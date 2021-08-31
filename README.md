@@ -3,7 +3,7 @@ HIA-ASPNETPortal(从原本的ASPNETPortal fork而来)
 
 
 ===================================
-以下位原项目简介：
+以下为原项目简介：
 
 **ASP.NET Portal Starter Kit**
 

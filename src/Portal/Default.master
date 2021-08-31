@@ -1,0 +1,28 @@
+<%@ Master Language="C#" AutoEventWireup="true" %>
+<%@ Register TagPrefix="ASPNETPortal" TagName="Banner" Src="DesktopPortalBanner.ascx" %>
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head runat="server">
+        <title>ASP.NET Portal Starter Kit</title>
+    </head>
+    <body bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
+        <form id="Form1" runat="server">
+            <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                <tbody>
+                    <tr valign="top">
+                        <td colspan="2">
+                            <ASPNETPortal:Banner id="Banner" runat="server" SelectedTabIndex="0"></ASPNETPortal:Banner>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            <asp:ContentPlaceHolder ID="maincontent" runat="server" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>

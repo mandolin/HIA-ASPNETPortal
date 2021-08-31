@@ -1,0 +1,338 @@
+/* ================================
+    CSS STYLES FOR THE ASP.NET PORTAL STARTER KIT
+    v1.0, 10/2002
+   ================================
+*/   
+
+
+/* PAGE BACKGROUND */
+
+/* background color for the header at the top of the page  */
+
+.HeadBg { background-color: darkred; }
+
+/* background color for the content part of the pages */
+
+Body { background-color: white; }
+
+
+/* PAGE BANNER */
+/* NOTE: Site Title, Site Links and Tabs are rendered by MobilePortalBanner.ascx
+/* style for the text of the site title */
+
+.SiteTitle {
+    color: #cccc99;
+    font-family: Verdana Bold, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* background/border colors for the selected tab */
+
+.TabBg {
+    background-color: white;
+    border-color: white;
+}
+
+/* background/border colors for the unselected tabs */
+
+.OtherTabsBg {
+    background-color: dimgray;
+    border-color: black;
+}
+
+/* text style for the selected tab */
+
+.SelectedTab {
+    color: DarkRed;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold
+}
+
+/* text style for the unselected tabs */
+
+.OtherTabs {
+    color: gainsboro;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* hyperlink styles of the unselected tabs */
+
+A.OtherTabs:link {
+    color: #eeeeee;
+    text-decoration: none;
+}
+
+A.OtherTabs:visited {
+    color: #eeeeee;
+    text-decoration: none;
+}
+
+A.OtherTabs:active {
+    color: #eeeeee;
+    text-decoration: none;
+}
+
+A.OtherTabs:hover {
+    color: white;
+    text-decoration: underline;
+}
+    
+/* text style for the site links (at extreme top-right of header) */
+
+.SiteLink {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold
+}   
+
+/* hyperlink style for the site links */
+
+A.SiteLink:link {
+    color: white;
+    text-decoration: none;
+}
+
+A.SiteLink:visited {
+    color: #eeeeee;
+    text-decoration: none;
+}
+
+A.SiteLink:active {
+    color: #eeeeee;
+    text-decoration: none;
+}
+
+A.SiteLink:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* style for separator between site links */
+
+.Accent {
+    color: red;
+    font-weight: bold;
+}
+
+
+
+/* MODULE-SPECIFIC */
+/* text style for reading messages in Discussion */
+
+.Message {
+    background-color: #eeeeee;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-size: 11px;
+    font-weight: normal;
+}   
+
+/* style of item titles by Announcements and events */
+
+.ItemTitle {
+    color: darkred;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+
+
+/* GENERAL */
+/* style for module titles */
+
+.Head {
+    color: #666644;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+/* style of item titles on edit and admin pages */
+
+.SubHead {
+    color: darkred;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* module title style used instead of Head for compact rendering by QuickLinks and Signin modules */
+
+.SubSubHead {
+    color: black;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* text style used for most text rendered by modules */
+
+.Normal {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 12px
+}
+
+/* text style used for textboxes in the admin and edit pages, for Nav compatibility */
+
+.NormalTextBox {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.NormalRed {
+    color: red;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.NormalBold {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold
+}
+
+/* text style for buttons and link buttons used in the portal admin pages */
+
+.CommandButton {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+}
+    
+/* hyperlink style for buttons and link buttons used in the portal admin pages */
+
+A.CommandButton:link {
+    color: darkred;
+    text-decoration: underline;
+}
+
+A.CommandButton:visited {
+    color: darkred;
+    text-decoration: underline;
+}
+
+A.CommandButton:active {
+    color: darkred;
+    text-decoration: underline;
+}
+
+A.CommandButton:hover {
+    color: red;
+    text-decoration: underline;
+}
+    
+
+
+
+/* GENERIC */
+
+H1 {
+    color: #666644;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+H2 {
+    color: #666644;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+H3 {
+    color: darkred;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+H4 {
+    color: darkred;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+H5, DT {
+    color: darkred;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+H6 {
+    color: darkred;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+TFOOT, THEAD {
+    color: darkred;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+TH {
+    color: darkred;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: baseline;
+}
+
+A:link {
+    color: darkred;
+    text-decoration: none;
+}
+
+A:visited {
+    color: darkred;
+    text-decoration: none;
+}
+
+A:active {
+    color: darkred;
+    text-decoration: none;
+}
+
+A:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+SMALL { font-size: 8px; }
+
+BIG { font-size: 14px; }
+
+BLOCKQUOTE, PRE { font-family: Lucida Console, monospace; }
+
+
+UL LI { list-style-type: square; }
+
+UL LI LI { list-style-type: disc; }
+
+UL LI LI LI { list-style-type: circle; }
+
+OL LI { list-style-type: decimal; }
+
+OL OL LI { list-style-type: lower-alpha; }
+
+OL OL OL LI { list-style-type: lower-roman; }
+
+HR {
+    color: dimgrey;
+    height: 1pt;
+    text-align: left
+}

@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83FC3CAD-9568-42B2-99D1-2C92432CEB25}</ProjectGuid>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASPNET.StarterKit.Portal</RootNamespace>
+    <AssemblyName>Portal</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\AccessDenied.aspx" />
+    <Content Include="Admin\EditAccessDenied.aspx" />
+    <Content Include="Admin\Logoff.aspx" />
+    <Content Include="Admin\ManageUsers.aspx" />
+    <Content Include="Admin\ModuleDefinitions.aspx" />
+    <Content Include="Admin\ModuleDefs.ascx" />
+    <Content Include="Admin\ModuleSettings.aspx" />
+    <Content Include="Admin\NotImplemented.aspx" />
+    <Content Include="Admin\Register.aspx" />
+    <Content Include="Admin\Roles.ascx" />
+    <Content Include="Admin\SecurityRoles.aspx" />
+    <Content Include="Admin\SiteSettings.ascx" />
+    <Content Include="Admin\TabLayout.aspx" />
+    <Content Include="Admin\Tabs.ascx" />
+    <Content Include="Admin\Users.ascx" />
+    <Content Include="App_Themes\Default\Default.css" />
+    <Content Include="Data\Admin.gif" />
+    <Content Include="Data\config_auth_forms.gif" />
+    <Content Include="Data\config_auth_win.gif" />
+    <Content Include="Data\enigma.gif" />
+    <Content Include="Data\hart.gif" />
+    <Content Include="Data\Layout.gif" />
+    <Content Include="Data\logoneg.gif" />
+    <Content Include="Data\mobilelogo.gif" />
+    <Content Include="Data\moduledefs.gif" />
+    <Content Include="Data\modulesettings.gif" />
+    <Content Include="Data\moduletypedef.gif" />
+    <Content Include="Data\m_ann.gif" />
+    <Content Include="Data\m_con.gif" />
+    <Content Include="Data\m_doc.gif" />
+    <Content Include="Data\m_dsc.gif" />
+    <Content Include="Data\m_evt.gif" />
+    <Content Include="Data\m_htm.gif" />
+    <Content Include="Data\m_img.gif" />
+    <Content Include="Data\m_lnk.gif" />
+    <Content Include="Data\m_ql.gif" />
+    <Content Include="Data\m_xml.gif" />
+    <Content Include="Data\nightvis.gif" />
+    <Content Include="Data\perfmon.gif" />
+    <Content Include="Data\QLT2112.gif" />
+    <Content Include="Data\rolemembership.gif" />
+    <Content Include="Data\Roles.gif" />
+    <Content Include="Data\Roles1.gif" />
+    <Content Include="Data\sales.xml" />
+    <Content Include="Data\sales.xsl" />
+    <Content Include="Data\sample.gif" />
+    <Content Include="Data\sitesettings.gif" />
+    <Content Include="Data\tabbar.gif" />
+    <Content Include="Data\tabs.gif" />
+    <Content Include="Data\vanlew.gif" />
+    <Content Include="Data\whataremodules.gif" />
+    <Content Include="Default.aspx" />
+    <Content Include="DesktopDefault.aspx" />
+    <Content Include="DesktopModules\Announcements.ascx" />
+    <Content Include="DesktopModules\Contacts.ascx" />
+    <Content Include="DesktopModules\DiscussDetails.aspx" />
+    <Content Include="DesktopModules\Discussion.ascx" />
+    <Content Include="DesktopModules\Document.ascx" />
+    <Content Include="DesktopModules\EditAnnouncements.aspx" />
+    <Content Include="DesktopModules\EditContacts.aspx" />
+    <Content Include="DesktopModules\EditDocs.aspx" />
+    <Content Include="DesktopModules\EditEvents.aspx" />
+    <Content Include="DesktopModules\EditHtml.aspx" />
+    <Content Include="DesktopModules\EditImage.aspx" />
+    <Content Include="DesktopModules\EditLinks.aspx" />
+    <Content Include="DesktopModules\EditXml.aspx" />
+    <Content Include="DesktopModules\Events.ascx" />
+    <Content Include="DesktopModules\HtmlModule.ascx" />
+    <Content Include="DesktopModules\ImageModule.ascx" />
+    <Content Include="DesktopModules\Links.ascx" />
+    <Content Include="DesktopModules\QuickLinks.ascx" />
+    <Content Include="DesktopModules\Signin.ascx" />
+    <Content Include="DesktopModules\ViewDocument.aspx" />
+    <Content Include="DesktopModules\XmlModule.ascx" />
+    <Content Include="DesktopModuleTitle.ascx" />
+    <Content Include="DesktopPortalBanner.ascx" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\1x1.gif" />
+    <Content Include="Images\aspnet.gif" />
+    <Content Include="Images\bars.gif" />
+    <Content Include="Images\delete.gif" />
+    <Content Include="Images\dn.gif" />
+    <Content Include="Images\edit.gif" />
+    <Content Include="Images\ffwd.gif" />
+    <Content Include="Images\frew.gif" />
+    <Content Include="Images\fwd.gif" />
+    <Content Include="Images\lt.gif" />
+    <Content Include="Images\minus.gif" />
+    <Content Include="Images\navlink.gif" />
+    <Content Include="Images\node.gif" />
+    <Content Include="Images\plus.gif" />
+    <Content Include="Images\poweredby_simple.gif" />
+    <Content Include="Images\register.gif" />
+    <Content Include="Images\rew.gif" />
+    <Content Include="Images\rt.gif" />
+    <Content Include="Images\signin.gif" />
+    <Content Include="Images\sm_dotnet.gif" />
+    <Content Include="Images\spacer.gif" />
+    <Content Include="Images\up.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\Logoff.aspx.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Logoff.aspx.designer.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ManageUsers.aspx.cs">
+      <DependentUpon>ManageUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageUsers.aspx.designer.cs">
+      <DependentUpon>ManageUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleDefinitions.aspx.cs">
+      <DependentUpon>ModuleDefinitions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleDefinitions.aspx.designer.cs">
+      <DependentUpon>ModuleDefinitions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleDefs.ascx.cs">
+      <DependentUpon>ModuleDefs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleDefs.ascx.designer.cs">
+      <DependentUpon>ModuleDefs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleSettings.aspx.cs">
+      <DependentUpon>ModuleSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleSettings.aspx.designer.cs">
+      <DependentUpon>ModuleSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Roles.ascx.cs">
+      <DependentUpon>Roles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Roles.ascx.designer.cs">
+      <DependentUpon>Roles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SecurityRoles.aspx.cs">
+      <DependentUpon>SecurityRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SecurityRoles.aspx.designer.cs">
+      <DependentUpon>SecurityRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SiteSettings.ascx.cs">
+      <DependentUpon>SiteSettings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SiteSettings.ascx.designer.cs">
+      <DependentUpon>SiteSettings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TabLayout.aspx.cs">
+      <DependentUpon>TabLayout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TabLayout.aspx.designer.cs">
+      <DependentUpon>TabLayout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Tabs.ascx.cs">
+      <DependentUpon>Tabs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Tabs.ascx.designer.cs">
+      <DependentUpon>Tabs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Users.ascx.cs">
+      <DependentUpon>Users.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Users.ascx.designer.cs">
+      <DependentUpon>Users.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\lang.en-us.designer.cs">
+      <DependentUpon>lang.en-us.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\lang.designer.cs">
+      <DependentUpon>lang.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\lang.zh-cn.designer.cs">
+      <DependentUpon>lang.zh-cn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Components\IPortalModuleControl.cs" />
+    <Compile Include="Components\PortalPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Components\IContainerAccessor.cs" />
+    <Compile Include="Components\CachedPortalModuleControl.cs">
+    </Compile>
+    <Compile Include="Components\PortalSettings.cs" />
+    <Compile Include="Components\TabSettings.cs" />
+    <Compile Include="Components\ModuleSettings.cs" />
+    <Compile Include="Components\PortalModuleControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopDefault.aspx.cs">
+      <DependentUpon>DesktopDefault.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopDefault.aspx.designer.cs">
+      <DependentUpon>DesktopDefault.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\Announcements.ascx.cs">
+      <DependentUpon>Announcements.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\Announcements.ascx.designer.cs">
+      <DependentUpon>Announcements.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\Contacts.ascx.cs">
+      <DependentUpon>Contacts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\Contacts.ascx.designer.cs">
+      <DependentUpon>Contacts.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\DiscussDetails.aspx.cs">
+      <DependentUpon>DiscussDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\DiscussDetails.aspx.designer.cs">
+      <DependentUpon>DiscussDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\Discussion.ascx.cs">
+      <DependentUpon>Discussion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\Discussion.ascx.designer.cs">
+      <DependentUpon>Discussion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\Document.ascx.cs">
+      <DependentUpon>Document.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\Document.ascx.designer.cs">
+      <DependentUpon>Document.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EditAnnouncements.aspx.cs">
+      <DependentUpon>EditAnnouncements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EditAnnouncements.aspx.designer.cs">
+      <DependentUpon>EditAnnouncements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EditContacts.aspx.cs">
+      <DependentUpon>EditContacts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EditContacts.aspx.designer.cs">
+      <DependentUpon>EditContacts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EditDocs.aspx.cs">
+      <DependentUpon>EditDocs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EditDocs.aspx.designer.cs">
+      <DependentUpon>EditDocs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EditEvents.aspx.cs">
+      <DependentUpon>EditEvents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EditEvents.aspx.designer.cs">
+      <DependentUpon>EditEvents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EditHtml.aspx.cs">
+      <DependentUpon>EditHtml.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EditHtml.aspx.designer.cs">
+      <DependentUpon>EditHtml.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EditImage.aspx.cs">
+      <DependentUpon>EditImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EditImage.aspx.designer.cs">
+      <DependentUpon>EditImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EditLinks.aspx.cs">
+      <DependentUpon>EditLinks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EditLinks.aspx.designer.cs">
+      <DependentUpon>EditLinks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EditXml.aspx.cs">
+      <DependentUpon>EditXml.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EditXml.aspx.designer.cs">
+      <DependentUpon>EditXml.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\Events.ascx.cs">
+      <DependentUpon>Events.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\Events.ascx.designer.cs">
+      <DependentUpon>Events.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\HtmlModule.ascx.cs">
+      <DependentUpon>HtmlModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\HtmlModule.ascx.designer.cs">
+      <DependentUpon>HtmlModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\ImageModule.ascx.cs">
+      <DependentUpon>ImageModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\ImageModule.ascx.designer.cs">
+      <DependentUpon>ImageModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\Links.ascx.cs">
+      <DependentUpon>Links.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\Links.ascx.designer.cs">
+      <DependentUpon>Links.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\QuickLinks.ascx.cs">
+      <DependentUpon>QuickLinks.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\QuickLinks.ascx.designer.cs">
+      <DependentUpon>QuickLinks.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\Signin.ascx.cs">
+      <DependentUpon>Signin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\Signin.ascx.designer.cs">
+      <DependentUpon>Signin.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\ViewDocument.aspx.cs">
+      <DependentUpon>ViewDocument.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\ViewDocument.aspx.designer.cs">
+      <DependentUpon>ViewDocument.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\XmlModule.ascx.cs">
+      <DependentUpon>XmlModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\XmlModule.ascx.designer.cs">
+      <DependentUpon>XmlModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModuleTitle.ascx.cs">
+      <DependentUpon>DesktopModuleTitle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModuleTitle.ascx.designer.cs">
+      <DependentUpon>DesktopModuleTitle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopPortalBanner.ascx.cs">
+      <DependentUpon>DesktopPortalBanner.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopPortalBanner.ascx.designer.cs">
+      <DependentUpon>DesktopPortalBanner.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.master" />
+    <Content Include="packages.config" />
+    <None Include="Uploads\sample.doc" />
+    <Content Include="UnityCfg.xml" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Portal.Components\Portal.Components.csproj">
+      <Project>{2B458F39-E3EE-44CA-B2E8-BFD787183ECE}</Project>
+      <Name>Portal.Components</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\lang.en-us.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>lang.en-us.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\lang.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>lang.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\lang.zh-cn.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>lang.zh-cn.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349C5851-65DF-11DA-9384-00065B846F21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2873</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+    <MonoDevelop>
+      <Properties VerifyCodeBehindFields="true" VerifyCodeBehindEvents="true">
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="true" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>

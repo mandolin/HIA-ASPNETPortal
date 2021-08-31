@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Announcements_readMore" xml:space="preserve">
+    <value>更多...</value>
+  </data>
+  <data name="Signin_accountLogin" xml:space="preserve">
+    <value>账户登录</value>
+  </data>
+  <data name="Signin_email" xml:space="preserve">
+    <value>邮箱：</value>
+  </data>
+  <data name="Signin_LoginFaild" xml:space="preserve">
+    <value>登录失败！</value>
+  </data>
+  <data name="Signin_LoginImg" xml:space="preserve">
+    <value>/images/signin.gif</value>
+  </data>
+  <data name="Signin_password" xml:space="preserve">
+    <value>密码：</value>
+  </data>
+  <data name="Signin_RegImg" xml:space="preserve">
+    <value>/images/register.gif</value>
+  </data>
+  <data name="Signin_rememberLogin" xml:space="preserve">
+    <value>记住登录状态</value>
+  </data>
+  <data name="Admin_AccessDenied_AccessDenied" xml:space="preserve">
+    <value>拒绝访问</value>
+  </data>
+  <data name="Admin_AccessDenied_DeniedAbout" xml:space="preserve">
+    <value>您没有登录或没有该页面的权限，请联系该系统的管理员。</value>
+  </data>
+  <data name="Admin_AccessDenied_ReturnToHome" xml:space="preserve">
+    <value>返回ASP.NET门户入门示例首页</value>
+  </data>
+  <data name="Admin_EditAccessDenied_EditAccessDenied" xml:space="preserve">
+    <value>拒绝编辑</value>
+  </data>
+  <data name="Admin_ManageUsers_AddUserToRole" xml:space="preserve">
+    <value>把用户加入此角色</value>
+  </data>
+  <data name="Admin_ManageUsers_ApplyNamePwdChange" xml:space="preserve">
+    <value>保存用户名和密码变更</value>
+  </data>
+  <data name="Admin_ManageUsers_ConfirmPwd" xml:space="preserve">
+    <value>确认密码:</value>
+  </data>
+  <data name="Admin_ManageUsers_Email" xml:space="preserve">
+    <value>邮箱 (或windows域账户):</value>
+  </data>
+  <data name="Admin_ManageUsers_ManageUser" xml:space="preserve">
+    <value>用户管理</value>
+  </data>
+  <data name="Admin_ManageUsers_Password" xml:space="preserve">
+    <value>密码:</value>
+  </data>
+  <data name="Admin_ManageUsers_RemoveFromRoleAlt" xml:space="preserve">
+    <value>把用户从此角色移除</value>
+  </data>
+  <data name="Admin_ManageUsers_SaveUserChange" xml:space="preserve">
+    <value>保存修改</value>
+  </data>
+  <data name="Admin_Users_FormMsg" xml:space="preserve">
+    <value>只有已注册的用户才可以看到安全内容。用户可以在注册表单里增加他们自己, 管理员也可以使用安全角色把用户加到特殊的角色里。本节只用于管理员直接管理用户和他们的安全角色。</value>
+  </data>
+  <data name="Admin_Users_OtherMsg" xml:space="preserve">
+    <value>域用户不需要注册就可以访问哪些提供给“所有用户”可访问的内容。管理员也可以使用安全角色把用户加到特殊的角色里。本节只用于管理员直接管理用户和他们的安全角色。</value>
+  </data>
+  <data name="Admin_Users_RegisteredUsers" xml:space="preserve">
+    <value>注册用户：</value>
+  </data>
+  <data name="Admin_User_AddUser" xml:space="preserve">
+    <value>新增用户</value>
+  </data>
+  <data name="Admin_User_DelUser" xml:space="preserve">
+    <value>删除用户</value>
+  </data>
+  <data name="Admin_User_EditUser" xml:space="preserve">
+    <value>编辑用户</value>
+  </data>
+  <data name="Module_Name_ID_32" xml:space="preserve">
+    <value>用户管理</value>
+  </data>
+</root>

@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6073BB00-CD2F-45A5-8BDD-6085AB5A538D}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.txt = ReadMe.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal", "Portal\Portal.csproj", "{83FC3CAD-9568-42B2-99D1-2C92432CEB25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Components.Data", "Portal.Components.Data\Portal.Components.Data.csproj", "{358EB6A9-B21A-44A8-9307-A495CE431518}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Components", "Portal.Components\Portal.Components.csproj", "{2B458F39-E3EE-44CA-B2E8-BFD787183ECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Components.Data1", "Portal.Components.Data1\Portal.Components.Data1.csproj", "{9F84089A-C636-4BBE-A049-1236A7AB5F36}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs06
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Portal\\Portal.csproj
+		SccProjectName1 = Portal
+		SccLocalPath1 = Portal
+		SccProjectUniqueName2 = Portal.Components\\Portal.Components.csproj
+		SccProjectName2 = Portal.Components
+		SccLocalPath2 = Portal.Components
+		SccProjectUniqueName3 = Portal.Components.Data\\Portal.Components.Data.csproj
+		SccProjectName3 = Portal.Components.Data
+		SccLocalPath3 = Portal.Components.Data
+		SccProjectUniqueName4 = Portal.Components.Data1\\Portal.Components.Data1.csproj
+		SccProjectName4 = Portal.Components.Data1
+		SccLocalPath4 = Portal.Components.Data1
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83FC3CAD-9568-42B2-99D1-2C92432CEB25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83FC3CAD-9568-42B2-99D1-2C92432CEB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83FC3CAD-9568-42B2-99D1-2C92432CEB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83FC3CAD-9568-42B2-99D1-2C92432CEB25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358EB6A9-B21A-44A8-9307-A495CE431518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358EB6A9-B21A-44A8-9307-A495CE431518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358EB6A9-B21A-44A8-9307-A495CE431518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358EB6A9-B21A-44A8-9307-A495CE431518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B458F39-E3EE-44CA-B2E8-BFD787183ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B458F39-E3EE-44CA-B2E8-BFD787183ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B458F39-E3EE-44CA-B2E8-BFD787183ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B458F39-E3EE-44CA-B2E8-BFD787183ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F84089A-C636-4BBE-A049-1236A7AB5F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F84089A-C636-4BBE-A049-1236A7AB5F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F84089A-C636-4BBE-A049-1236A7AB5F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F84089A-C636-4BBE-A049-1236A7AB5F36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+	EndGlobalSection
+EndGlobal

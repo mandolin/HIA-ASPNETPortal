@@ -1,0 +1,107 @@
+﻿<unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
+  <namespace name="ASPNET.StarterKit.Portal" />
+  <assembly name="Portal" />
+  <assembly name="Portal.Components" />
+  <assembly name="Portal.Components.Data" />
+  <assembly name="Portal.Components.Data1" />
+
+  <container>
+
+    <instance name="connectionString" type="string" 
+              value="Data Source=(LocalDB)\v11.0;Integrated Security=True;Initial Catalog=Portal; MultipleActiveResultSets=True" />
+    
+    <!--PORTAL SECURITY-->
+
+    <register type="PortalSecurityDbContext" mapTo="PortalSecurityDbContext">
+      <lifetime type="singleton" />
+      <constructor>
+        <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
+      </constructor>
+    </register>
+    
+    <register type="IUsersDb" mapTo="UsersDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IRolesDb" mapTo="RolesDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IPortalSecurity" mapTo="PortalSecurity">
+      <lifetime type="singleton" />
+    </register>
+    
+    <!--PORTAL CONFIGURATION-->
+
+    <register type="PortalCfgDbContext" mapTo="PortalCfgDbContext">
+      <lifetime type="singleton" />
+      <constructor>
+        <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
+      </constructor>
+    </register>
+
+    <register type="IPortalDb" mapTo="PortalDb">
+      <lifetime type="singleton" />
+      <constructor>
+        <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
+      </constructor>
+    </register>
+
+    <register type="ITabsDb" mapTo="TabsDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IModulesDb" mapTo="ModulesDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IModuleDefsDb" mapTo="ModuleDefsDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IGlobalsDb" mapTo="GlobalsDb">
+      <lifetime type="singleton" />
+    </register>
+
+
+    <!--PORTAL MODULES-->
+    <register type="PortalDbContext" mapTo="PortalDbContext">
+      <lifetime type="singleton" />
+      <constructor>
+        <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
+      </constructor>
+    </register>
+       
+    <register type="IAnnouncementsDb" mapTo="AnnouncementsDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IContactsDb" mapTo="ContactsDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IDiscussionsDb" mapTo="DiscussionsDb">
+      <lifetime type="singleton" />
+      <constructor>
+        <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
+      </constructor>
+    </register>
+
+    <register type="IDocumentsDb" mapTo="DocumentsDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IEventsDb" mapTo="EventsDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="IHtmlTextsDb" mapTo="HtmlTextsDb">
+      <lifetime type="singleton" />
+    </register>
+
+    <register type="ILinksDb" mapTo="LinksDb">
+      <lifetime type="singleton" />
+    </register>
+
+  </container>
+</unity>
