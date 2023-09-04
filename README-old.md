@@ -1,6 +1,6 @@
 # HIA-ASPNETPortal
 
-## [中文](#中文)
+### [中文](#中文)
 ===================================
 
 **ASP.NET Portal Starter Kit**
@@ -73,7 +73,7 @@ Thanks!
 
 ===================================
 
-## 中文
+### 中文
 
 **ASP.NET Portal Starter Kit**
 
