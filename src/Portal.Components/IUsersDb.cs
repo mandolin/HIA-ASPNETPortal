@@ -11,6 +11,6 @@ namespace ASPNET.StarterKit.Portal
         IEnumerable<IRoleItem> GetRolesByUser(String email);
         IEnumerable<string> GetRoleNamesByUser(String email);
         IUserItem GetSingleUser(String email);
-        string Login(String email, string password);
+        string Login(String emailOrName, string password);
     }
 }

@@ -1,8 +1,12 @@
 using System;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 管理模块定义的页面。
+    /// </summary>
     public partial class ModuleDefinitions : PortalPage<ModuleDefinitions>
     {
         private int defId = -1;
@@ -12,52 +16,49 @@ namespace ASPNET.StarterKit.Portal
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
-        //*******************************************************
-        //
-        // The Page_Load server event handler on this page is used
-        // to populate the role information for the page
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 页面加载时初始化模块定义信息。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Verify that the current user has access to access this page
-            if (PortalSecurity.IsInRoles("Admins") == false)
+            // 验证当前用户是否有权访问此页面
+            if (!PortalSecurity.IsInRoles("Admins"))
             {
                 Response.Redirect("~/Admin/EditAccessDenied.aspx");
             }
 
-            // Calculate security defId
+            // 计算模块定义 ID
             if (Request.Params["defid"] != null)
             {
-                defId = Int32.Parse(Request.Params["defid"]);
+                defId = int.Parse(Request.Params["defid"]);
             }
             if (Request.Params["tabid"] != null)
             {
-                tabId = Int32.Parse(Request.Params["tabid"]);
+                tabId = int.Parse(Request.Params["tabid"]);
             }
             if (Request.Params["tabindex"] != null)
             {
-                tabIndex = Int32.Parse(Request.Params["tabindex"]);
+                tabIndex = int.Parse(Request.Params["tabindex"]);
             }
 
-
-            // If this is the first visit to the page, bind the definition data 
-            if (Page.IsPostBack == false)
+            // 如果这是第一次访问页面，则绑定模块定义数据
+            if (!Page.IsPostBack)
             {
                 if (defId == -1)
                 {
-                    // new module definition
+                    // 新建模块定义
                     FriendlyName.Text = "New Definition";
                     DesktopSrc.Text = "DesktopModules/SomeModule.ascx";
                     MobileSrc.Text = "MobileModules/SomeModule.ascx";
                 }
                 else
                 {
-                    // Obtain the module definition to edit from the database
+                    // 从数据库中获取要编辑的模块定义
                     IModuleDefinitionItem modDefRow = ModuleDefConfig.GetSingleModuleDefinition(defId);
 
-                    // Read in information
+                    // 加载信息
                     FriendlyName.Text = modDefRow.FriendlyName;
                     DesktopSrc.Text = modDefRow.DesktopSourceFile;
                     MobileSrc.Text = modDefRow.MobileSourceFile;
@@ -65,66 +66,56 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
-        //****************************************************************
-        //
-        // The UpdateBtn_Click event handler on this Page is used to either
-        // create or update a link.  It  uses the ASPNET.StarterKit.Portal.LinkDB()
-        // data component to encapsulate all data functionality.
-        //
-        //****************************************************************
-
+        /// <summary>
+        /// 更新按钮点击事件处理器，用于创建或更新模块定义。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void UpdateBtn_Click(Object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
                 if (defId == -1)
                 {
-                    // Obtain PortalSettings from Current Context
-                    var portalSettings = (PortalSettings) Context.Items["PortalSettings"];
+                    // 从当前上下文中获取 PortalSettings
+                    var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
 
-                    // Add a new module definition to the database
-                    ModuleDefConfig.AddModuleDefinition(FriendlyName.Text, DesktopSrc.Text,
-                                                        MobileSrc.Text);
+                    // 向数据库中添加新的模块定义
+                    ModuleDefConfig.AddModuleDefinition(FriendlyName.Text, DesktopSrc.Text, MobileSrc.Text);
                 }
                 else
                 {
-                    // update the module definition
+                    // 更新模块定义
                     ModuleDefConfig.UpdateModuleDefinition(defId, FriendlyName.Text, DesktopSrc.Text, MobileSrc.Text);
                 }
 
-                // Redirect back to the portal admin page
+                // 重定向回门户管理页面
                 Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
             }
         }
 
-        //****************************************************************
-        //
-        // The DeleteBtn_Click event handler on this Page is used to delete an
-        // a link.  It  uses the ASPNET.StarterKit.Portal.LinksDB()
-        // data component to encapsulate all data functionality.
-        //
-        //****************************************************************
-
+        /// <summary>
+        /// 删除按钮点击事件处理器，用于删除模块定义。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void DeleteBtn_Click(Object sender, EventArgs e)
         {
-            // delete definition
+            // 删除模块定义
             ModuleDefConfig.DeleteModuleDefinition(defId);
 
-            // Redirect back to the portal admin page
+            // 重定向回门户管理页面
             Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
         }
 
-        //****************************************************************
-        //
-        // The CancelBtn_Click event handler on this Page is used to cancel
-        // out of the page -- and return the user back to the portal home
-        // page.
-        //
-        //****************************************************************
-
+        /// <summary>
+        /// 取消按钮点击事件处理器，用于取消操作并返回门户首页。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void CancelBtn_Click(Object sender, EventArgs e)
         {
-            // Redirect back to the portal home page
+            // 重定向回门户首页
             Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
         }
     }

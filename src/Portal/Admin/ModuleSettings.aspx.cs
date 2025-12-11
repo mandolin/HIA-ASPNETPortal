@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -13,185 +15,155 @@ namespace ASPNET.StarterKit.Portal
         private int tabId;
 
         [Dependency]
-        public IRolesDb RolesDB { private get; set; }
+        public IRolesDb RolesDb { private get; set; }
 
         [Dependency]
-        public IModulesDb ModulesConfig { private get; set; }
+        public IModulesDb ModulesDb { private get; set; }
 
-        //*******************************************************
-        //
-        // The Page_Load server event handler on this page is used
-        // to populate the module settings on the page
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 页面加载时初始化模块设置。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Verify that the current user has access to access this page
-            if (PortalSecurity.IsInRoles("Admins") == false)
+            // 验证当前用户是否有权访问此页面
+            if (!PortalSecurity.IsInRoles("Admins"))
             {
                 Response.Redirect("~/Admin/EditAccessDenied.aspx");
             }
 
-            // Determine Module to Edit
-            if (Request.Params["mid"] != null)
-            {
-                moduleId = Int32.Parse(Request.Params["mid"]);
-            }
-            // Determine Tab to Edit
-            if (Request.Params["tabid"] != null)
-            {
-                tabId = Int32.Parse(Request.Params["tabid"]);
-            }
+            // 获取请求中的模块ID和标签ID
+            moduleId = Request.Params["mid"] != null ? int.Parse(Request.Params["mid"]) : 0;
+            tabId = Request.Params["tabid"] != null ? int.Parse(Request.Params["tabid"]) : 0;
 
-            if (Page.IsPostBack == false)
+            // 如果不是回发请求，则加载数据
+            if (!IsPostBack)
             {
                 BindData();
             }
         }
 
-        //*******************************************************
-        //
-        // The ApplyChanges_Click server event handler on this page is used
-        // to save the module settings into the portal configuration system
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 用户点击“应用模块更改”按钮时保存模块设置。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void ApplyChanges_Click(Object Sender, EventArgs e)
         {
-            // Obtain PortalSettings from Current Context
-            var portalSettings = (PortalSettings) HttpContext.Current.Items["PortalSettings"];
+            // 获取PortalSettings
+            var portalSettings = GetPortalSettings();
 
-            object value = GetModule();
-            if (value != null)
+            // 获取模块设置对象
+            var module = GetModule();
+
+            if (module != null)
             {
-                var m = (ModuleSettings) value;
+                // 构建授权编辑角色字符串
+                string editRoles = ConstructAuthorizedRoles(authEditRoles.Items);
 
-                // Construct Authorized User Roles String
-                string editRoles = "";
+                // 更新模块设置
+                ModulesDb.UpdateModule(moduleId, module.ModuleOrder, module.PaneName, moduleTitle.Text,
+                                       int.Parse(cacheTime.Text), editRoles, showMobile.Checked);
 
-                foreach (ListItem item in authEditRoles.Items)
-                {
-                    if (item.Selected)
-                    {
-                        editRoles = editRoles + item.Text + ";";
-                    }
-                }
-
-                // update module
-                ModulesConfig.UpdateModule(moduleId, m.ModuleOrder, m.PaneName, moduleTitle.Text,
-                                           Int32.Parse(cacheTime.Text), editRoles, showMobile.Checked);
-
-                // Update Textbox Settings
-                moduleTitle.Text = m.ModuleTitle;
-                cacheTime.Text = m.CacheTime.ToString();
-
-                // Populate checkbox list with all security roles for this portal
-                // and "check" the ones already configured for this module
-                IEnumerable<IRoleItem> roles = RolesDB.GetPortalRoles(portalSettings.PortalId);
-
-                // Clear existing items in checkboxlist
-                authEditRoles.Items.Clear();
-
-                var allItem = new ListItem();
-                allItem.Text = "All Users";
-
-                if (m.AuthorizedEditRoles.LastIndexOf("All Users") > -1)
-                {
-                    allItem.Selected = true;
-                }
-
-                authEditRoles.Items.Add(allItem);
-
-                foreach (IRoleItem role in roles)
-                {
-                    var item = new ListItem();
-                    item.Text = role.RoleName;
-                    item.Value = role.RoleId.ToString();
-
-                    if ((m.AuthorizedEditRoles.LastIndexOf(item.Text)) > -1)
-                    {
-                        item.Selected = true;
-                    }
-
-                    authEditRoles.Items.Add(item);
-                }
+                // 重新绑定数据
+                BindData();
             }
 
-            // Navigate back to admin page
-            Response.Redirect("TabLayout.aspx?tabid=" + tabId);
+            // 重新导航到管理页面
+            Response.Redirect($"TabLayout.aspx?tabid={tabId}");
         }
 
-        //*******************************************************
-        //
-        // The BindData helper method is used to populate a asp:datalist
-        // server control with the current "edit access" permissions
-        // set within the portal configuration system
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 绑定数据到页面控件。
+        /// </summary>
         private void BindData()
         {
-            // Obtain PortalSettings from Current Context
-            var portalSettings = (PortalSettings) HttpContext.Current.Items["PortalSettings"];
+            // 获取模块设置对象
+            var module = GetModule();
 
-            object value = GetModule();
-            if (value != null)
+            if (module != null)
             {
-                var m = (ModuleSettings) value;
+                // 更新文本框设置
+                moduleTitle.Text = module.ModuleTitle;
+                cacheTime.Text = module.CacheTime.ToString();
+                showMobile.Checked = module.ShowMobile;
 
-                // Update Textbox Settings
-                moduleTitle.Text = m.ModuleTitle;
-                cacheTime.Text = m.CacheTime.ToString();
-                showMobile.Checked = m.ShowMobile;
-
-                // Populate checkbox list with all security roles for this portal
-                // and "check" the ones already configured for this module
-                IEnumerable<IRoleItem> roles = RolesDB.GetPortalRoles(portalSettings.PortalId);
-
-                // Clear existing items in checkboxlist
-                authEditRoles.Items.Clear();
-
-                var allItem = new ListItem();
-                allItem.Text = "All Users";
-
-                if (m.AuthorizedEditRoles.LastIndexOf("All Users") > -1)
-                {
-                    allItem.Selected = true;
-                }
-
-                authEditRoles.Items.Add(allItem);
-
-                foreach (IRoleItem role in roles)
-                {
-                    var item = new ListItem();
-                    item.Text = role.RoleName;
-                    item.Value = role.RoleId.ToString();
-
-                    if ((m.AuthorizedEditRoles.LastIndexOf(item.Text)) > -1)
-                    {
-                        item.Selected = true;
-                    }
-
-                    authEditRoles.Items.Add(item);
-                }
+                // 填充角色列表
+                PopulateRoleList(module.AuthorizedEditRoles.Split(';'), RolesDb.GetPortalRoles(GetPortalSettings().PortalId));
             }
         }
 
-        private ModuleSettings GetModule()
+        /// <summary>
+        /// 构建授权编辑角色字符串。
+        /// </summary>
+        /// <param name="items">包含角色的项集合。</param>
+        /// <returns>授权编辑角色字符串。</returns>
+        private string ConstructAuthorizedRoles(ListItemCollection items)
         {
-            // Obtain PortalSettings for this tab
-            var portalSettings = (PortalSettings) HttpContext.Current.Items["PortalSettings"];
+            // 初始化编辑角色字符串
+            var editRoles = "";
 
-            // Obtain selected module data
-            foreach (ModuleSettings _module in portalSettings.ActiveTab.Modules)
+            // 遍历所有项，如果被选中则添加到编辑角色字符串中
+            foreach (ListItem item in items)
             {
-                if (_module.ModuleId == moduleId)
+                if (item.Selected)
                 {
-                    return _module;
+                    editRoles += item.Text + ";";
                 }
             }
-            return null;
+
+            // 移除最后一个分号
+            if (!string.IsNullOrEmpty(editRoles))
+            {
+                editRoles = editRoles.TrimEnd(';');
+            }
+
+            return editRoles;
+        }
+
+        /// <summary>
+        /// 填充角色列表。
+        /// </summary>
+        /// <param name="authorizedRoles">已授权的角色数组。</param>
+        /// <param name="roles">所有角色集合。</param>
+        private void PopulateRoleList(string[] authorizedRoles, IEnumerable<IRoleItem> roles)
+        {
+            // 清除现有复选框列表项
+            authEditRoles.Items.Clear();
+
+            // 添加"All Users"项
+            var allItem = new ListItem("All Users", "All Users");
+            allItem.Selected = Array.IndexOf(authorizedRoles, "All Users") > -1;
+            authEditRoles.Items.Add(allItem);
+
+            // 添加其他角色项
+            foreach (var role in roles)
+            {
+                var item = new ListItem(role.RoleName, role.RoleId.ToString());
+                item.Selected = Array.IndexOf(authorizedRoles, role.RoleName) > -1;
+                authEditRoles.Items.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// 获取指定模块的设置。
+        /// </summary>
+        /// <returns>模块设置对象。</returns>
+        private ModuleSettings GetModule()
+        {
+            var portalSettings = GetPortalSettings();
+
+            return portalSettings?.ActiveTab?.Modules?.FirstOrDefault(m => m.ModuleId == moduleId);
+        }
+
+        /// <summary>
+        /// 获取当前上下文的PortalSettings。
+        /// </summary>
+        /// <returns>PortalSettings对象。</returns>
+        private PortalSettings GetPortalSettings()
+        {
+            return HttpContext.Current.Items["PortalSettings"] as PortalSettings;
         }
     }
 }

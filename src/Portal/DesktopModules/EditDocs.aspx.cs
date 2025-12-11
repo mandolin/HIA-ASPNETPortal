@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.IO;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -11,155 +12,123 @@ namespace ASPNET.StarterKit.Portal
         private int moduleId;
 
         [Dependency]
-        public IDocumentsDb DocumentDB { private get; set; }
+        public IDocumentsDb DocumentDB { private get; set; } // 依赖注入文档数据库接口
 
         [Dependency]
-        public IPortalSecurity PortalSecurity { private get; set; }
+        public IPortalSecurity PortalSecurity { private get; set; } // 依赖注入门户安全接口
 
-        //****************************************************************
-        //
-        // The Page_Load event on this Page is used to obtain the ModuleId
-        // and ItemId of the document to edit.
-        //
-        // It then uses the ASPNET.StarterKit.Portal.DocumentDB() data component
-        // to populate the page's edit controls with the document details.
-        //
-        //****************************************************************
-
+        // 页面加载事件
+        // 在此事件中获取模块ID(ModuleId)和项目ID(ItemId)，并使用数据组件填充页面编辑控件。
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Determine ModuleId of Announcements Portal Module
+            // 获取公告模块的ModuleId
             moduleId = Int32.Parse(Request.Params["Mid"]);
 
-            // Verify that the current user has access to edit this module
-            if (PortalSecurity.HasEditPermissions(moduleId) == false)
+            // 验证当前用户是否有编辑此模块的权限
+            if (!PortalSecurity.HasEditPermissions(moduleId))
             {
                 Response.Redirect("~/Admin/EditAccessDenied.aspx");
             }
 
-            // Determine ItemId of Document to Update
+            // 获取要更新的文档的ItemId
             if (Request.Params["ItemId"] != null)
             {
                 itemId = Int32.Parse(Request.Params["ItemId"]);
             }
 
-            // If the page is being requested the first time, determine if an
-            // document itemId value is specified, and if so populate page
-            // contents with the document details
-
-            if (Page.IsPostBack == false)
+            // 如果页面不是回发，则检查是否指定了文档的ItemId值，
+            // 如果有，则用文档详细信息填充页面内容。
+            if (!Page.IsPostBack)
             {
                 if (itemId != 0)
                 {
-                    // Obtain a single row of document information
+                    // 获取单个文档的信息
                     IDocumentItem item = DocumentDB.GetSingleDocument(itemId);
 
-                    // Security check.  verify that itemid is within the module.
+                    // 安全检查：验证itemid是否属于该模块
                     if (item.ModuleId != moduleId)
                     {
                         Response.Redirect("~/Admin/EditAccessDenied.aspx");
                     }
 
+                    // 将文档详细信息填充到页面控件中
                     NameField.Text = item.FileFriendlyName;
                     PathField.Text = item.FileNameUrl;
                     CategoryField.Text = item.Category;
                     CreatedBy.Text = item.CreatedByUser;
                     CreatedDate.Text = item.CreatedDate.Value.ToShortDateString();
-
                 }
 
-                // Store URL Referrer to return to portal
-                ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
+                // 将重定向地址存储在ViewState中，以便在保存后返回门户页面
+                ViewState["UrlReferrer"] = Request.UrlReferrer?.ToString();
             }
         }
 
-        //****************************************************************
-        //
-        // The UpdateBtn_Click event handler on this Page is used to either
-        // create or update an document.  It  uses the ASPNET.StarterKit.Portal.DocumentDB()
-        // data component to encapsulate all data functionality.
-        //
-        //****************************************************************
-
+        // 更新按钮点击事件处理器
+        // 用于创建或更新文档，使用数据组件封装所有数据功能。
         protected void UpdateBtn_Click(Object sender, EventArgs e)
         {
-            // Only Update if Input Data is Valid
+            // 只有当输入数据有效时才进行更新
             if (Page.IsValid)
             {
-                // Determine whether a file was uploaded
-
+                // 判断是否有文件上传
                 if (storeInDatabase.Checked && (FileUpload.PostedFile != null))
                 {
-                    // for web farm support
-                    var length = (int) FileUpload.PostedFile.InputStream.Length;
-                    string contentType = FileUpload.PostedFile.ContentType;
-                    var content = new byte[length];
-
-                    FileUpload.PostedFile.InputStream.Read(content, 0, length);
-
-                    // Update the document within the Documents table
-                    DocumentDB.UpdateDocument(moduleId, itemId, Context.User.Identity.Name, NameField.Text,
-                                              PathField.Text, CategoryField.Text, content, length, contentType);
-                }
-                else
-                {
-                    if (Upload.Checked && (FileUpload.PostedFile != null))
+                    // 支持Web Farm环境的数据处理
+                    using (var stream = FileUpload.PostedFile.InputStream)
                     {
-                        // Calculate virtualPath of the newly uploaded file
-                        string virtualPath = "~/uploads/" + Path.GetFileName(FileUpload.PostedFile.FileName);
+                        byte[] content = new byte[stream.Length];
+                        stream.Read(content, 0, content.Length);
 
-                        // Calculate physical path of the newly uploaded file
-                        string phyiscalPath = Server.MapPath(virtualPath);
-
-                        // Save file to uploads directory
-                        FileUpload.PostedFile.SaveAs(phyiscalPath);
-
-                        // Update PathFile with uploaded virtual file location
-                        PathField.Text = virtualPath;
+                        // 更新Documents表中的文档
+                        DocumentDB.UpdateDocument(moduleId, itemId, Context.User.Identity.Name, NameField.Text,
+                                                  PathField.Text, CategoryField.Text, content, content.Length, FileUpload.PostedFile.ContentType);
                     }
-                    DocumentDB.UpdateDocument(moduleId, itemId, Context.User.Identity.Name, NameField.Text,
-                                              PathField.Text, CategoryField.Text, new byte[0], 0, "");
+                }
+                else if (Upload.Checked && (FileUpload.PostedFile != null))
+                {
+                    // 计算新上传文件的虚拟路径
+                    string virtualPath = "~/uploads/" + Path.GetFileName(FileUpload.PostedFile.FileName);
+
+                    // 计算新上传文件的物理路径
+                    string phyiscalPath = Server.MapPath(virtualPath);
+
+                    // 将文件保存到上传目录
+                    FileUpload.PostedFile.SaveAs(phyiscalPath);
+
+                    // 更新PathFile为上传的虚拟文件位置
+                    PathField.Text = virtualPath;
                 }
 
-                // Redirect back to the portal home page
-                Response.Redirect((String) ViewState["UrlReferrer"]);
+                // 更新文档
+                DocumentDB.UpdateDocument(moduleId, itemId, Context.User.Identity.Name, NameField.Text,
+                                          PathField.Text, CategoryField.Text, new byte[0], 0, "");
+
+                // 重定向回门户首页
+                Response.Redirect((string)ViewState["UrlReferrer"]);
             }
         }
 
-        //****************************************************************
-        //
-        // The DeleteBtn_Click event handler on this Page is used to delete an
-        // a document.  It  uses the ASPNET.StarterKit.Portal.DocumentsDB()
-        // data component to encapsulate all data functionality.
-        //
-        //****************************************************************
-
+        // 删除按钮点击事件处理器
+        // 用于删除文档，使用数据组件封装所有数据功能。
         protected void DeleteBtn_Click(Object sender, EventArgs e)
         {
-            // Only attempt to delete the item if it is an existing item
-            // (new items will have "ItemId" of 0)
-
+            // 只有在存在现有项时尝试删除（新项的"ItemId"为0）
             if (itemId != 0)
             {
                 DocumentDB.DeleteDocument(itemId);
             }
 
-            // Redirect back to the portal home page
-            Response.Redirect((String) ViewState["UrlReferrer"]);
+            // 重定向回门户首页
+            Response.Redirect((string)ViewState["UrlReferrer"]);
         }
 
-        //****************************************************************
-        //
-        // The CancelBtn_Click event handler on this Page is used to cancel
-        // out of the page, and return the user back to the portal home
-        // page.
-        //
-        //****************************************************************
-
+        // 取消按钮点击事件处理器
+        // 用于取消当前页面操作，并将用户返回到门户首页。
         protected void CancelBtn_Click(Object sender, EventArgs e)
         {
-            // Redirect back to the portal home page
-            Response.Redirect((String) ViewState["UrlReferrer"]);
+            // 重定向回门户首页
+            Response.Redirect((string)ViewState["UrlReferrer"]);
         }
     }
 }

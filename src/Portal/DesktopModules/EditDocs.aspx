@@ -1,123 +1,150 @@
+<%-- Ò³ÃæÉùÃ÷ --%>
 <%@ Page Language="c#" CodeBehind="EditDocs.aspx.cs" AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.EditDocs"
     MasterPageFile="~/Default.master" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="maincontent" runat="server">
+<%-- ¶¨Òå·ÅÖÃÔÚÖ÷ÄÚÈÝÕ¼Î»·ûÖÐµÄÄÚÈÝ --%>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <%-- Ö÷±í¸ñ --%>
     <table width="98%" cellspacing="0" cellpadding="4" border="0">
+        <%-- ×ó²à¿Õ°×ÁÐ --%>
         <tr valign="top">
             <td width="150">
-                &nbsp;
+                &nbsp; <%-- Õ¼Î»·û --%>
             </td>
+            <%-- ÓÒ²àÄÚÈÝ --%>
             <td>
+                <%-- ±êÌâ±í¸ñ --%>
                 <table width="500" cellspacing="0" cellpadding="0">
                     <tr>
                         <td align="left" class="Head">
-                            Document Details
+                            Document Details <%-- ÎÄµµÏêÇé±êÌâ --%>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <hr noshade size="1">
+                            <hr noshade size="1"> <%-- ·Ö¸îÏß --%>
                         </td>
                     </tr>
                 </table>
+                
+                <%-- ÊäÈë±í¸ñ --%>
                 <table width="726" cellspacing="0" cellpadding="0" border="0">
+                    <%-- Ãû³ÆÊäÈëÐÐ --%>
                     <tr valign="top">
                         <td width="100" class="SubHead">
-                            Name:
+                            Name: <%-- Ãû³Æ±êÇ© --%>
                         </td>
                         <td>
-                            &nbsp;
+                            &nbsp; <%-- Õ¼Î»·û --%>
                         </td>
                         <td>
                             <asp:TextBox ID="NameField" CssClass="NormalTextBox" Width="353" Columns="28" MaxLength="150"
-                                runat="server" />
+                                runat="server" /> <%-- Ãû³ÆÊäÈë¿ò --%>
                         </td>
                         <td width="25" rowspan="6">
-                            &nbsp;
+                            &nbsp; <%-- Õ¼Î»·û --%>
                         </td>
                         <td class="Normal" width="250">
                             <asp:RequiredFieldValidator Display="Static" runat="server" ErrorMessage="You Must Enter a Valid Name"
-                                ControlToValidate="NameField" ID="RequiredFieldValidator1" />
+                                ControlToValidate="NameField" ID="RequiredFieldValidator1" /> <%-- Ãû³Æ±ØÌîÑéÖ¤Æ÷ --%>
                         </td>
                     </tr>
+                    
+                    <%-- Àà±ðÊäÈëÐÐ --%>
                     <tr valign="top">
                         <td class="SubHead">
-                            Category:
+                            Category: <%-- Àà±ð±êÇ© --%>
                         </td>
                         <td>
-                            &nbsp;
+                            &nbsp; <%-- Õ¼Î»·û --%>
                         </td>
                         <td>
                             <asp:TextBox ID="CategoryField" CssClass="NormalTextBox" Width="353" Columns="28"
-                                MaxLength="50" runat="server" />
+                                MaxLength="50" runat="server" /> <%-- Àà±ðÊäÈë¿ò --%>
                         </td>
                     </tr>
+                    
+                    <%-- ·Ö¸îÏß --%>
                     <tr>
                         <td>
-                            &nbsp;
+                            &nbsp; <%-- Õ¼Î»·û --%>
                         </td>
                         <td colspan="2">
-                            <hr noshade size="1" width="100%">
+                            <hr noshade size="1" width="100%"> <%-- ·Ö¸îÏß --%>
                         </td>
                     </tr>
+                    
+                    <%-- ä¯ÀÀURLÊäÈëÐÐ --%>
                     <tr valign="top">
                         <td width="100" class="SubHead">
-                            URL to Browse:
+                            URL to Browse: <%-- ä¯ÀÀURL±êÇ© --%>
                         </td>
                         <td>
-                            &nbsp;
+                            &nbsp; <%-- Õ¼Î»·û --%>
                         </td>
                         <td>
                             <asp:TextBox ID="PathField" CssClass="NormalTextBox" Width="353" Columns="28" MaxLength="250"
-                                runat="server" />
+                                runat="server" /> <%-- ä¯ÀÀURLÊäÈë¿ò --%>
                         </td>
                     </tr>
+                    
+                    <%-- Î´Öª±êÇ©ÐÐ --%>
                     <tr>
                         <td class="SubHead">
-                            — or —
+                            ?or ? <%-- Î´Öª±êÇ© --%>
                         </td>
                         <td colspan="2">
-                            &nbsp;
+                            &nbsp; <%-- Õ¼Î»·û --%>
                             <br>
                             <br>
                         </td>
                     </tr>
+                    
+                    <%-- ÉÏ´«Ñ¡ÏîÐÐ --%>
                     <tr valign="top">
                         <td nowrap class="SubHead">
-                            Upload to Web Server:&nbsp;
+                            Upload to Web Server:&nbsp; <%-- ÉÏ´«µ½·þÎñÆ÷±êÇ© --%>
                         </td>
                         <td>
-                            &nbsp;
+                            &nbsp; <%-- Õ¼Î»·û --%>
                         </td>
                         <td>
-                            <asp:CheckBox ID="Upload" CssClass="Normal" Text="Upload document to server" runat="server" />
+                            <asp:CheckBox ID="Upload" CssClass="Normal" Text="Upload document to server" runat="server" /> <%-- ÉÏ´«ÎÄµµµ½·þÎñÆ÷¸´Ñ¡¿ò --%>
                             <br />
-                            <asp:CheckBox ID="storeInDatabase" CssClass="Normal" Text="Store in database (web farm support)"
-                                runat="server" />
+                            <asp:CheckBox ID="storeInDatabase" CssClass="Normal" Text="Store in database (web farm support)" runat="server" /> <%-- ´æ´¢ÔÚÊý¾Ý¿âÖÐ¸´Ñ¡¿ò --%>
                             <br />
-                            <input type="file" id="FileUpload" width="300" style="font-family: verdana; width: 353px;"
-                                runat="server" name="FileUpload" />
+                            <input type="file" id="FileUpload" width="300" style="font-family: verdana; width: 353px;" runat="server" name="FileUpload" /> <%-- ÎÄ¼þÉÏ´«¿Ø¼þ --%>
                         </td>
                     </tr>
                 </table>
+                
+                <%-- ²Ù×÷°´Å¥ --%>
                 <p>
                     <asp:LinkButton ID="updateButton" Text="Update" runat="server" class="CommandButton"
-                        BorderStyle="none" OnClick="UpdateBtn_Click" />
-                    &nbsp;
+                        BorderStyle="none" OnClick="UpdateBtn_Click" /> <%-- ¸üÐÂ°´Å¥ --%>
+                    &nbsp; <%-- Õ¼Î»·û --%>
                     <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
-                        class="CommandButton" BorderStyle="none" OnClick="CancelBtn_Click" />
-                    &nbsp;
+                        class="CommandButton" BorderStyle="none" OnClick="CancelBtn_Click" /> <%-- È¡Ïû°´Å¥ --%>
+                    &nbsp; <%-- Õ¼Î»·û --%>
                     <asp:LinkButton ID="deleteButton" Text="Delete this item" CausesValidation="False"
-                        runat="server" class="CommandButton" BorderStyle="none" OnClick="DeleteBtn_Click" />
-                    <hr noshade size="1" width="500">
-                    <span class="Normal">Created by
-                        <asp:Label ID="CreatedBy" runat="server" />
-                        on
-                        <asp:Label ID="CreatedDate" runat="server" />
-                        <br>
-                    </span>
-                    <p>
-                    </p>
+                        runat="server" class="CommandButton" BorderStyle="none" OnClick="DeleteBtn_Click" /> <%-- É¾³ý°´Å¥ --%>
+                </p>
+                
+                <%-- ·Ö¸îÏß --%>
+                <hr noshade size="1" width="500">
+                
+                <%-- ´´½¨ÕßÐÅÏ¢ --%>
+                <span class="Normal">
+                    Created by <%-- ´´½¨Õß±êÇ© --%>
+                    <asp:Label ID="CreatedBy" runat="server" /> <%-- ´´½¨Õß±êÇ© --%>
+                    on <%-- Ê±¼ä±êÇ© --%>
+                    <asp:Label ID="CreatedDate" runat="server" /> <%-- ´´½¨Ê±¼ä±êÇ© --%>
+                    <br>
+                </span>
+                
+                <%-- ¿Õ°×¶ÎÂä --%>
+                <p>
+                </p>
             </td>
         </tr>
     </table>

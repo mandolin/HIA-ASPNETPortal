@@ -348,3 +348,14 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# ASPNETPortal
+*.Debug.config
+*.Release.config
+*.Test.config
+**/UnityCfg.dev.xml
+**/UnityCfg.prod.xml
+**/UnityCfg.test.xml
+**/appSettings.dev.json
+**/appSettings.prod.json
+**/appSettings.test.json

@@ -5,10 +5,10 @@
         "titleBar.inactiveForeground": "#84FF66",
         "titleBar.inactiveBackground": "#010600",
         "activityBar.foreground": "#FFFFFF",
-        "activityBar.background": "#DA0021",
-        "activityBar.inactiveForeground": "#FF3FA0",
-        "activityBarBadge.foreground": "#4B2D00",
-        "activityBarBadge.background": "#FFCB7C",
+        "activityBar.background": "#D8002B",
+        "activityBar.inactiveForeground": "#FF3EA8",
+        "activityBarBadge.foreground": "#532E00",
+        "activityBarBadge.background": "#FFC986",
         "statusBar.foreground": "#B6FFA4",
         "statusBar.background": "#072400",
         "statusBarItem.hoverBackground": "#29B347",
@@ -16,5 +16,9 @@
         "statusBarItem.remoteBackground": "#004A29",
         "statusBar.debuggingForeground": "#B6FFA4",
         "statusBar.debuggingBackground": "#072400"
-    }
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "aiXcoder.showTrayIcon": true,
+    "docwriter.language": "Chinese",
+    "docwriter.style": "JSDoc"
 }

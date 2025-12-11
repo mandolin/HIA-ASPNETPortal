@@ -1,20 +1,25 @@
 <%@ Control language="c#" Inherits="ASPNET.StarterKit.Portal.Events" CodeBehind="Events.ascx.cs" AutoEventWireup="True" %>
+
 <%@ Register TagPrefix="Portal" TagName="Title" Src="~/DesktopModuleTitle.ascx"%>
 
+<%-- 注册门户标题控件 --%>
 <portal:title EditText="Add New Event" EditUrl="~/DesktopModules/EditEvents.aspx" runat="server" id=Title1 />
 
+<%-- 数据列表控件，用于显示事件列表 --%>
 <asp:DataList id="myDataList" CellPadding="4" Width="98%" EnableViewState="false" runat="server">
     <ItemTemplate>
         <span class="ItemTitle">
-            <asp:HyperLink id="editLink" ImageUrl="~/images/edit.gif" NavigateUrl='<%# "~/DesktopModules/EditEvents.aspx?ItemID=" +
-                              DataBinder.Eval(Container.DataItem, "ItemID") +
-                              "&mid=" + ModuleId %>' Visible="<%# IsEditable %>" runat="server" />
+            <asp:HyperLink id="editLink" ImageUrl="~/images/edit.gif" 
+                           NavigateUrl='<%# "~/DesktopModules/EditEvents.aspx?ItemID=" + 
+                                            DataBinder.Eval(Container.DataItem, "ItemID") + 
+                                            "&mid=" + ModuleId %>' 
+                           Visible="<%# IsEditable %>" runat="server" />
             <asp:Label Text='<%# DataBinder.Eval(Container.DataItem, "Title") %>' runat="server" />
         </span>
         <br>
         <span class="Normal"><i>
-                                 <%# DataBinder.Eval(Container.DataItem, "WhereWhen") %>
-                             </i></span>
+            <%# DataBinder.Eval(Container.DataItem, "WhereWhen") %>
+        </i></span>
         <br>
         <span class="Normal">
             <%# DataBinder.Eval(Container.DataItem, "Description") %>

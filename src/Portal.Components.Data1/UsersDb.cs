@@ -8,6 +8,10 @@ namespace ASPNET.StarterKit.Portal
     {
         private readonly PortalSecurityDbContext _context;
 
+        /// <summary>
+        /// 初始化用户数据库操作类。
+        /// </summary>
+        /// <param name="context">数据库上下文。</param>
         public UsersDb(PortalSecurityDbContext context)
         {
             _context = context;
@@ -15,69 +19,124 @@ namespace ASPNET.StarterKit.Portal
 
         #region IUsersDb Members
 
-        public int AddUser(String fullName, string email, string password)
+        /// <summary>
+        /// 添加用户。
+        /// </summary>
+        /// <param name="fullName">用户全名。</param>
+        /// <param name="email">用户邮箱。</param>
+        /// <param name="password">用户密码。</param>
+        /// <returns>返回添加的用户ID，如果添加失败则返回-1。</returns>
+        public int AddUser(string fullName, string email, string password)
         {
+            // 创建一个新的用户对象并设置属性。
             var item = new UserItem
-                           {
-                               Name = fullName,
-                               Email = email,
-                               Password = password
-                           };
+            {
+                Name = fullName,
+                Email = email,
+                Password = password
+            };
 
-            // Execute the command in a try/catch to catch duplicate username errors
+            // 执行命令并捕获可能的异常（例如用户名重复）。
             try
             {
+                // 将新的用户对象添加到数据库上下文中。
                 _context.Users.Add(item);
+
+                // 保存更改到数据库。
                 _context.SaveChanges();
             }
-            catch
+            catch (Exception)
             {
-                // failed to create a new user
+                // 如果发生错误，则返回-1表示添加失败。
                 return -1;
             }
 
+            // 返回成功添加的用户的ID。
             return item.UserId;
         }
 
+        /// <summary>
+        /// 删除指定ID的用户。
+        /// </summary>
+        /// <param name="userId">用户ID。</param>
         public void DeleteUser(int userId)
         {
-            UserItem item = _context.Users.Single(i => i.UserId == userId);
+            // 通过用户ID获取用户对象。
+            var item = _context.Users.Single(i => i.UserId == userId);
+
+            // 从数据库上下文中移除用户对象。
             _context.Users.Remove(item);
+
+            // 保存更改到数据库。
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// 更新指定ID的用户信息。
+        /// </summary>
+        /// <param name="userId">用户ID。</param>
+        /// <param name="email">新邮箱地址。</param>
+        /// <param name="password">新密码。</param>
         public void UpdateUser(int userId, string email, string password)
         {
-            UserItem item = _context.Users.Single(i => i.UserId == userId);
+            // 通过用户ID获取用户对象。
+            var item = _context.Users.Single(i => i.UserId == userId);
+
+            // 更新用户的邮箱和密码。
             item.Email = email;
             item.Password = password;
+
+            // 保存更改到数据库。
             _context.SaveChanges();
         }
 
-        public IEnumerable<IRoleItem> GetRolesByUser(String email)
+        /// <summary>
+        /// 获取指定用户名的所有角色。
+        /// </summary>
+        /// <param name="name">用户名。</param>
+        /// <returns>角色集合。</returns>
+        public IEnumerable<IRoleItem> GetRolesByUser(string name) 
         {
-            return _context.Users.
-                Single(i => i.Email == email).Roles.
-                ToList<IRoleItem>();
+            // 通过用户名获取用户对象，并获取其所有角色。
+            return _context.Users.Single(i => i.Name == name).Roles.ToList<IRoleItem>();
         }
 
-        public IEnumerable<string> GetRoleNamesByUser(String email)
+        /// <summary>
+        /// 获取指定用户名的所有角色名称。
+        /// </summary>
+        /// <param name="name">用户名。</param>
+        /// <returns>角色名称集合。</returns>
+        public IEnumerable<string> GetRoleNamesByUser(string name)
         {
-            UserItem item = _context.Users.Single(i => i.Email == email);
-            return item.Roles.
-                Select(i => i.RoleName);
+            // 通过用户名获取用户对象，并选择其所有角色的名称。
+            var item = _context.Users.Single(i => i.Name == name);
+            return item.Roles.Select(i => i.RoleName);
         }
 
-        public IUserItem GetSingleUser(String email)
+        /// <summary>
+        /// 获取单个用户。
+        /// </summary>
+        /// <param name="name">用户名。</param>
+        /// <returns>用户对象。</returns>
+        public IUserItem GetSingleUser(string name)
         {
-            return _context.Users.Single(i => i.Email == email);
+            // 通过用户名获取用户对象。
+            return _context.Users.Single(i => i.Name == name);
         }
 
-        public string Login(String email, string password)
+        /// <summary>
+        /// 登录用户。
+        /// </summary>
+        /// <param name="emailOrName">邮箱或用户名。</param>
+        /// <param name="password">密码。</param>
+        /// <returns>登录成功的用户名，或空字符串表示登录失败。</returns>
+        public string Login(string emailOrName, string password)
         {
-            UserItem item = _context.Users.SingleOrDefault(i => i.Email == email && i.Password == password);
+            // 尝试通过邮箱或用户名以及密码查找用户。
+            var item = _context.Users.SingleOrDefault(i => (i.Email == emailOrName || i.Name == emailOrName) && i.Password == password);
 
-            if (item != default(UserItem))
+            // 如果找到了匹配的用户，则返回用户名；否则返回空字符串。
+            if (item != null)
             {
                 return item.Name.Trim();
             }

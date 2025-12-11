@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -9,55 +10,45 @@ namespace ASPNET.StarterKit.Portal
         private int moduleId;
 
         [Dependency]
-        public IAnnouncementsDb AnnouncementsDB { private get; set; }
+        public IAnnouncementsDb AnnouncementsDB { private get; set; } // 依赖注入：公告数据库访问接口
 
         [Dependency]
-        public IPortalSecurity PortalSecurity { private get; set; }
+        public IPortalSecurity PortalSecurity { private get; set; } // 依赖注入：门户安全接口
 
-        //****************************************************************
-        //
-        // The Page_Load event on this Page is used to obtain the ModuleId
-        // and ItemId of the announcement to edit.
-        //
-        // It then uses the ASPNET.StarterKit.Portal.AnnouncementsDB() data component
-        // to populate the page's edit controls with the annoucement details.
-        //
-        //****************************************************************
-
+        // Page_Load 事件处理程序用于获取要编辑的模块和公告的 ID
+        // 并使用 ASPNET.StarterKit.Portal.AnnouncementsDB 组件填充页面的编辑控件
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Determine ModuleId of Announcements Portal Module
+            // 获取公告模块的 ModuleId
             moduleId = Int32.Parse(Request.Params["Mid"]);
 
-            // Verify that the current user has access to edit this module
-            if (PortalSecurity.HasEditPermissions(moduleId) == false)
+            // 验证当前用户是否有权限编辑此模块
+            if (!PortalSecurity.HasEditPermissions(moduleId))
             {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
+                Response.Redirect("~/Admin/EditAccessDenied.aspx"); // 如果没有权限，则重定向到无权限页面
             }
 
-            // Determine ItemId of Announcement to Update
+            // 获取要更新的公告的 ItemId
             if (Request.Params["ItemId"] != null)
             {
                 itemId = Int32.Parse(Request.Params["ItemId"]);
             }
 
-            // If the page is being requested the first time, determine if an
-            // announcement itemId value is specified, and if so populate page
-            // contents with the announcement details
-
-            if (Page.IsPostBack == false)
+            // 如果页面不是回发请求，则检查是否有 ItemId，如果有则填充页面内容
+            if (!Page.IsPostBack)
             {
                 if (itemId != 0)
                 {
-                    // Obtain a single row of announcement information
-                    IAnnouncementItem item = AnnouncementsDB.GetSingleAnnouncement(itemId);
+                    // 获取单个公告的信息
+                    var item = AnnouncementsDB.GetSingleAnnouncement(itemId);
 
-                    // Security check.  verify that itemid is within the module.                    
+                    // 安全检查：验证 ItemId 是否属于当前模块
                     if (item.ModuleId != moduleId)
                     {
-                        Response.Redirect("~/Admin/EditAccessDenied.aspx");
+                        Response.Redirect("~/Admin/EditAccessDenied.aspx"); // 如果 ItemId 不属于当前模块，则重定向到无权限页面
                     }
 
+                    // 填充页面上的控件
                     TitleField.Text = item.Title;
                     MoreLinkField.Text = item.MoreLink;
                     MobileMoreField.Text = item.MobileMoreLink;
@@ -67,80 +58,55 @@ namespace ASPNET.StarterKit.Portal
                     CreatedDate.Text = item.CreatedDate.Value.ToShortDateString();
                 }
 
-                // Store URL Referrer to return to portal
-                ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
+                // 存储返回地址以便用户返回到门户主页
+                ViewState["UrlReferrer"] = Request.UrlReferrer?.ToString();
             }
         }
 
-        //****************************************************************
-        //
-        // The UpdateBtn_Click event handler on this Page is used to either
-        // create or update an announcement.  It  uses the ASPNET.StarterKit.Portal.AnnouncementsDB()
-        // data component to encapsulate all data functionality.
-        //
-        //****************************************************************
-
+        // UpdateBtn_Click 事件处理程序用于创建或更新公告
+        // 使用 ASPNET.StarterKit.Portal.AnnouncementsDB 组件封装所有数据操作功能
         protected void UpdateBtn_Click(Object sender, EventArgs e)
         {
-            // Only Update if the Entered Data is Valid
+            // 只有当输入的数据有效时才进行更新操作
             if (Page.IsValid)
             {
+                // 如果 ItemId 为 0，则添加新公告；否则更新现有公告
                 if (itemId == 0)
                 {
-                    // Add the announcement within the Announcements table
-                    AnnouncementsDB.AddAnnouncement(moduleId, Context.User.Identity.Name, TitleField.Text,
-                                                    DateTime.Parse(ExpireField.Text), DescriptionField.Text,
-                                                    MoreLinkField.Text,
-                                                    MobileMoreField.Text);
+                    // 添加公告到数据库
+                    AnnouncementsDB.AddAnnouncement(moduleId, Context.User.Identity.Name, TitleField.Text, DateTime.Parse(ExpireField.Text), DescriptionField.Text, MoreLinkField.Text, MobileMoreField.Text);
                 }
                 else
                 {
-                    // Update the announcement within the Announcements table
-                    AnnouncementsDB.UpdateAnnouncement(itemId, Context.User.Identity.Name, TitleField.Text,
-                                                       DateTime.Parse(ExpireField.Text), DescriptionField.Text,
-                                                       MoreLinkField.Text,
-                                                       MobileMoreField.Text);
+                    // 更新公告
+                    AnnouncementsDB.UpdateAnnouncement(itemId, Context.User.Identity.Name, TitleField.Text, DateTime.Parse(ExpireField.Text), DescriptionField.Text, MoreLinkField.Text, MobileMoreField.Text);
                 }
 
-                // Redirect back to the portal home page
-                Response.Redirect((String) ViewState["UrlReferrer"]);
+                // 重定向回存储的返回地址
+                Response.Redirect((String)ViewState["UrlReferrer"]);
             }
         }
 
-        //****************************************************************
-        //
-        // The DeleteBtn_Click event handler on this Page is used to delete an
-        // an announcement.  It  uses the ASPNET.StarterKit.Portal.AnnouncementsDB()
-        // data component to encapsulate all data functionality.
-        //
-        //****************************************************************
-
+        // DeleteBtn_Click 事件处理程序用于删除公告
+        // 使用 ASPNET.StarterKit.Portal.AnnouncementsDB 组件封装所有数据操作功能
         protected void DeleteBtn_Click(Object sender, EventArgs e)
         {
-            // Only attempt to delete the item if it is an existing item
-            // (new items will have "ItemId" of 0)
-
+            // 只有当 ItemId 不为 0 时才尝试删除公告（新公告的 ItemId 为 0）
             if (itemId != 0)
             {
+                // 删除公告
                 AnnouncementsDB.DeleteAnnouncement(itemId);
             }
 
-            // Redirect back to the portal home page
-            Response.Redirect((String) ViewState["UrlReferrer"]);
+            // 重定向回存储的返回地址
+            Response.Redirect((String)ViewState["UrlReferrer"]);
         }
 
-        //****************************************************************
-        //
-        // The CancelBtn_Click event handler on this Page is used to cancel
-        // out of the page, and return the user back to the portal home
-        // page.
-        //
-        //****************************************************************
-
+        // CancelBtn_Click 事件处理程序用于取消当前操作并返回门户主页
         protected void CancelBtn_Click(Object sender, EventArgs e)
         {
-            // Redirect back to the portal home page
-            Response.Redirect((String) ViewState["UrlReferrer"]);
+            // 重定向回存储的返回地址
+            Response.Redirect((String)ViewState["UrlReferrer"]);
         }
     }
 }

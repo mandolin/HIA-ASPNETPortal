@@ -5,7 +5,7 @@
     The SecurityRoles.aspx page is used to create and edit security roles within
     the Portal application.
 --%>
-<asp:Content ID="Content1" ContentPlaceHolderID="maincontent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <table width="98%" cellspacing="0" cellpadding="4" border="0">
         <tr height="*" valign="top">
             <td width="100">
@@ -36,7 +36,8 @@
                         </td>
                         <td>
                             <table width="100%" cellspacing="0" cellpadding="0">
-                                <tr>
+                                <%-- note 暂不考虑支持windowsUser机制
+                                    <tr>
                                     <td>
                                         <asp:TextBox ID="windowsUserName" Text="DOMAIN\username" Visible="False" runat="server" />
                                     </td>
@@ -45,9 +46,10 @@
                                             Visible="False" runat="server" OnClick="AddUser_Click" />
                                     </td>
                                 </tr>
+                                    --%>
                                 <tr>
                                     <td>
-                                        <asp:DropDownList ID="allUsers" DataTextField="Email" DataValueField="UserID" runat="server" />
+                                        <asp:DropDownList ID="allUsers" DataTextField="Name" DataValueField="UserID" runat="server" />
                                     </td>
                                     <td>
                                         <asp:LinkButton ID="addExisting" CssClass="CommandButton" Text="Add existing user to role"
@@ -68,7 +70,7 @@
                                     &nbsp;&nbsp;
                                     <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="Remove this user from role"
                                         runat="server" />
-                                    <asp:Label Text='<%# DataBinder.Eval(Container.DataItem, "Email") %>' CssClass="Normal"
+                                    <asp:Label Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>' CssClass="Normal"
                                         runat="server" />
                                 </ItemTemplate>
                             </asp:DataList>

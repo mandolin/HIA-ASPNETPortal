@@ -1,7 +1,8 @@
 <%@ Page Language="c#" CodeBehind="EditEvents.aspx.cs" AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.EditEvents"
     MasterPageFile="~/Default.master" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="maincontent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <%-- 页面内容区域开始 --%>
     <table width="98%" cellspacing="0" cellpadding="4" border="0">
         <tr valign="top">
             <td width="100">
@@ -83,6 +84,7 @@
                     </tr>
                 </table>
                 <p>
+                    <%-- 更新、取消和删除按钮 --%>
                     <asp:LinkButton ID="updateButton" Text="Update" runat="server" class="CommandButton"
                         BorderStyle="none" OnClick="UpdateBtn_Click" />
                     &nbsp;
@@ -102,4 +104,5 @@
             </td>
         </tr>
     </table>
+    <%-- 页面内容区域结束 --%>
 </asp:Content>

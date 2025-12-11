@@ -1,7 +1,7 @@
 <%@ Page Language="c#" CodeBehind="EditImage.aspx.cs" AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.EditImage"
     MasterPageFile="~/Default.master" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="maincontent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <table width="98%" cellspacing="0" cellpadding="4" border="0">
         <tr valign="top">
             <td width="150">

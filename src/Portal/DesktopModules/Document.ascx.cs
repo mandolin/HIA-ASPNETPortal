@@ -1,60 +1,50 @@
 using System;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 文档模块控件，用于显示文档列表。
+    /// </summary>
     public partial class Document : PortalModuleControl<Document>
     {
         [Dependency]
         public IDocumentsDb DocumentDB { private get; set; }
 
-
-        //*******************************************************
-        //
-        // The Page_Load event handler on this User Control is used to
-        // obtain a SqlDataReader of document information from the 
-        // Documents table, and then databind the results to a DataGrid
-        // server control.  It uses the ASPNET.StarterKit.Portal.DocumentDB()
-        // data component to encapsulate all data functionality.
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 用户控件的页面加载事件处理器，用于从数据库获取文档信息并绑定到 DataGrid 控件。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Obtain Document Data from Documents table
-            // and bind to the datalist control
+            // 从数据库获取指定模块的文档数据
             myDataGrid.DataSource = DocumentDB.GetDocuments(ModuleId);
+
+            // 将数据绑定到 DataGrid 控件
             myDataGrid.DataBind();
         }
 
-        //*******************************************************
-        //
-        // GetBrowsePath() is a helper method used to create the url   
-        // to the document.  If the size of the content stored in the   
-        // database is non-zero, it creates a path to browse that.   
-        // Otherwise, the FileNameUrl value is used.
-        //
-        // This method is used in the databinding expression for
-        // the browse Hyperlink within the DataGrid, and is called 
-        // for each row when DataGrid.DataBind() is called.  It is 
-        // defined as a helper method here (as opposed to inline 
-        // within the template) to improve code organization and
-        // avoid embedding logic within the content template.
-        //
-        //*******************************************************
-
-        protected string GetBrowsePath(String url, object size, int documentId)
+        /// <summary>
+        /// 获取浏览路径的辅助方法。如果数据库中存储的内容大小非零，则创建指向该内容的 URL；
+        /// 否则，返回 FileNameUrl 的值。
+        /// </summary>
+        /// <param name="url">文件的 URL。</param>
+        /// <param name="size">文件大小。</param>
+        /// <param name="documentId">文档的 ID。</param>
+        /// <returns>指向文档的 URL。</returns>
+        protected string GetBrowsePath(string url, object size, int documentId)
         {
-            if (size != DBNull.Value && (int) size > 0)
+            // 检查文件大小是否为非零值
+            if (size != DBNull.Value && Convert.ToInt32(size) > 0)
             {
-                // if there is content in the database, create an 
-                // url to browse it
-
+                // 如果数据库中有内容，则创建一个指向该内容的 URL
                 return "~/DesktopModules/ViewDocument.aspx?DocumentID=" + documentId;
             }
             else
             {
-                // otherwise, return the FileNameUrl
+                // 否则，返回 FileNameUrl 的值
                 return url;
             }
         }

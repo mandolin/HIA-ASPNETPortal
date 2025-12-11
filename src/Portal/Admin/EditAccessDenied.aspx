@@ -3,7 +3,7 @@
 <%@ OutputCache Duration="36000" VaryByParam="none" %>
 <%@ Import Namespace="ASPNET.StarterKit.Portal" %>
 <%@ Import Namespace="Resources" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="maincontent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <table width="500" border="0">
         <tbody>
             <tr>

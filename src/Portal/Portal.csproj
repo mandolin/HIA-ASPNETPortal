@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ASPNET.StarterKit.Portal</RootNamespace>
     <AssemblyName>Portal</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
@@ -28,6 +28,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Portal.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,17 +54,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    <Reference Include="Linq.Extras, Version=5.0.0.0, Culture=neutral, PublicKeyToken=487ae61f5d540dab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Linq.Extras.5.0.0\lib\net45\Linq.Extras.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -70,11 +64,17 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.ServiceModel.Web">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
@@ -85,6 +85,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.11.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Configuration.5.11.2\lib\net47\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\AccessDenied.aspx" />
@@ -103,6 +112,14 @@
     <Content Include="Admin\Tabs.ascx" />
     <Content Include="Admin\Users.ascx" />
     <Content Include="App_Themes\Default\Default.css" />
+    <Content Include="Config\UnityCfg.dev.template.xml" />
+    <Content Include="Config\UnityCfg.prod.template.xml" />
+    <Content Include="Config\UnityCfg.prod.xml" />
+    <Content Include="Config\UnityCfg.test.template.xml" />
+    <Content Include="Config\UnityCfg.test.xml" />
+    <Content Include="Config\UnityCfg.dev.xml" />
+    <Content Include="Config\UnityCfg.xml" />
+    <Content Include="css\sample.css" />
     <Content Include="Data\Admin.gif" />
     <Content Include="Data\config_auth_forms.gif" />
     <Content Include="Data\config_auth_win.gif" />
@@ -139,6 +156,7 @@
     <Content Include="Data\vanlew.gif" />
     <Content Include="Data\whataremodules.gif" />
     <Content Include="Default.aspx" />
+    <Content Include="Demo\1.htm" />
     <Content Include="DesktopDefault.aspx" />
     <Content Include="DesktopModules\Announcements.ascx" />
     <Content Include="DesktopModules\Contacts.ascx" />
@@ -306,6 +324,11 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopBanner.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DesktopBanner.resx</DependentUpon>
     </Compile>
     <Compile Include="DesktopDefault.aspx.cs">
       <DependentUpon>DesktopDefault.aspx</DependentUpon>
@@ -478,14 +501,62 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Sys\EnvSection.cs" />
+    <Compile Include="Sys\GlobalInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\AppSettingsLoader.cs" />
+    <Compile Include="Util\UnityConfigLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.master" />
+    <Content Include="js\grunt-sample.js" />
+    <Content Include="js\grunt-sample.min.js" />
+    <Content Include="js\sample.js" />
+    <Content Include="js\sample1.js" />
+    <Content Include="js\sample2.js" />
+    <Content Include="js\sample\sample.js" />
+    <Content Include="js\sample\sampleEs.js" />
+    <Content Include="js\sample\sampleEs1.js" />
+    <Content Include="js\sample\sampleEs1.src.js" />
+    <Content Include="js\sample\sampleEs.src.js" />
     <Content Include="packages.config" />
+    <Content Include=".editorconfig" />
+    <Content Include="js\sample.coffee" />
+    <Content Include="js\sample1.coffee" />
+    <Content Include="package.json" />
+    <Content Include="js\sample.js.map" />
+    <Content Include="Gulp\gulp-watcher-sign.cfg" />
+    <Content Include="js\sample2.coffee" />
+    <Content Include="js\sample\sample.coffee" />
+    <Content Include="css\sample.css.map" />
+    <Content Include="Config\Web.config" />
+    <Content Include="Config\appSettings.dev.json" />
+    <Content Include="Config\appSettings.json" />
+    <Content Include="Config\appSettings.prod.json" />
+    <Content Include="Config\appSettings.test.json" />
+    <Content Include="Config\appSettings.dev.template.json" />
+    <Content Include="Config\appSettings.prod.template.json" />
+    <Content Include="Config\appSettings.test.template.json" />
+    <None Include="css\sample.scss" />
+    <Content Include="js\sample1.js.map" />
+    <Content Include="js\sample2.js.map" />
+    <Content Include="js\sample\sample.js.map" />
+    <Content Include="js\sample\sampleEs.js.map" />
+    <Content Include="js\sample\sampleEs1.js.map" />
     <None Include="Uploads\sample.doc" />
-    <Content Include="UnityCfg.xml" />
     <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Debug.Template.config" />
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.Template.config" />
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Test.Template.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portal.Components\Portal.Components.csproj">
@@ -503,6 +574,7 @@
     <Content Include="App_GlobalResources\lang.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>lang.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -511,9 +583,30 @@
       <LastGenOutput>lang.zh-cn.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Grunt\Tasks\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DesktopBanner.en-US.resx" />
+    <EmbeddedResource Include="DesktopBanner.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DesktopBanner.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DesktopBanner.zh-CN.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

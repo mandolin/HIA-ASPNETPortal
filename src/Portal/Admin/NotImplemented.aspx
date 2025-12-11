@@ -20,7 +20,7 @@
     }
 
 </script>
-<asp:Content ID="Content1" ContentPlaceHolderID="maincontent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <table width="500" border="0">
         <tbody>
             <tr>

@@ -4,48 +4,59 @@ using System.Web.UI;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// XML 模块控制，用于显示 XML 数据并通过 XSL/T 进行转换。
+    /// </summary>
     public partial class XmlModule : PortalModuleControl<XmlModule>
     {
-        //*******************************************************
-        //
-        // The Page_Load event handler on this User Control uses
-        // the Portal configuration system to obtain an xml document
-        // and xsl/t transform file location.  It then sets these
-        // properties on an <asp:Xml> server control.
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 页面加载事件处理程序用于设置 XML 文档和 XSL/T 转换文件的位置。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            var xmlsrc = (String) Settings["xmlsrc"];
+            // 获取 XML 文件路径设置
+            string xmlsrc = Settings["xmlsrc"] as string;
 
-            if ((xmlsrc != null) && (xmlsrc != ""))
+            // 如果 XML 文件路径设置存在且非空
+            if (!string.IsNullOrEmpty(xmlsrc))
             {
-                if (File.Exists(Server.MapPath(xmlsrc)))
+                // 将路径转换为服务器上的绝对路径
+                string mappedXmlPath = Server.MapPath(xmlsrc);
+
+                // 检查文件是否存在
+                if (File.Exists(mappedXmlPath))
                 {
+                    // 设置 XML 控件的 DocumentSource 属性
                     xml1.DocumentSource = xmlsrc;
                 }
                 else
                 {
-                    Controls.Add(
-                        new LiteralControl("<" + "br" + "><" + "span class=NormalRed" + ">" + "File " + xmlsrc +
-                                           " not found.<" + "br" + ">"));
+                    // 如果文件不存在，则添加一个提示消息
+                    Controls.Add(new LiteralControl($"<br><span class=\"NormalRed\">File {xmlsrc} not found.<br>"));
                 }
             }
 
-            var xslsrc = (String) Settings["xslsrc"];
+            // 获取 XSL/T 文件路径设置
+            string xslsrc = Settings["xslsrc"] as string;
 
-            if ((xslsrc != null) && (xslsrc != ""))
+            // 如果 XSL/T 文件路径设置存在且非空
+            if (!string.IsNullOrEmpty(xslsrc))
             {
-                if (File.Exists(Server.MapPath(xslsrc)))
+                // 将路径转换为服务器上的绝对路径
+                string mappedXslPath = Server.MapPath(xslsrc);
+
+                // 检查文件是否存在
+                if (File.Exists(mappedXslPath))
                 {
+                    // 设置 XML 控件的 TransformSource 属性
                     xml1.TransformSource = xslsrc;
                 }
                 else
                 {
-                    Controls.Add(
-                        new LiteralControl("<" + "br" + "><" + "span class=NormalRed>File " + xslsrc + " not found.<" +
-                                           "br" + ">"));
+                    // 如果文件不存在，则添加一个提示消息
+                    Controls.Add(new LiteralControl($"<br><span class=\"NormalRed\">File {xslsrc} not found.<br>"));
                 }
             }
         }

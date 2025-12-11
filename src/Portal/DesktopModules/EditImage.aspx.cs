@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {

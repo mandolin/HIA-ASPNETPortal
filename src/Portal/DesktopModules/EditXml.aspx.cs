@@ -1,85 +1,89 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
     public partial class EditXml : PortalPage<EditXml>
     {
+        // 存储模块ID的私有字段
         private int moduleId;
 
+        // 依赖注入模块数据库接口
         [Dependency]
         public IModulesDb ModulesConfig { private get; set; }
 
+        // 依赖注入门户安全接口
         [Dependency]
         public IPortalSecurity PortalSecurity { private get; set; }
 
         //****************************************************************
         //
-        // The Page_Load event on this Page is used to obtain the ModuleId
-        // xml module to edit.
-        //
-        // It then uses the ASP.NET configuration system to populate the page's
-        // edit controls with the xml details.
+        // 页面加载事件：用于获取要编辑的模块ID。
+        // 使用配置系统填充页面上的编辑控件。
         //
         //****************************************************************
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Determine ModuleId of Announcements Portal Module
-            moduleId = Int32.Parse(Request.Params["Mid"]);
+            // 获取模块ID
+            moduleId = int.Parse(Request.Params["Mid"]);
 
-            // Verify that the current user has access to edit this module
-            if (PortalSecurity.HasEditPermissions(moduleId) == false)
+            // 验证当前用户是否有编辑此模块的权限
+            if (!PortalSecurity.HasEditPermissions(moduleId))
             {
+                // 如果没有权限，则重定向到无权访问页面
                 Response.Redirect("~/Admin/EditAccessDenied.aspx");
             }
 
-            if (Page.IsPostBack == false)
+            // 如果不是回发请求
+            if (!Page.IsPostBack)
             {
+                // 确保模块ID大于0，即确保是有效的模块
                 if (moduleId > 0)
                 {
-                    // Get settings from the database
+                    // 从数据库获取设置
                     Hashtable settings = ModulesConfig.GetModuleSettings(moduleId);
 
-                    XmlDataSrc.Text = (String) settings["xmlsrc"];
-                    XslTransformSrc.Text = (String) settings["xslsrc"];
+                    // 设置XML数据源路径
+                    XmlDataSrc.Text = (String)settings["xmlsrc"];
+                    // 设置XSL/T转换文件路径
+                    XslTransformSrc.Text = (String)settings["xslsrc"];
                 }
 
-                // Store URL Referrer to return to portal
-                ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
+                // 存储URL引用，以便返回到门户首页
+                ViewState["UrlReferrer"] = Request.UrlReferrer?.ToString();
             }
         }
 
         //****************************************************************
         //
-        // The UpdateBtn_Click event handler on this Page is used to save
-        // the settings to the configuration file.
+        // 更新按钮点击事件处理程序：用于保存设置到数据库。
         //
         //****************************************************************
 
         protected void UpdateBtn_Click(Object sender, EventArgs e)
         {
-            // Update settings in the database
+            // 更新数据库中的设置
             ModulesConfig.UpdateModuleSetting(moduleId, "xmlsrc", XmlDataSrc.Text);
             ModulesConfig.UpdateModuleSetting(moduleId, "xslsrc", XslTransformSrc.Text);
 
-            // Redirect back to the portal home page
-            Response.Redirect((String) ViewState["UrlReferrer"]);
+            // 重定向回门户首页
+            Response.Redirect((string)ViewState["UrlReferrer"]);
         }
 
         //****************************************************************
         //
-        // The CancelBtn_Click event handler on this Page is used to cancel
-        // out of the page, and return the user back to the portal home
-        // page.
+        // 取消按钮点击事件处理程序：用于取消编辑并返回到门户首页。
         //
         //****************************************************************
 
         protected void CancelBtn_Click(Object sender, EventArgs e)
         {
-            // Redirect back to the portal home page
-            Response.Redirect((String) ViewState["UrlReferrer"]);
+            // 重定向回门户首页
+            Response.Redirect((string)ViewState["UrlReferrer"]);
         }
     }
 }

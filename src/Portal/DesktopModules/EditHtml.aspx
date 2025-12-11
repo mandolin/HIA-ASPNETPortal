@@ -1,7 +1,8 @@
 <%@ Page Language="c#" CodeBehind="EditHtml.aspx.cs" AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.EditHtml"
     MasterPageFile="~/Default.master" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="maincontent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <%-- 页面内容区域开始 --%>
     <table width="98%" cellspacing="0" cellpadding="4" border="0">
         <tr valign="top">
             <td width="100">
@@ -29,6 +30,7 @@
                             &nbsp;&nbsp;
                         </td>
                         <td>
+                            <%-- 输入桌面版HTML内容的多行文本框 --%>
                             <asp:TextBox ID="DesktopText" Columns="75" Width="650" Rows="12" TextMode="multiline"
                                 runat="server" />
                         </td>
@@ -41,6 +43,7 @@
                             &nbsp;&nbsp;
                         </td>
                         <td>
+                            <%-- 输入移动端摘要（可选）的多行文本框 --%>
                             <asp:TextBox ID="MobileSummary" Columns="75" Width="650" Rows="3" TextMode="multiline"
                                 runat="server" />
                         </td>
@@ -53,15 +56,18 @@
                             &nbsp;&nbsp;
                         </td>
                         <td>
+                            <%-- 输入移动端详情（可选）的多行文本框 --%>
                             <asp:TextBox ID="MobileDetails" Columns="75" Width="650" Rows="5" TextMode="multiline"
                                 runat="server" />
                         </td>
                     </tr>
                 </table>
                 <p>
+                    <%-- 更新按钮 --%>
                     <asp:LinkButton ID="updateButton" Text="Update" runat="server" class="CommandButton"
                         BorderStyle="none" OnClick="UpdateBtn_Click" />
                     &nbsp;
+                    <%-- 取消按钮 --%>
                     <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
                         class="CommandButton" BorderStyle="none" OnClick="CancelBtn_Click" />
                     &nbsp;
@@ -69,4 +75,5 @@
             </td>
         </tr>
     </table>
+    <%-- 页面内容区域结束 --%>
 </asp:Content>

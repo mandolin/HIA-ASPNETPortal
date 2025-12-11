@@ -23,13 +23,13 @@ namespace ASPNET.StarterKit.Portal {
         protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;
         
         /// <summary>
-        /// siteName control.
+        /// SiteName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox siteName;
+        protected global::System.Web.UI.WebControls.TextBox SiteName;
         
         /// <summary>
         /// showEdit control.

@@ -8,7 +8,7 @@
             Site Title:
         </td>
         <td colspan="2" class="NormalTextBox">
-            <asp:Textbox id="siteName" width="240" runat="server" />
+            <asp:Textbox id="SiteName" width="240" runat="server" />
         </td>
     </tr>
     <tr>

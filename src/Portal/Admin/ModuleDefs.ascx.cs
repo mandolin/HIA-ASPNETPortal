@@ -1,9 +1,13 @@
 using System;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 用户控件用于管理模块定义。
+    /// </summary>
     public partial class ModuleDefs : PortalModuleControl<ModuleDefs>
     {
         private int tabId;
@@ -12,80 +16,70 @@ namespace ASPNET.StarterKit.Portal
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
-        //*******************************************************
-        //
-        // The Page_Load server event handler on this user control is used
-        // to populate the current defs settings from the configuration system
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 页面加载时初始化模块定义。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Verify that the current user has access to access this page
-            if (PortalSecurity.IsInRoles("Admins") == false)
+            // 验证当前用户是否有权访问此页面
+            if (!PortalSecurity.IsInRoles("Admins"))
             {
                 Response.Redirect("~/Admin/EditAccessDenied.aspx");
             }
 
+            // 获取请求参数中的 tabid 和 tabindex
             if (Request.Params["tabid"] != null)
             {
-                tabId = Int32.Parse(Request.Params["tabid"]);
+                tabId = int.Parse(Request.Params["tabid"]);
             }
             if (Request.Params["tabindex"] != null)
             {
-                tabIndex = Int32.Parse(Request.Params["tabindex"]);
+                tabIndex = int.Parse(Request.Params["tabindex"]);
             }
 
-            // If this is the first visit to the page, bind the definition data to the datalist
-            if (Page.IsPostBack == false)
+            // 如果这不是回发请求，则绑定数据到 DataList 控件
+            if (!Page.IsPostBack)
             {
                 BindData();
             }
         }
 
-        //*******************************************************
-        //
-        // The AddDef_Click server event handler is used to add
-        // a new module definition for this portal
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 添加新的模块定义时的事件处理程序。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void AddDef_Click(Object Sender, EventArgs e)
         {
-            // redirect to edit page
+            // 重定向到编辑页面
             Response.Redirect("~/Admin/ModuleDefinitions.aspx?defId=-1&tabindex=" + tabIndex + "&tabid=" + tabId);
         }
 
-        //*******************************************************
-        //
-        // The DefsList_ItemCommand server event handler on this page 
-        // is used to handle the user editing module definitions
-        // from the DefsList asp:datalist control
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 处理用户从 DataList 控件编辑模块定义的命令。
+        /// </summary>
+        /// <param name="sender">事件源对象。</param>
+        /// <param name="e">事件参数。</param>
         protected void DefsList_ItemCommand(object sender, DataListCommandEventArgs e)
         {
-            var moduleDefId = (int) defsList.DataKeys[e.Item.ItemIndex];
+            // 获取当前项的模块定义 ID
+            var moduleDefId = (int)defsList.DataKeys[e.Item.ItemIndex];
 
-            // redirect to edit page
-            Response.Redirect("~/Admin/ModuleDefinitions.aspx?defId=" + moduleDefId + "&tabindex=" + tabIndex +
-                              "&tabid=" + tabId);
+            // 重定向到编辑页面
+            Response.Redirect("~/Admin/ModuleDefinitions.aspx?defId=" + moduleDefId + "&tabindex=" + tabIndex + "&tabid=" + tabId);
         }
 
-        //*******************************************************
-        //
-        // The BindData helper method is used to bind the list of 
-        // module definitions for this portal to an asp:datalist server control
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 绑定模块定义列表到 DataList 控件。
+        /// </summary>
         private void BindData()
         {
-            // Obtain PortalSettings from Current Context
-            var portalSettings = (PortalSettings) Context.Items["PortalSettings"];
+            // 从当前上下文中获取 PortalSettings
+            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
 
-            // Get the portal's defs from the database
+            // 从数据库中获取门户的模块定义
             defsList.DataSource = ModuleDefConfig.GetModuleDefinitions();
             defsList.DataBind();
         }

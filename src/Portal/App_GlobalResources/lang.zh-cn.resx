@@ -117,30 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Announcements_readMore" xml:space="preserve">
-    <value>更多...</value>
-  </data>
-  <data name="Signin_accountLogin" xml:space="preserve">
-    <value>账户登录</value>
-  </data>
-  <data name="Signin_email" xml:space="preserve">
-    <value>邮箱：</value>
-  </data>
-  <data name="Signin_LoginFaild" xml:space="preserve">
-    <value>登录失败！</value>
-  </data>
-  <data name="Signin_LoginImg" xml:space="preserve">
-    <value>/images/signin.gif</value>
-  </data>
-  <data name="Signin_password" xml:space="preserve">
-    <value>密码：</value>
-  </data>
-  <data name="Signin_RegImg" xml:space="preserve">
-    <value>/images/register.gif</value>
-  </data>
-  <data name="Signin_rememberLogin" xml:space="preserve">
-    <value>记住登录状态</value>
-  </data>
   <data name="Admin_AccessDenied_AccessDenied" xml:space="preserve">
     <value>拒绝访问</value>
   </data>
@@ -195,7 +171,34 @@
   <data name="Admin_User_EditUser" xml:space="preserve">
     <value>编辑用户</value>
   </data>
+  <data name="Announcements_readMore" xml:space="preserve">
+    <value>更多...</value>
+  </data>
   <data name="Module_Name_ID_32" xml:space="preserve">
     <value>用户管理</value>
+  </data>
+  <data name="Signin_accountLogin" xml:space="preserve">
+    <value>账户登录</value>
+  </data>
+  <data name="Signin_email" xml:space="preserve">
+    <value>邮箱：</value>
+  </data>
+  <data name="Signin_LoginFaild" xml:space="preserve">
+    <value>登录失败！</value>
+  </data>
+  <data name="Signin_LoginImg" xml:space="preserve">
+    <value>/images/signin.gif</value>
+  </data>
+  <data name="Signin_password" xml:space="preserve">
+    <value>密码：</value>
+  </data>
+  <data name="Signin_RegImg" xml:space="preserve">
+    <value>/images/register.gif</value>
+  </data>
+  <data name="Signin_rememberLogin" xml:space="preserve">
+    <value>记住登录状态</value>
+  </data>
+  <data name="Signin_EmailOrName" xml:space="preserve">
+      <value>邮箱或用户名</value>
   </data>
 </root>

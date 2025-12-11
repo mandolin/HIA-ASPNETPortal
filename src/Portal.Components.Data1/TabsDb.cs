@@ -10,91 +10,156 @@ namespace ASPNET.StarterKit.Portal
         private readonly IPortalDb _portalDb;
         private List<TabItem> _tabs;
 
+        /// <summary>
+        /// 初始化页数据库操作类。
+        /// </summary>
+        /// <param name="context">配置数据库上下文。</param>
+        /// <param name="portalDb">门户数据库接口。</param>
         public TabsDb(PortalCfgDbContext context, IPortalDb portalDb)
         {
             _portalDb = portalDb;
             _context = context;
+            // 加载所有页项到内存列表中。
             _tabs = _context.Tabs.ToList();
         }
 
         #region ITabsDb Members
 
+        /// <summary>
+        /// 获取所有页项。
+        /// </summary>
+        /// <returns>页项的可枚举集合。</returns>
         public IEnumerable<ITabItem> GetTabs()
         {
-            return _tabs.
-                OrderBy(i => i.TabId);
+            // 按照页ID升序排序页项。
+            return _tabs.OrderBy(i => i.TabId);
         }
 
+        /// <summary>
+        /// 获取所有移动设备上显示的页项。
+        /// </summary>
+        /// <returns>页项的可枚举集合。</returns>
         public IEnumerable<ITabItem> GetMobileTabs()
         {
-            return _tabs.
-                Where(i => i.ShowMobile == true).
-                OrderBy(i => i.TabId);
+            // 筛选出需要在移动设备上显示的页项，并按照页ID升序排序。
+            return _tabs.Where(i => i.ShowMobile==true).OrderBy(i => i.TabId);
         }
 
+        /// <summary>
+        /// 获取单个页项。
+        /// </summary>
+        /// <param name="tabId">页ID。</param>
+        /// <returns>页项。</returns>
         public ITabItem GetSingleTab(int tabId)
         {
+            // 通过页ID获取单个页项。
             return _tabs.Single(i => i.TabId == tabId);
         }
 
-
+        /// <summary>
+        /// 添加新的页项。
+        /// </summary>
+        /// <param name="portalId">门户ID。</param>
+        /// <param name="tabName">页名称。</param>
+        /// <param name="tabOrder">页顺序。</param>
+        /// <returns>新添加的页的ID。</returns>
         public int AddTab(int portalId, string tabName, int tabOrder)
         {
-            var newRow = new TabItem();
+            // 创建一个新的页项。
+            var newRow = new TabItem
+            {
+                TabName = tabName,
+                TabOrder = tabOrder,
+                MobileTabName = String.Empty,
+                ShowMobile = true,
+                AccessRoles = "All Users;"
+            };
 
-            newRow.TabName = tabName;
-            newRow.TabOrder = tabOrder;
-            newRow.MobileTabName = String.Empty;
-            newRow.ShowMobile = true;
-            newRow.AccessRoles = "All Users;";
-
+            // 将新的页项添加到数据库上下文中。
             _context.Tabs.Add(newRow);
 
+            // 保存更改到数据库。
             _context.SaveChanges();
+
+            // 刷新内存中的页列表。
             _tabs = _context.Tabs.ToList();
 
+            // 返回新添加的页的ID。
             return newRow.TabId;
         }
 
+        /// <summary>
+        /// 更新现有的页项。
+        /// </summary>
+        /// <param name="portalId">门户ID。</param>
+        /// <param name="tabId">页ID。</param>
+        /// <param name="tabName">页名称。</param>
+        /// <param name="tabOrder">页顺序。</param>
+        /// <param name="authorizedRoles">授权角色。</param>
+        /// <param name="mobileTabName">移动设备上的页名称。</param>
+        /// <param name="showMobile">是否在移动设备上显示。</param>
         public void UpdateTab(int portalId, int tabId, string tabName, int tabOrder, string authorizedRoles,
                               string mobileTabName, bool showMobile)
         {
+            // 通过页ID获取页项。
             TabItem tabRow = _tabs.Single(i => i.TabId == tabId);
 
+            // 更新页项的信息。
             tabRow.TabName = tabName;
             tabRow.TabOrder = tabOrder;
             tabRow.AccessRoles = authorizedRoles;
             tabRow.MobileTabName = mobileTabName;
             tabRow.ShowMobile = showMobile;
 
+            // 保存更改到数据库。
             _context.SaveChanges();
+
+            // 刷新内存中的页列表。
             _tabs = _context.Tabs.ToList();
         }
 
+        /// <summary>
+        /// 更新页项的顺序。
+        /// </summary>
+        /// <param name="tabId">页ID。</param>
+        /// <param name="tabOrder">新的页顺序。</param>
         public void UpdateTabOrder(int tabId, int tabOrder)
         {
+            // 通过页ID获取页项。
             TabItem tabRow = _tabs.Single(i => i.TabId == tabId);
 
+            // 更新页项的顺序。
             tabRow.TabOrder = tabOrder;
 
+            // 保存更改到数据库。
             _context.SaveChanges();
+
+            // 刷新内存中的页列表。
             _tabs = _context.Tabs.ToList();
         }
 
+        /// <summary>
+        /// 删除指定ID的页项。
+        /// </summary>
+        /// <param name="tabId">页ID。</param>
         public void DeleteTab(int tabId)
         {
+            // 通过页ID获取页项。
             TabItem tabRow = _tabs.Single(i => i.TabId == tabId);
 
-            // Delete information in the Database relating to each Module being deleted            
+            // 删除页项中关联的模块信息。
             foreach (int moduleId in tabRow.Modules.Select(i => i.ModuleId))
             {
                 _portalDb.DeleteModule(moduleId);
             }
 
-            // Finish removing the Tab row from the Xml file
+            // 从数据库上下文中移除页项。
             _context.Tabs.Remove(tabRow);
 
+            // 保存更改到数据库。
             _context.SaveChanges();
+
+            // 刷新内存中的页列表。
             _tabs = _context.Tabs.ToList();
         }
 

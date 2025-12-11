@@ -1,82 +1,82 @@
 using System;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
     public partial class EditLinks : PortalPage<EditLinks>
     {
+        // 存储链接项ID的私有字段
         private int itemId;
+        // 存储模块ID的私有字段
         private int moduleId;
 
+        // 依赖注入链接数据库接口
         [Dependency]
         public ILinksDb LinkDB { private get; set; }
 
+        // 依赖注入门户安全接口
         [Dependency]
         public IPortalSecurity PortalSecurity { private get; set; }
 
         //****************************************************************
         //
-        // The Page_Load event on this Page is used to obtain the 
-        // ItemId of the link to edit.
-        //
-        // It then uses the ASPNET.StarterKit.Portal.LinkDB() data component
-        // to populate the page's edit controls with the links details.
+        // 页面加载事件：用于获取要编辑的链接项ID。
+        // 使用LinkDB组件填充页面上的编辑控件。
         //
         //****************************************************************
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Determine ModuleId of Links Portal Module
-            moduleId = Int32.Parse(Request.Params["Mid"]);
+            // 获取模块ID
+            moduleId = int.Parse(Request.Params["Mid"]);
 
-            // Verify that the current user has access to edit this module
-            if (PortalSecurity.HasEditPermissions(moduleId) == false)
+            // 验证当前用户是否有编辑此模块的权限
+            if (!PortalSecurity.HasEditPermissions(moduleId))
             {
+                // 如果没有权限，则重定向到无权访问页面
                 Response.Redirect("~/Admin/EditAccessDenied.aspx");
             }
 
-            // Determine ItemId of Link to Update
+            // 获取链接项ID
             if (Request.Params["ItemId"] != null)
             {
-                itemId = Int32.Parse(Request.Params["ItemId"]);
+                itemId = int.Parse(Request.Params["ItemId"]);
             }
 
-            // If the page is being requested the first time, determine if an
-            // link itemId value is specified, and if so populate page
-            // contents with the link details
-
-            if (Page.IsPostBack == false)
+            // 如果页面首次请求，并且指定了链接项ID，则填充页面内容
+            if (!Page.IsPostBack)
             {
                 if (itemId != 0)
                 {
-                    // Obtain a single row of link information
+                    // 获取单个链接项的信息
                     ILinkItem item = LinkDB.GetSingleLink(itemId);
 
-                    // Security check.  verify that itemid is within the module.
+                    // 安全检查：验证itemid是否属于该模块
                     if (item.ModuleId != moduleId)
                     {
                         Response.Redirect("~/Admin/EditAccessDenied.aspx");
                     }
 
+                    // 设置控件的值
                     TitleField.Text = item.Title;
                     DescriptionField.Text = item.Description;
                     UrlField.Text = item.Url;
                     MobileUrlField.Text = item.MobileUrl;
-                    ViewOrderField.Text = item.ViewOrder.Value.ToString();
+                    ViewOrderField.Text = item.ViewOrder.HasValue ? item.ViewOrder.Value.ToString() : string.Empty;
                     CreatedBy.Text = item.CreatedByUser;
-                    CreatedDate.Text = item.CreatedDate.Value.ToShortDateString();
+                    CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
                 }
 
-                // Store URL Referrer to return to portal
-                ViewState["UrlReferrer"] = Request.UrlReferrer.ToString();
+                // 存储URL引用，以便返回到门户首页
+                ViewState["UrlReferrer"] = Request.UrlReferrer?.ToString();
             }
         }
 
         //****************************************************************
         //
-        // The UpdateBtn_Click event handler on this Page is used to either
-        // create or update a link.  It  uses the ASPNET.StarterKit.Portal.LinkDB()
-        // data component to encapsulate all data functionality.
+        // 更新按钮点击事件处理程序：用于创建或更新链接。
+        // 使用LinkDB组件封装所有数据功能。
         //
         //****************************************************************
 
@@ -84,59 +84,54 @@ namespace ASPNET.StarterKit.Portal
         {
             if (Page.IsValid)
             {
-                // Create an instance of the Link DB component
+                // 根据itemId判断是添加还是更新链接
                 if (itemId == 0)
                 {
-                    // Add the link within the Links table
+                    // 添加新的链接到Links表
                     LinkDB.AddLink(moduleId, Context.User.Identity.Name, TitleField.Text, UrlField.Text,
-                                   MobileUrlField.Text, Int32.Parse(ViewOrderField.Text), DescriptionField.Text);
+                                   MobileUrlField.Text, int.Parse(ViewOrderField.Text), DescriptionField.Text);
                 }
                 else
                 {
-                    // Update the link within the Links table
+                    // 更新现有的链接
                     LinkDB.UpdateLink(itemId, Context.User.Identity.Name, TitleField.Text, UrlField.Text,
-                                      MobileUrlField.Text, Int32.Parse(ViewOrderField.Text), DescriptionField.Text);
+                                      MobileUrlField.Text, int.Parse(ViewOrderField.Text), DescriptionField.Text);
                 }
 
-                // Redirect back to the portal home page
-                Response.Redirect((String) ViewState["UrlReferrer"]);
+                // 重定向回门户首页
+                Response.Redirect((string)ViewState["UrlReferrer"]);
             }
         }
 
         //****************************************************************
         //
-        // The DeleteBtn_Click event handler on this Page is used to delete 
-        // a link.  It  uses the ASPNET.StarterKit.Portal.LinksDB()
-        // data component to encapsulate all data functionality.
+        // 删除按钮点击事件处理程序：用于删除链接。
+        // 使用LinkDB组件封装所有数据功能。
         //
         //****************************************************************
 
         protected void DeleteBtn_Click(Object sender, EventArgs e)
         {
-            // Only attempt to delete the item if it is an existing item
-            // (new items will have "ItemId" of 0)
-
+            // 只有在是现有项时才尝试删除（新项的“ItemId”为0）
             if (itemId != 0)
             {
                 LinkDB.DeleteLink(itemId);
             }
 
-            // Redirect back to the portal home page
-            Response.Redirect((String) ViewState["UrlReferrer"]);
+            // 重定向回门户首页
+            Response.Redirect((string)ViewState["UrlReferrer"]);
         }
 
         //****************************************************************
         //
-        // The CancelBtn_Click event handler on this Page is used to cancel
-        // out of the page, and return the user back to the portal home
-        // page.
+        // 取消按钮点击事件处理程序：用于取消编辑并返回到门户首页。
         //
         //****************************************************************
 
         protected void CancelBtn_Click(Object sender, EventArgs e)
         {
-            // Redirect back to the portal home page
-            Response.Redirect((String) ViewState["UrlReferrer"]);
+            // 重定向回门户首页
+            Response.Redirect((string)ViewState["UrlReferrer"]);
         }
     }
 }
