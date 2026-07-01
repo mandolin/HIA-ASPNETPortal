@@ -1,0 +1,114 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "nuget: restore packages",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Restore-NuGetPackages.ps1"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "build: solution Debug",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Build-Solution.ps1",
+                "-Configuration",
+                "Debug",
+                "-Platform",
+                "Any CPU"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile",
+            "dependsOn": [
+                "nuget: restore packages"
+            ]
+        },
+        {
+            "label": "iisexpress: start Portal (40001)",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Start-IISExpress.ps1",
+                "-Port",
+                "40001"
+            ],
+            "isBackground": false,
+            "problemMatcher": []
+        },
+        {
+            "label": "iisexpress: stop Portal (40001)",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Stop-IISExpress.ps1",
+                "-Port",
+                "40001"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "iisexpress: restart Portal (40001)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "iisexpress: stop Portal (40001)",
+                "iisexpress: start Portal (40001)"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "gulp: assets:build",
+            "type": "npm",
+            "script": "assets:build",
+            "path": "src/Portal",
+            "problemMatcher": []
+        },
+        {
+            "label": "gulp: startWatch",
+            "type": "npm",
+            "script": "assets:watch",
+            "path": "src/Portal",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "gulp: stopWatch",
+            "type": "npm",
+            "script": "assets:stop-watch",
+            "path": "src/Portal",
+            "problemMatcher": []
+        },
+        {
+            "label": "portal: build assets and start",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build: solution Debug",
+                "gulp: assets:build",
+                "iisexpress: start Portal (40001)"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

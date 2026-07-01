@@ -11,14 +11,14 @@
 --%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- Ö÷Òª±í¸ñ²¼¾Ö --%>
+    <%-- ä¸»è¦è¡¨æ ¼å¸ƒå±€ --%>
     <table width="98%" cellspacing="0" cellpadding="4" border="0">
         <tr valign="top">
             <td width="150">
                 &nbsp;
             </td>
             <td width="*">
-                <%-- ±êÌâ±í¸ñ --%>
+                <%-- æ ‡é¢˜è¡¨æ ¼ --%>
                 <table width="500" cellspacing="0" cellpadding="0">
                     <tr>
                         <td align="left" class="Head">
@@ -32,17 +32,17 @@
                     </tr>
                 </table>
 
-                <%-- ÊäÈë±íµ¥ --%>
+                <%-- è¾“å…¥è¡¨å• --%>
                 <table width="750" cellspacing="0" cellpadding="0" border="0">
                     <tr>
                         <td width="100" class="SubHead">
-                            Friendly Name:  <%-- ÓÑºÃÃû³Æ --%>
+                            Friendly Name:  <%-- å‹å¥½åç§° --%>
                         </td>
                         <td rowspan="5">
                             &nbsp;
                         </td>
                         <td>
-                            <%-- ÓÑºÃÃû³ÆÊäÈë¿ò --%>
+                            <%-- å‹å¥½åç§°è¾“å…¥æ¡† --%>
                             <asp:TextBox 
                                 ID="FriendlyName" 
                                 CssClass="NormalTextBox" 
@@ -55,7 +55,7 @@
                             &nbsp;
                         </td>
                         <td class="Normal" width="250">
-                            <%-- ±ØÌî×Ö¶ÎÑéÖ¤Æ÷ --%>
+                            <%-- å¿…å¡«å­—æ®µéªŒè¯å™¨ --%>
                             <asp:RequiredFieldValidator 
                                 ID="Req1" 
                                 Display="Static" 
@@ -66,10 +66,10 @@
                     </tr>
                     <tr>
                         <td class="SubHead" nowrap>
-                            Desktop Source:  <%-- ×ÀÃæÔ´Â·¾¶ --%>
+                            Desktop Source:  <%-- æ¡Œé¢æºè·¯å¾„ --%>
                         </td>
                         <td>
-                            <%-- ×ÀÃæÔ´Â·¾¶ÊäÈë¿ò --%>
+                            <%-- æ¡Œé¢æºè·¯å¾„è¾“å…¥æ¡† --%>
                             <asp:TextBox 
                                 ID="DesktopSrc" 
                                 CssClass="NormalTextBox" 
@@ -79,7 +79,7 @@
                                 runat="server" />
                         </td>
                         <td class="Normal">
-                            <%-- ±ØÌî×Ö¶ÎÑéÖ¤Æ÷ --%>
+                            <%-- å¿…å¡«å­—æ®µéªŒè¯å™¨ --%>
                             <asp:RequiredFieldValidator 
                                 ID="Req2" 
                                 Display="Static" 
@@ -90,10 +90,10 @@
                     </tr>
                     <tr>
                         <td class="SubHead">
-                            Mobile Source:  <%-- ÒÆ¶¯¶ËÔ´Â·¾¶ --%>
+                            Mobile Source:  <%-- ç§»åŠ¨ç«¯æºè·¯å¾„ --%>
                         </td>
                         <td>
-                            <%-- ÒÆ¶¯¶ËÔ´Â·¾¶ÊäÈë¿ò --%>
+                            <%-- ç§»åŠ¨ç«¯æºè·¯å¾„è¾“å…¥æ¡† --%>
                             <asp:TextBox 
                                 ID="MobileSrc" 
                                 CssClass="NormalTextBox" 
@@ -108,9 +108,9 @@
                     </tr>
                 </table>
 
-                <%-- °´Å¥ÇøÓò --%>
+                <%-- æŒ‰é’®åŒºåŸŸ --%>
                 <p>
-                    <%-- ¸üÐÂ°´Å¥ --%>
+                    <%-- æ›´æ–°æŒ‰é’® --%>
                     <asp:LinkButton 
                         ID="updateButton" 
                         Text="Update" 
@@ -119,7 +119,7 @@
                         BorderStyle="none" 
                         OnClick="UpdateBtn_Click" />
                     &nbsp;
-                    <%-- È¡Ïû°´Å¥ --%>
+                    <%-- å–æ¶ˆæŒ‰é’® --%>
                     <asp:LinkButton 
                         ID="cancelButton" 
                         Text="Cancel" 
@@ -129,7 +129,7 @@
                         BorderStyle="none" 
                         OnClick="CancelBtn_Click" />
                     &nbsp;
-                    <%-- É¾³ý°´Å¥ --%>
+                    <%-- åˆ é™¤æŒ‰é’® --%>
                     <asp:LinkButton 
                         ID="deleteButton" 
                         Text="Delete this module type" 

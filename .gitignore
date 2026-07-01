@@ -359,3 +359,5 @@ MigrationBackup/
 **/appSettings.dev.json
 **/appSettings.prod.json
 **/appSettings.test.json
+**/connectionStrings.config
+!**/Config/Templates/connectionStrings.config

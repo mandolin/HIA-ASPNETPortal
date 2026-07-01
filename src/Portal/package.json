@@ -1,0 +1,43 @@
+{
+    "version": "1.0.0",
+    "name": "asp.net",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "assets:build": "gulp assets:build",
+        "assets:watch": "gulp startWatch",
+        "assets:stop-watch": "gulp stopWatch"
+    },
+    "devDependencies": {
+        "eslint": "*",
+        "grunt": "*",
+        "grunt-contrib-clean": "*",
+        "grunt-contrib-coffee": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-stylus": "*",
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-gulp": "*",
+        "sass": "*",
+        "gulp": "^4.0.2",
+        "gulp-coffee": "*",
+        "gulp-data": "*",
+        "gulp-uglify-es": "*",
+        "gulp-changed": "*",
+        "gulp-postcss": "*",
+        "gulp-sass": "*",
+        "gulp-concat": "*",
+        "gulp-rename": "*",
+        "gulp-sourcemaps": "*",
+        "gulp-clean-css": "*",
+        "poststylus": "*",
+        "autoprefixer": "*",
+        "cssnano": "*",
+        "gulp-stylus": "*",
+        "gulp-uglify": "*",
+        "uglify-js": "*",
+        "@babel/core": "*",
+        "@babel/preset-env": "*",
+        "gulp-babel": "*"
+    }
+}

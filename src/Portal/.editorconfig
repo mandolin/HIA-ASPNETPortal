@@ -1,0 +1,17 @@
+# .editorconfig
+
+# 通用设置
+root = true
+
+# 代码样式
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+# 为通用性考虑，使用空格作为缩进，长度为4
+indent_style = space
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false

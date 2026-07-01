@@ -1,4 +1,4 @@
-﻿using Linq.Extras;
+using Linq.Extras;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using System;

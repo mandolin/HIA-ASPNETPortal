@@ -36,7 +36,7 @@
                         </td>
                         <td>
                             <table width="100%" cellspacing="0" cellpadding="0">
-                                <%-- note 暂不考虑支持windowsUser机制
+                                <%-- note 鏆備笉鑰冭檻鏀寔windowsUser鏈哄埗
                                     <tr>
                                     <td>
                                         <asp:TextBox ID="windowsUserName" Text="DOMAIN\username" Visible="False" runat="server" />

@@ -1,4 +1,4 @@
-﻿<unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
+<unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
     <!--定义Unity配置的命名空间和需要扫描的程序集，指示Unity将会在指定的程序集中查找类型进行注册和依赖注入。-->
     <namespace name="ASPNET.StarterKit.Portal" />
     <assembly name="Portal" />
@@ -7,10 +7,11 @@
     <assembly name="Portal.Components.Data1" />
 
     <container>
-        <!--连接串，生产环境中需要改为实际的数据源。MultipleActiveResultSets=True 表示可并行处理请求-->
-        <!--<instance> 并不仅限于数据库连接字符串的配置，它也可以用于配置任何需要预先定义并注入到容器中以便后续使用的值。例如，可以配置一个配置对象实例、常量、甚至是工厂委托等。在Unity容器中，<instance> 元素主要用于创建那些非接口类型的单例实例，或者在构造其他类型时需要的依赖对象。-->
-        <instance name="connectionString" type="string"
-                  value="Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;Initial Catalog=Portal; MultipleActiveResultSets=True" />
+        <!--
+        连接串不再放在 Unity 配置中。
+        Application_Start 会从外置 connectionStrings.config 读取名为 Portal 的连接串，
+        再注册为 Unity 使用的 connectionString 命名实例。
+        -->
 
         <instance name="testStr" type="string"
                   value="default UnityCfg" />
@@ -28,9 +29,9 @@
 
         <constructor>: 表明要注入依赖项到类的构造函数中。
 
-        <param name="connectionString" dependencyName="connectionString" dependencyType="string" />: 在这个标签内，name="connectionString" 指定了注入到构造函数中的参数名称。dependencyName="connectionString" 表示这个参数值来自之前定义的名为 "connectionString" 的实例，其类型为 string。这就意味着在创建 PortalSecurityDbContext 实例时，Unity将把之前定义的数据库连接字符串注入到它的构造函数中。
+        <param name="connectionString" dependencyName="connectionString" dependencyType="string" />: 在这个标签内，name="connectionString" 指定了注入到构造函数中的参数名称。dependencyName="connectionString" 表示这个参数值来自 Application_Start 从外置配置注册的命名实例，其类型为 string。这就意味着在创建 PortalSecurityDbContext 实例时，Unity将把外置数据库连接字符串注入到它的构造函数中。
 
-        总结来说，这段配置告诉Unity容器，每当应用程序请求 PortalSecurityDbContext 类型的实例时，应当创建一个单例的 PortalSecurityDbContext 实例，并在创建实例时，将其构造函数参数 connectionString 设置为先前定义好的数据库连接字符串实例的值。这样，每次使用 PortalSecurityDbContext 的时候，都能使用同一份数据库连接，同时也避免了硬编码数据库连接字符串。
+        总结来说，这段配置告诉Unity容器，每当应用程序请求 PortalSecurityDbContext 类型的实例时，应当创建一个单例的 PortalSecurityDbContext 实例，并在创建实例时，将其构造函数参数 connectionString 设置为启动时注册好的外置数据库连接字符串实例的值。这样，每次使用 PortalSecurityDbContext 的时候，都能使用同一份数据库连接，同时也避免了硬编码数据库连接字符串。
         -->
         <register type="PortalSecurityDbContext" mapTo="PortalSecurityDbContext">
             <lifetime type="singleton" />
@@ -40,7 +41,7 @@
         </register>
 
         <!--
-        
+
         再以以下这段Unity配置为例，作用为：
 
         type="IUsersDb": 指定要注册的接口类型。IUsersDb 是一个接口，表示一种特定的服务契约或职责，例如可能包含了对用户数据进行CRUD操作的相关方法。

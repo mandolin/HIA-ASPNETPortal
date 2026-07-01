@@ -1,51 +1,51 @@
 <%@ Control Inherits="ASPNET.StarterKit.Portal.Roles" CodeBehind="Roles.ascx.cs" Language="c#" AutoEventWireup="True" %>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Title" Src="~/DesktopModuleTitle.ascx"%>
 
-<%-- ×¢²á±êÌâÄ£¿é --%>
+<%-- æ³¨å†Œæ ‡é¢˜æ¨¡å— --%>
 <ASPNETPortal:title runat="server" id="Title1" />
 
-<%-- ±í¸ñ¿ªÊ¼ --%>
+<%-- è¡¨æ ¼å¼€å§‹ --%>
 <table cellpadding="2" cellspacing="0" border="0">
-    <%-- Êý¾ÝÁÐ±íÐÐ --%>
+    <%-- æ•°æ®åˆ—è¡¨è¡Œ --%>
     <tr valign="top">
         <td class="Normal" width="100">
             &nbsp;
         </td>
         <td>
-            <%-- ½ÇÉ«ÁÐ±í --%>
-            <asp:DataList id="rolesList" DataKeyField="RoleID" runat="server">
+            <%-- è§’è‰²åˆ—è¡¨ --%>
+            <asp:DataList id="rolesList" DataKeyField="RoleID" OnItemCommand="RolesList_ItemCommand" runat="server">
                 <ItemTemplate>
-                    <%-- ±à¼­°´Å¥ --%>
+                    <%-- ç¼–è¾‘æŒ‰é’® --%>
                     <asp:ImageButton ImageUrl="~/images/edit.gif" CommandName="edit" AlternateText="Edit this item" runat="server" />
-                    <%-- É¾³ý°´Å¥ --%>
+                    <%-- åˆ é™¤æŒ‰é’® --%>
                     <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="Delete this item" runat="server" />
                     &nbsp;&nbsp;
-                    <%-- ½ÇÉ«Ãû±êÇ© --%>
+                    <%-- è§’è‰²åæ ‡ç­¾ --%>
                     <asp:Label Text='<%# DataBinder.Eval(Container.DataItem, "RoleName") %>' cssclass="Normal" runat="server" />
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <%-- ¿É±à¼­µÄ½ÇÉ«ÃûÊäÈë¿ò --%>
+                    <%-- å¯ç¼–è¾‘çš„è§’è‰²åè¾“å…¥æ¡† --%>
                     <asp:TextBox id="roleName" width="200" cssclass="NormalTextBox" Text='<%# DataBinder.Eval(Container.DataItem, "RoleName") %>' runat="server" />
                     &nbsp;
-                    <%-- Ó¦ÓÃ¸ü¸Ä°´Å¥ --%>
+                    <%-- åº”ç”¨æ›´æ”¹æŒ‰é’® --%>
                     <asp:LinkButton Text="Apply" CommandName="apply" cssclass="CommandButton" runat="server" />
                     &nbsp;
-                    <%-- ¸ü¸Ä½ÇÉ«³ÉÔ±°´Å¥ --%>
+                    <%-- æ›´æ”¹è§’è‰²æˆå‘˜æŒ‰é’® --%>
                     <asp:LinkButton Text="Change Role Members" CommandName="members" cssclass="CommandButton" runat="server" />
                 </EditItemTemplate>
             </asp:DataList>
         </td>
     </tr>
-    <%-- Ìí¼ÓÐÂ½ÇÉ«ÐÐ --%>
+    <%-- æ·»åŠ æ–°è§’è‰²è¡Œ --%>
     <tr>
         <td>
             &nbsp;
         </td>
         <td>
-            <%-- Ìí¼ÓÐÂ½ÇÉ«°´Å¥ --%>
+            <%-- æ·»åŠ æ–°è§’è‰²æŒ‰é’® --%>
             <asp:LinkButton cssclass="CommandButton" Text="Add New Role" runat="server" id="AddRoleBtn" onclick="AddRole_Click">
                 Add New Role</asp:LinkButton>
         </td>
     </tr>
 </table>
-<%-- ±í¸ñ½áÊø --%>
+<%-- è¡¨æ ¼ç»“æŸ --%>

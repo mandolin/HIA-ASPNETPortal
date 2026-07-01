@@ -6,31 +6,31 @@ namespace ASPNET.StarterKit.Portal
     public interface IPortalModuleControl
     {
         /// <summary>
-        /// Ä£¿éId
+        /// æ¨¡å—Id
         /// </summary>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]// ÉèÖÃÊôĞÔ²»¿Éä¯ÀÀÇÒ²»ÔÚÉè¼ÆÆ÷ĞòÁĞ»¯ÖĞ¿É¼û
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]// è®¾ç½®å±æ€§ä¸å¯æµè§ˆä¸”ä¸åœ¨è®¾è®¡å™¨åºåˆ—åŒ–ä¸­å¯è§
         int ModuleId { get; }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÃÅ»§ID
+        /// è·å–æˆ–è®¾ç½®é—¨æˆ·ID
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         int PortalId { get; set; }
 
         /// <summary>
-        /// ÊÇ·ñ¿É±à¼­µÄ×´Ì¬
+        /// æ˜¯å¦å¯ç¼–è¾‘çš„çŠ¶æ€
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         bool IsEditable { get; }
 
         /// <summary>
-        /// Ä£¿éÅäÖÃ
+        /// æ¨¡å—é…ç½®
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         ModuleSettings ModuleConfiguration { get; set; }
 
         /// <summary>
-        /// Ä£¿éÉèÖÃ
+        /// æ¨¡å—è®¾ç½®
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         Hashtable Settings { get; }

@@ -4,11 +4,11 @@
         "titleBar.activeBackground": "#072400",
         "titleBar.inactiveForeground": "#84FF66",
         "titleBar.inactiveBackground": "#010600",
-        "activityBar.foreground": "#FFFFFF",
-        "activityBar.background": "#D8002B",
-        "activityBar.inactiveForeground": "#FF3EA8",
-        "activityBarBadge.foreground": "#532E00",
-        "activityBarBadge.background": "#FFC986",
+        "activityBar.foreground": "#FFF291",
+        "activityBar.background": "#2D2800",
+        "activityBar.inactiveForeground": "#C96A00",
+        "activityBarBadge.foreground": "#081600",
+        "activityBarBadge.background": "#96FF57",
         "statusBar.foreground": "#B6FFA4",
         "statusBar.background": "#072400",
         "statusBarItem.hoverBackground": "#29B347",
@@ -20,5 +20,9 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "aiXcoder.showTrayIcon": true,
     "docwriter.language": "Chinese",
-    "docwriter.style": "JSDoc"
+    "docwriter.style": "JSDoc",
+    "files.encoding": "utf8",
+    "dotnet.preferCSharpExtension": true,
+    "dotnet.server.useOmnisharp": true,
+    "omnisharp.useModernNet": false
 }

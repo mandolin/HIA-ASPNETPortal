@@ -3,9 +3,9 @@ using System;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    ///   ¸ÃÀà·â×°ÁËÃÅ»§ÖĞÌØ¶¨±êÇ©Ò³µÄÏêÏ¸ÉèÖÃ¡£ModuleSettings ÊµÏÖÁË
-    ///   IComparable ½Ó¿Ú£¬ÒÔ±ã¿ÉÒÔÍ¨¹ı ModuleOrder ¶Ô ModuleSettings ÁĞ±í½øĞĞÅÅĞò£¬
-    ///   Ê¹ÓÃ List µÄ Sort() ·½·¨¡£
+    ///   è¯¥ç±»å°è£…äº†é—¨æˆ·ä¸­ç‰¹å®šæ ‡ç­¾é¡µçš„è¯¦ç»†è®¾ç½®ã€‚ModuleSettings å®ç°äº†
+    ///   IComparable æ¥å£ï¼Œä»¥ä¾¿å¯ä»¥é€šè¿‡ ModuleOrder å¯¹ ModuleSettings åˆ—è¡¨è¿›è¡Œæ’åºï¼Œ
+    ///   ä½¿ç”¨ List çš„ Sort() æ–¹æ³•ã€‚
     /// 
     ///   Class that encapsulates the detailed settings for a specific Tab 
     ///   in the Portal. ModuleSettings implements 
@@ -15,10 +15,10 @@ namespace ASPNET.StarterKit.Portal
     public class ModuleSettings : IComparable<ModuleSettings>
     {
         /// <summary>
-        /// ³õÊ¼»¯ <see cref="ModuleSettings"/> ÊµÀı.
+        /// åˆå§‹åŒ– <see cref="ModuleSettings"/> å®ä¾‹.
         /// </summary>
-        /// <param name="module">Ä£¿éÏî</param>
-        /// <param name="moduleDefConfig">Ä£¿é¶¨ÒåµÄÅäÖÃ</param>
+        /// <param name="module">æ¨¡å—é¡¹</param>
+        /// <param name="moduleDefConfig">æ¨¡å—å®šä¹‰çš„é…ç½®</param>
         public ModuleSettings(IModuleItem module, IModuleDefsDb moduleDefConfig)
         {
             ModuleTitle         = module.ModuleTitle;
@@ -29,7 +29,7 @@ namespace ASPNET.StarterKit.Portal
             CacheTime           = module.CacheTimeout.Value;
             ShowMobile          = module.ShowMobile.Value;
 
-            // »ñÈ¡Ä£¿é¶¨ÒåÊı¾İ
+            // è·å–æ¨¡å—å®šä¹‰æ•°æ®
             IModuleDefinitionItem moduleDefinitionItem = moduleDefConfig.GetSingleModuleDefinition(module.ModuleDefId.Value);
 
             DesktopSrc = moduleDefinitionItem.DesktopSourceFile;            
@@ -64,42 +64,42 @@ namespace ASPNET.StarterKit.Portal
         #endregion
 
         /// <summary>
-        /// Ä£¿éÏÔÊ¾Ë³Ğò
+        /// æ¨¡å—æ˜¾ç¤ºé¡ºåº
         /// </summary>
         public int ModuleOrder { get; set; }
 
         /// <summary>
-        /// Ä£¿é±êÌâ
+        /// æ¨¡å—æ ‡é¢˜
         /// </summary>
         public string ModuleTitle { get; private set; }
 
         /// <summary>
-        /// ´°¸ñÃû³Æ
+        /// çª—æ ¼åç§°
         /// </summary>
         public string PaneName { get; private set; }
 
         /// <summary>
-        /// Ä£¿éID
+        /// æ¨¡å—ID
         /// </summary>
         public int ModuleId { get; private set; }
 
         /// <summary>
-        /// ÊÚÈ¨±à¼­½ÇÉ«
+        /// æˆæƒç¼–è¾‘è§’è‰²
         /// </summary>
         public string AuthorizedEditRoles { get; private set; }
 
         /// <summary>
-        /// »º´æÊ±¼ä
+        /// ç¼“å­˜æ—¶é—´
         /// </summary>
         public int CacheTime { get; private set; }
 
         /// <summary>
-        /// ÊÇ·ñÔÚÒÆ¶¯Éè±¸ÉÏÏÔÊ¾
+        /// æ˜¯å¦åœ¨ç§»åŠ¨è®¾å¤‡ä¸Šæ˜¾ç¤º
         /// </summary>
         public bool ShowMobile { get; private set; }
 
         /// <summary>
-        /// ×ÀÃæ°æÔ´ÎÄ¼şÂ·¾¶
+        /// æ¡Œé¢ç‰ˆæºæ–‡ä»¶è·¯å¾„
         /// </summary>
         public string DesktopSrc { get; private set; }
     }

@@ -1,9 +1,9 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <configuration>
     <configSections>
         <section name='unity' type='Microsoft.Practices.Unity.Configuration.UnityConfigurationSection, Unity.Configuration' />
     </configSections>
-    
+
     <unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
         <!--定义Unity配置的命名空间和需要扫描的程序集，指示Unity将会在指定的程序集中查找类型进行注册和依赖注入。-->
         <namespace name="ASPNET.StarterKit.Portal" />
@@ -14,9 +14,8 @@
 
         <container>
 
-            <instance name="connectionString" type="string"
-                      value="Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;Initial Catalog=Portal; MultipleActiveResultSets=True" />
-            
+            <!-- connectionString 由启动代码从外置 connectionStrings.config 加载，本文件不保存真实连接串。 -->
+
             <instance name="testStr" type="string"
                       value="test UnityCfg" />
 

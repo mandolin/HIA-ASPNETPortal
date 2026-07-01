@@ -1,4 +1,4 @@
-﻿namespace ASPNET.StarterKit.Portal
+namespace ASPNET.StarterKit.Portal
 {
     public interface IModuleDefinitionItem
     {

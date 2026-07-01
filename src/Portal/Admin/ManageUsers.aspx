@@ -3,25 +3,25 @@
 <%@ Import Namespace="Resources" %>
 
 <%-- 
-    ManageUsers.aspx Ò³ÃæÓÃÓÚ´´½¨ºÍ±à¼­ÃÅ»§Ó¦ÓÃÖÐµÄÓÃ»§¡£
+    ManageUsers.aspx é¡µé¢ç”¨äºŽåˆ›å»ºå’Œç¼–è¾‘é—¨æˆ·åº”ç”¨ä¸­çš„ç”¨æˆ·ã€‚
 --%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <table width="450" cellspacing="0" cellpadding="4" border="0">
-        <%-- ±êÌâ --%>
+        <%-- æ ‡é¢˜ --%>
         <tr height="*" valign="top">
             <td colspan="2">
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <tr>
                         <td align="left">
-                            <%-- ÏÔÊ¾±êÌâ --%>
+                            <%-- æ˜¾ç¤ºæ ‡é¢˜ --%>
                             <span id="title" class="Head" runat="server">
                                 <%= lang.Admin_ManageUsers_ManageUser %></span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <%-- ·Ö¸ôÏß --%>
+                            <%-- åˆ†éš”çº¿ --%>
                             <hr noshade size="1">
                         </td>
                     </tr>
@@ -29,7 +29,7 @@
             </td>
         </tr>
         
-        <%-- ÓÊÏä --%>
+        <%-- é‚®ç®± --%>
         <tr>
             <td class="Normal">
                 <%= lang.Admin_ManageUsers_Email %>
@@ -39,7 +39,7 @@
             </td>
         </tr>
         
-        <%-- ÃÜÂë --%>
+        <%-- å¯†ç  --%>
         <tr>
             <td class="Normal">
                 <%= lang.Admin_ManageUsers_Password %>
@@ -51,7 +51,7 @@
             </td>
         </tr>
         
-        <%-- È·ÈÏÃÜÂë --%>
+        <%-- ç¡®è®¤å¯†ç  --%>
         <tr>
             <td class="Normal">
                 <%= lang.Admin_ManageUsers_ConfirmPwd %>
@@ -66,7 +66,7 @@
             </td>
         </tr>
         
-        <%-- ¸üÐÂÓÃ»§°´Å¥ --%>
+        <%-- æ›´æ–°ç”¨æˆ·æŒ‰é’® --%>
         <tr>
             <td colspan="3">
                 <asp:LinkButton Text="<%$ Resources:lang,Admin_ManageUsers_ApplyNamePwdChange %>"
@@ -76,7 +76,7 @@
             </td>
         </tr>
         
-        <%-- ½ÇÉ«Ìí¼Ó --%>
+        <%-- è§’è‰²æ·»åŠ  --%>
         <tr>
             <td colspan="2">
                 <asp:DropDownList ID="allRoles" DataTextField="RoleName" DataValueField="RoleID"
@@ -86,7 +86,7 @@
             </td>
         </tr>
         
-        <%-- µ±Ç°ÓÃ»§µÄ½ÇÉ«ÁÐ±í --%>
+        <%-- å½“å‰ç”¨æˆ·çš„è§’è‰²åˆ—è¡¨ --%>
         <tr valign="top">
             <td>
                 &nbsp;
@@ -105,14 +105,14 @@
             </td>
         </tr>
         
-        <%-- ·Ö¸ôÏß --%>
+        <%-- åˆ†éš”çº¿ --%>
         <tr>
             <td colspan="2">
                 <hr noshade size="1">
             </td>
         </tr>
         
-        <%-- ±£´æ¸ü¸Ä --%>
+        <%-- ä¿å­˜æ›´æ”¹ --%>
         <tr>
             <td colspan="2">
                 <asp:LinkButton ID="saveBtn" class="CommandButton" Text="<%$ Resources:lang,Admin_ManageUsers_SaveUserChange %>"
