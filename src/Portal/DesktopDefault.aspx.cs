@@ -27,7 +27,7 @@ namespace ASPNET.StarterKit.Portal
 
             // Obtain PortalSettings from Current Context
             // 从当前上下文中获取 PortalSettings
-            var portalSettings = (PortalSettings)HttpContext.Current.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // Ensure that the visiting user has access to the current page
             // 确保访问用户有权限访问当前页面
@@ -79,7 +79,8 @@ namespace ASPNET.StarterKit.Portal
                     if (_moduleSettings.CacheTime == 0)
                     {
                         // 如果不缓存，动态加载模块
-                        var portalModule = (IPortalModuleControl)Page.LoadControl(_moduleSettings.DesktopSrc);
+                        string desktopSource = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(_moduleSettings.DesktopSrc);
+                        var portalModule = (IPortalModuleControl)Page.LoadControl(desktopSource);
 
                         // 设置加载的模块的 Portal ID 和模块配置
                         portalModule.PortalId = portalSettings.PortalId;

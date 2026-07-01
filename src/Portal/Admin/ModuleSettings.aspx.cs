@@ -28,10 +28,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // 验证当前用户是否有权访问此页面
-            if (!PortalSecurity.IsInRoles("Admins"))
-            {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             // 获取请求中的模块ID和标签ID
             moduleId = Request.Params["mid"] != null ? int.Parse(Request.Params["mid"]) : 0;
@@ -90,7 +87,7 @@ namespace ASPNET.StarterKit.Portal
                 showMobile.Checked = module.ShowMobile;
 
                 // 填充角色列表
-                PopulateRoleList(module.AuthorizedEditRoles.Split(';'), RolesDb.GetPortalRoles(GetPortalSettings().PortalId));
+                PopulateRoleList(PortalRoleParser.Parse(module.AuthorizedEditRoles), RolesDb.GetPortalRoles(GetPortalSettings().PortalId));
             }
         }
 
@@ -133,15 +130,15 @@ namespace ASPNET.StarterKit.Portal
             authEditRoles.Items.Clear();
 
             // 添加"All Users"项
-            var allItem = new ListItem("All Users", "All Users");
-            allItem.Selected = Array.IndexOf(authorizedRoles, "All Users") > -1;
+            var allItem = new ListItem(PortalRoleNames.AllUsers, PortalRoleNames.AllUsers);
+            allItem.Selected = authorizedRoles.Any(role => string.Equals(role, PortalRoleNames.AllUsers, StringComparison.OrdinalIgnoreCase));
             authEditRoles.Items.Add(allItem);
 
             // 添加其他角色项
             foreach (var role in roles)
             {
                 var item = new ListItem(role.RoleName, role.RoleId.ToString());
-                item.Selected = Array.IndexOf(authorizedRoles, role.RoleName) > -1;
+                item.Selected = authorizedRoles.Any(authorizedRole => string.Equals(authorizedRole, role.RoleName, StringComparison.OrdinalIgnoreCase));
                 authEditRoles.Items.Add(item);
             }
         }
@@ -163,7 +160,7 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>PortalSettings对象。</returns>
         private PortalSettings GetPortalSettings()
         {
-            return HttpContext.Current.Items["PortalSettings"] as PortalSettings;
+            return PortalContext.GetPortalSettings();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace ASPNET.StarterKit.Portal
                 TabOrder = tabOrder,
                 MobileTabName = String.Empty,
                 ShowMobile = true,
-                AccessRoles = "All Users;"
+                AccessRoles = PortalRoleNames.AllUsers + ";"
             };
 
             // 将新的页项添加到数据库上下文中。

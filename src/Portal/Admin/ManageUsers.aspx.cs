@@ -29,10 +29,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // 验证当前用户是否有访问此页面的权限
             // Verify that the current user has access to access this page
-            if (PortalSecurity.IsInRoles("Admins") == false)
-            {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             // Calculate userid
             if (Request.Params["userid"] != null)
@@ -97,7 +94,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Save_Click(Object sender, EventArgs e)
         {
             // 获取当前上下文中的 PortalSettings
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 导航回管理页面
             Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
@@ -184,7 +181,7 @@ namespace ASPNET.StarterKit.Portal
             userRoles.DataBind();
 
             // 获取当前上下文中的 PortalSettings
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 从数据库获取门户的角色
             // 绑定所有门户角色到下拉列表

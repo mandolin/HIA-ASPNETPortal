@@ -27,11 +27,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // 验证当前用户是否有权限访问此页面
-            if (PortalSecurity.IsInRoles("Admins") == false)
-            {
-                // 如果没有权限，则重定向到无访问权限页面
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             if (Request.Params["tabid"] != null)
             {
@@ -60,7 +56,7 @@ namespace ASPNET.StarterKit.Portal
         protected void AddRole_Click(Object Sender, EventArgs e)
         {
             // 从当前上下文中获取PortalSettings
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 向数据库中添加一个新角色
             RolesDB.AddRole(portalSettings.PortalId, "New Role");
@@ -137,7 +133,7 @@ namespace ASPNET.StarterKit.Portal
         private void BindData()
         {
             // 从当前上下文中获取PortalSettings
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 从数据库获取门户的角色
             rolesList.DataSource = RolesDB.GetPortalRoles(portalSettings.PortalId);

@@ -46,10 +46,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // Verify that the current user has access to access this page
-            if (PortalSecurity.IsInRoles("Admins") == false)
-            {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             // Determine Tab to Edit
             if (Request.Params["tabid"] != null)
@@ -82,23 +79,23 @@ namespace ASPNET.StarterKit.Portal
                 moduleTitle.Text,       // 模块标题，从输入框获取
                 Int32.Parse(moduleType.SelectedItem.Value), // 模块类型ID，从下拉菜单中选定的项获取
                 0,                      // 默认缓存设置为0
-                "Admins",               // 默认授权给管理员角色
+                PortalRoleNames.Administrators, // 默认授权给管理员角色
                 false                   // 默认showmobile配置为false
             );
 
             // 从当前上下文获取PortalSettings
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 从数据库中重新加载PortalSettings
             // 使用新的PortalSettings实例替换当前上下文中的PortalSettings
-            HttpContext.Current.Items["PortalSettings"] = new PortalSettings(
+            PortalContext.SetPortalSettings(new PortalSettings(
                 portalSettings.PortalId, // 门户ID
                 tabId,                   // 当前标签ID
                 PortalConfig,            // 门户配置对象
                 TabsConfig,              // 标签配置对象
                 ModulesConfig,           // 模块配置对象
                 ModuleDefConfig          // 模块定义配置对象
-            );
+            ));
 
             // 获取ContentPane内的所有模块
             List<ModuleSettings> modules = GetModules("ContentPane");
@@ -219,8 +216,8 @@ namespace ASPNET.StarterKit.Portal
 
                 // Reload the portal settings from the database
                 // 从数据库中重新加载门户设置。
-                var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
-                HttpContext.Current.Items["PortalSettings"] = new PortalSettings(portalSettings.PortalId, tabId, PortalConfig, TabsConfig, ModulesConfig, ModuleDefConfig);
+                var portalSettings = PortalContext.GetPortalSettings();
+                PortalContext.SetPortalSettings(new PortalSettings(portalSettings.PortalId, tabId, PortalConfig, TabsConfig, ModulesConfig, ModuleDefConfig));
 
                 // Reorder the modules in the source pane
                 // 重新排列源窗格内的模块顺序。
@@ -270,7 +267,7 @@ namespace ASPNET.StarterKit.Portal
 
             // Obtain PortalSettings from Current Context
             // 从当前上下文获取门户设置。
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
             int adminIndex = portalSettings.DesktopTabs.Count - 1;
 
             // Redirect back to the admin page
@@ -320,7 +317,7 @@ namespace ASPNET.StarterKit.Portal
 
             // Obtain PortalSettings from Current Context
             // 从当前上下文获取门户设置。
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // Update Tab info in the database
             // 更新数据库中的标签信息。
@@ -429,7 +426,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // Obtain PortalSettings from Current Context
             // 从当前上下文获取门户设置对象。
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
             TabSettings tab = portalSettings.ActiveTab;
 
             // Populate Tab Names, etc.
@@ -450,11 +447,11 @@ namespace ASPNET.StarterKit.Portal
             // Add 'All Users' option to the checkbox list
             // 向复选框列表添加“所有用户”选项。
             var allItem = new ListItem(); // 创建一个新的列表项。
-            allItem.Text = "All Users"; // 设置列表项的文本为“所有用户”。
+            allItem.Text = PortalRoleNames.AllUsers; // 设置列表项的文本为“所有用户”。
 
             // Check if 'All Users' is authorized for this tab
             // 检查“所有用户”是否对此标签已授权。
-            if (tab.AuthorizedRoles.LastIndexOf("All Users") > -1)
+            if (PortalRoleParser.Contains(tab.AuthorizedRoles, PortalRoleNames.AllUsers))
             {
                 allItem.Selected = true; // 如果已授权，则选中该选项。
             }
@@ -510,7 +507,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // Obtain PortalSettings from Current Context
             // 从当前上下文获取门户设置对象。
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
             var paneModules = new List<ModuleSettings>(); // 创建一个新的模块设置列表。
 
             // Iterate over all modules of the active tab

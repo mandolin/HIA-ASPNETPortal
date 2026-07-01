@@ -86,6 +86,13 @@
                                 ErrorMessage="You Must Enter Source Path for the Desktop Module" 
                                 ControlToValidate="DesktopSrc" 
                                 runat="server" />
+                            <asp:CustomValidator
+                                ID="DesktopSrcPathValidator"
+                                Display="Static"
+                                ErrorMessage="Desktop Source must be a relative .ascx path under DesktopModules/ or Admin/."
+                                ControlToValidate="DesktopSrc"
+                                OnServerValidate="DesktopSrcPathValidator_ServerValidate"
+                                runat="server" />
                         </td>
                     </tr>
                     <tr>

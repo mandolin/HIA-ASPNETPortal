@@ -15,7 +15,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // 从当前HttpContext的Items集合中获取PortalSettings对象，该对象包含与当前门户相关的设置信息
             // Obtain PortalSettings from Current Context
-            var portalSettings = (PortalSettings) HttpContext.Current.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 将父级控件转换为IPortalModuleControl接口类型，以便访问模块配置信息
             // Obtain reference to parent portal module

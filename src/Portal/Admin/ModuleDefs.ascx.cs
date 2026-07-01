@@ -24,10 +24,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // 验证当前用户是否有权访问此页面
-            if (!PortalSecurity.IsInRoles("Admins"))
-            {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             // 获取请求参数中的 tabid 和 tabindex
             if (Request.Params["tabid"] != null)
@@ -77,7 +74,7 @@ namespace ASPNET.StarterKit.Portal
         private void BindData()
         {
             // 从当前上下文中获取 PortalSettings
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 从数据库中获取门户的模块定义
             defsList.DataSource = ModuleDefConfig.GetModuleDefinitions();

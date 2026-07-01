@@ -40,10 +40,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // 验证当前用户是否有权限访问该页面
-            if (PortalSecurity.IsInRoles("Admins") == false)
-            {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             // 如果请求参数中存在tabid，则解析它
             if (Request.Params["tabid"] != null)
@@ -57,7 +54,7 @@ namespace ASPNET.StarterKit.Portal
             }
 
             // 从当前上下文获取PortalSettings
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 遍历门户设置中的所有桌面页，并将它们添加到PortalTabs列表中
             foreach (ITabItem tab in portalSettings.DesktopTabs)
@@ -144,7 +141,7 @@ namespace ASPNET.StarterKit.Portal
         protected void AddTab_Click(Object sender, EventArgs e)
         {
             // 从当前上下文获取PortalSettings
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 将页写入数据库
             int tabId = TabsConfig.AddTab(portalSettings.PortalId, "New Tab", 999);
@@ -154,7 +151,7 @@ namespace ASPNET.StarterKit.Portal
             PortalTabs.Add(new TabSettings(tab));
 
             // 重新加载PortalSettings
-            HttpContext.Current.Items["PortalSettings"] = new PortalSettings(portalSettings.PortalId, tabId, PortalConfig, TabsConfig, ModulesConfig, ModuleDefConfig);
+            PortalContext.SetPortalSettings(new PortalSettings(portalSettings.PortalId, tabId, PortalConfig, TabsConfig, ModulesConfig, ModuleDefConfig));
 
             // 重新设置页列表中的排序号
             OrderTabs();

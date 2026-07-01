@@ -168,8 +168,8 @@ namespace ASPNET.StarterKit.Portal
             var modulesConfig = Container.Resolve<IModulesDb>();
             var moduleDefConfig = Container.Resolve<IModuleDefsDb>();
 
-            // 构建并将 PortalSettings 对象添加到当前 Context
-            Context.Items["PortalSettings"] = new PortalSettings(tabIndex, tabId, portalConfig, tabsConfig, modulesConfig, moduleDefConfig);
+            // 构建并将 PortalSettings 对象添加到当前 Context。
+            PortalContext.SetPortalSettings(new PortalSettings(tabIndex, tabId, portalConfig, tabsConfig, modulesConfig, moduleDefConfig), Context);
 
             SetLanguage();
 
@@ -244,46 +244,16 @@ namespace ASPNET.StarterKit.Portal
             {
                 string[] roles;
 
-                // 如果角色 Cookie 不存在或为空，创建角色 Cookie
-                if (string.IsNullOrEmpty(Request.Cookies["portalroles"]?.Value))
+                // 优先读取角色 Cookie；缺失、过期或解密失败时再从数据库读取并重建 Cookie。
+                if (!PortalAuthenticationCookies.TryReadRoles(Request, out roles))
                 {
-                    // 从 UserRoles 表获取角色并添加到 Cookie
+                    // 从 UserRoles 表获取角色并添加到 Cookie。
                     var usersDb = Container.Resolve<IUsersDb>();
-                    roles = usersDb.GetRoleNamesByUser(User.Identity.Name).ToArray();
+                    roles = PortalRoleParser.Parse(string.Join(";", usersDb.GetRoleNamesByUser(User.Identity.Name)));
 
-                    // 创建角色字符串
-                    string roleStr = string.Join(";", roles);
-
-                    // 创建并加密票据 //#todo 此处后期需要调整，使其可HIA方式配置化
-                    var ticket = new FormsAuthenticationTicket(
-                        1, // 版本
-                        Context.User.Identity.Name, // 用户名
-                        DateTime.Now, // 发行时间
-                        DateTime.Now.AddHours(1), // 每小时过期
-                        false, // 不保持 Cookie
-                        roleStr // 角色
-                    );
-
-                    string encryptedTicket = FormsAuthentication.Encrypt(ticket);
-
-                    // 发送 Cookie 到客户端
-                    Response.Cookies.Add(new HttpCookie("portalroles", encryptedTicket)
-                    {
-                        //#todo 此处后期需要调整，包括Domain设置。因为需要兼容子站点以及虚拟目录/应用程序
-                        Path = "/",
-                        Expires = DateTime.Now.AddMinutes(1)
-                    });
-                }
-                else
-                {
-                    // 从角色 Cookie 获取角色
-                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(Context.Request.Cookies["portalroles"].Value);
-
-                    // 将角色数据的字符串表示转换为字符串数组
-                    roles = ticket.UserData.Split(';');
-
-                    // 移除空白项
-                    roles = roles.Where(r => !string.IsNullOrWhiteSpace(r)).ToArray();
+                    var formsIdentity = Context.User?.Identity as FormsIdentity;
+                    bool isPersistent = formsIdentity?.Ticket?.IsPersistent ?? false;
+                    PortalAuthenticationCookies.WriteRolesCookie(Response, Request, Context.User.Identity.Name, roles, isPersistent);
                 }
 
                 // 向请求中添加自定义的 Principal，其中包含身份验证票据中的角色信息 #todo 建立自定义Principal，引入HIA的SysUser和BizUser

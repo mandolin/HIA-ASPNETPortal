@@ -21,12 +21,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // Verify that the current user has access to access this page
             // 验证当前用户是否有权限访问此页面。
-            if (PortalSecurity.IsInRoles("Admins") == false)
-            {
-                // If not, redirect to an access denied page
-                // 如果没有权限，则重定向到拒绝访问页面。
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             // If this is the first visit to the page, populate the site data
             // 如果这是第一次访问页面，则填充站点数据。
@@ -34,7 +29,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 // Obtain PortalSettings from Current Context
                 // 从当前上下文获取PortalSettings。
-                var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+                var portalSettings = PortalContext.GetPortalSettings();
 
                 // Set the text box with the current site name
                 // 设置文本框以显示当前站点名称。
@@ -57,7 +52,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // Obtain PortalSettings from Current Context
             // 从当前上下文获取PortalSettings。
-            var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // Update the portal information in the database
             // 在数据库中更新门户信息。

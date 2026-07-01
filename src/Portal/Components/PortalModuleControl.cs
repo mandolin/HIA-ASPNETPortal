@@ -69,7 +69,7 @@ namespace ASPNET.StarterKit.Portal
                 if (_isEditable == 0) // 如果状态未知
                 {
                     // 从当前上下文中获取门户设置
-                    var portalSettings = (PortalSettings)HttpContext.Current.Items["PortalSettings"];
+                    var portalSettings = PortalContext.GetPortalSettings();
 
                     if (portalSettings.AlwaysShowEditButton || // 如果总是显示编辑按钮
                         PortalSecurity.IsInRoles(_moduleConfiguration.AuthorizedEditRoles)) // 或者当前用户具有编辑权限

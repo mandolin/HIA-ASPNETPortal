@@ -20,6 +20,15 @@ namespace ASPNET.StarterKit.Portal
         //
         //****************************************************************
 
+        /// <summary>
+        /// 按系统配置决定是否显示自主注册链接。
+        /// </summary>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // 自主注册默认关闭；后续系统管理模块会扩展审核、临时链接和员工号绑定等能力。
+            RegisterLink.Visible = PortalRegistrationOptions.AllowSelfRegistration;
+        }
+
         protected void LoginBtn_Click(Object sender, ImageClickEventArgs e)
         {
             // 清除输入的用户名或邮箱两端的空白字符

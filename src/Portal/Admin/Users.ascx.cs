@@ -44,10 +44,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // 验证当前用户是否有访问权限
             // Verify that the current user has access to access this page
-            if (!PortalSecurity.IsInRoles("Admins"))
-            {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             if (Request.Params["tabid"] != null)
             {

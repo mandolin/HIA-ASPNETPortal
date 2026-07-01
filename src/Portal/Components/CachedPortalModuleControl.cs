@@ -127,7 +127,8 @@ namespace ASPNET.StarterKit.Portal
             {
                 base.CreateChildControls();
 
-                var module = (IPortalModuleControl)Page.LoadControl(_moduleConfiguration.DesktopSrc);
+                string desktopSource = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(_moduleConfiguration.DesktopSrc);
+                var module = (IPortalModuleControl)Page.LoadControl(desktopSource);
 
                 module.ModuleConfiguration = ModuleConfiguration;
                 module.PortalId = PortalId;

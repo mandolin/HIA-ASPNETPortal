@@ -16,9 +16,25 @@ namespace ASPNET.StarterKit.Portal
         [Dependency]
         public IUsersDb UsersDB { private get; set; }
 
+        /// <summary>
+        /// 自主注册关闭时拒绝访问公开注册页。
+        /// </summary>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!PortalRegistrationOptions.AllowSelfRegistration)
+            {
+                Response.Redirect("~/Admin/AccessDenied.aspx");
+            }
+        }
+
         // 注册按钮点击事件处理程序
         protected void RegisterBtn_Click(object sender, EventArgs e)
         {
+            if (!PortalRegistrationOptions.AllowSelfRegistration)
+            {
+                Response.Redirect("~/Admin/AccessDenied.aspx");
+            }
+
             // 只有在页面上的所有表单字段都有效的情况下才尝试登录
             if (Page.IsValid)
             {

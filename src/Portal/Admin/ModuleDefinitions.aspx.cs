@@ -1,4 +1,5 @@
 using System;
+using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
 
@@ -24,10 +25,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // 验证当前用户是否有权访问此页面
-            if (!PortalSecurity.IsInRoles("Admins"))
-            {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
-            }
+            PortalAuthorization.RequireAdmin();
 
             // 计算模块定义 ID
             if (Request.Params["defid"] != null)
@@ -77,16 +75,13 @@ namespace ASPNET.StarterKit.Portal
             {
                 if (defId == -1)
                 {
-                    // 从当前上下文中获取 PortalSettings
-                    var portalSettings = (PortalSettings)Context.Items["PortalSettings"];
-
                     // 向数据库中添加新的模块定义
-                    ModuleDefConfig.AddModuleDefinition(FriendlyName.Text, DesktopSrc.Text, MobileSrc.Text);
+                    ModuleDefConfig.AddModuleDefinition(FriendlyName.Text, NormalizeDesktopSrc(), MobileSrc.Text);
                 }
                 else
                 {
                     // 更新模块定义
-                    ModuleDefConfig.UpdateModuleDefinition(defId, FriendlyName.Text, DesktopSrc.Text, MobileSrc.Text);
+                    ModuleDefConfig.UpdateModuleDefinition(defId, FriendlyName.Text, NormalizeDesktopSrc(), MobileSrc.Text);
                 }
 
                 // 重定向回门户管理页面
@@ -117,6 +112,28 @@ namespace ASPNET.StarterKit.Portal
         {
             // 重定向回门户首页
             Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+        }
+
+        /// <summary>
+        /// 服务端校验模块路径，防止动态加载入口指向站点外、上级目录或非用户控件文件。
+        /// </summary>
+        protected void DesktopSrcPathValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            string normalizedSource;
+            string errorMessage;
+            args.IsValid = PortalModulePathValidator.TryNormalizeDesktopSource(args.Value, out normalizedSource, out errorMessage);
+        }
+
+        private string NormalizeDesktopSrc()
+        {
+            string normalizedSource;
+            string errorMessage;
+            if (!PortalModulePathValidator.TryNormalizeDesktopSource(DesktopSrc.Text, out normalizedSource, out errorMessage))
+            {
+                throw new InvalidOperationException(errorMessage);
+            }
+
+            return normalizedSource;
         }
     }
 }

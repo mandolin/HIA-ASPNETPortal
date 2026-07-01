@@ -36,8 +36,14 @@
             <%-- 登录按钮 --%>
             <asp:ImageButton id="SigninBtn" ImageUrl="<%$ Resources:lang,Signin_LoginImg %>" runat="server" onclick="LoginBtn_Click" />
             <br>
-            <%-- 注册链接 --%>
-            <a href="Admin/Register.aspx"><img src="<%=lang.Signin_RegImg%>" border="0"></a>
+            <%-- 注册链接默认隐藏，只有配置允许自主注册时由代码隐藏文件显示。 --%>
+            <asp:HyperLink
+                id="RegisterLink"
+                NavigateUrl="~/Admin/Register.aspx"
+                ImageUrl="<%$ Resources:lang,Signin_RegImg %>"
+                BorderWidth="0"
+                Visible="false"
+                runat="server" />
             <%-- 错误消息标签 --%>
             <asp:Label id="Message" class="NormalRed" runat="server" />
         </td>

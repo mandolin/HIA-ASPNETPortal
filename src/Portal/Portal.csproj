@@ -307,9 +307,14 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Components\IPortalModuleControl.cs" />
+    <Compile Include="Components\PortalAuthenticationCookies.cs" />
+    <Compile Include="Components\PortalAuthorization.cs" />
+    <Compile Include="Components\PortalContext.cs" />
+    <Compile Include="Components\PortalModulePathValidator.cs" />
     <Compile Include="Components\PortalPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Components\PortalRegistrationOptions.cs" />
     <Compile Include="Components\IContainerAccessor.cs" />
     <Compile Include="Components\CachedPortalModuleControl.cs">
     </Compile>

@@ -81,11 +81,17 @@ namespace ASPNET.StarterKit.Portal
             // 获取当前的HttpContext
             HttpContext context = HttpContext.Current;
 
-            // 分割角色字符串为数组，并迭代检查每个角色
-            foreach (string role in roles.Split(';'))
+            if (context == null)
             {
-                // 如果角色非空并且用户在该角色中或者角色为"All Users"则返回true
-                if (!string.IsNullOrEmpty(role.Trim()) && (role.Trim() == "All Users" || context.User.IsInRole(role.Trim())))
+                return false;
+            }
+
+            // 统一使用旧角色字符串解析器，兼容末尾分号、空项和多余空白。
+            foreach (string role in PortalRoleParser.Parse(roles))
+            {
+                // 如果角色为 All Users，或者当前用户在指定角色中，则允许访问。
+                if (string.Equals(role, PortalRoleNames.AllUsers, StringComparison.OrdinalIgnoreCase) ||
+                    (context.User?.IsInRole(role) ?? false))
                 {
                     return true;
                 }

@@ -22,20 +22,8 @@ namespace ASPNET.StarterKit.Portal
             // 使用 Cookie 认证系统 注销用户
             FormsAuthentication.SignOut();
 
-            // Invalidate the roles token.
-            // 使角色令牌无效
-            HttpCookie rolesCookie = Response.Cookies["portalroles"];
-            if (rolesCookie != null)
-            {
-                rolesCookie.Value = null;
-                // Set the expiration time to yesterday to invalidate the token immediately.
-                // 设置过期时间为昨天，立即使令牌失效
-                rolesCookie.Expires = DateTime.Now.AddDays(-1);
-
-                //#todo 此处后期需要调整，包括Domain设置。因为需要兼容子站点以及虚拟目录/应用程序
-                rolesCookie.Path = "/";
-                Response.Cookies.Add(rolesCookie);
-            }
+            // 角色 Cookie 的 Path 必须和写入时保持一致，虚拟目录部署时才能真正清除。
+            PortalAuthenticationCookies.ExpireRolesCookie(Response, Request);
 
             // Redirect the user back to the portal home page.
             // 重定向用户回到门户首页

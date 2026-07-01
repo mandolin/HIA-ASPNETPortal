@@ -20,7 +20,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // 从当前上下文中获取 PortalSettings
-            var portalSettings = (PortalSettings)HttpContext.Current.Items["PortalSettings"];
+            var portalSettings = PortalContext.GetPortalSettings();
 
             // 动态填充门户站点名称
             SiteName.Text = portalSettings.PortalName;
