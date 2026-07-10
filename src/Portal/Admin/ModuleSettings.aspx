@@ -65,7 +65,7 @@
                             Roles that can edit content:
                         </td>
                         <td colspan="3">
-                            <asp:CheckBoxList ID="authEditRoles" RepeatColumns="2" Font-Names="Verdana,Arial"
+                            <asp:CheckBoxList ID="authEditRoles" RepeatColumns="2"
                                 Font-Size="8pt" Width="300" CellPadding="0" CellSpacing="0" runat="server" />
                         </td>
                     </tr>
@@ -83,7 +83,7 @@
                             Show to mobile users?:
                         </td>
                         <td colspan="3">
-                            <asp:CheckBox ID="showMobile" Font-Names="Verdana,Arial" Font-Size="8pt" runat="server" />
+                            <asp:CheckBox ID="showMobile" Font-Size="8pt" runat="server" />
                         </td>
                     </tr>
                     <tr>

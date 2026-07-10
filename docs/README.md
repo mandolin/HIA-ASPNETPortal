@@ -1,0 +1,18 @@
+# HIA-ASPNETPortal 文档
+
+本目录是项目的公开维护文档入口，面向使用者、开发者和后续维护人员。内部计划、阶段状态、ADR 和 AI 协作资料统一保存在独立私有仓库 `work-zone/`。
+
+## 文档索引
+
+- `architecture.md`：系统结构和主要模块说明。
+- `dev-guide.md`：本地开发、构建、配置和调试指南。
+- `user-guide.md`：运行和使用入口说明。
+- `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
+- `font-policy-and-audit.md`：字体使用原则、许可证边界和当前审计结果。
+
+## 当前约定
+
+- 根目录 `docs/` 只保存适合公开的稳定文档。
+- 内部规划放在 `work-zone/dev/plans/`，内部 ADR 放在 `work-zone/docs/adr/`。
+- `src/Documentation/` 和 `src/Portal.Components.Data/Documentation/` 暂按生成文档输出处理，不作为维护文档入口。
+- 新增正式文档默认使用中文，必要时保留英文技术名词。

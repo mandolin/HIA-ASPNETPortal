@@ -2,7 +2,12 @@
     CSS STYLES FOR THE ASP.NET PORTAL STARTER KIT
     v1.0, 10/2002
    ================================
-*/   
+*/
+
+/*
+   普通文字字体不随项目打包；优先使用许可证明确的开源字体，
+   未安装时由浏览器回退到通用 sans-serif / monospace 字体。
+*/
 
 
 /* PAGE BACKGROUND */
@@ -22,7 +27,7 @@ Body { background-color: white; }
 
 .SiteTitle {
     color: #cccc99;
-    font-family: Verdana Bold, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 20px;
     font-weight: bold;
 }
@@ -45,7 +50,7 @@ Body { background-color: white; }
 
 .SelectedTab {
     color: DarkRed;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 13px;
     font-weight: bold
 }
@@ -54,7 +59,7 @@ Body { background-color: white; }
 
 .OtherTabs {
     color: gainsboro;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 13px;
     font-weight: bold;
     text-decoration: none;
@@ -85,7 +90,7 @@ A.OtherTabs:hover {
 /* text style for the site links (at extreme top-right of header) */
 
 .SiteLink {
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: bold
 }   
@@ -126,7 +131,7 @@ A.SiteLink:hover {
 
 .Message {
     background-color: #eeeeee;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-size: 11px;
     font-weight: normal;
@@ -136,7 +141,7 @@ A.SiteLink:hover {
 
 .ItemTitle {
     color: darkred;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: bold;
 }
@@ -148,7 +153,7 @@ A.SiteLink:hover {
 
 .Head {
     color: #666644;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 20px;
     font-weight: normal;
 }
@@ -157,7 +162,7 @@ A.SiteLink:hover {
 
 .SubHead {
     color: darkred;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: bold;
 }
@@ -166,7 +171,7 @@ A.SiteLink:hover {
 
 .SubSubHead {
     color: black;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: bold;
 }
@@ -174,7 +179,7 @@ A.SiteLink:hover {
 /* text style used for most text rendered by modules */
 
 .Normal {
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: normal;
     line-height: 12px
@@ -183,20 +188,20 @@ A.SiteLink:hover {
 /* text style used for textboxes in the admin and edit pages, for Nav compatibility */
 
 .NormalTextBox {
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 12px;
     font-weight: normal;
 }
 
 .NormalRed {
     color: red;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: bold;
 }
 
 .NormalBold {
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: bold
 }
@@ -204,7 +209,7 @@ A.SiteLink:hover {
 /* text style for buttons and link buttons used in the portal admin pages */
 
 .CommandButton {
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: normal;
 }
@@ -238,55 +243,55 @@ A.CommandButton:hover {
 
 H1 {
     color: #666644;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 20px;
     font-weight: normal;
 }
 
 H2 {
     color: #666644;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 20px;
     font-weight: normal;
 }
 
 H3 {
     color: darkred;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 12px;
     font-weight: normal;
 }
 
 H4 {
     color: darkred;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 12px;
     font-weight: normal;
 }
 
 H5, DT {
     color: darkred;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: bold;
 }
 
 H6 {
     color: darkred;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 11px;
     font-weight: bold;
 }
 
 TFOOT, THEAD {
     color: darkred;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 12px;
 }
 
 TH {
     color: darkred;
-    font-family: Verdana, Helvetica, sans-serif;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
     font-size: 12px;
     font-weight: bold;
     vertical-align: baseline;
@@ -316,7 +321,7 @@ SMALL { font-size: 8px; }
 
 BIG { font-size: 14px; }
 
-BLOCKQUOTE, PRE { font-family: Lucida Console, monospace; }
+BLOCKQUOTE, PRE { font-family: "Sarasa Mono SC", "Noto Sans Mono CJK SC", "Source Han Mono SC", "Liberation Mono", monospace; }
 
 
 UL LI { list-style-type: square; }

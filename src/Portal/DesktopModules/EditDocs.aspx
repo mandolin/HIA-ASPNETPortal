@@ -113,7 +113,7 @@
                             <br />
                             <asp:CheckBox ID="storeInDatabase" CssClass="Normal" Text="Store in database (web farm support)" runat="server" /> <%-- 存储在数据库中复选框 --%>
                             <br />
-                            <input type="file" id="FileUpload" width="300" style="font-family: verdana; width: 353px;" runat="server" name="FileUpload" /> <%-- 文件上传控件 --%>
+                            <input type="file" id="FileUpload" width="300" style="width: 353px;" runat="server" name="FileUpload" /> <%-- 字体继承当前主题，避免绑定专有系统字体。 --%>
                             <br />
                             <asp:Label ID="UploadMessage" CssClass="NormalRed" runat="server" />
                         </td>

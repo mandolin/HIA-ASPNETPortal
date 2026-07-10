@@ -47,7 +47,7 @@
                             <%-- 授权角色 --%>
                         </td>
                         <td colspan="3">
-                            <asp:CheckBoxList ID="authRoles" RepeatColumns="2" Font-Names="Verdana,Arial" Font-Size="8pt"
+                            <asp:CheckBoxList ID="authRoles" RepeatColumns="2" Font-Size="8pt"
                                 Width="300" runat="server" OnSelectedIndexChanged="TabSettings_Change" />
                             <%-- 复选框列表用于选择授权角色 --%>
                         </td>
@@ -66,7 +66,7 @@
                             <%-- 是否显示给移动用户 --%>
                         </td>
                         <td colspan="3">
-                            <asp:CheckBox ID="showMobile" Font-Names="Verdana,Arial" Font-Size="8pt" runat="server"
+                            <asp:CheckBox ID="showMobile" Font-Size="8pt" runat="server"
                                 OnCheckedChanged="TabSettings_Change" />
                             <%-- 复选框用于控制是否向移动用户显示 --%>
                         </td>

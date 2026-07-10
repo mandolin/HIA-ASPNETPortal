@@ -361,3 +361,9 @@ MigrationBackup/
 **/appSettings.test.json
 **/connectionStrings.config
 !**/Config/Templates/connectionStrings.config
+
+# 私有工作区使用独立 Git 仓库，不进入公开项目仓库。
+/work-zone/
+
+# Serena 缓存和项目记忆属于本机 AI 工具状态，不进入公开仓库。
+/.serena/
