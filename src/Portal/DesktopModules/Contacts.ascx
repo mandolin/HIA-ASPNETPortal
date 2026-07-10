@@ -7,36 +7,44 @@
 <%-- 使用自定义标题控件 --%>
 <ASPNETPortal:title EditText="Add New Contact" EditUrl="~/DesktopModules/EditContacts.aspx" runat="server" id="Title1" />
 
-<%-- 数据网格控件 --%>
-<asp:DataGrid id="myDataGrid" Border="0" width="100%" AutoGenerateColumns="false" EnableViewState="false" runat="server">
-    <%-- 数据网格的列定义 --%>
-    <Columns>
-        <%-- 自定义模板列用于显示编辑链接 --%>
-        <asp:TemplateColumn>
-            <ItemTemplate>
-                <%-- 编辑链接 --%>
-                <asp:HyperLink ImageUrl="~/images/edit.gif"
-                    NavigateUrl='<%# "~/DesktopModules/EditContacts.aspx?ItemID=" + 
-                                 DataBinder.Eval(Container.DataItem, "ItemID").ToString() + 
-                                 "&mid=" + ModuleId %>'
-                    Visible='<%# IsEditable %>' runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        
-        <%-- 绑定列：显示联系人姓名 --%>
-        <asp:BoundColumn HeaderText="Name" DataField="Name" ItemStyle-CssClass="Normal" HeaderStyle-CssClass="NormalBold" />
-        
-        <%-- 绑定列：显示联系人角色 --%>
-        <asp:BoundColumn HeaderText="Role" DataField="Role" ItemStyle-CssClass="Normal" HeaderStyle-CssClass="NormalBold" />
-        
-        <%-- 超链接列：显示联系人电子邮件 --%>
-        <asp:HyperLinkColumn HeaderText="Email" DataTextField="Email" DataNavigateUrlField="Email" 
-                             DataNavigateUrlFormatString="mailto:{0}" ItemStyle-CssClass="Normal" HeaderStyle-CssClass="NormalBold" />
-        
-        <%-- 绑定列：显示联系人联系方式1 --%>
-        <asp:BoundColumn HeaderText="Contact 1" DataField="Contact1" ItemStyle-CssClass="Normal" HeaderStyle-CssClass="NormalBold" />
-        
-        <%-- 绑定列：显示联系人联系方式2 --%>
-        <asp:BoundColumn HeaderText="Contact 2" DataField="Contact2" ItemStyle-CssClass="Normal" HeaderStyle-CssClass="NormalBold" />
-    </Columns>
-</asp:DataGrid>
+<%-- 使用 Repeater 输出表格，避开旧 DataGrid 模板列的解析兼容问题。 --%>
+<asp:Repeater ID="myDataGrid" EnableViewState="false" runat="server">
+    <HeaderTemplate>
+        <table border="0" width="100%">
+            <tr>
+                <td></td>
+                <td class="NormalBold">Name</td>
+                <td class="NormalBold">Role</td>
+                <td class="NormalBold">Email</td>
+                <td class="NormalBold">Contact 1</td>
+                <td class="NormalBold">Contact 2</td>
+            </tr>
+    </HeaderTemplate>
+    <ItemTemplate>
+            <tr>
+                <td>
+                    <%-- 编辑链接只在当前用户具备模块编辑权限时显示。 --%>
+                    <asp:HyperLink
+                        ID="editLink"
+                        ImageUrl="~/images/edit.gif"
+                        NavigateUrl='<%# "~/DesktopModules/EditContacts.aspx?ItemID=" + DataBinder.Eval(Container.DataItem, "ItemID") + "&mid=" + ModuleId %>'
+                        Visible='<%# IsEditable %>'
+                        runat="server" />
+                </td>
+                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "Name") %></td>
+                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "Role") %></td>
+                <td class="Normal">
+                    <asp:HyperLink
+                        ID="emailLink"
+                        Text='<%# DataBinder.Eval(Container.DataItem, "Email") %>'
+                        NavigateUrl='<%# "mailto:" + DataBinder.Eval(Container.DataItem, "Email") %>'
+                        runat="server" />
+                </td>
+                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "Contact1") %></td>
+                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "Contact2") %></td>
+            </tr>
+    </ItemTemplate>
+    <FooterTemplate>
+        </table>
+    </FooterTemplate>
+</asp:Repeater>

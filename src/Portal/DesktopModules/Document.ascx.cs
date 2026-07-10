@@ -13,7 +13,7 @@ namespace ASPNET.StarterKit.Portal
         public IDocumentsDb DocumentDB { private get; set; }
 
         /// <summary>
-        /// 用户控件的页面加载事件处理器，用于从数据库获取文档信息并绑定到 DataGrid 控件。
+        /// 用户控件的页面加载事件处理器，用于从数据库获取文档信息并绑定到列表控件。
         /// </summary>
         /// <param name="sender">事件源对象。</param>
         /// <param name="e">事件参数。</param>
@@ -22,7 +22,7 @@ namespace ASPNET.StarterKit.Portal
             // 从数据库获取指定模块的文档数据
             myDataGrid.DataSource = DocumentDB.GetDocuments(ModuleId);
 
-            // 将数据绑定到 DataGrid 控件
+            // 将数据绑定到 Repeater 控件。控件 ID 沿用 myDataGrid，减少旧代码牵动。
             myDataGrid.DataBind();
         }
 

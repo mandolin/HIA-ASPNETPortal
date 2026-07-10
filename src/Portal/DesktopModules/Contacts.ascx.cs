@@ -23,7 +23,7 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // Obtain contact information from Contacts table
-            // and bind to the DataGrid Control
+            // and bind to the Repeater control. The old field name is kept to avoid wider churn.
             myDataGrid.DataSource = ContactsDB.GetContacts(ModuleId);
             myDataGrid.DataBind();
         }

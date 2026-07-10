@@ -7,35 +7,44 @@
 <%-- 开始定义用户控件的 HTML 输出 --%>
 <ASPNETPortal:title EditText="Add New Document" EditUrl="~/DesktopModules/EditDocs.aspx" runat="server" id=Title1 />
 
-<%-- 定义一个 DataGrid 控件用于显示文档列表 --%>
-<asp:datagrid ID="myDataGrid" Border="0" width="100%" AutoGenerateColumns="false" EnableViewState="false" runat="server">
-    <Columns>
-        <%--自定义模板列，用于显示编辑链接--%>
-        <asp:TemplateColumn>
-            <ItemTemplate>
-                <%-- 编辑链接 --%>
-                <asp:HyperLink id="editLink" ImageUrl="~/images/edit.gif" NavigateUrl='<%# "~/DesktopModules/EditDocs.aspx?ItemID=" + DataBinder.Eval(Container.DataItem, "ItemID") +
-                              "&mid=" + ModuleId %>' Visible="<%# IsEditable %>" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        
-        <%--自定义模板列，用于显示文档标题--%>
-        <asp:TemplateColumn HeaderText="Title" HeaderStyle-CssClass="NormalBold">
-            <ItemTemplate>
-                <%-- 文档标题链接 --%>
-                <asp:HyperLink id="docLink" Text='<%# DataBinder.Eval(Container.DataItem, "FileFriendlyName") %>' NavigateUrl='<%# GetBrowsePath(DataBinder.Eval(Container.DataItem, "FileNameUrl").ToString(),
-                                            DataBinder.Eval(Container.DataItem, "Size"),
-                                            (int) DataBinder.Eval(Container.DataItem, "ItemId")) %>' CssClass="Normal" Target="_new" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        
-        <%--绑定列，用于显示文档的所有者--%>
-        <asp:BoundColumn HeaderText="Owner" DataField="CreatedByUser" ItemStyle-CssClass="Normal" HeaderStyle-Cssclass="NormalBold" />
-        
-        <%--绑定列，用于显示文档的区域--%>
-        <asp:BoundColumn HeaderText="Area" DataField="Category" ItemStyle-Wrap="false" ItemStyle-CssClass="Normal" HeaderStyle-Cssclass="NormalBold" />
-        
-        <%--绑定列，用于显示文档最后更新的时间--%>
-        <asp:BoundColumn HeaderText="Last Updated" DataField="CreatedDate" DataFormatString="{0:d}" ItemStyle-CssClass="Normal" HeaderStyle-Cssclass="NormalBold" />
-    </Columns>
-</asp:datagrid>
+<%-- 使用 Repeater 输出表格，避免旧 DataGrid 模板列在当前运行时触发解析兼容问题。 --%>
+<asp:Repeater ID="myDataGrid" EnableViewState="false" runat="server">
+    <HeaderTemplate>
+        <table border="0" width="100%">
+            <tr>
+                <td></td>
+                <td class="NormalBold">Title</td>
+                <td class="NormalBold">Owner</td>
+                <td class="NormalBold">Area</td>
+                <td class="NormalBold">Last Updated</td>
+            </tr>
+    </HeaderTemplate>
+    <ItemTemplate>
+            <tr>
+                <td>
+                    <%-- 编辑链接只在当前用户具备模块编辑权限时显示。 --%>
+                    <asp:HyperLink
+                        ID="editLink"
+                        ImageUrl="~/images/edit.gif"
+                        NavigateUrl='<%# "~/DesktopModules/EditDocs.aspx?ItemID=" + DataBinder.Eval(Container.DataItem, "ItemID") + "&mid=" + ModuleId %>'
+                        Visible="<%# IsEditable %>"
+                        runat="server" />
+                </td>
+                <td>
+                    <asp:HyperLink
+                        ID="docLink"
+                        Text='<%# DataBinder.Eval(Container.DataItem, "FileFriendlyName") %>'
+                        NavigateUrl='<%# GetBrowsePath(DataBinder.Eval(Container.DataItem, "FileNameUrl").ToString(), DataBinder.Eval(Container.DataItem, "Size"), (int) DataBinder.Eval(Container.DataItem, "ItemId")) %>'
+                        CssClass="Normal"
+                        Target="_new"
+                        runat="server" />
+                </td>
+                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "CreatedByUser") %></td>
+                <td class="Normal" nowrap="nowrap"><%# DataBinder.Eval(Container.DataItem, "Category") %></td>
+                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "CreatedDate", "{0:d}") %></td>
+            </tr>
+    </ItemTemplate>
+    <FooterTemplate>
+        </table>
+    </FooterTemplate>
+</asp:Repeater>
