@@ -9,8 +9,6 @@ import gulpUglify from 'gulp-uglify';
 import gulpRename from 'gulp-rename';
 import sourcemaps from 'gulp-sourcemaps';
 import cleanCSS from 'gulp-clean-css';
-import stylus from 'gulp-stylus';
-import poststylus from 'poststylus';
 import postcss from 'gulp-postcss';
 import gulpSass from 'gulp-sass';
 import * as sass from 'sass';
@@ -76,21 +74,6 @@ const coffeejs = () => {
         .pipe(gulp.dest('js/'));
 };
 
-// 编译 Stylus 源文件：*.styl -> *.css。
-const styluscss = () => {
-    return gulp.src('css/**/*.styl', { sourcemaps: true })
-        .pipe(changed('css/', { extension: '.css' }))
-        .pipe(sourcemaps.init())
-        .pipe(stylus({
-            use: [
-                poststylus(postcssProcessors())
-            ]
-        }))
-        .pipe(cleanCSS())
-        .pipe(sourcemaps.write(''))
-        .pipe(gulp.dest('css/'));
-};
-
 // 编译 Sass/SCSS 源文件：*.sass、*.scss -> *.css。
 const sasscss = () => {
     const sassDealer = gulpSass(sass);
@@ -108,7 +91,6 @@ const sasscss = () => {
 let esWatcher = null;
 let coffeeWatcher = null;
 let sassWatcher = null;
-let stylusWatcher = null;
 let watcherSignWatcher = null;
 
 const closeWatchers = () => {
@@ -120,11 +102,6 @@ const closeWatchers = () => {
     if (coffeeWatcher) {
         coffeeWatcher.close();
         coffeeWatcher = null;
-    }
-
-    if (stylusWatcher) {
-        stylusWatcher.close();
-        stylusWatcher = null;
     }
 
     if (sassWatcher) {
@@ -148,11 +125,6 @@ const startWatch = (cb) => {
     if (!coffeeWatcher) {
         coffeeWatcher = gulp.watch('js/**/*.coffee', { ignoreInitial: true, delay: 500 });
         coffeeWatcher.on('all', coffeejs);
-    }
-
-    if (!stylusWatcher) {
-        stylusWatcher = gulp.watch('css/**/*.styl', { ignoreInitial: true, delay: 500 });
-        stylusWatcher.on('all', styluscss);
     }
 
     if (!sassWatcher) {
@@ -184,7 +156,7 @@ const stopWatch = (cb) => {
 };
 
 // VSCode / AI 自动化使用的一次性资源构建任务，不改变 VS 原 startWatch 绑定。
-const assetsBuild = gulp.parallel(esjs, coffeejs, styluscss, sasscss);
+const assetsBuild = gulp.parallel(esjs, coffeejs, sasscss);
 gulp.task('assets:build', assetsBuild);
 
 export { startWatch, stopWatch };
