@@ -187,13 +187,13 @@
     <value>登录失败！</value>
   </data>
   <data name="Signin_LoginImg" xml:space="preserve">
-    <value>/images/signin.gif</value>
+    <value>~/images/signin.gif</value>
   </data>
   <data name="Signin_password" xml:space="preserve">
     <value>密码：</value>
   </data>
   <data name="Signin_RegImg" xml:space="preserve">
-    <value>/images/register.gif</value>
+    <value>~/images/register.gif</value>
   </data>
   <data name="Signin_rememberLogin" xml:space="preserve">
     <value>记住登录状态</value>

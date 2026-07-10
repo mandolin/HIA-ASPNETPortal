@@ -21,8 +21,9 @@ namespace ASPNET.StarterKit.Portal
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
+        // 基类属性的 getter 为 private；本控件需要读取模块配置，因此显式建立自己的注入入口。
         [Dependency]
-        public IModulesDb ModulesConfig { private get; set; }
+        public new IModulesDb ModulesConfig { private get; set; }
 
         [Dependency]
         public ITabsDb TabsConfig { private get; set; }
