@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using System.Data;
 using System.IO;
 using Microsoft.Practices.Unity;
@@ -9,9 +8,6 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class EditDocs : PortalPage<EditDocs>
     {
-        private const int DefaultMaxDocumentUploadBytes = 10 * 1024 * 1024;
-        private const string MaxUploadBytesSettingName = "Portal.Documents.MaxUploadBytes";
-
         private int itemId;
         private int moduleId;
 
@@ -138,14 +134,7 @@ namespace ASPNET.StarterKit.Portal
 
         private static int GetMaxDocumentUploadBytes()
         {
-            string settingValue = ConfigurationManager.AppSettings[MaxUploadBytesSettingName];
-            int maxBytes;
-            if (Int32.TryParse(settingValue, out maxBytes) && maxBytes > 0)
-            {
-                return maxBytes;
-            }
-
-            return DefaultMaxDocumentUploadBytes;
+            return PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.MaxUploadBytes);
         }
 
         private static string FormatFileSize(int bytes)

@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
@@ -22,13 +21,13 @@ namespace ASPNET.StarterKit.Portal
         /// AppSettings key used to override the diagnostics log directory.
         /// 用于覆盖诊断日志目录的 appSettings 键名。
         /// </summary>
-        public const string LogDirectorySettingKey = "Portal.Diagnostics.LogDirectory";
+        public const string LogDirectorySettingKey = PortalSettingKeys.DiagnosticsLogDirectory;
 
         /// <summary>
         /// AppSettings key used to allow detailed ASP.NET error output in development.
         /// 用于允许开发期详细 ASP.NET 错误输出的 appSettings 键名。
         /// </summary>
-        public const string DetailedErrorsSettingKey = "Portal.Diagnostics.EnableDetailedErrors";
+        public const string DetailedErrorsSettingKey = PortalSettingKeys.DiagnosticsDetailedErrors;
 
         private static readonly object LogLock = new object();
 
@@ -104,8 +103,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public static bool AreDetailedErrorsEnabled()
         {
-            bool enabled;
-            return bool.TryParse(ConfigurationManager.AppSettings[DetailedErrorsSettingKey], out enabled) && enabled;
+            return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.DiagnosticsDetailedErrors);
         }
 
         private static string Write(string level, string category, string message, Exception exception, HttpContext context)
@@ -225,7 +223,7 @@ namespace ASPNET.StarterKit.Portal
 
         private static string ResolveLogDirectory()
         {
-            string configuredDirectory = ConfigurationManager.AppSettings[LogDirectorySettingKey];
+            string configuredDirectory = PortalRuntimeSettings.GetString(PortalSettingsRegistry.DiagnosticsLogDirectory);
             if (!string.IsNullOrWhiteSpace(configuredDirectory))
             {
                 string expanded = Environment.ExpandEnvironmentVariables(configuredDirectory.Trim());

@@ -329,7 +329,11 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Components\PortalDiagnostics.cs" />
+    <Compile Include="Components\PortalRuntimeSettings.cs" />
     <Compile Include="Components\PortalRegistrationOptions.cs" />
+    <Compile Include="Components\PortalSettingDefinition.cs" />
+    <Compile Include="Components\PortalSettingKeys.cs" />
+    <Compile Include="Components\PortalSettingsRegistry.cs" />
     <Compile Include="Components\PortalThemeResolver.cs" />
     <Compile Include="Components\IContainerAccessor.cs" />
     <Compile Include="Components\CachedPortalModuleControl.cs">

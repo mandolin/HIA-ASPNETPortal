@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -23,7 +22,7 @@ namespace ASPNET.StarterKit.Portal
         /// AppSettings key used to configure the active portal theme.
         /// 用于配置当前门户主题的 appSettings 键名。
         /// </summary>
-        public const string ThemeNameSettingKey = "Portal.Theme.Name";
+        public const string ThemeNameSettingKey = PortalSettingKeys.ThemeName;
 
         /// <summary>
         /// Safe fallback theme used when the configured theme is empty, invalid, or missing.
@@ -67,7 +66,7 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>A valid theme directory name. 合法的主题目录名称。</returns>
         public static string ResolveThemeName(HttpContext context)
         {
-            string configuredTheme = ConfigurationManager.AppSettings[ThemeNameSettingKey];
+            string configuredTheme = PortalRuntimeSettings.GetString(PortalSettingsRegistry.ThemeName);
             string themeName = string.IsNullOrWhiteSpace(configuredTheme)
                 ? DefaultThemeName
                 : configuredTheme.Trim();

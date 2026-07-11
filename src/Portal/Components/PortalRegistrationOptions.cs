@@ -1,6 +1,3 @@
-using System;
-using System.Configuration;
-
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
@@ -11,7 +8,7 @@ namespace ASPNET.StarterKit.Portal
         /// <summary>
         /// 控制是否开放自主注册的 appSettings 键名。
         /// </summary>
-        public const string AllowSelfRegistrationKey = "Portal.Security.AllowSelfRegistration";
+        public const string AllowSelfRegistrationKey = PortalSettingKeys.AllowSelfRegistration;
 
         /// <summary>
         /// 默认不开放自主注册；只有显式配置为 true 时才显示注册链接并允许访问 Register.aspx。
@@ -20,8 +17,7 @@ namespace ASPNET.StarterKit.Portal
         {
             get
             {
-                bool value;
-                return bool.TryParse(ConfigurationManager.AppSettings[AllowSelfRegistrationKey], out value) && value;
+                return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.AllowSelfRegistration);
             }
         }
     }
