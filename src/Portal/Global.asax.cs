@@ -84,14 +84,17 @@ namespace ASPNET.StarterKit.Portal
             Container.RegisterInstance(
                 ExternalConnectionStringLoader.UnityConnectionStringName,
                 portalConnectionString.ConnectionString);
-            System.Diagnostics.Debug.WriteLine(
-                $"Loaded connection string '{ExternalConnectionStringLoader.LogicalConnectionStringName}' from {portalConnectionString.Source}");
+            PortalDiagnostics.Info(
+                "Startup",
+                $"Loaded connection string '{ExternalConnectionStringLoader.LogicalConnectionStringName}' from {portalConnectionString.Source}; ConfigFile={portalConnectionString.ConfigFile}");
+            PortalDiagnostics.CheckSqlConnection(portalConnectionString.ConnectionString);
 
             // 启动期最小自检：确认关键数据服务和环境覆盖字符串都能从容器解析。
             var usersDbService = Container.Resolve<IUsersDb>();
-            System.Diagnostics.Debug.WriteLine($"Resolved IUsersDb: {usersDbService?.GetType().Name}");
             string testStr = Container.Resolve<string>("testStr");
-            System.Diagnostics.Debug.WriteLine($"Resolved testStr: '{testStr}'");
+            PortalDiagnostics.Info(
+                "Startup",
+                $"Resolved IUsersDb: {usersDbService?.GetType().Name}; Resolved testStr: {!string.IsNullOrEmpty(testStr)}");
 
 
         }
@@ -159,6 +162,10 @@ namespace ASPNET.StarterKit.Portal
             //string TestKey = ConfigurationManager.AppSettings.Get("TestKey").ToString();
             //System.Diagnostics.Debug.WriteLine($"获取TestKey：{TestKey}");
 
+            if (IsGenericErrorPageRequest(Request))
+            {
+                return;
+            }
 
             int tabIndex = GetIntParam("tabindex", 0);
             int tabId = GetIntParam("tabid", 1);
@@ -219,6 +226,34 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// Handles unhandled application errors and records a diagnostics event id.
+        /// 处理未捕获的应用程序错误，并记录诊断事件编号。
+        /// </summary>
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            string eventId = PortalDiagnostics.Unhandled(exception, Context);
+
+            if (IsGenericErrorPageRequest(Request))
+            {
+                return;
+            }
+
+            // 开发环境可用显式开关保留 ASP.NET 详细错误页；后续再升级为密码或角色授权查看。
+            // Development can keep detailed ASP.NET errors by explicit switch; later this should require password or role authorization.
+            if (PortalDiagnostics.AreDetailedErrorsEnabled() && Request.IsLocal)
+            {
+                return;
+            }
+
+            Server.ClearError();
+            Response.Clear();
+            Response.TrySkipIisCustomErrors = true;
+            Response.Redirect("~/GenericErrorPage.aspx?id=" + HttpUtility.UrlEncode(eventId), false);
+            Context.ApplicationInstance.CompleteRequest();
+        }
+
+        /// <summary>
         ///   Handles the AuthenticateRequest event of the Application control.
         ///   If the client is authenticated with the application, then determine
         ///   which security roles he/she belongs to and replace the "User" intrinsic
@@ -274,6 +309,12 @@ namespace ASPNET.StarterKit.Portal
         {
             // 使用 null 合并运算符，如果为 null 或空，则返回 ""
             return request.ApplicationPath?.TrimEnd('/') ?? "";
+        }
+
+        private static bool IsGenericErrorPageRequest(HttpRequest request)
+        {
+            string appRelativePath = request?.AppRelativeCurrentExecutionFilePath;
+            return string.Equals(appRelativePath, "~/GenericErrorPage.aspx", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

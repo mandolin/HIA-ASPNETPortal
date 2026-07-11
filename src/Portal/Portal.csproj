@@ -183,6 +183,7 @@
     <Content Include="DesktopModules\XmlModule.ascx" />
     <Content Include="DesktopModuleTitle.ascx" />
     <Content Include="DesktopPortalBanner.ascx" />
+    <Content Include="GenericErrorPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\1x1.gif" />
     <Content Include="Images\aspnet.gif" />
@@ -327,6 +328,7 @@
     <Compile Include="Components\PortalPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Components\PortalDiagnostics.cs" />
     <Compile Include="Components\PortalRegistrationOptions.cs" />
     <Compile Include="Components\PortalThemeResolver.cs" />
     <Compile Include="Components\IContainerAccessor.cs" />
@@ -517,6 +519,10 @@
     </Compile>
     <Compile Include="DesktopPortalBanner.ascx.designer.cs">
       <DependentUpon>DesktopPortalBanner.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="GenericErrorPage.aspx.cs">
+      <DependentUpon>GenericErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

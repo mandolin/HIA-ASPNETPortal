@@ -83,8 +83,14 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception ex)
             {
-                // 处理异常
-                Message.Text = $"删除失败: {ex.Message}";
+                // 详细异常只进入诊断日志，页面仅展示事件编号，避免泄漏数据库或路径细节。
+                // Detailed exception goes to diagnostics only; the page shows an event id to avoid leaking internals.
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Users.DeleteUser",
+                    "Deleting a user from the admin Users module failed. UserId=" + userId,
+                    ex,
+                    Context);
+                Message.Text = "删除失败，系统已记录本次错误。事件编号：" + eventId;
             }
         }
 
@@ -143,8 +149,14 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception ex)
             {
-                // 处理异常
-                Message.Text = $"数据绑定失败: {ex.Message}";
+                // 详细异常只进入诊断日志，页面仅展示事件编号，避免泄漏数据库或路径细节。
+                // Detailed exception goes to diagnostics only; the page shows an event id to avoid leaking internals.
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Users.BindData",
+                    "Binding users in the admin Users module failed.",
+                    ex,
+                    Context);
+                Message.Text = "数据绑定失败，系统已记录本次错误。事件编号：" + eventId;
             }
         }
 

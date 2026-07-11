@@ -100,11 +100,6 @@ namespace ASPNET.StarterKit.Portal
 
         private static void TraceFallback(HttpContext context, string configuredTheme, string fallbackReason)
         {
-            if (context == null || context.Trace == null)
-            {
-                return;
-            }
-
             string requestedTheme = string.IsNullOrWhiteSpace(configuredTheme) ? "(empty)" : configuredTheme;
             string fallbackKey = requestedTheme + "|" + fallbackReason;
             lock (TraceLock)
@@ -119,13 +114,18 @@ namespace ASPNET.StarterKit.Portal
                 WarnedFallbacks.Add(fallbackKey);
             }
 
-            context.Trace.Warn(
-                TraceCategory,
-                string.Format(
-                    "主题配置已回退到 {0}。 Theme configuration fell back to {0}. Requested='{1}', Reason='{2}'.",
-                    DefaultThemeName,
-                    requestedTheme,
-                    fallbackReason));
+            string warningMessage = string.Format(
+                "主题配置已回退到 {0}。 Theme configuration fell back to {0}. Requested='{1}', Reason='{2}'.",
+                DefaultThemeName,
+                requestedTheme,
+                fallbackReason);
+
+            if (context != null && context.Trace != null)
+            {
+                context.Trace.Warn(TraceCategory, warningMessage);
+            }
+
+            PortalDiagnostics.Warn(TraceCategory, warningMessage, context);
         }
     }
 }
