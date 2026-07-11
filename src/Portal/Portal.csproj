@@ -108,6 +108,7 @@
     <Content Include="Admin\Roles.ascx" />
     <Content Include="Admin\SecurityRoles.aspx" />
     <Content Include="Admin\SiteSettings.ascx" />
+    <Content Include="Admin\SystemHealth.aspx" />
     <Content Include="Admin\TabLayout.aspx" />
     <Content Include="Admin\Tabs.ascx" />
     <Content Include="Admin\Users.ascx" />
@@ -284,6 +285,13 @@
     <Compile Include="Admin\SiteSettings.ascx.designer.cs">
       <DependentUpon>SiteSettings.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\SystemHealth.aspx.cs">
+      <DependentUpon>SystemHealth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SystemHealth.aspx.designer.cs">
+      <DependentUpon>SystemHealth.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\TabLayout.aspx.cs">
       <DependentUpon>TabLayout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -329,10 +337,15 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Components\PortalDiagnostics.cs" />
+    <Compile Include="Components\PortalHealthChecker.cs" />
+    <Compile Include="Components\PortalHealthCheckResult.cs" />
+    <Compile Include="Components\PortalHealthSnapshot.cs" />
+    <Compile Include="Components\PortalHealthStatus.cs" />
     <Compile Include="Components\PortalRuntimeSettings.cs" />
     <Compile Include="Components\PortalRegistrationOptions.cs" />
     <Compile Include="Components\PortalSettingDefinition.cs" />
     <Compile Include="Components\PortalSettingKeys.cs" />
+    <Compile Include="Components\PortalSettingHealthInfo.cs" />
     <Compile Include="Components\PortalSettingsRegistry.cs" />
     <Compile Include="Components\PortalThemeResolver.cs" />
     <Compile Include="Components\IContainerAccessor.cs" />

@@ -221,7 +221,11 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
-        private static string ResolveLogDirectory()
+        /// <summary>
+        /// Resolves the diagnostics log directory used by file logging.
+        /// 解析文件日志使用的诊断日志目录。
+        /// </summary>
+        public static string ResolveLogDirectory()
         {
             string configuredDirectory = PortalRuntimeSettings.GetString(PortalSettingsRegistry.DiagnosticsLogDirectory);
             if (!string.IsNullOrWhiteSpace(configuredDirectory))
