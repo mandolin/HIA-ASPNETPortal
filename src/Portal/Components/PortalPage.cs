@@ -26,6 +26,9 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">事件参数。</param>
         protected override void OnPreInit(EventArgs e)
         {
+            // 主题必须在 PreInit 阶段完成选择，之后 WebForms 才能正确加载 App_Themes 资源。
+            // Theme selection must happen during PreInit so WebForms can load App_Themes resources.
+            PortalThemeResolver.ApplyTheme(this);
             InjectDependencies(); // 注入依赖项。
             base.OnPreInit(e); // 调用基类的 OnPreInit 方法。
         }

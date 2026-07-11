@@ -1,0 +1,22 @@
+@import url("../Default/Default.css");
+
+/*
+    ThemeProbe is only a verification fixture for P1.2 theme switching.
+    ThemeProbe 仅用于验证 P1.2 主题切换机制，不作为正式视觉重设计。
+*/
+
+.HeadBg {
+    background-color: #1f4f7a;
+}
+
+.SiteTitle {
+    color: #f5f5f5;
+}
+
+.SelectedTab {
+    color: #1f4f7a;
+}
+
+.OtherTabsBg {
+    background-color: #4f6678;
+}

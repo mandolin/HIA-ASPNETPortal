@@ -112,6 +112,7 @@
     <Content Include="Admin\Tabs.ascx" />
     <Content Include="Admin\Users.ascx" />
     <Content Include="App_Themes\Default\Default.css" />
+    <Content Include="App_Themes\ThemeProbe\Default.css" />
     <Content Include="Config\Templates\connectionStrings.config" />
     <Content Include="Config\UnityCfg.dev.template.xml" />
     <Content Include="Config\UnityCfg.prod.template.xml" />
@@ -207,6 +208,14 @@
     <Content Include="Images\up.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AccessDenied.aspx.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditAccessDenied.aspx.cs">
+      <DependentUpon>EditAccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Admin\Logoff.aspx.cs">
       <DependentUpon>Logoff.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -241,6 +250,10 @@
     </Compile>
     <Compile Include="Admin\ModuleSettings.aspx.designer.cs">
       <DependentUpon>ModuleSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\NotImplemented.aspx.cs">
+      <DependentUpon>NotImplemented.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -315,6 +328,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Components\PortalRegistrationOptions.cs" />
+    <Compile Include="Components\PortalThemeResolver.cs" />
     <Compile Include="Components\IContainerAccessor.cs" />
     <Compile Include="Components\CachedPortalModuleControl.cs">
     </Compile>

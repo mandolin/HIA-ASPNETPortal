@@ -1,25 +1,8 @@
-<%@ Page Language="c#" AutoEventWireup="True" MasterPageFile="../Default.master" %>
+<%@ Page Language="c#" CodeBehind="NotImplemented.aspx.cs" AutoEventWireup="True"
+    Inherits="ASPNET.StarterKit.Portal.NotImplemented" MasterPageFile="../Default.master" %>
 
 <%@ OutputCache Duration="600" VaryByParam="title" %>
 <%@ Import Namespace="ASPNET.StarterKit.Portal" %>
-<script runat="server">
-
-    /// <summary>
-    ///   The Page_Load event on this Page is used to obtain the title
-    ///   of the fictious content item.
-    /// </summary>
-    /// <remarks>
-    ///   This page is the target for the fictious links in the sample data.
-    /// </remarks>
-    private void Page_Load(Object sender, EventArgs e)
-    {
-        if (Request.Params["title"] != null)
-        {
-            title.InnerHtml = Request.Params["title"];
-        }
-    }
-
-</script>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <table width="500" border="0">
         <tbody>

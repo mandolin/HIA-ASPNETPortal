@@ -1,4 +1,5 @@
-<%@ Page Language="c#" AutoEventWireup="True" MasterPageFile="../Default.master" %>
+<%@ Page Language="c#" CodeBehind="EditAccessDenied.aspx.cs" AutoEventWireup="True"
+    Inherits="ASPNET.StarterKit.Portal.EditAccessDenied" MasterPageFile="../Default.master" %>
 
 <%@ OutputCache Duration="36000" VaryByParam="none" %>
 <%@ Import Namespace="ASPNET.StarterKit.Portal" %>
