@@ -14,9 +14,9 @@
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <tr>
                         <td align="left">
-                            <%-- 显示标题 --%>
-                            <span id="title" class="Head" runat="server">
-                                <%= lang.Admin_ManageUsers_ManageUser %></span>
+                            <%-- 显示标题。使用 Label 避免包含代码块的 HtmlControl 在运行时修改文本时报错。 --%>
+                            <asp:Label ID="TitleText" CssClass="Head" Text="<%$ Resources:lang,Admin_ManageUsers_ManageUser %>"
+                                runat="server" />
                         </td>
                     </tr>
                     <tr>
@@ -26,6 +26,67 @@
                         </td>
                     </tr>
                 </table>
+            </td>
+        </tr>
+
+        <%-- P2.3 注册审核状态，只展示并提供最小批准动作。 --%>
+        <tr>
+            <td class="Normal">
+                Registration Status:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="RegistrationStatus" runat="server" />
+                &nbsp;
+                <asp:LinkButton ID="ApproveRegistrationBtn" CssClass="CommandButton" Text="Approve Registration"
+                    CausesValidation="False" Visible="False" runat="server" OnClick="ApproveRegistration_Click" />
+            </td>
+        </tr>
+        <tr>
+            <td class="Normal">
+                Registration Source:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="RegistrationSource" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td class="Normal">
+                Employee Code:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="EmployeeCodeText" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td class="Normal">
+                Invite Code:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="InviteCodeText" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td class="Normal">
+                Registered UTC:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="RegisteredUtcText" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td class="Normal">
+                Approved UTC:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="ApprovedUtcText" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td class="Normal">
+                <asp:Label ID="RegistrationMessage" CssClass="NormalRed" runat="server" />
             </td>
         </tr>
         

@@ -35,5 +35,23 @@ namespace ASPNET.StarterKit.Portal
         /// Self-registration switch.
         /// </summary>
         public const string AllowSelfRegistration = "Portal.Security.AllowSelfRegistration";
+
+        /// <summary>
+        /// 自主注册后是否需要管理员审核。
+        /// Whether self-registration requires administrator approval.
+        /// </summary>
+        public const string RequireRegistrationApproval = "Portal.Security.RequireRegistrationApproval";
+
+        /// <summary>
+        /// 临时注册链接默认有效天数。
+        /// Default validity days for temporary registration invite links.
+        /// </summary>
+        public const string RegistrationInviteDefaultExpiryDays = "Portal.Registration.InviteDefaultExpiryDays";
+
+        /// <summary>
+        /// 是否允许员工号暂未绑定的注册继续进入待审核。
+        /// Whether registrations with pending employee binding may continue to approval.
+        /// </summary>
+        public const string AllowPendingEmployeeBinding = "Portal.Registration.AllowPendingEmployeeBinding";
     }
 }

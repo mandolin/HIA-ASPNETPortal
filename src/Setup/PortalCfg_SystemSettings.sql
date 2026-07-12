@@ -90,6 +90,33 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Security.RequireRegistrationApproval')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Security.RequireRegistrationApproval', N'true', N'Boolean', N'Database', 0, N'system', SYSUTCDATETIME())
+END
+GO
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Registration.InviteDefaultExpiryDays')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Registration.InviteDefaultExpiryDays', N'7', N'Integer', N'Database', 0, N'system', SYSUTCDATETIME())
+END
+GO
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Registration.AllowPendingEmployeeBinding')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Registration.AllowPendingEmployeeBinding', N'false', N'Boolean', N'Database', 0, N'system', SYSUTCDATETIME())
+END
+GO
+
 IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Documents.MaxUploadBytes')
 BEGIN
     INSERT INTO [dbo].[PortalCfg_SystemSettings]

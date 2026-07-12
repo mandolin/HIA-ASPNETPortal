@@ -25,6 +25,8 @@ namespace ASPNET.StarterKit.Portal
             {
                 Response.Redirect("~/Admin/AccessDenied.aspx");
             }
+
+            ConfigureRegistrationForm();
         }
 
         // 注册按钮点击事件处理程序
@@ -42,25 +44,88 @@ namespace ASPNET.StarterKit.Portal
                 var userName = Name.Text.Trim();
                 // 从表单中获取用户输入的电子邮件地址，并去除前后空格
                 var email = Email.Text.Trim();
+                string employeeCode = EmployeeCode.Text.Trim();
+                string inviteCode = CurrentInviteCode;
+                string inviteMessage;
+
+                if (!UsersDB.ValidateRegistrationInvite(inviteCode, out inviteMessage))
+                {
+                    Message.Text = inviteMessage;
+                    return;
+                }
+
+                if (PortalRegistrationOptions.IsEmployeeCodeRequired(inviteCode) &&
+                    string.IsNullOrWhiteSpace(employeeCode) &&
+                    !PortalRegistrationOptions.AllowPendingEmployeeBinding)
+                {
+                    Message.Text = "Employee Code is required for invitation registration.";
+                    return;
+                }
 
                 // 尝试将新用户添加到门户用户数据库中
                 // 如果返回值大于-1，则表示用户成功添加到数据库
-                if ((UsersDB.AddUser(userName, email, PortalSecurity.Encrypt(Password.Text))) > -1)
+                int userId;
+                try
                 {
-                    // 设置用户的认证名称为userId
-                    FormsAuthentication.SetAuthCookie(userName, false);
+                    userId = UsersDB.AddSelfRegisteredUser(
+                        userName,
+                        email,
+                        PortalSecurity.Encrypt(Password.Text),
+                        employeeCode,
+                        inviteCode,
+                        PortalRegistrationOptions.RequireRegistrationApproval);
+                }
+                catch (Exception ex)
+                {
+                    string eventId = PortalDiagnostics.Error(
+                        "Admin.Register.SelfRegistration",
+                        "Self-registration failed for userName=" + userName + "; email=" + email,
+                        ex,
+                        Context);
+                    Message.Text = "Registration failed. The system recorded this error. Event ID: " + eventId;
+                    return;
+                }
 
-                    // 重定向浏览器回到首页
+                if (userId > -1)
+                {
+                    if (PortalRegistrationOptions.RequireRegistrationApproval)
+                    {
+                        // 默认注册后进入待审核，不自动登录；管理员批准后用户才能登录。
+                        // By default a new registration is pending approval and cannot sign in until approved.
+                        RegisterBtn.Visible = false;
+                        Message.CssClass = "Normal";
+                        Message.Text = "Registration submitted. Please wait for administrator approval.";
+                        return;
+                    }
+
+                    // 不需要审核时沿用旧行为：注册成功后直接登录。
+                    // When approval is disabled, keep the legacy behavior and sign in immediately.
+                    FormsAuthentication.SetAuthCookie(userName, false);
                     Response.Redirect("~/DesktopDefault.aspx");
                 }
                 else
                 {
                     // 如果注册失败，则更新Message标签内容
-                    Message.Text = "Registration Failed!  <" + "u" + ">" + userName + " or " + email + "<" + "/u" +
-                                   "> is already registered." + "<" + "br" + ">" +
-                                   "Please register using a different email address.";
+                    Message.Text = "Registration failed. The user name or email may already exist, or registration metadata is not available.";
                 }
             }
+        }
+
+        private string CurrentInviteCode
+        {
+            get
+            {
+                string inviteCode = Request.QueryString["invite"];
+                return string.IsNullOrWhiteSpace(inviteCode) ? string.Empty : inviteCode.Trim();
+            }
+        }
+
+        private void ConfigureRegistrationForm()
+        {
+            bool employeeCodeRequired = PortalRegistrationOptions.IsEmployeeCodeRequired(CurrentInviteCode) &&
+                                        !PortalRegistrationOptions.AllowPendingEmployeeBinding;
+            EmployeeCodeRequiredValidator.Enabled = employeeCodeRequired;
+            EmployeeCodeRequiredHint.Visible = employeeCodeRequired;
         }
     }
 }

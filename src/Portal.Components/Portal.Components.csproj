@@ -108,10 +108,12 @@
     <Compile Include="IRolesDb.cs" />
     <Compile Include="ITabsDb.cs" />
     <Compile Include="IUsersDb.cs" />
+    <Compile Include="IUserRegistrationInfo.cs" />
     <Compile Include="IPortalDb.cs" />
     <Compile Include="IModuleDefinitionItem.cs" />
     <Compile Include="IModuleItem.cs" />
     <Compile Include="PortalRoles.cs" />
+    <Compile Include="PortalUserRegistrationStatuses.cs" />
     <Compile Include="PortalSecurity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRoleItem.cs" />

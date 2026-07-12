@@ -26,6 +26,16 @@ namespace ASPNET.StarterKit.Portal
         public DbSet<RoleItem> Roles { get; set; }
 
         /// <summary>
+        /// 用户注册审核记录。
+        /// </summary>
+        public DbSet<UserRegistrationItem> UserRegistrations { get; set; }
+
+        /// <summary>
+        /// 临时注册链接记录。
+        /// </summary>
+        public DbSet<RegistrationInviteItem> RegistrationInvites { get; set; }
+
+        /// <summary>
         /// 在模型构建时进行配置。
         /// </summary>
         /// <param name="modelBuilder">模型构建器。</param>
@@ -46,6 +56,11 @@ namespace ASPNET.StarterKit.Portal
                     // 设置角色ID作为外键
                     map.MapRightKey("UserId");
                 });
+
+            // 注册审核表不建立 EF 导航关系，保持对旧 Portal_Users 映射的低侵入扩展。
+            // The review tables intentionally avoid EF navigation properties to keep legacy user mapping stable.
+            modelBuilder.Entity<RegistrationInviteItem>()
+                .HasKey(invite => invite.InviteCode);
         }
     }
 }

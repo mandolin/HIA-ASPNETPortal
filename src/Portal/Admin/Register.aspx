@@ -62,6 +62,16 @@
                             <asp:RequiredFieldValidator ControlToValidate="Email" ErrorMessage="'Email' must not be left blank."
                                 runat="server" ID="RequiredFieldValidator2" />
                             <p>
+                            <%-- 员工号：企业临时注册链接流程中必填，普通自注册流程暂不强制。 --%>
+                            Employee Code:
+                            <asp:Label ID="EmployeeCodeRequiredHint" CssClass="NormalRed" Text="*" Visible="false" runat="server" />
+                            <br>
+                            <asp:TextBox size="25" ID="EmployeeCode" runat="server" />
+                            &nbsp;
+                            <asp:RequiredFieldValidator ControlToValidate="EmployeeCode" Display="Dynamic"
+                                ErrorMessage="'Employee Code' must not be left blank for invitation registration."
+                                Enabled="false" runat="server" ID="EmployeeCodeRequiredValidator" />
+                            <p>
                             <%-- 密码输入 --%>
                             Password:
                             <br>
@@ -84,7 +94,7 @@
                                 ErrorMessage="Password fields do not match." runat="server" ID="CompareValidator1" />
                             <p>
                             <%-- 注册按钮 --%>
-                            <asp:LinkButton class="CommandButton" Text="Register and Sign In Now" runat="server"
+                            <asp:LinkButton class="CommandButton" Text="Submit Registration" runat="server"
                                 ID="RegisterBtn" OnClick="RegisterBtn_Click" />
                             <br>
                             <br>

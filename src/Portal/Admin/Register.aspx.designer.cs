@@ -60,6 +60,33 @@ namespace ASPNET.StarterKit.Portal
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
+        /// EmployeeCodeRequiredHint 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EmployeeCodeRequiredHint;
+
+        /// <summary>
+        /// EmployeeCode 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EmployeeCode;
+
+        /// <summary>
+        /// EmployeeCodeRequiredValidator 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmployeeCodeRequiredValidator;
+
+        /// <summary>
         /// Password 控件。
         /// </summary>
         /// <remarks>

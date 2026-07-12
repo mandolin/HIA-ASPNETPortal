@@ -24,6 +24,43 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Security");
 
+        public static readonly PortalSettingDefinition RequireRegistrationApproval =
+            new PortalSettingDefinition(
+                PortalSettingKeys.RequireRegistrationApproval,
+                "自主注册需要审核",
+                "控制自主注册用户是否必须先由管理员批准才能登录；默认开启。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Security");
+
+        public static readonly PortalSettingDefinition RegistrationInviteDefaultExpiryDays =
+            new PortalSettingDefinition(
+                PortalSettingKeys.RegistrationInviteDefaultExpiryDays,
+                "注册链接默认有效天数",
+                "临时注册链接默认有效天数；第一版用于设计与后续创建入口。",
+                PortalSettingValueType.Integer,
+                "7",
+                true,
+                false,
+                "Admins",
+                "Registration",
+                minIntegerValue: 1);
+
+        public static readonly PortalSettingDefinition AllowPendingEmployeeBinding =
+            new PortalSettingDefinition(
+                PortalSettingKeys.AllowPendingEmployeeBinding,
+                "允许待绑定员工号注册",
+                "员工号绑定失败时是否仍允许注册进入待审核；默认不允许。",
+                PortalSettingValueType.Boolean,
+                "false",
+                true,
+                false,
+                "Admins",
+                "Registration");
+
         public static readonly PortalSettingDefinition MaxUploadBytes =
             new PortalSettingDefinition(
                 PortalSettingKeys.MaxUploadBytes,
@@ -77,6 +114,9 @@ namespace ASPNET.StarterKit.Portal
             new List<PortalSettingDefinition>
             {
                 AllowSelfRegistration,
+                RequireRegistrationApproval,
+                RegistrationInviteDefaultExpiryDays,
+                AllowPendingEmployeeBinding,
                 MaxUploadBytes,
                 ThemeName,
                 DiagnosticsDetailedErrors,

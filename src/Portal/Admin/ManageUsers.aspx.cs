@@ -137,8 +137,37 @@ namespace ASPNET.StarterKit.Portal
             UsersDB.UpdateUser(userId, Email.Text, PortalSecurity.Encrypt(Password.Text));
 
             // 重定向到此页面并附带修正后的查询字符串参数
-            Response.Redirect("~/Admin/ManageUsers.aspx?userId=" + userId + "&username=" + Email.Text + "&tabindex=" +
+            Response.Redirect("~/Admin/ManageUsers.aspx?userId=" + userId + "&username=" + Uri.EscapeDataString(userName) + "&tabindex=" +
                               tabIndex + "&tabid=" + tabId);
+        }
+
+        /// <summary>
+        /// 批准当前用户的注册申请。
+        /// </summary>
+        protected void ApproveRegistration_Click(Object sender, EventArgs e)
+        {
+            PortalAuthorization.RequireAdmin();
+
+            try
+            {
+                string approvedBy = Context.User == null || Context.User.Identity == null
+                    ? "admin"
+                    : Context.User.Identity.Name;
+                UsersDB.ApproveUser(userId, approvedBy);
+                RegistrationMessage.CssClass = "Normal";
+                RegistrationMessage.Text = "Registration approved.";
+                BindData();
+            }
+            catch (Exception ex)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.ApproveRegistration",
+                    "Approving user registration failed. UserId=" + userId,
+                    ex,
+                    Context);
+                RegistrationMessage.CssClass = "NormalRed";
+                RegistrationMessage.Text = "审核失败，系统已记录本次错误。事件编号：" + eventId;
+            }
         }
 
         /// <summary>
@@ -169,11 +198,13 @@ namespace ASPNET.StarterKit.Portal
             var user = UsersDB.GetSingleUser(userName);
 
             Email.Text = user.Email;
+            BindRegistrationInfo(user.UserId);
 
             // 添加用户名到标题
             if (!String.IsNullOrEmpty(userName))
             {
-                title.InnerText = "Manage User: " + userName;
+                // 标题控件使用 Label，避免旧 WebForms 代码块与 InnerText 修改冲突。
+                TitleText.Text = "Manage User: " + userName;
             }
 
             // 绑定用户所属角色到 DataList
@@ -187,6 +218,35 @@ namespace ASPNET.StarterKit.Portal
             // 绑定所有门户角色到下拉列表
             allRoles.DataSource = RolesDB.GetPortalRoles(portalSettings.PortalId);
             allRoles.DataBind();
+        }
+
+        private void BindRegistrationInfo(int currentUserId)
+        {
+            IUserRegistrationInfo registration = UsersDB.GetRegistrationInfo(currentUserId);
+
+            RegistrationStatus.Text = registration.Status;
+            RegistrationSource.Text = registration.Source;
+            EmployeeCodeText.Text = EmptyToNone(registration.EmployeeCode);
+            InviteCodeText.Text = EmptyToNone(registration.InviteCode);
+            RegisteredUtcText.Text = FormatUtc(registration.RegisteredUtc);
+            ApprovedUtcText.Text = FormatUtc(registration.ApprovedUtc);
+            ApproveRegistrationBtn.Visible =
+                string.Equals(registration.Status, PortalUserRegistrationStatuses.PendingApproval, StringComparison.Ordinal);
+        }
+
+        private static string EmptyToNone(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+        }
+
+        private static string FormatUtc(DateTime value)
+        {
+            return value == DateTime.MinValue ? "(legacy)" : value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'");
+        }
+
+        private static string FormatUtc(DateTime? value)
+        {
+            return value.HasValue ? FormatUtc(value.Value) : "(none)";
         }
     }
 }
