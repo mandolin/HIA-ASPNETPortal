@@ -23,6 +23,5 @@
     "docwriter.style": "JSDoc",
     "files.encoding": "utf8",
     "dotnet.preferCSharpExtension": true,
-    "dotnet.server.useOmnisharp": true,
-    "omnisharp.useModernNet": false
+    "dotnet.server.useOmnisharp": false
 }
