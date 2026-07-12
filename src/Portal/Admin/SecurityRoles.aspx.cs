@@ -113,6 +113,13 @@ namespace ASPNET.StarterKit.Portal
             {
                 // 向数据库中添加新的用户角色
                 RolesDB.AddUserRole(roleId, userId);
+                PortalOperationAudit.Record(
+                    "UserAdministration",
+                    "AddRole",
+                    "User",
+                    userId.ToString(),
+                    "Added user to role '" + roleName + "'.",
+                    Context);
             }
 
             // 重新绑定列表
@@ -125,7 +132,7 @@ namespace ASPNET.StarterKit.Portal
         //
         //*******************************************************
 
-        private void usersInRole_ItemCommand(object sender, DataListCommandEventArgs e)
+        protected void usersInRole_ItemCommand(object sender, DataListCommandEventArgs e)
         {
             // 获取用户的ID
             var userId = (int)usersInRole.DataKeys[e.Item.ItemIndex];
@@ -134,6 +141,13 @@ namespace ASPNET.StarterKit.Portal
             {
                 // 更新数据库
                 RolesDB.DeleteUserRole(roleId, userId);
+                PortalOperationAudit.Record(
+                    "UserAdministration",
+                    "RemoveRole",
+                    "User",
+                    userId.ToString(),
+                    "Removed user from role '" + roleName + "'.",
+                    Context);
 
                 // 确保项目不可编辑
                 usersInRole.EditItemIndex = -1;

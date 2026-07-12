@@ -192,6 +192,34 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// 拒绝处于待审核状态的用户注册；管理员后续仍可重新批准。
+        /// Rejects a pending user registration; an administrator may approve it later.
+        /// </summary>
+        /// <param name="userId">用户编号。User id.</param>
+        /// <param name="rejectedBy">拒绝操作人。Rejecting operator.</param>
+        public void RejectUser(int userId, string rejectedBy)
+        {
+            if (!HasRegistrationTable())
+            {
+                throw new InvalidOperationException("Registration metadata table is not available.");
+            }
+
+            var registration = _context.UserRegistrations.SingleOrDefault(i => i.UserId == userId);
+            if (registration == null)
+            {
+                throw new InvalidOperationException("Registration metadata does not exist for this user.");
+            }
+
+            registration.Status = PortalUserRegistrationStatuses.Rejected;
+            registration.RejectedUtc = DateTime.UtcNow;
+            registration.RejectedBy = Normalize(rejectedBy);
+            registration.ApprovedUtc = null;
+            registration.ApprovedBy = null;
+            registration.ReviewNote = null;
+            _context.SaveChanges();
+        }
+
+        /// <summary>
         /// 读取用户注册审核信息；旧库或旧用户按 legacy approved 展示。
         /// </summary>
         /// <param name="userId">用户ID。</param>

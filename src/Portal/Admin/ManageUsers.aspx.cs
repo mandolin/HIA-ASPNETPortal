@@ -121,6 +121,13 @@ namespace ASPNET.StarterKit.Portal
 
             // 将新用户角色添加到数据库
             RolesDB.AddUserRole(roleId, userId);
+            PortalOperationAudit.Record(
+                "UserAdministration",
+                "AddRole",
+                "User",
+                userId.ToString(),
+                "Added role '" + (allRoles.SelectedItem == null ? roleId.ToString() : allRoles.SelectedItem.Text) + "' to user.",
+                Context);
 
             // 重新绑定列表
             BindData();
@@ -135,6 +142,15 @@ namespace ASPNET.StarterKit.Portal
         {
             // 在数据库中更新用户记录
             UsersDB.UpdateUser(userId, Email.Text, PortalSecurity.Encrypt(Password.Text));
+            // 审计仅记录资料已更新，不记录密码、密码摘要或邮箱原文。
+            // The audit records profile update only, never password material or the raw email address.
+            PortalOperationAudit.Record(
+                "UserAdministration",
+                "UpdateProfile",
+                "User",
+                userId.ToString(),
+                "Updated user profile.",
+                Context);
 
             // 重定向到此页面并附带修正后的查询字符串参数
             Response.Redirect("~/Admin/ManageUsers.aspx?userId=" + userId + "&username=" + Uri.EscapeDataString(userName) + "&tabindex=" +
@@ -154,6 +170,13 @@ namespace ASPNET.StarterKit.Portal
                     ? "admin"
                     : Context.User.Identity.Name;
                 UsersDB.ApproveUser(userId, approvedBy);
+                PortalOperationAudit.Record(
+                    "Registration",
+                    "Approve",
+                    "User",
+                    userId.ToString(),
+                    "Registration approved.",
+                    Context);
                 RegistrationMessage.CssClass = "Normal";
                 RegistrationMessage.Text = "Registration approved.";
                 BindData();
@@ -171,16 +194,65 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// 拒绝当前待审核用户的注册申请；后续仍可通过批准动作恢复为可登录状态。
+        /// Rejects the current pending registration; a later approval may restore sign-in eligibility.
+        /// </summary>
+        protected void RejectRegistration_Click(object sender, EventArgs e)
+        {
+            PortalAuthorization.RequireAdmin();
+
+            try
+            {
+                string rejectedBy = Context.User == null || Context.User.Identity == null
+                    ? "admin"
+                    : Context.User.Identity.Name;
+                UsersDB.RejectUser(userId, rejectedBy);
+                PortalOperationAudit.Record(
+                    "Registration",
+                    "Reject",
+                    "User",
+                    userId.ToString(),
+                    "Registration rejected.",
+                    Context);
+                RegistrationMessage.CssClass = "Normal";
+                RegistrationMessage.Text = "Registration rejected.";
+                BindData();
+            }
+            catch (Exception ex)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.RejectRegistration",
+                    "Rejecting user registration failed. UserId=" + userId,
+                    ex,
+                    Context);
+                RegistrationMessage.CssClass = "NormalRed";
+                RegistrationMessage.Text = "拒绝审核失败，系统已记录本次错误。事件编号：" + eventId;
+            }
+        }
+
+        /// <summary>
         /// 处理用户角色删除命令。
         /// </summary>
         /// <param name="sender">发送者对象。</param>
         /// <param name="e">事件参数。</param>
-        private void UserRoles_ItemCommand(object sender, DataListCommandEventArgs e)
+        protected void UserRoles_ItemCommand(object sender, DataListCommandEventArgs e)
         {
             var roleId = (int)userRoles.DataKeys[e.Item.ItemIndex];
 
+            if (!string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
             // 更新数据库
             RolesDB.DeleteUserRole(roleId, userId);
+            PortalOperationAudit.Record(
+                "UserAdministration",
+                "RemoveRole",
+                "User",
+                userId.ToString(),
+                "Removed role id " + roleId + " from user.",
+                Context);
 
             // 确保项不可编辑
             userRoles.EditItemIndex = -1;
@@ -230,7 +302,12 @@ namespace ASPNET.StarterKit.Portal
             InviteCodeText.Text = EmptyToNone(registration.InviteCode);
             RegisteredUtcText.Text = FormatUtc(registration.RegisteredUtc);
             ApprovedUtcText.Text = FormatUtc(registration.ApprovedUtc);
+            // 待审核可批准；已拒绝记录也允许管理员重新批准，避免把最小审核动作做成不可逆死路。
+            // Pending registrations can be approved, and rejected records may be approved again by an administrator.
             ApproveRegistrationBtn.Visible =
+                string.Equals(registration.Status, PortalUserRegistrationStatuses.PendingApproval, StringComparison.Ordinal) ||
+                string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal);
+            RejectRegistrationBtn.Visible =
                 string.Equals(registration.Status, PortalUserRegistrationStatuses.PendingApproval, StringComparison.Ordinal);
         }
 

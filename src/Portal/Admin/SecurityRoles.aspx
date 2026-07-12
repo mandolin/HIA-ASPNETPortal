@@ -64,7 +64,7 @@
                             &nbsp;
                         </td>
                         <td>
-                            <asp:DataList ID="usersInRole" RepeatColumns="2" DataKeyField="UserId" runat="server">
+                            <asp:DataList ID="usersInRole" RepeatColumns="2" DataKeyField="UserId" OnItemCommand="usersInRole_ItemCommand" runat="server">
                                 <ItemStyle Width="225" />
                                 <ItemTemplate>
                                     &nbsp;&nbsp;

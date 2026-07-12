@@ -88,6 +88,16 @@ namespace ASPNET.StarterKit.Portal
 
                 if (userId > -1)
                 {
+                    // 注册成功后记录状态变更审计；审计缺表或写入失败不会阻断注册结果。
+                    // Audit the successful state change; missing or failed auditing never blocks registration.
+                    PortalOperationAudit.Record(
+                        "Registration",
+                        "Submit",
+                        "User",
+                        userId.ToString(),
+                        "Self-registration submitted.",
+                        Context);
+
                     if (PortalRegistrationOptions.RequireRegistrationApproval)
                     {
                         // 默认注册后进入待审核，不自动登录；管理员批准后用户才能登录。

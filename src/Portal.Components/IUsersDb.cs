@@ -42,6 +42,12 @@ namespace ASPNET.StarterKit.Portal
         void ApproveUser(int userId, string approvedBy);
 
         /// <summary>
+        /// 拒绝用户注册。
+        /// Rejects a user registration.
+        /// </summary>
+        void RejectUser(int userId, string rejectedBy);
+
+        /// <summary>
         /// 获取用户注册审核信息。
         /// Gets registration review information for a user.
         /// </summary>

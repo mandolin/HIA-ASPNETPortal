@@ -42,6 +42,11 @@ namespace ASPNET.StarterKit.Portal
         protected global::System.Web.UI.WebControls.LinkButton ApproveRegistrationBtn;
 
         /// <summary>
+        /// RejectRegistrationBtn 控件。
+        /// </summary>
+        protected global::System.Web.UI.WebControls.LinkButton RejectRegistrationBtn;
+
+        /// <summary>
         /// RegistrationSource 控件。
         /// </summary>
         /// <remarks>

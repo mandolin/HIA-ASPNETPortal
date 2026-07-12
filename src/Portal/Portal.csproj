@@ -108,6 +108,9 @@
     <Content Include="Admin\Roles.ascx" />
     <Content Include="Admin\SecurityRoles.aspx" />
     <Content Include="Admin\SiteSettings.ascx" />
+    <Content Include="Admin\DiagnosticLogDetail.aspx" />
+    <Content Include="Admin\DiagnosticsLogs.aspx" />
+    <Content Include="Admin\OperationAudits.aspx" />
     <Content Include="Admin\SystemHealth.aspx" />
     <Content Include="Admin\TabLayout.aspx" />
     <Content Include="Admin\Tabs.ascx" />
@@ -285,6 +288,27 @@
     <Compile Include="Admin\SiteSettings.ascx.designer.cs">
       <DependentUpon>SiteSettings.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DiagnosticLogDetail.aspx.cs">
+      <DependentUpon>DiagnosticLogDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DiagnosticLogDetail.aspx.designer.cs">
+      <DependentUpon>DiagnosticLogDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DiagnosticsLogs.aspx.cs">
+      <DependentUpon>DiagnosticsLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DiagnosticsLogs.aspx.designer.cs">
+      <DependentUpon>DiagnosticsLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\OperationAudits.aspx.cs">
+      <DependentUpon>OperationAudits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\OperationAudits.aspx.designer.cs">
+      <DependentUpon>OperationAudits.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\SystemHealth.aspx.cs">
       <DependentUpon>SystemHealth.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -333,10 +357,15 @@
     <Compile Include="Components\PortalAuthorization.cs" />
     <Compile Include="Components\PortalContext.cs" />
     <Compile Include="Components\PortalModulePathValidator.cs" />
+    <Compile Include="Components\PortalOperationAudit.cs" />
     <Compile Include="Components\PortalPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Components\PortalDiagnostics.cs" />
+    <Compile Include="Components\PortalDiagnosticEntry.cs" />
+    <Compile Include="Components\PortalDiagnosticQuery.cs" />
+    <Compile Include="Components\PortalDiagnosticQueryService.cs" />
+    <Compile Include="Components\PortalDiagnosticSanitizer.cs" />
     <Compile Include="Components\PortalHealthChecker.cs" />
     <Compile Include="Components\PortalHealthCheckResult.cs" />
     <Compile Include="Components\PortalHealthSnapshot.cs" />

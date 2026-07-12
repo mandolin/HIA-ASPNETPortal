@@ -110,6 +110,46 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Diagnostics");
 
+        public static readonly PortalSettingDefinition DiagnosticsMaxFileBytes =
+            new PortalSettingDefinition(
+                PortalSettingKeys.DiagnosticsMaxFileBytes,
+                "诊断日志单文件大小上限",
+                "结构化诊断日志单个文件允许的最大字节数；达到上限后自动滚动到下一个序号文件。",
+                PortalSettingValueType.Integer,
+                "10485760",
+                false,
+                true,
+                "Admins",
+                "Diagnostics",
+                minIntegerValue: 1024,
+                maxIntegerValue: 104857600);
+
+        public static readonly PortalSettingDefinition DiagnosticsRetentionDays =
+            new PortalSettingDefinition(
+                PortalSettingKeys.DiagnosticsRetentionDays,
+                "诊断日志保留天数",
+                "结构化诊断日志保留的天数；写入新事件时每天最多执行一次受限清理。",
+                PortalSettingValueType.Integer,
+                "90",
+                false,
+                true,
+                "Admins",
+                "Diagnostics",
+                minIntegerValue: 1,
+                maxIntegerValue: 3650);
+
+        public static readonly PortalSettingDefinition DiagnosticsAllowAdminDetailView =
+            new PortalSettingDefinition(
+                PortalSettingKeys.DiagnosticsAllowAdminDetailView,
+                "允许管理员查看诊断详情",
+                "控制 Admins 是否可查看已净化的异常详情、物理路径、用户名、IP 和 User-Agent。",
+                PortalSettingValueType.Boolean,
+                "true",
+                false,
+                true,
+                "Admins",
+                "Diagnostics");
+
         private static readonly IList<PortalSettingDefinition> AllDefinitions =
             new List<PortalSettingDefinition>
             {
@@ -120,7 +160,10 @@ namespace ASPNET.StarterKit.Portal
                 MaxUploadBytes,
                 ThemeName,
                 DiagnosticsDetailedErrors,
-                DiagnosticsLogDirectory
+                DiagnosticsLogDirectory,
+                DiagnosticsMaxFileBytes,
+                DiagnosticsRetentionDays,
+                DiagnosticsAllowAdminDetailView
             }.AsReadOnly();
 
         /// <summary>

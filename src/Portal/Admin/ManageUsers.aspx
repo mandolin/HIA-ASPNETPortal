@@ -39,6 +39,9 @@
                 &nbsp;
                 <asp:LinkButton ID="ApproveRegistrationBtn" CssClass="CommandButton" Text="Approve Registration"
                     CausesValidation="False" Visible="False" runat="server" OnClick="ApproveRegistration_Click" />
+                &nbsp;
+                <asp:LinkButton ID="RejectRegistrationBtn" CssClass="CommandButton" Text="Reject Registration"
+                    CausesValidation="False" Visible="False" runat="server" OnClick="RejectRegistration_Click" />
             </td>
         </tr>
         <tr>
@@ -153,7 +156,7 @@
                 &nbsp;
             </td>
             <td>
-                <asp:DataList ID="userRoles" RepeatColumns="2" DataKeyField="RoleId" runat="server">
+                <asp:DataList ID="userRoles" RepeatColumns="2" DataKeyField="RoleId" OnItemCommand="UserRoles_ItemCommand" runat="server">
                     <ItemStyle Width="225" />
                     <ItemTemplate>
                         &nbsp;&nbsp;

@@ -25,6 +25,24 @@ namespace ASPNET.StarterKit.Portal
         public const string DiagnosticsDetailedErrors = "Portal.Diagnostics.EnableDetailedErrors";
 
         /// <summary>
+        /// 单个结构化诊断日志文件的最大字节数。
+        /// Maximum byte size of one structured diagnostics log file.
+        /// </summary>
+        public const string DiagnosticsMaxFileBytes = "Portal.Diagnostics.MaxFileBytes";
+
+        /// <summary>
+        /// 结构化诊断日志保留天数。
+        /// Structured diagnostics log retention days.
+        /// </summary>
+        public const string DiagnosticsRetentionDays = "Portal.Diagnostics.RetentionDays";
+
+        /// <summary>
+        /// 管理员是否可查看已净化的诊断详情。
+        /// Whether administrators may view sanitized diagnostic details.
+        /// </summary>
+        public const string DiagnosticsAllowAdminDetailView = "Portal.Diagnostics.AllowAdminDetailView";
+
+        /// <summary>
         /// 文档上传大小上限，单位为字节。
         /// Maximum document upload size in bytes.
         /// </summary>
