@@ -31,5 +31,11 @@ namespace ASPNET.StarterKit.Portal
         /// Current theme CSS scope.
         /// </summary>
         protected global::System.Web.UI.WebControls.Label ThemeScopeLabel;
+
+        /// <summary>
+        /// 模块渲染的 UTC 标记，仅用于缓存验收。
+        /// UTC marker for the module render, used only by cache verification.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label RenderedUtcLabel;
     }
 }

@@ -55,6 +55,10 @@ namespace ASPNET.StarterKit.Portal
                 "Tab=" + tabId.ToString(CultureInfo.InvariantCulture) +
                 "; Pane=" + ModuleConfiguration.PaneName);
             ThemeScopeLabel.Text = Server.HtmlEncode(PortalThemeResolver.GetCurrentCssClass(Context));
+
+            // 缓存验收通过该非敏感时间标记判断命中与包状态修订后的失效，不读取业务数据。
+            // The cache proof uses this non-sensitive timestamp to verify hits and invalidation after a package-state revision.
+            RenderedUtcLabel.Text = Server.HtmlEncode(DateTime.UtcNow.ToString("O", CultureInfo.InvariantCulture));
         }
     }
 }

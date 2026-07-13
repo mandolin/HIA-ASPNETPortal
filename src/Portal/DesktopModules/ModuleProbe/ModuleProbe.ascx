@@ -21,5 +21,9 @@
             <td class="module-probe-label">Theme Scope:</td>
             <td><asp:Label ID="ThemeScopeLabel" runat="server" /></td>
         </tr>
+        <tr>
+            <td class="module-probe-label">Rendered UTC:</td>
+            <td><asp:Label ID="RenderedUtcLabel" runat="server" /></td>
+        </tr>
     </table>
 </div>

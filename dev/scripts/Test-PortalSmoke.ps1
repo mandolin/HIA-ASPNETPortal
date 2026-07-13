@@ -292,8 +292,11 @@ try {
         $missingUri = [Uri]::new($baseUri, ('P25SmokeMissing-' + [Guid]::NewGuid().ToString('N') + '.aspx')).AbsoluteUri
         $genericError = Invoke-PortalRequest -Uri $missingUri -WebSession $anonymousSession
         $genericErrorContent = [System.Net.WebUtility]::HtmlDecode($genericError.Content)
+        $genericErrorPath = Get-PortalResponsePath -Response $genericError
+        # 根站点与虚拟目录会有不同的应用路径前缀，只断言目标错误页而不硬编码站点根路径。
+        # Root and virtual-directory hosting use different application prefixes, so assert the target error page rather than a root-only path.
         $isGenericError = $genericError.StatusCode -eq 200 -and
-            (Get-PortalResponsePath -Response $genericError) -eq '/GenericErrorPage.aspx' -and
+            $genericErrorPath -match '/GenericErrorPage\.aspx$' -and
             $genericErrorContent -match '应用程序暂时无法完成请求|系统已记录本次错误'
         Add-PortalCheck -Name 'Generic error page' -Passed $isGenericError -Detail ('HTTP ' + $genericError.StatusCode)
     }
@@ -312,7 +315,9 @@ try {
             $adminPages = @(
                 @{ Name = 'System health'; Path = 'Admin/SystemHealth.aspx'; Marker = 'System Health' },
                 @{ Name = 'Diagnostics logs'; Path = 'Admin/DiagnosticsLogs.aspx'; Marker = 'Diagnostics Logs' },
-                @{ Name = 'Operation audits'; Path = 'Admin/OperationAudits.aspx'; Marker = 'Operation Audits' }
+                @{ Name = 'Operation audits'; Path = 'Admin/OperationAudits.aspx'; Marker = 'Operation Audits' },
+                @{ Name = 'Theme settings'; Path = 'Admin/ThemeSettings.aspx'; Marker = 'Theme Settings' },
+                @{ Name = 'Module catalog'; Path = 'Admin/ModuleCatalog.aspx'; Marker = 'Module Catalog' }
             )
 
             foreach ($page in $adminPages) {

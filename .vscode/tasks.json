@@ -123,6 +123,20 @@
                 "${workspaceFolder}\\dev\\scripts\\Test-PortalSmoke.ps1"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "portal: extension smoke (running site)",
+            "type": "process",
+            "command": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": [
+                "-NoLogo",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Test-PortalExtensionSmoke.ps1"
+            ],
+            "problemMatcher": []
         }
     ]
 }
