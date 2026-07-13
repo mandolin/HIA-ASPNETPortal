@@ -6,6 +6,7 @@
 
 - `architecture.md`：系统结构和主要模块说明。
 - `dev-guide.md`：本地开发、构建、配置和调试指南。
+- `module-development-guide.md`：受信任部署模块包的开发、注册、启停和移除边界。
 - `user-guide.md`：运行和使用入口说明。
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `deployment-checklist.md`：SQL Server、IIS、外置配置和发布后回归清单。

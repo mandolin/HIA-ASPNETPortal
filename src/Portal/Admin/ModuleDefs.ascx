@@ -45,10 +45,10 @@ Src="~/DesktopModuleTitle.ascx"%>
     <%-- 数据列表的最后一行 --%>
     <tr>
         <td>
-            <%-- 添加新模块类型的链接按钮 --%>
+            <%-- 打开受信任部署模块目录；不再从旧定义页手填新的模块路径。 --%>
             <asp:LinkButton 
                 cssclass="CommandButton" 
-                Text="Add New Module Type" 
+                Text="Open Module Catalog"
                 runat="server" 
                 id="AddDefBtn" 
                 onclick="AddDef_Click" />

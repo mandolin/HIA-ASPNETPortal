@@ -30,7 +30,30 @@ namespace ASPNET.StarterKit.Portal
                 body.Attributes["class"] = PortalThemeResolver.GetCurrentCssClass(Context);
             }
 
+            AddModulePackageStyles();
+
             base.OnPreRender(e);
+        }
+
+        /// <summary>
+        /// 仅为当前 Tab 的已启用受信任模块包挂载已声明 CSS。
+        /// Adds declared CSS only for enabled trusted module packages used by the current Tab.
+        /// </summary>
+        private void AddModulePackageStyles()
+        {
+            if (Page == null || Page.Header == null)
+            {
+                return;
+            }
+
+            foreach (PortalModuleStyleResource resource in PortalModuleCatalog.GetActiveStyleResources(Context))
+            {
+                var link = new HtmlLink();
+                link.Attributes["rel"] = "stylesheet";
+                link.Attributes["type"] = "text/css";
+                link.Href = ResolveUrl(resource.VirtualPath);
+                Page.Header.Controls.Add(link);
+            }
         }
     }
 }

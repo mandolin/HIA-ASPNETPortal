@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "packageId": "HIA.ModuleProbe",
+  "displayName": "模块验证 / Module Probe",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "desktopEntry": "DesktopModules/ModuleProbe/ModuleProbe.ascx",
+  "resources": [
+    "Styles/ModuleProbe.css"
+  ]
+}

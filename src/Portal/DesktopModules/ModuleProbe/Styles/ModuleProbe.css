@@ -1,0 +1,29 @@
+/* P3.2 ModuleProbe uses a package-scoped, IE9-compatible presentation without bundled fonts. */
+.portal-package-hia-moduleprobe .module-probe {
+    border: 1px solid #52718a;
+    background-color: #f4f8fb;
+    color: #1f3546;
+    padding: 8px;
+}
+
+.portal-package-hia-moduleprobe .module-probe-title {
+    color: #1b4f72;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.portal-package-hia-moduleprobe .module-probe-summary {
+    margin-top: 3px;
+    color: #496274;
+}
+
+.portal-package-hia-moduleprobe .module-probe-table {
+    margin-top: 7px;
+    width: 100%;
+}
+
+.portal-package-hia-moduleprobe .module-probe-label {
+    width: 92px;
+    color: #31495c;
+    font-weight: bold;
+}

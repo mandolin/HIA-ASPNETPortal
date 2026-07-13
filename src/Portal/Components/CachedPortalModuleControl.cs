@@ -68,6 +68,18 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public int PortalId { get; set; }
 
+        /// <summary>
+        /// 已通过模块目录解析的桌面控件路径；为空时兼容读取旧模块定义路径。
+        /// Desktop control path resolved by the module catalog; when empty, the legacy module-definition path remains compatible.
+        /// </summary>
+        public string DesktopSource { get; set; }
+
+        /// <summary>
+        /// 已验证包版本、状态修订或旧路径构成的缓存隔离身份。
+        /// Cache-isolation identity composed from validated package version, state revision, or a legacy path.
+        /// </summary>
+        public string CacheIdentity { get; set; }
+
         /* CacheKey 属性
         
          CacheKey 属性用于计算一个“唯一”的缓存键条目，用于在 ASP.NET 缓存中存储/检索门户模块的内容。
@@ -86,7 +98,12 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public string CacheKey
         {
-            get { return "Key:" + GetType().FullName + ModuleId + PortalSecurity.IsInRoles(_moduleConfiguration.AuthorizedEditRoles); }
+            get
+            {
+                return "Key:" + GetType().FullName + ModuleId +
+                       PortalSecurity.IsInRoles(_moduleConfiguration.AuthorizedEditRoles) + "|" +
+                       (CacheIdentity ?? string.Empty);
+            }
         }
 
         /* CreateChildControls 方法
@@ -127,13 +144,35 @@ namespace ASPNET.StarterKit.Portal
             {
                 base.CreateChildControls();
 
-                string desktopSource = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(_moduleConfiguration.DesktopSrc);
-                var module = (IPortalModuleControl)Page.LoadControl(desktopSource);
+                try
+                {
+                    string desktopSource = string.IsNullOrWhiteSpace(DesktopSource)
+                        ? PortalModulePathValidator.NormalizeDesktopSourceOrThrow(_moduleConfiguration.DesktopSrc)
+                        : DesktopSource;
+                    var module = Page.LoadControl(desktopSource) as IPortalModuleControl;
+                    if (module == null)
+                    {
+                        throw new InvalidOperationException(
+                            "The module control does not implement IPortalModuleControl.");
+                    }
 
-                module.ModuleConfiguration = ModuleConfiguration;
-                module.PortalId = PortalId;
+                    module.ModuleConfiguration = ModuleConfiguration;
+                    module.PortalId = PortalId;
 
-                Controls.Add((UserControl)module);
+                    Controls.Add((UserControl)module);
+                }
+                catch (Exception exception)
+                {
+                    // 缓存分支的加载失败不能中止整个门户页；记录事件并输出空模块区域。
+                    // A load failure in the cache branch must not abort the entire portal page; record the event
+                    // and render an empty module region.
+                    PortalDiagnostics.Error(
+                        "ModulePackage.CachedLoad",
+                        "Loading a cached portal module failed. ModuleId=" + ModuleId,
+                        exception,
+                        Context);
+                    _cachedOutput = string.Empty;
+                }
             }
         }
 

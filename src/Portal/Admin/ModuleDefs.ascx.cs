@@ -13,6 +13,10 @@ namespace ASPNET.StarterKit.Portal
         private int tabId;
         private int tabIndex;
 
+        /// <summary>
+        /// 旧模块定义数据服务，用于展示既有定义。
+        /// Legacy module-definition data service used to display existing definitions.
+        /// </summary>
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
@@ -48,10 +52,12 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="sender">事件源对象。</param>
         /// <param name="e">事件参数。</param>
-        protected void AddDef_Click(Object Sender, EventArgs e)
+        protected void AddDef_Click(Object sender, EventArgs e)
         {
-            // 重定向到编辑页面
-            Response.Redirect("~/Admin/ModuleDefinitions.aspx?defId=-1&tabindex=" + tabIndex + "&tabid=" + tabId);
+            // P3.2 的新模块必须从受信任部署目录选择，不能继续手填任意 DesktopSrc。
+            // P3.2 requires new modules to be selected from the trusted deployment catalog instead of entering
+            // arbitrary DesktopSrc paths.
+            Response.Redirect("~/Admin/ModuleCatalog.aspx");
         }
 
         /// <summary>

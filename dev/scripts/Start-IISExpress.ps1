@@ -35,7 +35,6 @@ if (-not $iisExpress) {
     throw 'IIS Express was not found. Install IIS Express or Visual Studio web tooling.'
 }
 
-$escapedSitePath = [regex]::Escape($SitePath)
 $configPath = $null
 if ($VirtualPath -ne '/') {
     $configDir = Join-Path $repoRoot 'temp\iisexpress'
@@ -44,10 +43,12 @@ if ($VirtualPath -ne '/') {
 }
 $escapedConfigPath = if ($configPath) { [regex]::Escape($configPath) } else { $null }
 
+# 端口或本次虚拟目录配置是唯一进程边界，不能以同一物理站点路径误匹配其他调试实例。
+# The port or this virtual-directory configuration is the only process boundary; do not match another debug
+# instance merely because it uses the same physical site path.
 $existing = Get-CimInstance Win32_Process -Filter "name = 'iisexpress.exe'" -ErrorAction SilentlyContinue |
     Where-Object {
         $_.CommandLine -match "/port:$Port(\s|$)" -or
-        ($VirtualPath -eq '/' -and $_.CommandLine -match $escapedSitePath) -or
         ($escapedConfigPath -and $_.CommandLine -match $escapedConfigPath)
     } |
     Select-Object -First 1
@@ -136,7 +137,6 @@ Start-Sleep -Seconds 2
 $started = Get-CimInstance Win32_Process -Filter "name = 'iisexpress.exe'" -ErrorAction SilentlyContinue |
     Where-Object {
         $_.CommandLine -match "/port:$Port(\s|$)" -or
-        ($VirtualPath -eq '/' -and $_.CommandLine -match $escapedSitePath) -or
         ($escapedConfigPath -and $_.CommandLine -match $escapedConfigPath)
     } |
     Select-Object -First 1

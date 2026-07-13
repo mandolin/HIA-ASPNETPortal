@@ -59,6 +59,36 @@ namespace ASPNET.StarterKit.Portal
                 // 遍历此标签的配置系统中的每个条目
                 foreach (ModuleSettings _moduleSettings in portalSettings.ActiveTab.Modules)
                 {
+                    // P3.2 先把旧模块和已验证部署包统一解析到受控描述中。旧模块保持可用；
+                    // 已声明 module.json 但校验失败的目录不能回退为普通路径加载。
+                    // P3.2 first resolves legacy modules and validated deployment packages into one controlled descriptor.
+                    // Legacy modules remain available; a directory declaring module.json but failing validation must not
+                    // fall back to an ordinary path load.
+                    PortalModuleRuntimeDescriptor moduleDescriptor;
+                    string moduleReason;
+                    if (!PortalModuleCatalog.TryResolveModule(
+                            _moduleSettings,
+                            Context,
+                            out moduleDescriptor,
+                            out moduleReason))
+                    {
+                        PortalDiagnostics.Warn(
+                            "ModulePackage.LoadBlocked",
+                            "Skipping module " + _moduleSettings.ModuleId + ": " + moduleReason,
+                            Context);
+                        continue;
+                    }
+
+                    if (!moduleDescriptor.IsEnabled)
+                    {
+                        PortalDiagnostics.Info(
+                            "ModulePackage.Disabled",
+                            "Skipping disabled module package '" + moduleDescriptor.Package.PackageId +
+                            "' for module " + _moduleSettings.ModuleId + ".",
+                            Context);
+                        continue;
+                    }
+
                     Control parent = LeftPane; //default
 
                     switch (_moduleSettings.PaneName)
@@ -88,36 +118,62 @@ namespace ASPNET.StarterKit.Portal
                     {
                         CssClass = PortalThemeResolver.GetModuleCssClass(
                             _moduleSettings.ModuleId,
-                            _moduleSettings.PaneName)
+                            _moduleSettings.PaneName,
+                            moduleDescriptor.IsManagedPackage
+                                ? moduleDescriptor.Package.PackageId
+                                : null)
                     };
 
-                    // 检查缓存时间设置是否为 0（表示不缓存）
-                    if (_moduleSettings.CacheTime == 0)
+                    try
                     {
-                        // 如果不缓存，动态加载模块
-                        string desktopSource = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(_moduleSettings.DesktopSrc);
-                        var portalModule = (IPortalModuleControl)Page.LoadControl(desktopSource);
+                        // 检查缓存时间设置是否为 0（表示不缓存）
+                        if (_moduleSettings.CacheTime == 0)
+                        {
+                            // 对已解析的受控入口执行动态加载，而不是再次读取原始数据库路径。
+                            // Dynamically load the resolved controlled entry instead of rereading the raw database path.
+                            var portalModule = Page.LoadControl(moduleDescriptor.DesktopSource) as IPortalModuleControl;
+                            if (portalModule == null)
+                            {
+                                throw new InvalidOperationException(
+                                    "The module control does not implement IPortalModuleControl.");
+                            }
 
-                        // 设置加载的模块的 Portal ID 和模块配置
-                        portalModule.PortalId = portalSettings.PortalId;
-                        portalModule.ModuleConfiguration = _moduleSettings;
+                            // 设置加载的模块的 Portal ID 和模块配置
+                            portalModule.PortalId = portalSettings.PortalId;
+                            portalModule.ModuleConfiguration = _moduleSettings;
 
-                        // 将加载的模块添加到 CSS scope 容器中。
-                        // Add the loaded module to the CSS-scope container.
-                        moduleContainer.Controls.Add((UserControl)portalModule);
+                            // 将加载的模块添加到 CSS scope 容器中。
+                            // Add the loaded module to the CSS-scope container.
+                            moduleContainer.Controls.Add((UserControl)portalModule);
+                        }
+                        else
+                        {
+                            // 缓存仍使用既有机制，但缓存键同时隔离已验证包版本和状态修订。
+                            // Caching still uses the existing mechanism, while its key also isolates package version
+                            // and state revision.
+                            var portalModule = new CachedPortalModuleControl
+                            {
+                                DesktopSource = moduleDescriptor.DesktopSource,
+                                CacheIdentity = moduleDescriptor.CacheIdentity
+                            };
+
+                            // 设置缓存模块的 Portal ID 和模块配置
+                            portalModule.PortalId = portalSettings.PortalId;
+                            portalModule.ModuleConfiguration = _moduleSettings;
+
+                            // 将缓存模块添加到 CSS scope 容器中。
+                            // Add the cached module to the CSS-scope container.
+                            moduleContainer.Controls.Add(portalModule);
+                        }
                     }
-                    else
+                    catch (Exception exception)
                     {
-                        // 如果启用缓存，使用缓存的 Portal 模块控件
-                        var portalModule = new CachedPortalModuleControl();
-
-                        // 设置缓存模块的 Portal ID 和模块配置
-                        portalModule.PortalId = portalSettings.PortalId;
-                        portalModule.ModuleConfiguration = _moduleSettings;
-
-                        // 将缓存模块添加到 CSS scope 容器中。
-                        // Add the cached module to the CSS-scope container.
-                        moduleContainer.Controls.Add(portalModule);
+                        PortalDiagnostics.Error(
+                            "ModulePackage.Load",
+                            "Loading module " + _moduleSettings.ModuleId + " failed.",
+                            exception,
+                            Context);
+                        continue;
                     }
 
                     parent.Controls.Add(moduleContainer);

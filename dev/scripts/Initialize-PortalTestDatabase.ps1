@@ -200,7 +200,7 @@ try {
         return
     }
 
-    Write-Host ('[1/7] Creating isolated database {0}.' -f $targetDatabaseName)
+    Write-Host ('[1/8] Creating isolated database {0}.' -f $targetDatabaseName)
     $initializationStarted = $true
     Invoke-SqlScript -Connection $masterConnection -Path (Join-Path $repoRoot 'src/Setup/Portal_CreateDB.sql') -QuotedDatabaseName $quotedTargetDatabaseName -ExpectedCreateDatabaseCount 1 -ExpectedUseDatabaseCount 1 -TimeoutSeconds $CommandTimeoutSeconds
 
@@ -213,18 +213,19 @@ try {
         [pscustomobject]@{ Number = 4; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_SystemSettings.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying system-settings migration' },
         [pscustomobject]@{ Number = 5; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_UserRegistration.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying registration migration' },
         [pscustomobject]@{ Number = 6; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_OperationAudits.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying operation-audit migration' },
-        [pscustomobject]@{ Number = 7; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_TabThemeOverrides.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying tab-theme migration' }
+        [pscustomobject]@{ Number = 7; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_TabThemeOverrides.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying tab-theme migration' },
+        [pscustomobject]@{ Number = 8; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_ModulePackageStates.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying module-package-state migration' }
     )
 
     foreach ($step in $steps) {
-        Write-Host ('[{0}/7] {1}.' -f $step.Number, $step.Description)
+        Write-Host ('[{0}/8] {1}.' -f $step.Number, $step.Description)
         Invoke-SqlScript -Connection $targetConnection -Path $step.Path -QuotedDatabaseName $quotedTargetDatabaseName -ExpectedCreateDatabaseCount $step.CreateCount -ExpectedUseDatabaseCount $step.UseCount -TimeoutSeconds $CommandTimeoutSeconds
     }
 
     [pscustomobject]@{
         DatabaseName = $targetDatabaseName
         ServerMajorVersion = $serverMajorVersion
-        CompletedSteps = 7
+        CompletedSteps = 8
         Status = 'Initialized'
     }
 }

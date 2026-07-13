@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
@@ -14,8 +15,19 @@ namespace ASPNET.StarterKit.Portal
         private int tabId;
         private int tabIndex;
 
+        /// <summary>
+        /// 旧模块定义数据服务，用于读取、更新名称及受保护删除。
+        /// Legacy module-definition data service used for reading, display-name updates, and protected deletion.
+        /// </summary>
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
+
+        /// <summary>
+        /// 模块实例数据服务，用于在删除前检查引用数量。
+        /// Module-instance data service used to check reference count before deletion.
+        /// </summary>
+        [Dependency]
+        public IModulesDb ModulesConfig { private get; set; }
 
         /// <summary>
         /// 页面加载时初始化模块定义信息。
@@ -46,10 +58,11 @@ namespace ASPNET.StarterKit.Portal
             {
                 if (defId == -1)
                 {
-                    // 新建模块定义
-                    FriendlyName.Text = "New Definition";
-                    DesktopSrc.Text = "DesktopModules/SomeModule.ascx";
-                    MobileSrc.Text = "MobileModules/SomeModule.ascx";
+                    // 新模块定义由受信任部署目录完成注册，避免继续引入任意路径入口。
+                    // New module definitions are registered through the trusted deployment catalog to avoid new
+                    // arbitrary-path entry points.
+                    Response.Redirect("~/Admin/ModuleCatalog.aspx");
+                    return;
                 }
                 else
                 {
@@ -60,6 +73,14 @@ namespace ASPNET.StarterKit.Portal
                     FriendlyName.Text = modDefRow.FriendlyName;
                     DesktopSrc.Text = modDefRow.DesktopSourceFile;
                     MobileSrc.Text = modDefRow.MobileSourceFile;
+
+                    // 旧定义页只保留历史名称维护和安全删除检查；路径变更统一迁移到部署包目录。
+                    // The legacy definition page retains historical name maintenance and safe-delete checks only;
+                    // path changes move to the deployment-package catalog.
+                    DesktopSrc.ReadOnly = true;
+                    MobileSrc.ReadOnly = true;
+                    Req2.Enabled = false;
+                    DesktopSrcPathValidator.Enabled = false;
                 }
             }
         }
@@ -75,13 +96,27 @@ namespace ASPNET.StarterKit.Portal
             {
                 if (defId == -1)
                 {
-                    // 向数据库中添加新的模块定义
-                    ModuleDefConfig.AddModuleDefinition(FriendlyName.Text, NormalizeDesktopSrc(), MobileSrc.Text);
+                    Response.Redirect("~/Admin/ModuleCatalog.aspx");
+                    return;
                 }
                 else
                 {
-                    // 更新模块定义
-                    ModuleDefConfig.UpdateModuleDefinition(defId, FriendlyName.Text, NormalizeDesktopSrc(), MobileSrc.Text);
+                    // 保留既有受控路径，避免通过 legacy 表单创建或变更任意动态加载入口。
+                    // Preserve the existing controlled path, preventing arbitrary dynamic-load entries from being
+                    // created or changed through the legacy form.
+                    IModuleDefinitionItem current = ModuleDefConfig.GetSingleModuleDefinition(defId);
+                    ModuleDefConfig.UpdateModuleDefinition(
+                        defId,
+                        FriendlyName.Text,
+                        current.DesktopSourceFile,
+                        current.MobileSourceFile);
+                    PortalOperationAudit.Record(
+                        "ModuleDefinition",
+                        "UpdateName",
+                        "ModuleDefinition",
+                        defId.ToString(),
+                        "Updated the legacy module-definition display name.",
+                        Context);
                 }
 
                 // 重定向回门户管理页面
@@ -96,8 +131,26 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">事件参数。</param>
         protected void DeleteBtn_Click(Object sender, EventArgs e)
         {
+            int instanceCount = ModulesConfig.GetModulesByModuleDefId(defId).Count();
+            if (instanceCount > 0)
+            {
+                // 旧删除会级联清除业务模块数据。P3.2 要求先禁用、迁移或显式清理实例。
+                // Legacy deletion cascades into business module data. P3.2 requires disabling, migration, or
+                // explicit instance cleanup first.
+                MessageLabel.Text = "This module definition is still used by " + instanceCount +
+                                    " module instance(s). Disable or migrate it, then explicitly clean instances before deletion.";
+                return;
+            }
+
             // 删除模块定义
             ModuleDefConfig.DeleteModuleDefinition(defId);
+            PortalOperationAudit.Record(
+                "ModuleDefinition",
+                "Delete",
+                "ModuleDefinition",
+                defId.ToString(),
+                "Deleted an unused legacy module definition.",
+                Context);
 
             // 重定向回门户管理页面
             Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);

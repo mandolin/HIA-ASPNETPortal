@@ -52,3 +52,5 @@
 - [ ] README、`docs/`、`dev/` 已按变更更新。
 - [ ] 已记录验证结果和残留风险。
 - [ ] 已按 `docs/deployment-checklist.md` 完成 SQL Server、IIS、外置配置和回滚检查。
+- [ ] 新模块包已通过 `module.json`、入口 `.ascx` 和本地资源校验；启用时模块/CSS 可用，禁用时二者均不加载。
+- [ ] 有实例引用的模块定义不能通过 Legacy 删除页直接级联删除；先完成禁用、迁移或显式实例清理。

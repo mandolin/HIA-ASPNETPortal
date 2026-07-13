@@ -245,10 +245,21 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="moduleId">模块实例标识。Module instance identifier.</param>
         /// <param name="paneName">模块所在窗格名。Pane containing the module.</param>
+        /// <param name="packageId">已验证部署包标识；Legacy 模块传空。Validated deployment package id; empty for a Legacy module.</param>
         /// <returns>模块和窗格作用域 class。Module and pane scope classes.</returns>
-        public static string GetModuleCssClass(int moduleId, string paneName)
+        public static string GetModuleCssClass(int moduleId, string paneName, string packageId = null)
         {
-            return "portal-module portal-module-" + moduleId + " portal-pane-" + NormalizeCssSegment(paneName);
+            var builder = new StringBuilder("portal-module portal-module-");
+            builder.Append(moduleId);
+            builder.Append(" portal-pane-");
+            builder.Append(NormalizeCssSegment(paneName));
+            if (!string.IsNullOrWhiteSpace(packageId))
+            {
+                builder.Append(" portal-package-");
+                builder.Append(NormalizeCssSegment(packageId));
+            }
+
+            return builder.ToString();
         }
 
         private static string ResolveTrustedThemeName(

@@ -15,6 +15,12 @@ namespace ASPNET.StarterKit.Portal
     {
 
         /// <summary>
+        /// 页面级安全错误提示。
+        /// Page-level safe error message.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label MessageLabel;
+
+        /// <summary>
         /// FriendlyName 控件。
         /// </summary>
         /// <remarks>
@@ -49,6 +55,12 @@ namespace ASPNET.StarterKit.Portal
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator Req2;
+
+        /// <summary>
+        /// DesktopSrcPathValidator 控件。
+        /// DesktopSrcPathValidator control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.CustomValidator DesktopSrcPathValidator;
 
         /// <summary>
         /// MobileSrc 控件。

@@ -100,6 +100,7 @@
     <Content Include="Admin\EditAccessDenied.aspx" />
     <Content Include="Admin\Logoff.aspx" />
     <Content Include="Admin\ManageUsers.aspx" />
+    <Content Include="Admin\ModuleCatalog.aspx" />
     <Content Include="Admin\ModuleDefinitions.aspx" />
     <Content Include="Admin\ModuleDefs.ascx" />
     <Content Include="Admin\ModuleSettings.aspx" />
@@ -184,6 +185,9 @@
     <Content Include="DesktopModules\HtmlModule.ascx" />
     <Content Include="DesktopModules\ImageModule.ascx" />
     <Content Include="DesktopModules\Links.ascx" />
+    <Content Include="DesktopModules\ModuleProbe\module.json" />
+    <Content Include="DesktopModules\ModuleProbe\ModuleProbe.ascx" />
+    <Content Include="DesktopModules\ModuleProbe\Styles\ModuleProbe.css" />
     <Content Include="DesktopModules\QuickLinks.ascx" />
     <Content Include="DesktopModules\Signin.ascx" />
     <Content Include="DesktopModules\ViewDocument.aspx" />
@@ -237,6 +241,13 @@
     </Compile>
     <Compile Include="Admin\ManageUsers.aspx.designer.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleCatalog.aspx.cs">
+      <DependentUpon>ModuleCatalog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleCatalog.aspx.designer.cs">
+      <DependentUpon>ModuleCatalog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ModuleDefinitions.aspx.cs">
       <DependentUpon>ModuleDefinitions.aspx</DependentUpon>
@@ -366,6 +377,8 @@
     <Compile Include="Components\PortalAuthenticationCookies.cs" />
     <Compile Include="Components\PortalAuthorization.cs" />
     <Compile Include="Components\PortalContext.cs" />
+    <Compile Include="Components\PortalModulePackage.cs" />
+    <Compile Include="Components\PortalModulePackageStates.cs" />
     <Compile Include="Components\PortalModulePathValidator.cs" />
     <Compile Include="Components\PortalOperationAudit.cs" />
     <Compile Include="Components\PortalPage.cs">
@@ -540,6 +553,13 @@
     </Compile>
     <Compile Include="DesktopModules\Links.ascx.designer.cs">
       <DependentUpon>Links.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\ModuleProbe\ModuleProbe.ascx.cs">
+      <DependentUpon>ModuleProbe.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\ModuleProbe\ModuleProbe.ascx.designer.cs">
+      <DependentUpon>ModuleProbe.ascx</DependentUpon>
     </Compile>
     <Compile Include="DesktopModules\QuickLinks.ascx.cs">
       <DependentUpon>QuickLinks.ascx</DependentUpon>

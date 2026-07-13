@@ -171,7 +171,7 @@ function Invoke-MigrationFile {
         [string]$Path
     )
 
-    $sqlText = [System.IO.File]::ReadAllText($Path)
+    $sqlText = [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
     foreach ($batch in Get-SqlBatches -SqlText $sqlText) {
         $command = $Connection.CreateCommand()
         try {
@@ -219,9 +219,15 @@ try {
     }
 
     if ($ApplyP3Migrations) {
-        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P3 theme migration scripts')) {
-            Invoke-MigrationFile -Connection $connection -Path (Join-Path $repoRoot 'src/Setup/PortalCfg_TabThemeOverrides.sql')
-            Add-DatabaseCheck -Name 'P3 migration application' -Status 'Pass' -Detail 'The idempotent P3 tab-theme migration batches completed.'
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P3 extension migration scripts')) {
+            $migrationFiles = @(
+                (Join-Path $repoRoot 'src/Setup/PortalCfg_TabThemeOverrides.sql'),
+                (Join-Path $repoRoot 'src/Setup/PortalCfg_ModulePackageStates.sql')
+            )
+            foreach ($migrationFile in $migrationFiles) {
+                Invoke-MigrationFile -Connection $connection -Path $migrationFile
+            }
+            Add-DatabaseCheck -Name 'P3 migration application' -Status 'Pass' -Detail 'The idempotent P3 theme and module-package migration batches completed.'
         }
         else {
             Add-DatabaseCheck -Name 'P3 migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
@@ -230,7 +236,7 @@ try {
 
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
-    $p3Tables = @('PortalCfg_TabThemeOverrides')
+    $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
     $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
@@ -249,13 +255,13 @@ try {
 
     $missingP3Tables = @($p3Tables | Where-Object { -not $existingTables.Contains($_) })
     if ($missingP3Tables.Count -eq 0) {
-        Add-DatabaseCheck -Name 'P3 theme schema' -Status 'Pass' -Detail 'All P3 theme extension tables are present.'
+        Add-DatabaseCheck -Name 'P3 extension schema' -Status 'Pass' -Detail 'All P3 theme and module-package extension tables are present.'
     }
     elseif ($RequireP3Migrations) {
-        Add-DatabaseCheck -Name 'P3 theme schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP3Tables -join ', '))
+        Add-DatabaseCheck -Name 'P3 extension schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP3Tables -join ', '))
     }
     else {
-        Add-DatabaseCheck -Name 'P3 theme schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP3Tables -join ', '))
+        Add-DatabaseCheck -Name 'P3 extension schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP3Tables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })

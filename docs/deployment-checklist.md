@@ -24,8 +24,9 @@
 - [ ] SQL Server 引擎版本、版本名称、数据库名和 `compatibility_level` 已记录。
 - [ ] SQL Server 2016 的新测试库建议使用兼容级别 `130`；已有库先记录实际值，不在发布窗口外强制调整。
 - [ ] 应用账号仅拥有所需数据库权限，不使用 `sysadmin` 作为运行账号。
-- [ ] `PortalCfg_SystemSettings.sql`、`PortalCfg_UserRegistration.sql`、`PortalCfg_OperationAudits.sql`、`PortalCfg_TabThemeOverrides.sql` 的执行状态已记录。
+- [ ] `PortalCfg_SystemSettings.sql`、`PortalCfg_UserRegistration.sql`、`PortalCfg_OperationAudits.sql`、`PortalCfg_TabThemeOverrides.sql`、`PortalCfg_ModulePackageStates.sql` 的执行状态已记录。
 - [ ] 仅将已审查的主题目录部署到 `App_Themes`；每个可选主题均含通过校验的 `theme.json` 与 `Default.css`。
+- [ ] 仅将已审查的模块目录部署到 `DesktopModules`；每个新业务模块均含通过校验的 `module.json`，且没有 ZIP、DLL、外链或自动脚本入口。
 - [ ] 不通过后台上传 ZIP、在线编辑 CSS、外部 URL 或主题脚本改变主题资源；这些能力目前不属于发布契约。
 - [ ] `Portal.Diagnostics.AllowAdminDetailView`、日志目录、上传目录和其他部署级设置符合环境要求。
 - [ ] 生产默认账号已替换，且没有共享开发密码。

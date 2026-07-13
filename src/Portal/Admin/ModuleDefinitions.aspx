@@ -32,6 +32,8 @@
                     </tr>
                 </table>
 
+                <asp:Label ID="MessageLabel" CssClass="NormalRed" EnableViewState="false" runat="server" />
+
                 <%-- 输入表单 --%>
                 <table width="750" cellspacing="0" cellpadding="0" border="0">
                     <tr>
