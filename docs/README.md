@@ -11,6 +11,7 @@
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `deployment-checklist.md`：SQL Server、IIS、外置配置和发布后回归清单。
 - `font-policy-and-audit.md`：字体使用原则、许可证边界和当前审计结果。
+- `third-party-dependencies.md`：新增第三方依赖的用途、许可证和分发边界。
 
 ## 当前约定
 

@@ -110,6 +110,18 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 
 可先增加 `-WhatIf` 检查目标库和执行意图。该脚本绝不覆盖既有数据库，任一步失败后也不会自动删库；只可用于隔离测试实例。发布前请使用 [deployment-checklist.md](deployment-checklist.md)。
 
+## 数据提供程序 Proof
+
+P3.3 提供一个不加入 `src/master.sln` 的 SQLite capability proof，用于验证新增 provider profile、ADO.NET factory、参数化读写、UTC、事务和唯一约束。它不切换门户主业务数据库，不需要修改外置 `Portal` 连接串，也不参与站点发布。
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalDataProvider.ps1 -Configuration Debug
+```
+
+脚本会单独还原 proof 项目的 packages.config、构建到 `temp\provider-proof\bin\`，并在 `temp\provider-proof\data\` 下重新生成 SQLite 文件。`-DatabasePath` 只允许该临时数据目录内的路径；默认会删除上次 proof 文件后重建，传入 `-KeepDatabase` 才保留文件。
+
+新增 provider 专用 DDL 放在 `src\Setup\Providers\{ProviderId}\`。当前只有 `SQLite` proof；未来 MySQL、PostgreSQL 等 provider 应各自增加目录、依赖/许可证审计、方言实现、迁移与回归，不应覆盖既有 SQL Server 脚本。
+
 ## 数据库初始化
 
 参考 `src/ReadMe.txt`，基础流程为：
@@ -150,7 +162,7 @@ npm run assets:stop-watch
 - 连接串不再写入 `UnityCfg*.xml`，而是从外置 `{ExternalCfgPath}\{env}\connectionStrings.config` 读取。
 - `ExternalCfgPath` 留空时默认使用 `{当前进程用户目录}\Web\HIA-ASPNETPortal\`。
 - 本地 `dev` 默认文件路径为 `{当前进程用户目录}\Web\HIA-ASPNETPortal\dev\connectionStrings.config`。
-- `connectionStrings.config` 中当前使用的逻辑名为 `Portal`，启动后会映射为 Unity 的 `connectionString` 命名实例。
+- `connectionStrings.config` 中当前使用的逻辑名为 `Portal`，启动后会映射为 Unity 的 `connectionString` 命名实例；`providerName` 为必填项，当前门户主业务数据库固定为 `System.Data.SqlClient`。
 - 环境变量 `HIA_ASPNETPORTAL_CONNSTR_PORTAL` 可覆盖具体连接串值；外置文件本身仍必须存在。
 - 不要提交真实生产连接字符串、账号、密码、Token 或证书。
 - `.gitignore` 已包含部分配置、数据库和构建产物忽略规则，但历史文件仍需人工核查。

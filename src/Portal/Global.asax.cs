@@ -84,9 +84,13 @@ namespace ASPNET.StarterKit.Portal
             Container.RegisterInstance(
                 ExternalConnectionStringLoader.UnityConnectionStringName,
                 portalConnectionString.ConnectionString);
+            // 新代码通过 profile 获取 provider invariant，不再把连接串文本当成数据库类型标识。
+            // New code receives a profile with the provider invariant instead of treating a connection string as a database type.
+            Container.RegisterInstance(portalConnectionString.DatabaseProfile);
+            Container.RegisterType<IPortalDbConnectionFactory, PortalDbConnectionFactory>();
             PortalDiagnostics.Info(
                 "Startup",
-                $"Loaded connection string '{ExternalConnectionStringLoader.LogicalConnectionStringName}' from {portalConnectionString.Source}; ConfigFile={portalConnectionString.ConfigFile}");
+                $"Loaded connection string '{ExternalConnectionStringLoader.LogicalConnectionStringName}' with provider '{portalConnectionString.ProviderInvariantName}' from {portalConnectionString.Source}; ConfigFile={portalConnectionString.ConfigFile}");
             PortalDiagnostics.CheckSqlConnection(portalConnectionString.ConnectionString);
 
             // 启动期最小自检：确认关键数据服务和环境覆盖字符串都能从容器解析。

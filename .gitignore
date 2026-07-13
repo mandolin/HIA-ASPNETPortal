@@ -367,3 +367,6 @@ MigrationBackup/
 
 # Serena 缓存和项目记忆属于本机 AI 工具状态，不进入公开仓库。
 /.serena/
+
+# P3.3 数据提供程序 proof 的可再生运行时输出。
+/temp/provider-proof/

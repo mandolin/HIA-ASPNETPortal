@@ -25,10 +25,12 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 ## 数据和依赖
 
 - 数据库初始化脚本位于 `src/Setup/`。
+- 新增 provider 专用脚本位于 `src/Setup/Providers/{ProviderId}/`；首轮 SQLite proof 位于 `Providers/SQLite/`，未来可并列增加 MySQL、PostgreSQL 等 provider，而不迁移既有 SQL Server 脚本。
 - 本地数据库文件位于 `db/MSSQLLocalDB/`。
 - 数据访问使用 Entity Framework 6.1.0。
 - 依赖注入使用 Unity 5.x。
 - Web 项目仍使用经典 `packages.config` 和 `src/packages/` NuGet 包目录。
+- `src/Portal.DataProviderProof/` 是未加入主解决方案的 .NET Framework 4.7 开发/测试 proof 项目；它验证 ADO.NET provider factory 与 SQLite 基础事务能力，不参与正常门户部署。
 
 ## 当前架构风险
 
