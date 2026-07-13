@@ -122,6 +122,18 @@ P3.3 提供一个不加入 `src/master.sln` 的 SQLite capability proof，用于
 
 新增 provider 专用 DDL 放在 `src\Setup\Providers\{ProviderId}\`。当前只有 `SQLite` proof；未来 MySQL、PostgreSQL 等 provider 应各自增加目录、依赖/许可证审计、方言实现、迁移与回归，不应覆盖既有 SQL Server 脚本。
 
+## HIA 外围契约 Proof
+
+P3.4 提供独立的 HIA 外围能力描述 proof。它仅验证门户拥有的 JSON envelope、版本、字段范围和隐私边界；不加载 HIA 外部程序集、不开放 HTTP/消息/文件 transport，也不影响门户正常启动与发布。
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalHiaBoundary.ps1 -Configuration Debug
+```
+
+Proof 项目位于 `src\Portal.HiaBoundaryProof\`，未加入 `src\master.sln`，输出仅写入被忽略的 `temp\hia-boundary-proof\`。当前草案允许模块、主题、设置 registry 元数据、健康状态和受限诊断引用；不会接受用户/角色/认证、设置实际值、日志详情、审计正文、路径、连接串或任何凭据。
+
+`Portal.Hia.InstanceId` 是可选的部署级、非敏感稳定标识。默认留空，留空不会启用任何对外适配器。需要为未来受控协作准备时，可设置为 GUID 或小写字母、数字、`.`、`_`、`-` 组成的稳定标识；不得由机器名、数据库名、域名、用户名或其他个人/环境信息推导。后续若接入真实 HIA consumer 或 transport，应先更新 ADR、契约版本和独立运行回归。
+
 ## 数据库初始化
 
 参考 `src/ReadMe.txt`，基础流程为：

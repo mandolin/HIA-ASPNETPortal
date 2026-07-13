@@ -398,6 +398,7 @@
     <Compile Include="Components\PortalRegistrationOptions.cs" />
     <Compile Include="Components\PortalSettingDefinition.cs" />
     <Compile Include="Components\PortalSettingKeys.cs" />
+    <Compile Include="Components\PortalHiaBoundarySettings.cs" />
     <Compile Include="Components\PortalSettingHealthInfo.cs" />
     <Compile Include="Components\PortalSettingsRegistry.cs" />
     <Compile Include="Components\PortalTabThemeOverrides.cs" />

@@ -31,6 +31,13 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 - 依赖注入使用 Unity 5.x。
 - Web 项目仍使用经典 `packages.config` 和 `src/packages/` NuGet 包目录。
 - `src/Portal.DataProviderProof/` 是未加入主解决方案的 .NET Framework 4.7 开发/测试 proof 项目；它验证 ADO.NET provider factory 与 SQLite 基础事务能力，不参与正常门户部署。
+- `src/Portal.HiaBoundaryProof/` 是未加入主解决方案的 .NET Framework 4.7 契约 proof 项目；它通过 fixtures 验证 HIA 外围能力描述的版本、字段与隐私边界，不添加 HIA 运行时依赖或 transport。
+
+## HIA 外围协作基线
+
+`Portal.Components/PortalHiaBoundaryContracts.cs` 定义门户拥有的 `hia.portal.peripheral@0.1.0-draft` 契约 DTO 和离线验证器。当前仅覆盖模块、主题、设置 registry 元数据、健康和受限诊断引用，且通过显式版本、白名单字段和路径/敏感字段检查保持边界清晰。
+
+这是一项可演进的协作基线，不是 HIA 平台强耦合或通用远程 API。正常门户不会发现或加载外部 adapter，也不需要 HIA 仓库、DLL 或服务存在。未来如需真实 consumer、传输、身份映射或写操作，应新增设计决策、版本化契约与独立运行回归。
 
 ## 当前架构风险
 

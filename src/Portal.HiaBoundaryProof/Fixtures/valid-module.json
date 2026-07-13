@@ -1,0 +1,23 @@
+{
+  "contract": "hia.portal.peripheral",
+  "contractVersion": "0.1.0-draft",
+  "portalInstanceId": "5d2e8c88-6e63-4d9b-9e1b-202607140001",
+  "producer": {
+    "id": "hia-aspnetportal",
+    "version": "0.1.0-draft"
+  },
+  "kind": "portal.module-capability",
+  "occurredUtc": "2026-07-14T01:00:00.0000000Z",
+  "payload": {
+    "descriptorVersion": "0.1.0-draft",
+    "packageId": "HIA.ModuleProbe",
+    "displayName": "Module Probe",
+    "packageVersion": "1.0.0",
+    "state": "Enabled",
+    "capabilities": ["style-scope", "read-only"]
+  },
+  "metadata": {
+    "metadataVersion": "0.1.0-draft",
+    "source": "portal"
+  }
+}

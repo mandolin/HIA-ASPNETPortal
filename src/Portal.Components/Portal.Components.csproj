@@ -114,6 +114,7 @@
     <Compile Include="IModuleItem.cs" />
     <Compile Include="PortalRoles.cs" />
     <Compile Include="PortalDatabaseProfile.cs" />
+    <Compile Include="PortalHiaBoundaryContracts.cs" />
     <Compile Include="PortalUserRegistrationStatuses.cs" />
     <Compile Include="PortalSecurity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -150,6 +150,23 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Diagnostics");
 
+        /// <summary>
+        /// HIA 外围契约使用的部署级门户实例标识。
+        /// Deployment-level portal instance identifier for the HIA peripheral contract.
+        /// </summary>
+        public static readonly PortalSettingDefinition HiaPortalInstanceId =
+            new PortalSettingDefinition(
+                PortalSettingKeys.HiaPortalInstanceId,
+                "HIA 门户实例标识",
+                "用于未来 HIA 外围能力描述的非敏感稳定实例标识；留空时不启用任何对外适配器。",
+                PortalSettingValueType.String,
+                string.Empty,
+                false,
+                true,
+                "Admins",
+                "HiaBoundary",
+                sourceLevel: "AppSettings");
+
         private static readonly IList<PortalSettingDefinition> AllDefinitions =
             new List<PortalSettingDefinition>
             {
@@ -163,7 +180,8 @@ namespace ASPNET.StarterKit.Portal
                 DiagnosticsLogDirectory,
                 DiagnosticsMaxFileBytes,
                 DiagnosticsRetentionDays,
-                DiagnosticsAllowAdminDetailView
+                DiagnosticsAllowAdminDetailView,
+                HiaPortalInstanceId
             }.AsReadOnly();
 
         /// <summary>

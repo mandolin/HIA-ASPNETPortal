@@ -1,0 +1,19 @@
+{
+  "contract": "hia.portal.peripheral",
+  "contractVersion": "0.1.0-draft",
+  "portalInstanceId": "portal-dev-01",
+  "producer": {
+    "id": "hia-aspnetportal",
+    "version": "0.1.0-draft"
+  },
+  "kind": "portal.setting-capability",
+  "occurredUtc": "2026-07-14T01:01:45.0000000Z",
+  "payload": {
+    "descriptorVersion": "0.1.0-draft",
+    "settingKey": "Portal.Theme.Name",
+    "valueType": "Enum",
+    "isSensitive": false,
+    "sourceLevel": "RuntimeSetting",
+    "canEditOnline": true
+  }
+}

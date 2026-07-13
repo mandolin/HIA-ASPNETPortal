@@ -1,0 +1,16 @@
+{
+  "contract": "hia.portal.peripheral",
+  "contractVersion": "9.0.0",
+  "portalInstanceId": "portal-dev-01",
+  "producer": {
+    "id": "hia-aspnetportal",
+    "version": "0.1.0-draft"
+  },
+  "kind": "portal.health-capability",
+  "occurredUtc": "2026-07-14T01:05:00.0000000Z",
+  "payload": {
+    "descriptorVersion": "0.1.0-draft",
+    "componentId": "database",
+    "status": "Healthy"
+  }
+}

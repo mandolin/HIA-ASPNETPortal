@@ -71,5 +71,11 @@ namespace ASPNET.StarterKit.Portal
         /// Whether registrations with pending employee binding may continue to approval.
         /// </summary>
         public const string AllowPendingEmployeeBinding = "Portal.Registration.AllowPendingEmployeeBinding";
+
+        /// <summary>
+        /// HIA 外围能力描述使用的部署级门户实例标识。
+        /// Deployment-level portal instance identifier used by HIA peripheral capability descriptors.
+        /// </summary>
+        public const string HiaPortalInstanceId = "Portal.Hia.InstanceId";
     }
 }
