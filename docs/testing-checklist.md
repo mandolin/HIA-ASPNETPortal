@@ -21,6 +21,7 @@
 
 - [ ] 站点可启动。
 - [ ] 首页可访问。
+- [ ] `dev/scripts/Test-PortalSmoke.ps1` 对已运行站点通过。
 - [ ] 登录流程可用。
 - [ ] 默认账号已仅限本地验证，非本地环境已修改密码。
 - [ ] 管理入口可访问。
@@ -50,3 +51,4 @@
 - [ ] `Web.Debug.config`、`Web.Release.config`、`Web.Test.config` 的处理方式符合仓库规则。
 - [ ] README、`docs/`、`dev/` 已按变更更新。
 - [ ] 已记录验证结果和残留风险。
+- [ ] 已按 `docs/deployment-checklist.md` 完成 SQL Server、IIS、外置配置和回滚检查。

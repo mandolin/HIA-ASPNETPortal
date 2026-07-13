@@ -74,13 +74,49 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 
 当前已验证 IIS Express 可在 `http://localhost:40001/` 返回 `HTTP 200 OK`。
 
+## 自动 Smoke 与 SQL Server 兼容检查
+
+P2.5 新增的 HTTP smoke 默认只检查已经运行的站点，不写入数据库，也不要求管理员凭据：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSmoke.ps1
+```
+
+需要脚本自行启动并关闭本地 IIS Express 时，显式传入：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSmoke.ps1 -StartIISExpress -StopWhenComplete
+```
+
+管理员页面回归需要显式提供用户名；密码会使用交互式 `SecureString` 输入，不应写入命令、脚本或配置文件：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSmoke.ps1 -AdminUser admin
+```
+
+非 LocalDB SQL Server 兼容检查必须使用独立测试库的外置连接串文件。默认只读 preflight；只有传入 `-ApplyP2Migrations` 并确认后，才会执行 P2 的幂等增量迁移：
+
+```powershell
+$testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath $testConfig -RequireP2Migrations
+```
+
+首次创建隔离的 SQL Server 2016+ 测试库时，可显式运行初始化脚本。它从外置连接串读取目标库名，要求目标库不存在，并在确认后导入历史基础数据和 P2 迁移；不会输出或保存连接串：
+
+```powershell
+$testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Initialize-PortalTestDatabase.ps1 -ConnectionStringsConfigPath $testConfig
+```
+
+可先增加 `-WhatIf` 检查目标库和执行意图。该脚本绝不覆盖既有数据库，任一步失败后也不会自动删库；只可用于隔离测试实例。发布前请使用 [deployment-checklist.md](deployment-checklist.md)。
+
 ## 数据库初始化
 
 参考 `src/ReadMe.txt`，基础流程为：
 
-1. 执行 `src/Setup/Portal_CreateDB.sql`。
-2. 执行 `src/Setup/Portal_LoadConfig.sql`。
-3. 执行 `src/Setup/Portal_LoadData.sql`。
+1. 为隔离环境准备仓库外 `connectionStrings.config`，并确保目标数据库不存在。
+2. 优先用 `Initialize-PortalTestDatabase.ps1` 显式执行基础初始化和 P2 迁移；历史 SQL 文件仍保留供 Visual Studio/SSMS 人工维护使用。
+3. 如确需手工执行，请按 `Portal_CreateDB.sql`、`Portal_LoadConfig.sql`、`Portal_LoadData.sql`、三份 `PortalCfg_*.sql` 的顺序操作，并确认数据库上下文与连接串一致。
 4. 复制 `src/Portal/Config/Templates/connectionStrings.config` 到外置配置目录，并修改其中的 `Portal` 连接串。
 5. 构建并运行站点。
 

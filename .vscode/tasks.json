@@ -109,6 +109,20 @@
                 "iisexpress: start Portal (40001)"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "portal: smoke (running site)",
+            "type": "process",
+            "command": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": [
+                "-NoLogo",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Test-PortalSmoke.ps1"
+            ],
+            "problemMatcher": []
         }
     ]
 }
