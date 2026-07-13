@@ -24,6 +24,11 @@
                             <hr noshade size="1">
                         </td>
                     </tr>
+                    <tr>
+                        <td class="Normal">
+                            <a class="CommandButton" href="ThemeSettings.aspx">Theme Settings</a>
+                        </td>
+                    </tr>
                 </table>
 
                 <table width="100%" cellspacing="0" cellpadding="3" border="0">

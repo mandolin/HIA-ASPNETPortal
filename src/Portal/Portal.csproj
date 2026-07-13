@@ -112,11 +112,14 @@
     <Content Include="Admin\DiagnosticsLogs.aspx" />
     <Content Include="Admin\OperationAudits.aspx" />
     <Content Include="Admin\SystemHealth.aspx" />
+    <Content Include="Admin\ThemeSettings.aspx" />
     <Content Include="Admin\TabLayout.aspx" />
     <Content Include="Admin\Tabs.ascx" />
     <Content Include="Admin\Users.ascx" />
     <Content Include="App_Themes\Default\Default.css" />
+    <Content Include="App_Themes\Default\theme.json" />
     <Content Include="App_Themes\ThemeProbe\Default.css" />
+    <Content Include="App_Themes\ThemeProbe\theme.json" />
     <Content Include="Config\Templates\connectionStrings.config" />
     <Content Include="Config\UnityCfg.dev.template.xml" />
     <Content Include="Config\UnityCfg.prod.template.xml" />
@@ -316,6 +319,13 @@
     <Compile Include="Admin\SystemHealth.aspx.designer.cs">
       <DependentUpon>SystemHealth.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ThemeSettings.aspx.cs">
+      <DependentUpon>ThemeSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ThemeSettings.aspx.designer.cs">
+      <DependentUpon>ThemeSettings.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\TabLayout.aspx.cs">
       <DependentUpon>TabLayout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -371,11 +381,14 @@
     <Compile Include="Components\PortalHealthSnapshot.cs" />
     <Compile Include="Components\PortalHealthStatus.cs" />
     <Compile Include="Components\PortalRuntimeSettings.cs" />
+    <Compile Include="Components\PortalSystemSettingsStore.cs" />
     <Compile Include="Components\PortalRegistrationOptions.cs" />
     <Compile Include="Components\PortalSettingDefinition.cs" />
     <Compile Include="Components\PortalSettingKeys.cs" />
     <Compile Include="Components\PortalSettingHealthInfo.cs" />
     <Compile Include="Components\PortalSettingsRegistry.cs" />
+    <Compile Include="Components\PortalTabThemeOverrides.cs" />
+    <Compile Include="Components\PortalThemePackage.cs" />
     <Compile Include="Components\PortalThemeResolver.cs" />
     <Compile Include="Components\IContainerAccessor.cs" />
     <Compile Include="Components\CachedPortalModuleControl.cs">
@@ -400,6 +413,10 @@
     </Compile>
     <Compile Include="DesktopDefault.aspx.cs">
       <DependentUpon>DesktopDefault.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.master.cs">
+      <DependentUpon>Default.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DesktopDefault.aspx.designer.cs">

@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -41,7 +42,12 @@ namespace ASPNET.StarterKit.Portal
             // 如果客户端尚未经过身份验证，并且当前标签的索引为 0，则在主页的左上角动态注入登录模块
             if (!Request.IsAuthenticated && portalSettings.ActiveTab.TabIndex == 0)
             {
-                LeftPane.Controls.Add(Page.LoadControl("~/DesktopModules/SignIn.ascx"));
+                var signInContainer = new Panel
+                {
+                    CssClass = "portal-module portal-module-signin portal-pane-leftpane"
+                };
+                signInContainer.Controls.Add(Page.LoadControl("~/DesktopModules/SignIn.ascx"));
+                LeftPane.Controls.Add(signInContainer);
                 LeftPane.Visible = true;
             }
 
@@ -75,6 +81,16 @@ namespace ASPNET.StarterKit.Portal
                     // 如果未指定缓存，则创建用户控件实例并将其动态注入页面。
                     // 否则，创建一个缓存的模块实例，该实例可能会或可能不会选择性地将模块注入到树中
 
+                    // 使用稳定包装元素承载模块 CSS scope。缓存只保存模块内部输出，因此纯 CSS scope 不改变缓存键。
+                    // Use a stable wrapper element for module CSS scope. The cache stores only inner module output,
+                    // so a CSS-only scope does not change the cache key.
+                    var moduleContainer = new Panel
+                    {
+                        CssClass = PortalThemeResolver.GetModuleCssClass(
+                            _moduleSettings.ModuleId,
+                            _moduleSettings.PaneName)
+                    };
+
                     // 检查缓存时间设置是否为 0（表示不缓存）
                     if (_moduleSettings.CacheTime == 0)
                     {
@@ -86,8 +102,9 @@ namespace ASPNET.StarterKit.Portal
                         portalModule.PortalId = portalSettings.PortalId;
                         portalModule.ModuleConfiguration = _moduleSettings;
 
-                        // 将加载的模块添加到父控件容器中
-                        parent.Controls.Add((UserControl)portalModule);
+                        // 将加载的模块添加到 CSS scope 容器中。
+                        // Add the loaded module to the CSS-scope container.
+                        moduleContainer.Controls.Add((UserControl)portalModule);
                     }
                     else
                     {
@@ -98,9 +115,12 @@ namespace ASPNET.StarterKit.Portal
                         portalModule.PortalId = portalSettings.PortalId;
                         portalModule.ModuleConfiguration = _moduleSettings;
 
-                        // 将缓存的模块添加到父控件容器中
-                        parent.Controls.Add(portalModule);
+                        // 将缓存模块添加到 CSS scope 容器中。
+                        // Add the cached module to the CSS-scope container.
+                        moduleContainer.Controls.Add(portalModule);
                     }
+
+                    parent.Controls.Add(moduleContainer);
 
                     // Dynamically inject separator break between portal modules
                     // 在门户模块之间动态注入分隔符换行符

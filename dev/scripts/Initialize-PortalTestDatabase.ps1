@@ -33,8 +33,22 @@ function Get-ExternalConnectionString {
         [string]$Name
     )
 
-    [xml]$configuration = [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
-    $matches = @($configuration.connectionStrings.add | Where-Object { $_.name -eq $Name })
+    [xml]$document = [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
+
+    # 应用正式契约是 <connectionStrings> 根节点；同时兼容早期人工包装的 <configuration> 形态。
+    # The production contract uses a <connectionStrings> root; also accept the legacy <configuration> wrapper.
+    $connectionStringsNode = if ($document.DocumentElement -and
+        $document.DocumentElement.Name -eq 'connectionStrings') {
+        $document.DocumentElement
+    }
+    elseif ($document.configuration -and $document.configuration.connectionStrings) {
+        $document.configuration.connectionStrings
+    }
+    else {
+        throw 'The external connection-string file must contain a <connectionStrings> section.'
+    }
+
+    $matches = @($connectionStringsNode.add | Where-Object { $_.name -eq $Name })
     if ($matches.Count -ne 1 -or [string]::IsNullOrWhiteSpace($matches[0].connectionString)) {
         throw "The external connection-string file does not contain one non-empty '$Name' entry."
     }
@@ -180,13 +194,13 @@ try {
         throw ("The configured target database '{0}' already exists. This script never replaces an existing database." -f $targetDatabaseName)
     }
 
-    $action = 'Create the database, load legacy base data, and apply P2 migrations'
+    $action = 'Create the database, load legacy base data, and apply P2/P3 migrations'
     if (-not $PSCmdlet.ShouldProcess(("database '{0}'" -f $targetDatabaseName), $action)) {
         Write-Host 'Initialization was skipped by WhatIf or confirmation response.'
         return
     }
 
-    Write-Host ('[1/6] Creating isolated database {0}.' -f $targetDatabaseName)
+    Write-Host ('[1/7] Creating isolated database {0}.' -f $targetDatabaseName)
     $initializationStarted = $true
     Invoke-SqlScript -Connection $masterConnection -Path (Join-Path $repoRoot 'src/Setup/Portal_CreateDB.sql') -QuotedDatabaseName $quotedTargetDatabaseName -ExpectedCreateDatabaseCount 1 -ExpectedUseDatabaseCount 1 -TimeoutSeconds $CommandTimeoutSeconds
 
@@ -198,18 +212,19 @@ try {
         [pscustomobject]@{ Number = 3; Path = (Join-Path $repoRoot 'src/Setup/Portal_LoadData.sql'); CreateCount = 0; UseCount = 1; Description = 'Loading legacy sample data' },
         [pscustomobject]@{ Number = 4; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_SystemSettings.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying system-settings migration' },
         [pscustomobject]@{ Number = 5; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_UserRegistration.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying registration migration' },
-        [pscustomobject]@{ Number = 6; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_OperationAudits.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying operation-audit migration' }
+        [pscustomobject]@{ Number = 6; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_OperationAudits.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying operation-audit migration' },
+        [pscustomobject]@{ Number = 7; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_TabThemeOverrides.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying tab-theme migration' }
     )
 
     foreach ($step in $steps) {
-        Write-Host ('[{0}/6] {1}.' -f $step.Number, $step.Description)
+        Write-Host ('[{0}/7] {1}.' -f $step.Number, $step.Description)
         Invoke-SqlScript -Connection $targetConnection -Path $step.Path -QuotedDatabaseName $quotedTargetDatabaseName -ExpectedCreateDatabaseCount $step.CreateCount -ExpectedUseDatabaseCount $step.UseCount -TimeoutSeconds $CommandTimeoutSeconds
     }
 
     [pscustomobject]@{
         DatabaseName = $targetDatabaseName
         ServerMajorVersion = $serverMajorVersion
-        CompletedSteps = 6
+        CompletedSteps = 7
         Status = 'Initialized'
     }
 }

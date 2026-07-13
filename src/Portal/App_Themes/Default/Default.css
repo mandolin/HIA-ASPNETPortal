@@ -12,6 +12,14 @@
 
 /* PAGE BACKGROUND */
 
+/*
+   P3.1 supplies portal-theme-{name}, portal-tab-{id}, portal-module-{id}, and portal-pane-{name}
+   scope classes. Theme packages may target these classes with IE9-compatible CSS; they must not rely
+   on remote resources, theme scripts, CSS variables, Grid, or Flexbox.
+   P3.1 提供 portal-theme-{name}、portal-tab-{id}、portal-module-{id}、portal-pane-{name} 作用域 class。
+   主题包可用兼容 IE9 的 CSS 定向这些 class；不得依赖远程资源、主题脚本、CSS 变量、Grid 或 Flexbox。
+*/
+
 /* background color for the header at the top of the page  */
 
 .HeadBg { background-color: darkred; }

@@ -21,8 +21,9 @@ namespace ASPNET.StarterKit.Portal
     /// Metadata definition for one system setting.
     /// </summary>
     /// <remarks>
-    /// P2.1 只建立 registry 骨架；运行值仍从 appSettings 读取，数据库设置层后续再接入。
-    /// P2.1 builds the registry skeleton only; runtime values still come from appSettings for now.
+    /// registry 定义设置契约；运行期可在受限的数据库覆盖层、appSettings 与代码默认值之间解析。
+    /// The registry defines the setting contract; runtime values resolve through a restricted database
+    /// override layer, appSettings, and code defaults.
     /// </remarks>
     public sealed class PortalSettingDefinition
     {

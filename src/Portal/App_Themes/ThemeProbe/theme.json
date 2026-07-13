@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "name": "ThemeProbe",
+  "displayName": "主题验证 / Theme Probe",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "inheritsDefault": true,
+  "resources": [
+    "Default.css"
+  ]
+}

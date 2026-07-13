@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "name": "Default",
+  "displayName": "默认主题 / Default Theme",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "inheritsDefault": false,
+  "resources": [
+    "Default.css"
+  ]
+}

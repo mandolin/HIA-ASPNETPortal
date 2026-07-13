@@ -20,3 +20,8 @@
 .OtherTabsBg {
     background-color: #4f6678;
 }
+
+/* P3.1 模块作用域验证：包装元素不参与缓存输出，可安全用于纯 CSS 呈现差异。 */
+body.portal-theme-themeprobe .portal-module {
+    outline: 1px solid #91a9bd;
+}

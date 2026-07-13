@@ -8,7 +8,11 @@ param(
 
     [switch]$ApplyP2Migrations,
 
-    [switch]$RequireP2Migrations
+    [switch]$RequireP2Migrations,
+
+    [switch]$ApplyP3Migrations,
+
+    [switch]$RequireP3Migrations
 )
 
 Set-StrictMode -Version Latest
@@ -39,8 +43,22 @@ function Get-ExternalConnectionString {
         [string]$Name
     )
 
-    [xml]$configuration = [System.IO.File]::ReadAllText($Path)
-    $matches = @($configuration.connectionStrings.add | Where-Object { $_.name -eq $Name })
+    [xml]$document = [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
+
+    # 应用正式契约是 <connectionStrings> 根节点；同时兼容早期人工包装的 <configuration> 形态。
+    # The production contract uses a <connectionStrings> root; also accept the legacy <configuration> wrapper.
+    $connectionStringsNode = if ($document.DocumentElement -and
+        $document.DocumentElement.Name -eq 'connectionStrings') {
+        $document.DocumentElement
+    }
+    elseif ($document.configuration -and $document.configuration.connectionStrings) {
+        $document.configuration.connectionStrings
+    }
+    else {
+        throw 'The external connection-string file must contain a <connectionStrings> section.'
+    }
+
+    $matches = @($connectionStringsNode.add | Where-Object { $_.name -eq $Name })
     if ($matches.Count -ne 1 -or [string]::IsNullOrWhiteSpace($matches[0].connectionString)) {
         throw "The external connection-string file does not contain one non-empty '$Name' entry."
     }
@@ -137,8 +155,8 @@ function Get-ExistingTableNames {
 function Get-SqlBatches {
     param([string]$SqlText)
 
-    # P2 迁移使用独立 GO 批次；只接受裸 GO，避免把未知 sqlcmd 指令静默当作 SQL 执行。
-    # P2 migrations use standalone GO batches; only bare GO is accepted to avoid treating unknown sqlcmd directives as SQL.
+    # 扩展迁移使用独立 GO 批次；只接受裸 GO，避免把未知 sqlcmd 指令静默当作 SQL 执行。
+    # Extension migrations use standalone GO batches; only bare GO is accepted to avoid treating unknown sqlcmd directives as SQL.
     if ($SqlText -match '(?im)^\s*GO\s+\d+') {
         throw 'SQL batch repeat counts are not supported by this compatibility script.'
     }
@@ -200,9 +218,20 @@ try {
         }
     }
 
+    if ($ApplyP3Migrations) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P3 theme migration scripts')) {
+            Invoke-MigrationFile -Connection $connection -Path (Join-Path $repoRoot 'src/Setup/PortalCfg_TabThemeOverrides.sql')
+            Add-DatabaseCheck -Name 'P3 migration application' -Status 'Pass' -Detail 'The idempotent P3 tab-theme migration batches completed.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P3 migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
-    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables)
+    $p3Tables = @('PortalCfg_TabThemeOverrides')
+    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
     Add-DatabaseCheck -Name 'Base Portal schema' -Status $(if ($missingBaseTables.Count -eq 0) { 'Pass' } else { 'Fail' }) -Detail $(if ($missingBaseTables.Count -eq 0) { 'Required base tables are present.' } else { 'Missing: ' + ($missingBaseTables -join ', ') })
@@ -216,6 +245,17 @@ try {
     }
     else {
         Add-DatabaseCheck -Name 'P2 migration schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP2Tables -join ', '))
+    }
+
+    $missingP3Tables = @($p3Tables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP3Tables.Count -eq 0) {
+        Add-DatabaseCheck -Name 'P3 theme schema' -Status 'Pass' -Detail 'All P3 theme extension tables are present.'
+    }
+    elseif ($RequireP3Migrations) {
+        Add-DatabaseCheck -Name 'P3 theme schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP3Tables -join ', '))
+    }
+    else {
+        Add-DatabaseCheck -Name 'P3 theme schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP3Tables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })

@@ -225,32 +225,53 @@ namespace ASPNET.StarterKit.Portal
 
         private static void AddThemeChecks(IList<PortalHealthCheckResult> checks, HttpContext context)
         {
-            string configuredTheme = PortalRuntimeSettings.GetString(PortalSettingsRegistry.ThemeName);
-            string resolvedTheme = PortalThemeResolver.ResolveThemeName(context);
+            PortalRuntimeSettingValue configuredTheme = PortalRuntimeSettings.GetEffectiveValue(
+                PortalSettingsRegistry.ThemeName,
+                context);
+            PortalThemeContext resolvedThemeContext = PortalThemeResolver.ResolveThemeContext(context);
+            string resolvedTheme = resolvedThemeContext.ThemeName;
             string resolvedPath = HostingEnvironment.MapPath("~/App_Themes/" + resolvedTheme);
             string defaultPath = HostingEnvironment.MapPath("~/App_Themes/" + PortalThemeResolver.DefaultThemeName);
 
             bool resolvedExists = !string.IsNullOrEmpty(resolvedPath) && Directory.Exists(resolvedPath);
             bool defaultExists = !string.IsNullOrEmpty(defaultPath) && Directory.Exists(defaultPath);
-            PortalHealthStatus status = resolvedExists && defaultExists
+            PortalThemePackage resolvedPackage;
+            string resolvedPackageReason;
+            bool resolvedPackageIsValid = PortalThemeCatalog.TryGetTrustedPackage(
+                resolvedTheme,
+                out resolvedPackage,
+                out resolvedPackageReason);
+            PortalThemePackage defaultPackage;
+            string defaultPackageReason;
+            bool defaultPackageIsValid = PortalThemeCatalog.TryGetTrustedPackage(
+                PortalThemeResolver.DefaultThemeName,
+                out defaultPackage,
+                out defaultPackageReason);
+            PortalHealthStatus status = resolvedExists && defaultExists && resolvedPackageIsValid && defaultPackageIsValid
                 ? PortalHealthStatus.Healthy
                 : PortalHealthStatus.Error;
 
             if (status == PortalHealthStatus.Healthy &&
-                !string.Equals(configuredTheme, resolvedTheme, StringComparison.Ordinal))
+                (!string.Equals(configuredTheme.Value, resolvedTheme, StringComparison.Ordinal) ||
+                 resolvedThemeContext.Source == PortalThemeSource.Fallback))
             {
                 status = PortalHealthStatus.Warning;
             }
 
             checks.Add(new PortalHealthCheckResult(
                 "Theme",
-                "主题目录",
+                "主题部署包",
                 status,
-                status == PortalHealthStatus.Healthy ? "主题目录检查通过。" : "主题目录存在异常。",
-                "Configured=" + configuredTheme +
+                status == PortalHealthStatus.Healthy ? "主题部署包检查通过。" : "主题目录或 manifest 存在异常。",
+                "Configured=" + configuredTheme.Value +
+                "; Source=" + configuredTheme.Source +
                 "; Resolved=" + resolvedTheme +
                 "; ResolvedPath=" + resolvedPath +
-                "; DefaultPath=" + defaultPath));
+                "; DefaultPath=" + defaultPath +
+                "; ResolvedManifest=" + resolvedPackageIsValid +
+                "; DefaultManifest=" + defaultPackageIsValid +
+                "; ResolvedManifestReason=" + resolvedPackageReason +
+                "; DefaultManifestReason=" + defaultPackageReason));
         }
 
         private static void AddWritableDirectoryCheck(
@@ -336,58 +357,9 @@ namespace ASPNET.StarterKit.Portal
             out string currentValue,
             out string source)
         {
-            string configuredValue = ConfigurationManager.AppSettings[definition.Key];
-            if (string.IsNullOrWhiteSpace(configuredValue))
-            {
-                currentValue = definition.DefaultValue;
-                source = "Default";
-                return;
-            }
-
-            if (TryNormalizeSettingValue(definition, configuredValue, out currentValue))
-            {
-                source = "AppSettings";
-                return;
-            }
-
-            currentValue = definition.DefaultValue;
-            source = "Default (invalid appSettings)";
-        }
-
-        private static bool TryNormalizeSettingValue(
-            PortalSettingDefinition definition,
-            string configuredValue,
-            out string normalizedValue)
-        {
-            normalizedValue = configuredValue.Trim();
-
-            switch (definition.ValueType)
-            {
-                case PortalSettingValueType.Boolean:
-                    bool boolValue;
-                    if (bool.TryParse(configuredValue, out boolValue))
-                    {
-                        normalizedValue = boolValue.ToString().ToLowerInvariant();
-                        return true;
-                    }
-
-                    return false;
-
-                case PortalSettingValueType.Integer:
-                    int intValue;
-                    if (int.TryParse(configuredValue, out intValue) &&
-                        (!definition.MinIntegerValue.HasValue || intValue >= definition.MinIntegerValue.Value) &&
-                        (!definition.MaxIntegerValue.HasValue || intValue <= definition.MaxIntegerValue.Value))
-                    {
-                        normalizedValue = intValue.ToString();
-                        return true;
-                    }
-
-                    return false;
-
-                default:
-                    return true;
-            }
+            PortalRuntimeSettingValue effectiveValue = PortalRuntimeSettings.GetEffectiveValue(definition);
+            currentValue = effectiveValue.Value;
+            source = effectiveValue.Source.ToString();
         }
 
         private static void TryDelete(string path)

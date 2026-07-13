@@ -78,11 +78,11 @@ namespace ASPNET.StarterKit.Portal
             new PortalSettingDefinition(
                 PortalSettingKeys.ThemeName,
                 "门户主题名",
-                "当前 WebForms 主题名称；非法或缺失时回退 Default。",
+                "当前 WebForms 主题名称；只允许选择已部署且通过清单校验的主题，非法或缺失时回退 Default。",
                 PortalSettingValueType.Enum,
                 "Default",
-                false,
                 true,
+                false,
                 "Admins",
                 "Theme");
 

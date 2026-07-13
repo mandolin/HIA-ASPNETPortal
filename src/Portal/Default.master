@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="ASPNET.StarterKit.Portal.PortalMasterPage" %>
 
 <%-- #todo 使Banner可配置 --%>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Banner" Src="DesktopPortalBanner.ascx" %>
@@ -10,7 +10,7 @@
     <title>ASP.NET Portal Starter Kit</title>
 </head>
 <%-- #todo 默认模板的改造：样式改造等（待细化） --%>
-<body bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
+<body id="PortalBody" runat="server" bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
     <form id="Form1" runat="server">
         <table cellspacing="0" cellpadding="0" width="100%" border="0">
             <tbody>
