@@ -8,14 +8,31 @@ using ASPNET.StarterKit.Portal;
 namespace ASPNET.StarterKit.Portal.Util
 {
     /// <summary>
-    /// 外置连接串加载结果。
+    /// 中文：外置门户连接串的加载结果。
+    ///
+    /// English: Result of loading the external Portal connection string.
     /// </summary>
     /// <remarks>
-    /// 结果中同时保留最终连接串、配置根目录、实际读取文件和来源说明，
-    /// 方便启动调试时确认当前环境到底使用了哪一路配置。
+    /// 中文：结果保留最终连接串、配置根目录、实际读取文件、来源和数据库 profile，供启动代码使用。
+    /// 连接串属于敏感信息，调用方不得将其输出到页面、诊断日志或普通管理界面。
+    ///
+    /// English: The result retains the effective connection string, configuration root, source file,
+    /// source description, and database profile for startup code. The connection string is sensitive
+    /// and must not be written to pages, diagnostic logs, or ordinary administration views.
     /// </remarks>
     internal sealed class ExternalConnectionStringLoadResult
     {
+        /// <summary>
+        /// 中文：创建外置连接串加载结果，并基于有效连接串构造门户主数据库 profile。
+        ///
+        /// English: Creates an external connection-string load result and builds the Portal primary-database profile from the effective connection string.
+        /// </summary>
+        /// <param name="connectionString">中文：敏感有效连接串。English: Sensitive effective connection string.</param>
+        /// <param name="providerInvariantName">中文：有效 provider invariant name。English: Effective provider invariant name.</param>
+        /// <param name="configRoot">中文：解析后的外置配置根目录。English: Resolved external configuration root.</param>
+        /// <param name="configFile">中文：读取的环境配置文件路径。English: Path of the environment configuration file that was read.</param>
+        /// <param name="source">中文：最终连接串来源说明。English: Description of the final connection-string source.</param>
+        /// <param name="environmentName">中文：当前规范化环境名称。English: Current normalized environment name.</param>
         public ExternalConnectionStringLoadResult(
             string connectionString,
             string providerInvariantName,
@@ -38,71 +55,123 @@ namespace ASPNET.StarterKit.Portal.Util
         }
 
         /// <summary>
-        /// 最终用于注入数据访问层的连接串。
+        /// 中文：最终注入数据访问层的敏感连接串。
+        ///
+        /// English: Sensitive effective connection string injected into the data-access layer.
         /// </summary>
         public string ConnectionString { get; private set; }
 
         /// <summary>
-        /// 当前连接串对应的 ADO.NET provider invariant name。
-        /// ADO.NET provider invariant name associated with the current connection string.
+        /// 中文：当前连接串对应的 ADO.NET provider invariant name。
+        ///
+        /// English: ADO.NET provider invariant name associated with the effective connection string.
         /// </summary>
         public string ProviderInvariantName { get; private set; }
 
         /// <summary>
-        /// 供新数据访问代码使用的数据库 profile；其中包含敏感连接串。
-        /// Database profile for new data-access code; it contains the sensitive connection string.
+        /// 中文：供新数据访问代码使用的数据库 profile，其中包含敏感连接串。
+        ///
+        /// English: Database profile for new data-access code; it contains the sensitive connection string.
         /// </summary>
         public PortalDatabaseProfile DatabaseProfile { get; private set; }
 
         /// <summary>
-        /// 外置配置根目录，例如 C:\Users\xxx\Web\HIA-ASPNETPortal。
+        /// 中文：实际解析出的外置配置根目录，默认规则为 {当前进程用户目录}\Web\{项目名}。
+        ///
+        /// English: Resolved external configuration root. The default rule is
+        /// {current-process user profile}\Web\{project name}.
         /// </summary>
         public string ConfigRoot { get; private set; }
 
         /// <summary>
-        /// 当前环境对应的 connectionStrings.config 完整路径。
+        /// 中文：当前环境对应的 <c>connectionStrings.config</c> 完整路径。
+        ///
+        /// English: Full path of <c>connectionStrings.config</c> for the current environment.
         /// </summary>
         public string ConfigFile { get; private set; }
 
         /// <summary>
-        /// 连接串最终来源；可能是外置文件，也可能是指定的环境变量。
+        /// 中文：最终连接串来源，可以是外置文件或指定的敏感环境变量。
+        ///
+        /// English: Final connection-string source, either the external file or the designated sensitive environment variable.
         /// </summary>
         public string Source { get; private set; }
     }
 
     /// <summary>
-    /// 负责从仓库外部加载门户数据库连接串。
+    /// 中文：从仓库外部加载门户主数据库连接串。
+    ///
+    /// English: Loads the Portal primary-database connection string from outside the repository.
     /// </summary>
     /// <remarks>
-    /// G1-P3 的约定是：真实连接串不进入仓库，Unity 配置只保留依赖名。
-    /// 启动时先读取外置文件中的逻辑连接串 <c>Portal</c>，
-    /// 再注册成旧数据访问层仍在使用的 Unity 命名实例 <c>connectionString</c>。
+    /// 中文：真实连接串不得进入仓库，Unity 配置只保留依赖名称。启动时先读取外置文件中的逻辑连接串
+    /// <c>Portal</c>，再注册为旧数据访问层仍使用的 Unity 命名实例 <c>connectionString</c>。
+    ///
+    /// English: Real connection strings must not enter the repository; Unity configuration retains only
+    /// a dependency name. Startup reads the logical external <c>Portal</c> connection string, then
+    /// registers it as the legacy Unity named instance <c>connectionString</c>.
     /// </remarks>
     internal static class ExternalConnectionStringLoader
     {
-        // Web.config 中用于覆盖外置配置根目录的 appSettings 键名。
+        /// <summary>
+        /// 中文：Web.config 中覆盖外置配置根目录的 appSettings 键名。
+        ///
+        /// English: appSettings key that overrides the external configuration root.
+        /// </summary>
         public const string ExternalCfgPathSettingName = "ExternalCfgPath";
 
-        // 默认路径中的项目名称固定使用仓库/站点名，不使用 VSCode Profile 名。
+        /// <summary>
+        /// 中文：默认路径使用的稳定仓库/站点名，不使用 VSCode Profile 名。
+        ///
+        /// English: Stable repository/site name used by the default path, not a VSCode profile name.
+        /// </summary>
         public const string ProjectName = "HIA-ASPNETPortal";
 
-        // 外置文件中的语义化连接串名称。
+        /// <summary>
+        /// 中文：外置文件中使用的语义化连接串名称。
+        ///
+        /// English: Semantic connection-string name used in the external file.
+        /// </summary>
         public const string LogicalConnectionStringName = "Portal";
 
-        // 旧 Unity 配置和数据访问构造函数当前仍依赖这个命名实例。
+        /// <summary>
+        /// 中文：旧 Unity 配置和数据访问构造函数仍依赖的命名实例。
+        ///
+        /// English: Named instance still required by legacy Unity configuration and data-access constructors.
+        /// </summary>
         public const string UnityConnectionStringName = "connectionString";
 
-        // 环境变量只覆盖具体敏感值，不负责改变外置配置根目录。
+        /// <summary>
+        /// 中文：仅覆盖敏感连接串值、不能改变外置配置根目录的环境变量名。
+        ///
+        /// English: Environment-variable name that overrides only the sensitive connection-string value, not the external root.
+        /// </summary>
         public const string EnvironmentVariableName = "HIA_ASPNETPORTAL_CONNSTR_PORTAL";
 
-        // 第一阶段只支持 XML 格式，后续再按规划扩展 JSON/YAML。
+        /// <summary>
+        /// 中文：当前唯一支持的外置 XML 文件名；JSON/YAML 兼容性保留给后续规划。
+        ///
+        /// English: Only supported external XML file name for now; JSON/YAML compatibility is reserved for later planning.
+        /// </summary>
         public const string ConnectionStringsFileName = "connectionStrings.config";
 
         /// <summary>
-        /// 加载当前运行环境的门户连接串。
+        /// 中文：加载当前运行环境的门户主数据库连接串。
+        ///
+        /// English: Loads the Portal primary-database connection string for the current runtime environment.
         /// </summary>
-        /// <param name="environmentName">运行配置环境，例如 dev、test 或 prod。</param>
-        /// <returns>包含最终连接串和来源信息的加载结果。</returns>
+        /// <param name="environmentName">
+        /// 中文：运行环境名称，例如 <c>dev</c>、<c>test</c> 或 <c>prod</c>；空白值回退为 <c>dev</c>。
+        /// English: Runtime environment name, such as <c>dev</c>, <c>test</c>, or <c>prod</c>; blank falls back to <c>dev</c>.
+        /// </param>
+        /// <returns>
+        /// 中文：包含有效连接串、provider、文件路径和来源的加载结果。
+        /// English: Load result containing the effective connection string, provider, file path, and source.
+        /// </returns>
+        /// <exception cref="ConfigurationErrorsException">
+        /// 中文：外置文件、逻辑连接串、provider 或默认根目录不可用时引发。
+        /// English: Thrown when the external file, logical connection string, provider, or default root is unavailable.
+        /// </exception>
         public static ExternalConnectionStringLoadResult LoadPortalConnectionString(string environmentName)
         {
             string env = NormalizeEnvironmentName(environmentName);
@@ -137,9 +206,18 @@ namespace ASPNET.StarterKit.Portal.Util
         }
 
         /// <summary>
-        /// 解析外置配置根目录。
+        /// 中文：解析外置配置根目录。
+        ///
+        /// English: Resolves the external configuration root.
         /// </summary>
-        /// <returns>规范化后的外置配置根目录。</returns>
+        /// <returns>
+        /// 中文：经规范化的根目录；优先使用 <c>ExternalCfgPath</c>，否则使用当前进程用户目录下的默认规则。
+        /// English: Normalized root; prefers <c>ExternalCfgPath</c>, otherwise uses the default rule beneath the current process user profile.
+        /// </returns>
+        /// <exception cref="ConfigurationErrorsException">
+        /// 中文：未配置覆盖路径且当前进程用户目录不可解析时引发。
+        /// English: Thrown when no override is configured and the current process user profile cannot be resolved.
+        /// </exception>
         public static string ResolveExternalConfigRoot()
         {
             string configuredPath = ConfigurationManager.AppSettings[ExternalCfgPathSettingName];
@@ -163,7 +241,9 @@ namespace ASPNET.StarterKit.Portal.Util
         }
 
         /// <summary>
-        /// 规范运行环境名称；缺省时回落到 dev。
+        /// 中文：规范运行环境名称；空白值回退为 <c>dev</c>。
+        ///
+        /// English: Normalizes a runtime environment name; blank falls back to <c>dev</c>.
         /// </summary>
         private static string NormalizeEnvironmentName(string environmentName)
         {
@@ -176,7 +256,9 @@ namespace ASPNET.StarterKit.Portal.Util
         }
 
         /// <summary>
-        /// 规范 Web.config 中配置的外置根目录。
+        /// 中文：规范 Web.config 中配置的外置根目录。
+        ///
+        /// English: Normalizes an external root configured in Web.config.
         /// </summary>
         private static string NormalizePath(string configuredPath)
         {
@@ -193,7 +275,9 @@ namespace ASPNET.StarterKit.Portal.Util
         }
 
         /// <summary>
-        /// 从外置 XML 文件中读取指定名称的连接串。
+        /// 中文：从外置 XML 文件读取指定名称的连接串。
+        ///
+        /// English: Reads a named connection string from the external XML file.
         /// </summary>
         private static string ReadConnectionString(string configFile, string connectionStringName)
         {
@@ -211,12 +295,13 @@ namespace ASPNET.StarterKit.Portal.Util
         }
 
         /// <summary>
-        /// 读取外置连接串条目的 provider invariant name。
-        /// Reads the provider invariant name from an external connection-string entry.
+        /// 中文：读取外置连接串条目的 provider invariant name。
+        ///
+        /// English: Reads the provider invariant name from an external connection-string entry.
         /// </summary>
-        /// <param name="configFile">外置配置文件完整路径。Full path of the external configuration file.</param>
-        /// <param name="connectionStringName">逻辑连接串名称。Logical connection-string name.</param>
-        /// <returns>非空 provider invariant name。A non-empty provider invariant name.</returns>
+        /// <param name="configFile">中文：外置配置文件完整路径。English: Full path of the external configuration file.</param>
+        /// <param name="connectionStringName">中文：逻辑连接串名称。English: Logical connection-string name.</param>
+        /// <returns>中文：非空 provider invariant name。English: A non-empty provider invariant name.</returns>
         private static string ReadProviderInvariantName(string configFile, string connectionStringName)
         {
             XElement entry = ReadConnectionStringEntry(configFile, connectionStringName);
@@ -232,12 +317,13 @@ namespace ASPNET.StarterKit.Portal.Util
         }
 
         /// <summary>
-        /// 读取并校验外置 XML 中的指定连接串条目。
-        /// Reads and validates a named connection-string entry from external XML.
+        /// 中文：读取并校验外置 XML 中的指定连接串条目。
+        ///
+        /// English: Reads and validates a named connection-string entry from external XML.
         /// </summary>
-        /// <param name="configFile">外置配置文件完整路径。Full path of the external configuration file.</param>
-        /// <param name="connectionStringName">逻辑连接串名称。Logical connection-string name.</param>
-        /// <returns>匹配的 XML 条目。Matching XML entry.</returns>
+        /// <param name="configFile">中文：外置配置文件完整路径。English: Full path of the external configuration file.</param>
+        /// <param name="connectionStringName">中文：逻辑连接串名称。English: Logical connection-string name.</param>
+        /// <returns>中文：匹配的 XML 条目。English: Matching XML entry.</returns>
         private static XElement ReadConnectionStringEntry(string configFile, string connectionStringName)
         {
             if (!File.Exists(configFile))
@@ -272,11 +358,12 @@ namespace ASPNET.StarterKit.Portal.Util
         }
 
         /// <summary>
-        /// 约束当前门户主业务数据库仍为 SQL Server。
-        /// Restricts the current primary portal database to SQL Server.
+        /// 中文：约束当前门户主业务数据库仍使用 SQL Server provider。
+        ///
+        /// English: Restricts the current Portal primary database to the SQL Server provider.
         /// </summary>
-        /// <param name="providerInvariantName">外置配置声明的 provider invariant。Provider invariant declared by external configuration.</param>
-        /// <param name="configFile">声明来源文件。Source configuration file.</param>
+        /// <param name="providerInvariantName">中文：外置配置声明的 provider invariant。English: Provider invariant declared by external configuration.</param>
+        /// <param name="configFile">中文：声明来源文件。English: Source configuration file.</param>
         private static void ValidatePrimaryPortalProvider(string providerInvariantName, string configFile)
         {
             if (!string.Equals(providerInvariantName, PortalDatabaseProviderNames.SqlServer, StringComparison.OrdinalIgnoreCase))
