@@ -59,12 +59,24 @@ namespace ASPNET.StarterKit.Portal
         /// 是否在 CSS 中继承 Default 主题。
         /// Whether the CSS inherits the Default theme.
         /// </summary>
+        /// <remarks>
+        /// 当前仅是部署包声明性元数据。主题 CSS 必须自行显式表达继承关系；catalog 和 Master Page 不会据此
+        /// 自动加载或注入 Default 主题资源。
+        /// This is declarative deployment-package metadata only. Theme CSS must explicitly express inheritance itself;
+        /// the catalog and Master Page do not automatically load or inject Default theme resources from this value.
+        /// </remarks>
         public bool InheritsDefault { get; private set; }
 
         /// <summary>
         /// 已声明且位于主题目录内的本地资源。
         /// Declared local resources located inside the theme directory.
         /// </summary>
+        /// <remarks>
+        /// 此列表用于部署包校验和后续工具，不是 Master Page 的通用资源注入协议。Web Forms 原生 Theme 仍按
+        /// App_Themes 机制处理主题文件。
+        /// This list is for deployment-package validation and future tooling; it is not a general Master Page resource
+        /// injection protocol. Native Web Forms Theme handling still processes theme files through App_Themes.
+        /// </remarks>
         public IList<string> Resources { get; private set; }
     }
 
@@ -75,10 +87,10 @@ namespace ASPNET.StarterKit.Portal
     /// <remarks>
     /// P3.1 只发现由受信任部署流程写入的目录。此类不上传、不解压、不编辑，也不自动加载
     /// 远程 URL 或 JavaScript；后续可信主题包机制会单独覆盖来源、签名、许可、版本与回滚。
-    /// P3.1 discovers directories written by a trusted deployment process only. It does not upload, unzip,
+        /// P3.1 discovers directories written by a trusted deployment process only. It does not upload, unzip,
     /// or edit packages, and it never auto-loads remote URLs or JavaScript. A future trusted-package mechanism
-    /// will separately cover provenance, signatures, licenses, versions, and rollback.
-    /// </remarks>
+        /// will separately cover provenance, signatures, licenses, versions, and rollback.
+        /// </remarks>
     public static class PortalThemeCatalog
     {
         private const int ManifestSchemaVersion = 1;
@@ -92,6 +104,11 @@ namespace ASPNET.StarterKit.Portal
         /// Gets every deployed theme package that passes manifest validation.
         /// </summary>
         /// <returns>按显示名排序的只读主题包列表。Read-only theme package list ordered by display name.</returns>
+        /// <remarks>
+        /// 无法读取主题根目录或单个包校验失败时会跳过对应包，不阻断其他合格主题或页面默认回退。
+        /// When the theme root cannot be read or one package fails validation, the corresponding package is skipped;
+        /// it does not block other valid themes or the page default fallback.
+        /// </remarks>
         public static IList<PortalThemePackage> GetTrustedPackages()
         {
             var packages = new List<PortalThemePackage>();
@@ -126,6 +143,11 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="package">成功时返回已验证的主题包。Validated theme package when successful.</param>
         /// <param name="reason">失败时返回不含物理路径的原因。Failure reason without physical paths.</param>
         /// <returns>主题包是否可被当前门户安全选择。Whether the package can be safely selected by this portal.</returns>
+        /// <remarks>
+        /// 成功只表示目录、manifest 和本地资源满足当前最小契约；它不证明主题视觉质量、许可、签名或部署来源。
+        /// Success means only that the directory, manifest, and local resources meet the current minimal contract; it
+        /// does not prove visual quality, license, signature, or deployment provenance.
+        /// </remarks>
         public static bool TryGetTrustedPackage(
             string themeName,
             out PortalThemePackage package,

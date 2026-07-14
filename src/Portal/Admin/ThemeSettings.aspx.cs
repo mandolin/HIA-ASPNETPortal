@@ -12,9 +12,11 @@ namespace ASPNET.StarterKit.Portal
     /// Theme global-selection and tab-override management page.
     /// </summary>
     /// <remarks>
-    /// 本页面仅选择已部署且已校验的主题包；它不提供 ZIP 上传、在线 CSS 编辑、外部 URL 或主题脚本入口。
-    /// This page selects deployed and validated theme packages only; it provides no ZIP upload, online CSS editing,
-    /// external URL, or theme-script entry point.
+        /// 本页面仅选择已部署且已校验的主题包；它不提供 ZIP 上传、在线 CSS 编辑、外部 URL 或主题脚本入口。
+        /// 所有成功的全局主题与 Tab 覆盖操作均写入运营审计，但本页不创建或删除物理主题目录。
+        /// This page selects deployed and validated theme packages only; it provides no ZIP upload, online CSS editing,
+        /// external URL, or theme-script entry point. Every successful global-theme or Tab-override operation writes an
+        /// operations audit, while this page never creates or deletes a physical theme directory.
     /// </remarks>
     public partial class ThemeSettings : PortalPage<ThemeSettings>
     {
@@ -31,6 +33,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="sender">事件源。Event source.</param>
         /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 管理员授权在每次请求中执行。列表只显示 catalog 校验通过的部署主题；主题目录缺失或无效时不会从表单值回退加载。
+        /// Administrator authorization is performed on every request. Lists show only catalog-validated deployed themes;
+        /// a missing or invalid theme directory is never loaded as a fallback from form input.
+        /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
             PortalAuthorization.RequireAdmin();
@@ -48,6 +55,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="sender">事件源。Event source.</param>
         /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 成功时写入运行时设置覆盖和运营审计，然后重定向以重新解析本请求的主题。失败不修改主题文件或原有覆盖值。
+        /// On success, writes a runtime-setting override and operations audit, then redirects to re-resolve the theme
+        /// for the new request. Failure changes neither theme files nor the existing override.
+        /// </remarks>
         protected void SaveGlobalThemeButton_Click(object sender, EventArgs e)
         {
             PortalAuthorization.RequireAdmin();
@@ -85,6 +97,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="sender">事件源。Event source.</param>
         /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 仅删除数据库覆盖值；有效主题随后按 appSettings 或 Default 回退，并记录成功的运营审计。
+        /// Deletes only the database override; the effective theme then falls back through appSettings or Default and a
+        /// successful operation is recorded in operations audit.
+        /// </remarks>
         protected void ResetGlobalThemeButton_Click(object sender, EventArgs e)
         {
             PortalAuthorization.RequireAdmin();
@@ -113,6 +130,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="sender">事件源。Event source.</param>
         /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 该动作只更新当前管理页面的显示状态，不写入 Tab 覆盖或全局设置。
+        /// This action updates only display state on the current admin page; it writes neither a Tab override nor a global setting.
+        /// </remarks>
         protected void TabList_SelectedIndexChanged(object sender, EventArgs e)
         {
             PortalAuthorization.RequireAdmin();
@@ -125,6 +146,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="sender">事件源。Event source.</param>
         /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 覆盖写入前会再次由存储层验证已部署主题。成功后写入运营审计；本页面不改变主题文件或主题包 manifest。
+        /// The store validates the deployed theme again before writing an override. Success records an operations audit;
+        /// this page does not change theme files or package manifests.
+        /// </remarks>
         protected void SaveTabThemeButton_Click(object sender, EventArgs e)
         {
             PortalAuthorization.RequireAdmin();
@@ -161,6 +187,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="sender">事件源。Event source.</param>
         /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 清除后当前 Tab 回退已解析全局主题。写入失败时保留原覆盖值，并由状态存储记录诊断。
+        /// After clearing, the current Tab falls back to the resolved global theme. On a write failure the existing
+        /// override remains, and diagnostics are recorded by the state store.
+        /// </remarks>
         protected void ClearTabThemeButton_Click(object sender, EventArgs e)
         {
             PortalAuthorization.RequireAdmin();

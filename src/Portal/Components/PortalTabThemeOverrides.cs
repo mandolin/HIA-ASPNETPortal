@@ -69,9 +69,13 @@ namespace ASPNET.StarterKit.Portal
     /// Restricted storage for tab theme overrides.
     /// </summary>
     /// <remarks>
-    /// 覆盖值只保存已验证的部署主题名。表缺失或读取失败时解析器回退全局主题，避免旧数据库阻断门户页面。
-    /// Override values store validated deployed theme names only. When the table is missing or unreadable, the
-    /// resolver falls back to the global theme so a legacy database never blocks portal pages.
+        /// 覆盖值只保存已验证的部署主题名。表缺失或读取失败时解析器回退全局主题，避免旧数据库阻断门户页面。
+        /// 此存储不负责调用方授权或运营审计；`ThemeSettings` 在调用前要求管理员并在成功后记录审计，任何新增调用点
+        /// 必须采用同等保护。
+        /// Override values store validated deployed theme names only. When the table is missing or unreadable, the
+        /// resolver falls back to the global theme so a legacy database never blocks portal pages. This store does not
+        /// enforce caller authorization or operations audit; `ThemeSettings` requires an administrator before calling
+        /// and records an audit after success, and every new call site must use equivalent protection.
     /// </remarks>
     public static class PortalTabThemeOverrides
     {
@@ -135,6 +139,11 @@ WHERE [TabId] = @TabId;";
         /// <param name="themeName">已部署主题名。Deployed theme name.</param>
         /// <param name="context">当前 HTTP 上下文，用于操作人和诊断。Current HTTP context for actor and diagnostics.</param>
         /// <returns>写入结果。Write result.</returns>
+        /// <remarks>
+        /// 仅在写入前验证当前部署的主题包，不会创建主题目录或变更 manifest。成功结果不代表调用方已经做过授权或审计。
+        /// Validates the currently deployed theme package before writing only; it does not create a theme directory or
+        /// change a manifest. A successful result does not mean the caller has performed authorization or audit.
+        /// </remarks>
         public static PortalTabThemeOverrideWriteResult Save(int tabId, string themeName, HttpContext context = null)
         {
             PortalThemePackage package;
@@ -204,6 +213,11 @@ VALUES
         /// <param name="tabId">门户 Tab 标识。Portal tab identifier.</param>
         /// <param name="context">当前 HTTP 上下文，用于诊断。Current HTTP context for diagnostics.</param>
         /// <returns>删除结果。Deletion result.</returns>
+        /// <remarks>
+        /// 删除只移除数据库覆盖值；后续请求按主题解析器的全局设置、appSettings 或 Default 回退，且本方法不自行授权或审计。
+        /// Deletion removes only the database override. Later requests fall back through the resolver's global setting,
+        /// appSettings, or Default, and this method performs neither authorization nor audit itself.
+        /// </remarks>
         public static PortalTabThemeOverrideWriteResult Delete(int tabId, HttpContext context = null)
         {
             if (tabId <= 0)

@@ -3,29 +3,39 @@ using System.Web.UI.HtmlControls;
 
 namespace ASPNET.StarterKit.Portal
 {
-    /// <summary>
-    /// Shows a placeholder page for sample data links that do not have real content yet.
-    /// 显示样例数据链接的占位页面，用于提示目标内容尚未实现。
-    /// </summary>
+        /// <summary>
+        /// 显示尚未实现目标内容的样例数据链接占位页。
+        /// Displays a placeholder page for sample-data links whose target content is not implemented yet.
+        /// </summary>
+        /// <remarks>
+        /// 可选标题来自请求参数，按纯文本显示；此页面不提供原始 HTML 输入或预览语义。
+        /// The optional title comes from a request parameter and is displayed as plain text; this page does not provide
+        /// raw-HTML input or preview semantics.
+        /// </remarks>
     public partial class NotImplemented : PortalPage<NotImplemented>
     {
         /// <summary>
-        /// Server-side title element rendered by the placeholder page.
-        /// 占位页面中由服务端控制的标题元素。
+        /// 占位页面中由服务器控制的标题元素。
+        /// Server-controlled title element in the placeholder page.
         /// </summary>
         protected HtmlGenericControl title;
 
         /// <summary>
-        /// Loads the optional sample title from the query string.
-        /// 从查询字符串读取可选的样例标题。
+        /// 读取可选标题并作为纯文本写入占位页。
+        /// Reads the optional title and writes it to the placeholder page as plain text.
         /// </summary>
-        /// <param name="sender">The event source. 事件源。</param>
-        /// <param name="e">The event data. 事件数据。</param>
+        /// <param name="sender">事件源。Event source.</param>
+        /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 使用 <see cref="HtmlContainerControl.InnerText"/> 而非 <c>InnerHtml</c>，避免请求参数成为反射型 HTML 或脚本注入。
+        /// Uses <see cref="HtmlContainerControl.InnerText"/> rather than <c>InnerHtml</c> so a request parameter cannot
+        /// become reflected HTML or script injection.
+        /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.Params["title"] != null)
             {
-                title.InnerHtml = Request.Params["title"];
+                title.InnerText = Request.Params["title"];
             }
         }
     }

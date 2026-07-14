@@ -80,6 +80,12 @@ namespace ASPNET.StarterKit.Portal
         /// 发生安全回退时的非敏感原因。
         /// Non-sensitive reason when a safe fallback occurred.
         /// </summary>
+        /// <remarks>
+        /// 此字段描述影响最终全局主题选择的回退。无效 Tab 覆盖会告警并继续使用已解析的全局主题，当前不会在此字段
+        /// 追加候选链细节。
+        /// This field describes a fallback affecting the final global theme selection. An invalid Tab override warns and
+        /// continues with the resolved global theme; the current implementation does not append candidate-chain detail here.
+        /// </remarks>
         public string FallbackReason { get; private set; }
     }
 
@@ -88,11 +94,14 @@ namespace ASPNET.StarterKit.Portal
     /// Resolves and applies the portal Web Forms theme.
     /// </summary>
     /// <remarks>
-    /// 原生 Theme 只承担每页唯一基底；Tab 和后续模块差异通过稳定 CSS scope 表达。
-    /// 主题值必须对应已部署且通过 manifest 校验的可信包，不能由查询字符串、远程 URL 或脚本决定。
-    /// Native Theme provides the one base theme per page only; tab and future module variations use stable CSS
-    /// scopes. Theme values must resolve to a deployed package that passes manifest validation and cannot be
-    /// selected by query strings, remote URLs, or scripts.
+        /// 原生 Theme 只承担每页唯一基底；Tab 和后续模块差异通过稳定 CSS scope 表达。
+        /// 主题值必须对应已部署且通过 manifest 校验的可信包，不能由查询字符串、远程 URL 或脚本决定。
+        /// 解析优先级保持 Tab 覆盖、数据库运行设置、appSettings、Default；结果只在当前 HttpContext.Items 中缓存，
+        /// 不构成跨请求主题缓存。
+        /// Native Theme provides the one base theme per page only; tab and future module variations use stable CSS
+        /// scopes. Theme values must resolve to a deployed package that passes manifest validation and cannot be
+        /// selected by query strings, remote URLs, or scripts. Resolution priority remains Tab override, database runtime
+        /// setting, appSettings, and Default. Results are cached only in the current HttpContext.Items, not across requests.
     /// </remarks>
     public static class PortalThemeResolver
     {
@@ -120,6 +129,14 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="page">接收主题的 Web Forms 页面。Web Forms page receiving the theme.</param>
         /// <returns>本请求的完整主题上下文。Complete theme context for this request.</returns>
+        /// <exception cref="ArgumentNullException">页面实例为 null 时抛出。
+        /// Thrown when the page instance is null.</exception>
+        /// <remarks>
+        /// 调用方应在 <c>PreInit</c> 调用本方法，使 Web Forms 在加载 App_Themes 资源前得到主题。它不会重新排序
+        /// 页面依赖注入，也不会从 URL 接受主题覆盖。
+        /// Callers should invoke this method during <c>PreInit</c> so Web Forms receives the theme before loading
+        /// App_Themes resources. It neither reorders page dependency injection nor accepts theme overrides from a URL.
+        /// </remarks>
         public static PortalThemeContext ApplyTheme(Page page)
         {
             if (page == null)
@@ -138,6 +155,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="context">当前 HTTP 上下文。Current HTTP context.</param>
         /// <returns>最终主题与 CSS scope 信息。Final theme and CSS-scope information.</returns>
+        /// <remarks>
+        /// Admin 请求不读取 Tab 覆盖。覆盖表不可用时保留已解析全局主题；无效覆盖也不阻断请求，而是记录受限告警。
+        /// Admin requests do not read Tab overrides. When the override table is unavailable, the resolved global theme
+        /// remains; an invalid override also does not block the request and records a restricted warning.
+        /// </remarks>
         public static PortalThemeContext ResolveThemeContext(HttpContext context)
         {
             PortalThemeContext existing = GetCurrentThemeContext(context);
@@ -220,6 +242,12 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="context">当前 HTTP 上下文。Current HTTP context.</param>
         /// <returns>仅含受控 ASCII class 的文本。Text containing controlled ASCII classes only.</returns>
+        /// <remarks>
+        /// 正常门户页面在 <c>PreInit</c> 已解析主题。若调用过早而无上下文缓存，本方法只返回 Default scope，
+        /// 不在渲染阶段重新读取数据库或配置。
+        /// Normal portal pages resolve the theme during <c>PreInit</c>. When called too early without a context cache,
+        /// this method returns only the Default scope and does not reread database or configuration during rendering.
+        /// </remarks>
         public static string GetCurrentCssClass(HttpContext context = null)
         {
             PortalThemeContext themeContext = GetCurrentThemeContext(context);

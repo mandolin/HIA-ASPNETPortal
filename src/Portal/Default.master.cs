@@ -9,11 +9,13 @@ namespace ASPNET.StarterKit.Portal
     /// Theme CSS-scope host for the portal default Master Page.
     /// </summary>
     /// <remarks>
-    /// 页面 Theme 已在 PortalPage.PreInit 中确定。本类只在渲染前把已解析主题和门户 Tab 转为受控 body class，
-    /// 不读取查询字符串、不重新选择 Theme，也不使 GenericErrorPage 依赖主题解析。
-    /// Page Theme is decided in PortalPage.PreInit. This class only converts the resolved theme and portal tab
-    /// into controlled body classes before rendering; it does not read query strings, reselect Theme, or make
-    /// GenericErrorPage depend on theme resolution.
+        /// 页面 Theme 已在 PortalPage.PreInit 中确定。本类只在渲染前把已解析主题和门户 Tab 转为受控 body class，
+        /// 不读取查询字符串、不重新选择 Theme，也不使 GenericErrorPage 依赖主题解析。
+        /// 主题包 resources 列表不在此处作为通用资源协议处理；本类仅按模块 catalog 结果加载当前 Tab 已启用模块包声明的 CSS。
+        /// Page Theme is decided in PortalPage.PreInit. This class only converts the resolved theme and portal tab
+        /// into controlled body classes before rendering; it does not read query strings, reselect Theme, or make
+        /// GenericErrorPage depend on theme resolution. The theme-package resources list is not handled here as a general
+        /// resource protocol; this class loads only CSS declared by enabled module packages used by the current Tab.
     /// </remarks>
     public class PortalMasterPage : MasterPage
     {
@@ -39,6 +41,12 @@ namespace ASPNET.StarterKit.Portal
         /// 仅为当前 Tab 的已启用受信任模块包挂载已声明 CSS。
         /// Adds declared CSS only for enabled trusted module packages used by the current Tab.
         /// </summary>
+        /// <remarks>
+        /// 资源由模块 catalog 去重并校验为站内路径。本方法不加载主题 manifest 资源、外部 URL 或 JavaScript，
+        /// 并在无 Header 的页面静默跳过。
+        /// Resources are de-duplicated and validated as site-local paths by the module catalog. This method does not load
+        /// theme-manifest resources, external URLs, or JavaScript, and silently skips pages without a Header.
+        /// </remarks>
         private void AddModulePackageStyles()
         {
             if (Page == null || Page.Header == null)
