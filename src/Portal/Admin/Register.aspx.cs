@@ -3,22 +3,40 @@ using System.Web.Security;
 using Microsoft.Practices.Unity;
 using Unity;
 
-// 定义命名空间
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    ///   Summary description for Register.
-    ///   注册类的简要描述。
+    /// 中文：公开自主注册页面的 Web Forms code-behind。
+    ///
+    /// English: Web Forms code-behind for the public self-registration page.
     /// </summary>
+    /// <remarks>
+    /// 中文：只有 <see cref="PortalRegistrationOptions.AllowSelfRegistration"/> 为 <c>true</c> 时才可访问。
+    /// 当前空邀请码允许非邀请注册；带邀请码时校验启用状态、UTC 到期时间与使用次数。是否要求邀请码是后续独立设置，
+    /// 不能在此页面隐式改变。需要审核的注册不会自动登录。
+    ///
+    /// English: Access is allowed only when <see cref="PortalRegistrationOptions.AllowSelfRegistration"/> is <c>true</c>.
+    /// Empty invite codes currently allow non-invite registration; supplied invite codes validate enabled state, UTC
+    /// expiration, and usage count. Requiring invite codes is a later independent setting and must not be changed
+    /// implicitly here. Registrations requiring approval do not sign in automatically.
+    /// </remarks>
     public partial class Register : PortalPage<Register>
     {
-        // 使用依赖注入标记属性定义IUsersDb接口的属性
+        /// <summary>
+        /// 中文：用户与注册审核数据访问依赖。
+        ///
+        /// English: User and registration-review data-access dependency.
+        /// </summary>
         [Dependency]
         public IUsersDb UsersDB { private get; set; }
 
         /// <summary>
-        /// 自主注册关闭时拒绝访问公开注册页。
+        /// 中文：页面加载时验证自主注册开关并配置邀请码相关的员工号校验。
+        ///
+        /// English: Validates the self-registration switch on page load and configures employee-code validation for invite registration.
         /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!PortalRegistrationOptions.AllowSelfRegistration)
@@ -30,19 +48,27 @@ namespace ASPNET.StarterKit.Portal
         }
 
         // 注册按钮点击事件处理程序
+        /// <summary>
+        /// 中文：处理自主注册提交，创建用户、记录注册审计，并按审核开关决定是否直接登录。
+        ///
+        /// English: Handles self-registration submission, creates the user, records registration audit data, and decides immediate sign-in from the approval switch.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void RegisterBtn_Click(object sender, EventArgs e)
         {
+            // 中文：每次提交重查开关，避免页面初次加载后部署设置发生变化时绕过限制。
+            // English: Recheck the switch on every submit so deployment-setting changes after initial page load cannot bypass the restriction.
             if (!PortalRegistrationOptions.AllowSelfRegistration)
             {
                 Response.Redirect("~/Admin/AccessDenied.aspx");
             }
 
-            // 只有在页面上的所有表单字段都有效的情况下才尝试登录
+            // 中文：只在 Web Forms 基础验证通过后继续创建用户。
+            // English: Continue user creation only after base Web Forms validation succeeds.
             if (Page.IsValid)
             {
-                // 从表单中获取用户输入的用户名，并去除前后空格
                 var userName = Name.Text.Trim();
-                // 从表单中获取用户输入的电子邮件地址，并去除前后空格
                 var email = Email.Text.Trim();
                 string employeeCode = EmployeeCode.Text.Trim();
                 string inviteCode = CurrentInviteCode;
@@ -62,11 +88,11 @@ namespace ASPNET.StarterKit.Portal
                     return;
                 }
 
-                // 尝试将新用户添加到门户用户数据库中
-                // 如果返回值大于-1，则表示用户成功添加到数据库
                 int userId;
                 try
                 {
+                    // 中文：只传递历史兼容摘要；异常与审计信息不得包含密码或邀请码原文。
+                    // English: Pass only the legacy-compatible digest; exceptions and audit data must not contain the password or raw invite code.
                     userId = UsersDB.AddSelfRegisteredUser(
                         userName,
                         email,
@@ -88,8 +114,8 @@ namespace ASPNET.StarterKit.Portal
 
                 if (userId > -1)
                 {
-                    // 注册成功后记录状态变更审计；审计缺表或写入失败不会阻断注册结果。
-                    // Audit the successful state change; missing or failed auditing never blocks registration.
+                    // 中文：记录注册状态变化；审计不可用不阻断已成功的注册事务。
+                    // English: Record the registration state change; unavailable auditing does not block a successful registration transaction.
                     PortalOperationAudit.Record(
                         "Registration",
                         "Submit",
@@ -100,22 +126,23 @@ namespace ASPNET.StarterKit.Portal
 
                     if (PortalRegistrationOptions.RequireRegistrationApproval)
                     {
-                        // 默认注册后进入待审核，不自动登录；管理员批准后用户才能登录。
-                        // By default a new registration is pending approval and cannot sign in until approved.
+                        // 中文：待审核用户不签发认证票据，管理员批准后才满足登录条件。
+                        // English: Pending users receive no authentication ticket and meet sign-in conditions only after administrator approval.
                         RegisterBtn.Visible = false;
                         Message.CssClass = "Normal";
                         Message.Text = "Registration submitted. Please wait for administrator approval.";
                         return;
                     }
 
-                    // 不需要审核时沿用旧行为：注册成功后直接登录。
-                    // When approval is disabled, keep the legacy behavior and sign in immediately.
+                    // 中文：关闭审核时保持既有直接登录行为。
+                    // English: Preserve legacy immediate sign-in behavior when approval is disabled.
                     FormsAuthentication.SetAuthCookie(userName, false);
                     Response.Redirect("~/DesktopDefault.aspx");
                 }
                 else
                 {
-                    // 如果注册失败，则更新Message标签内容
+                    // 中文：保持对外提示泛化，避免暴露数据库或邀请码校验细节。
+                    // English: Keep the user-facing message generic and avoid exposing database or invite-validation details.
                     Message.Text = "Registration failed. The user name or email may already exist, or registration metadata is not available.";
                 }
             }
@@ -125,6 +152,8 @@ namespace ASPNET.StarterKit.Portal
         {
             get
             {
+                // 中文：空值代表当前允许的非邀请注册，不在这里强制改写为拒绝。
+                // English: An empty value represents currently allowed non-invite registration and is not forced to rejection here.
                 string inviteCode = Request.QueryString["invite"];
                 return string.IsNullOrWhiteSpace(inviteCode) ? string.Empty : inviteCode.Trim();
             }
@@ -132,6 +161,8 @@ namespace ASPNET.StarterKit.Portal
 
         private void ConfigureRegistrationForm()
         {
+            // 中文：只有邀请注册且未允许待绑定员工号时，员工号成为本页必填项。
+            // English: Employee code becomes required only for invite registration when pending employee binding is not allowed.
             bool employeeCodeRequired = PortalRegistrationOptions.IsEmployeeCodeRequired(CurrentInviteCode) &&
                                         !PortalRegistrationOptions.AllowPendingEmployeeBinding;
             EmployeeCodeRequiredValidator.Enabled = employeeCodeRequired;

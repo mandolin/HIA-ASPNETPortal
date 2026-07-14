@@ -258,35 +258,34 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        ///   Handles the AuthenticateRequest event of the Application control.
-        ///   If the client is authenticated with the application, then determine
-        ///   which security roles he/she belongs to and replace the "User" intrinsic
-        ///   with a custom IPrincipal security object that permits "User.IsInRole"
-        ///   role checks within the application
+        /// 中文：处理应用程序的 AuthenticateRequest 事件，为已认证请求构造包含角色的 <see cref="GenericPrincipal"/>。
         ///
-        ///   处理应用程序的 AuthenticateRequest 事件。
-        ///   如果客户端已在应用程序中进行身份验证，则确定其所属的安全角色，
-        ///   并用自定义的 IPrincipal 安全对象替换 "User" 内置对象，
-        ///   允许应用程序内的 "User.IsInRole" 角色检查。
+        /// English: Handles the application's AuthenticateRequest event and builds a role-bearing <see cref="GenericPrincipal"/> for authenticated requests.
         /// </summary>
         /// <remarks>
-        ///   Roles are cached in the browser in an in-memory encrypted cookie.  If the
-        ///   cookie doesn't exist yet for this session, create it.
+        /// 中文：优先读取加密的 <c>portalroles</c> Cookie；缺失、过期或无法解密时从数据库读取角色并重建。
+        /// 角色变更不会主动使既有 Cookie 失效，因此通常在票据到期、登出或读取失败后才对已有会话生效。
+        /// 此方法不创建 HIA 用户模型，只维持当前 Web Forms 请求级身份兼容。
         ///
-        ///   角色以内存中的加密Cookie形式缓存在浏览器中。如果此会话尚未存在该Cookie，将创建它。
+        /// English: The encrypted <c>portalroles</c> cookie is read first; when missing, expired, or undecryptable,
+        /// roles are loaded from the database and the cookie is rebuilt. Role changes do not proactively invalidate
+        /// issued cookies, so they normally affect an existing session only after ticket expiration, sign-out, or a
+        /// read failure. This method does not create an HIA user model; it maintains current Web Forms request-identity compatibility.
         /// </remarks>
-        /// <param name = "sender">The source of the event. 事件源。</param>
-        /// <param name = "e">The <see cref = "System.EventArgs" /> instance containing the event data. 包含事件数据的 <see cref="System.EventArgs" /> 实例。</param>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)
             {
                 string[] roles;
 
-                // 优先读取角色 Cookie；缺失、过期或解密失败时再从数据库读取并重建 Cookie。
+                // 中文：优先使用已验证 Cookie；回退读取数据库可恢复失效票据，但不是角色即时撤销机制。
+                // English: Prefer a validated cookie; database fallback recovers from an invalid ticket but is not immediate role revocation.
                 if (!PortalAuthenticationCookies.TryReadRoles(Request, out roles))
                 {
-                    // 从 UserRoles 表获取角色并添加到 Cookie。
+                    // 中文：只将角色名称写入加密票据，不写入密码、用户资料或其他敏感业务数据。
+                    // English: Write role names only into the encrypted ticket, never passwords, profile data, or other sensitive business data.
                     var usersDb = Container.Resolve<IUsersDb>();
                     roles = PortalRoleParser.Parse(string.Join(";", usersDb.GetRoleNamesByUser(User.Identity.Name)));
 
@@ -295,7 +294,8 @@ namespace ASPNET.StarterKit.Portal
                     PortalAuthenticationCookies.WriteRolesCookie(Response, Request, Context.User.Identity.Name, roles, isPersistent);
                 }
 
-                // 向请求中添加自定义的 Principal，其中包含身份验证票据中的角色信息 #todo 建立自定义Principal，引入HIA的SysUser和BizUser
+                // 中文：当前只构造请求级 GenericPrincipal；SysUser/BizUser 等 HIA 模型保留给后续边界设计。
+                // English: Build only a request-level GenericPrincipal for now; HIA models such as SysUser/BizUser remain for later boundary design.
                 Context.User = new GenericPrincipal(Context.User.Identity, roles);
             }
         }
