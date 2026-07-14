@@ -54,6 +54,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 - `gulp: assets:build`：执行一次前端资源构建。
 - `gulp: startWatch` / `gulp: stopWatch`：保留原 Gulp 监视任务的 VSCode 入口。
 - `portal: build assets and start`：构建解决方案、构建前端资源并启动 IIS Express。
+- `portal: documentation baseline`：输出已追踪源码的文档化 inventory JSON。
+- `portal: build JavaScript documentation pilot`：独立生成并验证 HIA JSDoc pilot。
 
 这些任务只调用仓库内的辅助脚本和 npm scripts，不修改 `.sln`、`.csproj`、`.csproj.user`，因此不会覆盖 Visual Studio 的既有调试设置。
 
@@ -66,6 +68,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 ```
 
 脚本不会生成、发布、删除或修改文档。`src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`、`src/Portal/js/`、`src/Portal/css/` 和 `temp/` 均不会被自动纳入输入；后续 JSDoc 验证生成物暂定写入被忽略的 `temp/documentation/`，公开发布策略将在 `W-anp-P4.5` 决定。
+
+## JavaScript 文档化 Pilot
+
+`dev/documentation/jsdoc/` 是独立的 HIA JSDoc 工具项目。它锁定 `@mandolin/jsdoc-plugin-hia-sys@0.1.0`、`@mandolin/jsdoc-theme-hia@0.1.0` 和 `jsdoc@4.0.5`，不改动 `src/Portal/package.json`，因此不会干扰既有 Gulp 或 Visual Studio Task Runner。
+
+首个 pilot 只读取已追踪的 `src/Portal/gulpfile.js`。可在 VSCode 运行 `portal: build JavaScript documentation pilot`，或直接执行：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Build-PortalJsdocPilot.ps1
+```
+
+首次运行会在工具目录执行 `npm ci`；生成 HTML、HIA metadata 和 integration JSON 后验证双语内容、source-link 及本机路径泄漏。生成物只在 `temp/documentation/jsdoc/`，不得提交。
 
 ## VSCode 调试
 

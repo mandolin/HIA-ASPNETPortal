@@ -5,5 +5,6 @@
 ## 当前内容
 
 - `scripts/`：NuGet 还原、解决方案构建和 IIS Express 启停脚本。
+- `documentation/jsdoc/`：独立的 HIA JSDoc pilot 配置、依赖锁定和输出验证器。
 
 内部开发状态、路线图、阶段计划、任务与修复记录已经迁移到独立私有仓库 `work-zone/dev/`，不进入公开项目仓库。

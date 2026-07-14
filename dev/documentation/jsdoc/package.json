@@ -1,0 +1,19 @@
+{
+  "name": "hia-aspnetportal-jsdoc-pilot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Independent HIA JSDoc pilot for HIA-ASPNETPortal.",
+  "scripts": {
+    "docs:build": "jsdoc -c jsdoc.conf.json",
+    "docs:verify": "node verify-output.cjs",
+    "docs": "npm run docs:build && npm run docs:verify"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@mandolin/jsdoc-plugin-hia-sys": "0.1.0",
+    "@mandolin/jsdoc-theme-hia": "0.1.0",
+    "jsdoc": "4.0.5"
+  }
+}

@@ -152,6 +152,20 @@
                 "-AsJson"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "portal: build JavaScript documentation pilot",
+            "type": "process",
+            "command": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": [
+                "-NoLogo",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Build-PortalJsdocPilot.ps1"
+            ],
+            "problemMatcher": []
         }
     ]
 }

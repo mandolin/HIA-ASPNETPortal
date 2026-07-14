@@ -1,0 +1,52 @@
+{
+  "plugins": [
+    "node_modules/@mandolin/jsdoc-plugin-hia-sys/src/index.cjs"
+  ],
+  "source": {
+    "include": [
+      "../../../src/Portal/gulpfile.js"
+    ],
+    "includePattern": ".+\\.js$"
+  },
+  "opts": {
+    "destination": "../../../temp/documentation/jsdoc",
+    "encoding": "utf8",
+    "readme": "README.md",
+    "recurse": false,
+    "template": "node_modules/@mandolin/jsdoc-theme-hia",
+    "hia": {
+      "mode": "hiaIntegration",
+      "source": {
+        "basePath": "../../..",
+        "mode": "all",
+        "link": {
+          "enabled": true,
+          "rootUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false
+        },
+        "references": {
+          "enabled": true,
+          "defaultExpanded": false
+        }
+      },
+      "i18n": {
+        "enabled": true,
+        "defaultLocale": "zh-CN",
+        "fallbackLocale": "en",
+        "locales": [
+          "zh-CN",
+          "en"
+        ],
+        "mode": "runtimeSwitch"
+      },
+      "integration": {
+        "enabled": true,
+        "outputFile": "../../../temp/documentation/jsdoc/hia-integration.json"
+      }
+    }
+  }
+}

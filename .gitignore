@@ -371,3 +371,6 @@ MigrationBackup/
 # P3.3 数据提供程序 proof 的可再生运行时输出。
 /temp/provider-proof/
 /temp/hia-boundary-proof/
+
+# P4.2 JSDoc pilot 的可再生本机验证输出。
+/temp/documentation/
