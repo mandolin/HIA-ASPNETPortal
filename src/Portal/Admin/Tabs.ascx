@@ -5,6 +5,12 @@
 
 <%-- 创建一个表格，用于布局 --%>
 <table cellpadding=2 cellspacing=0 border=0>
+    <tr>
+        <td></td>
+        <td class="NormalRed">
+            <asp:Label ID="Message" runat="server" />
+        </td>
+    </tr>
     <%-- 第一行用于添加新页的按钮 --%>
     <tr>
         <td colspan=2>

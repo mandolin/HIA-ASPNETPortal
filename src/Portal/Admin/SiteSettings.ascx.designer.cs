@@ -21,6 +21,11 @@ namespace ASPNET.StarterKit.Portal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;
+
+        /// <summary>
+        /// Message control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label Message;
         
         /// <summary>
         /// SiteName control.

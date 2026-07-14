@@ -19,9 +19,10 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
     public partial class ModuleDefinitions : PortalPage<ModuleDefinitions>
     {
-        private int defId = -1;
+        private int defId;
         private int tabId;
         private int tabIndex;
+        private IModuleDefinitionItem currentDefinition;
 
         /// <summary>
         /// 旧模块定义数据服务，用于读取、更新名称及受保护删除。
@@ -43,62 +44,60 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="sender">事件源。Event source.</param>
         /// <param name="e">事件参数。Event arguments.</param>
-        /// <remarks>
-        /// 查询参数沿用历史 <see cref="int.Parse(string)"/> 行为；非整数值会按现有全局异常流程处理。本批只说明该风险，
-        /// 不改变 URL 兼容性或错误页行为。
-        /// Query parameters retain historical <see cref="int.Parse(string)"/> behavior; non-integer values flow through
-        /// the existing global exception handling. This batch documents the risk without changing URL compatibility or
-        /// error-page behavior.
-        /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 验证当前用户是否有权访问此页面
-            PortalAuthorization.RequireAdmin();
-
-            // 计算模块定义 ID
-            if (Request.Params["defid"] != null)
+            if (!TryInitializeRequest())
             {
-                defId = int.Parse(Request.Params["defid"]);
-            }
-            if (Request.Params["tabid"] != null)
-            {
-                tabId = int.Parse(Request.Params["tabid"]);
-            }
-            if (Request.Params["tabindex"] != null)
-            {
-                tabIndex = int.Parse(Request.Params["tabindex"]);
+                return;
             }
 
-            // 如果这是第一次访问页面，则绑定模块定义数据
             if (!Page.IsPostBack)
             {
-                if (defId == -1)
-                {
-                    // 新模块定义由受信任部署目录完成注册，避免继续引入任意路径入口。
-                    // New module definitions are registered through the trusted deployment catalog to avoid new
-                    // arbitrary-path entry points.
-                    Response.Redirect("~/Admin/ModuleCatalog.aspx");
-                    return;
-                }
-                else
-                {
-                    // 从数据库中获取要编辑的模块定义
-                    IModuleDefinitionItem modDefRow = ModuleDefConfig.GetSingleModuleDefinition(defId);
-
-                    // 加载信息
-                    FriendlyName.Text = modDefRow.FriendlyName;
-                    DesktopSrc.Text = modDefRow.DesktopSourceFile;
-                    MobileSrc.Text = modDefRow.MobileSourceFile;
-
-                    // 旧定义页只保留历史名称维护和安全删除检查；路径变更统一迁移到部署包目录。
-                    // The legacy definition page retains historical name maintenance and safe-delete checks only;
-                    // path changes move to the deployment-package catalog.
-                    DesktopSrc.ReadOnly = true;
-                    MobileSrc.ReadOnly = true;
-                    Req2.Enabled = false;
-                    DesktopSrcPathValidator.Enabled = false;
-                }
+                BindDefinition();
             }
+        }
+
+        /// <summary>
+        /// 中文：授权、验证导航参数，并绑定当前门户中存在的模块定义。
+        ///
+        /// English: Authorizes the request, validates navigation parameters, and binds an existing module definition.
+        /// </summary>
+        /// <returns>中文：请求可继续操作已验证定义时为 <c>true</c>。English: <c>true</c> when the request may operate on a verified definition.</returns>
+        private bool TryInitializeRequest()
+        {
+            if (!PortalAuthorization.EnsureAdmin(Context))
+            {
+                return false;
+            }
+
+            if (!TryReadOptionalPositiveParameter("tabid", out tabId) ||
+                !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
+            {
+                return false;
+            }
+
+            string rawDefinitionId = Request.Params["defid"];
+            if (string.IsNullOrWhiteSpace(rawDefinitionId))
+            {
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/Admin/ModuleCatalog.aspx"));
+                return false;
+            }
+
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(rawDefinitionId, out defId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            currentDefinition = ModuleDefConfig.GetModuleDefinitions()
+                .FirstOrDefault(item => item.ModuleDefId == defId);
+            if (currentDefinition != null)
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
         }
 
         /// <summary>
@@ -114,35 +113,44 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void UpdateBtn_Click(Object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            if (!TryInitializeRequest() || !Page.IsValid)
             {
-                if (defId == -1)
-                {
-                    Response.Redirect("~/Admin/ModuleCatalog.aspx");
-                    return;
-                }
-                else
-                {
-                    // 保留既有受控路径，避免通过 legacy 表单创建或变更任意动态加载入口。
-                    // Preserve the existing controlled path, preventing arbitrary dynamic-load entries from being
-                    // created or changed through the legacy form.
-                    IModuleDefinitionItem current = ModuleDefConfig.GetSingleModuleDefinition(defId);
-                    ModuleDefConfig.UpdateModuleDefinition(
-                        defId,
-                        FriendlyName.Text,
-                        current.DesktopSourceFile,
-                        current.MobileSourceFile);
-                    PortalOperationAudit.Record(
-                        "ModuleDefinition",
-                        "UpdateName",
-                        "ModuleDefinition",
-                        defId.ToString(),
-                        "Updated the legacy module-definition display name.",
-                        Context);
-                }
+                return;
+            }
 
-                // 重定向回门户管理页面
-                Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+            string friendlyName;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(FriendlyName.Text, 150, out friendlyName))
+            {
+                ShowMessage("模块定义名称无效，未保存本次修改。");
+                return;
+            }
+
+            try
+            {
+                // 中文：保留既有受控路径，避免通过 legacy 表单创建或变更任意动态加载入口。
+                // English: Preserve existing controlled paths so the legacy form cannot create or change arbitrary dynamic-load entries.
+                ModuleDefConfig.UpdateModuleDefinition(
+                    defId,
+                    friendlyName,
+                    currentDefinition.DesktopSourceFile,
+                    currentDefinition.MobileSourceFile);
+                PortalOperationAudit.Record(
+                    "ModuleDefinition",
+                    "UpdateName",
+                    "ModuleDefinition",
+                    defId.ToString(),
+                    "Updated the legacy module-definition display name.",
+                    Context);
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ModuleDefinitions.Update",
+                    "Updating a legacy module definition failed. ModuleDefinitionId=" + defId,
+                    exception,
+                    Context);
+                ShowMessage("模块定义保存失败，系统已记录本次错误。事件编号：" + eventId);
             }
         }
 
@@ -159,29 +167,42 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void DeleteBtn_Click(Object sender, EventArgs e)
         {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
             int instanceCount = ModulesConfig.GetModulesByModuleDefId(defId).Count();
             if (instanceCount > 0)
             {
                 // 旧删除会级联清除业务模块数据。P3.2 要求先禁用、迁移或显式清理实例。
                 // Legacy deletion cascades into business module data. P3.2 requires disabling, migration, or
                 // explicit instance cleanup first.
-                MessageLabel.Text = "This module definition is still used by " + instanceCount +
-                                    " module instance(s). Disable or migrate it, then explicitly clean instances before deletion.";
+                ShowMessage("该模块定义仍被 " + instanceCount + " 个模块实例使用。请先禁用、迁移或显式清理这些实例。");
                 return;
             }
 
-            // 删除模块定义
-            ModuleDefConfig.DeleteModuleDefinition(defId);
-            PortalOperationAudit.Record(
-                "ModuleDefinition",
-                "Delete",
-                "ModuleDefinition",
-                defId.ToString(),
-                "Deleted an unused legacy module definition.",
-                Context);
-
-            // 重定向回门户管理页面
-            Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+            try
+            {
+                ModuleDefConfig.DeleteModuleDefinition(defId);
+                PortalOperationAudit.Record(
+                    "ModuleDefinition",
+                    "Delete",
+                    "ModuleDefinition",
+                    defId.ToString(),
+                    "Deleted an unused legacy module definition.",
+                    Context);
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ModuleDefinitions.Delete",
+                    "Deleting a legacy module definition failed. ModuleDefinitionId=" + defId,
+                    exception,
+                    Context);
+                ShowMessage("模块定义删除失败，系统已记录本次错误。事件编号：" + eventId);
+            }
         }
 
         /// <summary>
@@ -192,8 +213,12 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">事件参数。Event arguments.</param>
         protected void CancelBtn_Click(Object sender, EventArgs e)
         {
-            // 重定向回门户首页
-            Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
         }
 
         /// <summary>
@@ -233,6 +258,68 @@ namespace ASPNET.StarterKit.Portal
             }
 
             return normalizedSource;
+        }
+
+        private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadNonNegativeInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private void BindDefinition()
+        {
+            FriendlyName.Text = currentDefinition.FriendlyName;
+            DesktopSrc.Text = currentDefinition.DesktopSourceFile;
+            MobileSrc.Text = currentDefinition.MobileSourceFile;
+            DesktopSrc.ReadOnly = true;
+            MobileSrc.ReadOnly = true;
+            Req2.Enabled = false;
+            DesktopSrcPathValidator.Enabled = false;
+        }
+
+        private string BuildPortalReturnUrl()
+        {
+            if (tabId > 0)
+            {
+                return ResolveUrl("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+            }
+
+            return ResolveUrl("~/Default.aspx");
+        }
+
+        private void ShowMessage(string message)
+        {
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }
 }

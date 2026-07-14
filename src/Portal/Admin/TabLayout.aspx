@@ -30,6 +30,11 @@
                                         <%-- 水平线 --%>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="NormalRed">
+                                        <asp:Label ID="Message" runat="server" />
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>

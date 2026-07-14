@@ -24,6 +24,11 @@ namespace ASPNET.StarterKit.Portal
         protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;
 
         /// <summary>
+        /// Message 控件。
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label Message;
+
+        /// <summary>
         /// rolesList 控件。
         /// </summary>
         /// <remarks>

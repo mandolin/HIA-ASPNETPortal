@@ -15,6 +15,11 @@ namespace ASPNET.StarterKit.Portal
     {
 
         /// <summary>
+        /// Message 控件。
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label Message;
+
+        /// <summary>
         /// moduleTitle 控件。
         /// </summary>
         /// <remarks>

@@ -230,6 +230,20 @@ namespace ASPNET.StarterKit.Portal
             return int.TryParse(value, out parsedValue) && parsedValue > 0;
         }
 
+        /// <summary>
+        /// 中文：尝试读取非负整数请求参数，用于旧数据中允许从零开始的标识，例如种子管理员角色。
+        ///
+        /// English: Attempts to read a nonnegative integer request parameter for legacy identifiers that may start at
+        /// zero, such as the seeded administrator role.
+        /// </summary>
+        /// <param name="value">中文：原始参数值。English: Raw parameter value.</param>
+        /// <param name="parsedValue">中文：成功时返回非负整数；失败时为零。English: Nonnegative integer when successful; otherwise zero.</param>
+        /// <returns>中文：参数为非负整数时为 <c>true</c>。English: <c>true</c> when the parameter is a nonnegative integer.</returns>
+        public static bool TryReadNonNegativeInt32(string value, out int parsedValue)
+        {
+            return int.TryParse(value, out parsedValue) && parsedValue >= 0;
+        }
+
         private static bool ContainsControlCharacter(string value)
         {
             foreach (char character in value)

@@ -35,7 +35,7 @@ Src="~/DesktopModuleTitle.ascx"%>
                     &nbsp;&nbsp;
                     <%-- 显示模块定义的友好名称 --%>
                     <asp:Label 
-                        Text='<%# DataBinder.Eval(Container.DataItem, "FriendlyName") %>' 
+                        Text='<%#: DataBinder.Eval(Container.DataItem, "FriendlyName") %>'
                         CssClass="Normal" 
                         runat="server" />
                 </ItemTemplate>

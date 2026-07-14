@@ -70,7 +70,7 @@
                                     &nbsp;&nbsp;
                                     <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="Remove this user from role"
                                         runat="server" />
-                                    <asp:Label Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>' CssClass="Normal"
+                                    <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "Name") %>' CssClass="Normal"
                                         runat="server" />
                                 </ItemTemplate>
                             </asp:DataList>

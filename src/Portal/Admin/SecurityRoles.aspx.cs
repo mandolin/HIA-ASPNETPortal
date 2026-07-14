@@ -1,194 +1,258 @@
 using System;
+using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
 
-// 定义命名空间
 namespace ASPNET.StarterKit.Portal
 {
-    // 定义一个继承自PortalPage<SecurityRoles>的部分类SecurityRoles
+    /// <summary>
+    /// 中文：旧门户角色成员关系管理页面。
+    ///
+    /// English: Legacy Portal role-membership administration page.
+    /// </summary>
+    /// <remarks>
+    /// 中文：角色名称始终从当前门户的 roleId 读取，不信任 URL 中的显示名称。角色成员增删不会立即撤销
+    /// 目标用户的既有角色 Cookie。
+    ///
+    /// English: The role name is always read from the current Portal roleId and never trusted from a URL display
+    /// value. Adding or removing membership does not immediately revoke the target user's existing role cookie.
+    /// </remarks>
     public partial class SecurityRoles : PortalPage<SecurityRoles>
     {
-        // 私有变量，用于保存角色ID
-        private int roleId = -1;
-        // 私有变量，用于保存角色名称
-        private string roleName = "";
-        // 私有变量，用于保存页ID
+        private int roleId;
         private int tabId;
-        // 私有变量，用于保存页索引
         private int tabIndex;
+        private IRoleItem currentRole;
 
-        // 使用依赖注入标记属性定义IUsersDb接口的属性
+        /// <summary>中文：用户数据访问依赖。English: User data-access dependency.</summary>
         [Dependency]
         public IUsersDb UsersDB { private get; set; }
 
-        // 使用依赖注入标记属性定义IRolesDb接口的属性
+        /// <summary>中文：角色和成员关系数据访问依赖。English: Role and membership data-access dependency.</summary>
         [Dependency]
         public IRolesDb RolesDB { private get; set; }
 
-        //*******************************************************
-        //
-        // Page_Load服务器事件处理器用于加载页面并填充角色信息
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 中文：授权、验证当前门户角色并在首次请求绑定成员列表。
+        ///
+        /// English: Authorizes, validates the current-Portal role, and binds membership lists on the initial request.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 验证当前用户是否有权限访问此页面
-            PortalAuthorization.RequireAdmin();
-
-            // 计算安全角色ID
-            if (Request.Params["roleid"] != null)
+            if (!TryInitializeRequest())
             {
-                // 从请求参数中获取角色ID
-                roleId = Int32.Parse(Request.Params["roleid"]);
-            }
-            if (Request.Params["rolename"] != null)
-            {
-                // 从请求参数中获取角色名称
-                roleName = Request.Params["rolename"];
-            }
-            if (Request.Params["tabid"] != null)
-            {
-                // 从请求参数中获取页ID
-                tabId = Int32.Parse(Request.Params["tabid"]);
-            }
-            if (Request.Params["tabindex"] != null)
-            {
-                // 从请求参数中获取页索引
-                tabIndex = Int32.Parse(Request.Params["tabindex"]);
+                return;
             }
 
-            // 如果是首次访问页面，则绑定角色数据到DataList控件
-            if (Page.IsPostBack == false)
+            if (!Page.IsPostBack)
             {
                 BindData();
             }
         }
 
-        //*******************************************************
-        //
-        // Save_Click服务器事件处理器用于保存当前的安全设置到配置系统
-        //
-        //*******************************************************
-
-        protected void Save_Click(Object Sender, EventArgs e)
+        /// <summary>
+        /// 中文：返回门户后台主页，不额外写入角色关系。
+        ///
+        /// English: Returns to the Portal administration home without writing additional role relationships.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void Save_Click(object sender, EventArgs e)
         {
-            // 从当前上下文中获取PortalSettings
-            var portalSettings = PortalContext.GetPortalSettings();
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
 
-            // 导航回管理员页面
-            Response.Redirect("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
         }
 
-        //*******************************************************
-        //
-        // AddUser_Click服务器事件处理器用于向此安全角色添加新用户
-        //
-        //*******************************************************
-
-        protected void AddUser_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：将选择的既有用户加入当前角色。
+        ///
+        /// English: Adds the selected existing user to the current role.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void AddUser_Click(object sender, EventArgs e)
         {
-            // 初始化用户ID为-1
-            int userId = -1;
-
-            if (((LinkButton)sender).ID == "addNew")
+            if (!TryInitializeRequest())
             {
-                /* note：暂不支持Windows用户机制
-                // 将新用户添加到用户表中
-                if ((userId = UsersDB.AddUser(windowsUserName.Text, windowsUserName.Text, "acme")) == -1)
-                {
-                    // 如果添加失败，显示错误消息
-                    Message.Text = "Add New Failed! There is already an entry for <u>" + windowsUserName.Text + "</u> in the Users database.<br>Please use Add Existing for this user.";
-                }
-                */
-            }
-            else
-            {
-                // 从现有用户的下拉列表中获取用户ID
-                userId = Int32.Parse(allUsers.SelectedItem.Value);
+                return;
             }
 
-            if (userId != -1)
+            if (allUsers.SelectedItem == null)
             {
-                // 向数据库中添加新的用户角色
+                ShowMessage("请选择一个有效用户。");
+                return;
+            }
+
+            int userId;
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(allUsers.SelectedItem.Value, out userId) ||
+                UsersDB.FindUserById(userId) == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            try
+            {
                 RolesDB.AddUserRole(roleId, userId);
                 PortalOperationAudit.Record(
-                    "UserAdministration",
-                    "AddRole",
-                    "User",
-                    userId.ToString(),
-                    "Added user to role '" + roleName + "'.",
+                    "RoleAdministration",
+                    "AddMember",
+                    "Role",
+                    roleId.ToString(),
+                    "Added user id " + userId + " to role.",
                     Context);
-            }
-
-            // 重新绑定列表
-            BindData();
-        }
-
-        //*******************************************************
-        //
-        // usersInRole_ItemCommand服务器事件处理器用于处理从usersInRole DataList控件中删除用户的角色
-        //
-        //*******************************************************
-
-        protected void usersInRole_ItemCommand(object sender, DataListCommandEventArgs e)
-        {
-            // 获取用户的ID
-            var userId = (int)usersInRole.DataKeys[e.Item.ItemIndex];
-
-            if (e.CommandName == "delete")
-            {
-                // 更新数据库
-                RolesDB.DeleteUserRole(roleId, userId);
-                PortalOperationAudit.Record(
-                    "UserAdministration",
-                    "RemoveRole",
-                    "User",
-                    userId.ToString(),
-                    "Removed user from role '" + roleName + "'.",
-                    Context);
-
-                // 确保项目不可编辑
-                usersInRole.EditItemIndex = -1;
-
-                // 重新填充列表
                 BindData();
             }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.SecurityRoles.AddUser",
+                    "Adding a role member failed. RoleId=" + roleId + "; UserId=" + userId,
+                    exception,
+                    Context);
+                ShowMessage("角色成员添加失败，系统已记录本次错误。事件编号：" + eventId);
+            }
         }
 
-        //*******************************************************
-        //
-        // BindData辅助方法用于将此门户的安全角色列表绑定到DataList服务器控件
-        //
-        //*******************************************************
+        /// <summary>
+        /// 中文：从当前角色移除选择的成员。
+        ///
+        /// English: Removes the selected member from the current role.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：包含命令和 DataList 项索引的事件数据。English: Event data containing the command and DataList item index.</param>
+        protected void usersInRole_ItemCommand(object sender, DataListCommandEventArgs e)
+        {
+            if (!TryInitializeRequest() || !string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            int userId;
+            if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= usersInRole.DataKeys.Count ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(usersInRole.DataKeys[e.Item.ItemIndex].ToString(), out userId) ||
+                UsersDB.FindUserById(userId) == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            try
+            {
+                RolesDB.DeleteUserRole(roleId, userId);
+                PortalOperationAudit.Record(
+                    "RoleAdministration",
+                    "RemoveMember",
+                    "Role",
+                    roleId.ToString(),
+                    "Removed user id " + userId + " from role.",
+                    Context);
+                usersInRole.EditItemIndex = -1;
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.SecurityRoles.RemoveUser",
+                    "Removing a role member failed. RoleId=" + roleId + "; UserId=" + userId,
+                    exception,
+                    Context);
+                ShowMessage("角色成员移除失败，系统已记录本次错误。事件编号：" + eventId);
+            }
+        }
+
+        private bool TryInitializeRequest()
+        {
+            if (!PortalAuthorization.EnsureAdmin(Context) ||
+                !PortalNavigationPolicy.TryReadNonNegativeInt32(Request.Params["roleid"], out roleId) ||
+                !TryReadOptionalPositiveParameter("tabid", out tabId) ||
+                !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
+            {
+                if (PortalAuthorization.IsAdmin())
+                {
+                    PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                }
+
+                return false;
+            }
+
+            PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            currentRole = RolesDB.GetPortalRoles(portalSettings.PortalId)
+                .FirstOrDefault(role => role.RoleId == roleId);
+            if (currentRole != null)
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadNonNegativeInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
 
         private void BindData()
         {
-            // 如果应用程序使用的是Windows身份验证而不是表单身份验证，则显示Windows身份验证UI
-            if (User.Identity.AuthenticationType != "Forms")
-            {
-                /* note：暂不支持Windows用户机制
-                // 显示Windows用户界面组件
-                windowsUserName.Visible = true;
-                addNew.Visible = true;
-                */
-            }
-
-            // 在标题中添加角色名称
-            if (roleName != "")
-            {
-                title.InnerText = "Role Membership: " + roleName;
-            }
-
-            // 从数据库获取门户的角色
-            // 将角色中的用户绑定到DataList
+            title.InnerText = "Role Membership: " + (currentRole.RoleName ?? string.Empty);
             usersInRole.DataSource = RolesDB.GetRoleMembers(roleId);
             usersInRole.DataBind();
-
-            // 将所有门户用户绑定到下拉列表
             allUsers.DataSource = RolesDB.GetUsers();
             allUsers.DataBind();
+        }
+
+        private string BuildPortalReturnUrl()
+        {
+            if (tabId <= 0 || tabIndex <= 0)
+            {
+                return ResolveUrl("~/DesktopDefault.aspx");
+            }
+
+            return ResolveUrl("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
+        }
+
+        private void ShowMessage(string message)
+        {
+            Message.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }
 }

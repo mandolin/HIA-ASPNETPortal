@@ -4,63 +4,91 @@ using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：旧门户站点名称和编辑按钮设置控件。
+    ///
+    /// English: Legacy Portal control for the site name and edit-button setting.
+    /// </summary>
     public partial class SiteSettings : PortalModuleControl<SiteSettings>
     {
-        // Dependency Injection: A property for accessing the global database configuration.
+        /// <summary>
+        /// 中文：门户全局设置数据访问依赖。
+        ///
+        /// English: Portal global-settings data-access dependency.
+        /// </summary>
         [Dependency]
         public IGlobalsDb PortalConfig { private get; set; }
 
-        //*******************************************************
-        //
-        // The Page_Load server event handler on this user control is used
-        // to populate the current site settings from the config system
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 中文：在首次请求读取当前门户设置。
+        ///
+        /// English: Reads current Portal settings on the initial request.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Verify that the current user has access to access this page
-            // 验证当前用户是否有权限访问此页面。
-            PortalAuthorization.RequireAdmin();
-
-            // If this is the first visit to the page, populate the site data
-            // 如果这是第一次访问页面，则填充站点数据。
-            if (Page.IsPostBack == false)
+            if (!PortalAuthorization.EnsureAdmin(Context))
             {
-                // Obtain PortalSettings from Current Context
-                // 从当前上下文获取PortalSettings。
-                var portalSettings = PortalContext.GetPortalSettings();
+                return;
+            }
 
-                // Set the text box with the current site name
-                // 设置文本框以显示当前站点名称。
+            if (!Page.IsPostBack)
+            {
+                PortalSettings portalSettings = PortalContext.GetPortalSettings();
                 SiteName.Text = portalSettings.PortalName;
-
-                // Set the checkbox state according to whether the edit button should always be shown
-                // 根据是否应始终显示编辑按钮来设置复选框状态。
                 showEdit.Checked = portalSettings.AlwaysShowEditButton;
             }
         }
 
-        //*******************************************************
-        //
-        // The Apply_Click server event handler is used
-        // to update the Site Name within the Portal Config System
-        //
-        //*******************************************************
-
-        protected void Apply_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：校验并保存站点设置，再安全刷新当前管理页面。
+        ///
+        /// English: Validates and saves site settings, then safely refreshes the current administration page.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void Apply_Click(object sender, EventArgs e)
         {
-            // Obtain PortalSettings from Current Context
-            // 从当前上下文获取PortalSettings。
-            var portalSettings = PortalContext.GetPortalSettings();
+            if (!PortalAuthorization.EnsureAdmin(Context))
+            {
+                return;
+            }
 
-            // Update the portal information in the database
-            // 在数据库中更新门户信息。
-            PortalConfig.UpdatePortalInfo(portalSettings.PortalId, SiteName.Text, showEdit.Checked);
+            string portalName;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(SiteName.Text, 150, out portalName))
+            {
+                ShowMessage("站点名称无效，未保存本次修改。");
+                return;
+            }
 
-            // Redirect to this site to refresh
-            // 重新定向到此站点以刷新页面。
-            Response.Redirect(Request.RawUrl);
+            try
+            {
+                PortalSettings portalSettings = PortalContext.GetPortalSettings();
+                PortalConfig.UpdatePortalInfo(portalSettings.PortalId, portalName, showEdit.Checked);
+                PortalOperationAudit.Record(
+                    "PortalAdministration",
+                    "UpdateSiteSettings",
+                    "Portal",
+                    portalSettings.PortalId.ToString(),
+                    "Updated site settings.",
+                    Context);
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, Request.RawUrl);
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.SiteSettings.Apply",
+                    "Updating site settings failed.",
+                    exception,
+                    Context);
+                ShowMessage("站点设置保存失败，系统已记录本次错误。事件编号：" + eventId);
+            }
+        }
+
+        private void ShowMessage(string message)
+        {
+            Message.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }
 }

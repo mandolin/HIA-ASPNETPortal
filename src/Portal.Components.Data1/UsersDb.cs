@@ -400,6 +400,18 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// 中文：按数值标识查找用户；页面请求目标缺失时返回空值而不是抛出查询异常。
+        ///
+        /// English: Finds a user by numeric identifier, returning null instead of throwing when a page-request target is absent.
+        /// </summary>
+        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
+        /// <returns>中文：匹配用户；不存在时为 <c>null</c>。English: Matching user, or <c>null</c> when absent.</returns>
+        public IUserItem FindUserById(int userId)
+        {
+            return _context.Users.SingleOrDefault(i => i.UserId == userId);
+        }
+
+        /// <summary>
         /// 中文：校验登录输入的摘要和注册审核状态。
         ///
         /// English: Validates the submitted sign-in digest and registration-review status.

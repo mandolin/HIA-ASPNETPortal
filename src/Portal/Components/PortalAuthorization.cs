@@ -31,6 +31,31 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// 中文：确认当前请求为管理员；未授权时安全跳转到既有拒绝访问页，并返回 <c>false</c>。
+        ///
+        /// English: Confirms that the current request is administrative; safely redirects unauthorized requests to the
+        /// existing access-denied page and returns <c>false</c>.
+        /// </summary>
+        /// <param name="context">中文：当前 HTTP 上下文。English: Current HTTP context.</param>
+        /// <returns>中文：当前请求可继续执行后台逻辑时为 <c>true</c>。English: <c>true</c> when the current request may continue administration logic.</returns>
+        /// <remarks>
+        /// 中文：调用方应采用 <c>if (!EnsureAdmin(Context)) return;</c>，避免拒绝重定向后继续执行写入。
+        ///
+        /// English: Callers should use <c>if (!EnsureAdmin(Context)) return;</c> to prevent writes from continuing
+        /// after an access-denied redirect.
+        /// </remarks>
+        public static bool EnsureAdmin(HttpContext context)
+        {
+            if (IsAdmin())
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(context ?? HttpContext.Current);
+            return false;
+        }
+
+        /// <summary>
         /// 中文：要求当前请求身份为管理员；不满足时跳转到既有后台拒绝访问页。
         ///
         /// English: Requires the current request identity to be an administrator; otherwise redirects to the existing administration access-denied page.

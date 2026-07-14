@@ -8,132 +8,259 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 用户管理控件，用于展示和管理门户站点的用户信息。
+    /// 中文：旧后台用户列表和显式创建入口。
+    ///
+    /// English: Legacy administration user list and explicit user-creation entry point.
     /// </summary>
+    /// <remarks>
+    /// 中文：本控件要求 <c>Admins</c> 角色。新增用户仍使用既有的占位资料再进入编辑页，
+    /// 但写入只会发生在管理员点击后的 Web Forms POST，不再由访问编辑地址的 GET 触发。
+    ///
+    /// English: This control requires the <c>Admins</c> role. New users still begin with a legacy placeholder
+    /// profile before entering the edit page, but the write occurs only from an administrator-initiated Web Forms
+    /// POST and no longer from a GET to the edit URL.
+    /// </remarks>
     public partial class Users : PortalModuleControl<Users>
     {
+        private const int PlaceholderCreationAttempts = 5;
         private int tabId;
         private int tabIndex;
 
         /// <summary>
-        /// 用户数据库接口实例。
+        /// 中文：用户数据访问依赖。
+        ///
+        /// English: User data-access dependency.
         /// </summary>
         [Dependency]
         public IUsersDb UsersDB { private get; set; }
 
         /// <summary>
-        /// 角色数据库接口实例。
+        /// 中文：角色和可选用户查询依赖。
+        ///
+        /// English: Role and selectable-user query dependency.
         /// </summary>
         [Dependency]
         public IRolesDb RolesDB { private get; set; }
 
-
-        /* 此用户控件上的页面加载服务器事件处理程序，用于从配置系统中填充当前角色设置
-        
-         The Page_Load server event handler on this user control is used
-         to populate the current roles settings from the configuration system
-        
-        */
-
         /// <summary>
-        /// 页面加载事件处理程序。
+        /// 中文：执行管理员授权、读取可选导航参数并在首次请求绑定用户列表。
+        ///
+        /// English: Performs administrator authorization, reads optional navigation parameters, and binds the user
+        /// list on the initial request.
         /// </summary>
-        /// <param name="sender">事件源。</param>
-        /// <param name="e">事件参数。</param>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 验证当前用户是否有访问权限
-            // Verify that the current user has access to access this page
-            PortalAuthorization.RequireAdmin();
-
-            if (Request.Params["tabid"] != null)
+            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
             {
-                tabId = Int32.Parse(Request.Params["tabid"]);
-            }
-            if (Request.Params["tabindex"] != null)
-            {
-                tabIndex = Int32.Parse(Request.Params["tabindex"]);
+                return;
             }
 
-            // 如果不是回发请求，则绑定数据
-            // If this is the first visit to the page, bind the role data to the datalist
-            if (Page.IsPostBack == false)
+            if (!Page.IsPostBack)
             {
                 BindData();
             }
         }
-        
+
         /// <summary>
-        /// 删除用户的按钮点击事件处理程序。
+        /// 中文：删除当前选择的用户并记录不含资料内容的运营审计。
+        ///
+        /// English: Deletes the selected user and records an operations audit without profile content.
         /// </summary>
-        /// <param name="sender">事件源。</param>
-        /// <param name="e">事件参数。</param>
-        protected void btn_DeleteUser_Click(Object sender, ImageClickEventArgs e)
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void btn_DeleteUser_Click(object sender, ImageClickEventArgs e)
         {
-            // 从下拉列表获取用户ID
-            // get user id from dropdownlist of users
-            var userId = int.Parse(ddl_AllUsers.SelectedItem.Value);
+            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            IUserItem user;
+            if (!TryGetSelectedUser(out user))
+            {
+                return;
+            }
 
             try
             {
-                UsersDB.DeleteUser(userId);
-
-                // 重新绑定数据
+                UsersDB.DeleteUser(user.UserId);
+                PortalOperationAudit.Record(
+                    "UserAdministration",
+                    "Delete",
+                    "User",
+                    user.UserId.ToString(),
+                    "Deleted user from the legacy administration list.",
+                    Context);
                 BindData();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                // 详细异常只进入诊断日志，页面仅展示事件编号，避免泄漏数据库或路径细节。
-                // Detailed exception goes to diagnostics only; the page shows an event id to avoid leaking internals.
                 string eventId = PortalDiagnostics.Error(
                     "Admin.Users.DeleteUser",
-                    "Deleting a user from the admin Users module failed. UserId=" + userId,
-                    ex,
+                    "Deleting a user from the admin Users module failed. UserId=" + user.UserId,
+                    exception,
                     Context);
-                Message.Text = "删除失败，系统已记录本次错误。事件编号：" + eventId;
+                ShowMessage("删除失败，系统已记录本次错误。事件编号：" + eventId);
             }
         }
 
         /// <summary>
-        /// 编辑用户的按钮点击事件处理程序。
+        /// 中文：按当前选择的规范用户标识进入资料编辑页。
+        ///
+        /// English: Opens the profile-editing page using the canonical identifier of the currently selected user.
         /// </summary>
-        /// <param name="sender">事件源。</param>
-        /// <param name="e">事件参数。</param>
-        protected void EditUser_Click(Object sender, ImageClickEventArgs imageClickEventArgs)
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void EditUser_Click(object sender, ImageClickEventArgs e)
         {
-            int userId = -1;
-            string userName = "";
+            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            {
+                return;
+            }
 
-            // 获取用户ID和用户名
-            userId = Int32.Parse(ddl_AllUsers.SelectedItem.Value);
-            userName = ddl_AllUsers.SelectedItem.Text;
-        
-            // 重定向到用户管理页面
-            Response.Redirect($"~/Admin/ManageUsers.aspx?userId={userId}&username={Uri.EscapeDataString(userName)}&tabindex={tabIndex}&tabid={tabId}");
+            IUserItem user;
+            if (!TryGetSelectedUser(out user))
+            {
+                return;
+            }
+
+            RedirectToManageUser(user);
         }
 
         /// <summary>
-        /// 添加用户的按钮点击事件处理程序。
+        /// 中文：在管理员显式 POST 中创建临时用户，并转入现有资料编辑流程。
+        ///
+        /// English: Creates a placeholder user during an explicit administrator POST, then enters the existing
+        /// profile-editing flow.
         /// </summary>
-        /// <param name="sender">事件源。</param>
-        /// <param name="e">事件参数。</param>
-        protected void AddUser_Click(Object sender, EventArgs e)
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void AddUser_Click(object sender, EventArgs e)
         {
-            int userId = -1;
-            string userName = "";
+            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            {
+                return;
+            }
 
-            // 重定向到用户管理页面
-            Response.Redirect($"~/Admin/ManageUsers.aspx?userId={userId}&username={Uri.EscapeDataString(userName)}&tabindex={tabIndex}&tabid={tabId}");
+            for (int attempt = 0; attempt < PlaceholderCreationAttempts; attempt++)
+            {
+                string placeholderName = CreatePlaceholderUserName();
+                int userId = UsersDB.AddUser(placeholderName, placeholderName, string.Empty);
+                if (userId <= 0)
+                {
+                    continue;
+                }
+
+                IUserItem user = UsersDB.FindUserById(userId);
+                if (user == null)
+                {
+                    break;
+                }
+
+                PortalOperationAudit.Record(
+                    "UserAdministration",
+                    "CreatePlaceholder",
+                    "User",
+                    user.UserId.ToString(),
+                    "Created an administrator placeholder user.",
+                    Context);
+                RedirectToManageUser(user);
+                return;
+            }
+
+            ShowMessage("无法创建新用户，系统未完成本次写入。");
         }
 
-        /// <summary>
-        /// 绑定用户数据到下拉列表。
-        /// </summary>
+        private bool TryReadNavigationParameters()
+        {
+            return TryReadOptionalPositiveParameter("tabid", out tabId) &&
+                   TryReadOptionalNonNegativeParameter("tabindex", out tabIndex);
+        }
+
+        private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadNonNegativeInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private bool TryGetSelectedUser(out IUserItem user)
+        {
+            user = null;
+            if (ddl_AllUsers.SelectedItem == null)
+            {
+                ShowMessage("请选择一个有效用户。");
+                return false;
+            }
+
+            int userId;
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(ddl_AllUsers.SelectedItem.Value, out userId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            user = UsersDB.FindUserById(userId);
+            if (user != null)
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private static string CreatePlaceholderUserName()
+        {
+            return "NewUser_" + DateTime.UtcNow.ToString("yyyyMMddHHmmss") + "_" +
+                   Guid.NewGuid().ToString("N").Substring(0, 8);
+        }
+
+        private void RedirectToManageUser(IUserItem user)
+        {
+            string url = ResolveUrl(
+                "~/Admin/ManageUsers.aspx?userId=" + user.UserId +
+                "&username=" + Uri.EscapeDataString(user.Name ?? string.Empty) +
+                "&tabindex=" + tabIndex +
+                "&tabid=" + tabId);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, url);
+        }
+
         private void BindData()
         {
             try
             {
-                // 设置不同的消息文本，取决于身份验证类型
                 if (Context.User.Identity.AuthenticationType != "Forms")
                 {
                     Message.Text = lang.Admin_Users_FormMsg;
@@ -143,23 +270,23 @@ namespace ASPNET.StarterKit.Portal
                     Message.Text = lang.Admin_Users_OtherMsg;
                 }
 
-                // 从数据库获取注册用户列表，并绑定到下拉列表
                 ddl_AllUsers.DataSource = RolesDB.GetUsers();
                 ddl_AllUsers.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                // 详细异常只进入诊断日志，页面仅展示事件编号，避免泄漏数据库或路径细节。
-                // Detailed exception goes to diagnostics only; the page shows an event id to avoid leaking internals.
                 string eventId = PortalDiagnostics.Error(
                     "Admin.Users.BindData",
                     "Binding users in the admin Users module failed.",
-                    ex,
+                    exception,
                     Context);
-                Message.Text = "数据绑定失败，系统已记录本次错误。事件编号：" + eventId;
+                ShowMessage("数据绑定失败，系统已记录本次错误。事件编号：" + eventId);
             }
         }
 
-
+        private void ShowMessage(string message)
+        {
+            Message.Text = Server.HtmlEncode(message ?? string.Empty);
+        }
     }
 }

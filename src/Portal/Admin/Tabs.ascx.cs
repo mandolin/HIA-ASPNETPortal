@@ -1,202 +1,353 @@
 using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
 
-// 命名空间声明
 namespace ASPNET.StarterKit.Portal
 {
-    // 定义一个Tabs类，继承自PortalModuleControl<Tabs>
+    /// <summary>
+    /// 中文：旧门户 Tab 列表、排序和创建管理控件。
+    ///
+    /// English: Legacy Portal control for Tab listing, ordering, and creation.
+    /// </summary>
+    /// <remarks>
+    /// 中文：当前以名称 <c>Admin</c> 识别核心后台 Tab，并在此兼容阶段禁止从 UI 删除该 Tab。
+    /// 未来应以稳定标识替代名称约定。
+    ///
+    /// English: The current compatibility phase identifies the core administration Tab by the <c>Admin</c> name and
+    /// prevents deleting it from this UI. A future design should replace this naming convention with a stable identifier.
+    /// </remarks>
     public partial class Tabs : PortalModuleControl<Tabs>
     {
-        // 用于存储门户页设置的列表
+        /// <summary>
+        /// 中文：供列表绑定的当前门户 Tab 设置集合。
+        ///
+        /// English: Current-Portal Tab-settings collection used for list binding.
+        /// </summary>
         protected readonly List<TabSettings> PortalTabs = new List<TabSettings>();
-        private int _tabId;
-        private int _tabIndex;
 
-        // 依赖注入配置
+        private int tabId;
+        private int tabIndex;
+
+        /// <summary>中文：模块定义数据访问依赖。English: Module-definition data-access dependency.</summary>
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
-        // 基类属性的 getter 为 private；本控件需要读取模块配置，因此显式建立自己的注入入口。
+        /// <summary>中文：模块实例数据访问依赖。English: Module-instance data-access dependency.</summary>
         [Dependency]
         public new IModulesDb ModulesConfig { private get; set; }
 
+        /// <summary>中文：Tab 数据访问依赖。English: Tab data-access dependency.</summary>
         [Dependency]
         public ITabsDb TabsConfig { private get; set; }
 
+        /// <summary>中文：门户全局设置数据访问依赖。English: Portal global-settings data-access dependency.</summary>
         [Dependency]
         public IGlobalsDb PortalConfig { private get; set; }
 
-        //*******************************************************
-        //
-        // The Page_Load server event handler on this user control is used
-        // to populate the current tab settings from the database
-        //
-        //*******************************************************
-        // 页面加载事件处理器
+        /// <summary>
+        /// 中文：授权、读取可选导航参数并在首次请求绑定 Tab 列表。
+        ///
+        /// English: Authorizes, reads optional navigation parameters, and binds the Tab list on the initial request.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 验证当前用户是否有权限访问该页面
-            PortalAuthorization.RequireAdmin();
-
-            // 如果请求参数中存在tabid，则解析它
-            if (Request.Params["tabid"] != null)
+            if (!TryInitializeRequest())
             {
-                _tabId = Int32.Parse(Request.Params["tabid"]);
-            }
-            // 如果请求参数中存在tabindex，则解析它
-            if (Request.Params["tabindex"] != null)
-            {
-                _tabIndex = Int32.Parse(Request.Params["tabindex"]);
+                return;
             }
 
-            // 从当前上下文获取PortalSettings
-            var portalSettings = PortalContext.GetPortalSettings();
-
-            // 遍历门户设置中的所有桌面页，并将它们添加到PortalTabs列表中
-            foreach (ITabItem tab in portalSettings.DesktopTabs)
-            {
-                PortalTabs.Add(new TabSettings(tab));
-            }
-
-            // 将管理员页的排序号设置为一个大的数值，以确保它始终位于末尾
-            TabSettings adminTab = PortalTabs.Find(IsAdminTab);
-            if (adminTab != null)
-            {
-                adminTab.TabOrder = 99999;
-            }
-            PortalTabs.Sort();
-
-            // 如果不是回发请求，则绑定页数据到页面的ListBox
-            if (Page.IsPostBack == false)
+            if (!Page.IsPostBack)
             {
                 tabList.DataBind();
             }
         }
 
-        //*******************************************************
-        //
-        // The UpDown_Click server event handler on this page is
-        // used to move a portal module up or down on a tab's layout pane
-        //
-        //*******************************************************
-        // 上下移动页的事件处理器
-        protected void UpDown_Click(Object sender, ImageClickEventArgs e)
+        /// <summary>
+        /// 中文：调整当前选择的普通 Tab 顺序。
+        ///
+        /// English: Adjusts the order of the currently selected non-core Tab.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void UpDown_Click(object sender, ImageClickEventArgs e)
         {
-            // 获取点击的ImageButton的命令名称
-            string cmd = ((ImageButton)sender).CommandName;
-
-            // 如果ListBox中有选中的项
-            if (tabList.SelectedIndex != -1)
+            if (!TryInitializeRequest())
             {
-                int delta;
+                return;
+            }
 
-                // 根据命令名称确定要应用于模块列表中的顺序号的变化量
-                if (cmd == "down")
-                {
-                    delta = 3;
-                }
-                else
-                {
-                    delta = -3;
-                }
+            ImageButton button = sender as ImageButton;
+            TabSettings selectedTab;
+            if (button == null || (button.CommandName != "up" && button.CommandName != "down") ||
+                !TryGetSelectedTab(out selectedTab))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
 
-                // 获取当前选中的页设置，并更新其排序号
-                TabSettings t = PortalTabs[tabList.SelectedIndex];
-                t.TabOrder += delta;
-
-                // 重新设置页列表中的排序号
+            selectedTab.TabOrder += button.CommandName == "down" ? 3 : -3;
+            try
+            {
                 OrderTabs();
-
-                // 重定向刷新页面
-                Response.Redirect("~/DesktopDefault.aspx?tabindex=" + (PortalTabs.Count - 1) + "&tabid=" + _tabId);
+                PortalOperationAudit.Record(
+                    "TabAdministration",
+                    "Order",
+                    "Tab",
+                    selectedTab.TabId.ToString(),
+                    "Changed Tab display order.",
+                    Context);
+                RedirectToPortalHome();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Tabs.Order",
+                    "Ordering a Tab failed. TabId=" + selectedTab.TabId,
+                    exception,
+                    Context);
+                ShowMessage("Tab 排序失败，系统已记录本次错误。事件编号：" + eventId);
             }
         }
 
-        // 删除页的事件处理器
-        protected void DeleteBtn_Click(Object sender, ImageClickEventArgs e)
+        /// <summary>
+        /// 中文：删除当前选择的普通 Tab；删除会连带清理该 Tab 的模块实例。
+        ///
+        /// English: Deletes the currently selected non-core Tab; deletion also cleans up that Tab's module instances.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void DeleteBtn_Click(object sender, ImageClickEventArgs e)
         {
-            // 如果ListBox中有选中的项
-            if (tabList.SelectedIndex != -1)
+            if (!TryInitializeRequest())
             {
-                // 必须从数据库中删除页
-                TabSettings t = PortalTabs[tabList.SelectedIndex];
-                TabsConfig.DeleteTab(t.TabId);
+                return;
+            }
 
-                // 从列表中移除项目
-                PortalTabs.RemoveAt(tabList.SelectedIndex);
+            TabSettings selectedTab;
+            if (!TryGetSelectedTab(out selectedTab))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
 
-                // 重新排序列表
+            if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(selectedTab.TabName))
+            {
+                ShowMessage("核心后台 Tab 不能删除。");
+                return;
+            }
+
+            try
+            {
+                int moduleCount = ModulesConfig.GetModulesByTab(selectedTab.TabId).Count();
+                TabsConfig.DeleteTab(selectedTab.TabId);
+                PortalTabs.Remove(selectedTab);
                 OrderTabs();
-
-                // 重定向刷新页面
-                Response.Redirect("~/DesktopDefault.aspx?tabindex=" + _tabIndex + "&tabid=" + _tabId);
+                PortalOperationAudit.Record(
+                    "TabAdministration",
+                    "Delete",
+                    "Tab",
+                    selectedTab.TabId.ToString(),
+                    "Deleted Tab and " + moduleCount + " module instance(s).",
+                    Context);
+                RedirectToPortalHome();
             }
-        }
-
-        // 添加页的事件处理器
-        protected void AddTab_Click(Object sender, EventArgs e)
-        {
-            // 从当前上下文获取PortalSettings
-            var portalSettings = PortalContext.GetPortalSettings();
-
-            // 将页写入数据库
-            int tabId = TabsConfig.AddTab(portalSettings.PortalId, "New Tab", 999);
-
-            // 新页放在列表的末尾
-            ITabItem tab = TabsConfig.GetSingleTab(tabId);
-            PortalTabs.Add(new TabSettings(tab));
-
-            // 重新加载PortalSettings
-            PortalContext.SetPortalSettings(new PortalSettings(portalSettings.PortalId, tabId, PortalConfig, TabsConfig, ModulesConfig, ModuleDefConfig));
-
-            // 重新设置页列表中的排序号
-            OrderTabs();
-
-            // 重定向到编辑页面
-            Response.Redirect("~/Admin/TabLayout.aspx?tabid=" + tabId);
-        }
-
-        // 编辑页的事件处理器
-        protected void EditBtn_Click(Object sender, ImageClickEventArgs e)
-        {
-            // 如果ListBox中有选中的项
-            if (tabList.SelectedIndex != -1)
+            catch (Exception exception)
             {
-                // 重定向到当前选择的页的编辑页面
-                TabSettings t = PortalTabs[tabList.SelectedIndex];
-
-                Response.Redirect("~/Admin/TabLayout.aspx?tabid=" + t.TabId);
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Tabs.Delete",
+                    "Deleting a Tab failed. TabId=" + selectedTab.TabId,
+                    exception,
+                    Context);
+                ShowMessage("Tab 删除失败，系统已记录本次错误。事件编号：" + eventId);
             }
         }
 
-        // 用于重新设置门户页显示顺序的帮助方法
+        /// <summary>
+        /// 中文：创建默认公开的普通 Tab，并转入其布局设置页面。
+        ///
+        /// English: Creates a default public non-core Tab and opens its layout-settings page.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void AddTab_Click(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            try
+            {
+                PortalSettings portalSettings = PortalContext.GetPortalSettings();
+                int newTabId = TabsConfig.AddTab(portalSettings.PortalId, "New Tab", 999);
+                ITabItem newTab = TabsConfig.GetSingleTab(newTabId);
+                PortalTabs.Add(new TabSettings(newTab));
+                OrderTabs();
+                PortalOperationAudit.Record(
+                    "TabAdministration",
+                    "Create",
+                    "Tab",
+                    newTabId.ToString(),
+                    "Created a new Tab.",
+                    Context);
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                    Context,
+                    ResolveUrl("~/Admin/TabLayout.aspx?tabid=" + newTabId));
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Tabs.Add",
+                    "Adding a Tab failed.",
+                    exception,
+                    Context);
+                ShowMessage("Tab 创建失败，系统已记录本次错误。事件编号：" + eventId);
+            }
+        }
+
+        /// <summary>
+        /// 中文：进入当前选择 Tab 的布局设置页。
+        ///
+        /// English: Opens the layout-settings page for the currently selected Tab.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void EditBtn_Click(object sender, ImageClickEventArgs e)
+        {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            TabSettings selectedTab;
+            if (!TryGetSelectedTab(out selectedTab))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                Context,
+                ResolveUrl("~/Admin/TabLayout.aspx?tabid=" + selectedTab.TabId));
+        }
+
+        private bool TryInitializeRequest()
+        {
+            if (!PortalAuthorization.EnsureAdmin(Context) ||
+                !TryReadOptionalPositiveParameter("tabid", out tabId) ||
+                !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
+            {
+                return false;
+            }
+
+            PortalTabs.Clear();
+            foreach (ITabItem tab in PortalContext.GetPortalSettings().DesktopTabs)
+            {
+                PortalTabs.Add(new TabSettings(tab));
+            }
+
+            EnsureCoreAdministrationTabLast();
+            return true;
+        }
+
+        private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadNonNegativeInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private bool TryGetSelectedTab(out TabSettings selectedTab)
+        {
+            selectedTab = null;
+            if (tabList.SelectedIndex < 0 || tabList.SelectedIndex >= PortalTabs.Count || tabList.SelectedItem == null)
+            {
+                return false;
+            }
+
+            int selectedTabId;
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(tabList.SelectedItem.Value, out selectedTabId))
+            {
+                return false;
+            }
+
+            TabSettings candidate = PortalTabs[tabList.SelectedIndex];
+            if (candidate.TabId != selectedTabId)
+            {
+                return false;
+            }
+
+            selectedTab = candidate;
+            return true;
+        }
+
         private void OrderTabs()
         {
-            int i = 1;
-
-            // 排序数组列表
-            PortalTabs.Sort();
-
-            // 重新编号排序号并保存到数据库
-            foreach (TabSettings t in PortalTabs)
+            EnsureCoreAdministrationTabLast();
+            int order = 1;
+            foreach (TabSettings tab in PortalTabs)
             {
-                // 将项目编号为1, 3, 5等，以便在列表中移动项目时提供一个空的排序号。
-                t.TabOrder = i;
-                i += 2;
-
-                // 将页重新写入数据库
-                TabsConfig.UpdateTabOrder(t.TabId, t.TabOrder);
+                tab.TabOrder = order;
+                order += 2;
+                TabsConfig.UpdateTabOrder(tab.TabId, tab.TabOrder);
             }
         }
 
-        private static bool IsAdminTab(TabSettings tab)
+        private void EnsureCoreAdministrationTabLast()
         {
-            return tab != null && string.Equals(tab.TabName, "Admin", StringComparison.OrdinalIgnoreCase);
+            TabSettings administrationTab = PortalTabs.FirstOrDefault(tab =>
+                PortalAdministrationPolicy.IsProtectedAdministrationTabName(tab.TabName));
+            if (administrationTab != null)
+            {
+                administrationTab.TabOrder = int.MaxValue;
+            }
+
+            PortalTabs.Sort();
+        }
+
+        private void RedirectToPortalHome()
+        {
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/DesktopDefault.aspx"));
+        }
+
+        private void ShowMessage(string message)
+        {
+            Message.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }
 }

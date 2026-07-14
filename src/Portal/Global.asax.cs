@@ -184,8 +184,12 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            int tabIndex = GetIntParam("tabindex", 0);
-            int tabId = GetIntParam("tabid", 1);
+            // 中文：BeginRequest 必须先使用安全的活动 Tab 上下文。无效查询参数由具体页面随后拒绝，
+            // 避免门户设置构造阶段因不存在的 Tab 直接进入全局错误页。
+            // English: BeginRequest must first use a safe active-Tab context. Individual pages reject invalid query
+            // parameters afterwards, preventing a nonexistent Tab from reaching the global error page during settings construction.
+            int tabIndex = GetNonNegativeIntParam("tabindex", 0);
+            int tabId = GetPositiveIntParam("tabid", 1);
 
             var portalConfig = Container.Resolve<IGlobalsDb>();
             var tabsConfig = Container.Resolve<ITabsDb>();
@@ -210,14 +214,30 @@ namespace ASPNET.StarterKit.Portal
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
             }
 
-            // 辅助方法，用于获取带有默认值的整数参数
-            int GetIntParam(string paramName, int defaultValue)
+            // 中文：活动 Tab 索引允许零；负数、非数字和缺失值使用安全默认值。
+            // English: Active Tab indexes may be zero; negative, nonnumeric, and missing values use the safe default.
+            int GetNonNegativeIntParam(string paramName, int defaultValue)
             {
                 string rawValue = Request.QueryString[paramName] ?? Request.Unvalidated.Form[paramName];
-                if (int.TryParse(rawValue, out int value))
+                if (int.TryParse(rawValue, out int value) && value >= 0)
                 {
                     return value;
                 }
+
+                return defaultValue;
+            }
+
+            // 中文：活动 Tab 标识必须为正数；负数、零、非数字和缺失值使用安全默认值。
+            // English: Active Tab identifiers must be positive; negative, zero, nonnumeric, and missing values use
+            // the safe default.
+            int GetPositiveIntParam(string paramName, int defaultValue)
+            {
+                string rawValue = Request.QueryString[paramName] ?? Request.Unvalidated.Form[paramName];
+                if (int.TryParse(rawValue, out int value) && value > 0)
+                {
+                    return value;
+                }
+
                 return defaultValue;
             }
 

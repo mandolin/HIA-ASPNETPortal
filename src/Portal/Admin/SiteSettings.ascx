@@ -4,6 +4,12 @@
 <ASPNETPortal:title runat="server" id=Title1 />
 <table cellpadding="2" cellspacing="0" border="0">
     <tr>
+        <td></td>
+        <td class="NormalRed">
+            <asp:Label ID="Message" runat="server" />
+        </td>
+    </tr>
+    <tr>
         <td width="100" class="Normal">
             Site Title:
         </td>

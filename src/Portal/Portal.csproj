@@ -375,6 +375,7 @@
     </Compile>
     <Compile Include="Components\IPortalModuleControl.cs" />
     <Compile Include="Components\PortalAuthenticationCookies.cs" />
+    <Compile Include="Components\PortalAdministrationPolicy.cs" />
     <Compile Include="Components\PortalAuthorization.cs" />
     <Compile Include="Components\PortalContext.cs" />
     <Compile Include="Components\PortalModulePackage.cs" />

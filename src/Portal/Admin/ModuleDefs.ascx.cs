@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
@@ -6,7 +7,10 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 用户控件用于管理模块定义。
+    /// 中文：展示既有模块定义并进入受信任部署模块目录的后台控件。
+    ///
+    /// English: Administration control that displays legacy module definitions and enters the trusted deployment
+    /// module catalog.
     /// </summary>
     public partial class ModuleDefs : PortalModuleControl<ModuleDefs>
     {
@@ -14,33 +18,28 @@ namespace ASPNET.StarterKit.Portal
         private int tabIndex;
 
         /// <summary>
-        /// 旧模块定义数据服务，用于展示既有定义。
-        /// Legacy module-definition data service used to display existing definitions.
+        /// 中文：旧模块定义数据访问依赖。
+        ///
+        /// English: Legacy module-definition data-access dependency.
         /// </summary>
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
         /// <summary>
-        /// 页面加载时初始化模块定义。
+        /// 中文：授权并读取可选后台导航参数，在首次请求绑定既有定义。
+        ///
+        /// English: Authorizes and reads optional administration navigation parameters, then binds existing definitions
+        /// on the initial request.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 验证当前用户是否有权访问此页面
-            PortalAuthorization.RequireAdmin();
-
-            // 获取请求参数中的 tabid 和 tabindex
-            if (Request.Params["tabid"] != null)
+            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
             {
-                tabId = int.Parse(Request.Params["tabid"]);
-            }
-            if (Request.Params["tabindex"] != null)
-            {
-                tabIndex = int.Parse(Request.Params["tabindex"]);
+                return;
             }
 
-            // 如果这不是回发请求，则绑定数据到 DataList 控件
             if (!Page.IsPostBack)
             {
                 BindData();
@@ -48,41 +47,96 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 添加新的模块定义时的事件处理程序。
+        /// 中文：打开受信任部署模块目录；不恢复在线手填模块路径。
+        ///
+        /// English: Opens the trusted deployment module catalog without restoring online entry of module paths.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
-        protected void AddDef_Click(Object sender, EventArgs e)
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void AddDef_Click(object sender, EventArgs e)
         {
-            // P3.2 的新模块必须从受信任部署目录选择，不能继续手填任意 DesktopSrc。
-            // P3.2 requires new modules to be selected from the trusted deployment catalog instead of entering
-            // arbitrary DesktopSrc paths.
-            Response.Redirect("~/Admin/ModuleCatalog.aspx");
+            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/Admin/ModuleCatalog.aspx"));
         }
 
         /// <summary>
-        /// 处理用户从 DataList 控件编辑模块定义的命令。
+        /// 中文：进入当前选择的既有模块定义编辑页。
+        ///
+        /// English: Opens the editing page for the currently selected legacy module definition.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：包含 DataList 项索引的事件数据。English: Event data containing a DataList item index.</param>
         protected void DefsList_ItemCommand(object sender, DataListCommandEventArgs e)
         {
-            // 获取当前项的模块定义 ID
-            var moduleDefId = (int)defsList.DataKeys[e.Item.ItemIndex];
+            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            {
+                return;
+            }
 
-            // 重定向到编辑页面
-            Response.Redirect("~/Admin/ModuleDefinitions.aspx?defId=" + moduleDefId + "&tabindex=" + tabIndex + "&tabid=" + tabId);
+            int moduleDefId;
+            if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= defsList.DataKeys.Count ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(defsList.DataKeys[e.Item.ItemIndex].ToString(), out moduleDefId) ||
+                !ModuleDefConfig.GetModuleDefinitions().Any(item => item.ModuleDefId == moduleDefId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            string url = ResolveUrl(
+                "~/Admin/ModuleDefinitions.aspx?defId=" + moduleDefId +
+                "&tabindex=" + tabIndex +
+                "&tabid=" + tabId);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, url);
         }
 
-        /// <summary>
-        /// 绑定模块定义列表到 DataList 控件。
-        /// </summary>
+        private bool TryReadNavigationParameters()
+        {
+            return TryReadOptionalPositiveParameter("tabid", out tabId) &&
+                   TryReadOptionalNonNegativeParameter("tabindex", out tabIndex);
+        }
+
+        private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadPositiveInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
+        private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
+        {
+            value = 0;
+            string rawValue = Request.Params[parameterName];
+            if (string.IsNullOrWhiteSpace(rawValue))
+            {
+                return true;
+            }
+
+            if (PortalNavigationPolicy.TryReadNonNegativeInt32(rawValue, out value))
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }
+
         private void BindData()
         {
-            // 从当前上下文中获取 PortalSettings
-            var portalSettings = PortalContext.GetPortalSettings();
-
-            // 从数据库中获取门户的模块定义
             defsList.DataSource = ModuleDefConfig.GetModuleDefinitions();
             defsList.DataBind();
         }

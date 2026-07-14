@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Web;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
@@ -9,535 +8,620 @@ using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：旧门户 Tab 属性和模块布局管理页面。
+    ///
+    /// English: Legacy Portal page for Tab properties and module-layout administration.
+    /// </summary>
+    /// <remarks>
+    /// 中文：当前页面只使用 <c>Admins</c> 角色，并以请求中的 Tab 标识和当前门户上下文共同确认目标。
+    /// 既有核心模块定义继续可选；受信任部署包定义在 Disabled 时不可新增实例。
+    ///
+    /// English: The current page uses only the <c>Admins</c> role and confirms its target through both the requested
+    /// Tab identifier and current Portal context. Existing core module definitions remain selectable; a trusted
+    /// deployment-package definition cannot create a new instance while Disabled.
+    /// </remarks>
     public partial class TabLayout : PortalPage<TabLayout>
     {
-        protected List<ModuleSettings> contentList;
-        protected List<ModuleSettings> leftList;
-        protected List<ModuleSettings> rightList;
-        private int tabId;
-
         private const string LeftPaneName = "LeftPane";
         private const string ContentPaneName = "ContentPane";
         private const string RightPaneName = "RightPane";
 
+        protected List<ModuleSettings> contentList;
+        protected List<ModuleSettings> leftList;
+        protected List<ModuleSettings> rightList;
+
+        private int tabId;
+        private PortalSettings currentPortalSettings;
+        private Tab currentTab;
+
+        /// <summary>中文：角色数据访问依赖。English: Role data-access dependency.</summary>
         [Dependency]
         public IRolesDb RolesDB { private get; set; }
 
+        /// <summary>中文：模块实例数据访问依赖。English: Module-instance data-access dependency.</summary>
         [Dependency]
         public IModulesDb ModulesConfig { private get; set; }
 
+        /// <summary>中文：Tab 数据访问依赖。English: Tab data-access dependency.</summary>
         [Dependency]
         public ITabsDb TabsConfig { private get; set; }
 
+        /// <summary>中文：模块定义数据访问依赖。English: Module-definition data-access dependency.</summary>
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
+        /// <summary>中文：门户全局设置数据访问依赖。English: Portal global-settings data-access dependency.</summary>
         [Dependency]
         public IGlobalsDb PortalConfig { private get; set; }
 
-
-        //*******************************************************
-        //
-        // The Page_Load server event handler on this page is used
-        // to populate a tab's layout settings on the page
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 中文：授权并验证当前 Tab，在首次请求加载布局数据。
+        ///
+        /// English: Authorizes and validates the current Tab, then loads layout data on the initial request.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Verify that the current user has access to access this page
-            PortalAuthorization.RequireAdmin();
-
-            // Determine Tab to Edit
-            if (Request.Params["tabid"] != null)
+            if (!TryInitializeRequest())
             {
-                tabId = Int32.Parse(Request.Params["tabid"]);
+                return;
             }
 
-            // If first visit to the page, update all entries
-            if (Page.IsPostBack == false)
+            if (!Page.IsPostBack)
             {
                 BindData();
             }
         }
 
-        //*******************************************************
-        //
-        // The AddModuleToPane_Click server event handler on this page is used
-        // to add a new portal module into the tab
-        //
-        //*******************************************************
-
-        protected void AddModuleToPane_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：向当前 Tab 的主内容窗格添加一个允许的新模块实例。
+        ///
+        /// English: Adds an allowed new module instance to the current Tab's content pane.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void AddModuleToPane_Click(object sender, EventArgs e)
         {
-            // 新增的模块都将被添加到ContentPane的末尾
-            // 将新的模块信息保存到数据库中
-            ModulesConfig.AddModule(
-                tabId,                  // 当前标签的ID
-                999,                    // 最高的顺序号，表示新模块将被添加到最后
-                "ContentPane",           // 目标窗格的名称
-                moduleTitle.Text,       // 模块标题，从输入框获取
-                Int32.Parse(moduleType.SelectedItem.Value), // 模块类型ID，从下拉菜单中选定的项获取
-                0,                      // 默认缓存设置为0
-                PortalRoleNames.Administrators, // 默认授权给管理员角色
-                false                   // 默认showmobile配置为false
-            );
-
-            // 从当前上下文获取PortalSettings
-            var portalSettings = PortalContext.GetPortalSettings();
-
-            // 从数据库中重新加载PortalSettings
-            // 使用新的PortalSettings实例替换当前上下文中的PortalSettings
-            PortalContext.SetPortalSettings(new PortalSettings(
-                portalSettings.PortalId, // 门户ID
-                tabId,                   // 当前标签ID
-                PortalConfig,            // 门户配置对象
-                TabsConfig,              // 标签配置对象
-                ModulesConfig,           // 模块配置对象
-                ModuleDefConfig          // 模块定义配置对象
-            ));
-
-            // 获取ContentPane内的所有模块
-            List<ModuleSettings> modules = GetModules("ContentPane");
-
-            // 对ContentPane内的模块重新排序
-            OrderModules(modules);
-
-            // 重新保存模块顺序到数据库
-            foreach (ModuleSettings item in modules)
+            if (!TryInitializeRequest())
             {
-                ModulesConfig.UpdateModuleOrder(item.ModuleId, item.ModuleOrder, "ContentPane");
+                return;
             }
 
-            // 重新定向到同一页面以获取更改
-            // 这样可以刷新页面并显示新的模块
-            Response.Redirect(Request.RawUrl);
+            int moduleDefinitionId;
+            string title;
+            if (moduleType.SelectedItem == null ||
+                !PortalNavigationPolicy.TryReadPositiveInt32(moduleType.SelectedItem.Value, out moduleDefinitionId) ||
+                FindEligibleModuleDefinition(moduleDefinitionId) == null)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(moduleTitle.Text, 150, out title))
+            {
+                ShowMessage("模块名称无效，未创建模块。");
+                return;
+            }
+
+            try
+            {
+                int moduleId = ModulesConfig.AddModule(
+                    tabId,
+                    999,
+                    ContentPaneName,
+                    title,
+                    moduleDefinitionId,
+                    0,
+                    PortalRoleNames.Administrators,
+                    false);
+                ReloadCurrentTab();
+                OrderModules(GetModules(ContentPaneName));
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Create",
+                    "Module",
+                    moduleId.ToString(),
+                    "Created module instance in the content pane.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.AddModule",
+                    "Adding a module instance failed. TabId=" + tabId,
+                    exception,
+                    Context);
+                ShowMessage("模块创建失败，系统已记录本次错误。事件编号：" + eventId);
+            }
         }
 
-        protected void UpDown_Click(Object sender, ImageClickEventArgs e)
+        /// <summary>
+        /// 中文：在同一窗格内调整所选模块的显示顺序。
+        ///
+        /// English: Adjusts the display order of the selected module inside the same pane.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void UpDown_Click(object sender, ImageClickEventArgs e)
         {
-            // Get the command name and pane argument from the image button's properties
-            // 从按钮的属性中获取命令名称和窗格参数。
-            string cmd = ((ImageButton)sender).CommandName;
-            string pane = NormalizePaneName(((ImageButton)sender).CommandArgument);
-
-            // Find the ListBox control corresponding to the specified pane
-            // 查找对应于指定窗格的 ListBox 控件。
-            var _listbox = GetPaneListBox(pane);
-
-            // Get the list of modules for the specified pane
-            // 获取指定窗格内的模块列表。
-            List<ModuleSettings> modules = GetModules(pane);
-
-            // If a module is selected in the ListBox
-            if (_listbox.SelectedIndex != -1)
+            if (!TryInitializeRequest())
             {
-                int delta;
-                int selection = -1;
+                return;
+            }
 
-                // Determine whether to move the module up or down and calculate the delta accordingly
-                // 根据命令确定模块是向上还是向下移动，并相应地计算delta值。
-                if (cmd == "down")
-                {
-                    delta = 3;
-                    if (_listbox.SelectedIndex < _listbox.Items.Count - 1)
-                    {
-                        selection = _listbox.SelectedIndex + 1;
-                    }
-                }
-                else
-                {
-                    delta = -3;
-                    if (_listbox.SelectedIndex > 0)
-                    {
-                        selection = _listbox.SelectedIndex - 1;
-                    }
-                }
+            ImageButton button = sender as ImageButton;
+            string pane;
+            ListBox listBox;
+            if (button == null || !TryGetPaneListBox(button.CommandArgument, out pane, out listBox) ||
+                (button.CommandName != "up" && button.CommandName != "down"))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
 
-                // Get the selected module and adjust its order
-                // 获取选中的模块并调整其顺序。
-                ModuleSettings m = modules[_listbox.SelectedIndex];
-                m.ModuleOrder += delta;
+            List<ModuleSettings> modules = GetModules(pane);
+            ModuleSettings selectedModule;
+            if (!TryGetSelectedModule(listBox, modules, out selectedModule))
+            {
+                RedirectToCurrentLayout();
+                return;
+            }
 
-                // Reorder the modules in the content pane
-                // 重新排列窗格内的模块顺序。
+            selectedModule.ModuleOrder += button.CommandName == "down" ? 3 : -3;
+            try
+            {
                 OrderModules(modules);
-
-                // Resave the order of the modules to the database
-                // 将模块的新顺序保存回数据库。
-                foreach (ModuleSettings item in modules)
-                {
-                    ModulesConfig.UpdateModuleOrder(item.ModuleId, item.ModuleOrder, pane);
-                }
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Order",
+                    "Module",
+                    selectedModule.ModuleId.ToString(),
+                    "Changed module order within a pane.",
+                    Context);
+                RedirectToCurrentLayout();
             }
-
-            // Redirect to the same page to pick up changes
-            // 重新定向到同一页面以获取更改。
-            Response.Redirect(Request.RawUrl);
-        }
-
-        //*******************************************************
-        //
-        // The RightLeft_Click server event handler on this page is
-        // used to move a portal module between layout panes on
-        // the tab page
-        //
-        //*******************************************************
-
-        protected void RightLeft_Click(Object sender, ImageClickEventArgs e)
-        {
-            // Get the source and target pane names from the button attributes
-            // 从按钮属性中获取源窗格和目标窗格的名称。
-            string sourcePane = NormalizePaneName(((ImageButton)sender).Attributes["sourcepane"]);
-            string targetPane = NormalizePaneName(((ImageButton)sender).Attributes["targetpane"]);
-
-            // Find the ListBox controls corresponding to the source and target panes
-            // 查找对应于源窗格和目标窗格的 ListBox 控件。
-            var sourceBox = GetPaneListBox(sourcePane);
-            var targetBox = GetPaneListBox(targetPane);
-
-            if (sourceBox.SelectedIndex != -1)
+            catch (Exception exception)
             {
-                // Get the list of modules for the source pane
-                // 获取源窗格内的模块列表。
-                List<ModuleSettings> sourceList = GetModules(sourcePane);
-
-                // Get a reference to the module to move and set a high order number to place it at the end of the target list
-                // 获取要移动的模块引用，并设置一个高的顺序号以将其放置在目标列表的末尾。
-                ModuleSettings m = sourceList[sourceBox.SelectedIndex];
-
-                // Update the module order in the database to reflect the move
-                // 在数据库中更新模块顺序以反映移动。
-                ModulesConfig.UpdateModuleOrder(m.ModuleId, 998, targetPane);
-
-                // Remove the module from the source list
-                // 从源列表中移除模块。
-                sourceList.RemoveAt(sourceBox.SelectedIndex);
-
-                // Reload the portal settings from the database
-                // 从数据库中重新加载门户设置。
-                var portalSettings = PortalContext.GetPortalSettings();
-                PortalContext.SetPortalSettings(new PortalSettings(portalSettings.PortalId, tabId, PortalConfig, TabsConfig, ModulesConfig, ModuleDefConfig));
-
-                // Reorder the modules in the source pane
-                // 重新排列源窗格内的模块顺序。
-                sourceList = GetModules(sourcePane);
-                OrderModules(sourceList);
-
-                // Resave the order of the modules in the source pane to the database
-                // 将源窗格内模块的新顺序保存回数据库。
-                foreach (ModuleSettings item in sourceList)
-                {
-                    ModulesConfig.UpdateModuleOrder(item.ModuleId, item.ModuleOrder, sourcePane);
-                }
-
-                // Reorder the modules in the target pane
-                // 重新排列目标窗格内的模块顺序。
-                List<ModuleSettings> targetList = GetModules(targetPane);
-                OrderModules(targetList);
-
-                // Resave the order of the modules in the target pane to the database
-                // 将目标窗格内模块的新顺序保存回数据库。
-                foreach (ModuleSettings item in targetList)
-                {
-                    ModulesConfig.UpdateModuleOrder(item.ModuleId, item.ModuleOrder, targetPane);
-                }
-
-                // Redirect to the same page to pick up changes
-                // 重新定向到同一页面以获取更改。
-                Response.Redirect(Request.RawUrl);
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.OrderModule",
+                    "Ordering a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
+                    exception,
+                    Context);
+                ShowMessage("模块排序失败，系统已记录本次错误。事件编号：" + eventId);
             }
         }
 
-        //*******************************************************
-        //
-        // The Apply_Click server event handler on this page is
-        // used to save the current tab settings to the database and 
-        // then redirect back to the main admin page.
-        //
-        //*******************************************************
-
-        protected void Apply_Click(Object Sender, EventArgs e)
+        /// <summary>
+        /// 中文：将所选模块移动到另一个允许的布局窗格。
+        ///
+        /// English: Moves the selected module to another allowed layout pane.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void RightLeft_Click(object sender, ImageClickEventArgs e)
         {
-            // Save changes then navigate back to admin.
-            // 保存更改后导航回管理页面。
-            string id = ((LinkButton)Sender).ID;
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
 
-            SaveTabData();
+            ImageButton button = sender as ImageButton;
+            string sourcePane;
+            string targetPane;
+            ListBox sourceBox;
+            ListBox ignoredTargetBox;
+            if (button == null ||
+                !TryGetPaneListBox(button.Attributes["sourcepane"], out sourcePane, out sourceBox) ||
+                !TryGetPaneListBox(button.Attributes["targetpane"], out targetPane, out ignoredTargetBox) ||
+                string.Equals(sourcePane, targetPane, StringComparison.Ordinal))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
 
-            // Obtain PortalSettings from Current Context
-            // 从当前上下文获取门户设置。
-            var portalSettings = PortalContext.GetPortalSettings();
-            int adminIndex = portalSettings.DesktopTabs.Count - 1;
+            List<ModuleSettings> sourceModules = GetModules(sourcePane);
+            ModuleSettings selectedModule;
+            if (!TryGetSelectedModule(sourceBox, sourceModules, out selectedModule))
+            {
+                RedirectToCurrentLayout();
+                return;
+            }
 
-            // Redirect back to the admin page
-            // 重新定向回管理页面。
-            Response.Redirect("~/DesktopDefault.aspx?tabindex=" + adminIndex + "&tabid=" +
-                              (portalSettings.DesktopTabs[adminIndex]).TabId);
+            try
+            {
+                ModulesConfig.UpdateModuleOrder(selectedModule.ModuleId, 998, targetPane);
+                ReloadCurrentTab();
+                OrderModules(GetModules(sourcePane));
+                OrderModules(GetModules(targetPane));
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Move",
+                    "Module",
+                    selectedModule.ModuleId.ToString(),
+                    "Moved module between layout panes.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.MoveModule",
+                    "Moving a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
+                    exception,
+                    Context);
+                ShowMessage("模块移动失败，系统已记录本次错误。事件编号：" + eventId);
+            }
         }
 
-        //*******************************************************
-        //
-        // The TabSettings_Change server event handler on this page is
-        // invoked any time the tab name or access security settings
-        // change.  The event handler in turn calls the "SaveTabData"
-        // helper method to ensure that these changes are persisted
-        // to the portal configuration file.
-        //
-        //*******************************************************
-
-        protected void TabSettings_Change(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：保存 Tab 设置并返回核心后台 Tab。
+        ///
+        /// English: Saves Tab settings and returns to the core administration Tab.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void Apply_Click(object sender, EventArgs e)
         {
-            // Ensure that settings are saved
+            if (!TryInitializeRequest() || !SaveTabData())
+            {
+                return;
+            }
+
+            ITabItem administrationTab = currentPortalSettings.DesktopTabs.FirstOrDefault(tab =>
+                PortalAdministrationPolicy.IsProtectedAdministrationTabName(tab.TabName));
+            if (administrationTab == null)
+            {
+                PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/DesktopDefault.aspx"));
+                return;
+            }
+
+            int administrationIndex = currentPortalSettings.DesktopTabs.IndexOf(administrationTab);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                Context,
+                ResolveUrl("~/DesktopDefault.aspx?tabindex=" + administrationIndex + "&tabid=" + administrationTab.TabId));
+        }
+
+        /// <summary>
+        /// 中文：处理 Tab 名称、访问角色或移动端属性的自动保存事件。
+        ///
+        /// English: Handles auto-save events for Tab name, access roles, or mobile properties.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void TabSettings_Change(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
             SaveTabData();
         }
 
-        //*******************************************************
-        //
-        // The SaveTabData helper method is used to persist the
-        // current tab settings to the database.
-        //
-        //*******************************************************
-
-        private void SaveTabData()
+        /// <summary>
+        /// 中文：进入所选模块的实例设置页。
+        ///
+        /// English: Opens the instance-settings page for the selected module.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void EditBtn_Click(object sender, ImageClickEventArgs e)
         {
-            // Construct Authorized User Roles String
-            // 构建授权用户角色字符串。
-            string authorizedRoles = "";
-
-            // Iterate through each item in the authRoles CheckBoxList
-            // 遍历 authRoles 复选框列表中的每一项。
-            foreach (ListItem item in authRoles.Items)
+            if (!TryInitializeRequest())
             {
-                if (item.Selected)
-                {
-                    authorizedRoles = authorizedRoles + item.Text + ";"; // 如果该项被选中，则将其添加到授权角色字符串中。
-                }
+                return;
             }
 
-            // Obtain PortalSettings from Current Context
-            // 从当前上下文获取门户设置。
-            var portalSettings = PortalContext.GetPortalSettings();
+            ImageButton button = sender as ImageButton;
+            string pane;
+            ListBox listBox;
+            ModuleSettings selectedModule;
+            if (button == null || !TryGetPaneListBox(button.CommandArgument, out pane, out listBox) ||
+                !TryGetSelectedModule(listBox, GetModules(pane), out selectedModule))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
 
-            // Update Tab info in the database
-            // 更新数据库中的标签信息。
-            TabsConfig.UpdateTab(
-                portalSettings.PortalId, // 门户ID
-                tabId,                   // 标签ID
-                tabName.Text,            // 标签名
-                portalSettings.ActiveTab.TabOrder, // 标签顺序
-                authorizedRoles,         // 授权角色字符串
-                mobileTabName.Text,      // 移动设备上的标签名
-                showMobile.Checked       // 是否显示在移动设备上
-            );
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                Context,
+                ResolveUrl("~/Admin/ModuleSettings.aspx?mid=" + selectedModule.ModuleId + "&tabid=" + tabId));
         }
 
-        //*******************************************************
-        //
-        // The EditBtn_Click server event handler on this page is
-        // used to edit an individual portal module's settings
-        //
-        //*******************************************************
-
-        protected void EditBtn_Click(Object sender, ImageClickEventArgs e)
+        /// <summary>
+        /// 中文：删除所选模块实例并重新整理该窗格顺序。
+        ///
+        /// English: Deletes the selected module instance and reorders the affected pane.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
+        protected void DeleteBtn_Click(object sender, ImageClickEventArgs e)
         {
-            // Get the pane name from the button's CommandArgument property
-            // 从按钮的 CommandArgument 属性获取窗格名称。
-            string pane = NormalizePaneName(((ImageButton)sender).CommandArgument);
-
-            // Find the ListBox control corresponding to the specified pane
-            // 查找对应于指定窗格的 ListBox 控件。
-            var _listbox = GetPaneListBox(pane);
-
-            if (_listbox.SelectedIndex != -1)
+            if (!TryInitializeRequest())
             {
-                // Parse the value of the selected item to get the module ID
-                // 解析选中项的值以获取模块ID。
-                int mid = Int32.Parse(_listbox.SelectedItem.Value);
+                return;
+            }
 
-                // Redirect to module settings page
-                // 重新定向到模块设置页面。
-                Response.Redirect("ModuleSettings.aspx?mid=" + mid + "&tabid=" + tabId);
+            ImageButton button = sender as ImageButton;
+            string pane;
+            ListBox listBox;
+            ModuleSettings selectedModule;
+            if (button == null || !TryGetPaneListBox(button.CommandArgument, out pane, out listBox) ||
+                !TryGetSelectedModule(listBox, GetModules(pane), out selectedModule))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return;
+            }
+
+            try
+            {
+                ModulesConfig.DeleteModule(selectedModule.ModuleId);
+                ReloadCurrentTab();
+                OrderModules(GetModules(pane));
+                PortalOperationAudit.Record(
+                    "ModuleAdministration",
+                    "Delete",
+                    "Module",
+                    selectedModule.ModuleId.ToString(),
+                    "Deleted module instance from a Tab layout.",
+                    Context);
+                RedirectToCurrentLayout();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.DeleteModule",
+                    "Deleting a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
+                    exception,
+                    Context);
+                ShowMessage("模块删除失败，系统已记录本次错误。事件编号：" + eventId);
             }
         }
 
-        //*******************************************************
-        //
-        // The DeleteBtn_Click server event handler on this page is
-        // used to delete an portal module from the page
-        //
-        //*******************************************************
-
-        protected void DeleteBtn_Click(Object sender, ImageClickEventArgs e)
+        private bool TryInitializeRequest()
         {
-            // Get the pane name from the button's CommandArgument property
-            // 从按钮的 CommandArgument 属性获取窗格名称。
-            string pane = NormalizePaneName(((ImageButton)sender).CommandArgument);
-
-            // Find the ListBox control corresponding to the specified pane
-            // 查找对应于指定窗格的 ListBox 控件。
-            var _listbox = GetPaneListBox(pane);
-
-            // Get the list of modules for the specified pane
-            // 获取指定窗格内的模块列表。
-            List<ModuleSettings> modules = GetModules(pane);
-
-            if (_listbox.SelectedIndex != -1)
+            if (!PortalAuthorization.EnsureAdmin(Context))
             {
-                // Get the selected module settings
-                // 获取选中的模块设置。
-                ModuleSettings m = modules[_listbox.SelectedIndex];
-
-                // Check if the module has a valid ID before attempting to delete
-                // 在尝试删除之前检查模块是否有有效的ID。
-                if (m.ModuleId > -1)
-                {
-                    // Must also delete the module from the database
-                    // 必须从数据库中删除模块。
-                    ModulesConfig.DeleteModule(m.ModuleId);
-                }
+                return false;
             }
 
-            // 重新排列窗格内的模块顺序。
-            modules = GetModules(pane);
-            OrderModules(modules);
-
-            // Resave the order of the modules in the target pane to the database
-            // 将窗格内模块的新顺序保存回数据库。
-            foreach (ModuleSettings item in modules)
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["tabid"], out tabId))
             {
-                ModulesConfig.UpdateModuleOrder(item.ModuleId, item.ModuleOrder, pane);
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
             }
 
-            // Redirect to the same page to pick up changes
-            // 重新定向到同一页面以获取更改。
-            Response.Redirect(Request.RawUrl);
+            currentPortalSettings = PortalContext.GetPortalSettings();
+            ITabItem requestedTab = currentPortalSettings.DesktopTabs.FirstOrDefault(tab => tab.TabId == tabId);
+            currentTab = requestedTab == null || currentPortalSettings.ActiveTab == null ||
+                         currentPortalSettings.ActiveTab.TabId != tabId
+                ? null
+                : currentPortalSettings.ActiveTab;
+            if (currentTab != null)
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
         }
 
+        private bool SaveTabData()
+        {
+            string normalizedTabName;
+            string normalizedMobileTabName;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(tabName.Text, 150, out normalizedTabName) ||
+                !PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(mobileTabName.Text, 150, out normalizedMobileTabName))
+            {
+                ShowMessage("Tab 名称无效，未保存本次修改。");
+                return false;
+            }
 
-        //*******************************************************
-        //
-        // The BindData helper method is used to update the tab's
-        // layout panes with the current configuration information
-        //
-        //*******************************************************
+            if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(currentTab.TabName) &&
+                !string.Equals(currentTab.TabName, normalizedTabName, StringComparison.Ordinal))
+            {
+                ShowMessage("核心后台 Tab 不能改名。");
+                return false;
+            }
+
+            string authorizedRoles = PortalRoleParser.Join(
+                authRoles.Items.Cast<ListItem>()
+                    .Where(item => item.Selected)
+                    .Select(item => item.Text));
+            try
+            {
+                TabsConfig.UpdateTab(
+                    currentPortalSettings.PortalId,
+                    tabId,
+                    normalizedTabName,
+                    currentTab.TabOrder,
+                    authorizedRoles,
+                    normalizedMobileTabName,
+                    showMobile.Checked);
+                PortalOperationAudit.Record(
+                    "TabAdministration",
+                    "Update",
+                    "Tab",
+                    tabId.ToString(),
+                    "Updated Tab settings.",
+                    Context);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.TabLayout.SaveTab",
+                    "Saving Tab settings failed. TabId=" + tabId,
+                    exception,
+                    Context);
+                ShowMessage("Tab 设置保存失败，系统已记录本次错误。事件编号：" + eventId);
+                return false;
+            }
+        }
 
         private void BindData()
         {
-            // Obtain PortalSettings from Current Context
-            // 从当前上下文获取门户设置对象。
-            var portalSettings = PortalContext.GetPortalSettings();
-            TabSettings tab = portalSettings.ActiveTab;
+            tabName.Text = currentTab.TabName;
+            mobileTabName.Text = currentTab.MobileTabName;
+            showMobile.Checked = currentTab.ShowMobile;
 
-            // Populate Tab Names, etc.
-            // 填充标签名等信息。
-            tabName.Text = tab.TabName; // 设置文本框中标签的名字。
-            mobileTabName.Text = tab.MobileTabName; // 设置文本框中移动设备上标签的名字。
-            showMobile.Checked = tab.ShowMobile; // 设置复选框以指示标签是否对移动用户可见。
-
-            // Populate checkbox list with all security roles for this portal
-            // and "check" the ones already configured for this tab
-            // 填充复选框列表以包含此门户的所有安全角色，并且选中那些已经为此标签配置的角色。
-            IEnumerable<IRoleItem> roles = RolesDB.GetPortalRoles(portalSettings.PortalId); // 获取门户的所有角色。
-
-            // Clear existing items in checkboxlist
-            // 清除复选框列表中的现有项。
             authRoles.Items.Clear();
-
-            // Add 'All Users' option to the checkbox list
-            // 向复选框列表添加“所有用户”选项。
-            var allItem = new ListItem(); // 创建一个新的列表项。
-            allItem.Text = PortalRoleNames.AllUsers; // 设置列表项的文本为“所有用户”。
-
-            // Check if 'All Users' is authorized for this tab
-            // 检查“所有用户”是否对此标签已授权。
-            if (PortalRoleParser.Contains(tab.AuthorizedRoles, PortalRoleNames.AllUsers))
+            var allUsers = new ListItem(PortalRoleNames.AllUsers, PortalRoleNames.AllUsers)
             {
-                allItem.Selected = true; // 如果已授权，则选中该选项。
-            }
-
-            authRoles.Items.Add(allItem); // 将“所有用户”选项添加到复选框列表中。
-
-            // Loop through each role and add it to the checkbox list
-            // 遍历每个角色并将其添加到复选框列表中。
-            foreach (IRoleItem role in roles)
+                Selected = PortalRoleParser.Contains(currentTab.AuthorizedRoles, PortalRoleNames.AllUsers)
+            };
+            authRoles.Items.Add(allUsers);
+            foreach (IRoleItem role in RolesDB.GetPortalRoles(currentPortalSettings.PortalId))
             {
-                var item = new ListItem(); // 创建一个新的列表项。
-                item.Text = role.RoleName; // 设置列表项的文本为角色名。
-                item.Value = role.RoleId.ToString(); // 设置列表项的值为角色ID。
-
-                // Check if the current role is authorized for this tab
-                // 检查当前角色是否对此标签已授权。
-                if ((tab.AuthorizedRoles.LastIndexOf(item.Text)) > -1)
+                var item = new ListItem(role.RoleName, role.RoleId.ToString())
                 {
-                    item.Selected = true; // 如果已授权，则选中该选项。
-                }
-
-                authRoles.Items.Add(item); // 将角色添加到复选框列表中。
+                    Selected = PortalRoleParser.Contains(currentTab.AuthorizedRoles, role.RoleName)
+                };
+                authRoles.Items.Add(item);
             }
 
-            // Populate the "Add Module" Data
-            // 填充“添加模块”的数据。
-            moduleType.DataSource = ModuleDefConfig.GetModuleDefinitions(); // 设置下拉列表的数据源为模块定义。
-            moduleType.DataBind(); // 绑定数据源到下拉列表。
+            moduleType.DataSource = GetEligibleModuleDefinitions();
+            moduleType.DataBind();
 
-            // Populate Right Hand Module Data
-            // 填充右侧模块数据。
-            rightList = GetModules("RightPane"); // 获取右侧模块列表。
-            rightPane.DataBind(); // 绑定数据到右侧模块列表框。
-
-            // Populate Content Pane Module Data
-            // 填充内容面板模块数据。
-            contentList = GetModules("ContentPane"); // 获取内容面板模块列表。
-            contentPane.DataBind(); // 绑定数据到内容面板模块列表框。
-
-            // Populate Left Hand Pane Module Data
-            // 填充左侧模块数据。
-            leftList = GetModules("LeftPane"); // 获取左侧模块列表。
-            leftPane.DataBind(); // 绑定数据到左侧模块列表框。
-        }
-        //*******************************************************
-        //
-        // The GetModules helper method is used to get the modules
-        // for a single pane within the tab
-        //
-        //*******************************************************
-
-        private List<ModuleSettings> GetModules(String pane)
-        {
-            // Obtain PortalSettings from Current Context
-            // 从当前上下文获取门户设置对象。
-            var portalSettings = PortalContext.GetPortalSettings();
-            var paneModules = new List<ModuleSettings>(); // 创建一个新的模块设置列表。
-
-            // Iterate over all modules of the active tab
-            // 遍历活动标签下的所有模块。
-            foreach (ModuleSettings module in portalSettings.ActiveTab.Modules)
-            {
-                // Check if the module belongs to the specified pane
-                // 检查模块是否属于指定的窗格。
-                if ((module.PaneName).ToLower() == pane.ToLower())
-                {
-                    paneModules.Add(module); // 如果属于指定窗格，则将模块添加到列表中。
-                }
-            }
-
-            return paneModules; // 返回包含指定窗格内所有模块的列表。
+            rightList = GetModules(RightPaneName);
+            rightPane.DataBind();
+            contentList = GetModules(ContentPaneName);
+            contentPane.DataBind();
+            leftList = GetModules(LeftPaneName);
+            leftPane.DataBind();
         }
 
-        private ListBox GetPaneListBox(string pane)
+        private IList<IModuleDefinitionItem> GetEligibleModuleDefinitions()
         {
-            switch (NormalizePaneName(pane))
+            IList<PortalModulePackage> trustedPackages = PortalModuleCatalog.GetTrustedPackages();
+            var eligibleDefinitions = new List<IModuleDefinitionItem>();
+            foreach (IModuleDefinitionItem definition in ModuleDefConfig.GetModuleDefinitions())
+            {
+                string normalizedSource;
+                string errorMessage;
+                if (!PortalModulePathValidator.TryNormalizeDesktopSource(
+                    definition.DesktopSourceFile,
+                    out normalizedSource,
+                    out errorMessage))
+                {
+                    continue;
+                }
+
+                PortalModulePackage package = trustedPackages.FirstOrDefault(item =>
+                    string.Equals(item.DesktopEntry, normalizedSource, StringComparison.OrdinalIgnoreCase));
+                if (package != null)
+                {
+                    PortalModulePackageStateReadResult state = PortalModulePackageStates.Read(package.PackageId, Context);
+                    if (state.IsAvailable && state.State != null && !state.State.IsEnabled)
+                    {
+                        continue;
+                    }
+                }
+
+                eligibleDefinitions.Add(definition);
+            }
+
+            return eligibleDefinitions;
+        }
+
+        private IModuleDefinitionItem FindEligibleModuleDefinition(int moduleDefinitionId)
+        {
+            return GetEligibleModuleDefinitions().FirstOrDefault(item => item.ModuleDefId == moduleDefinitionId);
+        }
+
+        private List<ModuleSettings> GetModules(string pane)
+        {
+            return currentTab.Modules
+                .Where(module => string.Equals(module.PaneName, pane, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(module => module.ModuleOrder)
+                .ThenBy(module => module.ModuleId)
+                .ToList();
+        }
+
+        private bool TryGetPaneListBox(string candidate, out string pane, out ListBox listBox)
+        {
+            pane = NormalizePaneName(candidate);
+            switch (pane)
             {
                 case LeftPaneName:
-                    return leftPane;
+                    listBox = leftPane;
+                    return true;
                 case ContentPaneName:
-                    return contentPane;
+                    listBox = contentPane;
+                    return true;
                 case RightPaneName:
-                    return rightPane;
+                    listBox = rightPane;
+                    return true;
                 default:
-                    throw new ArgumentException("Unknown pane name: " + pane, nameof(pane));
+                    listBox = null;
+                    return false;
             }
+        }
+
+        private bool TryGetSelectedModule(ListBox listBox, IList<ModuleSettings> modules, out ModuleSettings selectedModule)
+        {
+            selectedModule = null;
+            if (listBox == null || modules == null || listBox.SelectedIndex < 0 ||
+                listBox.SelectedIndex >= modules.Count || listBox.SelectedItem == null)
+            {
+                return false;
+            }
+
+            int selectedModuleId;
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(listBox.SelectedItem.Value, out selectedModuleId))
+            {
+                return false;
+            }
+
+            ModuleSettings candidate = modules[listBox.SelectedIndex];
+            if (candidate.ModuleId != selectedModuleId)
+            {
+                return false;
+            }
+
+            selectedModule = candidate;
+            return true;
+        }
+
+        private void OrderModules(List<ModuleSettings> modules)
+        {
+            modules.Sort();
+            int order = 1;
+            foreach (ModuleSettings module in modules)
+            {
+                module.ModuleOrder = order;
+                order += 2;
+                ModulesConfig.UpdateModuleOrder(module.ModuleId, module.ModuleOrder, module.PaneName);
+            }
+        }
+
+        private void ReloadCurrentTab()
+        {
+            int tabIndex = currentPortalSettings.DesktopTabs.FindIndex(tab => tab.TabId == tabId);
+            PortalContext.SetPortalSettings(new PortalSettings(
+                tabIndex,
+                tabId,
+                PortalConfig,
+                TabsConfig,
+                ModulesConfig,
+                ModuleDefConfig));
+            currentPortalSettings = PortalContext.GetPortalSettings();
+            currentTab = currentPortalSettings.ActiveTab;
+        }
+
+        private void RedirectToCurrentLayout()
+        {
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(
+                Context,
+                ResolveUrl("~/Admin/TabLayout.aspx?tabid=" + tabId));
+        }
+
+        private void ShowMessage(string message)
+        {
+            Message.Text = Server.HtmlEncode(message ?? string.Empty);
         }
 
         private static string NormalizePaneName(string pane)
@@ -560,33 +644,7 @@ namespace ASPNET.StarterKit.Portal
                 return RightPaneName;
             }
 
-            return pane;
-        }
-
-        //*******************************************************
-        //
-        // The OrderModules helper method is used to reset the display
-        // order for modules within a pane
-        //
-        //*******************************************************
-
-        private static void OrderModules(List<ModuleSettings> list)
-        {
-            int i = 1; // 初始化一个计数器用于设置模块顺序。
-
-            // Sort the list of module settings
-            // 对模块设置列表进行排序。
-            list.Sort();
-
-            // Renumber the order of modules, setting every other position to be empty
-            // 重新编号模块的顺序，每隔一个位置留空。
-            foreach (ModuleSettings m in list)
-            {
-                // Set the module order to odd numbers only (1, 3, 5, etc.)
-                // 这样做是为了在移动项目上下时提供一个空的顺序号。
-                m.ModuleOrder = i;
-                i += 2; // 每次迭代增加2，确保下一次迭代时是下一个奇数。
-            }
+            return string.Empty;
         }
     }
 }

@@ -6,6 +6,12 @@
 
 <%-- 表格开始 --%>
 <table cellpadding="2" cellspacing="0" border="0">
+    <tr>
+        <td></td>
+        <td class="NormalRed">
+            <asp:Label ID="Message" runat="server" />
+        </td>
+    </tr>
     <%-- 数据列表行 --%>
     <tr valign="top">
         <td class="Normal" width="100">
@@ -21,7 +27,7 @@
                     <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="Delete this item" runat="server" />
                     &nbsp;&nbsp;
                     <%-- 角色名标签 --%>
-                    <asp:Label Text='<%# DataBinder.Eval(Container.DataItem, "RoleName") %>' cssclass="Normal" runat="server" />
+                    <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "RoleName") %>' cssclass="Normal" runat="server" />
                 </ItemTemplate>
                 <EditItemTemplate>
                     <%-- 可编辑的角色名输入框 --%>

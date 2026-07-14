@@ -132,6 +132,16 @@ namespace ASPNET.StarterKit.Portal
         IUserItem GetSingleUser(String email);
 
         /// <summary>
+        /// 中文：按数值标识查找单个用户；管理员页面可将其用于验证请求目标，缺失时正常返回空值。
+        ///
+        /// English: Finds one user by numeric identifier; administration pages may use it to validate a request target,
+        /// returning null normally when the user is absent.
+        /// </summary>
+        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
+        /// <returns>中文：匹配用户；不存在时为 <c>null</c>。English: Matching user, or <c>null</c> when absent.</returns>
+        IUserItem FindUserById(int userId);
+
+        /// <summary>
         /// 中文：校验登录摘要和注册审核状态，成功时返回用户登录名称。
         ///
         /// English: Validates a sign-in digest and registration-review status, then returns the user sign-in name on success.
