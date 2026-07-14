@@ -56,6 +56,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 - `portal: build assets and start`：构建解决方案、构建前端资源并启动 IIS Express。
 - `portal: documentation baseline`：输出已追踪源码的文档化 inventory JSON。
 - `portal: build JavaScript documentation pilot`：独立生成并验证 HIA JSDoc pilot。
+- `portal: verify .NET XML documentation`：构建 Debug 后检查既有 C# XML 文档输出。
 
 这些任务只调用仓库内的辅助脚本和 npm scripts，不修改 `.sln`、`.csproj`、`.csproj.user`，因此不会覆盖 Visual Studio 的既有调试设置。
 
@@ -80,6 +81,24 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 ```
 
 首次运行会在工具目录执行 `npm ci`；生成 HTML、HIA metadata 和 integration JSON 后验证双语内容、source-link 及本机路径泄漏。生成物只在 `temp/documentation/jsdoc/`，不得提交。
+
+## .NET XML 文档验证
+
+`Test-PortalXmlDocumentation.ps1` 只检查既有 `Debug|Any CPU` 的四份 C# XML 文档输出：`Portal`、`Portal.Components`、`Portal.Components.Data` 与 `Portal.Components.Data1`。它不修改 `.csproj`、不生成 HIA artifact，也不设置 `CS1591` 数量门禁。
+
+默认仅验证已有构建产物：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalXmlDocumentation.ps1
+```
+
+需要脚本先执行既有解决方案构建时，显式传入 `-Build`；VSCode 的 `portal: verify .NET XML documentation` 任务采用此模式：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalXmlDocumentation.ps1 -Build
+```
+
+验证器只检查 XML 结构、程序集名和至少一个成员条目。XML 继续属于本机构建产物；待 HIA C# producer 和 source-linkage 契约稳定后，再考虑独立接入。
 
 ## VSCode 调试
 

@@ -166,6 +166,21 @@
                 "${workspaceFolder}\\dev\\scripts\\Build-PortalJsdocPilot.ps1"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "portal: verify .NET XML documentation",
+            "type": "process",
+            "command": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": [
+                "-NoLogo",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Test-PortalXmlDocumentation.ps1",
+                "-Build"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
