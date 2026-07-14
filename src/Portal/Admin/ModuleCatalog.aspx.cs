@@ -126,6 +126,13 @@ namespace ASPNET.StarterKit.Portal
         /// 为已验证包创建仅指向 manifest 入口的旧定义记录。
         /// Creates a legacy definition record pointing only to a validated manifest entry.
         /// </summary>
+        /// <remarks>
+        /// 此操作写入旧模块定义表并写入运营审计，但不复制、上传、删除或修改包目录。重复入口仅返回既有定义，
+        /// 不会创建第二条定义记录。
+        /// This operation writes the legacy module-definition table and an operations audit, but never copies, uploads,
+        /// deletes, or modifies the package directory. A duplicate entry returns the existing definition and does not
+        /// create a second definition record.
+        /// </remarks>
         private void RegisterPackage(PortalModulePackage package)
         {
             IList<IModuleDefinitionItem> definitions = ModuleDefConfig.GetModuleDefinitions().ToList();
@@ -157,6 +164,11 @@ namespace ASPNET.StarterKit.Portal
         /// 保存已验证包的启用状态，并记录高价值运营审计。
         /// Saves a validated package enabled state and records a high-value operations audit.
         /// </summary>
+        /// <remarks>
+        /// 状态表不可用或写入失败时不改变模块文件，也不伪造成功结果；失败详情由状态存储写入诊断。
+        /// When the state table is unavailable or a write fails, this method does not alter module files or fabricate a
+        /// successful result; failure details are recorded in diagnostics by the state store.
+        /// </remarks>
         private void SavePackageState(PortalModulePackage package, bool isEnabled)
         {
             PortalModulePackageStateWriteResult result = PortalModulePackageStates.Save(

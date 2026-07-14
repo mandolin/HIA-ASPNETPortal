@@ -7,8 +7,16 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 管理模块定义的页面。
-    /// </summary>
+        /// 维护历史模块定义名称并执行受保护删除检查的 Legacy 页面。
+        /// Legacy page that maintains historical module-definition names and performs protected deletion checks.
+        /// </summary>
+        /// <remarks>
+        /// 新模块定义必须在 <c>ModuleCatalog.aspx</c> 从已验证部署包登记。本页不再允许创建定义或修改桌面/移动入口，
+        /// 以避免恢复任意动态加载路径。
+        /// New module definitions must be registered from a validated deployment package in <c>ModuleCatalog.aspx</c>.
+        /// This page no longer permits creating a definition or changing desktop/mobile entries, preventing arbitrary
+        /// dynamic-load paths from returning.
+        /// </remarks>
     public partial class ModuleDefinitions : PortalPage<ModuleDefinitions>
     {
         private int defId = -1;
@@ -30,10 +38,18 @@ namespace ASPNET.StarterKit.Portal
         public IModulesDb ModulesConfig { private get; set; }
 
         /// <summary>
-        /// 页面加载时初始化模块定义信息。
+        /// 验证管理员访问权，读取查询参数，并初始化历史模块定义信息。
+        /// Requires administrator access, reads query parameters, and initializes legacy module-definition information.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
+        /// <param name="sender">事件源。Event source.</param>
+        /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 查询参数沿用历史 <see cref="int.Parse(string)"/> 行为；非整数值会按现有全局异常流程处理。本批只说明该风险，
+        /// 不改变 URL 兼容性或错误页行为。
+        /// Query parameters retain historical <see cref="int.Parse(string)"/> behavior; non-integer values flow through
+        /// the existing global exception handling. This batch documents the risk without changing URL compatibility or
+        /// error-page behavior.
+        /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
             // 验证当前用户是否有权访问此页面
@@ -86,10 +102,16 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 更新按钮点击事件处理器，用于创建或更新模块定义。
+        /// 更新历史模块定义的显示名称，并保留其已受控的路径。
+        /// Updates a legacy module-definition display name while preserving its controlled paths.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
+        /// <param name="sender">事件源。Event source.</param>
+        /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 新建请求会跳转目录页；已有定义只更新名称并写入运营审计，不重新验证或修改 DesktopSrc/MobileSrc。
+        /// A create request redirects to the catalog; an existing definition updates only its name and records an
+        /// operations audit, without revalidating or changing DesktopSrc/MobileSrc.
+        /// </remarks>
         protected void UpdateBtn_Click(Object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -125,10 +147,16 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 删除按钮点击事件处理器，用于删除模块定义。
+        /// 删除未被模块实例引用的历史模块定义。
+        /// Deletes a legacy module definition that no module instance references.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
+        /// <param name="sender">事件源。Event source.</param>
+        /// <param name="e">事件参数。Event arguments.</param>
+        /// <remarks>
+        /// 引用数量大于零时拒绝删除，要求先禁用、迁移或显式清理实例。删除成功会写入运营审计；不会删除物理部署目录。
+        /// Deletion is refused when references exist, requiring instances to be disabled, migrated, or explicitly
+        /// cleaned first. A successful deletion writes an operations audit and never deletes a physical deployment directory.
+        /// </remarks>
         protected void DeleteBtn_Click(Object sender, EventArgs e)
         {
             int instanceCount = ModulesConfig.GetModulesByModuleDefId(defId).Count();
@@ -157,10 +185,11 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 取消按钮点击事件处理器，用于取消操作并返回门户首页。
+        /// 取消当前编辑并返回指定门户 Tab。
+        /// Cancels the current edit and returns to the specified portal Tab.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
+        /// <param name="sender">事件源。Event source.</param>
+        /// <param name="e">事件参数。Event arguments.</param>
         protected void CancelBtn_Click(Object sender, EventArgs e)
         {
             // 重定向回门户首页
@@ -168,8 +197,17 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 服务端校验模块路径，防止动态加载入口指向站点外、上级目录或非用户控件文件。
+        /// 为历史表单保留的服务器端模块路径校验。
+        /// Server-side module-path validation retained for the legacy form.
         /// </summary>
+        /// <remarks>
+        /// 当前 UI 已将路径字段设为只读，新定义也重定向到目录页；保留此处理器是为了不破坏现有 ASPX 验证契约。
+        /// Current UI marks path fields read-only and redirects new definitions to the catalog; this handler remains so
+        /// the existing ASPX validation contract is not broken.
+        /// </remarks>
+        /// <param name="source">验证器控件。Validator control.</param>
+        /// <param name="args">包含待校验路径及验证结果的事件参数。
+        /// Event arguments containing the path to validate and the validation result.</param>
         protected void DesktopSrcPathValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
             string normalizedSource;
@@ -177,6 +215,14 @@ namespace ASPNET.StarterKit.Portal
             args.IsValid = PortalModulePathValidator.TryNormalizeDesktopSource(args.Value, out normalizedSource, out errorMessage);
         }
 
+        /// <summary>
+        /// 规范化当前历史表单中的桌面入口，供保留的兼容调用点使用。
+        /// Normalizes the desktop entry in the current legacy form for retained compatibility call sites.
+        /// </summary>
+        /// <returns>已通过路径校验的站内相对入口。
+        /// Site-relative entry that passed path validation.</returns>
+        /// <exception cref="InvalidOperationException">路径不符合受限动态加载边界时抛出。
+        /// Thrown when the path does not meet the constrained dynamic-loading boundary.</exception>
         private string NormalizeDesktopSrc()
         {
             string normalizedSource;

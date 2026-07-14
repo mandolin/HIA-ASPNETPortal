@@ -5,8 +5,30 @@ using System.Web.UI.WebControls;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 将当前 Tab 的已授权模块动态装配到门户页面窗格的主页面。
+    /// Main page that dynamically assembles authorized modules for the current Tab into portal layout panes.
+    /// </summary>
+    /// <remarks>
+    /// 模块入口会先通过 <see cref="PortalModuleCatalog"/> 解析。已验证部署包遵从启用状态；旧模块仍以受限路径兼容加载。
+    /// 单个模块解析或加载失败只记录诊断并跳过该模块，不应终止整个页面请求。
+    /// Each module entry is first resolved by <see cref="PortalModuleCatalog"/>. Validated deployment packages obey
+    /// enabled state, while legacy modules remain compatible through constrained paths. A single module resolution or
+    /// load failure records diagnostics and skips that module; it should not terminate the entire page request.
+    /// </remarks>
     public partial class DesktopDefault : PortalPage<DesktopDefault>
     {
+        /// <summary>
+        /// 在页面初始化阶段检查 Tab 访问权，并将登录控件和可加载模块放入对应窗格。
+        /// Checks Tab access and places the sign-in control and loadable modules into their panes during page initialization.
+        /// </summary>
+        /// <param name="sender">事件源。Event source.</param>
+        /// <param name="e">初始化事件参数。Initialization event arguments.</param>
+        /// <remarks>
+        /// 未通过当前 Tab 角色检查的请求会重定向到拒绝访问页。主页匿名访问会额外放置登录模块；这不是模块包注册流程的一部分。
+        /// A request failing the current Tab role check redirects to the access-denied page. Anonymous home-page visits
+        /// additionally receive the sign-in module; this is not part of module-package registration.
+        /// </remarks>
         protected void Page_Init(object sender, EventArgs e)
         {
             //*********************************************************************

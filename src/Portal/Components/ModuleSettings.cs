@@ -3,22 +3,27 @@ using System;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    ///   该类封装了门户中特定标签页的详细设置。ModuleSettings 实现了
-    ///   IComparable 接口，以便可以通过 ModuleOrder 对 ModuleSettings 列表进行排序，
-    ///   使用 List 的 Sort() 方法。
-    /// 
-    ///   Class that encapsulates the detailed settings for a specific Tab 
-    ///   in the Portal. ModuleSettings implements 
-    ///   the IComparable interface so that a List of ModuleItems may be sorted
-    ///   by ModuleOrder, List's Sort() method.
+        /// 当前 Tab 中一个模块实例的运行时设置快照。
+        /// Runtime settings snapshot for one module instance on the current Tab.
     /// </summary>
     public class ModuleSettings : IComparable<ModuleSettings>
     {
         /// <summary>
-        /// 初始化 <see cref="ModuleSettings"/> 实例.
+        /// 从模块实例记录及其模块定义创建运行时快照。
+        /// Creates a runtime snapshot from a module-instance record and its module definition.
         /// </summary>
-        /// <param name="module">模块项</param>
-        /// <param name="moduleDefConfig">模块定义的配置</param>
+        /// <param name="module">非 null 的模块实例记录；其可空数据库字段由现有数据层解包。
+        /// Non-null module-instance record; its nullable database fields are unwrapped by the existing data layer.</param>
+        /// <param name="moduleDefConfig">用于读取模块定义及原始桌面入口的数据服务。
+        /// Data service used to read the module definition and its raw desktop entry.</param>
+        /// <remarks>
+        /// <see cref="DesktopSrc"/> 在此处仍是定义表中的原始值。页面动态加载前必须再经
+        /// <see cref="PortalModuleCatalog"/> 和 <see cref="PortalModulePathValidator"/> 解析，不能将本对象
+        /// 本身作为路径已验证的证明。
+        /// <see cref="DesktopSrc"/> remains the raw definition-table value here. A page must resolve it through
+        /// <see cref="PortalModuleCatalog"/> and <see cref="PortalModulePathValidator"/> before dynamic loading;
+        /// this object alone does not prove that the path was validated.
+        /// </remarks>
         public ModuleSettings(IModuleItem module, IModuleDefsDb moduleDefConfig)
         {
             ModuleTitle         = module.ModuleTitle;
@@ -37,6 +42,14 @@ namespace ASPNET.StarterKit.Portal
 
         #region IComparable<ModuleItem> Members
 
+        /// <summary>
+        /// 按模块显示顺序进行升序比较。
+        /// Compares module display order in ascending order.
+        /// </summary>
+        /// <param name="value">待比较设置；为 null 时当前实例排在其后。
+        /// Settings to compare; when null, the current instance sorts after it.</param>
+        /// <returns>小于零表示当前模块应先显示，零表示顺序相同，大于零表示当前模块应后显示。
+        /// A value less than zero means this module displays first, zero means equal order, and a value greater than zero means it displays later.</returns>
         public int CompareTo(ModuleSettings value)
         {
             if (value == null)
@@ -64,42 +77,50 @@ namespace ASPNET.StarterKit.Portal
         #endregion
 
         /// <summary>
-        /// 模块显示顺序
+        /// 模块在所属 Tab 内的显示顺序。
+        /// Display order of the module within its owning Tab.
         /// </summary>
         public int ModuleOrder { get; set; }
 
         /// <summary>
-        /// 模块标题
+        /// 管理员配置的模块显示标题。
+        /// Module display title configured by an administrator.
         /// </summary>
         public string ModuleTitle { get; private set; }
 
         /// <summary>
-        /// 窗格名称
+        /// 页面布局中承载模块的窗格名称。
+        /// Name of the layout pane that hosts the module.
         /// </summary>
         public string PaneName { get; private set; }
 
         /// <summary>
-        /// 模块ID
+        /// 模块实例的数据库标识。
+        /// Database identifier of the module instance.
         /// </summary>
         public int ModuleId { get; private set; }
 
         /// <summary>
-        /// 授权编辑角色
+        /// 控制编辑入口展示的历史角色字符串。
+        /// Legacy role string controlling edit-entry display.
         /// </summary>
         public string AuthorizedEditRoles { get; private set; }
 
         /// <summary>
-        /// 缓存时间
+        /// 模块输出缓存秒数；零表示不使用 <see cref="CachedPortalModuleControl"/>。
+        /// Module output-cache duration in seconds; zero bypasses <see cref="CachedPortalModuleControl"/>.
         /// </summary>
         public int CacheTime { get; private set; }
 
         /// <summary>
-        /// 是否在移动设备上显示
+        /// 历史移动端显示标志；当前不代表新的移动端呈现策略。
+        /// Legacy mobile-display flag; it does not represent a future mobile presentation strategy.
         /// </summary>
         public bool ShowMobile { get; private set; }
 
         /// <summary>
-        /// 桌面版源文件路径
+        /// 模块定义记录提供的原始桌面用户控件路径。
+        /// Raw desktop user-control path supplied by the module-definition record.
         /// </summary>
         public string DesktopSrc { get; private set; }
     }

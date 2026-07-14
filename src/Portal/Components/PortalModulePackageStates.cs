@@ -121,11 +121,14 @@ namespace ASPNET.StarterKit.Portal
     /// Restricted enabled-state store for deployed module packages.
     /// </summary>
     /// <remarks>
-    /// 本存储不写入模块文件，也不注册未知包。状态表不存在或读取失败时，已验证包会保持默认启用，
-    /// 以避免未迁移旧库阻断门户；后台写入则会明确失败并提示执行迁移。
-    /// This store never writes module files or registers unknown packages. When its table is missing or unreadable,
-    /// validated packages remain enabled by default so an unmigrated legacy database cannot block the portal; admin
-    /// writes fail explicitly and request the migration.
+        /// 本存储不写入模块文件。读取状态表不存在或失败时，已验证包保持默认启用，以避免未迁移旧库阻断门户；
+        /// 后台写入会明确失败并提示执行迁移。<see cref="Save"/> 仅验证包标识格式，调用方必须先通过
+        /// <see cref="PortalModuleCatalog.TryGetTrustedPackage"/> 确认部署包存在；现有目录页已遵守此顺序。
+        /// This store never writes module files. When the state table is missing or unreadable, validated packages remain
+        /// enabled by default so an unmigrated legacy database cannot block the portal; admin writes fail explicitly and
+        /// request the migration. <see cref="Save"/> validates only package-id format, so callers must first confirm the
+        /// deployed package through <see cref="PortalModuleCatalog.TryGetTrustedPackage"/>; the existing catalog page
+        /// follows that order.
     /// </remarks>
     public static class PortalModulePackageStates
     {
@@ -206,6 +209,13 @@ WHERE [PackageId] = @PackageId;";
         /// <param name="note">不含敏感信息的管理员备注。Administrator note without sensitive information.</param>
         /// <param name="context">当前 HTTP 上下文，用于操作人和诊断。Current HTTP context for actor and diagnostics.</param>
         /// <returns>写入结果。Write result.</returns>
+        /// <remarks>
+        /// 此公共方法不自行确认 manifest 或物理部署目录。直接调用者若跳过目录校验，可能写入不会被运行时解析的
+        /// 孤立状态记录；这不会使未知包可加载，但应避免作为新的调用模式。
+        /// This public method does not independently confirm a manifest or physical deployment directory. A direct caller
+        /// that skips catalog validation can write an orphan state record that runtime resolution never uses; it does not
+        /// make an unknown package loadable, but should be avoided as a new calling pattern.
+        /// </remarks>
         public static PortalModulePackageStateWriteResult Save(
             string packageId,
             bool isEnabled,
