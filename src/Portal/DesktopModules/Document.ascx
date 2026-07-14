@@ -33,14 +33,14 @@
                 <td>
                     <asp:HyperLink
                         ID="docLink"
-                        Text='<%# DataBinder.Eval(Container.DataItem, "FileFriendlyName") %>'
-                        NavigateUrl='<%# GetBrowsePath(DataBinder.Eval(Container.DataItem, "FileNameUrl").ToString(), DataBinder.Eval(Container.DataItem, "Size"), (int) DataBinder.Eval(Container.DataItem, "ItemId")) %>'
+                        Text='<%# EncodeText(DataBinder.Eval(Container.DataItem, "FileFriendlyName")) %>'
+                        NavigateUrl='<%# GetBrowsePath(Convert.ToString(DataBinder.Eval(Container.DataItem, "FileNameUrl")), DataBinder.Eval(Container.DataItem, "Size"), (int) DataBinder.Eval(Container.DataItem, "ItemId")) %>'
                         CssClass="Normal"
                         Target="_new"
                         runat="server" />
                 </td>
-                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "CreatedByUser") %></td>
-                <td class="Normal" nowrap="nowrap"><%# DataBinder.Eval(Container.DataItem, "Category") %></td>
+                <td class="Normal"><%# EncodeText(DataBinder.Eval(Container.DataItem, "CreatedByUser")) %></td>
+                <td class="Normal" nowrap="nowrap"><%# EncodeText(DataBinder.Eval(Container.DataItem, "Category")) %></td>
                 <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "CreatedDate", "{0:d}") %></td>
             </tr>
     </ItemTemplate>

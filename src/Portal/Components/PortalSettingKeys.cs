@@ -57,6 +57,13 @@ namespace ASPNET.StarterKit.Portal
         public const string MaxUploadBytes = "Portal.Documents.MaxUploadBytes";
 
         /// <summary>
+        /// 中文：文档模块允许上传扩展名列表的设置键。
+        ///
+        /// English: Setting key for the document-module upload-extension allowlist.
+        /// </summary>
+        public const string AllowedDocumentExtensions = "Portal.Documents.AllowedExtensions";
+
+        /// <summary>
         /// 中文：是否允许用户自主注册的设置键。
         ///
         /// English: Setting key for the self-registration switch.

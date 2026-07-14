@@ -20,6 +20,19 @@ using Unity.Configuration;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：门户 ASP.NET 应用程序生命周期入口与请求级上下文装配器。
+    ///
+    /// English: ASP.NET application-lifecycle entry point and request-context composer for the Portal.
+    /// </summary>
+    /// <remarks>
+    /// 中文：本类初始化 Unity、外置连接串和运行级服务，并处理请求上下文、认证角色和未处理异常。
+    /// 它不是业务授权或配置写入 API；新增全局行为时必须评估启动失败、错误泄漏和所有请求的兼容影响。
+    ///
+    /// English: This class initializes Unity, external connection strings, and runtime services, and handles request
+    /// context, authenticated roles, and unhandled errors. It is not a business-authorization or configuration-write API;
+    /// new global behavior must consider startup failure, error disclosure, and compatibility across every request.
+    /// </remarks>
     public class Global : HttpApplication, IContainerAccessor
     {
         /// <summary>
@@ -230,9 +243,18 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// Handles unhandled application errors and records a diagnostics event id.
-        /// 处理未捕获的应用程序错误，并记录诊断事件编号。
+        /// 中文：处理未捕获的应用程序错误，记录诊断事件编号，并按部署开关转向通用错误页。
+        ///
+        /// English: Handles unhandled application errors, records a diagnostics event id, and redirects to the generic error page according to deployment switches.
         /// </summary>
+        /// <remarks>
+        /// 中文：通用错误页仅展示符合运行时编号格式的事件 ID；详细错误仅能在显式配置且本地请求时保留，
+        /// 不能把异常正文、连接串或其他运行时细节直接返回给普通访问者。
+        ///
+        /// English: The generic error page displays only event ids matching the runtime format. Detailed errors are retained
+        /// only for explicitly configured local requests; exception bodies, connection strings, and other runtime details
+        /// must not be returned directly to ordinary visitors.
+        /// </remarks>
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();

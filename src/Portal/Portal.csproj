@@ -385,6 +385,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Components\PortalDiagnostics.cs" />
+    <Compile Include="Components\PortalDocumentPolicy.cs" />
     <Compile Include="Components\PortalDiagnosticEntry.cs" />
     <Compile Include="Components\PortalDiagnosticQuery.cs" />
     <Compile Include="Components\PortalDiagnosticQueryService.cs" />
@@ -654,6 +655,7 @@
     <Content Include="js\sample\sample.js.map" />
     <Content Include="js\sample\sampleEs.js.map" />
     <Content Include="js\sample\sampleEs1.js.map" />
+    <Content Include="Uploads\web.config" />
     <None Include="Uploads\sample.doc" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">

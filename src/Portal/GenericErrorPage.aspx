@@ -11,7 +11,7 @@
             padding: 40px;
             color: #333;
             background: #f6f7f9;
-            font-family: Arial, "Microsoft YaHei", sans-serif;
+            font-family: sans-serif;
         }
 
         .error-panel {
@@ -31,7 +31,7 @@
             padding: 8px 10px;
             border: 1px solid #e5e7eb;
             background: #f9fafb;
-            font-family: Consolas, monospace;
+            font-family: monospace;
         }
     </style>
 </head>

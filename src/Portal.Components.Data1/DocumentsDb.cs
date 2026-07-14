@@ -1,84 +1,97 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：基于 Entity Framework 的旧文档模块数据访问实现。
+    ///
+    /// English: Entity Framework implementation of legacy document-module data access.
+    /// </summary>
+    /// <remarks>
+    /// 中文：读取单项时不存在记录会返回 <c>null</c>，由页面将编辑请求收敛到拒绝页或将下载请求收敛到中性未找到响应。
+    /// 写入方法不验证 URL、上传类型或权限，这些边界由调用页面和 <c>PortalDocumentPolicy</c> 负责。
+    ///
+    /// English: Reads of a missing single item return <c>null</c>, allowing pages to converge edit requests to an access-denied
+    /// page and download requests to a neutral not-found response. Write operations do not validate URLs, upload types, or
+    /// permission; those boundaries belong to calling pages and <c>PortalDocumentPolicy</c>.
+    /// </remarks>
     public class DocumentsDb : IDocumentsDb
     {
         private readonly PortalDbContext _context;
 
+        /// <summary>
+        /// 中文：初始化文档实体上下文。
+        /// English: Initializes the document entity context.
+        /// </summary>
+        /// <param name="context">中文：门户业务数据库上下文。English: Portal business database context.</param>
         public DocumentsDb(PortalDbContext context)
         {
             _context = context;
         }
 
-        #region IDocumentsDb Members
-
         /// <summary>
-        /// 获取指定模块ID下的所有文档。
+        /// 中文：读取指定模块下的全部文档记录。
+        /// English: Reads all document records for the specified module.
         /// </summary>
-        /// <param name="moduleId">模块标识符。</param>
-        /// <returns>文档集合。</returns>
+        /// <param name="moduleId">中文：模块实例标识。English: Module-instance identifier.</param>
+        /// <returns>中文：已物化的模块文档集合。English: Materialized collection of module documents.</returns>
         public IEnumerable<IDocumentItem> GetDocuments(int moduleId)
         {
-            // 使用 LINQ 查询获取指定模块ID下的所有文档
-            return _context.Documents.Where(i => i.ModuleId == moduleId).ToList<IDocumentItem>();
+            return _context.Documents.Where(item => item.ModuleId == moduleId).ToList<IDocumentItem>();
         }
 
         /// <summary>
-        /// 获取单个文档。
+        /// 中文：按文档项目标识读取记录。
+        /// English: Reads a record by document-item identifier.
         /// </summary>
-        /// <param name="itemId">文档标识符。</param>
-        /// <returns>指定ID的文档对象。</returns>
+        /// <param name="itemId">中文：文档项目标识。English: Document-item identifier.</param>
+        /// <returns>中文：匹配记录；不存在时为 <c>null</c>。English: Matching record, or <c>null</c> when absent.</returns>
         public IDocumentItem GetSingleDocument(int itemId)
         {
-            // 使用 Single 方法获取指定ID的文档
-            return _context.Documents.Single(i => i.ItemId == itemId);
+            return _context.Documents.SingleOrDefault(item => item.ItemId == itemId);
         }
 
         /// <summary>
-        /// 获取文档的内容详情。
+        /// 中文：按文档项目标识读取历史数据库内容。
+        /// English: Reads legacy database content by document-item identifier.
         /// </summary>
-        /// <param name="itemId">文档标识符。</param>
-        /// <returns>包含文档内容详情的对象。</returns>
+        /// <param name="itemId">中文：文档项目标识。English: Document-item identifier.</param>
+        /// <returns>中文：匹配详情；不存在时为 <c>null</c>。English: Matching detail, or <c>null</c> when absent.</returns>
         public IDocumentItemDetails GetDocumentContent(int itemId)
         {
-            // 使用 Single 方法获取指定ID的文档内容详情
-            return _context.Documents.Single(i => i.ItemId == itemId);
+            return _context.Documents.SingleOrDefault(item => item.ItemId == itemId);
         }
 
         /// <summary>
-        /// 删除指定ID的文档。
+        /// 中文：删除指定文档记录；调用方必须先完成模块归属和编辑权限校验。
+        /// English: Deletes a document record; the caller must validate module ownership and edit permission first.
         /// </summary>
-        /// <param name="itemId">文档标识符。</param>
+        /// <param name="itemId">中文：文档项目标识。English: Document-item identifier.</param>
         public void DeleteDocument(int itemId)
         {
-            // 获取指定ID的文档对象
-            var item = _context.Documents.Single(i => i.ItemId == itemId);
-            // 从上下文中移除文档对象
+            DocumentItem item = _context.Documents.Single(record => record.ItemId == itemId);
             _context.Documents.Remove(item);
-            // 提交更改到数据库
             _context.SaveChanges();
         }
 
         /// <summary>
-        /// 更新指定ID的文档信息。
+        /// 中文：创建或更新文档记录，并保留旧表的数据库内容字段以兼容已有 schema。
+        /// English: Creates or updates a document record while retaining legacy database-content fields for schema compatibility.
         /// </summary>
-        /// <param name="moduleId">模块标识符。</param>
-        /// <param name="itemId">文档标识符。</param>
-        /// <param name="userName">用户名。</param>
-        /// <param name="name">文档名称。</param>
-        /// <param name="url">文件URL。</param>
-        /// <param name="category">类别。</param>
-        /// <param name="content">文件内容。</param>
-        /// <param name="size">文件大小。</param>
-        /// <param name="contentType">文件类型。</param>
+        /// <param name="moduleId">中文：所属模块实例标识。English: Owning module-instance identifier.</param>
+        /// <param name="itemId">中文：已有项目标识；零表示新建。English: Existing item identifier; zero creates a new record.</param>
+        /// <param name="userName">中文：写入用户名；空值规范为 <c>unknown</c>。English: Writing user name; blank becomes <c>unknown</c>.</param>
+        /// <param name="name">中文：显示名称。English: Display name.</param>
+        /// <param name="url">中文：调用方已验证的浏览地址或上传路径。English: Browse address or upload path validated by the caller.</param>
+        /// <param name="category">中文：业务分类。English: Business category.</param>
+        /// <param name="content">中文：历史数据库二进制内容。English: Legacy database binary content.</param>
+        /// <param name="size">中文：历史数据库内容大小。English: Legacy database content size.</param>
+        /// <param name="contentType">中文：历史 MIME 类型提示。English: Legacy MIME-type hint.</param>
         public void UpdateDocument(int moduleId, int itemId, string userName, string name, string url, string category,
-                                  byte[] content, int size, string contentType)
+                                   byte[] content, int size, string contentType)
         {
-            // 如果用户名为空，则设置为 'unknown'
             userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
 
             DocumentItem item;
@@ -89,11 +102,9 @@ namespace ASPNET.StarterKit.Portal
             }
             else
             {
-                // 获取指定ID的文档对象
-                item = _context.Documents.Single(i => i.ItemId == itemId);
+                item = _context.Documents.Single(record => record.ItemId == itemId);
             }
 
-            // 更新文档的属性
             item.ModuleId = moduleId;
             item.CreatedByUser = userName;
             item.CreatedDate = DateTime.Now;
@@ -103,11 +114,7 @@ namespace ASPNET.StarterKit.Portal
             item.Content = content;
             item.ContentSize = size;
             item.ContentType = contentType;
-
-            // 提交更改到数据库
             _context.SaveChanges();
         }
-
-        #endregion
     }
 }

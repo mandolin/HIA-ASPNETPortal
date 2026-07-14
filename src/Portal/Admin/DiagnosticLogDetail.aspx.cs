@@ -31,19 +31,33 @@ namespace ASPNET.StarterKit.Portal
             }
 
             DetailPanel.Visible = true;
-            EventIdLabel.Text = entry.EventId;
-            UtcTimeLabel.Text = entry.UtcTime.ToString("yyyy-MM-dd HH:mm:ss 'UTC'");
-            LevelLabel.Text = entry.Level;
-            CategoryLabel.Text = entry.Category;
-            MessageTextLabel.Text = entry.Message;
-            ExceptionTypeLabel.Text = entry.ExceptionType;
+            // 中文：诊断字段可能包含请求或异常派生文本，标签输出前统一 HTML 编码。
+            // English: Diagnostic fields can contain request- or exception-derived text, so labels are HTML encoded before output.
+            EventIdLabel.Text = EncodeForLabel(entry.EventId);
+            UtcTimeLabel.Text = EncodeForLabel(entry.UtcTime.ToString("yyyy-MM-dd HH:mm:ss 'UTC'"));
+            LevelLabel.Text = EncodeForLabel(entry.Level);
+            CategoryLabel.Text = EncodeForLabel(entry.Category);
+            MessageTextLabel.Text = EncodeForLabel(entry.Message);
+            ExceptionTypeLabel.Text = EncodeForLabel(entry.ExceptionType);
             ExceptionDetailTextBox.Text = entry.ExceptionDetail;
-            RequestPathLabel.Text = entry.RequestPath;
-            HttpMethodLabel.Text = entry.HttpMethod;
-            UserNameLabel.Text = entry.UserName;
-            ClientIpLabel.Text = entry.ClientIp;
-            PhysicalPathLabel.Text = entry.PhysicalPath;
-            UserAgentLabel.Text = entry.UserAgent;
+            RequestPathLabel.Text = EncodeForLabel(entry.RequestPath);
+            HttpMethodLabel.Text = EncodeForLabel(entry.HttpMethod);
+            UserNameLabel.Text = EncodeForLabel(entry.UserName);
+            ClientIpLabel.Text = EncodeForLabel(entry.ClientIp);
+            PhysicalPathLabel.Text = EncodeForLabel(entry.PhysicalPath);
+            UserAgentLabel.Text = EncodeForLabel(entry.UserAgent);
+        }
+
+        /// <summary>
+        /// 中文：将受控诊断文本编码为可安全写入 <see cref="System.Web.UI.WebControls.Label"/> 的 HTML。
+        ///
+        /// English: Encodes controlled diagnostic text for safe HTML output through a <see cref="System.Web.UI.WebControls.Label"/>.
+        /// </summary>
+        /// <param name="value">中文：待显示的诊断值。English: Diagnostic value to display.</param>
+        /// <returns>中文：已 HTML 编码的文本。English: HTML-encoded text.</returns>
+        private string EncodeForLabel(string value)
+        {
+            return Server.HtmlEncode(value ?? string.Empty);
         }
     }
 }

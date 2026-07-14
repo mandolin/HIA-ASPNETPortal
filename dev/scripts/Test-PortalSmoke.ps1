@@ -13,7 +13,9 @@ param(
 
     [switch]$SkipAuthenticated,
 
-    [switch]$CheckGenericErrorPage
+    [switch]$CheckGenericErrorPage,
+
+    [switch]$CheckDocumentSafety
 )
 
 Set-StrictMode -Version Latest
@@ -299,6 +301,31 @@ try {
             $genericErrorPath -match '/GenericErrorPage\.aspx$' -and
             $genericErrorContent -match '应用程序暂时无法完成请求|系统已记录本次错误'
         Add-PortalCheck -Name 'Generic error page' -Passed $isGenericError -Detail ('HTTP ' + $genericError.StatusCode)
+    }
+
+    if ($CheckDocumentSafety) {
+        # 中文：使用仓库已有 sample.doc 验证允许扩展名的静态服务与全局 nosniff 响应头，不创建或删除上传文件。
+        # English: Use the repository's existing sample.doc to verify allowed-extension static serving and the global nosniff header without creating or deleting uploads.
+        $allowedUpload = Invoke-PortalRequest -Uri ([Uri]::new($baseUri, 'uploads/sample.doc').AbsoluteUri) -WebSession $anonymousSession
+        $allowedUploadPassed = $allowedUpload.StatusCode -eq 200 -and
+            [string]::Equals(
+                [string]$allowedUpload.Headers['X-Content-Type-Options'],
+                'nosniff',
+                [System.StringComparison]::OrdinalIgnoreCase)
+        Add-PortalCheck -Name 'Upload allowed-extension serving' -Passed $allowedUploadPassed -Detail ('HTTP ' + $allowedUpload.StatusCode)
+
+        # 中文：不存在的 .aspx 仍应在目录级 requestFiltering 阶段被拒绝为 IIS 404.7，不能落到页面处理器。
+        # English: A non-existing .aspx must still be rejected by directory-level requestFiltering as IIS 404.7, never reaching a page handler.
+        $blockedUpload = Invoke-PortalRequest -Uri ([Uri]::new($baseUri, ('uploads/P44Blocked-' + [Guid]::NewGuid().ToString('N') + '.aspx')).AbsoluteUri) -WebSession $anonymousSession
+        $blockedUploadPassed = $blockedUpload.StatusCode -eq 404 -and $blockedUpload.Content -match '404\.7'
+        Add-PortalCheck -Name 'Upload blocked-extension filtering' -Passed $blockedUploadPassed -Detail ('HTTP ' + $blockedUpload.StatusCode)
+
+        # 中文：伪造事件编号只可显示“未提供”，不能成为管理员在日志页中无法查找的表面编号。
+        # English: A forged event id may display only the fallback text, never an apparent id that administrators cannot find in logs.
+        $forgedError = Invoke-PortalRequest -Uri ([Uri]::new($baseUri, 'GenericErrorPage.aspx?id=P44-forged').AbsoluteUri) -WebSession $anonymousSession
+        $forgedErrorContent = [System.Net.WebUtility]::HtmlDecode($forgedError.Content)
+        $forgedErrorPassed = $forgedError.StatusCode -eq 200 -and $forgedErrorContent -match '事件编号：\s*未提供'
+        Add-PortalCheck -Name 'Forged diagnostics event id' -Passed $forgedErrorPassed -Detail ('HTTP ' + $forgedError.StatusCode)
     }
 
     if (-not $SkipAuthenticated -and -not [string]::IsNullOrWhiteSpace($AdminUser)) {

@@ -102,7 +102,32 @@ namespace ASPNET.StarterKit.Portal
                 false,
                 "Admins",
                 "Documents",
-                minIntegerValue: 1);
+                minIntegerValue: 1,
+                maxIntegerValue: PortalDocumentPolicy.InfrastructureMaximumUploadBytes);
+
+        /// <summary>
+        /// 中文：文档模块允许上传扩展名列表的设置定义。
+        ///
+        /// English: Setting definition for the document-module upload-extension allowlist.
+        /// </summary>
+        /// <remarks>
+        /// 中文：该文本设置只用于从 <see cref="PortalDocumentPolicy"/> 的硬允许集中选择子集；即使数据库覆盖值
+        /// 包含其他扩展名，也不会使脚本、页面、配置或可执行文件可上传。
+        ///
+        /// English: This text setting selects a subset of <see cref="PortalDocumentPolicy"/>'s hard allowlist only;
+        /// a database override containing other extensions never makes scripts, pages, configuration files, or executables uploadable.
+        /// </remarks>
+        public static readonly PortalSettingDefinition AllowedDocumentExtensions =
+            new PortalSettingDefinition(
+                PortalSettingKeys.AllowedDocumentExtensions,
+                "文档上传允许扩展名",
+                "以逗号分隔的上传允许扩展名；只能收紧内置安全类型集合。",
+                PortalSettingValueType.String,
+                "pdf,txt,csv,json,doc,docx,xls,xlsx,ppt,pptx,zip",
+                true,
+                false,
+                "Admins",
+                "Documents");
 
         /// <summary>
         /// 中文：门户 Web Forms 主题名称的设置定义。
@@ -236,6 +261,7 @@ namespace ASPNET.StarterKit.Portal
                 RegistrationInviteDefaultExpiryDays,
                 AllowPendingEmployeeBinding,
                 MaxUploadBytes,
+                AllowedDocumentExtensions,
                 ThemeName,
                 DiagnosticsDetailedErrors,
                 DiagnosticsLogDirectory,
