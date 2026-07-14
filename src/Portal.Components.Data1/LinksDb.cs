@@ -28,14 +28,17 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 获取单个链接。
+        /// 中文：获取单个链接；用户指定的不存在标识返回 <c>null</c>，由调用页决定其授权失败响应。
+        ///
+        /// English: Gets one link. A user-supplied missing identifier returns <c>null</c> so the caller can select its authorization-failure response.
         /// </summary>
-        /// <param name="itemId">链接标识符。</param>
-        /// <returns>单个链接对象。</returns>
+        /// <param name="itemId">中文：链接标识符。English: Link identifier.</param>
+        /// <returns>中文：指定链接；不存在时为 <c>null</c>。English: The requested link, or <c>null</c> when it does not exist.</returns>
         public ILinkItem GetSingleLink(int itemId)
         {
-            // 使用 Single 方法获取指定ID的链接
-            return _context.Links.Single(i => i.ItemId == itemId);
+            // 中文：编辑入口的 ItemId 来自请求，未命中不应转化为未处理异常。
+            // English: The editor item identifier comes from a request, so a miss must not become an unhandled exception.
+            return _context.Links.SingleOrDefault(i => i.ItemId == itemId);
         }
 
         /// <summary>

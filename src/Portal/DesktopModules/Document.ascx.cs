@@ -12,11 +12,11 @@ namespace ASPNET.StarterKit.Portal
     /// <remarks>
     /// 中文：服务器上传文件继续通过受限静态目录访问；数据库内容大于零的历史记录通过
     /// <c>ViewDocument.aspx</c> 以附件方式下载。手填旧链接在渲染前会经过
-    /// <see cref="PortalDocumentPolicy"/> 校验，非法协议或路径跳转不会生成可点击地址。
+    /// <see cref="PortalNavigationPolicy"/> 校验，非法协议或路径跳转不会生成可点击地址。
     ///
     /// English: Server-uploaded files continue through a restricted static directory; legacy records with database content
     /// download through <c>ViewDocument.aspx</c> as attachments. Manually entered legacy links are validated by
-    /// <see cref="PortalDocumentPolicy"/> before rendering, so invalid schemes or traversal paths do not produce a clickable address.
+    /// <see cref="PortalNavigationPolicy"/> before rendering, so invalid schemes or traversal paths do not produce a clickable address.
     /// </remarks>
     public partial class Document : PortalModuleControl<Document>
     {
@@ -58,7 +58,7 @@ namespace ASPNET.StarterKit.Portal
             }
 
             string normalizedUrl;
-            return PortalDocumentPolicy.TryNormalizeBrowseUrl(url, Context.Request, out normalizedUrl)
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(url, Context.Request, out normalizedUrl)
                 ? normalizedUrl
                 : string.Empty;
         }

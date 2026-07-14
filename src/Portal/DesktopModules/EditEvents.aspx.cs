@@ -1,142 +1,169 @@
 using System;
-using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：编辑事件模块条目的页面。
+    ///
+    /// English: Page for editing event-module items.
+    /// </summary>
     public partial class EditEvents : PortalPage<EditEvents>
     {
-        // 控件引用
-        protected RequiredFieldValidator RequiredFieldValidator1;
-        protected RequiredFieldValidator RequiredFieldValidator2;
-        protected RequiredFieldValidator RequiredFieldValidator3;
-
-        // 事件项ID
         private int itemId;
-
-        // 模块ID
         private int moduleId;
 
-        // 依赖注入
+        /// <summary>
+        /// 中文：事件数据访问服务。English: Event data-access service.
+        /// </summary>
         [Dependency]
         public IEventsDb EventsDB { private get; set; }
 
-        // 门户安全服务依赖注入
+        /// <summary>
+        /// 中文：模块编辑权限服务。English: Module edit-authorization service.
+        /// </summary>
         [Dependency]
         public IPortalSecurity PortalSecurity { private get; set; }
 
-        //****************************************************************
-        //
-        // 页面加载事件：用于获取要编辑的模块ID和事件项ID。
-        // 使用EventsDB组件填充页面上的编辑控件。
-        //
-        //****************************************************************
-
+        /// <summary>
+        /// 中文：初始化请求上下文、核验编辑权限和现有条目归属，并在首次访问时绑定表单。
+        ///
+        /// English: Initializes request context, verifies edit permission and existing-item ownership, and binds the form on the first request.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 获取事件模块的模块ID
-            moduleId = int.Parse(Request.Params["Mid"]);
-
-            // 验证当前用户是否有权限编辑此模块
-            if (!PortalSecurity.HasEditPermissions(moduleId))
+            IEventItem item;
+            if (!TryInitializeRequest(out item))
             {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
+                return;
             }
 
-            // 获取要更新的事件项ID
-            if (Request.Params["ItemId"] != null)
-            {
-                itemId = int.Parse(Request.Params["ItemId"]);
-            }
-
-            // 如果页面首次加载，检查是否有指定的事件项ID，如果有则填充页面内容
             if (!Page.IsPostBack)
             {
-                if (itemId != 0)
+                if (item != null)
                 {
-                    // 获取单个事件项信息
-                    var item = EventsDB.GetSingleEvent(itemId);
-
-                    // 安全检查：验证itemid是否属于该模块
-                    if (item.ModuleId != moduleId)
-                    {
-                        Response.Redirect("~/Admin/EditAccessDenied.aspx");
-                    }
-
-                    // 将事件项的数据填充到页面控件中
                     TitleField.Text = item.Title;
                     DescriptionField.Text = item.Description;
-                    ExpireField.Text = item.ExpireDate?.ToShortDateString() ?? string.Empty;
-                    CreatedBy.Text = item.CreatedByUser;
+                    ExpireField.Text = item.ExpireDate.HasValue ? item.ExpireDate.Value.ToShortDateString() : string.Empty;
+                    CreatedBy.Text = EncodeDisplayText(item.CreatedByUser);
                     WhereWhenField.Text = item.WhereWhen;
-                    CreatedDate.Text = item.CreatedDate?.ToShortDateString() ?? string.Empty;
+                    CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
                 }
 
-                // 存储URL引用，以便返回到门户首页
-                ViewState["UrlReferrer"] = Request.UrlReferrer?.ToString();
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
             }
         }
 
-        //****************************************************************
-        //
-        // 更新按钮点击事件处理程序：用于创建或更新事件。
-        // 使用EventsDB组件封装所有数据功能。
-        //
-        //****************************************************************
-
-        protected void UpdateBtn_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：创建或更新已授权事件，并回跳到当前应用内的安全地址。
+        ///
+        /// English: Creates or updates an authorized event and returns to a safe URL inside the current application.
+        /// </summary>
+        protected void UpdateBtn_Click(object sender, EventArgs e)
         {
-            // 只有当输入的数据有效时才进行更新
-            if (Page.IsValid)
+            IEventItem item;
+            if (!TryInitializeRequest(out item) || !Page.IsValid)
             {
-                if (itemId == 0)
-                {
-                    // 添加新事件到数据库表中
-                    EventsDB.AddEvent(moduleId, Context.User.Identity.Name, TitleField.Text,
-                                      DateTime.Parse(ExpireField.Text), DescriptionField.Text, WhereWhenField.Text);
-                }
-                else
-                {
-                    // 更新现有的事件
-                    EventsDB.UpdateEvent(itemId, Context.User.Identity.Name, TitleField.Text,
-                                         DateTime.Parse(ExpireField.Text), DescriptionField.Text, WhereWhenField.Text);
-                }
-
-                // 重定向回门户首页
-                Response.Redirect((string)ViewState["UrlReferrer"]);
+                return;
             }
+
+            DateTime expireDate;
+            if (!DateTime.TryParse(ExpireField.Text, out expireDate))
+            {
+                ShowValidationMessage("请输入有效的到期日期。");
+                return;
+            }
+
+            if (itemId == 0)
+            {
+                EventsDB.AddEvent(moduleId, Context.User.Identity.Name, TitleField.Text, expireDate,
+                    DescriptionField.Text, WhereWhenField.Text);
+            }
+            else
+            {
+                EventsDB.UpdateEvent(itemId, Context.User.Identity.Name, TitleField.Text, expireDate,
+                    DescriptionField.Text, WhereWhenField.Text);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
-        //****************************************************************
-        //
-        // 删除按钮点击事件处理程序：用于删除事件。
-        // 使用EventsDB组件封装所有数据功能。
-        //
-        //****************************************************************
-
-        protected void DeleteBtn_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：删除已核验归属的事件。English: Deletes an event whose ownership has been verified.
+        /// </summary>
+        protected void DeleteBtn_Click(object sender, EventArgs e)
         {
-            // 只有在是现有项目（新项目ItemId为0）时尝试删除
+            IEventItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
             if (itemId != 0)
             {
                 EventsDB.DeleteEvent(itemId);
             }
 
-            // 重定向回门户首页
-            Response.Redirect((string)ViewState["UrlReferrer"]);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
-        //****************************************************************
-        //
-        // 取消按钮点击事件处理程序：用于取消编辑并返回到门户首页。
-        //
-        //****************************************************************
-
-        protected void CancelBtn_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：放弃编辑并返回安全地址。English: Cancels editing and returns to a safe URL.
+        /// </summary>
+        protected void CancelBtn_Click(object sender, EventArgs e)
         {
-            // 重定向回门户首页
-            Response.Redirect((string)ViewState["UrlReferrer"]);
+            IEventItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }
+
+        private bool TryInitializeRequest(out IEventItem item)
+        {
+            item = null;
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
+                !PortalSecurity.HasEditPermissions(moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            string requestedItemId = Request.Params["ItemId"];
+            if (!string.IsNullOrWhiteSpace(requestedItemId) &&
+                !PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            if (itemId == 0)
+            {
+                return true;
+            }
+
+            item = EventsDB.GetSingleEvent(itemId);
+            if (item == null || item.ModuleId != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ShowValidationMessage(string message)
+        {
+            ValidationMessage.Text = message;
+            ValidationMessage.Visible = true;
+        }
+
+        private string EncodeDisplayText(string value)
+        {
+            return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
         }
     }
 }

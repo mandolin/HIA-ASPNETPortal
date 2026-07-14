@@ -16,14 +16,17 @@ namespace ASPNET.StarterKit.Portal
         #region IHtmlTextsDb Members
 
         /// <summary>
-        /// 获取指定模块ID的HTML文本。
+        /// 中文：获取指定模块的 HTML 文本；尚未创建记录时返回 <c>null</c>，以便编辑页提供受控的首次保存流程。
+        ///
+        /// English: Gets HTML text for a module. Returns <c>null</c> before a record exists so the editor can provide a controlled first-save flow.
         /// </summary>
-        /// <param name="moduleId">模块标识符。</param>
-        /// <returns>HTML文本对象。</returns>
+        /// <param name="moduleId">中文：模块标识符。English: Module identifier.</param>
+        /// <returns>中文：模块 HTML 文本；不存在时为 <c>null</c>。English: Module HTML text, or <c>null</c> when absent.</returns>
         public IHtmlTextItem GetHtmlText(int moduleId)
         {
-            // 使用 LINQ 查询获取指定模块ID的HTML文本对象
-            return _context.HtmlTexts.Single(i => i.ModuleId == moduleId);
+            // 中文：HTML 模块允许首次编辑时创建记录，缺失记录属于正常状态。
+            // English: HTML modules create their record during the first edit, so a missing record is an expected state.
+            return _context.HtmlTexts.SingleOrDefault(i => i.ModuleId == moduleId);
         }
 
         /// <summary>

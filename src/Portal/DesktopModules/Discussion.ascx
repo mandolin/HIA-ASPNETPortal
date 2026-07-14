@@ -12,11 +12,11 @@
         <asp:ImageButton id="btnSelect" ImageUrl='<%# NodeImage((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>' CommandName='<%# NodeCommandName((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>' runat="server" />
         
         <%-- 超链接显示讨论主题 --%>
-        <asp:hyperlink Text='<%# DataBinder.Eval(Container.DataItem, "Title") %>' NavigateUrl='<%# FormatUrl((int) DataBinder.Eval(Container.DataItem, "ItemID")) %>' Target="_new" runat="server" ID="Hyperlink1" />,
+        <asp:hyperlink Text='<%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "Title")) %>' NavigateUrl='<%# FormatUrl((int) DataBinder.Eval(Container.DataItem, "ItemID")) %>' Target="_blank" runat="server" ID="Hyperlink1" />,
         
         <%-- 显示发布者 --%>
         from
-        <%# DataBinder.Eval(Container.DataItem, "CreatedByUser") %>
+        <%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "CreatedByUser")) %>
         
         <%-- 显示发布时间 --%>
         , posted
@@ -28,11 +28,11 @@
         <asp:ImageButton id="btnCollapse" ImageUrl="~/images/minus.gif" runat="server" CommandName="collapse" />
         
         <%-- 超链接显示讨论主题 --%>
-        <asp:hyperlink Text='<%# DataBinder.Eval(Container.DataItem, "Title") %>' NavigateUrl='<%# FormatUrl((int) DataBinder.Eval(Container.DataItem, "ItemID")) %>' Target="_new" runat="server" ID="Hyperlink2" />,
+        <asp:hyperlink Text='<%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "Title")) %>' NavigateUrl='<%# FormatUrl((int) DataBinder.Eval(Container.DataItem, "ItemID")) %>' Target="_blank" runat="server" ID="Hyperlink2" />,
         
         <%-- 显示发布者 --%>
         from
-        <%# DataBinder.Eval(Container.DataItem, "CreatedByUser") %>
+        <%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "CreatedByUser")) %>
         
         <%-- 显示发布时间 --%>
         , posted
@@ -48,12 +48,12 @@
 
                 <%-- 标题超链接 --%>
                 <asp:HyperLink 
-                    Text='<%# Eval("Title") %>' 
+                    Text='<%# EncodeDisplayText(Eval("Title")) %>'
                     NavigateUrl='<%# FormatUrl((int)Eval("ItemID")) %>' 
                     Target="_blank" 
                     runat="server" />,
         
-                from <%# Eval("CreatedByUser") %>
+                from <%# EncodeDisplayText(Eval("CreatedByUser")) %>
 
                 <%-- 关键：用 FormatDate 方法，完美兼容老项目 --%>
                 , posted <%# FormatDate(Eval("CreatedDate")) %>

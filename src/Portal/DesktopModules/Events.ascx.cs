@@ -4,25 +4,24 @@ using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：显示事件列表。
+    ///
+    /// English: Renders the event list.
+    /// </summary>
     public partial class Events : PortalModuleControl<Events>
     {
+        /// <summary>
+        /// 中文：事件数据访问服务。English: Event data-access service.
+        /// </summary>
         [Dependency]
         public IEventsDb EventsDB { private get; set; }
 
-        //*******************************************************
-        //
-        // The Page_Load event handler on this User Control is used to
-        // obtain a DataReader of event information from the Events
-        // table, and then databind the results to a templated DataList
-        // server control.  It uses the ASPNET.StarterKit.Portal.EventDB()
-        // data component to encapsulate all data functionality.
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 中文：读取并绑定当前模块的未过期事件。English: Reads and binds non-expired events for the current module.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Obtain the list of events from the Events table
-            // and bind to the DataList Control
             myDataList.DataSource = EventsDB.GetEvents(ModuleId);
             myDataList.DataBind();
         }

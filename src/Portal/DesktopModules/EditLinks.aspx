@@ -93,6 +93,7 @@
                         </td>
                     </tr>
                 </table>
+                <asp:Label ID="ValidationMessage" CssClass="NormalRed" EnableViewState="false" Visible="false" runat="server" />
                 <p>
                     <asp:LinkButton ID="updateButton" Text="Update" runat="server" CssClass="CommandButton"
                         BorderStyle="none" OnClick="UpdateBtn_Click" />

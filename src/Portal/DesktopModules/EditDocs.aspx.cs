@@ -66,7 +66,7 @@ namespace ASPNET.StarterKit.Portal
 
                 // 中文：只保存已经验证在当前应用内的回跳地址，后续仍会再次校验。
                 // English: Store only a return URL already verified as inside the current application; it is revalidated later.
-                ViewState["UrlReferrer"] = PortalDocumentPolicy.GetSafeReturnUrl(Request);
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
             }
         }
 
@@ -112,7 +112,7 @@ namespace ASPNET.StarterKit.Portal
                 else
                 {
                     string normalizedUrl;
-                    if (!PortalDocumentPolicy.TryNormalizeBrowseUrl(PathField.Text, Request, out normalizedUrl))
+                    if (!PortalNavigationPolicy.TryNormalizeBrowseUrl(PathField.Text, Request, out normalizedUrl))
                     {
                         UploadMessage.Text = "请输入应用内相对地址或 http/https 浏览地址。";
                         return;
@@ -140,7 +140,7 @@ namespace ASPNET.StarterKit.Portal
                 throw;
             }
 
-            PortalDocumentPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace ASPNET.StarterKit.Portal
                 DocumentDB.DeleteDocument(_itemId);
             }
 
-            PortalDocumentPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            PortalDocumentPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
         private bool TryInitializeEditContext()

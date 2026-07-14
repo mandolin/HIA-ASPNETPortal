@@ -20,7 +20,7 @@
         
         <%-- 公告标题 --%>
         <span class="ItemTitle">
-            <%# DataBinder.Eval(Container.DataItem, "Title") %>
+            <%#: DataBinder.Eval(Container.DataItem, "Title") %>
         </span>
         
         <%-- 换行 --%>
@@ -28,12 +28,12 @@
         
         <%-- 公告描述 --%>
         <span class="Normal">
-            <%# DataBinder.Eval(Container.DataItem, "Description") %>
+            <%#: DataBinder.Eval(Container.DataItem, "Description") %>
             &nbsp;
             
             <%-- 查看更多链接 --%>
-            <asp:HyperLink id="moreLink" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "MoreLink") %>' 
-                           Visible='<%# DataBinder.Eval(Container.DataItem, "MoreLink") != String.Empty %>' 
+            <asp:HyperLink id="moreLink" NavigateUrl='<%# GetSafeBrowseUrl(DataBinder.Eval(Container.DataItem, "MoreLink")) %>'
+                           Visible='<%# HasSafeBrowseUrl(DataBinder.Eval(Container.DataItem, "MoreLink")) %>'
                            runat="server" Text='<%$ Resources: lang, Announcements_readMore %>'/>
         </span>
         

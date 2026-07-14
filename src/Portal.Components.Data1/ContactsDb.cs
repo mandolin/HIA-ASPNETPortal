@@ -29,14 +29,17 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 获取单个联系人。
+        /// 中文：获取单个联系人；用户指定的不存在标识返回 <c>null</c>，由调用页决定其授权失败响应。
+        ///
+        /// English: Gets one contact. A user-supplied missing identifier returns <c>null</c> so the caller can select its authorization-failure response.
         /// </summary>
-        /// <param name="itemId">联系人标识符。</param>
-        /// <returns>指定ID的联系人对象。</returns>
+        /// <param name="itemId">中文：联系人标识符。English: Contact identifier.</param>
+        /// <returns>中文：指定联系人；不存在时为 <c>null</c>。English: The requested contact, or <c>null</c> when it does not exist.</returns>
         public IContactItem GetSingleContact(int itemId)
         {
-            // 使用 Single 方法获取指定ID的联系人
-            return _context.Contacts.Single(i => i.ItemId == itemId);
+            // 中文：编辑入口的 ItemId 来自请求，未命中不应转化为未处理异常。
+            // English: The editor item identifier comes from a request, so a miss must not become an unhandled exception.
+            return _context.Contacts.SingleOrDefault(i => i.ItemId == itemId);
         }
 
         /// <summary>

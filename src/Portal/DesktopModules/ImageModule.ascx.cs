@@ -2,36 +2,47 @@ using System;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：显示图片模块的受限图片资源。
+    ///
+    /// English: Renders the image module's constrained image resource.
+    /// </summary>
     public partial class ImageModule : PortalModuleControl<ImageModule>
     {
-        //*******************************************************
-        //
-        // The Page_Load event handler on this User Control uses
-        // the Portal configuration system to obtain image details.
-        // It then sets these properties on an <asp:Image> server control.
-        //
-        //*******************************************************
-
+        /// <summary>
+        /// 中文：读取模块设置并仅渲染安全地址与可解析尺寸。
+        ///
+        /// English: Reads module settings and renders only a safe URL and parseable dimensions.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            var imageSrc = (String) Settings["src"];
-            var imageHeight = (String) Settings["height"];
-            var imageWidth = (String) Settings["width"];
-
-            // Set Image Source, Width and Height Properties
-            if ((imageSrc != null) && (imageSrc != ""))
+            string imageUrl;
+            if (!PortalNavigationPolicy.TryNormalizeBrowseUrl(Settings["src"] as string, Context.Request, out imageUrl))
             {
-                Image1.ImageUrl = imageSrc;
+                Image1.Visible = false;
+                return;
             }
 
-            if ((imageWidth != null) && (imageWidth != ""))
+            Image1.ImageUrl = imageUrl;
+            ApplyDimension(Settings["width"] as string, true);
+            ApplyDimension(Settings["height"] as string, false);
+        }
+
+        private void ApplyDimension(string configuredValue, bool isWidth)
+        {
+            int dimension;
+            if (!int.TryParse(configuredValue, out dimension) || dimension < 0)
             {
-                Image1.Width = Int32.Parse(imageWidth);
+                return;
             }
 
-            if ((imageHeight != null) && (imageHeight != ""))
+            if (isWidth)
             {
-                Image1.Height = Int32.Parse(imageHeight);
+                Image1.Width = dimension;
+            }
+            else
+            {
+                Image1.Height = dimension;
             }
         }
     }

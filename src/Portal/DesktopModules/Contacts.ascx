@@ -31,17 +31,23 @@
                         Visible='<%# IsEditable %>'
                         runat="server" />
                 </td>
-                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "Name") %></td>
-                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "Role") %></td>
+                <td class="Normal"><%#: DataBinder.Eval(Container.DataItem, "Name") %></td>
+                <td class="Normal"><%#: DataBinder.Eval(Container.DataItem, "Role") %></td>
                 <td class="Normal">
                     <asp:HyperLink
                         ID="emailLink"
-                        Text='<%# DataBinder.Eval(Container.DataItem, "Email") %>'
-                        NavigateUrl='<%# "mailto:" + DataBinder.Eval(Container.DataItem, "Email") %>'
+                        Text='<%#: DataBinder.Eval(Container.DataItem, "Email") %>'
+                        NavigateUrl='<%# GetMailToUrl(DataBinder.Eval(Container.DataItem, "Email")) %>'
+                        Visible='<%# HasEmail(DataBinder.Eval(Container.DataItem, "Email")) %>'
+                        runat="server" />
+                    <asp:Label
+                        ID="emailText"
+                        Text='<%#: DataBinder.Eval(Container.DataItem, "Email") %>'
+                        Visible='<%# !HasEmail(DataBinder.Eval(Container.DataItem, "Email")) %>'
                         runat="server" />
                 </td>
-                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "Contact1") %></td>
-                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "Contact2") %></td>
+                <td class="Normal"><%#: DataBinder.Eval(Container.DataItem, "Contact1") %></td>
+                <td class="Normal"><%#: DataBinder.Eval(Container.DataItem, "Contact2") %></td>
             </tr>
     </ItemTemplate>
     <FooterTemplate>

@@ -14,15 +14,15 @@
                                             DataBinder.Eval(Container.DataItem, "ItemID") + 
                                             "&mid=" + ModuleId %>' 
                            Visible="<%# IsEditable %>" runat="server" />
-            <asp:Label Text='<%# DataBinder.Eval(Container.DataItem, "Title") %>' runat="server" />
+            <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "Title") %>' runat="server" />
         </span>
         <br>
         <span class="Normal"><i>
-            <%# DataBinder.Eval(Container.DataItem, "WhereWhen") %>
+            <%#: DataBinder.Eval(Container.DataItem, "WhereWhen") %>
         </i></span>
         <br>
         <span class="Normal">
-            <%# DataBinder.Eval(Container.DataItem, "Description") %>
+            <%#: DataBinder.Eval(Container.DataItem, "Description") %>
         </span>
         <br>
     </ItemTemplate>

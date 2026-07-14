@@ -1,122 +1,189 @@
 using System;
-using System.Data;
 using Microsoft.Practices.Unity;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：显示讨论主题并允许已授权编辑者发布主题或回复的页面。
+    ///
+    /// English: Page that displays a discussion topic and allows authorized editors to post a topic or reply.
+    /// </summary>
     public partial class DiscussDetails : PortalPage<DiscussDetails>
     {
-        private int _itemId;
-        private int _moduleId;
+        private int itemId;
+        private int moduleId;
 
+        /// <summary>
+        /// 中文：讨论数据访问服务。English: Discussion data-access service.
+        /// </summary>
         [Dependency]
         public IDiscussionsDb DiscussionDB { private get; set; }
 
+        /// <summary>
+        /// 中文：模块编辑权限服务。English: Module edit-authorization service.
+        /// </summary>
         [Dependency]
         public IPortalSecurity PortalSecurity { private get; set; }
 
-        // Page_Load 事件处理器用于获取讨论列表的 ModuleId 和 ItemId，并显示消息内容
+        /// <summary>
+        /// 中文：初始化讨论请求；任何访客可读取现有主题，只有模块编辑者可创建或回复。
+        ///
+        /// English: Initializes a discussion request. Any visitor may read an existing topic, while only module editors may create or reply.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 从查询字符串中获取 moduleId 和 ItemId
-            _moduleId = int.Parse(Request.Params["Mid"]);
-
-            if (Request.Params["ItemId"] != null)
+            if (!TryReadRequestIdentifiers())
             {
-                _itemId = int.Parse(Request.Params["ItemId"]);
+                return;
             }
-            else
+
+            bool canEdit = PortalSecurity.HasEditPermissions(moduleId);
+            if (itemId == 0)
             {
-                _itemId = 0;
+                if (!canEdit)
+                {
+                    PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                    return;
+                }
+
                 EditPanel.Visible = true;
                 ButtonPanel.Visible = false;
+                return;
             }
 
-            // 如果这是第一次访问页面并且 ItemId 不为零，则填充数据
-            if (!Page.IsPostBack && _itemId != 0)
+            if (!Page.IsPostBack && !BindData())
             {
-                BindData();
+                return;
             }
 
-            // 检查用户是否有编辑权限
-            if (!PortalSecurity.HasEditPermissions(_moduleId))
+            if (!canEdit)
             {
-                if (_itemId == 0)
-                {
-                    Response.Redirect("~/Admin/EditAccessDenied.aspx");
-                }
-                else
-                {
-                    ReplyBtn.Visible = false;
-                }
+                ReplyBtn.Visible = false;
             }
         }
 
-        // ReplyBtn_Click 事件处理器处理用户点击消息的“回复”按钮的情况
-        protected void ReplyBtn_Click(Object Sender, EventArgs e)
+        /// <summary>
+        /// 中文：打开回复编辑区；仅模块编辑者可执行。English: Opens the reply editor; only module editors may perform this action.
+        /// </summary>
+        protected void ReplyBtn_Click(object sender, EventArgs e)
         {
+            if (!TryAuthorizeEditorForCurrentItem())
+            {
+                return;
+            }
+
             EditPanel.Visible = true;
             ButtonPanel.Visible = false;
         }
 
-        // UpdateBtn_Click 事件处理器处理用户点击“更新”按钮后提交对消息的响应
-        protected void UpdateBtn_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：创建主题或回复，并使用 HTML 编码存储普通用户文本。English: Creates a topic or reply and stores ordinary user text HTML-encoded.
+        /// </summary>
+        protected void UpdateBtn_Click(object sender, EventArgs e)
         {
-            // 添加新消息（更新页面上的 itemId）
-            _itemId = DiscussionDB.AddMessage(_moduleId, _itemId, User.Identity.Name,
-                                             Server.HtmlEncode(TitleField.Text),
-                                             Server.HtmlEncode(BodyField.Text));
+            if (!TryAuthorizeEditorForCurrentItem())
+            {
+                return;
+            }
 
-            // 更新页面元素的可见性
+            itemId = DiscussionDB.AddMessage(moduleId, itemId, User.Identity.Name,
+                Server.HtmlEncode(TitleField.Text), Server.HtmlEncode(BodyField.Text));
             EditPanel.Visible = false;
             ButtonPanel.Visible = true;
-
-            // 重新加载页面内容以显示新消息
             BindData();
         }
 
-        // CancelBtn_Click 事件处理器处理用户点击“取消”按钮的情况，用于放弃消息发布并退出编辑模式
-        protected void CancelBtn_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：取消回复编辑；仅模块编辑者可执行。English: Cancels reply editing; only module editors may perform this action.
+        /// </summary>
+        protected void CancelBtn_Click(object sender, EventArgs e)
         {
-            // 更新页面元素的可见性
+            if (!TryAuthorizeEditorForCurrentItem())
+            {
+                return;
+            }
+
             EditPanel.Visible = false;
             ButtonPanel.Visible = true;
         }
 
-        // BindData 方法用于从 Discussion 表中获取消息详情，并更新页面上的消息内容
-        private void BindData()
+        private bool TryReadRequestIdentifiers()
         {
-            IDiscussionItem item = DiscussionDB.GetSingleMessage(_itemId);
-
-            if (item == null || item.ModuleID != _moduleId)
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId))
             {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
             }
 
-            Subject.Text = item.Title ?? "";
-            Body.Text = item.Body ?? "";
-            CreatedByUser.Text = item.CreatedByUser ?? "匿名";
-            CreatedDate.Text = item.CreatedDate.HasValue
-                ? item.CreatedDate.Value.ToString("d")
-                : "未知时间";
+            string requestedItemId = Request.Params["ItemId"];
+            if (string.IsNullOrWhiteSpace(requestedItemId))
+            {
+                itemId = 0;
+                return true;
+            }
 
-            TitleField.Text = ReTitle(Subject.Text);
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
 
-            // 暂时关闭上下篇导航  #note 后期去掉此处及相关按钮
-            prevItem.Visible = false;
-            nextItem.Visible = false;
+            return true;
         }
 
-        // ReTitle 辅助方法用于创建消息回复的主题行
-        private string ReTitle(string title)
+        private bool TryAuthorizeEditorForCurrentItem()
         {
-            if (!string.IsNullOrEmpty(title) && !title.StartsWith("Re: "))
+            if (!TryReadRequestIdentifiers() || !PortalSecurity.HasEditPermissions(moduleId))
             {
-                title = "Re: " + title;
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
             }
 
-            return title;
+            if (itemId == 0)
+            {
+                return true;
+            }
+
+            IDiscussionItem item = DiscussionDB.GetSingleMessage(itemId);
+            if (item == null || item.ModuleID != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool BindData()
+        {
+            IDiscussionItem item = DiscussionDB.GetSingleMessage(itemId);
+            if (item == null || item.ModuleID != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            Subject.Text = EncodeDisplayText(item.Title);
+            Body.Text = EncodeDisplayText(item.Body);
+            CreatedByUser.Text = EncodeDisplayText(item.CreatedByUser ?? "匿名");
+            CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("d") : "未知时间";
+            TitleField.Text = ReTitle(Server.HtmlDecode(item.Title ?? string.Empty));
+            prevItem.Visible = false;
+            nextItem.Visible = false;
+            return true;
+        }
+
+        private string ReTitle(string title)
+        {
+            return string.IsNullOrEmpty(title) || title.StartsWith("Re: ", StringComparison.Ordinal)
+                ? title
+                : "Re: " + title;
+        }
+
+        private string EncodeDisplayText(string value)
+        {
+            return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
         }
     }
 }

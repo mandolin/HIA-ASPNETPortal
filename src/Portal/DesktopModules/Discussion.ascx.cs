@@ -7,15 +7,25 @@ using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：显示讨论主题和已展开主题的回复列表。
+    ///
+    /// English: Renders discussion topics and replies for an expanded topic.
+    /// </summary>
     public partial class Discussion : PortalModuleControl<Discussion>
     {
+        /// <summary>
+        /// 中文：讨论数据访问服务。English: Discussion data-access service.
+        /// </summary>
         [Dependency]
-        public IDiscussionsDb DiscussionDB { private get; set; } // 依赖注入：讨论数据库访问接口
+        public IDiscussionsDb DiscussionDB { private get; set; }
 
         // 用来存放当前选中顶级消息的 DisplayOrder（用于取回复）
         private string _currentParentDisplayOrder;
 
-        // Page_Load 事件处理程序用于在页面首次访问时获取并绑定讨论消息列表
+        /// <summary>
+        /// 中文：在首次请求时绑定讨论主题。English: Binds discussion topics on the first request.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             // 如果这不是一个回发请求，则绑定列表
@@ -25,7 +35,8 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
-        // BindList 方法用于从 Discussion 表中获取顶级消息列表，并将其绑定到名为 "TopLevelList" 的 DataList 控件
+        // 中文：列表会在展开/折叠命令后重绑，避免让模板直接承担状态转换逻辑。
+        // English: The list is rebound after expand/collapse commands so the template does not own state transitions.
         private void BindList()
         {
             // 获取与模块相关的讨论消息列表，并绑定到 DataList 控件
@@ -33,21 +44,17 @@ namespace ASPNET.StarterKit.Portal
             TopLevelList.DataBind();
         }
 
-        // GetThreadMessages 方法用于获取顶级讨论消息线程中的子主题消息列表
-        // 此方法用于填充 "TopLevelList" 中 "SelectedItemTemplate" 内的 "DetailList" DataList 控件
+        /// <summary>
+        /// 中文：为当前展开主题读取回复列表。English: Reads replies for the currently expanded topic.
+        /// </summary>
         protected List<IDiscussionItem> GetThreadMessages(string displayOrder)
         {
-            // 获取与选定的顶级讨论消息相关的子讨论消息列表
-            //IDataReader dr = DiscussionDB.GetThreadMessages(TopLevelList.DataKeys[TopLevelList.SelectedIndex].ToString());
-
-            // 返回过滤后的 DataReader
-            //return dr;
-
             return DiscussionDB.GetThreadMessages(displayOrder);
-            throw new NotImplementedException();
         }
 
-        // 在 TopLevelList 的 ItemDataBound 或 ItemCommand 中设置这个值
+        /// <summary>
+        /// 中文：在数据绑定时给展开项绑定回复列表。English: Binds replies for an expanded item during data binding.
+        /// </summary>
         protected void TopLevelList_ItemDataBound(object sender, DataListItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -66,11 +73,12 @@ namespace ASPNET.StarterKit.Portal
                     detailList.DataBind();
                 }
 
-                // 如果你原来是用 SelectedIndex 来判断“展开哪个”，现在可以用一个 HiddenField 或 ViewState
-                // 这里我们默认全部展开（最常见需求），如果要“点击展开”，再告诉我我给你加折叠逻辑
             }
         }
 
+        /// <summary>
+        /// 中文：格式化可空日期值。English: Formats a nullable date value.
+        /// </summary>
         protected string FormatDate(object dateObj)
         {
             if (dateObj == null || dateObj == DBNull.Value)
@@ -79,6 +87,19 @@ namespace ASPNET.StarterKit.Portal
             return ((DateTime)dateObj).ToString("g");
         }
 
+        /// <summary>
+        /// 中文：将历史上可能已编码的讨论文本规范为一次 HTML 编码的显示文本。
+        ///
+        /// English: Normalizes discussion text that may already be encoded into display text encoded exactly once for HTML output.
+        /// </summary>
+        protected string EncodeDisplayText(object value)
+        {
+            return Server.HtmlEncode(Server.HtmlDecode(Convert.ToString(value) ?? string.Empty));
+        }
+
+        /// <summary>
+        /// 中文：生成只由计算所得缩进级别组成的安全布局标记。English: Generates safe layout markup composed only from a computed indentation level.
+        /// </summary>
         protected string GetIndentHtml(object displayOrderObj)
         {
             if (displayOrderObj == null || displayOrderObj == DBNull.Value)
@@ -94,7 +115,9 @@ namespace ASPNET.StarterKit.Portal
             return "<span style=\"margin-left:" + (level * 20) + "px;display:inline-block;\"></span>";
         }
 
-        // TopLevelList_OnItemCommand 事件处理程序用于在层次结构的 DataList 控件中展开/折叠选定的讨论主题
+        /// <summary>
+        /// 中文：展开或折叠选定主题。English: Expands or collapses the selected topic.
+        /// </summary>
         protected void TopLevelList_OnItemCommand(object Sender, DataListCommandEventArgs e)
         {
             // 确定按钮的命令（要么是 "select"，要么是 "collapse"）
@@ -121,22 +144,27 @@ namespace ASPNET.StarterKit.Portal
             BindList();
         }
 
-        // FormatUrl 方法是一个帮助方法，由 DataList 控件模板中的绑定语句调用
-        // 该方法在此定义为帮助方法（而不是直接在模板内定义），以改善代码组织并避免在内容模板中嵌入逻辑
+        /// <summary>
+        /// 中文：构建当前模块内讨论详情页地址。English: Builds a discussion-detail URL inside the current module.
+        /// </summary>
         protected string FormatUrl(int item)
         {
             // 构造讨论详情页面的 URL
             return "~/DesktopModules/DiscussDetails.aspx?ItemID=" + item + "&mid=" + ModuleId;
         }
 
-        // NodeImage 方法是一个帮助方法，由 DataList 控件模板中的绑定语句调用
-        // 它控制列表中的项目是否应作为可展开的主题呈现，或者只是作为一个单一节点
+        /// <summary>
+        /// 中文：根据子消息数选择树节点图标。English: Selects a tree-node icon by child-message count.
+        /// </summary>
         protected string NodeImage(int count)
         {
             // 如果子项计数大于 0，则返回展开图标，否则返回单节点图标
             return count > 0 ? "~/images/plus.gif" : "~/images/node.gif";
         }
 
+        /// <summary>
+        /// 中文：根据子消息数选择展开命令。English: Selects an expand command by child-message count.
+        /// </summary>
         protected string NodeCommandName(int count)
         {
             // 如果子项计数大于 0，则返回展开图标，否则返回单节点图标

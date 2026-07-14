@@ -121,10 +121,12 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 获取单条消息的详细信息
+        /// 中文：获取单条消息的详细信息；未找到时返回 <c>null</c>。
+        ///
+        /// English: Gets one message in detail, returning <c>null</c> when it is not found.
         /// </summary>
-        /// <param name="itemId">消息 ItemID</param>
-        /// <returns>单条消息对象，未找到返回 null</returns>
+        /// <param name="itemId">中文：消息标识符。English: Message identifier.</param>
+        /// <returns>中文：消息对象；未找到时为 <c>null</c>。English: Message object, or <c>null</c> when it is not found.</returns>
         public IDiscussionItem GetSingleMessage(int itemId)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -163,9 +165,11 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 向数据库添加一条新消息（发帖或回复）
+        /// 中文：向数据库添加一条新消息（发帖或回复）。调用方负责权限和父消息归属核验。
+        ///
+        /// English: Adds a new message to the database (topic or reply). The caller is responsible for authorization and parent-message ownership verification.
         /// </summary>
-        /// <returns>新添加的消息的 ItemID</returns>
+        /// <returns>中文：新消息标识符；存储过程未返回标识时为 <c>-1</c>。English: New message identifier, or <c>-1</c> when the stored procedure does not return one.</returns>
         public int AddMessage(int moduleId, int parentId, string userName, string title, string body)
         {
             if (string.IsNullOrWhiteSpace(userName))

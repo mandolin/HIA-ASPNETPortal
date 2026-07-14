@@ -136,61 +136,7 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>中文：候选地址为允许的站内相对地址或 HTTP(S) 外链时为 <c>true</c>。English: <c>true</c> when the candidate is an allowed application-relative address or HTTP(S) external link.</returns>
         public static bool TryNormalizeBrowseUrl(string candidate, HttpRequest request, out string normalizedUrl)
         {
-            normalizedUrl = string.Empty;
-            if (string.IsNullOrWhiteSpace(candidate))
-            {
-                return false;
-            }
-
-            string value = candidate.Trim();
-            if (value.Length > 2048 || ContainsControlCharacter(value) ||
-                value.StartsWith("//", StringComparison.Ordinal) || value.StartsWith("\\\\", StringComparison.Ordinal))
-            {
-                return false;
-            }
-
-            Uri absoluteUri;
-            if (Uri.TryCreate(value, UriKind.Absolute, out absoluteUri))
-            {
-                if (string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
-                {
-                    normalizedUrl = absoluteUri.AbsoluteUri;
-                    return true;
-                }
-
-                return false;
-            }
-
-            if (value.IndexOf('\\') >= 0 || HasTraversalSegment(value))
-            {
-                return false;
-            }
-
-            if (value.StartsWith("~/", StringComparison.Ordinal))
-            {
-                normalizedUrl = value;
-                return true;
-            }
-
-            if (value.StartsWith("/", StringComparison.Ordinal))
-            {
-                if (!IsCurrentApplicationPath(value, request))
-                {
-                    return false;
-                }
-
-                normalizedUrl = value;
-                return true;
-            }
-
-            if (value.StartsWith("~", StringComparison.Ordinal))
-            {
-                return false;
-            }
-
-            normalizedUrl = value;
-            return true;
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(candidate, request, out normalizedUrl);
         }
 
         /// <summary>
@@ -203,13 +149,7 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>中文：当前应用内安全 URL；非法或缺失时返回门户首页。English: Safe URL in the current application, or the Portal home page when invalid or missing.</returns>
         public static string GetSafeReturnUrl(HttpRequest request, string candidate)
         {
-            string normalized;
-            if (TryNormalizeReturnUrl(request, candidate, out normalized))
-            {
-                return normalized;
-            }
-
-            return GetPortalHomeUrl(request);
+            return PortalNavigationPolicy.GetSafeReturnUrl(request, candidate);
         }
 
         /// <summary>
@@ -221,8 +161,7 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>中文：当前应用内安全 URL；无有效 Referer 时返回门户首页。English: Safe URL in the current application, or the Portal home page when no valid Referer exists.</returns>
         public static string GetSafeReturnUrl(HttpRequest request)
         {
-            Uri referer = request == null ? null : request.UrlReferrer;
-            return GetSafeReturnUrl(request, referer == null ? null : referer.AbsoluteUri);
+            return PortalNavigationPolicy.GetSafeReturnUrl(request);
         }
 
         /// <summary>
@@ -234,13 +173,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="candidate">中文：候选回跳地址。English: Candidate return address.</param>
         public static void RedirectToSafeReturnUrl(HttpContext context, string candidate)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-
-            context.Response.Redirect(GetSafeReturnUrl(context.Request, candidate), false);
-            context.ApplicationInstance.CompleteRequest();
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(context, candidate);
         }
 
         /// <summary>
@@ -336,123 +269,6 @@ namespace ASPNET.StarterKit.Portal
             }
 
             return sanitized.Substring(0, Math.Min(sanitized.Length, StorageStemMaximumLength));
-        }
-
-        private static bool ContainsControlCharacter(string value)
-        {
-            foreach (char character in value)
-            {
-                if (char.IsControl(character))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static bool HasTraversalSegment(string value)
-        {
-            string path = value.Split(new[] { '?', '#' }, 2)[0];
-            try
-            {
-                path = Uri.UnescapeDataString(path);
-            }
-            catch (UriFormatException)
-            {
-                return true;
-            }
-
-            foreach (string segment in path.Replace('\\', '/').Split('/'))
-            {
-                if (string.Equals(segment, "..", StringComparison.Ordinal))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static bool TryNormalizeReturnUrl(HttpRequest request, string candidate, out string normalizedUrl)
-        {
-            normalizedUrl = string.Empty;
-            if (request == null || string.IsNullOrWhiteSpace(candidate) || ContainsControlCharacter(candidate))
-            {
-                return false;
-            }
-
-            // 中文：首次请求把合法 Referer 规范为 PathAndQuery 保存到 ViewState；回发时仍须接受该站内格式。
-            // English: The first request stores a valid Referer as PathAndQuery in ViewState, which must remain valid on postback.
-            if (candidate.StartsWith("/", StringComparison.Ordinal) &&
-                !candidate.StartsWith("//", StringComparison.Ordinal) &&
-                IsCurrentApplicationPath(candidate, request))
-            {
-                normalizedUrl = candidate;
-                return true;
-            }
-
-            Uri requestUri = request.Url;
-            Uri candidateUri;
-            if (!Uri.TryCreate(candidate, UriKind.Absolute, out candidateUri) || requestUri == null ||
-                !string.Equals(candidateUri.Scheme, requestUri.Scheme, StringComparison.OrdinalIgnoreCase) ||
-                !string.Equals(candidateUri.Host, requestUri.Host, StringComparison.OrdinalIgnoreCase) ||
-                candidateUri.Port != requestUri.Port ||
-                !IsCurrentApplicationPath(candidateUri.AbsolutePath, request))
-            {
-                return false;
-            }
-
-            normalizedUrl = candidateUri.PathAndQuery;
-            return true;
-        }
-
-        private static bool IsCurrentApplicationPath(string absolutePath, HttpRequest request)
-        {
-            if (request == null || string.IsNullOrWhiteSpace(absolutePath) ||
-                absolutePath.StartsWith("//", StringComparison.Ordinal) || absolutePath.IndexOf('\\') >= 0 ||
-                HasTraversalSegment(absolutePath))
-            {
-                return false;
-            }
-
-            string pathOnly = absolutePath.Split(new[] { '?', '#' }, 2)[0];
-            string decodedPath;
-            try
-            {
-                decodedPath = Uri.UnescapeDataString(pathOnly);
-            }
-            catch (UriFormatException)
-            {
-                return false;
-            }
-
-            if (decodedPath.StartsWith("//", StringComparison.Ordinal) || decodedPath.IndexOf('\\') >= 0 ||
-                HasTraversalSegment(decodedPath))
-            {
-                return false;
-            }
-
-            string applicationPath = request.ApplicationPath;
-            if (string.IsNullOrEmpty(applicationPath) || string.Equals(applicationPath, "/", StringComparison.Ordinal))
-            {
-                return true;
-            }
-
-            string normalizedApplicationPath = applicationPath.TrimEnd('/');
-            return string.Equals(pathOnly, normalizedApplicationPath, StringComparison.OrdinalIgnoreCase) ||
-                   pathOnly.StartsWith(normalizedApplicationPath + "/", StringComparison.OrdinalIgnoreCase);
-        }
-
-        private static string GetPortalHomeUrl(HttpRequest request)
-        {
-            string applicationPath = request == null ? string.Empty : request.ApplicationPath;
-            if (string.IsNullOrEmpty(applicationPath) || string.Equals(applicationPath, "/", StringComparison.Ordinal))
-            {
-                return "/DesktopDefault.aspx";
-            }
-
-            return applicationPath.TrimEnd('/') + "/DesktopDefault.aspx";
         }
 
         private static string FormatFileSize(int bytes)

@@ -92,6 +92,7 @@
                     </tr>
                 </table>
                 
+                <asp:Label ID="ValidationMessage" CssClass="NormalRed" EnableViewState="false" Visible="false" runat="server" />
                 <%-- 按钮区域 --%>
                 <p>
                     <asp:LinkButton ID="updateButton" Text="Update" runat="server" CssClass="CommandButton"

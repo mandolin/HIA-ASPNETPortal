@@ -31,14 +31,17 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 获取单个公告。
+        /// 中文：获取单个公告；用户指定的不存在标识返回 <c>null</c>，由调用页决定其授权失败响应。
+        ///
+        /// English: Gets one announcement. A user-supplied missing identifier returns <c>null</c> so the caller can select its authorization-failure response.
         /// </summary>
-        /// <param name="itemId">公告标识符。</param>
-        /// <returns>指定ID的公告对象。</returns>
+        /// <param name="itemId">中文：公告标识符。English: Announcement identifier.</param>
+        /// <returns>中文：指定公告；不存在时为 <c>null</c>。English: The requested announcement, or <c>null</c> when it does not exist.</returns>
         public IAnnouncementItem GetSingleAnnouncement(int itemId)
         {
-            // 使用 Single 方法获取指定ID的公告
-            return _context.Announcements.Single(i => i.ItemId == itemId);
+            // 中文：编辑入口的 ItemId 来自请求，未命中不应转化为未处理异常。
+            // English: The editor item identifier comes from a request, so a miss must not become an unhandled exception.
+            return _context.Announcements.SingleOrDefault(i => i.ItemId == itemId);
         }
 
         /// <summary>

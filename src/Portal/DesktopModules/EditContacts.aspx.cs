@@ -1,126 +1,157 @@
 using System;
-using System.Web;
 using Microsoft.Practices.Unity;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 编辑联系人信息的页面。
+    /// 中文：编辑联系人模块条目的页面。
+    ///
+    /// English: Page for editing contact-module items.
     /// </summary>
     public partial class EditContacts : PortalPage<EditContacts>
     {
         private int itemId;
         private int moduleId;
 
+        /// <summary>
+        /// 中文：联系人数据访问服务。English: Contact data-access service.
+        /// </summary>
         [Dependency]
-        public IContactsDb ContactsDB { private get; set; } // 用于与数据库交互的接口
-
-        [Dependency]
-        public IPortalSecurity PortalSecurity { private get; set; } // 用于安全检查的接口
+        public IContactsDb ContactsDB { private get; set; }
 
         /// <summary>
-        /// 页面加载事件处理程序，用于获取模块ID和项目ID，并填充页面上的编辑控件。
+        /// 中文：模块编辑权限服务。English: Module edit-authorization service.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
+        [Dependency]
+        public IPortalSecurity PortalSecurity { private get; set; }
+
+        /// <summary>
+        /// 中文：初始化请求上下文、核验编辑权限和现有条目归属，并在首次访问时绑定表单。
+        ///
+        /// English: Initializes request context, verifies edit permission and existing-item ownership, and binds the form on the first request.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 解析请求中的模块ID参数
-            moduleId = int.Parse(Request.Params["Mid"]);
-
-            // 验证当前用户是否有权限编辑此模块
-            if (!PortalSecurity.HasEditPermissions(moduleId))
+            IContactItem item;
+            if (!TryInitializeRequest(out item))
             {
-                Response.Redirect("~/Admin/EditAccessDenied.aspx"); // 重定向到无权限访问页面
+                return;
             }
 
-            // 解析请求中的项目ID参数
-            if (Request.Params["ItemId"] != null)
+            if (!Page.IsPostBack)
             {
-                itemId = int.Parse(Request.Params["ItemId"]);
-            }
-
-            // 如果页面不是回发请求，且项目ID不为0，则填充页面内容
-            if (!Page.IsPostBack && itemId != 0)
-            {
-                // 从数据库获取单个联系人信息
-                var item = ContactsDB.GetSingleContact(itemId);
-
-                // 安全检查，确保项目ID属于当前模块
-                if (item.ModuleId != moduleId)
+                if (item != null)
                 {
-                    Response.Redirect("~/Admin/EditAccessDenied.aspx"); // 重定向到无权限访问页面
+                    NameField.Text = item.Name;
+                    RoleField.Text = item.Role;
+                    EmailField.Text = item.Email;
+                    Contact1Field.Text = item.Contact1;
+                    Contact2Field.Text = item.Contact2;
+                    CreatedBy.Text = EncodeDisplayText(item.CreatedByUser);
+                    CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
                 }
 
-                // 填充表单控件
-                NameField.Text = item.Name;
-                RoleField.Text = item.Role;
-                EmailField.Text = item.Email;
-                Contact1Field.Text = item.Contact1;
-                Contact2Field.Text = item.Contact2;
-                CreatedBy.Text = item.CreatedByUser;
-                CreatedDate.Text = item.CreatedDate.Value.ToShortDateString();
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
             }
-
-            // 存储URL引用以返回门户首页
-            ViewState["UrlReferrer"] = Request.UrlReferrer?.ToString();
         }
 
         /// <summary>
-        /// 更新按钮点击事件处理程序，用于创建或更新联系人信息。
+        /// 中文：创建或更新已授权联系人，并回跳到当前应用内的安全地址。
+        ///
+        /// English: Creates or updates an authorized contact and returns to a safe URL inside the current application.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
-            // 只有当输入数据有效时才进行更新
-            if (Page.IsValid)
+            IContactItem item;
+            if (!TryInitializeRequest(out item) || !Page.IsValid)
             {
-                if (itemId == 0)
-                {
-                    // 添加新的联系人记录
-                    ContactsDB.AddContact(moduleId, HttpContext.Current.User.Identity.Name, NameField.Text, RoleField.Text,
-                                         EmailField.Text, Contact1Field.Text, Contact2Field.Text);
-                }
-                else
-                {
-                    // 更新现有的联系人记录
-                    ContactsDB.UpdateContact(itemId, HttpContext.Current.User.Identity.Name, NameField.Text,
-                                            RoleField.Text, EmailField.Text, Contact1Field.Text, Contact2Field.Text);
-                }
-
-                // 重定向回到门户首页
-                Response.Redirect((string)ViewState["UrlReferrer"]);
+                return;
             }
+
+            if (itemId == 0)
+            {
+                ContactsDB.AddContact(moduleId, Context.User.Identity.Name, NameField.Text, RoleField.Text,
+                    EmailField.Text, Contact1Field.Text, Contact2Field.Text);
+            }
+            else
+            {
+                ContactsDB.UpdateContact(itemId, Context.User.Identity.Name, NameField.Text, RoleField.Text,
+                    EmailField.Text, Contact1Field.Text, Contact2Field.Text);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
         /// <summary>
-        /// 删除按钮点击事件处理程序，用于删除联系人信息。
+        /// 中文：删除已核验归属的联系人。English: Deletes a contact whose ownership has been verified.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
         protected void DeleteBtn_Click(object sender, EventArgs e)
         {
-            // 只有当项目ID不为0（即存在记录）时尝试删除
-            if (itemId != 0)
+            IContactItem item;
+            if (!TryInitializeRequest(out item))
             {
-                ContactsDB.DeleteContact(itemId); // 删除联系人记录
+                return;
             }
 
-            // 重定向回到门户首页
-            Response.Redirect((string)ViewState["UrlReferrer"]);
+            if (itemId != 0)
+            {
+                ContactsDB.DeleteContact(itemId);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
         /// <summary>
-        /// 取消按钮点击事件处理程序，用于取消编辑并返回门户首页。
+        /// 中文：放弃编辑并返回安全地址。English: Cancels editing and returns to a safe URL.
         /// </summary>
-        /// <param name="sender">事件源对象。</param>
-        /// <param name="e">事件参数。</param>
         protected void CancelBtn_Click(object sender, EventArgs e)
         {
-            // 重定向回到门户首页
-            Response.Redirect((string)ViewState["UrlReferrer"]);
+            IContactItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }
+
+        private bool TryInitializeRequest(out IContactItem item)
+        {
+            item = null;
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
+                !PortalSecurity.HasEditPermissions(moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            string requestedItemId = Request.Params["ItemId"];
+            if (!string.IsNullOrWhiteSpace(requestedItemId) &&
+                !PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            if (itemId == 0)
+            {
+                return true;
+            }
+
+            item = ContactsDB.GetSingleContact(itemId);
+            if (item == null || item.ModuleId != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
+        }
+
+        private string EncodeDisplayText(string value)
+        {
+            return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
         }
     }
 }

@@ -1,107 +1,114 @@
 using System;
-using ASPNET.StarterKit.Portal;
-using System.Web.UI;
 using Microsoft.Practices.Unity;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
+    /// <summary>
+    /// 中文：编辑受信任 HTML 模块内容的页面。
+    ///
+    /// English: Page for editing trusted HTML-module content.
+    /// </summary>
+    /// <remarks>
+    /// 中文：本页面保留历史兼容行为：具有模块编辑权限的受信任管理员可以输入原始 HTML，系统以 HTML 编码形式存储，
+    /// 渲染时再解码。它不是面向普通用户的富文本入口，未来应由“原始 HTML”细粒度权限替代当前宽泛信任。
+    ///
+    /// English: This page retains the historical compatibility behavior: a trusted administrator with module-edit permission
+    /// may enter raw HTML, which is stored HTML-encoded and decoded during rendering. It is not a general-user rich-text entry;
+    /// a future granular Raw HTML permission should replace the current broad trust.
+    /// </remarks>
     public partial class EditHtml : PortalPage<EditHtml>
     {
-        // 存储模块ID的私有字段
         private int moduleId;
 
-        // 依赖注入HTML文本数据库接口
+        /// <summary>
+        /// 中文：HTML 文本数据访问服务。English: HTML-text data-access service.
+        /// </summary>
         [Dependency]
         public IHtmlTextsDb HtmlTextDB { private get; set; }
 
-        // 依赖注入门户安全接口
+        /// <summary>
+        /// 中文：模块编辑权限服务。English: Module edit-authorization service.
+        /// </summary>
         [Dependency]
         public IPortalSecurity PortalSecurity { private get; set; }
 
-        //****************************************************************
-        //
-        // 页面加载事件：用于获取要编辑的模块ID。
-        // 使用HtmlTextDB组件填充页面上的编辑控件。
-        //
-        //****************************************************************
-
+        /// <summary>
+        /// 中文：初始化受信任 HTML 编辑请求，并在首次访问时读取已有内容或显示首次编辑提示。
+        ///
+        /// English: Initializes a trusted HTML editing request and reads existing content, or shows first-edit hints, on the first request.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 获取模块ID
-            moduleId = int.Parse(Request.QueryString["Mid"] ?? Request.Unvalidated.Form["Mid"]);
-
-            // 验证当前用户是否有编辑此模块的权限
-            if (!PortalSecurity.HasEditPermissions(moduleId))
+            if (!TryInitializeRequest())
             {
-                // 如果没有权限，则重定向到无权访问页面
-                Response.Redirect("~/Admin/EditAccessDenied.aspx");
+                return;
             }
 
-            // 如果不是回发请求
             if (!Page.IsPostBack)
             {
-                // 获取单行文本信息
                 IHtmlTextItem item = HtmlTextDB.GetHtmlText(moduleId);
-
-                try
+                if (item == null)
                 {
-                    // 解码并设置桌面版HTML内容
-                    DesktopText.Text = Server.HtmlDecode(item.DesktopHtml);
-                    // 解码并设置移动端摘要内容
-                    MobileSummary.Text = Server.HtmlDecode(item.MobileSummary);
-                    // 解码并设置移动端详情内容
-                    MobileDetails.Text = Server.HtmlDecode(item.MobileDetails);
-                }
-                catch
-                {
-                    // 如果出现异常，则设置默认提示信息
                     DesktopText.Text = "Todo: Add Content...";
                     MobileSummary.Text = "Todo: Add Content...";
                     MobileDetails.Text = "Todo: Add Content...";
                 }
+                else
+                {
+                    DesktopText.Text = Server.HtmlDecode(item.DesktopHtml);
+                    MobileSummary.Text = Server.HtmlDecode(item.MobileSummary);
+                    MobileDetails.Text = Server.HtmlDecode(item.MobileDetails);
+                }
 
-                // 存储URL引用，以便返回到门户首页
-                ViewState["UrlReferrer"] = Request.UrlReferrer?.ToString();
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
             }
         }
 
-        //****************************************************************
-        //
-        // 更新按钮点击事件处理程序：用于将文本更改保存到数据库。
-        //
-        //****************************************************************
-
-        protected void UpdateBtn_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：以历史编码存储约定保存受信任 HTML 内容。English: Saves trusted HTML content using the historical encoded-storage convention.
+        /// </summary>
+        protected void UpdateBtn_Click(object sender, EventArgs e)
         {
-            // 更新数据库中的文本
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
             HtmlTextDB.UpdateHtmlText(
                 moduleId,
-                Server.HtmlEncode(DesktopText.Text), // 编码桌面版HTML内容
-                Server.HtmlEncode(MobileSummary.Text), // 编码移动端摘要内容
-                Server.HtmlEncode(MobileDetails.Text) // 编码移动端详情内容
-            );
-
-            // 重定向回门户首页
-            Response.Redirect(GetReturnUrl());
+                Server.HtmlEncode(DesktopText.Text),
+                Server.HtmlEncode(MobileSummary.Text),
+                Server.HtmlEncode(MobileDetails.Text));
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
-        //****************************************************************
-        //
-        // 取消按钮点击事件处理程序：用于取消编辑并返回到门户首页。
-        //
-        //****************************************************************
-
-        protected void CancelBtn_Click(Object sender, EventArgs e)
+        /// <summary>
+        /// 中文：放弃编辑并返回安全地址。English: Cancels editing and returns to a safe URL.
+        /// </summary>
+        protected void CancelBtn_Click(object sender, EventArgs e)
         {
-            // 重定向回门户首页
-            Response.Redirect(GetReturnUrl());
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
         }
 
-        private string GetReturnUrl()
+        private bool TryInitializeRequest()
         {
-            string returnUrl = ViewState["UrlReferrer"] as string;
-            return string.IsNullOrEmpty(returnUrl) ? "~/Default.aspx" : returnUrl;
+            // 中文：原始 HTML 回发会触发普通 Request.Form 的请求验证；只读取未验证集合中的 Mid 参数。
+            // English: A raw-HTML postback triggers request validation on ordinary Request.Form access, so read only Mid from the unvalidated collection.
+            string moduleValue = Request.QueryString["Mid"] ?? Request.Unvalidated.Form["Mid"];
+            if (!PortalNavigationPolicy.TryReadPositiveInt32(moduleValue, out moduleId) ||
+                !PortalSecurity.HasEditPermissions(moduleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            return true;
         }
     }
 }

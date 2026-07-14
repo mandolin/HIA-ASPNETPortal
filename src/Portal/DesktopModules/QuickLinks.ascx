@@ -6,11 +6,9 @@
 <asp:datalist id="myDataList" cellpadding="4" width="100%" enableviewstate="false" runat="server">
     <itemtemplate>
         <span class="Normal">
-            <asp:hyperlink id="editLink" imageurl="<%# linkImage %>" navigateurl='<%# ChooseURL(Convert.ToString(DataBinder.Eval(Container.DataItem, "ItemID")),
-                                        ModuleId.ToString(), (string) DataBinder.Eval(Container.DataItem, "Url")) %>' runat="server" />
-            <a href='<%# DataBinder.Eval(Container.DataItem, "Url") %>'>
-                <%# DataBinder.Eval(Container.DataItem, "Title") %>
-            </a>
+            <asp:hyperlink id="editLink" imageurl="<%# linkImage %>" navigateurl='<%# ChooseUrl(DataBinder.Eval(Container.DataItem, "ItemID"), DataBinder.Eval(Container.DataItem, "Url")) %>' visible='<%# CanRenderNavigation(DataBinder.Eval(Container.DataItem, "Url")) %>' runat="server" />
+            <asp:HyperLink ID="quickLink" Text='<%#: DataBinder.Eval(Container.DataItem, "Title") %>' NavigateUrl='<%# GetSafeBrowseUrl(DataBinder.Eval(Container.DataItem, "Url")) %>' Target="_blank" Visible='<%# HasSafeBrowseUrl(DataBinder.Eval(Container.DataItem, "Url")) %>' runat="server" />
+            <asp:Label ID="quickLinkText" Text='<%#: DataBinder.Eval(Container.DataItem, "Title") %>' Visible='<%# !HasSafeBrowseUrl(DataBinder.Eval(Container.DataItem, "Url")) %>' runat="server" />
         </span>
         <br>
     </itemtemplate>

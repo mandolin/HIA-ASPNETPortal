@@ -28,14 +28,17 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 获取单个事件。
+        /// 中文：获取单个事件；用户指定的不存在标识返回 <c>null</c>，由调用页决定其授权失败响应。
+        ///
+        /// English: Gets one event. A user-supplied missing identifier returns <c>null</c> so the caller can select its authorization-failure response.
         /// </summary>
-        /// <param name="itemId">事件标识符。</param>
-        /// <returns>指定ID的事件对象。</returns>
+        /// <param name="itemId">中文：事件标识符。English: Event identifier.</param>
+        /// <returns>中文：指定事件；不存在时为 <c>null</c>。English: The requested event, or <c>null</c> when it does not exist.</returns>
         public IEventItem GetSingleEvent(int itemId)
         {
-            // 使用 Single 方法获取指定ID的事件
-            return _context.Events.Single(i => i.ItemId == itemId);
+            // 中文：编辑入口的 ItemId 来自请求，未命中不应转化为未处理异常。
+            // English: The editor item identifier comes from a request, so a miss must not become an unhandled exception.
+            return _context.Events.SingleOrDefault(i => i.ItemId == itemId);
         }
 
         /// <summary>
