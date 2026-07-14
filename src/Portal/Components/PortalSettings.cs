@@ -70,6 +70,12 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="tabsConfig">中文：读取桌面和移动页签的数据访问接口。English: Data-access interface for desktop and mobile tabs.</param>
         /// <param name="modulesConfig">中文：读取页签模块实例的数据访问接口。English: Data-access interface for tab module instances.</param>
         /// <param name="moduleDefConfig">中文：读取模块定义的数据访问接口。English: Data-access interface for module definitions.</param>
+        /// <exception cref="System.InvalidOperationException">
+        /// 中文：当门户、活动页签或模块定义的严格查询无法得到唯一结果时抛出。
+        /// 这些记录构成页面运行时配置，缺失或重复应被视为配置完整性错误，而不是静默回退。
+        /// English: Thrown when a strict Portal, active-Tab, or module-definition lookup does not return exactly one result.
+        /// These records form the page runtime configuration, so a missing or duplicate record is a configuration-integrity error rather than a silent fallback.
+        /// </exception>
         public PortalSettings(int tabIndex, int tabId,
                               IGlobalsDb portalConfig, ITabsDb tabsConfig, IModulesDb modulesConfig,
                               IModuleDefsDb moduleDefConfig)

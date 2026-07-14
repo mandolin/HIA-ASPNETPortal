@@ -23,14 +23,35 @@ namespace ASPNET.StarterKit.Portal
         #region IModulesDb Members
 
         /// <summary>
-        /// 获取单个模块。
+        /// 中文：严格获取单个模块实例。
+        ///
+        /// English: Strictly gets one module instance.
         /// </summary>
-        /// <param name="moduleId">模块ID。</param>
-        /// <returns>模块对象。</returns>
+        /// <param name="moduleId">中文：模块实例标识。English: Module-instance identifier.</param>
+        /// <returns>中文：匹配模块实例。English: Matching module instance.</returns>
+        /// <remarks>
+        /// 中文：此方法用于已验证的运行时配置和写入路径；缺失或重复记录应暴露为完整性故障。
+        /// English: This method serves verified runtime configuration and write paths; missing or duplicate records
+        /// should surface as integrity failures.
+        /// </remarks>
         public IModuleItem GetSingleModule(int moduleId)
         {
             // 从内存列表中查找指定ID的模块
             return _items.Single(i => i.ModuleId == moduleId);
+        }
+
+        /// <summary>
+        /// 中文：按标识查找模块实例；不存在时返回 <c>null</c>。
+        ///
+        /// English: Finds a module instance by identifier, returning <c>null</c> when it is absent.
+        /// </summary>
+        /// <param name="moduleId">中文：模块实例标识。English: Module-instance identifier.</param>
+        /// <returns>中文：匹配模块实例；不存在时为 <c>null</c>。English: Matching module instance, or <c>null</c> when absent.</returns>
+        public IModuleItem FindModuleById(int moduleId)
+        {
+            // 中文：SingleOrDefault 保留重复记录的完整性异常，同时允许授权层对缺失模块安全拒绝。
+            // English: SingleOrDefault preserves duplicate-record integrity errors while allowing authorization to deny a missing module safely.
+            return _items.SingleOrDefault(i => i.ModuleId == moduleId);
         }
 
         /// <summary>
@@ -207,10 +228,16 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 获取指定模块的所有设置。
+        /// 中文：获取指定已存在模块的全部设置。
+        ///
+        /// English: Gets all settings for a specified existing module.
         /// </summary>
-        /// <param name="moduleId">模块ID。</param>
-        /// <returns>设置的哈希表。</returns>
+        /// <param name="moduleId">中文：模块实例标识。English: Module-instance identifier.</param>
+        /// <returns>中文：设置哈希表；缺少单个键由调用模块处理默认值。English: Settings hashtable; consuming modules handle defaults for missing individual keys.</returns>
+        /// <remarks>
+        /// 中文：模块缺失仍为严格配置错误；此方法不把不存在模块伪装成空设置集合。
+        /// English: A missing module remains a strict configuration error; this method does not disguise it as an empty settings collection.
+        /// </remarks>
         public Hashtable GetModuleSettings(int moduleId)
         {
             // 从数据库中获取模块设置

@@ -24,6 +24,12 @@ namespace ASPNET.StarterKit.Portal
         /// <see cref="PortalModuleCatalog"/> and <see cref="PortalModulePathValidator"/> before dynamic loading;
         /// this object alone does not prove that the path was validated.
         /// </remarks>
+        /// <exception cref="InvalidOperationException">
+        /// 中文：当模块记录缺少模块定义，或模块定义的严格查询无法得到唯一结果时抛出。
+        /// 该情形属于部署或配置完整性错误，调用方不得将其静默降级为“跳过模块”。
+        /// English: Thrown when the module record has no module definition or when its strict lookup does not return exactly one result.
+        /// This is a deployment or configuration-integrity error and must not be silently downgraded to skipping the module.
+        /// </exception>
         public ModuleSettings(IModuleItem module, IModuleDefsDb moduleDefConfig)
         {
             ModuleTitle         = module.ModuleTitle;

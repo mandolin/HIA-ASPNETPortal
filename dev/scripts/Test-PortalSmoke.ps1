@@ -15,7 +15,9 @@ param(
 
     [switch]$CheckGenericErrorPage,
 
-    [switch]$CheckDocumentSafety
+    [switch]$CheckDocumentSafety,
+
+    [switch]$CheckEditorSafety
 )
 
 Set-StrictMode -Version Latest
@@ -326,6 +328,30 @@ try {
         $forgedErrorContent = [System.Net.WebUtility]::HtmlDecode($forgedError.Content)
         $forgedErrorPassed = $forgedError.StatusCode -eq 200 -and $forgedErrorContent -match '事件编号：\s*未提供'
         Add-PortalCheck -Name 'Forged diagnostics event id' -Passed $forgedErrorPassed -Detail ('HTTP ' + $forgedError.StatusCode)
+    }
+
+    if ($CheckEditorSafety) {
+        # 中文：正数但不存在的 Mid 不能穿透到严格数据查询并触发通用错误页，所有已迁移编辑器都应拒绝匿名访问。
+        # English: A positive but non-existing Mid must not reach strict data access and trigger the generic error page; every migrated editor must deny anonymous access.
+        $missingModuleId = '2147483647'
+        $editorPages = @(
+            @{ Name = 'Announcements editor missing module'; Path = ('DesktopModules/EditAnnouncements.aspx?Mid=' + $missingModuleId) },
+            @{ Name = 'Contacts editor missing module'; Path = ('DesktopModules/EditContacts.aspx?Mid=' + $missingModuleId) },
+            @{ Name = 'Events editor missing module'; Path = ('DesktopModules/EditEvents.aspx?Mid=' + $missingModuleId) },
+            @{ Name = 'Links editor missing module'; Path = ('DesktopModules/EditLinks.aspx?Mid=' + $missingModuleId) },
+            @{ Name = 'Image editor missing module'; Path = ('DesktopModules/EditImage.aspx?Mid=' + $missingModuleId) },
+            @{ Name = 'XML editor missing module'; Path = ('DesktopModules/EditXml.aspx?Mid=' + $missingModuleId) },
+            @{ Name = 'HTML editor missing module'; Path = ('DesktopModules/EditHtml.aspx?Mid=' + $missingModuleId) },
+            @{ Name = 'Documents editor missing module'; Path = ('DesktopModules/EditDocs.aspx?Mid=' + $missingModuleId) },
+            @{ Name = 'Discussion editor missing module'; Path = ('DesktopModules/DiscussDetails.aspx?Mid=' + $missingModuleId) }
+        )
+
+        foreach ($editorPage in $editorPages) {
+            $response = Invoke-PortalRequest -Uri ([Uri]::new($baseUri, $editorPage.Path).AbsoluteUri) -WebSession $anonymousSession
+            $responsePath = Get-PortalResponsePath -Response $response
+            $passed = $response.StatusCode -eq 200 -and $responsePath -match '/Admin/EditAccessDenied\.aspx$'
+            Add-PortalCheck -Name $editorPage.Name -Passed $passed -Detail ('HTTP ' + $response.StatusCode + ' -> ' + $responsePath)
+        }
     }
 
     if (-not $SkipAuthenticated -and -not [string]::IsNullOrWhiteSpace($AdminUser)) {

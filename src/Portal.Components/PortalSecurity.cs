@@ -44,17 +44,36 @@ namespace ASPNET.StarterKit.Portal
         /// English: Determines whether the current request identity may edit the specified module.
         /// </summary>
         /// <param name="moduleId">中文：要检查的模块实例标识。English: Module-instance identifier to check.</param>
-        /// <returns>中文：父 Tab 访问角色和模块编辑角色均满足时为 <c>true</c>。English: <c>true</c> when both parent-tab access roles and module edit roles are satisfied.</returns>
+        /// <returns>中文：父 Tab 访问角色和模块编辑角色均满足时为 <c>true</c>；模块、父 Tab 或必要关联缺失时为 <c>false</c>。
+        /// English: <c>true</c> when both parent-Tab access roles and module edit roles are satisfied; <c>false</c>
+        /// when the module, parent Tab, or a required relationship is missing.</returns>
+        /// <remarks>
+        /// 中文：该方法处于请求标识进入授权判断的边界，因此缺失记录必须 fail closed。可缺失查找仍会对重复数据抛出，
+        /// 以保留配置完整性故障的可观察性。
+        ///
+        /// English: This method is a boundary where request identifiers enter authorization, so missing records must
+        /// fail closed. Nullable lookups still throw for duplicate data, preserving observability of configuration-integrity failures.
+        /// </remarks>
         public bool HasEditPermissions(int moduleId)
         {
             // 中文：模块编辑不是单独授权，必须先读取模块所属 Tab 的访问规则。
             // English: Module editing is not standalone authorization; the parent-tab access rule is evaluated first.
-            IModuleItem module = _modulesConfig.GetSingleModule(moduleId);
+            IModuleItem module = _modulesConfig.FindModuleById(moduleId);
+            if (module == null || !module.TabId.HasValue)
+            {
+                return false;
+            }
+
+            ITabItem tab = _tabsConfig.FindTabById(module.TabId.Value);
+            if (tab == null)
+            {
+                return false;
+            }
 
             // 中文：两个角色集合都必须匹配，保持旧门户的严格组合规则。
             // English: Both role sets must match to preserve the legacy Portal's strict combined rule.
             string editRoles = module.EditRoles;
-            string accessRoles = _tabsConfig.GetSingleTab(module.TabId.Value).AccessRoles;
+            string accessRoles = tab.AccessRoles;
 
             // 中文：任一集合不匹配即拒绝编辑。
             // English: Editing is denied when either role set does not match.

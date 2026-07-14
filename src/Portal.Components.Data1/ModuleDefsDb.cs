@@ -110,13 +110,19 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 获取单个模块定义。
+        /// 中文：严格获取单个模块定义。
+        /// English: Strictly gets one module definition.
         /// </summary>
-        /// <param name="defId">模块定义的ID。</param>
-        /// <returns>单个模块定义对象。</returns>
+        /// <param name="defId">中文：模块定义标识。English: Module-definition identifier.</param>
+        /// <returns>中文：唯一的模块定义对象。English: The unique module-definition item.</returns>
+        /// <exception cref="InvalidOperationException">
+        /// 中文：找不到记录或出现重复记录时抛出；模块定义是运行时配置的一部分，调用方不得将其视为普通可选数据。
+        /// English: Thrown when no record or duplicate records exist; a module definition is runtime configuration rather than ordinary optional data.
+        /// </exception>
         public IModuleDefinitionItem GetSingleModuleDefinition(int defId)
         {
-            // 从内存中的模块定义列表中查找指定ID的模块定义
+            // 中文：模块定义参与动态加载；保持严格查询以暴露部署或配置损坏。
+            // English: Module definitions participate in dynamic loading; keep this lookup strict to expose deployment or configuration corruption.
             return _items.Single(i => i.ModuleDefId == defId);
         }
 

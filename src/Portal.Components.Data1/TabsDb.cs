@@ -46,14 +46,35 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 获取单个页项。
+        /// 中文：严格获取单个 Tab。
+        ///
+        /// English: Strictly gets one Tab.
         /// </summary>
-        /// <param name="tabId">页ID。</param>
-        /// <returns>页项。</returns>
+        /// <param name="tabId">中文：Tab 标识。English: Tab identifier.</param>
+        /// <returns>中文：匹配 Tab。English: Matching Tab.</returns>
+        /// <remarks>
+        /// 中文：此方法用于已验证的门户运行时配置和写入路径；缺失或重复记录应暴露为完整性故障。
+        /// English: This method serves verified Portal runtime configuration and write paths; missing or duplicate records
+        /// should surface as integrity failures.
+        /// </remarks>
         public ITabItem GetSingleTab(int tabId)
         {
             // 通过页ID获取单个页项。
             return _tabs.Single(i => i.TabId == tabId);
+        }
+
+        /// <summary>
+        /// 中文：按标识查找 Tab；不存在时返回 <c>null</c>。
+        ///
+        /// English: Finds a Tab by identifier, returning <c>null</c> when it is absent.
+        /// </summary>
+        /// <param name="tabId">中文：Tab 标识。English: Tab identifier.</param>
+        /// <returns>中文：匹配 Tab；不存在时为 <c>null</c>。English: Matching Tab, or <c>null</c> when absent.</returns>
+        public ITabItem FindTabById(int tabId)
+        {
+            // 中文：重复 Tab 仍应作为配置完整性错误暴露，缺失 Tab 则交由授权层安全拒绝。
+            // English: Duplicate Tabs still surface as configuration-integrity errors, while a missing Tab is safely denied by authorization.
+            return _tabs.SingleOrDefault(i => i.TabId == tabId);
         }
 
         /// <summary>
