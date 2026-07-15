@@ -26,6 +26,7 @@ namespace ASPNET.StarterKit.Portal
         /// English: User identifier, also used as the table primary key.
         /// </summary>
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
 
         /// <summary>
