@@ -9,12 +9,12 @@ namespace ASPNET.StarterKit.Portal
     /// English: Data-access contract for Portal users, sign-in, role lookup, and registration review.
     /// </summary>
     /// <remarks>
-    /// 中文：当前 <c>password</c> 参数是与既有用户表兼容的摘要文本，不是可记录或回显的明文密码。
-    /// 无盐 MD5 摘要仅为历史兼容保留，后续安全改造需要采用可渐进迁移的强哈希方案。
+    /// 中文：P5.2 起 <c>password</c> 参数表示一次性提交的密码输入，调用方不得记录、回显或自行生成摘要。
+    /// 数据访问层负责强哈希写入、旧 MD5 兼容验证和安全版本维护。
     ///
-    /// English: Current <c>password</c> parameters are digest text compatible with the legacy user table,
-    /// not plain-text passwords that may be logged or echoed. Unsalted MD5 remains only for historical
-    /// compatibility; later security work requires a strong-hash scheme that supports gradual migration.
+    /// English: Starting with P5.2, <c>password</c> parameters represent one-time submitted password input; callers
+    /// must not log, echo, or pre-digest it. The data-access layer owns strong-hash writes, legacy MD5 compatibility
+    /// verification, and security-version maintenance.
     /// </remarks>
     public interface IUsersDb
     {
@@ -25,7 +25,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="fullName">中文：用户登录名称。English: User sign-in name.</param>
         /// <param name="email">中文：用户邮箱地址。English: User email address.</param>
-        /// <param name="password">中文：既有用户表兼容的密码摘要文本。English: Password-digest text compatible with the legacy user table.</param>
+        /// <param name="password">中文：用户提交的密码输入；空值表示创建不可登录占位用户。English: Submitted password input; empty means creating a non-signable placeholder user.</param>
         /// <returns>中文：成功时返回新用户标识；失败时返回负值。English: New user identifier on success; a negative value on failure.</returns>
         int AddUser(String fullName, string email, string password);
 
@@ -36,7 +36,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="fullName">中文：用户登录名称。English: User sign-in name.</param>
         /// <param name="email">中文：用户邮箱地址。English: User email address.</param>
-        /// <param name="password">中文：既有用户表兼容的密码摘要文本。English: Password-digest text compatible with the legacy user table.</param>
+        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
         /// <param name="employeeCode">中文：可为空的员工号。English: Optional employee code.</param>
         /// <param name="inviteCode">中文：可为空的注册链接邀请码；空值表示当前允许的非邀请注册。English: Optional registration invite code; an empty value represents currently allowed non-invite registration.</param>
         /// <param name="requiresApproval">中文：是否应以待审核状态创建。English: Whether the user should be created in pending-approval status.</param>
@@ -58,13 +58,13 @@ namespace ASPNET.StarterKit.Portal
         void DeleteUser(int userId);
 
         /// <summary>
-        /// 中文：更新用户邮箱和密码摘要。
+        /// 中文：更新用户邮箱并重置用户凭据。
         ///
-        /// English: Updates a user's email and password digest.
+        /// English: Updates a user's email and resets the user's credential.
         /// </summary>
         /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
         /// <param name="email">中文：新的邮箱地址。English: New email address.</param>
-        /// <param name="password">中文：新的既有格式密码摘要，不得记录到审计正文。English: New legacy-format password digest; it must not be recorded in audit details.</param>
+        /// <param name="password">中文：新的密码输入，不得记录到审计正文。English: New password input; it must not be recorded in audit details.</param>
         void UpdateUser(int userId, string email, string password);
 
         /// <summary>
@@ -142,13 +142,50 @@ namespace ASPNET.StarterKit.Portal
         IUserItem FindUserById(int userId);
 
         /// <summary>
-        /// 中文：校验登录摘要和注册审核状态，成功时返回用户登录名称。
+        /// 中文：校验登录密码和注册审核状态，成功时返回登录结果。
         ///
-        /// English: Validates a sign-in digest and registration-review status, then returns the user sign-in name on success.
+        /// English: Validates a sign-in password and registration-review status, then returns the sign-in result on success.
         /// </summary>
         /// <param name="emailOrName">中文：用户输入的邮箱或登录名称。English: Email or sign-in name entered by the user.</param>
-        /// <param name="password">中文：与既有用户表比较的密码摘要文本。English: Password-digest text compared with the legacy user table.</param>
+        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
+        /// <returns>中文：登录结果；失败时使用通用失败对象。English: Sign-in result; generic failure object on failure.</returns>
+        PortalSignInResult SignIn(string emailOrName, string password);
+
+        /// <summary>
+        /// 中文：兼容旧调用点的登录方法；新代码应优先使用 <see cref="SignIn"/>。
+        ///
+        /// English: Sign-in method retained for legacy call sites; new code should prefer <see cref="SignIn"/>.
+        /// </summary>
+        /// <param name="emailOrName">中文：用户输入的邮箱或登录名称。English: Email or sign-in name entered by the user.</param>
+        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
         /// <returns>中文：登录成功且允许访问时返回用户名；否则为空字符串。English: User name when sign-in succeeds and access is allowed; otherwise an empty string.</returns>
         string Login(String emailOrName, string password);
+
+        /// <summary>
+        /// 中文：按用户名称读取当前安全版本；缺少 P5.2 表时返回 <c>0</c>。
+        ///
+        /// English: Reads the current security version by user name; returns <c>0</c> when P5.2 tables are absent.
+        /// </summary>
+        /// <param name="userName">中文：用户登录名称。English: User sign-in name.</param>
+        /// <returns>中文：当前安全版本。English: Current security version.</returns>
+        long GetSecurityVersionByUserName(string userName);
+
+        /// <summary>
+        /// 中文：按用户标识读取当前安全版本；缺少 P5.2 表时返回 <c>0</c>。
+        ///
+        /// English: Reads the current security version by user id; returns <c>0</c> when P5.2 tables are absent.
+        /// </summary>
+        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
+        /// <returns>中文：当前安全版本。English: Current security version.</returns>
+        long GetSecurityVersionByUserId(int userId);
+
+        /// <summary>
+        /// 中文：递增指定用户的安全版本，使旧身份票据和角色 Cookie 在下一次请求失效。
+        ///
+        /// English: Increments the security version of the specified user so older auth tickets and role cookies become invalid on the next request.
+        /// </summary>
+        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
+        /// <param name="reason">中文：非敏感变更原因。English: Non-sensitive change reason.</param>
+        void IncrementSecurityVersion(int userId, string reason);
     }
 }

@@ -22,6 +22,8 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public static class PortalAuthenticationCookies
     {
+        private const string RolesDataSeparator = "\nroles:";
+
         /// <summary>
         /// 中文：旧门户保存当前用户角色列表的 Cookie 名称。
         ///
@@ -30,14 +32,15 @@ namespace ASPNET.StarterKit.Portal
         public const string RolesCookieName = "portalroles";
 
         /// <summary>
-        /// 中文：尝试从角色 Cookie 读取角色；缺失、过期或解密失败时返回 <c>false</c>，调用方应从数据库重新加载。
+        /// 中文：尝试从角色 Cookie 读取角色；缺失、过期、解密失败或安全版本不匹配时返回 <c>false</c>，调用方应从数据库重新加载。
         ///
-        /// English: Attempts to read roles from the role cookie; returns <c>false</c> when missing, expired, or undecryptable so the caller reloads from the database.
+        /// English: Attempts to read roles from the role cookie; returns <c>false</c> when missing, expired, undecryptable, or security-version mismatched so the caller reloads from the database.
         /// </summary>
         /// <param name="request">中文：当前 HTTP 请求，可为 <c>null</c>。English: Current HTTP request; may be <c>null</c>.</param>
+        /// <param name="expectedSecurityVersion">中文：主身份票据和数据库确认的安全版本。English: Security version confirmed by the main auth ticket and database.</param>
         /// <param name="roles">中文：成功时返回规范化角色数组；失败时为空数组。English: Normalized role array on success; otherwise an empty array.</param>
         /// <returns>中文：成功读取未过期加密票据时为 <c>true</c>。English: <c>true</c> when an unexpired encrypted ticket is read successfully.</returns>
-        public static bool TryReadRoles(HttpRequest request, out string[] roles)
+        public static bool TryReadRoles(HttpRequest request, long expectedSecurityVersion, out string[] roles)
         {
             roles = new string[0];
 
@@ -55,7 +58,15 @@ namespace ASPNET.StarterKit.Portal
                     return false;
                 }
 
-                roles = PortalRoleParser.Parse(ticket.UserData);
+                long securityVersion;
+                string roleData;
+                if (!TryParseRoleData(ticket.UserData, out securityVersion, out roleData) ||
+                    securityVersion != expectedSecurityVersion)
+                {
+                    return false;
+                }
+
+                roles = PortalRoleParser.Parse(roleData);
                 return true;
             }
             catch
@@ -72,15 +83,22 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="response">中文：当前 HTTP 响应。English: Current HTTP response.</param>
         /// <param name="request">中文：当前 HTTP 请求，用于解析虚拟目录 Cookie Path。English: Current HTTP request used to resolve the virtual-directory cookie Path.</param>
         /// <param name="userName">中文：认证票据中的用户登录名称。English: User sign-in name stored in the authentication ticket.</param>
+        /// <param name="securityVersion">中文：当前用户安全版本。English: Current user security version.</param>
         /// <param name="roles">中文：要写入票据的角色集合。English: Role collection to write into the ticket.</param>
         /// <param name="isPersistent">中文：是否写为持久 Cookie。English: Whether to write a persistent cookie.</param>
-        public static void WriteRolesCookie(HttpResponse response, HttpRequest request, string userName, string[] roles, bool isPersistent)
+        public static void WriteRolesCookie(
+            HttpResponse response,
+            HttpRequest request,
+            string userName,
+            long securityVersion,
+            string[] roles,
+            bool isPersistent)
         {
             // 中文：Forms Authentication 票据和持久 Cookie 使用同一 timeout，避免二者产生不同过期边界。
             // English: Use the same timeout for the Forms Authentication ticket and persistent cookie to avoid divergent expiration boundaries.
             DateTime issuedAt = DateTime.Now;
             DateTime expiresAt = issuedAt.Add(FormsAuthentication.Timeout);
-            string roleData = PortalRoleParser.Join(roles);
+            string roleData = BuildRoleData(securityVersion, roles);
 
             var ticket = new FormsAuthenticationTicket(
                 1,
@@ -134,6 +152,38 @@ namespace ASPNET.StarterKit.Portal
             }
 
             return applicationPath.TrimEnd('/');
+        }
+
+        private static string BuildRoleData(long securityVersion, string[] roles)
+        {
+            return PortalAuthenticationService.FormatSecurityVersion(securityVersion) +
+                   RolesDataSeparator +
+                   PortalRoleParser.Join(roles);
+        }
+
+        private static bool TryParseRoleData(string value, out long securityVersion, out string roleData)
+        {
+            securityVersion = 0;
+            roleData = string.Empty;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return false;
+            }
+
+            int separatorIndex = value.IndexOf(RolesDataSeparator, StringComparison.Ordinal);
+            if (separatorIndex < 0)
+            {
+                return false;
+            }
+
+            string versionData = value.Substring(0, separatorIndex);
+            if (!PortalAuthenticationService.TryParseSecurityVersion(versionData, out securityVersion))
+            {
+                return false;
+            }
+
+            roleData = value.Substring(separatorIndex + RolesDataSeparator.Length);
+            return true;
         }
     }
 }

@@ -14,12 +14,12 @@ namespace ASPNET.StarterKit.Portal
     /// <remarks>
     /// 中文：页面要求 <c>Admins</c> 角色，并只编辑能由数值 userId 规范解析到的用户。用户创建由
     /// <c>Users.ascx</c> 的显式管理员 POST 完成；本页不会因访问地址缺少用户名而写入数据库。
-    /// 角色调整不会立即撤销目标用户现有的角色 Cookie。
+    /// 角色调整和密码重置会递增目标用户安全版本，使旧身份票据和角色 Cookie 在后续请求中失效。
     ///
     /// English: The page requires the <c>Admins</c> role and edits only a user canonically resolved by numeric userId.
     /// User creation occurs through the explicit administrator POST in <c>Users.ascx</c>; this page never writes to
-    /// the database merely because an address lacks a user name. Role changes do not immediately revoke the target
-    /// user's existing role cookie.
+    /// the database merely because an address lacks a user name. Role changes and password resets increment the target
+    /// user's security version so older authentication and role cookies are invalidated on later requests.
     /// </remarks>
     public partial class ManageUsers : PortalPage<ManageUsers>
     {
@@ -115,10 +115,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：更新当前用户的邮箱和密码摘要，并记录不含密码或邮箱原文的审计。
+        /// 中文：更新当前用户的邮箱并重置强哈希凭据，随后记录不含密码或邮箱原文的审计。
         ///
-        /// English: Updates the current user's email and password digest, then records audit data without the password
-        /// or raw email address.
+        /// English: Updates the current user's email and resets the strong-hash credential, then records audit data
+        /// without the password or raw email address.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
         /// <param name="e">中文：事件数据。English: Event data.</param>
@@ -138,13 +138,20 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
-                UsersDB.UpdateUser(userId, email, PortalSecurity.Encrypt(Password.Text));
+                UsersDB.UpdateUser(userId, email, Password.Text);
                 PortalOperationAudit.Record(
                     "UserAdministration",
                     "UpdateProfile",
                     "User",
                     userId.ToString(),
                     "Updated user profile.",
+                    Context);
+                PortalOperationAudit.Record(
+                    "SecurityCredentials",
+                    "Reset",
+                    "User",
+                    userId.ToString(),
+                    "User credential reset by administrator.",
                     Context);
                 RedirectToCurrentUser();
             }

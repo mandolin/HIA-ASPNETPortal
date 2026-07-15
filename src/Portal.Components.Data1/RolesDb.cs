@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -62,12 +63,16 @@ namespace ASPNET.StarterKit.Portal
         {
             // 根据角色ID获取角色对象。
             var item = _context.Roles.Single(i => i.RoleId == roleId);
+            var affectedUserIds = item.Users == null
+                ? new List<int>()
+                : item.Users.Select(user => user.UserId).ToList();
 
             // 从上下文中移除角色。
             _context.Roles.Remove(item);
 
             // 保存更改到数据库。
             _context.SaveChanges();
+            IncrementSecurityVersions(affectedUserIds, "RoleDeleted");
         }
 
         /// <summary>
@@ -79,12 +84,16 @@ namespace ASPNET.StarterKit.Portal
         {
             // 根据角色ID获取角色对象。
             var item = _context.Roles.Single(i => i.RoleId == roleId);
+            var affectedUserIds = item.Users == null
+                ? new List<int>()
+                : item.Users.Select(user => user.UserId).ToList();
 
             // 更新角色名称。
             item.RoleName = roleName;
 
             // 保存更改到数据库。
             _context.SaveChanges();
+            IncrementSecurityVersions(affectedUserIds, "RoleUpdated");
         }
 
         /// <summary>
@@ -114,6 +123,7 @@ namespace ASPNET.StarterKit.Portal
 
             // 保存更改到数据库。
             _context.SaveChanges();
+            IncrementSecurityVersion(userId, "RoleMembershipAdded");
         }
 
         /// <summary>
@@ -132,6 +142,7 @@ namespace ASPNET.StarterKit.Portal
 
             // 保存更改到数据库。
             _context.SaveChanges();
+            IncrementSecurityVersion(userId, "RoleMembershipRemoved");
         }
 
         /// <summary>
@@ -145,5 +156,63 @@ namespace ASPNET.StarterKit.Portal
         }
 
         #endregion
+
+        private void IncrementSecurityVersions(IEnumerable<int> userIds, string reason)
+        {
+            foreach (int userId in userIds.Distinct())
+            {
+                IncrementSecurityVersion(userId, reason);
+            }
+        }
+
+        private void IncrementSecurityVersion(int userId, string reason)
+        {
+            if (userId <= 0 || !HasSecurityStateTable())
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                @"
+UPDATE [dbo].[Portal_UserSecurityStates]
+SET [SecurityVersion] = [SecurityVersion] + 1,
+    [ChangedUtc] = SYSUTCDATETIME(),
+    [ChangeReason] = @p1
+WHERE [UserId] = @p0;
+
+IF @@ROWCOUNT = 0
+BEGIN
+    INSERT INTO [dbo].[Portal_UserSecurityStates] ([UserId], [SecurityVersion], [ChangedUtc], [ChangeReason])
+    SELECT @p0, @p2, SYSUTCDATETIME(), @p1
+    WHERE EXISTS (SELECT 1 FROM [dbo].[Portal_Users] WHERE [UserID] = @p0);
+END",
+                userId,
+                NormalizeReason(reason),
+                1);
+        }
+
+        private bool HasSecurityStateTable()
+        {
+            try
+            {
+                string sql = "SELECT CASE WHEN OBJECT_ID(N'[dbo].[Portal_UserSecurityStates]', N'U') IS NULL THEN 0 ELSE 1 END";
+                return _context.Database.SqlQuery<int>(sql).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private static string NormalizeReason(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return "Unspecified";
+            }
+
+            string normalized = value.Trim();
+            return normalized.Substring(0, Math.Min(normalized.Length, 100));
+        }
     }
 }

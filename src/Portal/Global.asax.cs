@@ -305,14 +305,14 @@ namespace ASPNET.StarterKit.Portal
         /// English: Handles the application's AuthenticateRequest event and builds a role-bearing <see cref="GenericPrincipal"/> for authenticated requests.
         /// </summary>
         /// <remarks>
-        /// 中文：优先读取加密的 <c>portalroles</c> Cookie；缺失、过期或无法解密时从数据库读取角色并重建。
-        /// 角色变更不会主动使既有 Cookie 失效，因此通常在票据到期、登出或读取失败后才对已有会话生效。
+        /// 中文：先校验身份票据中的安全版本是否与数据库一致，再读取加密的 <c>portalroles</c> Cookie；
+        /// 角色 Cookie 缺失、过期、无法解密或安全版本不匹配时从数据库读取角色并重建。
         /// 此方法不创建 HIA 用户模型，只维持当前 Web Forms 请求级身份兼容。
         ///
-        /// English: The encrypted <c>portalroles</c> cookie is read first; when missing, expired, or undecryptable,
-        /// roles are loaded from the database and the cookie is rebuilt. Role changes do not proactively invalidate
-        /// issued cookies, so they normally affect an existing session only after ticket expiration, sign-out, or a
-        /// read failure. This method does not create an HIA user model; it maintains current Web Forms request-identity compatibility.
+        /// English: The security version in the authentication ticket is validated against the database before the
+        /// encrypted <c>portalroles</c> cookie is read. When the role cookie is missing, expired, undecryptable, or
+        /// security-version mismatched, roles are loaded from the database and the cookie is rebuilt. This method does
+        /// not create an HIA user model; it maintains current Web Forms request-identity compatibility.
         /// </remarks>
         /// <param name="sender">中文：事件源。English: Event source.</param>
         /// <param name="e">中文：事件数据。English: Event data.</param>
@@ -321,19 +321,44 @@ namespace ASPNET.StarterKit.Portal
             if (Request.IsAuthenticated)
             {
                 string[] roles;
+                var usersDb = Container.Resolve<IUsersDb>();
+                var formsIdentity = Context.User?.Identity as FormsIdentity;
+                long ticketSecurityVersion;
+                long databaseSecurityVersion = usersDb.GetSecurityVersionByUserName(Context.User.Identity.Name);
 
-                // 中文：优先使用已验证 Cookie；回退读取数据库可恢复失效票据，但不是角色即时撤销机制。
-                // English: Prefer a validated cookie; database fallback recovers from an invalid ticket but is not immediate role revocation.
-                if (!PortalAuthenticationCookies.TryReadRoles(Request, out roles))
+                if (!PortalAuthenticationService.TryReadSecurityVersion(formsIdentity, out ticketSecurityVersion) ||
+                    ticketSecurityVersion != databaseSecurityVersion)
+                {
+                    PortalOperationAudit.Record(
+                        "SecuritySession",
+                        "Revoke",
+                        "User",
+                        Context.User.Identity.Name,
+                        "Authentication ticket security version mismatch.",
+                        Context);
+                    PortalAuthenticationService.SignOut(Response, Request);
+                    Context.User = null;
+                    Response.Redirect(Request.ApplicationPath, false);
+                    Context.ApplicationInstance.CompleteRequest();
+                    return;
+                }
+
+                // 中文：优先使用安全版本匹配的角色 Cookie；缺失或失效时从数据库重建。
+                // English: Prefer a role cookie whose security version matches; rebuild from the database when absent or invalid.
+                if (!PortalAuthenticationCookies.TryReadRoles(Request, databaseSecurityVersion, out roles))
                 {
                     // 中文：只将角色名称写入加密票据，不写入密码、用户资料或其他敏感业务数据。
                     // English: Write role names only into the encrypted ticket, never passwords, profile data, or other sensitive business data.
-                    var usersDb = Container.Resolve<IUsersDb>();
                     roles = PortalRoleParser.Parse(string.Join(";", usersDb.GetRoleNamesByUser(User.Identity.Name)));
 
-                    var formsIdentity = Context.User?.Identity as FormsIdentity;
                     bool isPersistent = formsIdentity?.Ticket?.IsPersistent ?? false;
-                    PortalAuthenticationCookies.WriteRolesCookie(Response, Request, Context.User.Identity.Name, roles, isPersistent);
+                    PortalAuthenticationCookies.WriteRolesCookie(
+                        Response,
+                        Request,
+                        Context.User.Identity.Name,
+                        databaseSecurityVersion,
+                        roles,
+                        isPersistent);
                 }
 
                 // 中文：当前只构造请求级 GenericPrincipal；SysUser/BizUser 等 HIA 模型保留给后续边界设计。

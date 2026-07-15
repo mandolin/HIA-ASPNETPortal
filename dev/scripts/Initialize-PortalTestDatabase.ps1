@@ -4,8 +4,8 @@
 Initializes an isolated Portal test database selected by an external connection string.
 
 .DESCRIPTION
-仅当目标数据库不存在且调用方显式确认时，按历史基础脚本和当前 P2 迁移建立测试库。
-Only when the target database is absent and the caller explicitly confirms, runs the legacy base scripts and current P2 migrations.
+仅当目标数据库不存在且调用方显式确认时，按历史基础脚本和当前 P2/P3/P5 迁移建立测试库。
+Only when the target database is absent and the caller explicitly confirms, runs the legacy base scripts and current P2/P3/P5 migrations.
 
 真实连接串只从仓库外 XML 文件读取，脚本不会输出或保存密码、服务器地址或完整连接串。
 The real connection string is read only from an external XML file; passwords, server addresses, and full connection strings are never output or persisted.
@@ -200,7 +200,7 @@ try {
         return
     }
 
-    Write-Host ('[1/8] Creating isolated database {0}.' -f $targetDatabaseName)
+    Write-Host ('[1/9] Creating isolated database {0}.' -f $targetDatabaseName)
     $initializationStarted = $true
     Invoke-SqlScript -Connection $masterConnection -Path (Join-Path $repoRoot 'src/Setup/Portal_CreateDB.sql') -QuotedDatabaseName $quotedTargetDatabaseName -ExpectedCreateDatabaseCount 1 -ExpectedUseDatabaseCount 1 -TimeoutSeconds $CommandTimeoutSeconds
 
@@ -214,18 +214,19 @@ try {
         [pscustomobject]@{ Number = 5; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_UserRegistration.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying registration migration' },
         [pscustomobject]@{ Number = 6; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_OperationAudits.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying operation-audit migration' },
         [pscustomobject]@{ Number = 7; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_TabThemeOverrides.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying tab-theme migration' },
-        [pscustomobject]@{ Number = 8; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_ModulePackageStates.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying module-package-state migration' }
+        [pscustomobject]@{ Number = 8; Path = (Join-Path $repoRoot 'src/Setup/PortalCfg_ModulePackageStates.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying module-package-state migration' },
+        [pscustomobject]@{ Number = 9; Path = (Join-Path $repoRoot 'src/Setup/Portal_UserCredentials.sql'); CreateCount = 0; UseCount = 0; Description = 'Applying user-credential and security-version migration' }
     )
 
     foreach ($step in $steps) {
-        Write-Host ('[{0}/8] {1}.' -f $step.Number, $step.Description)
+        Write-Host ('[{0}/9] {1}.' -f $step.Number, $step.Description)
         Invoke-SqlScript -Connection $targetConnection -Path $step.Path -QuotedDatabaseName $quotedTargetDatabaseName -ExpectedCreateDatabaseCount $step.CreateCount -ExpectedUseDatabaseCount $step.UseCount -TimeoutSeconds $CommandTimeoutSeconds
     }
 
     [pscustomobject]@{
         DatabaseName = $targetDatabaseName
         ServerMajorVersion = $serverMajorVersion
-        CompletedSteps = 8
+        CompletedSteps = 9
         Status = 'Initialized'
     }
 }

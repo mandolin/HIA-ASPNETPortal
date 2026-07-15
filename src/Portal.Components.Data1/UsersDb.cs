@@ -1,30 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：基于门户安全数据库上下文的既有用户和注册审核数据访问实现。
+    /// 中文：基于门户安全数据库上下文的用户、凭据和注册审核数据访问实现。
     ///
-    /// English: Legacy user and registration-review data-access implementation backed by the Portal security database context.
+    /// English: User, credential, and registration-review data-access implementation backed by the Portal security database context.
     /// </summary>
     /// <remarks>
-    /// 中文：此实现保留既有用户表的密码摘要格式，并在注册审核、邀请码和旧库兼容之间提供最小过渡行为。
-    /// 它不实现新密码哈希迁移、邀请创建、全局会话撤销或细粒度授权。
+    /// 中文：P5.2 起，新建、注册和重置密码写入 <c>Portal_UserCredentials</c> 强哈希表，并通过
+    /// <c>Portal_UserSecurityStates</c> 维护会话安全版本。旧 <c>Portal_Users.Password</c> 中的 MD5
+    /// 仅用于尚未升级用户的首次兼容登录；一旦强哈希凭据存在，登录不得再回退到旧字段。
     ///
-    /// English: This implementation retains the legacy user-table password-digest format and provides minimal
-    /// transition behavior across registration review, invite codes, and legacy databases. It does not implement
-    /// a new password-hash migration, invite creation, global session revocation, or fine-grained authorization.
+    /// English: Starting with P5.2, newly created, registered, and reset passwords are written to the
+    /// <c>Portal_UserCredentials</c> strong-hash table, while <c>Portal_UserSecurityStates</c> maintains the
+    /// session security version. Legacy MD5 values in <c>Portal_Users.Password</c> are used only for the first
+    /// compatibility sign-in of users that have not yet been upgraded; once a strong credential exists, sign-in
+    /// must not fall back to the legacy column.
     /// </remarks>
     public class UsersDb : IUsersDb
     {
+        private const long InitialSecurityVersion = 1;
+        private const string CredentialTableName = "Portal_UserCredentials";
+        private const string SecurityStateTableName = "Portal_UserSecurityStates";
         private readonly PortalSecurityDbContext _context;
 
         /// <summary>
-        /// 中文：初始化用户和注册审核数据访问实现。
+        /// 中文：初始化用户、凭据和注册审核数据访问实现。
         ///
-        /// English: Initializes the user and registration-review data-access implementation.
+        /// English: Initializes the user, credential, and registration-review data-access implementation.
         /// </summary>
         /// <param name="context">中文：门户安全数据库上下文。English: Portal security database context.</param>
         public UsersDb(PortalSecurityDbContext context)
@@ -35,36 +42,53 @@ namespace ASPNET.StarterKit.Portal
         #region IUsersDb Members
 
         /// <summary>
-        /// 中文：添加由管理员或既有流程创建的用户。
+        /// 中文：添加由管理员或既有流程创建的用户；非空密码写入强哈希凭据表。
         ///
-        /// English: Adds a user created by an administrator or an existing legacy flow.
+        /// English: Adds a user created by an administrator or an existing legacy flow; non-empty passwords are written to the strong-hash credential table.
         /// </summary>
         /// <param name="fullName">中文：用户登录名称。English: User sign-in name.</param>
         /// <param name="email">中文：用户邮箱地址。English: User email address.</param>
-        /// <param name="password">中文：既有格式密码摘要。English: Legacy-format password digest.</param>
+        /// <param name="password">中文：用户提交的密码输入；空值表示创建不可登录占位用户。English: Submitted password input; empty creates a non-signable placeholder user.</param>
         /// <returns>中文：成功时返回新用户标识；预期写入失败时返回 <c>-1</c>。English: New user identifier on success; <c>-1</c> for expected write failures.</returns>
         public int AddUser(string fullName, string email, string password)
         {
-            // 中文：管理员和既有入口保留当前用户表写入格式。
-            // English: Preserve the current user-table write format for administration and legacy entry points.
-            var item = new UserItem
+            string normalizedPassword = password ?? string.Empty;
+            if (!string.IsNullOrEmpty(normalizedPassword) && !HasCredentialTables())
             {
-                Name = fullName,
-                Email = email,
-                Password = password
-            };
+                return -1;
+            }
 
             try
             {
-                // 中文：将新用户写入既有用户表。
-                // English: Write the new user to the legacy user table.
-                _context.Users.Add(item);
+                UserItem item;
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    item = new UserItem
+                    {
+                        Name = fullName,
+                        Email = email,
+                        // 中文：新用户不再生成 MD5；旧字段只保留既有数据的迁移样本。
+                        // English: New users no longer receive MD5; the legacy column remains only for existing data migration samples.
+                        Password = string.Empty
+                    };
 
-                _context.SaveChanges();
+                    _context.Users.Add(item);
+                    _context.SaveChanges();
+
+                    EnsureSecurityState(item.UserId, "UserCreated");
+                    if (!string.IsNullOrEmpty(normalizedPassword))
+                    {
+                        UpsertCredential(item.UserId, normalizedPassword, null, null, false, null);
+                    }
+
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
 
                 // 中文：管理员或旧入口创建的用户默认已批准；缺少扩展表时保持旧行为。
                 // English: Users created by administration or legacy entry points are approved by default; missing extension tables preserve legacy behavior.
                 TryEnsureApprovedRegistration(item.UserId, "system-admin");
+                return item.UserId;
             }
             catch (Exception)
             {
@@ -72,22 +96,20 @@ namespace ASPNET.StarterKit.Portal
                 // English: Preserve the legacy interface contract: expected write failures return -1 and do not log sensitive input here.
                 return -1;
             }
-
-            return item.UserId;
         }
 
         /// <summary>
-        /// 中文：添加自主注册用户，并在同一事务写入注册审核元数据和邀请码使用次数。
+        /// 中文：添加自主注册用户，并在同一事务写入强哈希凭据、注册审核元数据和邀请码使用次数。
         ///
-        /// English: Adds a self-registered user and writes registration-review metadata and invite usage in one transaction.
+        /// English: Adds a self-registered user and writes the strong-hash credential, registration-review metadata, and invite usage in one transaction.
         /// </summary>
         /// <param name="fullName">中文：用户登录名称。English: User sign-in name.</param>
         /// <param name="email">中文：用户邮箱地址。English: User email address.</param>
-        /// <param name="password">中文：既有格式密码摘要。English: Legacy-format password digest.</param>
+        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
         /// <param name="employeeCode">中文：可为空的员工号。English: Optional employee code.</param>
         /// <param name="inviteCode">中文：可为空的邀请码；空值代表当前允许的非邀请注册。English: Optional invite code; an empty value represents currently allowed non-invite registration.</param>
         /// <param name="requiresApproval">中文：是否以待审核状态创建用户。English: Whether to create the user in pending-approval status.</param>
-        /// <returns>中文：成功时返回新用户标识；审核表不可用或邀请码无效时返回 <c>-1</c>。English: New user identifier on success; <c>-1</c> when the review table is unavailable or the invite is invalid.</returns>
+        /// <returns>中文：成功时返回新用户标识；审核表、凭据表不可用或邀请码无效时返回 <c>-1</c>。English: New user identifier on success; <c>-1</c> when review tables, credential tables, or invites are unavailable.</returns>
         public int AddSelfRegisteredUser(
             string fullName,
             string email,
@@ -96,7 +118,7 @@ namespace ASPNET.StarterKit.Portal
             string inviteCode,
             bool requiresApproval)
         {
-            if (!HasRegistrationTable())
+            if (!HasRegistrationTable() || !HasCredentialTables())
             {
                 return -1;
             }
@@ -116,11 +138,14 @@ namespace ASPNET.StarterKit.Portal
                     {
                         Name = fullName,
                         Email = email,
-                        Password = password
+                        Password = string.Empty
                     };
 
                     _context.Users.Add(item);
                     _context.SaveChanges();
+
+                    EnsureSecurityState(item.UserId, "SelfRegistration");
+                    UpsertCredential(item.UserId, password, null, null, false, null);
 
                     // 中文：所有注册审核时间统一以 UTC 保存。
                     // English: Store all registration-review timestamps in UTC.
@@ -188,8 +213,6 @@ namespace ASPNET.StarterKit.Portal
                 throw new InvalidOperationException("Registration metadata table is not available.");
             }
 
-            // 中文：批准时间和操作人仅保留审核事实，不记录密码或会话信息。
-            // English: Approval time and operator retain only review facts, never password or session information.
             DateTime nowUtc = DateTime.UtcNow;
             var registration = _context.UserRegistrations.SingleOrDefault(i => i.UserId == userId);
             if (registration == null)
@@ -215,6 +238,7 @@ namespace ASPNET.StarterKit.Portal
             }
 
             _context.SaveChanges();
+            IncrementSecurityVersion(userId, "RegistrationApproved");
         }
 
         /// <summary>
@@ -245,6 +269,7 @@ namespace ASPNET.StarterKit.Portal
             registration.ApprovedBy = null;
             registration.ReviewNote = null;
             _context.SaveChanges();
+            IncrementSecurityVersion(userId, "RegistrationRejected");
         }
 
         /// <summary>
@@ -337,20 +362,36 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：更新指定用户的邮箱和密码摘要。
+        /// 中文：更新指定用户的邮箱并重置强哈希凭据。
         ///
-        /// English: Updates the specified user's email and password digest.
+        /// English: Updates the specified user's email and resets the strong-hash credential.
         /// </summary>
         /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
         /// <param name="email">中文：新的邮箱地址。English: New email address.</param>
-        /// <param name="password">中文：新的既有格式密码摘要，不得写入审计正文或诊断日志。English: New legacy-format password digest; it must not be written to audit details or diagnostic logs.</param>
+        /// <param name="password">中文：新的密码输入，不得写入审计正文或诊断日志。English: New password input; it must not be written to audit details or diagnostic logs.</param>
         public void UpdateUser(int userId, string email, string password)
         {
-            var item = _context.Users.Single(i => i.UserId == userId);
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new InvalidOperationException("A password is required to reset user credentials.");
+            }
 
-            item.Email = email;
-            item.Password = password;
-            _context.SaveChanges();
+            if (!HasCredentialTables())
+            {
+                throw new InvalidOperationException("Credential metadata tables are not available.");
+            }
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                var item = _context.Users.Single(i => i.UserId == userId);
+
+                item.Email = email;
+                item.Password = string.Empty;
+                UpsertCredential(userId, password, null, null, false, null);
+                _context.SaveChanges();
+                IncrementSecurityVersion(userId, "CredentialReset");
+                transaction.Commit();
+            }
         }
 
         /// <summary>
@@ -360,10 +401,8 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="name">中文：用户登录名称。English: User sign-in name.</param>
         /// <returns>中文：角色集合；没有角色时为空集合。English: Role collection; empty when the user has no roles.</returns>
-        public IEnumerable<IRoleItem> GetRolesByUser(string name) 
+        public IEnumerable<IRoleItem> GetRolesByUser(string name)
         {
-            // 中文：待审核用户可能没有角色，返回空集合以保持后台可查看。
-            // English: Pending users may have no roles; return an empty collection so administration UI remains viewable.
             var item = _context.Users.Single(i => i.Name == name);
             return item.Roles == null
                 ? Enumerable.Empty<IRoleItem>()
@@ -379,8 +418,6 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>中文：角色名称集合；没有角色时为空集合。English: Role-name collection; empty when the user has no roles.</returns>
         public IEnumerable<string> GetRoleNamesByUser(string name)
         {
-            // 中文：角色 Cookie 缺失或过期时由此集合重建请求级身份。
-            // English: This collection rebuilds the request-level identity when the role cookie is missing or expired.
             var item = _context.Users.Single(i => i.Name == name);
             return item.Roles == null
                 ? Enumerable.Empty<string>()
@@ -412,26 +449,194 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：校验登录输入的摘要和注册审核状态。
+        /// 中文：校验登录输入密码、注册审核状态和 P5.2 强凭据。
         ///
-        /// English: Validates the submitted sign-in digest and registration-review status.
+        /// English: Validates the submitted password, registration-review status, and P5.2 strong credential.
         /// </summary>
         /// <param name="emailOrName">中文：用户输入的邮箱或登录名称。English: Email or sign-in name entered by the user.</param>
-        /// <param name="password">中文：既有用户表兼容的密码摘要。English: Password digest compatible with the legacy user table.</param>
+        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
+        /// <returns>中文：登录结果；失败时为通用失败对象。English: Sign-in result; generic failure object on failure.</returns>
+        public PortalSignInResult SignIn(string emailOrName, string password)
+        {
+            string normalizedLogin = Normalize(emailOrName);
+            if (string.IsNullOrEmpty(normalizedLogin) || password == null)
+            {
+                return PortalSignInResult.Failed();
+            }
+
+            var item = _context.Users
+                .AsNoTracking()
+                .SingleOrDefault(i => i.Email == normalizedLogin || i.Name == normalizedLogin);
+
+            if (item == null || !IsLoginAllowed(item.UserId))
+            {
+                return PortalSignInResult.Failed();
+            }
+
+            bool hasCredentialTables = HasCredentialTables();
+            if (hasCredentialTables)
+            {
+                var credential = _context.UserCredentials
+                    .AsNoTracking()
+                    .SingleOrDefault(i => i.UserId == item.UserId);
+
+                if (credential != null)
+                {
+                    if (credential.RequiresReset)
+                    {
+                        return new PortalSignInResult(false, item.UserId, SafeName(item.Name), GetSecurityVersionByUserId(item.UserId), false, true);
+                    }
+
+                    if (!PortalPasswordHasher.Verify(
+                        password,
+                        credential.PasswordFormat,
+                        credential.PasswordSalt,
+                        credential.PasswordHash,
+                        credential.IterationCount))
+                    {
+                        return PortalSignInResult.Failed();
+                    }
+
+                    MarkCredentialVerified(item.UserId);
+                    return new PortalSignInResult(true, item.UserId, SafeName(item.Name), GetSecurityVersionByUserId(item.UserId), false, false);
+                }
+            }
+
+            if (!VerifyLegacyPassword(item, password))
+            {
+                return PortalSignInResult.Failed();
+            }
+
+            bool upgradedLegacyCredential = false;
+            if (hasCredentialTables)
+            {
+                DateTime nowUtc = DateTime.UtcNow;
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    EnsureSecurityState(item.UserId, "LegacyCredentialUpgrade");
+                    UpsertCredential(item.UserId, password, nowUtc, nowUtc, false, null);
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+
+                upgradedLegacyCredential = true;
+            }
+
+            return new PortalSignInResult(
+                true,
+                item.UserId,
+                SafeName(item.Name),
+                GetSecurityVersionByUserId(item.UserId),
+                upgradedLegacyCredential,
+                false);
+        }
+
+        /// <summary>
+        /// 中文：兼容旧调用点的登录方法；新代码应优先使用 <see cref="SignIn"/>。
+        ///
+        /// English: Sign-in method retained for legacy call sites; new code should prefer <see cref="SignIn"/>.
+        /// </summary>
+        /// <param name="emailOrName">中文：用户输入的邮箱或登录名称。English: Email or sign-in name entered by the user.</param>
+        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
         /// <returns>中文：登录成功且允许访问时返回用户名；否则为空字符串。English: User name when sign-in succeeds and access is allowed; otherwise an empty string.</returns>
         public string Login(string emailOrName, string password)
         {
-            // 中文：当前查询比较历史摘要；强哈希迁移应增加兼容验证层，而不能直接替换此条件。
-            // English: The current query compares legacy digests; a strong-hash migration needs a compatibility verifier instead of directly replacing this condition.
-            var item = _context.Users.SingleOrDefault(i => (i.Email == emailOrName || i.Name == emailOrName) && i.Password == password);
+            PortalSignInResult result = SignIn(emailOrName, password);
+            return result.Succeeded ? result.UserName : string.Empty;
+        }
 
-            // 中文：审核元数据可用时，只有已批准状态可登录。
-            // English: When review metadata is available, only approved status may sign in.
-            if (item != null && IsLoginAllowed(item.UserId))
+        /// <summary>
+        /// 中文：按用户名称读取当前安全版本；缺少 P5.2 表时返回 <c>0</c>。
+        ///
+        /// English: Reads the current security version by user name; returns <c>0</c> when P5.2 tables are absent.
+        /// </summary>
+        /// <param name="userName">中文：用户登录名称。English: User sign-in name.</param>
+        /// <returns>中文：当前安全版本。English: Current security version.</returns>
+        public long GetSecurityVersionByUserName(string userName)
+        {
+            string normalizedUserName = Normalize(userName);
+            if (string.IsNullOrEmpty(normalizedUserName))
             {
-                return item.Name.Trim();
+                return 0;
             }
-            return string.Empty;
+
+            try
+            {
+                var userIds = _context.Database.SqlQuery<int>(
+                    "SELECT TOP (1) [UserID] FROM [dbo].[Portal_Users] WHERE [Name] = @p0",
+                    normalizedUserName).ToList();
+                return userIds.Count == 0 ? 0 : GetSecurityVersionByUserId(userIds[0]);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 中文：按用户标识读取当前安全版本；缺少 P5.2 表时返回 <c>0</c>。
+        ///
+        /// English: Reads the current security version by user id; returns <c>0</c> when P5.2 tables are absent.
+        /// </summary>
+        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
+        /// <returns>中文：当前安全版本。English: Current security version.</returns>
+        public long GetSecurityVersionByUserId(int userId)
+        {
+            if (userId <= 0 || !HasSecurityStateTable())
+            {
+                return 0;
+            }
+
+            try
+            {
+                var versions = _context.Database.SqlQuery<long>(
+                    "SELECT [SecurityVersion] FROM [dbo].[Portal_UserSecurityStates] WHERE [UserId] = @p0",
+                    userId).ToList();
+                if (versions.Count > 0)
+                {
+                    return versions[0];
+                }
+
+                EnsureSecurityState(userId, "AutoCreateSecurityState");
+                return InitialSecurityVersion;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 中文：递增指定用户的安全版本，使旧身份票据和角色 Cookie 在下一次请求失效。
+        ///
+        /// English: Increments the security version of the specified user so older auth tickets and role cookies become invalid on the next request.
+        /// </summary>
+        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
+        /// <param name="reason">中文：非敏感变更原因。English: Non-sensitive change reason.</param>
+        public void IncrementSecurityVersion(int userId, string reason)
+        {
+            if (userId <= 0 || !HasSecurityStateTable())
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                @"
+UPDATE [dbo].[Portal_UserSecurityStates]
+SET [SecurityVersion] = [SecurityVersion] + 1,
+    [ChangedUtc] = SYSUTCDATETIME(),
+    [ChangeReason] = @p1
+WHERE [UserId] = @p0;
+
+IF @@ROWCOUNT = 0
+BEGIN
+    INSERT INTO [dbo].[Portal_UserSecurityStates] ([UserId], [SecurityVersion], [ChangedUtc], [ChangeReason])
+    SELECT @p0, @p2, SYSUTCDATETIME(), @p1
+    WHERE EXISTS (SELECT 1 FROM [dbo].[Portal_Users] WHERE [UserID] = @p0);
+END",
+                userId,
+                NormalizeReason(reason),
+                InitialSecurityVersion);
         }
 
         #endregion
@@ -525,6 +730,102 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        private void UpsertCredential(
+            int userId,
+            string password,
+            DateTime? legacyUpgradedUtc,
+            DateTime? lastVerifiedUtc,
+            bool requiresReset,
+            string resetReason)
+        {
+            if (!HasCredentialTables())
+            {
+                throw new InvalidOperationException("Credential metadata tables are not available.");
+            }
+
+            PortalPasswordHash hash = PortalPasswordHasher.CreateHash(password);
+            DateTime nowUtc = DateTime.UtcNow;
+            var credential = _context.UserCredentials.SingleOrDefault(i => i.UserId == userId);
+            if (credential == null)
+            {
+                credential = new UserCredentialItem
+                {
+                    UserId = userId,
+                    CreatedUtc = nowUtc
+                };
+                _context.UserCredentials.Add(credential);
+            }
+
+            credential.CredentialVersion = 1;
+            credential.PasswordFormat = hash.Format;
+            credential.PasswordHash = hash.Hash;
+            credential.PasswordSalt = hash.Salt;
+            credential.IterationCount = hash.IterationCount;
+            credential.UpdatedUtc = nowUtc;
+            credential.LastVerifiedUtc = lastVerifiedUtc;
+            credential.LegacyUpgradedUtc = legacyUpgradedUtc;
+            credential.RequiresReset = requiresReset;
+            credential.ResetReason = string.IsNullOrWhiteSpace(resetReason) ? null : NormalizeReason(resetReason);
+        }
+
+        private void MarkCredentialVerified(int userId)
+        {
+            if (!HasCredentialTable())
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                "UPDATE [dbo].[Portal_UserCredentials] SET [LastVerifiedUtc] = SYSUTCDATETIME() WHERE [UserId] = @p0",
+                userId);
+        }
+
+        private void EnsureSecurityState(int userId, string reason)
+        {
+            if (userId <= 0 || !HasSecurityStateTable())
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                @"
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Portal_UserSecurityStates] WHERE [UserId] = @p0)
+BEGIN
+    INSERT INTO [dbo].[Portal_UserSecurityStates] ([UserId], [SecurityVersion], [ChangedUtc], [ChangeReason])
+    SELECT @p0, @p2, SYSUTCDATETIME(), @p1
+    WHERE EXISTS (SELECT 1 FROM [dbo].[Portal_Users] WHERE [UserID] = @p0);
+END",
+                userId,
+                NormalizeReason(reason),
+                InitialSecurityVersion);
+        }
+
+        private bool VerifyLegacyPassword(UserItem item, string password)
+        {
+            if (item == null || string.IsNullOrEmpty(item.Password))
+            {
+                return false;
+            }
+
+            string legacyDigest = PortalSecurity.Encrypt(password);
+            return string.Equals(item.Password, legacyDigest, StringComparison.Ordinal);
+        }
+
+        private bool HasCredentialTables()
+        {
+            return HasCredentialTable() && HasSecurityStateTable();
+        }
+
+        private bool HasCredentialTable()
+        {
+            return HasTable(CredentialTableName);
+        }
+
+        private bool HasSecurityStateTable()
+        {
+            return HasTable(SecurityStateTableName);
+        }
+
         private bool HasRegistrationTable()
         {
             return HasTable("PortalCfg_UserRegistrations");
@@ -567,9 +868,25 @@ namespace ASPNET.StarterKit.Portal
                 source);
         }
 
+        private static string SafeName(string value)
+        {
+            return value == null ? string.Empty : value.Trim();
+        }
+
         private static string Normalize(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? string.Empty : value.Trim();
+        }
+
+        private static string NormalizeReason(string value)
+        {
+            string normalized = Normalize(value);
+            if (string.IsNullOrEmpty(normalized))
+            {
+                return "Unspecified";
+            }
+
+            return normalized.Substring(0, Math.Min(normalized.Length, 100));
         }
 
         private static string NullIfEmpty(string value)

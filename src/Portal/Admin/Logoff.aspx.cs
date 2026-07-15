@@ -1,6 +1,4 @@
 using System;
-using System.Web;
-using System.Web.Security;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -18,12 +16,9 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">An <see cref="EventArgs"/> containing the event data. 事件数据的<see cref="EventArgs"/>对象。</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Log the user out using the Cookie Authentication system.
-            // 使用 Cookie 认证系统 注销用户
-            FormsAuthentication.SignOut();
-
-            // 角色 Cookie 的 Path 必须和写入时保持一致，虚拟目录部署时才能真正清除。
-            PortalAuthenticationCookies.ExpireRolesCookie(Response, Request);
+            // 中文：统一清理主认证 Cookie 与角色 Cookie，确保虚拟目录 Path 一致。
+            // English: Clear the main auth cookie and role cookie through one path-aware service.
+            PortalAuthenticationService.SignOut(Response, Request);
 
             // Redirect the user back to the portal home page.
             // 重定向用户回到门户首页

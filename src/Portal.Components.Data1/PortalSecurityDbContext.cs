@@ -36,6 +36,20 @@ namespace ASPNET.StarterKit.Portal
         public DbSet<RegistrationInviteItem> RegistrationInvites { get; set; }
 
         /// <summary>
+        /// 中文：用户强哈希凭据记录。
+        ///
+        /// English: User strong-hash credential records.
+        /// </summary>
+        public DbSet<UserCredentialItem> UserCredentials { get; set; }
+
+        /// <summary>
+        /// 中文：用户会话安全版本记录。
+        ///
+        /// English: User session security-version records.
+        /// </summary>
+        public DbSet<UserSecurityStateItem> UserSecurityStates { get; set; }
+
+        /// <summary>
         /// 在模型构建时进行配置。
         /// </summary>
         /// <param name="modelBuilder">模型构建器。</param>
@@ -61,6 +75,15 @@ namespace ASPNET.StarterKit.Portal
             // The review tables intentionally avoid EF navigation properties to keep legacy user mapping stable.
             modelBuilder.Entity<RegistrationInviteItem>()
                 .HasKey(invite => invite.InviteCode);
+
+            // 中文：凭据和安全版本表以 UserId 为主键，不建立 EF 导航关系，避免旧 UserItem 跟踪状态被扩大。
+            // English: Credential and security-version tables use UserId as their key and avoid EF navigation
+            // relationships so legacy UserItem tracking remains narrow.
+            modelBuilder.Entity<UserCredentialItem>()
+                .HasKey(credential => credential.UserId);
+
+            modelBuilder.Entity<UserSecurityStateItem>()
+                .HasKey(state => state.UserId);
         }
     }
 }

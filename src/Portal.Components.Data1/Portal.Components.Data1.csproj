@@ -88,10 +88,13 @@
     <Compile Include="LinkItem.cs" />
     <Compile Include="RoleItem.cs" />
     <Compile Include="PortalSecurityDbContext.cs" />
+    <Compile Include="PortalPasswordHasher.cs" />
     <Compile Include="RegistrationInviteItem.cs" />
     <Compile Include="UserItem.cs" />
+    <Compile Include="UserCredentialItem.cs" />
     <Compile Include="UserRegistrationInfo.cs" />
     <Compile Include="UserRegistrationItem.cs" />
+    <Compile Include="UserSecurityStateItem.cs" />
     <Compile Include="RolesDb.cs" />
     <Compile Include="TabItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

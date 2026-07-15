@@ -1,5 +1,4 @@
 using System;
-using System.Web.Security;
 using Microsoft.Practices.Unity;
 using Unity;
 
@@ -91,12 +90,12 @@ namespace ASPNET.StarterKit.Portal
                 int userId;
                 try
                 {
-                    // 中文：只传递历史兼容摘要；异常与审计信息不得包含密码或邀请码原文。
-                    // English: Pass only the legacy-compatible digest; exceptions and audit data must not contain the password or raw invite code.
+                    // 中文：只传递一次性密码输入；数据层负责强哈希写入，异常与审计信息不得包含密码或邀请码原文。
+                    // English: Pass only one-time password input; the data layer owns strong-hash writes, and exceptions/audits must not contain passwords or raw invite codes.
                     userId = UsersDB.AddSelfRegisteredUser(
                         userName,
                         email,
-                        PortalSecurity.Encrypt(Password.Text),
+                        Password.Text,
                         employeeCode,
                         inviteCode,
                         PortalRegistrationOptions.RequireRegistrationApproval);
@@ -134,9 +133,14 @@ namespace ASPNET.StarterKit.Portal
                         return;
                     }
 
-                    // 中文：关闭审核时保持既有直接登录行为。
-                    // English: Preserve legacy immediate sign-in behavior when approval is disabled.
-                    FormsAuthentication.SetAuthCookie(userName, false);
+                    // 中文：关闭审核时保持既有直接登录行为，但身份票据需带当前安全版本。
+                    // English: Preserve legacy immediate sign-in behavior when approval is disabled, while carrying the current security version in the identity ticket.
+                    PortalAuthenticationService.SignIn(
+                        Response,
+                        Request,
+                        userName,
+                        UsersDB.GetSecurityVersionByUserName(userName),
+                        false);
                     Response.Redirect("~/DesktopDefault.aspx");
                 }
                 else
