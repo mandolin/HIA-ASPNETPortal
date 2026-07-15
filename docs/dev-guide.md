@@ -40,7 +40,7 @@ VSCode / 命令行方式：
 powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.ps1 -Configuration Debug -Platform "Any CPU"
 ```
 
-脚本会通过 `dev\scripts\Find-MsBuild.ps1` 查找 Visual Studio / Build Tools 中的 MSBuild。当前已验证可使用 `d:\Program Files\Microsoft Visual Studio\18\Enterprise\MSBuild\Current\Bin\MSBuild.exe` 完成 `Debug|Any CPU` 构建。
+脚本会通过 `dev\scripts\Find-MsBuild.ps1` 查找 Visual Studio / Build Tools 中的 MSBuild。当前已验证脚本可自动定位已安装的 MSBuild 并完成 `Debug|Any CPU` 构建；实际安装路径因本机 Visual Studio / Build Tools 配置而异。
 
 ## VSCode 任务
 
@@ -58,10 +58,22 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 - `portal: build JavaScript documentation pilot`：独立生成并验证 HIA JSDoc pilot。
 - `portal: verify .NET XML documentation`：构建 Debug 后检查既有 C# XML 文档输出。
 - `portal: verify frontend contracts`：只读检查已追踪的 Web Forms 呈现、主题、模块 CSS 和 Gulp 契约。
+- `portal: verify public documentation`：只读检查公开 Markdown 的入口、相对文件链接、隐私边界和生成目录边界。
 
 这些任务只调用仓库内的辅助脚本和 npm scripts，不修改 `.sln`、`.csproj`、`.csproj.user`，因此不会覆盖 Visual Studio 的既有调试设置。
 
 ## 文档化基线
+
+公开文档门禁只读取根 README、`docs/` 与 JSDoc 工具 README；它不联网、不读取 WorkZone、不生成文档，
+也不会访问配置或数据库：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalPublicDocumentation.ps1
+```
+
+门禁会验证公开入口、相对文件链接、文档索引、项目绝对路径/凭据形态和未确认生成目录的 Git 边界。它允许
+`$env:USERPROFILE`、`{ExternalCfgPath}` 和 PowerShell 7 通用安装路径等可复现示例，但不会验证复杂 Markdown 锚点、
+外部链接或网络可达性。
 
 `Get-PortalDocumentationBaseline.ps1` 是 `W-anp-P4.1` 的只读基线工具。它只统计 Git 已追踪的 `src/` 源码，输出 C#、Web Forms、前端与配置的文件数量、C# XML 文档 inventory，以及已知生成/未跟踪目录的边界状态；这些数值不是文档质量或覆盖率百分比。
 
@@ -69,7 +81,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -AsJson
 ```
 
-脚本不会生成、发布、删除或修改文档。`src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`、`src/Portal/js/`、`src/Portal/css/` 和 `temp/` 均不会被自动纳入输入；后续 JSDoc 验证生成物暂定写入被忽略的 `temp/documentation/`，公开发布策略将在 `W-anp-P4.5` 决定。
+脚本不会生成、发布、删除或修改文档。`src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`、`src/Portal/js/`、`src/Portal/css/` 和 `temp/` 均不会被自动纳入输入；JSDoc 验证生成物写入被忽略的 `temp/documentation/`，公开发布策略见[文档产物与工具链边界](documentation-artifacts-guide.md)。
 
 ## JavaScript 文档化 Pilot
 

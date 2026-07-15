@@ -48,6 +48,7 @@
 
 ## 发布前检查
 
+- [ ] `dev/scripts/Test-PortalPublicDocumentation.ps1` 对公开入口、相对文件链接和隐私边界通过。
 - [ ] 未提交真实连接字符串、密码、Token、证书。
 - [ ] 未提交本地数据库文件、`node_modules/`、`bin/`、`obj/`。
 - [ ] `Web.Debug.config`、`Web.Release.config`、`Web.Test.config` 的处理方式符合仓库规则。

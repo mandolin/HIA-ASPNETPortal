@@ -195,6 +195,20 @@
                 "${workspaceFolder}\\dev\\scripts\\Test-PortalFrontendContracts.ps1"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "portal: verify public documentation",
+            "type": "process",
+            "command": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": [
+                "-NoLogo",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Test-PortalPublicDocumentation.ps1"
+            ],
+            "problemMatcher": []
         }
     ]
 }
