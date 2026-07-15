@@ -181,6 +181,20 @@
                 "-Build"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "portal: verify frontend contracts",
+            "type": "process",
+            "command": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": [
+                "-NoLogo",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Test-PortalFrontendContracts.ps1"
+            ],
+            "problemMatcher": []
         }
     ]
 }

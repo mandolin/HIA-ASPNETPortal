@@ -217,11 +217,14 @@ const stopWatch = (cb) => {
 };
 
 /**
- * One-time asset build task for VSCode and AI automation; it does not change the Visual Studio `startWatch` binding.
+ * One-time asset build task for VSCode and AI automation. It processes only existing source globs, writes outputs beside
+ * them, and does not create input directories or change the Visual Studio `startWatch` binding.
  *
  * @type {Function}
- * @lang zh-CN 供 VSCode 与 AI 自动化使用的一次性资源构建任务，不改变 Visual Studio 的 `startWatch` 绑定。
- * @lang en One-time asset build task for VSCode and AI automation; it does not change the Visual Studio `startWatch` binding.
+ * @lang zh-CN 供 VSCode 与 AI 自动化使用的一次性资源构建任务；仅处理已有输入并在相邻目录写入输出，
+ * 不创建输入目录，也不改变 Visual Studio 的 `startWatch` 绑定。
+ * @lang en One-time asset build task for VSCode and AI automation; it processes existing inputs and writes adjacent outputs
+ * without creating input directories or changing the Visual Studio `startWatch` binding.
  */
 const assetsBuild = gulp.parallel(esjs, coffeejs, sasscss);
 gulp.task('assets:build', assetsBuild);

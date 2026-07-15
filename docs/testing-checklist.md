@@ -39,9 +39,11 @@
 
 ## 前端资源检查
 
+- [ ] `dev/scripts/Test-PortalFrontendContracts.ps1` 对已追踪的前端契约通过。
 - [ ] 确认是否需要运行 Gulp 或 Grunt。
 - [ ] 如需构建前端资源，记录实际命令。
 - [ ] CSS、JS、图片资源路径正确。
+- [ ] 未将来源未确认的 `src/Portal/js/`、`src/Portal/css/` 或生成文档目录作为正式输入提交。
 - [ ] 浏览器控制台无新增关键错误。
 
 ## 发布前检查

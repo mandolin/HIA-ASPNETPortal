@@ -20,10 +20,16 @@ namespace ASPNET.StarterKit.Portal
     public class PortalMasterPage : MasterPage
     {
         /// <summary>
-        /// 在输出 HTML 前写入稳定的主题与 Tab CSS class。
-        /// Writes stable theme and tab CSS classes before HTML is rendered.
+        /// 在输出 HTML 前写入稳定的主题与 Tab CSS class，并挂载已验证模块包 CSS。
+        /// Writes stable theme and Tab CSS classes and adds validated module-package CSS before HTML is rendered.
         /// </summary>
         /// <param name="e">页面事件参数。Page event arguments.</param>
+        /// <remarks>
+        /// 中文：原生 Theme 已在 <c>PreInit</c> 选择；此处仅补充 body 作用域和 catalog 已验证的模块 CSS，
+        /// 不重选主题、不读取请求输入，也不自动加载 JavaScript。
+        /// English: Native Theme selection has already completed in <c>PreInit</c>; this method only adds body scope
+        /// classes and catalog-validated module CSS. It does not reselect Theme, read request input, or auto-load JavaScript.
+        /// </remarks>
         protected override void OnPreRender(EventArgs e)
         {
             HtmlGenericControl body = FindControl("PortalBody") as HtmlGenericControl;

@@ -1,17 +1,21 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="ASPNET.StarterKit.Portal.PortalMasterPage" %>
 
-<%-- #todo 使Banner可配置 --%>
+<%--
+中文：默认 Master 固定引用桌面 Banner，保留现有门户导航和 Tab 呈现行为；Banner 可配置化属于后续专题。
+English: The default Master keeps the desktop Banner and existing portal navigation/Tab rendering; configurable banners are a future concern.
+--%>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Banner" Src="DesktopPortalBanner.ascx" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <%-- #todo 使title可自定义可配置 --%>
+    <%-- 中文：标题仍沿用历史固定值；主题 CSS 由 Web Forms 原生 Theme 在页面生命周期中装载。English: The title remains a legacy fixed value; native Web Forms Theme loads theme CSS during the page lifecycle. --%>
     <title>ASP.NET Portal Starter Kit</title>
 </head>
-<%-- #todo 默认模板的改造：样式改造等（待细化） --%>
+<%-- 中文：PortalMasterPage 在渲染前为此 body 写入受控主题/Tab class；不得在标记中直接拼接外部资源。English: PortalMasterPage writes controlled theme/Tab classes to this body before rendering; markup must not concatenate external resources. --%>
 <body id="PortalBody" runat="server" bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
     <form id="Form1" runat="server">
+        <%-- 中文：历史 table 布局和唯一 server form 保持兼容；本批不改变 DOM、视觉或提交行为。English: The legacy table layout and single server form remain for compatibility; this batch does not change DOM, visuals, or submission behavior. --%>
         <table cellspacing="0" cellpadding="0" width="100%" border="0">
             <tbody>
                 <tr valign="top">
@@ -22,6 +26,7 @@
                 <tr>
                     <td>
                         <br />
+                        <%-- 中文：门户页与后台页通过此占位符提供主体内容。English: Portal and administration pages provide main content through this placeholder. --%>
                         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                     </td>
                 </tr>

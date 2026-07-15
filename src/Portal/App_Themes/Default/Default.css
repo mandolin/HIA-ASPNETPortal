@@ -1,7 +1,9 @@
-/* ================================
-    CSS STYLES FOR THE ASP.NET PORTAL STARTER KIT
-    v1.0, 10/2002
-   ================================
+/*
+   中文：这是 Web Forms 原生 Default Theme 的历史兼容样式。它提供门户的基础 class，不承担响应式重构、
+   外部资产加载或动态脚本职责；主题覆盖应使用 portal-theme/tab/module/pane 作用域 class。
+   English: This is the legacy-compatible CSS for the native Web Forms Default Theme. It supplies the portal's base
+   classes and does not own responsive redesign, external assets, or dynamic scripts; theme overrides use the
+   portal-theme/tab/module/pane scope classes.
 */
 
 /*
@@ -30,7 +32,7 @@ Body { background-color: white; }
 
 
 /* PAGE BANNER */
-/* NOTE: Site Title, Site Links and Tabs are rendered by MobilePortalBanner.ascx
+/* 中文：站点标题、站点链接和 Tab 由 DesktopPortalBanner.ascx 渲染。English: DesktopPortalBanner.ascx renders the site title, site links, and Tabs. */
 /* style for the text of the site title */
 
 .SiteTitle {

@@ -57,6 +57,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 - `portal: documentation baseline`：输出已追踪源码的文档化 inventory JSON。
 - `portal: build JavaScript documentation pilot`：独立生成并验证 HIA JSDoc pilot。
 - `portal: verify .NET XML documentation`：构建 Debug 后检查既有 C# XML 文档输出。
+- `portal: verify frontend contracts`：只读检查已追踪的 Web Forms 呈现、主题、模块 CSS 和 Gulp 契约。
 
 这些任务只调用仓库内的辅助脚本和 npm scripts，不修改 `.sln`、`.csproj`、`.csproj.user`，因此不会覆盖 Visual Studio 的既有调试设置。
 
@@ -219,6 +220,9 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 
 ## 前端资源
 
+Web Forms Master、主题、模块 CSS、Gulp 输入输出、Visual Studio/VSCode 边界和未跟踪资产策略见
+[frontend-asset-guide.md](frontend-asset-guide.md)。
+
 `src/Portal/gulpfile.js` 保留 Visual Studio Task Runner 原绑定：
 
 ```js
@@ -237,6 +241,12 @@ npm run assets:stop-watch
 ```
 
 当前已验证 `npm run assets:build` 可以成功执行。执行时出现 Browserslist 数据过期提示，属于前端依赖维护提醒，不影响本次构建结果。
+
+需要只读复核正式前端输入而不运行 Node/Gulp 时，执行：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalFrontendContracts.ps1
+```
 
 ## 配置注意事项
 
