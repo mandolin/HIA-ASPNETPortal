@@ -8,7 +8,7 @@
 
 ## 项目边界
 
-- 本项目保持 .NET Framework 4.7/4.8 与 ASP.NET Web Forms 路线，现阶段不迁移 ASP.NET Core。
+- 本项目保持 .NET Framework 4.8 与 ASP.NET Web Forms 路线，现阶段不迁移 ASP.NET Core。
 - Visual Studio 是主开发路径，VSCode 是自动化、AI 协作和调试增强路径。
 - VSCode 任务、脚本和配置不得破坏 `.sln`、`.csproj`、`.csproj.user`、VS Task Runner 或既有 Visual Studio 调试流程。
 - 前端继续保留原 Gulp 绑定；自动化使用独立 `assets:build` 等任务。

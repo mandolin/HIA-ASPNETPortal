@@ -6,7 +6,7 @@
 
 | 依赖 | 锁定版本 | 用途 | 许可证/依据 | 当前边界 |
 | --- | --- | --- | --- | --- |
-| `System.Data.SQLite.Core` | `1.0.119.0` | `W-anp-P3.3` 的 .NET Framework 4.7 SQLite ADO.NET capability proof。 | package 元数据链接至 SQLite Public Domain 版权声明；其 net46 build target 也声明为 Public Domain。 | 仅由独立 proof 项目使用，不进入门户主业务运行路径。 |
+| `System.Data.SQLite.Core` | `1.0.119.0` | `W-anp-P3.3` 的 .NET Framework 4.8 SQLite ADO.NET capability proof。 | package 元数据链接至 SQLite Public Domain 版权声明；其 net46 build target 也声明为 Public Domain。 | 仅由独立 proof 项目使用，不进入门户主业务运行路径。 |
 
 ## 使用与分发约束
 

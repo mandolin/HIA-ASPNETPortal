@@ -5,8 +5,8 @@
 建议使用：
 
 - Windows 开发环境。
-- Visual Studio 2022 或可构建 .NET Framework 4.7 项目的 Visual Studio。
-- .NET Framework 4.7 Developer Pack。
+- Visual Studio 2022 或可构建 .NET Framework 4.8 项目的 Visual Studio。
+- .NET Framework 4.8 Developer Pack。
 - NuGet 包还原能力。
 - SQL Server 或 SQL Server LocalDB。
 - IIS Express。

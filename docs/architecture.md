@@ -7,7 +7,7 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 ## 解决方案结构
 
 - `src/master.sln`：主解决方案。
-- `src/Portal/Portal.csproj`：WebForms 站点项目，目标框架 .NET Framework 4.7。
+- `src/Portal/Portal.csproj`：WebForms 站点项目，目标框架 .NET Framework 4.8。
 - `src/Portal.Components/Portal.Components.csproj`：接口和公共组件项目。
 - `src/Portal.Components.Data/Portal.Components.Data.csproj`：数据访问项目之一。
 - `src/Portal.Components.Data1/Portal.Components.Data1.csproj`：数据访问项目之一。
@@ -30,8 +30,8 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 - 数据访问使用 Entity Framework 6.1.0。
 - 依赖注入使用 Unity 5.x。
 - Web 项目仍使用经典 `packages.config` 和 `src/packages/` NuGet 包目录。
-- `src/Portal.DataProviderProof/` 是未加入主解决方案的 .NET Framework 4.7 开发/测试 proof 项目；它验证 ADO.NET provider factory 与 SQLite 基础事务能力，不参与正常门户部署。
-- `src/Portal.HiaBoundaryProof/` 是未加入主解决方案的 .NET Framework 4.7 契约 proof 项目；它通过 fixtures 验证 HIA 外围能力描述的版本、字段与隐私边界，不添加 HIA 运行时依赖或 transport。
+- `src/Portal.DataProviderProof/` 是未加入主解决方案的 .NET Framework 4.8 开发/测试 proof 项目；它验证 ADO.NET provider factory 与 SQLite 基础事务能力，不参与正常门户部署。
+- `src/Portal.HiaBoundaryProof/` 是未加入主解决方案的 .NET Framework 4.8 契约 proof 项目；它通过 fixtures 验证 HIA 外围能力描述的版本、字段与隐私边界，不添加 HIA 运行时依赖或 transport。
 
 ## HIA 外围协作基线
 
