@@ -171,7 +171,7 @@
                     <ItemTemplate>
                         &nbsp;&nbsp;
                         <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="<%$ Resources:lang,Admin_ManageUsers_RemoveFromRoleAlt %>"
-                            runat="server" ID="Imagebutton1" />
+                            CausesValidation="False" runat="server" ID="Imagebutton1" />
                         <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "RoleName") %>' CssClass="Normal"
                             runat="server" ID="Label1" />
                     </ItemTemplate>
