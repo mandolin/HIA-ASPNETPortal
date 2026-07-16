@@ -103,15 +103,28 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            RolesDB.AddUserRole(role.RoleId, userId);
-            PortalOperationAudit.Record(
-                "UserAdministration",
-                "AddRole",
-                "User",
-                userId.ToString(),
-                "Added role id " + role.RoleId + " to user.",
-                Context);
-            BindData();
+            try
+            {
+                RolesDB.AddUserRole(role.RoleId, userId);
+                PortalOperationAudit.Record(
+                    "UserAdministration",
+                    "AddRole",
+                    "User",
+                    userId.ToString(),
+                    "Added role id " + role.RoleId + " to user.",
+                    Context);
+                ShowRegistrationMessage("角色已加入当前用户。", false);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.AddRole",
+                    "Adding a role to user failed. UserId=" + userId + "; RoleId=" + role.RoleId,
+                    exception,
+                    Context);
+                ShowRegistrationMessage("加入角色失败，系统已记录本次错误。事件编号：" + eventId, true);
+            }
         }
 
         /// <summary>
@@ -397,6 +410,7 @@ namespace ASPNET.StarterKit.Portal
             }
 
             Email.Text = currentUser.Email;
+            UserNameText.Text = EncodeDisplay(currentUser.Name);
             BindRegistrationInfo(currentUser.UserId);
             TitleText.Text = Server.HtmlEncode("Manage User: " + (currentUser.Name ?? string.Empty));
 

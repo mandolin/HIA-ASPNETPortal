@@ -403,10 +403,19 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>中文：角色集合；没有角色时为空集合。English: Role collection; empty when the user has no roles.</returns>
         public IEnumerable<IRoleItem> GetRolesByUser(string name)
         {
-            var item = _context.Users.Single(i => i.Name == name);
-            return item.Roles == null
-                ? Enumerable.Empty<IRoleItem>()
-                : item.Roles.ToList<IRoleItem>();
+            // 中文：角色成员关系可能由 RolesDb 通过中间表直接写入；显式查询可避开 singleton DbContext 的导航集合缓存。
+            // English: Role memberships may be written directly through the join table by RolesDb; explicit querying avoids stale navigation collections on the singleton DbContext.
+            return _context.Database.SqlQuery<RoleItem>(
+                @"
+SELECT [Roles].[RoleID], [Roles].[PortalID], [Roles].[RoleName]
+FROM [dbo].[Portal_Roles] AS [Roles]
+INNER JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+    ON [UserRoles].[RoleID] = [Roles].[RoleID]
+INNER JOIN [dbo].[Portal_Users] AS [Users]
+    ON [Users].[UserID] = [UserRoles].[UserID]
+WHERE [Users].[Name] = @p0 OR [Users].[Email] = @p0
+ORDER BY [Roles].[RoleName]",
+                name).ToList<IRoleItem>();
         }
 
         /// <summary>
@@ -418,10 +427,17 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>中文：角色名称集合；没有角色时为空集合。English: Role-name collection; empty when the user has no roles.</returns>
         public IEnumerable<string> GetRoleNamesByUser(string name)
         {
-            var item = _context.Users.Single(i => i.Name == name);
-            return item.Roles == null
-                ? Enumerable.Empty<string>()
-                : item.Roles.Select(i => i.RoleName);
+            return _context.Database.SqlQuery<string>(
+                @"
+SELECT [Roles].[RoleName]
+FROM [dbo].[Portal_Roles] AS [Roles]
+INNER JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+    ON [UserRoles].[RoleID] = [Roles].[RoleID]
+INNER JOIN [dbo].[Portal_Users] AS [Users]
+    ON [Users].[UserID] = [UserRoles].[UserID]
+WHERE [Users].[Name] = @p0 OR [Users].[Email] = @p0
+ORDER BY [Roles].[RoleName]",
+                name).ToList();
         }
 
         /// <summary>

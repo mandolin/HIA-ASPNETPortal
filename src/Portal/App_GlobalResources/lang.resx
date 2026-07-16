@@ -133,13 +133,13 @@
     <value>Add user to this role</value>
   </data>
   <data name="Admin_ManageUsers_ApplyNamePwdChange" xml:space="preserve">
-    <value>Apply Name and Password Changes</value>
+    <value>Apply Email and Password Changes</value>
   </data>
   <data name="Admin_ManageUsers_ConfirmPwd" xml:space="preserve">
     <value>Confirm Password:</value>
   </data>
   <data name="Admin_ManageUsers_Email" xml:space="preserve">
-    <value>Email (or Windows domain name):</value>
+    <value>Email:</value>
   </data>
   <data name="Admin_ManageUsers_ManageUser" xml:space="preserve">
     <value>Manage User</value>

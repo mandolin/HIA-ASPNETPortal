@@ -63,9 +63,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // 根据角色ID获取角色对象。
             var item = _context.Roles.Single(i => i.RoleId == roleId);
-            var affectedUserIds = item.Users == null
-                ? new List<int>()
-                : item.Users.Select(user => user.UserId).ToList();
+            var affectedUserIds = GetRoleMemberIds(roleId);
 
             // 从上下文中移除角色。
             _context.Roles.Remove(item);
@@ -84,9 +82,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // 根据角色ID获取角色对象。
             var item = _context.Roles.Single(i => i.RoleId == roleId);
-            var affectedUserIds = item.Users == null
-                ? new List<int>()
-                : item.Users.Select(user => user.UserId).ToList();
+            var affectedUserIds = GetRoleMemberIds(roleId);
 
             // 更新角色名称。
             item.RoleName = roleName;
@@ -103,8 +99,13 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>角色成员集合。</returns>
         public IEnumerable<IUserItem> GetRoleMembers(int roleId)
         {
-            // 根据角色ID获取角色对象，并获取其所有成员。
-            return _context.Roles.Single(i => i.RoleId == roleId).Users.ToList();
+            // 中文：旧 EF 导航集合在某些运行路径中可能未初始化；显式读取中间表更稳定。
+            // English: The legacy EF navigation collection can be uninitialized in some runtime paths; reading the join table explicitly is more stable.
+            var userIds = GetRoleMemberIds(roleId);
+            return _context.Users
+                .Where(user => userIds.Contains(user.UserId))
+                .OrderBy(user => user.Name)
+                .ToList<IUserItem>();
         }
 
         /// <summary>
@@ -114,15 +115,18 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="userId">用户ID。</param>
         public void AddUserRole(int roleId, int userId)
         {
-            // 根据用户ID获取用户对象。
-            var item = _context.Users.Single(i => i.UserId == userId);
+            // 中文：显式确认用户和角色存在，再用中间表写入，避免旧 EF 导航集合为空导致后台错误页。
+            // English: Confirm that user and role exist, then write the join table explicitly to avoid admin error pages from null legacy EF collections.
+            EnsureUserAndRoleExist(roleId, userId);
+            if (HasUserRole(roleId, userId))
+            {
+                return;
+            }
 
-            // 根据角色ID获取角色对象，并向其中添加用户。
-            var role = _context.Roles.Single(i => i.RoleId == roleId);
-            role.Users.Add(item);
-
-            // 保存更改到数据库。
-            _context.SaveChanges();
+            _context.Database.ExecuteSqlCommand(
+                "INSERT INTO [dbo].[Portal_UserRoles] ([UserID], [RoleID]) VALUES (@p0, @p1)",
+                userId,
+                roleId);
             IncrementSecurityVersion(userId, "RoleMembershipAdded");
         }
 
@@ -133,15 +137,16 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="userId">用户ID。</param>
         public void DeleteUserRole(int roleId, int userId)
         {
-            // 根据用户ID获取用户对象。
-            var item = _context.Users.Single(i => i.UserId == userId);
+            EnsureUserAndRoleExist(roleId, userId);
+            if (!HasUserRole(roleId, userId))
+            {
+                return;
+            }
 
-            // 根据角色ID获取角色对象，并从中移除用户。
-            var role = _context.Roles.Single(i => i.RoleId == roleId);
-            role.Users.Remove(item);
-
-            // 保存更改到数据库。
-            _context.SaveChanges();
+            _context.Database.ExecuteSqlCommand(
+                "DELETE FROM [dbo].[Portal_UserRoles] WHERE [UserID] = @p0 AND [RoleID] = @p1",
+                userId,
+                roleId);
             IncrementSecurityVersion(userId, "RoleMembershipRemoved");
         }
 
@@ -163,6 +168,27 @@ namespace ASPNET.StarterKit.Portal
             {
                 IncrementSecurityVersion(userId, reason);
             }
+        }
+
+        private List<int> GetRoleMemberIds(int roleId)
+        {
+            return _context.Database.SqlQuery<int>(
+                "SELECT [UserID] FROM [dbo].[Portal_UserRoles] WHERE [RoleID] = @p0",
+                roleId).ToList();
+        }
+
+        private void EnsureUserAndRoleExist(int roleId, int userId)
+        {
+            _context.Users.Single(user => user.UserId == userId);
+            _context.Roles.Single(role => role.RoleId == roleId);
+        }
+
+        private bool HasUserRole(int roleId, int userId)
+        {
+            return _context.Database.SqlQuery<int>(
+                "SELECT CASE WHEN EXISTS (SELECT 1 FROM [dbo].[Portal_UserRoles] WHERE [UserID] = @p0 AND [RoleID] = @p1) THEN 1 ELSE 0 END",
+                userId,
+                roleId).Single() == 1;
         }
 
         private void IncrementSecurityVersion(int userId, string reason)

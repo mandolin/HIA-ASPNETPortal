@@ -133,13 +133,13 @@
     <value>把用户加入此角色</value>
   </data>
   <data name="Admin_ManageUsers_ApplyNamePwdChange" xml:space="preserve">
-    <value>保存用户名和密码变更</value>
+    <value>保存邮箱和密码变更</value>
   </data>
   <data name="Admin_ManageUsers_ConfirmPwd" xml:space="preserve">
     <value>确认密码:</value>
   </data>
   <data name="Admin_ManageUsers_Email" xml:space="preserve">
-    <value>邮箱 (或windows域账户):</value>
+    <value>邮箱:</value>
   </data>
   <data name="Admin_ManageUsers_ManageUser" xml:space="preserve">
     <value>用户管理</value>

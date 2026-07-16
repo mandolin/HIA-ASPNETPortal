@@ -93,6 +93,16 @@
             </td>
         </tr>
         
+        <%-- 用户名当前不可直接编辑；后续会进入自定义用户名和昵称机制设计。 --%>
+        <tr>
+            <td class="Normal">
+                用户名:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="UserNameText" runat="server" />
+            </td>
+        </tr>
+
         <%-- 邮箱 --%>
         <tr>
             <td class="Normal">
