@@ -28,7 +28,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context))
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.SettingsView))
             {
                 return;
             }
@@ -50,7 +50,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Apply_Click(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context))
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.SettingsEdit))
             {
                 return;
             }

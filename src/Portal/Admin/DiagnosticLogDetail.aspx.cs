@@ -14,7 +14,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.OpsDiagnosticsDetail))
+            {
+                return;
+            }
 
             if (!PortalDiagnostics.AreAdminLogDetailsEnabled())
             {

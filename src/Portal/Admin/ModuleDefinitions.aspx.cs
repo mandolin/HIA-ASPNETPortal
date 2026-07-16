@@ -65,7 +65,7 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>中文：请求可继续操作已验证定义时为 <c>true</c>。English: <c>true</c> when the request may operate on a verified definition.</returns>
         private bool TryInitializeRequest()
         {
-            if (!PortalAuthorization.EnsureAdmin(Context))
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleDefinitionEdit))
             {
                 return false;
             }

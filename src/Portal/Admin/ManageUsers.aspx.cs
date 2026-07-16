@@ -54,7 +54,8 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!TryInitializeRequest())
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit))
             {
                 return;
             }
@@ -137,7 +138,10 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void UpdateUser_Click(object sender, EventArgs e)
         {
-            if (!TryInitializeRequest() || !Page.IsValid)
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersResetPassword) ||
+                !Page.IsValid)
             {
                 return;
             }
@@ -188,7 +192,8 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void ApproveRegistration_Click(object sender, EventArgs e)
         {
-            if (!TryInitializeRequest())
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
             {
                 return;
             }
@@ -226,7 +231,8 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void RejectRegistration_Click(object sender, EventArgs e)
         {
-            if (!TryInitializeRequest())
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
             {
                 return;
             }
@@ -264,7 +270,9 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：包含命令和 DataList 项索引的事件数据。English: Event data containing the command and DataList item index.</param>
         protected void UserRoles_ItemCommand(object sender, DataListCommandEventArgs e)
         {
-            if (!TryInitializeRequest() || !string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) ||
+                !string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
             {
                 return;
             }
@@ -298,7 +306,7 @@ namespace ASPNET.StarterKit.Portal
 
         private bool TryInitializeRequest()
         {
-            if (!PortalAuthorization.EnsureAdmin(Context))
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView))
             {
                 return false;
             }

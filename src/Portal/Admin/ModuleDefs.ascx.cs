@@ -35,7 +35,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleDefinitionEdit) || !TryReadNavigationParameters())
             {
                 return;
             }
@@ -55,7 +55,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void AddDef_Click(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleCatalogView) || !TryReadNavigationParameters())
             {
                 return;
             }
@@ -72,7 +72,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：包含 DataList 项索引的事件数据。English: Event data containing a DataList item index.</param>
         protected void DefsList_ItemCommand(object sender, DataListCommandEventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleDefinitionEdit) || !TryReadNavigationParameters())
             {
                 return;
             }

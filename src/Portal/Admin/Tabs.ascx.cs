@@ -239,7 +239,7 @@ namespace ASPNET.StarterKit.Portal
 
         private bool TryInitializeRequest()
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) ||
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.PortalTabsEdit) ||
                 !TryReadOptionalPositiveParameter("tabid", out tabId) ||
                 !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
             {

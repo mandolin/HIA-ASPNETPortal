@@ -239,14 +239,15 @@ try {
     }
 
     if ($ApplyP5Migrations) {
-        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P5 credential migration scripts')) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P5 security migration scripts')) {
             $migrationFiles = @(
-                (Join-Path $repoRoot 'src/Setup/Portal_UserCredentials.sql')
+                (Join-Path $repoRoot 'src/Setup/Portal_UserCredentials.sql'),
+                (Join-Path $repoRoot 'src/Setup/PortalCfg_RolePermissions.sql')
             )
             foreach ($migrationFile in $migrationFiles) {
                 Invoke-MigrationFile -Connection $connection -Path $migrationFile
             }
-            Add-DatabaseCheck -Name 'P5 migration application' -Status 'Pass' -Detail 'The idempotent P5 credential and security-version migration batches completed.'
+            Add-DatabaseCheck -Name 'P5 migration application' -Status 'Pass' -Detail 'The idempotent P5 credential, security-version, and role-permission migration batches completed.'
         }
         else {
             Add-DatabaseCheck -Name 'P5 migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
@@ -256,7 +257,7 @@ try {
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
-    $p5Tables = @('Portal_UserCredentials', 'Portal_UserSecurityStates')
+    $p5Tables = @('Portal_UserCredentials', 'Portal_UserSecurityStates', 'PortalCfg_RolePermissions')
     $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
@@ -286,13 +287,13 @@ try {
 
     $missingP5Tables = @($p5Tables | Where-Object { -not $existingTables.Contains($_) })
     if ($missingP5Tables.Count -eq 0) {
-        Add-DatabaseCheck -Name 'P5 credential schema' -Status 'Pass' -Detail 'All P5 credential and security-version tables are present.'
+        Add-DatabaseCheck -Name 'P5 security schema' -Status 'Pass' -Detail 'All P5 credential, security-version, and role-permission tables are present.'
     }
     elseif ($RequireP5Migrations) {
-        Add-DatabaseCheck -Name 'P5 credential schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP5Tables -join ', '))
+        Add-DatabaseCheck -Name 'P5 security schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP5Tables -join ', '))
     }
     else {
-        Add-DatabaseCheck -Name 'P5 credential schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP5Tables -join ', '))
+        Add-DatabaseCheck -Name 'P5 security schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP5Tables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })

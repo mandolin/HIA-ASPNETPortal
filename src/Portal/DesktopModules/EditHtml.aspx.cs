@@ -108,7 +108,7 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
-            return true;
+            return PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ContentRawHtmlEdit);
         }
     }
 }

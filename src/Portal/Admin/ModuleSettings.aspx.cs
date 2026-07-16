@@ -122,11 +122,11 @@ namespace ASPNET.StarterKit.Portal
 
         private bool TryInitializeRequest()
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) ||
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.PortalModulesEdit) ||
                 !PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["mid"], out moduleId) ||
                 !PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["tabid"], out tabId))
             {
-                if (PortalAuthorization.IsAdmin())
+                if (PortalAuthorization.HasPermission(PortalPermissionKeys.PortalModulesEdit))
                 {
                     PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
                 }

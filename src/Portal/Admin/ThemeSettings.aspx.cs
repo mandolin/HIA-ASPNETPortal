@@ -40,7 +40,11 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeView))
+            {
+                return;
+            }
+
             if (!Page.IsPostBack)
             {
                 BindThemeLists();
@@ -62,7 +66,11 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void SaveGlobalThemeButton_Click(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeEdit))
+            {
+                return;
+            }
+
             PortalThemePackage package;
             string reason;
             if (!PortalThemeCatalog.TryGetTrustedPackage(GlobalThemeList.SelectedValue, out package, out reason))
@@ -104,7 +112,11 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void ResetGlobalThemeButton_Click(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeEdit))
+            {
+                return;
+            }
+
             PortalSystemSettingWriteResult result = PortalSystemSettingsStore.DeleteOverride(
                 PortalSettingsRegistry.ThemeName,
                 Context);
@@ -136,7 +148,11 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void TabList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeView))
+            {
+                return;
+            }
+
             BindTabStatus();
         }
 
@@ -153,7 +169,11 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void SaveTabThemeButton_Click(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeEdit))
+            {
+                return;
+            }
+
             int tabId;
             if (!TryGetSelectedTabId(out tabId))
             {
@@ -194,7 +214,11 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void ClearTabThemeButton_Click(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeEdit))
+            {
+                return;
+            }
+
             int tabId;
             if (!TryGetSelectedTabId(out tabId))
             {

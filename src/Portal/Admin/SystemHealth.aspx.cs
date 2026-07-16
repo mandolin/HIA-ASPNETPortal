@@ -14,7 +14,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.OpsHealthView))
+            {
+                return;
+            }
 
             if (!Page.IsPostBack)
             {
@@ -28,7 +31,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void RefreshButton_Click(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.OpsHealthView))
+            {
+                return;
+            }
+
             BindHealthSnapshot();
         }
 

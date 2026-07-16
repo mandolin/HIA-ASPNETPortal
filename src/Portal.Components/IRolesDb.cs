@@ -55,18 +55,20 @@ namespace ASPNET.StarterKit.Portal
         IEnumerable<IUserItem> GetRoleMembers(int roleId);
 
         /// <summary>
-        /// 中文：将用户加入角色；现有会话中的角色 Cookie 不会立即失效。
+        /// 中文：将用户加入角色，并在可用时递增用户安全版本以便旧角色 Cookie 下次请求重新判定。
         ///
-        /// English: Adds a user to a role; existing role cookies are not invalidated immediately.
+        /// English: Adds a user to a role and increments the user security version when available so older role
+        /// cookies are re-evaluated on the next request.
         /// </summary>
         /// <param name="roleId">中文：角色数值标识。English: Numeric role identifier.</param>
         /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
         void AddUserRole(int roleId, int userId);
 
         /// <summary>
-        /// 中文：从角色移除用户；现有会话中的角色 Cookie 不会立即失效。
+        /// 中文：从角色移除用户，并在可用时递增用户安全版本以便旧角色 Cookie 下次请求重新判定。
         ///
-        /// English: Removes a user from a role; existing role cookies are not invalidated immediately.
+        /// English: Removes a user from a role and increments the user security version when available so older role
+        /// cookies are re-evaluated on the next request.
         /// </summary>
         /// <param name="roleId">中文：角色数值标识。English: Numeric role identifier.</param>
         /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
@@ -79,5 +81,25 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <returns>中文：用户集合。English: User collection.</returns>
         IEnumerable<IUserItem> GetUsers();
+
+        /// <summary>
+        /// 中文：读取指定用户通过当前角色映射获得的权限键。
+        ///
+        /// English: Gets permission keys granted to the specified user through current role mappings.
+        /// </summary>
+        /// <param name="name">中文：用户登录名或邮箱。English: User sign-in name or email.</param>
+        /// <returns>中文：权限键集合；权限表缺失时返回空集合。English: Permission keys; empty when the permission table is unavailable.</returns>
+        IEnumerable<string> GetPermissionKeysByUserName(string name);
+
+        /// <summary>
+        /// 中文：替换指定角色的权限映射，并递增该角色现有成员的安全版本。
+        ///
+        /// English: Replaces permission mappings for the specified role and increments security versions of current
+        /// role members.
+        /// </summary>
+        /// <param name="roleId">中文：角色数值标识。English: Numeric role identifier.</param>
+        /// <param name="permissionKeys">中文：新的权限键集合。English: New permission-key collection.</param>
+        /// <param name="updatedBy">中文：执行更新的维护者标识。English: Maintainer identifier performing the update.</param>
+        void SaveRolePermissions(int roleId, IEnumerable<string> permissionKeys, string updatedBy);
     }
 }

@@ -160,6 +160,79 @@ namespace ASPNET.StarterKit.Portal
             return _context.Users.OrderBy(i => i.Name).ToList();
         }
 
+        /// <summary>
+        /// 中文：读取指定用户通过角色映射获得的权限键；权限扩展表未部署时保持空集合。
+        ///
+        /// English: Reads permission keys granted through role mappings for the specified user; returns an empty
+        /// collection when the permission extension table is not deployed.
+        /// </summary>
+        /// <param name="name">中文：用户登录名或邮箱。English: User sign-in name or email.</param>
+        /// <returns>中文：权限键集合。English: Permission-key collection.</returns>
+        public IEnumerable<string> GetPermissionKeysByUserName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name) || !HasRolePermissionsTable())
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            return _context.Database.SqlQuery<string>(
+                @"
+SELECT DISTINCT [RolePermissions].[PermissionKey]
+FROM [dbo].[PortalCfg_RolePermissions] AS [RolePermissions]
+INNER JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+    ON [UserRoles].[RoleID] = [RolePermissions].[RoleId]
+INNER JOIN [dbo].[Portal_Users] AS [Users]
+    ON [Users].[UserID] = [UserRoles].[UserID]
+WHERE [RolePermissions].[IsEnabled] = 1
+  AND ([Users].[Name] = @p0 OR [Users].[Email] = @p0)
+ORDER BY [RolePermissions].[PermissionKey]",
+                name.Trim()).ToList();
+        }
+
+        /// <summary>
+        /// 中文：替换角色权限映射，并递增该角色成员的安全版本以使旧票据在下一请求重新判定。
+        ///
+        /// English: Replaces role-permission mappings and increments member security versions so older tickets are
+        /// re-evaluated on the next request.
+        /// </summary>
+        /// <param name="roleId">中文：角色数值标识。English: Numeric role identifier.</param>
+        /// <param name="permissionKeys">中文：新的权限键集合。English: New permission-key collection.</param>
+        /// <param name="updatedBy">中文：执行更新的维护者标识。English: Maintainer identifier performing the update.</param>
+        public void SaveRolePermissions(int roleId, IEnumerable<string> permissionKeys, string updatedBy)
+        {
+            if (!HasRolePermissionsTable())
+            {
+                throw new InvalidOperationException("PortalCfg_RolePermissions is not available.");
+            }
+
+            var role = _context.Roles.Single(i => i.RoleId == roleId);
+            string[] normalizedKeys = PortalPermissionRegistry.NormalizeDefinedKeys(permissionKeys);
+            List<int> affectedUserIds = GetRoleMemberIds(role.RoleId);
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                _context.Database.ExecuteSqlCommand(
+                    "DELETE FROM [dbo].[PortalCfg_RolePermissions] WHERE [RoleId] = @p0",
+                    role.RoleId);
+
+                foreach (string permissionKey in normalizedKeys)
+                {
+                    _context.Database.ExecuteSqlCommand(
+                        @"
+INSERT INTO [dbo].[PortalCfg_RolePermissions]
+    ([RoleId], [PermissionKey], [IsEnabled], [UpdatedUtc], [UpdatedBy])
+VALUES
+    (@p0, @p1, 1, SYSUTCDATETIME(), @p2)",
+                        role.RoleId,
+                        permissionKey,
+                        NormalizeUpdatedBy(updatedBy));
+                }
+
+                IncrementSecurityVersions(affectedUserIds, "RolePermissionsChanged");
+                transaction.Commit();
+            }
+        }
+
         #endregion
 
         private void IncrementSecurityVersions(IEnumerable<int> userIds, string reason)
@@ -230,11 +303,35 @@ END",
             }
         }
 
+        private bool HasRolePermissionsTable()
+        {
+            try
+            {
+                string sql = "SELECT CASE WHEN OBJECT_ID(N'[dbo].[PortalCfg_RolePermissions]', N'U') IS NULL THEN 0 ELSE 1 END";
+                return _context.Database.SqlQuery<int>(sql).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         private static string NormalizeReason(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
             {
                 return "Unspecified";
+            }
+
+            string normalized = value.Trim();
+            return normalized.Substring(0, Math.Min(normalized.Length, 100));
+        }
+
+        private static string NormalizeUpdatedBy(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return "system";
             }
 
             string normalized = value.Trim();

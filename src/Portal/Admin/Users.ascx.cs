@@ -52,7 +52,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView) || !TryReadNavigationParameters())
             {
                 return;
             }
@@ -72,7 +72,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
         protected void btn_DeleteUser_Click(object sender, ImageClickEventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) || !TryReadNavigationParameters())
             {
                 return;
             }
@@ -115,7 +115,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
         protected void EditUser_Click(object sender, ImageClickEventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView) || !TryReadNavigationParameters())
             {
                 return;
             }
@@ -139,7 +139,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void AddUser_Click(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context) || !TryReadNavigationParameters())
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) || !TryReadNavigationParameters())
             {
                 return;
             }

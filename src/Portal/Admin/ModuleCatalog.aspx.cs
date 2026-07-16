@@ -43,7 +43,11 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">事件参数。Event arguments.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleCatalogView))
+            {
+                return;
+            }
+
             if (!Page.IsPostBack)
             {
                 BindPackages();
@@ -58,7 +62,14 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="e">GridView 命令事件参数。GridView command event arguments.</param>
         protected void PackagesGrid_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            PortalAuthorization.RequireAdmin();
+            string permissionKey = string.Equals(e.CommandName, "Preflight", StringComparison.OrdinalIgnoreCase)
+                ? PortalPermissionKeys.ModuleCatalogView
+                : PortalPermissionKeys.ModuleCatalogEdit;
+            if (!PortalAuthorization.EnsurePermission(Context, permissionKey))
+            {
+                return;
+            }
+
             string packageId = Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture);
             PortalModulePackage package;
             string reason;
