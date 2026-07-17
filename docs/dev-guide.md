@@ -150,12 +150,14 @@ P2.5 新增的 HTTP smoke 默认只检查已经运行的站点，不写入数据
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSmoke.ps1 -AdminUser admin
 ```
 
-非 LocalDB SQL Server 兼容检查必须使用独立测试库的外置连接串文件。默认只读 preflight；传入 `-ApplyP2Migrations`、`-ApplyP3Migrations` 或 `-ApplyP5Migrations` 并确认后，才会执行对应的幂等增量迁移：
+非 LocalDB SQL Server 兼容检查必须使用独立测试库的外置连接串文件。默认只读 preflight；传入 `-ApplyP2Migrations`、`-ApplyP3Migrations`、`-ApplyP5Migrations`、`-ApplyP6UserProfileMigration` 或 `-ApplyP6EmployeeOrganizationMigration` 并确认后，才会执行对应的幂等增量迁移：
 
 ```powershell
 $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath $testConfig -RequireP2Migrations -RequireP3Migrations -RequireP5Migrations
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath $testConfig -RequireP2Migrations -RequireP3Migrations -RequireP5Migrations -RequireP6UserProfileMigration -RequireP6EmployeeOrganizationMigration
 ```
+
+P6 用户资料迁移会先检查旧用户名称和邮箱是否存在会破坏唯一性的历史数据；P6.3 员工组织迁移按 `PortalBiz_OrganizationUnits.sql`、`PortalBiz_Employees.sql`、`PortalBiz_UserEmployeeBindings.sql` 的顺序执行。两者都只应指向隔离开发库或测试库，不要指向生产配置。
 
 首次创建隔离的 SQL Server 2016+ 测试库时，可显式运行初始化脚本。它从外置连接串读取目标库名，要求目标库不存在，并在确认后导入历史基础数据、P2、P3 与 P5 迁移；不会输出或保存连接串：
 
@@ -223,8 +225,8 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 参考 `src/ReadMe.txt`，基础流程为：
 
 1. 为隔离环境准备仓库外 `connectionStrings.config`，并确保目标数据库不存在。
-2. 优先用 `Initialize-PortalTestDatabase.ps1` 显式执行基础初始化、P2、P3 与 P5 迁移；历史 SQL 文件仍保留供 Visual Studio/SSMS 人工维护使用。
-3. 如确需手工执行，请按 `Portal_CreateDB.sql`、`Portal_LoadConfig.sql`、`Portal_LoadData.sql`、`PortalCfg_SystemSettings.sql`、`PortalCfg_UserRegistration.sql`、`PortalCfg_OperationAudits.sql`、`PortalCfg_TabThemeOverrides.sql`、`PortalCfg_ModulePackageStates.sql`、`Portal_UserCredentials.sql` 的顺序操作，并确认数据库上下文与连接串一致。
+2. 优先用 `Initialize-PortalTestDatabase.ps1` 显式执行基础初始化，再用 `Test-PortalSqlCompatibility.ps1` 的 `-Apply*` 开关补齐后续幂等迁移；历史 SQL 文件仍保留供 Visual Studio/SSMS 人工维护使用。
+3. 如确需手工执行，请按 `Portal_CreateDB.sql`、`Portal_LoadConfig.sql`、`Portal_LoadData.sql`、`PortalCfg_SystemSettings.sql`、`PortalCfg_UserRegistration.sql`、`PortalCfg_OperationAudits.sql`、`PortalCfg_TabThemeOverrides.sql`、`PortalCfg_ModulePackageStates.sql`、`Portal_UserCredentials.sql`、`PortalCfg_RolePermissions.sql`、`PortalBiz_UserProfiles.sql`、`PortalBiz_OrganizationUnits.sql`、`PortalBiz_Employees.sql`、`PortalBiz_UserEmployeeBindings.sql` 的顺序操作，并确认数据库上下文与连接串一致。
 4. 复制 `src/Portal/Config/Templates/connectionStrings.config` 到外置配置目录，并修改其中的 `Portal` 连接串。
 5. 构建并运行站点。
 

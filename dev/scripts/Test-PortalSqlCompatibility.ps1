@@ -20,7 +20,11 @@ param(
 
     [switch]$ApplyP6UserProfileMigration,
 
-    [switch]$RequireP6UserProfileMigration
+    [switch]$RequireP6UserProfileMigration,
+
+    [switch]$ApplyP6EmployeeOrganizationMigration,
+
+    [switch]$RequireP6EmployeeOrganizationMigration
 )
 
 Set-StrictMode -Version Latest
@@ -304,12 +308,32 @@ FROM
         }
     }
 
+    if ($ApplyP6EmployeeOrganizationMigration) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P6.3 employee and organization migration scripts')) {
+            $migrationFiles = @(
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_OrganizationUnits.sql'),
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_Employees.sql'),
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_UserEmployeeBindings.sql')
+            )
+
+            foreach ($migrationFile in $migrationFiles) {
+                Invoke-MigrationFile -Connection $connection -Path $migrationFile
+            }
+
+            Add-DatabaseCheck -Name 'P6.3 employee organization migration application' -Status 'Pass' -Detail 'The idempotent P6.3 organization, employee, and binding migration batches completed.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P6.3 employee organization migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
     $p5Tables = @('Portal_UserCredentials', 'Portal_UserSecurityStates', 'PortalCfg_RolePermissions')
-    $p6Tables = @('PortalBiz_UserProfiles')
-    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6Tables)
+    $p6UserProfileTables = @('PortalBiz_UserProfiles')
+    $p6EmployeeOrganizationTables = @('PortalBiz_OrganizationUnits', 'PortalBiz_Employees', 'PortalBiz_UserEmployeeBindings')
+    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
     Add-DatabaseCheck -Name 'Base Portal schema' -Status $(if ($missingBaseTables.Count -eq 0) { 'Pass' } else { 'Fail' }) -Detail $(if ($missingBaseTables.Count -eq 0) { 'Required base tables are present.' } else { 'Missing: ' + ($missingBaseTables -join ', ') })
@@ -347,8 +371,8 @@ FROM
         Add-DatabaseCheck -Name 'P5 security schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP5Tables -join ', '))
     }
 
-    $missingP6Tables = @($p6Tables | Where-Object { -not $existingTables.Contains($_) })
-    if ($missingP6Tables.Count -eq 0) {
+    $missingP6UserProfileTables = @($p6UserProfileTables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP6UserProfileTables.Count -eq 0) {
         Add-DatabaseCheck -Name 'P6 user-profile schema' -Status 'Pass' -Detail 'The P6 user-profile extension table is present.'
 
         $userCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[Portal_Users];')
@@ -378,10 +402,51 @@ WHERE NOT EXISTS
         Add-DatabaseCheck -Name 'P6 user-profile seed coverage' -Status $(if ($profileCoverageOk) { 'Pass' } elseif ($RequireP6UserProfileMigration) { 'Fail' } else { 'Warning' }) -Detail ('Users: ' + $userCount + '; profiles: ' + $profileCount + '; missing profiles: ' + $missingProfileCount + '; orphan profiles: ' + $orphanProfileCount + '.')
     }
     elseif ($RequireP6UserProfileMigration) {
-        Add-DatabaseCheck -Name 'P6 user-profile schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP6Tables -join ', '))
+        Add-DatabaseCheck -Name 'P6 user-profile schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP6UserProfileTables -join ', '))
     }
     else {
-        Add-DatabaseCheck -Name 'P6 user-profile schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP6Tables -join ', '))
+        Add-DatabaseCheck -Name 'P6 user-profile schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP6UserProfileTables -join ', '))
+    }
+
+    $missingP6EmployeeOrganizationTables = @($p6EmployeeOrganizationTables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP6EmployeeOrganizationTables.Count -eq 0) {
+        Add-DatabaseCheck -Name 'P6.3 employee organization schema' -Status 'Pass' -Detail 'The P6.3 organization, employee, and binding tables are present.'
+
+        $organizationCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_OrganizationUnits];')
+        $employeeCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_Employees];')
+        $bindingCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_UserEmployeeBindings];')
+        Add-DatabaseCheck -Name 'P6.3 employee organization row counts' -Status 'Info' -Detail ('Organizations: ' + $organizationCount + '; employees: ' + $employeeCount + '; bindings: ' + $bindingCount + '.')
+
+        $duplicateActiveUserBindings = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM
+(
+    SELECT [UserId]
+    FROM [dbo].[PortalBiz_UserEmployeeBindings]
+    WHERE [BindingStatus] = N'Active'
+    GROUP BY [UserId]
+    HAVING COUNT(*) > 1
+) AS [DuplicateActiveUsers];
+'@)
+        $duplicateActiveEmployeeBindings = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM
+(
+    SELECT [EmployeeId]
+    FROM [dbo].[PortalBiz_UserEmployeeBindings]
+    WHERE [BindingStatus] = N'Active'
+    GROUP BY [EmployeeId]
+    HAVING COUNT(*) > 1
+) AS [DuplicateActiveEmployees];
+'@)
+        $activeBindingUniquenessOk = $duplicateActiveUserBindings -eq 0 -and $duplicateActiveEmployeeBindings -eq 0
+        Add-DatabaseCheck -Name 'P6.3 active binding uniqueness' -Status $(if ($activeBindingUniquenessOk) { 'Pass' } elseif ($RequireP6EmployeeOrganizationMigration) { 'Fail' } else { 'Warning' }) -Detail ('Duplicate active user bindings: ' + $duplicateActiveUserBindings + '; duplicate active employee bindings: ' + $duplicateActiveEmployeeBindings + '.')
+    }
+    elseif ($RequireP6EmployeeOrganizationMigration) {
+        Add-DatabaseCheck -Name 'P6.3 employee organization schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP6EmployeeOrganizationTables -join ', '))
+    }
+    else {
+        Add-DatabaseCheck -Name 'P6.3 employee organization schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP6EmployeeOrganizationTables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })
