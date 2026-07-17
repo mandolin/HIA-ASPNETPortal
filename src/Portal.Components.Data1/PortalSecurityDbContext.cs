@@ -50,6 +50,13 @@ namespace ASPNET.StarterKit.Portal
         public DbSet<UserSecurityStateItem> UserSecurityStates { get; set; }
 
         /// <summary>
+        /// 中文：P6.2 企业用户资料扩展记录。
+        ///
+        /// English: P6.2 enterprise user-profile extension records.
+        /// </summary>
+        public DbSet<UserProfileItem> UserProfiles { get; set; }
+
+        /// <summary>
         /// 在模型构建时进行配置。
         /// </summary>
         /// <param name="modelBuilder">模型构建器。</param>
@@ -84,6 +91,12 @@ namespace ASPNET.StarterKit.Portal
 
             modelBuilder.Entity<UserSecurityStateItem>()
                 .HasKey(state => state.UserId);
+
+            // 中文：用户资料扩展同样以 UserId 为主键，不建立导航关系，避免旧账号实体承担新生命周期状态。
+            // English: User-profile extensions also use UserId as the key and avoid navigation properties so the
+            // legacy user entity does not own the new lifecycle status.
+            modelBuilder.Entity<UserProfileItem>()
+                .HasKey(profile => profile.UserId);
         }
     }
 }

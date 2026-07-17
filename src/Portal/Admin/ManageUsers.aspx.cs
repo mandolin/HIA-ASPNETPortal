@@ -153,6 +153,13 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            string passwordPolicyMessage;
+            if (!PortalPasswordPolicy.TryValidate(Password.Text, out passwordPolicyMessage))
+            {
+                ShowRegistrationMessage(passwordPolicyMessage, true);
+                return;
+            }
+
             try
             {
                 UsersDB.UpdateUser(userId, email, Password.Text);

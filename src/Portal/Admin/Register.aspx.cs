@@ -72,10 +72,17 @@ namespace ASPNET.StarterKit.Portal
                 string employeeCode = EmployeeCode.Text.Trim();
                 string inviteCode = CurrentInviteCode;
                 string inviteMessage;
+                string passwordPolicyMessage;
 
                 if (!UsersDB.ValidateRegistrationInvite(inviteCode, out inviteMessage))
                 {
                     Message.Text = inviteMessage;
+                    return;
+                }
+
+                if (!PortalPasswordPolicy.TryValidate(Password.Text, out passwordPolicyMessage))
+                {
+                    Message.Text = passwordPolicyMessage;
                     return;
                 }
 

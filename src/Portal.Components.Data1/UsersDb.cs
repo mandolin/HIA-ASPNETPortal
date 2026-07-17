@@ -25,6 +25,7 @@ namespace ASPNET.StarterKit.Portal
     {
         private const long InitialSecurityVersion = 1;
         private const string CredentialTableName = "Portal_UserCredentials";
+        private const string ProfileTableName = "PortalBiz_UserProfiles";
         private const string SecurityStateTableName = "Portal_UserSecurityStates";
         private readonly PortalSecurityDbContext _context;
 
@@ -53,6 +54,13 @@ namespace ASPNET.StarterKit.Portal
         public int AddUser(string fullName, string email, string password)
         {
             string normalizedPassword = password ?? string.Empty;
+            string passwordPolicyMessage;
+            if (!string.IsNullOrEmpty(normalizedPassword) &&
+                !PortalPasswordPolicy.TryValidate(normalizedPassword, out passwordPolicyMessage))
+            {
+                return -1;
+            }
+
             if (!string.IsNullOrEmpty(normalizedPassword) && !HasCredentialTables())
             {
                 return -1;
@@ -76,6 +84,12 @@ namespace ASPNET.StarterKit.Portal
                     _context.SaveChanges();
 
                     EnsureSecurityState(item.UserId, "UserCreated");
+                    TryEnsureUserProfile(
+                        item.UserId,
+                        item.Name,
+                        item.Email,
+                        PortalUserProfileStatuses.Active,
+                        "system-admin");
                     if (!string.IsNullOrEmpty(normalizedPassword))
                     {
                         UpsertCredential(item.UserId, normalizedPassword, null, null, false, null);
@@ -123,6 +137,12 @@ namespace ASPNET.StarterKit.Portal
                 return -1;
             }
 
+            string passwordPolicyMessage;
+            if (!PortalPasswordPolicy.TryValidate(password, out passwordPolicyMessage))
+            {
+                return -1;
+            }
+
             string normalizedInviteCode = Normalize(inviteCode);
             string inviteMessage;
             if (!ValidateRegistrationInvite(normalizedInviteCode, out inviteMessage))
@@ -145,6 +165,14 @@ namespace ASPNET.StarterKit.Portal
                     _context.SaveChanges();
 
                     EnsureSecurityState(item.UserId, "SelfRegistration");
+                    TryEnsureUserProfile(
+                        item.UserId,
+                        item.Name,
+                        item.Email,
+                        requiresApproval
+                            ? PortalUserProfileStatuses.PendingApproval
+                            : PortalUserProfileStatuses.Active,
+                        "system-self-registration");
                     UpsertCredential(item.UserId, password, null, null, false, null);
 
                     // 中文：所有注册审核时间统一以 UTC 保存。
@@ -238,6 +266,11 @@ namespace ASPNET.StarterKit.Portal
             }
 
             _context.SaveChanges();
+            TrySetUserProfileStatus(
+                userId,
+                PortalUserProfileStatuses.Active,
+                string.Empty,
+                Normalize(approvedBy));
             IncrementSecurityVersion(userId, "RegistrationApproved");
         }
 
@@ -269,6 +302,11 @@ namespace ASPNET.StarterKit.Portal
             registration.ApprovedBy = null;
             registration.ReviewNote = null;
             _context.SaveChanges();
+            TrySetUserProfileStatus(
+                userId,
+                PortalUserProfileStatuses.Disabled,
+                "RegistrationRejected",
+                Normalize(rejectedBy));
             IncrementSecurityVersion(userId, "RegistrationRejected");
         }
 
@@ -381,12 +419,19 @@ namespace ASPNET.StarterKit.Portal
                 throw new InvalidOperationException("Credential metadata tables are not available.");
             }
 
+            string passwordPolicyMessage;
+            if (!PortalPasswordPolicy.TryValidate(password, out passwordPolicyMessage))
+            {
+                throw new InvalidOperationException(passwordPolicyMessage);
+            }
+
             using (var transaction = _context.Database.BeginTransaction())
             {
                 var item = _context.Users.Single(i => i.UserId == userId);
 
                 item.Email = email;
                 item.Password = string.Empty;
+                TryUpdateUserProfileEmail(userId, email, "system-admin");
                 UpsertCredential(userId, password, null, null, false, null);
                 _context.SaveChanges();
                 IncrementSecurityVersion(userId, "CredentialReset");
@@ -480,11 +525,17 @@ ORDER BY [Roles].[RoleName]",
                 return PortalSignInResult.Failed();
             }
 
+            var resolution = new PortalLoginIdentifierResolver(_context, HasUserProfileTable()).Resolve(normalizedLogin);
+            if (!resolution.Found || resolution.Ambiguous)
+            {
+                return PortalSignInResult.Failed();
+            }
+
             var item = _context.Users
                 .AsNoTracking()
-                .SingleOrDefault(i => i.Email == normalizedLogin || i.Name == normalizedLogin);
+                .SingleOrDefault(i => i.UserId == resolution.UserId);
 
-            if (item == null || !IsLoginAllowed(item.UserId))
+            if (item == null || !IsUserProfileLoginAllowed(item.UserId) || !IsLoginAllowed(item.UserId))
             {
                 return PortalSignInResult.Failed();
             }
@@ -680,6 +731,30 @@ END",
             }
         }
 
+        private bool IsUserProfileLoginAllowed(int userId)
+        {
+            try
+            {
+                if (!HasUserProfileTable())
+                {
+                    return true;
+                }
+
+                string status = _context.Database.SqlQuery<string>(
+                    "SELECT TOP (1) [Status] FROM [dbo].[PortalBiz_UserProfiles] WHERE [UserId] = @p0",
+                    userId).SingleOrDefault();
+                return string.IsNullOrEmpty(status) ||
+                       string.Equals(status, PortalUserProfileStatuses.Active, StringComparison.Ordinal);
+            }
+            catch (Exception)
+            {
+                // 中文：profile 读取失败时保持旧路径可用，部署健康检查会另行暴露缺失或损坏的扩展表。
+                // English: Keep the legacy path usable when profile reads fail; deployment health checks will expose
+                // missing or damaged extension tables separately.
+                return true;
+            }
+        }
+
         private void TryEnsureApprovedRegistration(int userId, string approvedBy)
         {
             try
@@ -705,6 +780,98 @@ END",
             {
                 // 中文：可选审核元数据失败不能阻断管理员旧入口；诊断与补偿策略留给后续运营治理。
                 // English: Optional review-metadata failures must not block the legacy administration entry; diagnostics and remediation belong to later operations governance.
+            }
+        }
+
+        private void TryEnsureUserProfile(int userId, string loginName, string email, string status, string actor)
+        {
+            try
+            {
+                if (!HasUserProfileTable() || _context.UserProfiles.Any(i => i.UserId == userId))
+                {
+                    return;
+                }
+
+                DateTime nowUtc = DateTime.UtcNow;
+                string normalizedLoginName = Normalize(loginName);
+                var profile = new UserProfileItem
+                {
+                    UserId = userId,
+                    LoginName = normalizedLoginName,
+                    DisplayName = normalizedLoginName,
+                    PreferredEmail = NullIfEmpty(email),
+                    Status = NormalizeProfileStatus(status),
+                    CreatedUtc = nowUtc,
+                    CreatedBy = NullIfEmpty(actor),
+                    UpdatedUtc = nowUtc,
+                    UpdatedBy = NullIfEmpty(actor)
+                };
+                _context.UserProfiles.Add(profile);
+            }
+            catch (Exception)
+            {
+                if (HasUserProfileTable())
+                {
+                    throw;
+                }
+            }
+        }
+
+        private void TryUpdateUserProfileEmail(int userId, string email, string actor)
+        {
+            try
+            {
+                if (!HasUserProfileTable())
+                {
+                    return;
+                }
+
+                var profile = _context.UserProfiles.SingleOrDefault(i => i.UserId == userId);
+                if (profile == null)
+                {
+                    return;
+                }
+
+                profile.PreferredEmail = NullIfEmpty(email);
+                profile.UpdatedUtc = DateTime.UtcNow;
+                profile.UpdatedBy = NullIfEmpty(actor);
+            }
+            catch (Exception)
+            {
+                if (HasUserProfileTable())
+                {
+                    throw;
+                }
+            }
+        }
+
+        private void TrySetUserProfileStatus(int userId, string status, string reason, string actor)
+        {
+            try
+            {
+                if (!HasUserProfileTable())
+                {
+                    return;
+                }
+
+                var profile = _context.UserProfiles.SingleOrDefault(i => i.UserId == userId);
+                if (profile == null)
+                {
+                    return;
+                }
+
+                profile.Status = NormalizeProfileStatus(status);
+                profile.StatusReason = NullIfEmpty(reason);
+                profile.UpdatedUtc = DateTime.UtcNow;
+                profile.UpdatedBy = NullIfEmpty(actor);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                if (HasUserProfileTable())
+                {
+                    throw;
+                }
             }
         }
 
@@ -847,6 +1014,11 @@ END",
             return HasTable("PortalCfg_UserRegistrations");
         }
 
+        private bool HasUserProfileTable()
+        {
+            return HasTable(ProfileTableName);
+        }
+
         private bool HasInviteTable()
         {
             return HasTable("PortalCfg_RegistrationInvites");
@@ -903,6 +1075,14 @@ END",
             }
 
             return normalized.Substring(0, Math.Min(normalized.Length, 100));
+        }
+
+        private static string NormalizeProfileStatus(string value)
+        {
+            string normalized = Normalize(value);
+            return string.IsNullOrEmpty(normalized)
+                ? PortalUserProfileStatuses.Active
+                : normalized;
         }
 
         private static string NullIfEmpty(string value)
