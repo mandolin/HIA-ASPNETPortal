@@ -113,6 +113,7 @@
     <Content Include="Admin\SiteSettings.ascx" />
     <Content Include="Admin\DiagnosticLogDetail.aspx" />
     <Content Include="Admin\DiagnosticsLogs.aspx" />
+    <Content Include="Admin\EmployeeProfileCorrectionRequests.aspx" />
     <Content Include="Admin\OperationAudits.aspx" />
     <Content Include="Admin\OrganizationUnitEdit.aspx" />
     <Content Include="Admin\SystemHealth.aspx" />
@@ -192,6 +193,9 @@
     <Content Include="DesktopModules\EmployeeProfileConfirm\module.json" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\Styles\EmployeeProfileConfirm.css" />
+    <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\module.json" />
+    <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx" />
+    <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\Styles\EmployeeProfileCorrectionRequest.css" />
     <Content Include="DesktopModules\ModuleProbe\module.json" />
     <Content Include="DesktopModules\ModuleProbe\ModuleProbe.ascx" />
     <Content Include="DesktopModules\ModuleProbe\Styles\ModuleProbe.css" />
@@ -336,6 +340,13 @@
     </Compile>
     <Compile Include="Admin\DiagnosticsLogs.aspx.designer.cs">
       <DependentUpon>DiagnosticsLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EmployeeProfileCorrectionRequests.aspx.cs">
+      <DependentUpon>EmployeeProfileCorrectionRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeProfileCorrectionRequests.aspx.designer.cs">
+      <DependentUpon>EmployeeProfileCorrectionRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\OperationAudits.aspx.cs">
       <DependentUpon>OperationAudits.aspx</DependentUpon>
@@ -601,6 +612,13 @@
     </Compile>
     <Compile Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx.designer.cs">
       <DependentUpon>EmployeeProfileConfirm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx.cs">
+      <DependentUpon>EmployeeProfileCorrectionRequest.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx.designer.cs">
+      <DependentUpon>EmployeeProfileCorrectionRequest.ascx</DependentUpon>
     </Compile>
     <Compile Include="DesktopModules\ModuleProbe\ModuleProbe.ascx.cs">
       <DependentUpon>ModuleProbe.ascx</DependentUpon>

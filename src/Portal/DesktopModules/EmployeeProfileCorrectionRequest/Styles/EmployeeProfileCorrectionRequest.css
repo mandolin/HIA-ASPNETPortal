@@ -1,0 +1,48 @@
+.employee-profile-correction {
+    border: 1px solid #d8dee8;
+    padding: 12px;
+    max-width: 820px;
+    background: #fff;
+}
+
+.employee-profile-correction-title {
+    color: #2f475f;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.employee-profile-correction-subtitle {
+    color: #41556b;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 14px 0 8px;
+}
+
+.employee-profile-correction-message {
+    display: block;
+    color: #8a1f1f;
+    margin: 6px 0 10px;
+}
+
+.employee-profile-correction-table,
+.employee-profile-correction-form,
+.employee-profile-correction-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.employee-profile-correction-table td,
+.employee-profile-correction-form td,
+.employee-profile-correction-list td,
+.employee-profile-correction-list th {
+    border-bottom: 1px solid #edf1f5;
+    padding: 6px 4px;
+    text-align: left;
+}
+
+.employee-profile-correction-label {
+    width: 120px;
+    color: #41556b;
+    font-weight: 700;
+}

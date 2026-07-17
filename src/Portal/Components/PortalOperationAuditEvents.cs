@@ -80,6 +80,13 @@ namespace ASPNET.StarterKit.Portal
         public const string EmployeeProfileConfirmationTargetType = "EmployeeProfileConfirmation";
 
         /// <summary>
+        /// 中文：审计目标类型：员工资料更正请求。
+        ///
+        /// English: Audit target type for an employee-profile correction request.
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequestTargetType = "EmployeeProfileCorrectionRequest";
+
+        /// <summary>
         /// 中文：自主注册已提交。
         ///
         /// English: Self-registration was submitted.
@@ -197,5 +204,19 @@ namespace ASPNET.StarterKit.Portal
         /// English: Employee profile was confirmed by the current bound user.
         /// </summary>
         public const string EmployeeProfileConfirmed = "EmployeeProfileConfirmed";
+
+        /// <summary>
+        /// 中文：员工资料更正请求已提交。
+        ///
+        /// English: Employee-profile correction request was submitted.
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequested = "EmployeeProfileCorrectionRequested";
+
+        /// <summary>
+        /// 中文：员工资料更正请求已由管理员处理。
+        ///
+        /// English: Employee-profile correction request was reviewed by an administrator.
+        /// </summary>
+        public const string EmployeeProfileCorrectionReviewed = "EmployeeProfileCorrectionReviewed";
     }
 }

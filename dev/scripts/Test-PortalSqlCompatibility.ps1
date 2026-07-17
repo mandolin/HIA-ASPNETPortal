@@ -333,8 +333,16 @@ FROM
 
     if ($ApplyP6BusinessModuleMigration) {
         if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P6.4 business-module migration scripts')) {
-            Invoke-MigrationFile -Connection $connection -Path (Join-Path $repoRoot 'src/Setup/PortalBiz_EmployeeProfileConfirmations.sql')
-            Add-DatabaseCheck -Name 'P6.4 business module migration application' -Status 'Pass' -Detail 'The idempotent P6.4 employee-profile confirmation migration batches completed.'
+            $migrationFiles = @(
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_EmployeeProfileConfirmations.sql'),
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_EmployeeProfileCorrectionRequests.sql')
+            )
+
+            foreach ($migrationFile in $migrationFiles) {
+                Invoke-MigrationFile -Connection $connection -Path $migrationFile
+            }
+
+            Add-DatabaseCheck -Name 'P6.4 business module migration application' -Status 'Pass' -Detail 'The idempotent P6.4 business-module migration batches completed.'
         }
         else {
             Add-DatabaseCheck -Name 'P6.4 business module migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
@@ -347,7 +355,7 @@ FROM
     $p5Tables = @('Portal_UserCredentials', 'Portal_UserSecurityStates', 'PortalCfg_RolePermissions')
     $p6UserProfileTables = @('PortalBiz_UserProfiles')
     $p6EmployeeOrganizationTables = @('PortalBiz_OrganizationUnits', 'PortalBiz_Employees', 'PortalBiz_UserEmployeeBindings')
-    $p6BusinessModuleTables = @('PortalBiz_EmployeeProfileConfirmations')
+    $p6BusinessModuleTables = @('PortalBiz_EmployeeProfileConfirmations', 'PortalBiz_EmployeeProfileCorrectionRequests')
     $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
@@ -466,10 +474,13 @@ FROM
 
     $missingP6BusinessModuleTables = @($p6BusinessModuleTables | Where-Object { -not $existingTables.Contains($_) })
     if ($missingP6BusinessModuleTables.Count -eq 0) {
-        Add-DatabaseCheck -Name 'P6.4 business module schema' -Status 'Pass' -Detail 'The P6.4 employee-profile confirmation table is present.'
+        Add-DatabaseCheck -Name 'P6.4 business module schema' -Status 'Pass' -Detail 'The P6.4 employee-profile confirmation and correction-request tables are present.'
 
         $confirmationCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_EmployeeProfileConfirmations];')
         Add-DatabaseCheck -Name 'P6.4 employee profile confirmation row count' -Status 'Info' -Detail ('Confirmations: ' + $confirmationCount + '.')
+
+        $correctionRequestCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_EmployeeProfileCorrectionRequests];')
+        Add-DatabaseCheck -Name 'P6.4 employee profile correction request row count' -Status 'Info' -Detail ('Correction requests: ' + $correctionRequestCount + '.')
     }
     elseif ($RequireP6BusinessModuleMigration) {
         Add-DatabaseCheck -Name 'P6.4 business module schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP6BusinessModuleTables -join ', '))

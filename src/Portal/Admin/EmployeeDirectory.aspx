@@ -29,6 +29,8 @@
                             <a class="CommandButton" href="EmployeeEdit.aspx">New Employee</a>
                             &nbsp;
                             <a class="CommandButton" href="UserEmployeeBindingEdit.aspx">Bind User/Employee</a>
+                            &nbsp;
+                            <a class="CommandButton" href="EmployeeProfileCorrectionRequests.aspx">Profile Corrections</a>
                         </td>
                     </tr>
                 </table>

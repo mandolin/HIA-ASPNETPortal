@@ -64,6 +64,15 @@ namespace ASPNET.StarterKit.Portal
         /// <summary>中文：管理员工资料确认记录。English: Administer employee-profile confirmation records.</summary>
         public const string EmployeeProfileConfirmAdmin = "EmployeeProfileConfirm.Admin";
 
+        /// <summary>中文：查看员工资料更正请求模块。English: View the employee-profile correction request module.</summary>
+        public const string EmployeeProfileCorrectionRequestView = "EmployeeProfileCorrectionRequest.View";
+
+        /// <summary>中文：提交自己的员工资料更正请求。English: Submit one's own employee-profile correction request.</summary>
+        public const string EmployeeProfileCorrectionRequestSubmit = "EmployeeProfileCorrectionRequest.Submit";
+
+        /// <summary>中文：管理员工资料更正请求。English: Administer employee-profile correction requests.</summary>
+        public const string EmployeeProfileCorrectionRequestAdmin = "EmployeeProfileCorrectionRequest.Admin";
+
         /// <summary>中文：查看主题设置。English: View theme settings.</summary>
         public const string ThemeView = "Theme.View";
 
@@ -148,6 +157,9 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmView, "Business.EmployeeProfileConfirm", "查看员工资料确认模块。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmConfirm, "Business.EmployeeProfileConfirm", "确认自己的员工资料。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmAdmin, "Business.EmployeeProfileConfirm", "管理员查看和处理员工资料确认记录。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestView, "Business.EmployeeProfileCorrectionRequest", "查看员工资料更正请求模块。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit, "Business.EmployeeProfileCorrectionRequest", "提交自己的员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin, "Business.EmployeeProfileCorrectionRequest", "管理员查看和处理员工资料更正请求。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeView, "Theme", "查看主题设置。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeEdit, "Theme", "编辑主题设置和 Tab 覆盖。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),
