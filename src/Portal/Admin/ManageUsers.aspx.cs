@@ -45,6 +45,14 @@ namespace ASPNET.StarterKit.Portal
         public IRolesDb RolesDB { private get; set; }
 
         /// <summary>
+        /// 中文：员工目录只读数据访问依赖，用于展示当前账号员工绑定。
+        ///
+        /// English: Employee-directory read dependency used to display the current user-employee binding.
+        /// </summary>
+        [Dependency]
+        public IEmployeeDirectoryDb EmployeeDirectoryDb { private get; set; }
+
+        /// <summary>
         /// 中文：授权并解析规范用户目标；首次请求绑定用户、角色和审核信息。
         ///
         /// English: Authorizes and resolves the canonical user target, then binds user, role, and review information
@@ -517,6 +525,7 @@ namespace ASPNET.StarterKit.Portal
             ProfileSourceText.Text = EncodeDisplay(profile == null ? "LegacyNoProfileInfo" : profile.Source);
             SetProfileInputsEnabled(profile == null || profile.IsAvailable);
             IUserRegistrationInfo registration = BindRegistrationInfo(currentUser.UserId);
+            BindEmployeeBindingInfo(currentUser.UserId);
             BindProfileLifecycleActions(profile, registration);
             TitleText.Text = Server.HtmlEncode("Manage User: " + GetEffectiveDisplayName(profile, currentUser.Name));
 
@@ -543,6 +552,24 @@ namespace ASPNET.StarterKit.Portal
             RejectRegistrationBtn.Visible =
                 string.Equals(registration.Status, PortalUserRegistrationStatuses.PendingApproval, StringComparison.Ordinal);
             return registration;
+        }
+
+        private void BindEmployeeBindingInfo(int currentUserId)
+        {
+            EmployeeBindingLink.NavigateUrl = ResolveUrl(
+                "~/Admin/UserEmployeeBindingEdit.aspx?userId=" + currentUserId.ToString());
+            EmployeeBindingLink.Visible = true;
+
+            if (EmployeeDirectoryDb == null || !EmployeeDirectoryDb.IsSchemaAvailable())
+            {
+                EmployeeBindingText.Text = "P6.3 schema unavailable.";
+                return;
+            }
+
+            IUserEmployeeBindingInfo binding = EmployeeDirectoryDb.GetActiveBindingByUserId(currentUserId);
+            EmployeeBindingText.Text = binding == null
+                ? "(none)"
+                : EncodeDisplay(binding.EmployeeCode + " / " + binding.EmployeeDisplayName);
         }
 
         private void BindProfileLifecycleActions(IUserProfileInfo profile, IUserRegistrationInfo registration)

@@ -27,6 +27,8 @@
                             <a class="CommandButton" href="OrganizationUnitEdit.aspx">New Organization Unit</a>
                             &nbsp;
                             <a class="CommandButton" href="EmployeeEdit.aspx">New Employee</a>
+                            &nbsp;
+                            <a class="CommandButton" href="UserEmployeeBindingEdit.aspx">Bind User/Employee</a>
                         </td>
                     </tr>
                 </table>
@@ -110,6 +112,12 @@
                                         Text="Edit"
                                         NavigateUrl='<%# Eval("EditUrl") %>'
                                         runat="server" />
+                                    &nbsp;
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="Bind"
+                                        NavigateUrl='<%# Eval("BindUrl") %>'
+                                        runat="server" />
                                 </td>
                             </tr>
                     </ItemTemplate>
@@ -176,6 +184,7 @@
                                 <td width="150">Employee Name</td>
                                 <td width="95">Status</td>
                                 <td width="155">Bound UTC</td>
+                                <td width="80">Action</td>
                                 <td>Reason</td>
                             </tr>
                     </HeaderTemplate>
@@ -188,6 +197,13 @@
                                 <td><%#: Eval("EmployeeDisplayName") %></td>
                                 <td><%#: Eval("BindingStatus") %></td>
                                 <td><%#: Eval("BoundUtcText") %></td>
+                                <td>
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="Manage"
+                                        NavigateUrl='<%# Eval("EditUrl") %>'
+                                        runat="server" />
+                                </td>
                                 <td><%#: Eval("Reason") %></td>
                             </tr>
                     </ItemTemplate>

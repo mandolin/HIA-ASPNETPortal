@@ -10,22 +10,27 @@ namespace ASPNET.StarterKit.Portal
     /// English: Internal service that resolves a sign-in input to one unique Portal user identifier.
     /// </summary>
     /// <remarks>
-    /// 中文：此服务只负责“输入是谁”，不验证密码，不决定角色，也不把员工工号当作凭据。P6.2 中员工工号
-    /// 登录路径保持关闭，待 P6.3 正式员工表和当前有效绑定表完成后再启用。
+    /// 中文：此服务只负责“输入是谁”，不验证密码，不决定角色，也不把员工工号当作凭据。P6.3-S5 起，
+    /// 员工号只有在 Active 员工和 Active 账号绑定同时存在时才会解析为门户账号。
     ///
     /// English: This service only answers "who does this input identify"; it does not validate passwords, decide roles,
-    /// or treat employee codes as credentials. Employee-code sign-in remains disabled in P6.2 until P6.3 provides the
-    /// formal employee table and current binding table.
+    /// or treat employee codes as credentials. Starting in P6.3-S5, employee codes resolve to Portal accounts only
+    /// when both an active employee and an active user binding exist.
     /// </remarks>
     internal sealed class PortalLoginIdentifierResolver
     {
         private readonly PortalSecurityDbContext context;
         private readonly bool userProfilesAvailable;
+        private readonly bool employeeCodeSignInAvailable;
 
-        internal PortalLoginIdentifierResolver(PortalSecurityDbContext context, bool userProfilesAvailable)
+        internal PortalLoginIdentifierResolver(
+            PortalSecurityDbContext context,
+            bool userProfilesAvailable,
+            bool employeeCodeSignInAvailable)
         {
             this.context = context;
             this.userProfilesAvailable = userProfilesAvailable;
+            this.employeeCodeSignInAvailable = employeeCodeSignInAvailable;
         }
 
         internal PortalLoginIdentifierResolution Resolve(string input)
@@ -55,7 +60,30 @@ namespace ASPNET.StarterKit.Portal
                 return legacyName;
             }
 
+            if (employeeCodeSignInAvailable)
+            {
+                PortalLoginIdentifierResolution employeeCode = ResolveEmployeeCode(normalizedInput);
+                if (employeeCode.HasDecision)
+                {
+                    return employeeCode;
+                }
+            }
+
             return ResolveEmail(normalizedInput);
+        }
+
+        private PortalLoginIdentifierResolution ResolveEmployeeCode(string normalizedInput)
+        {
+            return ResolveSingle(
+                @"
+SELECT TOP (2) [Binding].[UserId]
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+WHERE [Binding].[BindingStatus] = N'Active'
+  AND [Employee].[EmploymentStatus] = N'Active'
+  AND [Employee].[EmployeeCode] = @p0",
+                normalizedInput);
         }
 
         private PortalLoginIdentifierResolution ResolveEmail(string normalizedInput)

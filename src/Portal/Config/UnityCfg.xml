@@ -72,6 +72,10 @@
             <lifetime type="singleton" />
         </register>
 
+        <register type="IUserEmployeeBindingAdminDb" mapTo="UserEmployeeBindingAdminDb">
+            <lifetime type="singleton" />
+        </register>
+
         <register type="IRolesDb" mapTo="RolesDb">
             <lifetime type="singleton" />
         </register>

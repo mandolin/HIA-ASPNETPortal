@@ -119,6 +119,7 @@
     <Content Include="Admin\ThemeSettings.aspx" />
     <Content Include="Admin\TabLayout.aspx" />
     <Content Include="Admin\Tabs.ascx" />
+    <Content Include="Admin\UserEmployeeBindingEdit.aspx" />
     <Content Include="Admin\Users.ascx" />
     <Content Include="App_Themes\Default\Default.css" />
     <Content Include="App_Themes\Default\theme.json" />
@@ -360,6 +361,13 @@
     </Compile>
     <Compile Include="Admin\ThemeSettings.aspx.designer.cs">
       <DependentUpon>ThemeSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserEmployeeBindingEdit.aspx.cs">
+      <DependentUpon>UserEmployeeBindingEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserEmployeeBindingEdit.aspx.designer.cs">
+      <DependentUpon>UserEmployeeBindingEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\TabLayout.aspx.cs">
       <DependentUpon>TabLayout.aspx</DependentUpon>

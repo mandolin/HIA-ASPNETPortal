@@ -59,6 +59,13 @@ namespace ASPNET.StarterKit.Portal
         public const string EmployeeTargetType = "Employee";
 
         /// <summary>
+        /// 中文：审计目标类型：门户账号员工绑定。
+        ///
+        /// English: Audit target type for a Portal-user employee binding.
+        /// </summary>
+        public const string UserEmployeeBindingTargetType = "UserEmployeeBinding";
+
+        /// <summary>
         /// 中文：自主注册已提交。
         ///
         /// English: Self-registration was submitted.
@@ -155,5 +162,19 @@ namespace ASPNET.StarterKit.Portal
         /// English: Employee master data was updated.
         /// </summary>
         public const string EmployeeUpdated = "EmployeeUpdated";
+
+        /// <summary>
+        /// 中文：门户账号与员工已绑定。
+        ///
+        /// English: A Portal user was bound to an employee.
+        /// </summary>
+        public const string UserEmployeeBound = "UserEmployeeBound";
+
+        /// <summary>
+        /// 中文：门户账号与员工绑定已结束。
+        ///
+        /// English: A Portal-user employee binding was ended.
+        /// </summary>
+        public const string UserEmployeeUnbound = "UserEmployeeUnbound";
     }
 }

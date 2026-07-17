@@ -60,6 +60,7 @@ BEGIN
         (N'Admin.Users.Edit'),
         (N'Admin.Users.ResetPassword'),
         (N'Admin.Roles.Edit'),
+        (N'EmployeeDirectory.Bind'),
         (N'Theme.View'),
         (N'Theme.Edit'),
         (N'Module.Catalog.View'),

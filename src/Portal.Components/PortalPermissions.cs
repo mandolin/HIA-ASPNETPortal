@@ -52,6 +52,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary>中文：编辑角色和角色成员关系。English: Edit roles and role memberships.</summary>
         public const string AdminRolesEdit = "Admin.Roles.Edit";
 
+        /// <summary>中文：绑定或解绑门户账号与员工。English: Bind or unbind Portal users and employees.</summary>
+        public const string EmployeeDirectoryBind = "EmployeeDirectory.Bind";
+
         /// <summary>中文：查看主题设置。English: View theme settings.</summary>
         public const string ThemeView = "Theme.View";
 
@@ -132,6 +135,7 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.AdminUsersEdit, "Administration", "编辑用户资料和注册审核。"),
             new PortalPermissionDefinition(PortalPermissionKeys.AdminUsersResetPassword, "Administration", "重置用户密码。"),
             new PortalPermissionDefinition(PortalPermissionKeys.AdminRolesEdit, "Administration", "编辑角色和角色成员关系。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryBind, "EnterpriseDirectory", "绑定或解绑门户账号与员工。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeView, "Theme", "查看主题设置。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeEdit, "Theme", "编辑主题设置和 Tab 覆盖。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),

@@ -115,6 +115,7 @@
     <Compile Include="IEmployeeInfo.cs" />
     <Compile Include="IOrganizationUnitInfo.cs" />
     <Compile Include="OrganizationUnitSaveRequest.cs" />
+    <Compile Include="IUserEmployeeBindingAdminDb.cs" />
     <Compile Include="IUserProfileInfo.cs" />
     <Compile Include="IUserEmployeeBindingInfo.cs" />
     <Compile Include="IUserRegistrationInfo.cs" />
@@ -133,6 +134,8 @@
     <Compile Include="PortalUserEmployeeBindingStatuses.cs" />
     <Compile Include="PortalUserProfileStatuses.cs" />
     <Compile Include="PortalSecurity.cs" />
+    <Compile Include="UserEmployeeBindingEndRequest.cs" />
+    <Compile Include="UserEmployeeBindingSaveRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRoleItem.cs" />
     <Compile Include="ITabItem.cs" />

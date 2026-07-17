@@ -65,6 +65,16 @@ namespace ASPNET.StarterKit.Portal
         protected global::System.Web.UI.WebControls.Label EmployeeCodeText;
 
         /// <summary>
+        /// EmployeeBindingText 控件。
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label EmployeeBindingText;
+
+        /// <summary>
+        /// EmployeeBindingLink 控件。
+        /// </summary>
+        protected global::System.Web.UI.WebControls.HyperLink EmployeeBindingLink;
+
+        /// <summary>
         /// InviteCodeText 控件。
         /// </summary>
         /// <remarks>

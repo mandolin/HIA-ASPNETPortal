@@ -247,6 +247,7 @@ namespace ASPNET.StarterKit.Portal
             EmploymentStatus = employee.EmploymentStatus;
             SourceSystem = employee.SourceSystem;
             EditUrl = "EmployeeEdit.aspx?employeeId=" + employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
+            BindUrl = "UserEmployeeBindingEdit.aspx?employeeId=" + employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>中文：员工标识。English: Employee identifier.</summary>
@@ -275,6 +276,9 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>中文：编辑页站内地址。English: Current-application edit-page URL.</summary>
         public string EditUrl { get; private set; }
+
+        /// <summary>中文：账号员工绑定维护页站内地址。English: Current-application user-employee binding URL.</summary>
+        public string BindUrl { get; private set; }
     }
 
     /// <summary>
@@ -294,6 +298,7 @@ namespace ASPNET.StarterKit.Portal
             BindingStatus = binding.BindingStatus;
             BoundUtcText = binding.BoundUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
             Reason = binding.Reason;
+            EditUrl = "UserEmployeeBindingEdit.aspx?bindingId=" + binding.BindingId.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>中文：绑定标识。English: Binding identifier.</summary>
@@ -316,6 +321,9 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>中文：绑定时间展示文本。English: Binding time display text.</summary>
         public string BoundUtcText { get; private set; }
+
+        /// <summary>中文：绑定维护页站内地址。English: Current-application binding maintenance URL.</summary>
+        public string EditUrl { get; private set; }
 
         /// <summary>中文：非敏感绑定说明。English: Non-sensitive binding reason.</summary>
         public string Reason { get; private set; }

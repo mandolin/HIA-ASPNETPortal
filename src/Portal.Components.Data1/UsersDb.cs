@@ -25,6 +25,8 @@ namespace ASPNET.StarterKit.Portal
     {
         private const long InitialSecurityVersion = 1;
         private const string CredentialTableName = "Portal_UserCredentials";
+        private const string EmployeeTableName = "PortalBiz_Employees";
+        private const string EmployeeBindingTableName = "PortalBiz_UserEmployeeBindings";
         private const string ProfileTableName = "PortalBiz_UserProfiles";
         private const string SecurityStateTableName = "Portal_UserSecurityStates";
         private readonly PortalSecurityDbContext _context;
@@ -699,7 +701,10 @@ ORDER BY [Roles].[RoleName]",
                 return PortalSignInResult.Failed();
             }
 
-            var resolution = new PortalLoginIdentifierResolver(_context, HasUserProfileTable()).Resolve(normalizedLogin);
+            var resolution = new PortalLoginIdentifierResolver(
+                _context,
+                HasUserProfileTable(),
+                HasEmployeeCodeSignInTables()).Resolve(normalizedLogin);
             if (!resolution.Found || resolution.Ambiguous)
             {
                 return PortalSignInResult.Failed();
@@ -1319,6 +1324,11 @@ END",
         private bool HasUserProfileTable()
         {
             return HasTable(ProfileTableName);
+        }
+
+        private bool HasEmployeeCodeSignInTables()
+        {
+            return HasTable(EmployeeTableName) && HasTable(EmployeeBindingTableName);
         }
 
         private bool HasInviteTable()

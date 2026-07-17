@@ -62,6 +62,16 @@
         </tr>
         <tr>
             <td class="Normal">
+                Employee Binding:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="EmployeeBindingText" runat="server" />
+                &nbsp;
+                <asp:HyperLink ID="EmployeeBindingLink" CssClass="CommandButton" Text="Manage Binding" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td class="Normal">
                 Invite Code:
             </td>
             <td class="Normal">
