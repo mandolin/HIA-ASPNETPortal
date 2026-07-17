@@ -133,7 +133,7 @@
             </td>
         </tr>
 
-        <%-- Profile 状态本阶段只读展示，生命周期动作仍走批准/拒绝等显式入口。 --%>
+        <%-- Profile 状态只读展示；禁用/恢复使用下面的显式生命周期动作。 --%>
         <tr>
             <td class="Normal">
                 Profile Status:
@@ -148,6 +148,19 @@
             </td>
             <td class="Normal">
                 <asp:Label ID="ProfileSourceText" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td class="Normal">
+                Lifecycle Action:
+            </td>
+            <td class="Normal">
+                <asp:LinkButton ID="DisableUserBtn" CssClass="CommandButton" Text="禁用账号"
+                    CausesValidation="False" Visible="False" runat="server" OnClick="DisableUser_Click"
+                    OnClientClick="return confirm('确认禁用此账号？');" />
+                &nbsp;
+                <asp:LinkButton ID="RestoreUserBtn" CssClass="CommandButton" Text="恢复启用"
+                    CausesValidation="False" Visible="False" runat="server" OnClick="RestoreUser_Click" />
             </td>
         </tr>
 

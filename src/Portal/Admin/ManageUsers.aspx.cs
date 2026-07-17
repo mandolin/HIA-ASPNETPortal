@@ -108,9 +108,9 @@ namespace ASPNET.StarterKit.Portal
             {
                 RolesDB.AddUserRole(role.RoleId, userId);
                 PortalOperationAudit.Record(
-                    "UserAdministration",
-                    "AddRole",
-                    "User",
+                    PortalOperationAuditEvents.UserAdministrationCategory,
+                    PortalOperationAuditEvents.RoleAdded,
+                    PortalOperationAuditEvents.UserTargetType,
                     userId.ToString(),
                     "Added role id " + role.RoleId + " to user.",
                     Context);
@@ -205,18 +205,18 @@ namespace ASPNET.StarterKit.Portal
                     shouldResetPassword ? password : string.Empty,
                     GetCurrentActor());
                 PortalOperationAudit.Record(
-                    "UserAdministration",
-                    "UpdateProfile",
-                    "User",
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    PortalOperationAuditEvents.ProfileUpdated,
+                    PortalOperationAuditEvents.UserTargetType,
                     userId.ToString(),
                     BuildProfileAuditSummary(profileBefore, loginName, displayName, nickname, email),
                     Context);
                 if (shouldResetPassword)
                 {
                     PortalOperationAudit.Record(
-                        "SecurityCredentials",
-                        "Reset",
-                        "User",
+                        PortalOperationAuditEvents.SecurityCredentialsCategory,
+                        PortalOperationAuditEvents.PasswordReset,
+                        PortalOperationAuditEvents.UserTargetType,
                         userId.ToString(),
                         "User credential reset by administrator.",
                         Context);
@@ -254,9 +254,9 @@ namespace ASPNET.StarterKit.Portal
             {
                 UsersDB.ApproveUser(userId, GetCurrentActor());
                 PortalOperationAudit.Record(
-                    "Registration",
-                    "Approve",
-                    "User",
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    PortalOperationAuditEvents.RegistrationApproved,
+                    PortalOperationAuditEvents.UserTargetType,
                     userId.ToString(),
                     "Registration approved.",
                     Context);
@@ -293,9 +293,9 @@ namespace ASPNET.StarterKit.Portal
             {
                 UsersDB.RejectUser(userId, GetCurrentActor());
                 PortalOperationAudit.Record(
-                    "Registration",
-                    "Reject",
-                    "User",
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    PortalOperationAuditEvents.RegistrationRejected,
+                    PortalOperationAuditEvents.UserTargetType,
                     userId.ToString(),
                     "Registration rejected.",
                     Context);
@@ -346,14 +346,50 @@ namespace ASPNET.StarterKit.Portal
 
             RolesDB.DeleteUserRole(role.RoleId, userId);
             PortalOperationAudit.Record(
-                "UserAdministration",
-                "RemoveRole",
-                "User",
+                PortalOperationAuditEvents.UserAdministrationCategory,
+                PortalOperationAuditEvents.RoleRemoved,
+                PortalOperationAuditEvents.UserTargetType,
                 userId.ToString(),
                 "Removed role id " + role.RoleId + " from user.",
                 Context);
             userRoles.EditItemIndex = -1;
             BindData();
+        }
+
+        /// <summary>
+        /// 中文：禁用当前目标用户，并通过安全版本让既有会话在后续请求中失效。
+        ///
+        /// English: Disables the current target user and invalidates existing sessions on later requests through the
+        /// security version.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void DisableUser_Click(object sender, EventArgs e)
+        {
+            ChangeUserProfileStatus(
+                PortalUserProfileStatuses.Disabled,
+                PortalOperationAuditEvents.UserDisabled,
+                "User account disabled by administrator.",
+                "账号已禁用。",
+                "禁用账号失败，系统已记录本次错误。事件编号：");
+        }
+
+        /// <summary>
+        /// 中文：恢复启用当前目标用户；被拒绝注册的用户仍应通过批准动作恢复。
+        ///
+        /// English: Restores the current target user; rejected registrations should still be restored through the
+        /// approval action.
+        /// </summary>
+        /// <param name="sender">中文：事件源。English: Event source.</param>
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void RestoreUser_Click(object sender, EventArgs e)
+        {
+            ChangeUserProfileStatus(
+                PortalUserProfileStatuses.Active,
+                PortalOperationAuditEvents.UserRestored,
+                "User account restored by administrator.",
+                "账号已恢复启用。",
+                "恢复启用失败，系统已记录本次错误。事件编号：");
         }
 
         private bool TryInitializeRequest()
@@ -480,7 +516,8 @@ namespace ASPNET.StarterKit.Portal
             ProfileStatusText.Text = EncodeDisplay(profile == null ? PortalUserProfileStatuses.Active : profile.Status);
             ProfileSourceText.Text = EncodeDisplay(profile == null ? "LegacyNoProfileInfo" : profile.Source);
             SetProfileInputsEnabled(profile == null || profile.IsAvailable);
-            BindRegistrationInfo(currentUser.UserId);
+            IUserRegistrationInfo registration = BindRegistrationInfo(currentUser.UserId);
+            BindProfileLifecycleActions(profile, registration);
             TitleText.Text = Server.HtmlEncode("Manage User: " + GetEffectiveDisplayName(profile, currentUser.Name));
 
             userRoles.DataSource = UsersDB.GetRolesByUser(currentUser.Name);
@@ -491,7 +528,7 @@ namespace ASPNET.StarterKit.Portal
             allRoles.DataBind();
         }
 
-        private void BindRegistrationInfo(int currentUserId)
+        private IUserRegistrationInfo BindRegistrationInfo(int currentUserId)
         {
             IUserRegistrationInfo registration = UsersDB.GetRegistrationInfo(currentUserId);
             RegistrationStatus.Text = EncodeDisplay(registration.Status);
@@ -505,6 +542,88 @@ namespace ASPNET.StarterKit.Portal
                 string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal);
             RejectRegistrationBtn.Visible =
                 string.Equals(registration.Status, PortalUserRegistrationStatuses.PendingApproval, StringComparison.Ordinal);
+            return registration;
+        }
+
+        private void BindProfileLifecycleActions(IUserProfileInfo profile, IUserRegistrationInfo registration)
+        {
+            DisableUserBtn.Visible = false;
+            RestoreUserBtn.Visible = false;
+            if (profile == null || !profile.IsAvailable)
+            {
+                return;
+            }
+
+            string status = profile.Status ?? string.Empty;
+            bool registrationRejected = registration != null &&
+                                        string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal);
+            DisableUserBtn.Visible =
+                !IsCurrentTargetSelf() &&
+                string.Equals(status, PortalUserProfileStatuses.Active, StringComparison.Ordinal);
+            RestoreUserBtn.Visible =
+                !registrationRejected &&
+                string.Equals(status, PortalUserProfileStatuses.Disabled, StringComparison.Ordinal);
+        }
+
+        private void ChangeUserProfileStatus(
+            string status,
+            string auditAction,
+            string auditSummary,
+            string successMessage,
+            string failurePrefix)
+        {
+            if (!TryInitializeRequest() ||
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
+            {
+                return;
+            }
+
+            if (string.Equals(status, PortalUserProfileStatuses.Disabled, StringComparison.Ordinal) && IsCurrentTargetSelf())
+            {
+                ShowRegistrationMessage("不能在当前会话中禁用自己的账号。", true);
+                return;
+            }
+
+            IUserRegistrationInfo registration = UsersDB.GetRegistrationInfo(userId);
+            if (registration != null &&
+                string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal))
+            {
+                ShowRegistrationMessage("该账号的注册申请已拒绝，请先使用批准注册动作恢复。", true);
+                return;
+            }
+
+            try
+            {
+                UsersDB.SetUserProfileStatus(userId, status, auditAction, GetCurrentActor());
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.UserLifecycleCategory,
+                    auditAction,
+                    PortalOperationAuditEvents.UserTargetType,
+                    userId.ToString(),
+                    auditSummary,
+                    Context);
+                ShowRegistrationMessage(successMessage, false);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.ChangeUserProfileStatus",
+                    "Changing user profile status failed. UserId=" + userId + "; Status=" + status,
+                    exception,
+                    Context);
+                ShowRegistrationMessage(failurePrefix + eventId, true);
+            }
+        }
+
+        private bool IsCurrentTargetSelf()
+        {
+            string actor = Context.User == null || Context.User.Identity == null
+                ? string.Empty
+                : Context.User.Identity.Name;
+            return !string.IsNullOrWhiteSpace(actor) &&
+                   currentUser != null &&
+                   string.Equals(actor, currentUser.Name, StringComparison.Ordinal);
         }
 
         private void RedirectToCurrentUser()

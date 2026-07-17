@@ -74,9 +74,9 @@ namespace ASPNET.StarterKit.Portal
                 if (signInResult.UpgradedLegacyCredential)
                 {
                     PortalOperationAudit.Record(
-                        "SecurityCredentials",
-                        "LegacyUpgrade",
-                        "User",
+                        PortalOperationAuditEvents.SecurityCredentialsCategory,
+                        PortalOperationAuditEvents.LegacyCredentialUpgraded,
+                        PortalOperationAuditEvents.UserTargetType,
                         signInResult.UserId.ToString(),
                         "Legacy credential upgraded after successful sign-in.",
                         Context);

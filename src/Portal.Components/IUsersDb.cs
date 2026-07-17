@@ -100,6 +100,18 @@ namespace ASPNET.StarterKit.Portal
             string actor);
 
         /// <summary>
+        /// 中文：设置用户资料生命周期状态，并递增安全版本以使旧身份票据和角色 Cookie 在后续请求中失效或重新判定。
+        ///
+        /// English: Sets the user-profile lifecycle status and increments the security version so older authentication
+        /// tickets and role cookies expire or re-evaluate on later requests.
+        /// </summary>
+        /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
+        /// <param name="status">中文：目标状态，必须来自 <see cref="PortalUserProfileStatuses"/>。English: Target status, which must come from <see cref="PortalUserProfileStatuses"/>.</param>
+        /// <param name="reason">中文：不含敏感值的状态变更原因。English: Non-sensitive status-change reason.</param>
+        /// <param name="actor">中文：执行状态变更的操作者标识。English: Identifier of the operator performing the status change.</param>
+        void SetUserProfileStatus(int userId, string status, string reason, string actor);
+
+        /// <summary>
         /// 中文：批准用户注册，使其符合当前审核状态下的登录条件。
         ///
         /// English: Approves a user registration so it meets the current review-status sign-in condition.

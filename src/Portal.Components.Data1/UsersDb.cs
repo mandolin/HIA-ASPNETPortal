@@ -556,6 +556,64 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// 中文：设置用户资料生命周期状态；页面或服务入口负责在成功后写入运营审计。
+        ///
+        /// English: Sets the user-profile lifecycle status; the page or service entry point records operations audit
+        /// after a successful state change.
+        /// </summary>
+        /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
+        /// <param name="status">中文：目标状态，必须是已知 profile 状态。English: Target status, which must be a known profile status.</param>
+        /// <param name="reason">中文：不含敏感值的状态变更原因。English: Non-sensitive status-change reason.</param>
+        /// <param name="actor">中文：执行状态变更的操作者标识。English: Identifier of the operator performing the status change.</param>
+        /// <exception cref="InvalidOperationException">中文：资料表不可用或状态无效时引发。English: Thrown when the profile table is unavailable or the status is invalid.</exception>
+        public void SetUserProfileStatus(int userId, string status, string reason, string actor)
+        {
+            if (!HasUserProfileTable())
+            {
+                throw new InvalidOperationException("User profile metadata table is not available.");
+            }
+
+            string normalizedStatus = NormalizeProfileStatus(status);
+            if (!IsKnownProfileStatus(normalizedStatus))
+            {
+                throw new InvalidOperationException("User profile status is invalid.");
+            }
+
+            string normalizedActor = Normalize(actor);
+            string normalizedReason = NormalizeReason(reason);
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                var item = _context.Users.Single(i => i.UserId == userId);
+                var profile = _context.UserProfiles.SingleOrDefault(i => i.UserId == userId);
+                DateTime nowUtc = DateTime.UtcNow;
+
+                if (profile == null)
+                {
+                    profile = new UserProfileItem
+                    {
+                        UserId = item.UserId,
+                        LoginName = Normalize(item.Name),
+                        DisplayName = Normalize(item.Name),
+                        PreferredEmail = NullIfEmpty(item.Email),
+                        CreatedUtc = nowUtc,
+                        CreatedBy = NullIfEmpty(normalizedActor)
+                    };
+                    _context.UserProfiles.Add(profile);
+                }
+
+                profile.Status = normalizedStatus;
+                profile.StatusReason = NullIfEmpty(normalizedReason);
+                profile.UpdatedUtc = nowUtc;
+                profile.UpdatedBy = NullIfEmpty(normalizedActor);
+                _context.SaveChanges();
+
+                IncrementSecurityVersion(userId, normalizedReason);
+                transaction.Commit();
+            }
+        }
+
+        /// <summary>
         /// 中文：获取指定用户的所有角色。
         ///
         /// English: Gets all roles of the specified user.
@@ -1327,6 +1385,16 @@ END",
             return string.IsNullOrEmpty(normalized)
                 ? PortalUserProfileStatuses.Active
                 : normalized;
+        }
+
+        private static bool IsKnownProfileStatus(string value)
+        {
+            return string.Equals(value, PortalUserProfileStatuses.Active, StringComparison.Ordinal) ||
+                   string.Equals(value, PortalUserProfileStatuses.PendingApproval, StringComparison.Ordinal) ||
+                   string.Equals(value, PortalUserProfileStatuses.PendingEmployeeBinding, StringComparison.Ordinal) ||
+                   string.Equals(value, PortalUserProfileStatuses.Disabled, StringComparison.Ordinal) ||
+                   string.Equals(value, PortalUserProfileStatuses.Left, StringComparison.Ordinal) ||
+                   string.Equals(value, PortalUserProfileStatuses.Locked, StringComparison.Ordinal);
         }
 
         private static string NullIfEmpty(string value)

@@ -123,9 +123,9 @@ namespace ASPNET.StarterKit.Portal
                     // 中文：记录注册状态变化；审计不可用不阻断已成功的注册事务。
                     // English: Record the registration state change; unavailable auditing does not block a successful registration transaction.
                     PortalOperationAudit.Record(
-                        "Registration",
-                        "Submit",
-                        "User",
+                        PortalOperationAuditEvents.UserLifecycleCategory,
+                        PortalOperationAuditEvents.RegistrationSubmitted,
+                        PortalOperationAuditEvents.UserTargetType,
                         userId.ToString(),
                         "Self-registration submitted.",
                         Context);

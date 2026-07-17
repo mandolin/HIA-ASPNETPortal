@@ -383,6 +383,7 @@
     <Compile Include="Components\PortalModulePackageStates.cs" />
     <Compile Include="Components\PortalModulePathValidator.cs" />
     <Compile Include="Components\PortalOperationAudit.cs" />
+    <Compile Include="Components\PortalOperationAuditEvents.cs" />
     <Compile Include="Components\PortalPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
