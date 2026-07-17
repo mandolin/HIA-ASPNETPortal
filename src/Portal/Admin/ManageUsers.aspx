@@ -93,13 +93,61 @@
             </td>
         </tr>
         
-        <%-- 用户名当前不可直接编辑；后续会进入自定义用户名和昵称机制设计。 --%>
+        <%-- 旧账号名继续只读展示，用于兼容历史 URL、角色和审计引用。 --%>
         <tr>
             <td class="Normal">
-                用户名:
+                旧账号名:
             </td>
             <td class="Normal">
-                <asp:Label ID="UserNameText" runat="server" />
+                <asp:Label ID="LegacyUserNameText" runat="server" />
+            </td>
+        </tr>
+
+        <%-- P6.2 新登录名。 --%>
+        <tr>
+            <td class="Normal">
+                登录名:
+            </td>
+            <td>
+                <asp:TextBox ID="LoginName" Width="200" CssClass="NormalTextBox" runat="server" />
+            </td>
+        </tr>
+
+        <%-- P6.2 显示名。 --%>
+        <tr>
+            <td class="Normal">
+                显示名:
+            </td>
+            <td>
+                <asp:TextBox ID="DisplayName" Width="200" CssClass="NormalTextBox" runat="server" />
+            </td>
+        </tr>
+
+        <%-- P6.2 昵称。 --%>
+        <tr>
+            <td class="Normal">
+                昵称:
+            </td>
+            <td>
+                <asp:TextBox ID="Nickname" Width="200" CssClass="NormalTextBox" runat="server" />
+            </td>
+        </tr>
+
+        <%-- Profile 状态本阶段只读展示，生命周期动作仍走批准/拒绝等显式入口。 --%>
+        <tr>
+            <td class="Normal">
+                Profile Status:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="ProfileStatusText" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td class="Normal">
+                Profile Source:
+            </td>
+            <td class="Normal">
+                <asp:Label ID="ProfileSourceText" runat="server" />
             </td>
         </tr>
 
@@ -121,7 +169,7 @@
             <td>
                 <asp:TextBox ID="Password" Width="200" CssClass="NormalTextBox" runat="server" TextMode="Password" />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
-                    ControlToValidate="Password" CssClass="NormalRed" Display="Dynamic"></asp:RequiredFieldValidator>
+                    ControlToValidate="Password" CssClass="NormalRed" Display="Dynamic" Enabled="False"></asp:RequiredFieldValidator>
             </td>
         </tr>
         
@@ -134,9 +182,9 @@
                 <asp:TextBox ID="ConfirmPassword" Width="200" CssClass="NormalTextBox" runat="server"
                     TextMode="Password" />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
-                    ControlToValidate="ConfirmPassword" CssClass="NormalRed" Display="Dynamic"></asp:RequiredFieldValidator>
+                    ControlToValidate="ConfirmPassword" CssClass="NormalRed" Display="Dynamic" Enabled="False"></asp:RequiredFieldValidator>
                 <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="*" ControlToValidate="ConfirmPassword"
-                    ControlToCompare="Password" CssClass="NormalRed" Display="Dynamic"></asp:CompareValidator>
+                    ControlToCompare="Password" CssClass="NormalRed" Display="Dynamic" Enabled="False"></asp:CompareValidator>
             </td>
         </tr>
         

@@ -101,13 +101,58 @@ namespace ASPNET.StarterKit.Portal
         protected global::System.Web.UI.WebControls.Label RegistrationMessage;
 
         /// <summary>
-        /// UserNameText 控件。
+        /// LegacyUserNameText 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label UserNameText;
+        protected global::System.Web.UI.WebControls.Label LegacyUserNameText;
+
+        /// <summary>
+        /// LoginName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LoginName;
+
+        /// <summary>
+        /// DisplayName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DisplayName;
+
+        /// <summary>
+        /// Nickname 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Nickname;
+
+        /// <summary>
+        /// ProfileStatusText 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProfileStatusText;
+
+        /// <summary>
+        /// ProfileSourceText 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProfileSourceText;
 
         /// <summary>
         /// Email 控件。

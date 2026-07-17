@@ -68,6 +68,38 @@ namespace ASPNET.StarterKit.Portal
         void UpdateUser(int userId, string email, string password);
 
         /// <summary>
+        /// 中文：读取用户资料扩展；旧库应返回兼容视图而不是抛出缺表异常。
+        ///
+        /// English: Reads the user-profile extension; legacy databases should return a compatibility view instead
+        /// of throwing a missing-table exception.
+        /// </summary>
+        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
+        /// <returns>中文：资料扩展只读视图。English: Read-only profile extension view.</returns>
+        IUserProfileInfo GetUserProfileInfo(int userId);
+
+        /// <summary>
+        /// 中文：更新用户资料扩展、同步旧邮箱，并可选重置用户凭据。
+        ///
+        /// English: Updates the user-profile extension, synchronizes the legacy email, and optionally resets the
+        /// user's credential.
+        /// </summary>
+        /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
+        /// <param name="loginName">中文：新的稳定登录名。English: New stable login name.</param>
+        /// <param name="displayName">中文：正式显示名。English: Formal display name.</param>
+        /// <param name="nickname">中文：昵称或偏好称呼。English: Nickname or preferred name.</param>
+        /// <param name="email">中文：新的邮箱地址。English: New email address.</param>
+        /// <param name="password">中文：可为空的新密码输入；为空时不重置凭据。English: Optional new password input; empty means no credential reset.</param>
+        /// <param name="actor">中文：执行更新的管理员标识。English: Identifier of the administrator performing the update.</param>
+        void UpdateUserProfile(
+            int userId,
+            string loginName,
+            string displayName,
+            string nickname,
+            string email,
+            string password,
+            string actor);
+
+        /// <summary>
         /// 中文：批准用户注册，使其符合当前审核状态下的登录条件。
         ///
         /// English: Approves a user registration so it meets the current review-status sign-in condition.

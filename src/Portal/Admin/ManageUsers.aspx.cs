@@ -129,32 +129,65 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：更新当前用户的邮箱并重置强哈希凭据，随后记录不含密码或邮箱原文的审计。
+        /// 中文：更新当前用户的资料扩展，并在填写密码时重置强哈希凭据；审计不记录密码或资料原文。
         ///
-        /// English: Updates the current user's email and resets the strong-hash credential, then records audit data
-        /// without the password or raw email address.
+        /// English: Updates the current user's profile extension and resets the strong-hash credential when a password
+        /// is entered; audit entries do not record passwords or raw profile values.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
         /// <param name="e">中文：事件数据。English: Event data.</param>
         protected void UpdateUser_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest() ||
-                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) ||
-                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersResetPassword) ||
-                !Page.IsValid)
+                !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit))
             {
                 return;
             }
 
             string email;
-            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(Email.Text, 100, out email))
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(Email.Text, 256, out email))
             {
                 ShowRegistrationMessage("邮箱格式无效，未保存本次修改。", true);
                 return;
             }
 
+            string loginName;
+            if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(LoginName.Text, 100, out loginName))
+            {
+                ShowRegistrationMessage("登录名格式无效，未保存本次修改。", true);
+                return;
+            }
+
+            string displayName;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(DisplayName.Text, 150, out displayName))
+            {
+                ShowRegistrationMessage("显示名格式无效，未保存本次修改。", true);
+                return;
+            }
+
+            string nickname;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(Nickname.Text, 100, out nickname))
+            {
+                ShowRegistrationMessage("昵称格式无效，未保存本次修改。", true);
+                return;
+            }
+
+            string password = Password.Text ?? string.Empty;
+            string confirmPassword = ConfirmPassword.Text ?? string.Empty;
+            bool shouldResetPassword = !string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(confirmPassword);
+            if (shouldResetPassword && !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersResetPassword))
+            {
+                return;
+            }
+
+            if (shouldResetPassword && !string.Equals(password, confirmPassword, StringComparison.Ordinal))
+            {
+                ShowRegistrationMessage("两次输入的密码不一致，未保存本次修改。", true);
+                return;
+            }
+
             string passwordPolicyMessage;
-            if (!PortalPasswordPolicy.TryValidate(Password.Text, out passwordPolicyMessage))
+            if (shouldResetPassword && !PortalPasswordPolicy.TryValidate(password, out passwordPolicyMessage))
             {
                 ShowRegistrationMessage(passwordPolicyMessage, true);
                 return;
@@ -162,21 +195,33 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
-                UsersDB.UpdateUser(userId, email, Password.Text);
+                IUserProfileInfo profileBefore = UsersDB.GetUserProfileInfo(userId);
+                UsersDB.UpdateUserProfile(
+                    userId,
+                    loginName,
+                    displayName,
+                    nickname,
+                    email,
+                    shouldResetPassword ? password : string.Empty,
+                    GetCurrentActor());
                 PortalOperationAudit.Record(
                     "UserAdministration",
                     "UpdateProfile",
                     "User",
                     userId.ToString(),
-                    "Updated user profile.",
+                    BuildProfileAuditSummary(profileBefore, loginName, displayName, nickname, email),
                     Context);
-                PortalOperationAudit.Record(
-                    "SecurityCredentials",
-                    "Reset",
-                    "User",
-                    userId.ToString(),
-                    "User credential reset by administrator.",
-                    Context);
+                if (shouldResetPassword)
+                {
+                    PortalOperationAudit.Record(
+                        "SecurityCredentials",
+                        "Reset",
+                        "User",
+                        userId.ToString(),
+                        "User credential reset by administrator.",
+                        Context);
+                }
+
                 RedirectToCurrentUser();
             }
             catch (Exception exception)
@@ -424,10 +469,19 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            Email.Text = currentUser.Email;
-            UserNameText.Text = EncodeDisplay(currentUser.Name);
+            IUserProfileInfo profile = UsersDB.GetUserProfileInfo(currentUser.UserId);
+            Email.Text = profile == null || string.IsNullOrWhiteSpace(profile.PreferredEmail)
+                ? currentUser.Email
+                : profile.PreferredEmail;
+            LegacyUserNameText.Text = EncodeDisplay(currentUser.Name);
+            LoginName.Text = profile == null ? currentUser.Name : profile.LoginName;
+            DisplayName.Text = profile == null ? currentUser.Name : profile.DisplayName;
+            Nickname.Text = profile == null ? string.Empty : profile.Nickname;
+            ProfileStatusText.Text = EncodeDisplay(profile == null ? PortalUserProfileStatuses.Active : profile.Status);
+            ProfileSourceText.Text = EncodeDisplay(profile == null ? "LegacyNoProfileInfo" : profile.Source);
+            SetProfileInputsEnabled(profile == null || profile.IsAvailable);
             BindRegistrationInfo(currentUser.UserId);
-            TitleText.Text = Server.HtmlEncode("Manage User: " + (currentUser.Name ?? string.Empty));
+            TitleText.Text = Server.HtmlEncode("Manage User: " + GetEffectiveDisplayName(profile, currentUser.Name));
 
             userRoles.DataSource = UsersDB.GetRolesByUser(currentUser.Name);
             userRoles.DataBind();
@@ -481,6 +535,65 @@ namespace ASPNET.StarterKit.Portal
                 : Context.User.Identity.Name;
         }
 
+        private void SetProfileInputsEnabled(bool enabled)
+        {
+            LoginName.Enabled = enabled;
+            DisplayName.Enabled = enabled;
+            Nickname.Enabled = enabled;
+        }
+
+        private string BuildProfileAuditSummary(
+            IUserProfileInfo before,
+            string loginName,
+            string displayName,
+            string nickname,
+            string email)
+        {
+            string changedFields = string.Empty;
+            AppendChangedField(ref changedFields, before == null ? currentUser.Name : before.LoginName, loginName, "LoginName");
+            AppendChangedField(ref changedFields, before == null ? currentUser.Name : before.DisplayName, displayName, "DisplayName");
+            AppendChangedField(ref changedFields, before == null ? string.Empty : before.Nickname, nickname, "Nickname");
+            AppendChangedField(ref changedFields, before == null ? currentUser.Email : before.PreferredEmail, email, "PreferredEmail");
+            return string.IsNullOrEmpty(changedFields)
+                ? "Saved user profile without profile field changes."
+                : "Updated user profile fields: " + changedFields + ".";
+        }
+
+        private static void AppendChangedField(ref string changedFields, string oldValue, string newValue, string fieldName)
+        {
+            if (string.Equals(Normalize(oldValue), Normalize(newValue), StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            changedFields = string.IsNullOrEmpty(changedFields)
+                ? fieldName
+                : changedFields + ", " + fieldName;
+        }
+
+        private static string GetEffectiveDisplayName(IUserProfileInfo profile, string fallbackName)
+        {
+            if (profile != null)
+            {
+                if (!string.IsNullOrWhiteSpace(profile.DisplayName))
+                {
+                    return profile.DisplayName;
+                }
+
+                if (!string.IsNullOrWhiteSpace(profile.Nickname))
+                {
+                    return profile.Nickname;
+                }
+
+                if (!string.IsNullOrWhiteSpace(profile.LoginName))
+                {
+                    return profile.LoginName;
+                }
+            }
+
+            return fallbackName ?? string.Empty;
+        }
+
         private void ShowRegistrationMessage(string message, bool isError)
         {
             RegistrationMessage.CssClass = isError ? "NormalRed" : "Normal";
@@ -495,6 +608,11 @@ namespace ASPNET.StarterKit.Portal
         private static string EmptyToNone(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+        }
+
+        private static string Normalize(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? string.Empty : value.Trim();
         }
 
         private static string FormatUtc(DateTime value)

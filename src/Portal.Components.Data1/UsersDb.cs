@@ -409,18 +409,87 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="password">中文：新的密码输入，不得写入审计正文或诊断日志。English: New password input; it must not be written to audit details or diagnostic logs.</param>
         public void UpdateUser(int userId, string email, string password)
         {
-            if (string.IsNullOrEmpty(password))
+            UpdateUserProfile(userId, null, null, null, email, password, "system-admin");
+        }
+
+        /// <summary>
+        /// 中文：读取用户资料扩展；缺少 P6.2 profile 表或记录时返回兼容视图。
+        ///
+        /// English: Reads the user-profile extension and returns a compatibility view when the P6.2 profile table
+        /// or row is missing.
+        /// </summary>
+        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
+        /// <returns>中文：资料扩展只读视图；用户不存在时为空。English: Read-only profile view, or null when the user does not exist.</returns>
+        public IUserProfileInfo GetUserProfileInfo(int userId)
+        {
+            UserItem user = _context.Users.AsNoTracking().SingleOrDefault(i => i.UserId == userId);
+            if (user == null)
             {
-                throw new InvalidOperationException("A password is required to reset user credentials.");
+                return null;
             }
 
-            if (!HasCredentialTables())
+            if (!HasUserProfileTable())
+            {
+                return CreateLegacyProfileInfo(user, false, "LegacyNoProfileTable");
+            }
+
+            UserProfileItem profile = _context.UserProfiles.AsNoTracking().SingleOrDefault(i => i.UserId == userId);
+            if (profile == null)
+            {
+                return CreateLegacyProfileInfo(user, true, "ProfileMissingLegacyFallback");
+            }
+
+            return new UserProfileInfo(
+                user.UserId,
+                SafeName(user.Name),
+                SafeName(profile.LoginName),
+                SafeName(profile.DisplayName),
+                SafeName(profile.Nickname),
+                SafeName(profile.PreferredEmail),
+                NormalizeProfileStatus(profile.Status),
+                SafeName(profile.StatusReason),
+                true,
+                "UserProfile");
+        }
+
+        /// <summary>
+        /// 中文：更新用户资料扩展、同步旧邮箱，并在提供密码时重置强哈希凭据。
+        ///
+        /// English: Updates the user-profile extension, synchronizes the legacy email, and resets the strong-hash
+        /// credential when a password is provided.
+        /// </summary>
+        /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
+        /// <param name="loginName">中文：新的稳定登录名；为空时保留旧登录名兼容值。English: New stable login name; empty preserves the legacy-compatible value.</param>
+        /// <param name="displayName">中文：正式显示名。English: Formal display name.</param>
+        /// <param name="nickname">中文：昵称或偏好称呼。English: Nickname or preferred name.</param>
+        /// <param name="email">中文：新的邮箱地址。English: New email address.</param>
+        /// <param name="password">中文：可为空的新密码输入；为空时不重置凭据。English: Optional new password input; empty means no credential reset.</param>
+        /// <param name="actor">中文：执行更新的管理员标识。English: Identifier of the administrator performing the update.</param>
+        public void UpdateUserProfile(
+            int userId,
+            string loginName,
+            string displayName,
+            string nickname,
+            string email,
+            string password,
+            string actor)
+        {
+            string normalizedEmail = Normalize(email);
+            if (string.IsNullOrEmpty(normalizedEmail))
+            {
+                throw new InvalidOperationException("Email is required.");
+            }
+
+            string normalizedPassword = password ?? string.Empty;
+            bool shouldResetCredential = !string.IsNullOrEmpty(normalizedPassword);
+            if (shouldResetCredential && !HasCredentialTables())
             {
                 throw new InvalidOperationException("Credential metadata tables are not available.");
             }
 
             string passwordPolicyMessage;
-            if (!PortalPasswordPolicy.TryValidate(password, out passwordPolicyMessage))
+            if (shouldResetCredential &&
+                !PortalPasswordPolicy.TryValidate(normalizedPassword, out passwordPolicyMessage))
             {
                 throw new InvalidOperationException(passwordPolicyMessage);
             }
@@ -428,13 +497,60 @@ namespace ASPNET.StarterKit.Portal
             using (var transaction = _context.Database.BeginTransaction())
             {
                 var item = _context.Users.Single(i => i.UserId == userId);
+                string normalizedLoginName = string.IsNullOrWhiteSpace(loginName)
+                    ? Normalize(item.Name)
+                    : Normalize(loginName);
+                string normalizedDisplayName = string.IsNullOrWhiteSpace(displayName)
+                    ? normalizedLoginName
+                    : Normalize(displayName);
+                string normalizedNickname = Normalize(nickname);
+                string normalizedActor = Normalize(actor);
 
-                item.Email = email;
+                if (string.IsNullOrEmpty(normalizedLoginName))
+                {
+                    throw new InvalidOperationException("Login name is required.");
+                }
+
+                bool hasProfileTable = HasUserProfileTable();
+                if (hasProfileTable)
+                {
+                    if (HasLoginNameConflict(userId, normalizedLoginName))
+                    {
+                        throw new InvalidOperationException("Login name is already used by another user.");
+                    }
+
+                    if (HasEmailConflict(userId, normalizedEmail))
+                    {
+                        throw new InvalidOperationException("Email is already used by another user.");
+                    }
+
+                    UpsertUserProfile(
+                        item.UserId,
+                        normalizedLoginName,
+                        normalizedDisplayName,
+                        normalizedNickname,
+                        normalizedEmail,
+                        NormalizeProfileStatus(GetExistingProfileStatus(item.UserId)),
+                        normalizedActor);
+                }
+                else if (HasLegacyEmailConflict(userId, normalizedEmail))
+                {
+                    throw new InvalidOperationException("Email is already used by another user.");
+                }
+
+                item.Email = normalizedEmail;
                 item.Password = string.Empty;
-                TryUpdateUserProfileEmail(userId, email, "system-admin");
-                UpsertCredential(userId, password, null, null, false, null);
+                if (shouldResetCredential)
+                {
+                    UpsertCredential(userId, normalizedPassword, null, null, false, null);
+                }
+
                 _context.SaveChanges();
-                IncrementSecurityVersion(userId, "CredentialReset");
+                if (shouldResetCredential)
+                {
+                    IncrementSecurityVersion(userId, "CredentialReset");
+                }
+
                 transaction.Commit();
             }
         }
@@ -873,6 +989,134 @@ END",
                     throw;
                 }
             }
+        }
+
+        private void UpsertUserProfile(
+            int userId,
+            string loginName,
+            string displayName,
+            string nickname,
+            string email,
+            string status,
+            string actor)
+        {
+            DateTime nowUtc = DateTime.UtcNow;
+            var profile = _context.UserProfiles.SingleOrDefault(i => i.UserId == userId);
+            if (profile == null)
+            {
+                profile = new UserProfileItem
+                {
+                    UserId = userId,
+                    CreatedUtc = nowUtc,
+                    CreatedBy = NullIfEmpty(actor)
+                };
+                _context.UserProfiles.Add(profile);
+            }
+
+            profile.LoginName = loginName;
+            profile.DisplayName = NullIfEmpty(displayName);
+            profile.Nickname = NullIfEmpty(nickname);
+            profile.PreferredEmail = NullIfEmpty(email);
+            profile.Status = NormalizeProfileStatus(status);
+            profile.UpdatedUtc = nowUtc;
+            profile.UpdatedBy = NullIfEmpty(actor);
+        }
+
+        private bool HasLoginNameConflict(int userId, string loginName)
+        {
+            int count = _context.Database.SqlQuery<int>(
+                @"
+SELECT COUNT(*)
+FROM
+(
+    SELECT [UserId]
+    FROM [dbo].[PortalBiz_UserProfiles]
+    WHERE [LoginName] = @p0 AND [UserId] <> @p1
+
+    UNION
+
+    SELECT [UserID]
+    FROM [dbo].[Portal_Users]
+    WHERE [Name] = @p0 AND [UserID] <> @p1
+) AS [Conflicts];",
+                loginName,
+                userId).Single();
+            return count > 0;
+        }
+
+        private bool HasEmailConflict(int userId, string email)
+        {
+            int count = _context.Database.SqlQuery<int>(
+                @"
+SELECT COUNT(*)
+FROM
+(
+    SELECT [UserId]
+    FROM [dbo].[PortalBiz_UserProfiles]
+    WHERE [PreferredEmail] = @p0 AND [UserId] <> @p1
+
+    UNION
+
+    SELECT [UserID]
+    FROM [dbo].[Portal_Users]
+    WHERE [Email] = @p0 AND [UserID] <> @p1
+) AS [Conflicts];",
+                email,
+                userId).Single();
+            return count > 0;
+        }
+
+        private bool HasLegacyEmailConflict(int userId, string email)
+        {
+            int count = _context.Database.SqlQuery<int>(
+                "SELECT COUNT(*) FROM [dbo].[Portal_Users] WHERE [Email] = @p0 AND [UserID] <> @p1",
+                email,
+                userId).Single();
+            return count > 0;
+        }
+
+        private string GetExistingProfileStatus(int userId)
+        {
+            var profile = _context.UserProfiles.SingleOrDefault(i => i.UserId == userId);
+            if (profile != null)
+            {
+                return NormalizeProfileStatus(profile.Status);
+            }
+
+            if (HasRegistrationTable())
+            {
+                var registration = _context.UserRegistrations.SingleOrDefault(i => i.UserId == userId);
+                if (registration != null)
+                {
+                    if (string.Equals(registration.Status, PortalUserRegistrationStatuses.PendingApproval, StringComparison.Ordinal))
+                    {
+                        return PortalUserProfileStatuses.PendingApproval;
+                    }
+
+                    if (string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal))
+                    {
+                        return PortalUserProfileStatuses.Disabled;
+                    }
+                }
+            }
+
+            return PortalUserProfileStatuses.Active;
+        }
+
+        private static IUserProfileInfo CreateLegacyProfileInfo(UserItem user, bool isAvailable, string source)
+        {
+            string legacyName = SafeName(user.Name);
+            return new UserProfileInfo(
+                user.UserId,
+                legacyName,
+                legacyName,
+                legacyName,
+                string.Empty,
+                SafeName(user.Email),
+                PortalUserProfileStatuses.Active,
+                string.Empty,
+                isAvailable,
+                source);
         }
 
         private void TryDeleteRegistration(int userId)

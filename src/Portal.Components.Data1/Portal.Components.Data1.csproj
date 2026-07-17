@@ -93,6 +93,7 @@
     <Compile Include="RegistrationInviteItem.cs" />
     <Compile Include="UserItem.cs" />
     <Compile Include="UserCredentialItem.cs" />
+    <Compile Include="UserProfileInfo.cs" />
     <Compile Include="UserProfileItem.cs" />
     <Compile Include="UserRegistrationInfo.cs" />
     <Compile Include="UserRegistrationItem.cs" />

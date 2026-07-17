@@ -108,6 +108,7 @@
     <Compile Include="IRolesDb.cs" />
     <Compile Include="ITabsDb.cs" />
     <Compile Include="IUsersDb.cs" />
+    <Compile Include="IUserProfileInfo.cs" />
     <Compile Include="IUserRegistrationInfo.cs" />
     <Compile Include="IPortalDb.cs" />
     <Compile Include="IModuleDefinitionItem.cs" />
