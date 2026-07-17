@@ -29,6 +29,33 @@ BEGIN
 END
 GO
 
+IF EXISTS
+(
+    SELECT 1
+    FROM [dbo].[Portal_Users]
+    WHERE NULLIF(LTRIM(RTRIM([Name])), N'') IS NULL
+        OR [Name] <> LTRIM(RTRIM([Name]))
+)
+BEGIN
+    RAISERROR(N'Portal_Users.Name contains blank or leading/trailing whitespace values. Resolve invalid legacy names before creating PortalBiz_UserProfiles.', 16, 1)
+    RETURN
+END
+GO
+
+IF EXISTS
+(
+    SELECT NULLIF(LTRIM(RTRIM([Email])), N'') AS [PreferredEmail]
+    FROM [dbo].[Portal_Users]
+    WHERE NULLIF(LTRIM(RTRIM([Email])), N'') IS NOT NULL
+    GROUP BY NULLIF(LTRIM(RTRIM([Email])), N'')
+    HAVING COUNT(*) > 1
+)
+BEGIN
+    RAISERROR(N'Portal_Users.Email contains duplicate non-empty normalized values. Resolve duplicate legacy emails before creating PortalBiz_UserProfiles.', 16, 1)
+    RETURN
+END
+GO
+
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PortalBiz_UserProfiles]') AND type IN (N'U'))
 BEGIN
     CREATE TABLE [dbo].[PortalBiz_UserProfiles]
@@ -77,7 +104,7 @@ BEGIN
         [Users].[UserID],
         [Users].[Name],
         [Users].[Name],
-        NULLIF([Users].[Email], N''),
+        NULLIF(LTRIM(RTRIM([Users].[Email])), N''),
         CASE
             WHEN [Registrations].[Status] = N'PendingApproval' THEN N'PendingApproval'
             WHEN [Registrations].[Status] = N'Rejected' THEN N'Disabled'
@@ -103,7 +130,7 @@ BEGIN
         [Users].[UserID],
         [Users].[Name],
         [Users].[Name],
-        NULLIF([Users].[Email], N''),
+        NULLIF(LTRIM(RTRIM([Users].[Email])), N''),
         N'Active',
         N'system-seed',
         N'system-seed'

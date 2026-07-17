@@ -16,7 +16,11 @@ param(
 
     [switch]$ApplyP5Migrations,
 
-    [switch]$RequireP5Migrations
+    [switch]$RequireP5Migrations,
+
+    [switch]$ApplyP6UserProfileMigration,
+
+    [switch]$RequireP6UserProfileMigration
 )
 
 Set-StrictMode -Version Latest
@@ -254,11 +258,58 @@ try {
         }
     }
 
+    if ($ApplyP6UserProfileMigration) {
+        $duplicateNameGroups = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM
+(
+    SELECT [Name]
+    FROM [dbo].[Portal_Users]
+    GROUP BY [Name]
+    HAVING COUNT(*) > 1
+) AS [DuplicateNames];
+'@)
+        $invalidNameRows = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM [dbo].[Portal_Users]
+WHERE NULLIF(LTRIM(RTRIM([Name])), N'') IS NULL
+    OR [Name] <> LTRIM(RTRIM([Name]));
+'@)
+        $duplicateEmailGroups = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM
+(
+    SELECT NULLIF(LTRIM(RTRIM([Email])), N'') AS [PreferredEmail]
+    FROM [dbo].[Portal_Users]
+    WHERE NULLIF(LTRIM(RTRIM([Email])), N'') IS NOT NULL
+    GROUP BY NULLIF(LTRIM(RTRIM([Email])), N'')
+    HAVING COUNT(*) > 1
+) AS [DuplicateEmails];
+'@)
+
+        Add-DatabaseCheck -Name 'P6 user-profile legacy name preflight' -Status $(if ($duplicateNameGroups -eq 0 -and $invalidNameRows -eq 0) { 'Pass' } else { 'Fail' }) -Detail ('Duplicate name groups: ' + $duplicateNameGroups + '; invalid name rows: ' + $invalidNameRows + '.')
+        Add-DatabaseCheck -Name 'P6 user-profile legacy email preflight' -Status $(if ($duplicateEmailGroups -eq 0) { 'Pass' } else { 'Fail' }) -Detail ('Duplicate normalized non-empty email groups: ' + $duplicateEmailGroups + '.')
+
+        if ($duplicateNameGroups -eq 0 -and $invalidNameRows -eq 0 -and $duplicateEmailGroups -eq 0) {
+            if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P6 user-profile migration script')) {
+                Invoke-MigrationFile -Connection $connection -Path (Join-Path $repoRoot 'src/Setup/PortalBiz_UserProfiles.sql')
+                Add-DatabaseCheck -Name 'P6 user-profile migration application' -Status 'Pass' -Detail 'The idempotent P6 user-profile migration batches completed.'
+            }
+            else {
+                Add-DatabaseCheck -Name 'P6 user-profile migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+            }
+        }
+        else {
+            Add-DatabaseCheck -Name 'P6 user-profile migration application' -Status 'Fail' -Detail 'Skipped because legacy user preflight failed.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
     $p5Tables = @('Portal_UserCredentials', 'Portal_UserSecurityStates', 'PortalCfg_RolePermissions')
-    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables)
+    $p6Tables = @('PortalBiz_UserProfiles')
+    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6Tables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
     Add-DatabaseCheck -Name 'Base Portal schema' -Status $(if ($missingBaseTables.Count -eq 0) { 'Pass' } else { 'Fail' }) -Detail $(if ($missingBaseTables.Count -eq 0) { 'Required base tables are present.' } else { 'Missing: ' + ($missingBaseTables -join ', ') })
@@ -294,6 +345,43 @@ try {
     }
     else {
         Add-DatabaseCheck -Name 'P5 security schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP5Tables -join ', '))
+    }
+
+    $missingP6Tables = @($p6Tables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP6Tables.Count -eq 0) {
+        Add-DatabaseCheck -Name 'P6 user-profile schema' -Status 'Pass' -Detail 'The P6 user-profile extension table is present.'
+
+        $userCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[Portal_Users];')
+        $profileCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_UserProfiles];')
+        $missingProfileCount = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM [dbo].[Portal_Users] AS [Users]
+WHERE NOT EXISTS
+(
+    SELECT 1
+    FROM [dbo].[PortalBiz_UserProfiles] AS [Profiles]
+    WHERE [Profiles].[UserId] = [Users].[UserID]
+);
+'@)
+        $orphanProfileCount = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM [dbo].[PortalBiz_UserProfiles] AS [Profiles]
+WHERE NOT EXISTS
+(
+    SELECT 1
+    FROM [dbo].[Portal_Users] AS [Users]
+    WHERE [Users].[UserID] = [Profiles].[UserId]
+);
+'@)
+
+        $profileCoverageOk = $profileCount -eq $userCount -and $missingProfileCount -eq 0 -and $orphanProfileCount -eq 0
+        Add-DatabaseCheck -Name 'P6 user-profile seed coverage' -Status $(if ($profileCoverageOk) { 'Pass' } elseif ($RequireP6UserProfileMigration) { 'Fail' } else { 'Warning' }) -Detail ('Users: ' + $userCount + '; profiles: ' + $profileCount + '; missing profiles: ' + $missingProfileCount + '; orphan profiles: ' + $orphanProfileCount + '.')
+    }
+    elseif ($RequireP6UserProfileMigration) {
+        Add-DatabaseCheck -Name 'P6 user-profile schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP6Tables -join ', '))
+    }
+    else {
+        Add-DatabaseCheck -Name 'P6 user-profile schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP6Tables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })
