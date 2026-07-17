@@ -31,11 +31,32 @@ namespace ASPNET.StarterKit.Portal
         public const string UserAdministrationCategory = "UserAdministration";
 
         /// <summary>
+        /// 中文：企业目录分类，覆盖员工和组织主数据维护动作。
+        ///
+        /// English: Enterprise-directory category covering employee and organization master-data maintenance actions.
+        /// </summary>
+        public const string EnterpriseDirectoryCategory = "EnterpriseDirectory";
+
+        /// <summary>
         /// 中文：审计目标类型：门户用户。
         ///
         /// English: Audit target type for a Portal user.
         /// </summary>
         public const string UserTargetType = "User";
+
+        /// <summary>
+        /// 中文：审计目标类型：组织单元。
+        ///
+        /// English: Audit target type for an organization unit.
+        /// </summary>
+        public const string OrganizationUnitTargetType = "OrganizationUnit";
+
+        /// <summary>
+        /// 中文：审计目标类型：员工。
+        ///
+        /// English: Audit target type for an employee.
+        /// </summary>
+        public const string EmployeeTargetType = "Employee";
 
         /// <summary>
         /// 中文：自主注册已提交。
@@ -106,5 +127,33 @@ namespace ASPNET.StarterKit.Portal
         /// English: User was removed from a role.
         /// </summary>
         public const string RoleRemoved = "RoleRemoved";
+
+        /// <summary>
+        /// 中文：组织单元已创建。
+        ///
+        /// English: Organization unit was created.
+        /// </summary>
+        public const string OrganizationUnitCreated = "OrganizationUnitCreated";
+
+        /// <summary>
+        /// 中文：组织单元已更新。
+        ///
+        /// English: Organization unit was updated.
+        /// </summary>
+        public const string OrganizationUnitUpdated = "OrganizationUnitUpdated";
+
+        /// <summary>
+        /// 中文：员工主数据已创建。
+        ///
+        /// English: Employee master data was created.
+        /// </summary>
+        public const string EmployeeCreated = "EmployeeCreated";
+
+        /// <summary>
+        /// 中文：员工主数据已更新。
+        ///
+        /// English: Employee master data was updated.
+        /// </summary>
+        public const string EmployeeUpdated = "EmployeeUpdated";
     }
 }

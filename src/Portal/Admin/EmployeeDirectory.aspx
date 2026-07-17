@@ -5,7 +5,7 @@
     Inherits="ASPNET.StarterKit.Portal.EmployeeDirectory"
     MasterPageFile="~/Default.master" %>
 
-<%-- P6.3-S3 员工组织只读目录页：不提供新增、编辑、导入、导出或绑定变更入口。 --%>
+<%-- P6.3-S4 员工组织目录页：列表本身只读，新增和编辑交给独立维护页处理。 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <table width="98%" cellspacing="0" cellpadding="4" border="0">
         <tr valign="top">
@@ -23,6 +23,10 @@
                             <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
                             &nbsp;
                             <a class="CommandButton" href="ManageUsers.aspx">User Administration</a>
+                            &nbsp;
+                            <a class="CommandButton" href="OrganizationUnitEdit.aspx">New Organization Unit</a>
+                            &nbsp;
+                            <a class="CommandButton" href="EmployeeEdit.aspx">New Employee</a>
                         </td>
                     </tr>
                 </table>
@@ -89,6 +93,7 @@
                                 <td width="190">Parent</td>
                                 <td width="70">Sort</td>
                                 <td width="80">Active</td>
+                                <td width="70">Action</td>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -99,6 +104,13 @@
                                 <td><%#: Eval("ParentText") %></td>
                                 <td><%#: Eval("SortOrder") %></td>
                                 <td><%#: Eval("IsActiveText") %></td>
+                                <td>
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="Edit"
+                                        NavigateUrl='<%# Eval("EditUrl") %>'
+                                        runat="server" />
+                                </td>
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
@@ -122,6 +134,7 @@
                                 <td>Organization</td>
                                 <td width="95">Status</td>
                                 <td width="90">Source</td>
+                                <td width="70">Action</td>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -133,6 +146,13 @@
                                 <td><%#: Eval("OrganizationText") %></td>
                                 <td><%#: Eval("EmploymentStatus") %></td>
                                 <td><%#: Eval("SourceSystem") %></td>
+                                <td>
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="Edit"
+                                        NavigateUrl='<%# Eval("EditUrl") %>'
+                                        runat="server" />
+                                </td>
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>

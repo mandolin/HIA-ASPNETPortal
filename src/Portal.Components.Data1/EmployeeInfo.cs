@@ -25,7 +25,8 @@ namespace ASPNET.StarterKit.Portal
             string employmentStatus,
             DateTime? joinedUtc,
             DateTime? leftUtc,
-            string sourceSystem)
+            string sourceSystem,
+            DateTime updatedUtc)
         {
             EmployeeId = employeeId;
             EmployeeCode = employeeCode ?? string.Empty;
@@ -38,6 +39,7 @@ namespace ASPNET.StarterKit.Portal
             JoinedUtc = joinedUtc;
             LeftUtc = leftUtc;
             SourceSystem = sourceSystem ?? string.Empty;
+            UpdatedUtc = updatedUtc;
         }
 
         /// <inheritdoc />
@@ -72,5 +74,8 @@ namespace ASPNET.StarterKit.Portal
 
         /// <inheritdoc />
         public string SourceSystem { get; private set; }
+
+        /// <inheritdoc />
+        public DateTime UpdatedUtc { get; private set; }
     }
 }

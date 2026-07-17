@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="Admin\AccessDenied.aspx" />
     <Content Include="Admin\EditAccessDenied.aspx" />
+    <Content Include="Admin\EmployeeEdit.aspx" />
     <Content Include="Admin\EmployeeDirectory.aspx" />
     <Content Include="Admin\Logoff.aspx" />
     <Content Include="Admin\ManageUsers.aspx" />
@@ -113,6 +114,7 @@
     <Content Include="Admin\DiagnosticLogDetail.aspx" />
     <Content Include="Admin\DiagnosticsLogs.aspx" />
     <Content Include="Admin\OperationAudits.aspx" />
+    <Content Include="Admin\OrganizationUnitEdit.aspx" />
     <Content Include="Admin\SystemHealth.aspx" />
     <Content Include="Admin\ThemeSettings.aspx" />
     <Content Include="Admin\TabLayout.aspx" />
@@ -229,6 +231,13 @@
       <DependentUpon>EditAccessDenied.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Admin\EmployeeEdit.aspx.cs">
+      <DependentUpon>EmployeeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeEdit.aspx.designer.cs">
+      <DependentUpon>EmployeeEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\EmployeeDirectory.aspx.cs">
       <DependentUpon>EmployeeDirectory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -330,6 +339,13 @@
     </Compile>
     <Compile Include="Admin\OperationAudits.aspx.designer.cs">
       <DependentUpon>OperationAudits.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\OrganizationUnitEdit.aspx.cs">
+      <DependentUpon>OrganizationUnitEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\OrganizationUnitEdit.aspx.designer.cs">
+      <DependentUpon>OrganizationUnitEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\SystemHealth.aspx.cs">
       <DependentUpon>SystemHealth.aspx</DependentUpon>

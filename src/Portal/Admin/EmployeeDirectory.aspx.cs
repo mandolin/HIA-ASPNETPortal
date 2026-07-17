@@ -14,10 +14,10 @@ namespace ASPNET.StarterKit.Portal
     /// English: Read-only administration directory page for employees, organization units, and Portal-user bindings.
     /// </summary>
     /// <remarks>
-    /// 中文：P6.3-S3 只显示 P6.3 基础数据，不提供新增、编辑、导入、导出、绑定或员工工号登录启用入口。
+    /// 中文：P6.3-S4 保持列表只读，并将新增/编辑动作交给独立后台维护页；导入、导出、绑定或员工工号登录启用仍不在本页处理。
     ///
-    /// English: P6.3-S3 displays only P6.3 foundation data and provides no creation, editing, import, export,
-    /// binding, or employee-code sign-in enablement entry points.
+    /// English: P6.3-S4 keeps the lists read-only and delegates creation/editing to separate administration
+    /// maintenance pages; import, export, binding, and employee-code sign-in enablement remain outside this page.
     /// </remarks>
     public partial class EmployeeDirectory : PortalPage<EmployeeDirectory>
     {
@@ -199,6 +199,8 @@ namespace ASPNET.StarterKit.Portal
             ParentText = parentText;
             SortOrder = organization.SortOrder;
             IsActiveText = organization.IsActive ? "Yes" : "No";
+            EditUrl = "OrganizationUnitEdit.aspx?organizationUnitId=" +
+                      organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>中文：组织单元标识。English: Organization-unit identifier.</summary>
@@ -218,6 +220,9 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>中文：启用状态展示文本。English: Active-state display text.</summary>
         public string IsActiveText { get; private set; }
+
+        /// <summary>中文：编辑页站内地址。English: Current-application edit-page URL.</summary>
+        public string EditUrl { get; private set; }
     }
 
     /// <summary>
@@ -229,6 +234,7 @@ namespace ASPNET.StarterKit.Portal
     {
         internal EmployeeDirectoryRow(IEmployeeInfo employee)
         {
+            EmployeeId = employee.EmployeeId;
             EmployeeCode = employee.EmployeeCode;
             DisplayName = employee.DisplayName;
             PreferredName = employee.PreferredName;
@@ -240,7 +246,11 @@ namespace ASPNET.StarterKit.Portal
                 : employee.OrganizationDisplayName;
             EmploymentStatus = employee.EmploymentStatus;
             SourceSystem = employee.SourceSystem;
+            EditUrl = "EmployeeEdit.aspx?employeeId=" + employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
         }
+
+        /// <summary>中文：员工标识。English: Employee identifier.</summary>
+        public int EmployeeId { get; private set; }
 
         /// <summary>中文：员工号。English: Employee code.</summary>
         public string EmployeeCode { get; private set; }
@@ -262,6 +272,9 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>中文：来源系统。English: Source system.</summary>
         public string SourceSystem { get; private set; }
+
+        /// <summary>中文：编辑页站内地址。English: Current-application edit-page URL.</summary>
+        public string EditUrl { get; private set; }
     }
 
     /// <summary>

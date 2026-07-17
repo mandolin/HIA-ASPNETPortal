@@ -129,7 +129,8 @@ SELECT
     [Employee].[EmploymentStatus],
     [Employee].[JoinedUtc],
     [Employee].[LeftUtc],
-    [Employee].[SourceSystem]
+    [Employee].[SourceSystem],
+    [Employee].[UpdatedUtc]
 FROM [dbo].[PortalBiz_Employees] AS [Employee]
 LEFT JOIN [dbo].[PortalBiz_OrganizationUnits] AS [Organization]
     ON [Organization].[OrganizationUnitId] = [Employee].[OrganizationUnitId]
@@ -156,7 +157,8 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
                     row.EmploymentStatus,
                     row.JoinedUtc,
                     row.LeftUtc,
-                    row.SourceSystem)).ToList();
+                    row.SourceSystem,
+                    row.UpdatedUtc)).ToList();
             }
             catch (Exception)
             {
@@ -383,6 +385,7 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
             public DateTime? JoinedUtc { get; set; }
             public DateTime? LeftUtc { get; set; }
             public string SourceSystem { get; set; }
+            public DateTime UpdatedUtc { get; set; }
         }
 
         private sealed class UserEmployeeBindingProjection

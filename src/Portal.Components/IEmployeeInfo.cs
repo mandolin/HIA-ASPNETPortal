@@ -85,5 +85,12 @@ namespace ASPNET.StarterKit.Portal
         /// English: Source-system identifier.
         /// </summary>
         string SourceSystem { get; }
+
+        /// <summary>
+        /// 中文：最近更新时间 UTC，用于后台编辑页的轻量并发检查。
+        ///
+        /// English: Last update time in UTC, used by administration edit pages for lightweight concurrency checks.
+        /// </summary>
+        DateTime UpdatedUtc { get; }
     }
 }

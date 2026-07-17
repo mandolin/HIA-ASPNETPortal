@@ -108,9 +108,13 @@
     <Compile Include="IRolesDb.cs" />
     <Compile Include="ITabsDb.cs" />
     <Compile Include="IUsersDb.cs" />
+    <Compile Include="EmployeeDirectoryWriteResult.cs" />
+    <Compile Include="EmployeeSaveRequest.cs" />
+    <Compile Include="IEmployeeDirectoryAdminDb.cs" />
     <Compile Include="IEmployeeDirectoryDb.cs" />
     <Compile Include="IEmployeeInfo.cs" />
     <Compile Include="IOrganizationUnitInfo.cs" />
+    <Compile Include="OrganizationUnitSaveRequest.cs" />
     <Compile Include="IUserProfileInfo.cs" />
     <Compile Include="IUserEmployeeBindingInfo.cs" />
     <Compile Include="IUserRegistrationInfo.cs" />

@@ -81,6 +81,7 @@
     <Compile Include="ModuleDefinitionItem.cs" />
     <Compile Include="ModuleSettingItem.cs" />
     <Compile Include="ContactItem.cs" />
+    <Compile Include="EmployeeDirectoryAdminDb.cs" />
     <Compile Include="EmployeeDirectoryDb.cs" />
     <Compile Include="EmployeeInfo.cs" />
     <Compile Include="EmployeeItem.cs" />

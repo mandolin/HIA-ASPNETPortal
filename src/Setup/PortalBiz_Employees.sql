@@ -28,7 +28,7 @@ BEGIN
     CREATE TABLE [dbo].[PortalBiz_Employees]
     (
         [EmployeeId] INT IDENTITY(1,1) NOT NULL,
-        [EmployeeCode] NVARCHAR(50) NOT NULL,
+        [EmployeeCode] NVARCHAR(64) NOT NULL,
         [DisplayName] NVARCHAR(150) NOT NULL,
         [PreferredName] NVARCHAR(100) NULL,
         [WorkEmail] NVARCHAR(256) NULL,
@@ -68,6 +68,40 @@ BEGIN
         CONSTRAINT [CK_PortalBiz_Employees_LeftUtc]
             CHECK ([EmploymentStatus] <> N'Left' OR [LeftUtc] IS NOT NULL)
     )
+END
+GO
+
+IF OBJECT_ID(N'[dbo].[PortalBiz_Employees]', N'U') IS NOT NULL
+    AND COL_LENGTH(N'dbo.PortalBiz_Employees', N'EmployeeCode') < 128
+BEGIN
+    IF EXISTS (SELECT * FROM sys.check_constraints WHERE [name] = N'CK_PortalBiz_Employees_EmployeeCode')
+    BEGIN
+        ALTER TABLE [dbo].[PortalBiz_Employees]
+        DROP CONSTRAINT [CK_PortalBiz_Employees_EmployeeCode]
+    END
+
+    IF EXISTS (SELECT * FROM sys.key_constraints WHERE [name] = N'UQ_PortalBiz_Employees_EmployeeCode')
+    BEGIN
+        ALTER TABLE [dbo].[PortalBiz_Employees]
+        DROP CONSTRAINT [UQ_PortalBiz_Employees_EmployeeCode]
+    END
+
+    ALTER TABLE [dbo].[PortalBiz_Employees]
+    ALTER COLUMN [EmployeeCode] NVARCHAR(64) NOT NULL
+
+    IF NOT EXISTS (SELECT * FROM sys.key_constraints WHERE [name] = N'UQ_PortalBiz_Employees_EmployeeCode')
+    BEGIN
+        ALTER TABLE [dbo].[PortalBiz_Employees]
+        ADD CONSTRAINT [UQ_PortalBiz_Employees_EmployeeCode]
+            UNIQUE ([EmployeeCode])
+    END
+
+    IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE [name] = N'CK_PortalBiz_Employees_EmployeeCode')
+    BEGIN
+        ALTER TABLE [dbo].[PortalBiz_Employees]
+        ADD CONSTRAINT [CK_PortalBiz_Employees_EmployeeCode]
+            CHECK ([EmployeeCode] = LTRIM(RTRIM([EmployeeCode])) AND NULLIF([EmployeeCode], N'') IS NOT NULL)
+    END
 END
 GO
 
