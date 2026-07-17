@@ -29,6 +29,8 @@
                             <a class="CommandButton" href="ThemeSettings.aspx">Theme Settings</a>
                             &nbsp;
                             <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
+                            &nbsp;
+                            <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
                         </td>
                     </tr>
                 </table>

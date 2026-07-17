@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="Admin\AccessDenied.aspx" />
     <Content Include="Admin\EditAccessDenied.aspx" />
+    <Content Include="Admin\EmployeeDirectory.aspx" />
     <Content Include="Admin\Logoff.aspx" />
     <Content Include="Admin\ManageUsers.aspx" />
     <Content Include="Admin\ModuleCatalog.aspx" />
@@ -227,6 +228,13 @@
     <Compile Include="Admin\EditAccessDenied.aspx.cs">
       <DependentUpon>EditAccessDenied.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeDirectory.aspx.cs">
+      <DependentUpon>EmployeeDirectory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeDirectory.aspx.designer.cs">
+      <DependentUpon>EmployeeDirectory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Logoff.aspx.cs">
       <DependentUpon>Logoff.aspx</DependentUpon>
