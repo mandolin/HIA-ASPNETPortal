@@ -56,6 +56,18 @@
             <lifetime type="singleton" />
         </register>
 
+        <!--P6.3 ENTERPRISE BUSINESS DIRECTORY-->
+        <register type="PortalBizDbContext" mapTo="PortalBizDbContext">
+            <lifetime type="singleton" />
+            <constructor>
+                <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
+            </constructor>
+        </register>
+
+        <register type="IEmployeeDirectoryDb" mapTo="EmployeeDirectoryDb">
+            <lifetime type="singleton" />
+        </register>
+
         <register type="IRolesDb" mapTo="RolesDb">
             <lifetime type="singleton" />
         </register>
