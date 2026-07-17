@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "packageId": "HIA.EmployeeProfileConfirm",
+  "displayName": "员工资料确认 / Employee Profile Confirm",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "desktopEntry": "DesktopModules/EmployeeProfileConfirm/EmployeeProfileConfirm.ascx",
+  "resources": [
+    "Styles/EmployeeProfileConfirm.css"
+  ]
+}

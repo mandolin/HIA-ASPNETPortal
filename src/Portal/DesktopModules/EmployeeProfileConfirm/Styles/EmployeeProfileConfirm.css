@@ -1,0 +1,39 @@
+.employee-profile-confirm {
+    border: 1px solid #d8dee8;
+    padding: 12px;
+    max-width: 720px;
+    background: #fff;
+}
+
+.employee-profile-confirm-title {
+    color: #2f475f;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.employee-profile-confirm-message {
+    display: block;
+    color: #8a1f1f;
+    margin: 6px 0 10px;
+}
+
+.employee-profile-confirm-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.employee-profile-confirm-table td {
+    border-bottom: 1px solid #edf1f5;
+    padding: 6px 4px;
+}
+
+.employee-profile-confirm-label {
+    width: 120px;
+    color: #41556b;
+    font-weight: 700;
+}
+
+.employee-profile-confirm-actions {
+    margin-top: 12px;
+}

@@ -76,6 +76,10 @@
             <lifetime type="singleton" />
         </register>
 
+        <register type="IEmployeeProfileConfirmationDb" mapTo="EmployeeProfileConfirmationDb">
+            <lifetime type="singleton" />
+        </register>
+
         <register type="IRolesDb" mapTo="RolesDb">
             <lifetime type="singleton" />
         </register>

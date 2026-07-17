@@ -108,11 +108,15 @@
     <Compile Include="IRolesDb.cs" />
     <Compile Include="ITabsDb.cs" />
     <Compile Include="IUsersDb.cs" />
+    <Compile Include="EmployeeProfileConfirmationRequest.cs" />
+    <Compile Include="EmployeeProfileConfirmationResult.cs" />
+    <Compile Include="EmployeeProfileConfirmationView.cs" />
     <Compile Include="EmployeeDirectoryWriteResult.cs" />
     <Compile Include="EmployeeSaveRequest.cs" />
     <Compile Include="IEmployeeDirectoryAdminDb.cs" />
     <Compile Include="IEmployeeDirectoryDb.cs" />
     <Compile Include="IEmployeeInfo.cs" />
+    <Compile Include="IEmployeeProfileConfirmationDb.cs" />
     <Compile Include="IOrganizationUnitInfo.cs" />
     <Compile Include="OrganizationUnitSaveRequest.cs" />
     <Compile Include="IUserEmployeeBindingAdminDb.cs" />

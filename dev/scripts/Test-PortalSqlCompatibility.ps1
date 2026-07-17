@@ -24,7 +24,11 @@ param(
 
     [switch]$ApplyP6EmployeeOrganizationMigration,
 
-    [switch]$RequireP6EmployeeOrganizationMigration
+    [switch]$RequireP6EmployeeOrganizationMigration,
+
+    [switch]$ApplyP6BusinessModuleMigration,
+
+    [switch]$RequireP6BusinessModuleMigration
 )
 
 Set-StrictMode -Version Latest
@@ -327,13 +331,24 @@ FROM
         }
     }
 
+    if ($ApplyP6BusinessModuleMigration) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P6.4 business-module migration scripts')) {
+            Invoke-MigrationFile -Connection $connection -Path (Join-Path $repoRoot 'src/Setup/PortalBiz_EmployeeProfileConfirmations.sql')
+            Add-DatabaseCheck -Name 'P6.4 business module migration application' -Status 'Pass' -Detail 'The idempotent P6.4 employee-profile confirmation migration batches completed.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P6.4 business module migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
     $p5Tables = @('Portal_UserCredentials', 'Portal_UserSecurityStates', 'PortalCfg_RolePermissions')
     $p6UserProfileTables = @('PortalBiz_UserProfiles')
     $p6EmployeeOrganizationTables = @('PortalBiz_OrganizationUnits', 'PortalBiz_Employees', 'PortalBiz_UserEmployeeBindings')
-    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables)
+    $p6BusinessModuleTables = @('PortalBiz_EmployeeProfileConfirmations')
+    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
     Add-DatabaseCheck -Name 'Base Portal schema' -Status $(if ($missingBaseTables.Count -eq 0) { 'Pass' } else { 'Fail' }) -Detail $(if ($missingBaseTables.Count -eq 0) { 'Required base tables are present.' } else { 'Missing: ' + ($missingBaseTables -join ', ') })
@@ -447,6 +462,20 @@ FROM
     }
     else {
         Add-DatabaseCheck -Name 'P6.3 employee organization schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP6EmployeeOrganizationTables -join ', '))
+    }
+
+    $missingP6BusinessModuleTables = @($p6BusinessModuleTables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP6BusinessModuleTables.Count -eq 0) {
+        Add-DatabaseCheck -Name 'P6.4 business module schema' -Status 'Pass' -Detail 'The P6.4 employee-profile confirmation table is present.'
+
+        $confirmationCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_EmployeeProfileConfirmations];')
+        Add-DatabaseCheck -Name 'P6.4 employee profile confirmation row count' -Status 'Info' -Detail ('Confirmations: ' + $confirmationCount + '.')
+    }
+    elseif ($RequireP6BusinessModuleMigration) {
+        Add-DatabaseCheck -Name 'P6.4 business module schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP6BusinessModuleTables -join ', '))
+    }
+    else {
+        Add-DatabaseCheck -Name 'P6.4 business module schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP6BusinessModuleTables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })

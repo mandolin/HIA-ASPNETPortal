@@ -189,6 +189,9 @@
     <Content Include="DesktopModules\HtmlModule.ascx" />
     <Content Include="DesktopModules\ImageModule.ascx" />
     <Content Include="DesktopModules\Links.ascx" />
+    <Content Include="DesktopModules\EmployeeProfileConfirm\module.json" />
+    <Content Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx" />
+    <Content Include="DesktopModules\EmployeeProfileConfirm\Styles\EmployeeProfileConfirm.css" />
     <Content Include="DesktopModules\ModuleProbe\module.json" />
     <Content Include="DesktopModules\ModuleProbe\ModuleProbe.ascx" />
     <Content Include="DesktopModules\ModuleProbe\Styles\ModuleProbe.css" />
@@ -591,6 +594,13 @@
     </Compile>
     <Compile Include="DesktopModules\Links.ascx.designer.cs">
       <DependentUpon>Links.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx.cs">
+      <DependentUpon>EmployeeProfileConfirm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx.designer.cs">
+      <DependentUpon>EmployeeProfileConfirm.ascx</DependentUpon>
     </Compile>
     <Compile Include="DesktopModules\ModuleProbe\ModuleProbe.ascx.cs">
       <DependentUpon>ModuleProbe.ascx</DependentUpon>

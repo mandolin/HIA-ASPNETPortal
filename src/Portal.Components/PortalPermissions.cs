@@ -55,6 +55,15 @@ namespace ASPNET.StarterKit.Portal
         /// <summary>中文：绑定或解绑门户账号与员工。English: Bind or unbind Portal users and employees.</summary>
         public const string EmployeeDirectoryBind = "EmployeeDirectory.Bind";
 
+        /// <summary>中文：查看员工资料确认模块。English: View the employee-profile confirmation module.</summary>
+        public const string EmployeeProfileConfirmView = "EmployeeProfileConfirm.View";
+
+        /// <summary>中文：确认自己的员工资料。English: Confirm one's own employee profile.</summary>
+        public const string EmployeeProfileConfirmConfirm = "EmployeeProfileConfirm.Confirm";
+
+        /// <summary>中文：管理员工资料确认记录。English: Administer employee-profile confirmation records.</summary>
+        public const string EmployeeProfileConfirmAdmin = "EmployeeProfileConfirm.Admin";
+
         /// <summary>中文：查看主题设置。English: View theme settings.</summary>
         public const string ThemeView = "Theme.View";
 
@@ -136,6 +145,9 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.AdminUsersResetPassword, "Administration", "重置用户密码。"),
             new PortalPermissionDefinition(PortalPermissionKeys.AdminRolesEdit, "Administration", "编辑角色和角色成员关系。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryBind, "EnterpriseDirectory", "绑定或解绑门户账号与员工。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmView, "Business.EmployeeProfileConfirm", "查看员工资料确认模块。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmConfirm, "Business.EmployeeProfileConfirm", "确认自己的员工资料。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmAdmin, "Business.EmployeeProfileConfirm", "管理员查看和处理员工资料确认记录。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeView, "Theme", "查看主题设置。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeEdit, "Theme", "编辑主题设置和 Tab 覆盖。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),

@@ -38,6 +38,13 @@ namespace ASPNET.StarterKit.Portal
         public const string EnterpriseDirectoryCategory = "EnterpriseDirectory";
 
         /// <summary>
+        /// 中文：业务模块分类，覆盖新业务模块的领域动作。
+        ///
+        /// English: Business-module category covering domain actions from new business modules.
+        /// </summary>
+        public const string BusinessModuleCategory = "BusinessModule";
+
+        /// <summary>
         /// 中文：审计目标类型：门户用户。
         ///
         /// English: Audit target type for a Portal user.
@@ -64,6 +71,13 @@ namespace ASPNET.StarterKit.Portal
         /// English: Audit target type for a Portal-user employee binding.
         /// </summary>
         public const string UserEmployeeBindingTargetType = "UserEmployeeBinding";
+
+        /// <summary>
+        /// 中文：审计目标类型：员工资料确认记录。
+        ///
+        /// English: Audit target type for an employee-profile confirmation record.
+        /// </summary>
+        public const string EmployeeProfileConfirmationTargetType = "EmployeeProfileConfirmation";
 
         /// <summary>
         /// 中文：自主注册已提交。
@@ -176,5 +190,12 @@ namespace ASPNET.StarterKit.Portal
         /// English: A Portal-user employee binding was ended.
         /// </summary>
         public const string UserEmployeeUnbound = "UserEmployeeUnbound";
+
+        /// <summary>
+        /// 中文：员工资料已由当前绑定用户确认。
+        ///
+        /// English: Employee profile was confirmed by the current bound user.
+        /// </summary>
+        public const string EmployeeProfileConfirmed = "EmployeeProfileConfirmed";
     }
 }
