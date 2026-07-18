@@ -7,79 +7,60 @@
 
 <%-- P6.3-S4 组织单元最小维护页：不提供硬删除、导入、导出或批量同步。 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="20">&nbsp;</td>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="left" class="Head">
-                            <asp:Label ID="TitleLabel" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><hr noshade size="1"></td>
-                    </tr>
-                    <tr>
-                        <td class="Normal">
-                            <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                            &nbsp;
-                            <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
-                        </td>
-                    </tr>
-                </table>
+    <%-- 中文 / English: 组织单元编辑页只重构展示壳，父级校验、保存和审计仍由 code-behind 处理。 --%>
+    <div class="portal-admin-page portal-admin-organization-edit">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <asp:Label ID="TitleLabel" CssClass="Head portal-admin-title" runat="server" />
+                <p class="Normal portal-admin-subtitle">Maintain organization units used by employee directory grouping and profile workflows.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
+                <a class="CommandButton" href="EmployeeEdit.aspx">New Employee</a>
+                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+            </div>
+        </div>
 
-                <asp:Label ID="MessageLabel" CssClass="NormalRed" EnableViewState="false" runat="server" />
-                <asp:HiddenField ID="OrganizationUnitIdField" runat="server" />
-                <asp:HiddenField ID="OriginalUpdatedUtcField" runat="server" />
+        <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
+        <asp:HiddenField ID="OrganizationUnitIdField" runat="server" />
+        <asp:HiddenField ID="OriginalUpdatedUtcField" runat="server" />
 
-                <table width="620" cellspacing="0" cellpadding="4" border="0">
-                    <tr>
-                        <td width="160" class="SubHead">Organization Code:</td>
-                        <td>
-                            <asp:TextBox ID="OrganizationCodeTextBox" CssClass="NormalTextBox" Width="260" MaxLength="100" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Display Name:</td>
-                        <td>
-                            <asp:TextBox ID="DisplayNameTextBox" CssClass="NormalTextBox" Width="320" MaxLength="150" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Parent:</td>
-                        <td>
-                            <asp:DropDownList ID="ParentOrganizationList" CssClass="NormalTextBox" Width="320" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Sort Order:</td>
-                        <td>
-                            <asp:TextBox ID="SortOrderTextBox" CssClass="NormalTextBox" Width="80" MaxLength="10" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Active:</td>
-                        <td class="Normal">
-                            <asp:CheckBox ID="IsActiveCheckBox" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>
-                            <asp:LinkButton
-                                ID="SaveButton"
-                                CssClass="CommandButton"
-                                Text="Save"
-                                CausesValidation="False"
-                                OnClick="SaveButton_Click"
-                                runat="server" />
-                            &nbsp;
-                            <a class="CommandButton" href="EmployeeDirectory.aspx">Cancel</a>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Organization Metadata</h2>
+            </div>
+            <div class="portal-form-grid">
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label">Organization Code</span>
+                    <asp:TextBox ID="OrganizationCodeTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="100" runat="server" />
+                </div>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label">Display Name</span>
+                    <asp:TextBox ID="DisplayNameTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="150" runat="server" />
+                </div>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label">Parent</span>
+                    <asp:DropDownList ID="ParentOrganizationList" CssClass="NormalTextBox portal-form-input" runat="server" />
+                </div>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label">Sort Order</span>
+                    <asp:TextBox ID="SortOrderTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="10" runat="server" />
+                </div>
+                <div class="portal-form-field portal-checkbox-field">
+                    <span class="SubHead portal-form-label">Active</span>
+                    <asp:CheckBox ID="IsActiveCheckBox" Text="Enable this organization unit" runat="server" />
+                </div>
+            </div>
+            <div class="portal-form-actions">
+                <asp:LinkButton
+                    ID="SaveButton"
+                    CssClass="CommandButton portal-primary-action"
+                    Text="Save"
+                    CausesValidation="False"
+                    OnClick="SaveButton_Click"
+                    runat="server" />
+                <a class="CommandButton" href="EmployeeDirectory.aspx">Cancel</a>
+            </div>
+        </div>
+    </div>
 </asp:Content>

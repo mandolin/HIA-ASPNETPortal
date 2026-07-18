@@ -384,6 +384,9 @@ if (p65?.tabUrl) {
 
 const adminTargets = [
   { id: 'admin-employee-directory', title: '员工目录后台', role: 'admin', url: joinUrl('Admin/EmployeeDirectory.aspx') },
+  { id: 'admin-employee-edit-new', title: '新增员工后台', role: 'admin', url: joinUrl('Admin/EmployeeEdit.aspx') },
+  { id: 'admin-organization-edit-new', title: '新增组织后台', role: 'admin', url: joinUrl('Admin/OrganizationUnitEdit.aspx') },
+  { id: 'admin-user-employee-binding-new', title: '账号员工绑定后台', role: 'admin', url: joinUrl('Admin/UserEmployeeBindingEdit.aspx') },
   { id: 'admin-operation-audits', title: '运营审计后台', role: 'admin', url: joinUrl('Admin/OperationAudits.aspx') },
   { id: 'admin-system-health', title: '系统健康后台', role: 'admin', url: joinUrl('Admin/SystemHealth.aspx') },
   { id: 'admin-diagnostics-logs', title: '诊断日志后台', role: 'admin', url: joinUrl('Admin/DiagnosticsLogs.aspx') },
