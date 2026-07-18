@@ -80,6 +80,17 @@ function Add-BitParameter {
     $parameter.Value = $Value
 }
 
+function Add-IntParameter {
+    param(
+        [System.Data.SqlClient.SqlCommand]$Command,
+        [string]$Name,
+        [int]$Value
+    )
+
+    $parameter = $Command.Parameters.Add($Name, [System.Data.SqlDbType]::Int)
+    $parameter.Value = $Value
+}
+
 function Add-DateTime2Parameter {
     param(
         [System.Data.SqlClient.SqlCommand]$Command,
@@ -204,6 +215,200 @@ ORDER BY [ItemID]
     finally {
         $command.Dispose()
     }
+}
+
+function Get-FirstModuleIdForDefinition {
+    param(
+        [System.Data.SqlClient.SqlConnection]$Connection,
+        [string]$FriendlyName
+    )
+
+    return Invoke-ScalarQuery -Connection $Connection -Sql @'
+SELECT TOP (1) [m].[ModuleId]
+FROM [dbo].[PortalCfg_Modules] AS [m]
+INNER JOIN [dbo].[PortalCfg_ModuleDefinitions] AS [d]
+    ON [d].[ModuleDefId] = [m].[ModuleDefId]
+WHERE [d].[FriendlyName] = @FriendlyName
+ORDER BY [m].[TabId], [m].[ModuleOrder], [m].[ModuleId]
+'@ -Configure {
+        param($command)
+        Add-TextParameter -Command $command -Name '@FriendlyName' -Size 150 -Value $FriendlyName
+    }
+}
+
+function Get-OrCreateEditPageTargets {
+    param([System.Data.SqlClient.SqlConnection]$Connection)
+
+    $targets = New-Object 'System.Collections.Generic.List[object]'
+
+    $announcementModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'Announcements'
+    if ($null -ne $announcementModuleId) {
+        $announcementItemId = Invoke-ScalarQuery -Connection $Connection -Sql @'
+DECLARE @ItemId int;
+
+SELECT TOP (1) @ItemId = [ItemID]
+FROM [dbo].[Portal_Announcements]
+WHERE [ModuleID] = @ModuleID
+  AND [Title] = N'P7-Test-Announcement-Edit';
+
+IF @ItemId IS NULL
+BEGIN
+    INSERT INTO [dbo].[Portal_Announcements]
+        ([ModuleID], [CreatedByUser], [CreatedDate], [Title], [MoreLink], [MobileMoreLink], [ExpireDate], [Description])
+    VALUES
+        (@ModuleID, N'P7-Screenshot', GETDATE(), N'P7-Test-Announcement-Edit', N'~/DesktopDefault.aspx', N'', DATEADD(day, 90, GETDATE()), N'P7 theme edit-page screenshot sample.');
+
+    SET @ItemId = CONVERT(int, SCOPE_IDENTITY());
+END
+ELSE
+BEGIN
+    UPDATE [dbo].[Portal_Announcements]
+    SET [MoreLink] = N'~/DesktopDefault.aspx',
+        [MobileMoreLink] = N'',
+        [ExpireDate] = DATEADD(day, 90, GETDATE()),
+        [Description] = N'P7 theme edit-page screenshot sample.'
+    WHERE [ItemID] = @ItemId;
+END
+
+SELECT @ItemId;
+'@ -Configure {
+            param($command)
+            Add-IntParameter -Command $command -Name '@ModuleID' -Value ([int]$announcementModuleId)
+        }
+
+        $targets.Add([pscustomobject]@{
+            id = 'edit-announcement'
+            title = '公告编辑页'
+            url = 'DesktopModules/EditAnnouncements.aspx?ItemID=' + [Convert]::ToString($announcementItemId, [System.Globalization.CultureInfo]::InvariantCulture) + '&mid=' + [Convert]::ToString($announcementModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
+        })
+    }
+
+    $contactModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'Contacts'
+    if ($null -ne $contactModuleId) {
+        $contactItemId = Invoke-ScalarQuery -Connection $Connection -Sql @'
+DECLARE @ItemId int;
+
+SELECT TOP (1) @ItemId = [ItemID]
+FROM [dbo].[Portal_Contacts]
+WHERE [ModuleID] = @ModuleID
+  AND [Name] = N'P7-Test-Contact-Edit';
+
+IF @ItemId IS NULL
+BEGIN
+    INSERT INTO [dbo].[Portal_Contacts]
+        ([ModuleID], [CreatedByUser], [CreatedDate], [Name], [Role], [Email], [Contact1], [Contact2])
+    VALUES
+        (@ModuleID, N'P7-Screenshot', GETDATE(), N'P7-Test-Contact-Edit', N'Theme Probe', N'p7-contact@example.invalid', N'office: 010-0000-0001', N'mobile: 138-0000-0001');
+
+    SET @ItemId = CONVERT(int, SCOPE_IDENTITY());
+END
+ELSE
+BEGIN
+    UPDATE [dbo].[Portal_Contacts]
+    SET [Role] = N'Theme Probe',
+        [Email] = N'p7-contact@example.invalid',
+        [Contact1] = N'office: 010-0000-0001',
+        [Contact2] = N'mobile: 138-0000-0001'
+    WHERE [ItemID] = @ItemId;
+END
+
+SELECT @ItemId;
+'@ -Configure {
+            param($command)
+            Add-IntParameter -Command $command -Name '@ModuleID' -Value ([int]$contactModuleId)
+        }
+
+        $targets.Add([pscustomobject]@{
+            id = 'edit-contact'
+            title = '联系人编辑页'
+            url = 'DesktopModules/EditContacts.aspx?ItemID=' + [Convert]::ToString($contactItemId, [System.Globalization.CultureInfo]::InvariantCulture) + '&mid=' + [Convert]::ToString($contactModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
+        })
+    }
+
+    $eventModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'Events'
+    if ($null -ne $eventModuleId) {
+        $eventItemId = Invoke-ScalarQuery -Connection $Connection -Sql @'
+DECLARE @ItemId int;
+
+SELECT TOP (1) @ItemId = [ItemID]
+FROM [dbo].[Portal_Events]
+WHERE [ModuleID] = @ModuleID
+  AND [Title] = N'P7-Test-Event-Edit';
+
+IF @ItemId IS NULL
+BEGIN
+    INSERT INTO [dbo].[Portal_Events]
+        ([ModuleID], [CreatedByUser], [CreatedDate], [Title], [WhereWhen], [Description], [ExpireDate])
+    VALUES
+        (@ModuleID, N'P7-Screenshot', GETDATE(), N'P7-Test-Event-Edit', N'P7 Screenshot Matrix', N'P7 theme edit-page screenshot sample.', DATEADD(day, 90, GETDATE()));
+
+    SET @ItemId = CONVERT(int, SCOPE_IDENTITY());
+END
+ELSE
+BEGIN
+    UPDATE [dbo].[Portal_Events]
+    SET [WhereWhen] = N'P7 Screenshot Matrix',
+        [Description] = N'P7 theme edit-page screenshot sample.',
+        [ExpireDate] = DATEADD(day, 90, GETDATE())
+    WHERE [ItemID] = @ItemId;
+END
+
+SELECT @ItemId;
+'@ -Configure {
+            param($command)
+            Add-IntParameter -Command $command -Name '@ModuleID' -Value ([int]$eventModuleId)
+        }
+
+        $targets.Add([pscustomobject]@{
+            id = 'edit-event'
+            title = '事件编辑页'
+            url = 'DesktopModules/EditEvents.aspx?ItemID=' + [Convert]::ToString($eventItemId, [System.Globalization.CultureInfo]::InvariantCulture) + '&mid=' + [Convert]::ToString($eventModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
+        })
+    }
+
+    $linkModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'Links'
+    if ($null -ne $linkModuleId) {
+        $linkItemId = Invoke-ScalarQuery -Connection $Connection -Sql @'
+DECLARE @ItemId int;
+
+SELECT TOP (1) @ItemId = [ItemID]
+FROM [dbo].[Portal_Links]
+WHERE [ModuleID] = @ModuleID
+  AND [Title] = N'P7-Test-Link-Edit';
+
+IF @ItemId IS NULL
+BEGIN
+    INSERT INTO [dbo].[Portal_Links]
+        ([ModuleID], [CreatedByUser], [CreatedDate], [Title], [Url], [MobileUrl], [ViewOrder], [Description])
+    VALUES
+        (@ModuleID, N'P7-Screenshot', GETDATE(), N'P7-Test-Link-Edit', N'~/DesktopDefault.aspx', N'', 99, N'P7 theme edit-page screenshot sample.');
+
+    SET @ItemId = CONVERT(int, SCOPE_IDENTITY());
+END
+ELSE
+BEGIN
+    UPDATE [dbo].[Portal_Links]
+    SET [Url] = N'~/DesktopDefault.aspx',
+        [MobileUrl] = N'',
+        [ViewOrder] = 99,
+        [Description] = N'P7 theme edit-page screenshot sample.'
+    WHERE [ItemID] = @ItemId;
+END
+
+SELECT @ItemId;
+'@ -Configure {
+            param($command)
+            Add-IntParameter -Command $command -Name '@ModuleID' -Value ([int]$linkModuleId)
+        }
+
+        $targets.Add([pscustomobject]@{
+            id = 'edit-link'
+            title = '链接编辑页'
+            url = 'DesktopModules/EditLinks.aspx?ItemID=' + [Convert]::ToString($linkItemId, [System.Globalization.CultureInfo]::InvariantCulture) + '&mid=' + [Convert]::ToString($linkModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
+        })
+    }
+
+    return $targets
 }
 
 function Get-SystemSettingSnapshot {
@@ -389,6 +594,7 @@ const moduleSettingsTabId = process.env.P7_THEME_MODULE_SETTINGS_TAB_ID;
 const tabLayoutTabId = process.env.P7_THEME_TAB_LAYOUT_TAB_ID;
 const contentTabsJson = process.env.P7_THEME_CONTENT_TABS || '[]';
 const discussionDetailJson = process.env.P7_THEME_DISCUSSION_DETAIL || 'null';
+const editPageTargetsJson = process.env.P7_THEME_EDIT_PAGE_TARGETS || '[]';
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -495,6 +701,7 @@ const p64 = fs.existsSync(p64Path) ? readJson(p64Path) : null;
 const p65 = fs.existsSync(p65Path) ? readJson(p65Path) : null;
 const contentTabs = readEnvJson(contentTabsJson, []);
 const discussionDetail = readEnvJson(discussionDetailJson, null);
+const editPageTargets = readEnvJson(editPageTargetsJson, []);
 fs.mkdirSync(outputDir, { recursive: true });
 
 const anonymousTargets = [
@@ -567,6 +774,17 @@ if (moduleSettingsModuleId && moduleSettingsTabId) {
 
 if (tabLayoutTabId) {
   adminTargets.push({ id: 'admin-tab-layout', title: 'Tab 布局后台', role: 'admin', url: joinUrl(`Admin/TabLayout.aspx?tabid=${encodeURIComponent(tabLayoutTabId)}`) });
+}
+
+for (const target of editPageTargets) {
+  if (target?.id && target?.url) {
+    adminTargets.push({
+      id: target.id,
+      title: target.title || target.id,
+      role: 'admin',
+      url: joinUrl(target.url)
+    });
+  }
 }
 
 const boundTargets = [];
@@ -657,6 +875,7 @@ try {
     $settingSnapshot = Get-SystemSettingSnapshot -Connection $connection
     $contentTabTargets = Get-ContentTabTargets -Connection $connection
     $discussionDetailTarget = Get-DiscussionDetailTarget -Connection $connection
+    $editPageTargets = Get-OrCreateEditPageTargets -Connection $connection
     $p65Context = Get-Content -LiteralPath $P65ContextPath -Raw -Encoding UTF8 | ConvertFrom-Json
     $adminUserId = if ($p65Context.adminUserName) {
         Invoke-ScalarQuery -Connection $connection -Sql @'
@@ -732,6 +951,7 @@ ORDER BY CASE WHEN [TabName] = N'Home' THEN 0 ELSE 1 END, [TabOrder], [TabId]
         $env:P7_THEME_TAB_LAYOUT_TAB_ID = if ($null -eq $tabLayoutTabId) { '' } else { [Convert]::ToString($tabLayoutTabId, [System.Globalization.CultureInfo]::InvariantCulture) }
         $env:P7_THEME_CONTENT_TABS = if ($contentTabTargets.Count -eq 0) { '[]' } else { $contentTabTargets | ConvertTo-Json -Compress }
         $env:P7_THEME_DISCUSSION_DETAIL = if ($null -eq $discussionDetailTarget) { 'null' } else { $discussionDetailTarget | ConvertTo-Json -Compress }
+        $env:P7_THEME_EDIT_PAGE_TARGETS = if ($editPageTargets.Count -eq 0) { '[]' } else { $editPageTargets | ConvertTo-Json -Compress }
 
         $nodeOutput = & node $runtimeScript
         if ($LASTEXITCODE -ne 0) {
@@ -757,6 +977,7 @@ finally {
     Remove-Item Env:P7_THEME_TAB_LAYOUT_TAB_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_CONTENT_TABS -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_DISCUSSION_DETAIL -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_EDIT_PAGE_TARGETS -ErrorAction SilentlyContinue
 
     if ($connection) {
         if ($connection.State -eq [System.Data.ConnectionState]::Open) {

@@ -2,108 +2,68 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 页面内容区域开始 --%>
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="100">
-                &nbsp;
-            </td>
-            <td width="*">
-                <table width="500" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="left" class="Head">
-                            Event Details
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <hr noshade size="1pt">
-                        </td>
-                    </tr>
-                </table>
-                <table width="750" cellspacing="0" cellpadding="0">
-                    <tr valign="top">
-                        <td width="100" class="SubHead">
-                            Title:
-                        </td>
-                        <td rowspan="4">
-                            &nbsp;
-                        </td>
-                        <td>
-                            <asp:TextBox ID="TitleField" CssClass="NormalTextBox" Width="390" Columns="30" MaxLength="150"
-                                runat="server" />
-                        </td>
-                        <td width="25" rowspan="4">
-                            &nbsp;
-                        </td>
-                        <td class="Normal" width="250">
-                            <asp:RequiredFieldValidator Display="Static" runat="server" ErrorMessage="You Must Enter a Valid Title"
-                                ControlToValidate="TitleField" />
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <td class="SubHead">
-                            Description:
-                        </td>
-                        <td>
-                            <asp:TextBox ID="DescriptionField" TextMode="Multiline" Width="390" Columns="44"
-                                Rows="6" runat="server" />
-                        </td>
-                        <td class="Normal">
-                            <asp:RequiredFieldValidator Display="Static" runat="server" ErrorMessage="You Must Enter a Valid Description"
-                                ControlToValidate="DescriptionField" />
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <td class="SubHead">
-                            Where/When:
-                        </td>
-                        <td>
-                            <asp:TextBox ID="WhereWhenField" CssClass="NormalTextBox" Width="390" Columns="30"
-                                MaxLength="150" runat="server" />
-                        </td>
-                        <td class="Normal">
-                            <asp:RequiredFieldValidator Display="Static" runat="server" ErrorMessage="You Must Enter a Valid Time/Location"
-                                ControlToValidate="WhereWhenField" />
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <td class="SubHead">
-                            Expires:
-                        </td>
-                        <td>
-                            <asp:TextBox ID="ExpireField" Text="12/31/2001" CssClass="NormalTextBox" Width="100"
-                                Columns="8" runat="server" />
-                        </td>
-                        <td class="Normal">
-                            <asp:RequiredFieldValidator Display="Static" ID="RequiredExpireDate" runat="server"
-                                ErrorMessage="You Must Enter a Valid Expiration Date" ControlToValidate="ExpireField" />
-                            <asp:CompareValidator Display="Static" ID="VerifyExpireDate" runat="server" Operator="DataTypeCheck"
-                                ControlToValidate="ExpireField" Type="Date" ErrorMessage="You Must Enter a Valid Expiration Date" />
-                        </td>
-                    </tr>
-                </table>
-                <asp:Label ID="ValidationMessage" CssClass="NormalRed" EnableViewState="false" Visible="false" runat="server" />
-                <p>
-                    <%-- 更新、取消和删除按钮 --%>
-                    <asp:LinkButton ID="updateButton" Text="Update" runat="server" class="CommandButton"
-                        BorderStyle="none" OnClick="UpdateBtn_Click" />
-                    &nbsp;
-                    <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
-                        class="CommandButton" BorderStyle="none" OnClick="CancelBtn_Click" />
-                    &nbsp;
-                    <asp:LinkButton ID="deleteButton" Text="Delete this item" CausesValidation="False"
-                        runat="server" class="CommandButton" BorderStyle="none" OnClick="DeleteBtn_Click" />
-                    <hr noshade size="1pt" width="500">
-                    <span class="Normal">Created by
-                        <asp:Label ID="CreatedBy" runat="server" />
-                        on
-                        <asp:Label ID="CreatedDate" runat="server" />
-                        <br>
-                    </span>
-                </p>
-            </td>
-        </tr>
-    </table>
-    <%-- 页面内容区域结束 --%>
+    <%-- 中文：事件编辑页使用统一主题化表单，保留既有校验和回发事件；English: Event edit page keeps existing validation and postback handlers. --%>
+    <section class="portal-page-section portal-edit-page portal-edit-events">
+        <div class="portal-page-heading-row">
+            <h1 class="portal-page-title">Event Details</h1>
+        </div>
+
+        <div class="portal-detail-card portal-edit-form">
+            <div class="portal-field-stack">
+                <asp:Label ID="TitleLabel" CssClass="portal-field-stack-label" AssociatedControlID="TitleField"
+                    runat="server" Text="Title" />
+                <asp:TextBox ID="TitleField" CssClass="NormalTextBox portal-input" Columns="30" MaxLength="150"
+                    runat="server" />
+                <asp:RequiredFieldValidator Display="Static" CssClass="portal-validation-message" runat="server"
+                    ErrorMessage="You Must Enter a Valid Title" ControlToValidate="TitleField" />
+            </div>
+
+            <div class="portal-field-stack">
+                <asp:Label ID="DescriptionLabel" CssClass="portal-field-stack-label" AssociatedControlID="DescriptionField"
+                    runat="server" Text="Description" />
+                <asp:TextBox ID="DescriptionField" CssClass="NormalTextBox portal-input" TextMode="Multiline"
+                    Columns="44" Rows="6" runat="server" />
+                <asp:RequiredFieldValidator Display="Static" CssClass="portal-validation-message" runat="server"
+                    ErrorMessage="You Must Enter a Valid Description" ControlToValidate="DescriptionField" />
+            </div>
+
+            <div class="portal-field-stack">
+                <asp:Label ID="WhereWhenLabel" CssClass="portal-field-stack-label" AssociatedControlID="WhereWhenField"
+                    runat="server" Text="Where/When" />
+                <asp:TextBox ID="WhereWhenField" CssClass="NormalTextBox portal-input" Columns="30"
+                    MaxLength="150" runat="server" />
+                <asp:RequiredFieldValidator Display="Static" CssClass="portal-validation-message" runat="server"
+                    ErrorMessage="You Must Enter a Valid Time/Location" ControlToValidate="WhereWhenField" />
+            </div>
+
+            <div class="portal-field-stack portal-edit-date-field">
+                <asp:Label ID="ExpireLabel" CssClass="portal-field-stack-label" AssociatedControlID="ExpireField"
+                    runat="server" Text="Expires" />
+                <asp:TextBox ID="ExpireField" Text="12/31/2001" CssClass="NormalTextBox portal-input" Columns="8"
+                    runat="server" />
+                <asp:RequiredFieldValidator Display="Static" ID="RequiredExpireDate" CssClass="portal-validation-message"
+                    runat="server" ErrorMessage="You Must Enter a Valid Expiration Date" ControlToValidate="ExpireField" />
+                <asp:CompareValidator Display="Static" ID="VerifyExpireDate" CssClass="portal-validation-message"
+                    runat="server" Operator="DataTypeCheck" ControlToValidate="ExpireField" Type="Date"
+                    ErrorMessage="You Must Enter a Valid Expiration Date" />
+            </div>
+
+            <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message" EnableViewState="false"
+                Visible="false" runat="server" />
+
+            <div class="portal-form-actions">
+                <asp:LinkButton ID="updateButton" Text="Update" runat="server"
+                    CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
+                <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
+                    CssClass="portal-button portal-button-secondary" BorderStyle="none" OnClick="CancelBtn_Click" />
+                <asp:LinkButton ID="deleteButton" Text="Delete this item" CausesValidation="False" runat="server"
+                    CssClass="portal-button portal-button-danger" BorderStyle="none" OnClick="DeleteBtn_Click" />
+            </div>
+        </div>
+
+        <p class="portal-edit-metadata">
+            Created by <asp:Label ID="CreatedBy" runat="server" />
+            on <asp:Label ID="CreatedDate" runat="server" />
+        </p>
+    </section>
 </asp:Content>

@@ -1296,3 +1296,68 @@ body.portal-theme-stateclassiclight input.portal-primary-action {
 .portal-icon-button:hover {
     background-color: #f4eedf;
 }
+
+/* 中文 / English: P7.4.2-C 普通内容编辑页的表单、校验与危险操作样式。 */
+.portal-edit-page {
+    max-width: 980px;
+}
+
+.portal-edit-page .portal-detail-card {
+    max-width: 860px;
+}
+
+.portal-edit-form {
+    padding: 18px;
+}
+
+.portal-edit-form .portal-field-stack {
+    max-width: 720px;
+}
+
+.portal-edit-form textarea.portal-input {
+    min-height: 132px;
+    resize: vertical;
+}
+
+.portal-edit-date-field .portal-input,
+.portal-edit-order-field .portal-input {
+    max-width: 180px;
+}
+
+.portal-validation-message {
+    display: block;
+    margin-top: 5px;
+    color: #b42318;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.portal-button-danger,
+a.portal-button-danger:link,
+a.portal-button-danger:visited,
+a.portal-button-danger:active,
+input.portal-button-danger,
+button.portal-button-danger {
+    border-color: #b42318;
+    background-color: #b42318;
+    color: #ffffff;
+}
+
+.portal-button-danger:hover,
+a.portal-button-danger:hover,
+input.portal-button-danger:hover,
+button.portal-button-danger:hover {
+    border-color: #8f1d14;
+    background-color: #8f1d14;
+    color: #ffffff;
+}
+
+.portal-edit-metadata {
+    max-width: 860px;
+    margin: -4px 0 18px;
+    padding-top: 12px;
+    border-top: 1px solid #c2b488;
+    color: #5f5a4a;
+    line-height: 1.5;
+}

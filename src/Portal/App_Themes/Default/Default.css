@@ -351,3 +351,160 @@ HR {
     height: 1pt;
     text-align: left
 }
+
+/* 中文 / English: P7 主题化页面的基础回退组件。 */
+.portal-page-section,
+.portal-detail-card {
+    margin: 0 0 18px;
+    padding: 16px 18px;
+    border: 1px solid #d6dce2;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.portal-page-heading-row {
+    margin: 0 0 16px;
+}
+
+.portal-page-title {
+    margin: 0;
+    color: #12385f;
+    font-size: 24px;
+    line-height: 1.35;
+}
+
+.portal-form-actions {
+    margin: 0 0 18px;
+    padding: 12px 0;
+}
+
+.portal-button,
+a.portal-button:link,
+a.portal-button:visited,
+a.portal-button:active,
+input.portal-button,
+button.portal-button {
+    display: inline-block;
+    margin: 2px 4px 2px 0;
+    padding: 6px 12px;
+    border: 1px solid #2f5f93;
+    background-color: #ffffff;
+    color: #12385f;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.35;
+    text-decoration: none;
+    border-radius: 7px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.portal-button:hover,
+a.portal-button:hover,
+input.portal-button:hover,
+button.portal-button:hover {
+    border-color: #12385f;
+    background-color: #e8f1fb;
+    color: #12385f;
+}
+
+.portal-button-primary,
+a.portal-button-primary:link,
+a.portal-button-primary:visited,
+a.portal-button-primary:active,
+input.portal-button-primary,
+button.portal-button-primary {
+    border-color: #12385f;
+    background-color: #12385f;
+    color: #ffffff;
+}
+
+.portal-button-secondary,
+a.portal-button-secondary:link,
+a.portal-button-secondary:visited,
+a.portal-button-secondary:active,
+input.portal-button-secondary,
+button.portal-button-secondary {
+    border-color: #d6dce2;
+    background-color: #ffffff;
+    color: #12385f;
+}
+
+/* 中文 / English: P7.4.2-C 普通内容编辑页的基础回退样式。 */
+.portal-edit-page {
+    max-width: 980px;
+}
+
+.portal-edit-page .portal-detail-card,
+.portal-edit-metadata {
+    max-width: 860px;
+}
+
+.portal-edit-form {
+    padding: 18px;
+}
+
+.portal-edit-form .portal-field-stack {
+    max-width: 720px;
+    margin-bottom: 12px;
+}
+
+.portal-field-stack-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.portal-input {
+    width: 100% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.portal-edit-form textarea.portal-input {
+    min-height: 132px;
+    resize: vertical;
+}
+
+.portal-edit-date-field .portal-input,
+.portal-edit-order-field .portal-input {
+    max-width: 180px;
+}
+
+.portal-validation-message {
+    display: block;
+    margin-top: 5px;
+    color: #b42318;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.45;
+}
+
+.portal-button-danger,
+a.portal-button-danger:link,
+a.portal-button-danger:visited,
+a.portal-button-danger:active,
+input.portal-button-danger,
+button.portal-button-danger {
+    border-color: #b42318;
+    background-color: #b42318;
+    color: #ffffff;
+}
+
+.portal-button-danger:hover,
+a.portal-button-danger:hover,
+input.portal-button-danger:hover,
+button.portal-button-danger:hover {
+    border-color: #8f1d14;
+    background-color: #8f1d14;
+    color: #ffffff;
+}
+
+.portal-edit-metadata {
+    margin: -4px 0 18px;
+    padding-top: 12px;
+    border-top: 1px solid dimgrey;
+    color: dimgrey;
+    line-height: 1.5;
+}
