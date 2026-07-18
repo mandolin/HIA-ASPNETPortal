@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "name": "EnterpriseDark",
+  "displayName": "现代企业深色 / Enterprise Dark",
+  "version": "0.1.0",
+  "minimumPortalVersion": "1.0",
+  "inheritsDefault": false,
+  "resources": [
+    "Default.css"
+  ]
+}

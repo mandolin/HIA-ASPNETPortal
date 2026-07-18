@@ -1,8 +1,8 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="ASPNET.StarterKit.Portal.PortalMasterPage" %>
 
 <%--
-中文：默认 Master 固定引用桌面 Banner，保留现有门户导航和 Tab 呈现行为；Banner 可配置化属于后续专题。
-English: The default Master keeps the desktop Banner and existing portal navigation/Tab rendering; configurable banners are a future concern.
+中文：默认 Master 固定引用桌面 Banner；P7.4 起承载现代门户外壳，Banner 可配置化属于后续专题。
+English: The default Master keeps the desktop Banner; starting with P7.4 it hosts the modern portal shell, while configurable banners remain a future concern.
 --%>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Banner" Src="DesktopPortalBanner.ascx" %>
 
@@ -15,23 +15,16 @@ English: The default Master keeps the desktop Banner and existing portal navigat
 <%-- 中文：PortalMasterPage 在渲染前为此 body 写入受控主题/Tab class；不得在标记中直接拼接外部资源。English: PortalMasterPage writes controlled theme/Tab classes to this body before rendering; markup must not concatenate external resources. --%>
 <body id="PortalBody" runat="server" bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
     <form id="Form1" runat="server">
-        <%-- 中文：历史 table 布局和唯一 server form 保持兼容；本批不改变 DOM、视觉或提交行为。English: The legacy table layout and single server form remain for compatibility; this batch does not change DOM, visuals, or submission behavior. --%>
-        <table cellspacing="0" cellpadding="0" width="100%" border="0">
-            <tbody>
-                <tr valign="top">
-                    <td colspan="2">
-                        <ASPNETPortal:Banner ID="Banner" runat="server" SelectedTabIndex="0"></ASPNETPortal:Banner>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br />
-                        <%-- 中文：门户页与后台页通过此占位符提供主体内容。English: Portal and administration pages provide main content through this placeholder. --%>
-                        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <%-- 中文：P7.4 主壳层改为 div 结构；仍保留单一 server form 与 WebForms postback。English: P7.4 moves the shell to div markup while keeping the single server form and WebForms postback. --%>
+        <div class="portal-app-shell">
+            <ASPNETPortal:Banner ID="Banner" runat="server" SelectedTabIndex="0"></ASPNETPortal:Banner>
+            <div class="portal-main-shell">
+                <div class="portal-content-stage">
+                    <%-- 中文：门户页与后台页通过此占位符提供主体内容。English: Portal and administration pages provide main content through this placeholder. --%>
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                </div>
+            </div>
+        </div>
     </form>
 </body>
 </html>

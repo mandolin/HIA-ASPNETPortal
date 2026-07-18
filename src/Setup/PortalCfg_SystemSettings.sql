@@ -125,3 +125,12 @@ BEGIN
         (N'Portal.Documents.MaxUploadBytes', N'10485760', N'Integer', N'Database', 0, N'system', SYSUTCDATETIME())
 END
 GO
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Theme.Name')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Theme.Name', N'EnterpriseLight', N'Enum', N'Database', 1, N'system', SYSUTCDATETIME())
+END
+GO

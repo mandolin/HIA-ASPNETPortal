@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "name": "OaDark",
+  "displayName": "OA 深色 / OA Dark",
+  "version": "0.1.0",
+  "minimumPortalVersion": "1.0",
+  "inheritsDefault": false,
+  "resources": [
+    "Default.css"
+  ]
+}

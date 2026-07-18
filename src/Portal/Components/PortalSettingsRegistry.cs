@@ -140,7 +140,7 @@ namespace ASPNET.StarterKit.Portal
                 "门户主题名",
                 "当前 WebForms 主题名称；只允许选择已部署且通过清单校验的主题，非法或缺失时回退 Default。",
                 PortalSettingValueType.Enum,
-                "Default",
+                "EnterpriseLight",
                 true,
                 false,
                 "Admins",

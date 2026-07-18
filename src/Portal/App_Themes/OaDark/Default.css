@@ -1,0 +1,770 @@
+/*
+   P7.3 OA 深色主题原型。
+   P7.3 OA Dark theme prototype.
+   中文：为夜间办公和高密度表格设计，强调清晰边线和可辨状态。
+   English: Designed for night-office and dense-table work, emphasizing clear borders and distinguishable states.
+*/
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    background-color: #15191d;
+    color: #dde6ea;
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+form {
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th, input, select, textarea, button {
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
+    font-size: 14px;
+}
+
+a {
+    color: #77d0df;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #a7edf6;
+    text-decoration: underline;
+}
+
+.HeadBg {
+    background-color: #0f3038;
+    border-bottom: 1px solid #2a4e56;
+}
+
+td.SiteLink {
+    height: 28px;
+    padding: 0 10px;
+    background-color: #0a2228;
+    background-image: none !important;
+    color: #b8d5dc;
+    line-height: 28px;
+}
+
+.SiteTitle {
+    color: #f4fbfc;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.SiteLink,
+a.SiteLink:link,
+a.SiteLink:visited,
+a.SiteLink:active {
+    color: #b8d5dc;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+a.SiteLink:hover {
+    color: #ffffff;
+}
+
+.Accent {
+    color: #77d0df;
+    font-weight: 700;
+}
+
+.OtherTabsBg {
+    background-color: #0f3038;
+    border: 0;
+}
+
+.OtherTabsBg td {
+    border-color: #2a4e56 !important;
+}
+
+.TabBg {
+    background-color: #15191d;
+    border-color: #15191d;
+}
+
+.OtherTabs,
+.SelectedTab {
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+a.OtherTabs:link,
+a.OtherTabs:visited,
+a.OtherTabs:active,
+.OtherTabs {
+    color: #cde4e9;
+    background-color: #17414a;
+    text-decoration: none;
+}
+
+a.OtherTabs:hover {
+    color: #ffffff;
+    background-color: #1f5661;
+}
+
+.SelectedTab {
+    color: #f4fbfc;
+    background-color: #15191d;
+    font-weight: 700;
+}
+
+.Head,
+h1,
+h2 {
+    margin: 0 0 10px;
+    color: #f4fbfc;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.SubHead,
+h3,
+h4,
+h5,
+h6,
+dt,
+th,
+thead,
+tfoot {
+    color: #95dce8;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.SubSubHead {
+    color: #dde6ea;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.Normal,
+.NormalBold,
+.NormalRed,
+.Message,
+.ItemTitle {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.Normal {
+    color: #dde6ea;
+    font-weight: 400;
+}
+
+.NormalBold {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.NormalRed {
+    color: #ff9b9b;
+    font-weight: 700;
+}
+
+.Message {
+    padding: 8px 10px;
+    border: 1px solid #2a4e56;
+    background-color: #1a272d;
+    color: #dde6ea;
+}
+
+.ItemTitle {
+    color: #77d0df;
+    font-weight: 700;
+}
+
+.NormalTextBox,
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+    padding: 4px 6px;
+    border: 1px solid #45616a;
+    background-color: #101d22;
+    color: #f4fbfc;
+    line-height: 1.35;
+}
+
+.NormalTextBox:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #77d0df;
+    outline: 1px solid #2a7884;
+}
+
+.CommandButton,
+a.CommandButton:link,
+a.CommandButton:visited,
+a.CommandButton:active,
+input.CommandButton,
+button.CommandButton {
+    display: inline-block;
+    margin: 2px 4px 2px 0;
+    padding: 4px 9px;
+    border: 1px solid #4aa8b7;
+    background-color: #162a31;
+    color: #a7edf6;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    text-decoration: none;
+}
+
+a.CommandButton:hover,
+input.CommandButton:hover,
+button.CommandButton:hover {
+    border-color: #77d0df;
+    background-color: #1f3d46;
+    color: #ffffff;
+}
+
+table[border="1"] {
+    border: 1px solid #324b54;
+    background-color: #1a242a;
+}
+
+table[border="1"] td,
+table[border="1"] th {
+    padding: 6px 7px;
+    border: 1px solid #324b54;
+    vertical-align: top;
+}
+
+tr.SubHead,
+table[border="1"] tr:first-child {
+    background-color: #21333a;
+}
+
+tr.Normal:hover,
+table[border="1"] tr:hover {
+    background-color: #223d46;
+}
+
+.portal-module {
+    margin: 0 0 10px;
+    padding: 10px;
+    border: 1px solid #324b54;
+    background-color: #1a242a;
+}
+
+.portal-pane-leftpane .portal-module,
+.portal-pane-rightpane .portal-module {
+    background-color: #151f24;
+}
+
+body.portal-theme-oadark .employee-profile-confirm,
+body.portal-theme-oadark .employee-profile-correction {
+    border: 1px solid #324b54;
+    background-color: #1a242a;
+    color: #dde6ea;
+}
+
+body.portal-theme-oadark .employee-profile-confirm-title,
+body.portal-theme-oadark .employee-profile-correction-title,
+body.portal-theme-oadark .employee-profile-correction-subtitle {
+    color: #f4fbfc;
+}
+
+body.portal-theme-oadark .employee-profile-confirm-label,
+body.portal-theme-oadark .employee-profile-correction-label {
+    color: #95dce8;
+}
+
+body.portal-theme-oadark .employee-profile-confirm-table td,
+body.portal-theme-oadark .employee-profile-correction-table td,
+body.portal-theme-oadark .employee-profile-correction-form td,
+body.portal-theme-oadark .employee-profile-correction-list td,
+body.portal-theme-oadark .employee-profile-correction-list th {
+    border-bottom: 1px solid #324b54;
+}
+
+.portal-app-shell {
+    min-height: 100%;
+    background-color: #11191d;
+}
+
+.portal-header {
+    background-color: #0b252b;
+    border-bottom: 1px solid #2a4e56;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .32);
+}
+
+.portal-header-inner,
+.portal-main-shell {
+    width: 1220px;
+    max-width: 97%;
+    margin: 0 auto;
+}
+
+.portal-brand-row {
+    display: table;
+    width: 100%;
+    padding: 14px 0 10px;
+}
+
+.portal-brand-block,
+.portal-userbar {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.portal-userbar {
+    text-align: right;
+    background-color: transparent;
+    color: #b6d6dc;
+}
+
+.portal-brand-subtitle {
+    display: block;
+    margin-top: 2px;
+    color: #88c6d0;
+    font-size: 14px;
+}
+
+.portal-toplink {
+    margin-left: 8px;
+    padding: 5px 9px;
+    border: 1px solid rgba(167, 237, 246, .18);
+    background-color: rgba(255, 255, 255, .06);
+}
+
+.portal-toplink:hover {
+    background-color: rgba(255, 255, 255, .12);
+    text-decoration: none;
+}
+
+.portal-nav-row {
+    padding: 0 0 10px;
+}
+
+.portal-tabs {
+    display: block;
+    background-color: transparent;
+}
+
+.portal-tab,
+a.portal-tab:link,
+a.portal-tab:visited,
+a.portal-tab:active {
+    display: inline-block;
+    margin: 0 6px 5px 0;
+    padding: 8px 12px;
+    border: 1px solid rgba(167, 237, 246, .16);
+    background-color: rgba(255, 255, 255, .06);
+    color: #dde6ea;
+    font-weight: 700;
+}
+
+a.portal-tab:hover {
+    background-color: rgba(255, 255, 255, .12);
+    text-decoration: none;
+}
+
+.portal-tab-selected {
+    border-color: #77d0df;
+    background-color: #162a31;
+    color: #ffffff;
+}
+
+.portal-main-shell {
+    padding: 16px 0 28px;
+}
+
+.portal-content-stage {
+    min-height: 520px;
+}
+
+.portal-dashboard-layout {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 14px 0;
+    margin-left: -14px;
+}
+
+.portal-pane {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.portal-pane-left {
+    width: 250px;
+}
+
+.portal-pane-right {
+    width: 300px;
+}
+
+.portal-module {
+    margin: 0 0 14px;
+    padding: 14px;
+    border: 1px solid #324b54;
+    background-color: #1a242a;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .26);
+}
+
+.portal-module-header {
+    display: table;
+    width: 100%;
+    margin: 0 0 11px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #324b54;
+}
+
+.portal-module-heading,
+.portal-module-action {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.portal-module-action {
+    text-align: right;
+}
+
+.portal-signin-title {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.portal-field {
+    margin-bottom: 10px;
+}
+
+.portal-field-label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.portal-field-input {
+    width: 100%;
+    max-width: 220px;
+    box-sizing: border-box;
+}
+
+.portal-action-row {
+    margin-top: 10px;
+}
+
+.portal-primary-action,
+input.portal-primary-action {
+    border-color: #77d0df;
+    background-color: #278698;
+    color: #ffffff;
+}
+
+input.portal-primary-action:hover {
+    background-color: #35a3b7;
+    color: #ffffff;
+}
+
+body.portal-theme-oadark {
+    background-color: #10181c;
+}
+
+body.portal-theme-oadark .portal-header {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 248px;
+    overflow: auto;
+    background-color: #0b252b;
+    border-right: 1px solid #2a4e56;
+    border-bottom: 0;
+    box-shadow: 8px 0 24px rgba(0, 0, 0, .3);
+}
+
+body.portal-theme-oadark .portal-header-inner {
+    width: auto;
+    max-width: none;
+    padding: 0 14px;
+}
+
+body.portal-theme-oadark .portal-brand-row,
+body.portal-theme-oadark .portal-brand-block,
+body.portal-theme-oadark .portal-userbar {
+    display: block;
+}
+
+body.portal-theme-oadark .portal-brand-row {
+    padding: 20px 0 14px;
+    border-bottom: 1px solid rgba(167, 237, 246, .16);
+}
+
+body.portal-theme-oadark .portal-userbar {
+    margin-top: 14px;
+    text-align: left;
+}
+
+body.portal-theme-oadark .portal-toplink {
+    display: block;
+    margin: 7px 0 0;
+    border-radius: 6px;
+}
+
+body.portal-theme-oadark .portal-nav-row {
+    padding: 14px 0 18px;
+}
+
+body.portal-theme-oadark .portal-tab,
+body.portal-theme-oadark a.portal-tab:link,
+body.portal-theme-oadark a.portal-tab:visited,
+body.portal-theme-oadark a.portal-tab:active {
+    display: block;
+    margin: 0 0 7px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border-color: transparent;
+    background-color: transparent;
+    color: #dde6ea;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+body.portal-theme-oadark a.portal-tab:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+body.portal-theme-oadark .portal-tab-selected {
+    background-color: #162a31;
+    color: #ffffff;
+    box-shadow: 0 7px 16px rgba(0, 0, 0, .22);
+}
+
+body.portal-theme-oadark .portal-main-shell {
+    width: auto;
+    max-width: none;
+    margin: 0 0 0 248px;
+    padding: 18px 22px 30px;
+}
+
+body.portal-theme-oadark .portal-content-stage {
+    max-width: 1280px;
+    min-height: 620px;
+}
+
+body.portal-theme-oadark .portal-module,
+body.portal-theme-oadark table[border="1"],
+body.portal-theme-oadark .Message {
+    border-radius: 6px;
+}
+
+body.portal-theme-oadark .CommandButton,
+body.portal-theme-oadark a.CommandButton:link,
+body.portal-theme-oadark a.CommandButton:visited,
+body.portal-theme-oadark a.CommandButton:active,
+body.portal-theme-oadark input.CommandButton,
+body.portal-theme-oadark button.CommandButton {
+    border-radius: 6px;
+}
+
+body.portal-theme-oadark .portal-dashboard-layout {
+    border-spacing: 14px 0;
+    margin-left: -14px;
+}
+
+/* 中文 / English: P7.4 后台页级组件，供系统健康、审计、目录等页面逐步复用。 */
+.portal-admin-page {
+    font-size: 14px;
+}
+
+.portal-admin-header {
+    display: table;
+    width: 100%;
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    border: 1px solid #29434d;
+    background-color: #111d22;
+    border-radius: 6px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .25);
+    box-sizing: border-box;
+}
+
+.portal-admin-heading,
+.portal-admin-actions {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.portal-admin-title {
+    margin: 0 0 4px;
+    color: #f5fbfc;
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.portal-admin-subtitle {
+    margin: 0;
+    color: #a5b9be;
+}
+
+.portal-admin-actions {
+    text-align: right;
+}
+
+.portal-admin-summary-grid {
+    display: table;
+    width: 100%;
+    margin: 0 0 14px -10px;
+    border-collapse: separate;
+    border-spacing: 10px 0;
+}
+
+.portal-admin-summary-item {
+    display: table-cell;
+    padding: 12px 14px;
+    border: 1px solid #29434d;
+    background-color: #111d22;
+    border-radius: 6px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .22);
+    vertical-align: middle;
+}
+
+.portal-summary-label {
+    margin-bottom: 5px;
+    color: #9be3ee;
+}
+
+.portal-summary-value {
+    color: #f5fbfc;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.portal-summary-command {
+    width: 130px;
+    text-align: center;
+}
+
+.portal-admin-section {
+    margin: 0 0 14px;
+    border: 1px solid #29434d;
+    background-color: #111d22;
+    border-radius: 6px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .22);
+    overflow: hidden;
+}
+
+.portal-section-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #29434d;
+    background-color: #16272d;
+}
+
+.portal-section-title {
+    margin: 0;
+    color: #f5fbfc;
+    font-size: 17px;
+    line-height: 1.3;
+}
+
+.portal-table-wrap {
+    overflow: auto;
+}
+
+.portal-data-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    background-color: #111d22;
+}
+
+.portal-data-table th,
+.portal-data-table td {
+    padding: 8px 9px;
+    border-bottom: 1px solid #29434d;
+    color: #d9e6e8;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+.portal-data-table th {
+    background-color: #183139;
+    color: #f5fbfc;
+    font-weight: 700;
+}
+
+.portal-data-table tr.Normal:hover {
+    background-color: #16282f;
+}
+
+.portal-filter-panel {
+    padding: 12px 14px;
+    overflow: visible;
+}
+
+.portal-filter-grid {
+    margin: -9px 0 0 -12px;
+}
+
+.portal-filter-field,
+.portal-filter-actions {
+    display: inline-block;
+    margin: 9px 0 0 12px;
+    vertical-align: bottom;
+}
+
+.portal-filter-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.portal-filter-input {
+    min-width: 128px;
+    box-sizing: border-box;
+}
+
+.portal-checkbox-field {
+    padding-bottom: 6px;
+}
+
+.portal-status-strip,
+.portal-pager {
+    margin: 0 0 14px;
+    padding: 10px 12px;
+    border: 1px solid #29434d;
+    background-color: #111d22;
+    border-radius: 6px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .22);
+}
+
+.portal-status-line {
+    display: block;
+    margin: 3px 0;
+}
+
+.portal-pager {
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.portal-pager-info,
+.portal-pager-actions {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.portal-pager-actions {
+    text-align: right;
+}

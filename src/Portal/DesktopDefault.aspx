@@ -14,23 +14,14 @@
     然后将它们注入到页面中。
 
 --%>
-<%-- #todo 改造整体结构，使其适应各种自定义主题/皮肤及其动态切换 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table cellspacing="0" cellpadding="4" width="100%" border="0">
-        <tbody>
-            <tr valign="top" height="*">
-                <td width="5">&nbsp;
-                </td>
-                <!-- 左侧面板 -->
-                <td id="LeftPane" width="170" runat="server" visible="false"></td>
-                <td width="1"></td>
-                <!-- 内容面板 -->
-                <td id="ContentPane" width="*" runat="server" visible="false"></td>
-                <!-- 右侧面板 -->
-                <td id="RightPane" width="230" runat="server" visible="false"></td>
-                <td width="10">&nbsp;
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <%-- 中文：P7.4 使用现代分栏容器；CSS 提供现代浏览器增强与旧浏览器基本块级回退。English: P7.4 uses modern pane containers; CSS provides modern enhancement and basic block fallback for old browsers. --%>
+    <div class="portal-dashboard-layout">
+        <!-- 左侧面板 / Left pane -->
+        <div id="LeftPane" class="portal-pane portal-pane-left" runat="server" visible="false"></div>
+        <!-- 内容面板 / Content pane -->
+        <div id="ContentPane" class="portal-pane portal-pane-content" runat="server" visible="false"></div>
+        <!-- 右侧面板 / Right pane -->
+        <div id="RightPane" class="portal-pane portal-pane-right" runat="server" visible="false"></div>
+    </div>
 </asp:Content>

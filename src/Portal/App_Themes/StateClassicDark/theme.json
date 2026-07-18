@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "name": "StateClassicDark",
+  "displayName": "国企传统深色 / State Classic Dark",
+  "version": "0.1.0",
+  "minimumPortalVersion": "1.0",
+  "inheritsDefault": false,
+  "resources": [
+    "Default.css"
+  ]
+}

@@ -12,41 +12,34 @@
     如果密码验证失败，则显示适当的错误消息。
 --%>
 
-<hr noshade size="1" width="98%">
-<%-- 登录标题 --%>
-<span class="SubSubHead" style="HEIGHT: 20px"><%=lang.Signin_accountLogin%></span>
-<br>
-<%-- 用户名或邮箱提示 --%>
-<span class="Normal"><%=lang.Signin_EmailOrName%></span>
-<br>
-<%-- 用户名或邮箱输入框 --%>
-<asp:TextBox id="EmailOrName" columns="9" width="130" cssclass="NormalTextBox" runat="server" />
-<br>
-<%-- 密码提示 --%>
-<span class="Normal"><%=lang.Signin_password%></span>
-<br>
-<%-- 密码输入框 --%>
-<asp:TextBox id="password" columns="9" width="130" textmode="password" cssclass="NormalTextBox" runat="server" />
-<br>
-<%-- 记住登录复选框 --%>
-<asp:CheckBox id="RememberCheckbox" class="Normal" Text='<%$ Resources:lang,Signin_rememberLogin %>' runat="server" />
-<table width="100%" cellspacing="0" cellpadding="4" border="0">
-    <tr>
-        <td>
-            <%-- 登录按钮 --%>
-            <asp:ImageButton id="SigninBtn" ImageUrl="<%$ Resources:lang,Signin_LoginImg %>" runat="server" onclick="LoginBtn_Click" />
-            <br>
-            <%-- 注册链接默认隐藏，只有配置允许自主注册时由代码隐藏文件显示。 --%>
-            <asp:HyperLink
-                id="RegisterLink"
-                NavigateUrl="~/Admin/Register.aspx"
-                ImageUrl="<%$ Resources:lang,Signin_RegImg %>"
-                BorderWidth="0"
-                Visible="false"
-                runat="server" />
-            <%-- 错误消息标签 --%>
-            <asp:Label id="Message" class="NormalRed" runat="server" />
-        </td>
-    </tr>
-</table>
-<br>
+<%-- 中文：P7.4 登录区改为真实表单布局和 Button，不再使用旧图片按钮。English: P7.4 uses a real form layout and Button for sign-in instead of legacy image buttons. --%>
+<div class="portal-signin-card">
+    <div class="portal-signin-title SubSubHead"><%=lang.Signin_accountLogin%></div>
+
+    <div class="portal-field">
+        <label class="portal-field-label Normal" for="<%= EmailOrName.ClientID %>"><%=lang.Signin_EmailOrName%></label>
+        <asp:TextBox id="EmailOrName" columns="18" cssclass="NormalTextBox portal-field-input" runat="server" />
+    </div>
+
+    <div class="portal-field">
+        <label class="portal-field-label Normal" for="<%= password.ClientID %>"><%=lang.Signin_password%></label>
+        <asp:TextBox id="password" columns="18" textmode="password" cssclass="NormalTextBox portal-field-input" runat="server" />
+    </div>
+
+    <div class="portal-checkline">
+        <asp:CheckBox id="RememberCheckbox" CssClass="Normal portal-check" Text='<%$ Resources:lang,Signin_rememberLogin %>' runat="server" />
+    </div>
+
+    <div class="portal-action-row">
+        <asp:Button id="SigninBtn" CssClass="CommandButton portal-primary-action" Text='<%$ Resources:lang,Signin_LoginText %>' runat="server" onclick="LoginBtn_Click" />
+        <asp:HyperLink
+            id="RegisterLink"
+            CssClass="CommandButton portal-secondary-action"
+            NavigateUrl="~/Admin/Register.aspx"
+            Text='<%$ Resources:lang,Signin_RegisterText %>'
+            Visible="false"
+            runat="server" />
+    </div>
+
+    <asp:Label id="Message" CssClass="NormalRed portal-form-message" runat="server" />
+</div>

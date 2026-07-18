@@ -7,97 +7,79 @@
 
 <%-- P6.3-S4 员工组织目录页：列表本身只读，新增和编辑交给独立维护页处理。 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="20">&nbsp;</td>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="left" class="Head">Employee Directory</td>
-                    </tr>
-                    <tr>
-                        <td><hr noshade size="1"></td>
-                    </tr>
-                    <tr>
-                        <td class="Normal">
-                            <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
-                            &nbsp;
-                            <a class="CommandButton" href="ManageUsers.aspx">User Administration</a>
-                            &nbsp;
-                            <a class="CommandButton" href="OrganizationUnitEdit.aspx">New Organization Unit</a>
-                            &nbsp;
-                            <a class="CommandButton" href="EmployeeEdit.aspx">New Employee</a>
-                            &nbsp;
-                            <a class="CommandButton" href="UserEmployeeBindingEdit.aspx">Bind User/Employee</a>
-                            &nbsp;
-                            <a class="CommandButton" href="EmployeeProfileCorrectionRequests.aspx">Profile Corrections</a>
-                        </td>
-                    </tr>
-                </table>
+    <%-- 中文 / English: 员工目录页只重构展示壳，数据读取、新增和编辑入口保持既有行为。 --%>
+    <div class="portal-admin-page portal-admin-employee-directory">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <h1 class="Head portal-admin-title">Employee Directory</h1>
+                <p class="Normal portal-admin-subtitle">Read-only overview for organizations, employees, and user bindings.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+                <a class="CommandButton" href="ManageUsers.aspx">User Administration</a>
+                <a class="CommandButton" href="OrganizationUnitEdit.aspx">New Organization Unit</a>
+                <a class="CommandButton" href="EmployeeEdit.aspx">New Employee</a>
+                <a class="CommandButton" href="UserEmployeeBindingEdit.aspx">Bind User/Employee</a>
+                <a class="CommandButton" href="EmployeeProfileCorrectionRequests.aspx">Profile Corrections</a>
+            </div>
+        </div>
 
-                <asp:Label ID="MessageLabel" CssClass="NormalRed" EnableViewState="false" runat="server" />
+        <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td width="95" class="SubHead">Keyword:</td>
-                        <td width="170">
-                            <asp:TextBox ID="KeywordTextBox" CssClass="NormalTextBox" Width="150" runat="server" />
-                        </td>
-                        <td width="110" class="SubHead">Employee Status:</td>
-                        <td width="150">
-                            <asp:DropDownList ID="EmployeeStatusList" CssClass="NormalTextBox" runat="server" />
-                        </td>
-                        <td width="100" class="SubHead">Binding Status:</td>
-                        <td width="150">
-                            <asp:DropDownList ID="BindingStatusList" CssClass="NormalTextBox" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Organizations:</td>
-                        <td colspan="3" class="Normal">
-                            <asp:CheckBox ID="IncludeInactiveOrganizations" Text="Include inactive organization units" runat="server" />
-                        </td>
-                        <td colspan="2">
-                            <asp:LinkButton
-                                ID="SearchButton"
-                                Text="Search"
-                                CssClass="CommandButton"
-                                CausesValidation="False"
-                                OnClick="SearchButton_Click"
-                                runat="server" />
-                        </td>
-                    </tr>
-                </table>
+        <div class="portal-admin-section portal-filter-panel">
+            <div class="portal-filter-grid">
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Keyword</span>
+                    <asp:TextBox ID="KeywordTextBox" CssClass="NormalTextBox portal-filter-input" Width="150" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Employee Status</span>
+                    <asp:DropDownList ID="EmployeeStatusList" CssClass="NormalTextBox portal-filter-input" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Binding Status</span>
+                    <asp:DropDownList ID="BindingStatusList" CssClass="NormalTextBox portal-filter-input" runat="server" />
+                </div>
+                <div class="portal-filter-field portal-checkbox-field">
+                    <asp:CheckBox ID="IncludeInactiveOrganizations" Text="Include inactive organization units" runat="server" />
+                </div>
+                <div class="portal-filter-actions">
+                    <asp:LinkButton
+                        ID="SearchButton"
+                        Text="Search"
+                        CssClass="CommandButton"
+                        CausesValidation="False"
+                        OnClick="SearchButton_Click"
+                        runat="server" />
+                </div>
+            </div>
+        </div>
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td class="Normal">
-                            <asp:Label ID="SchemaStatusLabel" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Normal">
-                            <asp:Label ID="ResultLabel" runat="server" />
-                        </td>
-                    </tr>
-                </table>
+        <div class="portal-status-strip">
+            <div class="Normal portal-status-line">
+                <asp:Label ID="SchemaStatusLabel" runat="server" />
+            </div>
+            <div class="Normal portal-status-line">
+                <asp:Label ID="ResultLabel" runat="server" />
+            </div>
+        </div>
 
-                <br>
-
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr><td class="Head">Organization Units</td></tr>
-                </table>
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Organization Units</h2>
+            </div>
+            <div class="portal-table-wrap">
                 <asp:Repeater ID="OrganizationsRepeater" runat="server">
                     <HeaderTemplate>
-                        <table width="100%" cellspacing="0" cellpadding="3" border="1">
-                            <tr class="SubHead">
-                                <td width="70">ID</td>
-                                <td width="120">Code</td>
-                                <td>Name</td>
-                                <td width="190">Parent</td>
-                                <td width="70">Sort</td>
-                                <td width="80">Active</td>
-                                <td width="70">Action</td>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="70" class="SubHead">ID</th>
+                                <th scope="col" width="120" class="SubHead">Code</th>
+                                <th scope="col" class="SubHead">Name</th>
+                                <th scope="col" width="190" class="SubHead">Parent</th>
+                                <th scope="col" width="70" class="SubHead">Sort</th>
+                                <th scope="col" width="80" class="SubHead">Active</th>
+                                <th scope="col" width="70" class="SubHead">Action</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -121,24 +103,26 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
+            </div>
+        </div>
 
-                <br>
-
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr><td class="Head">Employees</td></tr>
-                </table>
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Employees</h2>
+            </div>
+            <div class="portal-table-wrap">
                 <asp:Repeater ID="EmployeesRepeater" runat="server">
                     <HeaderTemplate>
-                        <table width="100%" cellspacing="0" cellpadding="3" border="1">
-                            <tr class="SubHead">
-                                <td width="110">Employee Code</td>
-                                <td width="140">Name</td>
-                                <td width="120">Preferred</td>
-                                <td width="180">Work Email</td>
-                                <td>Organization</td>
-                                <td width="95">Status</td>
-                                <td width="90">Source</td>
-                                <td width="100">Action</td>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="110" class="SubHead">Employee Code</th>
+                                <th scope="col" width="140" class="SubHead">Name</th>
+                                <th scope="col" width="120" class="SubHead">Preferred</th>
+                                <th scope="col" width="180" class="SubHead">Work Email</th>
+                                <th scope="col" class="SubHead">Organization</th>
+                                <th scope="col" width="95" class="SubHead">Status</th>
+                                <th scope="col" width="90" class="SubHead">Source</th>
+                                <th scope="col" width="100" class="SubHead">Action</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -157,7 +141,6 @@
                                         NavigateUrl='<%# Eval("EditUrl") %>'
                                         runat="server" />
                                     <%-- 员工账号绑定以员工行为入口，避免组织行误引用不存在的绑定地址。 --%>
-                                    &nbsp;
                                     <asp:HyperLink
                                         CssClass="CommandButton"
                                         Text="Bind"
@@ -170,25 +153,27 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
+            </div>
+        </div>
 
-                <br>
-
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr><td class="Head">Portal User Bindings</td></tr>
-                </table>
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Portal User Bindings</h2>
+            </div>
+            <div class="portal-table-wrap">
                 <asp:Repeater ID="BindingsRepeater" runat="server">
                     <HeaderTemplate>
-                        <table width="100%" cellspacing="0" cellpadding="3" border="1">
-                            <tr class="SubHead">
-                                <td width="80">Binding ID</td>
-                                <td width="80">User ID</td>
-                                <td width="140">User Name</td>
-                                <td width="120">Employee Code</td>
-                                <td width="150">Employee Name</td>
-                                <td width="95">Status</td>
-                                <td width="155">Bound UTC</td>
-                                <td width="80">Action</td>
-                                <td>Reason</td>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="80" class="SubHead">Binding ID</th>
+                                <th scope="col" width="80" class="SubHead">User ID</th>
+                                <th scope="col" width="140" class="SubHead">User Name</th>
+                                <th scope="col" width="120" class="SubHead">Employee Code</th>
+                                <th scope="col" width="150" class="SubHead">Employee Name</th>
+                                <th scope="col" width="95" class="SubHead">Status</th>
+                                <th scope="col" width="155" class="SubHead">Bound UTC</th>
+                                <th scope="col" width="80" class="SubHead">Action</th>
+                                <th scope="col" class="SubHead">Reason</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -214,7 +199,7 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>

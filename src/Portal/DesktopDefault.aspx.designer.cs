@@ -21,7 +21,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell LeftPane;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LeftPane;
 
         /// <summary>
         /// ContentPane 控件。
@@ -30,7 +30,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell ContentPane;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ContentPane;
 
         /// <summary>
         /// RightPane 控件。
@@ -39,6 +39,6 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell RightPane;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RightPane;
     }
 }

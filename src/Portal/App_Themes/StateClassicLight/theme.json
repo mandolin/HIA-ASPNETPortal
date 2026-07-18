@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "name": "StateClassicLight",
+  "displayName": "国企传统浅色 / State Classic Light",
+  "version": "0.1.0",
+  "minimumPortalVersion": "1.0",
+  "inheritsDefault": false,
+  "resources": [
+    "Default.css"
+  ]
+}

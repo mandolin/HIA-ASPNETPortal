@@ -49,8 +49,8 @@ namespace ASPNET.StarterKit.Portal
         /// English: Handles sign-in submission, validates the password, registration-review status, and security version, then issues a Forms Authentication identity ticket on success.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void LoginBtn_Click(Object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：按钮事件数据。English: Button event data.</param>
+        protected void LoginBtn_Click(Object sender, EventArgs e)
         {
             // 中文：仅规范化输入边界，不在此记录用户名、密码或摘要。
             // English: Normalize input boundaries only; do not log user name, password, or digest here.

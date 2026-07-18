@@ -7,87 +7,59 @@
 
 <%-- P2.2 只读系统健康页：仅展示检查结果，不提供修复、编辑或命令入口。 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="20">
-                &nbsp;
-            </td>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="left" class="Head">
-                            System Health
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr noshade size="1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Normal">
-                            <a class="CommandButton" href="ThemeSettings.aspx">Theme Settings</a>
-                            &nbsp;
-                            <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
-                            &nbsp;
-                            <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                        </td>
-                    </tr>
-                </table>
+    <%-- 中文 / English: 后台页级布局样板，保留服务器控件绑定，仅重构页面壳和表格语义。 --%>
+    <div class="portal-admin-page portal-admin-health">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <h1 class="Head portal-admin-title">System Health</h1>
+                <p class="Normal portal-admin-subtitle">Runtime diagnostics and configuration registry overview.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="ThemeSettings.aspx">Theme Settings</a>
+                <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
+            </div>
+        </div>
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td width="140" class="SubHead">
-                            Overall Status:
-                        </td>
-                        <td class="Normal">
-                            <asp:Label ID="OverallStatusLabel" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">
-                            Last Checked:
-                        </td>
-                        <td class="Normal">
-                            <asp:Label ID="GeneratedUtcLabel" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            <asp:LinkButton
-                                ID="RefreshButton"
-                                Text="Recheck"
-                                CssClass="CommandButton"
-                                CausesValidation="False"
-                                OnClick="RefreshButton_Click"
-                                runat="server" />
-                        </td>
-                    </tr>
-                </table>
+        <div class="portal-admin-summary-grid">
+            <div class="portal-admin-summary-item">
+                <div class="SubHead portal-summary-label">Overall Status</div>
+                <div class="Normal portal-summary-value">
+                    <asp:Label ID="OverallStatusLabel" runat="server" />
+                </div>
+            </div>
+            <div class="portal-admin-summary-item">
+                <div class="SubHead portal-summary-label">Last Checked</div>
+                <div class="Normal portal-summary-value">
+                    <asp:Label ID="GeneratedUtcLabel" runat="server" />
+                </div>
+            </div>
+            <div class="portal-admin-summary-item portal-summary-command">
+                <asp:LinkButton
+                    ID="RefreshButton"
+                    Text="Recheck"
+                    CssClass="CommandButton"
+                    CausesValidation="False"
+                    OnClick="RefreshButton_Click"
+                    runat="server" />
+            </div>
+        </div>
 
-                <br>
-
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td class="Head">
-                            Health Checks
-                        </td>
-                    </tr>
-                </table>
-
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Health Checks</h2>
+            </div>
+            <div class="portal-table-wrap">
                 <asp:Repeater ID="HealthChecksRepeater" runat="server">
                     <HeaderTemplate>
-                        <table width="100%" cellspacing="0" cellpadding="3" border="1">
-                            <tr class="SubHead">
-                                <td width="110">Category</td>
-                                <td width="150">Check</td>
-                                <td width="90">Status</td>
-                                <td width="220">Summary</td>
-                                <td>Detail</td>
-                                <td width="150">Event ID</td>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="110" class="SubHead">Category</th>
+                                <th scope="col" width="150" class="SubHead">Check</th>
+                                <th scope="col" width="90" class="SubHead">Status</th>
+                                <th scope="col" width="220" class="SubHead">Summary</th>
+                                <th scope="col" class="SubHead">Detail</th>
+                                <th scope="col" width="150" class="SubHead">Event ID</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -104,29 +76,26 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
+            </div>
+        </div>
 
-                <br>
-
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td class="Head">
-                            Settings Registry
-                        </td>
-                    </tr>
-                </table>
-
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Settings Registry</h2>
+            </div>
+            <div class="portal-table-wrap">
                 <asp:Repeater ID="SettingsRepeater" runat="server">
                     <HeaderTemplate>
-                        <table width="100%" cellspacing="0" cellpadding="3" border="1">
-                            <tr class="SubHead">
-                                <td width="230">Key</td>
-                                <td width="150">Name</td>
-                                <td width="80">Type</td>
-                                <td width="150">Current Value</td>
-                                <td width="120">Source</td>
-                                <td width="80">Sensitive</td>
-                                <td width="90">Editable</td>
-                                <td width="90">Restart</td>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="230" class="SubHead">Key</th>
+                                <th scope="col" width="150" class="SubHead">Name</th>
+                                <th scope="col" width="80" class="SubHead">Type</th>
+                                <th scope="col" width="150" class="SubHead">Current Value</th>
+                                <th scope="col" width="120" class="SubHead">Source</th>
+                                <th scope="col" width="80" class="SubHead">Sensitive</th>
+                                <th scope="col" width="90" class="SubHead">Editable</th>
+                                <th scope="col" width="90" class="SubHead">Restart</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -145,7 +114,7 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>

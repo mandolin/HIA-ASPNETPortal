@@ -7,56 +7,74 @@
 
 <%-- P2.4 只读运营审计页：查询高价值状态变更，不记录普通查看行为。 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="20">&nbsp;</td>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tr><td align="left" class="Head">Operation Audits</td></tr>
-                    <tr><td><hr noshade size="1"></td></tr>
-                </table>
+    <%-- 中文 / English: 运营审计页只调整展示结构，查询、分页和权限逻辑仍由 code-behind 控制。 --%>
+    <div class="portal-admin-page portal-admin-audits">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <h1 class="Head portal-admin-title">Operation Audits</h1>
+                <p class="Normal portal-admin-subtitle">Review high-value administration and workflow changes.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
+            </div>
+        </div>
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td width="110" class="SubHead">Start UTC:</td>
-                        <td width="150"><asp:TextBox ID="StartDateTextBox" CssClass="NormalTextBox" Width="110" runat="server" /></td>
-                        <td width="100" class="SubHead">End UTC:</td>
-                        <td width="150"><asp:TextBox ID="EndDateTextBox" CssClass="NormalTextBox" Width="110" runat="server" /></td>
-                        <td width="70" class="SubHead">Category:</td>
-                        <td><asp:TextBox ID="CategoryFilter" CssClass="NormalTextBox" Width="120" runat="server" /></td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Action:</td>
-                        <td><asp:TextBox ID="ActionFilter" CssClass="NormalTextBox" Width="110" runat="server" /></td>
-                        <td class="SubHead">Target ID:</td>
-                        <td><asp:TextBox ID="TargetIdFilter" CssClass="NormalTextBox" Width="150" runat="server" /></td>
-                        <td colspan="2"><asp:LinkButton ID="SearchButton" Text="Search" CssClass="CommandButton" CausesValidation="False" OnClick="SearchButton_Click" runat="server" /></td>
-                    </tr>
-                    <tr><td colspan="6" class="NormalRed"><asp:Label ID="MessageLabel" runat="server" /></td></tr>
-                </table>
+        <div class="portal-admin-section portal-filter-panel">
+            <div class="portal-filter-grid">
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Start UTC</span>
+                    <asp:TextBox ID="StartDateTextBox" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">End UTC</span>
+                    <asp:TextBox ID="EndDateTextBox" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Category</span>
+                    <asp:TextBox ID="CategoryFilter" CssClass="NormalTextBox portal-filter-input" Width="120" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Action</span>
+                    <asp:TextBox ID="ActionFilter" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Target ID</span>
+                    <asp:TextBox ID="TargetIdFilter" CssClass="NormalTextBox portal-filter-input" Width="150" runat="server" />
+                </div>
+                <div class="portal-filter-actions">
+                    <asp:LinkButton ID="SearchButton" Text="Search" CssClass="CommandButton" CausesValidation="False" OnClick="SearchButton_Click" runat="server" />
+                </div>
+            </div>
+            <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" runat="server" />
+        </div>
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td class="Normal"><asp:Label ID="ResultLabel" runat="server" /></td>
-                        <td align="right">
-                            <asp:LinkButton ID="PreviousButton" Text="Previous" CssClass="CommandButton" CausesValidation="False" OnClick="PreviousButton_Click" runat="server" />
-                            &nbsp;
-                            <asp:LinkButton ID="NextButton" Text="Next" CssClass="CommandButton" CausesValidation="False" OnClick="NextButton_Click" runat="server" />
-                        </td>
-                    </tr>
-                </table>
+        <div class="portal-pager">
+            <div class="Normal portal-pager-info">
+                <asp:Label ID="ResultLabel" runat="server" />
+            </div>
+            <div class="portal-pager-actions">
+                <asp:LinkButton ID="PreviousButton" Text="Previous" CssClass="CommandButton" CausesValidation="False" OnClick="PreviousButton_Click" runat="server" />
+                <asp:LinkButton ID="NextButton" Text="Next" CssClass="CommandButton" CausesValidation="False" OnClick="NextButton_Click" runat="server" />
+            </div>
+        </div>
 
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Audit Entries</h2>
+            </div>
+            <div class="portal-table-wrap">
                 <asp:Repeater ID="EntriesRepeater" runat="server">
                     <HeaderTemplate>
-                        <table width="100%" cellspacing="0" cellpadding="3" border="1">
-                            <tr class="SubHead">
-                                <td width="155">UTC</td>
-                                <td width="130">Category</td>
-                                <td width="110">Action</td>
-                                <td width="110">Actor</td>
-                                <td width="95">Target</td>
-                                <td width="100">Target ID</td>
-                                <td>Summary</td>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="155" class="SubHead">UTC</th>
+                                <th scope="col" width="130" class="SubHead">Category</th>
+                                <th scope="col" width="110" class="SubHead">Action</th>
+                                <th scope="col" width="110" class="SubHead">Actor</th>
+                                <th scope="col" width="95" class="SubHead">Target</th>
+                                <th scope="col" width="100" class="SubHead">Target ID</th>
+                                <th scope="col" class="SubHead">Summary</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -74,7 +92,7 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>
