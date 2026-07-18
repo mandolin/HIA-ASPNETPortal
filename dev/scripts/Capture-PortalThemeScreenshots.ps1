@@ -312,6 +312,7 @@ const roleId = process.env.P7_THEME_ROLE_ID;
 const moduleDefinitionId = process.env.P7_THEME_MODULE_DEFINITION_ID;
 const moduleSettingsModuleId = process.env.P7_THEME_MODULE_SETTINGS_MODULE_ID;
 const moduleSettingsTabId = process.env.P7_THEME_MODULE_SETTINGS_TAB_ID;
+const tabLayoutTabId = process.env.P7_THEME_TAB_LAYOUT_TAB_ID;
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -343,8 +344,26 @@ async function openPage(browser) {
   return { context, page };
 }
 
+async function gotoTarget(page, target) {
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      await page.goto(target.url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+      return;
+    } catch (error) {
+      if (attempt === 2) {
+        throw error;
+      }
+
+      // 中文：IIS Express 偶发冷启动或页面阻塞时重试一次，但不吞掉持续性错误。
+      // English: Retry once for transient IIS Express/page stalls without hiding persistent failures.
+      await page.goto('about:blank', { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
+      await page.waitForTimeout(1200);
+    }
+  }
+}
+
 async function capture(page, target) {
-  await page.goto(target.url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  await gotoTarget(page, target);
   await page.waitForTimeout(900);
   const fileName = `${theme}-${target.id}.png`;
   const filePath = path.join(outputDir, fileName);
@@ -419,6 +438,10 @@ if (moduleDefinitionId) {
 
 if (moduleSettingsModuleId && moduleSettingsTabId) {
   adminTargets.push({ id: 'admin-module-settings', title: '模块实例设置后台', role: 'admin', url: joinUrl(`Admin/ModuleSettings.aspx?mid=${encodeURIComponent(moduleSettingsModuleId)}&tabid=${encodeURIComponent(moduleSettingsTabId)}`) });
+}
+
+if (tabLayoutTabId) {
+  adminTargets.push({ id: 'admin-tab-layout', title: 'Tab 布局后台', role: 'admin', url: joinUrl(`Admin/TabLayout.aspx?tabid=${encodeURIComponent(tabLayoutTabId)}`) });
 }
 
 const boundTargets = [];
@@ -556,6 +579,14 @@ ORDER BY [TabId], [ModuleOrder], [ModuleId]
             $moduleSettingsTabId = $parts[1]
         }
     }
+    $tabLayoutTabId = Invoke-ScalarQuery -Connection $connection -Sql @'
+SELECT TOP (1) [TabId]
+FROM [dbo].[PortalCfg_Tabs]
+WHERE [TabId] > 0
+ORDER BY CASE WHEN [TabName] = N'Home' THEN 0 ELSE 1 END, [TabOrder], [TabId]
+'@ -Configure {
+        param($command)
+    }
 
     foreach ($theme in $Themes) {
         Write-Host ("[INFO] Capturing theme {0}" -f $theme)
@@ -571,6 +602,7 @@ ORDER BY [TabId], [ModuleOrder], [ModuleId]
         $env:P7_THEME_MODULE_DEFINITION_ID = if ($null -eq $moduleDefinitionId) { '' } else { [Convert]::ToString($moduleDefinitionId, [System.Globalization.CultureInfo]::InvariantCulture) }
         $env:P7_THEME_MODULE_SETTINGS_MODULE_ID = if ($null -eq $moduleSettingsModuleId) { '' } else { [string]$moduleSettingsModuleId }
         $env:P7_THEME_MODULE_SETTINGS_TAB_ID = if ($null -eq $moduleSettingsTabId) { '' } else { [string]$moduleSettingsTabId }
+        $env:P7_THEME_TAB_LAYOUT_TAB_ID = if ($null -eq $tabLayoutTabId) { '' } else { [Convert]::ToString($tabLayoutTabId, [System.Globalization.CultureInfo]::InvariantCulture) }
 
         $nodeOutput = & node $runtimeScript
         if ($LASTEXITCODE -ne 0) {
@@ -593,6 +625,7 @@ finally {
     Remove-Item Env:P7_THEME_MODULE_DEFINITION_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_MODULE_SETTINGS_MODULE_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_MODULE_SETTINGS_TAB_ID -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_TAB_LAYOUT_TAB_ID -ErrorAction SilentlyContinue
 
     if ($connection) {
         if ($connection.State -eq [System.Data.ConnectionState]::Open) {

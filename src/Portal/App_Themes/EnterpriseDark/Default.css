@@ -893,3 +893,78 @@ body.portal-theme-enterprisedark .portal-dashboard-layout {
     vertical-align: middle;
     word-break: break-word;
 }
+
+/* 中文 / English: TabLayout keeps legacy postback controls while presenting them as a layout workspace. */
+.portal-admin-tab-layout .portal-form-field-wide {
+    width: 360px;
+}
+
+.portal-admin-tab-layout .portal-form-actions-field {
+    width: 230px;
+}
+
+.portal-role-checklist td {
+    padding: 0 18px 6px 0;
+}
+
+.portal-layout-board {
+    padding: 16px 18px 18px;
+    overflow: auto;
+}
+
+.portal-layout-panes {
+    display: table;
+    width: 100%;
+    min-width: 760px;
+    margin-left: -14px;
+    border-collapse: separate;
+    border-spacing: 14px 0;
+}
+
+.portal-layout-pane {
+    display: table-cell;
+    padding: 14px;
+    border: 1px solid #263b50;
+    background-color: #162536;
+    border-radius: 8px;
+    vertical-align: top;
+}
+
+.portal-layout-pane-mini {
+    width: 26%;
+}
+
+.portal-layout-pane-content {
+    width: 48%;
+}
+
+.portal-layout-pane-title {
+    display: block;
+    margin: 0 0 10px;
+    color: #f7fbff;
+    font-size: 14px;
+}
+
+.portal-layout-list {
+    width: 100% !important;
+    max-width: none;
+    min-height: 162px;
+    box-sizing: border-box;
+}
+
+.portal-layout-toolbar {
+    margin-top: 10px;
+}
+
+.portal-icon-button {
+    margin: 0 5px 6px 0;
+    padding: 5px;
+    border: 1px solid #35546c;
+    background-color: #111c28;
+    border-radius: 6px;
+    vertical-align: middle;
+}
+
+.portal-icon-button:hover {
+    background-color: #1e3348;
+}
