@@ -688,6 +688,10 @@ body.portal-theme-enterprisedark .portal-dashboard-layout {
     background-color: #111c28;
 }
 
+.portal-module-catalog-table {
+    min-width: 1040px;
+}
+
 .portal-data-table th,
 .portal-data-table td {
     padding: 9px 10px;
@@ -768,4 +772,22 @@ body.portal-theme-enterprisedark .portal-dashboard-layout {
 
 .portal-pager-actions {
     text-align: right;
+}
+
+.portal-value-stack div {
+    margin-bottom: 4px;
+}
+
+.portal-review-note {
+    width: 100%;
+    max-width: 220px;
+    box-sizing: border-box;
+}
+
+.portal-row-actions {
+    margin-top: 8px;
+}
+
+.portal-row-actions .CommandButton {
+    margin-bottom: 5px;
 }

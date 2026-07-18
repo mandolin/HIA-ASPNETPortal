@@ -7,63 +7,62 @@
 
 <%-- P6.4.3 员工资料更正请求后台处理页：只处理请求状态，不直接修改员工主数据。 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="20">&nbsp;</td>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="left" class="Head">Employee Profile Correction Requests</td>
-                    </tr>
-                    <tr>
-                        <td><hr noshade size="1"></td>
-                    </tr>
-                    <tr>
-                        <td class="Normal">
-                            <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                            &nbsp;
-                            <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
-                        </td>
-                    </tr>
-                </table>
+    <%-- 中文 / English: 审核页只调整展示结构，状态命令和审计记录仍由 code-behind 处理。 --%>
+    <div class="portal-admin-page portal-admin-correction-requests">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <h1 class="Head portal-admin-title">Employee Profile Correction Requests</h1>
+                <p class="Normal portal-admin-subtitle">Review employee-submitted profile correction requests without directly changing master data.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
+                <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
+            </div>
+        </div>
 
-                <asp:Label ID="MessageLabel" CssClass="NormalRed" EnableViewState="false" runat="server" />
+        <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td width="90" class="SubHead">Status:</td>
-                        <td width="170">
-                            <asp:DropDownList ID="StatusFilterList" CssClass="NormalTextBox" runat="server" />
-                        </td>
-                        <td>
-                            <asp:LinkButton
-                                ID="SearchButton"
-                                Text="Search"
-                                CssClass="CommandButton"
-                                CausesValidation="False"
-                                OnClick="SearchButton_Click"
-                                runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="Normal">
-                            <asp:Label ID="ResultLabel" runat="server" />
-                        </td>
-                    </tr>
-                </table>
+        <div class="portal-admin-section portal-filter-panel">
+            <div class="portal-filter-grid">
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Status</span>
+                    <asp:DropDownList ID="StatusFilterList" CssClass="NormalTextBox portal-filter-input" runat="server" />
+                </div>
+                <div class="portal-filter-actions">
+                    <asp:LinkButton
+                        ID="SearchButton"
+                        Text="Search"
+                        CssClass="CommandButton"
+                        CausesValidation="False"
+                        OnClick="SearchButton_Click"
+                        runat="server" />
+                </div>
+            </div>
+        </div>
 
+        <div class="portal-status-strip">
+            <div class="Normal portal-status-line">
+                <asp:Label ID="ResultLabel" runat="server" />
+            </div>
+        </div>
+
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Correction Requests</h2>
+            </div>
+            <div class="portal-table-wrap">
                 <asp:Repeater ID="RequestsRepeater" OnItemCommand="RequestsRepeater_ItemCommand" runat="server">
                     <HeaderTemplate>
-                        <table width="100%" cellspacing="0" cellpadding="3" border="1">
-                            <tr class="SubHead">
-                                <td width="70">ID</td>
-                                <td width="145">Submitted UTC</td>
-                                <td width="110">Employee</td>
-                                <td width="120">User</td>
-                                <td width="110">Field</td>
-                                <td>Current / Proposed</td>
-                                <td width="95">Status</td>
-                                <td width="210">Review</td>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="70" class="SubHead">ID</th>
+                                <th scope="col" width="145" class="SubHead">Submitted UTC</th>
+                                <th scope="col" width="110" class="SubHead">Employee</th>
+                                <th scope="col" width="120" class="SubHead">User</th>
+                                <th scope="col" width="110" class="SubHead">Field</th>
+                                <th scope="col" class="SubHead">Current / Proposed</th>
+                                <th scope="col" width="95" class="SubHead">Status</th>
+                                <th scope="col" width="230" class="SubHead">Review</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -74,20 +73,21 @@
                                 <td><%#: Eval("UserText") %></td>
                                 <td><%#: Eval("FieldName") %></td>
                                 <td>
-                                    <div>Current: <%#: Eval("CurrentValueSnapshot") %></div>
-                                    <div>Proposed: <%#: Eval("ProposedValue") %></div>
-                                    <div>Note: <%#: Eval("RequestNote") %></div>
-                                    <div>Review: <%#: Eval("ReviewText") %></div>
+                                    <div class="portal-value-stack">
+                                        <div><span class="SubHead">Current:</span> <%#: Eval("CurrentValueSnapshot") %></div>
+                                        <div><span class="SubHead">Proposed:</span> <%#: Eval("ProposedValue") %></div>
+                                        <div><span class="SubHead">Note:</span> <%#: Eval("RequestNote") %></div>
+                                        <div><span class="SubHead">Review:</span> <%#: Eval("ReviewText") %></div>
+                                    </div>
                                 </td>
                                 <td><%#: Eval("RequestStatus") %></td>
                                 <td>
-                                    <asp:TextBox ID="ReviewNoteTextBox" CssClass="NormalTextBox" Width="190" MaxLength="1000" TextMode="MultiLine" Rows="3" runat="server" />
-                                    <br>
-                                    <asp:LinkButton ID="ReviewedButton" Text="Reviewed" CssClass="CommandButton" CommandName="Reviewed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
-                                    &nbsp;
-                                    <asp:LinkButton ID="ClosedButton" Text="Close" CssClass="CommandButton" CommandName="Closed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
-                                    &nbsp;
-                                    <asp:LinkButton ID="RejectedButton" Text="Reject" CssClass="CommandButton" CommandName="Rejected" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                    <asp:TextBox ID="ReviewNoteTextBox" CssClass="NormalTextBox portal-review-note" Width="210" MaxLength="1000" TextMode="MultiLine" Rows="3" runat="server" />
+                                    <div class="portal-row-actions">
+                                        <asp:LinkButton ID="ReviewedButton" Text="Reviewed" CssClass="CommandButton" CommandName="Reviewed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="ClosedButton" Text="Close" CssClass="CommandButton" CommandName="Closed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="RejectedButton" Text="Reject" CssClass="CommandButton" CommandName="Rejected" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                    </div>
                                 </td>
                             </tr>
                     </ItemTemplate>
@@ -95,7 +95,7 @@
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>

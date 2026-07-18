@@ -361,6 +361,8 @@ const adminTargets = [
   { id: 'admin-employee-directory', title: '员工目录后台', role: 'admin', url: joinUrl('Admin/EmployeeDirectory.aspx') },
   { id: 'admin-operation-audits', title: '运营审计后台', role: 'admin', url: joinUrl('Admin/OperationAudits.aspx') },
   { id: 'admin-system-health', title: '系统健康后台', role: 'admin', url: joinUrl('Admin/SystemHealth.aspx') },
+  { id: 'admin-theme-settings', title: '主题设置后台', role: 'admin', url: joinUrl('Admin/ThemeSettings.aspx') },
+  { id: 'admin-module-catalog', title: '模块目录后台', role: 'admin', url: joinUrl('Admin/ModuleCatalog.aspx') },
   { id: 'admin-correction-requests', title: '员工更正请求后台', role: 'admin', url: joinUrl('Admin/EmployeeProfileCorrectionRequests.aspx') }
 ];
 

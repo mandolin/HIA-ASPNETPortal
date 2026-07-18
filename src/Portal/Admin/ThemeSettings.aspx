@@ -7,65 +7,67 @@
 
 <%-- P3.1 主题选择页：管理员仅能选择已部署且通过 manifest 校验的主题，不提供包上传或在线样式编辑。 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="20">&nbsp;</td>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="left" class="Head">Theme Settings</td>
-                    </tr>
-                    <tr>
-                        <td><hr noshade size="1"></td>
-                    </tr>
-                </table>
+    <%-- 中文 / English: 主题设置页只调整展示结构，主题写入和审计仍由 code-behind 处理。 --%>
+    <div class="portal-admin-page portal-admin-theme-settings">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <h1 class="Head portal-admin-title">Theme Settings</h1>
+                <p class="Normal portal-admin-subtitle">Select trusted deployed themes for the portal and individual tabs.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+                <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
+            </div>
+        </div>
 
-                <asp:Label ID="MessageLabel" CssClass="NormalRed" EnableViewState="false" runat="server" />
+        <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td width="180" class="SubHead">Global Theme:</td>
-                        <td class="Normal">
-                            <asp:DropDownList ID="GlobalThemeList" CssClass="NormalTextBox" runat="server" />
-                            <asp:LinkButton ID="SaveGlobalThemeButton" CssClass="CommandButton" Text="Apply" OnClick="SaveGlobalThemeButton_Click" runat="server" />
-                            <asp:LinkButton ID="ResetGlobalThemeButton" CssClass="CommandButton" Text="Reset Override" CausesValidation="False" OnClick="ResetGlobalThemeButton_Click" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Effective Source:</td>
-                        <td class="Normal"><asp:Label ID="GlobalThemeStatusLabel" runat="server" /></td>
-                    </tr>
-                </table>
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Global Theme</h2>
+            </div>
+            <div class="portal-filter-panel">
+                <div class="portal-filter-grid">
+                    <div class="portal-filter-field">
+                        <span class="SubHead portal-filter-label">Global Theme</span>
+                        <asp:DropDownList ID="GlobalThemeList" CssClass="NormalTextBox portal-filter-input" runat="server" />
+                    </div>
+                    <div class="portal-filter-actions">
+                        <asp:LinkButton ID="SaveGlobalThemeButton" CssClass="CommandButton" Text="Apply" OnClick="SaveGlobalThemeButton_Click" runat="server" />
+                        <asp:LinkButton ID="ResetGlobalThemeButton" CssClass="CommandButton" Text="Reset Override" CausesValidation="False" OnClick="ResetGlobalThemeButton_Click" runat="server" />
+                    </div>
+                </div>
+                <div class="Normal portal-status-line">
+                    <span class="SubHead">Effective Source:</span>
+                    <asp:Label ID="GlobalThemeStatusLabel" runat="server" />
+                </div>
+            </div>
+        </div>
 
-                <br>
-
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td class="Head">Tab Override</td>
-                    </tr>
-                </table>
-
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td width="180" class="SubHead">Portal Tab:</td>
-                        <td class="Normal">
-                            <asp:DropDownList ID="TabList" CssClass="NormalTextBox" AutoPostBack="True" OnSelectedIndexChanged="TabList_SelectedIndexChanged" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Override Theme:</td>
-                        <td class="Normal">
-                            <asp:DropDownList ID="TabThemeList" CssClass="NormalTextBox" runat="server" />
-                            <asp:LinkButton ID="SaveTabThemeButton" CssClass="CommandButton" Text="Apply" OnClick="SaveTabThemeButton_Click" runat="server" />
-                            <asp:LinkButton ID="ClearTabThemeButton" CssClass="CommandButton" Text="Clear Override" CausesValidation="False" OnClick="ClearTabThemeButton_Click" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Current Override:</td>
-                        <td class="Normal"><asp:Label ID="TabThemeStatusLabel" runat="server" /></td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Tab Override</h2>
+            </div>
+            <div class="portal-filter-panel">
+                <div class="portal-filter-grid">
+                    <div class="portal-filter-field">
+                        <span class="SubHead portal-filter-label">Portal Tab</span>
+                        <asp:DropDownList ID="TabList" CssClass="NormalTextBox portal-filter-input" AutoPostBack="True" OnSelectedIndexChanged="TabList_SelectedIndexChanged" runat="server" />
+                    </div>
+                    <div class="portal-filter-field">
+                        <span class="SubHead portal-filter-label">Override Theme</span>
+                        <asp:DropDownList ID="TabThemeList" CssClass="NormalTextBox portal-filter-input" runat="server" />
+                    </div>
+                    <div class="portal-filter-actions">
+                        <asp:LinkButton ID="SaveTabThemeButton" CssClass="CommandButton" Text="Apply" OnClick="SaveTabThemeButton_Click" runat="server" />
+                        <asp:LinkButton ID="ClearTabThemeButton" CssClass="CommandButton" Text="Clear Override" CausesValidation="False" OnClick="ClearTabThemeButton_Click" runat="server" />
+                    </div>
+                </div>
+                <div class="Normal portal-status-line">
+                    <span class="SubHead">Current Override:</span>
+                    <asp:Label ID="TabThemeStatusLabel" runat="server" />
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
