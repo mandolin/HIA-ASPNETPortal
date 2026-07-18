@@ -28,6 +28,23 @@ namespace ASPNET.StarterKit.Portal
         public IDocumentsDb DocumentDB { private get; set; }
 
         /// <summary>
+        /// 中文：下载兼容页不渲染 HTML 外壳，因此不加载 App_Themes 样式。
+        ///
+        /// English: The compatibility download page does not render an HTML shell, so it does not load App_Themes styles.
+        /// </summary>
+        /// <remarks>
+        /// 中文：依赖注入仍由 <see cref="PortalPage{T}"/> 执行；这里只跳过主题样式注入，避免无
+        /// <c>&lt;head runat="server" /&gt;</c> 页面触发 Web Forms 运行期错误。
+        ///
+        /// English: Dependency injection is still performed by <see cref="PortalPage{T}"/>; this only skips stylesheet
+        /// injection to avoid Web Forms runtime errors on pages without <c>&lt;head runat="server" /&gt;</c>.
+        /// </remarks>
+        protected override bool ShouldApplyPortalTheme
+        {
+            get { return false; }
+        }
+
+        /// <summary>
         /// 中文：验证文档标识并以安全附件响应输出已有数据库内容。
         ///
         /// English: Validates the document identifier and emits existing database content in a safe attachment response.

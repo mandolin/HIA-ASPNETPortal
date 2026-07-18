@@ -1324,6 +1324,51 @@ body.portal-theme-stateclassiclight input.portal-primary-action {
     max-width: 180px;
 }
 
+.portal-edit-short-field .portal-input {
+    max-width: 360px;
+}
+
+.portal-edit-subsection {
+    margin: 18px 0 12px;
+    padding-top: 14px;
+    border-top: 1px solid #d8ceb5;
+}
+
+.portal-edit-subtitle {
+    margin: 0 0 5px;
+    color: #8a2524;
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+.portal-field-help {
+    display: block;
+    margin: 4px 0 0;
+    color: #6f6556;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.portal-option-stack {
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    border: 1px solid #d8ceb5;
+    background-color: #fbf7ed;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.portal-disabled-option {
+    border-style: dashed;
+    opacity: .86;
+}
+
+.portal-file-input {
+    padding: 8px;
+    border: 1px dashed #c8b88e;
+    background-color: #ffffff;
+}
+
 .portal-validation-message {
     display: block;
     margin-top: 5px;

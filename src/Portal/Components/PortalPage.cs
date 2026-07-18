@@ -40,9 +40,31 @@ namespace ASPNET.StarterKit.Portal
         {
             // 主题必须在 PreInit 阶段完成选择，之后 WebForms 才能正确加载 App_Themes 资源。
             // Theme selection must happen during PreInit so WebForms can load App_Themes resources.
-            PortalThemeResolver.ApplyTheme(this);
+            if (ShouldApplyPortalTheme)
+            {
+                PortalThemeResolver.ApplyTheme(this);
+            }
+
             InjectDependencies(); // 注入依赖项。
             base.OnPreInit(e); // 调用基类的 OnPreInit 方法。
+        }
+
+        /// <summary>
+        /// 中文：指示当前页面是否应加载门户 Web Forms 主题。
+        ///
+        /// English: Indicates whether the current page should load the Portal Web Forms theme.
+        /// </summary>
+        /// <remarks>
+        /// 中文：普通页面应保持默认值；仅无 HTML 外壳的下载、流式响应或极少数兼容页面可覆写为 <c>false</c>，
+        /// 以避免 Web Forms 在没有 <c>&lt;head runat="server" /&gt;</c> 的页面上强制注入主题样式。
+        ///
+        /// English: Normal pages should keep the default value. Only download, streaming-response, or rare compatibility
+        /// pages without an HTML shell should override this to <c>false</c>, avoiding Web Forms stylesheet injection on
+        /// pages that do not have <c>&lt;head runat="server" /&gt;</c>.
+        /// </remarks>
+        protected virtual bool ShouldApplyPortalTheme
+        {
+            get { return true; }
         }
 
         /// <summary>

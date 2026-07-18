@@ -325,6 +325,49 @@ SELECT @ItemId;
         })
     }
 
+    $documentModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'Documents'
+    if ($null -ne $documentModuleId) {
+        $documentItemId = Invoke-ScalarQuery -Connection $Connection -Sql @'
+DECLARE @ItemId int;
+
+SELECT TOP (1) @ItemId = [ItemID]
+FROM [dbo].[Portal_Documents]
+WHERE [ModuleID] = @ModuleID
+  AND [FileFriendlyName] = N'P7-Test-Document-Edit';
+
+IF @ItemId IS NULL
+BEGIN
+    INSERT INTO [dbo].[Portal_Documents]
+        ([ModuleID], [CreatedByUser], [CreatedDate], [FileNameUrl], [FileFriendlyName], [Category], [Content], [ContentType], [ContentSize])
+    VALUES
+        (@ModuleID, N'P7-Screenshot', GETDATE(), N'~/uploads/sample-under-10mb.json', N'P7-Test-Document-Edit', N'P7 Theme Probe', NULL, NULL, NULL);
+
+    SET @ItemId = CONVERT(int, SCOPE_IDENTITY());
+END
+ELSE
+BEGIN
+    UPDATE [dbo].[Portal_Documents]
+    SET [FileNameUrl] = N'~/uploads/sample-under-10mb.json',
+        [Category] = N'P7 Theme Probe',
+        [Content] = NULL,
+        [ContentType] = NULL,
+        [ContentSize] = NULL
+    WHERE [ItemID] = @ItemId;
+END
+
+SELECT @ItemId;
+'@ -Configure {
+            param($command)
+            Add-IntParameter -Command $command -Name '@ModuleID' -Value ([int]$documentModuleId)
+        }
+
+        $targets.Add([pscustomobject]@{
+            id = 'edit-document'
+            title = '文档编辑页'
+            url = 'DesktopModules/EditDocs.aspx?ItemID=' + [Convert]::ToString($documentItemId, [System.Globalization.CultureInfo]::InvariantCulture) + '&mid=' + [Convert]::ToString($documentModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
+        })
+    }
+
     $eventModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'Events'
     if ($null -ne $eventModuleId) {
         $eventItemId = Invoke-ScalarQuery -Connection $Connection -Sql @'

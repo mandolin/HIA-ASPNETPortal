@@ -1332,6 +1332,52 @@ body.portal-theme-oadark .portal-dashboard-layout {
     max-width: 180px;
 }
 
+.portal-edit-short-field .portal-input {
+    max-width: 360px;
+}
+
+.portal-edit-subsection {
+    margin: 18px 0 12px;
+    padding-top: 14px;
+    border-top: 1px solid #3b5f6c;
+}
+
+.portal-edit-subtitle {
+    margin: 0 0 5px;
+    color: #d8f4f6;
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+.portal-field-help {
+    display: block;
+    margin: 4px 0 0;
+    color: #b9d0d4;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.portal-option-stack {
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    border: 1px solid #3b5f6c;
+    background-color: #112229;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.portal-disabled-option {
+    border-style: dashed;
+    opacity: .86;
+}
+
+.portal-file-input {
+    padding: 8px;
+    border: 1px dashed #5a8290;
+    background-color: #0d1c21;
+    color: #d8f4f6;
+}
+
 .portal-validation-message {
     display: block;
     margin-top: 5px;

@@ -57,6 +57,8 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            ApplyUploadPolicyPresentation();
+
             if (!Page.IsPostBack)
             {
                 if (_currentItem != null)
@@ -219,6 +221,17 @@ namespace ASPNET.StarterKit.Portal
             CategoryField.Text = item.Category;
             CreatedBy.Text = item.CreatedByUser;
             CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
+        }
+
+        private void ApplyUploadPolicyPresentation()
+        {
+            // 中文：数据库二进制存储路线本阶段不启用，页面层也强制清空避免旧提交值误入库。
+            // English: Database-binary storage is disabled in this phase; clear it at page level to avoid legacy posts.
+            storeInDatabase.Checked = false;
+            storeInDatabase.Enabled = false;
+            UploadPolicyHint.Text = "单文件上限：" + PortalDocumentPolicy.GetMaximumUploadSizeDisplayText() +
+                                    "；允许扩展名：" + PortalDocumentPolicy.GetAllowedExtensionsDisplayText() +
+                                    "。服务器上传会重命名后保存到 " + PortalDocumentPolicy.UploadVirtualDirectory + "。";
         }
 
         private bool TrySaveUploadedFile(out string virtualPath, out string savedPhysicalPath)

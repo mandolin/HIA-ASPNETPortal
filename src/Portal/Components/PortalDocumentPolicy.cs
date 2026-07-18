@@ -91,6 +91,30 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// 中文：读取当前有效的文档上传大小上限，并格式化为面向编辑者的短文本。
+        ///
+        /// English: Reads the effective document-upload size limit and formats it as a short editor-facing text.
+        /// </summary>
+        /// <returns>中文：例如 <c>10 MB</c> 的大小说明。English: Size text such as <c>10 MB</c>.</returns>
+        public static string GetMaximumUploadSizeDisplayText()
+        {
+            return FormatFileSize(GetMaximumUploadBytes());
+        }
+
+        /// <summary>
+        /// 中文：读取当前有效的文档上传扩展名允许清单，并格式化为稳定顺序的展示文本。
+        ///
+        /// English: Reads the effective document-upload extension allowlist and formats it as stable display text.
+        /// </summary>
+        /// <returns>中文：逗号分隔的扩展名清单。English: Comma-separated extension allowlist.</returns>
+        public static string GetAllowedExtensionsDisplayText()
+        {
+            var extensions = new List<string>(GetConfiguredAllowedExtensions());
+            extensions.Sort(StringComparer.OrdinalIgnoreCase);
+            return string.Join(", ", extensions.ToArray());
+        }
+
+        /// <summary>
         /// 中文：为已验证上传生成可读且不易冲突的物理文件名。
         ///
         /// English: Generates a readable, collision-resistant physical filename for a validated upload.
