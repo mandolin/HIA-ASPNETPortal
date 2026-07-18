@@ -15,6 +15,15 @@ namespace ASPNET.StarterKit.Portal
     {
 
         /// <summary>
+        /// SrcLabel 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SrcLabel;
+
+        /// <summary>
         /// Src 控件。
         /// </summary>
         /// <remarks>
@@ -24,6 +33,33 @@ namespace ASPNET.StarterKit.Portal
         protected global::System.Web.UI.WebControls.TextBox Src;
 
         /// <summary>
+        /// ImagePreviewPanel 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ImagePreviewPanel;
+
+        /// <summary>
+        /// ImagePreview 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ImagePreview;
+
+        /// <summary>
+        /// WidthLabel 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label WidthLabel;
+
+        /// <summary>
         /// Width 控件。
         /// </summary>
         /// <remarks>
@@ -31,6 +67,15 @@ namespace ASPNET.StarterKit.Portal
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Width;
+
+        /// <summary>
+        /// HeightLabel 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label HeightLabel;
 
         /// <summary>
         /// Height 控件。

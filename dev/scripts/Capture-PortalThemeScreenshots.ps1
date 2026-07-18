@@ -236,6 +236,63 @@ ORDER BY [m].[TabId], [m].[ModuleOrder], [m].[ModuleId]
     }
 }
 
+function Test-PortalUserPermission {
+    param(
+        [System.Data.SqlClient.SqlConnection]$Connection,
+        [string]$UserName,
+        [string]$PermissionKey
+    )
+
+    if ([string]::IsNullOrWhiteSpace($UserName) -or [string]::IsNullOrWhiteSpace($PermissionKey)) {
+        return $false
+    }
+
+    $hasPermission = Invoke-ScalarQuery -Connection $Connection -Sql @'
+DECLARE @HasPermission bit = 0;
+
+IF EXISTS
+(
+    SELECT 1
+    FROM [dbo].[Portal_Users] AS [Users]
+    INNER JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+        ON [UserRoles].[UserID] = [Users].[UserID]
+    INNER JOIN [dbo].[Portal_Roles] AS [Roles]
+        ON [Roles].[RoleID] = [UserRoles].[RoleID]
+    WHERE ([Users].[Name] = @UserName OR [Users].[Email] = @UserName)
+      AND [Roles].[RoleName] = N'Admins'
+)
+BEGIN
+    SET @HasPermission = 1;
+END
+ELSE IF OBJECT_ID(N'[dbo].[PortalCfg_RolePermissions]', N'U') IS NOT NULL
+BEGIN
+    IF EXISTS
+    (
+        SELECT 1
+        FROM [dbo].[Portal_Users] AS [Users]
+        INNER JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+            ON [UserRoles].[UserID] = [Users].[UserID]
+        INNER JOIN [dbo].[PortalCfg_RolePermissions] AS [RolePermissions]
+            ON [RolePermissions].[RoleId] = [UserRoles].[RoleID]
+        WHERE ([Users].[Name] = @UserName OR [Users].[Email] = @UserName)
+          AND [RolePermissions].[PermissionKey] = @PermissionKey
+          AND [RolePermissions].[IsEnabled] = 1
+    )
+    BEGIN
+        SET @HasPermission = 1;
+    END
+END
+
+SELECT @HasPermission;
+'@ -Configure {
+        param($command)
+        Add-TextParameter -Command $command -Name '@UserName' -Size 100 -Value $UserName
+        Add-TextParameter -Command $command -Name '@PermissionKey' -Size 120 -Value $PermissionKey
+    }
+
+    return [Convert]::ToBoolean($hasPermission)
+}
+
 function Get-OrCreateEditPageTargets {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -448,6 +505,33 @@ SELECT @ItemId;
             id = 'edit-link'
             title = '链接编辑页'
             url = 'DesktopModules/EditLinks.aspx?ItemID=' + [Convert]::ToString($linkItemId, [System.Globalization.CultureInfo]::InvariantCulture) + '&mid=' + [Convert]::ToString($linkModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
+        })
+    }
+
+    $htmlModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'Html Document'
+    if ($null -ne $htmlModuleId) {
+        $targets.Add([pscustomobject]@{
+            id = 'edit-html'
+            title = 'HTML 配置页'
+            url = 'DesktopModules/EditHtml.aspx?Mid=' + [Convert]::ToString($htmlModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
+        })
+    }
+
+    $imageModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'Image'
+    if ($null -ne $imageModuleId) {
+        $targets.Add([pscustomobject]@{
+            id = 'edit-image'
+            title = '图片配置页'
+            url = 'DesktopModules/EditImage.aspx?Mid=' + [Convert]::ToString($imageModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
+        })
+    }
+
+    $xmlModuleId = Get-FirstModuleIdForDefinition -Connection $Connection -FriendlyName 'XML/XSL'
+    if ($null -ne $xmlModuleId) {
+        $targets.Add([pscustomobject]@{
+            id = 'edit-xml'
+            title = 'XML 配置页'
+            url = 'DesktopModules/EditXml.aspx?Mid=' + [Convert]::ToString($xmlModuleId, [System.Globalization.CultureInfo]::InvariantCulture)
         })
     }
 
@@ -941,12 +1025,18 @@ ORDER BY CASE WHEN [RoleName] = N'TestRole' THEN 0 ELSE 1 END, [RoleID]
 '@ -Configure {
         param($command)
     }
-    $moduleDefinitionId = Invoke-ScalarQuery -Connection $connection -Sql @'
+    $canCaptureModuleDefinitionPage = Test-PortalUserPermission -Connection $connection -UserName $p65Context.adminUserName -PermissionKey 'Module.Definition.Edit'
+    $moduleDefinitionId = if ($canCaptureModuleDefinitionPage) {
+        Invoke-ScalarQuery -Connection $connection -Sql @'
 SELECT TOP (1) [ModuleDefId]
 FROM [dbo].[PortalCfg_ModuleDefinitions]
 ORDER BY [ModuleDefId]
 '@ -Configure {
-        param($command)
+            param($command)
+        }
+    }
+    else {
+        $null
     }
     $moduleSettingsProbe = Invoke-ScalarQuery -Connection $connection -Sql @'
 SELECT TOP (1)

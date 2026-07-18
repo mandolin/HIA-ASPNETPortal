@@ -45,6 +45,7 @@ namespace ASPNET.StarterKit.Portal
                 Src.Text = settings["src"] as string;
                 Width.Text = settings["width"] as string;
                 Height.Text = settings["height"] as string;
+                ApplyImagePreview(Src.Text);
                 ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
             }
         }
@@ -65,12 +66,14 @@ namespace ASPNET.StarterKit.Portal
             if (!TryNormalizeOptionalBrowseUrl(Src.Text, out imageUrl))
             {
                 ShowValidationMessage("图片地址只能使用站内地址或 HTTP(S) 地址。");
+                ApplyImagePreview(string.Empty);
                 return;
             }
 
             if (!TryNormalizeDimension(Width.Text, out width) || !TryNormalizeDimension(Height.Text, out height))
             {
                 ShowValidationMessage("图片宽度和高度必须是非负整数，留空表示不限制该尺寸。");
+                ApplyImagePreview(imageUrl);
                 return;
             }
 
@@ -103,6 +106,22 @@ namespace ASPNET.StarterKit.Portal
             }
 
             return true;
+        }
+
+        private void ApplyImagePreview(string rawSource)
+        {
+            // 中文：预览只复用已允许的普通浏览地址规则，不为图片模块额外打开脚本、文件或任意物理路径能力。
+            // English: The preview reuses the allowed browse-URL rule and does not open script, file, or arbitrary physical-path capabilities for image modules.
+            string normalizedUrl;
+            if (TryNormalizeOptionalBrowseUrl(rawSource, out normalizedUrl) && !string.IsNullOrWhiteSpace(normalizedUrl))
+            {
+                ImagePreview.ImageUrl = normalizedUrl;
+                ImagePreviewPanel.Visible = true;
+                return;
+            }
+
+            ImagePreview.ImageUrl = string.Empty;
+            ImagePreviewPanel.Visible = false;
         }
 
         private bool TryNormalizeOptionalBrowseUrl(string value, out string normalizedUrl)

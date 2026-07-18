@@ -2,64 +2,44 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 页面内容区域开始 --%>
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="150">
-                &nbsp;
-            </td>
-            <td width="*">
-                <table width="500" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="left" class="Head">
-                            XML Settings
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <hr noshade size="1">
-                        </td>
-                    </tr>
-                </table>
-                <table width="500" cellspacing="0" cellpadding="0">
-                    <tr valign="top">
-                        <td width="100" class="SubHead">
-                            XML Data File:
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td align="right">
-                            <%-- 输入XML数据文件路径的文本框 --%>
-                            <asp:TextBox ID="XmlDataSrc" CssClass="NormalTextBox" Columns="26" Width="340" runat="server" />
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <td class="SubHead">
-                            XSL/T Transform File:
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td align="right">
-                            <%-- 输入XSL/T转换文件路径的文本框 --%>
-                            <asp:TextBox ID="XslTransformSrc" CssClass="NormalTextBox" Columns="26" Width="340"
-                                runat="server" />
-                        </td>
-                    </tr>
-                </table>
-                <asp:Label ID="ValidationMessage" CssClass="NormalRed" EnableViewState="false" Visible="false" runat="server" />
-                <p>
-                    <%-- 更新按钮 --%>
-                    <asp:LinkButton ID="updateButton" Text="Update" runat="server" class="CommandButton"
-                        BorderStyle="none" OnClick="UpdateBtn_Click" />
-                    &nbsp;
-                    <%-- 取消按钮 --%>
-                    <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
-                        class="CommandButton" BorderStyle="none" OnClick="CancelBtn_Click" />
-                </p>
-            </td>
-        </tr>
-    </table>
-    <%-- 页面内容区域结束 --%>
+    <%-- 中文：P7.4.2-E 将 XML/XSL 配置页改为主题化表单；资源仍必须由受信任部署提供。English: P7.4.2-E rebuilds the XML/XSL settings page with a themed form while deployed resources must still be provided by trusted deployment. --%>
+    <section class="portal-page-section portal-edit-page portal-edit-xml">
+        <div class="portal-page-heading-row">
+            <h1 class="portal-page-title">XML Settings</h1>
+        </div>
+
+        <div class="portal-detail-card portal-edit-form">
+            <div class="portal-option-stack">
+                <strong>Deployment resources only</strong>
+                <span class="portal-field-help">XML 与 XSL/T 文件必须位于当前应用部署目录内。本页只维护路径，不提供上传、在线编辑、外部 URL 或任意物理路径能力。</span>
+            </div>
+
+            <div class="portal-field-stack">
+                <asp:Label ID="XmlDataSrcLabel" CssClass="portal-field-stack-label" AssociatedControlID="XmlDataSrc"
+                    runat="server" Text="XML Data File" />
+                <%-- 中文：保存时会规范化为当前应用内虚拟路径。English: Saving normalizes this to a virtual path inside the current application. --%>
+                <asp:TextBox ID="XmlDataSrc" CssClass="NormalTextBox portal-input" Columns="26"
+                    MaxLength="250" runat="server" />
+            </div>
+
+            <div class="portal-field-stack">
+                <asp:Label ID="XslTransformSrcLabel" CssClass="portal-field-stack-label" AssociatedControlID="XslTransformSrc"
+                    runat="server" Text="XSL/T Transform File" />
+                <asp:TextBox ID="XslTransformSrc" CssClass="NormalTextBox portal-input" Columns="26"
+                    MaxLength="250" runat="server" />
+            </div>
+
+            <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message"
+                EnableViewState="false" Visible="false" runat="server" />
+
+            <div class="portal-form-actions">
+                <asp:LinkButton ID="updateButton" Text="Update" runat="server"
+                    CssClass="portal-button portal-button-primary" BorderStyle="none"
+                    OnClick="UpdateBtn_Click" />
+                <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
+                    CssClass="portal-button portal-button-secondary" BorderStyle="none"
+                    OnClick="CancelBtn_Click" />
+            </div>
+        </div>
+    </section>
 </asp:Content>
