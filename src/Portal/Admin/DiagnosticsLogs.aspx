@@ -7,65 +7,77 @@
 
 <%-- P2.4 只读诊断日志页：仅查询受限 NDJSON 记录，不提供下载、删除或路径输入。 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="20">&nbsp;</td>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tr><td align="left" class="Head">Diagnostics Logs</td></tr>
-                    <tr><td><hr noshade size="1"></td></tr>
-                </table>
+    <%-- 中文 / English: 诊断日志页只重构后台展示结构，查询范围、分页和权限仍由 code-behind 控制。 --%>
+    <div class="portal-admin-page portal-admin-diagnostics-logs">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <h1 class="Head portal-admin-title">Diagnostics Logs</h1>
+                <p class="Normal portal-admin-subtitle">Structured runtime events for administrators.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+                <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
+            </div>
+        </div>
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td width="110" class="SubHead">Start UTC:</td>
-                        <td width="150"><asp:TextBox ID="StartDateTextBox" CssClass="NormalTextBox" Width="110" runat="server" /></td>
-                        <td width="100" class="SubHead">End UTC:</td>
-                        <td width="150"><asp:TextBox ID="EndDateTextBox" CssClass="NormalTextBox" Width="110" runat="server" /></td>
-                        <td width="70" class="SubHead">Level:</td>
-                        <td>
-                            <asp:DropDownList ID="LevelFilter" CssClass="NormalTextBox" runat="server">
-                                <asp:ListItem Text="All" Value="" />
-                                <asp:ListItem Text="Info" Value="Info" />
-                                <asp:ListItem Text="Warning" Value="Warning" />
-                                <asp:ListItem Text="Error" Value="Error" />
-                            </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">Category:</td>
-                        <td><asp:TextBox ID="CategoryFilter" CssClass="NormalTextBox" Width="110" runat="server" /></td>
-                        <td class="SubHead">Event ID:</td>
-                        <td><asp:TextBox ID="EventIdFilter" CssClass="NormalTextBox" Width="150" runat="server" /></td>
-                        <td colspan="2">
-                            <asp:LinkButton ID="SearchButton" Text="Search" CssClass="CommandButton" CausesValidation="False" OnClick="SearchButton_Click" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6" class="NormalRed"><asp:Label ID="MessageLabel" runat="server" /></td>
-                    </tr>
-                </table>
+        <div class="portal-admin-section portal-filter-panel">
+            <div class="portal-filter-grid">
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Start UTC</span>
+                    <asp:TextBox ID="StartDateTextBox" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">End UTC</span>
+                    <asp:TextBox ID="EndDateTextBox" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Level</span>
+                    <asp:DropDownList ID="LevelFilter" CssClass="NormalTextBox portal-filter-input" runat="server">
+                        <asp:ListItem Text="All" Value="" />
+                        <asp:ListItem Text="Info" Value="Info" />
+                        <asp:ListItem Text="Warning" Value="Warning" />
+                        <asp:ListItem Text="Error" Value="Error" />
+                    </asp:DropDownList>
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Category</span>
+                    <asp:TextBox ID="CategoryFilter" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
+                </div>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">Event ID</span>
+                    <asp:TextBox ID="EventIdFilter" CssClass="NormalTextBox portal-filter-input" Width="150" runat="server" />
+                </div>
+                <div class="portal-filter-actions">
+                    <asp:LinkButton ID="SearchButton" Text="Search" CssClass="CommandButton" CausesValidation="False" OnClick="SearchButton_Click" runat="server" />
+                </div>
+            </div>
+            <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" runat="server" />
+        </div>
 
-                <table width="100%" cellspacing="0" cellpadding="3" border="0">
-                    <tr>
-                        <td class="Normal"><asp:Label ID="ResultLabel" runat="server" /></td>
-                        <td align="right">
-                            <asp:LinkButton ID="PreviousButton" Text="Previous" CssClass="CommandButton" CausesValidation="False" OnClick="PreviousButton_Click" runat="server" />
-                            &nbsp;
-                            <asp:LinkButton ID="NextButton" Text="Next" CssClass="CommandButton" CausesValidation="False" OnClick="NextButton_Click" runat="server" />
-                        </td>
-                    </tr>
-                </table>
+        <div class="portal-pager">
+            <div class="Normal portal-pager-info">
+                <asp:Label ID="ResultLabel" runat="server" />
+            </div>
+            <div class="portal-pager-actions">
+                <asp:LinkButton ID="PreviousButton" Text="Previous" CssClass="CommandButton" CausesValidation="False" OnClick="PreviousButton_Click" runat="server" />
+                <asp:LinkButton ID="NextButton" Text="Next" CssClass="CommandButton" CausesValidation="False" OnClick="NextButton_Click" runat="server" />
+            </div>
+        </div>
 
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Log Entries</h2>
+            </div>
+            <div class="portal-table-wrap">
                 <asp:Repeater ID="EntriesRepeater" runat="server">
                     <HeaderTemplate>
-                        <table width="100%" cellspacing="0" cellpadding="3" border="1">
-                            <tr class="SubHead">
-                                <td width="155">UTC</td>
-                                <td width="75">Level</td>
-                                <td width="150">Category</td>
-                                <td>Message</td>
-                                <td width="195">Event ID</td>
+                        <table class="portal-data-table portal-diagnostics-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="155" class="SubHead">UTC</th>
+                                <th scope="col" width="75" class="SubHead">Level</th>
+                                <th scope="col" width="150" class="SubHead">Category</th>
+                                <th scope="col" class="SubHead">Message</th>
+                                <th scope="col" width="195" class="SubHead">Event ID</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -73,15 +85,15 @@
                                 <td><%#: Eval("UtcTime", "{0:yyyy-MM-dd HH:mm:ss} UTC") %></td>
                                 <td><%#: Eval("Level") %></td>
                                 <td><%#: Eval("Category") %></td>
-                                <td><%#: Eval("Message") %></td>
-                                <td><asp:HyperLink ID="DetailLink" NavigateUrl='<%# GetDetailUrl(Eval("EventId")) %>' Text='<%#: Eval("EventId") %>' runat="server" /></td>
+                                <td class="portal-log-message"><%#: Eval("Message") %></td>
+                                <td class="portal-log-event"><asp:HyperLink ID="DetailLink" NavigateUrl='<%# GetDetailUrl(Eval("EventId")) %>' Text='<%#: Eval("EventId") %>' runat="server" /></td>
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>

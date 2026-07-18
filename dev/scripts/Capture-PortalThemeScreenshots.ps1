@@ -109,6 +109,29 @@ function Invoke-NonQuery {
     }
 }
 
+function Invoke-ScalarQuery {
+    param(
+        [System.Data.SqlClient.SqlConnection]$Connection,
+        [string]$Sql,
+        [scriptblock]$Configure
+    )
+
+    $command = $Connection.CreateCommand()
+    try {
+        $command.CommandText = $Sql
+        & $Configure $command
+        $value = $command.ExecuteScalar()
+        if ($null -eq $value -or $value -is [DBNull]) {
+            return $null
+        }
+
+        return $value
+    }
+    finally {
+        $command.Dispose()
+    }
+}
+
 function Get-SystemSettingSnapshot {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -284,6 +307,8 @@ const baseUrl = process.env.P7_THEME_BASE_URL;
 const outputDir = process.env.P7_THEME_OUTPUT_DIR;
 const p64Path = process.env.P7_THEME_P64_CONTEXT;
 const p65Path = process.env.P7_THEME_P65_CONTEXT;
+const adminUserId = process.env.P7_THEME_ADMIN_USER_ID;
+const roleId = process.env.P7_THEME_ROLE_ID;
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -361,10 +386,20 @@ const adminTargets = [
   { id: 'admin-employee-directory', title: '员工目录后台', role: 'admin', url: joinUrl('Admin/EmployeeDirectory.aspx') },
   { id: 'admin-operation-audits', title: '运营审计后台', role: 'admin', url: joinUrl('Admin/OperationAudits.aspx') },
   { id: 'admin-system-health', title: '系统健康后台', role: 'admin', url: joinUrl('Admin/SystemHealth.aspx') },
+  { id: 'admin-diagnostics-logs', title: '诊断日志后台', role: 'admin', url: joinUrl('Admin/DiagnosticsLogs.aspx') },
+  { id: 'admin-diagnostic-log-detail', title: '诊断日志详情', role: 'admin', url: joinUrl('Admin/DiagnosticLogDetail.aspx?id=P7-Screenshot-Probe') },
   { id: 'admin-theme-settings', title: '主题设置后台', role: 'admin', url: joinUrl('Admin/ThemeSettings.aspx') },
   { id: 'admin-module-catalog', title: '模块目录后台', role: 'admin', url: joinUrl('Admin/ModuleCatalog.aspx') },
   { id: 'admin-correction-requests', title: '员工更正请求后台', role: 'admin', url: joinUrl('Admin/EmployeeProfileCorrectionRequests.aspx') }
 ];
+
+if (roleId) {
+  adminTargets.push({ id: 'admin-security-roles', title: '安全角色后台', role: 'admin', url: joinUrl(`Admin/SecurityRoles.aspx?roleid=${encodeURIComponent(roleId)}`) });
+}
+
+if (adminUserId) {
+  adminTargets.push({ id: 'admin-manage-users', title: '管理用户后台', role: 'admin', url: joinUrl(`Admin/ManageUsers.aspx?userId=${encodeURIComponent(adminUserId)}`) });
+}
 
 const boundTargets = [];
 if (p64?.tabUrl) {
@@ -435,6 +470,28 @@ try {
     $connection = [System.Data.SqlClient.SqlConnection]::new($connectionString)
     $connection.Open()
     $settingSnapshot = Get-SystemSettingSnapshot -Connection $connection
+    $p65Context = Get-Content -LiteralPath $P65ContextPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $adminUserId = if ($p65Context.adminUserName) {
+        Invoke-ScalarQuery -Connection $connection -Sql @'
+SELECT TOP (1) [UserID]
+FROM [dbo].[Portal_Users]
+WHERE [Name] = @UserName
+'@ -Configure {
+            param($command)
+            Add-TextParameter -Command $command -Name '@UserName' -Size 100 -Value $p65Context.adminUserName
+        }
+    }
+    else {
+        $null
+    }
+    $roleId = Invoke-ScalarQuery -Connection $connection -Sql @'
+SELECT TOP (1) [RoleID]
+FROM [dbo].[Portal_Roles]
+WHERE [RoleID] > 0
+ORDER BY CASE WHEN [RoleName] = N'TestRole' THEN 0 ELSE 1 END, [RoleID]
+'@ -Configure {
+        param($command)
+    }
 
     foreach ($theme in $Themes) {
         Write-Host ("[INFO] Capturing theme {0}" -f $theme)
@@ -445,6 +502,8 @@ try {
         $env:P7_THEME_OUTPUT_DIR = (Resolve-Path -LiteralPath $OutputDirectory).Path
         $env:P7_THEME_P64_CONTEXT = (Resolve-Path -LiteralPath $P64ContextPath).Path
         $env:P7_THEME_P65_CONTEXT = (Resolve-Path -LiteralPath $P65ContextPath).Path
+        $env:P7_THEME_ADMIN_USER_ID = if ($null -eq $adminUserId) { '' } else { [Convert]::ToString($adminUserId, [System.Globalization.CultureInfo]::InvariantCulture) }
+        $env:P7_THEME_ROLE_ID = if ($null -eq $roleId) { '' } else { [Convert]::ToString($roleId, [System.Globalization.CultureInfo]::InvariantCulture) }
 
         $nodeOutput = & node $runtimeScript
         if ($LASTEXITCODE -ne 0) {
@@ -462,6 +521,8 @@ finally {
     Remove-Item Env:P7_THEME_OUTPUT_DIR -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_P64_CONTEXT -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_P65_CONTEXT -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_ADMIN_USER_ID -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_ROLE_ID -ErrorAction SilentlyContinue
 
     if ($connection) {
         if ($connection.State -eq [System.Data.ConnectionState]::Open) {

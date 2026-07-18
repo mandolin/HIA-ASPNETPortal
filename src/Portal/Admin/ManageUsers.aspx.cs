@@ -742,7 +742,9 @@ namespace ASPNET.StarterKit.Portal
 
         private void ShowRegistrationMessage(string message, bool isError)
         {
-            RegistrationMessage.CssClass = isError ? "NormalRed" : "Normal";
+            // 中文：保留主题状态行 class，避免后台提示在回发后退回旧式行内文本。
+            // English: Preserve the themed status-line class so postback messages do not fall back to legacy inline text.
+            RegistrationMessage.CssClass = (isError ? "NormalRed" : "Normal") + " portal-status-line";
             RegistrationMessage.Text = Server.HtmlEncode(message ?? string.Empty);
         }
 

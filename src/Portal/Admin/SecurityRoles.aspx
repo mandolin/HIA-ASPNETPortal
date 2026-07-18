@@ -6,89 +6,63 @@
     the Portal application.
 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr height="*" valign="top">
-            <td width="100">
-                &nbsp;
-            </td>
-            <td width="*">
-                <table width="450" cellpadding="2" cellspacing="4" border="0">
-                    <tr>
-                        <td colspan="2">
-                            <table width="100%" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td align="left">
-                                        <span id="title" class="Head" runat="server">Role Membership</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <hr noshade size="1">
-                                    </td>
-                                </tr>
-                            </table>
-                            <asp:Label ID="Message" CssClass="NormalRed" runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            <table width="100%" cellspacing="0" cellpadding="0">
-                                <%-- note 暂不考虑支持windowsUser机制
-                                    <tr>
-                                    <td>
-                                        <asp:TextBox ID="windowsUserName" Text="DOMAIN\username" Visible="False" runat="server" />
-                                    </td>
-                                    <td class="Normal">
-                                        <asp:LinkButton ID="addNew" CssClass="CommandButton" Text="Create new user and add to role"
-                                            Visible="False" runat="server" OnClick="AddUser_Click" />
-                                    </td>
-                                </tr>
-                                    --%>
-                                <tr>
-                                    <td>
-                                        <asp:DropDownList ID="allUsers" DataTextField="Name" DataValueField="UserID" runat="server" />
-                                    </td>
-                                    <td>
-                                        <asp:LinkButton ID="addExisting" CssClass="CommandButton" Text="Add existing user to role"
-                                            runat="server" OnClick="AddUser_Click" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            <asp:DataList ID="usersInRole" RepeatColumns="2" DataKeyField="UserId" OnItemCommand="usersInRole_ItemCommand" runat="server">
-                                <ItemStyle Width="225" />
-                                <ItemTemplate>
-                                    &nbsp;&nbsp;
-                                    <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="Remove this user from role"
-                                        runat="server" />
-                                    <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "Name") %>' CssClass="Normal"
-                                        runat="server" />
-                                </ItemTemplate>
-                            </asp:DataList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <hr noshade size="1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:LinkButton ID="saveBtn" class="CommandButton" Text="Save Role Changes" runat="server"
-                                OnClick="Save_Click" />
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+    <%-- 中文 / English: 角色成员页只调整后台展示结构，成员增删仍由原 DataList 命令和 code-behind 控制。 --%>
+    <div class="portal-admin-page portal-admin-role-membership">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <span id="title" class="Head portal-admin-title" runat="server">Role Membership</span>
+                <p class="Normal portal-admin-subtitle">Manage users assigned to the selected portal role.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
+                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+            </div>
+        </div>
+
+        <asp:Label ID="Message" CssClass="NormalRed portal-status-line" runat="server" />
+
+        <div class="portal-admin-section portal-filter-panel">
+            <div class="portal-filter-grid">
+                <%-- note 暂不考虑支持windowsUser机制
+                    <div class="portal-filter-field">
+                        <asp:TextBox ID="windowsUserName" Text="DOMAIN\username" Visible="False" runat="server" />
+                    </div>
+                    <div class="portal-filter-actions">
+                        <asp:LinkButton ID="addNew" CssClass="CommandButton" Text="Create new user and add to role"
+                            Visible="False" runat="server" OnClick="AddUser_Click" />
+                    </div>
+                --%>
+                <div class="portal-filter-field">
+                    <span class="SubHead portal-filter-label">User</span>
+                    <asp:DropDownList ID="allUsers" CssClass="NormalTextBox portal-filter-input" DataTextField="Name" DataValueField="UserID" runat="server" />
+                </div>
+                <div class="portal-filter-actions">
+                    <asp:LinkButton ID="addExisting" CssClass="CommandButton" Text="Add existing user to role"
+                        runat="server" OnClick="AddUser_Click" />
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Users In Role</h2>
+            </div>
+            <div class="portal-chip-list-wrap">
+                <asp:DataList ID="usersInRole" CssClass="portal-chip-list" RepeatColumns="2" DataKeyField="UserId" OnItemCommand="usersInRole_ItemCommand" runat="server">
+                    <ItemStyle Width="225" CssClass="portal-chip-item" />
+                    <ItemTemplate>
+                        <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="Remove this user from role"
+                            CssClass="portal-chip-delete" runat="server" />
+                        <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "Name") %>' CssClass="Normal portal-chip-text"
+                            runat="server" />
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
+        </div>
+
+        <div class="portal-form-actions">
+            <asp:LinkButton ID="saveBtn" class="CommandButton" Text="Save Role Changes" runat="server"
+                OnClick="Save_Click" />
+        </div>
+    </div>
 </asp:Content>

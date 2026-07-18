@@ -691,6 +691,28 @@ body.portal-theme-enterpriselight .portal-dashboard-layout {
     min-width: 1040px;
 }
 
+.portal-diagnostics-table {
+    min-width: 900px;
+}
+
+.portal-detail-table {
+    min-width: 760px;
+}
+
+.portal-log-message,
+.portal-log-event,
+.portal-detail-table td {
+    word-break: break-word;
+}
+
+.portal-detail-text {
+    width: 100%;
+    min-height: 190px;
+    box-sizing: border-box;
+    font-family: "Sarasa Mono SC", "Liberation Mono", monospace;
+    line-height: 1.45;
+}
+
 .portal-data-table th,
 .portal-data-table td {
     padding: 9px 10px;
@@ -789,4 +811,84 @@ body.portal-theme-enterpriselight .portal-dashboard-layout {
 
 .portal-row-actions .CommandButton {
     margin-bottom: 5px;
+}
+
+.portal-user-summary-grid .portal-admin-summary-item {
+    width: 33%;
+}
+
+.portal-field-grid,
+.portal-form-grid,
+.portal-chip-list-wrap {
+    padding: 16px 18px;
+}
+
+.portal-field,
+.portal-form-field {
+    display: inline-block;
+    width: 280px;
+    max-width: 100%;
+    margin: 0 18px 14px 0;
+    vertical-align: top;
+}
+
+.portal-field-label,
+.portal-form-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.portal-field-value {
+    display: block;
+    min-height: 28px;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.portal-form-input {
+    width: 100%;
+    max-width: 260px;
+    box-sizing: border-box;
+}
+
+.portal-form-actions {
+    margin: 0 0 18px;
+    padding: 12px 0;
+}
+
+.portal-admin-section .portal-form-actions {
+    margin: 0;
+    padding: 0 18px 16px;
+}
+
+.portal-inline-actions {
+    margin-top: 10px;
+}
+
+.portal-inline-actions .CommandButton {
+    margin: 6px 6px 0 0;
+}
+
+.portal-chip-list {
+    width: auto;
+    border-collapse: separate;
+    border-spacing: 8px;
+}
+
+.portal-chip-list td.portal-chip-item,
+.portal-chip-list .portal-chip-item {
+    padding: 7px 10px;
+    border: 1px solid #d8e3ee;
+    border-radius: 8px;
+    vertical-align: middle;
+}
+
+.portal-chip-delete {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.portal-chip-text {
+    vertical-align: middle;
+    word-break: break-word;
 }
