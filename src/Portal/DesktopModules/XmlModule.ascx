@@ -3,6 +3,6 @@
 
 <portal:title EditText="Edit" EditUrl="~/DesktopModules/EditXml.aspx" runat="server" id=Title1 />
 
-<span class="Normal">
+<div class="portal-content-xml">
     <asp:xml id="xml1" runat="server" />
-</span>
+</div>

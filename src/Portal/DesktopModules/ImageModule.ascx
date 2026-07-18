@@ -3,5 +3,6 @@
 
 <portal:title EditText="Edit" EditUrl="~/DesktopModules/EditImage.aspx" runat="server" id=Title1 />
 
-<asp:image id="Image1" border="0" runat="server" />
-<br>
+<div class="portal-content-media">
+    <asp:image id="Image1" CssClass="portal-content-image" runat="server" />
+</div>

@@ -174,6 +174,38 @@ ORDER BY [TabIndex], [TabId]
     }
 }
 
+function Get-DiscussionDetailTarget {
+    param([System.Data.SqlClient.SqlConnection]$Connection)
+
+    $command = $Connection.CreateCommand()
+    try {
+        $command.CommandText = @'
+SELECT TOP (1) [ItemID], [ModuleID]
+FROM [dbo].[Portal_Discussion]
+WHERE [ItemID] > 0
+  AND [ModuleID] > 0
+ORDER BY [ItemID]
+'@
+        $reader = $command.ExecuteReader()
+        try {
+            if (-not $reader.Read()) {
+                return $null
+            }
+
+            return [pscustomobject]@{
+                itemId = $reader.GetInt32(0)
+                moduleId = $reader.GetInt32(1)
+            }
+        }
+        finally {
+            $reader.Dispose()
+        }
+    }
+    finally {
+        $command.Dispose()
+    }
+}
+
 function Get-SystemSettingSnapshot {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -356,6 +388,7 @@ const moduleSettingsModuleId = process.env.P7_THEME_MODULE_SETTINGS_MODULE_ID;
 const moduleSettingsTabId = process.env.P7_THEME_MODULE_SETTINGS_TAB_ID;
 const tabLayoutTabId = process.env.P7_THEME_TAB_LAYOUT_TAB_ID;
 const contentTabsJson = process.env.P7_THEME_CONTENT_TABS || '[]';
+const discussionDetailJson = process.env.P7_THEME_DISCUSSION_DETAIL || 'null';
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -461,6 +494,7 @@ async function capture(page, target) {
 const p64 = fs.existsSync(p64Path) ? readJson(p64Path) : null;
 const p65 = fs.existsSync(p65Path) ? readJson(p65Path) : null;
 const contentTabs = readEnvJson(contentTabsJson, []);
+const discussionDetail = readEnvJson(discussionDetailJson, null);
 fs.mkdirSync(outputDir, { recursive: true });
 
 const anonymousTargets = [
@@ -483,6 +517,15 @@ anonymousTargets.push(
   { id: 'edit-access-denied', title: '编辑拒绝页', role: 'anonymous', url: joinUrl('Admin/EditAccessDenied.aspx'), allowAccessDenied: true },
   { id: 'not-implemented', title: '未实现提示页', role: 'anonymous', url: joinUrl('Admin/NotImplemented.aspx?title=P7%20Theme%20Probe') }
 );
+
+if (discussionDetail?.itemId && discussionDetail?.moduleId) {
+  anonymousTargets.push({
+    id: 'discussion-detail',
+    title: '讨论详情页',
+    role: 'anonymous',
+    url: joinUrl(`DesktopModules/DiscussDetails.aspx?ItemID=${encodeURIComponent(discussionDetail.itemId)}&mid=${encodeURIComponent(discussionDetail.moduleId)}`)
+  });
+}
 
 if (p64?.tabUrl) {
   anonymousTargets.push({ id: 'p64-confirm-anonymous', title: '员工资料确认匿名态', role: 'anonymous', url: p64.tabUrl });
@@ -613,6 +656,7 @@ try {
     $connection.Open()
     $settingSnapshot = Get-SystemSettingSnapshot -Connection $connection
     $contentTabTargets = Get-ContentTabTargets -Connection $connection
+    $discussionDetailTarget = Get-DiscussionDetailTarget -Connection $connection
     $p65Context = Get-Content -LiteralPath $P65ContextPath -Raw -Encoding UTF8 | ConvertFrom-Json
     $adminUserId = if ($p65Context.adminUserName) {
         Invoke-ScalarQuery -Connection $connection -Sql @'
@@ -687,6 +731,7 @@ ORDER BY CASE WHEN [TabName] = N'Home' THEN 0 ELSE 1 END, [TabOrder], [TabId]
         $env:P7_THEME_MODULE_SETTINGS_TAB_ID = if ($null -eq $moduleSettingsTabId) { '' } else { [string]$moduleSettingsTabId }
         $env:P7_THEME_TAB_LAYOUT_TAB_ID = if ($null -eq $tabLayoutTabId) { '' } else { [Convert]::ToString($tabLayoutTabId, [System.Globalization.CultureInfo]::InvariantCulture) }
         $env:P7_THEME_CONTENT_TABS = if ($contentTabTargets.Count -eq 0) { '[]' } else { $contentTabTargets | ConvertTo-Json -Compress }
+        $env:P7_THEME_DISCUSSION_DETAIL = if ($null -eq $discussionDetailTarget) { 'null' } else { $discussionDetailTarget | ConvertTo-Json -Compress }
 
         $nodeOutput = & node $runtimeScript
         if ($LASTEXITCODE -ne 0) {
@@ -711,6 +756,7 @@ finally {
     Remove-Item Env:P7_THEME_MODULE_SETTINGS_TAB_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_TAB_LAYOUT_TAB_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_CONTENT_TABS -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_DISCUSSION_DETAIL -ErrorAction SilentlyContinue
 
     if ($connection) {
         if ($connection.State -eq [System.Data.ConnectionState]::Open) {

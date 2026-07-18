@@ -422,6 +422,216 @@ body.portal-theme-stateclassiclight .employee-profile-form-field {
     display: inline-block;
 }
 
+/* 中文 / English: P7.4.2 内容模块、讨论详情和通用按钮组件。 */
+.portal-button,
+a.portal-button:link,
+a.portal-button:visited,
+a.portal-button:active,
+input.portal-button,
+button.portal-button {
+    display: inline-block;
+    margin: 2px 4px 2px 0;
+    padding: 6px 12px;
+    border: 1px solid #b18b32;
+    background-color: #fffdf7;
+    color: #8a2524;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    text-decoration: none;
+    border-radius: 7px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.portal-button:hover,
+a.portal-button:hover,
+input.portal-button:hover,
+button.portal-button:hover {
+    border-color: #641b1a;
+    background-color: #f7edcf;
+    color: #641b1a;
+}
+
+.portal-button-primary,
+a.portal-button-primary:link,
+a.portal-button-primary:visited,
+a.portal-button-primary:active,
+input.portal-button-primary,
+button.portal-button-primary {
+    border-color: #b18b32;
+    background-color: #8a2524;
+    color: #fffdf7;
+}
+
+.portal-button-primary:hover,
+a.portal-button-primary:hover,
+input.portal-button-primary:hover,
+button.portal-button-primary:hover {
+    border-color: #641b1a;
+    background-color: #641b1a;
+    color: #fffdf7;
+}
+
+.portal-button-secondary,
+a.portal-button-secondary:link,
+a.portal-button-secondary:visited,
+a.portal-button-secondary:active,
+input.portal-button-secondary,
+button.portal-button-secondary {
+    border-color: #d8ceb5;
+    background-color: #fffdf7;
+    color: #8a2524;
+}
+
+.portal-button-compact {
+    padding: 4px 9px;
+    font-size: 13px;
+}
+
+.portal-page-section,
+.portal-detail-card,
+.portal-content-html,
+.portal-content-media,
+.portal-content-xml {
+    margin: 0 0 18px;
+    padding: 16px 18px;
+    border: 1px solid #d8ceb5;
+    background-color: #fffdf7;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(38, 43, 51, .09);
+    box-sizing: border-box;
+}
+
+.portal-page-heading-row {
+    display: table;
+    width: 100%;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d8ceb5;
+}
+
+.portal-page-title,
+.portal-page-actions {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.portal-page-title {
+    margin: 0;
+    color: #8a2524;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.portal-page-actions {
+    text-align: right;
+}
+
+.portal-content-html,
+.portal-content-xml,
+.portal-message-body {
+    color: #575044;
+    line-height: 1.75;
+}
+
+.portal-content-media {
+    text-align: center;
+}
+
+.portal-content-image {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+}
+
+.portal-content-xml {
+    overflow: auto;
+}
+
+.portal-content-item-meta,
+.portal-discussion-meta {
+    display: block;
+    margin-top: 5px;
+    color: #7b725f;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.portal-discussion-list,
+.portal-discussion-children {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.portal-discussion-children {
+    margin-left: 18px;
+}
+
+.portal-discussion-row {
+    margin: 0 0 8px;
+    padding: 10px 12px;
+    border: 1px solid #d8ceb5;
+    background-color: #fffdf7;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.portal-discussion-row-selected,
+.portal-discussion-reply {
+    background-color: #faf4e4;
+}
+
+.portal-discussion-toggle {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.portal-discussion-main {
+    display: inline-block;
+    max-width: 92%;
+    vertical-align: top;
+}
+
+.portal-discussion-title {
+    color: #8a2524;
+    font-weight: 700;
+}
+
+.portal-edit-panel {
+    margin-bottom: 16px;
+}
+
+.portal-field-stack {
+    margin-bottom: 12px;
+}
+
+.portal-field-stack-label,
+.portal-detail-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #8a2524;
+    font-weight: 700;
+}
+
+.portal-input {
+    width: 100% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.portal-detail-row {
+    margin-bottom: 8px;
+    color: #575044;
+    line-height: 1.6;
+}
+
+.portal-message-body {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #d8ceb5;
+}
 .portal-app-shell {
     min-height: 100%;
     background-color: #f5f3ee;

@@ -5,92 +5,54 @@
 
 <%--主要内容区域--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table cellspacing="0" cellpadding="0" width="600">
-        <tr>
-            <td align="left">
-                <span class="Head">Message Detail</span> <%-- 显示“消息详情”的标题 --%>
-            </td>
-            <td align="right">
-                <asp:Panel ID="ButtonPanel" runat="server"> <%-- 按钮面板 --%>
-                    <a class="CommandButton" id="prevItem" title="Previous Message" runat="server">
-                        <img src='<%=Global.GetApplicationPath(Request) + "/images/rew.gif"%>' border="0"></a>&nbsp; <%-- 上一条消息按钮 --%>
-                    <a class="CommandButton" id="nextItem" title="Next Message" runat="server">
-                        <img src='<%=Global.GetApplicationPath(Request) + "/images/fwd.gif"%>' border="0"></a>&nbsp; <%-- 下一条消息按钮 --%>
-                    <asp:LinkButton ID="ReplyBtn" runat="server" EnableViewState="false" CssClass="CommandButton"
-                        Text="Reply to this Message" OnClick="ReplyBtn_Click"></asp:LinkButton> <%-- 回复按钮 --%>
-                </asp:Panel>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <hr noshade size="1"> <%-- 分割线 --%>
-            </td>
-        </tr>
-    </table>
+    <div class="portal-page-section portal-discussion-detail">
+        <div class="portal-page-heading-row">
+            <h1 class="portal-page-title">Message Detail</h1>
+            <asp:Panel ID="ButtonPanel" CssClass="portal-page-actions" runat="server"> <%-- 按钮面板 --%>
+                <a class="portal-button portal-button-secondary portal-button-compact portal-icon-nav" id="prevItem" title="Previous Message" runat="server">Previous</a> <%-- 上一条消息按钮 --%>
+                <a class="portal-button portal-button-secondary portal-button-compact portal-icon-nav" id="nextItem" title="Next Message" runat="server">Next</a> <%-- 下一条消息按钮 --%>
+                <asp:LinkButton ID="ReplyBtn" runat="server" EnableViewState="false" CssClass="portal-button portal-button-primary portal-button-compact"
+                    Text="Reply to this Message" OnClick="ReplyBtn_Click"></asp:LinkButton> <%-- 回复按钮 --%>
+            </asp:Panel>
+        </div>
 
-    <%-- 编辑面板 --%>
-    <asp:Panel ID="EditPanel" runat="server" Visible="false">
-        <table cellspacing="0" cellpadding="4" width="600" border="0">
-            <tr valign="top">
-                <td class="SubHead" width="150">
-                    Title: <%-- 标题标签 --%>
-                </td>
-                <td rowspan="4">
-                    &nbsp;
-                </td>
-                <td width="*">
-                    <asp:TextBox ID="TitleField" runat="server" MaxLength="100" Columns="40" Width="500"
-                        CssClass="NormalTextBox"></asp:TextBox> <%-- 输入框用于编辑标题 --%>
-                </td>
-            </tr>
-            <tr valign="top">
-                <td class="SubHead">
-                    Body: <%-- 内容标签 --%>
-                </td>
-                <td width="*">
-                    <asp:TextBox ID="BodyField" runat="server" Columns="59" Width="500" Rows="15" TextMode="Multiline"></asp:TextBox> <%-- 多行输入框用于编辑内容 --%>
-                </td>
-            </tr>
-            <tr valign="top">
-                <td>
-                    &nbsp;
-                </td>
-                <td>
-                    <asp:LinkButton class="CommandButton" ID="updateButton" runat="server" Text="Submit"
-                        OnClick="UpdateBtn_Click"></asp:LinkButton> <%-- 提交按钮 --%>
-                    &nbsp;
-                    <asp:LinkButton class="CommandButton" ID="cancelButton" runat="server" Text="Cancel"
-                        CausesValidation="False" OnClick="CancelBtn_Click"></asp:LinkButton> <%-- 取消按钮 --%>
-                    &nbsp;
-                </td>
-            </tr>
-            <tr valign="top">
-                <td class="SubHead">
-                    Original Message: <%-- 原始消息标签 --%>
-                </td>
-                <td>
-                    &nbsp;
-                </td>
-            </tr>
-        </table>
-    </asp:Panel>
+        <%-- 编辑面板 --%>
+        <asp:Panel ID="EditPanel" CssClass="portal-edit-panel portal-detail-card" runat="server" Visible="false">
+            <div class="portal-field-stack">
+                <span class="portal-field-stack-label">Title:</span> <%-- 标题标签 --%>
+                <asp:TextBox ID="TitleField" runat="server" MaxLength="100" Columns="40" Width="500"
+                    CssClass="NormalTextBox portal-input"></asp:TextBox> <%-- 输入框用于编辑标题 --%>
+            </div>
+            <div class="portal-field-stack">
+                <span class="portal-field-stack-label">Body:</span> <%-- 内容标签 --%>
+                <asp:TextBox ID="BodyField" runat="server" Columns="59" Width="500" Rows="15" TextMode="Multiline" CssClass="portal-input"></asp:TextBox> <%-- 多行输入框用于编辑内容 --%>
+            </div>
+            <div class="portal-form-actions">
+                <asp:LinkButton CssClass="portal-button portal-button-primary" ID="updateButton" runat="server" Text="Submit"
+                    OnClick="UpdateBtn_Click"></asp:LinkButton> <%-- 提交按钮 --%>
+                <asp:LinkButton CssClass="portal-button portal-button-secondary" ID="cancelButton" runat="server" Text="Cancel"
+                    CausesValidation="False" OnClick="CancelBtn_Click"></asp:LinkButton> <%-- 取消按钮 --%>
+            </div>
+            <div class="portal-content-item-meta">Original Message:</div> <%-- 原始消息标签 --%>
+        </asp:Panel>
 
-    <%-- 消息内容展示区 --%>
-    <table cellspacing="0" cellpadding="4" width="600" border="0">
-        <tr valign="top">
-            <td class="Message" align="left">
-                <b>Subject: </b> <%-- 主题 --%>
+        <%-- 消息内容展示区 --%>
+        <div class="portal-detail-card portal-message-detail-card">
+            <div class="portal-detail-row">
+                <span class="portal-detail-label">Subject:</span> <%-- 主题 --%>
                 <asp:Label ID="Subject" runat="server"></asp:Label>
-                <br>
-                <b>Author: </b> <%-- 发布者 --%>
+            </div>
+            <div class="portal-detail-row">
+                <span class="portal-detail-label">Author:</span> <%-- 发布者 --%>
                 <asp:Label ID="CreatedByUser" runat="server"></asp:Label>
-                <br>
-                <b>Date: </b> <%-- 发布日期 --%>
+            </div>
+            <div class="portal-detail-row">
+                <span class="portal-detail-label">Date:</span> <%-- 发布日期 --%>
                 <asp:Label ID="CreatedDate" runat="server"></asp:Label>
-                <br>
-                <br>
+            </div>
+            <div class="portal-message-body">
                 <asp:Label ID="Body" runat="server"></asp:Label> <%-- 消息正文 --%>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>

@@ -23,21 +23,12 @@ namespace ASPNET.StarterKit.Portal {
         protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;
         
         /// <summary>
-        /// t1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable t1;
-        
-        /// <summary>
         /// HtmlHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell HtmlHolder;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl HtmlHolder;
     }
 }
