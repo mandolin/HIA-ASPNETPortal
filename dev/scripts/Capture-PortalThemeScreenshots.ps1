@@ -132,6 +132,48 @@ function Invoke-ScalarQuery {
     }
 }
 
+function Get-ContentTabTargets {
+    param([System.Data.SqlClient.SqlConnection]$Connection)
+
+    $command = $Connection.CreateCommand()
+    try {
+        $command.CommandText = @'
+WITH OrderedTabs AS
+(
+    SELECT
+        [TabId],
+        [TabName],
+        ROW_NUMBER() OVER (ORDER BY [TabOrder], [TabId]) - 1 AS [TabIndex]
+    FROM [dbo].[PortalCfg_Tabs]
+    WHERE [PortalId] = 1
+)
+SELECT [TabName], [TabId], [TabIndex]
+FROM OrderedTabs
+WHERE [TabName] IN (N'Employee Info', N'Product Info', N'Discussions', N'About the Portal')
+ORDER BY [TabIndex], [TabId]
+'@
+        $reader = $command.ExecuteReader()
+        try {
+            $targets = New-Object 'System.Collections.Generic.List[object]'
+            while ($reader.Read()) {
+                $targets.Add([pscustomobject]@{
+                    tabName = $reader.GetString(0)
+                    tabId = $reader.GetInt32(1)
+                    tabIndex = [Convert]::ToInt32($reader.GetValue(2), [System.Globalization.CultureInfo]::InvariantCulture)
+                })
+            }
+
+            return $targets
+        }
+        finally {
+            $reader.Dispose()
+        }
+    }
+    finally {
+        $command.Dispose()
+    }
+}
+
 function Get-SystemSettingSnapshot {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -313,9 +355,18 @@ const moduleDefinitionId = process.env.P7_THEME_MODULE_DEFINITION_ID;
 const moduleSettingsModuleId = process.env.P7_THEME_MODULE_SETTINGS_MODULE_ID;
 const moduleSettingsTabId = process.env.P7_THEME_MODULE_SETTINGS_TAB_ID;
 const tabLayoutTabId = process.env.P7_THEME_TAB_LAYOUT_TAB_ID;
+const contentTabsJson = process.env.P7_THEME_CONTENT_TABS || '[]';
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+
+function readEnvJson(value, fallback) {
+  try {
+    return JSON.parse(value);
+  } catch {
+    return fallback;
+  }
 }
 
 function joinUrl(relativeUrl) {
@@ -390,8 +441,8 @@ async function capture(page, target) {
   }
   // 中文：截图回归不能把拒绝访问页误判为目标页正常渲染。
   // English: The screenshot smoke must not treat access-denied fallbacks as successful target renders.
-  if (bodyText.includes('拒绝编辑') || bodyText.includes('访问被拒绝') ||
-      page.url().includes('AccessDenied.aspx') || page.url().includes('EditAccessDenied.aspx')) {
+  if (!target.allowAccessDenied && (bodyText.includes('拒绝编辑') || bodyText.includes('访问被拒绝') ||
+      page.url().includes('AccessDenied.aspx') || page.url().includes('EditAccessDenied.aspx'))) {
     throw new Error('Access denied page detected.');
   }
 
@@ -409,12 +460,29 @@ async function capture(page, target) {
 
 const p64 = fs.existsSync(p64Path) ? readJson(p64Path) : null;
 const p65 = fs.existsSync(p65Path) ? readJson(p65Path) : null;
+const contentTabs = readEnvJson(contentTabsJson, []);
 fs.mkdirSync(outputDir, { recursive: true });
 
 const anonymousTargets = [
   { id: 'home-anonymous', title: '匿名首页', role: 'anonymous', url: joinUrl('DesktopDefault.aspx') },
   { id: 'signin', title: '登录模块', role: 'anonymous', url: joinUrl('DesktopDefault.aspx?tabindex=0&tabid=0') }
 ];
+
+for (const tab of contentTabs) {
+  const id = `tab-${String(tab.tabName || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`.replace(/-$/g, '');
+  anonymousTargets.push({
+    id,
+    title: `${tab.tabName} 内容页`,
+    role: 'anonymous',
+    url: joinUrl(`DesktopDefault.aspx?tabindex=${encodeURIComponent(tab.tabIndex)}&tabid=${encodeURIComponent(tab.tabId)}`)
+  });
+}
+
+anonymousTargets.push(
+  { id: 'access-denied', title: '访问拒绝页', role: 'anonymous', url: joinUrl('Admin/AccessDenied.aspx'), allowAccessDenied: true },
+  { id: 'edit-access-denied', title: '编辑拒绝页', role: 'anonymous', url: joinUrl('Admin/EditAccessDenied.aspx'), allowAccessDenied: true },
+  { id: 'not-implemented', title: '未实现提示页', role: 'anonymous', url: joinUrl('Admin/NotImplemented.aspx?title=P7%20Theme%20Probe') }
+);
 
 if (p64?.tabUrl) {
   anonymousTargets.push({ id: 'p64-confirm-anonymous', title: '员工资料确认匿名态', role: 'anonymous', url: p64.tabUrl });
@@ -544,6 +612,7 @@ try {
     $connection = [System.Data.SqlClient.SqlConnection]::new($connectionString)
     $connection.Open()
     $settingSnapshot = Get-SystemSettingSnapshot -Connection $connection
+    $contentTabTargets = Get-ContentTabTargets -Connection $connection
     $p65Context = Get-Content -LiteralPath $P65ContextPath -Raw -Encoding UTF8 | ConvertFrom-Json
     $adminUserId = if ($p65Context.adminUserName) {
         Invoke-ScalarQuery -Connection $connection -Sql @'
@@ -617,6 +686,7 @@ ORDER BY CASE WHEN [TabName] = N'Home' THEN 0 ELSE 1 END, [TabOrder], [TabId]
         $env:P7_THEME_MODULE_SETTINGS_MODULE_ID = if ($null -eq $moduleSettingsModuleId) { '' } else { [string]$moduleSettingsModuleId }
         $env:P7_THEME_MODULE_SETTINGS_TAB_ID = if ($null -eq $moduleSettingsTabId) { '' } else { [string]$moduleSettingsTabId }
         $env:P7_THEME_TAB_LAYOUT_TAB_ID = if ($null -eq $tabLayoutTabId) { '' } else { [Convert]::ToString($tabLayoutTabId, [System.Globalization.CultureInfo]::InvariantCulture) }
+        $env:P7_THEME_CONTENT_TABS = if ($contentTabTargets.Count -eq 0) { '[]' } else { $contentTabTargets | ConvertTo-Json -Compress }
 
         $nodeOutput = & node $runtimeScript
         if ($LASTEXITCODE -ne 0) {
@@ -640,6 +710,7 @@ finally {
     Remove-Item Env:P7_THEME_MODULE_SETTINGS_MODULE_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_MODULE_SETTINGS_TAB_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_TAB_LAYOUT_TAB_ID -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_CONTENT_TABS -ErrorAction SilentlyContinue
 
     if ($connection) {
         if ($connection.State -eq [System.Data.ConnectionState]::Open) {

@@ -298,6 +298,131 @@ body.portal-theme-oalight .employee-profile-form-field {
     border-bottom: 1px solid #dbe7ec;
 }
 
+.portal-content-list {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.portal-content-list-item {
+    margin: 0 0 12px;
+    padding: 12px;
+    border: 1px solid #cbd9df;
+    background-color: #ffffff;
+}
+
+.portal-content-item-title-row,
+.portal-quicklinks-header {
+    display: table;
+    width: 100%;
+}
+
+.portal-content-item-title,
+.portal-quicklinks-title {
+    display: table-cell;
+    color: #155263;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.portal-content-edit-action {
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.portal-content-item-summary {
+    margin-top: 8px;
+    color: #51646c;
+    line-height: 1.65;
+}
+
+.portal-content-item-actions {
+    margin-top: 10px;
+}
+
+.portal-text-action,
+.portal-content-link-title {
+    font-weight: 700;
+}
+
+.portal-content-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #cbd9df;
+    background-color: #ffffff;
+}
+
+.portal-content-table {
+    min-width: 620px;
+}
+
+.portal-content-action-cell {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.portal-content-link-list {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.portal-content-link-row {
+    padding: 8px 0;
+    border-bottom: 1px solid #dbe7ec;
+}
+
+.portal-content-link-row:last-child {
+    border-bottom: 0;
+}
+
+.portal-content-link-main {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.portal-disabled-text {
+    color: #74868d;
+}
+
+.portal-quicklinks {
+    padding-top: 10px;
+    border-top: 1px solid #dbe7ec;
+}
+
+.portal-quicklinks-header {
+    margin-bottom: 8px;
+}
+
+.portal-quicklinks-header .portal-content-edit-action {
+    display: table-cell;
+    width: 1%;
+    text-align: right;
+}
+
+.portal-static-message {
+    max-width: 760px;
+    margin: 20px auto;
+    padding: 22px;
+    border: 1px solid #cbd9df;
+    background-color: #ffffff;
+    box-shadow: 0 8px 22px rgba(38, 50, 56, .08);
+}
+
+.portal-static-message-title {
+    margin-bottom: 12px;
+    color: #155263;
+}
+
+.portal-static-message-body {
+    margin-bottom: 18px;
+    color: #51646c;
+    line-height: 1.7;
+}
+
+.portal-static-message-action {
+    display: inline-block;
+}
+
 .portal-app-shell {
     min-height: 100%;
     background-color: #eef3f7;

@@ -7,25 +7,27 @@
 <%-- 开始定义用户控件的 HTML 输出 --%>
 <ASPNETPortal:title EditText="Add New Document" EditUrl="~/DesktopModules/EditDocs.aspx" runat="server" id=Title1 />
 
-<%-- 使用 Repeater 输出表格，避免旧 DataGrid 模板列在当前运行时触发解析兼容问题。 --%>
+<%-- 中文 / English: 文档列表仍按数据表格呈现，外层提供主题化滚动与边框。 --%>
+<div class="portal-content-table-wrap">
 <asp:Repeater ID="myDataGrid" EnableViewState="false" runat="server">
     <HeaderTemplate>
-        <table border="0" width="100%">
+        <table class="portal-data-table portal-content-table" cellspacing="0" cellpadding="0" border="0" width="100%">
             <tr>
-                <td></td>
-                <td class="NormalBold">Title</td>
-                <td class="NormalBold">Owner</td>
-                <td class="NormalBold">Area</td>
-                <td class="NormalBold">Last Updated</td>
+                <th></th>
+                <th>Title</th>
+                <th>Owner</th>
+                <th>Area</th>
+                <th>Last Updated</th>
             </tr>
     </HeaderTemplate>
     <ItemTemplate>
             <tr>
-                <td>
+                <td class="portal-content-action-cell">
                     <%-- 编辑链接只在当前用户具备模块编辑权限时显示。 --%>
                     <asp:HyperLink
                         ID="editLink"
-                        ImageUrl="~/images/edit.gif"
+                        CssClass="CommandButton portal-content-edit-action"
+                        Text="Edit"
                         NavigateUrl='<%# "~/DesktopModules/EditDocs.aspx?ItemID=" + DataBinder.Eval(Container.DataItem, "ItemID") + "&mid=" + ModuleId %>'
                         Visible="<%# IsEditable %>"
                         runat="server" />
@@ -48,3 +50,4 @@
         </table>
     </FooterTemplate>
 </asp:Repeater>
+</div>

@@ -1,31 +1,14 @@
 <%@ Page Language="c#" CodeBehind="AccessDenied.aspx.cs" AutoEventWireup="True"
     Inherits="ASPNET.StarterKit.Portal.AccessDenied" MasterPageFile="../Default.master" %>
 
-<%@ OutputCache Duration="36000" VaryByParam="none" %>
 <%@ Import Namespace="ASPNET.StarterKit.Portal" %>
 <%@ Import Namespace="Resources" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table width="500" border="0">
-        <tbody>
-            <tr>
-                <td class="Normal">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <span class="Head">
-                        <%=lang.Admin_AccessDenied_AccessDenied%></span>
-                    <br />
-                    <br />
-                    <hr noshade="noshade" size="1" />
-                    <br />
-                    <%=lang.Admin_AccessDenied_DeniedAbout%>
-                    <br />
-                    <br />
-                    <a href="<%=Global.GetApplicationPath(Request)%>/DesktopDefault.aspx">
-                        <%=lang.Admin_AccessDenied_ReturnToHome%></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <%-- 中文 / English: 静态拒绝访问页改为主题化消息块，避免继续使用旧固定宽度表格。 --%>
+    <div class="portal-static-message portal-static-message-warning">
+        <div class="Head portal-static-message-title"><%=lang.Admin_AccessDenied_AccessDenied%></div>
+        <div class="Normal portal-static-message-body"><%=lang.Admin_AccessDenied_DeniedAbout%></div>
+        <a class="CommandButton portal-static-message-action" href="<%=Global.GetApplicationPath(Request)%>/DesktopDefault.aspx">
+            <%=lang.Admin_AccessDenied_ReturnToHome%></a>
+    </div>
 </asp:Content>

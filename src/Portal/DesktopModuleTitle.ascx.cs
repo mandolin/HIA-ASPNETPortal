@@ -58,17 +58,22 @@ namespace ASPNET.StarterKit.Portal
             // 设置模块标题文本，显示在控件中的Label（ModuleTitle）上
             // Display Modular Title Text and Edit Buttons
             ModuleTitle.Text = portalModule.ModuleConfiguration.ModuleTitle;
+            EditButton.Visible = false;
 
             // 检查是否应显示编辑按钮
             // Display the Edit button if the parent portalmodule has configured the PortalModuleTitle User Control
             // to display it -- and the current client has edit access permissions
-            if (portalSettings.AlwaysShowEditButton ||
-                (PortalSecurity.IsInRoles(portalModule.ModuleConfiguration.AuthorizedEditRoles)) && (EditText != null))
+            // 中文：没有实际文本的编辑入口不能渲染为空按钮；否则 P7 主题下会出现无意义的空框。
+            // English: Edit actions without text must stay hidden; otherwise P7 themes render meaningless empty buttons.
+            if (!string.IsNullOrWhiteSpace(EditText) &&
+                (portalSettings.AlwaysShowEditButton ||
+                 PortalSecurity.IsInRoles(portalModule.ModuleConfiguration.AuthorizedEditRoles)))
             {
                 // 如果条件满足，设置编辑按钮的文本、导航URL和目标窗口
                 EditButton.Text = EditText;
                 EditButton.NavigateUrl = EditUrl + "?mid=" + portalModule.ModuleId;
                 EditButton.Target = EditTarget;
+                EditButton.Visible = true;
             }
         }
     }
