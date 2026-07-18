@@ -114,12 +114,6 @@
                                         Text="Edit"
                                         NavigateUrl='<%# Eval("EditUrl") %>'
                                         runat="server" />
-                                    &nbsp;
-                                    <asp:HyperLink
-                                        CssClass="CommandButton"
-                                        Text="Bind"
-                                        NavigateUrl='<%# Eval("BindUrl") %>'
-                                        runat="server" />
                                 </td>
                             </tr>
                     </ItemTemplate>
@@ -144,7 +138,7 @@
                                 <td>Organization</td>
                                 <td width="95">Status</td>
                                 <td width="90">Source</td>
-                                <td width="70">Action</td>
+                                <td width="100">Action</td>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -161,6 +155,13 @@
                                         CssClass="CommandButton"
                                         Text="Edit"
                                         NavigateUrl='<%# Eval("EditUrl") %>'
+                                        runat="server" />
+                                    <%-- 员工账号绑定以员工行为入口，避免组织行误引用不存在的绑定地址。 --%>
+                                    &nbsp;
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="Bind"
+                                        NavigateUrl='<%# Eval("BindUrl") %>'
                                         runat="server" />
                                 </td>
                             </tr>
