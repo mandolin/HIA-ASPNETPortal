@@ -5,150 +5,109 @@
     Inherits="ASPNET.StarterKit.Portal.ModuleDefinitions" 
     MasterPageFile="~/Default.master" %>
 
-<%--
-    The ModuleDefinitions.aspx page is used to create and edit module definitions within
-    the Portal application.
---%>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 主要表格布局 --%>
-    <table width="98%" cellspacing="0" cellpadding="4" border="0">
-        <tr valign="top">
-            <td width="150">
-                &nbsp;
-            </td>
-            <td width="*">
-                <%-- 标题表格 --%>
-                <table width="500" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="left" class="Head">
-                            Module Type Definition
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <hr noshade size="1">
-                        </td>
-                    </tr>
-                </table>
+    <%-- 中文 / English: 历史模块定义页只维护名称和受保护删除，路径字段保持只读安全边界。 --%>
+    <div class="portal-admin-page portal-admin-module-definition-edit">
+        <div class="portal-admin-header">
+            <div class="portal-admin-heading">
+                <h1 class="Head portal-admin-title">Module Type Definition</h1>
+                <p class="Normal portal-admin-subtitle">Legacy definition maintenance for trusted deployed modules.</p>
+            </div>
+            <div class="portal-admin-actions">
+                <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
+                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+            </div>
+        </div>
 
-                <asp:Label ID="MessageLabel" CssClass="NormalRed" EnableViewState="false" runat="server" />
+        <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
 
-                <%-- 输入表单 --%>
-                <table width="750" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                        <td width="100" class="SubHead">
-                            Friendly Name:  <%-- 友好名称 --%>
-                        </td>
-                        <td rowspan="5">
-                            &nbsp;
-                        </td>
-                        <td>
-                            <%-- 友好名称输入框 --%>
-                            <asp:TextBox 
-                                ID="FriendlyName" 
-                                CssClass="NormalTextBox" 
-                                Width="390" 
-                                Columns="30" 
-                                MaxLength="150" 
-                                runat="server" />
-                        </td>
-                        <td width="25" rowspan="5">
-                            &nbsp;
-                        </td>
-                        <td class="Normal" width="250">
-                            <%-- 必填字段验证器 --%>
-                            <asp:RequiredFieldValidator 
-                                ID="Req1" 
-                                Display="Static" 
-                                ErrorMessage="Enter a Module Name" 
-                                ControlToValidate="FriendlyName" 
-                                runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead" nowrap>
-                            Desktop Source:  <%-- 桌面源路径 --%>
-                        </td>
-                        <td>
-                            <%-- 桌面源路径输入框 --%>
-                            <asp:TextBox 
-                                ID="DesktopSrc" 
-                                CssClass="NormalTextBox" 
-                                Width="390" 
-                                Columns="30" 
-                                MaxLength="150" 
-                                runat="server" />
-                        </td>
-                        <td class="Normal">
-                            <%-- 必填字段验证器 --%>
-                            <asp:RequiredFieldValidator 
-                                ID="Req2" 
-                                Display="Static" 
-                                ErrorMessage="You Must Enter Source Path for the Desktop Module" 
-                                ControlToValidate="DesktopSrc" 
-                                runat="server" />
-                            <asp:CustomValidator
-                                ID="DesktopSrcPathValidator"
-                                Display="Static"
-                                ErrorMessage="Desktop Source must be a relative .ascx path under DesktopModules/ or Admin/."
-                                ControlToValidate="DesktopSrc"
-                                OnServerValidate="DesktopSrcPathValidator_ServerValidate"
-                                runat="server" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="SubHead">
-                            Mobile Source:  <%-- 移动端源路径 --%>
-                        </td>
-                        <td>
-                            <%-- 移动端源路径输入框 --%>
-                            <asp:TextBox 
-                                ID="MobileSrc" 
-                                CssClass="NormalTextBox" 
-                                Width="390" 
-                                Columns="30" 
-                                MaxLength="150" 
-                                runat="server" />
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                </table>
+        <div class="portal-status-strip">
+            <div class="Normal portal-status-line">
+                New module definitions should be registered from verified packages in Module Catalog.
+            </div>
+            <div class="Normal portal-status-line">
+                Desktop and mobile source paths are read-only here to preserve the trusted deployment boundary.
+            </div>
+        </div>
 
-                <%-- 按钮区域 --%>
-                <p>
-                    <%-- 更新按钮 --%>
-                    <asp:LinkButton 
-                        ID="updateButton" 
-                        Text="Update" 
-                        runat="server" 
-                        class="CommandButton" 
-                        BorderStyle="none" 
-                        OnClick="UpdateBtn_Click" />
-                    &nbsp;
-                    <%-- 取消按钮 --%>
-                    <asp:LinkButton 
-                        ID="cancelButton" 
-                        Text="Cancel" 
-                        CausesValidation="False" 
-                        runat="server" 
-                        class="CommandButton" 
-                        BorderStyle="none" 
-                        OnClick="CancelBtn_Click" />
-                    &nbsp;
-                    <%-- 删除按钮 --%>
-                    <asp:LinkButton 
-                        ID="deleteButton" 
-                        Text="Delete this module type" 
-                        CausesValidation="False" 
-                        runat="server" 
-                        class="CommandButton" 
-                        BorderStyle="none" 
-                        OnClick="DeleteBtn_Click" />
-                </p>
-            </td>
-        </tr>
-    </table>
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title">Definition Metadata</h2>
+            </div>
+            <div class="portal-form-grid">
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label">Friendly Name</span>
+                    <asp:TextBox
+                        ID="FriendlyName"
+                        CssClass="NormalTextBox portal-form-input"
+                        Columns="30"
+                        MaxLength="150"
+                        runat="server" />
+                    <span class="NormalRed portal-field-value">
+                        <asp:RequiredFieldValidator
+                            ID="Req1"
+                            Display="Dynamic"
+                            ErrorMessage="Enter a Module Name"
+                            ControlToValidate="FriendlyName"
+                            runat="server" />
+                    </span>
+                </div>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label">Desktop Source</span>
+                    <asp:TextBox
+                        ID="DesktopSrc"
+                        CssClass="NormalTextBox portal-form-input"
+                        Columns="30"
+                        MaxLength="150"
+                        runat="server" />
+                    <span class="NormalRed portal-field-value">
+                        <asp:RequiredFieldValidator
+                            ID="Req2"
+                            Display="Dynamic"
+                            ErrorMessage="You Must Enter Source Path for the Desktop Module"
+                            ControlToValidate="DesktopSrc"
+                            runat="server" />
+                        <asp:CustomValidator
+                            ID="DesktopSrcPathValidator"
+                            Display="Dynamic"
+                            ErrorMessage="Desktop Source must be a relative .ascx path under DesktopModules/ or Admin/."
+                            ControlToValidate="DesktopSrc"
+                            OnServerValidate="DesktopSrcPathValidator_ServerValidate"
+                            runat="server" />
+                    </span>
+                </div>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label">Mobile Source</span>
+                    <asp:TextBox
+                        ID="MobileSrc"
+                        CssClass="NormalTextBox portal-form-input"
+                        Columns="30"
+                        MaxLength="150"
+                        runat="server" />
+                </div>
+            </div>
+            <div class="portal-form-actions">
+                <asp:LinkButton
+                    ID="updateButton"
+                    Text="Update"
+                    runat="server"
+                    CssClass="CommandButton portal-primary-action"
+                    OnClick="UpdateBtn_Click" />
+                <asp:LinkButton
+                    ID="cancelButton"
+                    Text="Cancel"
+                    CausesValidation="False"
+                    runat="server"
+                    CssClass="CommandButton"
+                    OnClick="CancelBtn_Click" />
+                <asp:LinkButton
+                    ID="deleteButton"
+                    Text="Delete this module type"
+                    CausesValidation="False"
+                    runat="server"
+                    CssClass="CommandButton"
+                    OnClick="DeleteBtn_Click" />
+            </div>
+        </div>
+    </div>
 </asp:Content>

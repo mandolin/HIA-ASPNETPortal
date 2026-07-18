@@ -309,6 +309,9 @@ const p64Path = process.env.P7_THEME_P64_CONTEXT;
 const p65Path = process.env.P7_THEME_P65_CONTEXT;
 const adminUserId = process.env.P7_THEME_ADMIN_USER_ID;
 const roleId = process.env.P7_THEME_ROLE_ID;
+const moduleDefinitionId = process.env.P7_THEME_MODULE_DEFINITION_ID;
+const moduleSettingsModuleId = process.env.P7_THEME_MODULE_SETTINGS_MODULE_ID;
+const moduleSettingsTabId = process.env.P7_THEME_MODULE_SETTINGS_TAB_ID;
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -351,6 +354,12 @@ async function capture(page, target) {
   const html = await page.content().catch(() => '');
   if (bodyText.includes('应用程序暂时无法完成请求') || page.url().includes('GenericErrorPage.aspx')) {
     throw new Error('Generic error page detected.');
+  }
+  // 中文：截图回归不能把拒绝访问页误判为目标页正常渲染。
+  // English: The screenshot smoke must not treat access-denied fallbacks as successful target renders.
+  if (bodyText.includes('拒绝编辑') || bodyText.includes('访问被拒绝') ||
+      page.url().includes('AccessDenied.aspx') || page.url().includes('EditAccessDenied.aspx')) {
+    throw new Error('Access denied page detected.');
   }
 
   const expectedThemeClass = `portal-theme-${theme.toLowerCase()}`;
@@ -404,6 +413,14 @@ if (adminUserId) {
   adminTargets.push({ id: 'admin-manage-users', title: '管理用户后台', role: 'admin', url: joinUrl(`Admin/ManageUsers.aspx?userId=${encodeURIComponent(adminUserId)}`) });
 }
 
+if (moduleDefinitionId) {
+  adminTargets.push({ id: 'admin-module-definitions', title: '模块定义编辑后台', role: 'admin', url: joinUrl(`Admin/ModuleDefinitions.aspx?defid=${encodeURIComponent(moduleDefinitionId)}`) });
+}
+
+if (moduleSettingsModuleId && moduleSettingsTabId) {
+  adminTargets.push({ id: 'admin-module-settings', title: '模块实例设置后台', role: 'admin', url: joinUrl(`Admin/ModuleSettings.aspx?mid=${encodeURIComponent(moduleSettingsModuleId)}&tabid=${encodeURIComponent(moduleSettingsTabId)}`) });
+}
+
 const boundTargets = [];
 if (p64?.tabUrl) {
   boundTargets.push({ id: 'p64-confirm-bound', title: '员工资料确认绑定用户态', role: 'bound-user', url: p64.tabUrl, data: p64, userName: p64.boundUserName });
@@ -415,6 +432,21 @@ if (p65?.tabUrl) {
 const browser = await chromium.launch({ headless: true });
 const results = [];
 
+// 中文：摘要文件只记录截图索引字段，避免把登录密码等上下文写入 WorkZone。
+// English: Summary output keeps only screenshot index fields and never serializes sign-in context.
+function createCaptureResult(target, fileName, status, detail) {
+  return {
+    theme,
+    id: target.id,
+    title: target.title,
+    role: target.role,
+    url: target.url,
+    fileName: fileName || '',
+    status,
+    detail: detail || ''
+  };
+}
+
 async function runCaptureGroup(targets, signedIn) {
   const { context, page } = await openPage(browser);
   try {
@@ -425,9 +457,9 @@ async function runCaptureGroup(targets, signedIn) {
     for (const target of targets) {
       try {
         const fileName = await capture(page, target);
-        results.push({ theme, ...target, fileName, status: 'Pass', detail: '' });
+        results.push(createCaptureResult(target, fileName, 'Pass', ''));
       } catch (error) {
-        results.push({ theme, ...target, status: 'Fail', detail: error instanceof Error ? error.message : String(error) });
+        results.push(createCaptureResult(target, '', 'Fail', error instanceof Error ? error.message : String(error)));
       }
     }
   } finally {
@@ -438,7 +470,9 @@ async function runCaptureGroup(targets, signedIn) {
 try {
   await runCaptureGroup(anonymousTargets, null);
   if (p65?.adminUserName) {
-    await runCaptureGroup(adminTargets, { data: p65, userName: p65.adminUserName });
+    for (const target of adminTargets) {
+      await runCaptureGroup([target], { data: p65, userName: p65.adminUserName });
+    }
   }
   for (const target of boundTargets) {
     await runCaptureGroup([target], { data: target.data, userName: target.userName });
@@ -495,6 +529,33 @@ ORDER BY CASE WHEN [RoleName] = N'TestRole' THEN 0 ELSE 1 END, [RoleID]
 '@ -Configure {
         param($command)
     }
+    $moduleDefinitionId = Invoke-ScalarQuery -Connection $connection -Sql @'
+SELECT TOP (1) [ModuleDefId]
+FROM [dbo].[PortalCfg_ModuleDefinitions]
+ORDER BY [ModuleDefId]
+'@ -Configure {
+        param($command)
+    }
+    $moduleSettingsProbe = Invoke-ScalarQuery -Connection $connection -Sql @'
+SELECT TOP (1)
+    CONVERT(nvarchar(20), [ModuleId]) + N'|' + CONVERT(nvarchar(20), [TabId])
+FROM [dbo].[PortalCfg_Modules]
+WHERE [ModuleId] > 0
+  AND [TabId] IS NOT NULL
+  AND [TabId] > 0
+ORDER BY [TabId], [ModuleOrder], [ModuleId]
+'@ -Configure {
+        param($command)
+    }
+    $moduleSettingsModuleId = $null
+    $moduleSettingsTabId = $null
+    if (-not [string]::IsNullOrWhiteSpace($moduleSettingsProbe)) {
+        $parts = ([string]$moduleSettingsProbe).Split('|')
+        if ($parts.Length -eq 2) {
+            $moduleSettingsModuleId = $parts[0]
+            $moduleSettingsTabId = $parts[1]
+        }
+    }
 
     foreach ($theme in $Themes) {
         Write-Host ("[INFO] Capturing theme {0}" -f $theme)
@@ -507,6 +568,9 @@ ORDER BY CASE WHEN [RoleName] = N'TestRole' THEN 0 ELSE 1 END, [RoleID]
         $env:P7_THEME_P65_CONTEXT = (Resolve-Path -LiteralPath $P65ContextPath).Path
         $env:P7_THEME_ADMIN_USER_ID = if ($null -eq $adminUserId) { '' } else { [Convert]::ToString($adminUserId, [System.Globalization.CultureInfo]::InvariantCulture) }
         $env:P7_THEME_ROLE_ID = if ($null -eq $roleId) { '' } else { [Convert]::ToString($roleId, [System.Globalization.CultureInfo]::InvariantCulture) }
+        $env:P7_THEME_MODULE_DEFINITION_ID = if ($null -eq $moduleDefinitionId) { '' } else { [Convert]::ToString($moduleDefinitionId, [System.Globalization.CultureInfo]::InvariantCulture) }
+        $env:P7_THEME_MODULE_SETTINGS_MODULE_ID = if ($null -eq $moduleSettingsModuleId) { '' } else { [string]$moduleSettingsModuleId }
+        $env:P7_THEME_MODULE_SETTINGS_TAB_ID = if ($null -eq $moduleSettingsTabId) { '' } else { [string]$moduleSettingsTabId }
 
         $nodeOutput = & node $runtimeScript
         if ($LASTEXITCODE -ne 0) {
@@ -526,6 +590,9 @@ finally {
     Remove-Item Env:P7_THEME_P65_CONTEXT -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_ADMIN_USER_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_ROLE_ID -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_MODULE_DEFINITION_ID -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_MODULE_SETTINGS_MODULE_ID -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_MODULE_SETTINGS_TAB_ID -ErrorAction SilentlyContinue
 
     if ($connection) {
         if ($connection.State -eq [System.Data.ConnectionState]::Open) {
