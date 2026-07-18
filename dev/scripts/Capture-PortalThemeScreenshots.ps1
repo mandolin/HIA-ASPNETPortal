@@ -323,14 +323,28 @@ function joinUrl(relativeUrl) {
 }
 
 async function signIn(page, data, userName) {
-  await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-  await page.locator('input[id$="EmailOrName"]').fill(userName);
-  await page.locator('input[id$="password"]').fill(data.password);
-  await Promise.all([
-    page.waitForLoadState('domcontentloaded'),
-    page.locator('input[id$="SigninBtn"]').click()
-  ]);
-  await page.waitForTimeout(600);
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await page.locator('input[id$="EmailOrName"]').fill(userName);
+    await page.locator('input[id$="password"]').fill(data.password);
+    await Promise.all([
+      page.waitForLoadState('domcontentloaded').catch(() => {}),
+      page.locator('input[id$="SigninBtn"]').click()
+    ]);
+    await page.waitForTimeout(900);
+
+    const bodyText = await page.locator('body').innerText().catch(() => '');
+    if (bodyText.includes(`欢迎 ${userName}`) || bodyText.includes('Logoff') || bodyText.includes('注销')) {
+      return;
+    }
+
+    // 中文：后台截图必须基于真实登录态；偶发登录未完成时重试一次，不把拒绝访问页当作目标页。
+    // English: Admin screenshots require a verified signed-in state; retry once for transient incomplete sign-in.
+    await page.context().clearCookies().catch(() => {});
+    await page.waitForTimeout(800);
+  }
+
+  throw new Error(`Sign-in did not complete for ${userName}.`);
 }
 
 async function openPage(browser) {

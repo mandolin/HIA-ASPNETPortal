@@ -1,7 +1,9 @@
 .employee-profile-confirm {
     border: 1px solid #d8dee8;
     padding: 12px;
-    max-width: 720px;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
     background: #fff;
 }
 
@@ -36,4 +38,33 @@
 
 .employee-profile-confirm-actions {
     margin-top: 12px;
+}
+
+.employee-profile-field-grid {
+    margin: -10px 0 0 -12px;
+}
+
+.employee-profile-field {
+    display: inline-block;
+    width: 210px;
+    max-width: 100%;
+    margin: 10px 0 0 12px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #edf1f5;
+    vertical-align: top;
+}
+
+.employee-profile-field-wide {
+    width: 320px;
+}
+
+.employee-profile-field-label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.employee-profile-field-value {
+    display: block;
+    min-height: 22px;
+    word-break: break-word;
 }

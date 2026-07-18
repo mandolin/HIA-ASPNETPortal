@@ -291,7 +291,9 @@ body.portal-theme-oadark .employee-profile-confirm-table td,
 body.portal-theme-oadark .employee-profile-correction-table td,
 body.portal-theme-oadark .employee-profile-correction-form td,
 body.portal-theme-oadark .employee-profile-correction-list td,
-body.portal-theme-oadark .employee-profile-correction-list th {
+body.portal-theme-oadark .employee-profile-correction-list th,
+body.portal-theme-oadark .employee-profile-field,
+body.portal-theme-oadark .employee-profile-form-field {
     border-bottom: 1px solid #324b54;
 }
 

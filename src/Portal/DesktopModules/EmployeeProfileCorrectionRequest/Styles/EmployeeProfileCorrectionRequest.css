@@ -1,7 +1,9 @@
 .employee-profile-correction {
     border: 1px solid #d8dee8;
     padding: 12px;
-    max-width: 820px;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
     background: #fff;
 }
 
@@ -45,4 +47,58 @@
     width: 120px;
     color: #41556b;
     font-weight: 700;
+}
+
+.employee-profile-field-grid,
+.employee-profile-form-grid {
+    margin: -10px 0 0 -12px;
+}
+
+.employee-profile-field,
+.employee-profile-form-field {
+    display: inline-block;
+    width: 210px;
+    max-width: 100%;
+    margin: 10px 0 0 12px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #edf1f5;
+    vertical-align: top;
+}
+
+.employee-profile-field-wide,
+.employee-profile-form-field-wide {
+    width: 360px;
+}
+
+.employee-profile-field-label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.employee-profile-field-value {
+    display: block;
+    min-height: 22px;
+    word-break: break-word;
+}
+
+.employee-profile-correction-input {
+    width: 100%;
+    max-width: 360px;
+    box-sizing: border-box;
+}
+
+.employee-profile-correction-note {
+    min-height: 82px;
+}
+
+.employee-profile-correction-actions {
+    margin: 12px 0 0 12px;
+}
+
+.employee-profile-list-wrap {
+    overflow: auto;
+}
+
+.employee-profile-correction-list {
+    min-width: 680px;
 }
