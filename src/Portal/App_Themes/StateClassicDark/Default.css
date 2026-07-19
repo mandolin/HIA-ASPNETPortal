@@ -341,6 +341,12 @@ body.portal-theme-stateclassicdark .employee-profile-correction-label {
     color: #dfb35c;
 }
 
+body.portal-theme-stateclassicdark .employee-profile-confirm-message,
+body.portal-theme-stateclassicdark .employee-profile-correction-message {
+    color: #ff9c99;
+    font-weight: 700;
+}
+
 body.portal-theme-stateclassicdark .employee-profile-confirm-table td,
 body.portal-theme-stateclassicdark .employee-profile-correction-table td,
 body.portal-theme-stateclassicdark .employee-profile-correction-form td,

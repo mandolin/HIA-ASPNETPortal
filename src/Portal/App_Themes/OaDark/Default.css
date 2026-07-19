@@ -340,6 +340,12 @@ body.portal-theme-oadark .employee-profile-correction-label {
     color: #95dce8;
 }
 
+body.portal-theme-oadark .employee-profile-confirm-message,
+body.portal-theme-oadark .employee-profile-correction-message {
+    color: #ff9b9b;
+    font-weight: 700;
+}
+
 body.portal-theme-oadark .employee-profile-confirm-table td,
 body.portal-theme-oadark .employee-profile-correction-table td,
 body.portal-theme-oadark .employee-profile-correction-form td,
