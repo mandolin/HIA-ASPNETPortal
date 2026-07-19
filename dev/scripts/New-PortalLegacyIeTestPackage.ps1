@@ -412,6 +412,65 @@ function Get-ElementsByTagNameCompat {
     }
 }
 
+function Get-ElementAttributeCompat {
+    param(
+        [object]$Element,
+        [string]$Name
+    )
+
+    try {
+        $value = $Element.getAttribute($Name)
+        if ($null -ne $value) {
+            return [string]$value
+        }
+    }
+    catch {
+    }
+
+    try {
+        $value = $Element.$Name
+        if ($null -ne $value) {
+            return [string]$value
+        }
+    }
+    catch {
+    }
+
+    return ''
+}
+
+function Test-EndsWithIgnoreCase {
+    param(
+        [string]$Value,
+        [string]$Suffix
+    )
+
+    if ([string]::IsNullOrEmpty($Value) -or [string]::IsNullOrEmpty($Suffix)) {
+        return $false
+    }
+
+    return $Value.ToLowerInvariant().EndsWith($Suffix.ToLowerInvariant())
+}
+
+function Write-InputInventory {
+    param([object]$Document)
+
+    try {
+        $inputs = Get-ElementsByTagNameCompat -Document $Document -TagName 'input'
+        $index = 0
+        foreach ($input in $inputs) {
+            $id = Get-ElementAttributeCompat -Element $input -Name 'id'
+            $name = Get-ElementAttributeCompat -Element $input -Name 'name'
+            $type = Get-ElementAttributeCompat -Element $input -Name 'type'
+            Write-Log ('INPUT {0}: id={1}; name={2}; type={3}' -f $index, $id, $name, $type)
+            $index++
+        }
+    }
+    catch {
+        Write-Log ('WARN input inventory failed: ' + $_.Exception.Message)
+    }
+}
+
 function Find-InputByIdSuffix {
     param(
         [object]$Document,
@@ -421,8 +480,10 @@ function Find-InputByIdSuffix {
     $inputs = Get-ElementsByTagNameCompat -Document $Document -TagName 'input'
     foreach ($input in $inputs) {
         try {
-            $id = [string]$input.id
-            if (-not [string]::IsNullOrEmpty($id) -and $id.EndsWith($Suffix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $id = Get-ElementAttributeCompat -Element $input -Name 'id'
+            $name = Get-ElementAttributeCompat -Element $input -Name 'name'
+            if ((Test-EndsWithIgnoreCase -Value $id -Suffix $Suffix) -or
+                (Test-EndsWithIgnoreCase -Value $name -Suffix $Suffix)) {
                 return $input
             }
         }
@@ -472,6 +533,7 @@ function Invoke-PortalLogin {
     $plainPassword = ConvertTo-PlainText -SecureText $securePassword
 
     Write-Log 'LOGIN finding fields.'
+    Write-InputInventory -Document $Ie.Document
     $userInput = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'EmailOrName'
     $passwordInput = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'password'
     $button = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'SigninBtn'
