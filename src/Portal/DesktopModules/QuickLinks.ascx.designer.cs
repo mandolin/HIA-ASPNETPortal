@@ -9,10 +9,19 @@
 //------------------------------------------------------------------------------
 
 namespace ASPNET.StarterKit.Portal {
-    
-    
+
+
     public partial class QuickLinks {
-        
+
+        /// <summary>
+        /// QuickLinkActions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel QuickLinkActions;
+
         /// <summary>
         /// EditButton control.
         /// </summary>
@@ -21,7 +30,7 @@ namespace ASPNET.StarterKit.Portal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink EditButton;
-        
+
         /// <summary>
         /// myDataList control.
         /// </summary>

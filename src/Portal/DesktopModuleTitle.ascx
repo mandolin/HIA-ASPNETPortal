@@ -7,8 +7,13 @@
    (if such a page has been configured).
 --%>
 
-<%-- 中文：P7.4 模块标题改为语义化容器，避免标题栏继续受旧 table 结构限制。English: P7.4 uses semantic containers for module titles so the header is no longer constrained by legacy table layout. --%>
+<%-- 中文：P8.3 模块标题正式拆为标题区和动作区，后续模块可逐步复用同一套语义契约。
+     English: P8.3 splits module headers into title and action areas so modules can gradually share one semantic contract. --%>
 <div class="portal-module-header">
-    <asp:label id="ModuleTitle" cssclass="Head portal-module-heading" EnableViewState="false" runat="server" />
-    <asp:hyperlink id="EditButton" cssclass="CommandButton portal-module-action" EnableViewState="false" runat="server" />
+    <div class="portal-module-title-wrap">
+        <asp:label id="ModuleTitle" cssclass="Head portal-module-title portal-module-heading" EnableViewState="false" runat="server" />
+    </div>
+    <asp:Panel id="ModuleActions" cssclass="portal-module-actions" EnableViewState="false" runat="server">
+        <asp:hyperlink id="EditButton" cssclass="CommandButton portal-module-action portal-secondary-action" EnableViewState="false" runat="server" />
+    </asp:Panel>
 </div>

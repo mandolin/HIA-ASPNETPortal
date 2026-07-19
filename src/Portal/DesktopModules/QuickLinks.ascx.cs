@@ -29,12 +29,15 @@ namespace ASPNET.StarterKit.Portal
 
             // 中文：快捷链接新增入口默认隐藏，避免匿名浏览时渲染空按钮框。
             // English: Hide the quick-link add action by default so anonymous browsing does not render an empty button.
+            QuickLinkActions.Visible = false;
             EditButton.Visible = false;
             if (PortalSecurity.IsInRoles(ModuleConfiguration.AuthorizedEditRoles))
             {
                 EditButton.Text = "Add Link";
                 EditButton.NavigateUrl = "~/DesktopModules/EditLinks.aspx?mid=" + ModuleId;
+                EditButton.ToolTip = "Open module action: Add Link";
                 EditButton.Visible = true;
+                QuickLinkActions.Visible = true;
             }
         }
 

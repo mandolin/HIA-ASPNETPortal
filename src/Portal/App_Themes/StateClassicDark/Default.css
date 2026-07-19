@@ -370,9 +370,15 @@ body.portal-theme-stateclassicdark .employee-profile-form-field {
     width: 100%;
 }
 
-.portal-content-item-title,
-.portal-quicklinks-title {
+.portal-content-item-title {
     display: table-cell;
+    color: #fff4d7;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.portal-quicklinks-title {
+    display: block;
     color: #fff4d7;
     font-size: 14px;
     font-weight: 700;
@@ -447,9 +453,7 @@ body.portal-theme-stateclassicdark .employee-profile-form-field {
 }
 
 .portal-quicklinks-header .portal-content-edit-action {
-    display: table-cell;
-    width: 1%;
-    text-align: right;
+    margin-left: 8px;
 }
 
 .portal-static-message {
@@ -837,14 +841,28 @@ a.portal-tab:hover {
     border-bottom: 1px solid #3d4450;
 }
 
-.portal-module-heading,
-.portal-module-action {
+.portal-module-title-wrap,
+.portal-module-actions {
     display: table-cell;
     vertical-align: middle;
 }
 
-.portal-module-action {
+.portal-module-title,
+.portal-module-heading {
+    display: block;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.portal-module-actions {
+    width: 1%;
     text-align: right;
+    white-space: nowrap;
+}
+
+.portal-module-action {
+    margin-left: 8px;
+    white-space: nowrap;
 }
 
 .portal-signin-title {

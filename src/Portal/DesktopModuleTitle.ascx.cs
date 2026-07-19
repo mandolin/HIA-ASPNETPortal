@@ -13,7 +13,8 @@ namespace ASPNET.StarterKit.Portal
     /// 中文：P7.4 起标记从旧 table 标题栏切换为语义化容器；权限判断和编辑链接生成仍沿用旧模块配置。
     ///
     /// English: Starting with P7.4, the markup changes from the legacy table title bar to semantic containers, while
-    /// permission checks and edit-link generation continue to use the legacy module configuration.
+    /// permission checks and edit-link generation continue to use the legacy module configuration. P8.3 further separates
+    /// the title and action areas so themes can style module actions consistently.
     /// </remarks>
     public partial class DesktopModuleTitle : UserControl
     {
@@ -58,6 +59,7 @@ namespace ASPNET.StarterKit.Portal
             // 设置模块标题文本，显示在控件中的Label（ModuleTitle）上
             // Display Modular Title Text and Edit Buttons
             ModuleTitle.Text = portalModule.ModuleConfiguration.ModuleTitle;
+            ModuleActions.Visible = false;
             EditButton.Visible = false;
 
             // 检查是否应显示编辑按钮
@@ -73,7 +75,9 @@ namespace ASPNET.StarterKit.Portal
                 EditButton.Text = EditText;
                 EditButton.NavigateUrl = EditUrl + "?mid=" + portalModule.ModuleId;
                 EditButton.Target = EditTarget;
+                EditButton.ToolTip = "Open module action: " + EditText;
                 EditButton.Visible = true;
+                ModuleActions.Visible = true;
             }
         }
     }
