@@ -703,6 +703,12 @@ button.portal-button-danger:hover {
     margin-top: 8px;
 }
 
+.portal-layout-command {
+    margin: 0 5px 6px 0;
+    min-width: 52px;
+    text-align: center;
+}
+
 .portal-chip-list {
     width: auto;
     border-collapse: separate;

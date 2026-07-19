@@ -144,15 +144,15 @@ namespace ASPNET.StarterKit.Portal
         /// English: Adjusts the display order of the selected module inside the same pane.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void UpDown_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void UpDown_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
             {
                 return;
             }
 
-            ImageButton button = sender as ImageButton;
+            LinkButton button = sender as LinkButton;
             string pane;
             ListBox listBox;
             if (button == null || !TryGetPaneListBox(button.CommandArgument, out pane, out listBox) ||
@@ -200,15 +200,15 @@ namespace ASPNET.StarterKit.Portal
         /// English: Moves the selected module to another allowed layout pane.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void RightLeft_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void RightLeft_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
             {
                 return;
             }
 
-            ImageButton button = sender as ImageButton;
+            LinkButton button = sender as LinkButton;
             string sourcePane;
             string targetPane;
             ListBox sourceBox;
@@ -307,15 +307,15 @@ namespace ASPNET.StarterKit.Portal
         /// English: Opens the instance-settings page for the selected module.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void EditBtn_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void EditBtn_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
             {
                 return;
             }
 
-            ImageButton button = sender as ImageButton;
+            LinkButton button = sender as LinkButton;
             string pane;
             ListBox listBox;
             ModuleSettings selectedModule;
@@ -337,15 +337,15 @@ namespace ASPNET.StarterKit.Portal
         /// English: Deletes the selected module instance and reorders the affected pane.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void DeleteBtn_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void DeleteBtn_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
             {
                 return;
             }
 
-            ImageButton button = sender as ImageButton;
+            LinkButton button = sender as LinkButton;
             string pane;
             ListBox listBox;
             ModuleSettings selectedModule;

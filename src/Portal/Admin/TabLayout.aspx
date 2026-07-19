@@ -79,17 +79,17 @@
                             <asp:ListBox ID="leftPane" CssClass="NormalTextBox portal-layout-list" DataSource="<%# leftList %>" DataTextField="ModuleTitle"
                                 DataValueField="ModuleId" Width="100%" Rows="9" runat="server" />
                             <div class="portal-layout-toolbar">
-                                <asp:ImageButton ID="LeftUpBtn" CssClass="portal-icon-button" ImageUrl="~/images/up.gif" CommandName="up" CommandArgument="leftPane"
-                                    AlternateText="Move selected module up in list" runat="server" OnClick="UpDown_Click" />
-                                <asp:ImageButton ID="LeftRightBtn" CssClass="portal-icon-button" ImageUrl="~/images/rt.gif" CommandName="right" sourcepane="leftPane"
-                                    targetpane="contentPane" AlternateText="Move selected module to the content pane"
+                                <asp:LinkButton ID="LeftUpBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Up" CommandName="up" CommandArgument="leftPane"
+                                    ToolTip="Move selected module up in list" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="LeftRightBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Right" CommandName="right" sourcepane="leftPane"
+                                    targetpane="contentPane" ToolTip="Move selected module to the content pane"
                                     runat="server" OnClick="RightLeft_Click" />
-                                <asp:ImageButton ID="LeftDownBtn" CssClass="portal-icon-button" ImageUrl="~/images/dn.gif" CommandName="down" CommandArgument="leftPane"
-                                    AlternateText="Move selected module down in list" runat="server" OnClick="UpDown_Click" />
-                                <asp:ImageButton ID="LeftEditBtn" CssClass="portal-icon-button" ImageUrl="~/images/edit.gif" CommandName="edit" CommandArgument="leftPane"
-                                    AlternateText="Edit this item" runat="server" OnClick="EditBtn_Click" />
-                                <asp:ImageButton ID="LeftDeleteBtn" CssClass="portal-icon-button" ImageUrl="~/images/delete.gif" CommandName="delete" CommandArgument="leftPane"
-                                    AlternateText="Delete this item" runat="server" OnClick="DeleteBtn_Click" />
+                                <asp:LinkButton ID="LeftDownBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Down" CommandName="down" CommandArgument="leftPane"
+                                    ToolTip="Move selected module down in list" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="LeftEditBtn" CssClass="CommandButton portal-layout-command portal-primary-action" Text="Edit" CommandName="edit" CommandArgument="leftPane"
+                                    ToolTip="Edit this item" runat="server" OnClick="EditBtn_Click" />
+                                <asp:LinkButton ID="LeftDeleteBtn" CssClass="CommandButton portal-layout-command portal-danger-action" Text="Delete" CommandName="delete" CommandArgument="leftPane"
+                                    ToolTip="Delete this item" runat="server" OnClick="DeleteBtn_Click" />
                             </div>
                         </div>
                     </div>
@@ -100,18 +100,18 @@
                             <asp:ListBox ID="contentPane" CssClass="NormalTextBox portal-layout-list" DataSource="<%# contentList %>" DataTextField="ModuleTitle"
                                 DataValueField="ModuleId" Width="100%" Rows="9" runat="server" />
                             <div class="portal-layout-toolbar portal-layout-toolbar-wide">
-                                <asp:ImageButton ID="ContentUpBtn" CssClass="portal-icon-button" ImageUrl="~/images/up.gif" CommandName="up" CommandArgument="contentPane"
-                                    AlternateText="Move selected module up in list" runat="server" OnClick="UpDown_Click" />
-                                <asp:ImageButton ID="ContentLeftBtn" CssClass="portal-icon-button" ImageUrl="~/images/lt.gif" sourcepane="contentPane" targetpane="leftPane"
-                                    AlternateText="Move selected module to the left pane" runat="server" OnClick="RightLeft_Click" />
-                                <asp:ImageButton ID="ContentRightBtn" CssClass="portal-icon-button" ImageUrl="~/images/rt.gif" sourcepane="contentPane" targetpane="rightPane"
-                                    AlternateText="Move selected module to the right pane" runat="server" OnClick="RightLeft_Click" />
-                                <asp:ImageButton ID="ContentDownBtn" CssClass="portal-icon-button" ImageUrl="~/images/dn.gif" CommandName="down" CommandArgument="contentPane"
-                                    AlternateText="Move selected module down in list" runat="server" OnClick="UpDown_Click" />
-                                <asp:ImageButton ID="ContentEditBtn" CssClass="portal-icon-button" ImageUrl="~/images/edit.gif" CommandName="edit" CommandArgument="contentPane"
-                                    AlternateText="Edit this item" runat="server" OnClick="EditBtn_Click" />
-                                <asp:ImageButton ID="ContentDeleteBtn" CssClass="portal-icon-button" ImageUrl="~/images/delete.gif" CommandName="delete" CommandArgument="contentPane"
-                                    AlternateText="Delete this item" runat="server" OnClick="DeleteBtn_Click" />
+                                <asp:LinkButton ID="ContentUpBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Up" CommandName="up" CommandArgument="contentPane"
+                                    ToolTip="Move selected module up in list" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="ContentLeftBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Left" sourcepane="contentPane" targetpane="leftPane"
+                                    ToolTip="Move selected module to the left pane" runat="server" OnClick="RightLeft_Click" />
+                                <asp:LinkButton ID="ContentRightBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Right" sourcepane="contentPane" targetpane="rightPane"
+                                    ToolTip="Move selected module to the right pane" runat="server" OnClick="RightLeft_Click" />
+                                <asp:LinkButton ID="ContentDownBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Down" CommandName="down" CommandArgument="contentPane"
+                                    ToolTip="Move selected module down in list" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="ContentEditBtn" CssClass="CommandButton portal-layout-command portal-primary-action" Text="Edit" CommandName="edit" CommandArgument="contentPane"
+                                    ToolTip="Edit this item" runat="server" OnClick="EditBtn_Click" />
+                                <asp:LinkButton ID="ContentDeleteBtn" CssClass="CommandButton portal-layout-command portal-danger-action" Text="Delete" CommandName="delete" CommandArgument="contentPane"
+                                    ToolTip="Delete this item" runat="server" OnClick="DeleteBtn_Click" />
                             </div>
                         </div>
                     </div>
@@ -122,23 +122,23 @@
                             <asp:ListBox ID="rightPane" CssClass="NormalTextBox portal-layout-list" DataSource="<%# rightList %>" DataTextField="ModuleTitle"
                                 DataValueField="ModuleId" Width="100%" Rows="9" runat="server" />
                             <div class="portal-layout-toolbar">
-                                <asp:ImageButton ID="RightUpBtn" CssClass="portal-icon-button" ImageUrl="~/images/up.gif" CommandName="up" CommandArgument="rightPane"
-                                    AlternateText="Move selected module up in list" runat="server" OnClick="UpDown_Click" />
-                                <asp:ImageButton ID="RightLeftBtn" CssClass="portal-icon-button" ImageUrl="~/images/lt.gif" sourcepane="rightPane" targetpane="contentPane"
-                                    AlternateText="Move selected module to the content pane" runat="server" OnClick="RightLeft_Click" />
-                                <asp:ImageButton ID="RightDownBtn" CssClass="portal-icon-button" ImageUrl="~/images/dn.gif" CommandName="down" CommandArgument="rightPane"
-                                    AlternateText="Move selected module down in list" runat="server" OnClick="UpDown_Click" />
-                                <asp:ImageButton ID="RightEditBtn" CssClass="portal-icon-button" ImageUrl="~/images/edit.gif" CommandName="edit" CommandArgument="rightPane"
-                                    AlternateText="Edit this item" runat="server" OnClick="EditBtn_Click" />
-                                <asp:ImageButton ID="RightDeleteBtn" CssClass="portal-icon-button" ImageUrl="~/images/delete.gif" CommandName="delete" CommandArgument="rightPane"
-                                    AlternateText="Delete this item" runat="server" OnClick="DeleteBtn_Click" />
+                                <asp:LinkButton ID="RightUpBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Up" CommandName="up" CommandArgument="rightPane"
+                                    ToolTip="Move selected module up in list" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="RightLeftBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Left" sourcepane="rightPane" targetpane="contentPane"
+                                    ToolTip="Move selected module to the content pane" runat="server" OnClick="RightLeft_Click" />
+                                <asp:LinkButton ID="RightDownBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="Down" CommandName="down" CommandArgument="rightPane"
+                                    ToolTip="Move selected module down in list" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="RightEditBtn" CssClass="CommandButton portal-layout-command portal-primary-action" Text="Edit" CommandName="edit" CommandArgument="rightPane"
+                                    ToolTip="Edit this item" runat="server" OnClick="EditBtn_Click" />
+                                <asp:LinkButton ID="RightDeleteBtn" CssClass="CommandButton portal-layout-command portal-danger-action" Text="Delete" CommandName="delete" CommandArgument="rightPane"
+                                    ToolTip="Delete this item" runat="server" OnClick="DeleteBtn_Click" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="portal-form-actions">
-                <asp:LinkButton ID="applyBtn" CssClass="CommandButton" Text="Apply Changes" runat="server"
+                <asp:LinkButton ID="applyBtn" CssClass="CommandButton portal-primary-action" Text="Apply Changes" runat="server"
                     OnClick="Apply_Click" />
             </div>
         </div>

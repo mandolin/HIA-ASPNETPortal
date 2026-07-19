@@ -1412,17 +1412,10 @@ body.portal-theme-enterprisedark .portal-dashboard-layout {
     margin-top: 10px;
 }
 
-.portal-icon-button {
+.portal-layout-command {
     margin: 0 5px 6px 0;
-    padding: 5px;
-    border: 1px solid #35546c;
-    background-color: #111c28;
-    border-radius: 6px;
-    vertical-align: middle;
-}
-
-.portal-icon-button:hover {
-    background-color: #1e3348;
+    min-width: 52px;
+    text-align: center;
 }
 
 /* 中文 / English: P7.4.2-C 普通内容编辑页的表单、校验与危险操作样式。 */

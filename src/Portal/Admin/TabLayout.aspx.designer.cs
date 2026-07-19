@@ -98,7 +98,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton LeftUpBtn;
+        protected global::System.Web.UI.WebControls.LinkButton LeftUpBtn;
 
         /// <summary>
         /// LeftRightBtn 控件。
@@ -107,7 +107,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton LeftRightBtn;
+        protected global::System.Web.UI.WebControls.LinkButton LeftRightBtn;
 
         /// <summary>
         /// LeftDownBtn 控件。
@@ -116,7 +116,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton LeftDownBtn;
+        protected global::System.Web.UI.WebControls.LinkButton LeftDownBtn;
 
         /// <summary>
         /// LeftEditBtn 控件。
@@ -125,7 +125,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton LeftEditBtn;
+        protected global::System.Web.UI.WebControls.LinkButton LeftEditBtn;
 
         /// <summary>
         /// LeftDeleteBtn 控件。
@@ -134,7 +134,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton LeftDeleteBtn;
+        protected global::System.Web.UI.WebControls.LinkButton LeftDeleteBtn;
 
         /// <summary>
         /// contentPane 控件。
@@ -152,7 +152,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ContentUpBtn;
+        protected global::System.Web.UI.WebControls.LinkButton ContentUpBtn;
 
         /// <summary>
         /// ContentLeftBtn 控件。
@@ -161,7 +161,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ContentLeftBtn;
+        protected global::System.Web.UI.WebControls.LinkButton ContentLeftBtn;
 
         /// <summary>
         /// ContentRightBtn 控件。
@@ -170,7 +170,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ContentRightBtn;
+        protected global::System.Web.UI.WebControls.LinkButton ContentRightBtn;
 
         /// <summary>
         /// ContentDownBtn 控件。
@@ -179,7 +179,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ContentDownBtn;
+        protected global::System.Web.UI.WebControls.LinkButton ContentDownBtn;
 
         /// <summary>
         /// ContentEditBtn 控件。
@@ -188,7 +188,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ContentEditBtn;
+        protected global::System.Web.UI.WebControls.LinkButton ContentEditBtn;
 
         /// <summary>
         /// ContentDeleteBtn 控件。
@@ -197,7 +197,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ContentDeleteBtn;
+        protected global::System.Web.UI.WebControls.LinkButton ContentDeleteBtn;
 
         /// <summary>
         /// rightPane 控件。
@@ -215,7 +215,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton RightUpBtn;
+        protected global::System.Web.UI.WebControls.LinkButton RightUpBtn;
 
         /// <summary>
         /// RightLeftBtn 控件。
@@ -224,7 +224,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton RightLeftBtn;
+        protected global::System.Web.UI.WebControls.LinkButton RightLeftBtn;
 
         /// <summary>
         /// RightDownBtn 控件。
@@ -233,7 +233,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton RightDownBtn;
+        protected global::System.Web.UI.WebControls.LinkButton RightDownBtn;
 
         /// <summary>
         /// RightEditBtn 控件。
@@ -242,7 +242,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton RightEditBtn;
+        protected global::System.Web.UI.WebControls.LinkButton RightEditBtn;
 
         /// <summary>
         /// RightDeleteBtn 控件。
@@ -251,7 +251,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton RightDeleteBtn;
+        protected global::System.Web.UI.WebControls.LinkButton RightDeleteBtn;
 
         /// <summary>
         /// applyBtn 控件。

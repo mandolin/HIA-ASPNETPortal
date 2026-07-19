@@ -158,6 +158,15 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_RemoveFromRoleAlt", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 Remove 的本地化字符串。
+        /// </summary>
+        internal static string Admin_ManageUsers_RemoveFromRoleText {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_RemoveFromRoleText", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Save User Changes 的本地化字符串。
@@ -277,29 +286,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 /images/signin.gif 的本地化字符串。
-        /// </summary>
-        internal static string Signin_LoginImg {
-            get {
-                return ResourceManager.GetString("Signin_LoginImg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Password: 的本地化字符串。
         /// </summary>
         internal static string Signin_password {
             get {
                 return ResourceManager.GetString("Signin_password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 /images/register.gif 的本地化字符串。
-        /// </summary>
-        internal static string Signin_RegImg {
-            get {
-                return ResourceManager.GetString("Signin_RegImg", resourceCulture);
             }
         }
         

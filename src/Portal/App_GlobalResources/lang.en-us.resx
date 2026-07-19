@@ -150,6 +150,9 @@
   <data name="Admin_ManageUsers_RemoveFromRoleAlt" xml:space="preserve">
     <value>Remove user from this role</value>
   </data>
+  <data name="Admin_ManageUsers_RemoveFromRoleText" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="Admin_ManageUsers_SaveUserChange" xml:space="preserve">
     <value>Save User Changes</value>
   </data>
@@ -183,17 +186,11 @@
   <data name="Signin_LoginFaild" xml:space="preserve">
     <value>Login Failed!</value>
   </data>
-  <data name="Signin_LoginImg" xml:space="preserve">
-    <value>~/images/signin.gif</value>
-  </data>
   <data name="Signin_LoginText" xml:space="preserve">
     <value>Sign In</value>
   </data>
   <data name="Signin_password" xml:space="preserve">
     <value>Password:</value>
-  </data>
-  <data name="Signin_RegImg" xml:space="preserve">
-    <value>~/images/register.gif</value>
   </data>
   <data name="Signin_RegisterText" xml:space="preserve">
     <value>Register</value>

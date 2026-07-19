@@ -12,11 +12,6 @@ namespace ASPNET.StarterKit.Portal
     public partial class Links : PortalModuleControl<Links>
     {
         /// <summary>
-        /// 中文：链接图标地址。English: Link icon URL.
-        /// </summary>
-        protected string linkImage = string.Empty;
-
-        /// <summary>
         /// 中文：链接数据访问服务。English: Link data-access service.
         /// </summary>
         [Dependency]
@@ -27,7 +22,6 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            linkImage = IsEditable ? "~/images/edit.gif" : "~/images/navlink.gif";
             myDataList.DataSource = LinkDB.GetLinks(ModuleId);
             myDataList.DataBind();
         }

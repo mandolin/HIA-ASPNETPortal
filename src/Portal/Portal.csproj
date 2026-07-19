@@ -219,28 +219,9 @@
     <Content Include="DesktopPortalBanner.ascx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Images\1x1.gif" />
-    <Content Include="Images\aspnet.gif" />
-    <Content Include="Images\bars.gif" />
-    <Content Include="Images\delete.gif" />
-    <Content Include="Images\dn.gif" />
-    <Content Include="Images\edit.gif" />
-    <Content Include="Images\ffwd.gif" />
-    <Content Include="Images\frew.gif" />
-    <Content Include="Images\fwd.gif" />
-    <Content Include="Images\lt.gif" />
     <Content Include="Images\minus.gif" />
-    <Content Include="Images\navlink.gif" />
     <Content Include="Images\node.gif" />
     <Content Include="Images\plus.gif" />
-    <Content Include="Images\poweredby_simple.gif" />
-    <Content Include="Images\register.gif" />
-    <Content Include="Images\rew.gif" />
-    <Content Include="Images\rt.gif" />
-    <Content Include="Images\signin.gif" />
-    <Content Include="Images\sm_dotnet.gif" />
-    <Content Include="Images\spacer.gif" />
-    <Content Include="Images\up.gif" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\AccessDenied.aspx.cs">

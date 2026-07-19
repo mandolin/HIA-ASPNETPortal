@@ -51,8 +51,8 @@
                 <asp:DataList ID="usersInRole" CssClass="portal-chip-list" RepeatColumns="2" DataKeyField="UserId" OnItemCommand="usersInRole_ItemCommand" runat="server">
                     <ItemStyle Width="225" CssClass="portal-chip-item" />
                     <ItemTemplate>
-                        <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="Remove this user from role"
-                            CssClass="portal-chip-delete" runat="server" />
+                        <asp:LinkButton CommandName="delete" Text="Remove" CssClass="CommandButton portal-chip-delete portal-danger-action"
+                            CausesValidation="False" runat="server" />
                         <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "Name") %>' CssClass="Normal portal-chip-text"
                             runat="server" />
                     </ItemTemplate>

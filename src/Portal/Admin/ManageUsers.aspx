@@ -30,9 +30,9 @@
                     <asp:Label ID="RegistrationStatus" runat="server" />
                 </div>
                 <div class="portal-inline-actions">
-                    <asp:LinkButton ID="ApproveRegistrationBtn" CssClass="CommandButton" Text="Approve Registration"
+                    <asp:LinkButton ID="ApproveRegistrationBtn" CssClass="CommandButton portal-primary-action" Text="Approve Registration"
                         CausesValidation="False" Visible="False" runat="server" OnClick="ApproveRegistration_Click" />
-                    <asp:LinkButton ID="RejectRegistrationBtn" CssClass="CommandButton" Text="Reject Registration"
+                    <asp:LinkButton ID="RejectRegistrationBtn" CssClass="CommandButton portal-danger-action" Text="Reject Registration"
                         CausesValidation="False" Visible="False" runat="server" OnClick="RejectRegistration_Click" />
                 </div>
             </div>
@@ -51,10 +51,10 @@
                     <asp:Label ID="ProfileStatusText" runat="server" />
                 </div>
                 <div class="portal-inline-actions">
-                    <asp:LinkButton ID="DisableUserBtn" CssClass="CommandButton" Text="禁用账号"
+                    <asp:LinkButton ID="DisableUserBtn" CssClass="CommandButton portal-danger-action" Text="禁用账号"
                         CausesValidation="False" Visible="False" runat="server" OnClick="DisableUser_Click"
                         OnClientClick="return confirm('确认禁用此账号？');" />
-                    <asp:LinkButton ID="RestoreUserBtn" CssClass="CommandButton" Text="恢复启用"
+                    <asp:LinkButton ID="RestoreUserBtn" CssClass="CommandButton portal-primary-action" Text="恢复启用"
                         CausesValidation="False" Visible="False" runat="server" OnClick="RestoreUser_Click" />
                 </div>
             </div>
@@ -144,7 +144,7 @@
             </div>
             <div class="portal-form-actions">
                 <asp:LinkButton Text="<%$ Resources:lang,Admin_ManageUsers_ApplyNamePwdChange %>"
-                    CssClass="CommandButton" runat="server" ID="UpdateUserBtn" OnClick="UpdateUser_Click" />
+                    CssClass="CommandButton portal-primary-action" runat="server" ID="UpdateUserBtn" OnClick="UpdateUser_Click" />
             </div>
         </div>
 
@@ -160,7 +160,7 @@
                             runat="server" />
                     </div>
                     <div class="portal-filter-actions">
-                        <asp:LinkButton ID="addExisting" CssClass="CommandButton" Text="<%$ Resources:lang,Admin_ManageUsers_AddUserToRole %>"
+                        <asp:LinkButton ID="addExisting" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang,Admin_ManageUsers_AddUserToRole %>"
                             runat="server" CausesValidation="False" OnClick="AddRole_Click" />
                     </div>
                 </div>
@@ -169,8 +169,9 @@
                 <asp:DataList ID="userRoles" CssClass="portal-chip-list" RepeatColumns="2" DataKeyField="RoleId" OnItemCommand="UserRoles_ItemCommand" runat="server">
                     <ItemStyle Width="225" CssClass="portal-chip-item" />
                     <ItemTemplate>
-                        <asp:ImageButton ImageUrl="~/images/delete.gif" CommandName="delete" AlternateText="<%$ Resources:lang,Admin_ManageUsers_RemoveFromRoleAlt %>"
-                            CssClass="portal-chip-delete" CausesValidation="False" runat="server" ID="Imagebutton1" />
+                        <asp:LinkButton ID="Imagebutton1" CommandName="delete" Text="<%$ Resources:lang,Admin_ManageUsers_RemoveFromRoleText %>"
+                            ToolTip="<%$ Resources:lang,Admin_ManageUsers_RemoveFromRoleAlt %>" CssClass="CommandButton portal-chip-delete portal-danger-action"
+                            CausesValidation="False" runat="server" />
                         <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "RoleName") %>' CssClass="Normal portal-chip-text"
                             runat="server" ID="Label1" />
                     </ItemTemplate>
@@ -179,7 +180,7 @@
         </div>
 
         <div class="portal-form-actions">
-            <asp:LinkButton ID="saveBtn" class="CommandButton" Text="<%$ Resources:lang,Admin_ManageUsers_SaveUserChange %>"
+            <asp:LinkButton ID="saveBtn" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang,Admin_ManageUsers_SaveUserChange %>"
                 runat="server" CausesValidation="False" OnClick="Save_Click" />
         </div>
     </div>

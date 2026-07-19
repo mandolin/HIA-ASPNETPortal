@@ -150,6 +150,9 @@
   <data name="Admin_ManageUsers_RemoveFromRoleAlt" xml:space="preserve">
     <value>把用户从此角色移除</value>
   </data>
+  <data name="Admin_ManageUsers_RemoveFromRoleText" xml:space="preserve">
+    <value>移除</value>
+  </data>
   <data name="Admin_ManageUsers_SaveUserChange" xml:space="preserve">
     <value>保存修改</value>
   </data>
@@ -186,17 +189,11 @@
   <data name="Signin_LoginFaild" xml:space="preserve">
     <value>登录失败！</value>
   </data>
-  <data name="Signin_LoginImg" xml:space="preserve">
-    <value>~/images/signin.gif</value>
-  </data>
   <data name="Signin_LoginText" xml:space="preserve">
     <value>登录</value>
   </data>
   <data name="Signin_password" xml:space="preserve">
     <value>密码：</value>
-  </data>
-  <data name="Signin_RegImg" xml:space="preserve">
-    <value>~/images/register.gif</value>
   </data>
   <data name="Signin_RegisterText" xml:space="preserve">
     <value>注册</value>
