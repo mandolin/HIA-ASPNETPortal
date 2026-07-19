@@ -534,8 +534,16 @@ a.portal-button-secondary:active,
 input.portal-button-secondary,
 button.portal-button-secondary {
     border-color: #2d455a;
+    border-style: solid !important;
     background-color: #122231;
     color: #a6d8ff;
+}
+
+.portal-button-secondary:hover,
+a.portal-button-secondary:hover,
+input.portal-button-secondary:hover,
+button.portal-button-secondary:hover {
+    border-color: #4d9ed5;
 }
 
 .portal-button-compact {
@@ -863,6 +871,64 @@ input.portal-primary-action {
 
 input.portal-primary-action:hover {
     background-color: #2d91ca;
+    color: #ffffff;
+}
+
+.CommandButton.portal-primary-action,
+a.CommandButton.portal-primary-action:link,
+a.CommandButton.portal-primary-action:visited,
+a.CommandButton.portal-primary-action:active,
+input.CommandButton.portal-primary-action,
+button.CommandButton.portal-primary-action {
+    border-color: #64c4ff;
+    background-color: #1f78ad;
+    color: #ffffff;
+}
+
+a.CommandButton.portal-primary-action:hover,
+input.CommandButton.portal-primary-action:hover,
+button.CommandButton.portal-primary-action:hover {
+    border-color: #64c4ff;
+    background-color: #2d91ca;
+    color: #ffffff;
+}
+
+.CommandButton.portal-secondary-action,
+a.CommandButton.portal-secondary-action:link,
+a.CommandButton.portal-secondary-action:visited,
+a.CommandButton.portal-secondary-action:active,
+input.CommandButton.portal-secondary-action,
+button.CommandButton.portal-secondary-action {
+    border-color: #2d455a;
+    border-style: solid !important;
+    background-color: #122231;
+    color: #a6d8ff;
+}
+
+a.CommandButton.portal-secondary-action:hover,
+input.CommandButton.portal-secondary-action:hover,
+button.CommandButton.portal-secondary-action:hover {
+    border-color: #4d9ed5;
+    background-color: #183950;
+    color: #ffffff;
+}
+
+.CommandButton.portal-danger-action,
+a.CommandButton.portal-danger-action:link,
+a.CommandButton.portal-danger-action:visited,
+a.CommandButton.portal-danger-action:active,
+input.CommandButton.portal-danger-action,
+button.CommandButton.portal-danger-action {
+    border-color: #ff8a7a;
+    background-color: #b42318;
+    color: #ffffff;
+}
+
+a.CommandButton.portal-danger-action:hover,
+input.CommandButton.portal-danger-action:hover,
+button.CommandButton.portal-danger-action:hover {
+    border-color: #8f1d14;
+    background-color: #8f1d14;
     color: #ffffff;
 }
 
@@ -1456,7 +1522,7 @@ button.portal-button-danger {
 a.portal-button-danger:hover,
 input.portal-button-danger:hover,
 button.portal-button-danger:hover {
-    border-color: #ffb4ab;
+    border-color: #8f1d14;
     background-color: #8f1d14;
     color: #ffffff;
 }

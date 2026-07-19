@@ -98,14 +98,14 @@
                     Text="Cancel"
                     CausesValidation="False"
                     runat="server"
-                    CssClass="CommandButton"
+                    CssClass="CommandButton portal-secondary-action"
                     OnClick="CancelBtn_Click" />
                 <asp:LinkButton
                     ID="deleteButton"
                     Text="Delete this module type"
                     CausesValidation="False"
                     runat="server"
-                    CssClass="CommandButton"
+                    CssClass="CommandButton portal-danger-action"
                     OnClick="DeleteBtn_Click" />
             </div>
         </div>

@@ -37,7 +37,7 @@
                     <asp:DropDownList ID="allUsers" CssClass="NormalTextBox portal-filter-input" DataTextField="Name" DataValueField="UserID" runat="server" />
                 </div>
                 <div class="portal-filter-actions">
-                    <asp:LinkButton ID="addExisting" CssClass="CommandButton" Text="Add existing user to role"
+                    <asp:LinkButton ID="addExisting" CssClass="CommandButton portal-primary-action" Text="Add existing user to role"
                         runat="server" OnClick="AddUser_Click" />
                 </div>
             </div>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="portal-form-actions">
-            <asp:LinkButton ID="saveBtn" class="CommandButton" Text="Save Role Changes" runat="server"
+            <asp:LinkButton ID="saveBtn" CssClass="CommandButton portal-primary-action" Text="Save Role Changes" runat="server"
                 OnClick="Save_Click" />
         </div>
     </div>

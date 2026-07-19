@@ -33,8 +33,8 @@
                         <asp:DropDownList ID="GlobalThemeList" CssClass="NormalTextBox portal-filter-input" runat="server" />
                     </div>
                     <div class="portal-filter-actions">
-                        <asp:LinkButton ID="SaveGlobalThemeButton" CssClass="CommandButton" Text="Apply" OnClick="SaveGlobalThemeButton_Click" runat="server" />
-                        <asp:LinkButton ID="ResetGlobalThemeButton" CssClass="CommandButton" Text="Reset Override" CausesValidation="False" OnClick="ResetGlobalThemeButton_Click" runat="server" />
+                        <asp:LinkButton ID="SaveGlobalThemeButton" CssClass="CommandButton portal-primary-action" Text="Apply" OnClick="SaveGlobalThemeButton_Click" runat="server" />
+                        <asp:LinkButton ID="ResetGlobalThemeButton" CssClass="CommandButton portal-secondary-action" Text="Reset Override" CausesValidation="False" OnClick="ResetGlobalThemeButton_Click" runat="server" />
                     </div>
                 </div>
                 <div class="Normal portal-status-line">
@@ -59,8 +59,8 @@
                         <asp:DropDownList ID="TabThemeList" CssClass="NormalTextBox portal-filter-input" runat="server" />
                     </div>
                     <div class="portal-filter-actions">
-                        <asp:LinkButton ID="SaveTabThemeButton" CssClass="CommandButton" Text="Apply" OnClick="SaveTabThemeButton_Click" runat="server" />
-                        <asp:LinkButton ID="ClearTabThemeButton" CssClass="CommandButton" Text="Clear Override" CausesValidation="False" OnClick="ClearTabThemeButton_Click" runat="server" />
+                        <asp:LinkButton ID="SaveTabThemeButton" CssClass="CommandButton portal-primary-action" Text="Apply" OnClick="SaveTabThemeButton_Click" runat="server" />
+                        <asp:LinkButton ID="ClearTabThemeButton" CssClass="CommandButton portal-secondary-action" Text="Clear Override" CausesValidation="False" OnClick="ClearTabThemeButton_Click" runat="server" />
                     </div>
                 </div>
                 <div class="Normal portal-status-line">

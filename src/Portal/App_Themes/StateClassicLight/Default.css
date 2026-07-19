@@ -512,8 +512,8 @@ a.portal-button-primary:visited,
 a.portal-button-primary:active,
 input.portal-button-primary,
 button.portal-button-primary {
-    border-color: #b18b32;
-    background-color: #8a2524;
+    border-color: #173452;
+    background-color: #173452;
     color: #fffdf7;
 }
 
@@ -521,8 +521,8 @@ button.portal-button-primary {
 a.portal-button-primary:hover,
 input.portal-button-primary:hover,
 button.portal-button-primary:hover {
-    border-color: #641b1a;
-    background-color: #641b1a;
+    border-color: #10263d;
+    background-color: #10263d;
     color: #fffdf7;
 }
 
@@ -533,8 +533,17 @@ a.portal-button-secondary:active,
 input.portal-button-secondary,
 button.portal-button-secondary {
     border-color: #d8ceb5;
+    border-style: solid !important;
     background-color: #fffdf7;
     color: #8a2524;
+}
+
+.portal-button-secondary:hover,
+a.portal-button-secondary:hover,
+input.portal-button-secondary:hover,
+button.portal-button-secondary:hover {
+    border-color: #173452;
+    color: #173452;
 }
 
 .portal-button-compact {
@@ -865,6 +874,64 @@ input.portal-primary-action:hover {
     color: #ffffff;
 }
 
+.CommandButton.portal-primary-action,
+a.CommandButton.portal-primary-action:link,
+a.CommandButton.portal-primary-action:visited,
+a.CommandButton.portal-primary-action:active,
+input.CommandButton.portal-primary-action,
+button.CommandButton.portal-primary-action {
+    border-color: #173452;
+    background-color: #173452;
+    color: #ffffff;
+}
+
+a.CommandButton.portal-primary-action:hover,
+input.CommandButton.portal-primary-action:hover,
+button.CommandButton.portal-primary-action:hover {
+    border-color: #10263d;
+    background-color: #10263d;
+    color: #ffffff;
+}
+
+.CommandButton.portal-secondary-action,
+a.CommandButton.portal-secondary-action:link,
+a.CommandButton.portal-secondary-action:visited,
+a.CommandButton.portal-secondary-action:active,
+input.CommandButton.portal-secondary-action,
+button.CommandButton.portal-secondary-action {
+    border-color: #d8ceb5;
+    border-style: solid !important;
+    background-color: #fffdf7;
+    color: #8a2524;
+}
+
+a.CommandButton.portal-secondary-action:hover,
+input.CommandButton.portal-secondary-action:hover,
+button.CommandButton.portal-secondary-action:hover {
+    border-color: #173452;
+    background-color: #f7edcf;
+    color: #173452;
+}
+
+.CommandButton.portal-danger-action,
+a.CommandButton.portal-danger-action:link,
+a.CommandButton.portal-danger-action:visited,
+a.CommandButton.portal-danger-action:active,
+input.CommandButton.portal-danger-action,
+button.CommandButton.portal-danger-action {
+    border-color: #b42318;
+    background-color: #b42318;
+    color: #ffffff;
+}
+
+a.CommandButton.portal-danger-action:hover,
+input.CommandButton.portal-danger-action:hover,
+button.CommandButton.portal-danger-action:hover {
+    border-color: #8f1d14;
+    background-color: #8f1d14;
+    color: #ffffff;
+}
+
 body.portal-theme-stateclassiclight {
     background-color: #f3f1ea;
 }
@@ -968,8 +1035,15 @@ body.portal-theme-stateclassiclight button.CommandButton {
 
 body.portal-theme-stateclassiclight .portal-primary-action,
 body.portal-theme-stateclassiclight input.portal-primary-action {
-    border-color: #8a2524;
-    background-color: #8a2524;
+    border-color: #173452;
+    background-color: #173452;
+    color: #ffffff;
+}
+
+body.portal-theme-stateclassiclight .portal-primary-action:hover,
+body.portal-theme-stateclassiclight input.portal-primary-action:hover {
+    border-color: #10263d;
+    background-color: #10263d;
     color: #ffffff;
 }
 
