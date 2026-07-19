@@ -926,15 +926,21 @@ body.portal-theme-stateclassicdark .portal-tab-selected {
 }
 
 body.portal-theme-stateclassicdark .portal-main-shell {
-    width: 1200px;
-    max-width: 96%;
-    padding: 20px 24px 28px;
-    border: 1px solid #0d2137;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 20px 0 28px;
+    border-color: #0d2137;
+    border-style: solid;
+    border-width: 0 1px 1px;
     background-color: #111820;
     box-sizing: border-box;
 }
 
 body.portal-theme-stateclassicdark .portal-content-stage {
+    width: 1200px;
+    max-width: 96%;
+    margin: 0 auto;
     min-height: 620px;
     padding: 0;
     border: 0;
