@@ -219,9 +219,6 @@
     <Content Include="DesktopPortalBanner.ascx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Images\minus.gif" />
-    <Content Include="Images\node.gif" />
-    <Content Include="Images\plus.gif" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\AccessDenied.aspx.cs">

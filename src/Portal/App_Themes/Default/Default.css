@@ -728,6 +728,54 @@ button.portal-button-danger:hover {
     word-break: break-word;
 }
 
+.portal-discussion-list {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.portal-discussion-children {
+    margin-left: 18px;
+}
+
+.portal-discussion-row {
+    margin: 0 0 8px;
+    padding: 10px 12px;
+    border: 1px solid #d6dce2;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.portal-discussion-row-selected,
+.portal-discussion-reply {
+    background-color: #f8f8f8;
+}
+
+.portal-discussion-toggle {
+    display: inline-block;
+    margin-right: 8px;
+    min-width: 66px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.portal-discussion-toggle-empty,
+.portal-discussion-toggle-empty.aspNetDisabled {
+    cursor: default;
+    opacity: .62;
+}
+
+.portal-discussion-main {
+    display: inline-block;
+    max-width: 92%;
+    vertical-align: top;
+}
+
+.portal-discussion-title {
+    font-weight: 700;
+}
+
 .portal-legacy-listbox {
     width: 100% !important;
     max-width: 360px;

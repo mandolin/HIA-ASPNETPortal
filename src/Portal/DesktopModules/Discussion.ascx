@@ -9,13 +9,14 @@
 <asp:datalist id="TopLevelList" CssClass="portal-discussion-list" RepeatLayout="Flow" OnItemCommand="TopLevelList_OnItemCommand" runat="server" DataKeyField="Parent">
     <ItemTemplate>
         <div class="portal-discussion-row">
-            <%-- 图像按钮用于选择 --%>
-            <asp:ImageButton id="btnSelect"
-                             CssClass="portal-discussion-toggle"
-                             ImageUrl='<%# NodeImage((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
-                             AlternateText="展开主题"
-                             CommandName='<%# NodeCommandName((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
-                             runat="server" />
+            <%-- 中文 / English: P8.2 用文字状态按钮替代旧 plus/node GIF，保留原展开命令。 --%>
+            <asp:LinkButton id="btnSelect"
+                            CssClass='<%# NodeToggleCssClass((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
+                            Text='<%# NodeToggleText((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
+                            Enabled='<%# HasChildMessages((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
+                            ToolTip="Expand this thread"
+                            CommandName='<%# NodeCommandName((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
+                            runat="server" />
             <span class="portal-discussion-main">
                 <%-- 超链接显示讨论主题 --%>
                 <asp:hyperlink CssClass="portal-discussion-title" Text='<%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "Title")) %>' NavigateUrl='<%# FormatUrl((int) DataBinder.Eval(Container.DataItem, "ItemID")) %>' Target="_blank" runat="server" ID="Hyperlink1" />
@@ -29,8 +30,9 @@
     
     <SelectedItemTemplate>
         <div class="portal-discussion-row portal-discussion-row-selected">
-            <%-- 图像按钮用于折叠 --%>
-            <asp:ImageButton id="btnCollapse" CssClass="portal-discussion-toggle" ImageUrl="~/images/minus.gif" AlternateText="折叠主题" runat="server" CommandName="collapse" />
+            <%-- 中文 / English: P8.2 用文字状态按钮替代旧 minus GIF，保留原折叠命令。 --%>
+            <asp:LinkButton id="btnCollapse" CssClass="CommandButton portal-discussion-toggle portal-secondary-action portal-discussion-toggle-selected"
+                Text="Collapse" ToolTip="Collapse this thread" runat="server" CommandName="collapse" />
             <span class="portal-discussion-main">
                 <%-- 超链接显示讨论主题 --%>
                 <asp:hyperlink CssClass="portal-discussion-title" Text='<%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "Title")) %>' NavigateUrl='<%# FormatUrl((int) DataBinder.Eval(Container.DataItem, "ItemID")) %>' Target="_blank" runat="server" ID="Hyperlink2" />

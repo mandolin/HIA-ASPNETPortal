@@ -121,7 +121,8 @@ namespace ASPNET.StarterKit.Portal
         protected void TopLevelList_OnItemCommand(object Sender, DataListCommandEventArgs e)
         {
             // 确定按钮的命令（要么是 "select"，要么是 "collapse"）
-            string command = ((ImageButton)e.CommandSource).CommandName;
+            LinkButton commandButton = e.CommandSource as LinkButton;
+            string command = commandButton == null ? string.Empty : commandButton.CommandName;
 
             // 根据命令类型更新 DataList 的选择索引，然后重新绑定 DataList 的内容
             if (command == "collapse")
@@ -154,21 +155,44 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：根据子消息数选择树节点图标。English: Selects a tree-node icon by child-message count.
-        /// </summary>
-        protected string NodeImage(int count)
-        {
-            // 如果子项计数大于 0，则返回展开图标，否则返回单节点图标
-            return count > 0 ? "~/images/plus.gif" : "~/images/node.gif";
-        }
-
-        /// <summary>
         /// 中文：根据子消息数选择展开命令。English: Selects an expand command by child-message count.
         /// </summary>
         protected string NodeCommandName(int count)
         {
-            // 如果子项计数大于 0，则返回展开图标，否则返回单节点图标
+            // 如果子项计数大于 0，则允许展开；无回复主题只展示静态状态文本。
             return count > 0 ? "select" : "";
+        }
+
+        /// <summary>
+        /// 中文：判断主题是否有可展开的回复。
+        ///
+        /// English: Determines whether a topic has replies that can be expanded.
+        /// </summary>
+        protected bool HasChildMessages(int count)
+        {
+            return count > 0;
+        }
+
+        /// <summary>
+        /// 中文：返回主题行左侧状态按钮文本。
+        ///
+        /// English: Returns the text shown in the left-side topic status button.
+        /// </summary>
+        protected string NodeToggleText(int count)
+        {
+            return count > 0 ? "Expand" : "Thread";
+        }
+
+        /// <summary>
+        /// 中文：返回主题行左侧状态按钮样式，保持可展开和无回复主题的视觉区分。
+        ///
+        /// English: Returns the left-side topic status-button classes, visually separating expandable and empty topics.
+        /// </summary>
+        protected string NodeToggleCssClass(int count)
+        {
+            return count > 0
+                ? "CommandButton portal-discussion-toggle portal-secondary-action"
+                : "CommandButton portal-discussion-toggle portal-secondary-action portal-discussion-toggle-empty";
         }
         
     }
