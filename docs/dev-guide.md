@@ -130,6 +130,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 
 当前已验证 IIS Express 可在 `http://localhost:40001/` 返回 `HTTP 200 OK`。
 
+Win7 VM 或其他局域网设备访问 IIS Express 时，不能使用默认 localhost 简易模式。先停止已有实例，再显式绑定主机 IP：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Stop-IISExpress.ps1 -Port 40001
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Start-IISExpress.ps1 -Port 40001 -HostName 192.168.199.21
+```
+
+脚本会同时保留 `localhost` 绑定并输出外部 URL。若 VM 仍无法访问，按脚本提示在主机管理员命令行中添加 URLACL 或防火墙规则。
+默认不传 `-HostName` 时仍使用原有 localhost 启动方式，不影响 Visual Studio 和 VSCode 既有调试路径。
+
 ## 自动 Smoke 与 SQL Server 兼容检查
 
 P2.5 新增的 HTTP smoke 默认只检查已经运行的站点，不写入数据库，也不要求管理员凭据：

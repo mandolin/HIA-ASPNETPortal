@@ -4,7 +4,9 @@ param(
 
     [string]$SitePath,
 
-    [string]$VirtualPath = '/'
+    [string]$VirtualPath = '/',
+
+    [string]$HostName = 'localhost'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -24,6 +26,12 @@ if (-not $VirtualPath.StartsWith('/')) {
 if ($VirtualPath.Length -gt 1) {
     $VirtualPath = $VirtualPath.TrimEnd('/')
 }
+$HostName = $HostName.Trim()
+if (-not $HostName) {
+    $HostName = 'localhost'
+}
+$useGeneratedConfig = $VirtualPath -ne '/' -or
+    -not [string]::Equals($HostName, 'localhost', [System.StringComparison]::OrdinalIgnoreCase)
 
 $iisCandidates = @(
     "${env:ProgramFiles(x86)}\IIS Express\iisexpress.exe",
@@ -36,7 +44,7 @@ if (-not $iisExpress) {
 }
 
 $configPath = $null
-if ($VirtualPath -ne '/') {
+if ($useGeneratedConfig) {
     $configDir = Join-Path $repoRoot 'temp\iisexpress'
     New-Item -ItemType Directory -Force -Path $configDir | Out-Null
     $configPath = Join-Path $configDir "applicationhost-$Port.config"
@@ -55,6 +63,10 @@ $existing = Get-CimInstance Win32_Process -Filter "name = 'iisexpress.exe'" -Err
 
 if ($existing) {
     Write-Host "IIS Express is already running for port $Port or site path $SitePath. PID: $($existing.ProcessId)"
+    if ($useGeneratedConfig -and $existing.CommandLine -match "/port:$Port(\s|$)") {
+        Write-Host "The current instance uses simple localhost mode. Stop it before starting HostName '$HostName'."
+    }
+
     exit 0
 }
 
@@ -63,7 +75,7 @@ if ($listening) {
     throw "Port $Port is already in use by PID $($listening.OwningProcess)."
 }
 
-if ($VirtualPath -eq '/') {
+if (-not $useGeneratedConfig) {
     $arguments = @(
         "/path:`"$SitePath`"",
         "/port:$Port"
@@ -101,14 +113,28 @@ else {
     $site = $config.CreateElement('site')
     $site.SetAttribute('name', $siteName)
     $site.SetAttribute('id', $siteId)
-    [void]$site.AppendChild((New-IISExpressApplicationElement -Document $config -Path '/' -PhysicalPath $rootSitePath))
-    [void]$site.AppendChild((New-IISExpressApplicationElement -Document $config -Path $VirtualPath -PhysicalPath $SitePath))
+    if ($VirtualPath -eq '/') {
+        [void]$site.AppendChild((New-IISExpressApplicationElement -Document $config -Path '/' -PhysicalPath $SitePath))
+    }
+    else {
+        [void]$site.AppendChild((New-IISExpressApplicationElement -Document $config -Path '/' -PhysicalPath $rootSitePath))
+        [void]$site.AppendChild((New-IISExpressApplicationElement -Document $config -Path $VirtualPath -PhysicalPath $SitePath))
+    }
 
     $bindings = $config.CreateElement('bindings')
-    $binding = $config.CreateElement('binding')
-    $binding.SetAttribute('protocol', 'http')
-    $binding.SetAttribute('bindingInformation', ":$($Port):localhost")
-    [void]$bindings.AppendChild($binding)
+    $bindingHosts = New-Object 'System.Collections.Generic.List[string]'
+    [void]$bindingHosts.Add('localhost')
+    if (-not [string]::Equals($HostName, 'localhost', [System.StringComparison]::OrdinalIgnoreCase)) {
+        [void]$bindingHosts.Add($HostName)
+    }
+
+    foreach ($bindingHost in ($bindingHosts | Select-Object -Unique)) {
+        $binding = $config.CreateElement('binding')
+        $binding.SetAttribute('protocol', 'http')
+        $binding.SetAttribute('bindingInformation', "*:$($Port):$bindingHost")
+        [void]$bindings.AppendChild($binding)
+    }
+
     [void]$site.AppendChild($bindings)
     [void]$sites.AppendChild($site)
 
@@ -145,4 +171,11 @@ if (-not $started) {
     throw 'IIS Express did not appear to start. Check the IIS Express logs for details.'
 }
 
-Write-Host "IIS Express started. PID: $($started.ProcessId); URL: http://localhost:$Port$VirtualPath/"
+$displayPath = if ($VirtualPath -eq '/') { '/' } else { "$VirtualPath/" }
+Write-Host "IIS Express started. PID: $($started.ProcessId); URL: http://localhost:$Port$displayPath"
+if (-not [string]::Equals($HostName, 'localhost', [System.StringComparison]::OrdinalIgnoreCase)) {
+    Write-Host "External URL: http://$HostName`:$Port$displayPath"
+    Write-Host "If the VM still cannot access the site, run these once from an elevated PowerShell/cmd on the host:"
+    Write-Host "  netsh http add urlacl url=http://$HostName`:$Port/ user=Everyone"
+    Write-Host "  netsh advfirewall firewall add rule name=`"HIA-ASPNETPortal $Port`" dir=in action=allow protocol=TCP localport=$Port"
+}
