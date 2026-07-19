@@ -40,6 +40,8 @@
 ## 前端资源检查
 
 - [ ] `dev/scripts/Test-PortalFrontendContracts.ps1` 对已追踪的前端契约通过。
+- [ ] `dev/scripts/Test-PortalLegacyCssCompatibility.ps1` 对旧浏览器 CSS 基础阻断项通过。
+- [ ] 如需 Edge IE mode 近似回归，先执行 `dev/scripts/Test-PortalIeModeReadiness.ps1` 并记录驱动/策略状态。
 - [ ] 确认是否需要运行 Gulp 或 Grunt。
 - [ ] 如需构建前端资源，记录实际命令。
 - [ ] CSS、JS、图片资源路径正确。
