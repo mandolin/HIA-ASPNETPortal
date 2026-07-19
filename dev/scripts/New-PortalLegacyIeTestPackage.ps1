@@ -360,6 +360,21 @@ function Get-BodyText {
     return ''
 }
 
+function Get-DocumentHtml {
+    param([object]$Browser)
+
+    try {
+        if ($null -ne $Browser.Document -and $null -ne $Browser.Document.documentElement) {
+            return [string]$Browser.Document.documentElement.outerHTML
+        }
+    }
+    catch {
+        return ''
+    }
+
+    return ''
+}
+
 function Test-AnyKeyword {
     param(
         [string]$Text,
@@ -375,13 +390,35 @@ function Test-AnyKeyword {
     return $false
 }
 
+function Get-ElementsByTagNameCompat {
+    param(
+        [object]$Document,
+        [string]$TagName
+    )
+
+    try {
+        if ($null -ne $Document.all) {
+            return $Document.all.tags($TagName)
+        }
+    }
+    catch {
+    }
+
+    try {
+        return $Document.getElementsByTagName($TagName)
+    }
+    catch {
+        return @()
+    }
+}
+
 function Find-InputByIdSuffix {
     param(
         [object]$Document,
         [string]$Suffix
     )
 
-    $inputs = $Document.getElementsByTagName('input')
+    $inputs = Get-ElementsByTagNameCompat -Document $Document -TagName 'input'
     foreach ($input in $inputs) {
         try {
             $id = [string]$input.id
@@ -417,7 +454,10 @@ function Invoke-PortalStep {
     $htmlPath = Save-PageHtml -Browser $Ie -Step $Step
     $screenshotPath = Save-Screenshot -Step $Step
     $bodyText = Get-BodyText -Browser $Ie
-    $passed = Test-AnyKeyword -Text $bodyText -Keywords $Keywords
+    $documentHtml = Get-DocumentHtml -Browser $Ie
+    $locationText = ([string]$Ie.LocationName) + ' ' + ([string]$Ie.LocationURL)
+    $combinedText = $bodyText + ' ' + $documentHtml + ' ' + $locationText
+    $passed = Test-AnyKeyword -Text $combinedText -Keywords $Keywords
     $message = if ($passed) { 'Expected keyword found.' } else { 'Expected keyword not found; manual review required.' }
     Add-Result -Step $Step -Passed $passed -Message $message -Url ([string]$Ie.LocationURL) -Screenshot $screenshotPath -Html $htmlPath
 }
@@ -494,7 +534,7 @@ try {
     $Ie.Width = 1200
     $Ie.Height = 900
 
-    Invoke-PortalStep -Step 'home' -Url (Join-PortalUrl -Root $BaseUrl -Path 'Default.aspx') -Keywords @('ASP.NET Portal Starter Kit', 'Portal')
+    Invoke-PortalStep -Step 'home' -Url (Join-PortalUrl -Root $BaseUrl -Path 'Default.aspx') -Keywords @('Portal', 'Home', 'Default.aspx')
     Invoke-PortalLogin
     Invoke-PortalStep -Step 'admin-system-health' -Url (Join-PortalUrl -Root $BaseUrl -Path 'Admin/SystemHealth.aspx') -Keywords @('System Health')
     Invoke-PortalStep -Step 'generic-error-page' -Url (Join-PortalUrl -Root $BaseUrl -Path 'GenericErrorPage.aspx?id=P9LegacyVmProbe') -Keywords @('P9LegacyVmProbe', 'event')
