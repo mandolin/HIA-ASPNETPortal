@@ -59,3 +59,12 @@ npm run assets:stop-watch
 
 脚本验证默认 Master 结构、主题和模块 CSS 加载边界、Visual Studio/VSCode Gulp 任务、IE9+ Browserslist、主题清单、字体禁用
 清单和公开文档入口。真实页面加载仍应结合 [testing-checklist.md](testing-checklist.md) 中的 IIS Express smoke 复核。
+
+旧浏览器兼容专项还应执行静态门禁：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalLegacyCssCompatibility.ps1
+```
+
+该脚本只读取 Git 已追踪的正式主题和模块 CSS。Flex/Grid、CSS 变量、现代单位、现代滤镜和 CSS 渐变依赖会作为阻断项；圆角、
+阴影、透明度等 IE8 视觉降级项默认只警告。真实 IE8/IE9 或国产旧内核表现仍需通过云测试平台、旧 VM 或目标环境人工补证。
