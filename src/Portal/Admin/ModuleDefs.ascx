@@ -11,47 +11,53 @@ TagPrefix="ASPNETPortal"
 TagName="Title" 
 Src="~/DesktopModuleTitle.ascx"%>
 
-<%-- 标题组件 --%>
 <ASPNETPortal:title runat="server" id="Title1" />
 
-<%-- 表格布局 --%>
-<table cellpadding="2" cellspacing="0" border="0">
-    <%-- 数据列表的第一行 --%>
-    <tr valign="top">
-        <td>
-            <%-- 数据列表控件，用于显示模块定义 --%>
-            <asp:DataList 
-                id="defsList" 
-                DataKeyField="ModuleDefID" 
-                runat="server" 
-                OnItemCommand="DefsList_ItemCommand">
-                
+<%-- 中文 / English: Legacy 桥接入口只展示既有定义并引导到受信任模块目录，不恢复在线手填路径。 --%>
+<div class="portal-admin-page portal-legacy-admin-module portal-legacy-module-defs">
+    <div class="portal-admin-header">
+        <div class="portal-admin-heading">
+            <h2 class="Head portal-admin-title">Legacy Module Definitions</h2>
+            <p class="Normal portal-admin-subtitle">Existing module definitions are listed here; new business modules should be registered from trusted deployed packages.</p>
+        </div>
+        <div class="portal-admin-actions">
+            <asp:LinkButton
+                ID="AddDefBtn"
+                CssClass="portal-button portal-button-primary"
+                Text="Open Module Catalog"
+                CausesValidation="False"
+                OnClick="AddDef_Click"
+                runat="server" />
+        </div>
+    </div>
+
+    <div class="portal-admin-section">
+        <div class="portal-section-header">
+            <h3 class="Head portal-section-title">Existing Definitions</h3>
+        </div>
+        <div class="portal-chip-list-wrap">
+            <asp:DataList
+                ID="defsList"
+                CssClass="portal-chip-list portal-legacy-list"
+                RepeatColumns="2"
+                DataKeyField="ModuleDefID"
+                OnItemCommand="DefsList_ItemCommand"
+                runat="server">
                 <ItemTemplate>
-                    <%-- 编辑按钮 --%>
-                    <asp:ImageButton 
-                        ImageUrl="~/images/edit.gif" 
-                        AlternateText="Edit this item" 
-                        runat="server" />
-                    &nbsp;&nbsp;
-                    <%-- 显示模块定义的友好名称 --%>
-                    <asp:Label 
-                        Text='<%#: DataBinder.Eval(Container.DataItem, "FriendlyName") %>'
-                        CssClass="Normal" 
-                        runat="server" />
+                    <div class="portal-chip-item">
+                        <asp:Label
+                            Text='<%#: DataBinder.Eval(Container.DataItem, "FriendlyName") %>'
+                            CssClass="Normal portal-chip-text"
+                            runat="server" />
+                        <asp:LinkButton
+                            Text="Edit Definition"
+                            CommandName="edit"
+                            CssClass="portal-button portal-button-secondary portal-button-compact"
+                            CausesValidation="False"
+                            runat="server" />
+                    </div>
                 </ItemTemplate>
             </asp:DataList>
-        </td>
-    </tr>
-    <%-- 数据列表的最后一行 --%>
-    <tr>
-        <td>
-            <%-- 打开受信任部署模块目录；不再从旧定义页手填新的模块路径。 --%>
-            <asp:LinkButton 
-                cssclass="CommandButton" 
-                Text="Open Module Catalog"
-                runat="server" 
-                id="AddDefBtn" 
-                onclick="AddDef_Click" />
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

@@ -1467,3 +1467,28 @@ button.portal-button-danger:hover {
     color: #5c6f82;
     line-height: 1.5;
 }
+
+/* 中文 / English: 旧 Admin ASCX 兼容控件的最小布局补强。 */
+.portal-legacy-listbox {
+    width: 100% !important;
+    max-width: 360px;
+    min-height: 160px;
+}
+
+.portal-legacy-action-stack .portal-button {
+    display: inline-block;
+    margin: 0 6px 8px 0;
+}
+
+.portal-legacy-list .portal-button {
+    margin-left: 8px;
+}
+
+.portal-legacy-role-item {
+    display: block;
+    min-width: 360px;
+}
+
+.portal-legacy-role-edit .portal-form-input {
+    margin-right: 8px;
+}

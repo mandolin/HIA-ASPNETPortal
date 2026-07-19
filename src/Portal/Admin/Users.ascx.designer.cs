@@ -48,7 +48,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_EditUser;
+        protected global::System.Web.UI.WebControls.LinkButton btn_EditUser;
 
         /// <summary>
         /// btn_DeleteUser 控件。
@@ -57,7 +57,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_DeleteUser;
+        protected global::System.Web.UI.WebControls.LinkButton btn_DeleteUser;
 
         /// <summary>
         /// btn_AddUser 控件。

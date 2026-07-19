@@ -39,3 +39,11 @@ font-family: "Sarasa Mono SC", "Noto Sans Mono CJK SC", "Source Han Mono SC", "L
 - 后台角色控件和文档上传控件已移除 Verdana、Arial 的内联绑定，统一继承主题字体。
 - 旧 `src/Setup/SystemReqs.rtf` 未被项目引用，且其字体表包含多种 Office/Windows 专有字体；现有 `SystemReqs.md` 已保留同一份历史需求内容，因此删除冗余 RTF。
 - 未跟踪的生成文档中存在 Font Awesome Free 6.1.1 图标字体，其 CSS 头部已声明字体使用 SIL OFL 1.1、代码使用 MIT、图标使用 CC BY 4.0；该目录目前仍按生成物处理，不纳入本次主仓库字体分发。
+
+## 2026-07-19 P7.5 审计结果
+
+- P7 六套正式主题没有分发 `.eot`、`.otf`、`.ttf`、`.woff` 或 `.woff2` 字体二进制。
+- `src/Portal/App_Themes/` 未发现 `@font-face`、远程字体 URL 或 `data:font`。
+- P7 主题继续使用上述开源字体优先栈，并保留 `sans-serif` / `monospace` 通用回退。
+- `Default`、`EnterpriseLight/Dark`、`OaLight/Dark`、`StateClassicLight/Dark` 和 `ThemeProbe` 未主动引用 Verdana、Arial、Helvetica、Times New Roman、Courier New、Consolas、Segoe UI、Microsoft YaHei 或微软雅黑。
+- 完整 P7.5 资源审计记录见 WorkZone 内部计划 `W-anp-P7.5-resource-license-audit.md`。

@@ -53,7 +53,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton upBtn;
+        protected global::System.Web.UI.WebControls.LinkButton upBtn;
 
         /// <summary>
         /// downBtn 控件。
@@ -62,7 +62,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton downBtn;
+        protected global::System.Web.UI.WebControls.LinkButton downBtn;
 
         /// <summary>
         /// editBtn 控件。
@@ -71,7 +71,7 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton editBtn;
+        protected global::System.Web.UI.WebControls.LinkButton editBtn;
 
         /// <summary>
         /// deleteBtn 控件。
@@ -80,6 +80,6 @@ namespace ASPNET.StarterKit.Portal
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton deleteBtn;
+        protected global::System.Web.UI.WebControls.LinkButton deleteBtn;
     }
 }

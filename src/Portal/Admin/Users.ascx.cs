@@ -69,8 +69,8 @@ namespace ASPNET.StarterKit.Portal
         /// English: Deletes the selected user and records an operations audit without profile content.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void btn_DeleteUser_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void btn_DeleteUser_Click(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) || !TryReadNavigationParameters())
             {
@@ -112,8 +112,8 @@ namespace ASPNET.StarterKit.Portal
         /// English: Opens the profile-editing page using the canonical identifier of the currently selected user.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void EditUser_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void EditUser_Click(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView) || !TryReadNavigationParameters())
             {

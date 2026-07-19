@@ -928,14 +928,17 @@ body.portal-theme-stateclassicdark .portal-tab-selected {
 body.portal-theme-stateclassicdark .portal-main-shell {
     width: 1200px;
     max-width: 96%;
-    padding-top: 20px;
+    padding: 20px 24px 28px;
+    border: 1px solid #0d2137;
+    background-color: #111820;
+    box-sizing: border-box;
 }
 
 body.portal-theme-stateclassicdark .portal-content-stage {
     min-height: 620px;
-    padding: 20px 24px 28px;
-    border: 1px solid #0d2137;
-    background-color: #111820;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
 }
 
 body.portal-theme-stateclassicdark .portal-module,
@@ -1461,4 +1464,29 @@ button.portal-button-danger:hover {
     border-top: 1px solid #515b6c;
     color: #c8ccd4;
     line-height: 1.5;
+}
+
+/* 中文 / English: 旧 Admin ASCX 兼容控件的最小布局补强。 */
+.portal-legacy-listbox {
+    width: 100% !important;
+    max-width: 360px;
+    min-height: 160px;
+}
+
+.portal-legacy-action-stack .portal-button {
+    display: inline-block;
+    margin: 0 6px 8px 0;
+}
+
+.portal-legacy-list .portal-button {
+    margin-left: 8px;
+}
+
+.portal-legacy-role-item {
+    display: block;
+    min-width: 360px;
+}
+
+.portal-legacy-role-edit .portal-form-input {
+    margin-right: 8px;
 }

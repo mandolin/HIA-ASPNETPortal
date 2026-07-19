@@ -185,6 +185,106 @@ ORDER BY [TabIndex], [TabId]
     }
 }
 
+function Get-LegacyAdminModuleTargets {
+    param([System.Data.SqlClient.SqlConnection]$Connection)
+
+    $command = $Connection.CreateCommand()
+    try {
+        $command.CommandText = @'
+WITH OrderedTabs AS
+(
+    SELECT
+        [TabId],
+        [TabName],
+        ROW_NUMBER() OVER (ORDER BY [TabOrder], [TabId]) - 1 AS [TabIndex]
+    FROM [dbo].[PortalCfg_Tabs]
+    WHERE [PortalId] = 1
+),
+LegacyModules AS
+(
+    SELECT
+        t.[TabId],
+        t.[TabIndex],
+        m.[ModuleTitle],
+        d.[DesktopSourceFile]
+    FROM OrderedTabs t
+    INNER JOIN [dbo].[PortalCfg_Modules] m
+        ON m.[TabId] = t.[TabId]
+    INNER JOIN [dbo].[PortalCfg_ModuleDefinitions] d
+        ON d.[ModuleDefId] = m.[ModuleDefId]
+    WHERE t.[TabName] = N'Admin'
+      AND d.[DesktopSourceFile] IN
+      (
+          N'Admin/ModuleDefs.ascx',
+          N'Admin/SiteSettings.ascx',
+          N'Admin/Tabs.ascx',
+          N'Admin/Roles.ascx',
+          N'Admin/Users.ascx'
+      )
+)
+SELECT [TabId], [TabIndex], [ModuleTitle], [DesktopSourceFile]
+FROM LegacyModules
+ORDER BY
+    CASE [DesktopSourceFile]
+        WHEN N'Admin/ModuleDefs.ascx' THEN 1
+        WHEN N'Admin/SiteSettings.ascx' THEN 2
+        WHEN N'Admin/Tabs.ascx' THEN 3
+        WHEN N'Admin/Roles.ascx' THEN 4
+        WHEN N'Admin/Users.ascx' THEN 5
+        ELSE 99
+    END
+'@
+        $reader = $command.ExecuteReader()
+        try {
+            $targets = New-Object 'System.Collections.Generic.List[object]'
+            while ($reader.Read()) {
+                $sourceFile = $reader.GetString(3)
+                $targetMeta = switch ($sourceFile) {
+                    'Admin/ModuleDefs.ascx' {
+                        @{ id = 'admin-legacy-module-defs'; title = '旧模块定义 ASCX'; scrollText = 'Legacy Module Definitions' }
+                    }
+                    'Admin/SiteSettings.ascx' {
+                        @{ id = 'admin-legacy-site-settings'; title = '旧站点设置 ASCX'; scrollText = 'Legacy Site Settings' }
+                    }
+                    'Admin/Tabs.ascx' {
+                        @{ id = 'admin-legacy-tabs'; title = '旧 Tab 管理 ASCX'; scrollText = 'Legacy Tab Administration' }
+                    }
+                    'Admin/Roles.ascx' {
+                        @{ id = 'admin-legacy-roles'; title = '旧角色管理 ASCX'; scrollText = 'Legacy Role Administration' }
+                    }
+                    'Admin/Users.ascx' {
+                        @{ id = 'admin-legacy-users'; title = '旧用户入口 ASCX'; scrollText = 'Legacy User Entry' }
+                    }
+                    default {
+                        $null
+                    }
+                }
+
+                if ($null -eq $targetMeta) {
+                    continue
+                }
+
+                $tabId = $reader.GetInt32(0)
+                $tabIndex = [Convert]::ToInt32($reader.GetValue(1), [System.Globalization.CultureInfo]::InvariantCulture)
+                $targets.Add([pscustomobject]@{
+                    id = $targetMeta.id
+                    title = $targetMeta.title
+                    url = "DesktopDefault.aspx?tabindex=$tabIndex&tabid=$tabId"
+                    scrollText = $targetMeta.scrollText
+                })
+            }
+
+            return $targets
+        }
+        finally {
+            $reader.Dispose()
+        }
+    }
+    finally {
+        $command.Dispose()
+    }
+}
+
 function Get-DiscussionDetailTarget {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -722,6 +822,7 @@ const tabLayoutTabId = process.env.P7_THEME_TAB_LAYOUT_TAB_ID;
 const contentTabsJson = process.env.P7_THEME_CONTENT_TABS || '[]';
 const discussionDetailJson = process.env.P7_THEME_DISCUSSION_DETAIL || 'null';
 const editPageTargetsJson = process.env.P7_THEME_EDIT_PAGE_TARGETS || '[]';
+const legacyAdminTargetsJson = process.env.P7_THEME_LEGACY_ADMIN_TARGETS || '[]';
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -795,6 +896,12 @@ async function gotoTarget(page, target) {
 
 async function capture(page, target) {
   await gotoTarget(page, target);
+  if (target.scrollText) {
+    const scrollTarget = page.getByText(target.scrollText, { exact: false }).first();
+    await scrollTarget.scrollIntoViewIfNeeded({ timeout: 8000 });
+    await page.waitForTimeout(350);
+  }
+
   await page.waitForTimeout(900);
   const fileName = `${theme}-${target.id}.png`;
   const filePath = path.join(outputDir, fileName);
@@ -829,6 +936,7 @@ const p65 = fs.existsSync(p65Path) ? readJson(p65Path) : null;
 const contentTabs = readEnvJson(contentTabsJson, []);
 const discussionDetail = readEnvJson(discussionDetailJson, null);
 const editPageTargets = readEnvJson(editPageTargetsJson, []);
+const legacyAdminTargets = readEnvJson(legacyAdminTargetsJson, []);
 fs.mkdirSync(outputDir, { recursive: true });
 
 const anonymousTargets = [
@@ -910,6 +1018,18 @@ for (const target of editPageTargets) {
       title: target.title || target.id,
       role: 'admin',
       url: joinUrl(target.url)
+    });
+  }
+}
+
+for (const target of legacyAdminTargets) {
+  if (target?.id && target?.url) {
+    adminTargets.push({
+      id: target.id,
+      title: target.title || target.id,
+      role: 'admin',
+      url: joinUrl(target.url),
+      scrollText: target.scrollText || ''
     });
   }
 }
@@ -1001,6 +1121,7 @@ try {
     $connection.Open()
     $settingSnapshot = Get-SystemSettingSnapshot -Connection $connection
     $contentTabTargets = Get-ContentTabTargets -Connection $connection
+    $legacyAdminTargets = Get-LegacyAdminModuleTargets -Connection $connection
     $discussionDetailTarget = Get-DiscussionDetailTarget -Connection $connection
     $editPageTargets = Get-OrCreateEditPageTargets -Connection $connection
     $p65Context = Get-Content -LiteralPath $P65ContextPath -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -1083,6 +1204,7 @@ ORDER BY CASE WHEN [TabName] = N'Home' THEN 0 ELSE 1 END, [TabOrder], [TabId]
         $env:P7_THEME_MODULE_SETTINGS_TAB_ID = if ($null -eq $moduleSettingsTabId) { '' } else { [string]$moduleSettingsTabId }
         $env:P7_THEME_TAB_LAYOUT_TAB_ID = if ($null -eq $tabLayoutTabId) { '' } else { [Convert]::ToString($tabLayoutTabId, [System.Globalization.CultureInfo]::InvariantCulture) }
         $env:P7_THEME_CONTENT_TABS = if ($contentTabTargets.Count -eq 0) { '[]' } else { $contentTabTargets | ConvertTo-Json -Compress }
+        $env:P7_THEME_LEGACY_ADMIN_TARGETS = if ($legacyAdminTargets.Count -eq 0) { '[]' } else { $legacyAdminTargets | ConvertTo-Json -Compress }
         $env:P7_THEME_DISCUSSION_DETAIL = if ($null -eq $discussionDetailTarget) { 'null' } else { $discussionDetailTarget | ConvertTo-Json -Compress }
         $env:P7_THEME_EDIT_PAGE_TARGETS = if ($editPageTargets.Count -eq 0) { '[]' } else { $editPageTargets | ConvertTo-Json -Compress }
 
@@ -1109,6 +1231,7 @@ finally {
     Remove-Item Env:P7_THEME_MODULE_SETTINGS_TAB_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_TAB_LAYOUT_TAB_ID -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_CONTENT_TABS -ErrorAction SilentlyContinue
+    Remove-Item Env:P7_THEME_LEGACY_ADMIN_TARGETS -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_DISCUSSION_DETAIL -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_EDIT_PAGE_TARGETS -ErrorAction SilentlyContinue
 

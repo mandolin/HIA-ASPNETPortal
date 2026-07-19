@@ -74,15 +74,15 @@ namespace ASPNET.StarterKit.Portal
         /// English: Adjusts the order of the currently selected non-core Tab.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void UpDown_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void UpDown_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
             {
                 return;
             }
 
-            ImageButton button = sender as ImageButton;
+            IButtonControl button = sender as IButtonControl;
             TabSettings selectedTab;
             if (button == null || (button.CommandName != "up" && button.CommandName != "down") ||
                 !TryGetSelectedTab(out selectedTab))
@@ -121,8 +121,8 @@ namespace ASPNET.StarterKit.Portal
         /// English: Deletes the currently selected non-core Tab; deletion also cleans up that Tab's module instances.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void DeleteBtn_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void DeleteBtn_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
             {
@@ -217,8 +217,8 @@ namespace ASPNET.StarterKit.Portal
         /// English: Opens the layout-settings page for the currently selected Tab.
         /// </summary>
         /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：图像按钮事件数据。English: Image-button event data.</param>
-        protected void EditBtn_Click(object sender, ImageClickEventArgs e)
+        /// <param name="e">中文：事件数据。English: Event data.</param>
+        protected void EditBtn_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
             {
