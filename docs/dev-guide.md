@@ -169,6 +169,19 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 
 P6 用户资料迁移会先检查旧用户名称和邮箱是否存在会破坏唯一性的历史数据；P6.3 员工组织迁移按 `PortalBiz_OrganizationUnits.sql`、`PortalBiz_Employees.sql`、`PortalBiz_UserEmployeeBindings.sql` 的顺序执行。两者都只应指向隔离开发库或测试库，不要指向生产配置。
 
+SQL Server 版本矩阵预检用于 P11 之后的多版本补证。默认只做静态扫描，不连接数据库、不创建数据库、不执行 SQL：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlVersionMatrix.ps1
+```
+
+需要给某个隔离 SQL Server 测试实例补充版本、兼容级别和目标库元数据时，传入仓库外连接串文件。脚本只读取元数据，不输出服务器名、连接串或密码；SQL Server 2016/2017/2019 的通过结论仍必须由对应真实实例补证，不能用更新版本代替：
+
+```powershell
+$testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlVersionMatrix.ps1 -ConnectionStringsConfigPath $testConfig
+```
+
 首次创建隔离的 SQL Server 2016+ 测试库时，可显式运行初始化脚本。它从外置连接串读取目标库名，要求目标库不存在，并在确认后导入历史基础数据、P2、P3 与 P5 迁移；不会输出或保存连接串：
 
 ```powershell

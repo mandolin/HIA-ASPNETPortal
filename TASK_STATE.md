@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P11 数据兼容、迁移与集成边界` |
-| 当前阶段 | `W-anp-P11.0` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P11.0-discussion-questions.md`；若确认，则拆出并推进 `W-anp-P11.1 SQL Server 版本矩阵`。 |
-| 当前完成条件 | P11.0 的讨论问题被确认，随后完成 P11.1 设计、数据库矩阵输入和可自动执行/需用户提供环境的验证边界。 |
+| 当前阶段 | `W-anp-P11.2` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P11.2-discussion-questions.md`；若确认，则推进数据访问差异盘点。 |
+| 当前完成条件 | P11.2 的讨论问题被确认，随后完成 SQL Server-only、可移植候选、SQLite/MySQL/PostgreSQL 差异和后续抽象边界清单。 |
 | 最近状态更新时间 | 2026-07-21 |
 
 ## Recent Completed Items
@@ -32,13 +32,14 @@
 | P10.4 审计、日志、证据与例外机制 | completed | `work-zone/dev/plans/W-anp-P10.4-implementation-result.md`；证据包 `work-zone/dev/evidence/p10/20260721-032427-Dev/` |
 | P10.5 周期验收与 P10 收口 | completed | `work-zone/dev/plans/W-anp-P10.5-acceptance-result.md`、`work-zone/dev/plans/W-anp-P10-closeout.md`；证据包 `work-zone/dev/evidence/p10.5/20260721-033459-Dev/` |
 | 上下文恢复任务账本机制 | completed | `TASK_STATE.md`、`AGENTS.md`、`work-zone/docs/task-ledger-protocol.md` |
+| P11.1 SQL Server 版本矩阵自动侧基线 | completed | `dev/scripts/Test-PortalSqlVersionMatrix.ps1`；`work-zone/dev/plans/W-anp-P11.1-static-preflight-result.md`；证据 `work-zone/dev/evidence/p11.1/` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 本轮 P10.5 状态账本提交 | 将包含 P10 已完成、P11.0 待确认的任务状态。 |
-| WorkZone | 本轮 P10.5 WorkZone 提交 | 将包含 P10.5 证据、closeout、P11 输入和本轮日志。 |
+| 主仓库 | 本轮 P11.1 SQL Server 版本矩阵预检提交 | 已包含 P11.1 只读矩阵脚本、公开文档说明和 P11.2 当前账本状态。 |
+| WorkZone | 待提交 P11.1 WorkZone 证据和 P11.2 讨论入口 | 将包含 P11.1 设计、证据摘要、P11.2 待讨论问题和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -56,6 +57,9 @@
 | UTF-8 无 BOM 检查 | P10.3.3 相关文件均为 UTF-8 无 BOM。 |
 | `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；12 个公开文档均已登记到 `docs/README.md`。 |
 | P10 阶段关键短语复查 | 无 `P10.4=多角色`、`P10 主轴待讨论`、`当前进入 P10.3`、`当前 P4.1` 等误导性残留命中。 |
+| `dev/scripts/Test-PortalSqlVersionMatrix.ps1` 静态预检 | `Pass=11; Warning=1; Fail=0; Info=1; Pending=4`；Warning 为历史 SQL 登录授权脚本。 |
+| `dev/scripts/Test-PortalSqlVersionMatrix.ps1 -ConnectionStringsConfigPath {test config}` | `Pass=14; Warning=1; Fail=0; Info=1; Pending=3`；本机仅补得 SQL Server 2022 元数据证据。 |
+| `dev/scripts/Test-PortalSqlCompatibility.ps1 -RequireP2...P6...` 只读检查 | SQL Server 2022 元数据通过；当前 test 库缺少 P5/P6 后续表，不能作为“最新迁移完成库”证据。 |
 
 ## Known Residual Working Tree Items
 

@@ -16,6 +16,8 @@
 - [ ] 外置 `connectionStrings.config` 存在于 `{ExternalCfgPath}\{env}\`。
 - [ ] `Portal` 连接串指向预期本地或测试数据库。
 - [ ] 不使用生产数据库执行开发验证。
+- [ ] 如需 SQL Server 2016+ 版本补证，先运行 `dev/scripts/Test-PortalSqlVersionMatrix.ps1`；没有对应真实实例时只记录 Pending，不宣称通过。
+- [ ] 如需验证最新 schema，`dev/scripts/Test-PortalSqlCompatibility.ps1` 指向已完成对应迁移的隔离测试库。
 
 ## 运行检查
 
