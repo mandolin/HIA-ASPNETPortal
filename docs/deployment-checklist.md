@@ -9,6 +9,7 @@
 - [ ] 如使用本地文件系统发布包，已运行 `dev/scripts/Publish-PortalFileSystem.ps1`，并对发布输出目录执行二次门禁。
 - [ ] 使用独立的 `test` 或 `prod` 外置配置目录，不使用开发机 LocalDB 或开发连接串。
 - [ ] 不提交或记录真实连接串、密码、Token、证书、Cookie 或生产数据库备份。
+- [ ] 已运行 `dev/scripts/Test-PortalDefaultCredentialRisk.ps1`，并确认默认凭据风险只有可接受的历史样例或已处理项。
 - [ ] 目标数据库已完成备份、变更窗口和回滚责任人已明确。
 - [ ] 全量初始化脚本仅在隔离测试库中按人工明确操作执行；历史脚本固定使用数据库名 `Portal` 并包含重建/清空行为。
 - [ ] P2/P3/P5 增量迁移已先在独立测试库验证；应用启动不会自动执行迁移。
@@ -34,6 +35,7 @@
 - [ ] 不通过后台上传 ZIP、在线编辑 CSS、外部 URL 或主题脚本改变主题资源；这些能力目前不属于发布契约。
 - [ ] `Portal.Diagnostics.AllowAdminDetailView`、日志目录、上传目录和其他部署级设置符合环境要求。
 - [ ] 生产默认账号已替换，且没有共享开发密码。
+- [ ] 如使用 `Portal_LoadData.sql` 初始化数据库，默认 admin 已在开放访问前完成替换、禁用、删除或迁移，并记录处理结果。
 - [ ] `Portal_UserCredentials`、`Portal_UserSecurityStates` 和 `PortalCfg_RolePermissions` 的执行状态已记录。
 - [ ] `PortalCfg_RolePermissions` 已包含 `Admins` 兼容权限映射；后续非管理员权限映射需有审计或变更记录。
 - [ ] `machineKey`、Cookie `Secure` / `SameSite` 和 HTTPS 策略已按目标环境确认；真实密钥不得进入仓库。

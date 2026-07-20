@@ -334,6 +334,16 @@ else {
     Add-ComplianceCheck -Severity Warning -Code 'PWD-SQL-CREDENTIALS' -Message 'Credential table migration script needs review.'
 }
 
+$defaultCredentialRiskScriptPath = Join-Path $repoRoot 'dev/scripts/Test-PortalDefaultCredentialRisk.ps1'
+$defaultCredentialDocPath = Join-Path $repoRoot 'docs/deployment-default-credentials.md'
+if ((Test-Path -LiteralPath $defaultCredentialRiskScriptPath) -and
+    (Test-TextContains -LiteralPath $defaultCredentialDocPath -Pattern '默认凭据|default credential')) {
+    Add-ComplianceCheck -Severity Pass -Code 'PWD-DEFAULT-CREDENTIAL-GOVERNANCE' -Message 'Default credential governance script and deployment guidance are present.' -Evidence 'Test-PortalDefaultCredentialRisk.ps1; docs/deployment-default-credentials.md'
+}
+else {
+    Add-ComplianceCheck -Severity Warning -Code 'PWD-DEFAULT-CREDENTIAL-GOVERNANCE' -Message 'Default credential governance script or deployment guidance needs review.'
+}
+
 $operationAuditScriptPath = Join-Path $resolvedSetupPath 'PortalCfg_OperationAudits.sql'
 if (Test-TextContains -LiteralPath $operationAuditScriptPath -Pattern 'PortalCfg_OperationAudits') {
     Add-ComplianceCheck -Severity Pass -Code 'AUDIT-SQL' -Message 'Operation audit table migration script is present.' -Evidence 'src/Setup/PortalCfg_OperationAudits.sql'

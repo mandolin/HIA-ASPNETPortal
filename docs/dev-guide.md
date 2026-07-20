@@ -241,6 +241,7 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 5. 构建并运行站点。
 
 部署或共享环境中不得使用默认账号和弱密码。
+默认凭据和旧口令治理见 `docs/deployment-default-credentials.md`；发布前应运行 `dev/scripts/Test-PortalDefaultCredentialRisk.ps1`。
 
 ## 前端资源
 

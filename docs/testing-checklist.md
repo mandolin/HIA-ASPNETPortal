@@ -24,6 +24,7 @@
 - [ ] `dev/scripts/Test-PortalSmoke.ps1` 对已运行站点通过。
 - [ ] 登录流程可用。
 - [ ] 默认账号已仅限本地验证，非本地环境已修改密码。
+- [ ] `dev/scripts/Test-PortalDefaultCredentialRisk.ps1` 已运行；默认 admin、旧 MD5 和初始化脚本风险已记录。
 - [ ] 管理入口可访问。
 
 ## 核心模块手工回归
