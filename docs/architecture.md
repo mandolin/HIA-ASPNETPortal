@@ -34,6 +34,15 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 - `src/Portal.DataProviderProof/` 是未加入主解决方案的 .NET Framework 4.8 开发/测试 proof 项目；它验证 ADO.NET provider factory 与 SQLite 基础事务能力，不参与正常门户部署。
 - `src/Portal.HiaBoundaryProof/` 是未加入主解决方案的 .NET Framework 4.8 契约 proof 项目；它通过 fixtures 验证 HIA 外围能力描述的版本、字段与隐私边界，不添加 HIA 运行时依赖或 transport。
 
+数据访问兼容性标签从 P11.2 起按四类记录：
+
+- `SqlServerOnly`：当前只能视为 SQL Server 能力，例如 `System.Data.SqlClient`、EF SQL Server provider、`[dbo]`、`OBJECT_ID`、`SYSUTCDATETIME()`、`IDENTITY`、`ROWVERSION`。
+- `NeedsDialect`：具备抽象可能但必须按 provider 改写的 SQL，例如 `SELECT TOP`、锁提示、`OUTPUT INSERTED` 和 table variable。
+- `PortableCandidate`：可作为 provider 抽象入口或接近通用的能力，例如 `PortalDatabaseProfile`、`DbProviderFactories`、简单连接检查。
+- `ProviderProof`：独立 proof 范围，例如当前 SQLite proof；不表示门户主业务数据库已支持该 provider。
+
+可用 `dev/scripts/Get-PortalDataAccessInventory.ps1` 生成只读 inventory。脚本只扫描 Git 已追踪源码，不读取真实连接串或仓库外配置。
+
 ## HIA 外围协作基线
 
 `Portal.Components/PortalHiaBoundaryContracts.cs` 定义门户拥有的 `hia.portal.peripheral@0.1.0-draft` 契约 DTO 和离线验证器。当前仅覆盖模块、主题、设置 registry 元数据、健康和受限诊断引用，且通过显式版本、白名单字段和路径/敏感字段检查保持边界清晰。

@@ -182,6 +182,18 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlVersionMatrix.ps1 -ConnectionStringsConfigPath $testConfig
 ```
 
+P11.2 起提供只读数据访问 inventory，用于扫描已追踪源码中的 SQL Server 专属依赖、需要 provider 方言处理的 SQL、可抽象入口和 provider proof 边界。它不连接数据库、不读取仓库外连接串，也不会扫描未跟踪生成目录：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1
+```
+
+需要保留 JSON 证据时显式指定输出路径：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1 -OutputJson work-zone\dev\evidence\p11.2\data-access-inventory.json
+```
+
 首次创建隔离的 SQL Server 2016+ 测试库时，可显式运行初始化脚本。它从外置连接串读取目标库名，要求目标库不存在，并在确认后导入历史基础数据、P2、P3 与 P5 迁移；不会输出或保存连接串：
 
 ```powershell
