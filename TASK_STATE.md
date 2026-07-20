@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P10 合规、安全发布治理与企业运行规则深化` |
-| 当前阶段 | `W-anp-P10.4` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P10.4-discussion-questions.md`；若确认，则推进审计、日志、证据与例外机制。 |
-| 当前完成条件 | P10.4 的讨论问题被确认，随后完成证据目录、日志/审计脱敏规则、例外模板和 P10.5 验收输入。 |
+| 当前阶段 | `W-anp-P10.5` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P10.5-discussion-questions.md`；若确认，则执行 P10.5 验收矩阵、复核例外并形成 P10 closeout。 |
+| 当前完成条件 | P10.5 的讨论问题被确认，随后完成证据包复跑、例外复核、多角色 smoke 可覆盖项、P10 closeout 和 P11 输入。 |
 | 最近状态更新时间 | 2026-07-21 |
 
 ## Recent Completed Items
@@ -29,14 +29,15 @@
 | P10.3 登录密码前端加密 | completed | `work-zone/dev/plans/W-anp-P10.3-login-encryption-result.md` |
 | P10.3.2 注册/管理员重置口令加密与策略配置 | completed | `work-zone/dev/plans/W-anp-P10.3.2-password-entry-result.md` |
 | P10.3.3 默认凭据与旧口令治理 | completed | `work-zone/dev/plans/W-anp-P10.3.3-default-credential-result.md` |
+| P10.4 审计、日志、证据与例外机制 | completed | `work-zone/dev/plans/W-anp-P10.4-implementation-result.md`；证据包 `work-zone/dev/evidence/p10/20260721-032427-Dev/` |
 | 上下文恢复任务账本机制 | completed | `TASK_STATE.md`、`AGENTS.md`、`work-zone/docs/task-ledger-protocol.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `09edefd Add default credential risk checks` | 已推送；包含默认凭据只读检查脚本和公开部署说明。 |
-| WorkZone | `d5ce9ba Update P10.3.3 session log` | 已推送；包含 P10.3.3 结果、P10.4 讨论入口和日志更新。 |
+| 主仓库 | 本账本所在 P10.4 提交 | 将包含合规证据包脚本、公开清单入口和 P10.5 任务状态。 |
+| WorkZone | 本轮 P10.4 WorkZone 提交 | 将包含证据目录、例外登记、脱敏规则、P10.4 结果、P10.5 讨论入口和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -44,6 +45,8 @@
 | --- | --- |
 | `dev/scripts/Test-PortalDefaultCredentialRisk.ps1 -Profile Dev` | `Pass=5; Warning=3; Fail=0; Info=1`；Warning 为历史 admin seed、本地旧默认说明、旧 MD5 兼容路径。 |
 | `dev/scripts/Test-PortalComplianceBaseline.ps1 -Profile Dev` | `Pass=26; Warning=1; Fail=0; Info=2`；唯一 Warning 为旧 MD5 兼容路径。 |
+| `dev/scripts/New-PortalComplianceEvidencePackage.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p10/20260721-032427-Dev/`，3 步骤全部 `Passed`，失败数 `0`。 |
+| 证据包敏感值复查 | 未发现实际密码、Token、Cookie、连接串或证书私钥值；快速正则命中均为 `Pass=` 摘要或安全配置键名误报。 |
 | UTF-8 无 BOM 检查 | P10.3.3 相关文件均为 UTF-8 无 BOM。 |
 | `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；12 个公开文档均已登记到 `docs/README.md`。 |
 | P10 阶段关键短语复查 | 无 `P10.4=多角色`、`P10 主轴待讨论`、`当前进入 P10.3`、`当前 P4.1` 等误导性残留命中。 |

@@ -53,6 +53,7 @@
 ## 发布前检查
 
 - [ ] `dev/scripts/Test-PortalPublicDocumentation.ps1` 对公开入口、相对文件链接和隐私边界通过。
+- [ ] 如需保留合规证据，执行 `dev/scripts/New-PortalComplianceEvidencePackage.ps1` 并将输出留存在 WorkZone 证据目录。
 - [ ] `dev/scripts/Test-PortalPublishReadiness.ps1` 对项目 Content 清单、主题包、模块包和发布输出通过。
 - [ ] 如需生成本地文件系统发布包，执行 `dev/scripts/Publish-PortalFileSystem.ps1` 并记录输出目录。
 - [ ] 未提交真实连接字符串、密码、Token、证书。

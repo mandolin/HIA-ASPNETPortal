@@ -10,6 +10,7 @@
 - [ ] 使用独立的 `test` 或 `prod` 外置配置目录，不使用开发机 LocalDB 或开发连接串。
 - [ ] 不提交或记录真实连接串、密码、Token、证书、Cookie 或生产数据库备份。
 - [ ] 已运行 `dev/scripts/Test-PortalDefaultCredentialRisk.ps1`，并确认默认凭据风险只有可接受的历史样例或已处理项。
+- [ ] 如本次发布需要合规留痕，已运行 `dev/scripts/New-PortalComplianceEvidencePackage.ps1` 并记录证据包目录。
 - [ ] 目标数据库已完成备份、变更窗口和回滚责任人已明确。
 - [ ] 全量初始化脚本仅在隔离测试库中按人工明确操作执行；历史脚本固定使用数据库名 `Portal` 并包含重建/清空行为。
 - [ ] P2/P3/P5 增量迁移已先在独立测试库验证；应用启动不会自动执行迁移。
