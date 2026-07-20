@@ -1,0 +1,18 @@
+{
+  "contract": "hia.portal.peripheral",
+  "contractVersion": "0.1.0-draft",
+  "draftLayer": "ExtensionMetadata",
+  "resourceType": "portal.extension-metadata.reference",
+  "direction": "ReadOnlyDescriptorDraft",
+  "candidates": [
+    "module-packages",
+    "theme-packages",
+    "settings-registry"
+  ],
+  "trustedDeployment": {
+    "zipUploadAllowed": false,
+    "onlineCodeEditAllowed": false,
+    "externalScriptAutoLoadAllowed": false
+  },
+  "notes": "P11.4 draft fixture only. It does not change the current module or theme package lifecycle."
+}

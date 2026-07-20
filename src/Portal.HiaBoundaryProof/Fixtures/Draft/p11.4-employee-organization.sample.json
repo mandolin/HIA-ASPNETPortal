@@ -1,0 +1,22 @@
+{
+  "contract": "hia.portal.peripheral",
+  "contractVersion": "0.1.0-draft",
+  "draftLayer": "EmployeeOrganization",
+  "resourceType": "portal.employee-organization.mapping",
+  "direction": "ImportOrReferenceDraft",
+  "localResources": [
+    "PortalBiz_Employees",
+    "PortalBiz_OrganizationUnits",
+    "PortalBiz_UserEmployeeBindings"
+  ],
+  "externalResources": [
+    "HIA.BizUser",
+    "HIA.Organization"
+  ],
+  "privacy": {
+    "sampleValuesOnly": true,
+    "containsActualEmployeeValue": false,
+    "requiresBusinessApprovalBeforeSync": true
+  },
+  "notes": "P11.4 draft fixture only. It records candidate mapping scope without enabling external sync."
+}

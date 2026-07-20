@@ -1,0 +1,21 @@
+{
+  "contract": "hia.portal.peripheral",
+  "contractVersion": "0.1.0-draft",
+  "draftLayer": "Identity",
+  "resourceType": "portal.user.hia-mapping",
+  "direction": "DesignOnly",
+  "localSubject": {
+    "kind": "PortalUser",
+    "reference": "local-user-reference"
+  },
+  "externalSubject": {
+    "kind": "HIA.SysUser",
+    "reference": "external-user-reference"
+  },
+  "privacy": {
+    "credentialExchange": false,
+    "containsRawRoleList": false,
+    "containsPersonalProfileValue": false
+  },
+  "notes": "P11.4 draft fixture only. It is not accepted by the current runtime validator."
+}

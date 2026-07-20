@@ -49,6 +49,10 @@
     <None Include="Fixtures\invalid-user-identity.json" />
     <None Include="Fixtures\invalid-instance-id.json" />
     <None Include="Fixtures\invalid-contract-version.json" />
+    <None Include="Fixtures\Draft\p11.4-identity-mapping.sample.json" />
+    <None Include="Fixtures\Draft\p11.4-employee-organization.sample.json" />
+    <None Include="Fixtures\Draft\p11.4-extension-metadata.sample.json" />
+    <None Include="Fixtures\Draft\p11.4-evidence-reference.sample.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portal.Components\Portal.Components.csproj">

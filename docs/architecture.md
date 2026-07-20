@@ -49,6 +49,12 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 
 这是一项可演进的协作基线，不是 HIA 平台强耦合或通用远程 API。正常门户不会发现或加载外部 adapter，也不需要 HIA 仓库、DLL 或服务存在。未来如需真实 consumer、传输、身份映射或写操作，应新增设计决策、版本化契约与独立运行回归。
 
+P11.4 起，HIA 外围集成按分层候选管理：用户与 HIA 身份只做映射设计，不替换本地 `Portal_Users`；员工、组织和用户资料是第一批只读/导入候选；模块包、主题包和设置 registry 是第二批元数据候选；诊断、审计和合规证据只允许摘要与引用，不暴露日志正文、物理路径、连接串或敏感字段。`src/Portal.HiaBoundaryProof/Fixtures/Draft/` 中的 P11.4 样例仅用于契约讨论，不会被当前运行时验证器接受。
+
+HIA-Documentation-Sys 通知机制采用目标项目主动读取。当前项目通过 `dev/scripts/Get-HiaDocumentationNotifications.ps1` 查看上游 `work-zone/notify/`，不会恢复向本项目 `dev/notify/` 主动投递的新通知机制。
+
+可用 `dev/scripts/Get-PortalHiaIntegrationInventory.ps1` 生成只读 HIA 集成边界 inventory。该脚本不连接数据库、不加载 HIA 外部程序集、不发起网络请求，也不复制通知正文。
+
 ## 当前架构风险
 
 - 数据访问存在 `Portal.Components.Data` 与 `Portal.Components.Data1` 两个相近项目，职责边界需要进一步确认。

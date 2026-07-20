@@ -37,3 +37,11 @@ dev/scripts/Get-HiaDocumentationNotifications.ps1
 ```
 
 默认读取同级 `../HIA-Documentation-Sys/work-zone/notify/`。如本机目录不同，可传入 `-HiaDocumentationRoot`。
+
+需要盘点门户自身 HIA 外围契约、proof、draft fixtures 与通知读取边界时使用：
+
+```powershell
+dev/scripts/Get-PortalHiaIntegrationInventory.ps1
+```
+
+该脚本只读，不连接数据库、不加载 HIA 外部程序集，也不复制通知正文。

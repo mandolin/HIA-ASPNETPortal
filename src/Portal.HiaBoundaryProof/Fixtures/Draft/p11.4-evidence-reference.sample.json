@@ -1,0 +1,19 @@
+{
+  "contract": "hia.portal.peripheral",
+  "contractVersion": "0.1.0-draft",
+  "draftLayer": "DiagnosticsEvidence",
+  "resourceType": "portal.evidence-reference.summary",
+  "direction": "ReferenceOnlyDraft",
+  "allowedReferenceTypes": [
+    "diagnostic-event-id",
+    "audit-summary-id",
+    "compliance-evidence-package-id"
+  ],
+  "privacy": {
+    "logBodyIncluded": false,
+    "physicalPathIncluded": false,
+    "connectionStringIncluded": false,
+    "clientFingerprintIncluded": false
+  },
+  "notes": "P11.4 draft fixture only. HIA consumers may request summaries, not raw operational evidence."
+}
