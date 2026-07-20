@@ -214,6 +214,10 @@
     <Content Include="DesktopPortalBanner.ascx" />
     <Content Include="GenericErrorPage.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Security\LoginPasswordKey.ashx" />
+    <Content Include="Scripts\Security\jsencrypt-ie6.LICENSE.txt" />
+    <Content Include="Scripts\Security\jsencrypt-ie6.min.js" />
+    <Content Include="Scripts\Security\PortalLoginPasswordEncryption.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\AccessDenied.aspx.cs">
@@ -410,6 +414,7 @@
     <Compile Include="Components\PortalAdministrationPolicy.cs" />
     <Compile Include="Components\PortalAuthorization.cs" />
     <Compile Include="Components\PortalContext.cs" />
+    <Compile Include="Components\PortalLoginPasswordCrypto.cs" />
     <Compile Include="Components\PortalModulePackage.cs" />
     <Compile Include="Components\PortalModulePackageStates.cs" />
     <Compile Include="Components\PortalModulePathValidator.cs" />
@@ -660,6 +665,9 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Security\LoginPasswordKey.ashx.cs">
+      <DependentUpon>LoginPasswordKey.ashx</DependentUpon>
     </Compile>
     <Compile Include="Sys\EnvSection.cs" />
     <Compile Include="Sys\GlobalInfo.cs" />

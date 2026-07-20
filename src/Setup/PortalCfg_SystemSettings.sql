@@ -99,6 +99,15 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Security.RequireEncryptedLoginPassword')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Security.RequireEncryptedLoginPassword', N'true', N'Boolean', N'Database', 0, N'system', SYSUTCDATETIME())
+END
+GO
+
 IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Registration.InviteDefaultExpiryDays')
 BEGIN
     INSERT INTO [dbo].[PortalCfg_SystemSettings]

@@ -24,6 +24,7 @@
     <div class="portal-field">
         <label class="portal-field-label Normal" for="<%= password.ClientID %>"><%=lang.Signin_password%></label>
         <asp:TextBox id="password" columns="18" textmode="password" cssclass="NormalTextBox portal-field-input" runat="server" />
+        <asp:HiddenField id="EncryptedPassword" runat="server" />
     </div>
 
     <div class="portal-checkline">

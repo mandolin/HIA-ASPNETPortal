@@ -52,6 +52,29 @@ namespace ASPNET.StarterKit.Portal
                 "Security");
 
         /// <summary>
+        /// 中文：控制登录密码提交是否必须使用前端一次性公钥加密的设置定义。
+        ///
+        /// English: Setting definition controlling whether login-password submission must use one-time public-key encryption on the client.
+        /// </summary>
+        /// <remarks>
+        /// 中文：P10.3 当前默认开启。后续会按客户端浏览器环境选择加密强度，但该开关仍表达“是否必须加密提交”的业务策略。
+        ///
+        /// English: Enabled by default in P10.3. Later work will select encryption strength by client browser capability,
+        /// while this setting continues to represent whether encrypted submission is required.
+        /// </remarks>
+        public static readonly PortalSettingDefinition RequireEncryptedLoginPassword =
+            new PortalSettingDefinition(
+                PortalSettingKeys.RequireEncryptedLoginPassword,
+                "登录密码必须前端加密",
+                "控制登录密码是否必须通过一次性 RSA 公钥加密后提交；默认开启。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Security");
+
+        /// <summary>
         /// 中文：临时注册链接默认有效天数的设置定义。
         ///
         /// English: Setting definition for the default validity period of temporary registration invite links.
@@ -258,6 +281,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 AllowSelfRegistration,
                 RequireRegistrationApproval,
+                RequireEncryptedLoginPassword,
                 RegistrationInviteDefaultExpiryDays,
                 AllowPendingEmployeeBinding,
                 MaxUploadBytes,

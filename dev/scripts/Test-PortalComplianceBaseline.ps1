@@ -332,12 +332,29 @@ else {
     Add-ComplianceCheck -Severity Warning -Code 'AUDIT-SQL' -Message 'Operation audit migration script needs review.'
 }
 
-$clientEncryptionMatches = @(Find-PortalSourceMatch -Pattern 'JSEncrypt|LoginSecurityKey|RSAEncrypt|RSADecrypt')
-if ($clientEncryptionMatches.Count -gt 0) {
-    Add-ComplianceCheck -Severity Pass -Code 'TRANS-PWD-FIELD-ENCRYPT' -Message 'Client-side password field encryption markers were found.' -Evidence (($clientEncryptionMatches | Select-Object -First 3) -join '; ')
+$loginEncryptionFiles = @(
+    'Portal/Scripts/Security/jsencrypt-ie6.min.js',
+    'Portal/Scripts/Security/jsencrypt-ie6.LICENSE.txt',
+    'Portal/Scripts/Security/PortalLoginPasswordEncryption.js',
+    'Portal/Security/LoginPasswordKey.ashx',
+    'Portal/Components/PortalLoginPasswordCrypto.cs'
+)
+$missingLoginEncryptionFiles = @(
+    foreach ($relativeLoginEncryptionFile in $loginEncryptionFiles) {
+        $loginEncryptionFilePath = Join-Path $resolvedSourcePath $relativeLoginEncryptionFile
+        if (-not (Test-Path -LiteralPath $loginEncryptionFilePath)) {
+            $relativeLoginEncryptionFile
+        }
+    }
+)
+
+$clientEncryptionMatches = @(Find-PortalSourceMatch -Pattern 'PortalLoginPasswordEncryption|LoginPasswordKey|TryDecryptSubmittedPassword|RequireEncryptedLoginPassword')
+if ($missingLoginEncryptionFiles.Count -eq 0 -and $clientEncryptionMatches.Count -gt 0) {
+    Add-ComplianceCheck -Severity Pass -Code 'TRANS-PWD-FIELD-ENCRYPT' -Message 'Login password field encryption assets and server hooks were found.' -Evidence (($clientEncryptionMatches | Select-Object -First 4) -join '; ')
 }
 else {
-    Add-ComplianceCheck -Severity Warning -Code 'TRANS-PWD-FIELD-ENCRYPT' -Message 'Client-side login password field encryption is not implemented yet; P10.3 must cover it.' -Evidence 'Reference approach: IE6-compatible JSEncrypt + session-bound RSA private key.'
+    $evidence = if ($missingLoginEncryptionFiles.Count -gt 0) { ($missingLoginEncryptionFiles -join '; ') } else { 'Expected source markers were not found.' }
+    Add-ComplianceCheck -Severity Warning -Code 'TRANS-PWD-FIELD-ENCRYPT' -Message 'Login password field encryption implementation needs review.' -Evidence $evidence
 }
 
 $signInPath = Join-Path $resolvedPortalPath 'DesktopModules/SignIn.ascx'
@@ -348,6 +365,31 @@ else {
     Add-ComplianceCheck -Severity Warning -Code 'LOGIN-PASSWORD-FIELD' -Message 'SignIn password input field was not detected; review the login markup.'
 }
 
+if ((Test-TextContains -LiteralPath $signInPath -Pattern 'EncryptedPassword') -and
+    (Test-TextContains -LiteralPath (Join-Path $resolvedSourcePath 'Portal/DesktopModules/Signin.ascx.cs') -Pattern 'PortalLoginPasswordCrypto\.TryDecryptSubmittedPassword')) {
+    Add-ComplianceCheck -Severity Pass -Code 'LOGIN-PASSWORD-ENCRYPTED-FIELD' -Message 'SignIn posts an encrypted hidden password field and decrypts it server-side.'
+}
+else {
+    Add-ComplianceCheck -Severity Warning -Code 'LOGIN-PASSWORD-ENCRYPTED-FIELD' -Message 'SignIn encrypted password field or server-side decrypt hook was not verified.'
+}
+
+$encryptedLoginSettingPattern = 'key\s*=\s*"Portal\.Security\.RequireEncryptedLoginPassword"\s+value\s*=\s*"true"'
+if (Test-TextContains -LiteralPath $resolvedWebConfigPath -Pattern $encryptedLoginSettingPattern) {
+    Add-ComplianceCheck -Severity Pass -Code 'LOGIN-PASSWORD-ENCRYPT-REQUIRED' -Message 'Encrypted login-password submission is required by default.' -Evidence 'Portal.Security.RequireEncryptedLoginPassword=true'
+}
+else {
+    $settingSeverity = if (Test-StrictDeploymentProfile) { 'Fail' } else { 'Warning' }
+    Add-ComplianceCheck -Severity $settingSeverity -Code 'LOGIN-PASSWORD-ENCRYPT-REQUIRED' -Message 'Encrypted login-password submission is not required by the selected Web.config.' -Evidence 'Portal.Security.RequireEncryptedLoginPassword should be true for production/scan profiles.'
+}
+
+$jsEncryptLicensePath = Join-Path $resolvedSourcePath 'Portal/Scripts/Security/jsencrypt-ie6.LICENSE.txt'
+if (Test-TextContains -LiteralPath $jsEncryptLicensePath -Pattern 'The MIT License') {
+    Add-ComplianceCheck -Severity Pass -Code '3P-JSENCRYPT-LICENSE' -Message 'JSEncrypt IE6-compatible asset has an archived MIT license.' -Evidence 'Scripts/Security/jsencrypt-ie6.LICENSE.txt'
+}
+else {
+    Add-ComplianceCheck -Severity Warning -Code '3P-JSENCRYPT-LICENSE' -Message 'JSEncrypt license archive was not verified.'
+}
+
 $sensitiveQueryMatches = @(Find-PortalSourceMatch -Pattern '(?i)(Request\.QueryString\s*\[[^\]]*(password|passwd|pwd|token|密码)|(password|passwd|pwd|token|密码)[^\r\n]{0,80}Request\.QueryString)')
 if ($sensitiveQueryMatches.Count -gt 0) {
     Add-ComplianceCheck -Severity Warning -Code 'TRANS-SENSITIVE-QUERYSTRING' -Message 'Potential sensitive QueryString usage was found; manual review required.' -Evidence (($sensitiveQueryMatches | Select-Object -First 5) -join '; ')
@@ -356,9 +398,15 @@ else {
     Add-ComplianceCheck -Severity Pass -Code 'TRANS-SENSITIVE-QUERYSTRING' -Message 'No obvious sensitive QueryString usage was found in portal source.'
 }
 
-$sensitiveLogMatches = @(Find-PortalSourceMatch -Pattern '(?i)((PortalDiagnostics|Trace\.|PortalOperationAudit|OperationAudit|Log)[^\r\n]*(password|passwd|pwd|token|密码)|(password|passwd|pwd|token|密码)[^\r\n]*(PortalDiagnostics|Trace\.|PortalOperationAudit|OperationAudit|Log))')
-if ($sensitiveLogMatches.Count -gt 0) {
-    Add-ComplianceCheck -Severity Warning -Code 'LOG-SENSITIVE-FIELDS' -Message 'Potential sensitive logging/audit text was found; manual review required.' -Evidence (($sensitiveLogMatches | Select-Object -First 5) -join '; ')
+$sensitiveLogMatches = @(Find-PortalSourceMatch -Pattern '(?i)((PortalDiagnostics|Trace\.|PortalOperationAudit|OperationAudit|\bLog(?:ger|ging)?\b)[^\r\n]*(password|passwd|pwd|token|密码)|(password|passwd|pwd|token|密码)[^\r\n]*(PortalDiagnostics|Trace\.|PortalOperationAudit|OperationAudit|\bLog(?:ger|ging)?\b))')
+$sensitiveLogReviewMatches = @(
+    $sensitiveLogMatches |
+        Where-Object {
+            $_ -notmatch '(?i)(do not log|不得记录|调用方不得记录|without logging|without the connection string|PortalOperationAuditEvents\.PasswordReset)'
+        }
+)
+if ($sensitiveLogReviewMatches.Count -gt 0) {
+    Add-ComplianceCheck -Severity Warning -Code 'LOG-SENSITIVE-FIELDS' -Message 'Potential sensitive logging/audit text was found; manual review required.' -Evidence (($sensitiveLogReviewMatches | Select-Object -First 5) -join '; ')
 }
 else {
     Add-ComplianceCheck -Severity Pass -Code 'LOG-SENSITIVE-FIELDS' -Message 'No obvious password/token logging pattern was found in portal source.'

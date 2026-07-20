@@ -78,6 +78,13 @@ namespace ASPNET.StarterKit.Portal
         public const string RequireRegistrationApproval = "Portal.Security.RequireRegistrationApproval";
 
         /// <summary>
+        /// 中文：登录密码提交是否必须使用前端加密的设置键。
+        ///
+        /// English: Setting key for whether login-password submission must use client-side encryption.
+        /// </summary>
+        public const string RequireEncryptedLoginPassword = "Portal.Security.RequireEncryptedLoginPassword";
+
+        /// <summary>
         /// 中文：临时注册链接默认有效天数的设置键。
         ///
         /// English: Setting key for default validity days of temporary registration invite links.
