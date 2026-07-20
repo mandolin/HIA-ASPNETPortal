@@ -5,6 +5,8 @@
 ## 发布前边界
 
 - [ ] 目标机器已安装 .NET Framework 4.8；缺少 4.8 时不得部署 P5.2+ 版本。
+- [ ] 已运行 `dev/scripts/Test-PortalPublishReadiness.ps1`，项目 Content 清单、主题包和模块包检查通过。
+- [ ] 如使用本地文件系统发布包，已运行 `dev/scripts/Publish-PortalFileSystem.ps1`，并对发布输出目录执行二次门禁。
 - [ ] 使用独立的 `test` 或 `prod` 外置配置目录，不使用开发机 LocalDB 或开发连接串。
 - [ ] 不提交或记录真实连接串、密码、Token、证书、Cookie 或生产数据库备份。
 - [ ] 目标数据库已完成备份、变更窗口和回滚责任人已明确。

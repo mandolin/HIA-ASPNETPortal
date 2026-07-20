@@ -52,6 +52,8 @@
 ## 发布前检查
 
 - [ ] `dev/scripts/Test-PortalPublicDocumentation.ps1` 对公开入口、相对文件链接和隐私边界通过。
+- [ ] `dev/scripts/Test-PortalPublishReadiness.ps1` 对项目 Content 清单、主题包、模块包和发布输出通过。
+- [ ] 如需生成本地文件系统发布包，执行 `dev/scripts/Publish-PortalFileSystem.ps1` 并记录输出目录。
 - [ ] 未提交真实连接字符串、密码、Token、证书。
 - [ ] 未提交本地数据库文件、`node_modules/`、`bin/`、`obj/`。
 - [ ] `Web.Debug.config`、`Web.Release.config`、`Web.Test.config` 的处理方式符合仓库规则。

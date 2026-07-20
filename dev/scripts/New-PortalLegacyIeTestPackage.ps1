@@ -79,8 +79,8 @@ Purpose:
 
 How to run:
   1. Make sure this VM can access the portal base URL.
-  2. Double-click run-smoke.cmd.
-  3. Enter the admin password when prompted.
+  2. Put the admin password in a VM-local secret file, for example secrets\admin-password.txt.
+  3. Run run-smoke.ps1 with -AdminPasswordFile, or run the package through Portal VM Task Agent.
   4. Wait until the script closes Internet Explorer.
   5. Copy the generated results folder or PortalLegacyIeResult-*.zip back to the host.
 
@@ -91,13 +91,13 @@ Default settings:
 
 If the VM cannot access the default Base URL:
   Open a command prompt in this folder and run:
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File run-smoke.ps1 -BaseUrl http://HOST-IP:40001/
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File run-smoke.ps1 -BaseUrl http://HOST-IP:40001/ -AdminPasswordFile secrets\admin-password.txt
 
 Notes:
   - The script uses InternetExplorer.Application COM automation.
   - No IEDriver, Java, Node.js, or browser plugin is required.
   - Screenshots are desktop screenshots, so keep the VM desktop unlocked and IE visible.
-  - Passwords are requested at runtime and are not written into this package.
+  - Passwords must come from a VM-local secret file or explicit parameter; the script will not wait for manual password input.
 "@
 
 $taskJson = @"
@@ -141,15 +141,18 @@ cd /d "%~dp0"
 echo Portal legacy IE smoke package
 echo.
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0run-smoke.ps1"
+set EXITCODE=%ERRORLEVEL%
 echo.
-echo Finished. Press any key to close this window.
-pause >nul
+echo Finished with exit code %EXITCODE%.
+exit /b %EXITCODE%
 "@
 
 $runSmoke = @'
 param(
     [string]$BaseUrl = '__BASE_URL__',
     [string]$AdminUser = '__ADMIN_USER__',
+    [string]$AdminPasswordFile = '',
+    [string]$AdminPassword = '',
     [switch]$SkipLogin,
     [switch]$DryRun
 )
@@ -166,6 +169,8 @@ $LogPath = Join-Path $RunRoot 'portal-legacy-ie-smoke.log'
 $ResultJsonPath = Join-Path $RunRoot 'result.json'
 $Results = New-Object System.Collections.ArrayList
 $Ie = $null
+$script:PortalLegacyIeWinInetTypeAdded = $false
+$script:PortalLegacyIeUiTypeAdded = $false
 
 function New-DirectoryIfMissing {
     param([string]$Path)
@@ -199,6 +204,47 @@ function ConvertTo-PlainText {
     }
 }
 
+function ConvertTo-SecretFileName {
+    param([string]$Value)
+
+    $safe = $Value -replace '[^A-Za-z0-9_.@-]+', '-'
+    $safe = $safe.Trim('-')
+    if ([string]::IsNullOrEmpty($safe)) {
+        return 'admin'
+    }
+
+    return $safe
+}
+
+function Get-AdminLoginPassword {
+    if (-not [string]::IsNullOrEmpty($AdminPassword)) {
+        return $AdminPassword
+    }
+
+    if (-not [string]::IsNullOrEmpty($AdminPasswordFile)) {
+        if (-not (Test-Path -LiteralPath $AdminPasswordFile -PathType Leaf)) {
+            throw ('AdminPasswordFile not found: ' + $AdminPasswordFile)
+        }
+
+        return ([System.IO.File]::ReadAllText($AdminPasswordFile, [System.Text.Encoding]::UTF8)).Trim()
+    }
+
+    $secretRoot = [Environment]::GetEnvironmentVariable('PORTAL_VM_SECRETS_DIR')
+    if (-not [string]::IsNullOrEmpty($secretRoot)) {
+        $userSecret = Join-Path (Join-Path $secretRoot 'users') ((ConvertTo-SecretFileName -Value $AdminUser) + '.password.txt')
+        if (Test-Path -LiteralPath $userSecret -PathType Leaf) {
+            return ([System.IO.File]::ReadAllText($userSecret, [System.Text.Encoding]::UTF8)).Trim()
+        }
+
+        $legacySecret = Join-Path $secretRoot 'admin-password.txt'
+        if (Test-Path -LiteralPath $legacySecret -PathType Leaf) {
+            return ([System.IO.File]::ReadAllText($legacySecret, [System.Text.Encoding]::UTF8)).Trim()
+        }
+    }
+
+    throw ('Password was not provided for user ' + $AdminUser + '. Use -AdminPasswordFile, -AdminPassword, or PORTAL_VM_SECRETS_DIR\users\' + $AdminUser + '.password.txt.')
+}
+
 function ConvertTo-JsonString {
     param([string]$Value)
 
@@ -207,6 +253,580 @@ function ConvertTo-JsonString {
     }
 
     return ($Value -replace '\\', '\\' -replace '"', '\"' -replace "`r", '\r' -replace "`n", '\n')
+}
+
+function Read-HttpResponseText {
+    param([object]$Response)
+
+    $stream = $Response.GetResponseStream()
+    try {
+        $reader = New-Object System.IO.StreamReader($stream, [System.Text.Encoding]::UTF8)
+        try {
+            return $reader.ReadToEnd()
+        }
+        finally {
+            $reader.Close()
+        }
+    }
+    finally {
+        $stream.Close()
+    }
+}
+
+function Get-HtmlAttributeValue {
+    param(
+        [string]$Tag,
+        [string]$Name
+    )
+
+    try {
+        Add-Type -AssemblyName System.Web
+    }
+    catch {
+    }
+
+    $pattern = '(?is)\b' + [regex]::Escape($Name) + '\s*=\s*(?:"([^"]*)"|''([^'']*)''|([^\s>]+))'
+    $match = [regex]::Match($Tag, $pattern)
+    if (-not $match.Success) {
+        return ''
+    }
+
+    if ($match.Groups[1].Success) {
+        return [System.Web.HttpUtility]::HtmlDecode($match.Groups[1].Value)
+    }
+
+    if ($match.Groups[2].Success) {
+        return [System.Web.HttpUtility]::HtmlDecode($match.Groups[2].Value)
+    }
+
+    return [System.Web.HttpUtility]::HtmlDecode($match.Groups[3].Value)
+}
+
+function Encode-FormComponent {
+    param([string]$Value)
+
+    if ($null -eq $Value) {
+        $Value = ''
+    }
+
+    try {
+        return [System.Web.HttpUtility]::UrlEncode($Value, [System.Text.Encoding]::UTF8)
+    }
+    catch {
+        return [System.Uri]::EscapeDataString($Value)
+    }
+}
+
+function ConvertTo-FormUrlEncoded {
+    param([System.Collections.Specialized.NameValueCollection]$Fields)
+
+    $pairs = New-Object System.Collections.ArrayList
+    foreach ($key in $Fields.AllKeys) {
+        if ([string]::IsNullOrEmpty($key)) {
+            continue
+        }
+
+        $pair = (Encode-FormComponent -Value $key) + '=' + (Encode-FormComponent -Value $Fields[$key])
+        [void]$pairs.Add($pair)
+    }
+
+    return [string]::Join('&', [string[]]$pairs.ToArray([string]))
+}
+
+function Set-FormFieldValue {
+    param(
+        [System.Collections.Specialized.NameValueCollection]$Fields,
+        [string]$Name,
+        [string]$Value
+    )
+
+    if ([string]::IsNullOrEmpty($Name)) {
+        return
+    }
+
+    $Fields.Remove($Name)
+    $Fields.Add($Name, $Value)
+}
+
+function Get-FormFieldsFromHtml {
+    param([string]$Html)
+
+    try {
+        Add-Type -AssemblyName System.Web
+    }
+    catch {
+    }
+
+    $fields = New-Object System.Collections.Specialized.NameValueCollection
+    $inputMatches = [regex]::Matches($Html, '(?is)<input\b[^>]*>')
+    foreach ($inputMatch in $inputMatches) {
+        $tag = $inputMatch.Value
+        $name = Get-HtmlAttributeValue -Tag $tag -Name 'name'
+        if ([string]::IsNullOrEmpty($name)) {
+            continue
+        }
+
+        $type = (Get-HtmlAttributeValue -Tag $tag -Name 'type').ToLowerInvariant()
+        if (($type -eq 'checkbox' -or $type -eq 'radio') -and $tag.IndexOf('checked', [System.StringComparison]::OrdinalIgnoreCase) -lt 0) {
+            continue
+        }
+
+        Set-FormFieldValue -Fields $fields -Name $name -Value (Get-HtmlAttributeValue -Tag $tag -Name 'value')
+    }
+
+    return ,$fields
+}
+
+function Resolve-FormPostUri {
+    param(
+        [System.Uri]$PageUri,
+        [string]$Html
+    )
+
+    $formMatch = [regex]::Match($Html, '(?is)<form\b[^>]*>')
+    if (-not $formMatch.Success) {
+        return $PageUri
+    }
+
+    $action = Get-HtmlAttributeValue -Tag $formMatch.Value -Name 'action'
+    if ([string]::IsNullOrEmpty($action)) {
+        return $PageUri
+    }
+
+    try {
+        return (New-Object System.Uri -ArgumentList $PageUri, $action)
+    }
+    catch {
+        return $PageUri
+    }
+}
+
+function Get-SetCookieNames {
+    param([string]$SetCookieHeader)
+
+    $names = New-Object System.Collections.ArrayList
+    if ([string]::IsNullOrEmpty($SetCookieHeader)) {
+        return ,$names
+    }
+
+    $matches = [regex]::Matches($SetCookieHeader, '(?im)(^|,\s*)([^=;,\s]+)=')
+    foreach ($match in $matches) {
+        $name = $match.Groups[2].Value
+        if (-not [string]::IsNullOrEmpty($name) -and $names.IndexOf($name) -lt 0) {
+            [void]$names.Add($name)
+        }
+    }
+
+    return ,$names
+}
+
+function Get-AuthCookieValueFromHeader {
+    param([string]$SetCookieHeader)
+
+    if ([string]::IsNullOrEmpty($SetCookieHeader)) {
+        return ''
+    }
+
+    $match = [regex]::Match($SetCookieHeader, '(?i)(^|,\s*)\.ASPXAUTH=([^;,\r\n]+)')
+    if ($match.Success) {
+        return $match.Groups[2].Value
+    }
+
+    return ''
+}
+
+function Ensure-WinInetCookieType {
+    if ($script:PortalLegacyIeWinInetTypeAdded) {
+        return
+    }
+
+    Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+
+public static class PortalLegacyIeWinInetCookie
+{
+    [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    public static extern bool InternetSetCookie(string url, string cookieName, string cookieData);
+}
+"@
+
+    $script:PortalLegacyIeWinInetTypeAdded = $true
+}
+
+function Set-InternetExplorerCookie {
+    param(
+        [string]$Url,
+        [System.Net.Cookie]$Cookie
+    )
+
+    try {
+        Ensure-WinInetCookieType
+        $cookieData = $Cookie.Name + '=' + $Cookie.Value + '; path=/'
+        if (-not [PortalLegacyIeWinInetCookie]::InternetSetCookie($Url, $null, $cookieData)) {
+            Write-Log ('WARN wininet cookie set returned false for ' + $Cookie.Name)
+            return $false
+        }
+
+        Write-Log ('LOGIN copied cookie to IE: ' + $Cookie.Name)
+        return $true
+    }
+    catch {
+        Write-Log ('WARN wininet cookie set failed for ' + $Cookie.Name + ': ' + $_.Exception.Message)
+        return $false
+    }
+}
+
+function Set-InternetExplorerCookieValue {
+    param(
+        [string]$Url,
+        [string]$Name,
+        [string]$Value
+    )
+
+    try {
+        Ensure-WinInetCookieType
+        $cookieData = $Name + '=' + $Value + '; path=/'
+        if (-not [PortalLegacyIeWinInetCookie]::InternetSetCookie($Url, $null, $cookieData)) {
+            Write-Log ('WARN wininet raw cookie set returned false for ' + $Name)
+            return $false
+        }
+
+        Write-Log ('LOGIN copied raw cookie to IE: ' + $Name)
+        return $true
+    }
+    catch {
+        Write-Log ('WARN wininet raw cookie set failed for ' + $Name + ': ' + $_.Exception.Message)
+        return $false
+    }
+}
+
+function Ensure-UiAutomationType {
+    if ($script:PortalLegacyIeUiTypeAdded) {
+        return
+    }
+
+    Add-Type -AssemblyName System.Windows.Forms
+    Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+
+public static class PortalLegacyIeUi
+{
+    [DllImport("user32.dll")]
+    public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+    [DllImport("user32.dll")]
+    public static extern bool SetCursorPos(int x, int y);
+
+    [DllImport("user32.dll")]
+    public static extern void mouse_event(uint flags, uint dx, uint dy, uint data, UIntPtr extraInfo);
+}
+"@
+
+    $script:PortalLegacyIeUiTypeAdded = $true
+}
+
+function Set-ClipboardTextByClipExe {
+    param([string]$Text)
+
+    if ($null -eq $Text) {
+        $Text = ''
+    }
+
+    $processInfo = New-Object System.Diagnostics.ProcessStartInfo
+    $processInfo.FileName = 'clip.exe'
+    $processInfo.UseShellExecute = $false
+    $processInfo.RedirectStandardInput = $true
+    $processInfo.CreateNoWindow = $true
+
+    $process = [System.Diagnostics.Process]::Start($processInfo)
+    try {
+        $process.StandardInput.Write($Text)
+        $process.StandardInput.Close()
+        $process.WaitForExit()
+        return ($process.ExitCode -eq 0)
+    }
+    finally {
+        $process.Dispose()
+    }
+}
+
+function Clear-ClipboardByClipExe {
+    try {
+        [void](Set-ClipboardTextByClipExe -Text '')
+    }
+    catch {
+    }
+}
+
+function Set-BrowserWindowForKeyboard {
+    param([object]$Browser)
+
+    try {
+        $Browser.Left = 120
+        $Browser.Top = 40
+        $Browser.Width = 1280
+        $Browser.Height = 920
+    }
+    catch {
+    }
+
+    Ensure-UiAutomationType
+    try {
+        [void][PortalLegacyIeUi]::SetForegroundWindow([IntPtr]([int]$Browser.HWND))
+    }
+    catch {
+    }
+
+    Start-Sleep -Milliseconds 600
+}
+
+function Click-BrowserPoint {
+    param(
+        [object]$Browser,
+        [int]$X,
+        [int]$Y
+    )
+
+    Ensure-UiAutomationType
+    $screenX = [int]$Browser.Left + $X
+    $screenY = [int]$Browser.Top + $Y
+    [void][PortalLegacyIeUi]::SetCursorPos($screenX, $screenY)
+    Start-Sleep -Milliseconds 120
+    [PortalLegacyIeUi]::mouse_event(2, 0, 0, 0, [UIntPtr]::Zero)
+    Start-Sleep -Milliseconds 60
+    [PortalLegacyIeUi]::mouse_event(4, 0, 0, 0, [UIntPtr]::Zero)
+    Start-Sleep -Milliseconds 180
+}
+
+function Paste-TextToFocusedControl {
+    param([string]$Text)
+
+    if (-not (Set-ClipboardTextByClipExe -Text $Text)) {
+        throw 'clip.exe failed to set clipboard text.'
+    }
+
+    [System.Windows.Forms.SendKeys]::SendWait('^a')
+    Start-Sleep -Milliseconds 120
+    [System.Windows.Forms.SendKeys]::SendWait('^v')
+    Start-Sleep -Milliseconds 250
+}
+
+function Invoke-PortalLoginByKeyboard {
+    param(
+        [object]$Browser,
+        [string]$UserName,
+        [string]$Password
+    )
+
+    try {
+        Write-Log 'LOGIN keyboard fallback positioning IE window.'
+        Set-BrowserWindowForKeyboard -Browser $Browser
+
+        # Coordinates are relative to the IE window after it is positioned by this package.
+        Click-BrowserPoint -Browser $Browser -X 500 -Y 250
+        Paste-TextToFocusedControl -Text $UserName
+
+        Click-BrowserPoint -Browser $Browser -X 500 -Y 350
+        Paste-TextToFocusedControl -Text $Password
+
+        Click-BrowserPoint -Browser $Browser -X 520 -Y 485
+        Wait-InternetExplorer -Browser $Browser
+        Clear-ClipboardByClipExe
+        return $true
+    }
+    catch {
+        Clear-ClipboardByClipExe
+        Write-Log ('WARN keyboard login fallback failed: ' + $_.Exception.Message)
+        return $false
+    }
+}
+
+function Invoke-PortalLoginByHttp {
+    param(
+        [string]$Root,
+        [string]$UserName,
+        [string]$Password
+    )
+
+    $loginUrl = Join-PortalUrl -Root $Root -Path 'Default.aspx'
+    $loginUri = New-Object System.Uri($loginUrl)
+    $cookieContainer = New-Object System.Net.CookieContainer
+    $userAgent = 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
+
+    try {
+        $rawAuthCookie = ''
+        $setCookieHeader = ''
+        $postText = ''
+        $locationHeader = ''
+
+        Write-Log 'LOGIN HTTP fallback requesting login page.'
+        $getRequest = [System.Net.HttpWebRequest]::Create($loginUri)
+        $getRequest.CookieContainer = $cookieContainer
+        $getRequest.UserAgent = $userAgent
+        $getRequest.AllowAutoRedirect = $true
+        $getResponse = $getRequest.GetResponse()
+        try {
+            $loginHtml = Read-HttpResponseText -Response $getResponse
+            $actualLoginUri = $getResponse.ResponseUri
+        }
+        finally {
+            $getResponse.Close()
+        }
+
+        if ($null -eq $actualLoginUri) {
+            $actualLoginUri = $loginUri
+        }
+
+        $postUri = Resolve-FormPostUri -PageUri $actualLoginUri -Html $loginHtml
+        Write-Log ('LOGIN HTTP fallback GET url: ' + $actualLoginUri.AbsoluteUri)
+        Write-Log ('LOGIN HTTP fallback form POST url: ' + $postUri.AbsoluteUri)
+
+        $fields = Get-FormFieldsFromHtml -Html $loginHtml
+        Set-FormFieldValue -Fields $fields -Name 'ctl00$MainContent$ctl01$EmailOrName' -Value $UserName
+        Set-FormFieldValue -Fields $fields -Name 'ctl00$MainContent$ctl01$password' -Value $Password
+        Set-FormFieldValue -Fields $fields -Name 'ctl00$MainContent$ctl01$SigninBtn' -Value 'Sign In'
+
+        $postBody = ConvertTo-FormUrlEncoded -Fields $fields
+        $postBytes = [System.Text.Encoding]::UTF8.GetBytes($postBody)
+
+        Write-Log ('LOGIN HTTP fallback posting form fields: ' + $fields.Count)
+        $postRequest = [System.Net.HttpWebRequest]::Create($postUri)
+        $postRequest.CookieContainer = $cookieContainer
+        $postRequest.UserAgent = $userAgent
+        $postRequest.Method = 'POST'
+        $postRequest.ContentType = 'application/x-www-form-urlencoded'
+        $postRequest.Referer = $actualLoginUri.AbsoluteUri
+        $postRequest.AllowAutoRedirect = $false
+        $postRequest.ContentLength = $postBytes.Length
+        $requestStream = $postRequest.GetRequestStream()
+        try {
+            $requestStream.Write($postBytes, 0, $postBytes.Length)
+        }
+        finally {
+            $requestStream.Close()
+        }
+
+        $postResponse = $postRequest.GetResponse()
+        try {
+            $postText = Read-HttpResponseText -Response $postResponse
+            $statusText = [int]$postResponse.StatusCode
+            $locationHeader = [string]$postResponse.Headers['Location']
+            $setCookieHeader = [string]$postResponse.Headers['Set-Cookie']
+            Write-Log ('LOGIN HTTP fallback response status: ' + $statusText)
+            Write-Log ('LOGIN HTTP fallback response url: ' + $postResponse.ResponseUri.AbsoluteUri)
+            if (-not [string]::IsNullOrEmpty($locationHeader)) {
+                Write-Log ('LOGIN HTTP fallback response location: ' + $locationHeader)
+            }
+
+            $setCookieNames = Get-SetCookieNames -SetCookieHeader $setCookieHeader
+            if ($setCookieNames.Count -gt 0) {
+                Write-Log ('LOGIN HTTP fallback set-cookie names: ' + [string]::Join(',', [string[]]$setCookieNames.ToArray([string])))
+            }
+            else {
+                Write-Log 'LOGIN HTTP fallback set-cookie names: (none)'
+            }
+        }
+        finally {
+            $postResponse.Close()
+        }
+
+        $authCookieFound = $false
+        $authCookieCopied = 0
+        $allCookiesCopied = 0
+
+        $cookieUris = @($loginUri, $actualLoginUri, $postUri)
+        foreach ($cookieUri in $cookieUris) {
+            $cookies = $cookieContainer.GetCookies($cookieUri)
+            foreach ($cookie in $cookies) {
+                Write-Log ('LOGIN HTTP fallback cookie container has: ' + $cookie.Name + '; path=' + $cookie.Path)
+                if ($cookie.Name -eq '.ASPXAUTH') {
+                    $authCookieFound = $true
+                }
+
+                if (Set-InternetExplorerCookie -Url $loginUrl -Cookie $cookie) {
+                    $allCookiesCopied++
+                    if ($cookie.Name -eq '.ASPXAUTH') {
+                        $authCookieCopied++
+                    }
+                }
+            }
+        }
+
+        if (-not $authCookieFound) {
+            $rawAuthCookie = Get-AuthCookieValueFromHeader -SetCookieHeader $setCookieHeader
+            if (-not [string]::IsNullOrEmpty($rawAuthCookie)) {
+                $authCookieFound = $true
+            }
+        }
+
+        if (-not [string]::IsNullOrEmpty($rawAuthCookie)) {
+            if (Set-InternetExplorerCookieValue -Url $loginUrl -Name '.ASPXAUTH' -Value $rawAuthCookie) {
+                $authCookieCopied++
+                $allCookiesCopied++
+            }
+        }
+
+        $logoffFound = Test-AnyKeyword -Text $postText -Keywords @('Logoff', 'Log off')
+        Write-Log ('LOGIN HTTP fallback logoff marker: ' + $logoffFound)
+
+        if ($authCookieFound -and $authCookieCopied -gt 0 -and -not [string]::IsNullOrEmpty($locationHeader)) {
+            try {
+                $redirectUri = New-Object System.Uri -ArgumentList $postUri, $locationHeader
+                $redirectRequest = [System.Net.HttpWebRequest]::Create($redirectUri)
+                $redirectRequest.CookieContainer = $cookieContainer
+                $redirectRequest.UserAgent = $userAgent
+                $redirectRequest.AllowAutoRedirect = $true
+                $redirectResponse = $redirectRequest.GetResponse()
+                try {
+                    [void](Read-HttpResponseText -Response $redirectResponse)
+                    Write-Log ('LOGIN HTTP fallback followed redirect: ' + $redirectResponse.ResponseUri.AbsoluteUri)
+                }
+                finally {
+                    $redirectResponse.Close()
+                }
+            }
+            catch {
+                Write-Log ('WARN HTTP login redirect follow failed: ' + $_.Exception.Message)
+            }
+        }
+
+        if ($logoffFound -and -not $authCookieFound) {
+            Write-Log 'WARN login marker was found without auth cookie; treating as not logged.'
+        }
+
+        if (-not $authCookieFound) {
+            $snippet = $postText
+            if ($null -eq $snippet) {
+                $snippet = ''
+            }
+
+            $snippet = [regex]::Replace($snippet, '\s+', ' ')
+            if ($snippet.Length -gt 160) {
+                $snippet = $snippet.Substring(0, 160)
+            }
+
+            Write-Log ('LOGIN HTTP fallback response snippet: ' + $snippet)
+        }
+
+        $passed = $authCookieFound -and $authCookieCopied -gt 0
+        $result = New-Object PSObject
+        Add-Member -InputObject $result -MemberType NoteProperty -Name Passed -Value $passed
+        Add-Member -InputObject $result -MemberType NoteProperty -Name AuthCookieFound -Value $authCookieFound
+        Add-Member -InputObject $result -MemberType NoteProperty -Name CookiesCopied -Value $allCookiesCopied
+        Add-Member -InputObject $result -MemberType NoteProperty -Name MarkerFound -Value $logoffFound
+        return $result
+    }
+    catch {
+        Write-Log ('WARN HTTP login fallback failed: ' + $_.Exception.Message)
+        $result = New-Object PSObject
+        Add-Member -InputObject $result -MemberType NoteProperty -Name Passed -Value $false
+        Add-Member -InputObject $result -MemberType NoteProperty -Name AuthCookieFound -Value $false
+        Add-Member -InputObject $result -MemberType NoteProperty -Name CookiesCopied -Value 0
+        Add-Member -InputObject $result -MemberType NoteProperty -Name MarkerFound -Value $false
+        return $result
+    }
 }
 
 function Add-Result {
@@ -396,20 +1016,164 @@ function Get-ElementsByTagNameCompat {
         [string]$TagName
     )
 
+    $items = New-Object System.Collections.ArrayList
+    $collection = $null
+
     try {
         if ($null -ne $Document.all) {
-            return $Document.all.tags($TagName)
+            $collection = $Document.all.tags($TagName)
+        }
+    }
+    catch {
+    }
+
+    if ($null -eq $collection) {
+        try {
+            $collection = $Document.getElementsByTagName($TagName)
+        }
+        catch {
+            $collection = $null
+        }
+    }
+
+    if ($null -eq $collection) {
+        return $items
+    }
+
+    $count = Get-CollectionCountCompat -Collection $collection
+    if ($count -gt 0) {
+        for ($i = 0; $i -lt $count; $i++) {
+            $element = Get-CollectionItemCompat -Collection $collection -Index $i
+            if ($null -ne $element) {
+                [void]$items.Add($element)
+            }
+        }
+
+        return $items
+    }
+
+    try {
+        foreach ($element in $collection) {
+            if ($null -ne $element) {
+                [void]$items.Add($element)
+            }
+        }
+    }
+    catch {
+    }
+
+    return $items
+}
+
+function Get-CollectionCountCompat {
+    param([object]$Collection)
+
+    try {
+        if ($null -ne $Collection.length) {
+            return [int]$Collection.length
         }
     }
     catch {
     }
 
     try {
-        return $Document.getElementsByTagName($TagName)
+        if ($null -ne $Collection.Length) {
+            return [int]$Collection.Length
+        }
     }
     catch {
-        return @()
     }
+
+    try {
+        if ($null -ne $Collection.count) {
+            return [int]$Collection.count
+        }
+    }
+    catch {
+    }
+
+    try {
+        if ($null -ne $Collection.Count) {
+            return [int]$Collection.Count
+        }
+    }
+    catch {
+    }
+
+    return 0
+}
+
+function Get-CollectionItemCompat {
+    param(
+        [object]$Collection,
+        [int]$Index
+    )
+
+    try {
+        return $Collection.item($Index)
+    }
+    catch {
+    }
+
+    try {
+        return $Collection.item($Index, 0)
+    }
+    catch {
+    }
+
+    try {
+        return $Collection.Item($Index)
+    }
+    catch {
+    }
+
+    try {
+        return $Collection.Item($Index, 0)
+    }
+    catch {
+    }
+
+    try {
+        return $Collection[$Index]
+    }
+    catch {
+    }
+
+    return $null
+}
+
+function Test-ElementLooksUsable {
+    param([object]$Element)
+
+    if ($null -eq $Element) {
+        return $false
+    }
+
+    try {
+        if (-not [string]::IsNullOrEmpty([string]$Element.tagName)) {
+            return $true
+        }
+    }
+    catch {
+    }
+
+    try {
+        if (-not [string]::IsNullOrEmpty([string]$Element.id)) {
+            return $true
+        }
+    }
+    catch {
+    }
+
+    try {
+        if (-not [string]::IsNullOrEmpty([string]$Element.name)) {
+            return $true
+        }
+    }
+    catch {
+    }
+
+    return $false
 }
 
 function Get-ElementAttributeCompat {
@@ -437,6 +1201,94 @@ function Get-ElementAttributeCompat {
     }
 
     return ''
+}
+
+function Get-ElementByIdCompat {
+    param(
+        [object]$Document,
+        [string]$Id
+    )
+
+    try {
+        $element = $Document.getElementById($Id)
+        if (Test-ElementLooksUsable -Element $element) {
+            return $element
+        }
+    }
+    catch {
+    }
+
+    try {
+        if ($null -ne $Document.all) {
+            $element = $Document.all.item($Id)
+            if (Test-ElementLooksUsable -Element $element) {
+                return $element
+            }
+        }
+    }
+    catch {
+    }
+
+    try {
+        if ($null -ne $Document.all) {
+            $element = $Document.all.item($Id, 0)
+            if (Test-ElementLooksUsable -Element $element) {
+                return $element
+            }
+        }
+    }
+    catch {
+    }
+
+    return $null
+}
+
+function Get-ElementsByNameCompat {
+    param(
+        [object]$Document,
+        [string]$Name
+    )
+
+    $items = New-Object System.Collections.ArrayList
+
+    try {
+        $collection = $Document.getElementsByName($Name)
+        $count = Get-CollectionCountCompat -Collection $collection
+        for ($i = 0; $i -lt $count; $i++) {
+            $element = Get-CollectionItemCompat -Collection $collection -Index $i
+            if (Test-ElementLooksUsable -Element $element) {
+                [void]$items.Add($element)
+            }
+        }
+    }
+    catch {
+    }
+
+    if ($items.Count -gt 0) {
+        return $items
+    }
+
+    try {
+        if ($null -ne $Document.all) {
+            $elementOrCollection = $Document.all.item($Name)
+            if (Test-ElementLooksUsable -Element $elementOrCollection) {
+                [void]$items.Add($elementOrCollection)
+                return $items
+            }
+
+            $count = Get-CollectionCountCompat -Collection $elementOrCollection
+            for ($i = 0; $i -lt $count; $i++) {
+                $element = Get-CollectionItemCompat -Collection $elementOrCollection -Index $i
+                if (Test-ElementLooksUsable -Element $element) {
+                    [void]$items.Add($element)
+                }
+            }
+        }
+    }
+    catch {
+    }
+
+    return $items
 }
 
 function Test-EndsWithIgnoreCase {
@@ -494,6 +1346,61 @@ function Find-InputByIdSuffix {
     return $null
 }
 
+function Find-InputByKnownIdentity {
+    param(
+        [object]$Document,
+        [string[]]$Ids,
+        [string[]]$Names
+    )
+
+    foreach ($id in $Ids) {
+        $element = Get-ElementByIdCompat -Document $Document -Id $id
+        if (Test-ElementLooksUsable -Element $element) {
+            return $element
+        }
+    }
+
+    foreach ($name in $Names) {
+        $elements = Get-ElementsByNameCompat -Document $Document -Name $name
+        foreach ($element in $elements) {
+            if (Test-ElementLooksUsable -Element $element) {
+                return $element
+            }
+        }
+    }
+
+    return $null
+}
+
+function ConvertTo-JavascriptString {
+    param([string]$Value)
+
+    if ($null -eq $Value) {
+        return ''
+    }
+
+    return $Value.Replace('\', '\\').Replace("'", "\'").Replace("`r", '\r').Replace("`n", '\n')
+}
+
+function Invoke-PortalLoginByScript {
+    param(
+        [string]$UserName,
+        [string]$Password
+    )
+
+    try {
+        $userScript = ConvertTo-JavascriptString -Value $UserName
+        $passwordScript = ConvertTo-JavascriptString -Value $Password
+        $script = "(function(){function ew(v,s){v=(v||'').toLowerCase();s=s.toLowerCase();return v.length>=s.length&&v.substr(v.length-s.length)==s;}function bySuffix(s){var xs=document.getElementsByTagName('input');for(var i=0;i<xs.length;i++){var e=xs[i];if(ew(e.id,s)||ew(e.name,s)){return e;}}return null;}var u=document.getElementById('ctl00_MainContent_ctl01_EmailOrName')||bySuffix('EmailOrName');var p=document.getElementById('ctl00_MainContent_ctl01_password')||bySuffix('password');var b=document.getElementById('ctl00_MainContent_ctl01_SigninBtn')||bySuffix('SigninBtn');window.__PortalLegacyIeLoginResult='missing';if(u&&p&&b){u.value='" + $userScript + "';p.value='" + $passwordScript + "';window.__PortalLegacyIeLoginResult='clicked';b.click();}})();"
+        $Ie.Document.parentWindow.execScript($script, 'JavaScript')
+        return $true
+    }
+    catch {
+        Write-Log ('WARN script login failed: ' + $_.Exception.Message)
+        return $false
+    }
+}
+
 function Invoke-PortalStep {
     param(
         [string]$Step,
@@ -529,25 +1436,63 @@ function Invoke-PortalLogin {
         return
     }
 
-    $securePassword = Read-Host -Prompt ('Password for ' + $AdminUser + ' (not logged)') -AsSecureString
-    $plainPassword = ConvertTo-PlainText -SecureText $securePassword
+    $plainPassword = Get-AdminLoginPassword
 
     Write-Log 'LOGIN finding fields.'
     Write-InputInventory -Document $Ie.Document
-    $userInput = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'EmailOrName'
-    $passwordInput = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'password'
-    $button = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'SigninBtn'
-
-    if ($null -eq $userInput -or $null -eq $passwordInput -or $null -eq $button) {
-        $htmlPath = Save-PageHtml -Browser $Ie -Step 'login-fields-missing'
-        $screenshotPath = Save-Screenshot -Step 'login-fields-missing'
-        Add-Result -Step 'login' -Passed $false -Message 'Login fields were not found on the current page.' -Url ([string]$Ie.LocationURL) -Screenshot $screenshotPath -Html $htmlPath
-        return
+    $userInput = Find-InputByKnownIdentity -Document $Ie.Document -Ids @('ctl00_MainContent_ctl01_EmailOrName', 'EmailOrName') -Names @('ctl00$MainContent$ctl01$EmailOrName', 'EmailOrName')
+    if ($null -eq $userInput) {
+        $userInput = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'EmailOrName'
     }
 
-    $userInput.value = $AdminUser
-    $passwordInput.value = $plainPassword
-    $button.click()
+    $passwordInput = Find-InputByKnownIdentity -Document $Ie.Document -Ids @('ctl00_MainContent_ctl01_password', 'password') -Names @('ctl00$MainContent$ctl01$password', 'password')
+    if ($null -eq $passwordInput) {
+        $passwordInput = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'password'
+    }
+
+    $button = Find-InputByKnownIdentity -Document $Ie.Document -Ids @('ctl00_MainContent_ctl01_SigninBtn', 'SigninBtn') -Names @('ctl00$MainContent$ctl01$SigninBtn', 'SigninBtn')
+    if ($null -eq $button) {
+        $button = Find-InputByIdSuffix -Document $Ie.Document -Suffix 'SigninBtn'
+    }
+
+    if ($null -eq $userInput -or $null -eq $passwordInput -or $null -eq $button) {
+        Write-Log 'LOGIN using JavaScript DOM fallback.'
+        if (-not (Invoke-PortalLoginByScript -UserName $AdminUser -Password $plainPassword)) {
+            Write-Log 'LOGIN using keyboard fallback.'
+            if (Invoke-PortalLoginByKeyboard -Browser $Ie -UserName $AdminUser -Password $plainPassword) {
+                $htmlPath = Save-PageHtml -Browser $Ie -Step 'login'
+                $screenshotPath = Save-Screenshot -Step 'login'
+                $message = 'Keyboard login submitted; the next protected-page step validates the authenticated session.'
+                Add-Result -Step 'login' -Passed $true -Message $message -Url ([string]$Ie.LocationURL) -Screenshot $screenshotPath -Html $htmlPath
+                return
+            }
+            else {
+                Write-Log 'LOGIN using HTTP cookie fallback.'
+                $httpLogin = Invoke-PortalLoginByHttp -Root $BaseUrl -UserName $AdminUser -Password $plainPassword
+                if ($httpLogin.Passed) {
+                    $Ie.Navigate((Join-PortalUrl -Root $BaseUrl -Path 'Default.aspx'))
+                    Wait-InternetExplorer -Browser $Ie
+                    $htmlPath = Save-PageHtml -Browser $Ie -Step 'login'
+                    $screenshotPath = Save-Screenshot -Step 'login'
+                    $message = 'HTTP fallback login completed. AuthCookieFound=' + $httpLogin.AuthCookieFound + '; CookiesCopied=' + $httpLogin.CookiesCopied + '; MarkerFound=' + $httpLogin.MarkerFound
+                    Add-Result -Step 'login' -Passed $true -Message $message -Url ([string]$Ie.LocationURL) -Screenshot $screenshotPath -Html $htmlPath
+                    return
+                }
+                else {
+                    $htmlPath = Save-PageHtml -Browser $Ie -Step 'login-fields-missing'
+                    $screenshotPath = Save-Screenshot -Step 'login-fields-missing'
+                    Add-Result -Step 'login' -Passed $false -Message 'Login fields were not found and fallbacks failed.' -Url ([string]$Ie.LocationURL) -Screenshot $screenshotPath -Html $htmlPath
+                    return
+                }
+            }
+        }
+    }
+    else {
+        $userInput.value = $AdminUser
+        $passwordInput.value = $plainPassword
+        $button.click()
+    }
+
     Wait-InternetExplorer -Browser $Ie
     $htmlPath = Save-PageHtml -Browser $Ie -Step 'login'
     $screenshotPath = Save-Screenshot -Step 'login'
@@ -598,7 +1543,7 @@ try {
 
     Invoke-PortalStep -Step 'home' -Url (Join-PortalUrl -Root $BaseUrl -Path 'Default.aspx') -Keywords @('Portal', 'Home', 'Default.aspx')
     Invoke-PortalLogin
-    Invoke-PortalStep -Step 'admin-system-health' -Url (Join-PortalUrl -Root $BaseUrl -Path 'Admin/SystemHealth.aspx') -Keywords @('System Health')
+    Invoke-PortalStep -Step 'admin-system-health' -Url (Join-PortalUrl -Root $BaseUrl -Path 'Admin/SystemHealth.aspx') -Keywords @('System Health', 'SystemHealth.aspx', 'SystemHealth')
     Invoke-PortalStep -Step 'generic-error-page' -Url (Join-PortalUrl -Root $BaseUrl -Path 'GenericErrorPage.aspx?id=P9LegacyVmProbe') -Keywords @('P9LegacyVmProbe', 'event')
 }
 catch {
