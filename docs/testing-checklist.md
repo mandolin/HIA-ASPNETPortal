@@ -19,6 +19,8 @@
 - [ ] 如需 SQL Server 2016+ 版本补证，先运行 `dev/scripts/Test-PortalSqlVersionMatrix.ps1`；没有对应真实实例时只记录 Pending，不宣称通过。
 - [ ] 如需验证最新 schema，`dev/scripts/Test-PortalSqlCompatibility.ps1` 指向已完成对应迁移的隔离测试库。
 - [ ] 新增或调整数据访问代码前，运行 `dev/scripts/Get-PortalDataAccessInventory.ps1`，确认 SQL/provider 标签和方言风险已记录。
+- [ ] 新增或调整数据库脚本前，运行 `dev/scripts/Get-PortalMigrationManifest.ps1`，确认脚本已纳入 manifest、类型、幂等性、provider 标签和回滚边界。
+- [ ] 任何 `-Apply*` 数据库迁移演练均只允许指向隔离测试库，并保留 apply 输出和随后的只读 require 输出。
 
 ## 运行检查
 

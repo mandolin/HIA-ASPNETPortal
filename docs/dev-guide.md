@@ -194,6 +194,25 @@ P11.2 起提供只读数据访问 inventory，用于扫描已追踪源码中的 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1 -OutputJson work-zone\dev\evidence\p11.2\data-access-inventory.json
 ```
 
+P11.3 起提供只读迁移 manifest 检查，用于盘点 `src/Setup` 脚本的执行顺序、迁移类型、幂等性、provider 标签、回滚模式和 legacy 风险：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalMigrationManifest.ps1
+```
+
+需要保留 JSON 证据时显式指定输出路径：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalMigrationManifest.ps1 -OutputJson work-zone\dev\evidence\p11.3\migration-manifest.json
+```
+
+既有测试库需要补齐 P5/P6 schema 时，必须显式使用外置 `test` 连接串和 `Test-PortalSqlCompatibility.ps1` 的 `-Apply*` 开关。该操作会写入目标测试库，只应指向隔离测试实例：
+
+```powershell
+$testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath $testConfig -ApplyP5Migrations -ApplyP6UserProfileMigration -ApplyP6EmployeeOrganizationMigration -ApplyP6BusinessModuleMigration -RequireP2Migrations -RequireP3Migrations -RequireP5Migrations -RequireP6UserProfileMigration -RequireP6EmployeeOrganizationMigration -RequireP6BusinessModuleMigration
+```
+
 首次创建隔离的 SQL Server 2016+ 测试库时，可显式运行初始化脚本。它从外置连接串读取目标库名，要求目标库不存在，并在确认后导入历史基础数据、P2、P3 与 P5 迁移；不会输出或保存连接串：
 
 ```powershell

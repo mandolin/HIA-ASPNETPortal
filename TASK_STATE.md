@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P11 数据兼容、迁移与集成边界` |
-| 当前阶段 | `W-anp-P11.3` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P11.3-discussion-questions.md`；若确认，则推进迁移脚本、seed、回滚和数据修复规范。 |
-| 当前完成条件 | P11.3 的讨论问题被确认，随后形成迁移命名、执行顺序、回滚边界、seed 分类、数据修复和默认凭据退出规则。 |
+| 当前阶段 | `W-anp-P11.4` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P11.4-discussion-questions.md`；若确认，则推进 HIA 外围集成契约。 |
+| 当前完成条件 | P11.4 的讨论问题被确认，随后形成 HIA 用户、组织、模块、文档化和诊断/证据边界的集成契约。 |
 | 最近状态更新时间 | 2026-07-21 |
 
 ## Recent Completed Items
@@ -34,13 +34,14 @@
 | 上下文恢复任务账本机制 | completed | `TASK_STATE.md`、`AGENTS.md`、`work-zone/docs/task-ledger-protocol.md` |
 | P11.1 SQL Server 版本矩阵自动侧基线 | completed | `dev/scripts/Test-PortalSqlVersionMatrix.ps1`；`work-zone/dev/plans/W-anp-P11.1-static-preflight-result.md`；证据 `work-zone/dev/evidence/p11.1/` |
 | P11.2 数据访问差异盘点 | completed | `dev/scripts/Get-PortalDataAccessInventory.ps1`；`work-zone/dev/plans/W-anp-P11.2-data-access-inventory.md`；证据 `work-zone/dev/evidence/p11.2/` |
+| P11.3 迁移脚本与数据修复规范 | completed | `dev/scripts/Get-PortalMigrationManifest.ps1`；`work-zone/dev/plans/W-anp-P11.3-result.md`；证据 `work-zone/dev/evidence/p11.3/` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 本轮 P11.2 数据访问 inventory 提交 | 将包含 P11.2 只读 inventory 脚本、公开文档说明和 P11.3 当前账本状态。 |
-| WorkZone | 本轮 P11.2 WorkZone 提交 | 将包含 P11.2 inventory、provider 方言矩阵、标签规范、P11.3 待讨论问题和本轮日志。 |
+| 主仓库 | 本轮 P11.3 迁移 manifest 提交 | 将包含 P11.3 只读 manifest 脚本、公开文档说明和 P11.4 当前账本状态。 |
+| WorkZone | 本轮 P11.3 WorkZone 提交 | 将包含 P11.3 manifest、迁移规范、演练证据、P11.4 待讨论问题和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -62,6 +63,9 @@
 | `dev/scripts/Test-PortalSqlVersionMatrix.ps1 -ConnectionStringsConfigPath {test config}` | `Pass=14; Warning=1; Fail=0; Info=1; Pending=3`；本机仅补得 SQL Server 2022 元数据证据。 |
 | `dev/scripts/Test-PortalSqlCompatibility.ps1 -RequireP2...P6...` 只读检查 | SQL Server 2022 元数据通过；当前 test 库缺少 P5/P6 后续表，不能作为“最新迁移完成库”证据。 |
 | `dev/scripts/Get-PortalDataAccessInventory.ps1 -OutputJson work-zone/dev/evidence/p11.2/data-access-inventory-20260721-043622.json` | 扫描 384 个已追踪源文件；`SqlServerOnly=48 files`、`NeedsDialect=11 files`、`PortableCandidate=16 files`、`ProviderProof=6 files`。 |
+| `dev/scripts/Get-PortalMigrationManifest.ps1 -OutputJson work-zone/dev/evidence/p11.3/migration-manifest-20260721-045026.json` | `Pass=4; Warning=2; Fail=0; Info=1`；21 个已追踪 SQL 文件全部纳入 manifest。 |
+| `dev/scripts/Test-PortalSqlCompatibility.ps1 -ApplyP5... -ApplyP6... -Require...` | 对外置 `test` 配置指向的隔离测试库执行，P5/P6 schema 补齐成功；21 项检查，失败数 `0`。 |
+| `dev/scripts/Test-PortalSqlCompatibility.ps1 -Require...` | P11.3 写入后只读复核通过；15 项检查，失败数 `0`。 |
 
 ## Known Residual Working Tree Items
 
