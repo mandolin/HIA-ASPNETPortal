@@ -4,7 +4,15 @@ param(
 
     [string]$SourcePath,
 
+    [string]$WebConfigPath,
+
     [string]$SetupPath,
+
+    [ValidateSet('Dev', 'Test', 'Prod', 'Scan', 'LegacyIe')]
+    [string]$Profile = 'Dev',
+
+    [ValidatePattern('^https?://')]
+    [string]$BaseUrl,
 
     [string]$OutputJson,
 
@@ -32,6 +40,20 @@ $resolvedPortalPath = (Resolve-Path -LiteralPath $PortalPath).Path
 $resolvedSourcePath = (Resolve-Path -LiteralPath $SourcePath).Path
 $resolvedSetupPath = (Resolve-Path -LiteralPath $SetupPath).Path
 $checks = New-Object 'System.Collections.Generic.List[object]'
+
+if ([string]::IsNullOrWhiteSpace($WebConfigPath)) {
+    $WebConfigPath = Join-Path $resolvedPortalPath 'Web.config'
+}
+
+$resolvedWebConfigPath = [System.IO.Path]::GetFullPath($WebConfigPath)
+
+function Test-StrictDeploymentProfile {
+    return $Profile -in @('Test', 'Prod', 'Scan')
+}
+
+function Test-ProductionLikeProfile {
+    return $Profile -in @('Prod', 'Scan')
+}
 
 function Add-ComplianceCheck {
     param(
@@ -116,16 +138,42 @@ function Find-PortalSourceMatch {
     return $matches
 }
 
-# 中文：先做只读基线检查，不主动扫描漏洞、不写数据库，也不改变 Web.config。
-# English: This script is a read-only baseline check; it does not attack, write the database, or modify Web.config.
-$webConfigPath = Join-Path $resolvedPortalPath 'Web.config'
-if (-not (Test-Path -LiteralPath $webConfigPath)) {
-    Add-ComplianceCheck -Severity Fail -Code 'CFG-001' -Message 'Web.config was not found.' -Evidence $webConfigPath
+function Get-PortalHttpHeader {
+    param(
+        [System.Net.WebHeaderCollection]$Headers,
+        [string]$Name
+    )
+
+    foreach ($key in $Headers.AllKeys) {
+        if ($key -ieq $Name) {
+            return [string]$Headers[$key]
+        }
+    }
+
+    return ''
+}
+
+function Resolve-PortalSmokeUri {
+    param([string]$Url)
+
+    $baseUri = [Uri]$Url
+    if ($baseUri.AbsolutePath -eq '/' -or [string]::IsNullOrWhiteSpace($baseUri.AbsolutePath)) {
+        return [Uri]::new($baseUri, 'Default.aspx')
+    }
+
+    return $baseUri
+}
+
+# 中文：先做只读基线检查，不主动扫描漏洞、不写数据库，也不改变 Web.config；Profile 只影响判定口径。
+# English: This script is a read-only baseline check; Profile affects expectations only and never modifies Web.config.
+Write-Host ('PROFILE: {0}' -f $Profile)
+if (-not (Test-Path -LiteralPath $resolvedWebConfigPath)) {
+    Add-ComplianceCheck -Severity Fail -Code 'CFG-001' -Message 'Web.config was not found.' -Evidence $resolvedWebConfigPath
 }
 else {
-    Add-ComplianceCheck -Severity Pass -Code 'CFG-001' -Message 'Web.config exists.' -Evidence $webConfigPath
+    Add-ComplianceCheck -Severity Pass -Code 'CFG-001' -Message 'Web.config exists.' -Evidence $resolvedWebConfigPath
 
-    [xml]$webConfig = Get-Utf8Text -LiteralPath $webConfigPath
+    [xml]$webConfig = Get-Utf8Text -LiteralPath $resolvedWebConfigPath
     $headerNodes = $webConfig.SelectNodes('/configuration/system.webServer/httpProtocol/customHeaders/add')
     $headers = @{}
     foreach ($node in $headerNodes) {
@@ -136,7 +184,6 @@ else {
         @{ Name = 'X-Content-Type-Options'; Pattern = '\bnosniff\b' },
         @{ Name = 'X-XSS-Protection'; Pattern = '^1;\s*mode=block$' },
         @{ Name = 'Content-Security-Policy'; Pattern = '\bdefault-src\b' },
-        @{ Name = 'Strict-Transport-Security'; Pattern = '\bmax-age=' },
         @{ Name = 'Referrer-Policy'; Pattern = '.+' },
         @{ Name = 'X-Permitted-Cross-Domain-Policies'; Pattern = '.+' },
         @{ Name = 'X-Download-Options'; Pattern = '\bnoopen\b' },
@@ -159,22 +206,84 @@ else {
         }
     }
 
-    if ($headers.ContainsKey('Content-Security-Policy') -and $headers['Content-Security-Policy'] -match "unsafe-inline|unsafe-eval") {
-        Add-ComplianceCheck -Severity Warning -Code 'HDR-CSP-COMPAT' -Message 'CSP currently keeps Web Forms compatibility exceptions.' -Evidence $headers['Content-Security-Policy']
+    if ($headers.ContainsKey('Strict-Transport-Security')) {
+        $hstsValue = [string]$headers['Strict-Transport-Security']
+        if (Test-StrictDeploymentProfile) {
+            if ($hstsValue -match '\bmax-age=') {
+                Add-ComplianceCheck -Severity Pass -Code 'HDR-Strict-Transport-Security' -Message 'HSTS is present for the selected deployment profile.' -Evidence $hstsValue
+            }
+            else {
+                Add-ComplianceCheck -Severity Fail -Code 'HDR-Strict-Transport-Security' -Message 'HSTS exists but does not contain max-age.' -Evidence $hstsValue
+            }
+        }
+        else {
+            Add-ComplianceCheck -Severity Warning -Code 'HDR-HSTS-DEV' -Message 'HSTS is present in a development/legacy profile; keep it in publish transforms instead of the base config.' -Evidence $hstsValue
+        }
+
+        if ($hstsValue -match 'includeSubDomains|preload') {
+            Add-ComplianceCheck -Severity Warning -Code 'HDR-HSTS-SCOPE' -Message 'HSTS uses includeSubDomains or preload; confirm domain ownership and long-term HTTPS readiness.' -Evidence $hstsValue
+        }
+    }
+    elseif (Test-StrictDeploymentProfile) {
+        Add-ComplianceCheck -Severity Fail -Code 'HDR-Strict-Transport-Security' -Message ('HSTS is required for the {0} profile.' -f $Profile)
+    }
+    else {
+        Add-ComplianceCheck -Severity Pass -Code 'HDR-HSTS-DEV' -Message 'HSTS is intentionally absent from the development/legacy base profile.'
     }
 
-    $envNode = $webConfig.SelectSingleNode('/configuration/env')
-    $envValue = if ($envNode -ne $null) { $envNode.GetAttribute('value') } else { '' }
-    if ($envValue -ieq 'dev' -and $headers.ContainsKey('Strict-Transport-Security')) {
-        Add-ComplianceCheck -Severity Warning -Code 'HDR-HSTS-ENV' -Message 'HSTS is present while the current config env is dev; P10.2 should split environment policy.' -Evidence $headers['Strict-Transport-Security']
+    if ($headers.ContainsKey('Content-Security-Policy') -and $headers['Content-Security-Policy'] -match "unsafe-inline|unsafe-eval") {
+        $cspSeverity = if (Test-StrictDeploymentProfile) { 'Warning' } else { 'Info' }
+        Add-ComplianceCheck -Severity $cspSeverity -Code 'HDR-CSP-COMPAT' -Message 'CSP currently keeps Web Forms compatibility exceptions.' -Evidence $headers['Content-Security-Policy']
+    }
+
+    if ($headers.ContainsKey('Referrer-Policy')) {
+        $referrerPolicy = [string]$headers['Referrer-Policy']
+        if (Test-ProductionLikeProfile) {
+            if ($referrerPolicy -ieq 'strict-origin-when-cross-origin') {
+                Add-ComplianceCheck -Severity Pass -Code 'HDR-REFERRER-PROD' -Message 'Production-like profile uses strict referrer policy.' -Evidence $referrerPolicy
+            }
+            else {
+                Add-ComplianceCheck -Severity Warning -Code 'HDR-REFERRER-PROD' -Message 'Production-like profile should use strict-origin-when-cross-origin.' -Evidence $referrerPolicy
+            }
+        }
     }
 
     $httpCookiesNode = $webConfig.SelectSingleNode('/configuration/system.web/httpCookies')
-    if ($httpCookiesNode -ne $null -and $httpCookiesNode.GetAttribute('requireSSL') -ieq 'true') {
-        Add-ComplianceCheck -Severity Pass -Code 'COOKIE-SSL' -Message 'Cookies are configured to require SSL.'
+    $httpCookiesRequireSsl = $httpCookiesNode -ne $null -and $httpCookiesNode.GetAttribute('requireSSL') -ieq 'true'
+    if (Test-StrictDeploymentProfile) {
+        if ($httpCookiesRequireSsl) {
+            Add-ComplianceCheck -Severity Pass -Code 'COOKIE-SSL' -Message 'Cookies are configured to require SSL for the selected deployment profile.'
+        }
+        else {
+            Add-ComplianceCheck -Severity Fail -Code 'COOKIE-SSL' -Message ('Cookies must require SSL for the {0} profile.' -f $Profile)
+        }
     }
     else {
-        Add-ComplianceCheck -Severity Warning -Code 'COOKIE-SSL' -Message 'Cookies do not require SSL in the base config; production transform or deployment config must enforce it.'
+        if ($httpCookiesRequireSsl) {
+            Add-ComplianceCheck -Severity Info -Code 'COOKIE-SSL' -Message 'Cookies require SSL in a development/legacy profile; HTTP local debugging may need a different config.'
+        }
+        else {
+            Add-ComplianceCheck -Severity Pass -Code 'COOKIE-SSL' -Message 'Cookies do not require SSL in the development/legacy base profile; production transforms must enforce SSL.'
+        }
+    }
+
+    $formsNode = $webConfig.SelectSingleNode('/configuration/system.web/authentication/forms')
+    $formsRequireSsl = $formsNode -ne $null -and $formsNode.GetAttribute('requireSSL') -ieq 'true'
+    if (Test-StrictDeploymentProfile) {
+        if ($formsRequireSsl) {
+            Add-ComplianceCheck -Severity Pass -Code 'COOKIE-FORMS-SSL' -Message 'Forms Authentication cookie is configured to require SSL.'
+        }
+        else {
+            Add-ComplianceCheck -Severity Fail -Code 'COOKIE-FORMS-SSL' -Message ('Forms Authentication cookie must require SSL for the {0} profile.' -f $Profile)
+        }
+    }
+    else {
+        if ($formsRequireSsl) {
+            Add-ComplianceCheck -Severity Info -Code 'COOKIE-FORMS-SSL' -Message 'Forms Authentication cookie requires SSL in a development/legacy profile; HTTP local debugging may need a different config.'
+        }
+        else {
+            Add-ComplianceCheck -Severity Pass -Code 'COOKIE-FORMS-SSL' -Message 'Forms Authentication cookie does not require SSL in the development/legacy base profile.'
+        }
     }
 
     $customErrorsNode = $webConfig.SelectSingleNode('/configuration/system.web/customErrors')
@@ -263,15 +372,82 @@ else {
     Add-ComplianceCheck -Severity Pass -Code 'PWD-LEGACY-MD5' -Message 'No PortalSecurity.Encrypt callers were found outside the scanner scope.'
 }
 
+if (-not [string]::IsNullOrWhiteSpace($BaseUrl)) {
+    $smokeUri = Resolve-PortalSmokeUri -Url $BaseUrl
+    $response = $null
+
+    try {
+        $request = [System.Net.WebRequest]::Create($smokeUri)
+        $request.Method = 'GET'
+        $request.AllowAutoRedirect = $false
+        $request.Timeout = 15000
+        $response = $request.GetResponse()
+
+        Add-ComplianceCheck -Severity Pass -Code 'HTTP-RESPONSE' -Message ('HTTP smoke returned status {0}.' -f [int]$response.StatusCode) -Evidence $smokeUri.AbsoluteUri
+
+        $runtimeHeaders = $response.Headers
+        $runtimeRequiredHeaders = @(
+            'X-Content-Type-Options',
+            'X-XSS-Protection',
+            'Content-Security-Policy',
+            'Referrer-Policy',
+            'X-Permitted-Cross-Domain-Policies',
+            'X-Download-Options',
+            'X-Frame-Options'
+        )
+
+        foreach ($headerName in $runtimeRequiredHeaders) {
+            $runtimeHeaderValue = Get-PortalHttpHeader -Headers $runtimeHeaders -Name $headerName
+            if ([string]::IsNullOrWhiteSpace($runtimeHeaderValue)) {
+                Add-ComplianceCheck -Severity Warning -Code ('HTTP-HDR-{0}' -f $headerName) -Message ('Runtime response header is missing: {0}' -f $headerName) -Evidence $smokeUri.AbsoluteUri
+            }
+            else {
+                Add-ComplianceCheck -Severity Pass -Code ('HTTP-HDR-{0}' -f $headerName) -Message ('Runtime response header is present: {0}' -f $headerName) -Evidence $runtimeHeaderValue
+            }
+        }
+
+        $runtimeHsts = Get-PortalHttpHeader -Headers $runtimeHeaders -Name 'Strict-Transport-Security'
+        if (Test-StrictDeploymentProfile) {
+            if ($smokeUri.Scheme -ine 'https') {
+                Add-ComplianceCheck -Severity Warning -Code 'HTTP-HSTS-SCHEME' -Message ('Runtime {0} profile should be validated over HTTPS.' -f $Profile) -Evidence $smokeUri.AbsoluteUri
+            }
+
+            if ([string]::IsNullOrWhiteSpace($runtimeHsts)) {
+                Add-ComplianceCheck -Severity Fail -Code 'HTTP-HDR-Strict-Transport-Security' -Message ('Runtime HSTS header is required for the {0} profile.' -f $Profile)
+            }
+            else {
+                Add-ComplianceCheck -Severity Pass -Code 'HTTP-HDR-Strict-Transport-Security' -Message 'Runtime HSTS header is present.' -Evidence $runtimeHsts
+            }
+        }
+        elseif ([string]::IsNullOrWhiteSpace($runtimeHsts)) {
+            Add-ComplianceCheck -Severity Pass -Code 'HTTP-HSTS-DEV' -Message 'Runtime HSTS is absent for the development/legacy profile.'
+        }
+        else {
+            Add-ComplianceCheck -Severity Warning -Code 'HTTP-HSTS-DEV' -Message 'Runtime HSTS is present in a development/legacy profile.' -Evidence $runtimeHsts
+        }
+    }
+    catch {
+        Add-ComplianceCheck -Severity Warning -Code 'HTTP-RESPONSE' -Message 'HTTP smoke could not reach the target URL.' -Evidence $_.Exception.Message
+    }
+    finally {
+        if ($response -ne $null) {
+            $response.Dispose()
+        }
+    }
+}
+
 $failCount = @($checks | Where-Object { $_.Severity -eq 'Fail' }).Count
 $warningCount = @($checks | Where-Object { $_.Severity -eq 'Warning' }).Count
 $infoCount = @($checks | Where-Object { $_.Severity -eq 'Info' }).Count
 $passCount = @($checks | Where-Object { $_.Severity -eq 'Pass' }).Count
 
 $summary = [pscustomobject]@{
+    Profile = $Profile
     PortalPath = $resolvedPortalPath
     SourcePath = $resolvedSourcePath
     SetupPath  = $resolvedSetupPath
+    WebConfigPath = $resolvedWebConfigPath
+    BaseUrl = $BaseUrl
     GeneratedAt = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
     Counts = [pscustomobject]@{
         Pass = $passCount
