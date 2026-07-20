@@ -108,6 +108,42 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Security.Password.MinimumLength')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Security.Password.MinimumLength', N'8', N'Integer', N'Database', 0, N'system', SYSUTCDATETIME())
+END
+GO
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Security.Password.RequiredCategoryCount')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Security.Password.RequiredCategoryCount', N'3', N'Integer', N'Database', 0, N'system', SYSUTCDATETIME())
+END
+GO
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Security.Password.WeakDictionaryEnabled')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Security.Password.WeakDictionaryEnabled', N'true', N'Boolean', N'Database', 0, N'system', SYSUTCDATETIME())
+END
+GO
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Security.Password.DisallowContextTerms')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Security.Password.DisallowContextTerms', N'true', N'Boolean', N'Database', 0, N'system', SYSUTCDATETIME())
+END
+GO
+
 IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Registration.InviteDefaultExpiryDays')
 BEGIN
     INSERT INTO [dbo].[PortalCfg_SystemSettings]

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Web;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
@@ -67,6 +68,8 @@ namespace ASPNET.StarterKit.Portal
             {
                 return;
             }
+
+            ConfigurePasswordSubmission();
 
             if (!Page.IsPostBack)
             {
@@ -180,13 +183,26 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            string password = Password.Text ?? string.Empty;
-            string confirmPassword = ConfirmPassword.Text ?? string.Empty;
-            bool shouldResetPassword = !string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(confirmPassword);
-            if (shouldResetPassword && !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersResetPassword))
+            bool passwordResetSubmitted = HasPasswordResetSubmission();
+            if (passwordResetSubmitted && !PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersResetPassword))
             {
                 return;
             }
+
+            string password;
+            string confirmPassword;
+            bool shouldResetPassword;
+            if (!TryResolvePasswordResetSubmission(
+                passwordResetSubmitted,
+                out password,
+                out confirmPassword,
+                out shouldResetPassword))
+            {
+                ClearSubmittedPasswordFields();
+                return;
+            }
+
+            ClearSubmittedPasswordFields();
 
             if (shouldResetPassword && !string.Equals(password, confirmPassword, StringComparison.Ordinal))
             {
@@ -195,7 +211,10 @@ namespace ASPNET.StarterKit.Portal
             }
 
             string passwordPolicyMessage;
-            if (shouldResetPassword && !PortalPasswordPolicy.TryValidate(password, out passwordPolicyMessage))
+            if (shouldResetPassword && !PortalPasswordPolicy.TryValidate(
+                password,
+                BuildPasswordPolicyContextTerms(loginName, displayName, nickname, email),
+                out passwordPolicyMessage))
             {
                 ShowRegistrationMessage(passwordPolicyMessage, true);
                 return;
@@ -241,6 +260,128 @@ namespace ASPNET.StarterKit.Portal
                     Context);
                 ShowRegistrationMessage("资料更新失败，系统已记录本次错误。事件编号：" + eventId, true);
             }
+        }
+
+        /// <summary>
+        /// 中文：按加密开关配置管理员重置密码提交脚本。
+        ///
+        /// English: Configures administrator password-reset submission scripts from the encryption switch.
+        /// </summary>
+        private void ConfigurePasswordSubmission()
+        {
+            if (!PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
+            {
+                UpdateUserBtn.OnClientClick = string.Empty;
+                return;
+            }
+
+            Page.ClientScript.RegisterClientScriptInclude(
+                typeof(ManageUsers),
+                "JSEncryptIE6",
+                ResolveUrl("~/Scripts/Security/jsencrypt-ie6.min.js"));
+
+            Page.ClientScript.RegisterClientScriptInclude(
+                typeof(ManageUsers),
+                "PortalLoginPasswordEncryption",
+                ResolveUrl("~/Scripts/Security/PortalLoginPasswordEncryption.js"));
+
+            UpdateUserBtn.OnClientClick = string.Format(
+                "return PortalLoginPasswordEncryption.encryptPasswordFields([{0},{1}],'{2}','{3}');",
+                BuildPasswordFieldScriptObject(Password.ClientID, EncryptedPassword.ClientID),
+                BuildPasswordFieldScriptObject(ConfirmPassword.ClientID, EncryptedConfirmPassword.ClientID),
+                HttpUtility.JavaScriptStringEncode(ResolveUrl("~/Security/LoginPasswordKey.ashx")),
+                HttpUtility.JavaScriptStringEncode(RegistrationMessage.ClientID));
+        }
+
+        /// <summary>
+        /// 中文：判断本次后台用户资料提交是否包含重置密码意图。
+        ///
+        /// English: Determines whether this user-profile submission intends to reset the password.
+        /// </summary>
+        /// <returns>中文：任一明文或密文字段非空时为 <c>true</c>。English: <c>true</c> when any plain or encrypted field is present.</returns>
+        private bool HasPasswordResetSubmission()
+        {
+            return !string.IsNullOrEmpty(Password.Text) ||
+                   !string.IsNullOrEmpty(ConfirmPassword.Text) ||
+                   !string.IsNullOrWhiteSpace(EncryptedPassword.Value) ||
+                   !string.IsNullOrWhiteSpace(EncryptedConfirmPassword.Value);
+        }
+
+        /// <summary>
+        /// 中文：解析管理员重置密码提交，保持“两框任一填写即重置”的旧语义。
+        ///
+        /// English: Resolves administrator password-reset submission while preserving the legacy "either field
+        /// means reset" semantics.
+        /// </summary>
+        /// <param name="passwordResetSubmitted">中文：是否存在密码重置提交意图。English: Whether a password-reset submission was detected.</param>
+        /// <param name="password">中文：当前请求内使用的密码。English: Password value for this request.</param>
+        /// <param name="confirmPassword">中文：当前请求内使用的确认密码。English: Confirmation password value for this request.</param>
+        /// <param name="shouldResetPassword">中文：解密或读取后是否应重置密码。English: Whether the password should be reset after decrypting or reading values.</param>
+        /// <returns>中文：提交满足当前加密策略时为 <c>true</c>。English: <c>true</c> when the submission satisfies the current encryption policy.</returns>
+        private bool TryResolvePasswordResetSubmission(
+            bool passwordResetSubmitted,
+            out string password,
+            out string confirmPassword,
+            out bool shouldResetPassword)
+        {
+            password = string.Empty;
+            confirmPassword = string.Empty;
+            shouldResetPassword = false;
+
+            if (!passwordResetSubmitted)
+            {
+                return true;
+            }
+
+            bool hasEncryptedPassword = !string.IsNullOrWhiteSpace(EncryptedPassword.Value);
+            bool hasEncryptedConfirmPassword = !string.IsNullOrWhiteSpace(EncryptedConfirmPassword.Value);
+
+            if (hasEncryptedPassword || hasEncryptedConfirmPassword)
+            {
+                if (!hasEncryptedPassword || !hasEncryptedConfirmPassword)
+                {
+                    PortalDiagnostics.Warn(
+                        "PasswordSubmissionEncryption",
+                        "Administrator password-reset submission was incomplete: one encrypted password field was missing.",
+                        Context);
+                    ShowRegistrationMessage("密码提交不完整，未保存本次修改。", true);
+                    return false;
+                }
+
+                string[] submittedPasswords;
+                string failureCode;
+                string eventId;
+                if (PortalPasswordSubmissionCrypto.TryDecryptSubmittedPasswords(
+                    Context,
+                    new[] { EncryptedPassword.Value, EncryptedConfirmPassword.Value },
+                    out submittedPasswords,
+                    out failureCode,
+                    out eventId))
+                {
+                    password = submittedPasswords.Length > 0 ? submittedPasswords[0] : string.Empty;
+                    confirmPassword = submittedPasswords.Length > 1 ? submittedPasswords[1] : string.Empty;
+                    shouldResetPassword = !string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(confirmPassword);
+                    return true;
+                }
+
+                ShowRegistrationMessage("密码提交验证失败，系统已记录本次错误。事件编号：" + eventId, true);
+                return false;
+            }
+
+            if (PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
+            {
+                PortalDiagnostics.Warn(
+                    "PasswordSubmissionEncryption",
+                    "Administrator password reset was submitted without the required encrypted fields.",
+                    Context);
+                ShowRegistrationMessage("密码提交验证失败，未保存本次修改。", true);
+                return false;
+            }
+
+            password = Password.Text ?? string.Empty;
+            confirmPassword = ConfirmPassword.Text ?? string.Empty;
+            shouldResetPassword = !string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(confirmPassword);
+            return true;
         }
 
         /// <summary>
@@ -686,6 +827,42 @@ namespace ASPNET.StarterKit.Portal
             LoginName.Enabled = enabled;
             DisplayName.Enabled = enabled;
             Nickname.Enabled = enabled;
+        }
+
+        /// <summary>
+        /// 中文：清空管理员重置密码字段，降低页面回发、异常路径和调试残留风险。
+        ///
+        /// English: Clears administrator password-reset fields to reduce postback, exception-path, and debugging residue.
+        /// </summary>
+        private void ClearSubmittedPasswordFields()
+        {
+            Password.Text = string.Empty;
+            ConfirmPassword.Text = string.Empty;
+            EncryptedPassword.Value = string.Empty;
+            EncryptedConfirmPassword.Value = string.Empty;
+        }
+
+        private static string BuildPasswordFieldScriptObject(string passwordElementId, string encryptedElementId)
+        {
+            return string.Format(
+                "{{passwordElementId:'{0}',encryptedElementId:'{1}'}}",
+                HttpUtility.JavaScriptStringEncode(passwordElementId),
+                HttpUtility.JavaScriptStringEncode(encryptedElementId));
+        }
+
+        private static string[] BuildPasswordPolicyContextTerms(
+            string loginName,
+            string displayName,
+            string nickname,
+            string email)
+        {
+            return new[]
+            {
+                loginName ?? string.Empty,
+                displayName ?? string.Empty,
+                nickname ?? string.Empty,
+                email ?? string.Empty
+            };
         }
 
         private string BuildProfileAuditSummary(

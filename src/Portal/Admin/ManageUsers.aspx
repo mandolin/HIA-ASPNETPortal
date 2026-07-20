@@ -128,6 +128,7 @@
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_Password %></span>
                     <asp:TextBox ID="Password" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" TextMode="Password" />
+                    <asp:HiddenField ID="EncryptedPassword" runat="server" />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
                         ControlToValidate="Password" CssClass="NormalRed" Display="Dynamic" Enabled="False"></asp:RequiredFieldValidator>
                 </div>
@@ -136,6 +137,7 @@
                     <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_ConfirmPwd %></span>
                     <asp:TextBox ID="ConfirmPassword" Width="200" CssClass="NormalTextBox portal-form-input" runat="server"
                         TextMode="Password" />
+                    <asp:HiddenField ID="EncryptedConfirmPassword" runat="server" />
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
                         ControlToValidate="ConfirmPassword" CssClass="NormalRed" Display="Dynamic" Enabled="False"></asp:RequiredFieldValidator>
                     <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="*" ControlToValidate="ConfirmPassword"

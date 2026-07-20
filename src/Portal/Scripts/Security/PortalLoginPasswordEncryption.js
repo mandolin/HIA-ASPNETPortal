@@ -53,18 +53,40 @@
         return "";
     }
 
-    function encryptPassword(passwordElementId, encryptedElementId, keyUrl, messageElementId) {
-        var passwordElement = getById(passwordElementId);
-        var encryptedElement = getById(encryptedElementId);
+    function encryptPasswordFields(fieldPairs, keyUrl, messageElementId) {
         var failureMessage = "密码加密准备失败，请刷新页面后重试。";
+        var pairs = [];
+        var index;
+        var hasPlainValue = false;
 
-        if (!passwordElement || !encryptedElement) {
+        if (!fieldPairs || !fieldPairs.length) {
             setMessage(messageElementId, failureMessage);
             return false;
         }
 
-        encryptedElement.value = "";
-        if (!passwordElement.value) {
+        for (index = 0; index < fieldPairs.length; index++) {
+            var pair = fieldPairs[index];
+            var passwordElement = getById(pair.passwordElementId);
+            var encryptedElement = getById(pair.encryptedElementId);
+
+            if (!passwordElement || !encryptedElement) {
+                setMessage(messageElementId, failureMessage);
+                return false;
+            }
+
+            encryptedElement.value = "";
+            pairs[pairs.length] = {
+                passwordElement: passwordElement,
+                encryptedElement: encryptedElement,
+                value: passwordElement.value || ""
+            };
+
+            if (passwordElement.value) {
+                hasPlainValue = true;
+            }
+        }
+
+        if (!hasPlainValue) {
             return true;
         }
 
@@ -82,18 +104,40 @@
         var encryptor = new window.JSEncrypt();
         encryptor.setPublicKey(publicKey);
 
-        var encryptedPassword = encryptor.encrypt(passwordElement.value);
-        if (!encryptedPassword) {
-            setMessage(messageElementId, failureMessage);
-            return false;
+        for (index = 0; index < pairs.length; index++) {
+            if (pairs[index].value) {
+                pairs[index].encryptedValue = encryptor.encrypt(pairs[index].value);
+                if (!pairs[index].encryptedValue) {
+                    setMessage(messageElementId, failureMessage);
+                    return false;
+                }
+            } else {
+                pairs[index].encryptedValue = "";
+            }
         }
 
-        encryptedElement.value = encryptedPassword;
-        passwordElement.value = "";
+        for (index = 0; index < pairs.length; index++) {
+            pairs[index].encryptedElement.value = pairs[index].encryptedValue;
+            pairs[index].passwordElement.value = "";
+        }
+
         return true;
     }
 
+    function encryptPassword(passwordElementId, encryptedElementId, keyUrl, messageElementId) {
+        return encryptPasswordFields(
+            [
+                {
+                    passwordElementId: passwordElementId,
+                    encryptedElementId: encryptedElementId
+                }
+            ],
+            keyUrl,
+            messageElementId);
+    }
+
     window.PortalLoginPasswordEncryption = {
-        encryptPassword: encryptPassword
+        encryptPassword: encryptPassword,
+        encryptPasswordFields: encryptPasswordFields
     };
 })(window, document);

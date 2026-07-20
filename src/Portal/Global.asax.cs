@@ -105,6 +105,7 @@ namespace ASPNET.StarterKit.Portal
                 "Startup",
                 $"Loaded connection string '{ExternalConnectionStringLoader.LogicalConnectionStringName}' with provider '{portalConnectionString.ProviderInvariantName}' from {portalConnectionString.Source}; ConfigFile={portalConnectionString.ConfigFile}");
             PortalDiagnostics.CheckSqlConnection(portalConnectionString.ConnectionString);
+            RegisterPasswordPolicyOptionsProvider();
 
             // 启动期最小自检：确认关键数据服务和环境覆盖字符串都能从容器解析。
             var usersDbService = Container.Resolve<IUsersDb>();
@@ -114,6 +115,29 @@ namespace ASPNET.StarterKit.Portal
                 $"Resolved IUsersDb: {usersDbService?.GetType().Name}; Resolved testStr: {!string.IsNullOrEmpty(testStr)}");
 
 
+        }
+
+        /// <summary>
+        /// 中文：把 Web 层运行期系统设置接入组件层密码策略。
+        ///
+        /// English: Connects Web-layer runtime system settings to the component-layer password policy.
+        /// </summary>
+        /// <remarks>
+        /// 中文：<see cref="PortalPasswordPolicy"/> 位于独立组件项目，不能反向依赖 Web 配置读取器；
+        /// 因此启动期通过委托注入当前有效策略。读取失败时策略类自身会回退到硬下限默认值。
+        ///
+        /// English: <see cref="PortalPasswordPolicy"/> lives in the independent components project and must not
+        /// depend back on the Web configuration resolver, so startup injects a delegate for the effective policy.
+        /// The policy class falls back to its hard lower-bound defaults if reads fail.
+        /// </remarks>
+        private static void RegisterPasswordPolicyOptionsProvider()
+        {
+            PortalPasswordPolicy.ConfigureOptionsProvider(
+                () => new PortalPasswordPolicyOptions(
+                    PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordMinimumLength),
+                    PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordRequiredCategoryCount),
+                    PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.PasswordWeakDictionaryEnabled),
+                    PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.PasswordDisallowContextTerms)));
         }
 
         /// <summary>

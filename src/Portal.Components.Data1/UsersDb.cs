@@ -58,7 +58,10 @@ namespace ASPNET.StarterKit.Portal
             string normalizedPassword = password ?? string.Empty;
             string passwordPolicyMessage;
             if (!string.IsNullOrEmpty(normalizedPassword) &&
-                !PortalPasswordPolicy.TryValidate(normalizedPassword, out passwordPolicyMessage))
+                !PortalPasswordPolicy.TryValidate(
+                    normalizedPassword,
+                    BuildPasswordPolicyContextTerms(fullName, email),
+                    out passwordPolicyMessage))
             {
                 return -1;
             }
@@ -140,7 +143,10 @@ namespace ASPNET.StarterKit.Portal
             }
 
             string passwordPolicyMessage;
-            if (!PortalPasswordPolicy.TryValidate(password, out passwordPolicyMessage))
+            if (!PortalPasswordPolicy.TryValidate(
+                password,
+                BuildPasswordPolicyContextTerms(fullName, email, employeeCode),
+                out passwordPolicyMessage))
             {
                 return -1;
             }
@@ -491,7 +497,10 @@ namespace ASPNET.StarterKit.Portal
 
             string passwordPolicyMessage;
             if (shouldResetCredential &&
-                !PortalPasswordPolicy.TryValidate(normalizedPassword, out passwordPolicyMessage))
+                !PortalPasswordPolicy.TryValidate(
+                    normalizedPassword,
+                    BuildPasswordPolicyContextTerms(loginName, displayName, nickname, email),
+                    out passwordPolicyMessage))
             {
                 throw new InvalidOperationException(passwordPolicyMessage);
             }
@@ -1366,6 +1375,18 @@ END",
                 string.Empty,
                 string.Empty,
                 source);
+        }
+
+        /// <summary>
+        /// 中文：为密码策略提供账号相关上下文词；调用方不得记录返回值。
+        ///
+        /// English: Provides account-related context terms for password policy checks; callers must not log the returned values.
+        /// </summary>
+        /// <param name="terms">中文：用户名、邮箱、员工号、显示名等候选词。English: Candidate user name, email, employee code, display name, and similar terms.</param>
+        /// <returns>中文：供策略层只读使用的上下文词数组。English: Context-term array for read-only policy checks.</returns>
+        private static string[] BuildPasswordPolicyContextTerms(params string[] terms)
+        {
+            return terms ?? new string[0];
         }
 
         private static string SafeName(string value)

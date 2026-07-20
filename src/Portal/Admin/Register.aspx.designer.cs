@@ -96,6 +96,15 @@ namespace ASPNET.StarterKit.Portal
         protected global::System.Web.UI.WebControls.TextBox Password;
 
         /// <summary>
+        /// EncryptedPassword 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField EncryptedPassword;
+
+        /// <summary>
         /// RequiredFieldValidator3 控件。
         /// </summary>
         /// <remarks>
@@ -112,6 +121,15 @@ namespace ASPNET.StarterKit.Portal
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ConfirmPassword;
+
+        /// <summary>
+        /// EncryptedConfirmPassword 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField EncryptedConfirmPassword;
 
         /// <summary>
         /// RequiredFieldValidator4 控件。

@@ -48,7 +48,7 @@ namespace ASPNET.StarterKit.Portal.Security
 
             try
             {
-                PortalLoginPasswordPublicKey publicKey = PortalLoginPasswordCrypto.IssueLoginPasswordKey(context);
+                PortalLoginPasswordPublicKey publicKey = PortalPasswordSubmissionCrypto.IssuePasswordSubmissionKey(context);
                 context.Response.Write(publicKey.PublicKeyPem);
             }
             catch (Exception exception)

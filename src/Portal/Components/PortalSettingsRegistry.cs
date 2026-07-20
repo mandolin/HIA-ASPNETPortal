@@ -75,6 +75,78 @@ namespace ASPNET.StarterKit.Portal
                 "Security");
 
         /// <summary>
+        /// 中文：密码策略最小长度设置定义，硬下限为 8 位。
+        ///
+        /// English: Setting definition for password-policy minimum length, with an 8-character hard lower bound.
+        /// </summary>
+        public static readonly PortalSettingDefinition PasswordMinimumLength =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordMinimumLength,
+                "密码最小长度",
+                "控制新建、注册和重置密码的最小长度；不能低于 8 位。",
+                PortalSettingValueType.Integer,
+                "8",
+                true,
+                false,
+                "Admins",
+                "Security",
+                minIntegerValue: 8,
+                maxIntegerValue: 128);
+
+        /// <summary>
+        /// 中文：密码策略要求的字符类别数量设置定义。
+        ///
+        /// English: Setting definition for the required password character-category count.
+        /// </summary>
+        public static readonly PortalSettingDefinition PasswordRequiredCategoryCount =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordRequiredCategoryCount,
+                "密码字符类别数量",
+                "控制密码需同时满足大写、小写、数字、特殊字符中的几类；当前允许 3 到 4 类。",
+                PortalSettingValueType.Integer,
+                "3",
+                true,
+                false,
+                "Admins",
+                "Security",
+                minIntegerValue: 3,
+                maxIntegerValue: 4);
+
+        /// <summary>
+        /// 中文：常见弱口令字典检测设置定义。
+        ///
+        /// English: Setting definition for common weak-password dictionary checks.
+        /// </summary>
+        public static readonly PortalSettingDefinition PasswordWeakDictionaryEnabled =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordWeakDictionaryEnabled,
+                "启用弱口令字典",
+                "控制是否拒绝常见弱口令和单字符重复密码；默认启用。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Security");
+
+        /// <summary>
+        /// 中文：禁止密码包含账号上下文词的设置定义。
+        ///
+        /// English: Setting definition for disallowing account-context terms in passwords.
+        /// </summary>
+        public static readonly PortalSettingDefinition PasswordDisallowContextTerms =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordDisallowContextTerms,
+                "禁止账号相关密码",
+                "控制是否拒绝包含用户名、邮箱、员工号、显示名等账号相关词的密码；默认启用。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Security");
+
+        /// <summary>
         /// 中文：临时注册链接默认有效天数的设置定义。
         ///
         /// English: Setting definition for the default validity period of temporary registration invite links.
@@ -282,6 +354,10 @@ namespace ASPNET.StarterKit.Portal
                 AllowSelfRegistration,
                 RequireRegistrationApproval,
                 RequireEncryptedLoginPassword,
+                PasswordMinimumLength,
+                PasswordRequiredCategoryCount,
+                PasswordWeakDictionaryEnabled,
+                PasswordDisallowContextTerms,
                 RegistrationInviteDefaultExpiryDays,
                 AllowPendingEmployeeBinding,
                 MaxUploadBytes,

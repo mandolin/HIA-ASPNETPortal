@@ -76,6 +76,7 @@
                             Password:
                             <br>
                             <asp:TextBox size="25" ID="Password" TextMode="Password" runat="server" />
+                            <asp:HiddenField ID="EncryptedPassword" runat="server" />
                             &nbsp;
                             <%-- 必填项验证 --%>
                             <asp:RequiredFieldValidator ControlToValidate="Password" ErrorMessage="'Password' must not be left blank."
@@ -85,6 +86,7 @@
                             Confirm Password:
                             <br>
                             <asp:TextBox size="25" ID="ConfirmPassword" TextMode="Password" runat="server" />
+                            <asp:HiddenField ID="EncryptedConfirmPassword" runat="server" />
                             &nbsp;
                             <%-- 必填项验证 --%>
                             <asp:RequiredFieldValidator ControlToValidate="ConfirmPassword" Display="Dynamic"

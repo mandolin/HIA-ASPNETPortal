@@ -6,17 +6,17 @@ using System.Web;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：登录密码前端加密的服务端 RSA 支撑工具。
+    /// 中文：登录/口令提交前端加密的服务端 RSA 支撑工具。
     ///
-    /// English: Server-side RSA support for client-side login-password encryption.
+    /// English: Server-side RSA support for client-side login/password-submission encryption.
     /// </summary>
     /// <remarks>
     /// 中文：P10.3 第一版固定使用 2048 位一次性密钥；后续会按客户端浏览器环境选择加密强度。
-    /// 私钥只保存在当前 Session 中，并在登录提交时一次性消费，不写入日志、数据库或页面。
+    /// 私钥只保存在当前 Session 中，并在口令提交时一次性消费，不写入日志、数据库或页面。
     ///
     /// English: The first P10.3 version uses a fixed 2048-bit one-time key; later work will select encryption
     /// strength by client browser capability. The private key stays only in the current Session and is consumed
-    /// once by the login post. It is never written to logs, the database, or the page.
+    /// once by the password post. It is never written to logs, the database, or the page.
     /// </remarks>
     public static class PortalLoginPasswordCrypto
     {
@@ -86,6 +86,48 @@ namespace ASPNET.StarterKit.Portal
             out string eventId)
         {
             password = string.Empty;
+            string[] passwords;
+            if (!TryDecryptSubmittedPasswords(
+                context,
+                new[] { encryptedPassword },
+                out passwords,
+                out failureCode,
+                out eventId))
+            {
+                return false;
+            }
+
+            password = passwords.Length > 0 ? passwords[0] : string.Empty;
+            return true;
+        }
+
+        /// <summary>
+        /// 中文：消费当前 Session 的一次性私钥并解密同一表单中的多个口令密文字段。
+        ///
+        /// English: Consumes the current Session's one-time private key and decrypts multiple password ciphertext fields from one form.
+        /// </summary>
+        /// <remarks>
+        /// 中文：注册、改密和管理员重置密码通常包含密码与确认密码两个字段；它们必须共用同一把一次性私钥，
+        /// 并在一次调用中完成解密，避免第一个字段解密后清空私钥导致第二个字段失败。
+        ///
+        /// English: Registration, change-password, and administrator password-reset forms usually contain password
+        /// and confirmation fields. They must share the same one-time private key and decrypt in one call so the
+        /// first field does not clear the key before the second field is processed.
+        /// </remarks>
+        /// <param name="context">中文：当前 HTTP 上下文，必须带 Session。English: Current HTTP context; Session is required.</param>
+        /// <param name="encryptedPasswords">中文：客户端提交的一组 Base64 RSA 密文。English: Base64 RSA ciphertext values submitted by the client.</param>
+        /// <param name="passwords">中文：解密成功时返回当前请求内使用的明文口令数组。English: Plain password values for this request when decryption succeeds.</param>
+        /// <param name="failureCode">中文：失败分类，不包含敏感值。English: Failure category without sensitive values.</param>
+        /// <param name="eventId">中文：诊断事件编号。English: Diagnostics event id.</param>
+        /// <returns>中文：全部字段解密成功时为 <c>true</c>。English: <c>true</c> when all fields decrypt successfully.</returns>
+        public static bool TryDecryptSubmittedPasswords(
+            HttpContext context,
+            string[] encryptedPasswords,
+            out string[] passwords,
+            out string failureCode,
+            out string eventId)
+        {
+            passwords = new string[0];
             failureCode = string.Empty;
             eventId = string.Empty;
 
@@ -94,20 +136,37 @@ namespace ASPNET.StarterKit.Portal
                 failureCode = "NoSession";
                 eventId = PortalDiagnostics.Warn(
                     "LoginPasswordEncryption",
-                    "Encrypted login password could not be decrypted because Session is unavailable.",
+                    "Encrypted password submission could not be decrypted because Session is unavailable.",
                     context);
                 return false;
             }
 
-            string trimmedEncryptedPassword = encryptedPassword == null ? string.Empty : encryptedPassword.Trim();
-            if (trimmedEncryptedPassword.Length == 0)
+            if (encryptedPasswords == null || encryptedPasswords.Length == 0)
             {
                 failureCode = "MissingCiphertext";
                 eventId = PortalDiagnostics.Warn(
                     "LoginPasswordEncryption",
-                    "Encrypted login password was missing from the submitted form.",
+                    "Encrypted password submission did not contain any ciphertext fields.",
                     context);
                 return false;
+            }
+
+            string[] trimmedEncryptedPasswords = new string[encryptedPasswords.Length];
+            for (int index = 0; index < encryptedPasswords.Length; index++)
+            {
+                trimmedEncryptedPasswords[index] = encryptedPasswords[index] == null
+                    ? string.Empty
+                    : encryptedPasswords[index].Trim();
+
+                if (trimmedEncryptedPasswords[index].Length == 0)
+                {
+                    failureCode = "MissingCiphertext";
+                    eventId = PortalDiagnostics.Warn(
+                        "LoginPasswordEncryption",
+                        "Encrypted password submission was missing one or more ciphertext fields.",
+                        context);
+                    return false;
+                }
             }
 
             string privateKeyXml = context.Session[PrivateKeySessionKey] as string;
@@ -119,7 +178,7 @@ namespace ASPNET.StarterKit.Portal
                 failureCode = "MissingPrivateKey";
                 eventId = PortalDiagnostics.Warn(
                     "LoginPasswordEncryption",
-                    "Encrypted login password could not be decrypted because the one-time private key was missing.",
+                    "Encrypted password submission could not be decrypted because the one-time private key was missing.",
                     context);
                 return false;
             }
@@ -129,19 +188,23 @@ namespace ASPNET.StarterKit.Portal
                 failureCode = "ExpiredPrivateKey";
                 eventId = PortalDiagnostics.Warn(
                     "LoginPasswordEncryption",
-                    "Encrypted login password could not be decrypted because the one-time private key expired.",
+                    "Encrypted password submission could not be decrypted because the one-time private key expired.",
                     context);
                 return false;
             }
 
             try
             {
-                byte[] cipherBytes = Convert.FromBase64String(trimmedEncryptedPassword);
+                passwords = new string[trimmedEncryptedPasswords.Length];
                 using (var rsa = new RSACryptoServiceProvider())
                 {
                     rsa.FromXmlString(privateKeyXml);
-                    byte[] plainBytes = rsa.Decrypt(cipherBytes, false);
-                    password = Encoding.UTF8.GetString(plainBytes);
+                    for (int index = 0; index < trimmedEncryptedPasswords.Length; index++)
+                    {
+                        byte[] cipherBytes = Convert.FromBase64String(trimmedEncryptedPasswords[index]);
+                        byte[] plainBytes = rsa.Decrypt(cipherBytes, false);
+                        passwords[index] = Encoding.UTF8.GetString(plainBytes);
+                    }
                 }
 
                 return true;
@@ -151,7 +214,7 @@ namespace ASPNET.StarterKit.Portal
                 failureCode = "InvalidCiphertext";
                 eventId = PortalDiagnostics.Error(
                     "LoginPasswordEncryption",
-                    "Encrypted login password was not valid Base64.",
+                    "Encrypted password submission was not valid Base64.",
                     exception,
                     context);
                 return false;
@@ -161,7 +224,7 @@ namespace ASPNET.StarterKit.Portal
                 failureCode = "DecryptFailed";
                 eventId = PortalDiagnostics.Error(
                     "LoginPasswordEncryption",
-                    "Encrypted login password RSA decryption failed.",
+                    "Encrypted password submission RSA decryption failed.",
                     exception,
                     context);
                 return false;
@@ -349,5 +412,96 @@ namespace ASPNET.StarterKit.Portal
         /// English: Key size in bits.
         /// </summary>
         public int KeySizeBits { get; private set; }
+    }
+
+    /// <summary>
+    /// 中文：面向页面层的通用口令提交加密 facade。
+    ///
+    /// English: Generic password-submission encryption facade for page code.
+    /// </summary>
+    /// <remarks>
+    /// 中文：保留 <see cref="PortalLoginPasswordCrypto"/> 作为第一批登录实现的兼容入口；新页面应依赖本 facade，
+    /// 让注册、改密、管理员重置密码等入口共享同一提交安全语义。
+    ///
+    /// English: <see cref="PortalLoginPasswordCrypto"/> remains as the compatibility entry from the first login
+    /// implementation; new pages should depend on this facade so registration, change-password, and administrator
+    /// reset flows share one submission-security contract.
+    /// </remarks>
+    public static class PortalPasswordSubmissionCrypto
+    {
+        /// <summary>
+        /// 中文：读取口令提交是否必须使用前端加密。
+        ///
+        /// English: Reads whether password submission must use client-side encryption.
+        /// </summary>
+        /// <returns>中文：必须加密提交时为 <c>true</c>。English: <c>true</c> when encrypted submission is required.</returns>
+        public static bool IsEncryptedSubmissionRequired()
+        {
+            return PortalLoginPasswordCrypto.IsEncryptedSubmissionRequired();
+        }
+
+        /// <summary>
+        /// 中文：为当前 Session 签发一个一次性口令提交公钥。
+        ///
+        /// English: Issues a one-time password-submission public key for the current Session.
+        /// </summary>
+        /// <param name="context">中文：当前 HTTP 上下文。English: Current HTTP context.</param>
+        /// <returns>中文：PEM 公钥和密钥位数。English: PEM public key and key size.</returns>
+        public static PortalLoginPasswordPublicKey IssuePasswordSubmissionKey(HttpContext context)
+        {
+            return PortalLoginPasswordCrypto.IssueLoginPasswordKey(context);
+        }
+
+        /// <summary>
+        /// 中文：解密单个口令提交密文字段。
+        ///
+        /// English: Decrypts one encrypted password-submission field.
+        /// </summary>
+        /// <param name="context">中文：当前 HTTP 上下文。English: Current HTTP context.</param>
+        /// <param name="encryptedPassword">中文：Base64 RSA 密文。English: Base64 RSA ciphertext.</param>
+        /// <param name="password">中文：解密后的当前请求内明文。English: Decrypted plain value for the current request.</param>
+        /// <param name="failureCode">中文：失败分类。English: Failure category.</param>
+        /// <param name="eventId">中文：诊断事件编号。English: Diagnostics event id.</param>
+        /// <returns>中文：解密成功时为 <c>true</c>。English: <c>true</c> when decryption succeeds.</returns>
+        public static bool TryDecryptSubmittedPassword(
+            HttpContext context,
+            string encryptedPassword,
+            out string password,
+            out string failureCode,
+            out string eventId)
+        {
+            return PortalLoginPasswordCrypto.TryDecryptSubmittedPassword(
+                context,
+                encryptedPassword,
+                out password,
+                out failureCode,
+                out eventId);
+        }
+
+        /// <summary>
+        /// 中文：解密同一口令表单中的多个密文字段。
+        ///
+        /// English: Decrypts multiple encrypted fields from one password form.
+        /// </summary>
+        /// <param name="context">中文：当前 HTTP 上下文。English: Current HTTP context.</param>
+        /// <param name="encryptedPasswords">中文：同一次提交中的密文字段。English: Ciphertext fields in the same submission.</param>
+        /// <param name="passwords">中文：解密后的当前请求内明文数组。English: Decrypted plain values for the current request.</param>
+        /// <param name="failureCode">中文：失败分类。English: Failure category.</param>
+        /// <param name="eventId">中文：诊断事件编号。English: Diagnostics event id.</param>
+        /// <returns>中文：全部解密成功时为 <c>true</c>。English: <c>true</c> when all fields decrypt successfully.</returns>
+        public static bool TryDecryptSubmittedPasswords(
+            HttpContext context,
+            string[] encryptedPasswords,
+            out string[] passwords,
+            out string failureCode,
+            out string eventId)
+        {
+            return PortalLoginPasswordCrypto.TryDecryptSubmittedPasswords(
+                context,
+                encryptedPasswords,
+                out passwords,
+                out failureCode,
+                out eventId);
+        }
     }
 }

@@ -116,6 +116,12 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private void RegisterLoginPasswordEncryptionScripts()
         {
+            if (!PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
+            {
+                SigninBtn.OnClientClick = string.Empty;
+                return;
+            }
+
             Page.ClientScript.RegisterClientScriptInclude(
                 typeof(Signin),
                 "JSEncryptIE6",
@@ -150,7 +156,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 string failureCode;
                 string eventId;
-                if (PortalLoginPasswordCrypto.TryDecryptSubmittedPassword(
+                if (PortalPasswordSubmissionCrypto.TryDecryptSubmittedPassword(
                     Context,
                     EncryptedPassword.Value,
                     out submittedPassword,
@@ -165,7 +171,7 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
-            if (PortalLoginPasswordCrypto.IsEncryptedSubmissionRequired())
+            if (PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
             {
                 PortalDiagnostics.Warn(
                     "LoginPasswordEncryption",

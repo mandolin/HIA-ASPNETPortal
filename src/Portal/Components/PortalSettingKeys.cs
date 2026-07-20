@@ -85,6 +85,34 @@ namespace ASPNET.StarterKit.Portal
         public const string RequireEncryptedLoginPassword = "Portal.Security.RequireEncryptedLoginPassword";
 
         /// <summary>
+        /// 中文：密码策略最小长度的设置键。
+        ///
+        /// English: Setting key for password-policy minimum length.
+        /// </summary>
+        public const string PasswordMinimumLength = "Portal.Security.Password.MinimumLength";
+
+        /// <summary>
+        /// 中文：密码策略要求的字符类别数量设置键。
+        ///
+        /// English: Setting key for the required password character-category count.
+        /// </summary>
+        public const string PasswordRequiredCategoryCount = "Portal.Security.Password.RequiredCategoryCount";
+
+        /// <summary>
+        /// 中文：是否启用常见弱口令字典检测的设置键。
+        ///
+        /// English: Setting key for enabling common weak-password dictionary checks.
+        /// </summary>
+        public const string PasswordWeakDictionaryEnabled = "Portal.Security.Password.WeakDictionaryEnabled";
+
+        /// <summary>
+        /// 中文：是否禁止密码包含账号上下文词的设置键。
+        ///
+        /// English: Setting key for disallowing account-context terms in passwords.
+        /// </summary>
+        public const string PasswordDisallowContextTerms = "Portal.Security.Password.DisallowContextTerms";
+
+        /// <summary>
         /// 中文：临时注册链接默认有效天数的设置键。
         ///
         /// English: Setting key for default validity days of temporary registration invite links.

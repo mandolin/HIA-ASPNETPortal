@@ -297,11 +297,21 @@ else {
 
 $passwordPolicyPath = Join-Path $resolvedSourcePath 'Portal.Components/PortalPasswordPolicy.cs'
 if ((Test-TextContains -LiteralPath $passwordPolicyPath -Pattern 'MinimumLength\s*=\s*8') -and
-    (Test-TextContains -LiteralPath $passwordPolicyPath -Pattern 'RequiredCategoryCount\s*=\s*3')) {
-    Add-ComplianceCheck -Severity Pass -Code 'PWD-POLICY-MIN' -Message 'Password policy currently meets the legacy-compatible 8 length / 3 category baseline.' -Evidence 'PortalPasswordPolicy.cs'
+    (Test-TextContains -LiteralPath $passwordPolicyPath -Pattern 'RequiredCategoryCount\s*=\s*3') -and
+    (Test-TextContains -LiteralPath $passwordPolicyPath -Pattern 'WeakPasswordDictionary') -and
+    (Test-TextContains -LiteralPath $passwordPolicyPath -Pattern 'DisallowContextTerms')) {
+    Add-ComplianceCheck -Severity Pass -Code 'PWD-POLICY-MIN' -Message 'Password policy keeps the 8 length / 3 category hard baseline and weak-password extensions.' -Evidence 'PortalPasswordPolicy.cs'
 }
 else {
-    Add-ComplianceCheck -Severity Warning -Code 'PWD-POLICY-MIN' -Message 'Password policy baseline could not be verified from source.' -Evidence 'Expected MinimumLength = 8 and RequiredCategoryCount = 3.'
+    Add-ComplianceCheck -Severity Warning -Code 'PWD-POLICY-MIN' -Message 'Password policy baseline could not be verified from source.' -Evidence 'Expected MinimumLength = 8, RequiredCategoryCount = 3, and weak-password markers.'
+}
+
+$passwordPolicySettingMatches = @(Find-PortalSourceMatch -Pattern 'PasswordMinimumLength|PasswordRequiredCategoryCount|PasswordWeakDictionaryEnabled|PasswordDisallowContextTerms|Portal\.Security\.Password\.' -Limit 12)
+if ($passwordPolicySettingMatches.Count -ge 4) {
+    Add-ComplianceCheck -Severity Pass -Code 'PWD-POLICY-SETTINGS' -Message 'Password policy runtime settings were found in source metadata and configuration.' -Evidence (($passwordPolicySettingMatches | Select-Object -First 6) -join '; ')
+}
+else {
+    Add-ComplianceCheck -Severity Warning -Code 'PWD-POLICY-SETTINGS' -Message 'Password policy runtime settings need review.' -Evidence 'Expected Portal.Security.Password.* registry/config markers.'
 }
 
 $passwordHasherPath = Join-Path $resolvedSourcePath 'Portal.Components.Data1/PortalPasswordHasher.cs'
@@ -348,9 +358,9 @@ $missingLoginEncryptionFiles = @(
     }
 )
 
-$clientEncryptionMatches = @(Find-PortalSourceMatch -Pattern 'PortalLoginPasswordEncryption|LoginPasswordKey|TryDecryptSubmittedPassword|RequireEncryptedLoginPassword')
+$clientEncryptionMatches = @(Find-PortalSourceMatch -Pattern 'PortalLoginPasswordEncryption|LoginPasswordKey|PortalPasswordSubmissionCrypto|TryDecryptSubmittedPassword|TryDecryptSubmittedPasswords|RequireEncryptedLoginPassword')
 if ($missingLoginEncryptionFiles.Count -eq 0 -and $clientEncryptionMatches.Count -gt 0) {
-    Add-ComplianceCheck -Severity Pass -Code 'TRANS-PWD-FIELD-ENCRYPT' -Message 'Login password field encryption assets and server hooks were found.' -Evidence (($clientEncryptionMatches | Select-Object -First 4) -join '; ')
+    Add-ComplianceCheck -Severity Pass -Code 'TRANS-PWD-FIELD-ENCRYPT' -Message 'Password field encryption assets and server hooks were found.' -Evidence (($clientEncryptionMatches | Select-Object -First 4) -join '; ')
 }
 else {
     $evidence = if ($missingLoginEncryptionFiles.Count -gt 0) { ($missingLoginEncryptionFiles -join '; ') } else { 'Expected source markers were not found.' }
@@ -366,11 +376,35 @@ else {
 }
 
 if ((Test-TextContains -LiteralPath $signInPath -Pattern 'EncryptedPassword') -and
-    (Test-TextContains -LiteralPath (Join-Path $resolvedSourcePath 'Portal/DesktopModules/Signin.ascx.cs') -Pattern 'PortalLoginPasswordCrypto\.TryDecryptSubmittedPassword')) {
+    (Test-TextContains -LiteralPath (Join-Path $resolvedSourcePath 'Portal/DesktopModules/Signin.ascx.cs') -Pattern 'PortalPasswordSubmissionCrypto\.TryDecryptSubmittedPassword')) {
     Add-ComplianceCheck -Severity Pass -Code 'LOGIN-PASSWORD-ENCRYPTED-FIELD' -Message 'SignIn posts an encrypted hidden password field and decrypts it server-side.'
 }
 else {
     Add-ComplianceCheck -Severity Warning -Code 'LOGIN-PASSWORD-ENCRYPTED-FIELD' -Message 'SignIn encrypted password field or server-side decrypt hook was not verified.'
+}
+
+$registerPath = Join-Path $resolvedPortalPath 'Admin/Register.aspx'
+$registerCodePath = Join-Path $resolvedSourcePath 'Portal/Admin/Register.aspx.cs'
+if ((Test-TextContains -LiteralPath $registerPath -Pattern 'EncryptedPassword') -and
+    (Test-TextContains -LiteralPath $registerPath -Pattern 'EncryptedConfirmPassword') -and
+    (Test-TextContains -LiteralPath $registerCodePath -Pattern 'TryResolveRegistrationPasswords') -and
+    (Test-TextContains -LiteralPath $registerCodePath -Pattern 'TryDecryptSubmittedPasswords')) {
+    Add-ComplianceCheck -Severity Pass -Code 'REGISTER-PASSWORD-ENCRYPTED-FIELDS' -Message 'Registration password and confirmation fields use encrypted hidden fields and server-side decrypt.'
+}
+else {
+    Add-ComplianceCheck -Severity Warning -Code 'REGISTER-PASSWORD-ENCRYPTED-FIELDS' -Message 'Registration encrypted password fields or server-side decrypt hooks were not verified.'
+}
+
+$manageUsersPath = Join-Path $resolvedPortalPath 'Admin/ManageUsers.aspx'
+$manageUsersCodePath = Join-Path $resolvedSourcePath 'Portal/Admin/ManageUsers.aspx.cs'
+if ((Test-TextContains -LiteralPath $manageUsersPath -Pattern 'EncryptedPassword') -and
+    (Test-TextContains -LiteralPath $manageUsersPath -Pattern 'EncryptedConfirmPassword') -and
+    (Test-TextContains -LiteralPath $manageUsersCodePath -Pattern 'TryResolvePasswordResetSubmission') -and
+    (Test-TextContains -LiteralPath $manageUsersCodePath -Pattern 'TryDecryptSubmittedPasswords')) {
+    Add-ComplianceCheck -Severity Pass -Code 'ADMIN-RESET-PASSWORD-ENCRYPTED-FIELDS' -Message 'Administrator password reset uses encrypted hidden fields and server-side multi-field decrypt.'
+}
+else {
+    Add-ComplianceCheck -Severity Warning -Code 'ADMIN-RESET-PASSWORD-ENCRYPTED-FIELDS' -Message 'Administrator password-reset encryption hooks were not verified.'
 }
 
 $encryptedLoginSettingPattern = 'key\s*=\s*"Portal\.Security\.RequireEncryptedLoginPassword"\s+value\s*=\s*"true"'
@@ -402,7 +436,7 @@ $sensitiveLogMatches = @(Find-PortalSourceMatch -Pattern '(?i)((PortalDiagnostic
 $sensitiveLogReviewMatches = @(
     $sensitiveLogMatches |
         Where-Object {
-            $_ -notmatch '(?i)(do not log|不得记录|调用方不得记录|without logging|without the connection string|PortalOperationAuditEvents\.PasswordReset)'
+            $_ -notmatch '(?i)(do not log|must not log|不得记录|调用方不得记录|without logging|without the connection string|PortalOperationAuditEvents\.PasswordReset)'
         }
 )
 if ($sensitiveLogReviewMatches.Count -gt 0) {
