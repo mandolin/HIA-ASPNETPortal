@@ -32,6 +32,14 @@ namespace ASPNET.StarterKit.Portal
         public IEmployeeProfileCorrectionRequestDb CorrectionRequestDb { private get; set; }
 
         /// <summary>
+        /// 中文：轻量待办数据服务，用于把资料更正处理同步为待办完成事件。
+        ///
+        /// English: Lightweight work-item data service used to mirror correction reviews into work-item completion events.
+        /// </summary>
+        [Dependency]
+        public IPortalWorkItemDb WorkItemDb { private get; set; }
+
+        /// <summary>
         /// 中文：初始化员工资料更正请求后台页。
         ///
         /// English: Initializes the employee-profile correction-request administration page.
@@ -118,6 +126,8 @@ namespace ASPNET.StarterKit.Portal
                 "Employee profile correction reviewed. RequestStatus=" + targetStatus,
                 Context);
 
+            TryCompleteWorkItem(result.RequestId, targetStatus, reviewNote);
+
             MessageLabel.Text = "Correction request status updated.";
             BindRequests();
         }
@@ -173,6 +183,49 @@ namespace ASPNET.StarterKit.Portal
                    Context.User.Identity.IsAuthenticated
                 ? Context.User.Identity.Name
                 : "system";
+        }
+
+        private void TryCompleteWorkItem(long requestId, string requestStatus, string reviewNote)
+        {
+            // 中文 / English: 待办是旁路增强能力，写入失败不应回滚已经完成的审核动作。
+            if (WorkItemDb == null || requestId <= 0)
+            {
+                return;
+            }
+
+            WorkItemDb.CompleteBusinessWorkItem(
+                new PortalWorkItemCompletionRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest,
+                    BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                    EventType = MapWorkItemEventType(requestStatus),
+                    TargetStatus = MapWorkItemStatus(requestStatus),
+                    ActorName = GetCurrentUserName(),
+                    Comment = NormalizeInput(reviewNote, 1000),
+                    OccurredUtc = DateTime.UtcNow
+                });
+        }
+
+        private static string MapWorkItemEventType(string requestStatus)
+        {
+            if (string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Rejected, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Rejected;
+            }
+
+            if (string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Cancelled;
+            }
+
+            return PortalWorkItemEventTypes.Approved;
+        }
+
+        private static string MapWorkItemStatus(string requestStatus)
+        {
+            return string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal)
+                ? PortalWorkItemStatuses.Cancelled
+                : PortalWorkItemStatuses.Completed;
         }
 
         private static string NormalizeInput(string value, int maxLength)

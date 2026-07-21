@@ -73,6 +73,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary>中文：管理员工资料更正请求。English: Administer employee-profile correction requests.</summary>
         public const string EmployeeProfileCorrectionRequestAdmin = "EmployeeProfileCorrectionRequest.Admin";
 
+        /// <summary>中文：查看和处理业务待办。English: View and handle business work items.</summary>
+        public const string BusinessWorkItemsAdmin = "Business.WorkItems.Admin";
+
         /// <summary>中文：查看主题设置。English: View theme settings.</summary>
         public const string ThemeView = "Theme.View";
 
@@ -160,6 +163,7 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestView, "Business.EmployeeProfileCorrectionRequest", "查看员工资料更正请求模块。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit, "Business.EmployeeProfileCorrectionRequest", "提交自己的员工资料更正请求。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin, "Business.EmployeeProfileCorrectionRequest", "管理员查看和处理员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsAdmin, "Business.WorkItems", "查看和处理业务待办。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeView, "Theme", "查看主题设置。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeEdit, "Theme", "编辑主题设置和 Tab 覆盖。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),

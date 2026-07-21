@@ -125,6 +125,7 @@
     <Compile Include="IEmployeeProfileConfirmationDb.cs" />
     <Compile Include="IEmployeeProfileCorrectionRequestDb.cs" />
     <Compile Include="IOrganizationUnitInfo.cs" />
+    <Compile Include="IPortalWorkItemDb.cs" />
     <Compile Include="OrganizationUnitSaveRequest.cs" />
     <Compile Include="IUserEmployeeBindingAdminDb.cs" />
     <Compile Include="IUserProfileInfo.cs" />
@@ -144,6 +145,14 @@
     <Compile Include="PortalUserRegistrationStatuses.cs" />
     <Compile Include="PortalUserEmployeeBindingStatuses.cs" />
     <Compile Include="PortalUserProfileStatuses.cs" />
+    <Compile Include="PortalWorkItemBusinessKinds.cs" />
+    <Compile Include="PortalWorkItemCompletionRequest.cs" />
+    <Compile Include="PortalWorkItemCreateRequest.cs" />
+    <Compile Include="PortalWorkItemEventInfo.cs" />
+    <Compile Include="PortalWorkItemEventTypes.cs" />
+    <Compile Include="PortalWorkItemInfo.cs" />
+    <Compile Include="PortalWorkItemResult.cs" />
+    <Compile Include="PortalWorkItemStatuses.cs" />
     <Compile Include="PortalSecurity.cs" />
     <Compile Include="UserEmployeeBindingEndRequest.cs" />
     <Compile Include="UserEmployeeBindingSaveRequest.cs" />

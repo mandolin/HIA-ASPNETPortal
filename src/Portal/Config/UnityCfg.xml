@@ -84,6 +84,10 @@
             <lifetime type="singleton" />
         </register>
 
+        <register type="IPortalWorkItemDb" mapTo="PortalWorkItemDb">
+            <lifetime type="singleton" />
+        </register>
+
         <register type="IRolesDb" mapTo="RolesDb">
             <lifetime type="singleton" />
         </register>

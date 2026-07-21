@@ -122,6 +122,7 @@
     <Content Include="Admin\Tabs.ascx" />
     <Content Include="Admin\UserEmployeeBindingEdit.aspx" />
     <Content Include="Admin\Users.ascx" />
+    <Content Include="Admin\WorkItems.aspx" />
     <Content Include="App_Themes\Default\Default.css" />
     <Content Include="App_Themes\Default\theme.json" />
     <Content Include="App_Themes\EnterpriseDark\Default.css" />
@@ -343,6 +344,13 @@
     </Compile>
     <Compile Include="Admin\OperationAudits.aspx.designer.cs">
       <DependentUpon>OperationAudits.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\WorkItems.aspx.cs">
+      <DependentUpon>WorkItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\WorkItems.aspx.designer.cs">
+      <DependentUpon>WorkItems.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\OrganizationUnitEdit.aspx.cs">
       <DependentUpon>OrganizationUnitEdit.aspx</DependentUpon>

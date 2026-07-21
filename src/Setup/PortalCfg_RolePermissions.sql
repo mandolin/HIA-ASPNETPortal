@@ -67,6 +67,7 @@ BEGIN
         (N'EmployeeProfileCorrectionRequest.View'),
         (N'EmployeeProfileCorrectionRequest.Submit'),
         (N'EmployeeProfileCorrectionRequest.Admin'),
+        (N'Business.WorkItems.Admin'),
         (N'Theme.View'),
         (N'Theme.Edit'),
         (N'Module.Catalog.View'),

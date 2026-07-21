@@ -139,6 +139,8 @@ $manifest = @(
     New-MigrationEntry 140 'src/Setup/PortalBiz_UserEmployeeBindings.sql' 'FeatureMigration' 'EmployeeOrganization' 'SqlServerOnly' $true 'CompensationOnly' 'P6.3 用户员工绑定表。'
     New-MigrationEntry 150 'src/Setup/PortalBiz_EmployeeProfileConfirmations.sql' 'FeatureMigration' 'BusinessModule' 'SqlServerOnly' $true 'CompensationOnly' 'P6.4 员工资料确认表。'
     New-MigrationEntry 160 'src/Setup/PortalBiz_EmployeeProfileCorrectionRequests.sql' 'FeatureMigration' 'BusinessModule' 'SqlServerOnly' $true 'CompensationOnly' 'P6.4 员工资料更正请求表。'
+    New-MigrationEntry 170 'src/Setup/PortalBiz_WorkItems.sql' 'FeatureMigration' 'BusinessWorkflow' 'SqlServerOnly' $true 'CompensationOnly' 'P12.3 轻量业务待办表。'
+    New-MigrationEntry 180 'src/Setup/PortalBiz_WorkItemEvents.sql' 'FeatureMigration' 'BusinessWorkflow' 'SqlServerOnly' $true 'CompensationOnly' 'P12.3 轻量业务待办事件表。'
     New-MigrationEntry 900 'src/Setup/Portal_CleanUp.sql' 'LegacyUtility' 'LegacyMaintenance' 'SqlServerOnly' $false 'ManualOnly' '历史清理脚本，不能进入自动迁移链。'
     New-MigrationEntry 910 'src/Setup/Portal_DropDB.sql' 'LegacyUtility' 'LegacyMaintenance' 'SqlServerOnly' $false 'ManualOnly' '历史删库脚本，仅限人工维护或隔离环境。'
     New-MigrationEntry 920 'src/Setup/Portal_GrantPermissions_ForLocal.sql' 'LegacyUtility' 'LegacySecurity' 'SqlServerOnly' $false 'ManualOnly' '历史授权脚本，含 legacy grant 写法，不进入现代矩阵路径。'

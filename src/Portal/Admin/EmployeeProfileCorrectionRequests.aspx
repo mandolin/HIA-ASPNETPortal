@@ -16,6 +16,7 @@
             </div>
             <div class="portal-admin-actions">
                 <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
+                <a class="CommandButton" href="WorkItems.aspx">Work Items</a>
                 <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
             </div>
         </div>
@@ -84,8 +85,8 @@
                                 <td>
                                     <asp:TextBox ID="ReviewNoteTextBox" CssClass="NormalTextBox portal-review-note" Width="210" MaxLength="1000" TextMode="MultiLine" Rows="3" runat="server" />
                                     <div class="portal-row-actions">
-                                        <asp:LinkButton ID="ReviewedButton" Text="Reviewed" CssClass="CommandButton" CommandName="Reviewed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
-                                        <asp:LinkButton ID="ClosedButton" Text="Close" CssClass="CommandButton" CommandName="Closed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="ReviewedButton" Text="Approve" CssClass="CommandButton" CommandName="Reviewed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="ClosedButton" Text="Cancel" CssClass="CommandButton" CommandName="Closed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
                                         <asp:LinkButton ID="RejectedButton" Text="Reject" CssClass="CommandButton" CommandName="Rejected" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
                                     </div>
                                 </td>

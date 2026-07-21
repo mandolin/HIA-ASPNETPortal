@@ -42,6 +42,14 @@ namespace ASPNET.StarterKit.Portal
         public IEmployeeProfileCorrectionRequestDb CorrectionRequestDb { private get; set; }
 
         /// <summary>
+        /// 中文：轻量待办数据服务，用于把资料更正请求同步为后台待办。
+        ///
+        /// English: Lightweight work-item data service used to mirror correction requests into administration work items.
+        /// </summary>
+        [Dependency]
+        public IPortalWorkItemDb WorkItemDb { private get; set; }
+
+        /// <summary>
         /// 中文：初始化员工资料更正请求模块。
         ///
         /// English: Initializes the employee-profile correction-request module.
@@ -112,6 +120,8 @@ namespace ASPNET.StarterKit.Portal
                 "Employee profile correction requested. EmployeeId=" + profile.EmployeeId.ToString(CultureInfo.InvariantCulture) +
                 "; FieldName=" + fieldName,
                 Context);
+
+            TryEnsureWorkItem(result.RequestId, profile.EmployeeId, fieldName);
 
             ProposedValueTextBox.Text = string.Empty;
             RequestNoteTextBox.Text = string.Empty;
@@ -213,6 +223,27 @@ namespace ASPNET.StarterKit.Portal
         private string GetCurrentUserName()
         {
             return IsCurrentUserAuthenticated() ? Context.User.Identity.Name : string.Empty;
+        }
+
+        private void TryEnsureWorkItem(long requestId, int employeeId, string fieldName)
+        {
+            // 中文 / English: 待办写入只补充后台处理入口，不能阻断用户已经成功提交的更正请求。
+            if (WorkItemDb == null || requestId <= 0)
+            {
+                return;
+            }
+
+            WorkItemDb.EnsureWorkItem(
+                new PortalWorkItemCreateRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest,
+                    BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                    Title = "Employee profile correction request #" + requestId.ToString(CultureInfo.InvariantCulture),
+                    Summary = "EmployeeId=" + employeeId.ToString(CultureInfo.InvariantCulture) + "; FieldName=" + fieldName,
+                    AssignedRoleKey = PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin,
+                    CreatedUtc = DateTime.UtcNow,
+                    CreatedBy = GetCurrentUserName()
+                });
         }
 
         private void ShowMessage(string message)

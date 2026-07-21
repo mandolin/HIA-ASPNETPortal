@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P12` 已启动 |
-| 当前阶段 | `W-anp-P12.3` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.3-discussion-questions.md`；若确认，则进入轻量审批与待办基础实现。 |
-| 当前完成条件 | P12.2 当前切片已完成并验证；P12.3 的讨论问题已形成。 |
+| 当前阶段 | `W-anp-P12.4` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.4-discussion-questions.md`；若确认，则进入业务权限与审计深化。 |
+| 当前完成条件 | P12.3 当前切片已完成并验证；P12.4 的讨论问题已形成。 |
 | 最近状态更新时间 | 2026-07-21 |
 
 ## Recent Completed Items
@@ -40,14 +40,16 @@
 | P12.0 入口确认 | completed | 用户确认 P12.0 推荐；`work-zone/dev/plans/W-anp-P12.md` |
 | P12.1 参考项目业务盘点 | completed | `work-zone/dev/plans/W-anp-P12.1-reference-project-inventory.md`、`work-zone/dev/plans/W-anp-P12.1-business-candidate-map.md`、`work-zone/dev/plans/W-anp-P12.1-discussion-questions.md`；用户确认按推荐推进。 |
 | P12.2 员工与组织资料深化当前切片 | completed | `work-zone/dev/plans/W-anp-P12.2-implementation-result.md`；业务身份静态门禁 `Pass=8; Warning=0; Fail=0; Info=0`。 |
-| P12.3 轻量审批与待办基础问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P12.3-discussion-questions.md` |
+| P12.3 轻量审批与待办基础问题清单 | completed | `work-zone/dev/plans/W-anp-P12.3-discussion-questions.md`；用户确认按推荐推进。 |
+| P12.3 轻量待办当前切片 | completed | `work-zone/dev/plans/W-anp-P12.3-implementation-result.md`；静态门禁 `TotalChecks=9; FailedChecks=0; WarningChecks=0`。 |
+| P12.4 业务权限与审计深化问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P12.4-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 本轮 P12.2 业务身份提交已完成 | 已包含业务身份门禁脚本、登录文案和注释补强。 |
-| WorkZone | 本轮 P12.2/P12.3 文档提交已完成 | 已包含 P12.2 结果、P12.3 问题清单、证据、状态和本轮日志。 |
+| 主仓库 | P12.3 轻量待办改动已完成 | 已包含待办 SQL、契约、数据实现、后台页、资料更正接入、迁移脚本和门禁脚本。 |
+| WorkZone | P12.3/P12.4 文档已完成 | 已包含 P12.3 结果、P12.4 问题清单、证据、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -81,6 +83,10 @@
 | WSF 参考项目只读盘点 | 已形成脱敏结构证据 `work-zone/dev/evidence/p12.1/wsf-reference-inventory-20260721-122902.json`；确认 `petroleum-sys`、`petroleum-scientificresearch` 为 P12 主要参考源。 |
 | `dev/scripts/Test-PortalBusinessIdentity.ps1 -OutputJson work-zone/dev/evidence/p12.2/business-identity-static-20260721-133737.json` | `Pass=8; Warning=0; Fail=0; Info=0`；确认工号登录标识、资料字段、员工主数据和账号员工绑定关键契约。 |
 | `dev/scripts/Build-Solution.ps1` | 通过；存在既有 `CS1591` XML 注释警告，无编译错误。 |
+| `dev/scripts/Test-PortalWorkItemSmoke.ps1 -OutputJson work-zone/dev/evidence/p12.3/work-item-static-20260721-144000.json` | `TotalChecks=9; FailedChecks=0; WarningChecks=0`；确认 P12.3 SQL、契约、Unity、项目文件、权限、后台页、业务同步点和迁移工具。 |
+| `dev/scripts/Get-PortalMigrationManifest.ps1 -OutputJson work-zone/dev/evidence/p12.3/migration-manifest-20260721-145100.json` | `Pass=4; Warning=2; Fail=0; Info=1`；Warning 为既有 legacy grant/security seed review。 |
+| `dev/scripts/Test-PortalSqlVersionMatrix.ps1 -OutputJson work-zone/dev/evidence/p12.3/sql-version-matrix-20260721-145100.json` | `Pass=11; Warning=1; Fail=0; Info=1; Pending=4`；Warning 为 legacy grant 脚本，Pending 为本轮未提供真实 SQL Server 目标实例。 |
+| `dev/scripts/Build-Solution.ps1` | P12.3 后复跑通过；仅保留既有 XML 注释警告和 `Roles.ModulesConfig` 隐藏警告。 |
 
 ## Known Residual Working Tree Items
 

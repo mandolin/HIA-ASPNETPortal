@@ -90,6 +90,7 @@
     <Compile Include="OrganizationUnitInfo.cs" />
     <Compile Include="OrganizationUnitItem.cs" />
     <Compile Include="PortalBizDbContext.cs" />
+    <Compile Include="PortalWorkItemDb.cs" />
     <Compile Include="PortalDbContext.cs" />
     <Compile Include="DocumentItem.cs" />
     <Compile Include="EventItem.cs" />

@@ -28,7 +28,11 @@ param(
 
     [switch]$ApplyP6BusinessModuleMigration,
 
-    [switch]$RequireP6BusinessModuleMigration
+    [switch]$RequireP6BusinessModuleMigration,
+
+    [switch]$ApplyP12WorkItemMigration,
+
+    [switch]$RequireP12WorkItemMigration
 )
 
 Set-StrictMode -Version Latest
@@ -349,6 +353,24 @@ FROM
         }
     }
 
+    if ($ApplyP12WorkItemMigration) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P12.3 work-item migration scripts')) {
+            $migrationFiles = @(
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_WorkItems.sql'),
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_WorkItemEvents.sql')
+            )
+
+            foreach ($migrationFile in $migrationFiles) {
+                Invoke-MigrationFile -Connection $connection -Path $migrationFile
+            }
+
+            Add-DatabaseCheck -Name 'P12.3 work-item migration application' -Status 'Pass' -Detail 'The idempotent P12.3 work-item migration batches completed.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P12.3 work-item migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
@@ -356,7 +378,8 @@ FROM
     $p6UserProfileTables = @('PortalBiz_UserProfiles')
     $p6EmployeeOrganizationTables = @('PortalBiz_OrganizationUnits', 'PortalBiz_Employees', 'PortalBiz_UserEmployeeBindings')
     $p6BusinessModuleTables = @('PortalBiz_EmployeeProfileConfirmations', 'PortalBiz_EmployeeProfileCorrectionRequests')
-    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables)
+    $p12WorkItemTables = @('PortalBiz_WorkItems', 'PortalBiz_WorkItemEvents')
+    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables + $p12WorkItemTables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
     Add-DatabaseCheck -Name 'Base Portal schema' -Status $(if ($missingBaseTables.Count -eq 0) { 'Pass' } else { 'Fail' }) -Detail $(if ($missingBaseTables.Count -eq 0) { 'Required base tables are present.' } else { 'Missing: ' + ($missingBaseTables -join ', ') })
@@ -487,6 +510,21 @@ FROM
     }
     else {
         Add-DatabaseCheck -Name 'P6.4 business module schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP6BusinessModuleTables -join ', '))
+    }
+
+    $missingP12WorkItemTables = @($p12WorkItemTables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP12WorkItemTables.Count -eq 0) {
+        Add-DatabaseCheck -Name 'P12.3 work-item schema' -Status 'Pass' -Detail 'The P12.3 work-item and work-item-event tables are present.'
+
+        $workItemCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_WorkItems];')
+        $workItemEventCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_WorkItemEvents];')
+        Add-DatabaseCheck -Name 'P12.3 work-item row counts' -Status 'Info' -Detail ('Work items: ' + $workItemCount + '; events: ' + $workItemEventCount + '.')
+    }
+    elseif ($RequireP12WorkItemMigration) {
+        Add-DatabaseCheck -Name 'P12.3 work-item schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP12WorkItemTables -join ', '))
+    }
+    else {
+        Add-DatabaseCheck -Name 'P12.3 work-item schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP12WorkItemTables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })

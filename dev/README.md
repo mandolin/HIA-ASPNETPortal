@@ -55,3 +55,13 @@ dev/scripts/Test-PortalBusinessIdentity.ps1
 ```
 
 该脚本只读，不连接数据库、不读取密码、不修改外置配置。
+
+## 轻量待办门禁
+
+P12.3 起，轻量审批/待办基础的 SQL、契约、Unity 注册、后台入口和业务同步点可用以下脚本检查：
+
+```powershell
+dev/scripts/Test-PortalWorkItemSmoke.ps1
+```
+
+该脚本只读，不连接数据库、不执行迁移，用于避免待办骨架在后续业务模块接入时被拆断。
