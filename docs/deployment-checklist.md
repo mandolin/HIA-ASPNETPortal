@@ -5,8 +5,11 @@
 ## 发布前边界
 
 - [ ] 目标机器已安装 .NET Framework 4.8；缺少 4.8 时不得部署 P5.2+ 版本。
+- [ ] 已确认本次发布 profile：Dev、Test、Prod、Scan 或 LegacyIe，并记录 profile 与 Web.config transform 的对应关系。
 - [ ] 已运行 `dev/scripts/Test-PortalPublishReadiness.ps1`，项目 Content 清单、主题包和模块包检查通过。
 - [ ] 如使用本地文件系统发布包，已运行 `dev/scripts/Publish-PortalFileSystem.ps1`，并对发布输出目录执行二次门禁。
+- [ ] 已对 FileSystem 发布输出运行 `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath <发布目录>`，生成发布包 manifest。
+- [ ] 发布包 manifest 确认没有 `work-zone/`、`temp/`、`dev/`、`src/`、上传目录业务文件、真实配置、Web.config transform 或证书私钥文件；`Uploads/web.config` 作为安全配置文件允许随包发布。
 - [ ] 使用独立的 `test` 或 `prod` 外置配置目录，不使用开发机 LocalDB 或开发连接串。
 - [ ] 不提交或记录真实连接串、密码、Token、证书、Cookie 或生产数据库备份。
 - [ ] 已运行 `dev/scripts/Test-PortalDefaultCredentialRisk.ps1`，并确认默认凭据风险只有可接受的历史样例或已处理项。
@@ -41,6 +44,16 @@
 - [ ] `PortalCfg_RolePermissions` 已包含 `Admins` 兼容权限映射；后续非管理员权限映射需有审计或变更记录。
 - [ ] `machineKey`、Cookie `Secure` / `SameSite` 和 HTTPS 策略已按目标环境确认；真实密钥不得进入仓库。
 
+## Profile 分层
+
+| Profile | 用途 | 发布注意事项 |
+| --- | --- | --- |
+| Dev | 本机开发和 IIS Express 验证。 | 可以使用 LocalDB/开发配置，但不得作为生产证据。 |
+| Test | 测试库和测试 IIS/虚拟目录。 | 允许详细诊断，但真实测试连接串仍外置。 |
+| Prod | 正式部署。 | 必须启用生产安全 header、Cookie SSL、外置敏感配置和最小权限账号。 |
+| Scan | 企业扫描工具专用。 | 可为扫描调整 CSP、缓存或跳转，但需要记录例外和恢复策略。 |
+| LegacyIe | 旧浏览器补证。 | 只证明可访问、可操作和可解释降级，不降低生产安全基线。 |
+
 ## 发布后回归
 
 - [ ] 首页、登录、登出、Admin 主入口和核心模块可访问。
@@ -55,5 +68,6 @@
 ## 回滚与记录
 
 - [ ] 已记录发布包/提交编号、外置配置版本、数据库迁移状态和验证时间。
+- [ ] 已按 `docs/deployment-rollback-guide.md` 准备文件、配置、数据库和证据回滚材料。
 - [ ] 应用回滚、配置回滚和数据库恢复步骤均可执行。
 - [ ] 真实 IIS 复测结果、已知限制和延期项已写入内部 WorkZone 记录。

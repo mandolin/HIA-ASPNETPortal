@@ -13,6 +13,7 @@
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。
 - `deployment-checklist.md`：SQL Server、IIS、外置配置和发布后回归清单。
+- `deployment-rollback-guide.md`：文件、配置、数据库和证据回滚准备说明。
 - `deployment-default-credentials.md`：默认账号、初始化脚本样例口令和旧凭据治理说明。
 - `p12-sample-business-flow.md`：员工资料更正样板业务路径、样例数据 SQL 和 P12 验收入口。
 - `font-policy-and-audit.md`：字体使用原则、许可证边界和当前审计结果。

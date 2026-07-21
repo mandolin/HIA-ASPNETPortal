@@ -62,11 +62,13 @@
 - [ ] 如需保留合规证据，执行 `dev/scripts/New-PortalComplianceEvidencePackage.ps1` 并将输出留存在 WorkZone 证据目录。
 - [ ] `dev/scripts/Test-PortalPublishReadiness.ps1` 对项目 Content 清单、主题包、模块包和发布输出通过。
 - [ ] 如需生成本地文件系统发布包，执行 `dev/scripts/Publish-PortalFileSystem.ps1` 并记录输出目录。
+- [ ] 如需生成交付证据，执行 `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath <发布目录>` 并记录 manifest 输出目录。
 - [ ] 未提交真实连接字符串、密码、Token、证书。
 - [ ] 未提交本地数据库文件、`node_modules/`、`bin/`、`obj/`。
 - [ ] `Web.Debug.config`、`Web.Release.config`、`Web.Test.config` 的处理方式符合仓库规则。
 - [ ] README、`docs/`、`dev/` 已按变更更新。
 - [ ] 已记录验证结果和残留风险。
 - [ ] 已按 `docs/deployment-checklist.md` 完成 SQL Server、IIS、外置配置和回滚检查。
+- [ ] 已按 `docs/deployment-rollback-guide.md` 准备文件、配置、数据库和证据回滚材料。
 - [ ] 新模块包已通过 `module.json`、入口 `.ascx` 和本地资源校验；启用时模块/CSS 可用，禁用时二者均不加载。
 - [ ] 有实例引用的模块定义不能通过 Legacy 删除页直接级联删除；先完成禁用、迁移或显式实例清理。

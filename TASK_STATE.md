@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P13` 已启动 |
-| 当前阶段 | `W-anp-P13.1` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.1-discussion-questions.md`；若确认，则实现发布包 manifest、部署文档和 P13.1 验证记录。 |
-| 当前完成条件 | P13 总规划、P13.1 盘点、设计草案和待讨论问题已形成。 |
+| 当前阶段 | `W-anp-P13.2` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.2-discussion-questions.md`；若确认，则推进运维可观测、例行任务和只读运维证据包。 |
+| 当前完成条件 | P13.1 发布包 manifest、部署/回滚文档、自动侧验证和实施结果已完成。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -49,14 +49,16 @@
 | P12 周期收口 | completed | `work-zone/dev/plans/W-anp-P12-closeout.md` |
 | P13.0 前置讨论问题 | completed | `work-zone/dev/plans/W-anp-P13.0-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P13 总规划 | completed | `work-zone/dev/plans/W-anp-P13.md` |
-| P13.1 发布包与部署模板问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P13.1-discussion-questions.md` |
+| P13.1 发布包与部署模板问题清单 | completed | `work-zone/dev/plans/W-anp-P13.1-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P13.1 发布包与部署模板当前切片 | completed | `work-zone/dev/plans/W-anp-P13.1-implementation-result.md`；manifest 证据 `work-zone/dev/evidence/p13.1/20260722-025435/`，`Failed=0; Warning=2`。 |
+| P13.2 运维可观测与例行任务问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P13.2-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P12.5 业务验收脚本与公开说明已完成 | 本轮尚未新增主仓库代码；仅待更新任务账本。 |
-| WorkZone | P13 已拆分并推进到 P13.1 讨论节点 | 已包含 P13 总规划、P13.1 发布部署盘点、设计草案、问题清单、C-anp-P1 状态和本轮日志。 |
+| 主仓库 | P13.1 发布 manifest 与公开部署文档已完成 | 已包含 `New-PortalReleaseManifest.ps1`、回滚指南、部署/测试清单和任务账本更新。 |
+| WorkZone | P13.1 当前切片已完成并推进到 P13.2 讨论节点 | 已包含 P13.1 结果、P13.2 问题清单、发布 manifest 证据、P12 smoke 证据、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -99,6 +101,10 @@
 | `dev/scripts/Build-Solution.ps1` | P12.4 后复跑通过；仅保留既有 XML 注释警告，无编译错误。 |
 | `dev/scripts/New-PortalP12SampleScenarioSql.ps1 -OutputPath temp/p12.5/PortalP12SampleScenario.sql` | 通过；仅生成开发/测试 SQL 文件，不连接数据库、不创建用户、不写密码。 |
 | `dev/scripts/New-PortalP12EvidencePackage.ps1 -OutputRoot work-zone/dev/evidence/p12.5` | 通过；证据包 `work-zone/dev/evidence/p12.5/20260721-202550/`，P12.2、P12.3、P12.4 门禁和解决方案构建全部 `Passed`，失败数 `0`。 |
+| `dev/scripts/Publish-PortalFileSystem.ps1 -Configuration Release -PublishPath temp/publish/P13.1-Release-20260722-025022` | 通过；发布前门禁 `Failed=0; Warning=0`，发布后二次门禁 `Failed=0; Warning=0`；构建保留既有 `Roles.ModulesConfig` 隐藏警告。 |
+| `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath temp/publish/P13.1-Release-20260722-025022 -OutputRoot work-zone/dev/evidence/p13.1` | 通过；manifest 证据 `work-zone/dev/evidence/p13.1/20260722-025435/`，`Files=155; Failed=0; Warning=2`。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；13 个公开文档已登记，无私有链接和敏感赋值。 |
+| `dev/scripts/New-PortalP12EvidencePackage.ps1 -OutputRoot work-zone/dev/evidence/p13.1/p12-acceptance-smoke -SkipBuild` | 通过；`Steps=3; Failed=0`。 |
 
 ## Known Residual Working Tree Items
 

@@ -13,9 +13,10 @@
 ```powershell
 dev/scripts/Test-PortalPublishReadiness.ps1
 dev/scripts/Publish-PortalFileSystem.ps1
+dev/scripts/New-PortalReleaseManifest.ps1
 ```
 
-`Test-PortalPublishReadiness.ps1` 只读检查项目发布清单、主题包、模块包和可选发布输出目录。`Publish-PortalFileSystem.ps1` 发布到 `temp/publish/` 下的临时目录，并在发布前后执行门禁；它不修改 IIS、数据库或外置配置。
+`Test-PortalPublishReadiness.ps1` 只读检查项目发布清单、主题包、模块包和可选发布输出目录。`Publish-PortalFileSystem.ps1` 发布到 `temp/publish/` 下的临时目录，并在发布前后执行门禁；它不修改 IIS、数据库或外置配置。`New-PortalReleaseManifest.ps1` 对 FileSystem 发布输出生成文件清单、SHA256、版本信息和排除项检查；它只记录路径和哈希，不写入真实敏感值。
 
 ## VM 任务代理
 
