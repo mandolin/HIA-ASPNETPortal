@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P12` 待确认 |
-| 当前阶段 | `W-anp-P12.0` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.0-discussion-questions.md`；若确认，则正式拆分 W-anp-P12 并推进 P12.1。 |
-| 当前完成条件 | P12.0 的讨论问题被确认，随后建立 W-anp-P12 主规划、分阶段计划和 P12.1 入口。 |
+| 当前大周期 | `W-anp-P12` 已启动 |
+| 当前阶段 | `W-anp-P12.1` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.1-discussion-questions.md`；若确认，则进入 `W-anp-P12.2 员工与组织资料深化`。 |
+| 当前完成条件 | P12.1 的参考项目盘点、业务候选映射和讨论问题已形成，并提交相关 Git。 |
 | 最近状态更新时间 | 2026-07-21 |
 
 ## Recent Completed Items
@@ -37,6 +37,8 @@
 | P11.3 迁移脚本与数据修复规范 | completed | `dev/scripts/Get-PortalMigrationManifest.ps1`；`work-zone/dev/plans/W-anp-P11.3-result.md`；证据 `work-zone/dev/evidence/p11.3/` |
 | P11.4 HIA 外围集成契约 | completed | `dev/scripts/Get-PortalHiaIntegrationInventory.ps1`；`work-zone/dev/plans/W-anp-P11.4-result.md`；ADR `0023`；证据 `work-zone/dev/evidence/p11.4/` |
 | P11.5 数据与集成验收 | completed | `work-zone/dev/plans/W-anp-P11.5-acceptance-result.md`；`work-zone/dev/plans/W-anp-P11-closeout.md`；证据 `work-zone/dev/evidence/p11.5/` |
+| P12.0 入口确认 | completed | 用户确认 P12.0 推荐；`work-zone/dev/plans/W-anp-P12.md` |
+| P12.1 参考项目业务盘点 | pending-user-review | `work-zone/dev/plans/W-anp-P12.1-reference-project-inventory.md`、`work-zone/dev/plans/W-anp-P12.1-business-candidate-map.md`、`work-zone/dev/plans/W-anp-P12.1-discussion-questions.md` |
 
 ## Last Code State
 
@@ -74,6 +76,7 @@
 | `dev/scripts/Get-PortalDataAccessInventory.ps1 -OutputJson work-zone/dev/evidence/p11.5/data-access-inventory-20260721-115503.json` | 扫描 384 个已追踪源文件；`SqlServerOnly=48 files`、`NeedsDialect=11 files`、`PortableCandidate=16 files`、`ProviderProof=6 files`。 |
 | `dev/scripts/Get-PortalMigrationManifest.ps1 -OutputJson work-zone/dev/evidence/p11.5/migration-manifest-20260721-115503.json` | `Pass=4; Warning=2; Fail=0; Info=1`；21 个已追踪 SQL 文件全部纳入 manifest。 |
 | `dev/scripts/Get-PortalHiaIntegrationInventory.ps1 -OutputJson work-zone/dev/evidence/p11.5/hia-integration-inventory-20260721-115503.json` | `Pass=9; Warning=0; Fail=0; Info=0; Pending=0`。 |
+| WSF 参考项目只读盘点 | 已形成脱敏结构证据 `work-zone/dev/evidence/p12.1/wsf-reference-inventory-20260721-122902.json`；确认 `petroleum-sys`、`petroleum-scientificresearch` 为 P12 主要参考源。 |
 
 ## Known Residual Working Tree Items
 
