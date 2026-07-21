@@ -96,6 +96,41 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// 中文：判断当前请求身份是否至少具有给定权限中的任意一个。
+        ///
+        /// English: Determines whether the current request identity has at least one of the specified permissions.
+        /// </summary>
+        /// <param name="permissionKeys">中文：稳定权限键名集合。English: Stable permission keys.</param>
+        /// <returns>中文：任一权限被授予时为 <c>true</c>。English: <c>true</c> when any specified permission is granted.</returns>
+        /// <remarks>
+        /// 中文：此方法用于 P12.4 这类权限拆分过渡点，让新细粒度权限和旧聚合权限可以并行存在。
+        /// 未定义权限键会被拒绝并记录诊断，不能扩大访问范围。
+        ///
+        /// English: This method supports transition points such as P12.4 where new fine-grained permissions and old
+        /// aggregate permissions coexist. Undefined keys are denied and diagnosed, never broadening access.
+        /// </remarks>
+        public static bool HasAnyPermission(params string[] permissionKeys)
+        {
+            HttpContext context = HttpContext.Current;
+            string[] normalizedKeys;
+            if (!TryNormalizePermissionKeys(permissionKeys, context, out normalizedKeys))
+            {
+                return false;
+            }
+
+            if (normalizedKeys.Length == 0)
+            {
+                PortalDiagnostics.Warn(
+                    "Authorization.PermissionKey",
+                    "No permission keys were supplied for an any-permission check.",
+                    context);
+                return false;
+            }
+
+            return normalizedKeys.Any(HasPermission);
+        }
+
+        /// <summary>
         /// 中文：确认当前请求为管理员；未授权时安全跳转到既有拒绝访问页，并返回 <c>false</c>。
         ///
         /// English: Confirms that the current request is administrative; safely redirects unauthorized requests to the
@@ -153,6 +188,39 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
+        /// 中文：确认当前请求至少具有给定权限中的任意一个；未授权时记录诊断并跳转到既有拒绝访问页。
+        ///
+        /// English: Confirms that the current request has at least one of the specified permissions; unauthorized
+        /// requests are logged and redirected to the existing access-denied page.
+        /// </summary>
+        /// <param name="context">中文：当前 HTTP 上下文。English: Current HTTP context.</param>
+        /// <param name="permissionKeys">中文：稳定权限键名集合。English: Stable permission keys.</param>
+        /// <returns>中文：当前请求可继续执行敏感逻辑时为 <c>true</c>。English: <c>true</c> when the request may continue sensitive logic.</returns>
+        public static bool EnsureAnyPermission(HttpContext context, params string[] permissionKeys)
+        {
+            context = context ?? HttpContext.Current;
+            string[] normalizedKeys;
+            if (!TryNormalizePermissionKeys(permissionKeys, context, out normalizedKeys) ||
+                normalizedKeys.Length == 0)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(context);
+                return false;
+            }
+
+            if (normalizedKeys.Any(HasPermission))
+            {
+                return true;
+            }
+
+            PortalDiagnostics.Warn(
+                "Authorization.PermissionDenied",
+                "Permission denied. PermissionKeys=" + string.Join(",", normalizedKeys),
+                context);
+            PortalNavigationPolicy.RedirectToEditAccessDenied(context);
+            return false;
+        }
+
+        /// <summary>
         /// 中文：要求当前请求身份为管理员；不满足时跳转到既有后台拒绝访问页。
         ///
         /// English: Requires the current request identity to be an administrator; otherwise redirects to the existing administration access-denied page.
@@ -201,6 +269,28 @@ namespace ASPNET.StarterKit.Portal
                 PortalDiagnostics.Error(
                     "Authorization.PermissionKey",
                     "Undefined or invalid permission key requested.",
+                    exception,
+                    context);
+                return false;
+            }
+        }
+
+        private static bool TryNormalizePermissionKeys(
+            string[] permissionKeys,
+            HttpContext context,
+            out string[] normalizedKeys)
+        {
+            normalizedKeys = new string[0];
+            try
+            {
+                normalizedKeys = PortalPermissionRegistry.NormalizeDefinedKeys(permissionKeys);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                PortalDiagnostics.Error(
+                    "Authorization.PermissionKey",
+                    "Undefined or invalid permission key requested in an any-permission check.",
                     exception,
                     context);
                 return false;

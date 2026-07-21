@@ -240,7 +240,7 @@ namespace ASPNET.StarterKit.Portal
                     BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
                     Title = "Employee profile correction request #" + requestId.ToString(CultureInfo.InvariantCulture),
                     Summary = "EmployeeId=" + employeeId.ToString(CultureInfo.InvariantCulture) + "; FieldName=" + fieldName,
-                    AssignedRoleKey = PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin,
+                    AssignedRoleKey = PortalPermissionKeys.EmployeeProfileCorrectionRequestReview,
                     CreatedUtc = DateTime.UtcNow,
                     CreatedBy = GetCurrentUserName()
                 });

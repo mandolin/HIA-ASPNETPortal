@@ -54,7 +54,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context))
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryEdit))
             {
                 return;
             }
@@ -72,7 +72,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void SaveButton_Click(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsureAdmin(Context))
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryEdit))
             {
                 return;
             }

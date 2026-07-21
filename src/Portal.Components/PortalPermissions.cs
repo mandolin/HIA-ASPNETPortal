@@ -52,6 +52,12 @@ namespace ASPNET.StarterKit.Portal
         /// <summary>中文：编辑角色和角色成员关系。English: Edit roles and role memberships.</summary>
         public const string AdminRolesEdit = "Admin.Roles.Edit";
 
+        /// <summary>中文：查看员工、组织和账号绑定目录。English: View employee, organization, and user-binding directories.</summary>
+        public const string EmployeeDirectoryView = "EmployeeDirectory.View";
+
+        /// <summary>中文：编辑员工与组织主数据。English: Edit employee and organization master data.</summary>
+        public const string EmployeeDirectoryEdit = "EmployeeDirectory.Edit";
+
         /// <summary>中文：绑定或解绑门户账号与员工。English: Bind or unbind Portal users and employees.</summary>
         public const string EmployeeDirectoryBind = "EmployeeDirectory.Bind";
 
@@ -70,10 +76,22 @@ namespace ASPNET.StarterKit.Portal
         /// <summary>中文：提交自己的员工资料更正请求。English: Submit one's own employee-profile correction request.</summary>
         public const string EmployeeProfileCorrectionRequestSubmit = "EmployeeProfileCorrectionRequest.Submit";
 
-        /// <summary>中文：管理员工资料更正请求。English: Administer employee-profile correction requests.</summary>
+        /// <summary>中文：审核员工资料更正请求。English: Review employee-profile correction requests.</summary>
+        public const string EmployeeProfileCorrectionRequestReview = "EmployeeProfileCorrectionRequest.Review";
+
+        /// <summary>中文：取消或关闭员工资料更正请求。English: Cancel or close employee-profile correction requests.</summary>
+        public const string EmployeeProfileCorrectionRequestCancel = "EmployeeProfileCorrectionRequest.Cancel";
+
+        /// <summary>中文：管理员工资料更正请求的旧聚合权限。English: Legacy aggregate permission for employee-profile correction administration.</summary>
         public const string EmployeeProfileCorrectionRequestAdmin = "EmployeeProfileCorrectionRequest.Admin";
 
-        /// <summary>中文：查看和处理业务待办。English: View and handle business work items.</summary>
+        /// <summary>中文：查看业务待办。English: View business work items.</summary>
+        public const string BusinessWorkItemsView = "Business.WorkItems.View";
+
+        /// <summary>中文：处理业务待办。English: Handle business work items.</summary>
+        public const string BusinessWorkItemsHandle = "Business.WorkItems.Handle";
+
+        /// <summary>中文：查看和处理业务待办的旧聚合权限。English: Legacy aggregate permission for viewing and handling business work items.</summary>
         public const string BusinessWorkItemsAdmin = "Business.WorkItems.Admin";
 
         /// <summary>中文：查看主题设置。English: View theme settings.</summary>
@@ -156,14 +174,20 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.AdminUsersEdit, "Administration", "编辑用户资料和注册审核。"),
             new PortalPermissionDefinition(PortalPermissionKeys.AdminUsersResetPassword, "Administration", "重置用户密码。"),
             new PortalPermissionDefinition(PortalPermissionKeys.AdminRolesEdit, "Administration", "编辑角色和角色成员关系。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryView, "EnterpriseDirectory", "查看员工、组织和账号绑定目录。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryEdit, "EnterpriseDirectory", "编辑员工与组织主数据。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryBind, "EnterpriseDirectory", "绑定或解绑门户账号与员工。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmView, "Business.EmployeeProfileConfirm", "查看员工资料确认模块。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmConfirm, "Business.EmployeeProfileConfirm", "确认自己的员工资料。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmAdmin, "Business.EmployeeProfileConfirm", "管理员查看和处理员工资料确认记录。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestView, "Business.EmployeeProfileCorrectionRequest", "查看员工资料更正请求模块。"),
             new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit, "Business.EmployeeProfileCorrectionRequest", "提交自己的员工资料更正请求。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin, "Business.EmployeeProfileCorrectionRequest", "管理员查看和处理员工资料更正请求。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsAdmin, "Business.WorkItems", "查看和处理业务待办。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestReview, "Business.EmployeeProfileCorrectionRequest", "审核员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestCancel, "Business.EmployeeProfileCorrectionRequest", "取消或关闭员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin, "Business.EmployeeProfileCorrectionRequest", "员工资料更正请求旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsView, "Business.WorkItems", "查看业务待办。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsHandle, "Business.WorkItems", "处理业务待办。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsAdmin, "Business.WorkItems", "业务待办旧聚合管理权限。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeView, "Theme", "查看主题设置。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeEdit, "Theme", "编辑主题设置和 Tab 覆盖。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),

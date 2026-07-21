@@ -38,7 +38,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.BusinessWorkItemsAdmin))
+            if (!PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessWorkItemsView,
+                PortalPermissionKeys.BusinessWorkItemsAdmin))
             {
                 return;
             }
@@ -57,7 +60,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void SearchButton_Click(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.BusinessWorkItemsAdmin))
+            if (!PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessWorkItemsView,
+                PortalPermissionKeys.BusinessWorkItemsAdmin))
             {
                 return;
             }

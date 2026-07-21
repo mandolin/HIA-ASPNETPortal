@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P12` 已启动 |
-| 当前阶段 | `W-anp-P12.4` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.4-discussion-questions.md`；若确认，则进入业务权限与审计深化。 |
-| 当前完成条件 | P12.3 当前切片已完成并验证；P12.4 的讨论问题已形成。 |
+| 当前阶段 | `W-anp-P12.5` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.5-discussion-questions.md`；若确认，则进入业务验收与样板场景。 |
+| 当前完成条件 | P12.4 当前切片已完成并验证；P12.5 的讨论问题已形成。 |
 | 最近状态更新时间 | 2026-07-21 |
 
 ## Recent Completed Items
@@ -42,14 +42,16 @@
 | P12.2 员工与组织资料深化当前切片 | completed | `work-zone/dev/plans/W-anp-P12.2-implementation-result.md`；业务身份静态门禁 `Pass=8; Warning=0; Fail=0; Info=0`。 |
 | P12.3 轻量审批与待办基础问题清单 | completed | `work-zone/dev/plans/W-anp-P12.3-discussion-questions.md`；用户确认按推荐推进。 |
 | P12.3 轻量待办当前切片 | completed | `work-zone/dev/plans/W-anp-P12.3-implementation-result.md`；静态门禁 `TotalChecks=9; FailedChecks=0; WarningChecks=0`。 |
-| P12.4 业务权限与审计深化问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P12.4-discussion-questions.md` |
+| P12.4 业务权限与审计深化问题清单 | completed | `work-zone/dev/plans/W-anp-P12.4-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P12.4 业务权限与审计深化当前切片 | completed | `work-zone/dev/plans/W-anp-P12.4-implementation-result.md`；静态门禁 `TotalChecks=7; FailedChecks=0; WarningChecks=0`。 |
+| P12.5 业务验收与样板场景问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P12.5-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P12.3 轻量待办改动已完成 | 已包含待办 SQL、契约、数据实现、后台页、资料更正接入、迁移脚本和门禁脚本。 |
-| WorkZone | P12.3/P12.4 文档已完成 | 已包含 P12.3 结果、P12.4 问题清单、证据、状态和本轮日志。 |
+| 主仓库 | P12.4 业务权限与审计改动已完成 | 已包含细粒度业务权限、任一权限授权辅助方法、页面授权入口调整、待办分派键调整和门禁脚本。 |
+| WorkZone | P12.4/P12.5 文档已完成 | 已包含 P12.4 结果、权限审计矩阵、审计策略边界、P12.5 问题清单、证据、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -87,6 +89,9 @@
 | `dev/scripts/Get-PortalMigrationManifest.ps1 -OutputJson work-zone/dev/evidence/p12.3/migration-manifest-20260721-145100.json` | `Pass=4; Warning=2; Fail=0; Info=1`；Warning 为既有 legacy grant/security seed review。 |
 | `dev/scripts/Test-PortalSqlVersionMatrix.ps1 -OutputJson work-zone/dev/evidence/p12.3/sql-version-matrix-20260721-145100.json` | `Pass=11; Warning=1; Fail=0; Info=1; Pending=4`；Warning 为 legacy grant 脚本，Pending 为本轮未提供真实 SQL Server 目标实例。 |
 | `dev/scripts/Build-Solution.ps1` | P12.3 后复跑通过；仅保留既有 XML 注释警告和 `Roles.ModulesConfig` 隐藏警告。 |
+| `dev/scripts/Test-PortalBusinessPermissionAudit.ps1 -OutputJson work-zone/dev/evidence/p12.4/business-permission-audit-static-20260721-1610.json` | `TotalChecks=7; FailedChecks=0; WarningChecks=0`；确认 P12.4 业务权限、Admin seed、页面门禁、待办分派和审计事件目录。 |
+| `dev/scripts/Test-PortalWorkItemSmoke.ps1 -OutputJson work-zone/dev/evidence/p12.4/work-item-static-20260721-1610.json` | `TotalChecks=9; FailedChecks=0; WarningChecks=0`；确认 P12.3 待办静态门禁在 P12.4 权限拆分后仍通过。 |
+| `dev/scripts/Build-Solution.ps1` | P12.4 后复跑通过；仅保留既有 XML 注释警告，无编译错误。 |
 
 ## Known Residual Working Tree Items
 

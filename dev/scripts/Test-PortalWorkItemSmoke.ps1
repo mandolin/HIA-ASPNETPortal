@@ -156,10 +156,17 @@ Add-WorkItemCheck `
     -Evidence 'UnityCfg.xml; *.csproj'
 
 $permissionOk = (Test-ContainsAll $permissions @(
+    'BusinessWorkItemsView',
+    'Business.WorkItems.View',
+    'BusinessWorkItemsHandle',
+    'Business.WorkItems.Handle',
     'BusinessWorkItemsAdmin',
-    'Business.WorkItems.Admin',
-    '查看和处理业务待办。'
-)) -and (Test-ContainsAll $rolePermissionsSql @('Business.WorkItems.Admin'))
+    'Business.WorkItems.Admin'
+)) -and (Test-ContainsAll $rolePermissionsSql @(
+    'Business.WorkItems.View',
+    'Business.WorkItems.Handle',
+    'Business.WorkItems.Admin'
+))
 Add-WorkItemCheck `
     -Code 'P12-WORKITEM-PERMISSION' `
     -Status $(if ($permissionOk) { 'Pass' } else { 'Fail' }) `
@@ -172,7 +179,9 @@ $adminPageOk = (Test-ContainsAll $workItemPage @(
     'Current Work Items',
     'Correction Requests'
 )) -and (Test-ContainsAll $workItemPageCode @(
-    'PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.BusinessWorkItemsAdmin)',
+    'PortalAuthorization.EnsureAnyPermission',
+    'PortalPermissionKeys.BusinessWorkItemsView',
+    'PortalPermissionKeys.BusinessWorkItemsAdmin',
     'WorkItemDb.IsSchemaAvailable()',
     'GetAdminWorkItems',
     'EmployeeProfileCorrectionRequests.aspx'
@@ -187,7 +196,7 @@ $businessSyncOk = (Test-ContainsAll $correctionModule @(
     'IPortalWorkItemDb WorkItemDb',
     'TryEnsureWorkItem(result.RequestId, profile.EmployeeId, fieldName)',
     'PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest',
-    'AssignedRoleKey = PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin'
+    'AssignedRoleKey = PortalPermissionKeys.EmployeeProfileCorrectionRequestReview'
 )) -and (Test-ContainsAll $correctionAdminCode @(
     'IPortalWorkItemDb WorkItemDb',
     'TryCompleteWorkItem(result.RequestId, targetStatus, reviewNote)',

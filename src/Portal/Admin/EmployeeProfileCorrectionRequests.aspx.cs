@@ -46,7 +46,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin))
+            if (!EnsureCanViewRequests())
             {
                 return;
             }
@@ -65,7 +65,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void SearchButton_Click(object sender, EventArgs e)
         {
-            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin))
+            if (!EnsureCanViewRequests())
             {
                 return;
             }
@@ -80,7 +80,15 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void RequestsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin))
+            string targetStatus = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+            if (!IsSupportedTargetStatus(targetStatus))
+            {
+                MessageLabel.Text = "Unsupported request status.";
+                BindRequests();
+                return;
+            }
+
+            if (!EnsureCanApplyRequestStatus(targetStatus))
             {
                 return;
             }
@@ -98,7 +106,6 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            string targetStatus = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
             TextBox noteBox = e.Item.FindControl("ReviewNoteTextBox") as TextBox;
             string reviewNote = noteBox == null ? string.Empty : noteBox.Text;
             EmployeeProfileCorrectionRequestResult result = CorrectionRequestDb.ReviewRequest(
@@ -173,6 +180,37 @@ namespace ASPNET.StarterKit.Portal
             ResultLabel.Text = string.Empty;
             RequestsRepeater.DataSource = Enumerable.Empty<EmployeeProfileCorrectionAdminRow>();
             RequestsRepeater.DataBind();
+        }
+
+        private bool EnsureCanViewRequests()
+        {
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestReview,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+        }
+
+        private bool EnsureCanApplyRequestStatus(string targetStatus)
+        {
+            if (string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal))
+            {
+                return PortalAuthorization.EnsureAnyPermission(
+                    Context,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestCancel,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+            }
+
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestReview,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+        }
+
+        private static bool IsSupportedTargetStatus(string targetStatus)
+        {
+            return string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Reviewed, StringComparison.Ordinal) ||
+                   string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Rejected, StringComparison.Ordinal) ||
+                   string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal);
         }
 
         private string GetCurrentUserName()

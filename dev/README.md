@@ -65,3 +65,13 @@ dev/scripts/Test-PortalWorkItemSmoke.ps1
 ```
 
 该脚本只读，不连接数据库、不执行迁移，用于避免待办骨架在后续业务模块接入时被拆断。
+
+## 业务权限与审计门禁
+
+P12.4 起，业务权限拆分、Admin 兼容 seed、页面授权入口、待办分派键和关键运营审计调用可用以下脚本检查：
+
+```powershell
+dev/scripts/Test-PortalBusinessPermissionAudit.ps1
+```
+
+该脚本只读，不连接数据库、不执行迁移，用于避免新增业务页绕过权限、审计或合规边界。
