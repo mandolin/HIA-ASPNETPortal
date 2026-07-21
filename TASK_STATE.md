@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P12` 已启动 |
-| 当前阶段 | `W-anp-P12.5` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.5-discussion-questions.md`；若确认，则进入业务验收与样板场景。 |
-| 当前完成条件 | P12.4 当前切片已完成并验证；P12.5 的讨论问题已形成。 |
+| 当前大周期 | `W-anp-P12` 已完成，准备进入 `W-anp-P13` 前置确认 |
+| 当前阶段 | `W-anp-P13.0` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.0-discussion-questions.md`；若确认，则正式拆分 W-anp-P13 并进入 P13.1。 |
+| 当前完成条件 | P12.5 自动侧验收、样板路径文档、样例 SQL 生成脚本和 P12 closeout 已完成。 |
 | 最近状态更新时间 | 2026-07-21 |
 
 ## Recent Completed Items
@@ -44,14 +44,17 @@
 | P12.3 轻量待办当前切片 | completed | `work-zone/dev/plans/W-anp-P12.3-implementation-result.md`；静态门禁 `TotalChecks=9; FailedChecks=0; WarningChecks=0`。 |
 | P12.4 业务权限与审计深化问题清单 | completed | `work-zone/dev/plans/W-anp-P12.4-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P12.4 业务权限与审计深化当前切片 | completed | `work-zone/dev/plans/W-anp-P12.4-implementation-result.md`；静态门禁 `TotalChecks=7; FailedChecks=0; WarningChecks=0`。 |
-| P12.5 业务验收与样板场景问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P12.5-discussion-questions.md` |
+| P12.5 业务验收与样板场景问题清单 | completed | `work-zone/dev/plans/W-anp-P12.5-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P12.5 业务验收与样板场景当前切片 | completed | `work-zone/dev/plans/W-anp-P12.5-implementation-result.md`；证据包 `work-zone/dev/evidence/p12.5/20260721-202550/`，`Steps=4; Failed=0`。 |
+| P12 周期收口 | completed | `work-zone/dev/plans/W-anp-P12-closeout.md` |
+| P13.0 前置讨论问题 | pending-user-review | `work-zone/dev/plans/W-anp-P13.0-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P12.4 业务权限与审计改动已完成 | 已包含细粒度业务权限、任一权限授权辅助方法、页面授权入口调整、待办分派键调整和门禁脚本。 |
-| WorkZone | P12.4/P12.5 文档已完成 | 已包含 P12.4 结果、权限审计矩阵、审计策略边界、P12.5 问题清单、证据、状态和本轮日志。 |
+| 主仓库 | P12.5 业务验收脚本与公开说明已完成 | 已包含 P12.5 证据包编排脚本、样例 SQL 生成脚本、公开 walkthrough 和 README 入口。 |
+| WorkZone | P12.5/P12 closeout 文档已完成 | 已包含 P12.5 结果、P12 closeout、P13.0 问题清单、C-anp-P1 周期组说明、P12.5 证据、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -92,6 +95,8 @@
 | `dev/scripts/Test-PortalBusinessPermissionAudit.ps1 -OutputJson work-zone/dev/evidence/p12.4/business-permission-audit-static-20260721-1610.json` | `TotalChecks=7; FailedChecks=0; WarningChecks=0`；确认 P12.4 业务权限、Admin seed、页面门禁、待办分派和审计事件目录。 |
 | `dev/scripts/Test-PortalWorkItemSmoke.ps1 -OutputJson work-zone/dev/evidence/p12.4/work-item-static-20260721-1610.json` | `TotalChecks=9; FailedChecks=0; WarningChecks=0`；确认 P12.3 待办静态门禁在 P12.4 权限拆分后仍通过。 |
 | `dev/scripts/Build-Solution.ps1` | P12.4 后复跑通过；仅保留既有 XML 注释警告，无编译错误。 |
+| `dev/scripts/New-PortalP12SampleScenarioSql.ps1 -OutputPath temp/p12.5/PortalP12SampleScenario.sql` | 通过；仅生成开发/测试 SQL 文件，不连接数据库、不创建用户、不写密码。 |
+| `dev/scripts/New-PortalP12EvidencePackage.ps1 -OutputRoot work-zone/dev/evidence/p12.5` | 通过；证据包 `work-zone/dev/evidence/p12.5/20260721-202550/`，P12.2、P12.3、P12.4 门禁和解决方案构建全部 `Passed`，失败数 `0`。 |
 
 ## Known Residual Working Tree Items
 

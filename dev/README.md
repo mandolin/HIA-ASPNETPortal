@@ -75,3 +75,19 @@ dev/scripts/Test-PortalBusinessPermissionAudit.ps1
 ```
 
 该脚本只读，不连接数据库、不执行迁移，用于避免新增业务页绕过权限、审计或合规边界。
+
+## P12 验收与样例数据
+
+P12.5 起，业务身份、轻量待办、业务权限审计和解决方案构建可编排为一个验收证据包：
+
+```powershell
+dev/scripts/New-PortalP12EvidencePackage.ps1
+```
+
+需要准备员工资料更正样板路径的开发/测试数据时，可先生成 SQL 草案：
+
+```powershell
+dev/scripts/New-PortalP12SampleScenarioSql.ps1
+```
+
+该 SQL 生成脚本不连接数据库、不创建用户、不写密码；生成的 SQL 只能在开发库或测试库中经人工确认后执行。
