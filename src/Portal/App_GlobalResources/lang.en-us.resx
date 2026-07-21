@@ -199,6 +199,6 @@
     <value>Remember Login</value>
   </data>
   <data name="Signin_EmailOrName" xml:space="preserve">
-      <value>Email Or Name:</value>
+      <value>Email, username, or employee code:</value>
   </data>
 </root>

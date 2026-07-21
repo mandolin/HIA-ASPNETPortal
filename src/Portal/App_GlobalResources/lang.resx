@@ -187,7 +187,7 @@
     <value>Email:</value>
   </data>
   <data name="Signin_EmailOrName" xml:space="preserve">
-      <value />
+      <value>邮箱、用户名或员工号</value>
   </data>
   <data name="Signin_LoginFaild" xml:space="preserve">
     <value>Login Failed!</value>

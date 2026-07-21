@@ -202,6 +202,6 @@
     <value>记住登录状态</value>
   </data>
   <data name="Signin_EmailOrName" xml:space="preserve">
-      <value>邮箱或用户名</value>
+      <value>邮箱、用户名或员工号</value>
   </data>
 </root>

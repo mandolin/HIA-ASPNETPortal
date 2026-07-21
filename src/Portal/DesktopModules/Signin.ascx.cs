@@ -18,10 +18,11 @@ namespace ASPNET.StarterKit.Portal
     /// 成功登录后签发带安全版本的 Forms Authentication 票据，角色 Cookie 在认证请求阶段按需建立。
     ///
     /// English: Starting with P5.2, the page sends one-time password input to <see cref="IUsersDb.SignIn"/>, while
-    /// the data layer handles strong hashing and legacy MD5 compatibility upgrade. Starting with P10.3, the password
-    /// is encrypted into a hidden field with a one-time RSA public key before submit; the server decrypts it and keeps
-    /// the plain value only inside the current request. On success, a Forms Authentication ticket with the security
-    /// version is issued, and the role cookie is established on demand during authentication requests.
+    /// the data layer handles strong hashing, legacy MD5 compatibility upgrade, and P12.2 login-identifier resolution
+    /// for profile login names, legacy names, active employee codes, and email addresses. Starting with P10.3, the
+    /// password is encrypted into a hidden field with a one-time RSA public key before submit; the server decrypts it
+    /// and keeps the plain value only inside the current request. On success, a Forms Authentication ticket with the
+    /// security version is issued, and the role cookie is established on demand during authentication requests.
     /// </remarks>
     public partial class Signin : PortalModuleControl<Signin>
     {
@@ -60,7 +61,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // 中文：仅规范化输入边界，不在此记录用户名、密码或摘要。
             // English: Normalize input boundaries only; do not log user name, password, or digest here.
-            var emailOrName = EmailOrName.Text.Trim();
+            var loginIdentifier = EmailOrName.Text.Trim();
             string submittedPassword;
             if (!TryResolveSubmittedPassword(out submittedPassword))
             {
@@ -71,7 +72,7 @@ namespace ASPNET.StarterKit.Portal
 
             // 中文：不在页面层生成摘要；数据层负责强哈希验证、旧 MD5 兼容和迁移。
             // English: Do not generate a digest in the page layer; the data layer owns strong-hash verification, legacy MD5 compatibility, and migration.
-            PortalSignInResult signInResult = UsersDB.SignIn(emailOrName, submittedPassword);
+            PortalSignInResult signInResult = UsersDB.SignIn(loginIdentifier, submittedPassword);
 
             ClearSubmittedPasswordFields();
 

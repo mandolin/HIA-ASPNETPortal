@@ -695,11 +695,12 @@ ORDER BY [Roles].[RoleName]",
         }
 
         /// <summary>
-        /// 中文：校验登录输入密码、注册审核状态和 P5.2 强凭据。
+        /// 中文：解析登录标识并校验输入密码、注册审核状态和 P5.2 强凭据。
         ///
-        /// English: Validates the submitted password, registration-review status, and P5.2 strong credential.
+        /// English: Resolves the sign-in identifier, then validates the submitted password, registration-review status,
+        /// and P5.2 strong credential.
         /// </summary>
-        /// <param name="emailOrName">中文：用户输入的邮箱或登录名称。English: Email or sign-in name entered by the user.</param>
+        /// <param name="emailOrName">中文：用户输入的邮箱、登录名称或员工号。English: Email, sign-in name, or employee code entered by the user.</param>
         /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
         /// <returns>中文：登录结果；失败时为通用失败对象。English: Sign-in result; generic failure object on failure.</returns>
         public PortalSignInResult SignIn(string emailOrName, string password)
@@ -791,7 +792,7 @@ ORDER BY [Roles].[RoleName]",
         ///
         /// English: Sign-in method retained for legacy call sites; new code should prefer <see cref="SignIn"/>.
         /// </summary>
-        /// <param name="emailOrName">中文：用户输入的邮箱或登录名称。English: Email or sign-in name entered by the user.</param>
+        /// <param name="emailOrName">中文：用户输入的邮箱、登录名称或员工号。English: Email, sign-in name, or employee code entered by the user.</param>
         /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
         /// <returns>中文：登录成功且允许访问时返回用户名；否则为空字符串。English: User name when sign-in succeeds and access is allowed; otherwise an empty string.</returns>
         public string Login(string emailOrName, string password)

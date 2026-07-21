@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P12` 已启动 |
-| 当前阶段 | `W-anp-P12.1` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.1-discussion-questions.md`；若确认，则进入 `W-anp-P12.2 员工与组织资料深化`。 |
-| 当前完成条件 | P12.1 的参考项目盘点、业务候选映射和讨论问题已形成，并提交相关 Git。 |
+| 当前阶段 | `W-anp-P12.3` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P12.3-discussion-questions.md`；若确认，则进入轻量审批与待办基础实现。 |
+| 当前完成条件 | P12.2 当前切片已完成并验证；P12.3 的讨论问题已形成。 |
 | 最近状态更新时间 | 2026-07-21 |
 
 ## Recent Completed Items
@@ -38,14 +38,16 @@
 | P11.4 HIA 外围集成契约 | completed | `dev/scripts/Get-PortalHiaIntegrationInventory.ps1`；`work-zone/dev/plans/W-anp-P11.4-result.md`；ADR `0023`；证据 `work-zone/dev/evidence/p11.4/` |
 | P11.5 数据与集成验收 | completed | `work-zone/dev/plans/W-anp-P11.5-acceptance-result.md`；`work-zone/dev/plans/W-anp-P11-closeout.md`；证据 `work-zone/dev/evidence/p11.5/` |
 | P12.0 入口确认 | completed | 用户确认 P12.0 推荐；`work-zone/dev/plans/W-anp-P12.md` |
-| P12.1 参考项目业务盘点 | pending-user-review | `work-zone/dev/plans/W-anp-P12.1-reference-project-inventory.md`、`work-zone/dev/plans/W-anp-P12.1-business-candidate-map.md`、`work-zone/dev/plans/W-anp-P12.1-discussion-questions.md` |
+| P12.1 参考项目业务盘点 | completed | `work-zone/dev/plans/W-anp-P12.1-reference-project-inventory.md`、`work-zone/dev/plans/W-anp-P12.1-business-candidate-map.md`、`work-zone/dev/plans/W-anp-P12.1-discussion-questions.md`；用户确认按推荐推进。 |
+| P12.2 员工与组织资料深化当前切片 | completed | `work-zone/dev/plans/W-anp-P12.2-implementation-result.md`；业务身份静态门禁 `Pass=8; Warning=0; Fail=0; Info=0`。 |
+| P12.3 轻量审批与待办基础问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P12.3-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 本轮 P11.5 task-state 提交 | 将包含 P11 closeout 后的任务账本状态。 |
-| WorkZone | 本轮 P11.5 WorkZone 提交 | 将包含 P11.5 验收结果、P11 closeout、P12.0 待讨论问题、里程碑补强记录、证据和本轮日志。 |
+| 主仓库 | 本轮 P12.2 业务身份提交已完成 | 已包含业务身份门禁脚本、登录文案和注释补强。 |
+| WorkZone | 本轮 P12.2/P12.3 文档提交已完成 | 已包含 P12.2 结果、P12.3 问题清单、证据、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -77,6 +79,8 @@
 | `dev/scripts/Get-PortalMigrationManifest.ps1 -OutputJson work-zone/dev/evidence/p11.5/migration-manifest-20260721-115503.json` | `Pass=4; Warning=2; Fail=0; Info=1`；21 个已追踪 SQL 文件全部纳入 manifest。 |
 | `dev/scripts/Get-PortalHiaIntegrationInventory.ps1 -OutputJson work-zone/dev/evidence/p11.5/hia-integration-inventory-20260721-115503.json` | `Pass=9; Warning=0; Fail=0; Info=0; Pending=0`。 |
 | WSF 参考项目只读盘点 | 已形成脱敏结构证据 `work-zone/dev/evidence/p12.1/wsf-reference-inventory-20260721-122902.json`；确认 `petroleum-sys`、`petroleum-scientificresearch` 为 P12 主要参考源。 |
+| `dev/scripts/Test-PortalBusinessIdentity.ps1 -OutputJson work-zone/dev/evidence/p12.2/business-identity-static-20260721-133737.json` | `Pass=8; Warning=0; Fail=0; Info=0`；确认工号登录标识、资料字段、员工主数据和账号员工绑定关键契约。 |
+| `dev/scripts/Build-Solution.ps1` | 通过；存在既有 `CS1591` XML 注释警告，无编译错误。 |
 
 ## Known Residual Working Tree Items
 

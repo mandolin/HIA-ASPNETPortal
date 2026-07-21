@@ -190,7 +190,7 @@ namespace ASPNET.StarterKit.Portal
         ///
         /// English: Validates a sign-in password and registration-review status, then returns the sign-in result on success.
         /// </summary>
-        /// <param name="emailOrName">中文：用户输入的邮箱或登录名称。English: Email or sign-in name entered by the user.</param>
+        /// <param name="emailOrName">中文：用户输入的邮箱、登录名称或员工号。English: Email, sign-in name, or employee code entered by the user.</param>
         /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
         /// <returns>中文：登录结果；失败时使用通用失败对象。English: Sign-in result; generic failure object on failure.</returns>
         PortalSignInResult SignIn(string emailOrName, string password);
@@ -200,7 +200,7 @@ namespace ASPNET.StarterKit.Portal
         ///
         /// English: Sign-in method retained for legacy call sites; new code should prefer <see cref="SignIn"/>.
         /// </summary>
-        /// <param name="emailOrName">中文：用户输入的邮箱或登录名称。English: Email or sign-in name entered by the user.</param>
+        /// <param name="emailOrName">中文：用户输入的邮箱、登录名称或员工号。English: Email, sign-in name, or employee code entered by the user.</param>
         /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
         /// <returns>中文：登录成功且允许访问时返回用户名；否则为空字符串。English: User name when sign-in succeeds and access is allowed; otherwise an empty string.</returns>
         string Login(String emailOrName, string password);

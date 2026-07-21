@@ -45,3 +45,13 @@ dev/scripts/Get-PortalHiaIntegrationInventory.ps1
 ```
 
 该脚本只读，不连接数据库、不加载 HIA 外部程序集，也不复制通知正文。
+
+## 业务身份门禁
+
+P12.2 起，员工号登录、用户资料、员工主数据和账号员工绑定的静态契约可用以下脚本检查：
+
+```powershell
+dev/scripts/Test-PortalBusinessIdentity.ps1
+```
+
+该脚本只读，不连接数据库、不读取密码、不修改外置配置。
