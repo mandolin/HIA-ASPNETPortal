@@ -14,11 +14,11 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P12` 已完成，准备进入 `W-anp-P13` 前置确认 |
-| 当前阶段 | `W-anp-P13.0` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.0-discussion-questions.md`；若确认，则正式拆分 W-anp-P13 并进入 P13.1。 |
-| 当前完成条件 | P12.5 自动侧验收、样板路径文档、样例 SQL 生成脚本和 P12 closeout 已完成。 |
-| 最近状态更新时间 | 2026-07-21 |
+| 当前大周期 | `W-anp-P13` 已启动 |
+| 当前阶段 | `W-anp-P13.1` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.1-discussion-questions.md`；若确认，则实现发布包 manifest、部署文档和 P13.1 验证记录。 |
+| 当前完成条件 | P13 总规划、P13.1 盘点、设计草案和待讨论问题已形成。 |
+| 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
 
@@ -47,14 +47,16 @@
 | P12.5 业务验收与样板场景问题清单 | completed | `work-zone/dev/plans/W-anp-P12.5-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P12.5 业务验收与样板场景当前切片 | completed | `work-zone/dev/plans/W-anp-P12.5-implementation-result.md`；证据包 `work-zone/dev/evidence/p12.5/20260721-202550/`，`Steps=4; Failed=0`。 |
 | P12 周期收口 | completed | `work-zone/dev/plans/W-anp-P12-closeout.md` |
-| P13.0 前置讨论问题 | pending-user-review | `work-zone/dev/plans/W-anp-P13.0-discussion-questions.md` |
+| P13.0 前置讨论问题 | completed | `work-zone/dev/plans/W-anp-P13.0-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P13 总规划 | completed | `work-zone/dev/plans/W-anp-P13.md` |
+| P13.1 发布包与部署模板问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P13.1-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P12.5 业务验收脚本与公开说明已完成 | 已包含 P12.5 证据包编排脚本、样例 SQL 生成脚本、公开 walkthrough 和 README 入口。 |
-| WorkZone | P12.5/P12 closeout 文档已完成 | 已包含 P12.5 结果、P12 closeout、P13.0 问题清单、C-anp-P1 周期组说明、P12.5 证据、状态和本轮日志。 |
+| 主仓库 | P12.5 业务验收脚本与公开说明已完成 | 本轮尚未新增主仓库代码；仅待更新任务账本。 |
+| WorkZone | P13 已拆分并推进到 P13.1 讨论节点 | 已包含 P13 总规划、P13.1 发布部署盘点、设计草案、问题清单、C-anp-P1 状态和本轮日志。 |
 
 ## Last Validation Evidence
 
