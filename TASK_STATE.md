@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P14` 已启动 |
-| 当前阶段 | `W-anp-P14.5` 周期收口待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P14.5-discussion-questions.md`；若确认，则生成 P14 closeout、validation summary 和 P15 输入清单，并把代码梳理、注释完善和文档化专项纳入 P14 后的周期编排。 |
-| 当前完成条件 | P14.4 当前切片已完成；真实 IIS/TLS/ACL、machineKey 真实值、生产连接串和真实扫描复测继续作为不阻塞 Pending；P14 后新增 1-2 个代码梳理/注释/文档化专项周期作为候选插入项。 |
+| 当前大周期 | `W-anp-P15` 已拆分 |
+| 当前阶段 | `W-anp-P15.1` 待讨论 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P15.1-discussion-questions.md`；若确认，则进入源码结构与文档化覆盖盘点。 |
+| 当前完成条件 | P14 已条件式收口；真实 IIS/TLS/ACL、machineKey 真实值、生产连接串和真实扫描复测继续作为不阻塞 Pending；P15/P16 作为代码梳理、注释完善和文档化专项周期。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -71,6 +71,8 @@
 | P14.3 企业扫描 baseline 当前切片 | completed | `dev/scripts/New-PortalEnterpriseScanBaseline.ps1`、`work-zone/dev/plans/W-anp-P14.3-implementation-result.md`；Scan profile 证据包 `work-zone/dev/evidence/p14.3/20260722-183718-Scan/`，`Pass=13; Warning=3; Fail=0; PendingTargetEnvironment=6`。 |
 | P14.4 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.4-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P14.4 生产前硬化当前切片 | completed | `dev/scripts/Test-PortalProductionHardening.ps1`、`work-zone/dev/plans/W-anp-P14.4-implementation-result.md`；发布产物 Prod profile `Pass=14; Warning=3; Fail=0; PendingTargetEnvironment=4; Info=2`。 |
+| P14.5 周期收口 | completed | `work-zone/dev/plans/W-anp-P14-closeout.md`、`work-zone/dev/plans/W-anp-P14-validation-summary.md`、`work-zone/dev/plans/W-anp-P15-input-from-P14.md`；用户确认 P14.5 全部按推荐推进。 |
+| P15 规划入口 | completed | `work-zone/dev/plans/W-anp-P15.md`、`work-zone/dev/plans/W-anp-P15-breakdown.md`、`work-zone/dev/plans/W-anp-P15.1-discussion-questions.md`。 |
 
 ## Last Code State
 
@@ -84,6 +86,7 @@
 | 事项 | 状态 | 处理原则 |
 | --- | --- | --- |
 | 代码梳理、注释完善与文档化专项 | pending-planning | 用户要求后续安排 1-2 个专门周期。推荐在 P14 条件式收口后插入；若真实企业扫描/完整合规条款尚未到位，则优先作为 P15/P16；若真实扫描输入先到，则扫描整改先做，文档化专项紧随其后。 |
+| 绿盟/本地企业扫描工具 | pending-tool-input | 当前未找到绿盟官方免费本地社区版证据；已记录开源替代组合 ZAP、Greenbone/OpenVAS Free、Nuclei、Nikto，后续真实报告或工具输入到位后进入企业扫描整改专项。 |
 
 ## Last Validation Evidence
 
