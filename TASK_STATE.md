@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P14` 已启动 |
-| 当前阶段 | `W-anp-P14.1` readiness evidence 待实施 |
-| 当前唯一下一步 | 新增只读 readiness/evidence 脚本，汇总目标环境矩阵、当前可用证据和不阻塞 Pending 项，然后形成 P14.1 实施结果。 |
-| 当前完成条件 | P14 总规划、breakdown、P14.1 目标环境矩阵和 P14.1 待讨论问题已形成且已按推荐确认；真实环境缺口继续作为不阻塞 Pending。 |
+| 当前阶段 | `W-anp-P14.2` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P14.2-discussion-questions.md`；若确认，则推进近真实发布演练脚本和 P14.2 evidence package。 |
+| 当前完成条件 | P14.1 目标环境矩阵、确认记录、只读 readiness/evidence 脚本和证据包已完成；真实环境缺口继续作为不阻塞 Pending。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -64,13 +64,15 @@
 | P14 总规划与 breakdown | completed | `work-zone/dev/plans/W-anp-P14.md`、`work-zone/dev/plans/W-anp-P14-breakdown.md`。 |
 | P14.1 目标环境矩阵 | completed | `work-zone/dev/plans/W-anp-P14.1-target-environment-matrix.md`。 |
 | P14.1 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.1-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P14.1 readiness/evidence 当前切片 | completed | `dev/scripts/New-PortalTargetEnvironmentEvidencePackage.ps1`、`work-zone/dev/plans/W-anp-P14.1-implementation-result.md`；证据包 `work-zone/dev/evidence/p14.1/20260722-170700-Dev/`，只读门禁失败数 `0`。 |
+| P14.2 待讨论问题 | pending-user-review | `work-zone/dev/plans/W-anp-P14.2-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P14.1 讨论确认后更新任务账本 | 本轮没有新增主仓库运行代码或公开文档；主仓库仅修改 `TASK_STATE.md` 的 P14.1 状态。 |
-| WorkZone | P14.1 讨论已确认，准备实施 readiness evidence | 已包含 P14 总规划、breakdown、目标环境矩阵、P14.1 问题清单、确认记录、状态和本轮日志。 |
+| 主仓库 | P14.1 readiness 脚本已新增 | 主仓库新增 `dev/scripts/New-PortalTargetEnvironmentEvidencePackage.ps1`，并更新 `TASK_STATE.md`。 |
+| WorkZone | P14.1 已完成，P14.2 待确认 | 已包含 P14.1 实施结果、P14.1 证据包、P14.2 问题清单、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -128,6 +130,7 @@
 | `dev/scripts/Get-PortalReleaseSummary.ps1 -Version 0.13.1 ...` | 通过；证据包 `work-zone/dev/evidence/p13.4/20260722-131600/`，`FailedReleaseChecks=0; WarningReleaseChecks=2; FailedOperationsSteps=0; FailedDocumentationSteps=0; PendingTargetEnvironmentItems=5`。 |
 | P13.5 收口静态复核 | 通过；公开文档门禁 `16 indexed documents`，本轮文件 BOM 检查通过，无过期 P13 状态短语或敏感赋值命中。 |
 | P14.1 规划静态复核 | 通过；公开文档索引、`diff --check`、UTF-8 无 BOM、旧 P14 状态词和敏感赋值扫描均通过；仅有 Git LF/CRLF 提示。 |
+| `dev/scripts/New-PortalTargetEnvironmentEvidencePackage.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p14.1/20260722-170700-Dev/`，5 个只读门禁全部 `Passed`，`FailedStepCount=0`，`ReadyForP14_2NearTargetDrill=True`，`RealProductionEvidenceClaimed=False`。 |
 
 ## Known Residual Working Tree Items
 
