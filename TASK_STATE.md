@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P13` 已启动 |
-| 当前阶段 | `W-anp-P13.2` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.2-discussion-questions.md`；若确认，则推进运维可观测、例行任务和只读运维证据包。 |
-| 当前完成条件 | P13.1 发布包 manifest、部署/回滚文档、自动侧验证和实施结果已完成。 |
+| 当前阶段 | `W-anp-P13.3` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.3-discussion-questions.md`；若确认，则推进文档化工具链接入准备、coverage 分层和只读文档化证据包。 |
+| 当前完成条件 | P13.1 发布包 manifest、P13.2 运维运行手册、只读运维脚本、运维证据包和实施结果已完成。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -51,14 +51,16 @@
 | P13 总规划 | completed | `work-zone/dev/plans/W-anp-P13.md` |
 | P13.1 发布包与部署模板问题清单 | completed | `work-zone/dev/plans/W-anp-P13.1-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P13.1 发布包与部署模板当前切片 | completed | `work-zone/dev/plans/W-anp-P13.1-implementation-result.md`；manifest 证据 `work-zone/dev/evidence/p13.1/20260722-025435/`，`Failed=0; Warning=2`。 |
-| P13.2 运维可观测与例行任务问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P13.2-discussion-questions.md` |
+| P13.2 运维可观测与例行任务问题清单 | completed | `work-zone/dev/plans/W-anp-P13.2-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P13.2 运维可观测与例行任务当前切片 | completed | `work-zone/dev/plans/W-anp-P13.2-implementation-result.md`；证据包 `work-zone/dev/evidence/p13.2/20260722-110447-Dev/`，`Steps=6; Failed=0`。 |
+| P13.3 文档化工具链接入准备问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P13.3-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P13.1 发布 manifest 与公开部署文档已完成 | 已包含 `New-PortalReleaseManifest.ps1`、回滚指南、部署/测试清单和任务账本更新。 |
-| WorkZone | P13.1 当前切片已完成并推进到 P13.2 讨论节点 | 已包含 P13.1 结果、P13.2 问题清单、发布 manifest 证据、P12 smoke 证据、状态和本轮日志。 |
+| 主仓库 | P13.2 运维脚本与公开运行手册已完成 | 已包含 `Test-PortalOperationsReadiness.ps1`、`Test-PortalLogMaintenance.ps1`、`New-PortalOperationsEvidencePackage.ps1`、运维手册和公开清单更新。 |
+| WorkZone | P13.2 当前切片已完成并推进到 P13.3 讨论节点 | 已包含 P13.2 盘点、实施结果、运维证据、P13.3 问题清单、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -105,6 +107,10 @@
 | `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath temp/publish/P13.1-Release-20260722-025022 -OutputRoot work-zone/dev/evidence/p13.1` | 通过；manifest 证据 `work-zone/dev/evidence/p13.1/20260722-025435/`，`Files=155; Failed=0; Warning=2`。 |
 | `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；13 个公开文档已登记，无私有链接和敏感赋值。 |
 | `dev/scripts/New-PortalP12EvidencePackage.ps1 -OutputRoot work-zone/dev/evidence/p13.1/p12-acceptance-smoke -SkipBuild` | 通过；`Steps=3; Failed=0`。 |
+| `dev/scripts/Test-PortalOperationsReadiness.ps1 -OutputJson temp/p13.2/operations-readiness.json` | 通过；`TotalChecks=11; FailedChecks=0; WarningChecks=0; PendingChecks=3`。 |
+| `dev/scripts/Test-PortalLogMaintenance.ps1 -OutputJson temp/p13.2/log-maintenance.json` | 条件式通过；`TotalChecks=5; FailedChecks=0; WarningChecks=1`，Warning 为旧 `.log` 历史文件。 |
+| `dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p13.2/20260722-110447-Dev/`，`Steps=6; Failed=0`。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；14 个公开文档已登记，无私有链接和敏感赋值。 |
 
 ## Known Residual Working Tree Items
 

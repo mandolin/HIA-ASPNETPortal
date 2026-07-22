@@ -60,6 +60,7 @@
 
 - [ ] `dev/scripts/Test-PortalPublicDocumentation.ps1` 对公开入口、相对文件链接和隐私边界通过。
 - [ ] 如需保留合规证据，执行 `dev/scripts/New-PortalComplianceEvidencePackage.ps1` 并将输出留存在 WorkZone 证据目录。
+- [ ] 如需保留运维证据，执行 `dev/scripts/New-PortalOperationsEvidencePackage.ps1` 并确认 `Fail=0`；`Pending` 项应记录为目标环境补证。
 - [ ] `dev/scripts/Test-PortalPublishReadiness.ps1` 对项目 Content 清单、主题包、模块包和发布输出通过。
 - [ ] 如需生成本地文件系统发布包，执行 `dev/scripts/Publish-PortalFileSystem.ps1` 并记录输出目录。
 - [ ] 如需生成交付证据，执行 `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath <发布目录>` 并记录 manifest 输出目录。
@@ -70,5 +71,6 @@
 - [ ] 已记录验证结果和残留风险。
 - [ ] 已按 `docs/deployment-checklist.md` 完成 SQL Server、IIS、外置配置和回滚检查。
 - [ ] 已按 `docs/deployment-rollback-guide.md` 准备文件、配置、数据库和证据回滚材料。
+- [ ] 已按 `docs/operations-runbook.md` 完成运维入口、日志 dry-run、审计查询、备份提醒和计划任务建议复核。
 - [ ] 新模块包已通过 `module.json`、入口 `.ascx` 和本地资源校验；启用时模块/CSS 可用，禁用时二者均不加载。
 - [ ] 有实例引用的模块定义不能通过 Legacy 删除页直接级联删除；先完成禁用、迁移或显式实例清理。

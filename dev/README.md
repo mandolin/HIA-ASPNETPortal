@@ -18,6 +18,16 @@ dev/scripts/New-PortalReleaseManifest.ps1
 
 `Test-PortalPublishReadiness.ps1` 只读检查项目发布清单、主题包、模块包和可选发布输出目录。`Publish-PortalFileSystem.ps1` 发布到 `temp/publish/` 下的临时目录，并在发布前后执行门禁；它不修改 IIS、数据库或外置配置。`New-PortalReleaseManifest.ps1` 对 FileSystem 发布输出生成文件清单、SHA256、版本信息和排除项检查；它只记录路径和哈希，不写入真实敏感值。
 
+## 运维证据与例行任务
+
+```powershell
+dev/scripts/Test-PortalOperationsReadiness.ps1
+dev/scripts/Test-PortalLogMaintenance.ps1
+dev/scripts/New-PortalOperationsEvidencePackage.ps1
+```
+
+`Test-PortalOperationsReadiness.ps1` 只读检查运维页面、诊断日志、运营审计、公开运行手册和目标环境补证边界。`Test-PortalLogMaintenance.ps1` 只做诊断日志保留策略 dry-run，不删除、移动、压缩或读取日志正文。`New-PortalOperationsEvidencePackage.ps1` 编排运维 readiness、日志 dry-run、发布、公开文档、合规和默认凭据风险门禁，证据默认写入 WorkZone。
+
 ## VM 任务代理
 
 ```powershell
