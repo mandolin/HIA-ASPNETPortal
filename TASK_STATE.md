@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P13` 已启动 |
-| 当前阶段 | `W-anp-P13.5` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.5-discussion-questions.md`；若确认，则推进 P13 交付验收、P13 closeout、C-anp-P1 closeout 和后续 P14 输入。 |
-| 当前完成条件 | P13.1 发布包 manifest、P13.2 运维证据包、P13.3 文档化 readiness/evidence、P13.4 版本节奏/release ledger/release summary 已完成。 |
+| 当前大周期 | `W-anp-P14` 候选入口 |
+| 当前阶段 | `W-anp-P14.0` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P14.0-discussion-questions.md`；若确认，则正式启动 P14 并先推进目标环境矩阵与补证计划。 |
+| 当前完成条件 | P13.1-P13.5 已完成；`W-anp-P13-closeout.md` 与 `C-anp-P1-closeout.md` 已形成；下一周期组 `C-anp-P2` 已形成候选蓝图。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -57,14 +57,17 @@
 | P13.3 文档化工具链接入准备当前切片 | completed | `work-zone/dev/plans/W-anp-P13.3-implementation-result.md`；证据包 `work-zone/dev/evidence/p13.3/20260722-114011/`，`Steps=6; Failed=0; Pending=0`。 |
 | P13.4 版本节奏与发布说明问题清单 | completed | `work-zone/dev/plans/W-anp-P13.4-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P13.4 版本节奏与发布说明当前切片 | completed | `work-zone/dev/plans/W-anp-P13.4-implementation-result.md`；release summary 证据 `work-zone/dev/evidence/p13.4/20260722-131600/`；内部 release entry `work-zone/dev/releases/0.13.1-p13-productization-evidence-baseline.md`。 |
-| P13.5 交付验收与周期组收口问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P13.5-discussion-questions.md` |
+| P13.5 交付验收与周期组收口问题清单 | completed | `work-zone/dev/plans/W-anp-P13.5-discussion-questions.md`；用户确认全部按推荐推进，并确认真实环境事项可在不阻塞时顺延。 |
+| P13.5 交付验收与周期组收口当前切片 | completed | `work-zone/dev/plans/W-anp-P13.5-acceptance-result.md`、`work-zone/dev/plans/W-anp-P13-closeout.md`、`work-zone/dev/plans/C-anp-P1-closeout.md`。 |
+| C-anp-P2 候选蓝图 | completed | `work-zone/dev/plans/C-anp-P2.md`；建议 P14-P17 以目标环境补证、企业扫描、HIA runtime pilot 和后续业务/Workflow 为主线。 |
+| P14.0 目标环境补证与发布演练问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P14.0-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P13.4 发布节奏脚本与公开模板已完成 | 已包含 `Get-PortalReleaseSummary.ps1`、`docs/release-notes-template.md` 和发布/测试/开发入口更新。 |
-| WorkZone | P13.4 当前切片已完成并推进到 P13.5 讨论节点 | 已包含 P13.4 实施结果、release ledger、`0.13.1` 内部 entry、P13.4 证据、P13.5 问题清单、状态和本轮日志。 |
+| 主仓库 | P13.5 收口后仅更新任务账本 | P13.5 没有新增主仓库运行代码或公开文档；主仓库仅需提交 `TASK_STATE.md` 的 P14.0 入口状态。 |
+| WorkZone | P13.5 已完成并推进到 P14.0 讨论节点 | 已包含 P13.5 验收结果、P13 closeout、C-anp-P1 closeout、C-anp-P2 候选蓝图、P14.0 问题清单、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -120,6 +123,7 @@
 | `dev/scripts/Test-PortalXmlDocumentation.ps1` | 通过；四份 XML 文档可解析，member counts 为 `1251/545/9/320`。 |
 | `dev/scripts/New-PortalDocumentationEvidencePackage.ps1` | 通过；证据包 `work-zone/dev/evidence/p13.3/20260722-114011/`，`Steps=6; Failed=0; Pending=0`。 |
 | `dev/scripts/Get-PortalReleaseSummary.ps1 -Version 0.13.1 ...` | 通过；证据包 `work-zone/dev/evidence/p13.4/20260722-131600/`，`FailedReleaseChecks=0; WarningReleaseChecks=2; FailedOperationsSteps=0; FailedDocumentationSteps=0; PendingTargetEnvironmentItems=5`。 |
+| P13.5 收口静态复核 | 通过；公开文档门禁 `16 indexed documents`，本轮文件 BOM 检查通过，无过期 P13 状态短语或敏感赋值命中。 |
 
 ## Known Residual Working Tree Items
 
