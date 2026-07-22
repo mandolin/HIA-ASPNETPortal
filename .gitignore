@@ -375,5 +375,10 @@ MigrationBackup/
 # P4.2 JSDoc pilot 的可再生本机验证输出。
 /temp/documentation/
 
+# SHFB/Doxygen 历史生成文档输出；配置文件需另行评估，不在此处整体忽略。
+/src/Documentation/
+/src/Portal/Documentation/
+/src/Portal.Components.Data/Documentation/
+
 # Playwright CLI 浏览器回归快照，属于本机临时证据。
 /.playwright-cli/

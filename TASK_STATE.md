@@ -15,10 +15,10 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P15` 已拆分 |
-| 当前阶段 | `W-anp-P15.1` 待讨论 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P15.1-discussion-questions.md`；若确认，则进入源码结构与文档化覆盖盘点。 |
-| 当前完成条件 | P14 已条件式收口；真实 IIS/TLS/ACL、machineKey 真实值、生产连接串和真实扫描复测继续作为不阻塞 Pending；P15/P16 作为代码梳理、注释完善和文档化专项周期。 |
-| 最近状态更新时间 | 2026-07-22 |
+| 当前阶段 | `W-anp-P15.2` 待讨论 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P15.2-discussion-questions.md`，并提供 aspx/ascx/cs 注释样例，或确认由我先挑选候选样例。 |
+| 当前完成条件 | P15.1 只读盘点已完成；P15.2 需先确定注释样例和密度，再按 `<lang>` / `<l>` 标准补强高风险契约注释。 |
+| 最近状态更新时间 | 2026-07-23 |
 
 ## Recent Completed Items
 
@@ -73,20 +73,21 @@
 | P14.4 生产前硬化当前切片 | completed | `dev/scripts/Test-PortalProductionHardening.ps1`、`work-zone/dev/plans/W-anp-P14.4-implementation-result.md`；发布产物 Prod profile `Pass=14; Warning=3; Fail=0; PendingTargetEnvironment=4; Info=2`。 |
 | P14.5 周期收口 | completed | `work-zone/dev/plans/W-anp-P14-closeout.md`、`work-zone/dev/plans/W-anp-P14-validation-summary.md`、`work-zone/dev/plans/W-anp-P15-input-from-P14.md`；用户确认 P14.5 全部按推荐推进。 |
 | P15 规划入口 | completed | `work-zone/dev/plans/W-anp-P15.md`、`work-zone/dev/plans/W-anp-P15-breakdown.md`、`work-zone/dev/plans/W-anp-P15.1-discussion-questions.md`。 |
+| P15.1 源码结构与文档化覆盖盘点 | completed | `dev/scripts/Get-PortalSourceDocumentationInventory.ps1`；证据 `work-zone/dev/evidence/p15.1/source-documentation-inventory-20260723-0410.*`；实施结果 `work-zone/dev/plans/W-anp-P15.1-implementation-result.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P14.5 收口账本已更新 | 当前 Git HEAD 已进入 P15.1 待讨论状态；P14.5 条件式收口和 P15 文档化专项入口已记录。 |
-| WorkZone | P14.5 收口与 P15 拆分已提交 | 当前 Git HEAD 已包含 P14 closeout、P14 validation summary、P15 输入、P15 总规划和扫描工具候选调研。 |
+| 主仓库 | P15.1 源码与文档化盘点待提交 | 当前工作区已新增只读 inventory 脚本、更新 `<lang>` 注释规范和生成文档目录忽略规则。 |
+| WorkZone | P15.1 盘点证据待提交 | 当前工作区已形成 P15.1 evidence、实施结果、HIA DotNetDoc `<lang>` 评估、生成目录评估和 P15.2 待讨论问题。 |
 
 ## Upcoming Planning Constraints
 
 | 事项 | 状态 | 处理原则 |
 | --- | --- | --- |
-| 代码梳理、注释完善与文档化专项 | pending-planning | 用户要求后续安排 1-2 个专门周期。推荐在 P14 条件式收口后插入；若真实企业扫描/完整合规条款尚未到位，则优先作为 P15/P16；若真实扫描输入先到，则扫描整改先做，文档化专项紧随其后。 |
-| 绿盟/本地企业扫描工具 | pending-tool-input | 当前未找到绿盟官方免费本地社区版证据；已记录开源替代组合 ZAP、Greenbone/OpenVAS Free、Nuclei、Nikto，后续真实报告或工具输入到位后进入企业扫描整改专项。 |
+| 代码梳理、注释完善与文档化专项 | active | 已作为 P15/P16 主线启动；P15.1 完成全局盘点，P15.2 等待用户样例后进入高风险文件注释补强。 |
+| 绿盟/本地企业扫描工具 | pending-tool-input | 当前未找到绿盟官方免费本地社区版证据；已记录开源替代组合 ZAP、Greenbone/OpenVAS Free、Nuclei、Nikto。若真实报告或工具输入到 `W-anp-P17.1` 仍未到位，必须至少启动本地 baseline。 |
 
 ## Last Validation Evidence
 
