@@ -14,9 +14,12 @@
 dev/scripts/Test-PortalPublishReadiness.ps1
 dev/scripts/Publish-PortalFileSystem.ps1
 dev/scripts/New-PortalReleaseManifest.ps1
+dev/scripts/Get-PortalReleaseSummary.ps1
 ```
 
 `Test-PortalPublishReadiness.ps1` 只读检查项目发布清单、主题包、模块包和可选发布输出目录。`Publish-PortalFileSystem.ps1` 发布到 `temp/publish/` 下的临时目录，并在发布前后执行门禁；它不修改 IIS、数据库或外置配置。`New-PortalReleaseManifest.ps1` 对 FileSystem 发布输出生成文件清单、SHA256、版本信息和排除项检查；它只记录路径和哈希，不写入真实敏感值。
+
+`Get-PortalReleaseSummary.ps1` 汇总发布包 manifest、运维证据包、文档化证据包和当前 Git 状态，用于发布说明和内部 release ledger。它只读，不打 tag、不创建分支、不发布文件、不连接 IIS 或数据库。
 
 ## 运维证据与例行任务
 

@@ -14,6 +14,7 @@
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。
 - `deployment-checklist.md`：SQL Server、IIS、外置配置和发布后回归清单。
 - `deployment-rollback-guide.md`：文件、配置、数据库和证据回滚准备说明。
+- `release-notes-template.md`：版本号、变更、验证摘要、延期补证和回滚入口模板。
 - `operations-runbook.md`：运维入口、例行检查、日志维护、审计查询、备份提醒和证据包说明。
 - `deployment-default-credentials.md`：默认账号、初始化脚本样例口令和旧凭据治理说明。
 - `p12-sample-business-flow.md`：员工资料更正样板业务路径、样例数据 SQL 和 P12 验收入口。

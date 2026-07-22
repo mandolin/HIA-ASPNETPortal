@@ -71,6 +71,8 @@
 - [ ] `dev/scripts/Test-PortalPublishReadiness.ps1` 对项目 Content 清单、主题包、模块包和发布输出通过。
 - [ ] 如需生成本地文件系统发布包，执行 `dev/scripts/Publish-PortalFileSystem.ps1` 并记录输出目录。
 - [ ] 如需生成交付证据，执行 `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath <发布目录>` 并记录 manifest 输出目录。
+- [ ] 如需形成版本节奏或发布说明材料，执行 `dev/scripts/Get-PortalReleaseSummary.ps1`，确认发布 manifest、运维证据和文档化证据均可汇总。
+- [ ] 如需对外或跨团队传阅，按 `docs/release-notes-template.md` 整理公开发布说明，并将内部证据路径留在私有记录中。
 - [ ] 未提交真实连接字符串、密码、Token、证书。
 - [ ] 未提交本地数据库文件、`node_modules/`、`bin/`、`obj/`。
 - [ ] `Web.Debug.config`、`Web.Release.config`、`Web.Test.config` 的处理方式符合仓库规则。
