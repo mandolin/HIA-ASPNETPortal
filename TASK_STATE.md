@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P14` 已启动 |
-| 当前阶段 | `W-anp-P14.2` 近真实发布演练待实施 |
-| 当前唯一下一步 | 新增或编排 P14.2 近真实发布演练脚本，生成 FileSystem 发布包、manifest、IIS Express smoke、回滚 dry-run、P14.2 evidence package 和 `0.14.1` 内部 release entry。 |
-| 当前完成条件 | P14.2 待讨论问题已按推荐确认；真实 IIS/TLS/ACL、目标 SQL Server 和企业扫描继续作为不阻塞 Pending。 |
+| 当前阶段 | `W-anp-P14.3` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P14.3-discussion-questions.md`；若确认，则推进企业扫描登记模板、状态机和只读 security header/config baseline。 |
+| 当前完成条件 | P14.2 近真实发布演练脚本、证据包和 `0.14.1` 内部 release entry 已完成；真实 IIS/TLS/ACL、目标 SQL Server、企业扫描真实报告和业务签收继续作为不阻塞 Pending。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -66,13 +66,15 @@
 | P14.1 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.1-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P14.1 readiness/evidence 当前切片 | completed | `dev/scripts/New-PortalTargetEnvironmentEvidencePackage.ps1`、`work-zone/dev/plans/W-anp-P14.1-implementation-result.md`；证据包 `work-zone/dev/evidence/p14.1/20260722-170700-Dev/`，只读门禁失败数 `0`。 |
 | P14.2 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.2-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P14.2 近真实发布演练当前切片 | completed | `dev/scripts/New-PortalNearTargetReleaseRehearsal.ps1`、`work-zone/dev/plans/W-anp-P14.2-implementation-result.md`；证据包 `work-zone/dev/evidence/p14.2/20260722-173318-Dev/`，必需步骤失败数 `0`，可选步骤失败数 `0`，内部 release entry `0.14.1`。 |
+| P14.3 待讨论问题 | pending-user-review | `work-zone/dev/plans/W-anp-P14.3-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P14.2 确认后更新任务账本 | 主仓库暂无 P14.2 运行代码变更；当前仅更新 `TASK_STATE.md`。 |
-| WorkZone | P14.2 已确认，准备实施近真实发布演练 | 已包含 P14.2 确认记录、状态和本轮日志。 |
+| 主仓库 | P14.2 发布演练脚本已新增 | 主仓库新增 `dev/scripts/New-PortalNearTargetReleaseRehearsal.ps1`，并更新 `TASK_STATE.md`。 |
+| WorkZone | P14.2 已完成，P14.3 待确认 | 已包含 P14.2 实施结果、P14.2 证据包、`0.14.1` release entry、P14.3 问题清单、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -131,6 +133,8 @@
 | P13.5 收口静态复核 | 通过；公开文档门禁 `16 indexed documents`，本轮文件 BOM 检查通过，无过期 P13 状态短语或敏感赋值命中。 |
 | P14.1 规划静态复核 | 通过；公开文档索引、`diff --check`、UTF-8 无 BOM、旧 P14 状态词和敏感赋值扫描均通过；仅有 Git LF/CRLF 提示。 |
 | `dev/scripts/New-PortalTargetEnvironmentEvidencePackage.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p14.1/20260722-170700-Dev/`，5 个只读门禁全部 `Passed`，`FailedStepCount=0`，`ReadyForP14_2NearTargetDrill=True`，`RealProductionEvidenceClaimed=False`。 |
+| `dev/scripts/New-PortalNearTargetReleaseRehearsal.ps1 -Profile Dev -Configuration Release -Port 40001` | 通过；证据包 `work-zone/dev/evidence/p14.2/20260722-173318-Dev/`，必需步骤 `6`、可选步骤 `2`，失败数均为 `0`；manifest `Files=155; Failed=0; Warning=2`；`RealProductionEvidenceClaimed=False`。 |
+| P14.2 完工静态复核 | 通过；脚本解析、公开文档门禁、`diff --check`、UTF-8 无 BOM、尾随空白、旧 P14.2 状态词和敏感赋值扫描均通过；文本证据文件 `14` 个。 |
 
 ## Known Residual Working Tree Items
 
