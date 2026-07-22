@@ -81,7 +81,22 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -AsJson
 ```
 
+如需把 baseline 写入证据目录，可使用：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -OutputJson work-zone\dev\evidence\p13.3\documentation-baseline.json
+```
+
 脚本不会生成、发布、删除或修改文档。`src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`、`src/Portal/js/`、`src/Portal/css/` 和 `temp/` 均不会被自动纳入输入；JSDoc 验证生成物写入被忽略的 `temp/documentation/`，公开发布策略见[文档产物与工具链边界](documentation-artifacts-guide.md)。
+
+P13.3 起，文档化 readiness 和证据包可以用以下脚本执行：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalDocumentationReadiness.ps1
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalDocumentationEvidencePackage.ps1
+```
+
+readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JSDoc pilot 隔离、.NET XML 延期边界、生成物未入库和 HIA 通知读取。证据包默认写入 WorkZone；它不修改源码注释、不提交生成物、不读取敏感配置，也不连接数据库。
 
 ## JavaScript 文档化 Pilot
 

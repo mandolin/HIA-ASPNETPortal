@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P13` 已启动 |
-| 当前阶段 | `W-anp-P13.3` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.3-discussion-questions.md`；若确认，则推进文档化工具链接入准备、coverage 分层和只读文档化证据包。 |
-| 当前完成条件 | P13.1 发布包 manifest、P13.2 运维运行手册、只读运维脚本、运维证据包和实施结果已完成。 |
+| 当前阶段 | `W-anp-P13.4` 待用户确认 |
+| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P13.4-discussion-questions.md`；若确认，则推进版本节奏、发布说明模板、内部 release ledger 和只读 release-summary。 |
+| 当前完成条件 | P13.1 发布包 manifest、P13.2 运维证据包、P13.3 文档化 readiness/evidence、coverage 分层和实施结果已完成。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -53,14 +53,16 @@
 | P13.1 发布包与部署模板当前切片 | completed | `work-zone/dev/plans/W-anp-P13.1-implementation-result.md`；manifest 证据 `work-zone/dev/evidence/p13.1/20260722-025435/`，`Failed=0; Warning=2`。 |
 | P13.2 运维可观测与例行任务问题清单 | completed | `work-zone/dev/plans/W-anp-P13.2-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P13.2 运维可观测与例行任务当前切片 | completed | `work-zone/dev/plans/W-anp-P13.2-implementation-result.md`；证据包 `work-zone/dev/evidence/p13.2/20260722-110447-Dev/`，`Steps=6; Failed=0`。 |
-| P13.3 文档化工具链接入准备问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P13.3-discussion-questions.md` |
+| P13.3 文档化工具链接入准备问题清单 | completed | `work-zone/dev/plans/W-anp-P13.3-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P13.3 文档化工具链接入准备当前切片 | completed | `work-zone/dev/plans/W-anp-P13.3-implementation-result.md`；证据包 `work-zone/dev/evidence/p13.3/20260722-114011/`，`Steps=6; Failed=0; Pending=0`。 |
+| P13.4 版本节奏与发布说明问题清单 | pending-user-review | `work-zone/dev/plans/W-anp-P13.4-discussion-questions.md` |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P13.2 运维脚本与公开运行手册已完成 | 已包含 `Test-PortalOperationsReadiness.ps1`、`Test-PortalLogMaintenance.ps1`、`New-PortalOperationsEvidencePackage.ps1`、运维手册和公开清单更新。 |
-| WorkZone | P13.2 当前切片已完成并推进到 P13.3 讨论节点 | 已包含 P13.2 盘点、实施结果、运维证据、P13.3 问题清单、状态和本轮日志。 |
+| 主仓库 | P13.3 文档化脚本与公开指南已完成 | 已包含 `Test-PortalDocumentationReadiness.ps1`、`New-PortalDocumentationEvidencePackage.ps1`、baseline JSON 输出增强、coverage 分层和公开指南更新。 |
+| WorkZone | P13.3 当前切片已完成并推进到 P13.4 讨论节点 | 已包含 P13.3 contract、实施结果、文档化证据、P13.4 问题清单、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
@@ -111,6 +113,10 @@
 | `dev/scripts/Test-PortalLogMaintenance.ps1 -OutputJson temp/p13.2/log-maintenance.json` | 条件式通过；`TotalChecks=5; FailedChecks=0; WarningChecks=1`，Warning 为旧 `.log` 历史文件。 |
 | `dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p13.2/20260722-110447-Dev/`，`Steps=6; Failed=0`。 |
 | `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；14 个公开文档已登记，无私有链接和敏感赋值。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1 -OutputJson temp/p13.3/documentation-readiness.json` | 通过；`TotalChecks=7; FailedChecks=0; WarningChecks=0; PendingChecks=0`。 |
+| `dev/scripts/Get-PortalDocumentationBaseline.ps1 -OutputJson temp/p13.3/documentation-baseline.json` | 通过；`.cs=296`、`.aspx=35`、`.ascx=21`，输出为 inventory 非质量分数。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1` | 通过；四份 XML 文档可解析，member counts 为 `1251/545/9/320`。 |
+| `dev/scripts/New-PortalDocumentationEvidencePackage.ps1` | 通过；证据包 `work-zone/dev/evidence/p13.3/20260722-114011/`，`Steps=6; Failed=0; Pending=0`。 |
 
 ## Known Residual Working Tree Items
 

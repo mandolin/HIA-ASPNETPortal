@@ -56,6 +56,13 @@
 - [ ] 未将来源未确认的 `src/Portal/js/`、`src/Portal/css/` 或生成文档目录作为正式输入提交。
 - [ ] 浏览器控制台无新增关键错误。
 
+## 文档化检查
+
+- [ ] `dev/scripts/Test-PortalDocumentationReadiness.ps1` 对公开文档化指南、coverage 分层、JSDoc pilot、XML 边界和 HIA 通知读取机制通过。
+- [ ] `dev/scripts/Get-PortalDocumentationBaseline.ps1 -OutputJson <证据路径>` 已记录已追踪源码的文档化 inventory。
+- [ ] 如需 P13.3 文档化证据，执行 `dev/scripts/New-PortalDocumentationEvidencePackage.ps1` 并确认 `Failed=0`。
+- [ ] `src/Documentation/`、`src/DoxyGen/`、`src/Portal.Components.Data/Documentation/`、`src/Portal/Documentation/` 和 `src/Portal.shfbproj` 未作为正式生成物提交。
+
 ## 发布前检查
 
 - [ ] `dev/scripts/Test-PortalPublicDocumentation.ps1` 对公开入口、相对文件链接和隐私边界通过。

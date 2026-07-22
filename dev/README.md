@@ -57,6 +57,15 @@ dev/scripts/Get-PortalHiaIntegrationInventory.ps1
 
 该脚本只读，不连接数据库、不加载 HIA 外部程序集，也不复制通知正文。
 
+## 文档化 readiness 与证据包
+
+```powershell
+dev/scripts/Test-PortalDocumentationReadiness.ps1
+dev/scripts/New-PortalDocumentationEvidencePackage.ps1
+```
+
+`Test-PortalDocumentationReadiness.ps1` 只读检查公开文档化指南、XML 文档边界、JSDoc pilot、生成目录边界、coverage 分层和 HIA 通知读取机制。`New-PortalDocumentationEvidencePackage.ps1` 编排文档化 readiness、baseline、公开文档门禁、XML 文档验证、JSDoc pilot 和 HIA 通知读取，证据默认写入 WorkZone。
+
 ## 业务身份门禁
 
 P12.2 起，员工号登录、用户资料、员工主数据和账号员工绑定的静态契约可用以下脚本检查：

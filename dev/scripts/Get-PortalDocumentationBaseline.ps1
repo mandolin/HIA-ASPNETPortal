@@ -1,6 +1,8 @@
 [CmdletBinding()]
 param(
-    [switch]$AsJson
+    [switch]$AsJson,
+
+    [string]$OutputJson
 )
 
 Set-StrictMode -Version Latest
@@ -141,6 +143,19 @@ $result = [pscustomobject][ordered]@{
         TrackedCssFiles = @(Get-TrackedFilesByExtension -Extension '.css')
         KnownDirectoryStates = $knownBoundaryPaths
     }
+}
+
+if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
+    $outputDirectory = Split-Path -Parent $OutputJson
+    if (-not [string]::IsNullOrWhiteSpace($outputDirectory) -and -not (Test-Path -LiteralPath $outputDirectory)) {
+        New-Item -ItemType Directory -Force -Path $outputDirectory | Out-Null
+    }
+
+    [System.IO.File]::WriteAllText(
+        $OutputJson,
+        (($result | ConvertTo-Json -Depth 8) + [Environment]::NewLine),
+        [System.Text.UTF8Encoding]::new($false))
+    Write-Host ('JSON: {0}' -f $OutputJson)
 }
 
 if ($AsJson) {
