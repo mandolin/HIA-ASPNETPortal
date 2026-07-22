@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P14` 已启动 |
-| 当前阶段 | `W-anp-P14.2` 待用户确认 |
-| 当前唯一下一步 | 等用户批注 `work-zone/dev/plans/W-anp-P14.2-discussion-questions.md`；若确认，则推进近真实发布演练脚本和 P14.2 evidence package。 |
-| 当前完成条件 | P14.1 目标环境矩阵、确认记录、只读 readiness/evidence 脚本和证据包已完成；真实环境缺口继续作为不阻塞 Pending。 |
+| 当前阶段 | `W-anp-P14.2` 近真实发布演练待实施 |
+| 当前唯一下一步 | 新增或编排 P14.2 近真实发布演练脚本，生成 FileSystem 发布包、manifest、IIS Express smoke、回滚 dry-run、P14.2 evidence package 和 `0.14.1` 内部 release entry。 |
+| 当前完成条件 | P14.2 待讨论问题已按推荐确认；真实 IIS/TLS/ACL、目标 SQL Server 和企业扫描继续作为不阻塞 Pending。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -65,14 +65,14 @@
 | P14.1 目标环境矩阵 | completed | `work-zone/dev/plans/W-anp-P14.1-target-environment-matrix.md`。 |
 | P14.1 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.1-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P14.1 readiness/evidence 当前切片 | completed | `dev/scripts/New-PortalTargetEnvironmentEvidencePackage.ps1`、`work-zone/dev/plans/W-anp-P14.1-implementation-result.md`；证据包 `work-zone/dev/evidence/p14.1/20260722-170700-Dev/`，只读门禁失败数 `0`。 |
-| P14.2 待讨论问题 | pending-user-review | `work-zone/dev/plans/W-anp-P14.2-discussion-questions.md` |
+| P14.2 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.2-discussion-questions.md`；用户确认全部按推荐推进。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P14.1 readiness 脚本已新增 | 主仓库新增 `dev/scripts/New-PortalTargetEnvironmentEvidencePackage.ps1`，并更新 `TASK_STATE.md`。 |
-| WorkZone | P14.1 已完成，P14.2 待确认 | 已包含 P14.1 实施结果、P14.1 证据包、P14.2 问题清单、状态和本轮日志。 |
+| 主仓库 | P14.2 确认后更新任务账本 | 主仓库暂无 P14.2 运行代码变更；当前仅更新 `TASK_STATE.md`。 |
+| WorkZone | P14.2 已确认，准备实施近真实发布演练 | 已包含 P14.2 确认记录、状态和本轮日志。 |
 
 ## Last Validation Evidence
 
