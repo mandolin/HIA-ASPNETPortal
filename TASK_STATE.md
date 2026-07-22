@@ -78,8 +78,8 @@
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `6f3653e Add P14.4 production hardening checks` | P14.4 生产前硬化脚本、Web.config 低风险硬化和任务账本更新已提交。 |
-| WorkZone | `decd9f6 Complete P14.4 production hardening slice` | P14.4 清单、实施结果、P14.5 问题清单、证据包和状态文档已提交。 |
+| 主仓库 | P14.5 收口账本已更新 | 当前 Git HEAD 已进入 P15.1 待讨论状态；P14.5 条件式收口和 P15 文档化专项入口已记录。 |
+| WorkZone | P14.5 收口与 P15 拆分已提交 | 当前 Git HEAD 已包含 P14 closeout、P14 validation summary、P15 输入、P15 总规划和扫描工具候选调研。 |
 
 ## Upcoming Planning Constraints
 
