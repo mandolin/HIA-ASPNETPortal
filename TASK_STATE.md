@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P14` 已启动 |
-| 当前阶段 | `W-anp-P14.4` 生产前硬化实施中 |
-| 当前唯一下一步 | 实施低风险源码配置硬化、新增生产前硬化只读复核脚本、生成生产硬化 checklist 和 P14.4 evidence package。 |
-| 当前完成条件 | P14.4 待讨论问题已按推荐确认；真实 IIS/TLS/ACL、machineKey 真实值、生产连接串和真实扫描复测继续作为不阻塞 Pending。 |
+| 当前阶段 | `W-anp-P14.5` 周期收口待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P14.5-discussion-questions.md`；若确认，则生成 P14 closeout、validation summary 和 P15 输入清单。 |
+| 当前完成条件 | P14.4 当前切片已完成；真实 IIS/TLS/ACL、machineKey 真实值、生产连接串和真实扫描复测继续作为不阻塞 Pending。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -70,13 +70,14 @@
 | P14.3 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.3-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P14.3 企业扫描 baseline 当前切片 | completed | `dev/scripts/New-PortalEnterpriseScanBaseline.ps1`、`work-zone/dev/plans/W-anp-P14.3-implementation-result.md`；Scan profile 证据包 `work-zone/dev/evidence/p14.3/20260722-183718-Scan/`，`Pass=13; Warning=3; Fail=0; PendingTargetEnvironment=6`。 |
 | P14.4 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.4-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P14.4 生产前硬化当前切片 | completed | `dev/scripts/Test-PortalProductionHardening.ps1`、`work-zone/dev/plans/W-anp-P14.4-implementation-result.md`；发布产物 Prod profile `Pass=14; Warning=3; Fail=0; PendingTargetEnvironment=4; Info=2`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `97baf3d` | P14.3 企业扫描 baseline 脚本已提交；当前准备实施 P14.4 低风险配置硬化和只读复核脚本。 |
-| WorkZone | `dfa87d0` | P14.3 当前切片已提交；当前准备实施 P14.4 硬化清单、证据包和状态文档。 |
+| 主仓库 | P14.4 当前切片待提交 | 已更新 `src/Portal/Web.config`，新增 `dev/scripts/Test-PortalProductionHardening.ps1`，并更新任务账本。 |
+| WorkZone | P14.4 当前切片待提交 | 已新增 P14.4 清单、实施结果、P14.5 问题清单、证据包和状态文档。 |
 
 ## Last Validation Evidence
 
@@ -139,6 +140,11 @@
 | P14.2 完工静态复核 | 通过；脚本解析、公开文档门禁、`diff --check`、UTF-8 无 BOM、尾随空白、旧 P14.2 状态词和敏感赋值扫描均通过；文本证据文件 `14` 个。 |
 | `dev/scripts/New-PortalEnterpriseScanBaseline.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p14.3/20260722-183657-Dev/`，`Pass=16; Warning=2; Fail=0; PendingTargetEnvironment=2`。 |
 | `dev/scripts/New-PortalEnterpriseScanBaseline.ps1 -Profile Scan` | 通过；证据包 `work-zone/dev/evidence/p14.3/20260722-183718-Scan/`，`Pass=13; Warning=3; Fail=0; PendingTargetEnvironment=6`，不声明真实扫描通过。 |
+| `dev/scripts/Test-PortalProductionHardening.ps1 -Profile Scan` | 通过；证据 `work-zone/dev/evidence/p14.4/production-hardening-scan.json`，`Pass=9; Warning=3; Fail=0; PendingTargetEnvironment=8; Info=3`。 |
+| `dev/scripts/Publish-PortalFileSystem.ps1 -Configuration Release -PublishPath temp/publish/P14.4-Release-20260722-2048` | 通过；发布前后 readiness 均为 `FailedChecks=0; WarningChecks=0`。 |
+| `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath temp/publish/P14.4-Release-20260722-2048 -OutputRoot work-zone/dev/evidence/p14.4/release-manifest` | 通过；`Files=155; Failed=0; Warning=2`。 |
+| `dev/scripts/Test-PortalProductionHardening.ps1 -Profile Prod -PublishedPath temp/publish/P14.4-Release-20260722-2048` | 通过；证据 `work-zone/dev/evidence/p14.4/production-hardening-prod-publish.json`，`Pass=14; Warning=3; Fail=0; PendingTargetEnvironment=4; Info=2`。 |
+| `dev/scripts/Test-PortalComplianceBaseline.ps1 -Profile Dev` | 通过；`Pass=26; Warning=1; Fail=0; Info=2`，唯一 Warning 为旧 MD5 兼容路径。 |
 
 ## Known Residual Working Tree Items
 
