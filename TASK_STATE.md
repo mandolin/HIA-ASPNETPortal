@@ -16,8 +16,8 @@
 | --- | --- |
 | 当前大周期 | `W-anp-P14` 已启动 |
 | 当前阶段 | `W-anp-P14.5` 周期收口待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P14.5-discussion-questions.md`；若确认，则生成 P14 closeout、validation summary 和 P15 输入清单。 |
-| 当前完成条件 | P14.4 当前切片已完成；真实 IIS/TLS/ACL、machineKey 真实值、生产连接串和真实扫描复测继续作为不阻塞 Pending。 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P14.5-discussion-questions.md`；若确认，则生成 P14 closeout、validation summary 和 P15 输入清单，并把代码梳理、注释完善和文档化专项纳入 P14 后的周期编排。 |
+| 当前完成条件 | P14.4 当前切片已完成；真实 IIS/TLS/ACL、machineKey 真实值、生产连接串和真实扫描复测继续作为不阻塞 Pending；P14 后新增 1-2 个代码梳理/注释/文档化专项周期作为候选插入项。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -76,8 +76,14 @@
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P14.4 当前切片待提交 | 已更新 `src/Portal/Web.config`，新增 `dev/scripts/Test-PortalProductionHardening.ps1`，并更新任务账本。 |
-| WorkZone | P14.4 当前切片待提交 | 已新增 P14.4 清单、实施结果、P14.5 问题清单、证据包和状态文档。 |
+| 主仓库 | `6f3653e Add P14.4 production hardening checks` | P14.4 生产前硬化脚本、Web.config 低风险硬化和任务账本更新已提交。 |
+| WorkZone | `decd9f6 Complete P14.4 production hardening slice` | P14.4 清单、实施结果、P14.5 问题清单、证据包和状态文档已提交。 |
+
+## Upcoming Planning Constraints
+
+| 事项 | 状态 | 处理原则 |
+| --- | --- | --- |
+| 代码梳理、注释完善与文档化专项 | pending-planning | 用户要求后续安排 1-2 个专门周期。推荐在 P14 条件式收口后插入；若真实企业扫描/完整合规条款尚未到位，则优先作为 P15/P16；若真实扫描输入先到，则扫描整改先做，文档化专项紧随其后。 |
 
 ## Last Validation Evidence
 
