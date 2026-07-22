@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P14` 已启动 |
-| 当前阶段 | `W-anp-P14.4` 生产前硬化待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P14.4-discussion-questions.md`；若确认，则进入生产前硬化清单、只读复核脚本和低风险配置硬化评估。 |
-| 当前完成条件 | P14.3 已完成当前切片；真实企业扫描报告、真实复测和真实目标环境继续作为不阻塞 Pending。 |
+| 当前阶段 | `W-anp-P14.4` 生产前硬化实施中 |
+| 当前唯一下一步 | 实施低风险源码配置硬化、新增生产前硬化只读复核脚本、生成生产硬化 checklist 和 P14.4 evidence package。 |
+| 当前完成条件 | P14.4 待讨论问题已按推荐确认；真实 IIS/TLS/ACL、machineKey 真实值、生产连接串和真实扫描复测继续作为不阻塞 Pending。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -69,13 +69,14 @@
 | P14.2 近真实发布演练当前切片 | completed | `dev/scripts/New-PortalNearTargetReleaseRehearsal.ps1`、`work-zone/dev/plans/W-anp-P14.2-implementation-result.md`；证据包 `work-zone/dev/evidence/p14.2/20260722-173318-Dev/`，必需步骤失败数 `0`，可选步骤失败数 `0`，内部 release entry `0.14.1`。 |
 | P14.3 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.3-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P14.3 企业扫描 baseline 当前切片 | completed | `dev/scripts/New-PortalEnterpriseScanBaseline.ps1`、`work-zone/dev/plans/W-anp-P14.3-implementation-result.md`；Scan profile 证据包 `work-zone/dev/evidence/p14.3/20260722-183718-Scan/`，`Pass=13; Warning=3; Fail=0; PendingTargetEnvironment=6`。 |
+| P14.4 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.4-discussion-questions.md`；用户确认全部按推荐推进。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P14.3 企业扫描 baseline 脚本待提交 | 新增 `dev/scripts/New-PortalEnterpriseScanBaseline.ps1`，并更新任务账本。 |
-| WorkZone | P14.3 当前切片待提交 | 新增扫描模板、状态模型、脱敏目录说明、P14.3 证据包、实施结果和 P14.4 问题清单。 |
+| 主仓库 | `97baf3d` | P14.3 企业扫描 baseline 脚本已提交；当前准备实施 P14.4 低风险配置硬化和只读复核脚本。 |
+| WorkZone | `dfa87d0` | P14.3 当前切片已提交；当前准备实施 P14.4 硬化清单、证据包和状态文档。 |
 
 ## Last Validation Evidence
 
