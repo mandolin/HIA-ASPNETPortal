@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P14` 已启动 |
-| 当前阶段 | `W-anp-P14.3` 企业扫描模板与 baseline 待实施 |
-| 当前唯一下一步 | 新增企业扫描登记模板、状态机/严重级别说明、只读 Web.config/security header baseline 脚本和 P14.3 evidence package。 |
-| 当前完成条件 | P14.3 待讨论问题已按推荐确认；真实企业扫描报告、真实复测和真实目标环境继续作为不阻塞 Pending。 |
+| 当前阶段 | `W-anp-P14.4` 生产前硬化待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P14.4-discussion-questions.md`；若确认，则进入生产前硬化清单、只读复核脚本和低风险配置硬化评估。 |
+| 当前完成条件 | P14.3 已完成当前切片；真实企业扫描报告、真实复测和真实目标环境继续作为不阻塞 Pending。 |
 | 最近状态更新时间 | 2026-07-22 |
 
 ## Recent Completed Items
@@ -68,13 +68,14 @@
 | P14.2 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.2-discussion-questions.md`；用户确认全部按推荐推进。 |
 | P14.2 近真实发布演练当前切片 | completed | `dev/scripts/New-PortalNearTargetReleaseRehearsal.ps1`、`work-zone/dev/plans/W-anp-P14.2-implementation-result.md`；证据包 `work-zone/dev/evidence/p14.2/20260722-173318-Dev/`，必需步骤失败数 `0`，可选步骤失败数 `0`，内部 release entry `0.14.1`。 |
 | P14.3 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P14.3-discussion-questions.md`；用户确认全部按推荐推进。 |
+| P14.3 企业扫描 baseline 当前切片 | completed | `dev/scripts/New-PortalEnterpriseScanBaseline.ps1`、`work-zone/dev/plans/W-anp-P14.3-implementation-result.md`；Scan profile 证据包 `work-zone/dev/evidence/p14.3/20260722-183718-Scan/`，`Pass=13; Warning=3; Fail=0; PendingTargetEnvironment=6`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P14.3 确认后更新任务账本 | 主仓库暂无 P14.3 运行代码变更；当前仅更新 `TASK_STATE.md`。 |
-| WorkZone | P14.3 已确认，准备实施扫描模板与 baseline | 已包含 P14.3 确认记录、状态和本轮日志。 |
+| 主仓库 | P14.3 企业扫描 baseline 脚本待提交 | 新增 `dev/scripts/New-PortalEnterpriseScanBaseline.ps1`，并更新任务账本。 |
+| WorkZone | P14.3 当前切片待提交 | 新增扫描模板、状态模型、脱敏目录说明、P14.3 证据包、实施结果和 P14.4 问题清单。 |
 
 ## Last Validation Evidence
 
@@ -135,6 +136,8 @@
 | `dev/scripts/New-PortalTargetEnvironmentEvidencePackage.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p14.1/20260722-170700-Dev/`，5 个只读门禁全部 `Passed`，`FailedStepCount=0`，`ReadyForP14_2NearTargetDrill=True`，`RealProductionEvidenceClaimed=False`。 |
 | `dev/scripts/New-PortalNearTargetReleaseRehearsal.ps1 -Profile Dev -Configuration Release -Port 40001` | 通过；证据包 `work-zone/dev/evidence/p14.2/20260722-173318-Dev/`，必需步骤 `6`、可选步骤 `2`，失败数均为 `0`；manifest `Files=155; Failed=0; Warning=2`；`RealProductionEvidenceClaimed=False`。 |
 | P14.2 完工静态复核 | 通过；脚本解析、公开文档门禁、`diff --check`、UTF-8 无 BOM、尾随空白、旧 P14.2 状态词和敏感赋值扫描均通过；文本证据文件 `14` 个。 |
+| `dev/scripts/New-PortalEnterpriseScanBaseline.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p14.3/20260722-183657-Dev/`，`Pass=16; Warning=2; Fail=0; PendingTargetEnvironment=2`。 |
+| `dev/scripts/New-PortalEnterpriseScanBaseline.ps1 -Profile Scan` | 通过；证据包 `work-zone/dev/evidence/p14.3/20260722-183718-Scan/`，`Pass=13; Warning=3; Fail=0; PendingTargetEnvironment=6`，不声明真实扫描通过。 |
 
 ## Known Residual Working Tree Items
 
