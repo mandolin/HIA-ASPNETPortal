@@ -9,50 +9,53 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：员工资料更正请求业务模块样板。
-    ///
-    /// English: Business-module sample for employee-profile correction requests.
+    /// <lang>
+    ///   <zh-CN>员工资料更正请求业务模块样板。</zh-CN>
+    ///   <en>Business-module sample for employee-profile correction requests.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：第一版只允许已登录且拥有 Active 员工绑定的用户提交低敏字段级文本更正请求；请求进入后台处理页，
-    /// 本模块不直接修改员工主数据。
-    ///
-    /// English: The first version allows only signed-in users with an active employee binding to submit
-    /// low-sensitivity field-level text correction requests. Requests go to an administration page; this module does
-    /// not directly modify employee master data.
+    /// <lang>
+    ///   <zh-CN>第一版只允许已登录且拥有 Active 员工绑定的用户提交低敏字段级文本更正请求；请求进入后台处理页， 本模块不直接修改员工主数据。</zh-CN>
+    ///   <en>The first version allows only signed-in users with an active employee binding to submit low-sensitivity field-level text correction requests. Requests go to an administration page; this module does not directly modify employee master data.</en>
+    /// </lang>
     /// </remarks>
     public partial class EmployeeProfileCorrectionRequest : PortalModuleControl<EmployeeProfileCorrectionRequest>
     {
         private const int RecentRequestLimit = 10;
 
         /// <summary>
-        /// 中文：用户数据访问服务，用于把当前登录名解析为门户用户标识。
-        ///
-        /// English: User data service used to resolve the current sign-in name to a Portal user identifier.
+        /// <lang>
+        ///   <zh-CN>用户数据访问服务，用于把当前登录名解析为门户用户标识。</zh-CN>
+        ///   <en>User data service used to resolve the current sign-in name to a Portal user identifier.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IUsersDb UsersDb { private get; set; }
 
         /// <summary>
-        /// 中文：员工资料更正请求模块数据访问服务。
-        ///
-        /// English: Employee-profile correction-request module data service.
+        /// <lang>
+        ///   <zh-CN>员工资料更正请求模块数据访问服务。</zh-CN>
+        ///   <en>Employee-profile correction-request module data service.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IEmployeeProfileCorrectionRequestDb CorrectionRequestDb { private get; set; }
 
         /// <summary>
-        /// 中文：轻量待办数据服务，用于把资料更正请求同步为后台待办。
-        ///
-        /// English: Lightweight work-item data service used to mirror correction requests into administration work items.
+        /// <lang>
+        ///   <zh-CN>轻量待办数据服务，用于把资料更正请求同步为后台待办。</zh-CN>
+        ///   <en>Lightweight work-item data service used to mirror correction requests into administration work items.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IPortalWorkItemDb WorkItemDb { private get; set; }
 
         /// <summary>
-        /// 中文：初始化员工资料更正请求模块。
-        ///
-        /// English: Initializes the employee-profile correction-request module.
+        /// <lang>
+        ///   <zh-CN>初始化员工资料更正请求模块。</zh-CN>
+        ///   <en>Initializes the employee-profile correction-request module.</en>
+        /// </lang>
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -64,9 +67,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：提交当前绑定员工的资料更正请求。
-        ///
-        /// English: Submits a profile correction request for the current bound employee.
+        /// <lang>
+        ///   <zh-CN>提交当前绑定员工的资料更正请求。</zh-CN>
+        ///   <en>Submits a profile correction request for the current bound employee.</en>
+        /// </lang>
         /// </summary>
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
@@ -227,7 +231,10 @@ namespace ASPNET.StarterKit.Portal
 
         private void TryEnsureWorkItem(long requestId, int employeeId, string fieldName)
         {
-            // 中文 / English: 待办写入只补充后台处理入口，不能阻断用户已经成功提交的更正请求。
+            // <lang>
+            //   <zh-CN>待办写入只补充后台处理入口，不能阻断用户已经成功提交的资料更正请求。</zh-CN>
+            //   <en>Work-item writes only add an administration entry point and must not block an already submitted profile-correction request.</en>
+            // </lang>
             if (WorkItemDb == null || requestId <= 0)
             {
                 return;
@@ -291,9 +298,10 @@ namespace ASPNET.StarterKit.Portal
     }
 
     /// <summary>
-    /// 中文：员工资料更正请求模块的最近请求展示行。
-    ///
-    /// English: Recent-request display row for the employee-profile correction-request module.
+    /// <lang>
+    ///   <zh-CN>员工资料更正请求模块的最近请求展示行。</zh-CN>
+    ///   <en>Recent-request display row for the employee-profile correction-request module.</en>
+    /// </lang>
     /// </summary>
     public sealed class EmployeeProfileCorrectionRecentRequestRow
     {
@@ -306,19 +314,44 @@ namespace ASPNET.StarterKit.Portal
             RequestStatus = request.RequestStatus;
         }
 
-        /// <summary>中文：提交时间文本。English: Submission time text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交时间文本。</zh-CN>
+        ///   <en>Submission time text.</en>
+        /// </lang>
+        /// </summary>
         public string SubmittedUtcText { get; private set; }
 
-        /// <summary>中文：字段名。English: Field name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>字段名。</zh-CN>
+        ///   <en>Field name.</en>
+        /// </lang>
+        /// </summary>
         public string FieldName { get; private set; }
 
-        /// <summary>中文：当前值快照。English: Current-value snapshot.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前值快照。</zh-CN>
+        ///   <en>Current-value snapshot.</en>
+        /// </lang>
+        /// </summary>
         public string CurrentValueSnapshot { get; private set; }
 
-        /// <summary>中文：建议值。English: Proposed value.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>建议值。</zh-CN>
+        ///   <en>Proposed value.</en>
+        /// </lang>
+        /// </summary>
         public string ProposedValue { get; private set; }
 
-        /// <summary>中文：请求状态。English: Request status.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请求状态。</zh-CN>
+        ///   <en>Request status.</en>
+        /// </lang>
+        /// </summary>
         public string RequestStatus { get; private set; }
     }
 }

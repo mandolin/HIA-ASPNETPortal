@@ -9,32 +9,35 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：轻量待办后台只读列表页。
-    ///
-    /// English: Read-only administration list page for lightweight work items.
+    /// <lang>
+    ///   <zh-CN>轻量待办后台只读列表页。</zh-CN>
+    ///   <en>Read-only administration list page for lightweight work items.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：P12.3 第一版只提供集中查看和状态筛选，不执行转办、加签、会签或通知发送。
-    ///
-    /// English: The first P12.3 version provides centralized viewing and status filtering only. It does not perform
-    /// delegation, countersigning, co-signing, or notification delivery.
+    /// <lang>
+    ///   <zh-CN>P12.3 第一版只提供集中查看和状态筛选，不执行转办、加签、会签或通知发送。</zh-CN>
+    ///   <en>The first P12.3 version provides centralized viewing and status filtering only. It does not perform delegation, countersigning, co-signing, or notification delivery.</en>
+    /// </lang>
     /// </remarks>
     public partial class WorkItems : PortalPage<WorkItems>
     {
         private const int PageSize = 50;
 
         /// <summary>
-        /// 中文：轻量待办数据服务。
-        ///
-        /// English: Lightweight work-item data service.
+        /// <lang>
+        ///   <zh-CN>轻量待办数据服务。</zh-CN>
+        ///   <en>Lightweight work-item data service.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IPortalWorkItemDb WorkItemDb { private get; set; }
 
         /// <summary>
-        /// 中文：初始化待办后台页。
-        ///
-        /// English: Initializes the work-item administration page.
+        /// <lang>
+        ///   <zh-CN>初始化待办后台页。</zh-CN>
+        ///   <en>Initializes the work-item administration page.</en>
+        /// </lang>
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -54,9 +57,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：按当前筛选条件重新读取待办列表。
-        ///
-        /// English: Reloads work items using the current filter.
+        /// <lang>
+        ///   <zh-CN>按当前筛选条件重新读取待办列表。</zh-CN>
+        ///   <en>Reloads work items using the current filter.</en>
+        /// </lang>
         /// </summary>
         protected void SearchButton_Click(object sender, EventArgs e)
         {
@@ -117,9 +121,10 @@ namespace ASPNET.StarterKit.Portal
     }
 
     /// <summary>
-    /// 中文：待办后台展示行。
-    ///
-    /// English: Administration display row for a work item.
+    /// <lang>
+    ///   <zh-CN>待办后台展示行。</zh-CN>
+    ///   <en>Administration display row for a work item.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalWorkItemAdminRow
     {
@@ -139,34 +144,84 @@ namespace ASPNET.StarterKit.Portal
                 : "(open)";
         }
 
-        /// <summary>中文：待办标识。English: Work-item identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>待办标识。</zh-CN>
+        ///   <en>Work-item identifier.</en>
+        /// </lang>
+        /// </summary>
         public long WorkItemId { get; private set; }
 
-        /// <summary>中文：待办状态。English: Work-item status.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>待办状态。</zh-CN>
+        ///   <en>Work-item status.</en>
+        /// </lang>
+        /// </summary>
         public string WorkItemStatus { get; private set; }
 
-        /// <summary>中文：业务对象类型。English: Business-object kind.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>业务对象类型。</zh-CN>
+        ///   <en>Business-object kind.</en>
+        /// </lang>
+        /// </summary>
         public string BusinessKind { get; private set; }
 
-        /// <summary>中文：业务对象标识。English: Business-object identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>业务对象标识。</zh-CN>
+        ///   <en>Business-object identifier.</en>
+        /// </lang>
+        /// </summary>
         public string BusinessId { get; private set; }
 
-        /// <summary>中文：业务入口链接。English: Business entry URL.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>业务入口链接。</zh-CN>
+        ///   <en>Business entry URL.</en>
+        /// </lang>
+        /// </summary>
         public string BusinessUrl { get; private set; }
 
-        /// <summary>中文：标题。English: Title.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>标题。</zh-CN>
+        ///   <en>Title.</en>
+        /// </lang>
+        /// </summary>
         public string Title { get; private set; }
 
-        /// <summary>中文：摘要。English: Summary.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>摘要。</zh-CN>
+        ///   <en>Summary.</en>
+        /// </lang>
+        /// </summary>
         public string Summary { get; private set; }
 
-        /// <summary>中文：分派信息。English: Assignment text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>分派信息。</zh-CN>
+        ///   <en>Assignment text.</en>
+        /// </lang>
+        /// </summary>
         public string AssignedText { get; private set; }
 
-        /// <summary>中文：创建 UTC 文本。English: Creation UTC text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建 UTC 文本。</zh-CN>
+        ///   <en>Creation UTC text.</en>
+        /// </lang>
+        /// </summary>
         public string CreatedUtcText { get; private set; }
 
-        /// <summary>中文：完成 UTC 文本。English: Completion UTC text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>完成 UTC 文本。</zh-CN>
+        ///   <en>Completion UTC text.</en>
+        /// </lang>
+        /// </summary>
         public string CompletedUtcText { get; private set; }
 
         private static string GetAssignedText(PortalWorkItemInfo item)

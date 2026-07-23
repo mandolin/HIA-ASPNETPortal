@@ -8,17 +8,16 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：旧后台用户列表和显式创建入口。
-    ///
-    /// English: Legacy administration user list and explicit user-creation entry point.
+    /// <lang>
+    ///   <zh-CN>旧后台用户列表和显式创建入口。</zh-CN>
+    ///   <en>Legacy administration user list and explicit user-creation entry point.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：本控件要求 <c>Admins</c> 角色。新增用户仍使用既有的占位资料再进入编辑页，
-    /// 但写入只会发生在管理员点击后的 Web Forms POST，不再由访问编辑地址的 GET 触发。
-    ///
-    /// English: This control requires the <c>Admins</c> role. New users still begin with a legacy placeholder
-    /// profile before entering the edit page, but the write occurs only from an administrator-initiated Web Forms
-    /// POST and no longer from a GET to the edit URL.
+    /// <lang>
+    ///   <zh-CN>本控件要求 <c>Admins</c> 角色。新增用户仍使用既有的占位资料再进入编辑页， 但写入只会发生在管理员点击后的 Web Forms POST，不再由访问编辑地址的 GET 触发。</zh-CN>
+    ///   <en>This control requires the <c>Admins</c> role. New users still begin with a legacy placeholder profile before entering the edit page, but the write occurs only from an administrator-initiated Web Forms POST and no longer from a GET to the edit URL.</en>
+    /// </lang>
     /// </remarks>
     public partial class Users : PortalModuleControl<Users>
     {
@@ -27,29 +26,41 @@ namespace ASPNET.StarterKit.Portal
         private int tabIndex;
 
         /// <summary>
-        /// 中文：用户数据访问依赖。
-        ///
-        /// English: User data-access dependency.
+        /// <lang>
+        ///   <zh-CN>用户数据访问依赖。</zh-CN>
+        ///   <en>User data-access dependency.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IUsersDb UsersDB { private get; set; }
 
         /// <summary>
-        /// 中文：角色和可选用户查询依赖。
-        ///
-        /// English: Role and selectable-user query dependency.
+        /// <lang>
+        ///   <zh-CN>角色和可选用户查询依赖。</zh-CN>
+        ///   <en>Role and selectable-user query dependency.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IRolesDb RolesDB { private get; set; }
 
         /// <summary>
-        /// 中文：执行管理员授权、读取可选导航参数并在首次请求绑定用户列表。
-        ///
-        /// English: Performs administrator authorization, reads optional navigation parameters, and binds the user
-        /// list on the initial request.
+        /// <lang>
+        ///   <zh-CN>执行管理员授权、读取可选导航参数并在首次请求绑定用户列表。</zh-CN>
+        ///   <en>Performs administrator authorization, reads optional navigation parameters, and binds the user list on the initial request.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView) || !TryReadNavigationParameters())
@@ -64,12 +75,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：删除当前选择的用户并记录不含资料内容的运营审计。
-        ///
-        /// English: Deletes the selected user and records an operations audit without profile content.
+        /// <lang>
+        ///   <zh-CN>删除当前选择的用户并记录不含资料内容的运营审计。</zh-CN>
+        ///   <en>Deletes the selected user and records an operations audit without profile content.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void btn_DeleteUser_Click(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) || !TryReadNavigationParameters())
@@ -107,12 +129,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：按当前选择的规范用户标识进入资料编辑页。
-        ///
-        /// English: Opens the profile-editing page using the canonical identifier of the currently selected user.
+        /// <lang>
+        ///   <zh-CN>按当前选择的规范用户标识进入资料编辑页。</zh-CN>
+        ///   <en>Opens the profile-editing page using the canonical identifier of the currently selected user.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void EditUser_Click(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersView) || !TryReadNavigationParameters())
@@ -130,13 +163,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：在管理员显式 POST 中创建临时用户，并转入现有资料编辑流程。
-        ///
-        /// English: Creates a placeholder user during an explicit administrator POST, then enters the existing
-        /// profile-editing flow.
+        /// <lang>
+        ///   <zh-CN>在管理员显式 POST 中创建临时用户，并转入现有资料编辑流程。</zh-CN>
+        ///   <en>Creates a placeholder user during an explicit administrator POST, then enters the existing profile-editing flow.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void AddUser_Click(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) || !TryReadNavigationParameters())

@@ -7,16 +7,16 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：旧门户角色成员关系管理页面。
-    ///
-    /// English: Legacy Portal role-membership administration page.
+    /// <lang>
+    ///   <zh-CN>旧门户角色成员关系管理页面。</zh-CN>
+    ///   <en>Legacy Portal role-membership administration page.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：角色名称始终从当前门户的 roleId 读取，不信任 URL 中的显示名称。角色成员增删不会立即撤销
-    /// 目标用户的既有角色 Cookie。
-    ///
-    /// English: The role name is always read from the current Portal roleId and never trusted from a URL display
-    /// value. Adding or removing membership does not immediately revoke the target user's existing role cookie.
+    /// <lang>
+    ///   <zh-CN>角色名称始终从当前门户的 roleId 读取，不信任 URL 中的显示名称。角色成员增删不会立即撤销 目标用户的既有角色 Cookie。</zh-CN>
+    ///   <en>The role name is always read from the current Portal roleId and never trusted from a URL display value. Adding or removing membership does not immediately revoke the target user's existing role cookie.</en>
+    /// </lang>
     /// </remarks>
     public partial class SecurityRoles : PortalPage<SecurityRoles>
     {
@@ -25,21 +25,42 @@ namespace ASPNET.StarterKit.Portal
         private int tabIndex;
         private IRoleItem currentRole;
 
-        /// <summary>中文：用户数据访问依赖。English: User data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户数据访问依赖。</zh-CN>
+        ///   <en>User data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public IUsersDb UsersDB { private get; set; }
 
-        /// <summary>中文：角色和成员关系数据访问依赖。English: Role and membership data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>角色和成员关系数据访问依赖。</zh-CN>
+        ///   <en>Role and membership data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public IRolesDb RolesDB { private get; set; }
 
         /// <summary>
-        /// 中文：授权、验证当前门户角色并在首次请求绑定成员列表。
-        ///
-        /// English: Authorizes, validates the current-Portal role, and binds membership lists on the initial request.
+        /// <lang>
+        ///   <zh-CN>授权、验证当前门户角色并在首次请求绑定成员列表。</zh-CN>
+        ///   <en>Authorizes, validates the current-Portal role, and binds membership lists on the initial request.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -54,12 +75,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：返回门户后台主页，不额外写入角色关系。
-        ///
-        /// English: Returns to the Portal administration home without writing additional role relationships.
+        /// <lang>
+        ///   <zh-CN>返回门户后台主页，不额外写入角色关系。</zh-CN>
+        ///   <en>Returns to the Portal administration home without writing additional role relationships.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Save_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -71,12 +103,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：将选择的既有用户加入当前角色。
-        ///
-        /// English: Adds the selected existing user to the current role.
+        /// <lang>
+        ///   <zh-CN>将选择的既有用户加入当前角色。</zh-CN>
+        ///   <en>Adds the selected existing user to the current role.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void AddUser_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -122,12 +165,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：从当前角色移除选择的成员。
-        ///
-        /// English: Removes the selected member from the current role.
+        /// <lang>
+        ///   <zh-CN>从当前角色移除选择的成员。</zh-CN>
+        ///   <en>Removes the selected member from the current role.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：包含命令和 DataList 项索引的事件数据。English: Event data containing the command and DataList item index.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>包含命令和 DataList 项索引的事件数据。</zh-CN>
+        ///   <en>Event data containing the command and DataList item index.</en>
+        /// </l>
+        /// </param>
         protected void usersInRole_ItemCommand(object sender, DataListCommandEventArgs e)
         {
             if (!TryInitializeRequest() || !string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
