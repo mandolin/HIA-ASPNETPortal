@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 第八批已完成 |
-| 当前唯一下一步 | 继续 P16.1 第九批：`WorkItems.aspx.cs`、`Users.ascx.cs`、`PortalRegistrationOptions.cs`、`EmployeeProfileCorrectionRequest.ascx.cs`、`IUserProfileInfo.cs`。 |
-| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前八批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
+| 当前阶段 | `W-anp-P16.1` 第十批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第十一批：`EmployeeDirectoryDb.cs`、`EmployeeItem.cs`、`Roles.ascx.cs`、`ModulesDb.cs`、`EmployeeDirectoryWriteResult.cs`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前十批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
 | 最近状态更新时间 | 2026-07-24 |
 
 ## Recent Completed Items
@@ -87,13 +87,15 @@
 | P16.1 第六批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-sixth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第六批 5 个文件旧双语模式清零，`LegacyBilingualFormat` 降至 `1672`。 |
 | P16.1 第七批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-seventh-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第七批 5 个文件旧双语模式清零，`LegacyBilingualFormat` 降至 `1534`。 |
 | P16.1 第八批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-eighth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第八批 5 个文件旧双语模式清零，补 1 个待办旁路代码块 `<lang>` 注释，`LegacyBilingualFormat` 降至 `1403`。 |
+| P16.1 第九批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-ninth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第九批 5 个文件旧双语模式清零，补 1 个待办旁路代码块 `<lang>` 注释，`LegacyBilingualFormat` 降至 `1287`。 |
+| P16.1 第十批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-tenth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第十批 5 个文件旧双语模式清零，手工补强 `Discussion.ascx.cs` 展开/折叠和回复绑定流程块注释，`LegacyBilingualFormat` 降至 `1180`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `9e7d87d` 已推送；第六/第七/第八批源码已入库 | P16.1 第六至第八批源码迁移已提交推送，下一步进入第九批；本账本同步随后单独入库。 |
-| WorkZone | `d60a209` 已推送；第六/第七/第八批资料已入库 | 已记录第六批 `comment-debt-inventory-20260724-0351.*`、第七批 `comment-debt-inventory-20260724-0404.*`、第八批 `comment-debt-inventory-20260724-0412.*` 及对应阶段清单和日志。 |
+| 主仓库 | `8df8fa0` 已推送；第九/第十批源码已提交 | P16.1 第九、第十批源码迁移已提交推送；任务账本正在同步，下一步进入第十一批。 |
+| WorkZone | `066594f` 已推送；第九/第十批清单、进度、结果、证据和上一轮日志已提交 | 已提交推送第九批 `comment-debt-inventory-20260724-0433.*`、第十批 `comment-debt-inventory-20260724-0442.*` 和对应批次文档；本轮第十一批日志仍在记录中。 |
 
 ## Upcoming Planning Constraints
 
@@ -217,6 +219,16 @@
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=99`。 |
 | `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1260`，保留既有 `CS1591` 历史警告。 |
 | `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260724-0412.*`，`LegacyBilingualFormat=1403`，`MissingNodeDocumentation=302`。 |
+| P16.1 第九批旧格式扫描 | 通过；第九批 5 个文件旧 `中文：` / `English:` 模式为 `0`。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；16 个公开文档已登记，失败数 `0`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=101`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1260`，保留既有 `CS1591` 历史警告。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260724-0433.*`，`LegacyBilingualFormat=1287`，`MissingNodeDocumentation=302`。 |
+| P16.1 第十批旧格式扫描 | 通过；第十批 5 个文件旧 `中文：` / `English:` 模式为 `0`。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；16 个公开文档已登记，失败数 `0`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=102`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1260`，保留既有 `CS1591` 历史警告。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260724-0442.*`，`LegacyBilingualFormat=1180`，`MissingNodeDocumentation=302`。 |
 
 ## Known Residual Working Tree Items
 
