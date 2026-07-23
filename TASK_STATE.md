@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 第二批已完成 |
-| 当前唯一下一步 | 继续 P16.1 第三批：`PortalPasswordPolicy.cs`、`PortalRuntimeSettings.cs`、`PortalSecurity.cs`、`PortalNavigationPolicy.cs`、`PortalSystemSettingsStore.cs`。 |
-| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前两批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
+| 当前阶段 | `W-anp-P16.1` 第三批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第四批：`PortalAuthorization.cs`、`Register.aspx.cs`、`IRolesDb.cs`、`PortalSettings.cs`、`PortalSettingKeys.cs`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前三批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
 | 最近状态更新时间 | 2026-07-24 |
 
 ## Recent Completed Items
@@ -81,13 +81,14 @@
 | P16 规划入口 | completed | `work-zone/dev/plans/W-anp-P16.md`、`work-zone/dev/plans/W-anp-P16-breakdown.md`、`work-zone/dev/plans/W-anp-P16.1-discussion-questions.md`。 |
 | P16.1 第一批注释迁移 | completed | `dev/scripts/Convert-PortalLegacyBilingualComments.ps1`、`work-zone/dev/plans/W-anp-P16.1-first-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；首批 5 个文件旧双语模式清零，`LegacyBilingualFormat` 降至 `2740`。 |
 | P16.1 第二批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-second-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二批 5 个文件旧双语模式清零，`LegacyBilingualFormat` 降至 `2452`。 |
+| P16.1 第三批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-third-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三批 5 个文件旧双语模式清零，`LegacyBilingualFormat` 降至 `2211`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P16.1 第二批源码已修改，尚未提交 | 已完成 P16.1 第二批注释迁移，下一步进入第三批或先提交本批。 |
-| WorkZone | P16.1 第二批清单、进度、结果、证据和日志已修改，尚未提交 | 已记录第二批结果和 `comment-debt-inventory-20260724-0221.*`。 |
+| 主仓库 | P16.1 第三批源码与任务账本已提交并推送 | 已完成 P16.1 第三批注释迁移，下一步进入第四批。 |
+| WorkZone | P16.1 第三批清单、进度、结果、证据和日志已提交并推送 | 已记录第三批结果和 `comment-debt-inventory-20260724-0303.*`。 |
 
 ## Upcoming Planning Constraints
 
@@ -181,6 +182,11 @@
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`。 |
 | `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；保留既有 `CS1591` 和 `Roles.ModulesConfig` 警告。 |
 | `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260724-0221.*`，`LegacyBilingualFormat=2452`。 |
+| P16.1 第三批旧格式扫描 | 通过；第三批 5 个文件旧 `中文：` / `English:` 模式为 `0`，普通中文-only 代码块注释为 `0`。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；16 个公开文档已登记，失败数 `0`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；保留既有 `CS1591` 和 `Roles.ModulesConfig` 警告。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260724-0303.*`，`LegacyBilingualFormat=2211`。 |
 
 ## Known Residual Working Tree Items
 

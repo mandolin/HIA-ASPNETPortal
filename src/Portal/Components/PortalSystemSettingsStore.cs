@@ -8,21 +8,43 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：数据库运行级设置读取结果。
-    ///
-    /// English: Database runtime-setting read result.
+    /// <lang>
+    ///   <zh-CN>数据库运行级设置读取结果。</zh-CN>
+    ///   <en>Database runtime-setting read result.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalSystemSettingReadResult
     {
         /// <summary>
-        /// 中文：创建数据库运行级设置读取结果。
-        ///
-        /// English: Creates a database runtime-setting read result.
+        /// <lang>
+        ///   <zh-CN>创建数据库运行级设置读取结果。</zh-CN>
+        ///   <en>Creates a database runtime-setting read result.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="isAvailable">中文：设置表是否可用。English: Whether the settings table is available.</param>
-        /// <param name="isFound">中文：是否找到对应覆盖值。English: Whether the matching override was found.</param>
-        /// <param name="value">中文：原始覆盖值文本。English: Raw override value text.</param>
-        /// <param name="valueType">中文：数据库记录的值类型名称。English: Value-type name recorded by the database.</param>
+        /// <param name="isAvailable">
+        /// <l>
+        ///   <zh-CN>设置表是否可用。</zh-CN>
+        ///   <en>Whether the settings table is available.</en>
+        /// </l>
+        /// </param>
+        /// <param name="isFound">
+        /// <l>
+        ///   <zh-CN>是否找到对应覆盖值。</zh-CN>
+        ///   <en>Whether the matching override was found.</en>
+        /// </l>
+        /// </param>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>原始覆盖值文本。</zh-CN>
+        ///   <en>Raw override value text.</en>
+        /// </l>
+        /// </param>
+        /// <param name="valueType">
+        /// <l>
+        ///   <zh-CN>数据库记录的值类型名称。</zh-CN>
+        ///   <en>Value-type name recorded by the database.</en>
+        /// </l>
+        /// </param>
         internal PortalSystemSettingReadResult(bool isAvailable, bool isFound, string value, string valueType)
         {
             IsAvailable = isAvailable;
@@ -32,48 +54,64 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：运行级设置表是否可用。
-        ///
-        /// English: Whether the runtime-settings table is available.
+        /// <lang>
+        ///   <zh-CN>运行级设置表是否可用。</zh-CN>
+        ///   <en>Whether the runtime-settings table is available.</en>
+        /// </lang>
         /// </summary>
         public bool IsAvailable { get; private set; }
 
         /// <summary>
-        /// 中文：当前键是否存在数据库覆盖值；仅当 <see cref="IsAvailable"/> 为 <c>true</c> 时有意义。
-        ///
-        /// English: Whether a database override exists for the requested key; meaningful only when <see cref="IsAvailable"/> is <c>true</c>.
+        /// <lang>
+        ///   <zh-CN>当前键是否存在数据库覆盖值；仅当 <see cref="IsAvailable"/> 为 <c>true</c> 时有意义。</zh-CN>
+        ///   <en>Whether a database override exists for the requested key; meaningful only when <see cref="IsAvailable"/> is <c>true</c>.</en>
+        /// </lang>
         /// </summary>
         public bool IsFound { get; private set; }
 
         /// <summary>
-        /// 中文：数据库覆盖值文本；调用方应按注册定义校验后再使用。
-        ///
-        /// English: Database override value text; callers must validate it against the registered definition before use.
+        /// <lang>
+        ///   <zh-CN>数据库覆盖值文本；调用方应按注册定义校验后再使用。</zh-CN>
+        ///   <en>Database override value text; callers must validate it against the registered definition before use.</en>
+        /// </lang>
         /// </summary>
         public string Value { get; private set; }
 
         /// <summary>
-        /// 中文：数据库中保存的值类型名称，用于防止错误类型覆盖被直接采用。
-        ///
-        /// English: Value-type name stored in the database, used to prevent direct use of an override with the wrong type.
+        /// <lang>
+        ///   <zh-CN>数据库中保存的值类型名称，用于防止错误类型覆盖被直接采用。</zh-CN>
+        ///   <en>Value-type name stored in the database, used to prevent direct use of an override with the wrong type.</en>
+        /// </lang>
         /// </summary>
         public string ValueType { get; private set; }
     }
 
     /// <summary>
-    /// 中文：数据库运行级设置写入或删除结果。
-    ///
-    /// English: Result of writing or deleting a database runtime setting.
+    /// <lang>
+    ///   <zh-CN>数据库运行级设置写入或删除结果。</zh-CN>
+    ///   <en>Result of writing or deleting a database runtime setting.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalSystemSettingWriteResult
     {
         /// <summary>
-        /// 中文：创建数据库运行级设置写入或删除结果。
-        ///
-        /// English: Creates a database runtime-setting write or deletion result.
+        /// <lang>
+        ///   <zh-CN>创建数据库运行级设置写入或删除结果。</zh-CN>
+        ///   <en>Creates a database runtime-setting write or deletion result.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="succeeded">中文：操作是否成功。English: Whether the operation succeeded.</param>
-        /// <param name="message">中文：可展示给管理员的安全说明。English: Safe message that may be shown to an administrator.</param>
+        /// <param name="succeeded">
+        /// <l>
+        ///   <zh-CN>操作是否成功。</zh-CN>
+        ///   <en>Whether the operation succeeded.</en>
+        /// </l>
+        /// </param>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>可展示给管理员的安全说明。</zh-CN>
+        ///   <en>Safe message that may be shown to an administrator.</en>
+        /// </l>
+        /// </param>
         internal PortalSystemSettingWriteResult(bool succeeded, string message)
         {
             Succeeded = succeeded;
@@ -81,32 +119,33 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：操作是否成功完成。
-        ///
-        /// English: Whether the operation completed successfully.
+        /// <lang>
+        ///   <zh-CN>操作是否成功完成。</zh-CN>
+        ///   <en>Whether the operation completed successfully.</en>
+        /// </lang>
         /// </summary>
         public bool Succeeded { get; private set; }
 
         /// <summary>
-        /// 中文：可安全展示给管理员的结果说明，不包含连接串或 SQL 细节。
-        ///
-        /// English: Result message safe to show to an administrator; it contains no connection-string or SQL details.
+        /// <lang>
+        ///   <zh-CN>可安全展示给管理员的结果说明，不包含连接串或 SQL 细节。</zh-CN>
+        ///   <en>Result message safe to show to an administrator; it contains no connection-string or SQL details.</en>
+        /// </lang>
         /// </summary>
         public string Message { get; private set; }
     }
 
     /// <summary>
-    /// 中文：受限数据库运行级设置存储。
-    ///
-    /// English: Restricted database runtime-settings store.
+    /// <lang>
+    ///   <zh-CN>受限数据库运行级设置存储。</zh-CN>
+    ///   <en>Restricted database runtime-settings store.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：本类只处理 registry 已登记、允许在线编辑且非敏感的设置。读取失败时调用方回退；写入要求
-    /// 当前值表和设置审计表均可用，并在同一事务中完成，避免出现无法追溯的在线配置变化。
-    ///
-    /// English: This class handles only registered, non-sensitive settings that allow online editing. Callers
-    /// fall back when reads fail; writes require both current-value and setting-audit tables and complete in
-    /// one transaction so online configuration changes remain traceable.
+    /// <lang>
+    ///   <zh-CN>本类只处理 registry 已登记、允许在线编辑且非敏感的设置。读取失败时调用方回退；写入要求 当前值表和设置审计表均可用，并在同一事务中完成，避免出现无法追溯的在线配置变化。</zh-CN>
+    ///   <en>This class handles only registered, non-sensitive settings that allow online editing. Callers fall back when reads fail; writes require both current-value and setting-audit tables and complete in one transaction so online configuration changes remain traceable.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalSystemSettingsStore
     {
@@ -114,13 +153,29 @@ namespace ASPNET.StarterKit.Portal
         private const string AuditsTableName = "PortalCfg_SystemSettingAudits";
 
         /// <summary>
-        /// 中文：读取一个数据库运行级设置覆盖值。
-        ///
-        /// English: Reads one database runtime-setting override.
+        /// <lang>
+        ///   <zh-CN>读取一个数据库运行级设置覆盖值。</zh-CN>
+        ///   <en>Reads one database runtime-setting override.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="settingKey">中文：已登记的稳定设置键。English: Registered stable setting key.</param>
-        /// <param name="context">中文：用于受限诊断的当前 HTTP 上下文，可为 <c>null</c>。English: Current HTTP context for restricted diagnostics; may be <c>null</c>.</param>
-        /// <returns>中文：表可用状态、命中状态、原始值和数据库值类型。English: Table availability, match state, raw value, and database value type.</returns>
+        /// <param name="settingKey">
+        /// <l>
+        ///   <zh-CN>已登记的稳定设置键。</zh-CN>
+        ///   <en>Registered stable setting key.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于受限诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>表可用状态、命中状态、原始值和数据库值类型。</zh-CN>
+        ///   <en>Table availability, match state, raw value, and database value type.</en>
+        /// </l>
+        /// </returns>
         public static PortalSystemSettingReadResult Read(string settingKey, HttpContext context = null)
         {
             if (string.IsNullOrWhiteSpace(settingKey))
@@ -177,14 +232,35 @@ WHERE [SettingKey] = @SettingKey;";
         }
 
         /// <summary>
-        /// 中文：写入一个允许在线管理的非敏感设置覆盖值，并在同一事务记录设置审计。
-        ///
-        /// English: Writes one non-sensitive setting override allowed for online management and records setting audit data in the same transaction.
+        /// <lang>
+        ///   <zh-CN>写入一个允许在线管理的非敏感设置覆盖值，并在同一事务记录设置审计。</zh-CN>
+        ///   <en>Writes one non-sensitive setting override allowed for online management and records setting audit data in the same transaction.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="definition">中文：已登记且允许在线编辑的非敏感设置定义。English: Registered non-sensitive setting definition that allows online editing.</param>
-        /// <param name="settingValue">中文：候选文本值；存储前会再次按定义校验和规范化。English: Candidate text value; it is validated and normalized against the definition again before storage.</param>
-        /// <param name="context">中文：用于审计和受限诊断的当前 HTTP 上下文，可为 <c>null</c>。English: Current HTTP context for auditing and restricted diagnostics; may be <c>null</c>.</param>
-        /// <returns>中文：写入结果，不包含连接串或 SQL 细节。English: Write result without connection-string or SQL details.</returns>
+        /// <param name="definition">
+        /// <l>
+        ///   <zh-CN>已登记且允许在线编辑的非敏感设置定义。</zh-CN>
+        ///   <en>Registered non-sensitive setting definition that allows online editing.</en>
+        /// </l>
+        /// </param>
+        /// <param name="settingValue">
+        /// <l>
+        ///   <zh-CN>候选文本值；存储前会再次按定义校验和规范化。</zh-CN>
+        ///   <en>Candidate text value; it is validated and normalized against the definition again before storage.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于审计和受限诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for auditing and restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果，不包含连接串或 SQL 细节。</zh-CN>
+        ///   <en>Write result without connection-string or SQL details.</en>
+        /// </l>
+        /// </returns>
         public static PortalSystemSettingWriteResult SaveOverride(
             PortalSettingDefinition definition,
             string settingValue,
@@ -275,13 +351,29 @@ VALUES
         }
 
         /// <summary>
-        /// 中文：删除允许删除的数据库运行级覆盖值，使设置回退至 appSettings 或代码默认值，并写入审计。
-        ///
-        /// English: Deletes a deletable database runtime override so the setting falls back to appSettings or code defaults, and writes audit data.
+        /// <lang>
+        ///   <zh-CN>删除允许删除的数据库运行级覆盖值，使设置回退至 appSettings 或代码默认值，并写入审计。</zh-CN>
+        ///   <en>Deletes a deletable database runtime override so the setting falls back to appSettings or code defaults, and writes audit data.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="definition">中文：已登记且允许在线编辑的非敏感设置定义。English: Registered non-sensitive setting definition that allows online editing.</param>
-        /// <param name="context">中文：用于审计和受限诊断的当前 HTTP 上下文，可为 <c>null</c>。English: Current HTTP context for auditing and restricted diagnostics; may be <c>null</c>.</param>
-        /// <returns>中文：删除结果，或不存在覆盖值时的成功结果。English: Deletion result, or a successful result when no override exists.</returns>
+        /// <param name="definition">
+        /// <l>
+        ///   <zh-CN>已登记且允许在线编辑的非敏感设置定义。</zh-CN>
+        ///   <en>Registered non-sensitive setting definition that allows online editing.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于审计和受限诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for auditing and restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>删除结果，或不存在覆盖值时的成功结果。</zh-CN>
+        ///   <en>Deletion result, or a successful result when no override exists.</en>
+        /// </l>
+        /// </returns>
         public static PortalSystemSettingWriteResult DeleteOverride(
             PortalSettingDefinition definition,
             HttpContext context = null)

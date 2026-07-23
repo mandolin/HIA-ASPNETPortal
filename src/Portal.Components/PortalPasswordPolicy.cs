@@ -4,34 +4,32 @@ using System.Collections.Generic;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：门户密码复杂度策略，用于企业用户生命周期的注册、建号和重置密码入口。
-    ///
-    /// English: Portal password-complexity policy for the enterprise user lifecycle registration,
-    /// account-creation, and password-reset entry points.
+    /// <lang>
+    ///   <zh-CN>门户密码复杂度策略，用于企业用户生命周期的注册、建号和重置密码入口。</zh-CN>
+    ///   <en>Portal password-complexity policy for the enterprise user lifecycle registration, account-creation, and password-reset entry points.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：组件层保留 8 位/3 类作为硬下限；Web 层可在启动时注入运行期策略选项，让系统管理设置
-    /// 能控制更高强度的最小长度、类别数量、弱口令字典和账号上下文词限制。此类型不处理历史密码、
-    /// 失败锁定或客户端加密协议。
-    ///
-    /// English: The component layer keeps 8 characters / 3 categories as the hard lower bound. The Web layer may
-    /// inject runtime policy options on startup so system settings can control stronger minimum length, category
-    /// count, weak-password dictionary checks, and account-context-word restrictions. This type does not handle
-    /// password history, failure lockout, or client-side encryption protocols.
+    /// <lang>
+    ///   <zh-CN>组件层保留 8 位/3 类作为硬下限；Web 层可在启动时注入运行期策略选项，让系统管理设置 能控制更高强度的最小长度、类别数量、弱口令字典和账号上下文词限制。此类型不处理历史密码、 失败锁定或客户端加密协议。</zh-CN>
+    ///   <en>The component layer keeps 8 characters / 3 categories as the hard lower bound. The Web layer may inject runtime policy options on startup so system settings can control stronger minimum length, category count, weak-password dictionary checks, and account-context-word restrictions. This type does not handle password history, failure lockout, or client-side encryption protocols.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalPasswordPolicy
     {
         /// <summary>
-        /// 中文：当前临时策略要求的最小长度。
-        ///
-        /// English: Minimum length required by the current temporary policy.
+        /// <lang>
+        ///   <zh-CN>当前临时策略要求的最小长度。</zh-CN>
+        ///   <en>Minimum length required by the current temporary policy.</en>
+        /// </lang>
         /// </summary>
         public const int MinimumLength = 8;
 
         /// <summary>
-        /// 中文：当前临时策略要求满足的字符类别数量。
-        ///
-        /// English: Number of character categories required by the current temporary policy.
+        /// <lang>
+        ///   <zh-CN>当前临时策略要求满足的字符类别数量。</zh-CN>
+        ///   <en>Number of character categories required by the current temporary policy.</en>
+        /// </lang>
         /// </summary>
         public const int RequiredCategoryCount = 3;
 
@@ -60,19 +58,23 @@ namespace ASPNET.StarterKit.Portal
         };
 
         /// <summary>
-        /// 中文：配置运行期密码策略选项提供器。
-        ///
-        /// English: Configures the runtime password-policy options provider.
+        /// <lang>
+        ///   <zh-CN>配置运行期密码策略选项提供器。</zh-CN>
+        ///   <en>Configures the runtime password-policy options provider.</en>
+        /// </lang>
         /// </summary>
         /// <remarks>
-        /// 中文：该入口用于避免组件层反向依赖 Web 配置读取器。提供器异常时会安全回退到组件默认策略；
-        /// 调用方不得在提供器中记录或返回任何密码明文。
-        ///
-        /// English: This entry avoids a reverse dependency from the component layer to the Web configuration
-        /// resolver. Provider failures safely fall back to the component default policy; callers must not log or
-        /// return any plain password values from the provider.
+        /// <lang>
+        ///   <zh-CN>该入口用于避免组件层反向依赖 Web 配置读取器。提供器异常时会安全回退到组件默认策略； 调用方不得在提供器中记录或返回任何密码明文。</zh-CN>
+        ///   <en>This entry avoids a reverse dependency from the component layer to the Web configuration resolver. Provider failures safely fall back to the component default policy; callers must not log or return any plain password values from the provider.</en>
+        /// </lang>
         /// </remarks>
-        /// <param name="provider">中文：返回当前有效策略选项的委托；传入 <c>null</c> 会恢复默认策略。English: Delegate returning current effective policy options; <c>null</c> restores the default policy.</param>
+        /// <param name="provider">
+        /// <l>
+        ///   <zh-CN>返回当前有效策略选项的委托；传入 <c>null</c> 会恢复默认策略。</zh-CN>
+        ///   <en>Delegate returning current effective policy options; <c>null</c> restores the default policy.</en>
+        /// </l>
+        /// </param>
         public static void ConfigureOptionsProvider(Func<PortalPasswordPolicyOptions> provider)
         {
             lock (OptionsProviderLock)
@@ -82,28 +84,64 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：校验密码是否满足当前临时复杂度策略。
-        ///
-        /// English: Validates whether a password satisfies the current temporary complexity policy.
+        /// <lang>
+        ///   <zh-CN>校验密码是否满足当前临时复杂度策略。</zh-CN>
+        ///   <en>Validates whether a password satisfies the current temporary complexity policy.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="password">中文：一次性提交的密码输入；调用方不得记录。English: One-time submitted password input; callers must not log it.</param>
-        /// <param name="message">中文：可显示给用户的失败说明。English: Display-safe failure message.</param>
-        /// <returns>中文：满足策略时为 <c>true</c>。English: <c>true</c> when the policy is satisfied.</returns>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>一次性提交的密码输入；调用方不得记录。</zh-CN>
+        ///   <en>One-time submitted password input; callers must not log it.</en>
+        /// </l>
+        /// </param>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>可显示给用户的失败说明。</zh-CN>
+        ///   <en>Display-safe failure message.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>满足策略时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the policy is satisfied.</en>
+        /// </l>
+        /// </returns>
         public static bool TryValidate(string password, out string message)
         {
             return TryValidate(password, null, out message);
         }
 
         /// <summary>
-        /// 中文：校验密码是否满足当前复杂度策略，并可按账号上下文词阻止弱相关密码。
-        ///
-        /// English: Validates whether a password satisfies the current complexity policy and can reject weak
-        /// account-context-related passwords.
+        /// <lang>
+        ///   <zh-CN>校验密码是否满足当前复杂度策略，并可按账号上下文词阻止弱相关密码。</zh-CN>
+        ///   <en>Validates whether a password satisfies the current complexity policy and can reject weak account-context-related passwords.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="password">中文：一次性提交的密码输入；调用方不得记录。English: One-time submitted password input; callers must not log it.</param>
-        /// <param name="contextTerms">中文：可选的用户名、邮箱、员工号、显示名等上下文词；调用方不得记录。English: Optional user name, email, employee code, display name, and similar context terms; callers must not log them.</param>
-        /// <param name="message">中文：可显示给用户的失败说明。English: Display-safe failure message.</param>
-        /// <returns>中文：满足策略时为 <c>true</c>。English: <c>true</c> when the policy is satisfied.</returns>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>一次性提交的密码输入；调用方不得记录。</zh-CN>
+        ///   <en>One-time submitted password input; callers must not log it.</en>
+        /// </l>
+        /// </param>
+        /// <param name="contextTerms">
+        /// <l>
+        ///   <zh-CN>可选的用户名、邮箱、员工号、显示名等上下文词；调用方不得记录。</zh-CN>
+        ///   <en>Optional user name, email, employee code, display name, and similar context terms; callers must not log them.</en>
+        /// </l>
+        /// </param>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>可显示给用户的失败说明。</zh-CN>
+        ///   <en>Display-safe failure message.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>满足策略时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the policy is satisfied.</en>
+        /// </l>
+        /// </returns>
         public static bool TryValidate(string password, IEnumerable<string> contextTerms, out string message)
         {
             PortalPasswordPolicyOptions options = GetEffectiveOptions();
@@ -137,22 +175,34 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：返回当前策略的可展示说明。
-        ///
-        /// English: Returns a display-safe description of the current policy.
+        /// <lang>
+        ///   <zh-CN>返回当前策略的可展示说明。</zh-CN>
+        ///   <en>Returns a display-safe description of the current policy.</en>
+        /// </lang>
         /// </summary>
-        /// <returns>中文：策略说明。English: Policy description.</returns>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>策略说明。</zh-CN>
+        ///   <en>Policy description.</en>
+        /// </l>
+        /// </returns>
         public static string BuildDisplayMessage()
         {
             return BuildDisplayMessage(GetEffectiveOptions());
         }
 
         /// <summary>
-        /// 中文：获取当前有效密码策略选项。
-        ///
-        /// English: Gets the current effective password-policy options.
+        /// <lang>
+        ///   <zh-CN>获取当前有效密码策略选项。</zh-CN>
+        ///   <en>Gets the current effective password-policy options.</en>
+        /// </lang>
         /// </summary>
-        /// <returns>中文：已按硬下限规范化的策略选项。English: Policy options normalized against hard lower bounds.</returns>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>已按硬下限规范化的策略选项。</zh-CN>
+        ///   <en>Policy options normalized against hard lower bounds.</en>
+        /// </l>
+        /// </returns>
         public static PortalPasswordPolicyOptions GetEffectiveOptions()
         {
             Func<PortalPasswordPolicyOptions> provider;
@@ -329,28 +379,49 @@ namespace ASPNET.StarterKit.Portal
     }
 
     /// <summary>
-    /// 中文：密码策略运行期选项。
-    ///
-    /// English: Runtime options for the password policy.
+    /// <lang>
+    ///   <zh-CN>密码策略运行期选项。</zh-CN>
+    ///   <en>Runtime options for the password policy.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：该类型只保存策略参数，不保存用户密码。Web 层可以从系统设置解析这些值后传入
-    /// <see cref="PortalPasswordPolicy.ConfigureOptionsProvider"/>。
-    ///
-    /// English: This type stores policy parameters only, not user passwords. The Web layer can resolve these
-    /// values from system settings and pass them into <see cref="PortalPasswordPolicy.ConfigureOptionsProvider"/>.
+    /// <lang>
+    ///   <zh-CN>该类型只保存策略参数，不保存用户密码。Web 层可以从系统设置解析这些值后传入 <see cref="PortalPasswordPolicy.ConfigureOptionsProvider"/>。</zh-CN>
+    ///   <en>This type stores policy parameters only, not user passwords. The Web layer can resolve these values from system settings and pass them into <see cref="PortalPasswordPolicy.ConfigureOptionsProvider"/>.</en>
+    /// </lang>
     /// </remarks>
     public sealed class PortalPasswordPolicyOptions
     {
         /// <summary>
-        /// 中文：创建密码策略运行期选项。
-        ///
-        /// English: Creates runtime options for the password policy.
+        /// <lang>
+        ///   <zh-CN>创建密码策略运行期选项。</zh-CN>
+        ///   <en>Creates runtime options for the password policy.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="minimumLength">中文：最小长度。English: Minimum length.</param>
-        /// <param name="requiredCategoryCount">中文：必须满足的字符类别数。English: Required character-category count.</param>
-        /// <param name="weakDictionaryEnabled">中文：是否启用常见弱口令字典。English: Whether the common weak-password dictionary is enabled.</param>
-        /// <param name="disallowContextTerms">中文：是否禁止包含账号上下文词。English: Whether account-context terms are disallowed.</param>
+        /// <param name="minimumLength">
+        /// <l>
+        ///   <zh-CN>最小长度。</zh-CN>
+        ///   <en>Minimum length.</en>
+        /// </l>
+        /// </param>
+        /// <param name="requiredCategoryCount">
+        /// <l>
+        ///   <zh-CN>必须满足的字符类别数。</zh-CN>
+        ///   <en>Required character-category count.</en>
+        /// </l>
+        /// </param>
+        /// <param name="weakDictionaryEnabled">
+        /// <l>
+        ///   <zh-CN>是否启用常见弱口令字典。</zh-CN>
+        ///   <en>Whether the common weak-password dictionary is enabled.</en>
+        /// </l>
+        /// </param>
+        /// <param name="disallowContextTerms">
+        /// <l>
+        ///   <zh-CN>是否禁止包含账号上下文词。</zh-CN>
+        ///   <en>Whether account-context terms are disallowed.</en>
+        /// </l>
+        /// </param>
         public PortalPasswordPolicyOptions(
             int minimumLength,
             int requiredCategoryCount,
@@ -364,11 +435,17 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：创建组件层默认策略选项。
-        ///
-        /// English: Creates the component-layer default policy options.
+        /// <lang>
+        ///   <zh-CN>创建组件层默认策略选项。</zh-CN>
+        ///   <en>Creates the component-layer default policy options.</en>
+        /// </lang>
         /// </summary>
-        /// <returns>中文：默认策略选项。English: Default policy options.</returns>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>默认策略选项。</zh-CN>
+        ///   <en>Default policy options.</en>
+        /// </l>
+        /// </returns>
         public static PortalPasswordPolicyOptions CreateDefault()
         {
             return new PortalPasswordPolicyOptions(
@@ -379,30 +456,34 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：最小密码长度。
-        ///
-        /// English: Minimum password length.
+        /// <lang>
+        ///   <zh-CN>最小密码长度。</zh-CN>
+        ///   <en>Minimum password length.</en>
+        /// </lang>
         /// </summary>
         public int MinimumLength { get; private set; }
 
         /// <summary>
-        /// 中文：必须满足的字符类别数量。
-        ///
-        /// English: Required number of character categories.
+        /// <lang>
+        ///   <zh-CN>必须满足的字符类别数量。</zh-CN>
+        ///   <en>Required number of character categories.</en>
+        /// </lang>
         /// </summary>
         public int RequiredCategoryCount { get; private set; }
 
         /// <summary>
-        /// 中文：是否启用常见弱口令字典。
-        ///
-        /// English: Whether the common weak-password dictionary is enabled.
+        /// <lang>
+        ///   <zh-CN>是否启用常见弱口令字典。</zh-CN>
+        ///   <en>Whether the common weak-password dictionary is enabled.</en>
+        /// </lang>
         /// </summary>
         public bool WeakDictionaryEnabled { get; private set; }
 
         /// <summary>
-        /// 中文：是否禁止密码包含账号上下文词。
-        ///
-        /// English: Whether passwords may contain account-context terms.
+        /// <lang>
+        ///   <zh-CN>是否禁止密码包含账号上下文词。</zh-CN>
+        ///   <en>Whether passwords may contain account-context terms.</en>
+        /// </lang>
         /// </summary>
         public bool DisallowContextTerms { get; private set; }
     }
