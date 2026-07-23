@@ -9,32 +9,35 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：员工、组织和账号绑定的后台只读目录页。
-    ///
-    /// English: Read-only administration directory page for employees, organization units, and Portal-user bindings.
+    /// <lang>
+    ///   <zh-CN>员工、组织和账号绑定的后台只读目录页。</zh-CN>
+    ///   <en>Read-only administration directory page for employees, organization units, and Portal-user bindings.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：P6.3-S4 保持列表只读，并将新增/编辑动作交给独立后台维护页；导入、导出、绑定或员工工号登录启用仍不在本页处理。
-    ///
-    /// English: P6.3-S4 keeps the lists read-only and delegates creation/editing to separate administration
-    /// maintenance pages; import, export, binding, and employee-code sign-in enablement remain outside this page.
+    /// <lang>
+    ///   <zh-CN>P6.3-S4 保持列表只读，并将新增/编辑动作交给独立后台维护页；导入、导出、绑定或员工工号登录启用仍不在本页处理。</zh-CN>
+    ///   <en>P6.3-S4 keeps the lists read-only and delegates creation/editing to separate administration maintenance pages; import, export, binding, and employee-code sign-in enablement remain outside this page.</en>
+    /// </lang>
     /// </remarks>
     public partial class EmployeeDirectory : PortalPage<EmployeeDirectory>
     {
         private const int PageSize = 50;
 
         /// <summary>
-        /// 中文：员工组织目录只读数据服务。
-        ///
-        /// English: Read-only employee and organization directory data service.
+        /// <lang>
+        ///   <zh-CN>员工组织目录只读数据服务。</zh-CN>
+        ///   <en>Read-only employee and organization directory data service.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IEmployeeDirectoryDb EmployeeDirectoryDb { private get; set; }
 
         /// <summary>
-        /// 中文：初始化后台员工目录页面。
-        ///
-        /// English: Initializes the administration employee-directory page.
+        /// <lang>
+        ///   <zh-CN>初始化后台员工目录页面。</zh-CN>
+        ///   <en>Initializes the administration employee-directory page.</en>
+        /// </lang>
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -54,9 +57,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：按当前只读筛选条件重新绑定目录。
-        ///
-        /// English: Rebinds the directory using the current read-only filters.
+        /// <lang>
+        ///   <zh-CN>按当前只读筛选条件重新绑定目录。</zh-CN>
+        ///   <en>Rebinds the directory using the current read-only filters.</en>
+        /// </lang>
         /// </summary>
         protected void SearchButton_Click(object sender, EventArgs e)
         {
@@ -191,9 +195,10 @@ namespace ASPNET.StarterKit.Portal
     }
 
     /// <summary>
-    /// 中文：员工目录页的组织展示行。
-    ///
-    /// English: Organization display row for the employee-directory page.
+    /// <lang>
+    ///   <zh-CN>员工目录页的组织展示行。</zh-CN>
+    ///   <en>Organization display row for the employee-directory page.</en>
+    /// </lang>
     /// </summary>
     public sealed class OrganizationDirectoryRow
     {
@@ -209,32 +214,68 @@ namespace ASPNET.StarterKit.Portal
                       organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture);
         }
 
-        /// <summary>中文：组织单元标识。English: Organization-unit identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织单元标识。</zh-CN>
+        ///   <en>Organization-unit identifier.</en>
+        /// </lang>
+        /// </summary>
         public int OrganizationUnitId { get; private set; }
 
-        /// <summary>中文：组织编码。English: Organization code.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织编码。</zh-CN>
+        ///   <en>Organization code.</en>
+        /// </lang>
+        /// </summary>
         public string OrganizationCode { get; private set; }
 
-        /// <summary>中文：组织显示名。English: Organization display name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织显示名。</zh-CN>
+        ///   <en>Organization display name.</en>
+        /// </lang>
+        /// </summary>
         public string DisplayName { get; private set; }
 
-        /// <summary>中文：父级组织展示文本。English: Parent organization display text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>父级组织展示文本。</zh-CN>
+        ///   <en>Parent organization display text.</en>
+        /// </lang>
+        /// </summary>
         public string ParentText { get; private set; }
 
-        /// <summary>中文：排序值。English: Sort order.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>排序值。</zh-CN>
+        ///   <en>Sort order.</en>
+        /// </lang>
+        /// </summary>
         public int SortOrder { get; private set; }
 
-        /// <summary>中文：启用状态展示文本。English: Active-state display text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>启用状态展示文本。</zh-CN>
+        ///   <en>Active-state display text.</en>
+        /// </lang>
+        /// </summary>
         public string IsActiveText { get; private set; }
 
-        /// <summary>中文：编辑页站内地址。English: Current-application edit-page URL.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑页站内地址。</zh-CN>
+        ///   <en>Current-application edit-page URL.</en>
+        /// </lang>
+        /// </summary>
         public string EditUrl { get; private set; }
     }
 
     /// <summary>
-    /// 中文：员工目录页的员工展示行。
-    ///
-    /// English: Employee display row for the employee-directory page.
+    /// <lang>
+    ///   <zh-CN>员工目录页的员工展示行。</zh-CN>
+    ///   <en>Employee display row for the employee-directory page.</en>
+    /// </lang>
     /// </summary>
     public sealed class EmployeeDirectoryRow
     {
@@ -256,41 +297,92 @@ namespace ASPNET.StarterKit.Portal
             BindUrl = "UserEmployeeBindingEdit.aspx?employeeId=" + employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
         }
 
-        /// <summary>中文：员工标识。English: Employee identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工标识。</zh-CN>
+        ///   <en>Employee identifier.</en>
+        /// </lang>
+        /// </summary>
         public int EmployeeId { get; private set; }
 
-        /// <summary>中文：员工号。English: Employee code.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工号。</zh-CN>
+        ///   <en>Employee code.</en>
+        /// </lang>
+        /// </summary>
         public string EmployeeCode { get; private set; }
 
-        /// <summary>中文：员工显示名。English: Employee display name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工显示名。</zh-CN>
+        ///   <en>Employee display name.</en>
+        /// </lang>
+        /// </summary>
         public string DisplayName { get; private set; }
 
-        /// <summary>中文：偏好称呼。English: Preferred name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>偏好称呼。</zh-CN>
+        ///   <en>Preferred name.</en>
+        /// </lang>
+        /// </summary>
         public string PreferredName { get; private set; }
 
-        /// <summary>中文：工作邮箱。English: Work email.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>工作邮箱。</zh-CN>
+        ///   <en>Work email.</en>
+        /// </lang>
+        /// </summary>
         public string WorkEmail { get; private set; }
 
-        /// <summary>中文：组织展示文本。English: Organization display text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织展示文本。</zh-CN>
+        ///   <en>Organization display text.</en>
+        /// </lang>
+        /// </summary>
         public string OrganizationText { get; private set; }
 
-        /// <summary>中文：员工状态。English: Employee status.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工状态。</zh-CN>
+        ///   <en>Employee status.</en>
+        /// </lang>
+        /// </summary>
         public string EmploymentStatus { get; private set; }
 
-        /// <summary>中文：来源系统。English: Source system.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>来源系统。</zh-CN>
+        ///   <en>Source system.</en>
+        /// </lang>
+        /// </summary>
         public string SourceSystem { get; private set; }
 
-        /// <summary>中文：编辑页站内地址。English: Current-application edit-page URL.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑页站内地址。</zh-CN>
+        ///   <en>Current-application edit-page URL.</en>
+        /// </lang>
+        /// </summary>
         public string EditUrl { get; private set; }
 
-        /// <summary>中文：账号员工绑定维护页站内地址。English: Current-application user-employee binding URL.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>账号员工绑定维护页站内地址。</zh-CN>
+        ///   <en>Current-application user-employee binding URL.</en>
+        /// </lang>
+        /// </summary>
         public string BindUrl { get; private set; }
     }
 
     /// <summary>
-    /// 中文：员工目录页的账号员工绑定展示行。
-    ///
-    /// English: User-employee binding display row for the employee-directory page.
+    /// <lang>
+    ///   <zh-CN>员工目录页的账号员工绑定展示行。</zh-CN>
+    ///   <en>User-employee binding display row for the employee-directory page.</en>
+    /// </lang>
     /// </summary>
     public sealed class UserEmployeeBindingDirectoryRow
     {
@@ -307,31 +399,76 @@ namespace ASPNET.StarterKit.Portal
             EditUrl = "UserEmployeeBindingEdit.aspx?bindingId=" + binding.BindingId.ToString(CultureInfo.InvariantCulture);
         }
 
-        /// <summary>中文：绑定标识。English: Binding identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定标识。</zh-CN>
+        ///   <en>Binding identifier.</en>
+        /// </lang>
+        /// </summary>
         public int BindingId { get; private set; }
 
-        /// <summary>中文：门户账号标识。English: Portal user identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户账号标识。</zh-CN>
+        ///   <en>Portal user identifier.</en>
+        /// </lang>
+        /// </summary>
         public int UserId { get; private set; }
 
-        /// <summary>中文：门户用户名。English: Portal user name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户用户名。</zh-CN>
+        ///   <en>Portal user name.</en>
+        /// </lang>
+        /// </summary>
         public string UserName { get; private set; }
 
-        /// <summary>中文：员工号。English: Employee code.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工号。</zh-CN>
+        ///   <en>Employee code.</en>
+        /// </lang>
+        /// </summary>
         public string EmployeeCode { get; private set; }
 
-        /// <summary>中文：员工显示名。English: Employee display name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工显示名。</zh-CN>
+        ///   <en>Employee display name.</en>
+        /// </lang>
+        /// </summary>
         public string EmployeeDisplayName { get; private set; }
 
-        /// <summary>中文：绑定状态。English: Binding status.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定状态。</zh-CN>
+        ///   <en>Binding status.</en>
+        /// </lang>
+        /// </summary>
         public string BindingStatus { get; private set; }
 
-        /// <summary>中文：绑定时间展示文本。English: Binding time display text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定时间展示文本。</zh-CN>
+        ///   <en>Binding time display text.</en>
+        /// </lang>
+        /// </summary>
         public string BoundUtcText { get; private set; }
 
-        /// <summary>中文：绑定维护页站内地址。English: Current-application binding maintenance URL.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定维护页站内地址。</zh-CN>
+        ///   <en>Current-application binding maintenance URL.</en>
+        /// </lang>
+        /// </summary>
         public string EditUrl { get; private set; }
 
-        /// <summary>中文：非敏感绑定说明。English: Non-sensitive binding reason.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>非敏感绑定说明。</zh-CN>
+        ///   <en>Non-sensitive binding reason.</en>
+        /// </lang>
+        /// </summary>
         public string Reason { get; private set; }
     }
 }

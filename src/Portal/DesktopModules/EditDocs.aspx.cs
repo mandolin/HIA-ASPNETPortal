@@ -6,18 +6,16 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：编辑文档模块项并处理受限服务器文件上传的页面。
-    ///
-    /// English: Page that edits document-module items and handles restricted server-file uploads.
+    /// <lang>
+    ///   <zh-CN>编辑文档模块项并处理受限服务器文件上传的页面。</zh-CN>
+    ///   <en>Page that edits document-module items and handles restricted server-file uploads.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：每个请求都会重新验证模块编辑权限和既有项目归属。服务器上传只接受
-    /// <see cref="PortalDocumentPolicy"/> 允许的大小与扩展名，并生成新的物理文件名；
-    /// 本页不重新启用数据库文件存储，也不提供私有文件下载授权。
-    ///
-    /// English: Every request revalidates module-edit permission and existing-item ownership. Server uploads accept only
-    /// the size and extensions allowed by <see cref="PortalDocumentPolicy"/> and receive a new physical filename;
-    /// this page does not re-enable database file storage or provide private-file download authorization.
+    /// <lang>
+    ///   <zh-CN>每个请求都会重新验证模块编辑权限和既有项目归属。服务器上传只接受 <see cref="PortalDocumentPolicy"/> 允许的大小与扩展名，并生成新的物理文件名； 本页不重新启用数据库文件存储，也不提供私有文件下载授权。</zh-CN>
+    ///   <en>Every request revalidates module-edit permission and existing-item ownership. Server uploads accept only the size and extensions allowed by <see cref="PortalDocumentPolicy"/> and receive a new physical filename; this page does not re-enable database file storage or provide private-file download authorization.</en>
+    /// </lang>
     /// </remarks>
     public partial class EditDocs : PortalPage<EditDocs>
     {
@@ -27,28 +25,41 @@ namespace ASPNET.StarterKit.Portal
         private IDocumentItem _currentItem;
 
         /// <summary>
-        /// 中文：读取和更新文档模块项目的数据访问依赖。
-        ///
-        /// English: Data-access dependency used to read and update document-module items.
+        /// <lang>
+        ///   <zh-CN>读取和更新文档模块项目的数据访问依赖。</zh-CN>
+        ///   <en>Data-access dependency used to read and update document-module items.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IDocumentsDb DocumentDB { private get; set; }
 
         /// <summary>
-        /// 中文：验证父 Tab 与模块组合编辑权限的安全服务依赖。
-        ///
-        /// English: Security-service dependency that validates combined parent-tab and module edit permission.
+        /// <lang>
+        ///   <zh-CN>验证父 Tab 与模块组合编辑权限的安全服务依赖。</zh-CN>
+        ///   <en>Security-service dependency that validates combined parent-tab and module edit permission.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IPortalSecurity PortalSecurity { private get; set; }
 
         /// <summary>
-        /// 中文：初始化编辑上下文，并在首次请求时绑定已有文档或安全回跳地址。
-        ///
-        /// English: Initializes the edit context and, on the first request, binds an existing document or a safe return URL.
+        /// <lang>
+        ///   <zh-CN>初始化编辑上下文，并在首次请求时绑定已有文档或安全回跳地址。</zh-CN>
+        ///   <en>Initializes the edit context and, on the first request, binds an existing document or a safe return URL.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             _hasValidEditContext = TryInitializeEditContext();
@@ -66,19 +77,32 @@ namespace ASPNET.StarterKit.Portal
                     BindDocument(_currentItem);
                 }
 
-                // 中文：只保存已经验证在当前应用内的回跳地址，后续仍会再次校验。
-                // English: Store only a return URL already verified as inside the current application; it is revalidated later.
+                // <lang>
+                //   <zh-CN>只保存已经验证在当前应用内的回跳地址，后续仍会再次校验。</zh-CN>
+                //   <en>Store only a return URL already verified as inside the current application; it is revalidated later.</en>
+                // </lang>
                 ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
             }
         }
 
         /// <summary>
-        /// 中文：保存新建或已有文档项目，并在服务器上传时生成唯一物理文件名。
-        ///
-        /// English: Saves a new or existing document item and generates a unique physical filename for a server upload.
+        /// <lang>
+        ///   <zh-CN>保存新建或已有文档项目，并在服务器上传时生成唯一物理文件名。</zh-CN>
+        ///   <en>Saves a new or existing document item and generates a unique physical filename for a server upload.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
             if (!_hasValidEditContext || !Page.IsValid)
@@ -136,8 +160,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch
             {
-                // 中文：数据库保存失败时删除本次新建文件，避免留下无记录的上传孤儿文件。
-                // English: Remove the file created by this request when database save fails, avoiding an unreferenced upload orphan.
+                // <lang>
+                //   <zh-CN>数据库保存失败时删除本次新建文件，避免留下无记录的上传孤儿文件。</zh-CN>
+                //   <en>Remove the file created by this request when database save fails, avoiding an unreferenced upload orphan.</en>
+                // </lang>
                 TryDeleteFile(savedPhysicalPath);
                 throw;
             }
@@ -146,12 +172,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：删除当前已验证归属的文档记录；不删除可能由历史记录共享的物理文件。
-        ///
-        /// English: Deletes the current document record after ownership validation; it does not delete a physical file that legacy records may share.
+        /// <lang>
+        ///   <zh-CN>删除当前已验证归属的文档记录；不删除可能由历史记录共享的物理文件。</zh-CN>
+        ///   <en>Deletes the current document record after ownership validation; it does not delete a physical file that legacy records may share.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void DeleteBtn_Click(object sender, EventArgs e)
         {
             if (!_hasValidEditContext)
@@ -168,12 +205,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：取消编辑并返回已验证的门户内地址。
-        ///
-        /// English: Cancels editing and returns to a verified address inside the Portal.
+        /// <lang>
+        ///   <zh-CN>取消编辑并返回已验证的门户内地址。</zh-CN>
+        ///   <en>Cancels editing and returns to a verified address inside the Portal.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void CancelBtn_Click(object sender, EventArgs e)
         {
             if (!_hasValidEditContext)
@@ -225,8 +273,10 @@ namespace ASPNET.StarterKit.Portal
 
         private void ApplyUploadPolicyPresentation()
         {
-            // 中文：数据库二进制存储路线本阶段不启用，页面层也强制清空避免旧提交值误入库。
-            // English: Database-binary storage is disabled in this phase; clear it at page level to avoid legacy posts.
+            // <lang>
+            //   <zh-CN>数据库二进制存储路线本阶段不启用，页面层也强制清空避免旧提交值误入库。</zh-CN>
+            //   <en>Database-binary storage is disabled in this phase; clear it at page level to avoid legacy posts.</en>
+            // </lang>
             storeInDatabase.Checked = false;
             storeInDatabase.Enabled = false;
             UploadPolicyHint.Text = "单文件上限：" + PortalDocumentPolicy.GetMaximumUploadSizeDisplayText() +
@@ -255,8 +305,10 @@ namespace ASPNET.StarterKit.Portal
                 string physicalPath = Path.Combine(uploadDirectory, fileName);
                 try
                 {
-                    // 中文：CreateNew 避免即使出现极低概率名称冲突时也覆盖已有文件。
-                    // English: CreateNew avoids overwriting an existing file even in the unlikely event of a name collision.
+                    // <lang>
+                    //   <zh-CN>CreateNew 避免即使出现极低概率名称冲突时也覆盖已有文件。</zh-CN>
+                    //   <en>CreateNew avoids overwriting an existing file even in the unlikely event of a name collision.</en>
+                    // </lang>
                     using (var output = new FileStream(physicalPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
                     {
                         FileUpload.PostedFile.InputStream.CopyTo(output);
@@ -311,8 +363,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch
             {
-                // 中文：原异常比清理失败更有诊断价值，因此不覆盖原异常。
-                // English: The original exception is more diagnostic than cleanup failure, so do not mask it.
+                // <lang>
+                //   <zh-CN>原异常比清理失败更有诊断价值，因此不覆盖原异常。</zh-CN>
+                //   <en>The original exception is more diagnostic than cleanup failure, so do not mask it.</en>
+                // </lang>
             }
         }
     }

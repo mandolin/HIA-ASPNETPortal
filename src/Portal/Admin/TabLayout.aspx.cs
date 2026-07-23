@@ -9,17 +9,16 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：旧门户 Tab 属性和模块布局管理页面。
-    ///
-    /// English: Legacy Portal page for Tab properties and module-layout administration.
+    /// <lang>
+    ///   <zh-CN>旧门户 Tab 属性和模块布局管理页面。</zh-CN>
+    ///   <en>Legacy Portal page for Tab properties and module-layout administration.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：当前页面只使用 <c>Admins</c> 角色，并以请求中的 Tab 标识和当前门户上下文共同确认目标。
-    /// 既有核心模块定义继续可选；受信任部署包定义在 Disabled 时不可新增实例。
-    ///
-    /// English: The current page uses only the <c>Admins</c> role and confirms its target through both the requested
-    /// Tab identifier and current Portal context. Existing core module definitions remain selectable; a trusted
-    /// deployment-package definition cannot create a new instance while Disabled.
+    /// <lang>
+    ///   <zh-CN>当前页面只使用 <c>Admins</c> 角色，并以请求中的 Tab 标识和当前门户上下文共同确认目标。 既有核心模块定义继续可选；受信任部署包定义在 Disabled 时不可新增实例。</zh-CN>
+    ///   <en>The current page uses only the <c>Admins</c> role and confirms its target through both the requested Tab identifier and current Portal context. Existing core module definitions remain selectable; a trusted deployment-package definition cannot create a new instance while Disabled.</en>
+    /// </lang>
     /// </remarks>
     public partial class TabLayout : PortalPage<TabLayout>
     {
@@ -27,41 +26,97 @@ namespace ASPNET.StarterKit.Portal
         private const string ContentPaneName = "ContentPane";
         private const string RightPaneName = "RightPane";
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定到内容主栏的模块列表，供 WebForms 标记层直接枚举。</zh-CN>
+        ///   <en>Module list bound to the main content pane and enumerated directly by the WebForms markup.</en>
+        /// </lang>
+        /// </summary>
         protected List<ModuleSettings> contentList;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定到左侧栏的模块列表，保持旧页面三栏布局编辑语义。</zh-CN>
+        ///   <en>Module list bound to the left pane, preserving the legacy page's three-column layout-editing semantics.</en>
+        /// </lang>
+        /// </summary>
         protected List<ModuleSettings> leftList;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定到右侧栏的模块列表，和排序/移动操作共同维护 Tab 布局状态。</zh-CN>
+        ///   <en>Module list bound to the right pane and maintained together with ordering and move operations.</en>
+        /// </lang>
+        /// </summary>
         protected List<ModuleSettings> rightList;
 
         private int tabId;
         private PortalSettings currentPortalSettings;
         private Tab currentTab;
 
-        /// <summary>中文：角色数据访问依赖。English: Role data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>角色数据访问依赖。</zh-CN>
+        ///   <en>Role data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public IRolesDb RolesDB { private get; set; }
 
-        /// <summary>中文：模块实例数据访问依赖。English: Module-instance data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块实例数据访问依赖。</zh-CN>
+        ///   <en>Module-instance data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public IModulesDb ModulesConfig { private get; set; }
 
-        /// <summary>中文：Tab 数据访问依赖。English: Tab data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 数据访问依赖。</zh-CN>
+        ///   <en>Tab data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public ITabsDb TabsConfig { private get; set; }
 
-        /// <summary>中文：模块定义数据访问依赖。English: Module-definition data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块定义数据访问依赖。</zh-CN>
+        ///   <en>Module-definition data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
-        /// <summary>中文：门户全局设置数据访问依赖。English: Portal global-settings data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户全局设置数据访问依赖。</zh-CN>
+        ///   <en>Portal global-settings data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public IGlobalsDb PortalConfig { private get; set; }
 
         /// <summary>
-        /// 中文：授权并验证当前 Tab，在首次请求加载布局数据。
-        ///
-        /// English: Authorizes and validates the current Tab, then loads layout data on the initial request.
+        /// <lang>
+        ///   <zh-CN>授权并验证当前 Tab，在首次请求加载布局数据。</zh-CN>
+        ///   <en>Authorizes and validates the current Tab, then loads layout data on the initial request.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -76,12 +131,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：向当前 Tab 的主内容窗格添加一个允许的新模块实例。
-        ///
-        /// English: Adds an allowed new module instance to the current Tab's content pane.
+        /// <lang>
+        ///   <zh-CN>向当前 Tab 的主内容窗格添加一个允许的新模块实例。</zh-CN>
+        ///   <en>Adds an allowed new module instance to the current Tab's content pane.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void AddModuleToPane_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -139,12 +205,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：在同一窗格内调整所选模块的显示顺序。
-        ///
-        /// English: Adjusts the display order of the selected module inside the same pane.
+        /// <lang>
+        ///   <zh-CN>在同一窗格内调整所选模块的显示顺序。</zh-CN>
+        ///   <en>Adjusts the display order of the selected module inside the same pane.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void UpDown_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -195,12 +272,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：将所选模块移动到另一个允许的布局窗格。
-        ///
-        /// English: Moves the selected module to another allowed layout pane.
+        /// <lang>
+        ///   <zh-CN>将所选模块移动到另一个允许的布局窗格。</zh-CN>
+        ///   <en>Moves the selected module to another allowed layout pane.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void RightLeft_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -257,12 +345,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：保存 Tab 设置并返回核心后台 Tab。
-        ///
-        /// English: Saves Tab settings and returns to the core administration Tab.
+        /// <lang>
+        ///   <zh-CN>保存 Tab 设置并返回核心后台 Tab。</zh-CN>
+        ///   <en>Saves Tab settings and returns to the core administration Tab.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Apply_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest() || !SaveTabData())
@@ -285,12 +384,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：处理 Tab 名称、访问角色或移动端属性的自动保存事件。
-        ///
-        /// English: Handles auto-save events for Tab name, access roles, or mobile properties.
+        /// <lang>
+        ///   <zh-CN>处理 Tab 名称、访问角色或移动端属性的自动保存事件。</zh-CN>
+        ///   <en>Handles auto-save events for Tab name, access roles, or mobile properties.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void TabSettings_Change(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -302,12 +412,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：进入所选模块的实例设置页。
-        ///
-        /// English: Opens the instance-settings page for the selected module.
+        /// <lang>
+        ///   <zh-CN>进入所选模块的实例设置页。</zh-CN>
+        ///   <en>Opens the instance-settings page for the selected module.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void EditBtn_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -332,12 +453,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：删除所选模块实例并重新整理该窗格顺序。
-        ///
-        /// English: Deletes the selected module instance and reorders the affected pane.
+        /// <lang>
+        ///   <zh-CN>删除所选模块实例并重新整理该窗格顺序。</zh-CN>
+        ///   <en>Deletes the selected module instance and reorders the affected pane.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void DeleteBtn_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
