@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P15` 已拆分 |
-| 当前阶段 | `W-anp-P15.3` 待讨论 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P15.3-discussion-questions.md`，然后进入旧注释债务 inventory 与少量明显错误/乱码注释修正。 |
-| 当前完成条件 | P15.2 注释样例与代表性补强已完成；P15.3 需整理旧注释债务、迁移优先级和 P16.1 全量迁移输入。 |
+| 当前阶段 | `W-anp-P15.4` 待讨论 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P15.4-discussion-questions.md`，然后进入文档地图、生成边界、公开/内部/生成文档提交策略整理。 |
+| 当前完成条件 | P15.3 旧注释债务 inventory 已完成；P15.4 需整理文档地图、生成目录归属、公开/内部文档边界和 P15.5 输入。 |
 | 最近状态更新时间 | 2026-07-23 |
 
 ## Recent Completed Items
@@ -75,19 +75,20 @@
 | P15 规划入口 | completed | `work-zone/dev/plans/W-anp-P15.md`、`work-zone/dev/plans/W-anp-P15-breakdown.md`、`work-zone/dev/plans/W-anp-P15.1-discussion-questions.md`。 |
 | P15.1 源码结构与文档化覆盖盘点 | completed | `dev/scripts/Get-PortalSourceDocumentationInventory.ps1`；证据 `work-zone/dev/evidence/p15.1/source-documentation-inventory-20260723-0410.*`；实施结果 `work-zone/dev/plans/W-anp-P15.1-implementation-result.md`。 |
 | P15.2 注释样例与代表性补强 | completed | `work-zone/dev/plans/W-anp-P15.2-comment-style-guide.md`、`work-zone/dev/plans/W-anp-P15.2-implementation-result.md`；代表性文件 `Global.asax.cs`、`Default.master(.cs)`、`DiscussDetails.aspx(.cs)` 已补强。 |
+| P15.3 旧注释复核与技术债分类 | completed | `dev/scripts/Get-PortalCommentDebtInventory.ps1`；证据 `work-zone/dev/evidence/p15.3/comment-debt-inventory-20260723-2221.*`；实施结果 `work-zone/dev/plans/W-anp-P15.3-implementation-result.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P15.2 注释样例补强待提交 | 当前工作区已更新 P15 注释规则，并补强 `Global.asax.cs`、`Default.master(.cs)`、`DiscussDetails.aspx(.cs)`。 |
-| WorkZone | P15.2 文档证据待提交 | 当前工作区已形成 P15.2 注释样例规则、实施结果和 P15.3 待讨论问题。 |
+| 主仓库 | `24114cd` 已推送；P15.3 旧注释脚本和少量 markup 注释修正待提交 | 已提交 P15.2 注释样例补强；当前工作区新增 P15.3 旧注释债务脚本，并将 4 条客户端可见开发注释改为服务端注释。 |
+| WorkZone | `156cb4f` 已推送；P15.3 结果和日志待提交 | 已提交 P15.2 文档证据；当前工作区已形成 P15.3 旧注释债务分类、实施结果、证据和 P15.4 待讨论问题。 |
 
 ## Upcoming Planning Constraints
 
 | 事项 | 状态 | 处理原则 |
 | --- | --- | --- |
-| 代码梳理、注释完善与文档化专项 | active | 已作为 P15/P16 主线启动；P15.1 完成全局盘点，P15.2 完成样例和代表性补强，P15.3 进入旧注释债务分类。 |
+| 代码梳理、注释完善与文档化专项 | active | 已作为 P15/P16 主线启动；P15.1 完成全局盘点，P15.2 完成样例和代表性补强，P15.3 完成旧注释债务分类；全量注释调理需在 `W-anp-P16.5` 验收前完成或登记延期债务。 |
 | 绿盟/本地企业扫描工具 | pending-tool-input | 当前未找到绿盟官方免费本地社区版证据；已记录开源替代组合 ZAP、Greenbone/OpenVAS Free、Nuclei、Nikto。若真实报告或工具输入到 `W-anp-P17.1` 仍未到位，必须至少启动本地 baseline。 |
 
 ## Last Validation Evidence
@@ -156,6 +157,10 @@
 | `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath temp/publish/P14.4-Release-20260722-2048 -OutputRoot work-zone/dev/evidence/p14.4/release-manifest` | 通过；`Files=155; Failed=0; Warning=2`。 |
 | `dev/scripts/Test-PortalProductionHardening.ps1 -Profile Prod -PublishedPath temp/publish/P14.4-Release-20260722-2048` | 通过；证据 `work-zone/dev/evidence/p14.4/production-hardening-prod-publish.json`，`Pass=14; Warning=3; Fail=0; PendingTargetEnvironment=4; Info=2`。 |
 | `dev/scripts/Test-PortalComplianceBaseline.ps1 -Profile Dev` | 通过；`Pass=26; Warning=1; Fail=0; Info=2`，唯一 Warning 为旧 MD5 兼容路径。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P15.3 证据 `work-zone/dev/evidence/p15.3/comment-debt-inventory-20260723-2221.*`，纳入文件 `375`，有债务命中文件 `289`，客户端可见 HTML 注释和乱码命中均为 `0`。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；公开文档索引 `16` 个，失败数 `0`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；保留既有 `CS1591` 和 `Roles.ModulesConfig` 警告。 |
+| P15.3 空白和编码检查 | 通过；`git diff --check` 无空白错误，触达文件 UTF-8 BOM 检查通过。 |
 
 ## Known Residual Working Tree Items
 

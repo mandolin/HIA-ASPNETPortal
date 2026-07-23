@@ -1,10 +1,10 @@
 <%@ Control CodeBehind="DesktopModuleTitle.ascx.cs" Language="c#" AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.DesktopModuleTitle" %>
 
-<!-- 注释描述了该用户控件的作用，它负责在门户中显示每个模块的标题，以及在必要时显示模块的“编辑页面”链接（如果配置了的话） -->
 <%--
-   The PortalModuleTitle User Control is responsible for displaying the title of each
-   portal module within the portal -- as well as optionally the module's "Edit Page"
-   (if such a page has been configured).
+    <lang>
+        <zh-CN>模块标题控件负责显示门户模块标题，并在配置了编辑页且当前用户具备编辑权限时显示模块动作入口。</zh-CN>
+        <en>The module-title control displays each portal module title and, when an edit page is configured and the current user has edit permission, shows the module action entry.</en>
+    </lang>
 --%>
 
 <%-- 中文：P8.3 模块标题正式拆为标题区和动作区，后续模块可逐步复用同一套语义契约。
