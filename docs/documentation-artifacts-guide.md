@@ -61,11 +61,15 @@ P13.3 的 `Test-PortalDocumentationReadiness.ps1` 会把通知来源可读性作
 
 - `temp/documentation/`：JSDoc pilot 的本机验证输出，受 `.gitignore` 保护。
 - `bin/`：Visual Studio 与 MSBuild 生成的程序集和 XML 文档输出，受 `.gitignore` 保护。
-- `src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`：当前不作为公开文档输入或发布目录。
-- `src/Portal.Components.Data/Documentation/`、`src/Portal.shfbproj`：历史文档化候选或生成相关文件，当前不入正式发布包。
+- `src/Documentation/`、`src/Portal/Documentation/`、`src/Portal.Components.Data/Documentation/`：SHFB/Doxygen 历史生成输出，当前不作为公开文档输入或发布目录。
+- `src/DoxyGen/`、`src/Portal.shfbproj`：Doxygen/SHFB 历史工具现场或配置候选，当前不入正式发布包。
 
 `portal: verify public documentation` 会检查这些未确认生成目录没有进入 Git 已追踪文件。若将来需要发布版本化文档，
 必须先定义所有权、许可证、清理方式、发布位置、访问边界和回退方案，并更新本指南、公开索引和门禁。
+
+当 HIA-Documentation-Sys 的 .NET 文档化机制、输出 contract、source linkage 和生成产物边界稳定后，旧 SHFB/Doxygen
+现场不再作为长期兼容目标保留。届时可按内部清理计划删除上述历史生成输出和空配置足迹；若仍需保留少量信息，应先迁移为
+HIA 文档化工具链输入说明，而不是继续提交或发布 SHFB/Doxygen 生成物。
 
 ## 本地验证顺序
 

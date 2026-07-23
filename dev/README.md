@@ -63,11 +63,12 @@ dev/scripts/Get-PortalHiaIntegrationInventory.ps1
 ## 文档化 readiness 与证据包
 
 ```powershell
+dev/scripts/Get-PortalDocumentationMap.ps1
 dev/scripts/Test-PortalDocumentationReadiness.ps1
 dev/scripts/New-PortalDocumentationEvidencePackage.ps1
 ```
 
-`Test-PortalDocumentationReadiness.ps1` 只读检查公开文档化指南、XML 文档边界、JSDoc pilot、生成目录边界、coverage 分层和 HIA 通知读取机制。`New-PortalDocumentationEvidencePackage.ps1` 编排文档化 readiness、baseline、公开文档门禁、XML 文档验证、JSDoc pilot 和 HIA 通知读取，证据默认写入 WorkZone。
+`Get-PortalDocumentationMap.ps1` 只读生成公开文档、WorkZone 内部资料、生成文档输出、历史 SHFB/Doxygen 现场和 HIA 通知源的边界地图。`Test-PortalDocumentationReadiness.ps1` 只读检查公开文档化指南、XML 文档边界、JSDoc pilot、生成目录边界、coverage 分层和 HIA 通知读取机制。`New-PortalDocumentationEvidencePackage.ps1` 编排文档化 readiness、baseline、公开文档门禁、XML 文档验证、JSDoc pilot 和 HIA 通知读取，证据默认写入 WorkZone。
 
 ## 业务身份门禁
 

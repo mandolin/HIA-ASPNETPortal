@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P15` 已拆分 |
-| 当前阶段 | `W-anp-P15.4` 待讨论 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P15.4-discussion-questions.md`，然后进入文档地图、生成边界、公开/内部/生成文档提交策略整理。 |
-| 当前完成条件 | P15.3 旧注释债务 inventory 已完成；P15.4 需整理文档地图、生成目录归属、公开/内部文档边界和 P15.5 输入。 |
+| 当前阶段 | `W-anp-P15.5` 待讨论 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P15.5-discussion-questions.md`，然后进入 P15 周期验收、P16 输入清单和 closeout。 |
+| 当前完成条件 | P15.4 文档地图与生成边界已完成；P15.5 需汇总 P15 closeout、P16 输入、注释调理截止和提交建议。 |
 | 最近状态更新时间 | 2026-07-23 |
 
 ## Recent Completed Items
@@ -76,13 +76,14 @@
 | P15.1 源码结构与文档化覆盖盘点 | completed | `dev/scripts/Get-PortalSourceDocumentationInventory.ps1`；证据 `work-zone/dev/evidence/p15.1/source-documentation-inventory-20260723-0410.*`；实施结果 `work-zone/dev/plans/W-anp-P15.1-implementation-result.md`。 |
 | P15.2 注释样例与代表性补强 | completed | `work-zone/dev/plans/W-anp-P15.2-comment-style-guide.md`、`work-zone/dev/plans/W-anp-P15.2-implementation-result.md`；代表性文件 `Global.asax.cs`、`Default.master(.cs)`、`DiscussDetails.aspx(.cs)` 已补强。 |
 | P15.3 旧注释复核与技术债分类 | completed | `dev/scripts/Get-PortalCommentDebtInventory.ps1`；证据 `work-zone/dev/evidence/p15.3/comment-debt-inventory-20260723-2221.*`；实施结果 `work-zone/dev/plans/W-anp-P15.3-implementation-result.md`。 |
+| P15.4 文档地图与生成边界整理 | completed | `dev/scripts/Get-PortalDocumentationMap.ps1`；证据 `work-zone/dev/evidence/p15.4/documentation-map-20260723-2312.*`；实施结果 `work-zone/dev/plans/W-anp-P15.4-implementation-result.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `24114cd` 已推送；P15.3 旧注释脚本和少量 markup 注释修正待提交 | 已提交 P15.2 注释样例补强；当前工作区新增 P15.3 旧注释债务脚本，并将 4 条客户端可见开发注释改为服务端注释。 |
-| WorkZone | `156cb4f` 已推送；P15.3 结果和日志待提交 | 已提交 P15.2 文档证据；当前工作区已形成 P15.3 旧注释债务分类、实施结果、证据和 P15.4 待讨论问题。 |
+| 主仓库 | `838e6b0` 已推送；P15.4 文档地图脚本和公开文档边界更新待提交 | 已提交 P15.3 旧注释债务脚本；当前工作区新增 P15.4 文档地图脚本，并更新公开文档化边界说明。 |
+| WorkZone | `49f9585` 已推送；P15.4 结果和日志待提交 | 已提交 P15.3 文档证据；当前工作区已形成 P15.4 文档地图、实施结果、证据和 P15.5 待讨论问题。 |
 
 ## Upcoming Planning Constraints
 
@@ -161,6 +162,9 @@
 | `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；公开文档索引 `16` 个，失败数 `0`。 |
 | `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；保留既有 `CS1591` 和 `Roles.ModulesConfig` 警告。 |
 | P15.3 空白和编码检查 | 通过；`git diff --check` 无空白错误，触达文件 UTF-8 BOM 检查通过。 |
+| `dev/scripts/Get-PortalDocumentationMap.ps1` | 通过；P15.4 证据 `work-zone/dev/evidence/p15.4/documentation-map-20260723-2312.*`，稳定公开文档 `19`，文档化脚本入口 `10`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`TotalChecks=7; FailedChecks=0; WarningChecks=0; PendingChecks=0`。 |
+| P15.4 公开文档、空白和编码检查 | 通过；公开文档门禁失败数 `0`，`git diff --check` 无空白错误，触达文件 UTF-8 BOM 检查通过。 |
 
 ## Known Residual Working Tree Items
 
