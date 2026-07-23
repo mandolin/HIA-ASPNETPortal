@@ -1,26 +1,48 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="ASPNET.StarterKit.Portal.PortalMasterPage" %>
 
 <%--
-中文：默认 Master 固定引用桌面 Banner；P7.4 起承载现代门户外壳，Banner 可配置化属于后续专题。
-English: The default Master keeps the desktop Banner; starting with P7.4 it hosts the modern portal shell, while configurable banners remain a future concern.
+<lang>
+  <zh-CN>默认 Master 固定引用桌面 Banner 控件；P7.4 起它承载现代门户外壳，Banner 的进一步组件化或可配置化属于后续专题。</zh-CN>
+  <en>The default Master keeps the desktop Banner control. Starting with P7.4, it hosts the modern portal shell; further componentization or configurability of the banner remains future work.</en>
+</lang>
 --%>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Banner" Src="DesktopPortalBanner.ascx" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <%-- 中文：标题仍沿用历史固定值；主题 CSS 由 Web Forms 原生 Theme 在页面生命周期中装载。English: The title remains a legacy fixed value; native Web Forms Theme loads theme CSS during the page lifecycle. --%>
+    <%--
+    <lang>
+      <zh-CN>页面标题仍沿用历史固定值；主题 CSS 由 Web Forms 原生 Theme 在页面生命周期中装载，不在 Master 标记中手动拼接。</zh-CN>
+      <en>The page title remains a legacy fixed value. Native Web Forms Theme loading attaches theme CSS during the page lifecycle, so the Master markup does not concatenate it manually.</en>
+    </lang>
+    --%>
     <title>ASP.NET Portal Starter Kit</title>
 </head>
-<%-- 中文：PortalMasterPage 在渲染前为此 body 写入受控主题/Tab class；不得在标记中直接拼接外部资源。English: PortalMasterPage writes controlled theme/Tab classes to this body before rendering; markup must not concatenate external resources. --%>
+<%--
+<lang>
+  <zh-CN>PortalMasterPage 在渲染前为此 body 写入受控主题和 Tab class；标记层不得直接拼接外部资源，避免绕过主题包和模块包的受信任部署边界。</zh-CN>
+  <en>PortalMasterPage writes controlled theme and Tab classes to this body before rendering. Markup must not concatenate external resources, so it does not bypass the trusted deployment boundary of theme and module packages.</en>
+</lang>
+--%>
 <body id="PortalBody" runat="server" bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
     <form id="Form1" runat="server">
-        <%-- 中文：P7.4 主壳层改为 div 结构；仍保留单一 server form 与 WebForms postback。English: P7.4 moves the shell to div markup while keeping the single server form and WebForms postback. --%>
+        <%--
+        <lang>
+          <zh-CN>P7.4 主壳层已改为 div 结构；仍保留单一 server form 与 Web Forms postback，避免破坏旧控件生命周期。</zh-CN>
+          <en>P7.4 moved the shell to div markup while retaining the single server form and Web Forms postback, preserving the legacy control lifecycle.</en>
+        </lang>
+        --%>
         <div class="portal-app-shell">
             <ASPNETPortal:Banner ID="Banner" runat="server" SelectedTabIndex="0"></ASPNETPortal:Banner>
             <div class="portal-main-shell">
                 <div class="portal-content-stage">
-                    <%-- 中文：门户页与后台页通过此占位符提供主体内容。English: Portal and administration pages provide main content through this placeholder. --%>
+                    <%--
+                    <lang>
+                      <zh-CN>门户页、后台页和旧模块页都通过此占位符提供主体内容；主题样式应围绕该稳定入口做兼容。</zh-CN>
+                      <en>Portal pages, administration pages, and legacy module pages all provide main content through this placeholder; theme styles should treat it as a stable compatibility entry point.</en>
+                    </lang>
+                    --%>
                     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                 </div>
             </div>
