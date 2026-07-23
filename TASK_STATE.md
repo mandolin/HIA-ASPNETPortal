@@ -14,11 +14,11 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P15` 已拆分 |
-| 当前阶段 | `W-anp-P15.5` 待讨论 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P15.5-discussion-questions.md`，然后进入 P15 周期验收、P16 输入清单和 closeout。 |
-| 当前完成条件 | P15.4 文档地图与生成边界已完成；P15.5 需汇总 P15 closeout、P16 输入、注释调理截止和提交建议。 |
-| 最近状态更新时间 | 2026-07-23 |
+| 当前大周期 | `W-anp-P16` 已拆分 |
+| 当前阶段 | `W-anp-P16.1` 待讨论 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P16.1-discussion-questions.md`，然后生成第一批 `<lang>` / `<l>` 迁移清单并执行首批注释补强。 |
+| 当前完成条件 | P15 已完成周期验收和 closeout；P16.1 需确认批次化迁移策略、首批文件范围、脚本辅助边界和每批验证门禁。 |
+| 最近状态更新时间 | 2026-07-24 |
 
 ## Recent Completed Items
 
@@ -77,19 +77,21 @@
 | P15.2 注释样例与代表性补强 | completed | `work-zone/dev/plans/W-anp-P15.2-comment-style-guide.md`、`work-zone/dev/plans/W-anp-P15.2-implementation-result.md`；代表性文件 `Global.asax.cs`、`Default.master(.cs)`、`DiscussDetails.aspx(.cs)` 已补强。 |
 | P15.3 旧注释复核与技术债分类 | completed | `dev/scripts/Get-PortalCommentDebtInventory.ps1`；证据 `work-zone/dev/evidence/p15.3/comment-debt-inventory-20260723-2221.*`；实施结果 `work-zone/dev/plans/W-anp-P15.3-implementation-result.md`。 |
 | P15.4 文档地图与生成边界整理 | completed | `dev/scripts/Get-PortalDocumentationMap.ps1`；证据 `work-zone/dev/evidence/p15.4/documentation-map-20260723-2312.*`；实施结果 `work-zone/dev/plans/W-anp-P15.4-implementation-result.md`。 |
+| P15.5 周期验收与 P16 输入 | completed | `work-zone/dev/plans/W-anp-P15.5-acceptance-result.md`、`work-zone/dev/plans/W-anp-P15-closeout.md`、`work-zone/dev/plans/W-anp-P16-input-from-P15.md`。 |
+| P16 规划入口 | completed | `work-zone/dev/plans/W-anp-P16.md`、`work-zone/dev/plans/W-anp-P16-breakdown.md`、`work-zone/dev/plans/W-anp-P16.1-discussion-questions.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `838e6b0` 已推送；P15.4 文档地图脚本和公开文档边界更新待提交 | 已提交 P15.3 旧注释债务脚本；当前工作区新增 P15.4 文档地图脚本，并更新公开文档化边界说明。 |
-| WorkZone | `49f9585` 已推送；P15.4 结果和日志待提交 | 已提交 P15.3 文档证据；当前工作区已形成 P15.4 文档地图、实施结果、证据和 P15.5 待讨论问题。 |
+| 主仓库 | `86be23a` 已推送；本次仅任务账本状态更新待提交 | 已提交 P15.4 文档地图脚本和公开文档边界；当前进入 P16.1 前状态校准。 |
+| WorkZone | `427c3ad` 已推送；P15.5/P16 收口资料待提交 | 已提交 P15.4 文档地图；当前已形成 P15.5 验收、P15 closeout、P16 输入和 P16.1 待讨论资料。 |
 
 ## Upcoming Planning Constraints
 
 | 事项 | 状态 | 处理原则 |
 | --- | --- | --- |
-| 代码梳理、注释完善与文档化专项 | active | 已作为 P15/P16 主线启动；P15.1 完成全局盘点，P15.2 完成样例和代表性补强，P15.3 完成旧注释债务分类；全量注释调理需在 `W-anp-P16.5` 验收前完成或登记延期债务。 |
+| 代码梳理、注释完善与文档化专项 | active | P15 已完成输入质量整理；P16 已拆分，P16.1 进入全量 `<lang>` / `<l>` 迁移与注释丰富度提升讨论；全量注释调理需在 `W-anp-P16.5` 验收前完成或登记延期债务。 |
 | 绿盟/本地企业扫描工具 | pending-tool-input | 当前未找到绿盟官方免费本地社区版证据；已记录开源替代组合 ZAP、Greenbone/OpenVAS Free、Nuclei、Nikto。若真实报告或工具输入到 `W-anp-P17.1` 仍未到位，必须至少启动本地 baseline。 |
 
 ## Last Validation Evidence
@@ -165,6 +167,10 @@
 | `dev/scripts/Get-PortalDocumentationMap.ps1` | 通过；P15.4 证据 `work-zone/dev/evidence/p15.4/documentation-map-20260723-2312.*`，稳定公开文档 `19`，文档化脚本入口 `10`。 |
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`TotalChecks=7; FailedChecks=0; WarningChecks=0; PendingChecks=0`。 |
 | P15.4 公开文档、空白和编码检查 | 通过；公开文档门禁失败数 `0`，`git diff --check` 无空白错误，触达文件 UTF-8 BOM 检查通过。 |
+| `dev/scripts/Get-PortalSourceDocumentationInventory.ps1` | 通过；P15.5 证据 `work-zone/dev/evidence/p15.5/source-documentation-inventory-20260724-0100.*`，纳入文件 `437`。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P15.5 证据 `work-zone/dev/evidence/p15.5/comment-debt-inventory-20260724-0100.*`，有债务命中文件 `289`，旧双语格式命中 `3187`。 |
+| `dev/scripts/Get-PortalDocumentationMap.ps1` | 通过；P15.5 证据 `work-zone/dev/evidence/p15.5/documentation-map-20260724-0100.*`，稳定公开文档 `19`，文档化脚本入口 `11`。 |
+| P15.5 文档化门禁 | 通过；HIA 通知读取、公开文档门禁、DocumentationReadiness、XML documentation build 和 `git diff --check` 均通过。 |
 
 ## Known Residual Working Tree Items
 
