@@ -3,24 +3,24 @@ using System.Collections.Generic;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：系统设置元数据 registry。
-    ///
-    /// English: Registry of system-setting metadata.
+    /// <lang>
+    ///   <zh-CN>系统设置元数据 registry。</zh-CN>
+    ///   <en>Registry of system-setting metadata.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：registry 集中描述设置项，再由运行时解析器、数据库覆盖层和后台管理界面按其契约工作。
-    /// 已登记的定义是可受控读取和在线管理的唯一入口，不能以任意键绕过元数据校验。
-    ///
-    /// English: The registry centralizes setting definitions, which are then used by the runtime resolver,
-    /// database override layer, and administration UI. Registered definitions are the only controlled entry
-    /// point for reads and online management; arbitrary keys must not bypass metadata validation.
+    /// <lang>
+    ///   <zh-CN>registry 集中描述设置项，再由运行时解析器、数据库覆盖层和后台管理界面按其契约工作。 已登记的定义是可受控读取和在线管理的唯一入口，不能以任意键绕过元数据校验。</zh-CN>
+    ///   <en>The registry centralizes setting definitions, which are then used by the runtime resolver, database override layer, and administration UI. Registered definitions are the only controlled entry point for reads and online management; arbitrary keys must not bypass metadata validation.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalSettingsRegistry
     {
         /// <summary>
-        /// 中文：控制是否开放用户自主注册的设置定义，默认关闭。
-        ///
-        /// English: Setting definition controlling whether user self-registration is available; disabled by default.
+        /// <lang>
+        ///   <zh-CN>控制是否开放用户自主注册的设置定义，默认关闭。</zh-CN>
+        ///   <en>Setting definition controlling whether user self-registration is available; disabled by default.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition AllowSelfRegistration =
             new PortalSettingDefinition(
@@ -35,9 +35,10 @@ namespace ASPNET.StarterKit.Portal
                 "Security");
 
         /// <summary>
-        /// 中文：控制自主注册用户是否需要管理员审核的设置定义，默认启用。
-        ///
-        /// English: Setting definition controlling whether self-registered users require administrator approval; enabled by default.
+        /// <lang>
+        ///   <zh-CN>控制自主注册用户是否需要管理员审核的设置定义，默认启用。</zh-CN>
+        ///   <en>Setting definition controlling whether self-registered users require administrator approval; enabled by default.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition RequireRegistrationApproval =
             new PortalSettingDefinition(
@@ -52,15 +53,16 @@ namespace ASPNET.StarterKit.Portal
                 "Security");
 
         /// <summary>
-        /// 中文：控制登录密码提交是否必须使用前端一次性公钥加密的设置定义。
-        ///
-        /// English: Setting definition controlling whether login-password submission must use one-time public-key encryption on the client.
+        /// <lang>
+        ///   <zh-CN>控制登录密码提交是否必须使用前端一次性公钥加密的设置定义。</zh-CN>
+        ///   <en>Setting definition controlling whether login-password submission must use one-time public-key encryption on the client.</en>
+        /// </lang>
         /// </summary>
         /// <remarks>
-        /// 中文：P10.3 当前默认开启。后续会按客户端浏览器环境选择加密强度，但该开关仍表达“是否必须加密提交”的业务策略。
-        ///
-        /// English: Enabled by default in P10.3. Later work will select encryption strength by client browser capability,
-        /// while this setting continues to represent whether encrypted submission is required.
+        /// <lang>
+        ///   <zh-CN>P10.3 当前默认开启。后续会按客户端浏览器环境选择加密强度，但该开关仍表达“是否必须加密提交”的业务策略。</zh-CN>
+        ///   <en>Enabled by default in P10.3. Later work will select encryption strength by client browser capability, while this setting continues to represent whether encrypted submission is required.</en>
+        /// </lang>
         /// </remarks>
         public static readonly PortalSettingDefinition RequireEncryptedLoginPassword =
             new PortalSettingDefinition(
@@ -75,9 +77,10 @@ namespace ASPNET.StarterKit.Portal
                 "Security");
 
         /// <summary>
-        /// 中文：密码策略最小长度设置定义，硬下限为 8 位。
-        ///
-        /// English: Setting definition for password-policy minimum length, with an 8-character hard lower bound.
+        /// <lang>
+        ///   <zh-CN>密码策略最小长度设置定义，硬下限为 8 位。</zh-CN>
+        ///   <en>Setting definition for password-policy minimum length, with an 8-character hard lower bound.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition PasswordMinimumLength =
             new PortalSettingDefinition(
@@ -94,9 +97,10 @@ namespace ASPNET.StarterKit.Portal
                 maxIntegerValue: 128);
 
         /// <summary>
-        /// 中文：密码策略要求的字符类别数量设置定义。
-        ///
-        /// English: Setting definition for the required password character-category count.
+        /// <lang>
+        ///   <zh-CN>密码策略要求的字符类别数量设置定义。</zh-CN>
+        ///   <en>Setting definition for the required password character-category count.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition PasswordRequiredCategoryCount =
             new PortalSettingDefinition(
@@ -113,9 +117,10 @@ namespace ASPNET.StarterKit.Portal
                 maxIntegerValue: 4);
 
         /// <summary>
-        /// 中文：常见弱口令字典检测设置定义。
-        ///
-        /// English: Setting definition for common weak-password dictionary checks.
+        /// <lang>
+        ///   <zh-CN>常见弱口令字典检测设置定义。</zh-CN>
+        ///   <en>Setting definition for common weak-password dictionary checks.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition PasswordWeakDictionaryEnabled =
             new PortalSettingDefinition(
@@ -130,9 +135,10 @@ namespace ASPNET.StarterKit.Portal
                 "Security");
 
         /// <summary>
-        /// 中文：禁止密码包含账号上下文词的设置定义。
-        ///
-        /// English: Setting definition for disallowing account-context terms in passwords.
+        /// <lang>
+        ///   <zh-CN>禁止密码包含账号上下文词的设置定义。</zh-CN>
+        ///   <en>Setting definition for disallowing account-context terms in passwords.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition PasswordDisallowContextTerms =
             new PortalSettingDefinition(
@@ -147,9 +153,10 @@ namespace ASPNET.StarterKit.Portal
                 "Security");
 
         /// <summary>
-        /// 中文：临时注册链接默认有效天数的设置定义。
-        ///
-        /// English: Setting definition for the default validity period of temporary registration invite links.
+        /// <lang>
+        ///   <zh-CN>临时注册链接默认有效天数的设置定义。</zh-CN>
+        ///   <en>Setting definition for the default validity period of temporary registration invite links.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition RegistrationInviteDefaultExpiryDays =
             new PortalSettingDefinition(
@@ -165,9 +172,10 @@ namespace ASPNET.StarterKit.Portal
                 minIntegerValue: 1);
 
         /// <summary>
-        /// 中文：员工号尚未绑定时是否可继续进入待审核注册流程的设置定义。
-        ///
-        /// English: Setting definition controlling whether a registration with pending employee binding may continue to approval.
+        /// <lang>
+        ///   <zh-CN>员工号尚未绑定时是否可继续进入待审核注册流程的设置定义。</zh-CN>
+        ///   <en>Setting definition controlling whether a registration with pending employee binding may continue to approval.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition AllowPendingEmployeeBinding =
             new PortalSettingDefinition(
@@ -182,9 +190,10 @@ namespace ASPNET.StarterKit.Portal
                 "Registration");
 
         /// <summary>
-        /// 中文：文档模块允许上传的单个文件最大字节数设置定义。
-        ///
-        /// English: Setting definition for the maximum bytes allowed for one document-module upload.
+        /// <lang>
+        ///   <zh-CN>文档模块允许上传的单个文件最大字节数设置定义。</zh-CN>
+        ///   <en>Setting definition for the maximum bytes allowed for one document-module upload.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition MaxUploadBytes =
             new PortalSettingDefinition(
@@ -201,16 +210,16 @@ namespace ASPNET.StarterKit.Portal
                 maxIntegerValue: PortalDocumentPolicy.InfrastructureMaximumUploadBytes);
 
         /// <summary>
-        /// 中文：文档模块允许上传扩展名列表的设置定义。
-        ///
-        /// English: Setting definition for the document-module upload-extension allowlist.
+        /// <lang>
+        ///   <zh-CN>文档模块允许上传扩展名列表的设置定义。</zh-CN>
+        ///   <en>Setting definition for the document-module upload-extension allowlist.</en>
+        /// </lang>
         /// </summary>
         /// <remarks>
-        /// 中文：该文本设置只用于从 <see cref="PortalDocumentPolicy"/> 的硬允许集中选择子集；即使数据库覆盖值
-        /// 包含其他扩展名，也不会使脚本、页面、配置或可执行文件可上传。
-        ///
-        /// English: This text setting selects a subset of <see cref="PortalDocumentPolicy"/>'s hard allowlist only;
-        /// a database override containing other extensions never makes scripts, pages, configuration files, or executables uploadable.
+        /// <lang>
+        ///   <zh-CN>该文本设置只用于从 <see cref="PortalDocumentPolicy"/> 的硬允许集中选择子集；即使数据库覆盖值 包含其他扩展名，也不会使脚本、页面、配置或可执行文件可上传。</zh-CN>
+        ///   <en>This text setting selects a subset of <see cref="PortalDocumentPolicy"/>'s hard allowlist only; a database override containing other extensions never makes scripts, pages, configuration files, or executables uploadable.</en>
+        /// </lang>
         /// </remarks>
         public static readonly PortalSettingDefinition AllowedDocumentExtensions =
             new PortalSettingDefinition(
@@ -225,9 +234,10 @@ namespace ASPNET.StarterKit.Portal
                 "Documents");
 
         /// <summary>
-        /// 中文：门户 Web Forms 主题名称的设置定义。
-        ///
-        /// English: Setting definition for the Portal Web Forms theme name.
+        /// <lang>
+        ///   <zh-CN>门户 Web Forms 主题名称的设置定义。</zh-CN>
+        ///   <en>Setting definition for the Portal Web Forms theme name.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition ThemeName =
             new PortalSettingDefinition(
@@ -242,9 +252,10 @@ namespace ASPNET.StarterKit.Portal
                 "Theme");
 
         /// <summary>
-        /// 中文：详细错误输出状态的只读设置定义。
-        ///
-        /// English: Read-only setting definition for detailed-error output status.
+        /// <lang>
+        ///   <zh-CN>详细错误输出状态的只读设置定义。</zh-CN>
+        ///   <en>Read-only setting definition for detailed-error output status.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition DiagnosticsDetailedErrors =
             new PortalSettingDefinition(
@@ -259,9 +270,10 @@ namespace ASPNET.StarterKit.Portal
                 "Diagnostics");
 
         /// <summary>
-        /// 中文：诊断日志目录的部署级只读设置定义。
-        ///
-        /// English: Deployment-level read-only setting definition for the diagnostics log directory.
+        /// <lang>
+        ///   <zh-CN>诊断日志目录的部署级只读设置定义。</zh-CN>
+        ///   <en>Deployment-level read-only setting definition for the diagnostics log directory.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition DiagnosticsLogDirectory =
             new PortalSettingDefinition(
@@ -276,9 +288,10 @@ namespace ASPNET.StarterKit.Portal
                 "Diagnostics");
 
         /// <summary>
-        /// 中文：结构化诊断日志单文件大小上限的部署级只读设置定义。
-        ///
-        /// English: Deployment-level read-only setting definition for the structured diagnostics log-file size limit.
+        /// <lang>
+        ///   <zh-CN>结构化诊断日志单文件大小上限的部署级只读设置定义。</zh-CN>
+        ///   <en>Deployment-level read-only setting definition for the structured diagnostics log-file size limit.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition DiagnosticsMaxFileBytes =
             new PortalSettingDefinition(
@@ -295,9 +308,10 @@ namespace ASPNET.StarterKit.Portal
                 maxIntegerValue: 104857600);
 
         /// <summary>
-        /// 中文：结构化诊断日志保留天数的部署级只读设置定义。
-        ///
-        /// English: Deployment-level read-only setting definition for structured diagnostics-log retention days.
+        /// <lang>
+        ///   <zh-CN>结构化诊断日志保留天数的部署级只读设置定义。</zh-CN>
+        ///   <en>Deployment-level read-only setting definition for structured diagnostics-log retention days.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition DiagnosticsRetentionDays =
             new PortalSettingDefinition(
@@ -314,9 +328,10 @@ namespace ASPNET.StarterKit.Portal
                 maxIntegerValue: 3650);
 
         /// <summary>
-        /// 中文：管理员查看已净化诊断详情权限的部署级只读设置定义。
-        ///
-        /// English: Deployment-level read-only setting definition for administrator access to sanitized diagnostic details.
+        /// <lang>
+        ///   <zh-CN>管理员查看已净化诊断详情权限的部署级只读设置定义。</zh-CN>
+        ///   <en>Deployment-level read-only setting definition for administrator access to sanitized diagnostic details.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition DiagnosticsAllowAdminDetailView =
             new PortalSettingDefinition(
@@ -331,9 +346,10 @@ namespace ASPNET.StarterKit.Portal
                 "Diagnostics");
 
         /// <summary>
-        /// 中文：HIA 外围契约使用的部署级门户实例标识设置定义。
-        ///
-        /// English: Deployment-level Portal instance identifier setting definition for the HIA peripheral contract.
+        /// <lang>
+        ///   <zh-CN>HIA 外围契约使用的部署级门户实例标识设置定义。</zh-CN>
+        ///   <en>Deployment-level Portal instance identifier setting definition for the HIA peripheral contract.</en>
+        /// </lang>
         /// </summary>
         public static readonly PortalSettingDefinition HiaPortalInstanceId =
             new PortalSettingDefinition(
@@ -372,13 +388,16 @@ namespace ASPNET.StarterKit.Portal
             }.AsReadOnly();
 
         /// <summary>
-        /// 中文：获取当前已登记的全部设置定义。
-        ///
-        /// English: Gets all currently registered setting definitions.
+        /// <lang>
+        ///   <zh-CN>获取当前已登记的全部设置定义。</zh-CN>
+        ///   <en>Gets all currently registered setting definitions.</en>
+        /// </lang>
         /// </summary>
         /// <returns>
-        /// 中文：只读定义集合，调用方不应修改其中的定义。
-        /// English: Read-only definition collection; callers must not modify the contained definitions.
+        /// <l>
+        ///   <zh-CN>只读定义集合，调用方不应修改其中的定义。</zh-CN>
+        ///   <en>Read-only definition collection; callers must not modify the contained definitions.</en>
+        /// </l>
         /// </returns>
         public static IEnumerable<PortalSettingDefinition> GetAll()
         {
@@ -386,13 +405,29 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：按稳定键名查找设置定义。
-        ///
-        /// English: Finds a setting definition by its stable key.
+        /// <lang>
+        ///   <zh-CN>按稳定键名查找设置定义。</zh-CN>
+        ///   <en>Finds a setting definition by its stable key.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="key">中文：要查找的稳定设置键。English: Stable setting key to find.</param>
-        /// <param name="definition">中文：找到时返回对应定义；否则为 <c>null</c>。English: Matching definition when found; otherwise <c>null</c>.</param>
-        /// <returns>中文：找到已登记定义时为 <c>true</c>。English: <c>true</c> when a registered definition is found.</returns>
+        /// <param name="key">
+        /// <l>
+        ///   <zh-CN>要查找的稳定设置键。</zh-CN>
+        ///   <en>Stable setting key to find.</en>
+        /// </l>
+        /// </param>
+        /// <param name="definition">
+        /// <l>
+        ///   <zh-CN>找到时返回对应定义；否则为 <c>null</c>。</zh-CN>
+        ///   <en>Matching definition when found; otherwise <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>找到已登记定义时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when a registered definition is found.</en>
+        /// </l>
+        /// </returns>
         public static bool TryGet(string key, out PortalSettingDefinition definition)
         {
             foreach (PortalSettingDefinition item in AllDefinitions)

@@ -8,19 +8,16 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：旧后台用户资料、角色和注册审核管理页面。
-    ///
-    /// English: Legacy administration page for user profiles, roles, and registration review.
+    /// <lang>
+    ///   <zh-CN>旧后台用户资料、角色和注册审核管理页面。</zh-CN>
+    ///   <en>Legacy administration page for user profiles, roles, and registration review.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：页面要求 <c>Admins</c> 角色，并只编辑能由数值 userId 规范解析到的用户。用户创建由
-    /// <c>Users.ascx</c> 的显式管理员 POST 完成；本页不会因访问地址缺少用户名而写入数据库。
-    /// 角色调整和密码重置会递增目标用户安全版本，使旧身份票据和角色 Cookie 在后续请求中失效。
-    ///
-    /// English: The page requires the <c>Admins</c> role and edits only a user canonically resolved by numeric userId.
-    /// User creation occurs through the explicit administrator POST in <c>Users.ascx</c>; this page never writes to
-    /// the database merely because an address lacks a user name. Role changes and password resets increment the target
-    /// user's security version so older authentication and role cookies are invalidated on later requests.
+    /// <lang>
+    ///   <zh-CN>页面要求 <c>Admins</c> 角色，并只编辑能由数值 userId 规范解析到的用户。用户创建由 <c>Users.ascx</c> 的显式管理员 POST 完成；本页不会因访问地址缺少用户名而写入数据库。 角色调整和密码重置会递增目标用户安全版本，使旧身份票据和角色 Cookie 在后续请求中失效。</zh-CN>
+    ///   <en>The page requires the <c>Admins</c> role and edits only a user canonically resolved by numeric userId. User creation occurs through the explicit administrator POST in <c>Users.ascx</c>; this page never writes to the database merely because an address lacks a user name. Role changes and password resets increment the target user's security version so older authentication and role cookies are invalidated on later requests.</en>
+    /// </lang>
     /// </remarks>
     public partial class ManageUsers : PortalPage<ManageUsers>
     {
@@ -30,37 +27,50 @@ namespace ASPNET.StarterKit.Portal
         private IUserItem currentUser;
 
         /// <summary>
-        /// 中文：用户和注册审核数据访问依赖。
-        ///
-        /// English: User and registration-review data-access dependency.
+        /// <lang>
+        ///   <zh-CN>用户和注册审核数据访问依赖。</zh-CN>
+        ///   <en>User and registration-review data-access dependency.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IUsersDb UsersDB { private get; set; }
 
         /// <summary>
-        /// 中文：角色和成员关系数据访问依赖。
-        ///
-        /// English: Role and membership data-access dependency.
+        /// <lang>
+        ///   <zh-CN>角色和成员关系数据访问依赖。</zh-CN>
+        ///   <en>Role and membership data-access dependency.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IRolesDb RolesDB { private get; set; }
 
         /// <summary>
-        /// 中文：员工目录只读数据访问依赖，用于展示当前账号员工绑定。
-        ///
-        /// English: Employee-directory read dependency used to display the current user-employee binding.
+        /// <lang>
+        ///   <zh-CN>员工目录只读数据访问依赖，用于展示当前账号员工绑定。</zh-CN>
+        ///   <en>Employee-directory read dependency used to display the current user-employee binding.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IEmployeeDirectoryDb EmployeeDirectoryDb { private get; set; }
 
         /// <summary>
-        /// 中文：授权并解析规范用户目标；首次请求绑定用户、角色和审核信息。
-        ///
-        /// English: Authorizes and resolves the canonical user target, then binds user, role, and review information
-        /// on the initial request.
+        /// <lang>
+        ///   <zh-CN>授权并解析规范用户目标；首次请求绑定用户、角色和审核信息。</zh-CN>
+        ///   <en>Authorizes and resolves the canonical user target, then binds user, role, and review information on the initial request.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!TryInitializeRequest() ||
@@ -78,12 +88,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：处理仅返回门户页的保存按钮事件。
-        ///
-        /// English: Handles the save-button event that only returns to the Portal page.
+        /// <lang>
+        ///   <zh-CN>处理仅返回门户页的保存按钮事件。</zh-CN>
+        ///   <en>Handles the save-button event that only returns to the Portal page.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Save_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -95,13 +116,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：将当前用户加入所选的当前门户角色，并记录不含角色名称的运营审计。
-        ///
-        /// English: Adds the current user to a selected role of the current Portal and records an operations audit
-        /// without the role name.
+        /// <lang>
+        ///   <zh-CN>将当前用户加入所选的当前门户角色，并记录不含角色名称的运营审计。</zh-CN>
+        ///   <en>Adds the current user to a selected role of the current Portal and records an operations audit without the role name.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void AddRole_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -140,13 +171,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：更新当前用户的资料扩展，并在填写密码时重置强哈希凭据；审计不记录密码或资料原文。
-        ///
-        /// English: Updates the current user's profile extension and resets the strong-hash credential when a password
-        /// is entered; audit entries do not record passwords or raw profile values.
+        /// <lang>
+        ///   <zh-CN>更新当前用户的资料扩展，并在填写密码时重置强哈希凭据；审计不记录密码或资料原文。</zh-CN>
+        ///   <en>Updates the current user's profile extension and resets the strong-hash credential when a password is entered; audit entries do not record passwords or raw profile values.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void UpdateUser_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest() ||
@@ -263,9 +304,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：按加密开关配置管理员重置密码提交脚本。
-        ///
-        /// English: Configures administrator password-reset submission scripts from the encryption switch.
+        /// <lang>
+        ///   <zh-CN>按加密开关配置管理员重置密码提交脚本。</zh-CN>
+        ///   <en>Configures administrator password-reset submission scripts from the encryption switch.</en>
+        /// </lang>
         /// </summary>
         private void ConfigurePasswordSubmission()
         {
@@ -294,11 +336,17 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：判断本次后台用户资料提交是否包含重置密码意图。
-        ///
-        /// English: Determines whether this user-profile submission intends to reset the password.
+        /// <lang>
+        ///   <zh-CN>判断本次后台用户资料提交是否包含重置密码意图。</zh-CN>
+        ///   <en>Determines whether this user-profile submission intends to reset the password.</en>
+        /// </lang>
         /// </summary>
-        /// <returns>中文：任一明文或密文字段非空时为 <c>true</c>。English: <c>true</c> when any plain or encrypted field is present.</returns>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>任一明文或密文字段非空时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when any plain or encrypted field is present.</en>
+        /// </l>
+        /// </returns>
         private bool HasPasswordResetSubmission()
         {
             return !string.IsNullOrEmpty(Password.Text) ||
@@ -308,16 +356,41 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：解析管理员重置密码提交，保持“两框任一填写即重置”的旧语义。
-        ///
-        /// English: Resolves administrator password-reset submission while preserving the legacy "either field
-        /// means reset" semantics.
+        /// <lang>
+        ///   <zh-CN>解析管理员重置密码提交，保持“两框任一填写即重置”的旧语义。</zh-CN>
+        ///   <en>Resolves administrator password-reset submission while preserving the legacy "either field means reset" semantics.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="passwordResetSubmitted">中文：是否存在密码重置提交意图。English: Whether a password-reset submission was detected.</param>
-        /// <param name="password">中文：当前请求内使用的密码。English: Password value for this request.</param>
-        /// <param name="confirmPassword">中文：当前请求内使用的确认密码。English: Confirmation password value for this request.</param>
-        /// <param name="shouldResetPassword">中文：解密或读取后是否应重置密码。English: Whether the password should be reset after decrypting or reading values.</param>
-        /// <returns>中文：提交满足当前加密策略时为 <c>true</c>。English: <c>true</c> when the submission satisfies the current encryption policy.</returns>
+        /// <param name="passwordResetSubmitted">
+        /// <l>
+        ///   <zh-CN>是否存在密码重置提交意图。</zh-CN>
+        ///   <en>Whether a password-reset submission was detected.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>当前请求内使用的密码。</zh-CN>
+        ///   <en>Password value for this request.</en>
+        /// </l>
+        /// </param>
+        /// <param name="confirmPassword">
+        /// <l>
+        ///   <zh-CN>当前请求内使用的确认密码。</zh-CN>
+        ///   <en>Confirmation password value for this request.</en>
+        /// </l>
+        /// </param>
+        /// <param name="shouldResetPassword">
+        /// <l>
+        ///   <zh-CN>解密或读取后是否应重置密码。</zh-CN>
+        ///   <en>Whether the password should be reset after decrypting or reading values.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>提交满足当前加密策略时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the submission satisfies the current encryption policy.</en>
+        /// </l>
+        /// </returns>
         private bool TryResolvePasswordResetSubmission(
             bool passwordResetSubmitted,
             out string password,
@@ -385,12 +458,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：批准当前用户的注册申请，并记录注册审核操作。
-        ///
-        /// English: Approves the current user's registration and records the registration-review operation.
+        /// <lang>
+        ///   <zh-CN>批准当前用户的注册申请，并记录注册审核操作。</zh-CN>
+        ///   <en>Approves the current user's registration and records the registration-review operation.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void ApproveRegistration_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest() ||
@@ -424,12 +508,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：拒绝当前待审核用户的注册申请，并记录注册审核操作。
-        ///
-        /// English: Rejects the current pending registration and records the registration-review operation.
+        /// <lang>
+        ///   <zh-CN>拒绝当前待审核用户的注册申请，并记录注册审核操作。</zh-CN>
+        ///   <en>Rejects the current pending registration and records the registration-review operation.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void RejectRegistration_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest() ||
@@ -463,12 +558,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：移除当前用户的一个当前门户角色，并记录角色成员关系审计。
-        ///
-        /// English: Removes one current-Portal role from the current user and records a role-membership audit.
+        /// <lang>
+        ///   <zh-CN>移除当前用户的一个当前门户角色，并记录角色成员关系审计。</zh-CN>
+        ///   <en>Removes one current-Portal role from the current user and records a role-membership audit.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：包含命令和 DataList 项索引的事件数据。English: Event data containing the command and DataList item index.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>包含命令和 DataList 项索引的事件数据。</zh-CN>
+        ///   <en>Event data containing the command and DataList item index.</en>
+        /// </l>
+        /// </param>
         protected void UserRoles_ItemCommand(object sender, DataListCommandEventArgs e)
         {
             if (!TryInitializeRequest() ||
@@ -506,13 +612,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：禁用当前目标用户，并通过安全版本让既有会话在后续请求中失效。
-        ///
-        /// English: Disables the current target user and invalidates existing sessions on later requests through the
-        /// security version.
+        /// <lang>
+        ///   <zh-CN>禁用当前目标用户，并通过安全版本让既有会话在后续请求中失效。</zh-CN>
+        ///   <en>Disables the current target user and invalidates existing sessions on later requests through the security version.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void DisableUser_Click(object sender, EventArgs e)
         {
             ChangeUserProfileStatus(
@@ -524,13 +640,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：恢复启用当前目标用户；被拒绝注册的用户仍应通过批准动作恢复。
-        ///
-        /// English: Restores the current target user; rejected registrations should still be restored through the
-        /// approval action.
+        /// <lang>
+        ///   <zh-CN>恢复启用当前目标用户；被拒绝注册的用户仍应通过批准动作恢复。</zh-CN>
+        ///   <en>Restores the current target user; rejected registrations should still be restored through the approval action.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void RestoreUser_Click(object sender, EventArgs e)
         {
             ChangeUserProfileStatus(
@@ -830,9 +956,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：清空管理员重置密码字段，降低页面回发、异常路径和调试残留风险。
-        ///
-        /// English: Clears administrator password-reset fields to reduce postback, exception-path, and debugging residue.
+        /// <lang>
+        ///   <zh-CN>清空管理员重置密码字段，降低页面回发、异常路径和调试残留风险。</zh-CN>
+        ///   <en>Clears administrator password-reset fields to reduce postback, exception-path, and debugging residue.</en>
+        /// </lang>
         /// </summary>
         private void ClearSubmittedPasswordFields()
         {
@@ -919,8 +1046,10 @@ namespace ASPNET.StarterKit.Portal
 
         private void ShowRegistrationMessage(string message, bool isError)
         {
-            // 中文：保留主题状态行 class，避免后台提示在回发后退回旧式行内文本。
-            // English: Preserve the themed status-line class so postback messages do not fall back to legacy inline text.
+            // <lang>
+            //   <zh-CN>保留主题状态行 class，避免后台提示在回发后退回旧式行内文本。</zh-CN>
+            //   <en>Preserve the themed status-line class so postback messages do not fall back to legacy inline text.</en>
+            // </lang>
             RegistrationMessage.CssClass = (isError ? "NormalRed" : "Normal") + " portal-status-line";
             RegistrationMessage.Text = Server.HtmlEncode(message ?? string.Empty);
         }
