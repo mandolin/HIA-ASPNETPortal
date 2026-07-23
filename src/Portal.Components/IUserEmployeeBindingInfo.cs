@@ -3,93 +3,106 @@ using System;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：门户账号与员工绑定的只读视图。
-    ///
-    /// English: Read-only view of a Portal-user to employee binding.
+    /// <lang>
+    ///   <zh-CN>门户账号与员工绑定的只读视图。</zh-CN>
+    ///   <en>Read-only view of a Portal-user to employee binding.</en>
+    /// </lang>
     /// </summary>
     public interface IUserEmployeeBindingInfo
     {
         /// <summary>
-        /// 中文：绑定记录数值标识。
-        ///
-        /// English: Numeric binding identifier.
+        /// <lang>
+        ///   <zh-CN>绑定记录数值标识。</zh-CN>
+        ///   <en>Numeric binding identifier.</en>
+        /// </lang>
         /// </summary>
         int BindingId { get; }
 
         /// <summary>
-        /// 中文：门户账号标识。
-        ///
-        /// English: Portal user identifier.
+        /// <lang>
+        ///   <zh-CN>门户账号标识。</zh-CN>
+        ///   <en>Portal user identifier.</en>
+        /// </lang>
         /// </summary>
         int UserId { get; }
 
         /// <summary>
-        /// 中文：旧门户用户名。
-        ///
-        /// English: Legacy Portal user name.
+        /// <lang>
+        ///   <zh-CN>旧门户用户名。</zh-CN>
+        ///   <en>Legacy Portal user name.</en>
+        /// </lang>
         /// </summary>
         string UserName { get; }
 
         /// <summary>
-        /// 中文：员工标识。
-        ///
-        /// English: Employee identifier.
+        /// <lang>
+        ///   <zh-CN>员工标识。</zh-CN>
+        ///   <en>Employee identifier.</en>
+        /// </lang>
         /// </summary>
         int EmployeeId { get; }
 
         /// <summary>
-        /// 中文：员工号。
-        ///
-        /// English: Employee code.
+        /// <lang>
+        ///   <zh-CN>员工号。</zh-CN>
+        ///   <en>Employee code.</en>
+        /// </lang>
         /// </summary>
         string EmployeeCode { get; }
 
         /// <summary>
-        /// 中文：员工显示名。
-        ///
-        /// English: Employee display name.
+        /// <lang>
+        ///   <zh-CN>员工显示名。</zh-CN>
+        ///   <en>Employee display name.</en>
+        /// </lang>
         /// </summary>
         string EmployeeDisplayName { get; }
 
         /// <summary>
-        /// 中文：绑定生命周期状态。
-        ///
-        /// English: Binding lifecycle status.
+        /// <lang>
+        ///   <zh-CN>绑定生命周期状态。</zh-CN>
+        ///   <en>Binding lifecycle status.</en>
+        /// </lang>
         /// </summary>
         string BindingStatus { get; }
 
         /// <summary>
-        /// 中文：绑定创建时间 UTC。
-        ///
-        /// English: Binding creation time in UTC.
+        /// <lang>
+        ///   <zh-CN>绑定创建时间 UTC。</zh-CN>
+        ///   <en>Binding creation time in UTC.</en>
+        /// </lang>
         /// </summary>
         DateTime BoundUtc { get; }
 
         /// <summary>
-        /// 中文：绑定创建人标识。
-        ///
-        /// English: Binding creator identifier.
+        /// <lang>
+        ///   <zh-CN>绑定创建人标识。</zh-CN>
+        ///   <en>Binding creator identifier.</en>
+        /// </lang>
         /// </summary>
         string BoundBy { get; }
 
         /// <summary>
-        /// 中文：绑定结束时间 UTC，可为空。
-        ///
-        /// English: Binding end time in UTC, when known.
+        /// <lang>
+        ///   <zh-CN>绑定结束时间 UTC，可为空。</zh-CN>
+        ///   <en>Binding end time in UTC, when known.</en>
+        /// </lang>
         /// </summary>
         DateTime? EndedUtc { get; }
 
         /// <summary>
-        /// 中文：绑定结束人标识。
-        ///
-        /// English: Binding ending-operator identifier.
+        /// <lang>
+        ///   <zh-CN>绑定结束人标识。</zh-CN>
+        ///   <en>Binding ending-operator identifier.</en>
+        /// </lang>
         /// </summary>
         string EndedBy { get; }
 
         /// <summary>
-        /// 中文：非敏感绑定说明。
-        ///
-        /// English: Non-sensitive binding reason.
+        /// <lang>
+        ///   <zh-CN>非敏感绑定说明。</zh-CN>
+        ///   <en>Non-sensitive binding reason.</en>
+        /// </lang>
         /// </summary>
         string Reason { get; }
     }

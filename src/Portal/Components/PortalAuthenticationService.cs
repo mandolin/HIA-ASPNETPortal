@@ -5,32 +5,57 @@ using System.Web.Security;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：门户 Forms Authentication 身份票据门面。
-    ///
-    /// English: Forms Authentication ticket facade for the Portal.
+    /// <lang>
+    ///   <zh-CN>门户 Forms Authentication 身份票据门面。</zh-CN>
+    ///   <en>Forms Authentication ticket facade for the Portal.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：P5.2 起身份票据的 <c>UserData</c> 只保存用户安全版本，不保存角色、密码材料或业务资料。
-    /// 角色列表仍由 <see cref="PortalAuthenticationCookies"/> 单独加密保存，并使用相同安全版本校验。
-    ///
-    /// English: Starting with P5.2, the authentication ticket <c>UserData</c> stores only the user security version,
-    /// never roles, password material, or business profile data. Role lists remain in the separately encrypted
-    /// <see cref="PortalAuthenticationCookies"/> cookie and are validated with the same security version.
+    /// <lang>
+    ///   <zh-CN>P5.2 起身份票据的 <c>UserData</c> 只保存用户安全版本，不保存角色、密码材料或业务资料。 角色列表仍由 <see cref="PortalAuthenticationCookies"/> 单独加密保存，并使用相同安全版本校验。</zh-CN>
+    ///   <en>Starting with P5.2, the authentication ticket <c>UserData</c> stores only the user security version, never roles, password material, or business profile data. Role lists remain in the separately encrypted <see cref="PortalAuthenticationCookies"/> cookie and are validated with the same security version.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalAuthenticationService
     {
         private const string SecurityVersionPrefix = "sv:";
 
         /// <summary>
-        /// 中文：签发带安全版本的 Forms Authentication 身份票据。
-        ///
-        /// English: Issues a Forms Authentication ticket with the security version.
+        /// <lang>
+        ///   <zh-CN>签发带安全版本的 Forms Authentication 身份票据。</zh-CN>
+        ///   <en>Issues a Forms Authentication ticket with the security version.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="response">中文：当前 HTTP 响应。English: Current HTTP response.</param>
-        /// <param name="request">中文：当前 HTTP 请求，用于解析 Cookie Path。English: Current HTTP request used to resolve the cookie path.</param>
-        /// <param name="userName">中文：认证用户名称。English: Authenticated user name.</param>
-        /// <param name="securityVersion">中文：用户当前安全版本。English: Current user security version.</param>
-        /// <param name="isPersistent">中文：是否写为持久 Cookie。English: Whether to write a persistent cookie.</param>
+        /// <param name="response">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 响应。</zh-CN>
+        ///   <en>Current HTTP response.</en>
+        /// </l>
+        /// </param>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 请求，用于解析 Cookie Path。</zh-CN>
+        ///   <en>Current HTTP request used to resolve the cookie path.</en>
+        /// </l>
+        /// </param>
+        /// <param name="userName">
+        /// <l>
+        ///   <zh-CN>认证用户名称。</zh-CN>
+        ///   <en>Authenticated user name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="securityVersion">
+        /// <l>
+        ///   <zh-CN>用户当前安全版本。</zh-CN>
+        ///   <en>Current user security version.</en>
+        /// </l>
+        /// </param>
+        /// <param name="isPersistent">
+        /// <l>
+        ///   <zh-CN>是否写为持久 Cookie。</zh-CN>
+        ///   <en>Whether to write a persistent cookie.</en>
+        /// </l>
+        /// </param>
         public static void SignIn(
             HttpResponse response,
             HttpRequest request,
@@ -63,12 +88,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：注销当前身份并清理角色 Cookie。
-        ///
-        /// English: Signs out the current identity and clears the role cookie.
+        /// <lang>
+        ///   <zh-CN>注销当前身份并清理角色 Cookie。</zh-CN>
+        ///   <en>Signs out the current identity and clears the role cookie.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="response">中文：当前 HTTP 响应。English: Current HTTP response.</param>
-        /// <param name="request">中文：当前 HTTP 请求，用于解析 Cookie Path。English: Current HTTP request used to resolve the cookie path.</param>
+        /// <param name="response">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 响应。</zh-CN>
+        ///   <en>Current HTTP response.</en>
+        /// </l>
+        /// </param>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 请求，用于解析 Cookie Path。</zh-CN>
+        ///   <en>Current HTTP request used to resolve the cookie path.</en>
+        /// </l>
+        /// </param>
         public static void SignOut(HttpResponse response, HttpRequest request)
         {
             FormsAuthentication.SignOut();
@@ -77,13 +113,29 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：从 Forms Authentication 身份中读取安全版本。
-        ///
-        /// English: Reads the security version from a Forms Authentication identity.
+        /// <lang>
+        ///   <zh-CN>从 Forms Authentication 身份中读取安全版本。</zh-CN>
+        ///   <en>Reads the security version from a Forms Authentication identity.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="identity">中文：Forms 身份。English: Forms identity.</param>
-        /// <param name="securityVersion">中文：读取到的安全版本。English: Parsed security version.</param>
-        /// <returns>中文：成功解析安全版本时为 <c>true</c>。English: <c>true</c> when the security version was parsed successfully.</returns>
+        /// <param name="identity">
+        /// <l>
+        ///   <zh-CN>Forms 身份。</zh-CN>
+        ///   <en>Forms identity.</en>
+        /// </l>
+        /// </param>
+        /// <param name="securityVersion">
+        /// <l>
+        ///   <zh-CN>读取到的安全版本。</zh-CN>
+        ///   <en>Parsed security version.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功解析安全版本时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the security version was parsed successfully.</en>
+        /// </l>
+        /// </returns>
         public static bool TryReadSecurityVersion(FormsIdentity identity, out long securityVersion)
         {
             securityVersion = 0;
@@ -94,25 +146,52 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：将安全版本格式化为票据 UserData。
-        ///
-        /// English: Formats a security version for ticket UserData.
+        /// <lang>
+        ///   <zh-CN>将安全版本格式化为票据 UserData。</zh-CN>
+        ///   <en>Formats a security version for ticket UserData.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="securityVersion">中文：安全版本。English: Security version.</param>
-        /// <returns>中文：稳定的票据数据文本。English: Stable ticket-data text.</returns>
+        /// <param name="securityVersion">
+        /// <l>
+        ///   <zh-CN>安全版本。</zh-CN>
+        ///   <en>Security version.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>稳定的票据数据文本。</zh-CN>
+        ///   <en>Stable ticket-data text.</en>
+        /// </l>
+        /// </returns>
         public static string FormatSecurityVersion(long securityVersion)
         {
             return SecurityVersionPrefix + Math.Max(0, securityVersion);
         }
 
         /// <summary>
-        /// 中文：解析票据 UserData 中的安全版本。
-        ///
-        /// English: Parses the security version from ticket UserData.
+        /// <lang>
+        ///   <zh-CN>解析票据 UserData 中的安全版本。</zh-CN>
+        ///   <en>Parses the security version from ticket UserData.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="value">中文：票据数据文本。English: Ticket-data text.</param>
-        /// <param name="securityVersion">中文：解析出的安全版本。English: Parsed security version.</param>
-        /// <returns>中文：格式有效时为 <c>true</c>。English: <c>true</c> when the format is valid.</returns>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>票据数据文本。</zh-CN>
+        ///   <en>Ticket-data text.</en>
+        /// </l>
+        /// </param>
+        /// <param name="securityVersion">
+        /// <l>
+        ///   <zh-CN>解析出的安全版本。</zh-CN>
+        ///   <en>Parsed security version.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>格式有效时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the format is valid.</en>
+        /// </l>
+        /// </returns>
         public static bool TryParseSecurityVersion(string value, out long securityVersion)
         {
             securityVersion = 0;

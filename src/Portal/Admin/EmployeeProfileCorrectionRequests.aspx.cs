@@ -9,40 +9,44 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：员工资料更正请求后台处理页。
-    ///
-    /// English: Administration page for employee-profile correction requests.
+    /// <lang>
+    ///   <zh-CN>员工资料更正请求后台处理页。</zh-CN>
+    ///   <en>Administration page for employee-profile correction requests.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：P6.4.3 第一版只处理请求状态和管理员备注，不直接修改员工主数据；真实资料修改仍走员工目录维护。
-    ///
-    /// English: The first P6.4.3 version updates only request status and administrator notes. Actual profile changes
-    /// still go through employee-directory maintenance.
+    /// <lang>
+    ///   <zh-CN>P6.4.3 第一版只处理请求状态和管理员备注，不直接修改员工主数据；真实资料修改仍走员工目录维护。</zh-CN>
+    ///   <en>The first P6.4.3 version updates only request status and administrator notes. Actual profile changes still go through employee-directory maintenance.</en>
+    /// </lang>
     /// </remarks>
     public partial class EmployeeProfileCorrectionRequests : PortalPage<EmployeeProfileCorrectionRequests>
     {
         private const int PageSize = 50;
 
         /// <summary>
-        /// 中文：员工资料更正请求数据服务。
-        ///
-        /// English: Employee-profile correction-request data service.
+        /// <lang>
+        ///   <zh-CN>员工资料更正请求数据服务。</zh-CN>
+        ///   <en>Employee-profile correction-request data service.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IEmployeeProfileCorrectionRequestDb CorrectionRequestDb { private get; set; }
 
         /// <summary>
-        /// 中文：轻量待办数据服务，用于把资料更正处理同步为待办完成事件。
-        ///
-        /// English: Lightweight work-item data service used to mirror correction reviews into work-item completion events.
+        /// <lang>
+        ///   <zh-CN>轻量待办数据服务，用于把资料更正处理同步为待办完成事件。</zh-CN>
+        ///   <en>Lightweight work-item data service used to mirror correction reviews into work-item completion events.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IPortalWorkItemDb WorkItemDb { private get; set; }
 
         /// <summary>
-        /// 中文：初始化员工资料更正请求后台页。
-        ///
-        /// English: Initializes the employee-profile correction-request administration page.
+        /// <lang>
+        ///   <zh-CN>初始化员工资料更正请求后台页。</zh-CN>
+        ///   <en>Initializes the employee-profile correction-request administration page.</en>
+        /// </lang>
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -59,9 +63,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：按当前筛选条件重新绑定请求列表。
-        ///
-        /// English: Rebinds requests using the current filter.
+        /// <lang>
+        ///   <zh-CN>按当前筛选条件重新绑定请求列表。</zh-CN>
+        ///   <en>Rebinds requests using the current filter.</en>
+        /// </lang>
         /// </summary>
         protected void SearchButton_Click(object sender, EventArgs e)
         {
@@ -74,9 +79,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：处理请求列表中的管理员状态命令。
-        ///
-        /// English: Handles administrator status commands from the request list.
+        /// <lang>
+        ///   <zh-CN>处理请求列表中的管理员状态命令。</zh-CN>
+        ///   <en>Handles administrator status commands from the request list.</en>
+        /// </lang>
         /// </summary>
         protected void RequestsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -225,7 +231,10 @@ namespace ASPNET.StarterKit.Portal
 
         private void TryCompleteWorkItem(long requestId, string requestStatus, string reviewNote)
         {
-            // 中文 / English: 待办是旁路增强能力，写入失败不应回滚已经完成的审核动作。
+            // <lang>
+            //   <zh-CN>待办是旁路增强能力，写入失败不应回滚已经完成的资料更正审核动作。</zh-CN>
+            //   <en>Work items are a sidecar enhancement; write failures must not roll back the completed profile-correction review.</en>
+            // </lang>
             if (WorkItemDb == null || requestId <= 0)
             {
                 return;
@@ -274,9 +283,10 @@ namespace ASPNET.StarterKit.Portal
     }
 
     /// <summary>
-    /// 中文：员工资料更正请求后台展示行。
-    ///
-    /// English: Administration display row for an employee-profile correction request.
+    /// <lang>
+    ///   <zh-CN>员工资料更正请求后台展示行。</zh-CN>
+    ///   <en>Administration display row for an employee-profile correction request.</en>
+    /// </lang>
     /// </summary>
     public sealed class EmployeeProfileCorrectionAdminRow
     {
@@ -298,34 +308,84 @@ namespace ASPNET.StarterKit.Portal
                 : "(not reviewed)";
         }
 
-        /// <summary>中文：请求标识。English: Request identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请求标识。</zh-CN>
+        ///   <en>Request identifier.</en>
+        /// </lang>
+        /// </summary>
         public long RequestId { get; private set; }
 
-        /// <summary>中文：提交时间文本。English: Submission time text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交时间文本。</zh-CN>
+        ///   <en>Submission time text.</en>
+        /// </lang>
+        /// </summary>
         public string SubmittedUtcText { get; private set; }
 
-        /// <summary>中文：员工文本。English: Employee text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工文本。</zh-CN>
+        ///   <en>Employee text.</en>
+        /// </lang>
+        /// </summary>
         public string EmployeeText { get; private set; }
 
-        /// <summary>中文：用户文本。English: User text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户文本。</zh-CN>
+        ///   <en>User text.</en>
+        /// </lang>
+        /// </summary>
         public string UserText { get; private set; }
 
-        /// <summary>中文：字段名。English: Field name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>字段名。</zh-CN>
+        ///   <en>Field name.</en>
+        /// </lang>
+        /// </summary>
         public string FieldName { get; private set; }
 
-        /// <summary>中文：当前值快照。English: Current-value snapshot.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前值快照。</zh-CN>
+        ///   <en>Current-value snapshot.</en>
+        /// </lang>
+        /// </summary>
         public string CurrentValueSnapshot { get; private set; }
 
-        /// <summary>中文：建议值。English: Proposed value.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>建议值。</zh-CN>
+        ///   <en>Proposed value.</en>
+        /// </lang>
+        /// </summary>
         public string ProposedValue { get; private set; }
 
-        /// <summary>中文：员工说明。English: Employee note.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工说明。</zh-CN>
+        ///   <en>Employee note.</en>
+        /// </lang>
+        /// </summary>
         public string RequestNote { get; private set; }
 
-        /// <summary>中文：请求状态。English: Request status.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请求状态。</zh-CN>
+        ///   <en>Request status.</en>
+        /// </lang>
+        /// </summary>
         public string RequestStatus { get; private set; }
 
-        /// <summary>中文：处理信息文本。English: Review information text.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理信息文本。</zh-CN>
+        ///   <en>Review information text.</en>
+        /// </lang>
+        /// </summary>
         public string ReviewText { get; private set; }
 
         private static string EmptyToNone(string value)

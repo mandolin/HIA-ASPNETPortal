@@ -9,52 +9,84 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：旧门户 Tab 列表、排序和创建管理控件。
-    ///
-    /// English: Legacy Portal control for Tab listing, ordering, and creation.
+    /// <lang>
+    ///   <zh-CN>旧门户 Tab 列表、排序和创建管理控件。</zh-CN>
+    ///   <en>Legacy Portal control for Tab listing, ordering, and creation.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：当前以名称 <c>Admin</c> 识别核心后台 Tab，并在此兼容阶段禁止从 UI 删除该 Tab。
-    /// 未来应以稳定标识替代名称约定。
-    ///
-    /// English: The current compatibility phase identifies the core administration Tab by the <c>Admin</c> name and
-    /// prevents deleting it from this UI. A future design should replace this naming convention with a stable identifier.
+    /// <lang>
+    ///   <zh-CN>当前以名称 <c>Admin</c> 识别核心后台 Tab，并在此兼容阶段禁止从 UI 删除该 Tab。 未来应以稳定标识替代名称约定。</zh-CN>
+    ///   <en>The current compatibility phase identifies the core administration Tab by the <c>Admin</c> name and prevents deleting it from this UI. A future design should replace this naming convention with a stable identifier.</en>
+    /// </lang>
     /// </remarks>
     public partial class Tabs : PortalModuleControl<Tabs>
     {
         /// <summary>
-        /// 中文：供列表绑定的当前门户 Tab 设置集合。
-        ///
-        /// English: Current-Portal Tab-settings collection used for list binding.
+        /// <lang>
+        ///   <zh-CN>供列表绑定的当前门户 Tab 设置集合。</zh-CN>
+        ///   <en>Current-Portal Tab-settings collection used for list binding.</en>
+        /// </lang>
         /// </summary>
         protected readonly List<TabSettings> PortalTabs = new List<TabSettings>();
 
         private int tabId;
         private int tabIndex;
 
-        /// <summary>中文：模块定义数据访问依赖。English: Module-definition data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块定义数据访问依赖。</zh-CN>
+        ///   <en>Module-definition data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
-        /// <summary>中文：模块实例数据访问依赖。English: Module-instance data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块实例数据访问依赖。</zh-CN>
+        ///   <en>Module-instance data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public new IModulesDb ModulesConfig { private get; set; }
 
-        /// <summary>中文：Tab 数据访问依赖。English: Tab data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 数据访问依赖。</zh-CN>
+        ///   <en>Tab data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public ITabsDb TabsConfig { private get; set; }
 
-        /// <summary>中文：门户全局设置数据访问依赖。English: Portal global-settings data-access dependency.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户全局设置数据访问依赖。</zh-CN>
+        ///   <en>Portal global-settings data-access dependency.</en>
+        /// </lang>
+        /// </summary>
         [Dependency]
         public IGlobalsDb PortalConfig { private get; set; }
 
         /// <summary>
-        /// 中文：授权、读取可选导航参数并在首次请求绑定 Tab 列表。
-        ///
-        /// English: Authorizes, reads optional navigation parameters, and binds the Tab list on the initial request.
+        /// <lang>
+        ///   <zh-CN>授权、读取可选导航参数并在首次请求绑定 Tab 列表。</zh-CN>
+        ///   <en>Authorizes, reads optional navigation parameters, and binds the Tab list on the initial request.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -69,12 +101,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：调整当前选择的普通 Tab 顺序。
-        ///
-        /// English: Adjusts the order of the currently selected non-core Tab.
+        /// <lang>
+        ///   <zh-CN>调整当前选择的普通 Tab 顺序。</zh-CN>
+        ///   <en>Adjusts the order of the currently selected non-core Tab.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void UpDown_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -116,12 +159,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：删除当前选择的普通 Tab；删除会连带清理该 Tab 的模块实例。
-        ///
-        /// English: Deletes the currently selected non-core Tab; deletion also cleans up that Tab's module instances.
+        /// <lang>
+        ///   <zh-CN>删除当前选择的普通 Tab；删除会连带清理该 Tab 的模块实例。</zh-CN>
+        ///   <en>Deletes the currently selected non-core Tab; deletion also cleans up that Tab's module instances.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void DeleteBtn_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -169,12 +223,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：创建默认公开的普通 Tab，并转入其布局设置页面。
-        ///
-        /// English: Creates a default public non-core Tab and opens its layout-settings page.
+        /// <lang>
+        ///   <zh-CN>创建默认公开的普通 Tab，并转入其布局设置页面。</zh-CN>
+        ///   <en>Creates a default public non-core Tab and opens its layout-settings page.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void AddTab_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -212,12 +277,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：进入当前选择 Tab 的布局设置页。
-        ///
-        /// English: Opens the layout-settings page for the currently selected Tab.
+        /// <lang>
+        ///   <zh-CN>进入当前选择 Tab 的布局设置页。</zh-CN>
+        ///   <en>Opens the layout-settings page for the currently selected Tab.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void EditBtn_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())

@@ -5,41 +5,59 @@ using System.Web.Security;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：统一处理门户角色 Cookie，保持票据到期、Cookie 到期和虚拟目录 Path 规则一致。
-    ///
-    /// English: Centralizes Portal role-cookie handling so ticket expiration, cookie expiration, and virtual-directory Path rules remain consistent.
+    /// <lang>
+    ///   <zh-CN>统一处理门户角色 Cookie，保持票据到期、Cookie 到期和虚拟目录 Path 规则一致。</zh-CN>
+    ///   <en>Centralizes Portal role-cookie handling so ticket expiration, cookie expiration, and virtual-directory Path rules remain consistent.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：Cookie 使用 Forms Authentication 加密票据和 <c>HttpOnly</c>，但当前未设置 <c>Secure</c> 或
-    /// <c>SameSite</c>。这些属性须在 HTTPS 部署策略与 IE9+ 兼容边界明确后通过独立配置设计，不能在此直接强制。
-    /// 角色变更不会主动撤销已签发 Cookie，通常在票据到期、登出或读取失败后才从数据库重建。
-    ///
-    /// English: The cookie uses a Forms Authentication encrypted ticket and <c>HttpOnly</c>, but currently sets
-    /// neither <c>Secure</c> nor <c>SameSite</c>. Those attributes require a separate configuration design after
-    /// HTTPS deployment policy and IE9+ compatibility boundaries are settled, and must not be forced here directly.
-    /// Role changes do not proactively revoke issued cookies; roles are normally rebuilt from the database only after
-    /// ticket expiration, sign-out, or a read failure.
+    /// <lang>
+    ///   <zh-CN>Cookie 使用 Forms Authentication 加密票据和 <c>HttpOnly</c>，但当前未设置 <c>Secure</c> 或 <c>SameSite</c>。这些属性须在 HTTPS 部署策略与 IE9+ 兼容边界明确后通过独立配置设计，不能在此直接强制。 角色变更不会主动撤销已签发 Cookie，通常在票据到期、登出或读取失败后才从数据库重建。</zh-CN>
+    ///   <en>The cookie uses a Forms Authentication encrypted ticket and <c>HttpOnly</c>, but currently sets neither <c>Secure</c> nor <c>SameSite</c>. Those attributes require a separate configuration design after HTTPS deployment policy and IE9+ compatibility boundaries are settled, and must not be forced here directly. Role changes do not proactively revoke issued cookies; roles are normally rebuilt from the database only after ticket expiration, sign-out, or a read failure.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalAuthenticationCookies
     {
         private const string RolesDataSeparator = "\nroles:";
 
         /// <summary>
-        /// 中文：旧门户保存当前用户角色列表的 Cookie 名称。
-        ///
-        /// English: Cookie name used by the legacy Portal to store the current user's role list.
+        /// <lang>
+        ///   <zh-CN>旧门户保存当前用户角色列表的 Cookie 名称。</zh-CN>
+        ///   <en>Cookie name used by the legacy Portal to store the current user's role list.</en>
+        /// </lang>
         /// </summary>
         public const string RolesCookieName = "portalroles";
 
         /// <summary>
-        /// 中文：尝试从角色 Cookie 读取角色；缺失、过期、解密失败或安全版本不匹配时返回 <c>false</c>，调用方应从数据库重新加载。
-        ///
-        /// English: Attempts to read roles from the role cookie; returns <c>false</c> when missing, expired, undecryptable, or security-version mismatched so the caller reloads from the database.
+        /// <lang>
+        ///   <zh-CN>尝试从角色 Cookie 读取角色；缺失、过期、解密失败或安全版本不匹配时返回 <c>false</c>，调用方应从数据库重新加载。</zh-CN>
+        ///   <en>Attempts to read roles from the role cookie; returns <c>false</c> when missing, expired, undecryptable, or security-version mismatched so the caller reloads from the database.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="request">中文：当前 HTTP 请求，可为 <c>null</c>。English: Current HTTP request; may be <c>null</c>.</param>
-        /// <param name="expectedSecurityVersion">中文：主身份票据和数据库确认的安全版本。English: Security version confirmed by the main auth ticket and database.</param>
-        /// <param name="roles">中文：成功时返回规范化角色数组；失败时为空数组。English: Normalized role array on success; otherwise an empty array.</param>
-        /// <returns>中文：成功读取未过期加密票据时为 <c>true</c>。English: <c>true</c> when an unexpired encrypted ticket is read successfully.</returns>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 请求，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP request; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <param name="expectedSecurityVersion">
+        /// <l>
+        ///   <zh-CN>主身份票据和数据库确认的安全版本。</zh-CN>
+        ///   <en>Security version confirmed by the main auth ticket and database.</en>
+        /// </l>
+        /// </param>
+        /// <param name="roles">
+        /// <l>
+        ///   <zh-CN>成功时返回规范化角色数组；失败时为空数组。</zh-CN>
+        ///   <en>Normalized role array on success; otherwise an empty array.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功读取未过期加密票据时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when an unexpired encrypted ticket is read successfully.</en>
+        /// </l>
+        /// </returns>
         public static bool TryReadRoles(HttpRequest request, long expectedSecurityVersion, out string[] roles)
         {
             roles = new string[0];
@@ -76,16 +94,47 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：写入角色 Cookie；非持久登录保持会话 Cookie，持久登录才写入过期时间。
-        ///
-        /// English: Writes the role cookie; non-persistent sign-in keeps a session cookie, while persistent sign-in writes an expiration time.
+        /// <lang>
+        ///   <zh-CN>写入角色 Cookie；非持久登录保持会话 Cookie，持久登录才写入过期时间。</zh-CN>
+        ///   <en>Writes the role cookie; non-persistent sign-in keeps a session cookie, while persistent sign-in writes an expiration time.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="response">中文：当前 HTTP 响应。English: Current HTTP response.</param>
-        /// <param name="request">中文：当前 HTTP 请求，用于解析虚拟目录 Cookie Path。English: Current HTTP request used to resolve the virtual-directory cookie Path.</param>
-        /// <param name="userName">中文：认证票据中的用户登录名称。English: User sign-in name stored in the authentication ticket.</param>
-        /// <param name="securityVersion">中文：当前用户安全版本。English: Current user security version.</param>
-        /// <param name="roles">中文：要写入票据的角色集合。English: Role collection to write into the ticket.</param>
-        /// <param name="isPersistent">中文：是否写为持久 Cookie。English: Whether to write a persistent cookie.</param>
+        /// <param name="response">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 响应。</zh-CN>
+        ///   <en>Current HTTP response.</en>
+        /// </l>
+        /// </param>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 请求，用于解析虚拟目录 Cookie Path。</zh-CN>
+        ///   <en>Current HTTP request used to resolve the virtual-directory cookie Path.</en>
+        /// </l>
+        /// </param>
+        /// <param name="userName">
+        /// <l>
+        ///   <zh-CN>认证票据中的用户登录名称。</zh-CN>
+        ///   <en>User sign-in name stored in the authentication ticket.</en>
+        /// </l>
+        /// </param>
+        /// <param name="securityVersion">
+        /// <l>
+        ///   <zh-CN>当前用户安全版本。</zh-CN>
+        ///   <en>Current user security version.</en>
+        /// </l>
+        /// </param>
+        /// <param name="roles">
+        /// <l>
+        ///   <zh-CN>要写入票据的角色集合。</zh-CN>
+        ///   <en>Role collection to write into the ticket.</en>
+        /// </l>
+        /// </param>
+        /// <param name="isPersistent">
+        /// <l>
+        ///   <zh-CN>是否写为持久 Cookie。</zh-CN>
+        ///   <en>Whether to write a persistent cookie.</en>
+        /// </l>
+        /// </param>
         public static void WriteRolesCookie(
             HttpResponse response,
             HttpRequest request,
@@ -94,8 +143,10 @@ namespace ASPNET.StarterKit.Portal
             string[] roles,
             bool isPersistent)
         {
-            // 中文：Forms Authentication 票据和持久 Cookie 使用同一 timeout，避免二者产生不同过期边界。
-            // English: Use the same timeout for the Forms Authentication ticket and persistent cookie to avoid divergent expiration boundaries.
+            // <lang>
+            //   <zh-CN>Forms Authentication 票据和持久 Cookie 使用同一 timeout，避免二者产生不同过期边界。</zh-CN>
+            //   <en>Use the same timeout for the Forms Authentication ticket and persistent cookie to avoid divergent expiration boundaries.</en>
+            // </lang>
             DateTime issuedAt = DateTime.Now;
             DateTime expiresAt = issuedAt.Add(FormsAuthentication.Timeout);
             string roleData = BuildRoleData(securityVersion, roles);
@@ -108,8 +159,10 @@ namespace ASPNET.StarterKit.Portal
                 isPersistent,
                 roleData);
 
-            // 中文：当前保持 HttpOnly 与虚拟目录 Path；Secure/SameSite 由后续部署安全策略统一配置。
-            // English: Keep HttpOnly and the virtual-directory Path for now; Secure/SameSite are configured by later deployment-security policy.
+            // <lang>
+            //   <zh-CN>当前保持 HttpOnly 与虚拟目录 Path；Secure/SameSite 由后续部署安全策略统一配置。</zh-CN>
+            //   <en>Keep HttpOnly and the virtual-directory Path for now; Secure/SameSite are configured by later deployment-security policy.</en>
+            // </lang>
             var cookie = new HttpCookie(RolesCookieName, FormsAuthentication.Encrypt(ticket))
             {
                 HttpOnly = true,
@@ -125,12 +178,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：让当前请求路径下的角色 Cookie 立即失效；Path 必须与写入时一致。
-        ///
-        /// English: Immediately expires the role cookie for the current request path; Path must match the write path.
+        /// <lang>
+        ///   <zh-CN>让当前请求路径下的角色 Cookie 立即失效；Path 必须与写入时一致。</zh-CN>
+        ///   <en>Immediately expires the role cookie for the current request path; Path must match the write path.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="response">中文：当前 HTTP 响应。English: Current HTTP response.</param>
-        /// <param name="request">中文：当前 HTTP 请求，用于解析虚拟目录 Cookie Path。English: Current HTTP request used to resolve the virtual-directory cookie Path.</param>
+        /// <param name="response">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 响应。</zh-CN>
+        ///   <en>Current HTTP response.</en>
+        /// </l>
+        /// </param>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 请求，用于解析虚拟目录 Cookie Path。</zh-CN>
+        ///   <en>Current HTTP request used to resolve the virtual-directory cookie Path.</en>
+        /// </l>
+        /// </param>
         public static void ExpireRolesCookie(HttpResponse response, HttpRequest request)
         {
             response.Cookies.Add(new HttpCookie(RolesCookieName, string.Empty)
@@ -143,8 +207,10 @@ namespace ASPNET.StarterKit.Portal
 
         private static string GetCookiePath(HttpRequest request)
         {
-            // 中文：根站点使用 /，虚拟目录去除末尾 / 后作为 Cookie Path。
-            // English: Root sites use /; virtual directories use the application path without a trailing / as the cookie Path.
+            // <lang>
+            //   <zh-CN>根站点使用 /，虚拟目录去除末尾 / 后作为 Cookie Path。</zh-CN>
+            //   <en>Root sites use /; virtual directories use the application path without a trailing / as the cookie Path.</en>
+            // </lang>
             string applicationPath = request?.ApplicationPath;
             if (string.IsNullOrWhiteSpace(applicationPath) || applicationPath == "/")
             {

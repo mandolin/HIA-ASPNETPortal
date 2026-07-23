@@ -3,69 +3,131 @@ using System.Collections.Generic;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：员工、组织和门户账号绑定目录的只读数据访问契约。
-    ///
-    /// English: Read-only data-access contract for employees, organization units, and Portal-user bindings.
+    /// <lang>
+    ///   <zh-CN>员工、组织和门户账号绑定目录的只读数据访问契约。</zh-CN>
+    ///   <en>Read-only data-access contract for employees, organization units, and Portal-user bindings.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：P6.3-S2 只提供只读查询和缺表兼容。新增、编辑、绑定、解绑、审计和安全版本递增后续单独实现。
-    ///
-    /// English: P6.3-S2 provides only read queries and missing-schema compatibility. Creation, editing, binding,
-    /// unbinding, auditing, and security-version increments are implemented later.
+    /// <lang>
+    ///   <zh-CN>P6.3-S2 只提供只读查询和缺表兼容。新增、编辑、绑定、解绑、审计和安全版本递增后续单独实现。</zh-CN>
+    ///   <en>P6.3-S2 provides only read queries and missing-schema compatibility. Creation, editing, binding, unbinding, auditing, and security-version increments are implemented later.</en>
+    /// </lang>
     /// </remarks>
     public interface IEmployeeDirectoryDb
     {
         /// <summary>
-        /// 中文：检查 P6.3 员工组织目录表是否全部可用。
-        ///
-        /// English: Checks whether all P6.3 employee-directory tables are available.
+        /// <lang>
+        ///   <zh-CN>检查 P6.3 员工组织目录表是否全部可用。</zh-CN>
+        ///   <en>Checks whether all P6.3 employee-directory tables are available.</en>
+        /// </lang>
         /// </summary>
-        /// <returns>中文：三张基础表均存在时为 <c>true</c>。English: <c>true</c> when all three foundation tables exist.</returns>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>三张基础表均存在时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when all three foundation tables exist.</en>
+        /// </l>
+        /// </returns>
         bool IsSchemaAvailable();
 
         /// <summary>
-        /// 中文：读取组织单元扁平列表。
-        ///
-        /// English: Reads a flat organization-unit list.
+        /// <lang>
+        ///   <zh-CN>读取组织单元扁平列表。</zh-CN>
+        ///   <en>Reads a flat organization-unit list.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="query">中文：分页和过滤条件。English: Paging and filtering options.</param>
-        /// <returns>中文：组织单元只读集合；缺表时为空集合。English: Read-only organization-unit collection; empty when schema is missing.</returns>
+        /// <param name="query">
+        /// <l>
+        ///   <zh-CN>分页和过滤条件。</zh-CN>
+        ///   <en>Paging and filtering options.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>组织单元只读集合；缺表时为空集合。</zh-CN>
+        ///   <en>Read-only organization-unit collection; empty when schema is missing.</en>
+        /// </l>
+        /// </returns>
         IEnumerable<IOrganizationUnitInfo> GetOrganizationUnits(EmployeeDirectoryQuery query);
 
         /// <summary>
-        /// 中文：读取员工主数据列表。
-        ///
-        /// English: Reads employee master-data rows.
+        /// <lang>
+        ///   <zh-CN>读取员工主数据列表。</zh-CN>
+        ///   <en>Reads employee master-data rows.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="query">中文：分页和过滤条件。English: Paging and filtering options.</param>
-        /// <returns>中文：员工只读集合；缺表时为空集合。English: Read-only employee collection; empty when schema is missing.</returns>
+        /// <param name="query">
+        /// <l>
+        ///   <zh-CN>分页和过滤条件。</zh-CN>
+        ///   <en>Paging and filtering options.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>员工只读集合；缺表时为空集合。</zh-CN>
+        ///   <en>Read-only employee collection; empty when schema is missing.</en>
+        /// </l>
+        /// </returns>
         IEnumerable<IEmployeeInfo> GetEmployees(EmployeeDirectoryQuery query);
 
         /// <summary>
-        /// 中文：读取门户账号与员工绑定列表。
-        ///
-        /// English: Reads Portal-user to employee binding rows.
+        /// <lang>
+        ///   <zh-CN>读取门户账号与员工绑定列表。</zh-CN>
+        ///   <en>Reads Portal-user to employee binding rows.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="query">中文：分页和过滤条件。English: Paging and filtering options.</param>
-        /// <returns>中文：绑定只读集合；缺表时为空集合。English: Read-only binding collection; empty when schema is missing.</returns>
+        /// <param name="query">
+        /// <l>
+        ///   <zh-CN>分页和过滤条件。</zh-CN>
+        ///   <en>Paging and filtering options.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>绑定只读集合；缺表时为空集合。</zh-CN>
+        ///   <en>Read-only binding collection; empty when schema is missing.</en>
+        /// </l>
+        /// </returns>
         IEnumerable<IUserEmployeeBindingInfo> GetUserEmployeeBindings(EmployeeDirectoryQuery query);
 
         /// <summary>
-        /// 中文：按门户账号读取当前有效绑定。
-        ///
-        /// English: Reads the current active binding by Portal user id.
+        /// <lang>
+        ///   <zh-CN>按门户账号读取当前有效绑定。</zh-CN>
+        ///   <en>Reads the current active binding by Portal user id.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：门户账号数值标识。English: Numeric Portal user identifier.</param>
-        /// <returns>中文：当前有效绑定；缺表或不存在时为空。English: Active binding, or null when schema is missing or no binding exists.</returns>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>门户账号数值标识。</zh-CN>
+        ///   <en>Numeric Portal user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前有效绑定；缺表或不存在时为空。</zh-CN>
+        ///   <en>Active binding, or null when schema is missing or no binding exists.</en>
+        /// </l>
+        /// </returns>
         IUserEmployeeBindingInfo GetActiveBindingByUserId(int userId);
 
         /// <summary>
-        /// 中文：按员工号读取当前有效绑定。
-        ///
-        /// English: Reads the current active binding by employee code.
+        /// <lang>
+        ///   <zh-CN>按员工号读取当前有效绑定。</zh-CN>
+        ///   <en>Reads the current active binding by employee code.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="employeeCode">中文：员工号。English: Employee code.</param>
-        /// <returns>中文：当前有效绑定；缺表或不存在时为空。English: Active binding, or null when schema is missing or no binding exists.</returns>
+        /// <param name="employeeCode">
+        /// <l>
+        ///   <zh-CN>员工号。</zh-CN>
+        ///   <en>Employee code.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前有效绑定；缺表或不存在时为空。</zh-CN>
+        ///   <en>Active binding, or null when schema is missing or no binding exists.</en>
+        /// </l>
+        /// </returns>
         IUserEmployeeBindingInfo GetActiveBindingByEmployeeCode(string employeeCode);
     }
 }
