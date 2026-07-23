@@ -6,20 +6,16 @@ using System.Linq;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：基于门户安全数据库上下文的用户、凭据和注册审核数据访问实现。
-    ///
-    /// English: User, credential, and registration-review data-access implementation backed by the Portal security database context.
+    /// <lang>
+    ///   <zh-CN>基于门户安全数据库上下文的用户、凭据和注册审核数据访问实现。</zh-CN>
+    ///   <en>User, credential, and registration-review data-access implementation backed by the Portal security database context.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：P5.2 起，新建、注册和重置密码写入 <c>Portal_UserCredentials</c> 强哈希表，并通过
-    /// <c>Portal_UserSecurityStates</c> 维护会话安全版本。旧 <c>Portal_Users.Password</c> 中的 MD5
-    /// 仅用于尚未升级用户的首次兼容登录；一旦强哈希凭据存在，登录不得再回退到旧字段。
-    ///
-    /// English: Starting with P5.2, newly created, registered, and reset passwords are written to the
-    /// <c>Portal_UserCredentials</c> strong-hash table, while <c>Portal_UserSecurityStates</c> maintains the
-    /// session security version. Legacy MD5 values in <c>Portal_Users.Password</c> are used only for the first
-    /// compatibility sign-in of users that have not yet been upgraded; once a strong credential exists, sign-in
-    /// must not fall back to the legacy column.
+    /// <lang>
+    ///   <zh-CN>P5.2 起，新建、注册和重置密码写入 <c>Portal_UserCredentials</c> 强哈希表，并通过 <c>Portal_UserSecurityStates</c> 维护会话安全版本。旧 <c>Portal_Users.Password</c> 中的 MD5 仅用于尚未升级用户的首次兼容登录；一旦强哈希凭据存在，登录不得再回退到旧字段。</zh-CN>
+    ///   <en>Starting with P5.2, newly created, registered, and reset passwords are written to the <c>Portal_UserCredentials</c> strong-hash table, while <c>Portal_UserSecurityStates</c> maintains the session security version. Legacy MD5 values in <c>Portal_Users.Password</c> are used only for the first compatibility sign-in of users that have not yet been upgraded; once a strong credential exists, sign-in must not fall back to the legacy column.</en>
+    /// </lang>
     /// </remarks>
     public class UsersDb : IUsersDb
     {
@@ -32,11 +28,17 @@ namespace ASPNET.StarterKit.Portal
         private readonly PortalSecurityDbContext _context;
 
         /// <summary>
-        /// 中文：初始化用户、凭据和注册审核数据访问实现。
-        ///
-        /// English: Initializes the user, credential, and registration-review data-access implementation.
+        /// <lang>
+        ///   <zh-CN>初始化用户、凭据和注册审核数据访问实现。</zh-CN>
+        ///   <en>Initializes the user, credential, and registration-review data-access implementation.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：门户安全数据库上下文。English: Portal security database context.</param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>门户安全数据库上下文。</zh-CN>
+        ///   <en>Portal security database context.</en>
+        /// </l>
+        /// </param>
         public UsersDb(PortalSecurityDbContext context)
         {
             _context = context;
@@ -45,14 +47,35 @@ namespace ASPNET.StarterKit.Portal
         #region IUsersDb Members
 
         /// <summary>
-        /// 中文：添加由管理员或既有流程创建的用户；非空密码写入强哈希凭据表。
-        ///
-        /// English: Adds a user created by an administrator or an existing legacy flow; non-empty passwords are written to the strong-hash credential table.
+        /// <lang>
+        ///   <zh-CN>添加由管理员或既有流程创建的用户；非空密码写入强哈希凭据表。</zh-CN>
+        ///   <en>Adds a user created by an administrator or an existing legacy flow; non-empty passwords are written to the strong-hash credential table.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="fullName">中文：用户登录名称。English: User sign-in name.</param>
-        /// <param name="email">中文：用户邮箱地址。English: User email address.</param>
-        /// <param name="password">中文：用户提交的密码输入；空值表示创建不可登录占位用户。English: Submitted password input; empty creates a non-signable placeholder user.</param>
-        /// <returns>中文：成功时返回新用户标识；预期写入失败时返回 <c>-1</c>。English: New user identifier on success; <c>-1</c> for expected write failures.</returns>
+        /// <param name="fullName">
+        /// <l>
+        ///   <zh-CN>用户登录名称。</zh-CN>
+        ///   <en>User sign-in name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="email">
+        /// <l>
+        ///   <zh-CN>用户邮箱地址。</zh-CN>
+        ///   <en>User email address.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>用户提交的密码输入；空值表示创建不可登录占位用户。</zh-CN>
+        ///   <en>Submitted password input; empty creates a non-signable placeholder user.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功时返回新用户标识；预期写入失败时返回 <c>-1</c>。</zh-CN>
+        ///   <en>New user identifier on success; <c>-1</c> for expected write failures.</en>
+        /// </l>
+        /// </returns>
         public int AddUser(string fullName, string email, string password)
         {
             string normalizedPassword = password ?? string.Empty;
@@ -80,8 +103,10 @@ namespace ASPNET.StarterKit.Portal
                     {
                         Name = fullName,
                         Email = email,
-                        // 中文：新用户不再生成 MD5；旧字段只保留既有数据的迁移样本。
-                        // English: New users no longer receive MD5; the legacy column remains only for existing data migration samples.
+                        // <lang>
+                        //   <zh-CN>新用户不再生成 MD5；旧字段只保留既有数据的迁移样本。</zh-CN>
+                        //   <en>New users no longer receive MD5; the legacy column remains only for existing data migration samples.</en>
+                        // </lang>
                         Password = string.Empty
                     };
 
@@ -104,31 +129,71 @@ namespace ASPNET.StarterKit.Portal
                     transaction.Commit();
                 }
 
-                // 中文：管理员或旧入口创建的用户默认已批准；缺少扩展表时保持旧行为。
-                // English: Users created by administration or legacy entry points are approved by default; missing extension tables preserve legacy behavior.
+                // <lang>
+                //   <zh-CN>管理员或旧入口创建的用户默认已批准；缺少扩展表时保持旧行为。</zh-CN>
+                //   <en>Users created by administration or legacy entry points are approved by default; missing extension tables preserve legacy behavior.</en>
+                // </lang>
                 TryEnsureApprovedRegistration(item.UserId, "system-admin");
                 return item.UserId;
             }
             catch (Exception)
             {
-                // 中文：保持旧接口约定，预期写入失败用 -1 表达，不在此记录敏感输入。
-                // English: Preserve the legacy interface contract: expected write failures return -1 and do not log sensitive input here.
+                // <lang>
+                //   <zh-CN>保持旧接口约定，预期写入失败用 -1 表达，不在此记录敏感输入。</zh-CN>
+                //   <en>Preserve the legacy interface contract: expected write failures return -1 and do not log sensitive input here.</en>
+                // </lang>
                 return -1;
             }
         }
 
         /// <summary>
-        /// 中文：添加自主注册用户，并在同一事务写入强哈希凭据、注册审核元数据和邀请码使用次数。
-        ///
-        /// English: Adds a self-registered user and writes the strong-hash credential, registration-review metadata, and invite usage in one transaction.
+        /// <lang>
+        ///   <zh-CN>添加自主注册用户，并在同一事务写入强哈希凭据、注册审核元数据和邀请码使用次数。</zh-CN>
+        ///   <en>Adds a self-registered user and writes the strong-hash credential, registration-review metadata, and invite usage in one transaction.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="fullName">中文：用户登录名称。English: User sign-in name.</param>
-        /// <param name="email">中文：用户邮箱地址。English: User email address.</param>
-        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
-        /// <param name="employeeCode">中文：可为空的员工号。English: Optional employee code.</param>
-        /// <param name="inviteCode">中文：可为空的邀请码；空值代表当前允许的非邀请注册。English: Optional invite code; an empty value represents currently allowed non-invite registration.</param>
-        /// <param name="requiresApproval">中文：是否以待审核状态创建用户。English: Whether to create the user in pending-approval status.</param>
-        /// <returns>中文：成功时返回新用户标识；审核表、凭据表不可用或邀请码无效时返回 <c>-1</c>。English: New user identifier on success; <c>-1</c> when review tables, credential tables, or invites are unavailable.</returns>
+        /// <param name="fullName">
+        /// <l>
+        ///   <zh-CN>用户登录名称。</zh-CN>
+        ///   <en>User sign-in name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="email">
+        /// <l>
+        ///   <zh-CN>用户邮箱地址。</zh-CN>
+        ///   <en>User email address.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>用户提交的密码输入。</zh-CN>
+        ///   <en>Submitted password input.</en>
+        /// </l>
+        /// </param>
+        /// <param name="employeeCode">
+        /// <l>
+        ///   <zh-CN>可为空的员工号。</zh-CN>
+        ///   <en>Optional employee code.</en>
+        /// </l>
+        /// </param>
+        /// <param name="inviteCode">
+        /// <l>
+        ///   <zh-CN>可为空的邀请码；空值代表当前允许的非邀请注册。</zh-CN>
+        ///   <en>Optional invite code; an empty value represents currently allowed non-invite registration.</en>
+        /// </l>
+        /// </param>
+        /// <param name="requiresApproval">
+        /// <l>
+        ///   <zh-CN>是否以待审核状态创建用户。</zh-CN>
+        ///   <en>Whether to create the user in pending-approval status.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功时返回新用户标识；审核表、凭据表不可用或邀请码无效时返回 <c>-1</c>。</zh-CN>
+        ///   <en>New user identifier on success; <c>-1</c> when review tables, credential tables, or invites are unavailable.</en>
+        /// </l>
+        /// </returns>
         public int AddSelfRegisteredUser(
             string fullName,
             string email,
@@ -183,8 +248,10 @@ namespace ASPNET.StarterKit.Portal
                         "system-self-registration");
                     UpsertCredential(item.UserId, password, null, null, false, null);
 
-                    // 中文：所有注册审核时间统一以 UTC 保存。
-                    // English: Store all registration-review timestamps in UTC.
+                    // <lang>
+                    //   <zh-CN>所有注册审核时间统一以 UTC 保存。</zh-CN>
+                    //   <en>Store all registration-review timestamps in UTC.</en>
+                    // </lang>
                     DateTime nowUtc = DateTime.UtcNow;
                     _context.UserRegistrations.Add(new UserRegistrationItem
                     {
@@ -200,8 +267,10 @@ namespace ASPNET.StarterKit.Portal
                         ApprovedBy = requiresApproval ? null : "system-self-registration"
                     });
 
-                    // 中文：空邀请码不会增加使用次数；有效邀请码的计数与用户创建同一事务提交。
-                    // English: Empty invite codes do not increment usage; valid invite counts commit in the same transaction as user creation.
+                    // <lang>
+                    //   <zh-CN>空邀请码不会增加使用次数；有效邀请码的计数与用户创建同一事务提交。</zh-CN>
+                    //   <en>Empty invite codes do not increment usage; valid invite counts commit in the same transaction as user creation.</en>
+                    // </lang>
                     IncrementInviteUsage(normalizedInviteCode);
                     _context.SaveChanges();
                     transaction.Commit();
@@ -217,15 +286,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：删除指定用户及可用的注册审核元数据。
-        ///
-        /// English: Deletes the specified user and available registration-review metadata.
+        /// <lang>
+        ///   <zh-CN>删除指定用户及可用的注册审核元数据。</zh-CN>
+        ///   <en>Deletes the specified user and available registration-review metadata.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：要删除的用户数值标识。English: Numeric identifier of the user to delete.</param>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要删除的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to delete.</en>
+        /// </l>
+        /// </param>
         public void DeleteUser(int userId)
         {
-            // 中文：先清理扩展元数据，避免显式 FK 部署阻止既有删除流程。
-            // English: Clean up extension metadata first so explicit FK deployments do not block the legacy delete flow.
+            // <lang>
+            //   <zh-CN>先清理扩展元数据，避免显式 FK 部署阻止既有删除流程。</zh-CN>
+            //   <en>Clean up extension metadata first so explicit FK deployments do not block the legacy delete flow.</en>
+            // </lang>
             TryDeleteRegistration(userId);
 
             var item = _context.Users.Single(i => i.UserId == userId);
@@ -235,13 +312,29 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：批准用户注册，并恢复已拒绝记录的登录资格。
-        ///
-        /// English: Approves a user registration and restores sign-in eligibility for a previously rejected record.
+        /// <lang>
+        ///   <zh-CN>批准用户注册，并恢复已拒绝记录的登录资格。</zh-CN>
+        ///   <en>Approves a user registration and restores sign-in eligibility for a previously rejected record.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：要批准的用户数值标识。English: Numeric identifier of the user to approve.</param>
-        /// <param name="approvedBy">中文：批准操作人标识。English: Approving operator identifier.</param>
-        /// <exception cref="InvalidOperationException">中文：注册审核表不可用时引发。English: Thrown when the registration-review table is unavailable.</exception>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要批准的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to approve.</en>
+        /// </l>
+        /// </param>
+        /// <param name="approvedBy">
+        /// <l>
+        ///   <zh-CN>批准操作人标识。</zh-CN>
+        ///   <en>Approving operator identifier.</en>
+        /// </l>
+        /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>注册审核表不可用时引发。</zh-CN>
+        ///   <en>Thrown when the registration-review table is unavailable.</en>
+        /// </l>
+        /// </exception>
         public void ApproveUser(int userId, string approvedBy)
         {
             if (!HasRegistrationTable())
@@ -283,13 +376,29 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：拒绝处于待审核状态的用户注册；管理员后续仍可重新批准。
-        ///
-        /// English: Rejects a pending user registration; an administrator may approve it later.
+        /// <lang>
+        ///   <zh-CN>拒绝处于待审核状态的用户注册；管理员后续仍可重新批准。</zh-CN>
+        ///   <en>Rejects a pending user registration; an administrator may approve it later.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：要拒绝的用户数值标识。English: Numeric identifier of the user to reject.</param>
-        /// <param name="rejectedBy">中文：拒绝操作人标识。English: Rejecting operator identifier.</param>
-        /// <exception cref="InvalidOperationException">中文：注册审核表或用户审核记录不可用时引发。English: Thrown when the registration-review table or user review record is unavailable.</exception>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要拒绝的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to reject.</en>
+        /// </l>
+        /// </param>
+        /// <param name="rejectedBy">
+        /// <l>
+        ///   <zh-CN>拒绝操作人标识。</zh-CN>
+        ///   <en>Rejecting operator identifier.</en>
+        /// </l>
+        /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>注册审核表或用户审核记录不可用时引发。</zh-CN>
+        ///   <en>Thrown when the registration-review table or user review record is unavailable.</en>
+        /// </l>
+        /// </exception>
         public void RejectUser(int userId, string rejectedBy)
         {
             if (!HasRegistrationTable())
@@ -319,12 +428,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：读取用户注册审核信息；旧库或旧用户按已批准兼容视图展示。
-        ///
-        /// English: Reads user registration-review information; legacy databases or users appear through an approved compatibility view.
+        /// <lang>
+        ///   <zh-CN>读取用户注册审核信息；旧库或旧用户按已批准兼容视图展示。</zh-CN>
+        ///   <en>Reads user registration-review information; legacy databases or users appear through an approved compatibility view.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
-        /// <returns>中文：注册审核只读信息，包含信息来源。English: Read-only registration-review information including its source.</returns>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户数值标识。</zh-CN>
+        ///   <en>Numeric user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>注册审核只读信息，包含信息来源。</zh-CN>
+        ///   <en>Read-only registration-review information including its source.</en>
+        /// </l>
+        /// </returns>
         public IUserRegistrationInfo GetRegistrationInfo(int userId)
         {
             if (!HasRegistrationTable())
@@ -354,17 +474,35 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：校验临时注册链接邀请码。
-        ///
-        /// English: Validates a temporary registration invite code.
+        /// <lang>
+        ///   <zh-CN>校验临时注册链接邀请码。</zh-CN>
+        ///   <en>Validates a temporary registration invite code.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="inviteCode">中文：可为空的邀请码。English: Optional invite code.</param>
-        /// <param name="message">中文：失败时可安全展示的说明；成功时为空。English: Display-safe explanation on failure; empty on success.</param>
-        /// <returns>中文：邀请码有效，或当前允许空邀请码时为 <c>true</c>。English: <c>true</c> when the code is valid or an empty code is currently allowed.</returns>
+        /// <param name="inviteCode">
+        /// <l>
+        ///   <zh-CN>可为空的邀请码。</zh-CN>
+        ///   <en>Optional invite code.</en>
+        /// </l>
+        /// </param>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>失败时可安全展示的说明；成功时为空。</zh-CN>
+        ///   <en>Display-safe explanation on failure; empty on success.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>邀请码有效，或当前允许空邀请码时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the code is valid or an empty code is currently allowed.</en>
+        /// </l>
+        /// </returns>
         public bool ValidateRegistrationInvite(string inviteCode, out string message)
         {
-            // 中文：空邀请码当前表示允许的非邀请注册，未来“必须邀请码”策略应作为独立设置实现。
-            // English: An empty invite code currently represents allowed non-invite registration; a required-invite policy must be implemented as a separate setting.
+            // <lang>
+            //   <zh-CN>空邀请码当前表示允许的非邀请注册，未来“必须邀请码”策略应作为独立设置实现。</zh-CN>
+            //   <en>An empty invite code currently represents allowed non-invite registration; a required-invite policy must be implemented as a separate setting.</en>
+            // </lang>
             string normalizedInviteCode = Normalize(inviteCode);
             if (string.IsNullOrEmpty(normalizedInviteCode))
             {
@@ -408,26 +546,52 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：更新指定用户的邮箱并重置强哈希凭据。
-        ///
-        /// English: Updates the specified user's email and resets the strong-hash credential.
+        /// <lang>
+        ///   <zh-CN>更新指定用户的邮箱并重置强哈希凭据。</zh-CN>
+        ///   <en>Updates the specified user's email and resets the strong-hash credential.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
-        /// <param name="email">中文：新的邮箱地址。English: New email address.</param>
-        /// <param name="password">中文：新的密码输入，不得写入审计正文或诊断日志。English: New password input; it must not be written to audit details or diagnostic logs.</param>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要更新的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to update.</en>
+        /// </l>
+        /// </param>
+        /// <param name="email">
+        /// <l>
+        ///   <zh-CN>新的邮箱地址。</zh-CN>
+        ///   <en>New email address.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>新的密码输入，不得写入审计正文或诊断日志。</zh-CN>
+        ///   <en>New password input; it must not be written to audit details or diagnostic logs.</en>
+        /// </l>
+        /// </param>
         public void UpdateUser(int userId, string email, string password)
         {
             UpdateUserProfile(userId, null, null, null, email, password, "system-admin");
         }
 
         /// <summary>
-        /// 中文：读取用户资料扩展；缺少 P6.2 profile 表或记录时返回兼容视图。
-        ///
-        /// English: Reads the user-profile extension and returns a compatibility view when the P6.2 profile table
-        /// or row is missing.
+        /// <lang>
+        ///   <zh-CN>读取用户资料扩展；缺少 P6.2 profile 表或记录时返回兼容视图。</zh-CN>
+        ///   <en>Reads the user-profile extension and returns a compatibility view when the P6.2 profile table or row is missing.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
-        /// <returns>中文：资料扩展只读视图；用户不存在时为空。English: Read-only profile view, or null when the user does not exist.</returns>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户数值标识。</zh-CN>
+        ///   <en>Numeric user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>资料扩展只读视图；用户不存在时为空。</zh-CN>
+        ///   <en>Read-only profile view, or null when the user does not exist.</en>
+        /// </l>
+        /// </returns>
         public IUserProfileInfo GetUserProfileInfo(int userId)
         {
             UserItem user = _context.Users.AsNoTracking().SingleOrDefault(i => i.UserId == userId);
@@ -461,18 +625,53 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：更新用户资料扩展、同步旧邮箱，并在提供密码时重置强哈希凭据。
-        ///
-        /// English: Updates the user-profile extension, synchronizes the legacy email, and resets the strong-hash
-        /// credential when a password is provided.
+        /// <lang>
+        ///   <zh-CN>更新用户资料扩展、同步旧邮箱，并在提供密码时重置强哈希凭据。</zh-CN>
+        ///   <en>Updates the user-profile extension, synchronizes the legacy email, and resets the strong-hash credential when a password is provided.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
-        /// <param name="loginName">中文：新的稳定登录名；为空时保留旧登录名兼容值。English: New stable login name; empty preserves the legacy-compatible value.</param>
-        /// <param name="displayName">中文：正式显示名。English: Formal display name.</param>
-        /// <param name="nickname">中文：昵称或偏好称呼。English: Nickname or preferred name.</param>
-        /// <param name="email">中文：新的邮箱地址。English: New email address.</param>
-        /// <param name="password">中文：可为空的新密码输入；为空时不重置凭据。English: Optional new password input; empty means no credential reset.</param>
-        /// <param name="actor">中文：执行更新的管理员标识。English: Identifier of the administrator performing the update.</param>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要更新的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to update.</en>
+        /// </l>
+        /// </param>
+        /// <param name="loginName">
+        /// <l>
+        ///   <zh-CN>新的稳定登录名；为空时保留旧登录名兼容值。</zh-CN>
+        ///   <en>New stable login name; empty preserves the legacy-compatible value.</en>
+        /// </l>
+        /// </param>
+        /// <param name="displayName">
+        /// <l>
+        ///   <zh-CN>正式显示名。</zh-CN>
+        ///   <en>Formal display name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="nickname">
+        /// <l>
+        ///   <zh-CN>昵称或偏好称呼。</zh-CN>
+        ///   <en>Nickname or preferred name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="email">
+        /// <l>
+        ///   <zh-CN>新的邮箱地址。</zh-CN>
+        ///   <en>New email address.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>可为空的新密码输入；为空时不重置凭据。</zh-CN>
+        ///   <en>Optional new password input; empty means no credential reset.</en>
+        /// </l>
+        /// </param>
+        /// <param name="actor">
+        /// <l>
+        ///   <zh-CN>执行更新的管理员标识。</zh-CN>
+        ///   <en>Identifier of the administrator performing the update.</en>
+        /// </l>
+        /// </param>
         public void UpdateUserProfile(
             int userId,
             string loginName,
@@ -567,16 +766,41 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：设置用户资料生命周期状态；页面或服务入口负责在成功后写入运营审计。
-        ///
-        /// English: Sets the user-profile lifecycle status; the page or service entry point records operations audit
-        /// after a successful state change.
+        /// <lang>
+        ///   <zh-CN>设置用户资料生命周期状态；页面或服务入口负责在成功后写入运营审计。</zh-CN>
+        ///   <en>Sets the user-profile lifecycle status; the page or service entry point records operations audit after a successful state change.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：要更新的用户数值标识。English: Numeric identifier of the user to update.</param>
-        /// <param name="status">中文：目标状态，必须是已知 profile 状态。English: Target status, which must be a known profile status.</param>
-        /// <param name="reason">中文：不含敏感值的状态变更原因。English: Non-sensitive status-change reason.</param>
-        /// <param name="actor">中文：执行状态变更的操作者标识。English: Identifier of the operator performing the status change.</param>
-        /// <exception cref="InvalidOperationException">中文：资料表不可用或状态无效时引发。English: Thrown when the profile table is unavailable or the status is invalid.</exception>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要更新的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to update.</en>
+        /// </l>
+        /// </param>
+        /// <param name="status">
+        /// <l>
+        ///   <zh-CN>目标状态，必须是已知 profile 状态。</zh-CN>
+        ///   <en>Target status, which must be a known profile status.</en>
+        /// </l>
+        /// </param>
+        /// <param name="reason">
+        /// <l>
+        ///   <zh-CN>不含敏感值的状态变更原因。</zh-CN>
+        ///   <en>Non-sensitive status-change reason.</en>
+        /// </l>
+        /// </param>
+        /// <param name="actor">
+        /// <l>
+        ///   <zh-CN>执行状态变更的操作者标识。</zh-CN>
+        ///   <en>Identifier of the operator performing the status change.</en>
+        /// </l>
+        /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>资料表不可用或状态无效时引发。</zh-CN>
+        ///   <en>Thrown when the profile table is unavailable or the status is invalid.</en>
+        /// </l>
+        /// </exception>
         public void SetUserProfileStatus(int userId, string status, string reason, string actor)
         {
             if (!HasUserProfileTable())
@@ -625,16 +849,29 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：获取指定用户的所有角色。
-        ///
-        /// English: Gets all roles of the specified user.
+        /// <lang>
+        ///   <zh-CN>获取指定用户的所有角色。</zh-CN>
+        ///   <en>Gets all roles of the specified user.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="name">中文：用户登录名称。English: User sign-in name.</param>
-        /// <returns>中文：角色集合；没有角色时为空集合。English: Role collection; empty when the user has no roles.</returns>
+        /// <param name="name">
+        /// <l>
+        ///   <zh-CN>用户登录名称。</zh-CN>
+        ///   <en>User sign-in name.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>角色集合；没有角色时为空集合。</zh-CN>
+        ///   <en>Role collection; empty when the user has no roles.</en>
+        /// </l>
+        /// </returns>
         public IEnumerable<IRoleItem> GetRolesByUser(string name)
         {
-            // 中文：角色成员关系可能由 RolesDb 通过中间表直接写入；显式查询可避开 singleton DbContext 的导航集合缓存。
-            // English: Role memberships may be written directly through the join table by RolesDb; explicit querying avoids stale navigation collections on the singleton DbContext.
+            // <lang>
+            //   <zh-CN>角色成员关系可能由 RolesDb 通过中间表直接写入；显式查询可避开 singleton DbContext 的导航集合缓存。</zh-CN>
+            //   <en>Role memberships may be written directly through the join table by RolesDb; explicit querying avoids stale navigation collections on the singleton DbContext.</en>
+            // </lang>
             return _context.Database.SqlQuery<RoleItem>(
                 @"
 SELECT [Roles].[RoleID], [Roles].[PortalID], [Roles].[RoleName]
@@ -649,12 +886,23 @@ ORDER BY [Roles].[RoleName]",
         }
 
         /// <summary>
-        /// 中文：获取指定用户的所有角色名称。
-        ///
-        /// English: Gets names of all roles of the specified user.
+        /// <lang>
+        ///   <zh-CN>获取指定用户的所有角色名称。</zh-CN>
+        ///   <en>Gets names of all roles of the specified user.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="name">中文：用户登录名称。English: User sign-in name.</param>
-        /// <returns>中文：角色名称集合；没有角色时为空集合。English: Role-name collection; empty when the user has no roles.</returns>
+        /// <param name="name">
+        /// <l>
+        ///   <zh-CN>用户登录名称。</zh-CN>
+        ///   <en>User sign-in name.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>角色名称集合；没有角色时为空集合。</zh-CN>
+        ///   <en>Role-name collection; empty when the user has no roles.</en>
+        /// </l>
+        /// </returns>
         public IEnumerable<string> GetRoleNamesByUser(string name)
         {
             return _context.Database.SqlQuery<string>(
@@ -671,38 +919,75 @@ ORDER BY [Roles].[RoleName]",
         }
 
         /// <summary>
-        /// 中文：获取单个用户。
-        ///
-        /// English: Gets a single user.
+        /// <lang>
+        ///   <zh-CN>获取单个用户。</zh-CN>
+        ///   <en>Gets a single user.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="name">中文：用户登录名称。English: User sign-in name.</param>
-        /// <returns>中文：匹配的用户对象。English: Matching user object.</returns>
+        /// <param name="name">
+        /// <l>
+        ///   <zh-CN>用户登录名称。</zh-CN>
+        ///   <en>User sign-in name.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>匹配的用户对象。</zh-CN>
+        ///   <en>Matching user object.</en>
+        /// </l>
+        /// </returns>
         public IUserItem GetSingleUser(string name)
         {
             return _context.Users.Single(i => i.Name == name);
         }
 
         /// <summary>
-        /// 中文：按数值标识查找用户；页面请求目标缺失时返回空值而不是抛出查询异常。
-        ///
-        /// English: Finds a user by numeric identifier, returning null instead of throwing when a page-request target is absent.
+        /// <lang>
+        ///   <zh-CN>按数值标识查找用户；页面请求目标缺失时返回空值而不是抛出查询异常。</zh-CN>
+        ///   <en>Finds a user by numeric identifier, returning null instead of throwing when a page-request target is absent.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
-        /// <returns>中文：匹配用户；不存在时为 <c>null</c>。English: Matching user, or <c>null</c> when absent.</returns>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户数值标识。</zh-CN>
+        ///   <en>Numeric user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>匹配用户；不存在时为 <c>null</c>。</zh-CN>
+        ///   <en>Matching user, or <c>null</c> when absent.</en>
+        /// </l>
+        /// </returns>
         public IUserItem FindUserById(int userId)
         {
             return _context.Users.SingleOrDefault(i => i.UserId == userId);
         }
 
         /// <summary>
-        /// 中文：解析登录标识并校验输入密码、注册审核状态和 P5.2 强凭据。
-        ///
-        /// English: Resolves the sign-in identifier, then validates the submitted password, registration-review status,
-        /// and P5.2 strong credential.
+        /// <lang>
+        ///   <zh-CN>解析登录标识并校验输入密码、注册审核状态和 P5.2 强凭据。</zh-CN>
+        ///   <en>Resolves the sign-in identifier, then validates the submitted password, registration-review status, and P5.2 strong credential.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="emailOrName">中文：用户输入的邮箱、登录名称或员工号。English: Email, sign-in name, or employee code entered by the user.</param>
-        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
-        /// <returns>中文：登录结果；失败时为通用失败对象。English: Sign-in result; generic failure object on failure.</returns>
+        /// <param name="emailOrName">
+        /// <l>
+        ///   <zh-CN>用户输入的邮箱、登录名称或员工号。</zh-CN>
+        ///   <en>Email, sign-in name, or employee code entered by the user.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>用户提交的密码输入。</zh-CN>
+        ///   <en>Submitted password input.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>登录结果；失败时为通用失败对象。</zh-CN>
+        ///   <en>Sign-in result; generic failure object on failure.</en>
+        /// </l>
+        /// </returns>
         public PortalSignInResult SignIn(string emailOrName, string password)
         {
             string normalizedLogin = Normalize(emailOrName);
@@ -788,13 +1073,29 @@ ORDER BY [Roles].[RoleName]",
         }
 
         /// <summary>
-        /// 中文：兼容旧调用点的登录方法；新代码应优先使用 <see cref="SignIn"/>。
-        ///
-        /// English: Sign-in method retained for legacy call sites; new code should prefer <see cref="SignIn"/>.
+        /// <lang>
+        ///   <zh-CN>兼容旧调用点的登录方法；新代码应优先使用 <see cref="SignIn"/>。</zh-CN>
+        ///   <en>Sign-in method retained for legacy call sites; new code should prefer <see cref="SignIn"/>.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="emailOrName">中文：用户输入的邮箱、登录名称或员工号。English: Email, sign-in name, or employee code entered by the user.</param>
-        /// <param name="password">中文：用户提交的密码输入。English: Submitted password input.</param>
-        /// <returns>中文：登录成功且允许访问时返回用户名；否则为空字符串。English: User name when sign-in succeeds and access is allowed; otherwise an empty string.</returns>
+        /// <param name="emailOrName">
+        /// <l>
+        ///   <zh-CN>用户输入的邮箱、登录名称或员工号。</zh-CN>
+        ///   <en>Email, sign-in name, or employee code entered by the user.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>用户提交的密码输入。</zh-CN>
+        ///   <en>Submitted password input.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>登录成功且允许访问时返回用户名；否则为空字符串。</zh-CN>
+        ///   <en>User name when sign-in succeeds and access is allowed; otherwise an empty string.</en>
+        /// </l>
+        /// </returns>
         public string Login(string emailOrName, string password)
         {
             PortalSignInResult result = SignIn(emailOrName, password);
@@ -802,12 +1103,23 @@ ORDER BY [Roles].[RoleName]",
         }
 
         /// <summary>
-        /// 中文：按用户名称读取当前安全版本；缺少 P5.2 表时返回 <c>0</c>。
-        ///
-        /// English: Reads the current security version by user name; returns <c>0</c> when P5.2 tables are absent.
+        /// <lang>
+        ///   <zh-CN>按用户名称读取当前安全版本；缺少 P5.2 表时返回 <c>0</c>。</zh-CN>
+        ///   <en>Reads the current security version by user name; returns <c>0</c> when P5.2 tables are absent.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userName">中文：用户登录名称。English: User sign-in name.</param>
-        /// <returns>中文：当前安全版本。English: Current security version.</returns>
+        /// <param name="userName">
+        /// <l>
+        ///   <zh-CN>用户登录名称。</zh-CN>
+        ///   <en>User sign-in name.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前安全版本。</zh-CN>
+        ///   <en>Current security version.</en>
+        /// </l>
+        /// </returns>
         public long GetSecurityVersionByUserName(string userName)
         {
             string normalizedUserName = Normalize(userName);
@@ -830,12 +1142,23 @@ ORDER BY [Roles].[RoleName]",
         }
 
         /// <summary>
-        /// 中文：按用户标识读取当前安全版本；缺少 P5.2 表时返回 <c>0</c>。
-        ///
-        /// English: Reads the current security version by user id; returns <c>0</c> when P5.2 tables are absent.
+        /// <lang>
+        ///   <zh-CN>按用户标识读取当前安全版本；缺少 P5.2 表时返回 <c>0</c>。</zh-CN>
+        ///   <en>Reads the current security version by user id; returns <c>0</c> when P5.2 tables are absent.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
-        /// <returns>中文：当前安全版本。English: Current security version.</returns>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户数值标识。</zh-CN>
+        ///   <en>Numeric user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前安全版本。</zh-CN>
+        ///   <en>Current security version.</en>
+        /// </l>
+        /// </returns>
         public long GetSecurityVersionByUserId(int userId)
         {
             if (userId <= 0 || !HasSecurityStateTable())
@@ -863,12 +1186,23 @@ ORDER BY [Roles].[RoleName]",
         }
 
         /// <summary>
-        /// 中文：递增指定用户的安全版本，使旧身份票据和角色 Cookie 在下一次请求失效。
-        ///
-        /// English: Increments the security version of the specified user so older auth tickets and role cookies become invalid on the next request.
+        /// <lang>
+        ///   <zh-CN>递增指定用户的安全版本，使旧身份票据和角色 Cookie 在下一次请求失效。</zh-CN>
+        ///   <en>Increments the security version of the specified user so older auth tickets and role cookies become invalid on the next request.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="userId">中文：用户数值标识。English: Numeric user identifier.</param>
-        /// <param name="reason">中文：非敏感变更原因。English: Non-sensitive change reason.</param>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户数值标识。</zh-CN>
+        ///   <en>Numeric user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="reason">
+        /// <l>
+        ///   <zh-CN>非敏感变更原因。</zh-CN>
+        ///   <en>Non-sensitive change reason.</en>
+        /// </l>
+        /// </param>
         public void IncrementSecurityVersion(int userId, string reason)
         {
             if (userId <= 0 || !HasSecurityStateTable())
@@ -903,8 +1237,10 @@ END",
             {
                 if (!HasRegistrationTable())
                 {
-                    // 中文：审核表尚未部署时保持旧系统可登录，避免迁移未完成导致全站锁定。
-                    // English: Preserve legacy sign-in when the review table is not deployed, avoiding site-wide lockout during migration.
+                    // <lang>
+                    //   <zh-CN>审核表尚未部署时保持旧系统可登录，避免迁移未完成导致全站锁定。</zh-CN>
+                    //   <en>Preserve legacy sign-in when the review table is not deployed, avoiding site-wide lockout during migration.</en>
+                    // </lang>
                     return true;
                 }
 
@@ -914,8 +1250,10 @@ END",
             }
             catch (Exception)
             {
-                // 中文：读取审核元数据失败时仍保持旧登录行为；该兼容回退须在未来安全迁移中重新评估。
-                // English: Keep legacy sign-in when review metadata cannot be read; this compatibility fallback must be reassessed during future security migration.
+                // <lang>
+                //   <zh-CN>读取审核元数据失败时仍保持旧登录行为；该兼容回退须在未来安全迁移中重新评估。</zh-CN>
+                //   <en>Keep legacy sign-in when review metadata cannot be read; this compatibility fallback must be reassessed during future security migration.</en>
+                // </lang>
                 return true;
             }
         }
@@ -937,8 +1275,10 @@ END",
             }
             catch (Exception)
             {
-                // 中文：profile 读取失败时保持旧路径可用，部署健康检查会另行暴露缺失或损坏的扩展表。
-                // English: Keep the legacy path usable when profile reads fail; deployment health checks will expose
+                // <lang>
+                //   <zh-CN>profile 读取失败时保持旧路径可用，部署健康检查会另行暴露缺失或损坏的扩展表。</zh-CN>
+                //   <en>Keep the legacy path usable when profile reads fail; deployment health checks will expose</en>
+                // </lang>
                 // missing or damaged extension tables separately.
                 return true;
             }
@@ -967,8 +1307,10 @@ END",
             }
             catch (Exception)
             {
-                // 中文：可选审核元数据失败不能阻断管理员旧入口；诊断与补偿策略留给后续运营治理。
-                // English: Optional review-metadata failures must not block the legacy administration entry; diagnostics and remediation belong to later operations governance.
+                // <lang>
+                //   <zh-CN>可选审核元数据失败不能阻断管理员旧入口；诊断与补偿策略留给后续运营治理。</zh-CN>
+                //   <en>Optional review-metadata failures must not block the legacy administration entry; diagnostics and remediation belong to later operations governance.</en>
+                // </lang>
             }
         }
 
@@ -1210,8 +1552,10 @@ FROM
             }
             catch (Exception)
             {
-                // 中文：让后续用户删除流程继续暴露真实失败，避免扩展清理吞掉主流程错误。
-                // English: Let the subsequent user-delete flow surface the real failure instead of letting extension cleanup swallow it.
+                // <lang>
+                //   <zh-CN>让后续用户删除流程继续暴露真实失败，避免扩展清理吞掉主流程错误。</zh-CN>
+                //   <en>Let the subsequent user-delete flow surface the real failure instead of letting extension cleanup swallow it.</en>
+                // </lang>
             }
         }
 
@@ -1379,12 +1723,23 @@ END",
         }
 
         /// <summary>
-        /// 中文：为密码策略提供账号相关上下文词；调用方不得记录返回值。
-        ///
-        /// English: Provides account-related context terms for password policy checks; callers must not log the returned values.
+        /// <lang>
+        ///   <zh-CN>为密码策略提供账号相关上下文词；调用方不得记录返回值。</zh-CN>
+        ///   <en>Provides account-related context terms for password policy checks; callers must not log the returned values.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="terms">中文：用户名、邮箱、员工号、显示名等候选词。English: Candidate user name, email, employee code, display name, and similar terms.</param>
-        /// <returns>中文：供策略层只读使用的上下文词数组。English: Context-term array for read-only policy checks.</returns>
+        /// <param name="terms">
+        /// <l>
+        ///   <zh-CN>用户名、邮箱、员工号、显示名等候选词。</zh-CN>
+        ///   <en>Candidate user name, email, employee code, display name, and similar terms.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>供策略层只读使用的上下文词数组。</zh-CN>
+        ///   <en>Context-term array for read-only policy checks.</en>
+        /// </l>
+        /// </returns>
         private static string[] BuildPasswordPolicyContextTerms(params string[] terms)
         {
             return terms ?? new string[0];

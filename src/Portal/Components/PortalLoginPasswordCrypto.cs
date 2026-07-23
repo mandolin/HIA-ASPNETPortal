@@ -6,24 +6,24 @@ using System.Web;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：登录/口令提交前端加密的服务端 RSA 支撑工具。
-    ///
-    /// English: Server-side RSA support for client-side login/password-submission encryption.
+    /// <lang>
+    ///   <zh-CN>登录/口令提交前端加密的服务端 RSA 支撑工具。</zh-CN>
+    ///   <en>Server-side RSA support for client-side login/password-submission encryption.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：P10.3 第一版固定使用 2048 位一次性密钥；后续会按客户端浏览器环境选择加密强度。
-    /// 私钥只保存在当前 Session 中，并在口令提交时一次性消费，不写入日志、数据库或页面。
-    ///
-    /// English: The first P10.3 version uses a fixed 2048-bit one-time key; later work will select encryption
-    /// strength by client browser capability. The private key stays only in the current Session and is consumed
-    /// once by the password post. It is never written to logs, the database, or the page.
+    /// <lang>
+    ///   <zh-CN>P10.3 第一版固定使用 2048 位一次性密钥；后续会按客户端浏览器环境选择加密强度。 私钥只保存在当前 Session 中，并在口令提交时一次性消费，不写入日志、数据库或页面。</zh-CN>
+    ///   <en>The first P10.3 version uses a fixed 2048-bit one-time key; later work will select encryption strength by client browser capability. The private key stays only in the current Session and is consumed once by the password post. It is never written to logs, the database, or the page.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalLoginPasswordCrypto
     {
         /// <summary>
-        /// 中文：当前默认 RSA 密钥位数。
-        ///
-        /// English: Current default RSA key size.
+        /// <lang>
+        ///   <zh-CN>当前默认 RSA 密钥位数。</zh-CN>
+        ///   <en>Current default RSA key size.</en>
+        /// </lang>
         /// </summary>
         public const int DefaultKeySizeBits = 2048;
 
@@ -32,25 +32,52 @@ namespace ASPNET.StarterKit.Portal
         private static readonly TimeSpan KeyLifetime = TimeSpan.FromMinutes(5);
 
         /// <summary>
-        /// 中文：读取登录密码提交是否必须使用前端加密。
-        ///
-        /// English: Reads whether login-password submission must use client-side encryption.
+        /// <lang>
+        ///   <zh-CN>读取登录密码提交是否必须使用前端加密。</zh-CN>
+        ///   <en>Reads whether login-password submission must use client-side encryption.</en>
+        /// </lang>
         /// </summary>
-        /// <returns>中文：必须使用加密提交时为 <c>true</c>。English: <c>true</c> when encrypted submission is required.</returns>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>必须使用加密提交时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when encrypted submission is required.</en>
+        /// </l>
+        /// </returns>
         public static bool IsEncryptedSubmissionRequired()
         {
             return PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.RequireEncryptedLoginPassword);
         }
 
         /// <summary>
-        /// 中文：为当前 Session 签发一个登录密码一次性公钥。
-        ///
-        /// English: Issues a one-time login-password public key for the current Session.
+        /// <lang>
+        ///   <zh-CN>为当前 Session 签发一个登录密码一次性公钥。</zh-CN>
+        ///   <en>Issues a one-time login-password public key for the current Session.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：当前 HTTP 上下文，必须带 Session。English: Current HTTP context; Session is required.</param>
-        /// <returns>中文：PEM 公钥和密钥位数。English: PEM public key and key size.</returns>
-        /// <exception cref="ArgumentNullException">中文：<paramref name="context"/> 为 <c>null</c> 时引发。English: Thrown when <paramref name="context"/> is <c>null</c>.</exception>
-        /// <exception cref="InvalidOperationException">中文：当前请求没有 Session 时引发。English: Thrown when the current request has no Session.</exception>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文，必须带 Session。</zh-CN>
+        ///   <en>Current HTTP context; Session is required.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>PEM 公钥和密钥位数。</zh-CN>
+        ///   <en>PEM public key and key size.</en>
+        /// </l>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <l>
+        ///   <zh-CN><paramref name="context"/> 为 <c>null</c> 时引发。</zh-CN>
+        ///   <en>Thrown when <paramref name="context"/> is <c>null</c>.</en>
+        /// </l>
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>当前请求没有 Session 时引发。</zh-CN>
+        ///   <en>Thrown when the current request has no Session.</en>
+        /// </l>
+        /// </exception>
         public static PortalLoginPasswordPublicKey IssueLoginPasswordKey(HttpContext context)
         {
             EnsureSession(context);
@@ -68,16 +95,47 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：消费当前 Session 的一次性私钥并解密登录密码密文。
-        ///
-        /// English: Consumes the current Session's one-time private key and decrypts the encrypted login password.
+        /// <lang>
+        ///   <zh-CN>消费当前 Session 的一次性私钥并解密登录密码密文。</zh-CN>
+        ///   <en>Consumes the current Session's one-time private key and decrypts the encrypted login password.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：当前 HTTP 上下文，必须带 Session。English: Current HTTP context; Session is required.</param>
-        /// <param name="encryptedPassword">中文：客户端提交的 Base64 RSA 密文。English: Base64 RSA ciphertext submitted by the client.</param>
-        /// <param name="password">中文：解密成功时返回当前请求内使用的明文密码。English: Plain password for this request when decryption succeeds.</param>
-        /// <param name="failureCode">中文：失败分类，不包含敏感值。English: Failure category without sensitive values.</param>
-        /// <param name="eventId">中文：诊断事件编号。English: Diagnostics event id.</param>
-        /// <returns>中文：解密成功时为 <c>true</c>。English: <c>true</c> when decryption succeeds.</returns>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文，必须带 Session。</zh-CN>
+        ///   <en>Current HTTP context; Session is required.</en>
+        /// </l>
+        /// </param>
+        /// <param name="encryptedPassword">
+        /// <l>
+        ///   <zh-CN>客户端提交的 Base64 RSA 密文。</zh-CN>
+        ///   <en>Base64 RSA ciphertext submitted by the client.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>解密成功时返回当前请求内使用的明文密码。</zh-CN>
+        ///   <en>Plain password for this request when decryption succeeds.</en>
+        /// </l>
+        /// </param>
+        /// <param name="failureCode">
+        /// <l>
+        ///   <zh-CN>失败分类，不包含敏感值。</zh-CN>
+        ///   <en>Failure category without sensitive values.</en>
+        /// </l>
+        /// </param>
+        /// <param name="eventId">
+        /// <l>
+        ///   <zh-CN>诊断事件编号。</zh-CN>
+        ///   <en>Diagnostics event id.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>解密成功时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when decryption succeeds.</en>
+        /// </l>
+        /// </returns>
         public static bool TryDecryptSubmittedPassword(
             HttpContext context,
             string encryptedPassword,
@@ -102,24 +160,53 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：消费当前 Session 的一次性私钥并解密同一表单中的多个口令密文字段。
-        ///
-        /// English: Consumes the current Session's one-time private key and decrypts multiple password ciphertext fields from one form.
+        /// <lang>
+        ///   <zh-CN>消费当前 Session 的一次性私钥并解密同一表单中的多个口令密文字段。</zh-CN>
+        ///   <en>Consumes the current Session's one-time private key and decrypts multiple password ciphertext fields from one form.</en>
+        /// </lang>
         /// </summary>
         /// <remarks>
-        /// 中文：注册、改密和管理员重置密码通常包含密码与确认密码两个字段；它们必须共用同一把一次性私钥，
-        /// 并在一次调用中完成解密，避免第一个字段解密后清空私钥导致第二个字段失败。
-        ///
-        /// English: Registration, change-password, and administrator password-reset forms usually contain password
-        /// and confirmation fields. They must share the same one-time private key and decrypt in one call so the
-        /// first field does not clear the key before the second field is processed.
+        /// <lang>
+        ///   <zh-CN>注册、改密和管理员重置密码通常包含密码与确认密码两个字段；它们必须共用同一把一次性私钥， 并在一次调用中完成解密，避免第一个字段解密后清空私钥导致第二个字段失败。</zh-CN>
+        ///   <en>Registration, change-password, and administrator password-reset forms usually contain password and confirmation fields. They must share the same one-time private key and decrypt in one call so the first field does not clear the key before the second field is processed.</en>
+        /// </lang>
         /// </remarks>
-        /// <param name="context">中文：当前 HTTP 上下文，必须带 Session。English: Current HTTP context; Session is required.</param>
-        /// <param name="encryptedPasswords">中文：客户端提交的一组 Base64 RSA 密文。English: Base64 RSA ciphertext values submitted by the client.</param>
-        /// <param name="passwords">中文：解密成功时返回当前请求内使用的明文口令数组。English: Plain password values for this request when decryption succeeds.</param>
-        /// <param name="failureCode">中文：失败分类，不包含敏感值。English: Failure category without sensitive values.</param>
-        /// <param name="eventId">中文：诊断事件编号。English: Diagnostics event id.</param>
-        /// <returns>中文：全部字段解密成功时为 <c>true</c>。English: <c>true</c> when all fields decrypt successfully.</returns>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文，必须带 Session。</zh-CN>
+        ///   <en>Current HTTP context; Session is required.</en>
+        /// </l>
+        /// </param>
+        /// <param name="encryptedPasswords">
+        /// <l>
+        ///   <zh-CN>客户端提交的一组 Base64 RSA 密文。</zh-CN>
+        ///   <en>Base64 RSA ciphertext values submitted by the client.</en>
+        /// </l>
+        /// </param>
+        /// <param name="passwords">
+        /// <l>
+        ///   <zh-CN>解密成功时返回当前请求内使用的明文口令数组。</zh-CN>
+        ///   <en>Plain password values for this request when decryption succeeds.</en>
+        /// </l>
+        /// </param>
+        /// <param name="failureCode">
+        /// <l>
+        ///   <zh-CN>失败分类，不包含敏感值。</zh-CN>
+        ///   <en>Failure category without sensitive values.</en>
+        /// </l>
+        /// </param>
+        /// <param name="eventId">
+        /// <l>
+        ///   <zh-CN>诊断事件编号。</zh-CN>
+        ///   <en>Diagnostics event id.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>全部字段解密成功时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when all fields decrypt successfully.</en>
+        /// </l>
+        /// </returns>
         public static bool TryDecryptSubmittedPasswords(
             HttpContext context,
             string[] encryptedPasswords,
@@ -380,19 +467,31 @@ namespace ASPNET.StarterKit.Portal
     }
 
     /// <summary>
-    /// 中文：登录密码加密公钥响应模型。
-    ///
-    /// English: Response model for a login-password encryption public key.
+    /// <lang>
+    ///   <zh-CN>登录密码加密公钥响应模型。</zh-CN>
+    ///   <en>Response model for a login-password encryption public key.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalLoginPasswordPublicKey
     {
         /// <summary>
-        /// 中文：创建公钥响应模型。
-        ///
-        /// English: Creates a public-key response model.
+        /// <lang>
+        ///   <zh-CN>创建公钥响应模型。</zh-CN>
+        ///   <en>Creates a public-key response model.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="publicKeyPem">中文：SubjectPublicKeyInfo PEM 公钥。English: SubjectPublicKeyInfo PEM public key.</param>
-        /// <param name="keySizeBits">中文：RSA 密钥位数。English: RSA key size in bits.</param>
+        /// <param name="publicKeyPem">
+        /// <l>
+        ///   <zh-CN>SubjectPublicKeyInfo PEM 公钥。</zh-CN>
+        ///   <en>SubjectPublicKeyInfo PEM public key.</en>
+        /// </l>
+        /// </param>
+        /// <param name="keySizeBits">
+        /// <l>
+        ///   <zh-CN>RSA 密钥位数。</zh-CN>
+        ///   <en>RSA key size in bits.</en>
+        /// </l>
+        /// </param>
         public PortalLoginPasswordPublicKey(string publicKeyPem, int keySizeBits)
         {
             PublicKeyPem = publicKeyPem ?? string.Empty;
@@ -400,69 +499,118 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：PEM 格式公钥。
-        ///
-        /// English: PEM-format public key.
+        /// <lang>
+        ///   <zh-CN>PEM 格式公钥。</zh-CN>
+        ///   <en>PEM-format public key.</en>
+        /// </lang>
         /// </summary>
         public string PublicKeyPem { get; private set; }
 
         /// <summary>
-        /// 中文：密钥位数。
-        ///
-        /// English: Key size in bits.
+        /// <lang>
+        ///   <zh-CN>密钥位数。</zh-CN>
+        ///   <en>Key size in bits.</en>
+        /// </lang>
         /// </summary>
         public int KeySizeBits { get; private set; }
     }
 
     /// <summary>
-    /// 中文：面向页面层的通用口令提交加密 facade。
-    ///
-    /// English: Generic password-submission encryption facade for page code.
+    /// <lang>
+    ///   <zh-CN>面向页面层的通用口令提交加密 facade。</zh-CN>
+    ///   <en>Generic password-submission encryption facade for page code.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：保留 <see cref="PortalLoginPasswordCrypto"/> 作为第一批登录实现的兼容入口；新页面应依赖本 facade，
-    /// 让注册、改密、管理员重置密码等入口共享同一提交安全语义。
-    ///
-    /// English: <see cref="PortalLoginPasswordCrypto"/> remains as the compatibility entry from the first login
-    /// implementation; new pages should depend on this facade so registration, change-password, and administrator
-    /// reset flows share one submission-security contract.
+    /// <lang>
+    ///   <zh-CN>保留 <see cref="PortalLoginPasswordCrypto"/> 作为第一批登录实现的兼容入口；新页面应依赖本 facade， 让注册、改密、管理员重置密码等入口共享同一提交安全语义。</zh-CN>
+    ///   <en><see cref="PortalLoginPasswordCrypto"/> remains as the compatibility entry from the first login implementation; new pages should depend on this facade so registration, change-password, and administrator reset flows share one submission-security contract.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalPasswordSubmissionCrypto
     {
         /// <summary>
-        /// 中文：读取口令提交是否必须使用前端加密。
-        ///
-        /// English: Reads whether password submission must use client-side encryption.
+        /// <lang>
+        ///   <zh-CN>读取口令提交是否必须使用前端加密。</zh-CN>
+        ///   <en>Reads whether password submission must use client-side encryption.</en>
+        /// </lang>
         /// </summary>
-        /// <returns>中文：必须加密提交时为 <c>true</c>。English: <c>true</c> when encrypted submission is required.</returns>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>必须加密提交时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when encrypted submission is required.</en>
+        /// </l>
+        /// </returns>
         public static bool IsEncryptedSubmissionRequired()
         {
             return PortalLoginPasswordCrypto.IsEncryptedSubmissionRequired();
         }
 
         /// <summary>
-        /// 中文：为当前 Session 签发一个一次性口令提交公钥。
-        ///
-        /// English: Issues a one-time password-submission public key for the current Session.
+        /// <lang>
+        ///   <zh-CN>为当前 Session 签发一个一次性口令提交公钥。</zh-CN>
+        ///   <en>Issues a one-time password-submission public key for the current Session.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：当前 HTTP 上下文。English: Current HTTP context.</param>
-        /// <returns>中文：PEM 公钥和密钥位数。English: PEM public key and key size.</returns>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>PEM 公钥和密钥位数。</zh-CN>
+        ///   <en>PEM public key and key size.</en>
+        /// </l>
+        /// </returns>
         public static PortalLoginPasswordPublicKey IssuePasswordSubmissionKey(HttpContext context)
         {
             return PortalLoginPasswordCrypto.IssueLoginPasswordKey(context);
         }
 
         /// <summary>
-        /// 中文：解密单个口令提交密文字段。
-        ///
-        /// English: Decrypts one encrypted password-submission field.
+        /// <lang>
+        ///   <zh-CN>解密单个口令提交密文字段。</zh-CN>
+        ///   <en>Decrypts one encrypted password-submission field.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：当前 HTTP 上下文。English: Current HTTP context.</param>
-        /// <param name="encryptedPassword">中文：Base64 RSA 密文。English: Base64 RSA ciphertext.</param>
-        /// <param name="password">中文：解密后的当前请求内明文。English: Decrypted plain value for the current request.</param>
-        /// <param name="failureCode">中文：失败分类。English: Failure category.</param>
-        /// <param name="eventId">中文：诊断事件编号。English: Diagnostics event id.</param>
-        /// <returns>中文：解密成功时为 <c>true</c>。English: <c>true</c> when decryption succeeds.</returns>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <param name="encryptedPassword">
+        /// <l>
+        ///   <zh-CN>Base64 RSA 密文。</zh-CN>
+        ///   <en>Base64 RSA ciphertext.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>解密后的当前请求内明文。</zh-CN>
+        ///   <en>Decrypted plain value for the current request.</en>
+        /// </l>
+        /// </param>
+        /// <param name="failureCode">
+        /// <l>
+        ///   <zh-CN>失败分类。</zh-CN>
+        ///   <en>Failure category.</en>
+        /// </l>
+        /// </param>
+        /// <param name="eventId">
+        /// <l>
+        ///   <zh-CN>诊断事件编号。</zh-CN>
+        ///   <en>Diagnostics event id.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>解密成功时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when decryption succeeds.</en>
+        /// </l>
+        /// </returns>
         public static bool TryDecryptSubmittedPassword(
             HttpContext context,
             string encryptedPassword,
@@ -479,16 +627,47 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：解密同一口令表单中的多个密文字段。
-        ///
-        /// English: Decrypts multiple encrypted fields from one password form.
+        /// <lang>
+        ///   <zh-CN>解密同一口令表单中的多个密文字段。</zh-CN>
+        ///   <en>Decrypts multiple encrypted fields from one password form.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：当前 HTTP 上下文。English: Current HTTP context.</param>
-        /// <param name="encryptedPasswords">中文：同一次提交中的密文字段。English: Ciphertext fields in the same submission.</param>
-        /// <param name="passwords">中文：解密后的当前请求内明文数组。English: Decrypted plain values for the current request.</param>
-        /// <param name="failureCode">中文：失败分类。English: Failure category.</param>
-        /// <param name="eventId">中文：诊断事件编号。English: Diagnostics event id.</param>
-        /// <returns>中文：全部解密成功时为 <c>true</c>。English: <c>true</c> when all fields decrypt successfully.</returns>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <param name="encryptedPasswords">
+        /// <l>
+        ///   <zh-CN>同一次提交中的密文字段。</zh-CN>
+        ///   <en>Ciphertext fields in the same submission.</en>
+        /// </l>
+        /// </param>
+        /// <param name="passwords">
+        /// <l>
+        ///   <zh-CN>解密后的当前请求内明文数组。</zh-CN>
+        ///   <en>Decrypted plain values for the current request.</en>
+        /// </l>
+        /// </param>
+        /// <param name="failureCode">
+        /// <l>
+        ///   <zh-CN>失败分类。</zh-CN>
+        ///   <en>Failure category.</en>
+        /// </l>
+        /// </param>
+        /// <param name="eventId">
+        /// <l>
+        ///   <zh-CN>诊断事件编号。</zh-CN>
+        ///   <en>Diagnostics event id.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>全部解密成功时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when all fields decrypt successfully.</en>
+        /// </l>
+        /// </returns>
         public static bool TryDecryptSubmittedPasswords(
             HttpContext context,
             string[] encryptedPasswords,

@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 待讨论 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P16.1-discussion-questions.md`，然后生成第一批 `<lang>` / `<l>` 迁移清单并执行首批注释补强。 |
-| 当前完成条件 | P15 已完成周期验收和 closeout；P16.1 需确认批次化迁移策略、首批文件范围、脚本辅助边界和每批验证门禁。 |
+| 当前阶段 | `W-anp-P16.1` 第一批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第二批：`ManageUsers.aspx.cs`、`PortalOperationAuditEvents.cs`、`PortalSettingDefinition.cs`、`PortalSettingsRegistry.cs`、`PortalDocumentPolicy.cs`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；第一批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
 | 最近状态更新时间 | 2026-07-24 |
 
 ## Recent Completed Items
@@ -79,13 +79,14 @@
 | P15.4 文档地图与生成边界整理 | completed | `dev/scripts/Get-PortalDocumentationMap.ps1`；证据 `work-zone/dev/evidence/p15.4/documentation-map-20260723-2312.*`；实施结果 `work-zone/dev/plans/W-anp-P15.4-implementation-result.md`。 |
 | P15.5 周期验收与 P16 输入 | completed | `work-zone/dev/plans/W-anp-P15.5-acceptance-result.md`、`work-zone/dev/plans/W-anp-P15-closeout.md`、`work-zone/dev/plans/W-anp-P16-input-from-P15.md`。 |
 | P16 规划入口 | completed | `work-zone/dev/plans/W-anp-P16.md`、`work-zone/dev/plans/W-anp-P16-breakdown.md`、`work-zone/dev/plans/W-anp-P16.1-discussion-questions.md`。 |
+| P16.1 第一批注释迁移 | completed | `dev/scripts/Convert-PortalLegacyBilingualComments.ps1`、`work-zone/dev/plans/W-anp-P16.1-first-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；首批 5 个文件旧双语模式清零，`LegacyBilingualFormat` 降至 `2740`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `86be23a` 已推送；本次仅任务账本状态更新待提交 | 已提交 P15.4 文档地图脚本和公开文档边界；当前进入 P16.1 前状态校准。 |
-| WorkZone | `427c3ad` 已推送；P15.5/P16 收口资料待提交 | 已提交 P15.4 文档地图；当前已形成 P15.5 验收、P15 closeout、P16 输入和 P16.1 待讨论资料。 |
+| 主仓库 | `d72074e` 已推送；P16.1 第一批源码与迁移脚本待提交 | 已提交 P16 入口前任务账本；当前工作区已完成 P16.1 第一批注释迁移。 |
+| WorkZone | `844c83b` 已推送；P16.1 第一批结果待提交 | 已提交 P15 closeout/P16 规划；当前工作区已形成 P16.1 第一批清单、进度、结果和证据。 |
 
 ## Upcoming Planning Constraints
 
@@ -171,6 +172,9 @@
 | `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P15.5 证据 `work-zone/dev/evidence/p15.5/comment-debt-inventory-20260724-0100.*`，有债务命中文件 `289`，旧双语格式命中 `3187`。 |
 | `dev/scripts/Get-PortalDocumentationMap.ps1` | 通过；P15.5 证据 `work-zone/dev/evidence/p15.5/documentation-map-20260724-0100.*`，稳定公开文档 `19`，文档化脚本入口 `11`。 |
 | P15.5 文档化门禁 | 通过；HIA 通知读取、公开文档门禁、DocumentationReadiness、XML documentation build 和 `git diff --check` 均通过。 |
+| P16.1 第一批旧格式扫描 | 通过；首批 5 个文件旧 `中文：` / `English:` 模式为 `0`，普通中文-only 代码块注释为 `0`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；保留既有 `CS1591` 历史警告。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260724-0138.*`，`LegacyBilingualFormat=2740`。 |
 
 ## Known Residual Working Tree Items
 
