@@ -6,15 +6,16 @@ using System.Linq;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：基于 <see cref="PortalBizDbContext"/> 的员工组织目录只读数据访问实现。
-    ///
-    /// English: Read-only employee and organization directory data-access implementation backed by <see cref="PortalBizDbContext"/>.
+    /// <lang>
+    ///   <zh-CN>基于 <see cref="PortalBizDbContext"/> 的员工组织目录只读数据访问实现。</zh-CN>
+    ///   <en>Read-only employee and organization directory data-access implementation backed by <see cref="PortalBizDbContext"/>.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：本实现只查询 P6.3 表，不写审计、不递增安全版本、不启用员工工号登录。缺少 P6.3 表时返回空集合或空值。
-    ///
-    /// English: This implementation only reads P6.3 tables. It does not write audits, increment security versions,
-    /// or enable employee-code sign-in. Missing P6.3 tables result in empty collections or null values.
+    /// <lang>
+    ///   <zh-CN>本实现只查询 P6.3 表，不写审计、不递增安全版本、不启用员工工号登录。缺少 P6.3 表时返回空集合或空值。</zh-CN>
+    ///   <en>This implementation only reads P6.3 tables. It does not write audits, increment security versions, or enable employee-code sign-in. Missing P6.3 tables result in empty collections or null values.</en>
+    /// </lang>
     /// </remarks>
     public class EmployeeDirectoryDb : IEmployeeDirectoryDb
     {
@@ -26,11 +27,17 @@ namespace ASPNET.StarterKit.Portal
         private readonly PortalBizDbContext _context;
 
         /// <summary>
-        /// 中文：初始化员工组织目录只读数据访问实现。
-        ///
-        /// English: Initializes the employee and organization directory read-only data-access implementation.
+        /// <lang>
+        ///   <zh-CN>初始化员工组织目录只读数据访问实现。</zh-CN>
+        ///   <en>Initializes the employee and organization directory read-only data-access implementation.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：企业业务基础数据上下文。English: Enterprise business foundation data context.</param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>企业业务基础数据上下文。</zh-CN>
+        ///   <en>Enterprise business foundation data context.</en>
+        /// </l>
+        /// </param>
         public EmployeeDirectoryDb(PortalBizDbContext context)
         {
             _context = context;

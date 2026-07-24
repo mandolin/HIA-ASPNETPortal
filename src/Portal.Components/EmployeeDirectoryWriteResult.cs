@@ -1,22 +1,24 @@
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：员工组织后台写入操作的受控结果。
-    ///
-    /// English: Controlled result for employee-directory administration write operations.
+    /// <lang>
+    ///   <zh-CN>员工组织后台写入操作的受控结果。</zh-CN>
+    ///   <en>Controlled result for employee-directory administration write operations.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：结果对象只暴露管理员可安全读取的状态和提示，不包含数据库异常全文、连接串或敏感资料原文。
-    ///
-    /// English: The result exposes only administrator-safe status and message text, never raw database exceptions,
-    /// connection strings, or sensitive profile values.
+    /// <lang>
+    ///   <zh-CN>结果对象只暴露管理员可安全读取的状态和提示，不包含数据库异常全文、连接串或敏感资料原文。</zh-CN>
+    ///   <en>The result exposes only administrator-safe status and message text, never raw database exceptions, connection strings, or sensitive profile values.</en>
+    /// </lang>
     /// </remarks>
     public sealed class EmployeeDirectoryWriteResult
     {
         /// <summary>
-        /// 中文：创建员工组织后台写入结果。
-        ///
-        /// English: Creates an employee-directory administration write result.
+        /// <lang>
+        ///   <zh-CN>创建员工组织后台写入结果。</zh-CN>
+        ///   <en>Creates an employee-directory administration write result.</en>
+        /// </lang>
         /// </summary>
         public EmployeeDirectoryWriteResult(
             bool succeeded,
@@ -32,25 +34,51 @@ namespace ASPNET.StarterKit.Portal
             NotFound = notFound;
         }
 
-        /// <summary>中文：写入是否成功。English: Whether the write succeeded.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>写入是否成功。</zh-CN>
+        ///   <en>Whether the write succeeded.</en>
+        /// </lang>
+        /// </summary>
         public bool Succeeded { get; private set; }
 
-        /// <summary>中文：被写入实体的数值标识。English: Numeric identifier of the written entity.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>被写入实体的数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the written entity.</en>
+        /// </lang>
+        /// </summary>
         public int EntityId { get; private set; }
 
-        /// <summary>中文：可展示给管理员的安全提示。English: Administrator-safe display message.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可展示给管理员的安全提示。</zh-CN>
+        ///   <en>Administrator-safe display message.</en>
+        /// </lang>
+        /// </summary>
         public string Message { get; private set; }
 
-        /// <summary>中文：是否因为并发更新被拒绝。English: Whether the write was rejected by a concurrency conflict.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否因为并发更新被拒绝。</zh-CN>
+        ///   <en>Whether the write was rejected by a concurrency conflict.</en>
+        /// </lang>
+        /// </summary>
         public bool Conflict { get; private set; }
 
-        /// <summary>中文：目标记录是否不存在。English: Whether the target row was not found.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>目标记录是否不存在。</zh-CN>
+        ///   <en>Whether the target row was not found.</en>
+        /// </lang>
+        /// </summary>
         public bool NotFound { get; private set; }
 
         /// <summary>
-        /// 中文：创建成功结果。
-        ///
-        /// English: Creates a success result.
+        /// <lang>
+        ///   <zh-CN>创建成功结果。</zh-CN>
+        ///   <en>Creates a success result.</en>
+        /// </lang>
         /// </summary>
         public static EmployeeDirectoryWriteResult Success(int entityId, string message)
         {
@@ -58,9 +86,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：创建普通失败结果。
-        ///
-        /// English: Creates a regular failure result.
+        /// <lang>
+        ///   <zh-CN>创建普通失败结果。</zh-CN>
+        ///   <en>Creates a regular failure result.</en>
+        /// </lang>
         /// </summary>
         public static EmployeeDirectoryWriteResult Failed(string message)
         {
@@ -68,9 +97,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：创建目标不存在结果。
-        ///
-        /// English: Creates a not-found result.
+        /// <lang>
+        ///   <zh-CN>创建目标不存在结果。</zh-CN>
+        ///   <en>Creates a not-found result.</en>
+        /// </lang>
         /// </summary>
         public static EmployeeDirectoryWriteResult Missing(string message)
         {
@@ -78,9 +108,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：创建并发冲突结果。
-        ///
-        /// English: Creates a concurrency-conflict result.
+        /// <lang>
+        ///   <zh-CN>创建并发冲突结果。</zh-CN>
+        ///   <en>Creates a concurrency-conflict result.</en>
+        /// </lang>
         /// </summary>
         public static EmployeeDirectoryWriteResult ConcurrencyConflict(string message)
         {
