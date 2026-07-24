@@ -3,52 +3,113 @@ using System;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：员工主数据后台保存请求。
-    ///
-    /// English: Administration save request for employee master data.
+    /// <lang>
+    ///   <zh-CN>员工主数据后台保存请求。</zh-CN>
+    ///   <en>Administration save request for employee master data.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：本请求只覆盖 P6.3 第一版最小字段，不承载手机号、身份证号、住址等高敏个人资料。
-    ///
-    /// English: This request covers only the first-version P6.3 minimal fields and does not carry highly sensitive
-    /// personal data such as phone numbers, government identifiers, or addresses.
+    /// <lang>
+    ///   <zh-CN>本请求只覆盖 P6.3 第一版最小字段，不承载手机号、身份证号、住址等高敏个人资料。</zh-CN>
+    ///   <en>This request covers only the first-version P6.3 minimal fields and does not carry highly sensitive personal data such as phone numbers, government identifiers, or addresses.</en>
+    /// </lang>
     /// </remarks>
     public sealed class EmployeeSaveRequest
     {
-        /// <summary>中文：员工标识；零表示新增。English: Employee id; zero means create.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工标识；零表示新增。</zh-CN>
+        ///   <en>Employee id; zero means create.</en>
+        /// </lang>
+        /// </summary>
         public int EmployeeId { get; set; }
 
-        /// <summary>中文：全局唯一员工号。English: Globally unique employee code.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>全局唯一员工号。</zh-CN>
+        ///   <en>Globally unique employee code.</en>
+        /// </lang>
+        /// </summary>
         public string EmployeeCode { get; set; }
 
-        /// <summary>中文：正式显示名。English: Formal display name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>正式显示名。</zh-CN>
+        ///   <en>Formal display name.</en>
+        /// </lang>
+        /// </summary>
         public string DisplayName { get; set; }
 
-        /// <summary>中文：偏好称呼或昵称。English: Preferred name or nickname.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>偏好称呼或昵称。</zh-CN>
+        ///   <en>Preferred name or nickname.</en>
+        /// </lang>
+        /// </summary>
         public string PreferredName { get; set; }
 
-        /// <summary>中文：工作邮箱。English: Work email address.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>工作邮箱。</zh-CN>
+        ///   <en>Work email address.</en>
+        /// </lang>
+        /// </summary>
         public string WorkEmail { get; set; }
 
-        /// <summary>中文：所属组织单元标识。English: Owning organization-unit id.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>所属组织单元标识。</zh-CN>
+        ///   <en>Owning organization-unit id.</en>
+        /// </lang>
+        /// </summary>
         public int? OrganizationUnitId { get; set; }
 
-        /// <summary>中文：员工生命周期状态。English: Employee lifecycle status.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工生命周期状态。</zh-CN>
+        ///   <en>Employee lifecycle status.</en>
+        /// </lang>
+        /// </summary>
         public string EmploymentStatus { get; set; }
 
-        /// <summary>中文：入职时间 UTC。English: Joined time in UTC.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>入职时间 UTC。</zh-CN>
+        ///   <en>Joined time in UTC.</en>
+        /// </lang>
+        /// </summary>
         public DateTime? JoinedUtc { get; set; }
 
-        /// <summary>中文：离职时间 UTC。English: Left time in UTC.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>离职时间 UTC。</zh-CN>
+        ///   <en>Left time in UTC.</en>
+        /// </lang>
+        /// </summary>
         public DateTime? LeftUtc { get; set; }
 
-        /// <summary>中文：数据来源系统。English: Source system.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>数据来源系统。</zh-CN>
+        ///   <en>Source system.</en>
+        /// </lang>
+        /// </summary>
         public string SourceSystem { get; set; }
 
-        /// <summary>中文：更新前读取到的 UTC 更新时间。English: UTC update time read before editing.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>更新前读取到的 UTC 更新时间。</zh-CN>
+        ///   <en>UTC update time read before editing.</en>
+        /// </lang>
+        /// </summary>
         public DateTime? OriginalUpdatedUtc { get; set; }
 
-        /// <summary>中文：当前操作者标识。English: Current actor identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前操作者标识。</zh-CN>
+        ///   <en>Current actor identifier.</en>
+        /// </lang>
+        /// </summary>
         public string ActorName { get; set; }
     }
 }

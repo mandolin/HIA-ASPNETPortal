@@ -8,15 +8,16 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：旧门户模块实例设置页面。
-    ///
-    /// English: Legacy Portal module-instance settings page.
+    /// <lang>
+    ///   <zh-CN>旧门户模块实例设置页面。</zh-CN>
+    ///   <en>Legacy Portal module-instance settings page.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：页面只允许管理员修改属于指定 Tab 的模块实例；缓存秒数保持 <c>0</c> 为不缓存的既有语义。
-    ///
-    /// English: The page allows administrators to modify only a module instance that belongs to the specified Tab;
-    /// cache timeout <c>0</c> retains its existing no-cache meaning.
+    /// <lang>
+    ///   <zh-CN>页面只允许管理员修改属于指定 Tab 的模块实例；缓存秒数保持 <c>0</c> 为不缓存的既有语义。</zh-CN>
+    ///   <en>The page allows administrators to modify only a module instance that belongs to the specified Tab; cache timeout <c>0</c> retains its existing no-cache meaning.</en>
+    /// </lang>
     /// </remarks>
     public partial class ModuleSettingsPage : PortalPage<ModuleSettingsPage>
     {
@@ -26,28 +27,41 @@ namespace ASPNET.StarterKit.Portal
         private ModuleSettings currentModule;
 
         /// <summary>
-        /// 中文：当前门户角色查询依赖。
-        ///
-        /// English: Current-Portal role-query dependency.
+        /// <lang>
+        ///   <zh-CN>当前门户角色查询依赖。</zh-CN>
+        ///   <en>Current-Portal role-query dependency.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IRolesDb RolesDb { private get; set; }
 
         /// <summary>
-        /// 中文：模块实例数据访问依赖。
-        ///
-        /// English: Module-instance data-access dependency.
+        /// <lang>
+        ///   <zh-CN>模块实例数据访问依赖。</zh-CN>
+        ///   <en>Module-instance data-access dependency.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IModulesDb ModulesDb { private get; set; }
 
         /// <summary>
-        /// 中文：授权并解析模块与 Tab 的归属关系，在首次请求绑定设置。
-        ///
-        /// English: Authorizes and resolves module-to-Tab ownership, then binds settings on the initial request.
+        /// <lang>
+        ///   <zh-CN>授权并解析模块与 Tab 的归属关系，在首次请求绑定设置。</zh-CN>
+        ///   <en>Authorizes and resolves module-to-Tab ownership, then binds settings on the initial request.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -62,12 +76,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 中文：校验并保存当前模块实例的标题、缓存、编辑角色和移动端显示设置。
-        ///
-        /// English: Validates and saves the current module instance title, cache, edit roles, and mobile-display setting.
+        /// <lang>
+        ///   <zh-CN>校验并保存当前模块实例的标题、缓存、编辑角色和移动端显示设置。</zh-CN>
+        ///   <en>Validates and saves the current module instance title, cache, edit roles, and mobile-display setting.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">中文：事件源。English: Event source.</param>
-        /// <param name="e">中文：事件数据。English: Event data.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件数据。</zh-CN>
+        ///   <en>Event data.</en>
+        /// </l>
+        /// </param>
         protected void ApplyChanges_Click(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -75,6 +100,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>先在页面层做轻量输入归一化，阻断空标题、换行标题和过大的缓存秒数进入旧存储过程。</zh-CN>
+            //   <en>Performs lightweight page-level normalization first so empty titles, multiline titles, and excessive cache values never reach the legacy stored procedure.</en>
+            // </lang>
             string title;
             int cacheSeconds;
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(moduleTitle.Text, 150, out title) ||
@@ -86,6 +115,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>编辑角色仍沿用旧的分号串存储格式，保存前统一通过角色解析器拼接，避免页面控件自行拼字符串。</zh-CN>
+                //   <en>Edit roles still use the legacy semicolon-delimited storage format, so the role parser owns joining instead of the page concatenating strings directly.</en>
+                // </lang>
                 string editRoles = PortalRoleParser.Join(
                     authEditRoles.Items.Cast<ListItem>()
                         .Where(item => item.Selected)
@@ -98,6 +131,10 @@ namespace ASPNET.StarterKit.Portal
                     cacheSeconds,
                     editRoles,
                     showMobile.Checked);
+                // <lang>
+                //   <zh-CN>模块设置影响页面运行时行为，成功后写运营审计，再回到当前 Tab 布局页确认结果。</zh-CN>
+                //   <en>Module settings affect runtime page behavior, so successful saves write an operation audit before returning to the current Tab layout page.</en>
+                // </lang>
                 PortalOperationAudit.Record(
                     "ModuleAdministration",
                     "Update",
@@ -120,6 +157,18 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化请求上下文，并确认当前模块确实属于当前 Tab。</zh-CN>
+        ///   <en>Initializes request context and verifies that the current module truly belongs to the current Tab.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>授权、参数和模块归属均合法时返回 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when authorization, parameters, and module ownership are all valid.</en>
+        /// </l>
+        /// </returns>
         private bool TryInitializeRequest()
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.PortalModulesEdit) ||
@@ -136,6 +185,10 @@ namespace ASPNET.StarterKit.Portal
 
             PortalSettings portalSettings = PortalContext.GetPortalSettings();
             ITabItem targetTab = portalSettings.DesktopTabs.FirstOrDefault(tab => tab.TabId == tabId);
+            // <lang>
+            //   <zh-CN>旧门户的 ActiveTab 由请求参数驱动；这里同时检查目标 Tab 和 ActiveTab，避免跨 Tab 构造 mid/tabid 操作其他模块。</zh-CN>
+            //   <en>The legacy Portal drives ActiveTab from request parameters; checking both target Tab and ActiveTab prevents crafted mid/tabid pairs from editing another Tab's module.</en>
+            // </lang>
             currentModule = targetTab == null || portalSettings.ActiveTab == null ||
                             portalSettings.ActiveTab.TabId != tabId
                 ? null
@@ -149,6 +202,12 @@ namespace ASPNET.StarterKit.Portal
             return false;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把当前模块设置和可选角色绑定到页面控件。</zh-CN>
+        ///   <en>Binds the current module settings and selectable roles to page controls.</en>
+        /// </lang>
+        /// </summary>
         private void BindData()
         {
             moduleTitle.Text = currentModule.ModuleTitle;
@@ -159,9 +218,31 @@ namespace ASPNET.StarterKit.Portal
                 RolesDb.GetPortalRoles(PortalContext.GetPortalSettings().PortalId));
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>重建编辑角色复选列表，并保持旧系统的 All Users 特殊角色语义。</zh-CN>
+        ///   <en>Rebuilds the edit-role checkbox list while preserving the legacy All Users special-role semantics.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="authorizedRoles">
+        /// <l>
+        ///   <zh-CN>当前模块已经授权的角色名集合。</zh-CN>
+        ///   <en>Role names currently authorized for the module.</en>
+        /// </l>
+        /// </param>
+        /// <param name="roles">
+        /// <l>
+        ///   <zh-CN>当前门户可配置角色集合。</zh-CN>
+        ///   <en>Configurable roles for the current Portal.</en>
+        /// </l>
+        /// </param>
         private void PopulateRoleList(string[] authorizedRoles, IEnumerable<IRoleItem> roles)
         {
             authEditRoles.Items.Clear();
+            // <lang>
+            //   <zh-CN>All Users 不是数据库角色记录，但在模块编辑权限中具有旧门户约定的公开编辑含义。</zh-CN>
+            //   <en>All Users is not a database role row, but legacy module edit permissions give it a conventional public-edit meaning.</en>
+            // </lang>
             var allItem = new ListItem(PortalRoleNames.AllUsers, PortalRoleNames.AllUsers)
             {
                 Selected = authorizedRoles.Any(role =>
@@ -180,6 +261,18 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>向页面显示经过 HTML 编码的非敏感提示。</zh-CN>
+        ///   <en>Displays an HTML-encoded non-sensitive page message.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>待显示提示文本。</zh-CN>
+        ///   <en>Message text to display.</en>
+        /// </l>
+        /// </param>
         private void ShowMessage(string message)
         {
             Message.Text = Server.HtmlEncode(message ?? string.Empty);
