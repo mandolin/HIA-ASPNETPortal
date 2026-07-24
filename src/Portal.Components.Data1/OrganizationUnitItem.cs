@@ -5,51 +5,107 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：P6.3 组织单元 EF 记录。
-    ///
-    /// English: P6.3 organization-unit EF row.
+    /// <lang>
+    ///   <zh-CN>P6.3 组织单元 EF 记录。</zh-CN>
+    ///   <en>P6.3 organization-unit EF row.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：本实体不声明导航属性，组织树由服务层基于 <c>ParentOrganizationUnitId</c> 显式组装。
-    ///
-    /// English: This entity does not declare navigation properties; services explicitly assemble the tree from
-    /// <c>ParentOrganizationUnitId</c>.
+    /// <lang>
+    ///   <zh-CN>本实体不声明导航属性，组织树由服务层基于 <c>ParentOrganizationUnitId</c> 显式组装。</zh-CN>
+    ///   <en>This entity does not declare navigation properties; services explicitly assemble the tree from <c>ParentOrganizationUnitId</c>.</en>
+    /// </lang>
     /// </remarks>
     [Table("PortalBiz_OrganizationUnits")]
     public class OrganizationUnitItem
     {
-        /// <summary>中文：组织单元标识。English: Organization-unit identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织单元标识。</zh-CN>
+        ///   <en>Organization-unit identifier.</en>
+        /// </lang>
+        /// </summary>
         [Key]
         public int OrganizationUnitId { get; set; }
 
-        /// <summary>中文：父级组织单元标识。English: Parent organization-unit identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>父级组织单元标识。</zh-CN>
+        ///   <en>Parent organization-unit identifier.</en>
+        /// </lang>
+        /// </summary>
         public int? ParentOrganizationUnitId { get; set; }
 
-        /// <summary>中文：组织编码。English: Organization code.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织编码。</zh-CN>
+        ///   <en>Organization code.</en>
+        /// </lang>
+        /// </summary>
         public string OrganizationCode { get; set; }
 
-        /// <summary>中文：组织显示名。English: Organization display name.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织显示名。</zh-CN>
+        ///   <en>Organization display name.</en>
+        /// </lang>
+        /// </summary>
         public string DisplayName { get; set; }
 
-        /// <summary>中文：排序值。English: Sort order.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>排序值。</zh-CN>
+        ///   <en>Sort order.</en>
+        /// </lang>
+        /// </summary>
         public int SortOrder { get; set; }
 
-        /// <summary>中文：是否启用。English: Whether the unit is active.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否启用。</zh-CN>
+        ///   <en>Whether the unit is active.</en>
+        /// </lang>
+        /// </summary>
         public bool IsActive { get; set; }
 
-        /// <summary>中文：创建时间 UTC。English: Creation time in UTC.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建时间 UTC。</zh-CN>
+        ///   <en>Creation time in UTC.</en>
+        /// </lang>
+        /// </summary>
         public DateTime CreatedUtc { get; set; }
 
-        /// <summary>中文：创建人标识。English: Creator identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建人标识。</zh-CN>
+        ///   <en>Creator identifier.</en>
+        /// </lang>
+        /// </summary>
         public string CreatedBy { get; set; }
 
-        /// <summary>中文：最近更新时间 UTC。English: Last update time in UTC.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近更新时间 UTC。</zh-CN>
+        ///   <en>Last update time in UTC.</en>
+        /// </lang>
+        /// </summary>
         public DateTime UpdatedUtc { get; set; }
 
-        /// <summary>中文：最近更新人标识。English: Last updater identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近更新人标识。</zh-CN>
+        ///   <en>Last updater identifier.</en>
+        /// </lang>
+        /// </summary>
         public string UpdatedBy { get; set; }
 
-        /// <summary>中文：SQL Server 并发版本。English: SQL Server concurrency version.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>SQL Server 并发版本。</zh-CN>
+        ///   <en>SQL Server concurrency version.</en>
+        /// </lang>
+        /// </summary>
         [Timestamp]
         public byte[] RowVersion { get; set; }
     }
