@@ -6,17 +6,16 @@ using System.Linq;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：基于 <see cref="PortalBizDbContext"/> 的员工资料确认模块数据访问实现。
-    ///
-    /// English: Employee-profile confirmation module data-access implementation backed by <see cref="PortalBizDbContext"/>.
+    /// <lang>
+    ///   <zh-CN>基于 <see cref="PortalBizDbContext"/> 的员工资料确认模块数据访问实现。</zh-CN>
+    ///   <en>Employee-profile confirmation module data-access implementation backed by <see cref="PortalBizDbContext"/>.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：此实现只接受当前 Active 员工和 Active 账号绑定。确认写入会保存一份低敏资料快照，方便后续审计
-    /// 和人工核对；它不更新员工主数据，也不变更账号绑定。
-    ///
-    /// English: This implementation accepts only a current active employee and an active user binding. Confirmation
-    /// writes store a low-sensitivity profile snapshot for later audit and manual review; they do not update employee
-    /// master data or change account bindings.
+    /// <lang>
+    ///   <zh-CN>此实现只接受当前 Active 员工和 Active 账号绑定。确认写入会保存一份低敏资料快照，方便审计和人工核对；它不更新员工主数据，也不变更账号绑定。</zh-CN>
+    ///   <en>This implementation accepts only a current active employee and an active user binding. Confirmation writes store a low-sensitivity profile snapshot for later audit and manual review; they do not update employee master data or change account bindings.</en>
+    /// </lang>
     /// </remarks>
     public sealed class EmployeeProfileConfirmationDb : IEmployeeProfileConfirmationDb
     {
@@ -26,11 +25,17 @@ namespace ASPNET.StarterKit.Portal
         private readonly PortalBizDbContext context;
 
         /// <summary>
-        /// 中文：初始化员工资料确认模块数据访问实现。
-        ///
-        /// English: Initializes the employee-profile confirmation module data-access implementation.
+        /// <lang>
+        ///   <zh-CN>初始化员工资料确认模块数据访问实现。</zh-CN>
+        ///   <en>Initializes the employee-profile confirmation module data-access implementation.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：企业业务基础数据上下文。English: Enterprise business foundation data context.</param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>企业业务基础数据上下文。</zh-CN>
+        ///   <en>Enterprise business foundation data context.</en>
+        /// </l>
+        /// </param>
         public EmployeeProfileConfirmationDb(PortalBizDbContext context)
         {
             this.context = context;
@@ -39,6 +44,10 @@ namespace ASPNET.StarterKit.Portal
         /// <inheritdoc />
         public bool IsSchemaAvailable()
         {
+            // <lang>
+            //   <zh-CN>资料确认模块横跨员工、绑定和确认快照三张表；任一表缺失时页面应安全降级，而不是局部执行写入。</zh-CN>
+            //   <en>The profile-confirmation module spans employee, binding and confirmation snapshot tables; if any table is missing, the page should degrade safely instead of partially writing data.</en>
+            // </lang>
             return HasTable(ConfirmationTableName) &&
                    HasTable(EmployeeTableName) &&
                    HasTable(BindingTableName);
@@ -54,6 +63,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>只取当前用户最新 Active 绑定对应的 Active 员工，同时带出最近一次确认记录，供前台显示“已确认”状态。</zh-CN>
+                //   <en>Only the current user's latest active binding to an active employee is loaded, with the latest confirmation record included for the front-end confirmation state.</en>
+                // </lang>
                 ProfileProjection row = context.Database.SqlQuery<ProfileProjection>(
                     @"
 SELECT TOP (1)
@@ -126,6 +139,10 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;",
 
             try
             {
+                // <lang>
+                //   <zh-CN>确认写入通过 `INSERT ... SELECT TOP (1)` 再次校验 Active 绑定和 Active 员工，避免页面加载后绑定状态变化造成越权确认。</zh-CN>
+                //   <en>The confirmation write uses `INSERT ... SELECT TOP (1)` to re-check active binding and active employee state, preventing unauthorized confirmation if binding state changes after page load.</en>
+                // </lang>
                 var rows = context.Database.SqlQuery<long>(
                     @"
 DECLARE @Inserted TABLE
@@ -187,6 +204,24 @@ SELECT [ConfirmationId] FROM @Inserted;",
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查业务表是否存在。</zh-CN>
+        ///   <en>Checks whether a business table exists.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tableName">
+        /// <l>
+        ///   <zh-CN>不带 schema 的表名常量。</zh-CN>
+        ///   <en>Table-name constant without schema.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>表存在时为 <c>true</c>；无法探测时返回 <c>false</c> 以触发安全降级。</zh-CN>
+        ///   <en><c>true</c> when the table exists; <c>false</c> when probing fails so the caller can degrade safely.</en>
+        /// </l>
+        /// </returns>
         private bool HasTable(string tableName)
         {
             try
@@ -202,6 +237,24 @@ SELECT [ConfirmationId] FROM @Inserted;",
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>归一化员工资料确认请求。</zh-CN>
+        ///   <en>Normalizes an employee-profile confirmation request.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>调用方提交的原始请求；可为 <c>null</c>。</zh-CN>
+        ///   <en>Raw request submitted by the caller; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>带 UTC 时间和非空操作者标识的请求副本。</zh-CN>
+        ///   <en>Request copy with UTC timestamp and non-empty actor identifier.</en>
+        /// </l>
+        /// </returns>
         private static EmployeeProfileConfirmationRequest NormalizeRequest(EmployeeProfileConfirmationRequest request)
         {
             request = request ?? new EmployeeProfileConfirmationRequest();
@@ -216,28 +269,106 @@ SELECT [ConfirmationId] FROM @Inserted;",
             };
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工资料确认页面使用的 SQL 查询投影。</zh-CN>
+        ///   <en>SQL query projection used by the employee-profile confirmation page.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>此类型只承接当前页面需要展示和判断的低敏字段，不应扩展为完整员工资料对象。</zh-CN>
+        ///   <en>This type carries only the low-sensitivity fields needed for this page's display and decisions; it should not grow into a full employee profile object.</en>
+        /// </lang>
+        /// </remarks>
         private sealed class ProfileProjection
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工主数据标识。</zh-CN>
+            ///   <en>Employee master-data identifier.</en>
+            /// </lang>
+            /// </summary>
             public int EmployeeId { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
             public string EmployeeCode { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示姓名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
             public string DisplayName { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工偏好姓名。</zh-CN>
+            ///   <en>Employee preferred name.</en>
+            /// </lang>
+            /// </summary>
             public string PreferredName { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工工作邮箱。</zh-CN>
+            ///   <en>Employee work email.</en>
+            /// </lang>
+            /// </summary>
             public string WorkEmail { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>所属组织显示名称。</zh-CN>
+            ///   <en>Display name of the owning organization.</en>
+            /// </lang>
+            /// </summary>
             public string OrganizationDisplayName { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工当前状态。</zh-CN>
+            ///   <en>Current employee status.</en>
+            /// </lang>
+            /// </summary>
             public string EmploymentStatus { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>账号员工绑定标识。</zh-CN>
+            ///   <en>User-employee binding identifier.</en>
+            /// </lang>
+            /// </summary>
             public int BindingId { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定创建 UTC 时间。</zh-CN>
+            ///   <en>Binding creation UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime BoundUtc { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>最近一次确认记录标识。</zh-CN>
+            ///   <en>Identifier of the latest confirmation record.</en>
+            /// </lang>
+            /// </summary>
             public long? LastConfirmationId { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>最近一次确认 UTC 时间。</zh-CN>
+            ///   <en>Latest confirmation UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime? LastConfirmedUtc { get; set; }
         }
     }

@@ -1,20 +1,37 @@
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：轻量待办写入结果。
-    ///
-    /// English: Result of a lightweight work-item write operation.
+    /// <lang>
+    ///   <zh-CN>轻量待办写入结果。</zh-CN>
+    ///   <en>Result of a lightweight work-item write operation.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalWorkItemResult
     {
         /// <summary>
-        /// 中文：创建轻量待办写入结果。
-        ///
-        /// English: Creates a lightweight work-item write result.
+        /// <lang>
+        ///   <zh-CN>创建轻量待办写入结果。</zh-CN>
+        ///   <en>Creates a lightweight work-item write result.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="succeeded">中文：是否成功。English: Whether the operation succeeded.</param>
-        /// <param name="workItemId">中文：待办标识。English: Work-item identifier.</param>
-        /// <param name="message">中文：可展示说明。English: Display-safe message.</param>
+        /// <param name="succeeded">
+        /// <l>
+        ///   <zh-CN>是否成功。</zh-CN>
+        ///   <en>Whether the operation succeeded.</en>
+        /// </l>
+        /// </param>
+        /// <param name="workItemId">
+        /// <l>
+        ///   <zh-CN>待办标识。</zh-CN>
+        ///   <en>Work-item identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>可展示说明。</zh-CN>
+        ///   <en>Display-safe message.</en>
+        /// </l>
+        /// </param>
         public PortalWorkItemResult(bool succeeded, long workItemId, string message)
         {
             Succeeded = succeeded;
@@ -22,13 +39,28 @@ namespace ASPNET.StarterKit.Portal
             Message = message ?? string.Empty;
         }
 
-        /// <summary>中文：是否成功。English: Whether the operation succeeded.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否成功。</zh-CN>
+        ///   <en>Whether the operation succeeded.</en>
+        /// </lang>
+        /// </summary>
         public bool Succeeded { get; private set; }
 
-        /// <summary>中文：待办标识。English: Work-item identifier.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>待办标识。</zh-CN>
+        ///   <en>Work-item identifier.</en>
+        /// </lang>
+        /// </summary>
         public long WorkItemId { get; private set; }
 
-        /// <summary>中文：可展示说明。English: Display-safe message.</summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可展示说明。</zh-CN>
+        ///   <en>Display-safe message.</en>
+        /// </lang>
+        /// </summary>
         public string Message { get; private set; }
     }
 }
