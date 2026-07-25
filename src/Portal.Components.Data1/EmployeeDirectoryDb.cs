@@ -65,6 +65,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>组织目录只暴露轻量层级字段；分页在 SQL 侧完成，避免后台页面一次性拉取完整组织树。</zh-CN>
+                //   <en>The organization directory exposes only lightweight hierarchy fields; paging happens in SQL so administration pages do not pull the full organization tree at once.</en>
+                // </lang>
                 var rows = _context.Database.SqlQuery<OrganizationUnitProjection>(
                     @"
 SELECT
@@ -123,6 +127,10 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
 
             try
             {
+                // <lang>
+                //   <zh-CN>员工列表联接组织名称用于后台浏览和绑定辅助，不在此处计算权限或员工账号状态。</zh-CN>
+                //   <en>The employee list joins organization names for administration browsing and binding assistance; it does not calculate authorization or employee-account state here.</en>
+                // </lang>
                 var rows = _context.Database.SqlQuery<EmployeeProjection>(
                     @"
 SELECT
@@ -193,6 +201,10 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
 
             try
             {
+                // <lang>
+                //   <zh-CN>绑定列表联接用户表和员工表，作为后台核对视图；写入、结束绑定和审计由后台写入契约负责。</zh-CN>
+                //   <en>The binding list joins user and employee tables as an administration review view; writes, binding termination, and audit are handled by the administration write contract.</en>
+                // </lang>
                 var rows = _context.Database.SqlQuery<UserEmployeeBindingProjection>(
                     @"
 SELECT
@@ -275,6 +287,24 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查指定表是否存在并可通过当前连接访问。</zh-CN>
+        ///   <en>Checks whether the specified table exists and is accessible through the current connection.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tableName">
+        /// <l>
+        ///   <zh-CN>不带架构前缀的表名。</zh-CN>
+        ///   <en>Table name without schema prefix.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>表存在且检查成功时为 <c>true</c>；异常按不可用处理。</zh-CN>
+        ///   <en><c>true</c> when the table exists and the check succeeds; exceptions are treated as unavailable.</en>
+        /// </l>
+        /// </returns>
         private bool HasTable(string tableName)
         {
             try
@@ -290,6 +320,24 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>归一化员工目录查询条件，并套用分页上限。</zh-CN>
+        ///   <en>Normalizes employee-directory query options and applies paging limits.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="query">
+        /// <l>
+        ///   <zh-CN>调用方提供的查询条件；为空时使用默认条件。</zh-CN>
+        ///   <en>Caller-provided query options; defaults are used when null.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>可安全传入 SQL 查询的归一化条件。</zh-CN>
+        ///   <en>Normalized options safe to pass into SQL queries.</en>
+        /// </l>
+        /// </returns>
         private static EmployeeDirectoryQuery NormalizeQuery(EmployeeDirectoryQuery query)
         {
             var normalized = query ?? new EmployeeDirectoryQuery();
@@ -309,11 +357,47 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
             };
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把可选文本裁剪为空串或去除首尾空白后的值。</zh-CN>
+        ///   <en>Normalizes optional text to an empty string or a trimmed value.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>原始文本。</zh-CN>
+        ///   <en>Raw text.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>归一化后的文本。</zh-CN>
+        ///   <en>Normalized text.</en>
+        /// </l>
+        /// </returns>
         private static string Normalize(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? string.Empty : value.Trim();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把关键字转换为 SQL Server LIKE 模式，并转义通配符字符。</zh-CN>
+        ///   <en>Converts a keyword into a SQL Server LIKE pattern while escaping wildcard characters.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="keyword">
+        /// <l>
+        ///   <zh-CN>已归一化关键字。</zh-CN>
+        ///   <en>Normalized keyword.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>LIKE 模式；空关键字返回空串。</zh-CN>
+        ///   <en>LIKE pattern, or an empty string for empty keywords.</en>
+        /// </l>
+        /// </returns>
         private static string ToLikePattern(string keyword)
         {
             if (string.IsNullOrEmpty(keyword))
@@ -324,6 +408,24 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
             return "%" + keyword.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]") + "%";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>生成当前有效绑定查询 SQL。</zh-CN>
+        ///   <en>Builds SQL for querying the current active binding.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="predicate">
+        /// <l>
+        ///   <zh-CN>已由调用方控制的附加谓词片段。</zh-CN>
+        ///   <en>Additional predicate fragment controlled by the caller.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>可交给 EF SQL 查询执行的 SQL 文本。</zh-CN>
+        ///   <en>SQL text suitable for execution through EF SQL query APIs.</en>
+        /// </l>
+        /// </returns>
         private static string GetActiveBindingSql(string predicate)
         {
             return @"
@@ -350,6 +452,24 @@ WHERE [Binding].[BindingStatus] = N'Active'
 ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把 SQL 投影转换为跨层绑定信息契约。</zh-CN>
+        ///   <en>Converts a SQL projection into the cross-layer binding-info contract.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="row">
+        /// <l>
+        ///   <zh-CN>SQL 查询结果行。</zh-CN>
+        ///   <en>SQL query result row.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>用户员工绑定只读信息。</zh-CN>
+        ///   <en>Read-only user-employee binding information.</en>
+        /// </l>
+        /// </returns>
         private static IUserEmployeeBindingInfo CreateBindingInfo(UserEmployeeBindingProjection row)
         {
             return new UserEmployeeBindingInfo(
@@ -367,47 +487,286 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
                 row.Reason);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织单元 SQL 查询投影。</zh-CN>
+        ///   <en>SQL query projection for an organization unit.</en>
+        /// </lang>
+        /// </summary>
         private sealed class OrganizationUnitProjection
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>组织单元标识。</zh-CN>
+            ///   <en>Organization-unit identifier.</en>
+            /// </lang>
+            /// </summary>
             public int OrganizationUnitId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>父级组织单元标识。</zh-CN>
+            ///   <en>Parent organization-unit identifier.</en>
+            /// </lang>
+            /// </summary>
             public int? ParentOrganizationUnitId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>组织编码。</zh-CN>
+            ///   <en>Organization code.</en>
+            /// </lang>
+            /// </summary>
             public string OrganizationCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>组织显示名。</zh-CN>
+            ///   <en>Organization display name.</en>
+            /// </lang>
+            /// </summary>
             public string DisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>同级显示顺序。</zh-CN>
+            ///   <en>Sibling display order.</en>
+            /// </lang>
+            /// </summary>
             public int SortOrder { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>组织是否启用。</zh-CN>
+            ///   <en>Whether the organization unit is active.</en>
+            /// </lang>
+            /// </summary>
             public bool IsActive { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>创建 UTC 时间。</zh-CN>
+            ///   <en>Creation UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime CreatedUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>最近更新 UTC 时间。</zh-CN>
+            ///   <en>Latest update UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime UpdatedUtc { get; set; }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工 SQL 查询投影。</zh-CN>
+        ///   <en>SQL query projection for an employee.</en>
+        /// </lang>
+        /// </summary>
         private sealed class EmployeeProjection
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工标识。</zh-CN>
+            ///   <en>Employee identifier.</en>
+            /// </lang>
+            /// </summary>
             public int EmployeeId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
             public string EmployeeCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
             public string DisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>偏好称呼。</zh-CN>
+            ///   <en>Preferred name.</en>
+            /// </lang>
+            /// </summary>
             public string PreferredName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>工作邮箱。</zh-CN>
+            ///   <en>Work email.</en>
+            /// </lang>
+            /// </summary>
             public string WorkEmail { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>所属组织单元标识。</zh-CN>
+            ///   <en>Owning organization-unit identifier.</en>
+            /// </lang>
+            /// </summary>
             public int? OrganizationUnitId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>所属组织显示名。</zh-CN>
+            ///   <en>Owning organization display name.</en>
+            /// </lang>
+            /// </summary>
             public string OrganizationDisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工状态。</zh-CN>
+            ///   <en>Employee status.</en>
+            /// </lang>
+            /// </summary>
             public string EmploymentStatus { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>入职 UTC 时间。</zh-CN>
+            ///   <en>Join UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime? JoinedUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>离职 UTC 时间。</zh-CN>
+            ///   <en>Leave UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime? LeftUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>来源系统标识。</zh-CN>
+            ///   <en>Source-system identifier.</en>
+            /// </lang>
+            /// </summary>
             public string SourceSystem { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>最近更新 UTC 时间。</zh-CN>
+            ///   <en>Latest update UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime UpdatedUtc { get; set; }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户用户与员工绑定 SQL 查询投影。</zh-CN>
+        ///   <en>SQL query projection for a Portal-user to employee binding.</en>
+        /// </lang>
+        /// </summary>
         private sealed class UserEmployeeBindingProjection
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定标识。</zh-CN>
+            ///   <en>Binding identifier.</en>
+            /// </lang>
+            /// </summary>
             public int BindingId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>门户用户标识。</zh-CN>
+            ///   <en>Portal user identifier.</en>
+            /// </lang>
+            /// </summary>
             public int UserId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>门户用户名。</zh-CN>
+            ///   <en>Portal user name.</en>
+            /// </lang>
+            /// </summary>
             public string UserName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工标识。</zh-CN>
+            ///   <en>Employee identifier.</en>
+            /// </lang>
+            /// </summary>
             public int EmployeeId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
             public string EmployeeCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
             public string EmployeeDisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定状态。</zh-CN>
+            ///   <en>Binding status.</en>
+            /// </lang>
+            /// </summary>
             public string BindingStatus { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定创建 UTC 时间。</zh-CN>
+            ///   <en>Binding creation UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime BoundUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定创建人。</zh-CN>
+            ///   <en>User who created the binding.</en>
+            /// </lang>
+            /// </summary>
             public string BoundBy { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定结束 UTC 时间。</zh-CN>
+            ///   <en>Binding end UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime? EndedUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定结束操作人。</zh-CN>
+            ///   <en>User who ended the binding.</en>
+            /// </lang>
+            /// </summary>
             public string EndedBy { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定变更原因。</zh-CN>
+            ///   <en>Reason for the binding change.</en>
+            /// </lang>
+            /// </summary>
             public string Reason { get; set; }
         }
     }

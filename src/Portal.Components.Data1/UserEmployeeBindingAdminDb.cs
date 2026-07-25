@@ -6,17 +6,16 @@ using System.Linq;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：基于 P6.3 表的门户账号与员工绑定后台写入实现。
-    ///
-    /// English: Administration write implementation for Portal-user to employee bindings backed by P6.3 tables.
+    /// <lang>
+    ///   <zh-CN>基于 P6.3 表的门户账号与员工绑定后台写入实现。</zh-CN>
+    ///   <en>Administration write implementation for Portal-user to employee bindings backed by P6.3 tables.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 中文：本实现只维护绑定表本身。运营审计、安全版本递增和登录票据失效由调用方在成功后完成，
-    /// 以便页面层能够把用户上下文和审计摘要控制在安全范围内。
-    ///
-    /// English: This implementation maintains only the binding table. Operations audit, security-version increments,
-    /// and ticket invalidation are completed by callers after success so page code can control user context and safe
-    /// audit summaries.
+    /// <lang>
+    ///   <zh-CN>本实现只维护绑定表本身。运营审计、安全版本递增和登录票据失效由调用方在成功后完成，以便页面层能够把用户上下文和审计摘要控制在安全范围内。</zh-CN>
+    ///   <en>This implementation maintains only the binding table. Operations audit, security-version increments, and ticket invalidation are completed by callers after success so page code can control user context and safe audit summaries.</en>
+    /// </lang>
     /// </remarks>
     public class UserEmployeeBindingAdminDb : IUserEmployeeBindingAdminDb
     {
@@ -25,11 +24,17 @@ namespace ASPNET.StarterKit.Portal
         private readonly PortalBizDbContext _context;
 
         /// <summary>
-        /// 中文：初始化门户账号与员工绑定写入实现。
-        ///
-        /// English: Initializes the Portal-user to employee binding write implementation.
+        /// <lang>
+        ///   <zh-CN>初始化门户账号与员工绑定写入实现。</zh-CN>
+        ///   <en>Initializes the Portal-user to employee binding write implementation.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="context">中文：企业业务基础数据上下文。English: Enterprise business foundation data context.</param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>企业业务基础数据上下文。</zh-CN>
+        ///   <en>Enterprise business foundation data context.</en>
+        /// </l>
+        /// </param>
         public UserEmployeeBindingAdminDb(PortalBizDbContext context)
         {
             _context = context;
@@ -164,6 +169,30 @@ WHERE [BindingId] = @BindingId
                 : EmployeeDirectoryWriteResult.Missing("The binding no longer exists.");
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证新增绑定请求的基础字段。</zh-CN>
+        ///   <en>Validates the basic fields of a new binding request.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>已归一化的保存请求。</zh-CN>
+        ///   <en>Normalized save request.</en>
+        /// </l>
+        /// </param>
+        /// <param name="message">
+        /// <l>
+        ///   <zh-CN>校验失败时可展示的错误消息。</zh-CN>
+        ///   <en>Displayable error message when validation fails.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>请求满足基础字段要求时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the request satisfies basic field requirements.</en>
+        /// </l>
+        /// </returns>
         private bool TryValidateSaveRequest(UserEmployeeBindingSaveRequest request, out string message)
         {
             if (request.UserId <= 0)
@@ -188,6 +217,12 @@ WHERE [BindingId] = @BindingId
             return true;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>确认门户用户是否存在。</zh-CN>
+        ///   <en>Checks whether a Portal user exists.</en>
+        /// </lang>
+        /// </summary>
         private bool UserExists(int userId)
         {
             return ScalarInt(
@@ -195,6 +230,12 @@ WHERE [BindingId] = @BindingId
                 IntParameter("@UserId", userId)) > 0;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>确认绑定记录是否仍存在。</zh-CN>
+        ///   <en>Checks whether a binding record still exists.</en>
+        /// </lang>
+        /// </summary>
         private bool BindingExists(int bindingId)
         {
             return ScalarInt(
@@ -202,6 +243,12 @@ WHERE [BindingId] = @BindingId
                 IntParameter("@BindingId", bindingId)) > 0;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查用户是否已有有效员工绑定。</zh-CN>
+        ///   <en>Checks whether the user already has an active employee binding.</en>
+        /// </lang>
+        /// </summary>
         private bool HasActiveBindingForUser(int userId)
         {
             return ScalarInt(
@@ -213,6 +260,12 @@ WHERE [UserId] = @UserId
                 IntParameter("@UserId", userId)) > 0;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查员工是否已有有效门户账号绑定。</zh-CN>
+        ///   <en>Checks whether the employee already has an active Portal-user binding.</en>
+        /// </lang>
+        /// </summary>
         private bool HasActiveBindingForEmployee(int employeeId)
         {
             return ScalarInt(
@@ -224,6 +277,12 @@ WHERE [EmployeeId] = @EmployeeId
                 IntParameter("@EmployeeId", employeeId)) > 0;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按员工号读取可绑定员工的轻量投影。</zh-CN>
+        ///   <en>Reads a lightweight bindable employee projection by employee code.</en>
+        /// </lang>
+        /// </summary>
         private EmployeeBindingProjection GetEmployeeByCode(string employeeCode)
         {
             return _context.Database.SqlQuery<EmployeeBindingProjection>(
@@ -238,6 +297,12 @@ WHERE [EmployeeCode] = @EmployeeCode;",
                 TextParameter("@EmployeeCode", employeeCode, 64)).SingleOrDefault();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查指定表是否存在并可访问。</zh-CN>
+        ///   <en>Checks whether the specified table exists and is accessible.</en>
+        /// </lang>
+        /// </summary>
         private bool HasTable(string tableName)
         {
             try
@@ -253,11 +318,23 @@ WHERE [EmployeeCode] = @EmployeeCode;",
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>执行返回单个整数的 SQL 查询。</zh-CN>
+        ///   <en>Executes a SQL query that returns a single integer.</en>
+        /// </lang>
+        /// </summary>
         private int ScalarInt(string sql, params object[] parameters)
         {
             return _context.Database.SqlQuery<int>(sql, parameters).Single();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>生成按指定谓词读取绑定详情的 SQL。</zh-CN>
+        ///   <en>Builds SQL for reading binding details by the specified predicate.</en>
+        /// </lang>
+        /// </summary>
         private static string GetBindingSql(string predicate)
         {
             return @"
@@ -283,6 +360,12 @@ WHERE " + predicate + @"
 ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把绑定 SQL 投影转换为跨层只读契约。</zh-CN>
+        ///   <en>Converts a binding SQL projection into the cross-layer read-only contract.</en>
+        /// </lang>
+        /// </summary>
         private static IUserEmployeeBindingInfo CreateBindingInfo(UserEmployeeBindingProjection row)
         {
             return new UserEmployeeBindingInfo(
@@ -300,12 +383,24 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
                 row.Reason);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断员工状态是否允许建立有效绑定。</zh-CN>
+        ///   <en>Determines whether an employee status may receive an active binding.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsEmployeeStatusAllowedForActiveBinding(string status)
         {
             return string.Equals(status, PortalEmployeeStatuses.Active, StringComparison.Ordinal) ||
                    string.Equals(status, PortalEmployeeStatuses.Pending, StringComparison.Ordinal);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>归一化新增或替换绑定请求。</zh-CN>
+        ///   <en>Normalizes a create-or-replace binding request.</en>
+        /// </lang>
+        /// </summary>
         private static UserEmployeeBindingSaveRequest NormalizeSaveRequest(UserEmployeeBindingSaveRequest request)
         {
             request = request ?? new UserEmployeeBindingSaveRequest();
@@ -318,6 +413,12 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
             };
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>归一化结束绑定请求。</zh-CN>
+        ///   <en>Normalizes an end-binding request.</en>
+        /// </lang>
+        /// </summary>
         private static UserEmployeeBindingEndRequest NormalizeEndRequest(UserEmployeeBindingEndRequest request)
         {
             request = request ?? new UserEmployeeBindingEndRequest();
@@ -329,17 +430,35 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
             };
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>归一化可选文本字段。</zh-CN>
+        ///   <en>Normalizes an optional text field.</en>
+        /// </lang>
+        /// </summary>
         private static string NormalizeOptional(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? string.Empty : value.Trim();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>归一化绑定变更原因，并限制最大长度。</zh-CN>
+        ///   <en>Normalizes a binding-change reason and enforces the maximum length.</en>
+        /// </lang>
+        /// </summary>
         private static string NormalizeReason(string value)
         {
             string reason = NormalizeOptional(value);
             return reason.Length > 200 ? reason.Substring(0, 200) : reason;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>归一化操作人标识，缺省时使用后台默认值。</zh-CN>
+        ///   <en>Normalizes the actor identifier, using the administration default when missing.</en>
+        /// </lang>
+        /// </summary>
         private static string NormalizeActor(string value)
         {
             string actor = NormalizeOptional(value);
@@ -351,11 +470,23 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
             return actor.Length > 100 ? actor.Substring(0, 100) : actor;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建整数 SQL 参数。</zh-CN>
+        ///   <en>Creates an integer SQL parameter.</en>
+        /// </lang>
+        /// </summary>
         private static SqlParameter IntParameter(string name, int value)
         {
             return new SqlParameter(name, SqlDbType.Int) { Value = value };
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建文本 SQL 参数，空文本按数据库空值传递。</zh-CN>
+        ///   <en>Creates a text SQL parameter, passing empty text as a database null.</en>
+        /// </lang>
+        /// </summary>
         private static SqlParameter TextParameter(string name, string value, int size)
         {
             return new SqlParameter(name, SqlDbType.NVarChar, size)
@@ -364,27 +495,149 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;";
             };
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用于绑定创建校验的员工轻量投影。</zh-CN>
+        ///   <en>Lightweight employee projection used for binding-create validation.</en>
+        /// </lang>
+        /// </summary>
         private sealed class EmployeeBindingProjection
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工标识。</zh-CN>
+            ///   <en>Employee identifier.</en>
+            /// </lang>
+            /// </summary>
             public int EmployeeId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
             public string EmployeeCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
             public string DisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工状态。</zh-CN>
+            ///   <en>Employee status.</en>
+            /// </lang>
+            /// </summary>
             public string EmploymentStatus { get; set; }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户用户与员工绑定详情 SQL 投影。</zh-CN>
+        ///   <en>SQL projection for Portal-user to employee binding details.</en>
+        /// </lang>
+        /// </summary>
         private sealed class UserEmployeeBindingProjection
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定标识。</zh-CN>
+            ///   <en>Binding identifier.</en>
+            /// </lang>
+            /// </summary>
             public int BindingId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>门户用户标识。</zh-CN>
+            ///   <en>Portal user identifier.</en>
+            /// </lang>
+            /// </summary>
             public int UserId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>门户用户名。</zh-CN>
+            ///   <en>Portal user name.</en>
+            /// </lang>
+            /// </summary>
             public string UserName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工标识。</zh-CN>
+            ///   <en>Employee identifier.</en>
+            /// </lang>
+            /// </summary>
             public int EmployeeId { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工号。</zh-CN>
+            ///   <en>Employee code.</en>
+            /// </lang>
+            /// </summary>
             public string EmployeeCode { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工显示名。</zh-CN>
+            ///   <en>Employee display name.</en>
+            /// </lang>
+            /// </summary>
             public string EmployeeDisplayName { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定状态。</zh-CN>
+            ///   <en>Binding status.</en>
+            /// </lang>
+            /// </summary>
             public string BindingStatus { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定创建 UTC 时间。</zh-CN>
+            ///   <en>Binding creation UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime BoundUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定创建人。</zh-CN>
+            ///   <en>User who created the binding.</en>
+            /// </lang>
+            /// </summary>
             public string BoundBy { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定结束 UTC 时间。</zh-CN>
+            ///   <en>Binding end UTC time.</en>
+            /// </lang>
+            /// </summary>
             public DateTime? EndedUtc { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定结束操作人。</zh-CN>
+            ///   <en>User who ended the binding.</en>
+            /// </lang>
+            /// </summary>
             public string EndedBy { get; set; }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定变更原因。</zh-CN>
+            ///   <en>Reason for the binding change.</en>
+            /// </lang>
+            /// </summary>
             public string Reason { get; set; }
         }
     }
