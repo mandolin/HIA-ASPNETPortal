@@ -1,10 +1,13 @@
-<%-- 页面声明 --%>
 <%@ Page Language="c#" CodeBehind="EditDocs.aspx.cs" AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.EditDocs"
     MasterPageFile="~/Default.master" %>
 
-<%-- 定义放置在主内容占位符中的内容 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文：P7.4.2-D 文档编辑页改为主题化表单外壳，并保留旧 WebForms 事件模型。English: P7.4.2-D rebuilds the document editor shell while keeping legacy WebForms events. --%>
+    <%--
+        <lang>
+            <zh-CN>P7.4.2-D 文档编辑页改为主题化表单外壳，并保留旧 WebForms 事件模型。</zh-CN>
+            <en>P7.4.2-D rebuilds the document editor shell while keeping legacy WebForms events.</en>
+        </lang>
+    --%>
     <section class="portal-page-section portal-edit-page portal-edit-docs">
         <div class="portal-page-heading-row">
             <h1 class="portal-page-title">Document Details</h1>
@@ -62,7 +65,7 @@
             <div class="portal-option-stack portal-disabled-option">
                 <asp:CheckBox ID="storeInDatabase" CssClass="Normal portal-checkbox"
                     Text="Store in database (web farm support)" runat="server" />
-                <span class="portal-field-help">数据库文件存储暂未启用，本阶段不接收二进制内容入库。</span>
+                <span class="portal-field-help">数据库文件存储属于后置能力，本阶段不接收二进制内容入库。</span>
             </div>
 
             <div class="portal-form-actions">

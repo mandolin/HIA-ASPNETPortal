@@ -1,12 +1,22 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmployeeProfileCorrectionRequest.ascx.cs" Inherits="ASPNET.StarterKit.Portal.EmployeeProfileCorrectionRequest" %>
 
-<%-- P6.4.3 业务模块样板：员工提交低敏字段级更正请求，不提供附件、脚本或外部资源。 --%>
+<%--
+    <lang>
+        <zh-CN>P6.4.3 业务模块样板：员工提交低敏字段级更正请求，不提供附件、脚本或外部资源。</zh-CN>
+        <en>P6.4.3 business module sample: employees submit low-sensitivity field-level correction requests; no attachment, script, or external resource capability is provided.</en>
+    </lang>
+--%>
 <div class="employee-profile-correction">
     <div class="employee-profile-correction-title">员工资料更正请求</div>
     <asp:Label ID="MessageLabel" CssClass="employee-profile-correction-message" runat="server" />
 
     <asp:Panel ID="RequestPanel" CssClass="employee-profile-correction-panel" Visible="false" runat="server">
-        <%-- 中文 / English: 当前资料快照用字段网格展示；提交区仍保留原控件 ID 和事件。 --%>
+        <%--
+            <lang>
+                <zh-CN>当前资料快照用字段网格展示；提交区仍保留原控件 ID 和事件，以维持 code-behind 绑定和回发兼容。</zh-CN>
+                <en>The current profile snapshot renders in a field grid; the submission area keeps the original control IDs and events to preserve code-behind binding and postback compatibility.</en>
+            </lang>
+        --%>
         <div class="employee-profile-field-grid">
             <div class="employee-profile-field">
                 <span class="employee-profile-correction-label employee-profile-field-label">员工号</span>

@@ -2,7 +2,12 @@
     Inherits="ASPNET.StarterKit.Portal.EditAnnouncements" MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文：P7 编辑页改用主题化表单外壳；English: P7 edit page uses the shared themed form shell. --%>
+    <%--
+        <lang>
+            <zh-CN>P7 编辑页改用主题化表单外壳，并保留既有公告校验、回发和删除事件。</zh-CN>
+            <en>P7 edit pages use the shared themed form shell while preserving existing announcement validation, postback, and delete events.</en>
+        </lang>
+    --%>
     <section class="portal-page-section portal-edit-page portal-edit-announcements">
         <div class="portal-page-heading-row">
             <h1 class="portal-page-title">Announcement Details</h1>

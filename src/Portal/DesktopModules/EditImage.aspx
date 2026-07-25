@@ -2,7 +2,12 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文：P7.4.2-E 将图片配置页改为主题化表单，并保留站内或 HTTP(S) 图片地址边界。English: P7.4.2-E rebuilds the image settings page with a themed form while keeping the current application-or-HTTP(S) image URL boundary. --%>
+    <%--
+        <lang>
+            <zh-CN>P7.4.2-E 将图片配置页改为主题化表单，并保留站内或 HTTP(S) 图片地址边界。</zh-CN>
+            <en>P7.4.2-E rebuilds the image settings page with a themed form while keeping the current application-or-HTTP(S) image URL boundary.</en>
+        </lang>
+    --%>
     <section class="portal-page-section portal-edit-page portal-edit-image">
         <div class="portal-page-heading-row">
             <h1 class="portal-page-title">Image Settings</h1>

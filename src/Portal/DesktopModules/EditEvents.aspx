@@ -2,7 +2,12 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文：事件编辑页使用统一主题化表单，保留既有校验和回发事件；English: Event edit page keeps existing validation and postback handlers. --%>
+    <%--
+        <lang>
+            <zh-CN>事件编辑页使用统一主题化表单，保留既有校验、回发和删除事件。</zh-CN>
+            <en>The event edit page uses the shared themed form while preserving existing validation, postback, and delete events.</en>
+        </lang>
+    --%>
     <section class="portal-page-section portal-edit-page portal-edit-events">
         <div class="portal-page-heading-row">
             <h1 class="portal-page-title">Event Details</h1>

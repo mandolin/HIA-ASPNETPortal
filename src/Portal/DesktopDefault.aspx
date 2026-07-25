@@ -3,19 +3,18 @@
     MasterPageFile="Default.master" %>
 
 <%--
-
-    The DesktopDefault.aspx page is used to load and populate each Portal View.  It accomplishes
-    this by reading the layout configuration of the portal from the Portal Configuration
-    system, and then using this information to dynamically instantiate portal modules
-    (each implemented as an ASP.NET User Control), and then inject them into the page.
-
-    DesktopDefault.aspx 页面用于加载和填充每个门户视图。它通过从门户配置系统中读取门户的布局配置信息，
-    然后使用这些信息动态实例化门户模块（每个都实现为 ASP.NET 用户控件），
-    然后将它们注入到页面中。
-
+    <lang>
+        <zh-CN>桌面门户页负责读取当前 Tab 的布局配置，动态实例化各模块用户控件，并注入到对应栏位容器中。</zh-CN>
+        <en>The desktop portal page reads the current Tab layout configuration, dynamically instantiates module user controls, and injects them into the matching pane containers.</en>
+    </lang>
 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文：P7.4 使用现代分栏容器；CSS 提供现代浏览器增强与旧浏览器基本块级回退。English: P7.4 uses modern pane containers; CSS provides modern enhancement and basic block fallback for old browsers. --%>
+    <%--
+        <lang>
+            <zh-CN>P7.4 使用现代分栏容器；CSS 提供现代浏览器增强与旧浏览器基本块级回退。</zh-CN>
+            <en>P7.4 uses modern pane containers; CSS provides modern enhancement and basic block fallback for old browsers.</en>
+        </lang>
+    --%>
     <div class="portal-dashboard-layout">
         <%-- <lang><zh-CN>左侧模块容器；仅在当前 Tab 配置了左侧模块时由 code-behind 显示。</zh-CN><en>Left module pane; code-behind shows it only when the current tab has left-pane modules.</en></lang> --%>
         <div id="LeftPane" class="portal-pane portal-pane-left" runat="server" visible="false"></div>

@@ -1,13 +1,15 @@
-<%-- 控制声明 --%>
 <%@ Control Language="c#" Inherits="ASPNET.StarterKit.Portal.Announcements" CodeBehind="Announcements.ascx.cs" AutoEventWireup="True" %>
 
-<%-- 注册自定义控件 --%>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Title" Src="~/DesktopModuleTitle.ascx" %>
 
-<%-- 使用自定义标题控件 --%>
 <ASPNETPortal:title EditText="Add New Announcement" EditUrl="~/DesktopModules/EditAnnouncements.aspx" runat="server" id="Title1" />
 
-<%-- 中文 / English: 公告列表保留 DataList 数据绑定，输出改为主题化条目结构。 --%>
+<%--
+    <lang>
+        <zh-CN>公告列表保留 DataList 数据绑定，输出改为主题化条目结构。</zh-CN>
+        <en>The announcements list keeps DataList binding while rendering through themed item markup.</en>
+    </lang>
+--%>
 <asp:DataList id="myDataList" CssClass="portal-content-list portal-announcement-list" RepeatLayout="Flow" EnableViewState="false" runat="server">
     <ItemTemplate>
         <div class="portal-content-list-item portal-announcement-item">

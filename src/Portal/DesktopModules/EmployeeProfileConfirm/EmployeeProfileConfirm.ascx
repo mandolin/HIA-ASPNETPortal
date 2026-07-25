@@ -1,12 +1,22 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmployeeProfileConfirm.ascx.cs" Inherits="ASPNET.StarterKit.Portal.EmployeeProfileConfirm" %>
 
-<%-- P6.4 首批业务模块样板：员工只确认自己当前绑定的低敏资料，不提供上传、脚本或外部资源。 --%>
+<%--
+    <lang>
+        <zh-CN>P6.4 首批业务模块样板：员工只确认自己当前绑定的低敏资料，不提供上传、脚本或外部资源。</zh-CN>
+        <en>P6.4 first business module sample: employees only confirm their currently bound low-sensitivity profile data; no upload, script, or external resource capability is provided.</en>
+    </lang>
+--%>
 <div class="employee-profile-confirm">
     <div class="employee-profile-confirm-title">员工资料确认</div>
     <asp:Label ID="MessageLabel" CssClass="employee-profile-confirm-message" runat="server" />
 
     <asp:Panel ID="ProfilePanel" CssClass="employee-profile-confirm-profile" Visible="false" runat="server">
-        <%-- 中文 / English: 资料字段使用块级网格，避免业务模块继续保留旧表格布局。 --%>
+        <%--
+            <lang>
+                <zh-CN>资料字段使用块级网格，避免业务模块继续保留旧表格布局。</zh-CN>
+                <en>Profile fields use a block grid so business modules do not continue the old table-based layout.</en>
+            </lang>
+        --%>
         <div class="employee-profile-field-grid">
             <div class="employee-profile-field">
                 <span class="employee-profile-confirm-label employee-profile-field-label">员工号</span>
