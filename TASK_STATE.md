@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 第三十三批已完成 |
-| 当前唯一下一步 | 继续 P16.1 第三十四批：`GlobalItem.cs`、`GlobalsDb.cs`、`HtmlTextItem.cs`、`ModuleDefinitionItem.cs`、`ModuleSettingItem.cs`。 |
-| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前三十三批已完成，剩余批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
+| 当前阶段 | `W-anp-P16.1` 第三十四批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第三十五批：`IDiscussionItem.cs`、`IEventItem.cs`、`IGlobalDb.cs`、`IGlobalItem.cs`、`IHtmlTextItem.cs`、`ILinkItem.cs`、`IModuleDefinitionItem.cs`、`IPortalDb.cs`、`IRoleItem.cs`、`IUserItem.cs`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前三十四批已完成，后续批次按约 10 个文件一批推进，并继续执行 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁。 |
 | 最近状态更新时间 | 2026-07-25 |
 
 ## Recent Completed Items
@@ -112,13 +112,14 @@
 | P16.1 第三十一批注释迁移 | completed | 主仓库源码提交 `c02e7c7`，WorkZone 资料提交 `5773376`；`work-zone/dev/plans/W-anp-P16.1-thirty-first-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十一批 5 个文件旧双语模式清零，手工补强组织/用户投影、Portal 页面基类和事件展示模块的空值归一化、依赖注入、主题初始化、模块归属和展示层安全分工说明，`LegacyBilingualFormat` 降至 `167`。 |
 | P16.1 第三十二批注释迁移 | completed | 主仓库源码提交 `089ed13`，WorkZone 资料提交 `ec4727c`；`work-zone/dev/plans/W-anp-P16.1-thirty-second-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十二批 5 个文件旧双语和旧标记层注释清零，手工补强审批工作项业务类型、受信任 HTML 标记层、图片/XML 模块和讨论列表标记层的持久化字符串、请求验证、路径策略、编码输出和旧回发命令边界，`LegacyBilingualFormat` 降至 `150`，`TodoOrDeferredMarker` 降至 `112`。 |
 | P16.1 第三十三批注释补强 | completed | 主仓库源码提交 `39cd1a3`，WorkZone 资料提交 `cd1174c`；`work-zone/dev/plans/W-anp-P16.1-thirty-third-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十三批补齐 EF 内容/配置上下文、旧事件/Tab 实体和员工资料更正内部投影节点文档化注释，`MissingNodeDocumentation` 降至 `95`。 |
+| P16.1 第三十四批注释补强 | completed | 主仓库源码提交 `626641d`，WorkZone 资料提交 `7108681`；`work-zone/dev/plans/W-anp-P16.1-thirty-fourth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十四批扩大到 10 个文件，补齐 Data1 配置/内容/用户/角色实体、注册审核 DTO 和公告/联系人接口契约节点文档化注释，`MissingNodeDocumentation` 降至 `60`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 第三十三批源码提交 `39cd1a3`；任务账本由本次同步提交记录 | 第三十三批源码注释补强已提交；任务账本已同步到第三十四批唯一下一步。 |
-| WorkZone | 第三十三批资料提交 `cd1174c` | 第三十三批清单、进度、结果和证据已提交；下一步进入第三十四批。 |
+| 主仓库 | 第三十四批源码提交 `626641d`；任务账本由本次同步提交记录 | 第三十四批源码注释补强已提交；任务账本已同步到第三十五批唯一下一步。 |
+| WorkZone | 第三十四批资料提交 `7108681` | 第三十四批清单、进度、结果和证据已提交；下一步进入第三十五批。 |
 
 ## Upcoming Planning Constraints
 
@@ -353,6 +354,12 @@
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=115`。 |
 | `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1372`，`Portal.Components` XML member count 为 `545`，`Portal.Components.Data` XML member count 为 `21`，`Portal.Components.Data1` XML member count 为 `621`，保留既有 `CS1591` 历史警告。 |
 | `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260725-2057.*`，`LegacyBilingualFormat=150`，`TodoOrDeferredMarker=112`，`LowValueRestatement=8`，`MissingNodeDocumentation=95`，`HighRiskScriptCandidate=22`。 |
+| P16.1 第三十四批旧格式/TODO 误判词扫描 | 通过；第三十四批 10 个文件旧 `中文：` / `英文：` / `English:` / `中文 / English` 模式为 `0`，`TODO`、`Deferred`、`后续`、`暂不`、`暂未`、`待办` 命中数为 `0`；`GlobalsDb.cs` 仅保留结构化 `// <lang>` 代码块注释。 |
+| P16.1 第三十四批编码和空白检查 | 通过；第三十四批 10 个源文件 UTF-8 无 BOM，`git diff --check -- 第三十四批文件` 无空白错误。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；16 个公开文档已登记，失败数 `0`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=115`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1372`，`Portal.Components` XML member count 为 `565`，`Portal.Components.Data` XML member count 为 `21`，`Portal.Components.Data1` XML member count 为 `654`，保留既有 `CS1591` 历史警告。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260725-2209.*`，`LegacyBilingualFormat=150`，`TodoOrDeferredMarker=112`，`LowValueRestatement=8`，`MissingNodeDocumentation=60`，`HighRiskScriptCandidate=22`，约 10 文件节奏下 P16.1 剩余候选约 9 批。 |
 
 ## Known Residual Working Tree Items
 
