@@ -3,17 +3,63 @@ using System;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 中文：组织单元只读视图的默认实现。
-    ///
-    /// English: Default implementation of the organization-unit read-only view.
+    ///   <lang>
+    ///     <zh-CN>组织单元只读视图的默认实现。</zh-CN>
+    ///     <en>Default implementation of the organization-unit read-only view.</en>
+    ///   </lang>
     /// </summary>
+    /// <remarks>
+    ///   <lang>
+    ///     <zh-CN>
+    ///       该对象用于后台组织树、员工目录筛选和账号员工绑定页面展示组织信息。它是查询结果投影，
+    ///       不负责判断组织编辑权限，也不表达多租户边界；权限和范围过滤应在调用它的数据访问或页面层完成。
+    ///     </zh-CN>
+    ///     <en>
+    ///       This object is used by organization-tree administration, employee-directory filters, and user-employee
+    ///       binding pages to display organization data. It is a query-result projection and does not decide
+    ///       organization edit permission or tenant boundaries; permission and scope filtering must happen in the
+    ///       data access or page layer that creates it.
+    ///     </en>
+    ///   </lang>
+    /// </remarks>
     public sealed class OrganizationUnitInfo : IOrganizationUnitInfo
     {
         /// <summary>
-        /// 中文：创建组织单元只读视图。
-        ///
-        /// English: Creates an organization-unit read-only view.
+        ///   <lang>
+        ///     <zh-CN>创建组织单元只读视图。</zh-CN>
+        ///     <en>Creates an organization-unit read-only view.</en>
+        ///   </lang>
         /// </summary>
+        /// <param name="organizationUnitId">
+        ///   <l zh-CN="组织单元主键。" en="Organization unit primary key." />
+        /// </param>
+        /// <param name="parentOrganizationUnitId">
+        ///   <l zh-CN="父级组织单元主键；为空表示根组织。" en="Parent organization unit key; null means this is a root unit." />
+        /// </param>
+        /// <param name="organizationCode">
+        ///   <l zh-CN="企业组织编码，用于业务识别和人工核对，不作为安全凭据。" en="Business organization code used for identification and manual review, not as a security credential." />
+        /// </param>
+        /// <param name="displayName">
+        ///   <l zh-CN="组织显示名称，输出到页面前仍需由展示层编码。" en="Organization display name; presentation code must still encode it before output." />
+        /// </param>
+        /// <param name="sortOrder">
+        ///   <l zh-CN="同级组织排序值。" en="Sort value among sibling organization units." />
+        /// </param>
+        /// <param name="isActive">
+        ///   <l zh-CN="是否启用；停用组织通常不应作为新增绑定的默认选择。" en="Whether the unit is active; inactive units should usually not be default choices for new bindings." />
+        /// </param>
+        /// <param name="createdUtc">
+        ///   <l zh-CN="创建时间，统一使用 UTC。" en="Creation time in UTC." />
+        /// </param>
+        /// <param name="updatedUtc">
+        ///   <l zh-CN="最后更新时间，统一使用 UTC。" en="Last update time in UTC." />
+        /// </param>
+        /// <remarks>
+        ///   <lang>
+        ///     <zh-CN>文本参数在构造时归一化为空字符串，避免旧 Web Forms 绑定控件遇到 <c>null</c> 后分散处理。</zh-CN>
+        ///     <en>Text arguments are normalized to empty strings so legacy Web Forms binding controls do not need scattered null handling.</en>
+        ///   </lang>
+        /// </remarks>
         public OrganizationUnitInfo(
             int organizationUnitId,
             int? parentOrganizationUnitId,
