@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.OrganizationUnitEdit"
     MasterPageFile="~/Default.master" %>
 
-<%-- P6.3-S4 组织单元最小维护页：不提供硬删除、导入、导出或批量同步。 --%>
+<%--
+<lang>
+  <zh-CN>P6.3-S4 组织单元最小维护页只支持单条新增/编辑和启停；不提供硬删除、导入、导出或批量同步，避免过早扩大组织数据治理面。</zh-CN>
+  <en>The P6.3-S4 minimal organization-unit maintenance page only supports single-record create/edit and activation toggles; it does not provide hard delete, import, export, or batch synchronization, avoiding premature expansion of organization-data governance.</en>
+</lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 组织单元编辑页只重构展示壳，父级校验、保存和审计仍由 code-behind 处理。 --%>
+    <%--
+    <lang>
+      <zh-CN>组织单元编辑页只重构展示壳和表单布局，父级循环校验、并发时间戳、保存和审计仍由 code-behind 处理。</zh-CN>
+      <en>The organization-unit edit page only rebuilds the display shell and form layout; parent-cycle validation, concurrency timestamps, persistence, and auditing remain handled by the code-behind.</en>
+    </lang>
+    --%>
     <div class="portal-admin-page portal-admin-organization-edit">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

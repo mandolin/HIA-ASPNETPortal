@@ -2,7 +2,12 @@
     Inherits="ASPNET.StarterKit.Portal.ModuleSettingsPage" MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 模块实例设置页只重构展示壳，实例归属校验、保存和审计仍由 code-behind 处理。 --%>
+    <%--
+    <lang>
+      <zh-CN>模块实例设置页只重构展示壳和表单分组，实例归属校验、编辑角色保存、缓存策略写入和审计仍由 code-behind 控制。</zh-CN>
+      <en>The module-instance settings page only rebuilds the presentation shell and form grouping; instance ownership checks, editor-role persistence, cache-policy writes, and auditing remain controlled by the code-behind.</en>
+    </lang>
+    --%>
     <div class="portal-admin-page portal-admin-module-settings">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.SystemHealth"
     MasterPageFile="~/Default.master" %>
 
-<%-- P2.2 只读系统健康页：仅展示检查结果，不提供修复、编辑或命令入口。 --%>
+<%--
+<lang>
+  <zh-CN>P2.2 只读系统健康页仅展示检查结果、设置 registry 摘要和重新检测入口，不在页面上提供自动修复、配置写入或命令执行能力。</zh-CN>
+  <en>The P2.2 read-only system health page only displays check results, the settings-registry summary, and a recheck entry point; it does not provide automated repair, configuration writes, or command execution.</en>
+</lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 后台页级布局样板，保留服务器控件绑定，仅重构页面壳和表格语义。 --%>
+    <%--
+    <lang>
+      <zh-CN>后台页级布局样板保留服务器控件绑定和 Repeater 数据源，只重构页面壳、摘要卡片和表格语义，避免影响 code-behind 健康检查流程。</zh-CN>
+      <en>The admin page-level layout sample preserves server-control bindings and Repeater data sources, only rebuilding the page shell, summary cards, and table semantics so the code-behind health-check flow is not changed.</en>
+    </lang>
+    --%>
     <div class="portal-admin-page portal-admin-health">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

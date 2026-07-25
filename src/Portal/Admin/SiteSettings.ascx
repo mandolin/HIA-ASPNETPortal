@@ -3,7 +3,12 @@
 
 <ASPNETPortal:title runat="server" id=Title1 />
 
-<%-- 中文 / English: 站点基础设置仍由旧控件保存；系统设置总 UI 覆盖前先完成视觉兼容治理。 --%>
+<%--
+<lang>
+  <zh-CN>站点基础设置仍由旧控件保存门户标题和编辑按钮显示策略；系统设置总 UI 覆盖前，本控件先完成后台视觉兼容治理。</zh-CN>
+  <en>Basic site settings still use the legacy control to persist the portal title and edit-button visibility policy; before the unified system-settings UI takes over, this control only receives admin-visual compatibility treatment.</en>
+</lang>
+--%>
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-site-settings">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">

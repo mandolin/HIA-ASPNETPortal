@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.OperationAudits"
     MasterPageFile="~/Default.master" %>
 
-<%-- P2.4 只读运营审计页：查询高价值状态变更，不记录普通查看行为。 --%>
+<%--
+<lang>
+  <zh-CN>P2.4 只读运营审计页用于查询高价值状态变更；普通查看行为当前不写审计，相关策略扩展由审计策略配置统一控制。</zh-CN>
+  <en>The P2.4 read-only operation-audit page queries high-value state changes; ordinary view actions are not audited at this stage and can later be governed by audit-policy settings if needed.</en>
+</lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 运营审计页只调整展示结构，查询、分页和权限逻辑仍由 code-behind 控制。 --%>
+    <%--
+    <lang>
+      <zh-CN>运营审计页只调整筛选区、分页区和结果表格的展示结构，查询条件解析、分页边界和管理员权限逻辑仍由 code-behind 控制。</zh-CN>
+      <en>The operation-audit page only adjusts the display structure for filters, paging, and the result table; query parsing, paging boundaries, and administrator authorization remain controlled by the code-behind.</en>
+    </lang>
+    --%>
     <div class="portal-admin-page portal-admin-audits">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
