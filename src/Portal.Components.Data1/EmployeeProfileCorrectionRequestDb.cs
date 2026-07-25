@@ -746,22 +746,76 @@ SELECT [RequestId] FROM @Updated;",
         /// </remarks>
         private sealed class ProfileProjection
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>当前登录账号绑定到的员工主键。</zh-CN>
+            ///   <en>Employee primary key bound to the current signed-in account.</en>
+            /// </lang>
+            /// </summary>
             public int EmployeeId { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工工号，用于用户可识别的身份展示和业务核对。</zh-CN>
+            ///   <en>Employee code used for user-recognizable identity display and business verification.</en>
+            /// </lang>
+            /// </summary>
             public string EmployeeCode { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工正式显示姓名。</zh-CN>
+            ///   <en>Employee formal display name.</en>
+            /// </lang>
+            /// </summary>
             public string DisplayName { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工偏好姓名或简称。</zh-CN>
+            ///   <en>Employee preferred name or short name.</en>
+            /// </lang>
+            /// </summary>
             public string PreferredName { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工工作邮箱。</zh-CN>
+            ///   <en>Employee work email address.</en>
+            /// </lang>
+            /// </summary>
             public string WorkEmail { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工所属组织的显示名称。</zh-CN>
+            ///   <en>Display name of the employee's organization unit.</en>
+            /// </lang>
+            /// </summary>
             public string OrganizationDisplayName { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>员工状态快照，查询已在 SQL 中限定为 Active。</zh-CN>
+            ///   <en>Employee status snapshot; the SQL query already limits it to Active.</en>
+            /// </lang>
+            /// </summary>
             public string EmploymentStatus { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>当前用户与员工的绑定记录主键。</zh-CN>
+            ///   <en>Primary key of the binding between the current user and employee.</en>
+            /// </lang>
+            /// </summary>
             public int BindingId { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>绑定建立时间，用于在多条绑定记录中选择最新有效记录。</zh-CN>
+            ///   <en>Binding creation time used to choose the latest active binding among multiple rows.</en>
+            /// </lang>
+            /// </summary>
             public DateTime BoundUtc { get; set; }
         }
     }
