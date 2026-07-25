@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.EmployeeEdit"
     MasterPageFile="~/Default.master" %>
 
-<%-- P6.3-S4 员工主数据最小维护页：不提供账号绑定、工号登录启用、导入、导出或敏感个人资料字段。 --%>
+<%--
+  <lang>
+    <zh-CN>P6.3-S4 员工主数据最小维护页不提供账号绑定、工号登录启用、导入、导出或敏感个人资料字段。</zh-CN>
+    <en>The P6.3-S4 minimal employee master-data page does not provide account binding, employee-code login enablement, import, export, or sensitive personal-profile fields.</en>
+  </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 员工编辑页只重构展示壳，字段验证、保存和审计仍由 code-behind 处理。 --%>
+    <%--
+      <lang>
+        <zh-CN>员工编辑页只重构展示壳，字段验证、保存和审计仍由 code-behind 处理。</zh-CN>
+        <en>The employee edit page only rebuilds the presentation shell; field validation, saving, and audit writing remain handled by code-behind.</en>
+      </lang>
+    --%>
     <div class="portal-admin-page portal-admin-employee-edit">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

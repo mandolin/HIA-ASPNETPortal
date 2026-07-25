@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.EmployeeDirectory"
     MasterPageFile="~/Default.master" %>
 
-<%-- P6.3-S4 员工组织目录页：列表本身只读，新增和编辑交给独立维护页处理。 --%>
+<%--
+  <lang>
+    <zh-CN>P6.3-S4 员工组织目录页的列表本身只读，新增和编辑交给独立维护页处理。</zh-CN>
+    <en>The P6.3-S4 employee and organization directory list is read-only; creation and editing are handled by dedicated maintenance pages.</en>
+  </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 员工目录页只重构展示壳，数据读取、新增和编辑入口保持既有行为。 --%>
+    <%--
+      <lang>
+        <zh-CN>员工目录页只重构展示壳，数据读取、新增和编辑入口保持既有行为。</zh-CN>
+        <en>The employee directory page only rebuilds the presentation shell; data reads, creation, and edit entry behavior remain unchanged.</en>
+      </lang>
+    --%>
     <div class="portal-admin-page portal-admin-employee-directory">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
@@ -140,7 +150,12 @@
                                         Text="Edit"
                                         NavigateUrl='<%# Eval("EditUrl") %>'
                                         runat="server" />
-                                    <%-- 员工账号绑定以员工行为入口，避免组织行误引用不存在的绑定地址。 --%>
+                                    <%--
+                                      <lang>
+                                        <zh-CN>员工账号绑定以员工行为入口，避免组织行误引用不存在的绑定地址。</zh-CN>
+                                        <en>User-employee binding is exposed from employee rows to avoid organization rows referencing a binding URL that does not exist.</en>
+                                      </lang>
+                                    --%>
                                     <asp:HyperLink
                                         CssClass="CommandButton"
                                         Text="Bind"

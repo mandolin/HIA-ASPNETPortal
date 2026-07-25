@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.DiagnosticLogDetail"
     MasterPageFile="~/Default.master" %>
 
-<%-- P2.4 诊断日志详情：仅按事件编号查询已净化记录，不接受日志文件路径。 --%>
+<%--
+  <lang>
+    <zh-CN>P2.4 诊断日志详情页仅按事件编号查询已净化记录，不接受日志文件路径。</zh-CN>
+    <en>The P2.4 diagnostic log detail page queries sanitized entries only by event id and does not accept log file paths.</en>
+  </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 详情页只改只读展示结构，不改变事件编号查询和部署级开关。 --%>
+    <%--
+      <lang>
+        <zh-CN>详情页只调整只读展示结构，不改变事件编号查询和部署级详情开关。</zh-CN>
+        <en>The detail page changes only the read-only presentation structure and does not change event-id lookup or the deployment-level detail switch.</en>
+      </lang>
+    --%>
     <div class="portal-admin-page portal-admin-diagnostic-detail">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.ModuleCatalog"
     MasterPageFile="~/Default.master" %>
 
-<%-- P3.2 只管理受信任部署包的注册和启停；不提供 ZIP、DLL、脚本、外链或在线编译入口。 --%>
+<%--
+  <lang>
+    <zh-CN>P3.2 只管理受信任部署包的注册和启停；不提供 ZIP、DLL、脚本、外链或在线编译入口。</zh-CN>
+    <en>P3.2 manages only registration and enablement for trusted deployed packages; it provides no ZIP, DLL, script, external-link, or online-compilation entry point.</en>
+  </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 模块目录页只重构展示壳，包注册、启停和预检命令保持既有安全边界。 --%>
+    <%--
+      <lang>
+        <zh-CN>模块目录页只重构展示壳，包注册、启停和预检命令保持既有安全边界。</zh-CN>
+        <en>The module catalog page only rebuilds the presentation shell; package registration, enable/disable, and preflight commands keep their existing security boundary.</en>
+      </lang>
+    --%>
     <div class="portal-admin-page portal-admin-module-catalog">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.EmployeeProfileCorrectionRequests"
     MasterPageFile="~/Default.master" %>
 
-<%-- P6.4.3 员工资料更正请求后台处理页：只处理请求状态，不直接修改员工主数据。 --%>
+<%--
+  <lang>
+    <zh-CN>P6.4.3 员工资料更正请求后台处理页只处理请求状态，不直接修改员工主数据。</zh-CN>
+    <en>The P6.4.3 employee profile correction Admin page handles request status only and does not directly modify employee master data.</en>
+  </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 审核页只调整展示结构，状态命令和审计记录仍由 code-behind 处理。 --%>
+    <%--
+      <lang>
+        <zh-CN>审核页只调整展示结构，状态命令和审计记录仍由 code-behind 处理。</zh-CN>
+        <en>The review page only adjusts presentation structure; status commands and audit records remain handled by code-behind.</en>
+      </lang>
+    --%>
     <div class="portal-admin-page portal-admin-correction-requests">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

@@ -2,16 +2,29 @@
     MasterPageFile="~/Default.master" %>
 <%@ Import Namespace="Resources" %>
 
-<%-- 
-    ManageUsers.aspx 页面用于创建和编辑门户应用中的用户。
+<%--
+  <lang>
+    <zh-CN>`ManageUsers.aspx` 用于创建、审核和维护门户账号，并作为角色成员关系维护的入口。</zh-CN>
+    <en>`ManageUsers.aspx` creates, reviews, and maintains portal accounts and also acts as the role-membership maintenance entry.</en>
+  </lang>
 --%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 管理用户页只重排展示结构，账号更新、注册审核、生命周期和角色命令仍由 code-behind 控制。 --%>
+    <%--
+      <lang>
+        <zh-CN>管理用户页只重排展示结构，账号更新、注册审核、生命周期和角色命令仍由 code-behind 控制。</zh-CN>
+        <en>The manage-user page only rearranges presentation structure; account updates, registration review, lifecycle commands, and role commands remain controlled by code-behind.</en>
+      </lang>
+    --%>
     <div class="portal-admin-page portal-admin-manage-users">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <%-- 显示标题。使用 Label 避免包含代码块的 HtmlControl 在运行时修改文本时报错。 --%>
+                <%--
+                  <lang>
+                    <zh-CN>标题使用服务器端 Label，避免包含代码块的 HtmlControl 在运行时修改文本时报错。</zh-CN>
+                    <en>The title uses a server-side Label to avoid runtime text-update errors on an HtmlControl that contains code blocks.</en>
+                  </lang>
+                --%>
                 <asp:Label ID="TitleText" CssClass="Head portal-admin-title" Text="<%$ Resources:lang,Admin_ManageUsers_ManageUser %>"
                     runat="server" />
                 <p class="Normal portal-admin-subtitle">Account profile, registration review, lifecycle, and role membership.</p>
@@ -23,7 +36,12 @@
         </div>
 
         <div class="portal-admin-summary-grid portal-user-summary-grid">
-            <%-- P2.3 注册审核状态，只展示并提供最小批准动作。 --%>
+            <%--
+              <lang>
+                <zh-CN>P2.3 注册审核状态区域只展示当前状态，并提供最小批准/拒绝动作。</zh-CN>
+                <en>The P2.3 registration-review status area displays the current state and exposes only minimal approve/reject actions.</en>
+              </lang>
+            --%>
             <div class="portal-admin-summary-item">
                 <div class="SubHead portal-summary-label">Registration Status</div>
                 <div class="Normal portal-summary-value">
@@ -99,32 +117,62 @@
                 <h2 class="Head portal-section-title">Account Profile</h2>
             </div>
             <div class="portal-form-grid">
-                <%-- 旧账号名继续只读展示，用于兼容历史 URL、角色和审计引用。 --%>
+                <%--
+                  <lang>
+                    <zh-CN>旧账号名继续只读展示，用于兼容历史 URL、角色和审计引用。</zh-CN>
+                    <en>The legacy user name remains read-only for compatibility with historical URLs, roles, and audit references.</en>
+                  </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">旧账号名</span>
                     <span class="Normal portal-field-value"><asp:Label ID="LegacyUserNameText" runat="server" /></span>
                 </div>
-                <%-- P6.2 新登录名。 --%>
+                <%--
+                  <lang>
+                    <zh-CN>P6.2 新登录名字段由后台校验唯一性和格式。</zh-CN>
+                    <en>The P6.2 login-name field has uniqueness and format validation in code-behind.</en>
+                  </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">登录名</span>
                     <asp:TextBox ID="LoginName" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
-                <%-- P6.2 显示名。 --%>
+                <%--
+                  <lang>
+                    <zh-CN>P6.2 显示名用于后台列表和低敏展示，不作为登录凭据。</zh-CN>
+                    <en>The P6.2 display name is used by Admin lists and low-sensitivity display surfaces, not as a login credential.</en>
+                  </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">显示名</span>
                     <asp:TextBox ID="DisplayName" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
-                <%-- P6.2 昵称。 --%>
+                <%--
+                  <lang>
+                    <zh-CN>P6.2 昵称是可选展示资料，保存策略由 code-behind 统一处理。</zh-CN>
+                    <en>The P6.2 nickname is optional display profile data and its save policy is handled centrally by code-behind.</en>
+                  </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">昵称</span>
                     <asp:TextBox ID="Nickname" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
-                <%-- 邮箱 --%>
+                <%--
+                  <lang>
+                    <zh-CN>邮箱字段可作为联系信息或登录标识输入之一，最终解析仍由认证服务控制。</zh-CN>
+                    <en>The email field may serve as contact information or one login identifier input; final resolution remains controlled by the authentication service.</en>
+                  </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_Email %></span>
                     <asp:TextBox ID="Email" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
-                <%-- 密码 --%>
+                <%--
+                  <lang>
+                    <zh-CN>密码输入配合隐藏加密字段使用；服务端仍会重新校验明文/密文边界和策略。</zh-CN>
+                    <en>The password input works with the hidden encrypted field; the server still revalidates plaintext/ciphertext boundaries and policy.</en>
+                  </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_Password %></span>
                     <asp:TextBox ID="Password" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" TextMode="Password" />
@@ -132,7 +180,12 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
                         ControlToValidate="Password" CssClass="NormalRed" Display="Dynamic" Enabled="False"></asp:RequiredFieldValidator>
                 </div>
-                <%-- 确认密码 --%>
+                <%--
+                  <lang>
+                    <zh-CN>确认密码字段用于前后台一致性校验，并同样配合隐藏加密字段提交。</zh-CN>
+                    <en>The confirm-password field supports client/server consistency validation and is also submitted with a hidden encrypted field.</en>
+                  </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_ConfirmPwd %></span>
                     <asp:TextBox ID="ConfirmPassword" Width="200" CssClass="NormalTextBox portal-form-input" runat="server"

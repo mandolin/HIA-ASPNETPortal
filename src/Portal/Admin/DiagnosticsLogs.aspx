@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.DiagnosticsLogs"
     MasterPageFile="~/Default.master" %>
 
-<%-- P2.4 只读诊断日志页：仅查询受限 NDJSON 记录，不提供下载、删除或路径输入。 --%>
+<%--
+  <lang>
+    <zh-CN>P2.4 只读诊断日志页仅查询受限 NDJSON 记录，不提供下载、删除或路径输入。</zh-CN>
+    <en>The P2.4 read-only diagnostic log page queries only constrained NDJSON entries and provides no download, delete, or path-input action.</en>
+  </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 诊断日志页只重构后台展示结构，查询范围、分页和权限仍由 code-behind 控制。 --%>
+    <%--
+      <lang>
+        <zh-CN>诊断日志页只重构后台展示结构，查询范围、分页和权限仍由 code-behind 控制。</zh-CN>
+        <en>The diagnostic log page only rebuilds the Admin presentation structure; query scope, paging, and authorization remain controlled by code-behind.</en>
+      </lang>
+    --%>
     <div class="portal-admin-page portal-admin-diagnostics-logs">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
