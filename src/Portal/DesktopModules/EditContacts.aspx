@@ -2,7 +2,12 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文：联系人编辑页仅替换表现层外壳；English: Contact edit keeps the existing WebForms events and data flow. --%>
+    <%--
+        <lang>
+            <zh-CN>联系人编辑页仅替换表现层外壳，保留既有 WebForms 事件和数据流。</zh-CN>
+            <en>The contact edit page only replaces the presentation shell while preserving existing WebForms events and data flow.</en>
+        </lang>
+    --%>
     <section class="portal-page-section portal-edit-page portal-edit-contacts">
         <div class="portal-page-heading-row">
             <h1 class="portal-page-title">Contact Details</h1>

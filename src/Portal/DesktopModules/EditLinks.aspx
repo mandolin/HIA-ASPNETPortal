@@ -2,7 +2,12 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文：链接编辑页统一到 P7 表单视觉；English: Link edit page is aligned with the P7 themed form style. --%>
+    <%--
+        <lang>
+            <zh-CN>链接编辑页统一到 P7 表单视觉，并保留既有校验、回发和删除事件。</zh-CN>
+            <en>The link edit page is aligned with the P7 themed form style while preserving existing validation, postback, and delete events.</en>
+        </lang>
+    --%>
     <section class="portal-page-section portal-edit-page portal-edit-links">
         <div class="portal-page-heading-row">
             <h1 class="portal-page-title">Link Details</h1>

@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.ThemeSettings"
     MasterPageFile="~/Default.master" %>
 
-<%-- P3.1 主题选择页：管理员仅能选择已部署且通过 manifest 校验的主题，不提供包上传或在线样式编辑。 --%>
+<%--
+    <lang>
+        <zh-CN>P3.1 主题选择页：管理员仅能选择已部署且通过 manifest 校验的主题，不提供包上传或在线样式编辑。</zh-CN>
+        <en>P3.1 theme selection page: administrators can only select deployed themes that pass manifest validation; package upload and online style editing are not provided.</en>
+    </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 主题设置页只调整展示结构，主题写入和审计仍由 code-behind 处理。 --%>
+    <%--
+        <lang>
+            <zh-CN>主题设置页只调整展示结构，主题写入和审计仍由 code-behind 处理。</zh-CN>
+            <en>The theme settings page only adjusts the presentation structure; theme writes and audit recording remain in code-behind.</en>
+        </lang>
+    --%>
     <div class="portal-admin-page portal-admin-theme-settings">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

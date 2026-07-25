@@ -1,11 +1,9 @@
-<%-- 用户控件声明 --%>
 <%@ Control 
 Inherits="ASPNET.StarterKit.Portal.ModuleDefs" 
 CodeBehind="ModuleDefs.ascx.cs" 
 Language="c#" 
 AutoEventWireup="True" %>
 
-<%-- 注册一个自定义标签，用于显示标题 --%>
 <%@ Register 
 TagPrefix="ASPNETPortal" 
 TagName="Title" 
@@ -13,7 +11,12 @@ Src="~/DesktopModuleTitle.ascx"%>
 
 <ASPNETPortal:title runat="server" id="Title1" />
 
-<%-- 中文 / English: Legacy 桥接入口只展示既有定义并引导到受信任模块目录，不恢复在线手填路径。 --%>
+<%--
+    <lang>
+        <zh-CN>Legacy 桥接入口只展示既有定义并引导到受信任模块目录，不恢复在线手填路径。</zh-CN>
+        <en>The legacy bridge entry only lists existing definitions and routes users to the trusted module catalog; online manual path entry is not restored.</en>
+    </lang>
+--%>
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-module-defs">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">

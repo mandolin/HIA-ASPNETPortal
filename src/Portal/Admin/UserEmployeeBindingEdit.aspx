@@ -5,9 +5,19 @@
     Inherits="ASPNET.StarterKit.Portal.UserEmployeeBindingEdit"
     MasterPageFile="~/Default.master" %>
 
-<%-- P6.3-S5 门户账号与员工单条绑定维护页。 --%>
+<%--
+    <lang>
+        <zh-CN>P6.3-S5 门户账号与员工单条绑定维护页。</zh-CN>
+        <en>P6.3-S5 single binding maintenance page between a portal account and an employee record.</en>
+    </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 绑定页只重构展示壳，绑定、解绑、安全版本刷新和审计逻辑仍由 code-behind 处理。 --%>
+    <%--
+        <lang>
+            <zh-CN>绑定页只重构展示壳，绑定、解绑、安全版本刷新和审计逻辑仍由 code-behind 处理。</zh-CN>
+            <en>The binding page only rebuilds the presentation shell; binding, unbinding, security-version refresh, and audit logic remain in code-behind.</en>
+        </lang>
+    --%>
     <div class="portal-admin-page portal-admin-user-employee-binding">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

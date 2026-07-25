@@ -3,7 +3,12 @@
 <%@ Register TagPrefix="ASPNETPortal" TagName="Title" Src="~/DesktopModuleTitle.ascx"%>
 <ASPNETPortal:title runat="server" id="Title1" />
 
-<%-- 中文 / English: 旧用户入口保留显式管理员 POST 行为；不在页面打开时创建用户。 --%>
+<%--
+    <lang>
+        <zh-CN>旧用户入口保留显式管理员 POST 行为；不在页面打开时创建用户。</zh-CN>
+        <en>The legacy user entry preserves explicit administrator POST behavior and does not create users when the page is merely opened.</en>
+    </lang>
+--%>
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-users">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">

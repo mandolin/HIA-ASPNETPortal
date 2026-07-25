@@ -2,7 +2,12 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 只重构页面外观，保留所有 WebForms 控件 ID、事件和自定义属性以维持旧排序逻辑。 --%>
+    <%--
+        <lang>
+            <zh-CN>只重构页面外观，保留所有 WebForms 控件 ID、事件和自定义属性以维持旧排序逻辑。</zh-CN>
+            <en>Only the page presentation is rebuilt; all WebForms control IDs, events, and custom attributes are preserved to keep the legacy ordering logic intact.</en>
+        </lang>
+    --%>
     <div class="portal-admin-page portal-admin-tab-layout">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

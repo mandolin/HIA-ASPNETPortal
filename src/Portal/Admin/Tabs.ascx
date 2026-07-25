@@ -3,7 +3,12 @@
 
 <ASPNETPortal:Title runat="server" ID="Title1" />
 
-<%-- 中文 / English: 旧 Tab 管理控件保留真实排序、删除和创建行为；截图矩阵只打开页面，不点击这些写库按钮。 --%>
+<%--
+    <lang>
+        <zh-CN>旧 Tab 管理控件保留真实排序、删除和创建行为；截图矩阵只打开页面，不点击这些写库按钮。</zh-CN>
+        <en>The legacy Tab administration control preserves real ordering, deletion, and creation behavior; screenshot matrices only open the page and do not click these database-writing buttons.</en>
+    </lang>
+--%>
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-tabs">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">

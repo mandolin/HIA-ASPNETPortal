@@ -2,10 +2,14 @@
 
 <%@ Register TagPrefix="Portal" TagName="Title" Src="~/DesktopModuleTitle.ascx"%>
 
-<%-- 注册门户标题控件 --%>
 <portal:title EditText="Add New Event" EditUrl="~/DesktopModules/EditEvents.aspx" runat="server" id=Title1 />
 
-<%-- 中文：保留 DataList 绑定和编辑入口，只重构每条事件的主题化展示结构。English: Keep DataList binding and edit navigation while rebuilding the themed event-item markup. --%>
+<%--
+    <lang>
+        <zh-CN>保留 DataList 绑定和编辑入口，只重构每条事件的主题化展示结构。</zh-CN>
+        <en>DataList binding and edit navigation are preserved while only the themed event-item markup is rebuilt.</en>
+    </lang>
+--%>
 <asp:DataList id="myDataList" CssClass="portal-content-list portal-event-list" RepeatLayout="Flow" EnableViewState="false" runat="server">
     <ItemTemplate>
         <div class="portal-content-list-item portal-event-item">
