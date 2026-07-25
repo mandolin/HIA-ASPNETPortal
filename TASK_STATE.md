@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 第二十三批已完成 |
-| 当前唯一下一步 | 继续 P16.1 第二十四批：`LoginPasswordKey.ashx.cs`、`PortalEmployeeStatuses.cs`、`PortalUserEmployeeBindingStatuses.cs`、`PortalUserRegistrationStatuses.cs`、`PortalPasswordHasher.cs`。 |
-| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前二十三批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
+| 当前阶段 | `W-anp-P16.1` 第二十四批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第二十五批：`EmployeeProfileCorrectionRequestStatuses.cs`、`UserEmployeeBindingSaveRequest.cs`、`DiscussionDb.cs`、`Contacts.ascx.cs`、`HtmlModule.ascx.cs`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前二十四批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
 | 最近状态更新时间 | 2026-07-25 |
 
 ## Recent Completed Items
@@ -102,13 +102,14 @@
 | P16.1 第二十一批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-twenty-first-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二十一批 5 个文件旧双语模式清零，手工补强待办完成请求、登录标识解析、安全上下文、待办状态值和公告编辑页的身份、状态、旧表映射、条目归属和安全回跳说明，`LegacyBilingualFormat` 降至 `475`，`MissingNodeDocumentation` 降至 `208`。 |
 | P16.1 第二十二批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-twenty-second-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二十二批 5 个文件旧双语模式清零，手工补强旧内容编辑页模块权限、条目归属、创建人来源、URL/尺寸策略、低敏提示和安全回跳说明，`LegacyBilingualFormat` 降至 `425`。 |
 | P16.1 第二十三批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-twenty-third-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二十三批 5 个文件旧双语模式清零，手工补强员工资料更正结果、模块定义契约/实现、审批工作项 SQL 状态流转和 XML 模块资源路径边界，`LegacyBilingualFormat` 降至 `381`，`TodoOrDeferredMarker` 降至 `120`，`MissingNodeDocumentation` 降至 `206`。 |
+| P16.1 第二十四批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-twenty-fourth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二十四批 5 个文件旧双语模式清零，手工补强登录公钥 handler、企业身份状态常量和密码哈希辅助器的安全/持久化/兼容边界，`LegacyBilingualFormat` 降至 `344`，`TodoOrDeferredMarker` 降至 `116`，`MissingNodeDocumentation` 降至 `198`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 第二十三批源码提交 `019f6c0`；任务账本由本次同步提交记录 | 第二十三批源码迁移已提交；任务账本已同步到第二十四批唯一下一步。 |
-| WorkZone | 第二十三批资料提交 `d522e81` | 第二十三批清单、进度、结果、证据和本轮日志已提交；下一步进入第二十四批。 |
+| 主仓库 | 第二十四批源码提交 `0f8383a`；任务账本由本次同步提交记录 | 第二十四批源码迁移已提交；任务账本已同步到第二十五批唯一下一步。 |
+| WorkZone | 第二十四批资料提交 `29e4668` | 第二十四批清单、进度、结果、证据和本轮日志已提交；下一步进入第二十五批。 |
 
 ## Upcoming Planning Constraints
 
