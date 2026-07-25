@@ -3,7 +3,12 @@
 
 <ASPNETPortal:title runat="server" id="Title1" />
 
-<%-- 中文 / English: 旧角色入口保留真实创建、改名、删除和成员管理行为，并继续同步旧分号授权字符串。 --%>
+<%--
+    <lang>
+        <zh-CN>旧角色入口保留真实创建、改名、删除和成员管理行为，并继续同步旧分号授权字符串。</zh-CN>
+        <en>The legacy role entry preserves real create, rename, delete, and membership management behavior while continuing to synchronize legacy semicolon-delimited authorization strings.</en>
+    </lang>
+--%>
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-roles">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">

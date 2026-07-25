@@ -1,7 +1,12 @@
 <%@ Control language="c#" Inherits="ASPNET.StarterKit.Portal.Links" CodeBehind="Links.ascx.cs" AutoEventWireup="True" %>
 <%@ Register TagPrefix="Portal" TagName="Title" Src="~/DesktopModuleTitle.ascx"%>
 <portal:title editurl="~/DesktopModules/EditLinks.aspx" edittext="Add Link" runat="server" id="Title1" />
-<%-- 中文 / English: 普通链接以主题化链接组呈现；编辑入口仍走既有 EditLinks 页面。 --%>
+<%--
+    <lang>
+        <zh-CN>普通链接以主题化链接组呈现；编辑入口仍走既有 EditLinks 页面。</zh-CN>
+        <en>Standard links render as a themed link group; editing still routes through the existing EditLinks page.</en>
+    </lang>
+--%>
 <asp:datalist id="myDataList" CssClass="portal-content-link-list" RepeatLayout="Flow" runat="server">
     <itemtemplate>
         <div class="portal-content-link-row">

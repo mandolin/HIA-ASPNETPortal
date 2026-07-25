@@ -7,8 +7,12 @@
     </lang>
 --%>
 
-<%-- 中文：P8.3 模块标题正式拆为标题区和动作区，后续模块可逐步复用同一套语义契约。
-     English: P8.3 splits module headers into title and action areas so modules can gradually share one semantic contract. --%>
+<%--
+    <lang>
+        <zh-CN>P8.3 将模块标题正式拆为标题区和动作区，其他模块可逐步复用同一套语义契约。</zh-CN>
+        <en>P8.3 splits module headers into title and action areas so modules can gradually share one semantic contract.</en>
+    </lang>
+--%>
 <div class="portal-module-header">
     <div class="portal-module-title-wrap">
         <asp:label id="ModuleTitle" cssclass="Head portal-module-title portal-module-heading" EnableViewState="false" runat="server" />

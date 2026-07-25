@@ -1,7 +1,17 @@
 <%@ Control language="c#" Inherits="ASPNET.StarterKit.Portal.QuickLinks" CodeBehind="QuickLinks.ascx.cs" AutoEventWireup="True" %>
-<%-- 中文 / English: 快捷链接改为紧凑链接组，保留新增入口和原数据绑定。 --%>
+<%--
+    <lang>
+        <zh-CN>快捷链接模块以紧凑链接组呈现，保留新增入口和原有数据绑定。</zh-CN>
+        <en>The quick-links module renders as a compact link group while preserving the add entry and existing data binding.</en>
+    </lang>
+--%>
 <div class="portal-quicklinks">
-    <%-- 中文 / English: P8.3 让快捷链接自有头部接入统一模块标题/动作区契约。 --%>
+    <%--
+        <lang>
+            <zh-CN>P8.3 让快捷链接自有头部接入统一模块标题/动作区契约，避免与外层模块标题重复。</zh-CN>
+            <en>P8.3 connects the quick-links local header to the shared module title/action contract without duplicating the outer module title.</en>
+        </lang>
+    --%>
     <div class="portal-module-header portal-quicklinks-header">
         <div class="portal-module-title-wrap">
             <span class="SubSubHead portal-module-title portal-quicklinks-title">Quick Launch</span>

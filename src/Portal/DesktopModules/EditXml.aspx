@@ -2,7 +2,12 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文：P7.4.2-E 将 XML/XSL 配置页改为主题化表单；资源仍必须由受信任部署提供。English: P7.4.2-E rebuilds the XML/XSL settings page with a themed form while deployed resources must still be provided by trusted deployment. --%>
+    <%--
+        <lang>
+            <zh-CN>P7.4.2-E 将 XML/XSL 配置页改为主题化表单；资源仍必须由受信任部署提供。</zh-CN>
+            <en>P7.4.2-E rebuilds the XML/XSL settings page with a themed form while deployed resources must still be provided by trusted deployment.</en>
+        </lang>
+    --%>
     <section class="portal-page-section portal-edit-page portal-edit-xml">
         <div class="portal-page-heading-row">
             <h1 class="portal-page-title">XML Settings</h1>
@@ -17,7 +22,12 @@
             <div class="portal-field-stack">
                 <asp:Label ID="XmlDataSrcLabel" CssClass="portal-field-stack-label" AssociatedControlID="XmlDataSrc"
                     runat="server" Text="XML Data File" />
-                <%-- 中文：保存时会规范化为当前应用内虚拟路径。English: Saving normalizes this to a virtual path inside the current application. --%>
+                <%--
+                    <lang>
+                        <zh-CN>保存时会规范化为当前应用内虚拟路径，避免写入外部 URL 或任意物理路径。</zh-CN>
+                        <en>Saving normalizes this value to a virtual path inside the current application, avoiding external URLs or arbitrary physical paths.</en>
+                    </lang>
+                --%>
                 <asp:TextBox ID="XmlDataSrc" CssClass="NormalTextBox portal-input" Columns="26"
                     MaxLength="250" runat="server" />
             </div>

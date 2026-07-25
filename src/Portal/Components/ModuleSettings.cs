@@ -3,32 +3,42 @@ using System;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-        /// 当前 Tab 中一个模块实例的运行时设置快照。
-        /// Runtime settings snapshot for one module instance on the current Tab.
+    /// <lang>
+    ///   <zh-CN>当前 Tab 中一个模块实例的运行时设置快照。</zh-CN>
+    ///   <en>Runtime settings snapshot for one module instance on the current Tab.</en>
+    /// </lang>
     /// </summary>
     public class ModuleSettings : IComparable<ModuleSettings>
     {
         /// <summary>
-        /// 从模块实例记录及其模块定义创建运行时快照。
-        /// Creates a runtime snapshot from a module-instance record and its module definition.
+        /// <lang>
+        ///   <zh-CN>从模块实例记录及其模块定义创建运行时快照。</zh-CN>
+        ///   <en>Creates a runtime snapshot from a module-instance record and its module definition.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="module">非 null 的模块实例记录；其可空数据库字段由现有数据层解包。
-        /// Non-null module-instance record; its nullable database fields are unwrapped by the existing data layer.</param>
-        /// <param name="moduleDefConfig">用于读取模块定义及原始桌面入口的数据服务。
-        /// Data service used to read the module definition and its raw desktop entry.</param>
+        /// <param name="module">
+        /// <l>
+        ///   <zh-CN>非 null 的模块实例记录；其可空数据库字段由现有数据层解包。</zh-CN>
+        ///   <en>Non-null module-instance record; its nullable database fields are unwrapped by the existing data layer.</en>
+        /// </l>
+        /// </param>
+        /// <param name="moduleDefConfig">
+        /// <l>
+        ///   <zh-CN>用于读取模块定义及原始桌面入口的数据服务。</zh-CN>
+        ///   <en>Data service used to read the module definition and its raw desktop entry.</en>
+        /// </l>
+        /// </param>
         /// <remarks>
-        /// <see cref="DesktopSrc"/> 在此处仍是定义表中的原始值。页面动态加载前必须再经
-        /// <see cref="PortalModuleCatalog"/> 和 <see cref="PortalModulePathValidator"/> 解析，不能将本对象
-        /// 本身作为路径已验证的证明。
-        /// <see cref="DesktopSrc"/> remains the raw definition-table value here. A page must resolve it through
-        /// <see cref="PortalModuleCatalog"/> and <see cref="PortalModulePathValidator"/> before dynamic loading;
-        /// this object alone does not prove that the path was validated.
+        /// <lang>
+        ///   <zh-CN><see cref="DesktopSrc"/> 在此处仍是定义表中的原始值。页面动态加载前必须再经 <see cref="PortalModuleCatalog"/> 和 <see cref="PortalModulePathValidator"/> 解析，不能将本对象本身作为路径已验证的证明。</zh-CN>
+        ///   <en><see cref="DesktopSrc"/> remains the raw definition-table value here. A page must resolve it through <see cref="PortalModuleCatalog"/> and <see cref="PortalModulePathValidator"/> before dynamic loading; this object alone does not prove that the path was validated.</en>
+        /// </lang>
         /// </remarks>
         /// <exception cref="InvalidOperationException">
-        /// 中文：当模块记录缺少模块定义，或模块定义的严格查询无法得到唯一结果时抛出。
-        /// 该情形属于部署或配置完整性错误，调用方不得将其静默降级为“跳过模块”。
-        /// English: Thrown when the module record has no module definition or when its strict lookup does not return exactly one result.
-        /// This is a deployment or configuration-integrity error and must not be silently downgraded to skipping the module.
+        /// <lang>
+        ///   <zh-CN>当模块记录缺少模块定义，或模块定义的严格查询无法得到唯一结果时抛出。该情形属于部署或配置完整性错误，调用方不得将其静默降级为“跳过模块”。</zh-CN>
+        ///   <en>Thrown when the module record has no module definition or when its strict lookup does not return exactly one result. This is a deployment or configuration-integrity error and must not be silently downgraded to skipping the module.</en>
+        /// </lang>
         /// </exception>
         public ModuleSettings(IModuleItem module, IModuleDefsDb moduleDefConfig)
         {
@@ -40,7 +50,10 @@ namespace ASPNET.StarterKit.Portal
             CacheTime           = module.CacheTimeout.Value;
             ShowMobile          = module.ShowMobile.Value;
 
-            // 获取模块定义数据
+            // <lang>
+            //   <zh-CN>模块定义查询采用严格单条语义；失败会在数据访问层或构造函数边界显式暴露。</zh-CN>
+            //   <en>The module-definition lookup uses strict single-row semantics; failures surface explicitly at the data-access or constructor boundary.</en>
+            // </lang>
             IModuleDefinitionItem moduleDefinitionItem = moduleDefConfig.GetSingleModuleDefinition(module.ModuleDefId.Value);
 
             DesktopSrc = moduleDefinitionItem.DesktopSourceFile;            

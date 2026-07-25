@@ -6,7 +6,12 @@
     MasterPageFile="~/Default.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 中文 / English: 历史模块定义页只维护名称和受保护删除，路径字段保持只读安全边界。 --%>
+    <%--
+        <lang>
+            <zh-CN>历史模块定义页只维护名称和受保护删除，路径字段保持只读安全边界。</zh-CN>
+            <en>The legacy module-definition page only maintains names and protected deletion; source-path fields keep their read-only safety boundary.</en>
+        </lang>
+    --%>
     <div class="portal-admin-page portal-admin-module-definition-edit">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">

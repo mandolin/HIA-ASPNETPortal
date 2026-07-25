@@ -133,8 +133,10 @@ namespace ASPNET.StarterKit.Portal
 
         private static void AddDatabaseCheck(IList<PortalHealthCheckResult> checks, HttpContext context)
         {
-            // 中文：本检查需要健康状态和关联事件编号，不能复用仅记录结果的 PortalDiagnostics.CheckSqlConnection。
-            // English: This check needs a health status and correlated event id, so it cannot reuse the record-only PortalDiagnostics.CheckSqlConnection.
+            // <lang>
+            //   <zh-CN>本检查需要健康状态和关联事件编号，不能复用仅记录结果的 PortalDiagnostics.CheckSqlConnection。</zh-CN>
+            //   <en>This check needs a health status and correlated event id, so it cannot reuse the record-only PortalDiagnostics.CheckSqlConnection.</en>
+            // </lang>
             string connectionString;
             try
             {
