@@ -133,6 +133,12 @@ namespace ASPNET.StarterKit.Portal
             ShowMessage("更正请求已提交，等待管理员处理。");
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化允许用户提交更正的低敏字段列表。</zh-CN>
+        ///   <en>Initializes the low-sensitivity fields that users may submit for correction.</en>
+        /// </lang>
+        /// </summary>
         private void BindFieldList()
         {
             FieldNameList.Items.Clear();
@@ -142,6 +148,12 @@ namespace ASPNET.StarterKit.Portal
             FieldNameList.Items.Add(new ListItem("组织", "OrganizationDisplayName"));
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定当前登录用户的员工资料、表单可见性和最近请求列表。</zh-CN>
+        ///   <en>Binds the current signed-in user's employee profile, form visibility, and recent-request list.</en>
+        /// </lang>
+        /// </summary>
         private void BindProfile()
         {
             int userId = GetCurrentUserId();
@@ -165,6 +177,12 @@ namespace ASPNET.StarterKit.Portal
             BindRecentRequests(userId);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定当前用户最近提交的资料更正请求。</zh-CN>
+        ///   <en>Binds recent profile-correction requests submitted by the current user.</en>
+        /// </lang>
+        /// </summary>
         private void BindRecentRequests(int userId)
         {
             IList<EmployeeProfileCorrectionRequestInfo> requests = CorrectionRequestDb == null
@@ -175,6 +193,12 @@ namespace ASPNET.StarterKit.Portal
             RecentRequestsRepeater.DataBind();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前用户可提交更正请求的 Active 员工资料。</zh-CN>
+        ///   <en>Reads the active employee profile that the current user may submit correction requests for.</en>
+        /// </lang>
+        /// </summary>
         private EmployeeProfileCorrectionProfileView GetCurrentProfile(int userId)
         {
             if (CorrectionRequestDb == null ||
@@ -187,6 +211,12 @@ namespace ASPNET.StarterKit.Portal
             return CorrectionRequestDb.GetCurrentProfileForUser(userId);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把当前登录名解析为门户用户标识。</zh-CN>
+        ///   <en>Resolves the current sign-in name to a portal user identifier.</en>
+        /// </lang>
+        /// </summary>
         private int GetCurrentUserId()
         {
             string userName = GetCurrentUserName();
@@ -199,6 +229,12 @@ namespace ASPNET.StarterKit.Portal
             return user == null ? 0 : user.UserId;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>根据登录、schema 和用户解析状态生成低敏不可用提示。</zh-CN>
+        ///   <en>Builds a low-sensitivity unavailable message from sign-in, schema, and user-resolution state.</en>
+        /// </lang>
+        /// </summary>
         private string GetUnavailableMessage(int userId)
         {
             if (!IsCurrentUserAuthenticated())
@@ -216,6 +252,12 @@ namespace ASPNET.StarterKit.Portal
                 : "当前账号没有可提交更正请求的在职员工资料。";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断当前请求是否已有通过认证的门户身份。</zh-CN>
+        ///   <en>Determines whether the current request has an authenticated portal identity.</en>
+        /// </lang>
+        /// </summary>
         private bool IsCurrentUserAuthenticated()
         {
             return Context != null &&
@@ -224,11 +266,23 @@ namespace ASPNET.StarterKit.Portal
                    Context.User.Identity.IsAuthenticated;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前登录用户名，未登录时返回空文本。</zh-CN>
+        ///   <en>Reads the current signed-in user name, returning empty text when not signed in.</en>
+        /// </lang>
+        /// </summary>
         private string GetCurrentUserName()
         {
             return IsCurrentUserAuthenticated() ? Context.User.Identity.Name : string.Empty;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>尝试为已提交请求创建后台待办入口。</zh-CN>
+        ///   <en>Attempts to create an administration work-item entry for a submitted request.</en>
+        /// </lang>
+        /// </summary>
         private void TryEnsureWorkItem(long requestId, int employeeId, string fieldName)
         {
             // <lang>
@@ -253,16 +307,34 @@ namespace ASPNET.StarterKit.Portal
                 });
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把页面提示写入 Label，并在写入前进行 HTML 编码。</zh-CN>
+        ///   <en>Writes a page message to the label after HTML encoding.</en>
+        /// </lang>
+        /// </summary>
         private void ShowMessage(string message)
         {
             MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编码员工资料展示文本，避免用户资料直接进入标记层。</zh-CN>
+        ///   <en>Encodes employee-profile display text so user data does not enter markup directly.</en>
+        /// </lang>
+        /// </summary>
         private string EncodeDisplay(string value)
         {
             return Server.HtmlEncode(value ?? string.Empty);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按字段白名单读取当前资料值，用于阻止无变化提交。</zh-CN>
+        ///   <en>Reads the current profile value by field allowlist to block unchanged submissions.</en>
+        /// </lang>
+        /// </summary>
         private static string GetCurrentValue(EmployeeProfileCorrectionProfileView profile, string fieldName)
         {
             if (profile == null)
@@ -285,11 +357,23 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将空展示值转换为统一占位文本。</zh-CN>
+        ///   <en>Converts empty display values to the shared placeholder text.</en>
+        /// </lang>
+        /// </summary>
         private static string EmptyToNone(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>裁剪用户输入，避免提交文本超过持久化字段长度。</zh-CN>
+        ///   <en>Trims user input so submitted text does not exceed persistence field lengths.</en>
+        /// </lang>
+        /// </summary>
         private static string NormalizeInput(string value, int maxLength)
         {
             string normalized = (value ?? string.Empty).Trim();
@@ -305,6 +389,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class EmployeeProfileCorrectionRecentRequestRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从资料更正请求投影创建最近请求展示行。</zh-CN>
+        ///   <en>Creates a recent-request display row from a profile-correction request projection.</en>
+        /// </lang>
+        /// </summary>
         internal EmployeeProfileCorrectionRecentRequestRow(EmployeeProfileCorrectionRequestInfo request)
         {
             SubmittedUtcText = request.SubmittedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);

@@ -1,11 +1,19 @@
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 系统设置 registry 的只读展示信息。
-    /// Read-only display row for one registered system setting.
+    /// <lang>
+    ///   <zh-CN>系统设置 registry 的只读展示信息。</zh-CN>
+    ///   <en>Read-only display row for one registered system setting.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalSettingHealthInfo
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一条系统设置健康展示信息。</zh-CN>
+        ///   <en>Creates one system-setting health display row.</en>
+        /// </lang>
+        /// </summary>
         public PortalSettingHealthInfo(
             string key,
             string displayName,
@@ -27,50 +35,66 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 设置键名。
-        /// Setting key.
+        /// <l>
+        ///   <zh-CN>设置键名。</zh-CN>
+        ///   <en>Setting key.</en>
+        /// </l>
         /// </summary>
         public string Key { get; private set; }
 
         /// <summary>
-        /// 展示名称。
-        /// Display name.
+        /// <l>
+        ///   <zh-CN>展示名称。</zh-CN>
+        ///   <en>Display name.</en>
+        /// </l>
         /// </summary>
         public string DisplayName { get; private set; }
 
         /// <summary>
-        /// 值类型。
-        /// Value type.
+        /// <l>
+        ///   <zh-CN>值类型。</zh-CN>
+        ///   <en>Value type.</en>
+        /// </l>
         /// </summary>
         public string ValueType { get; private set; }
 
         /// <summary>
-        /// 当前有效值；敏感项不会展示明文。
-        /// Current effective value; sensitive values are not shown in plain text.
+        /// <l>
+        ///   <zh-CN>当前有效值；敏感项不会展示明文。</zh-CN>
+        ///   <en>Current effective value; sensitive values are not shown in plain text.</en>
+        /// </l>
         /// </summary>
         public string CurrentValue { get; private set; }
 
         /// <summary>
-        /// 当前值来源。
-        /// Current value source.
+        /// <l>
+        ///   <zh-CN>当前值来源。</zh-CN>
+        ///   <en>Current value source.</en>
+        /// </l>
         /// </summary>
         public string Source { get; private set; }
 
         /// <summary>
-        /// 是否敏感设置。
-        /// Whether this setting is sensitive.
+        /// <l>
+        ///   <zh-CN>是否敏感设置。</zh-CN>
+        ///   <en>Whether this setting is sensitive.</en>
+        /// </l>
         /// </summary>
         public bool IsSensitive { get; private set; }
 
         /// <summary>
-        /// 后续是否允许在线编辑。
-        /// Whether this setting may be edited online later.
+        /// <l>
+        ///   <zh-CN>是否允许在线编辑。</zh-CN>
+        ///   <en>Whether this setting may be edited online.</en>
+        /// </l>
         /// </summary>
         public bool CanEditOnline { get; private set; }
 
         /// <summary>
-        /// 变更后是否需要重启。
-        /// Whether changes require restart.
+        /// <l>
+        ///   <zh-CN>变更后是否需要重启。</zh-CN>
+        ///   <en>Whether changes require restart.</en>
+        /// </l>
         /// </summary>
         public bool RequiresRestart { get; private set; }
     }

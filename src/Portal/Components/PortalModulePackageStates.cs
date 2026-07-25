@@ -13,6 +13,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalModulePackageState
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一个模块包运行状态快照。</zh-CN>
+        ///   <en>Creates a runtime state snapshot for a module package.</en>
+        /// </lang>
+        /// </summary>
         internal PortalModulePackageState(
             string packageId,
             bool isEnabled,
@@ -72,6 +78,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalModulePackageStateReadResult
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建模块包状态读取结果。</zh-CN>
+        ///   <en>Creates a module-package state read result.</en>
+        /// </lang>
+        /// </summary>
         internal PortalModulePackageStateReadResult(bool isAvailable, PortalModulePackageState state)
         {
             IsAvailable = isAvailable;
@@ -97,6 +109,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalModulePackageStateWriteResult
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建模块包状态写入结果。</zh-CN>
+        ///   <en>Creates a module-package state write result.</en>
+        /// </lang>
+        /// </summary>
         internal PortalModulePackageStateWriteResult(bool succeeded, string message)
         {
             Succeeded = succeeded;
@@ -284,6 +302,12 @@ VALUES
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从 Unity 中解析运行期连接串并创建 SQL Server 连接。</zh-CN>
+        ///   <en>Resolves the runtime connection string from Unity and creates a SQL Server connection.</en>
+        /// </lang>
+        /// </summary>
         private static SqlConnection CreateConnection()
         {
             if (Global.Container == null)
@@ -295,6 +319,12 @@ VALUES
             return string.IsNullOrWhiteSpace(connectionString) ? null : new SqlConnection(connectionString);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查模块包状态表是否已部署。</zh-CN>
+        ///   <en>Checks whether the module-package state table has been deployed.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsTableAvailable(SqlConnection connection)
         {
             using (SqlCommand command = connection.CreateCommand())
@@ -306,6 +336,12 @@ VALUES
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>在事务中锁定并判断目标包状态行是否存在。</zh-CN>
+        ///   <en>Locks and determines whether the target package-state row exists within a transaction.</en>
+        /// </lang>
+        /// </summary>
         private static bool ExistsForUpdate(SqlConnection connection, SqlTransaction transaction, string packageId)
         {
             using (SqlCommand command = connection.CreateCommand())
@@ -323,6 +359,12 @@ SELECT CASE WHEN EXISTS
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前操作人用户名，未认证时使用匿名占位值。</zh-CN>
+        ///   <en>Reads the current actor user name, using an anonymous placeholder when unauthenticated.</en>
+        /// </lang>
+        /// </summary>
         private static string GetActorUserName(HttpContext context)
         {
             HttpContext current = context ?? HttpContext.Current;
@@ -335,6 +377,12 @@ SELECT CASE WHEN EXISTS
             return current.User.Identity.Name;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>添加必填文本参数，并使用诊断清理器限制长度和内容。</zh-CN>
+        ///   <en>Adds a required text parameter while using the diagnostic sanitizer to limit length and content.</en>
+        /// </lang>
+        /// </summary>
         private static void AddTextParameter(
             SqlCommand command,
             string parameterName,
@@ -347,6 +395,12 @@ SELECT CASE WHEN EXISTS
                 string.IsNullOrWhiteSpace(sanitized) ? fallback : sanitized;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>添加可空文本参数，空值写入数据库 NULL。</zh-CN>
+        ///   <en>Adds a nullable text parameter and writes database NULL for empty values.</en>
+        /// </lang>
+        /// </summary>
         private static void AddNullableTextParameter(SqlCommand command, string parameterName, int size, string value)
         {
             string sanitized = PortalDiagnosticSanitizer.SanitizeAndTruncate(value, size);

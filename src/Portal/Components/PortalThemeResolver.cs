@@ -50,6 +50,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalThemeContext
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建当前请求的主题上下文。</zh-CN>
+        ///   <en>Creates the theme context for the current request.</en>
+        /// </lang>
+        /// </summary>
         internal PortalThemeContext(string themeName, PortalThemeSource source, int? tabId, string fallbackReason)
         {
             ThemeName = themeName ?? PortalThemeResolver.DefaultThemeName;
@@ -94,11 +100,11 @@ namespace ASPNET.StarterKit.Portal
     /// Resolves and applies the portal Web Forms theme.
     /// </summary>
     /// <remarks>
-        /// 原生 Theme 只承担每页唯一基底；Tab 和后续模块差异通过稳定 CSS scope 表达。
+        /// 原生 Theme 只承担每页唯一基底；Tab 和模块差异通过稳定 CSS scope 表达。
         /// 主题值必须对应已部署且通过 manifest 校验的可信包，不能由查询字符串、远程 URL 或脚本决定。
         /// 解析优先级保持 Tab 覆盖、数据库运行设置、appSettings、Default；结果只在当前 HttpContext.Items 中缓存，
         /// 不构成跨请求主题缓存。
-        /// Native Theme provides the one base theme per page only; tab and future module variations use stable CSS
+        /// Native Theme provides the one base theme per page only; tab and module variations use stable CSS
         /// scopes. Theme values must resolve to a deployed package that passes manifest validation and cannot be
         /// selected by query strings, remote URLs, or scripts. Resolution priority remains Tab override, database runtime
         /// setting, appSettings, and Default. Results are cached only in the current HttpContext.Items, not across requests.
@@ -290,6 +296,12 @@ namespace ASPNET.StarterKit.Portal
             return builder.ToString();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把候选主题名解析为已验证部署主题，失败时回退 Default 并记录受限告警。</zh-CN>
+        ///   <en>Resolves a candidate theme name to a validated deployed theme, falling back to Default and recording a restricted warning on failure.</en>
+        /// </lang>
+        /// </summary>
         private static string ResolveTrustedThemeName(
             string requestedThemeName,
             HttpContext context,
@@ -311,6 +323,12 @@ namespace ASPNET.StarterKit.Portal
             return DefaultThemeName;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把运行期设置来源转换为主题来源枚举。</zh-CN>
+        ///   <en>Converts runtime-setting source into the theme-source enumeration.</en>
+        /// </lang>
+        /// </summary>
         private static PortalThemeSource ToThemeSource(
             PortalRuntimeSettingSource settingSource,
             bool usedFallback)
@@ -331,6 +349,12 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断当前请求是否为后台页，后台页不参与 Tab 主题覆盖。</zh-CN>
+        ///   <en>Determines whether the current request is an administration page, which does not participate in tab theme overrides.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsAdminRequest(HttpContext context)
         {
             HttpContext current = context ?? HttpContext.Current;
@@ -340,6 +364,12 @@ namespace ASPNET.StarterKit.Portal
             return path.StartsWith("~/Admin/", StringComparison.OrdinalIgnoreCase);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从当前门户上下文读取活动 Tab 标识，无法取得时返回 null。</zh-CN>
+        ///   <en>Reads the active tab identifier from the current portal context, returning null when unavailable.</en>
+        /// </lang>
+        /// </summary>
         private static int? TryGetActiveTabId(HttpContext context)
         {
             try
@@ -355,6 +385,12 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把主题、pane 或包标识转换为稳定 CSS class 片段。</zh-CN>
+        ///   <en>Converts a theme, pane, or package identifier into a stable CSS class segment.</en>
+        /// </lang>
+        /// </summary>
         private static string NormalizeCssSegment(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -382,6 +418,12 @@ namespace ASPNET.StarterKit.Portal
             return builder.Length == 0 ? "default" : builder.ToString();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>记录主题回退告警，并按请求主题和原因去重。</zh-CN>
+        ///   <en>Records a theme fallback warning and de-duplicates by requested theme and reason.</en>
+        /// </lang>
+        /// </summary>
         private static void TraceFallback(HttpContext context, string requestedTheme, string fallbackReason)
         {
             string requested = PortalDiagnosticSanitizer.SanitizeAndTruncate(requestedTheme, 100);

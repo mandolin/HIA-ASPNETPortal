@@ -16,6 +16,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalModulePackage
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一个已通过 manifest 和资源校验的模块包元数据对象。</zh-CN>
+        ///   <en>Creates metadata for a module package that has passed manifest and resource validation.</en>
+        /// </lang>
+        /// </summary>
         internal PortalModulePackage(
             string directoryName,
             string packageId,
@@ -83,6 +89,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalModuleStyleResource
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一个已验证模块包 CSS 资源引用。</zh-CN>
+        ///   <en>Creates a CSS resource reference for a validated module package.</en>
+        /// </lang>
+        /// </summary>
         internal PortalModuleStyleResource(string packageId, string virtualPath)
         {
             PackageId = packageId ?? string.Empty;
@@ -108,6 +120,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalModuleRuntimeDescriptor
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建当前模块实例的受控运行描述。</zh-CN>
+        ///   <en>Creates the controlled runtime descriptor for the current module instance.</en>
+        /// </lang>
+        /// </summary>
         internal PortalModuleRuntimeDescriptor(
             string desktopSource,
             bool isManagedPackage,
@@ -209,9 +227,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
-            // 重复 PackageId 会让状态表、审计和缓存身份失去唯一归属，因此整组包都不作为可信包返回。
-            // A duplicate PackageId makes state rows, audit records, and cache identity ambiguous, so no package in
-            // that duplicate group is returned as trusted.
+            // <lang>
+            //   <zh-CN>重复 PackageId 会让状态表、审计和缓存身份失去唯一归属，因此整组包都不作为可信包返回。</zh-CN>
+            //   <en>A duplicate PackageId makes state rows, audit records, and cache identity ambiguous, so no package in that duplicate group is returned as trusted.</en>
+            // </lang>
             return packages
                 .GroupBy(item => item.PackageId, StringComparer.OrdinalIgnoreCase)
                 .Where(group => group.Count() == 1)
@@ -394,6 +413,12 @@ namespace ASPNET.StarterKit.Portal
             return !string.IsNullOrWhiteSpace(packageId) && PackageIdPattern.IsMatch(packageId.Trim());
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按目录名读取并验证一个受信任部署模块包。</zh-CN>
+        ///   <en>Reads and validates one trusted-deployment module package by directory name.</en>
+        /// </lang>
+        /// </summary>
         private static bool TryReadPackage(string directoryName, out PortalModulePackage package, out string reason)
         {
             package = null;
@@ -490,12 +515,24 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证模块 manifest schemaVersion 是否为当前支持版本。</zh-CN>
+        ///   <en>Validates whether the module manifest schemaVersion is currently supported.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsSchemaVersionSupported(JObject manifest)
         {
             JToken token = manifest["schemaVersion"];
             return token != null && token.Type == JTokenType.Integer && token.Value<int>() == ManifestSchemaVersion;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取必填字符串 manifest 属性。</zh-CN>
+        ///   <en>Reads a required string manifest property.</en>
+        /// </lang>
+        /// </summary>
         private static string ReadRequiredString(JObject manifest, string propertyName, int maximumLength)
         {
             string value = ReadOptionalString(manifest, propertyName, maximumLength);
@@ -507,6 +544,12 @@ namespace ASPNET.StarterKit.Portal
             return value;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取可选字符串 manifest 属性，并执行类型和长度检查。</zh-CN>
+        ///   <en>Reads an optional string manifest property with type and length checks.</en>
+        /// </lang>
+        /// </summary>
         private static string ReadOptionalString(JObject manifest, string propertyName, int maximumLength)
         {
             JToken token = manifest[propertyName];
@@ -529,6 +572,12 @@ namespace ASPNET.StarterKit.Portal
             return value;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取并验证模块包声明的站内静态资源。</zh-CN>
+        ///   <en>Reads and validates site-local static resources declared by a module package.</en>
+        /// </lang>
+        /// </summary>
         private static IList<string> ReadAndValidateResources(JObject manifest, string packagePath)
         {
             JArray resources = manifest["resources"] as JArray;
@@ -563,6 +612,12 @@ namespace ASPNET.StarterKit.Portal
             return validatedResources.AsReadOnly();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证资源路径为包内相对路径，且不包含外部 URL 或目录逃逸。</zh-CN>
+        ///   <en>Validates that a resource path is package-relative and contains no external URL or directory escape.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsValidResourcePath(string resource)
         {
             if (string.IsNullOrWhiteSpace(resource) || resource.StartsWith("/", StringComparison.Ordinal) ||
@@ -575,6 +630,12 @@ namespace ASPNET.StarterKit.Portal
             return segments.All(segment => !string.IsNullOrWhiteSpace(segment) && segment != "." && segment != "..");
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断资源扩展名是否属于当前模块包允许的 CSS 或图片类型。</zh-CN>
+        ///   <en>Determines whether the resource extension is an allowed CSS or image type for module packages.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsAllowedResourceExtension(string resource)
         {
             string extension = Path.GetExtension(resource);
@@ -586,6 +647,12 @@ namespace ASPNET.StarterKit.Portal
                    string.Equals(extension, ".webp", StringComparison.OrdinalIgnoreCase);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断一个旧模块路径是否位于带 manifest 的候选包目录下。</zh-CN>
+        ///   <en>Determines whether a legacy module path sits under a candidate package directory with a manifest.</en>
+        /// </lang>
+        /// </summary>
         private static bool HasManifestCandidate(string source)
         {
             string[] segments = source.Split('/');
@@ -611,12 +678,24 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断当前请求是否为后台页面，以避免后台维护页加载前台模块样式。</zh-CN>
+        ///   <en>Determines whether the current request is an administration page so front-end module styles are not loaded there.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsAdminRequest(HttpContext context)
         {
             string path = context.Request == null ? string.Empty : context.Request.AppRelativeCurrentExecutionFilePath;
             return path.StartsWith("~/Admin/", StringComparison.OrdinalIgnoreCase);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>在根目录内解析子路径，并拒绝目录逃逸。</zh-CN>
+        ///   <en>Resolves a child path inside a root directory and rejects directory escape.</en>
+        /// </lang>
+        /// </summary>
         private static string GetChildPath(string rootPath, string childPath)
         {
             string normalizedRoot = Path.GetFullPath(rootPath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);

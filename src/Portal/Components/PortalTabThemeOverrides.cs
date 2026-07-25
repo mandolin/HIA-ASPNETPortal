@@ -13,6 +13,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalTabThemeOverrideReadResult
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建 Tab 主题覆盖读取结果。</zh-CN>
+        ///   <en>Creates a tab theme-override read result.</en>
+        /// </lang>
+        /// </summary>
         internal PortalTabThemeOverrideReadResult(bool isAvailable, bool isFound, string themeName)
         {
             IsAvailable = isAvailable;
@@ -45,6 +51,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalTabThemeOverrideWriteResult
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建 Tab 主题覆盖写入或删除结果。</zh-CN>
+        ///   <en>Creates a tab theme-override write or delete result.</en>
+        /// </lang>
+        /// </summary>
         internal PortalTabThemeOverrideWriteResult(bool succeeded, string message)
         {
             Succeeded = succeeded;
@@ -214,7 +226,7 @@ VALUES
         /// <param name="context">当前 HTTP 上下文，用于诊断。Current HTTP context for diagnostics.</param>
         /// <returns>删除结果。Deletion result.</returns>
         /// <remarks>
-        /// 删除只移除数据库覆盖值；后续请求按主题解析器的全局设置、appSettings 或 Default 回退，且本方法不自行授权或审计。
+        /// 删除只移除数据库覆盖值；下一次请求按主题解析器的全局设置、appSettings 或 Default 回退，且本方法不自行授权或审计。
         /// Deletion removes only the database override. Later requests fall back through the resolver's global setting,
         /// appSettings, or Default, and this method performs neither authorization nor audit itself.
         /// </remarks>
@@ -259,6 +271,12 @@ WHERE [TabId] = @TabId;";
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从 Unity 中解析运行期连接串并创建 SQL Server 连接。</zh-CN>
+        ///   <en>Resolves the runtime connection string from Unity and creates a SQL Server connection.</en>
+        /// </lang>
+        /// </summary>
         private static SqlConnection CreateConnection()
         {
             if (Global.Container == null)
@@ -270,6 +288,12 @@ WHERE [TabId] = @TabId;";
             return string.IsNullOrWhiteSpace(connectionString) ? null : new SqlConnection(connectionString);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查 Tab 主题覆盖表是否已部署。</zh-CN>
+        ///   <en>Checks whether the tab theme-override table has been deployed.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsTableAvailable(SqlConnection connection)
         {
             using (SqlCommand command = connection.CreateCommand())
@@ -281,6 +305,12 @@ WHERE [TabId] = @TabId;";
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>在事务中锁定并判断指定 Tab 覆盖行是否存在。</zh-CN>
+        ///   <en>Locks and determines whether the specified tab override row exists within a transaction.</en>
+        /// </lang>
+        /// </summary>
         private static bool ExistsForUpdate(SqlConnection connection, SqlTransaction transaction, int tabId)
         {
             using (SqlCommand command = connection.CreateCommand())
@@ -298,6 +328,12 @@ SELECT CASE WHEN EXISTS
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前操作人用户名，未认证时使用匿名占位值。</zh-CN>
+        ///   <en>Reads the current actor user name, using an anonymous placeholder when unauthenticated.</en>
+        /// </lang>
+        /// </summary>
         private static string GetActorUserName(HttpContext context)
         {
             HttpContext current = context ?? HttpContext.Current;
@@ -310,6 +346,12 @@ SELECT CASE WHEN EXISTS
             return current.User.Identity.Name;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>添加文本参数，并在写入前进行长度限制和诊断级清理。</zh-CN>
+        ///   <en>Adds a text parameter with length limiting and diagnostic-grade sanitization before writing.</en>
+        /// </lang>
+        /// </summary>
         private static void AddTextParameter(
             SqlCommand command,
             string parameterName,
