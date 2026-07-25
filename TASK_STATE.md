@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 第四十一批已完成 |
-| 当前唯一下一步 | 继续 P16.1 第四十二批：`EditLinks.aspx`、`EditContacts.aspx`、`Events.ascx`、`Signin.ascx`、`Tabs.ascx`、`Users.ascx`、`UserEmployeeBindingEdit.aspx`、`ThemeSettings.aspx`、`TabLayout.aspx`、`ModuleDefs.ascx`。 |
-| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前四十一批已完成，非 designer `MissingNodeDocumentation` 已清零，`LegacyBilingualFormat` 降至 `113`；后续继续清理剩余非 designer 页面和控件旧双语格式，并执行 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁。 |
+| 当前阶段 | `W-anp-P16.1` 第四十二批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第四十三批非 designer 收尾：`SystemHealth.aspx`、`ModuleSettings.aspx`、`NotImplemented.aspx`、`OperationAudits.aspx`、`OrganizationUnitEdit.aspx`、`SecurityRoles.aspx`、`SiteSettings.ascx`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前四十二批已完成，非 designer `MissingNodeDocumentation` 已清零，`LegacyBilingualFormat` 降至 `103`；后续清理剩余 7 个非 designer 页面和控件旧双语格式，并执行 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁。Designer 与 PowerShell 分别按 P16.5/P16.4 分流。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items
@@ -120,13 +120,14 @@
 | P16.1 第三十九批注释迁移 | completed | 主仓库源码提交 `b813274`；`work-zone/dev/plans/W-anp-P16.1-thirty-ninth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十九批清理 10 个 Admin WebForms/C# 文件旧双语格式，`LegacyBilingualFormat` 降至 `139`。 |
 | P16.1 第四十批注释迁移 | completed | 主仓库源码提交 `fffc236`；`work-zone/dev/plans/W-anp-P16.1-fortieth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第四十批清理 10 个非 designer、非脚本文件旧双语格式，`LegacyBilingualFormat` 降至 `123`。 |
 | P16.1 第四十一批注释迁移 | completed | 主仓库源码提交 `bc6e5f4`；`work-zone/dev/plans/W-anp-P16.1-forty-first-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第四十一批清理 10 个 DesktopModules/桌面入口文件旧双语格式，`LegacyBilingualFormat` 降至 `113`。 |
+| P16.1 第四十二批注释迁移 | completed | 主仓库源码提交 `6843612`；WorkZone 资料提交 `72d4787`；`work-zone/dev/plans/W-anp-P16.1-forty-second-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第四十二批清理 10 个剩余非 designer 页面/控件旧双语格式，`LegacyBilingualFormat` 降至 `103`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 第四十一批源码提交 `bc6e5f4`；任务账本由本次同步提交记录 | 第四十一批源码注释迁移已提交；任务账本同步到第四十二批唯一下一步。 |
-| WorkZone | 第四十一批资料提交 `82df2c2` | 第四十一批清单、进度、结果和证据已提交；下一步进入第四十二批。 |
+| 主仓库 | 第四十二批源码提交 `6843612`；任务账本由本次同步提交记录 | 第四十二批源码注释迁移已提交；任务账本同步到第四十三批唯一下一步。 |
+| WorkZone | 第四十二批资料提交 `72d4787` | 第四十二批清单、进度、结果和证据已提交；下一步进入第四十三批非 designer 收尾。 |
 
 ## Upcoming Planning Constraints
 
@@ -403,6 +404,12 @@
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=115`。 |
 | `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1478`，`Portal.Components` XML member count 为 `652`，`Portal.Components.Data` XML member count 为 `21`，`Portal.Components.Data1` XML member count 为 `654`。 |
 | `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260726-072720.*`，`LegacyBilingualFormat=113`，`TodoOrDeferredMarker=113`，`LowValueRestatement=7`，`MissingNodeDocumentation=0`，`HighRiskScriptCandidate=22`。 |
+| P16.1 第四十二批旧格式扫描 | 通过；第四十二批 10 个文件旧 `中文：` / `英文：` / `English:` / `中文 / English` 模式为 `0`。 |
+| P16.1 第四十二批编码和空白检查 | 通过；第四十二批 10 个源文件 UTF-8 无 BOM，`git diff --check -- 第四十二批文件` 无空白错误。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；16 个公开文档已登记，失败数 `0`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=115`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1478`，`Portal.Components` XML member count 为 `652`，`Portal.Components.Data` XML member count 为 `21`，`Portal.Components.Data1` XML member count 为 `654`。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260726-0742.*`，`LegacyBilingualFormat=103`，`TodoOrDeferredMarker=113`，`LowValueRestatement=7`，`MissingNodeDocumentation=0`，`HighRiskScriptCandidate=22`。 |
 
 ## Known Residual Working Tree Items
 
