@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 第二十七批已完成 |
-| 当前唯一下一步 | 继续 P16.1 第二十八批：`EmployeeProfileCorrectionReviewRequest.cs`、`IDiscussionDb.cs`、`IPortalSecurity.cs`、`IDocumentItemDetails.cs`、`UserEmployeeBindingEndRequest.cs`。 |
-| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前二十七批已完成，剩余批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
+| 当前阶段 | `W-anp-P16.1` 第二十八批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第二十九批：`DiagnosticLogDetail.aspx.cs`、`Announcements.ascx.cs`、`ModuleDefinitions.aspx.cs`、`EmployeeInfo.cs`、`PortalDiagnosticQueryService.cs`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前二十八批已完成，剩余批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
 | 最近状态更新时间 | 2026-07-25 |
 
 ## Recent Completed Items
@@ -106,13 +106,14 @@
 | P16.1 第二十五批注释迁移 | completed | 主仓库源码提交 `ed01cf5`，WorkZone 资料提交 `28b352e`；`work-zone/dev/plans/W-anp-P16.1-twenty-fifth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二十五批 5 个文件旧双语模式清零，手工补强资料更正状态、账号员工绑定请求、讨论数据访问、联系人展示和受信任 HTML 渲染边界，`LegacyBilingualFormat` 降至 `307`，`LowValueRestatement` 降至 `8`。 |
 | P16.1 第二十六批注释迁移 | completed | 主仓库源码提交 `b0a722f`，WorkZone 资料提交 `7ddbbb7`；`work-zone/dev/plans/W-anp-P16.1-twenty-sixth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二十六批 5 个文件旧双语模式清零，手工补强旧内容模块 Data1 数据访问实现的存储过程、模块归属、空值、排序、URL/HTML 信任边界说明，`LegacyBilingualFormat` 降至 `277`，`MissingNodeDocumentation` 降至 `188`。 |
 | P16.1 第二十七批注释迁移 | completed | 主仓库源码提交 `03a74e4`，WorkZone 资料提交 `f112581`；`work-zone/dev/plans/W-anp-P16.1-twenty-seventh-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二十七批 5 个文件旧双语模式清零，手工补强旧内容模块数据访问契约接口的参数、返回、模块归属、URL/HTML 安全和调用层职责说明，`LegacyBilingualFormat` 降至 `244`。 |
+| P16.1 第二十八批注释迁移 | completed | 主仓库源码提交 `78c8476`，WorkZone 资料提交 `5f2bd8c`；`work-zone/dev/plans/W-anp-P16.1-twenty-eighth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第二十八批 5 个文件旧双语模式清零，手工补强资料更正审核请求、讨论契约、模块编辑权限、历史文档下载详情和账号员工解绑请求的授权、状态、敏感信息、附件输出和审计边界，`LegacyBilingualFormat` 降至 `212`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 第二十七批源码提交 `03a74e4`；任务账本由本次同步提交记录 | 第二十七批源码迁移已提交；任务账本已同步到第二十八批唯一下一步。 |
-| WorkZone | 第二十七批资料提交 `f112581` | 第二十七批清单、进度、结果和证据已提交；下一步进入第二十八批。 |
+| 主仓库 | 第二十八批源码提交 `78c8476`；任务账本由本次同步提交记录 | 第二十八批源码迁移已提交；任务账本已同步到第二十九批唯一下一步。 |
+| WorkZone | 第二十八批资料提交 `5f2bd8c` | 第二十八批清单、进度、结果和证据已提交；下一步进入第二十九批。 |
 
 ## Upcoming Planning Constraints
 
@@ -316,6 +317,11 @@
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=109`。 |
 | `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1352`，`Portal.Components` XML member count 为 `545`，`Portal.Components.Data` XML member count 为 `10`，`Portal.Components.Data1` XML member count 为 `539`，保留既有 `CS1591` 历史警告。 |
 | `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260725-1835.*`，`LegacyBilingualFormat=244`，`TodoOrDeferredMarker=116`，`LowValueRestatement=8`，`MissingNodeDocumentation=188`。 |
+| P16.1 第二十八批旧格式扫描 | 通过；第二十八批 5 个文件旧 `中文：` / `英文：` / `English:` 模式为 `0`，裸中文/英文 `//` 流程注释和 TODO/Deferred 误判词均为 `0`。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；16 个公开文档已登记，失败数 `0`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=110`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1352`，`Portal.Components` XML member count 为 `545`，`Portal.Components.Data` XML member count 为 `10`，`Portal.Components.Data1` XML member count 为 `539`，保留既有 `CS1591` 历史警告。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260725-1848.*`，`LegacyBilingualFormat=212`，`TodoOrDeferredMarker=116`，`LowValueRestatement=8`，`MissingNodeDocumentation=188`。 |
 
 ## Known Residual Working Tree Items
 
