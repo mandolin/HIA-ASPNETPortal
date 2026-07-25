@@ -75,6 +75,12 @@ namespace ASPNET.StarterKit.Portal
             BindWorkItems();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化待办状态筛选项。</zh-CN>
+        ///   <en>Initializes work-item status filter options.</en>
+        /// </lang>
+        /// </summary>
         private void BindStatusFilter()
         {
             StatusFilterList.Items.Clear();
@@ -87,6 +93,12 @@ namespace ASPNET.StarterKit.Portal
             StatusFilterList.SelectedValue = PortalWorkItemStatuses.Open;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按当前状态筛选读取后台待办列表。</zh-CN>
+        ///   <en>Reads the administration work-item list using the current status filter.</en>
+        /// </lang>
+        /// </summary>
         private void BindWorkItems()
         {
             if (WorkItemDb == null)
@@ -111,6 +123,12 @@ namespace ASPNET.StarterKit.Portal
                                " work items; count: " + workItems.Count.ToString(CultureInfo.InvariantCulture) + ".";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显示待办数据不可用提示，并清空列表。</zh-CN>
+        ///   <en>Displays work-item data unavailable messages and clears the list.</en>
+        /// </lang>
+        /// </summary>
         private void ShowUnavailable(string message)
         {
             MessageLabel.Text = message ?? string.Empty;
@@ -128,6 +146,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class PortalWorkItemAdminRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从待办数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from a work-item data object.</en>
+        /// </lang>
+        /// </summary>
         internal PortalWorkItemAdminRow(PortalWorkItemInfo item)
         {
             WorkItemId = item.WorkItemId;
@@ -224,6 +248,12 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public string CompletedUtcText { get; private set; }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>生成用户或角色分派的展示文本。</zh-CN>
+        ///   <en>Builds display text for user or role assignment.</en>
+        /// </lang>
+        /// </summary>
         private static string GetAssignedText(PortalWorkItemInfo item)
         {
             if (item.AssignedUserId.HasValue)
@@ -235,6 +265,12 @@ namespace ASPNET.StarterKit.Portal
             return "Role " + EmptyToNone(item.AssignedRoleKey);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>根据业务类型生成后台查看入口。</zh-CN>
+        ///   <en>Builds the administration viewing entry URL from the business kind.</en>
+        /// </lang>
+        /// </summary>
         private static string GetBusinessUrl(string businessKind)
         {
             if (string.Equals(businessKind, PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest, StringComparison.Ordinal))
@@ -245,6 +281,12 @@ namespace ASPNET.StarterKit.Portal
             return "NotImplemented.aspx";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将空展示值统一转换为页面占位文本。</zh-CN>
+        ///   <en>Converts empty display values to the shared page placeholder text.</en>
+        /// </lang>
+        /// </summary>
         private static string EmptyToNone(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? "(none)" : value;

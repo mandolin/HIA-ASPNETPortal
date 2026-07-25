@@ -7,6 +7,18 @@ using System.Web.Script.Serialization;
 
 namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
 {
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>执行 HIA 外围契约 fixture 验证的控制台入口。</zh-CN>
+    ///   <en>Console entry point for validating HIA peripheral-contract fixtures.</en>
+    /// </lang>
+    /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>该 proof 只将受控 JSON fixture 映射到门户 DTO，再调用正式契约验证器；它不复制第二套业务规则。</zh-CN>
+    ///   <en>This proof maps controlled JSON fixtures to portal DTOs and then invokes the real contract validator; it does not duplicate a second rule set.</en>
+    /// </lang>
+    /// </remarks>
     internal static class Program
     {
         private static readonly ProofCase[] FixtureCases =
@@ -22,6 +34,24 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
             new ProofCase("P3H09.ContractVersion", "invalid-contract-version.json", false, "HIA_PERIPHERAL_UNSUPPORTED_VERSION")
         };
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取 fixture 目录并执行所有正反例契约验证。</zh-CN>
+        ///   <en>Reads the fixture directory and runs all positive and negative contract checks.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="args">
+        /// <l>
+        ///   <zh-CN>必须包含 <c>--fixtures</c> 的参数数组。</zh-CN>
+        ///   <en>Argument array that must contain <c>--fixtures</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>0 表示全部 fixture 通过，1 表示契约验证失败，2 表示参数无效。</zh-CN>
+        ///   <en>Returns 0 when all fixtures pass, 1 for contract proof failure, and 2 for invalid arguments.</en>
+        /// </l>
+        /// </returns>
         private static int Main(string[] args)
         {
             string fixtureDirectory;
@@ -54,6 +84,12 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
             return passed ? 0 : 1;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从命令行读取并校验 fixture 根目录。</zh-CN>
+        ///   <en>Reads and validates the fixture root directory from command-line arguments.</en>
+        /// </lang>
+        /// </summary>
         private static bool TryReadFixtureDirectory(string[] args, out string fixtureDirectory)
         {
             fixtureDirectory = string.Empty;
@@ -74,6 +110,12 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
             return !string.IsNullOrWhiteSpace(fixtureDirectory) && Directory.Exists(fixtureDirectory);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取单个 fixture、映射 envelope，并调用正式验证器。</zh-CN>
+        ///   <en>Reads one fixture, maps the envelope, and invokes the production validator.</en>
+        /// </lang>
+        /// </summary>
         private static bool TryValidateFixture(
             string fixtureDirectory,
             string fixtureFileName,
@@ -114,6 +156,12 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从 fixture 根对象读取 producer 描述。</zh-CN>
+        ///   <en>Reads the producer descriptor from the fixture root object.</en>
+        /// </lang>
+        /// </summary>
         private static PortalHiaProducerDescriptor ReadProducer(IDictionary<string, object> root)
         {
             IDictionary<string, object> producer = ReadMap(root, "producer");
@@ -124,6 +172,12 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
             };
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指定键上的 JSON 对象映射。</zh-CN>
+        ///   <en>Reads the JSON object map at the specified key.</en>
+        /// </lang>
+        /// </summary>
         private static IDictionary<string, object> ReadMap(IDictionary<string, object> source, string key)
         {
             if (source == null || string.IsNullOrWhiteSpace(key))
@@ -135,6 +189,12 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
             return source.TryGetValue(key, out value) ? value as IDictionary<string, object> : null;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>以 invariant culture 读取指定键上的文本值。</zh-CN>
+        ///   <en>Reads a text value at the specified key using invariant culture.</en>
+        /// </lang>
+        /// </summary>
         private static string ReadText(IDictionary<string, object> source, string key)
         {
             if (source == null || string.IsNullOrWhiteSpace(key))
@@ -148,8 +208,20 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
                 : string.Empty;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>一个 HIA 契约 fixture 的期望结果定义。</zh-CN>
+        ///   <en>Expected result definition for one HIA contract fixture.</en>
+        /// </lang>
+        /// </summary>
         private sealed class ProofCase
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>创建 fixture proof 用例。</zh-CN>
+            ///   <en>Creates a fixture proof case.</en>
+            /// </lang>
+            /// </summary>
             public ProofCase(string id, string fileName, bool expectedValid, string expectedCode)
             {
                 Id = id;
@@ -158,12 +230,36 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
                 ExpectedCode = expectedCode;
             }
 
+            /// <summary>
+            /// <l>
+            ///   <zh-CN>proof 步骤标识。</zh-CN>
+            ///   <en>Proof step identifier.</en>
+            /// </l>
+            /// </summary>
             public string Id { get; private set; }
 
+            /// <summary>
+            /// <l>
+            ///   <zh-CN>fixture 文件名。</zh-CN>
+            ///   <en>Fixture file name.</en>
+            /// </l>
+            /// </summary>
             public string FileName { get; private set; }
 
+            /// <summary>
+            /// <l>
+            ///   <zh-CN>期望验证是否通过。</zh-CN>
+            ///   <en>Whether validation is expected to pass.</en>
+            /// </l>
+            /// </summary>
             public bool ExpectedValid { get; private set; }
 
+            /// <summary>
+            /// <l>
+            ///   <zh-CN>期望的稳定验证代码。</zh-CN>
+            ///   <en>Expected stable validation code.</en>
+            /// </l>
+            /// </summary>
             public string ExpectedCode { get; private set; }
         }
     }

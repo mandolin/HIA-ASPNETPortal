@@ -75,6 +75,12 @@ namespace ASPNET.StarterKit.Portal
             BindDirectory();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化员工状态与绑定状态筛选项。</zh-CN>
+        ///   <en>Initializes employee-status and binding-status filter options.</en>
+        /// </lang>
+        /// </summary>
         private void BindFilterLists()
         {
             EmployeeStatusList.Items.Clear();
@@ -93,6 +99,12 @@ namespace ASPNET.StarterKit.Portal
             BindingStatusList.SelectedValue = PortalUserEmployeeBindingStatuses.Active;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取组织、员工和账号绑定数据，并绑定到三个只读列表。</zh-CN>
+        ///   <en>Reads organization, employee, and user-binding data and binds them to the three read-only lists.</en>
+        /// </lang>
+        /// </summary>
         private void BindDirectory()
         {
             if (EmployeeDirectoryDb == null)
@@ -153,6 +165,12 @@ namespace ASPNET.StarterKit.Portal
                                ", bindings: " + bindings.Count.ToString(CultureInfo.InvariantCulture) + ".";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>根据页面输入创建目录查询的公共筛选对象。</zh-CN>
+        ///   <en>Creates the shared directory query filter from page inputs.</en>
+        /// </lang>
+        /// </summary>
         private EmployeeDirectoryQuery CreateCommonQuery()
         {
             return new EmployeeDirectoryQuery
@@ -163,6 +181,12 @@ namespace ASPNET.StarterKit.Portal
             };
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显示数据服务或 schema 不可用提示，并清空只读结果区。</zh-CN>
+        ///   <en>Displays data-service or schema-unavailable messages and clears the read-only result area.</en>
+        /// </lang>
+        /// </summary>
         private void ShowUnavailable(string message)
         {
             MessageLabel.Text = message ?? string.Empty;
@@ -176,6 +200,12 @@ namespace ASPNET.StarterKit.Portal
             BindingsRepeater.DataBind();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>生成父级组织展示文本，优先显示本页已读取到的组织名称。</zh-CN>
+        ///   <en>Builds parent-organization display text, preferring organization names already read by this page.</en>
+        /// </lang>
+        /// </summary>
         private static string GetParentText(IOrganizationUnitInfo organization, IDictionary<int, string> organizationNames)
         {
             if (!organization.ParentOrganizationUnitId.HasValue)
@@ -202,6 +232,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class OrganizationDirectoryRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从组织数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from an organization data object.</en>
+        /// </lang>
+        /// </summary>
         internal OrganizationDirectoryRow(IOrganizationUnitInfo organization, string parentText)
         {
             OrganizationUnitId = organization.OrganizationUnitId;
@@ -279,6 +315,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class EmployeeDirectoryRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从员工数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from an employee data object.</en>
+        /// </lang>
+        /// </summary>
         internal EmployeeDirectoryRow(IEmployeeInfo employee)
         {
             EmployeeId = employee.EmployeeId;
@@ -386,6 +428,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class UserEmployeeBindingDirectoryRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从账号员工绑定数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from a user-employee binding data object.</en>
+        /// </lang>
+        /// </summary>
         internal UserEmployeeBindingDirectoryRow(IUserEmployeeBindingInfo binding)
         {
             BindingId = binding.BindingId;

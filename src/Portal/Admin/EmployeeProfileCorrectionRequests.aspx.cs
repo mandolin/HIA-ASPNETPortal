@@ -145,6 +145,12 @@ namespace ASPNET.StarterKit.Portal
             BindRequests();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化资料更正请求状态筛选项。</zh-CN>
+        ///   <en>Initializes employee-profile correction request status filter options.</en>
+        /// </lang>
+        /// </summary>
         private void BindStatusFilter()
         {
             StatusFilterList.Items.Clear();
@@ -156,6 +162,12 @@ namespace ASPNET.StarterKit.Portal
             StatusFilterList.SelectedValue = EmployeeProfileCorrectionRequestStatuses.Submitted;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前状态筛选下的更正请求并绑定后台列表。</zh-CN>
+        ///   <en>Reads correction requests for the current status filter and binds the administration list.</en>
+        /// </lang>
+        /// </summary>
         private void BindRequests()
         {
             if (CorrectionRequestDb == null)
@@ -180,6 +192,12 @@ namespace ASPNET.StarterKit.Portal
                                " requests; count: " + requests.Count.ToString(CultureInfo.InvariantCulture) + ".";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显示请求数据不可用提示，并清空请求列表。</zh-CN>
+        ///   <en>Displays request-data unavailable messages and clears the request list.</en>
+        /// </lang>
+        /// </summary>
         private void ShowUnavailable(string message)
         {
             MessageLabel.Text = message ?? string.Empty;
@@ -188,6 +206,12 @@ namespace ASPNET.StarterKit.Portal
             RequestsRepeater.DataBind();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>确认当前用户具备查看更正请求的权限。</zh-CN>
+        ///   <en>Ensures that the current user can view correction requests.</en>
+        /// </lang>
+        /// </summary>
         private bool EnsureCanViewRequests()
         {
             return PortalAuthorization.EnsureAnyPermission(
@@ -196,6 +220,12 @@ namespace ASPNET.StarterKit.Portal
                 PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按目标状态确认当前用户具备处理权限。</zh-CN>
+        ///   <en>Ensures that the current user has processing permission for the target status.</en>
+        /// </lang>
+        /// </summary>
         private bool EnsureCanApplyRequestStatus(string targetStatus)
         {
             if (string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal))
@@ -212,6 +242,12 @@ namespace ASPNET.StarterKit.Portal
                 PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断列表命令传入的目标状态是否在本页允许范围内。</zh-CN>
+        ///   <en>Determines whether the target status from a list command is allowed by this page.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsSupportedTargetStatus(string targetStatus)
         {
             return string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Reviewed, StringComparison.Ordinal) ||
@@ -219,6 +255,12 @@ namespace ASPNET.StarterKit.Portal
                    string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前登录用户名，无法取得时使用系统占位值。</zh-CN>
+        ///   <en>Reads the current signed-in user name, using a system placeholder when unavailable.</en>
+        /// </lang>
+        /// </summary>
         private string GetCurrentUserName()
         {
             return Context != null &&
@@ -229,6 +271,12 @@ namespace ASPNET.StarterKit.Portal
                 : "system";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>尝试把资料更正处理结果同步到轻量待办。</zh-CN>
+        ///   <en>Attempts to mirror the profile-correction review result into lightweight work items.</en>
+        /// </lang>
+        /// </summary>
         private void TryCompleteWorkItem(long requestId, string requestStatus, string reviewNote)
         {
             // <lang>
@@ -253,6 +301,12 @@ namespace ASPNET.StarterKit.Portal
                 });
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将资料更正请求状态映射为待办事件类型。</zh-CN>
+        ///   <en>Maps a profile-correction request status to a work-item event type.</en>
+        /// </lang>
+        /// </summary>
         private static string MapWorkItemEventType(string requestStatus)
         {
             if (string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Rejected, StringComparison.Ordinal))
@@ -268,6 +322,12 @@ namespace ASPNET.StarterKit.Portal
             return PortalWorkItemEventTypes.Approved;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将资料更正请求状态映射为待办终态。</zh-CN>
+        ///   <en>Maps a profile-correction request status to a final work-item status.</en>
+        /// </lang>
+        /// </summary>
         private static string MapWorkItemStatus(string requestStatus)
         {
             return string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal)
@@ -275,6 +335,12 @@ namespace ASPNET.StarterKit.Portal
                 : PortalWorkItemStatuses.Completed;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>裁剪管理员输入，避免备注字段超过数据库约定长度。</zh-CN>
+        ///   <en>Trims administrator input to prevent notes from exceeding the database contract length.</en>
+        /// </lang>
+        /// </summary>
         private static string NormalizeInput(string value, int maxLength)
         {
             string normalized = (value ?? string.Empty).Trim();
@@ -290,6 +356,12 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class EmployeeProfileCorrectionAdminRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从资料更正请求数据对象创建后台展示行。</zh-CN>
+        ///   <en>Creates an administration display row from a profile-correction request data object.</en>
+        /// </lang>
+        /// </summary>
         internal EmployeeProfileCorrectionAdminRow(EmployeeProfileCorrectionRequestInfo request)
         {
             RequestId = request.RequestId;
@@ -388,6 +460,12 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public string ReviewText { get; private set; }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将空展示值统一转换为页面占位文本。</zh-CN>
+        ///   <en>Converts empty display values to the shared page placeholder text.</en>
+        /// </lang>
+        /// </summary>
         private static string EmptyToNone(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? "(none)" : value;

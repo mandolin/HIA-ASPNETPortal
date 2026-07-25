@@ -7,32 +7,40 @@ using System.Text.RegularExpressions;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// HIA 外围能力描述契约的当前草案基线。
-    /// Current draft baseline for the HIA peripheral capability contract.
+    /// <lang>
+    ///   <zh-CN>HIA 外围能力描述契约的当前草案基线。</zh-CN>
+    ///   <en>Current draft baseline for the HIA peripheral capability contract.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 该类型只定义门户拥有的、可离线验证的描述 envelope；它不加载外部程序集、不开启网络 transport，
-    /// 也不表示用户、权限、审计或业务数据已经成为跨系统协议。
-    /// This type defines a portal-owned, offline-verifiable descriptor envelope only. It does not load external
-    /// assemblies, enable network transport, or make users, authorization, auditing, or business data cross-system APIs.
+    /// <lang>
+    ///   <zh-CN>该类型只定义门户拥有的、可离线验证的描述 envelope；它不加载外部程序集、不开启网络 transport，也不表示用户、权限、审计或业务数据已经成为跨系统协议。</zh-CN>
+    ///   <en>This type defines a portal-owned, offline-verifiable descriptor envelope only. It does not load external assemblies, enable network transport, or make users, authorization, auditing, or business data cross-system APIs.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalHiaBoundaryContract
     {
         /// <summary>
-        /// 当前外围契约的稳定名称。
-        /// Stable name of the current peripheral contract.
+        /// <l>
+        ///   <zh-CN>当前外围契约的稳定名称。</zh-CN>
+        ///   <en>Stable name of the current peripheral contract.</en>
+        /// </l>
         /// </summary>
         public const string ContractName = "hia.portal.peripheral";
 
         /// <summary>
-        /// 当前外围契约的草案版本。
-        /// Current draft version of the peripheral contract.
+        /// <l>
+        ///   <zh-CN>当前外围契约的草案版本。</zh-CN>
+        ///   <en>Current draft version of the peripheral contract.</en>
+        /// </l>
         /// </summary>
         public const string CurrentContractVersion = "0.1.0-draft";
 
         /// <summary>
-        /// 当前门户 producer 的稳定标识。
-        /// Stable producer identifier for the current portal.
+        /// <l>
+        ///   <zh-CN>当前门户 producer 的稳定标识。</zh-CN>
+        ///   <en>Stable producer identifier for the current portal.</en>
+        /// </l>
         /// </summary>
         public const string ProducerId = "hia-aspnetportal";
 
@@ -89,11 +97,23 @@ namespace ASPNET.StarterKit.Portal
             };
 
         /// <summary>
-        /// 验证一个外围能力 envelope 是否符合当前草案、字段范围和隐私边界。
-        /// Validates whether a peripheral capability envelope meets the current draft, field scope, and privacy boundary.
+        /// <lang>
+        ///   <zh-CN>验证一个外围能力 envelope 是否符合当前草案、字段范围和隐私边界。</zh-CN>
+        ///   <en>Validates whether a peripheral capability envelope meets the current draft, field scope, and privacy boundary.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="envelope">待验证的门户拥有 envelope。Portal-owned envelope to validate.</param>
-        /// <returns>不包含 payload 原文的结构化验证结果。Structured validation result without raw payload content.</returns>
+        /// <param name="envelope">
+        /// <l>
+        ///   <zh-CN>待验证的门户拥有 envelope。</zh-CN>
+        ///   <en>Portal-owned envelope to validate.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>不包含 payload 原文的结构化验证结果。</zh-CN>
+        ///   <en>Structured validation result without raw payload content.</en>
+        /// </l>
+        /// </returns>
         public static PortalHiaBoundaryValidationResult Validate(PortalHiaPeripheralEnvelope envelope)
         {
             if (envelope == null)
@@ -145,12 +165,29 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 验证并规范化部署级门户实例标识。
-        /// Validates and normalizes a deployment-level portal instance identifier.
+        /// <lang>
+        ///   <zh-CN>验证并规范化部署级门户实例标识。</zh-CN>
+        ///   <en>Validates and normalizes a deployment-level portal instance identifier.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="candidate">部署配置提供的候选标识。Candidate identifier supplied by deployment configuration.</param>
-        /// <param name="normalizedInstanceId">成功时返回小写受限标识或规范 GUID。Normalized restricted identifier or canonical GUID when successful.</param>
-        /// <returns>候选值可作为非敏感稳定实例标识时为 true。True when the candidate can serve as a non-sensitive stable instance identifier.</returns>
+        /// <param name="candidate">
+        /// <l>
+        ///   <zh-CN>部署配置提供的候选标识。</zh-CN>
+        ///   <en>Candidate identifier supplied by deployment configuration.</en>
+        /// </l>
+        /// </param>
+        /// <param name="normalizedInstanceId">
+        /// <l>
+        ///   <zh-CN>成功时返回小写受限标识或规范 GUID。</zh-CN>
+        ///   <en>Normalized restricted identifier or canonical GUID when successful.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>候选值可作为非敏感稳定实例标识时为 true。</zh-CN>
+        ///   <en>True when the candidate can serve as a non-sensitive stable instance identifier.</en>
+        /// </l>
+        /// </returns>
         public static bool TryNormalizePortalInstanceId(string candidate, out string normalizedInstanceId)
         {
             normalizedInstanceId = string.Empty;
@@ -177,6 +214,12 @@ namespace ASPNET.StarterKit.Portal
             return true;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证 payload 的必填字段、未知字段和字段值安全性。</zh-CN>
+        ///   <en>Validates required payload fields, unknown fields, and field-value safety.</en>
+        /// </lang>
+        /// </summary>
         private static PortalHiaBoundaryValidationResult ValidatePayload(
             string kind,
             IDictionary<string, object> payload)
@@ -221,6 +264,12 @@ namespace ASPNET.StarterKit.Portal
             return Success();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证可忽略 metadata 的字段范围和版本一致性。</zh-CN>
+        ///   <en>Validates field scope and version consistency for ignorable metadata.</en>
+        /// </lang>
+        /// </summary>
         private static PortalHiaBoundaryValidationResult ValidateMetadata(IDictionary<string, object> metadata)
         {
             if (metadata == null || metadata.Count == 0)
@@ -253,6 +302,12 @@ namespace ASPNET.StarterKit.Portal
             return Success();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按字段语义验证 payload 值的类型、枚举范围和安全文本约束。</zh-CN>
+        ///   <en>Validates payload value type, enumeration scope, and safe-text constraints by field semantics.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsValidPayloadValue(string kind, string key, object value)
         {
             if (string.Equals(key, "capabilities", StringComparison.Ordinal))
@@ -305,6 +360,12 @@ namespace ASPNET.StarterKit.Portal
             return true;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证 capabilities 是非空的受限字符串集合，且数量不超过契约上限。</zh-CN>
+        ///   <en>Validates that capabilities is a non-empty restricted string collection within the contract limit.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsValidCapabilities(object value)
         {
             IEnumerable values = value as IEnumerable;
@@ -332,6 +393,12 @@ namespace ASPNET.StarterKit.Portal
             return count > 0;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证文本非空、长度受限，且不像物理路径或 URL。</zh-CN>
+        ///   <en>Validates that text is non-empty, length-limited, and does not look like a physical path or URL.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsSafeText(string value, int maximumLength)
         {
             return !string.IsNullOrWhiteSpace(value) &&
@@ -339,6 +406,12 @@ namespace ASPNET.StarterKit.Portal
                    !LooksLikeUnsafeLocation(value);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>识别会泄露身份、凭据、路径、审计或异常细节的字段名片段。</zh-CN>
+        ///   <en>Detects field-name fragments that could expose identity, credentials, paths, audit data, or exception details.</en>
+        /// </lang>
+        /// </summary>
         private static bool ContainsProhibitedFieldName(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
@@ -365,12 +438,24 @@ namespace ASPNET.StarterKit.Portal
             return false;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>识别不应进入外围描述的本机路径、UNC 路径、绝对路径和外部 URL。</zh-CN>
+        ///   <en>Detects local paths, UNC paths, absolute paths, and external URLs that should not enter peripheral descriptors.</en>
+        /// </lang>
+        /// </summary>
         private static bool LooksLikeUnsafeLocation(string value)
         {
             string trimmed = value.Trim();
             return Regex.IsMatch(trimmed, @"^[A-Za-z]:[\\/]|^\\\\|^/|^[A-Za-z][A-Za-z0-9+.-]*://");
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证时间文本是 round-trip 格式且偏移为 UTC。</zh-CN>
+        ///   <en>Validates that timestamp text uses round-trip format and has a UTC offset.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsUtcTimestamp(string value)
         {
             DateTimeOffset timestamp;
@@ -382,25 +467,55 @@ namespace ASPNET.StarterKit.Portal
                 out timestamp) && timestamp.Offset == TimeSpan.Zero;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证 producer 版本符合语义版本文本格式。</zh-CN>
+        ///   <en>Validates that the producer version follows semantic-version text format.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsSemanticVersion(string value)
         {
             return !string.IsNullOrWhiteSpace(value) && SemanticVersionPattern.IsMatch(value);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建统一的契约验证成功结果。</zh-CN>
+        ///   <en>Creates the unified successful contract-validation result.</en>
+        /// </lang>
+        /// </summary>
         private static PortalHiaBoundaryValidationResult Success()
         {
             return new PortalHiaBoundaryValidationResult(true, "HIA_PERIPHERAL_VALID", "The peripheral envelope is valid.");
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建统一的契约验证失败结果。</zh-CN>
+        ///   <en>Creates a unified failed contract-validation result.</en>
+        /// </lang>
+        /// </summary>
         private static PortalHiaBoundaryValidationResult Failure(string code, string message)
         {
             return new PortalHiaBoundaryValidationResult(false, code, message);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>某一 capability kind 的 payload 字段白名单规则。</zh-CN>
+        ///   <en>Payload field allowlist rule for one capability kind.</en>
+        /// </lang>
+        /// </summary>
         private sealed class PayloadRule
         {
             private readonly ISet<string> _allowedKeys;
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>用必填键和可选键创建 payload 规则。</zh-CN>
+            ///   <en>Creates a payload rule from required and optional keys.</en>
+            /// </lang>
+            /// </summary>
             public PayloadRule(IEnumerable<string> requiredKeys, IEnumerable<string> optionalKeys)
             {
                 RequiredKeys = new List<string>(requiredKeys).AsReadOnly();
@@ -411,8 +526,20 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            /// <summary>
+            /// <l>
+            ///   <zh-CN>当前 kind 必须提供的字段名集合。</zh-CN>
+            ///   <en>Field names that the current kind must provide.</en>
+            /// </l>
+            /// </summary>
             public IList<string> RequiredKeys { get; private set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>判断字段名是否在当前 kind 的白名单中。</zh-CN>
+            ///   <en>Determines whether a field name is allowed for the current kind.</en>
+            /// </lang>
+            /// </summary>
             public bool Allows(string key)
             {
                 return _allowedKeys.Contains(key ?? string.Empty);
@@ -421,91 +548,123 @@ namespace ASPNET.StarterKit.Portal
     }
 
     /// <summary>
-    /// HIA 外围能力描述的可序列化 envelope。
-    /// Serializable envelope for an HIA peripheral capability descriptor.
+    /// <lang>
+    ///   <zh-CN>HIA 外围能力描述的可序列化 envelope。</zh-CN>
+    ///   <en>Serializable envelope for an HIA peripheral capability descriptor.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// 属性使用可写 DTO 形式以支持未来受控序列化；任何 consumer 在使用前都必须调用
-    /// <see cref="PortalHiaBoundaryContract.Validate"/>，不能信任未经验证的输入。
-    /// Properties remain writable DTO members for future controlled serialization. Every consumer must call
-    /// <see cref="PortalHiaBoundaryContract.Validate"/> before use and must not trust unvalidated input.
+    /// <lang>
+    ///   <zh-CN>属性使用可写 DTO 形式以支持受控序列化；任何 consumer 在使用前都必须调用 <see cref="PortalHiaBoundaryContract.Validate"/>，不能信任未经验证的输入。</zh-CN>
+    ///   <en>Properties remain writable DTO members for controlled serialization. Every consumer must call <see cref="PortalHiaBoundaryContract.Validate"/> before use and must not trust unvalidated input.</en>
+    /// </lang>
     /// </remarks>
     public sealed class PortalHiaPeripheralEnvelope
     {
         /// <summary>
-        /// 契约稳定名称。
-        /// Stable contract name.
+        /// <l>
+        ///   <zh-CN>契约稳定名称。</zh-CN>
+        ///   <en>Stable contract name.</en>
+        /// </l>
         /// </summary>
         public string Contract { get; set; }
 
         /// <summary>
-        /// 契约草案或稳定版本。
-        /// Draft or stable contract version.
+        /// <l>
+        ///   <zh-CN>契约草案或稳定版本。</zh-CN>
+        ///   <en>Draft or stable contract version.</en>
+        /// </l>
         /// </summary>
         public string ContractVersion { get; set; }
 
         /// <summary>
-        /// 部署级非敏感门户实例标识。
-        /// Deployment-level non-sensitive portal instance identifier.
+        /// <l>
+        ///   <zh-CN>部署级非敏感门户实例标识。</zh-CN>
+        ///   <en>Deployment-level non-sensitive portal instance identifier.</en>
+        /// </l>
         /// </summary>
         public string PortalInstanceId { get; set; }
 
         /// <summary>
-        /// 产生当前描述的门户 producer。
-        /// Portal producer that created the current descriptor.
+        /// <l>
+        ///   <zh-CN>产生当前描述的门户 producer。</zh-CN>
+        ///   <en>Portal producer that created the current descriptor.</en>
+        /// </l>
         /// </summary>
         public PortalHiaProducerDescriptor Producer { get; set; }
 
         /// <summary>
-        /// 受支持的能力类型。
-        /// Supported capability kind.
+        /// <l>
+        ///   <zh-CN>受支持的能力类型。</zh-CN>
+        ///   <en>Supported capability kind.</en>
+        /// </l>
         /// </summary>
         public string Kind { get; set; }
 
         /// <summary>
-        /// ISO 8601 round-trip UTC 时间文本。
-        /// ISO 8601 round-trip UTC timestamp text.
+        /// <l>
+        ///   <zh-CN>ISO 8601 round-trip UTC 时间文本。</zh-CN>
+        ///   <en>ISO 8601 round-trip UTC timestamp text.</en>
+        /// </l>
         /// </summary>
         public string OccurredUtc { get; set; }
 
         /// <summary>
-        /// 对应 kind 的受限能力描述。
-        /// Restricted capability descriptor for the selected kind.
+        /// <l>
+        ///   <zh-CN>对应 kind 的受限能力描述。</zh-CN>
+        ///   <en>Restricted capability descriptor for the selected kind.</en>
+        /// </l>
         /// </summary>
         public IDictionary<string, object> Payload { get; set; }
 
         /// <summary>
-        /// 可忽略的实现追踪 metadata。
-        /// Optional, ignorable implementation-tracing metadata.
+        /// <l>
+        ///   <zh-CN>可忽略的实现追踪 metadata。</zh-CN>
+        ///   <en>Optional, ignorable implementation-tracing metadata.</en>
+        /// </l>
         /// </summary>
         public IDictionary<string, object> Metadata { get; set; }
     }
 
     /// <summary>
-    /// 外围能力描述的 producer 身份。
-    /// Producer identity for a peripheral capability descriptor.
+    /// <lang>
+    ///   <zh-CN>外围能力描述的 producer 身份。</zh-CN>
+    ///   <en>Producer identity for a peripheral capability descriptor.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalHiaProducerDescriptor
     {
         /// <summary>
-        /// producer 稳定标识。
-        /// Stable producer identifier.
+        /// <l>
+        ///   <zh-CN>producer 稳定标识。</zh-CN>
+        ///   <en>Stable producer identifier.</en>
+        /// </l>
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
-        /// producer 的语义版本文本。
-        /// Semantic version text of the producer.
+        /// <l>
+        ///   <zh-CN>producer 的语义版本文本。</zh-CN>
+        ///   <en>Semantic version text of the producer.</en>
+        /// </l>
         /// </summary>
         public string Version { get; set; }
     }
 
     /// <summary>
-    /// 外围能力契约的安全验证结果。
-    /// Safe validation result for a peripheral capability contract.
+    /// <lang>
+    ///   <zh-CN>外围能力契约的安全验证结果。</zh-CN>
+    ///   <en>Safe validation result for a peripheral capability contract.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalHiaBoundaryValidationResult
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建不回显输入内容的契约验证结果。</zh-CN>
+        ///   <en>Creates a contract-validation result that does not echo input content.</en>
+        /// </lang>
+        /// </summary>
         internal PortalHiaBoundaryValidationResult(bool isValid, string code, string message)
         {
             IsValid = isValid;
@@ -514,20 +673,26 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 当前 envelope 是否通过验证。
-        /// Whether the current envelope passed validation.
+        /// <l>
+        ///   <zh-CN>当前 envelope 是否通过验证。</zh-CN>
+        ///   <en>Whether the current envelope passed validation.</en>
+        /// </l>
         /// </summary>
         public bool IsValid { get; private set; }
 
         /// <summary>
-        /// 稳定、可供机器处理的验证代码。
-        /// Stable machine-readable validation code.
+        /// <l>
+        ///   <zh-CN>稳定、可供机器处理的验证代码。</zh-CN>
+        ///   <en>Stable machine-readable validation code.</en>
+        /// </l>
         /// </summary>
         public string Code { get; private set; }
 
         /// <summary>
-        /// 不回显输入 payload 的安全说明。
-        /// Safe message that does not echo the input payload.
+        /// <l>
+        ///   <zh-CN>不回显输入 payload 的安全说明。</zh-CN>
+        ///   <en>Safe message that does not echo the input payload.</en>
+        /// </l>
         /// </summary>
         public string Message { get; private set; }
     }

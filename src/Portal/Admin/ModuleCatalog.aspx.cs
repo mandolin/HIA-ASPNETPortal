@@ -9,38 +9,55 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 受信任部署模块包的注册、启停与预检目录页。
-    /// Catalog page for registering, enabling, disabling, and preflighting trusted-deployment module packages.
+    /// <lang>
+    ///   <zh-CN>受信任部署模块包的注册、启停与预检目录页。</zh-CN>
+    ///   <en>Catalog page for registering, enabling, disabling, and preflighting trusted-deployment module packages.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// P3.2 只消费服务器已部署且通过 manifest 校验的包，不提供上传、解压、DLL、在线编译、外部 URL
-    /// 或自动脚本能力。物理目录始终由受信任部署流程负责，后台只管理数据库定义和启用状态。
-    /// P3.2 consumes only server-deployed packages passing manifest validation. It provides no upload, extraction,
-    /// DLL, online-compilation, external-URL, or automatic-script capability. Physical directories remain the
-    /// responsibility of a trusted deployment process; this page manages database definitions and enabled state only.
+    /// <lang>
+    ///   <zh-CN>P3.2 只消费服务器已部署且通过 manifest 校验的包，不提供上传、解压、DLL、在线编译、外部 URL 或自动脚本能力。物理目录始终由受信任部署流程负责，后台只管理数据库定义和启用状态。</zh-CN>
+    ///   <en>P3.2 consumes only server-deployed packages passing manifest validation. It provides no upload, extraction, DLL, online-compilation, external-URL, or automatic-script capability. Physical directories remain the responsibility of a trusted deployment process; this page manages database definitions and enabled state only.</en>
+    /// </lang>
     /// </remarks>
     public partial class ModuleCatalog : PortalPage<ModuleCatalog>
     {
         /// <summary>
-        /// 旧模块定义数据服务，仅用于创建或匹配受控入口。
-        /// Legacy module-definition data service, used only to create or match controlled entries.
+        /// <lang>
+        ///   <zh-CN>旧模块定义数据服务，仅用于创建或匹配受控入口。</zh-CN>
+        ///   <en>Legacy module-definition data service, used only to create or match controlled entries.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IModuleDefsDb ModuleDefConfig { private get; set; }
 
         /// <summary>
-        /// 旧模块实例数据服务，仅用于预检引用数量。
-        /// Legacy module-instance data service, used only to preflight reference counts.
+        /// <lang>
+        ///   <zh-CN>旧模块实例数据服务，仅用于预检引用数量。</zh-CN>
+        ///   <en>Legacy module-instance data service, used only to preflight reference counts.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public IModulesDb ModulesConfig { private get; set; }
 
         /// <summary>
-        /// 初始化已验证部署包目录。
-        /// Initializes the validated deployment-package catalog.
+        /// <lang>
+        ///   <zh-CN>初始化已验证部署包目录。</zh-CN>
+        ///   <en>Initializes the validated deployment-package catalog.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">事件源。Event source.</param>
-        /// <param name="e">事件参数。Event arguments.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件参数。</zh-CN>
+        ///   <en>Event arguments.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleCatalogView))
@@ -55,11 +72,23 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 处理已验证模块包的受限目录操作。
-        /// Handles restricted catalog actions for a validated module package.
+        /// <lang>
+        ///   <zh-CN>处理已验证模块包的受限目录操作。</zh-CN>
+        ///   <en>Handles restricted catalog actions for a validated module package.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">事件源。Event source.</param>
-        /// <param name="e">GridView 命令事件参数。GridView command event arguments.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>GridView 命令事件参数。</zh-CN>
+        ///   <en>GridView command event arguments.</en>
+        /// </l>
+        /// </param>
         protected void PackagesGrid_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string permissionKey = string.Equals(e.CommandName, "Preflight", StringComparison.OrdinalIgnoreCase)
@@ -100,8 +129,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 绑定已验证包及其数据库注册和实例引用摘要。
-        /// Binds validated packages and their database registration and instance-reference summary.
+        /// <lang>
+        ///   <zh-CN>绑定已验证包及其数据库注册和实例引用摘要。</zh-CN>
+        ///   <en>Binds validated packages and their database registration and instance-reference summary.</en>
+        /// </lang>
         /// </summary>
         private void BindPackages()
         {
@@ -134,15 +165,16 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 为已验证包创建仅指向 manifest 入口的旧定义记录。
-        /// Creates a legacy definition record pointing only to a validated manifest entry.
+        /// <lang>
+        ///   <zh-CN>为已验证包创建仅指向 manifest 入口的旧定义记录。</zh-CN>
+        ///   <en>Creates a legacy definition record pointing only to a validated manifest entry.</en>
+        /// </lang>
         /// </summary>
         /// <remarks>
-        /// 此操作写入旧模块定义表并写入运营审计，但不复制、上传、删除或修改包目录。重复入口仅返回既有定义，
-        /// 不会创建第二条定义记录。
-        /// This operation writes the legacy module-definition table and an operations audit, but never copies, uploads,
-        /// deletes, or modifies the package directory. A duplicate entry returns the existing definition and does not
-        /// create a second definition record.
+        /// <lang>
+        ///   <zh-CN>此操作写入旧模块定义表并写入运营审计，但不复制、上传、删除或修改包目录。重复入口仅返回既有定义，不会创建第二条定义记录。</zh-CN>
+        ///   <en>This operation writes the legacy module-definition table and an operations audit, but never copies, uploads, deletes, or modifies the package directory. A duplicate entry returns the existing definition and does not create a second definition record.</en>
+        /// </lang>
         /// </remarks>
         private void RegisterPackage(PortalModulePackage package)
         {
@@ -172,13 +204,16 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 保存已验证包的启用状态，并记录高价值运营审计。
-        /// Saves a validated package enabled state and records a high-value operations audit.
+        /// <lang>
+        ///   <zh-CN>保存已验证包的启用状态，并记录高价值运营审计。</zh-CN>
+        ///   <en>Saves a validated package enabled state and records a high-value operations audit.</en>
+        /// </lang>
         /// </summary>
         /// <remarks>
-        /// 状态表不可用或写入失败时不改变模块文件，也不伪造成功结果；失败详情由状态存储写入诊断。
-        /// When the state table is unavailable or a write fails, this method does not alter module files or fabricate a
-        /// successful result; failure details are recorded in diagnostics by the state store.
+        /// <lang>
+        ///   <zh-CN>状态表不可用或写入失败时不改变模块文件，也不伪造成功结果；失败详情由状态存储写入诊断。</zh-CN>
+        ///   <en>When the state table is unavailable or a write fails, this method does not alter module files or fabricate a successful result; failure details are recorded in diagnostics by the state store.</en>
+        /// </lang>
         /// </remarks>
         private void SavePackageState(PortalModulePackage package, bool isEnabled)
         {
@@ -204,8 +239,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 展示包定义和实例引用数量，不执行删除、迁移或物理文件操作。
-        /// Displays definition and instance reference counts without deleting, migrating, or touching physical files.
+        /// <lang>
+        ///   <zh-CN>展示包定义和实例引用数量，不执行删除、迁移或物理文件操作。</zh-CN>
+        ///   <en>Displays definition and instance reference counts without deleting, migrating, or touching physical files.</en>
+        /// </lang>
         /// </summary>
         private void ShowPreflight(PortalModulePackage package)
         {
@@ -225,8 +262,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 按已规范化桌面入口匹配旧模块定义。
-        /// Matches a legacy module definition by normalized desktop entry.
+        /// <lang>
+        ///   <zh-CN>按已规范化桌面入口匹配旧模块定义。</zh-CN>
+        ///   <en>Matches a legacy module definition by normalized desktop entry.</en>
+        /// </lang>
         /// </summary>
         private static IModuleDefinitionItem FindDefinition(
             IEnumerable<IModuleDefinitionItem> definitions,
@@ -237,8 +276,10 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 展示不含物理路径或异常详情的管理员安全提示。
-        /// Displays an administrator-safe message without physical paths or exception details.
+        /// <lang>
+        ///   <zh-CN>展示不含物理路径或异常详情的管理员安全提示。</zh-CN>
+        ///   <en>Displays an administrator-safe message without physical paths or exception details.</en>
+        /// </lang>
         /// </summary>
         private void ShowMessage(string message)
         {
@@ -248,11 +289,19 @@ namespace ASPNET.StarterKit.Portal
     }
 
     /// <summary>
-    /// 模块目录 GridView 的只读展示行。
-    /// Read-only display row for the module-catalog GridView.
+    /// <lang>
+    ///   <zh-CN>模块目录 GridView 的只读展示行。</zh-CN>
+    ///   <en>Read-only display row for the module-catalog GridView.</en>
+    /// </lang>
     /// </summary>
     public sealed class ModuleCatalogRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从已验证包、状态读取结果和旧定义摘要创建目录展示行。</zh-CN>
+        ///   <en>Creates a catalog display row from a validated package, state-read result, and legacy definition summary.</en>
+        /// </lang>
+        /// </summary>
         internal ModuleCatalogRow(
             PortalModulePackage package,
             bool isEnabled,
@@ -277,31 +326,76 @@ namespace ASPNET.StarterKit.Portal
                     : isEnabled ? "Enabled" : "Disabled";
         }
 
-        /// <summary>稳定部署包标识。Stable deployment-package identifier.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>稳定部署包标识。</zh-CN>
+        ///   <en>Stable deployment-package identifier.</en>
+        /// </l>
+        /// </summary>
         public string PackageId { get; private set; }
 
-        /// <summary>管理员展示名称。Administrator display name.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>管理员展示名称。</zh-CN>
+        ///   <en>Administrator display name.</en>
+        /// </l>
+        /// </summary>
         public string DisplayName { get; private set; }
 
-        /// <summary>部署包版本。Deployment-package version.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>部署包版本。</zh-CN>
+        ///   <en>Deployment-package version.</en>
+        /// </l>
+        /// </summary>
         public string Version { get; private set; }
 
-        /// <summary>已验证桌面入口。Validated desktop entry.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>已验证桌面入口。</zh-CN>
+        ///   <en>Validated desktop entry.</en>
+        /// </l>
+        /// </summary>
         public string DesktopEntry { get; private set; }
 
-        /// <summary>显示用启用状态。Display enabled state.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>显示用启用状态。</zh-CN>
+        ///   <en>Display enabled state.</en>
+        /// </l>
+        /// </summary>
         public bool IsEnabled { get; private set; }
 
-        /// <summary>是否已有旧定义记录。Whether a legacy definition exists.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>是否已有旧定义记录。</zh-CN>
+        ///   <en>Whether a legacy definition exists.</en>
+        /// </l>
+        /// </summary>
         public bool IsRegistered { get; private set; }
 
-        /// <summary>显示用状态文本。Display state text.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>显示用状态文本。</zh-CN>
+        ///   <en>Display state text.</en>
+        /// </l>
+        /// </summary>
         public string StateText { get; private set; }
 
-        /// <summary>显示用定义摘要。Display definition summary.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>显示用定义摘要。</zh-CN>
+        ///   <en>Display definition summary.</en>
+        /// </l>
+        /// </summary>
         public string DefinitionText { get; private set; }
 
-        /// <summary>引用该定义的模块实例数量。Module-instance count referencing the definition.</summary>
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>引用该定义的模块实例数量。</zh-CN>
+        ///   <en>Module-instance count referencing the definition.</en>
+        /// </l>
+        /// </summary>
         public int InstanceCount { get; private set; }
     }
 }
