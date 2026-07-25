@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 第十五批已完成 |
-| 当前唯一下一步 | 继续 P16.1 第十六批：`PortalWorkItemEventTypes.cs`、`IEmployeeDirectoryAdminDb.cs`、`ITabsDb.cs`、`PortalUserProfileStatuses.cs`、`PortalWorkItemEventInfo.cs`。 |
-| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前十五批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
+| 当前阶段 | `W-anp-P16.1` 第十六批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第十七批：`DesktopPortalBanner.ascx.cs`、`RolesDb.cs`、`UserEmployeeBindingAdminDb.cs`、`EmployeeDirectoryDb.cs`、`IDocumentItem.cs`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前十六批已完成，后续批次继续按 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁推进。 |
 | 最近状态更新时间 | 2026-07-25 |
 
 ## Recent Completed Items
@@ -94,13 +94,14 @@
 | P16.1 第十三批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-thirteenth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第十三批 5 个文件旧双语模式清零，手工补强 `ModuleDefs.ascx.cs` 和 `ModuleSettings.aspx.cs` Admin 私有流程注释，`LegacyBilingualFormat` 降至 `934`。 |
 | P16.1 第十四批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-fourteenth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第十四批 5 个文件旧双语模式清零，手工补强 `DesktopModuleTitle.ascx.cs`、`EmployeeDirectoryAdminDb.cs`、`ViewDocument.aspx.cs` 触达流程和私有节点注释，`LegacyBilingualFormat` 降至 `867`，`MissingNodeDocumentation` 降至 `280`。 |
 | P16.1 第十五批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-fifteenth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第十五批 5 个文件旧双语模式清零，手工补强 `EditHtml.aspx.cs` 原始 HTML 保存安全边界和 `EmployeeProfileCorrectionProfileView.cs` 构造参数说明，`LegacyBilingualFormat` 降至 `797`。 |
+| P16.1 第十六批注释迁移 | completed | `work-zone/dev/plans/W-anp-P16.1-sixteenth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第十六批 5 个文件旧双语模式清零，手工补强稳定持久化字符串、Tab 兼容契约和待办事件投影边界说明，`LegacyBilingualFormat` 降至 `734`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 第十五批源码提交 `4c2bf72`；任务账本由本次同步提交记录 | 第十五批源码迁移已提交；任务账本已同步到第十六批唯一下一步。 |
-| WorkZone | 第十五批资料提交 `a853169` | 第十五批清单、进度、结果、证据和本轮日志已提交；下一步进入第十六批。 |
+| 主仓库 | 第十六批源码提交 `aafee6e`；任务账本由本次同步提交记录 | 第十六批源码迁移已提交；任务账本已同步到第十七批唯一下一步。 |
+| WorkZone | 第十六批资料提交 `8a4e86a` | 第十六批清单、进度、结果、证据和本轮日志已提交；下一步进入第十七批。 |
 
 ## Upcoming Planning Constraints
 
@@ -259,6 +260,11 @@
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=103`。 |
 | `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1293`，`Portal.Components` XML member count 为 `545`，`Portal.Components.Data1` XML member count 为 `367`，保留既有 `CS1591` 历史警告。 |
 | `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260725-0506.*`，`LegacyBilingualFormat=797`，`MissingNodeDocumentation=280`。 |
+| P16.1 第十六批旧格式扫描 | 通过；第十六批 5 个文件旧 `中文：` / `English:` 模式为 `0`，裸中文 `//` 流程注释为 `0`。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；16 个公开文档已登记，失败数 `0`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=105`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1293`，`Portal.Components` XML member count 为 `545`，`Portal.Components.Data1` XML member count 为 `367`，保留既有 `CS1591` 历史警告。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260725-1301.*`，`LegacyBilingualFormat=734`，`MissingNodeDocumentation=280`。 |
 
 ## Known Residual Working Tree Items
 
