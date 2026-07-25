@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 第三十七批已完成 |
-| 当前唯一下一步 | 继续 P16.1 第三十八批：`PortalHealthCheckResult.cs`、`TabSettings.cs`、`EnvSection.cs`、`GlobalInfo.cs`、`AppSettingsLoader.cs`、`UnityConfigLoader.cs`。 |
-| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前三十七批已完成，后续批次按剩余 debt inventory 推进，并继续执行 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁。 |
+| 当前阶段 | `W-anp-P16.1` 第三十八批已完成 |
+| 当前唯一下一步 | 继续 P16.1 第三十九批：`AccessDenied.aspx`、`DiagnosticLogDetail.aspx`、`DiagnosticsLogs.aspx`、`EditAccessDenied.aspx`、`EmployeeDirectory.aspx`、`EmployeeEdit.aspx`、`EmployeeProfileCorrectionRequests.aspx`、`Logoff.aspx.cs`、`ManageUsers.aspx`、`ModuleCatalog.aspx`。 |
+| 当前完成条件 | P16.1 需分批完成全量 `<lang>` / `<l>` 迁移与注释丰富度提升；前三十八批已完成，非 designer `MissingNodeDocumentation` 已清零；后续继续清理非 designer WebForms 标记层和少量 C# 旧双语格式，并执行 `-WhatIf`、人工复核、XML 构建、公开文档和 debt inventory 门禁。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items
@@ -116,13 +116,14 @@
 | P16.1 第三十五批注释补强 | completed | 主仓库源码提交 `571e31a`，WorkZone 资料提交 `83f29ca`；`work-zone/dev/plans/W-anp-P16.1-thirty-fifth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十五批补齐旧内容、配置、HTML、链接、模块定义、基础存储过程、角色和用户接口节点级契约注释，`MissingNodeDocumentation` 降至 `50`。 |
 | P16.1 第三十六批注释补强 | completed | 主仓库源码提交 `15439fd`，WorkZone 资料提交 `45c7b38`；`work-zone/dev/plans/W-anp-P16.1-thirty-sixth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十六批补齐模块/Tab 接口、HIA 外围契约、provider/HIA proof、后台列表页和容器配置处理器节点注释，`MissingNodeDocumentation` 降至 `25`。 |
 | P16.1 第三十七批注释补强 | completed | 主仓库源码提交 `16108a8`，WorkZone 资料提交 `65c7c0e`；`work-zone/dev/plans/W-anp-P16.1-thirty-seventh-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十七批补齐主题包/模块包、主题覆盖/解析、健康快照、根入口跳转页、容器配置项和员工资料更正模块 helper 注释，`MissingNodeDocumentation` 降至 `8`。 |
+| P16.1 第三十八批注释补强 | completed | 主仓库源码提交 `7d862e2`，WorkZone 资料提交 `86e51ab`；`work-zone/dev/plans/W-anp-P16.1-thirty-eighth-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第三十八批补齐健康检查结果、Tab 设置、环境节、全局信息和配置加载器节点注释，`MissingNodeDocumentation` 降至 `0`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | 第三十七批源码提交 `16108a8`；任务账本由本次同步提交记录 | 第三十七批源码注释补强已提交；任务账本同步到第三十八批唯一下一步。 |
-| WorkZone | 第三十七批资料提交 `65c7c0e` | 第三十七批清单、进度、结果和证据已提交；下一步进入第三十八批。 |
+| 主仓库 | 第三十八批源码提交 `7d862e2`；任务账本由本次同步提交记录 | 第三十八批源码注释补强已提交；任务账本同步到第三十九批唯一下一步。 |
+| WorkZone | 第三十八批资料提交 `86e51ab` | 第三十八批清单、进度、结果和证据已提交；下一步进入第三十九批。 |
 
 ## Upcoming Planning Constraints
 
@@ -375,6 +376,12 @@
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=115`。 |
 | `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1465`，`Portal.Components` XML member count 为 `652`，`Portal.Components.Data` XML member count 为 `21`，`Portal.Components.Data1` XML member count 为 `654`，保留既有 `CS1591` 历史警告。 |
 | `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260726-0019.*`，`LegacyBilingualFormat=150`，`TodoOrDeferredMarker=114`，`LowValueRestatement=7`，`MissingNodeDocumentation=8`，`HighRiskScriptCandidate=22`。 |
+| P16.1 第三十八批旧格式扫描 | 通过；第三十八批 6 个文件旧 `中文：` / `英文：` / `English:` / `中文 / English` 模式为 `0`。 |
+| P16.1 第三十八批编码和空白检查 | 通过；第三十八批 6 个源文件 UTF-8 无 BOM，`git diff --check -- 第三十八批文件` 无空白错误。 |
+| `dev/scripts/Test-PortalPublicDocumentation.ps1` | 通过；16 个公开文档已登记，失败数 `0`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，`Notifications=115`。 |
+| `dev/scripts/Test-PortalXmlDocumentation.ps1 -Build` | 通过；Debug 构建成功，XML 文档可解析；`Portal` XML member count 为 `1478`，`Portal.Components` XML member count 为 `652`，`Portal.Components.Data` XML member count 为 `21`，`Portal.Components.Data1` XML member count 为 `654`，保留既有 `CS1591` 历史警告。 |
+| `dev/scripts/Get-PortalCommentDebtInventory.ps1` | 通过；P16.1 证据 `work-zone/dev/evidence/p16.1/comment-debt-inventory-20260726-0034.*`，`LegacyBilingualFormat=150`，`TodoOrDeferredMarker=114`，`LowValueRestatement=7`，`MissingNodeDocumentation=0`，`HighRiskScriptCandidate=22`。 |
 
 ## Known Residual Working Tree Items
 
