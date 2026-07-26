@@ -3,6 +3,18 @@
 初始化外置连接串指定的隔离 Portal 测试数据库。
 Initializes an isolated Portal test database selected by an external connection string.
 
+.LANG en
+Initializes a development or test Portal database only when the target database
+does not already exist and the caller explicitly confirms the operation. The
+script reads the connection string from an external config file, executes the
+known setup/migration scripts, and must not print passwords, server names, or
+full connection-string values.
+
+.LANG zh-CN
+仅在目标数据库尚不存在且调用方明确确认时，初始化开发或测试用 Portal 数据库。
+脚本从外置配置文件读取连接串，执行已知的初始化和迁移脚本，并且不得输出密码、
+服务器名称或完整连接串。
+
 .DESCRIPTION
 仅当目标数据库不存在且调用方显式确认时，按历史基础脚本和当前 P2/P3/P5 迁移建立测试库。
 Only when the target database is absent and the caller explicitly confirms, runs the legacy base scripts and current P2/P3/P5 migrations.

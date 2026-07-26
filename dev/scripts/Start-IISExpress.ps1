@@ -1,3 +1,33 @@
+<#
+.SYNOPSIS
+Starts IIS Express for the Portal development site.
+
+.LANG en
+Starts an IIS Express instance for the Portal site, usually on the fixed VSCode
+automation port 40001. When a non-root virtual path or non-localhost host name is
+requested, the script generates an isolated applicationhost.config under temp.
+It does not modify Visual Studio project files, global IIS settings, databases,
+or external configuration.
+
+.LANG zh-CN
+为 Portal 开发站点启动 IIS Express，通常使用 VSCode 自动化固定端口 40001。
+当请求非根虚拟目录或非 localhost 主机名时，脚本会在 temp 下生成隔离的
+applicationhost.config。它不修改 Visual Studio 项目文件、全局 IIS 设置、数据库
+或外置配置。
+
+.PARAMETER Port
+Local IIS Express port.
+
+.PARAMETER SitePath
+Portal site physical path. Defaults to src/Portal.
+
+.PARAMETER VirtualPath
+Optional virtual application path used to approximate IIS virtual-directory
+deployment.
+
+.PARAMETER HostName
+Host name for the generated IIS Express binding.
+#>
 [CmdletBinding()]
 param(
     [int]$Port = 40001,

@@ -1,3 +1,31 @@
+<#
+.SYNOPSIS
+Creates the VM task-agent package for legacy-browser automation.
+
+.LANG en
+Builds a portable VM-side task-agent package that polls a shared tasks folder,
+executes approved task commands, and writes structured logs/results back to the
+shared root. The package generator writes files and optionally a zip archive; it
+does not start the VM agent, does not run browser tests locally, and does not
+embed passwords or production secrets.
+
+.LANG zh-CN
+生成 VM 侧任务代理包。该代理会轮询共享 tasks 目录，执行经任务清单声明的命令，
+并把结构化日志和结果写回共享根目录。包生成脚本只写入文件并可选生成 zip；它
+不会启动 VM 代理、不会在本机运行浏览器测试，也不会内嵌密码或生产密钥。
+
+.PARAMETER OutputRoot
+Local folder where generated package folders and zip files are written.
+
+.PARAMETER DeployRoot
+Optional shared VM folder where the generated package is copied.
+
+.PARAMETER PollSeconds
+Polling interval used by the generated VM agent.
+
+.PARAMETER MaxTaskSeconds
+Maximum execution time enforced by the generated VM agent.
+#>
 [CmdletBinding()]
 param(
     [string]$OutputRoot = (Join-Path (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) 'temp/vm-task-agent-packages'),

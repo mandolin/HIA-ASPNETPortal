@@ -1,3 +1,29 @@
+<#
+.SYNOPSIS
+Publishes the Portal Web Forms project to a filesystem folder.
+
+.LANG en
+Builds a filesystem publish output for the Portal project and runs publish
+readiness checks before and after the MSBuild WebPublish step. The script writes
+only to the selected publish folder, does not modify IIS, databases, external
+configuration, credentials, or production machines, and fails if the target
+folder already exists.
+
+.LANG zh-CN
+将 Portal Web Forms 项目发布到文件系统目录，并在 MSBuild WebPublish 前后执行
+发布就绪检查。本脚本只写入指定发布目录，不修改 IIS、数据库、外置配置、凭据或
+生产机器；如果目标目录已经存在，会直接失败。
+
+.PARAMETER Configuration
+Build configuration, normally Debug or Release.
+
+.PARAMETER Platform
+MSBuild platform value passed through to the Portal project.
+
+.PARAMETER PublishPath
+Target filesystem publish folder. Leave empty to create a timestamped folder
+under temp/publish.
+#>
 [CmdletBinding()]
 param(
     [ValidateSet('Debug', 'Release')]

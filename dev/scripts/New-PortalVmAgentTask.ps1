@@ -1,3 +1,33 @@
+<#
+.SYNOPSIS
+Creates a task for the Win7/legacy-browser VM task agent.
+
+.LANG en
+Writes a task manifest and optional package reference into the shared VM agent
+directory so the already-running VM agent can execute it. The script may copy
+command text and package paths to the shared folder, but it does not execute the
+task locally and should never include raw passwords, tokens, cookies, or
+connection strings in the task record. Use password placeholders resolved inside
+the VM-side credential files when authentication is required.
+
+.LANG zh-CN
+向共享的 VM 代理目录写入任务清单和可选包引用，使已经运行的 VM 代理能够执行该
+任务。本脚本可能把命令文本和包路径写入共享目录，但不会在本机执行任务；任务
+记录中绝不能写入原始密码、Token、Cookie 或连接串。需要认证时，应使用占位符，
+由 VM 侧凭据文件解析。
+
+.PARAMETER AgentRoot
+Shared root directory watched by the VM task agent.
+
+.PARAMETER TaskName
+Human-readable task name used in manifest and result files.
+
+.PARAMETER Command
+Command lines to execute inside the VM agent.
+
+.PARAMETER RunUser
+Logical user key used by the VM-side credential resolver.
+#>
 [CmdletBinding(DefaultParameterSetName = 'Command')]
 param(
     [string]$AgentRoot = '\\192.168.199.124\Temp\HIA-ASPNETPortal',

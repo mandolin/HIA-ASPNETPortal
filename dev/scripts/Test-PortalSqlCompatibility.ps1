@@ -1,3 +1,33 @@
+<#
+.SYNOPSIS
+Checks or applies Portal SQL compatibility migrations.
+
+.LANG en
+Connects to the configured SQL Server database and verifies selected schema
+milestones. Apply switches execute migration scripts and therefore change the
+target database; require switches are read-only checks. Use only against a
+prepared development, test, or explicitly approved target database. The script
+does not print connection-string secrets and should be run with a template or
+external config file that is excluded from Git when it contains credentials.
+
+.LANG zh-CN
+连接到配置的 SQL Server 数据库，并验证指定的 schema 里程碑。Apply 开关会执行
+迁移脚本，因此会修改目标数据库；Require 开关仅做只读检查。请只在已准备好的
+开发库、测试库或明确批准的目标库上运行。本脚本不应打印连接串敏感值；当配置
+包含凭据时，应使用已排除入库的模板或外置配置文件。
+
+.PARAMETER ConnectionStringsConfigPath
+Connection strings config file used to locate the target database.
+
+.PARAMETER ConnectionStringName
+Logical connection-string name, defaults to Portal.
+
+.PARAMETER ApplyP2Migrations
+Applies P2 migration scripts and changes the target database.
+
+.PARAMETER RequireP2Migrations
+Checks P2 schema without applying changes.
+#>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
     [Parameter(Mandatory)]

@@ -1,3 +1,32 @@
+<#
+.SYNOPSIS
+Runs Portal HTTP smoke checks.
+
+.LANG en
+Runs lightweight HTTP smoke checks against a local or supplied Portal base URL.
+It can optionally start IIS Express, attempt authenticated admin checks when
+credentials are supplied, and verify generic error, document safety, and editor
+safety paths. Do not pass or log plaintext credentials; use SecureString input
+for AdminPassword and keep any captured evidence free of cookies or tokens.
+
+.LANG zh-CN
+针对本地或指定的 Portal BaseUrl 执行轻量 HTTP smoke 检查。它可以按需启动
+IIS Express，在提供凭据时尝试管理员认证检查，并验证通用错误页、文档安全和
+编辑器安全路径。不要传入或记录明文凭据；AdminPassword 应使用 SecureString，
+并确保采集证据中不包含 Cookie 或 Token。
+
+.PARAMETER BaseUrl
+Portal HTTP base URL.
+
+.PARAMETER StartIISExpress
+Starts IIS Express before running checks.
+
+.PARAMETER StopWhenComplete
+Stops the IIS Express instance started by this script after checks finish.
+
+.PARAMETER AdminPassword
+SecureString password used only for authenticated smoke checks.
+#>
 [CmdletBinding()]
 param(
     [ValidatePattern('^https?://')]

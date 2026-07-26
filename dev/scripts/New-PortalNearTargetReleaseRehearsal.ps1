@@ -2,6 +2,17 @@
 .SYNOPSIS
     Runs the P14.2 near-target release rehearsal and writes an evidence package.
 
+.LANG en
+Runs the near-target release rehearsal by publishing a filesystem package,
+creating release evidence, starting or reusing IIS Express, and running smoke
+checks. It is still development-side evidence: it must not be treated as real
+IIS, production TLS, production ACL, production database, or business approval.
+
+.LANG zh-CN
+执行近真实发布演练：生成文件系统发布包、创建发布证据、启动或复用 IIS Express，
+并运行 smoke 检查。它仍然只是开发侧证据，不得当作真实 IIS、生产 TLS、生产 ACL、
+生产数据库或业务签收结论。
+
 .DESCRIPTION
     中文：本脚本编排 P14.2 近真实发布演练：重新生成 FileSystem 发布包、生成 release manifest、
     启动或复用 IIS Express、执行 smoke、记录外置配置边界和回滚 dry-run，并可选捕获主题截图近似证据。

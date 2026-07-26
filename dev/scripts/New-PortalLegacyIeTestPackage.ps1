@@ -1,3 +1,28 @@
+<#
+.SYNOPSIS
+Creates a portable legacy IE smoke-test package.
+
+.LANG en
+Generates a zero-dependency package intended to run inside a Win7/IE VM. The
+package drives Internet Explorer through COM automation, writes detailed logs
+and zipped results, and must avoid embedding raw passwords. Authentication
+should use VM-side credential files or placeholders resolved by the generated
+script.
+
+.LANG zh-CN
+生成用于 Win7/IE 虚拟机内运行的零依赖旧 IE smoke 测试包。该包通过 IE COM 自动化
+驱动浏览器，写入详细日志和压缩结果，并且不得内嵌原始密码。认证应使用 VM 侧
+凭据文件，或由生成脚本解析的占位符。
+
+.PARAMETER BaseUrl
+Portal base URL reachable from the VM.
+
+.PARAMETER TaskName
+Task label used in generated package and result names.
+
+.PARAMETER AdminUser
+Logical admin user name used by the generated smoke script.
+#>
 [CmdletBinding()]
 param(
     [ValidatePattern('^https?://')]

@@ -1,3 +1,32 @@
+<#
+.SYNOPSIS
+Checks the current Portal compliance baseline.
+
+.LANG en
+Performs read-only compliance baseline checks for headers, security-related
+configuration, credential-risk markers, legacy compatibility warnings, and
+optional HTTP observations. It may issue HTTP GET requests when BaseUrl is
+provided, but it does not log in, mutate the site, change Web.config, write
+secrets, or execute external scanning tools.
+
+.LANG zh-CN
+对当前 Portal 合规基线执行只读检查，覆盖响应头、安全相关配置、凭据风险标记、
+旧兼容警告以及可选 HTTP 观测。当提供 BaseUrl 时，它可能发起 HTTP GET 请求；
+但不会登录、不会修改站点、不会改写 Web.config、不会写入密钥，也不会执行外部
+扫描工具。
+
+.PARAMETER Profile
+Compliance profile used to tune Dev/Test/Prod/Scan/LegacyIe expectations.
+
+.PARAMETER BaseUrl
+Optional HTTP base URL for runtime observations.
+
+.PARAMETER OutputJson
+Optional JSON evidence output path.
+
+.PARAMETER FailOnWarning
+Treats warnings as a non-zero result for stricter gates.
+#>
 [CmdletBinding()]
 param(
     [string]$PortalPath,

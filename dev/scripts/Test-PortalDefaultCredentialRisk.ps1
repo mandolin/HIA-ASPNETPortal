@@ -1,3 +1,27 @@
+<#
+.SYNOPSIS
+Checks default-credential and legacy password-risk markers.
+
+.LANG en
+Runs read-only checks for seeded default credentials, legacy password hashes,
+documentation warnings, setup scripts, and profile-specific risk expectations.
+It does not connect to a live database, does not verify real passwords, does not
+print secrets, and does not change setup scripts or Web.config.
+
+.LANG zh-CN
+只读检查默认凭据 seed、旧口令哈希、文档警告、安装脚本以及不同 profile 下的风险
+期望。它不连接实时数据库、不校验真实密码、不输出密钥，也不修改安装脚本或
+Web.config。
+
+.PARAMETER Profile
+Risk profile used to classify Dev/Test/Prod/Scan expectations.
+
+.PARAMETER OutputJson
+Optional JSON evidence output path.
+
+.PARAMETER FailOnWarning
+Treats warnings as a failed gate for stricter security runs.
+#>
 [CmdletBinding()]
 param(
     [string]$RootPath,
