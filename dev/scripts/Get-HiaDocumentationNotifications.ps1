@@ -1,3 +1,50 @@
+<#
+.SYNOPSIS
+.LANG en
+Reads notification documents from the HIA-Documentation-Sys WorkZone.
+
+.LANG zh-CN
+读取 HIA-Documentation-Sys WorkZone 中的通知文档。
+
+.DESCRIPTION
+.LANG en
+Lists recent Markdown notices from HIA-Documentation-Sys/work-zone/notify so this
+project can actively pull upstream documentation-tooling messages. The script is
+read-only: it does not copy notices into this repository and does not update any
+local planning files by itself.
+
+.LANG zh-CN
+列出 HIA-Documentation-Sys/work-zone/notify 下近期 Markdown 通知，让本项目主动拉取上游
+文档工具链消息。本脚本为只读行为：不会把通知复制进本仓库，也不会自行更新本地规划文件。
+
+.PARAMETER HiaDocumentationRoot
+.LANG en
+Optional root path of the HIA-Documentation-Sys repository. When omitted, the script uses the sibling repository path.
+
+.LANG zh-CN
+可选的 HIA-Documentation-Sys 仓库根目录。省略时使用同级仓库路径。
+
+.PARAMETER Since
+.LANG en
+Only returns notices whose last write time is greater than or equal to this value.
+
+.LANG zh-CN
+只返回最后写入时间大于或等于该值的通知。
+
+.PARAMETER Latest
+.LANG en
+Maximum number of recent notices to return.
+
+.LANG zh-CN
+最多返回的近期通知数量。
+
+.PARAMETER ShowContent
+.LANG en
+Prints full notice content instead of the summary table.
+
+.LANG zh-CN
+输出完整通知内容，而不是摘要表格。
+#>
 [CmdletBinding()]
 param(
     [string]$HiaDocumentationRoot,
@@ -13,8 +60,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# 中文：本脚本只读取 HIA-Documentation-Sys 的 WorkZone 通知，不复制通知、不修改本项目状态。
-# English: This script only reads HIA-Documentation-Sys WorkZone notifications. It does not copy notices or modify this project.
+# <lang>
+#   <zh-CN>本脚本只读取 HIA-Documentation-Sys 的 WorkZone 通知，不复制通知、不修改本项目状态。</zh-CN>
+#   <en>This script only reads HIA-Documentation-Sys WorkZone notifications. It does not copy notices or modify this project.</en>
+# </lang>
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $defaultHiaDocumentationRoot = Join-Path (Split-Path -Parent $repositoryRoot) 'HIA-Documentation-Sys'
 

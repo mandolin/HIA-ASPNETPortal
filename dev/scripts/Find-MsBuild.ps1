@@ -1,3 +1,21 @@
+<#
+.SYNOPSIS
+.LANG en
+Finds an installed MSBuild executable for local portal automation.
+
+.LANG zh-CN
+为门户本地自动化查找已安装的 MSBuild 可执行文件。
+
+.DESCRIPTION
+.LANG en
+Uses Visual Studio's vswhere first, then falls back to known Visual Studio and
+Build Tools installation paths. The script only reports a usable path and does
+not install, repair, or modify Visual Studio components.
+
+.LANG zh-CN
+优先使用 Visual Studio 的 vswhere，再回退到已知的 Visual Studio 与 Build Tools 安装路径。
+本脚本只返回可用路径，不安装、修复或修改任何 Visual Studio 组件。
+#>
 [CmdletBinding()]
 param()
 

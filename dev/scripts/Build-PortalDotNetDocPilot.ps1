@@ -1,3 +1,51 @@
+<#
+.SYNOPSIS
+.LANG en
+Runs the HIA DotNetDoc pilot for the portal codebase.
+
+.LANG zh-CN
+为门户代码库运行 HIA DotNetDoc 试点生成流程。
+
+.DESCRIPTION
+.LANG en
+Optionally builds XML documentation, restores the isolated DotNetDoc Node
+workspace, and runs the selected DotNetDoc npm script. The tool output is written
+under temp/documentation and remains separate from the Web Forms runtime,
+Visual Studio Task Runner, and legacy Gulp pipeline.
+
+.LANG zh-CN
+可选构建 XML 文档、还原隔离的 DotNetDoc Node 工作区，并运行选定的 DotNetDoc npm 脚本。
+工具输出写入 temp/documentation，与 Web Forms 运行时、Visual Studio Task Runner 和旧 Gulp
+流水线保持隔离。
+
+.PARAMETER SkipRestore
+.LANG en
+Skips npm ci when node_modules already exists and the caller accepts the current local dependency state.
+
+.LANG zh-CN
+当 node_modules 已存在且调用方接受当前本地依赖状态时，跳过 npm ci。
+
+.PARAMETER SkipXmlBuild
+.LANG en
+Skips the XML documentation build precheck and consumes existing XML outputs.
+
+.LANG zh-CN
+跳过 XML 文档构建预检，直接使用现有 XML 输出。
+
+.PARAMETER ApiOnly
+.LANG en
+Runs the API-only DotNetDoc script instead of the full documentation build.
+
+.LANG zh-CN
+运行 API-only DotNetDoc 脚本，而不是完整文档构建。
+
+.PARAMETER SourceProbe
+.LANG en
+Runs the source-probe DotNetDoc script for parser and source extraction checks.
+
+.LANG zh-CN
+运行 source-probe DotNetDoc 脚本，用于解析器和源码抽取检查。
+#>
 [CmdletBinding()]
 param(
     [switch]$SkipRestore,

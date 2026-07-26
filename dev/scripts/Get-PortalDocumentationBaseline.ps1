@@ -1,3 +1,36 @@
+<#
+.SYNOPSIS
+.LANG en
+Creates a read-only documentation baseline for tracked portal sources.
+
+.LANG zh-CN
+为已追踪门户源码生成只读文档化基线。
+
+.DESCRIPTION
+.LANG en
+Counts tracked source files, C# XML documentation lines, public/protected
+declaration candidates, and known documentation-boundary directories. The output
+is an inventory snapshot only; it does not judge final documentation quality and
+does not adopt generated or local-only directories.
+
+.LANG zh-CN
+统计已追踪源码文件、C# XML 文档行、public/protected 声明候选和已知文档边界目录。
+输出只是 inventory 快照，不判定最终文档质量，也不采纳生成目录或本机专属目录。
+
+.PARAMETER AsJson
+.LANG en
+Writes the baseline object to the pipeline as JSON.
+
+.LANG zh-CN
+以 JSON 形式将基线对象写入管道。
+
+.PARAMETER OutputJson
+.LANG en
+Optional file path for a UTF-8 no BOM JSON baseline artifact.
+
+.LANG zh-CN
+可选的 UTF-8 无 BOM JSON 基线证据输出路径。
+#>
 [CmdletBinding()]
 param(
     [switch]$AsJson,
@@ -8,8 +41,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# 基线只读取 Git 已追踪源码，避免将本机资料或历史生成物误纳入公开文档范围。
-# The baseline reads tracked sources only, so local material and generated history are never adopted implicitly.
+# <lang>
+#   <zh-CN>基线只读取 Git 已追踪源码，避免将本机资料或历史生成物误纳入公开文档范围。</zh-CN>
+#   <en>The baseline reads tracked sources only, so local material and generated history are never adopted implicitly.</en>
+# </lang>
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $trackedFiles = @(& git -C $repositoryRoot ls-files)
 if ($LASTEXITCODE -ne 0) {
@@ -88,8 +123,10 @@ function Get-CSharpAreaSummary {
             $xmlDocumentationLineCount += $xmlLineCount
         }
 
-        # 这是 inventory 启发式统计，不等价于 API 完整度或注释质量百分比。
-        # This is an inventory heuristic, not an API-completeness or documentation-quality percentage.
+        # <lang>
+        #   <zh-CN>这是 inventory 启发式统计，不等价于 API 完整度或注释质量百分比。</zh-CN>
+        #   <en>This is an inventory heuristic, not an API-completeness or documentation-quality percentage.</en>
+        # </lang>
         $publicProtectedCandidateCount += [System.Text.RegularExpressions.Regex]::Matches(
             $content,
             '(?m)^\s*(?:public|protected)\b').Count

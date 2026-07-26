@@ -1,3 +1,29 @@
+<#
+.SYNOPSIS
+.LANG en
+Validates the portal XML documentation build outputs.
+
+.LANG zh-CN
+验证门户 XML 文档构建输出。
+
+.DESCRIPTION
+.LANG en
+Optionally builds Debug|Any CPU, then checks the expected XML documentation files
+for existence, parseability, assembly names, and non-empty member lists. The
+script verifies documentation artifacts only and does not rewrite MSBuild or
+Visual Studio project settings.
+
+.LANG zh-CN
+可选构建 Debug|Any CPU，然后检查预期 XML 文档文件是否存在、能否解析、程序集名称是否匹配、
+成员列表是否非空。本脚本只验证文档产物，不改写 MSBuild 或 Visual Studio 项目设置。
+
+.PARAMETER Build
+.LANG en
+Builds the solution before checking the XML documentation artifacts.
+
+.LANG zh-CN
+检查 XML 文档产物前先构建解决方案。
+#>
 [CmdletBinding()]
 param(
     [switch]$Build
@@ -6,8 +32,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# P4.3 只验证既有 Debug XML 文档输出，不能改写旧项目的 MSBuild/Visual Studio 配置。
-# P4.3 validates existing Debug XML documentation outputs only and must not rewrite legacy MSBuild or Visual Studio settings.
+# <lang>
+#   <zh-CN>P4.3 只验证既有 Debug XML 文档输出，不能改写旧项目的 MSBuild/Visual Studio 配置。</zh-CN>
+#   <en>P4.3 validates existing Debug XML documentation outputs only and must not rewrite legacy MSBuild or Visual Studio settings.</en>
+# </lang>
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $expectedDocuments = @(
     [pscustomobject]@{ Project = 'Portal'; RelativePath = 'src/Portal/bin/Portal.xml'; AssemblyName = 'Portal' },
