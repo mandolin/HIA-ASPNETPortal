@@ -1,17 +1,37 @@
 <#
 .SYNOPSIS
-    Builds a read-only P14.3 enterprise-scan baseline evidence package.
+    Builds a read-only enterprise-scan baseline evidence package.
 
 .DESCRIPTION
-    中文：本脚本为 P14.3 生成企业扫描准备基线，重点盘点 Web.config 中安全响应头、
+    中文：本脚本生成企业扫描准备基线，最初用于 P14.3，现在也可被后续阶段复用。
+    它重点盘点 Web.config 中安全响应头、
     Cookie、Forms Authentication、错误页、上传限制、machineKey 和发布转换线索。
     脚本只读取仓库文件并输出证据包，不修改 Web.config，不连接数据库，不读取外置敏感配置，
     也不把开发基线或源码转换文件宣称为真实企业扫描通过。
-    English: This script builds a P14.3 enterprise-scan preparation baseline by inventorying
+    English: This script builds an enterprise-scan preparation baseline. It was introduced for
+    P14.3 and can be reused by later phases. It inventories
     security headers, cookies, Forms Authentication, custom errors, upload limits, machineKey,
     and transform hints from Web.config. It only reads repository files and writes an evidence
     package; it does not modify Web.config, connect to a database, read external secret
     configuration, or claim that a development/source baseline passed a real enterprise scan.
+
+.PARAMETER EvidencePackageTitle
+    .LANG en
+    Optional title written into the generated README. Leave the default value for the original
+    P14.3 package, or pass the current phase name when the same read-only baseline script is reused.
+
+    .LANG zh-CN
+    写入生成 README 的可选标题。原 P14.3 证据包可保持默认值；后续阶段复用本只读
+    baseline 脚本时，可传入当前阶段名称，避免证据目录与标题互相误导。
+
+.PARAMETER BaselineScopeCode
+    .LANG en
+    Finding code used for the generated package scope record. Keep the default for P14.3, or pass
+    a later phase code when the same read-only scan baseline is reused.
+
+    .LANG zh-CN
+    生成证据包范围说明记录时使用的 finding code。P14.3 可保持默认值；后续阶段复用本
+    只读扫描 baseline 时，可传入新的阶段 code，避免结果里混入过期阶段编号。
 #>
 [CmdletBinding()]
 param(
@@ -24,7 +44,11 @@ param(
 
     [string]$OutputRoot,
 
-    [string]$ScanRegisterTemplatePath
+    [string]$ScanRegisterTemplatePath,
+
+    [string]$EvidencePackageTitle = 'P14.3 Evidence Package',
+
+    [string]$BaselineScopeCode = 'P14.3-SCOPE'
 )
 
 Set-StrictMode -Version Latest
@@ -259,7 +283,7 @@ function Format-MarkdownTableCell {
 
 New-Item -ItemType Directory -Force -Path $runDirectory | Out-Null
 
-Add-ScanFinding -Status 'Info' -EnterpriseSeverity 'Info' -Code 'P14.3-SCOPE' -Area 'Process' -Title '当前生成企业扫描准备 baseline，不代表真实扫描通过。' -Evidence $Profile -Recommendation '真实绿盟等报告到来后登记到 WorkZone 脱敏目录并逐项分流。'
+Add-ScanFinding -Status 'Info' -EnterpriseSeverity 'Info' -Code $BaselineScopeCode -Area 'Process' -Title '当前生成企业扫描准备 baseline，不代表真实扫描通过。' -Evidence $Profile -Recommendation '真实企业扫描报告到来后登记到 WorkZone 脱敏目录并逐项分流。'
 
 if (-not (Test-Path -LiteralPath $resolvedWebConfigPath -PathType Leaf)) {
     Add-ScanFinding -Status 'Fail' -EnterpriseSeverity 'High' -Code 'CFG-WEBCONFIG' -Area 'Configuration' -Title 'Web.config 未找到。' -Evidence $resolvedWebConfigPath -Recommendation '确认 PortalPath 或 WebConfigPath。'
@@ -465,7 +489,7 @@ $readmePath = Join-Path $runDirectory 'README.md'
 Write-Utf8NoBomFile -Path $jsonPath -Content (($baseline | ConvertTo-Json -Depth 8) + [Environment]::NewLine)
 
 $tableLines = @(
-    '# P14.3 企业扫描准备 Baseline',
+    ('# {0}' -f $EvidencePackageTitle),
     '',
     ('生成时间 UTC：`{0}`' -f $summary.GeneratedAtUtc),
     ('Profile：`{0}`' -f $Profile),
@@ -488,7 +512,7 @@ foreach ($finding in $findings) {
 Write-Utf8NoBomFile -Path $tablePath -Content (($tableLines -join [Environment]::NewLine) + [Environment]::NewLine)
 
 $readmeLines = @(
-    '# P14.3 Evidence Package',
+    ('# {0}' -f $EvidencePackageTitle),
     '',
     '本目录由 `dev/scripts/New-PortalEnterpriseScanBaseline.ps1` 生成。',
     '',
@@ -515,7 +539,7 @@ $readmeLines = @(
 
 Write-Utf8NoBomFile -Path $readmePath -Content (($readmeLines -join [Environment]::NewLine) + [Environment]::NewLine)
 
-Write-Host ('P14.3 enterprise scan baseline: {0}' -f (ConvertTo-RepoPath -Path $runDirectory))
+Write-Host ('{0}: {1}' -f $EvidencePackageTitle, (ConvertTo-RepoPath -Path $runDirectory))
 Write-Host ('Pass={0}; Warning={1}; Fail={2}; PendingTargetEnvironment={3}' -f $summary.PassedChecks, $summary.WarningChecks, $summary.FailedChecks, $summary.PendingTargetEnvironmentCount)
 
 if ($summary.FailedChecks -gt 0) {
