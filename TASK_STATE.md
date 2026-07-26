@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.5` 待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P16.5-discussion-questions.md`；确认后复跑 P16 质量门禁并输出 closeout。 |
-| 当前完成条件 | P16.4 当前切片已完成：PowerShell documentation inventory 已落地，12 个高风险脚本 HIA 双语标记缺口为 `0`；P16.5 已形成待讨论问题，下一步需用户确认后执行周期收口门禁。 |
+| 当前大周期 | `W-anp-P17` 已形成入口草案 |
+| 当前阶段 | `W-anp-P17.0` 待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P17.0-discussion-questions.md`；确认后进入 P17.1，补齐剩余 PowerShell 脚本 help 和主要内部注释双语化。 |
+| 当前完成条件 | P16 已完成：P16.5 门禁复核通过，P16 closeout、P17 输入和 P17.0 待讨论问题已形成。下一步需用户确认 P17.0 后继续推进。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items
@@ -127,13 +127,14 @@
 | P16.3 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P16.3-discussion-questions.md` |
 | P16.3 TODO/延期标记与低价值注释清理 | completed | `dev/scripts/Get-PortalTodoDebtInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.3/todo-debt-inventory-20260726-1107.*`；`Total=245; active=0; deferred-plan=205; external-env=34; needs-owner-confirmation=4; resolved-stale=2`；实施结果 `work-zone/dev/plans/W-anp-P16.3-implementation-result.md`。 |
 | P16.4 高风险 PowerShell 脚本文档化 | completed | `dev/scripts/Get-PortalPowerShellDocumentationInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.4/powershell-documentation-inventory-20260726-1224.*`；`TotalScripts=58; HighRiskScripts=12; HighRiskMissingHiaLanguageMarkers=0; MissingCommentHelp=21`；实施结果 `work-zone/dev/plans/W-anp-P16.4-implementation-result.md`。 |
+| P16.5 质量门禁与周期收口 | completed | `work-zone/dev/evidence/p16.5/20260726-1248/`；`Documentation readiness FailedChecks=0`、`TODO active=0`、`PowerShell high-risk missing=0`、`DotNetDoc success: 16 artifact(s)`；`work-zone/dev/plans/W-anp-P16-closeout.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P16.4 PowerShell 双语 help 修正提交 `9732cb6`；任务账本同步待提交 | 高风险脚本 help 的 `.SYNOPSIS` 和新增 `.PARAMETER` 说明已改为中英双语；任务账本将单独同步到 P16.5 唯一下一步。 |
-| WorkZone | P16.4 双语 help 修正资料提交 `4dafb88` | P16.4 实施结果、最终 evidence、P16.5 待讨论问题和修正日志已提交。 |
+| 主仓库 | P16.5 inventory 修正提交 `29a84c3`；任务账本同步待提交 | TODO inventory false-positive 修正已提交；任务账本将单独同步到 P17.0 唯一下一步。 |
+| WorkZone | P16.5/P17.0 资料提交 `83ec323` | P16.5 evidence、P16 closeout、P17 输入、P17.0 待讨论问题和本轮日志已提交。 |
 
 ## Upcoming Planning Constraints
 
