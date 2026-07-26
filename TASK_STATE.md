@@ -126,20 +126,21 @@
 | P16.2 DotNetDoc 最小接入层 | completed | 主仓库提交 `1c7c2dd`；`dev/documentation/dotnetdoc/`、`dotnetdoc.config.json`、`dotnetdoc.api-only.config.json`、`dotnetdoc.source-probe.config.json`、`dev/scripts/Build-PortalDotNetDocPilot.ps1`；默认完整路径 `DotNetDoc success: 16 artifact(s)`，API-only `8 artifact(s)`，`npm audit` 为 `0 vulnerabilities`。 |
 | P16.3 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P16.3-discussion-questions.md` |
 | P16.3 TODO/延期标记与低价值注释清理 | completed | `dev/scripts/Get-PortalTodoDebtInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.3/todo-debt-inventory-20260726-1107.*`；`Total=245; active=0; deferred-plan=205; external-env=34; needs-owner-confirmation=4; resolved-stale=2`；实施结果 `work-zone/dev/plans/W-anp-P16.3-implementation-result.md`。 |
-| P16.4 高风险 PowerShell 脚本文档化 | completed | `dev/scripts/Get-PortalPowerShellDocumentationInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.4/powershell-documentation-inventory-20260726-1224.*`；`TotalScripts=57; HighRiskScripts=12; HighRiskMissingHiaLanguageMarkers=0; MissingCommentHelp=21`；实施结果 `work-zone/dev/plans/W-anp-P16.4-implementation-result.md`。 |
+| P16.4 高风险 PowerShell 脚本文档化 | completed | `dev/scripts/Get-PortalPowerShellDocumentationInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.4/powershell-documentation-inventory-20260726-1224.*`；`TotalScripts=58; HighRiskScripts=12; HighRiskMissingHiaLanguageMarkers=0; MissingCommentHelp=21`；实施结果 `work-zone/dev/plans/W-anp-P16.4-implementation-result.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P16.4 PowerShell 脚本文档化提交 `34cde3d`；任务账本同步待提交 | PowerShell documentation inventory 脚本和高风险脚本 HIA help 补强已提交；任务账本将单独同步到 P16.5 唯一下一步。 |
-| WorkZone | P16.4/P16.5 资料提交 `9bcf4f4` | P16.4 实施结果、最终 evidence、P16.5 待讨论问题、状态索引和本轮日志已提交。 |
+| 主仓库 | P16.4 PowerShell 双语 help 修正提交 `9732cb6`；任务账本同步待提交 | 高风险脚本 help 的 `.SYNOPSIS` 和新增 `.PARAMETER` 说明已改为中英双语；任务账本将单独同步到 P16.5 唯一下一步。 |
+| WorkZone | P16.4 双语 help 修正资料提交 `4dafb88` | P16.4 实施结果、最终 evidence、P16.5 待讨论问题和修正日志已提交。 |
 
 ## Upcoming Planning Constraints
 
 | 事项 | 状态 | 处理原则 |
 | --- | --- | --- |
 | 代码梳理、注释完善与文档化专项 | active | P15 已完成输入质量整理；P16 已拆分，P16.1 进入全量 `<lang>` / `<l>` 迁移与注释丰富度提升讨论；全量注释调理需在 `W-anp-P16.5` 验收前完成或登记延期债务。 |
+| PowerShell 注释完整双语化 | active | P16.4 已完成高风险脚本 help 双语化当前切片；所有 PowerShell 文本注释默认应中英双语，并为后续外部多语言文件留扩展余地。剩余中低风险脚本和内部注释需写入 P16.5 closeout/P17 输入，不得仅口头顺延。 |
 | 绿盟/本地企业扫描工具 | pending-tool-input | 当前未找到绿盟官方免费本地社区版证据；已记录开源替代组合 ZAP、Greenbone/OpenVAS Free、Nuclei、Nikto。若真实报告或工具输入到 `W-anp-P17.1` 仍未到位，必须至少启动本地 baseline。 |
 
 ## Last Validation Evidence
