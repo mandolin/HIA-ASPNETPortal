@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.3` 待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P16.3-discussion-questions.md`；确认后先做 TODO/延期标记只读 inventory。 |
-| 当前完成条件 | P16.2 当前切片已完成：DotNetDoc `0.1.3` 最小接入层已落地，默认/API-only 路径通过，source-probe 已记录为研究入口。P16.3 已形成待讨论问题，下一步需用户确认后执行 TODO debt inventory。 |
+| 当前阶段 | `W-anp-P16.4` 待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P16.4-discussion-questions.md`；确认后先做高风险 PowerShell 脚本 inventory。 |
+| 当前完成条件 | P16.3 当前切片已完成：TODO debt inventory 已落地，最终证据 `todo-debt-inventory-20260726-1107.*` 显示 `active=0`；明显过期或误导的 TODO/临时说明已安全清理。P16.4 已形成待讨论问题，下一步需用户确认后推进脚本文档化。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items
@@ -125,13 +125,14 @@
 | P16.2 DotNetDoc 输入盘点与待讨论问题 | completed | `work-zone/dev/plans/W-anp-P16.2-dotnetdoc-intake.md`、`work-zone/dev/plans/W-anp-P16.2-design-options.md`、`work-zone/dev/plans/W-anp-P16.2-discussion-questions.md`；npm 当前 runner `0.1.3`，旧候选 `0.1.2` 不直接复制。 |
 | P16.2 DotNetDoc 最小接入层 | completed | 主仓库提交 `1c7c2dd`；`dev/documentation/dotnetdoc/`、`dotnetdoc.config.json`、`dotnetdoc.api-only.config.json`、`dotnetdoc.source-probe.config.json`、`dev/scripts/Build-PortalDotNetDocPilot.ps1`；默认完整路径 `DotNetDoc success: 16 artifact(s)`，API-only `8 artifact(s)`，`npm audit` 为 `0 vulnerabilities`。 |
 | P16.3 待讨论问题 | completed | `work-zone/dev/plans/W-anp-P16.3-discussion-questions.md` |
+| P16.3 TODO/延期标记与低价值注释清理 | completed | `dev/scripts/Get-PortalTodoDebtInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.3/todo-debt-inventory-20260726-1107.*`；`Total=245; active=0; deferred-plan=205; external-env=34; needs-owner-confirmation=4; resolved-stale=2`；实施结果 `work-zone/dev/plans/W-anp-P16.3-implementation-result.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P16.2 DotNetDoc 接入层提交 `1c7c2dd`；任务账本由本次同步提交记录 | DotNetDoc pilot 脚本、配置、工具包和公开文档已提交；任务账本同步到 P16.3 唯一下一步。 |
-| WorkZone | P16.2/P16.3 资料提交 `d655045` | P16.2 实施结果和 P16.3 待讨论问题已提交；下一步等待用户确认。 |
+| 主仓库 | P16.3 TODO debt inventory 提交 `90603d8`；任务账本同步待提交 | TODO debt inventory 脚本和少量过期/误导 TODO 注释清理已提交；任务账本将单独同步到 P16.4 唯一下一步。 |
+| WorkZone | P16.3/P16.4 资料提交 `c54b83e` | P16.3 实施结果、最终 evidence、P16.4 待讨论问题、状态索引和本轮日志已提交。 |
 
 ## Upcoming Planning Constraints
 
