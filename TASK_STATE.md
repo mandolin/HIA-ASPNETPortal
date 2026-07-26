@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P18` 入口待确认 |
-| 当前阶段 | `W-anp-P18.0` 待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P18.0-discussion-questions.md`；确认后进入 P18.1 HIA 边界 inventory 和最小 proof 设计。 |
-| 当前完成条件 | P17 已完成并等待提交：P17.5 验收证据位于 `work-zone/dev/evidence/p17.5/20260726-1503/`；`MissingCommentHelp=0`；扫描 baseline `Pass=15; Warning=1; Fail=0; PendingTargetEnvironment=6`；文档 readiness `FailedChecks=0`；合规 baseline `Fail=0`。 |
+| 当前大周期 | 后续周期方向待确认；`W-anp-P18` 已整体延期 |
+| 当前阶段 | HIA 集成暂停，等待替代周期入口 |
+| 当前唯一下一步 | 等待用户指定下一条推进主线；在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P17 已完成并已提交推送：P17.5 验收证据位于 `work-zone/dev/evidence/p17.5/20260726-1503/`；`MissingCommentHelp=0`；扫描 baseline `Pass=15; Warning=1; Fail=0; PendingTargetEnvironment=6`；文档 readiness `FailedChecks=0`；合规 baseline `Fail=0`。P18/HIA 集成因 HIA 基础抽象设计尚未启动而延期。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items
@@ -59,7 +59,7 @@
 | P13.4 版本节奏与发布说明当前切片 | completed | `work-zone/dev/plans/W-anp-P13.4-implementation-result.md`；release summary 证据 `work-zone/dev/evidence/p13.4/20260722-131600/`；内部 release entry `work-zone/dev/releases/0.13.1-p13-productization-evidence-baseline.md`。 |
 | P13.5 交付验收与周期组收口问题清单 | completed | `work-zone/dev/plans/W-anp-P13.5-discussion-questions.md`；用户确认全部按推荐推进，并确认真实环境事项可在不阻塞时顺延。 |
 | P13.5 交付验收与周期组收口当前切片 | completed | `work-zone/dev/plans/W-anp-P13.5-acceptance-result.md`、`work-zone/dev/plans/W-anp-P13-closeout.md`、`work-zone/dev/plans/C-anp-P1-closeout.md`。 |
-| C-anp-P2 规划入口 | completed | `work-zone/dev/plans/C-anp-P2.md`；建议 P14-P17 以目标环境补证、企业扫描、HIA runtime pilot 和后续业务/Workflow 为主线。 |
+| C-anp-P2 规划入口 | completed | `work-zone/dev/plans/C-anp-P2.md`；P14-P17 以目标环境补证、企业扫描准备和文档化/脚本治理为主线；HIA runtime pilot 已因基础抽象未启动而延期。 |
 | P14.0 目标环境补证与发布演练问题清单 | completed | `work-zone/dev/plans/W-anp-P14.0-discussion-questions.md`；用户回复“继续推进”，视为确认进入 P14。 |
 | P14 总规划与 breakdown | completed | `work-zone/dev/plans/W-anp-P14.md`、`work-zone/dev/plans/W-anp-P14-breakdown.md`。 |
 | P14.1 目标环境矩阵 | completed | `work-zone/dev/plans/W-anp-P14.1-target-environment-matrix.md`。 |
@@ -133,8 +133,8 @@
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P17.5 当前待提交 | 任务账本已推进到 P18.0 待确认；P17 主仓库最近已推送到 `c24a468`，本轮仅任务账本有待提交改动。 |
-| WorkZone | P17.5 当前待提交 | P17.5 验收、P17 closeout、P18 入口和 P17.5 证据包已生成，等待提交推送。 |
+| 主仓库 | P17.5 已提交推送；P18 延期状态待提交 | 任务账本将从 P18.0 待确认改为 HIA 集成整体延期；本轮不改运行代码。 |
+| WorkZone | P17.5 已提交推送；P18 延期状态待提交 | P18 规划、入口问题、当前状态和索引将标记为延期，保留为未来候选。 |
 
 ## Upcoming Planning Constraints
 
@@ -143,7 +143,7 @@
 | 代码梳理、注释完善与文档化专项 | completed-current-cycle | P15-P17 已完成当前两轮文档化、注释、脚本文档化和生成物清理主线；后续继续 touch-improve，不在 P18 阻塞。 |
 | PowerShell 注释完整双语化 | completed-current-cycle | P17.1 已将 58 个脚本 comment-based help 缺口清零；外部新增语种机制交由 HIA-Documentation-Sys 后续实现。 |
 | 绿盟/本地企业扫描工具 | pending-user-tool-selection | 用户确认企业合规专项、绿盟类映射和开源扫描工具接入先延期，等待用户确定一到两个开源扫描工具后再启动。 |
-| HIA 集成与跨系统运行时 pilot | pending-discussion | P18 入口已生成，建议先做边界 inventory 和最小 proof，不立即重构旧用户/角色核心。 |
+| HIA 集成与跨系统运行时 pilot | deferred-user-blocked | 用户确认 HIA 基础抽象设计尚未启动，因此整个 HIA 集成事项整体延后；只有用户后续明确通知条件满足后，才恢复 P18 或另起 HIA 专项。 |
 
 ## Last Validation Evidence
 
