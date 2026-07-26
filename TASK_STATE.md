@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P17` 已启动 |
-| 当前阶段 | `W-anp-P17.5` 待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P17.5-discussion-questions.md`；确认后执行 P17 周期验收与收口。 |
-| 当前完成条件 | P17.1 已完成并推送：58 个 PowerShell 脚本全部具备 comment-based help，`MissingCommentHelp=0`。P17.2 已按用户批注收口为边界结论；P17.3 已完成生成物与历史文档工具当前清理切片；P17.4 已生成 Scan profile baseline，`Pass=15; Warning=1; Fail=0; PendingTargetEnvironment=6`。 |
+| 当前大周期 | `W-anp-P18` 入口待确认 |
+| 当前阶段 | `W-anp-P18.0` 待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P18.0-discussion-questions.md`；确认后进入 P18.1 HIA 边界 inventory 和最小 proof 设计。 |
+| 当前完成条件 | P17 已完成并等待提交：P17.5 验收证据位于 `work-zone/dev/evidence/p17.5/20260726-1503/`；`MissingCommentHelp=0`；扫描 baseline `Pass=15; Warning=1; Fail=0; PendingTargetEnvironment=6`；文档 readiness `FailedChecks=0`；合规 baseline `Fail=0`。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items
@@ -133,21 +133,26 @@
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P17.1 第一批脚本注释补强提交 `703e759`；收尾提交 `be93172`；任务账本同步提交 `18795fa` | 21 个缺 help 脚本已全部补齐并推送。 |
-| WorkZone | P17.1 第一批资料提交 `f0eea34`；收尾资料提交 `ca5129e`；P17.2 草案待提交 | P17.2 设计草案和待讨论问题已生成。 |
+| 主仓库 | P17.5 当前待提交 | 任务账本已推进到 P18.0 待确认；P17 主仓库最近已推送到 `c24a468`，本轮仅任务账本有待提交改动。 |
+| WorkZone | P17.5 当前待提交 | P17.5 验收、P17 closeout、P18 入口和 P17.5 证据包已生成，等待提交推送。 |
 
 ## Upcoming Planning Constraints
 
 | 事项 | 状态 | 处理原则 |
 | --- | --- | --- |
-| 代码梳理、注释完善与文档化专项 | active | P15 已完成输入质量整理；P16 已拆分，P16.1 进入全量 `<lang>` / `<l>` 迁移与注释丰富度提升讨论；全量注释调理需在 `W-anp-P16.5` 验收前完成或登记延期债务。 |
-| PowerShell 注释完整双语化 | active | P16.4 已完成高风险脚本 help 双语化当前切片；P17.1 已将剩余 help 缺口从 21 降至 0。所有 PowerShell 文本注释默认应中英双语；现有 `en` / `zh-CN` 保持内嵌，外部语言文件只作为未来新增语种扩展入口。 |
-| 绿盟/本地企业扫描工具 | pending-tool-input | 当前未找到绿盟官方免费本地社区版证据；已记录开源替代组合 ZAP、Greenbone/OpenVAS Free、Nuclei、Nikto。若真实报告或工具输入到 `W-anp-P17.1` 仍未到位，必须至少启动本地 baseline。 |
+| 代码梳理、注释完善与文档化专项 | completed-current-cycle | P15-P17 已完成当前两轮文档化、注释、脚本文档化和生成物清理主线；后续继续 touch-improve，不在 P18 阻塞。 |
+| PowerShell 注释完整双语化 | completed-current-cycle | P17.1 已将 58 个脚本 comment-based help 缺口清零；外部新增语种机制交由 HIA-Documentation-Sys 后续实现。 |
+| 绿盟/本地企业扫描工具 | pending-user-tool-selection | 用户确认企业合规专项、绿盟类映射和开源扫描工具接入先延期，等待用户确定一到两个开源扫描工具后再启动。 |
+| HIA 集成与跨系统运行时 pilot | pending-discussion | P18 入口已生成，建议先做边界 inventory 和最小 proof，不立即重构旧用户/角色核心。 |
 
 ## Last Validation Evidence
 
 | 验证 | 结果 |
 | --- | --- |
+| `dev/scripts/Get-PortalPowerShellDocumentationInventory.ps1` | P17.5 通过；`TotalScripts=58; ScriptsWithCommentHelp=58; MissingCommentHelp=0; HighRiskMissingHiaLanguageMarkers=0`，证据 `work-zone/dev/evidence/p17.5/20260726-1503/powershell-documentation-inventory.*`。 |
+| `dev/scripts/New-PortalEnterpriseScanBaseline.ps1 -Profile Scan` | P17.5 通过当前源码/配置 baseline；`Pass=15; Warning=1; Fail=0; PendingTargetEnvironment=6`，证据 `work-zone/dev/evidence/p17.5/20260726-1503/20260726-150427-Scan/`。 |
+| `dev/scripts/Test-PortalDocumentationReadiness.ps1` | P17.5 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，证据 `work-zone/dev/evidence/p17.5/20260726-1503/documentation-readiness.*`。 |
+| `dev/scripts/Test-PortalComplianceBaseline.ps1` | P17.5 通过；`Pass=26; Warning=1; Fail=0; Info=2`，证据 `work-zone/dev/evidence/p17.5/20260726-1503/compliance-baseline.txt`。 |
 | `dev/scripts/Test-PortalDefaultCredentialRisk.ps1 -Profile Dev` | `Pass=5; Warning=3; Fail=0; Info=1`；Warning 为历史 admin seed、本地旧默认说明、旧 MD5 兼容路径。 |
 | `dev/scripts/Test-PortalComplianceBaseline.ps1 -Profile Dev` | `Pass=26; Warning=1; Fail=0; Info=2`；唯一 Warning 为旧 MD5 兼容路径。 |
 | `dev/scripts/New-PortalComplianceEvidencePackage.ps1 -Profile Dev` | 通过；证据包 `work-zone/dev/evidence/p10/20260721-032427-Dev/`，3 步骤全部 `Passed`，失败数 `0`。 |
@@ -429,7 +434,7 @@
 
 这些项在多轮任务中已作为既有残留保留，除非用户明确要求，不纳入普通阶段提交：
 
-1. 主仓库：`.vscode/settings.json`、生成文档目录、`src/Portal/Uploads/sample-under-10mb.json`、`src/Portal/css/`、`src/Portal/js/`、`temp/` 等。
+1. 主仓库：`.vscode/settings.json` 仍为既有本机配置残留；`temp/`、上传样例、历史生成/样例目录已在 P17.3 固定忽略边界。
 2. WorkZone：历史 2026-07-13/14/15 日志、P7 截图研究目录和一份旧日志修改。
 
 ## Failed Or Risky Attempts
