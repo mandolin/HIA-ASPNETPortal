@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P16` 已拆分 |
-| 当前阶段 | `W-anp-P16.1` 当前范围已完成 |
-| 当前唯一下一步 | 进入 `W-anp-P16.2`：整理 DotNetDoc runner 与生成产物 contract，先形成设计/讨论问题和必要的只读验证清单。 |
-| 当前完成条件 | P16.1 已分批完成非 designer C# 节点文档缺口和非 designer 页面/控件旧双语格式清理；`MissingNodeDocumentation=0`，`LegacyBilingualFormat` 降至 `96`，剩余项只分布在 designer 文件和 PowerShell 脚本。Designer 与 PowerShell 分别按 P16.5/P16.4 分流；下一步 P16.2 需确认 DotNetDoc runner、输出 contract、source linkage、生成物落点和 HIA 工具链边界。 |
+| 当前阶段 | `W-anp-P16.2` 待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P16.2-discussion-questions.md`；确认后实施最小 DotNetDoc 接入层。 |
+| 当前完成条件 | P16.2 已完成输入盘点、设计方案和待讨论问题；建议采用 `@hia-doc/dotnetdoc-runner@0.1.3`、根级 config、`dev/documentation/dotnetdoc/` 独立工具包和 `temp/documentation/dotnetdoc/` 输出。下一步需用户确认后再新增配置、package lock、构建脚本和输出检查脚本。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items
@@ -122,13 +122,14 @@
 | P16.1 第四十一批注释迁移 | completed | 主仓库源码提交 `bc6e5f4`；`work-zone/dev/plans/W-anp-P16.1-forty-first-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第四十一批清理 10 个 DesktopModules/桌面入口文件旧双语格式，`LegacyBilingualFormat` 降至 `113`。 |
 | P16.1 第四十二批注释迁移 | completed | 主仓库源码提交 `6843612`；WorkZone 资料提交 `72d4787`；`work-zone/dev/plans/W-anp-P16.1-forty-second-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第四十二批清理 10 个剩余非 designer 页面/控件旧双语格式，`LegacyBilingualFormat` 降至 `103`。 |
 | P16.1 第四十三批注释迁移 | completed | 主仓库源码提交 `d5b2a47`；WorkZone 资料提交 `4177e8d`；`work-zone/dev/plans/W-anp-P16.1-forty-third-batch.md`、`work-zone/dev/plans/W-anp-P16.1-implementation-result.md`；第四十三批完成 7 个非 designer 页面/控件旧双语格式收尾，`LegacyBilingualFormat` 降至 `96`。 |
+| P16.2 DotNetDoc 输入盘点与待讨论问题 | completed | `work-zone/dev/plans/W-anp-P16.2-dotnetdoc-intake.md`、`work-zone/dev/plans/W-anp-P16.2-design-options.md`、`work-zone/dev/plans/W-anp-P16.2-discussion-questions.md`；npm 当前 runner `0.1.3`，旧候选 `0.1.2` 不直接复制。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
 | 主仓库 | 第四十三批源码提交 `d5b2a47`；任务账本由本次同步提交记录 | P16.1 当前范围源码注释迁移已提交；任务账本同步到 P16.2 唯一下一步。 |
-| WorkZone | 第四十三批资料提交 `4177e8d` | 第四十三批清单、进度、结果和证据已提交；下一步进入 P16.2。 |
+| WorkZone | P16.2 输入盘点资料提交 `e448273` | P16.2 输入盘点、设计方案和待讨论问题已提交；下一步等待用户确认。 |
 
 ## Upcoming Planning Constraints
 
