@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Creates a portable legacy IE smoke-test package.
+
+.LANG zh-CN
+创建可移植的旧 IE smoke 测试包。
 
 .LANG en
 Generates a zero-dependency package intended to run inside a Win7/IE VM. The
@@ -15,13 +19,25 @@ script.
 凭据文件，或由生成脚本解析的占位符。
 
 .PARAMETER BaseUrl
+.LANG en
 Portal base URL reachable from the VM.
 
+.LANG zh-CN
+虚拟机可访问的 Portal 基础地址。
+
 .PARAMETER TaskName
+.LANG en
 Task label used in generated package and result names.
 
+.LANG zh-CN
+用于生成包和结果名称的任务标签。
+
 .PARAMETER AdminUser
+.LANG en
 Logical admin user name used by the generated smoke script.
+
+.LANG zh-CN
+生成的 smoke 脚本使用的逻辑管理员用户名。
 #>
 [CmdletBinding()]
 param(

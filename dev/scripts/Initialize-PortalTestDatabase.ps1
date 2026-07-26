@@ -1,7 +1,10 @@
 <#
 .SYNOPSIS
-初始化外置连接串指定的隔离 Portal 测试数据库。
+.LANG en
 Initializes an isolated Portal test database selected by an external connection string.
+
+.LANG zh-CN
+初始化外置连接串指定的隔离 Portal 测试数据库。
 
 .LANG en
 Initializes a development or test Portal database only when the target database

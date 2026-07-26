@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Checks default-credential and legacy password-risk markers.
+
+.LANG zh-CN
+检查默认凭据和旧口令风险标记。
 
 .LANG en
 Runs read-only checks for seeded default credentials, legacy password hashes,
@@ -14,13 +18,25 @@ print secrets, and does not change setup scripts or Web.config.
 Web.config。
 
 .PARAMETER Profile
+.LANG en
 Risk profile used to classify Dev/Test/Prod/Scan expectations.
 
+.LANG zh-CN
+用于分类 Dev/Test/Prod/Scan 期望的风险 profile。
+
 .PARAMETER OutputJson
+.LANG en
 Optional JSON evidence output path.
 
+.LANG zh-CN
+可选 JSON 证据输出路径。
+
 .PARAMETER FailOnWarning
+.LANG en
 Treats warnings as a failed gate for stricter security runs.
+
+.LANG zh-CN
+在更严格的安全运行中将 Warning 视为门禁失败。
 #>
 [CmdletBinding()]
 param(

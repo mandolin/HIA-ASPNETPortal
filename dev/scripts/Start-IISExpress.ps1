@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Starts IIS Express for the Portal development site.
+
+.LANG zh-CN
+为 Portal 开发站点启动 IIS Express。
 
 .LANG en
 Starts an IIS Express instance for the Portal site, usually on the fixed VSCode
@@ -16,17 +20,33 @@ applicationhost.config。它不修改 Visual Studio 项目文件、全局 IIS �
 或外置配置。
 
 .PARAMETER Port
+.LANG en
 Local IIS Express port.
 
+.LANG zh-CN
+本地 IIS Express 端口。
+
 .PARAMETER SitePath
+.LANG en
 Portal site physical path. Defaults to src/Portal.
 
+.LANG zh-CN
+Portal 站点物理路径，默认指向 src/Portal。
+
 .PARAMETER VirtualPath
+.LANG en
 Optional virtual application path used to approximate IIS virtual-directory
 deployment.
 
+.LANG zh-CN
+可选虚拟应用路径，用于近似验证 IIS 虚拟目录部署形态。
+
 .PARAMETER HostName
+.LANG en
 Host name for the generated IIS Express binding.
+
+.LANG zh-CN
+生成 IIS Express 绑定时使用的主机名。
 #>
 [CmdletBinding()]
 param(

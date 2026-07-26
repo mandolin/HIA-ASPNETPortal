@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Runs Portal HTTP smoke checks.
+
+.LANG zh-CN
+执行 Portal HTTP smoke 检查。
 
 .LANG en
 Runs lightweight HTTP smoke checks against a local or supplied Portal base URL.
@@ -16,16 +20,32 @@ IIS Express，在提供凭据时尝试管理员认证检查，并验证通用错
 并确保采集证据中不包含 Cookie 或 Token。
 
 .PARAMETER BaseUrl
+.LANG en
 Portal HTTP base URL.
 
+.LANG zh-CN
+Portal HTTP 基础地址。
+
 .PARAMETER StartIISExpress
+.LANG en
 Starts IIS Express before running checks.
 
+.LANG zh-CN
+在执行检查前启动 IIS Express。
+
 .PARAMETER StopWhenComplete
+.LANG en
 Stops the IIS Express instance started by this script after checks finish.
 
+.LANG zh-CN
+检查结束后停止由本脚本启动的 IIS Express 实例。
+
 .PARAMETER AdminPassword
+.LANG en
 SecureString password used only for authenticated smoke checks.
+
+.LANG zh-CN
+仅用于认证 smoke 检查的 SecureString 密码。
 #>
 [CmdletBinding()]
 param(

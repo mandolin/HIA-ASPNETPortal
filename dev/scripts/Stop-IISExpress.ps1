@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Stops the Portal IIS Express process for a known port or generated config.
+
+.LANG zh-CN
+按指定端口或生成配置停止 Portal IIS Express 进程。
 
 .LANG en
 Finds and stops IIS Express processes that match the requested port or the
@@ -14,15 +18,27 @@ does not remove site files, databases, logs, or external configuration.
 本脚本不删除站点文件、数据库、日志或外置配置。
 
 .PARAMETER Port
+.LANG en
 Local IIS Express port used as the primary process boundary.
 
+.LANG zh-CN
+作为主要进程边界的本地 IIS Express 端口。
+
 .PARAMETER SitePath
+.LANG en
 Compatibility parameter kept for older task invocations; process matching does
 not rely on the physical site path.
 
+.LANG zh-CN
+为旧任务调用保留的兼容参数；进程匹配不依赖物理站点路径。
+
 .PARAMETER VirtualPath
+.LANG en
 Compatibility parameter for matching generated same-port virtual-directory
 configuration.
+
+.LANG zh-CN
+用于匹配同端口虚拟目录生成配置的兼容参数。
 #>
 [CmdletBinding()]
 param(

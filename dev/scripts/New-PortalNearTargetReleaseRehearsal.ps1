@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
-    Runs the P14.2 near-target release rehearsal and writes an evidence package.
+.LANG en
+Runs the P14.2 near-target release rehearsal and writes an evidence package.
+
+.LANG zh-CN
+执行 P14.2 近真实发布演练，并写入证据包。
 
 .LANG en
 Runs the near-target release rehearsal by publishing a filesystem package,

@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Checks the current Portal compliance baseline.
+
+.LANG zh-CN
+检查当前 Portal 合规基线。
 
 .LANG en
 Performs read-only compliance baseline checks for headers, security-related
@@ -16,16 +20,32 @@ secrets, or execute external scanning tools.
 扫描工具。
 
 .PARAMETER Profile
+.LANG en
 Compliance profile used to tune Dev/Test/Prod/Scan/LegacyIe expectations.
 
+.LANG zh-CN
+用于调整 Dev/Test/Prod/Scan/LegacyIe 期望的合规 profile。
+
 .PARAMETER BaseUrl
+.LANG en
 Optional HTTP base URL for runtime observations.
 
+.LANG zh-CN
+用于运行时观测的可选 HTTP 基础地址。
+
 .PARAMETER OutputJson
+.LANG en
 Optional JSON evidence output path.
 
+.LANG zh-CN
+可选 JSON 证据输出路径。
+
 .PARAMETER FailOnWarning
+.LANG en
 Treats warnings as a non-zero result for stricter gates.
+
+.LANG zh-CN
+在更严格门禁中将 Warning 视为非零结果。
 #>
 [CmdletBinding()]
 param(

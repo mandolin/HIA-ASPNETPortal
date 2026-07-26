@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
-    Performs a read-only P14.4 production-hardening preflight.
+.LANG en
+Performs a read-only P14.4 production-hardening preflight.
+
+.LANG zh-CN
+执行只读的 P14.4 生产前硬化预检。
 
 .LANG en
 Performs a read-only hardening preflight against source or filesystem publish

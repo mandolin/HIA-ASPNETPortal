@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Publishes the Portal Web Forms project to a filesystem folder.
+
+.LANG zh-CN
+将 Portal Web Forms 项目发布到文件系统目录。
 
 .LANG en
 Builds a filesystem publish output for the Portal project and runs publish
@@ -15,14 +19,26 @@ folder already exists.
 生产机器；如果目标目录已经存在，会直接失败。
 
 .PARAMETER Configuration
+.LANG en
 Build configuration, normally Debug or Release.
 
+.LANG zh-CN
+构建配置，通常为 Debug 或 Release。
+
 .PARAMETER Platform
+.LANG en
 MSBuild platform value passed through to the Portal project.
 
+.LANG zh-CN
+传递给 Portal 项目的 MSBuild 平台值。
+
 .PARAMETER PublishPath
+.LANG en
 Target filesystem publish folder. Leave empty to create a timestamped folder
 under temp/publish.
+
+.LANG zh-CN
+目标文件系统发布目录。留空时会在 temp/publish 下创建带时间戳的目录。
 #>
 [CmdletBinding()]
 param(

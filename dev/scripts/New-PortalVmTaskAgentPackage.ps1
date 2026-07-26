@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Creates the VM task-agent package for legacy-browser automation.
+
+.LANG zh-CN
+创建用于旧浏览器自动化的 VM 任务代理包。
 
 .LANG en
 Builds a portable VM-side task-agent package that polls a shared tasks folder,
@@ -15,16 +19,32 @@ embed passwords or production secrets.
 不会启动 VM 代理、不会在本机运行浏览器测试，也不会内嵌密码或生产密钥。
 
 .PARAMETER OutputRoot
+.LANG en
 Local folder where generated package folders and zip files are written.
 
+.LANG zh-CN
+写入生成包目录和 zip 文件的本地目录。
+
 .PARAMETER DeployRoot
+.LANG en
 Optional shared VM folder where the generated package is copied.
 
+.LANG zh-CN
+可选的 VM 共享目录，用于复制生成后的代理包。
+
 .PARAMETER PollSeconds
+.LANG en
 Polling interval used by the generated VM agent.
 
+.LANG zh-CN
+生成的 VM 代理使用的轮询间隔。
+
 .PARAMETER MaxTaskSeconds
+.LANG en
 Maximum execution time enforced by the generated VM agent.
+
+.LANG zh-CN
+生成的 VM 代理强制执行的单任务最长运行时间。
 #>
 [CmdletBinding()]
 param(

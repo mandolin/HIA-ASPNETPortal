@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Creates a task for the Win7/legacy-browser VM task agent.
+
+.LANG zh-CN
+为 Win7/旧浏览器 VM 任务代理创建任务。
 
 .LANG en
 Writes a task manifest and optional package reference into the shared VM agent
@@ -17,16 +21,32 @@ the VM-side credential files when authentication is required.
 由 VM 侧凭据文件解析。
 
 .PARAMETER AgentRoot
+.LANG en
 Shared root directory watched by the VM task agent.
 
+.LANG zh-CN
+VM 任务代理监听的共享根目录。
+
 .PARAMETER TaskName
+.LANG en
 Human-readable task name used in manifest and result files.
 
+.LANG zh-CN
+写入任务清单和结果文件的人类可读任务名称。
+
 .PARAMETER Command
+.LANG en
 Command lines to execute inside the VM agent.
 
+.LANG zh-CN
+由 VM 代理在虚拟机内执行的命令行。
+
 .PARAMETER RunUser
+.LANG en
 Logical user key used by the VM-side credential resolver.
+
+.LANG zh-CN
+供 VM 侧凭据解析器使用的逻辑用户键。
 #>
 [CmdletBinding(DefaultParameterSetName = 'Command')]
 param(

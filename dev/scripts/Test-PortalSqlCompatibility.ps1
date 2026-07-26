@@ -1,6 +1,10 @@
 <#
 .SYNOPSIS
+.LANG en
 Checks or applies Portal SQL compatibility migrations.
+
+.LANG zh-CN
+检查或执行 Portal SQL 兼容性迁移。
 
 .LANG en
 Connects to the configured SQL Server database and verifies selected schema
@@ -17,16 +21,32 @@ external config file that is excluded from Git when it contains credentials.
 包含凭据时，应使用已排除入库的模板或外置配置文件。
 
 .PARAMETER ConnectionStringsConfigPath
+.LANG en
 Connection strings config file used to locate the target database.
 
+.LANG zh-CN
+用于定位目标数据库的连接串配置文件。
+
 .PARAMETER ConnectionStringName
+.LANG en
 Logical connection-string name, defaults to Portal.
 
+.LANG zh-CN
+逻辑连接串名称，默认为 Portal。
+
 .PARAMETER ApplyP2Migrations
+.LANG en
 Applies P2 migration scripts and changes the target database.
 
+.LANG zh-CN
+执行 P2 迁移脚本，并会修改目标数据库。
+
 .PARAMETER RequireP2Migrations
+.LANG en
 Checks P2 schema without applying changes.
+
+.LANG zh-CN
+仅检查 P2 schema，不执行变更。
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
