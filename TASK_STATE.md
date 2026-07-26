@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P17` 已形成入口草案 |
-| 当前阶段 | `W-anp-P17.0` 待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P17.0-discussion-questions.md`；确认后进入 P17.1，补齐剩余 PowerShell 脚本 help 和主要内部注释双语化。 |
-| 当前完成条件 | P16 已完成：P16.5 门禁复核通过，P16 closeout、P17 输入和 P17.0 待讨论问题已形成。下一步需用户确认 P17.0 后继续推进。 |
+| 当前大周期 | `W-anp-P17` 已启动 |
+| 当前阶段 | `W-anp-P17.1` 第一批已完成，继续进行中 |
+| 当前唯一下一步 | 推送 P17.1 第一批提交；随后继续补齐剩余 13 个中低风险 PowerShell 脚本 help 和主要内部注释双语化。 |
+| 当前完成条件 | P17.1 第一批已完成：8 个基础脚本新增中英双语 help，inventory 显示 `MissingCommentHelp=13`，高风险缺口仍为 0。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items
@@ -133,15 +133,15 @@
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P16.5 inventory 修正提交 `29a84c3`；任务账本同步待提交 | TODO inventory false-positive 修正已提交；任务账本将单独同步到 P17.0 唯一下一步。 |
-| WorkZone | P16.5/P17.0 资料提交 `83ec323` | P16.5 evidence、P16 closeout、P17 输入、P17.0 待讨论问题和本轮日志已提交。 |
+| 主仓库 | P17.1 第一批脚本注释补强提交 `703e759`；任务账本同步待提交 | 8 个基础 PowerShell 脚本新增中英双语 help；后续还剩 13 个中低风险脚本。 |
+| WorkZone | P17.1 第一批资料提交 `f0eea34` | P17 Q4 纠偏、P17.1 第一批计划/结果、inventory 证据和本轮日志已提交。 |
 
 ## Upcoming Planning Constraints
 
 | 事项 | 状态 | 处理原则 |
 | --- | --- | --- |
 | 代码梳理、注释完善与文档化专项 | active | P15 已完成输入质量整理；P16 已拆分，P16.1 进入全量 `<lang>` / `<l>` 迁移与注释丰富度提升讨论；全量注释调理需在 `W-anp-P16.5` 验收前完成或登记延期债务。 |
-| PowerShell 注释完整双语化 | active | P16.4 已完成高风险脚本 help 双语化当前切片；所有 PowerShell 文本注释默认应中英双语，并为后续外部多语言文件留扩展余地。剩余中低风险脚本和内部注释需写入 P16.5 closeout/P17 输入，不得仅口头顺延。 |
+| PowerShell 注释完整双语化 | active | P16.4 已完成高风险脚本 help 双语化当前切片；P17.1 第一批已将剩余 help 缺口从 21 降至 13。所有 PowerShell 文本注释默认应中英双语；现有 `en` / `zh-CN` 保持内嵌，外部语言文件只作为未来新增语种扩展入口。 |
 | 绿盟/本地企业扫描工具 | pending-tool-input | 当前未找到绿盟官方免费本地社区版证据；已记录开源替代组合 ZAP、Greenbone/OpenVAS Free、Nuclei、Nikto。若真实报告或工具输入到 `W-anp-P17.1` 仍未到位，必须至少启动本地 baseline。 |
 
 ## Last Validation Evidence
