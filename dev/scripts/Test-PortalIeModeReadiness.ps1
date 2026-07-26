@@ -1,3 +1,29 @@
+<#
+.SYNOPSIS
+.LANG en
+Checks local Edge IE mode automation readiness.
+
+.LANG zh-CN
+检查本机 Edge IE mode 自动化准备状态。
+
+.DESCRIPTION
+.LANG en
+Inspects Microsoft Edge, msedgedriver, IEDriverServer, and Edge IE mode policy
+markers required by the legacy-browser automation strategy. The script is
+read-only and does not install drivers, change registry policy, or start a
+browser session.
+
+.LANG zh-CN
+检查旧浏览器自动化策略所需的 Microsoft Edge、msedgedriver、IEDriverServer 和 Edge IE mode
+策略标记。本脚本为只读检查，不安装驱动、不修改注册表策略，也不启动浏览器会话。
+
+.PARAMETER FailWhenNotReady
+.LANG en
+Returns a failing exit code when one or more readiness checks fail.
+
+.LANG zh-CN
+当一个或多个准备项失败时返回失败退出码。
+#>
 [CmdletBinding()]
 param(
     [switch]$FailWhenNotReady
@@ -6,8 +32,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# 中文：本脚本只读本机 Edge IE mode 自动化准备状态，不安装驱动、不修改注册表或企业策略。
-# English: This script only reads local Edge IE mode automation readiness. It does not install drivers or modify registry/policies.
+# <lang>
+#   <zh-CN>本脚本只读本机 Edge IE mode 自动化准备状态，不安装驱动、不修改注册表或企业策略。</zh-CN>
+#   <en>This script only reads local Edge IE mode automation readiness. It does not install drivers or modify registry/policies.</en>
+# </lang>
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
 function Add-PortalReadinessCheck {

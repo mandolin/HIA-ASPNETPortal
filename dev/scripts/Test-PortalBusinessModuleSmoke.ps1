@@ -1,3 +1,71 @@
+<#
+.SYNOPSIS
+.LANG en
+Runs static smoke checks for a trusted business module package.
+
+.LANG zh-CN
+对受信任业务模块包运行静态 smoke 检查。
+
+.DESCRIPTION
+.LANG en
+Validates a deployed module directory, module.json manifest, expected package
+identity, desktop entry path, optional migration script, and trusted resource
+boundaries. The script reads files only and does not register modules, mutate the
+database, or start the portal runtime.
+
+.LANG zh-CN
+验证已部署模块目录、module.json manifest、预期包标识、桌面入口路径、可选迁移脚本和受信任资源边界。
+本脚本只读取文件，不注册模块、不修改数据库，也不启动门户运行时。
+
+.PARAMETER ModuleName
+.LANG en
+Module folder/name used to locate the default DesktopModules path and expected package identity.
+
+.LANG zh-CN
+用于定位默认 DesktopModules 路径和预期包标识的模块文件夹/名称。
+
+.PARAMETER ModuleDirectory
+.LANG en
+Optional explicit module directory. When omitted, DesktopModules/ModuleName is used.
+
+.LANG zh-CN
+可选显式模块目录。省略时使用 DesktopModules/ModuleName。
+
+.PARAMETER ExpectedPackageId
+.LANG en
+Optional expected package id; defaults to HIA.ModuleName.
+
+.LANG zh-CN
+可选预期 package id；默认使用 HIA.ModuleName。
+
+.PARAMETER ExpectedDesktopEntry
+.LANG en
+Optional expected desktop ASCX entry declared by the manifest.
+
+.LANG zh-CN
+可选预期桌面 ASCX 入口，用于与 manifest 声明对比。
+
+.PARAMETER SqlMigrationFile
+.LANG en
+Optional migration script path that should exist under src/Setup.
+
+.LANG zh-CN
+可选迁移脚本路径，应位于 src/Setup 下。
+
+.PARAMETER AllowModuleScripts
+.LANG en
+Allows module script resources for packages whose design explicitly permits them.
+
+.LANG zh-CN
+允许显式设计为可加载脚本资源的模块包。
+
+.PARAMETER SkipSqlMigrationCheck
+.LANG en
+Skips the optional SQL migration file check.
+
+.LANG zh-CN
+跳过可选 SQL 迁移文件检查。
+#>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]

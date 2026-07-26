@@ -1,3 +1,43 @@
+<#
+.SYNOPSIS
+.LANG en
+Checks portal publish readiness without deploying to IIS.
+
+.LANG zh-CN
+在不部署到 IIS 的情况下检查门户发布就绪状态。
+
+.DESCRIPTION
+.LANG en
+Inspects Portal.csproj content and compile items, required publish files,
+tracked-file boundaries, optional filesystem publish output, and known deployment
+risks. The script is read-only for repository/project files and does not connect
+to real IIS or read external sensitive configuration.
+
+.LANG zh-CN
+检查 Portal.csproj 的 Content/Compile 项、必需发布文件、Git 追踪边界、可选文件系统发布输出和已知部署风险。
+本脚本对仓库和项目文件只读，不连接真实 IIS，也不读取外置敏感配置。
+
+.PARAMETER PortalProjectPath
+.LANG en
+Path to Portal.csproj. Defaults to the repository Web Forms project.
+
+.LANG zh-CN
+Portal.csproj 路径。默认使用仓库中的 Web Forms 项目。
+
+.PARAMETER PublishedPath
+.LANG en
+Optional filesystem publish output to validate after WebPublish.
+
+.LANG zh-CN
+可选的文件系统发布输出目录，用于 WebPublish 后验证。
+
+.PARAMETER TreatWarningsAsErrors
+.LANG en
+Returns a failing exit code when warning-level findings are present.
+
+.LANG zh-CN
+存在 Warning 级发现时返回失败退出码。
+#>
 [CmdletBinding()]
 param(
     [string]$PortalProjectPath = (Join-Path (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) 'src/Portal/Portal.csproj'),
@@ -94,8 +134,10 @@ function Get-RelativePublishedFiles {
         ForEach-Object { [System.IO.Path]::GetRelativePath($RootPath, $_.FullName) })
 }
 
-# 中文：P9.4 发布门禁只做仓库和项目文件的只读核查，不替代真实 IIS 发布验证。
-# English: The P9.4 publish gate performs read-only repository/project checks and does not replace real IIS deployment verification.
+# <lang>
+#   <zh-CN>P9.4 发布门禁只做仓库和项目文件的只读核查，不替代真实 IIS 发布验证。</zh-CN>
+#   <en>The P9.4 publish gate performs read-only repository/project checks and does not replace real IIS deployment verification.</en>
+# </lang>
 [xml]$project = [System.IO.File]::ReadAllText($portalProject.Path, [System.Text.UTF8Encoding]::new($false))
 $contentItems = Get-MsBuildItems -Project $project -ItemName 'Content'
 $compileItems = Get-MsBuildItems -Project $project -ItemName 'Compile'
@@ -257,8 +299,10 @@ if (-not [string]::IsNullOrWhiteSpace($PublishedPath)) {
         $publishedRootPath = $publishRoot.Path
         Add-PublishCheck -Name 'Published output exists' -Status 'Pass' -Detail $publishedRootPath
 
-        # 中文：发布目录检查针对 IIS 文件系统包，不直接连接真实 IIS 或读取外置敏感配置。
-        # English: Published-output checks target a filesystem IIS package and do not connect to real IIS or read external secrets.
+        # <lang>
+        #   <zh-CN>发布目录检查针对 IIS 文件系统包，不直接连接真实 IIS 或读取外置敏感配置。</zh-CN>
+        #   <en>Published-output checks target a filesystem IIS package and do not connect to real IIS or read external secrets.</en>
+        # </lang>
         $requiredPublishedFiles = @(
             'Web.config',
             'Default.aspx',

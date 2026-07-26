@@ -1,12 +1,32 @@
+<#
+.SYNOPSIS
+.LANG en
+Validates the public Markdown documentation surface.
+
+.LANG zh-CN
+验证公开 Markdown 文档面。
+
+.DESCRIPTION
+.LANG en
+Checks public Markdown entries, relative links, private-path leakage, credential
+assignment patterns, generated-directory boundaries, and required public guide
+markers. The gate intentionally ignores WorkZone and local generated output
+unless those paths are explicitly declared as public.
+
+.LANG zh-CN
+检查公开 Markdown 入口、相对链接、私有路径泄露、凭据赋值模式、生成目录边界和必需公开指南标记。
+除非路径被明确声明为公开面，本门禁会刻意忽略 WorkZone 和本地生成输出。
+#>
 [CmdletBinding()]
 param()
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# 中文：此门禁只读取公开 Markdown、Git 索引和已声明的生成目录边界；不访问 WorkZone、网络、数据库或文档生成工具。
-# English: This gate reads only public Markdown, the Git index, and declared generated-directory boundaries. It never accesses
-# WorkZone, the network, databases, or documentation generators.
+# <lang>
+#   <zh-CN>此门禁只读取公开 Markdown、Git 索引和已声明的生成目录边界；不访问 WorkZone、网络、数据库或文档生成工具。</zh-CN>
+#   <en>This gate reads only public Markdown, the Git index, and declared generated-directory boundaries. It never accesses WorkZone, the network, databases, or documentation generators.</en>
+# </lang>
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $checks = New-Object 'System.Collections.Generic.List[object]'
 $linkPattern = [regex]'\[(?<label>[^\]]+)\]\((?<target>[^)]+)\)'
@@ -33,9 +53,10 @@ function Add-PortalCheck {
 }
 
 function Get-PublicMarkdownFiles {
-    # 中文：只从 Git 已追踪文件筛选公开文档面，避免未跟踪草稿、WorkZone 资料或生成物改变门禁结果。
-    # English: Select the public documentation surface from Git-tracked files only so untracked drafts, WorkZone material,
-    # or generated output cannot change the gate result.
+    # <lang>
+    #   <zh-CN>只从 Git 已追踪文件筛选公开文档面，避免未跟踪草稿、WorkZone 资料或生成物改变门禁结果。</zh-CN>
+    #   <en>Select the public documentation surface from Git-tracked files only so untracked drafts, WorkZone material, or generated output cannot change the gate result.</en>
+    # </lang>
     $trackedFiles = @(& git -C $repositoryRoot ls-files -- '*.md')
     if ($LASTEXITCODE -ne 0) {
         throw "Git 无法列出已追踪 Markdown，退出代码：$LASTEXITCODE"
@@ -189,8 +210,10 @@ Add-PortalCheck -Name 'Public documentation index coverage' -Passed ($missingInd
 $externalLinkCount = Test-RelativeMarkdownLinks -MarkdownFiles $markdownFiles
 Test-PublicDocumentationPrivacy -MarkdownFiles $markdownFiles
 
-# 中文：这些目录尚未完成所有权或发布策略确认，任何已追踪文件都意味着公开边界被意外扩大。
-# English: Ownership or publication policy is not yet confirmed for these directories; any tracked file would unexpectedly widen the public boundary.
+# <lang>
+#   <zh-CN>这些目录尚未完成所有权或发布策略确认，任何已追踪文件都意味着公开边界被意外扩大。</zh-CN>
+#   <en>Ownership or publication policy is not yet confirmed for these directories; any tracked file would unexpectedly widen the public boundary.</en>
+# </lang>
 $excludedGeneratedDirectories = @(
     'src/Documentation',
     'src/DoxyGen',

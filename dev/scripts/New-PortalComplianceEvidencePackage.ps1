@@ -1,3 +1,50 @@
+<#
+.SYNOPSIS
+.LANG en
+Creates a compliance evidence package from existing read-only gates.
+
+.LANG zh-CN
+基于现有只读门禁生成合规证据包。
+
+.DESCRIPTION
+.LANG en
+Runs the compliance baseline, default-credential risk gate, and public
+documentation gate, then writes logs and a summary under a timestamped evidence
+directory. The script orchestrates evidence only; it does not sign in, modify a
+database, read secrets, or upload results.
+
+.LANG zh-CN
+运行合规基线、默认凭据风险门禁和公开文档门禁，并在带时间戳的证据目录下写入日志和摘要。
+本脚本只编排证据，不登录、不修改数据库、不读取密钥，也不上传结果。
+
+.PARAMETER Profile
+.LANG en
+Compliance profile name used by downstream gates and the evidence directory name.
+
+.LANG zh-CN
+传给下游门禁并用于证据目录命名的合规 profile。
+
+.PARAMETER BaseUrl
+.LANG en
+Optional portal URL passed to gates that can inspect HTTP responses.
+
+.LANG zh-CN
+可选门户 URL，会传给能够检查 HTTP 响应的门禁。
+
+.PARAMETER OutputRoot
+.LANG en
+Optional evidence root. Defaults to WorkZone evidence when WorkZone exists, otherwise temp.
+
+.LANG zh-CN
+可选证据根目录。存在 WorkZone 时默认写入 WorkZone evidence，否则写入 temp。
+
+.PARAMETER AllowFailures
+.LANG en
+Writes the package even when one or more gates fail, instead of returning a failing exit code.
+
+.LANG zh-CN
+即使一个或多个门禁失败也写出证据包，而不是返回失败退出码。
+#>
 [CmdletBinding()]
 param(
     [ValidateSet('Dev', 'Test', 'Prod', 'Scan', 'LegacyIe')]
@@ -134,9 +181,10 @@ if (-not (Test-Path -LiteralPath $runDirectory)) {
     New-Item -ItemType Directory -Path $runDirectory | Out-Null
 }
 
-# 中文：本脚本只编排已有只读门禁，形成可留存证据包；不写数据库、不尝试登录、不读取 secret 文件。
-# English: This script only orchestrates existing read-only gates into an evidence package; it never writes databases,
-# attempts sign-in, or reads secret files.
+# <lang>
+#   <zh-CN>本脚本只编排已有只读门禁，形成可留存证据包；不写数据库、不尝试登录、不读取 secret 文件。</zh-CN>
+#   <en>This script only orchestrates existing read-only gates into an evidence package; it never writes databases, attempts sign-in, or reads secret files.</en>
+# </lang>
 Write-Host ('Evidence directory: {0}' -f $runDirectory)
 
 $complianceJson = Join-Path $runDirectory 'compliance-baseline.json'

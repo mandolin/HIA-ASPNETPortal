@@ -1,3 +1,43 @@
+<#
+.SYNOPSIS
+.LANG en
+Runs the module cache isolation proof against a test database configuration.
+
+.LANG zh-CN
+针对测试数据库配置运行模块缓存隔离 proof。
+
+.DESCRIPTION
+.LANG en
+Uses an external Portal connection string, creates temporary ModuleProbe state,
+starts an isolated IIS Express instance, verifies cache behavior, and restores
+database state afterward. The script is intentionally restricted to the Portal SQL
+Server provider and should be run only against a disposable development database.
+
+.LANG zh-CN
+使用外置 Portal 连接串创建临时 ModuleProbe 状态，启动隔离 IIS Express 实例，验证缓存行为，并在结束后恢复
+数据库状态。本脚本有意限制为 Portal SQL Server provider，只应针对可丢弃的开发数据库运行。
+
+.PARAMETER ConnectionStringsConfigPath
+.LANG en
+External connectionStrings.config file containing the Portal SQL Server connection string.
+
+.LANG zh-CN
+包含 Portal SQL Server 连接串的外置 connectionStrings.config 文件。
+
+.PARAMETER Port
+.LANG en
+IIS Express port used by the isolated cache proof site.
+
+.LANG zh-CN
+隔离缓存 proof 站点使用的 IIS Express 端口。
+
+.PARAMETER CacheSeconds
+.LANG en
+Temporary cache duration used for the module instance under test.
+
+.LANG zh-CN
+测试模块实例使用的临时缓存秒数。
+#>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]
@@ -231,7 +271,10 @@ function Invoke-PortalPage {
             }
         }
         catch {
-            # 独立 IIS Express 首次编译期间允许短暂重试；不输出连接串或物理路径。
+            # <lang>
+            #   <zh-CN>独立 IIS Express 首次编译期间允许短暂重试；不输出连接串或物理路径。</zh-CN>
+            #   <en>Allow a short retry while the isolated IIS Express site compiles for the first time, without printing connection strings or physical paths.</en>
+            # </lang>
         }
 
         Start-Sleep -Seconds 1
@@ -346,8 +389,10 @@ VALUES
     & (Join-Path $PSScriptRoot 'Start-IISExpress.ps1') -Port $Port
     $startedCacheSite = $true
     $probeUri = 'http://localhost:' + $Port + '/DesktopDefault.aspx?tabindex=0&tabid=' + $tabId
-    # ModuleProbe 不显示旧模块标题；使用控件自身输出的标识确认动态实例实际被装载。
-    # ModuleProbe does not render the legacy module title, so use its own output marker to prove the dynamic instance was loaded.
+    # <lang>
+    #   <zh-CN>ModuleProbe 不显示旧模块标题；使用控件自身输出的标识确认动态实例实际被装载。</zh-CN>
+    #   <en>ModuleProbe does not render the legacy module title, so use its own output marker to prove the dynamic instance was loaded.</en>
+    # </lang>
     $moduleMarker = 'Id={0}; Source=DesktopModules/ModuleProbe/ModuleProbe.ascx' -f $moduleId
 
     $firstHtml = Invoke-PortalPage -Uri $probeUri

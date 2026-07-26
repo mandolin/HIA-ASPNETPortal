@@ -1,3 +1,64 @@
+<#
+.SYNOPSIS
+.LANG en
+Captures reference screenshots for the deployed portal themes.
+
+.LANG zh-CN
+采集已部署门户主题的参考截图。
+
+.DESCRIPTION
+.LANG en
+Temporarily applies theme settings through the configured test database, drives
+browser-based capture flows, and writes screenshots to a WorkZone research
+directory. The script is evidence tooling for design review; it should run only
+against development data that can tolerate temporary theme changes.
+
+.LANG zh-CN
+通过配置的测试数据库临时应用主题设置，驱动浏览器截图流程，并把截图写入 WorkZone research 目录。
+本脚本是设计复核证据工具，只应针对可承受临时主题变更的开发数据运行。
+
+.PARAMETER BaseUrl
+.LANG en
+Portal base URL used by the screenshot capture flow.
+
+.LANG zh-CN
+截图采集流程使用的门户基础 URL。
+
+.PARAMETER ConnectionStringsConfigPath
+.LANG en
+External connectionStrings.config file used to update temporary theme settings.
+
+.LANG zh-CN
+用于更新临时主题设置的外置 connectionStrings.config 文件。
+
+.PARAMETER P64ContextPath
+.LANG en
+Regression context JSON for employee profile confirmation screenshots.
+
+.LANG zh-CN
+员工资料确认截图使用的回归上下文 JSON。
+
+.PARAMETER P65ContextPath
+.LANG en
+Acceptance context JSON for employee profile correction screenshots.
+
+.LANG zh-CN
+员工资料更正截图使用的验收上下文 JSON。
+
+.PARAMETER OutputDirectory
+.LANG en
+Target directory for captured screenshots and related review artifacts.
+
+.LANG zh-CN
+截图和相关复核产物的目标目录。
+
+.PARAMETER Themes
+.LANG en
+Theme names to apply and capture.
+
+.LANG zh-CN
+需要应用并采集的主题名称列表。
+#>
 [CmdletBinding()]
 param(
     [ValidatePattern('^https?://')]

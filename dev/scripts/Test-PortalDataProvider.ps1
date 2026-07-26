@@ -1,3 +1,43 @@
+<#
+.SYNOPSIS
+.LANG en
+Builds and runs the SQLite data-provider proof project.
+
+.LANG zh-CN
+构建并运行 SQLite 数据 provider proof 项目。
+
+.DESCRIPTION
+.LANG en
+Restores and builds the isolated Portal.DataProviderProof project, then runs the
+proof executable against the SQLite schema fixture. The proof project is kept out
+of the main solution path so SQL Server production assumptions and Visual Studio
+debugging behavior remain unchanged.
+
+.LANG zh-CN
+还原并构建隔离的 Portal.DataProviderProof 项目，然后使用 SQLite schema fixture 运行 proof
+可执行文件。proof 项目不加入主解决方案路径，以免改变 SQL Server 生产假设和 Visual Studio 调试行为。
+
+.PARAMETER Configuration
+.LANG en
+Build configuration for the proof project, normally Debug or Release.
+
+.LANG zh-CN
+proof 项目的构建配置，通常为 Debug 或 Release。
+
+.PARAMETER DatabasePath
+.LANG en
+Optional SQLite database path. The resolved path must stay under temp/provider-proof/data.
+
+.LANG zh-CN
+可选 SQLite 数据库路径。解析后的路径必须位于 temp/provider-proof/data 下。
+
+.PARAMETER KeepDatabase
+.LANG en
+Keeps an existing proof database instead of deleting it before the run.
+
+.LANG zh-CN
+运行前保留已有 proof 数据库，而不是先删除它。
+#>
 [CmdletBinding()]
 param(
     [ValidateSet('Debug', 'Release')]
@@ -25,7 +65,10 @@ if (-not (Test-Path -LiteralPath $schemaPath)) {
 
 $msbuild = & $findMsBuild
 
-# 独立项目不加入主解决方案；这里单独 restore/build，避免影响 Visual Studio 的门户构建路径。
+# <lang>
+#   <zh-CN>独立项目不加入主解决方案；这里单独 restore/build，避免影响 Visual Studio 的门户构建路径。</zh-CN>
+#   <en>The isolated project is not added to the main solution; restore/build runs here so the Visual Studio portal build path stays unchanged.</en>
+# </lang>
 Write-Host "Restoring provider proof packages with $msbuild"
 & $msbuild $projectPath /t:Restore /p:RestorePackagesConfig=true "/p:SolutionDir=$repoRoot\src\" /v:minimal /nologo
 if ($LASTEXITCODE -ne 0) {

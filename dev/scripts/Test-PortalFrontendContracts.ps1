@@ -1,13 +1,31 @@
+<#
+.SYNOPSIS
+.LANG en
+Validates tracked Web Forms presentation and front-end build contracts.
+
+.LANG zh-CN
+验证已追踪 Web Forms 呈现层和前端构建契约。
+
+.DESCRIPTION
+.LANG en
+Checks the master page, native theme manifests, module CSS boundaries, Gulp task
+bindings, package scripts, browser targets, and public front-end guide text. The
+gate is read-only and does not run npm, Gulp, IIS Express, or the runtime database.
+
+.LANG zh-CN
+检查 master 页、原生主题 manifest、模块 CSS 边界、Gulp 任务绑定、package scripts、浏览器目标和
+公开前端指南文本。本门禁为只读行为，不运行 npm、Gulp、IIS Express 或运行时数据库。
+#>
 [CmdletBinding()]
 param()
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# 中文：本检查只读取 Git 已追踪的 Web Forms 呈现与前端构建契约，不调用 npm、Gulp 或 IIS Express，
-# 因而不会创建 js/css 输出、修改 Visual Studio Task Runner 状态或访问运行数据库。
-# English: This check reads only Git-tracked Web Forms presentation and front-end build contracts. It never invokes npm,
-# Gulp, or IIS Express, so it cannot create js/css outputs, change Visual Studio Task Runner state, or access the runtime database.
+# <lang>
+#   <zh-CN>本检查只读取 Git 已追踪的 Web Forms 呈现与前端构建契约，不调用 npm、Gulp 或 IIS Express，因此不会创建 js/css 输出、修改 Visual Studio Task Runner 状态或访问运行数据库。</zh-CN>
+#   <en>This check reads only Git-tracked Web Forms presentation and front-end build contracts. It never invokes npm, Gulp, or IIS Express, so it cannot create js/css outputs, change Visual Studio Task Runner state, or access the runtime database.</en>
+# </lang>
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
@@ -36,8 +54,10 @@ function Test-TrackedPortalFile {
         [string]$RelativePath
     )
 
-    # 中文：文件必须同时存在于工作树和 Git 索引历史中，避免把临时生成物误当成正式契约输入。
-    # English: A file must exist in both the work tree and Git history so temporary generated output is not treated as a formal contract input.
+    # <lang>
+    #   <zh-CN>文件必须同时存在于工作树和 Git 索引历史中，避免把临时生成物误当成正式契约输入。</zh-CN>
+    #   <en>A file must exist in both the work tree and Git history so temporary generated output is not treated as a formal contract input.</en>
+    # </lang>
     $absolutePath = Join-Path $repositoryRoot ($RelativePath -replace '/', '\\')
     $trackedPaths = @(& git -C $repositoryRoot ls-files -- $RelativePath)
     if ($LASTEXITCODE -ne 0) {
@@ -173,8 +193,10 @@ Test-TextContract -Name 'Public front-end guide contract' -RelativePath 'docs/fr
     '模块 JavaScript'
 )
 
-# 中文：js/css 当前的所有权尚待资产治理专题确认，因此只报告其边界状态，不能将其是否存在或是否已跟踪作为失败条件。
-# English: Ownership of js/css remains for a dedicated asset-governance effort, so report their boundary state without making existence or tracking a failure condition.
+# <lang>
+#   <zh-CN>js/css 当前的所有权尚待资产治理专题确认，因此只报告其边界状态，不能将其是否存在或是否已跟踪作为失败条件。</zh-CN>
+#   <en>Ownership of js/css remains for a dedicated asset-governance effort, so report their boundary state without making existence or tracking a failure condition.</en>
+# </lang>
 $assetBoundary = foreach ($relativeDirectory in @('src/Portal/js', 'src/Portal/css')) {
     $trackedFiles = @(& git -C $repositoryRoot ls-files -- ($relativeDirectory + '/**'))
     if ($LASTEXITCODE -ne 0) {

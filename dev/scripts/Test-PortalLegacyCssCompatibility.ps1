@@ -1,3 +1,35 @@
+<#
+.SYNOPSIS
+.LANG en
+Runs the static legacy-browser CSS compatibility gate.
+
+.LANG zh-CN
+运行旧浏览器 CSS 兼容性静态门禁。
+
+.DESCRIPTION
+.LANG en
+Scans tracked theme and module CSS for constructs that cannot be baseline
+requirements for IE9/IE8 compatibility. The script is static and read-only: it
+does not run Gulp, IIS Express, or any database-backed page.
+
+.LANG zh-CN
+扫描已追踪主题和模块 CSS，找出不能作为 IE9/IE8 基础兼容要求的现代 CSS 构造。
+本脚本是静态只读门禁，不运行 Gulp、IIS Express 或任何数据库页面。
+
+.PARAMETER FailOnWarning
+.LANG en
+Treats warning-level findings, such as IE8 visual degradation markers, as failures.
+
+.LANG zh-CN
+将 Warning 级发现也视为失败，例如 IE8 视觉降级标记。
+
+.PARAMETER MaxSamplesPerRule
+.LANG en
+Maximum number of sample findings to print for each rule.
+
+.LANG zh-CN
+每条规则最多输出的样例发现数量。
+#>
 [CmdletBinding()]
 param(
     [switch]$FailOnWarning,
@@ -9,9 +41,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# 中文：本脚本是旧浏览器兼容的本地静态门禁，只读取 Git 已追踪 CSS，不运行 Gulp、IIS Express 或数据库。
-# English: This script is a local static gate for legacy-browser compatibility. It reads only Git-tracked CSS and never
-# invokes Gulp, IIS Express, or the runtime database.
+# <lang>
+#   <zh-CN>本脚本是旧浏览器兼容的本地静态门禁，只读取 Git 已追踪 CSS，不运行 Gulp、IIS Express 或数据库。</zh-CN>
+#   <en>This script is a local static gate for legacy-browser compatibility. It reads only Git-tracked CSS and never invokes Gulp, IIS Express, or the runtime database.</en>
+# </lang>
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $findings = New-Object 'System.Collections.Generic.List[object]'
 

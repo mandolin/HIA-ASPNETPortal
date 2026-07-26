@@ -1,3 +1,36 @@
+<#
+.SYNOPSIS
+.LANG en
+Runs an isolated theme-resolution proof against a test database configuration.
+
+.LANG zh-CN
+针对测试数据库配置运行隔离主题解析 proof。
+
+.DESCRIPTION
+.LANG en
+Uses an external Portal connection string, mutates temporary system/tab theme
+state, starts an isolated IIS Express instance, verifies effective theme behavior,
+and restores previous state afterward. The script is intended for disposable
+development databases and must not be pointed at production data.
+
+.LANG zh-CN
+使用外置 Portal 连接串临时变更系统/Tab 主题状态，启动隔离 IIS Express 实例，验证有效主题行为，并在结束后
+恢复原状态。本脚本面向可丢弃的开发数据库，不应指向生产数据。
+
+.PARAMETER ConnectionStringsConfigPath
+.LANG en
+External connectionStrings.config file containing the Portal SQL Server connection string.
+
+.LANG zh-CN
+包含 Portal SQL Server 连接串的外置 connectionStrings.config 文件。
+
+.PARAMETER Port
+.LANG en
+IIS Express port used by the isolated theme proof site.
+
+.LANG zh-CN
+隔离主题 proof 站点使用的 IIS Express 端口。
+#>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]
@@ -336,8 +369,10 @@ function Invoke-PortalPage {
             }
         }
         catch {
-            # IIS Express 首次编译前可能暂不可访问；短暂重试不会掩盖最终失败。
-            # IIS Express may be unavailable during first compilation; a short retry does not mask final failure.
+            # <lang>
+            #   <zh-CN>IIS Express 首次编译前可能暂不可访问；短暂重试不会掩盖最终失败。</zh-CN>
+            #   <en>IIS Express may be unavailable during first compilation; a short retry does not mask final failure.</en>
+            # </lang>
         }
 
         Start-Sleep -Seconds 1
