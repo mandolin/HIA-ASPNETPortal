@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P17` 已启动 |
-| 当前阶段 | `W-anp-P17.2` 待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P17.2-discussion-questions.md`；确认后输出正式外部新增语种扩展约定文档。 |
-| 当前完成条件 | P17.1 已完成并推送：58 个 PowerShell 脚本全部具备 comment-based help，`MissingCommentHelp=0`，高风险缺口仍为 0。P17.2 已形成设计草案和待讨论问题。 |
+| 当前阶段 | `W-anp-P17.4` 待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P17.4-discussion-questions.md`；确认后复跑并补强企业扫描 baseline。 |
+| 当前完成条件 | P17.1 已完成并推送：58 个 PowerShell 脚本全部具备 comment-based help，`MissingCommentHelp=0`。P17.2 已按用户批注收口为边界结论；P17.3 已完成生成物与历史文档工具当前清理切片。 |
 | 最近状态更新时间 | 2026-07-26 |
 
 ## Recent Completed Items

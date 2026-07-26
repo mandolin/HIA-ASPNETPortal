@@ -375,10 +375,23 @@ MigrationBackup/
 # P4.2 JSDoc pilot 的可再生本机验证输出。
 /temp/documentation/
 
+# 本机临时目录统一不入库；正式证据写入 WorkZone 私有仓库或公开文档目录。
+/temp/
+
 # SHFB/Doxygen 历史生成文档输出；配置文件需另行评估，不在此处整体忽略。
 /src/Documentation/
 /src/Portal/Documentation/
 /src/Portal.Components.Data/Documentation/
+
+# P17.3 已废弃的 SHFB/Doxygen 配置足迹和旧前端样例目录。
+/src/DoxyGen/
+/src/Portal.shfbproj
+/src/Portal/Demo/
+/src/Portal/css/
+/src/Portal/js/
+
+# G1/P14 上传回归保留的本机样例文件，不作为 Web 发布内容提交。
+/src/Portal/Uploads/sample-under-10mb.json
 
 # Playwright CLI 浏览器回归快照，属于本机临时证据。
 /.playwright-cli/
