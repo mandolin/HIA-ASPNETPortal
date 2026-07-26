@@ -22,15 +22,22 @@ WorkZone、门户运行时或其他 HIA 项目本地目录的前提下，重复�
 不是门户运行时输入、Gulp 资产输入或公开发布物；不得将其复制到 `src/Documentation/`、`src/DoxyGen/`、
 `src/Portal/Documentation/` 或提交到主仓库。
 
-## .NET XML 文档
+## .NET DotNetDoc Pilot
 
-现阶段使用标准 C# XML 文档输出，`Test-PortalXmlDocumentation.ps1` 会验证 Debug 构建生成的 `Portal`、
-`Portal.Components`、`Portal.Components.Data` 与 `Portal.Components.Data1` XML 文件的存在、程序集名称和基本 XML 结构。
-该检查不改写 `.csproj`、不把 `CS1591` 数量当作质量门禁，也不生成项目私有文档格式。
+`dev/documentation/dotnetdoc/` 是独立的 HIA DotNetDoc pilot 工具项目。它锁定 `@hia-doc/dotnetdoc-runner@0.1.3`，
+并通过工具目录局部 `.npmrc` 使用 npm 官方 registry，以避免镜像源元数据延迟导致版本不可用。该工具包不复用
+`src/Portal/package.json`，不参与 Gulp、IIS Express、Visual Studio Task Runner 或发布包构建。
 
-首个 HIA .NET pilot 候选是 `Portal.Components.xml`。只有 HIA-Documentation-Sys 提供稳定、已版本化的 producer/
-consumer contract，且其许可证、输入、输出、source linkage、失败和回退方式经过独立审查后，才可以另立接入批次。
-在此之前，不安装跨项目依赖、不建立本地目录链接，也不让门户构建、IIS 启动或发布流程依赖该工具链。
+默认配置为根级 `dotnetdoc.config.json`，首轮只读取四份 Debug XML 文档、代表性 Web Forms 标记注释、一个 Web Forms
+surface 和 solution/project discovery。生成的 DotNetDoc extraction、HIA document 与 producer result 只写入被忽略的
+`temp/documentation/dotnetdoc/`，不得提交。
+
+可使用 `dev/scripts/Build-PortalDotNetDocPilot.ps1` 或 VSCode 任务 `portal: build .NET DotNetDoc pilot` 执行。脚本默认先调用
+`Test-PortalXmlDocumentation.ps1 -Build` 生成 XML 文档，再运行 runner 和输出检查；已有 Debug XML 时可显式使用 `-SkipXmlBuild`。
+
+`dotnetdoc.api-only.config.json` 是排障回退配置，只消费四份 XML 文档。`dotnetdoc.source-probe.config.json` 是 source relation
+研究配置，用于观察 C# source extractor 在缺少完整项目上下文时的诊断表现；它不作为默认门禁，也不阻塞门户文档化主线。
+当 HIA-Documentation-Sys 后续提供更稳定的项目级 source linkage 后，再把 source relation 提升为默认 contract。
 
 ## 覆盖率分层
 
@@ -59,7 +66,7 @@ P13.3 的 `Test-PortalDocumentationReadiness.ps1` 会把通知来源可读性作
 
 以下目录或文件类型当前属于生成物、历史输出或尚未确定所有权的区域：
 
-- `temp/documentation/`：JSDoc pilot 的本机验证输出，受 `.gitignore` 保护。
+- `temp/documentation/`：JSDoc 与 DotNetDoc pilot 的本机验证输出，受 `.gitignore` 保护。
 - `bin/`：Visual Studio 与 MSBuild 生成的程序集和 XML 文档输出，受 `.gitignore` 保护。
 - `src/Documentation/`、`src/Portal/Documentation/`、`src/Portal.Components.Data/Documentation/`：SHFB/Doxygen 历史生成输出，当前不作为公开文档输入或发布目录。
 - `src/DoxyGen/`、`src/Portal.shfbproj`：Doxygen/SHFB 历史工具现场或配置候选，当前不入正式发布包。
@@ -76,7 +83,8 @@ HIA 文档化工具链输入说明，而不是继续提交或发布 SHFB/Doxygen
 1. 运行 `portal: verify public documentation`，检查公开入口、相对链接、隐私和生成目录边界。
 2. 需要确认 JavaScript 文档工具时，运行 JSDoc pilot；生成物保持在被忽略目录。
 3. 需要确认 C# XML 输出时，运行 `portal: verify .NET XML documentation`；必要时由该任务先构建 Debug 配置。
-4. 需要留存 P13.3 文档化证据时，运行：
+4. 需要确认 HIA DotNetDoc 输出 contract 时，运行 `portal: build .NET DotNetDoc pilot`。
+5. 需要留存 P13.3 文档化证据时，运行：
 
 ```powershell
 dev/scripts/New-PortalDocumentationEvidencePackage.ps1

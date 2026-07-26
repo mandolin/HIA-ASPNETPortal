@@ -56,6 +56,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 - `portal: build assets and start`：构建解决方案、构建前端资源并启动 IIS Express。
 - `portal: documentation baseline`：输出已追踪源码的文档化 inventory JSON。
 - `portal: build JavaScript documentation pilot`：独立生成并验证 HIA JSDoc pilot。
+- `portal: build .NET DotNetDoc pilot`：独立生成并验证 HIA DotNetDoc pilot。
 - `portal: verify .NET XML documentation`：构建 Debug 后检查既有 C# XML 文档输出。
 - `portal: verify frontend contracts`：只读检查已追踪的 Web Forms 呈现、主题、模块 CSS 和 Gulp 契约。
 - `portal: verify public documentation`：只读检查公开 Markdown 的入口、相对文件链接、隐私边界和生成目录边界。
@@ -127,6 +128,28 @@ readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JS
 ```
 
 验证器只检查 XML 结构、程序集名和至少一个成员条目。XML 继续属于本机构建产物；待 HIA C# producer 和 source-linkage 契约稳定后，再考虑独立接入。
+
+## .NET DotNetDoc Pilot
+
+`dev/documentation/dotnetdoc/` 是独立的 HIA DotNetDoc 工具项目。它锁定 `@hia-doc/dotnetdoc-runner@0.1.3`，并通过工具目录局部
+`.npmrc` 使用 npm 官方 registry；这只影响 DotNetDoc pilot，不改变 Portal 前端依赖或 Gulp 工作流。
+
+默认 pilot 读取四份 Debug XML 文档、代表性 Web Forms 标记注释、一个 Web Forms surface 和 solution/project discovery，
+输出到被忽略的 `temp/documentation/dotnetdoc/`。执行：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Build-PortalDotNetDocPilot.ps1
+```
+
+已有 Debug XML 文档时可跳过构建：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Build-PortalDotNetDocPilot.ps1 -SkipXmlBuild
+```
+
+`-ApiOnly` 使用 `dotnetdoc.api-only.config.json`，用于排查 XML 文档管线；`-SourceProbe` 使用
+`dotnetdoc.source-probe.config.json`，用于研究 C# source relation。当前 source probe 可能因逐文件 Roslyn 解析缺少完整项目上下文而产生
+`CS0246`/`CS0103` 诊断，因此不作为默认门禁。
 
 ## VSCode 调试
 

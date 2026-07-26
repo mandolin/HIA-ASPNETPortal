@@ -1,0 +1,73 @@
+{
+  "$schema": "https://mandolin.github.io/HIA-Documentation/schemas/dotnetdoc-config-0.1.0-draft.schema.json",
+  "schemaVersion": "0.1.0-draft",
+  "workspaceRoot": ".",
+  "outputDirectory": "temp/documentation/dotnetdoc",
+  "profileIds": [
+    "hia-aspnetportal",
+    "dotnetdoc"
+  ],
+  "inputs": [
+    {
+      "kind": "dotnet-xml-doc",
+      "path": "src/Portal/bin/Portal.xml",
+      "artifactBasePath": "api/Portal",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal",
+      "title": "HIA-ASPNETPortal Portal API"
+    },
+    {
+      "kind": "dotnet-xml-doc",
+      "path": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "artifactBasePath": "api/Portal.Components",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components",
+      "title": "HIA-ASPNETPortal Portal.Components API"
+    },
+    {
+      "kind": "dotnet-xml-doc",
+      "path": "src/Portal/bin/Portal.Components.Data.xml",
+      "artifactBasePath": "api/Portal.Components.Data",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components.Data",
+      "title": "HIA-ASPNETPortal Portal.Components.Data API"
+    },
+    {
+      "kind": "dotnet-xml-doc",
+      "path": "src/Portal/bin/Portal.Components.Data1.xml",
+      "artifactBasePath": "api/Portal.Components.Data1",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components.Data1",
+      "title": "HIA-ASPNETPortal Portal.Components.Data1 API"
+    },
+    {
+      "kind": "dotnet-markup-comments",
+      "path": "src/Portal/Default.master",
+      "artifactBasePath": "markup/Portal/Default.master",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:markup:Default.master",
+      "title": "Default Master Markup Comments"
+    },
+    {
+      "kind": "dotnet-markup-comments",
+      "path": "src/Portal/DesktopModules/DiscussDetails.aspx",
+      "artifactBasePath": "markup/Portal/DesktopModules/DiscussDetails",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:markup:DiscussDetails",
+      "title": "DiscussDetails Markup Comments"
+    },
+    {
+      "kind": "dotnet-aspnet-surface",
+      "path": "src/Portal/Default.aspx",
+      "applicationRoot": "src/Portal",
+      "artifactBasePath": "surface/Portal/Default",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:surface:Default",
+      "title": "Default Web Forms Surface"
+    },
+    {
+      "kind": "dotnet-project",
+      "path": "src/master.sln",
+      "artifactBasePath": "project/Portal",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:project",
+      "title": "HIA-ASPNETPortal Project Discovery"
+    }
+  ],
+  "options": {
+    "writeResultManifest": true,
+    "writeSourceRelationArtifact": false
+  }
+}

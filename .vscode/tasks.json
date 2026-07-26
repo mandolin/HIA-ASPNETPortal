@@ -168,6 +168,20 @@
             "problemMatcher": []
         },
         {
+            "label": "portal: build .NET DotNetDoc pilot",
+            "type": "process",
+            "command": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": [
+                "-NoLogo",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\dev\\scripts\\Build-PortalDotNetDocPilot.ps1"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "portal: verify .NET XML documentation",
             "type": "process",
             "command": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",

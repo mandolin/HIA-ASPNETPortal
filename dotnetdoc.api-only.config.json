@@ -1,0 +1,45 @@
+{
+  "$schema": "https://mandolin.github.io/HIA-Documentation/schemas/dotnetdoc-config-0.1.0-draft.schema.json",
+  "schemaVersion": "0.1.0-draft",
+  "workspaceRoot": ".",
+  "outputDirectory": "temp/documentation/dotnetdoc",
+  "profileIds": [
+    "hia-aspnetportal",
+    "dotnetdoc",
+    "api-only"
+  ],
+  "inputs": [
+    {
+      "kind": "dotnet-xml-doc",
+      "path": "src/Portal/bin/Portal.xml",
+      "artifactBasePath": "api/Portal",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal",
+      "title": "HIA-ASPNETPortal Portal API"
+    },
+    {
+      "kind": "dotnet-xml-doc",
+      "path": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "artifactBasePath": "api/Portal.Components",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components",
+      "title": "HIA-ASPNETPortal Portal.Components API"
+    },
+    {
+      "kind": "dotnet-xml-doc",
+      "path": "src/Portal/bin/Portal.Components.Data.xml",
+      "artifactBasePath": "api/Portal.Components.Data",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components.Data",
+      "title": "HIA-ASPNETPortal Portal.Components.Data API"
+    },
+    {
+      "kind": "dotnet-xml-doc",
+      "path": "src/Portal/bin/Portal.Components.Data1.xml",
+      "artifactBasePath": "api/Portal.Components.Data1",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components.Data1",
+      "title": "HIA-ASPNETPortal Portal.Components.Data1 API"
+    }
+  ],
+  "options": {
+    "writeResultManifest": true,
+    "writeSourceRelationArtifact": false
+  }
+}

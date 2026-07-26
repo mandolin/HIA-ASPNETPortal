@@ -4,10 +4,10 @@
 
 .DESCRIPTION
     中文：本脚本只读取仓库文件、Git 索引和可选的 HIA-Documentation-Sys 通知目录，检查公开文档、
-    XML 文档、JSDoc pilot、生成目录边界、coverage 分层和通知读取机制是否处于可交接状态。
+    XML 文档、JSDoc/DotNetDoc pilot、生成目录边界、coverage 分层和通知读取机制是否处于可交接状态。
     它不改写源码注释、不执行 npm、不构建解决方案、不生成文档、不复制通知，也不访问数据库或网络。
     English: This script reads repository files, the Git index, and the optional HIA-Documentation-Sys notification
-    directory to check whether public docs, XML docs, the JSDoc pilot, generated-output boundaries, coverage tiers,
+    directory to check whether public docs, XML docs, JSDoc/DotNetDoc pilots, generated-output boundaries, coverage tiers,
     and notification pull mechanics are ready for handoff. It never rewrites comments, runs npm, builds the solution,
     generates docs, copies notifications, or accesses databases or the network.
 #>
@@ -119,6 +119,7 @@ $requiredScripts = @(
     'dev/scripts/Get-PortalDocumentationBaseline.ps1',
     'dev/scripts/Test-PortalXmlDocumentation.ps1',
     'dev/scripts/Build-PortalJsdocPilot.ps1',
+    'dev/scripts/Build-PortalDotNetDocPilot.ps1',
     'dev/scripts/Get-HiaDocumentationNotifications.ps1',
     'dev/scripts/Test-PortalPublicDocumentation.ps1'
 )
@@ -126,7 +127,7 @@ $missingScripts = @($requiredScripts | Where-Object {
         -not (Test-Path -LiteralPath (Get-RepoPath -RelativePath $_) -PathType Leaf) -or -not (Test-TrackedPath -RelativePath $_)
     })
 if ($missingScripts.Count -eq 0) {
-    Add-DocumentationCheck -Severity Pass -Code 'DOC-SCRIPTS' -Message 'Documentation baseline, XML, JSDoc, notification and public-doc scripts are present and tracked.'
+    Add-DocumentationCheck -Severity Pass -Code 'DOC-SCRIPTS' -Message 'Documentation baseline, XML, JSDoc, DotNetDoc, notification and public-doc scripts are present and tracked.'
 }
 else {
     Add-DocumentationCheck -Severity Fail -Code 'DOC-SCRIPTS' -Message 'Required documentation scripts are missing or untracked.' -Evidence ($missingScripts -join '; ')
@@ -178,12 +179,45 @@ else {
 $xmlReady =
     (Test-TextContains -RelativePath 'dev/scripts/Test-PortalXmlDocumentation.ps1' -Pattern 'Portal\.Components\.xml') -and
     (Test-TextContains -RelativePath 'dev/scripts/Test-PortalXmlDocumentation.ps1' -Pattern '不改写.*MSBuild|must not rewrite') -and
-    (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'HIA-Documentation-Sys 提供稳定')
+    (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'Test-PortalXmlDocumentation.ps1')
 if ($xmlReady) {
-    Add-DocumentationCheck -Severity Pass -Code 'DOC-XML-CONTRACT' -Message '.NET XML documentation verification remains standard XML output and HIA .NET producer is deferred.'
+    Add-DocumentationCheck -Severity Pass -Code 'DOC-XML-CONTRACT' -Message '.NET XML documentation verification remains standard XML output and does not rewrite MSBuild settings.'
 }
 else {
     Add-DocumentationCheck -Severity Fail -Code 'DOC-XML-CONTRACT' -Message '.NET XML documentation boundary needs review.'
+}
+
+$dotnetDocPackagePath = Get-RepoPath -RelativePath 'dev/documentation/dotnetdoc/package.json'
+$dotnetDocPackageLockPath = Get-RepoPath -RelativePath 'dev/documentation/dotnetdoc/package-lock.json'
+$dotnetDocCheckerPath = Get-RepoPath -RelativePath 'dev/documentation/dotnetdoc/check-dotnetdoc-output.cjs'
+$dotnetDocConfigPath = Get-RepoPath -RelativePath 'dotnetdoc.config.json'
+$dotnetDocApiOnlyConfigPath = Get-RepoPath -RelativePath 'dotnetdoc.api-only.config.json'
+$dotnetDocSourceProbeConfigPath = Get-RepoPath -RelativePath 'dotnetdoc.source-probe.config.json'
+$dotnetDocReady = $false
+if ((Test-Path -LiteralPath $dotnetDocPackagePath -PathType Leaf) -and
+    (Test-Path -LiteralPath $dotnetDocPackageLockPath -PathType Leaf) -and
+    (Test-Path -LiteralPath $dotnetDocCheckerPath -PathType Leaf) -and
+    (Test-Path -LiteralPath $dotnetDocConfigPath -PathType Leaf) -and
+    (Test-Path -LiteralPath $dotnetDocApiOnlyConfigPath -PathType Leaf) -and
+    (Test-Path -LiteralPath $dotnetDocSourceProbeConfigPath -PathType Leaf)) {
+    $package = Get-Utf8Text -LiteralPath $dotnetDocPackagePath | ConvertFrom-Json
+    $config = Get-Utf8Text -LiteralPath $dotnetDocConfigPath | ConvertFrom-Json
+    $dotnetDocReady =
+        ($package.private -eq $true) -and
+        ($package.devDependencies.'@hia-doc/dotnetdoc-runner' -eq '0.1.3') -and
+        ($package.overrides.'fast-xml-parser' -eq '5.7.0') -and
+        ([string]$config.outputDirectory -eq 'temp/documentation/dotnetdoc') -and
+        (@($config.inputs).Count -gt 0) -and
+        (Test-TextContains -RelativePath 'dev/scripts/Build-PortalDotNetDocPilot.ps1' -Pattern 'temp\\documentation') -and
+        (Test-TextContains -RelativePath 'dev/documentation/dotnetdoc/check-dotnetdoc-output.cjs' -Pattern 'sourcesContent') -and
+        (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'DotNetDoc pilot')
+}
+
+if ($dotnetDocReady) {
+    Add-DocumentationCheck -Severity Pass -Code 'DOC-DOTNETDOC-PILOT' -Message 'DotNetDoc pilot is isolated, locked, writes only to temp/documentation/dotnetdoc, and has a source-probe fallback boundary.'
+}
+else {
+    Add-DocumentationCheck -Severity Fail -Code 'DOC-DOTNETDOC-PILOT' -Message 'DotNetDoc pilot isolation, input, output, audit override or checker contract needs review.'
 }
 
 $generatedBoundaries = @(
