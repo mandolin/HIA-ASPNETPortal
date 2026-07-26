@@ -160,6 +160,15 @@ function Get-Classification {
     $sample = $Text.Trim()
 
     # <lang>
+    #   <zh-CN>扫描器自身会包含待办、修复和延期等匹配规则文本，这些是检测逻辑，不是真实债务。</zh-CN>
+    #   <en>The scanner itself contains matching-rule text for debt, fix and deferred markers; those lines describe detection logic rather than real debt.</en>
+    # </lang>
+    if ($path -eq 'dev/scripts/Get-PortalTodoDebtInventory.ps1' -and
+        $sample -match '(?i)(TODO\|FIXME\|HACK\|XXX|markerPattern|Get-Classification)') {
+        return 'resolved-stale'
+    }
+
+    # <lang>
     #   <zh-CN>目标环境、真实 IIS、企业扫描等无法在本机直接完成，默认归为外部环境依赖。</zh-CN>
     #   <en>Target environment, real IIS, and enterprise scanning work cannot be completed locally and is classified as external-environment dependent by default.</en>
     # </lang>

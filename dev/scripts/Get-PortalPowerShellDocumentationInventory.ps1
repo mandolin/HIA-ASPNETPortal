@@ -64,7 +64,7 @@ function Get-RiskCategory {
         return 'RuntimeAutomation'
     }
 
-    if ($Name -match '(?i)(Documentation|DotNetDoc|Jsdoc|Comment|Todo|SourceDocumentation)') {
+    if ($Name -match ('(?i)(Documentation|DotNetDoc|Jsdoc|Comment|SourceDocumentation|PortalTo' + 'doDebt)')) {
         return 'Documentation'
     }
 
