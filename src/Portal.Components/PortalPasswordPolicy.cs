@@ -19,16 +19,16 @@ namespace ASPNET.StarterKit.Portal
     {
         /// <summary>
         /// <lang>
-        ///   <zh-CN>当前临时策略要求的最小长度。</zh-CN>
-        ///   <en>Minimum length required by the current temporary policy.</en>
+        ///   <zh-CN>当前基线策略要求的最小长度。</zh-CN>
+        ///   <en>Minimum length required by the current baseline policy.</en>
         /// </lang>
         /// </summary>
         public const int MinimumLength = 8;
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>当前临时策略要求满足的字符类别数量。</zh-CN>
-        ///   <en>Number of character categories required by the current temporary policy.</en>
+        ///   <zh-CN>当前基线策略要求满足的字符类别数量。</zh-CN>
+        ///   <en>Number of character categories required by the current baseline policy.</en>
         /// </lang>
         /// </summary>
         public const int RequiredCategoryCount = 3;
@@ -85,8 +85,8 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>校验密码是否满足当前临时复杂度策略。</zh-CN>
-        ///   <en>Validates whether a password satisfies the current temporary complexity policy.</en>
+        ///   <zh-CN>校验密码是否满足当前复杂度基线策略。</zh-CN>
+        ///   <en>Validates whether a password satisfies the current baseline complexity policy.</en>
         /// </lang>
         /// </summary>
         /// <param name="password">

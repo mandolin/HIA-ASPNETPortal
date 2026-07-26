@@ -45,7 +45,12 @@
                             <br>
                             <asp:TextBox size="25" ID="Name" runat="server" />
                             &nbsp;
-                            <%-- todo 此处可以增加正则表达式验证 --%>
+                            <%--
+                              <lang>
+                                <zh-CN>公开注册只在此处强制必填；更严格的用户名格式策略应通过系统设置统一治理。</zh-CN>
+                                <en>Public registration only requires a non-empty value here; stricter user-name format rules should be governed through system settings.</en>
+                              </lang>
+                            --%>
                             <asp:RequiredFieldValidator ControlToValidate="Name" ErrorMessage="'Name' must not be left blank."
                                 runat="server" ID="RequiredFieldValidator1" />
                             <p>

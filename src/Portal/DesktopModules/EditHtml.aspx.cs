@@ -60,9 +60,9 @@ namespace ASPNET.StarterKit.Portal
                 IHtmlTextItem item = HtmlTextDB.GetHtmlText(moduleId);
                 if (item == null)
                 {
-                    DesktopText.Text = "Todo: Add Content...";
-                    MobileSummary.Text = "Todo: Add Content...";
-                    MobileDetails.Text = "Todo: Add Content...";
+                    DesktopText.Text = "Add content...";
+                    MobileSummary.Text = "Add summary...";
+                    MobileDetails.Text = "Add details...";
                 }
                 else
                 {

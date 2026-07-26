@@ -84,11 +84,6 @@ namespace ASPNET.StarterKit.Portal
             var env = (EnvSection)ConfigurationManager.GetSection("env") ?? "dev";
             GlobalInfo.Environment = env;
 
-            //System.Diagnostics.Debug.WriteLine($"当前env：{env}");
-
-            //ConfigurationManager.AppSettings.Set("TestKey", "xxxxxxxxxx");
-
-
             // <lang>
             //   <zh-CN>按“基础配置 + 环境覆盖”的顺序加载 JSON appSettings；真实敏感值仍由外置配置或环境变量处理。</zh-CN>
             //   <en>Load JSON appSettings in "base configuration plus environment override" order; real sensitive values remain handled by external configuration or environment variables.</en>
