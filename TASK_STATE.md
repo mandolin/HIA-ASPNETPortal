@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P19 下一批业务模块与 Workflow 深化`；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P19.5` 已条件式完成，进入 `W-anp-P20.0` 待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P20.0-discussion-questions.md`；若按推荐确认，则正式拆 `W-anp-P20` 与 breakdown，并进入项目/任务协同抽象模型设计。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P19 已完成抽象业务申请/审批样板和自动侧收口；真实开发库迁移、测试 Tab 和浏览器三步流因缺少外置连接串保持待补证。P20.0 需确认是否启动企业能力模块样板深化及首选方向。 |
+| 当前阶段 | `W-anp-P19.5` 已条件式完成，进入下一 Cycle 候选评估 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/C-anp-P3-discussion-questions.md`；若确认 Cycle 蓝图，再根据用户选择建立下一个正式 `W-anp-P*` 文件。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P19 已完成抽象业务申请/审批样板和自动侧收口；真实开发库迁移、测试 Tab 和浏览器三步流因缺少外置连接串保持待补证。下一步只确认 Cycle 级候选蓝图，不提前确定具体 `W-anp-P20` 事项。 |
 | 最近状态更新时间 | 2026-07-27 |
 
 ## Recent Completed Items
@@ -139,8 +139,8 @@
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P19.5 当前切片本轮提交推送完成 | `.vscode/settings.json` 仍为本机设置残留；P19.5 新增脚本和公开文档说明已作为本轮相关切片处理。 |
-| WorkZone | P19.5 当前切片本轮提交推送完成 | P19.5 验收、P19 closeout、P20 输入、P20.0 讨论清单、证据和本轮日志已作为本轮相关切片处理；历史日志/截图残留仍按既有策略不处理。 |
+| 主仓库 | Cycle 评估修正本轮提交推送完成 | `.vscode/settings.json` 仍为本机设置残留；任务账本已改为下一 Cycle 候选评估入口，不再提前确定具体 P20。 |
+| WorkZone | Cycle 评估修正本轮提交推送完成 | 撤回具体 P20 入口，改为 C-anp-P2 closeout、C-anp-P3 候选蓝图、Cycle 待讨论清单和本轮日志；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 
