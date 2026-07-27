@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P19 下一批业务模块与 Workflow 深化`；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P19.2` 企业能力模块排序已形成待确认输入 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P19.2-discussion-questions.md`；若按推荐确认，则进入 `W-anp-P19.3` 轻量 Workflow Backbone 设计。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P19.2 已读取 HIA-ASPNETPortal 引导记录与企业能力模块体系资料，并将 WSF 科研/井设计/情报等参考项目转化为企业能力候选排序；等待用户确认后进入 P19.3。 |
+| 当前阶段 | `W-anp-P19.3` 轻量 Workflow Backbone 设计已形成待确认输入 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P19.3-discussion-questions.md`；若按推荐确认，则进入 `W-anp-P19.4` 抽象业务申请/审批样板实现。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P19.3 已形成轻量 Workflow Backbone、抽象业务申请样板、数据迁移草案、回归计划和 ADR `0024`；等待用户确认后进入 P19.4。 |
 | 最近状态更新时间 | 2026-07-27 |
 
 ## Recent Completed Items
@@ -129,15 +129,16 @@
 | P16.4 高风险 PowerShell 脚本文档化 | completed | `dev/scripts/Get-PortalPowerShellDocumentationInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.4/powershell-documentation-inventory-20260726-1224.*`；`TotalScripts=58; HighRiskScripts=12; HighRiskMissingHiaLanguageMarkers=0; MissingCommentHelp=21`；实施结果 `work-zone/dev/plans/W-anp-P16.4-implementation-result.md`。 |
 | P16.5 质量门禁与周期收口 | completed | `work-zone/dev/evidence/p16.5/20260726-1248/`；`Documentation readiness FailedChecks=0`、`TODO active=0`、`PowerShell high-risk missing=0`、`DotNetDoc success: 16 artifact(s)`；`work-zone/dev/plans/W-anp-P16-closeout.md`。 |
 | P19.0 入口确认与范围定界 | completed | 用户确认 `work-zone/dev/plans/W-anp-P19.0-discussion-questions.md` 全部按推荐推进；主仓提交 `40b2a74`，WorkZone 提交 `1caec0f`。 |
-| P19.1 WSF 参考项目业务盘点 | pending-user-confirmation | 已形成 `work-zone/dev/plans/W-anp-P19.1-module-pack-architecture-input.md`、`work-zone/dev/plans/W-anp-P19.1-wsf-inventory.md`、`work-zone/dev/plans/W-anp-P19.1-business-candidate-map.md` 和 `work-zone/dev/plans/W-anp-P19.1-discussion-questions.md`。 |
-| P19.2 企业能力模块排序 | pending-user-confirmation | 用户确认 P19.1 全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.2-enterprise-capability-module-model.md`、`work-zone/dev/plans/W-anp-P19.2-candidate-priority-matrix.md` 和 `work-zone/dev/plans/W-anp-P19.2-discussion-questions.md`。 |
+| P19.1 WSF 参考项目业务盘点 | completed | 用户确认全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.1-module-pack-architecture-input.md`、`work-zone/dev/plans/W-anp-P19.1-wsf-inventory.md`、`work-zone/dev/plans/W-anp-P19.1-business-candidate-map.md` 和 `work-zone/dev/plans/W-anp-P19.1-discussion-questions.md`。 |
+| P19.2 企业能力模块排序 | completed | 用户确认全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.2-enterprise-capability-module-model.md`、`work-zone/dev/plans/W-anp-P19.2-candidate-priority-matrix.md` 和 `work-zone/dev/plans/W-anp-P19.2-discussion-questions.md`；主仓提交 `d90eaa7`，WorkZone 提交 `8801469`。 |
+| P19.3 轻量 Workflow Backbone 设计 | pending-user-confirmation | 已形成 `work-zone/dev/plans/W-anp-P19.3-workflow-backbone-design.md`、`work-zone/dev/plans/W-anp-P19.3-business-application-sample.md`、`work-zone/dev/plans/W-anp-P19.3-data-migration-draft.md`、`work-zone/dev/plans/W-anp-P19.3-regression-plan.md`、`work-zone/docs/adr/0024-enterprise-capability-workflow-sample-boundary.md` 和 `work-zone/dev/plans/W-anp-P19.3-discussion-questions.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P19.1 任务账本提交 `898c29b` 已推送；本轮 P19.2 任务账本更新未提交 | `.vscode/settings.json` 仍为本机设置残留；P19.2 未改运行代码。 |
-| WorkZone | P19.1 盘点资料提交 `358289c` 已推送；本轮 P19.2 能力排序文档未提交 | 当前等待用户确认 P19.2 待讨论问题。 |
+| 主仓库 | P19.2 任务账本提交 `d90eaa7` 已推送；本轮 P19.3 任务账本更新未提交 | `.vscode/settings.json` 仍为本机设置残留；P19.3 未改运行代码。 |
+| WorkZone | P19.2 能力排序资料提交 `8801469` 已推送；本轮 P19.3 设计文档未提交 | 当前等待用户确认 P19.3 待讨论问题。 |
 
 ## Upcoming Planning Constraints
 
