@@ -4,9 +4,11 @@
   ],
   "source": {
     "include": [
-      "../../../src/Portal/gulpfile.js"
+      "../../../src/Portal/gulpfile.js",
+      "../../../src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js"
     ],
-    "includePattern": ".+\\.js$"
+    "includePattern": ".+\\.js$",
+    "excludePattern": "(^|/|\\\\)(node_modules|packages|dist|vendor)(/|\\\\)|\\.min\\.js$|\\.bundle\\.js$|\\.generated\\.js$"
   },
   "opts": {
     "destination": "../../../temp/documentation/jsdoc",

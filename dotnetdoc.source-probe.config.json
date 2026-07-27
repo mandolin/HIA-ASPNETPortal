@@ -18,24 +18,13 @@
     },
     {
       "kind": "dotnet-csharp-source",
-      "path": "src/Portal.Components/IUsersDb.cs",
-      "artifactBasePath": "source/Portal.Components/IUsersDb",
-      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:source:IUsersDb",
-      "title": "IUsersDb Source Documentation"
-    },
-    {
-      "kind": "dotnet-csharp-source",
-      "path": "src/Portal.Components/PortalSecurity.cs",
-      "artifactBasePath": "source/Portal.Components/PortalSecurity",
-      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:source:PortalSecurity",
-      "title": "PortalSecurity Source Documentation"
-    },
-    {
-      "kind": "dotnet-csharp-source",
-      "path": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
-      "artifactBasePath": "source/Portal.Components/PortalHiaBoundaryContracts",
-      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:source:PortalHiaBoundaryContracts",
-      "title": "Portal HIA Boundary Source Documentation"
+      "projectPath": "src/Portal.Components/Portal.Components.csproj",
+      "paths": [
+        "src/Portal.Components/IUsersDb.cs"
+      ],
+      "artifactBasePath": "source/Portal.Components",
+      "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:source:Portal.Components",
+      "title": "Portal.Components Project Source Documentation"
     }
   ],
   "options": {

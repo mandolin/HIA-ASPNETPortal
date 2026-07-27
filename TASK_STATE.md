@@ -14,11 +14,11 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | 后续周期方向待确认；`W-anp-P18` 已整体延期 |
-| 当前阶段 | HIA 集成暂停，等待替代周期入口 |
-| 当前唯一下一步 | 等待用户指定下一条推进主线；在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P17 已完成并已提交推送：P17.5 验收证据位于 `work-zone/dev/evidence/p17.5/20260726-1503/`；`MissingCommentHelp=0`；扫描 baseline `Pass=15; Warning=1; Fail=0; PendingTargetEnvironment=6`；文档 readiness `FailedChecks=0`；合规 baseline `Fail=0`。P18/HIA 集成因 HIA 基础抽象设计尚未启动而延期。 |
-| 最近状态更新时间 | 2026-07-26 |
+| 当前大周期 | `W-anp-P19 下一批业务模块与 Workflow 深化` 入口拆分；`W-anp-P18` 继续整体延期 |
+| 当前阶段 | `W-anp-P19.0` 入口确认与范围定界 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P19.0-discussion-questions.md`；若按推荐确认，则进入 `W-anp-P19.1` 只读盘点 `K:\Work\wsf\`。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P19 已作为 P18 延期后的非 HIA 主线完成入口拆分：`W-anp-P19.md`、`W-anp-P19-breakdown.md`、`W-anp-P19.0-discussion-questions.md` 已建立；等待用户确认后进入 P19.1。 |
+| 最近状态更新时间 | 2026-07-27 |
 
 ## Recent Completed Items
 

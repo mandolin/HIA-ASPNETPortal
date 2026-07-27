@@ -12,7 +12,7 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@mandolin/jsdoc-plugin-hia-sys": "0.1.0",
+    "@mandolin/jsdoc-plugin-hia-sys": "^0.1.2",
     "@mandolin/jsdoc-theme-hia": "0.1.0",
     "jsdoc": "4.0.5"
   }
