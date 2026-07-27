@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnnouncementsDb.cs" />
+    <Compile Include="BusinessApplicationDb.cs" />
     <Compile Include="ContactsDb.cs" />
     <Compile Include="DocumentsDb.cs" />
     <Compile Include="EventsDb.cs" />

@@ -1,0 +1,86 @@
+.business-application-request {
+    border: 1px solid #d8dee8;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.business-application-title {
+    color: #2f475f;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.business-application-subtitle {
+    color: #41556b;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 16px 0 8px;
+}
+
+.business-application-message {
+    display: block;
+    color: #8a1f1f;
+    margin: 6px 0 10px;
+}
+
+.business-application-form-grid {
+    margin: -10px 0 0 -12px;
+}
+
+.business-application-form-field {
+    display: inline-block;
+    width: 240px;
+    max-width: 100%;
+    margin: 10px 0 0 12px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #edf1f5;
+    vertical-align: top;
+}
+
+.business-application-form-field-wide {
+    width: 360px;
+}
+
+.business-application-form-field-full {
+    width: 100%;
+    max-width: 760px;
+}
+
+.business-application-label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.business-application-input {
+    width: 100%;
+    max-width: 760px;
+    box-sizing: border-box;
+}
+
+.business-application-body {
+    min-height: 130px;
+}
+
+.business-application-actions {
+    margin: 14px 0;
+}
+
+.business-application-list-wrap {
+    overflow: auto;
+}
+
+.business-application-list {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+}
+
+.business-application-list td,
+.business-application-list th {
+    border-bottom: 1px solid #edf1f5;
+    padding: 6px 4px;
+    text-align: left;
+}

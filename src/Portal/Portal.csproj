@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\AccessDenied.aspx" />
+    <Content Include="Admin\BusinessApplications.aspx" />
     <Content Include="Admin\EditAccessDenied.aspx" />
     <Content Include="Admin\EmployeeEdit.aspx" />
     <Content Include="Admin\EmployeeDirectory.aspx" />
@@ -198,6 +199,9 @@
     <Content Include="DesktopModules\HtmlModule.ascx" />
     <Content Include="DesktopModules\ImageModule.ascx" />
     <Content Include="DesktopModules\Links.ascx" />
+    <Content Include="DesktopModules\BusinessApplicationRequest\module.json" />
+    <Content Include="DesktopModules\BusinessApplicationRequest\BusinessApplicationRequest.ascx" />
+    <Content Include="DesktopModules\BusinessApplicationRequest\Styles\BusinessApplicationRequest.css" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\module.json" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\Styles\EmployeeProfileConfirm.css" />
@@ -224,6 +228,13 @@
     <Compile Include="Admin\AccessDenied.aspx.cs">
       <DependentUpon>AccessDenied.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\BusinessApplications.aspx.cs">
+      <DependentUpon>BusinessApplications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\BusinessApplications.aspx.designer.cs">
+      <DependentUpon>BusinessApplications.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EditAccessDenied.aspx.cs">
       <DependentUpon>EditAccessDenied.aspx</DependentUpon>
@@ -603,6 +614,13 @@
     </Compile>
     <Compile Include="DesktopModules\Links.ascx.designer.cs">
       <DependentUpon>Links.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\BusinessApplicationRequest\BusinessApplicationRequest.ascx.cs">
+      <DependentUpon>BusinessApplicationRequest.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\BusinessApplicationRequest\BusinessApplicationRequest.ascx.designer.cs">
+      <DependentUpon>BusinessApplicationRequest.ascx</DependentUpon>
     </Compile>
     <Compile Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx.cs">
       <DependentUpon>EmployeeProfileConfirm.ascx</DependentUpon>

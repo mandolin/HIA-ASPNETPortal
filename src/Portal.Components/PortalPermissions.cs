@@ -220,6 +220,54 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>提交抽象业务申请。</zh-CN>
+        ///   <en>Submit abstract business applications.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationSubmit = "Business.Application.Submit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看本人提交的抽象业务申请。</zh-CN>
+        ///   <en>View one's own abstract business applications.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationViewOwn = "Business.Application.ViewOwn";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审核抽象业务申请。</zh-CN>
+        ///   <en>Review abstract business applications.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationReview = "Business.Application.Review";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理抽象业务申请。</zh-CN>
+        ///   <en>Administer abstract business applications.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationAdmin = "Business.Application.Admin";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看业务流程事件。</zh-CN>
+        ///   <en>View business workflow events.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessWorkflowView = "Business.Workflow.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理业务流程事件和相关配置。</zh-CN>
+        ///   <en>Administer business workflow events and related configuration.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessWorkflowAdmin = "Business.Workflow.Admin";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查看主题设置。</zh-CN>
         ///   <en>View theme settings.</en>
         /// </lang>
@@ -390,6 +438,12 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsView, "Business.WorkItems", "查看业务待办。"),
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsHandle, "Business.WorkItems", "处理业务待办。"),
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsAdmin, "Business.WorkItems", "业务待办旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationSubmit, "Business.Application", "提交抽象业务申请。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationViewOwn, "Business.Application", "查看本人提交的抽象业务申请。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationReview, "Business.Application", "审核抽象业务申请。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationAdmin, "Business.Application", "抽象业务申请旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkflowView, "Business.Workflow", "查看业务流程事件。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkflowAdmin, "Business.Workflow", "业务流程旧聚合管理权限。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeView, "Theme", "查看主题设置。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeEdit, "Theme", "编辑主题设置和 Tab 覆盖。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),

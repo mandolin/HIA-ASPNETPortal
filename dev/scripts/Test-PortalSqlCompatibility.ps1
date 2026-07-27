@@ -82,7 +82,11 @@ param(
 
     [switch]$ApplyP12WorkItemMigration,
 
-    [switch]$RequireP12WorkItemMigration
+    [switch]$RequireP12WorkItemMigration,
+
+    [switch]$ApplyP19BusinessApplicationMigration,
+
+    [switch]$RequireP19BusinessApplicationMigration
 )
 
 Set-StrictMode -Version Latest
@@ -421,6 +425,24 @@ FROM
         }
     }
 
+    if ($ApplyP19BusinessApplicationMigration) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P19.4 business-application migration scripts')) {
+            $migrationFiles = @(
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_BusinessApplications.sql'),
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_WorkflowEvents.sql')
+            )
+
+            foreach ($migrationFile in $migrationFiles) {
+                Invoke-MigrationFile -Connection $connection -Path $migrationFile
+            }
+
+            Add-DatabaseCheck -Name 'P19.4 business application migration application' -Status 'Pass' -Detail 'The idempotent P19.4 business-application migration batches completed.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P19.4 business application migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
@@ -429,7 +451,8 @@ FROM
     $p6EmployeeOrganizationTables = @('PortalBiz_OrganizationUnits', 'PortalBiz_Employees', 'PortalBiz_UserEmployeeBindings')
     $p6BusinessModuleTables = @('PortalBiz_EmployeeProfileConfirmations', 'PortalBiz_EmployeeProfileCorrectionRequests')
     $p12WorkItemTables = @('PortalBiz_WorkItems', 'PortalBiz_WorkItemEvents')
-    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables + $p12WorkItemTables)
+    $p19BusinessApplicationTables = @('PortalBiz_BusinessApplications', 'PortalBiz_WorkflowEvents')
+    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables + $p12WorkItemTables + $p19BusinessApplicationTables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
     Add-DatabaseCheck -Name 'Base Portal schema' -Status $(if ($missingBaseTables.Count -eq 0) { 'Pass' } else { 'Fail' }) -Detail $(if ($missingBaseTables.Count -eq 0) { 'Required base tables are present.' } else { 'Missing: ' + ($missingBaseTables -join ', ') })
@@ -575,6 +598,21 @@ FROM
     }
     else {
         Add-DatabaseCheck -Name 'P12.3 work-item schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP12WorkItemTables -join ', '))
+    }
+
+    $missingP19BusinessApplicationTables = @($p19BusinessApplicationTables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP19BusinessApplicationTables.Count -eq 0) {
+        Add-DatabaseCheck -Name 'P19.4 business application schema' -Status 'Pass' -Detail 'The P19.4 business application and workflow-event tables are present.'
+
+        $businessApplicationCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_BusinessApplications];')
+        $workflowEventCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_WorkflowEvents];')
+        Add-DatabaseCheck -Name 'P19.4 business application row counts' -Status 'Info' -Detail ('Applications: ' + $businessApplicationCount + '; workflow events: ' + $workflowEventCount + '.')
+    }
+    elseif ($RequireP19BusinessApplicationMigration) {
+        Add-DatabaseCheck -Name 'P19.4 business application schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP19BusinessApplicationTables -join ', '))
+    }
+    else {
+        Add-DatabaseCheck -Name 'P19.4 business application schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP19BusinessApplicationTables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })

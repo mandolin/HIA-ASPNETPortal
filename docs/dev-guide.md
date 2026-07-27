@@ -332,7 +332,7 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 
 1. 为隔离环境准备仓库外 `connectionStrings.config`，并确保目标数据库不存在。
 2. 优先用 `Initialize-PortalTestDatabase.ps1` 显式执行基础初始化，再用 `Test-PortalSqlCompatibility.ps1` 的 `-Apply*` 开关补齐后续幂等迁移；历史 SQL 文件仍保留供 Visual Studio/SSMS 人工维护使用。
-3. 如确需手工执行，请按 `Portal_CreateDB.sql`、`Portal_LoadConfig.sql`、`Portal_LoadData.sql`、`PortalCfg_SystemSettings.sql`、`PortalCfg_UserRegistration.sql`、`PortalCfg_OperationAudits.sql`、`PortalCfg_TabThemeOverrides.sql`、`PortalCfg_ModulePackageStates.sql`、`Portal_UserCredentials.sql`、`PortalCfg_RolePermissions.sql`、`PortalBiz_UserProfiles.sql`、`PortalBiz_OrganizationUnits.sql`、`PortalBiz_Employees.sql`、`PortalBiz_UserEmployeeBindings.sql` 的顺序操作，并确认数据库上下文与连接串一致。
+3. 如确需手工执行，请按 `Portal_CreateDB.sql`、`Portal_LoadConfig.sql`、`Portal_LoadData.sql`、`PortalCfg_SystemSettings.sql`、`PortalCfg_UserRegistration.sql`、`PortalCfg_OperationAudits.sql`、`PortalCfg_TabThemeOverrides.sql`、`PortalCfg_ModulePackageStates.sql`、`Portal_UserCredentials.sql`、`PortalCfg_RolePermissions.sql`、`PortalBiz_UserProfiles.sql`、`PortalBiz_OrganizationUnits.sql`、`PortalBiz_Employees.sql`、`PortalBiz_UserEmployeeBindings.sql`、`PortalBiz_EmployeeProfileConfirmations.sql`、`PortalBiz_EmployeeProfileCorrectionRequests.sql`、`PortalBiz_WorkItems.sql`、`PortalBiz_WorkItemEvents.sql`、`PortalBiz_BusinessApplications.sql`、`PortalBiz_WorkflowEvents.sql` 的顺序操作，并确认数据库上下文与连接串一致。
 4. 复制 `src/Portal/Config/Templates/connectionStrings.config` 到外置配置目录，并修改其中的 `Portal` 连接串。
 5. 构建并运行站点。
 

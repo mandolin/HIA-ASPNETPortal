@@ -21,5 +21,13 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string EmployeeProfileCorrectionRequest = "EmployeeProfileCorrectionRequest";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>抽象业务申请业务对象。</zh-CN>
+        ///   <en>Abstract business-application business object.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplication = "BusinessApplication";
     }
 }

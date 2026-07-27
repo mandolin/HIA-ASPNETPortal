@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P19 下一批业务模块与 Workflow 深化`；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P19.3` 轻量 Workflow Backbone 设计已形成待确认输入 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P19.3-discussion-questions.md`；若按推荐确认，则进入 `W-anp-P19.4` 抽象业务申请/审批样板实现。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P19.3 已形成轻量 Workflow Backbone、抽象业务申请样板、数据迁移草案、回归计划和 ADR `0024`；等待用户确认后进入 P19.4。 |
+| 当前阶段 | `W-anp-P19.4` 抽象业务申请/审批样板当前切片已完成，进入 `W-anp-P19.5` 待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P19.5-discussion-questions.md`；若按推荐确认，则在可修改开发库上执行 P19.4 迁移、挂载测试 Tab/模块实例并做最小浏览器回归。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P19.4 已新增抽象业务申请事实表、WorkflowEvent 事实表、提交模块、后台审核页、权限 seed、待办/审计旁路同步和静态验证证据；P19.5 需确认开发库迁移、测试页和验收范围。 |
 | 最近状态更新时间 | 2026-07-27 |
 
 ## Recent Completed Items
@@ -131,14 +131,15 @@
 | P19.0 入口确认与范围定界 | completed | 用户确认 `work-zone/dev/plans/W-anp-P19.0-discussion-questions.md` 全部按推荐推进；主仓提交 `40b2a74`，WorkZone 提交 `1caec0f`。 |
 | P19.1 WSF 参考项目业务盘点 | completed | 用户确认全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.1-module-pack-architecture-input.md`、`work-zone/dev/plans/W-anp-P19.1-wsf-inventory.md`、`work-zone/dev/plans/W-anp-P19.1-business-candidate-map.md` 和 `work-zone/dev/plans/W-anp-P19.1-discussion-questions.md`。 |
 | P19.2 企业能力模块排序 | completed | 用户确认全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.2-enterprise-capability-module-model.md`、`work-zone/dev/plans/W-anp-P19.2-candidate-priority-matrix.md` 和 `work-zone/dev/plans/W-anp-P19.2-discussion-questions.md`；主仓提交 `d90eaa7`，WorkZone 提交 `8801469`。 |
-| P19.3 轻量 Workflow Backbone 设计 | pending-user-confirmation | 已形成 `work-zone/dev/plans/W-anp-P19.3-workflow-backbone-design.md`、`work-zone/dev/plans/W-anp-P19.3-business-application-sample.md`、`work-zone/dev/plans/W-anp-P19.3-data-migration-draft.md`、`work-zone/dev/plans/W-anp-P19.3-regression-plan.md`、`work-zone/docs/adr/0024-enterprise-capability-workflow-sample-boundary.md` 和 `work-zone/dev/plans/W-anp-P19.3-discussion-questions.md`。 |
+| P19.3 轻量 Workflow Backbone 设计 | completed | 用户确认全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.3-workflow-backbone-design.md`、`work-zone/dev/plans/W-anp-P19.3-business-application-sample.md`、`work-zone/dev/plans/W-anp-P19.3-data-migration-draft.md`、`work-zone/dev/plans/W-anp-P19.3-regression-plan.md`、`work-zone/docs/adr/0024-enterprise-capability-workflow-sample-boundary.md` 和 `work-zone/dev/plans/W-anp-P19.3-discussion-questions.md`。 |
+| P19.4 抽象业务申请/审批样板当前切片 | completed | `src/Setup/PortalBiz_BusinessApplications.sql`、`src/Setup/PortalBiz_WorkflowEvents.sql`、`DesktopModules/BusinessApplicationRequest`、`Admin/BusinessApplications.aspx`、`work-zone/dev/plans/W-anp-P19.4-implementation-result.md`；构建通过，静态证据 `work-zone/dev/evidence/p19.4/20260727-210002/`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P19.2 任务账本提交 `d90eaa7` 已推送；本轮 P19.3 任务账本更新未提交 | `.vscode/settings.json` 仍为本机设置残留；P19.3 未改运行代码。 |
-| WorkZone | P19.2 能力排序资料提交 `8801469` 已推送；本轮 P19.3 设计文档未提交 | 当前等待用户确认 P19.3 待讨论问题。 |
+| 主仓库 | P19.4 当前切片本轮提交推送完成 | `.vscode/settings.json` 仍为本机设置残留；P19.4 新增 SQL、C#、WebForms 页面/模块、脚本和公开文档改动已作为本轮相关切片处理。 |
+| WorkZone | P19.4 当前切片本轮提交推送完成 | P19.4 实施结果、P19.5 待讨论问题、证据和本轮日志已作为本轮相关切片处理；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 

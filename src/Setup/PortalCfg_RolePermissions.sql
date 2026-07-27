@@ -74,6 +74,12 @@ BEGIN
         (N'Business.WorkItems.View'),
         (N'Business.WorkItems.Handle'),
         (N'Business.WorkItems.Admin'),
+        (N'Business.Application.Submit'),
+        (N'Business.Application.ViewOwn'),
+        (N'Business.Application.Review'),
+        (N'Business.Application.Admin'),
+        (N'Business.Workflow.View'),
+        (N'Business.Workflow.Admin'),
         (N'Theme.View'),
         (N'Theme.Edit'),
         (N'Module.Catalog.View'),
@@ -99,6 +105,44 @@ BEGIN
         SELECT 1
         FROM [dbo].[PortalCfg_RolePermissions] AS [Existing]
         WHERE [Existing].[RoleId] = @AdminRoleId
+          AND [Existing].[PermissionKey] = [Permissions].[PermissionKey]
+    );
+END
+GO
+
+DECLARE @AllUsersRoleId INT;
+SELECT TOP (1) @AllUsersRoleId = [RoleID]
+FROM [dbo].[Portal_Roles]
+WHERE [RoleName] = N'All Users'
+ORDER BY [RoleID];
+
+IF @AllUsersRoleId IS NOT NULL
+BEGIN
+    DECLARE @AllUsersPermissions TABLE
+    (
+        [PermissionKey] NVARCHAR(120) NOT NULL PRIMARY KEY
+    );
+
+    INSERT INTO @AllUsersPermissions ([PermissionKey])
+    VALUES
+        (N'Business.Application.Submit'),
+        (N'Business.Application.ViewOwn');
+
+    INSERT INTO [dbo].[PortalCfg_RolePermissions]
+        ([RoleId], [PermissionKey], [IsEnabled], [UpdatedUtc], [UpdatedBy], [Notes])
+    SELECT
+        @AllUsersRoleId,
+        [Permissions].[PermissionKey],
+        1,
+        SYSUTCDATETIME(),
+        N'P19.4Seed',
+        N'All Users grant for abstract business-application submission.'
+    FROM @AllUsersPermissions AS [Permissions]
+    WHERE NOT EXISTS
+    (
+        SELECT 1
+        FROM [dbo].[PortalCfg_RolePermissions] AS [Existing]
+        WHERE [Existing].[RoleId] = @AllUsersRoleId
           AND [Existing].[PermissionKey] = [Permissions].[PermissionKey]
     );
 END

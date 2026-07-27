@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "packageId": "HIA.BusinessApplicationRequest",
+  "displayName": "业务申请 / Business Application Request",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "desktopEntry": "DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx",
+  "resources": [
+    "Styles/BusinessApplicationRequest.css"
+  ]
+}

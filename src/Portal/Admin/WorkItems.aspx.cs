@@ -278,6 +278,11 @@ namespace ASPNET.StarterKit.Portal
                 return "EmployeeProfileCorrectionRequests.aspx";
             }
 
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.BusinessApplication, StringComparison.Ordinal))
+            {
+                return "BusinessApplications.aspx";
+            }
+
             return "NotImplemented.aspx";
         }
 

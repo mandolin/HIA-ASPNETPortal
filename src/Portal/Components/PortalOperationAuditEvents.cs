@@ -98,6 +98,14 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>审计目标类型：抽象业务申请。</zh-CN>
+        ///   <en>Audit target type for an abstract business application.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationTargetType = "BusinessApplication";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>自主注册已提交。</zh-CN>
         ///   <en>Self-registration was submitted.</en>
         /// </lang>
@@ -247,5 +255,21 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string EmployeeProfileCorrectionReviewed = "EmployeeProfileCorrectionReviewed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>抽象业务申请已提交。</zh-CN>
+        ///   <en>Abstract business application was submitted.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationSubmitted = "BusinessApplicationSubmitted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>抽象业务申请已由审核人处理。</zh-CN>
+        ///   <en>Abstract business application was handled by a reviewer.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationReviewed = "BusinessApplicationReviewed";
     }
 }
