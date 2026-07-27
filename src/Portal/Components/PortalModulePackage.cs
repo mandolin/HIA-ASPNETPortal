@@ -128,6 +128,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         internal PortalModuleRuntimeDescriptor(
             string desktopSource,
+            string profilePackageId,
             bool isManagedPackage,
             bool isEnabled,
             bool isStateAvailable,
@@ -135,6 +136,7 @@ namespace ASPNET.StarterKit.Portal
             string cacheIdentity)
         {
             DesktopSource = desktopSource ?? string.Empty;
+            ProfilePackageId = profilePackageId ?? string.Empty;
             IsManagedPackage = isManagedPackage;
             IsEnabled = isEnabled;
             IsStateAvailable = isStateAvailable;
@@ -147,6 +149,14 @@ namespace ASPNET.StarterKit.Portal
         /// Normalized desktop-control path allowed to load.
         /// </summary>
         public string DesktopSource { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>参与 Profile 判定的 package id；Core 模块使用稳定虚拟标识。</zh-CN>
+        ///   <en>Package id used for Profile decisions; Core modules use a stable virtual identifier.</en>
+        /// </lang>
+        /// </summary>
+        public string ProfilePackageId { get; private set; }
 
         /// <summary>
         /// 当前实例是否匹配已验证的部署模块包。
@@ -307,6 +317,70 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            return TryResolveDesktopSource(source, context, out descriptor, out reason);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按桌面入口解析模块运行描述，并应用启动期 Profile gate。</zh-CN>
+        ///   <en>Resolves a module runtime descriptor by desktop entry and applies the startup Profile gate.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>此方法供页面加载和后台新增模块共同使用，避免“运行时禁止但后台仍可新增”的不一致。</zh-CN>
+        ///   <en>This method is shared by page loading and admin module creation so the system does not allow creation of entries that runtime would later block.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="desktopSource">
+        /// <l zh-CN="旧定义表或模块实例中的桌面控件路径。" en="Desktop control path from the legacy definition table or module instance." />
+        /// </param>
+        /// <param name="context">
+        /// <l zh-CN="当前 HTTP 上下文，用于读取状态和后续诊断扩展。" en="Current HTTP context used for state reads and later diagnostic extension." />
+        /// </param>
+        /// <param name="descriptor">
+        /// <l zh-CN="成功时返回受控运行描述。" en="Controlled runtime descriptor when successful." />
+        /// </param>
+        /// <param name="reason">
+        /// <l zh-CN="失败或禁用时的非敏感原因。" en="Non-sensitive reason when failed or disabled." />
+        /// </param>
+        /// <returns>
+        /// <l zh-CN="入口允许进入加载流程时为 true。" en="True when the entry may enter the loading flow." />
+        /// </returns>
+        public static bool TryResolveDesktopSource(
+            string desktopSource,
+            HttpContext context,
+            out PortalModuleRuntimeDescriptor descriptor,
+            out string reason)
+        {
+            descriptor = null;
+            reason = string.Empty;
+
+            string source;
+            try
+            {
+                source = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(desktopSource);
+            }
+            catch (InvalidOperationException exception)
+            {
+                reason = PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 200);
+                return false;
+            }
+
+            PortalModuleProfileSnapshot profile = PortalModuleProfileResolver.Resolve(context);
+            if (PortalModuleProfileResolver.IsCoreDesktopSource(source))
+            {
+                descriptor = new PortalModuleRuntimeDescriptor(
+                    source,
+                    "Core",
+                    false,
+                    true,
+                    true,
+                    null,
+                    "core|" + source.ToLowerInvariant());
+                return true;
+            }
+
             PortalModulePackage package = GetTrustedPackages().FirstOrDefault(item =>
                 string.Equals(item.DesktopEntry, source, StringComparison.OrdinalIgnoreCase));
             if (package == null)
@@ -317,14 +391,39 @@ namespace ASPNET.StarterKit.Portal
                     return false;
                 }
 
+                string legacyPackageId;
+                if (!PortalModuleProfileResolver.TryGetLegacyPackageId(source, out legacyPackageId))
+                {
+                    reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                             " Legacy module path is not mapped to a package profile.";
+                    return false;
+                }
+
+                if (!profile.IsPackageAllowed(legacyPackageId))
+                {
+                    reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                             " Package '" + legacyPackageId + "' is not allowed by active profile '" +
+                             profile.ActiveProfile + "'.";
+                    return false;
+                }
+
                 descriptor = new PortalModuleRuntimeDescriptor(
                     source,
+                    legacyPackageId,
                     false,
                     true,
                     true,
                     null,
-                    "legacy|" + source.ToLowerInvariant());
+                    "legacy|" + legacyPackageId.ToLowerInvariant() + "|" + source.ToLowerInvariant());
                 return true;
+            }
+
+            if (!profile.IsPackageAllowed(package.PackageId))
+            {
+                reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                         " Package '" + package.PackageId + "' is not allowed by active profile '" +
+                         profile.ActiveProfile + "'.";
+                return false;
             }
 
             PortalModulePackageStateReadResult stateResult = PortalModulePackageStates.Read(package.PackageId, context);
@@ -336,6 +435,7 @@ namespace ASPNET.StarterKit.Portal
                 : "default";
             descriptor = new PortalModuleRuntimeDescriptor(
                 source,
+                package.PackageId,
                 true,
                 isEnabled,
                 stateResult.IsAvailable,

@@ -84,8 +84,10 @@ namespace ASPNET.StarterKit.Portal
                     // P3.2 先把旧模块和已验证部署包统一解析到受控描述中。旧模块保持可用；
                     // 已声明 module.json 但校验失败的目录不能回退为普通路径加载。
                     // P3.2 first resolves legacy modules and validated deployment packages into one controlled descriptor.
-                    // Legacy modules remain available; a directory declaring module.json but failing validation must not
-                    // fall back to an ordinary path load.
+                    // <lang>
+                    //   <zh-CN>模块入口先经过受信任包和启动期 Profile gate，再进入 WebForms 动态加载，避免“物理文件存在就被加载”的伪按需加载。</zh-CN>
+                    //   <en>Module entries pass the trusted-package and startup Profile gates before WebForms dynamic loading, avoiding pseudo on-demand loading where any existing physical file can be loaded.</en>
+                    // </lang>
                     PortalModuleRuntimeDescriptor moduleDescriptor;
                     string moduleReason;
                     if (!PortalModuleCatalog.TryResolveModule(
@@ -94,8 +96,13 @@ namespace ASPNET.StarterKit.Portal
                             out moduleDescriptor,
                             out moduleReason))
                     {
+                        string diagnosticKey = moduleReason.StartsWith(
+                            PortalModuleProfileResolver.NotAllowedReasonPrefix,
+                            StringComparison.OrdinalIgnoreCase)
+                            ? "ModuleProfile.NotAllowed"
+                            : "ModulePackage.LoadBlocked";
                         PortalDiagnostics.Warn(
-                            "ModulePackage.LoadBlocked",
+                            diagnosticKey,
                             "Skipping module " + _moduleSettings.ModuleId + ": " + moduleReason,
                             Context);
                         continue;

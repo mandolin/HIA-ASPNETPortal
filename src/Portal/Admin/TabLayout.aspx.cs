@@ -16,8 +16,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>当前页面只使用 <c>Admins</c> 角色，并以请求中的 Tab 标识和当前门户上下文共同确认目标。 既有核心模块定义继续可选；受信任部署包定义在 Disabled 时不可新增实例。</zh-CN>
-    ///   <en>The current page uses only the <c>Admins</c> role and confirms its target through both the requested Tab identifier and current Portal context. Existing core module definitions remain selectable; a trusted deployment-package definition cannot create a new instance while Disabled.</en>
+    ///   <zh-CN>当前页面只使用 <c>Admins</c> 角色，并以请求中的 Tab 标识和当前门户上下文共同确认目标。既有核心模块定义继续可选；不在当前启动期 Profile 或被包状态禁用的定义不可新增实例。</zh-CN>
+    ///   <en>The current page uses only the <c>Admins</c> role and confirms its target through both the requested Tab identifier and current Portal context. Existing core module definitions remain selectable; a definition outside the current startup Profile or disabled package state cannot create a new instance.</en>
     /// </lang>
     /// </remarks>
     public partial class TabLayout : PortalPage<TabLayout>
@@ -628,29 +628,23 @@ namespace ASPNET.StarterKit.Portal
 
         private IList<IModuleDefinitionItem> GetEligibleModuleDefinitions()
         {
-            IList<PortalModulePackage> trustedPackages = PortalModuleCatalog.GetTrustedPackages();
             var eligibleDefinitions = new List<IModuleDefinitionItem>();
             foreach (IModuleDefinitionItem definition in ModuleDefConfig.GetModuleDefinitions())
             {
-                string normalizedSource;
-                string errorMessage;
-                if (!PortalModulePathValidator.TryNormalizeDesktopSource(
+                PortalModuleRuntimeDescriptor descriptor;
+                string reason;
+                if (!PortalModuleCatalog.TryResolveDesktopSource(
                     definition.DesktopSourceFile,
-                    out normalizedSource,
-                    out errorMessage))
+                    Context,
+                    out descriptor,
+                    out reason))
                 {
                     continue;
                 }
 
-                PortalModulePackage package = trustedPackages.FirstOrDefault(item =>
-                    string.Equals(item.DesktopEntry, normalizedSource, StringComparison.OrdinalIgnoreCase));
-                if (package != null)
+                if (!descriptor.IsEnabled)
                 {
-                    PortalModulePackageStateReadResult state = PortalModulePackageStates.Read(package.PackageId, Context);
-                    if (state.IsAvailable && state.State != null && !state.State.IsEnabled)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
 
                 eligibleDefinitions.Add(definition);

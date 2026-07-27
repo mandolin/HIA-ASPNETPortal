@@ -15,10 +15,10 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P20 模块 Profile 与启动期按需加载治理`；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P20.2` 文档侧完成，`W-anp-P20.3` 待讨论问题已建立 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P20.3-discussion-questions.md`；确认后进入 Profile gate 最小 C# 实现。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前阶段 | `W-anp-P20.3` Profile gate 最小实现已完成，`W-anp-P20.4` 待讨论问题已建立 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P20.4-discussion-questions.md`；确认后整理 Legacy 模块治理清单、中期可选部署包拆分路径和发布备忘。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
 | 当前完成条件 | P20 完成启动期 Profile gate 设计和当前范围最小实现；中期可选部署包、长期分布式模块注册/同步和 DLL 动态热插拔研究只进入备忘，不作为 P20 完成条件。P19.5 真实数据库 proof 等外置连接串可用后补证。 |
-| 最近状态更新时间 | 2026-07-27 |
+| 最近状态更新时间 | 2026-07-28 |
 
 ## Recent Completed Items
 
@@ -134,13 +134,16 @@
 | P19.3 轻量 Workflow Backbone 设计 | completed | 用户确认全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.3-workflow-backbone-design.md`、`work-zone/dev/plans/W-anp-P19.3-business-application-sample.md`、`work-zone/dev/plans/W-anp-P19.3-data-migration-draft.md`、`work-zone/dev/plans/W-anp-P19.3-regression-plan.md`、`work-zone/docs/adr/0024-enterprise-capability-workflow-sample-boundary.md` 和 `work-zone/dev/plans/W-anp-P19.3-discussion-questions.md`。 |
 | P19.4 抽象业务申请/审批样板当前切片 | completed | `src/Setup/PortalBiz_BusinessApplications.sql`、`src/Setup/PortalBiz_WorkflowEvents.sql`、`DesktopModules/BusinessApplicationRequest`、`Admin/BusinessApplications.aspx`、`work-zone/dev/plans/W-anp-P19.4-implementation-result.md`；构建通过，静态证据 `work-zone/dev/evidence/p19.4/20260727-210002/`。 |
 | P19.5 验收与 P19 收口 | conditionally completed | `dev/scripts/New-PortalP19BusinessApplicationScenarioSql.ps1`、`work-zone/dev/plans/W-anp-P19.5-acceptance-result.md`、`work-zone/dev/plans/W-anp-P19-closeout.md`、证据 `work-zone/dev/evidence/p19.5/20260727-213723/`；真实数据库/浏览器证据等待外置连接串。 |
+| P20.1 模块加载链路与分类设计 | completed | `work-zone/dev/plans/W-anp-P20.1-module-loading-inventory.md`、`work-zone/dev/plans/W-anp-P20.1-module-classification.md`、`work-zone/dev/plans/W-anp-P20.1-discussion-questions.md`。 |
+| P20.2 Profile 配置契约与 registry 设计 | completed | `work-zone/dev/plans/W-anp-P20.2-profile-config-contract.md`、`work-zone/dev/plans/W-anp-P20.2-registry-design.md`、`work-zone/dev/plans/W-anp-P20.2-implementation-result.md`。 |
+| P20.3 启动期按需加载最小实现 | completed | `src/Portal/Components/PortalModuleProfileResolver.cs`、`PortalModuleCatalog.TryResolveDesktopSource`、`DesktopDefault`、`ModuleCatalog`、`TabLayout`、`SystemHealth` 和配置模板已接入 Profile gate；Debug 构建通过，HTTP smoke `TotalChecks=3; FailedChecks=0`；实施结果见 `work-zone/dev/plans/W-anp-P20.3-implementation-result.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | Cycle 评估修正本轮提交推送完成 | `.vscode/settings.json` 仍为本机设置残留；任务账本已改为下一 Cycle 候选评估入口，不再提前确定具体 P20。 |
-| WorkZone | Cycle 评估修正本轮提交推送完成 | 撤回具体 P20 入口，改为 C-anp-P2 closeout、C-anp-P3 候选蓝图、Cycle 待讨论清单和本轮日志；历史日志/截图残留仍按既有策略不处理。 |
+| 主仓库 | P20.3 Profile gate 本轮待提交 | `.vscode/settings.json` 仍为本机设置残留，不纳入提交；本轮主仓改动集中在 Profile gate 代码、配置模板和任务账本。 |
+| WorkZone | P20.3/P20.4 规划资料本轮待提交 | 本轮新增 P20.3 实施结果和 P20.4 待讨论问题，更新当前状态与索引；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 

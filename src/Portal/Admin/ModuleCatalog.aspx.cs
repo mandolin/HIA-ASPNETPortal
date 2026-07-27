@@ -109,6 +109,17 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            PortalModuleProfileSnapshot profile = PortalModuleProfileResolver.Resolve(Context);
+            if (!string.Equals(e.CommandName, "Preflight", StringComparison.OrdinalIgnoreCase) &&
+                !profile.IsPackageAllowed(package.PackageId))
+            {
+                ShowMessage(
+                    "The selected module package is deployed, but it is not allowed by active module profile '" +
+                    profile.ActiveProfile + "'.");
+                BindPackages();
+                return;
+            }
+
             switch (e.CommandName)
             {
                 case "Register":
@@ -137,6 +148,7 @@ namespace ASPNET.StarterKit.Portal
         private void BindPackages()
         {
             IList<IModuleDefinitionItem> definitions = ModuleDefConfig.GetModuleDefinitions().ToList();
+            PortalModuleProfileSnapshot profile = PortalModuleProfileResolver.Resolve(Context);
             var rows = new List<ModuleCatalogRow>();
 
             foreach (PortalModulePackage package in PortalModuleCatalog.GetTrustedPackages())
@@ -144,6 +156,7 @@ namespace ASPNET.StarterKit.Portal
                 IModuleDefinitionItem definition = FindDefinition(definitions, package.DesktopEntry);
                 PortalModulePackageStateReadResult stateResult = PortalModulePackageStates.Read(package.PackageId, Context);
                 bool isEnabled = !stateResult.IsAvailable || stateResult.State == null || stateResult.State.IsEnabled;
+                bool isProfileAllowed = profile.IsPackageAllowed(package.PackageId);
                 int instanceCount = definition == null
                     ? 0
                     : ModulesConfig.GetModulesByModuleDefId(definition.ModuleDefId).Count();
@@ -151,6 +164,8 @@ namespace ASPNET.StarterKit.Portal
                 rows.Add(new ModuleCatalogRow(
                     package,
                     isEnabled,
+                    isProfileAllowed,
+                    profile.ActiveProfile,
                     stateResult,
                     definition,
                     instanceCount));
@@ -305,6 +320,8 @@ namespace ASPNET.StarterKit.Portal
         internal ModuleCatalogRow(
             PortalModulePackage package,
             bool isEnabled,
+            bool isProfileAllowed,
+            string activeProfile,
             PortalModulePackageStateReadResult stateResult,
             IModuleDefinitionItem definition,
             int instanceCount)
@@ -314,12 +331,18 @@ namespace ASPNET.StarterKit.Portal
             Version = package.Version;
             DesktopEntry = package.DesktopEntry;
             IsEnabled = isEnabled;
+            IsProfileAllowed = isProfileAllowed;
             IsRegistered = definition != null;
             DefinitionText = definition == null
                 ? "Not registered"
                 : definition.ModuleDefId.ToString(CultureInfo.InvariantCulture);
             InstanceCount = instanceCount;
-            StateText = !stateResult.IsAvailable
+            ProfileText = isProfileAllowed
+                ? "Allowed by " + activeProfile
+                : "Blocked by " + activeProfile;
+            StateText = !isProfileAllowed
+                ? "Profile blocked"
+                : !stateResult.IsAvailable
                 ? "Enabled (state table unavailable)"
                 : stateResult.State == null || !stateResult.State.IsConfigured
                     ? "Enabled (default)"
@@ -376,6 +399,22 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <l>
+        ///   <zh-CN>当前启动期 Profile 是否允许该包进入门户能力集。</zh-CN>
+        ///   <en>Whether the current startup Profile allows this package into the Portal capability set.</en>
+        /// </l>
+        /// </summary>
+        public bool IsProfileAllowed { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>显示用 Profile 状态。</zh-CN>
+        ///   <en>Display Profile state.</en>
+        /// </l>
+        /// </summary>
+        public string ProfileText { get; private set; }
+
+        /// <summary>
+        /// <l>
         ///   <zh-CN>显示用状态文本。</zh-CN>
         ///   <en>Display state text.</en>
         /// </l>
@@ -397,5 +436,38 @@ namespace ASPNET.StarterKit.Portal
         /// </l>
         /// </summary>
         public int InstanceCount { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>是否显示注册按钮。</zh-CN>
+        ///   <en>Whether to show the register button.</en>
+        /// </l>
+        /// </summary>
+        public bool CanRegister
+        {
+            get { return IsProfileAllowed && !IsRegistered; }
+        }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>是否显示启用按钮。</zh-CN>
+        ///   <en>Whether to show the enable button.</en>
+        /// </l>
+        /// </summary>
+        public bool CanEnable
+        {
+            get { return IsProfileAllowed && !IsEnabled; }
+        }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>是否显示禁用按钮。</zh-CN>
+        ///   <en>Whether to show the disable button.</en>
+        /// </l>
+        /// </summary>
+        public bool CanDisable
+        {
+            get { return IsProfileAllowed && IsEnabled; }
+        }
     }
 }

@@ -435,6 +435,7 @@
     <Compile Include="Components\PortalContext.cs" />
     <Compile Include="Components\PortalLoginPasswordCrypto.cs" />
     <Compile Include="Components\PortalModulePackage.cs" />
+    <Compile Include="Components\PortalModuleProfileResolver.cs" />
     <Compile Include="Components\PortalModulePackageStates.cs" />
     <Compile Include="Components\PortalModulePathValidator.cs" />
     <Compile Include="Components\PortalOperationAudit.cs" />

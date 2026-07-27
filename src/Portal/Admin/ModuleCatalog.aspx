@@ -63,6 +63,7 @@
                         <asp:BoundField DataField="DisplayName" HeaderText="Name" />
                         <asp:BoundField DataField="Version" HeaderText="Version" />
                         <asp:BoundField DataField="DesktopEntry" HeaderText="Desktop Entry" />
+                        <asp:BoundField DataField="ProfileText" HeaderText="Profile" />
                         <asp:BoundField DataField="StateText" HeaderText="State" />
                         <asp:BoundField DataField="DefinitionText" HeaderText="Definition" />
                         <asp:BoundField DataField="InstanceCount" HeaderText="Instances" />
@@ -76,7 +77,7 @@
                                         CommandArgument='<%# Eval("PackageId") %>'
                                         CssClass="CommandButton"
                                         CausesValidation="False"
-                                        Visible='<%# !(bool)Eval("IsRegistered") %>'
+                                        Visible='<%# (bool)Eval("CanRegister") %>'
                                         runat="server" />
                                     <asp:LinkButton
                                         ID="EnableButton"
@@ -85,7 +86,7 @@
                                         CommandArgument='<%# Eval("PackageId") %>'
                                         CssClass="CommandButton"
                                         CausesValidation="False"
-                                        Visible='<%# !(bool)Eval("IsEnabled") %>'
+                                        Visible='<%# (bool)Eval("CanEnable") %>'
                                         runat="server" />
                                     <asp:LinkButton
                                         ID="DisableButton"
@@ -94,7 +95,7 @@
                                         CommandArgument='<%# Eval("PackageId") %>'
                                         CssClass="CommandButton"
                                         CausesValidation="False"
-                                        Visible='<%# (bool)Eval("IsEnabled") %>'
+                                        Visible='<%# (bool)Eval("CanDisable") %>'
                                         runat="server" />
                                     <asp:LinkButton
                                         ID="PreflightButton"

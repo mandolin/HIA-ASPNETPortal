@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Web;
@@ -36,6 +37,7 @@ namespace ASPNET.StarterKit.Portal
             AddApplicationChecks(checks, context);
             AddRuntimeChecks(checks);
             AddConfigurationChecks(checks);
+            AddModuleProfileChecks(checks, context);
             AddDatabaseCheck(checks, context);
             AddRegistryCheck(checks, settings);
             AddDirectoryChecks(checks);
@@ -207,6 +209,26 @@ namespace ASPNET.StarterKit.Portal
                     exception.Message,
                     eventId));
             }
+        }
+
+        private static void AddModuleProfileChecks(IList<PortalHealthCheckResult> checks, HttpContext context)
+        {
+            PortalModuleProfileSnapshot profile = PortalModuleProfileResolver.Resolve(context);
+            bool hasInvalidEntries = profile.InvalidEntries.Count > 0;
+
+            // <lang>
+            //   <zh-CN>Profile 只展示非敏感名称和数量；它是部署能力集的解释信息，不展示连接串或文件内容。</zh-CN>
+            //   <en>The Profile check exposes only non-sensitive names and counts. It explains the deployment capability set and never shows connection strings or file contents.</en>
+            // </lang>
+            checks.Add(new PortalHealthCheckResult(
+                "Modules",
+                "模块 Profile",
+                hasInvalidEntries ? PortalHealthStatus.Warning : PortalHealthStatus.Healthy,
+                hasInvalidEntries ? "模块 Profile 已加载，但存在无效配置项。" : "模块 Profile 已加载。",
+                "ActiveProfile=" + profile.ActiveProfile +
+                "; AllowedPackageCount=" + profile.AllowedPackageIds.Count +
+                "; AllowedPackages=" + string.Join(",", profile.AllowedPackageIds.ToArray()) +
+                "; InvalidEntries=" + string.Join(",", profile.InvalidEntries.ToArray())));
         }
 
         private static void AddRegistryCheck(
