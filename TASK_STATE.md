@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P19 下一批业务模块与 Workflow 深化`；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P19.5` 已条件式完成，进入下一 Cycle 候选评估 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/C-anp-P3-discussion-questions.md`；若确认 Cycle 蓝图，再根据用户选择建立下一个正式 `W-anp-P*` 文件。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P19 已完成抽象业务申请/审批样板和自动侧收口；真实开发库迁移、测试 Tab 和浏览器三步流因缺少外置连接串保持待补证。下一步只确认 Cycle 级候选蓝图，不提前确定具体 `W-anp-P20` 事项。 |
+| 当前大周期 | `W-anp-P20 模块 Profile 与启动期按需加载治理`；`W-anp-P18` 继续整体延期 |
+| 当前阶段 | `W-anp-P20.1` 待讨论问题已建立，等待用户确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P20.1-discussion-questions.md`；确认后进入模块加载链路 inventory、Core/Optional/Profile 分类和 P20.2 配置契约设计。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P20 完成启动期 Profile gate 设计和当前范围最小实现；中期可选部署包、长期分布式模块注册/同步和 DLL 动态热插拔研究只进入备忘，不作为 P20 完成条件。P19.5 真实数据库 proof 等外置连接串可用后补证。 |
 | 最近状态更新时间 | 2026-07-27 |
 
 ## Recent Completed Items
