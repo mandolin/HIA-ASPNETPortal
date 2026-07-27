@@ -336,6 +336,20 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 4. 复制 `src/Portal/Config/Templates/connectionStrings.config` 到外置配置目录，并修改其中的 `Portal` 连接串。
 5. 构建并运行站点。
 
+P19.5 业务申请样板页可以先生成可审阅 SQL，不直接修改数据库：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1
+```
+
+如需在已确认的开发/测试库中执行，应先补齐 P5/P12/P19 迁移，再显式传入外置连接串并使用 `-Apply`：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath '<仓库外>\connectionStrings.config' -ApplyP5Migrations -ApplyP12WorkItemMigration -ApplyP19BusinessApplicationMigration -RequireP5Migrations -RequireP12WorkItemMigration -RequireP19BusinessApplicationMigration -Confirm:$false
+
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1 -ConnectionStringsConfigPath '<仓库外>\connectionStrings.config' -Apply -Confirm:$false
+```
+
 部署或共享环境中不得使用默认账号和弱密码。
 默认凭据和旧口令治理见 `docs/deployment-default-credentials.md`；发布前应运行 `dev/scripts/Test-PortalDefaultCredentialRisk.ps1`。
 

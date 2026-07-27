@@ -15,9 +15,9 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P19 下一批业务模块与 Workflow 深化`；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P19.4` 抽象业务申请/审批样板当前切片已完成，进入 `W-anp-P19.5` 待确认 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P19.5-discussion-questions.md`；若按推荐确认，则在可修改开发库上执行 P19.4 迁移、挂载测试 Tab/模块实例并做最小浏览器回归。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P19.4 已新增抽象业务申请事实表、WorkflowEvent 事实表、提交模块、后台审核页、权限 seed、待办/审计旁路同步和静态验证证据；P19.5 需确认开发库迁移、测试页和验收范围。 |
+| 当前阶段 | `W-anp-P19.5` 已条件式完成，进入 `W-anp-P20.0` 待确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P20.0-discussion-questions.md`；若按推荐确认，则正式拆 `W-anp-P20` 与 breakdown，并进入项目/任务协同抽象模型设计。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P19 已完成抽象业务申请/审批样板和自动侧收口；真实开发库迁移、测试 Tab 和浏览器三步流因缺少外置连接串保持待补证。P20.0 需确认是否启动企业能力模块样板深化及首选方向。 |
 | 最近状态更新时间 | 2026-07-27 |
 
 ## Recent Completed Items
@@ -133,13 +133,14 @@
 | P19.2 企业能力模块排序 | completed | 用户确认全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.2-enterprise-capability-module-model.md`、`work-zone/dev/plans/W-anp-P19.2-candidate-priority-matrix.md` 和 `work-zone/dev/plans/W-anp-P19.2-discussion-questions.md`；主仓提交 `d90eaa7`，WorkZone 提交 `8801469`。 |
 | P19.3 轻量 Workflow Backbone 设计 | completed | 用户确认全部按推荐推进；已形成 `work-zone/dev/plans/W-anp-P19.3-workflow-backbone-design.md`、`work-zone/dev/plans/W-anp-P19.3-business-application-sample.md`、`work-zone/dev/plans/W-anp-P19.3-data-migration-draft.md`、`work-zone/dev/plans/W-anp-P19.3-regression-plan.md`、`work-zone/docs/adr/0024-enterprise-capability-workflow-sample-boundary.md` 和 `work-zone/dev/plans/W-anp-P19.3-discussion-questions.md`。 |
 | P19.4 抽象业务申请/审批样板当前切片 | completed | `src/Setup/PortalBiz_BusinessApplications.sql`、`src/Setup/PortalBiz_WorkflowEvents.sql`、`DesktopModules/BusinessApplicationRequest`、`Admin/BusinessApplications.aspx`、`work-zone/dev/plans/W-anp-P19.4-implementation-result.md`；构建通过，静态证据 `work-zone/dev/evidence/p19.4/20260727-210002/`。 |
+| P19.5 验收与 P19 收口 | conditionally completed | `dev/scripts/New-PortalP19BusinessApplicationScenarioSql.ps1`、`work-zone/dev/plans/W-anp-P19.5-acceptance-result.md`、`work-zone/dev/plans/W-anp-P19-closeout.md`、证据 `work-zone/dev/evidence/p19.5/20260727-213723/`；真实数据库/浏览器证据等待外置连接串。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P19.4 当前切片本轮提交推送完成 | `.vscode/settings.json` 仍为本机设置残留；P19.4 新增 SQL、C#、WebForms 页面/模块、脚本和公开文档改动已作为本轮相关切片处理。 |
-| WorkZone | P19.4 当前切片本轮提交推送完成 | P19.4 实施结果、P19.5 待讨论问题、证据和本轮日志已作为本轮相关切片处理；历史日志/截图残留仍按既有策略不处理。 |
+| 主仓库 | P19.5 当前切片本轮提交推送完成 | `.vscode/settings.json` 仍为本机设置残留；P19.5 新增脚本和公开文档说明已作为本轮相关切片处理。 |
+| WorkZone | P19.5 当前切片本轮提交推送完成 | P19.5 验收、P19 closeout、P20 输入、P20.0 讨论清单、证据和本轮日志已作为本轮相关切片处理；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 
