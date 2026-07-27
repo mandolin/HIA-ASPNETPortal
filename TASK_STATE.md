@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P19 下一批业务模块与 Workflow 深化` 入口拆分；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P19.0` 入口确认与范围定界 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P19.0-discussion-questions.md`；若按推荐确认，则进入 `W-anp-P19.1` 只读盘点 `K:\Work\wsf\`。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P19 已作为 P18 延期后的非 HIA 主线完成入口拆分：`W-anp-P19.md`、`W-anp-P19-breakdown.md`、`W-anp-P19.0-discussion-questions.md` 已建立；等待用户确认后进入 P19.1。 |
+| 当前大周期 | `W-anp-P19 下一批业务模块与 Workflow 深化`；`W-anp-P18` 继续整体延期 |
+| 当前阶段 | `W-anp-P19.1` WSF 参考项目业务盘点已形成待确认输入 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P19.1-discussion-questions.md`；若按推荐确认，则进入 `W-anp-P19.2` 业务模块候选排序。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P19.1 已把用户补充的 Biz Pack/Profile 思想吸收到架构输入，并完成 `K:\Work\wsf\` 只读盘点、业务候选映射和待讨论问题；等待用户确认后进入 P19.2。 |
 | 最近状态更新时间 | 2026-07-27 |
 
 ## Recent Completed Items
@@ -128,13 +128,15 @@
 | P16.3 TODO/延期标记与低价值注释清理 | completed | `dev/scripts/Get-PortalTodoDebtInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.3/todo-debt-inventory-20260726-1107.*`；`Total=245; active=0; deferred-plan=205; external-env=34; needs-owner-confirmation=4; resolved-stale=2`；实施结果 `work-zone/dev/plans/W-anp-P16.3-implementation-result.md`。 |
 | P16.4 高风险 PowerShell 脚本文档化 | completed | `dev/scripts/Get-PortalPowerShellDocumentationInventory.ps1`；最终证据 `work-zone/dev/evidence/p16.4/powershell-documentation-inventory-20260726-1224.*`；`TotalScripts=58; HighRiskScripts=12; HighRiskMissingHiaLanguageMarkers=0; MissingCommentHelp=21`；实施结果 `work-zone/dev/plans/W-anp-P16.4-implementation-result.md`。 |
 | P16.5 质量门禁与周期收口 | completed | `work-zone/dev/evidence/p16.5/20260726-1248/`；`Documentation readiness FailedChecks=0`、`TODO active=0`、`PowerShell high-risk missing=0`、`DotNetDoc success: 16 artifact(s)`；`work-zone/dev/plans/W-anp-P16-closeout.md`。 |
+| P19.0 入口确认与范围定界 | completed | 用户确认 `work-zone/dev/plans/W-anp-P19.0-discussion-questions.md` 全部按推荐推进；主仓提交 `40b2a74`，WorkZone 提交 `1caec0f`。 |
+| P19.1 WSF 参考项目业务盘点 | pending-user-confirmation | 已形成 `work-zone/dev/plans/W-anp-P19.1-module-pack-architecture-input.md`、`work-zone/dev/plans/W-anp-P19.1-wsf-inventory.md`、`work-zone/dev/plans/W-anp-P19.1-business-candidate-map.md` 和 `work-zone/dev/plans/W-anp-P19.1-discussion-questions.md`。 |
 
 ## Last Code State
 
 | 仓库 | 最新已知提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P17.5 已提交推送；P18 延期状态待提交 | 任务账本将从 P18.0 待确认改为 HIA 集成整体延期；本轮不改运行代码。 |
-| WorkZone | P17.5 已提交推送；P18 延期状态待提交 | P18 规划、入口问题、当前状态和索引将标记为延期，保留为未来候选。 |
+| 主仓库 | P19.0 文档工具链状态提交 `40b2a74` 已推送；本轮 P19.1 任务账本更新未提交 | `.vscode/settings.json` 仍为本机设置残留；P19.1 未改运行代码。 |
+| WorkZone | P19.0 入口资料提交 `1caec0f` 已推送；本轮 P19.1 盘点文档未提交 | 当前等待用户确认 P19.1 待讨论问题。 |
 
 ## Upcoming Planning Constraints
 
