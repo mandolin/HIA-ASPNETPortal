@@ -15,9 +15,10 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P22 企业能力模板、前台入口与链接治理准备` 已启动；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P22.5` 回归、证据与 P23 输入已获用户确认，执行中 |
-| 当前唯一下一步 | 使用 test 外置库完成浏览器级 Workbench smoke：登录后打开 `P22-Test-EnterpriseWorkbench`、提交低敏事项、确认本人列表和 `Admin/CollaborationItems.aspx` 可见记录；随后整理 P22 closeout / P23 输入。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前阶段 | `W-anp-P22.5` 回归、证据与 P23 输入已获用户确认；浏览器前置验证完成，认证 fixture 技术暂停 |
+| 当前唯一下一步 | 等待用户提供可用于 test 外置库的专用 smoke 账号，或明确授权新增可审计的 test fixture helper；再完成登录后打开 `P22-Test-EnterpriseWorkbench`、提交低敏事项、确认本人列表和 `Admin/CollaborationItems.aspx` 可见记录，并整理 P22 closeout / P23 输入。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
 | 当前完成条件 | P22 明确企业能力模板、普通用户前台入口、链接治理和权限/Profile 联动路线，完成入口 inventory 与最小前后台闭环；P19.5 真实数据库 proof 等继续条件式补证。 |
+| 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，导致 dev 库不存在 test TabId 7 并进入通用错误页；切换隔离副本到 `env=test` 后已通过。认证阶段中，PowerShell 外部宿主无法加载项目 EF provider；改用参数化 SQL 创建 test fixture 时，二进制 PBKDF2 参数绑定连续失败两次且均已回滚，未创建用户或凭据，依反循环规则暂停。 |
 | 最近状态更新时间 | 2026-07-28 |
 
 ## Recent Completed Items
