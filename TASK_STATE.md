@@ -15,11 +15,11 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P22 企业能力模板、前台入口与链接治理准备` 已完成；`W-anp-P23` 进行中；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | P23.2 最小参考数据目录已完成代码、迁移和 test SQL 验证；P23.3 至 P23.5 已完成附件、评论、状态和 SLA 规则设计，进入 P23.6 评论/状态规则实现、回归与 closeout |
-| 当前唯一下一步 | 按 `work-zone/dev/plans/W-anp-P23.4-comment-event-contract.md`、`W-anp-P23.5-workflow-rule-contract.md` 与 P23 总规划实现评论事件和状态规则，执行迁移、权限、审计与 SQL 回归；浏览器自动化在本机具备 `npx` 后补证。不得启动通用 BPM 引擎、让评论改变事项状态，或接入附件二进制。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前阶段 | P23.2 最小参考数据目录已完成代码、迁移、test SQL 与浏览器补证；P23.3 至 P23.5 已完成附件、评论、状态和 SLA 规则设计，进入 P23.6 评论/状态规则实现、回归与 closeout |
+| 当前唯一下一步 | 按 `work-zone/dev/plans/W-anp-P23.4-comment-event-contract.md`、`W-anp-P23.5-workflow-rule-contract.md` 与 P23 总规划实现评论事件和状态规则，执行迁移、权限、审计、SQL 与浏览器回归。不得启动通用 BPM 引擎、让评论改变事项状态，或接入附件二进制。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
 | 当前完成条件 | P23 先固定参考数据/业务参数、附件资料、评论沟通和状态流转的安全契约与最小实现顺序；P19.5 真实数据库 proof 等继续条件式补证。 |
-| 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，切换隔离副本到 `env=test` 后通过。认证阶段的 EF 外部宿主与早期二进制参数方案均失败并回滚；用户授权后以显式 `SqlParameter` 成功创建 test fixture。浏览器回归发现 `All Users` 虚拟角色无法参与细粒度权限映射，已通过隐藏配置载体、运行时权限合并和 idempotent SQL seed 修复，并由零成员普通用户浏览器验证。期间嵌套 PowerShell 启动器无法启动构建，改用直接指定 PowerShell 7 执行器后 Debug 构建通过，未发现项目构建失败。 |
-| 最近状态更新时间 | 2026-07-28 |
+| 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，切换隔离副本到 `env=test` 后通过。认证阶段的 EF 外部宿主与早期二进制参数方案均失败并回滚；用户授权后以显式 `SqlParameter` 成功创建 test fixture。P23.2 初次新隔离副本从 `CoreOnly` Profile 启动，按安全门禁跳过 Workbench；仅在该临时副本把 Profile 覆盖为 `EnterpriseWorkbench` 后复测通过。浏览器回归发现 `All Users` 虚拟角色无法参与细粒度权限映射，已通过隐藏配置载体、运行时权限合并和 idempotent SQL seed 修复，并由零成员普通用户浏览器验证。期间嵌套 PowerShell 启动器无法启动构建，改用直接指定 PowerShell 7 执行器后 Debug 构建通过，未发现项目构建失败。 |
+| 最近状态更新时间 | 2026-07-29 |
 
 ## Recent Completed Items
 
@@ -31,6 +31,7 @@
 | P22.3 导航注册与权限/Profile 联动设计 | completed | `src/Portal.Components/PortalNavigationRegistry.cs`；`EnterpriseWorkbench` Profile；`work-zone/dev/plans/W-anp-P22.3-navigation-registry-contract.md`；Debug 构建通过 |
 | P22.4 最小前台闭环实现 | completed | `src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/`；`dev/scripts/New-PortalP22EnterpriseWorkbenchScenarioSql.ps1`；test 库挂载 proof；证据 `work-zone/dev/evidence/p22.4/20260728-134633/` |
 | P22.5 回归、默认全员权限修复与收口 | completed | 最小角色前台提交 `CI-20260728064445-3293d9dc`、后台可见性，以及零成员默认用户提交 `CI-20260728065849-3d00b308`；`RolesDb` / `PortalCfg_RolePermissions.sql` 修复；证据 `work-zone/dev/evidence/p22.5/20260728-144609/`；`W-anp-P22-closeout.md` 与 P23.0 输入。 |
+| P23.2 参考数据目录浏览器补证 | completed | `mise` 受管 Node 24.12.0 与 Playwright Chromium；隔离 `test` 站点的 Workbench 显示 4 个类型和 2 个优先级，提交 `CI-20260728175628-f30760c7` 后 test 库复核为 `Content` / `Important` / `Submitted`；无凭据、连接串或 Cookie 入库。 |
 | P10.1 合规输入与差距矩阵 | completed | `work-zone/dev/plans/W-anp-P10.1-closeout.md` |
 | P10.2 安全响应头与发布环境治理 | completed | `work-zone/dev/plans/W-anp-P10.2-closeout.md` |
 | P10.3 登录密码前端加密 | completed | `work-zone/dev/plans/W-anp-P10.3-login-encryption-result.md` |
