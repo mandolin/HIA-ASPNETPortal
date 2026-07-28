@@ -15,8 +15,8 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P22 企业能力模板、前台入口与链接治理准备` 已启动；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P22.4` 最小前台闭环实现已完成当前轮；下一步进入 `W-anp-P22.5` 讨论 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P22.5-discussion-questions.md`；确认后使用 test 外置库做浏览器级 Workbench smoke，并整理 P22 closeout / P23 输入。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前阶段 | `W-anp-P22.5` 回归、证据与 P23 输入已获用户确认，执行中 |
+| 当前唯一下一步 | 使用 test 外置库完成浏览器级 Workbench smoke：登录后打开 `P22-Test-EnterpriseWorkbench`、提交低敏事项、确认本人列表和 `Admin/CollaborationItems.aspx` 可见记录；随后整理 P22 closeout / P23 输入。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
 | 当前完成条件 | P22 明确企业能力模板、普通用户前台入口、链接治理和权限/Profile 联动路线，完成入口 inventory 与最小前后台闭环；P19.5 真实数据库 proof 等继续条件式补证。 |
 | 最近状态更新时间 | 2026-07-28 |
 
