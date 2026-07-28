@@ -15,8 +15,8 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P22 企业能力模板、前台入口与链接治理准备` 已启动；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P22.1` 功能入口与链接链路 inventory 已完成当前轮；下一步进入 `W-anp-P22.2` 讨论 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P22.2-discussion-questions.md`；确认后推进企业能力模板与普通用户前台提交入口设计。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前阶段 | `W-anp-P22.2` 企业能力模板与前台提交入口设计已完成当前轮；下一步进入 `W-anp-P22.3` 讨论 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P22.3-discussion-questions.md`；确认后推进导航注册与权限/Profile 联动设计。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
 | 当前完成条件 | P22 明确企业能力模板、普通用户前台入口、链接治理和权限/Profile 联动路线，完成入口 inventory 与最小前后台闭环；P19.5 真实数据库 proof 等继续条件式补证。 |
 | 最近状态更新时间 | 2026-07-28 |
 
@@ -26,6 +26,7 @@
 | --- | --- | --- |
 | P22.0 周期启动确认 | completed | 用户确认 P22.0 全部按推荐推进；`work-zone/dev/plans/W-anp-P22.0-discussion-questions.md` |
 | P22.1 功能入口与链接链路 inventory | completed | `dev/scripts/Get-PortalLinkNavigationInventory.ps1`；证据 `work-zone/dev/evidence/p22.1/20260728-112941/`；结果 `work-zone/dev/plans/W-anp-P22.1-entry-link-inventory.md` |
+| P22.2 企业能力模板与前台入口设计 | completed | `dev/scripts/Get-PortalTabModuleNavigationInventory.ps1`；证据 `work-zone/dev/evidence/p22.2/20260728-122653/` 与 `work-zone/dev/evidence/p22.2/20260728-122800/`；设计 `work-zone/dev/plans/W-anp-P22.2-enterprise-capability-workbench-design.md` |
 | P10.1 合规输入与差距矩阵 | completed | `work-zone/dev/plans/W-anp-P10.1-closeout.md` |
 | P10.2 安全响应头与发布环境治理 | completed | `work-zone/dev/plans/W-anp-P10.2-closeout.md` |
 | P10.3 登录密码前端加密 | completed | `work-zone/dev/plans/W-anp-P10.3-login-encryption-result.md` |
