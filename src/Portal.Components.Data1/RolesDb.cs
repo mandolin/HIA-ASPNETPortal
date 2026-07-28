@@ -53,13 +53,21 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         /// <returns>
         /// <l>
-        ///   <zh-CN>角色集合。</zh-CN>
-        ///   <en>Role collection.</en>
+        ///   <zh-CN>可由后台维护的角色集合；不含 <c>All Users</c> 的权限配置载体记录。</zh-CN>
+        ///   <en>Roles that can be maintained through administration, excluding the <c>All Users</c> permission-configuration carrier.</en>
         /// </l>
         /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN><c>All Users</c> 在访问判定中仍是虚拟通配角色。细粒度权限表需要外键目标时，迁移会维护一个同名但无成员关系的配置载体记录；后台角色列表必须隐藏它，以免被误当成可分配或可删除的普通角色。</zh-CN>
+        ///   <en><c>All Users</c> remains a virtual wildcard for access checks. When the fine-grained permission table needs a foreign-key target, migration maintains a same-named configuration carrier with no membership; administration lists must hide it so it is not mistaken for an assignable or deletable regular role.</en>
+        /// </lang>
+        /// </remarks>
         public IEnumerable<IRoleItem> GetPortalRoles(int portalId)
         {
-            return _context.Roles.Where(i => i.PortalId == portalId).ToList();
+            return _context.Roles
+                .Where(i => i.PortalId == portalId && i.RoleName != PortalRoleNames.AllUsers)
+                .ToList();
         }
 
         /// <summary>
@@ -296,10 +304,16 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         /// <returns>
         /// <l>
-        ///   <zh-CN>权限键集合。</zh-CN>
-        ///   <en>Permission-key collection.</en>
+        ///   <zh-CN>直接角色成员关系以及虚拟 <c>All Users</c> 配置载体授予的权限键集合。</zh-CN>
+        ///   <en>Permission keys granted through direct role membership and the virtual <c>All Users</c> configuration carrier.</en>
         /// </l>
         /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>为保持旧门户中 <c>All Users</c> 的通配语义，查询会把同名配置载体的启用权限合并给每个已认证身份，但不会要求或写入 <c>Portal_UserRoles</c> 成员记录。普通角色仍严格按用户成员关系查询。</zh-CN>
+        ///   <en>To preserve the legacy wildcard semantics of <c>All Users</c>, this query unions enabled permissions from its same-named configuration carrier for every authenticated identity without requiring or writing a <c>Portal_UserRoles</c> membership row. Regular roles remain strictly membership based.</en>
+        /// </lang>
+        /// </remarks>
         public IEnumerable<string> GetPermissionKeysByUserName(string name)
         {
             if (string.IsNullOrWhiteSpace(name) || !HasRolePermissionsTable())
@@ -311,14 +325,22 @@ namespace ASPNET.StarterKit.Portal
                 @"
 SELECT DISTINCT [RolePermissions].[PermissionKey]
 FROM [dbo].[PortalCfg_RolePermissions] AS [RolePermissions]
-INNER JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+INNER JOIN [dbo].[Portal_Roles] AS [Roles]
+    ON [Roles].[RoleID] = [RolePermissions].[RoleId]
+LEFT JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
     ON [UserRoles].[RoleID] = [RolePermissions].[RoleId]
-INNER JOIN [dbo].[Portal_Users] AS [Users]
+LEFT JOIN [dbo].[Portal_Users] AS [Users]
     ON [Users].[UserID] = [UserRoles].[UserID]
 WHERE [RolePermissions].[IsEnabled] = 1
-  AND ([Users].[Name] = @p0 OR [Users].[Email] = @p0)
+  AND
+  (
+      [Roles].[RoleName] = @p1
+      OR [Users].[Name] = @p0
+      OR [Users].[Email] = @p0
+  )
 ORDER BY [RolePermissions].[PermissionKey]",
-                name.Trim()).ToList();
+                name.Trim(),
+                PortalRoleNames.AllUsers).ToList();
         }
 
         /// <summary>

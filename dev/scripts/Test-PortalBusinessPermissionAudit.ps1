@@ -66,6 +66,7 @@ function Test-ContainsAll {
 $authorization = Get-PortalText 'src/Portal/Components/PortalAuthorization.cs'
 $permissions = Get-PortalText 'src/Portal.Components/PortalPermissions.cs'
 $rolePermissionsSql = Get-PortalText 'src/Setup/PortalCfg_RolePermissions.sql'
+$rolesDb = Get-PortalText 'src/Portal.Components.Data1/RolesDb.cs'
 $workItemsCode = Get-PortalText 'src/Portal/Admin/WorkItems.aspx.cs'
 $correctionAdminCode = Get-PortalText 'src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs'
 $correctionModuleCode = Get-PortalText 'src/Portal/DesktopModules/EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx.cs'
@@ -105,6 +106,21 @@ Add-BusinessPermissionCheck `
     -Status $(if ($permissionRegistryOk) { 'Pass' } else { 'Fail' }) `
     -Message 'Fine-grained business permissions are registered in code and seeded for the Admins compatibility role.' `
     -Evidence 'PortalPermissions.cs; PortalCfg_RolePermissions.sql'
+
+$allUsersPermissionBridgeOk = (Test-ContainsAll $rolePermissionsSql @(
+    'All Users is a legacy virtual access role.',
+    '([PortalID], [RoleName])',
+    "(0, N'All Users')"
+)) -and (Test-ContainsAll $rolesDb @(
+    'i.RoleName != PortalRoleNames.AllUsers',
+    '[Roles].[RoleName] = @p1',
+    'PortalRoleNames.AllUsers).ToList()'
+))
+Add-BusinessPermissionCheck `
+    -Code 'P22-BIZAUTH-ALL-USERS-BRIDGE' `
+    -Status $(if ($allUsersPermissionBridgeOk) { 'Pass' } else { 'Fail' }) `
+    -Message 'The virtual All Users role has a hidden permission carrier and grants its enabled mappings without user-role rows.' `
+    -Evidence 'RolesDb.cs; PortalCfg_RolePermissions.sql'
 
 $workItemGateOk = Test-ContainsAll $workItemsCode @(
     'PortalAuthorization.EnsureAnyPermission',

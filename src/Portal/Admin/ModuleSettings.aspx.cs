@@ -240,8 +240,8 @@ namespace ASPNET.StarterKit.Portal
         {
             authEditRoles.Items.Clear();
             // <lang>
-            //   <zh-CN>All Users 不是数据库角色记录，但在模块编辑权限中具有旧门户约定的公开编辑含义。</zh-CN>
-            //   <en>All Users is not a database role row, but legacy module edit permissions give it a conventional public-edit meaning.</en>
+            //   <zh-CN>All Users 在模块编辑权限中保留旧门户的公开编辑语义。细粒度权限迁移可能维护同名配置载体，但 RolesDb 不会把它作为可配置普通角色返回。</zh-CN>
+            //   <en>All Users retains its legacy public-edit meaning for module permissions. Fine-grained permission migration may maintain a same-named configuration carrier, but RolesDb never returns it as a configurable regular role.</en>
             // </lang>
             var allItem = new ListItem(PortalRoleNames.AllUsers, PortalRoleNames.AllUsers)
             {

@@ -34,6 +34,27 @@ BEGIN
 END
 GO
 
+/*
+    All Users 是旧门户的虚拟访问角色。细粒度权限映射需要外键目标，
+    因此仅为映射维护一个无成员关系的配置载体；运行时不会把用户写入该角色。
+    All Users is a legacy virtual access role. Fine-grained permission mappings
+    need a foreign-key target, so maintain a configuration carrier with no
+    membership; runtime never adds users to this role.
+*/
+IF NOT EXISTS
+(
+    SELECT 1
+    FROM [dbo].[Portal_Roles]
+    WHERE [RoleName] = N'All Users'
+)
+BEGIN
+    INSERT INTO [dbo].[Portal_Roles]
+        ([PortalID], [RoleName])
+    VALUES
+        (0, N'All Users');
+END
+GO
+
 DECLARE @AdminRoleId INT;
 SELECT TOP (1) @AdminRoleId = [RoleID]
 FROM [dbo].[Portal_Roles]

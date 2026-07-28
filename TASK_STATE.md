@@ -14,11 +14,11 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P22 企业能力模板、前台入口与链接治理准备` 已启动；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P22.5` 回归、证据与 P23 输入已获用户确认；浏览器前置验证完成，认证 fixture 技术暂停 |
-| 当前唯一下一步 | 等待用户提供可用于 test 外置库的专用 smoke 账号，或明确授权新增可审计的 test fixture helper；再完成登录后打开 `P22-Test-EnterpriseWorkbench`、提交低敏事项、确认本人列表和 `Admin/CollaborationItems.aspx` 可见记录，并整理 P22 closeout / P23 输入。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P22 明确企业能力模板、普通用户前台入口、链接治理和权限/Profile 联动路线，完成入口 inventory 与最小前后台闭环；P19.5 真实数据库 proof 等继续条件式补证。 |
-| 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，导致 dev 库不存在 test TabId 7 并进入通用错误页；切换隔离副本到 `env=test` 后已通过。认证阶段中，PowerShell 外部宿主无法加载项目 EF provider；改用参数化 SQL 创建 test fixture 时，二进制 PBKDF2 参数绑定连续失败两次且均已回滚，未创建用户或凭据，依反循环规则暂停。 |
+| 当前大周期 | `W-anp-P22 企业能力模板、前台入口与链接治理准备` 已完成；`W-anp-P23.0` 待讨论；`W-anp-P18` 继续整体延期 |
+| 当前阶段 | `W-anp-P23.0` 参考数据、业务参数、附件资料与 Workflow 深化的范围确认 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P23.0-discussion-questions.md` 的 Q1-Q6；确认后建立 P23 总规划与首切片。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P23 先固定参考数据/业务参数、附件资料、评论沟通和状态流转的安全契约与最小实现顺序；P19.5 真实数据库 proof 等继续条件式补证。 |
+| 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，切换隔离副本到 `env=test` 后通过。认证阶段的 EF 外部宿主与早期二进制参数方案均失败并回滚；用户授权后以显式 `SqlParameter` 成功创建 test fixture。浏览器回归发现 `All Users` 虚拟角色无法参与细粒度权限映射，已通过隐藏配置载体、运行时权限合并和 idempotent SQL seed 修复，并由零成员普通用户浏览器验证。期间嵌套 PowerShell 启动器无法启动构建，改用直接指定 PowerShell 7 执行器后 Debug 构建通过，未发现项目构建失败。 |
 | 最近状态更新时间 | 2026-07-28 |
 
 ## Recent Completed Items
@@ -30,6 +30,7 @@
 | P22.2 企业能力模板与前台入口设计 | completed | `dev/scripts/Get-PortalTabModuleNavigationInventory.ps1`；证据 `work-zone/dev/evidence/p22.2/20260728-122653/` 与 `work-zone/dev/evidence/p22.2/20260728-122800/`；设计 `work-zone/dev/plans/W-anp-P22.2-enterprise-capability-workbench-design.md` |
 | P22.3 导航注册与权限/Profile 联动设计 | completed | `src/Portal.Components/PortalNavigationRegistry.cs`；`EnterpriseWorkbench` Profile；`work-zone/dev/plans/W-anp-P22.3-navigation-registry-contract.md`；Debug 构建通过 |
 | P22.4 最小前台闭环实现 | completed | `src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/`；`dev/scripts/New-PortalP22EnterpriseWorkbenchScenarioSql.ps1`；test 库挂载 proof；证据 `work-zone/dev/evidence/p22.4/20260728-134633/` |
+| P22.5 回归、默认全员权限修复与收口 | completed | 最小角色前台提交 `CI-20260728064445-3293d9dc`、后台可见性，以及零成员默认用户提交 `CI-20260728065849-3d00b308`；`RolesDb` / `PortalCfg_RolePermissions.sql` 修复；证据 `work-zone/dev/evidence/p22.5/20260728-144609/`；`W-anp-P22-closeout.md` 与 P23.0 输入。 |
 | P10.1 合规输入与差距矩阵 | completed | `work-zone/dev/plans/W-anp-P10.1-closeout.md` |
 | P10.2 安全响应头与发布环境治理 | completed | `work-zone/dev/plans/W-anp-P10.2-closeout.md` |
 | P10.3 登录密码前端加密 | completed | `work-zone/dev/plans/W-anp-P10.3-login-encryption-result.md` |
