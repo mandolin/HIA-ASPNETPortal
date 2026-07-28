@@ -15,8 +15,8 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `W-anp-P20 模块 Profile 与启动期按需加载治理`；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P20.3` Profile gate 最小实现已完成，`W-anp-P20.4` 待讨论问题已建立 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P20.4-discussion-questions.md`；确认后整理 Legacy 模块治理清单、中期可选部署包拆分路径和发布备忘。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前阶段 | `W-anp-P20.4` Legacy 模块治理与发布备忘已完成，`W-anp-P20.5` 待讨论问题已建立 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P20.5-discussion-questions.md`；确认后执行 P20 验收、回归和 closeout。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
 | 当前完成条件 | P20 完成启动期 Profile gate 设计和当前范围最小实现；中期可选部署包、长期分布式模块注册/同步和 DLL 动态热插拔研究只进入备忘，不作为 P20 完成条件。P19.5 真实数据库 proof 等外置连接串可用后补证。 |
 | 最近状态更新时间 | 2026-07-28 |
 
@@ -137,13 +137,14 @@
 | P20.1 模块加载链路与分类设计 | completed | `work-zone/dev/plans/W-anp-P20.1-module-loading-inventory.md`、`work-zone/dev/plans/W-anp-P20.1-module-classification.md`、`work-zone/dev/plans/W-anp-P20.1-discussion-questions.md`。 |
 | P20.2 Profile 配置契约与 registry 设计 | completed | `work-zone/dev/plans/W-anp-P20.2-profile-config-contract.md`、`work-zone/dev/plans/W-anp-P20.2-registry-design.md`、`work-zone/dev/plans/W-anp-P20.2-implementation-result.md`。 |
 | P20.3 启动期按需加载最小实现 | completed | `src/Portal/Components/PortalModuleProfileResolver.cs`、`PortalModuleCatalog.TryResolveDesktopSource`、`DesktopDefault`、`ModuleCatalog`、`TabLayout`、`SystemHealth` 和配置模板已接入 Profile gate；Debug 构建通过，HTTP smoke `TotalChecks=3; FailedChecks=0`；实施结果见 `work-zone/dev/plans/W-anp-P20.3-implementation-result.md`。 |
+| P20.4 Legacy 模块治理与发布备忘 | completed | `work-zone/dev/plans/W-anp-P20.4-legacy-module-governance.md`、`W-anp-P20.4-optional-package-roadmap.md`、`W-anp-P20.4-profile-publish-memo.md`、`W-anp-P20.4-implementation-result.md`；下一步见 `work-zone/dev/plans/W-anp-P20.5-discussion-questions.md`。 |
 
 ## Last Code State
 
 | 仓库 | 本轮关键提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `2e225df` + 状态补记 `ce6e470` | P20.3 Profile gate 代码、配置模板和任务账本已提交推送；`.vscode/settings.json` 仍为本机设置残留，不纳入提交。 |
-| WorkZone | `31e9571` + 日志补记 `a11a9f4` | P20.3 实施结果、P20.4 待讨论问题、当前状态、索引和本轮日志已提交推送；历史日志/截图残留仍按既有策略不处理。 |
+| 主仓库 | P20.4 任务账本提交 | 本轮主仓仅更新任务账本；`.vscode/settings.json` 仍为本机设置残留，不纳入提交。 |
+| WorkZone | P20.4 文档资料提交 | 本轮新增 Legacy 治理、可选部署包路线、Profile 发布备忘、P20.4 结果、P20.5 待讨论问题和日志；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 
