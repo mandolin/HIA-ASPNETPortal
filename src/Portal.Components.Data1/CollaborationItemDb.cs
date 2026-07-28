@@ -162,6 +162,29 @@ SELECT @ItemId;",
         }
 
         /// <inheritdoc />
+        public IList<CollaborationItemInfo> GetRecentItemsForUser(int userId, int take)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<CollaborationItemInfo>();
+            }
+
+            try
+            {
+                return QueryItems(
+                    @"
+WHERE [Item].[InitiatorUserId] = @UserId
+   OR [Item].[OwnerUserId] = @UserId",
+                    NormalizeTake(take, 20),
+                    new SqlParameter("@UserId", userId));
+            }
+            catch (Exception)
+            {
+                return new List<CollaborationItemInfo>();
+            }
+        }
+
+        /// <inheritdoc />
         public IList<CollaborationItemInfo> GetAdminItems(string status, int take)
         {
             if (!IsSchemaAvailable())

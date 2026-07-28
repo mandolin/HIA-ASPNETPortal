@@ -28,6 +28,14 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>读取指定用户最近发起或负责的协同事项。</zh-CN>
+        ///   <en>Reads recent collaboration items initiated by or assigned to a specific user.</en>
+        /// </lang>
+        /// </summary>
+        IList<CollaborationItemInfo> GetRecentItemsForUser(int userId, int take);
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>读取后台协同事项列表。</zh-CN>
         ///   <en>Reads the administration collaboration-item list.</en>
         /// </lang>

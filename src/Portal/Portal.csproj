@@ -203,6 +203,9 @@
     <Content Include="DesktopModules\BusinessApplicationRequest\module.json" />
     <Content Include="DesktopModules\BusinessApplicationRequest\BusinessApplicationRequest.ascx" />
     <Content Include="DesktopModules\BusinessApplicationRequest\Styles\BusinessApplicationRequest.css" />
+    <Content Include="DesktopModules\EnterpriseCapabilityWorkbench\module.json" />
+    <Content Include="DesktopModules\EnterpriseCapabilityWorkbench\EnterpriseCapabilityWorkbench.ascx" />
+    <Content Include="DesktopModules\EnterpriseCapabilityWorkbench\Styles\EnterpriseCapabilityWorkbench.css" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\module.json" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\Styles\EmployeeProfileConfirm.css" />
@@ -630,6 +633,13 @@
     </Compile>
     <Compile Include="DesktopModules\BusinessApplicationRequest\BusinessApplicationRequest.ascx.designer.cs">
       <DependentUpon>BusinessApplicationRequest.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\EnterpriseCapabilityWorkbench\EnterpriseCapabilityWorkbench.ascx.cs">
+      <DependentUpon>EnterpriseCapabilityWorkbench.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\EnterpriseCapabilityWorkbench\EnterpriseCapabilityWorkbench.ascx.designer.cs">
+      <DependentUpon>EnterpriseCapabilityWorkbench.ascx</DependentUpon>
     </Compile>
     <Compile Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx.cs">
       <DependentUpon>EmployeeProfileConfirm.ascx</DependentUpon>

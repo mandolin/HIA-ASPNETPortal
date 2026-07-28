@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "packageId": "HIA.EnterpriseCapabilityWorkbench",
+  "displayName": "企业能力工作台 / Enterprise Capability Workbench",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "desktopEntry": "DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+  "resources": [
+    "Styles/EnterpriseCapabilityWorkbench.css"
+  ]
+}

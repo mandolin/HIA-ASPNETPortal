@@ -355,13 +355,13 @@ namespace ASPNET.StarterKit.Portal
                 "Enterprise Capability Workbench",
                 "DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
                 PortalNavigationVisibilityMode.HideWhenBlocked,
-                PortalNavigationLifecycleState.Draft,
+                PortalNavigationLifecycleState.Active,
                 100,
                 new[] { PortalRoleNames.AllUsers },
                 new[] { PortalPermissionKeys.BusinessCollaborationCreate, PortalPermissionKeys.BusinessCollaborationViewOwn },
                 new[] { EnterpriseWorkbenchPackageId },
                 new[] { EnterpriseWorkbenchProfile },
-                "P22.4 candidate front-end entry for ordinary users."),
+                "P22.4 front-end entry for ordinary users to submit and review their own collaboration items."),
 
             new PortalNavigationEntry(
                 "Admin.CollaborationItems",
