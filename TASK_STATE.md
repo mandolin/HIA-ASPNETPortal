@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P21 企业能力模块骨架深化` 已启动；`W-anp-P20 模块 Profile 与启动期按需加载治理` 已完成；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P21.4` 当前自动侧验收已完成；`W-anp-P21.5` 周期收口待讨论问题已建立 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P21.5-discussion-questions.md`；确认后输出 `W-anp-P21-closeout.md` 并整理 P22 候选输入。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P21 完成企业能力对象骨架、生命周期、权限、待办、审计、参考项目抽象规则和一个最小样板实现/验收输入；P19.5 真实数据库 proof 等外置连接串可用后补证。 |
+| 当前大周期 | `W-anp-P21 企业能力模块骨架深化` 已完成；`W-anp-P22 企业能力模板、前台入口与链接治理准备` 进入启动讨论；`W-anp-P18` 继续整体延期 |
+| 当前阶段 | `W-anp-P21` 已收口；`W-anp-P22.0` 待讨论问题已建立 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P22.0-discussion-questions.md`；确认后正式拆 `W-anp-P22` 和 breakdown，并推进 `W-anp-P22.1` 入口与链接链路 inventory。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P22 明确企业能力模板、普通用户前台入口、链接治理和权限/Profile 联动路线，先形成入口 inventory 与最小前后台闭环设计；P19.5 真实数据库 proof 等继续条件式补证。 |
 | 最近状态更新时间 | 2026-07-28 |
 
 ## Recent Completed Items
@@ -143,13 +143,14 @@
 | P21.1 对象模型与抽象规则确认 | completed | 用户确认 `work-zone/dev/plans/W-anp-P21.1-discussion-questions.md` 全部按推荐推进；已形成 `W-anp-P21.2-data-contract.md`、`W-anp-P21.2-permission-workflow-design.md`、`W-anp-P21.2-implementation-input.md` 和 `W-anp-P21.2-discussion-questions.md`。 |
 | P21.3 后台优先最小样板当前切片 | completed | 新增 `PortalBiz_CollaborationItems`、`PortalBiz_CollaborationItemEvents`、协同事项 C# 契约/数据访问、`Admin/CollaborationItems.aspx`、权限 seed、审计事件和迁移验证脚本接入；Debug 构建通过；迁移 manifest `Fail=0`；SQL version matrix `Fail=0`。 |
 | P21.4 验收与参考项目映射复核 | completed | test 外置库执行 P12/P21 idempotent 迁移并复核 `FailedChecks=0`；SQL version matrix 带 test 库 `Pass=14; Warning=1; Fail=0; Pending=3`；实现范围领域词复核无命中；链接治理专项输入已记录。 |
+| P21.5 周期收口 | completed | 用户确认 P21.5 全部按推荐推进；已形成 `W-anp-P21-closeout.md`、`W-anp-P22-input-from-P21.md` 和 `W-anp-P22.0-discussion-questions.md`。 |
 
 ## Last Code State
 
 | 仓库 | 本轮关键提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P21.4 收口状态本轮待提交 | 本轮仅调整 P21 页面注释并更新任务账本；`.vscode/settings.json` 仍为本机设置残留，不纳入提交。 |
-| WorkZone | P21.4 验收资料本轮待提交 | 本轮新增 P21.4 验收结果、链接治理候选输入、P21.5 待讨论问题、证据包和日志；历史日志/截图残留仍按既有策略不处理。 |
+| 主仓库 | P21.5 收口状态本轮待提交 | 本轮主仓只更新任务账本；`.vscode/settings.json` 仍为本机设置残留，不纳入提交。 |
+| WorkZone | P21.5 收口资料本轮待提交 | 本轮新增 P21 closeout、P22 输入、P22.0 待讨论问题和日志，并更新 C-anp-P3、索引与当前状态；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 
