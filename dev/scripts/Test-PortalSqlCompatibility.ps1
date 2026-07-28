@@ -75,6 +75,20 @@ Checks P23 governed business reference-data schema without applying changes.
 
 .LANG zh-CN
 仅检查 P23 受治理业务参考数据 schema，不执行变更。
+
+.PARAMETER ApplyP23CollaborationCommentWorkflowMigration
+.LANG en
+Applies the P23.6 collaboration-item comment and workflow-rule migration and changes the target database.
+
+.LANG zh-CN
+执行 P23.6 协同事项评论与状态规则迁移，并会修改目标数据库。
+
+.PARAMETER RequireP23CollaborationCommentWorkflowMigration
+.LANG en
+Checks the P23.6 collaboration-item comment and workflow-rule schema without applying changes.
+
+.LANG zh-CN
+仅检查 P23.6 协同事项评论与状态规则 schema，不执行变更。
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
@@ -122,7 +136,11 @@ param(
 
     [switch]$ApplyP23ReferenceDataMigration,
 
-    [switch]$RequireP23ReferenceDataMigration
+    [switch]$RequireP23ReferenceDataMigration,
+
+    [switch]$ApplyP23CollaborationCommentWorkflowMigration,
+
+    [switch]$RequireP23CollaborationCommentWorkflowMigration
 )
 
 Set-StrictMode -Version Latest
@@ -507,6 +525,16 @@ FROM
         }
     }
 
+    if ($ApplyP23CollaborationCommentWorkflowMigration) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P23.6 collaboration-item comment and workflow-rule migration script')) {
+            Invoke-MigrationFile -Connection $connection -Path (Join-Path $repoRoot 'src/Setup/PortalBiz_CollaborationItemCommentWorkflow.sql')
+            Add-DatabaseCheck -Name 'P23.6 collaboration comment/workflow migration application' -Status 'Pass' -Detail 'The idempotent P23.6 collaboration-item comment and workflow-rule migration batches completed.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P23.6 collaboration comment/workflow migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
@@ -688,12 +716,39 @@ FROM
         $collaborationItemCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_CollaborationItems];')
         $collaborationItemEventCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_CollaborationItemEvents];')
         Add-DatabaseCheck -Name 'P21.3 collaboration item row counts' -Status 'Info' -Detail ('Collaboration items: ' + $collaborationItemCount + '; collaboration item events: ' + $collaborationItemEventCount + '.')
+
+        $p23CommentWorkflowColumnCount = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM sys.columns
+WHERE [object_id] = OBJECT_ID(N'[dbo].[PortalBiz_CollaborationItemEvents]')
+  AND [name] IN (N'EventType', N'VisibilityScope');
+'@)
+        $p23CommentWorkflowConstraintCount = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM sys.check_constraints
+WHERE [parent_object_id] = OBJECT_ID(N'[dbo].[PortalBiz_CollaborationItemEvents]')
+  AND [name] IN
+  (
+      N'CK_PortalBiz_CollaborationItemEvents_EventType',
+      N'CK_PortalBiz_CollaborationItemEvents_VisibilityScope',
+      N'CK_PortalBiz_CollaborationItemEvents_Shape'
+  );
+'@)
+        $p23CommentWorkflowSchemaOk = $p23CommentWorkflowColumnCount -eq 2 -and $p23CommentWorkflowConstraintCount -eq 3
+        Add-DatabaseCheck -Name 'P23.6 collaboration comment/workflow schema' -Status $(if ($p23CommentWorkflowSchemaOk) { 'Pass' } elseif ($RequireP23CollaborationCommentWorkflowMigration) { 'Fail' } else { 'Warning' }) -Detail ('Required event columns: ' + $p23CommentWorkflowColumnCount + ' of 2; required event constraints: ' + $p23CommentWorkflowConstraintCount + ' of 3.')
     }
     elseif ($RequireP21CollaborationItemMigration) {
         Add-DatabaseCheck -Name 'P21.3 collaboration item schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP21CollaborationItemTables -join ', '))
     }
     else {
         Add-DatabaseCheck -Name 'P21.3 collaboration item schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP21CollaborationItemTables -join ', '))
+
+        if ($RequireP23CollaborationCommentWorkflowMigration) {
+            Add-DatabaseCheck -Name 'P23.6 collaboration comment/workflow schema' -Status 'Fail' -Detail 'P21.3 collaboration-item tables are required before the P23.6 extension can exist.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P23.6 collaboration comment/workflow schema' -Status 'Warning' -Detail 'Not required for this run because the prerequisite P21.3 collaboration-item tables are unavailable.'
+        }
     }
 
     $missingP23ReferenceDataTables = @($p23ReferenceDataTables | Where-Object { -not $existingTables.Contains($_) })

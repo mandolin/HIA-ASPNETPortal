@@ -23,6 +23,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>退回事项。</zh-CN><en>Return the item.</en></lang></summary>
         public const string Return = "Return";
 
+        /// <summary><lang><zh-CN>发起人对已退回事项重新提交。</zh-CN><en>Resubmit a returned item by its initiator.</en></lang></summary>
+        public const string Resubmit = "Resubmit";
+
         /// <summary><lang><zh-CN>驳回事项。</zh-CN><en>Reject the item.</en></lang></summary>
         public const string Reject = "Reject";
 

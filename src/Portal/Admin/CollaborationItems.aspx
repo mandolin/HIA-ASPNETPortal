@@ -110,8 +110,8 @@
                                 <th scope="col" width="155" class="SubHead">Code</th>
                                 <th scope="col" width="140" class="SubHead">Owner</th>
                                 <th scope="col" class="SubHead">Item</th>
-                                <th scope="col" width="95" class="SubHead">Status</th>
-                                <th scope="col" width="310" class="SubHead">Handle</th>
+                                <th scope="col" width="110" class="SubHead">Status</th>
+                                <th scope="col" width="390" class="SubHead">Handle / Comment</th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -127,7 +127,8 @@
                                         <div><span class="SubHead">Priority:</span> <%#: Eval("PriorityKey") %></div>
                                         <div><span class="SubHead">Summary:</span> <%#: Eval("Summary") %></div>
                                         <div><span class="SubHead">Description:</span> <%#: Eval("Description") %></div>
-                                        <div><span class="SubHead">Latest Comment:</span> <%#: Eval("LastActionComment") %></div>
+                                        <div><span class="SubHead">Latest Workflow Comment:</span> <%#: Eval("LastActionComment") %></div>
+                                        <div><span class="SubHead">Latest Visible Timeline Comment:</span> <%#: Eval("LatestVisibleComment") %></div>
                                     </div>
                                 </td>
                                 <td><%#: Eval("ItemStatus") %></td>
@@ -137,9 +138,12 @@
                                         <asp:Button ID="StartButton" Text="Start" CssClass="CommandButton" CommandName="Start" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="CompleteButton" Text="Complete" CssClass="CommandButton" CommandName="Complete" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="ReturnButton" Text="Return" CssClass="CommandButton" CommandName="Return" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="ResubmitButton" Text="Resubmit" CssClass="CommandButton" CommandName="Resubmit" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="RejectButton" Text="Reject" CssClass="CommandButton CommandButtonDanger" CommandName="Reject" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="CancelButton" Text="Cancel" CssClass="CommandButton CommandButtonDanger" CommandName="Cancel" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="CloseButton" Text="Close" CssClass="CommandButton" CommandName="Close" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="AddParticipantCommentButton" Text="Participant Comment" CssClass="CommandButton" CommandName="AddParticipantComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="AddAdministratorCommentButton" Text="Administrator Comment" CssClass="CommandButton" CommandName="AddAdministratorComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                     </div>
                                 </td>
                             </tr>

@@ -290,6 +290,14 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>企业协同事项已开始处理。</zh-CN>
+        ///   <en>Enterprise collaboration item handling was started.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemStarted = "CollaborationItemStarted";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>企业协同事项已完成。</zh-CN>
         ///   <en>Enterprise collaboration item was completed.</en>
         /// </lang>
@@ -303,6 +311,14 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string CollaborationItemReturned = "CollaborationItemReturned";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已退回的企业协同事项已重新提交。</zh-CN>
+        ///   <en>A returned enterprise collaboration item was resubmitted.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemResubmitted = "CollaborationItemResubmitted";
 
         /// <summary>
         /// <lang>
@@ -327,5 +343,13 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string CollaborationItemClosed = "CollaborationItemClosed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已新增纯文本评论。</zh-CN>
+        ///   <en>A plain-text comment was added to an enterprise collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemCommentAdded = "CollaborationItemCommentAdded";
     }
 }

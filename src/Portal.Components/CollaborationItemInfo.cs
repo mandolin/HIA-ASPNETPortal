@@ -58,6 +58,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>期限 UTC 时间。</zh-CN><en>Due UTC time.</en></lang></summary>
         public DateTime? DueUtc { get; set; }
 
+        /// <summary><lang><zh-CN>在当前 UTC 时刻按 P23.5 规则计算的只读超期标记；不会改变状态或期限。</zh-CN><en>Read-only overdue flag computed at the current UTC time under P23.5 rules; it does not change state or due date.</en></lang></summary>
+        public bool IsOverdue { get; set; }
+
         /// <summary><lang><zh-CN>提交 UTC 时间。</zh-CN><en>Submission UTC time.</en></lang></summary>
         public DateTime? SubmittedUtc { get; set; }
 

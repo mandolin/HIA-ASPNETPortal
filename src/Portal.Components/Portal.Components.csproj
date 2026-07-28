@@ -113,7 +113,10 @@
     <Compile Include="BusinessApplicationReviewRequest.cs" />
     <Compile Include="BusinessApplicationSubmitRequest.cs" />
     <Compile Include="CollaborationItemActionRequest.cs" />
+    <Compile Include="CollaborationItemCommentCreateRequest.cs" />
+    <Compile Include="CollaborationItemCommentResult.cs" />
     <Compile Include="CollaborationItemCreateRequest.cs" />
+    <Compile Include="CollaborationItemEventInfo.cs" />
     <Compile Include="CollaborationItemInfo.cs" />
     <Compile Include="CollaborationItemResult.cs" />
     <Compile Include="ReferenceDataItem.cs" />
@@ -153,7 +156,9 @@
     <Compile Include="PortalReferenceDataSets.cs" />
     <Compile Include="PortalBusinessApplicationStatuses.cs" />
     <Compile Include="PortalCollaborationItemActions.cs" />
+    <Compile Include="PortalCollaborationItemEventTypes.cs" />
     <Compile Include="PortalCollaborationItemStatuses.cs" />
+    <Compile Include="PortalCollaborationItemVisibilityScopes.cs" />
     <Compile Include="PortalDatabaseProfile.cs" />
     <Compile Include="PortalEmployeeStatuses.cs" />
     <Compile Include="PortalHiaBoundaryContracts.cs" />

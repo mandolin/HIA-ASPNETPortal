@@ -51,7 +51,7 @@
 
         <div class="enterprise-workbench-subtitle">我的最近事项</div>
         <div class="enterprise-workbench-list-wrap">
-            <asp:Repeater ID="RecentItemsRepeater" runat="server">
+            <asp:Repeater ID="RecentItemsRepeater" OnItemCommand="RecentItemsRepeater_ItemCommand" runat="server">
                 <HeaderTemplate>
                     <table class="enterprise-workbench-list" cellspacing="0" cellpadding="4" border="0">
                         <tr>
@@ -61,6 +61,7 @@
                             <th>状态</th>
                             <th>优先级</th>
                             <th>最近意见</th>
+                            <th>参与跟进</th>
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>
@@ -68,9 +69,17 @@
                             <td><%#: Eval("LastActionUtcText") %></td>
                             <td><%#: Eval("ItemCode") %></td>
                             <td><%#: Eval("Title") %></td>
-                            <td><%#: Eval("ItemStatus") %></td>
+                            <td><%#: Eval("StatusText") %></td>
                             <td><%#: Eval("PriorityKey") %></td>
                             <td><%#: Eval("LastActionComment") %></td>
+                            <td>
+                                <div><span class="SubHead">最新评论：</span><%#: Eval("LatestParticipantComment") %></div>
+                                <asp:TextBox ID="ParticipantCommentTextBox" CssClass="NormalTextBox enterprise-workbench-input" MaxLength="1000" TextMode="MultiLine" Rows="2" runat="server" />
+                                <div class="enterprise-workbench-actions">
+                                    <asp:Button ID="AddParticipantCommentButton" CssClass="CommandButton" Text="添加参与者评论" CommandName="AddParticipantComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                    <asp:Button ID="ResubmitButton" CssClass="CommandButton" Text="退回后重新提交" CommandName="Resubmit" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                </div>
+                            </td>
                         </tr>
                 </ItemTemplate>
                 <FooterTemplate>

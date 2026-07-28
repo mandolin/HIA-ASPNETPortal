@@ -167,6 +167,93 @@ namespace ASPNET.StarterKit.Portal
             BindModule();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理本人事项列表中的评论和退回后重新提交请求。</zh-CN>
+        ///   <en>Handles comment and post-return resubmission requests from the own-item list.</en>
+        /// </lang>
+        /// </summary>
+        protected void RecentItemsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            int userId = GetCurrentUserId();
+            if (userId <= 0 || !IsCurrentUserAuthenticated())
+            {
+                ShowMessage("请先登录后再操作协同事项。");
+                BindModule();
+                return;
+            }
+
+            long itemId;
+            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId) || itemId <= 0)
+            {
+                ShowMessage("协同事项标识无效。");
+                BindModule();
+                return;
+            }
+
+            string commandName = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+            if (string.Equals(commandName, "AddParticipantComment", StringComparison.Ordinal))
+            {
+                TextBox commentBox = e.Item.FindControl("ParticipantCommentTextBox") as TextBox;
+                string comment = commentBox == null ? string.Empty : commentBox.Text;
+                CollaborationItemCommentResult commentResult = CollaborationItemDb.AddComment(
+                    new CollaborationItemCommentCreateRequest
+                    {
+                        ItemId = itemId,
+                        Comment = comment,
+                        VisibilityScope = PortalCollaborationItemVisibilityScopes.ItemParticipants,
+                        ActorUserId = userId,
+                        ActorName = GetCurrentUserName(),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+                if (!commentResult.Succeeded)
+                {
+                    ShowMessage(commentResult.Message);
+                    BindModule();
+                    return;
+                }
+
+                RecordCommentAudit(commentResult, PortalCollaborationItemVisibilityScopes.ItemParticipants, comment);
+                ShowMessage("已添加参与者范围评论。");
+                BindModule();
+                return;
+            }
+
+            if (string.Equals(commandName, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                CollaborationItemResult result = CollaborationItemDb.ApplyAction(
+                    new CollaborationItemActionRequest
+                    {
+                        ItemId = itemId,
+                        ActionKey = PortalCollaborationItemActions.Resubmit,
+                        ActorUserId = userId,
+                        ActorName = GetCurrentUserName(),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+                if (!result.Succeeded)
+                {
+                    ShowMessage(result.Message);
+                    BindModule();
+                    return;
+                }
+
+                CollaborationItemInfo item = CollaborationItemDb.GetRecentItemsForUser(userId, RecentItemLimit)
+                    .FirstOrDefault(candidate => candidate.ItemId == result.ItemId);
+                if (item != null)
+                {
+                    TryEnsureWorkItem(item.ItemId, item.ItemCode, item.Title, item.Summary, item.DueUtc);
+                }
+
+                RecordActionAudit(result);
+                ShowMessage("协同事项已重新提交。");
+                BindModule();
+                return;
+            }
+
+            ShowMessage("不支持的协同事项操作。");
+            BindModule();
+        }
+
         private void BindModule()
         {
             int userId = GetCurrentUserId();
@@ -231,8 +318,45 @@ namespace ASPNET.StarterKit.Portal
             IList<CollaborationItemInfo> items = CollaborationItemDb == null || userId <= 0
                 ? new List<CollaborationItemInfo>()
                 : CollaborationItemDb.GetRecentItemsForUser(userId, RecentItemLimit);
-            RecentItemsRepeater.DataSource = items.Select(item => new EnterpriseCapabilityWorkbenchItemRow(item)).ToList();
+            RecentItemsRepeater.DataSource = items.Select(item => new EnterpriseCapabilityWorkbenchItemRow(
+                item,
+                CollaborationItemDb.GetVisibleEvents(item.ItemId, userId))).ToList();
             RecentItemsRepeater.DataBind();
+        }
+
+        private void RecordActionAudit(CollaborationItemResult result)
+        {
+            if (result == null || !result.Succeeded ||
+                !string.Equals(result.ActionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemResubmitted,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item resubmitted from EnterpriseCapabilityWorkbench. ItemCode=" + result.ItemCode,
+                Context);
+        }
+
+        private void RecordCommentAudit(CollaborationItemCommentResult result, string visibilityScope, string comment)
+        {
+            if (result == null || !result.Succeeded)
+            {
+                return;
+            }
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemCommentAdded,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item comment added. EventId=" + result.EventId.ToString(CultureInfo.InvariantCulture) +
+                "; VisibilityScope=" + visibilityScope +
+                "; Length=" + NormalizeInput(comment, 1000).Length.ToString(CultureInfo.InvariantCulture),
+                Context);
         }
 
         private int GetCurrentUserId()
@@ -353,17 +477,29 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class EnterpriseCapabilityWorkbenchItemRow
     {
-        internal EnterpriseCapabilityWorkbenchItemRow(CollaborationItemInfo item)
+        internal EnterpriseCapabilityWorkbenchItemRow(CollaborationItemInfo item, IList<CollaborationItemEventInfo> visibleEvents)
         {
+            ItemId = item.ItemId;
             ItemCode = EmptyToNone(item.ItemCode);
             Title = EmptyToNone(item.Title);
             ItemStatus = EmptyToNone(item.ItemStatus);
+            StatusText = item.IsOverdue ? ItemStatus + " / Overdue" : ItemStatus;
             PriorityKey = EmptyToNone(item.PriorityKey);
             LastActionUtcText = item.LastActionUtc.HasValue
                 ? item.LastActionUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
                 : "(none)";
             LastActionComment = EmptyToNone(item.LastActionComment);
+            CollaborationItemEventInfo latestComment = (visibleEvents ?? new List<CollaborationItemEventInfo>())
+                .Where(itemEvent => string.Equals(itemEvent.EventType, PortalCollaborationItemEventTypes.Comment, StringComparison.Ordinal) &&
+                                    string.Equals(itemEvent.VisibilityScope, PortalCollaborationItemVisibilityScopes.ItemParticipants, StringComparison.Ordinal))
+                .OrderByDescending(itemEvent => itemEvent.OccurredUtc)
+                .ThenByDescending(itemEvent => itemEvent.EventId)
+                .FirstOrDefault();
+            LatestParticipantComment = latestComment == null ? "(none)" : EmptyToNone(latestComment.Comment);
         }
+
+        /// <summary><lang><zh-CN>协同事项主键。</zh-CN><en>Collaboration-item primary key.</en></lang></summary>
+        public long ItemId { get; private set; }
 
         /// <summary><lang><zh-CN>事项编号。</zh-CN><en>Item code.</en></lang></summary>
         public string ItemCode { get; private set; }
@@ -374,6 +510,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>事项状态。</zh-CN><en>Item status.</en></lang></summary>
         public string ItemStatus { get; private set; }
 
+        /// <summary><lang><zh-CN>包含只读超期标记的事项状态。</zh-CN><en>Item status including the read-only overdue indicator.</en></lang></summary>
+        public string StatusText { get; private set; }
+
         /// <summary><lang><zh-CN>优先级键。</zh-CN><en>Priority key.</en></lang></summary>
         public string PriorityKey { get; private set; }
 
@@ -382,6 +521,9 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary><lang><zh-CN>最近办理意见。</zh-CN><en>Latest handling comment.</en></lang></summary>
         public string LastActionComment { get; private set; }
+
+        /// <summary><lang><zh-CN>当前用户可见的最新评论。</zh-CN><en>Latest comment visible to the current user.</en></lang></summary>
+        public string LatestParticipantComment { get; private set; }
 
         private static string EmptyToNone(string value)
         {

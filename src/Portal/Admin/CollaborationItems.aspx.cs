@@ -156,6 +156,22 @@ namespace ASPNET.StarterKit.Portal
         protected void ItemsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             string actionKey = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+            long itemId;
+            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId) || itemId <= 0)
+            {
+                MessageLabel.Text = "Invalid collaboration item id.";
+                return;
+            }
+
+            TextBox commentBox = e.Item.FindControl("ActionCommentTextBox") as TextBox;
+            string actionComment = commentBox == null ? string.Empty : commentBox.Text;
+            if (IsCommentCommand(actionKey))
+            {
+                TryAddComment(itemId, actionKey, actionComment);
+                BindItems();
+                return;
+            }
+
             if (!IsSupportedAction(actionKey))
             {
                 MessageLabel.Text = "Unsupported collaboration action.";
@@ -168,15 +184,6 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            long itemId;
-            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId))
-            {
-                MessageLabel.Text = "Invalid collaboration item id.";
-                return;
-            }
-
-            TextBox commentBox = e.Item.FindControl("ActionCommentTextBox") as TextBox;
-            string actionComment = commentBox == null ? string.Empty : commentBox.Text;
             CollaborationItemResult result = CollaborationItemDb.ApplyAction(
                 new CollaborationItemActionRequest
                 {
@@ -196,7 +203,14 @@ namespace ASPNET.StarterKit.Portal
             }
 
             TryRecordOperationAudit(result);
-            TryCompleteWorkItem(result.ItemId, actionKey, actionComment);
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                TryEnsureResubmittedWorkItem(result.ItemId);
+            }
+            else
+            {
+                TryCompleteWorkItem(result.ItemId, actionKey, actionComment);
+            }
 
             MessageLabel.Text = "Collaboration item state updated.";
             BindItems();
@@ -247,14 +261,17 @@ namespace ASPNET.StarterKit.Portal
 
             if (!CollaborationItemDb.IsSchemaAvailable())
             {
-                ShowUnavailable("P21.3 collaboration item schema is unavailable. Run PortalBiz_CollaborationItems.sql and PortalBiz_CollaborationItemEvents.sql.");
+                ShowUnavailable("Collaboration item schema is unavailable. Run the P21.3 item migrations and P23.6 PortalBiz_CollaborationItemCommentWorkflow.sql.");
                 return;
             }
 
             IList<CollaborationItemInfo> items = CollaborationItemDb.GetAdminItems(
                 StatusFilterList.SelectedValue,
                 PageSize);
-            ItemsRepeater.DataSource = items.Select(item => new CollaborationItemAdminRow(item)).ToList();
+            int currentUserId = GetCurrentUserId();
+            ItemsRepeater.DataSource = items.Select(item => new CollaborationItemAdminRow(
+                item,
+                CollaborationItemDb.GetVisibleEvents(item.ItemId, currentUserId))).ToList();
             ItemsRepeater.DataBind();
 
             ResultLabel.Text = "Showing up to " + PageSize.ToString(CultureInfo.InvariantCulture) +
@@ -367,6 +384,56 @@ namespace ASPNET.StarterKit.Portal
                 });
         }
 
+        private void TryEnsureResubmittedWorkItem(long itemId)
+        {
+            if (CollaborationItemDb == null || itemId <= 0)
+            {
+                return;
+            }
+
+            CollaborationItemInfo item = CollaborationItemDb.GetAdminItems(string.Empty, 200)
+                .FirstOrDefault(candidate => candidate.ItemId == itemId);
+            if (item == null)
+            {
+                return;
+            }
+
+            TryEnsureWorkItem(item.ItemId, item.ItemCode, item.Title, item.Summary, item.OwnerRoleKey, item.DueUtc);
+        }
+
+        private void TryAddComment(long itemId, string commandName, string comment)
+        {
+            string visibilityScope = string.Equals(commandName, "AddAdministratorComment", StringComparison.Ordinal)
+                ? PortalCollaborationItemVisibilityScopes.Administrators
+                : PortalCollaborationItemVisibilityScopes.ItemParticipants;
+            CollaborationItemCommentResult result = CollaborationItemDb.AddComment(
+                new CollaborationItemCommentCreateRequest
+                {
+                    ItemId = itemId,
+                    Comment = comment,
+                    VisibilityScope = visibilityScope,
+                    ActorUserId = GetCurrentUserId(),
+                    ActorName = GetCurrentUserName(),
+                    OccurredUtc = DateTime.UtcNow
+                });
+            if (!result.Succeeded)
+            {
+                MessageLabel.Text = result.Message;
+                return;
+            }
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemCommentAdded,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item comment added. EventId=" + result.EventId.ToString(CultureInfo.InvariantCulture) +
+                "; VisibilityScope=" + visibilityScope +
+                "; Length=" + NormalizeInput(comment, 1000).Length.ToString(CultureInfo.InvariantCulture),
+                Context);
+            MessageLabel.Text = "Collaboration item comment added.";
+        }
+
         private void TryRecordOperationAudit(CollaborationItemResult result)
         {
             string eventKey = MapAuditEvent(result.ActionKey);
@@ -441,6 +508,11 @@ namespace ASPNET.StarterKit.Portal
 
         private static string MapAuditEvent(string actionKey)
         {
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal))
+            {
+                return PortalOperationAuditEvents.CollaborationItemStarted;
+            }
+
             if (string.Equals(actionKey, PortalCollaborationItemActions.Complete, StringComparison.Ordinal))
             {
                 return PortalOperationAuditEvents.CollaborationItemCompleted;
@@ -449,6 +521,11 @@ namespace ASPNET.StarterKit.Portal
             if (string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal))
             {
                 return PortalOperationAuditEvents.CollaborationItemReturned;
+            }
+
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                return PortalOperationAuditEvents.CollaborationItemResubmitted;
             }
 
             if (string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal))
@@ -474,9 +551,16 @@ namespace ASPNET.StarterKit.Portal
             return string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal) ||
                    string.Equals(actionKey, PortalCollaborationItemActions.Complete, StringComparison.Ordinal) ||
                    string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal) ||
                    string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal) ||
                    string.Equals(actionKey, PortalCollaborationItemActions.Cancel, StringComparison.Ordinal) ||
                    string.Equals(actionKey, PortalCollaborationItemActions.Close, StringComparison.Ordinal);
+        }
+
+        private static bool IsCommentCommand(string commandName)
+        {
+            return string.Equals(commandName, "AddParticipantComment", StringComparison.Ordinal) ||
+                   string.Equals(commandName, "AddAdministratorComment", StringComparison.Ordinal);
         }
 
         private static bool TryParseDueUtc(string value, out DateTime? dueUtc)
@@ -517,7 +601,7 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class CollaborationItemAdminRow
     {
-        internal CollaborationItemAdminRow(CollaborationItemInfo item)
+        internal CollaborationItemAdminRow(CollaborationItemInfo item, IList<CollaborationItemEventInfo> visibleEvents)
         {
             ItemId = item.ItemId;
             ItemCode = item.ItemCode;
@@ -525,13 +609,19 @@ namespace ASPNET.StarterKit.Portal
             Title = EmptyToNone(item.Title);
             Summary = EmptyToNone(item.Summary);
             Description = EmptyToNone(item.Description);
-            ItemStatus = item.ItemStatus;
+            ItemStatus = item.IsOverdue ? item.ItemStatus + " / Overdue" : item.ItemStatus;
             PriorityKey = EmptyToNone(item.PriorityKey);
             OwnerText = GetOwnerText(item);
             LastActionUtcText = item.LastActionUtc.HasValue
                 ? item.LastActionUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
                 : "(none)";
             LastActionComment = EmptyToNone(item.LastActionComment);
+            CollaborationItemEventInfo latestComment = (visibleEvents ?? new List<CollaborationItemEventInfo>())
+                .Where(itemEvent => string.Equals(itemEvent.EventType, PortalCollaborationItemEventTypes.Comment, StringComparison.Ordinal))
+                .OrderByDescending(itemEvent => itemEvent.OccurredUtc)
+                .ThenByDescending(itemEvent => itemEvent.EventId)
+                .FirstOrDefault();
+            LatestVisibleComment = latestComment == null ? "(none)" : EmptyToNone(latestComment.Comment);
         }
 
         /// <summary><lang><zh-CN>协同事项主键。</zh-CN><en>Collaboration-item primary key.</en></lang></summary>
@@ -566,6 +656,9 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary><lang><zh-CN>最近办理意见。</zh-CN><en>Latest handling comment.</en></lang></summary>
         public string LastActionComment { get; private set; }
+
+        /// <summary><lang><zh-CN>当前管理员可见的最新评论。</zh-CN><en>Latest comment visible to the current administrator.</en></lang></summary>
+        public string LatestVisibleComment { get; private set; }
 
         private static string GetOwnerText(CollaborationItemInfo item)
         {

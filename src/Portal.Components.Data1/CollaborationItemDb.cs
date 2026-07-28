@@ -24,6 +24,8 @@ namespace ASPNET.StarterKit.Portal
         private const string EventTableName = "PortalBiz_CollaborationItemEvents";
         private readonly PortalBizDbContext context;
         private readonly IReferenceDataDb referenceDataDb;
+        private readonly IUsersDb usersDb;
+        private readonly IRolesDb rolesDb;
 
         /// <summary>
         /// <lang>
@@ -43,16 +45,33 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Governed reference-data catalog reader used to revalidate type and priority stable keys before writing.</en>
         /// </l>
         /// </param>
-        public CollaborationItemDb(PortalBizDbContext context, IReferenceDataDb referenceDataDb)
+        /// <param name="usersDb">
+        /// <l>
+        ///   <zh-CN>门户用户服务，用于在状态和评论写入时重新确认动作人。</zh-CN>
+        ///   <en>Portal-user service used to re-confirm the actor during workflow and comment writes.</en>
+        /// </l>
+        /// </param>
+        /// <param name="rolesDb">
+        /// <l>
+        ///   <zh-CN>角色权限服务，用于按当前映射检查负责人和管理员权限。</zh-CN>
+        ///   <en>Role-permission service used to check current handler and administrator permissions.</en>
+        /// </l>
+        /// </param>
+        public CollaborationItemDb(PortalBizDbContext context, IReferenceDataDb referenceDataDb, IUsersDb usersDb, IRolesDb rolesDb)
         {
             this.context = context;
             this.referenceDataDb = referenceDataDb;
+            this.usersDb = usersDb;
+            this.rolesDb = rolesDb;
         }
 
         /// <inheritdoc />
         public bool IsSchemaAvailable()
         {
-            return HasTable(ItemTableName) && HasTable(EventTableName);
+            return HasTable(ItemTableName) &&
+                   HasTable(EventTableName) &&
+                   HasColumn(EventTableName, "EventType") &&
+                   HasColumn(EventTableName, "VisibilityScope");
         }
 
         /// <inheritdoc />
@@ -153,9 +172,9 @@ VALUES
 SET @ItemId = CONVERT(BIGINT, SCOPE_IDENTITY());
 
 INSERT INTO [dbo].[PortalBiz_CollaborationItemEvents]
-    ([ItemId], [OccurredUtc], [ActionKey], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
+    ([ItemId], [OccurredUtc], [EventType], [ActionKey], [VisibilityScope], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
 VALUES
-    (@ItemId, @SubmittedUtc, N'Submit', @InitiatorUserId, @SubmittedBy, NULL, N'Submitted', @Summary, NULL);
+    (@ItemId, @SubmittedUtc, N'WorkflowAction', N'Submit', N'ItemParticipants', @InitiatorUserId, @SubmittedBy, NULL, N'Submitted', @Summary, NULL);
 
 SELECT @ItemId;",
                     new SqlParameter("@ItemCode", itemCode),
@@ -233,6 +252,133 @@ WHERE [Item].[ItemStatus] = @ItemStatus",
         }
 
         /// <inheritdoc />
+        public IList<CollaborationItemEventInfo> GetVisibleEvents(long itemId, int actorUserId)
+        {
+            if (itemId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<CollaborationItemEventInfo>();
+            }
+
+            CollaborationItemInfo item = FindItem(itemId);
+            CollaborationItemActorAuthorization actor;
+            if (item == null || !TryGetActorAuthorization(actorUserId, out actor) || !CanParticipate(item, actor))
+            {
+                return new List<CollaborationItemEventInfo>();
+            }
+
+            try
+            {
+                string visibilityClause = actor.IsAdministrator
+                    ? string.Empty
+                    : @"
+  AND ([Event].[EventType] = N'WorkflowAction' OR [Event].[VisibilityScope] = N'ItemParticipants')";
+                return context.Database.SqlQuery<CollaborationItemEventInfo>(
+                    @"
+SELECT
+    [Event].[EventId],
+    [Event].[ItemId],
+    [Event].[EventType],
+    [Event].[ActionKey],
+    [Event].[VisibilityScope],
+    [Event].[ActorUserId],
+    [Event].[ActorName],
+    [Event].[OccurredUtc],
+    [Event].[FromStatus],
+    [Event].[ToStatus],
+    [Event].[Comment]
+FROM [dbo].[PortalBiz_CollaborationItemEvents] AS [Event]
+WHERE [Event].[ItemId] = @ItemId" + visibilityClause + @"
+ORDER BY [Event].[OccurredUtc] ASC, [Event].[EventId] ASC;",
+                    new SqlParameter("@ItemId", itemId)).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<CollaborationItemEventInfo>();
+            }
+        }
+
+        /// <inheritdoc />
+        public CollaborationItemCommentResult AddComment(CollaborationItemCommentCreateRequest request)
+        {
+            request = request ?? new CollaborationItemCommentCreateRequest();
+            if (request.ItemId <= 0)
+            {
+                return new CollaborationItemCommentResult(false, 0, 0, "Collaboration item id is required.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "Collaboration item schema is unavailable.");
+            }
+
+            string comment = NormalizeOptionalText(request.Comment, 1000);
+            if (string.IsNullOrWhiteSpace(comment))
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "A plain-text comment is required.");
+            }
+
+            if ((request.Comment ?? string.Empty).Trim().Length > 1000)
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "The plain-text comment cannot exceed 1000 characters.");
+            }
+
+            string visibilityScope = NormalizeText(request.VisibilityScope, 30);
+            if (string.IsNullOrWhiteSpace(visibilityScope))
+            {
+                visibilityScope = PortalCollaborationItemVisibilityScopes.ItemParticipants;
+            }
+
+            if (!IsKnownVisibilityScope(visibilityScope))
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "The requested comment visibility scope is not supported.");
+            }
+
+            CollaborationItemInfo item = FindItem(request.ItemId);
+            CollaborationItemActorAuthorization actor;
+            if (item == null || !TryGetActorAuthorization(request.ActorUserId, out actor))
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "A signed-in portal user is required to add a comment.");
+            }
+
+            if (!CanParticipate(item, actor))
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "The current user is not allowed to comment on this item.");
+            }
+
+            if (string.Equals(visibilityScope, PortalCollaborationItemVisibilityScopes.Administrators, StringComparison.Ordinal) && !actor.IsAdministrator)
+            {
+                return new CollaborationItemCommentResult(false, request.ItemId, 0, "Only collaboration-item administrators can add administrator-visible comments.");
+            }
+
+            DateTime occurredUtc = request.OccurredUtc ?? DateTime.UtcNow;
+            try
+            {
+                List<long> eventIds = context.Database.SqlQuery<long>(
+                    @"
+INSERT INTO [dbo].[PortalBiz_CollaborationItemEvents]
+    ([ItemId], [OccurredUtc], [EventType], [ActionKey], [VisibilityScope], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
+VALUES
+    (@ItemId, @OccurredUtc, N'Comment', NULL, @VisibilityScope, @ActorUserId, @ActorName, NULL, NULL, @Comment, NULL);
+
+SELECT CONVERT(BIGINT, SCOPE_IDENTITY());",
+                    new SqlParameter("@ItemId", item.ItemId),
+                    new SqlParameter("@OccurredUtc", occurredUtc),
+                    new SqlParameter("@VisibilityScope", visibilityScope),
+                    new SqlParameter("@ActorUserId", actor.ActorUserId),
+                    new SqlParameter("@ActorName", actor.ActorName),
+                    new SqlParameter("@Comment", comment)).ToList();
+                long eventId = eventIds.Count == 0 ? 0 : eventIds[0];
+                return eventId <= 0
+                    ? new CollaborationItemCommentResult(false, item.ItemId, 0, "The collaboration-item comment was not created.")
+                    : new CollaborationItemCommentResult(true, item.ItemId, eventId, "The collaboration-item comment was added.");
+            }
+            catch (Exception)
+            {
+                return new CollaborationItemCommentResult(false, item.ItemId, 0, "The collaboration-item comment could not be added.");
+            }
+        }
+
+        /// <inheritdoc />
         public CollaborationItemResult ApplyAction(CollaborationItemActionRequest request)
         {
             CollaborationItemActionRequest normalized = NormalizeActionRequest(request);
@@ -252,6 +398,29 @@ WHERE [Item].[ItemStatus] = @ItemStatus",
                 return new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item schema is unavailable.");
             }
 
+            CollaborationItemInfo item = FindItem(normalized.ItemId);
+            if (item == null)
+            {
+                return new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item was not found or cannot accept this action.");
+            }
+
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(normalized.ActorUserId, out actor))
+            {
+                return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "A signed-in portal user is required to apply this action.");
+            }
+
+            normalized.ActorName = actor.ActorName;
+            if (!CanApplyAction(item, normalized.ActionKey, actor))
+            {
+                return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "The current user is not allowed to apply this action.");
+            }
+
+            if (ActionRequiresComment(normalized.ActionKey) && string.IsNullOrWhiteSpace(normalized.Comment))
+            {
+                return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "A plain-text handling comment is required for this action.");
+            }
+
             try
             {
                 List<CollaborationItemWriteRow> rows = context.Database.SqlQuery<CollaborationItemWriteRow>(
@@ -266,7 +435,8 @@ DECLARE @Updated TABLE
 UPDATE [dbo].[PortalBiz_CollaborationItems]
 SET [ItemStatus] = @TargetStatus,
     [CompletedUtc] = CASE
-        WHEN @TargetStatus IN (N'Completed', N'Rejected', N'Cancelled', N'Closed') THEN @OccurredUtc
+        WHEN @TargetStatus IN (N'Completed', N'Rejected', N'Cancelled') THEN @OccurredUtc
+        WHEN @TargetStatus = N'Closed' THEN [CompletedUtc]
         ELSE NULL
     END,
     [ClosedUtc] = CASE
@@ -282,11 +452,15 @@ OUTPUT inserted.[ItemId], inserted.[ItemCode], deleted.[ItemStatus]
 INTO @Updated ([ItemId], [ItemCode], [FromStatus])
 WHERE [ItemId] = @ItemId
   AND (
+        (@ActionKey = N'Submit' AND [ItemStatus] = N'Draft')
+        OR
         (@ActionKey = N'Start' AND [ItemStatus] = N'Submitted')
         OR
         (@ActionKey = N'Complete' AND [ItemStatus] IN (N'Submitted', N'InProgress'))
         OR
         (@ActionKey = N'Return' AND [ItemStatus] IN (N'Submitted', N'InProgress'))
+        OR
+        (@ActionKey = N'Resubmit' AND [ItemStatus] = N'Returned')
         OR
         (@ActionKey = N'Reject' AND [ItemStatus] IN (N'Submitted', N'InProgress'))
         OR
@@ -296,11 +470,13 @@ WHERE [ItemId] = @ItemId
       );
 
 INSERT INTO [dbo].[PortalBiz_CollaborationItemEvents]
-    ([ItemId], [OccurredUtc], [ActionKey], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
+    ([ItemId], [OccurredUtc], [EventType], [ActionKey], [VisibilityScope], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
 SELECT
     [ItemId],
     @OccurredUtc,
+    N'WorkflowAction',
     @ActionKey,
+    N'ItemParticipants',
     @ActorUserId,
     @ActorName,
     [FromStatus],
@@ -352,6 +528,13 @@ SELECT TOP (@Take)
     [Item].[OrganizationUnitId],
     [Item].[PriorityKey],
     [Item].[DueUtc],
+    CAST(CASE
+        WHEN [Item].[ItemStatus] IN (N'Submitted', N'InProgress', N'Returned')
+         AND [Item].[DueUtc] IS NOT NULL
+         AND [Item].[DueUtc] < SYSUTCDATETIME()
+        THEN 1
+        ELSE 0
+    END AS BIT) AS [IsOverdue],
     [Item].[SubmittedUtc],
     [Item].[CompletedUtc],
     [Item].[ClosedUtc],
@@ -389,6 +572,128 @@ ORDER BY ISNULL([Item].[LastActionUtc], [Item].[CreatedUtc]) DESC, [Item].[ItemI
             {
                 return false;
             }
+        }
+
+        private bool HasColumn(string tableName, string columnName)
+        {
+            try
+            {
+                return context.Database.SqlQuery<int>(
+                    "SELECT CASE WHEN COL_LENGTH(N'[dbo].[" + tableName + "]', @ColumnName) IS NULL THEN 0 ELSE 1 END",
+                    new SqlParameter("@ColumnName", columnName)).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private CollaborationItemInfo FindItem(long itemId)
+        {
+            try
+            {
+                return QueryItems(
+                    @"
+WHERE [Item].[ItemId] = @ItemId",
+                    1,
+                    new SqlParameter("@ItemId", itemId)).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        private bool TryGetActorAuthorization(int? actorUserId, out CollaborationItemActorAuthorization authorization)
+        {
+            authorization = null;
+            if (!actorUserId.HasValue || actorUserId.Value <= 0 || usersDb == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                IUserItem actor = usersDb.FindUserById(actorUserId.Value);
+                if (actor == null || string.IsNullOrWhiteSpace(actor.Name))
+                {
+                    return false;
+                }
+
+                string[] permissionKeys = rolesDb == null
+                    ? new string[0]
+                    : (rolesDb.GetPermissionKeysByUserName(actor.Name) ?? Enumerable.Empty<string>())
+                        .Where(key => !string.IsNullOrWhiteSpace(key))
+                        .Distinct(StringComparer.OrdinalIgnoreCase)
+                        .ToArray();
+                string[] roleNames = (usersDb.GetRoleNamesByUser(actor.Name) ?? Enumerable.Empty<string>())
+                    .Where(name => !string.IsNullOrWhiteSpace(name))
+                    .ToArray();
+                bool isAdministrator = roleNames.Any(name => string.Equals(name, PortalRoleNames.Administrators, StringComparison.OrdinalIgnoreCase)) ||
+                                       permissionKeys.Any(key => string.Equals(key, PortalPermissionKeys.BusinessCollaborationAdmin, StringComparison.OrdinalIgnoreCase));
+                authorization = new CollaborationItemActorAuthorization(actor.UserId, NormalizeText(actor.Name, 100), permissionKeys, isAdministrator);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private static bool CanParticipate(CollaborationItemInfo item, CollaborationItemActorAuthorization actor)
+        {
+            return item != null && actor != null &&
+                   (actor.IsAdministrator ||
+                    item.InitiatorUserId == actor.ActorUserId ||
+                    (item.OwnerUserId.HasValue && item.OwnerUserId.Value == actor.ActorUserId) ||
+                    HasOwnerRolePermission(item, actor));
+        }
+
+        private static bool CanApplyAction(CollaborationItemInfo item, string actionKey, CollaborationItemActorAuthorization actor)
+        {
+            if (item == null || actor == null)
+            {
+                return false;
+            }
+
+            bool isInitiator = item.InitiatorUserId == actor.ActorUserId;
+            bool isHandler = (item.OwnerUserId.HasValue && item.OwnerUserId.Value == actor.ActorUserId) || HasOwnerRolePermission(item, actor);
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal) ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Complete, StringComparison.Ordinal) ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal) ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal))
+            {
+                return actor.IsAdministrator || isHandler;
+            }
+
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Submit, StringComparison.Ordinal) ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal) ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Cancel, StringComparison.Ordinal))
+            {
+                return actor.IsAdministrator || isInitiator;
+            }
+
+            return string.Equals(actionKey, PortalCollaborationItemActions.Close, StringComparison.Ordinal) && actor.IsAdministrator;
+        }
+
+        private static bool HasOwnerRolePermission(CollaborationItemInfo item, CollaborationItemActorAuthorization actor)
+        {
+            return item != null &&
+                   actor != null &&
+                   !string.IsNullOrWhiteSpace(item.OwnerRoleKey) &&
+                   actor.PermissionKeys.Any(key => string.Equals(key, item.OwnerRoleKey, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private static bool ActionRequiresComment(string actionKey)
+        {
+            return string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal) ||
+                   string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal);
+        }
+
+        private static bool IsKnownVisibilityScope(string visibilityScope)
+        {
+            return string.Equals(visibilityScope, PortalCollaborationItemVisibilityScopes.ItemParticipants, StringComparison.Ordinal) ||
+                   string.Equals(visibilityScope, PortalCollaborationItemVisibilityScopes.Administrators, StringComparison.Ordinal);
         }
 
         private static CollaborationItemCreateRequest NormalizeCreateRequest(CollaborationItemCreateRequest request)
@@ -429,6 +734,11 @@ ORDER BY ISNULL([Item].[LastActionUtc], [Item].[CreatedUtc]) DESC, [Item].[ItemI
 
         private static string MapActionToStatus(string actionKey)
         {
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Submit, StringComparison.Ordinal))
+            {
+                return PortalCollaborationItemStatuses.Submitted;
+            }
+
             if (string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal))
             {
                 return PortalCollaborationItemStatuses.InProgress;
@@ -442,6 +752,11 @@ ORDER BY ISNULL([Item].[LastActionUtc], [Item].[CreatedUtc]) DESC, [Item].[ItemI
             if (string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal))
             {
                 return PortalCollaborationItemStatuses.Returned;
+            }
+
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                return PortalCollaborationItemStatuses.Submitted;
             }
 
             if (string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal))
@@ -542,6 +857,31 @@ ORDER BY ISNULL([Item].[LastActionUtc], [Item].[CreatedUtc]) DESC, [Item].[ItemI
             public long ItemId { get; set; }
 
             public string ItemCode { get; set; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>一次服务端身份复核后用于协同事项授权的最小动作人快照。</zh-CN>
+        ///   <en>Minimal actor snapshot used for collaboration-item authorization after a server-side identity recheck.</en>
+        /// </lang>
+        /// </summary>
+        private sealed class CollaborationItemActorAuthorization
+        {
+            public CollaborationItemActorAuthorization(int actorUserId, string actorName, string[] permissionKeys, bool isAdministrator)
+            {
+                ActorUserId = actorUserId;
+                ActorName = actorName;
+                PermissionKeys = permissionKeys ?? new string[0];
+                IsAdministrator = isAdministrator;
+            }
+
+            public int ActorUserId { get; private set; }
+
+            public string ActorName { get; private set; }
+
+            public string[] PermissionKeys { get; private set; }
+
+            public bool IsAdministrator { get; private set; }
         }
     }
 }

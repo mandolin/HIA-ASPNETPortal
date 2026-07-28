@@ -44,6 +44,22 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>读取当前用户可见的事项时间线；服务端会重新验证参与者或管理员范围。</zh-CN>
+        ///   <en>Reads the item timeline visible to the current user; the server revalidates participant or administrator scope.</en>
+        /// </lang>
+        /// </summary>
+        IList<CollaborationItemEventInfo> GetVisibleEvents(long itemId, int actorUserId);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建不改变事项状态的纯文本评论。</zh-CN>
+        ///   <en>Creates a plain-text comment that does not change item state.</en>
+        /// </lang>
+        /// </summary>
+        CollaborationItemCommentResult AddComment(CollaborationItemCommentCreateRequest request);
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>执行协同事项状态动作。</zh-CN>
         ///   <en>Applies a state action to a collaboration item.</en>
         /// </lang>
