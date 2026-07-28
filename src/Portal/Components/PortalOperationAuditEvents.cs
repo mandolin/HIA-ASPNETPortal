@@ -106,6 +106,14 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>审计目标类型：企业协同事项。</zh-CN>
+        ///   <en>Audit target type for an enterprise collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemTargetType = "CollaborationItem";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>自主注册已提交。</zh-CN>
         ///   <en>Self-registration was submitted.</en>
         /// </lang>
@@ -271,5 +279,53 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string BusinessApplicationReviewed = "BusinessApplicationReviewed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已提交。</zh-CN>
+        ///   <en>Enterprise collaboration item was submitted.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemSubmitted = "CollaborationItemSubmitted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已完成。</zh-CN>
+        ///   <en>Enterprise collaboration item was completed.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemCompleted = "CollaborationItemCompleted";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已退回。</zh-CN>
+        ///   <en>Enterprise collaboration item was returned.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemReturned = "CollaborationItemReturned";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已驳回。</zh-CN>
+        ///   <en>Enterprise collaboration item was rejected.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemRejected = "CollaborationItemRejected";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已取消。</zh-CN>
+        ///   <en>Enterprise collaboration item was cancelled.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemCancelled = "CollaborationItemCancelled";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项已关闭。</zh-CN>
+        ///   <en>Enterprise collaboration item was closed.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItemClosed = "CollaborationItemClosed";
     }
 }

@@ -283,6 +283,11 @@ namespace ASPNET.StarterKit.Portal
                 return "BusinessApplications.aspx";
             }
 
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.CollaborationItem, StringComparison.Ordinal))
+            {
+                return "CollaborationItems.aspx";
+            }
+
             return "NotImplemented.aspx";
         }
 

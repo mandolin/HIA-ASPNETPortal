@@ -47,6 +47,20 @@ Checks P2 schema without applying changes.
 
 .LANG zh-CN
 仅检查 P2 schema，不执行变更。
+
+.PARAMETER ApplyP21CollaborationItemMigration
+.LANG en
+Applies P21 collaboration-item migration scripts and changes the target database.
+
+.LANG zh-CN
+执行 P21 企业协同事项迁移脚本，并会修改目标数据库。
+
+.PARAMETER RequireP21CollaborationItemMigration
+.LANG en
+Checks P21 collaboration-item schema without applying changes.
+
+.LANG zh-CN
+仅检查 P21 企业协同事项 schema，不执行变更。
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
@@ -86,7 +100,11 @@ param(
 
     [switch]$ApplyP19BusinessApplicationMigration,
 
-    [switch]$RequireP19BusinessApplicationMigration
+    [switch]$RequireP19BusinessApplicationMigration,
+
+    [switch]$ApplyP21CollaborationItemMigration,
+
+    [switch]$RequireP21CollaborationItemMigration
 )
 
 Set-StrictMode -Version Latest
@@ -443,6 +461,24 @@ FROM
         }
     }
 
+    if ($ApplyP21CollaborationItemMigration) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P21.3 collaboration-item migration scripts')) {
+            $migrationFiles = @(
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_CollaborationItems.sql'),
+                (Join-Path $repoRoot 'src/Setup/PortalBiz_CollaborationItemEvents.sql')
+            )
+
+            foreach ($migrationFile in $migrationFiles) {
+                Invoke-MigrationFile -Connection $connection -Path $migrationFile
+            }
+
+            Add-DatabaseCheck -Name 'P21.3 collaboration item migration application' -Status 'Pass' -Detail 'The idempotent P21.3 collaboration-item migration batches completed.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P21.3 collaboration item migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
@@ -452,7 +488,8 @@ FROM
     $p6BusinessModuleTables = @('PortalBiz_EmployeeProfileConfirmations', 'PortalBiz_EmployeeProfileCorrectionRequests')
     $p12WorkItemTables = @('PortalBiz_WorkItems', 'PortalBiz_WorkItemEvents')
     $p19BusinessApplicationTables = @('PortalBiz_BusinessApplications', 'PortalBiz_WorkflowEvents')
-    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables + $p12WorkItemTables + $p19BusinessApplicationTables)
+    $p21CollaborationItemTables = @('PortalBiz_CollaborationItems', 'PortalBiz_CollaborationItemEvents')
+    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables + $p12WorkItemTables + $p19BusinessApplicationTables + $p21CollaborationItemTables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
     Add-DatabaseCheck -Name 'Base Portal schema' -Status $(if ($missingBaseTables.Count -eq 0) { 'Pass' } else { 'Fail' }) -Detail $(if ($missingBaseTables.Count -eq 0) { 'Required base tables are present.' } else { 'Missing: ' + ($missingBaseTables -join ', ') })
@@ -613,6 +650,21 @@ FROM
     }
     else {
         Add-DatabaseCheck -Name 'P19.4 business application schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP19BusinessApplicationTables -join ', '))
+    }
+
+    $missingP21CollaborationItemTables = @($p21CollaborationItemTables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP21CollaborationItemTables.Count -eq 0) {
+        Add-DatabaseCheck -Name 'P21.3 collaboration item schema' -Status 'Pass' -Detail 'The P21.3 collaboration item and collaboration-item-event tables are present.'
+
+        $collaborationItemCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_CollaborationItems];')
+        $collaborationItemEventCount = [int](Invoke-SqlScalar -Connection $connection -CommandText 'SELECT COUNT(*) FROM [dbo].[PortalBiz_CollaborationItemEvents];')
+        Add-DatabaseCheck -Name 'P21.3 collaboration item row counts' -Status 'Info' -Detail ('Collaboration items: ' + $collaborationItemCount + '; collaboration item events: ' + $collaborationItemEventCount + '.')
+    }
+    elseif ($RequireP21CollaborationItemMigration) {
+        Add-DatabaseCheck -Name 'P21.3 collaboration item schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP21CollaborationItemTables -join ', '))
+    }
+    else {
+        Add-DatabaseCheck -Name 'P21.3 collaboration item schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP21CollaborationItemTables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })

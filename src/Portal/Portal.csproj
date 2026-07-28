@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="Admin\AccessDenied.aspx" />
     <Content Include="Admin\BusinessApplications.aspx" />
+    <Content Include="Admin\CollaborationItems.aspx" />
     <Content Include="Admin\EditAccessDenied.aspx" />
     <Content Include="Admin\EmployeeEdit.aspx" />
     <Content Include="Admin\EmployeeDirectory.aspx" />
@@ -235,6 +236,13 @@
     </Compile>
     <Compile Include="Admin\BusinessApplications.aspx.designer.cs">
       <DependentUpon>BusinessApplications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\CollaborationItems.aspx.cs">
+      <DependentUpon>CollaborationItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CollaborationItems.aspx.designer.cs">
+      <DependentUpon>CollaborationItems.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EditAccessDenied.aspx.cs">
       <DependentUpon>EditAccessDenied.aspx</DependentUpon>

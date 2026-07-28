@@ -112,6 +112,10 @@
     <Compile Include="BusinessApplicationResult.cs" />
     <Compile Include="BusinessApplicationReviewRequest.cs" />
     <Compile Include="BusinessApplicationSubmitRequest.cs" />
+    <Compile Include="CollaborationItemActionRequest.cs" />
+    <Compile Include="CollaborationItemCreateRequest.cs" />
+    <Compile Include="CollaborationItemInfo.cs" />
+    <Compile Include="CollaborationItemResult.cs" />
     <Compile Include="EmployeeProfileConfirmationRequest.cs" />
     <Compile Include="EmployeeProfileConfirmationResult.cs" />
     <Compile Include="EmployeeProfileConfirmationView.cs" />
@@ -127,6 +131,7 @@
     <Compile Include="IEmployeeDirectoryDb.cs" />
     <Compile Include="IEmployeeInfo.cs" />
     <Compile Include="IBusinessApplicationDb.cs" />
+    <Compile Include="ICollaborationItemDb.cs" />
     <Compile Include="IEmployeeProfileConfirmationDb.cs" />
     <Compile Include="IEmployeeProfileCorrectionRequestDb.cs" />
     <Compile Include="IOrganizationUnitInfo.cs" />
@@ -143,6 +148,8 @@
     <Compile Include="PortalRoles.cs" />
     <Compile Include="PortalPermissions.cs" />
     <Compile Include="PortalBusinessApplicationStatuses.cs" />
+    <Compile Include="PortalCollaborationItemActions.cs" />
+    <Compile Include="PortalCollaborationItemStatuses.cs" />
     <Compile Include="PortalDatabaseProfile.cs" />
     <Compile Include="PortalEmployeeStatuses.cs" />
     <Compile Include="PortalHiaBoundaryContracts.cs" />

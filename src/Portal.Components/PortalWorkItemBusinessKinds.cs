@@ -29,5 +29,13 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string BusinessApplication = "BusinessApplication";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项业务对象。</zh-CN>
+        ///   <en>Enterprise collaboration-item business object.</en>
+        /// </lang>
+        /// </summary>
+        public const string CollaborationItem = "CollaborationItem";
     }
 }

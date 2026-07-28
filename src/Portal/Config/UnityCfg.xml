@@ -88,6 +88,10 @@
             <lifetime type="singleton" />
         </register>
 
+        <register type="ICollaborationItemDb" mapTo="CollaborationItemDb">
+            <lifetime type="singleton" />
+        </register>
+
         <register type="IPortalWorkItemDb" mapTo="PortalWorkItemDb">
             <lifetime type="singleton" />
         </register>

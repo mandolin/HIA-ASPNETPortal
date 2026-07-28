@@ -20,6 +20,7 @@
             </div>
             <div class="portal-admin-actions">
                 <a class="CommandButton" href="WorkItems.aspx">Work Items</a>
+                <a class="CommandButton" href="CollaborationItems.aspx">Collaboration Items</a>
                 <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
             </div>
         </div>

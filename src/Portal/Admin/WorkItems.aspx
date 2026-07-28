@@ -5,7 +5,12 @@
     Inherits="ASPNET.StarterKit.Portal.WorkItems"
     MasterPageFile="~/Default.master" %>
 
-<%-- P12.3 轻量待办后台入口：第一版只读集中查看，不提供流程设计器或转办。 --%>
+<%--
+  <lang>
+    <zh-CN>P12.3 轻量待办后台入口：第一版只读集中查看，不提供流程设计器或转办；P21.3 起同时承接协同事项待办投影。</zh-CN>
+    <en>P12.3 lightweight work-item Admin entry: the first version is a read-only central view without workflow designer or reassignment; P21.3 also projects collaboration-item work entries here.</en>
+  </lang>
+--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="portal-admin-page portal-admin-work-items">
         <div class="portal-admin-header">
@@ -15,6 +20,7 @@
             </div>
             <div class="portal-admin-actions">
                 <a class="CommandButton" href="EmployeeProfileCorrectionRequests.aspx">Correction Requests</a>
+                <a class="CommandButton" href="CollaborationItems.aspx">Collaboration Items</a>
                 <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
             </div>
         </div>

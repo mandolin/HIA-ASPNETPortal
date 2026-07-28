@@ -268,6 +268,54 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>创建企业协同事项。</zh-CN>
+        ///   <en>Create enterprise collaboration items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationCreate = "Business.Collaboration.Create";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看本人发起或本人负责的企业协同事项。</zh-CN>
+        ///   <en>View enterprise collaboration items initiated by or assigned to oneself.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationViewOwn = "Business.Collaboration.ViewOwn";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理分派给本人或本人角色的企业协同事项。</zh-CN>
+        ///   <en>Handle enterprise collaboration items assigned to oneself or one's role.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationHandle = "Business.Collaboration.Handle";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看全部企业协同事项。</zh-CN>
+        ///   <en>View all enterprise collaboration items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationViewAll = "Business.Collaboration.ViewAll";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理企业协同事项。</zh-CN>
+        ///   <en>Administer enterprise collaboration items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationAdmin = "Business.Collaboration.Admin";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看企业协同事项流程事件。</zh-CN>
+        ///   <en>View enterprise collaboration-item workflow events.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationEventsView = "Business.Collaboration.Events.View";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查看主题设置。</zh-CN>
         ///   <en>View theme settings.</en>
         /// </lang>
@@ -444,6 +492,12 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationAdmin, "Business.Application", "抽象业务申请旧聚合管理权限。"),
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkflowView, "Business.Workflow", "查看业务流程事件。"),
             new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkflowAdmin, "Business.Workflow", "业务流程旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationCreate, "Business.Collaboration", "创建企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationViewOwn, "Business.Collaboration", "查看本人发起或本人负责的企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationHandle, "Business.Collaboration", "处理分派给本人或本人角色的企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationViewAll, "Business.Collaboration", "查看全部企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationAdmin, "Business.Collaboration", "管理企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationEventsView, "Business.Collaboration", "查看企业协同事项流程事件。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeView, "Theme", "查看主题设置。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ThemeEdit, "Theme", "编辑主题设置和 Tab 覆盖。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),

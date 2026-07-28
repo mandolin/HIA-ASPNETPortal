@@ -231,7 +231,9 @@ $requiredScripts = @(
     'PortalBiz_WorkItems.sql',
     'PortalBiz_WorkItemEvents.sql',
     'PortalBiz_BusinessApplications.sql',
-    'PortalBiz_WorkflowEvents.sql'
+    'PortalBiz_WorkflowEvents.sql',
+    'PortalBiz_CollaborationItems.sql',
+    'PortalBiz_CollaborationItemEvents.sql'
 )
 $existingScriptNames = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
 foreach ($file in $allSqlFiles) {
@@ -272,7 +274,9 @@ $extensionScripts = @(
     'PortalBiz_WorkItems.sql',
     'PortalBiz_WorkItemEvents.sql',
     'PortalBiz_BusinessApplications.sql',
-    'PortalBiz_WorkflowEvents.sql'
+    'PortalBiz_WorkflowEvents.sql',
+    'PortalBiz_CollaborationItems.sql',
+    'PortalBiz_CollaborationItemEvents.sql'
 )
 $extensionUseMatches = @(Find-SqlMatches -Pattern '(?im)^\s*USE\s+\[[^\]]+\]' -IncludeNames $extensionScripts)
 Add-MatrixCheck -Status $(if ($extensionUseMatches.Count -eq 0) { 'Pass' } else { 'Fail' }) -Code 'MIGRATION-NO-HARDCODED-DB' -Message 'Modern extension migrations do not hard-code database context.' -Evidence ($extensionUseMatches -join '; ')

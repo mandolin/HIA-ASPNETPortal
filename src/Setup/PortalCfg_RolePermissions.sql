@@ -80,6 +80,12 @@ BEGIN
         (N'Business.Application.Admin'),
         (N'Business.Workflow.View'),
         (N'Business.Workflow.Admin'),
+        (N'Business.Collaboration.Create'),
+        (N'Business.Collaboration.ViewOwn'),
+        (N'Business.Collaboration.Handle'),
+        (N'Business.Collaboration.ViewAll'),
+        (N'Business.Collaboration.Admin'),
+        (N'Business.Collaboration.Events.View'),
         (N'Theme.View'),
         (N'Theme.Edit'),
         (N'Module.Catalog.View'),
@@ -126,7 +132,9 @@ BEGIN
     INSERT INTO @AllUsersPermissions ([PermissionKey])
     VALUES
         (N'Business.Application.Submit'),
-        (N'Business.Application.ViewOwn');
+        (N'Business.Application.ViewOwn'),
+        (N'Business.Collaboration.Create'),
+        (N'Business.Collaboration.ViewOwn');
 
     INSERT INTO [dbo].[PortalCfg_RolePermissions]
         ([RoleId], [PermissionKey], [IsEnabled], [UpdatedUtc], [UpdatedBy], [Notes])
@@ -135,8 +143,8 @@ BEGIN
         [Permissions].[PermissionKey],
         1,
         SYSUTCDATETIME(),
-        N'P19.4Seed',
-        N'All Users grant for abstract business-application submission.'
+        N'P21.3Seed',
+        N'All Users grant for abstract business application and collaboration-item submission.'
     FROM @AllUsersPermissions AS [Permissions]
     WHERE NOT EXISTS
     (

@@ -1,0 +1,45 @@
+using System.Collections.Generic;
+
+namespace ASPNET.StarterKit.Portal
+{
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>企业协同事项和事项事件的数据访问契约。</zh-CN>
+    ///   <en>Data-access contract for enterprise collaboration items and item events.</en>
+    /// </lang>
+    /// </summary>
+    public interface ICollaborationItemDb
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查协同事项主表和事件表是否已部署。</zh-CN>
+        ///   <en>Checks whether the collaboration-item fact and event tables are deployed.</en>
+        /// </lang>
+        /// </summary>
+        bool IsSchemaAvailable();
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建并提交一条企业协同事项。</zh-CN>
+        ///   <en>Creates and submits one enterprise collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        CollaborationItemResult CreateSubmittedItem(CollaborationItemCreateRequest request);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取后台协同事项列表。</zh-CN>
+        ///   <en>Reads the administration collaboration-item list.</en>
+        /// </lang>
+        /// </summary>
+        IList<CollaborationItemInfo> GetAdminItems(string status, int take);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>执行协同事项状态动作。</zh-CN>
+        ///   <en>Applies a state action to a collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        CollaborationItemResult ApplyAction(CollaborationItemActionRequest request);
+    }
+}
