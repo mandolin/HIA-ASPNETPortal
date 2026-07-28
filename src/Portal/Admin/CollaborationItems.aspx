@@ -7,8 +7,8 @@
 
 <%--
   <lang>
-    <zh-CN>P21.3 企业协同事项后台页用于验证泛化企业能力对象，不承载科研、井设计、情报等具体领域字段。</zh-CN>
-    <en>The P21.3 enterprise collaboration-item Admin page validates the generalized enterprise capability object and does not carry research, well-design, intelligence, or other domain-specific fields.</en>
+    <zh-CN>P21.3 企业协同事项后台页用于验证泛化企业能力对象，不承载具体领域字段。</zh-CN>
+    <en>The P21.3 enterprise collaboration-item Admin page validates the generalized enterprise capability object and does not carry domain-specific fields.</en>
   </lang>
 --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
