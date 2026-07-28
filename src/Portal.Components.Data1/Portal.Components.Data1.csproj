@@ -68,6 +68,7 @@
     <Compile Include="AnnouncementsDb.cs" />
     <Compile Include="BusinessApplicationDb.cs" />
     <Compile Include="CollaborationItemDb.cs" />
+    <Compile Include="ReferenceDataDb.cs" />
     <Compile Include="ContactsDb.cs" />
     <Compile Include="DocumentsDb.cs" />
     <Compile Include="EventsDb.cs" />

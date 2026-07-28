@@ -29,6 +29,15 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>受治理参考数据目录读取服务，用于后台创建表单的类型和优先级选择。</zh-CN>
+        ///   <en>Governed reference-data catalog reader for type and priority selectors on the administration create form.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IReferenceDataDb ReferenceDataDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>轻量待办数据服务，用于把事项提交和处理结果投影到后台待办。</zh-CN>
         ///   <en>Lightweight work-item data service used to project item submissions and handling results into the administration work queue.</en>
         /// </lang>
@@ -60,6 +69,7 @@ namespace ASPNET.StarterKit.Portal
 
             if (!IsPostBack)
             {
+                BindReferenceDataLists();
                 BindStatusFilter();
                 BindItems();
             }
@@ -88,7 +98,7 @@ namespace ASPNET.StarterKit.Portal
             CollaborationItemResult result = CollaborationItemDb.CreateSubmittedItem(
                 new CollaborationItemCreateRequest
                 {
-                    ItemTypeKey = ItemTypeKeyTextBox.Text,
+                    ItemTypeKey = ItemTypeList.SelectedValue,
                     Title = TitleTextBox.Text,
                     Summary = SummaryTextBox.Text,
                     Description = DescriptionTextBox.Text,
@@ -204,6 +214,27 @@ namespace ASPNET.StarterKit.Portal
             StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Cancelled, PortalCollaborationItemStatuses.Cancelled));
             StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Closed, PortalCollaborationItemStatuses.Closed));
             StatusFilterList.SelectedValue = PortalCollaborationItemStatuses.Submitted;
+        }
+
+        private void BindReferenceDataLists()
+        {
+            BindReferenceDataList(ItemTypeList, PortalReferenceDataSets.CollaborationItemType);
+            BindReferenceDataList(PriorityList, PortalReferenceDataSets.CollaborationPriority);
+        }
+
+        private void BindReferenceDataList(DropDownList list, string referenceSetKey)
+        {
+            list.Items.Clear();
+            IList<ReferenceDataItem> items;
+            if (ReferenceDataDb == null || !ReferenceDataDb.TryGetActiveItems(referenceSetKey, out items))
+            {
+                items = PortalReferenceDataSets.GetFallbackItems(referenceSetKey);
+            }
+
+            foreach (ReferenceDataItem item in items)
+            {
+                list.Items.Add(new ListItem(item.DisplayName, item.ValueKey));
+            }
         }
 
         private void BindItems()
@@ -359,9 +390,24 @@ namespace ASPNET.StarterKit.Portal
             SummaryTextBox.Text = string.Empty;
             DescriptionTextBox.Text = string.Empty;
             DueUtcTextBox.Text = string.Empty;
-            PriorityList.SelectedValue = "Normal";
-            ItemTypeKeyTextBox.Text = "General";
+            SelectReferenceValue(PriorityList, PortalReferenceDataSets.NormalPriority);
+            SelectReferenceValue(ItemTypeList, PortalReferenceDataSets.GeneralItemType);
             OwnerRoleKeyTextBox.Text = PortalPermissionKeys.BusinessCollaborationHandle;
+        }
+
+        private static void SelectReferenceValue(DropDownList list, string valueKey)
+        {
+            if (list == null)
+            {
+                return;
+            }
+
+            ListItem item = list.Items.FindByValue(valueKey);
+            if (item != null)
+            {
+                list.ClearSelection();
+                item.Selected = true;
+            }
         }
 
         private static string MapWorkItemEventType(string actionKey)

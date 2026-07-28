@@ -12,8 +12,8 @@ namespace ASPNET.StarterKit.Portal
         /// <summary>页面级状态提示。Page-level status message.</summary>
         protected global::System.Web.UI.WebControls.Label MessageLabel;
 
-        /// <summary>事项类型输入框。Item type input.</summary>
-        protected global::System.Web.UI.WebControls.TextBox ItemTypeKeyTextBox;
+        /// <summary>事项类型选择控件。Item type selector.</summary>
+        protected global::System.Web.UI.WebControls.DropDownList ItemTypeList;
 
         /// <summary>负责人角色输入框。Owner role input.</summary>
         protected global::System.Web.UI.WebControls.TextBox OwnerRoleKeyTextBox;

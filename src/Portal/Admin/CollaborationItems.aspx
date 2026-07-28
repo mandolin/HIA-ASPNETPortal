@@ -34,7 +34,7 @@
             <div class="portal-form-grid">
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Type Key</span>
-                    <asp:TextBox ID="ItemTypeKeyTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="80" Text="General" runat="server" />
+                    <asp:DropDownList ID="ItemTypeList" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Owner Role</span>
@@ -42,10 +42,7 @@
                 </div>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Priority</span>
-                    <asp:DropDownList ID="PriorityList" CssClass="NormalTextBox portal-form-input" runat="server">
-                        <asp:ListItem Text="Normal" Value="Normal" />
-                        <asp:ListItem Text="Important" Value="Important" />
-                    </asp:DropDownList>
+                    <asp:DropDownList ID="PriorityList" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Due UTC</span>

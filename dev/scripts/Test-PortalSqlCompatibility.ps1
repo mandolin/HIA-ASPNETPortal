@@ -61,6 +61,20 @@ Checks P21 collaboration-item schema without applying changes.
 
 .LANG zh-CN
 仅检查 P21 企业协同事项 schema，不执行变更。
+
+.PARAMETER ApplyP23ReferenceDataMigration
+.LANG en
+Applies the P23 governed business reference-data migration and changes the target database.
+
+.LANG zh-CN
+执行 P23 受治理业务参考数据迁移，并会修改目标数据库。
+
+.PARAMETER RequireP23ReferenceDataMigration
+.LANG en
+Checks P23 governed business reference-data schema without applying changes.
+
+.LANG zh-CN
+仅检查 P23 受治理业务参考数据 schema，不执行变更。
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
@@ -104,7 +118,11 @@ param(
 
     [switch]$ApplyP21CollaborationItemMigration,
 
-    [switch]$RequireP21CollaborationItemMigration
+    [switch]$RequireP21CollaborationItemMigration,
+
+    [switch]$ApplyP23ReferenceDataMigration,
+
+    [switch]$RequireP23ReferenceDataMigration
 )
 
 Set-StrictMode -Version Latest
@@ -479,6 +497,16 @@ FROM
         }
     }
 
+    if ($ApplyP23ReferenceDataMigration) {
+        if ($PSCmdlet.ShouldProcess('the selected external test database', 'Apply idempotent P23.2 business reference-data migration script')) {
+            Invoke-MigrationFile -Connection $connection -Path (Join-Path $repoRoot 'src/Setup/PortalBiz_ReferenceData.sql')
+            Add-DatabaseCheck -Name 'P23.2 reference-data migration application' -Status 'Pass' -Detail 'The idempotent P23.2 governed business reference-data migration batches completed.'
+        }
+        else {
+            Add-DatabaseCheck -Name 'P23.2 reference-data migration application' -Status 'Info' -Detail 'Skipped by WhatIf or confirmation response.'
+        }
+    }
+
     $baseTables = @('Portal_Users', 'PortalCfg_Globals', 'PortalCfg_Tabs', 'PortalCfg_Modules')
     $p2Tables = @('PortalCfg_SystemSettings', 'PortalCfg_SystemSettingAudits', 'PortalCfg_RegistrationInvites', 'PortalCfg_UserRegistrations', 'PortalCfg_OperationAudits')
     $p3Tables = @('PortalCfg_TabThemeOverrides', 'PortalCfg_ModulePackageStates')
@@ -489,7 +517,8 @@ FROM
     $p12WorkItemTables = @('PortalBiz_WorkItems', 'PortalBiz_WorkItemEvents')
     $p19BusinessApplicationTables = @('PortalBiz_BusinessApplications', 'PortalBiz_WorkflowEvents')
     $p21CollaborationItemTables = @('PortalBiz_CollaborationItems', 'PortalBiz_CollaborationItemEvents')
-    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables + $p12WorkItemTables + $p19BusinessApplicationTables + $p21CollaborationItemTables)
+    $p23ReferenceDataTables = @('PortalBiz_ReferenceData')
+    $existingTables = Get-ExistingTableNames -Connection $connection -TableNames ($baseTables + $p2Tables + $p3Tables + $p5Tables + $p6UserProfileTables + $p6EmployeeOrganizationTables + $p6BusinessModuleTables + $p12WorkItemTables + $p19BusinessApplicationTables + $p21CollaborationItemTables + $p23ReferenceDataTables)
 
     $missingBaseTables = @($baseTables | Where-Object { -not $existingTables.Contains($_) })
     Add-DatabaseCheck -Name 'Base Portal schema' -Status $(if ($missingBaseTables.Count -eq 0) { 'Pass' } else { 'Fail' }) -Detail $(if ($missingBaseTables.Count -eq 0) { 'Required base tables are present.' } else { 'Missing: ' + ($missingBaseTables -join ', ') })
@@ -665,6 +694,26 @@ FROM
     }
     else {
         Add-DatabaseCheck -Name 'P21.3 collaboration item schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP21CollaborationItemTables -join ', '))
+    }
+
+    $missingP23ReferenceDataTables = @($p23ReferenceDataTables | Where-Object { -not $existingTables.Contains($_) })
+    if ($missingP23ReferenceDataTables.Count -eq 0) {
+        Add-DatabaseCheck -Name 'P23.2 reference-data schema' -Status 'Pass' -Detail 'The P23.2 governed business reference-data table is present.'
+
+        $requiredReferenceDataCount = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
+SELECT COUNT(*)
+FROM [dbo].[PortalBiz_ReferenceData]
+WHERE ([ReferenceSetKey] = N'CollaborationItemType' AND [ValueKey] IN (N'General', N'Content', N'Operations', N'Workflow'))
+   OR ([ReferenceSetKey] = N'CollaborationPriority' AND [ValueKey] IN (N'Normal', N'Important'));
+'@)
+        $referenceDataSeedOk = $requiredReferenceDataCount -eq 6
+        Add-DatabaseCheck -Name 'P23.2 reference-data seed coverage' -Status $(if ($referenceDataSeedOk) { 'Pass' } elseif ($RequireP23ReferenceDataMigration) { 'Fail' } else { 'Warning' }) -Detail ('Required active-or-historical reference values found: ' + $requiredReferenceDataCount + ' of 6.')
+    }
+    elseif ($RequireP23ReferenceDataMigration) {
+        Add-DatabaseCheck -Name 'P23.2 reference-data schema' -Status 'Fail' -Detail ('Missing: ' + ($missingP23ReferenceDataTables -join ', '))
+    }
+    else {
+        Add-DatabaseCheck -Name 'P23.2 reference-data schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP23ReferenceDataTables -join ', '))
     }
 
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })

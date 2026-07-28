@@ -23,6 +23,7 @@ namespace ASPNET.StarterKit.Portal
         private const string ItemTableName = "PortalBiz_CollaborationItems";
         private const string EventTableName = "PortalBiz_CollaborationItemEvents";
         private readonly PortalBizDbContext context;
+        private readonly IReferenceDataDb referenceDataDb;
 
         /// <summary>
         /// <lang>
@@ -36,9 +37,16 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Enterprise business foundation data context.</en>
         /// </l>
         /// </param>
-        public CollaborationItemDb(PortalBizDbContext context)
+        /// <param name="referenceDataDb">
+        /// <l>
+        ///   <zh-CN>受治理参考数据目录读取服务，用于在写入前复核类型和优先级稳定键。</zh-CN>
+        ///   <en>Governed reference-data catalog reader used to revalidate type and priority stable keys before writing.</en>
+        /// </l>
+        /// </param>
+        public CollaborationItemDb(PortalBizDbContext context, IReferenceDataDb referenceDataDb)
         {
             this.context = context;
+            this.referenceDataDb = referenceDataDb;
         }
 
         /// <inheritdoc />
@@ -70,6 +78,21 @@ namespace ASPNET.StarterKit.Portal
             {
                 return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item schema is unavailable.");
             }
+
+            string itemTypeKey;
+            if (!TryResolveActiveReferenceValue(PortalReferenceDataSets.CollaborationItemType, normalized.ItemTypeKey, out itemTypeKey))
+            {
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "The collaboration item type is not allowed.");
+            }
+
+            string priorityKey;
+            if (!TryResolveActiveReferenceValue(PortalReferenceDataSets.CollaborationPriority, normalized.PriorityKey, out priorityKey))
+            {
+                return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "The collaboration item priority is not allowed.");
+            }
+
+            normalized.ItemTypeKey = itemTypeKey;
+            normalized.PriorityKey = priorityKey;
 
             string itemCode = CreateItemCode(normalized.SubmittedUtc.Value);
             try
@@ -374,7 +397,7 @@ ORDER BY ISNULL([Item].[LastActionUtc], [Item].[CreatedUtc]) DESC, [Item].[ItemI
             DateTime submittedUtc = request.SubmittedUtc ?? DateTime.UtcNow;
             return new CollaborationItemCreateRequest
             {
-                ItemTypeKey = string.IsNullOrWhiteSpace(request.ItemTypeKey) ? "General" : NormalizeText(request.ItemTypeKey, 80),
+                ItemTypeKey = string.IsNullOrWhiteSpace(request.ItemTypeKey) ? PortalReferenceDataSets.GeneralItemType : NormalizeText(request.ItemTypeKey, 80),
                 Title = NormalizeText(request.Title, 200),
                 Summary = NormalizeOptionalText(request.Summary, 500),
                 Description = NormalizeOptionalText(request.Description, 4000),
@@ -460,7 +483,28 @@ ORDER BY ISNULL([Item].[LastActionUtc], [Item].[CreatedUtc]) DESC, [Item].[ItemI
         private static string NormalizePriority(string value)
         {
             string normalized = NormalizeOptionalText(value, 20);
-            return string.Equals(normalized, "Important", StringComparison.OrdinalIgnoreCase) ? "Important" : "Normal";
+            return string.IsNullOrEmpty(normalized) ? PortalReferenceDataSets.NormalPriority : normalized;
+        }
+
+        private bool TryResolveActiveReferenceValue(string referenceSetKey, string candidateValueKey, out string canonicalValueKey)
+        {
+            canonicalValueKey = string.Empty;
+            IList<ReferenceDataItem> activeItems;
+            if (referenceDataDb != null && referenceDataDb.TryGetActiveItems(referenceSetKey, out activeItems))
+            {
+                foreach (ReferenceDataItem item in activeItems)
+                {
+                    if (string.Equals(item.ValueKey, candidateValueKey, StringComparison.OrdinalIgnoreCase))
+                    {
+                        canonicalValueKey = item.ValueKey;
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            return PortalReferenceDataSets.TryResolveFallbackValue(referenceSetKey, candidateValueKey, out canonicalValueKey);
         }
 
         private static string NormalizeStatusFilter(string status)

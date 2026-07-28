@@ -52,6 +52,15 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>受治理参考数据目录读取服务，用于填充类型和优先级。</zh-CN>
+        ///   <en>Governed reference-data catalog reader used to populate types and priorities.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IReferenceDataDb ReferenceDataDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>轻量待办数据服务，用于把用户提交投影到后台处理入口。</zh-CN>
         ///   <en>Lightweight work-item data service used to project user submissions into the administration handling entry.</en>
         /// </lang>
@@ -194,18 +203,27 @@ namespace ASPNET.StarterKit.Portal
 
         private void BindItemTypeList()
         {
-            ItemTypeList.Items.Clear();
-            ItemTypeList.Items.Add(new ListItem("通用协同", "General"));
-            ItemTypeList.Items.Add(new ListItem("资料/内容协同", "Content"));
-            ItemTypeList.Items.Add(new ListItem("资源/运维协同", "Operations"));
-            ItemTypeList.Items.Add(new ListItem("业务流程协同", "Workflow"));
+            BindReferenceDataList(ItemTypeList, PortalReferenceDataSets.CollaborationItemType);
         }
 
         private void BindPriorityList()
         {
-            PriorityList.Items.Clear();
-            PriorityList.Items.Add(new ListItem("普通", "Normal"));
-            PriorityList.Items.Add(new ListItem("重要", "Important"));
+            BindReferenceDataList(PriorityList, PortalReferenceDataSets.CollaborationPriority);
+        }
+
+        private void BindReferenceDataList(DropDownList list, string referenceSetKey)
+        {
+            list.Items.Clear();
+            IList<ReferenceDataItem> items;
+            if (ReferenceDataDb == null || !ReferenceDataDb.TryGetActiveItems(referenceSetKey, out items))
+            {
+                items = PortalReferenceDataSets.GetFallbackItems(referenceSetKey);
+            }
+
+            foreach (ReferenceDataItem item in items)
+            {
+                list.Items.Add(new ListItem(item.DisplayName, item.ValueKey));
+            }
         }
 
         private void BindRecentItems(int userId)
@@ -273,8 +291,23 @@ namespace ASPNET.StarterKit.Portal
             SummaryTextBox.Text = string.Empty;
             DescriptionTextBox.Text = string.Empty;
             DueUtcTextBox.Text = string.Empty;
-            ItemTypeList.SelectedValue = "General";
-            PriorityList.SelectedValue = "Normal";
+            SelectReferenceValue(ItemTypeList, PortalReferenceDataSets.GeneralItemType);
+            SelectReferenceValue(PriorityList, PortalReferenceDataSets.NormalPriority);
+        }
+
+        private static void SelectReferenceValue(DropDownList list, string valueKey)
+        {
+            if (list == null)
+            {
+                return;
+            }
+
+            ListItem item = list.Items.FindByValue(valueKey);
+            if (item != null)
+            {
+                list.ClearSelection();
+                item.Selected = true;
+            }
         }
 
         private void ShowMessage(string message)
