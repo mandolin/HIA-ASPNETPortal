@@ -14,10 +14,10 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P20 模块 Profile 与启动期按需加载治理`；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | `W-anp-P20.4` Legacy 模块治理与发布备忘已完成，`W-anp-P20.5` 待讨论问题已建立 |
-| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P20.5-discussion-questions.md`；确认后执行 P20 验收、回归和 closeout。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
-| 当前完成条件 | P20 完成启动期 Profile gate 设计和当前范围最小实现；中期可选部署包、长期分布式模块注册/同步和 DLL 动态热插拔研究只进入备忘，不作为 P20 完成条件。P19.5 真实数据库 proof 等外置连接串可用后补证。 |
+| 当前大周期 | `W-anp-P20 模块 Profile 与启动期按需加载治理` 已完成；`W-anp-P21 企业能力模块骨架深化` 候选待确认；`W-anp-P18` 继续整体延期 |
+| 当前阶段 | `W-anp-P20.5` 验收与 P20 收口已完成，`W-anp-P21.0` 待讨论问题已建立 |
+| 当前唯一下一步 | 等待用户确认 `work-zone/dev/plans/W-anp-P21.0-discussion-questions.md`；确认后正式拆 `W-anp-P21` 并推进 `W-anp-P21.1` 企业能力对象模型与参考项目抽象规则。在用户明确通知 HIA 基础抽象设计已经具备前，不启动 `W-anp-P18` 的边界 inventory、adapter/facade 或 runtime proof。 |
+| 当前完成条件 | P20 已完成；P21 若确认启动，则完成企业能力对象骨架、生命周期、权限、待办、审计和参考项目抽象规则。P19.5 真实数据库 proof 等外置连接串可用后补证。 |
 | 最近状态更新时间 | 2026-07-28 |
 
 ## Recent Completed Items
@@ -138,13 +138,14 @@
 | P20.2 Profile 配置契约与 registry 设计 | completed | `work-zone/dev/plans/W-anp-P20.2-profile-config-contract.md`、`work-zone/dev/plans/W-anp-P20.2-registry-design.md`、`work-zone/dev/plans/W-anp-P20.2-implementation-result.md`。 |
 | P20.3 启动期按需加载最小实现 | completed | `src/Portal/Components/PortalModuleProfileResolver.cs`、`PortalModuleCatalog.TryResolveDesktopSource`、`DesktopDefault`、`ModuleCatalog`、`TabLayout`、`SystemHealth` 和配置模板已接入 Profile gate；Debug 构建通过，HTTP smoke `TotalChecks=3; FailedChecks=0`；实施结果见 `work-zone/dev/plans/W-anp-P20.3-implementation-result.md`。 |
 | P20.4 Legacy 模块治理与发布备忘 | completed | `work-zone/dev/plans/W-anp-P20.4-legacy-module-governance.md`、`W-anp-P20.4-optional-package-roadmap.md`、`W-anp-P20.4-profile-publish-memo.md`、`W-anp-P20.4-implementation-result.md`；下一步见 `work-zone/dev/plans/W-anp-P20.5-discussion-questions.md`。 |
+| P20.5 验收与 P20 收口 | completed | `work-zone/dev/plans/W-anp-P20.5-acceptance-result.md`、`work-zone/dev/plans/W-anp-P20-closeout.md`；Debug 构建通过，HTTP smoke `TotalChecks=3; FailedChecks=0`，Profile 静态配置检查通过；P21 输入见 `work-zone/dev/plans/W-anp-P21-input-from-P20.md` 和 `W-anp-P21.0-discussion-questions.md`。 |
 
 ## Last Code State
 
 | 仓库 | 本轮关键提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P20.4 任务账本提交 | 本轮主仓仅更新任务账本；`.vscode/settings.json` 仍为本机设置残留，不纳入提交。 |
-| WorkZone | P20.4 文档资料提交 | 本轮新增 Legacy 治理、可选部署包路线、Profile 发布备忘、P20.4 结果、P20.5 待讨论问题和日志；历史日志/截图残留仍按既有策略不处理。 |
+| 主仓库 | P20.5 任务账本本轮待提交 | 本轮主仓仅更新任务账本；`.vscode/settings.json` 仍为本机设置残留，不纳入提交。 |
+| WorkZone | P20.5 验收/closeout 资料本轮待提交 | 本轮新增 P20.5 验收、P20 closeout、P21 输入、P21.0 待讨论问题和当前状态；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 
