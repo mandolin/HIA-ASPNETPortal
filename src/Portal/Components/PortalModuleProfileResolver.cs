@@ -44,6 +44,7 @@ namespace ASPNET.StarterKit.Portal
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
                 { "EnterpriseBase", "HIA.EmployeeProfileConfirm,HIA.EmployeeProfileCorrectionRequest" },
+                { "EnterpriseWorkbench", PortalNavigationRegistry.EnterpriseWorkbenchPackageId },
                 { "BusinessWorkflow", "HIA.BusinessApplicationRequest" },
                 { "LegacyContent", "Legacy.Announcements,Legacy.Contacts,Legacy.Discussion,Legacy.Document,Legacy.Events,Legacy.HtmlModule,Legacy.ImageModule,Legacy.Links,Legacy.QuickLinks,Legacy.XmlModule" },
                 { "DevProbe", "HIA.ModuleProbe" }
@@ -52,7 +53,7 @@ namespace ASPNET.StarterKit.Portal
         private static readonly IDictionary<string, string> DefaultProfileIncludes =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                { "BusinessWorkflow", "EnterpriseBase" }
+                { "BusinessWorkflow", "EnterpriseBase,EnterpriseWorkbench" }
             };
 
         private static readonly IDictionary<string, string> LegacyPackagesBySource =

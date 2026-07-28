@@ -147,6 +147,7 @@
     <Compile Include="EmployeeDirectoryQuery.cs" />
     <Compile Include="PortalRoles.cs" />
     <Compile Include="PortalPermissions.cs" />
+    <Compile Include="PortalNavigationRegistry.cs" />
     <Compile Include="PortalBusinessApplicationStatuses.cs" />
     <Compile Include="PortalCollaborationItemActions.cs" />
     <Compile Include="PortalCollaborationItemStatuses.cs" />
