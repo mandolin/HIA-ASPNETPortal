@@ -147,30 +147,91 @@ else {
     Add-DocumentationCheck -Severity Fail -Code 'DOC-PUBLIC-GUIDE' -Message 'Public documentation artifacts guide needs P13.3 contract updates.'
 }
 
+# <lang>
+# <zh-CN>验证隔离的 JSDoc pilot：仅允许经审查的源码白名单，并且输出必须保持在被忽略的临时目录。</zh-CN>
+# <en>Validate the isolated JSDoc pilot: it permits only the reviewed source allowlist and keeps output in the ignored temporary directory.</en>
+# </lang>
+# <lang>
+# <zh-CN>定位 JSDoc 工具项目的依赖清单；缺失时不得尝试解析或安装依赖。</zh-CN>
+# <en>Locate the JSDoc tool project's dependency manifest; a missing manifest must not trigger parsing or dependency installation.</en>
+# </lang>
 $jsdocPackagePath = Get-RepoPath -RelativePath 'dev/documentation/jsdoc/package.json'
+# <lang>
+# <zh-CN>定位受版本控制的 JSDoc 输入与输出契约配置。</zh-CN>
+# <en>Locate the version-controlled JSDoc input and output contract configuration.</en>
+# </lang>
 $jsdocConfigPath = Get-RepoPath -RelativePath 'dev/documentation/jsdoc/jsdoc.conf.json'
+# <lang>
+# <zh-CN>定位锁文件，以确认该 pilot 不依赖未锁定的瞬态依赖树。</zh-CN>
+# <en>Locate the lockfile so the pilot does not rely on an unlocked transient dependency tree.</en>
+# </lang>
 $jsdocPackageLockPath = Get-RepoPath -RelativePath 'dev/documentation/jsdoc/package-lock.json'
+# <lang>
+# <zh-CN>声明当前经审查的两个 JSDoc 输入；任何增删均须同步更新门禁和公开文档。</zh-CN>
+# <en>Declare the two currently reviewed JSDoc inputs; any addition or removal must update this gate and the public documentation together.</en>
+# </lang>
+$expectedJsdocInputs = @(
+    '../../../src/Portal/gulpfile.js',
+    '../../../src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js'
+)
+# <lang>
+# <zh-CN>以失败为默认值，使缺失文件或不满足契约时产生明确的失败检查而非误报通过。</zh-CN>
+# <en>Default to failure so missing files or an unmet contract produce an explicit failed check rather than a false pass.</en>
+# </lang>
 $jsdocReady = $false
+# <lang>
+# <zh-CN>只有清单、配置和锁文件均存在时才解析 JSON；这样损坏或不完整的工具项目不会被视为可交接。</zh-CN>
+# <en>Parse JSON only when the manifest, configuration, and lockfile all exist, so a damaged or incomplete tool project is never considered handoff-ready.</en>
+# </lang>
 if ((Test-Path -LiteralPath $jsdocPackagePath -PathType Leaf) -and
     (Test-Path -LiteralPath $jsdocConfigPath -PathType Leaf) -and
     (Test-Path -LiteralPath $jsdocPackageLockPath -PathType Leaf)) {
-    $package = Get-Utf8Text -LiteralPath $jsdocPackagePath | ConvertFrom-Json
-    $config = Get-Utf8Text -LiteralPath $jsdocConfigPath | ConvertFrom-Json
-    $sourceIncludes = @($config.source.include)
-    $destination = [string]$config.opts.destination
-    $integrationOutput = [string]$config.opts.hia.integration.outputFile
+    # <lang>
+    # <zh-CN>读取 JSDoc 依赖声明，以验证 HIA 插件和主题仍在隔离工具项目内。</zh-CN>
+    # <en>Read the JSDoc dependency manifest to verify that the HIA plugin and theme remain inside the isolated tool project.</en>
+    # </lang>
+    $jsdocPackage = Get-Utf8Text -LiteralPath $jsdocPackagePath | ConvertFrom-Json
+    # <lang>
+    # <zh-CN>读取 JSDoc 配置，以比较实际白名单和受限生成目录。</zh-CN>
+    # <en>Read the JSDoc configuration to compare the actual allowlist and constrained generated directories.</en>
+    # </lang>
+    $jsdocConfig = Get-Utf8Text -LiteralPath $jsdocConfigPath | ConvertFrom-Json
+    # <lang>
+    # <zh-CN>收集配置的源码输入；顺序不构成安全边界，集合内容才构成边界。</zh-CN>
+    # <en>Collect configured source inputs; their contents, rather than their order, form the security boundary.</en>
+    # </lang>
+    $sourceIncludes = @($jsdocConfig.source.include)
+    # <lang>
+    # <zh-CN>比较期望与实际输入集合，以发现遗漏、未经审查的新增输入或重复项。</zh-CN>
+    # <en>Compare expected and actual input sets to detect omissions, unreviewed additions, or duplicate entries.</en>
+    # </lang>
+    $jsdocInputDifferences = @(Compare-Object -ReferenceObject $expectedJsdocInputs -DifferenceObject $sourceIncludes)
+    # <lang>
+    # <zh-CN>保留 HTML 文档输出目录，用于防止生成物漂移到可提交或运行时路径。</zh-CN>
+    # <en>Keep the HTML documentation output directory to prevent generated artifacts from drifting into tracked or runtime paths.</en>
+    # </lang>
+    $destination = [string]$jsdocConfig.opts.destination
+    # <lang>
+    # <zh-CN>保留 integration JSON 输出目录；其边界必须与 HTML 输出同样受控。</zh-CN>
+    # <en>Keep the integration JSON output directory; its boundary must be controlled just like the HTML output.</en>
+    # </lang>
+    $integrationOutput = [string]$jsdocConfig.opts.hia.integration.outputFile
+    # <lang>
+    # <zh-CN>仅当隔离依赖、精确输入白名单和两个临时输出边界同时成立时，才允许 JSDoc pilot 通过 readiness。</zh-CN>
+    # <en>Allow the JSDoc pilot to pass readiness only when isolated dependencies, the exact input allowlist, and both temporary output boundaries all hold.</en>
+    # </lang>
     $jsdocReady =
-        ($package.private -eq $true) -and
-        ($null -ne $package.devDependencies.'@mandolin/jsdoc-plugin-hia-sys') -and
-        ($null -ne $package.devDependencies.'@mandolin/jsdoc-theme-hia') -and
-        ($sourceIncludes.Count -eq 1) -and
-        ($sourceIncludes[0] -eq '../../../src/Portal/gulpfile.js') -and
+        ($jsdocPackage.private -eq $true) -and
+        ($null -ne $jsdocPackage.devDependencies.'@mandolin/jsdoc-plugin-hia-sys') -and
+        ($null -ne $jsdocPackage.devDependencies.'@mandolin/jsdoc-theme-hia') -and
+        ($sourceIncludes.Count -eq $expectedJsdocInputs.Count) -and
+        ($jsdocInputDifferences.Count -eq 0) -and
         ($destination -eq '../../../temp/documentation/jsdoc') -and
         ($integrationOutput -eq '../../../temp/documentation/jsdoc/hia-integration.json')
 }
 
 if ($jsdocReady) {
-    Add-DocumentationCheck -Severity Pass -Code 'DOC-JSDOC-PILOT' -Message 'JSDoc pilot is isolated, locked and writes only to temp/documentation/jsdoc.'
+    Add-DocumentationCheck -Severity Pass -Code 'DOC-JSDOC-PILOT' -Message 'JSDoc pilot is isolated, locked, uses two reviewed source inputs, and writes only to temp/documentation/jsdoc.'
 }
 else {
     Add-DocumentationCheck -Severity Fail -Code 'DOC-JSDOC-PILOT' -Message 'JSDoc pilot isolation, input or output contract needs review.'
@@ -187,27 +248,106 @@ else {
     Add-DocumentationCheck -Severity Fail -Code 'DOC-XML-CONTRACT' -Message '.NET XML documentation boundary needs review.'
 }
 
+# <lang>
+# <zh-CN>验证隔离的 DotNetDoc pilot：清单的允许版本范围和锁文件的解析版本必须一起反映当前已审查的工具链。</zh-CN>
+# <en>Validate the isolated DotNetDoc pilot: both the manifest's accepted range and the lockfile's resolved version must reflect the current reviewed toolchain.</en>
+# </lang>
+# <lang>
+# <zh-CN>定位 DotNetDoc 工具项目清单，以验证其不与 Portal 前端依赖混用。</zh-CN>
+# <en>Locate the DotNetDoc tool-project manifest to verify it remains separate from Portal frontend dependencies.</en>
+# </lang>
 $dotnetDocPackagePath = Get-RepoPath -RelativePath 'dev/documentation/dotnetdoc/package.json'
+# <lang>
+# <zh-CN>定位 DotNetDoc 锁文件，以验证本机 `npm ci` 可复现当前 runner 版本。</zh-CN>
+# <en>Locate the DotNetDoc lockfile to verify that local `npm ci` can reproduce the current runner version.</en>
+# </lang>
 $dotnetDocPackageLockPath = Get-RepoPath -RelativePath 'dev/documentation/dotnetdoc/package-lock.json'
+# <lang>
+# <zh-CN>定位输出检查器；它防止生成内容丢失 source-content 审计信息。</zh-CN>
+# <en>Locate the output checker; it prevents generated content from losing source-content audit information.</en>
+# </lang>
 $dotnetDocCheckerPath = Get-RepoPath -RelativePath 'dev/documentation/dotnetdoc/check-dotnetdoc-output.cjs'
+# <lang>
+# <zh-CN>定位默认配置；它定义常规 pilot 的输入和受限输出目录。</zh-CN>
+# <en>Locate the default configuration; it defines the regular pilot's inputs and constrained output directory.</en>
+# </lang>
 $dotnetDocConfigPath = Get-RepoPath -RelativePath 'dotnetdoc.config.json'
+# <lang>
+# <zh-CN>定位仅 API 回退配置，以确保排障路径不会意外丢失。</zh-CN>
+# <en>Locate the API-only fallback configuration so the troubleshooting path is not accidentally lost.</en>
+# </lang>
 $dotnetDocApiOnlyConfigPath = Get-RepoPath -RelativePath 'dotnetdoc.api-only.config.json'
+# <lang>
+# <zh-CN>定位 source-probe 配置，以确保研究性路径与默认门禁保持显式分离。</zh-CN>
+# <en>Locate the source-probe configuration so the exploratory path remains explicitly separate from the default gate.</en>
+# </lang>
 $dotnetDocSourceProbeConfigPath = Get-RepoPath -RelativePath 'dotnetdoc.source-probe.config.json'
+# <lang>
+# <zh-CN>声明清单中允许的 runner 版本范围；升级必须先审查，再同步此契约。</zh-CN>
+# <en>Declare the runner version range allowed by the manifest; an upgrade must be reviewed before this contract is updated.</en>
+# </lang>
+$expectedDotnetDocRunnerRange = '^0.1.8'
+# <lang>
+# <zh-CN>声明锁文件中当前可复现的 runner 版本；它不能仅由 semver 范围隐式决定。</zh-CN>
+# <en>Declare the runner version currently reproducible from the lockfile; it must not be implied by the semver range alone.</en>
+# </lang>
+$expectedDotnetDocRunnerLockedVersion = '0.1.8'
+# <lang>
+# <zh-CN>以失败为默认值，使缺失或不一致的 pilot 契约明确失败。</zh-CN>
+# <en>Default to failure so a missing or inconsistent pilot contract fails explicitly.</en>
+# </lang>
 $dotnetDocReady = $false
+# <lang>
+# <zh-CN>仅在所有配置和检查器均存在时解析 JSON，避免把不完整工具项目视作可交接。</zh-CN>
+# <en>Parse JSON only when every configuration and checker exists, avoiding treating an incomplete tool project as handoff-ready.</en>
+# </lang>
 if ((Test-Path -LiteralPath $dotnetDocPackagePath -PathType Leaf) -and
     (Test-Path -LiteralPath $dotnetDocPackageLockPath -PathType Leaf) -and
     (Test-Path -LiteralPath $dotnetDocCheckerPath -PathType Leaf) -and
     (Test-Path -LiteralPath $dotnetDocConfigPath -PathType Leaf) -and
     (Test-Path -LiteralPath $dotnetDocApiOnlyConfigPath -PathType Leaf) -and
     (Test-Path -LiteralPath $dotnetDocSourceProbeConfigPath -PathType Leaf)) {
-    $package = Get-Utf8Text -LiteralPath $dotnetDocPackagePath | ConvertFrom-Json
-    $config = Get-Utf8Text -LiteralPath $dotnetDocConfigPath | ConvertFrom-Json
+    # <lang>
+    # <zh-CN>读取依赖清单，以校验隔离性、runner 允许范围和安全解析器覆盖项。</zh-CN>
+    # <en>Read the dependency manifest to validate isolation, the allowed runner range, and the secure parser override.</en>
+    # </lang>
+    $dotnetDocPackage = Get-Utf8Text -LiteralPath $dotnetDocPackagePath | ConvertFrom-Json
+    # <lang>
+    # <zh-CN>以哈希表读取锁文件，以兼容 npm 锁文件的空根键并校验实际解析的 runner 版本。</zh-CN>
+    # <en>Read the lockfile as a hash table to support npm's empty root key and validate the actually resolved runner version.</en>
+    # </lang>
+    $dotnetDocPackageLock = Get-Utf8Text -LiteralPath $dotnetDocPackageLockPath | ConvertFrom-Json -AsHashtable
+    # <lang>
+    # <zh-CN>通过哈希键读取含斜杠的 npm 路径，避免把包路径误当作普通 PowerShell 属性。</zh-CN>
+    # <en>Read the npm path containing slashes through a hash key, avoiding treatment of the package path as an ordinary PowerShell property.</en>
+    # </lang>
+    $dotnetDocRunnerLockEntry = $dotnetDocPackageLock['packages']['node_modules/@hia-doc/dotnetdoc-runner']
+    # <lang>
+    # <zh-CN>将缺失锁条目规范化为空字符串，使版本比较产生 readiness 失败而不产生不透明的空引用异常。</zh-CN>
+    # <en>Normalize a missing lock entry to an empty string so version comparison produces a readiness failure instead of an opaque null-reference exception.</en>
+    # </lang>
+    $dotnetDocRunnerLockedVersion = if ($null -eq $dotnetDocRunnerLockEntry) { '' } else { [string]$dotnetDocRunnerLockEntry['version'] }
+    # <lang>
+    # <zh-CN>读取默认 pilot 配置，以校验输出目录和至少一个输入仍被定义。</zh-CN>
+    # <en>Read the default pilot configuration to validate that its output directory and at least one input remain defined.</en>
+    # </lang>
+    $dotnetDocConfig = Get-Utf8Text -LiteralPath $dotnetDocConfigPath | ConvertFrom-Json
+    # <lang>
+    # <zh-CN>缓存输入数量，避免在完成条件中重复展开配置数组，并明确“至少一个输入”的门禁语义。</zh-CN>
+    # <en>Cache the input count to avoid repeatedly expanding the configuration array in the completion condition and to make the "at least one input" gate explicit.</en>
+    # </lang>
+    $dotnetDocInputCount = @($dotnetDocConfig.inputs).Count
+    # <lang>
+    # <zh-CN>仅当依赖清单、锁定 runner、解析器覆盖、默认输入输出及两个回退边界均完整时，才允许 DotNetDoc pilot 通过 readiness。</zh-CN>
+    # <en>Allow the DotNetDoc pilot to pass readiness only when its manifest, locked runner, parser override, default inputs and outputs, and both fallback boundaries are complete.</en>
+    # </lang>
     $dotnetDocReady =
-        ($package.private -eq $true) -and
-        ($package.devDependencies.'@hia-doc/dotnetdoc-runner' -eq '0.1.3') -and
-        ($package.overrides.'fast-xml-parser' -eq '5.7.0') -and
-        ([string]$config.outputDirectory -eq 'temp/documentation/dotnetdoc') -and
-        (@($config.inputs).Count -gt 0) -and
+        ($dotnetDocPackage.private -eq $true) -and
+        ($dotnetDocPackage.devDependencies.'@hia-doc/dotnetdoc-runner' -eq $expectedDotnetDocRunnerRange) -and
+        ($dotnetDocRunnerLockedVersion -eq $expectedDotnetDocRunnerLockedVersion) -and
+        ($dotnetDocPackage.overrides.'fast-xml-parser' -eq '5.7.0') -and
+        ([string]$dotnetDocConfig.outputDirectory -eq 'temp/documentation/dotnetdoc') -and
+        ($dotnetDocInputCount -gt 0) -and
         (Test-TextContains -RelativePath 'dev/scripts/Build-PortalDotNetDocPilot.ps1' -Pattern 'temp\\documentation') -and
         (Test-TextContains -RelativePath 'dev/documentation/dotnetdoc/check-dotnetdoc-output.cjs' -Pattern 'sourcesContent') -and
         (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'DotNetDoc pilot')

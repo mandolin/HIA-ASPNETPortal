@@ -14,11 +14,13 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 当前大周期 | `W-anp-P22` 与 `W-anp-P23` 已完成当前范围；`W-anp-P24` 为当前条件式入口；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | P23.6 评论/状态规则已完成迁移、服务端授权、审计、SQL、构建和浏览器回归；进入 P24 条件式补证与 `C-anp-P3` 收口准备 |
-| 当前唯一下一步 | 在不重做已完成 P23 回归的前提下，核对 P24 所需真实 SQL/IIS/HTTPS 环境、企业扫描工具或 P19.5 proof 条件；条件可用时形成有范围的补证任务，条件不可用时维护延期证据。test fixture 清理必须作为单列、可审计操作，不自动执行。不得启动通用 BPM、附件二进制或 P18 runtime pilot。 |
-| 当前完成条件 | P24 对每个外部条件给出真实 proof 或明确延期记录，并完成 `C-anp-P3` 收口；P18 仅在用户通知 HIA 基础抽象设计具备后恢复。 |
-| 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，切换隔离副本到 `env=test` 后通过。认证阶段的 EF 外部宿主与早期二进制参数方案均失败并回滚；用户授权后以显式 `SqlParameter` 成功创建 test fixture。P23.2 初次新隔离副本从 `CoreOnly` Profile 启动，按安全门禁跳过 Workbench；仅在该临时副本把 Profile 覆盖为 `EnterpriseWorkbench` 后复测通过。浏览器回归发现 `All Users` 虚拟角色无法参与细粒度权限映射，已通过隐藏配置载体、运行时权限合并和 idempotent SQL seed 修复，并由零成员普通用户浏览器验证。期间嵌套 PowerShell 启动器无法启动构建，改用直接指定 PowerShell 7 执行器后 Debug 构建通过，未发现项目构建失败。 |
+| 当前大周期 | `C-anp-P3`、`W-anp-P24` 与 `W-anp-P25` 已完成当前范围；`W-anp-P26` 为当前治理入口；`W-anp-P18` 继续整体延期 |
+| 当前阶段 | P24.1 完成文档 readiness contract refresh；P24.2 恢复 P19.5 test schema 与测试 Tab；P24.3 以受限、可清理 fixture 完成普通用户提交、管理员审核、只读事实复核与零计数清理。`C-anp-P3` 已条件式收口。P25 已完成 ROP 只读基线、人工抽样、风险矩阵、生成边界、批次与验证设计；P26.1 已完成运营审计门面的注释补强与验证；HIA ROP 注释基线持续生效。 |
+| 当前唯一下一步 | 为 `P26.2` 冻结 `src/Portal.Components.Data1/CollaborationItemDb.cs` 的首个方法级数据访问小批次：先只读定位事务写入、状态转换、参考数据复核、SQL 参数和异常回退边界，再决定不超过一个可构建/可回归范围的注释补强切片。不得直接机械改写整个文件；真实 IIS/HTTPS、目标 SQL Server 版本实例和企业扫描维持延期证据；不得启动通用 BPM、附件二进制或 P18 runtime pilot。 |
+| P24 最近完成小步 | P24.3 新增受限 helper，使用当前 PBKDF2-HMAC-SHA256 凭据契约和最小物理角色，完成 P19 test 库的认证浏览器提交/审核链路。清理前事实为 2 用户、1 个批准申请、2 条 WorkflowEvent、1 条已完成 WorkItem、2 条 WorkItemEvent、2 条审计；Remove 后 Inspect 全部为 0，隔离 Profile 和短生命周期凭据均已清除。 |
+| 当前完成条件 | P24 已对当前可用 test proof 给出真实证据，并对真实 IIS/HTTPS、目标 SQL Server 版本实例和企业扫描给出延期记录；`C-anp-P3` 已收口。P25 的完成条件为形成可执行的历史注释盘点、风险分类、批次和验证设计；P18 仅在用户通知 HIA 基础抽象设计具备后恢复。 |
+| 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，切换隔离副本到 `env=test` 后通过。认证阶段的 EF 外部宿主与早期二进制参数方案均失败并回滚；用户授权后以显式 `SqlParameter` 成功创建 test fixture。P23.2 初次新隔离副本从 `CoreOnly` Profile 启动，按安全门禁跳过 Workbench；仅在该临时副本把 Profile 覆盖为 `EnterpriseWorkbench` 后复测通过。浏览器回归发现 `All Users` 虚拟角色无法参与细粒度权限映射，已通过隐藏配置载体、运行时权限合并和 idempotent SQL seed 修复，并由零成员普通用户浏览器验证。期间嵌套 PowerShell 启动器无法启动构建，改用直接指定 PowerShell 7 执行器后 Debug 构建通过，未发现项目构建失败。P24.2 的 fixture 前置 schema 查询连续两次未完成（PowerShell here-string 语法、再到历史权限表字段假设不符）；未创建用户/凭据。P24.3 的首次 Create 因 PowerShell 将 `byte[]` 展开成 `Object[]` 而被数据库拒绝，未写入数据；改为显式 `byte[]` / `VarBinary` 参数 helper 后成功。Playwright run-code 两次不支持受限执行上下文，已停止该方案并使用不回显密码的本地浏览器输入；最终凭据和剪贴板均已清除。 |
+| 本轮文档 gate 结果 | 初次只读检查的 2 项 contract 漂移已修复：JSDoc 精确校验两个受控输入，DotNetDoc 同时校验清单 `^0.1.8` 和锁文件 `0.1.8`。首次锁文件对象解析因 npm 空根键失败，改为 PowerShell 7 `-AsHashtable` 后通过；不重试未修改方案，也未伪造通过。 |
 | 最近状态更新时间 | 2026-07-29 |
 
 ## Recent Completed Items
@@ -33,6 +35,11 @@
 | P22.5 回归、默认全员权限修复与收口 | completed | 最小角色前台提交 `CI-20260728064445-3293d9dc`、后台可见性，以及零成员默认用户提交 `CI-20260728065849-3d00b308`；`RolesDb` / `PortalCfg_RolePermissions.sql` 修复；证据 `work-zone/dev/evidence/p22.5/20260728-144609/`；`W-anp-P22-closeout.md` 与 P23.0 输入。 |
 | P23.2 参考数据目录浏览器补证 | completed | `mise` 受管 Node 24.12.0 与 Playwright Chromium；隔离 `test` 站点的 Workbench 显示 4 个类型和 2 个优先级，提交 `CI-20260728175628-f30760c7` 后 test 库复核为 `Content` / `Important` / `Submitted`；无凭据、连接串或 Cookie 入库。 |
 | P23.6 评论与状态规则实施及 P23 收口 | completed | `PortalBiz_CollaborationItemCommentWorkflow.sql`、`Test-PortalCollaborationWorkflowSmoke.ps1`、P23.6 SQL 幂等检查（24 项/0 失败）、Debug 构建、mise/Playwright 浏览器回归；结果 `work-zone/dev/plans/W-anp-P23.6-implementation-result.md`，收口 `W-anp-P23-closeout.md`。 |
+| HIA ROP 注释基线采纳与存量治理预案 | completed-current-policy | 已读取项目引导、初始化指南第 7 节与 C# 样例；`AGENTS.md` 已纳入严格 ROP 规则；通知采纳记录 `work-zone/dev/adoption/documentation-notify-state.md`，P25/P26 预案 `W-anp-ROP-comment-governance-roadmap.md`。 |
+| P24.1 文档 readiness contract refresh | completed | `dev/scripts/Test-PortalDocumentationReadiness.ps1`、公开工具说明和 [P24.1 结果](work-zone/dev/plans/W-anp-P24.1-documentation-readiness-contract-refresh.md)；readiness 0 失败，JSDoc/DotNetDoc mise pilot 均通过。 |
+| P24.2/P24.3 P19.5 test 数据库、认证浏览器与清理 proof | completed | P19.4 migration 与场景 seed 在外置 test 库连续应用并复核通过；受限 fixture helper 完成普通用户提交、管理员审核、只读事实复核和全量零计数清理，见 [P24.2 记录](work-zone/dev/plans/W-anp-P24.2-p19.5-test-database-recovery.md)、[P24.3 结果](work-zone/dev/plans/W-anp-P24.3-p19.5-authenticated-browser-result.md)。 |
+| P25 ROP 历史注释基线与治理设计 | completed | 只读证据 `work-zone/dev/evidence/p25/20260729-083600/`；87 个启发式候选文件、P25 风险矩阵、生成边界、人工抽样和 P26 分批计划见 [P25 设计](work-zone/dev/plans/W-anp-P25-rop-baseline-and-governance-design.md)。 |
+| P26.1 运营审计 ROP 注释补强 | completed | `PortalOperationAudit.cs` 的审计写入、受限查询、分页、净化、HTTP 上下文和异常降级已补 `<lang>` 双语说明；代码差异为 0 个非注释行，权限审计 8/0、运维门禁 0 失败、Debug 构建及 XML 文档验证通过；见 [P26.1 结果](work-zone/dev/plans/W-anp-P26.1-portal-operation-audit-result.md)。 |
 | P10.1 合规输入与差距矩阵 | completed | `work-zone/dev/plans/W-anp-P10.1-closeout.md` |
 | P10.2 安全响应头与发布环境治理 | completed | `work-zone/dev/plans/W-anp-P10.2-closeout.md` |
 | P10.3 登录密码前端加密 | completed | `work-zone/dev/plans/W-anp-P10.3-login-encryption-result.md` |
@@ -158,14 +165,15 @@
 
 | 仓库 | 本轮关键提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | P21.5 收口状态本轮待提交 | 本轮主仓只更新任务账本；`.vscode/settings.json` 仍为本机设置残留，不纳入提交。 |
-| WorkZone | P21.5 收口资料本轮待提交 | 本轮新增 P21 closeout、P22 输入、P22.0 待讨论问题和日志，并更新 C-anp-P3、索引与当前状态；历史日志/截图残留仍按既有策略不处理。 |
+| 主仓库 | `76792c4 feat(collaboration): add comment workflow rules` 后有本轮未提交改动 | 本轮更新 ROP 基线、P24.1 readiness gate 和公开工具说明；`.vscode/settings.json` 是既有本机设置残留，不纳入本轮。 |
+| WorkZone | `a60dee4 docs(p23): close comment workflow cycle` 后有本轮未提交资料 | 本轮新增 ROP 采纳/治理预案、P24.1 结果和会话日志，并更新 C-anp-P3、索引与当前状态；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 
 | 事项 | 状态 | 处理原则 |
 | --- | --- | --- |
 | 代码梳理、注释完善与文档化专项 | completed-current-cycle | P15-P17 已完成当前两轮文档化、注释、脚本文档化和生成物清理主线；后续继续 touch-improve，不在 P18 阻塞。 |
+| ROP 历史注释治理 | planned-after-P24 | 新 ROP 基线不追溯性地宣布存量达标；P25 先做独立盘点和治理设计，按实际规模决定是否启动 P26 分批补强与门禁，见 `W-anp-ROP-comment-governance-roadmap.md`。 |
 | PowerShell 注释完整双语化 | completed-current-cycle | P17.1 已将 58 个脚本 comment-based help 缺口清零；外部新增语种机制交由 HIA-Documentation-Sys 后续实现。 |
 | 绿盟/本地企业扫描工具 | pending-user-tool-selection | 用户确认企业合规专项、绿盟类映射和开源扫描工具接入先延期，等待用户确定一到两个开源扫描工具后再启动。 |
 | HIA 集成与跨系统运行时 pilot | deferred-user-blocked | 用户确认 HIA 基础抽象设计尚未启动，因此整个 HIA 集成事项整体延后；只有用户后续明确通知条件满足后，才恢复 P18 或另起 HIA 专项。 |
@@ -174,6 +182,12 @@
 
 | 验证 | 结果 |
 | --- | --- |
+| `Test-PortalDocumentationReadiness.ps1 -HiaDocumentationRoot I:\HIA_SYS_DOC` | P24.1 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=1`。唯一 Pending 为本机不存在的 `I:\HIA_SYS_DOC\work-zone\notify`，不影响已追踪 gate contract。 |
+| `mise exec node@24.12.0 -- ... Build-PortalJsdocPilot.ps1` | P24.1 通过；隔离依赖还原后 JSDoc 生成和 `verify-output.cjs` 均通过。 |
+| `mise exec node@24.12.0 -- ... Build-PortalDotNetDocPilot.ps1 -SkipXmlBuild` | P24.1 通过；隔离依赖还原后生成 `14` 个 artifact，输出检查成功。 |
+| `Test-PortalSqlCompatibility.ps1 -ApplyP19BusinessApplicationMigration ...` | P24.2 外置 test 库通过；SQL Server 2022 Developer、`TotalChecks=25`、`FailedChecks=0`。只应用 P19.4 两份幂等迁移，不触及 dev/production。 |
+| `New-PortalP19BusinessApplicationScenarioSql.ps1 -Apply`（连续两次） | P24.2 通过；`P19-Test-BusinessApplication`、模块定义/实例与 `HIA.BusinessApplicationRequest` 包状态以可重复 SQL 创建或更新。 |
+| P24.2 临时浏览器验证 | 隔离 `env=test` / `BusinessWorkflow` 副本显示 `P19-Test-BusinessApplication` 链接。认证 fixture 前 schema 查询连续失败两次；未尝试登录、未创建用户或凭据，已停止临时 IIS Express 和浏览器。 |
 | `dev/scripts/Get-PortalPowerShellDocumentationInventory.ps1` | P17.5 通过；`TotalScripts=58; ScriptsWithCommentHelp=58; MissingCommentHelp=0; HighRiskMissingHiaLanguageMarkers=0`，证据 `work-zone/dev/evidence/p17.5/20260726-1503/powershell-documentation-inventory.*`。 |
 | `dev/scripts/New-PortalEnterpriseScanBaseline.ps1 -Profile Scan` | P17.5 通过当前源码/配置 baseline；`Pass=15; Warning=1; Fail=0; PendingTargetEnvironment=6`，证据 `work-zone/dev/evidence/p17.5/20260726-1503/20260726-150427-Scan/`。 |
 | `dev/scripts/Test-PortalDocumentationReadiness.ps1` | P17.5 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=0`，证据 `work-zone/dev/evidence/p17.5/20260726-1503/documentation-readiness.*`。 |

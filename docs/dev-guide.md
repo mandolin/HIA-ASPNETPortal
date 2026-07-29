@@ -103,7 +103,9 @@ readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JS
 
 `dev/documentation/jsdoc/` 是独立的 HIA JSDoc 工具项目。它锁定 `@mandolin/jsdoc-plugin-hia-sys@0.1.0`、`@mandolin/jsdoc-theme-hia@0.1.0` 和 `jsdoc@4.0.5`，不改动 `src/Portal/package.json`，因此不会干扰既有 Gulp 或 Visual Studio Task Runner。
 
-首个 pilot 只读取已追踪的 `src/Portal/gulpfile.js`。可在 VSCode 运行 `portal: build JavaScript documentation pilot`，或直接执行：
+当前 pilot 只读取两个已追踪且经审查的输入：`src/Portal/gulpfile.js` 与
+`src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js`。可在 VSCode 运行
+`portal: build JavaScript documentation pilot`，或直接执行：
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Build-PortalJsdocPilot.ps1
@@ -131,8 +133,9 @@ readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JS
 
 ## .NET DotNetDoc Pilot
 
-`dev/documentation/dotnetdoc/` 是独立的 HIA DotNetDoc 工具项目。它锁定 `@hia-doc/dotnetdoc-runner@0.1.3`，并通过工具目录局部
-`.npmrc` 使用 npm 官方 registry；这只影响 DotNetDoc pilot，不改变 Portal 前端依赖或 Gulp 工作流。
+`dev/documentation/dotnetdoc/` 是独立的 HIA DotNetDoc 工具项目。其清单声明
+`@hia-doc/dotnetdoc-runner@^0.1.8`，受版本控制的锁文件解析为 `0.1.8`；并通过工具目录局部 `.npmrc`
+使用 npm 官方 registry。这只影响 DotNetDoc pilot，不改变 Portal 前端依赖或 Gulp 工作流。
 
 默认 pilot 读取四份 Debug XML 文档、代表性 Web Forms 标记注释、一个 Web Forms surface 和 solution/project discovery，
 输出到被忽略的 `temp/documentation/dotnetdoc/`。执行：
@@ -349,6 +352,35 @@ P19.5 业务申请样板页可以先生成可审阅 SQL，不直接修改数据�
 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1 -ConnectionStringsConfigPath '<仓库外>\connectionStrings.config' -Apply -Confirm:$false
 ```
+
+需要补齐 P19.5 的认证浏览器回归时，可使用受限的 fixture helper。它只接受直接父目录名为 `test` 的外置 `connectionStrings.config`，且只创建由 `FixtureId` 确定的一个普通参与者和一个仅具 `Admins` 实体角色的管理员。Create 的密码必须由短生命周期进程以 `SecureString` 交互输入；不得把密码写入命令行、脚本、日志或配置。完成提交和管理员审核后，必须先 Inspect 再 Remove，并确认最终计数均为零：
+
+```powershell
+$testConfig = '<仓库外>\test\connectionStrings.config'
+$participantPassword = Read-Host -AsSecureString 'P19 fixture participant password'
+$administratorPassword = Read-Host -AsSecureString 'P19 fixture administrator password'
+
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
+  -ConnectionStringsConfigPath $testConfig `
+  -Action Create `
+  -FixtureId 'p19-local-001' `
+  -ParticipantPassword $participantPassword `
+  -AdministratorPassword $administratorPassword `
+  -Confirm:$false
+
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
+  -ConnectionStringsConfigPath $testConfig `
+  -Action Inspect `
+  -FixtureId 'p19-local-001'
+
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
+  -ConnectionStringsConfigPath $testConfig `
+  -Action Remove `
+  -FixtureId 'p19-local-001' `
+  -Confirm:$false
+```
+
+该 helper 只输出计数级事实，不输出连接串、密码、盐、哈希或申请正文。Remove 在单一事务中按依赖顺序删除该 fixture 的 P19 记录、实体角色关系和两个账号；它不能按任意用户名、角色或前缀删除数据。它只证明 test 数据库与隔离浏览器闭环，不能替代真实 IIS/HTTPS、生产或企业扫描证明。
 
 部署或共享环境中不得使用默认账号和弱密码。
 默认凭据和旧口令治理见 `docs/deployment-default-credentials.md`；发布前应运行 `dev/scripts/Test-PortalDefaultCredentialRisk.ps1`。

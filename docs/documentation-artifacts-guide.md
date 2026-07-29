@@ -13,7 +13,8 @@ WorkZone、门户运行时或其他 HIA 项目本地目录的前提下，重复�
 ## JavaScript 文档化
 
 `dev/documentation/jsdoc/` 是独立的 HIA JSDoc pilot 工具项目。当前范围只读取已追踪的
-`src/Portal/gulpfile.js`，用于验证中英双语内容、源码链接、HIA metadata 和 integration JSON。
+`src/Portal/gulpfile.js` 与 `src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js`，用于验证中英双语内容、
+源码链接、HIA metadata 和 integration JSON。两个输入均为受控白名单；增删时必须同步审查配置、readiness gate 和本说明。
 
 执行方式见 [开发指南](dev-guide.md#javascript-文档化-pilot)。首次运行会在该工具目录执行 `npm ci`；之后可使用
 `portal: build JavaScript documentation pilot` VSCode 任务，或执行 `dev/scripts/Build-PortalJsdocPilot.ps1`。
@@ -24,8 +25,9 @@ WorkZone、门户运行时或其他 HIA 项目本地目录的前提下，重复�
 
 ## .NET DotNetDoc Pilot
 
-`dev/documentation/dotnetdoc/` 是独立的 HIA DotNetDoc pilot 工具项目。它锁定 `@hia-doc/dotnetdoc-runner@0.1.3`，
-并通过工具目录局部 `.npmrc` 使用 npm 官方 registry，以避免镜像源元数据延迟导致版本不可用。该工具包不复用
+`dev/documentation/dotnetdoc/` 是独立的 HIA DotNetDoc pilot 工具项目。其 `package.json` 声明
+`@hia-doc/dotnetdoc-runner@^0.1.8`，而受版本控制的锁文件解析为 `0.1.8`；两者共同构成当前可复现契约。
+工具目录局部 `.npmrc` 使用 npm 官方 registry，以避免镜像源元数据延迟导致版本不可用。该工具包不复用
 `src/Portal/package.json`，不参与 Gulp、IIS Express、Visual Studio Task Runner 或发布包构建。
 
 默认配置为根级 `dotnetdoc.config.json`，首轮只读取四份 Debug XML 文档、代表性 Web Forms 标记注释、一个 Web Forms
