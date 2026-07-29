@@ -576,44 +576,105 @@ SELECT CONVERT(BIGINT, SCOPE_IDENTITY());",
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>在服务端重新授权和当前状态谓词均满足时，对协同事项执行一个受支持的工作流动作。</zh-CN>
+        ///   <en>Applies a supported workflow action to a collaboration item when both server-side reauthorization and the current-status predicate are satisfied.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>状态动作输入，包含事项、动作、动作人、可选处理意见和发生时间；动作人和状态前置条件不会信任客户端表示。</zh-CN>
+        ///   <en>State-action input containing the item, action, actor, optional handling comment, and occurrence time; actor and state preconditions do not trust the client representation.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功时包含动作后事项标识和编码；不支持的动作、授权/状态前置条件、schema 或数据库失败时返回不泄露内部异常的失败结果。</zh-CN>
+        ///   <en>On success, contains the post-action item identifier and code; unsupported actions, authorization or state-precondition failures, schema failures, and database failures return a result without internal exception detail.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>更新使用动作与当前状态的 SQL 谓词，并仅在实际更新的事项集合上写入 WorkflowAction 事件，避免过期读取产生孤立事件。评论会投影为最近工作流动作评论；独立评论继续由 <see cref="AddComment"/> 处理。</zh-CN>
+        ///   <en>The update uses an action-and-current-status SQL predicate and writes a WorkflowAction event only for actually updated items, preventing stale reads from producing orphan events. Its comment projects as the latest workflow-action comment; independent comments remain handled by <see cref="AddComment"/>.</en>
+        /// </lang>
+        /// </remarks>
         public CollaborationItemResult ApplyAction(CollaborationItemActionRequest request)
         {
+            // <lang>
+            //   <zh-CN>先复制并规范化不受信任的页面动作输入，固定动作键、可选评论、动作人和 UTC 发生时间的表示。</zh-CN>
+            //   <en>First copy and normalize untrusted page action input so action key, optional comment, actor, and UTC occurrence time have stable representations.</en>
+            // </lang>
             CollaborationItemActionRequest normalized = NormalizeActionRequest(request);
+
+            // <lang>
+            //   <zh-CN>状态动作必须指向正数事项标识；缺失标识时不进入状态映射或数据访问。</zh-CN>
+            //   <en>A state action must target a positive item identifier; do not enter state mapping or data access when it is missing.</en>
+            // </lang>
             if (normalized.ItemId <= 0)
             {
                 return new CollaborationItemResult(false, 0, string.Empty, normalized.ActionKey, "Collaboration item id is required.");
             }
 
+            // <lang>
+            //   <zh-CN>将受控动作键映射为唯一目标状态；没有映射的动作不能绕过有限状态机进入写入路径。</zh-CN>
+            //   <en>Map the controlled action key to its single target status; an unmapped action cannot bypass the finite-state machine into the write path.</en>
+            // </lang>
             string targetStatus = MapActionToStatus(normalized.ActionKey);
             if (string.IsNullOrEmpty(targetStatus))
             {
                 return new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Unsupported collaboration action.");
             }
 
+            // <lang>
+            //   <zh-CN>写入事项事实和工作流事件前确认最小 schema，避免只更新其中一侧的降级路径。</zh-CN>
+            //   <en>Confirm the minimum schema before writing item facts and workflow events, avoiding a downgraded path that can update only one side.</en>
+            // </lang>
             if (!IsSchemaAvailable())
             {
                 return new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item schema is unavailable.");
             }
 
+            // <lang>
+            //   <zh-CN>读取当前事项用于服务端授权和处理结果编码；不存在的事项不披露更多存储细节。</zh-CN>
+            //   <en>Load the current item for server-side authorization and the result code; an absent item does not disclose further storage detail.</en>
+            // </lang>
             CollaborationItemInfo item = FindItem(normalized.ItemId);
             if (item == null)
             {
                 return new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item was not found or cannot accept this action.");
             }
 
+            // <lang>
+            //   <zh-CN>重新解析当前动作人授权；客户端提供的用户标识不会直接决定状态动作权限。</zh-CN>
+            //   <en>Re-resolve current actor authorization; a client-supplied user identifier does not directly determine state-action permission.</en>
+            // </lang>
             CollaborationItemActorAuthorization actor;
             if (!TryGetActorAuthorization(normalized.ActorUserId, out actor))
             {
                 return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "A signed-in portal user is required to apply this action.");
             }
 
+            // <lang>
+            //   <zh-CN>用服务端确认的显示名替换输入值，确保事件动作人文字与授权身份一致。</zh-CN>
+            //   <en>Replace the input value with the server-confirmed display name so event actor text remains aligned with the authorized identity.</en>
+            // </lang>
             normalized.ActorName = actor.ActorName;
+
+            // <lang>
+            //   <zh-CN>在写入前按事项、动作和当前授权复核处理权；SQL 仍会在更新时再次验证当前状态，防止预读后的陈旧状态推进。</zh-CN>
+            //   <en>Recheck handling permission from the item, action, and current authorization before writing; SQL still verifies current status during update to prevent a stale pre-read from advancing state.</en>
+            // </lang>
             if (!CanApplyAction(item, normalized.ActionKey, actor))
             {
                 return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "The current user is not allowed to apply this action.");
             }
 
+            // <lang>
+            //   <zh-CN>退回和拒绝等需要处理意见的动作不能产生无说明的状态事件；其他动作保留可选评论契约。</zh-CN>
+            //   <en>Actions such as return and reject that require a handling reason cannot create an unexplained state event; other actions retain the optional-comment contract.</en>
+            // </lang>
             if (ActionRequiresComment(normalized.ActionKey) && string.IsNullOrWhiteSpace(normalized.Comment))
             {
                 return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "A plain-text handling comment is required for this action.");
@@ -621,6 +682,10 @@ SELECT CONVERT(BIGINT, SCOPE_IDENTITY());",
 
             try
             {
+                // <lang>
+                //   <zh-CN>单个参数化命令批次先以动作/当前状态谓词更新事项，再仅从实际更新集合写入 WorkflowAction 事件并返回事项事实；更新为零时不会生成孤立事件。</zh-CN>
+                //   <en>The single parameterized command batch first updates the item through an action/current-status predicate, then writes a WorkflowAction event only from the actually updated set and returns item facts; a zero-row update produces no orphan event.</en>
+                // </lang>
                 List<CollaborationItemWriteRow> rows = context.Database.SqlQuery<CollaborationItemWriteRow>(
                     @"
 DECLARE @Updated TABLE
@@ -695,6 +760,10 @@ FROM @Updated;",
                     new SqlParameter("@ActorName", normalized.ActorName),
                     CreateNullableStringParameter("@Comment", normalized.Comment)).ToList();
 
+                // <lang>
+                //   <zh-CN>只有批次返回事项编码时才确认状态已更新；空结果统一表示事项不存在或已不再接受该动作，避免泄露并发细节。</zh-CN>
+                //   <en>Confirm the state update only when the batch returns an item code; an empty result consistently means the item is absent or no longer accepts the action, avoiding disclosure of concurrency detail.</en>
+                // </lang>
                 CollaborationItemWriteRow row = rows.Count == 0 ? null : rows[0];
                 return row == null || string.IsNullOrWhiteSpace(row.ItemCode)
                     ? new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item was not found or cannot accept this action.")
@@ -702,6 +771,10 @@ FROM @Updated;",
             }
             catch (Exception)
             {
+                // <lang>
+                //   <zh-CN>状态动作失败只返回既有通用结果，不向页面泄露 SQL、连接或异常详情。</zh-CN>
+                //   <en>Return only the established generic result when a state action fails and do not expose SQL, connection, or exception detail to the page.</en>
+                // </lang>
                 return new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item action failed.");
             }
         }
