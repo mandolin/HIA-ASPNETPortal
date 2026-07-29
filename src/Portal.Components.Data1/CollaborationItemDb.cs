@@ -74,51 +74,111 @@ namespace ASPNET.StarterKit.Portal
                    HasColumn(EventTableName, "VisibilityScope");
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>规范化并校验创建请求后，创建一条处于 <c>Submitted</c> 状态的协同事项及其 Submit 事件。</zh-CN>
+        ///   <en>Normalizes and validates a create request, then creates a collaboration item in <c>Submitted</c> status with its Submit event.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>由已认证页面层提供的事项输入；发起人、标题和至少一个负责人目标为必填项。</zh-CN>
+        ///   <en>Item input supplied by an authenticated page layer; initiator, title, and at least one owner target are required.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功时包含新事项标识和事项编码；校验、参考数据或数据库失败时返回不含内部异常详情的失败结果。</zh-CN>
+        ///   <en>On success, contains the new item identifier and item code; validation, reference-data, or database failures return a result without internal exception detail.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法仅写入事项事实和 Submit 事件，两者通过同一参数化数据库命令批次提交；待办投影和运营审计由调用页面在业务事实成功后作为旁路处理。</zh-CN>
+        ///   <en>This method writes only the item fact and Submit event through one parameterized database-command batch; the calling page handles work-item projection and operational audit as sidecars after the business fact succeeds.</en>
+        /// </lang>
+        /// </remarks>
         public CollaborationItemResult CreateSubmittedItem(CollaborationItemCreateRequest request)
         {
+            // <lang>
+            //   <zh-CN>先复制并规范化不受信任的页面输入，固定默认值、长度和可空值语义，避免后续校验与写入使用不同表示。</zh-CN>
+            //   <en>First copy and normalize untrusted page input so defaults, length limits, and nullable semantics remain consistent for validation and persistence.</en>
+            // </lang>
             CollaborationItemCreateRequest normalized = NormalizeCreateRequest(request);
+
+            // <lang>
+            //   <zh-CN>事项提交必须可追溯到已登录的发起人；缺失身份时在触及数据库前失败。</zh-CN>
+            //   <en>Submission must be attributable to a signed-in initiator; fail before database access when the identity is missing.</en>
+            // </lang>
             if (normalized.InitiatorUserId <= 0)
             {
                 return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "A signed-in portal user is required.");
             }
 
+            // <lang>
+            //   <zh-CN>标题是事项的最小可识别业务内容，空白标题不能进入事件时间线。</zh-CN>
+            //   <en>The title is the minimum identifiable business content of an item; a blank title cannot enter the event timeline.</en>
+            // </lang>
             if (string.IsNullOrWhiteSpace(normalized.Title))
             {
                 return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item title is required.");
             }
 
+            // <lang>
+            //   <zh-CN>提交状态必须有可解析的个人或角色负责人，避免产生没有处理目标的事项。</zh-CN>
+            //   <en>A submitted item needs a resolvable individual or role owner so no item is created without a handling target.</en>
+            // </lang>
             if (!normalized.OwnerUserId.HasValue && string.IsNullOrWhiteSpace(normalized.OwnerRoleKey))
             {
                 return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "An owner user or owner role is required.");
             }
 
+            // <lang>
+            //   <zh-CN>先确认事项和事件表的最小结构可用，防止部分部署环境写入不完整业务事实。</zh-CN>
+            //   <en>Confirm that the minimum item and event schema is available before writing, preventing incomplete business facts in partially deployed environments.</en>
+            // </lang>
             if (!IsSchemaAvailable())
             {
                 return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item schema is unavailable.");
             }
 
+            // <lang>
+            //   <zh-CN>将请求类型复核为当前启用的参考数据稳定键；调用方不能借由自由文本绕过目录治理。</zh-CN>
+            //   <en>Revalidate the requested type as an active reference-data stable key so callers cannot bypass catalog governance with free text.</en>
+            // </lang>
             string itemTypeKey;
             if (!TryResolveActiveReferenceValue(PortalReferenceDataSets.CollaborationItemType, normalized.ItemTypeKey, out itemTypeKey))
             {
                 return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "The collaboration item type is not allowed.");
             }
 
+            // <lang>
+            //   <zh-CN>同样复核优先级稳定键，确保写入值仍属于当前启用的优先级目录。</zh-CN>
+            //   <en>Likewise revalidate the priority stable key, ensuring the persisted value remains in the currently active priority catalog.</en>
+            // </lang>
             string priorityKey;
             if (!TryResolveActiveReferenceValue(PortalReferenceDataSets.CollaborationPriority, normalized.PriorityKey, out priorityKey))
             {
                 return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "The collaboration item priority is not allowed.");
             }
 
+            // <lang>
+            //   <zh-CN>用目录返回的规范稳定键替换输入值，使主记录和后续筛选均使用同一受治理标识。</zh-CN>
+            //   <en>Replace input values with catalog-returned canonical stable keys so the record and later filtering use the same governed identifiers.</en>
+            // </lang>
             normalized.ItemTypeKey = itemTypeKey;
             normalized.PriorityKey = priorityKey;
 
+            // <lang>
+            //   <zh-CN>事项编码以已规范化的提交时间生成，供页面、待办投影和运营追踪使用，而非暴露数据库主键。</zh-CN>
+            //   <en>Generate the item code from the normalized submission time for pages, work-item projection, and operations tracing without exposing the database key.</en>
+            // </lang>
             string itemCode = CreateItemCode(normalized.SubmittedUtc.Value);
             try
             {
                 // <lang>
-                //   <zh-CN>协同事项事实和 Submit 事件必须同批写入，保证主状态与事件时间线不会分裂；待办投影稍后由页面层旁路创建。</zh-CN>
-                //   <en>The collaboration-item fact and Submit event are written in the same batch so the current state and event timeline cannot split; the page layer later creates the work-item projection as a sidecar.</en>
+                //   <zh-CN>以下参数化命令批次依次写入事项事实和 Submit 事件并返回新标识；待办投影由页面层在成功后旁路创建。</zh-CN>
+                //   <en>The parameterized command batch below writes the item fact and Submit event in order and returns the new identifier; the page layer creates the work-item projection as a sidecar after success.</en>
                 // </lang>
                 List<long> rows = context.Database.SqlQuery<long>(
                     @"
@@ -192,6 +252,10 @@ SELECT @ItemId;",
                     new SqlParameter("@SubmittedUtc", normalized.SubmittedUtc.Value),
                     new SqlParameter("@SubmittedBy", normalized.SubmittedBy)).ToList();
 
+                // <lang>
+                //   <zh-CN>仅接受数据库批次明确返回的首个标识；空结果按创建失败处理，避免将未知写入状态报告为成功。</zh-CN>
+                //   <en>Accept only the first identifier explicitly returned by the database batch; treat an empty result as creation failure rather than reporting an unknown write state as success.</en>
+                // </lang>
                 long itemId = rows.Count == 0 ? 0 : rows[0];
                 return itemId <= 0
                     ? new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item was not created.")
@@ -199,6 +263,10 @@ SELECT @ItemId;",
             }
             catch (Exception)
             {
+                // <lang>
+                //   <zh-CN>不向页面返回数据库异常细节；上层可按既有日志和运营审计策略记录上下文。</zh-CN>
+                //   <en>Do not return database exception detail to the page; upper layers may record context through their established logging and operational-audit policy.</en>
+                // </lang>
                 return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item submission failed.");
             }
         }
@@ -251,14 +319,51 @@ WHERE [Item].[ItemStatus] = @ItemStatus",
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>返回当前动作人可见的协同事项事件时间线。</zh-CN>
+        ///   <en>Returns the collaboration-item event timeline visible to the current actor.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="itemId">
+        /// <l>
+        ///   <zh-CN>待读取的协同事项数据库标识；必须为正值。</zh-CN>
+        ///   <en>Database identifier of the collaboration item to read; must be positive.</en>
+        /// </l>
+        /// </param>
+        /// <param name="actorUserId">
+        /// <l>
+        ///   <zh-CN>由已认证调用方传入并在服务端重新解析授权的门户用户标识。</zh-CN>
+        ///   <en>Portal-user identifier supplied by the authenticated caller and re-resolved for authorization on the server.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>按发生时间和事件标识升序排列的可见事件；无效输入、无参与权、schema 不可用或读取异常时返回空集合且不泄露内部原因。</zh-CN>
+        ///   <en>Visible events ordered by occurrence time and event identifier; invalid input, missing participation, unavailable schema, or read failure returns an empty collection without exposing the internal reason.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>管理员读取所有事件；普通参与者只能读取工作流动作和参与者可见事件。查询只拼接固定受控 SQL 片段，事项标识始终作为参数传入。</zh-CN>
+        ///   <en>Administrators read all events; ordinary participants read only workflow actions and participant-visible events. The query concatenates only fixed controlled SQL fragments, while the item identifier is always passed as a parameter.</en>
+        /// </lang>
+        /// </remarks>
         public IList<CollaborationItemEventInfo> GetVisibleEvents(long itemId, int actorUserId)
         {
+            // <lang>
+            //   <zh-CN>无效标识或不完整 schema 直接返回空集合，避免在无法安全读取事件时继续触及数据访问层。</zh-CN>
+            //   <en>Return an empty collection for an invalid identifier or incomplete schema rather than reaching the data layer when events cannot be read safely.</en>
+            // </lang>
             if (itemId <= 0 || !IsSchemaAvailable())
             {
                 return new List<CollaborationItemEventInfo>();
             }
 
+            // <lang>
+            //   <zh-CN>先取得事项事实，再按当前用户重新计算动作人授权；事项不存在、身份无效和无参与权共用空结果，避免向调用方区分这些内部状态。</zh-CN>
+            //   <en>Load the item fact first, then recompute actor authorization for the current user; item absence, invalid identity, and missing participation share an empty result so callers cannot distinguish those internal states.</en>
+            // </lang>
             CollaborationItemInfo item = FindItem(itemId);
             CollaborationItemActorAuthorization actor;
             if (item == null || !TryGetActorAuthorization(actorUserId, out actor) || !CanParticipate(item, actor))
@@ -268,10 +373,19 @@ WHERE [Item].[ItemStatus] = @ItemStatus",
 
             try
             {
+                // <lang>
+                //   <zh-CN>仅管理员可省略额外可见性条件；普通参与者仍可看到工作流动作和参与者范围事件。拼接片段为内部固定文本，不接受请求值。</zh-CN>
+                //   <en>Only administrators may omit the additional visibility predicate; ordinary participants still see workflow actions and participant-scope events. The concatenated fragment is fixed internal text and accepts no request value.</en>
+                // </lang>
                 string visibilityClause = actor.IsAdministrator
                     ? string.Empty
                     : @"
   AND ([Event].[EventType] = N'WorkflowAction' OR [Event].[VisibilityScope] = N'ItemParticipants')";
+
+                // <lang>
+                //   <zh-CN>只读取时间线显示所需字段，并将事项标识作为 SQL 参数；排序同时使用 UTC 发生时间和稳定事件标识，确保相同时间的顺序可预测。</zh-CN>
+                //   <en>Read only fields needed for timeline display and pass the item identifier as a SQL parameter; order by UTC occurrence time and stable event identifier so equal-time events remain predictable.</en>
+                // </lang>
                 return context.Database.SqlQuery<CollaborationItemEventInfo>(
                     @"
 SELECT
@@ -293,46 +407,106 @@ ORDER BY [Event].[OccurredUtc] ASC, [Event].[EventId] ASC;",
             }
             catch (Exception)
             {
+                // <lang>
+                //   <zh-CN>读取失败时维持不可见的空结果，不向页面泄露 SQL、连接或异常细节。</zh-CN>
+                //   <en>Keep the non-disclosing empty result on read failure and do not expose SQL, connection, or exception detail to the page.</en>
+                // </lang>
                 return new List<CollaborationItemEventInfo>();
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为当前有参与权的动作人创建一条不改变事项状态的纯文本评论事件。</zh-CN>
+        ///   <en>Creates a plain-text comment event for a current actor with participation rights without changing item status.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>评论输入，包含事项、动作人、纯文本内容、可见性范围和可选发生时间；服务端重新校验所有授权相关字段。</zh-CN>
+        ///   <en>Comment input containing the item, actor, plain-text content, visibility scope, and optional occurrence time; the server revalidates every authorization-relevant field.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功时包含事项和新事件标识；校验、授权、schema 或数据库失败时包含可呈现但不泄露内部异常的失败原因。</zh-CN>
+        ///   <en>On success, contains the item and new event identifiers; validation, authorization, schema, or database failures contain a displayable reason without internal exception detail.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>评论以独立事件写入，不更新事项事实、当前状态或最近工作流评论投影。管理员可写管理员范围评论；参与者只能写参与者范围评论。</zh-CN>
+        ///   <en>The comment is written as an independent event and does not update the item fact, current status, or latest workflow-comment projection. Administrators may write administrator-scope comments; participants may write only participant-scope comments.</en>
+        /// </lang>
+        /// </remarks>
         public CollaborationItemCommentResult AddComment(CollaborationItemCommentCreateRequest request)
         {
+            // <lang>
+            //   <zh-CN>将空请求收敛为本地对象，使后续校验返回稳定的业务失败结果而非空引用异常。</zh-CN>
+            //   <en>Collapse a null request to a local object so later checks return a stable business failure instead of a null-reference exception.</en>
+            // </lang>
             request = request ?? new CollaborationItemCommentCreateRequest();
+
+            // <lang>
+            //   <zh-CN>评论必须绑定已有事项标识；无效标识在数据库访问前被拒绝。</zh-CN>
+            //   <en>A comment must be bound to an existing item identifier; reject an invalid identifier before database access.</en>
+            // </lang>
             if (request.ItemId <= 0)
             {
                 return new CollaborationItemCommentResult(false, 0, 0, "Collaboration item id is required.");
             }
 
+            // <lang>
+            //   <zh-CN>先确认事件表所需 schema 可用，防止降级部署把评论路径误报为成功。</zh-CN>
+            //   <en>Confirm that the schema needed by the event table is available first, preventing a downgraded deployment from reporting the comment path as successful.</en>
+            // </lang>
             if (!IsSchemaAvailable())
             {
                 return new CollaborationItemCommentResult(false, request.ItemId, 0, "Collaboration item schema is unavailable.");
             }
 
+            // <lang>
+            //   <zh-CN>规范化用于持久化的评论值，但仍须结合原始输入检查长度，避免静默截断超长用户内容。</zh-CN>
+            //   <en>Normalize the comment value for persistence, while retaining a raw-input length check so overlong user content is rejected rather than silently truncated.</en>
+            // </lang>
             string comment = NormalizeOptionalText(request.Comment, 1000);
             if (string.IsNullOrWhiteSpace(comment))
             {
                 return new CollaborationItemCommentResult(false, request.ItemId, 0, "A plain-text comment is required.");
             }
 
+            // <lang>
+            //   <zh-CN>长度限制按去除首尾空白后的原始请求执行，与事件列容量和页面提示保持一致。</zh-CN>
+            //   <en>Apply the length limit to the trimmed original request so it remains aligned with event-column capacity and the page message.</en>
+            // </lang>
             if ((request.Comment ?? string.Empty).Trim().Length > 1000)
             {
                 return new CollaborationItemCommentResult(false, request.ItemId, 0, "The plain-text comment cannot exceed 1000 characters.");
             }
 
+            // <lang>
+            //   <zh-CN>规范化可见性范围；省略时采用参与者范围这一最小共享默认值。</zh-CN>
+            //   <en>Normalize the visibility scope and use participant scope as the minimum shared default when it is omitted.</en>
+            // </lang>
             string visibilityScope = NormalizeText(request.VisibilityScope, 30);
             if (string.IsNullOrWhiteSpace(visibilityScope))
             {
                 visibilityScope = PortalCollaborationItemVisibilityScopes.ItemParticipants;
             }
 
+            // <lang>
+            //   <zh-CN>范围必须属于封闭白名单，禁止将任意文本持久化为潜在的新可见性语义。</zh-CN>
+            //   <en>The scope must be in the closed allowlist so arbitrary text cannot be persisted as a potential new visibility semantic.</en>
+            // </lang>
             if (!IsKnownVisibilityScope(visibilityScope))
             {
                 return new CollaborationItemCommentResult(false, request.ItemId, 0, "The requested comment visibility scope is not supported.");
             }
 
+            // <lang>
+            //   <zh-CN>读取事项并重新解析动作人授权；不可用身份不会仅凭客户端传入的用户标识获得评论资格。</zh-CN>
+            //   <en>Load the item and re-resolve actor authorization; an unavailable identity cannot gain comment eligibility from a client-supplied user identifier alone.</en>
+            // </lang>
             CollaborationItemInfo item = FindItem(request.ItemId);
             CollaborationItemActorAuthorization actor;
             if (item == null || !TryGetActorAuthorization(request.ActorUserId, out actor))
@@ -340,19 +514,35 @@ ORDER BY [Event].[OccurredUtc] ASC, [Event].[EventId] ASC;",
                 return new CollaborationItemCommentResult(false, request.ItemId, 0, "A signed-in portal user is required to add a comment.");
             }
 
+            // <lang>
+            //   <zh-CN>即使身份有效，也必须是当前事项参与者或管理员，避免已认证但无关用户写入事件时间线。</zh-CN>
+            //   <en>Even a valid identity must be a current item participant or administrator, preventing authenticated but unrelated users from writing to the event timeline.</en>
+            // </lang>
             if (!CanParticipate(item, actor))
             {
                 return new CollaborationItemCommentResult(false, request.ItemId, 0, "The current user is not allowed to comment on this item.");
             }
 
+            // <lang>
+            //   <zh-CN>管理员范围评论可能对普通参与者隐藏，因此仅保留给已重新确认的管理员。</zh-CN>
+            //   <en>Administrator-scope comments can be hidden from ordinary participants, so reserve them for actors re-confirmed as administrators.</en>
+            // </lang>
             if (string.Equals(visibilityScope, PortalCollaborationItemVisibilityScopes.Administrators, StringComparison.Ordinal) && !actor.IsAdministrator)
             {
                 return new CollaborationItemCommentResult(false, request.ItemId, 0, "Only collaboration-item administrators can add administrator-visible comments.");
             }
 
+            // <lang>
+            //   <zh-CN>以调用方提供的 UTC 时刻或当前 UTC 记录事件发生时间，避免本地时区参与时间线排序。</zh-CN>
+            //   <en>Record the event occurrence with a caller-supplied UTC time or current UTC, keeping local time zones out of timeline ordering.</en>
+            // </lang>
             DateTime occurredUtc = request.OccurredUtc ?? DateTime.UtcNow;
             try
             {
+                // <lang>
+                //   <zh-CN>评论只写入独立 Comment 事件；事项状态和最近工作流评论字段保持不变，所有可变值均通过显式参数传递。</zh-CN>
+                //   <en>Write the comment only as an independent Comment event; item status and latest workflow-comment fields remain unchanged, and every variable value is passed through an explicit parameter.</en>
+                // </lang>
                 List<long> eventIds = context.Database.SqlQuery<long>(
                     @"
 INSERT INTO [dbo].[PortalBiz_CollaborationItemEvents]
@@ -367,6 +557,10 @@ SELECT CONVERT(BIGINT, SCOPE_IDENTITY());",
                     new SqlParameter("@ActorUserId", actor.ActorUserId),
                     new SqlParameter("@ActorName", actor.ActorName),
                     new SqlParameter("@Comment", comment)).ToList();
+                // <lang>
+                //   <zh-CN>只有数据库明确返回的新事件标识才报告成功；空结果按未创建处理，避免未知写入状态进入页面反馈。</zh-CN>
+                //   <en>Report success only when the database explicitly returns a new event identifier; treat an empty result as not created so an unknown write state cannot reach page feedback.</en>
+                // </lang>
                 long eventId = eventIds.Count == 0 ? 0 : eventIds[0];
                 return eventId <= 0
                     ? new CollaborationItemCommentResult(false, item.ItemId, 0, "The collaboration-item comment was not created.")
@@ -374,6 +568,10 @@ SELECT CONVERT(BIGINT, SCOPE_IDENTITY());",
             }
             catch (Exception)
             {
+                // <lang>
+                //   <zh-CN>异常只映射为既有通用失败结果，不向页面泄露数据库、SQL 或异常细节。</zh-CN>
+                //   <en>Map exceptions only to the established generic failure result and do not expose database, SQL, or exception detail to the page.</en>
+                // </lang>
                 return new CollaborationItemCommentResult(false, item.ItemId, 0, "The collaboration-item comment could not be added.");
             }
         }

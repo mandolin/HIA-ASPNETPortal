@@ -15,8 +15,8 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `C-anp-P3`、`W-anp-P24` 与 `W-anp-P25` 已完成当前范围；`W-anp-P26` 为当前治理入口；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | P24.1 完成文档 readiness contract refresh；P24.2 恢复 P19.5 test schema 与测试 Tab；P24.3 以受限、可清理 fixture 完成普通用户提交、管理员审核、只读事实复核与零计数清理。`C-anp-P3` 已条件式收口。P25 已完成 ROP 只读基线、人工抽样、风险矩阵、生成边界、批次与验证设计；P26.1 已完成运营审计门面的注释补强与验证；HIA ROP 注释基线持续生效。 |
-| 当前唯一下一步 | 为 `P26.2` 冻结 `src/Portal.Components.Data1/CollaborationItemDb.cs` 的首个方法级数据访问小批次：先只读定位事务写入、状态转换、参考数据复核、SQL 参数和异常回退边界，再决定不超过一个可构建/可回归范围的注释补强切片。不得直接机械改写整个文件；真实 IIS/HTTPS、目标 SQL Server 版本实例和企业扫描维持延期证据；不得启动通用 BPM、附件二进制或 P18 runtime pilot。 |
+| 当前阶段 | P24.1 完成文档 readiness contract refresh；P24.2 恢复 P19.5 test schema 与测试 Tab；P24.3 以受限、可清理 fixture 完成普通用户提交、管理员审核、只读事实复核与零计数清理。`C-anp-P3` 已条件式收口。P25 已完成 ROP 只读基线、人工抽样、风险矩阵、生成边界、批次与验证设计；P26.1、P26.2a、P26.2b 与 P26.2c 已分别完成运营审计、协同事项 Submit 写入、事件可见性读取和评论事件写入的注释补强与验证；HIA ROP 注释基线持续生效。 |
+| 当前唯一下一步 | 继续 `P26.2d`：在 `src/Portal.Components.Data1/CollaborationItemDb.cs` 只读冻结 `ApplyAction` 的单一方法级状态动作写入切片，先核查动作/目标状态映射、重新授权、状态前置条件、原子谓词、事件事实、SQL 参数和异常回退，再决定是否仅补双语注释。该方法预计比前三个切片复杂，审查后可因风险拆分；不得直接机械改写整个文件或修改工作流行为。真实 IIS/HTTPS、目标 SQL Server 版本实例和企业扫描维持延期证据；不得启动通用 BPM、附件二进制或 P18 runtime pilot。 |
 | P24 最近完成小步 | P24.3 新增受限 helper，使用当前 PBKDF2-HMAC-SHA256 凭据契约和最小物理角色，完成 P19 test 库的认证浏览器提交/审核链路。清理前事实为 2 用户、1 个批准申请、2 条 WorkflowEvent、1 条已完成 WorkItem、2 条 WorkItemEvent、2 条审计；Remove 后 Inspect 全部为 0，隔离 Profile 和短生命周期凭据均已清除。 |
 | 当前完成条件 | P24 已对当前可用 test proof 给出真实证据，并对真实 IIS/HTTPS、目标 SQL Server 版本实例和企业扫描给出延期记录；`C-anp-P3` 已收口。P25 的完成条件为形成可执行的历史注释盘点、风险分类、批次和验证设计；P18 仅在用户通知 HIA 基础抽象设计具备后恢复。 |
 | 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，切换隔离副本到 `env=test` 后通过。认证阶段的 EF 外部宿主与早期二进制参数方案均失败并回滚；用户授权后以显式 `SqlParameter` 成功创建 test fixture。P23.2 初次新隔离副本从 `CoreOnly` Profile 启动，按安全门禁跳过 Workbench；仅在该临时副本把 Profile 覆盖为 `EnterpriseWorkbench` 后复测通过。浏览器回归发现 `All Users` 虚拟角色无法参与细粒度权限映射，已通过隐藏配置载体、运行时权限合并和 idempotent SQL seed 修复，并由零成员普通用户浏览器验证。期间嵌套 PowerShell 启动器无法启动构建，改用直接指定 PowerShell 7 执行器后 Debug 构建通过，未发现项目构建失败。P24.2 的 fixture 前置 schema 查询连续两次未完成（PowerShell here-string 语法、再到历史权限表字段假设不符）；未创建用户/凭据。P24.3 的首次 Create 因 PowerShell 将 `byte[]` 展开成 `Object[]` 而被数据库拒绝，未写入数据；改为显式 `byte[]` / `VarBinary` 参数 helper 后成功。Playwright run-code 两次不支持受限执行上下文，已停止该方案并使用不回显密码的本地浏览器输入；最终凭据和剪贴板均已清除。 |
@@ -40,6 +40,9 @@
 | P24.2/P24.3 P19.5 test 数据库、认证浏览器与清理 proof | completed | P19.4 migration 与场景 seed 在外置 test 库连续应用并复核通过；受限 fixture helper 完成普通用户提交、管理员审核、只读事实复核和全量零计数清理，见 [P24.2 记录](work-zone/dev/plans/W-anp-P24.2-p19.5-test-database-recovery.md)、[P24.3 结果](work-zone/dev/plans/W-anp-P24.3-p19.5-authenticated-browser-result.md)。 |
 | P25 ROP 历史注释基线与治理设计 | completed | 只读证据 `work-zone/dev/evidence/p25/20260729-083600/`；87 个启发式候选文件、P25 风险矩阵、生成边界、人工抽样和 P26 分批计划见 [P25 设计](work-zone/dev/plans/W-anp-P25-rop-baseline-and-governance-design.md)。 |
 | P26.1 运营审计 ROP 注释补强 | completed | `PortalOperationAudit.cs` 的审计写入、受限查询、分页、净化、HTTP 上下文和异常降级已补 `<lang>` 双语说明；代码差异为 0 个非注释行，权限审计 8/0、运维门禁 0 失败、Debug 构建及 XML 文档验证通过；见 [P26.1 结果](work-zone/dev/plans/W-anp-P26.1-portal-operation-audit-result.md)。 |
+| P26.2a 协同事项提交写入 ROP 注释补强 | completed | `CollaborationItemDb.CreateSubmittedItem` 的输入规范化、发起人/标题/负责人门槛、schema 与参考数据复核、规范键、参数化写入批次、新标识和非泄露异常回退均已补 XML/inline `<lang>` 说明；目标文件零非注释变更，Workflow smoke 6/0、权限审计 8/0、Debug 构建及 XML 文档验证通过；见 [P26.2a 结果](work-zone/dev/plans/W-anp-P26.2a-collaboration-item-submit-result.md)。 |
+| P26.2b 协同事项事件可见性 ROP 注释补强 | completed | `CollaborationItemDb.GetVisibleEvents` 的 schema/输入短路、事项与动作人复核、参与权、管理员/参与者可见性分支、受控 SQL 片段、参数化读取、稳定排序和非泄露异常回退均已补 XML/inline `<lang>` 说明；目标文件零非注释变更，Workflow smoke 6/0、权限审计 8/0、Debug 构建及 XML 文档验证通过；见 [P26.2b 结果](work-zone/dev/plans/W-anp-P26.2b-collaboration-item-event-visibility-result.md)。 |
+| P26.2c 协同事项评论事件 ROP 注释补强 | completed | `CollaborationItemDb.AddComment` 的空请求、事项/schema、纯文本与原始长度、范围白名单/默认值、事项与动作人复核、参与权、管理员范围、UTC 时间、参数化事件写入、新事件标识和非泄露异常回退均已补 XML/inline `<lang>` 说明；目标文件零非注释变更，Workflow smoke 6/0、权限审计 8/0、Debug 构建及 XML 文档验证通过；见 [P26.2c 结果](work-zone/dev/plans/W-anp-P26.2c-collaboration-item-comment-result.md)。 |
 | P10.1 合规输入与差距矩阵 | completed | `work-zone/dev/plans/W-anp-P10.1-closeout.md` |
 | P10.2 安全响应头与发布环境治理 | completed | `work-zone/dev/plans/W-anp-P10.2-closeout.md` |
 | P10.3 登录密码前端加密 | completed | `work-zone/dev/plans/W-anp-P10.3-login-encryption-result.md` |
@@ -165,8 +168,8 @@
 
 | 仓库 | 本轮关键提交 | 说明 |
 | --- | --- | --- |
-| 主仓库 | `76792c4 feat(collaboration): add comment workflow rules` 后有本轮未提交改动 | 本轮更新 ROP 基线、P24.1 readiness gate 和公开工具说明；`.vscode/settings.json` 是既有本机设置残留，不纳入本轮。 |
-| WorkZone | `a60dee4 docs(p23): close comment workflow cycle` 后有本轮未提交资料 | 本轮新增 ROP 采纳/治理预案、P24.1 结果和会话日志，并更新 C-anp-P3、索引与当前状态；历史日志/截图残留仍按既有策略不处理。 |
+| 主仓库 | `7468c9b feat(quality): add P19 proof fixture and ROP audit docs` 已推送；其后有 P26.2a/P26.2b/P26.2c 未提交注释改动 | P24/P25/P26.1 的公开源、工具和账本已推送；`CollaborationItemDb.cs` 的 P26.2a-P26.2c 仅新增注释，`.vscode/settings.json` 是既有本机设置残留，不纳入本轮。 |
+| WorkZone | `af37299 docs(plans): close P24 and establish ROP governance` 已推送；其后有 P26.2a-P26.2c 结果资料 | P24-P26.1 的内部资料已推送；历史日志/截图残留仍按既有策略不处理。 |
 
 ## Upcoming Planning Constraints
 
@@ -182,6 +185,13 @@
 
 | 验证 | 结果 |
 | --- | --- |
+| P26.2a `git diff --check` 与目标文件零上下文差异筛选 | 通过；`CollaborationItemDb.cs` 的 `NonCommentChangeCount=0`。 |
+| P26.2a `Test-PortalCollaborationWorkflowSmoke.ps1` / `Test-PortalBusinessPermissionAudit.ps1` | 分别为 6 项通过、0 失败、0 警告；8 项通过、0 失败、0 警告。 |
+| P26.2a `Build-Solution.ps1 -Configuration Debug -Platform 'Any CPU'` / `Test-PortalXmlDocumentation.ps1` | 通过；仅保留既有 Designer `CS1591` 与 `Roles.ModulesConfig` 隐藏成员警告；四份 XML 文档均可解析。 |
+| P26.2b `git diff --check` 与目标文件零上下文差异筛选 | 通过；`CollaborationItemDb.cs` 的累计 `NonCommentChangeCount=0`。 |
+| P26.2b `Test-PortalCollaborationWorkflowSmoke.ps1` / `Test-PortalBusinessPermissionAudit.ps1` / Debug 构建 / XML 文档验证 | 分别为 6/0/0、8/0/0、通过、四份 XML 文档可解析；无新增编译警告。 |
+| P26.2c `git diff --check` 与目标文件零上下文差异筛选 | 通过；`CollaborationItemDb.cs` 的累计 `NonCommentChangeCount=0`。 |
+| P26.2c `Test-PortalCollaborationWorkflowSmoke.ps1` / `Test-PortalBusinessPermissionAudit.ps1` / Debug 构建 / XML 文档验证 | 分别为 6/0/0、8/0/0、通过、四份 XML 文档可解析；无新增编译警告。 |
 | `Test-PortalDocumentationReadiness.ps1 -HiaDocumentationRoot I:\HIA_SYS_DOC` | P24.1 通过；`FailedChecks=0; WarningChecks=0; PendingChecks=1`。唯一 Pending 为本机不存在的 `I:\HIA_SYS_DOC\work-zone\notify`，不影响已追踪 gate contract。 |
 | `mise exec node@24.12.0 -- ... Build-PortalJsdocPilot.ps1` | P24.1 通过；隔离依赖还原后 JSDoc 生成和 `verify-output.cjs` 均通过。 |
 | `mise exec node@24.12.0 -- ... Build-PortalDotNetDocPilot.ps1 -SkipXmlBuild` | P24.1 通过；隔离依赖还原后生成 `14` 个 artifact，输出检查成功。 |
