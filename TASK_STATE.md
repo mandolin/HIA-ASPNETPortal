@@ -15,8 +15,8 @@
 | 字段 | 内容 |
 | --- | --- |
 | 当前大周期 | `C-anp-P3`、`W-anp-P24`、`W-anp-P25` 与 `W-anp-P26.2` 已完成当前范围；`W-anp-P26` 仍为当前治理入口；`W-anp-P18` 继续整体延期 |
-| 当前阶段 | P24.1 完成文档 readiness contract refresh；P24.2 恢复 P19.5 test schema 与测试 Tab；P24.3 以受限、可清理 fixture 完成普通用户提交、管理员审核、只读事实复核与零计数清理。`C-anp-P3` 已条件式收口。P25 已完成 ROP 只读基线、人工抽样、风险矩阵、生成边界、批次与验证设计；P26.1 已完成运营审计门面补强，P26.2 已以四个独立方法级微批完成协同事项提交、可见事件、评论和状态动作的高风险语义注释及验证；HIA ROP 注释基线持续生效。 |
-| 当前唯一下一步 | 启动 `P26.3` 选片：先重新读取 P25 风险矩阵、P26 已完成范围和当前 Git 状态，再只读选择一个尚未触达的高风险非生成源文件或单方法边界，记录选择依据和专属回归组合后才改注释。不得用 P26.2 已完成的四个方法重复计数，也不得直接机械改写整文件；真实 IIS/HTTPS、目标 SQL Server 版本实例和企业扫描维持延期证据；不得启动通用 BPM、附件二进制或 P18 runtime pilot。 |
+| 当前阶段 | P26.1 已完成运营审计门面补强，P26.2 已完成协同事项四个高风险公共方法的独立微批，P26.3a 已完成 `WorkItems.BindWorkItems` 的后台绑定语义补强与验证；HIA ROP 注释基线持续生效。 |
+| 当前唯一下一步 | 继续 `P26.3b`：在 `src/Portal/Admin/WorkItems.aspx.cs` 只读冻结 `PortalWorkItemAdminRow.GetBusinessUrl` 的单一 URL 白名单映射切片，先核查业务类型分支、未知类型回退和展示入口边界，再决定是否仅补双语注释。不得重复计数 P26.3a 的服务/schema/绑定范围，也不得机械改写整个后台页。 |
 | P24 最近完成小步 | P24.3 新增受限 helper，使用当前 PBKDF2-HMAC-SHA256 凭据契约和最小物理角色，完成 P19 test 库的认证浏览器提交/审核链路。清理前事实为 2 用户、1 个批准申请、2 条 WorkflowEvent、1 条已完成 WorkItem、2 条 WorkItemEvent、2 条审计；Remove 后 Inspect 全部为 0，隔离 Profile 和短生命周期凭据均已清除。 |
 | 当前完成条件 | P24 已对当前可用 test proof 给出真实证据，并对真实 IIS/HTTPS、目标 SQL Server 版本实例和企业扫描给出延期记录；`C-anp-P3` 已收口。P25 的完成条件为形成可执行的历史注释盘点、风险分类、批次和验证设计；P18 仅在用户通知 HIA 基础抽象设计具备后恢复。 |
 | 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，切换隔离副本到 `env=test` 后通过。认证阶段的 EF 外部宿主与早期二进制参数方案均失败并回滚；用户授权后以显式 `SqlParameter` 成功创建 test fixture。P23.2 初次新隔离副本从 `CoreOnly` Profile 启动，按安全门禁跳过 Workbench；仅在该临时副本把 Profile 覆盖为 `EnterpriseWorkbench` 后复测通过。浏览器回归发现 `All Users` 虚拟角色无法参与细粒度权限映射，已通过隐藏配置载体、运行时权限合并和 idempotent SQL seed 修复，并由零成员普通用户浏览器验证。期间嵌套 PowerShell 启动器无法启动构建，改用直接指定 PowerShell 7 执行器后 Debug 构建通过，未发现项目构建失败。P24.2 的 fixture 前置 schema 查询连续两次未完成（PowerShell here-string 语法、再到历史权限表字段假设不符）；未创建用户/凭据。P24.3 的首次 Create 因 PowerShell 将 `byte[]` 展开成 `Object[]` 而被数据库拒绝，未写入数据；改为显式 `byte[]` / `VarBinary` 参数 helper 后成功。Playwright run-code 两次不支持受限执行上下文，已停止该方案并使用不回显密码的本地浏览器输入；最终凭据和剪贴板均已清除。 |
@@ -45,6 +45,7 @@
 | P26.2c 协同事项评论事件 ROP 注释补强 | completed | `CollaborationItemDb.AddComment` 的空请求、事项/schema、纯文本与原始长度、范围白名单/默认值、事项与动作人复核、参与权、管理员范围、UTC 时间、参数化事件写入、新事件标识和非泄露异常回退均已补 XML/inline `<lang>` 说明；目标文件零非注释变更，Workflow smoke 6/0、权限审计 8/0、Debug 构建及 XML 文档验证通过；见 [P26.2c 结果](work-zone/dev/plans/W-anp-P26.2c-collaboration-item-comment-result.md)。 |
 | P26.2d 协同事项状态动作 ROP 注释补强 | completed | `CollaborationItemDb.ApplyAction` 的动作规范化、有限状态映射、schema/事项、动作人重授权、处理权、必需意见、动作/当前状态原子谓词、事实与 WorkflowAction 事件写入、返回事实和非泄露异常回退均已补 XML/inline `<lang>` 说明；目标文件零非注释变更，Workflow smoke 6/0、权限审计 8/0、Debug 构建及 XML 文档验证通过；见 [P26.2d 结果](work-zone/dev/plans/W-anp-P26.2d-collaboration-item-action-result.md)。 |
 | P26.2 协同事项高风险方法级 ROP 治理收口 | completed | 四个相互独立的注释-only 微批覆盖 `CreateSubmittedItem`、`GetVisibleEvents`、`AddComment` 和 `ApplyAction`；每批均有零非注释差异断言、Workflow/权限静态回归、Debug 构建和 XML 文档验证。较低风险列表读取和私有 helper 未因此宣布达标，留待后续选片；见 [P26.2 收口](work-zone/dev/plans/W-anp-P26.2-collaboration-item-methods-closeout.md)。 |
+| P26.3a 待办后台绑定 ROP 注释补强 | completed | `WorkItems.BindWorkItems` 的服务注入、schema 回退、状态筛选与固定页大小、受控展示行投影和不变区域摘要均已补 XML/inline `<lang>` 说明；目标文件零非注释变更，待办专项 9/0、权限审计 8/0、Debug 构建及 XML 文档验证通过；见 [P26.3a 结果](work-zone/dev/plans/W-anp-P26.3a-work-items-binding-result.md)。 |
 | P10.1 合规输入与差距矩阵 | completed | `work-zone/dev/plans/W-anp-P10.1-closeout.md` |
 | P10.2 安全响应头与发布环境治理 | completed | `work-zone/dev/plans/W-anp-P10.2-closeout.md` |
 | P10.3 登录密码前端加密 | completed | `work-zone/dev/plans/W-anp-P10.3-login-encryption-result.md` |

@@ -99,26 +99,53 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Reads the administration work-item list using the current status filter.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>此方法假定调用入口已通过待办查看或管理权限门禁。数据服务或 schema 不可用时清空旧展示并给出部署提示；成功时只绑定受限页大小的展示模型，不执行待办状态写入。</zh-CN>
+        ///   <en>This method assumes its caller has passed the work-item view or administration permission gate. When the data service or schema is unavailable, it clears stale display and gives a deployment hint; on success, it binds only a page-size-limited display model and performs no work-item state write.</en>
+        /// </lang>
+        /// </remarks>
         private void BindWorkItems()
         {
+            // <lang>
+            //   <zh-CN>依赖注入失败时不能继续访问数据层；清空此前绑定内容以避免页面展示过期管理信息。</zh-CN>
+            //   <en>Do not continue to the data layer when dependency injection fails; clear previously bound content so the page cannot display stale administration information.</en>
+            // </lang>
             if (WorkItemDb == null)
             {
                 ShowUnavailable("Portal work-item data service is not registered.");
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>待办和事件 schema 是列表投影的最小前置条件；缺失时返回可操作的迁移提示而不执行部分查询。</zh-CN>
+            //   <en>The work-item and event schema is the minimum prerequisite for list projection; when missing, return an actionable migration hint rather than attempting a partial query.</en>
+            // </lang>
             if (!WorkItemDb.IsSchemaAvailable())
             {
                 ShowUnavailable("P12.3 work-item schema is unavailable. Run PortalBiz_WorkItems.sql and PortalBiz_WorkItemEvents.sql.");
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>使用由筛选控件提供的状态和固定页大小读取后台视图；服务层负责保持状态筛选的既有受控契约。</zh-CN>
+            //   <en>Read the administration view with the status supplied by the filter control and a fixed page size; the service layer preserves the established controlled status-filter contract.</en>
+            // </lang>
             IList<PortalWorkItemInfo> workItems = WorkItemDb.GetAdminWorkItems(
                 StatusFilterList.SelectedValue,
                 PageSize);
+
+            // <lang>
+            //   <zh-CN>将数据对象映射为页面专用展示行，使业务入口 URL、空值占位、分派文字和 UTC 时间格式在受控投影中生成。</zh-CN>
+            //   <en>Map data objects to page-specific display rows so business-entry URLs, empty-value placeholders, assignment text, and UTC formatting are produced in a controlled projection.</en>
+            // </lang>
             WorkItemsRepeater.DataSource = workItems.Select(item => new PortalWorkItemAdminRow(item)).ToList();
             WorkItemsRepeater.DataBind();
 
+            // <lang>
+            //   <zh-CN>用不随服务器区域设置变化的数字格式报告固定上限与实际计数，避免管理页摘要产生文化相关歧义。</zh-CN>
+            //   <en>Report the fixed limit and actual count with culture-invariant number formatting so the administration summary has no server-locale ambiguity.</en>
+            // </lang>
             ResultLabel.Text = "Showing up to " + PageSize.ToString(CultureInfo.InvariantCulture) +
                                " work items; count: " + workItems.Count.ToString(CultureInfo.InvariantCulture) + ".";
         }
