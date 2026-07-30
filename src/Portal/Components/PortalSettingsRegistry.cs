@@ -10,12 +10,16 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>registry 集中描述设置项，再由运行时解析器、数据库覆盖层和后台管理界面按其契约工作。 已登记的定义是可受控读取和在线管理的唯一入口，不能以任意键绕过元数据校验。</zh-CN>
-    ///   <en>The registry centralizes setting definitions, which are then used by the runtime resolver, database override layer, and administration UI. Registered definitions are the only controlled entry point for reads and online management; arbitrary keys must not bypass metadata validation.</en>
+    ///   <zh-CN>registry 集中描述设置项，再由运行时解析器、数据库覆盖层和后台管理界面按其契约工作。已登记的定义是可受控读取和在线管理的唯一入口，不能以任意键绕过元数据校验；本类只提供静态策略目录，不读取实时配置、写数据库或实施页面授权。</zh-CN>
+    ///   <en>The registry centralizes setting definitions, which are then used by the runtime resolver, database override layer, and administration UI. Registered definitions are the only controlled entry point for reads and online management, and arbitrary keys must not bypass metadata validation; this class provides a static policy catalog only and reads no live configuration, writes no database, and implements no page authorization.</en>
     /// </lang>
     /// </remarks>
     public static class PortalSettingsRegistry
     {
+        // <lang>
+        //   <zh-CN>注册与账户准入策略：这些静态定义描述受控默认值和在线编辑条件，但不会显示注册页、创建用户或绕过管理员授权。</zh-CN>
+        //   <en>Registration and account-admission policy: these static definitions describe controlled defaults and online-editing conditions but do not display a registration page, create users, or bypass administrator authorization.</en>
+        // </lang>
         /// <summary>
         /// <lang>
         ///   <zh-CN>控制是否开放用户自主注册的设置定义，默认关闭。</zh-CN>
@@ -52,6 +56,10 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Security");
 
+        // <lang>
+        //   <zh-CN>密码与凭据提交策略：类型、硬范围和默认值只是消费方验证契约，不能降低既有密码安全实现或替代身份/权限校验。</zh-CN>
+        //   <en>Password and credential-submission policy: type, hard ranges, and defaults are consumer validation contracts only and cannot lower established password security implementation or replace identity/permission checks.</en>
+        // </lang>
         /// <summary>
         /// <lang>
         ///   <zh-CN>控制登录密码提交是否必须使用前端一次性公钥加密的设置定义。</zh-CN>
@@ -171,6 +179,10 @@ namespace ASPNET.StarterKit.Portal
                 "Registration",
                 minIntegerValue: 1);
 
+        // <lang>
+        //   <zh-CN>员工绑定与注册审核策略：这些值只约束既有准入流程，不能创建用户绑定、替代身份核验或绕过审批。</zh-CN>
+        //   <en>Employee-binding and registration-approval policy: these values constrain established admission flows only and cannot create user bindings, replace identity validation, or bypass approval.</en>
+        // </lang>
         /// <summary>
         /// <lang>
         ///   <zh-CN>员工号尚未绑定时是否可继续进入待审核注册流程的设置定义。</zh-CN>
@@ -189,6 +201,10 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Registration");
 
+        // <lang>
+        //   <zh-CN>上传与文档安全策略：整数限制和扩展名 allowlist 由文件消费方再次验证，registry 本身不接收上传、写文件或开放路径。</zh-CN>
+        //   <en>Upload and document-safety policy: file consumers validate integer limits and extension allowlist again; the registry itself accepts no upload, writes no file, and opens no path.</en>
+        // </lang>
         /// <summary>
         /// <lang>
         ///   <zh-CN>文档模块允许上传的单个文件最大字节数设置定义。</zh-CN>
@@ -233,6 +249,10 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Documents");
 
+        // <lang>
+        //   <zh-CN>主题选择策略：该枚举定义允许值的元数据边界，实际资源存在、路径安全和请求期主题选择仍由主题消费方负责。</zh-CN>
+        //   <en>Theme-selection policy: this enumeration defines the metadata boundary for allowed values, while actual resource existence, path safety, and request-time theme choice remain the responsibility of theme consumers.</en>
+        // </lang>
         /// <summary>
         /// <lang>
         ///   <zh-CN>门户 Web Forms 主题名称的设置定义。</zh-CN>
@@ -251,6 +271,10 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Theme");
 
+        // <lang>
+        //   <zh-CN>诊断策略：详细错误、目录、容量、保留期和管理员详情可见性均为受控元数据；它们不直接读写诊断文件、暴露异常详情或授予访问。</zh-CN>
+        //   <en>Diagnostics policy: detailed errors, directory, capacity, retention, and administrator-detail visibility are controlled metadata; they do not directly read or write diagnostic files, expose exception detail, or grant access.</en>
+        // </lang>
         /// <summary>
         /// <lang>
         ///   <zh-CN>详细错误输出状态的只读设置定义。</zh-CN>
@@ -345,6 +369,10 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Diagnostics");
 
+        // <lang>
+        //   <zh-CN>HIA 外围实例标识策略：留空保持适配器不启用；此定义不是对外连接、密钥、端点或发布动作。</zh-CN>
+        //   <en>HIA peripheral instance-identifier policy: blank keeps adapters disabled; this definition is not an external connection, secret, endpoint, or release action.</en>
+        // </lang>
         /// <summary>
         /// <lang>
         ///   <zh-CN>HIA 外围契约使用的部署级门户实例标识设置定义。</zh-CN>
@@ -364,7 +392,23 @@ namespace ASPNET.StarterKit.Portal
                 "HiaBoundary",
                 sourceLevel: "AppSettings");
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按稳定声明顺序保存的全部受控设置定义只读集合。</zh-CN>
+        ///   <en>Read-only collection of all controlled setting definitions in stable declaration order.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>顺序是 registry 输出契约的一部分；集合包装为只读，且包含的定义不可变。调用方不得据此推断配置已读取、权限已授予或数据库覆盖已采用。</zh-CN>
+        ///   <en>Order is part of the registry output contract; the collection is wrapped as read-only and its definitions are immutable. Callers must not infer that configuration was read, permission granted, or a database override adopted from it.</en>
+        /// </lang>
+        /// </remarks>
         private static readonly IList<PortalSettingDefinition> AllDefinitions =
+            // <lang>
+            //   <zh-CN>集中列出所有受控定义并冻结集合，供精确键查找和后台展示复用；静态初始化不触发配置、数据库或请求访问。</zh-CN>
+            //   <en>List every controlled definition centrally and freeze the collection for exact-key lookup and administration-display reuse; static initialization triggers no configuration, database, or request access.</en>
+            // </lang>
             new List<PortalSettingDefinition>
             {
                 AllowSelfRegistration,
@@ -401,6 +445,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static IEnumerable<PortalSettingDefinition> GetAll()
         {
+            // <lang>
+            //   <zh-CN>返回同一只读集合而非可变副本；定义和顺序保持 registry 的静态契约，调用方只能枚举，不能借此改变策略。</zh-CN>
+            //   <en>Return the same read-only collection rather than a mutable copy; definitions and order retain the registry's static contract, so callers can enumerate but cannot change policy through it.</en>
+            // </lang>
             return AllDefinitions;
         }
 
@@ -412,8 +460,8 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="key">
         /// <l>
-        ///   <zh-CN>要查找的稳定设置键。</zh-CN>
-        ///   <en>Stable setting key to find.</en>
+        ///   <zh-CN>要精确查找的稳定设置键；不做空白规范化或大小写折叠。</zh-CN>
+        ///   <en>Stable setting key to find exactly; no whitespace normalization or case folding occurs.</en>
         /// </l>
         /// </param>
         /// <param name="definition">
@@ -424,14 +472,22 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         /// <returns>
         /// <l>
-        ///   <zh-CN>找到已登记定义时为 <c>true</c>。</zh-CN>
-        ///   <en><c>true</c> when a registered definition is found.</en>
+        ///   <zh-CN>找到已登记定义时为 <c>true</c>；找不到时输出为 <c>null</c>，不读取其它来源或产生授权结论。</zh-CN>
+        ///   <en><c>true</c> when a registered definition is found; when absent, output is <c>null</c> and no other source is read or authorization conclusion produced.</en>
         /// </l>
         /// </returns>
         public static bool TryGet(string key, out PortalSettingDefinition definition)
         {
+            // <lang>
+            //   <zh-CN>以声明顺序遍历只读 registry；这不是配置来源回退，也不把未知键转换为动态定义。</zh-CN>
+            //   <en>Traverse the read-only registry in declaration order; this is not configuration-source fallback and does not turn an unknown key into a dynamic definition.</en>
+            // </lang>
             foreach (PortalSettingDefinition item in AllDefinitions)
             {
+                // <lang>
+                //   <zh-CN>使用现有 string 精确相等语义匹配稳定键；不去空白、不忽略大小写，也不检查调用方身份或页面权限。</zh-CN>
+                //   <en>Match stable keys using the existing exact string-equality semantics; do not trim, ignore case, or check caller identity or page permission.</en>
+                // </lang>
                 if (item.Key == key)
                 {
                     definition = item;
@@ -439,6 +495,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>未知或格式不同的键以 false/null 表示；调用方决定拒绝、回退或显示方式，registry 不执行配置读取、写入或诊断。</zh-CN>
+            //   <en>Represent an unknown or differently formatted key by false/null; callers decide rejection, fallback, or display, while the registry performs no configuration read, write, or diagnostic action.</en>
+            // </lang>
             definition = null;
             return false;
         }
