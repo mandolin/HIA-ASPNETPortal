@@ -19,8 +19,16 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public static class PortalRuntimeSettings
     {
+        // <lang>
+        //   <zh-CN>进程内锁只保护“某键/原因是否已告警”的集合，避免并发回退重复写入诊断；它不锁设置读取或数据库访问。</zh-CN>
+        //   <en>The in-process lock protects only the “key/reason was warned” set to avoid duplicate diagnostics under concurrent fallbacks; it does not lock settings reads or database access.</en>
+        // </lang>
         private static readonly object WarningLock = new object();
 
+        // <lang>
+        //   <zh-CN>集合只保存稳定设置键和受控回退原因，不保存原始配置值、连接串或 HTTP 数据。</zh-CN>
+        //   <en>The set stores only stable setting keys and controlled fallback reasons, never raw configuration values, connection strings, or HTTP data.</en>
+        // </lang>
         private static readonly HashSet<string> WarnedDatabaseFallbacks =
             new HashSet<string>(StringComparer.Ordinal);
 
@@ -58,11 +66,19 @@ namespace ASPNET.StarterKit.Portal
             PortalSettingDefinition definition,
             HttpContext context = null)
         {
+            // <lang>
+            //   <zh-CN>在访问任何来源前拒绝空定义，确保后续键、类型、默认值和权限元数据都来自已登记契约。</zh-CN>
+            //   <en>Reject a null definition before accessing any source so later key, type, default, and permission metadata all come from the registered contract.</en>
+            // </lang>
             EnsureDefinition(definition);
 
             PortalSystemSettingReadResult databaseResult = null;
             if (definition.CanEditOnline && !definition.IsSensitive)
             {
+                // <lang>
+                //   <zh-CN>只有可在线编辑且非敏感的定义可尝试数据库覆盖；敏感或部署级设置直接跳过数据库，避免在线层成为秘密读取通道。</zh-CN>
+                //   <en>Only online-editable, non-sensitive definitions may attempt a database override; sensitive or deployment-level settings bypass the database to prevent the online layer from becoming a secret-read channel.</en>
+                // </lang>
                 databaseResult = PortalSystemSettingsStore.Read(definition.Key, context);
                 if (databaseResult.IsAvailable && databaseResult.IsFound)
                 {
@@ -70,6 +86,10 @@ namespace ASPNET.StarterKit.Portal
                     if (string.Equals(databaseResult.ValueType, definition.ValueType.ToString(), StringComparison.Ordinal) &&
                         TryNormalizeValue(definition, databaseResult.Value, out databaseValue))
                     {
+                        // <lang>
+                        //   <zh-CN>数据库值必须同时匹配已登记值类型并通过同一规范化/范围门禁，才可成为有效值；不信任存储层的文本本身。</zh-CN>
+                        //   <en>A database value becomes effective only when it matches the registered value type and passes the same normalization/range gate; do not trust storage-layer text by itself.</en>
+                        // </lang>
                         return new PortalRuntimeSettingValue(
                             databaseValue,
                             PortalRuntimeSettingSource.Database);
@@ -82,6 +102,10 @@ namespace ASPNET.StarterKit.Portal
                 }
                 else if (!databaseResult.IsAvailable)
                 {
+                    // <lang>
+                    //   <zh-CN>覆盖表不可用时仅记录一次受控回退事实，继续较低优先级来源而不把数据库错误详情或连接信息带入返回值。</zh-CN>
+                    //   <en>When the override table is unavailable, record only one controlled fallback fact and continue to lower-priority sources without putting database-error detail or connection information into the return value.</en>
+                    // </lang>
                     WarnDatabaseFallback(
                         definition.Key,
                         "数据库设置表不可用。 Database setting table is unavailable.",
@@ -95,6 +119,10 @@ namespace ASPNET.StarterKit.Portal
                 ConfigurationManager.AppSettings[definition.Key],
                 out configuredValue))
             {
+                // <lang>
+                //   <zh-CN>appSettings 仅在通过已登记类型/范围规范化后生效；空白或无效文本自然继续回退。</zh-CN>
+                //   <en>AppSettings becomes effective only after registered type/range normalization; blank or invalid text naturally continues fallback.</en>
+                // </lang>
                 return new PortalRuntimeSettingValue(
                     configuredValue,
                     PortalRuntimeSettingSource.AppSettings);
@@ -103,9 +131,17 @@ namespace ASPNET.StarterKit.Portal
             string defaultValue;
             if (TryNormalizeValue(definition, definition.DefaultValue, out defaultValue))
             {
+                // <lang>
+                //   <zh-CN>代码默认值经过同一门禁后才作为最终常规回退，保持各来源的解析规则一致。</zh-CN>
+                //   <en>The code default becomes the final normal fallback only after the same gate, keeping parsing rules consistent across sources.</en>
+                // </lang>
                 return new PortalRuntimeSettingValue(defaultValue, PortalRuntimeSettingSource.Default);
             }
 
+            // <lang>
+            //   <zh-CN>仅当定义自身默认值也无法规范化时返回稳定空字符串和 Default 来源；不臆造来源值或抛出原始设置文本。</zh-CN>
+            //   <en>Return stable empty text with Default source only when even the definition default cannot normalize; do not invent a source value or throw raw settings text.</en>
+            // </lang>
             return new PortalRuntimeSettingValue(string.Empty, PortalRuntimeSettingSource.Default);
         }
 
@@ -127,8 +163,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Final normalized text value.</en>
         /// </l>
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <l>
+        ///   <zh-CN><paramref name="definition"/> 为 <c>null</c> 时引发。</zh-CN>
+        ///   <en>Thrown when <paramref name="definition"/> is <c>null</c>.</en>
+        /// </l>
+        /// </exception>
         public static string GetString(PortalSettingDefinition definition)
         {
+            // <lang>
+            //   <zh-CN>先保持与其它读取入口一致的空定义门禁，再仅返回已解析值文本；不暴露来源内部状态或绕过规范化。</zh-CN>
+            //   <en>Keep the same null-definition gate as other read entry points, then return only resolved value text without exposing source internals or bypassing normalization.</en>
+            // </lang>
             EnsureDefinition(definition);
 
             return GetEffectiveValue(definition).Value;
@@ -166,6 +212,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         public static bool GetBoolean(PortalSettingDefinition definition)
         {
+            // <lang>
+            //   <zh-CN>先验证定义与布尔契约；最终文本再次以 TryParse 转换，防御性地将无法表示的结果收敛为 <c>false</c>。</zh-CN>
+            //   <en>Validate definition and Boolean contract first; parse final text again with TryParse so an unrepresentable result defensively converges to <c>false</c>.</en>
+            // </lang>
             EnsureDefinition(definition);
             EnsureValueType(definition, PortalSettingValueType.Boolean);
 
@@ -205,6 +255,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         public static int GetInt32(PortalSettingDefinition definition)
         {
+            // <lang>
+            //   <zh-CN>先验证定义与整数契约；最终解析再次应用范围门禁，所有来源均不可用时按既有契约返回 <c>0</c>。</zh-CN>
+            //   <en>Validate definition and integer contract first; apply the range gate again to final parsing and return <c>0</c> by the established contract when no source is usable.</en>
+            // </lang>
             EnsureDefinition(definition);
             EnsureValueType(definition, PortalSettingValueType.Integer);
 
@@ -250,6 +304,10 @@ namespace ASPNET.StarterKit.Portal
             string candidateValue,
             out string normalizedValue)
         {
+            // <lang>
+            //   <zh-CN>先写入稳定失败输出；缺少定义或候选为空白时不尝试推断默认值，也不把原始输入作为成功值返回。</zh-CN>
+            //   <en>Set a stable failure output first; when definition is missing or candidate is blank, do not infer a default or return raw input as a successful value.</en>
+            // </lang>
             normalizedValue = string.Empty;
             if (definition == null || string.IsNullOrWhiteSpace(candidateValue))
             {
@@ -260,6 +318,10 @@ namespace ASPNET.StarterKit.Portal
             switch (definition.ValueType)
             {
                 case PortalSettingValueType.Boolean:
+                    // <lang>
+                    //   <zh-CN>布尔值只接受 .NET 固定解析形式，并规范为小写稳定文本，避免来源间大小写差异影响后续比较。</zh-CN>
+                    //   <en>Accept only fixed .NET Boolean parse forms and normalize to stable lowercase text so source casing differences do not affect later comparisons.</en>
+                    // </lang>
                     bool booleanValue;
                     if (bool.TryParse(trimmedValue, out booleanValue))
                     {
@@ -270,6 +332,10 @@ namespace ASPNET.StarterKit.Portal
                     return false;
 
                 case PortalSettingValueType.Integer:
+                    // <lang>
+                    //   <zh-CN>整数必须可解析且同时满足定义的可选上下限；超界值与格式错误同样触发来源回退。</zh-CN>
+                    //   <en>An integer must parse and satisfy the definition's optional lower and upper bounds; out-of-range values fall back just like malformed values.</en>
+                    // </lang>
                     int integerValue;
                     if (int.TryParse(trimmedValue, out integerValue) && IsIntegerInRange(definition, integerValue))
                     {
@@ -280,6 +346,10 @@ namespace ASPNET.StarterKit.Portal
                     return false;
 
                 default:
+                    // <lang>
+                    //   <zh-CN>其它已登记类型保留去空白后的文本；其语义约束由对应定义和消费方承担，本 helper 不把文本解释为路径、权限或秘密。</zh-CN>
+                    //   <en>Other registered types retain trimmed text; their semantic constraints belong to the definition and consumer, and this helper does not interpret text as a path, permission, or secret.</en>
+                    // </lang>
                     normalizedValue = trimmedValue;
                     return true;
             }
@@ -287,6 +357,10 @@ namespace ASPNET.StarterKit.Portal
 
         private static void EnsureDefinition(PortalSettingDefinition definition)
         {
+            // <lang>
+            //   <zh-CN>用固定参数名抛出受控契约异常，避免后续空引用并且不包含候选设置值。</zh-CN>
+            //   <en>Throw a controlled contract exception with the fixed parameter name to avoid later null dereference and include no candidate setting value.</en>
+            // </lang>
             if (definition == null)
             {
                 throw new ArgumentNullException("definition");
@@ -295,6 +369,10 @@ namespace ASPNET.StarterKit.Portal
 
         private static void EnsureValueType(PortalSettingDefinition definition, PortalSettingValueType expectedType)
         {
+            // <lang>
+            //   <zh-CN>读取入口不得把错误类型定义静默转换；异常只描述稳定键和元数据类型，不包含实际设置内容。</zh-CN>
+            //   <en>A read entry point must not silently convert a definition of the wrong type; the exception describes only stable key and metadata types, never actual setting content.</en>
+            // </lang>
             if (definition.ValueType != expectedType)
             {
                 throw new InvalidOperationException(
@@ -304,6 +382,10 @@ namespace ASPNET.StarterKit.Portal
 
         private static bool IsIntegerInRange(PortalSettingDefinition definition, int value)
         {
+            // <lang>
+            //   <zh-CN>下限和上限均为可选约束；只有存在的边界参与拒绝，未设置的边界不隐含额外限制。</zh-CN>
+            //   <en>Lower and upper bounds are optional constraints; only present bounds reject a value and an absent bound implies no additional restriction.</en>
+            // </lang>
             if (definition.MinIntegerValue.HasValue && value < definition.MinIntegerValue.Value)
             {
                 return false;
@@ -319,17 +401,33 @@ namespace ASPNET.StarterKit.Portal
 
         private static void WarnDatabaseFallback(string key, string reason, HttpContext context)
         {
+            // <lang>
+            //   <zh-CN>去重键由稳定设置键和调用方提供的受控原因组成，不附加数据库值、连接串或 HTTP 内容。</zh-CN>
+            //   <en>The deduplication key consists of the stable setting key and caller-supplied controlled reason, with no database value, connection string, or HTTP content appended.</en>
+            // </lang>
             string warningKey = key + "|" + reason;
             lock (WarningLock)
             {
                 if (WarnedDatabaseFallbacks.Contains(warningKey))
                 {
+                    // <lang>
+                    //   <zh-CN>同一键/原因已记录时静默返回，避免持续故障在高频读取路径放大为日志噪声。</zh-CN>
+                    //   <en>Return silently when the same key/reason was recorded, preventing a persistent fault from amplifying into log noise on a high-frequency read path.</en>
+                    // </lang>
                     return;
                 }
 
+                // <lang>
+                //   <zh-CN>在写入诊断前先标记为已告警，保留既有“诊断接收器失败也不无限重试”语义。</zh-CN>
+                //   <en>Mark as warned before writing diagnostics, retaining the established behavior that a diagnostics-sink failure is not retried without bound.</en>
+                // </lang>
                 WarnedDatabaseFallbacks.Add(warningKey);
             }
 
+            // <lang>
+            //   <zh-CN>告警消息只包含稳定设置键和受控原因；PortalDiagnostics 继续负责请求上下文净化、长度限制和接收器隔离。</zh-CN>
+            //   <en>The warning message contains only stable setting key and controlled reason; PortalDiagnostics continues to own request-context sanitization, length caps, and sink isolation.</en>
+            // </lang>
             PortalDiagnostics.Warn(
                 "RuntimeSettings",
                 "Setting '" + key + "' fell back from database override. " + reason,

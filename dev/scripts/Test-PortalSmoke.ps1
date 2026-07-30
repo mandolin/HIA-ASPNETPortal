@@ -907,17 +907,52 @@ try {
         }
     }
 
+    # <lang>
+    #   <zh-CN>仅在调用方未显式跳过认证且提供非空白管理员用户名时进入认证群组；任一条件不满足都不会读取口令、创建认证会话、登录或请求管理员页，保留匿名 smoke 的无凭据路径。</zh-CN>
+    #   <en>Enter the authenticated group only when the caller did not explicitly skip authentication and supplied a non-blank administrator user name; otherwise no password is read, authenticated session is created, sign-in occurs, or administrator page is requested, preserving the credential-free anonymous smoke path.</en>
+    # </lang>
     if (-not $SkipAuthenticated -and -not [string]::IsNullOrWhiteSpace($AdminUser)) {
+        # <lang>
+        #   <zh-CN>只有调用方未提供口令对象时才以 SecureString 提示读取，避免覆盖已传入的受保护值；Read-Host 不回显输入，本脚本不记录、返回或持久化口令。</zh-CN>
+        #   <en>Prompt as SecureString only when the caller supplied no password object, avoiding replacement of an already provided protected value; Read-Host does not echo input, and this script neither records, returns, nor persists a password.</en>
+        # </lang>
         if ($null -eq $AdminPassword) {
             $AdminPassword = Read-Host -Prompt 'Admin password' -AsSecureString
         }
 
+        # <lang>
+        #   <zh-CN>为认证链路创建独立 WebSession，使登录 Cookie 不与前述匿名会话共享；该会话仅存在于本次运行，后续固定管理员页复用它而不重新登录。</zh-CN>
+        #   <en>Create a dedicated WebSession for the authenticated flow so sign-in cookies are not shared with the preceding anonymous session; it exists only for this invocation, and the later fixed administrator pages reuse it without signing in again.</en>
+        # </lang>
         $authenticatedSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+
+        # <lang>
+        #   <zh-CN>调用既有登录 helper，以已解析 BaseUrl 下的 Default.aspx 作为登录入口，并只接收认证 Cookie 是否获得的布尔事实；用户名和 SecureString 仅传入 helper，不写入结果、输出或详情。</zh-CN>
+        #   <en>Call the established sign-in helper with Default.aspx beneath the parsed BaseUrl as the login entry point and receive only the Boolean fact of whether an authentication cookie was obtained; the user name and SecureString go only to that helper and are not written to results, output, or detail.</en>
+        # </lang>
         $loginSucceeded = Invoke-PortalAdminLogin -LoginUri ([Uri]::new($baseUri, 'Default.aspx').AbsoluteUri) -WebSession $authenticatedSession -UserName $AdminUser -Password $AdminPassword
+
+        # <lang>
+        #   <zh-CN>将登录结果映射为固定且不含用户名、Cookie 名称或值的公开详情；这只说明既有 Cookie 事实，不替代各管理员页的后续可访问性断言。</zh-CN>
+        #   <en>Map the login result to fixed shareable detail containing no user name, cookie name, or cookie value; it reports only the established cookie fact and does not replace the later accessibility assertions for individual administrator pages.</en>
+        # </lang>
         $loginDetail = if ($loginSucceeded) { 'Authentication cookie received.' } else { 'Authentication cookie was not received.' }
+
+        # <lang>
+        #   <zh-CN>记录固定的管理员登录检查，供终端汇总决定 smoke 成败；不保存会话、口令、Cookie 或登录响应。</zh-CN>
+        #   <en>Record the fixed administrator-sign-in check for terminal smoke aggregation; do not retain the session, password, cookie, or sign-in response.</en>
+        # </lang>
         Add-PortalCheck -Name 'Admin sign-in' -Passed $loginSucceeded -Detail $loginDetail
 
+        # <lang>
+        #   <zh-CN>只有取得认证 Cookie 事实后才请求管理员页，避免认证失败时继续发送看似受保护的请求；该门禁不扩大既有登录 helper 的授权语义。</zh-CN>
+        #   <en>Request administrator pages only after obtaining the authentication-cookie fact, avoiding apparently protected requests after failed sign-in; this gate does not expand the established sign-in helper's authorization semantics.</en>
+        # </lang>
         if ($loginSucceeded) {
+            # <lang>
+            #   <zh-CN>固定列出五个管理员页及各自稳定页面标记，名称作为结果标签；该映射锁定现有回归范围，不动态发现后台页，也不替代逐页权限设计验证。</zh-CN>
+            #   <en>Explicitly list five administrator pages and their stable page markers, with names serving as result labels; this map pins the current regression scope, performs no dynamic administrator-page discovery, and does not replace per-page permission-design verification.</en>
+            # </lang>
             $adminPages = @(
                 @{ Name = 'System health'; Path = 'Admin/SystemHealth.aspx'; Marker = 'System Health' },
                 @{ Name = 'Diagnostics logs'; Path = 'Admin/DiagnosticsLogs.aspx'; Marker = 'Diagnostics Logs' },
@@ -926,9 +961,27 @@ try {
                 @{ Name = 'Module catalog'; Path = 'Admin/ModuleCatalog.aspx'; Marker = 'Module Catalog' }
             )
 
+            # <lang>
+            #   <zh-CN>按固定顺序在同一认证会话中读取每页，使检查覆盖登录状态下的既有访问路径；只执行 GET，不提交表单、不改变设置或业务数据。</zh-CN>
+            #   <en>Read each page in fixed order through the same authenticated session so checks cover the established access path after sign-in; perform only GETs, submit no form, and change no setting or business data.</en>
+            # </lang>
             foreach ($page in $adminPages) {
+                # <lang>
+                #   <zh-CN>将固定站点相对后台路径与已解析 BaseUrl 组合后请求，保留虚拟目录兼容；响应正文只在下方固定标记断言中使用，不输出或写入 Detail。</zh-CN>
+                #   <en>Combine the fixed site-relative administrator path with the parsed BaseUrl before requesting it, preserving virtual-directory compatibility; response content is used only by the fixed marker assertion below and is neither output nor placed in Detail.</en>
+                # </lang>
                 $response = Invoke-PortalRequest -Uri ([Uri]::new($baseUri, $page.Path).AbsoluteUri) -WebSession $authenticatedSession
+
+                # <lang>
+                #   <zh-CN>同时要求 HTTP 200 与经正则转义的固定页面标记，避免将任意成功状态或可被页面名元字符放大的模式视为通过；该断言不解析、净化或公开正文。</zh-CN>
+                #   <en>Require both HTTP 200 and the fixed page marker escaped for regex, avoiding acceptance of an arbitrary success status or a pattern broadened by page-name metacharacters; this assertion neither parses, sanitizes, nor discloses the body.</en>
+                # </lang>
                 $passed = $response.StatusCode -eq 200 -and $response.Content -match [regex]::Escape($page.Marker)
+
+                # <lang>
+                #   <zh-CN>每页结果详情只公开 HTTP 状态，便于汇总而不泄露后台正文、Cookie、用户名或口令。</zh-CN>
+                #   <en>Expose only HTTP status in each page's result detail for aggregation, without disclosing administrator content, cookies, user names, or passwords.</en>
+                # </lang>
                 Add-PortalCheck -Name $page.Name -Passed $passed -Detail ('HTTP ' + $response.StatusCode)
             }
         }

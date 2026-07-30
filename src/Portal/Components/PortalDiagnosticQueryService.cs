@@ -58,6 +58,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static bool IsValidEventId(string eventId)
         {
+            // <lang>
+            //   <zh-CN>只复用受控格式/日期解析并返回布尔事实，不访问日志目录、读取文件或将外部事件编号视为授权凭据。</zh-CN>
+            //   <en>Reuse only controlled format/date parsing and return a Boolean fact; do not access the log directory, read a file, or treat an external event id as an authorization credential.</en>
+            // </lang>
             DateTime eventDate;
             return TryGetEventDate(eventId, out eventDate);
         }
@@ -88,11 +92,24 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static PortalDiagnosticQueryResult Query(PortalDiagnosticQuery query)
         {
+            // <lang>
+            //   <zh-CN>先归一化调用方 DTO，使日期、过滤器和分页均落入既有受限范围；原始 DTO 不会直接驱动文件扫描。</zh-CN>
+            //   <en>Normalize the caller DTO first so date, filters, and paging fall within established restricted bounds; the raw DTO never drives file scanning directly.</en>
+            // </lang>
             PortalDiagnosticQuery normalized = NormalizeQuery(query);
+
+            // <lang>
+            //   <zh-CN>只收集已解析且匹配的内存条目，并分别记录扫描上限事实；集合不含原始 NDJSON 行或文件路径。</zh-CN>
+            //   <en>Collect only parsed matching entries in memory and separately record the scan-cap fact; the collection contains neither raw NDJSON lines nor file paths.</en>
+            // </lang>
             var matches = new List<PortalDiagnosticEntry>();
             bool wasTruncated = false;
             int scannedEntries = 0;
 
+            // <lang>
+            //   <zh-CN>日志目录只由 PortalDiagnostics 解析，不接受调用方路径；目录缺失是空结果而非异常，避免后台页因尚无日志失败。</zh-CN>
+            //   <en>Resolve the log directory only through PortalDiagnostics and accept no caller path; a missing directory is an empty result rather than an exception so an administration page does not fail merely because no log exists yet.</en>
+            // </lang>
             string logDirectory = PortalDiagnostics.ResolveLogDirectory();
             if (!Directory.Exists(logDirectory))
             {
@@ -105,6 +122,10 @@ namespace ASPNET.StarterKit.Portal
                 {
                     foreach (string line in File.ReadLines(logFile.FullName))
                     {
+                        // <lang>
+                        //   <zh-CN>在处理下一行前累计全查询扫描量；越过固定上限即停止后续文件，明确向结果暴露截断而不无限读取日志。</zh-CN>
+                        //   <en>Count the next line against the whole-query scan budget before processing it; crossing the fixed cap stops later files and exposes truncation in the result instead of reading logs without bound.</en>
+                        // </lang>
                         scannedEntries++;
                         if (scannedEntries > MaximumScannedEntries)
                         {
@@ -121,6 +142,10 @@ namespace ASPNET.StarterKit.Portal
                 }
                 catch (Exception exception)
                 {
+                    // <lang>
+                    //   <zh-CN>单个不可读文件不会阻断受控后台查询；警告只含文件名和已净化截断的异常文本，不写入文件路径或原始内容。</zh-CN>
+                    //   <en>One unreadable file cannot block the controlled administration query; the warning contains only file name and sanitized truncated exception text, never file path or raw content.</en>
+                    // </lang>
                     Trace.TraceWarning(
                         "Portal diagnostic query skipped file '{0}'. Error={1}",
                         logFile.Name,
@@ -133,6 +158,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>以 UTC 时间倒序并以 ordinal 事件编号稳定打破并列，随后在内存中分页；HasMore 只描述受限匹配集合，WasTruncated 仍单独保留。</zh-CN>
+            //   <en>Order by UTC time descending with ordinal event id as stable tie-breaker, then page in memory; HasMore describes only the restricted match collection while WasTruncated remains separate.</en>
+            // </lang>
             matches = matches
                 .OrderByDescending(item => item.UtcTime)
                 .ThenByDescending(item => item.EventId, StringComparer.Ordinal)
@@ -173,6 +202,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static PortalDiagnosticEntry FindByEventId(string eventId)
         {
+            // <lang>
+            //   <zh-CN>先验证并提取事件编号中的日期；无效输入在任何目录或文件操作前按未找到返回，不把格式检查当作访问授权。</zh-CN>
+            //   <en>Validate and extract the event-id date first; invalid input returns not found before directory or file operation and format checking is not treated as access authorization.</en>
+            // </lang>
             DateTime eventDate;
             if (!TryGetEventDate(eventId, out eventDate))
             {
@@ -195,6 +228,10 @@ namespace ASPNET.StarterKit.Portal
                         scannedEntries++;
                         if (scannedEntries > MaximumScannedEntries)
                         {
+                            // <lang>
+                            //   <zh-CN>详情读取也遵守同一固定扫描上限；达到上限只记录不含敏感正文的警告并按未找到返回，避免单个编号触发无界读取。</zh-CN>
+                            //   <en>Detail lookup obeys the same fixed scan cap; on reaching it, write only a warning without sensitive body content and return not found so one id cannot trigger unbounded reading.</en>
+                            // </lang>
                             Trace.TraceWarning(
                                 "Portal diagnostic detail reached scan cap of {0} entries for event '{1}'.",
                                 MaximumScannedEntries,
@@ -205,12 +242,20 @@ namespace ASPNET.StarterKit.Portal
                         PortalDiagnosticEntry entry = ParseEntry(line, logFile.Name);
                         if (entry != null && string.Equals(entry.EventId, eventId, StringComparison.Ordinal))
                         {
+                            // <lang>
+                            //   <zh-CN>只在已解析条目的事件编号与已验证输入按 ordinal 精确相等时返回；不以文件名、部分匹配或客户端提供的其它字段替代该事实。</zh-CN>
+                            //   <en>Return only when a parsed entry event id equals validated input by ordinal comparison; do not substitute file name, partial matches, or other client-supplied fields for that fact.</en>
+                            // </lang>
                             return entry;
                         }
                     }
                 }
                 catch (Exception exception)
                 {
+                    // <lang>
+                    //   <zh-CN>跳过单个不可读详情文件并记录净化警告，保留其它候选文件的查找机会；不把异常详情返回给调用方。</zh-CN>
+                    //   <en>Skip one unreadable detail file with a sanitized warning while preserving lookup opportunity in other candidates; do not return exception detail to the caller.</en>
+                    // </lang>
                     Trace.TraceWarning(
                         "Portal diagnostic detail skipped file '{0}'. Error={1}",
                         logFile.Name,
@@ -241,6 +286,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static PortalDiagnosticQuery NormalizeQuery(PortalDiagnosticQuery query)
         {
+            // <lang>
+            //   <zh-CN>以当前 UTC 日期建立默认窗口，避免调用方本地时区或缺失日期扩大诊断扫描范围。</zh-CN>
+            //   <en>Establish the default window from the current UTC date so caller local time zones or missing dates cannot broaden diagnostic scanning.</en>
+            // </lang>
             DateTime nowUtc = DateTime.UtcNow.Date;
             DateTime startUtc = query == null || query.StartUtc == DateTime.MinValue
                 ? nowUtc.AddDays(-6)
@@ -251,14 +300,26 @@ namespace ASPNET.StarterKit.Portal
 
             if (endUtcExclusive <= startUtc)
             {
+                // <lang>
+                //   <zh-CN>倒置或零长度区间回退为从起始日开始的一天半开窗口，保证下游日期比较具有正长度。</zh-CN>
+                //   <en>Fall back an inverted or zero-length interval to a one-day half-open window from start date so downstream date comparisons have positive length.</en>
+                // </lang>
                 endUtcExclusive = startUtc.AddDays(1);
             }
 
             if ((endUtcExclusive - startUtc).TotalDays > MaximumQueryDays)
             {
+                // <lang>
+                //   <zh-CN>将过宽窗口截到固定天数上限，限制文件枚举和 NDJSON 扫描成本，而不以异常回显调用方日期。</zh-CN>
+                //   <en>Clamp an over-wide window to the fixed day cap, limiting file enumeration and NDJSON scan cost without echoing caller dates through an exception.</en>
+                // </lang>
                 endUtcExclusive = startUtc.AddDays(MaximumQueryDays);
             }
 
+            // <lang>
+            //   <zh-CN>构造独立的受限查询对象：明确 UTC Kind、长度受限过滤器和有界分页；不修改调用方 DTO。</zh-CN>
+            //   <en>Construct an independent restricted query with explicit UTC kind, length-bounded filters, and bounded paging; do not mutate the caller DTO.</en>
+            // </lang>
             return new PortalDiagnosticQuery
             {
                 StartUtc = DateTime.SpecifyKind(startUtc, DateTimeKind.Utc),
@@ -303,6 +364,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static IEnumerable<FileInfo> GetLogFiles(string logDirectory, DateTime startUtc, DateTime endUtcExclusive)
         {
+            // <lang>
+            //   <zh-CN>只枚举调用方已解析的日志目录顶层 portal JSONL 模式；不递归、不接受用户路径且不读取文件内容。</zh-CN>
+            //   <en>Enumerate only the top-level portal JSONL pattern in the caller-resolved log directory; do not recurse, accept user paths, or read file content.</en>
+            // </lang>
             var files = new List<FileInfo>();
             foreach (string path in Directory.EnumerateFiles(logDirectory, "portal-*.jsonl", SearchOption.TopDirectoryOnly))
             {
@@ -312,12 +377,20 @@ namespace ASPNET.StarterKit.Portal
                     fileDate < startUtc.Date ||
                     fileDate >= endUtcExclusive.Date)
                 {
+                    // <lang>
+                    //   <zh-CN>拒绝不符合受控文件名或日期窗口的候选，避免任意同目录文件进入诊断扫描。</zh-CN>
+                    //   <en>Reject candidates outside the controlled filename format or date window so arbitrary sibling files cannot enter diagnostic scanning.</en>
+                    // </lang>
                     continue;
                 }
 
                 files.Add(new FileInfo(path));
             }
 
+            // <lang>
+            //   <zh-CN>按文件名倒序稳定排序并取固定上限，限制单次查询可打开的候选文件数。</zh-CN>
+            //   <en>Order stably by filename descending and take the fixed cap, limiting candidate files a single query may open.</en>
+            // </lang>
             return files
                 .OrderByDescending(item => item.Name, StringComparer.OrdinalIgnoreCase)
                 .Take(MaximumScannedFiles)
@@ -350,6 +423,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static PortalDiagnosticEntry ParseEntry(string line, string fileName)
         {
+            // <lang>
+            //   <zh-CN>空白行不是诊断事件，直接忽略而不反序列化或产生警告。</zh-CN>
+            //   <en>A blank line is not a diagnostic event; ignore it without deserialization or warning.</en>
+            // </lang>
             if (string.IsNullOrWhiteSpace(line))
             {
                 return null;
@@ -357,10 +434,18 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>只反序列化为受控 DTO；DTO 仍依赖日志生产者已完成净化，不把原始行返回或写入警告。</zh-CN>
+                //   <en>Deserialize only into the controlled DTO; it still relies on producer sanitization and neither returns raw line content nor writes it to warnings.</en>
+                // </lang>
                 return JsonConvert.DeserializeObject<PortalDiagnosticEntry>(line);
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>单条畸形事件仅写入受控文件名和已净化、截断的异常摘要后跳过；不记录原始行，且不会阻止同文件其余事件继续读取。</zh-CN>
+                //   <en>Skip one malformed event after logging only the controlled file name and sanitized, truncated exception summary; do not log the raw line or block reading other events in the file.</en>
+                // </lang>
                 Trace.TraceWarning(
                     "Portal diagnostic query skipped malformed entry in '{0}'. Error={1}",
                     fileName,
@@ -395,6 +480,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static bool Matches(PortalDiagnosticEntry entry, PortalDiagnosticQuery query)
         {
+            // <lang>
+            //   <zh-CN>先以 UTC 半开区间排除事件，保持结束日不包含并避免相邻查询重复。</zh-CN>
+            //   <en>Exclude entries first with the UTC half-open interval, keeping the end day exclusive and avoiding duplication across adjacent queries.</en>
+            // </lang>
             if (entry.UtcTime < query.StartUtc || entry.UtcTime >= query.EndUtcExclusive)
             {
                 return false;
@@ -410,6 +499,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>可选事件编号使用 ordinal 精确比较；空过滤器只表示不按编号缩小已受限结果，不构成授权判断。</zh-CN>
+            //   <en>Use ordinal exact comparison for optional event id; an empty filter merely does not narrow the already restricted result and is not authorization.</en>
+            // </lang>
             return string.IsNullOrEmpty(query.EventId) ||
                    string.Equals(entry.EventId, query.EventId, StringComparison.Ordinal);
         }
@@ -440,6 +533,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static bool TryGetEventDate(string eventId, out DateTime eventDate)
         {
+            // <lang>
+            //   <zh-CN>先写入稳定失败值，再以 culture-invariant 受控正则和 yyyyMMdd 解析日期；不访问日志或抛出格式细节。</zh-CN>
+            //   <en>Set a stable failure value first, then parse the date with culture-invariant controlled regex and yyyyMMdd; do not access logs or throw format detail.</en>
+            // </lang>
             eventDate = DateTime.MinValue;
             Match match = EventIdPattern.Match(eventId ?? string.Empty);
             if (!match.Success)
@@ -487,6 +584,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static bool TryGetFileParts(string fileName, out DateTime fileDate, out int sequence)
         {
+            // <lang>
+            //   <zh-CN>从受控 portal 文件名提取 UTC 日期和三位序号；不匹配或无效日期保持失败值并拒绝候选。</zh-CN>
+            //   <en>Extract UTC date and three-digit sequence from a controlled portal filename; a mismatch or invalid date retains failure values and rejects the candidate.</en>
+            // </lang>
             fileDate = DateTime.MinValue;
             sequence = 0;
             Match match = FileNamePattern.Match(fileName ?? string.Empty);
@@ -530,6 +631,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static string NormalizeFilter(string value, int maximumLength)
         {
+            // <lang>
+            //   <zh-CN>空白过滤器归一为稳定空字符串；非空值仅修剪并按调用方固定上限截断，不执行通配、正则或授权解释。</zh-CN>
+            //   <en>Normalize a blank filter to stable empty string; trim and truncate non-blank input only to the caller's fixed cap, without wildcard, regex, or authorization interpretation.</en>
+            // </lang>
             if (string.IsNullOrWhiteSpace(value))
             {
                 return string.Empty;
