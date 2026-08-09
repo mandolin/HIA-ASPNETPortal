@@ -812,6 +812,10 @@
 | P26.5lh 注释补强 | 已为三份生成文件补齐 12/12 个字段的中英双语 `<lang>` XML，并加入生成头覆盖提示；字段声明和 Web Forms 绑定未改变。 |
 | P26.5li 静态验证 | 通过；字段 `<lang>` 分别 4/4、3/3、5/5，文件 `<lang>` 分别 5/4/6；源码盘点目标候选 0，Debug/XML gate 通过，Portal XML member count 1872，注释债务保持 `27/6`，TODO `scanner-rule-text=39`，PowerShell inventory `65/65` help、`65/65` HIA、缺失 0；UTF-8 无 BOM/CRLF 与两仓库 `git diff --check` 通过。未运行 Designer 生成器、数据库、IIS/HTTP、浏览器或真实角色/模块包/健康 proof，重生成覆盖风险已登记。 |
 | 当前唯一下一步 | 进入 P26.5lj：重新读取最新源码盘点，继续选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5lg-li，生成文件重生成风险继续显式登记。 |
+| P26.5lj 选片 | 已选择 `BusinessApplications.aspx.designer.cs`、`ModuleDefinitions.aspx.designer.cs`、`ModuleDefs.ascx.designer.cs` 与 `SiteSettings.ascx.designer.cs`，同属 Admin 配置/业务申请生成 Designer 注释-only/静态验证路径，合计 23 个 protected 字段；页面逻辑、权限/路径实现、数据访问、生成器和真实 proof 排除。 |
+| P26.5lk 注释补强 | 已为四份生成文件补齐 23/23 个字段的中英双语 `<lang>` XML，并加入生成头覆盖提示；字段声明、类型、访问级别、partial class 与标记绑定未改变。 |
+| P26.5ll 静态验证 | 通过；字段 `<lang>` 分别 5/10/3/5，文件 `<lang>` 分别 6/11/4/6；源码盘点目标候选 0，Debug/XML gate 通过，Portal XML member count 1872，注释债务保持 `27/6`，TODO 总计 430 且 `scanner-rule-text=39`，PowerShell inventory `65/65` help、`65/65` HIA、高风险缺失 0；UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过。未运行 Designer 生成器、数据库、IIS/HTTP、浏览器、真实业务申请/模块定义/站点设置记录或发布 proof，重生成覆盖风险已登记。 |
+| 当前唯一下一步 | 进入 P26.5lm：重新读取最新源码盘点，继续选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5lj-ll，生成文件重生成风险继续显式登记。 |
 
 
 ## Known Residual Working Tree Items
