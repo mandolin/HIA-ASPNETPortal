@@ -904,7 +904,10 @@
 | P26.5om 选片 | 已选择 `PortalHealthChecker.cs` 的只读健康检查编排职责链；覆盖固定检查顺序、运行时/配置/数据库/Profile/Registry/目录/主题状态、敏感值投影、主题 fail-closed 和临时文件清理；真实数据库、目录写入、主题资源、IIS/HTTP、账号、凭据与发布 proof 排除。见 [P26.5om 选片](work-zone/dev/plans/W-anp-P26.5om-health-checker-selection.md)。 |
 | P26.5pn 注释补强 | 已将类/公开入口历史双语表面迁移为 `<lang>`，为 12 个 private helper 补齐 XML 文档，并为固定顺序、局部生命周期、数据库/主题边界、敏感值投影和目录清理补充 64 个双语块；新增非注释代码 `0`。见 [P26.5pn 结果](work-zone/dev/plans/W-anp-P26.5pn-health-checker-result.md)。 |
 | P26.5po 静态验证 | 通过；目标差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1907`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5po 审计](work-zone/dev/plans/W-anp-P26.5po-health-checker-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5or：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5om-pn。 |
+| P26.5or 选片 | 已选择 `PortalHealthCheckResult.cs`、`PortalHealthSnapshot.cs` 与 `PortalHealthStatus.cs` 的健康结果模型职责链；覆盖单项结果字段归一、快照空集合回退、Error → Warning → Unknown → Healthy 汇总优先级和状态枚举；真实检查、数据库、文件系统、主题、IIS/HTTP、账号、凭据与发布 proof 排除。见 [P26.5or 选片](work-zone/dev/plans/W-anp-P26.5or-health-model-selection.md)。 |
+| P26.5ps 注释补强 | 已迁移三文件历史双语表面，并为单项结果构造器、快照构造器和汇总状态计算补充 34 个中英双语 `<lang>` 块；新增非注释代码 `0`。见 [P26.5ps 结果](work-zone/dev/plans/W-anp-P26.5ps-health-model-result.md)。 |
+| P26.5pt 静态验证 | 通过；三个目标文件差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1907`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5pt 审计](work-zone/dev/plans/W-anp-P26.5pt-health-model-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5pu：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5or-pt。 |
 
 ## Known Residual Working Tree Items
 
