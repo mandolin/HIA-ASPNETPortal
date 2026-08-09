@@ -886,7 +886,10 @@
 | P26.5nu 选片 | 已选择 `Contacts.ascx` 与 `Document.ascx` 的联系人/文档展示标记层职责链；覆盖共享编辑入口、列表数据绑定、编码输出、mailto 条件、受控下载入口和旧链接策略边界，code-behind、数据访问、真实内容与 proof 排除。见 [P26.5nu 选片](work-zone/dev/plans/W-anp-P26.5nu-contacts-document-markup-selection.md)。 |
 | P26.5nv 注释补强 | 已为两份联系人/文档展示标记文件各新增 3 个服务器端双语 `<%-- ... --%>` 块，合计 `6` 个；控件注册、EditUrl、Visible 状态、字段 id、绑定表达式、ViewState、下载 URL 和页面结构未改变。见 [P26.5nv 结果](work-zone/dev/plans/W-anp-P26.5nv-contacts-document-markup-result.md)。 |
 | P26.5nw 静态验证 | 通过；`Contacts.ascx`、`Document.ascx` 的服务器注释/`<lang>` 均为 `5/5`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实联系人/文档记录、编辑、上传、下载、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5nw 审计](work-zone/dev/plans/W-anp-P26.5nw-contacts-document-markup-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5nx：登记 P14 联系人与文档展示标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5nu-nw。 |
+| P26.5nx 选片 | 已选择 `PortalNavigationPolicy.cs` 与 `ExternalConnectionStringLoader.cs` 的配置/路径安全职责链；覆盖回跳同源、路径遍历、部署资源边界、外置连接串根目录、provider 约束和敏感值来源，数据库、IIS/HTTP、真实凭据与外部 proof 排除。见 [P26.5nx 选片](work-zone/dev/plans/W-anp-P26.5nx-config-navigation-selection.md)。 |
+| P26.5ny 注释补强 | 已为配置/路径安全职责链补齐 `PortalNavigationPolicy.cs` 五个私有 helper 的 XML `<lang>` 文档，并为回跳、路径、外置连接串和 provider 校验流程补充关键局部变量双语说明；未改变任何代码语句。见 [P26.5ny 结果](work-zone/dev/plans/W-anp-P26.5ny-config-navigation-result.md)。 |
+| P26.5nz 静态验证 | 通过；两文件去除全部 XML/inline 注释后与基线一致，新增非注释代码 `0`，Debug 构建与 XML 文档检查通过，XML member count 为 `1877`，UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；构建保留既有 `Roles.ModulesConfig` CS0108 警告，未执行真实连接串、路径、数据库、IIS/HTTP 或凭据 proof。见 [P26.5nz 审计](work-zone/dev/plans/W-anp-P26.5nz-config-navigation-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5oa：登记 P14 配置与路径安全职责链 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5nx-nz。 |
 
 ## Known Residual Working Tree Items
 

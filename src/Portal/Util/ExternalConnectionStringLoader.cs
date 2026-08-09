@@ -221,17 +221,45 @@ namespace ASPNET.StarterKit.Portal.Util
         /// </exception>
         public static ExternalConnectionStringLoadResult LoadPortalConnectionString(string environmentName)
         {
+            // <lang>
+            //   <zh-CN>把调用方传入的环境名称收敛为文件路径使用的稳定片段，生命周期仅覆盖本次启动读取。</zh-CN>
+            //   <en>Reduce the caller-supplied environment name to a stable path segment whose lifetime is limited to this startup read.</en>
+            // </lang>
             string env = NormalizeEnvironmentName(environmentName);
+
+            // <lang>
+            //   <zh-CN>解析外置配置根目录；该目录来自受控 appSettings 或进程用户目录，不从连接串内容推导。</zh-CN>
+            //   <en>Resolve the external configuration root from controlled appSettings or the process user profile, never from connection-string content.</en>
+            // </lang>
             string configRoot = ResolveExternalConfigRoot();
+
+            // <lang>
+            //   <zh-CN>组合当前环境的固定 XML 文件路径，后续文件结构校验和敏感值读取都以此为唯一来源。</zh-CN>
+            //   <en>Compose the fixed XML path for the current environment; subsequent structure checks and sensitive-value reads use this single source.</en>
+            // </lang>
             string configFile = Path.Combine(configRoot, env, ConnectionStringsFileName);
 
             // <lang>
             //   <zh-CN>外置文件必须存在，即使后续使用环境变量覆盖连接串值，也不能绕过文件结构校验。</zh-CN>
             //   <en>The external file must exist even when an environment variable later overrides the sensitive connection-string value; the file contract still has to be validated.</en>
             // </lang>
+            // <lang>
+            //   <zh-CN>读取外置文件中的敏感连接串值；空值或缺项在 helper 内作为配置错误拒绝。</zh-CN>
+            //   <en>Read the sensitive connection-string value from the external file; the helper rejects missing or blank entries as configuration errors.</en>
+            // </lang>
             string connectionString = ReadConnectionString(configFile, LogicalConnectionStringName);
+
+            // <lang>
+            //   <zh-CN>读取并固定 provider invariant，确保环境变量覆盖只能替换敏感值而不能切换数据库 provider。</zh-CN>
+            //   <en>Read and fix the provider invariant so an environment-variable override can replace only the sensitive value, not the database provider.</en>
+            // </lang>
             string providerInvariantName = ReadProviderInvariantName(configFile, LogicalConnectionStringName);
             ValidatePrimaryPortalProvider(providerInvariantName, configFile);
+
+            // <lang>
+            //   <zh-CN>读取可选敏感环境变量；该值不参与根目录或文件名选择，空白时回退到外置文件。</zh-CN>
+            //   <en>Read the optional sensitive environment variable; it cannot choose the root or file name, and blank values fall back to the external file.</en>
+            // </lang>
             string environmentOverride = Environment.GetEnvironmentVariable(EnvironmentVariableName);
 
             if (!string.IsNullOrWhiteSpace(environmentOverride))
@@ -278,6 +306,10 @@ namespace ASPNET.StarterKit.Portal.Util
         /// </exception>
         public static string ResolveExternalConfigRoot()
         {
+            // <lang>
+            //   <zh-CN>读取部署模板中的根目录覆盖值；它是路径配置而非敏感连接串来源。</zh-CN>
+            //   <en>Read the deployment-template root override; it is path configuration, not a sensitive connection-string source.</en>
+            // </lang>
             string configuredPath = ConfigurationManager.AppSettings[ExternalCfgPathSettingName];
 
             if (!string.IsNullOrWhiteSpace(configuredPath))
@@ -289,6 +321,10 @@ namespace ASPNET.StarterKit.Portal.Util
                 return NormalizePath(configuredPath);
             }
 
+            // <lang>
+            //   <zh-CN>解析当前进程用户目录，作为没有显式覆盖时的默认路径基准。</zh-CN>
+            //   <en>Resolve the current process user profile as the default-path base when no explicit override exists.</en>
+            // </lang>
             string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
             if (string.IsNullOrWhiteSpace(userProfile))
@@ -396,7 +432,16 @@ namespace ASPNET.StarterKit.Portal.Util
         /// </returns>
         private static string ReadProviderInvariantName(string configFile, string connectionStringName)
         {
+            // <lang>
+            //   <zh-CN>复用同一 XML 条目读取路径，避免 provider 检查绕过文件、根节点和名称校验。</zh-CN>
+            //   <en>Reuse the same XML-entry path so provider checking cannot bypass file, root, or logical-name validation.</en>
+            // </lang>
             XElement entry = ReadConnectionStringEntry(configFile, connectionStringName);
+
+            // <lang>
+            //   <zh-CN>提取配置声明的 provider invariant；后续只接受主门户允许的 SQL Server provider。</zh-CN>
+            //   <en>Extract the configured provider invariant; later validation accepts only the SQL Server provider allowed for the primary Portal path.</en>
+            // </lang>
             string providerInvariantName = (string)entry.Attribute("providerName");
 
             if (string.IsNullOrWhiteSpace(providerInvariantName))
@@ -444,6 +489,10 @@ namespace ASPNET.StarterKit.Portal.Util
                     "External connection string file is missing. Expected path: " + configFile);
             }
 
+            // <lang>
+            //   <zh-CN>加载已确认存在的外置 XML；此时仍处于启动配置边界，不把文档内容暴露给页面或日志。</zh-CN>
+            //   <en>Load the confirmed external XML within the startup-configuration boundary; document content is not exposed to pages or logs.</en>
+            // </lang>
             XDocument document = XDocument.Load(configFile);
             if (document.Root == null || !string.Equals(document.Root.Name.LocalName, "connectionStrings", StringComparison.OrdinalIgnoreCase))
             {
@@ -455,6 +504,10 @@ namespace ASPNET.StarterKit.Portal.Util
                     "External connection string file must use <connectionStrings> as root. File: " + configFile);
             }
 
+            // <lang>
+            //   <zh-CN>按逻辑名称选择唯一 add 条目，保持 Portal 连接串语义与 XML 顺序无关。</zh-CN>
+            //   <en>Select the add entry by logical name so Portal connection semantics do not depend on XML element order.</en>
+            // </lang>
             XElement entry = document.Root
                 .Elements()
                 .FirstOrDefault(element =>
