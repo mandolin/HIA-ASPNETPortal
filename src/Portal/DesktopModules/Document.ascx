@@ -1,5 +1,11 @@
 <%@ Control language="c#" Inherits="ASPNET.StarterKit.Portal.Document" CodeBehind="Document.ascx.cs" AutoEventWireup="True" %>
 
+<%--
+    <lang>
+        <zh-CN>共享模块标题控件承载文档编辑入口和主题化标题；动作是否可见仍由服务器编辑上下文决定。</zh-CN>
+        <en>The shared module-title control hosts the document-edit entry and themed title; action visibility remains a server-side edit-context decision.</en>
+    </lang>
+--%>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Title" Src="~/DesktopModuleTitle.ascx"%>
 
 <ASPNETPortal:title EditText="Add New Document" EditUrl="~/DesktopModules/EditDocs.aspx" runat="server" id=Title1 />
@@ -11,6 +17,12 @@
     </lang>
 --%>
 <div class="portal-content-table-wrap">
+<%--
+    <lang>
+        <zh-CN>文档列表由当前模块数据服务绑定并关闭 ViewState；文件名、所有者和分类按安全文本规则输出，不把客户端值当作下载来源。</zh-CN>
+        <en>The current module data service binds the document list with ViewState disabled; file name, owner, and category follow safe-text output rules, and client values are not trusted as download sources.</en>
+    </lang>
+--%>
 <asp:Repeater ID="myDataGrid" EnableViewState="false" runat="server">
     <HeaderTemplate>
         <table class="portal-data-table portal-content-table" cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -29,6 +41,12 @@
                         <lang>
                             <zh-CN>编辑链接只在当前用户具备模块编辑权限时显示。</zh-CN>
                             <en>The edit link is shown only when the current user has module edit permission.</en>
+                        </lang>
+                    --%>
+                    <%--
+                        <lang>
+                            <zh-CN>文档链接地址由服务器根据数据库内容大小选择受控下载入口或校验后的旧链接；原始路径不直接进入页面输出。</zh-CN>
+                            <en>The server chooses a controlled download endpoint or a validated legacy link from the database-content size; raw paths do not enter page output directly.</en>
                         </lang>
                     --%>
                     <asp:HyperLink

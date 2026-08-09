@@ -1,5 +1,11 @@
 <%@ Control language="c#" Inherits="ASPNET.StarterKit.Portal.Contacts" CodeBehind="Contacts.ascx.cs" AutoEventWireup="True" %>
 
+<%--
+    <lang>
+        <zh-CN>共享模块标题控件承载联系人编辑入口和主题化标题；动作是否可见仍由服务器编辑上下文决定。</zh-CN>
+        <en>The shared module-title control hosts the contact-edit entry and themed title; action visibility remains a server-side edit-context decision.</en>
+    </lang>
+--%>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Title" Src="~/DesktopModuleTitle.ascx" %>
 
 <ASPNETPortal:title EditText="Add New Contact" EditUrl="~/DesktopModules/EditContacts.aspx" runat="server" id="Title1" />
@@ -11,6 +17,12 @@
     </lang>
 --%>
 <div class="portal-content-table-wrap">
+<%--
+    <lang>
+        <zh-CN>联系人列表由当前模块数据服务绑定并关闭 ViewState；姓名、角色和电话等字段使用编码绑定，客户端行不作为编辑或数据来源。</zh-CN>
+        <en>The current module data service binds the contact list with ViewState disabled; name, role, and phone fields use encoded binding, and client rows are not trusted as edit or data sources.</en>
+    </lang>
+--%>
 <asp:Repeater ID="myDataGrid" EnableViewState="false" runat="server">
     <HeaderTemplate>
         <table class="portal-data-table portal-content-table" cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -30,6 +42,12 @@
                         <lang>
                             <zh-CN>编辑链接只在当前用户具备模块编辑权限时显示。</zh-CN>
                             <en>The edit link is shown only when the current user has module edit permission.</en>
+                        </lang>
+                    --%>
+                    <%--
+                        <lang>
+                            <zh-CN>邮箱链接只有在服务器生成非空 mailto 地址时显示；空值回退为编码文本，不把联系人字段强制变成可点击外部动作。</zh-CN>
+                            <en>The email link appears only when the server produces a non-empty mailto address; blank values fall back to encoded text instead of forcing a contact field into a clickable external action.</en>
                         </lang>
                     --%>
                     <asp:HyperLink

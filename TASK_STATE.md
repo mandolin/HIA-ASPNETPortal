@@ -883,7 +883,10 @@
 | P26.5nr 选片 | 已选择 `Links.ascx`、`Events.ascx` 与 `Announcements.ascx` 的门户内容列表标记层职责链；覆盖共享编辑入口、数据绑定、编码展示、ItemID 编辑路径、有效记录与导航策略边界，code-behind、数据访问、真实内容与 proof 排除。见 [P26.5nr 选片](work-zone/dev/plans/W-anp-P26.5nr-content-list-markup-selection.md)。 |
 | P26.5ns 注释补强 | 已为三份门户内容列表标记文件各新增 3 个服务器端双语 `<%-- ... --%>` 块，合计 `9` 个；控件注册、EditUrl、Visible 状态、字段 id、绑定表达式、ItemID 路径、ViewState 和页面结构未改变。见 [P26.5ns 结果](work-zone/dev/plans/W-anp-P26.5ns-content-list-markup-result.md)。 |
 | P26.5nt 静态验证 | 通过；三文件服务器注释/`<lang>` 均为 `5/5`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实链接/事件/公告记录、编辑、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5nt 审计](work-zone/dev/plans/W-anp-P26.5nt-content-list-markup-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5nu：登记 P14 门户内容列表标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5nr-nt。 |
+| P26.5nu 选片 | 已选择 `Contacts.ascx` 与 `Document.ascx` 的联系人/文档展示标记层职责链；覆盖共享编辑入口、列表数据绑定、编码输出、mailto 条件、受控下载入口和旧链接策略边界，code-behind、数据访问、真实内容与 proof 排除。见 [P26.5nu 选片](work-zone/dev/plans/W-anp-P26.5nu-contacts-document-markup-selection.md)。 |
+| P26.5nv 注释补强 | 已为两份联系人/文档展示标记文件各新增 3 个服务器端双语 `<%-- ... --%>` 块，合计 `6` 个；控件注册、EditUrl、Visible 状态、字段 id、绑定表达式、ViewState、下载 URL 和页面结构未改变。见 [P26.5nv 结果](work-zone/dev/plans/W-anp-P26.5nv-contacts-document-markup-result.md)。 |
+| P26.5nw 静态验证 | 通过；`Contacts.ascx`、`Document.ascx` 的服务器注释/`<lang>` 均为 `5/5`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实联系人/文档记录、编辑、上传、下载、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5nw 审计](work-zone/dev/plans/W-anp-P26.5nw-contacts-document-markup-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5nx：登记 P14 联系人与文档展示标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5nu-nw。 |
 
 ## Known Residual Working Tree Items
 
