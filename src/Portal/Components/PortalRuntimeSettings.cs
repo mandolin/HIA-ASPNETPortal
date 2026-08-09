@@ -72,6 +72,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             EnsureDefinition(definition);
 
+            // <lang>
+            //   <zh-CN>数据库读取结果只在允许在线覆盖的非敏感设置上短暂持有，生命周期限于本次解析，并可能触发受控回退。</zh-CN>
+            //   <en>Keep the database read result only for an eligible non-sensitive setting during this resolution, where it may lead to a controlled fallback.</en>
+            // </lang>
             PortalSystemSettingReadResult databaseResult = null;
             if (definition.CanEditOnline && !definition.IsSensitive)
             {
@@ -82,6 +86,10 @@ namespace ASPNET.StarterKit.Portal
                 databaseResult = PortalSystemSettingsStore.Read(definition.Key, context);
                 if (databaseResult.IsAvailable && databaseResult.IsFound)
                 {
+                    // <lang>
+                    //   <zh-CN>保存通过数据库类型匹配与规范化门禁的候选文本；该局部值不跨越当前读取调用。</zh-CN>
+                    //   <en>Hold the candidate text that passed database type matching and normalization; this local value does not outlive the current read.</en>
+                    // </lang>
                     string databaseValue;
                     if (string.Equals(databaseResult.ValueType, definition.ValueType.ToString(), StringComparison.Ordinal) &&
                         TryNormalizeValue(definition, databaseResult.Value, out databaseValue))
@@ -113,6 +121,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>保存 appSettings 候选的规范化结果；无效或空白输入保持失败状态并继续回退。</zh-CN>
+            //   <en>Hold the normalized appSettings candidate; invalid or blank input remains a failure and continues fallback.</en>
+            // </lang>
             string configuredValue;
             if (TryNormalizeValue(
                 definition,
@@ -128,6 +140,10 @@ namespace ASPNET.StarterKit.Portal
                     PortalRuntimeSettingSource.AppSettings);
             }
 
+            // <lang>
+            //   <zh-CN>保存代码默认候选的规范化结果；它只在更高优先级来源不可用时使用。</zh-CN>
+            //   <en>Hold the normalized code-default candidate; use it only when higher-priority sources are unavailable.</en>
+            // </lang>
             string defaultValue;
             if (TryNormalizeValue(definition, definition.DefaultValue, out defaultValue))
             {
@@ -219,6 +235,10 @@ namespace ASPNET.StarterKit.Portal
             EnsureDefinition(definition);
             EnsureValueType(definition, PortalSettingValueType.Boolean);
 
+            // <lang>
+            //   <zh-CN>承接最终文本的布尔解析结果；局部值仅服务于本次转换，不保留原始设置文本。</zh-CN>
+            //   <en>Receive the Boolean parse result for the final text; this local serves only the current conversion and retains no raw setting text.</en>
+            // </lang>
             bool parsed;
             return bool.TryParse(GetEffectiveValue(definition).Value, out parsed) && parsed;
         }
@@ -262,6 +282,10 @@ namespace ASPNET.StarterKit.Portal
             EnsureDefinition(definition);
             EnsureValueType(definition, PortalSettingValueType.Integer);
 
+            // <lang>
+            //   <zh-CN>承接最终文本的整数解析结果；随后再次检查定义边界，避免最终回退值绕过范围契约。</zh-CN>
+            //   <en>Receive the integer parse result for the final text; the definition bounds are checked again so the final fallback cannot bypass the range contract.</en>
+            // </lang>
             int parsed;
             return int.TryParse(GetEffectiveValue(definition).Value, out parsed) &&
                    IsIntegerInRange(definition, parsed)
@@ -314,6 +338,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>生成仅用于本次类型分派的去首尾空白文本，不修改调用方字符串，也不扩大候选值生命周期。</zh-CN>
+            //   <en>Create a trimmed text used only for this type dispatch without modifying the caller's string or extending the candidate's lifetime.</en>
+            // </lang>
             string trimmedValue = candidateValue.Trim();
             switch (definition.ValueType)
             {
@@ -321,6 +349,10 @@ namespace ASPNET.StarterKit.Portal
                     // <lang>
                     //   <zh-CN>布尔值只接受 .NET 固定解析形式，并规范为小写稳定文本，避免来源间大小写差异影响后续比较。</zh-CN>
                     //   <en>Accept only fixed .NET Boolean parse forms and normalize to stable lowercase text so source casing differences do not affect later comparisons.</en>
+                    // </lang>
+                    // <lang>
+                    //   <zh-CN>承接布尔解析结果，再写入稳定的小写表示；不保留候选原文。</zh-CN>
+                    //   <en>Receive the Boolean parse result before writing a stable lowercase representation; do not retain the candidate text.</en>
                     // </lang>
                     bool booleanValue;
                     if (bool.TryParse(trimmedValue, out booleanValue))
@@ -335,6 +367,10 @@ namespace ASPNET.StarterKit.Portal
                     // <lang>
                     //   <zh-CN>整数必须可解析且同时满足定义的可选上下限；超界值与格式错误同样触发来源回退。</zh-CN>
                     //   <en>An integer must parse and satisfy the definition's optional lower and upper bounds; out-of-range values fall back just like malformed values.</en>
+                    // </lang>
+                    // <lang>
+                    //   <zh-CN>承接整数解析结果并立即应用定义边界；越界值不得进入规范化输出。</zh-CN>
+                    //   <en>Receive the integer parse result and apply definition bounds immediately; out-of-range values must not enter normalized output.</en>
                     // </lang>
                     int integerValue;
                     if (int.TryParse(trimmedValue, out integerValue) && IsIntegerInRange(definition, integerValue))
@@ -355,6 +391,24 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证运行期设置定义存在，阻止读取入口在缺少已登记契约时继续执行。</zh-CN>
+        ///   <en>Validates that a runtime setting definition exists before a read continues without its registered contract.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="definition">
+        /// <l>
+        ///   <zh-CN>待验证的设置定义。</zh-CN>
+        ///   <en>Setting definition to validate.</en>
+        /// </l>
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// <l>
+        ///   <zh-CN>定义为 <c>null</c> 时引发。</zh-CN>
+        ///   <en>Thrown when the definition is <c>null</c>.</en>
+        /// </l>
+        /// </exception>
         private static void EnsureDefinition(PortalSettingDefinition definition)
         {
             // <lang>
@@ -367,6 +421,30 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证读取入口所要求的值类型与登记定义一致，拒绝静默跨类型转换。</zh-CN>
+        ///   <en>Validates that the registered value type matches the read entry point and rejects silent cross-type conversion.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="definition">
+        /// <l>
+        ///   <zh-CN>已登记的设置定义。</zh-CN>
+        ///   <en>Registered setting definition.</en>
+        /// </l>
+        /// </param>
+        /// <param name="expectedType">
+        /// <l>
+        ///   <zh-CN>当前读取入口允许的值类型。</zh-CN>
+        ///   <en>Value type allowed by the current read entry point.</en>
+        /// </l>
+        /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>登记类型与入口要求不一致时引发。</zh-CN>
+        ///   <en>Thrown when the registered type does not match the entry point requirement.</en>
+        /// </l>
+        /// </exception>
         private static void EnsureValueType(PortalSettingDefinition definition, PortalSettingValueType expectedType)
         {
             // <lang>
@@ -380,6 +458,30 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按定义的可选整数上下限检查候选值，保持所有来源共用同一范围契约。</zh-CN>
+        ///   <en>Checks a candidate against the definition's optional integer bounds so every source shares one range contract.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="definition">
+        /// <l>
+        ///   <zh-CN>提供可选上下限的设置定义。</zh-CN>
+        ///   <en>Setting definition providing optional bounds.</en>
+        /// </l>
+        /// </param>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>待检查的整数候选值。</zh-CN>
+        ///   <en>Integer candidate to check.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>值未越过已设置边界时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the value stays within every configured bound.</en>
+        /// </l>
+        /// </returns>
         private static bool IsIntegerInRange(PortalSettingDefinition definition, int value)
         {
             // <lang>
@@ -399,6 +501,30 @@ namespace ASPNET.StarterKit.Portal
             return true;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>以稳定键和受控原因对数据库覆盖回退告警去重，并交给诊断层隔离输出。</zh-CN>
+        ///   <en>Deduplicates database-override fallback warnings by stable key and controlled reason, then delegates isolated output to diagnostics.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="key">
+        /// <l>
+        ///   <zh-CN>已登记的稳定设置键。</zh-CN>
+        ///   <en>Stable key of the registered setting.</en>
+        /// </l>
+        /// </param>
+        /// <param name="reason">
+        /// <l>
+        ///   <zh-CN>不包含原始值或连接信息的受控回退原因。</zh-CN>
+        ///   <en>Controlled fallback reason without raw values or connection details.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>供诊断层净化请求上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Request context for diagnostics sanitization; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
         private static void WarnDatabaseFallback(string key, string reason, HttpContext context)
         {
             // <lang>
