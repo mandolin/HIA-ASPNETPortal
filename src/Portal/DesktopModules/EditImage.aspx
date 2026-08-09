@@ -14,6 +14,12 @@
         </div>
 
         <div class="portal-detail-card portal-edit-form">
+            <%--
+                <lang>
+                    <zh-CN>Src 只接受当前兼容策略允许的站内或 HTTP(S) 图片地址；预览面板是展示反馈，不替代服务器来源校验。</zh-CN>
+                    <en>Src accepts only application-local or HTTP(S) image locations allowed by the compatibility policy; the preview is display feedback and does not replace server-side source validation.</en>
+                </lang>
+            --%>
             <div class="portal-edit-subsection">
                 <h2 class="portal-edit-subtitle">Image Source</h2>
                 <p class="portal-field-help">优先使用站内图片路径；HTTP(S) 外链图片会按当前兼容策略保留，但应只指向受信任来源。</p>
@@ -39,6 +45,12 @@
             </div>
 
             <div class="portal-inline-field-grid">
+                <%--
+                    <lang>
+                        <zh-CN>宽高字段可选但必须按服务器约束解释为非负整数；空值、范围和保存结果不由客户端或 CSS 决定。</zh-CN>
+                        <en>Width and height are optional but must be interpreted by the server as non-negative integers; empty values, ranges, and save results are not decided by the client or CSS.</en>
+                    </lang>
+                --%>
                 <div class="portal-inline-field">
                     <div class="portal-field-stack portal-edit-short-field">
                         <asp:Label ID="WidthLabel" CssClass="portal-field-stack-label" AssociatedControlID="Width"
@@ -60,6 +72,12 @@
             <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message"
                 EnableViewState="false" Visible="false" runat="server" />
 
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel 进入图片配置的既有服务器流程；按钮不改变来源信任、尺寸校验或权限。</zh-CN>
+                    <en>Update and Cancel enter the existing server flow for image settings; the buttons do not change source trust, dimension validation, or authorization.</en>
+                </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton ID="updateButton" Text="Update" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none"

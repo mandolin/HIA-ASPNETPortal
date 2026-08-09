@@ -14,12 +14,24 @@
         </div>
 
         <div class="portal-detail-card portal-edit-form">
+            <%--
+                <lang>
+                    <zh-CN>XML/XSL 输入只维护受信部署目录内的资源引用；本页不提供上传、在线编辑、外部 URL 或任意物理路径能力。</zh-CN>
+                    <en>XML/XSL inputs maintain references only to trusted deployment resources; this page provides no upload, online editing, external URL, or arbitrary physical-path capability.</en>
+                </lang>
+            --%>
             <div class="portal-option-stack">
                 <strong>Deployment resources only</strong>
                 <span class="portal-field-help">XML 与 XSL/T 文件必须位于当前应用部署目录内。本页只维护路径，不提供上传、在线编辑、外部 URL 或任意物理路径能力。</span>
             </div>
 
             <div class="portal-field-stack">
+                <%--
+                    <lang>
+                        <zh-CN>XmlDataSrc 与 XslTransformSrc 由服务器规范化并限制在应用虚拟路径边界；文本框值不是外部资源信任证明。</zh-CN>
+                        <en>The server normalizes XmlDataSrc and XslTransformSrc within the application virtual-path boundary; a textbox value is not proof that an external resource is trusted.</en>
+                    </lang>
+                --%>
                 <asp:Label ID="XmlDataSrcLabel" CssClass="portal-field-stack-label" AssociatedControlID="XmlDataSrc"
                     runat="server" Text="XML Data File" />
                 <%--
@@ -42,6 +54,12 @@
             <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message"
                 EnableViewState="false" Visible="false" runat="server" />
 
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel 进入既有 XML/XSL 设置流程；按钮不绕过部署路径验证、权限或错误提示。</zh-CN>
+                    <en>Update and Cancel enter the existing XML/XSL settings flow; the buttons do not bypass deployment-path validation, authorization, or error reporting.</en>
+                </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton ID="updateButton" Text="Update" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none"

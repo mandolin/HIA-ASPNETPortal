@@ -868,7 +868,10 @@
 | P26.5nc 选片 | 已选择 `EditAnnouncements.aspx`、`EditEvents.aspx` 与 `EditLinks.aspx` 的门户内容编辑器标记层职责链；覆盖正文/链接、日期、URL、排序、验证和保存/删除命令，规范化、权限、审计、数据库和真实 proof 排除。见 [P26.5nc 选片](work-zone/dev/plans/W-anp-P26.5nc-content-editors-markup-selection.md)。 |
 | P26.5nd 注释补强 | 已为三份门户内容编辑器标记文件各新增 3 个服务器端双语 `<%-- ... --%>` 块，合计 9 个；控件、验证器、事件、字段 id、默认值、命令、页面结构和既有页面级注释未改变。见 [P26.5nd 结果](work-zone/dev/plans/W-anp-P26.5nd-content-editors-markup-result.md)。 |
 | P26.5ne 静态验证 | 通过；三文件服务器注释/`<lang>` 均为 `4/4`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实公告/事件/链接记录、URL/日期/排序校验、保存/删除、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5ne 审计](work-zone/dev/plans/W-anp-P26.5ne-content-editors-markup-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5nf：登记 P14 内容编辑器标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5nc-ne。 |
+| P26.5nf 选片 | 已选择 `EditContacts.aspx`、`EditImage.aspx` 与 `EditXml.aspx` 的联系人/图片/XML 资源标记层职责链；覆盖联系人输入、图片来源/预览/尺寸、部署内 XML/XSL 路径和保存/删除命令，隐私、路径、权限、数据层和真实 proof 排除。见 [P26.5nf 选片](work-zone/dev/plans/W-anp-P26.5nf-contact-image-xml-markup-selection.md)。 |
+| P26.5ng 注释补强 | 已为三份联系人/图片/XML 资源标记文件各新增 3 个服务器端双语 `<%-- ... --%>` 块，合计 9 个；控件、验证器、事件、字段 id、Visible 状态、默认值、命令、路径和页面结构未改变。见 [P26.5ng 结果](work-zone/dev/plans/W-anp-P26.5ng-contact-image-xml-markup-result.md)。 |
+| P26.5nh 静态验证 | 通过；三文件服务器注释/`<lang>` 分别为 `4/4`、`4/4`、`5/5`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实联系人/图片/XML 记录、外链、路径、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5nh 审计](work-zone/dev/plans/W-anp-P26.5nh-contact-image-xml-markup-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5ni：登记 P14 联系人、图片与 XML 资源标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5nf-nh。 |
 
 ## Known Residual Working Tree Items
 

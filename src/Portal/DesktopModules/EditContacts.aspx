@@ -14,6 +14,12 @@
         </div>
 
         <div class="portal-detail-card portal-edit-form">
+            <%--
+                <lang>
+                    <zh-CN>姓名、角色和联系方式组成联系人资料输入；长度、必填、规范化和最终持久化仍由服务器处理。</zh-CN>
+                    <en>Name, role, and contact fields form contact-profile input; length, requiredness, normalization, and final persistence remain server-side.</en>
+                </lang>
+            --%>
             <div class="portal-field-stack">
                 <asp:Label ID="NameLabel" CssClass="portal-field-stack-label" AssociatedControlID="NameField"
                     runat="server" Text="Name" />
@@ -31,6 +37,12 @@
             </div>
 
             <div class="portal-field-stack">
+                <%--
+                    <lang>
+                        <zh-CN>Email、Contact1 和 Contact2 仅承载联系信息文本；格式、隐私处理和输出编码不由标记层假定或放宽。</zh-CN>
+                        <en>Email, Contact1, and Contact2 carry contact text only; format, privacy handling, and output encoding are not assumed or relaxed by markup.</en>
+                    </lang>
+                --%>
                 <asp:Label ID="EmailLabel" CssClass="portal-field-stack-label" AssociatedControlID="EmailField"
                     runat="server" Text="Email" />
                 <asp:TextBox ID="EmailField" CssClass="NormalTextBox portal-input" Columns="30" MaxLength="100"
@@ -51,6 +63,12 @@
                     MaxLength="250" runat="server" />
             </div>
 
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel/Delete 进入既有联系人持久化流程；按钮不绕过权限、当前记录校验或删除保护。</zh-CN>
+                    <en>Update, Cancel, and Delete enter the existing contact persistence flow; the buttons do not bypass authorization, current-record checks, or deletion protection.</en>
+                </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton ID="updateButton" Text="Update" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
