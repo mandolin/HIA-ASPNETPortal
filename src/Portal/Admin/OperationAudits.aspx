@@ -30,6 +30,12 @@
             </div>
         </div>
 
+        <%--
+          <lang>
+            <zh-CN>审计筛选控件只收集展示查询条件；日期、分类、动作和目标编号的解析、范围限制及管理员授权仍由 code-behind 完成。</zh-CN>
+            <en>The audit filter controls only collect display-query criteria; code-behind remains responsible for parsing, range limits, and administrator authorization for dates, category, action, and target id.</en>
+          </lang>
+        --%>
         <div class="portal-admin-section portal-filter-panel">
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
@@ -59,6 +65,12 @@
             <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" runat="server" />
         </div>
 
+        <%--
+          <lang>
+            <zh-CN>分页按钮只表达前后页请求且不触发页面验证；实际审计结果页边界和空结果回退由服务端处理。</zh-CN>
+            <en>Pager buttons express only previous/next requests without page validation; the server handles audit-result page boundaries and empty-result fallback.</en>
+          </lang>
+        --%>
         <div class="portal-pager">
             <div class="Normal portal-pager-info">
                 <asp:Label ID="ResultLabel" runat="server" />
@@ -74,6 +86,12 @@
                 <h2 class="Head portal-section-title">Audit Entries</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                  <lang>
+                    <zh-CN>Repeater 仅呈现审计记录，不提供写入或删除动作；文本字段使用编码绑定，摘要、操作者和目标信息的脱敏边界由服务端查询层负责。</zh-CN>
+                    <en>The Repeater only renders audit records and exposes no write or delete action; encoded bindings render text, while the server query layer owns redaction boundaries for summary, actor, and target data.</en>
+                  </lang>
+                --%>
                 <asp:Repeater ID="EntriesRepeater" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">

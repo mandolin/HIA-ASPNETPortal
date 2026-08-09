@@ -30,6 +30,12 @@
             </div>
         </div>
 
+        <%--
+          <lang>
+            <zh-CN>筛选控件只收集展示查询条件；日期、级别、分类和事件编号的解析、范围限制及授权仍由 SearchButton_Click 的服务端职责完成。</zh-CN>
+            <en>The filter controls only collect display-query criteria; server code in SearchButton_Click remains responsible for parsing, range limits, and authorization for dates, level, category, and event id.</en>
+          </lang>
+        --%>
         <div class="portal-admin-section portal-filter-panel">
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
@@ -64,6 +70,12 @@
             <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" runat="server" />
         </div>
 
+        <%--
+          <lang>
+            <zh-CN>分页按钮仅发送前后页意图且关闭页面验证；实际页码边界、数据读取和越界回退由 code-behind 控制。</zh-CN>
+            <en>Pager buttons submit only previous/next intent with page validation disabled; code-behind controls page boundaries, data reads, and out-of-range fallback.</en>
+          </lang>
+        --%>
         <div class="portal-pager">
             <div class="Normal portal-pager-info">
                 <asp:Label ID="ResultLabel" runat="server" />
@@ -79,6 +91,12 @@
                 <h2 class="Head portal-section-title">Log Entries</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                  <lang>
+                    <zh-CN>Repeater 只读展示受限诊断条目；`<%#: ... %>` 负责编码文本绑定，详情链接统一经过 GetDetailUrl 生成，不在标记层拼接路径。</zh-CN>
+                    <en>The Repeater renders constrained diagnostic entries read-only; `<%#: ... %>` encodes text bindings, and detail links are produced by GetDetailUrl rather than concatenated in markup.</en>
+                  </lang>
+                --%>
                 <asp:Repeater ID="EntriesRepeater" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table portal-diagnostics-table" width="100%" cellspacing="0" cellpadding="0" border="0">

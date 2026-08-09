@@ -828,7 +828,11 @@
 | P26.5ls 选片 | 已选择 `src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js` 登录口令提交前端加密职责链；覆盖模块公开面、六个函数、公钥来源信任、同步读取、固定失败、整批密文提交和明文清理注释；压缩/第三方 `jsencrypt-ie6.min.js`、真实登录与密码学运行 proof 排除。见 [P26.5ls 选片](work-zone/dev/plans/W-anp-P26.5ls-login-password-js-selection.md)。 |
 | P26.5lt 注释补强 | 已为模块与六个函数补充 JSDoc 及流程内双语 `<lang>` 注释；新增 198 行全部为注释，函数/JSDoc `6/6`，字段、请求、返回和明文清理语义未改变。见 [P26.5lt 结果](work-zone/dev/plans/W-anp-P26.5lt-login-password-js-result.md)。 |
 | P26.5lu 静态验证 | 通过；mise Node 24 `node --check`、隔离 JSDoc pilot build/verify、函数/JSDoc `6/6`、`<lang>` `33/33`、新增非注释语句 `0`、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实 RSA/JSEncrypt、浏览器、网络公钥、IIS/HTTP、数据库、账号或凭据 proof。见 [P26.5lu 审计](work-zone/dev/plans/W-anp-P26.5lu-login-password-js-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5lv：登记 P14 登录口令前端脚本 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5ls-lu。 |
+
+| P26.5lv 选片 | 已选择 `DiagnosticLogDetail.aspx`、`DiagnosticsLogs.aspx` 与 `OperationAudits.aspx` 的只读诊断/运营审计标记层职责链；覆盖敏感详情、筛选、分页、编码绑定和无写入动作边界，code-behind、查询、授权和真实 proof 排除。见 [P26.5lv 选片](work-zone/dev/plans/W-anp-P26.5lv-diagnostics-markup-selection.md)。 |
+| P26.5lw 注释补强 | 已为三页各补充 3 个服务器端双语 `<%-- ... --%>` 块，合计 9 个；控件、事件、绑定表达式和页面结构未改变。见 [P26.5lw 结果](work-zone/dev/plans/W-anp-P26.5lw-diagnostics-markup-result.md)。 |
+| P26.5lx 静态验证 | 通过；三文件服务器注释/`<lang>` 均为 `5/5`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过；未执行真实诊断/审计查询、管理员浏览器、数据库、IIS/HTTP 或敏感字段 proof。见 [P26.5lx 审计](work-zone/dev/plans/W-anp-P26.5lx-diagnostics-markup-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5ly：登记 P14 诊断与运营审计标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5lv-lx。 |
 
 ## Known Residual Working Tree Items
 
