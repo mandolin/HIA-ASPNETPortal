@@ -20,6 +20,12 @@
                 <span class="portal-field-help">此入口仅面向受信任管理员。内容会按旧机制保存为 HTML 编码文本，未来将由“原始 HTML”细粒度权限继续收拢。</span>
             </div>
 
+            <%--
+            <lang>
+              <zh-CN>桌面原始 HTML 输入是受信任管理员边界；ValidateRequest=false 只满足旧回发兼容，不能替代权限、审计和内容治理。</zh-CN>
+              <en>The desktop raw-HTML input is restricted to trusted administrators; ValidateRequest=false preserves legacy postback compatibility and does not replace permission, audit, or content governance.</en>
+            </lang>
+            --%>
             <div class="portal-field-stack">
                 <asp:Label ID="DesktopTextLabel" CssClass="portal-field-stack-label" AssociatedControlID="DesktopText"
                     runat="server" Text="Desktop Html Content" />
@@ -34,6 +40,12 @@
             </div>
 
             <div class="portal-edit-subsection">
+                <%--
+                <lang>
+                  <zh-CN>移动端摘要和详情是旧数据兼容字段；它们的可选性和展示回退由服务器内容模型决定。</zh-CN>
+                  <en>Mobile summary and detail are legacy-compatibility fields; their optionality and display fallback are decided by the server content model.</en>
+                </lang>
+                --%>
                 <h2 class="portal-edit-subtitle">Mobile Fallback</h2>
                 <p class="portal-field-help">移动端字段保留旧数据兼容；移动端展示方案稳定后再统一收拢。</p>
             </div>
@@ -53,6 +65,12 @@
             </div>
 
             <div class="portal-form-actions">
+                <%--
+                <lang>
+                  <zh-CN>Update/Cancel 分别进入既有保存或离开流程；按钮不在客户端实现 HTML 清洗、权限判断或回滚。</zh-CN>
+                  <en>Update and Cancel enter the existing save or leave flows; the buttons do not implement HTML sanitization, authorization, or rollback on the client.</en>
+                </lang>
+                --%>
                 <asp:LinkButton ID="updateButton" Text="Update" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none"
                     OnClick="UpdateBtn_Click" />

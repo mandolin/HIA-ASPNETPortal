@@ -37,6 +37,12 @@
             </div>
 
             <div class="portal-field-stack">
+                <%--
+                <lang>
+                  <zh-CN>浏览地址是路径/协议安全边界的输入；标记层只收集文本，服务器必须验证站内相对地址和 http/https 目标。</zh-CN>
+                  <en>The browse address is a path and scheme security boundary; markup only collects text, while the server must validate local-relative and http/https targets.</en>
+                </lang>
+                --%>
                 <asp:Label ID="PathLabel" CssClass="portal-field-stack-label" AssociatedControlID="PathField"
                     runat="server" Text="URL to Browse" />
                 <asp:TextBox ID="PathField" CssClass="NormalTextBox portal-input" Columns="28" MaxLength="250"
@@ -44,6 +50,12 @@
             </div>
 
             <div class="portal-edit-subsection portal-edit-upload-section">
+                <%--
+                <lang>
+                  <zh-CN>上传区域由 Upload 选项、文件输入和服务器策略提示组成；文件名、大小、类型、落盘位置和覆盖行为不能由客户端决定。</zh-CN>
+                  <en>The upload area combines the Upload option, file input, and server policy hint; filename, size, type, storage location, and overwrite behavior cannot be decided by the client.</en>
+                </lang>
+                --%>
                 <h2 class="portal-edit-subtitle">Server Upload</h2>
                 <asp:Label ID="UploadPolicyHint" CssClass="portal-field-help portal-upload-policy" runat="server" />
             </div>
@@ -69,6 +81,12 @@
             </div>
 
             <div class="portal-form-actions">
+                <%--
+                <lang>
+                  <zh-CN>Update/Cancel/Delete 进入既有文档状态流程；数据库存储选项当前禁用，不能把页面勾选当作已启用能力。</zh-CN>
+                  <en>Update, Cancel, and Delete enter the existing document state flow; database storage is currently disabled, so a page option cannot be treated as an enabled capability.</en>
+                </lang>
+                --%>
                 <asp:LinkButton ID="updateButton" Text="Update" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
                 <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"

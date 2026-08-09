@@ -40,6 +40,12 @@
                     <%-- 用户信息输入表格 --%>
                     <tr valign="top">
                         <td class="Normal">
+                            <%--
+                              <lang>
+                                <zh-CN>注册字段和验证器只构造一次性账号申请；唯一性、邀请员工号策略、规范化和账户写入仍由服务器完成。</zh-CN>
+                                <en>Registration fields and validators construct a one-time account request; uniqueness, invited employee-code policy, normalization, and account persistence remain server-side.</en>
+                              </lang>
+                            --%>
                             <%-- 姓名输入 --%>
                             Name:
                             <br>
@@ -80,6 +86,12 @@
                             <%-- 密码输入 --%>
                             Password:
                             <br>
+                            <%--
+                              <lang>
+                                <zh-CN>密码与确认密码的隐藏密文字段仅用于提交前保护，仍属于客户端回传；服务器必须重新验证匹配、策略和安全存储。</zh-CN>
+                                <en>The password and confirmation ciphertext fields only support pre-submit protection and remain client-posted data; the server must revalidate matching, policy, and secure storage.</en>
+                              </lang>
+                            --%>
                             <asp:TextBox size="25" ID="Password" TextMode="Password" runat="server" />
                             <asp:HiddenField ID="EncryptedPassword" runat="server" />
                             &nbsp;
@@ -101,6 +113,12 @@
                                 ErrorMessage="Password fields do not match." runat="server" ID="CompareValidator1" />
                             <p>
                             <%-- 注册按钮 --%>
+                            <%--
+                              <lang>
+                                <zh-CN>RegisterBtn_Click 是账号创建与失败提示的服务器入口；Message 只能反馈服务器结果，不能由页面标记宣称注册成功。</zh-CN>
+                                <en>RegisterBtn_Click is the server entry for account creation and failure messaging; Message reports the server result and cannot be used by markup to claim registration success.</en>
+                              </lang>
+                            --%>
                             <asp:LinkButton class="CommandButton" Text="Submit Registration" runat="server"
                                 ID="RegisterBtn" OnClick="RegisterBtn_Click" />
                             <br>
