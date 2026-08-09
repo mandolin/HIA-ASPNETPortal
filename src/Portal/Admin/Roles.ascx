@@ -16,6 +16,12 @@
             <p class="Normal portal-admin-subtitle">Manage legacy portal roles and enter role membership management.</p>
         </div>
         <div class="portal-admin-actions">
+            <%--
+                <lang>
+                    <zh-CN>新增角色是写库入口，仍通过 AddRole_Click 执行服务器端创建、命名约束和授权边界。</zh-CN>
+                    <en>Adding a role is a persistence entry point and still uses AddRole_Click for server-side creation, naming constraints, and authorization boundaries.</en>
+                </lang>
+            --%>
             <asp:LinkButton
                 ID="AddRoleBtn"
                 CssClass="portal-button portal-button-primary"
@@ -33,6 +39,12 @@
             <h3 class="Head portal-section-title">Portal Roles</h3>
         </div>
         <div class="portal-chip-list-wrap">
+            <%--
+                <lang>
+                    <zh-CN>DataList 以 RoleID 作为命令键并保留角色行事件；显示名称采用编码绑定，编辑和删除必须由服务器重新确认目标与权限。</zh-CN>
+                    <en>The DataList keeps RoleID as the command key and retains role-row events; the name uses encoded binding, while edit and delete must be rechecked by the server for target and authorization.</en>
+                </lang>
+            --%>
             <asp:DataList
                 ID="rolesList"
                 CssClass="portal-chip-list portal-legacy-list"
@@ -63,6 +75,12 @@
                     </div>
                 </ItemTemplate>
                 <EditItemTemplate>
+                    <%--
+                        <lang>
+                            <zh-CN>编辑模板允许改名或进入成员管理，但角色删除保护、旧分号授权同步和保存结果仍由 code-behind 决定。</zh-CN>
+                            <en>The edit template allows renaming or entering membership management, while deletion protection, legacy semicolon-authorization synchronization, and save results remain decided by the code-behind.</en>
+                        </lang>
+                    --%>
                     <div class="portal-chip-item portal-legacy-role-item portal-legacy-role-edit">
                         <asp:TextBox
                             ID="roleName"
