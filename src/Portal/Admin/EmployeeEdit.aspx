@@ -32,6 +32,12 @@
         </div>
 
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
+        <%--
+          <lang>
+            <zh-CN>EmployeeIdField 和 OriginalUpdatedUtcField 只是回发状态载体，客户端可以修改；实体身份和并发版本必须由 code-behind 重新解析与校验。</zh-CN>
+            <en>EmployeeIdField and OriginalUpdatedUtcField are postback state carriers that the client can modify; code-behind must resolve and validate entity identity and concurrency version again.</en>
+          </lang>
+        --%>
         <asp:HiddenField ID="EmployeeIdField" runat="server" />
         <asp:HiddenField ID="OriginalUpdatedUtcField" runat="server" />
 
@@ -39,6 +45,12 @@
             <div class="portal-section-header">
                 <h2 class="Head portal-section-title">Employee Profile</h2>
             </div>
+            <%--
+              <lang>
+                <zh-CN>员工资料控件的 MaxLength 只是输入上限；员工代码唯一性、邮箱格式、组织/状态组合、日期关系和来源系统策略仍由服务端校验。</zh-CN>
+                <en>MaxLength on employee fields is only an input ceiling; the server still validates code uniqueness, email format, organization/status combinations, date relationships, and source-system policy.</en>
+              </lang>
+            --%>
             <div class="portal-form-grid">
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Employee Code</span>
@@ -77,6 +89,12 @@
                     <asp:TextBox ID="SourceSystemTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="80" runat="server" />
                 </div>
             </div>
+            <%--
+              <lang>
+                <zh-CN>保存按钮只触发服务端员工资料更新；并发版本、授权、审计和失败回退不由标记层或取消链接决定。</zh-CN>
+                <en>The save button only triggers the server-side employee update; concurrency version, authorization, audit, and failure fallback are not decided by markup or the cancel link.</en>
+              </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton
                     ID="SaveButton"

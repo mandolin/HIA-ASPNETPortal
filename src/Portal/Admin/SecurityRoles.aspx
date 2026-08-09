@@ -43,6 +43,12 @@
                             Visible="False" runat="server" OnClick="AddUser_Click" />
                     </div>
                 --%>
+                <%--
+                  <lang>
+                    <zh-CN>用户下拉列表只提供当前角色的候选用户键；添加命令必须由 code-behind 重新校验用户存在性、角色授权和重复成员状态。</zh-CN>
+                    <en>The user dropdown only supplies candidate user keys for the current role; code-behind must revalidate user existence, role authorization, and duplicate membership before adding.</en>
+                  </lang>
+                --%>
                 <div class="portal-filter-field">
                     <span class="SubHead portal-filter-label">User</span>
                     <asp:DropDownList ID="allUsers" CssClass="NormalTextBox portal-filter-input" DataTextField="Name" DataValueField="UserID" runat="server" />
@@ -58,6 +64,12 @@
             <div class="portal-section-header">
                 <h2 class="Head portal-section-title">Users In Role</h2>
             </div>
+            <%--
+              <lang>
+                <zh-CN>成员 DataList 只读展示当前成员并使用编码绑定文本；删除命令的角色/用户关系和审计结果由服务端决定。</zh-CN>
+                <en>The member DataList renders current members read-only with encoded text binding; the server decides the role/user relationship and audit result for a removal command.</en>
+              </lang>
+            --%>
             <div class="portal-chip-list-wrap">
                 <asp:DataList ID="usersInRole" CssClass="portal-chip-list" RepeatColumns="2" DataKeyField="UserId" OnItemCommand="usersInRole_ItemCommand" runat="server">
                     <ItemStyle Width="225" CssClass="portal-chip-item" />
@@ -71,6 +83,12 @@
             </div>
         </div>
 
+        <%--
+          <lang>
+            <zh-CN>保存角色变更按钮只触发服务端成员同步；管理员授权、重复项、并发和旧授权字符串兼容逻辑不由标记层实现。</zh-CN>
+            <en>The save-role-changes button only triggers server-side membership synchronization; administrator authorization, duplicates, concurrency, and legacy authorization-string compatibility are not implemented by markup.</en>
+          </lang>
+        --%>
         <div class="portal-form-actions">
             <asp:LinkButton ID="saveBtn" CssClass="CommandButton portal-primary-action" Text="Save Role Changes" runat="server"
                 OnClick="Save_Click" />
