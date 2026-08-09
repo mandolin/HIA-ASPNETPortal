@@ -37,6 +37,12 @@
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
 
         <div class="portal-admin-section portal-filter-panel">
+            <%--
+                <lang>
+                    <zh-CN>筛选字段只构造目录查询条件；关键字、员工状态、绑定状态和停用组织选项仍由服务器规范化并决定可见结果。</zh-CN>
+                    <en>These filters only construct directory query criteria; the server still normalizes keyword, employee status, binding status, and inactive-organization choices before deciding visible results.</en>
+                </lang>
+            --%>
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
                     <span class="SubHead portal-filter-label">Keyword</span>
@@ -79,6 +85,12 @@
                 <h2 class="Head portal-section-title">Organization Units</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                    <lang>
+                        <zh-CN>组织行使用编码绑定的只读字段，并把编辑入口指向服务器生成的 URL；页面不在表格中自行推断组织权限或关系。</zh-CN>
+                        <en>Organization rows use encoded read-only bindings and link to server-generated edit URLs; the table does not infer organization permissions or relationships on its own.</en>
+                    </lang>
+                --%>
                 <asp:Repeater ID="OrganizationsRepeater" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -121,6 +133,12 @@
                 <h2 class="Head portal-section-title">Employees</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                    <lang>
+                        <zh-CN>员工行同时提供编辑和绑定入口，绑定 URL 只针对员工记录生成；编码输出与操作授权仍由服务器端模型和 code-behind 负责。</zh-CN>
+                        <en>Employee rows expose edit and binding entries, with binding URLs generated only for employee records; encoded output and operation authorization remain owned by the server model and code-behind.</en>
+                    </lang>
+                --%>
                 <asp:Repeater ID="EmployeesRepeater" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">

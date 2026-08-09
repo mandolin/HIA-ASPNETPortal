@@ -32,6 +32,12 @@
         </div>
 
         <div class="portal-admin-summary-grid">
+            <%--
+            <lang>
+              <zh-CN>摘要卡片只呈现 code-behind 生成的总体状态和检查时间；重新检测按钮重新触发只读检查，不提供修复或配置写入。</zh-CN>
+              <en>Summary cards only present the overall status and check time produced by the code-behind; recheck triggers read-only checks and does not repair or write configuration.</en>
+            </lang>
+            --%>
             <div class="portal-admin-summary-item">
                 <div class="SubHead portal-summary-label">Overall Status</div>
                 <div class="Normal portal-summary-value">
@@ -60,6 +66,12 @@
                 <h2 class="Head portal-section-title">Health Checks</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                <lang>
+                  <zh-CN>健康检查 Repeater 以编码绑定展示类别、摘要、详情和事件 ID；详情是诊断输出，不应被页面层当作可执行命令。</zh-CN>
+                  <en>The health-check Repeater displays category, summary, detail, and event ID through encoded bindings; detail is diagnostic output and must not be treated as an executable command by the page layer.</en>
+                </lang>
+                --%>
                 <asp:Repeater ID="HealthChecksRepeater" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -94,6 +106,12 @@
                 <h2 class="Head portal-section-title">Settings Registry</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                <lang>
+                  <zh-CN>设置 registry 行同时标出敏感性、在线可编辑和重启要求；这些标签只反映服务器元数据，不能绕过配置写入策略。</zh-CN>
+                  <en>Settings-registry rows expose sensitivity, online-editability, and restart requirements; these labels reflect server metadata and cannot bypass configuration-write policy.</en>
+                </lang>
+                --%>
                 <asp:Repeater ID="SettingsRepeater" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">

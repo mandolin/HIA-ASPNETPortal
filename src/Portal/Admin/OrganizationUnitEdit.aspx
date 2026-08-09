@@ -32,6 +32,12 @@
         </div>
 
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
+        <%--
+        <lang>
+          <zh-CN>隐藏字段回传记录 ID 和原始更新时间，仅用于服务器并发/目标校验；它们不是客户端可写的授权来源。</zh-CN>
+          <en>These hidden fields round-trip the record ID and original update timestamp for server-side concurrency and target checks; they are not client-writable authorization sources.</en>
+        </lang>
+        --%>
         <asp:HiddenField ID="OrganizationUnitIdField" runat="server" />
         <asp:HiddenField ID="OriginalUpdatedUtcField" runat="server" />
 
@@ -40,6 +46,12 @@
                 <h2 class="Head portal-section-title">Organization Metadata</h2>
             </div>
             <div class="portal-form-grid">
+                <%--
+                <lang>
+                  <zh-CN>代码、名称、父级、排序和启用状态组成单条组织维护输入；父级循环、规范化和业务边界不由标记层判断。</zh-CN>
+                  <en>Code, name, parent, order, and active state form one organization-maintenance input; the markup does not decide parent cycles, normalization, or business boundaries.</en>
+                </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Organization Code</span>
                     <asp:TextBox ID="OrganizationCodeTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="100" runat="server" />
@@ -62,6 +74,12 @@
                 </div>
             </div>
             <div class="portal-form-actions">
+                <%--
+                <lang>
+                  <zh-CN>保存命令进入既有服务器持久化和审计流程，取消只离开当前编辑上下文，不在客户端撤销或伪造状态。</zh-CN>
+                  <en>The save command enters the existing server persistence and audit flow; cancel only leaves the edit context and does not revoke or forge state on the client.</en>
+                </lang>
+                --%>
                 <asp:LinkButton
                     ID="SaveButton"
                     CssClass="CommandButton portal-primary-action"
