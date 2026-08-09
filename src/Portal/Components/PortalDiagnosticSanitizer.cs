@@ -25,14 +25,26 @@ namespace ASPNET.StarterKit.Portal
             @"(?<key>connection\s*string|connectionstring)\s*(?<separator>[:=])\s*(?<value>""[^""]*""|'[^']*'|[^\r\n]+)",
             RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
+        // <lang>
+        //   <zh-CN>覆盖未使用 connection string 键名、但仍包含 data source/server 的连接串片段。</zh-CN>
+        //   <en>Redacts connection-string fragments that omit a connection-string key but still contain data source/server values.</en>
+        // </lang>
         private static readonly Regex DataSourceConnectionPattern = new Regex(
             @"(?:data\s*source|server)\s*=\s*[^\r\n]+",
             RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
+        // <lang>
+        //   <zh-CN>遮蔽整行凭据/认证头，优先于紧凑赋值规则以避免留下同一行的其它敏感尾部。</zh-CN>
+        //   <en>Redacts full credential/authentication lines before compact assignments so no sensitive tail remains on the same line.</en>
+        // </lang>
         private static readonly Regex SensitiveLinePattern = new Regex(
             @"(?<key>password|pwd|token|authorization|cookie|set-cookie|api(?:[_\s-]?key)?|secret)\s*(?<separator>[:=])\s*[^\r\n]+",
             RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 
+        // <lang>
+        //   <zh-CN>覆盖分号、逗号或空白分隔的紧凑敏感键值，作为整行规则之后的兜底。</zh-CN>
+        //   <en>Redacts compact sensitive assignments delimited by semicolons, commas, or whitespace as the fallback after full-line rules.</en>
+        // </lang>
         private static readonly Regex SensitiveAssignmentPattern = new Regex(
             @"(?<key>password|pwd|token|authorization|cookie|api(?:[_\s-]?key)?|secret)\s*(?<separator>[:=])\s*(?<value>""[^""]*""|'[^']*'|[^;,\s\r\n]+)",
             RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
@@ -131,6 +143,24 @@ namespace ASPNET.StarterKit.Portal
             return sanitized.Substring(0, Math.Max(0, maximumLength - 3)) + "...";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用固定占位替换正则匹配到的敏感赋值，同时保留键名和分隔符。</zh-CN>
+        ///   <en>Replaces a regex-matched sensitive assignment with a fixed placeholder while retaining its key and separator.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="match">
+        /// <l>
+        ///   <zh-CN>包含 <c>key</c>、<c>separator</c> 和可选 <c>value</c> 捕获组的匹配结果。</zh-CN>
+        ///   <en>Match result containing the <c>key</c>, <c>separator</c>, and optional <c>value</c> capture groups.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>保留结构但不含原始敏感值的文本片段。</zh-CN>
+        ///   <en>A structurally recognizable fragment that contains no original sensitive value.</en>
+        /// </l>
+        /// </returns>
         private static string ReplaceAssignment(Match match)
         {
             // <lang>

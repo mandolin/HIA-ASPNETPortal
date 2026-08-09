@@ -889,7 +889,10 @@
 | P26.5nx 选片 | 已选择 `PortalNavigationPolicy.cs` 与 `ExternalConnectionStringLoader.cs` 的配置/路径安全职责链；覆盖回跳同源、路径遍历、部署资源边界、外置连接串根目录、provider 约束和敏感值来源，数据库、IIS/HTTP、真实凭据与外部 proof 排除。见 [P26.5nx 选片](work-zone/dev/plans/W-anp-P26.5nx-config-navigation-selection.md)。 |
 | P26.5ny 注释补强 | 已为配置/路径安全职责链补齐 `PortalNavigationPolicy.cs` 五个私有 helper 的 XML `<lang>` 文档，并为回跳、路径、外置连接串和 provider 校验流程补充关键局部变量双语说明；未改变任何代码语句。见 [P26.5ny 结果](work-zone/dev/plans/W-anp-P26.5ny-config-navigation-result.md)。 |
 | P26.5nz 静态验证 | 通过；两文件去除全部 XML/inline 注释后与基线一致，新增非注释代码 `0`，Debug 构建与 XML 文档检查通过，XML member count 为 `1877`，UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；构建保留既有 `Roles.ModulesConfig` CS0108 警告，未执行真实连接串、路径、数据库、IIS/HTTP 或凭据 proof。见 [P26.5nz 审计](work-zone/dev/plans/W-anp-P26.5nz-config-navigation-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5oa：登记 P14 配置与路径安全职责链 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5nx-nz。 |
+| P26.5oa 选片 | 已选择 `PortalAdministrationPolicy.cs`、`PortalAuthorization.cs` 与 `PortalDiagnosticSanitizer.cs` 的安全授权/诊断净化职责链；覆盖私有 helper、固定拒绝页常量、权限规范化、管理员快速路径、角色查询、拒绝重定向和 fail-closed 净化边界；授权实现、角色映射、数据库、Cookie/HTTP 和真实 proof 排除。见 [P26.5oa 选片](work-zone/dev/plans/W-anp-P26.5oa-security-authorization-sanitizer-selection.md)。 |
+| P26.5ob 注释补强 | 已补齐三文件私有/常量节点 XML 文档，并为关键局部状态、规范化、授权查询、拒绝诊断和净化正则顺序补充中英双语注释；新增非注释代码 `0`。见 [P26.5ob 结果](work-zone/dev/plans/W-anp-P26.5ob-security-authorization-sanitizer-result.md)。 |
+| P26.5oc 静态验证 | 通过；三文件目标差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1884`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5oc 审计](work-zone/dev/plans/W-anp-P26.5oc-security-authorization-sanitizer-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5od：登记安全授权与诊断净化职责链 closeout，重新读取最新源码盘点并选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5oa-oc。 |
 
 ## Known Residual Working Tree Items
 

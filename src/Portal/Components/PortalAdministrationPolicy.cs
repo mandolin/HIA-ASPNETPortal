@@ -59,7 +59,15 @@ namespace ASPNET.StarterKit.Portal
             int maximumLength,
             out string normalizedValue)
         {
+            // <lang>
+            //   <zh-CN>先统一空值和两端空白，再由同一规范值承担长度与控制字符检查；失败时 out 值仍保留可诊断的规范结果。</zh-CN>
+            //   <en>Normalize null and surrounding whitespace first, then apply length and control-character checks to that same value; the out value remains the diagnostic normalized result even on failure.</en>
+            // </lang>
             normalizedValue = Normalize(candidate);
+            // <lang>
+            //   <zh-CN>必填文本必须同时满足正长度、非空、目标字段长度和无控制字符四项约束。</zh-CN>
+            //   <en>Required text must satisfy positive length, nonempty content, the target-field limit, and no-control-character constraints together.</en>
+            // </lang>
             return maximumLength > 0 && normalizedValue.Length > 0 && normalizedValue.Length <= maximumLength &&
                    !ContainsControlCharacter(normalizedValue);
         }
@@ -99,7 +107,15 @@ namespace ASPNET.StarterKit.Portal
             int maximumLength,
             out string normalizedValue)
         {
+            // <lang>
+            //   <zh-CN>可选字段同样先取得规范值；空字符串由长度检查自然放行，但控制字符和无效上限仍拒绝。</zh-CN>
+            //   <en>Optional fields still produce a normalized value first; an empty string passes naturally, while control characters and an invalid limit remain rejected.</en>
+            // </lang>
             normalizedValue = Normalize(candidate);
+            // <lang>
+            //   <zh-CN>允许空值但不放宽字段上限或控制字符边界。</zh-CN>
+            //   <en>Allow an empty value without relaxing the field limit or control-character boundary.</en>
+            // </lang>
             return maximumLength > 0 && normalizedValue.Length <= maximumLength &&
                    !ContainsControlCharacter(normalizedValue);
         }
@@ -135,6 +151,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>旧角色存储使用分号分隔且保留 All Users 虚拟角色；两者都不能作为新角色名写入。</zh-CN>
+            //   <en>The legacy role store uses semicolons as delimiters and reserves the All Users virtual role; neither may be written as a new role name.</en>
+            // </lang>
             return normalizedRoleName.IndexOf(';') < 0 &&
                    !string.Equals(normalizedRoleName, PortalRoleNames.AllUsers, StringComparison.OrdinalIgnoreCase);
         }
@@ -162,13 +182,53 @@ namespace ASPNET.StarterKit.Portal
             return string.Equals(tabName, "Admin", StringComparison.OrdinalIgnoreCase);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将可为空的后台文本规范化为空字符串或去除两端空白的值。</zh-CN>
+        ///   <en>Normalizes optional administration text to an empty string or a value trimmed at both ends.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>待规范化的候选文本，可为 <c>null</c>。</zh-CN>
+        ///   <en>Candidate text to normalize; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>空白输入返回空字符串，否则返回去除两端空白的文本。</zh-CN>
+        ///   <en>An empty string for blank input; otherwise text trimmed at both ends.</en>
+        /// </l>
+        /// </returns>
         private static string Normalize(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? string.Empty : value.Trim();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查规范文本是否包含会破坏单行后台字段契约的控制字符。</zh-CN>
+        ///   <en>Checks whether normalized text contains control characters that would violate a single-line administration-field contract.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>已经完成空白规范化的文本。</zh-CN>
+        ///   <en>Text that has already been whitespace-normalized.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>发现任一控制字符时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when any control character is present.</en>
+        /// </l>
+        /// </returns>
         private static bool ContainsControlCharacter(string value)
         {
+            // <lang>
+            //   <zh-CN>逐字符检查以覆盖换行、制表等不可进入单行字段的控制码；调用方已保证 value 非空。</zh-CN>
+            //   <en>Inspect each character to cover newline, tab, and other control codes excluded from single-line fields; callers provide a non-null value.</en>
+            // </lang>
             foreach (char character in value)
             {
                 if (char.IsControl(character))
