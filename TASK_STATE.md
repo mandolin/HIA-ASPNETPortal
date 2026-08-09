@@ -895,7 +895,10 @@
 | P26.5od 选片 | 已选择 `PortalDocumentPolicy.cs` 的文档上传与文件名安全完整职责链；覆盖硬允许扩展名、可收紧运行设置、上传大小、物理文件名、下载文件名、站内回跳和七个 private helper；真实上传、文件系统、数据库、IIS/HTTP 与浏览器 proof 排除。见 [P26.5od 选片](work-zone/dev/plans/W-anp-P26.5od-document-policy-selection.md)。 |
 | P26.5oe 注释补强 | 已为固定常量、上传/文件名流程关键局部变量和七个 private helper 补充中英双语 XML/inline 注释；新增非注释代码 `0`。见 [P26.5oe 结果](work-zone/dev/plans/W-anp-P26.5oe-document-policy-result.md)。 |
 | P26.5of 静态验证 | 通过；目标差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1891`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5of 审计](work-zone/dev/plans/W-anp-P26.5of-document-policy-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5og：登记文档上传与文件名安全职责链 closeout，重新读取最新源码盘点并选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5od-of。 |
+| P26.5og 选片 | 已选择 `PortalThemePackage.cs` 的受信主题包与本地资源路径职责链；覆盖主题元数据、manifest 版本/字段、资源清单、脚本/外链拒绝、主题名边界、包根目录和子路径前缀校验；真实主题目录、资源、上传/解压、IIS/HTTP 与生产 proof 排除。见 [P26.5og 选片](work-zone/dev/plans/W-anp-P26.5og-theme-package-selection.md)。 |
+| P26.5oh 注释补强 | 已统一主题包类/属性与目录校验器历史双语表面，并为关键局部状态和七个 private helper 补充中英双语 ROP 注释；新增非注释代码 `0`。见 [P26.5oh 结果](work-zone/dev/plans/W-anp-P26.5oh-theme-package-result.md)。 |
+| P26.5oi 静态验证 | 通过；目标差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1891`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5oi 审计](work-zone/dev/plans/W-anp-P26.5oi-theme-package-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5oj：登记受信主题包与本地资源路径职责链 closeout，重新读取最新源码盘点并选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5og-oi。 |
 
 ## Known Residual Working Tree Items
 

@@ -10,8 +10,10 @@ using Newtonsoft.Json.Linq;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 已验证的受信任部署主题包元数据。
-    /// Metadata for a validated trusted-deployment theme package.
+    /// <lang>
+    ///   <zh-CN>已验证的受信任部署主题包元数据。</zh-CN>
+    ///   <en>Metadata for a validated trusted-deployment theme package.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalThemePackage
     {
@@ -56,26 +58,34 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 与部署目录一致的稳定主题名。
-        /// Stable theme name matching the deployment directory.
+        /// <lang>
+        ///   <zh-CN>与部署目录一致的稳定主题名。</zh-CN>
+        ///   <en>Stable theme name matching the deployment directory.</en>
+        /// </lang>
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// 供后台选择器展示的名称。
-        /// Name displayed by the admin selector.
+        /// <lang>
+        ///   <zh-CN>供后台选择器展示的名称。</zh-CN>
+        ///   <en>Name displayed by the admin selector.</en>
+        /// </lang>
         /// </summary>
         public string DisplayName { get; private set; }
 
         /// <summary>
-        /// 主题包版本。
-        /// Theme package version.
+        /// <lang>
+        ///   <zh-CN>主题包版本。</zh-CN>
+        ///   <en>Theme package version.</en>
+        /// </lang>
         /// </summary>
         public string Version { get; private set; }
 
         /// <summary>
-        /// 主题声明的最低门户版本。
-        /// Minimum portal version declared by the theme.
+        /// <lang>
+        ///   <zh-CN>主题声明的最低门户版本。</zh-CN>
+        ///   <en>Minimum portal version declared by the theme.</en>
+        /// </lang>
         /// </summary>
         public string MinimumPortalVersion { get; private set; }
 
@@ -84,41 +94,52 @@ namespace ASPNET.StarterKit.Portal
         /// Whether the CSS inherits the Default theme.
         /// </summary>
         /// <remarks>
-        /// 当前仅是部署包声明性元数据。主题 CSS 必须自行显式表达继承关系；catalog 和 Master Page 不会据此
-        /// 自动加载或注入 Default 主题资源。
-        /// This is declarative deployment-package metadata only. Theme CSS must explicitly express inheritance itself;
-        /// the catalog and Master Page do not automatically load or inject Default theme resources from this value.
+        /// <lang>
+        ///   <zh-CN>当前仅是部署包声明性元数据。主题 CSS 必须自行显式表达继承关系；catalog 和 Master Page 不会据此自动加载或注入 Default 主题资源。</zh-CN>
+        ///   <en>This is declarative deployment-package metadata only. Theme CSS must explicitly express inheritance itself; the catalog and Master Page do not automatically load or inject Default theme resources from this value.</en>
+        /// </lang>
         /// </remarks>
         public bool InheritsDefault { get; private set; }
 
         /// <summary>
-        /// 已声明且位于主题目录内的本地资源。
-        /// Declared local resources located inside the theme directory.
+        /// <lang>
+        ///   <zh-CN>已声明且位于主题目录内的本地资源。</zh-CN>
+        ///   <en>Declared local resources located inside the theme directory.</en>
+        /// </lang>
         /// </summary>
         /// <remarks>
-        /// 此列表用于部署包校验和工具链，不是 Master Page 的通用资源注入协议。Web Forms 原生 Theme 仍按
-        /// App_Themes 机制处理主题文件。
-        /// This list is for deployment-package validation and tooling; it is not a general Master Page resource
-        /// injection protocol. Native Web Forms Theme handling still processes theme files through App_Themes.
+        /// <lang>
+        ///   <zh-CN>此列表用于部署包校验和工具链，不是 Master Page 的通用资源注入协议。Web Forms 原生 Theme 仍按 App_Themes 机制处理主题文件。</zh-CN>
+        ///   <en>This list is for deployment-package validation and tooling; it is not a general Master Page resource injection protocol. Native Web Forms Theme handling still processes theme files through App_Themes.</en>
+        /// </lang>
         /// </remarks>
         public IList<string> Resources { get; private set; }
     }
 
     /// <summary>
-    /// 主题部署包目录和 manifest 校验器。
-    /// Theme deployment-package directory and manifest validator.
+    /// <lang>
+    ///   <zh-CN>主题部署包目录和 manifest 校验器。</zh-CN>
+    ///   <en>Theme deployment-package directory and manifest validator.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-    /// P3.1 只发现由受信任部署流程写入的目录。此类不上传、不解压、不编辑，也不自动加载
-    /// 远程 URL 或 JavaScript；可信主题包来源、签名、许可、版本与回滚由独立机制覆盖。
-    /// P3.1 discovers directories written by a trusted deployment process only. It does not upload, unzip,
-    /// or edit packages, and it never auto-loads remote URLs or JavaScript. A separate trusted-package mechanism
-    /// covers provenance, signatures, licenses, versions, and rollback.
+    /// <lang>
+    ///   <zh-CN>P3.1 只发现由受信任部署流程写入的目录。此类不上传、不解压、不编辑，也不自动加载远程 URL 或 JavaScript；可信主题包来源、签名、许可、版本与回滚由独立机制覆盖。</zh-CN>
+    ///   <en>P3.1 discovers directories written by a trusted deployment process only. It does not upload, unzip, or edit packages, and it never auto-loads remote URLs or JavaScript. A separate trusted-package mechanism covers provenance, signatures, licenses, versions, and rollback.</en>
+    /// </lang>
         /// </remarks>
     public static class PortalThemeCatalog
     {
+        // <lang>
+        //   <zh-CN>当前主题 manifest 的唯一受支持 schema 版本；未知版本 fail-closed，不按旧结构猜测。</zh-CN>
+        //   <en>Only supported schema version for the current theme manifest; unknown versions fail closed rather than being guessed as an old shape.</en>
+        // </lang>
         private const int ManifestSchemaVersion = 1;
 
+        // <lang>
+        //   <zh-CN>主题名同时作为目录名和 CSS class 片段，限制为稳定 ASCII 标识符以阻断路径/标记结构。</zh-CN>
+        //   <en>Theme names serve as both directory names and CSS-class fragments, so they are restricted to stable ASCII identifiers to block path/markup structure.</en>
+        // </lang>
         private static readonly Regex ThemeNamePattern = new Regex(
             @"^[A-Za-z][A-Za-z0-9_-]{0,63}$",
             RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -135,7 +156,15 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         public static IList<PortalThemePackage> GetTrustedPackages()
         {
+            // <lang>
+            //   <zh-CN>收集本次扫描中通过最小信任契约的包；失败包不会阻断其他包或默认主题回退。</zh-CN>
+            //   <en>Collect packages that pass the minimal trust contract for this scan; one failed package does not block other packages or the default-theme fallback.</en>
+            // </lang>
             var packages = new List<PortalThemePackage>();
+            // <lang>
+            //   <zh-CN>只映射应用内 App_Themes 根目录；根目录不可用时返回空只读集合，不暴露物理路径。</zh-CN>
+            //   <en>Map only the in-application App_Themes root; return an empty read-only collection when unavailable without exposing a physical path.</en>
+            // </lang>
             string rootPath = HostingEnvironment.MapPath("~/App_Themes");
             if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
             {
@@ -144,6 +173,10 @@ namespace ASPNET.StarterKit.Portal
 
             foreach (DirectoryInfo directory in new DirectoryInfo(rootPath).GetDirectories())
             {
+                // <lang>
+                //   <zh-CN>逐目录执行独立验证；reason 仅用于诊断边界，本入口不把失败原因写入返回集合。</zh-CN>
+                //   <en>Validate each directory independently; reason is kept within the diagnostic boundary and is not emitted in the returned collection.</en>
+                // </lang>
                 PortalThemePackage package;
                 string reason;
                 if (TryGetTrustedPackage(directory.Name, out package, out reason))
@@ -177,6 +210,10 @@ namespace ASPNET.StarterKit.Portal
             out PortalThemePackage package,
             out string reason)
         {
+            // <lang>
+            //   <zh-CN>先清空 out 结果，确保任一失败分支不会泄露上一次调用的包或原因。</zh-CN>
+            //   <en>Clear out results first so every failure branch cannot leak a package or reason from a previous call.</en>
+            // </lang>
             package = null;
             reason = string.Empty;
 
@@ -186,6 +223,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>主题根目录是后续物理路径检查的信任边界，目录缺失时保持不可用而非回退到任意路径。</zh-CN>
+            //   <en>The theme root is the trust boundary for later physical-path checks; when unavailable, remain unavailable instead of falling back to an arbitrary path.</en>
+            // </lang>
             string rootPath = HostingEnvironment.MapPath("~/App_Themes");
             if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
             {
@@ -193,6 +234,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>通过根目录内子路径 helper 解析包目录；越界异常转换为不含路径的安全原因。</zh-CN>
+            //   <en>Resolve the package directory through the root-contained child-path helper; convert escape exceptions into a path-free safe reason.</en>
+            // </lang>
             string packagePath;
             try
             {
@@ -210,6 +255,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>固定 manifest 和 Default.css 入口，只有两者都存在才进入内容解析。</zh-CN>
+            //   <en>Use fixed manifest and Default.css entry points; parse content only when both exist.</en>
+            // </lang>
             string manifestPath = Path.Combine(packagePath, "theme.json");
             string defaultCssPath = Path.Combine(packagePath, "Default.css");
             if (!File.Exists(manifestPath) || !File.Exists(defaultCssPath))
@@ -220,6 +269,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>以 UTF-8 读取低敏 manifest；解析和契约失败统一转换为无路径的无效包结果。</zh-CN>
+                //   <en>Read the low-sensitivity manifest as UTF-8; parsing or contract failures become a path-free invalid-package result.</en>
+                // </lang>
                 JObject manifest = JObject.Parse(File.ReadAllText(manifestPath, Encoding.UTF8));
                 if (!IsSchemaVersionSupported(manifest))
                 {
@@ -227,6 +280,10 @@ namespace ASPNET.StarterKit.Portal
                     return false;
                 }
 
+                // <lang>
+                //   <zh-CN>manifest 名称必须与已经验证的目录名精确一致，防止包投影与物理目录错配。</zh-CN>
+                //   <en>The manifest name must exactly match the already validated directory name so the package projection cannot diverge from its physical directory.</en>
+                // </lang>
                 string manifestName = ReadRequiredString(manifest, "name", 64);
                 if (!string.Equals(themeName, manifestName, StringComparison.Ordinal))
                 {
@@ -234,6 +291,10 @@ namespace ASPNET.StarterKit.Portal
                     return false;
                 }
 
+                // <lang>
+                //   <zh-CN>读取展示、版本、兼容性和资源投影；这些值仅用于已验证包的低敏元数据，不改变主题加载授权。</zh-CN>
+                //   <en>Read display, version, compatibility, and resource projections; these values are low-sensitivity metadata for a validated package and do not grant theme-loading authorization.</en>
+                // </lang>
                 string displayName = ReadRequiredString(manifest, "displayName", 100);
                 string version = ReadRequiredString(manifest, "version", 64);
                 string minimumPortalVersion = ReadOptionalString(manifest, "minimumPortalVersion", 64);
@@ -268,13 +329,19 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 判断主题名是否可安全作为部署目录和 CSS class 片段。
-        /// Determines whether a theme name is safe as a deployment directory and CSS-class segment.
+        /// <lang>
+        ///   <zh-CN>判断主题名是否可安全作为部署目录和 CSS class 片段。</zh-CN>
+        ///   <en>Determines whether a theme name is safe as a deployment directory and CSS-class segment.</en>
+        /// </lang>
         /// </summary>
         /// <param name="themeName">待校验主题名。Theme name to validate.</param>
         /// <returns>主题名是否满足稳定 ASCII 契约。Whether the name meets the stable ASCII contract.</returns>
         public static bool IsValidThemeName(string themeName)
         {
+            // <lang>
+            //   <zh-CN>先拒绝空白，再用文化无关正则校验稳定 ASCII 形状；trim 只用于验证，不改写调用方值。</zh-CN>
+            //   <en>Reject blank input first, then validate a stable ASCII shape with the culture-invariant regex; trimming is validation-only and does not rewrite caller input.</en>
+            // </lang>
             return !string.IsNullOrWhiteSpace(themeName) && ThemeNamePattern.IsMatch(themeName.Trim());
         }
 
@@ -292,6 +359,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static bool IsSchemaVersionSupported(JObject manifest)
         {
+            // <lang>
+            //   <zh-CN>只读取 schemaVersion 节点并要求整数精确匹配；缺失、null 或其它类型均拒绝。</zh-CN>
+            //   <en>Read only the schemaVersion node and require an exact integer match; missing, null, or other types are rejected.</en>
+            // </lang>
             JToken token = manifest["schemaVersion"];
             return token != null && token.Type == JTokenType.Integer && token.Value<int>() == ManifestSchemaVersion;
         }
@@ -319,6 +390,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         private static string ReadRequiredString(JObject manifest, string propertyName, int maximumLength)
         {
+            // <lang>
+            //   <zh-CN>复用可选读取器取得已完成类型、trim 和长度校验的值，再将空值提升为必填字段错误。</zh-CN>
+            //   <en>Reuse the optional reader for type, trimming, and length validation, then promote an empty value to a required-field error.</en>
+            // </lang>
             string value = ReadOptionalString(manifest, propertyName, maximumLength);
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -351,6 +426,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         private static string ReadOptionalString(JObject manifest, string propertyName, int maximumLength)
         {
+            // <lang>
+            //   <zh-CN>按属性名读取原始 JSON token；缺失或 null 明确回退为空字符串，不伪造默认业务值。</zh-CN>
+            //   <en>Read the raw JSON token by property name; missing or null values explicitly fall back to an empty string without fabricating a business default.</en>
+            // </lang>
             JToken token = manifest[propertyName];
             if (token == null || token.Type == JTokenType.Null)
             {
@@ -362,6 +441,10 @@ namespace ASPNET.StarterKit.Portal
                 throw new InvalidOperationException("Manifest string value is invalid.");
             }
 
+            // <lang>
+            //   <zh-CN>类型确认后去除首尾空白，再按 manifest 字段上限拒绝过长值。</zh-CN>
+            //   <en>After confirming the type, trim surrounding whitespace and reject values beyond the manifest field limit.</en>
+            // </lang>
             string value = token.Value<string>().Trim();
             if (value.Length > maximumLength)
             {
@@ -391,6 +474,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         private static bool ReadOptionalBoolean(JObject manifest, string propertyName)
         {
+            // <lang>
+            //   <zh-CN>缺失布尔值采用 false 这一声明性回退；存在但类型不符仍然阻止包通过。</zh-CN>
+            //   <en>Use false as the declarative fallback for a missing Boolean; an existing value with the wrong type still blocks the package.</en>
+            // </lang>
             JToken token = manifest[propertyName];
             if (token == null || token.Type == JTokenType.Null)
             {
@@ -425,13 +512,25 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         private static IList<string> ReadAndValidateResources(JObject manifest, string packagePath)
         {
+            // <lang>
+            //   <zh-CN>资源必须以非空 JSON 数组声明；缺失数组不是“无资源”成功状态。</zh-CN>
+            //   <en>Resources must be declared as a nonempty JSON array; a missing array is not a successful “no resources” state.</en>
+            // </lang>
             JArray resources = manifest["resources"] as JArray;
             if (resources == null || resources.Count == 0)
             {
                 throw new InvalidOperationException("Theme resources are missing.");
             }
 
+            // <lang>
+            //   <zh-CN>只累积已通过路径、存在性、脚本排除和 Default.css 契约的资源相对路径。</zh-CN>
+            //   <en>Accumulate only resource-relative paths that pass path, existence, script exclusion, and Default.css contract checks.</en>
+            // </lang>
             var validatedResources = new List<string>();
+            // <lang>
+            //   <zh-CN>Default.css 是主题包最小样式入口，循环结束前必须被显式声明。</zh-CN>
+            //   <en>Default.css is the package's minimum style entry point and must be explicitly declared before the loop completes.</en>
+            // </lang>
             bool containsDefaultCss = false;
             foreach (JToken token in resources)
             {
@@ -440,12 +539,20 @@ namespace ASPNET.StarterKit.Portal
                     throw new InvalidOperationException("Theme resource is invalid.");
                 }
 
+                // <lang>
+                //   <zh-CN>把资源声明规范为斜杠相对路径；后续白名单和物理映射均基于该规范值。</zh-CN>
+                //   <en>Normalize the resource declaration to a slash-separated relative path; later allowlist and physical mapping use this normalized value.</en>
+                // </lang>
                 string resource = token.Value<string>().Trim().Replace('\\', '/');
                 if (!IsValidResourcePath(resource))
                 {
                     throw new InvalidOperationException("Theme resource path is not allowed.");
                 }
 
+                // <lang>
+                //   <zh-CN>把已通过相对路径检查的资源映射回包根目录；GetChildPath 再次执行规范化前缀边界检查。</zh-CN>
+                //   <en>Map the validated relative resource under the package root; GetChildPath performs the normalized-prefix boundary check again.</en>
+                // </lang>
                 string physicalResourcePath = GetChildPath(packagePath, resource.Replace('/', Path.DirectorySeparatorChar));
                 if (!File.Exists(physicalResourcePath))
                 {
@@ -487,12 +594,20 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static bool IsValidResourcePath(string resource)
         {
+            // <lang>
+            //   <zh-CN>先拒绝空值、绝对路径、协议 URL 和协议相对路径，避免资源声明离开主题根目录语义。</zh-CN>
+            //   <en>Reject blank, absolute, protocol, and protocol-relative paths first so resource declarations cannot leave the theme-root semantics.</en>
+            // </lang>
             if (string.IsNullOrWhiteSpace(resource) || resource.StartsWith("/", StringComparison.Ordinal) ||
                 resource.IndexOf("://", StringComparison.Ordinal) >= 0 || resource.StartsWith("//", StringComparison.Ordinal))
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>逐段拒绝空段、当前目录和父目录片段，阻断显式遍历路径。</zh-CN>
+            //   <en>Reject empty, current-directory, and parent-directory segments to block explicit traversal paths.</en>
+            // </lang>
             string[] segments = resource.Split('/');
             return segments.All(segment => !string.IsNullOrWhiteSpace(segment) && segment != "." && segment != "..");
         }
@@ -517,8 +632,20 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         private static string GetChildPath(string rootPath, string childPath)
         {
+            // <lang>
+            //   <zh-CN>先规范化根目录并去除末尾分隔符，保证后续前缀比较只接受根目录的真实子路径。</zh-CN>
+            //   <en>Normalize the root and remove its trailing separator first so the later prefix check accepts only real descendants.</en>
+            // </lang>
             string normalizedRoot = Path.GetFullPath(rootPath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            // <lang>
+            //   <zh-CN>组合并规范化候选路径；任何路径解析后的逃逸都在返回前拒绝。</zh-CN>
+            //   <en>Combine and normalize the candidate path; any escape revealed by path resolution is rejected before return.</en>
+            // </lang>
             string candidate = Path.GetFullPath(Path.Combine(normalizedRoot, childPath));
+            // <lang>
+            //   <zh-CN>使用带分隔符的根前缀，避免把同前缀但非子目录的路径误判为合法子路径。</zh-CN>
+            //   <en>Use a separator-terminated root prefix so a sibling path sharing the text prefix is not mistaken for a child.</en>
+            // </lang>
             string rootWithSeparator = normalizedRoot + Path.DirectorySeparatorChar;
             if (!candidate.StartsWith(rootWithSeparator, StringComparison.OrdinalIgnoreCase))
             {
