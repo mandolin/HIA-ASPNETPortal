@@ -14,6 +14,12 @@
         </div>
 
         <div class="portal-detail-card portal-edit-form">
+            <%--
+                <lang>
+                    <zh-CN>公告标题、描述和验证器组成受控内容输入；长度、必填、规范化和最终持久化仍由服务器处理。</zh-CN>
+                    <en>Announcement title, description, and validators form controlled content input; length, requiredness, normalization, and final persistence remain server-side.</en>
+                </lang>
+            --%>
             <div class="portal-field-stack">
                 <asp:Label ID="TitleLabel" CssClass="portal-field-stack-label" AssociatedControlID="TitleField"
                     runat="server" Text="Title" />
@@ -24,6 +30,12 @@
             </div>
 
             <div class="portal-field-stack">
+                <%--
+                    <lang>
+                        <zh-CN>公告的 Read More 链接及移动端变体只是导航数据；目标地址和协议安全不能由文本输入或标记层自行放宽。</zh-CN>
+                        <en>The announcement Read More link and mobile variant are navigation data; target and scheme safety cannot be relaxed by text input or markup.</en>
+                    </lang>
+                --%>
                 <asp:Label ID="MoreLinkLabel" CssClass="portal-field-stack-label" AssociatedControlID="MoreLinkField"
                     runat="server" Text="Read More Link" />
                 <asp:TextBox ID="MoreLinkField" CssClass="NormalTextBox portal-input" Columns="30"
@@ -61,6 +73,12 @@
             <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message" EnableViewState="false"
                 Visible="false" runat="server" />
 
+            <%--
+                <lang>
+                    <zh-CN>过期日期和 Update/Cancel/Delete 命令共同进入旧公告状态流程；页面验证器不能替代服务器权限和当前记录校验。</zh-CN>
+                    <en>The expiration date and Update/Cancel/Delete commands enter the legacy announcement state flow together; page validators do not replace server authorization or current-record checks.</en>
+                </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton ID="updateButton" Text="Update" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />

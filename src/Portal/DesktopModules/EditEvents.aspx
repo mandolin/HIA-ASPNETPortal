@@ -14,6 +14,12 @@
         </div>
 
         <div class="portal-detail-card portal-edit-form">
+            <%--
+                <lang>
+                    <zh-CN>事件标题、描述和 Where/When 字段构成事件内容输入；必填验证只提供表单反馈，服务器仍需规范化和授权。</zh-CN>
+                    <en>Event title, description, and Where/When fields form event content input; required validators provide form feedback while the server still normalizes and authorizes.</en>
+                </lang>
+            --%>
             <div class="portal-field-stack">
                 <asp:Label ID="TitleLabel" CssClass="portal-field-stack-label" AssociatedControlID="TitleField"
                     runat="server" Text="Title" />
@@ -42,6 +48,12 @@
             </div>
 
             <div class="portal-field-stack portal-edit-date-field">
+                <%--
+                    <lang>
+                        <zh-CN>ExpireField 的日期校验表达当前页面格式契约；日期解释、时区、过期策略和保存结果仍由服务器决定。</zh-CN>
+                        <en>ExpireField validators express the page format contract; date interpretation, time zone, expiry policy, and save result remain server-decided.</en>
+                    </lang>
+                --%>
                 <asp:Label ID="ExpireLabel" CssClass="portal-field-stack-label" AssociatedControlID="ExpireField"
                     runat="server" Text="Expires" />
                 <asp:TextBox ID="ExpireField" Text="12/31/2001" CssClass="NormalTextBox portal-input" Columns="8"
@@ -56,6 +68,12 @@
             <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message" EnableViewState="false"
                 Visible="false" runat="server" />
 
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel/Delete 通过既有事件处理器进入事件持久化流程；按钮本身不改变权限或绕过删除保护。</zh-CN>
+                    <en>Update, Cancel, and Delete use the existing event handlers for event persistence; the buttons do not change authorization or bypass deletion protection.</en>
+                </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton ID="updateButton" Text="Update" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />

@@ -14,6 +14,12 @@
         </div>
 
         <div class="portal-detail-card portal-edit-form">
+            <%--
+                <lang>
+                    <zh-CN>标题、Url 和移动端 Url 是导航目标输入；标记层只收集值，协议、主机、站内路径和权限边界必须由服务器验证。</zh-CN>
+                    <en>Title, Url, and mobile Url are navigation-target inputs; markup only collects values, while the server must validate scheme, host, local paths, and authorization boundaries.</en>
+                </lang>
+            --%>
             <div class="portal-field-stack">
                 <asp:Label ID="TitleLabel" CssClass="portal-field-stack-label" AssociatedControlID="TitleField"
                     runat="server" Text="Title" />
@@ -47,6 +53,12 @@
             </div>
 
             <div class="portal-field-stack portal-edit-order-field">
+                <%--
+                    <lang>
+                        <zh-CN>Description 和 ViewOrder 维持旧显示模型；整数验证只限制表单格式，排序范围和持久化冲突仍由服务器处理。</zh-CN>
+                        <en>Description and ViewOrder preserve the legacy display model; integer validation limits form shape, while order range and persistence conflicts remain server-side.</en>
+                    </lang>
+                --%>
                 <asp:Label ID="ViewOrderLabel" CssClass="portal-field-stack-label" AssociatedControlID="ViewOrderField"
                     runat="server" Text="View Order" />
                 <asp:TextBox ID="ViewOrderField" CssClass="NormalTextBox portal-input" Columns="30"
@@ -61,6 +73,12 @@
             <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message" EnableViewState="false"
                 Visible="false" runat="server" />
 
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel/Delete 进入链接记录的既有服务器流程；按钮不自行解析 URL、改变排序或绕过删除权限。</zh-CN>
+                    <en>Update, Cancel, and Delete enter the existing server flow for the link record; the buttons do not parse URLs, change ordering, or bypass delete authorization.</en>
+                </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton ID="updateButton" Text="Update" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
