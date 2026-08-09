@@ -910,7 +910,10 @@
 | P26.5pu 选片 | 已选择 `PortalSettingHealthInfo.cs` 的设置健康展示 DTO 职责链；覆盖构造器文本归一、敏感值占位前置责任、来源展示、在线编辑提示、重启提示和八个属性契约；真实设置来源、敏感值、管理员页面、数据库、IIS/HTTP、账号、凭据与发布 proof 排除。见 [P26.5pu 选片](work-zone/dev/plans/W-anp-P26.5pu-setting-health-info-selection.md)。 |
 | P26.5pv 注释补强 | 已为构造器八个参数、八个字段赋值和八个属性迁移补充 16 个中英双语 `<lang>` 块；新增非注释代码 `0`。见 [P26.5pv 结果](work-zone/dev/plans/W-anp-P26.5pv-setting-health-info-result.md)。 |
 | P26.5pw 静态验证 | 通过；目标差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1907`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5pw 审计](work-zone/dev/plans/W-anp-P26.5pw-setting-health-info-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5px：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5pu-pw。 |
+| P26.5px 选片 | 已选择 `PortalDiagnosticQueryService.cs` 的受限结构化诊断日志查询职责链；覆盖扫描/分页上限、事件编号与文件名格式、日期归一化、逐行 NDJSON 解析、匹配、截断和详情查找；真实诊断目录、NDJSON、管理员查询、IIS/HTTP、账号、凭据与发布 proof 排除。见 [P26.5px 选片](work-zone/dev/plans/W-anp-P26.5px-diagnostic-query-selection.md)。 |
+| P26.5py 注释补强 | 已为重要常量、正则、Query/FindByEventId 扫描状态、日期/文件名解析和过滤器截断补充 31 个中英双语 `<lang>` 块；新增非注释代码 `0`。见 [P26.5py 结果](work-zone/dev/plans/W-anp-P26.5py-diagnostic-query-result.md)。 |
+| P26.5pz 静态验证 | 通过；目标差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1907`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5pz 审计](work-zone/dev/plans/W-anp-P26.5pz-diagnostic-query-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5qa：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5px-pz。 |
 
 ## Known Residual Working Tree Items
 
