@@ -28,6 +28,12 @@
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
 
         <div class="portal-admin-section portal-filter-panel">
+            <%--
+                <lang>
+                    <zh-CN>状态筛选和 SearchButton_Click 只构造审核查询条件；最终可见申请、状态解释和权限仍由服务器决定。</zh-CN>
+                    <en>The status filter and SearchButton_Click only construct review-query criteria; the server still decides visible applications, status interpretation, and authorization.</en>
+                </lang>
+            --%>
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
                     <span class="SubHead portal-filter-label">Status</span>
@@ -56,6 +62,12 @@
                 <h2 class="Head portal-section-title">Application Requests</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                    <lang>
+                        <zh-CN>申请 Repeater 使用编码绑定展示低敏字段，并以 ApplicationId 作为命令目标；展示键不等于客户端可授予的操作权限。</zh-CN>
+                        <en>The application Repeater uses encoded bindings for low-sensitivity fields and ApplicationId as the command target; a displayed key does not grant client-side operation permission.</en>
+                    </lang>
+                --%>
                 <asp:Repeater ID="ApplicationsRepeater" OnItemCommand="ApplicationsRepeater_ItemCommand" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -87,6 +99,12 @@
                                 <td><%#: Eval("ApplicationStatus") %></td>
                                 <td>
                                     <asp:TextBox ID="ReviewCommentTextBox" CssClass="NormalTextBox portal-review-note" Width="230" MaxLength="1000" TextMode="MultiLine" Rows="3" runat="server" />
+                                    <%--
+                                        <lang>
+                                            <zh-CN>审核备注与 Approve/Return/Reject 命令共同进入服务器状态机；备注内容、当前状态和目标 ID 必须由 code-behind 重新校验。</zh-CN>
+                                            <en>The review note and Approve/Return/Reject commands enter the server state machine together; code-behind must revalidate note content, current status, and target ID.</en>
+                                        </lang>
+                                    --%>
                                     <div class="portal-row-actions">
                                         <asp:Button ID="ApproveButton" Text="Approve" CssClass="CommandButton" CommandName="Approve" CommandArgument='<%# Eval("ApplicationId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="ReturnButton" Text="Return" CssClass="CommandButton" CommandName="Return" CommandArgument='<%# Eval("ApplicationId") %>' CausesValidation="False" runat="server" />

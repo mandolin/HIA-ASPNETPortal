@@ -32,6 +32,12 @@
                 <h2 class="Head portal-section-title">Create Collaboration Item</h2>
             </div>
             <div class="portal-form-grid">
+                <%--
+                    <lang>
+                        <zh-CN>创建表单承载类型、责任角色、优先级、截止时间和正文输入；规范化、角色授权、时间单位和低敏边界不由标记层决定。</zh-CN>
+                        <en>The create form carries type, owner role, priority, due time, and content inputs; normalization, role authorization, time units, and low-sensitivity boundaries are not decided by markup.</en>
+                    </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Type Key</span>
                     <asp:DropDownList ID="ItemTypeList" CssClass="NormalTextBox portal-form-input" runat="server" />
@@ -73,6 +79,12 @@
         </div>
 
         <div class="portal-admin-section portal-filter-panel">
+            <%--
+                <lang>
+                    <zh-CN>列表状态筛选与 SearchButton_Click 只刷新服务器提供的事项集合，不把筛选值当作工作流权限或状态迁移命令。</zh-CN>
+                    <en>The list status filter and SearchButton_Click only refresh the server-provided item set; filter values are not workflow permissions or transition commands.</en>
+                </lang>
+            --%>
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
                     <span class="SubHead portal-filter-label">Status</span>
@@ -101,6 +113,12 @@
                 <h2 class="Head portal-section-title">Collaboration Item List</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                    <lang>
+                        <zh-CN>事项 Repeater 以 ItemId 绑定命令目标并编码展示时间线/正文；动作按钮和评论文本仍受服务器状态、角色和审计约束。</zh-CN>
+                        <en>The item Repeater binds ItemId as the command target and encodes timeline/content output; action buttons and comments remain constrained by server state, roles, and audit rules.</en>
+                    </lang>
+                --%>
                 <asp:Repeater ID="ItemsRepeater" OnItemCommand="ItemsRepeater_ItemCommand" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
