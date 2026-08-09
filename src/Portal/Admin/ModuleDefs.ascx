@@ -24,6 +24,12 @@ Src="~/DesktopModuleTitle.ascx"%>
             <p class="Normal portal-admin-subtitle">Existing module definitions are listed here; new business modules should be registered from trusted deployed packages.</p>
         </div>
         <div class="portal-admin-actions">
+            <%--
+                <lang>
+                    <zh-CN>此入口只转到受信任的模块目录；不在旧控件中开放定义路径或程序集等高风险输入。</zh-CN>
+                    <en>This entry routes only to the trusted module catalog; the legacy control does not expose high-risk definition-path or assembly inputs.</en>
+                </lang>
+            --%>
             <asp:LinkButton
                 ID="AddDefBtn"
                 CssClass="portal-button portal-button-primary"
@@ -39,6 +45,12 @@ Src="~/DesktopModuleTitle.ascx"%>
             <h3 class="Head portal-section-title">Existing Definitions</h3>
         </div>
         <div class="portal-chip-list-wrap">
+            <%--
+                <lang>
+                    <zh-CN>DataList 使用 ModuleDefID 作为命令键并保留服务器事件，展示名称采用编码绑定以避免把定义元数据当作标记输出。</zh-CN>
+                    <en>The DataList keeps ModuleDefID as the command key and retains server events; the display name uses encoded binding so definition metadata is not emitted as markup.</en>
+                </lang>
+            --%>
             <asp:DataList
                 ID="defsList"
                 CssClass="portal-chip-list portal-legacy-list"
@@ -47,6 +59,12 @@ Src="~/DesktopModuleTitle.ascx"%>
                 OnItemCommand="DefsList_ItemCommand"
                 runat="server">
                 <ItemTemplate>
+                    <%--
+                        <lang>
+                            <zh-CN>每个条目仅提供受编码的友好名称和编辑命令，实际定义读取、授权与保存仍由 code-behind 决定。</zh-CN>
+                            <en>Each item exposes only an encoded friendly name and an edit command; definition loading, authorization, and persistence remain decided by the code-behind.</en>
+                        </lang>
+                    --%>
                     <div class="portal-chip-item">
                         <asp:Label
                             Text='<%#: DataBinder.Eval(Container.DataItem, "FriendlyName") %>'

@@ -16,6 +16,12 @@
             <p class="Normal portal-admin-subtitle">Manage tab order and enter the modern tab layout editor.</p>
         </div>
         <div class="portal-admin-actions">
+            <%--
+                <lang>
+                    <zh-CN>新增 Tab 是写库入口，仍通过原 AddTab_Click 回调执行服务器端创建与权限检查。</zh-CN>
+                    <en>Adding a tab is a persistence entry point and still uses AddTab_Click for server-side creation and authorization checks.</en>
+                </lang>
+            --%>
             <asp:LinkButton
                 ID="addBtn"
                 CssClass="portal-button portal-button-primary"
@@ -35,6 +41,12 @@
         <div class="portal-form-grid portal-legacy-tab-grid">
             <div class="portal-form-field portal-form-field-wide">
                 <span class="SubHead portal-form-label">Tabs</span>
+                <%--
+                    <lang>
+                        <zh-CN>列表由 PortalTabs 数据源提供 Tab 顺序和 ID；选中项只作为后续服务器命令的目标，不直接决定权限。</zh-CN>
+                        <en>The list receives tab order and IDs from PortalTabs; the selected item is only the target of later server commands and does not directly determine authorization.</en>
+                    </lang>
+                --%>
                 <asp:ListBox
                     ID="tabList"
                     CssClass="NormalTextBox portal-form-input portal-legacy-listbox"
@@ -47,6 +59,12 @@
             <div class="portal-form-field portal-form-actions-field">
                 <span class="SubHead portal-form-label">Actions</span>
                 <div class="portal-action-row portal-legacy-action-stack">
+                    <%--
+                        <lang>
+                            <zh-CN>排序、编辑和删除共用旧事件回调；删除语义受 code-behind 的核心 Tab 保护约束，页面提示不能替代服务器校验。</zh-CN>
+                            <en>Ordering, editing, and deletion share the legacy callbacks; deletion is constrained by the code-behind's core-tab protection, and the page hint cannot replace server validation.</en>
+                        </lang>
+                    --%>
                     <asp:LinkButton
                         ID="upBtn"
                         CssClass="portal-button portal-button-secondary portal-button-compact"

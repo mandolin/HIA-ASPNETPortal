@@ -844,7 +844,10 @@
 | P26.5me 选片 | 已选择 `ThemeSettings.aspx`、`EmployeeProfileCorrectionRequests.aspx` 与 `ModuleDefinitions.aspx` 的后台配置/审核标记层职责链；覆盖主题键、审核状态、编码绑定、源路径验证和更新/删除命令边界，code-behind、授权、事务和真实 proof 排除。见 [P26.5me 选片](work-zone/dev/plans/W-anp-P26.5me-theme-correction-definition-markup-selection.md)。 |
 | P26.5mf 注释补强 | 已为三页各新增 3 个服务器端双语 `<%-- ... --%>` 块，合计 9 个；控件、事件、绑定表达式、字段 id、验证器和页面结构未改变。见 [P26.5mf 结果](work-zone/dev/plans/W-anp-P26.5mf-theme-correction-definition-markup-result.md)。 |
 | P26.5mg 静态验证 | 通过；三文件服务器注释/`<lang>` 分别为 `5/5`、`5/5`、`4/4`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过；未执行真实主题、资料更正审核、模块定义、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5mg 审计](work-zone/dev/plans/W-anp-P26.5mg-theme-correction-definition-markup-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5mh：登记 P14 主题、更正审核与模块定义标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5me-mg。 |
+| P26.5mh 选片 | 已选择 `TabLayout.aspx`、`ModuleDefs.ascx` 与 `Tabs.ascx` 的旧版 Tab/模块管理标记层职责链；覆盖 Tab 元数据、角色/移动端字段、模块定义桥接、pane 排序、核心 Tab 保护和写库命令边界，code-behind、授权、事务和真实 proof 排除。见 [P26.5mh 选片](work-zone/dev/plans/W-anp-P26.5mh-tab-module-markup-selection.md)。 |
+| P26.5mi 注释补强 | 已为三份旧版 Tab/模块管理标记文件各新增 3 个服务器端双语 `<%-- ... --%>` 块，合计 9 个；控件、事件、绑定表达式、字段 id、命令、数据源和页面结构未改变。见 [P26.5mi 结果](work-zone/dev/plans/W-anp-P26.5mi-tab-module-markup-result.md)。 |
+| P26.5mj 静态验证 | 通过；三文件服务器注释/`<lang>` 均为 `4/4`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实 Tab/模块排序、创建、编辑、删除、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5mj 审计](work-zone/dev/plans/W-anp-P26.5mj-tab-module-markup-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5mk：登记 P14 Tab/模块旧版管理标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5mh-mj。 |
 
 ## Known Residual Working Tree Items
 

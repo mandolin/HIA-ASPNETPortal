@@ -27,6 +27,12 @@
                 <h2 class="Head portal-section-title">Tab Settings</h2>
             </div>
             <div class="portal-form-grid portal-tab-settings-grid">
+                <%--
+                    <lang>
+                        <zh-CN>这些字段承载 Tab 元数据、角色授权和移动端可见性；变更事件仍交由 code-behind 处理并由服务器决定最终状态。</zh-CN>
+                        <en>These fields carry tab metadata, role authorization, and mobile visibility; change events remain handled by the code-behind, with the server deciding the final state.</en>
+                    </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Tab Name</span>
                     <asp:TextBox ID="tabName" CssClass="NormalTextBox portal-form-input" runat="server" OnTextChanged="TabSettings_Change" />
@@ -54,6 +60,12 @@
                 <h2 class="Head portal-section-title">Add Module</h2>
             </div>
             <div class="portal-form-grid portal-module-add-grid">
+                <%--
+                    <lang>
+                        <zh-CN>新增模块只从服务器提供的定义列表取类型，标题作为当前 Tab 的模块实例名称提交，不能把客户端值视为受信任路径或权限。</zh-CN>
+                        <en>Module creation selects a type from the server-provided definition list and submits a title for the current tab instance; client values are not trusted paths or permissions.</en>
+                    </lang>
+                --%>
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Module Type</span>
                     <asp:DropDownList ID="moduleType" CssClass="NormalTextBox portal-form-input" DataValueField="ModuleDefID"
@@ -77,6 +89,12 @@
                 <h2 class="Head portal-section-title">Organize Modules</h2>
             </div>
             <div class="portal-layout-board">
+                <%--
+                    <lang>
+                        <zh-CN>三个 ListBox 及其命令栏共同表达模块所在 pane 和顺序；移动、编辑、删除操作均通过既有事件回调进入服务器状态机。</zh-CN>
+                        <en>The three ListBoxes and their command bars together express module pane membership and order; move, edit, and delete actions enter the server state machine through the existing callbacks.</en>
+                    </lang>
+                --%>
                 <div class="portal-layout-panes">
                     <div class="portal-layout-pane portal-layout-pane-mini">
                         <h3 class="SubHead portal-layout-pane-title">Left Mini Pane</h3>
