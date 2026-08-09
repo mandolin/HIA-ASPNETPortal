@@ -823,8 +823,12 @@
 | P26.5lp 选片 | 已选择 `BusinessApplicationRequest.ascx.designer.cs`、`EditHtml.aspx.designer.cs`、`EditXml.aspx.designer.cs`、`ModuleProbe.ascx.designer.cs` 与 `DesktopDefault.aspx.designer.cs`，同属编辑、探针与布局生成 Designer 注释-only/静态验证路径，合计 31 个 protected 字段；页面逻辑、内容解析、权限/路径实现、数据访问、生成器和真实 proof 排除。 |
 | P26.5lq 注释补强 | 已为五份生成文件补齐 31/31 个字段的中英双语 `<lang>` XML，并加入生成头覆盖提示；字段声明、类型、访问级别、partial class 与标记绑定未改变。 |
 | P26.5lr 静态验证 | 通过；字段 `<lang>` 分别 8/8、8/8、7/7、5/5、3/3，文件 `<lang>` 分别 9/9/8/6/4；源码盘点目标候选 0，Debug/XML gate 通过，Portal XML member count 1872，注释债务保持 `27/6`，TODO 总计 430 且 `scanner-rule-text=39`，PowerShell inventory `65/65` help、`65/65` HIA、高风险缺失 0；UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过。剩余无 `<lang>` Designer 均为空文件或强类型资源生成物，未机械改写；未运行 Designer 生成器、数据库、IIS/HTTP、浏览器、真实业务申请/模块编辑/探针记录或发布 proof，重生成覆盖风险已登记。 |
-| 当前唯一下一步 | 进入 P26.5ls：重新读取最新源码盘点，继续选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5lp-lr，生成文件重生成风险继续显式登记。 |
 
+
+| P26.5ls 选片 | 已选择 `src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js` 登录口令提交前端加密职责链；覆盖模块公开面、六个函数、公钥来源信任、同步读取、固定失败、整批密文提交和明文清理注释；压缩/第三方 `jsencrypt-ie6.min.js`、真实登录与密码学运行 proof 排除。见 [P26.5ls 选片](work-zone/dev/plans/W-anp-P26.5ls-login-password-js-selection.md)。 |
+| P26.5lt 注释补强 | 已为模块与六个函数补充 JSDoc 及流程内双语 `<lang>` 注释；新增 198 行全部为注释，函数/JSDoc `6/6`，字段、请求、返回和明文清理语义未改变。见 [P26.5lt 结果](work-zone/dev/plans/W-anp-P26.5lt-login-password-js-result.md)。 |
+| P26.5lu 静态验证 | 通过；mise Node 24 `node --check`、隔离 JSDoc pilot build/verify、函数/JSDoc `6/6`、`<lang>` `33/33`、新增非注释语句 `0`、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实 RSA/JSEncrypt、浏览器、网络公钥、IIS/HTTP、数据库、账号或凭据 proof。见 [P26.5lu 审计](work-zone/dev/plans/W-anp-P26.5lu-login-password-js-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5lv：登记 P14 登录口令前端脚本 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5ls-lu。 |
 
 ## Known Residual Working Tree Items
 
