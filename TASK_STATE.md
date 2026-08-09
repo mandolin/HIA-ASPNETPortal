@@ -907,7 +907,10 @@
 | P26.5or 选片 | 已选择 `PortalHealthCheckResult.cs`、`PortalHealthSnapshot.cs` 与 `PortalHealthStatus.cs` 的健康结果模型职责链；覆盖单项结果字段归一、快照空集合回退、Error → Warning → Unknown → Healthy 汇总优先级和状态枚举；真实检查、数据库、文件系统、主题、IIS/HTTP、账号、凭据与发布 proof 排除。见 [P26.5or 选片](work-zone/dev/plans/W-anp-P26.5or-health-model-selection.md)。 |
 | P26.5ps 注释补强 | 已迁移三文件历史双语表面，并为单项结果构造器、快照构造器和汇总状态计算补充 34 个中英双语 `<lang>` 块；新增非注释代码 `0`。见 [P26.5ps 结果](work-zone/dev/plans/W-anp-P26.5ps-health-model-result.md)。 |
 | P26.5pt 静态验证 | 通过；三个目标文件差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1907`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5pt 审计](work-zone/dev/plans/W-anp-P26.5pt-health-model-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5pu：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5or-pt。 |
+| P26.5pu 选片 | 已选择 `PortalSettingHealthInfo.cs` 的设置健康展示 DTO 职责链；覆盖构造器文本归一、敏感值占位前置责任、来源展示、在线编辑提示、重启提示和八个属性契约；真实设置来源、敏感值、管理员页面、数据库、IIS/HTTP、账号、凭据与发布 proof 排除。见 [P26.5pu 选片](work-zone/dev/plans/W-anp-P26.5pu-setting-health-info-selection.md)。 |
+| P26.5pv 注释补强 | 已为构造器八个参数、八个字段赋值和八个属性迁移补充 16 个中英双语 `<lang>` 块；新增非注释代码 `0`。见 [P26.5pv 结果](work-zone/dev/plans/W-anp-P26.5pv-setting-health-info-result.md)。 |
+| P26.5pw 静态验证 | 通过；目标差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1907`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5pw 审计](work-zone/dev/plans/W-anp-P26.5pw-setting-health-info-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5px：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5pu-pw。 |
 
 ## Known Residual Working Tree Items
 
