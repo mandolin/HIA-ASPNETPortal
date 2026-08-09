@@ -877,7 +877,10 @@
 | P26.5nl 选片 | 已选择 `EmployeeProfileCorrectionRequest.ascx`、`EmployeeProfileConfirm.ascx` 与 `QuickLinks.ascx` 的员工资料与快捷链接标记层职责链；覆盖服务器可见性、低敏字段/确认动作、编码列表、导航策略和后端授权边界，code-behind、数据服务、真实记录与 proof 排除。见 [P26.5nl 选片](work-zone/dev/plans/W-anp-P26.5nl-profile-quicklinks-markup-selection.md)。 |
 | P26.5nm 注释补强 | 已为三份员工资料与快捷链接标记文件各新增 3 个服务器端双语 `<%-- ... --%>` 块，合计 9 个；控件、Visible 状态、字段 id、绑定表达式、命令、MaxLength、ViewState、导航策略和页面结构未改变。见 [P26.5nm 结果](work-zone/dev/plans/W-anp-P26.5nm-profile-quicklinks-markup-result.md)。 |
 | P26.5nn 静态验证 | 通过；三文件服务器注释/`<lang>` 均为 `5/5`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实员工资料确认/更正、快捷链接编辑、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5nn 审计](work-zone/dev/plans/W-anp-P26.5nn-profile-quicklinks-markup-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5no：登记 P14 员工资料与快捷链接标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5nl-nn。 |
+| P26.5no 选片 | 已选择 `HtmlModule.ascx`、`ImageModule.ascx` 与 `XmlModule.ascx` 的受信内容与资源展示标记层职责链；覆盖共享标题编辑边界、原始 HTML/图片/XML 输出容器、路径与外链安全边界，code-behind、数据访问、真实资源与 proof 排除。见 [P26.5no 选片](work-zone/dev/plans/W-anp-P26.5no-trusted-content-markup-selection.md)。 |
+| P26.5np 注释补强 | 已为三份受信内容与资源展示标记文件新增服务器端双语 `<%-- ... --%>` 块，合计 `9` 个；控件注册、EditUrl、资源属性、服务器绑定和页面结构未改变。见 [P26.5np 结果](work-zone/dev/plans/W-anp-P26.5np-trusted-content-markup-result.md)。 |
+| P26.5nq 静态验证 | 通过；`HtmlModule.ascx`、`ImageModule.ascx`、`XmlModule.ascx` 的服务器注释/`<lang>` 分别为 `4/4`、`3/3`、`3/3`，去除服务器注释和注释空行后与基线一致，新增非注释语句 `0`，Debug 构建、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；未执行真实 HTML/图片/XML 资源、上传、外链、数据库、IIS/HTTP 或浏览器 proof。见 [P26.5nq 审计](work-zone/dev/plans/W-anp-P26.5nq-trusted-content-markup-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5nr：登记 P14 受信内容与资源展示标记层 closeout，重新读取最新源码盘点，选择下一组同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5no-nq。 |
 
 ## Known Residual Working Tree Items
 
