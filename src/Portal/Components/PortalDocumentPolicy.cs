@@ -37,7 +37,16 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public const int InfrastructureMaximumUploadBytes = 31457280;
 
+        // <lang>
+        //   <zh-CN>生成物理文件名时允许的净化主名长度；时间戳和随机串仍在此上限之外独立保留。</zh-CN>
+        //   <en>Maximum sanitized-stem length for generated physical filenames; the timestamp and random token remain independent of this cap.</en>
+        // </lang>
         private const int StorageStemMaximumLength = 48;
+
+        // <lang>
+        //   <zh-CN>服务器上传的硬允许扩展名集合；配置只能从该集合收紧，不能重新允许脚本、页面或可执行类型。</zh-CN>
+        //   <en>Hard allowlist for server-upload extensions; configuration may narrow this set but cannot re-enable script, page, or executable types.</en>
+        // </lang>
         private static readonly ISet<string> HardAllowedExtensions = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase)
         {
@@ -87,6 +96,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>从受控运行设置读取并封顶本次上传的字节预算；该值不代表底层 IIS/请求限制可被绕过。</zh-CN>
+            //   <en>Read and cap the byte budget from controlled runtime settings; this value does not bypass lower-level IIS/request limits.</en>
+            // </lang>
             int maximumBytes = GetMaximumUploadBytes();
             if (postedFile.ContentLength > maximumBytes)
             {
@@ -95,6 +108,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>只从文件名提取小写扩展名，再由硬允许集和配置允许集共同决定类型。</zh-CN>
+            //   <en>Extract only a lowercase extension from the filename, then require both the hard and configured allowlists.</en>
+            // </lang>
             string extension = GetNormalizedExtension(postedFile.FileName);
             if (!IsExtensionAllowed(extension))
             {
@@ -136,6 +153,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static string GetAllowedExtensionsDisplayText()
         {
+            // <lang>
+            //   <zh-CN>复制有效扩展名集合后排序，避免展示顺序受配置输入或 HashSet 枚举顺序影响。</zh-CN>
+            //   <en>Copy the effective extension set before sorting so display order is independent of configuration input or HashSet enumeration order.</en>
+            // </lang>
             var extensions = new List<string>(GetConfiguredAllowedExtensions());
             extensions.Sort(StringComparer.OrdinalIgnoreCase);
             return string.Join(", ", extensions.ToArray());
@@ -167,15 +188,35 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         public static string CreateStorageFileName(string originalFileName)
         {
+            // <lang>
+            //   <zh-CN>先去除目录部分，避免原始路径进入生成文件名或影响后续扩展名判断。</zh-CN>
+            //   <en>Strip directory components first so an original path cannot enter the generated filename or influence extension validation.</en>
+            // </lang>
             string sourceFileName = Path.GetFileName(originalFileName ?? string.Empty);
+            // <lang>
+            //   <zh-CN>扩展名必须先通过同一策略，生成器不为不允许类型提供旁路。</zh-CN>
+            //   <en>The extension must pass the same policy before generation; the generator provides no bypass for disallowed types.</en>
+            // </lang>
             string extension = GetNormalizedExtension(sourceFileName);
             if (!IsExtensionAllowed(extension))
             {
                 throw new ArgumentException("The upload extension is not allowed.", "originalFileName");
             }
 
+            // <lang>
+            //   <zh-CN>主名只用于可读性，经过控制字符、路径字符和长度净化，不承担授权或保密作用。</zh-CN>
+            //   <en>The stem is for readability only; it is sanitized for control/path characters and length and carries no authorization or secrecy.</en>
+            // </lang>
             string stem = SanitizeFileStem(Path.GetFileNameWithoutExtension(sourceFileName));
+            // <lang>
+            //   <zh-CN>使用 UTC 固定格式生成可按时间观察的低敏文件名片段，避免本地时区歧义。</zh-CN>
+            //   <en>Use a fixed UTC format for a low-sensitivity, time-observable filename segment without local-time ambiguity.</en>
+            // </lang>
             string timestamp = DateTime.UtcNow.ToString("yyyyMMdd-HHmmss'Z'", CultureInfo.InvariantCulture);
+            // <lang>
+            //   <zh-CN>随机串用于降低同秒同主名冲突；它不是下载令牌，不写入权限或审计语义。</zh-CN>
+            //   <en>The random token reduces same-second/name collisions; it is not a download token and carries no permission or audit semantics.</en>
+            // </lang>
             string randomToken = Guid.NewGuid().ToString("N").Substring(0, 12);
             return timestamp + "-" + randomToken + "-" + stem + extension;
         }
@@ -333,22 +374,68 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static string GetSafeDownloadFileName(string candidate)
         {
+            // <lang>
+            //   <zh-CN>仅保留文件名部分，阻断历史记录中的目录片段进入 Content-Disposition。</zh-CN>
+            //   <en>Keep only the filename component so directory fragments from legacy records cannot enter Content-Disposition.</en>
+            // </lang>
             string fileName = Path.GetFileName(candidate ?? string.Empty);
+            // <lang>
+            //   <zh-CN>扩展名和主名分别规范化，返回值不包含路径、控制字符或引号。</zh-CN>
+            //   <en>Normalize extension and stem separately so the result contains no path, control characters, or quotation marks.</en>
+            // </lang>
             string extension = GetNormalizedExtension(fileName);
             string stem = SanitizeFileStem(Path.GetFileNameWithoutExtension(fileName));
             return stem + extension;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取运行设置中的上传上限，并将其限制在基础设施硬上限内。</zh-CN>
+        ///   <en>Reads the configured upload limit and constrains it to the infrastructure hard ceiling.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>有效正数上限，配置缺失或越界时回退到 10 MiB。</zh-CN>
+        ///   <en>Effective positive limit, falling back to 10 MiB when configuration is absent or out of range.</en>
+        /// </l>
+        /// </returns>
         private static int GetMaximumUploadBytes()
         {
+            // <lang>
+            //   <zh-CN>运行设置只提供可收紧的覆盖值；无效值不能扩大基础设施允许范围。</zh-CN>
+            //   <en>Runtime settings provide only a narrowing override; invalid values cannot expand the infrastructure allowance.</en>
+            // </lang>
             int configured = PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.MaxUploadBytes);
             return configured > 0 && configured <= InfrastructureMaximumUploadBytes
                 ? configured
                 : 10485760;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>确认扩展名同时位于硬允许集和当前配置允许集。</zh-CN>
+        ///   <en>Confirms that an extension belongs to both the hard and currently configured allowlists.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="extension">
+        /// <l>
+        ///   <zh-CN>已经规范化为小写并带点的扩展名。</zh-CN>
+        ///   <en>Extension normalized to lowercase with a leading dot.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>扩展名可进入上传或文件名生成流程时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the extension may enter upload or filename-generation flow.</en>
+        /// </l>
+        /// </returns>
         private static bool IsExtensionAllowed(string extension)
         {
+            // <lang>
+            //   <zh-CN>先拒绝空值和硬集合之外的类型，再读取可收紧的运行配置。</zh-CN>
+            //   <en>Reject empty or hard-allowlist-external types first, then apply the narrowing runtime configuration.</en>
+            // </lang>
             if (string.IsNullOrEmpty(extension) || !HardAllowedExtensions.Contains(extension))
             {
                 return false;
@@ -357,12 +444,36 @@ namespace ASPNET.StarterKit.Portal
             return GetConfiguredAllowedExtensions().Contains(extension);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取并规范化配置扩展名，只保留硬允许集合中的值。</zh-CN>
+        ///   <en>Reads and normalizes configured extensions, retaining only values in the hard allowlist.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>不区分大小写的有效扩展名集合。</zh-CN>
+        ///   <en>Case-insensitive set of effective extensions.</en>
+        /// </l>
+        /// </returns>
         private static ISet<string> GetConfiguredAllowedExtensions()
         {
+            // <lang>
+            //   <zh-CN>读取低敏设置原文；缺失按空配置处理，不把缺失解释为放开全部类型。</zh-CN>
+            //   <en>Read the low-sensitivity setting text; treat missing input as empty rather than opening every type.</en>
+            // </lang>
             string configured = PortalRuntimeSettings.GetString(PortalSettingsRegistry.AllowedDocumentExtensions);
+            // <lang>
+            //   <zh-CN>使用不区分大小写集合去重，并为后续 Contains 保持稳定比较语义。</zh-CN>
+            //   <en>Use a case-insensitive set for deduplication and stable comparison semantics for later Contains checks.</en>
+            // </lang>
             var extensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (string token in (configured ?? string.Empty).Split(','))
             {
+                // <lang>
+                //   <zh-CN>每个配置 token 先规范为带点小写扩展名，只有硬允许类型才可加入有效集合。</zh-CN>
+                //   <en>Normalize each configuration token to a dotted lowercase extension, adding it only when it is hard-allowed.</en>
+                // </lang>
                 string normalized = NormalizeConfiguredExtension(token);
                 if (!string.IsNullOrEmpty(normalized) && HardAllowedExtensions.Contains(normalized))
                 {
@@ -373,8 +484,30 @@ namespace ASPNET.StarterKit.Portal
             return extensions;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将配置中的单个扩展名规范为带点的小写值。</zh-CN>
+        ///   <en>Normalizes one configured extension to a dotted lowercase value.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>配置 token，可缺少前导点或为空。</zh-CN>
+        ///   <en>Configuration token, which may omit the leading dot or be empty.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>规范扩展名，空 token 返回空字符串。</zh-CN>
+        ///   <en>Normalized extension, or an empty string for an empty token.</en>
+        /// </l>
+        /// </returns>
         private static string NormalizeConfiguredExtension(string value)
         {
+            // <lang>
+            //   <zh-CN>先去除两端空白；空 token 不被补点，避免生成虚假的扩展名。</zh-CN>
+            //   <en>Trim surrounding whitespace first; do not add a dot to an empty token or create a fictitious extension.</en>
+            // </lang>
             string normalized = (value ?? string.Empty).Trim();
             if (normalized.Length == 0)
             {
@@ -386,15 +519,63 @@ namespace ASPNET.StarterKit.Portal
                 : "." + normalized.ToLowerInvariant();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从文件名安全提取小写扩展名，不保留目录部分。</zh-CN>
+        ///   <en>Safely extracts a lowercase extension from a filename without retaining directory components.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="fileName">
+        /// <l>
+        ///   <zh-CN>候选文件名，可为空。</zh-CN>
+        ///   <en>Candidate filename; may be empty.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>带点的小写扩展名，缺失时为空字符串。</zh-CN>
+        ///   <en>Dotted lowercase extension, or an empty string when absent.</en>
+        /// </l>
+        /// </returns>
         private static string GetNormalizedExtension(string fileName)
         {
+            // <lang>
+            //   <zh-CN>Path.GetFileName 先建立文件名边界，随后只将非空扩展名转为不区分大小写的稳定形式。</zh-CN>
+            //   <en>Establish the filename boundary with Path.GetFileName, then convert only a nonempty extension to a stable case-insensitive form.</en>
+            // </lang>
             string extension = Path.GetExtension(Path.GetFileName(fileName ?? string.Empty));
             return string.IsNullOrEmpty(extension) ? string.Empty : extension.ToLowerInvariant();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>净化文件主名中的控制字符、引号和平台非法字符，并限制存储长度。</zh-CN>
+        ///   <en>Sanitizes control characters, quotes, and platform-invalid characters from a filename stem and limits its storage length.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>候选文件主名，可为空。</zh-CN>
+        ///   <en>Candidate filename stem; may be empty.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>可读、非空且不超过主名上限的文件主名。</zh-CN>
+        ///   <en>Readable, nonempty stem no longer than the stem limit.</en>
+        /// </l>
+        /// </returns>
         private static string SanitizeFileStem(string value)
         {
+            // <lang>
+            //   <zh-CN>将 null 视为空主名，并固定当前平台非法字符集合作为替换依据。</zh-CN>
+            //   <en>Treat null as an empty stem and use the current platform's invalid-character set for replacement.</en>
+            // </lang>
             string source = value ?? string.Empty;
+            // <lang>
+            //   <zh-CN>逐字符替换控制码、引号和平台非法字符，避免主名进入响应头或物理路径时形成结构。</zh-CN>
+            //   <en>Replace control codes, quotes, and platform-invalid characters one by one so the stem cannot form response-header or physical-path structure.</en>
+            // </lang>
             char[] invalidCharacters = Path.GetInvalidFileNameChars();
             var builder = new StringBuilder();
             foreach (char character in source)
@@ -410,6 +591,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>去除边界空格、点和替换横线；完全为空时使用低敏固定名称。</zh-CN>
+            //   <en>Trim boundary spaces, dots, and replacement hyphens; use a fixed low-sensitivity name when nothing remains.</en>
+            // </lang>
             string sanitized = builder.ToString().Trim(' ', '.', '-');
             if (sanitized.Length == 0)
             {
@@ -419,6 +604,24 @@ namespace ASPNET.StarterKit.Portal
             return sanitized.Substring(0, Math.Min(sanitized.Length, StorageStemMaximumLength));
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将字节数格式化为不依赖区域设置的 MB 展示文本。</zh-CN>
+        ///   <en>Formats a byte count as culture-invariant MB display text.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="bytes">
+        /// <l>
+        ///   <zh-CN>待展示的字节数。</zh-CN>
+        ///   <en>Byte count to display.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>最多两位小数的 MB 文本。</zh-CN>
+        ///   <en>MB text with at most two decimal places.</en>
+        /// </l>
+        /// </returns>
         private static string FormatFileSize(int bytes)
         {
             return (bytes / 1024d / 1024d).ToString("0.##", CultureInfo.InvariantCulture) + " MB";
