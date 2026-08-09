@@ -47,6 +47,12 @@
                 <h2 class="Head portal-section-title">Trusted Packages</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                  <lang>
+                    <zh-CN>GridView 只投影受信部署包的状态和元数据；包标识来自绑定行但不构成信任边界，RowCommand 必须由服务端重新解析和校验。</zh-CN>
+                    <en>The GridView projects only trusted deployed-package state and metadata; a bound package id is not a trust boundary, so RowCommand must parse and validate it again on the server.</en>
+                  </lang>
+                --%>
                 <asp:GridView
                     ID="PackagesGrid"
                     AutoGenerateColumns="False"
@@ -67,6 +73,12 @@
                         <asp:BoundField DataField="StateText" HeaderText="State" />
                         <asp:BoundField DataField="DefinitionText" HeaderText="Definition" />
                         <asp:BoundField DataField="InstanceCount" HeaderText="Instances" />
+                        <%--
+                          <lang>
+                            <zh-CN>动作按钮的 Visible 标志只反映当前行能力投影；注册、启停和预检不会在标记层上传、解包、编译或加载脚本。</zh-CN>
+                            <en>Action-button visibility only projects the current row's capabilities; registration, enable/disable, and preflight never upload, extract, compile, or load scripts in the markup layer.</en>
+                          </lang>
+                        --%>
                         <asp:TemplateField HeaderText="Actions">
                             <ItemTemplate>
                                 <div class="portal-row-actions">

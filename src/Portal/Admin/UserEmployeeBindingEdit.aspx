@@ -32,6 +32,12 @@
         </div>
 
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
+        <%--
+          <lang>
+            <zh-CN>ActiveBindingId 只是服务端状态的回发载体，客户端可修改其值；绑定结束和版本校验不能信任该隐藏字段。</zh-CN>
+            <en>ActiveBindingId is only a postback carrier for server state and can be modified by the client; unbinding and version checks must not trust this hidden field.</en>
+          </lang>
+        --%>
         <asp:HiddenField ID="ActiveBindingId" runat="server" />
 
         <div class="portal-status-strip">
@@ -45,6 +51,12 @@
             <div class="portal-section-header">
                 <h2 class="Head portal-section-title">Binding Operation</h2>
             </div>
+            <%--
+              <lang>
+                <zh-CN>用户、员工和原因输入受标记层长度上限约束，但格式、存在性、唯一性、当前绑定和审计要求仍由 code-behind 校验。</zh-CN>
+                <en>User, employee, and reason inputs have markup-level length limits, while code-behind still validates format, existence, uniqueness, current binding, and audit requirements.</en>
+              </lang>
+            --%>
             <div class="portal-form-grid">
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Portal User ID</span>
@@ -61,6 +73,12 @@
                     <asp:TextBox ID="ReasonTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="200" runat="server" />
                 </div>
             </div>
+            <%--
+              <lang>
+                <zh-CN>绑定和结束绑定按钮只触发服务端命令；浏览器确认仅降低误操作，不替代管理员授权、并发版本和事务审计检查。</zh-CN>
+                <en>The bind and end-binding buttons only trigger server commands; browser confirmation reduces accidental actions but does not replace administrator authorization, concurrency-version, or transactional-audit checks.</en>
+              </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton ID="BindButton" CssClass="CommandButton portal-primary-action" Text="Bind User To Employee"
                     OnClick="BindButton_Click" runat="server" />

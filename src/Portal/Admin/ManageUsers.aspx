@@ -54,6 +54,12 @@
                         CausesValidation="False" Visible="False" runat="server" OnClick="RejectRegistration_Click" />
                 </div>
             </div>
+            <%--
+              <lang>
+                <zh-CN>员工绑定卡片只提供进入单绑定维护页的导航；绑定目标、版本刷新和审计动作不在此标记层执行。</zh-CN>
+                <en>The employee-binding card only navigates to the single-binding maintenance page; binding targets, security-version refresh, and audit actions are not executed by this markup.</en>
+              </lang>
+            --%>
             <div class="portal-admin-summary-item">
                 <div class="SubHead portal-summary-label">Employee Binding</div>
                 <div class="Normal portal-summary-value">
@@ -63,6 +69,12 @@
                     <asp:HyperLink ID="EmployeeBindingLink" CssClass="CommandButton" Text="Manage Binding" runat="server" />
                 </div>
             </div>
+            <%--
+              <lang>
+                <zh-CN>账号状态卡片仅在服务端授权后显示禁用/恢复按钮；禁用动作额外保留浏览器确认，但确认不替代服务端授权。</zh-CN>
+                <en>The account-status card shows disable/restore buttons only after server authorization; the disable action keeps a browser confirmation, which never replaces server authorization.</en>
+              </lang>
+            --%>
             <div class="portal-admin-summary-item">
                 <div class="SubHead portal-summary-label">Profile Status</div>
                 <div class="Normal portal-summary-value">
@@ -80,6 +92,12 @@
 
         <asp:Label ID="RegistrationMessage" CssClass="NormalRed portal-status-line" runat="server" />
 
+        <%--
+          <lang>
+            <zh-CN>注册元数据区只读展示邀请、员工和时间信息；这些值由后台加载，不作为账号更新表单的可编辑输入。</zh-CN>
+            <en>The registration-metadata section renders invitation, employee, and timestamp information read-only; code-behind loads these values and the markup does not treat them as editable account-update inputs.</en>
+          </lang>
+        --%>
         <div class="portal-admin-section">
             <div class="portal-section-header">
                 <h2 class="Head portal-section-title">Registration Metadata</h2>
@@ -203,6 +221,12 @@
             </div>
         </div>
 
+        <%--
+          <lang>
+            <zh-CN>角色成员区将可选角色和当前成员作为回发命令载体；角色身份、去重、授权和审计仍由 code-behind 在写入前重新判断。</zh-CN>
+            <en>The role-membership section carries selected roles and current members through postback commands; code-behind rechecks role identity, duplication, authorization, and audit requirements before writing.</en>
+          </lang>
+        --%>
         <div class="portal-admin-section">
             <div class="portal-section-header">
                 <h2 class="Head portal-section-title">Role Membership</h2>
