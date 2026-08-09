@@ -40,6 +40,12 @@
             </div>
         </div>
 
+        <%--
+            <lang>
+                <zh-CN>更正表单只承载服务器生成的字段白名单和有界低敏文本；MaxLength 约束改善交互，但规范化、授权与敏感字段边界仍由 code-behind 和数据服务负责。</zh-CN>
+                <en>The correction form carries only a server-generated field allowlist and bounded low-sensitivity text; MaxLength improves interaction, while normalization, authorization, and sensitive-field boundaries remain owned by code-behind and the data service.</en>
+            </lang>
+        --%>
         <div class="employee-profile-correction-subtitle">提交更正</div>
         <div class="employee-profile-form-grid">
             <div class="employee-profile-form-field">
@@ -55,6 +61,12 @@
                 <asp:TextBox ID="RequestNoteTextBox" CssClass="NormalTextBox employee-profile-correction-input employee-profile-correction-note"
                     MaxLength="1000" TextMode="MultiLine" Rows="4" runat="server" />
             </div>
+            <%--
+                <lang>
+                    <zh-CN>提交按钮只进入 SubmitButton_Click 回发流程；它不直接修改员工主数据，当前身份、员工绑定、字段白名单和写入结果均由服务器重新确认。</zh-CN>
+                    <en>The submit button only enters the SubmitButton_Click postback flow; it does not modify employee master data directly, because the server rechecks identity, employee binding, field allowlist, and write result.</en>
+                </lang>
+            --%>
             <div class="employee-profile-correction-actions">
                 <asp:Button ID="SubmitButton" CssClass="CommandButton" Text="提交更正请求" OnClick="SubmitButton_Click" runat="server" />
             </div>
@@ -62,6 +74,12 @@
 
         <div class="employee-profile-correction-subtitle">最近请求</div>
         <div class="employee-profile-list-wrap">
+            <%--
+                <lang>
+                    <zh-CN>最近请求列表只展示服务器返回的有限快照，字段使用编码绑定；列表是状态提示，不等同于员工主数据已修改或审核已完成。</zh-CN>
+                    <en>The recent-request list shows a bounded server-returned snapshot with encoded fields; it is a status hint, not proof that employee master data changed or review completed.</en>
+                </lang>
+            --%>
             <asp:Repeater ID="RecentRequestsRepeater" runat="server">
                 <HeaderTemplate>
                     <table class="employee-profile-correction-list" cellspacing="0" cellpadding="4" border="0">
