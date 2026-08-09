@@ -16,6 +16,12 @@
             <p class="Normal portal-admin-subtitle">Select an existing user, create a placeholder account, or enter the modern user management page.</p>
         </div>
         <div class="portal-admin-actions">
+            <%--
+                <lang>
+                    <zh-CN>新增用户按钮是显式管理员写库入口，继续通过 AddUser_Click 执行服务器端占位账号创建与授权边界。</zh-CN>
+                    <en>The add-user button is an explicit administrator persistence entry point and still uses AddUser_Click for server-side placeholder creation and authorization boundaries.</en>
+                </lang>
+            --%>
             <asp:LinkButton
                 ID="btn_AddUser"
                 CssClass="portal-button portal-button-primary"
@@ -38,6 +44,12 @@
         <div class="portal-form-grid portal-legacy-user-grid">
             <div class="portal-form-field portal-form-field-wide">
                 <span class="SubHead portal-form-label">User</span>
+                <%--
+                    <lang>
+                        <zh-CN>下拉列表以 UserID 作为服务器目标键、Email 作为展示文本；选中项不能单独证明当前管理员可操作该账号。</zh-CN>
+                        <en>The dropdown uses UserID as the server target key and Email as display text; the selected item alone does not prove that the administrator may operate on that account.</en>
+                    </lang>
+                --%>
                 <asp:DropDownList
                     ID="ddl_AllUsers"
                     CssClass="NormalTextBox portal-form-input"
@@ -48,6 +60,12 @@
             <div class="portal-form-field portal-form-actions-field">
                 <span class="SubHead portal-form-label">Actions</span>
                 <div class="portal-action-row portal-legacy-action-stack">
+                    <%--
+                        <lang>
+                            <zh-CN>编辑和删除命令沿用旧回调；删除是不可逆风险动作，服务器必须重新确认目标、权限和引用状态。</zh-CN>
+                            <en>Edit and delete commands use the legacy callbacks; deletion is an irreversible-risk action, so the server must recheck target, authorization, and reference state.</en>
+                        </lang>
+                    --%>
                     <asp:LinkButton
                         ID="btn_EditUser"
                         CssClass="portal-button portal-button-primary portal-button-compact"
