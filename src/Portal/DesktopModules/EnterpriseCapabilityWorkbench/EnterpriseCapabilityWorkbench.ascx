@@ -10,6 +10,12 @@
     <div class="enterprise-workbench-title">企业能力工作台 / Enterprise Capability Workbench</div>
     <asp:Label ID="MessageLabel" CssClass="enterprise-workbench-message" EnableViewState="false" runat="server" />
 
+    <%--
+        <lang>
+            <zh-CN>WorkbenchPanel 是否可见由服务器根据普通用户能力和上下文决定；标记层不自行授予协同事项权限。</zh-CN>
+            <en>The server decides WorkbenchPanel visibility from ordinary-user capability and context; markup does not grant collaboration-item permission.</en>
+        </lang>
+    --%>
     <asp:Panel ID="WorkbenchPanel" CssClass="enterprise-workbench-panel" Visible="false" runat="server">
         <%--
             <lang>
@@ -18,6 +24,12 @@
             </lang>
         --%>
         <div class="enterprise-workbench-form-grid">
+            <%--
+                <lang>
+                    <zh-CN>标题、类型、优先级、期限、摘要和说明构成低敏协同事项输入；角色、时间、长度和正文规范化仍由服务器处理。</zh-CN>
+                    <en>Title, type, priority, due time, summary, and description form low-sensitivity collaboration input; role, time, length, and body normalization remain server-side.</en>
+                </lang>
+            --%>
             <div class="enterprise-workbench-form-field enterprise-workbench-form-field-wide">
                 <span class="SubHead enterprise-workbench-label">事项标题</span>
                 <asp:TextBox ID="TitleTextBox" CssClass="NormalTextBox enterprise-workbench-input" MaxLength="200" runat="server" />
@@ -45,6 +57,12 @@
             </div>
         </div>
 
+        <%--
+            <lang>
+                <zh-CN>提交、参与者评论和重新提交命令通过既有 ItemId 绑定事件进入服务器状态机；编码列表输出不替代状态和权限校验。</zh-CN>
+                <en>Submit, participant-comment, and resubmit commands enter the server state machine through existing ItemId-bound events; encoded list output does not replace state or authorization checks.</en>
+            </lang>
+        --%>
         <div class="enterprise-workbench-actions">
             <asp:Button ID="SubmitButton" CssClass="CommandButton" Text="提交协同事项" OnClick="SubmitButton_Click" runat="server" />
         </div>

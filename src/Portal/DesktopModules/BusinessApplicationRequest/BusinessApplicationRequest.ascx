@@ -10,6 +10,12 @@
     <div class="business-application-title">业务申请 / Business Application</div>
     <asp:Label ID="MessageLabel" CssClass="business-application-message" EnableViewState="false" runat="server" />
 
+    <%--
+        <lang>
+            <zh-CN>RequestPanel 是否可见由服务器根据模块可用性和当前上下文决定；页面不在客户端推断普通用户是否可提交。</zh-CN>
+            <en>The server decides RequestPanel visibility from module availability and current context; the page does not infer client-side whether a user may submit.</en>
+        </lang>
+    --%>
     <asp:Panel ID="RequestPanel" CssClass="business-application-panel" Visible="false" runat="server">
         <%--
             <lang>
@@ -18,6 +24,12 @@
             </lang>
         --%>
         <div class="business-application-form-grid">
+            <%--
+                <lang>
+                    <zh-CN>标题、分类、摘要和说明构成低敏纯文本申请；长度、分类白名单、规范化和敏感信息边界仍由服务器负责。</zh-CN>
+                    <en>Title, category, summary, and body form a low-sensitivity plain-text request; length, category allowlists, normalization, and sensitive-data boundaries remain server-owned.</en>
+                </lang>
+            --%>
             <div class="business-application-form-field business-application-form-field-wide">
                 <span class="SubHead business-application-label">标题</span>
                 <asp:TextBox ID="TitleTextBox" CssClass="NormalTextBox business-application-input" MaxLength="200" runat="server" />
@@ -37,6 +49,12 @@
             </div>
         </div>
 
+        <%--
+            <lang>
+                <zh-CN>SubmitButton_Click 进入申请写入流程；最近申请列表使用编码绑定展示服务器结果，不把页面文本当作提交成功证明。</zh-CN>
+                <en>SubmitButton_Click enters the application write flow; the recent-application list uses encoded bindings for server results, and page text is not proof of submission success.</en>
+            </lang>
+        --%>
         <div class="business-application-actions">
             <asp:Button ID="SubmitButton" CssClass="CommandButton" Text="提交申请" OnClick="SubmitButton_Click" runat="server" />
         </div>
