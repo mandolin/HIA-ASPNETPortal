@@ -33,6 +33,12 @@
 
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
 
+        <%--
+          <lang>
+            <zh-CN>状态筛选只表达审核列表的查询意图；状态值解析、页大小、授权和空结果处理仍由 SearchButton_Click 的服务端职责负责。</zh-CN>
+            <en>The status filter expresses only review-list query intent; SearchButton_Click remains responsible for parsing, page size, authorization, and empty-result handling.</en>
+          </lang>
+        --%>
         <div class="portal-admin-section portal-filter-panel">
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
@@ -62,6 +68,12 @@
                 <h2 class="Head portal-section-title">Correction Requests</h2>
             </div>
             <div class="portal-table-wrap">
+                <%--
+                  <lang>
+                    <zh-CN>Repeater 只读呈现当前值、提议值和审核文本，使用编码绑定避免把申请内容当作标记执行；请求编号和状态命令仍需服务端重新校验。</zh-CN>
+                    <en>The Repeater renders current, proposed, and review text read-only with encoded bindings so request content is not executed as markup; the server must revalidate request id and status commands.</en>
+                  </lang>
+                --%>
                 <asp:Repeater ID="RequestsRepeater" OnItemCommand="RequestsRepeater_ItemCommand" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -93,6 +105,12 @@
                                 </td>
                                 <td><%#: Eval("RequestStatus") %></td>
                                 <td>
+                                    <%--
+                                      <lang>
+                                        <zh-CN>审核备注有长度上限但仍是管理员输入；状态转换、请求归属、审计事件和主数据旁路规则由 code-behind 校验。</zh-CN>
+                                        <en>The review note has a length limit but remains administrator input; code-behind validates state transition, request ownership, audit events, and the master-data side-channel rule.</en>
+                                      </lang>
+                                    --%>
                                     <asp:TextBox ID="ReviewNoteTextBox" CssClass="NormalTextBox portal-review-note" Width="210" MaxLength="1000" TextMode="MultiLine" Rows="3" runat="server" />
                                     <div class="portal-row-actions">
                                         <asp:LinkButton ID="ReviewedButton" Text="Approve" CssClass="CommandButton" CommandName="Reviewed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />

@@ -39,6 +39,12 @@
             <div class="portal-section-header">
                 <h2 class="Head portal-section-title">Definition Metadata</h2>
             </div>
+            <%--
+              <lang>
+                <zh-CN>定义表单只允许友好名称编辑；桌面/移动源路径保持只读安全边界，并由服务器验证受信相对 ASCX 路径。</zh-CN>
+                <en>The definition form edits only the friendly name; desktop/mobile source paths remain read-only safety boundaries and the server validates trusted relative ASCX paths.</en>
+              </lang>
+            --%>
             <div class="portal-form-grid">
                 <div class="portal-form-field">
                     <span class="SubHead portal-form-label">Friendly Name</span>
@@ -72,6 +78,12 @@
                             ErrorMessage="You Must Enter Source Path for the Desktop Module"
                             ControlToValidate="DesktopSrc"
                             runat="server" />
+                        <%--
+                          <lang>
+                            <zh-CN>CustomValidator 只是触发服务器路径规则的标记入口；它不把客户端校验视为路径信任或授权证明。</zh-CN>
+                            <en>CustomValidator only invokes the server path rule from markup; client-side validation is not treated as path trust or authorization proof.</en>
+                          </lang>
+                        --%>
                         <asp:CustomValidator
                             ID="DesktopSrcPathValidator"
                             Display="Dynamic"
@@ -91,6 +103,12 @@
                         runat="server" />
                 </div>
             </div>
+            <%--
+              <lang>
+                <zh-CN>更新、取消和删除按钮只发送命令意图；定义身份、实例引用、受信路径、删除保护和审计仍由 code-behind 决定。</zh-CN>
+                <en>Update, cancel, and delete buttons submit only command intent; code-behind decides definition identity, instance references, trusted paths, delete protection, and auditing.</en>
+              </lang>
+            --%>
             <div class="portal-form-actions">
                 <asp:LinkButton
                     ID="updateButton"
