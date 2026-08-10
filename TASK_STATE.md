@@ -922,7 +922,10 @@
 | P26.5qg 选片 | 已选择 `PortalHiaBoundarySettings.cs` 与 `Portal.HiaBoundaryProof/Program.cs` 的 HIA 部署级实例标识读取与离线 fixture proof 相邻职责链；覆盖受控 registry 输入、正式契约规范化、fixture 清单、JSON 映射、稳定错误码和隐私输出边界；真实外围适配器、transport、外部程序集、账号、凭据、数据库、IIS/HTTP 和浏览器 proof 排除。见 [P26.5qg 选片](work-zone/dev/plans/W-anp-P26.5qg-hia-boundary-settings-proof-selection.md)。 |
 | P26.5qh 注释补强 | 已将设置读取器历史双语 XML 迁移为 `<lang>`/`<l>`，并为 proof 清单、命令行读取、用例结果、规范化断言、JSON/producer/字段映射和失败回退补充 26 个中英双语 `<lang>` 块；新增 fixture 清单 private XML `<summary>` 1 个，新增非注释代码 `0`。见 [P26.5qh 结果](work-zone/dev/plans/W-anp-P26.5qh-hia-boundary-settings-proof-result.md)。 |
 | P26.5qi 静态验证 | 通过；两个目标文件差异全部为 XML/inline 注释，注释-only 扫描 `NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal XML member count `1918`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。真实外围、账号、凭据和运行时 proof 未执行。见 [P26.5qi 审计](work-zone/dev/plans/W-anp-P26.5qi-hia-boundary-settings-proof-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5qj：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qg-qi。 |
+| P26.5qj 选片 | 已选择 `PortalHiaBoundaryContracts.cs` 的 HIA 外围契约验证完整职责链；覆盖实例标识规范化、能力类型/字段白名单、payload/metadata 校验、敏感字段拒绝、路径/URL 防泄露、UTC/语义版本和安全结果归一；真实外围适配器、transport、外部程序集、账号、凭据、数据库、IIS/HTTP 和浏览器 proof 排除。见 [P26.5qj 选片](work-zone/dev/plans/W-anp-P26.5qj-hia-boundary-contract-selection.md)。 |
+| P26.5qk 注释补强 | 已为契约正则、能力白名单、payload 规则、实例规范化、payload/metadata 校验、能力集合上限、敏感字段片段、路径/URL 拒绝、UTC 解析、内部规则对象和安全结果构造补充 33 个中英双语 `<lang>` 块及 5 个 private/state XML `<summary>`；新增非注释代码 `0`。见 [P26.5qk 结果](work-zone/dev/plans/W-anp-P26.5qk-hia-boundary-contract-result.md)。 |
+| P26.5ql 静态验证 | 通过；目标文件差异全部为 XML/inline 注释，注释-only 扫描 `NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal XML member count `1918`、Portal.Components `902`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。真实外围、网络、账号、凭据和生产 proof 未执行。见 [P26.5ql 审计](work-zone/dev/plans/W-anp-P26.5ql-hia-boundary-contract-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5qm：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qj-ql。 |
 
 ## Known Residual Working Tree Items
 

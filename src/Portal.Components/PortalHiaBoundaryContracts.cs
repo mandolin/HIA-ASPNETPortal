@@ -44,14 +44,32 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public const string ProducerId = "hia-aspnetportal";
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>限制部署级实例标识的字符集和长度，阻止路径、空白及敏感内容进入契约。</zh-CN>
+        ///   <en>Restricts deployment instance identifiers by character set and length so paths, whitespace, and sensitive content cannot enter the contract.</en>
+        /// </lang>
+        /// </summary>
         private static readonly Regex InstanceIdPattern = new Regex(
             @"^[a-z0-9][a-z0-9._-]{0,127}$",
             RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>约束 producer 版本为 invariant 的语义版本文本。</zh-CN>
+        ///   <en>Constrains producer versions to invariant semantic-version text.</en>
+        /// </lang>
+        /// </summary>
         private static readonly Regex SemanticVersionPattern = new Regex(
             @"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$",
             RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>外围契约允许发布的能力类型白名单。</zh-CN>
+        ///   <en>Allowlist of capability kinds that the peripheral contract may publish.</en>
+        /// </lang>
+        /// </summary>
         private static readonly ISet<string> AllowedKinds = new HashSet<string>(StringComparer.Ordinal)
         {
             "portal.module-capability",
@@ -61,6 +79,12 @@ namespace ASPNET.StarterKit.Portal
             "portal.diagnostic-reference"
         };
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按能力类型保存 payload 必填/可选字段规则；规则只用于离线验证，不启用外部连接。</zh-CN>
+        ///   <en>Stores required and optional payload-field rules by capability kind; rules serve offline validation only and enable no external connection.</en>
+        /// </lang>
+        /// </summary>
         private static readonly IDictionary<string, PayloadRule> PayloadRules =
             new Dictionary<string, PayloadRule>(StringComparer.Ordinal)
             {
@@ -131,6 +155,10 @@ namespace ASPNET.StarterKit.Portal
                 return Failure("HIA_PERIPHERAL_UNSUPPORTED_VERSION", "The peripheral contract version is unsupported.");
             }
 
+            // <lang>
+            //   <zh-CN>暂存规范化实例标识；验证结果只返回状态，不把原始输入回显给调用方。</zh-CN>
+            //   <en>Hold the normalized instance identifier; validation returns status only and never echoes the raw input.</en>
+            // </lang>
             string normalizedInstanceId;
             if (!TryNormalizePortalInstanceId(envelope.PortalInstanceId, out normalizedInstanceId))
             {
@@ -154,12 +182,20 @@ namespace ASPNET.StarterKit.Portal
                 return Failure("HIA_PERIPHERAL_INVALID_TIMESTAMP", "The UTC timestamp is invalid.");
             }
 
+            // <lang>
+            //   <zh-CN>先验证按 kind 约束的 payload，使未知字段和敏感字段在 metadata 之前被拒绝。</zh-CN>
+            //   <en>Validate the kind-scoped payload first so unknown and sensitive fields are rejected before metadata processing.</en>
+            // </lang>
             PortalHiaBoundaryValidationResult payloadResult = ValidatePayload(envelope.Kind, envelope.Payload);
             if (!payloadResult.IsValid)
             {
                 return payloadResult;
             }
 
+            // <lang>
+            //   <zh-CN>最后验证可忽略 metadata，并只返回成功或稳定失败结果，不携带 payload 原文。</zh-CN>
+            //   <en>Validate ignorable metadata last and return only success or a stable failure without raw payload content.</en>
+            // </lang>
             PortalHiaBoundaryValidationResult metadataResult = ValidateMetadata(envelope.Metadata);
             return metadataResult.IsValid ? Success() : metadataResult;
         }
@@ -190,13 +226,26 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static bool TryNormalizePortalInstanceId(string candidate, out string normalizedInstanceId)
         {
+            // <lang>
+            //   <zh-CN>先清空输出，确保空值、格式错误或长度超限时不会残留上一次结果。</zh-CN>
+            //   <en>Clear the output first so null, malformed, or overlong input cannot retain a previous result.</en>
+            // </lang>
             normalizedInstanceId = string.Empty;
             if (string.IsNullOrWhiteSpace(candidate))
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>去除部署配置外围空白，再按 GUID 优先、受限文本其次的顺序规范化。</zh-CN>
+            //   <en>Trim deployment-configuration whitespace, then normalize in GUID-first and restricted-text order.</en>
+            // </lang>
             string trimmed = candidate.Trim();
+
+            // <lang>
+            //   <zh-CN>保存 GUID 解析结果，以统一 D 格式输出不含大括号的稳定标识。</zh-CN>
+            //   <en>Hold the GUID parse result so the stable identifier is emitted in brace-free D format.</en>
+            // </lang>
             Guid guid;
             if (Guid.TryParse(trimmed, out guid))
             {
@@ -204,6 +253,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>将非 GUID 候选转为 invariant 小写，再由正则执行字符和长度门禁。</zh-CN>
+            //   <en>Convert non-GUID candidates to invariant lowercase before the regex enforces character and length bounds.</en>
+            // </lang>
             string normalized = trimmed.ToLowerInvariant();
             if (!InstanceIdPattern.IsMatch(normalized))
             {
@@ -229,12 +282,20 @@ namespace ASPNET.StarterKit.Portal
                 return Failure("HIA_PERIPHERAL_INVALID_PAYLOAD", "The capability payload is required.");
             }
 
+            // <lang>
+            //   <zh-CN>按 capability kind 取得字段白名单；未知 kind 立即失败，避免宽松接受未定义 payload。</zh-CN>
+            //   <en>Resolve the field allowlist by capability kind; fail unknown kinds immediately instead of accepting undefined payloads.</en>
+            // </lang>
             PayloadRule rule;
             if (!PayloadRules.TryGetValue(kind, out rule))
             {
                 return Failure("HIA_PERIPHERAL_UNSUPPORTED_KIND", "The capability kind has no payload rule.");
             }
 
+            // <lang>
+            //   <zh-CN>逐项确认契约声明的必填字段都存在，缺失时返回稳定错误码。</zh-CN>
+            //   <en>Confirm every contract-declared required field is present and return a stable error code when one is missing.</en>
+            // </lang>
             foreach (string requiredKey in rule.RequiredKeys)
             {
                 if (!payload.ContainsKey(requiredKey))
@@ -243,6 +304,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>遍历实际 payload，依次执行敏感字段拒绝、白名单校验和字段值类型/范围校验。</zh-CN>
+            //   <en>Traverse the actual payload to reject sensitive names, enforce the allowlist, and validate value type and scope.</en>
+            // </lang>
             foreach (KeyValuePair<string, object> entry in payload)
             {
                 if (ContainsProhibitedFieldName(entry.Key))
@@ -277,6 +342,10 @@ namespace ASPNET.StarterKit.Portal
                 return Success();
             }
 
+            // <lang>
+            //   <zh-CN>只允许 metadataVersion 与 source 两个非敏感字段，并复用安全文本规则。</zh-CN>
+            //   <en>Allow only the non-sensitive metadataVersion and source fields and reuse the safe-text rule.</en>
+            // </lang>
             foreach (KeyValuePair<string, object> entry in metadata)
             {
                 if (ContainsProhibitedFieldName(entry.Key))
@@ -290,6 +359,10 @@ namespace ASPNET.StarterKit.Portal
                     return Failure("HIA_PERIPHERAL_UNKNOWN_FIELD", "The metadata contains an unknown field.");
                 }
 
+                // <lang>
+                //   <zh-CN>将 metadata 值限制为文本，再校验长度、路径/URL 外观和版本一致性。</zh-CN>
+                //   <en>Restrict metadata values to text, then validate length, path/URL appearance, and version consistency.</en>
+                // </lang>
                 string text = entry.Value as string;
                 if (!IsSafeText(text, 100) ||
                     (string.Equals(entry.Key, "metadataVersion", StringComparison.Ordinal) &&
@@ -322,6 +395,10 @@ namespace ASPNET.StarterKit.Portal
                 return value is bool;
             }
 
+            // <lang>
+            //   <zh-CN>非布尔/集合字段必须先转换为安全文本，后续枚举判断只作用于已净化值。</zh-CN>
+            //   <en>Non-boolean and non-collection fields must first become safe text so later enum checks operate on sanitized values.</en>
+            // </lang>
             string text = value as string;
             if (!IsSafeText(text, 200))
             {
@@ -368,15 +445,32 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private static bool IsValidCapabilities(object value)
         {
+            // <lang>
+            //   <zh-CN>暂存集合视图并拒绝字符串伪装的集合输入。</zh-CN>
+            //   <en>Hold the collection view and reject string values that masquerade as collections.</en>
+            // </lang>
             IEnumerable values = value as IEnumerable;
             if (values == null || value is string)
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>累计能力项数量，用于执行非空和最多 32 项的契约上限。</zh-CN>
+            //   <en>Count capability items to enforce the non-empty contract and its maximum of 32 entries.</en>
+            // </lang>
             int count = 0;
+
+            // <lang>
+            //   <zh-CN>逐项要求安全文本和实例标识字符集，避免能力名携带路径或外部地址。</zh-CN>
+            //   <en>Require safe text and instance-identifier characters for each item so capability names cannot carry paths or external addresses.</en>
+            // </lang>
             foreach (object item in values)
             {
+                // <lang>
+                //   <zh-CN>将当前集合项限制为字符串，再复用统一文本安全检查。</zh-CN>
+                //   <en>Restrict the current collection item to a string and reuse the shared text-safety check.</en>
+                // </lang>
                 string capability = item as string;
                 if (!IsSafeText(capability, 80) || !InstanceIdPattern.IsMatch(capability.ToLowerInvariant()))
                 {
@@ -419,7 +513,16 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>去除字段名分隔符并转为 invariant 小写，以便大小写/命名风格变化不能绕过敏感片段识别。</zh-CN>
+            //   <en>Remove field-name separators and use invariant lowercase so casing or naming style cannot bypass sensitive-fragment detection.</en>
+            // </lang>
             string normalized = key.Replace("_", string.Empty).Replace("-", string.Empty).ToLowerInvariant();
+
+            // <lang>
+            //   <zh-CN>保存会触发拒绝的身份、凭据、路径、审计和异常片段；列表本身不包含运行时秘密。</zh-CN>
+            //   <en>Store identity, credential, path, audit, and exception fragments that trigger rejection; the list contains no runtime secrets.</en>
+            // </lang>
             string[] prohibitedFragments =
             {
                 "password", "secret", "token", "cookie", "connectionstring", "requestbody",
@@ -427,6 +530,10 @@ namespace ASPNET.StarterKit.Portal
                 "username", "userid", "email", "role", "audit", "stacktrace", "exceptiondetail"
             };
 
+            // <lang>
+            //   <zh-CN>逐个匹配受限片段，命中任一项即 fail-closed。</zh-CN>
+            //   <en>Match each restricted fragment and fail closed when any fragment is found.</en>
+            // </lang>
             foreach (string fragment in prohibitedFragments)
             {
                 if (normalized.Contains(fragment))
@@ -446,6 +553,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private static bool LooksLikeUnsafeLocation(string value)
         {
+            // <lang>
+            //   <zh-CN>去除外围空白后统一识别盘符、UNC、Unix 绝对路径和 URL 前缀。</zh-CN>
+            //   <en>Trim surrounding whitespace before uniformly recognizing drive, UNC, Unix-absolute, and URL prefixes.</en>
+            // </lang>
             string trimmed = value.Trim();
             return Regex.IsMatch(trimmed, @"^[A-Za-z]:[\\/]|^\\\\|^/|^[A-Za-z][A-Za-z0-9+.-]*://");
         }
@@ -458,6 +569,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private static bool IsUtcTimestamp(string value)
         {
+            // <lang>
+            //   <zh-CN>暂存 round-trip 解析结果，并要求偏移为零来保持 UTC-only 契约。</zh-CN>
+            //   <en>Hold the round-trip parse result and require zero offset to preserve the UTC-only contract.</en>
+            // </lang>
             DateTimeOffset timestamp;
             return DateTimeOffset.TryParseExact(
                 value,
@@ -508,6 +623,12 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private sealed class PayloadRule
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>当前 kind 的完整允许字段集合，供 required/optional 规则共享。</zh-CN>
+            ///   <en>Complete allowed-field set for the current kind, shared by required and optional rules.</en>
+            /// </lang>
+            /// </summary>
             private readonly ISet<string> _allowedKeys;
 
             /// <summary>
@@ -518,8 +639,22 @@ namespace ASPNET.StarterKit.Portal
             /// </summary>
             public PayloadRule(IEnumerable<string> requiredKeys, IEnumerable<string> optionalKeys)
             {
+                // <lang>
+                //   <zh-CN>复制并冻结必填键集合，避免调用方后续修改规则输入。</zh-CN>
+                //   <en>Copy and freeze required keys so callers cannot mutate rule inputs afterward.</en>
+                // </lang>
                 RequiredKeys = new List<string>(requiredKeys).AsReadOnly();
+
+                // <lang>
+                //   <zh-CN>以必填键初始化白名单，再追加受控可选键。</zh-CN>
+                //   <en>Initialize the allowlist from required keys and then add controlled optional keys.</en>
+                // </lang>
                 _allowedKeys = new HashSet<string>(RequiredKeys, StringComparer.Ordinal);
+
+                // <lang>
+                //   <zh-CN>把每个可选键纳入同一 ordinal 白名单，保持字段匹配大小写敏感且稳定。</zh-CN>
+                //   <en>Add each optional key to the same ordinal allowlist so field matching remains case-sensitive and stable.</en>
+                // </lang>
                 foreach (string optionalKey in optionalKeys)
                 {
                     _allowedKeys.Add(optionalKey);
@@ -667,8 +802,22 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         internal PortalHiaBoundaryValidationResult(bool isValid, string code, string message)
         {
+            // <lang>
+            //   <zh-CN>保存验证状态，供调用方只读取结构化结果而不接触原始 envelope。</zh-CN>
+            //   <en>Store validation state so callers consume a structured result without accessing the raw envelope.</en>
+            // </lang>
             IsValid = isValid;
+
+            // <lang>
+            //   <zh-CN>将机器代码空值归一为空字符串，保证失败/成功结果都可稳定序列化。</zh-CN>
+            //   <en>Normalize a null machine code to empty so success and failure results serialize stably.</en>
+            // </lang>
             Code = code ?? string.Empty;
+
+            // <lang>
+            //   <zh-CN>将安全消息空值归一为空字符串，不回显请求字段或 payload 原文。</zh-CN>
+            //   <en>Normalize a null safe message to empty without echoing request fields or raw payload text.</en>
+            // </lang>
             Message = message ?? string.Empty;
         }
 
