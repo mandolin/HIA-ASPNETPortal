@@ -18,6 +18,10 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public static class PortalAuthenticationService
     {
+        // <lang>
+        //   <zh-CN>安全版本前缀是票据 UserData 的固定受控格式，不承载角色、秘密或业务资料。</zh-CN>
+        //   <en>The security-version prefix is the fixed controlled UserData format and carries no roles, secrets, or business data.</en>
+        // </lang>
         private const string SecurityVersionPrefix = "sv:";
 
         /// <summary>
@@ -63,8 +67,22 @@ namespace ASPNET.StarterKit.Portal
             long securityVersion,
             bool isPersistent)
         {
+            // <lang>
+            //   <zh-CN>记录本次票据签发的本地时间起点，后续过期边界与 Forms Authentication timeout 保持一致。</zh-CN>
+            //   <en>Record the local issuance start so the later expiration boundary matches the Forms Authentication timeout.</en>
+            // </lang>
             DateTime issuedAt = DateTime.Now;
+
+            // <lang>
+            //   <zh-CN>计算票据过期时间；持久 Cookie 仅在调用方选择持久登录时复用该边界。</zh-CN>
+            //   <en>Compute the ticket expiration; a persistent cookie reuses this boundary only when persistent sign-in is selected.</en>
+            // </lang>
             DateTime expiresAt = issuedAt.Add(FormsAuthentication.Timeout);
+
+            // <lang>
+            //   <zh-CN>创建只包含安全版本 UserData 的 Forms Authentication 票据，角色和业务资料不进入主票据。</zh-CN>
+            //   <en>Create a Forms Authentication ticket whose UserData contains only the security version; roles and business data stay out of the main ticket.</en>
+            // </lang>
             var ticket = new FormsAuthenticationTicket(
                 1,
                 userName,
@@ -73,6 +91,10 @@ namespace ASPNET.StarterKit.Portal
                 isPersistent,
                 FormatSecurityVersion(securityVersion));
 
+            // <lang>
+            //   <zh-CN>创建 HttpOnly 身份 Cookie，并复用虚拟目录 Path 规则；Secure/SameSite 仍由部署策略负责。</zh-CN>
+            //   <en>Create the HttpOnly identity cookie using the virtual-directory Path rule; deployment policy still owns Secure/SameSite.</en>
+            // </lang>
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket))
             {
                 HttpOnly = true,
@@ -205,8 +227,20 @@ namespace ASPNET.StarterKit.Portal
                    securityVersion >= 0;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析 Forms Authentication Cookie 使用的应用程序路径。</zh-CN>
+        ///   <en>Resolves the application path used by the Forms Authentication cookie.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request"><l zh-CN="当前 HTTP 请求，可为 null。" en="Current HTTP request; may be null." /></param>
+        /// <returns><l zh-CN="非空 Cookie Path，无法确定时为根路径。" en="Non-empty cookie path, or root path when it cannot be determined." /></returns>
         private static string GetCookiePath(HttpRequest request)
         {
+            // <lang>
+            //   <zh-CN>提取应用程序路径并在当前 helper 内使用；不接受请求参数作为额外路径片段。</zh-CN>
+            //   <en>Extract the application path for this helper only and accept no request parameter as an additional path fragment.</en>
+            // </lang>
             string applicationPath = request == null ? null : request.ApplicationPath;
             if (string.IsNullOrWhiteSpace(applicationPath) || applicationPath == "/")
             {
@@ -216,6 +250,14 @@ namespace ASPNET.StarterKit.Portal
             return applicationPath.TrimEnd('/');
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按与签入相同的 Path 规则让主身份 Cookie 立即过期。</zh-CN>
+        ///   <en>Immediately expires the main identity cookie using the same Path rule as sign-in.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="response"><l zh-CN="当前 HTTP 响应。" en="Current HTTP response." /></param>
+        /// <param name="request"><l zh-CN="用于解析 Cookie Path 的当前请求。" en="Current request used to resolve the cookie path." /></param>
         private static void ExpireAuthenticationCookie(HttpResponse response, HttpRequest request)
         {
             response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, string.Empty)

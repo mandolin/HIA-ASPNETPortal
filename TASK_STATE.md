@@ -916,7 +916,10 @@
 | P26.5qa 选片 | 已选择 `PortalDiagnostics.cs` 的诊断写入、接收器隔离、文件滚动、保留清理和目录解析职责链；覆盖受管文件名正则、日志锁、事件构造、请求字段净化、Trace/NDJSON 输出、UTF-8 字节容量、旧日志清理和路径归一化；真实日志、文件权限、IIS/HTTP、账号、凭据与发布 proof 排除。见 [P26.5qa 选片](work-zone/dev/plans/W-anp-P26.5qa-diagnostics-write-selection.md)。 |
 | P26.5qb 注释补强 | 已为重要状态/正则、九个 private helper 和关键局部变量补充 29 个中英双语 `<lang>` 块；新增非注释代码 `0`。见 [P26.5qb 结果](work-zone/dev/plans/W-anp-P26.5qb-diagnostics-write-result.md)。 |
 | P26.5qc 静态验证 | 通过；目标差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1916`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5qc 审计](work-zone/dev/plans/W-anp-P26.5qc-diagnostics-write-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5qd：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qa-qc。 |
+| P26.5qd 选片 | 已选择 `PortalAuthenticationService.cs` 与 `PortalAuthenticationCookies.cs` 的认证票据/角色 Cookie 生命周期职责链；覆盖安全版本 UserData、Forms Authentication 签入/签出、角色票据加密、版本失效、Cookie Path、HttpOnly、过期与持久化；真实登录、浏览器、HTTPS、数据库角色、账号、凭据与发布 proof 排除。见 [P26.5qd 选片](work-zone/dev/plans/W-anp-P26.5qd-auth-ticket-cookie-selection.md)。 |
+| P26.5qe 注释补强 | 已为安全版本/角色分隔符、主票据签入和两个 private helper、角色 Cookie 读取/写入/解析局部状态补充 25 个中英双语 `<lang>` 块；新增非注释代码 `0`。见 [P26.5qe 结果](work-zone/dev/plans/W-anp-P26.5qe-auth-ticket-cookie-result.md)。 |
+| P26.5qf 静态验证 | 通过；两个目标文件差异全部为 XML/inline 注释，Debug 构建、XML gate（Portal XML member count `1918`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。见 [P26.5qf 审计](work-zone/dev/plans/W-anp-P26.5qf-auth-ticket-cookie-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5qg：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qd-qf。 |
 
 ## Known Residual Working Tree Items
 
