@@ -21,6 +21,12 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
     /// </remarks>
     internal static class Program
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按稳定顺序登记所有受控外围契约 fixture 及其期望结果。</zh-CN>
+        ///   <en>Registers all controlled peripheral-contract fixtures and their expected results in stable order.</en>
+        /// </lang>
+        /// </summary>
         private static readonly ProofCase[] FixtureCases =
         {
             new ProofCase("P3H01.ModuleDescriptor", "valid-module.json", true, "HIA_PERIPHERAL_VALID"),
@@ -54,6 +60,10 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
         /// </returns>
         private static int Main(string[] args)
         {
+            // <lang>
+            //   <zh-CN>从命令行提取受控 fixture 根目录；缺少目录时只报告用法错误，不触碰真实环境。</zh-CN>
+            //   <en>Extract the controlled fixture root from the command line; when absent, report usage only and never touch a real environment.</en>
+            // </lang>
             string fixtureDirectory;
             if (!TryReadFixtureDirectory(args, out fixtureDirectory))
             {
@@ -61,11 +71,34 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
                 return 2;
             }
 
+            // <lang>
+            //   <zh-CN>累计所有 fixture 和规范化检查的结果，保持 proof 以单一退出码收口。</zh-CN>
+            //   <en>Accumulate every fixture and normalization result so the proof closes with one exit code.</en>
+            // </lang>
             bool passed = true;
+
+            // <lang>
+            //   <zh-CN>按固定顺序遍历 fixture，保持 proof 输出与登记表一一对应。</zh-CN>
+            //   <en>Traverse fixtures in fixed order so proof output remains one-to-one with the registry.</en>
+            // </lang>
             foreach (ProofCase proofCase in FixtureCases)
             {
+                // <lang>
+                //   <zh-CN>当前受控用例定义文件名、预期有效性和稳定错误码，供本地离线验证。</zh-CN>
+                //   <en>The current controlled case supplies the file name, expected validity, and stable error code for offline verification.</en>
+                // </lang>
                 PortalHiaBoundaryValidationResult result;
+
+                // <lang>
+                //   <zh-CN>读取并验证 fixture；失败时保留 null 结果，让输出只暴露稳定 proof 状态。</zh-CN>
+                //   <en>Read and validate the fixture; retain a null result on failure so output exposes only stable proof state.</en>
+                // </lang>
                 bool loaded = TryValidateFixture(fixtureDirectory, proofCase.FileName, out result);
+
+                // <lang>
+                //   <zh-CN>同时比较加载状态、有效性和稳定代码，避免只凭进程未抛异常判定通过。</zh-CN>
+                //   <en>Compare load state, validity, and stable code together instead of treating an exception-free process as proof success.</en>
+                // </lang>
                 bool casePassed = loaded && result != null &&
                                   result.IsValid == proofCase.ExpectedValid &&
                                   string.Equals(result.Code, proofCase.ExpectedCode, StringComparison.Ordinal);
@@ -73,7 +106,16 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
                 passed &= casePassed;
             }
 
+            // <lang>
+            //   <zh-CN>保存实例标识规范化的输出，验证合法值转小写且非法值被拒绝。</zh-CN>
+            //   <en>Store normalization output to verify lowercase canonicalization for valid input and rejection of invalid input.</en>
+            // </lang>
             string normalizedInstanceId;
+
+            // <lang>
+            //   <zh-CN>将合法与非法样例合并为一个边界断言，确保 proof 复用正式契约实现。</zh-CN>
+            //   <en>Combine valid and invalid samples into one boundary assertion so the proof reuses the production contract.</en>
+            // </lang>
             bool instanceIdPassed =
                 PortalHiaBoundaryContract.TryNormalizePortalInstanceId("Portal-Dev_01", out normalizedInstanceId) &&
                 string.Equals(normalizedInstanceId, "portal-dev_01", StringComparison.Ordinal) &&
@@ -92,12 +134,20 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
         /// </summary>
         private static bool TryReadFixtureDirectory(string[] args, out string fixtureDirectory)
         {
+            // <lang>
+            //   <zh-CN>先将输出初始化为空，保证参数缺失或格式错误时不会泄露调用方路径。</zh-CN>
+            //   <en>Initialize the output to empty so missing or malformed arguments never leak a caller path.</en>
+            // </lang>
             fixtureDirectory = string.Empty;
             if (args == null)
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>只扫描能取得后继值的参数位置，避免读取 --fixtures 末尾的越界项。</zh-CN>
+            //   <en>Scan only positions with a following value to avoid reading past a trailing --fixtures switch.</en>
+            // </lang>
             for (int index = 0; index < args.Length - 1; index++)
             {
                 if (string.Equals(args[index], "--fixtures", StringComparison.OrdinalIgnoreCase))
@@ -124,16 +174,42 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
             result = null;
             try
             {
+                // <lang>
+                //   <zh-CN>把受控目录和固定文件名组合为单个 fixture 路径；路径来自 proof 参数，不扩展外部搜索。</zh-CN>
+                //   <en>Combine the controlled directory and fixed file name into one fixture path; the path comes from proof arguments without external discovery.</en>
+                // </lang>
                 string fixturePath = Path.Combine(fixtureDirectory, fixtureFileName);
+
+                // <lang>
+                //   <zh-CN>以文本形式读取 fixture，随后交给框架 serializer 做结构映射。</zh-CN>
+                //   <en>Read the fixture as text and then hand structural mapping to the framework serializer.</en>
+                // </lang>
                 string json = File.ReadAllText(fixturePath);
+
+                // <lang>
+                //   <zh-CN>使用无外部配置的 JavaScriptSerializer 将 JSON 映射为普通字典。</zh-CN>
+                //   <en>Use JavaScriptSerializer without external configuration to map JSON into ordinary dictionaries.</en>
+                // </lang>
                 var serializer = new JavaScriptSerializer();
+
+                // <lang>
+                //   <zh-CN>要求根对象为字段字典；非对象 fixture 直接作为 proof 失败处理。</zh-CN>
+                //   <en>Require a dictionary root object; treat non-object fixtures as proof failures immediately.</en>
+                // </lang>
                 var root = serializer.DeserializeObject(json) as IDictionary<string, object>;
                 if (root == null)
                 {
                     return false;
                 }
 
-                // proof 只将 fixture 映射到门户 DTO，再调用正式验证器；不为测试复制第二套契约规则。
+                // <lang>
+                //   <zh-CN>只将 fixture 映射到门户 DTO，再调用正式验证器；不为测试复制第二套契约规则。</zh-CN>
+                //   <en>Map the fixture only to portal DTOs and invoke the production validator; do not copy a second contract rule set for tests.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>保留字段缺失为 null/空值，让正式验证器负责统一失败码和隐私边界。</zh-CN>
+                //   <en>Preserve missing fields as null or empty values so the production validator owns failure codes and privacy boundaries.</en>
+                // </lang>
                 var envelope = new PortalHiaPeripheralEnvelope
                 {
                     Contract = ReadText(root, "contract"),
@@ -151,7 +227,10 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
             }
             catch
             {
-                // fixture 内容错误只以测试失败体现，避免命令行输出路径或原始 JSON。
+                // <lang>
+                //   <zh-CN>fixture 内容错误只以测试失败体现，避免命令行输出路径或原始 JSON。</zh-CN>
+                //   <en>Represent fixture-content errors only as test failures and avoid printing paths or raw JSON to the command line.</en>
+                // </lang>
                 return false;
             }
         }
@@ -164,6 +243,10 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
         /// </summary>
         private static PortalHiaProducerDescriptor ReadProducer(IDictionary<string, object> root)
         {
+            // <lang>
+            //   <zh-CN>从根对象读取 producer 子对象；缺失或类型不符由后续验证器判定无效。</zh-CN>
+            //   <en>Read the producer child object from the root; the validator decides when it is missing or mistyped.</en>
+            // </lang>
             IDictionary<string, object> producer = ReadMap(root, "producer");
             return new PortalHiaProducerDescriptor
             {
@@ -185,6 +268,10 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
                 return null;
             }
 
+            // <lang>
+            //   <zh-CN>暂存键值以便只做字典查询和安全类型转换，不改变 fixture 原始对象。</zh-CN>
+            //   <en>Hold the keyed value for dictionary lookup and safe type conversion without mutating the fixture object.</en>
+            // </lang>
             object value;
             return source.TryGetValue(key, out value) ? value as IDictionary<string, object> : null;
         }
@@ -202,6 +289,10 @@ namespace ASPNET.StarterKit.Portal.HiaBoundaryProof
                 return string.Empty;
             }
 
+            // <lang>
+            //   <zh-CN>暂存文本字段的原始对象，再以 invariant culture 转换为稳定字符串。</zh-CN>
+            //   <en>Hold the raw text-field object and convert it to a stable string using invariant culture.</en>
+            // </lang>
             object value;
             return source.TryGetValue(key, out value)
                 ? Convert.ToString(value, CultureInfo.InvariantCulture)
