@@ -15,11 +15,17 @@ namespace ASPNET.StarterKit.Portal
     public struct ContainerComponentItem
     {
         /// <summary>
-        /// <l>
+        /// <lang>
         ///   <zh-CN>容器组件类型名。</zh-CN>
         ///   <en>Container-component type name.</en>
-        /// </l>
+        /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该字段只保存配置文本，不代表类型已经通过反射解析或控件实例已经创建。</zh-CN>
+        ///   <en>This field stores only configuration text; it does not mean the type has been resolved by reflection or that a control instance has been created.</en>
+        /// </lang>
+        /// </remarks>
         public string TypeName;
     }
 }

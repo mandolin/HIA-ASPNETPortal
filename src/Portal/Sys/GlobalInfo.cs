@@ -21,20 +21,36 @@ namespace ASPNET.StarterKit.Portal.Sys
     public static class GlobalInfo
     {
         /// <summary>
-        /// <l>
+        /// <lang>
         ///   <zh-CN>当前环境标识，默认 `dev`。</zh-CN>
         ///   <en>Current environment marker, defaulting to `dev`.</en>
-        /// </l>
+        /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该值只用于选择本地运行 profile 和诊断展示，不应编码数据库、账号或部署机密。</zh-CN>
+        ///   <en>This value is used only for local runtime profile selection and diagnostic display; it must not encode databases, accounts, or deployment secrets.</en>
+        /// </lang>
+        /// </remarks>
         public static string Environment = "dev";
 
         /// <summary>
-        /// <l>
+        /// <lang>
         ///   <zh-CN>低敏扩展信息字典，供运行期辅助组件临时共享状态。</zh-CN>
         ///   <en>Low-sensitivity extension information dictionary used by runtime helper components to share temporary state.</en>
-        /// </l>
+        /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>字典是进程级共享对象，值必须可重建且不含凭据；跨请求持久化状态应使用受治理的数据访问层。</zh-CN>
+        ///   <en>The dictionary is a process-level shared object and values must be rebuildable and credential-free; cross-request durable state belongs in the governed data-access layer.</en>
+        /// </lang>
+        /// </remarks>
         public static ConcurrentDictionary<string, object> ExtInfo
+            // <lang>
+            //   <zh-CN>初始化为线程安全字典，适配旧 WebForms 多请求并发访问的静态共享模式。</zh-CN>
+            //   <en>Initialize as a thread-safe dictionary to fit the legacy WebForms static sharing pattern under concurrent requests.</en>
+            // </lang>
             = new ConcurrentDictionary<string, object>();
     }
 }

@@ -69,13 +69,14 @@
 | 当前阶段补充 | P26.5kl-kn 已合并收口 `ManageUsers.aspx.designer.cs` 与 `Register.aspx.designer.cs`：字段文档 33/33 与 17/17，合计 50/50；文件 `<lang>` 分别 34/18（含生成头），仅治理 XML/生成边界说明。 |
 | 当前阶段补充 | P26.5kl-kn 静态验证通过：两个目标非注释差异 0，Debug 构建、XML 文档 gate、源码/注释/TODO/PowerShell inventory、UTF-8 无 BOM/CRLF 与两仓库 `git diff --check` 均通过；未运行 Designer 生成器或真实注册/审核 proof，重生成覆盖风险已登记。 |
 | 当前失败与修正 | P26.5kl 盘点聚合命令首次因工具调用对象的 JavaScript 键名书写错误未执行后半段，未写入文件；改为合法调用后一次通过，TODO/PowerShell 结果保持既定基线。 |
-| 当前唯一下一步 | 进入 P26.5kr：重新读取最新源码盘点，继续选择下一组可本地静态验证的完整职责链；不重复 P26.5ko-kq，生成文件重生成风险继续显式登记。 |
+| 当前阶段补充 | P26.5qy-qz-ra 已收口 `EnvSection.cs`、`GlobalInfo.cs`、`UnityConfigLoader.cs`、`ContainerComponentHandler.cs` 与 `ContainerComponentItem.cs` 的启动配置与容器解析职责链：新增 92 行注释-only 差异，补强环境配置节、进程级低敏状态、Unity 覆盖配置、映射配置读取、容器 XML 解析和 `typeName` 文本载荷边界；Debug 构建、XML 文档 gate、编码和目标 `git diff --check` 通过。 |
+| 当前唯一下一步 | 进入 P26.5rb：重新读取最新账本和源码盘点，选择下一条未重复、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qy-qz-ra。 |
 | P24 最近完成小步 | P24.3 新增受限 helper，使用当前 PBKDF2-HMAC-SHA256 凭据契约和最小物理角色，完成 P19 test 库的认证浏览器提交/审核链路。清理前事实为 2 用户、1 个批准申请、2 条 WorkflowEvent、1 条已完成 WorkItem、2 条 WorkItemEvent、2 条审计；Remove 后 Inspect 全部为 0，隔离 Profile 和短生命周期凭据均已清除。 |
 | 当前完成条件 | P24 已对当前可用 test proof 给出真实证据，并对真实 IIS/HTTPS、目标 SQL Server 版本实例和企业扫描给出延期记录；`C-anp-P3` 已收口。P25 的完成条件为形成可执行的历史注释盘点、风险分类、批次和验证设计；P18 仅在用户通知 HIA 基础抽象设计具备后恢复。 |
 | 最近失败与修正 | P22.5 首次隔离浏览器启动仍使用 `env=dev`，切换隔离副本到 `env=test` 后通过。认证阶段的 EF 外部宿主与早期二进制参数方案均失败并回滚；用户授权后以显式 `SqlParameter` 成功创建 test fixture。P23.2 初次新隔离副本从 `CoreOnly` Profile 启动，按安全门禁跳过 Workbench；仅在该临时副本把 Profile 覆盖为 `EnterpriseWorkbench` 后复测通过。浏览器回归发现 `All Users` 虚拟角色无法参与细粒度权限映射，已通过隐藏配置载体、运行时权限合并和 idempotent SQL seed 修复，并由零成员普通用户浏览器验证。期间嵌套 PowerShell 启动器无法启动构建，改用直接指定 PowerShell 7 执行器后 Debug 构建通过，未发现项目构建失败。P24.2 的 fixture 前置 schema 查询连续两次未完成（PowerShell here-string 语法、再到历史权限表字段假设不符）；未创建用户/凭据。P24.3 的首次 Create 因 PowerShell 将 `byte[]` 展开成 `Object[]` 而被数据库拒绝，未写入数据；改为显式 `byte[]` / `VarBinary` 参数 helper 后成功。Playwright run-code 两次不支持受限执行上下文，已停止该方案并使用不回显密码的本地浏览器输入；最终凭据和剪贴板均已清除。P26.5ab 最终静态核验首次因 PowerShell 条件表达式缺失闭合括号而未运行；未改动文件，修正括号后一次通过。P26.5ad 首次 registry 大补丁因员工绑定字段的实际审计分类与预期上下文不符而未应用；随后分段按真实文本完成。其首个静态审计脚本又缺少 `ForEach-Object` 闭合块；未执行构建或改动文件，修正后一次通过。P26.5ah 最终聚合检查首次在 `$relativePath:` 字符串插值处解析停止，未执行检查或改变文件；改为 `${relativePath}` 后仅重跑一次。P26.5ap 首个静态锚点脚本只截取目标文件前 610 行，未包含加长后的 catch/`IsAdminRequest` 区段而报 3 个缺失；源码差异、格式和两个 `diff --check` 均已通过。第二次改为动态三个节点范围后仍误报 2 个英文锚点；`rg` 已确认这两个文本实际紧邻目标 `GetActiveStyleResources` XML 说明。依反循环协议停止同类审计重试，未运行构建或改变源码。用户确认恢复后，逐节点可见行映射与 Debug/XML 文档构建通过；其最终静态核验发现 4 个账本/计划文件为 LF（源码无格式问题），将统一规范化为 UTF-8 无 BOM/CRLF 后只重跑一次。P26.5bj 首次聚合节点审计误用 PowerShell 自动变量 `$matches`，仅审计命令失败且未改文件；改用独立变量后 18/18 节点与 70/70 lang 通过。首轮 Debug/XML 构建发现 `UsersDb.cs` 缺少一个 `HasUserProfileTable` summary 闭合标签，修补后最终构建通过。P26.5bm 首次 Global 节点脚本未识别泛型 `BuildItemWithCurrentContext<T>`，误报 1 个缺失；扩展节点匹配后 9/9 节点与 51/51 lang 通过，未改动源码。 |
 | 本轮文档 gate 结果 | 初次只读检查的 2 项 contract 漂移已修复：JSDoc 精确校验两个受控输入，DotNetDoc 同时校验清单 `^0.1.8` 和锁文件 `0.1.8`。首次锁文件对象解析因 npm 空根键失败，改为 PowerShell 7 `-AsHashtable` 后通过；不重试未修改方案，也未伪造通过。 |
 | 本轮失败与修正 | 未跟踪文档最终空白检查首次因 PowerShell `${file}:` 插值边界缺失而解析失败，未写入文件；改用显式变量边界后一次通过，未影响源码、账本或验证结论。 |
-| 最近状态更新时间 | 2026-08-03 |
+| 最近状态更新时间 | 2026-08-11 |
 
 ## P26.5av/P26.5ax Recovery Note
 
@@ -937,7 +938,10 @@
 | P26.5qv 选片 | 已选择 `PortalPasswordHasher.cs`、`ReferenceDataDb.cs` 与 `PortalReferenceDataSets.cs` 的口令哈希安全 helper、参考数据只读目录和受限兼容回退职责链；覆盖明文密码原样语义、PBKDF2 盐/成本、固定时间比较、目录表可用性、已启用值查询、空目录/不可读目录区分和规范键解析；真实密码、账号、数据库、IIS/HTTP、浏览器与凭据 proof 排除。见 [P26.5qv 选片](work-zone/dev/plans/W-anp-P26.5qv-reference-data-password-helper-selection.md)。 |
 | P26.5qw 注释补强 | 已为三文件补充 26 个中英双语 `<lang>` 块及 5 个 XML `<summary>`；文件 `<lang>` 分别 `20→36`、`3→19`、`8→18`，新增非注释代码 `0`。见 [P26.5qw 结果](work-zone/dev/plans/W-anp-P26.5qw-reference-data-password-helper-result.md)。 |
 | P26.5qx 静态验证 | 通过；三文件差异全部为 XML/inline 注释，注释-only 扫描 `ADDED_COUNT=232`、`NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal `1923`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `717`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实密码、账号、数据库、IIS/HTTP、浏览器与凭据 proof 未执行。见 [P26.5qx 审计](work-zone/dev/plans/W-anp-P26.5qx-reference-data-password-helper-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5qy：重新读取最新账本和源码盘点，选择下一条未重复、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qv-qx。 |
+| P26.5qy 选片 | 已选择 `EnvSection.cs`、`GlobalInfo.cs`、`UnityConfigLoader.cs`、`ContainerComponentHandler.cs` 与 `ContainerComponentItem.cs` 的启动配置与容器解析职责链；覆盖环境配置节、进程级低敏状态、Unity 覆盖配置、映射配置读取、容器 XML 解析、`typeName` 文本载荷和不实例化类型/控件边界；真实配置、数据库、IIS/HTTP、浏览器与凭据 proof 排除。见 [P26.5qy 选片](work-zone/dev/plans/W-anp-P26.5qy-startup-config-container-selection.md)。 |
+| P26.5qz 注释补强 | 已为五文件补充/迁移中英双语 XML/inline ROP 注释；文件 `<lang>` 分别为 `6`、`7`、`12`、`10`、`4`，XML `<summary>` 分别为 `3`、`3`、`3`、`2`、`2`，新增非注释代码 `0`。见 [P26.5qz 结果](work-zone/dev/plans/W-anp-P26.5qz-startup-config-container-result.md)。 |
+| P26.5ra 静态验证 | 通过；五文件差异全部为 XML/inline 注释，注释-only 扫描 `ADDED_COUNT=92`、`NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal `1923`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `717`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实环境覆盖配置、Unity 注册解析、数据库、IIS/HTTP、浏览器与凭据 proof 未执行。见 [P26.5ra 审计](work-zone/dev/plans/W-anp-P26.5ra-startup-config-container-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5rb：重新读取最新账本和源码盘点，选择下一条未重复、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qy-qz-ra。 |
 
 ## Known Residual Working Tree Items
 
@@ -953,6 +957,7 @@
 | 用双引号包裹 `pwsh -Command` 且内部包含 `$p`、`$null` | failed | 外层 PowerShell 会提前展开变量；后续统一用单引号包裹 `-Command` 或避免内部 `$` 变量。 |
 | 全量 `rg` 默认口令扫描一次输出过大 | adjusted | 改为分阶段、限量、聚焦文件范围的扫描。 |
 | P26.5jn 首次 Debug/XML 验证 | adjusted | 新增授权快照参数文档遗漏两个 `</l>`，构建给出 CS1570；补齐闭合标签后仅重跑一次，最终构建和 XML gate 通过。 |
+| P26.5qy 文本规范化首次 EOF/CRLF 检查 | adjusted | 首次机械规范化留下新增 EOF 空白行，第二次只修 EOF 时又保留正文 LF；改为剥离末尾换行、正文统一 CRLF 后复核通过，未改变代码语义。 |
 
 ## Anti-Loop Guard
 

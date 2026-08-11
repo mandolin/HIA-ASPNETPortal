@@ -29,7 +29,15 @@ namespace ASPNET.StarterKit.Portal.Sys
         [ConfigurationProperty("value", DefaultValue = "dev", IsRequired = false)]
         public string Value
         {
+            // <lang>
+            //   <zh-CN>读取 Web.config 中的轻量环境标识；缺省值由配置属性定义为 dev。</zh-CN>
+            //   <en>Reads the lightweight environment marker from Web.config; the configuration property defines dev as the default.</en>
+            // </lang>
             get { return (string)this["value"]; }
+            // <lang>
+            //   <zh-CN>写入仅更新配置节对象中的 value 字段，不触达外置敏感配置或运行时密钥。</zh-CN>
+            //   <en>Writing updates only the value field on the section object and does not touch external sensitive configuration or runtime secrets.</en>
+            // </lang>
             set { this["value"] = value; }
         }
 
@@ -47,6 +55,10 @@ namespace ASPNET.StarterKit.Portal.Sys
         /// </returns>
         public static implicit operator string(EnvSection section)
         {
+            // <lang>
+            //   <zh-CN>保留旧调用点的宽容语义：缺少 env 节时返回 null，由调用方决定默认环境。</zh-CN>
+            //   <en>Preserve the tolerant legacy call-site semantics: a missing env section returns null and lets the caller choose the default environment.</en>
+            // </lang>
             return section?.Value;
         }
     }

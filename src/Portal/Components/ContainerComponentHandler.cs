@@ -51,7 +51,15 @@ namespace ASPNET.StarterKit.Portal
         public object Create(object parent,
                              object configContext, XmlNode section)
         {
+            // <lang>
+            //   <zh-CN>返回列表是配置节的轻量投影，生命周期限定在配置系统读取结果中。</zh-CN>
+            //   <en>The returned list is a lightweight projection of the configuration section and its lifetime is limited to the configuration-system read result.</en>
+            // </lang>
             var items = new List<ContainerComponentItem>();
+            // <lang>
+            //   <zh-CN>节点查询只匹配直接声明的 containerComponent 条目，不解析嵌套配置或外部文件。</zh-CN>
+            //   <en>The node query matches only directly declared containerComponent entries and does not parse nested configuration or external files.</en>
+            // </lang>
             XmlNodeList nodes = section.SelectNodes("containerComponent");
 
             // <lang>
@@ -60,10 +68,26 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             foreach (XmlNode node in nodes)
             {
+                // <lang>
+                //   <zh-CN>每个条目都是值类型副本，仅承载配置中的类型名字符串，不触发反射或控件创建。</zh-CN>
+                //   <en>Each entry is a value-type copy carrying only the configured type-name string and does not trigger reflection or control creation.</en>
+                // </lang>
                 var item = new ContainerComponentItem();
+                // <lang>
+                //   <zh-CN>typeName 属性沿用旧 Web.config 必填约定；缺失属性继续让配置读取失败，避免静默注册空组件。</zh-CN>
+                //   <en>The typeName attribute follows the legacy Web.config required convention; a missing attribute still fails configuration reading instead of silently registering an empty component.</en>
+                // </lang>
                 item.TypeName = node.Attributes["typeName"].InnerText;
+                // <lang>
+                //   <zh-CN>追加顺序保持 XML 声明顺序，供旧容器机制按原配置顺序消费。</zh-CN>
+                //   <en>The append order preserves XML declaration order for the legacy container mechanism to consume in original configuration order.</en>
+                // </lang>
                 items.Add(item);
             }
+            // <lang>
+            //   <zh-CN>返回对象类型保持为旧配置处理器预期的 object，实际内容为容器组件列表。</zh-CN>
+            //   <en>The return type remains object as expected by the legacy configuration handler, while the actual content is the container-component list.</en>
+            // </lang>
             return items;
         }
 
