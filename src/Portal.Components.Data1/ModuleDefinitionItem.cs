@@ -28,22 +28,34 @@ namespace ASPNET.StarterKit.Portal
         #region IModuleDefinitionItem Members
 
         /// <summary>
-        ///   <l zh-CN="模块类型的后台显示名称。" en="Administration display name for the module type." />
+        ///   <l>
+        ///     <zh-CN>模块类型的后台显示名称。</zh-CN>
+        ///     <en>Administration display name for the module type.</en>
+        ///   </l>
         /// </summary>
         public string FriendlyName { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="历史移动端控件路径，当前仅作为兼容字段保留。" en="Legacy mobile control path retained only as a compatibility field." />
+        ///   <l>
+        ///     <zh-CN>历史移动端控件路径，当前仅作为兼容字段保留。</zh-CN>
+        ///     <en>Legacy mobile control path retained only as a compatibility field.</en>
+        ///   </l>
         /// </summary>
         public string MobileSourceFile { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="桌面端模块控件路径，必须落在受信任部署边界内。" en="Desktop module control path, which must remain inside the trusted deployment boundary." />
+        ///   <l>
+        ///     <zh-CN>桌面端模块控件路径，必须落在受信任部署边界内。</zh-CN>
+        ///     <en>Desktop module control path, which must remain inside the trusted deployment boundary.</en>
+        ///   </l>
         /// </summary>
         public string DesktopSourceFile { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块类型定义主键。" en="Primary key of the module type definition." />
+        ///   <l>
+        ///     <zh-CN>模块类型定义主键。</zh-CN>
+        ///     <en>Primary key of the module type definition.</en>
+        ///   </l>
         /// </summary>
         [Key]
         public int ModuleDefId { get; set; }

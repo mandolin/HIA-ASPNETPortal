@@ -27,25 +27,37 @@ namespace ASPNET.StarterKit.Portal
     public class RoleItem : IRoleItem
     {
         /// <summary>
-        ///   <l zh-CN="拥有该角色的用户导航集合，由 EF 旧成员关系映射填充。" en="User navigation collection populated by the legacy EF membership mapping." />
+        ///   <l>
+        ///     <zh-CN>拥有该角色的用户导航集合，由 EF 旧成员关系映射填充。</zh-CN>
+        ///     <en>User navigation collection populated by the legacy EF membership mapping.</en>
+        ///   </l>
         /// </summary>
         public virtual ICollection<UserItem> Users { get; set; }
 
         #region IRoleItem Members
 
         /// <summary>
-        ///   <l zh-CN="角色主键。" en="Role primary key." />
+        ///   <l>
+        ///     <zh-CN>角色主键。</zh-CN>
+        ///     <en>Role primary key.</en>
+        ///   </l>
         /// </summary>
         [Key]
         public int RoleId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="角色所属门户标识。" en="Identifier of the portal that owns this role." />
+        ///   <l>
+        ///     <zh-CN>角色所属门户标识。</zh-CN>
+        ///     <en>Identifier of the portal that owns this role.</en>
+        ///   </l>
         /// </summary>
         public int PortalId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="角色名称；旧页面和分号角色字符串均以该值匹配。" en="Role name matched by legacy pages and semicolon-delimited role strings." />
+        ///   <l>
+        ///     <zh-CN>角色名称；旧页面和分号角色字符串均以该值匹配。</zh-CN>
+        ///     <en>Role name matched by legacy pages and semicolon-delimited role strings.</en>
+        ///   </l>
         /// </summary>
         public string RoleName { get; set; }
 

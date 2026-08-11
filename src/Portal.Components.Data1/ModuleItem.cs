@@ -28,55 +28,85 @@ namespace ASPNET.StarterKit.Portal
     public class ModuleItem : IModuleItem
     {
         /// <summary>
-        ///   <l zh-CN="模块实例附加设置集合，由 EF 导航属性加载。" en="Additional module settings loaded through the EF navigation property." />
+        ///   <l>
+        ///     <zh-CN>模块实例附加设置集合，由 EF 导航属性加载。</zh-CN>
+        ///     <en>Additional module settings loaded through the EF navigation property.</en>
+        ///   </l>
         /// </summary>
         public virtual ICollection<ModuleSettingItem> Settings { get; set; }
 
         #region IModuleItem Members
 
         /// <summary>
-        ///   <l zh-CN="同一 Pane 内的显示顺序；为空时由调用层决定默认排序。" en="Display order within the pane; callers choose the fallback order when null." />
+        ///   <l>
+        ///     <zh-CN>同一 Pane 内的显示顺序；为空时由调用层决定默认排序。</zh-CN>
+        ///     <en>Display order within the pane; callers choose the fallback order when null.</en>
+        ///   </l>
         /// </summary>
         public int? ModuleOrder { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块实例标题，展示层输出前必须编码。" en="Module instance title; presentation code must encode it before output." />
+        ///   <l>
+        ///     <zh-CN>模块实例标题，展示层输出前必须编码。</zh-CN>
+        ///     <en>Module instance title; presentation code must encode it before output.</en>
+        ///   </l>
         /// </summary>
         public string ModuleTitle { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="旧门户布局 Pane 名称，如左栏、内容栏或右栏。" en="Legacy portal pane name, such as left, content, or right pane." />
+        ///   <l>
+        ///     <zh-CN>旧门户布局 Pane 名称，如左栏、内容栏或右栏。</zh-CN>
+        ///     <en>Legacy portal pane name, such as left, content, or right pane.</en>
+        ///   </l>
         /// </summary>
         public string PaneName { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块实例数据库主键。" en="Database primary key for the module instance." />
+        ///   <l>
+        ///     <zh-CN>模块实例数据库主键。</zh-CN>
+        ///     <en>Database primary key for the module instance.</en>
+        ///   </l>
         /// </summary>
         [Key]
         public int ModuleId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="关联的模块定义标识；为空代表历史异常或未完整配置的数据。" en="Associated module definition identifier; null indicates legacy or incomplete configuration." />
+        ///   <l>
+        ///     <zh-CN>关联的模块定义标识；为空代表历史异常或未完整配置的数据。</zh-CN>
+        ///     <en>Associated module definition identifier; null indicates legacy or incomplete configuration.</en>
+        ///   </l>
         /// </summary>
         public int? ModuleDefId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="分号分隔的模块编辑角色字符串。" en="Semicolon-delimited role string allowed to edit this module." />
+        ///   <l>
+        ///     <zh-CN>分号分隔的模块编辑角色字符串。</zh-CN>
+        ///     <en>Semicolon-delimited role string allowed to edit this module.</en>
+        ///   </l>
         /// </summary>
         public string EditRoles { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块输出缓存秒数；为空时沿用调用层或旧门户默认策略。" en="Module output cache duration in seconds; null keeps caller or legacy defaults." />
+        ///   <l>
+        ///     <zh-CN>模块输出缓存秒数；为空时沿用调用层或旧门户默认策略。</zh-CN>
+        ///     <en>Module output cache duration in seconds; null keeps caller or legacy defaults.</en>
+        ///   </l>
         /// </summary>
         public int? CacheTimeout { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="历史移动端显示标记；当前移动端方案不以它作为主要机制。" en="Legacy mobile visibility flag; the current mobile strategy does not use it as the primary mechanism." />
+        ///   <l>
+        ///     <zh-CN>历史移动端显示标记；当前移动端方案不以它作为主要机制。</zh-CN>
+        ///     <en>Legacy mobile visibility flag; the current mobile strategy does not use it as the primary mechanism.</en>
+        ///   </l>
         /// </summary>
         public bool? ShowMobile { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块所属 Tab 标识。" en="Identifier of the tab that owns this module instance." />
+        ///   <l>
+        ///     <zh-CN>模块所属 Tab 标识。</zh-CN>
+        ///     <en>Identifier of the tab that owns this module instance.</en>
+        ///   </l>
         /// </summary>
         public int? TabId { get; set; }
 

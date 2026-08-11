@@ -21,22 +21,34 @@ namespace ASPNET.StarterKit.Portal
     public interface IModuleDefinitionItem
     {
         /// <summary>
-        ///   <l zh-CN="面向管理员展示的模块类型名称。" en="Module type name displayed to administrators." />
+        ///   <l>
+        ///     <zh-CN>面向管理员展示的模块类型名称。</zh-CN>
+        ///     <en>Module type name displayed to administrators.</en>
+        ///   </l>
         /// </summary>
         string FriendlyName { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="历史移动端控件虚拟路径；当前主要作为兼容字段保留。" en="Legacy mobile control virtual path, currently retained mainly as a compatibility field." />
+        ///   <l>
+        ///     <zh-CN>历史移动端控件虚拟路径；当前主要作为兼容字段保留。</zh-CN>
+        ///     <en>Legacy mobile control virtual path, currently retained mainly as a compatibility field.</en>
+        ///   </l>
         /// </summary>
         string MobileSourceFile { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="桌面端控件虚拟路径；新增或修改时必须先经过受信任部署路径校验。" en="Desktop control virtual path; additions or updates must pass trusted deployment path validation first." />
+        ///   <l>
+        ///     <zh-CN>桌面端控件虚拟路径；新增或修改时必须先经过受信任部署路径校验。</zh-CN>
+        ///     <en>Desktop control virtual path; additions or updates must pass trusted deployment path validation first.</en>
+        ///   </l>
         /// </summary>
         string DesktopSourceFile { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块定义的旧数据库主键。" en="Legacy database primary key of the module definition." />
+        ///   <l>
+        ///     <zh-CN>模块定义的旧数据库主键。</zh-CN>
+        ///     <en>Legacy database primary key of the module definition.</en>
+        ///   </l>
         /// </summary>
         int ModuleDefId { get; set; }
     }

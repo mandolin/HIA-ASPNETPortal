@@ -29,48 +29,75 @@ namespace ASPNET.StarterKit.Portal
         #region ILinkItem Members
 
         /// <summary>
-        ///   <l zh-CN="链接条目的数据库主键。" en="Database primary key for the link item." />
+        ///   <l>
+        ///     <zh-CN>链接条目的数据库主键。</zh-CN>
+        ///     <en>Database primary key for the link item.</en>
+        ///   </l>
         /// </summary>
         [Key]
         public int ItemId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="拥有该链接条目的模块实例标识。" en="Module instance identifier that owns this link item." />
+        ///   <l>
+        ///     <zh-CN>拥有该链接条目的模块实例标识。</zh-CN>
+        ///     <en>Module instance identifier that owns this link item.</en>
+        ///   </l>
         /// </summary>
         public int ModuleId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="创建人显示名称；不是授权依据。" en="Display name of the creator; this is not an authorization source." />
+        ///   <l>
+        ///     <zh-CN>创建人显示名称；不是授权依据。</zh-CN>
+        ///     <en>Display name of the creator; this is not an authorization source.</en>
+        ///   </l>
         /// </summary>
         public string CreatedByUser { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="链接条目创建时间；旧数据可能为空。" en="Creation time for the link item; legacy rows may be null." />
+        ///   <l>
+        ///     <zh-CN>链接条目创建时间；旧数据可能为空。</zh-CN>
+        ///     <en>Creation time for the link item; legacy rows may be null.</en>
+        ///   </l>
         /// </summary>
         public DateTime? CreatedDate { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="链接标题，展示层输出前必须编码。" en="Link title; presentation code must encode it before output." />
+        ///   <l>
+        ///     <zh-CN>链接标题，展示层输出前必须编码。</zh-CN>
+        ///     <en>Link title; presentation code must encode it before output.</en>
+        ///   </l>
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="桌面端链接地址；调用层仍需执行站内或受信任导航策略。" en="Desktop link URL; callers must still apply in-site or trusted navigation policy." />
+        ///   <l>
+        ///     <zh-CN>桌面端链接地址；调用层仍需执行站内或受信任导航策略。</zh-CN>
+        ///     <en>Desktop link URL; callers must still apply in-site or trusted navigation policy.</en>
+        ///   </l>
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="历史移动端链接地址，当前仅作为兼容字段保留。" en="Legacy mobile link URL retained only as a compatibility field." />
+        ///   <l>
+        ///     <zh-CN>历史移动端链接地址，当前仅作为兼容字段保留。</zh-CN>
+        ///     <en>Legacy mobile link URL retained only as a compatibility field.</en>
+        ///   </l>
         /// </summary>
         public string MobileUrl { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="链接显示顺序；为空时由查询或展示层决定默认顺序。" en="Link display order; query or presentation code chooses the fallback order when null." />
+        ///   <l>
+        ///     <zh-CN>链接显示顺序；为空时由查询或展示层决定默认顺序。</zh-CN>
+        ///     <en>Link display order; query or presentation code chooses the fallback order when null.</en>
+        ///   </l>
         /// </summary>
         public int? ViewOrder { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="链接描述文本，展示层输出前必须编码。" en="Link description text; presentation code must encode it before output." />
+        ///   <l>
+        ///     <zh-CN>链接描述文本，展示层输出前必须编码。</zh-CN>
+        ///     <en>Link description text; presentation code must encode it before output.</en>
+        ///   </l>
         /// </summary>
         public string Description { get; set; }
 

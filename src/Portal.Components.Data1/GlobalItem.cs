@@ -28,18 +28,27 @@ namespace ASPNET.StarterKit.Portal
         #region IGlobalItem Members
 
         /// <summary>
-        ///   <l zh-CN="门户全局配置主键；旧项目通常只有一个门户记录。" en="Primary key for portal global configuration; the legacy project usually has one portal row." />
+        ///   <l>
+        ///     <zh-CN>门户全局配置主键；旧项目通常只有一个门户记录。</zh-CN>
+        ///     <en>Primary key for portal global configuration; the legacy project usually has one portal row.</en>
+        ///   </l>
         /// </summary>
         [Key]
         public int PortalId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="门户显示名称，顶栏和旧站点设置页会读取该值。" en="Portal display name read by the banner and legacy site settings page." />
+        ///   <l>
+        ///     <zh-CN>门户显示名称，顶栏和旧站点设置页会读取该值。</zh-CN>
+        ///     <en>Portal display name read by the banner and legacy site settings page.</en>
+        ///   </l>
         /// </summary>
         public string PortalName { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="旧门户是否始终显示模块编辑按钮的兼容开关。" en="Legacy compatibility flag that controls whether module edit buttons are always shown." />
+        ///   <l>
+        ///     <zh-CN>旧门户是否始终显示模块编辑按钮的兼容开关。</zh-CN>
+        ///     <en>Legacy compatibility flag that controls whether module edit buttons are always shown.</en>
+        ///   </l>
         /// </summary>
         public bool? AlwaysShowEditButton { get; set; }
 

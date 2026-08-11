@@ -24,47 +24,74 @@ namespace ASPNET.StarterKit.Portal
     public interface IAnnouncementItem
     {
         /// <summary>
-        ///   <l zh-CN="公告条目的数据库主键。" en="Database primary key for the announcement item." />
+        ///   <l>
+        ///     <zh-CN>公告条目的数据库主键。</zh-CN>
+        ///     <en>Database primary key for the announcement item.</en>
+        ///   </l>
         /// </summary>
         int ItemId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="拥有该公告条目的模块实例标识。" en="Module instance identifier that owns this announcement item." />
+        ///   <l>
+        ///     <zh-CN>拥有该公告条目的模块实例标识。</zh-CN>
+        ///     <en>Module instance identifier that owns this announcement item.</en>
+        ///   </l>
         /// </summary>
         int ModuleId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="创建人显示名称；来自旧内容模块保存流程，不作为授权依据。" en="Display name of the creator from the legacy content save flow; not an authorization source." />
+        ///   <l>
+        ///     <zh-CN>创建人显示名称；来自旧内容模块保存流程，不作为授权依据。</zh-CN>
+        ///     <en>Display name of the creator from the legacy content save flow; not an authorization source.</en>
+        ///   </l>
         /// </summary>
         string CreatedByUser { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="公告创建时间；旧数据可能为空。" en="Announcement creation time; legacy rows may be null." />
+        ///   <l>
+        ///     <zh-CN>公告创建时间；旧数据可能为空。</zh-CN>
+        ///     <en>Announcement creation time; legacy rows may be null.</en>
+        ///   </l>
         /// </summary>
         DateTime? CreatedDate { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="公告标题，展示层输出前必须编码。" en="Announcement title; presentation code must encode it before output." />
+        ///   <l>
+        ///     <zh-CN>公告标题，展示层输出前必须编码。</zh-CN>
+        ///     <en>Announcement title; presentation code must encode it before output.</en>
+        ///   </l>
         /// </summary>
         string Title { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="更多链接地址；站内/受信任导航策略由调用层复核。" en="More-link URL; callers re-check it with the in-site or trusted navigation policy." />
+        ///   <l>
+        ///     <zh-CN>更多链接地址；站内/受信任导航策略由调用层复核。</zh-CN>
+        ///     <en>More-link URL; callers re-check it with the in-site or trusted navigation policy.</en>
+        ///   </l>
         /// </summary>
         string MoreLink { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="历史移动端更多链接地址，当前仅作为兼容字段保留。" en="Legacy mobile more-link URL retained only as a compatibility field." />
+        ///   <l>
+        ///     <zh-CN>历史移动端更多链接地址，当前仅作为兼容字段保留。</zh-CN>
+        ///     <en>Legacy mobile more-link URL retained only as a compatibility field.</en>
+        ///   </l>
         /// </summary>
         string MobileMoreLink { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="公告过期时间；过期过滤由查询或展示层决定。" en="Announcement expiry time; query or presentation code decides expiry filtering." />
+        ///   <l>
+        ///     <zh-CN>公告过期时间；过期过滤由查询或展示层决定。</zh-CN>
+        ///     <en>Announcement expiry time; query or presentation code decides expiry filtering.</en>
+        ///   </l>
         /// </summary>
         DateTime? ExpireDate { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="公告正文描述，展示层输出前必须编码。" en="Announcement body description; presentation code must encode it before output." />
+        ///   <l>
+        ///     <zh-CN>公告正文描述，展示层输出前必须编码。</zh-CN>
+        ///     <en>Announcement body description; presentation code must encode it before output.</en>
+        ///   </l>
         /// </summary>
         string Description { get; set; }
     }

@@ -26,22 +26,34 @@ namespace ASPNET.StarterKit.Portal
     public class ModuleSettingItem
     {
         /// <summary>
-        ///   <l zh-CN="拥有该设置的模块实例标识。" en="Module instance identifier that owns this setting." />
+        ///   <l>
+        ///     <zh-CN>拥有该设置的模块实例标识。</zh-CN>
+        ///     <en>Module instance identifier that owns this setting.</en>
+        ///   </l>
         /// </summary>
         public int ModuleId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块私有设置键名。" en="Private module setting key." />
+        ///   <l>
+        ///     <zh-CN>模块私有设置键名。</zh-CN>
+        ///     <en>Private module setting key.</en>
+        ///   </l>
         /// </summary>
         public string SettingName { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块私有设置文本值；调用模块负责解析、校验和输出安全处理。" en="Private module setting text value; the owning module parses, validates, and safely outputs it." />
+        ///   <l>
+        ///     <zh-CN>模块私有设置文本值；调用模块负责解析、校验和输出安全处理。</zh-CN>
+        ///     <en>Private module setting text value; the owning module parses, validates, and safely outputs it.</en>
+        ///   </l>
         /// </summary>
         public string SettingText { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="模块设置行主键。" en="Primary key of the module setting row." />
+        ///   <l>
+        ///     <zh-CN>模块设置行主键。</zh-CN>
+        ///     <en>Primary key of the module setting row.</en>
+        ///   </l>
         /// </summary>
         [Key]
         public int ModuleSettingId { get; set; }

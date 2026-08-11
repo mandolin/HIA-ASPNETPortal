@@ -21,22 +21,34 @@ namespace ASPNET.StarterKit.Portal
     public interface IHtmlTextItem
     {
         /// <summary>
-        ///   <l zh-CN="拥有该 HTML 内容的模块实例标识。" en="Module instance identifier that owns this HTML content." />
+        ///   <l>
+        ///     <zh-CN>拥有该 HTML 内容的模块实例标识。</zh-CN>
+        ///     <en>Module instance identifier that owns this HTML content.</en>
+        ///   </l>
         /// </summary>
         int ModuleId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="桌面端原始 HTML 内容；展示层按受信任 HTML 策略输出。" en="Desktop raw HTML content; the presentation layer emits it according to the trusted-HTML policy." />
+        ///   <l>
+        ///     <zh-CN>桌面端原始 HTML 内容；展示层按受信任 HTML 策略输出。</zh-CN>
+        ///     <en>Desktop raw HTML content; the presentation layer emits it according to the trusted-HTML policy.</en>
+        ///   </l>
         /// </summary>
         string DesktopHtml { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="历史移动端摘要字段，当前主要作为兼容数据保留。" en="Legacy mobile summary field, currently retained mainly for data compatibility." />
+        ///   <l>
+        ///     <zh-CN>历史移动端摘要字段，当前主要作为兼容数据保留。</zh-CN>
+        ///     <en>Legacy mobile summary field, currently retained mainly for data compatibility.</en>
+        ///   </l>
         /// </summary>
         string MobileSummary { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="历史移动端详情字段，当前主要作为兼容数据保留。" en="Legacy mobile detail field, currently retained mainly for data compatibility." />
+        ///   <l>
+        ///     <zh-CN>历史移动端详情字段，当前主要作为兼容数据保留。</zh-CN>
+        ///     <en>Legacy mobile detail field, currently retained mainly for data compatibility.</en>
+        ///   </l>
         /// </summary>
         string MobileDetails { get; set; }
     }

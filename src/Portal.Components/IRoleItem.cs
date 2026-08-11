@@ -21,17 +21,26 @@ namespace ASPNET.StarterKit.Portal
     public interface IRoleItem
     {
         /// <summary>
-        ///   <l zh-CN="角色的旧数据库主键。" en="Legacy database primary key of the role." />
+        ///   <l>
+        ///     <zh-CN>角色的旧数据库主键。</zh-CN>
+        ///     <en>Legacy database primary key of the role.</en>
+        ///   </l>
         /// </summary>
         int RoleId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="角色所属门户标识。" en="Portal identifier that owns the role." />
+        ///   <l>
+        ///     <zh-CN>角色所属门户标识。</zh-CN>
+        ///     <en>Portal identifier that owns the role.</en>
+        ///   </l>
         /// </summary>
         int PortalId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="角色名称；用于显示和旧角色字符串匹配。" en="Role name used for display and legacy role-string matching." />
+        ///   <l>
+        ///     <zh-CN>角色名称；用于显示和旧角色字符串匹配。</zh-CN>
+        ///     <en>Role name used for display and legacy role-string matching.</en>
+        ///   </l>
         /// </summary>
         string RoleName { get; set; }
     }

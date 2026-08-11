@@ -24,47 +24,74 @@ namespace ASPNET.StarterKit.Portal
     public interface IContactItem
     {
         /// <summary>
-        ///   <l zh-CN="联系人条目的数据库主键。" en="Database primary key for the contact item." />
+        ///   <l>
+        ///     <zh-CN>联系人条目的数据库主键。</zh-CN>
+        ///     <en>Database primary key for the contact item.</en>
+        ///   </l>
         /// </summary>
         int ItemId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="拥有该联系人条目的模块实例标识。" en="Module instance identifier that owns this contact item." />
+        ///   <l>
+        ///     <zh-CN>拥有该联系人条目的模块实例标识。</zh-CN>
+        ///     <en>Module instance identifier that owns this contact item.</en>
+        ///   </l>
         /// </summary>
         int ModuleId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="联系人条目创建时间；旧数据可能为空。" en="Creation time for the contact item; legacy rows may be null." />
+        ///   <l>
+        ///     <zh-CN>联系人条目创建时间；旧数据可能为空。</zh-CN>
+        ///     <en>Creation time for the contact item; legacy rows may be null.</en>
+        ///   </l>
         /// </summary>
         DateTime? CreatedDate { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="创建人显示名称；不是授权依据。" en="Display name of the creator; this is not an authorization source." />
+        ///   <l>
+        ///     <zh-CN>创建人显示名称；不是授权依据。</zh-CN>
+        ///     <en>Display name of the creator; this is not an authorization source.</en>
+        ///   </l>
         /// </summary>
         string CreatedByUser { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="联系人姓名，展示层输出前必须编码。" en="Contact name; presentation code must encode it before output." />
+        ///   <l>
+        ///     <zh-CN>联系人姓名，展示层输出前必须编码。</zh-CN>
+        ///     <en>Contact name; presentation code must encode it before output.</en>
+        ///   </l>
         /// </summary>
         string Name { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="联系人岗位或角色说明，展示层输出前必须编码。" en="Contact role or job description; presentation code must encode it before output." />
+        ///   <l>
+        ///     <zh-CN>联系人岗位或角色说明，展示层输出前必须编码。</zh-CN>
+        ///     <en>Contact role or job description; presentation code must encode it before output.</en>
+        ///   </l>
         /// </summary>
         string Role { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="联系人邮箱；仅作为展示和邮件链接输入，不作为登录身份。" en="Contact email; only used for display and mail-link input, not as login identity." />
+        ///   <l>
+        ///     <zh-CN>联系人邮箱；仅作为展示和邮件链接输入，不作为登录身份。</zh-CN>
+        ///     <en>Contact email; only used for display and mail-link input, not as login identity.</en>
+        ///   </l>
         /// </summary>
         string Email { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="第一联系方式文本，通常是电话或办公信息。" en="First contact information text, typically phone or office details." />
+        ///   <l>
+        ///     <zh-CN>第一联系方式文本，通常是电话或办公信息。</zh-CN>
+        ///     <en>First contact information text, typically phone or office details.</en>
+        ///   </l>
         /// </summary>
         string Contact1 { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="第二联系方式文本，通常是备用电话、传真或地址。" en="Second contact information text, typically alternate phone, fax, or address." />
+        ///   <l>
+        ///     <zh-CN>第二联系方式文本，通常是备用电话、传真或地址。</zh-CN>
+        ///     <en>Second contact information text, typically alternate phone, fax, or address.</en>
+        ///   </l>
         /// </summary>
         string Contact2 { get; set; }
     }

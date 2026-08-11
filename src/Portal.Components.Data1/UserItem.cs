@@ -27,30 +27,45 @@ namespace ASPNET.StarterKit.Portal
     public class UserItem : IUserItem
     {
         /// <summary>
-        ///   <l zh-CN="用户拥有的角色导航集合，由 EF 旧成员关系映射填充。" en="Role navigation collection populated by the legacy EF membership mapping." />
+        ///   <l>
+        ///     <zh-CN>用户拥有的角色导航集合，由 EF 旧成员关系映射填充。</zh-CN>
+        ///     <en>Role navigation collection populated by the legacy EF membership mapping.</en>
+        ///   </l>
         /// </summary>
         public virtual ICollection<RoleItem> Roles { get; set; }
 
         #region IUserItem Members
 
         /// <summary>
-        ///   <l zh-CN="用户主键。" en="User primary key." />
+        ///   <l>
+        ///     <zh-CN>用户主键。</zh-CN>
+        ///     <en>User primary key.</en>
+        ///   </l>
         /// </summary>
         [Key]
         public int UserId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="用户邮箱或历史登录名字段；当前登录标识解析需经过认证服务。" en="User email or historical login-name field; current login identifier resolution must go through the authentication service." />
+        ///   <l>
+        ///     <zh-CN>用户邮箱或历史登录名字段；当前登录标识解析需经过认证服务。</zh-CN>
+        ///     <en>User email or historical login-name field; current login identifier resolution must go through the authentication service.</en>
+        ///   </l>
         /// </summary>
         public string Email { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="用户口令哈希或历史兼容口令字段；不得写入明文。" en="User password hash or historical compatibility password field; plaintext must never be written here." />
+        ///   <l>
+        ///     <zh-CN>用户口令哈希或历史兼容口令字段；不得写入明文。</zh-CN>
+        ///     <en>User password hash or historical compatibility password field; plaintext must never be written here.</en>
+        ///   </l>
         /// </summary>
         public string Password { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="用户显示名或旧用户名字段。" en="User display name or legacy user-name field." />
+        ///   <l>
+        ///     <zh-CN>用户显示名或旧用户名字段。</zh-CN>
+        ///     <en>User display name or legacy user-name field.</en>
+        ///   </l>
         /// </summary>
         public string Name { get; set; }
 

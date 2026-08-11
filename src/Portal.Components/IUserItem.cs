@@ -21,22 +21,34 @@ namespace ASPNET.StarterKit.Portal
     public interface IUserItem
     {
         /// <summary>
-        ///   <l zh-CN="用户的旧数据库主键。" en="Legacy database primary key of the user." />
+        ///   <l>
+        ///     <zh-CN>用户的旧数据库主键。</zh-CN>
+        ///     <en>Legacy database primary key of the user.</en>
+        ///   </l>
         /// </summary>
         int UserId { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="用户邮箱或旧登录名字段；实际登录标识解析由登录服务处理。" en="User email or legacy login-name field; actual login identifier resolution is handled by the sign-in service." />
+        ///   <l>
+        ///     <zh-CN>用户邮箱或旧登录名字段；实际登录标识解析由登录服务处理。</zh-CN>
+        ///     <en>User email or legacy login-name field; actual login identifier resolution is handled by the sign-in service.</en>
+        ///   </l>
         /// </summary>
         string Email { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="历史口令存储字段；只允许认证/迁移服务按安全策略读取或更新。" en="Historical password storage field; only authentication or migration services may read or update it according to security policy." />
+        ///   <l>
+        ///     <zh-CN>历史口令存储字段；只允许认证/迁移服务按安全策略读取或更新。</zh-CN>
+        ///     <en>Historical password storage field; only authentication or migration services may read or update it according to security policy.</en>
+        ///   </l>
         /// </summary>
         string Password { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="用户显示名或旧名称字段；不作为唯一身份或授权依据。" en="User display name or legacy name field; not used as a unique identity or authorization source." />
+        ///   <l>
+        ///     <zh-CN>用户显示名或旧名称字段；不作为唯一身份或授权依据。</zh-CN>
+        ///     <en>User display name or legacy name field; not used as a unique identity or authorization source.</en>
+        ///   </l>
         /// </summary>
         string Name { get; set; }
     }

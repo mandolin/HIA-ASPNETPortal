@@ -31,48 +31,75 @@ namespace ASPNET.StarterKit.Portal
         #region IDiscussionItem Members
 
         /// <summary>
-        ///   <l zh-CN="讨论条目的数据库主键。" en="Database primary key for the discussion item." />
+        ///   <l>
+        ///     <zh-CN>讨论条目的数据库主键。</zh-CN>
+        ///     <en>Database primary key for the discussion item.</en>
+        ///   </l>
         /// </summary>
         [Key]
         public int ItemID { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="拥有该讨论条目的模块实例标识。" en="Module instance identifier that owns this discussion item." />
+        ///   <l>
+        ///     <zh-CN>拥有该讨论条目的模块实例标识。</zh-CN>
+        ///     <en>Module instance identifier that owns this discussion item.</en>
+        ///   </l>
         /// </summary>
         public int ModuleID { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="当前讨论节点的直接子回复数量。" en="Number of direct child replies below this discussion node." />
+        ///   <l>
+        ///     <zh-CN>当前讨论节点的直接子回复数量。</zh-CN>
+        ///     <en>Number of direct child replies below this discussion node.</en>
+        ///   </l>
         /// </summary>
         public int ChildCount { get; set; } = 0;
 
         /// <summary>
-        ///   <l zh-CN="讨论标题；展示层输出前必须编码。" en="Discussion title; the presentation layer must encode it before output." />
+        ///   <l>
+        ///     <zh-CN>讨论标题；展示层输出前必须编码。</zh-CN>
+        ///     <en>Discussion title; the presentation layer must encode it before output.</en>
+        ///   </l>
         /// </summary>
         public string Title { get; set; } = string.Empty;
 
         /// <summary>
-        ///   <l zh-CN="历史线程父路径字符串，用于定位父级消息。" en="Legacy parent-thread path string used to locate the parent message." />
+        ///   <l>
+        ///     <zh-CN>历史线程父路径字符串，用于定位父级消息。</zh-CN>
+        ///     <en>Legacy parent-thread path string used to locate the parent message.</en>
+        ///   </l>
         /// </summary>
         public string Parent { get; set; } = string.Empty;
 
         /// <summary>
-        ///   <l zh-CN="讨论条目创建时间；旧数据可能为空。" en="Creation time for the discussion item; legacy rows may be null." />
+        ///   <l>
+        ///     <zh-CN>讨论条目创建时间；旧数据可能为空。</zh-CN>
+        ///     <en>Creation time for the discussion item; legacy rows may be null.</en>
+        ///   </l>
         /// </summary>
         public DateTime? CreatedDate { get; set; }
 
         /// <summary>
-        ///   <l zh-CN="讨论正文；展示层输出前必须编码或按受信任策略处理。" en="Discussion body; encode it before output or process it through a trusted policy." />
+        ///   <l>
+        ///     <zh-CN>讨论正文；展示层输出前必须编码或按受信任策略处理。</zh-CN>
+        ///     <en>Discussion body; encode it before output or process it through a trusted policy.</en>
+        ///   </l>
         /// </summary>
         public string Body { get; set; } = string.Empty;
 
         /// <summary>
-        ///   <l zh-CN="历史排序路径，用于按讨论树顺序显示线程。" en="Legacy sort path used to display threads in discussion-tree order." />
+        ///   <l>
+        ///     <zh-CN>历史排序路径，用于按讨论树顺序显示线程。</zh-CN>
+        ///     <en>Legacy sort path used to display threads in discussion-tree order.</en>
+        ///   </l>
         /// </summary>
         public string DisplayOrder { get; set; } = string.Empty;
 
         /// <summary>
-        ///   <l zh-CN="创建人显示名称；不是授权依据。" en="Display name of the creator; this is not an authorization source." />
+        ///   <l>
+        ///     <zh-CN>创建人显示名称；不是授权依据。</zh-CN>
+        ///     <en>Display name of the creator; this is not an authorization source.</en>
+        ///   </l>
         /// </summary>
         public string CreatedByUser { get; set; } = string.Empty;
 
