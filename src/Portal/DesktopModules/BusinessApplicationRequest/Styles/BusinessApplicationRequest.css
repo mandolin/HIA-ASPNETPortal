@@ -1,3 +1,7 @@
+/* <lang>
+ *   <zh-CN>业务应用申请模块的根容器提供独立白底卡片边界，避免旧门户主题背景直接干扰表单可读性。</zh-CN>
+ *   <en>The business-application request root container provides an isolated white card boundary so legacy portal theme backgrounds do not reduce form readability.</en>
+ * </lang> */
 .business-application-request {
     border: 1px solid #d8dee8;
     padding: 12px;
@@ -6,6 +10,10 @@
     background: #fff;
 }
 
+/* <lang>
+ *   <zh-CN>标题层级使用固定颜色、字号和粗体，形成模块内部的视觉入口而不依赖外层主题标题样式。</zh-CN>
+ *   <en>The title tier uses fixed color, size, and weight to create the module-local visual entry point without depending on outer theme heading styles.</en>
+ * </lang> */
 .business-application-title {
     color: #2f475f;
     font-size: 18px;
@@ -13,6 +21,10 @@
     margin-bottom: 10px;
 }
 
+/* <lang>
+ *   <zh-CN>副标题标记表单分区边界；上边距大于下边距，用于和前一组字段保持可读间隔。</zh-CN>
+ *   <en>The subtitle marks form-section boundaries; its top margin is larger than its bottom margin to keep readable spacing from the previous field group.</en>
+ * </lang> */
 .business-application-subtitle {
     color: #41556b;
     font-size: 15px;
@@ -20,16 +32,28 @@
     margin: 16px 0 8px;
 }
 
+/* <lang>
+ *   <zh-CN>消息文本承载保存/校验反馈，采用低饱和错误色并保持块级占位，避免与输入控件挤在同一行。</zh-CN>
+ *   <en>The message text carries save and validation feedback, using a muted error color and block layout so it does not crowd input controls on the same line.</en>
+ * </lang> */
 .business-application-message {
     display: block;
     color: #8a1f1f;
     margin: 6px 0 10px;
 }
 
+/* <lang>
+ *   <zh-CN>表单网格用负外边距抵消子字段的首列/首行间距，使 inline-block 字段在旧浏览器中保持均匀 gutters。</zh-CN>
+ *   <en>The form grid uses negative outer margins to offset child field spacing so inline-block fields keep even gutters in legacy browsers.</en>
+ * </lang> */
 .business-application-form-grid {
     margin: -10px 0 0 -12px;
 }
 
+/* <lang>
+ *   <zh-CN>普通字段以 inline-block 排列，固定宽度兼容旧桌面布局，`max-width` 防止窄容器溢出。</zh-CN>
+ *   <en>Regular fields use inline-block layout with a fixed desktop width, while `max-width` prevents overflow in narrow containers.</en>
+ * </lang> */
 .business-application-form-field {
     display: inline-block;
     width: 240px;
@@ -40,44 +64,80 @@
     vertical-align: top;
 }
 
+/* <lang>
+ *   <zh-CN>宽字段用于跨较长业务文本的输入项，但仍保留在表单网格的同一行内流式排列。</zh-CN>
+ *   <en>Wide fields host longer business text inputs while staying within the same flowing row model as the form grid.</en>
+ * </lang> */
 .business-application-form-field-wide {
     width: 360px;
 }
 
+/* <lang>
+ *   <zh-CN>全宽字段用于说明类内容，限制最大宽度以避免长文本输入在大屏上过宽。</zh-CN>
+ *   <en>Full-width fields are for descriptive content, with a maximum width to keep long-text inputs from becoming too wide on large screens.</en>
+ * </lang> */
 .business-application-form-field-full {
     width: 100%;
     max-width: 760px;
 }
 
+/* <lang>
+ *   <zh-CN>标签独占一行，保证旧 Web Forms 服务器控件渲染出的输入在其下方对齐。</zh-CN>
+ *   <en>Labels occupy their own line so inputs rendered by legacy Web Forms server controls align beneath them.</en>
+ * </lang> */
 .business-application-label {
     display: block;
     margin-bottom: 4px;
 }
 
+/* <lang>
+ *   <zh-CN>输入控件按容器宽度伸展并纳入边框盒模型，避免 padding/border 让控件突破字段宽度。</zh-CN>
+ *   <en>Inputs stretch to their container width and use border-box sizing so padding and borders do not exceed the field width.</en>
+ * </lang> */
 .business-application-input {
     width: 100%;
     max-width: 760px;
     box-sizing: border-box;
 }
 
+/* <lang>
+ *   <zh-CN>正文输入保留最小高度，给申请说明提供可编辑空间并减少初始页面跳动。</zh-CN>
+ *   <en>The body input keeps a minimum height to provide editing space for the request description and reduce initial page jumps.</en>
+ * </lang> */
 .business-application-body {
     min-height: 130px;
 }
 
+/* <lang>
+ *   <zh-CN>动作区与表单主体分离，给保存/取消按钮留出稳定点击区域。</zh-CN>
+ *   <en>The action area is separated from the form body to provide a stable click zone for save and cancel buttons.</en>
+ * </lang> */
 .business-application-actions {
     margin: 14px 0;
 }
 
+/* <lang>
+ *   <zh-CN>列表外壳允许横向滚动，保护窄屏或窄模块 pane 中的多列表格不破坏页面布局。</zh-CN>
+ *   <en>The list wrapper allows horizontal scrolling so multi-column tables do not break the page layout in narrow screens or module panes.</en>
+ * </lang> */
 .business-application-list-wrap {
     overflow: auto;
 }
 
+/* <lang>
+ *   <zh-CN>申请列表设置最小宽度与折叠边框，保持状态、标题和日期列在旧浏览器中仍可扫描。</zh-CN>
+ *   <en>The request list uses a minimum width and collapsed borders so status, title, and date columns remain scannable in legacy browsers.</en>
+ * </lang> */
 .business-application-list {
     width: 100%;
     min-width: 720px;
     border-collapse: collapse;
 }
 
+/* <lang>
+ *   <zh-CN>表头和单元格共享边线、内距和左对齐，避免后台数据表在主题切换时出现不一致行高。</zh-CN>
+ *   <en>Headers and cells share borders, padding, and left alignment so the admin data table keeps consistent row height across theme switches.</en>
+ * </lang> */
 .business-application-list td,
 .business-application-list th {
     border-bottom: 1px solid #edf1f5;

@@ -1,3 +1,7 @@
+/* <lang>
+ *   <zh-CN>员工资料更正模块使用独立白底边框容器，隔离外层门户主题并给当前资料、申请表和历史列表提供统一边界。</zh-CN>
+ *   <en>The employee-profile correction module uses an isolated white bordered container, separating it from the outer portal theme and giving current data, the request form, and history list one boundary.</en>
+ * </lang> */
 .employee-profile-correction {
     border: 1px solid #d8dee8;
     padding: 12px;
@@ -7,6 +11,10 @@
     background: #fff;
 }
 
+/* <lang>
+ *   <zh-CN>主标题建立更正申请的视觉入口，避免当前资料和历史记录在页面上缺少模块级归属。</zh-CN>
+ *   <en>The main title establishes the correction-request visual entry point so current data and history records retain module-level ownership on the page.</en>
+ * </lang> */
 .employee-profile-correction-title {
     color: #2f475f;
     font-size: 18px;
@@ -14,6 +22,10 @@
     margin-bottom: 10px;
 }
 
+/* <lang>
+ *   <zh-CN>副标题分隔当前资料、申请填写和历史列表等区域，提供稳定的阅读节奏。</zh-CN>
+ *   <en>Subtitles separate current profile, request entry, and history-list areas to provide a stable reading rhythm.</en>
+ * </lang> */
 .employee-profile-correction-subtitle {
     color: #41556b;
     font-size: 15px;
@@ -21,12 +33,20 @@
     margin: 14px 0 8px;
 }
 
+/* <lang>
+ *   <zh-CN>消息文本显示校验或提交反馈，使用块级错误色区域避免与表单控件混淆。</zh-CN>
+ *   <en>The message text displays validation or submission feedback using a block-level error-colored area so it is not confused with form controls.</en>
+ * </lang> */
 .employee-profile-correction-message {
     display: block;
     color: #8a1f1f;
     margin: 6px 0 10px;
 }
 
+/* <lang>
+ *   <zh-CN>表格、表单和列表共享全宽折叠布局，使旧 Web Forms 渲染出的不同数据区保持统一宽度契约。</zh-CN>
+ *   <en>Tables, forms, and lists share a full-width collapsed layout so different Web Forms-rendered data areas keep one width contract.</en>
+ * </lang> */
 .employee-profile-correction-table,
 .employee-profile-correction-form,
 .employee-profile-correction-list {
@@ -34,6 +54,10 @@
     border-collapse: collapse;
 }
 
+/* <lang>
+ *   <zh-CN>各数据区单元格共享边线、内距和左对齐，保证当前值、申请值和历史记录可横向比较。</zh-CN>
+ *   <en>Cells across data areas share borders, padding, and left alignment so current values, requested values, and history records can be compared horizontally.</en>
+ * </lang> */
 .employee-profile-correction-table td,
 .employee-profile-correction-form td,
 .employee-profile-correction-list td,
@@ -43,17 +67,29 @@
     text-align: left;
 }
 
+/* <lang>
+ *   <zh-CN>标签列固定并加粗，给资料字段名和可变用户数据之间建立稳定分界。</zh-CN>
+ *   <en>The label column is fixed and bold to create a stable boundary between profile field names and variable user data.</en>
+ * </lang> */
 .employee-profile-correction-label {
     width: 120px;
     color: #41556b;
     font-weight: 700;
 }
 
+/* <lang>
+ *   <zh-CN>当前资料网格与更正表单网格复用 gutters 规则，使只读资料和可编辑申请项在视觉上对齐。</zh-CN>
+ *   <en>The current-profile grid and correction-form grid reuse gutter rules so read-only data and editable request fields align visually.</en>
+ * </lang> */
 .employee-profile-field-grid,
 .employee-profile-form-grid {
     margin: -10px 0 0 -12px;
 }
 
+/* <lang>
+ *   <zh-CN>字段块在两类网格中共用 inline-block 布局，兼容旧浏览器且允许窄 pane 下自然换行。</zh-CN>
+ *   <en>Field blocks share inline-block layout in both grids, preserving legacy-browser compatibility while allowing natural wrapping in narrow panes.</en>
+ * </lang> */
 .employee-profile-field,
 .employee-profile-form-field {
     display: inline-block;
@@ -65,40 +101,72 @@
     vertical-align: top;
 }
 
+/* <lang>
+ *   <zh-CN>宽字段用于备注、联系方式或组织路径等长文本，避免用户输入被过早截断。</zh-CN>
+ *   <en>Wide fields are for notes, contact data, or organization paths so user-entered text is not visually truncated too early.</en>
+ * </lang> */
 .employee-profile-field-wide,
 .employee-profile-form-field-wide {
     width: 360px;
 }
 
+/* <lang>
+ *   <zh-CN>字段标签独占一行，保持只读值与编辑控件的说明位置一致。</zh-CN>
+ *   <en>Field labels occupy their own line so read-only values and edit controls share the same explanatory position.</en>
+ * </lang> */
 .employee-profile-field-label {
     display: block;
     margin-bottom: 4px;
 }
 
+/* <lang>
+ *   <zh-CN>只读字段值允许长词断行，保护邮箱、电话或组织编码不撑破布局。</zh-CN>
+ *   <en>Read-only field values allow long words to break, protecting the layout from emails, phone numbers, or organization codes.</en>
+ * </lang> */
 .employee-profile-field-value {
     display: block;
     min-height: 22px;
     word-break: break-word;
 }
 
+/* <lang>
+ *   <zh-CN>更正输入控件以字段宽度为边界，采用 border-box 使边框和内距不扩大实际占位。</zh-CN>
+ *   <en>Correction inputs are bounded by the field width and use border-box sizing so borders and padding do not expand their footprint.</en>
+ * </lang> */
 .employee-profile-correction-input {
     width: 100%;
     max-width: 360px;
     box-sizing: border-box;
 }
 
+/* <lang>
+ *   <zh-CN>备注输入保留最小高度，鼓励用户说明更正理由并降低初始编辑区域跳动。</zh-CN>
+ *   <en>The note input keeps a minimum height to encourage correction rationale and reduce initial edit-area jumps.</en>
+ * </lang> */
 .employee-profile-correction-note {
     min-height: 82px;
 }
 
+/* <lang>
+ *   <zh-CN>动作区与字段网格左侧 gutter 对齐，使提交按钮和输入字段在视觉上属于同一表单流。</zh-CN>
+ *   <en>The action area aligns with the field-grid left gutter so submit buttons and inputs remain part of the same form flow.</en>
+ * </lang> */
 .employee-profile-correction-actions {
     margin: 12px 0 0 12px;
 }
 
+/* <lang>
+ *   <zh-CN>历史列表外壳允许横向滚动，避免多列审批历史在窄容器中压缩到不可读。</zh-CN>
+ *   <en>The history-list wrapper allows horizontal scrolling so multi-column approval history does not compress into unreadable columns in narrow containers.</en>
+ * </lang> */
 .employee-profile-list-wrap {
     overflow: auto;
 }
 
+/* <lang>
+ *   <zh-CN>历史列表保留最小宽度，保护状态、提交人和时间等列的可扫描性。</zh-CN>
+ *   <en>The history list keeps a minimum width to preserve scannability for status, submitter, and time columns.</en>
+ * </lang> */
 .employee-profile-correction-list {
     min-width: 680px;
 }

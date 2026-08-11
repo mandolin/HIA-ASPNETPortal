@@ -1,3 +1,7 @@
+/* <lang>
+ *   <zh-CN>企业能力工作台根容器创建独立白底模块区，承载能力需求表单与列表并隔离外层门户主题背景。</zh-CN>
+ *   <en>The enterprise-capability workbench root container creates an isolated white module area for capability forms and lists, separating them from the outer portal theme background.</en>
+ * </lang> */
 .enterprise-workbench {
     border: 1px solid #d8dee8;
     padding: 12px;
@@ -6,6 +10,10 @@
     background: #fff;
 }
 
+/* <lang>
+ *   <zh-CN>标题提供工作台的视觉入口，避免列表、表单和页面其他模块混在同一层级。</zh-CN>
+ *   <en>The title provides the workbench visual entry point so lists, forms, and neighboring page modules do not blend into one hierarchy.</en>
+ * </lang> */
 .enterprise-workbench-title {
     color: #2f475f;
     font-size: 18px;
@@ -13,6 +21,10 @@
     margin-bottom: 10px;
 }
 
+/* <lang>
+ *   <zh-CN>副标题划分新增/编辑区与清单区，上下间距表达当前区块的开始位置。</zh-CN>
+ *   <en>Subtitles separate create/edit areas from list areas, with spacing that communicates where the current section begins.</en>
+ * </lang> */
 .enterprise-workbench-subtitle {
     color: #41556b;
     font-size: 15px;
@@ -20,16 +32,28 @@
     margin: 16px 0 8px;
 }
 
+/* <lang>
+ *   <zh-CN>消息文本用于权限、保存或校验反馈，块级错误色区域保证反馈不会被表单字段吞没。</zh-CN>
+ *   <en>The message text is for permission, save, or validation feedback; a block-level error-colored area keeps feedback from being swallowed by form fields.</en>
+ * </lang> */
 .enterprise-workbench-message {
     display: block;
     color: #8a1f1f;
     margin: 6px 0 10px;
 }
 
+/* <lang>
+ *   <zh-CN>工作台表单网格使用负外边距抵消子字段 gutters，使首行首列在旧浏览器中仍对齐模块边界。</zh-CN>
+ *   <en>The workbench form grid uses negative margins to offset child gutters so the first row and column align with the module boundary in legacy browsers.</en>
+ * </lang> */
 .enterprise-workbench-form-grid {
     margin: -10px 0 0 -12px;
 }
 
+/* <lang>
+ *   <zh-CN>普通字段使用 inline-block 和固定宽度，兼顾桌面信息密度与窄 pane 自动换行。</zh-CN>
+ *   <en>Regular fields use inline-block layout and fixed width, balancing desktop information density with automatic wrapping in narrow panes.</en>
+ * </lang> */
 .enterprise-workbench-form-field {
     display: inline-block;
     width: 220px;
@@ -40,44 +64,80 @@
     vertical-align: top;
 }
 
+/* <lang>
+ *   <zh-CN>宽字段服务较长的能力名称、责任人或分类输入，仍保持同一网格流。</zh-CN>
+ *   <en>Wide fields serve longer capability names, owners, or category inputs while remaining in the same grid flow.</en>
+ * </lang> */
 .enterprise-workbench-form-field-wide {
     width: 360px;
 }
 
+/* <lang>
+ *   <zh-CN>全宽字段用于描述性正文，最大宽度限制保证超宽屏上仍保持可读行长。</zh-CN>
+ *   <en>Full-width fields are for descriptive body text, with a maximum width that keeps line length readable on very wide screens.</en>
+ * </lang> */
 .enterprise-workbench-form-field-full {
     width: 100%;
     max-width: 780px;
 }
 
+/* <lang>
+ *   <zh-CN>标签单独成行，确保 Web Forms 输入控件的说明文字不会与控件水平挤压。</zh-CN>
+ *   <en>Labels occupy their own line so explanatory text for Web Forms input controls is not squeezed horizontally with the controls.</en>
+ * </lang> */
 .enterprise-workbench-label {
     display: block;
     margin-bottom: 4px;
 }
 
+/* <lang>
+ *   <zh-CN>输入控件使用完整字段宽度和 border-box，保持文字框、下拉框与多行控件宽度一致。</zh-CN>
+ *   <en>Inputs use the full field width and border-box sizing so text boxes, dropdowns, and multiline controls keep consistent width.</en>
+ * </lang> */
 .enterprise-workbench-input {
     width: 100%;
     max-width: 780px;
     box-sizing: border-box;
 }
 
+/* <lang>
+ *   <zh-CN>正文区域保留最小高度，给能力说明提供稳定编辑空间。</zh-CN>
+ *   <en>The body area keeps a minimum height to provide stable editing space for capability descriptions.</en>
+ * </lang> */
 .enterprise-workbench-body {
     min-height: 130px;
 }
 
+/* <lang>
+ *   <zh-CN>动作区与字段区拉开距离，给保存、取消或刷新按钮提供明确的交互边界。</zh-CN>
+ *   <en>The action area is spaced away from fields to give save, cancel, or refresh buttons a clear interaction boundary.</en>
+ * </lang> */
 .enterprise-workbench-actions {
     margin: 14px 0;
 }
 
+/* <lang>
+ *   <zh-CN>列表外壳允许横向滚动，保护多列能力清单在窄模块 pane 中不压缩失真。</zh-CN>
+ *   <en>The list wrapper allows horizontal scrolling so multi-column capability lists do not distort in narrow module panes.</en>
+ * </lang> */
 .enterprise-workbench-list-wrap {
     overflow: auto;
 }
 
+/* <lang>
+ *   <zh-CN>能力清单使用最小宽度和折叠边框，保障编号、名称、状态和责任列的可扫描性。</zh-CN>
+ *   <en>The capability list uses a minimum width and collapsed borders to preserve scannability for identifier, name, status, and owner columns.</en>
+ * </lang> */
 .enterprise-workbench-list {
     width: 100%;
     min-width: 760px;
     border-collapse: collapse;
 }
 
+/* <lang>
+ *   <zh-CN>表头与单元格共享边线和内距，保证工作台数据行在主题切换时仍保持稳定行高。</zh-CN>
+ *   <en>Headers and cells share borders and padding so workbench data rows keep stable height across theme switches.</en>
+ * </lang> */
 .enterprise-workbench-list td,
 .enterprise-workbench-list th {
     border-bottom: 1px solid #edf1f5;

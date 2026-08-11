@@ -980,7 +980,10 @@
 | P26.5sj 选片 | 已选择 `src/Portal/gulpfile.js` 的前端资产构建与 Visual Studio watcher 编排职责链；clean 非 Designer C#、Designer 与 markup 同类缺口为 `0`，本轮覆盖 JS 节点内部流程、局部变量、watcher 句柄、信号文件和 side-effect 注释；资产构建、watcher 启动、package/lockfile 和生成资源排除。见 [P26.5sj 选片](work-zone/dev/plans/W-anp-P26.5sj-gulpfile-rop-comments-selection.md)。 |
 | P26.5sk 注释补强 | 已为 `gulpfile.js` 补强 inline `<lang>` ROP 注释，覆盖 ESM 路径恢复、PostCSS 顺序、ES/Coffee/Sass 构建管线、source map、`gulp-rename` 可变路径、watcher 句柄生命周期、stop 信号文件和 `assets:build`/`startWatch` 分离；目标 `<lang>` 总数 `44`，新增非注释代码 `0`。见 [P26.5sk 结果](work-zone/dev/plans/W-anp-P26.5sk-gulpfile-rop-comments-result.md)。 |
 | P26.5sl 静态验证 | 通过；JS diff 新增/删除行全部为注释，`ADDED_NONBLANK=176`、`REMOVED_NONBLANK=1`、`NONCOMMENT_COUNT=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、`mise exec -- node --check src/Portal/gulpfile.js` 和 `mise exec -- npx gulp --tasks-simple` 均通过，Gulp 任务仍为 `assets:build`、`startWatch`、`stopWatch`。未运行资产构建、watcher、IIS/HTTP、浏览器或发布 proof。见 [P26.5sl 审计](work-zone/dev/plans/W-anp-P26.5sl-gulpfile-rop-comments-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5sm：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 clean 非 Designer C# XML 文档表面、主题/模块 XML 文档表面或 `gulpfile.js` watcher/asset 管线。 |
+| P26.5sm 选片 | 已选择 `BusinessApplicationRequest.css`、`EmployeeProfileConfirm.css`、`EmployeeProfileCorrectionRequest.css` 与 `EnterpriseCapabilityWorkbench.css` 的业务桌面模块 CSS 职责链；覆盖容器、标题/消息、表单网格、字段/输入、动作区、列表横向滚动和旧浏览器布局兼容；大型主题 CSS、SQL、XML/config 与真实浏览器 proof 排除。见 [P26.5sm 选片](work-zone/dev/plans/W-anp-P26.5sm-business-module-css-rop-selection.md)。 |
+| P26.5sn 注释补强 | 已为 4 个目标 CSS 补充合法 `/* <lang> ... */` ROP 注释，目标 `<lang>` 总数 `59`，新增非注释代码 `0`；未改变 selector、声明、CSS 属性值、Gulp 输入或生成资产。见 [P26.5sn 结果](work-zone/dev/plans/W-anp-P26.5sn-business-module-css-rop-result.md)。 |
+| P26.5so 静态验证 | 通过；CSS diff 新增行全部为注释，`ADDED_NONBLANK=236`、`REMOVED_NONBLANK=0`、`NONCOMMENT_COUNT=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、PostCSS parse、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；未执行 assets build、真实浏览器、IIS/HTTP、模块真实数据、账号、凭据或发布 proof。见 [P26.5so 审计](work-zone/dev/plans/W-anp-P26.5so-business-module-css-rop-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5sp：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 clean 非 Designer C# XML 文档表面、主题/模块 XML 文档表面、`gulpfile.js` watcher/asset 管线或本轮业务模块 CSS。 |
 
 ## Known Residual Working Tree Items
 
@@ -1006,6 +1009,8 @@
 | P26.5sh 首个单行 XML 文档迁移器 | adjusted | 首次机械迁移能处理多行块，但单行 `<param>...</param>`/`<returns>...</returns>` 会在 `<zh-CN>` 内残留外层起始标签；已用标签残留扫描定位并清理，XML gate 与构建通过。 |
 | P26.5sj 多类别扫描命令 | adjusted | 首次 markup 正则里的 `runat="server"` 双引号未按 PowerShell 规则转义，命令未执行且未改文件；改用反引号转义后完成只读扫描。 |
 | P26.5sk 初次编码复核 | adjusted | `apply_patch` 后 `gulpfile.js` 呈 LF，内容验证已过但不符合项目 CRLF 要求；已用 UTF-8 无 BOM/CRLF 规范化后重跑 Node/Gulp 与 diff-check。 |
+| P26.5sm 初次 CSS 统计命令 | adjusted | 首次验证脚本在 PowerShell `foreach` 语句块后直接接管道导致解析失败；目标文件未受影响，改用中间变量后完成统计。 |
+| P26.5so 初次 PostCSS parse 命令 | adjusted | 首次 `node -e` 内联脚本被 PowerShell 引号抢占导致命令未执行；改用 PowerShell here-string 传 Node 脚本后 4 个 CSS 均解析通过。 |
 
 ## Anti-Loop Guard
 

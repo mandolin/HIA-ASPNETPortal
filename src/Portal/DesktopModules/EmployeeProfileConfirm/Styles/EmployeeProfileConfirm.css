@@ -1,3 +1,7 @@
+/* <lang>
+ *   <zh-CN>员工资料确认模块以独立白底容器呈现，避免确认数据被外层门户主题背景或窄 pane 压缩。</zh-CN>
+ *   <en>The employee-profile confirmation module renders in its own white container so confirmation data is not compressed by outer portal theme backgrounds or narrow panes.</en>
+ * </lang> */
 .employee-profile-confirm {
     border: 1px solid #d8dee8;
     padding: 12px;
@@ -7,6 +11,10 @@
     background: #fff;
 }
 
+/* <lang>
+ *   <zh-CN>标题样式固定确认页入口层级，帮助用户区分资料核对区域与普通模块内容。</zh-CN>
+ *   <en>The title style fixes the confirmation-page entry hierarchy, helping users distinguish the profile-review area from ordinary module content.</en>
+ * </lang> */
 .employee-profile-confirm-title {
     color: #2f475f;
     font-size: 18px;
@@ -14,36 +22,64 @@
     margin-bottom: 10px;
 }
 
+/* <lang>
+ *   <zh-CN>消息区域承载确认结果或校验提示，块级显示防止提示文本与按钮、字段混排。</zh-CN>
+ *   <en>The message area carries confirmation results or validation prompts, using block display to avoid mixing prompt text with buttons or fields.</en>
+ * </lang> */
 .employee-profile-confirm-message {
     display: block;
     color: #8a1f1f;
     margin: 6px 0 10px;
 }
 
+/* <lang>
+ *   <zh-CN>确认表采用全宽折叠边框，适合只读资料键值对在旧 Web Forms 表格布局中稳定呈现。</zh-CN>
+ *   <en>The confirmation table uses full width and collapsed borders so read-only profile key/value pairs render steadily in legacy Web Forms table layouts.</en>
+ * </lang> */
 .employee-profile-confirm-table {
     width: 100%;
     border-collapse: collapse;
 }
 
+/* <lang>
+ *   <zh-CN>确认表单元格统一底线和内距，形成逐项核对的扫描节奏。</zh-CN>
+ *   <en>Confirmation table cells share bottom borders and padding to create a scannable item-by-item review rhythm.</en>
+ * </lang> */
 .employee-profile-confirm-table td {
     border-bottom: 1px solid #edf1f5;
     padding: 6px 4px;
 }
 
+/* <lang>
+ *   <zh-CN>标签列固定宽度并加粗，保证姓名、组织、联系方式等字段名与字段值有稳定分界。</zh-CN>
+ *   <en>The label column is fixed-width and bold so names, organizations, contact fields, and values keep a stable boundary.</en>
+ * </lang> */
 .employee-profile-confirm-label {
     width: 120px;
     color: #41556b;
     font-weight: 700;
 }
 
+/* <lang>
+ *   <zh-CN>确认动作区与表格保持间距，避免提交按钮贴近最后一行资料造成误触。</zh-CN>
+ *   <en>The confirmation action area keeps spacing from the table so submit buttons do not sit too close to the final profile row.</en>
+ * </lang> */
 .employee-profile-confirm-actions {
     margin-top: 12px;
 }
 
+/* <lang>
+ *   <zh-CN>字段网格用于补充只读资料块，负外边距抵消子字段 gutters，保持首列与容器边界对齐。</zh-CN>
+ *   <en>The field grid hosts supplemental read-only profile blocks, using negative margins to offset child gutters and align the first column with the container edge.</en>
+ * </lang> */
 .employee-profile-field-grid {
     margin: -10px 0 0 -12px;
 }
 
+/* <lang>
+ *   <zh-CN>字段块以 inline-block 排布，固定宽度服务桌面门户布局，`max-width` 防止窄 pane 溢出。</zh-CN>
+ *   <en>Field blocks use inline-block layout with a fixed desktop width, while `max-width` prevents overflow in narrow panes.</en>
+ * </lang> */
 .employee-profile-field {
     display: inline-block;
     width: 210px;
@@ -54,15 +90,27 @@
     vertical-align: top;
 }
 
+/* <lang>
+ *   <zh-CN>宽字段给邮箱、组织路径等较长资料保留更多横向空间。</zh-CN>
+ *   <en>Wide fields reserve more horizontal space for longer profile data such as email addresses or organization paths.</en>
+ * </lang> */
 .employee-profile-field-wide {
     width: 320px;
 }
 
+/* <lang>
+ *   <zh-CN>字段标签单独成行，保证只读值在视觉上属于其上方说明。</zh-CN>
+ *   <en>The field label occupies its own line so the read-only value is visually associated with the label above it.</en>
+ * </lang> */
 .employee-profile-field-label {
     display: block;
     margin-bottom: 4px;
 }
 
+/* <lang>
+ *   <zh-CN>字段值保留最小高度并允许长词断行，防止邮箱、工号或组织路径撑破布局。</zh-CN>
+ *   <en>Field values keep a minimum height and allow long words to break so emails, employee numbers, or organization paths do not stretch the layout.</en>
+ * </lang> */
 .employee-profile-field-value {
     display: block;
     min-height: 22px;
