@@ -928,7 +928,10 @@
 | P26.5qm 选片 | 已选择 `PortalTabThemeOverrides.cs` 与 `PortalThemeResolver.cs` 的 Tab 主题覆盖与请求主题解析相邻职责链；覆盖受信主题包、覆盖表可用性、事务写入、全局/Tab 回退、请求缓存、CSS scope 净化和受限告警；真实主题目录、数据库写入、IIS/HTTP、浏览器、账号、凭据和发布 proof 排除。见 [P26.5qm 选片](work-zone/dev/plans/W-anp-P26.5qm-tab-theme-resolution-selection.md)。 |
 | P26.5qn 注释补强 | 已为覆盖读写结果、固定表名、连接/事务/命令生命周期、可信包、操作人净化、全局/Tab 候选、请求缓存、CSS scope、后台排除和告警去重补充 62 个中英双语 `<lang>` 块及 5 个 private/state XML `<summary>`；新增非注释代码 `0`。见 [P26.5qn 结果](work-zone/dev/plans/W-anp-P26.5qn-tab-theme-resolution-result.md)。 |
 | P26.5qo 静态验证 | 通过；两个目标文件差异全部为 XML/inline 注释，注释-only 扫描 `NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal XML member count `1923`、Portal.Components `902`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。真实主题目录、数据库、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5qo 审计](work-zone/dev/plans/W-anp-P26.5qo-tab-theme-resolution-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5qp：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qm-qo。 |
+| P26.5qp 选片 | 已选择 `PortalPasswordPolicy.cs` 的共享密码复杂度策略职责链；覆盖运行期提供器、硬下限、长度/类别、弱口令、账号上下文词、令牌拆分、重复字符和安全展示消息；真实注册、建号、重置密码、账号、数据库、IIS/HTTP、浏览器、凭据和发布 proof 排除。见 [P26.5qp 选片](work-zone/dev/plans/W-anp-P26.5qp-password-policy-selection.md)。 |
+| P26.5qq 注释补强 | 已为提供器同步、硬下限规范化、长度/类别校验、弱口令、上下文词、令牌拆分、重复字符、默认回退和策略选项构造补充 36 个中英双语 `<lang>` 块及 11 个 private/state XML `<summary>`；新增非注释代码 `0`。见 [P26.5qq 结果](work-zone/dev/plans/W-anp-P26.5qq-password-policy-result.md)。 |
+| P26.5qr 静态验证 | 通过；目标文件差异全部为 XML/inline 注释，注释-only 扫描 `NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal XML member count `1923`、Portal.Components `913`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。真实账号、密码、数据库、IIS/HTTP、浏览器、凭据和发布 proof 未执行。见 [P26.5qr 审计](work-zone/dev/plans/W-anp-P26.5qr-password-policy-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5qs：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qp-qr。 |
 
 ## Known Residual Working Tree Items
 
