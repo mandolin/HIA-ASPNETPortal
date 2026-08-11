@@ -19,6 +19,12 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public partial class EditXml : PortalPage<EditXml>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求中的模块实例标识，是 XML/XSL 设置读取、保存和编辑权限校验的共同边界。</zh-CN>
+        ///   <en>Module instance identifier for the current request, forming the shared boundary for XML/XSL setting reads, saves, and edit permission checks.</en>
+        /// </lang>
+        /// </summary>
         private int moduleId;
 
         /// <summary>
@@ -45,6 +51,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Initializes the module-edit request and binds existing settings on the first request.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面加载的 Web Forms 事件源。</zh-CN>
+        ///   <en>The Web Forms event source that triggered page loading.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；当前实现不读取其内容。</zh-CN>
+        ///   <en>The page-load event arguments; the current implementation does not read them.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -57,6 +75,10 @@ namespace ASPNET.StarterKit.Portal
                 // <lang>
                 //   <zh-CN>首次进入时只读取当前模块既有设置；权限校验已经在 TryInitializeRequest 中完成。</zh-CN>
                 //   <en>On the first request, read only the current module's existing settings; authorization has already completed in TryInitializeRequest.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>settings 是当前模块的 XML/XSL 文本设置快照，只在首次加载时回填表单。</zh-CN>
+                //   <en>settings is the XML/XSL text-setting snapshot for the current module and is used only to fill the form on first load.</en>
                 // </lang>
                 Hashtable settings = ModulesConfig.GetModuleSettings(moduleId);
                 XmlDataSrc.Text = settings["xmlsrc"] as string;
@@ -71,13 +93,33 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Saves XML/XSL paths constrained to the current application's deployed directory.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发保存命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the save command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>保存命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The save-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>保存前重新核验模块编辑权限，避免凭首次加载状态写入模块设置。</zh-CN>
+            //   <en>Module edit permission is rechecked before saving so module settings are not written based on first-load state.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>xmlPath 与 xslPath 保存通过部署资源策略后的应用内虚拟路径；空输入表示清空对应设置。</zh-CN>
+            //   <en>xmlPath and xslPath hold in-application virtual paths after deployment-resource policy validation; blank input clears the corresponding setting.</en>
+            // </lang>
             string xmlPath;
             string xslPath;
             if (!TryNormalizeOptionalDeploymentPath(XmlDataSrc.Text, out xmlPath) ||
@@ -106,8 +148,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Cancels editing and returns to a safe URL.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发取消命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the cancel command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>取消命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The cancel-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void CancelBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>取消不写入 XML/XSL 设置，但仍确认请求合法后才使用安全回跳地址。</zh-CN>
+            //   <en>Cancel does not write XML/XSL settings, but still confirms the request is valid before using the safe return URL.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
@@ -130,6 +188,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryInitializeRequest()
         {
+            // <lang>
+            //   <zh-CN>模块标识决定设置记录和权限范围；非法或无权限请求统一进入编辑拒绝页。</zh-CN>
+            //   <en>The module identifier determines the setting row and permission scope; invalid or unauthorized requests go uniformly to the edit-denied page.</en>
+            // </lang>
             if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
                 !PortalSecurity.HasEditPermissions(moduleId))
             {
@@ -168,10 +230,18 @@ namespace ASPNET.StarterKit.Portal
         {
             if (string.IsNullOrWhiteSpace(value))
             {
+                // <lang>
+                //   <zh-CN>XML 或 XSL 路径允许清空；空输入保存为空字符串且不触发文件探测。</zh-CN>
+                //   <en>XML or XSL paths may be cleared; blank input persists as an empty string and does not trigger file probing.</en>
+                // </lang>
                 normalizedPath = string.Empty;
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非空路径必须通过可信部署资源策略，拒绝应用外路径、远程 URL 和不受信资源。</zh-CN>
+            //   <en>Non-empty paths must pass the trusted deployment-resource policy, rejecting outside-application paths, remote URLs, and untrusted resources.</en>
+            // </lang>
             return PortalNavigationPolicy.TryNormalizeTrustedDeploymentResourcePath(value, Request, out normalizedPath);
         }
 
@@ -189,6 +259,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         private void ShowValidationMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>提示文本来自固定服务器分支，不包含物理路径、异常堆栈或原始输入。</zh-CN>
+            //   <en>The message text comes from fixed server-side branches and contains no physical paths, exception stacks, or raw input.</en>
+            // </lang>
             ValidationMessage.Text = message;
             ValidationMessage.Visible = true;
         }

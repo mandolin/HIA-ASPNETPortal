@@ -18,7 +18,20 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public partial class EditEvents : PortalPage<EditEvents>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求中的事件条目标识；0 表示创建新事件。</zh-CN>
+        ///   <en>Event item identifier for the current request; 0 means a new event is being created.</en>
+        /// </lang>
+        /// </summary>
         private int itemId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求中的模块实例标识，是编辑权限和事件归属校验的共同边界。</zh-CN>
+        ///   <en>Module instance identifier for the current request, forming the shared boundary for edit permission and event ownership checks.</en>
+        /// </lang>
+        /// </summary>
         private int moduleId;
 
         /// <summary>
@@ -45,8 +58,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Initializes request context, verifies edit permission and existing-item ownership, and binds the form on the first request.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面加载的 Web Forms 事件源。</zh-CN>
+        ///   <en>The Web Forms event source that triggered page loading.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；当前实现不读取其内容。</zh-CN>
+        ///   <en>The page-load event arguments; the current implementation does not read them.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>item 是通过模块权限和归属校验后的事件快照；新增事件路径保持为空。</zh-CN>
+            //   <en>item is the event snapshot after module permission and ownership validation; it remains null on the new-event path.</en>
+            // </lang>
             IEventItem item;
             if (!TryInitializeRequest(out item))
             {
@@ -63,6 +92,10 @@ namespace ASPNET.StarterKit.Portal
                     // </lang>
                     TitleField.Text = item.Title;
                     DescriptionField.Text = item.Description;
+                    // <lang>
+                    //   <zh-CN>事件过期日期继续按旧页面短日期文本回填，保持当前文化兼容。</zh-CN>
+                    //   <en>The event expiry date continues to fill with the legacy page's short-date text, preserving current-culture compatibility.</en>
+                    // </lang>
                     ExpireField.Text = item.ExpireDate.HasValue ? item.ExpireDate.Value.ToShortDateString() : string.Empty;
                     CreatedBy.Text = EncodeDisplayText(item.CreatedByUser);
                     WhereWhenField.Text = item.WhereWhen;
@@ -83,14 +116,34 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Creates or updates an authorized event and returns to a safe URL inside the current application.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发保存命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the save command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>保存命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The save-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>保存前重新初始化请求，确保事件归属与模块编辑权限来自服务器端实时校验。</zh-CN>
+            //   <en>The request is initialized again before saving so event ownership and module edit permission come from live server-side validation.</en>
+            // </lang>
             IEventItem item;
             if (!TryInitializeRequest(out item) || !Page.IsValid)
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>expireDate 是当前文化解析得到的事件过期时间；解析失败只显示低敏提示，不写入数据库。</zh-CN>
+            //   <en>expireDate is the event expiry time parsed with the current culture; parse failures only show a low-sensitivity notice and do not write to the database.</en>
+            // </lang>
             DateTime expireDate;
             if (!DateTime.TryParse(ExpireField.Text, out expireDate))
             {
@@ -130,8 +183,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Deletes an event whose ownership has been verified.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发删除命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the delete command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>删除命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The delete-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void DeleteBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>删除路径重新读取请求并校验归属，避免直接用 ItemId 删除其他模块事件。</zh-CN>
+            //   <en>The delete path rereads the request and validates ownership, avoiding deletion of another module's event by ItemId.</en>
+            // </lang>
             IEventItem item;
             if (!TryInitializeRequest(out item))
             {
@@ -140,6 +209,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (itemId != 0)
             {
+                // <lang>
+                //   <zh-CN>新增路径没有持久化事件可删；既有事件通过归属检查后才进入数据层删除。</zh-CN>
+                //   <en>The creation path has no persisted event to delete; existing events reach the data-layer delete only after ownership checks.</en>
+                // </lang>
                 EventsDB.DeleteEvent(itemId);
             }
 
@@ -152,8 +225,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Cancels editing and returns to a safe URL.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发取消命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the cancel command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>取消命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The cancel-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void CancelBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>取消不保存字段，但仍确认请求合法后才回到安全来源页。</zh-CN>
+            //   <en>Cancel does not persist fields, but still confirms the request is valid before returning to the safe referrer.</en>
+            // </lang>
             IEventItem item;
             if (!TryInitializeRequest(out item))
             {
@@ -183,7 +272,15 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryInitializeRequest(out IEventItem item)
         {
+            // <lang>
+            //   <zh-CN>输出参数先清空，确保非法请求不会把事件快照泄露给后续流程。</zh-CN>
+            //   <en>The output parameter is cleared first so invalid requests cannot leak an event snapshot into later flow.</en>
+            // </lang>
             item = null;
+            // <lang>
+            //   <zh-CN>模块标识同时限定权限和新增事件归属；非法或无权限请求统一进入编辑拒绝页。</zh-CN>
+            //   <en>The module identifier constrains both permission and new-event ownership; invalid or unauthorized requests go to the edit-denied page uniformly.</en>
+            // </lang>
             if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
                 !PortalSecurity.HasEditPermissions(moduleId))
             {
@@ -191,6 +288,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>ItemId 可省略以表示新增事件；非空值必须是正整数。</zh-CN>
+            //   <en>ItemId may be omitted to represent a new event; non-empty values must be positive integers.</en>
+            // </lang>
             string requestedItemId = Request.Params["ItemId"];
             if (!string.IsNullOrWhiteSpace(requestedItemId) &&
                 !PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
@@ -201,9 +302,17 @@ namespace ASPNET.StarterKit.Portal
 
             if (itemId == 0)
             {
+                // <lang>
+                //   <zh-CN>新增路径不读取数据库事件，前置模块编辑权限已经足够授权创建。</zh-CN>
+                //   <en>The creation path does not read a database event; the earlier module edit permission is sufficient to authorize creation.</en>
+                // </lang>
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>既有事件必须按 ItemId 读取并核对模块归属，避免跨模块直接对象引用。</zh-CN>
+            //   <en>Existing events must be read by ItemId and checked against module ownership, avoiding cross-module direct object references.</en>
+            // </lang>
             item = EventsDB.GetSingleEvent(itemId);
             if (item == null || item.ModuleId != moduleId)
             {
@@ -228,6 +337,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         private void ShowValidationMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>校验提示由服务器固定分支提供，不回显管理员输入的原始日期或路径。</zh-CN>
+            //   <en>The validation notice comes from fixed server-side branches and does not echo the administrator's raw date or path input.</en>
+            // </lang>
             ValidationMessage.Text = message;
             ValidationMessage.Visible = true;
         }
@@ -252,6 +365,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private string EncodeDisplayText(string value)
         {
+            // <lang>
+            //   <zh-CN>历史创建人等字段可能已经实体化；显示前先解码再编码，避免重复实体显示。</zh-CN>
+            //   <en>Historical creator and similar fields may already be entity-encoded; decode before encoding to avoid repeated entity display.</en>
+            // </lang>
             return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
         }
     }

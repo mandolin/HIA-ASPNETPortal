@@ -20,6 +20,12 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public partial class EditImage : PortalPage<EditImage>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求中的模块实例标识，是图片设置读取、保存和编辑权限校验的共同边界。</zh-CN>
+        ///   <en>Module instance identifier for the current request, forming the shared boundary for image-setting reads, saves, and edit permission checks.</en>
+        /// </lang>
+        /// </summary>
         private int moduleId;
 
         /// <summary>
@@ -46,6 +52,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Initializes the module-edit request and binds existing settings on the first request.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面加载的 Web Forms 事件源。</zh-CN>
+        ///   <en>The Web Forms event source that triggered page loading.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；当前实现不读取其内容。</zh-CN>
+        ///   <en>The page-load event arguments; the current implementation does not read them.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!TryInitializeRequest())
@@ -58,6 +76,10 @@ namespace ASPNET.StarterKit.Portal
                 // <lang>
                 //   <zh-CN>首次加载只在模块编辑权限通过后读取模块设置，避免未授权用户探测图片资源配置。</zh-CN>
                 //   <en>Initial binding reads module settings only after edit permission succeeds, avoiding unauthorized probing of image-resource configuration.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>settings 是当前模块的持久化文本设置快照，只在首次加载时回填表单。</zh-CN>
+                //   <en>settings is the persisted text-setting snapshot for the current module and is used only to fill the form on first load.</en>
                 // </lang>
                 Hashtable settings = ModulesConfig.GetModuleSettings(moduleId);
                 Src.Text = settings["src"] as string;
@@ -79,13 +101,33 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Saves validated image-address and dimension settings.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发保存命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the save command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>保存命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The save-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>保存前重新校验模块权限，避免只凭首次加载状态写入设置。</zh-CN>
+            //   <en>Module permission is checked again before saving so settings are not written based only on first-load state.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>imageUrl、width 和 height 都保存经过策略或格式校验后的文本值，不直接持久化原始输入。</zh-CN>
+            //   <en>imageUrl, width, and height persist policy- or format-validated text values rather than raw input.</en>
+            // </lang>
             string imageUrl;
             string width;
             string height;
@@ -111,6 +153,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>三个设置分开写入沿用旧模块设置表契约；本页不处理图片二进制或上传目录。</zh-CN>
+            //   <en>The three settings are written separately to keep the legacy module-settings table contract; this page does not handle image binaries or upload directories.</en>
+            // </lang>
             ModulesConfig.UpdateModuleSetting(moduleId, "src", imageUrl);
             ModulesConfig.UpdateModuleSetting(moduleId, "height", height);
             ModulesConfig.UpdateModuleSetting(moduleId, "width", width);
@@ -123,8 +169,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Cancels editing and returns to a safe URL.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发取消命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the cancel command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>取消命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The cancel-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void CancelBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>取消不会写入图片设置，但仍重新校验请求后才使用安全回跳地址。</zh-CN>
+            //   <en>Cancel does not write image settings, but still revalidates the request before using the safe return URL.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
@@ -147,6 +209,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryInitializeRequest()
         {
+            // <lang>
+            //   <zh-CN>模块标识决定设置记录和编辑权限范围；非法模块或无权限请求统一拒绝。</zh-CN>
+            //   <en>The module identifier determines the setting row and edit-permission scope; invalid or unauthorized requests are denied uniformly.</en>
+            // </lang>
             if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
                 !PortalSecurity.HasEditPermissions(moduleId))
             {
@@ -178,12 +244,20 @@ namespace ASPNET.StarterKit.Portal
             string normalizedUrl;
             if (TryNormalizeOptionalBrowseUrl(rawSource, out normalizedUrl) && !string.IsNullOrWhiteSpace(normalizedUrl))
             {
+                // <lang>
+                //   <zh-CN>预览只使用已归一化地址，避免把被拒绝的原始输入写回 Image 控件。</zh-CN>
+                //   <en>The preview uses only the normalized address so rejected raw input is not written back to the Image control.</en>
+                // </lang>
                 ImagePreview.ImageUrl = normalizedUrl;
                 ImagePreviewPanel.Visible = true;
                 return;
             }
 
             ImagePreview.ImageUrl = string.Empty;
+            // <lang>
+            //   <zh-CN>没有可用地址时隐藏预览面板，避免界面显示破损图片或泄露输入。</zh-CN>
+            //   <en>When no usable address exists, the preview panel is hidden to avoid showing a broken image or leaking input.</en>
+            // </lang>
             ImagePreviewPanel.Visible = false;
         }
 
@@ -215,10 +289,18 @@ namespace ASPNET.StarterKit.Portal
         {
             if (string.IsNullOrWhiteSpace(value))
             {
+                // <lang>
+                //   <zh-CN>图片地址允许清空；空输入保存为空字符串并关闭预览。</zh-CN>
+                //   <en>The image URL may be cleared; blank input persists as an empty string and disables preview.</en>
+                // </lang>
                 normalizedUrl = string.Empty;
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非空地址必须通过统一浏览 URL 策略，避免设置页绕过前台图片渲染限制。</zh-CN>
+            //   <en>Non-empty addresses must pass the shared browse-URL policy so the settings page cannot bypass front-end image rendering constraints.</en>
+            // </lang>
             return PortalNavigationPolicy.TryNormalizeBrowseUrl(value, Request, out normalizedUrl);
         }
 
@@ -248,12 +330,20 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static bool TryNormalizeDimension(string value, out string normalizedValue)
         {
+            // <lang>
+            //   <zh-CN>输出值先清空，保证任何失败分支都不会保留旧解析结果。</zh-CN>
+            //   <en>The output value is cleared first so no failure path retains an old parse result.</en>
+            // </lang>
             normalizedValue = string.Empty;
             if (string.IsNullOrWhiteSpace(value))
             {
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>dimension 是管理员输入解析出的像素数，只接受非负整数以保持旧 Web Forms 尺寸语义。</zh-CN>
+            //   <en>dimension is the pixel count parsed from administrator input, accepting only non-negative integers to preserve legacy Web Forms sizing semantics.</en>
+            // </lang>
             int dimension;
             if (!int.TryParse(value, out dimension) || dimension < 0)
             {
@@ -278,6 +368,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         private void ShowValidationMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>校验提示固定来自服务器端分支，不回显被拒绝的图片地址或尺寸文本。</zh-CN>
+            //   <en>The validation notice comes from fixed server-side branches and does not echo rejected image URLs or dimension text.</en>
+            // </lang>
             ValidationMessage.Text = message;
             ValidationMessage.Visible = true;
         }

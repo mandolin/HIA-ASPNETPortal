@@ -18,7 +18,20 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public partial class EditContacts : PortalPage<EditContacts>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求中的联系人条目标识；0 表示创建新联系人。</zh-CN>
+        ///   <en>Contact item identifier for the current request; 0 means a new contact is being created.</en>
+        /// </lang>
+        /// </summary>
         private int itemId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求中的模块实例标识，是编辑权限和联系人归属校验的共同边界。</zh-CN>
+        ///   <en>Module instance identifier for the current request, forming the shared boundary for edit permission and contact ownership checks.</en>
+        /// </lang>
+        /// </summary>
         private int moduleId;
 
         /// <summary>
@@ -45,8 +58,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Initializes request context, verifies edit permission and existing-item ownership, and binds the form on the first request.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面加载的 Web Forms 事件源。</zh-CN>
+        ///   <en>The Web Forms event source that triggered page loading.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；当前实现不读取其内容。</zh-CN>
+        ///   <en>The page-load event arguments; the current implementation does not read them.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>item 是通过权限与归属校验后的联系人快照；新增联系人时保持为空。</zh-CN>
+            //   <en>item is the contact snapshot after permission and ownership validation; it remains null when creating a new contact.</en>
+            // </lang>
             IContactItem item;
             if (!TryInitializeRequest(out item))
             {
@@ -67,6 +96,10 @@ namespace ASPNET.StarterKit.Portal
                     Contact1Field.Text = item.Contact1;
                     Contact2Field.Text = item.Contact2;
                     CreatedBy.Text = EncodeDisplayText(item.CreatedByUser);
+                    // <lang>
+                    //   <zh-CN>创建时间只作为历史展示字段回填，不参与联系人保存或授权判断。</zh-CN>
+                    //   <en>The creation date is filled only as a historical display field and does not participate in contact saving or authorization.</en>
+                    // </lang>
                     CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
                 }
 
@@ -84,8 +117,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Creates or updates an authorized contact and returns to a safe URL inside the current application.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发保存命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the save command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>保存命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The save-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>保存前重新初始化请求，确保联系人归属与模块编辑权限来自服务器端实时校验。</zh-CN>
+            //   <en>The request is initialized again before saving so contact ownership and module edit permission come from live server-side validation.</en>
+            // </lang>
             IContactItem item;
             if (!TryInitializeRequest(out item) || !Page.IsValid)
             {
@@ -120,8 +169,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Deletes a contact whose ownership has been verified.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发删除命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the delete command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>删除命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The delete-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void DeleteBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>删除路径重新校验请求，避免仅凭 ItemId 触发跨模块删除。</zh-CN>
+            //   <en>The delete path revalidates the request, preventing cross-module deletion based only on ItemId.</en>
+            // </lang>
             IContactItem item;
             if (!TryInitializeRequest(out item))
             {
@@ -130,6 +195,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (itemId != 0)
             {
+                // <lang>
+                //   <zh-CN>只有既有联系人且已确认属于当前模块时才调用数据层删除。</zh-CN>
+                //   <en>The data layer is called only for an existing contact already confirmed to belong to the current module.</en>
+                // </lang>
                 ContactsDB.DeleteContact(itemId);
             }
 
@@ -142,8 +211,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Cancels editing and returns to a safe URL.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发取消命令的提交控件。</zh-CN>
+        ///   <en>The submit control that raised the cancel command.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>取消命令事件参数；当前实现不读取额外状态。</zh-CN>
+        ///   <en>The cancel-command event arguments; no additional state is read by the current implementation.</en>
+        /// </l>
+        /// </param>
         protected void CancelBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>取消不写入联系人字段，但仍确认请求合法后才使用保存的安全回跳地址。</zh-CN>
+            //   <en>Cancel does not persist contact fields, but still confirms the request is valid before using the stored safe return URL.</en>
+            // </lang>
             IContactItem item;
             if (!TryInitializeRequest(out item))
             {
@@ -173,7 +258,15 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryInitializeRequest(out IContactItem item)
         {
+            // <lang>
+            //   <zh-CN>输出参数先清空，保证权限失败时不会把联系人快照交给调用方。</zh-CN>
+            //   <en>The output parameter is cleared first so authorization failures cannot pass a contact snapshot to callers.</en>
+            // </lang>
             item = null;
+            // <lang>
+            //   <zh-CN>模块标识是权限检查和新增联系人归属的根；非法模块直接进入受控拒绝页。</zh-CN>
+            //   <en>The module identifier is the root for permission checks and new-contact ownership; invalid modules go directly to the controlled denial page.</en>
+            // </lang>
             if (!PortalNavigationPolicy.TryReadPositiveInt32(Request.Params["Mid"], out moduleId) ||
                 !PortalSecurity.HasEditPermissions(moduleId))
             {
@@ -181,6 +274,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>ItemId 缺失表示新增联系人；非空值必须是正整数，避免 0 或负数伪装既有条目。</zh-CN>
+            //   <en>A missing ItemId means a new contact; non-empty values must be positive integers, preventing 0 or negative values from impersonating existing rows.</en>
+            // </lang>
             string requestedItemId = Request.Params["ItemId"];
             if (!string.IsNullOrWhiteSpace(requestedItemId) &&
                 !PortalNavigationPolicy.TryReadPositiveInt32(requestedItemId, out itemId))
@@ -191,9 +288,17 @@ namespace ASPNET.StarterKit.Portal
 
             if (itemId == 0)
             {
+                // <lang>
+                //   <zh-CN>新增路径没有既有联系人可做归属比对，模块编辑权限就是完整授权条件。</zh-CN>
+                //   <en>The creation path has no existing contact for ownership comparison, so module edit permission is the complete authorization condition.</en>
+                // </lang>
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>既有联系人重新从数据层读取并比对模块，避免通过 ItemId 直接引用其他模块记录。</zh-CN>
+            //   <en>Existing contacts are reloaded from the data layer and compared against the module to avoid direct references to another module's row via ItemId.</en>
+            // </lang>
             item = ContactsDB.GetSingleContact(itemId);
             if (item == null || item.ModuleId != moduleId)
             {
@@ -224,6 +329,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private string EncodeDisplayText(string value)
         {
+            // <lang>
+            //   <zh-CN>展示历史创建人等文本时先解码再编码，兼容旧实体存储并保持 HTML 文本节点安全。</zh-CN>
+            //   <en>When displaying historical creator text and similar values, decode before encoding to support legacy entity storage while keeping HTML text nodes safe.</en>
+            // </lang>
             return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
         }
     }
