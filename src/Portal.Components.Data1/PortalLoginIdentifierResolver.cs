@@ -18,8 +18,28 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     internal sealed class PortalLoginIdentifierResolver
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前调用持有的安全 EF 上下文，仅用于受控标识查询，不验证密码或授予角色。</zh-CN>
+        ///   <en>Security EF context held for the current call, used only for controlled identifier queries and never for password validation or role grants.</en>
+        /// </lang>
+        /// </summary>
         private readonly PortalSecurityDbContext context;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户资料扩展表是否可用；不可用时解析安全地跳过资料登录名和资料邮箱来源。</zh-CN>
+        ///   <en>Whether the user-profile extension table is available; when unavailable, resolution safely skips profile login-name and profile-email sources.</en>
+        /// </lang>
+        /// </summary>
         private readonly bool userProfilesAvailable;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工及绑定表是否可用；不可用时工号解析被显式跳过。</zh-CN>
+        ///   <en>Whether employee and binding tables are available; when unavailable, employee-code resolution is explicitly skipped.</en>
+        /// </lang>
+        /// </summary>
         private readonly bool employeeCodeSignInAvailable;
 
         /// <summary>
@@ -51,8 +71,22 @@ namespace ASPNET.StarterKit.Portal
             bool userProfilesAvailable,
             bool employeeCodeSignInAvailable)
         {
+            // <lang>
+            //   <zh-CN>保存当前安全查询上下文；其生命周期由调用方数据访问操作限定。</zh-CN>
+            //   <en>Store the current security-query context; its lifetime is bounded by the caller's data-access operation.</en>
+            // </lang>
             this.context = context;
+
+            // <lang>
+            //   <zh-CN>保存资料表可用性快照，避免每个解析分支重复探测数据库 schema。</zh-CN>
+            //   <en>Store the profile-table availability snapshot, avoiding repeated database-schema probing in every resolution branch.</en>
+            // </lang>
             this.userProfilesAvailable = userProfilesAvailable;
+
+            // <lang>
+            //   <zh-CN>保存员工工号解析依赖表可用性快照，不把工号当作独立凭据。</zh-CN>
+            //   <en>Store the availability snapshot for employee-code resolution dependencies and never treat an employee code as a standalone credential.</en>
+            // </lang>
             this.employeeCodeSignInAvailable = employeeCodeSignInAvailable;
         }
 
@@ -82,6 +116,10 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         internal PortalLoginIdentifierResolution Resolve(string input)
         {
+            // <lang>
+            //   <zh-CN>裁剪一次性登录输入；空白输入立即得到终止性未命中，不访问数据库。</zh-CN>
+            //   <en>Trim the one-time sign-in input; blank input immediately yields terminal not-found without database access.</en>
+            // </lang>
             string normalizedInput = Normalize(input);
             if (string.IsNullOrEmpty(normalizedInput))
             {
@@ -90,6 +128,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (userProfilesAvailable)
             {
+                // <lang>
+                //   <zh-CN>先查询资料表中应唯一的登录名；歧义是终止性安全结果，未命中才允许继续旧来源。</zh-CN>
+                //   <en>Query the profile table's expected-unique login name first; ambiguity is terminal and safe, while no match alone permits legacy sources to continue.</en>
+                // </lang>
                 PortalLoginIdentifierResolution profileLoginName = ResolveSingle(
                     "SELECT TOP (2) [UserId] FROM [dbo].[PortalBiz_UserProfiles] WHERE [LoginName] = @p0",
                     normalizedInput);
@@ -99,6 +141,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>查询旧用户表名称，保留与资料来源相同的唯一/歧义判定语义。</zh-CN>
+            //   <en>Query the legacy user-table name while retaining the same unique-versus-ambiguous decision semantics as the profile source.</en>
+            // </lang>
             PortalLoginIdentifierResolution legacyName = ResolveSingle(
                 "SELECT TOP (2) [UserID] FROM [dbo].[Portal_Users] WHERE [Name] = @p0",
                 normalizedInput);
@@ -109,6 +155,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (employeeCodeSignInAvailable)
             {
+                // <lang>
+                //   <zh-CN>仅在员工和绑定表可用时尝试工号，并要求两端 Active 才返回门户用户。</zh-CN>
+                //   <en>Attempt employee code only when employee and binding tables are available, requiring both sides to be Active before returning a portal user.</en>
+                // </lang>
                 PortalLoginIdentifierResolution employeeCode = ResolveEmployeeCode(normalizedInput);
                 if (employeeCode.HasDecision)
                 {
@@ -171,10 +221,18 @@ WHERE [Binding].[BindingStatus] = N'Active'
         /// </returns>
         private PortalLoginIdentifierResolution ResolveEmail(string normalizedInput)
         {
+            // <lang>
+            //   <zh-CN>暂存新旧来源的候选用户标识；集合只在当前解析中存活，不保存邮箱原文。</zh-CN>
+            //   <en>Hold candidate user ids from new and legacy sources; the collection lives only during current resolution and does not retain raw email text.</en>
+            // </lang>
             var ids = new List<int>();
 
             if (userProfilesAvailable)
             {
+                // <lang>
+                //   <zh-CN>合并资料扩展表邮箱候选；后续会去重并至多保留两个以识别歧义。</zh-CN>
+                //   <en>Merge profile-extension email candidates; later processing de-duplicates and retains at most two to identify ambiguity.</en>
+                // </lang>
                 ids.AddRange(QueryIds(
                     "SELECT [UserId] FROM [dbo].[PortalBiz_UserProfiles] WHERE [PreferredEmail] = @p0",
                     normalizedInput));
@@ -184,6 +242,10 @@ WHERE [Binding].[BindingStatus] = N'Active'
                 "SELECT [UserID] FROM [dbo].[Portal_Users] WHERE [Email] = @p0",
                 normalizedInput));
 
+            // <lang>
+            //   <zh-CN>按用户标识去重并截断为两个候选；一个即唯一，两个即歧义，无需扫描全部记录。</zh-CN>
+            //   <en>De-duplicate by user id and cap at two candidates; one is unique and two are ambiguous without scanning all records.</en>
+            // </lang>
             List<int> distinctIds = ids.Distinct().Take(2).ToList();
             if (distinctIds.Count == 1)
             {
@@ -221,6 +283,10 @@ WHERE [Binding].[BindingStatus] = N'Active'
         /// </returns>
         private PortalLoginIdentifierResolution ResolveSingle(string sql, string normalizedInput)
         {
+            // <lang>
+            //   <zh-CN>取得应唯一字段的至多两个不同用户标识，保留未命中但可继续的语义。</zh-CN>
+            //   <en>Retrieve at most two distinct user ids for an expected-unique field while retaining no-match-but-may-continue semantics.</en>
+            // </lang>
             List<int> ids = QueryIds(sql, normalizedInput).Distinct().Take(2).ToList();
             if (ids.Count == 1)
             {
@@ -260,6 +326,10 @@ WHERE [Binding].[BindingStatus] = N'Active'
         {
             try
             {
+                // <lang>
+                //   <zh-CN>执行调用点提供的受控 SQL 模板，并把登录输入作为 EF 参数传入；不拼接用户输入。</zh-CN>
+                //   <en>Execute the controlled SQL template supplied by the call site and pass sign-in input as an EF parameter; user input is never concatenated.</en>
+                // </lang>
                 return context.Database.SqlQuery<int>(sql, normalizedInput).ToList();
             }
             catch (Exception)
@@ -342,9 +412,28 @@ WHERE [Binding].[BindingStatus] = N'Active'
         /// </param>
         private PortalLoginIdentifierResolution(bool found, bool ambiguous, bool hasDecision, int userId)
         {
+            // <lang>
+            //   <zh-CN>保存唯一命中状态；false 不区分未命中和歧义，需结合其他标志读取。</zh-CN>
+            //   <en>Store unique-found state; false alone does not distinguish no match from ambiguity and must be read with the other flags.</en>
+            // </lang>
             Found = found;
+
+            // <lang>
+            //   <zh-CN>保存歧义状态；歧义绝不选择任一候选账号。</zh-CN>
+            //   <en>Store ambiguity state; ambiguity never selects either candidate account.</en>
+            // </lang>
             Ambiguous = ambiguous;
+
+            // <lang>
+            //   <zh-CN>保存当前路径是否终止，供调用方决定是否继续尝试后续身份来源。</zh-CN>
+            //   <en>Store whether the current path is terminal so callers can decide whether to try subsequent identity sources.</en>
+            // </lang>
             HasDecision = hasDecision;
+
+            // <lang>
+            //   <zh-CN>保存唯一命中的门户用户标识；非唯一结果固定为 0，不能作为登录主体使用。</zh-CN>
+            //   <en>Store the uniquely matched portal user id; non-unique results are fixed to 0 and cannot be used as a sign-in principal.</en>
+            // </lang>
             UserId = userId;
         }
 
