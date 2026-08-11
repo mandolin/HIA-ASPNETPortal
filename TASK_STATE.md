@@ -989,7 +989,10 @@
 | P26.5ss 选片 | 已选择 `PortalBiz_BusinessApplications.sql`、`PortalBiz_CollaborationItems.sql`、`PortalBiz_WorkItems.sql`、`PortalBiz_CollaborationItemEvents.sql`、`PortalBiz_WorkflowEvents.sql` 与 `PortalBiz_WorkItemEvents.sql` 的业务流程 SQL 迁移脚本；覆盖业务申请、协作事项、工作事项事实表及其追加式事件流；真实 SQL 执行、数据库写入、账号、凭据、IIS/HTTP、浏览器 proof 与大型 setup 脚本排除。见 [P26.5ss 选片](work-zone/dev/plans/W-anp-P26.5ss-business-workflow-sql-rop-selection.md)。 |
 | P26.5st 注释补强 | 已为 6 个目标 SQL 补充或迁移合法 `/* <lang> ... */` 与 `-- <lang>` ROP 注释，目标 `<lang>` 总数 `77`，覆盖脚本幂等、表/约束/索引、UTC 时间、来源追溯、追加式事件、低敏 Actor 和查询边界；新增非注释 SQL `0`。见 [P26.5st 结果](work-zone/dev/plans/W-anp-P26.5st-business-workflow-sql-rop-result.md)。 |
 | P26.5su 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 和未冻结注释机制扫描均通过；未执行真实 SQL Server 迁移、SQL 解析器 proof、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5su 审计](work-zone/dev/plans/W-anp-P26.5su-business-workflow-sql-rop-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5sv：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 clean C# XML 文档表面、主题/模块 XML 表面、`gulpfile.js`、业务模块 CSS、配置 SQL 或本轮业务流程 SQL。 |
+| P26.5sv 选片 | 已选择 `PortalBiz_OrganizationUnits.sql`、`PortalBiz_Employees.sql`、`PortalBiz_UserProfiles.sql`、`PortalBiz_UserEmployeeBindings.sql`、`PortalBiz_EmployeeProfileConfirmations.sql`、`PortalBiz_EmployeeProfileCorrectionRequests.sql` 与 `PortalBiz_ReferenceData.sql` 的员工身份/组织目录/参考数据 SQL 迁移脚本；覆盖组织树、员工主数据、旧用户资料扩展、账号-员工绑定、资料确认/更正和参考数据 seed；真实 SQL 执行、数据库写入、账号、凭据、IIS/HTTP、浏览器 proof 与大型 setup 脚本排除。见 [P26.5sv 选片](work-zone/dev/plans/W-anp-P26.5sv-identity-reference-sql-rop-selection.md)。 |
+| P26.5sw 注释补强 | 已为 7 个目标 SQL 补充或迁移合法 `/* <lang> ... */` 与 `-- <lang>` ROP 注释，目标 `<lang>` 总数 `87`，覆盖单父级组织树、员工低敏主数据、旧用户资料 seed、唯一 Active 绑定、确认快照、更正审核状态和参考数据稳定键；新增非注释 SQL `0`。见 [P26.5sw 结果](work-zone/dev/plans/W-anp-P26.5sw-identity-reference-sql-rop-result.md)。 |
+| P26.5sx 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 和未冻结注释机制扫描均通过；未执行真实 SQL Server 迁移、SQL 解析器 proof、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5sx 审计](work-zone/dev/plans/W-anp-P26.5sx-identity-reference-sql-rop-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5sy：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 clean C# XML 文档表面、主题/模块 XML 表面、`gulpfile.js`、业务模块 CSS、配置 SQL、业务流程 SQL 或本轮员工身份/参考数据 SQL。 |
 
 ## Known Residual Working Tree Items
 
