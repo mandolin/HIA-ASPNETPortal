@@ -96,6 +96,10 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         public override string ToString()
         {
+            // <lang>
+            //   <zh-CN>诊断摘要保留标题和创建人原文快照，调用方不能把它视为已编码的用户界面文本。</zh-CN>
+            //   <en>The diagnostic summary preserves raw title and creator snapshots, so callers must not treat it as already encoded UI text.</en>
+            // </lang>
             return $"[{ItemID}] {Title} - {CreatedByUser} ({CreatedDate:yyyy-MM-dd HH:mm})";
         }
 

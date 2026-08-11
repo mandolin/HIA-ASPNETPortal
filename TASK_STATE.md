@@ -953,7 +953,10 @@
 | P26.5rh 选片 | 已选择 `DiscussionsDb.cs` 的旧讨论区存储过程数据访问实现；覆盖连接串引用、顶级主题读取、回复线程读取、单条消息详情读取、新增消息写入、输出参数和兼容回退；真实数据库、SQL 运行时、IIS/HTTP、浏览器与凭据 proof 排除。见 [P26.5rh 选片](work-zone/dev/plans/W-anp-P26.5rh-discussion-db-selection.md)。 |
 | P26.5ri 注释补强 | 已为 `DiscussionsDb.cs` 补充 124 行中英双语 inline ROP 注释；文件 `<lang>` `14→43`，新增非注释代码 `0`。见 [P26.5ri 结果](work-zone/dev/plans/W-anp-P26.5ri-discussion-db-result.md)。 |
 | P26.5rj 静态验证 | 通过；目标文件差异全部为 inline 注释，注释-only 扫描 `ADDED_COUNT=124`、`NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal `1923`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过。真实数据库、讨论主题/回复创建、SQL 存储过程运行时、IIS/HTTP、浏览器与凭据 proof 未执行。见 [P26.5rj 审计](work-zone/dev/plans/W-anp-P26.5rj-discussion-db-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5rk：重新读取最新账本和源码盘点，选择下一条未重复、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5rh-ri-rj。 |
+| P26.5rk 选片 | 已选择 `Discussion.ascx.cs`、`DiscussDetails.aspx.cs`、`Discussion.ascx.designer.cs` 与 `DiscussionItem.cs` 的讨论区前台职责链；覆盖顶级主题/回复列表、详情页新建/回复、请求标识、模块权限、HTML 编码兼容、Designer 字段容器和诊断摘要边界；已有历史修改的 `DiscussDetails.aspx.designer.cs` 排除。见 [P26.5rk 选片](work-zone/dev/plans/W-anp-P26.5rk-discussion-frontend-selection.md)。 |
+| P26.5rl 注释补强 | 已为 4 个目标文件补充中英双语 XML/inline ROP 注释；新增覆盖字段状态、私有 helper 文档、参数/返回、局部变量、回发状态、`DisplayOrder` 层级计算、命令白名单、写入后重绑和生成文件重生成风险；新增非注释代码 `0`。见 [P26.5rl 结果](work-zone/dev/plans/W-anp-P26.5rl-discussion-frontend-result.md)。 |
+| P26.5rm 静态验证 | 通过；去注释后与 HEAD 代码 fingerprint 一致，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1926`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实数据库、讨论发帖、IIS/HTTP、浏览器、真实账号、凭据和发布 proof 未执行。见 [P26.5rm 审计](work-zone/dev/plans/W-anp-P26.5rm-discussion-frontend-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5rn：重新读取最新源码盘点，选择下一组未重复、同风险同验证路径且仍存在明确语义缺口的 clean 职责链；不重复 P26.5rk-rm。 |
 
 ## Known Residual Working Tree Items
 
@@ -971,6 +974,7 @@
 | P26.5jn 首次 Debug/XML 验证 | adjusted | 新增授权快照参数文档遗漏两个 `</l>`，构建给出 CS1570；补齐闭合标签后仅重跑一次，最终构建和 XML gate 通过。 |
 | P26.5qy 文本规范化首次 EOF/CRLF 检查 | adjusted | 首次机械规范化留下新增 EOF 空白行，第二次只修 EOF 时又保留正文 LF；改为剥离末尾换行、正文统一 CRLF 后复核通过，未改变代码语义。 |
 | P26.5rb clean-file 选片命令 | adjusted | 首次命令因 PowerShell 字符串引号解析失败未执行，未改文件；改用 `git ls-files -m` 与 `git ls-files` 组合后完成只读筛选。 |
+| P26.5rk 初始注释-only 增行扫描 | adjusted | 一处旧行尾中文注释迁移为前置双语块后，简单新增行扫描把 unchanged code + removed trailing comment 识别为 `NONCOMMENT_COUNT=1`；改用去注释后与 HEAD code fingerprint 对比通过，确认语义代码未变。 |
 
 ## Anti-Loop Guard
 

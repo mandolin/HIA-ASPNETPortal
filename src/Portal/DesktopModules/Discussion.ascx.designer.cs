@@ -9,6 +9,12 @@ namespace ASPNET.StarterKit.Portal
 {
 
 
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>讨论列表用户控件的 Designer 字段容器；字段由标记层服务器控件生成。</zh-CN>
+    ///   <en>Designer field container for the discussion-list user control; fields are generated from server controls in markup.</en>
+    /// </lang>
+    /// </summary>
     public partial class Discussion
     {
 

@@ -18,7 +18,20 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public partial class DiscussDetails : PortalPage<DiscussDetails>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求解析出的讨论消息标识；0 表示正在创建顶级主题。</zh-CN>
+        ///   <en>Discussion message identifier parsed from the current request; 0 means a top-level topic is being created.</en>
+        /// </lang>
+        /// </summary>
         private int itemId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求解析出的讨论模块实例标识，是权限检查和消息归属校验的共同边界。</zh-CN>
+        ///   <en>Discussion module instance identifier parsed from the current request, forming the shared boundary for permission and message-ownership checks.</en>
+        /// </lang>
+        /// </summary>
         private int moduleId;
 
         /// <summary>
@@ -81,6 +94,10 @@ namespace ASPNET.StarterKit.Portal
                     return;
                 }
 
+                // <lang>
+                //   <zh-CN>新增主题没有原始消息详情可显示，因此直接切换到编辑面板并隐藏详情页动作区。</zh-CN>
+                //   <en>A new topic has no original message detail to display, so the page switches directly to the editor and hides detail actions.</en>
+                // </lang>
                 EditPanel.Visible = true;
                 ButtonPanel.Visible = false;
                 return;
@@ -97,6 +114,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (!canEdit)
             {
+                // <lang>
+                //   <zh-CN>访客仍可读取消息详情，但不能看到回复入口；真正写入仍由回发授权再次校验。</zh-CN>
+                //   <en>Visitors may still read message details but cannot see the reply entry; write attempts are rechecked on postback authorization.</en>
+                // </lang>
                 ReplyBtn.Visible = false;
             }
         }
@@ -126,6 +147,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>回复动作只改变服务器控件可见性，原始消息内容保留在详情区作为上下文。</zh-CN>
+            //   <en>The reply action changes only server-control visibility, while the original message content remains in the detail area as context.</en>
+            // </lang>
             EditPanel.Visible = true;
             ButtonPanel.Visible = false;
         }
@@ -161,6 +186,11 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             itemId = DiscussionDB.AddMessage(moduleId, itemId, User.Identity.Name,
                 Server.HtmlEncode(TitleField.Text), Server.HtmlEncode(BodyField.Text));
+
+            // <lang>
+            //   <zh-CN>写入成功后用新消息标识重新显示详情，避免用户停留在可重复提交的编辑面板。</zh-CN>
+            //   <en>After a successful write, the new message identifier is used to redisplay details so the user does not remain on a repeatedly submittable editor.</en>
+            // </lang>
             EditPanel.Visible = false;
             ButtonPanel.Visible = true;
             BindData();
@@ -191,6 +221,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>取消只恢复详情动作区，不清理数据库或请求标识；当前页面仍指向同一讨论消息。</zh-CN>
+            //   <en>Cancel only restores the detail action area and does not clear database state or request identifiers; the page still points to the same discussion message.</en>
+            // </lang>
             EditPanel.Visible = false;
             ButtonPanel.Visible = true;
         }
@@ -219,9 +253,17 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>ItemId 是可选请求参数；缺失表示从模块标题栏进入“新增主题”路径。</zh-CN>
+            //   <en>ItemId is an optional request parameter; when absent, the module-title entry is opening the "new topic" path.</en>
+            // </lang>
             string requestedItemId = Request.Params["ItemId"];
             if (string.IsNullOrWhiteSpace(requestedItemId))
             {
+                // <lang>
+                //   <zh-CN>用 0 作为服务器内部的新主题哨兵值，但不接受客户端显式传入 0。</zh-CN>
+                //   <en>Use 0 as the server-internal sentinel for a new topic, while still rejecting an explicit client-supplied 0.</en>
+                // </lang>
                 itemId = 0;
                 return true;
             }
@@ -272,6 +314,10 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>回复必须确认消息真实存在并归属于当前模块，避免用合法权限编辑其他模块的消息。</zh-CN>
             //   <en>Replies must confirm that the message exists and belongs to the current module, avoiding edits to another module's message with otherwise valid permissions.</en>
             // </lang>
+            // <lang>
+            //   <zh-CN>父消息快照只用于归属校验；它不授权跨模块写入，也不把正文回填给编辑框。</zh-CN>
+            //   <en>The parent-message snapshot is used only for ownership checks; it does not authorize cross-module writes or populate the editor body.</en>
+            // </lang>
             IDiscussionItem item = DiscussionDB.GetSingleMessage(itemId);
             if (item == null || item.ModuleID != moduleId)
             {
@@ -296,6 +342,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool BindData()
         {
+            // <lang>
+            //   <zh-CN>详情快照必须从当前消息标识重新读取，防止回发期间使用过期或跨模块缓存对象。</zh-CN>
+            //   <en>The detail snapshot must be reloaded from the current message identifier to avoid using stale or cross-module cached objects during postback.</en>
+            // </lang>
             IDiscussionItem item = DiscussionDB.GetSingleMessage(itemId);
             if (item == null || item.ModuleID != moduleId)
             {
@@ -311,7 +361,17 @@ namespace ASPNET.StarterKit.Portal
             Body.Text = EncodeDisplayText(item.Body);
             CreatedByUser.Text = EncodeDisplayText(item.CreatedByUser ?? "匿名");
             CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("d") : "未知时间";
+
+            // <lang>
+            //   <zh-CN>回复标题使用解码后的主题文本生成，避免把历史实体文本继续累积到输入框中。</zh-CN>
+            //   <en>The reply title is generated from decoded subject text so historical entity text does not keep accumulating in the input box.</en>
+            // </lang>
             TitleField.Text = ReTitle(Server.HtmlDecode(item.Title ?? string.Empty));
+
+            // <lang>
+            //   <zh-CN>上一条/下一条链接在旧页面中未实现，绑定阶段保持隐藏以免暴露空导航锚点。</zh-CN>
+            //   <en>Previous/next links are not implemented in the legacy page, so binding keeps them hidden to avoid exposing empty navigation anchors.</en>
+            // </lang>
             prevItem.Visible = false;
             nextItem.Visible = false;
             return true;
@@ -337,6 +397,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private string ReTitle(string title)
         {
+            // <lang>
+            //   <zh-CN>该 helper 保持旧讨论体验：空标题不强补文本，已有回复前缀也不会重复叠加。</zh-CN>
+            //   <en>This helper preserves the legacy discussion experience: empty titles are not forced, and existing reply prefixes are not duplicated.</en>
+            // </lang>
             return string.IsNullOrEmpty(title) || title.StartsWith("Re: ", StringComparison.Ordinal)
                 ? title
                 : "Re: " + title;
@@ -362,6 +426,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private string EncodeDisplayText(string value)
         {
+            // <lang>
+            //   <zh-CN>显示路径先解码历史实体再重新编码，统一处理旧数据和本次提交的新文本。</zh-CN>
+            //   <en>The display path decodes historical entities before encoding again, treating legacy rows and newly submitted text consistently.</en>
+            // </lang>
             return Server.HtmlEncode(Server.HtmlDecode(value ?? string.Empty));
         }
     }

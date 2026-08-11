@@ -13,6 +13,12 @@ namespace ASPNET.StarterKit.Portal
     ///   <en>Renders discussion topics and replies for an expanded topic.</en>
     /// </lang>
     /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>控件保留旧 Web Forms DataList 展开/折叠模型：顶级主题由模块标识读取，选中项再按 <c>DisplayOrder</c> 读取回复。用户输入文本必须继续通过 code-behind helper 编码后进入标记层。</zh-CN>
+    ///   <en>The control preserves the legacy Web Forms DataList expand/collapse model: top-level topics are read by module identifier, and the selected item then loads replies by <c>DisplayOrder</c>. User-supplied text must continue to pass through code-behind encoding helpers before reaching markup.</en>
+    /// </lang>
+    /// </remarks>
     public partial class Discussion : PortalModuleControl<Discussion>
     {
         /// <summary>
@@ -36,6 +42,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Binds discussion topics on the first request.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面生命周期事件的控件实例。</zh-CN>
+        ///   <en>The control instance that raised the page lifecycle event.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件数据；当前实现不读取其内容。</zh-CN>
+        ///   <en>Page-load event data; the current implementation does not read its contents.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             // <lang>
@@ -48,10 +66,18 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
-        // <lang>
-        //   <zh-CN>列表会在展开/折叠命令后重绑，避免让模板直接承担状态转换逻辑。</zh-CN>
-        //   <en>The list is rebound after expand/collapse commands so the template does not own state transitions.</en>
-        // </lang>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把当前模块的顶级讨论主题绑定到外层列表。</zh-CN>
+        ///   <en>Binds the current module's top-level discussion topics to the outer list.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>列表会在展开/折叠命令后重绑，避免让模板直接承担状态转换逻辑；回复数据仍由选中项的数据绑定阶段按需读取。</zh-CN>
+        ///   <en>The list is rebound after expand/collapse commands so the template does not own state transitions; reply data is still loaded on demand during selected-item binding.</en>
+        /// </lang>
+        /// </remarks>
         private void BindList()
         {
             // <lang>
@@ -68,8 +94,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Reads replies for the currently expanded topic.</en>
         /// </lang>
         /// </summary>
+        /// <param name="displayOrder">
+        /// <l>
+        ///   <zh-CN>顶级主题的旧 <c>DisplayOrder</c> 路径；来自已绑定的数据项，而不是任意客户端输入。</zh-CN>
+        ///   <en>The top-level topic's legacy <c>DisplayOrder</c> path, coming from a bound data item rather than arbitrary client input.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>该父路径下的回复集合；展示层仍负责逐项编码。</zh-CN>
+        ///   <en>The replies under that parent path; the presentation layer remains responsible for per-item encoding.</en>
+        /// </l>
+        /// </returns>
         protected List<IDiscussionItem> GetThreadMessages(string displayOrder)
         {
+            // <lang>
+            //   <zh-CN>此 helper 只桥接模板绑定表达式和数据访问接口，不缓存回复集合，避免跨回发复用旧主题内容。</zh-CN>
+            //   <en>This helper only bridges the template binding expression to the data-access contract and does not cache replies, avoiding reuse of stale thread content across postbacks.</en>
+            // </lang>
             return DiscussionDB.GetThreadMessages(displayOrder);
         }
 
@@ -79,10 +121,30 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Binds replies for an expanded item during data binding.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发项绑定事件的外层 DataList。</zh-CN>
+        ///   <en>The outer DataList that raised the item-binding event.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>当前模板项和其数据对象。</zh-CN>
+        ///   <en>The current template item and its data object.</en>
+        /// </l>
+        /// </param>
         protected void TopLevelList_ItemDataBound(object sender, DataListItemEventArgs e)
         {
+            // <lang>
+            //   <zh-CN>只处理普通数据项；页眉、页脚和分隔项不携带讨论业务对象，不能参与回复绑定。</zh-CN>
+            //   <en>Only ordinary data items are processed; headers, footers, and separators do not carry discussion business objects and cannot bind replies.</en>
+            // </lang>
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                // <lang>
+                //   <zh-CN>当前顶级主题对象来自 DataList 数据源，生命周期只覆盖本次 ItemDataBound 回调。</zh-CN>
+                //   <en>The current top-level topic object comes from the DataList data source and lives only for this ItemDataBound callback.</en>
+                // </lang>
                 var item = (IDiscussionItem)e.Item.DataItem;
 
                 // <lang>
@@ -96,7 +158,7 @@ namespace ASPNET.StarterKit.Portal
                     //   <zh-CN>关键点：先记录顶级帖子的 DisplayOrder，再按该值读取它的所有回复。</zh-CN>
                     //   <en>Key point: record the top-level post DisplayOrder before loading all replies under that value.</en>
                     // </lang>
-                    _currentParentDisplayOrder = item.DisplayOrder; // 例如 "0001."
+                    _currentParentDisplayOrder = item.DisplayOrder;
 
                     // <lang>
                     //   <zh-CN>回复绑定限制在当前展开主题内，不改变顶级主题列表的选择状态。</zh-CN>
@@ -115,11 +177,31 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Formats a nullable date value.</en>
         /// </lang>
         /// </summary>
+        /// <param name="dateObj">
+        /// <l>
+        ///   <zh-CN>来自数据绑定表达式的候选创建时间，可能为 <c>null</c> 或 <see cref="DBNull"/>。</zh-CN>
+        ///   <en>Candidate creation time from a data-binding expression; it may be <c>null</c> or <see cref="DBNull"/>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前区域性的短日期时间文本；缺失时返回旧界面使用的中文占位文本。</zh-CN>
+        ///   <en>A short date-time string using the current culture, or the legacy Chinese placeholder when the value is missing.</en>
+        /// </l>
+        /// </returns>
         protected string FormatDate(object dateObj)
         {
+            // <lang>
+            //   <zh-CN>旧数据和 DataBinder 都可能以空引用或 DBNull 表示缺失时间；两者需要同一占位输出。</zh-CN>
+            //   <en>Legacy data and DataBinder may represent a missing date as either null or DBNull, so both need the same placeholder output.</en>
+            // </lang>
             if (dateObj == null || dateObj == DBNull.Value)
                 return "未知时间";
 
+            // <lang>
+            //   <zh-CN>格式化只发生在服务器端，返回值随后进入普通文本节点，不携带 HTML 标记。</zh-CN>
+            //   <en>Formatting happens only on the server, and the returned value later enters an ordinary text node without carrying HTML markup.</en>
+            // </lang>
             return ((DateTime)dateObj).ToString("g");
         }
 
@@ -129,8 +211,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Normalizes discussion text that may already be encoded into display text encoded exactly once for HTML output.</en>
         /// </lang>
         /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>来自数据绑定表达式的候选标题、作者或正文片段。</zh-CN>
+        ///   <en>Candidate title, author, or body fragment from a data-binding expression.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>适合写入 HTML 文本节点的编码文本。</zh-CN>
+        ///   <en>Encoded text suitable for writing into an HTML text node.</en>
+        /// </l>
+        /// </returns>
         protected string EncodeDisplayText(object value)
         {
+            // <lang>
+            //   <zh-CN>先解码再编码可以兼容已编码历史行，同时避免把新输入重复编码后显示为实体文本。</zh-CN>
+            //   <en>Decoding before encoding supports historically encoded rows while avoiding newly entered text being double-encoded into entity text.</en>
+            // </lang>
             return Server.HtmlEncode(Server.HtmlDecode(Convert.ToString(value) ?? string.Empty));
         }
 
@@ -140,18 +238,46 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Generates safe layout markup composed only from a computed indentation level.</en>
         /// </lang>
         /// </summary>
+        /// <param name="displayOrderObj">
+        /// <l>
+        ///   <zh-CN>来自绑定行的旧 <c>DisplayOrder</c> 值。</zh-CN>
+        ///   <en>The legacy <c>DisplayOrder</c> value from the bound row.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>用于树形缩进的受限 <c>span</c> 标记；没有缩进时返回空字符串。</zh-CN>
+        ///   <en>A constrained <c>span</c> fragment used for tree indentation, or an empty string when no indentation is needed.</en>
+        /// </l>
+        /// </returns>
         protected string GetIndentHtml(object displayOrderObj)
         {
+            // <lang>
+            //   <zh-CN>缺失排序路径时不生成占位标记，避免错误数据改变讨论行布局。</zh-CN>
+            //   <en>When the sort path is missing, no placeholder markup is emitted so malformed data does not alter the discussion-row layout.</en>
+            // </lang>
             if (displayOrderObj == null || displayOrderObj == DBNull.Value)
                 return string.Empty;
 
+            // <lang>
+            //   <zh-CN>DisplayOrder 是旧线程路径文本，只用于计算层级；不会原样拼接进返回的 HTML。</zh-CN>
+            //   <en>DisplayOrder is a legacy thread-path string used only to compute the level; it is never concatenated directly into returned HTML.</en>
+            // </lang>
             string displayOrder = displayOrderObj.ToString();
             if (string.IsNullOrEmpty(displayOrder))
                 return string.Empty;
 
+            // <lang>
+            //   <zh-CN>层级由点分段数推导，顶级或异常短路径不需要缩进。</zh-CN>
+            //   <en>The level is inferred from dot-separated segments, and top-level or unusually short paths need no indentation.</en>
+            // </lang>
             int level = displayOrder.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).Length - 1;
             if (level <= 0) return string.Empty;
 
+            // <lang>
+            //   <zh-CN>返回片段只包含由整数层级计算出的像素值，因此不引入来自数据库的 HTML 或样式文本。</zh-CN>
+            //   <en>The returned fragment contains only a pixel value calculated from an integer level, so it introduces no HTML or style text from the database.</en>
+            // </lang>
             return "<span style=\"margin-left:" + (level * 20) + "px;display:inline-block;\"></span>";
         }
 
@@ -161,6 +287,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Expands or collapses the selected topic.</en>
         /// </lang>
         /// </summary>
+        /// <param name="Sender">
+        /// <l>
+        ///   <zh-CN>触发列表命令的控件；保留旧签名大小写以匹配既有事件处理器。</zh-CN>
+        ///   <en>The control that raised the list command; the legacy parameter casing is preserved to match the existing event handler.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>包含命令源和当前列表项索引的 DataList 命令事件数据。</zh-CN>
+        ///   <en>DataList command event data containing the command source and current item index.</en>
+        /// </l>
+        /// </param>
         protected void TopLevelList_OnItemCommand(object Sender, DataListCommandEventArgs e)
         {
             // <lang>
@@ -168,6 +306,10 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Commands are limited to select/collapse values emitted by template buttons; any other command is ignored.</en>
             // </lang>
             LinkButton commandButton = e.CommandSource as LinkButton;
+            // <lang>
+            //   <zh-CN>将缺失或非 LinkButton 命令源折叠为空命令，使后续白名单分支统一拒绝。</zh-CN>
+            //   <en>Missing or non-LinkButton command sources are folded into an empty command so the later allow-list branch rejects them uniformly.</en>
+            // </lang>
             string command = commandButton == null ? string.Empty : commandButton.CommandName;
 
             // <lang>
@@ -188,6 +330,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>选择状态改变后立即重绑，确保选中模板和子回复列表与 DataList 状态同步。</zh-CN>
+            //   <en>After selected state changes, rebind immediately so the selected template and child reply list match the DataList state.</en>
+            // </lang>
             BindList();
         }
 
@@ -197,6 +343,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Builds a discussion-detail URL inside the current module.</en>
         /// </lang>
         /// </summary>
+        /// <param name="item">
+        /// <l>
+        ///   <zh-CN>当前讨论条目的数据库标识。</zh-CN>
+        ///   <en>The database identifier of the current discussion item.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>带消息标识和当前模块标识的站内详情页虚拟路径。</zh-CN>
+        ///   <en>An in-site detail-page virtual path carrying the message identifier and current module identifier.</en>
+        /// </l>
+        /// </returns>
         protected string FormatUrl(int item)
         {
             // <lang>
@@ -212,6 +370,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Selects an expand command by child-message count.</en>
         /// </lang>
         /// </summary>
+        /// <param name="count">
+        /// <l>
+        ///   <zh-CN>当前主题的直接子回复数量。</zh-CN>
+        ///   <en>The current topic's direct child-reply count.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>可展开时返回 <c>select</c>；否则返回空命令以禁止无意义回发。</zh-CN>
+        ///   <en>Returns <c>select</c> when expansion is available, otherwise an empty command to suppress meaningless postbacks.</en>
+        /// </l>
+        /// </returns>
         protected string NodeCommandName(int count)
         {
             // <lang>
@@ -227,8 +397,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Determines whether a topic has replies that can be expanded.</en>
         /// </lang>
         /// </summary>
+        /// <param name="count">
+        /// <l>
+        ///   <zh-CN>当前主题的直接子回复数量。</zh-CN>
+        ///   <en>The current topic's direct child-reply count.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>存在至少一个子回复时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when at least one child reply exists.</en>
+        /// </l>
+        /// </returns>
         protected bool HasChildMessages(int count)
         {
+            // <lang>
+            //   <zh-CN>该返回值同时驱动按钮可用性和展开命令，保持视觉状态与服务器端回发语义一致。</zh-CN>
+            //   <en>This return value drives both button enablement and expand command behavior, keeping visual state aligned with server-side postback semantics.</en>
+            // </lang>
             return count > 0;
         }
 
@@ -238,8 +424,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Returns the text shown in the left-side topic status button.</en>
         /// </lang>
         /// </summary>
+        /// <param name="count">
+        /// <l>
+        ///   <zh-CN>当前主题的直接子回复数量。</zh-CN>
+        ///   <en>The current topic's direct child-reply count.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>有回复时显示展开动作文本；无回复时显示静态主题状态文本。</zh-CN>
+        ///   <en>Shows expansion action text when replies exist; otherwise shows static thread-state text.</en>
+        /// </l>
+        /// </returns>
         protected string NodeToggleText(int count)
         {
+            // <lang>
+            //   <zh-CN>文案与命令启用条件共用同一个数量判断，避免“可点/不可点”状态在界面上分裂。</zh-CN>
+            //   <en>The label shares the same count check as command enablement so clickable and non-clickable states do not diverge in the UI.</en>
+            // </lang>
             return count > 0 ? "Expand" : "Thread";
         }
 
@@ -249,8 +451,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Returns the left-side topic status-button classes, visually separating expandable and empty topics.</en>
         /// </lang>
         /// </summary>
+        /// <param name="count">
+        /// <l>
+        ///   <zh-CN>当前主题的直接子回复数量。</zh-CN>
+        ///   <en>The current topic's direct child-reply count.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>主题化按钮 CSS 类；无回复主题额外附加空状态类。</zh-CN>
+        ///   <en>The themed button CSS classes, with an additional empty-state class for topics without replies.</en>
+        /// </l>
+        /// </returns>
         protected string NodeToggleCssClass(int count)
         {
+            // <lang>
+            //   <zh-CN>类名仍包含旧 CommandButton 以兼容既有样式，再叠加门户主题类表达现代视觉状态。</zh-CN>
+            //   <en>The class list keeps the legacy CommandButton class for existing styles and layers portal theme classes for the modern visual state.</en>
+            // </lang>
             return count > 0
                 ? "CommandButton portal-discussion-toggle portal-secondary-action"
                 : "CommandButton portal-discussion-toggle portal-secondary-action portal-discussion-toggle-empty";
