@@ -986,7 +986,10 @@
 | P26.5sp 选片 | 已选择 `PortalCfg_TabThemeOverrides.sql`、`PortalCfg_OperationAudits.sql`、`PortalCfg_RolePermissions.sql` 与 `PortalCfg_UserRegistration.sql` 的配置/安全/审计 SQL 迁移脚本；覆盖主题覆盖、运营审计、角色权限映射、注册审核与邀请链接的 DDL/DML 注释边界；真实 SQL 执行、数据库写入和大体量建库/装载脚本排除。见 [P26.5sp 选片](work-zone/dev/plans/W-anp-P26.5sp-config-sql-rop-selection.md)。 |
 | P26.5sq 注释补强 | 已为 4 个目标 SQL 补充或迁移合法 `/* <lang> ... */` 与 `-- <lang>` ROP 注释，目标 `<lang>` 总数 `50`，覆盖脚本幂等、表/约束/索引、UTC 时间、低敏审计、授权 seed、虚拟 All Users、注册状态白名单和旧用户 Approved seed；新增非注释 SQL `0`。见 [P26.5sq 结果](work-zone/dev/plans/W-anp-P26.5sq-config-sql-rop-result.md)。 |
 | P26.5sr 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 均通过；未执行真实 SQL Server 迁移、SQL 解析器 proof、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5sr 审计](work-zone/dev/plans/W-anp-P26.5sr-config-sql-rop-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5ss：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 clean C# XML 文档表面、主题/模块 XML 表面、`gulpfile.js`、业务模块 CSS 或本轮配置 SQL。 |
+| P26.5ss 选片 | 已选择 `PortalBiz_BusinessApplications.sql`、`PortalBiz_CollaborationItems.sql`、`PortalBiz_WorkItems.sql`、`PortalBiz_CollaborationItemEvents.sql`、`PortalBiz_WorkflowEvents.sql` 与 `PortalBiz_WorkItemEvents.sql` 的业务流程 SQL 迁移脚本；覆盖业务申请、协作事项、工作事项事实表及其追加式事件流；真实 SQL 执行、数据库写入、账号、凭据、IIS/HTTP、浏览器 proof 与大型 setup 脚本排除。见 [P26.5ss 选片](work-zone/dev/plans/W-anp-P26.5ss-business-workflow-sql-rop-selection.md)。 |
+| P26.5st 注释补强 | 已为 6 个目标 SQL 补充或迁移合法 `/* <lang> ... */` 与 `-- <lang>` ROP 注释，目标 `<lang>` 总数 `77`，覆盖脚本幂等、表/约束/索引、UTC 时间、来源追溯、追加式事件、低敏 Actor 和查询边界；新增非注释 SQL `0`。见 [P26.5st 结果](work-zone/dev/plans/W-anp-P26.5st-business-workflow-sql-rop-result.md)。 |
+| P26.5su 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 和未冻结注释机制扫描均通过；未执行真实 SQL Server 迁移、SQL 解析器 proof、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5su 审计](work-zone/dev/plans/W-anp-P26.5su-business-workflow-sql-rop-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5sv：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 clean C# XML 文档表面、主题/模块 XML 表面、`gulpfile.js`、业务模块 CSS、配置 SQL 或本轮业务流程 SQL。 |
 
 ## Known Residual Working Tree Items
 
@@ -1014,6 +1017,7 @@
 | P26.5sk 初次编码复核 | adjusted | `apply_patch` 后 `gulpfile.js` 呈 LF，内容验证已过但不符合项目 CRLF 要求；已用 UTF-8 无 BOM/CRLF 规范化后重跑 Node/Gulp 与 diff-check。 |
 | P26.5sm 初次 CSS 统计命令 | adjusted | 首次验证脚本在 PowerShell `foreach` 语句块后直接接管道导致解析失败；目标文件未受影响，改用中间变量后完成统计。 |
 | P26.5so 初次 PostCSS parse 命令 | adjusted | 首次 `node -e` 内联脚本被 PowerShell 引号抢占导致命令未执行；改用 PowerShell here-string 传 Node 脚本后 4 个 CSS 均解析通过。 |
+| P26.5ss 初次 BOM/编码扫描 | adjusted | 首次使用旧式 `Get-Content -Encoding Byte`，PowerShell 7 不支持该参数；目标文件未受影响，改用 `.NET` byte 读取后完成 UTF-8 无 BOM 与 CRLF 验证。 |
 
 ## Anti-Loop Guard
 
