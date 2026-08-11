@@ -42,6 +42,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         public DiscussionsDb(string connectionString)
         {
+            // <lang>
+            //   <zh-CN>保存已由外部配置边界解析出的连接串引用；构造阶段不打开 SQL 连接，避免 DI 创建时产生隐式数据库 I/O。</zh-CN>
+            //   <en>Store the connection string reference already resolved by the external-configuration boundary; construction does not open SQL connections, avoiding implicit database I/O during DI creation.</en>
+            // </lang>
             _connectionString = connectionString;
         }
 
@@ -67,14 +71,35 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public List<IDiscussionItem> GetTopLevelMessages(int moduleId)
         {
+            // <lang>
+            //   <zh-CN>输出列表只在本次读取内累积，承载已物化的顶级主题 DTO，不延迟持有 reader 或连接。</zh-CN>
+            //   <en>The output list accumulates only within this read and carries materialized top-level topic DTOs without retaining the reader or connection lazily.</en>
+            // </lang>
             var list = new List<IDiscussionItem>();
 
+            // <lang>
+            //   <zh-CN>连接和命令均限制在当前查询作用域；存储过程名称沿用旧数据库契约，不在代码层重写查询。</zh-CN>
+            //   <en>Both connection and command are scoped to the current query; the stored-procedure name preserves the legacy database contract rather than rewriting the query in code.</en>
+            // </lang>
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand("Portal_GetTopLevelMessages", connection))
             {
+                // <lang>
+                //   <zh-CN>明确声明存储过程调用，避免命令文本被解释为即席 SQL。</zh-CN>
+                //   <en>Explicitly declare a stored-procedure call so the command text is not interpreted as ad-hoc SQL.</en>
+                // </lang>
                 command.CommandType = CommandType.StoredProcedure;
+
+                // <lang>
+                //   <zh-CN>模块标识作为强类型整型参数传入；模块权限与可见性已由调用页在进入数据层前处理。</zh-CN>
+                //   <en>The module identifier is passed as a strongly typed integer parameter; module permission and visibility are handled by the caller page before entering the data layer.</en>
+                // </lang>
                 command.Parameters.Add(new SqlParameter("@ModuleID", SqlDbType.Int) { Value = moduleId });
 
+                // <lang>
+                //   <zh-CN>仅在命令完全配置后打开连接，缩短连接占用时间并保持异常定位清晰。</zh-CN>
+                //   <en>Open the connection only after the command is fully configured, shortening connection hold time and keeping exception origin clear.</en>
+                // </lang>
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -92,6 +117,10 @@ namespace ASPNET.StarterKit.Portal
 
                     while (reader.Read())
                     {
+                        // <lang>
+                        //   <zh-CN>每一行立即投影为讨论项；可空列按旧表兼容语义保留为 null，展示层再决定空值呈现。</zh-CN>
+                        //   <en>Each row is immediately projected into a discussion item; nullable columns preserve legacy-table null semantics and the presentation layer decides empty display.</en>
+                        // </lang>
                         var item = new DiscussionItem
                         {
                             ItemID = reader.GetInt32(idxItemID),
@@ -103,10 +132,20 @@ namespace ASPNET.StarterKit.Portal
                             DisplayOrder = reader.IsDBNull(idxDisplayOrder) ? null : reader.GetString(idxDisplayOrder),
                             CreatedByUser = reader.IsDBNull(idxCreatedByUser) ? null : reader.GetString(idxCreatedByUser)
                         };
+
+                        // <lang>
+                        //   <zh-CN>按 reader 返回顺序追加，保留存储过程负责的顶级主题排序。</zh-CN>
+                        //   <en>Append in reader order, preserving the top-level topic ordering owned by the stored procedure.</en>
+                        // </lang>
                         list.Add(item);
                     }
                 }
             }
+
+            // <lang>
+            //   <zh-CN>返回已脱离连接生命周期的列表；空模块结果以空列表表达，而不是 null。</zh-CN>
+            //   <en>Return the list after it has been detached from the connection lifetime; an empty module result is represented as an empty list rather than null.</en>
+            // </lang>
             return list;
         }
 
@@ -130,16 +169,37 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public List<IDiscussionItem> GetThreadMessages(string parent)
         {
+            // <lang>
+            //   <zh-CN>输出列表只在本次线程读取内累积，保持和顶级主题查询一致的已物化返回契约。</zh-CN>
+            //   <en>The output list accumulates only within this thread read, keeping the same materialized return contract as the top-level topic query.</en>
+            // </lang>
             var list = new List<IDiscussionItem>();
 
+            // <lang>
+            //   <zh-CN>连接和命令作用域限定到一次线程查询；父路径解释继续由旧存储过程完成。</zh-CN>
+            //   <en>The connection and command scopes are limited to one thread query; parent-path interpretation remains with the legacy stored procedure.</en>
+            // </lang>
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand("Portal_GetThreadMessages", connection))
             {
+                // <lang>
+                //   <zh-CN>明确使用存储过程执行模式，保持旧 SQL 契约和执行计划边界。</zh-CN>
+                //   <en>Use stored-procedure execution mode explicitly to preserve the legacy SQL contract and execution-plan boundary.</en>
+                // </lang>
                 command.CommandType = CommandType.StoredProcedure;
+
+                // <lang>
+                //   <zh-CN>父级 DisplayOrder 路径最大长度沿用旧过程定义；null 显式转为数据库空值以表达根/缺省语义。</zh-CN>
+                //   <en>The parent DisplayOrder path length follows the legacy procedure definition; null is explicitly converted to database null to express root/default semantics.</en>
+                // </lang>
                 SqlParameter param = new SqlParameter("@Parent", SqlDbType.NVarChar, 750);
                 param.Value = parent ?? (object)DBNull.Value;
                 command.Parameters.Add(param);
 
+                // <lang>
+                //   <zh-CN>参数配置完成后才打开连接，避免在本地参数准备阶段占用 SQL 连接。</zh-CN>
+                //   <en>Open the connection only after parameters are configured so local parameter preparation does not hold a SQL connection.</en>
+                // </lang>
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -157,6 +217,10 @@ namespace ASPNET.StarterKit.Portal
 
                     while (reader.Read())
                     {
+                        // <lang>
+                        //   <zh-CN>每条回复使用数据库返回的 ModuleID，以便调用方后续按真实归属复核安全边界。</zh-CN>
+                        //   <en>Each reply uses the ModuleID returned by the database so callers can later re-check safety boundaries against true ownership.</en>
+                        // </lang>
                         var item = new DiscussionItem
                         {
                             ItemID = reader.GetInt32(idxItemID),
@@ -167,10 +231,20 @@ namespace ASPNET.StarterKit.Portal
                             DisplayOrder = reader.IsDBNull(idxDisplayOrder) ? null : reader.GetString(idxDisplayOrder),
                             CreatedByUser = reader.IsDBNull(idxCreatedByUser) ? null : reader.GetString(idxCreatedByUser)
                         };
+
+                        // <lang>
+                        //   <zh-CN>按存储过程返回顺序追加，保留 DisplayOrder 线程排序。</zh-CN>
+                        //   <en>Append in stored-procedure return order, preserving DisplayOrder thread ordering.</en>
+                        // </lang>
                         list.Add(item);
                     }
                 }
             }
+
+            // <lang>
+            //   <zh-CN>返回已物化回复列表；未找到子线程时保持空列表，便于页面安全展示“无回复”。</zh-CN>
+            //   <en>Return the materialized reply list; when no child thread is found, keep an empty list so pages can safely display “no replies”.</en>
+            // </lang>
             return list;
         }
 
@@ -194,12 +268,24 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public IDiscussionItem GetSingleMessage(int itemId)
         {
+            // <lang>
+            //   <zh-CN>单条详情查询使用短生命周期连接和命令；调用方仍负责把 itemId 与当前模块上下文关联。</zh-CN>
+            //   <en>The single-message detail query uses a short-lived connection and command; callers still associate itemId with the current module context.</en>
+            // </lang>
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand("Portal_GetSingleMessage", connection))
             {
+                // <lang>
+                //   <zh-CN>明确声明存储过程模式并使用强类型消息标识参数，避免字符串拼接 SQL。</zh-CN>
+                //   <en>Declare stored-procedure mode explicitly and use a strongly typed message identifier parameter, avoiding string-concatenated SQL.</en>
+                // </lang>
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add(new SqlParameter("@ItemID", SqlDbType.Int) { Value = itemId });
 
+                // <lang>
+                //   <zh-CN>命令配置完成后打开连接；reader 关闭即释放连接作用域。</zh-CN>
+                //   <en>Open the connection after command configuration; closing the reader releases the connection scope.</en>
+                // </lang>
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -209,6 +295,10 @@ namespace ASPNET.StarterKit.Portal
                     // </lang>
                     if (reader.Read())
                     {
+                        // <lang>
+                        //   <zh-CN>列序号只在确认存在一行后解析；空结果不依赖 schema 元数据。</zh-CN>
+                        //   <en>Resolve column ordinals only after confirming a row exists; empty results do not depend on schema metadata.</en>
+                        // </lang>
                         int idxItemID = reader.GetOrdinal("ItemID");
                         int idxModuleID = reader.GetOrdinal("ModuleID");
                         int idxTitle = reader.GetOrdinal("Title");
@@ -217,6 +307,10 @@ namespace ASPNET.StarterKit.Portal
                         int idxDisplayOrder = reader.GetOrdinal("DisplayOrder");
                         int idxCreatedByUser = reader.GetOrdinal("CreatedByUser");
 
+                        // <lang>
+                        //   <zh-CN>直接返回已物化详情对象；可空字段保留 null，展示/错误处理由调用页完成。</zh-CN>
+                        //   <en>Return the materialized detail object directly; nullable fields remain null and display/error handling stays with the caller page.</en>
+                        // </lang>
                         return new DiscussionItem
                         {
                             ItemID = reader.GetInt32(idxItemID),
@@ -230,6 +324,11 @@ namespace ASPNET.StarterKit.Portal
                     }
                 }
             }
+
+            // <lang>
+            //   <zh-CN>没有匹配消息时返回 null，不在数据层泄露原因或构造用户可见错误文案。</zh-CN>
+            //   <en>Return null when no message matches, without leaking a cause or constructing user-visible error text in the data layer.</en>
+            // </lang>
             return null;
         }
 
@@ -283,14 +382,26 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public int AddMessage(int moduleId, int parentId, string userName, string title, string body)
         {
+            // <lang>
+            //   <zh-CN>空白用户名降级为旧占位值，只满足历史显示字段；认证身份和发帖权限不从该值推断。</zh-CN>
+            //   <en>A blank user name falls back to the legacy placeholder only for the historical display field; authenticated identity and posting permission are not inferred from this value.</en>
+            // </lang>
             if (string.IsNullOrWhiteSpace(userName))
             {
                 userName = "unknown";
             }
 
+            // <lang>
+            //   <zh-CN>新增消息调用封装一次旧存储过程执行；线程 DisplayOrder 分配由数据库过程维护。</zh-CN>
+            //   <en>The add-message call wraps one legacy stored-procedure execution; thread DisplayOrder allocation is maintained by the database procedure.</en>
+            // </lang>
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand("Portal_AddMessage", connection))
             {
+                // <lang>
+                //   <zh-CN>明确以存储过程模式执行，避免把过程名称作为文本 SQL。</zh-CN>
+                //   <en>Execute explicitly in stored-procedure mode so the procedure name is not treated as text SQL.</en>
+                // </lang>
                 command.CommandType = CommandType.StoredProcedure;
 
                 // <lang>
@@ -311,9 +422,22 @@ namespace ASPNET.StarterKit.Portal
                 command.Parameters.AddWithValue("@Title", title ?? (object)DBNull.Value);
                 command.Parameters.AddWithValue("@Body", body ?? (object)DBNull.Value);
 
+                // <lang>
+                //   <zh-CN>参数全部绑定后再打开连接；执行过程时不在代码层拼接标题或正文。</zh-CN>
+                //   <en>Open the connection after all parameters are bound; title and body are not concatenated into SQL at the code layer.</en>
+                // </lang>
                 connection.Open();
+
+                // <lang>
+                //   <zh-CN>执行写入过程；数据库负责插入、父子路径维护和输出参数赋值。</zh-CN>
+                //   <en>Execute the write procedure; the database owns insertion, parent/child path maintenance, and output parameter assignment.</en>
+                // </lang>
                 command.ExecuteNonQuery();
 
+                // <lang>
+                //   <zh-CN>读取输出参数；未返回标识时保持旧契约的 -1 回退，调用页再决定提示或重试策略。</zh-CN>
+                //   <en>Read the output parameter; when no identifier is returned, keep the legacy -1 fallback and let the caller page decide messaging or retry policy.</en>
+                // </lang>
                 return itemIdParam.Value == DBNull.Value ? -1 : Convert.ToInt32(itemIdParam.Value);
             }
         }
