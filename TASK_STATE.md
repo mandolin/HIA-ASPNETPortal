@@ -974,7 +974,10 @@
 | P26.5sd 选片 | 已选择剩余 20 个 clean 非 Designer C# 文件的旧 XML locale 表面，覆盖配置/DTO/Db 接口、导航注册表、认证/诊断/Profile/设置/主题/Page/Tab 工具链与一个 clean 旧事件模块 code-behind；已有未提交残留、真实运行 proof 和业务逻辑修改排除。见 [P26.5sd 选片](work-zone/dev/plans/W-anp-P26.5sd-remaining-locale-surface-selection.md)。 |
 | P26.5se 注释补强 | 已迁移 252 处旧自闭合 `<l zh-CN="..." en="..." />` 为嵌套 `<l><zh-CN>...</zh-CN><en>...</en></l>`；独立 XML 文档行 68 处，行内 `<param>`/`<returns>`/`<exception>` 等 184 处；目标旧自闭合表面 `0`、目标嵌套 `<l>` `315`、clean 非 Designer C# 范围剩余旧表面文件数 `0`，新增非注释代码 `0`。见 [P26.5se 结果](work-zone/dev/plans/W-anp-P26.5se-remaining-locale-surface-result.md)。 |
 | P26.5sf 静态验证 | 通过；去 XML 文档注释后代码与 `HEAD` 一致，`NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实数据库、诊断日志、主题包解析、Profile 解析、认证 Cookie、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5sf 审计](work-zone/dev/plans/W-anp-P26.5sf-remaining-locale-surface-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5sg：重新读取最新源码盘点，继续选择下一组未重复、同风险同验证路径且存在明确语义缺口的 clean 职责链；不重复 P26.5sd-sf。 |
+| P26.5sg 选片 | 已选择 `PortalThemeResolver.cs`、`PortalTabThemeOverrides.cs`、`ModuleSettings.cs` 与 `PortalThemePackage.cs` 的主题/模块设置 XML 文档表面；覆盖主题解析、Tab 覆盖存储、模块运行设置 DTO 和主题包校验器中仍保留的旧式“中文行 + English line”文档块；真实主题目录、manifest、数据库、IIS/HTTP、浏览器、账号、凭据和发布 proof 排除。见 [P26.5sg 选片](work-zone/dev/plans/W-anp-P26.5sg-theme-module-xml-locale-selection.md)。 |
+| P26.5sh 注释迁移 | 已将 87 个旧式中英双语 XML 文档块迁移为 `<lang>`/`<l>` 表面：`PortalThemeResolver.cs` 40 个、`PortalTabThemeOverrides.cs` 24 个、`ModuleSettings.cs` 11 个、`PortalThemePackage.cs` 12 个；目标缺失 `<lang>/<l>` 的 XML 文档块 `0`，新增非注释代码 `0`。见 [P26.5sh 结果](work-zone/dev/plans/W-anp-P26.5sh-theme-module-xml-locale-result.md)。 |
+| P26.5si 静态验证 | 通过；目标 diff 新增/删除行全部为 `///` XML 文档注释，`ADDED_NONBLANK=416`、`REMOVED_NONBLANK=165`、`NONCOMMENT_COUNT=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）和 Debug 构建均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实主题目录、manifest、数据库读写、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5si 审计](work-zone/dev/plans/W-anp-P26.5si-theme-module-xml-locale-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5sj：继续从 clean 文件中选择下一组同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 P26.5sd-sf 的旧自闭合 `<l />` 迁移，也不重复 P26.5sg-si 的主题/模块 XML 文档表面迁移。 |
 
 ## Known Residual Working Tree Items
 
@@ -996,6 +999,8 @@
 | P26.5rx 初始注释-only 增行扫描 | adjusted | 服务器注释内部 `<lang>` 内容以及首次规范化误删的两个既有 Page 指令行尾空格会让简单新增行扫描出现伪非注释差异；已恢复原始指令文本，并改用去服务器注释/XML 注释后的有效标记/代码对比通过。 |
 | P26.5sa 首次批量迁移命令 | adjusted | PowerShell 正则字符串首次使用反斜杠转义双引号导致解析失败，未执行到写文件；改用 PowerShell 原生反引号转义后成功迁移 131 处旧 `<l>` 表面。 |
 | P26.5sd 首个迁移器 | adjusted | 首个迁移器已成功迁移独立 XML 文档行 68 处，但在行内 `<param>` 形态处中断；随后按行内形态使用第二迁移器完成剩余 184 处，最终目标旧表面清零且代码一致性通过。 |
+| P26.5sg 初始 plain XML 扫描统计 | adjusted | 首次粗扫脚本因 PowerShell 单元素 `Match` 对象 `.Count` 展示语义导致 `PlainSummary` 计数异常；改用逐块解析列出缺 `<lang>/<l>` 的 XML 文档块后再选片。 |
+| P26.5sh 首个单行 XML 文档迁移器 | adjusted | 首次机械迁移能处理多行块，但单行 `<param>...</param>`/`<returns>...</returns>` 会在 `<zh-CN>` 内残留外层起始标签；已用标签残留扫描定位并清理，XML gate 与构建通过。 |
 
 ## Anti-Loop Guard
 

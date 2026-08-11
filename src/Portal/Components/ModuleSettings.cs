@@ -62,13 +62,23 @@ namespace ASPNET.StarterKit.Portal
         #region IComparable<ModuleItem> Members
 
         /// <summary>
-        /// 按模块显示顺序进行升序比较。
-        /// Compares module display order in ascending order.
+        /// <lang>
+        ///   <zh-CN>按模块显示顺序进行升序比较。</zh-CN>
+        ///   <en>Compares module display order in ascending order.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="value">待比较设置；为 null 时当前实例排在其后。
-        /// Settings to compare; when null, the current instance sorts after it.</param>
-        /// <returns>小于零表示当前模块应先显示，零表示顺序相同，大于零表示当前模块应后显示。
-        /// A value less than zero means this module displays first, zero means equal order, and a value greater than zero means it displays later.</returns>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>待比较设置；为 null 时当前实例排在其后。</zh-CN>
+        ///   <en>Settings to compare; when null, the current instance sorts after it.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>小于零表示当前模块应先显示，零表示顺序相同，大于零表示当前模块应后显示。</zh-CN>
+        ///   <en>A value less than zero means this module displays first, zero means equal order, and a value greater than zero means it displays later.</en>
+        /// </l>
+        /// </returns>
         public int CompareTo(ModuleSettings value)
         {
             if (value == null)
@@ -96,50 +106,66 @@ namespace ASPNET.StarterKit.Portal
         #endregion
 
         /// <summary>
-        /// 模块在所属 Tab 内的显示顺序。
-        /// Display order of the module within its owning Tab.
+        /// <lang>
+        ///   <zh-CN>模块在所属 Tab 内的显示顺序。</zh-CN>
+        ///   <en>Display order of the module within its owning Tab.</en>
+        /// </lang>
         /// </summary>
         public int ModuleOrder { get; set; }
 
         /// <summary>
-        /// 管理员配置的模块显示标题。
-        /// Module display title configured by an administrator.
+        /// <lang>
+        ///   <zh-CN>管理员配置的模块显示标题。</zh-CN>
+        ///   <en>Module display title configured by an administrator.</en>
+        /// </lang>
         /// </summary>
         public string ModuleTitle { get; private set; }
 
         /// <summary>
-        /// 页面布局中承载模块的窗格名称。
-        /// Name of the layout pane that hosts the module.
+        /// <lang>
+        ///   <zh-CN>页面布局中承载模块的窗格名称。</zh-CN>
+        ///   <en>Name of the layout pane that hosts the module.</en>
+        /// </lang>
         /// </summary>
         public string PaneName { get; private set; }
 
         /// <summary>
-        /// 模块实例的数据库标识。
-        /// Database identifier of the module instance.
+        /// <lang>
+        ///   <zh-CN>模块实例的数据库标识。</zh-CN>
+        ///   <en>Database identifier of the module instance.</en>
+        /// </lang>
         /// </summary>
         public int ModuleId { get; private set; }
 
         /// <summary>
-        /// 控制编辑入口展示的历史角色字符串。
-        /// Legacy role string controlling edit-entry display.
+        /// <lang>
+        ///   <zh-CN>控制编辑入口展示的历史角色字符串。</zh-CN>
+        ///   <en>Legacy role string controlling edit-entry display.</en>
+        /// </lang>
         /// </summary>
         public string AuthorizedEditRoles { get; private set; }
 
         /// <summary>
-        /// 模块输出缓存秒数；零表示不使用 <see cref="CachedPortalModuleControl"/>。
-        /// Module output-cache duration in seconds; zero bypasses <see cref="CachedPortalModuleControl"/>.
+        /// <lang>
+        ///   <zh-CN>模块输出缓存秒数；零表示不使用 <see cref="CachedPortalModuleControl"/>。</zh-CN>
+        ///   <en>Module output-cache duration in seconds; zero bypasses <see cref="CachedPortalModuleControl"/>.</en>
+        /// </lang>
         /// </summary>
         public int CacheTime { get; private set; }
 
         /// <summary>
-        /// 历史移动端显示标志；当前不代表新的移动端呈现策略。
-        /// Legacy mobile-display flag; it does not represent a future mobile presentation strategy.
+        /// <lang>
+        ///   <zh-CN>历史移动端显示标志；当前不代表新的移动端呈现策略。</zh-CN>
+        ///   <en>Legacy mobile-display flag; it does not represent a future mobile presentation strategy.</en>
+        /// </lang>
         /// </summary>
         public bool ShowMobile { get; private set; }
 
         /// <summary>
-        /// 模块定义记录提供的原始桌面用户控件路径。
-        /// Raw desktop user-control path supplied by the module-definition record.
+        /// <lang>
+        ///   <zh-CN>模块定义记录提供的原始桌面用户控件路径。</zh-CN>
+        ///   <en>Raw desktop user-control path supplied by the module-definition record.</en>
+        /// </lang>
         /// </summary>
         public string DesktopSrc { get; private set; }
     }

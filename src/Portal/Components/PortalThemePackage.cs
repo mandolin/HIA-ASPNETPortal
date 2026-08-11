@@ -108,8 +108,10 @@ namespace ASPNET.StarterKit.Portal
         public string MinimumPortalVersion { get; private set; }
 
         /// <summary>
-        /// 是否在 CSS 中继承 Default 主题。
-        /// Whether the CSS inherits the Default theme.
+        /// <lang>
+        ///   <zh-CN>是否在 CSS 中继承 Default 主题。</zh-CN>
+        ///   <en>Whether the CSS inherits the Default theme.</en>
+        /// </lang>
         /// </summary>
         /// <remarks>
         /// <lang>
@@ -163,14 +165,22 @@ namespace ASPNET.StarterKit.Portal
             RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         /// <summary>
-        /// 获取所有已部署并通过 manifest 校验的主题包。
-        /// Gets every deployed theme package that passes manifest validation.
+        /// <lang>
+        ///   <zh-CN>获取所有已部署并通过 manifest 校验的主题包。</zh-CN>
+        ///   <en>Gets every deployed theme package that passes manifest validation.</en>
+        /// </lang>
         /// </summary>
-        /// <returns>按显示名排序的只读主题包列表。Read-only theme package list ordered by display name.</returns>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>按显示名排序的只读主题包列表。</zh-CN>
+        ///   <en>Read-only theme package list ordered by display name.</en>
+        /// </l>
+        /// </returns>
         /// <remarks>
-        /// 无法读取主题根目录或单个包校验失败时会跳过对应包，不阻断其他合格主题或页面默认回退。
-        /// When the theme root cannot be read or one package fails validation, the corresponding package is skipped;
-        /// it does not block other valid themes or the page default fallback.
+        /// <lang>
+        ///   <zh-CN>无法读取主题根目录或单个包校验失败时会跳过对应包，不阻断其他合格主题或页面默认回退。</zh-CN>
+        ///   <en>When the theme root cannot be read or one package fails validation, the corresponding package is skipped; it does not block other valid themes or the page default fallback.</en>
+        /// </lang>
         /// </remarks>
         public static IList<PortalThemePackage> GetTrustedPackages()
         {
@@ -211,17 +221,40 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 验证并读取一个已部署主题包。
-        /// Validates and reads one deployed theme package.
+        /// <lang>
+        ///   <zh-CN>验证并读取一个已部署主题包。</zh-CN>
+        ///   <en>Validates and reads one deployed theme package.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="themeName">目录和 manifest 中应一致的主题名。Theme name expected in both directory and manifest.</param>
-        /// <param name="package">成功时返回已验证的主题包。Validated theme package when successful.</param>
-        /// <param name="reason">失败时返回不含物理路径的原因。Failure reason without physical paths.</param>
-        /// <returns>主题包是否可被当前门户安全选择。Whether the package can be safely selected by this portal.</returns>
+        /// <param name="themeName">
+        /// <l>
+        ///   <zh-CN>目录和 manifest 中应一致的主题名。</zh-CN>
+        ///   <en>Theme name expected in both directory and manifest.</en>
+        /// </l>
+        /// </param>
+        /// <param name="package">
+        /// <l>
+        ///   <zh-CN>成功时返回已验证的主题包。</zh-CN>
+        ///   <en>Validated theme package when successful.</en>
+        /// </l>
+        /// </param>
+        /// <param name="reason">
+        /// <l>
+        ///   <zh-CN>失败时返回不含物理路径的原因。</zh-CN>
+        ///   <en>Failure reason without physical paths.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>主题包是否可被当前门户安全选择。</zh-CN>
+        ///   <en>Whether the package can be safely selected by this portal.</en>
+        /// </l>
+        /// </returns>
         /// <remarks>
-        /// 成功只表示目录、manifest 和本地资源满足当前最小契约；它不证明主题视觉质量、许可、签名或部署来源。
-        /// Success means only that the directory, manifest, and local resources meet the current minimal contract; it
-        /// does not prove visual quality, license, signature, or deployment provenance.
+        /// <lang>
+        ///   <zh-CN>成功只表示目录、manifest 和本地资源满足当前最小契约；它不证明主题视觉质量、许可、签名或部署来源。</zh-CN>
+        ///   <en>Success means only that the directory, manifest, and local resources meet the current minimal contract; it does not prove visual quality, license, signature, or deployment provenance.</en>
+        /// </lang>
         /// </remarks>
         public static bool TryGetTrustedPackage(
             string themeName,
@@ -352,8 +385,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Determines whether a theme name is safe as a deployment directory and CSS-class segment.</en>
         /// </lang>
         /// </summary>
-        /// <param name="themeName">待校验主题名。Theme name to validate.</param>
-        /// <returns>主题名是否满足稳定 ASCII 契约。Whether the name meets the stable ASCII contract.</returns>
+        /// <param name="themeName">
+        /// <l>
+        ///   <zh-CN>待校验主题名。</zh-CN>
+        ///   <en>Theme name to validate.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>主题名是否满足稳定 ASCII 契约。</zh-CN>
+        ///   <en>Whether the name meets the stable ASCII contract.</en>
+        /// </l>
+        /// </returns>
         public static bool IsValidThemeName(string themeName)
         {
             // <lang>

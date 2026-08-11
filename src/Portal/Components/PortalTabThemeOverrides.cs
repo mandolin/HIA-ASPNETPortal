@@ -8,8 +8,10 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// Tab 主题覆盖读取结果。
-    /// Tab theme-override read result.
+    /// <lang>
+    ///   <zh-CN>Tab 主题覆盖读取结果。</zh-CN>
+    ///   <en>Tab theme-override read result.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalTabThemeOverrideReadResult
     {
@@ -41,27 +43,35 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 覆盖表是否已部署并可读取。
-        /// Whether the override table is deployed and readable.
+        /// <lang>
+        ///   <zh-CN>覆盖表是否已部署并可读取。</zh-CN>
+        ///   <en>Whether the override table is deployed and readable.</en>
+        /// </lang>
         /// </summary>
         public bool IsAvailable { get; private set; }
 
         /// <summary>
-        /// 当前 Tab 是否有覆盖值。
-        /// Whether the current tab has an override.
+        /// <lang>
+        ///   <zh-CN>当前 Tab 是否有覆盖值。</zh-CN>
+        ///   <en>Whether the current tab has an override.</en>
+        /// </lang>
         /// </summary>
         public bool IsFound { get; private set; }
 
         /// <summary>
-        /// 覆盖主题名。
-        /// Overridden theme name.
+        /// <lang>
+        ///   <zh-CN>覆盖主题名。</zh-CN>
+        ///   <en>Overridden theme name.</en>
+        /// </lang>
         /// </summary>
         public string ThemeName { get; private set; }
     }
 
     /// <summary>
-    /// Tab 主题覆盖写入结果。
-    /// Tab theme-override write result.
+    /// <lang>
+    ///   <zh-CN>Tab 主题覆盖写入结果。</zh-CN>
+    ///   <en>Tab theme-override write result.</en>
+    /// </lang>
     /// </summary>
     public sealed class PortalTabThemeOverrideWriteResult
     {
@@ -87,30 +97,33 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 操作是否成功。
-        /// Whether the operation succeeded.
+        /// <lang>
+        ///   <zh-CN>操作是否成功。</zh-CN>
+        ///   <en>Whether the operation succeeded.</en>
+        /// </lang>
         /// </summary>
         public bool Succeeded { get; private set; }
 
         /// <summary>
-        /// 可安全展示给管理员的操作说明。
-        /// Operation message safe to show to an administrator.
+        /// <lang>
+        ///   <zh-CN>可安全展示给管理员的操作说明。</zh-CN>
+        ///   <en>Operation message safe to show to an administrator.</en>
+        /// </lang>
         /// </summary>
         public string Message { get; private set; }
     }
 
     /// <summary>
-    /// Tab 主题覆盖的受限存储。
-    /// Restricted storage for tab theme overrides.
+    /// <lang>
+    ///   <zh-CN>Tab 主题覆盖的受限存储。</zh-CN>
+    ///   <en>Restricted storage for tab theme overrides.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-        /// 覆盖值只保存已验证的部署主题名。表缺失或读取失败时解析器回退全局主题，避免旧数据库阻断门户页面。
-        /// 此存储不负责调用方授权或运营审计；`ThemeSettings` 在调用前要求管理员并在成功后记录审计，任何新增调用点
-        /// 必须采用同等保护。
-        /// Override values store validated deployed theme names only. When the table is missing or unreadable, the
-        /// resolver falls back to the global theme so a legacy database never blocks portal pages. This store does not
-        /// enforce caller authorization or operations audit; `ThemeSettings` requires an administrator before calling
-        /// and records an audit after success, and every new call site must use equivalent protection.
+    /// <lang>
+    ///   <zh-CN>覆盖值只保存已验证的部署主题名。表缺失或读取失败时解析器回退全局主题，避免旧数据库阻断门户页面。此存储不负责调用方授权或运营审计；`ThemeSettings` 在调用前要求管理员并在成功后记录审计，任何新增调用点必须采用同等保护。</zh-CN>
+    ///   <en>Override values store validated deployed theme names only. When the table is missing or unreadable, the resolver falls back to the global theme so a legacy database never blocks portal pages. This store does not enforce caller authorization or operations audit; `ThemeSettings` requires an administrator before calling and records an audit after success, and every new call site must use equivalent protection.</en>
+    /// </lang>
     /// </remarks>
     public static class PortalTabThemeOverrides
     {
@@ -123,12 +136,29 @@ namespace ASPNET.StarterKit.Portal
         private const string TableName = "PortalCfg_TabThemeOverrides";
 
         /// <summary>
-        /// 读取一个 Tab 的主题覆盖值。
-        /// Reads the theme override for one tab.
+        /// <lang>
+        ///   <zh-CN>读取一个 Tab 的主题覆盖值。</zh-CN>
+        ///   <en>Reads the theme override for one tab.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="tabId">门户 Tab 标识。Portal tab identifier.</param>
-        /// <param name="context">用于受限诊断的当前 HTTP 上下文。Current HTTP context for restricted diagnostics.</param>
-        /// <returns>表可用状态、命中状态和主题名。Table availability, match state, and theme name.</returns>
+        /// <param name="tabId">
+        /// <l>
+        ///   <zh-CN>门户 Tab 标识。</zh-CN>
+        ///   <en>Portal tab identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于受限诊断的当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context for restricted diagnostics.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>表可用状态、命中状态和主题名。</zh-CN>
+        ///   <en>Table availability, match state, and theme name.</en>
+        /// </l>
+        /// </returns>
         public static PortalTabThemeOverrideReadResult Read(int tabId, HttpContext context = null)
         {
             if (tabId <= 0)
@@ -190,17 +220,40 @@ WHERE [TabId] = @TabId;";
         }
 
         /// <summary>
-        /// 保存一个 Tab 的主题覆盖值。
-        /// Saves the theme override for one tab.
+        /// <lang>
+        ///   <zh-CN>保存一个 Tab 的主题覆盖值。</zh-CN>
+        ///   <en>Saves the theme override for one tab.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="tabId">门户 Tab 标识。Portal tab identifier.</param>
-        /// <param name="themeName">已部署主题名。Deployed theme name.</param>
-        /// <param name="context">当前 HTTP 上下文，用于操作人和诊断。Current HTTP context for actor and diagnostics.</param>
-        /// <returns>写入结果。Write result.</returns>
+        /// <param name="tabId">
+        /// <l>
+        ///   <zh-CN>门户 Tab 标识。</zh-CN>
+        ///   <en>Portal tab identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="themeName">
+        /// <l>
+        ///   <zh-CN>已部署主题名。</zh-CN>
+        ///   <en>Deployed theme name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文，用于操作人和诊断。</zh-CN>
+        ///   <en>Current HTTP context for actor and diagnostics.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果。</zh-CN>
+        ///   <en>Write result.</en>
+        /// </l>
+        /// </returns>
         /// <remarks>
-        /// 仅在写入前验证当前部署的主题包，不会创建主题目录或变更 manifest。成功结果不代表调用方已经做过授权或审计。
-        /// Validates the currently deployed theme package before writing only; it does not create a theme directory or
-        /// change a manifest. A successful result does not mean the caller has performed authorization or audit.
+        /// <lang>
+        ///   <zh-CN>仅在写入前验证当前部署的主题包，不会创建主题目录或变更 manifest。成功结果不代表调用方已经做过授权或审计。</zh-CN>
+        ///   <en>Validates the currently deployed theme package before writing only; it does not create a theme directory or change a manifest. A successful result does not mean the caller has performed authorization or audit.</en>
+        /// </lang>
         /// </remarks>
         public static PortalTabThemeOverrideWriteResult Save(int tabId, string themeName, HttpContext context = null)
         {
@@ -294,16 +347,34 @@ VALUES
         }
 
         /// <summary>
-        /// 删除一个 Tab 覆盖值，使其回退到全局主题。
-        /// Deletes one tab override so it falls back to the global theme.
+        /// <lang>
+        ///   <zh-CN>删除一个 Tab 覆盖值，使其回退到全局主题。</zh-CN>
+        ///   <en>Deletes one tab override so it falls back to the global theme.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="tabId">门户 Tab 标识。Portal tab identifier.</param>
-        /// <param name="context">当前 HTTP 上下文，用于诊断。Current HTTP context for diagnostics.</param>
-        /// <returns>删除结果。Deletion result.</returns>
+        /// <param name="tabId">
+        /// <l>
+        ///   <zh-CN>门户 Tab 标识。</zh-CN>
+        ///   <en>Portal tab identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文，用于诊断。</zh-CN>
+        ///   <en>Current HTTP context for diagnostics.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>删除结果。</zh-CN>
+        ///   <en>Deletion result.</en>
+        /// </l>
+        /// </returns>
         /// <remarks>
-        /// 删除只移除数据库覆盖值；下一次请求按主题解析器的全局设置、appSettings 或 Default 回退，且本方法不自行授权或审计。
-        /// Deletion removes only the database override. Later requests fall back through the resolver's global setting,
-        /// appSettings, or Default, and this method performs neither authorization nor audit itself.
+        /// <lang>
+        ///   <zh-CN>删除只移除数据库覆盖值；下一次请求按主题解析器的全局设置、appSettings 或 Default 回退，且本方法不自行授权或审计。</zh-CN>
+        ///   <en>Deletion removes only the database override. Later requests fall back through the resolver's global setting, appSettings, or Default, and this method performs neither authorization nor audit itself.</en>
+        /// </lang>
         /// </remarks>
         public static PortalTabThemeOverrideWriteResult Delete(int tabId, HttpContext context = null)
         {
