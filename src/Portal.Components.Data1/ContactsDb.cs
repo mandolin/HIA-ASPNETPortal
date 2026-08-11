@@ -105,6 +105,10 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="itemId"><l><zh-CN>联系人标识符。</zh-CN><en>Contact identifier.</en></l></param>
         public void DeleteContact(int itemId)
         {
+            // <lang>
+            //   <zh-CN>待删除联系人必须唯一存在；缺失或重复说明调用页归属校验前提或数据完整性已失效。</zh-CN>
+            //   <en>The contact to delete must exist uniquely; a miss or duplicate means caller-side ownership validation assumptions or data integrity have failed.</en>
+            // </lang>
             var item = _context.Contacts.Single(i => i.ItemId == itemId);
 
             // <lang>
@@ -112,6 +116,11 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The delete action is committed directly to the legacy table; audit, permission, and safe return navigation are completed by the editor page.</en>
             // </lang>
             _context.Contacts.Remove(item);
+
+            // <lang>
+            //   <zh-CN>提交当前删除批次；本方法不输出用户可见消息，也不清理外部联系方式。</zh-CN>
+            //   <en>Commit the current deletion batch; this method does not emit user-visible messages or clean up external contact channels.</en>
+            // </lang>
             _context.SaveChanges();
         }
 
@@ -144,6 +153,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
 
+            // <lang>
+            //   <zh-CN>新联系人实体承载一次新增投影；邮箱和联系方式文本保持编辑页的前置校验结果。</zh-CN>
+            //   <en>The new contact entity carries one create projection; email and contact-detail text keep the editor page's prior validation result.</en>
+            // </lang>
             var item = new ContactItem
             {
                 ModuleId = moduleId,
@@ -156,9 +169,22 @@ namespace ASPNET.StarterKit.Portal
                 Contact2 = contact2
             };
 
+            // <lang>
+            //   <zh-CN>把新实体加入 EF 跟踪集，数据库标识会在保存后回填到同一对象。</zh-CN>
+            //   <en>Add the new entity to the EF tracking set; the database identifier is populated back onto the same object after saving.</en>
+            // </lang>
             _context.Contacts.Add(item);
+
+            // <lang>
+            //   <zh-CN>提交新增批次；本层不重判权限、不发送邮件，也不生成前台 mailto 输出。</zh-CN>
+            //   <en>Commit the create batch; this layer does not re-authorize, send email, or generate front-end mailto output.</en>
+            // </lang>
             _context.SaveChanges();
 
+            // <lang>
+            //   <zh-CN>返回 EF 保存后生成的旧表主键，供编辑页继续导航或反馈。</zh-CN>
+            //   <en>Return the legacy-table primary key generated after EF saving, allowing the editor page to continue navigation or feedback.</en>
+            // </lang>
             return item.ItemId;
         }
 
@@ -190,6 +216,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
 
+            // <lang>
+            //   <zh-CN>更新路径要求目标联系人唯一存在；调用页已完成模块归属和编辑权限判断。</zh-CN>
+            //   <en>The update path requires the target contact to exist uniquely; the caller page has already completed module ownership and edit-permission checks.</en>
+            // </lang>
             var item = _context.Contacts.Single(i => i.ItemId == itemId);
 
             // <lang>
@@ -203,6 +233,10 @@ namespace ASPNET.StarterKit.Portal
             item.Contact1 = contact1;
             item.Contact2 = contact2;
 
+            // <lang>
+            //   <zh-CN>提交当前可编辑字段更新；所属模块、原创建时间和页面级审计不在此处改变。</zh-CN>
+            //   <en>Commit the current editable-field update; owning module, original creation time, and page-level audit are not changed here.</en>
+            // </lang>
             _context.SaveChanges();
         }
 

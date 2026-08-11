@@ -123,6 +123,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         public void DeleteAnnouncement(int itemId)
         {
+            // <lang>
+            //   <zh-CN>待删除公告必须唯一存在；缺失或重复说明调用页归属校验前提或数据完整性已失效。</zh-CN>
+            //   <en>The announcement to delete must exist uniquely; a miss or duplicate means caller-side ownership validation assumptions or data integrity have failed.</en>
+            // </lang>
             var item = _context.Announcements.Single(i => i.ItemId == itemId);
 
             // <lang>
@@ -130,6 +134,11 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The delete action is committed directly to the legacy table; audit, permission, and safe return navigation are completed by the editor page.</en>
             // </lang>
             _context.Announcements.Remove(item);
+
+            // <lang>
+            //   <zh-CN>提交当前删除批次；本方法不删除外部资源，也不输出用户可见消息。</zh-CN>
+            //   <en>Commit the current deletion batch; this method does not delete external resources or emit user-visible messages.</en>
+            // </lang>
             _context.SaveChanges();
         }
 
@@ -162,6 +171,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
 
+            // <lang>
+            //   <zh-CN>新公告实体承载一次新增投影；字段值均来自已由编辑页校验或兼容处理后的输入。</zh-CN>
+            //   <en>The new announcement entity carries one create projection; every field value comes from input already validated or compatibility-handled by the editor page.</en>
+            // </lang>
             var item = new AnnouncementItem
             {
                 ModuleId = moduleId,
@@ -174,9 +187,22 @@ namespace ASPNET.StarterKit.Portal
                 Title = title
             };
 
+            // <lang>
+            //   <zh-CN>把新实体加入 EF 跟踪集，数据库标识会在保存后回填到同一对象。</zh-CN>
+            //   <en>Add the new entity to the EF tracking set; the database identifier is populated back onto the same object after saving.</en>
+            // </lang>
             _context.Announcements.Add(item);
+
+            // <lang>
+            //   <zh-CN>提交新增批次；本层不写审计、不重判权限，也不检查链接是否可点击。</zh-CN>
+            //   <en>Commit the create batch; this layer does not write audit records, re-authorize, or check whether links are clickable.</en>
+            // </lang>
             _context.SaveChanges();
 
+            // <lang>
+            //   <zh-CN>返回 EF 保存后生成的旧表主键，供编辑页继续导航或反馈。</zh-CN>
+            //   <en>Return the legacy-table primary key generated after EF saving, allowing the editor page to continue navigation or feedback.</en>
+            // </lang>
             return item.ItemId;
         }
 
@@ -208,6 +234,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
 
+            // <lang>
+            //   <zh-CN>更新路径要求目标公告唯一存在；调用页已完成模块归属和编辑权限判断。</zh-CN>
+            //   <en>The update path requires the target announcement to exist uniquely; the caller page has already completed module ownership and edit-permission checks.</en>
+            // </lang>
             var item = _context.Announcements.Single(i => i.ItemId == itemId);
 
             // <lang>
@@ -221,6 +251,10 @@ namespace ASPNET.StarterKit.Portal
             item.MobileMoreLink = mobileMoreLink;
             item.Title = title;
 
+            // <lang>
+            //   <zh-CN>提交当前可编辑字段更新；所属模块、原创建时间和页面级审计不在此处改变。</zh-CN>
+            //   <en>Commit the current editable-field update; owning module, original creation time, and page-level audit are not changed here.</en>
+            // </lang>
             _context.SaveChanges();
         }
 

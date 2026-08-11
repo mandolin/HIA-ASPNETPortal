@@ -100,6 +100,10 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="itemId"><l><zh-CN>链接标识符。</zh-CN><en>Link identifier.</en></l></param>
         public void DeleteLink(int itemId)
         {
+            // <lang>
+            //   <zh-CN>待删除链接必须唯一存在；缺失或重复说明调用页归属校验前提或数据完整性已失效。</zh-CN>
+            //   <en>The link to delete must exist uniquely; a miss or duplicate means caller-side ownership validation assumptions or data integrity have failed.</en>
+            // </lang>
             var item = _context.Links.Single(i => i.ItemId == itemId);
 
             // <lang>
@@ -107,6 +111,11 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The delete action is committed directly to the legacy table; audit, permission, and safe return navigation are completed by the editor page.</en>
             // </lang>
             _context.Links.Remove(item);
+
+            // <lang>
+            //   <zh-CN>提交当前删除批次；本方法不触碰外部 URL，也不刷新导航或页面缓存。</zh-CN>
+            //   <en>Commit the current deletion batch; this method does not touch external URLs or refresh navigation/page caches.</en>
+            // </lang>
             _context.SaveChanges();
         }
 
@@ -139,6 +148,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             userName = userName ?? "unknown";
 
+            // <lang>
+            //   <zh-CN>新链接实体承载一次新增投影；URL、移动端 URL 和排序值均来自编辑页的前置策略处理。</zh-CN>
+            //   <en>The new link entity carries one create projection; URL, mobile URL, and order value all come from the editor page's prior policy handling.</en>
+            // </lang>
             var item = new LinkItem
             {
                 ModuleId = moduleId,
@@ -151,9 +164,22 @@ namespace ASPNET.StarterKit.Portal
                 Description = description
             };
 
+            // <lang>
+            //   <zh-CN>把新实体加入 EF 跟踪集，数据库标识会在保存后回填到同一对象。</zh-CN>
+            //   <en>Add the new entity to the EF tracking set; the database identifier is populated back onto the same object after saving.</en>
+            // </lang>
             _context.Links.Add(item);
+
+            // <lang>
+            //   <zh-CN>提交新增批次；本层不重判权限、不访问目标 URL，也不决定展示时是否可点击。</zh-CN>
+            //   <en>Commit the create batch; this layer does not re-authorize, access the target URL, or decide whether it is clickable at display time.</en>
+            // </lang>
             _context.SaveChanges();
 
+            // <lang>
+            //   <zh-CN>返回 EF 保存后生成的旧表主键，供编辑页继续导航或反馈。</zh-CN>
+            //   <en>Return the legacy-table primary key generated after EF saving, allowing the editor page to continue navigation or feedback.</en>
+            // </lang>
             return item.ItemId;
         }
 
@@ -185,6 +211,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             userName = userName ?? "unknown";
 
+            // <lang>
+            //   <zh-CN>更新路径要求目标链接唯一存在；调用页已完成模块归属和编辑权限判断。</zh-CN>
+            //   <en>The update path requires the target link to exist uniquely; the caller page has already completed module ownership and edit-permission checks.</en>
+            // </lang>
             var item = _context.Links.Single(i => i.ItemId == itemId);
 
             // <lang>
@@ -198,6 +228,10 @@ namespace ASPNET.StarterKit.Portal
             item.ViewOrder = viewOrder;
             item.Description = description;
 
+            // <lang>
+            //   <zh-CN>提交当前可编辑字段更新；所属模块、原创建时间和页面级审计不在此处改变。</zh-CN>
+            //   <en>Commit the current editable-field update; owning module, original creation time, and page-level audit are not changed here.</en>
+            // </lang>
             _context.SaveChanges();
         }
 

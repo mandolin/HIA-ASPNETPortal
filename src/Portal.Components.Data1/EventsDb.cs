@@ -100,6 +100,10 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="itemId"><l><zh-CN>事件标识符。</zh-CN><en>Event identifier.</en></l></param>
         public void DeleteEvent(int itemId)
         {
+            // <lang>
+            //   <zh-CN>待删除事件必须唯一存在；缺失或重复说明调用页归属校验前提或数据完整性已失效。</zh-CN>
+            //   <en>The event to delete must exist uniquely; a miss or duplicate means caller-side ownership validation assumptions or data integrity have failed.</en>
+            // </lang>
             var item = _context.Events.Single(i => i.ItemId == itemId);
 
             // <lang>
@@ -107,6 +111,11 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The delete action is committed directly to the legacy table; audit, permission, and safe return navigation are completed by the editor page.</en>
             // </lang>
             _context.Events.Remove(item);
+
+            // <lang>
+            //   <zh-CN>提交当前删除批次；本方法不输出用户可见消息，也不负责页面缓存刷新。</zh-CN>
+            //   <en>Commit the current deletion batch; this method does not emit user-visible messages or refresh page caches.</en>
+            // </lang>
             _context.SaveChanges();
         }
 
@@ -138,6 +147,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
 
+            // <lang>
+            //   <zh-CN>新事件实体承载一次新增投影；日期、标题和地点时间文本均沿用编辑页的兼容输入结果。</zh-CN>
+            //   <en>The new event entity carries one create projection; date, title, and where/when text all keep the editor page's compatibility-processed input.</en>
+            // </lang>
             var item = new EventItem
             {
                 ModuleId = moduleId,
@@ -149,9 +162,22 @@ namespace ASPNET.StarterKit.Portal
                 WhereWhen = wherewhen
             };
 
+            // <lang>
+            //   <zh-CN>把新实体加入 EF 跟踪集，数据库标识会在保存后回填到同一对象。</zh-CN>
+            //   <en>Add the new entity to the EF tracking set; the database identifier is populated back onto the same object after saving.</en>
+            // </lang>
             _context.Events.Add(item);
+
+            // <lang>
+            //   <zh-CN>提交新增批次；本层不重判权限、不解析日期，也不生成展示 HTML。</zh-CN>
+            //   <en>Commit the create batch; this layer does not re-authorize, parse dates, or generate display HTML.</en>
+            // </lang>
             _context.SaveChanges();
 
+            // <lang>
+            //   <zh-CN>返回 EF 保存后生成的旧表主键，供编辑页继续导航或反馈。</zh-CN>
+            //   <en>Return the legacy-table primary key generated after EF saving, allowing the editor page to continue navigation or feedback.</en>
+            // </lang>
             return item.ItemId;
         }
 
@@ -182,6 +208,10 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
 
+            // <lang>
+            //   <zh-CN>更新路径要求目标事件唯一存在；调用页已完成模块归属和编辑权限判断。</zh-CN>
+            //   <en>The update path requires the target event to exist uniquely; the caller page has already completed module ownership and edit-permission checks.</en>
+            // </lang>
             var item = _context.Events.Single(i => i.ItemId == itemId);
 
             // <lang>
@@ -194,6 +224,10 @@ namespace ASPNET.StarterKit.Portal
             item.Description = description;
             item.WhereWhen = wherewhen;
 
+            // <lang>
+            //   <zh-CN>提交当前可编辑字段更新；所属模块、原创建时间和页面级审计不在此处改变。</zh-CN>
+            //   <en>Commit the current editable-field update; owning module, original creation time, and page-level audit are not changed here.</en>
+            // </lang>
             _context.SaveChanges();
         }
 
