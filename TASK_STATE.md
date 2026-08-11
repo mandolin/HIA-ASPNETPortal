@@ -965,7 +965,10 @@
 | P26.5ru 选片 | 已选择 `Announcements.ascx.designer.cs`、`Contacts.ascx.designer.cs`、`Document.ascx.designer.cs`、`Events.ascx.designer.cs`、`HtmlModule.ascx.designer.cs`、`ImageModule.ascx.designer.cs`、`Links.ascx.designer.cs` 与 `XmlModule.ascx.designer.cs` 的旧内容展示模块 Designer 字段容器；标记层、code-behind 与 Designer 生成器排除。见 [P26.5ru 选片](work-zone/dev/plans/W-anp-P26.5ru-content-display-designer-selection.md)。 |
 | P26.5rv 注释补强 | 已为 8 个目标 Designer partial class 补充中英双语 XML `<summary>`，明确字段由 ASCX 服务器控件生成及重生成覆盖风险；新增非注释代码 `0`。见 [P26.5rv 结果](work-zone/dev/plans/W-anp-P26.5rv-content-display-designer-result.md)。 |
 | P26.5rw 静态验证 | 通过；注释-only 扫描 `ADDED_COUNT=64`、`NONCOMMENT_COUNT=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。Designer 生成器、真实数据库、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5rw 审计](work-zone/dev/plans/W-anp-P26.5rw-content-display-designer-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5rx：重新读取最新源码盘点，继续选择下一组未重复、同风险同验证路径且存在明确语义缺口的 clean 职责链；不重复 P26.5ru-rw。 |
+| P26.5rx 选片 | 已选择 `Default.aspx`、`Default.aspx.designer.cs`、`Logoff.aspx`、`Logoff.aspx.designer.cs`、`ViewDocument.aspx`、`ViewDocument.aspx.designer.cs` 与 `GenericErrorPage.aspx` 的入口/出口标记层与空 Designer 容器职责链；code-behind、Designer 生成器和真实运行 proof 排除。见 [P26.5rx 选片](work-zone/dev/plans/W-anp-P26.5rx-entry-exit-markup-selection.md)。 |
+| P26.5ry 注释补强 | 已为 4 个标记页补充/迁移服务器端双语 `<%-- ... --%>` 注释块 `9` 个，为 3 个空 Designer 容器补充生成头 `<lang>` 与 class 级 XML `<summary>`；目标 `<lang>` 总数 `15`，新增非注释代码 `0`。见 [P26.5ry 结果](work-zone/dev/plans/W-anp-P26.5ry-entry-exit-markup-result.md)。 |
+| P26.5rz 静态验证 | 通过；去服务器注释/XML 注释后有效标记/代码与 `HEAD` 一致，`ADDED_COUNT=86`、`NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实注销、文档下载、异常触发、数据库、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5rz 审计](work-zone/dev/plans/W-anp-P26.5rz-entry-exit-markup-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5sa：重新读取最新源码盘点，继续选择下一组未重复、同风险同验证路径且存在明确语义缺口的 clean 职责链；不重复 P26.5rx-rz。 |
 
 ## Known Residual Working Tree Items
 
@@ -984,6 +987,7 @@
 | P26.5qy 文本规范化首次 EOF/CRLF 检查 | adjusted | 首次机械规范化留下新增 EOF 空白行，第二次只修 EOF 时又保留正文 LF；改为剥离末尾换行、正文统一 CRLF 后复核通过，未改变代码语义。 |
 | P26.5rb clean-file 选片命令 | adjusted | 首次命令因 PowerShell 字符串引号解析失败未执行，未改文件；改用 `git ls-files -m` 与 `git ls-files` 组合后完成只读筛选。 |
 | P26.5rk 初始注释-only 增行扫描 | adjusted | 一处旧行尾中文注释迁移为前置双语块后，简单新增行扫描把 unchanged code + removed trailing comment 识别为 `NONCOMMENT_COUNT=1`；改用去注释后与 HEAD code fingerprint 对比通过，确认语义代码未变。 |
+| P26.5rx 初始注释-only 增行扫描 | adjusted | 服务器注释内部 `<lang>` 内容以及首次规范化误删的两个既有 Page 指令行尾空格会让简单新增行扫描出现伪非注释差异；已恢复原始指令文本，并改用去服务器注释/XML 注释后的有效标记/代码对比通过。 |
 
 ## Anti-Loop Guard
 
