@@ -983,7 +983,10 @@
 | P26.5sm 选片 | 已选择 `BusinessApplicationRequest.css`、`EmployeeProfileConfirm.css`、`EmployeeProfileCorrectionRequest.css` 与 `EnterpriseCapabilityWorkbench.css` 的业务桌面模块 CSS 职责链；覆盖容器、标题/消息、表单网格、字段/输入、动作区、列表横向滚动和旧浏览器布局兼容；大型主题 CSS、SQL、XML/config 与真实浏览器 proof 排除。见 [P26.5sm 选片](work-zone/dev/plans/W-anp-P26.5sm-business-module-css-rop-selection.md)。 |
 | P26.5sn 注释补强 | 已为 4 个目标 CSS 补充合法 `/* <lang> ... */` ROP 注释，目标 `<lang>` 总数 `59`，新增非注释代码 `0`；未改变 selector、声明、CSS 属性值、Gulp 输入或生成资产。见 [P26.5sn 结果](work-zone/dev/plans/W-anp-P26.5sn-business-module-css-rop-result.md)。 |
 | P26.5so 静态验证 | 通过；CSS diff 新增行全部为注释，`ADDED_NONBLANK=236`、`REMOVED_NONBLANK=0`、`NONCOMMENT_COUNT=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、PostCSS parse、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；未执行 assets build、真实浏览器、IIS/HTTP、模块真实数据、账号、凭据或发布 proof。见 [P26.5so 审计](work-zone/dev/plans/W-anp-P26.5so-business-module-css-rop-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5sp：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 clean 非 Designer C# XML 文档表面、主题/模块 XML 文档表面、`gulpfile.js` watcher/asset 管线或本轮业务模块 CSS。 |
+| P26.5sp 选片 | 已选择 `PortalCfg_TabThemeOverrides.sql`、`PortalCfg_OperationAudits.sql`、`PortalCfg_RolePermissions.sql` 与 `PortalCfg_UserRegistration.sql` 的配置/安全/审计 SQL 迁移脚本；覆盖主题覆盖、运营审计、角色权限映射、注册审核与邀请链接的 DDL/DML 注释边界；真实 SQL 执行、数据库写入和大体量建库/装载脚本排除。见 [P26.5sp 选片](work-zone/dev/plans/W-anp-P26.5sp-config-sql-rop-selection.md)。 |
+| P26.5sq 注释补强 | 已为 4 个目标 SQL 补充或迁移合法 `/* <lang> ... */` 与 `-- <lang>` ROP 注释，目标 `<lang>` 总数 `50`，覆盖脚本幂等、表/约束/索引、UTC 时间、低敏审计、授权 seed、虚拟 All Users、注册状态白名单和旧用户 Approved seed；新增非注释 SQL `0`。见 [P26.5sq 结果](work-zone/dev/plans/W-anp-P26.5sq-config-sql-rop-result.md)。 |
+| P26.5sr 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 均通过；未执行真实 SQL Server 迁移、SQL 解析器 proof、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5sr 审计](work-zone/dev/plans/W-anp-P26.5sr-config-sql-rop-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5ss：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 clean C# XML 文档表面、主题/模块 XML 表面、`gulpfile.js`、业务模块 CSS 或本轮配置 SQL。 |
 
 ## Known Residual Working Tree Items
 
