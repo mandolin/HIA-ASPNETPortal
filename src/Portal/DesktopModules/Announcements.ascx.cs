@@ -53,7 +53,15 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>公告查询限制在当前模块实例内，过期筛选由数据访问层保持旧模块规则。</zh-CN>
+            //   <en>The announcement query is scoped to the current module instance, with expiry filtering kept in the data-access layer under legacy module rules.</en>
+            // </lang>
             myDataList.DataSource = AnnouncementsDB.GetAnnouncements(ModuleId);
+            // <lang>
+            //   <zh-CN>立即绑定可以让编辑回跳后的公告标题、描述和更多链接策略在本次请求中生效。</zh-CN>
+            //   <en>Binding immediately lets edited titles, descriptions, and read-more URL policy results take effect on this request after returning from edit.</en>
+            // </lang>
             myDataList.DataBind();
         }
 
@@ -77,7 +85,15 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         protected string GetSafeBrowseUrl(object value)
         {
+            // <lang>
+            //   <zh-CN>normalizedUrl 只在策略通过时承载可输出地址；失败路径保持未公开的空字符串。</zh-CN>
+            //   <en>normalizedUrl carries an output-safe address only when policy succeeds; failure paths remain the non-disclosing empty string.</en>
+            // </lang>
             string normalizedUrl;
+            // <lang>
+            //   <zh-CN>候选值来自旧数据库记录，必须先按当前请求上下文规范化，不能直接进入 HyperLink。</zh-CN>
+            //   <en>The candidate value comes from a legacy database row and must be normalized against the current request context before reaching HyperLink output.</en>
+            // </lang>
             return PortalNavigationPolicy.TryNormalizeBrowseUrl(Convert.ToString(value), Context.Request, out normalizedUrl)
                 ? normalizedUrl
                 : string.Empty;
@@ -103,6 +119,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         protected bool HasSafeBrowseUrl(object value)
         {
+            // <lang>
+            //   <zh-CN>可见性复用同一规范化 helper，确保链接文本和链接地址不会采用不同安全判断。</zh-CN>
+            //   <en>Visibility reuses the same normalization helper so link text and link address do not rely on different safety decisions.</en>
+            // </lang>
             return !string.IsNullOrEmpty(GetSafeBrowseUrl(value));
         }
     }

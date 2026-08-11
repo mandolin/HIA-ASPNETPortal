@@ -33,6 +33,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Reads and binds contacts for the current module. Ordinary fields are emitted through encoded data binding in the markup.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面加载的 Web Forms 事件源。</zh-CN>
+        ///   <en>The Web Forms event source that triggered page loading.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；当前实现不读取其内容。</zh-CN>
+        ///   <en>The page-load event arguments; the current implementation does not read them.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             // <lang>
@@ -63,7 +75,15 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         protected string GetMailToUrl(object value)
         {
+            // <lang>
+            //   <zh-CN>email 是展示型联系人字段，不代表已验证身份；这里只做空白归一，不做登录语义推断。</zh-CN>
+            //   <en>email is a display-oriented contact field rather than verified identity; this path only normalizes blanks and does not infer login semantics.</en>
+            // </lang>
             string email = Convert.ToString(value);
+            // <lang>
+            //   <zh-CN>空邮箱返回空地址，让标记层隐藏链接；非空值只加 mailto 前缀，保留旧模块兼容行为。</zh-CN>
+            //   <en>Blank email returns an empty address so markup can hide the link; non-blank values only receive the mailto prefix to preserve legacy module behavior.</en>
+            // </lang>
             return string.IsNullOrWhiteSpace(email) ? string.Empty : "mailto:" + email.Trim();
         }
 
@@ -87,6 +107,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         protected bool HasEmail(object value)
         {
+            // <lang>
+            //   <zh-CN>是否显示邮件链接与实际 href 生成使用同一 helper，避免空白邮箱产生可见但无效的链接。</zh-CN>
+            //   <en>Mail-link visibility and href generation use the same helper, avoiding visible but invalid links for blank email values.</en>
+            // </lang>
             return !string.IsNullOrEmpty(GetMailToUrl(value));
         }
     }

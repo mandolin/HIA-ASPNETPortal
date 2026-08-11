@@ -34,6 +34,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Decodes and renders trusted HTML stored in encoded form; emits no content when its record is absent.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面加载的控件实例；当前逻辑不依赖该值。</zh-CN>
+        ///   <en>The control instance that raised page loading; the current logic does not depend on it.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；当前逻辑不读取额外事件状态。</zh-CN>
+        ///   <en>The page-load event arguments; no additional event state is read.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             // <lang>
@@ -43,6 +55,10 @@ namespace ASPNET.StarterKit.Portal
             IHtmlTextItem item = HtmlTextDB.GetHtmlText(ModuleId);
             if (item == null || string.IsNullOrEmpty(item.DesktopHtml))
             {
+                // <lang>
+                //   <zh-CN>缺失记录和空 HTML 都保持静默输出，避免在普通门户页面暴露配置状态。</zh-CN>
+                //   <en>Missing records and empty HTML both remain silent, avoiding disclosure of configuration state on the ordinary portal page.</en>
+                // </lang>
                 return;
             }
 

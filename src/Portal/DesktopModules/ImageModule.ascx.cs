@@ -42,13 +42,25 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>imageUrl 只有在当前请求上下文下通过浏览地址策略时才会被写入 Image 控件。</zh-CN>
+            //   <en>imageUrl is assigned to the Image control only when it passes browse-url policy for the current request context.</en>
+            // </lang>
             string imageUrl;
             if (!PortalNavigationPolicy.TryNormalizeBrowseUrl(Settings["src"] as string, Context.Request, out imageUrl))
             {
+                // <lang>
+                //   <zh-CN>非法或缺失图片地址直接隐藏控件，避免输出原始配置值或破损外链。</zh-CN>
+                //   <en>Invalid or missing image URLs hide the control outright, avoiding raw setting output or broken external links.</en>
+                // </lang>
                 Image1.Visible = false;
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>到达此处时地址已经规范化，可以交给 Web Forms Image 控件生成最终 src。</zh-CN>
+            //   <en>At this point the address has been normalized and can be passed to the Web Forms Image control to produce the final src.</en>
+            // </lang>
             Image1.ImageUrl = imageUrl;
             ApplyDimension(Settings["width"] as string, true);
             ApplyDimension(Settings["height"] as string, false);
@@ -80,12 +92,20 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         private void ApplyDimension(string configuredValue, bool isWidth)
         {
+            // <lang>
+            //   <zh-CN>dimension 是从模块设置解析出的像素数量，生命周期只覆盖本次宽度或高度赋值尝试。</zh-CN>
+            //   <en>dimension is the pixel count parsed from module settings and lives only for this width-or-height assignment attempt.</en>
+            // </lang>
             int dimension;
             if (!int.TryParse(configuredValue, out dimension) || dimension < 0)
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>布尔参数决定目标维度；保持单一 helper 可避免宽高解析规则漂移。</zh-CN>
+            //   <en>The Boolean parameter selects the target dimension, keeping one helper so width and height parsing rules do not drift apart.</en>
+            // </lang>
             if (isWidth)
             {
                 Image1.Width = dimension;

@@ -33,6 +33,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Binds quick links and exposes the add entry only to users with module-edit permission.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>触发页面加载的 Web Forms 事件源。</zh-CN>
+        ///   <en>The Web Forms event source that triggered page loading.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；当前实现不读取其内容。</zh-CN>
+        ///   <en>The page-load event arguments; the current implementation does not read them.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             // <lang>
@@ -68,13 +80,39 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Editors receive the current page's edit URL; ordinary visitors receive only a URL that passes navigation policy.</en>
         /// </lang>
         /// </summary>
+        /// <param name="itemId">
+        /// <l>
+        ///   <zh-CN>当前快捷链接条目的数据库标识。</zh-CN>
+        ///   <en>The current quick-link item's database identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="url">
+        /// <l>
+        ///   <zh-CN>当前快捷链接条目的候选浏览地址。</zh-CN>
+        ///   <en>The current quick-link item's candidate browse URL.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>编辑者获得站内编辑页地址；浏览者获得通过策略的 URL 或空字符串。</zh-CN>
+        ///   <en>Editors receive an in-site edit URL; viewers receive a policy-approved URL or an empty string.</en>
+        /// </l>
+        /// </returns>
         protected string ChooseUrl(object itemId, object url)
         {
+            // <lang>
+            //   <zh-CN>快捷链接在编辑态优先进入维护页面，让编辑者能修复当前不可浏览的旧 URL。</zh-CN>
+            //   <en>Quick Links prefer the maintenance page in edit mode so editors can repair legacy URLs that are not currently browsable.</en>
+            // </lang>
             if (IsEditable)
             {
                 return "~/DesktopModules/EditLinks.aspx?ItemID=" + Convert.ToString(itemId) + "&mid=" + ModuleId;
             }
 
+            // <lang>
+            //   <zh-CN>浏览态只返回通过当前导航策略的 URL，策略失败则由空字符串抑制链接。</zh-CN>
+            //   <en>Browse mode returns only URLs accepted by current navigation policy, with an empty string suppressing links on failure.</en>
+            // </lang>
             return GetSafeBrowseUrl(url);
         }
 
@@ -84,8 +122,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Determines whether the navigation icon should be shown in the current context.</en>
         /// </lang>
         /// </summary>
+        /// <param name="url">
+        /// <l>
+        ///   <zh-CN>当前快捷链接条目的候选浏览地址。</zh-CN>
+        ///   <en>The current quick-link item's candidate browse URL.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>编辑状态或地址可安全浏览时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the row is editable or the URL is safe to browse.</en>
+        /// </l>
+        /// </returns>
         protected bool CanRenderNavigation(object url)
         {
+            // <lang>
+            //   <zh-CN>编辑者始终看到图标作为修复入口；浏览者只在 URL 通过策略时看到图标。</zh-CN>
+            //   <en>Editors always see the icon as a repair entry; viewers see it only when the URL passes policy.</en>
+            // </lang>
             return IsEditable || !string.IsNullOrEmpty(GetSafeBrowseUrl(url));
         }
 
@@ -95,8 +149,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Returns a browse URL that passes navigation policy, or an empty string for an invalid legacy value.</en>
         /// </lang>
         /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>来自快捷链接记录的候选 URL。</zh-CN>
+        ///   <en>The candidate URL from the quick-link row.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>策略允许的 URL；失败时为空字符串。</zh-CN>
+        ///   <en>The policy-approved URL, or an empty string on failure.</en>
+        /// </l>
+        /// </returns>
         protected string GetSafeBrowseUrl(object value)
         {
+            // <lang>
+            //   <zh-CN>normalizedUrl 只在策略成功时作为 href 输出；失败时不回显历史原始地址。</zh-CN>
+            //   <en>normalizedUrl is emitted as href only when policy succeeds; failures do not echo the legacy raw address.</en>
+            // </lang>
             string normalizedUrl;
             return PortalNavigationPolicy.TryNormalizeBrowseUrl(Convert.ToString(value), Context.Request, out normalizedUrl)
                 ? normalizedUrl
@@ -109,8 +179,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Determines whether a legacy browse URL can still be safely rendered as a link.</en>
         /// </lang>
         /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>来自快捷链接记录的候选 URL。</zh-CN>
+        ///   <en>The candidate URL from the quick-link row.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>候选 URL 通过策略并且非空时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the candidate URL passes policy and is non-empty.</en>
+        /// </l>
+        /// </returns>
         protected bool HasSafeBrowseUrl(object value)
         {
+            // <lang>
+            //   <zh-CN>链接可见性使用与 href 相同的规范化结果，避免显示无法访问的快捷链接。</zh-CN>
+            //   <en>Link visibility uses the same normalization result as href generation, avoiding visible quick links that cannot be reached.</en>
+            // </lang>
             return !string.IsNullOrEmpty(GetSafeBrowseUrl(value));
         }
     }

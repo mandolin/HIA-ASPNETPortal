@@ -67,7 +67,15 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>事件查询限制在当前模块实例，由数据访问层按旧规则过滤过期事件。</zh-CN>
+            //   <en>The event query is scoped to the current module instance, and the data-access layer applies legacy expiry filtering.</en>
+            // </lang>
             myDataList.DataSource = EventsDB.GetEvents(ModuleId);
+            // <lang>
+            //   <zh-CN>立即绑定保持旧模块“编辑后回到首页即刷新”的行为，标记层随后负责字段输出。</zh-CN>
+            //   <en>Immediate binding preserves the legacy module behavior where returning to the home page after editing refreshes the list, and markup then owns field output.</en>
+            // </lang>
             myDataList.DataBind();
         }
     }

@@ -956,7 +956,10 @@
 | P26.5rk 选片 | 已选择 `Discussion.ascx.cs`、`DiscussDetails.aspx.cs`、`Discussion.ascx.designer.cs` 与 `DiscussionItem.cs` 的讨论区前台职责链；覆盖顶级主题/回复列表、详情页新建/回复、请求标识、模块权限、HTML 编码兼容、Designer 字段容器和诊断摘要边界；已有历史修改的 `DiscussDetails.aspx.designer.cs` 排除。见 [P26.5rk 选片](work-zone/dev/plans/W-anp-P26.5rk-discussion-frontend-selection.md)。 |
 | P26.5rl 注释补强 | 已为 4 个目标文件补充中英双语 XML/inline ROP 注释；新增覆盖字段状态、私有 helper 文档、参数/返回、局部变量、回发状态、`DisplayOrder` 层级计算、命令白名单、写入后重绑和生成文件重生成风险；新增非注释代码 `0`。见 [P26.5rl 结果](work-zone/dev/plans/W-anp-P26.5rl-discussion-frontend-result.md)。 |
 | P26.5rm 静态验证 | 通过；去注释后与 HEAD 代码 fingerprint 一致，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1926`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实数据库、讨论发帖、IIS/HTTP、浏览器、真实账号、凭据和发布 proof 未执行。见 [P26.5rm 审计](work-zone/dev/plans/W-anp-P26.5rm-discussion-frontend-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5rn：重新读取最新源码盘点，选择下一组未重复、同风险同验证路径且仍存在明确语义缺口的 clean 职责链；不重复 P26.5rk-rm。 |
+| P26.5rn 选片 | 已选择 `Announcements.ascx.cs`、`Contacts.ascx.cs`、`Document.ascx.cs`、`Events.ascx.cs`、`HtmlModule.ascx.cs`、`Links.ascx.cs`、`QuickLinks.ascx.cs`、`XmlModule.ascx.cs` 与 `ImageModule.ascx.cs` 的旧内容展示模块 code-behind；覆盖当前模块数据绑定、受限链接/路径规范化、HTML 输出边界、编辑/浏览 URL 切换、配置缺失回退和图片尺寸设置。见 [P26.5rn 选片](work-zone/dev/plans/W-anp-P26.5rn-content-display-codebehind-selection.md)。 |
+| P26.5ro 注释补强 | 已为 9 个目标 code-behind 补充中英双语 XML/inline ROP 注释，覆盖 Page_Load 参数、DataBind 刷新语义、`normalizedUrl` 生命周期、邮件链接展示身份边界、HTML 模块 trusted raw HTML 例外、XML/XSL 受信资源校验和图片尺寸局部变量；新增非注释代码 `0`。见 [P26.5ro 结果](work-zone/dev/plans/W-anp-P26.5ro-content-display-codebehind-result.md)。 |
+| P26.5rp 静态验证 | 通过；注释-only 扫描 `ADDED_COUNT=334`、`NONCOMMENT_COUNT=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1926`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实数据库、真实模块设置、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5rp 审计](work-zone/dev/plans/W-anp-P26.5rp-content-display-codebehind-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5rq：重新读取最新源码盘点，继续选择下一组未重复、同风险同验证路径且存在明确语义缺口的 clean 职责链；不重复 P26.5rn-rp。 |
 
 ## Known Residual Working Tree Items
 

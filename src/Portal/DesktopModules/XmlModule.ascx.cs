@@ -44,9 +44,17 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>xmlPath 是通过站内部署资源策略后的应用相对路径；失败时不会包含原始设置值。</zh-CN>
+            //   <en>xmlPath is the application-relative path after in-site deployment-resource policy validation; on failure it does not contain the raw setting value.</en>
+            // </lang>
             string xmlPath;
             if (TryGetExistingResource(Settings["xmlsrc"] as string, out xmlPath))
             {
+                // <lang>
+                //   <zh-CN>只有策略和物理文件存在性都通过后，才把 XML 数据源交给 Web Forms Xml 控件。</zh-CN>
+                //   <en>The XML source is assigned to the Web Forms Xml control only after both policy and physical file-existence checks pass.</en>
+                // </lang>
                 xml1.DocumentSource = xmlPath;
             }
             else if (!string.IsNullOrWhiteSpace(Settings["xmlsrc"] as string))
@@ -54,9 +62,17 @@ namespace ASPNET.StarterKit.Portal
                 AddConfigurationMessage("XML 数据文件当前不可用。");
             }
 
+            // <lang>
+            //   <zh-CN>xslPath 独立于 XML 数据源校验，允许无转换的纯 XML 配置继续工作。</zh-CN>
+            //   <en>xslPath is validated independently from the XML data source, allowing XML-only configuration to keep working without a transform.</en>
+            // </lang>
             string xslPath;
             if (TryGetExistingResource(Settings["xslsrc"] as string, out xslPath))
             {
+                // <lang>
+                //   <zh-CN>转换源同样只接受站内受信任文件，避免远程样式表进入 XSL/T 执行路径。</zh-CN>
+                //   <en>The transform source also accepts only trusted in-site files, avoiding remote stylesheets entering the XSL/T execution path.</en>
+                // </lang>
                 xml1.TransformSource = xslPath;
             }
             else if (!string.IsNullOrWhiteSpace(Settings["xslsrc"] as string))
@@ -97,12 +113,20 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         private bool TryGetExistingResource(string configuredPath, out string normalizedPath)
         {
+            // <lang>
+            //   <zh-CN>输出参数先归零，保证任何失败分支都不会把原始配置路径泄露给调用方。</zh-CN>
+            //   <en>The output parameter is cleared first so no failure path leaks the raw configured path back to the caller.</en>
+            // </lang>
             normalizedPath = string.Empty;
             if (!PortalNavigationPolicy.TryNormalizeTrustedDeploymentResourcePath(configuredPath, Context.Request, out normalizedPath))
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>路径通过策略后再映射物理文件；这里只返回存在性，不把物理路径写入页面。</zh-CN>
+            //   <en>After policy validation, the path is mapped to the physical file; only existence is returned, and the physical path is not written to the page.</en>
+            // </lang>
             return File.Exists(Server.MapPath(normalizedPath));
         }
 
@@ -126,6 +150,10 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         private void AddConfigurationMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>提示通过 LiteralControl 追加到模块内，但消息本身先 HTML 编码，保持低敏文本输出。</zh-CN>
+            //   <en>The notice is appended through LiteralControl inside the module, but the message itself is HTML-encoded to keep output low-sensitivity text.</en>
+            // </lang>
             Controls.Add(new LiteralControl("<br><span class=\"NormalRed\">" + Server.HtmlEncode(message) + "</span>"));
         }
     }

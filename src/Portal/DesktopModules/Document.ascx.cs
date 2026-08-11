@@ -47,7 +47,15 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>文档列表按当前模块读取，上传文件、数据库内容和手填链接的选择逻辑留到行级 helper。</zh-CN>
+            //   <en>The document list is read by current module, while the row-level helper decides among uploaded files, database content, and manually entered links.</en>
+            // </lang>
             myDataGrid.DataSource = DocumentDB.GetDocuments(ModuleId);
+            // <lang>
+            //   <zh-CN>立即绑定保持旧页面编辑后刷新语义，并让标记层在本次请求中应用编码和链接可见性。</zh-CN>
+            //   <en>Immediate binding preserves the legacy refresh-after-edit behavior and lets markup apply encoding and link visibility in this request.</en>
+            // </lang>
             myDataGrid.DataBind();
         }
 
@@ -83,11 +91,19 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         protected string GetBrowsePath(string url, object size, int documentId)
         {
+            // <lang>
+            //   <zh-CN>内容大小来自旧数据绑定行；正数表示二进制内容在数据库中，必须走受控下载页而非直接 URL。</zh-CN>
+            //   <en>The content size comes from a legacy bound row; a positive value means binary content is in the database and must use the controlled download page rather than a direct URL.</en>
+            // </lang>
             if (size != DBNull.Value && Convert.ToInt32(size) > 0)
             {
                 return "~/DesktopModules/ViewDocument.aspx?DocumentID=" + documentId;
             }
 
+            // <lang>
+            //   <zh-CN>normalizedUrl 是旧手填链接通过当前导航策略后的输出值；失败时不会回显原始 URL。</zh-CN>
+            //   <en>normalizedUrl is the output value for a legacy manually entered link after current navigation policy validation; failures do not echo the raw URL.</en>
+            // </lang>
             string normalizedUrl;
             return PortalNavigationPolicy.TryNormalizeBrowseUrl(url, Context.Request, out normalizedUrl)
                 ? normalizedUrl
@@ -114,6 +130,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         protected string EncodeText(object value)
         {
+            // <lang>
+            //   <zh-CN>文档标题、类别和描述等普通字段统一作为文本节点输出，缺失值折叠为空字符串。</zh-CN>
+            //   <en>Ordinary fields such as document title, category, and description are emitted as text nodes, with missing values folded into an empty string.</en>
+            // </lang>
             return Server.HtmlEncode(value == null ? string.Empty : Convert.ToString(value));
         }
     }
