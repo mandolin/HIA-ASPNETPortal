@@ -962,7 +962,10 @@
 | P26.5rq 选片 | 已选择 `EditAnnouncements.aspx.cs`、`EditContacts.aspx.cs`、`EditEvents.aspx.cs`、`EditImage.aspx.cs`、`EditLinks.aspx.cs` 与 `EditXml.aspx.cs` 的旧内容编辑页 code-behind；覆盖模块编辑权限、请求参数读取、条目归属校验、可选 URL/路径归一化、低敏校验提示、保存/删除/取消回跳和模块设置写入；已有历史修改的 `EditDocs.aspx.cs`、`EditHtml.aspx.cs` 排除。见 [P26.5rq 选片](work-zone/dev/plans/W-anp-P26.5rq-content-editor-codebehind-selection.md)。 |
 | P26.5rs 注释补强 | 已为 6 个目标编辑页补充中英双语 XML/inline ROP 注释，覆盖 `itemId`/`moduleId` 私有状态、事件参数、初始化输出参数清空、模块权限边界、可选 `ItemId`、新增路径授权、既有条目归属、URL/路径/尺寸解析和低敏提示赋值；新增非注释代码 `0`。见 [P26.5rs 结果](work-zone/dev/plans/W-anp-P26.5rs-content-editor-codebehind-result.md)。 |
 | P26.5rt 静态验证 | 通过；注释-only 扫描 `ADDED_COUNT=652`、`NONCOMMENT_COUNT=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实数据库、真实模块设置写入、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5rt 审计](work-zone/dev/plans/W-anp-P26.5rt-content-editor-codebehind-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5ru：重新读取最新源码盘点，继续选择下一组未重复、同风险同验证路径且存在明确语义缺口的 clean 职责链；不重复 P26.5rq-rt。 |
+| P26.5ru 选片 | 已选择 `Announcements.ascx.designer.cs`、`Contacts.ascx.designer.cs`、`Document.ascx.designer.cs`、`Events.ascx.designer.cs`、`HtmlModule.ascx.designer.cs`、`ImageModule.ascx.designer.cs`、`Links.ascx.designer.cs` 与 `XmlModule.ascx.designer.cs` 的旧内容展示模块 Designer 字段容器；标记层、code-behind 与 Designer 生成器排除。见 [P26.5ru 选片](work-zone/dev/plans/W-anp-P26.5ru-content-display-designer-selection.md)。 |
+| P26.5rv 注释补强 | 已为 8 个目标 Designer partial class 补充中英双语 XML `<summary>`，明确字段由 ASCX 服务器控件生成及重生成覆盖风险；新增非注释代码 `0`。见 [P26.5rv 结果](work-zone/dev/plans/W-anp-P26.5rv-content-display-designer-result.md)。 |
+| P26.5rw 静态验证 | 通过；注释-only 扫描 `ADDED_COUNT=64`、`NONCOMMENT_COUNT=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。Designer 生成器、真实数据库、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5rw 审计](work-zone/dev/plans/W-anp-P26.5rw-content-display-designer-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5rx：重新读取最新源码盘点，继续选择下一组未重复、同风险同验证路径且存在明确语义缺口的 clean 职责链；不重复 P26.5ru-rw。 |
 
 ## Known Residual Working Tree Items
 

@@ -8,7 +8,12 @@
 namespace ASPNET.StarterKit.Portal
 {
 
-
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>文档展示用户控件的 Designer 字段容器；字段由 ASCX 服务器控件生成。</zh-CN>
+    ///   <en>Designer field container for the document display user control; fields are generated from ASCX server controls.</en>
+    /// </lang>
+    /// </summary>
     public partial class Document
     {
 

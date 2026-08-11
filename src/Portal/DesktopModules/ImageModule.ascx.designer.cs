@@ -6,13 +6,19 @@
 //------------------------------------------------------------------------------
 
 namespace ASPNET.StarterKit.Portal {
-    
-    
+
+
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>图片展示模块用户控件的 Designer 字段容器；字段由 ASCX 服务器控件生成。</zh-CN>
+    ///   <en>Designer field container for the image display module user control; fields are generated from ASCX server controls.</en>
+    /// </lang>
+    /// </summary>
     public partial class ImageModule {
-        
+
         /// <summary><lang><zh-CN>显示图片模块标题的共享标题组件。</zh-CN><en>Shared title component that displays the image-module title.</en></lang></summary>
         protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;
-        
+
         /// <summary><lang><zh-CN>显示模块配置图片的图像呈现组件。</zh-CN><en>Image-rendering component that displays the module-configured image.</en></lang></summary>
         protected global::System.Web.UI.WebControls.Image Image1;
     }

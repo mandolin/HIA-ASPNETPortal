@@ -6,13 +6,19 @@
 //------------------------------------------------------------------------------
 
 namespace ASPNET.StarterKit.Portal {
-    
-    
+
+
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>链接展示用户控件的 Designer 字段容器；字段由 ASCX 服务器控件生成。</zh-CN>
+    ///   <en>Designer field container for the links display user control; fields are generated from ASCX server controls.</en>
+    /// </lang>
+    /// </summary>
     public partial class Links {
-        
+
         /// <summary><lang><zh-CN>显示链接模块标题的共享标题组件。</zh-CN><en>Shared title component that displays the links-module title.</en></lang></summary>
         protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;
-        
+
         /// <summary><lang><zh-CN>绑定链接条目的 DataList。</zh-CN><en>DataList bound to link entries.</en></lang></summary>
         protected global::System.Web.UI.WebControls.DataList myDataList;
     }

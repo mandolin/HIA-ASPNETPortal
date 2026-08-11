@@ -6,13 +6,19 @@
 //------------------------------------------------------------------------------
 
 namespace ASPNET.StarterKit.Portal {
-    
-    
+
+
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>HTML 展示模块用户控件的 Designer 字段容器；字段由 ASCX 服务器控件生成。</zh-CN>
+    ///   <en>Designer field container for the HTML display module user control; fields are generated from ASCX server controls.</en>
+    /// </lang>
+    /// </summary>
     public partial class HtmlModule {
-        
+
         /// <summary><lang><zh-CN>显示 HTML 模块标题的共享标题组件。</zh-CN><en>Shared title component that displays the HTML-module title.</en></lang></summary>
         protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;
-        
+
         /// <summary><lang><zh-CN>承载模块渲染 HTML 内容的服务端容器。</zh-CN><en>Server-side container that holds the module-rendered HTML content.</en></lang></summary>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl HtmlHolder;
     }
