@@ -12,12 +12,24 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>读取单项时不存在记录会返回 <c>null</c>，由页面将编辑请求收敛到拒绝页或将下载请求收敛到中性未找到响应。 写入方法不验证 URL、上传类型或权限，这些边界由调用页面和 <c>PortalDocumentPolicy</c> 负责。</zh-CN>
+    ///   <zh-CN>读取单项时不存在记录会返回 <c>null</c>，由页面将编辑请求收敛到拒绝页或将下载请求收敛到中性未找到响应。写入方法不验证 URL、上传类型或权限，这些边界由调用页面和 <c>PortalDocumentPolicy</c> 负责。</zh-CN>
     ///   <en>Reads of a missing single item return <c>null</c>, allowing pages to converge edit requests to an access-denied page and download requests to a neutral not-found response. Write operations do not validate URLs, upload types, or permission; those boundaries belong to calling pages and <c>PortalDocumentPolicy</c>.</en>
     /// </lang>
     /// </remarks>
     public class DocumentsDb : IDocumentsDb
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户业务 EF 上下文，承载旧文档模块表的查询和写入跟踪。</zh-CN>
+        ///   <en>Portal business EF context that carries query and write tracking for the legacy document-module table.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该上下文由 Unity 注入并随数据访问对象生命周期使用；本类不持有连接串、凭据或上传文件句柄。</zh-CN>
+        ///   <en>The context is injected by Unity and used for the lifetime of this data-access object; this class does not hold connection strings, credentials, or uploaded-file handles.</en>
+        /// </lang>
+        /// </remarks>
         private readonly PortalDbContext _context;
 
         /// <summary>
@@ -34,6 +46,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         public DocumentsDb(PortalDbContext context)
         {
+            // <lang>
+            //   <zh-CN>保存调用方提供的 EF 上下文引用；构造器不主动访问数据库，避免 DI 创建阶段产生隐式 I/O。</zh-CN>
+            //   <en>Store the caller-provided EF context reference; the constructor does not query the database, avoiding implicit I/O during DI creation.</en>
+            // </lang>
             _context = context;
         }
 
@@ -57,6 +73,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public IEnumerable<IDocumentItem> GetDocuments(int moduleId)
         {
+            // <lang>
+            //   <zh-CN>只按模块实例过滤并立即物化；排序、空列表展示和下载入口策略由页面/控件层继续处理。</zh-CN>
+            //   <en>Filter only by module instance and materialize immediately; ordering, empty-list display, and download-link policy remain with the page/control layer.</en>
+            // </lang>
             return _context.Documents.Where(item => item.ModuleId == moduleId).ToList<IDocumentItem>();
         }
 
@@ -80,6 +100,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public IDocumentItem GetSingleDocument(int itemId)
         {
+            // <lang>
+            //   <zh-CN>编辑页会把请求中的 ItemId 传入这里；未命中返回空值，重复记录仍作为完整性故障暴露。</zh-CN>
+            //   <en>Editor pages pass request item identifiers here; misses return null while duplicate records still surface as integrity failures.</en>
+            // </lang>
             return _context.Documents.SingleOrDefault(item => item.ItemId == itemId);
         }
 
@@ -103,6 +127,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public IDocumentItemDetails GetDocumentContent(int itemId)
         {
+            // <lang>
+            //   <zh-CN>详情读取复用同一实体集，但返回包含二进制内容的接口；调用方必须避免把内容展开到列表、日志或诊断输出。</zh-CN>
+            //   <en>The detail read uses the same entity set but returns the interface that includes binary content; callers must avoid expanding that content into lists, logs, or diagnostics.</en>
+            // </lang>
             return _context.Documents.SingleOrDefault(item => item.ItemId == itemId);
         }
 
@@ -120,8 +148,22 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         public void DeleteDocument(int itemId)
         {
+            // <lang>
+            //   <zh-CN>待删除实体必须唯一存在；调用方已经验证模块归属，因此这里不再用宽松空值分支吞掉损坏状态。</zh-CN>
+            //   <en>The entity to delete must exist uniquely; caller-side module ownership has already been validated, so this layer does not swallow damaged state with a loose null branch.</en>
+            // </lang>
             DocumentItem item = _context.Documents.Single(record => record.ItemId == itemId);
+
+            // <lang>
+            //   <zh-CN>从 EF 跟踪集中标记删除；真实文件系统清理不在该旧表数据访问方法内完成。</zh-CN>
+            //   <en>Mark the entity for deletion in the EF tracking set; real filesystem cleanup is not performed inside this legacy-table data-access method.</en>
+            // </lang>
             _context.Documents.Remove(item);
+
+            // <lang>
+            //   <zh-CN>提交单条文档表删除；权限审计和安全回跳由调用页在本方法外处理。</zh-CN>
+            //   <en>Commit the single document-table deletion; permission auditing and safe return navigation are handled by the caller page outside this method.</en>
+            // </lang>
             _context.SaveChanges();
         }
 
@@ -188,19 +230,39 @@ namespace ASPNET.StarterKit.Portal
         public void UpdateDocument(int moduleId, int itemId, string userName, string name, string url, string category,
                                    byte[] content, int size, string contentType)
         {
+            // <lang>
+            //   <zh-CN>用户名只做旧表必需的空值回退，不做身份重判；真实身份和权限已经由页面层建立。</zh-CN>
+            //   <en>The user name receives only the legacy-table required blank fallback and is not re-authenticated here; real identity and permission are established by the page layer.</en>
+            // </lang>
             userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
 
+            // <lang>
+            //   <zh-CN>本地实体变量在新增和更新分支之间共享，生命周期只覆盖本次保存批次。</zh-CN>
+            //   <en>The local entity variable is shared by the create and update branches and lives only for this save batch.</en>
+            // </lang>
             DocumentItem item;
             if (itemId == 0)
             {
+                // <lang>
+                //   <zh-CN>零标识保持旧约定表示新增；新实体先纳入 EF 集合，随后统一赋值，避免新增/更新字段漂移。</zh-CN>
+                //   <en>The zero identifier keeps the legacy convention for creation; add the new entity to the EF set first, then use the common assignment block to avoid create/update field drift.</en>
+                // </lang>
                 item = new DocumentItem();
                 _context.Documents.Add(item);
             }
             else
             {
+                // <lang>
+                //   <zh-CN>非零标识表示更新既有记录；缺失或重复记录应作为完整性/归属前置校验失败暴露。</zh-CN>
+                //   <en>A non-zero identifier updates an existing record; missing or duplicate records should surface as integrity or prevalidated-ownership failures.</en>
+                // </lang>
                 item = _context.Documents.Single(record => record.ItemId == itemId);
             }
 
+            // <lang>
+            //   <zh-CN>以下赋值是旧文档表的完整持久化投影；策略校验后的 URL/上传路径、分类和历史内容占位由调用方按契约传入。</zh-CN>
+            //   <en>The assignments below are the full persistence projection for the legacy document table; the caller supplies policy-validated URL/upload path, category, and legacy-content placeholders according to contract.</en>
+            // </lang>
             item.ModuleId = moduleId;
             item.CreatedByUser = userName;
             item.CreatedDate = DateTime.Now;
@@ -210,6 +272,11 @@ namespace ASPNET.StarterKit.Portal
             item.Content = content;
             item.ContentSize = size;
             item.ContentType = contentType;
+
+            // <lang>
+            //   <zh-CN>提交当前新增或更新批次；本方法不附带文件移动、MIME 复核、审计或浏览器可见输出。</zh-CN>
+            //   <en>Commit the current create or update batch; this method does not perform file moves, MIME re-checks, auditing, or browser-visible output.</en>
+            // </lang>
             _context.SaveChanges();
         }
     }
