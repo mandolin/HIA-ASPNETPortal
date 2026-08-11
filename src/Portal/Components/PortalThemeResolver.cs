@@ -58,9 +58,28 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         internal PortalThemeContext(string themeName, PortalThemeSource source, int? tabId, string fallbackReason)
         {
+            // <lang>
+            //   <zh-CN>将主题名空值归一为安全 Default，保证 Web Forms 始终接收单一可用基底主题。</zh-CN>
+            //   <en>Normalize a null theme name to safe Default so Web Forms always receives one usable base theme.</en>
+            // </lang>
             ThemeName = themeName ?? PortalThemeResolver.DefaultThemeName;
+
+            // <lang>
+            //   <zh-CN>保存最终来源层级，供健康检查和受限诊断解释回退但不暴露配置原文。</zh-CN>
+            //   <en>Store the final source layer so health checks and restricted diagnostics can explain fallback without exposing raw configuration.</en>
+            // </lang>
             Source = source;
+
+            // <lang>
+            //   <zh-CN>保存可选 Tab 标识；后台、错误或无门户上下文请求保持 null。</zh-CN>
+            //   <en>Store the optional tab identifier; administration, error, or no-portal-context requests remain null.</en>
+            // </lang>
             TabId = tabId;
+
+            // <lang>
+            //   <zh-CN>将回退原因空值归一为空字符串，且该字段只容纳非敏感说明。</zh-CN>
+            //   <en>Normalize a null fallback reason to empty; this field holds non-sensitive explanation only.</en>
+            // </lang>
             FallbackReason = fallbackReason ?? string.Empty;
         }
 
@@ -123,10 +142,36 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public const string DefaultThemeName = "Default";
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>主题回退的受限诊断分类，不包含用户、路径或配置原文。</zh-CN>
+        ///   <en>Restricted diagnostic category for theme fallback, without users, paths, or raw configuration.</en>
+        /// </lang>
+        /// </summary>
         private const string TraceCategory = "PortalTheme";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前请求 Items 中保存主题上下文的稳定键，不构成跨请求缓存。</zh-CN>
+        ///   <en>Stable key for the theme context in current-request Items; it does not form a cross-request cache.</en>
+        /// </lang>
+        /// </summary>
         private const string ThemeContextKey = "PortalThemeContext";
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>保护进程内回退告警去重集合的同步锁。</zh-CN>
+        ///   <en>Synchronization lock protecting the process-local fallback-warning de-duplication set.</en>
+        /// </lang>
+        /// </summary>
         private static readonly object TraceLock = new object();
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已记录的受限回退键集合，避免同一主题/原因重复污染诊断。</zh-CN>
+        ///   <en>Set of recorded restricted fallback keys, preventing repeated diagnostics for the same theme and reason.</en>
+        /// </lang>
+        /// </summary>
         private static readonly HashSet<string> WarnedFallbacks = new HashSet<string>(StringComparer.Ordinal);
 
         /// <summary>
@@ -150,6 +195,10 @@ namespace ASPNET.StarterKit.Portal
                 throw new ArgumentNullException("page");
             }
 
+            // <lang>
+            //   <zh-CN>解析当前请求主题上下文；解析只依赖既有受控来源，不接受 URL 或脚本输入。</zh-CN>
+            //   <en>Resolve the current-request theme context from existing controlled sources only, never from URL or script input.</en>
+            // </lang>
             PortalThemeContext themeContext = ResolveThemeContext(HttpContext.Current);
             page.Theme = themeContext.ThemeName;
             return themeContext;
@@ -168,28 +217,73 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         public static PortalThemeContext ResolveThemeContext(HttpContext context)
         {
+            // <lang>
+            //   <zh-CN>读取本请求已缓存的主题上下文，避免同一请求在渲染过程中重复访问设置存储。</zh-CN>
+            //   <en>Read the theme context already cached for this request to avoid repeated settings-store access during rendering.</en>
+            // </lang>
             PortalThemeContext existing = GetCurrentThemeContext(context);
             if (existing != null)
             {
                 return existing;
             }
 
+            // <lang>
+            //   <zh-CN>读取全局主题的受控运行期设置值及来源层级，后续仍需校验部署包可信度。</zh-CN>
+            //   <en>Read the controlled runtime global-theme value and source layer; deployed-package trust still requires later validation.</en>
+            // </lang>
             PortalRuntimeSettingValue globalSetting =
                 PortalRuntimeSettings.GetEffectiveValue(PortalSettingsRegistry.ThemeName, context);
+
+            // <lang>
+            //   <zh-CN>保存全局候选校验失败的非敏感原因；成功时保持空字符串。</zh-CN>
+            //   <en>Hold the non-sensitive reason when global-candidate validation fails; retain empty on success.</en>
+            // </lang>
             string fallbackReason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>将全局候选解析为可信部署主题，失败时得到 Default 而非未验证目录名。</zh-CN>
+            //   <en>Resolve the global candidate to a trusted deployed theme, producing Default on failure rather than an unverified directory name.</en>
+            // </lang>
             string themeName = ResolveTrustedThemeName(globalSetting.Value, context, out fallbackReason);
+
+            // <lang>
+            //   <zh-CN>将运行期设置来源映射为展示/健康检查使用的稳定主题来源。</zh-CN>
+            //   <en>Map the runtime-setting source to the stable theme source used by display and health checks.</en>
+            // </lang>
             PortalThemeSource source = ToThemeSource(globalSetting.Source, !string.IsNullOrEmpty(fallbackReason));
+
+            // <lang>
+            //   <zh-CN>初始化可选 Tab 标识；后台请求和无法建立门户上下文的请求保持 null。</zh-CN>
+            //   <en>Initialize the optional tab identifier; administration requests and requests without portal context remain null.</en>
+            // </lang>
             int? tabId = null;
 
             if (!IsAdminRequest(context))
             {
+                // <lang>
+                //   <zh-CN>仅门户请求尝试读取活动 Tab，避免后台页因覆盖表或 Tab 上下文出现额外依赖。</zh-CN>
+                //   <en>Attempt to read the active tab only for portal requests, avoiding extra override-table or tab-context dependencies for administration pages.</en>
+                // </lang>
                 tabId = TryGetActiveTabId(context);
                 if (tabId.HasValue)
                 {
+                    // <lang>
+                    //   <zh-CN>读取当前 Tab 的覆盖状态；表不可用只触发告警并保持已解析全局主题。</zh-CN>
+                    //   <en>Read current-tab override state; an unavailable table only triggers a warning and retains the resolved global theme.</en>
+                    // </lang>
                     PortalTabThemeOverrideReadResult overrideResult = PortalTabThemeOverrides.Read(tabId.Value, context);
                     if (overrideResult.IsAvailable && overrideResult.IsFound)
                     {
+                        // <lang>
+                        //   <zh-CN>保存覆盖主题验证失败原因；无效覆盖不会替换全局主题或阻断请求。</zh-CN>
+                        //   <en>Hold the override-theme validation failure reason; an invalid override neither replaces the global theme nor blocks the request.</en>
+                        // </lang>
                         string overrideFallbackReason;
+
+                        // <lang>
+                        //   <zh-CN>把覆盖候选解析为可信部署主题，只有验证成功才允许提升来源为 TabOverride。</zh-CN>
+                        //   <en>Resolve the override candidate to a trusted deployed theme and elevate the source to TabOverride only after validation succeeds.</en>
+                        // </lang>
                         string overrideThemeName = ResolveTrustedThemeName(
                             overrideResult.ThemeName,
                             context,
@@ -210,6 +304,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>封装本请求最终主题快照，避免后续渲染阶段重新计算候选链。</zh-CN>
+            //   <en>Package the final theme snapshot for this request so later rendering does not recompute the candidate chain.</en>
+            // </lang>
             var resolved = new PortalThemeContext(themeName, source, tabId, fallbackReason);
             if (context != null)
             {
@@ -227,6 +325,10 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>已缓存的主题上下文，或 null。Cached theme context, or null.</returns>
         public static PortalThemeContext GetCurrentThemeContext(HttpContext context = null)
         {
+            // <lang>
+            //   <zh-CN>优先使用显式上下文，再回退当前请求；没有请求时安全返回 null。</zh-CN>
+            //   <en>Prefer the explicit context and then fall back to the current request; return null safely when no request exists.</en>
+            // </lang>
             HttpContext current = context ?? HttpContext.Current;
             return current == null ? null : current.Items[ThemeContextKey] as PortalThemeContext;
         }
@@ -256,12 +358,20 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         public static string GetCurrentCssClass(HttpContext context = null)
         {
+            // <lang>
+            //   <zh-CN>读取请求缓存主题；缺失时只输出 Default scope，不在渲染阶段访问配置或数据库。</zh-CN>
+            //   <en>Read the request-cached theme; when absent, emit Default scope only and never access configuration or database during rendering.</en>
+            // </lang>
             PortalThemeContext themeContext = GetCurrentThemeContext(context);
             if (themeContext == null)
             {
                 return "portal-theme-default";
             }
 
+            // <lang>
+            //   <zh-CN>构造仅含受控前缀和规范化片段的 body class，避免主题原文直接进入 HTML 属性。</zh-CN>
+            //   <en>Build a body class using only controlled prefixes and normalized segments so raw theme text never enters an HTML attribute.</en>
+            // </lang>
             var builder = new StringBuilder("portal-theme-");
             builder.Append(NormalizeCssSegment(themeContext.ThemeName));
             if (themeContext.TabId.HasValue && themeContext.TabId.Value > 0)
@@ -283,6 +393,10 @@ namespace ASPNET.StarterKit.Portal
         /// <returns>模块和窗格作用域 class。Module and pane scope classes.</returns>
         public static string GetModuleCssClass(int moduleId, string paneName, string packageId = null)
         {
+            // <lang>
+            //   <zh-CN>构造模块作用域 class；窗格和包标识均先规范化，模块 ID 保留整数形式。</zh-CN>
+            //   <en>Build module-scope classes; pane and package identifiers are normalized first while module ID remains an integer representation.</en>
+            // </lang>
             var builder = new StringBuilder("portal-module portal-module-");
             builder.Append(moduleId);
             builder.Append(" portal-pane-");
@@ -307,10 +421,24 @@ namespace ASPNET.StarterKit.Portal
             HttpContext context,
             out string fallbackReason)
         {
+            // <lang>
+            //   <zh-CN>把空白候选归一为 Default，否则只去除外围空白；最终可信度由主题目录校验决定。</zh-CN>
+            //   <en>Normalize a blank candidate to Default and otherwise trim surrounding whitespace; theme-directory validation decides final trust.</en>
+            // </lang>
             string themeName = string.IsNullOrWhiteSpace(requestedThemeName)
                 ? DefaultThemeName
                 : requestedThemeName.Trim();
+
+            // <lang>
+            //   <zh-CN>保存可信主题包，在成功时只返回其规范名称。</zh-CN>
+            //   <en>Hold the trusted theme package and return only its canonical name on success.</en>
+            // </lang>
             PortalThemePackage package;
+
+            // <lang>
+            //   <zh-CN>接收非敏感验证失败原因，用于受限告警和最终上下文而不泄露 manifest 内容。</zh-CN>
+            //   <en>Receive the non-sensitive validation failure reason for restricted warning and final context without leaking manifest content.</en>
+            // </lang>
             string validationReason;
             if (PortalThemeCatalog.TryGetTrustedPackage(themeName, out package, out validationReason))
             {
@@ -357,7 +485,16 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private static bool IsAdminRequest(HttpContext context)
         {
+            // <lang>
+            //   <zh-CN>优先采用显式上下文，再回退当前请求，以保持测试和宿主调用可预测。</zh-CN>
+            //   <en>Prefer the explicit context and then the current request to keep tests and host calls predictable.</en>
+            // </lang>
             HttpContext current = context ?? HttpContext.Current;
+
+            // <lang>
+            //   <zh-CN>读取应用相对执行路径；缺少请求时使用空文本，使判定安全地落入非后台分支。</zh-CN>
+            //   <en>Read the application-relative execution path; use empty text without a request so the decision safely falls outside the administration branch.</en>
+            // </lang>
             string path = current == null || current.Request == null
                 ? string.Empty
                 : current.Request.AppRelativeCurrentExecutionFilePath;
@@ -374,6 +511,10 @@ namespace ASPNET.StarterKit.Portal
         {
             try
             {
+                // <lang>
+                //   <zh-CN>读取当前请求关联的门户设置；该操作只服务 Tab 判定，不修改上下文或主题设置。</zh-CN>
+                //   <en>Read portal settings associated with the current request; this serves tab determination only and changes neither context nor theme settings.</en>
+                // </lang>
                 PortalSettings settings = PortalContext.GetPortalSettings(context);
                 return settings.ActiveTab == null || settings.ActiveTab.TabId <= 0
                     ? (int?)null
@@ -398,7 +539,16 @@ namespace ASPNET.StarterKit.Portal
                 return "default";
             }
 
+            // <lang>
+            //   <zh-CN>逐字符构造 ASCII 安全 class 片段，任何非允许字符统一降级为连字符。</zh-CN>
+            //   <en>Build an ASCII-safe class segment character by character, degrading every disallowed character to a hyphen.</en>
+            // </lang>
             var builder = new StringBuilder();
+
+            // <lang>
+            //   <zh-CN>遍历已去除外围空白的输入；循环不保留原始 Unicode 字符。</zh-CN>
+            //   <en>Traverse the trimmed input; the loop does not retain raw Unicode characters.</en>
+            // </lang>
             foreach (char character in value.Trim())
             {
                 if ((character >= 'A' && character <= 'Z') ||
@@ -426,8 +576,22 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private static void TraceFallback(HttpContext context, string requestedTheme, string fallbackReason)
         {
+            // <lang>
+            //   <zh-CN>净化并截断请求主题，供受限日志使用，避免把原始配置或攻击输入写入诊断。</zh-CN>
+            //   <en>Sanitize and truncate the requested theme for restricted logging, preventing raw configuration or hostile input from entering diagnostics.</en>
+            // </lang>
             string requested = PortalDiagnosticSanitizer.SanitizeAndTruncate(requestedTheme, 100);
+
+            // <lang>
+            //   <zh-CN>净化并截断回退原因，保持诊断稳定且不携带 manifest 或路径细节。</zh-CN>
+            //   <en>Sanitize and truncate the fallback reason, keeping diagnostics stable without manifest or path details.</en>
+            // </lang>
             string reason = PortalDiagnosticSanitizer.SanitizeAndTruncate(fallbackReason, 200);
+
+            // <lang>
+            //   <zh-CN>组合进程内去重键；它不写入 Cookie、数据库或跨请求用户状态。</zh-CN>
+            //   <en>Combine the process-local de-duplication key; it writes to no cookie, database, or cross-request user state.</en>
+            // </lang>
             string fallbackKey = requested + "|" + reason;
             lock (TraceLock)
             {
@@ -439,6 +603,10 @@ namespace ASPNET.StarterKit.Portal
                 WarnedFallbacks.Add(fallbackKey);
             }
 
+            // <lang>
+            //   <zh-CN>构造已净化的固定格式告警文本，供 Trace 和门户诊断复用。</zh-CN>
+            //   <en>Build a sanitized fixed-format warning message shared by Trace and portal diagnostics.</en>
+            // </lang>
             string warningMessage = string.Format(
                 "Theme configuration fell back to {0}. Requested='{1}', Reason='{2}'.",
                 DefaultThemeName,

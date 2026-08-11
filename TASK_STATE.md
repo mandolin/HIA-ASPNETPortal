@@ -925,7 +925,10 @@
 | P26.5qj 选片 | 已选择 `PortalHiaBoundaryContracts.cs` 的 HIA 外围契约验证完整职责链；覆盖实例标识规范化、能力类型/字段白名单、payload/metadata 校验、敏感字段拒绝、路径/URL 防泄露、UTC/语义版本和安全结果归一；真实外围适配器、transport、外部程序集、账号、凭据、数据库、IIS/HTTP 和浏览器 proof 排除。见 [P26.5qj 选片](work-zone/dev/plans/W-anp-P26.5qj-hia-boundary-contract-selection.md)。 |
 | P26.5qk 注释补强 | 已为契约正则、能力白名单、payload 规则、实例规范化、payload/metadata 校验、能力集合上限、敏感字段片段、路径/URL 拒绝、UTC 解析、内部规则对象和安全结果构造补充 33 个中英双语 `<lang>` 块及 5 个 private/state XML `<summary>`；新增非注释代码 `0`。见 [P26.5qk 结果](work-zone/dev/plans/W-anp-P26.5qk-hia-boundary-contract-result.md)。 |
 | P26.5ql 静态验证 | 通过；目标文件差异全部为 XML/inline 注释，注释-only 扫描 `NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal XML member count `1918`、Portal.Components `902`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。真实外围、网络、账号、凭据和生产 proof 未执行。见 [P26.5ql 审计](work-zone/dev/plans/W-anp-P26.5ql-hia-boundary-contract-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5qm：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qj-ql。 |
+| P26.5qm 选片 | 已选择 `PortalTabThemeOverrides.cs` 与 `PortalThemeResolver.cs` 的 Tab 主题覆盖与请求主题解析相邻职责链；覆盖受信主题包、覆盖表可用性、事务写入、全局/Tab 回退、请求缓存、CSS scope 净化和受限告警；真实主题目录、数据库写入、IIS/HTTP、浏览器、账号、凭据和发布 proof 排除。见 [P26.5qm 选片](work-zone/dev/plans/W-anp-P26.5qm-tab-theme-resolution-selection.md)。 |
+| P26.5qn 注释补强 | 已为覆盖读写结果、固定表名、连接/事务/命令生命周期、可信包、操作人净化、全局/Tab 候选、请求缓存、CSS scope、后台排除和告警去重补充 62 个中英双语 `<lang>` 块及 5 个 private/state XML `<summary>`；新增非注释代码 `0`。见 [P26.5qn 结果](work-zone/dev/plans/W-anp-P26.5qn-tab-theme-resolution-result.md)。 |
+| P26.5qo 静态验证 | 通过；两个目标文件差异全部为 XML/inline 注释，注释-only 扫描 `NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal XML member count `1923`、Portal.Components `902`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告保持登记。真实主题目录、数据库、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5qo 审计](work-zone/dev/plans/W-anp-P26.5qo-tab-theme-resolution-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5qp：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qm-qo。 |
 
 ## Known Residual Working Tree Items
 
