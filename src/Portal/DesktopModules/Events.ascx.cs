@@ -47,10 +47,16 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="sender">
-        ///   <l zh-CN="触发页面加载的 Web Forms 对象。" en="Web Forms object that raised the load event." />
+        ///   <l>
+        ///     <zh-CN>触发页面加载的 Web Forms 对象。</zh-CN>
+        ///     <en>Web Forms object that raised the load event.</en>
+        ///   </l>
         /// </param>
         /// <param name="e">
-        ///   <l zh-CN="页面加载事件参数。" en="Page load event arguments." />
+        ///   <l>
+        ///     <zh-CN>页面加载事件参数。</zh-CN>
+        ///     <en>Page load event arguments.</en>
+        ///   </l>
         /// </param>
         /// <remarks>
         ///   <lang>

@@ -27,7 +27,10 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="moduleId">
-        ///   <l zh-CN="要删除的模块实例标识。" en="Identifier of the module instance to delete." />
+        ///   <l>
+        ///     <zh-CN>要删除的模块实例标识。</zh-CN>
+        ///     <en>Identifier of the module instance to delete.</en>
+        ///   </l>
         /// </param>
         /// <remarks>
         ///   <lang>

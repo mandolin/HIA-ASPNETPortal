@@ -233,8 +233,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Resolves the application path used by the Forms Authentication cookie.</en>
         /// </lang>
         /// </summary>
-        /// <param name="request"><l zh-CN="当前 HTTP 请求，可为 null。" en="Current HTTP request; may be null." /></param>
-        /// <returns><l zh-CN="非空 Cookie Path，无法确定时为根路径。" en="Non-empty cookie path, or root path when it cannot be determined." /></returns>
+        /// <param name="request">
+        ///   <l>
+        ///     <zh-CN>当前 HTTP 请求，可为 null。</zh-CN>
+        ///     <en>Current HTTP request; may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>非空 Cookie Path，无法确定时为根路径。</zh-CN>
+        ///     <en>Non-empty cookie path, or root path when it cannot be determined.</en>
+        ///   </l>
+        /// </returns>
         private static string GetCookiePath(HttpRequest request)
         {
             // <lang>
@@ -256,8 +266,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Immediately expires the main identity cookie using the same Path rule as sign-in.</en>
         /// </lang>
         /// </summary>
-        /// <param name="response"><l zh-CN="当前 HTTP 响应。" en="Current HTTP response." /></param>
-        /// <param name="request"><l zh-CN="用于解析 Cookie Path 的当前请求。" en="Current request used to resolve the cookie path." /></param>
+        /// <param name="response">
+        ///   <l>
+        ///     <zh-CN>当前 HTTP 响应。</zh-CN>
+        ///     <en>Current HTTP response.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="request">
+        ///   <l>
+        ///     <zh-CN>用于解析 Cookie Path 的当前请求。</zh-CN>
+        ///     <en>Current request used to resolve the cookie path.</en>
+        ///   </l>
+        /// </param>
         private static void ExpireAuthenticationCookie(HttpResponse response, HttpRequest request)
         {
             response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, string.Empty)

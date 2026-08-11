@@ -30,40 +30,76 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="userId">
-        ///   <l zh-CN="用户主键。" en="User primary key." />
+        ///   <l>
+        ///     <zh-CN>用户主键。</zh-CN>
+        ///     <en>User primary key.</en>
+        ///   </l>
         /// </param>
         /// <param name="status">
-        ///   <l zh-CN="注册审核状态。" en="Registration review status." />
+        ///   <l>
+        ///     <zh-CN>注册审核状态。</zh-CN>
+        ///     <en>Registration review status.</en>
+        ///   </l>
         /// </param>
         /// <param name="requiresApproval">
-        ///   <l zh-CN="是否需要管理员审核。" en="Whether administrator approval is required." />
+        ///   <l>
+        ///     <zh-CN>是否需要管理员审核。</zh-CN>
+        ///     <en>Whether administrator approval is required.</en>
+        ///   </l>
         /// </param>
         /// <param name="employeeCode">
-        ///   <l zh-CN="注册时填写或绑定的员工工号。" en="Employee code entered or bound during registration." />
+        ///   <l>
+        ///     <zh-CN>注册时填写或绑定的员工工号。</zh-CN>
+        ///     <en>Employee code entered or bound during registration.</en>
+        ///   </l>
         /// </param>
         /// <param name="inviteCode">
-        ///   <l zh-CN="注册邀请码或邀请批次标识。" en="Registration invitation code or invitation batch identifier." />
+        ///   <l>
+        ///     <zh-CN>注册邀请码或邀请批次标识。</zh-CN>
+        ///     <en>Registration invitation code or invitation batch identifier.</en>
+        ///   </l>
         /// </param>
         /// <param name="registeredUtc">
-        ///   <l zh-CN="注册提交 UTC 时间。" en="UTC time when registration was submitted." />
+        ///   <l>
+        ///     <zh-CN>注册提交 UTC 时间。</zh-CN>
+        ///     <en>UTC time when registration was submitted.</en>
+        ///   </l>
         /// </param>
         /// <param name="approvedUtc">
-        ///   <l zh-CN="批准 UTC 时间；未批准时为空。" en="UTC approval time; null when not approved." />
+        ///   <l>
+        ///     <zh-CN>批准 UTC 时间；未批准时为空。</zh-CN>
+        ///     <en>UTC approval time; null when not approved.</en>
+        ///   </l>
         /// </param>
         /// <param name="approvedBy">
-        ///   <l zh-CN="批准操作者显示名或账号快照。" en="Approving operator display name or account snapshot." />
+        ///   <l>
+        ///     <zh-CN>批准操作者显示名或账号快照。</zh-CN>
+        ///     <en>Approving operator display name or account snapshot.</en>
+        ///   </l>
         /// </param>
         /// <param name="rejectedUtc">
-        ///   <l zh-CN="拒绝 UTC 时间；未拒绝时为空。" en="UTC rejection time; null when not rejected." />
+        ///   <l>
+        ///     <zh-CN>拒绝 UTC 时间；未拒绝时为空。</zh-CN>
+        ///     <en>UTC rejection time; null when not rejected.</en>
+        ///   </l>
         /// </param>
         /// <param name="rejectedBy">
-        ///   <l zh-CN="拒绝操作者显示名或账号快照。" en="Rejecting operator display name or account snapshot." />
+        ///   <l>
+        ///     <zh-CN>拒绝操作者显示名或账号快照。</zh-CN>
+        ///     <en>Rejecting operator display name or account snapshot.</en>
+        ///   </l>
         /// </param>
         /// <param name="reviewNote">
-        ///   <l zh-CN="审核备注，调用方应避免写入敏感信息。" en="Review note; callers should avoid writing sensitive information." />
+        ///   <l>
+        ///     <zh-CN>审核备注，调用方应避免写入敏感信息。</zh-CN>
+        ///     <en>Review note; callers should avoid writing sensitive information.</en>
+        ///   </l>
         /// </param>
         /// <param name="source">
-        ///   <l zh-CN="注册信息来源。" en="Registration information source." />
+        ///   <l>
+        ///     <zh-CN>注册信息来源。</zh-CN>
+        ///     <en>Registration information source.</en>
+        ///   </l>
         /// </param>
         public UserRegistrationInfo(
             int userId,
@@ -94,62 +130,98 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        ///   <l zh-CN="用户主键。" en="User primary key." />
+        ///   <l>
+        ///     <zh-CN>用户主键。</zh-CN>
+        ///     <en>User primary key.</en>
+        ///   </l>
         /// </summary>
         public int UserId { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="注册审核状态。" en="Registration review status." />
+        ///   <l>
+        ///     <zh-CN>注册审核状态。</zh-CN>
+        ///     <en>Registration review status.</en>
+        ///   </l>
         /// </summary>
         public string Status { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="是否需要管理员审核。" en="Whether administrator approval is required." />
+        ///   <l>
+        ///     <zh-CN>是否需要管理员审核。</zh-CN>
+        ///     <en>Whether administrator approval is required.</en>
+        ///   </l>
         /// </summary>
         public bool RequiresApproval { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="注册时填写或绑定的员工工号。" en="Employee code entered or bound during registration." />
+        ///   <l>
+        ///     <zh-CN>注册时填写或绑定的员工工号。</zh-CN>
+        ///     <en>Employee code entered or bound during registration.</en>
+        ///   </l>
         /// </summary>
         public string EmployeeCode { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="注册邀请码或邀请批次标识。" en="Registration invitation code or invitation batch identifier." />
+        ///   <l>
+        ///     <zh-CN>注册邀请码或邀请批次标识。</zh-CN>
+        ///     <en>Registration invitation code or invitation batch identifier.</en>
+        ///   </l>
         /// </summary>
         public string InviteCode { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="注册提交 UTC 时间。" en="UTC time when registration was submitted." />
+        ///   <l>
+        ///     <zh-CN>注册提交 UTC 时间。</zh-CN>
+        ///     <en>UTC time when registration was submitted.</en>
+        ///   </l>
         /// </summary>
         public DateTime RegisteredUtc { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="批准 UTC 时间；未批准时为空。" en="UTC approval time; null when not approved." />
+        ///   <l>
+        ///     <zh-CN>批准 UTC 时间；未批准时为空。</zh-CN>
+        ///     <en>UTC approval time; null when not approved.</en>
+        ///   </l>
         /// </summary>
         public DateTime? ApprovedUtc { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="批准操作者显示名或账号快照。" en="Approving operator display name or account snapshot." />
+        ///   <l>
+        ///     <zh-CN>批准操作者显示名或账号快照。</zh-CN>
+        ///     <en>Approving operator display name or account snapshot.</en>
+        ///   </l>
         /// </summary>
         public string ApprovedBy { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="拒绝 UTC 时间；未拒绝时为空。" en="UTC rejection time; null when not rejected." />
+        ///   <l>
+        ///     <zh-CN>拒绝 UTC 时间；未拒绝时为空。</zh-CN>
+        ///     <en>UTC rejection time; null when not rejected.</en>
+        ///   </l>
         /// </summary>
         public DateTime? RejectedUtc { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="拒绝操作者显示名或账号快照。" en="Rejecting operator display name or account snapshot." />
+        ///   <l>
+        ///     <zh-CN>拒绝操作者显示名或账号快照。</zh-CN>
+        ///     <en>Rejecting operator display name or account snapshot.</en>
+        ///   </l>
         /// </summary>
         public string RejectedBy { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="审核备注，调用方应避免写入敏感信息。" en="Review note; callers should avoid writing sensitive information." />
+        ///   <l>
+        ///     <zh-CN>审核备注，调用方应避免写入敏感信息。</zh-CN>
+        ///     <en>Review note; callers should avoid writing sensitive information.</en>
+        ///   </l>
         /// </summary>
         public string ReviewNote { get; private set; }
 
         /// <summary>
-        ///   <l zh-CN="注册信息来源。" en="Registration information source." />
+        ///   <l>
+        ///     <zh-CN>注册信息来源。</zh-CN>
+        ///     <en>Registration information source.</en>
+        ///   </l>
         /// </summary>
         public string Source { get; private set; }
     }

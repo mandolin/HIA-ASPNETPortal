@@ -318,12 +318,42 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Builds a sanitized diagnostic entry, isolates Trace/file sink failures, and returns a stable event id.</en>
         /// </lang>
         /// </summary>
-        /// <param name="level"><l zh-CN="受控诊断级别文本。" en="Controlled diagnostics level text." /></param>
-        /// <param name="category"><l zh-CN="诊断分类候选。" en="Diagnostics category candidate." /></param>
-        /// <param name="message"><l zh-CN="诊断消息候选。" en="Diagnostics message candidate." /></param>
-        /// <param name="exception"><l zh-CN="可选异常；由构造链净化。" en="Optional exception sanitized by the construction pipeline." /></param>
-        /// <param name="context"><l zh-CN="可选 HTTP 上下文。" en="Optional HTTP context." /></param>
-        /// <returns><l zh-CN="已构造条目的事件编号。" en="Event id of the constructed entry." /></returns>
+        /// <param name="level">
+        ///   <l>
+        ///     <zh-CN>受控诊断级别文本。</zh-CN>
+        ///     <en>Controlled diagnostics level text.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="category">
+        ///   <l>
+        ///     <zh-CN>诊断分类候选。</zh-CN>
+        ///     <en>Diagnostics category candidate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="message">
+        ///   <l>
+        ///     <zh-CN>诊断消息候选。</zh-CN>
+        ///     <en>Diagnostics message candidate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="exception">
+        ///   <l>
+        ///     <zh-CN>可选异常；由构造链净化。</zh-CN>
+        ///     <en>Optional exception sanitized by the construction pipeline.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="context">
+        ///   <l>
+        ///     <zh-CN>可选 HTTP 上下文。</zh-CN>
+        ///     <en>Optional HTTP context.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>已构造条目的事件编号。</zh-CN>
+        ///     <en>Event id of the constructed entry.</en>
+        ///   </l>
+        /// </returns>
         private static string Write(string level, string category, string message, Exception exception, HttpContext context)
         {
             // <lang>
@@ -376,12 +406,42 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Creates a diagnostic DTO with sanitized, length-capped fields and an event id.</en>
         /// </lang>
         /// </summary>
-        /// <param name="level"><l zh-CN="受控诊断级别。" en="Controlled diagnostics level." /></param>
-        /// <param name="category"><l zh-CN="分类候选。" en="Category candidate." /></param>
-        /// <param name="message"><l zh-CN="消息候选。" en="Message candidate." /></param>
-        /// <param name="exception"><l zh-CN="可选异常。" en="Optional exception." /></param>
-        /// <param name="context"><l zh-CN="可选请求上下文。" en="Optional request context." /></param>
-        /// <returns><l zh-CN="独立的已净化诊断条目。" en="Detached sanitized diagnostic entry." /></returns>
+        /// <param name="level">
+        ///   <l>
+        ///     <zh-CN>受控诊断级别。</zh-CN>
+        ///     <en>Controlled diagnostics level.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="category">
+        ///   <l>
+        ///     <zh-CN>分类候选。</zh-CN>
+        ///     <en>Category candidate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="message">
+        ///   <l>
+        ///     <zh-CN>消息候选。</zh-CN>
+        ///     <en>Message candidate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="exception">
+        ///   <l>
+        ///     <zh-CN>可选异常。</zh-CN>
+        ///     <en>Optional exception.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="context">
+        ///   <l>
+        ///     <zh-CN>可选请求上下文。</zh-CN>
+        ///     <en>Optional request context.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>独立的已净化诊断条目。</zh-CN>
+        ///     <en>Detached sanitized diagnostic entry.</en>
+        ///   </l>
+        /// </returns>
         private static PortalDiagnosticEntry BuildEntry(
             string level,
             string category,
@@ -422,8 +482,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Appends optional request fields to a diagnostic entry with per-field sanitization and length caps.</en>
         /// </lang>
         /// </summary>
-        /// <param name="entry"><l zh-CN="待补充请求字段的已净化条目。" en="Sanitized entry receiving request fields." /></param>
-        /// <param name="context"><l zh-CN="可选 HTTP 上下文。" en="Optional HTTP context." /></param>
+        /// <param name="entry">
+        ///   <l>
+        ///     <zh-CN>待补充请求字段的已净化条目。</zh-CN>
+        ///     <en>Sanitized entry receiving request fields.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="context">
+        ///   <l>
+        ///     <zh-CN>可选 HTTP 上下文。</zh-CN>
+        ///     <en>Optional HTTP context.</en>
+        ///   </l>
+        /// </param>
         private static void AppendRequestContext(PortalDiagnosticEntry entry, HttpContext context)
         {
             // <lang>
@@ -454,7 +524,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Creates a diagnostics correlation id containing UTC time and a short GUID fragment.</en>
         /// </lang>
         /// </summary>
-        /// <returns><l zh-CN="稳定格式的关联编号。" en="Correlation id in the stable format." /></returns>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>稳定格式的关联编号。</zh-CN>
+        ///     <en>Correlation id in the stable format.</en>
+        ///   </l>
+        /// </returns>
         private static string CreateEventId()
         {
             // <lang>
@@ -470,7 +545,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Projects a sanitized entry summary to Trace and falls back to error for unknown levels.</en>
         /// </lang>
         /// </summary>
-        /// <param name="entry"><l zh-CN="已净化诊断条目。" en="Sanitized diagnostic entry." /></param>
+        /// <param name="entry">
+        ///   <l>
+        ///     <zh-CN>已净化诊断条目。</zh-CN>
+        ///     <en>Sanitized diagnostic entry.</en>
+        ///   </l>
+        /// </param>
         private static void WriteTrace(PortalDiagnosticEntry entry)
         {
             // <lang>
@@ -508,7 +588,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Serializes a sanitized entry as NDJSON and performs file selection, append, and retention cleanup under the lock.</en>
         /// </lang>
         /// </summary>
-        /// <param name="entry"><l zh-CN="待写入的已净化诊断条目。" en="Sanitized diagnostic entry to write." /></param>
+        /// <param name="entry">
+        ///   <l>
+        ///     <zh-CN>待写入的已净化诊断条目。</zh-CN>
+        ///     <en>Sanitized diagnostic entry to write.</en>
+        ///   </l>
+        /// </param>
         private static void WriteFile(PortalDiagnosticEntry entry)
         {
             // <lang>
@@ -561,11 +646,36 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Selects the current managed log file by date, sequence, and byte capacity.</en>
         /// </lang>
         /// </summary>
-        /// <param name="logDirectory"><l zh-CN="已解析的日志目录。" en="Resolved diagnostics log directory." /></param>
-        /// <param name="utcTime"><l zh-CN="当前事件 UTC 时间。" en="Current event UTC time." /></param>
-        /// <param name="incomingByteCount"><l zh-CN="待追加 UTF-8 无 BOM payload 字节数。" en="UTF-8-without-BOM payload bytes to append." /></param>
-        /// <returns><l zh-CN="可追加的受控日志文件路径。" en="Controlled log-file path available for append." /></returns>
-        /// <exception cref="IOException"><l zh-CN="当日受控序号全部耗尽时引发。" en="Thrown when all controlled daily sequence values are exhausted." /></exception>
+        /// <param name="logDirectory">
+        ///   <l>
+        ///     <zh-CN>已解析的日志目录。</zh-CN>
+        ///     <en>Resolved diagnostics log directory.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="utcTime">
+        ///   <l>
+        ///     <zh-CN>当前事件 UTC 时间。</zh-CN>
+        ///     <en>Current event UTC time.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="incomingByteCount">
+        ///   <l>
+        ///     <zh-CN>待追加 UTF-8 无 BOM payload 字节数。</zh-CN>
+        ///     <en>UTF-8-without-BOM payload bytes to append.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>可追加的受控日志文件路径。</zh-CN>
+        ///     <en>Controlled log-file path available for append.</en>
+        ///   </l>
+        /// </returns>
+        /// <exception cref="IOException">
+        ///   <l>
+        ///     <zh-CN>当日受控序号全部耗尽时引发。</zh-CN>
+        ///     <en>Thrown when all controlled daily sequence values are exhausted.</en>
+        ///   </l>
+        /// </exception>
         private static string ResolveCurrentLogFile(string logDirectory, DateTime utcTime, int incomingByteCount)
         {
             // <lang>
@@ -628,8 +738,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Best-effort cleans managed logs older than the retention period and isolates failures as Trace warnings.</en>
         /// </lang>
         /// </summary>
-        /// <param name="logDirectory"><l zh-CN="已解析的日志目录。" en="Resolved diagnostics log directory." /></param>
-        /// <param name="currentUtcDate"><l zh-CN="当前事件 UTC 日期。" en="Current event UTC date." /></param>
+        /// <param name="logDirectory">
+        ///   <l>
+        ///     <zh-CN>已解析的日志目录。</zh-CN>
+        ///     <en>Resolved diagnostics log directory.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="currentUtcDate">
+        ///   <l>
+        ///     <zh-CN>当前事件 UTC 日期。</zh-CN>
+        ///     <en>Current event UTC date.</en>
+        ///   </l>
+        /// </param>
         private static void CleanupExpiredLogs(string logDirectory, DateTime currentUtcDate)
         {
             // <lang>
@@ -724,9 +844,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Parses a UTC date from a managed log filename without accessing disk.</en>
         /// </lang>
         /// </summary>
-        /// <param name="fileName"><l zh-CN="候选日志文件名。" en="Candidate log filename." /></param>
-        /// <param name="fileDate"><l zh-CN="成功时返回文件 UTC 日期。" en="File UTC date on success." /></param>
-        /// <returns><l zh-CN="文件名格式和日期有效时为 true。" en="True when filename format and date are valid." /></returns>
+        /// <param name="fileName">
+        ///   <l>
+        ///     <zh-CN>候选日志文件名。</zh-CN>
+        ///     <en>Candidate log filename.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="fileDate">
+        ///   <l>
+        ///     <zh-CN>成功时返回文件 UTC 日期。</zh-CN>
+        ///     <en>File UTC date on success.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>文件名格式和日期有效时为 true。</zh-CN>
+        ///     <en>True when filename format and date are valid.</en>
+        ///   </l>
+        /// </returns>
         private static bool TryGetManagedLogDate(string fileName, out DateTime fileDate)
         {
             // <lang>

@@ -31,40 +31,76 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="bindingId">
-        ///   <l zh-CN="绑定记录主键。" en="Binding record primary key." />
+        ///   <l>
+        ///     <zh-CN>绑定记录主键。</zh-CN>
+        ///     <en>Binding record primary key.</en>
+        ///   </l>
         /// </param>
         /// <param name="userId">
-        ///   <l zh-CN="门户用户主键。" en="Portal user primary key." />
+        ///   <l>
+        ///     <zh-CN>门户用户主键。</zh-CN>
+        ///     <en>Portal user primary key.</en>
+        ///   </l>
         /// </param>
         /// <param name="userName">
-        ///   <l zh-CN="门户用户名或登录名；仅用于展示和人工核对。" en="Portal user name or login name; used only for display and manual review." />
+        ///   <l>
+        ///     <zh-CN>门户用户名或登录名；仅用于展示和人工核对。</zh-CN>
+        ///     <en>Portal user name or login name; used only for display and manual review.</en>
+        ///   </l>
         /// </param>
         /// <param name="employeeId">
-        ///   <l zh-CN="员工主数据主键。" en="Employee master-data primary key." />
+        ///   <l>
+        ///     <zh-CN>员工主数据主键。</zh-CN>
+        ///     <en>Employee master-data primary key.</en>
+        ///   </l>
         /// </param>
         /// <param name="employeeCode">
-        ///   <l zh-CN="员工工号，可用于登录标识解析，但这里不作为凭据处理。" en="Employee code, which may be used by login identifier resolution but is not treated as a credential here." />
+        ///   <l>
+        ///     <zh-CN>员工工号，可用于登录标识解析，但这里不作为凭据处理。</zh-CN>
+        ///     <en>Employee code, which may be used by login identifier resolution but is not treated as a credential here.</en>
+        ///   </l>
         /// </param>
         /// <param name="employeeDisplayName">
-        ///   <l zh-CN="员工显示名称，页面输出前仍需编码。" en="Employee display name; presentation code must still encode it before output." />
+        ///   <l>
+        ///     <zh-CN>员工显示名称，页面输出前仍需编码。</zh-CN>
+        ///     <en>Employee display name; presentation code must still encode it before output.</en>
+        ///   </l>
         /// </param>
         /// <param name="bindingStatus">
-        ///   <l zh-CN="绑定状态稳定字符串，如 Active 或 Ended。" en="Stable binding status string, such as Active or Ended." />
+        ///   <l>
+        ///     <zh-CN>绑定状态稳定字符串，如 Active 或 Ended。</zh-CN>
+        ///     <en>Stable binding status string, such as Active or Ended.</en>
+        ///   </l>
         /// </param>
         /// <param name="boundUtc">
-        ///   <l zh-CN="绑定建立时间，统一使用 UTC。" en="Binding creation time in UTC." />
+        ///   <l>
+        ///     <zh-CN>绑定建立时间，统一使用 UTC。</zh-CN>
+        ///     <en>Binding creation time in UTC.</en>
+        ///   </l>
         /// </param>
         /// <param name="boundBy">
-        ///   <l zh-CN="建立绑定的操作者显示值；用于审计展示，不作为授权依据。" en="Display value of the operator who created the binding; used for audit display, not authorization." />
+        ///   <l>
+        ///     <zh-CN>建立绑定的操作者显示值；用于审计展示，不作为授权依据。</zh-CN>
+        ///     <en>Display value of the operator who created the binding; used for audit display, not authorization.</en>
+        ///   </l>
         /// </param>
         /// <param name="endedUtc">
-        ///   <l zh-CN="绑定结束时间；仍处于有效绑定时为空。" en="Binding end time; null while the binding is still active." />
+        ///   <l>
+        ///     <zh-CN>绑定结束时间；仍处于有效绑定时为空。</zh-CN>
+        ///     <en>Binding end time; null while the binding is still active.</en>
+        ///   </l>
         /// </param>
         /// <param name="endedBy">
-        ///   <l zh-CN="结束绑定的操作者显示值；用于审计展示。" en="Display value of the operator who ended the binding; used for audit display." />
+        ///   <l>
+        ///     <zh-CN>结束绑定的操作者显示值；用于审计展示。</zh-CN>
+        ///     <en>Display value of the operator who ended the binding; used for audit display.</en>
+        ///   </l>
         /// </param>
         /// <param name="reason">
-        ///   <l zh-CN="绑定变更原因或备注；显示前需编码，且不应包含密码等敏感信息。" en="Binding change reason or note; encode before display and do not include passwords or similar secrets." />
+        ///   <l>
+        ///     <zh-CN>绑定变更原因或备注；显示前需编码，且不应包含密码等敏感信息。</zh-CN>
+        ///     <en>Binding change reason or note; encode before display and do not include passwords or similar secrets.</en>
+        ///   </l>
         /// </param>
         /// <remarks>
         ///   <lang>

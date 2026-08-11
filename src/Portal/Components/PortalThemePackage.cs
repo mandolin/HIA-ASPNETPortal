@@ -24,22 +24,40 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="name">
-        /// <l zh-CN="与物理目录一致的稳定主题名。" en="Stable theme name matching the physical directory." />
+        /// <l>
+        ///   <zh-CN>与物理目录一致的稳定主题名。</zh-CN>
+        ///   <en>Stable theme name matching the physical directory.</en>
+        /// </l>
         /// </param>
         /// <param name="displayName">
-        /// <l zh-CN="后台选择器展示名称。" en="Display name for admin selectors." />
+        /// <l>
+        ///   <zh-CN>后台选择器展示名称。</zh-CN>
+        ///   <en>Display name for admin selectors.</en>
+        /// </l>
         /// </param>
         /// <param name="version">
-        /// <l zh-CN="主题包声明版本。" en="Version declared by the theme package." />
+        /// <l>
+        ///   <zh-CN>主题包声明版本。</zh-CN>
+        ///   <en>Version declared by the theme package.</en>
+        /// </l>
         /// </param>
         /// <param name="minimumPortalVersion">
-        /// <l zh-CN="主题包声明的最低门户版本，可为空。" en="Minimum portal version declared by the package, if any." />
+        /// <l>
+        ///   <zh-CN>主题包声明的最低门户版本，可为空。</zh-CN>
+        ///   <en>Minimum portal version declared by the package, if any.</en>
+        /// </l>
         /// </param>
         /// <param name="inheritsDefault">
-        /// <l zh-CN="是否声明继承 Default 主题。" en="Whether the package declares inheritance from the Default theme." />
+        /// <l>
+        ///   <zh-CN>是否声明继承 Default 主题。</zh-CN>
+        ///   <en>Whether the package declares inheritance from the Default theme.</en>
+        /// </l>
         /// </param>
         /// <param name="resources">
-        /// <l zh-CN="已校验的站内本地资源路径集合。" en="Validated site-local resource path collection." />
+        /// <l>
+        ///   <zh-CN>已校验的站内本地资源路径集合。</zh-CN>
+        ///   <en>Validated site-local resource path collection.</en>
+        /// </l>
         /// </param>
         internal PortalThemePackage(
             string name,
@@ -352,10 +370,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="manifest">
-        /// <l zh-CN="已解析的主题 manifest。" en="Parsed theme manifest." />
+        /// <l>
+        ///   <zh-CN>已解析的主题 manifest。</zh-CN>
+        ///   <en>Parsed theme manifest.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="schemaVersion 是否精确匹配当前受支持版本。" en="Whether schemaVersion exactly matches the currently supported version." />
+        /// <l>
+        ///   <zh-CN>schemaVersion 是否精确匹配当前受支持版本。</zh-CN>
+        ///   <en>Whether schemaVersion exactly matches the currently supported version.</en>
+        /// </l>
         /// </returns>
         private static bool IsSchemaVersionSupported(JObject manifest)
         {
@@ -374,19 +398,34 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="manifest">
-        /// <l zh-CN="已解析的主题 manifest。" en="Parsed theme manifest." />
+        /// <l>
+        ///   <zh-CN>已解析的主题 manifest。</zh-CN>
+        ///   <en>Parsed theme manifest.</en>
+        /// </l>
         /// </param>
         /// <param name="propertyName">
-        /// <l zh-CN="需要读取的属性名。" en="Property name to read." />
+        /// <l>
+        ///   <zh-CN>需要读取的属性名。</zh-CN>
+        ///   <en>Property name to read.</en>
+        /// </l>
         /// </param>
         /// <param name="maximumLength">
-        /// <l zh-CN="允许的最大字符数。" en="Maximum allowed character count." />
+        /// <l>
+        ///   <zh-CN>允许的最大字符数。</zh-CN>
+        ///   <en>Maximum allowed character count.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="去除首尾空白后的必填字段值。" en="Required field value after trimming surrounding whitespace." />
+        /// <l>
+        ///   <zh-CN>去除首尾空白后的必填字段值。</zh-CN>
+        ///   <en>Required field value after trimming surrounding whitespace.</en>
+        /// </l>
         /// </returns>
         /// <exception cref="InvalidOperationException">
-        /// <l zh-CN="字段缺失、为空、类型不符或超过长度限制时抛出。" en="Thrown when the field is missing, blank, incorrectly typed, or too long." />
+        /// <l>
+        ///   <zh-CN>字段缺失、为空、类型不符或超过长度限制时抛出。</zh-CN>
+        ///   <en>Thrown when the field is missing, blank, incorrectly typed, or too long.</en>
+        /// </l>
         /// </exception>
         private static string ReadRequiredString(JObject manifest, string propertyName, int maximumLength)
         {
@@ -410,19 +449,34 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="manifest">
-        /// <l zh-CN="已解析的主题 manifest。" en="Parsed theme manifest." />
+        /// <l>
+        ///   <zh-CN>已解析的主题 manifest。</zh-CN>
+        ///   <en>Parsed theme manifest.</en>
+        /// </l>
         /// </param>
         /// <param name="propertyName">
-        /// <l zh-CN="需要读取的属性名。" en="Property name to read." />
+        /// <l>
+        ///   <zh-CN>需要读取的属性名。</zh-CN>
+        ///   <en>Property name to read.</en>
+        /// </l>
         /// </param>
         /// <param name="maximumLength">
-        /// <l zh-CN="允许的最大字符数。" en="Maximum allowed character count." />
+        /// <l>
+        ///   <zh-CN>允许的最大字符数。</zh-CN>
+        ///   <en>Maximum allowed character count.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="字段不存在时返回空字符串，否则返回 trim 后的值。" en="Empty string when the field is absent; otherwise the trimmed value." />
+        /// <l>
+        ///   <zh-CN>字段不存在时返回空字符串，否则返回 trim 后的值。</zh-CN>
+        ///   <en>Empty string when the field is absent; otherwise the trimmed value.</en>
+        /// </l>
         /// </returns>
         /// <exception cref="InvalidOperationException">
-        /// <l zh-CN="字段类型不符或超过长度限制时抛出。" en="Thrown when the field type is invalid or the value is too long." />
+        /// <l>
+        ///   <zh-CN>字段类型不符或超过长度限制时抛出。</zh-CN>
+        ///   <en>Thrown when the field type is invalid or the value is too long.</en>
+        /// </l>
         /// </exception>
         private static string ReadOptionalString(JObject manifest, string propertyName, int maximumLength)
         {
@@ -461,16 +515,28 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="manifest">
-        /// <l zh-CN="已解析的主题 manifest。" en="Parsed theme manifest." />
+        /// <l>
+        ///   <zh-CN>已解析的主题 manifest。</zh-CN>
+        ///   <en>Parsed theme manifest.</en>
+        /// </l>
         /// </param>
         /// <param name="propertyName">
-        /// <l zh-CN="需要读取的属性名。" en="Property name to read." />
+        /// <l>
+        ///   <zh-CN>需要读取的属性名。</zh-CN>
+        ///   <en>Property name to read.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="读取到的布尔值；未声明时为 false。" en="The declared Boolean value; false when not declared." />
+        /// <l>
+        ///   <zh-CN>读取到的布尔值；未声明时为 false。</zh-CN>
+        ///   <en>The declared Boolean value; false when not declared.</en>
+        /// </l>
         /// </returns>
         /// <exception cref="InvalidOperationException">
-        /// <l zh-CN="字段存在但不是布尔类型时抛出。" en="Thrown when the field exists but is not Boolean." />
+        /// <l>
+        ///   <zh-CN>字段存在但不是布尔类型时抛出。</zh-CN>
+        ///   <en>Thrown when the field exists but is not Boolean.</en>
+        /// </l>
         /// </exception>
         private static bool ReadOptionalBoolean(JObject manifest, string propertyName)
         {
@@ -499,16 +565,28 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="manifest">
-        /// <l zh-CN="已解析的主题 manifest。" en="Parsed theme manifest." />
+        /// <l>
+        ///   <zh-CN>已解析的主题 manifest。</zh-CN>
+        ///   <en>Parsed theme manifest.</en>
+        /// </l>
         /// </param>
         /// <param name="packagePath">
-        /// <l zh-CN="主题包物理根目录。" en="Physical root directory of the theme package." />
+        /// <l>
+        ///   <zh-CN>主题包物理根目录。</zh-CN>
+        ///   <en>Physical root directory of the theme package.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="已通过路径、存在性和类型限制的只读资源集合。" en="Read-only resource collection that passed path, existence, and type restrictions." />
+        /// <l>
+        ///   <zh-CN>已通过路径、存在性和类型限制的只读资源集合。</zh-CN>
+        ///   <en>Read-only resource collection that passed path, existence, and type restrictions.</en>
+        /// </l>
         /// </returns>
         /// <exception cref="InvalidOperationException">
-        /// <l zh-CN="资源清单缺失、路径越界、文件不存在、声明脚本或缺少 Default.css 时抛出。" en="Thrown when resources are missing, escape the package root, do not exist, declare scripts, or omit Default.css." />
+        /// <l>
+        ///   <zh-CN>资源清单缺失、路径越界、文件不存在、声明脚本或缺少 Default.css 时抛出。</zh-CN>
+        ///   <en>Thrown when resources are missing, escape the package root, do not exist, declare scripts, or omit Default.css.</en>
+        /// </l>
         /// </exception>
         private static IList<string> ReadAndValidateResources(JObject manifest, string packagePath)
         {
@@ -587,10 +665,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="resource">
-        /// <l zh-CN="manifest 中声明的资源相对路径。" en="Resource relative path declared in the manifest." />
+        /// <l>
+        ///   <zh-CN>manifest 中声明的资源相对路径。</zh-CN>
+        ///   <en>Resource relative path declared in the manifest.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="路径是否可继续映射到主题包根目录下。" en="Whether the path may continue to be mapped under the theme package root." />
+        /// <l>
+        ///   <zh-CN>路径是否可继续映射到主题包根目录下。</zh-CN>
+        ///   <en>Whether the path may continue to be mapped under the theme package root.</en>
+        /// </l>
         /// </returns>
         private static bool IsValidResourcePath(string resource)
         {
@@ -619,16 +703,28 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="rootPath">
-        /// <l zh-CN="允许访问的物理根目录。" en="Allowed physical root directory." />
+        /// <l>
+        ///   <zh-CN>允许访问的物理根目录。</zh-CN>
+        ///   <en>Allowed physical root directory.</en>
+        /// </l>
         /// </param>
         /// <param name="childPath">
-        /// <l zh-CN="待映射的子路径。" en="Child path to map." />
+        /// <l>
+        ///   <zh-CN>待映射的子路径。</zh-CN>
+        ///   <en>Child path to map.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="确认位于根目录下的规范化物理路径。" en="Normalized physical path confirmed to remain under the root directory." />
+        /// <l>
+        ///   <zh-CN>确认位于根目录下的规范化物理路径。</zh-CN>
+        ///   <en>Normalized physical path confirmed to remain under the root directory.</en>
+        /// </l>
         /// </returns>
         /// <exception cref="InvalidOperationException">
-        /// <l zh-CN="子路径逃逸根目录时抛出。" en="Thrown when the child path escapes the root directory." />
+        /// <l>
+        ///   <zh-CN>子路径逃逸根目录时抛出。</zh-CN>
+        ///   <en>Thrown when the child path escapes the root directory.</en>
+        /// </l>
         /// </exception>
         private static string GetChildPath(string rootPath, string childPath)
         {

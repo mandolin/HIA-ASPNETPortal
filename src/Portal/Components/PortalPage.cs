@@ -13,7 +13,10 @@ namespace ASPNET.StarterKit.Portal
     ///   </lang>
     /// </summary>
     /// <typeparam name="T">
-    ///   <l zh-CN="供 Unity BuildUp 使用的具体页面类型。" en="Concrete page type supplied to Unity BuildUp." />
+    ///   <l>
+    ///     <zh-CN>供 Unity BuildUp 使用的具体页面类型。</zh-CN>
+    ///     <en>Concrete page type supplied to Unity BuildUp.</en>
+    ///   </l>
     /// </typeparam>
     /// <remarks>
     ///   <lang>
@@ -34,7 +37,10 @@ namespace ASPNET.StarterKit.Portal
         where T : class
     {
         /// <summary>
-        ///   <l zh-CN="当前请求可用的 Unity 容器访问器。" en="Unity container accessor available to the current request." />
+        ///   <l>
+        ///     <zh-CN>当前请求可用的 Unity 容器访问器。</zh-CN>
+        ///     <en>Unity container accessor available to the current request.</en>
+        ///   </l>
         /// </summary>
         private IContainerAccessor _accessor;
 
@@ -45,7 +51,10 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="e">
-        ///   <l zh-CN="预初始化事件参数。" en="Pre-initialization event arguments." />
+        ///   <l>
+        ///     <zh-CN>预初始化事件参数。</zh-CN>
+        ///     <en>Pre-initialization event arguments.</en>
+        ///   </l>
         /// </param>
         /// <remarks>
         ///   <lang>
@@ -173,7 +182,10 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="ctrl">
-        ///   <l zh-CN="要装配的服务器控件。" en="Server control to build up." />
+        ///   <l>
+        ///     <zh-CN>要装配的服务器控件。</zh-CN>
+        ///     <en>Server control to build up.</en>
+        ///   </l>
         /// </param>
         /// <remarks>
         ///   <lang>

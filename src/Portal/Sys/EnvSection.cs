@@ -48,10 +48,16 @@ namespace ASPNET.StarterKit.Portal.Sys
         /// </lang>
         /// </summary>
         /// <param name="section">
-        /// <l zh-CN="环境配置节实例。" en="Environment configuration section instance." />
+        /// <l>
+        ///   <zh-CN>环境配置节实例。</zh-CN>
+        ///   <en>Environment configuration section instance.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="配置节值；配置节为空时返回空。" en="Section value, or null when the section itself is null." />
+        /// <l>
+        ///   <zh-CN>配置节值；配置节为空时返回空。</zh-CN>
+        ///   <en>Section value, or null when the section itself is null.</en>
+        /// </l>
         /// </returns>
         public static implicit operator string(EnvSection section)
         {

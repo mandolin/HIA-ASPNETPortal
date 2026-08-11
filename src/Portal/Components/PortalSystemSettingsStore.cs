@@ -592,10 +592,30 @@ WHERE [SettingKey] = @SettingKey;";
         ///   <en>Validates whether a definition and value may be written as an online database override.</en>
         /// </lang>
         /// </summary>
-        /// <param name="definition"><l zh-CN="可能为空的设置定义。" en="Setting definition, which may be null." /></param>
-        /// <param name="settingValue"><l zh-CN="待规范化的候选文本值。" en="Candidate text value to normalize." /></param>
-        /// <param name="normalizedValue"><l zh-CN="成功时返回受定义约束的规范化值；失败时为空字符串。" en="Definition-constrained normalized value on success; empty string on failure." /></param>
-        /// <returns><l zh-CN="定义允许在线编辑、非敏感且值通过规范化时为 true。" en="True when the definition permits online editing, is non-sensitive, and the value normalizes." /></returns>
+        /// <param name="definition">
+        ///   <l>
+        ///     <zh-CN>可能为空的设置定义。</zh-CN>
+        ///     <en>Setting definition, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="settingValue">
+        ///   <l>
+        ///     <zh-CN>待规范化的候选文本值。</zh-CN>
+        ///     <en>Candidate text value to normalize.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="normalizedValue">
+        ///   <l>
+        ///     <zh-CN>成功时返回受定义约束的规范化值；失败时为空字符串。</zh-CN>
+        ///     <en>Definition-constrained normalized value on success; empty string on failure.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>定义允许在线编辑、非敏感且值通过规范化时为 true。</zh-CN>
+        ///     <en>True when the definition permits online editing, is non-sensitive, and the value normalizes.</en>
+        ///   </l>
+        /// </returns>
         private static bool CanWrite(
             PortalSettingDefinition definition,
             string settingValue,
@@ -623,7 +643,12 @@ WHERE [SettingKey] = @SettingKey;";
         ///   <en>Creates a system-settings database connection object from the controlled dependency container.</en>
         /// </lang>
         /// </summary>
-        /// <returns><l zh-CN="未打开的连接对象；容器或连接串不可用时为 null。" en="Unopened connection object, or null when the container or connection string is unavailable." /></returns>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>未打开的连接对象；容器或连接串不可用时为 null。</zh-CN>
+        ///     <en>Unopened connection object, or null when the container or connection string is unavailable.</en>
+        ///   </l>
+        /// </returns>
         private static SqlConnection CreateConnection()
         {
             // <lang>
@@ -649,9 +674,24 @@ WHERE [SettingKey] = @SettingKey;";
         ///   <en>Checks whether one controlled system-settings table exists.</en>
         /// </lang>
         /// </summary>
-        /// <param name="connection"><l zh-CN="已由调用方打开的数据库连接。" en="Database connection already opened by the caller." /></param>
-        /// <param name="tableName"><l zh-CN="仅由本类固定常量传入的表名。" en="Table name supplied only by this class's fixed constants." /></param>
-        /// <returns><l zh-CN="目标用户表存在时为 true。" en="True when the target user table exists." /></returns>
+        /// <param name="connection">
+        ///   <l>
+        ///     <zh-CN>已由调用方打开的数据库连接。</zh-CN>
+        ///     <en>Database connection already opened by the caller.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="tableName">
+        ///   <l>
+        ///     <zh-CN>仅由本类固定常量传入的表名。</zh-CN>
+        ///     <en>Table name supplied only by this class's fixed constants.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>目标用户表存在时为 true。</zh-CN>
+        ///     <en>True when the target user table exists.</en>
+        ///   </l>
+        /// </returns>
         private static bool IsTableAvailable(SqlConnection connection, string tableName)
         {
             // <lang>
@@ -682,12 +722,42 @@ WHERE [SettingKey] = @SettingKey;";
         ///   <en>Locks and reads the current override value and deletion-protection flag inside a write transaction.</en>
         /// </lang>
         /// </summary>
-        /// <param name="connection"><l zh-CN="与事务关联的已打开数据库连接。" en="Opened database connection associated with the transaction." /></param>
-        /// <param name="transaction"><l zh-CN="保护读取、变更和审计原子性的当前事务。" en="Current transaction protecting atomic read, change, and audit." /></param>
-        /// <param name="settingKey"><l zh-CN="通过定义门禁的稳定设置键。" en="Stable setting key that passed the definition gate." /></param>
-        /// <param name="exists"><l zh-CN="找到锁定行时为 true。" en="True when a locked row is found." /></param>
-        /// <param name="currentValue"><l zh-CN="找到时的当前值；数据库 NULL 时为 null。" en="Current value when found, or null for database NULL." /></param>
-        /// <param name="canDelete"><l zh-CN="找到行且数据库删除保护允许时为 true。" en="True when a row is found and database deletion protection permits removal." /></param>
+        /// <param name="connection">
+        ///   <l>
+        ///     <zh-CN>与事务关联的已打开数据库连接。</zh-CN>
+        ///     <en>Opened database connection associated with the transaction.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="transaction">
+        ///   <l>
+        ///     <zh-CN>保护读取、变更和审计原子性的当前事务。</zh-CN>
+        ///     <en>Current transaction protecting atomic read, change, and audit.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="settingKey">
+        ///   <l>
+        ///     <zh-CN>通过定义门禁的稳定设置键。</zh-CN>
+        ///     <en>Stable setting key that passed the definition gate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="exists">
+        ///   <l>
+        ///     <zh-CN>找到锁定行时为 true。</zh-CN>
+        ///     <en>True when a locked row is found.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="currentValue">
+        ///   <l>
+        ///     <zh-CN>找到时的当前值；数据库 NULL 时为 null。</zh-CN>
+        ///     <en>Current value when found, or null for database NULL.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="canDelete">
+        ///   <l>
+        ///     <zh-CN>找到行且数据库删除保护允许时为 true。</zh-CN>
+        ///     <en>True when a row is found and database deletion protection permits removal.</en>
+        ///   </l>
+        /// </param>
         private static void ReadCurrentValueForUpdate(
             SqlConnection connection,
             SqlTransaction transaction,
@@ -744,13 +814,48 @@ WHERE [SettingKey] = @SettingKey;";
         ///   <en>Writes a traceable audit record inside the current setting-change transaction.</en>
         /// </lang>
         /// </summary>
-        /// <param name="connection"><l zh-CN="与事务关联的已打开数据库连接。" en="Opened database connection associated with the transaction." /></param>
-        /// <param name="transaction"><l zh-CN="尚未提交的当前设置变更事务。" en="Current uncommitted setting-change transaction." /></param>
-        /// <param name="settingKey"><l zh-CN="受控稳定设置键。" en="Controlled stable setting key." /></param>
-        /// <param name="changeType"><l zh-CN="调用方提供的受控 Insert、Update 或 Delete 变更类型。" en="Caller-supplied controlled Insert, Update, or Delete change type." /></param>
-        /// <param name="oldValue"><l zh-CN="变更前的数据库值，可为 null。" en="Database value before the change, which may be null." /></param>
-        /// <param name="newValue"><l zh-CN="变更后的数据库值；删除时为 null。" en="Database value after the change; null for deletion." /></param>
-        /// <param name="context"><l zh-CN="用于受限操作者和客户端审计字段的可选 HTTP 上下文。" en="Optional HTTP context for restricted actor and client audit fields." /></param>
+        /// <param name="connection">
+        ///   <l>
+        ///     <zh-CN>与事务关联的已打开数据库连接。</zh-CN>
+        ///     <en>Opened database connection associated with the transaction.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="transaction">
+        ///   <l>
+        ///     <zh-CN>尚未提交的当前设置变更事务。</zh-CN>
+        ///     <en>Current uncommitted setting-change transaction.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="settingKey">
+        ///   <l>
+        ///     <zh-CN>受控稳定设置键。</zh-CN>
+        ///     <en>Controlled stable setting key.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="changeType">
+        ///   <l>
+        ///     <zh-CN>调用方提供的受控 Insert、Update 或 Delete 变更类型。</zh-CN>
+        ///     <en>Caller-supplied controlled Insert, Update, or Delete change type.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="oldValue">
+        ///   <l>
+        ///     <zh-CN>变更前的数据库值，可为 null。</zh-CN>
+        ///     <en>Database value before the change, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="newValue">
+        ///   <l>
+        ///     <zh-CN>变更后的数据库值；删除时为 null。</zh-CN>
+        ///     <en>Database value after the change; null for deletion.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="context">
+        ///   <l>
+        ///     <zh-CN>用于受限操作者和客户端审计字段的可选 HTTP 上下文。</zh-CN>
+        ///     <en>Optional HTTP context for restricted actor and client audit fields.</en>
+        ///   </l>
+        /// </param>
         private static void WriteAudit(
             SqlConnection connection,
             SqlTransaction transaction,
@@ -797,7 +902,12 @@ VALUES
         ///   <en>Gets the authenticated actor name for setting audit or a fixed anonymous fallback.</en>
         /// </lang>
         /// </summary>
-        /// <param name="context"><l zh-CN="调用方提供的可选 HTTP 上下文。" en="Optional HTTP context supplied by the caller." /></param>
+        /// <param name="context">
+        ///   <l>
+        ///     <zh-CN>调用方提供的可选 HTTP 上下文。</zh-CN>
+        ///     <en>Optional HTTP context supplied by the caller.</en>
+        ///   </l>
+        /// </param>
         /// <returns>
         /// <l>
         ///   <zh-CN>已认证身份名，或 <c>(anonymous)</c>。</zh-CN>
@@ -835,8 +945,18 @@ VALUES
         ///   <en>Gets client IP text for setting audit.</en>
         /// </lang>
         /// </summary>
-        /// <param name="context"><l zh-CN="调用方提供的可选 HTTP 上下文。" en="Optional HTTP context supplied by the caller." /></param>
-        /// <returns><l zh-CN="当前请求的 UserHostAddress；上下文或请求缺失时为空字符串。" en="Current request UserHostAddress, or empty string when context or request is absent." /></returns>
+        /// <param name="context">
+        ///   <l>
+        ///     <zh-CN>调用方提供的可选 HTTP 上下文。</zh-CN>
+        ///     <en>Optional HTTP context supplied by the caller.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>当前请求的 UserHostAddress；上下文或请求缺失时为空字符串。</zh-CN>
+        ///     <en>Current request UserHostAddress, or empty string when context or request is absent.</en>
+        ///   </l>
+        /// </returns>
         private static string GetClientIp(HttpContext context)
         {
             // <lang>
@@ -853,8 +973,18 @@ VALUES
         ///   <en>Gets client User-Agent text for setting audit.</en>
         /// </lang>
         /// </summary>
-        /// <param name="context"><l zh-CN="调用方提供的可选 HTTP 上下文。" en="Optional HTTP context supplied by the caller." /></param>
-        /// <returns><l zh-CN="当前请求的 UserAgent；上下文或请求缺失时为空字符串。" en="Current request UserAgent, or empty string when context or request is absent." /></returns>
+        /// <param name="context">
+        ///   <l>
+        ///     <zh-CN>调用方提供的可选 HTTP 上下文。</zh-CN>
+        ///     <en>Optional HTTP context supplied by the caller.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>当前请求的 UserAgent；上下文或请求缺失时为空字符串。</zh-CN>
+        ///     <en>Current request UserAgent, or empty string when context or request is absent.</en>
+        ///   </l>
+        /// </returns>
         private static string GetUserAgent(HttpContext context)
         {
             // <lang>
@@ -871,11 +1001,36 @@ VALUES
         ///   <en>Adds a sanitized text SQL parameter with a specified length.</en>
         /// </lang>
         /// </summary>
-        /// <param name="command"><l zh-CN="接收参数的当前 SQL 命令。" en="Current SQL command receiving the parameter." /></param>
-        /// <param name="parameterName"><l zh-CN="调用方提供的固定参数名。" en="Fixed parameter name supplied by the caller." /></param>
-        /// <param name="size"><l zh-CN="数据库列与参数的最大字符数。" en="Maximum characters for the database column and parameter." /></param>
-        /// <param name="value"><l zh-CN="待净化和截断的文本。" en="Text to sanitize and truncate." /></param>
-        /// <param name="fallback"><l zh-CN="净化后为空白时写入的受控回退文本。" en="Controlled fallback text written when the sanitized result is blank." /></param>
+        /// <param name="command">
+        ///   <l>
+        ///     <zh-CN>接收参数的当前 SQL 命令。</zh-CN>
+        ///     <en>Current SQL command receiving the parameter.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="parameterName">
+        ///   <l>
+        ///     <zh-CN>调用方提供的固定参数名。</zh-CN>
+        ///     <en>Fixed parameter name supplied by the caller.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="size">
+        ///   <l>
+        ///     <zh-CN>数据库列与参数的最大字符数。</zh-CN>
+        ///     <en>Maximum characters for the database column and parameter.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="value">
+        ///   <l>
+        ///     <zh-CN>待净化和截断的文本。</zh-CN>
+        ///     <en>Text to sanitize and truncate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="fallback">
+        ///   <l>
+        ///     <zh-CN>净化后为空白时写入的受控回退文本。</zh-CN>
+        ///     <en>Controlled fallback text written when the sanitized result is blank.</en>
+        ///   </l>
+        /// </param>
         private static void AddTextParameter(
             SqlCommand command,
             string parameterName,
@@ -903,9 +1058,24 @@ VALUES
         ///   <en>Adds an unlimited-length text SQL parameter that permits database NULL.</en>
         /// </lang>
         /// </summary>
-        /// <param name="command"><l zh-CN="接收参数的当前 SQL 命令。" en="Current SQL command receiving the parameter." /></param>
-        /// <param name="parameterName"><l zh-CN="调用方提供的固定参数名。" en="Fixed parameter name supplied by the caller." /></param>
-        /// <param name="value"><l zh-CN="设置审计的旧值或新值；空值映射为数据库 NULL。" en="Old or new value for setting audit; null maps to database NULL." /></param>
+        /// <param name="command">
+        ///   <l>
+        ///     <zh-CN>接收参数的当前 SQL 命令。</zh-CN>
+        ///     <en>Current SQL command receiving the parameter.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="parameterName">
+        ///   <l>
+        ///     <zh-CN>调用方提供的固定参数名。</zh-CN>
+        ///     <en>Fixed parameter name supplied by the caller.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="value">
+        ///   <l>
+        ///     <zh-CN>设置审计的旧值或新值；空值映射为数据库 NULL。</zh-CN>
+        ///     <en>Old or new value for setting audit; null maps to database NULL.</en>
+        ///   </l>
+        /// </param>
         private static void AddUnlimitedTextParameter(SqlCommand command, string parameterName, string value)
         {
             // <lang>

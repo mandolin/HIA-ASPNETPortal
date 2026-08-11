@@ -38,13 +38,22 @@ namespace ASPNET.StarterKit.Portal.Util
         /// </lang>
         /// </summary>
         /// <param name="appSettingsConfig">
-        /// <l zh-CN="相对于站点根目录的 JSON 配置文件路径。" en="JSON configuration file path relative to the site root." />
+        /// <l>
+        ///   <zh-CN>相对于站点根目录的 JSON 配置文件路径。</zh-CN>
+        ///   <en>JSON configuration file path relative to the site root.</en>
+        /// </l>
         /// </param>
         /// <param name="preservePrevious">
-        /// <l zh-CN="是否保留 JSON 中未声明的既有 appSettings 键。" en="Whether to keep existing appSettings keys that are not declared in JSON." />
+        /// <l>
+        ///   <zh-CN>是否保留 JSON 中未声明的既有 appSettings 键。</zh-CN>
+        ///   <en>Whether to keep existing appSettings keys that are not declared in JSON.</en>
+        /// </l>
         /// </param>
         /// <param name="preserveLocalSqlServer">
-        /// <l zh-CN="历史兼容参数；当前加载流程不直接处理 SQL Server 保留逻辑。" en="Historical compatibility parameter; the current loading flow does not directly process SQL Server preservation logic." />
+        /// <l>
+        ///   <zh-CN>历史兼容参数；当前加载流程不直接处理 SQL Server 保留逻辑。</zh-CN>
+        ///   <en>Historical compatibility parameter; the current loading flow does not directly process SQL Server preservation logic.</en>
+        /// </l>
         /// </param>
         /// <remarks>
         /// <lang>
@@ -69,13 +78,22 @@ namespace ASPNET.StarterKit.Portal.Util
         /// </lang>
         /// </summary>
         /// <param name="configFile">
-        /// <l zh-CN="相对于站点根目录的 JSON 配置文件路径。" en="JSON configuration file path relative to the site root." />
+        /// <l>
+        ///   <zh-CN>相对于站点根目录的 JSON 配置文件路径。</zh-CN>
+        ///   <en>JSON configuration file path relative to the site root.</en>
+        /// </l>
         /// </param>
         /// <param name="preservePrevious">
-        /// <l zh-CN="是否保留 JSON 中未声明的既有 appSettings 键。" en="Whether to keep existing appSettings keys that are not declared in JSON." />
+        /// <l>
+        ///   <zh-CN>是否保留 JSON 中未声明的既有 appSettings 键。</zh-CN>
+        ///   <en>Whether to keep existing appSettings keys that are not declared in JSON.</en>
+        /// </l>
         /// </param>
         /// <param name="preserveLocalSqlServer">
-        /// <l zh-CN="历史兼容参数；当前方法保留签名但不直接使用。" en="Historical compatibility parameter; this method keeps the signature but does not use it directly." />
+        /// <l>
+        ///   <zh-CN>历史兼容参数；当前方法保留签名但不直接使用。</zh-CN>
+        ///   <en>Historical compatibility parameter; this method keeps the signature but does not use it directly.</en>
+        /// </l>
         /// </param>
         private static void LoadConfigFile(string configFile, bool preservePrevious = true,
             bool preserveLocalSqlServer = true)
@@ -97,10 +115,16 @@ namespace ASPNET.StarterKit.Portal.Util
         /// </lang>
         /// </summary>
         /// <param name="appSettings">
-        /// <l zh-CN="JSON `appSettings` 对象；为空时不做任何修改。" en="JSON `appSettings` object; when null, no changes are applied." />
+        /// <l>
+        ///   <zh-CN>JSON `appSettings` 对象；为空时不做任何修改。</zh-CN>
+        ///   <en>JSON `appSettings` object; when null, no changes are applied.</en>
+        /// </l>
         /// </param>
         /// <param name="preservePrevious">
-        /// <l zh-CN="是否保留 JSON 中未声明的既有键；为 false 时会移除未声明键。" en="Whether to keep existing keys not declared by JSON; when false, undeclared keys are removed." />
+        /// <l>
+        ///   <zh-CN>是否保留 JSON 中未声明的既有键；为 false 时会移除未声明键。</zh-CN>
+        ///   <en>Whether to keep existing keys not declared by JSON; when false, undeclared keys are removed.</en>
+        /// </l>
         /// </param>
         /// <remarks>
         /// <lang>

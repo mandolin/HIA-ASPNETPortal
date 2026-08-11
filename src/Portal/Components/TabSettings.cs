@@ -32,10 +32,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="tabIndex">
-        /// <l zh-CN="当前导航集合中的索引。" en="Index in the current navigation collection." />
+        /// <l>
+        ///   <zh-CN>当前导航集合中的索引。</zh-CN>
+        ///   <en>Index in the current navigation collection.</en>
+        /// </l>
         /// </param>
         /// <param name="tab">
-        /// <l zh-CN="旧门户 Tab 数据项。" en="Legacy portal tab data item." />
+        /// <l>
+        ///   <zh-CN>旧门户 Tab 数据项。</zh-CN>
+        ///   <en>Legacy portal tab data item.</en>
+        /// </l>
         /// </param>
         public Tab(int tabIndex, ITabItem tab)
             : base(tab)
@@ -121,7 +127,10 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="item">
-        /// <l zh-CN="旧门户 Tab 数据项。" en="Legacy portal tab data item." />
+        /// <l>
+        ///   <zh-CN>旧门户 Tab 数据项。</zh-CN>
+        ///   <en>Legacy portal tab data item.</en>
+        /// </l>
         /// </param>
         /// <remarks>
         /// <lang>
@@ -146,10 +155,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="other">
-        /// <l zh-CN="另一个 Tab 设置快照；为空时当前对象排在其后。" en="Another tab settings snapshot; when null, the current object sorts after it." />
+        /// <l>
+        ///   <zh-CN>另一个 Tab 设置快照；为空时当前对象排在其后。</zh-CN>
+        ///   <en>Another tab settings snapshot; when null, the current object sorts after it.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="与 `IComparable` 契约一致的排序比较结果。" en="Sort comparison result following the `IComparable` contract." />
+        /// <l>
+        ///   <zh-CN>与 `IComparable` 契约一致的排序比较结果。</zh-CN>
+        ///   <en>Sort comparison result following the `IComparable` contract.</en>
+        /// </l>
         /// </returns>
         public int CompareTo(TabSettings other)
         {

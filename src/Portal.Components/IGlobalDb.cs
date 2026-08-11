@@ -27,10 +27,16 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="portalId">
-        ///   <l zh-CN="门户标识。" en="Portal identifier." />
+        ///   <l>
+        ///     <zh-CN>门户标识。</zh-CN>
+        ///     <en>Portal identifier.</en>
+        ///   </l>
         /// </param>
         /// <returns>
-        ///   <l zh-CN="匹配的全局配置项。" en="The matching global configuration item." />
+        ///   <l>
+        ///     <zh-CN>匹配的全局配置项。</zh-CN>
+        ///     <en>The matching global configuration item.</en>
+        ///   </l>
         /// </returns>
         /// <remarks>
         ///   <lang>
@@ -47,13 +53,22 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="portalId">
-        ///   <l zh-CN="门户标识。" en="Portal identifier." />
+        ///   <l>
+        ///     <zh-CN>门户标识。</zh-CN>
+        ///     <en>Portal identifier.</en>
+        ///   </l>
         /// </param>
         /// <param name="portalName">
-        ///   <l zh-CN="要保存的门户名称。" en="Portal name to save." />
+        ///   <l>
+        ///     <zh-CN>要保存的门户名称。</zh-CN>
+        ///     <en>Portal name to save.</en>
+        ///   </l>
         /// </param>
         /// <param name="alwaysShow">
-        ///   <l zh-CN="是否始终显示模块编辑按钮。" en="Whether module edit buttons should always be shown." />
+        ///   <l>
+        ///     <zh-CN>是否始终显示模块编辑按钮。</zh-CN>
+        ///     <en>Whether module edit buttons should always be shown.</en>
+        ///   </l>
         /// </param>
         /// <remarks>
         ///   <lang>

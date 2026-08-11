@@ -15,22 +15,40 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="category">
-        /// <l zh-CN="检查所属分类，例如数据库、文件系统或运行时。" en="Category that owns the check, such as database, file system, or runtime." />
+        /// <l>
+        ///   <zh-CN>检查所属分类，例如数据库、文件系统或运行时。</zh-CN>
+        ///   <en>Category that owns the check, such as database, file system, or runtime.</en>
+        /// </l>
         /// </param>
         /// <param name="name">
-        /// <l zh-CN="检查项名称。" en="Check item name." />
+        /// <l>
+        ///   <zh-CN>检查项名称。</zh-CN>
+        ///   <en>Check item name.</en>
+        /// </l>
         /// </param>
         /// <param name="status">
-        /// <l zh-CN="检查结果状态。" en="Check result status." />
+        /// <l>
+        ///   <zh-CN>检查结果状态。</zh-CN>
+        ///   <en>Check result status.</en>
+        /// </l>
         /// </param>
         /// <param name="summary">
-        /// <l zh-CN="可直接展示给管理员的简短结论。" en="Short conclusion that can be shown directly to administrators." />
+        /// <l>
+        ///   <zh-CN>可直接展示给管理员的简短结论。</zh-CN>
+        ///   <en>Short conclusion that can be shown directly to administrators.</en>
+        /// </l>
         /// </param>
         /// <param name="detail">
-        /// <l zh-CN="可选详细信息；当前面向 Admin 页面，不承载密码、Token 或连接串。" en="Optional detail text; currently intended for Admin pages and must not carry passwords, tokens, or connection strings." />
+        /// <l>
+        ///   <zh-CN>可选详细信息；当前面向 Admin 页面，不承载密码、Token 或连接串。</zh-CN>
+        ///   <en>Optional detail text; currently intended for Admin pages and must not carry passwords, tokens, or connection strings.</en>
+        /// </l>
         /// </param>
         /// <param name="eventId">
-        /// <l zh-CN="关联诊断事件编号；无事件时为空。" en="Related diagnostic event id; empty when no event is associated." />
+        /// <l>
+        ///   <zh-CN>关联诊断事件编号；无事件时为空。</zh-CN>
+        ///   <en>Related diagnostic event id; empty when no event is associated.</en>
+        /// </l>
         /// </param>
         public PortalHealthCheckResult(
             string category,

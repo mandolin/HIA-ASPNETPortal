@@ -162,19 +162,84 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Creates a navigation-entry metadata object.</en>
         /// </lang>
         /// </summary>
-        /// <param name="entryKey"><l zh-CN="不能为空的稳定入口键。" en="Nonblank stable entry key." /></param>
-        /// <param name="entryKind"><l zh-CN="入口的固定类型。" en="Fixed kind of entry." /></param>
-        /// <param name="displayNameZhCn"><l zh-CN="可为空的中文显示文本。" en="Chinese display text, which may be blank." /></param>
-        /// <param name="displayNameEn"><l zh-CN="可为空的英文显示文本。" en="English display text, which may be blank." /></param>
-        /// <param name="target"><l zh-CN="可为空的注册目标元数据；本构造器不解析或访问它。" en="Registered target metadata, which may be blank; this constructor does not resolve or access it." /></param>
-        /// <param name="visibilityMode"><l zh-CN="导航消费方使用的显示策略提示。" en="Visibility-policy hint used by navigation consumers." /></param>
-        /// <param name="lifecycleState"><l zh-CN="入口在注册表中的生命周期状态。" en="Entry lifecycle state in the registry." /></param>
-        /// <param name="sortOrder"><l zh-CN="稳定导航排序值。" en="Stable navigation sort value." /></param>
-        /// <param name="requiredRoles"><l zh-CN="可为空的旧角色依赖序列。" en="Legacy-role dependency sequence, which may be null." /></param>
-        /// <param name="requiredPermissionKeys"><l zh-CN="可为空的细粒度权限键依赖序列。" en="Fine-grained permission-key dependency sequence, which may be null." /></param>
-        /// <param name="requiredPackageIds"><l zh-CN="可为空的部署包依赖序列。" en="Deployment-package dependency sequence, which may be null." /></param>
-        /// <param name="requiredProfiles"><l zh-CN="可为空的部署 Profile 依赖序列。" en="Deployment-Profile dependency sequence, which may be null." /></param>
-        /// <param name="notes"><l zh-CN="可为空的维护说明。" en="Maintainer note, which may be blank." /></param>
+        /// <param name="entryKey">
+        ///   <l>
+        ///     <zh-CN>不能为空的稳定入口键。</zh-CN>
+        ///     <en>Nonblank stable entry key.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="entryKind">
+        ///   <l>
+        ///     <zh-CN>入口的固定类型。</zh-CN>
+        ///     <en>Fixed kind of entry.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="displayNameZhCn">
+        ///   <l>
+        ///     <zh-CN>可为空的中文显示文本。</zh-CN>
+        ///     <en>Chinese display text, which may be blank.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="displayNameEn">
+        ///   <l>
+        ///     <zh-CN>可为空的英文显示文本。</zh-CN>
+        ///     <en>English display text, which may be blank.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="target">
+        ///   <l>
+        ///     <zh-CN>可为空的注册目标元数据；本构造器不解析或访问它。</zh-CN>
+        ///     <en>Registered target metadata, which may be blank; this constructor does not resolve or access it.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="visibilityMode">
+        ///   <l>
+        ///     <zh-CN>导航消费方使用的显示策略提示。</zh-CN>
+        ///     <en>Visibility-policy hint used by navigation consumers.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="lifecycleState">
+        ///   <l>
+        ///     <zh-CN>入口在注册表中的生命周期状态。</zh-CN>
+        ///     <en>Entry lifecycle state in the registry.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="sortOrder">
+        ///   <l>
+        ///     <zh-CN>稳定导航排序值。</zh-CN>
+        ///     <en>Stable navigation sort value.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="requiredRoles">
+        ///   <l>
+        ///     <zh-CN>可为空的旧角色依赖序列。</zh-CN>
+        ///     <en>Legacy-role dependency sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="requiredPermissionKeys">
+        ///   <l>
+        ///     <zh-CN>可为空的细粒度权限键依赖序列。</zh-CN>
+        ///     <en>Fine-grained permission-key dependency sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="requiredPackageIds">
+        ///   <l>
+        ///     <zh-CN>可为空的部署包依赖序列。</zh-CN>
+        ///     <en>Deployment-package dependency sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="requiredProfiles">
+        ///   <l>
+        ///     <zh-CN>可为空的部署 Profile 依赖序列。</zh-CN>
+        ///     <en>Deployment-Profile dependency sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="notes">
+        ///   <l>
+        ///     <zh-CN>可为空的维护说明。</zh-CN>
+        ///     <en>Maintainer note, which may be blank.</en>
+        ///   </l>
+        /// </param>
         /// <exception cref="ArgumentException">
         /// <l>
         ///   <zh-CN><paramref name="entryKey"/> 为空白时引发。</zh-CN>
@@ -335,10 +400,30 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Validates and normalizes one required stable navigation-metadata value.</en>
         /// </lang>
         /// </summary>
-        /// <param name="value"><l zh-CN="待验证的候选文本。" en="Candidate text to validate." /></param>
-        /// <param name="argumentName"><l zh-CN="用于受控参数异常的固定参数名。" en="Fixed parameter name for the controlled argument exception." /></param>
-        /// <returns><l zh-CN="已去除边缘空白的必需值。" en="Required value with edge whitespace removed." /></returns>
-        /// <exception cref="ArgumentException"><l zh-CN="候选值为空白时引发。" en="Thrown when the candidate is blank." /></exception>
+        /// <param name="value">
+        ///   <l>
+        ///     <zh-CN>待验证的候选文本。</zh-CN>
+        ///     <en>Candidate text to validate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="argumentName">
+        ///   <l>
+        ///     <zh-CN>用于受控参数异常的固定参数名。</zh-CN>
+        ///     <en>Fixed parameter name for the controlled argument exception.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>已去除边缘空白的必需值。</zh-CN>
+        ///     <en>Required value with edge whitespace removed.</en>
+        ///   </l>
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        ///   <l>
+        ///     <zh-CN>候选值为空白时引发。</zh-CN>
+        ///     <en>Thrown when the candidate is blank.</en>
+        ///   </l>
+        /// </exception>
         private static string NormalizeRequired(string value, string argumentName)
         {
             // <lang>
@@ -363,8 +448,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Copies and normalizes an optional navigation-dependency list.</en>
         /// </lang>
         /// </summary>
-        /// <param name="values"><l zh-CN="可为空的依赖候选序列。" en="Dependency candidate sequence, which may be null." /></param>
-        /// <returns><l zh-CN="已去空白、按大小写不敏感去重的只读列表。" en="Read-only list with blanks removed and case-insensitive duplicates removed." /></returns>
+        /// <param name="values">
+        ///   <l>
+        ///     <zh-CN>可为空的依赖候选序列。</zh-CN>
+        ///     <en>Dependency candidate sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>已去空白、按大小写不敏感去重的只读列表。</zh-CN>
+        ///     <en>Read-only list with blanks removed and case-insensitive duplicates removed.</en>
+        ///   </l>
+        /// </returns>
         private static IList<string> NormalizeList(IEnumerable<string> values)
         {
             // <lang>
@@ -566,7 +661,10 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <returns>
-        /// <l zh-CN="按排序值和稳定键排序的只读入口副本。" en="Read-only entry copy ordered by sort value and stable key." />
+        /// <l>
+        ///   <zh-CN>按排序值和稳定键排序的只读入口副本。</zh-CN>
+        ///   <en>Read-only entry copy ordered by sort value and stable key.</en>
+        /// </l>
         /// </returns>
         public static IList<PortalNavigationEntry> GetEntries()
         {
@@ -588,7 +686,10 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="entryKey">
-        /// <l zh-CN="稳定入口键。" en="Stable entry key." />
+        /// <l>
+        ///   <zh-CN>稳定入口键。</zh-CN>
+        ///   <en>Stable entry key.</en>
+        /// </l>
         /// </param>
         /// <returns>
         /// <lang>

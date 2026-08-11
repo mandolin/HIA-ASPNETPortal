@@ -36,10 +36,16 @@ namespace ASPNET.StarterKit.Portal.Util
         /// </lang>
         /// </summary>
         /// <param name="container">
-        /// <l zh-CN="需要接收注册项的 Unity 容器。" en="Unity container that receives registrations." />
+        /// <l>
+        ///   <zh-CN>需要接收注册项的 Unity 容器。</zh-CN>
+        ///   <en>Unity container that receives registrations.</en>
+        /// </l>
         /// </param>
         /// <param name="unityConfig">
-        /// <l zh-CN="相对于站点根目录的 Unity XML 配置文件路径。" en="Unity XML configuration file path relative to the site root." />
+        /// <l>
+        ///   <zh-CN>相对于站点根目录的 Unity XML 配置文件路径。</zh-CN>
+        ///   <en>Unity XML configuration file path relative to the site root.</en>
+        /// </l>
         /// </param>
         public static void LoadUnityConfig(IUnityContainer container, string unityConfig)
         {
@@ -65,13 +71,22 @@ namespace ASPNET.StarterKit.Portal.Util
         /// </lang>
         /// </summary>
         /// <param name="container">
-        /// <l zh-CN="需要接收注册项的 Unity 容器。" en="Unity container that receives registrations." />
+        /// <l>
+        ///   <zh-CN>需要接收注册项的 Unity 容器。</zh-CN>
+        ///   <en>Unity container that receives registrations.</en>
+        /// </l>
         /// </param>
         /// <param name="configFile">
-        /// <l zh-CN="相对于站点根目录的 Unity XML 配置文件路径。" en="Unity XML configuration file path relative to the site root." />
+        /// <l>
+        ///   <zh-CN>相对于站点根目录的 Unity XML 配置文件路径。</zh-CN>
+        ///   <en>Unity XML configuration file path relative to the site root.</en>
+        /// </l>
         /// </param>
         /// <exception cref="ConfigurationErrorsException">
-        /// <l zh-CN="配置文件存在但缺少 `&lt;unity&gt;` 节时抛出。" en="Thrown when the file exists but does not contain a `&lt;unity&gt;` section." />
+        /// <l>
+        ///   <zh-CN>配置文件存在但缺少 `&lt;unity&gt;` 节时抛出。</zh-CN>
+        ///   <en>Thrown when the file exists but does not contain a `&lt;unity&gt;` section.</en>
+        /// </l>
         /// </exception>
         private static void LoadConfig(IUnityContainer container, string configFile)
         {

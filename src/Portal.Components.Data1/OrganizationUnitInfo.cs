@@ -31,28 +31,52 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="organizationUnitId">
-        ///   <l zh-CN="组织单元主键。" en="Organization unit primary key." />
+        ///   <l>
+        ///     <zh-CN>组织单元主键。</zh-CN>
+        ///     <en>Organization unit primary key.</en>
+        ///   </l>
         /// </param>
         /// <param name="parentOrganizationUnitId">
-        ///   <l zh-CN="父级组织单元主键；为空表示根组织。" en="Parent organization unit key; null means this is a root unit." />
+        ///   <l>
+        ///     <zh-CN>父级组织单元主键；为空表示根组织。</zh-CN>
+        ///     <en>Parent organization unit key; null means this is a root unit.</en>
+        ///   </l>
         /// </param>
         /// <param name="organizationCode">
-        ///   <l zh-CN="企业组织编码，用于业务识别和人工核对，不作为安全凭据。" en="Business organization code used for identification and manual review, not as a security credential." />
+        ///   <l>
+        ///     <zh-CN>企业组织编码，用于业务识别和人工核对，不作为安全凭据。</zh-CN>
+        ///     <en>Business organization code used for identification and manual review, not as a security credential.</en>
+        ///   </l>
         /// </param>
         /// <param name="displayName">
-        ///   <l zh-CN="组织显示名称，输出到页面前仍需由展示层编码。" en="Organization display name; presentation code must still encode it before output." />
+        ///   <l>
+        ///     <zh-CN>组织显示名称，输出到页面前仍需由展示层编码。</zh-CN>
+        ///     <en>Organization display name; presentation code must still encode it before output.</en>
+        ///   </l>
         /// </param>
         /// <param name="sortOrder">
-        ///   <l zh-CN="同级组织排序值。" en="Sort value among sibling organization units." />
+        ///   <l>
+        ///     <zh-CN>同级组织排序值。</zh-CN>
+        ///     <en>Sort value among sibling organization units.</en>
+        ///   </l>
         /// </param>
         /// <param name="isActive">
-        ///   <l zh-CN="是否启用；停用组织通常不应作为新增绑定的默认选择。" en="Whether the unit is active; inactive units should usually not be default choices for new bindings." />
+        ///   <l>
+        ///     <zh-CN>是否启用；停用组织通常不应作为新增绑定的默认选择。</zh-CN>
+        ///     <en>Whether the unit is active; inactive units should usually not be default choices for new bindings.</en>
+        ///   </l>
         /// </param>
         /// <param name="createdUtc">
-        ///   <l zh-CN="创建时间，统一使用 UTC。" en="Creation time in UTC." />
+        ///   <l>
+        ///     <zh-CN>创建时间，统一使用 UTC。</zh-CN>
+        ///     <en>Creation time in UTC.</en>
+        ///   </l>
         /// </param>
         /// <param name="updatedUtc">
-        ///   <l zh-CN="最后更新时间，统一使用 UTC。" en="Last update time in UTC." />
+        ///   <l>
+        ///     <zh-CN>最后更新时间，统一使用 UTC。</zh-CN>
+        ///     <en>Last update time in UTC.</en>
+        ///   </l>
         /// </param>
         /// <remarks>
         ///   <lang>

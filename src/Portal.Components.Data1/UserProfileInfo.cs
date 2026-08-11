@@ -29,34 +29,64 @@ namespace ASPNET.StarterKit.Portal
         ///   </lang>
         /// </summary>
         /// <param name="userId">
-        ///   <l zh-CN="门户用户主键。" en="Portal user primary key." />
+        ///   <l>
+        ///     <zh-CN>门户用户主键。</zh-CN>
+        ///     <en>Portal user primary key.</en>
+        ///   </l>
         /// </param>
         /// <param name="legacyName">
-        ///   <l zh-CN="旧用户表中的原始名称，用于兼容显示和迁移核对。" en="Original name from the legacy user table, used for compatibility display and migration review." />
+        ///   <l>
+        ///     <zh-CN>旧用户表中的原始名称，用于兼容显示和迁移核对。</zh-CN>
+        ///     <en>Original name from the legacy user table, used for compatibility display and migration review.</en>
+        ///   </l>
         /// </param>
         /// <param name="loginName">
-        ///   <l zh-CN="当前登录名或账号名；展示层输出前仍需编码。" en="Current login or account name; presentation code must still encode it before output." />
+        ///   <l>
+        ///     <zh-CN>当前登录名或账号名；展示层输出前仍需编码。</zh-CN>
+        ///     <en>Current login or account name; presentation code must still encode it before output.</en>
+        ///   </l>
         /// </param>
         /// <param name="displayName">
-        ///   <l zh-CN="用户显示名称，优先服务企业门户界面展示。" en="User display name, primarily used by the enterprise portal UI." />
+        ///   <l>
+        ///     <zh-CN>用户显示名称，优先服务企业门户界面展示。</zh-CN>
+        ///     <en>User display name, primarily used by the enterprise portal UI.</en>
+        ///   </l>
         /// </param>
         /// <param name="nickname">
-        ///   <l zh-CN="用户昵称或短名称；为空时由页面决定回退显示。" en="User nickname or short name; pages decide fallback display when empty." />
+        ///   <l>
+        ///     <zh-CN>用户昵称或短名称；为空时由页面决定回退显示。</zh-CN>
+        ///     <en>User nickname or short name; pages decide fallback display when empty.</en>
+        ///   </l>
         /// </param>
         /// <param name="preferredEmail">
-        ///   <l zh-CN="首选联系邮箱；不是认证凭据。" en="Preferred contact email; this is not an authentication credential." />
+        ///   <l>
+        ///     <zh-CN>首选联系邮箱；不是认证凭据。</zh-CN>
+        ///     <en>Preferred contact email; this is not an authentication credential.</en>
+        ///   </l>
         /// </param>
         /// <param name="status">
-        ///   <l zh-CN="用户资料状态稳定字符串。" en="Stable user-profile status string." />
+        ///   <l>
+        ///     <zh-CN>用户资料状态稳定字符串。</zh-CN>
+        ///     <en>Stable user-profile status string.</en>
+        ///   </l>
         /// </param>
         /// <param name="statusReason">
-        ///   <l zh-CN="状态原因或备注；显示前需编码，且不应包含敏感值。" en="Status reason or note; encode before display and do not include secrets." />
+        ///   <l>
+        ///     <zh-CN>状态原因或备注；显示前需编码，且不应包含敏感值。</zh-CN>
+        ///     <en>Status reason or note; encode before display and do not include secrets.</en>
+        ///   </l>
         /// </param>
         /// <param name="isAvailable">
-        ///   <l zh-CN="当前资料是否可用于页面展示或后台选择。" en="Whether the profile is currently available for page display or administration selection." />
+        ///   <l>
+        ///     <zh-CN>当前资料是否可用于页面展示或后台选择。</zh-CN>
+        ///     <en>Whether the profile is currently available for page display or administration selection.</en>
+        ///   </l>
         /// </param>
         /// <param name="source">
-        ///   <l zh-CN="资料来源标识，用于区分旧表、扩展表或扩展同步来源。" en="Profile source marker used to distinguish legacy table, extension table, or extended synchronization sources." />
+        ///   <l>
+        ///     <zh-CN>资料来源标识，用于区分旧表、扩展表或扩展同步来源。</zh-CN>
+        ///     <en>Profile source marker used to distinguish legacy table, extension table, or extended synchronization sources.</en>
+        ///   </l>
         /// </param>
         /// <remarks>
         ///   <lang>

@@ -971,7 +971,10 @@
 | P26.5sa 选片 | 已选择 21 个旧 Item 契约与 EF 投影文件，覆盖 `src/Portal.Components` 10 个 `I*Item.cs`、`src/Portal.Components.Data` 1 个 `DiscussionItem.cs` 与 `src/Portal.Components.Data1` 10 个 `*Item.cs` 的 XML locale 表面；Db 接口、服务、页面 code-behind、策略类和真实 proof 排除。见 [P26.5sa 选片](work-zone/dev/plans/W-anp-P26.5sa-item-locale-surface-selection.md)。 |
 | P26.5sb 注释补强 | 已将 131 处旧自闭合 `<l zh-CN="..." en="..." />` 迁移为嵌套 `<l><zh-CN>...</zh-CN><en>...</en></l>`；旧自闭合表面 `0`，嵌套 `<l>` `131`，新增非注释代码 `0`。见 [P26.5sb 结果](work-zone/dev/plans/W-anp-P26.5sb-item-locale-surface-result.md)。 |
 | P26.5sc 静态验证 | 通过；去 XML 文档注释后代码与 `HEAD` 一致，`NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实数据库、EF 查询、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5sc 审计](work-zone/dev/plans/W-anp-P26.5sc-item-locale-surface-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5sd：重新读取最新源码盘点，继续选择下一组未重复、同风险同验证路径且存在明确语义缺口的 clean 职责链；不重复 P26.5sa-sc。 |
+| P26.5sd 选片 | 已选择剩余 20 个 clean 非 Designer C# 文件的旧 XML locale 表面，覆盖配置/DTO/Db 接口、导航注册表、认证/诊断/Profile/设置/主题/Page/Tab 工具链与一个 clean 旧事件模块 code-behind；已有未提交残留、真实运行 proof 和业务逻辑修改排除。见 [P26.5sd 选片](work-zone/dev/plans/W-anp-P26.5sd-remaining-locale-surface-selection.md)。 |
+| P26.5se 注释补强 | 已迁移 252 处旧自闭合 `<l zh-CN="..." en="..." />` 为嵌套 `<l><zh-CN>...</zh-CN><en>...</en></l>`；独立 XML 文档行 68 处，行内 `<param>`/`<returns>`/`<exception>` 等 184 处；目标旧自闭合表面 `0`、目标嵌套 `<l>` `315`、clean 非 Designer C# 范围剩余旧表面文件数 `0`，新增非注释代码 `0`。见 [P26.5se 结果](work-zone/dev/plans/W-anp-P26.5se-remaining-locale-surface-result.md)。 |
+| P26.5sf 静态验证 | 通过；去 XML 文档注释后代码与 `HEAD` 一致，`NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、Debug 构建和 XML gate（Portal `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`）均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实数据库、诊断日志、主题包解析、Profile 解析、认证 Cookie、IIS/HTTP、浏览器、账号、凭据和发布 proof 未执行。见 [P26.5sf 审计](work-zone/dev/plans/W-anp-P26.5sf-remaining-locale-surface-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5sg：重新读取最新源码盘点，继续选择下一组未重复、同风险同验证路径且存在明确语义缺口的 clean 职责链；不重复 P26.5sd-sf。 |
 
 ## Known Residual Working Tree Items
 
@@ -992,6 +995,7 @@
 | P26.5rk 初始注释-only 增行扫描 | adjusted | 一处旧行尾中文注释迁移为前置双语块后，简单新增行扫描把 unchanged code + removed trailing comment 识别为 `NONCOMMENT_COUNT=1`；改用去注释后与 HEAD code fingerprint 对比通过，确认语义代码未变。 |
 | P26.5rx 初始注释-only 增行扫描 | adjusted | 服务器注释内部 `<lang>` 内容以及首次规范化误删的两个既有 Page 指令行尾空格会让简单新增行扫描出现伪非注释差异；已恢复原始指令文本，并改用去服务器注释/XML 注释后的有效标记/代码对比通过。 |
 | P26.5sa 首次批量迁移命令 | adjusted | PowerShell 正则字符串首次使用反斜杠转义双引号导致解析失败，未执行到写文件；改用 PowerShell 原生反引号转义后成功迁移 131 处旧 `<l>` 表面。 |
+| P26.5sd 首个迁移器 | adjusted | 首个迁移器已成功迁移独立 XML 文档行 68 处，但在行内 `<param>` 形态处中断；随后按行内形态使用第二迁移器完成剩余 184 处，最终目标旧表面清零且代码一致性通过。 |
 
 ## Anti-Loop Guard
 

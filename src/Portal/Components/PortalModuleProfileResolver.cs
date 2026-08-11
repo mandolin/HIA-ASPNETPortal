@@ -123,10 +123,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="context">
-        /// <l zh-CN="可选 HTTP 上下文；当前解析不读取它，以保持上层调用形状稳定。" en="Optional HTTP context; the current resolver does not read it, keeping the upstream call shape stable." />
+        /// <l>
+        ///   <zh-CN>可选 HTTP 上下文；当前解析不读取它，以保持上层调用形状稳定。</zh-CN>
+        ///   <en>Optional HTTP context; the current resolver does not read it, keeping the upstream call shape stable.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="不可变的 Profile 快照。" en="Immutable Profile snapshot." />
+        /// <l>
+        ///   <zh-CN>不可变的 Profile 快照。</zh-CN>
+        ///   <en>Immutable Profile snapshot.</en>
+        /// </l>
         /// </returns>
         public static PortalModuleProfileSnapshot Resolve(HttpContext context = null)
         {
@@ -188,10 +194,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="normalizedDesktopSource">
-        /// <l zh-CN="已去掉 ~/ 的桌面控件路径。" en="Desktop control path without ~/." />
+        /// <l>
+        ///   <zh-CN>已去掉 ~/ 的桌面控件路径。</zh-CN>
+        ///   <en>Desktop control path without ~/.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="属于 Core 时为 true。" en="True when the entry belongs to Core." />
+        /// <l>
+        ///   <zh-CN>属于 Core 时为 true。</zh-CN>
+        ///   <en>True when the entry belongs to Core.</en>
+        /// </l>
         /// </returns>
         public static bool IsCoreDesktopSource(string normalizedDesktopSource)
         {
@@ -211,13 +223,22 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="normalizedDesktopSource">
-        /// <l zh-CN="已规范化桌面入口。" en="Normalized desktop entry." />
+        /// <l>
+        ///   <zh-CN>已规范化桌面入口。</zh-CN>
+        ///   <en>Normalized desktop entry.</en>
+        /// </l>
         /// </param>
         /// <param name="packageId">
-        /// <l zh-CN="成功时返回虚拟 package id。" en="Virtual package id when successful." />
+        /// <l>
+        ///   <zh-CN>成功时返回虚拟 package id。</zh-CN>
+        ///   <en>Virtual package id when successful.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="找到映射时为 true。" en="True when a mapping is found." />
+        /// <l>
+        ///   <zh-CN>找到映射时为 true。</zh-CN>
+        ///   <en>True when a mapping is found.</en>
+        /// </l>
         /// </returns>
         public static bool TryGetLegacyPackageId(string normalizedDesktopSource, out string packageId)
         {
@@ -250,13 +271,22 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="profileName">
-        /// <l zh-CN="已规范化的父 Profile 名称。" en="Normalized parent Profile name." />
+        /// <l>
+        ///   <zh-CN>已规范化的父 Profile 名称。</zh-CN>
+        ///   <en>Normalized parent Profile name.</en>
+        /// </l>
         /// </param>
         /// <param name="invalidEntries">
-        /// <l zh-CN="用于追加受控无效配置摘要的集合。" en="Collection that receives controlled invalid-configuration summaries." />
+        /// <l>
+        ///   <zh-CN>用于追加受控无效配置摘要的集合。</zh-CN>
+        ///   <en>Collection that receives controlled invalid-configuration summaries.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="已过滤自身引用和无效名称的直接 include 序列。" en="Direct include sequence with self-references and invalid names filtered out." />
+        /// <l>
+        ///   <zh-CN>已过滤自身引用和无效名称的直接 include 序列。</zh-CN>
+        ///   <en>Direct include sequence with self-references and invalid names filtered out.</en>
+        /// </l>
         /// </returns>
         private static IEnumerable<string> ReadProfileIncludes(string profileName, IList<string> invalidEntries)
         {
@@ -308,11 +338,36 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Adds one Profile, its packages, and its recursive includes to the allowed set.</en>
         /// </lang>
         /// </summary>
-        /// <param name="profileName"><l zh-CN="已规范化的待展开 Profile 名称。" en="Normalized Profile name to expand." /></param>
-        /// <param name="allowedPackages"><l zh-CN="按大小写不敏感语义合并的包白名单。" en="Package allowlist merged with case-insensitive semantics." /></param>
-        /// <param name="invalidEntries"><l zh-CN="接收受控无效或循环摘要的集合。" en="Collection receiving controlled invalid or cycle summaries." /></param>
-        /// <param name="visitedProfiles"><l zh-CN="已完整展开的 Profile 集合。" en="Set of Profiles whose expansion completed." /></param>
-        /// <param name="expandingProfiles"><l zh-CN="当前递归栈中的 Profile 集合。" en="Set of Profiles on the current recursion stack." /></param>
+        /// <param name="profileName">
+        ///   <l>
+        ///     <zh-CN>已规范化的待展开 Profile 名称。</zh-CN>
+        ///     <en>Normalized Profile name to expand.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="allowedPackages">
+        ///   <l>
+        ///     <zh-CN>按大小写不敏感语义合并的包白名单。</zh-CN>
+        ///     <en>Package allowlist merged with case-insensitive semantics.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="invalidEntries">
+        ///   <l>
+        ///     <zh-CN>接收受控无效或循环摘要的集合。</zh-CN>
+        ///     <en>Collection receiving controlled invalid or cycle summaries.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="visitedProfiles">
+        ///   <l>
+        ///     <zh-CN>已完整展开的 Profile 集合。</zh-CN>
+        ///     <en>Set of Profiles whose expansion completed.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="expandingProfiles">
+        ///   <l>
+        ///     <zh-CN>当前递归栈中的 Profile 集合。</zh-CN>
+        ///     <en>Set of Profiles on the current recursion stack.</en>
+        ///   </l>
+        /// </param>
         private static void AddProfileAndIncludes(
             string profileName,
             ISet<string> allowedPackages,
@@ -376,9 +431,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Reads and merges the direct package list for one Profile.</en>
         /// </lang>
         /// </summary>
-        /// <param name="profileName"><l zh-CN="已规范化的 Profile 名称。" en="Normalized Profile name." /></param>
-        /// <param name="allowedPackages"><l zh-CN="接收有效包 id 的允许集合。" en="Allowed set receiving valid package ids." /></param>
-        /// <param name="invalidEntries"><l zh-CN="接收受控配置问题摘要的集合。" en="Collection receiving controlled configuration-issue summaries." /></param>
+        /// <param name="profileName">
+        ///   <l>
+        ///     <zh-CN>已规范化的 Profile 名称。</zh-CN>
+        ///     <en>Normalized Profile name.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="allowedPackages">
+        ///   <l>
+        ///     <zh-CN>接收有效包 id 的允许集合。</zh-CN>
+        ///     <en>Allowed set receiving valid package ids.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="invalidEntries">
+        ///   <l>
+        ///     <zh-CN>接收受控配置问题摘要的集合。</zh-CN>
+        ///     <en>Collection receiving controlled configuration-issue summaries.</en>
+        ///   </l>
+        /// </param>
         private static void AddProfilePackages(
             string profileName,
             ISet<string> allowedPackages,
@@ -409,10 +479,30 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Merges stable package ids from a CSV package list into the allowed set.</en>
         /// </lang>
         /// </summary>
-        /// <param name="configured"><l zh-CN="来自受控默认值或 appSettings 的 CSV 文本。" en="CSV text from a controlled default or appSettings." /></param>
-        /// <param name="allowedPackages"><l zh-CN="接收有效包 id 的允许集合。" en="Allowed set receiving valid package ids." /></param>
-        /// <param name="invalidEntries"><l zh-CN="接收非法包摘要的集合。" en="Collection receiving invalid-package summaries." /></param>
-        /// <param name="sourceKey"><l zh-CN="用于受控问题摘要的配置来源键。" en="Configuration source key used in controlled issue summaries." /></param>
+        /// <param name="configured">
+        ///   <l>
+        ///     <zh-CN>来自受控默认值或 appSettings 的 CSV 文本。</zh-CN>
+        ///     <en>CSV text from a controlled default or appSettings.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="allowedPackages">
+        ///   <l>
+        ///     <zh-CN>接收有效包 id 的允许集合。</zh-CN>
+        ///     <en>Allowed set receiving valid package ids.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="invalidEntries">
+        ///   <l>
+        ///     <zh-CN>接收非法包摘要的集合。</zh-CN>
+        ///     <en>Collection receiving invalid-package summaries.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="sourceKey">
+        ///   <l>
+        ///     <zh-CN>用于受控问题摘要的配置来源键。</zh-CN>
+        ///     <en>Configuration source key used in controlled issue summaries.</en>
+        ///   </l>
+        /// </param>
         private static void AddPackageList(
             string configured,
             ISet<string> allowedPackages,
@@ -443,11 +533,36 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Constrains a configuration candidate to a stable name or returns the caller-specified safe fallback.</en>
         /// </lang>
         /// </summary>
-        /// <param name="candidate"><l zh-CN="待验证的配置候选文本。" en="Configuration candidate text to validate." /></param>
-        /// <param name="fallback"><l zh-CN="候选为空或非法时的既定回退值。" en="Established fallback when the candidate is blank or invalid." /></param>
-        /// <param name="invalidEntries"><l zh-CN="接收受控非法输入摘要的集合。" en="Collection receiving controlled invalid-input summaries." /></param>
-        /// <param name="sourceName"><l zh-CN="用于标识配置来源的受控名称。" en="Controlled name identifying the configuration source." /></param>
-        /// <returns><l zh-CN="通过验证的去空白稳定名称，或既定回退值。" en="Validated trimmed stable name, or the established fallback." /></returns>
+        /// <param name="candidate">
+        ///   <l>
+        ///     <zh-CN>待验证的配置候选文本。</zh-CN>
+        ///     <en>Configuration candidate text to validate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="fallback">
+        ///   <l>
+        ///     <zh-CN>候选为空或非法时的既定回退值。</zh-CN>
+        ///     <en>Established fallback when the candidate is blank or invalid.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="invalidEntries">
+        ///   <l>
+        ///     <zh-CN>接收受控非法输入摘要的集合。</zh-CN>
+        ///     <en>Collection receiving controlled invalid-input summaries.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="sourceName">
+        ///   <l>
+        ///     <zh-CN>用于标识配置来源的受控名称。</zh-CN>
+        ///     <en>Controlled name identifying the configuration source.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>通过验证的去空白稳定名称，或既定回退值。</zh-CN>
+        ///     <en>Validated trimmed stable name, or the established fallback.</en>
+        ///   </l>
+        /// </returns>
         private static string NormalizeStableName(
             string candidate,
             string fallback,
@@ -487,8 +602,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Produces trimmed, nonempty segments from CSV text.</en>
         /// </lang>
         /// </summary>
-        /// <param name="value"><l zh-CN="可能为空的 CSV 文本。" en="CSV text that may be blank." /></param>
-        /// <returns><l zh-CN="不含空项的延迟片段序列。" en="Deferred segment sequence without blank entries." /></returns>
+        /// <param name="value">
+        ///   <l>
+        ///     <zh-CN>可能为空的 CSV 文本。</zh-CN>
+        ///     <en>CSV text that may be blank.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>不含空项的延迟片段序列。</zh-CN>
+        ///     <en>Deferred segment sequence without blank entries.</en>
+        ///   </l>
+        /// </returns>
         private static IEnumerable<string> SplitCsv(string value)
         {
             // <lang>
@@ -516,8 +641,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Converges a legacy desktop source to a relative forward-slash path for fixed mapping comparison.</en>
         /// </lang>
         /// </summary>
-        /// <param name="source"><l zh-CN="可能带 ~/、起始斜杠或反斜杠的来源文本。" en="Source text that may contain ~/, a leading slash, or backslashes." /></param>
-        /// <returns><l zh-CN="可与固定来源映射比较的规范化相对路径。" en="Normalized relative path suitable for fixed source-map comparison." /></returns>
+        /// <param name="source">
+        ///   <l>
+        ///     <zh-CN>可能带 ~/、起始斜杠或反斜杠的来源文本。</zh-CN>
+        ///     <en>Source text that may contain ~/, a leading slash, or backslashes.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>可与固定来源映射比较的规范化相对路径。</zh-CN>
+        ///     <en>Normalized relative path suitable for fixed source-map comparison.</en>
+        ///   </l>
+        /// </returns>
         private static string NormalizeSource(string source)
         {
             // <lang>
@@ -548,9 +683,24 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Creates the immutable result of one deployment Profile resolution.</en>
         /// </lang>
         /// </summary>
-        /// <param name="activeProfile"><l zh-CN="已解析的活动 Profile；空值收敛为空字符串。" en="Resolved active Profile; null converges to an empty string." /></param>
-        /// <param name="allowedPackageIds"><l zh-CN="解析得到的包 id 列表；复制为只读快照。" en="Resolved package-id list; copied into a read-only snapshot." /></param>
-        /// <param name="invalidEntries"><l zh-CN="解析期间的受控问题摘要；复制为只读快照。" en="Controlled issue summaries from parsing; copied into a read-only snapshot." /></param>
+        /// <param name="activeProfile">
+        ///   <l>
+        ///     <zh-CN>已解析的活动 Profile；空值收敛为空字符串。</zh-CN>
+        ///     <en>Resolved active Profile; null converges to an empty string.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="allowedPackageIds">
+        ///   <l>
+        ///     <zh-CN>解析得到的包 id 列表；复制为只读快照。</zh-CN>
+        ///     <en>Resolved package-id list; copied into a read-only snapshot.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="invalidEntries">
+        ///   <l>
+        ///     <zh-CN>解析期间的受控问题摘要；复制为只读快照。</zh-CN>
+        ///     <en>Controlled issue summaries from parsing; copied into a read-only snapshot.</en>
+        ///   </l>
+        /// </param>
         internal PortalModuleProfileSnapshot(
             string activeProfile,
             IList<string> allowedPackageIds,
@@ -602,10 +752,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         /// <param name="packageId">
-        /// <l zh-CN="待判断 package id。" en="Package id to check." />
+        /// <l>
+        ///   <zh-CN>待判断 package id。</zh-CN>
+        ///   <en>Package id to check.</en>
+        /// </l>
         /// </param>
         /// <returns>
-        /// <l zh-CN="允许时为 true。" en="True when allowed." />
+        /// <l>
+        ///   <zh-CN>允许时为 true。</zh-CN>
+        ///   <en>True when allowed.</en>
+        /// </l>
         /// </returns>
         public bool IsPackageAllowed(string packageId)
         {
