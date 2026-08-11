@@ -75,6 +75,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         internal static PortalPasswordHash CreateHash(string password)
         {
+            // <lang>
+            //   <zh-CN>明文密码只接受调用方已经确认的原始输入；这里不做裁剪或规范化，避免改变用户实际提交的凭据语义。</zh-CN>
+            //   <en>The plain-text password accepts only the raw input already confirmed by the caller; this method does not trim or normalize it, avoiding changes to the submitted credential semantics.</en>
+            // </lang>
             if (password == null)
             {
                 throw new ArgumentNullException("password");
@@ -85,11 +89,19 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Generate an independent random salt for each credential so identical passwords do not produce identical hashes.</en>
             // </lang>
             byte[] salt = new byte[SaltLength];
+            // <lang>
+            //   <zh-CN>加密随机数生成器只在填充本次盐缓冲区时存活，减少非托管资源和敏感状态驻留时间。</zh-CN>
+            //   <en>The cryptographic random-number generator lives only while filling this salt buffer, reducing unmanaged-resource and sensitive-state residency.</en>
+            // </lang>
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(salt);
             }
 
+            // <lang>
+            //   <zh-CN>返回对象显式携带算法和成本参数，使数据库记录可以在未来按账号独立升级迭代次数。</zh-CN>
+            //   <en>The returned object carries the algorithm and cost parameters explicitly so database records can later upgrade iteration counts per account.</en>
+            // </lang>
             return new PortalPasswordHash(
                 Format,
                 DefaultIterationCount,
@@ -146,6 +158,10 @@ namespace ASPNET.StarterKit.Portal
             byte[] expectedHash,
             int iterationCount)
         {
+            // <lang>
+            //   <zh-CN>所有凭据字段必须同时完整且格式精确匹配，防止旧格式、损坏盐或无效成本参数进入派生步骤。</zh-CN>
+            //   <en>All credential fields must be complete and the format must match exactly, preventing legacy formats, damaged salts, or invalid cost parameters from entering derivation.</en>
+            // </lang>
             if (password == null ||
                 !string.Equals(passwordFormat, Format, StringComparison.Ordinal) ||
                 passwordSalt == null ||
@@ -159,7 +175,15 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>实际哈希仅保留在当前验证栈帧中，用保存的盐和成本参数复现数据库凭据。</zh-CN>
+            //   <en>The actual hash remains only in the current verification stack frame and reproduces the database credential with the saved salt and cost parameter.</en>
+            // </lang>
             byte[] actualHash = DeriveHash(password, passwordSalt, iterationCount);
+            // <lang>
+            //   <zh-CN>比较步骤委托给固定时间 helper，避免普通数组比较提前暴露首个差异位置。</zh-CN>
+            //   <en>The comparison is delegated to the fixed-time helper so ordinary array comparison does not reveal the first differing position early.</en>
+            // </lang>
             return FixedTimeEquals(actualHash, expectedHash);
         }
 
@@ -195,8 +219,16 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static byte[] DeriveHash(string password, byte[] salt, int iterationCount)
         {
+            // <lang>
+            //   <zh-CN>PBKDF2 实例持有密码派生过程中的内部状态，限定在 using 块内释放。</zh-CN>
+            //   <en>The PBKDF2 instance holds internal state for password derivation and is released within this using block.</en>
+            // </lang>
             using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterationCount, HashAlgorithmName.SHA256))
             {
+                // <lang>
+                //   <zh-CN>派生长度固定为当前格式约定的字节数，确保保存与验证时的比较尺寸一致。</zh-CN>
+                //   <en>The derived length is fixed to the byte count required by the current format, keeping persistence and verification comparison sizes aligned.</en>
+                // </lang>
                 return deriveBytes.GetBytes(HashLength);
             }
         }
@@ -227,12 +259,24 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static bool FixedTimeEquals(byte[] left, byte[] right)
         {
+            // <lang>
+            //   <zh-CN>空数组引用代表损坏或未迁移的凭据字段，固定时间比较不负责猜测兼容格式。</zh-CN>
+            //   <en>Null array references represent damaged or unmigrated credential fields; fixed-time comparison does not guess compatibility formats.</en>
+            // </lang>
             if (left == null || right == null)
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>长度差异先进入累积差异位，保证最终结果同时包含尺寸和内容两个维度。</zh-CN>
+            //   <en>The length difference enters the accumulated difference bits first, ensuring the final result covers both size and content.</en>
+            // </lang>
             int difference = left.Length ^ right.Length;
+            // <lang>
+            //   <zh-CN>共同长度限制后续索引范围；长度不同时仍会扫描可比较的完整前缀。</zh-CN>
+            //   <en>The shared length bounds subsequent indexing; when lengths differ, the full comparable prefix is still scanned.</en>
+            // </lang>
             int count = Math.Min(left.Length, right.Length);
             // <lang>
             //   <zh-CN>即使长度不同，也比较共同长度内的所有字节，减少基于首个差异位置的时间侧信道。</zh-CN>
@@ -243,6 +287,10 @@ namespace ASPNET.StarterKit.Portal
                 difference |= left[i] ^ right[i];
             }
 
+            // <lang>
+            //   <zh-CN>只有长度差异和每个字节差异都为零时，凭据哈希才被视为匹配。</zh-CN>
+            //   <en>The credential hash is considered matched only when both length difference and every byte difference are zero.</en>
+            // </lang>
             return difference == 0;
         }
     }
@@ -293,9 +341,25 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         internal PortalPasswordHash(string format, int iterationCount, byte[] salt, byte[] hash)
         {
+            // <lang>
+            //   <zh-CN>格式标识保持与数据库列值一致，调用方据此区分强哈希与历史凭据。</zh-CN>
+            //   <en>The format identifier stays aligned with the database column value so callers can distinguish strong hashes from legacy credentials.</en>
+            // </lang>
             Format = format;
+            // <lang>
+            //   <zh-CN>迭代次数作为每条凭据的成本快照保存，不由全局默认值在读取时重新推断。</zh-CN>
+            //   <en>The iteration count is stored as the per-credential cost snapshot instead of being inferred again from the global default during reads.</en>
+            // </lang>
             IterationCount = iterationCount;
+            // <lang>
+            //   <zh-CN>盐字节来自创建流程的随机缓冲区，并只在数据访问层写库前短暂传递。</zh-CN>
+            //   <en>The salt bytes come from the creation flow's random buffer and are passed briefly before database persistence in the data-access layer.</en>
+            // </lang>
             Salt = salt;
+            // <lang>
+            //   <zh-CN>派生哈希同样只作为内部 DTO 字段传递，不能流入日志、页面或审计摘要。</zh-CN>
+            //   <en>The derived hash is likewise carried only as an internal DTO field and must not flow into logs, pages, or audit summaries.</en>
+            // </lang>
             Hash = hash;
         }
 

@@ -934,7 +934,10 @@
 | P26.5qs 选片 | 已选择 `PortalLoginIdentifierResolver.cs` 的登录输入唯一映射职责链；覆盖资料登录名、旧用户名、Active 员工工号、新旧资料邮箱、候选去重、歧义拒绝、参数化查询和安全结果对象；真实登录、数据库、账号、密码、IIS/HTTP、浏览器、凭据和发布 proof 排除。见 [P26.5qs 选片](work-zone/dev/plans/W-anp-P26.5qs-login-identifier-resolution-selection.md)。 |
 | P26.5qt 注释补强 | 已为安全上下文/表可用性快照、来源优先级、员工 Active 约束、邮箱合并、候选截断、歧义 fail-safe、参数化查询和不可变结果对象补充 19 个中英双语 `<lang>` 块及 3 个 private/state XML `<summary>`；新增非注释代码 `0`。见 [P26.5qt 结果](work-zone/dev/plans/W-anp-P26.5qt-login-identifier-resolution-result.md)。 |
 | P26.5qu 静态验证 | 通过；目标文件差异全部为 XML/inline 注释，注释-only 扫描 `NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal XML member count `1923`、Portal.Components.Data1 `713`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记，本次无新增警告。真实登录、账号、密码、数据库、IIS/HTTP、浏览器、凭据和发布 proof 未执行。见 [P26.5qu 审计](work-zone/dev/plans/W-anp-P26.5qu-login-identifier-resolution-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5qv：重新读取最新账本和源码盘点，选择下一条同风险、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qs-qu。 |
+| P26.5qv 选片 | 已选择 `PortalPasswordHasher.cs`、`ReferenceDataDb.cs` 与 `PortalReferenceDataSets.cs` 的口令哈希安全 helper、参考数据只读目录和受限兼容回退职责链；覆盖明文密码原样语义、PBKDF2 盐/成本、固定时间比较、目录表可用性、已启用值查询、空目录/不可读目录区分和规范键解析；真实密码、账号、数据库、IIS/HTTP、浏览器与凭据 proof 排除。见 [P26.5qv 选片](work-zone/dev/plans/W-anp-P26.5qv-reference-data-password-helper-selection.md)。 |
+| P26.5qw 注释补强 | 已为三文件补充 26 个中英双语 `<lang>` 块及 5 个 XML `<summary>`；文件 `<lang>` 分别 `20→36`、`3→19`、`8→18`，新增非注释代码 `0`。见 [P26.5qw 结果](work-zone/dev/plans/W-anp-P26.5qw-reference-data-password-helper-result.md)。 |
+| P26.5qx 静态验证 | 通过；三文件差异全部为 XML/inline 注释，注释-only 扫描 `ADDED_COUNT=232`、`NONCOMMENT_COUNT=0`，Debug 构建、XML gate（Portal `1923`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `717`）、UTF-8 无 BOM/CRLF 与目标 `git diff --check` 均通过；既有 `Roles.ModulesConfig` CS0108 警告继续登记。真实密码、账号、数据库、IIS/HTTP、浏览器与凭据 proof 未执行。见 [P26.5qx 审计](work-zone/dev/plans/W-anp-P26.5qx-reference-data-password-helper-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5qy：重新读取最新账本和源码盘点，选择下一条未重复、同验证路径且存在明确语义缺口的完整职责链；不重复 P26.5qv-qx。 |
 
 ## Known Residual Working Tree Items
 

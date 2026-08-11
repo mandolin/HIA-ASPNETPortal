@@ -43,7 +43,15 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static IList<ReferenceDataItem> GetFallbackItems(string referenceSetKey)
         {
+            // <lang>
+            //   <zh-CN>每次调用都创建独立列表，调用方可以绑定、排序或追加占位项，而不会污染全局兼容种子。</zh-CN>
+            //   <en>Each call creates an independent list so callers may bind, sort, or append placeholder items without mutating the global compatibility seeds.</en>
+            // </lang>
             var items = new List<ReferenceDataItem>();
+            // <lang>
+            //   <zh-CN>协同事项类型回退只保留 P22 已接受的低敏业务类别，供目录表未部署时维持表单可用。</zh-CN>
+            //   <en>The collaboration-item type fallback keeps only the low-sensitivity business categories accepted by P22, preserving form availability while the catalog table is undeployed.</en>
+            // </lang>
             if (string.Equals(referenceSetKey, CollaborationItemType, StringComparison.Ordinal))
             {
                 items.Add(CreateItem(CollaborationItemType, GeneralItemType, "通用协同", 10));
@@ -51,12 +59,20 @@ namespace ASPNET.StarterKit.Portal
                 items.Add(CreateItem(CollaborationItemType, "Operations", "资源/运维协同", 30));
                 items.Add(CreateItem(CollaborationItemType, "Workflow", "业务流程协同", 40));
             }
+            // <lang>
+            //   <zh-CN>优先级回退保持最小集合，避免在目录治理尚不可读时引入未审计的业务级别。</zh-CN>
+            //   <en>The priority fallback keeps the smallest set, avoiding unaudited business levels while catalog governance is not yet readable.</en>
+            // </lang>
             else if (string.Equals(referenceSetKey, CollaborationPriority, StringComparison.Ordinal))
             {
                 items.Add(CreateItem(CollaborationPriority, NormalPriority, "普通", 10));
                 items.Add(CreateItem(CollaborationPriority, "Important", "重要", 20));
             }
 
+            // <lang>
+            //   <zh-CN>未知集合返回空副本，由调用方按业务上下文决定是否拒绝或展示无可选值。</zh-CN>
+            //   <en>Unknown sets return an empty copy, leaving callers to reject the value or show no choices according to their business context.</en>
+            // </lang>
             return items;
         }
 
@@ -80,9 +96,21 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static bool TryResolveFallbackValue(string referenceSetKey, string candidateValueKey, out string canonicalValueKey)
         {
+            // <lang>
+            //   <zh-CN>输出键先置空，确保解析失败时不会保留调用方传入的旧值或上一轮结果。</zh-CN>
+            //   <en>The output key starts empty so a failed resolution cannot retain an old caller value or a previous result.</en>
+            // </lang>
             canonicalValueKey = string.Empty;
+            // <lang>
+            //   <zh-CN>解析只遍历当前集合的兼容副本；目录可读时调用方不得走这条路径绕过停用值。</zh-CN>
+            //   <en>Resolution scans only the compatibility copy for the current set; callers must not use this path to bypass deactivated values when the catalog is readable.</en>
+            // </lang>
             foreach (ReferenceDataItem item in GetFallbackItems(referenceSetKey))
             {
+                // <lang>
+                //   <zh-CN>值键比较允许大小写差异，但返回值保持种子中的规范大小写，便于事实表持久化稳定键。</zh-CN>
+                //   <en>Value-key comparison accepts casing differences, but the returned value keeps the seed's canonical casing for stable fact-table persistence.</en>
+                // </lang>
                 if (string.Equals(item.ValueKey, candidateValueKey, StringComparison.OrdinalIgnoreCase))
                 {
                     canonicalValueKey = item.ValueKey;
@@ -90,11 +118,55 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>未命中表示候选值不属于受限兼容集合，调用方应按输入无效处理。</zh-CN>
+            //   <en>A miss means the candidate does not belong to the restricted compatibility set and should be treated by callers as invalid input.</en>
+            // </lang>
             return false;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一条受限兼容参考数据项。</zh-CN>
+        ///   <en>Creates one restricted compatibility reference-data item.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="referenceSetKey">
+        /// <l>
+        ///   <zh-CN>该值所属的稳定集合键。</zh-CN>
+        ///   <en>Stable set key that owns this value.</en>
+        /// </l>
+        /// </param>
+        /// <param name="valueKey">
+        /// <l>
+        ///   <zh-CN>集合内稳定值键。</zh-CN>
+        ///   <en>Stable value key within the set.</en>
+        /// </l>
+        /// </param>
+        /// <param name="displayName">
+        /// <l>
+        ///   <zh-CN>面向用户展示的低敏名称。</zh-CN>
+        ///   <en>Low-sensitivity name displayed to users.</en>
+        /// </l>
+        /// </param>
+        /// <param name="sortOrder">
+        /// <l>
+        ///   <zh-CN>兼容集合内的稳定排序值。</zh-CN>
+        ///   <en>Stable ordering value within the compatibility set.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>标记为启用和系统种子的参考数据项。</zh-CN>
+        ///   <en>A reference-data item marked as active and system-seeded.</en>
+        /// </l>
+        /// </returns>
         private static ReferenceDataItem CreateItem(string referenceSetKey, string valueKey, string displayName, int sortOrder)
         {
+            // <lang>
+            //   <zh-CN>兼容项不分配数据库标识，也不携带说明字段，避免被误解为已经持久化的运营目录记录。</zh-CN>
+            //   <en>Compatibility items do not assign database identifiers or descriptions, avoiding confusion with persisted operational catalog records.</en>
+            // </lang>
             return new ReferenceDataItem
             {
                 ReferenceSetKey = referenceSetKey,
