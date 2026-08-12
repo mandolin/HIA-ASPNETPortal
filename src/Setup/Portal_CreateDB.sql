@@ -1,10 +1,33 @@
+/*
+<lang>
+  <zh-CN>旧 ASP.NET Portal Starter Kit 建库总脚本。本脚本会创建固定名称 `Portal` 数据库、删除同名旧对象并重建旧门户内容表、配置表、用户/角色表、讨论区存储过程、默认约束和外键；只能用于受控初始化或重建场景，不能直接用于承载真实数据的生产环境。</zh-CN>
+  <en>Legacy ASP.NET Portal Starter Kit database creation script. This script creates the fixed-name `Portal` database, drops same-name legacy objects, and rebuilds legacy portal content tables, configuration tables, user/role tables, discussion stored procedures, default constraints, and foreign keys; it is only for controlled initialization or rebuild scenarios and must not be run directly against production environments containing real data.</en>
+</lang>
+*/
+
+-- <lang>
+--   <zh-CN>先切换到 master 再创建数据库，避免在调用者当前数据库上下文中执行实例级建库操作。</zh-CN>
+--   <en>Switch to master before creating the database so the instance-level create operation does not execute in the caller's current database context.</en>
+-- </lang>
 use [master]
 
+-- <lang>
+--   <zh-CN>创建固定名称 `Portal` 数据库；脚本未做存在性保护，执行前必须确认目标实例中不存在需要保留的同名数据库。</zh-CN>
+--   <en>Create the fixed-name `Portal` database; the script has no existence guard here, so operators must confirm that no same-name database needing preservation exists on the target instance.</en>
+-- </lang>
 create database [Portal]
 GO
 
+-- <lang>
+--   <zh-CN>后续 DDL/DROP 均在新建或目标 `Portal` 数据库中执行，作用域不应泄漏到其它业务库。</zh-CN>
+--   <en>All later DDL and DROP operations run inside the new or target `Portal` database and must not leak into other business databases.</en>
+-- </lang>
 use [Portal]
 
+-- <lang>
+--   <zh-CN>重建前先移除旧外键，释放内容表、模块表、Tab 表和用户角色表之间的依赖，便于后续按旧顺序 DROP。</zh-CN>
+--   <en>Before rebuilding, remove old foreign keys to release dependencies among content tables, module tables, tab tables, and user-role tables so later DROP statements can follow the legacy order.</en>
+-- </lang>
 /****** Object:  ForeignKey [FK_Portal_Announcements_PortalCfg_Modules]    Script Date: 03/01/2012 23:02:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Portal_Announcements_PortalCfg_Modules]') AND parent_object_id = OBJECT_ID(N'[dbo].[Portal_Announcements]'))
 ALTER TABLE [dbo].[Portal_Announcements] DROP CONSTRAINT [FK_Portal_Announcements_PortalCfg_Modules]
@@ -49,6 +72,10 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_PortalCfg_Tabs_PortalCfg_Globals]') AND parent_object_id = OBJECT_ID(N'[dbo].[PortalCfg_Tabs]'))
 ALTER TABLE [dbo].[PortalCfg_Tabs] DROP CONSTRAINT [FK_PortalCfg_Tabs_PortalCfg_Globals]
 GO
+-- <lang>
+--   <zh-CN>删除旧讨论区和模块维护存储过程，为后续通过动态 SQL 重新创建同名过程清理命名空间。</zh-CN>
+--   <en>Drop legacy discussion and module-maintenance stored procedures to clear the namespace before recreating same-name procedures through dynamic SQL later.</en>
+-- </lang>
 /****** Object:  StoredProcedure [dbo].[Portal_GetSingleMessage]    Script Date: 03/01/2012 23:02:10 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Portal_GetSingleMessage]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Portal_GetSingleMessage]
@@ -77,6 +104,10 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Portal_GetPrevMessageID]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Portal_GetPrevMessageID]
 GO
+-- <lang>
+--   <zh-CN>删除旧内容、配置、用户和角色表；这是破坏性重建路径，执行前必须确认不需要保留旧数据。</zh-CN>
+--   <en>Drop legacy content, configuration, user, and role tables; this is a destructive rebuild path and operators must confirm old data does not need preservation before execution.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_Announcements]    Script Date: 03/01/2012 23:02:10 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Portal_Announcements]') AND type in (N'U'))
 DROP TABLE [dbo].[Portal_Announcements]
@@ -141,6 +172,10 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Portal_HtmlText]') AND type in (N'U'))
 DROP TABLE [dbo].[Portal_HtmlText]
 GO
+-- <lang>
+--   <zh-CN>移除旧默认约束，避免重建表或补默认值时遇到同名约束残留；这里同时兼容新旧系统目录检查写法。</zh-CN>
+--   <en>Remove old default constraints to avoid same-name leftovers during table rebuild or default backfill; this block keeps both newer and older system-catalog checks for compatibility.</en>
+-- </lang>
 /****** Object:  Default [DF_PortalCfg_Globals_AlwaysShowEditButton]    Script Date: 03/01/2012 23:02:10 ******/
 IF  EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[dbo].[DF_PortalCfg_Globals_AlwaysShowEditButton]') AND parent_object_id = OBJECT_ID(N'[dbo].[PortalCfg_Globals]'))
 Begin
@@ -196,6 +231,10 @@ END
 
 End
 GO
+-- <lang>
+--   <zh-CN>从这里开始重建旧 Portal 表结构；每个表都带存在性保护，用于从已清理或空数据库中恢复基础 schema。</zh-CN>
+--   <en>From here the script rebuilds the legacy Portal table schema; each table has an existence guard so the base schema can be restored into a cleaned or empty database.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_HtmlText]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -203,6 +242,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Portal_HtmlText]') AND type in (N'U'))
 BEGIN
+-- <lang>
+--   <zh-CN>HTML 文本表保存旧 HtmlModule 的桌面与移动文本载荷；内容可信度由旧模块编辑权限控制，不在此 DDL 中净化。</zh-CN>
+--   <en>The HTML text table stores desktop and mobile text payloads for the legacy HtmlModule; content trust is controlled by legacy module edit permissions and is not sanitized by this DDL.</en>
+-- </lang>
 CREATE TABLE [dbo].[Portal_HtmlText](
 	[ModuleID] [int] NOT NULL,
 	[DesktopHtml] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -215,6 +258,10 @@ CREATE TABLE [dbo].[Portal_HtmlText](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>角色表是旧门户授权目录的根表，后续用户角色表通过外键和级联删除关联到它。</zh-CN>
+--   <en>The role table is the root of the legacy portal authorization catalog, and the later user-role table links to it through foreign keys and cascade deletion.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_Roles]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -233,6 +280,10 @@ CREATE TABLE [dbo].[Portal_Roles](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>模块定义表登记旧桌面/移动 ASCX 控件入口，后续 `Portal_LoadConfig.sql` 会按固定 ID 装载示例定义。</zh-CN>
+--   <en>The module-definition table registers legacy desktop/mobile ASCX control entry points, and later `Portal_LoadConfig.sql` loads sample definitions with fixed ids.</en>
+-- </lang>
 /****** Object:  Table [dbo].[PortalCfg_ModuleDefinitions]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -252,6 +303,10 @@ CREATE TABLE [dbo].[PortalCfg_ModuleDefinitions](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>全局门户配置表保存旧 PortalName 和编辑按钮显示策略，是 Tab 层级的父级配置根。</zh-CN>
+--   <en>The global portal configuration table stores the legacy PortalName and edit-button display policy and is the parent configuration root for tabs.</en>
+-- </lang>
 /****** Object:  Table [dbo].[PortalCfg_Globals]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -270,6 +325,10 @@ CREATE TABLE [dbo].[PortalCfg_Globals](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>旧用户表保存登录名、旧密码样本和邮箱；新凭据治理已由后续 `Portal_UserCredentials.sql` 分离承接。</zh-CN>
+--   <en>The legacy user table stores sign-in name, legacy password sample, and email; newer credential governance is separated later by `Portal_UserCredentials.sql`.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_Users]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -293,6 +352,10 @@ CREATE TABLE [dbo].[Portal_Users](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>Tab 表保存旧导航层级、访问角色文本和移动显示开关，后续模块表通过 TabId 归属到该导航节点。</zh-CN>
+--   <en>The tab table stores legacy navigation hierarchy, access-role text, and mobile display flags, and later module rows attach to navigation nodes through TabId.</en>
+-- </lang>
 /****** Object:  Table [dbo].[PortalCfg_Tabs]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -315,6 +378,10 @@ CREATE TABLE [dbo].[PortalCfg_Tabs](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>用户角色桥表建立账号与角色之间的多对多关系；实际外键在脚本末尾恢复，以便先完成表重建。</zh-CN>
+--   <en>The user-role bridge table establishes the many-to-many relationship between accounts and roles; its real foreign keys are restored at the end so table rebuild can finish first.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_UserRoles]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -364,6 +431,10 @@ WHERE
 ' 
 END
 GO
+-- <lang>
+--   <zh-CN>模块实例表保存 Tab 内模块标题、排序、编辑角色、pane、缓存和模块定义引用，是旧 Web Forms 页面组装核心。</zh-CN>
+--   <en>The module instance table stores module title, ordering, edit roles, pane, cache, and module-definition reference within tabs, forming the core of legacy Web Forms page composition.</en>
+-- </lang>
 /****** Object:  Table [dbo].[PortalCfg_Modules]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -388,6 +459,10 @@ CREATE TABLE [dbo].[PortalCfg_Modules](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>模块设置表保存旧模块级键值配置，外键稍后指回模块实例，避免设置行脱离模块上下文。</zh-CN>
+--   <en>The module-setting table stores legacy module-level key/value configuration, with a later foreign key back to module instances so setting rows cannot outlive module context.</en>
+-- </lang>
 /****** Object:  Table [dbo].[PortalCfg_ModuleSettings]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -407,6 +482,10 @@ CREATE TABLE [dbo].[PortalCfg_ModuleSettings](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>以下内容模块表共享 `ModuleID` 归属模型；每张表只保存旧示例模块所需的低敏展示字段。</zh-CN>
+--   <en>The content-module tables below share the `ModuleID` ownership model, and each table stores only the low-sensitivity display fields required by legacy sample modules.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_Links]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -431,6 +510,10 @@ CREATE TABLE [dbo].[Portal_Links](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>事件表保存旧 Events 模块标题、地点时间、描述和过期时间，不表达现代工作流事件或审计事件。</zh-CN>
+--   <en>The events table stores legacy Events module title, where/when text, description, and expiration time, and does not represent modern workflow or audit events.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_Events]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -454,6 +537,10 @@ CREATE TABLE [dbo].[Portal_Events](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>文档表保存旧 Documents 模块的文件名、友好名、类别和可选二进制内容；现代上传安全由后续策略代码补强。</zh-CN>
+--   <en>The documents table stores legacy Documents module filename, friendly name, category, and optional binary content; modern upload safety is strengthened later by policy code.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_Documents]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -479,6 +566,10 @@ CREATE TABLE [dbo].[Portal_Documents](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>讨论表使用 DisplayOrder 字符串表达树形回复顺序，后续存储过程依赖该兼容排序模型。</zh-CN>
+--   <en>The discussion table uses a DisplayOrder string to represent threaded reply order, and later stored procedures depend on this compatible ordering model.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_Discussion]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -501,6 +592,10 @@ CREATE TABLE [dbo].[Portal_Discussion](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>联系人和公告表延续旧内容模块字段模型，邮箱、链接和描述均为展示数据，不在建库脚本中做语义校验。</zh-CN>
+--   <en>The contacts and announcements tables keep the legacy content-module field model, and email, link, and description values are display data without semantic validation in the creation script.</en>
+-- </lang>
 /****** Object:  Table [dbo].[Portal_Contacts]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -549,6 +644,10 @@ CREATE TABLE [dbo].[Portal_Announcements](
 )
 END
 GO
+-- <lang>
+--   <zh-CN>讨论区导航过程族读取 DisplayOrder 前后关系、顶级消息、线程回复和单条消息详情，只服务旧讨论模块。</zh-CN>
+--   <en>The discussion navigation procedure family reads DisplayOrder adjacency, top-level messages, thread replies, and single-message details, serving only the legacy discussion module.</en>
+-- </lang>
 /****** Object:  StoredProcedure [dbo].[Portal_GetPrevMessageID]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -651,6 +750,10 @@ IF @@Rowcount < 1
 ' 
 END
 GO
+-- <lang>
+--   <zh-CN>新增讨论消息过程按父消息 DisplayOrder 拼接当前时间字符串，保持旧 Starter Kit 的树形排序兼容策略。</zh-CN>
+--   <en>The add-message procedure appends the current timestamp string to the parent message DisplayOrder, preserving the tree-ordering compatibility strategy from the old Starter Kit.</en>
+-- </lang>
 /****** Object:  StoredProcedure [dbo].[Portal_AddMessage]    Script Date: 03/01/2012 23:02:09 ******/
 SET ANSI_NULLS OFF
 GO
@@ -713,6 +816,10 @@ SELECT
 ' 
 END
 GO
+-- <lang>
+--   <zh-CN>删除模块过程按 ModuleID 清除各旧内容表记录；它不会删除模块配置行本身，也不处理现代业务模块表。</zh-CN>
+--   <en>The delete-module procedure clears records from legacy content tables by ModuleID; it does not delete the module configuration row itself and does not handle modern business-module tables.</en>
+-- </lang>
 /****** Object:  StoredProcedure [dbo].[Portal_DeleteModule]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -752,6 +859,10 @@ AS
 ' 
 END
 GO
+-- <lang>
+--   <zh-CN>讨论列表查询过程族基于 DisplayOrder 深度和前缀计算父子关系、缩进和回复数量，保留旧 UI 的线程显示模型。</zh-CN>
+--   <en>The discussion-list query procedure family calculates parent-child relationships, indentation, and reply counts from DisplayOrder depth and prefix, preserving the old UI thread display model.</en>
+-- </lang>
 /****** Object:  StoredProcedure [dbo].[Portal_GetTopLevelMessages]    Script Date: 03/01/2012 23:02:10 ******/
 SET ANSI_NULLS ON
 GO
@@ -879,6 +990,10 @@ WHERE
 ' 
 END
 GO
+-- <lang>
+--   <zh-CN>重建默认约束，恢复旧配置字段的缺省行为；这些默认值仅覆盖旧 UI 兼容字段，不代表现代策略默认值。</zh-CN>
+--   <en>Rebuild default constraints to restore default behavior for legacy configuration fields; these defaults cover only old UI compatibility fields and do not represent modern policy defaults.</en>
+-- </lang>
 /****** Object:  Default [DF_PortalCfg_Globals_AlwaysShowEditButton]    Script Date: 03/01/2012 23:02:10 ******/
 IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[dbo].[DF_PortalCfg_Globals_AlwaysShowEditButton]') AND parent_object_id = OBJECT_ID(N'[dbo].[PortalCfg_Globals]'))
 Begin
@@ -934,6 +1049,10 @@ END
 
 End
 GO
+-- <lang>
+--   <zh-CN>脚本末尾恢复内容表、用户角色表和配置表外键，重新建立模块、Tab、Portal、用户和角色之间的旧引用边界。</zh-CN>
+--   <en>The end of the script restores foreign keys for content, user-role, and configuration tables, re-establishing legacy reference boundaries among modules, tabs, portals, users, and roles.</en>
+-- </lang>
 /****** Object:  ForeignKey [FK_Portal_Announcements_PortalCfg_Modules]    Script Date: 03/01/2012 23:02:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Portal_Announcements_PortalCfg_Modules]') AND parent_object_id = OBJECT_ID(N'[dbo].[Portal_Announcements]'))
 ALTER TABLE [dbo].[Portal_Announcements]  WITH CHECK ADD  CONSTRAINT [FK_Portal_Announcements_PortalCfg_Modules] FOREIGN KEY([ModuleID])

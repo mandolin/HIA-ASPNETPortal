@@ -1001,7 +1001,10 @@
 | P26.5te 选片 | 已选择 `PortalBiz_CollaborationItemCommentWorkflow.sql` 的协作事项评论/工作流规则扩展 SQL 脚本；覆盖 P21 表依赖、事件类型、可见范围、ActionKey 可空、评论形态约束和可见性时间线索引；真实 SQL 执行、数据库写入、协作评论/工作流事件写入、账号、凭据和 proof 排除。见 [P26.5te 选片](work-zone/dev/plans/W-anp-P26.5te-collaboration-comment-workflow-sql-rop-selection.md)。 |
 | P26.5tf 注释补强 | 已为目标 SQL 补充或迁移合法 `/* <lang> ... */` 与 `-- <lang>` ROP 注释，目标 `<lang>` 总数 `12`，覆盖 `EventType`/`VisibilityScope` 补列、旧 ActionKey 约束替换、事件类型/可见范围白名单、评论形态约束和可见性索引；新增非注释 SQL `0`。见 [P26.5tf 结果](work-zone/dev/plans/W-anp-P26.5tf-collaboration-comment-workflow-sql-rop-result.md)。 |
 | P26.5tg 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过；未执行真实 SQL Server 迁移、数据库写入、协作评论/工作流事件写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5tg 审计](work-zone/dev/plans/W-anp-P26.5tg-collaboration-comment-workflow-sql-rop-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5th：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；大型 `Portal_CreateDB.sql` 与 `Portal_LoadData.sql` 建议单独批次处理。 |
+| P26.5th 选片 | 已选择 `Portal_CreateDB.sql` 的大型旧建库总脚本；覆盖固定 `Portal` 建库、同名旧对象清理、旧内容/配置/用户/角色表重建、讨论区存储过程、默认约束和外键恢复；真实 SQL Server 建库、DROP、对象重建、账号、凭据和 proof 排除。见 [P26.5th 选片](work-zone/dev/plans/W-anp-P26.5th-create-db-sql-rop-selection.md)。 |
+| P26.5ti 注释补强 | 已为 `Portal_CreateDB.sql` 补充合法 `/* <lang> ... */` 与 `-- <lang>` ROP 注释，目标 `<lang>` 总数 `29`；注释覆盖建库边界、破坏性重建风险、旧表族职责、讨论区 DisplayOrder 兼容模型、过程族、默认约束和外键恢复；未进入动态 SQL 字符串内部，新增非注释 SQL `0`。见 [P26.5ti 结果](work-zone/dev/plans/W-anp-P26.5ti-create-db-sql-rop-result.md)。 |
+| P26.5tj 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、未冻结注释机制扫描与目标 `git diff --check` 通过；未执行真实 SQL Server 建库、DROP、对象重建、存储过程创建、外键恢复、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5tj 审计](work-zone/dev/plans/W-anp-P26.5tj-create-db-sql-rop-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5tk：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；`Portal_LoadData.sql` 作为剩余大型 seed 数据脚本建议单独批次处理。 |
 
 ## Known Residual Working Tree Items
 
@@ -1030,6 +1033,9 @@
 | P26.5sm 初次 CSS 统计命令 | adjusted | 首次验证脚本在 PowerShell `foreach` 语句块后直接接管道导致解析失败；目标文件未受影响，改用中间变量后完成统计。 |
 | P26.5so 初次 PostCSS parse 命令 | adjusted | 首次 `node -e` 内联脚本被 PowerShell 引号抢占导致命令未执行；改用 PowerShell here-string 传 Node 脚本后 4 个 CSS 均解析通过。 |
 | P26.5ss 初次 BOM/编码扫描 | adjusted | 首次使用旧式 `Get-Content -Encoding Byte`，PowerShell 7 不支持该参数；目标文件未受影响，改用 `.NET` byte 读取后完成 UTF-8 无 BOM 与 CRLF 验证。 |
+| P26.5th 初次大型 SQL 分段查看 | adjusted | 首次把多个 range 直接放入 PowerShell 数组导致只读命令无法转换对象，未改文件；改用显式 start/end 对完成分段读取。 |
+| P26.5th 初次 Select-Object range 查看 | adjusted | 首次 `Select-Object -Index 136..151` 未用数组表达式包装，PowerShell 将范围视为字符串而失败，未改文件；改用显式循环读取目标行。 |
+| P26.5th 初次大型 apply_patch | adjusted | 首次单个大补丁因旧 SQL 空白/大小写上下文不完全匹配被拒绝且未应用；改为多个小补丁分段落地并完成验证。 |
 
 ## Anti-Loop Guard
 
