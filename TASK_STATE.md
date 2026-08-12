@@ -1007,7 +1007,10 @@
 | P26.5tk 选片 | 已选择 `Portal_LoadData.sql` 的大型旧 seed 数据脚本；覆盖可重建 `Portal` 数据库的清空顺序、默认角色/管理员、HTML 展示内容、全局设置、Tab/Module 布局、事件/文档/讨论/联系人/公告/链接和模块设置；真实 SQL Server seed 执行、数据库写入、账号登录、外链访问、上传文件校验、IIS/HTTP、浏览器和发布 proof 排除。见 [P26.5tk 选片](work-zone/dev/plans/W-anp-P26.5tk-load-data-sql-rop-selection.md)。 |
 | P26.5tl 注释补强 | 已为 `Portal_LoadData.sql` 补充合法 `/* <lang> ... */` ROP 注释，目标 `<lang>` 总数 `16`；注释停留在 SQL 语句外层，覆盖破坏性清空、固定主键种子、旧 admin 示例哈希、HTML/URL/路径文本常量、DisplayOrder 拼接排序、identity insert 和运行时字符串契约；新增非注释 SQL `0`。见 [P26.5tl 结果](work-zone/dev/plans/W-anp-P26.5tl-load-data-sql-rop-result.md)。 |
 | P26.5tm 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，注释内未冻结机制扫描 `0`，UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过；未执行真实 SQL Server 清库、seed 写入、identity insert、账号登录、外链访问、文件下载、数据库、IIS/HTTP、浏览器或发布 proof。见 [P26.5tm 审计](work-zone/dev/plans/W-anp-P26.5tm-load-data-sql-rop-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5tn：重新读取最新账本和源码盘点，继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 `Portal_CreateDB.sql` 与 `Portal_LoadData.sql`。 |
+| P26.5tn 选片 | 已选择 `Default.aspx.cs` 与 `GenericErrorPage.aspx.cs`，同属门户根入口/通用错误出口 code-behind 生命周期边界；覆盖根入口跳转参数契约、诊断事件编号来源、未信任输入校验和 HTML 编码输出；已确认 `AccessDenied.aspx`、`EditAccessDenied.aspx`、`NotImplemented.aspx` 标记层已有合格服务器端 `<lang>` 注释，不重复治理。见 [P26.5tn 选片](work-zone/dev/plans/W-anp-P26.5tn-root-error-entry-selection.md)。 |
+| P26.5to 注释补强 | 已为 `Default.aspx.cs` 的 `Page_Load` 补齐 `sender`/`e` 参数 `<l>` 注释，为 `GenericErrorPage.aspx.cs` 的事件编号读取与输出赋值补齐方法内 `<lang>` 叙事；新增非注释 C# `0`，跳转目标、事件编号校验、HTML 编码和兜底文本均未改变。见 [P26.5to 结果](work-zone/dev/plans/W-anp-P26.5to-root-error-entry-result.md)。 |
+| P26.5tp 静态验证 | 通过；两个目标文件去 C# 注释后与 `HEAD` 对比 `CSharp_NONCOMMENT_STRIPPED_DIFF=0`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过；经 `mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 验证 Debug 构建和 XML 文档门禁通过，Portal XML member count `1936`，仅保留既有 `Roles.ModulesConfig` 隐藏继承成员警告。见 [P26.5tp 审计](work-zone/dev/plans/W-anp-P26.5tp-root-error-entry-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5tq：重新读取最新账本和源码盘点，继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 Setup 两个大型 SQL 与本批根入口/错误出口。 |
 
 ## Known Residual Working Tree Items
 
@@ -1040,6 +1043,8 @@
 | P26.5th 初次 Select-Object range 查看 | adjusted | 首次 `Select-Object -Index 136..151` 未用数组表达式包装，PowerShell 将范围视为字符串而失败，未改文件；改用显式循环读取目标行。 |
 | P26.5th 初次大型 apply_patch | adjusted | 首次单个大补丁因旧 SQL 空白/大小写上下文不完全匹配被拒绝且未应用；改为多个小补丁分段落地并完成验证。 |
 | P26.5tk 初次底部大型 apply_patch | adjusted | 首次底部多 hunk 补丁因 `Portal_Links` 尾部上下文手抄不完全匹配被拒绝且未应用；改为按表族边界拆分小补丁后完成注释补强。 |
+| P26.5tn 初次候选扫描 | adjusted | 首次对每个候选文件逐个调用 `git status` 导致只读扫描超时，未改文件；改为一次性取工作树状态集合并在内存中过滤候选。 |
+| P26.5tn PowerShell 预检管道写法 | adjusted | 两次把 `foreach {}` 结果直接接管道导致 PowerShell 解析前失败，未执行验证也未改文件；改为 `$rows = foreach (...) { ... }` 后完成预检、编码和构建验证。 |
 
 ## Anti-Loop Guard
 

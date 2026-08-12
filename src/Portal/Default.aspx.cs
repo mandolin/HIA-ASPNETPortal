@@ -22,6 +22,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Handles root-page loading and immediately redirects to the desktop portal home page.</en>
         /// </lang>
         /// </summary>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>Web Forms 生命周期事件来源；根入口分流不读取该值。</zh-CN>
+        ///   <en>Web Forms lifecycle event source; root-entry routing does not read this value.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>页面加载事件参数；保留用于匹配 Web Forms 生命周期签名。</zh-CN>
+        ///   <en>Page-load event arguments retained to match the Web Forms lifecycle signature.</en>
+        /// </l>
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             // <lang>

@@ -39,7 +39,15 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>事件编号首先来自查询字符串，其次来自当前请求上下文；该值仍视为客户端可影响的短生命周期诊断令牌，不能直接输出。</zh-CN>
+            //   <en>The event id is read from the query string first and then from the current request context; the value is still treated as a client-influenceable, request-lifetime diagnostics token and must not be rendered directly.</en>
+            // </lang>
             string eventId = Request.QueryString["id"] ?? Context.Items["PortalDiagnostics.EventId"] as string;
+            // <lang>
+            //   <zh-CN>仅当令牌符合诊断编号契约时才进入页面输出，并在赋给标记表达式前统一 HTML 编码；无效或缺失时使用低敏兜底文本。</zh-CN>
+            //   <en>The token is rendered only when it matches the diagnostics-id contract, and is HTML-encoded before reaching the markup expression; invalid or missing values fall back to low-sensitivity text.</en>
+            // </lang>
             EventIdText = Server.HtmlEncode(
                 PortalDiagnosticQueryService.IsValidEventId(eventId) ? eventId : "未提供");
         }
