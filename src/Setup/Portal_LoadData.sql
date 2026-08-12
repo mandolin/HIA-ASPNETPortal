@@ -1,5 +1,7 @@
+/* <lang><zh-CN>本脚本面向已由 `Portal_CreateDB.sql` 重建完成的本地 `Portal` 数据库，负责灌入 ASP.NET Portal Starter Kit 的演示门户数据；它会先清空同名基础表再重新写入固定主键种子，因此只能用于可重建环境，不能直接套用于保留业务数据的实例。</zh-CN><en>This script targets the local `Portal` database after `Portal_CreateDB.sql` has rebuilt the schema, and loads the ASP.NET Portal Starter Kit demo seed data; it first clears the same foundational tables and then writes fixed-key seed rows, so it is suitable only for rebuildable environments and must not be applied directly to instances that retain business data.</en></lang> */
 use [Portal]
 
+/* <lang><zh-CN>清空阶段按旧门户外键依赖的反向顺序删除设置、成员关系、用户、内容记录、模块、Tab、全局配置和角色；这里使用 `DELETE` 而不是 `TRUNCATE`，是为了兼容存在外键约束与 identity seed 显式恢复的安装路径。</zh-CN><en>The reset phase deletes settings, memberships, users, content records, modules, tabs, globals, and roles in the reverse order of the legacy portal foreign-key dependencies; it uses `DELETE` rather than `TRUNCATE` to remain compatible with foreign-key constraints and the explicit identity reseeding path.</en></lang> */
 /****** Object:  Table [dbo].[PortalCfg_ModuleSettings]    Script Date: 03/01/2012 22:46:17 ******/
 DELETE FROM [PortalCfg_ModuleSettings]
 GO
@@ -24,12 +26,14 @@ GO
 /****** Object:  Table [dbo].[Portal_Documents]    Script Date: 03/01/2012 22:46:17 ******/
 DELETE FROM [Portal_Documents]
 GO
+/* <lang><zh-CN>事件种子提供首页事件模块的两条固定样例记录，日期使用 SQL Server 十六进制 DateTime literal 以复现原 Starter Kit 数据；迁移时应保持语义而非依赖当前区域设置解析。</zh-CN><en>The event seed provides two fixed sample rows for the home events module, with dates represented as SQL Server hexadecimal DateTime literals to reproduce the original Starter Kit data; migrations should preserve that meaning rather than depend on current-locale parsing.</en></lang> */
 /****** Object:  Table [dbo].[Portal_Events]    Script Date: 03/01/2012 22:46:17 ******/
 DELETE FROM [Portal_Events]
 GO
 /****** Object:  Table [dbo].[Portal_HtmlText]    Script Date: 03/01/2012 22:46:17 ******/
 DELETE FROM [Portal_HtmlText]
 GO
+/* <lang><zh-CN>链接种子为两个 Quick Links 模块提供固定显示顺序和历史示例 URL；`ViewOrder` 的奇数间隔是旧管理界面可插入排序的演示数据，不应在注释批次中压缩。</zh-CN><en>The links seed provides fixed display ordering and historical sample URLs for two Quick Links modules; the odd-numbered `ViewOrder` spacing is demo data for insertion-style ordering in the legacy admin UI and should not be compacted during a comment-only pass.</en></lang> */
 /****** Object:  Table [dbo].[Portal_Links]    Script Date: 03/01/2012 22:46:17 ******/
 DELETE FROM [Portal_Links]
 GO
@@ -39,17 +43,20 @@ GO
 /****** Object:  Table [dbo].[PortalCfg_Tabs]    Script Date: 03/01/2012 22:46:17 ******/
 DELETE FROM [PortalCfg_Tabs]
 GO
+/* <lang><zh-CN>门户全局设置种子恢复 `PortalId = 1` 的站点名称和编辑按钮默认策略；这些值是后续 Tab、模块和后台设置页共同读取的门户级基线。</zh-CN><en>The portal-global seed restores the `PortalId = 1` site name and default edit-button policy; these values form the portal-wide baseline read by later tabs, modules, and the admin site-settings page.</en></lang> */
 /****** Object:  Table [dbo].[PortalCfg_Globals]    Script Date: 03/01/2012 22:46:17 ******/
 DELETE FROM [PortalCfg_Globals]
 GO
 /****** Object:  Table [dbo].[Portal_Roles]    Script Date: 03/01/2012 22:46:17 ******/
 DELETE FROM [Portal_Roles]
 GO
+/* <lang><zh-CN>角色种子只创建固定 `RoleID = 0` 的 `Admins` 角色；后续用户、Tab 访问规则、模块编辑规则都以这个历史角色名称为授权锚点，因此主键和文本值必须保持与旧 Web Forms 代码契约一致。</zh-CN><en>The role seed creates only the fixed `RoleID = 0` `Admins` role; later user, tab-access, and module-editing rules use this historical role name as their authorization anchor, so both the primary key and the text value must remain aligned with the legacy Web Forms code contract.</en></lang> */
 /****** Object:  Table [dbo].[Portal_Roles]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [Portal_Roles] ON
 INSERT [Portal_Roles] ([RoleID], [PortalID], [RoleName]) VALUES (0, 0, N'Admins')
 SET IDENTITY_INSERT [Portal_Roles] OFF
 
+/* <lang><zh-CN>`Portal_HtmlText` 种子包含大量作为 SQL Unicode 字符串保存的演示 HTML；注释必须停留在 SQL 语句外层，避免进入文本常量后改变页面正文、HTML 转义、图片路径或移动端摘要。</zh-CN><en>The `Portal_HtmlText` seed contains large demo HTML fragments stored as SQL Unicode strings; comments must stay outside the SQL statement bodies to avoid changing page text, HTML escaping, image paths, or mobile summaries.</en></lang> */
 /****** Object:  Table [dbo].[Portal_HtmlText]    Script Date: 03/01/2012 22:46:17 ******/
 INSERT [Portal_HtmlText] ([ModuleID], [DesktopHtml], [MobileSummary], [MobileDetails]) VALUES (2, N'&lt;table cellSpacing=&quot;0&quot; cellPadding=&quot;5&quot; border=&quot;0&quot;&gt;
     &lt;tr valign=&quot;top&quot;&gt;
@@ -611,12 +618,15 @@ INSERT [Portal_HtmlText] ([ModuleID], [DesktopHtml], [MobileSummary], [MobileDet
 SET IDENTITY_INSERT [PortalCfg_Globals] ON
 INSERT [PortalCfg_Globals] ([PortalId], [PortalName], [AlwaysShowEditButton]) VALUES (1, N'ASP.NET Portal Starter Kit', 0)
 SET IDENTITY_INSERT [PortalCfg_Globals] OFF
+/* <lang><zh-CN>默认用户种子创建历史演示管理员账号 `admin` 及其旧式口令哈希；该值只用于 Starter Kit 可重建样例环境，生产或共享环境必须通过正式账号初始化流程替换。</zh-CN><en>The default-user seed creates the historical demo administrator account `admin` and its legacy password hash; the value is only for rebuildable Starter Kit sample environments, and production or shared environments must replace it through the formal account-initialization flow.</en></lang> */
 /****** Object:  Table [dbo].[Portal_Users]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [Portal_Users] ON
 INSERT [Portal_Users] ([UserID], [Name], [Password], [Email]) VALUES (1, N'admin', N'21-23-2F-29-7A-57-A5-A7-43-89-4A-0E-4A-80-1F-C3', N'admin')
 SET IDENTITY_INSERT [Portal_Users] OFF
+/* <lang><zh-CN>用户角色种子把固定管理员用户绑定到固定 `Admins` 角色；该桥接行必须在用户和角色种子之后写入，以维持旧后台管理页的初始授权入口。</zh-CN><en>The user-role seed binds the fixed administrator user to the fixed `Admins` role; this bridge row must be written after the user and role seeds so the legacy admin pages retain their initial authorization entry point.</en></lang> */
 /****** Object:  Table [dbo].[Portal_UserRoles]    Script Date: 03/01/2012 22:46:17 ******/
 INSERT [Portal_UserRoles] ([UserID], [RoleID]) VALUES (1, 0)
+/* <lang><zh-CN>Tab 种子定义单门户六个固定导航节点及其顺序、移动端显示和访问角色字符串；旧运行时代码直接读取这些主键与分号分隔角色文本，因此这里不重排、不重编号。</zh-CN><en>The tab seed defines the six fixed navigation nodes for the single portal, including ordering, mobile visibility, and role-list strings; the legacy runtime reads these keys and semicolon-delimited role values directly, so this script does not reorder or renumber them.</en></lang> */
 /****** Object:  Table [dbo].[PortalCfg_Tabs]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [PortalCfg_Tabs] ON
 INSERT [PortalCfg_Tabs] ([TabId], [TabName], [TabOrder], [AccessRoles], [ShowMobile], [MobileTabName], [PortalId]) VALUES (1, N'Home', 1, N'All Users;', 1, N'Home', 1)
@@ -626,6 +636,7 @@ INSERT [PortalCfg_Tabs] ([TabId], [TabName], [TabOrder], [AccessRoles], [ShowMob
 INSERT [PortalCfg_Tabs] ([TabId], [TabName], [TabOrder], [AccessRoles], [ShowMobile], [MobileTabName], [PortalId]) VALUES (5, N'About the Portal', 9, N'All Users;', 1, N'About', 1)
 INSERT [PortalCfg_Tabs] ([TabId], [TabName], [TabOrder], [AccessRoles], [ShowMobile], [MobileTabName], [PortalId]) VALUES (6, N'Admin', 13, N'Admins;', 0, N'Admin', 1)
 SET IDENTITY_INSERT [PortalCfg_Tabs] OFF
+/* <lang><zh-CN>模块实例种子把三十二个演示模块固定到 Tab、Pane、模块定义、缓存和编辑角色；这些主键会被内容表和模块设置继续引用，变更需要同步全链路迁移而不能只改一行。</zh-CN><en>The module-instance seed pins thirty-two demo modules to tabs, panes, module definitions, cache policy, and edit roles; these primary keys are referenced by content tables and module settings, so changing them requires a whole-chain migration rather than a single-row edit.</en></lang> */
 /****** Object:  Table [dbo].[PortalCfg_Modules]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [PortalCfg_Modules] ON
 INSERT [PortalCfg_Modules] ([ModuleId], [ModuleTitle], [ModuleOrder], [EditRoles], [PaneName], [ShowMobile], [CacheTimeout], [ModuleDefId], [TabId]) VALUES (1, N'QuickLinks', 1, N'Admins;', N'LeftPane', 0, 0, 8, 1)
@@ -667,6 +678,7 @@ SET IDENTITY_INSERT [Portal_Events] ON
 INSERT [Portal_Events] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Title], [WhereWhen], [Description], [ExpireDate]) VALUES (1, 4, N'JennaJ@ibuyspy.com', CAST(0x0000917A0103F0FC AS DateTime), N'Spy-o-Rama', N'This Saturday, usual secret time and place...', N'It''s back!  The premier regional swap meet for spy paraphernalia of every description.  Shop early for some amazing bargins.', CAST(0x0000B3C400000000 AS DateTime))
 INSERT [Portal_Events] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Title], [WhereWhen], [Description], [ExpireDate]) VALUES (2, 4, N'JennaJ@ibuyspy.com', CAST(0x0000917A01047AFC AS DateTime), N'Dark Ops Sock Hop', N'Saturday, 8pm to ?, Dark Ops Cafe', N'Back by popular demand!  Practice your surveillance of the opposite sex, and dance some too.  Great opportunity for a brush pass!', CAST(0x0000B3C400000000 AS DateTime))
 SET IDENTITY_INSERT [Portal_Events] OFF
+/* <lang><zh-CN>文档种子只写入元数据和 `~/uploads/sample.doc` 路径，二进制 `Content`、`ContentType` 与大小保持 NULL；真实文件可用性由部署包或运行环境单独保证。</zh-CN><en>The document seed writes only metadata and the `~/uploads/sample.doc` path, leaving binary `Content`, `ContentType`, and size as NULL; the deployable package or runtime environment is responsible for making the physical file available.</en></lang> */
 /****** Object:  Table [dbo].[Portal_Documents]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [Portal_Documents] ON
 INSERT [Portal_Documents] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [FileNameUrl], [FileFriendlyName], [Category], [Content], [ContentType], [ContentSize]) VALUES (1, 10, N'JennaJ@ibuyspy.com', CAST(0x0000917B00CF6025 AS DateTime), N'~/uploads/sample.doc', N'Employee Handbook', N'New Employee Info', NULL, NULL, NULL)
@@ -677,6 +689,7 @@ INSERT [Portal_Documents] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate],
 INSERT [Portal_Documents] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [FileNameUrl], [FileFriendlyName], [Category], [Content], [ContentType], [ContentSize]) VALUES (6, 20, N'TomVZ@ibuyspy.com', CAST(0x0000917B00D082C7 AS DateTime), N'~/uploads/sample.doc', N'Mistranslated: Translator Moustache Meets Interpreter Earrings', N'Spy Humor', NULL, NULL, NULL)
 INSERT [Portal_Documents] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [FileNameUrl], [FileFriendlyName], [Category], [Content], [ContentType], [ContentSize]) VALUES (7, 20, N'TomVZ@ibuyspy.com', CAST(0x0000917B00CF6025 AS DateTime), N'~/uploads/sample.doc', N'The Edible Tape Recipe Book', N'Documentation', NULL, NULL, NULL)
 SET IDENTITY_INSERT [Portal_Documents] OFF
+/* <lang><zh-CN>讨论区种子保留旧 Starter Kit 的 `DisplayOrder` 拼接时间线模型：回复行通过连续时间戳字符串表达层级排序，不应被“修正”为单个日期或普通数字排序键。</zh-CN><en>The discussion seed preserves the legacy Starter Kit `DisplayOrder` concatenated-timeline model: reply rows encode hierarchy ordering through chained timestamp strings and must not be “corrected” into single dates or ordinary numeric sort keys.</en></lang> */
 /****** Object:  Table [dbo].[Portal_Discussion]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [Portal_Discussion] ON
 INSERT [Portal_Discussion] ([ItemID], [ModuleID], [Title], [CreatedDate], [Body], [DisplayOrder], [CreatedByUser]) VALUES (1, 19, N'Edible Tape Puttanesca', CAST(0x0000917B00E99FD0 AS DateTime), N'Had this last night in the Dark Ops Cafe and -- WOW -- is it good!  Red sauce with olives, capers and anchovies.', N'2001-12-20 14:10:36.317', N'MaryK@ibuyspy.com')
@@ -696,6 +709,7 @@ INSERT [Portal_Discussion] ([ItemID], [ModuleID], [Title], [CreatedDate], [Body]
 INSERT [Portal_Discussion] ([ItemID], [ModuleID], [Title], [CreatedDate], [Body], [DisplayOrder], [CreatedByUser]) VALUES (15, 18, N'Re: Foreign language terms for ''mole''?', CAST(0x000090240092A630 AS DateTime), N'There''s a great dictionary for intelligence terms both in English and the languages of the other major intelligence agencies: <i>The CIA Insider''s Dictionary of US and Foreign Intelligence, Counterintelligence & Tradecraft</i>.  Last time I looked Amazon offered it, but was out of stock.  Let me know if you want to borrow my copy.', N'2001-01-10 08:49:57.5032001-01-10 08:53:55.600', N'TomVZ@ibuyspy.com')
 INSERT [Portal_Discussion] ([ItemID], [ModuleID], [Title], [CreatedDate], [Body], [DisplayOrder], [CreatedByUser]) VALUES (16, 18, N'AMT Mini Night Vision Monocular', CAST(0x000090250098B5C0 AS DateTime), N'Has anyone tried this yet?  It looks really good: tiny (9.5 oz), built-in IR illumination.  The only downside I see is that it seems to be limited to 1.5x magnification.', N'2001-01-12 09:15:59.640', N'ManishG@ibuyspy.com')
 SET IDENTITY_INSERT [Portal_Discussion] OFF
+/* <lang><zh-CN>联系人种子为员工联系模块提供演示姓名、角色、邮箱和电话文本；这些值是样例数据而非目录主数据，后续企业员工目录治理不得从此脚本推断真实组织结构。</zh-CN><en>The contacts seed provides demo names, roles, email addresses, and phone text for the employee-contact module; these values are sample data rather than directory master data, so later enterprise-directory work must not infer real organization structure from this script.</en></lang> */
 /****** Object:  Table [dbo].[Portal_Contacts]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [Portal_Contacts] ON
 INSERT [Portal_Contacts] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Name], [Role], [Email], [Contact1], [Contact2]) VALUES (1, 9, N'JennaJ@ibuyspy.com', CAST(0x0000917B00D5F363 AS DateTime), N'JennaJ', N'Program Lead', N'JennaJ@ibuyspy.com', N'home: 206-555-4434', N'mobile: 206-555-8381')
@@ -705,6 +719,7 @@ INSERT [Portal_Contacts] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], 
 INSERT [Portal_Contacts] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Name], [Role], [Email], [Contact1], [Contact2]) VALUES (5, 9, N'JennaJ@ibuyspy.com', CAST(0x0000917B00E8D6CD AS DateTime), N'RajivP', N'Fullfillment Lead', N'RajivP@ibuyspy.com', N'home: 425-555-7787', N'mobile: 425-555-4443')
 INSERT [Portal_Contacts] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Name], [Role], [Email], [Contact1], [Contact2]) VALUES (6, 9, N'JennaJ@ibuyspy.com', CAST(0x0000917B00D70883 AS DateTime), N'TomVZ', N'Secret Agent', N'TomVZ@ibuyspy.com', N'shoe phone: 206-555-4433', N'fountain pen: 206-555-9985')
 SET IDENTITY_INSERT [Portal_Contacts] OFF
+/* <lang><zh-CN>公告种子混合站内 `notimplemented.aspx` 链接和历史外部 URL，用于演示公告模块的链接字段与过期日期；离线/合规环境可屏蔽访问，但不要在 seed 注释治理中改写 URL 文本。</zh-CN><en>The announcements seed mixes in-site `notimplemented.aspx` links and historical external URLs to demonstrate announcement link fields and expiration dates; offline or compliance environments may block navigation, but seed-comment governance must not rewrite the URL text.</en></lang> */
 /****** Object:  Table [dbo].[Portal_Announcements]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [Portal_Announcements] ON
 INSERT [Portal_Announcements] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Title], [MoreLink], [MobileMoreLink], [ExpireDate], [Description]) VALUES (1, 8, N'JennaJ@ibuyspy.com', CAST(0x0000917A0103F0FC AS DateTime), N'Open Enrollment and Payroll Checklist', N'~/admin/notimplemented.aspx?title=Open%20Enrollment%20and%20Payroll%20Checklist', N'', CAST(0x0000B3C400000000 AS DateTime), N'Please take a few moments to review this year-end checklist that will guide you through the Benefits Open Enrollment process and instruct you on how to ensure your payroll information is accurate for 2001.')
@@ -735,6 +750,7 @@ INSERT [Portal_Links] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Ti
 INSERT [Portal_Links] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Title], [Url], [MobileUrl], [ViewOrder], [Description]) VALUES (11, 21, N'JennaJ@ibuyspy.com', CAST(0x0000917B00F2292C AS DateTime), N'ASP.NET on MSDN', N'http://msdn.microsoft.com/net/aspnet', N'', 5, N'')
 INSERT [Portal_Links] ([ItemID], [ModuleID], [CreatedByUser], [CreatedDate], [Title], [Url], [MobileUrl], [ViewOrder], [Description]) VALUES (12, 21, N'JennaJ@ibuyspy.com', CAST(0x0000917B00F2292C AS DateTime), N'QuickStart Samples', N'http://www.gotdotnet.com/quickstart/aspplus', N'', 7, N'')
 SET IDENTITY_INSERT [Portal_Links] OFF
+/* <lang><zh-CN>模块设置种子为 XML/XSL 渲染模块和图片模块写入相对资源路径；字段名和值被运行时代码按字符串读取，因此治理注释只能描述契约，不能顺手改名或迁移路径。</zh-CN><en>The module-settings seed writes relative resource paths for the XML/XSL rendering module and the image module; runtime code reads both setting names and values as strings, so comment governance may describe the contract but must not opportunistically rename settings or migrate paths.</en></lang> */
 /****** Object:  Table [dbo].[PortalCfg_ModuleSettings]    Script Date: 03/01/2012 22:46:17 ******/
 SET IDENTITY_INSERT [PortalCfg_ModuleSettings] ON
 INSERT [PortalCfg_ModuleSettings] ([ModuleSettingId], [SettingName], [SettingText], [ModuleId]) VALUES (1, N'xmlsrc', N'~/data/sales.xml', 6)

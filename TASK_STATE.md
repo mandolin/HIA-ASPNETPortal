@@ -1004,7 +1004,10 @@
 | P26.5th 选片 | 已选择 `Portal_CreateDB.sql` 的大型旧建库总脚本；覆盖固定 `Portal` 建库、同名旧对象清理、旧内容/配置/用户/角色表重建、讨论区存储过程、默认约束和外键恢复；真实 SQL Server 建库、DROP、对象重建、账号、凭据和 proof 排除。见 [P26.5th 选片](work-zone/dev/plans/W-anp-P26.5th-create-db-sql-rop-selection.md)。 |
 | P26.5ti 注释补强 | 已为 `Portal_CreateDB.sql` 补充合法 `/* <lang> ... */` 与 `-- <lang>` ROP 注释，目标 `<lang>` 总数 `29`；注释覆盖建库边界、破坏性重建风险、旧表族职责、讨论区 DisplayOrder 兼容模型、过程族、默认约束和外键恢复；未进入动态 SQL 字符串内部，新增非注释 SQL `0`。见 [P26.5ti 结果](work-zone/dev/plans/W-anp-P26.5ti-create-db-sql-rop-result.md)。 |
 | P26.5tj 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，UTF-8 无 BOM/CRLF、未冻结注释机制扫描与目标 `git diff --check` 通过；未执行真实 SQL Server 建库、DROP、对象重建、存储过程创建、外键恢复、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5tj 审计](work-zone/dev/plans/W-anp-P26.5tj-create-db-sql-rop-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5tk：继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；`Portal_LoadData.sql` 作为剩余大型 seed 数据脚本建议单独批次处理。 |
+| P26.5tk 选片 | 已选择 `Portal_LoadData.sql` 的大型旧 seed 数据脚本；覆盖可重建 `Portal` 数据库的清空顺序、默认角色/管理员、HTML 展示内容、全局设置、Tab/Module 布局、事件/文档/讨论/联系人/公告/链接和模块设置；真实 SQL Server seed 执行、数据库写入、账号登录、外链访问、上传文件校验、IIS/HTTP、浏览器和发布 proof 排除。见 [P26.5tk 选片](work-zone/dev/plans/W-anp-P26.5tk-load-data-sql-rop-selection.md)。 |
+| P26.5tl 注释补强 | 已为 `Portal_LoadData.sql` 补充合法 `/* <lang> ... */` ROP 注释，目标 `<lang>` 总数 `16`；注释停留在 SQL 语句外层，覆盖破坏性清空、固定主键种子、旧 admin 示例哈希、HTML/URL/路径文本常量、DisplayOrder 拼接排序、identity insert 和运行时字符串契约；新增非注释 SQL `0`。见 [P26.5tl 结果](work-zone/dev/plans/W-anp-P26.5tl-load-data-sql-rop-result.md)。 |
+| P26.5tm 静态验证 | 通过；去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，注释内未冻结机制扫描 `0`，UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过；未执行真实 SQL Server 清库、seed 写入、identity insert、账号登录、外链访问、文件下载、数据库、IIS/HTTP、浏览器或发布 proof。见 [P26.5tm 审计](work-zone/dev/plans/W-anp-P26.5tm-load-data-sql-rop-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5tn：重新读取最新账本和源码盘点，继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 `Portal_CreateDB.sql` 与 `Portal_LoadData.sql`。 |
 
 ## Known Residual Working Tree Items
 
@@ -1036,6 +1039,7 @@
 | P26.5th 初次大型 SQL 分段查看 | adjusted | 首次把多个 range 直接放入 PowerShell 数组导致只读命令无法转换对象，未改文件；改用显式 start/end 对完成分段读取。 |
 | P26.5th 初次 Select-Object range 查看 | adjusted | 首次 `Select-Object -Index 136..151` 未用数组表达式包装，PowerShell 将范围视为字符串而失败，未改文件；改用显式循环读取目标行。 |
 | P26.5th 初次大型 apply_patch | adjusted | 首次单个大补丁因旧 SQL 空白/大小写上下文不完全匹配被拒绝且未应用；改为多个小补丁分段落地并完成验证。 |
+| P26.5tk 初次底部大型 apply_patch | adjusted | 首次底部多 hunk 补丁因 `Portal_Links` 尾部上下文手抄不完全匹配被拒绝且未应用；改为按表族边界拆分小补丁后完成注释补强。 |
 
 ## Anti-Loop Guard
 
