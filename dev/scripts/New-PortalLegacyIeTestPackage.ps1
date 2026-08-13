@@ -6,17 +6,11 @@ Creates a portable legacy IE smoke-test package.
 .LANG zh-CN
 创建可移植的旧 IE smoke 测试包。
 
-.LANG en
-Generates a zero-dependency package intended to run inside a Win7/IE VM. The
-package drives Internet Explorer through COM automation, writes detailed logs
-and zipped results, and must avoid embedding raw passwords. Authentication
-should use VM-side credential files or placeholders resolved by the generated
-script.
-
-.LANG zh-CN
-生成用于 Win7/IE 虚拟机内运行的零依赖旧 IE smoke 测试包。该包通过 IE COM 自动化
-驱动浏览器，写入详细日志和压缩结果，并且不得内嵌原始密码。认证应使用 VM 侧
-凭据文件，或由生成脚本解析的占位符。
+.DESCRIPTION
+<lang>
+  <zh-CN>生成用于 Win7/IE 虚拟机内运行的零依赖旧 IE smoke 测试包。该包通过 IE COM 自动化驱动浏览器，写入详细日志和压缩结果，并且不得内嵌原始密码；认证使用 VM 侧凭据文件或由生成脚本解析的占位符。</zh-CN>
+  <en>Generates a zero-dependency legacy IE smoke package for a Win7/IE VM. The package drives Internet Explorer through COM, writes detailed logs and zipped results, and must not embed raw passwords; authentication uses VM-local secret files or placeholders resolved by the generated script.</en>
+</lang>
 
 .PARAMETER BaseUrl
 .LANG en
@@ -56,8 +50,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-# 中文：生成可复制到 Win7/IE VM 内运行的零依赖 IE COM smoke 测试包。
-# English: Generates a zero-dependency IE COM smoke package that can be copied to a Win7/IE VM.
+# <lang>
+#   <zh-CN>生成可复制到 Win7/IE 虚拟机内运行的零依赖 IE COM smoke 测试包；不在包内保存原始密码。</zh-CN>
+#   <en>Generates a zero-dependency IE COM smoke package that can be copied to a Win7/IE VM without storing raw passwords in the package.</en>
+# </lang>
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $outputRootPath = if ([System.IO.Path]::IsPathRooted($OutputRoot)) {
     $OutputRoot
@@ -66,6 +62,10 @@ else {
     Join-Path $repositoryRoot $OutputRoot
 }
 
+# <lang>
+#   <zh-CN>将任务标签规范化为可跨文件系统使用的包名片段，并为空值提供稳定回退。</zh-CN>
+#   <en>Normalizes the task label into a file-system-safe package-name fragment and supplies a stable fallback for empty input.</en>
+# </lang>
 function ConvertTo-SafeFileName {
     param([string]$Value)
 
@@ -78,12 +78,20 @@ function ConvertTo-SafeFileName {
     return $safe
 }
 
+# <lang>
+#   <zh-CN>转义单引号内容，使生成脚本中的单引号字符串保持字面值而不改变注入边界。</zh-CN>
+#   <en>Escapes single-quoted content so generated-script literals preserve their value without changing the injection boundary.</en>
+# </lang>
 function ConvertTo-PowerShellSingleQuotedContent {
     param([string]$Value)
 
     return ($Value -replace "'", "''")
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 和 CRLF 写入生成物，保持旧 Windows PowerShell 与文本审计兼容。</zh-CN>
+#   <en>Writes generated artifacts as UTF-8 without BOM and with CRLF for legacy Windows PowerShell and text-audit compatibility.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)]
@@ -188,6 +196,10 @@ echo Finished with exit code %EXITCODE%.
 exit /b %EXITCODE%
 "@
 
+# <lang>
+#   <zh-CN>下面的 here-string 是复制到 VM 内执行的独立 smoke 代理体；本文件只生成它，不在宿主机启动 IE、HTTP 或压缩流程。</zh-CN>
+#   <en>The following here-string is the standalone smoke agent copied into the VM; this file only generates it and does not launch IE, HTTP, or compression on the host.</en>
+# </lang>
 $runSmoke = @'
 param(
     [string]$BaseUrl = '__BASE_URL__',
@@ -198,6 +210,10 @@ param(
     [switch]$DryRun
 )
 
+# <lang>
+#   <zh-CN>生成代理的运行时状态集中在结果目录、日志路径和清理标志中，避免跨阶段隐式共享状态。</zh-CN>
+#   <en>Keep generated-agent runtime state in the result directory, log paths, and cleanup flags so phase boundaries remain explicit.</en>
+# </lang>
 $ErrorActionPreference = 'Stop'
 
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -213,6 +229,10 @@ $Ie = $null
 $script:PortalLegacyIeWinInetTypeAdded = $false
 $script:PortalLegacyIeUiTypeAdded = $false
 
+# <lang>
+#   <zh-CN>确保代理结果目录存在且只创建缺失目录。</zh-CN>
+#   <en>Ensures the agent's result directories exist, creating only missing directories.</en>
+# </lang>
 function New-DirectoryIfMissing {
     param([string]$Path)
 
@@ -221,6 +241,10 @@ function New-DirectoryIfMissing {
     }
 }
 
+# <lang>
+#   <zh-CN>以时间戳写入日志并同步输出，保持诊断信息集中且不打印密码。</zh-CN>
+#   <en>Writes timestamped diagnostics to the log and console without printing passwords.</en>
+# </lang>
 function Write-Log {
     param([string]$Message)
 
@@ -229,6 +253,10 @@ function Write-Log {
     Write-Host $line
 }
 
+# <lang>
+#   <zh-CN>在最小作用域内解包 SecureString，并在 finally 中清零 BSTR。</zh-CN>
+#   <en>Unwraps a SecureString only within the smallest scope and zeroes the BSTR in finally.</en>
+# </lang>
 function ConvertTo-PlainText {
     param([System.Security.SecureString]$SecureText)
 
@@ -245,6 +273,10 @@ function ConvertTo-PlainText {
     }
 }
 
+# <lang>
+#   <zh-CN>把用户名约束为安全的秘密文件名片段，避免路径穿越和不稳定命名。</zh-CN>
+#   <en>Constrains a user name to a safe secret-file fragment, preventing traversal and unstable names.</en>
+# </lang>
 function ConvertTo-SecretFileName {
     param([string]$Value)
 
@@ -257,6 +289,10 @@ function ConvertTo-SecretFileName {
     return $safe
 }
 
+# <lang>
+#   <zh-CN>按显式参数、显式文件和 VM 秘密目录的优先级读取密码，不回显秘密。</zh-CN>
+#   <en>Reads the password from explicit parameters, an explicit file, or the VM secret directory without echoing it.</en>
+# </lang>
 function Get-AdminLoginPassword {
     if (-not [string]::IsNullOrEmpty($AdminPassword)) {
         return $AdminPassword
@@ -286,6 +322,10 @@ function Get-AdminLoginPassword {
     throw ('Password was not provided for user ' + $AdminUser + '. Use -AdminPasswordFile, -AdminPassword, or PORTAL_VM_SECRETS_DIR\users\' + $AdminUser + '.password.txt.')
 }
 
+# <lang>
+#   <zh-CN>转义结果 JSON 中的字符串值，不引入新的序列化依赖。</zh-CN>
+#   <en>Escapes result JSON string values without adding a serialization dependency.</en>
+# </lang>
 function ConvertTo-JsonString {
     param([string]$Value)
 
@@ -296,6 +336,10 @@ function ConvertTo-JsonString {
     return ($Value -replace '\\', '\\' -replace '"', '\"' -replace "`r", '\r' -replace "`n", '\n')
 }
 
+# <lang>
+#   <zh-CN>读取并关闭 HTTP 响应流，确保 fallback 不遗留网络资源。</zh-CN>
+#   <en>Reads and closes an HTTP response stream so the fallback does not leak network resources.</en>
+# </lang>
 function Read-HttpResponseText {
     param([object]$Response)
 
@@ -314,6 +358,10 @@ function Read-HttpResponseText {
     }
 }
 
+# <lang>
+#   <zh-CN>从 HTML 标签提取并解码属性值，兼容单双引号和未加引号形式。</zh-CN>
+#   <en>Extracts and decodes an HTML attribute while accepting quoted and unquoted legacy forms.</en>
+# </lang>
 function Get-HtmlAttributeValue {
     param(
         [string]$Tag,
@@ -343,6 +391,10 @@ function Get-HtmlAttributeValue {
     return [System.Web.HttpUtility]::HtmlDecode($match.Groups[3].Value)
 }
 
+# <lang>
+#   <zh-CN>按 UTF-8 对表单字段编码，并为旧运行时提供 URI 回退。</zh-CN>
+#   <en>URL-encodes a form component as UTF-8 with a URI fallback for older runtimes.</en>
+# </lang>
 function Encode-FormComponent {
     param([string]$Value)
 
@@ -358,6 +410,10 @@ function Encode-FormComponent {
     }
 }
 
+# <lang>
+#   <zh-CN>按稳定字段顺序拼接表单正文，保持 HTTP 登录提交契约。</zh-CN>
+#   <en>Builds the form body from fields while preserving the HTTP login submission contract.</en>
+# </lang>
 function ConvertTo-FormUrlEncoded {
     param([System.Collections.Specialized.NameValueCollection]$Fields)
 
@@ -374,6 +430,10 @@ function ConvertTo-FormUrlEncoded {
     return [string]::Join('&', [string[]]$pairs.ToArray([string]))
 }
 
+# <lang>
+#   <zh-CN>替换指定表单字段而不重复键，保持隐藏字段与凭据字段边界。</zh-CN>
+#   <en>Replaces one form field without duplicate keys, preserving hidden-field and credential boundaries.</en>
+# </lang>
 function Set-FormFieldValue {
     param(
         [System.Collections.Specialized.NameValueCollection]$Fields,
@@ -389,6 +449,10 @@ function Set-FormFieldValue {
     $Fields.Add($Name, $Value)
 }
 
+# <lang>
+#   <zh-CN>收集登录表单的可提交 input 字段，并保留已勾选控件的语义。</zh-CN>
+#   <en>Collects submit-ready login inputs while preserving checked-control semantics.</en>
+# </lang>
 function Get-FormFieldsFromHtml {
     param([string]$Html)
 
@@ -418,6 +482,10 @@ function Get-FormFieldsFromHtml {
     return ,$fields
 }
 
+# <lang>
+#   <zh-CN>把表单 action 解析为相对页面地址，异常时回退到当前页面。</zh-CN>
+#   <en>Resolves form action against the page URI and falls back to the current page on malformed input.</en>
+# </lang>
 function Resolve-FormPostUri {
     param(
         [System.Uri]$PageUri,
@@ -442,6 +510,10 @@ function Resolve-FormPostUri {
     }
 }
 
+# <lang>
+#   <zh-CN>仅提取 Set-Cookie 名称用于诊断日志，不记录 Cookie 值。</zh-CN>
+#   <en>Extracts only Set-Cookie names for diagnostics and never records cookie values.</en>
+# </lang>
 function Get-SetCookieNames {
     param([string]$SetCookieHeader)
 
@@ -461,6 +533,10 @@ function Get-SetCookieNames {
     return ,$names
 }
 
+# <lang>
+#   <zh-CN>从响应头受限提取认证 Cookie 值，仅供后续受控写入 IE。</zh-CN>
+#   <en>Extracts the authentication cookie value from a response header only for controlled IE injection.</en>
+# </lang>
 function Get-AuthCookieValueFromHeader {
     param([string]$SetCookieHeader)
 
@@ -476,6 +552,10 @@ function Get-AuthCookieValueFromHeader {
     return ''
 }
 
+# <lang>
+#   <zh-CN>惰性注册 WinInet Cookie P/Invoke 类型，并避免重复 Add-Type。</zh-CN>
+#   <en>Lazily registers the WinInet cookie P/Invoke type and avoids duplicate Add-Type calls.</en>
+# </lang>
 function Ensure-WinInetCookieType {
     if ($script:PortalLegacyIeWinInetTypeAdded) {
         return
@@ -495,6 +575,10 @@ public static class PortalLegacyIeWinInetCookie
     $script:PortalLegacyIeWinInetTypeAdded = $true
 }
 
+# <lang>
+#   <zh-CN>把受控 Cookie 写入 IE 的 WinInet 容器，并将失败降级为可审计结果。</zh-CN>
+#   <en>Copies a controlled cookie into IE WinInet and degrades failures to an auditable result.</en>
+# </lang>
 function Set-InternetExplorerCookie {
     param(
         [string]$Url,
@@ -518,6 +602,10 @@ function Set-InternetExplorerCookie {
     }
 }
 
+# <lang>
+#   <zh-CN>写入原始认证 Cookie 值的兼容路径，并保持失败不泄露值。</zh-CN>
+#   <en>Provides the raw authentication-cookie compatibility path while never logging its value.</en>
+# </lang>
 function Set-InternetExplorerCookieValue {
     param(
         [string]$Url,
@@ -542,6 +630,10 @@ function Set-InternetExplorerCookieValue {
     }
 }
 
+# <lang>
+#   <zh-CN>惰性注册窗口和鼠标自动化类型，为键盘 fallback 复用一次性状态。</zh-CN>
+#   <en>Lazily registers window and mouse automation types for the keyboard fallback.</en>
+# </lang>
 function Ensure-UiAutomationType {
     if ($script:PortalLegacyIeUiTypeAdded) {
         return
@@ -568,6 +660,10 @@ public static class PortalLegacyIeUi
     $script:PortalLegacyIeUiTypeAdded = $true
 }
 
+# <lang>
+#   <zh-CN>通过 clip.exe 临时写入剪贴板，并在进程结束后释放句柄。</zh-CN>
+#   <en>Temporarily writes clipboard text through clip.exe and releases the process handle.</en>
+# </lang>
 function Set-ClipboardTextByClipExe {
     param([string]$Text)
 
@@ -593,6 +689,10 @@ function Set-ClipboardTextByClipExe {
     }
 }
 
+# <lang>
+#   <zh-CN>尽力清空剪贴板，避免键盘登录后的密码残留。</zh-CN>
+#   <en>Best-effort clears the clipboard so keyboard login does not leave a password behind.</en>
+# </lang>
 function Clear-ClipboardByClipExe {
     try {
         [void](Set-ClipboardTextByClipExe -Text '')
@@ -601,6 +701,10 @@ function Clear-ClipboardByClipExe {
     }
 }
 
+# <lang>
+#   <zh-CN>调整 IE 窗口并置前，为坐标式键盘 fallback 建立可重复前提。</zh-CN>
+#   <en>Positions and foregrounds IE to establish repeatable preconditions for coordinate-based keyboard fallback.</en>
+# </lang>
 function Set-BrowserWindowForKeyboard {
     param([object]$Browser)
 
@@ -623,6 +727,10 @@ function Set-BrowserWindowForKeyboard {
     Start-Sleep -Milliseconds 600
 }
 
+# <lang>
+#   <zh-CN>在已定位的 IE 窗口内执行受控鼠标点击并保留必要节拍。</zh-CN>
+#   <en>Performs a controlled mouse click within the positioned IE window with required pacing.</en>
+# </lang>
 function Click-BrowserPoint {
     param(
         [object]$Browser,
@@ -641,6 +749,10 @@ function Click-BrowserPoint {
     Start-Sleep -Milliseconds 180
 }
 
+# <lang>
+#   <zh-CN>通过临时剪贴板把文本粘贴到当前控件，避免模拟逐字符输入。</zh-CN>
+#   <en>Pastes text through the temporary clipboard into the focused control instead of simulating keystrokes.</en>
+# </lang>
 function Paste-TextToFocusedControl {
     param([string]$Text)
 
@@ -654,6 +766,10 @@ function Paste-TextToFocusedControl {
     Start-Sleep -Milliseconds 250
 }
 
+# <lang>
+#   <zh-CN>使用坐标和剪贴板完成最后一级登录 fallback，并确保清空剪贴板。</zh-CN>
+#   <en>Performs the final coordinate-and-clipboard login fallback and always clears the clipboard.</en>
+# </lang>
 function Invoke-PortalLoginByKeyboard {
     param(
         [object]$Browser,
@@ -665,7 +781,10 @@ function Invoke-PortalLoginByKeyboard {
         Write-Log 'LOGIN keyboard fallback positioning IE window.'
         Set-BrowserWindowForKeyboard -Browser $Browser
 
-        # Coordinates are relative to the IE window after it is positioned by this package.
+        # <lang>
+        #   <zh-CN>坐标相对于本包已定位的 IE 窗口，窗口布局变化时必须先复核这些 fallback 前提。</zh-CN>
+        #   <en>Coordinates are relative to the IE window positioned by this package; review the fallback precondition if the layout changes.</en>
+        # </lang>
         Click-BrowserPoint -Browser $Browser -X 500 -Y 250
         Paste-TextToFocusedControl -Text $UserName
 
@@ -684,6 +803,10 @@ function Invoke-PortalLoginByKeyboard {
     }
 }
 
+# <lang>
+#   <zh-CN>执行 HTTP 表单登录、Cookie 复制与受控结果判定，不把凭据写入日志。</zh-CN>
+#   <en>Performs HTTP form login, cookie copying, and controlled result classification without logging credentials.</en>
+# </lang>
 function Invoke-PortalLoginByHttp {
     param(
         [string]$Root,
@@ -870,6 +993,10 @@ function Invoke-PortalLoginByHttp {
     }
 }
 
+# <lang>
+#   <zh-CN>追加步骤结果并统一输出 PASS/FAIL 日志，保持结果字段契约。</zh-CN>
+#   <en>Adds a step result and emits the canonical PASS/FAIL log while preserving result fields.</en>
+# </lang>
 function Add-Result {
     param(
         [string]$Step,
@@ -897,6 +1024,10 @@ function Add-Result {
     }
 }
 
+# <lang>
+#   <zh-CN>以固定字段和稳定顺序写入结果 JSON，供宿主归档和人工复核。</zh-CN>
+#   <en>Writes result JSON with stable fields and ordering for host-side archiving and review.</en>
+# </lang>
 function Write-ResultJson {
     $lines = New-Object System.Collections.ArrayList
     [void]$lines.Add('{')
@@ -925,6 +1056,10 @@ function Write-ResultJson {
     Set-Content -LiteralPath $ResultJsonPath -Value $lines.ToArray() -Encoding UTF8
 }
 
+# <lang>
+#   <zh-CN>拼接门户根地址与相对路径，同时避免重复或缺失斜杠。</zh-CN>
+#   <en>Joins the portal root and relative path without duplicate or missing slashes.</en>
+# </lang>
 function Join-PortalUrl {
     param(
         [string]$Root,
@@ -938,6 +1073,10 @@ function Join-PortalUrl {
     return $Root + '/' + $Path.TrimStart('/')
 }
 
+# <lang>
+#   <zh-CN>等待 IE 完成导航并在固定期限后失败，避免 smoke 无限挂起。</zh-CN>
+#   <en>Waits for IE navigation with a fixed deadline so the smoke test cannot hang indefinitely.</en>
+# </lang>
 function Wait-InternetExplorer {
     param([object]$Browser)
 
@@ -959,6 +1098,10 @@ function Wait-InternetExplorer {
     throw 'Internet Explorer did not finish loading before timeout.'
 }
 
+# <lang>
+#   <zh-CN>保存当前页面 HTML 供失败复核，并将读取异常转为内嵌诊断标记。</zh-CN>
+#   <en>Saves current page HTML for review and turns read failures into an embedded diagnostic marker.</en>
+# </lang>
 function Save-PageHtml {
     param(
         [object]$Browser,
@@ -980,6 +1123,10 @@ function Save-PageHtml {
     return $path
 }
 
+# <lang>
+#   <zh-CN>捕获桌面截图用于人工复核，并在图形资源失败时安全降级。</zh-CN>
+#   <en>Captures a desktop screenshot for review and degrades safely when graphics resources fail.</en>
+# </lang>
 function Save-Screenshot {
     param([string]$Step)
 
@@ -1006,6 +1153,10 @@ function Save-Screenshot {
     }
 }
 
+# <lang>
+#   <zh-CN>读取 IE 文档正文文本，异常时返回空值而不阻断后续诊断。</zh-CN>
+#   <en>Reads IE document body text and returns empty text on failure without blocking diagnostics.</en>
+# </lang>
 function Get-BodyText {
     param([object]$Browser)
 
@@ -1021,6 +1172,10 @@ function Get-BodyText {
     return ''
 }
 
+# <lang>
+#   <zh-CN>读取 IE 文档 HTML，异常时返回空值以保持结果生成。</zh-CN>
+#   <en>Reads IE document HTML and returns empty text on failure so results can still be generated.</en>
+# </lang>
 function Get-DocumentHtml {
     param([object]$Browser)
 
@@ -1036,6 +1191,10 @@ function Get-DocumentHtml {
     return ''
 }
 
+# <lang>
+#   <zh-CN>按不区分大小写的序列检查页面标记，保持 smoke 断言简单可审计。</zh-CN>
+#   <en>Checks page markers with ordinal case-insensitive matching for simple auditable smoke assertions.</en>
+# </lang>
 function Test-AnyKeyword {
     param(
         [string]$Text,
@@ -1051,6 +1210,10 @@ function Test-AnyKeyword {
     return $false
 }
 
+# <lang>
+#   <zh-CN>在 IE DOM 旧接口与标准接口之间提供标签集合兼容读取。</zh-CN>
+#   <en>Reads tag collections through both legacy IE DOM and standard interfaces.</en>
+# </lang>
 function Get-ElementsByTagNameCompat {
     param(
         [object]$Document,
@@ -1106,6 +1269,10 @@ function Get-ElementsByTagNameCompat {
     return $items
 }
 
+# <lang>
+#   <zh-CN>兼容 length、Length 和 count 形态读取 COM 集合数量。</zh-CN>
+#   <en>Reads COM collection counts across length, Length, and count shapes.</en>
+# </lang>
 function Get-CollectionCountCompat {
     param([object]$Collection)
 
@@ -1144,6 +1311,10 @@ function Get-CollectionCountCompat {
     return 0
 }
 
+# <lang>
+#   <zh-CN>兼容多种 item/Item 索引调用方式读取 COM 集合项。</zh-CN>
+#   <en>Reads COM collection items across legacy item/Item index call shapes.</en>
+# </lang>
 function Get-CollectionItemCompat {
     param(
         [object]$Collection,
@@ -1183,6 +1354,10 @@ function Get-CollectionItemCompat {
     return $null
 }
 
+# <lang>
+#   <zh-CN>用最小属性探测判断 COM 元素是否可继续使用。</zh-CN>
+#   <en>Uses minimal property probes to decide whether a COM element is usable.</en>
+# </lang>
 function Test-ElementLooksUsable {
     param([object]$Element)
 
@@ -1217,6 +1392,10 @@ function Test-ElementLooksUsable {
     return $false
 }
 
+# <lang>
+#   <zh-CN>兼容 getAttribute 与属性访问读取 DOM 属性，失败返回空值。</zh-CN>
+#   <en>Reads a DOM attribute through getAttribute or property access, returning empty on failure.</en>
+# </lang>
 function Get-ElementAttributeCompat {
     param(
         [object]$Element,
@@ -1244,6 +1423,10 @@ function Get-ElementAttributeCompat {
     return ''
 }
 
+# <lang>
+#   <zh-CN>在标准 DOM 与 IE all 集合之间按兼容顺序查找元素。</zh-CN>
+#   <en>Finds an element through standard DOM and IE all-collection fallbacks.</en>
+# </lang>
 function Get-ElementByIdCompat {
     param(
         [object]$Document,
@@ -1284,6 +1467,10 @@ function Get-ElementByIdCompat {
     return $null
 }
 
+# <lang>
+#   <zh-CN>按标准 name 查询并回退到 IE all 集合，返回可用元素集合。</zh-CN>
+#   <en>Finds named elements through standard APIs and IE all-collection fallbacks.</en>
+# </lang>
 function Get-ElementsByNameCompat {
     param(
         [object]$Document,
@@ -1332,6 +1519,10 @@ function Get-ElementsByNameCompat {
     return $items
 }
 
+# <lang>
+#   <zh-CN>执行旧运行时兼容的大小写不敏感后缀比较。</zh-CN>
+#   <en>Performs an older-runtime-compatible case-insensitive suffix comparison.</en>
+# </lang>
 function Test-EndsWithIgnoreCase {
     param(
         [string]$Value,
@@ -1345,6 +1536,10 @@ function Test-EndsWithIgnoreCase {
     return $Value.ToLowerInvariant().EndsWith($Suffix.ToLowerInvariant())
 }
 
+# <lang>
+#   <zh-CN>记录登录页 input 的非敏感结构诊断，不输出控件值。</zh-CN>
+#   <en>Logs non-sensitive login-input structure without outputting control values.</en>
+# </lang>
 function Write-InputInventory {
     param([object]$Document)
 
@@ -1364,6 +1559,10 @@ function Write-InputInventory {
     }
 }
 
+# <lang>
+#   <zh-CN>按 ID 或 name 后缀寻找兼容登录控件，避免依赖单一命名容器。</zh-CN>
+#   <en>Finds a login control by ID or name suffix without relying on one naming container.</en>
+# </lang>
 function Find-InputByIdSuffix {
     param(
         [object]$Document,
@@ -1387,6 +1586,10 @@ function Find-InputByIdSuffix {
     return $null
 }
 
+# <lang>
+#   <zh-CN>优先按已知 ID/name 白名单寻找登录控件，保持选择器边界固定。</zh-CN>
+#   <en>Finds login controls from an allowlisted ID/name set before using broader fallbacks.</en>
+# </lang>
 function Find-InputByKnownIdentity {
     param(
         [object]$Document,
@@ -1413,6 +1616,10 @@ function Find-InputByKnownIdentity {
     return $null
 }
 
+# <lang>
+#   <zh-CN>转义注入 JavaScript 的字面值，避免用户名或密码改变脚本结构。</zh-CN>
+#   <en>Escapes JavaScript literal values so user names or passwords cannot change script structure.</en>
+# </lang>
 function ConvertTo-JavascriptString {
     param([string]$Value)
 
@@ -1423,6 +1630,10 @@ function ConvertTo-JavascriptString {
     return $Value.Replace('\', '\\').Replace("'", "\'").Replace("`r", '\r').Replace("`n", '\n')
 }
 
+# <lang>
+#   <zh-CN>通过 IE 文档脚本提交登录控件，并将失败交给下一 fallback。</zh-CN>
+#   <en>Submits the login controls through IE document script and delegates failure to the next fallback.</en>
+# </lang>
 function Invoke-PortalLoginByScript {
     param(
         [string]$UserName,
@@ -1442,6 +1653,10 @@ function Invoke-PortalLoginByScript {
     }
 }
 
+# <lang>
+#   <zh-CN>导航到一个 smoke 步骤，采集页面、截图并按关键词写入结果。</zh-CN>
+#   <en>Navigates one smoke step, captures page artifacts, and records a keyword-based result.</en>
+# </lang>
 function Invoke-PortalStep {
     param(
         [string]$Step,
@@ -1471,6 +1686,10 @@ function Invoke-PortalStep {
     Add-Result -Step $Step -Passed $passed -Message $message -Url ([string]$Ie.LocationURL) -Screenshot $screenshotPath -Html $htmlPath
 }
 
+# <lang>
+#   <zh-CN>按参数、DOM、脚本、键盘和 HTTP 顺序完成登录并记录结果。</zh-CN>
+#   <en>Runs login through parameter, DOM, script, keyboard, and HTTP fallbacks in order.</en>
+# </lang>
 function Invoke-PortalLogin {
     if ($SkipLogin) {
         Add-Result -Step 'login' -Passed $true -Message 'Skipped by parameter.' -Url ([string]$Ie.LocationURL) -Screenshot '' -Html ''
@@ -1543,6 +1762,10 @@ function Invoke-PortalLogin {
     Add-Result -Step 'login' -Passed $passed -Message $message -Url ([string]$Ie.LocationURL) -Screenshot $screenshotPath -Html $htmlPath
 }
 
+# <lang>
+#   <zh-CN>使用 Shell COM 将本次结果目录压缩归档，失败时保留目录作为回退。</zh-CN>
+#   <en>Uses Shell COM to archive the run directory and retains the directory when zipping fails.</en>
+# </lang>
 function New-ResultZip {
     $zipPath = Join-Path $ResultsRoot ('PortalLegacyIeResult-' + $Stamp + '.zip')
     try {
@@ -1565,10 +1788,18 @@ function New-ResultZip {
     }
 }
 
+# <lang>
+#   <zh-CN>先建立本次运行的结果目录和日志边界，再记录任务启动信息；此处不创建外部资源。</zh-CN>
+#   <en>Establishes the run result and log boundaries before recording startup; no external resource is created here.</en>
+# </lang>
 New-DirectoryIfMissing -Path $ResultsRoot
 New-DirectoryIfMissing -Path $RunRoot
 Write-Log ('START task=' + $TaskName + ' baseUrl=' + $BaseUrl)
 
+# <lang>
+#   <zh-CN>DryRun 只生成结果 JSON 并退出，明确不启动 IE、读取秘密或访问门户。</zh-CN>
+#   <en>DryRun writes only result JSON and exits without launching IE, reading secrets, or accessing the portal.</en>
+# </lang>
 if ($DryRun) {
     Add-Result -Step 'dry-run' -Passed $true -Message 'Package script dry run completed without launching IE.' -Url $BaseUrl -Screenshot '' -Html ''
     Write-ResultJson
@@ -1576,6 +1807,10 @@ if ($DryRun) {
     exit 0
 }
 
+# <lang>
+#   <zh-CN>真实 smoke 流程在受控 try/catch/finally 内启动 IE、执行导航和登录 fallback，并始终进入结果与资源清理。</zh-CN>
+#   <en>The real smoke flow starts IE, navigation, and login fallbacks inside controlled try/catch/finally blocks and always reaches result and resource cleanup.</en>
+# </lang>
 try {
     $Ie = New-Object -ComObject InternetExplorer.Application
     $Ie.Visible = $true
@@ -1587,6 +1822,10 @@ try {
     Invoke-PortalStep -Step 'admin-system-health' -Url (Join-PortalUrl -Root $BaseUrl -Path 'Admin/SystemHealth.aspx') -Keywords @('System Health', 'SystemHealth.aspx', 'SystemHealth')
     Invoke-PortalStep -Step 'generic-error-page' -Url (Join-PortalUrl -Root $BaseUrl -Path 'GenericErrorPage.aspx?id=P9LegacyVmProbe') -Keywords @('P9LegacyVmProbe', 'event')
 }
+# <lang>
+#   <zh-CN>把未处理的导航或认证异常转换为非泄露的失败结果，同时尽力保存页面证据。</zh-CN>
+#   <en>Converts unhandled navigation or authentication errors into a non-leaking failure result while best-effort evidence is saved.</en>
+# </lang>
 catch {
     Write-Log ('ERROR ' + $_.Exception.Message)
     try {
@@ -1602,6 +1841,10 @@ catch {
     catch {
     }
 }
+# <lang>
+#   <zh-CN>无论成功或失败都写入结果、尝试压缩并退出 IE；清理失败不覆盖主结果。</zh-CN>
+#   <en>Always writes results, attempts compression, and quits IE; cleanup failure does not replace the primary result.</en>
+# </lang>
 finally {
     Write-ResultJson
     Write-Log ('RESULT JSON ' + $ResultJsonPath)
@@ -1615,6 +1858,10 @@ finally {
     }
 }
 
+# <lang>
+#   <zh-CN>汇总每个步骤的通过状态并以非零退出码向 VM 任务代理报告失败。</zh-CN>
+#   <en>Aggregates step outcomes and reports failure to the VM task agent through a non-zero exit code.</en>
+# </lang>
 $failed = $false
 foreach ($result in $Results) {
     if (-not $result.Passed) {

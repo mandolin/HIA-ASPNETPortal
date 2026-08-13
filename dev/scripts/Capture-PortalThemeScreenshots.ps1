@@ -7,15 +7,10 @@ Captures reference screenshots for the deployed portal themes.
 采集已部署门户主题的参考截图。
 
 .DESCRIPTION
-.LANG en
-Temporarily applies theme settings through the configured test database, drives
-browser-based capture flows, and writes screenshots to a WorkZone research
-directory. The script is evidence tooling for design review; it should run only
-against development data that can tolerate temporary theme changes.
-
-.LANG zh-CN
-通过配置的测试数据库临时应用主题设置，驱动浏览器截图流程，并把截图写入 WorkZone research 目录。
-本脚本是设计复核证据工具，只应针对可承受临时主题变更的开发数据运行。
+<lang>
+  <en>Temporarily applies theme settings through the configured test database, drives browser-based capture flows, and writes screenshots to a WorkZone research directory. The script is evidence tooling for design review; it should run only against development data that can tolerate temporary theme changes.</en>
+  <zh-CN>通过配置的测试数据库临时应用主题设置，驱动浏览器截图流程，并把截图写入 WorkZone research 目录。本脚本是设计复核证据工具，只应针对可承受临时主题变更的开发数据运行。</zh-CN>
+</lang>
 
 .PARAMETER BaseUrl
 .LANG en
@@ -94,9 +89,21 @@ $testActor = 'P7.3-theme-screenshot'
 $settingSnapshot = $null
 $connection = $null
 
+# <lang>
+#   <zh-CN>下面的状态仅服务本次截图编排：外置数据库快照、测试 actor、输出目录和 Node 子进程环境，不代表生产配置。</zh-CN>
+#   <en>The state below serves only this capture run: external database snapshot, test actor, output directory, and Node child-process environment; it is not production configuration.</en>
+# </lang>
+# <lang>
+#   <zh-CN>读取外置 XML 中命名为 Portal 的连接串；缺失时失败且不回显敏感值。</zh-CN>
+#   <en>Reads the connection string named Portal from external XML; missing input fails without echoing sensitive values.</en>
+# </lang>
 function Get-ExternalPortalConnectionString {
     param([string]$Path)
 
+# <lang>
+#   <zh-CN>以无 BOM UTF-8 解析两种 connectionStrings XML 包装形式，保持配置文件边界。</zh-CN>
+#   <en>Parses both connectionStrings XML wrapper forms as UTF-8 without a BOM, keeping the external-file boundary explicit.</en>
+# </lang>
     [xml]$document = [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
     $connectionStringsNode = if ($document.DocumentElement -and $document.DocumentElement.Name -eq 'connectionStrings') {
         $document.DocumentElement
@@ -118,6 +125,10 @@ function Get-ExternalPortalConnectionString {
     return $portalNode.connectionString
 }
 
+# <lang>
+#   <zh-CN>将可空文本映射为参数化 NVarChar，保持 NULL 语义并避免 SQL 拼接。</zh-CN>
+#   <en>Maps nullable text to a parameterized NVarChar, preserving NULL semantics and avoiding SQL concatenation.</en>
+# </lang>
 function Add-TextParameter {
     param(
         [System.Data.SqlClient.SqlCommand]$Command,
@@ -130,6 +141,10 @@ function Add-TextParameter {
     $parameter.Value = if ($null -eq $Value) { [DBNull]::Value } else { $Value }
 }
 
+# <lang>
+#   <zh-CN>为布尔列创建类型化参数，供临时主题设置恢复使用。</zh-CN>
+#   <en>Creates a typed Boolean parameter for temporary theme-setting restoration.</en>
+# </lang>
 function Add-BitParameter {
     param(
         [System.Data.SqlClient.SqlCommand]$Command,
@@ -141,6 +156,10 @@ function Add-BitParameter {
     $parameter.Value = $Value
 }
 
+# <lang>
+#   <zh-CN>为整数键创建类型化参数，避免页面/模块目标查询依赖文本转换。</zh-CN>
+#   <en>Creates a typed integer parameter so page and module target queries do not depend on text conversion.</en>
+# </lang>
 function Add-IntParameter {
     param(
         [System.Data.SqlClient.SqlCommand]$Command,
@@ -152,6 +171,10 @@ function Add-IntParameter {
     $parameter.Value = $Value
 }
 
+# <lang>
+#   <zh-CN>为时间字段创建 DateTime2 参数，恢复主题设置原始审计时间。</zh-CN>
+#   <en>Creates a DateTime2 parameter so restored theme settings retain their original audit timestamps.</en>
+# </lang>
 function Add-DateTime2Parameter {
     param(
         [System.Data.SqlClient.SqlCommand]$Command,
@@ -163,6 +186,10 @@ function Add-DateTime2Parameter {
     $parameter.Value = $Value
 }
 
+# <lang>
+#   <zh-CN>执行带配置回调的非查询并在 finally 释放命令，覆盖主题写入和恢复路径。</zh-CN>
+#   <en>Executes a configured non-query and disposes the command in finally for both theme writes and restoration.</en>
+# </lang>
 function Invoke-NonQuery {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -181,6 +208,10 @@ function Invoke-NonQuery {
     }
 }
 
+# <lang>
+#   <zh-CN>执行只读标量查询并由调用方绑定参数，统一目标 ID 发现边界。</zh-CN>
+#   <en>Executes a scalar query with caller-bound parameters, centralizing target-ID discovery boundaries.</en>
+# </lang>
 function Invoke-ScalarQuery {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -204,6 +235,10 @@ function Invoke-ScalarQuery {
     }
 }
 
+# <lang>
+#   <zh-CN>发现可用于内容截图的 Tab 目标，输出低敏 ID/路径事实而不创建页面。</zh-CN>
+#   <en>Discovers Tab targets usable for content screenshots and emits low-sensitivity ID/path facts without creating pages.</en>
+# </lang>
 function Get-ContentTabTargets {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -246,6 +281,10 @@ ORDER BY [TabIndex], [TabId]
     }
 }
 
+# <lang>
+#   <zh-CN>发现旧后台模块页面目标，先通过模块定义和受治理路径过滤，避免截图越出范围。</zh-CN>
+#   <en>Discovers legacy-admin module page targets, filtering by module definitions and governed paths before capture leaves scope.</en>
+# </lang>
 function Get-LegacyAdminModuleTargets {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -346,6 +385,10 @@ ORDER BY
     }
 }
 
+# <lang>
+#   <zh-CN>查找讨论详情目标并保留可回退的空结果，供截图 Node 流程条件执行。</zh-CN>
+#   <en>Finds a discussion-detail target and preserves an empty fallback so the Node capture flow can remain conditional.</en>
+# </lang>
 function Get-DiscussionDetailTarget {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -378,6 +421,10 @@ ORDER BY [ItemID]
     }
 }
 
+# <lang>
+#   <zh-CN>按模块定义取得首个可编辑页面 ID，缺失时返回空值而不伪造权限目标。</zh-CN>
+#   <en>Gets the first editable page ID for a module definition, returning null when absent instead of fabricating a permission target.</en>
+# </lang>
 function Get-FirstModuleIdForDefinition {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -397,6 +444,10 @@ ORDER BY [m].[TabId], [m].[ModuleOrder], [m].[ModuleId]
     }
 }
 
+# <lang>
+#   <zh-CN>只读判定指定用户是否拥有权限键，供后台截图目标条件化，不执行授权变更。</zh-CN>
+#   <en>Read-only checks whether a user has a permission key for conditional admin targets; it never changes authorization.</en>
+# </lang>
 function Test-PortalUserPermission {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -454,6 +505,10 @@ SELECT @HasPermission;
     return [Convert]::ToBoolean($hasPermission)
 }
 
+# <lang>
+#   <zh-CN>从 P64/P65 上下文和受治理页面规则构造编辑页目标，保留缺失项的显式回退。</zh-CN>
+#   <en>Builds edit-page targets from P64/P65 contexts and governed page rules, preserving explicit fallbacks for missing items.</en>
+# </lang>
 function Get-OrCreateEditPageTargets {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -699,6 +754,10 @@ SELECT @ItemId;
     return $targets
 }
 
+# <lang>
+#   <zh-CN>读取系统主题设置的可恢复字段，区分不存在和已存在记录供 finally 恢复。</zh-CN>
+#   <en>Reads restorable system-theme fields and distinguishes absence from an existing record for finally restoration.</en>
+# </lang>
 function Get-SystemSettingSnapshot {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -735,6 +794,10 @@ WHERE [SettingKey] = @SettingKey
     }
 }
 
+# <lang>
+#   <zh-CN>使用参数化 upsert 临时设置全局主题，写入固定测试 actor 以便审计。</zh-CN>
+#   <en>Temporarily upserts the global theme with parameterized values and a fixed test actor for auditability.</en>
+# </lang>
 function Set-GlobalTheme {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -768,6 +831,10 @@ END
     }
 }
 
+# <lang>
+#   <zh-CN>根据系统快照恢复或删除临时主题记录，保持失败路径的最小副作用。</zh-CN>
+#   <en>Restores or deletes the temporary theme record from its snapshot, keeping failure-path side effects minimal.</en>
+# </lang>
 function Restore-SystemSettingSnapshot {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -804,6 +871,10 @@ WHERE [SettingKey] = @SettingKey
     }
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入 JSON 证据，确保输出目录产物可被后续工具稳定读取。</zh-CN>
+#   <en>Writes JSON evidence as UTF-8 without a BOM so downstream tools read the output directory consistently.</en>
+# </lang>
 function Write-Utf8NoBomJson {
     param(
         [string]$Path,
@@ -814,6 +885,10 @@ function Write-Utf8NoBomJson {
     [System.IO.File]::WriteAllText($Path, $json, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>从截图目录生成 Contact Sheet，保持视觉复核产物与单张截图同一输出边界。</zh-CN>
+#   <en>Generates a Contact Sheet from the screenshot directory, keeping the visual-review artifact within the same output boundary.</en>
+# </lang>
 function New-ContactSheet {
     param([string]$Directory)
 
@@ -861,6 +936,10 @@ function New-ContactSheet {
     }
 }
 
+# <lang>
+#   <zh-CN>生成隔离 Node 截图脚本并注入固定环境变量契约，不在 PowerShell 中执行浏览器逻辑。</zh-CN>
+#   <en>Generates the isolated Node capture script and injects a fixed environment contract without executing browser logic in PowerShell.</en>
+# </lang>
 function Write-NodeCaptureScript {
     param([string]$Path)
 
@@ -885,10 +964,18 @@ const discussionDetailJson = process.env.P7_THEME_DISCUSSION_DETAIL || 'null';
 const editPageTargetsJson = process.env.P7_THEME_EDIT_PAGE_TARGETS || '[]';
 const legacyAdminTargetsJson = process.env.P7_THEME_LEGACY_ADMIN_TARGETS || '[]';
 
+// <lang>
+//   <zh-CN>读取必需的回归 JSON 文件；文件缺失或格式错误直接失败，避免生成无上下文的截图。</zh-CN>
+//   <en>Reads required regression JSON files; missing or malformed files fail fast so context-free screenshots are not produced.</en>
+// </lang>
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
+// <lang>
+//   <zh-CN>解析可选的环境变量 JSON；异常时使用调用方指定的安全回退值。</zh-CN>
+//   <en>Parses optional environment JSON and uses the caller-provided safe fallback when parsing fails.</en>
+// </lang>
 function readEnvJson(value, fallback) {
   try {
     return JSON.parse(value);
@@ -897,10 +984,18 @@ function readEnvJson(value, fallback) {
   }
 }
 
+// <lang>
+//   <zh-CN>将相对目标解析到固定门户基础 URL，保持截图目标不越出本次运行的站点边界。</zh-CN>
+//   <en>Resolves relative targets against the fixed portal base URL so capture navigation stays within this run's site boundary.</en>
+// </lang>
 function joinUrl(relativeUrl) {
   return new URL(relativeUrl, baseUrl).toString();
 }
 
+// <lang>
+//   <zh-CN>建立并验证后台登录态；仅对偶发登录未完成重试一次，并清理失败尝试的 Cookie。</zh-CN>
+//   <en>Establishes and verifies the admin sign-in state; retries one transient incomplete attempt and clears its cookies.</en>
+// </lang>
 async function signIn(page, data, userName) {
   for (let attempt = 1; attempt <= 2; attempt++) {
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
@@ -917,8 +1012,10 @@ async function signIn(page, data, userName) {
       return;
     }
 
-    // 中文：后台截图必须基于真实登录态；偶发登录未完成时重试一次，不把拒绝访问页当作目标页。
-    // English: Admin screenshots require a verified signed-in state; retry once for transient incomplete sign-in.
+    // <lang>
+    //   <zh-CN>后台截图必须基于真实登录态；偶发登录未完成时重试一次，不把拒绝访问页当作目标页。</zh-CN>
+    //   <en>Admin screenshots require a verified signed-in state; retry once for transient incomplete sign-in.</en>
+    // </lang>
     await page.context().clearCookies().catch(() => {});
     await page.waitForTimeout(800);
   }
@@ -926,6 +1023,10 @@ async function signIn(page, data, userName) {
   throw new Error(`Sign-in did not complete for ${userName}.`);
 }
 
+// <lang>
+//   <zh-CN>为一组截图创建隔离浏览器上下文，固定视口、语言和超时，结束时由调用方关闭上下文。</zh-CN>
+//   <en>Creates an isolated browser context for a capture group with fixed viewport, locale, and timeout; the caller closes it.</en>
+// </lang>
 async function openPage(browser) {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 1000 },
@@ -937,6 +1038,10 @@ async function openPage(browser) {
   return { context, page };
 }
 
+// <lang>
+//   <zh-CN>导航到截图目标并仅对瞬时冷启动/阻塞重试一次，持续性错误继续向上传播。</zh-CN>
+//   <en>Navigates to a screenshot target and retries only transient cold-start or stall failures once.</en>
+// </lang>
 async function gotoTarget(page, target) {
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
@@ -947,14 +1052,20 @@ async function gotoTarget(page, target) {
         throw error;
       }
 
-      // 中文：IIS Express 偶发冷启动或页面阻塞时重试一次，但不吞掉持续性错误。
-      // English: Retry once for transient IIS Express/page stalls without hiding persistent failures.
+      // <lang>
+      //   <zh-CN>IIS Express 偶发冷启动或页面阻塞时重试一次，但不吞掉持续性错误。</zh-CN>
+      //   <en>Retry once for transient IIS Express/page stalls without hiding persistent failures.</en>
+      // </lang>
       await page.goto('about:blank', { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
       await page.waitForTimeout(1200);
     }
   }
 }
 
+// <lang>
+//   <zh-CN>采集单个目标、执行主题/CSS/错误页断言，并把截图写入当前主题目录。</zh-CN>
+//   <en>Captures one target, asserts theme/CSS/error-page conditions, and writes the screenshot under the current theme output.</en>
+// </lang>
 async function capture(page, target) {
   await gotoTarget(page, target);
   if (target.scrollText) {
@@ -973,8 +1084,10 @@ async function capture(page, target) {
   if (bodyText.includes('应用程序暂时无法完成请求') || page.url().includes('GenericErrorPage.aspx')) {
     throw new Error('Generic error page detected.');
   }
-  // 中文：截图回归不能把拒绝访问页误判为目标页正常渲染。
-  // English: The screenshot smoke must not treat access-denied fallbacks as successful target renders.
+  // <lang>
+  //   <zh-CN>截图回归不能把拒绝访问页误判为目标页正常渲染。</zh-CN>
+  //   <en>The screenshot smoke must not treat access-denied fallbacks as successful target renders.</en>
+  // </lang>
   if (!target.allowAccessDenied && (bodyText.includes('拒绝编辑') || bodyText.includes('访问被拒绝') ||
       page.url().includes('AccessDenied.aspx') || page.url().includes('EditAccessDenied.aspx'))) {
     throw new Error('Access denied page detected.');
@@ -992,6 +1105,10 @@ async function capture(page, target) {
   return fileName;
 }
 
+// <lang>
+//   <zh-CN>读取上下文、解析环境目标并创建输出目录；缺少可选上下文时保持空目标集合。</zh-CN>
+//   <en>Loads contexts, parses target JSON, and creates the output directory; missing optional contexts yield empty target groups.</en>
+// </lang>
 const p64 = fs.existsSync(p64Path) ? readJson(p64Path) : null;
 const p65 = fs.existsSync(p65Path) ? readJson(p65Path) : null;
 const contentTabs = readEnvJson(contentTabsJson, []);
@@ -1000,6 +1117,10 @@ const editPageTargets = readEnvJson(editPageTargetsJson, []);
 const legacyAdminTargets = readEnvJson(legacyAdminTargetsJson, []);
 fs.mkdirSync(outputDir, { recursive: true });
 
+// <lang>
+//   <zh-CN>按匿名、后台和绑定用户三类权限边界构造稳定的截图目标索引。</zh-CN>
+//   <en>Builds a stable screenshot index across anonymous, admin, and bound-user permission boundaries.</en>
+// </lang>
 const anonymousTargets = [
   { id: 'home-anonymous', title: '匿名首页', role: 'anonymous', url: joinUrl('DesktopDefault.aspx') },
   { id: 'signin', title: '登录模块', role: 'anonymous', url: joinUrl('DesktopDefault.aspx?tabindex=0&tabid=0') }
@@ -1103,11 +1224,17 @@ if (p65?.tabUrl) {
   boundTargets.push({ id: 'p65-correction-bound', title: '员工资料更正绑定用户态', role: 'bound-user', url: p65.tabUrl, data: p65, userName: p65.boundUserName });
 }
 
+// <lang>
+//   <zh-CN>由本脚本统一持有浏览器生命周期，确保所有截图组完成后再关闭实例。</zh-CN>
+//   <en>The script owns the browser lifetime and closes it only after all capture groups finish.</en>
+// </lang>
 const browser = await chromium.launch({ headless: true });
 const results = [];
 
-// 中文：摘要文件只记录截图索引字段，避免把登录密码等上下文写入 WorkZone。
-// English: Summary output keeps only screenshot index fields and never serializes sign-in context.
+// <lang>
+//   <zh-CN>摘要文件只记录截图索引字段，避免把登录密码等上下文写入 WorkZone。</zh-CN>
+//   <en>Summary output keeps only screenshot index fields and never serializes sign-in context.</en>
+// </lang>
 function createCaptureResult(target, fileName, status, detail) {
   return {
     theme,
@@ -1121,6 +1248,10 @@ function createCaptureResult(target, fileName, status, detail) {
   };
 }
 
+// <lang>
+//   <zh-CN>在隔离上下文中按组执行登录和目标采集，并在 finally 中释放上下文。</zh-CN>
+//   <en>Runs sign-in and target capture within an isolated context and releases that context in finally.</en>
+// </lang>
 async function runCaptureGroup(targets, signedIn) {
   const { context, page } = await openPage(browser);
   try {
@@ -1141,6 +1272,10 @@ async function runCaptureGroup(targets, signedIn) {
   }
 }
 
+// <lang>
+//   <zh-CN>按匿名、后台和绑定用户顺序编排目标组；每个失败目标进入摘要而不阻断同组后续目标。</zh-CN>
+//   <en>Runs anonymous, admin, and bound-user groups in order; a failed target is recorded without stopping later targets in its group.</en>
+// </lang>
 try {
   await runCaptureGroup(anonymousTargets, null);
   if (p65?.adminUserName) {
@@ -1152,9 +1287,17 @@ try {
     await runCaptureGroup([target], { data: target.data, userName: target.userName });
   }
 } finally {
+  // <lang>
+  //   <zh-CN>浏览器无论采集成功与否都必须关闭，避免残留进程影响后续复核。</zh-CN>
+  //   <en>Closes the browser regardless of capture success so no process remains for later review runs.</en>
+  // </lang>
   await browser.close();
 }
 
+// <lang>
+//   <zh-CN>仅输出低敏感度截图索引，并通过退出码向 PowerShell 汇报失败。</zh-CN>
+//   <en>Outputs only the low-sensitivity screenshot index and reports failures through the process exit code.</en>
+// </lang>
 console.log(JSON.stringify(results, null, 2));
 if (results.some(item => item.status !== 'Pass')) {
   process.exitCode = 1;
@@ -1164,19 +1307,35 @@ if (results.some(item => item.status !== 'Pass')) {
     [System.IO.File]::WriteAllText($Path, $script, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>执行前只检查本地 Playwright 依赖是否存在；本检查本身不启动 Node 或浏览器。</zh-CN>
+#   <en>Before execution, checks only for the local Playwright dependency; this check does not start Node or a browser.</en>
+# </lang>
 if (-not (Test-Path -LiteralPath (Join-Path $repoRoot 'temp\node_modules\playwright') -PathType Container)) {
     throw 'Playwright is not available under temp\node_modules. Run an existing Playwright setup or create the local junction before capturing screenshots.'
 }
 
+# <lang>
+#   <zh-CN>准备截图输出目录和临时运行时脚本路径；运行时脚本由同一版本的编排函数生成。</zh-CN>
+#   <en>Prepares the screenshot output directory and temporary runtime script path generated by this orchestration version.</en>
+# </lang>
 New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
 $runtimeDir = Join-Path $repoRoot 'temp\p7'
 New-Item -ItemType Directory -Path $runtimeDir -Force | Out-Null
 $runtimeScript = Join-Path $runtimeDir 'Capture-PortalThemeScreenshots.runtime.mjs'
 Write-NodeCaptureScript -Path $runtimeScript
 
+# <lang>
+#   <zh-CN>建立低敏感度结果集合，并读取外置连接串；连接串只进入内存，不写入日志。</zh-CN>
+#   <en>Creates the low-sensitivity result collection and reads the external connection string into memory only.</en>
+# </lang>
 $summary = New-Object 'System.Collections.Generic.List[object]'
 $connectionString = Get-ExternalPortalConnectionString -Path $ConnectionStringsConfigPath
 
+# <lang>
+#   <zh-CN>打开数据库后一次性发现主题快照、权限目标和页面 ID，随后按主题循环驱动独立 Node 子进程。</zh-CN>
+#   <en>After opening the database, discovers the theme snapshot, permission targets, and page IDs once, then drives one Node child process per theme.</en>
+# </lang>
 try {
     $connection = [System.Data.SqlClient.SqlConnection]::new($connectionString)
     $connection.Open()
@@ -1249,6 +1408,10 @@ ORDER BY CASE WHEN [TabName] = N'Home' THEN 0 ELSE 1 END, [TabOrder], [TabId]
         param($command)
     }
 
+# <lang>
+#   <zh-CN>每个主题先写入临时设置，再通过固定环境变量传递已发现目标；子进程结果只解析为摘要对象。</zh-CN>
+#   <en>For each theme, applies the temporary setting, passes discovered targets through fixed environment variables, and parses child output only as summary objects.</en>
+# </lang>
     foreach ($theme in $Themes) {
         Write-Host ("[INFO] Capturing theme {0}" -f $theme)
         Set-GlobalTheme -Connection $connection -ThemeName $theme
@@ -1280,6 +1443,10 @@ ORDER BY CASE WHEN [TabName] = N'Home' THEN 0 ELSE 1 END, [TabOrder], [TabId]
     }
 }
 finally {
+# <lang>
+#   <zh-CN>无论 Node、解析或后续断言是否失败，都清理本轮环境变量并恢复主题设置、释放连接。</zh-CN>
+#   <en>Regardless of Node, parsing, or assertion failures, clears run-scoped environment variables, restores the theme, and releases the connection.</en>
+# </lang>
     Remove-Item Env:P7_THEME_NAME -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_BASE_URL -ErrorAction SilentlyContinue
     Remove-Item Env:P7_THEME_OUTPUT_DIR -ErrorAction SilentlyContinue
@@ -1306,6 +1473,10 @@ finally {
     }
 }
 
+# <lang>
+#   <zh-CN>成功完成数据库清理后写入摘要和 Contact Sheet；失败目标在最终阶段统一报告。</zh-CN>
+#   <en>After database cleanup succeeds, writes the summary and contact sheet; failed targets are reported together at the end.</en>
+# </lang>
 Write-Utf8NoBomJson -Path (Join-Path $OutputDirectory 'screenshot-summary.json') -Value $summary
 New-ContactSheet -Directory $OutputDirectory
 
