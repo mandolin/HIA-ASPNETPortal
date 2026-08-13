@@ -47,7 +47,18 @@ namespace ASPNET.StarterKit.Portal
             _context = context;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查 P6.3 员工组织目录表是否可用于维护。</zh-CN>
+        ///   <en>Checks whether the P6.3 employee-directory tables are available for maintenance.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>依赖表存在且可访问时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the required tables exist and can be accessed.</en>
+        /// </l>
+        /// </returns>
         public bool IsSchemaAvailable()
         {
             return HasTable(OrganizationTableName) &&
@@ -55,7 +66,24 @@ namespace ASPNET.StarterKit.Portal
                    HasTable(BindingTableName);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按标识读取一个组织单元。</zh-CN>
+        ///   <en>Reads one organization unit by id.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="organizationUnitId">
+        /// <l>
+        ///   <zh-CN>组织单元标识。</zh-CN>
+        ///   <en>Organization-unit identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>组织单元只读信息；不存在时为空。</zh-CN>
+        ///   <en>Read-only organization-unit information, or null when it does not exist.</en>
+        /// </l>
+        /// </returns>
         public IOrganizationUnitInfo GetOrganizationUnitById(int organizationUnitId)
         {
             if (organizationUnitId <= 0 || !IsSchemaAvailable())
@@ -81,7 +109,24 @@ WHERE [OrganizationUnitId] = @OrganizationUnitId;",
             return row == null ? null : CreateOrganizationInfo(row);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按标识读取一个员工。</zh-CN>
+        ///   <en>Reads one employee by id.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="employeeId">
+        /// <l>
+        ///   <zh-CN>员工标识。</zh-CN>
+        ///   <en>Employee identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>员工只读信息；不存在时为空。</zh-CN>
+        ///   <en>Read-only employee information, or null when it does not exist.</en>
+        /// </l>
+        /// </returns>
         public IEmployeeInfo GetEmployeeById(int employeeId)
         {
             if (employeeId <= 0 || !IsSchemaAvailable())
@@ -113,7 +158,24 @@ WHERE [Employee].[EmployeeId] = @EmployeeId;",
             return row == null ? null : CreateEmployeeInfo(row);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>新增或更新组织单元。</zh-CN>
+        ///   <en>Creates or updates an organization unit.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>组织单元保存请求，包含父级、编码、名称、排序和启用状态。</zh-CN>
+        ///   <en>Organization-unit save request containing parent, code, name, sort order, and enabled state.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果，包含成功状态、目标标识和可显示错误。</zh-CN>
+        ///   <en>Write result containing success state, target identifier, and displayable errors.</en>
+        /// </l>
+        /// </returns>
         public EmployeeDirectoryWriteResult SaveOrganizationUnit(OrganizationUnitSaveRequest request)
         {
             if (!IsSchemaAvailable())
@@ -195,7 +257,24 @@ WHERE [OrganizationUnitId] = @OrganizationUnitId
                 : EmployeeDirectoryWriteResult.Missing("The organization unit no longer exists.");
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>新增或更新员工主数据。</zh-CN>
+        ///   <en>Creates or updates employee master data.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>员工保存请求，包含员工号、姓名、邮箱、组织、状态和更新并发信息。</zh-CN>
+        ///   <en>Employee save request containing employee code, names, email, organization, status, and update concurrency data.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果，包含成功状态、目标标识和可显示错误。</zh-CN>
+        ///   <en>Write result containing success state, target identifier, and displayable errors.</en>
+        /// </l>
+        /// </returns>
         public EmployeeDirectoryWriteResult SaveEmployee(EmployeeSaveRequest request)
         {
             if (!IsSchemaAvailable())

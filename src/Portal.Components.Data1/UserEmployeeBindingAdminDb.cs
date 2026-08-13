@@ -40,7 +40,18 @@ namespace ASPNET.StarterKit.Portal
             _context = context;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查 P6.3 绑定所需表是否可用。</zh-CN>
+        ///   <en>Checks whether the P6.3 binding tables are available.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>全部所需表存在时返回 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when all required tables exist.</en>
+        /// </l>
+        /// </returns>
         public bool IsSchemaAvailable()
         {
             return HasTable(EmployeeTableName) &&
@@ -48,7 +59,24 @@ namespace ASPNET.StarterKit.Portal
                    HasTable("Portal_Users");
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按标识读取绑定记录。</zh-CN>
+        ///   <en>Reads a binding row by id.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="bindingId">
+        /// <l>
+        ///   <zh-CN>绑定记录标识。</zh-CN>
+        ///   <en>Binding row identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>绑定记录；不存在或表不可用时返回 <c>null</c>。</zh-CN>
+        ///   <en>Binding row, or <c>null</c> when it does not exist or schema is unavailable.</en>
+        /// </l>
+        /// </returns>
         public IUserEmployeeBindingInfo GetBindingById(int bindingId)
         {
             if (bindingId <= 0 || !IsSchemaAvailable())
@@ -62,7 +90,24 @@ namespace ASPNET.StarterKit.Portal
             return row == null ? null : CreateBindingInfo(row);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>建立一个当前有效绑定。</zh-CN>
+        ///   <en>Creates one current active binding.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>账号、员工、状态、时间和操作者信息组成的保存请求。</zh-CN>
+        ///   <en>Save request containing user, employee, status, timestamp and actor information.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果；失败消息应保持低敏，可直接展示给管理员。</zh-CN>
+        ///   <en>Write result; failure messages should remain low-sensitivity and may be shown to administrators.</en>
+        /// </l>
+        /// </returns>
         public EmployeeDirectoryWriteResult BindUserToEmployee(UserEmployeeBindingSaveRequest request)
         {
             if (!IsSchemaAvailable())
@@ -119,7 +164,24 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);",
             return EmployeeDirectoryWriteResult.Success(bindingId, "Employee binding saved.");
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>结束一个当前有效绑定。</zh-CN>
+        ///   <en>Ends one current active binding.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>解绑请求，包含绑定标识、结束时间和操作者信息。</zh-CN>
+        ///   <en>Unbind request containing binding id, end timestamp and actor information.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果；未找到当前有效绑定时返回失败。</zh-CN>
+        ///   <en>Write result; returns failure when no current active binding is found.</en>
+        /// </l>
+        /// </returns>
         public EmployeeDirectoryWriteResult EndBinding(UserEmployeeBindingEndRequest request)
         {
             if (!IsSchemaAvailable())

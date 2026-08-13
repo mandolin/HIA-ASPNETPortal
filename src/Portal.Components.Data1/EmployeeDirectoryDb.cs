@@ -43,7 +43,18 @@ namespace ASPNET.StarterKit.Portal
             _context = context;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查 P6.3 员工组织目录表是否全部可用。</zh-CN>
+        ///   <en>Checks whether all P6.3 employee-directory tables are available.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>三张基础表均存在时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when all three foundation tables exist.</en>
+        /// </l>
+        /// </returns>
         public bool IsSchemaAvailable()
         {
             return HasTable(OrganizationTableName) &&
@@ -51,7 +62,24 @@ namespace ASPNET.StarterKit.Portal
                    HasTable(BindingTableName);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取组织单元扁平列表。</zh-CN>
+        ///   <en>Reads a flat organization-unit list.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="query">
+        /// <l>
+        ///   <zh-CN>分页和过滤条件。</zh-CN>
+        ///   <en>Paging and filtering options.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>组织单元只读集合；缺表时为空集合。</zh-CN>
+        ///   <en>Read-only organization-unit collection; empty when schema is missing.</en>
+        /// </l>
+        /// </returns>
         public IEnumerable<IOrganizationUnitInfo> GetOrganizationUnits(EmployeeDirectoryQuery query)
         {
             if (!IsSchemaAvailable())
@@ -107,7 +135,24 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取员工主数据列表。</zh-CN>
+        ///   <en>Reads employee master-data rows.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="query">
+        /// <l>
+        ///   <zh-CN>分页和过滤条件。</zh-CN>
+        ///   <en>Paging and filtering options.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>员工只读集合；缺表时为空集合。</zh-CN>
+        ///   <en>Read-only employee collection; empty when schema is missing.</en>
+        /// </l>
+        /// </returns>
         public IEnumerable<IEmployeeInfo> GetEmployees(EmployeeDirectoryQuery query)
         {
             if (!IsSchemaAvailable())
@@ -181,7 +226,24 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取门户账号与员工绑定列表。</zh-CN>
+        ///   <en>Reads Portal-user to employee binding rows.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="query">
+        /// <l>
+        ///   <zh-CN>分页和过滤条件。</zh-CN>
+        ///   <en>Paging and filtering options.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>绑定只读集合；缺表时为空集合。</zh-CN>
+        ///   <en>Read-only binding collection; empty when schema is missing.</en>
+        /// </l>
+        /// </returns>
         public IEnumerable<IUserEmployeeBindingInfo> GetUserEmployeeBindings(EmployeeDirectoryQuery query)
         {
             if (!IsSchemaAvailable())
@@ -244,7 +306,24 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按门户账号读取当前有效绑定。</zh-CN>
+        ///   <en>Reads the current active binding by Portal user id.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>门户账号数值标识。</zh-CN>
+        ///   <en>Numeric Portal user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前有效绑定；缺表或不存在时为空。</zh-CN>
+        ///   <en>Active binding, or null when schema is missing or no binding exists.</en>
+        /// </l>
+        /// </returns>
         public IUserEmployeeBindingInfo GetActiveBindingByUserId(int userId)
         {
             if (userId <= 0 || !IsSchemaAvailable())
@@ -265,7 +344,24 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按员工号读取当前有效绑定。</zh-CN>
+        ///   <en>Reads the current active binding by employee code.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="employeeCode">
+        /// <l>
+        ///   <zh-CN>员工号。</zh-CN>
+        ///   <en>Employee code.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前有效绑定；缺表或不存在时为空。</zh-CN>
+        ///   <en>Active binding, or null when schema is missing or no binding exists.</en>
+        /// </l>
+        /// </returns>
         public IUserEmployeeBindingInfo GetActiveBindingByEmployeeCode(string employeeCode)
         {
             string normalizedEmployeeCode = Normalize(employeeCode);

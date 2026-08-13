@@ -41,7 +41,18 @@ namespace ASPNET.StarterKit.Portal
             this.context = context;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查员工资料确认表和依赖的员工绑定基础表是否可用。</zh-CN>
+        ///   <en>Checks whether the employee-profile confirmation table and required employee-binding foundation tables are available.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>相关表均可用时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when all related tables are available.</en>
+        /// </l>
+        /// </returns>
         public bool IsSchemaAvailable()
         {
             // <lang>
@@ -53,7 +64,24 @@ namespace ASPNET.StarterKit.Portal
                    HasTable(BindingTableName);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指定门户用户当前可确认的员工资料。</zh-CN>
+        ///   <en>Reads the employee profile currently confirmable by the specified Portal user.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>门户用户标识。</zh-CN>
+        ///   <en>Portal user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>当前资料视图；缺表、未绑定或非 Active 状态时为空。</zh-CN>
+        ///   <en>Current profile view, or null when schema is missing, no active binding exists, or the employee is not active.</en>
+        /// </l>
+        /// </returns>
         public EmployeeProfileConfirmationView GetCurrentProfileForUser(int userId)
         {
             if (userId <= 0 || !IsSchemaAvailable())
@@ -123,7 +151,24 @@ ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;",
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为当前用户和员工写入一条资料确认记录。</zh-CN>
+        ///   <en>Writes one profile-confirmation record for the current user and employee.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="request">
+        /// <l>
+        ///   <zh-CN>确认请求。</zh-CN>
+        ///   <en>Confirmation request.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>写入结果。</zh-CN>
+        ///   <en>Write result.</en>
+        /// </l>
+        /// </returns>
         public EmployeeProfileConfirmationResult ConfirmProfile(EmployeeProfileConfirmationRequest request)
         {
             EmployeeProfileConfirmationRequest normalized = NormalizeRequest(request);
