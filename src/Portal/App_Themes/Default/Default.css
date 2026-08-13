@@ -1,18 +1,24 @@
 /*
-   中文：这是 Web Forms 原生 Default Theme 的历史兼容样式。它提供门户的基础 class，不承担响应式重构、
-   外部资产加载或动态脚本职责；主题覆盖应使用 portal-theme/tab/module/pane 作用域 class。
-   English: This is the legacy-compatible CSS for the native Web Forms Default Theme. It supplies the portal's base
-   classes and does not own responsive redesign, external assets, or dynamic scripts; theme overrides use the
-   portal-theme/tab/module/pane scope classes.
+   <lang>
+     <zh-CN>这是 Web Forms 原生 Default Theme 的历史兼容样式，负责提供门户基础 class；它不承担响应式重构、外部资产加载或动态脚本职责，主题覆盖应使用 portal-theme/tab/module/pane 作用域 class。</zh-CN>
+     <en>This is the legacy-compatible CSS for the native Web Forms Default Theme and supplies the portal's base classes; it does not own responsive redesign, external assets, or dynamic scripts, and theme overrides should use portal-theme/tab/module/pane scope classes.</en>
+   </lang>
 */
 
 /*
-   普通文字字体不随项目打包；优先使用许可证明确的开源字体，
-   未安装时由浏览器回退到通用 sans-serif / monospace 字体。
+   <lang>
+     <zh-CN>普通文字字体不随项目打包；字体栈优先使用许可证明确的开源字体，未安装时由浏览器回退到通用 sans-serif / monospace 字体。</zh-CN>
+     <en>Regular text fonts are not bundled with the project; the font stack prefers clearly licensed open fonts and falls back to generic sans-serif / monospace fonts when they are unavailable.</en>
+   </lang>
 */
 
 
-/* 中文 / English: P7.4.2-E 高风险配置编辑页的宽文本、并排短字段与图片预览样式。 */
+/*
+   <lang>
+     <zh-CN>P7.4.2-E 高风险配置编辑页样式覆盖宽文本、并排短字段与图片预览；这些规则只负责缺省主题下的编辑表单可读性，不承载保存、校验或权限逻辑。</zh-CN>
+     <en>The P7.4.2-E high-risk configuration editor styles cover wide text, side-by-side short fields, and image previews; these rules own only edit-form readability in the default theme and do not carry save, validation, or authorization logic.</en>
+   </lang>
+*/
 textarea.portal-code-textarea {
     min-height: 260px !important;
 }
@@ -65,28 +71,51 @@ textarea.portal-small-textarea {
     }
 }
 
-/* PAGE BACKGROUND */
-
 /*
-   P3.1 supplies portal-theme-{name}, portal-tab-{id}, portal-module-{id}, and portal-pane-{name}
-   scope classes. Theme packages may target these classes with IE9-compatible CSS; they must not rely
-   on remote resources, theme scripts, CSS variables, Grid, or Flexbox.
-   P3.1 提供 portal-theme-{name}、portal-tab-{id}、portal-module-{id}、portal-pane-{name} 作用域 class。
-   主题包可用兼容 IE9 的 CSS 定向这些 class；不得依赖远程资源、主题脚本、CSS 变量、Grid 或 Flexbox。
+   <lang>
+     <zh-CN>页面背景区段保留旧门户页头和正文底色基线，是 Default Theme 的最低兼容层。</zh-CN>
+     <en>The page-background section preserves the legacy portal header and body color baseline as the lowest compatibility layer of the Default Theme.</en>
+   </lang>
 */
 
-/* background color for the header at the top of the page  */
+/*
+   <lang>
+     <zh-CN>P3.1 提供 portal-theme-{name}、portal-tab-{id}、portal-module-{id} 和 portal-pane-{name} 作用域 class；主题包可用兼容 IE9 的 CSS 定向这些 class，但不得依赖远程资源、主题脚本、CSS 变量、Grid 或 Flexbox。</zh-CN>
+     <en>P3.1 supplies portal-theme-{name}, portal-tab-{id}, portal-module-{id}, and portal-pane-{name} scope classes; theme packages may target them with IE9-compatible CSS, but must not rely on remote resources, theme scripts, CSS variables, Grid, or Flexbox.</en>
+   </lang>
+*/
+
+/*
+   <lang>
+     <zh-CN>页头背景色为旧表格页头提供可见背景，不改变页头内容、导航或主题资源加载顺序。</zh-CN>
+     <en>The header background color provides a visible background for the legacy table header without changing header content, navigation, or theme-resource loading order.</en>
+   </lang>
+*/
 
 .HeadBg { background-color: darkred; }
 
-/* background color for the content part of the pages */
+/*
+   <lang>
+     <zh-CN>正文背景色定义缺省主题的页面底色回退，确保未命中现代主题作用域时仍保持可读。</zh-CN>
+     <en>The body background color defines the default theme's page-color fallback so pages remain readable when no modern theme scope applies.</en>
+   </lang>
+*/
 
 Body { background-color: white; }
 
 
-/* PAGE BANNER */
-/* 中文：站点标题、站点链接和 Tab 由 DesktopPortalBanner.ascx 渲染。English: DesktopPortalBanner.ascx renders the site title, site links, and Tabs. */
-/* style for the text of the site title */
+/*
+   <lang>
+     <zh-CN>页面 Banner 区段对应 `DesktopPortalBanner.ascx` 输出的站点标题、站点链接和 Tab；样式只描述旧标记的视觉层，不改变导航数据或权限。</zh-CN>
+     <en>The page-banner section maps to site title, site links, and tabs emitted by `DesktopPortalBanner.ascx`; styles describe only the visual layer for legacy markup and do not change navigation data or authorization.</en>
+   </lang>
+*/
+/*
+   <lang>
+     <zh-CN>站点标题文本样式保持旧门户品牌位的字体、字号和强调方式。</zh-CN>
+     <en>The site-title text style preserves the font, size, and emphasis for the legacy portal brand area.</en>
+   </lang>
+*/
 
 .SiteTitle {
     color: #cccc99;
@@ -95,21 +124,36 @@ Body { background-color: white; }
     font-weight: bold;
 }
 
-/* background/border colors for the selected tab */
+/*
+   <lang>
+     <zh-CN>选中 Tab 的背景和边框色用于旧表格 Tab 条的活动项识别，不改变 Tab 顺序或访问角色。</zh-CN>
+     <en>The selected-tab background and border colors identify the active item in the legacy table-based tab bar without changing tab order or access roles.</en>
+   </lang>
+*/
 
 .TabBg {
     background-color: white;
     border-color: white;
 }
 
-/* background/border colors for the unselected tabs */
+/*
+   <lang>
+     <zh-CN>未选中 Tab 背景和边框色提供旧导航的非活动态回退，保持与选中态区分。</zh-CN>
+     <en>The unselected-tab background and border colors provide the inactive-state fallback for legacy navigation and keep it distinct from the selected state.</en>
+   </lang>
+*/
 
 .OtherTabsBg {
     background-color: dimgray;
     border-color: black;
 }
 
-/* text style for the selected tab */
+/*
+   <lang>
+     <zh-CN>选中 Tab 文本样式强调当前导航项，仅影响旧 Banner 输出的视觉状态。</zh-CN>
+     <en>The selected-tab text style emphasizes the current navigation item and affects only the visual state emitted by the legacy banner.</en>
+   </lang>
+*/
 
 .SelectedTab {
     color: DarkRed;
@@ -118,7 +162,12 @@ Body { background-color: white; }
     font-weight: bold
 }
 
-/* text style for the unselected tabs */
+/*
+   <lang>
+     <zh-CN>未选中 Tab 文本样式保持其他导航项可读并避免默认下划线干扰旧 Tab 条。</zh-CN>
+     <en>The unselected-tab text style keeps other navigation items readable and avoids default underlines interfering with the legacy tab bar.</en>
+   </lang>
+*/
 
 .OtherTabs {
     color: gainsboro;
@@ -128,7 +177,12 @@ Body { background-color: white; }
     text-decoration: none;
 }
 
-/* hyperlink styles of the unselected tabs */
+/*
+   <lang>
+     <zh-CN>未选中 Tab 的超链接伪类统一颜色和 hover 行为，确保旧浏览器下四种链接状态一致。</zh-CN>
+     <en>The unselected-tab hyperlink pseudo-classes unify color and hover behavior so all four link states remain consistent in legacy browsers.</en>
+   </lang>
+*/
 
 A.OtherTabs:link {
     color: #eeeeee;
@@ -150,7 +204,12 @@ A.OtherTabs:hover {
     text-decoration: underline;
 }
 
-/* text style for the site links (at extreme top-right of header) */
+/*
+   <lang>
+     <zh-CN>站点链接文本样式作用于页头右上角的辅助链接，保持其低层级但可识别。</zh-CN>
+     <en>The site-link text style applies to auxiliary links in the top-right header, keeping them lower in hierarchy but still recognizable.</en>
+   </lang>
+*/
 
 .SiteLink {
     font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
@@ -158,7 +217,12 @@ A.OtherTabs:hover {
     font-weight: bold
 }
 
-/* hyperlink style for the site links */
+/*
+   <lang>
+     <zh-CN>站点链接伪类样式统一页头辅助链接的常规、访问、活动和 hover 状态。</zh-CN>
+     <en>The site-link pseudo-class styles unify normal, visited, active, and hover states for auxiliary header links.</en>
+   </lang>
+*/
 
 A.SiteLink:link {
     color: white;
@@ -180,7 +244,12 @@ A.SiteLink:hover {
     text-decoration: underline;
 }
 
-/* style for separator between site links */
+/*
+   <lang>
+     <zh-CN>Accent 分隔符为页头链接之间提供轻量视觉分隔，不表达告警或业务状态。</zh-CN>
+     <en>The Accent separator provides lightweight visual separation between header links and does not encode alerts or business state.</en>
+   </lang>
+*/
 
 .Accent {
     color: red;
@@ -189,8 +258,18 @@ A.SiteLink:hover {
 
 
 
-/* MODULE-SPECIFIC */
-/* text style for reading messages in Discussion */
+/*
+   <lang>
+     <zh-CN>模块特定区段保留旧内容模块共用 class 的基础观感，避免在缺省主题下回退到浏览器默认样式。</zh-CN>
+     <en>The module-specific section preserves baseline presentation for legacy content-module classes so the default theme does not fall back to browser defaults.</en>
+   </lang>
+*/
+/*
+   <lang>
+     <zh-CN>Discussion 消息文本样式提供阅读背景和旧字号回退，供讨论内容列表保持可读。</zh-CN>
+     <en>The Discussion message text style provides a reading background and legacy font-size fallback so discussion lists remain readable.</en>
+   </lang>
+*/
 
 .Message {
     background-color: #eeeeee;
@@ -200,7 +279,12 @@ A.SiteLink:hover {
     font-weight: normal;
 }
 
-/* style of item titles by Announcements and events */
+/*
+   <lang>
+     <zh-CN>Announcements 和 Events 的项目标题样式复用旧 ItemTitle class，保持列表标题强调一致。</zh-CN>
+     <en>The Announcements and Events item-title style reuses the legacy ItemTitle class to keep list-title emphasis consistent.</en>
+   </lang>
+*/
 
 .ItemTitle {
     color: darkred;
@@ -211,8 +295,18 @@ A.SiteLink:hover {
 
 
 
-/* GENERAL */
-/* style for module titles */
+/*
+   <lang>
+     <zh-CN>General 区段定义旧模块、编辑页和后台页共用的基础文字、标题和按钮 class，是缺省主题的兼容核心。</zh-CN>
+     <en>The General section defines shared legacy classes for module text, edit pages, and admin pages, forming the compatibility core of the default theme.</en>
+   </lang>
+*/
+/*
+   <lang>
+     <zh-CN>模块标题样式用于旧模块标题行，保持与 DesktopModuleTitle 输出的 Head class 兼容。</zh-CN>
+     <en>The module-title style is used by legacy module title rows and remains compatible with the Head class emitted by DesktopModuleTitle.</en>
+   </lang>
+*/
 
 .Head {
     color: #666644;
@@ -221,7 +315,12 @@ A.SiteLink:hover {
     font-weight: normal;
 }
 
-/* style of item titles on edit and admin pages */
+/*
+   <lang>
+     <zh-CN>编辑页和后台页项目标题样式用于表单小标题和分组标题，避免它们与正文混在一起。</zh-CN>
+     <en>The edit/admin item-title style is used for form subtitles and group headings so they do not blend into body text.</en>
+   </lang>
+*/
 
 .SubHead {
     color: darkred;
@@ -230,7 +329,12 @@ A.SiteLink:hover {
     font-weight: bold;
 }
 
-/* module title style used instead of Head for compact rendering by QuickLinks and Signin modules */
+/*
+   <lang>
+     <zh-CN>SubSubHead 作为 QuickLinks 与 Signin 的紧凑标题样式，避免在小模块中使用过大的 Head 标题。</zh-CN>
+     <en>SubSubHead acts as the compact title style for QuickLinks and Signin, avoiding oversized Head titles in small modules.</en>
+   </lang>
+*/
 
 .SubSubHead {
     color: black;
@@ -239,7 +343,12 @@ A.SiteLink:hover {
     font-weight: bold;
 }
 
-/* text style used for most text rendered by modules */
+/*
+   <lang>
+     <zh-CN>Normal class 是旧模块大多数正文文本的字体和颜色回退，保持普通内容可读。</zh-CN>
+     <en>The Normal class is the font and color fallback for most legacy module body text, keeping ordinary content readable.</en>
+   </lang>
+*/
 
 .Normal {
     font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
@@ -248,7 +357,12 @@ A.SiteLink:hover {
     line-height: 12px
 }
 
-/* text style used for textboxes in the admin and edit pages, for Nav compatibility */
+/*
+   <lang>
+     <zh-CN>NormalTextBox 为后台和编辑页输入框提供旧浏览器兼容文字样式，尤其保留历史 Nav 兼容边界。</zh-CN>
+     <en>NormalTextBox provides legacy-browser-compatible text styling for admin and edit-page inputs, especially preserving the historical Nav compatibility boundary.</en>
+   </lang>
+*/
 
 .NormalTextBox {
     font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
@@ -269,7 +383,12 @@ A.SiteLink:hover {
     font-weight: bold
 }
 
-/* text style for buttons and link buttons used in the portal admin pages */
+/*
+   <lang>
+     <zh-CN>CommandButton 文本样式统一后台页按钮和链接按钮的文字外观，不承担点击授权或写入确认。</zh-CN>
+     <en>The CommandButton text style unifies text appearance for admin-page buttons and link buttons, without owning click authorization or write confirmation.</en>
+   </lang>
+*/
 
 .CommandButton {
     font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", sans-serif;
@@ -277,7 +396,12 @@ A.SiteLink:hover {
     font-weight: normal;
 }
 
-/* hyperlink style for buttons and link buttons used in the portal admin pages */
+/*
+   <lang>
+     <zh-CN>CommandButton 超链接伪类样式保持后台动作链接的访问状态一致，避免旧浏览器状态色破坏操作识别。</zh-CN>
+     <en>The CommandButton hyperlink pseudo-class styles keep admin action links consistent across link states and prevent legacy browser state colors from obscuring action identity.</en>
+   </lang>
+*/
 
 A.CommandButton:link {
     color: darkred;
@@ -302,7 +426,12 @@ A.CommandButton:hover {
 
 
 
-/* GENERIC */
+/*
+   <lang>
+     <zh-CN>Generic 区段提供 P7 之后新增主题化组件在 Default 主题下的回退样式，优先保持可读和可操作。</zh-CN>
+     <en>The Generic section provides fallback styles for P7-era themed components under the Default theme, prioritizing readability and operability.</en>
+   </lang>
+*/
 
 H1 {
     color: #666644;
@@ -405,7 +534,12 @@ HR {
     text-align: left
 }
 
-/* 中文 / English: P7 主题化页面的基础回退组件。 */
+/*
+   <lang>
+     <zh-CN>P7 主题化页面基础回退组件为页壳、容器和通用提示提供缺省视觉，不依赖现代主题变体。</zh-CN>
+     <en>The P7 themed-page fallback components provide default visuals for page shells, containers, and common notices without depending on modern theme variants.</en>
+   </lang>
+*/
 .portal-page-section,
 .portal-detail-card {
     margin: 0 0 18px;
@@ -484,7 +618,12 @@ button.portal-button-secondary {
     color: #12385f;
 }
 
-/* 中文 / English: P7.4.2-C 普通内容编辑页的基础回退样式。 */
+/*
+   <lang>
+     <zh-CN>P7.4.2-C 普通内容编辑页回退样式覆盖表单、提示和危险操作分组，保持缺省主题下的风险分层可见。</zh-CN>
+     <en>The P7.4.2-C standard content editor fallback styles cover forms, notices, and dangerous-action grouping so risk layering remains visible under the Default theme.</en>
+   </lang>
+*/
 .portal-edit-page {
     max-width: 980px;
 }
@@ -607,7 +746,12 @@ button.portal-button-danger:hover {
     line-height: 1.5;
 }
 
-/* 中文 / English: Default 回退主题的后台兼容壳，避免旧 ASCX 在缺省主题下回到裸表格观感。 */
+/*
+   <lang>
+     <zh-CN>Default 回退主题的后台兼容壳为旧 ASCX 提供最小页面框架，避免缺省主题下回到裸表格观感。</zh-CN>
+     <en>The Default-theme admin compatibility shell gives legacy ASCX pages a minimal page frame so they do not fall back to raw table presentation.</en>
+   </lang>
+*/
 .portal-admin-page {
     font-size: 14px;
 }
