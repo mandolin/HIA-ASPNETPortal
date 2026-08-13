@@ -53,6 +53,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>先执行查看/审核权限门禁，再仅在首次请求绑定筛选项和申请列表，避免回发覆盖筛选状态。</zh-CN>
+            //   <en>Apply the view/review gate first, then bind filters and applications only on the first request so postbacks do not overwrite filter state.</en>
+            // </lang>
             if (!EnsureCanViewApplications())
             {
                 return;
@@ -73,6 +77,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void SearchButton_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>搜索回调只重新读取当前状态筛选，不改变审核权限或领域状态。</zh-CN>
+            //   <en>The search callback reloads the current status filter only; it does not change review authorization or domain state.</en>
+            // </lang>
             if (!EnsureCanViewApplications())
             {
                 return;
@@ -89,6 +97,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void ApplicationsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            // <lang>
+            //   <zh-CN>审核命令先通过固定动作白名单和处理权限，再校验申请标识与评论长度。</zh-CN>
+            //   <en>Review commands pass the fixed action allowlist and handling permission before validating the application identifier and comment length.</en>
+            // </lang>
             string actionKey = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
             if (!IsSupportedAction(actionKey))
             {
@@ -109,8 +121,16 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>审核评论来自当前列表行控件，随后按固定上限归一化后交给数据服务。</zh-CN>
+            //   <en>Read the review comment from the current list-row control and normalize it to the fixed limit before calling the data service.</en>
+            // </lang>
             TextBox commentBox = e.Item.FindControl("ReviewCommentTextBox") as TextBox;
             string reviewComment = commentBox == null ? string.Empty : commentBox.Text;
+            // <lang>
+            //   <zh-CN>审核服务负责申请状态和 WorkflowEvent 事实写入，后台页面不自行推断状态。</zh-CN>
+            //   <en>The review service writes application state and WorkflowEvent facts; the page does not infer state locally.</en>
+            // </lang>
             BusinessApplicationResult result = BusinessApplicationDb.ReviewApplication(
                 new BusinessApplicationReviewRequest
                 {
@@ -129,6 +149,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>审核事实成功后记录操作审计，再更新后台待办投影；待办失败不回滚申请状态。</zh-CN>
+            //   <en>Record operation audit after review succeeds, then update the work-item projection; work-item failure does not roll back application state.</en>
+            // </lang>
             PortalOperationAudit.Record(
                 PortalOperationAuditEvents.BusinessModuleCategory,
                 PortalOperationAuditEvents.BusinessApplicationReviewed,
@@ -143,8 +167,18 @@ namespace ASPNET.StarterKit.Portal
             BindApplications();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定后台允许筛选的业务申请状态，并默认定位到已提交状态。</zh-CN>
+        ///   <en>Binds administration-allowed business-application statuses and defaults to submitted applications.</en>
+        /// </lang>
+        /// </summary>
         private void BindStatusFilter()
         {
+            // <lang>
+            //   <zh-CN>筛选项使用稳定状态键，显示值保持现有后台兼容文本。</zh-CN>
+            //   <en>Use stable status keys for filters while preserving the existing administration-compatible display text.</en>
+            // </lang>
             StatusFilterList.Items.Clear();
             StatusFilterList.Items.Add(new ListItem("All", string.Empty));
             StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.Submitted, PortalBusinessApplicationStatuses.Submitted));
@@ -156,8 +190,18 @@ namespace ASPNET.StarterKit.Portal
             StatusFilterList.SelectedValue = PortalBusinessApplicationStatuses.Submitted;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按当前状态筛选读取业务申请并绑定低敏后台展示行。</zh-CN>
+        ///   <en>Loads business applications by the current status filter and binds low-sensitivity administration display rows.</en>
+        /// </lang>
+        /// </summary>
         private void BindApplications()
         {
+            // <lang>
+            //   <zh-CN>数据服务缺失或 Schema 不可用时绑定空集合，不继续读取业务申请数据。</zh-CN>
+            //   <en>Bind an empty collection when the service or schema is unavailable and do not continue reading application data.</en>
+            // </lang>
             if (BusinessApplicationDb == null)
             {
                 ShowUnavailable("Business application data service is not registered.");
@@ -170,6 +214,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>查询使用固定分页上限，展示行只保留申请审核所需低敏字段。</zh-CN>
+            //   <en>Use the fixed page-size limit and keep only the low-sensitivity fields needed for review display.</en>
+            // </lang>
             IList<BusinessApplicationInfo> applications = BusinessApplicationDb.GetAdminApplications(
                 StatusFilterList.SelectedValue,
                 PageSize);
@@ -180,14 +228,30 @@ namespace ASPNET.StarterKit.Portal
                                " applications; count: " + applications.Count.ToString(CultureInfo.InvariantCulture) + ".";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显示后台能力不可用提示并绑定空申请列表。</zh-CN>
+        ///   <en>Displays an unavailable-capability message and binds an empty application list.</en>
+        /// </lang>
+        /// </summary>
         private void ShowUnavailable(string message)
         {
+            // <lang>
+            //   <zh-CN>不可用路径清空旧结果，避免残留数据继续显示。</zh-CN>
+            //   <en>The unavailable path clears the old result so stale data cannot remain visible.</en>
+            // </lang>
             MessageLabel.Text = message ?? string.Empty;
             ResultLabel.Text = string.Empty;
             ApplicationsRepeater.DataSource = Enumerable.Empty<BusinessApplicationAdminRow>();
             ApplicationsRepeater.DataBind();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查业务申请审核或管理员权限以允许查看。</zh-CN>
+        ///   <en>Checks business-application review or administrator permission for viewing.</en>
+        /// </lang>
+        /// </summary>
         private bool EnsureCanViewApplications()
         {
             return PortalAuthorization.EnsureAnyPermission(
@@ -196,6 +260,12 @@ namespace ASPNET.StarterKit.Portal
                 PortalPermissionKeys.BusinessApplicationAdmin);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查业务申请审核或管理员权限以允许处理动作。</zh-CN>
+        ///   <en>Checks business-application review or administrator permission for handling actions.</en>
+        /// </lang>
+        /// </summary>
         private bool EnsureCanHandleApplications()
         {
             return PortalAuthorization.EnsureAnyPermission(
@@ -204,8 +274,18 @@ namespace ASPNET.StarterKit.Portal
                 PortalPermissionKeys.BusinessApplicationAdmin);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将当前认证用户名解析为门户用户标识；缺少身份或服务时返回零。</zh-CN>
+        ///   <en>Resolves the current authenticated name to a Portal user identifier and returns zero when identity or service is unavailable.</en>
+        /// </lang>
+        /// </summary>
         private int GetCurrentUserId()
         {
+            // <lang>
+            //   <zh-CN>审核人标识只通过用户服务解析，不从申请参数或控件值推断。</zh-CN>
+            //   <en>Resolve the reviewer identifier only through the user service; never infer it from application parameters or controls.</en>
+            // </lang>
             string userName = GetCurrentUserName();
             if (string.IsNullOrWhiteSpace(userName) || UsersDb == null)
             {
@@ -216,6 +296,12 @@ namespace ASPNET.StarterKit.Portal
             return user == null ? 0 : user.UserId;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前认证用户名；后台无认证上下文时使用 system 兼容回退。</zh-CN>
+        ///   <en>Reads the current authenticated name and uses the existing system fallback when no authenticated context exists.</en>
+        /// </lang>
+        /// </summary>
         private string GetCurrentUserName()
         {
             return Context != null &&
@@ -226,6 +312,12 @@ namespace ASPNET.StarterKit.Portal
                 : "system";
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把审核结果投影为后台待办完成事件；待办失败不回滚 WorkflowEvent 或申请状态。</zh-CN>
+        ///   <en>Projects a review result into a work-item completion event; failure does not roll back the WorkflowEvent or application state.</en>
+        /// </lang>
+        /// </summary>
         private void TryCompleteWorkItem(long applicationId, string actionKey, string reviewComment)
         {
             // <lang>
@@ -251,8 +343,18 @@ namespace ASPNET.StarterKit.Portal
                 });
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将审核动作映射为待办事件类型。</zh-CN>
+        ///   <en>Maps a review action to a work-item event type.</en>
+        /// </lang>
+        /// </summary>
         private static string MapWorkItemEventType(string actionKey)
         {
+            // <lang>
+            //   <zh-CN>拒绝和退回保持特定事件语义，批准动作回退为批准事件。</zh-CN>
+            //   <en>Preserve specific event semantics for reject and return, with approve as the default approval event.</en>
+            // </lang>
             if (string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal))
             {
                 return PortalWorkItemEventTypes.Rejected;
@@ -266,6 +368,12 @@ namespace ASPNET.StarterKit.Portal
             return PortalWorkItemEventTypes.Approved;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断审核动作是否属于批准、退回或拒绝白名单。</zh-CN>
+        ///   <en>Determines whether a review action belongs to the approve, return, or reject allowlist.</en>
+        /// </lang>
+        /// </summary>
         private static bool IsSupportedAction(string actionKey)
         {
             return string.Equals(actionKey, PortalWorkflowActions.Approve, StringComparison.Ordinal) ||
@@ -273,8 +381,18 @@ namespace ASPNET.StarterKit.Portal
                    string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>裁剪并限制审核输入长度，null 按空字符串处理。</zh-CN>
+        ///   <en>Trims and limits review input length, treating null as an empty string.</en>
+        /// </lang>
+        /// </summary>
         private static string NormalizeInput(string value, int maxLength)
         {
+            // <lang>
+            //   <zh-CN>该 helper 只负责输入边界归一化，不承担权限、状态或持久化职责。</zh-CN>
+            //   <en>This helper performs input-boundary normalization only; authorization, state, and persistence remain elsewhere.</en>
+            // </lang>
             string normalized = (value ?? string.Empty).Trim();
             return normalized.Length <= maxLength ? normalized : normalized.Substring(0, maxLength);
         }
@@ -288,8 +406,18 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class BusinessApplicationAdminRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把业务申请转换为低敏只读后台展示模型。</zh-CN>
+        ///   <en>Converts a business application into a low-sensitivity read-only administration display model.</en>
+        /// </lang>
+        /// </summary>
         internal BusinessApplicationAdminRow(BusinessApplicationInfo application)
         {
+            // <lang>
+            //   <zh-CN>展示行保留审核所需字段，申请正文和审核意见只作为既有展示文本处理。</zh-CN>
+            //   <en>The display row keeps review-required fields while treating body and review comment as existing display text.</en>
+            // </lang>
             ApplicationId = application.ApplicationId;
             ApplicationCode = application.ApplicationCode;
             Title = EmptyToNone(application.Title);
@@ -388,6 +516,12 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public string ReviewText { get; private set; }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将空白展示字段统一转换为占位文本。</zh-CN>
+        ///   <en>Converts blank display fields to a consistent placeholder.</en>
+        /// </lang>
+        /// </summary>
         private static string EmptyToNone(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? "(none)" : value;

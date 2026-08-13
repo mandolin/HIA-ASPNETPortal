@@ -28,8 +28,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>本类初始化 Unity、外置连接串和运行级服务，并处理请求上下文、认证角色和未处理异常。它不是业务授权或配置写入 API；新增全局行为时必须评估启动失败、错误泄漏和所有请求的兼容影响。</zh-CN>
-    ///   <en>This class initializes Unity, external connection strings, and runtime services, and handles request context, authenticated roles, and unhandled errors. It is not a business-authorization or configuration-write API; new global behavior must consider startup failure, error disclosure, and compatibility across every request.</en>
+    ///   <zh-CN>本类初始化 Unity、外置连接串和运行级服务，并处理请求上下文、认证角色和未处理异常。启动阶段可执行连接可用性探针，请求阶段可撤销过期身份票据并重建角色 Cookie；它不是业务授权或配置写入 API。新增全局行为时必须评估启动失败、错误泄漏、身份失效和所有请求的兼容影响。</zh-CN>
+    ///   <en>This class initializes Unity, external connection strings, and runtime services, and handles request context, authenticated roles, and unhandled errors. Startup may probe connection availability; request processing may revoke stale tickets and rebuild the role cookie. This is not a business-authorization or configuration-write API, so new global behavior must consider startup failure, error disclosure, identity revocation, and compatibility across every request.</en>
     /// </lang>
     /// </remarks>
     public class Global : HttpApplication, IContainerAccessor
@@ -75,6 +75,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Event data.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该方法会读取配置、注册依赖并触发受控 SQL 可用性检查；异常继续沿既有 ASP.NET 启动失败路径传播。它不执行业务迁移、修复数据或记录连接串秘密，调用方不能把启动完成误解为页面授权已完成。</zh-CN>
+        ///   <en>This method reads configuration, registers dependencies, and performs the existing controlled SQL-availability check; exceptions continue through the established ASP.NET startup-failure path. It does not run business migrations, repair data, or log connection-string secrets, and startup completion must not be treated as page authorization.</en>
+        /// </lang>
+        /// </remarks>
         protected void Application_Start(object sender, EventArgs e)
         {
             // <lang>
@@ -124,6 +130,10 @@ namespace ASPNET.StarterKit.Portal
             PortalDiagnostics.Info(
                 "Startup",
                 $"Loaded connection string '{ExternalConnectionStringLoader.LogicalConnectionStringName}' with provider '{portalConnectionString.ProviderInvariantName}' from {portalConnectionString.Source}; ConfigFile={portalConnectionString.ConfigFile}");
+            // <lang>
+            //   <zh-CN>该探针只验证当前启动配置能否建立最小连接；它不改变业务状态，异常仍由启动流程处理。</zh-CN>
+            //   <en>This probe only verifies that the current startup configuration can open the minimal connection; it does not change business state, and failures remain handled by the startup flow.</en>
+            // </lang>
             PortalDiagnostics.CheckSqlConnection(portalConnectionString.ConnectionString);
             RegisterPasswordPolicyOptionsProvider();
 
@@ -180,6 +190,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Event data.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>关闭阶段只释放当前进程持有的 Unity 容器；启动失败时容器可能为空，释放操作必须保持幂等且不重新解析服务。</zh-CN>
+        ///   <en>Shutdown only releases the Unity container held by the current process; startup may have left it null, so disposal must remain idempotent and must not resolve services again.</en>
+        /// </lang>
+        /// </remarks>
         protected void Application_End(object sender, EventArgs e)
         {
             // <lang>
@@ -214,6 +230,12 @@ namespace ASPNET.StarterKit.Portal
         /// <lang>
         ///   <zh-CN>Web Forms 通常先由 ASP.NET 创建页面和控件，再进入项目代码；因此构造函数注入在旧页面里不可用。本方法把 Unity 的 <c>BuildUp</c> 限定为“补充已注册属性依赖”的兼容入口，不负责创建控件，也不改变控件生命周期。</zh-CN>
         ///   <en>Web Forms usually lets ASP.NET create pages and controls before project code runs, so constructor injection is unavailable in legacy pages. This method limits Unity <c>BuildUp</c> to the compatibility role of filling registered property dependencies; it does not create controls or change their lifecycle.</en>
+        /// </lang>
+        /// </remarks>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该兼容入口假定容器已由启动阶段建立，并把异常和生命周期责任保留给既有 Unity/Web Forms 调用方；它不创建控件、不提供授权判断，也不吞掉未注册依赖错误。</zh-CN>
+        ///   <en>This compatibility entry assumes the container was created during startup and leaves exception and lifecycle responsibility with the existing Unity/Web Forms caller; it does not create controls, perform authorization, or hide unregistered-dependency errors.</en>
         /// </lang>
         /// </remarks>
         public static void BuildItemWithCurrentContext<T>(Control ctrl)
@@ -252,6 +274,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (IsGenericErrorPageRequest(Request))
             {
+                // <lang>
+                //   <zh-CN>通用错误页必须跳过门户设置和文化构造，避免错误处理链再次触发同一异常。</zh-CN>
+                //   <en>The generic error page must bypass Portal settings and culture construction so the error-handling path does not trigger the same failure again.</en>
+                // </lang>
                 return;
             }
 
@@ -267,6 +293,10 @@ namespace ASPNET.StarterKit.Portal
             var modulesConfig = Container.Resolve<IModulesDb>();
             var moduleDefConfig = Container.Resolve<IModuleDefsDb>();
 
+            // <lang>
+            //   <zh-CN>四个数据依赖只用于构造当前请求的 PortalSettings 快照；此处不执行页面级权限判断，具体页面仍须自行授权。</zh-CN>
+            //   <en>The four data dependencies only compose the current request's PortalSettings snapshot; this stage does not perform page-level authorization, which remains the page's responsibility.</en>
+            // </lang>
             // <lang>
             //   <zh-CN>PortalSettings 是旧门户请求级对象图的核心；先集中构造，再通过 PortalContext 挂入当前请求。</zh-CN>
             //   <en>PortalSettings is the core request-level object graph of the legacy portal; build it centrally and attach it to the current request through PortalContext.</en>
@@ -343,6 +373,10 @@ namespace ASPNET.StarterKit.Portal
                 }
                 else
                 {
+                    // <lang>
+                    //   <zh-CN>Cookie 和浏览器首选语言都不可用时，使用固定的 en-US 线程文化；该回退不写回 Cookie 或用户资料。</zh-CN>
+                    //   <en>When neither the cookie nor the browser preference is usable, use a fixed en-US thread culture; this fallback does not write a cookie or user profile.</en>
+                    // </lang>
                     SetCulture("en-US"); // 设置默认语言
                 }
             }
@@ -372,8 +406,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Event data.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>异常先进入诊断净化链，再按通用错误页、显式详细错误开关和本地请求条件决定是否保留 ASP.NET 详细响应。重定向只携带受控事件编号，不把异常对象或连接串写回响应。</zh-CN>
+        ///   <en>The exception first enters the diagnostic-sanitization path; the handler then decides whether to retain ASP.NET details based on the generic-error target, the explicit detailed-error switch, and local-request status. Redirects carry only a controlled event id and never write the exception object or connection string to the response.</en>
+        /// </lang>
+        /// </remarks>
         protected void Application_Error(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>Server.GetLastError 可能为空或包含敏感异常；统一交给 PortalDiagnostics.Unhandled 生成低敏事件编号。</zh-CN>
+            //   <en>Server.GetLastError may be null or contain sensitive details; pass it to PortalDiagnostics.Unhandled to obtain a low-sensitivity event id.</en>
+            // </lang>
             Exception exception = Server.GetLastError();
             string eventId = PortalDiagnostics.Unhandled(exception, Context);
 
@@ -422,6 +466,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Event data.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>安全版本读取失败、返回 0 或与票据不一致时统一撤销当前认证上下文；角色 Cookie 只作为可重建的缓存，不是独立授权事实。</zh-CN>
+        ///   <en>When the security-version read fails, returns 0, or disagrees with the ticket, revoke the current authentication context uniformly; the role cookie is only a rebuildable cache, not an independent authorization fact.</en>
+        /// </lang>
+        /// </remarks>
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)
@@ -432,6 +482,10 @@ namespace ASPNET.StarterKit.Portal
                 long ticketSecurityVersion;
                 long databaseSecurityVersion = usersDb.GetSecurityVersionByUserName(Context.User.Identity.Name);
 
+                // <lang>
+                //   <zh-CN>比较票据和数据库安全版本先于角色 Cookie 读取；不一致时必须先注销，不能用缓存角色继续当前请求。</zh-CN>
+                //   <en>Compare the ticket and database security versions before reading the role cookie; on mismatch, sign out first and never continue the request with cached roles.</en>
+                // </lang>
                 if (!PortalAuthenticationService.TryReadSecurityVersion(formsIdentity, out ticketSecurityVersion) ||
                     ticketSecurityVersion != databaseSecurityVersion)
                 {
@@ -455,6 +509,10 @@ namespace ASPNET.StarterKit.Portal
                 // </lang>
                 if (!PortalAuthenticationCookies.TryReadRoles(Request, databaseSecurityVersion, out roles))
                 {
+                    // <lang>
+                    //   <zh-CN>角色 Cookie 缺失或无效时从数据访问层重新读取；该回退仍不替代当前页面的权限检查。</zh-CN>
+                    //   <en>When the role cookie is missing or invalid, reload roles through the data-access layer; this fallback still does not replace the current page's permission check.</en>
+                    // </lang>
                     // <lang>
                     //   <zh-CN>只将角色名称写入加密票据，不写入密码、用户资料或其他敏感业务数据。</zh-CN>
                     //   <en>Write role names only into the encrypted ticket, never passwords, profile data, or other sensitive business data.</en>
@@ -500,8 +558,8 @@ namespace ASPNET.StarterKit.Portal
         public static string GetApplicationPath(HttpRequest request)
         {
             // <lang>
-            //   <zh-CN>旧代码经常把返回值直接拼进站内 URL；统一去除末尾斜杠可减少根站点和虚拟目录差异。</zh-CN>
-            //   <en>Legacy code often concatenates this value into site-local URLs; removing the trailing slash consistently reduces root-site and virtual-directory differences.</en>
+            //   <zh-CN>旧代码经常把返回值直接拼进站内 URL；统一去除末尾斜杠可减少根站点和虚拟目录差异。空请求按既有实现返回空字符串，不承担 URL 白名单或外跳校验。</zh-CN>
+            //   <en>Legacy code often concatenates this value into site-local URLs; removing the trailing slash reduces root-site and virtual-directory differences. A null request returns the existing empty-string fallback; URL allowlisting and external-redirect validation remain outside this helper.</en>
             // </lang>
             return request.ApplicationPath?.TrimEnd('/') ?? "";
         }
@@ -526,6 +584,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static bool IsGenericErrorPageRequest(HttpRequest request)
         {
+            // <lang>
+            //   <zh-CN>只比较 ASP.NET 应用相对执行路径且忽略大小写；查询串和事件编号不参与判断，避免错误页链接参数改变全局短路语义。</zh-CN>
+            //   <en>Compare only the ASP.NET application-relative execution path case-insensitively; query strings and event ids do not affect the decision, so error-page parameters cannot change the global short-circuit semantics.</en>
+            // </lang>
             string appRelativePath = request?.AppRelativeCurrentExecutionFilePath;
             return string.Equals(appRelativePath, "~/GenericErrorPage.aspx", StringComparison.OrdinalIgnoreCase);
         }

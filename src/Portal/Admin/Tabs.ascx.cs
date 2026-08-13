@@ -30,7 +30,20 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected readonly List<TabSettings> PortalTabs = new List<TabSettings>();
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的 Tab 回跳标识。</zh-CN>
+        ///   <en>Optional Tab identifier preserved for return navigation.</en>
+        /// </lang>
+        /// </summary>
         private int tabId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的 Tab 列表索引回跳参数。</zh-CN>
+        ///   <en>Optional Tab-list index preserved for return navigation.</en>
+        /// </lang>
+        /// </summary>
         private int tabIndex;
 
         /// <summary>
@@ -89,11 +102,19 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>统一初始化负责权限、导航参数和当前门户 Tab 快照，避免各事件处理器形成不同门禁。</zh-CN>
+            //   <en>Centralized initialization owns permission, navigation parameters, and the current portal Tab snapshot so event handlers share one gate.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>仅首次请求绑定列表，保留回发时的选中项和控件状态。</zh-CN>
+            //   <en>Bind the list only on the initial request, preserving the selected item and control state during postback.</en>
+            // </lang>
             if (!Page.IsPostBack)
             {
                 tabList.DataBind();
@@ -120,6 +141,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void UpDown_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>排序命令只接受受控的 up/down 值，并要求选中项通过列表与快照交叉校验。</zh-CN>
+            //   <en>Ordering accepts only the controlled up/down commands and requires the selected item to cross-check against the list snapshot.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
@@ -134,6 +159,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>先调整内存顺序，再由 OrderTabs 写回稳定的奇数步长并记录低敏审计。</zh-CN>
+            //   <en>Adjust the in-memory order first, then let OrderTabs persist a stable odd-step sequence and record a low-sensitivity audit.</en>
+            // </lang>
             selectedTab.TabOrder += button.CommandName == "down" ? 3 : -3;
             try
             {
@@ -149,6 +178,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>排序失败只展示事件编号，不回显异常或 Tab 资料。</zh-CN>
+                //   <en>On ordering failure, expose only the event identifier rather than the exception or Tab data.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.Tabs.Order",
                     "Ordering a Tab failed. TabId=" + selectedTab.TabId,
@@ -178,6 +211,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void DeleteBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>删除前复用统一初始化和选中项校验，并阻止删除受保护的核心后台 Tab。</zh-CN>
+            //   <en>Reuse centralized initialization and selection validation before deletion, and block deletion of the protected administration Tab.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
@@ -198,6 +235,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>先统计关联模块实例，再执行 Tab 删除、列表重排和低敏审计，保持操作语义可追踪。</zh-CN>
+                //   <en>Count related module instances before deleting the Tab, reordering the list, and recording a traceable low-sensitivity audit.</en>
+                // </lang>
                 int moduleCount = ModulesConfig.GetModulesByTab(selectedTab.TabId).Count();
                 TabsConfig.DeleteTab(selectedTab.TabId);
                 PortalTabs.Remove(selectedTab);
@@ -213,6 +254,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>删除失败不吞异常，向用户仅返回事件编号。</zh-CN>
+                //   <en>Do not swallow deletion failures; return only the event identifier to the user.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.Tabs.Delete",
                     "Deleting a Tab failed. TabId=" + selectedTab.TabId,
@@ -242,6 +287,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void AddTab_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>创建入口只产生默认公开 Tab，并沿用既有布局设置页和安全回跳策略。</zh-CN>
+            //   <en>The creation entry produces only a default public Tab and reuses the existing layout page and safe-return policy.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
@@ -249,6 +298,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>新增后立即纳入当前快照、规范排序并记录创建审计，再导航到已验证的布局页。</zh-CN>
+                //   <en>After creation, add the Tab to the current snapshot, normalize ordering, record the audit, and navigate to the verified layout page.</en>
+                // </lang>
                 PortalSettings portalSettings = PortalContext.GetPortalSettings();
                 int newTabId = TabsConfig.AddTab(portalSettings.PortalId, "New Tab", 999);
                 ITabItem newTab = TabsConfig.GetSingleTab(newTabId);
@@ -267,6 +320,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>创建失败只保留事件编号提示，避免把底层异常暴露到页面。</zh-CN>
+                //   <en>On creation failure, show only the event identifier and avoid exposing the underlying exception.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.Tabs.Add",
                     "Adding a Tab failed.",
@@ -296,6 +353,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void EditBtn_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>编辑入口要求选中项来自已验证快照，并只通过安全导航策略进入布局页。</zh-CN>
+            //   <en>The edit entry requires a selection from the verified snapshot and enters the layout page only through the safe-navigation policy.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
@@ -315,6 +376,10 @@ namespace ASPNET.StarterKit.Portal
 
         private bool TryInitializeRequest()
         {
+            // <lang>
+            //   <zh-CN>权限和两个可选导航参数必须全部通过后，才读取门户 Tab 快照。</zh-CN>
+            //   <en>Read the portal Tab snapshot only after permission and both optional navigation parameters pass validation.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.PortalTabsEdit) ||
                 !TryReadOptionalPositiveParameter("tabid", out tabId) ||
                 !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
@@ -322,12 +387,20 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>快照来自当前门户桌面 Tab 集合；后续选中项和排序都基于这一受控集合。</zh-CN>
+            //   <en>The snapshot comes from the current portal desktop Tab collection; later selection and ordering operate on this controlled set.</en>
+            // </lang>
             PortalTabs.Clear();
             foreach (ITabItem tab in PortalContext.GetPortalSettings().DesktopTabs)
             {
                 PortalTabs.Add(new TabSettings(tab));
             }
 
+            // <lang>
+            //   <zh-CN>将核心后台 Tab 固定到排序末端，避免普通 Tab 操作改变其兼容位置。</zh-CN>
+            //   <en>Keep the core administration Tab at the end so ordinary Tab operations cannot change its compatibility position.</en>
+            // </lang>
             EnsureCoreAdministrationTabLast();
             return true;
         }
@@ -335,6 +408,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>缺失参数保持兼容默认值 0；提供的值必须是正整数。</zh-CN>
+            //   <en>Keep the compatibility default of 0 when absent; a supplied value must be a positive integer.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -346,6 +423,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法正整数参数直接进入拒绝页，不把原始输入带入后续地址。</zh-CN>
+            //   <en>Route invalid positive-integer input to the denied page without carrying the raw value into later URLs.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -353,6 +434,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>索引参数允许零，但仍必须通过非负整数策略。</zh-CN>
+            //   <en>The index permits zero but must still pass the non-negative-integer policy.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -364,6 +449,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法索引不回退为默认值，直接阻断导航。</zh-CN>
+            //   <en>Do not fall back to a default for an invalid index; block navigation directly.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -371,11 +460,19 @@ namespace ASPNET.StarterKit.Portal
         private bool TryGetSelectedTab(out TabSettings selectedTab)
         {
             selectedTab = null;
+            // <lang>
+            //   <zh-CN>先检查控件索引、快照范围和选中项存在性，拒绝越界或缺失的回发状态。</zh-CN>
+            //   <en>Check the control index, snapshot bounds, and selected item before accepting postback state.</en>
+            // </lang>
             if (tabList.SelectedIndex < 0 || tabList.SelectedIndex >= PortalTabs.Count || tabList.SelectedItem == null)
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>列表值必须是正整数，并与同索引快照项的真实 TabId 一致。</zh-CN>
+            //   <en>The list value must be a positive integer matching the real TabId of the snapshot item at the same index.</en>
+            // </lang>
             int selectedTabId;
             if (!PortalNavigationPolicy.TryReadPositiveInt32(tabList.SelectedItem.Value, out selectedTabId))
             {
@@ -394,10 +491,18 @@ namespace ASPNET.StarterKit.Portal
 
         private void OrderTabs()
         {
+            // <lang>
+            //   <zh-CN>排序前再次固定核心后台 Tab，随后以奇数步长写回全部 Tab 的稳定顺序。</zh-CN>
+            //   <en>Fix the core administration Tab again before writing a stable odd-step order for every Tab.</en>
+            // </lang>
             EnsureCoreAdministrationTabLast();
             int order = 1;
             foreach (TabSettings tab in PortalTabs)
             {
+                // <lang>
+                //   <zh-CN>每个写回只更新顺序字段，不在排序流程中改变 Tab 名称、权限或模块内容。</zh-CN>
+                //   <en>Each write-back updates only ordering; the sort flow does not change Tab names, permissions, or module content.</en>
+                // </lang>
                 tab.TabOrder = order;
                 order += 2;
                 TabsConfig.UpdateTabOrder(tab.TabId, tab.TabOrder);
@@ -406,6 +511,10 @@ namespace ASPNET.StarterKit.Portal
 
         private void EnsureCoreAdministrationTabLast()
         {
+            // <lang>
+            //   <zh-CN>按受保护名称识别核心后台 Tab，并将其排序值提升为最大值后再排序。</zh-CN>
+            //   <en>Identify the core administration Tab by its protected name, assign the maximum order, then sort.</en>
+            // </lang>
             TabSettings administrationTab = PortalTabs.FirstOrDefault(tab =>
                 PortalAdministrationPolicy.IsProtectedAdministrationTabName(tab.TabName));
             if (administrationTab != null)
@@ -418,11 +527,19 @@ namespace ASPNET.StarterKit.Portal
 
         private void RedirectToPortalHome()
         {
+            // <lang>
+            //   <zh-CN>操作完成后只通过安全回跳策略返回门户首页。</zh-CN>
+            //   <en>After an operation, return to the portal home only through the safe-return policy.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/DesktopDefault.aspx"));
         }
 
         private void ShowMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>所有提示先进行 HTML 编码，避免旧控件把诊断或输入内容当作标记输出。</zh-CN>
+            //   <en>HTML-encode every message so diagnostics or input cannot be emitted as markup by the legacy control.</en>
+            // </lang>
             Message.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }

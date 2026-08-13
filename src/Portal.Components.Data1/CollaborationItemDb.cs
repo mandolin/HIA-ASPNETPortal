@@ -1123,10 +1123,34 @@ WHERE [Item].[ItemId] = @ItemId",
             return new SqlParameter(name, value.HasValue ? (object)value.Value : DBNull.Value);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>数据库状态动作批次返回的最小事项写入结果。</zh-CN>
+        ///   <en>Minimal item-write result returned by the database state-action batch.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该类型只承载批次明确返回的标识和编码，供调用方区分实际更新与零行并发失败；它不是新的授权来源，也不包含数据库异常详情。</zh-CN>
+        ///   <en>This type carries only the identifier and code explicitly returned by the batch so callers can distinguish an actual update from a zero-row concurrency failure; it is not an authorization source and contains no database exception detail.</en>
+        /// </lang>
+        /// </remarks>
         private sealed class CollaborationItemWriteRow
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>批次实际更新的协同事项标识。</zh-CN>
+            ///   <en>Identifier of the collaboration item actually updated by the batch.</en>
+            /// </lang>
+            /// </summary>
             public long ItemId { get; set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>批次实际更新的稳定事项编码。</zh-CN>
+            ///   <en>Stable item code of the collaboration item actually updated by the batch.</en>
+            /// </lang>
+            /// </summary>
             public string ItemCode { get; set; }
         }
 
@@ -1138,6 +1162,36 @@ WHERE [Item].[ItemId] = @ItemId",
         /// </summary>
         private sealed class CollaborationItemActorAuthorization
         {
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>创建一次服务端身份复核后的最小动作人授权快照。</zh-CN>
+            ///   <en>Creates a minimal actor-authorization snapshot after server-side identity revalidation.</en>
+            /// </lang>
+            /// </summary>
+            /// <param name="actorUserId">
+            /// <l>
+            ///   <zh-CN>服务端重新解析得到的门户用户标识。</zh-CN>
+            ///   <en>Portal-user identifier re-resolved by the server.</en>
+            /// </l>
+            /// </param>
+            /// <param name="actorName">
+            /// <l>
+            ///   <zh-CN>经长度限制的服务端显示名称。</zh-CN>
+            ///   <en>Server-confirmed display name after length limiting.</en>
+            /// </l>
+            /// </param>
+            /// <param name="permissionKeys">
+            /// <l>
+            ///   <zh-CN>当前用户的去空、去重权限键快照。</zh-CN>
+            ///   <en>Current user's non-empty, de-duplicated permission-key snapshot.</en>
+            /// </l>
+            /// </param>
+            /// <param name="isAdministrator">
+            /// <l>
+            ///   <zh-CN>服务端按角色或协同管理员权限计算出的管理员标记。</zh-CN>
+            ///   <en>Administrator flag computed by the server from roles or collaboration-admin permission.</en>
+            /// </l>
+            /// </param>
             public CollaborationItemActorAuthorization(int actorUserId, string actorName, string[] permissionKeys, bool isAdministrator)
             {
                 ActorUserId = actorUserId;
@@ -1146,12 +1200,36 @@ WHERE [Item].[ItemId] = @ItemId",
                 IsAdministrator = isAdministrator;
             }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>服务端确认的门户用户标识。</zh-CN>
+            ///   <en>Server-confirmed portal-user identifier.</en>
+            /// </lang>
+            /// </summary>
             public int ActorUserId { get; private set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>用于事件和诊断低敏展示的服务端用户名称。</zh-CN>
+            ///   <en>Server-confirmed user name for low-sensitivity event and diagnostic display.</en>
+            /// </lang>
+            /// </summary>
             public string ActorName { get; private set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>本次授权复核得到的权限键快照。</zh-CN>
+            ///   <en>Permission-key snapshot produced by this authorization recheck.</en>
+            /// </lang>
+            /// </summary>
             public string[] PermissionKeys { get; private set; }
 
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>服务端计算的协同事项管理员标记。</zh-CN>
+            ///   <en>Server-computed collaboration-item administrator flag.</en>
+            /// </lang>
+            /// </summary>
             public bool IsAdministrator { get; private set; }
         }
     }

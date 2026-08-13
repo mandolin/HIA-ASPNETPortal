@@ -64,6 +64,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>先校验正整数文档标识，再检查内容和声明长度；任何不满足条件的路径统一返回 404。</zh-CN>
+            //   <en>Validate a positive document identifier first, then verify content and declared length; every invalid path returns the common 404.</en>
+            // </lang>
             int documentId;
             if (!int.TryParse(Request.Params["DocumentId"], out documentId) || documentId <= 0)
             {
@@ -71,6 +75,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>文档内容只通过数据服务读取，不从请求参数推断文件名或长度。</zh-CN>
+            //   <en>Read document content only through the data service; never infer filename or length from request parameters.</en>
+            // </lang>
             IDocumentItemDetails item = DocumentDB.GetDocumentContent(documentId);
             if (item == null || item.Content == null || !item.ContentSize.HasValue || item.ContentSize.Value <= 0)
             {
@@ -78,6 +86,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>响应字节数取实际内容和数据库声明长度的较小值，限制历史异常元数据影响响应体。</zh-CN>
+            //   <en>Bound the response byte count by the smaller of actual content and the database-declared length so abnormal legacy metadata cannot expand the body.</en>
+            // </lang>
             int byteCount = Math.Min(item.Content.Length, item.ContentSize.Value);
             if (byteCount <= 0)
             {
@@ -113,8 +125,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>The compatibility page has no display UI; invalid parameters, missing rows, and empty content all return 404 to avoid leaking legacy document-storage details.</en>
         /// </lang>
         /// </remarks>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>清空响应并以低泄露 404 完成历史附件请求。</zh-CN>
+        ///   <en>Clears the response and completes the legacy attachment request with a low-disclosure 404.</en>
+        /// </lang>
+        /// </summary>
         private void WriteNotFoundResponse()
         {
+            // <lang>
+            //   <zh-CN>无论参数、记录还是内容失败都使用同一状态，避免暴露文档是否存在。</zh-CN>
+            //   <en>Use the same status for parameter, record, and content failures so document existence is not disclosed.</en>
+            // </lang>
             Response.Clear();
             Response.StatusCode = 404;
             Response.TrySkipIisCustomErrors = true;

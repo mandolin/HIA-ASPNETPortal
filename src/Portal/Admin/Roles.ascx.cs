@@ -21,7 +21,20 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public partial class Roles : PortalModuleControl<Roles>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的当前门户 Tab 标识，用于角色管理回跳上下文。</zh-CN>
+        ///   <en>The optional current-Portal Tab id used to preserve role-management return context.</en>
+        /// </lang>
+        /// </summary>
         private int tabId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的当前门户 Tab 索引，用于角色成员页安全回跳。</zh-CN>
+        ///   <en>The optional current-Portal Tab index used for safe return navigation to membership management.</en>
+        /// </lang>
+        /// </summary>
         private int tabIndex;
 
         /// <summary>
@@ -71,11 +84,19 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>权限和导航参数是角色列表、创建、编辑、删除及成员入口的共同门禁。</zh-CN>
+            //   <en>Permission and navigation parameters gate role listing, creation, editing, deletion, and membership entry points.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) || !TryReadNavigationParameters())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>只在首次请求绑定角色列表，避免回发覆盖正在编辑的控件状态。</zh-CN>
+            //   <en>Bind the role list only on the initial request so postback editing state is not overwritten.</en>
+            // </lang>
             if (!Page.IsPostBack)
             {
                 BindData();
@@ -102,6 +123,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void AddRole_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>创建事件再次验证权限和导航上下文，防止陈旧模块状态触发新增。</zh-CN>
+            //   <en>Revalidate permission and navigation context before creation so stale module state cannot trigger an add.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) || !TryReadNavigationParameters())
             {
                 return;
@@ -109,8 +134,20 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>从当前门户读取角色集合，生成唯一默认名称后写入角色定义。</zh-CN>
+                //   <en>Read current-Portal roles, generate a unique default name, and persist the new role definition.</en>
+                // </lang>
                 PortalSettings portalSettings = PortalContext.GetPortalSettings();
+                // <lang>
+                //   <zh-CN>默认名称生成器只在当前门户集合内保证唯一。</zh-CN>
+                //   <en>The default-name generator guarantees uniqueness only within the current Portal collection.</en>
+                // </lang>
                 string roleName = CreateUniqueDefaultRoleName(RolesDB.GetPortalRoles(portalSettings.PortalId));
+                // <lang>
+                //   <zh-CN>保存成功后记录角色创建审计并刷新列表进入编辑状态。</zh-CN>
+                //   <en>After persistence succeeds, audit role creation and refresh the list in edit state.</en>
+                // </lang>
                 int roleId = RolesDB.AddRole(portalSettings.PortalId, roleName);
                 PortalOperationAudit.Record(
                     "RoleAdministration",
@@ -124,6 +161,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>创建异常写入诊断并只显示事件编号。</zh-CN>
+                //   <en>Record creation failures through diagnostics and display only the event id.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.Roles.Add",
                     "Adding a role failed.",
@@ -153,11 +194,19 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void RolesList_ItemCommand(object sender, DataListCommandEventArgs e)
         {
+            // <lang>
+            //   <zh-CN>每个命令先验证页面权限、导航参数和 DataList 角色归属。</zh-CN>
+            //   <en>Validate page permission, navigation parameters, and DataList role ownership before every command.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) || !TryReadNavigationParameters())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>DataList 键必须解析为当前门户角色，避免篡改索引操作其他角色。</zh-CN>
+            //   <en>The DataList key must resolve to a current-Portal role so a tampered index cannot target another role.</en>
+            // </lang>
             IRoleItem role;
             if (!TryGetRoleFromDataList(e, out role))
             {
@@ -165,6 +214,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>edit 命令只切换当前行编辑状态并刷新展示，不写入角色。</zh-CN>
+            //   <en>The edit command only switches the current row to edit mode and refreshes display without persisting a role.</en>
+            // </lang>
             if (string.Equals(e.CommandName, "edit", StringComparison.OrdinalIgnoreCase))
             {
                 rolesList.EditItemIndex = e.Item.ItemIndex;
@@ -175,6 +228,10 @@ namespace ASPNET.StarterKit.Portal
             if (string.Equals(e.CommandName, "apply", StringComparison.OrdinalIgnoreCase) ||
                 string.Equals(e.CommandName, "members", StringComparison.OrdinalIgnoreCase))
             {
+                // <lang>
+                //   <zh-CN>apply/members 共用名称规范化和改名流程，失败时不继续导航或刷新。</zh-CN>
+                //   <en>apply and members share the rename normalization flow; failure stops navigation and refresh.</en>
+                // </lang>
                 TextBox roleNameTextBox = e.Item.FindControl("roleName") as TextBox;
                 if (roleNameTextBox == null || !TryRenameRole(role, roleNameTextBox.Text))
                 {
@@ -183,6 +240,10 @@ namespace ASPNET.StarterKit.Portal
 
                 if (string.Equals(e.CommandName, "members", StringComparison.OrdinalIgnoreCase))
                 {
+                    // <lang>
+                    //   <zh-CN>成员入口只携带已验证角色和兼容导航参数，并交给安全导航策略。</zh-CN>
+                    //   <en>The membership entry carries only the verified role and compatibility navigation parameters through safe navigation.</en>
+                    // </lang>
                     string url = ResolveUrl(
                         "~/Admin/SecurityRoles.aspx?roleId=" + role.RoleId +
                         "&tabindex=" + tabIndex +
@@ -198,6 +259,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
             {
+                // <lang>
+                //   <zh-CN>删除命令交由 DeleteRole 统一执行管理员保护、成员和引用检查。</zh-CN>
+                //   <en>Delegate delete to DeleteRole so administrator, member, and reference guards stay centralized.</en>
+                // </lang>
                 DeleteRole(role);
             }
         }
@@ -216,6 +281,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryReadNavigationParameters()
         {
+            // <lang>
+            //   <zh-CN>两个可选参数分别保留 Tab 标识和索引；任一非法值都会阻断后续命令。</zh-CN>
+            //   <en>Read the optional Tab id and index together; any invalid value blocks subsequent commands.</en>
+            // </lang>
             return TryReadOptionalPositiveParameter("tabid", out tabId) &&
                    TryReadOptionalPositiveParameter("tabindex", out tabIndex);
         }
@@ -253,6 +322,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>缺失参数保留兼容默认值 0；存在参数必须通过正整数策略。</zh-CN>
+            //   <en>Keep the compatibility default of 0 when absent; a supplied value must pass positive-integer validation.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -264,6 +337,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法导航参数统一拒绝，不将原始值回显到后台页面。</zh-CN>
+            //   <en>Reject invalid navigation input consistently without echoing the raw value into the administration page.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -294,7 +371,15 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryGetRoleFromDataList(DataListCommandEventArgs e, out IRoleItem role)
         {
+            // <lang>
+            //   <zh-CN>先验证行对象和 DataKeys 索引，再解析非负角色标识。</zh-CN>
+            //   <en>Validate the row and DataKeys index before parsing the non-negative role identifier.</en>
+            // </lang>
             role = null;
+            // <lang>
+            //   <zh-CN>角色标识来自服务器 DataKeys，不直接信任客户端行文本。</zh-CN>
+            //   <en>The role id comes from server DataKeys rather than trusting client row text.</en>
+            // </lang>
             int roleId;
             if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= rolesList.DataKeys.Count ||
                 !PortalNavigationPolicy.TryReadNonNegativeInt32(rolesList.DataKeys[e.Item.ItemIndex].ToString(), out roleId))
@@ -302,6 +387,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>只接受当前门户集合中的角色，阻断跨门户或陈旧角色操作。</zh-CN>
+            //   <en>Accept only a role in the current Portal collection, blocking cross-Portal or stale operations.</en>
+            // </lang>
             role = FindCurrentPortalRole(roleId);
             return role != null;
         }
@@ -326,6 +415,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private IRoleItem FindCurrentPortalRole(int roleId)
         {
+            // <lang>
+            //   <zh-CN>从当前门户设置读取角色集合，角色名称和成员范围不来自请求参数。</zh-CN>
+            //   <en>Read the role collection from current Portal settings so names and membership scope do not come from request parameters.</en>
+            // </lang>
             PortalSettings portalSettings = PortalContext.GetPortalSettings();
             return RolesDB.GetPortalRoles(portalSettings.PortalId)
                 .FirstOrDefault(item => item.RoleId == roleId);
@@ -357,6 +450,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryRenameRole(IRoleItem role, string requestedName)
         {
+            // <lang>
+            //   <zh-CN>名称先经过角色名策略归一化；无效输入不访问角色或授权数据。</zh-CN>
+            //   <en>Normalize the name through the role-name policy first; invalid input performs no role or authorization data access.</en>
+            // </lang>
             string roleName;
             if (!PortalAdministrationPolicy.TryNormalizeRoleName(requestedName, out roleName))
             {
@@ -368,7 +465,15 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>同一门户内角色名称必须保持唯一；跨门户同名不在本控件处理范围内。</zh-CN>
             //   <en>Role names must be unique within the same Portal; same names across Portals are outside this control's scope.</en>
             // </lang>
+            // <lang>
+            //   <zh-CN>读取当前门户快照并在同一门户内排除当前角色后检查重名。</zh-CN>
+            //   <en>Read the current Portal snapshot and check duplicates within that Portal while excluding the current role.</en>
+            // </lang>
             PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            // <lang>
+            //   <zh-CN>重名比较不区分大小写，避免授权字符串出现看似不同但实际冲突的角色。</zh-CN>
+            //   <en>Compare names case-insensitively to prevent authorization conflicts that differ only by case.</en>
+            // </lang>
             bool duplicate = RolesDB.GetPortalRoles(portalSettings.PortalId).Any(item =>
                 item.RoleId != role.RoleId &&
                 string.Equals(item.RoleName, roleName, StringComparison.OrdinalIgnoreCase));
@@ -378,6 +483,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>名称未变化时直接视为成功，不触碰数据库或授权引用。</zh-CN>
+            //   <en>Treat an unchanged name as success without touching persistence or authorization references.</en>
+            // </lang>
             if (string.Equals(role.RoleName, roleName, StringComparison.Ordinal))
             {
                 return true;
@@ -395,6 +504,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>保存旧名称用于精确同步；角色更新成功后再更新 Tab/模块授权引用并写审计。</zh-CN>
+                //   <en>Keep the old name for exact synchronization; update the role first, then references and audit.</en>
+                // </lang>
                 string previousRoleName = role.RoleName;
                 RolesDB.UpdateRole(role.RoleId, roleName);
                 UpdateRoleReferences(portalSettings, previousRoleName, roleName);
@@ -409,6 +522,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>改名或引用同步失败写入统一诊断并返回事件编号。</zh-CN>
+                //   <en>Record rename or reference-synchronization failures through shared diagnostics and return an event id.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.Roles.Rename",
                     "Renaming a role failed. RoleId=" + role.RoleId,
@@ -451,8 +568,16 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         private void UpdateRoleReferences(PortalSettings portalSettings, string oldRoleName, string newRoleName)
         {
+            // <lang>
+            //   <zh-CN>遍历当前门户 Tab 及其模块，只更新完整角色项发生变化的记录。</zh-CN>
+            //   <en>Walk current-Portal Tabs and modules, updating only records whose complete role entries changed.</en>
+            // </lang>
             foreach (ITabItem tab in portalSettings.DesktopTabs)
             {
+                // <lang>
+                //   <zh-CN>先计算 Tab 访问角色的新串；无变化时不产生写入。</zh-CN>
+                //   <en>Compute the new Tab access-role string first; unchanged values produce no write.</en>
+                // </lang>
                 string updatedTabRoles = ReplaceRoleReference(tab.AccessRoles, oldRoleName, newRoleName);
                 if (!string.Equals(tab.AccessRoles ?? string.Empty, updatedTabRoles, StringComparison.Ordinal))
                 {
@@ -468,6 +593,10 @@ namespace ASPNET.StarterKit.Portal
 
                 foreach (IModuleItem module in ModulesConfig.GetModulesByTab(tab.TabId))
                 {
+                    // <lang>
+                    //   <zh-CN>模块编辑角色同样按完整项替换，保留原有布局和模块字段。</zh-CN>
+                    //   <en>Replace complete module edit-role entries while preserving existing layout and module fields.</en>
+                    // </lang>
                     string updatedModuleRoles = ReplaceRoleReference(module.EditRoles, oldRoleName, newRoleName);
                     if (!string.Equals(module.EditRoles ?? string.Empty, updatedModuleRoles, StringComparison.Ordinal))
                     {
@@ -514,6 +643,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>引用检查覆盖当前门户 Tab 和模块编辑角色，删除前不隐式清理授权。</zh-CN>
+            //   <en>Reference checks cover current-Portal Tab and module edit roles; deletion never performs implicit authorization cleanup.</en>
+            // </lang>
             PortalSettings portalSettings = PortalContext.GetPortalSettings();
             if (HasRoleReferences(portalSettings, role.RoleName))
             {
@@ -523,6 +656,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>仅在管理员、成员和授权引用检查均通过后删除，并记录成功审计。</zh-CN>
+                //   <en>Delete only after administrator, member, and authorization-reference guards pass, then record success.</en>
+                // </lang>
                 RolesDB.DeleteRole(role.RoleId);
                 PortalOperationAudit.Record(
                     "RoleAdministration",
@@ -536,6 +673,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>删除异常写入诊断并保持页面低敏反馈。</zh-CN>
+                //   <en>Record deletion failures through diagnostics and keep page feedback low sensitivity.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.Roles.Delete",
                     "Deleting a role failed. RoleId=" + role.RoleId,
@@ -571,6 +712,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool HasRoleReferences(PortalSettings portalSettings, string roleName)
         {
+            // <lang>
+            //   <zh-CN>对每个 Tab 先检查访问角色，再检查其模块编辑角色；发现一处即阻断删除。</zh-CN>
+            //   <en>Check each Tab's access roles and then its module edit roles; any match blocks deletion immediately.</en>
+            // </lang>
             foreach (ITabItem tab in portalSettings.DesktopTabs)
             {
                 if (PortalRoleParser.Contains(tab.AccessRoles, roleName))
@@ -620,6 +765,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static string ReplaceRoleReference(string roles, string oldRoleName, string newRoleName)
         {
+            // <lang>
+            //   <zh-CN>先按旧分号协议解析完整角色项，再仅替换大小写不敏感匹配项并重新拼接。</zh-CN>
+            //   <en>Parse complete entries under the legacy semicolon contract, replace only case-insensitive matches, and join them again.</en>
+            // </lang>
             return PortalRoleParser.Join(
                 PortalRoleParser.Parse(roles)
                     .Select(role => string.Equals(role, oldRoleName, StringComparison.OrdinalIgnoreCase)
@@ -653,6 +802,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         private static string CreateUniqueDefaultRoleName(IEnumerable<IRoleItem> roles)
         {
+            // <lang>
+            //   <zh-CN>把现有角色名放入不区分大小写集合，控制默认名称生成的唯一性范围。</zh-CN>
+            //   <en>Place existing names in a case-insensitive set to constrain default-name uniqueness.</en>
+            // </lang>
             var existingNames = new HashSet<string>(
                 roles.Select(item => item.RoleName ?? string.Empty),
                 StringComparer.OrdinalIgnoreCase);
@@ -661,8 +814,16 @@ namespace ASPNET.StarterKit.Portal
                 return "New Role";
             }
 
+            // <lang>
+            //   <zh-CN>在有限后缀范围内寻找第一个未占用名称，避免无限循环。</zh-CN>
+            //   <en>Search for the first unused suffix within a bounded range to avoid an unbounded loop.</en>
+            // </lang>
             for (int suffix = 2; suffix < 1000; suffix++)
             {
+                // <lang>
+                //   <zh-CN>候选名称由固定前缀和当前后缀组成，并再次通过集合检查。</zh-CN>
+                //   <en>Build each candidate from the fixed prefix and current suffix, then check it against the set.</en>
+                // </lang>
                 string candidate = "New Role " + suffix;
                 if (!existingNames.Contains(candidate))
                 {
@@ -670,6 +831,10 @@ namespace ASPNET.StarterKit.Portal
                 }
             }
 
+            // <lang>
+            //   <zh-CN>所有预设名称均被占用时显式失败，不回退到重复名称。</zh-CN>
+            //   <en>Fail explicitly when all preset names are occupied instead of falling back to a duplicate.</en>
+            // </lang>
             throw new InvalidOperationException("A unique default role name could not be generated.");
         }
 
@@ -681,6 +846,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private void BindData()
         {
+            // <lang>
+            //   <zh-CN>从当前门户读取角色集合并绑定列表；绑定阶段不执行写入。</zh-CN>
+            //   <en>Read the current-Portal role collection and bind the list without performing writes.</en>
+            // </lang>
             PortalSettings portalSettings = PortalContext.GetPortalSettings();
             rolesList.DataSource = RolesDB.GetPortalRoles(portalSettings.PortalId);
             rolesList.DataBind();
@@ -700,6 +869,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         private void ShowMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>提示统一 HTML 编码并将空值归一化，避免数据或异常文本进入标记输出。</zh-CN>
+            //   <en>HTML-encode messages and normalize null so data or exception text cannot enter markup output.</en>
+            // </lang>
             Message.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }

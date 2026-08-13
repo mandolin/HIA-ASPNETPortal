@@ -8,35 +8,51 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 主题全局选择和 Tab 覆盖管理页面。
-    /// Theme global-selection and tab-override management page.
+    /// <lang>
+    ///   <zh-CN>主题全局选择和 Tab 覆盖管理页面。</zh-CN>
+    ///   <en>Theme global-selection and tab-override management page.</en>
+    /// </lang>
     /// </summary>
     /// <remarks>
-        /// 本页面仅选择已部署且已校验的主题包；它不提供 ZIP 上传、在线 CSS 编辑、外部 URL 或主题脚本入口。
-        /// 所有成功的全局主题与 Tab 覆盖操作均写入运营审计，但本页不创建或删除物理主题目录。
-        /// This page selects deployed and validated theme packages only; it provides no ZIP upload, online CSS editing,
-        /// external URL, or theme-script entry point. Every successful global-theme or Tab-override operation writes an
-        /// operations audit, while this page never creates or deletes a physical theme directory.
+    /// <lang>
+    ///   <zh-CN>本页面仅选择已部署且已校验的主题包；它不提供 ZIP 上传、在线 CSS 编辑、外部 URL 或主题脚本入口。成功的全局主题与 Tab 覆盖操作会写入运营审计，但本页不创建或删除物理主题目录。</zh-CN>
+    ///   <en>This page selects deployed and validated theme packages only; it provides no ZIP upload, online CSS editing, external URL, or theme-script entry point. Successful global-theme and Tab-override operations write an operations audit, while this page never creates or deletes a physical theme directory.</en>
+    /// </lang>
     /// </remarks>
     public partial class ThemeSettings : PortalPage<ThemeSettings>
     {
         /// <summary>
-        /// 用于读取门户 Tab 列表的旧数据服务。
-        /// Legacy data service used to read the portal tab list.
+        /// <lang>
+        ///   <zh-CN>用于读取门户 Tab 列表的旧数据服务。</zh-CN>
+        ///   <en>Legacy data service used to read the portal tab list.</en>
+        /// </lang>
         /// </summary>
         [Dependency]
         public ITabsDb TabsConfig { private get; set; }
 
         /// <summary>
-        /// 初始化主题选择器和当前覆盖状态。
-        /// Initializes theme selectors and current override state.
+        /// <lang>
+        ///   <zh-CN>初始化主题选择器和当前覆盖状态。</zh-CN>
+        ///   <en>Initializes theme selectors and current override state.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">事件源。Event source.</param>
-        /// <param name="e">事件参数。Event arguments.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件参数。</zh-CN>
+        ///   <en>Event arguments.</en>
+        /// </l>
+        /// </param>
         /// <remarks>
-        /// 管理员授权在每次请求中执行。列表只显示 catalog 校验通过的部署主题；主题目录缺失或无效时不会从表单值回退加载。
-        /// Administrator authorization is performed on every request. Lists show only catalog-validated deployed themes;
-        /// a missing or invalid theme directory is never loaded as a fallback from form input.
+        /// <lang>
+        ///   <zh-CN>每次请求都会执行管理员权限门禁；列表只显示 catalog 校验通过的部署主题，主题目录缺失或无效时不会从表单值回退加载。</zh-CN>
+        ///   <en>Administrator authorization is checked on every request; lists show only catalog-validated deployed themes, and a missing or invalid theme directory is never loaded as a fallback from form input.</en>
+        /// </lang>
         /// </remarks>
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -54,15 +70,28 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 保存全局主题的数据库运行级覆盖值。
-        /// Saves the database runtime override for the global theme.
+        /// <lang>
+        ///   <zh-CN>保存全局主题的数据库运行级覆盖值。</zh-CN>
+        ///   <en>Saves the database runtime override for the global theme.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">事件源。Event source.</param>
-        /// <param name="e">事件参数。Event arguments.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件参数。</zh-CN>
+        ///   <en>Event arguments.</en>
+        /// </l>
+        /// </param>
         /// <remarks>
-        /// 成功时写入运行时设置覆盖和运营审计，然后重定向以重新解析本请求的主题。失败不修改主题文件或原有覆盖值。
-        /// On success, writes a runtime-setting override and operations audit, then redirects to re-resolve the theme
-        /// for the new request. Failure changes neither theme files nor the existing override.
+        /// <lang>
+        ///   <zh-CN>成功时写入运行时设置覆盖和运营审计，然后重定向以让新请求重新解析主题；失败不修改主题文件或原有覆盖值。</zh-CN>
+        ///   <en>On success, writes a runtime-setting override and operations audit, then redirects so the new request re-resolves the theme; failure changes neither theme files nor the existing override.</en>
+        /// </lang>
         /// </remarks>
         protected void SaveGlobalThemeButton_Click(object sender, EventArgs e)
         {
@@ -100,15 +129,28 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 清除全局主题的数据库覆盖值，使其回退部署配置或 Default。
-        /// Clears the global theme database override so it falls back to deployment configuration or Default.
+        /// <lang>
+        ///   <zh-CN>清除全局主题的数据库覆盖值，使其回退部署配置或 Default。</zh-CN>
+        ///   <en>Clears the global theme database override so it falls back to deployment configuration or Default.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">事件源。Event source.</param>
-        /// <param name="e">事件参数。Event arguments.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件参数。</zh-CN>
+        ///   <en>Event arguments.</en>
+        /// </l>
+        /// </param>
         /// <remarks>
-        /// 仅删除数据库覆盖值；有效主题随后按 appSettings 或 Default 回退，并记录成功的运营审计。
-        /// Deletes only the database override; the effective theme then falls back through appSettings or Default and a
-        /// successful operation is recorded in operations audit.
+        /// <lang>
+        ///   <zh-CN>仅删除数据库覆盖值；有效主题随后按 appSettings 或 Default 回退，并记录成功的运营审计。</zh-CN>
+        ///   <en>Deletes only the database override; the effective theme then falls back through appSettings or Default, and a successful operation is recorded in operations audit.</en>
+        /// </lang>
         /// </remarks>
         protected void ResetGlobalThemeButton_Click(object sender, EventArgs e)
         {
@@ -137,14 +179,28 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 切换正在查看的门户 Tab 覆盖状态。
-        /// Switches the portal tab whose override state is being viewed.
+        /// <lang>
+        ///   <zh-CN>切换正在查看的门户 Tab 覆盖状态。</zh-CN>
+        ///   <en>Switches the portal tab whose override state is being viewed.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">事件源。Event source.</param>
-        /// <param name="e">事件参数。Event arguments.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件参数。</zh-CN>
+        ///   <en>Event arguments.</en>
+        /// </l>
+        /// </param>
         /// <remarks>
-        /// 该动作只更新当前管理页面的显示状态，不写入 Tab 覆盖或全局设置。
-        /// This action updates only display state on the current admin page; it writes neither a Tab override nor a global setting.
+        /// <lang>
+        ///   <zh-CN>该动作只更新当前管理页面的显示状态，不写入 Tab 覆盖或全局设置。</zh-CN>
+        ///   <en>This action updates only display state on the current admin page; it writes neither a Tab override nor a global setting.</en>
+        /// </lang>
         /// </remarks>
         protected void TabList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -157,15 +213,28 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 保存选定 Tab 的主题覆盖值。
-        /// Saves the theme override for the selected tab.
+        /// <lang>
+        ///   <zh-CN>保存选定 Tab 的主题覆盖值。</zh-CN>
+        ///   <en>Saves the theme override for the selected tab.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">事件源。Event source.</param>
-        /// <param name="e">事件参数。Event arguments.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件参数。</zh-CN>
+        ///   <en>Event arguments.</en>
+        /// </l>
+        /// </param>
         /// <remarks>
-        /// 覆盖写入前会再次由存储层验证已部署主题。成功后写入运营审计；本页面不改变主题文件或主题包 manifest。
-        /// The store validates the deployed theme again before writing an override. Success records an operations audit;
-        /// this page does not change theme files or package manifests.
+        /// <lang>
+        ///   <zh-CN>覆盖写入前会再次由存储层验证已部署主题；成功后写入运营审计，本页面不改变主题文件或主题包 manifest。</zh-CN>
+        ///   <en>The store validates the deployed theme again before writing an override; success records an operations audit, and this page does not change theme files or package manifests.</en>
+        /// </lang>
         /// </remarks>
         protected void SaveTabThemeButton_Click(object sender, EventArgs e)
         {
@@ -202,15 +271,28 @@ namespace ASPNET.StarterKit.Portal
         }
 
         /// <summary>
-        /// 清除选定 Tab 的主题覆盖值。
-        /// Clears the theme override for the selected tab.
+        /// <lang>
+        ///   <zh-CN>清除选定 Tab 的主题覆盖值。</zh-CN>
+        ///   <en>Clears the theme override for the selected tab.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="sender">事件源。Event source.</param>
-        /// <param name="e">事件参数。Event arguments.</param>
+        /// <param name="sender">
+        /// <l>
+        ///   <zh-CN>事件源。</zh-CN>
+        ///   <en>Event source.</en>
+        /// </l>
+        /// </param>
+        /// <param name="e">
+        /// <l>
+        ///   <zh-CN>事件参数。</zh-CN>
+        ///   <en>Event arguments.</en>
+        /// </l>
+        /// </param>
         /// <remarks>
-        /// 清除后当前 Tab 回退已解析全局主题。写入失败时保留原覆盖值，并由状态存储记录诊断。
-        /// After clearing, the current Tab falls back to the resolved global theme. On a write failure the existing
-        /// override remains, and diagnostics are recorded by the state store.
+        /// <lang>
+        ///   <zh-CN>清除后当前 Tab 回退已解析全局主题；写入失败时保留原覆盖值，并由状态存储记录诊断。</zh-CN>
+        ///   <en>After clearing, the current Tab falls back to the resolved global theme; on a write failure the existing override remains and diagnostics are recorded by the state store.</en>
+        /// </lang>
         /// </remarks>
         protected void ClearTabThemeButton_Click(object sender, EventArgs e)
         {
@@ -243,6 +325,10 @@ namespace ASPNET.StarterKit.Portal
             ShowMessage(result.Message);
         }
 
+        // <lang>
+        //   <zh-CN>绑定全局主题和 Tab 主题下拉列表；数据源只提供已部署且受信的主题包。</zh-CN>
+        //   <en>Binds the global-theme and Tab-theme dropdowns; the source contains deployed and trusted theme packages only.</en>
+        // </lang>
         private void BindThemeLists()
         {
             IList<PortalThemePackage> packages = PortalThemeCatalog.GetTrustedPackages();
@@ -250,6 +336,10 @@ namespace ASPNET.StarterKit.Portal
             BindThemeList(TabThemeList, packages);
         }
 
+        // <lang>
+        //   <zh-CN>读取旧 Tab 数据服务并构造展示值；Tab 名称先归一化，再进行 HTML 编码，隐藏值仅使用正数 Tab 标识。</zh-CN>
+        //   <en>Reads the legacy Tab data service and builds display values; names are normalized then HTML-encoded, while hidden values contain positive Tab identifiers only.</en>
+        // </lang>
         private void BindTabs()
         {
             TabList.Items.Clear();
@@ -262,6 +352,10 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        // <lang>
+        //   <zh-CN>读取全局有效主题并初始化全局和当前 Tab 状态；状态文本编码后才写入控件。</zh-CN>
+        //   <en>Reads the effective global theme and initializes global/current-Tab status; status text is encoded before being assigned to controls.</en>
+        // </lang>
         private void BindStatuses()
         {
             PortalRuntimeSettingValue globalTheme = PortalRuntimeSettings.GetEffectiveValue(
@@ -273,6 +367,10 @@ namespace ASPNET.StarterKit.Portal
             BindTabStatus();
         }
 
+        // <lang>
+        //   <zh-CN>读取当前 Tab 的覆盖事实，并区分无 Tab、迁移不可用、未命中和已命中回退状态。</zh-CN>
+        //   <en>Reads the current Tab override fact and distinguishes no Tab, unavailable migration, not-found, and found fallback states.</en>
+        // </lang>
         private void BindTabStatus()
         {
             int tabId;
@@ -299,6 +397,10 @@ namespace ASPNET.StarterKit.Portal
             TabThemeStatusLabel.Text = Server.HtmlEncode(result.ThemeName);
         }
 
+        // <lang>
+        //   <zh-CN>把受信主题包投影到下拉列表；显示名和规范名称来自 catalog，不接受表单值扩展列表。</zh-CN>
+        //   <en>Projects trusted theme packages into a dropdown; display and canonical names come from the catalog, not from form input.</en>
+        // </lang>
         private static void BindThemeList(DropDownList list, IEnumerable<PortalThemePackage> packages)
         {
             list.Items.Clear();
@@ -310,6 +412,10 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        // <lang>
+        //   <zh-CN>按规范主题名称选择现有列表项；不存在的名称不会动态加入列表或改变当前选择。</zh-CN>
+        //   <en>Selects an existing list item by canonical theme name; an unknown name is not added dynamically and does not change the current selection.</en>
+        // </lang>
         private static void SelectTheme(DropDownList list, string themeName)
         {
             ListItem selected = list.Items.FindByValue(themeName ?? string.Empty);
@@ -320,18 +426,30 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        // <lang>
+        //   <zh-CN>解析当前 Tab 隐藏值为正整数标识；解析失败或非正数均视为没有可操作 Tab。</zh-CN>
+        //   <en>Parses the current Tab hidden value as a positive integer identifier; parse failures and non-positive values mean that no actionable Tab is selected.</en>
+        // </lang>
         private bool TryGetSelectedTabId(out int tabId)
         {
             return int.TryParse(TabList.SelectedValue, NumberStyles.None, CultureInfo.InvariantCulture, out tabId) &&
                    tabId > 0;
         }
 
+        // <lang>
+        //   <zh-CN>使用当前请求地址执行非终止重定向，并要求 ASP.NET 完成本请求；用于写入成功后的重新解析。</zh-CN>
+        //   <en>Performs a non-terminating redirect to the current request URL and asks ASP.NET to complete the request; used to re-resolve after a successful write.</en>
+        // </lang>
         private void RedirectToSelf()
         {
             Response.Redirect(Request.RawUrl, false);
             Context.ApplicationInstance.CompleteRequest();
         }
 
+        // <lang>
+        //   <zh-CN>把失败或输入提示进行 HTML 编码后写入消息控件；空消息按空字符串处理。</zh-CN>
+        //   <en>HTML-encodes a failure or input message before assigning it to the message control; null messages become an empty string.</en>
+        // </lang>
         private void ShowMessage(string message)
         {
             MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);

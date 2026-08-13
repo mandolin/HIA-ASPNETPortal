@@ -31,8 +31,8 @@ namespace ASPNET.StarterKit.Portal
         protected void Page_Load(object sender, EventArgs e)
         {
             // <lang>
-            //   <zh-CN>统一清理主认证 Cookie 与角色 Cookie，确保虚拟目录 Path 一致。</zh-CN>
-            //   <en>Clear the main auth cookie and role cookie through one path-aware service.</en>
+            //   <zh-CN>注销页不重新判断业务权限；统一认证服务负责清理主认证 Cookie 与角色 Cookie，并确保虚拟目录 Path 一致。</zh-CN>
+            //   <en>The sign-out page does not re-evaluate business permissions; the shared service clears both cookies with a virtual-directory-aware path.</en>
             // </lang>
             PortalAuthenticationService.SignOut(Response, Request);
 

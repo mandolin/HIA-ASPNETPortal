@@ -90,11 +90,19 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>先执行统一权限与请求初始化；失败时立即结束，避免未验证的定义标识进入绑定或事件处理。</zh-CN>
+            //   <en>Run the shared authorization and request initialization first; stop immediately on failure so an unverified definition id cannot reach binding or event handlers.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>仅首次请求绑定快照，保留 Web Forms 回发字段并避免重复读取数据库。</zh-CN>
+            //   <en>Bind the snapshot only on the initial request, preserving Web Forms postback fields and avoiding a duplicate database read.</en>
+            // </lang>
             if (!Page.IsPostBack)
             {
                 BindDefinition();
@@ -115,30 +123,54 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryInitializeRequest()
         {
+            // <lang>
+            //   <zh-CN>模块定义编辑权限是本页所有读取、修改和删除操作的共同门禁。</zh-CN>
+            //   <en>The module-definition edit permission is the shared gate for every read, update, and delete operation on this page.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleDefinitionEdit))
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>Tab 参数只用于受控返回地址；任一参数非法都不允许继续处理定义。</zh-CN>
+            //   <en>Tab parameters are used only for a controlled return URL; any invalid value prevents further definition processing.</en>
+            // </lang>
             if (!TryReadOptionalPositiveParameter("tabid", out tabId) ||
                 !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
             {
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>从 Request.Params 读取兼容查询参数，以支持既有链接同时覆盖查询串和表单参数。</zh-CN>
+            //   <en>Read the compatibility parameter from Request.Params so existing links can use either query-string or form input.</en>
+            // </lang>
             string rawDefinitionId = Request.Params["defid"];
             if (string.IsNullOrWhiteSpace(rawDefinitionId))
             {
+                // <lang>
+                //   <zh-CN>缺少定义标识时回到模块目录，不把空标识解释为新建或默认对象。</zh-CN>
+                //   <en>Return to the module catalog when the definition id is missing instead of treating an empty id as a create or default object.</en>
+                // </lang>
                 PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/Admin/ModuleCatalog.aspx"));
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>正整数解析同时约束编辑对象范围，非法输入统一导向拒绝页。</zh-CN>
+            //   <en>Positive-integer parsing constrains the editable object range, and invalid input is routed to the common access-denied page.</en>
+            // </lang>
             if (!PortalNavigationPolicy.TryReadPositiveInt32(rawDefinitionId, out defId))
             {
                 PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>只从当前定义集合匹配快照，避免直接信任请求标识或跨租户读取不存在对象。</zh-CN>
+            //   <en>Match a snapshot only from the current definition set, avoiding trust in the request id or reads of a non-existent object across boundaries.</en>
+            // </lang>
             currentDefinition = ModuleDefConfig.GetModuleDefinitions()
                 .FirstOrDefault(item => item.ModuleDefId == defId);
             if (currentDefinition != null)
@@ -146,6 +178,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>已解析但不存在的定义同样视为不可编辑，防止后续保存或删除使用陈旧标识。</zh-CN>
+            //   <en>A parsed but missing definition is also treated as non-editable, preventing later updates or deletes from using a stale id.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -176,11 +212,19 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void UpdateBtn_Click(Object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>回发事件再次初始化请求，防止仅依赖首次加载时缓存的字段状态。</zh-CN>
+            //   <en>Reinitialize the request for the postback event so it does not rely only on state cached during the initial load.</en>
+            // </lang>
             if (!TryInitializeRequest() || !Page.IsValid)
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>名称先经过单行、长度和规范化检查；无效输入不触碰数据服务。</zh-CN>
+            //   <en>Validate and normalize the single-line name before touching the data service; invalid input performs no persistence.</en>
+            // </lang>
             string friendlyName;
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(FriendlyName.Text, 150, out friendlyName))
             {
@@ -201,6 +245,10 @@ namespace ASPNET.StarterKit.Portal
                     friendlyName,
                     currentDefinition.DesktopSourceFile,
                     currentDefinition.MobileSourceFile);
+                // <lang>
+                //   <zh-CN>审计只记录名称更新这一受限动作，路径保持来自已验证快照。</zh-CN>
+                //   <en>Audit only the constrained name-update action while paths remain sourced from the verified snapshot.</en>
+                // </lang>
                 PortalOperationAudit.Record(
                     "ModuleDefinition",
                     "UpdateName",
@@ -212,6 +260,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>持久化异常转为带事件编号的低敏提示，详细异常留在诊断日志。</zh-CN>
+                //   <en>Convert persistence failures into a low-sensitivity message with an event id while keeping details in diagnostics.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.ModuleDefinitions.Update",
                     "Updating a legacy module definition failed. ModuleDefinitionId=" + defId,
@@ -247,11 +299,19 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         protected void DeleteBtn_Click(Object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>删除事件同样重新执行授权和对象解析，避免陈旧页面状态绕过门禁。</zh-CN>
+            //   <en>The delete event repeats authorization and object resolution so stale page state cannot bypass the gate.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>删除前统计实例引用，明确阻断仍被使用的定义。</zh-CN>
+            //   <en>Count instance references before deletion and explicitly block definitions that are still in use.</en>
+            // </lang>
             int instanceCount = ModulesConfig.GetModulesByModuleDefId(defId).Count();
             if (instanceCount > 0)
             {
@@ -268,6 +328,10 @@ namespace ASPNET.StarterKit.Portal
             try
             {
                 ModuleDefConfig.DeleteModuleDefinition(defId);
+                // <lang>
+                //   <zh-CN>仅在删除调用成功后记录审计，避免把失败操作误报为完成。</zh-CN>
+                //   <en>Record the audit only after the delete call succeeds, avoiding a false completion record.</en>
+                // </lang>
                 PortalOperationAudit.Record(
                     "ModuleDefinition",
                     "Delete",
@@ -279,6 +343,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>删除失败沿用统一诊断和低敏反馈边界，不向页面泄漏异常细节。</zh-CN>
+                //   <en>Delete failures use the shared diagnostics and low-sensitivity feedback boundary without exposing exception details.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.ModuleDefinitions.Delete",
                     "Deleting a legacy module definition failed. ModuleDefinitionId=" + defId,
@@ -308,6 +376,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void CancelBtn_Click(Object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>取消也需要验证当前请求，返回地址只能由已解析的 Tab 参数构造。</zh-CN>
+            //   <en>Cancellation still validates the request, and the return URL can only be built from parsed Tab parameters.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
@@ -342,6 +414,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void DesktopSrcPathValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            // <lang>
+            //   <zh-CN>保留验证器契约并复用统一路径策略；即使当前控件停用，也不恢复任意路径写入。</zh-CN>
+            //   <en>Keep the validator contract while reusing the shared path policy; a disabled control must not restore arbitrary path writes.</en>
+            // </lang>
             string normalizedSource;
             string errorMessage;
             args.IsValid = PortalModulePathValidator.TryNormalizeDesktopSource(args.Value, out normalizedSource, out errorMessage);
@@ -367,6 +443,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         private string NormalizeDesktopSrc()
         {
+            // <lang>
+            //   <zh-CN>使用同一规范化策略处理兼容调用点，失败时转换为明确的操作异常。</zh-CN>
+            //   <en>Use the same normalization policy for compatibility call sites and convert failure into an explicit operation exception.</en>
+            // </lang>
             string normalizedSource;
             string errorMessage;
             if (!PortalModulePathValidator.TryNormalizeDesktopSource(DesktopSrc.Text, out normalizedSource, out errorMessage))
@@ -404,6 +484,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>缺失参数保持兼容默认值 0；存在参数则必须通过正整数策略。</zh-CN>
+            //   <en>Keep the compatibility default of 0 for a missing parameter; a supplied value must pass the positive-integer policy.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -415,6 +499,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法导航参数统一拒绝，不让调用方继续使用不可信的返回上下文。</zh-CN>
+            //   <en>Reject invalid navigation input consistently so callers cannot continue with an untrusted return context.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -446,6 +534,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>索引参数允许零，但仍需在进入返回 URL 构造前完成非负整数校验。</zh-CN>
+            //   <en>The index permits zero but must still be validated as non-negative before constructing a return URL.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -457,6 +549,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法索引不降级为默认 Tab，直接进入编辑拒绝路径。</zh-CN>
+            //   <en>Do not downgrade an invalid index to a default Tab; route it directly to the edit-denied path.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -475,6 +571,10 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         private void BindDefinition()
         {
+            // <lang>
+            //   <zh-CN>从已验证快照投影名称和路径；路径只读，验证器停用以保持“仅改名称”的契约。</zh-CN>
+            //   <en>Project the name and paths from the verified snapshot; paths stay read-only and validation is disabled to preserve the name-only contract.</en>
+            // </lang>
             FriendlyName.Text = currentDefinition.FriendlyName;
             DesktopSrc.Text = currentDefinition.DesktopSourceFile;
             MobileSrc.Text = currentDefinition.MobileSourceFile;
@@ -498,6 +598,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private string BuildPortalReturnUrl()
         {
+            // <lang>
+            //   <zh-CN>只有正 Tab 标识才构造桌面页返回地址，其他情况回到固定门户首页。</zh-CN>
+            //   <en>Build a desktop-page return URL only for a positive Tab id; otherwise return to the fixed portal home page.</en>
+            // </lang>
             if (tabId > 0)
             {
                 return ResolveUrl("~/DesktopDefault.aspx?tabindex=" + tabIndex + "&tabid=" + tabId);
@@ -520,6 +624,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         private void ShowMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>所有提示先 HTML 编码并将空值归一化，避免异常文本进入标记输出。</zh-CN>
+            //   <en>HTML-encode every message and normalize null to an empty string before it reaches markup output.</en>
+            // </lang>
             MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }

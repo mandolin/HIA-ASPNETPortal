@@ -8,8 +8,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>待办状态只描述任务处理状态，不替代业务对象自身的领域状态。这里的字符串会写入数据库、审计和文档，不能随意重命名。</zh-CN>
-    ///   <en>Work-item status describes task handling only and does not replace the business object's domain status. These strings are persisted to the database, audit records and documentation, so they must not be casually renamed.</en>
+    ///   <zh-CN>待办状态只描述任务处理状态，不替代业务对象自身的领域状态。这里的字符串会写入数据库、审计和文档，不能随意重命名；本类也不定义合法迁移、终态、超期计算或授权规则，调用方必须在领域边界另行执行这些判断。</zh-CN>
+    ///   <en>Work-item status describes task handling only and does not replace the business object's domain status. These strings are persisted to the database, audit records, and documentation, so they must not be casually renamed. This class defines neither legal transitions, terminal states, expiration calculation, nor authorization rules; callers must enforce those decisions at the domain boundary.</en>
     /// </lang>
     /// </remarks>
     public static class PortalWorkItemStatuses

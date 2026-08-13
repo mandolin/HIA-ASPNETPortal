@@ -20,9 +20,36 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public partial class SecurityRoles : PortalPage<SecurityRoles>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前通过权限和门户角色集合校验的角色标识。</zh-CN>
+        ///   <en>The role identifier verified against permissions and the current Portal role set.</en>
+        /// </lang>
+        /// </summary>
         private int roleId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的安全回跳 Tab 标识。</zh-CN>
+        ///   <en>The optional Tab identifier used for safe return navigation.</en>
+        /// </lang>
+        /// </summary>
         private int tabId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的安全回跳 Tab 索引。</zh-CN>
+        ///   <en>The optional Tab index used for safe return navigation.</en>
+        /// </lang>
+        /// </summary>
         private int tabIndex;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已通过权限和角色集合校验的当前门户角色快照。</zh-CN>
+        ///   <en>The current Portal-role snapshot after permission and role-set validation.</en>
+        /// </lang>
+        /// </summary>
         private IRoleItem currentRole;
 
         /// <summary>
@@ -63,11 +90,19 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>先重做权限、角色和导航参数门禁，避免未验证角色进入绑定或成员事件。</zh-CN>
+            //   <en>Reapply permission, role, and navigation gates before binding or membership events can use an unverified role.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>仅首次请求加载成员和可选用户，保留 Web Forms 回发字段。</zh-CN>
+            //   <en>Load members and selectable users only on the initial request, preserving Web Forms postback fields.</en>
+            // </lang>
             if (!Page.IsPostBack)
             {
                 BindData();
@@ -94,6 +129,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Save_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>保存按钮不直接写角色关系，只在重新验证后执行受控回跳。</zh-CN>
+            //   <en>The save button does not write membership directly; it performs controlled return navigation only after revalidation.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
@@ -122,17 +161,29 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void AddUser_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>成员新增事件重新解析角色和请求上下文，防止陈旧页面状态绕过门禁。</zh-CN>
+            //   <en>Re-resolve the role and request context for member addition so stale page state cannot bypass the gate.</en>
+            // </lang>
             if (!TryInitializeRequest())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>没有选择项时不访问用户服务，也不改变角色关系。</zh-CN>
+            //   <en>Do not call the user service or change membership when no option is selected.</en>
+            // </lang>
             if (allUsers.SelectedItem == null)
             {
                 ShowMessage("请选择一个有效用户。");
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>选中值必须是正整数且对应当前可读取用户，避免直接信任下拉项值。</zh-CN>
+            //   <en>Require a positive id that resolves to a readable user instead of trusting the dropdown value directly.</en>
+            // </lang>
             int userId;
             if (!PortalNavigationPolicy.TryReadPositiveInt32(allUsers.SelectedItem.Value, out userId) ||
                 UsersDB.FindUserById(userId) == null)
@@ -143,6 +194,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>只向已验证角色加入已验证用户，并在成功后记录审计、刷新读模型。</zh-CN>
+                //   <en>Add only the verified user to the verified role, then audit success and refresh the read model.</en>
+                // </lang>
                 RolesDB.AddUserRole(roleId, userId);
                 PortalOperationAudit.Record(
                     "RoleAdministration",
@@ -155,6 +210,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>成员新增异常写入统一诊断并返回事件编号，不暴露数据层细节。</zh-CN>
+                //   <en>Record member-add failures through shared diagnostics and return an event id without exposing data-layer details.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.SecurityRoles.AddUser",
                     "Adding a role member failed. RoleId=" + roleId + "; UserId=" + userId,
@@ -184,11 +243,19 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void usersInRole_ItemCommand(object sender, DataListCommandEventArgs e)
         {
+            // <lang>
+            //   <zh-CN>仅处理不区分大小写的 delete 命令，其他命令保持无副作用。</zh-CN>
+            //   <en>Handle only the case-insensitive delete command; other commands remain side-effect free.</en>
+            // </lang>
             if (!TryInitializeRequest() || !string.Equals(e.CommandName, "delete", StringComparison.OrdinalIgnoreCase))
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>校验行对象、索引、DataKeys 和用户存在性，防止篡改行索引删除其他用户。</zh-CN>
+            //   <en>Validate the row, index, DataKeys entry, and user existence so a tampered row index cannot delete another user.</en>
+            // </lang>
             int userId;
             if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= usersInRole.DataKeys.Count ||
                 !PortalNavigationPolicy.TryReadPositiveInt32(usersInRole.DataKeys[e.Item.ItemIndex].ToString(), out userId) ||
@@ -200,6 +267,10 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>删除成功后清除编辑索引、写入审计并刷新成员读模型。</zh-CN>
+                //   <en>After successful deletion, clear the edit index, write the audit, and refresh the membership read model.</en>
+                // </lang>
                 RolesDB.DeleteUserRole(roleId, userId);
                 PortalOperationAudit.Record(
                     "RoleAdministration",
@@ -213,6 +284,10 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>成员移除异常沿用统一诊断和低敏页面反馈。</zh-CN>
+                //   <en>Member-removal failures use shared diagnostics and low-sensitivity page feedback.</en>
+                // </lang>
                 string eventId = PortalDiagnostics.Error(
                     "Admin.SecurityRoles.RemoveUser",
                     "Removing a role member failed. RoleId=" + roleId + "; UserId=" + userId,
@@ -224,11 +299,19 @@ namespace ASPNET.StarterKit.Portal
 
         private bool TryInitializeRequest()
         {
+            // <lang>
+            //   <zh-CN>角色编辑权限、角色标识和可选回跳参数共同构成入口门禁。</zh-CN>
+            //   <en>The role-edit permission, role id, and optional return parameters form the entry gate.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) ||
                 !PortalNavigationPolicy.TryReadNonNegativeInt32(Request.Params["roleid"], out roleId) ||
                 !TryReadOptionalPositiveParameter("tabid", out tabId) ||
                 !TryReadOptionalNonNegativeParameter("tabindex", out tabIndex))
             {
+                // <lang>
+                //   <zh-CN>只有已具备角色编辑权限的请求才重定向到编辑拒绝页，其他请求沿用授权组件处理。</zh-CN>
+                //   <en>Redirect to edit-denied only when role-edit permission is known; other requests retain the authorization component's handling.</en>
+                // </lang>
                 if (PortalAuthorization.HasPermission(PortalPermissionKeys.AdminRolesEdit))
                 {
                     PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
@@ -237,7 +320,15 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>读取当前门户角色快照，角色名称和成员范围均来自此数据源而非 URL 显示值。</zh-CN>
+            //   <en>Read the current Portal role snapshot so role names and membership scope come from data, not URL display values.</en>
+            // </lang>
             PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            // <lang>
+            //   <zh-CN>只在当前门户角色集合中匹配 roleId，阻断跨门户或不存在角色的操作。</zh-CN>
+            //   <en>Match roleId only within the current Portal role set, blocking cross-Portal or missing-role operations.</zh-CN>
+            // </lang>
             currentRole = RolesDB.GetPortalRoles(portalSettings.PortalId)
                 .FirstOrDefault(role => role.RoleId == roleId);
             if (currentRole != null)
@@ -245,6 +336,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>已解析但不存在的角色不允许继续绑定、添加或删除成员。</zh-CN>
+            //   <en>A parsed but missing role cannot continue to bind, add, or remove members.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -252,6 +347,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>缺失参数保留兼容默认值 0；存在参数必须通过正整数策略。</zh-CN>
+            //   <en>Keep the compatibility default of 0 when absent; a supplied value must pass positive-integer validation.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -263,6 +362,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法回跳参数统一拒绝，不使用未经验证的上下文构造 URL。</zh-CN>
+            //   <en>Reject invalid return parameters consistently instead of constructing a URL from unverified context.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -270,6 +373,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>索引允许零，但仍需通过非负整数策略后才能参与回跳。</zh-CN>
+            //   <en>The index permits zero but must pass non-negative validation before it participates in navigation.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -281,12 +388,20 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法索引不降级为默认值，直接进入编辑拒绝路径。</zh-CN>
+            //   <en>Do not downgrade an invalid index to a default; route it directly to edit-denied.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
 
         private void BindData()
         {
+            // <lang>
+            //   <zh-CN>标题使用已验证角色快照，成员和用户列表从当前门户数据源绑定。</zh-CN>
+            //   <en>Use the verified role snapshot for the title and bind member/user lists from current Portal data sources.</en>
+            // </lang>
             title.InnerText = "Role Membership: " + (currentRole.RoleName ?? string.Empty);
             usersInRole.DataSource = RolesDB.GetRoleMembers(roleId);
             usersInRole.DataBind();
@@ -296,6 +411,10 @@ namespace ASPNET.StarterKit.Portal
 
         private string BuildPortalReturnUrl()
         {
+            // <lang>
+            //   <zh-CN>仅当 Tab 标识和索引均为正数时构造带上下文回跳，否则回到固定桌面首页。</zh-CN>
+            //   <en>Build a contextual return URL only when both Tab id and index are positive; otherwise use the fixed desktop home.</en>
+            // </lang>
             if (tabId <= 0 || tabIndex <= 0)
             {
                 return ResolveUrl("~/DesktopDefault.aspx");
@@ -306,6 +425,10 @@ namespace ASPNET.StarterKit.Portal
 
         private void ShowMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>所有提示先 HTML 编码并将空值归一化，避免异常文本进入标记输出。</zh-CN>
+            //   <en>HTML-encode every message and normalize null before it reaches markup output.</en>
+            // </lang>
             Message.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }

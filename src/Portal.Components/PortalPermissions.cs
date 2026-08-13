@@ -12,8 +12,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>P5.3 第一版只把权限定义放在代码和文档中；数据库只保存角色到这些键名的映射。 新增或重命名键名属于安全契约变更，必须同步迁移脚本、ADR 和回归清单。</zh-CN>
-    ///   <en>P5.3 keeps permission definitions in code and documentation; the database stores only role-to-key mappings. Adding or renaming keys is a security-contract change and must update migration scripts, ADRs, and regression checklists together.</en>
+    ///   <zh-CN>P5.3 第一版只把权限定义放在代码和文档中；数据库只保存角色到这些键名的映射。新增或重命名键名属于安全契约变更，必须同步迁移脚本、ADR 和回归清单。本类型只持有稳定键名，不会授予当前请求任何权限。</zh-CN>
+    ///   <en>P5.3 keeps permission definitions in code and documentation; the database stores only role-to-key mappings. Adding or renaming keys is a security-contract change and must update migration scripts, ADRs, and regression checklists together. This type only holds stable keys; it does not grant permission to the current request.</en>
     /// </lang>
     /// </remarks>
     public static class PortalPermissionKeys
@@ -419,6 +419,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Maintainer-facing permission description.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>构造函数只保存权限元数据，不读取角色、配置或数据库。注册键名的校验由注册表规范化方法负责。</zh-CN>
+        ///   <en>The constructor stores permission metadata only; it does not read roles, configuration, or the database. Registered-key validation belongs to the registry normalization methods.</en>
+        /// </lang>
+        /// </remarks>
         public PortalPermissionDefinition(string key, string category, string description)
         {
             Key = key;
@@ -457,8 +463,18 @@ namespace ASPNET.StarterKit.Portal
     ///   <en>Registry of Portal permission definitions.</en>
     /// </lang>
     /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>注册表提供静态元数据、已知键名查询和规范化能力，不判断当前请求是否获权，也不表示任何角色已经拥有某个键名。</zh-CN>
+    ///   <en>The registry provides static metadata, known-key lookup, and normalization only. It does not authorize the current request or imply that any role owns a key.</en>
+    /// </lang>
+    /// </remarks>
     public static class PortalPermissionRegistry
     {
+        // <lang>
+        //   <zh-CN>固定数组是权限定义的唯一注册来源；运行时不会从数据库或用户输入动态扩展权限键。</zh-CN>
+        //   <en>The fixed array is the single registration source; runtime code does not extend permission keys from the database or user input.</en>
+        // </lang>
         private static readonly PortalPermissionDefinition[] DefinitionArray =
         {
             new PortalPermissionDefinition(PortalPermissionKeys.SettingsView, "Settings", "查看普通系统设置。"),
@@ -509,6 +525,10 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.ContentUploadManage, "Content", "管理上传内容策略。")
         };
 
+        // <lang>
+        //   <zh-CN>已知键集合只用于不区分大小写的存在性检查；规范化结果仍从固定数组返回其规范大小写。</zh-CN>
+        //   <en>The known-key set is only for case-insensitive existence checks; normalization still returns canonical casing from the fixed array.</en>
+        // </lang>
         private static readonly HashSet<string> KnownKeys = new HashSet<string>(
             DefinitionArray.Select(definition => definition.Key),
             StringComparer.OrdinalIgnoreCase);
@@ -519,6 +539,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Gets every defined permission.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>返回固定注册数组的只读接口视图；调用方不能通过该属性新增定义，且定义存在不等于当前主体已获权。</zh-CN>
+        ///   <en>Returns an interface view over the fixed registration array; callers cannot add definitions through it, and a defined key is not evidence that the current subject is authorized.</en>
+        /// </lang>
+        /// </remarks>
         public static IEnumerable<PortalPermissionDefinition> Definitions
         {
             get { return DefinitionArray; }
@@ -542,6 +568,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en><c>true</c> when defined.</en>
         /// </l>
         /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>空白输入返回 <c>false</c>；比较会去除首尾空白并忽略大小写。未知键永远不会因本方法而变成已授权。</zh-CN>
+        ///   <en>Blank input returns <c>false</c>; comparison trims surrounding whitespace and ignores case. An unknown key never becomes authorized through this method.</en>
+        /// </lang>
+        /// </remarks>
         public static bool IsDefined(string key)
         {
             return !string.IsNullOrWhiteSpace(key) && KnownKeys.Contains(key.Trim());
@@ -571,6 +603,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Thrown when the key is not registered.</en>
         /// </l>
         /// </exception>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>结果只来自固定注册数组，并保留注册时的规范大小写；本方法不查询角色，也不授予当前请求权限。</zh-CN>
+        ///   <en>The result comes only from the fixed registration array and preserves registered canonical casing; this method does not query roles or grant permission to the current request.</en>
+        /// </lang>
+        /// </remarks>
         public static string NormalizeDefinedKey(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
@@ -607,6 +645,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Trimmed and deduplicated permission-key array.</en>
         /// </l>
         /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>空集合输入返回空数组；非空但未定义的键会沿用单键方法抛出异常；结果按不区分大小写去重并排序。</zh-CN>
+        ///   <en>A null collection returns an empty array; a non-blank undefined key propagates the single-key method's exception; results are deduplicated and sorted case-insensitively.</en>
+        /// </lang>
+        /// </remarks>
         public static string[] NormalizeDefinedKeys(IEnumerable<string> keys)
         {
             if (keys == null)

@@ -76,6 +76,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>仅在首次请求绑定固定参考数据和本人列表，避免回发时覆盖用户输入或控件选择。</zh-CN>
+            //   <en>Bind fixed reference data and the own-item list only on the first request so postbacks do not overwrite user input or selections.</en>
+            // </lang>
             if (!IsPostBack)
             {
                 BindItemTypeList();
@@ -92,6 +96,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>先解析当前身份，再执行权限、期限、内容和数据服务门禁；任何门禁失败都只显示提示并保持页面闭环。</zh-CN>
+            //   <en>Resolve the current identity before permission, due-date, content, and data-service gates; every failed gate stays within the page flow and only reports a message.</en>
+            // </lang>
             int userId = GetCurrentUserId();
             if (userId <= 0)
             {
@@ -109,6 +117,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>期限按 UTC 解析；空值代表未设置，格式错误不会进入持久化。</zh-CN>
+            //   <en>Parse the due date as UTC; an empty value means unset, while an invalid format never reaches persistence.</en>
+            // </lang>
             DateTime? dueUtc;
             if (!TryParseDueUtc(DueUtcTextBox.Text, out dueUtc))
             {
@@ -116,6 +128,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>在服务调用前统一裁剪文本，保持 UI 输入与领域字段长度契约一致。</zh-CN>
+            //   <en>Normalize text before the service call so UI input remains within the domain field-length contract.</en>
+            // </lang>
             string title = NormalizeInput(TitleTextBox.Text, 200);
             string summary = NormalizeInput(SummaryTextBox.Text, 500);
             string description = NormalizeInput(DescriptionTextBox.Text, 4000);
@@ -131,6 +147,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>协同事项服务写入提交事实和状态；提交人和处理角色采用当前上下文的稳定身份键。</zh-CN>
+            //   <en>The collaboration-item service writes the submission fact and state; submitter and handling role use stable identity keys from the current context.</en>
+            // </lang>
             CollaborationItemResult result = CollaborationItemDb.CreateSubmittedItem(
                 new CollaborationItemCreateRequest
                 {
@@ -153,6 +173,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>领域事实成功后记录操作审计；后续待办投影失败不回滚已提交事项。</zh-CN>
+            //   <en>Record operation audit after the domain fact succeeds; a later work-item projection failure must not roll back the submitted item.</en>
+            // </lang>
             PortalOperationAudit.Record(
                 PortalOperationAuditEvents.BusinessModuleCategory,
                 PortalOperationAuditEvents.CollaborationItemSubmitted,
@@ -175,6 +199,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void RecentItemsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            // <lang>
+            //   <zh-CN>列表命令重新解析当前身份并校验命令参数，防止匿名或无效事项标识进入动作服务。</zh-CN>
+            //   <en>Re-resolve identity and validate the command argument before list actions so anonymous or invalid item identifiers never reach the action service.</en>
+            // </lang>
             int userId = GetCurrentUserId();
             if (userId <= 0 || !IsCurrentUserAuthenticated())
             {
@@ -191,9 +219,17 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>仅允许显式支持的评论和重提动作；未知动作走统一提示并重新绑定列表。</zh-CN>
+            //   <en>Only explicit comment and resubmission actions are supported; unknown actions use the common message and rebind the list.</en>
+            // </lang>
             string commandName = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
             if (string.Equals(commandName, "AddParticipantComment", StringComparison.Ordinal))
             {
+                // <lang>
+                //   <zh-CN>评论限定为事项参与者可见范围，并保留服务层返回的失败信息。</zh-CN>
+                //   <en>Comments are written to the item-participant visibility scope while preserving the service failure message.</en>
+                // </lang>
                 TextBox commentBox = e.Item.FindControl("ParticipantCommentTextBox") as TextBox;
                 string comment = commentBox == null ? string.Empty : commentBox.Text;
                 CollaborationItemCommentResult commentResult = CollaborationItemDb.AddComment(
@@ -221,6 +257,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (string.Equals(commandName, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
             {
+                // <lang>
+                //   <zh-CN>重提动作成功后重新读取本人事项，再补建后台待办并记录动作审计。</zh-CN>
+                //   <en>After resubmission succeeds, reload the user's item, recreate the handling work item, and record the action audit.</en>
+                // </lang>
                 CollaborationItemResult result = CollaborationItemDb.ApplyAction(
                     new CollaborationItemActionRequest
                     {
@@ -254,8 +294,18 @@ namespace ASPNET.StarterKit.Portal
             BindModule();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按身份、Schema 和权限门禁控制工作台可见性，并绑定当前用户最近事项。</zh-CN>
+        ///   <en>Applies identity, schema, and permission gates to workbench visibility and binds the current user's recent items.</en>
+        /// </lang>
+        /// </summary>
         private void BindModule()
         {
+            // <lang>
+            //   <zh-CN>模块绑定前先做认证和数据库能力检查，失败时隐藏工作区并绑定空列表。</zh-CN>
+            //   <en>Check authentication and database capability before binding; failures hide the work area and bind an empty list.</en>
+            // </lang>
             int userId = GetCurrentUserId();
             if (!IsCurrentUserAuthenticated())
             {
@@ -273,6 +323,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>创建、查看本人和管理员权限共同决定前台是否可用；此处不推断角色继承关系。</zh-CN>
+            //   <en>Create, own-view, and administrator permissions jointly determine front-end availability; no role inheritance is inferred here.</en>
+            // </lang>
             bool canUseWorkbench = PortalAuthorization.HasAnyPermission(
                 PortalPermissionKeys.BusinessCollaborationCreate,
                 PortalPermissionKeys.BusinessCollaborationViewOwn,
@@ -288,18 +342,40 @@ namespace ASPNET.StarterKit.Portal
             BindRecentItems(userId);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定协同事项类型参考数据。</zh-CN>
+        ///   <en>Binds collaboration-item type reference data.</en>
+        /// </lang>
+        /// </summary>
         private void BindItemTypeList()
         {
             BindReferenceDataList(ItemTypeList, PortalReferenceDataSets.CollaborationItemType);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定协同事项优先级参考数据。</zh-CN>
+        ///   <en>Binds collaboration-item priority reference data.</en>
+        /// </lang>
+        /// </summary>
         private void BindPriorityList()
         {
             BindReferenceDataList(PriorityList, PortalReferenceDataSets.CollaborationPriority);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>优先读取活动参考数据，读取不可用时使用受治理的固定回退项。</zh-CN>
+        ///   <en>Prefers active reference data and uses governed fixed fallback items when the reader is unavailable.</en>
+        /// </lang>
+        /// </summary>
         private void BindReferenceDataList(DropDownList list, string referenceSetKey)
         {
+            // <lang>
+            //   <zh-CN>每次绑定先清空旧项，避免回发或服务切换造成重复选项。</zh-CN>
+            //   <en>Clear old entries before each bind so postbacks or service switches cannot create duplicate options.</en>
+            // </lang>
             list.Items.Clear();
             IList<ReferenceDataItem> items;
             if (ReferenceDataDb == null || !ReferenceDataDb.TryGetActiveItems(referenceSetKey, out items))
@@ -307,25 +383,53 @@ namespace ASPNET.StarterKit.Portal
                 items = PortalReferenceDataSets.GetFallbackItems(referenceSetKey);
             }
 
+            // <lang>
+            //   <zh-CN>下拉框保存稳定值键，显示名称只来自参考数据目录。</zh-CN>
+            //   <en>Store stable value keys in the drop-down while taking display names only from the reference catalog.</en>
+            // </lang>
             foreach (ReferenceDataItem item in items)
             {
                 list.Items.Add(new ListItem(item.DisplayName, item.ValueKey));
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前用户最近事项及其可见事件并转换为展示行。</zh-CN>
+        ///   <en>Loads the current user's recent items and visible events and converts them to display rows.</en>
+        /// </lang>
+        /// </summary>
         private void BindRecentItems(int userId)
         {
+            // <lang>
+            //   <zh-CN>未认证或服务不可用时使用空集合，保持模板绑定安全且不暴露跨用户数据。</zh-CN>
+            //   <en>Use an empty collection when unauthenticated or unavailable so template binding stays safe and cannot expose another user's data.</en>
+            // </lang>
             IList<CollaborationItemInfo> items = CollaborationItemDb == null || userId <= 0
                 ? new List<CollaborationItemInfo>()
                 : CollaborationItemDb.GetRecentItemsForUser(userId, RecentItemLimit);
+            // <lang>
+            //   <zh-CN>可见事件由数据服务按当前用户裁剪，展示行只做排序和低敏文本转换。</zh-CN>
+            //   <en>The data service scopes visible events to the current user; the display row only sorts and converts low-sensitivity text.</en>
+            // </lang>
             RecentItemsRepeater.DataSource = items.Select(item => new EnterpriseCapabilityWorkbenchItemRow(
                 item,
                 CollaborationItemDb.GetVisibleEvents(item.ItemId, userId))).ToList();
             RecentItemsRepeater.DataBind();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为成功的协同事项重提动作写入操作审计。</zh-CN>
+        ///   <en>Records operation audit for a successful collaboration-item resubmission.</en>
+        /// </lang>
+        /// </summary>
         private void RecordActionAudit(CollaborationItemResult result)
         {
+            // <lang>
+            //   <zh-CN>只审计成功且动作键明确为重提的结果，避免重复或误报。</zh-CN>
+            //   <en>Audit only successful results whose action key is explicitly resubmission to avoid duplicates or false reports.</en>
+            // </lang>
             if (result == null || !result.Succeeded ||
                 !string.Equals(result.ActionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
             {
@@ -341,8 +445,18 @@ namespace ASPNET.StarterKit.Portal
                 Context);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>记录评论成功事件的审计元数据，不写入评论正文。</zh-CN>
+        ///   <en>Records audit metadata for a successful comment event without writing the comment body.</en>
+        /// </lang>
+        /// </summary>
         private void RecordCommentAudit(CollaborationItemCommentResult result, string visibilityScope, string comment)
         {
+            // <lang>
+            //   <zh-CN>审计仅保留可追踪的事项、事件、可见范围和长度，降低正文泄露风险。</zh-CN>
+            //   <en>Audit retains only traceable item, event, scope, and length metadata to reduce comment-body exposure.</en>
+            // </lang>
             if (result == null || !result.Succeeded)
             {
                 return;
@@ -359,8 +473,18 @@ namespace ASPNET.StarterKit.Portal
                 Context);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将当前认证用户名解析为门户用户标识；缺少身份或服务时返回零。</zh-CN>
+        ///   <en>Resolves the current authenticated name to a Portal user identifier and returns zero when identity or service is unavailable.</en>
+        /// </lang>
+        /// </summary>
         private int GetCurrentUserId()
         {
+            // <lang>
+            //   <zh-CN>用户标识只通过用户服务解析，不从页面参数或控件值推断。</zh-CN>
+            //   <en>Resolve the user identifier only through the user service; never infer it from page parameters or control values.</en>
+            // </lang>
             string userName = GetCurrentUserName();
             if (string.IsNullOrWhiteSpace(userName) || UsersDb == null)
             {
@@ -371,6 +495,12 @@ namespace ASPNET.StarterKit.Portal
             return user == null ? 0 : user.UserId;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断当前 HTTP 上下文是否存在已认证身份。</zh-CN>
+        ///   <en>Determines whether the current HTTP context contains an authenticated identity.</en>
+        /// </lang>
+        /// </summary>
         private bool IsCurrentUserAuthenticated()
         {
             return Context != null &&
@@ -379,11 +509,23 @@ namespace ASPNET.StarterKit.Portal
                    Context.User.Identity.IsAuthenticated;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前认证用户名；未认证时返回空字符串。</zh-CN>
+        ///   <en>Reads the current authenticated name and returns an empty string when unauthenticated.</en>
+        /// </lang>
+        /// </summary>
         private string GetCurrentUserName()
         {
             return IsCurrentUserAuthenticated() ? Context.User.Identity.Name : string.Empty;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为已提交或重提事项补建后台待办投影；待办写入失败不回滚领域事实。</zh-CN>
+        ///   <en>Ensures an administration work-item projection for a submitted or resubmitted item; work-item failure does not roll back the domain fact.</en>
+        /// </lang>
+        /// </summary>
         private void TryEnsureWorkItem(long itemId, string itemCode, string title, string summary, DateTime? dueUtc)
         {
             // <lang>
@@ -409,8 +551,18 @@ namespace ASPNET.StarterKit.Portal
                 });
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>清理提交控件并恢复受治理的默认参考值。</zh-CN>
+        ///   <en>Clears submission controls and restores governed default reference values.</en>
+        /// </lang>
+        /// </summary>
         private void ClearSubmitForm()
         {
+            // <lang>
+            //   <zh-CN>成功提交后清空用户输入，默认值仅通过稳定参考数据键选择。</zh-CN>
+            //   <en>Clear user input after a successful submission and select defaults only by stable reference-data keys.</en>
+            // </lang>
             TitleTextBox.Text = string.Empty;
             SummaryTextBox.Text = string.Empty;
             DescriptionTextBox.Text = string.Empty;
@@ -419,8 +571,18 @@ namespace ASPNET.StarterKit.Portal
             SelectReferenceValue(PriorityList, PortalReferenceDataSets.NormalPriority);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>在下拉列表存在目标值时安全地选中该参考数据项。</zh-CN>
+        ///   <en>Safely selects a reference-data entry when the target value exists in the drop-down.</en>
+        /// </lang>
+        /// </summary>
         private static void SelectReferenceValue(DropDownList list, string valueKey)
         {
+            // <lang>
+            //   <zh-CN>列表或目标值缺失时保持当前状态，不人为插入不存在的选项。</zh-CN>
+            //   <en>Leave the current state unchanged when the list or target value is missing; do not invent an absent option.</en>
+            // </lang>
             if (list == null)
             {
                 return;
@@ -434,13 +596,33 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将页面提示进行 HTML 编码后写入消息标签。</zh-CN>
+        ///   <en>HTML-encodes a page message before writing it to the message label.</en>
+        /// </lang>
+        /// </summary>
         private void ShowMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>提示内容按不可信文本处理，避免服务返回信息直接形成标记。</zh-CN>
+            //   <en>Treat message content as untrusted text so service-returned text cannot become markup.</en>
+            // </lang>
             MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按允许的 UTC 日期格式解析期限，空白输入表示未设置。</zh-CN>
+        ///   <en>Parses a due date using the allowed UTC formats; blank input means unset.</en>
+        /// </lang>
+        /// </summary>
         private static bool TryParseDueUtc(string value, out DateTime? dueUtc)
         {
+            // <lang>
+            //   <zh-CN>先初始化输出为 null，保证失败和空值路径都不会泄漏上次解析结果。</zh-CN>
+            //   <en>Initialize the output to null so failed and blank paths cannot leak a previous parse result.</en>
+            // </lang>
             dueUtc = null;
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -462,8 +644,18 @@ namespace ASPNET.StarterKit.Portal
             return true;
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>裁剪并限制用户输入长度，null 按空字符串处理。</zh-CN>
+        ///   <en>Trims and limits user input length, treating null as an empty string.</en>
+        /// </lang>
+        /// </summary>
         private static string NormalizeInput(string value, int maxLength)
         {
+            // <lang>
+            //   <zh-CN>该 helper 只做边界归一化，不承担业务必填校验或持久化。</zh-CN>
+            //   <en>This helper performs boundary normalization only; required-field validation and persistence remain elsewhere.</en>
+            // </lang>
             string normalized = (value ?? string.Empty).Trim();
             return normalized.Length <= maxLength ? normalized : normalized.Substring(0, maxLength);
         }
@@ -477,8 +669,18 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public sealed class EnterpriseCapabilityWorkbenchItemRow
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把领域事项和当前用户可见事件转换为只读展示模型。</zh-CN>
+        ///   <en>Converts a domain item and events visible to the current user into a read-only display model.</en>
+        /// </lang>
+        /// </summary>
         internal EnterpriseCapabilityWorkbenchItemRow(CollaborationItemInfo item, IList<CollaborationItemEventInfo> visibleEvents)
         {
+            // <lang>
+            //   <zh-CN>展示模型保留稳定主键和低敏字段，空值统一回退为占位文本。</zh-CN>
+            //   <en>The display model keeps the stable key and low-sensitivity fields while normalizing empty values to placeholders.</en>
+            // </lang>
             ItemId = item.ItemId;
             ItemCode = EmptyToNone(item.ItemCode);
             Title = EmptyToNone(item.Title);
@@ -489,6 +691,10 @@ namespace ASPNET.StarterKit.Portal
                 ? item.LastActionUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
                 : "(none)";
             LastActionComment = EmptyToNone(item.LastActionComment);
+            // <lang>
+            //   <zh-CN>最新评论只从当前用户可见且属于参与者范围的评论事件中按时间和事件号稳定选取。</zh-CN>
+            //   <en>Select the latest comment deterministically from visible participant-scope events by time and event identifier.</en>
+            // </lang>
             CollaborationItemEventInfo latestComment = (visibleEvents ?? new List<CollaborationItemEventInfo>())
                 .Where(itemEvent => string.Equals(itemEvent.EventType, PortalCollaborationItemEventTypes.Comment, StringComparison.Ordinal) &&
                                     string.Equals(itemEvent.VisibilityScope, PortalCollaborationItemVisibilityScopes.ItemParticipants, StringComparison.Ordinal))
@@ -525,6 +731,12 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>当前用户可见的最新评论。</zh-CN><en>Latest comment visible to the current user.</en></lang></summary>
         public string LatestParticipantComment { get; private set; }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将空白展示字段转换为统一的占位文本。</zh-CN>
+        ///   <en>Converts blank display fields to a consistent placeholder.</en>
+        /// </lang>
+        /// </summary>
         private static string EmptyToNone(string value)
         {
             return string.IsNullOrWhiteSpace(value) ? "(none)" : value;

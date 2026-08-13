@@ -14,8 +14,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>P6.3-S5 只提供单条绑定和结束当前绑定，不做批量导入、外部 HR 同步或在线身份源配置。 绑定成功或解绑成功后会递增目标用户安全版本，使旧登录票据和角色 Cookie 在后续请求中失效。</zh-CN>
-    ///   <en>P6.3-S5 provides only single-row binding and ending of the current binding, not bulk import, external HR synchronization, or online identity-source configuration. Successful bind or unbind operations increment the target user's security version so old auth tickets and role cookies expire on later requests.</en>
+    ///   <zh-CN>P6.3-S5 只提供单条绑定和结束当前绑定，不做批量导入、外部 HR 同步或在线身份源配置。绑定/解绑写入、目标用户安全版本失效和运营审计由连续调用组成，不宣称跨服务原子事务；成功递增安全版本后，旧登录票据和角色 Cookie 才会在后续请求中按既有认证链失效。</zh-CN>
+    ///   <en>P6.3-S5 provides only single-row binding and ending of the current binding, not bulk import, external HR synchronization, or online identity-source configuration. Bind/unbind persistence, target-user security-version invalidation, and operations audit are sequential calls rather than a claimed cross-service atomic transaction; after a successful version increment, old auth tickets and role cookies expire on later requests through the existing authentication chain.</en>
     /// </lang>
     /// </remarks>
     public partial class UserEmployeeBindingEdit : PortalPage<UserEmployeeBindingEdit>
@@ -105,6 +105,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Event data.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该回发先复核绑定权限和正数用户标识，再调用绑定写入；随后递增安全版本并记录审计。三步不共享本页声明的跨服务事务，异常处理保留已发生的部分完成事实。</zh-CN>
+        ///   <en>This postback rechecks binding permission and a positive user identifier before the bind write, then increments the security version and records audit. The three steps do not share a cross-service transaction claimed by this page, and exception handling preserves the fact that earlier steps may already have completed.</en>
+        /// </lang>
+        /// </remarks>
         protected void BindButton_Click(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryBind))
@@ -134,6 +140,10 @@ namespace ASPNET.StarterKit.Portal
 
                 if (!result.Succeeded)
                 {
+                    // <lang>
+                    //   <zh-CN>绑定服务返回失败时不递增安全版本、不记录成功审计，刷新当前状态以反映服务端事实。</zh-CN>
+                    //   <en>When the binding service reports failure, do not increment the security version or record success audit; refresh the current state to reflect the server fact.</en>
+                    // </lang>
                     ShowMessage(result.Message, true);
                     RefreshCurrentState(userId, EmployeeCodeTextBox.Text);
                     return;
@@ -144,6 +154,10 @@ namespace ASPNET.StarterKit.Portal
                 //   <en>After a successful bind, increment the security version so the target user's old tickets expire naturally on later requests.</en>
                 // </lang>
                 UsersDb.IncrementSecurityVersion(userId, "EmployeeBindingChanged");
+                // <lang>
+                //   <zh-CN>安全版本递增与绑定写入已是连续调用；若递增异常，绑定事实可能已经持久化，不能把 catch 后提示误写成回滚完成。</zh-CN>
+                //   <en>The security-version increment is a sequential call after binding persistence; if it throws, the binding fact may already be durable, so the catch message must not be read as a completed rollback.</en>
+                // </lang>
                 PortalOperationAudit.Record(
                     PortalOperationAuditEvents.EnterpriseDirectoryCategory,
                     PortalOperationAuditEvents.UserEmployeeBound,
@@ -183,6 +197,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Event data.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>解绑先解析隐藏域中的正数绑定标识并重新读取当前记录，再执行结束写入；成功后同样递增用户安全版本并审计。隐藏域不是授权凭据，最终权限仍由回发门禁和数据服务共同约束。</zh-CN>
+        ///   <en>Unbinding parses a positive binding id from the hidden field and reloads the current row before ending it; success then increments the user security version and records audit. The hidden field is not an authorization credential; the postback gate and data service together constrain the final operation.</en>
+        /// </lang>
+        /// </remarks>
         protected void EndBindingButton_Click(object sender, EventArgs e)
         {
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryBind))
@@ -220,6 +240,10 @@ namespace ASPNET.StarterKit.Portal
 
                 if (!result.Succeeded)
                 {
+                    // <lang>
+                    //   <zh-CN>解绑服务失败时保留当前绑定摘要并返回，不递增安全版本或记录成功审计。</zh-CN>
+                    //   <en>When the unbind service fails, retain the current binding summary and return without incrementing the security version or recording success audit.</en>
+                    // </lang>
                     ShowMessage(result.Message, true);
                     RefreshCurrentState(binding.UserId, binding.EmployeeCode);
                     return;
@@ -230,6 +254,10 @@ namespace ASPNET.StarterKit.Portal
                 //   <en>Unbinding also increments the target user's security version because employee identity binding affects later permissions and profile context.</en>
                 // </lang>
                 UsersDb.IncrementSecurityVersion(binding.UserId, "EmployeeBindingChanged");
+                // <lang>
+                //   <zh-CN>解绑写入、安全版本递增和审计仍是连续步骤；后续异常不代表前一步写入已自动回滚。</zh-CN>
+                //   <en>Unbind persistence, security-version increment, and audit remain sequential steps; a later exception does not mean the earlier write was automatically rolled back.</en>
+                // </lang>
                 PortalOperationAudit.Record(
                     PortalOperationAuditEvents.EnterpriseDirectoryCategory,
                     PortalOperationAuditEvents.UserEmployeeUnbound,
@@ -422,6 +450,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Employee code, optionally empty.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>当前绑定摘要优先按用户再按员工号读取；隐藏域只保存展示记录的绑定标识，结束操作前仍由回发代码重新读取并由数据服务复核。摘要文本统一 HTML 编码。</zh-CN>
+        ///   <en>The current binding summary reads by user first and employee code second; the hidden field stores only the displayed row's binding id, which the postback code reloads and the data service rechecks before ending. Summary text is HTML-encoded consistently.</en>
+        /// </lang>
+        /// </remarks>
         private void BindCurrentBinding(int userId, string employeeCode)
         {
             IUserEmployeeBindingInfo binding = null;
@@ -530,6 +564,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Safe message displayed to the administrator.</en>
         /// </l>
         /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>不可用状态只改变页面提示和按钮可用性，不伪造绑定事实、不执行写入，也不把结构缺失当成权限通过。</zh-CN>
+        ///   <en>The unavailable state changes only page messaging and button availability; it does not fake a binding fact, perform writes, or treat a missing schema as authorization.</en>
+        /// </lang>
+        /// </remarks>
         private void ShowUnavailable(string message)
         {
             ShowMessage(message, true);
@@ -574,6 +614,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Current identity name, or an administration-compatible fallback when absent.</en>
         /// </l>
         /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>返回值只作为既有审计字段输入；缺失时的 admin 是兼容占位，不是身份认证、权限授予或操作者真实性证明。</zh-CN>
+        ///   <en>The return value is only an input to the existing audit field; the admin fallback is a compatibility placeholder, not authentication, permission granting, or proof of actor authenticity.</en>
+        /// </lang>
+        /// </remarks>
         private string GetCurrentActor()
         {
             return Context.User == null || Context.User.Identity == null ||

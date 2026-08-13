@@ -64,8 +64,10 @@ namespace ASPNET.StarterKit.Portal
         public string CreatedBy { get; set; }
 
         /// <summary>
-        /// 创建 UTC 时间。
-        /// Creation UTC time.
+        /// <lang>
+        ///   <zh-CN>邀请记录创建时间，按 UTC 保存以便跨服务器比较。</zh-CN>
+        ///   <en>Creation time of the invitation record, stored as UTC for cross-server comparison.</en>
+        /// </lang>
         /// </summary>
         public DateTime CreatedUtc { get; set; }
     }

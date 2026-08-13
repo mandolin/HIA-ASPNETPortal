@@ -14,7 +14,20 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     public partial class ModuleDefs : PortalModuleControl<ModuleDefs>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的模块定义编辑回跳 Tab 标识。</zh-CN>
+        ///   <en>The optional Tab identifier preserved for module-definition edit return navigation.</en>
+        /// </lang>
+        /// </summary>
         private int tabId;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选的模块定义编辑回跳 Tab 索引。</zh-CN>
+        ///   <en>The optional Tab index preserved for module-definition edit return navigation.</en>
+        /// </lang>
+        /// </summary>
         private int tabIndex;
 
         /// <summary>
@@ -46,11 +59,19 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>模块定义查看权限和导航参数是列表、目录入口及编辑入口的共同门禁。</zh-CN>
+            //   <en>Definition-view permission and navigation parameters gate the list, catalog entry, and edit entry points.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleDefinitionEdit) || !TryReadNavigationParameters())
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>仅首次请求绑定既有定义，保留回发控件状态。</zh-CN>
+            //   <en>Bind existing definitions only on the initial request, preserving postback control state.</en>
+            // </lang>
             if (!Page.IsPostBack)
             {
                 BindData();
@@ -77,6 +98,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void AddDef_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>新增入口使用目录查看权限，并只导航到受信模块目录，不恢复手填路径创建。</zh-CN>
+            //   <en>Use catalog-view permission and navigate only to the trusted module catalog without restoring hand-entered path creation.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleCatalogView) || !TryReadNavigationParameters())
             {
                 return;
@@ -105,6 +130,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void DefsList_ItemCommand(object sender, DataListCommandEventArgs e)
         {
+            // <lang>
+            //   <zh-CN>编辑命令再次验证权限、导航参数和 DataList 目标，避免仅凭行索引构造地址。</zh-CN>
+            //   <en>Revalidate permission, navigation parameters, and the DataList target so a URL cannot be built from a row index alone.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ModuleDefinitionEdit) || !TryReadNavigationParameters())
             {
                 return;
@@ -113,6 +142,10 @@ namespace ASPNET.StarterKit.Portal
             // <lang>
             //   <zh-CN>旧 DataList 只给出行索引，因此这里先把索引、DataKeys 和真实定义集合串起来复核，避免构造不存在的定义编辑地址。</zh-CN>
             //   <en>The legacy DataList provides only a row index, so this block cross-checks the index, DataKeys, and actual definition set before composing an edit URL.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>定义标识必须同时通过行边界、DataKeys 正整数和当前定义集合校验。</zh-CN>
+            //   <en>The definition id must pass row bounds, DataKeys positive-integer parsing, and current-definition-set validation together.</en>
             // </lang>
             int moduleDefId;
             if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= defsList.DataKeys.Count ||
@@ -123,6 +156,10 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>编辑地址只携带已验证定义和兼容导航参数，并交给安全导航策略。</zh-CN>
+            //   <en>Carry only the verified definition and compatibility navigation parameters through the safe navigation policy.</en>
+            // </lang>
             string url = ResolveUrl(
                 "~/Admin/ModuleDefinitions.aspx?defId=" + moduleDefId +
                 "&tabindex=" + tabIndex +
@@ -144,6 +181,10 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private bool TryReadNavigationParameters()
         {
+            // <lang>
+            //   <zh-CN>同时读取可选 Tab 标识和非负索引；任一非法输入都阻断后续操作。</zh-CN>
+            //   <en>Read the optional Tab id and non-negative index together; any invalid input blocks subsequent operations.</en>
+            // </lang>
             return TryReadOptionalPositiveParameter("tabid", out tabId) &&
                    TryReadOptionalNonNegativeParameter("tabindex", out tabIndex);
         }
@@ -175,6 +216,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalPositiveParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>缺失参数保持兼容默认值 0；存在参数必须通过正整数策略。</zh-CN>
+            //   <en>Keep the compatibility default of 0 when absent; a supplied value must pass positive-integer validation.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -186,6 +231,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法导航参数统一导向编辑拒绝页，不回显原始输入。</zh-CN>
+            //   <en>Route invalid navigation input to edit-denied without echoing the raw value.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -217,6 +266,10 @@ namespace ASPNET.StarterKit.Portal
         private bool TryReadOptionalNonNegativeParameter(string parameterName, out int value)
         {
             value = 0;
+            // <lang>
+            //   <zh-CN>索引允许零，但必须在参与返回 URL 前完成非负整数校验。</zh-CN>
+            //   <en>The index permits zero but must be validated as non-negative before it participates in a return URL.</en>
+            // </lang>
             string rawValue = Request.Params[parameterName];
             if (string.IsNullOrWhiteSpace(rawValue))
             {
@@ -228,6 +281,10 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
+            // <lang>
+            //   <zh-CN>非法索引不降级为默认值，直接拒绝继续处理。</zh-CN>
+            //   <en>Do not downgrade an invalid index to a default; reject further processing directly.</en>
+            // </lang>
             PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
             return false;
         }
@@ -240,6 +297,10 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private void BindData()
         {
+            // <lang>
+            //   <zh-CN>从旧模块定义数据源绑定只读列表，不在控件绑定阶段执行写入。</zh-CN>
+            //   <en>Bind the read-only list from the legacy definition source without performing writes during binding.</en>
+            // </lang>
             defsList.DataSource = ModuleDefConfig.GetModuleDefinitions();
             defsList.DataBind();
         }

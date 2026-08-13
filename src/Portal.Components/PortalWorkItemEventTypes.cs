@@ -8,8 +8,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>这些字符串会写入待办事件表和审计记录，属于跨版本可读数据的一部分；新增事件类型应追加新常量，不应重命名已有值。</zh-CN>
-    ///   <en>These strings are persisted into work-item event tables and audit records, so they are part of cross-version readable data. Add new constants for new event types instead of renaming existing values.</en>
+    ///   <zh-CN>这些字符串会写入待办事件表和审计记录，属于跨版本可读数据的一部分；新增事件类型应追加新常量，不应重命名已有值。事件类型只分类历史事实，不自动决定目标状态、业务动作是否成功或当前用户是否有权操作。</zh-CN>
+    ///   <en>These strings are persisted into work-item event tables and audit records, so they are part of cross-version readable data. Add new constants for new event types instead of renaming existing values. An event type only classifies a historical fact; it does not automatically determine target state, successful domain action, or current-user authorization.</en>
     /// </lang>
     /// </remarks>
     public static class PortalWorkItemEventTypes

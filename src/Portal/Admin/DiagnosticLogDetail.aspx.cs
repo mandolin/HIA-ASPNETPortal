@@ -36,25 +36,45 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>详情页在读取查询字符串前复核明细权限，拒绝时不探测配置、不查询事件。</zh-CN>
+            //   <en>Recheck detail permission before reading the query string so rejection probes neither configuration nor events.</en>
+            // </lang>
             if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.OpsDiagnosticsDetail))
             {
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>部署级开关是第二道门禁；关闭时给出固定提示，不泄露日志服务或文件路径状态。</zh-CN>
+            //   <en>The deployment-level switch is the second gate; when disabled, show a fixed message without exposing log-service or file-path state.</en>
+            // </lang>
             if (!PortalDiagnostics.AreAdminLogDetailsEnabled())
             {
                 MessageLabel.Text = "Diagnostic detail viewing is disabled by deployment configuration.";
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>只接受事件编号查询结构化日志，不把请求参数解释为物理路径或任意文件名。</zh-CN>
+            //   <en>Use the request value only as an event-id lookup into structured logs, never as a physical path or arbitrary file name.</en>
+            // </lang>
             string eventId = Request.QueryString["id"];
             PortalDiagnosticEntry entry = PortalDiagnosticQueryService.FindByEventId(eventId);
             if (entry == null)
             {
+                // <lang>
+                //   <zh-CN>未知或已清理事件统一落到固定未找到提示，避免回显查询值或底层异常。</zh-CN>
+                //   <en>Unknown or purged events use a fixed not-found message, avoiding reflection of the query value or backend exception.</en>
+                // </lang>
                 MessageLabel.Text = "The requested diagnostic event was not found in structured logs.";
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>只有服务返回完整事件后才显示详情面板；字段投影继续由下方编码 helper 统一约束。</zh-CN>
+            //   <en>Show the detail panel only after the service returns a complete event; field projection remains constrained by the encoding helper below.</en>
+            // </lang>
             DetailPanel.Visible = true;
             /*
              * <lang>

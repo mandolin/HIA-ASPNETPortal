@@ -22,6 +22,18 @@ namespace ASPNET.StarterKit.Portal
     /// </remarks>
     public partial class WorkItems : PortalPage<WorkItems>
     {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>后台列表一次读取和展示的固定上限。</zh-CN>
+        ///   <en>Fixed maximum number of work items read and displayed per administration request.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该上限同时传给数据服务并用于摘要文本，避免管理页在没有分页控件时无界读取；它不是数据服务、授权或状态写入策略。</zh-CN>
+        ///   <en>The limit is passed to the data service and reused in the summary text so the administration page cannot read an unbounded result without paging controls; it is not a data-service, authorization, or state-write policy.</en>
+        /// </lang>
+        /// </remarks>
         private const int PageSize = 50;
 
         /// <summary>

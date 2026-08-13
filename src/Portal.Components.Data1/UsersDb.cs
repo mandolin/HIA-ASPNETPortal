@@ -13,8 +13,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>P5.2 起，新建、注册和重置密码写入 <c>Portal_UserCredentials</c> 强哈希表，并通过 <c>Portal_UserSecurityStates</c> 维护会话安全版本。旧 <c>Portal_Users.Password</c> 中的 MD5 仅用于尚未升级用户的首次兼容登录；一旦强哈希凭据存在，登录不得再回退到旧字段。</zh-CN>
-    ///   <en>Starting with P5.2, newly created, registered, and reset passwords are written to the <c>Portal_UserCredentials</c> strong-hash table, while <c>Portal_UserSecurityStates</c> maintains the session security version. Legacy MD5 values in <c>Portal_Users.Password</c> are used only for the first compatibility sign-in of users that have not yet been upgraded; once a strong credential exists, sign-in must not fall back to the legacy column.</en>
+    ///   <zh-CN>P5.2 起，新建、注册和重置密码写入 <c>Portal_UserCredentials</c> 强哈希表，并通过 <c>Portal_UserSecurityStates</c> 维护会话安全版本。旧 <c>Portal_Users.Password</c> 中的 MD5 仅用于尚未升级用户的首次兼容登录；一旦强哈希凭据存在，登录不得再回退到旧字段。本类只负责凭据/状态数据访问与结果构造，不负责页面授权、Cookie 签发或把密码值写入日志。</zh-CN>
+    ///   <en>Starting with P5.2, newly created, registered, and reset passwords are written to the <c>Portal_UserCredentials</c> strong-hash table, while <c>Portal_UserSecurityStates</c> maintains the session security version. Legacy MD5 values in <c>Portal_Users.Password</c> are used only for the first compatibility sign-in of users that have not yet been upgraded; once a strong credential exists, sign-in must not fall back to the legacy column. This class only accesses credential/security-state data and constructs results; it does not authorize pages, issue cookies, or write password values to logs.</en>
     /// </lang>
     /// </remarks>
     public class UsersDb : IUsersDb
@@ -964,12 +964,18 @@ ORDER BY [Roles].[RoleName]",
             return _context.Users.SingleOrDefault(i => i.UserId == userId);
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>解析登录标识并校验输入密码、注册审核状态和 P5.2 强凭据。</zh-CN>
-        ///   <en>Resolves the sign-in identifier, then validates the submitted password, registration-review status, and P5.2 strong credential.</en>
-        /// </lang>
-        /// </summary>
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>解析登录标识并校验输入密码、注册审核状态和 P5.2 强凭据。</zh-CN>
+    ///   <en>Resolves the sign-in identifier, then validates the submitted password, registration-review status, and P5.2 strong credential.</en>
+    /// </lang>
+    /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>方法只返回成功、失败、需重置和安全版本等结果事实，不返回失败原因细节。标识会先归一化并通过解析器处理歧义；profile/注册审核扩展表缺失或读取异常按兼容策略放行，强凭据表可用时优先使用强哈希，存在凭据时禁止回退旧密码列；仅在无该用户强凭据时才允许一次 legacy 兼容升级。调用方仍须负责登录节流、会话/Cookie 和页面授权。</zh-CN>
+    ///   <en>The method returns only outcome, reset-required, and security-version facts, not failure details. The identifier is normalized and resolved with ambiguity handling first. Missing or unreadable profile/review extension tables follow the compatibility allow path; available strong-credential tables are preferred, and an existing credential forbids fallback to the legacy password column. Legacy compatibility upgrade is allowed only when that user has no strong credential. Callers remain responsible for throttling, session/Cookie issuance, and page authorization.</en>
+    /// </lang>
+    /// </remarks>
         /// <param name="emailOrName">
         /// <l>
         ///   <zh-CN>用户输入的邮箱、登录名称或员工号。</zh-CN>
@@ -990,6 +996,10 @@ ORDER BY [Roles].[RoleName]",
         /// </returns>
         public PortalSignInResult SignIn(string emailOrName, string password)
         {
+            // <lang>
+            //   <zh-CN>只保留归一化后的登录标识用于解析；密码不写入本地变量日志或诊断文本。</zh-CN>
+            //   <en>Use only the normalized sign-in identifier for resolution; never write the password to logs or diagnostic text.</en>
+            // </lang>
             string normalizedLogin = Normalize(emailOrName);
             if (string.IsNullOrEmpty(normalizedLogin) || password == null)
             {
@@ -1000,6 +1010,10 @@ ORDER BY [Roles].[RoleName]",
                 _context,
                 HasUserProfileTable(),
                 HasEmployeeCodeSignInTables()).Resolve(normalizedLogin);
+            // <lang>
+            //   <zh-CN>未找到或存在歧义时统一失败，避免通过响应差异暴露账号解析结果。</zh-CN>
+            //   <en>Fail uniformly when resolution is missing or ambiguous so response differences do not disclose account lookup results.</en>
+            // </lang>
             if (!resolution.Found || resolution.Ambiguous)
             {
                 return PortalSignInResult.Failed();
@@ -1015,6 +1029,10 @@ ORDER BY [Roles].[RoleName]",
             }
 
             bool hasCredentialTables = HasCredentialTables();
+            // <lang>
+            //   <zh-CN>强凭据表和安全状态表必须同时可用才进入强凭据路径；扩展表不可用时保留受控 legacy 兼容读取。</zh-CN>
+            //   <en>Use the strong-credential path only when both credential and security-state tables are available; otherwise retain the controlled legacy compatibility read.</en>
+            // </lang>
             if (hasCredentialTables)
             {
                 var credential = _context.UserCredentials
@@ -1038,6 +1056,10 @@ ORDER BY [Roles].[RoleName]",
                         return PortalSignInResult.Failed();
                     }
 
+                    // <lang>
+                    //   <zh-CN>强凭据验证成功后只更新最后验证时间并返回安全版本，不重新读取或暴露哈希材料。</zh-CN>
+                    //   <en>After strong-credential verification, update only the last-verified time and return the security version; never re-read or expose hash material.</en>
+                    // </lang>
                     MarkCredentialVerified(item.UserId);
                     return new PortalSignInResult(true, item.UserId, SafeName(item.Name), GetSecurityVersionByUserId(item.UserId), false, false);
                 }
@@ -1051,6 +1073,10 @@ ORDER BY [Roles].[RoleName]",
             bool upgradedLegacyCredential = false;
             if (hasCredentialTables)
             {
+                // <lang>
+                //   <zh-CN>legacy 登录成功只在事务内升级为强凭据并初始化安全状态；升级异常沿既有调用路径传播，不把明文密码写入表。</zh-CN>
+                //   <en>After legacy sign-in succeeds, upgrade the credential and initialize security state in one transaction; upgrade exceptions follow the existing call path and plaintext passwords are never stored.</en>
+                // </lang>
                 DateTime nowUtc = DateTime.UtcNow;
                 using (var transaction = _context.Database.BeginTransaction())
                 {
@@ -1078,6 +1104,12 @@ ORDER BY [Roles].[RoleName]",
         ///   <en>Sign-in method retained for legacy call sites; new code should prefer <see cref="SignIn"/>.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该兼容入口只把 <see cref="SignIn"/> 的成功用户名投影为字符串；空字符串同时表示输入失败、账号不可用、密码失败或解析失败，调用方不得依赖原因分类。</zh-CN>
+        ///   <en>This compatibility entry projects only the successful user name from <see cref="SignIn"/>. An empty string represents invalid input, unavailable account, password failure, or resolution failure alike; callers must not depend on a reason classification.</en>
+        /// </lang>
+        /// </remarks>
         /// <param name="emailOrName">
         /// <l>
         ///   <zh-CN>用户输入的邮箱、登录名称或员工号。</zh-CN>
@@ -1122,6 +1154,10 @@ ORDER BY [Roles].[RoleName]",
         /// </returns>
         public long GetSecurityVersionByUserName(string userName)
         {
+            // <lang>
+            //   <zh-CN>名称查询失败和未找到统一返回 0；0 只表示当前无法取得版本，不能当作已验证的初始状态。</zh-CN>
+            //   <en>Return zero for both lookup failure and absence; zero means the version is currently unavailable, not that an initial state was verified.</en>
+            // </lang>
             string normalizedUserName = Normalize(userName);
             if (string.IsNullOrEmpty(normalizedUserName))
             {
@@ -1161,6 +1197,10 @@ ORDER BY [Roles].[RoleName]",
         /// </returns>
         public long GetSecurityVersionByUserId(int userId)
         {
+            // <lang>
+            //   <zh-CN>安全版本读取只接受正数标识；缺少状态行时尝试幂等创建初始版本，任何数据库异常按 0 回退。</zh-CN>
+            //   <en>Security-version reads accept only positive identifiers; a missing state row is idempotently initialized when possible, and database errors fall back to zero.</en>
+            // </lang>
             if (userId <= 0 || !HasSecurityStateTable())
             {
                 return 0;
@@ -1177,6 +1217,10 @@ ORDER BY [Roles].[RoleName]",
                 }
 
                 EnsureSecurityState(userId, "AutoCreateSecurityState");
+                // <lang>
+                //   <zh-CN>创建请求只保证尝试补齐状态；当前方法返回稳定的初始版本，不把插入结果扩大为用户存在或登录授权证明。</zh-CN>
+                //   <en>The create request only attempts to fill the state; return the stable initial version without treating insertion as proof of user existence or sign-in authorization.</en>
+                // </lang>
                 return InitialSecurityVersion;
             }
             catch (Exception)
@@ -1205,6 +1249,10 @@ ORDER BY [Roles].[RoleName]",
         /// </param>
         public void IncrementSecurityVersion(int userId, string reason)
         {
+            // <lang>
+            //   <zh-CN>安全版本递增是使旧票据失效的持久化门禁；非法标识或缺少状态表直接 no-op，数据库执行异常保持原有传播行为。</zh-CN>
+            //   <en>Security-version increment is the persistence gate that invalidates older tickets; invalid identifiers or a missing state table are no-ops, while database execution errors retain their existing propagation behavior.</en>
+            // </lang>
             if (userId <= 0 || !HasSecurityStateTable())
             {
                 return;
@@ -1231,6 +1279,30 @@ END",
 
         #endregion
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按注册审核状态判断用户是否允许进入登录校验。</zh-CN>
+        ///   <en>Determines whether a user may enter password verification based on registration-review state.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>审核表缺失、用户无审核记录或读取异常沿历史兼容路径放行；该 fail-open 行为只维持迁移兼容，不是强授权保证。</zh-CN>
+        ///   <en>Missing review tables, absent user records, and read failures follow the historical compatibility allow path; this fail-open behavior preserves migration compatibility and is not a strong authorization guarantee.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户数值标识。</zh-CN>
+        ///   <en>The numeric user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>审核状态允许或兼容回退时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when review state allows access or compatibility fallback applies.</en>
+        /// </l>
+        /// </returns>
         private bool IsLoginAllowed(int userId)
         {
             try
@@ -1258,6 +1330,30 @@ END",
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按用户 profile 状态判断登录是否可继续。</zh-CN>
+        ///   <en>Determines whether sign-in may continue based on the user's profile status.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>profile 表缺失、状态为空或读取异常按兼容路径放行；只有明确非 Active 状态才拒绝。本 helper 不替代认证成功后的页面授权。</zh-CN>
+        ///   <en>Missing profile tables, empty status, and read failures follow the compatibility allow path; only an explicit non-Active status rejects. This helper does not replace page authorization after authentication.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户数值标识。</zh-CN>
+        ///   <en>The numeric user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>profile 缺失/Active/兼容回退时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the profile is missing, Active, or compatibility fallback applies.</en>
+        /// </l>
+        /// </returns>
         private bool IsUserProfileLoginAllowed(int userId)
         {
             try
@@ -1574,6 +1670,18 @@ FROM
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建或更新用户的强哈希凭据记录。</zh-CN>
+        ///   <en>Creates or updates a user's strong-hash credential record.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>要求凭据和安全状态表同时存在；密码只传给哈希器，持久化哈希、盐、格式和迭代次数，不保存明文。调用方负责在适当事务中提交上下文。</zh-CN>
+        ///   <en>Requires both credential and security-state tables. The password is passed only to the hasher; persisted fields are hash, salt, format, and iteration count, never plaintext. The caller is responsible for committing the context in the appropriate transaction.</en>
+        /// </lang>
+        /// </remarks>
         private void UpsertCredential(
             int userId,
             string password,
@@ -1587,6 +1695,10 @@ FROM
                 throw new InvalidOperationException("Credential metadata tables are not available.");
             }
 
+            // <lang>
+            //   <zh-CN>哈希器负责随机盐和迭代策略；本层只保存其结果，不记录或回写原始密码。</zh-CN>
+            //   <en>The hasher owns salt and iteration policy; this layer persists only its result and never logs or writes the raw password.</en>
+            // </lang>
             PortalPasswordHash hash = PortalPasswordHasher.CreateHash(password);
             DateTime nowUtc = DateTime.UtcNow;
             var credential = _context.UserCredentials.SingleOrDefault(i => i.UserId == userId);
@@ -1612,6 +1724,18 @@ FROM
             credential.ResetReason = string.IsNullOrWhiteSpace(resetReason) ? null : NormalizeReason(resetReason);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>更新强凭据的最后验证 UTC 时间。</zh-CN>
+        ///   <en>Updates the last-verified UTC time for a strong credential.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>凭据表缺失时不执行写入；该记录只用于运维/安全追踪，不改变认证结果或安全版本。</zh-CN>
+        ///   <en>No write occurs when the credential table is absent; the field is for operational/security tracking and does not change authentication outcome or security version.</en>
+        /// </lang>
+        /// </remarks>
         private void MarkCredentialVerified(int userId)
         {
             if (!HasCredentialTable())
@@ -1624,6 +1748,18 @@ FROM
                 userId);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>幂等补齐用户初始安全版本状态。</zh-CN>
+        ///   <en>Idempotently ensures the user's initial security-version state.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>仅对正数用户且状态表存在时执行；插入仍以 Portal 用户存在为条件，重复调用不覆盖现有版本。</zh-CN>
+        ///   <en>Executes only for a positive user identifier when the state table exists; insertion also requires the Portal user to exist, and repeated calls do not overwrite an existing version.</en>
+        /// </lang>
+        /// </remarks>
         private void EnsureSecurityState(int userId, string reason)
         {
             if (userId <= 0 || !HasSecurityStateTable())
@@ -1644,6 +1780,18 @@ END",
                 InitialSecurityVersion);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>对尚未建立强凭据的旧用户执行一次 legacy 密码摘要比较。</zh-CN>
+        ///   <en>Compares a legacy password digest for a user who has not yet established a strong credential.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>调用方必须先确认不存在强凭据；空用户、空旧摘要或比较失败均返回 false。该路径只为迁移兼容，不应作为新用户凭据存储方式。</zh-CN>
+        ///   <en>The caller must establish that no strong credential exists first; a null user, empty legacy digest, or mismatch returns false. This path exists only for migration compatibility and must not be used as new-user credential storage.</en>
+        /// </lang>
+        /// </remarks>
         private bool VerifyLegacyPassword(UserItem item, string password)
         {
             if (item == null || string.IsNullOrEmpty(item.Password))
@@ -1651,35 +1799,75 @@ END",
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>只在内存中生成兼容摘要并做序号比较，不输出摘要或原始密码。</zh-CN>
+            //   <en>Generate the compatibility digest only in memory and compare ordinally; expose neither digest nor raw password.</en>
+            // </lang>
             string legacyDigest = PortalSecurity.Encrypt(password);
             return string.Equals(item.Password, legacyDigest, StringComparison.Ordinal);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查强凭据表和安全状态表是否同时可用。</zh-CN>
+        ///   <en>Checks whether both strong-credential and security-state tables are available.</en>
+        /// </lang>
+        /// </summary>
         private bool HasCredentialTables()
         {
             return HasCredentialTable() && HasSecurityStateTable();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查强凭据表是否可用。</zh-CN>
+        ///   <en>Checks whether the strong-credential table is available.</en>
+        /// </lang>
+        /// </summary>
         private bool HasCredentialTable()
         {
             return HasTable(CredentialTableName);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查安全版本状态表是否可用。</zh-CN>
+        ///   <en>Checks whether the security-version state table is available.</en>
+        /// </lang>
+        /// </summary>
         private bool HasSecurityStateTable()
         {
             return HasTable(SecurityStateTableName);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查注册审核表是否可用。</zh-CN>
+        ///   <en>Checks whether the registration-review table is available.</en>
+        /// </lang>
+        /// </summary>
         private bool HasRegistrationTable()
         {
             return HasTable("PortalCfg_UserRegistrations");
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查用户 profile 扩展表是否可用。</zh-CN>
+        ///   <en>Checks whether the user-profile extension table is available.</en>
+        /// </lang>
+        /// </summary>
         private bool HasUserProfileTable()
         {
             return HasTable(ProfileTableName);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查员工号登录所需的员工和绑定表是否同时可用。</zh-CN>
+        ///   <en>Checks whether both employee and binding tables required for employee-code sign-in are available.</en>
+        /// </lang>
+        /// </summary>
         private bool HasEmployeeCodeSignInTables()
         {
             return HasTable(EmployeeTableName) && HasTable(EmployeeBindingTableName);
@@ -1690,10 +1878,32 @@ END",
             return HasTable("PortalCfg_RegistrationInvites");
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>检查受控安全数据库表是否存在。</zh-CN>
+        ///   <en>Checks whether a controlled security-database table exists.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tableName">
+        /// <l>
+        ///   <zh-CN>只能来自本类固定表名常量或固定注册表名。</zh-CN>
+        ///   <en>A name that must come from fixed table constants or fixed registration-table names in this class.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>表可访问时为 <c>true</c>；元数据异常时为 <c>false</c>。</zh-CN>
+        ///   <en><c>true</c> when the table is accessible; <c>false</c> on metadata errors.</en>
+        /// </l>
+        /// </returns>
         private bool HasTable(string tableName)
         {
             try
             {
+                // <lang>
+                //   <zh-CN>表名不接受用户输入；OBJECT_ID 元数据失败按不可用处理，调用方决定是否走兼容路径。</zh-CN>
+                //   <en>Table names accept no user input; OBJECT_ID metadata failures are treated as unavailable and callers decide whether to use compatibility paths.</en>
+                // </lang>
                 string sql = string.Format(
                     "SELECT CASE WHEN OBJECT_ID(N'[dbo].[{0}]', N'U') IS NULL THEN 0 ELSE 1 END",
                     tableName);

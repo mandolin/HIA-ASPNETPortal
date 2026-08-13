@@ -98,6 +98,10 @@ namespace ASPNET.StarterKit.Portal
             }
 
             string portalName;
+            // <lang>
+            //   <zh-CN>站点名称限制为单行、非空且不超过既有上限；校验失败时保持原设置不变。</zh-CN>
+            //   <en>Keep the existing settings unchanged unless the site name is non-empty, single-line, and within the established length limit.</en>
+            // </lang>
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(SiteName.Text, 150, out portalName))
             {
                 ShowMessage("站点名称无效，未保存本次修改。");
@@ -119,6 +123,10 @@ namespace ASPNET.StarterKit.Portal
                     portalSettings.PortalId.ToString(),
                     "Updated site settings.",
                     Context);
+                // <lang>
+                //   <zh-CN>保存和审计完成后只按当前请求地址安全刷新，不接受外部回跳地址。</zh-CN>
+                //   <en>After save and audit, safely refresh only the current request URL and do not accept an external return address.</en>
+                // </lang>
                 PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, Request.RawUrl);
             }
             catch (Exception exception)
@@ -150,6 +158,10 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         private void ShowMessage(string message)
         {
+            // <lang>
+            //   <zh-CN>提示统一 HTML 编码，避免站点名称或诊断编号被当作标记输出。</zh-CN>
+            //   <en>HTML-encode messages so a site name or diagnostic identifier cannot be emitted as markup.</en>
+            // </lang>
             Message.Text = Server.HtmlEncode(message ?? string.Empty);
         }
     }

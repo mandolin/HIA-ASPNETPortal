@@ -16,8 +16,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>P6.4.3 第一版只处理请求状态和管理员备注，不直接修改员工主数据；真实资料修改仍走员工目录维护。</zh-CN>
-    ///   <en>The first P6.4.3 version updates only request status and administrator notes. Actual profile changes still go through employee-directory maintenance.</en>
+    ///   <zh-CN>P6.4.3 第一版只处理请求状态和管理员备注，不直接修改员工主数据；真实资料修改仍走员工目录维护。审核成功、运营审计和待办同步由不同调用链完成，本页不宣称它们构成跨服务原子事务。</zh-CN>
+    ///   <en>The first P6.4.3 version updates only request status and administrator notes. Actual profile changes still go through employee-directory maintenance. Review success, operations audit, and work-item synchronization use separate call paths; this page does not claim a cross-service atomic transaction.</en>
     /// </lang>
     /// </remarks>
     public partial class EmployeeProfileCorrectionRequests : PortalPage<EmployeeProfileCorrectionRequests>
@@ -84,11 +84,21 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Handles administrator status commands from the request list.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>命令状态先经过固定白名单和按状态分支的权限检查，再解析正数请求标识并调用数据服务。审核事实成功后才记录运营审计；待办同步是后续旁路，不能被文档化为与审核写入同一事务。</zh-CN>
+        ///   <en>The command status passes a fixed allowlist and status-specific permission check before the positive request identifier is parsed and the data service is called. Operations audit is recorded only after the review fact succeeds; work-item synchronization is a later sidecar and must not be documented as the same transaction as the review write.</en>
+        /// </lang>
+        /// </remarks>
         protected void RequestsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             string targetStatus = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
             if (!IsSupportedTargetStatus(targetStatus))
             {
+                // <lang>
+                //   <zh-CN>命令名来自回发控件，不能直接当作任意状态传入数据层；未知值只刷新列表并返回。</zh-CN>
+                //   <en>The command name comes from a postback control and cannot be passed to the data layer as an arbitrary status; unknown values only refresh the list and return.</en>
+                // </lang>
                 MessageLabel.Text = "Unsupported request status.";
                 BindRequests();
                 return;
@@ -96,6 +106,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (!EnsureCanApplyRequestStatus(targetStatus))
             {
+                // <lang>
+                //   <zh-CN>关闭状态使用取消权限，其它处理状态使用审核权限；权限门禁在每次命令回发时重新执行。</zh-CN>
+                //   <en>The closed status uses the cancel permission while other processing statuses use the review permission; the gate is re-evaluated on every command postback.</en>
+                // </lang>
                 return;
             }
 
@@ -126,6 +140,10 @@ namespace ASPNET.StarterKit.Portal
 
             if (!result.Succeeded)
             {
+                // <lang>
+                //   <zh-CN>数据服务返回失败事实时不记录成功审计或待办完成，重新绑定列表以呈现服务端状态。</zh-CN>
+                //   <en>When the data service returns a failed fact, do not record success audit or work-item completion; rebind the list to show the server state.</en>
+                // </lang>
                 MessageLabel.Text = result.Message;
                 BindRequests();
                 return;
@@ -139,6 +157,10 @@ namespace ASPNET.StarterKit.Portal
                 "Employee profile correction reviewed. RequestStatus=" + targetStatus,
                 Context);
 
+            // <lang>
+            //   <zh-CN>审核写入和运营审计已经完成后才尝试待办旁路；旁路调用是否传播异常遵循其既有实现。</zh-CN>
+            //   <en>Attempt the work-item sidecar only after the review write and operations audit complete; whether sidecar exceptions propagate follows its existing implementation.</en>
+            // </lang>
             TryCompleteWorkItem(result.RequestId, targetStatus, reviewNote);
 
             MessageLabel.Text = "Correction request status updated.";
@@ -168,6 +190,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Reads correction requests for the current status filter and binds the administration list.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>读取只使用当前状态筛选和固定 PageSize；schema 或依赖不可用时显示受控提示并清空列表。展示行随后由 ASPX 的编码绑定输出，不在此层承担 HTML 或授权。</zh-CN>
+        ///   <en>The read uses only the current status filter and fixed PageSize; unavailable schema or dependencies produce a controlled message and an empty list. The display rows are later emitted through encoded ASPX bindings, so this method does not own HTML encoding or authorization.</en>
+        /// </lang>
+        /// </remarks>
         private void BindRequests()
         {
             if (CorrectionRequestDb == null)
@@ -198,6 +226,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Displays request-data unavailable messages and clears the request list.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该回退只清理本页展示状态，不伪造数据可用性、不改变权限，也不写入诊断或数据库。</zh-CN>
+        ///   <en>This fallback only clears the page's display state; it does not fake data availability, change permissions, or write diagnostics or database state.</en>
+        /// </lang>
+        /// </remarks>
         private void ShowUnavailable(string message)
         {
             MessageLabel.Text = message ?? string.Empty;
@@ -277,11 +311,17 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Attempts to mirror the profile-correction review result into lightweight work items.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>当前实现仅在待办依赖为空或请求标识非正数时短路；对实际 CompleteBusinessWorkItem 调用的异常保留既有传播行为。因此该方法是旁路调用边界，不是失败隔离或跨服务事务保证。</zh-CN>
+        ///   <en>The current implementation short-circuits only when the work-item dependency is absent or the request identifier is non-positive; exceptions from CompleteBusinessWorkItem retain their existing propagation behavior. This method is therefore a sidecar-call boundary, not a failure-isolation or cross-service transaction guarantee.</en>
+        /// </lang>
+        /// </remarks>
         private void TryCompleteWorkItem(long requestId, string requestStatus, string reviewNote)
         {
             // <lang>
-            //   <zh-CN>待办是旁路增强能力，写入失败不应回滚已经完成的资料更正审核动作。</zh-CN>
-            //   <en>Work items are a sidecar enhancement; write failures must not roll back the completed profile-correction review.</en>
+            //   <zh-CN>待办是审核后的旁路增强能力；当前调用不捕获服务异常，是否隔离失败属于后续实现任务，不能把“旁路”误写成“不会传播异常”。</zh-CN>
+            //   <en>Work items are a sidecar enhancement after review; this call currently does not catch service exceptions, so failure isolation is a follow-up implementation task and “sidecar” must not be misread as “exceptions never propagate.”</en>
             // </lang>
             if (WorkItemDb == null || requestId <= 0)
             {
@@ -354,6 +394,12 @@ namespace ASPNET.StarterKit.Portal
     ///   <en>Administration display row for an employee-profile correction request.</en>
     /// </lang>
     /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>该类型只投影审核列表所需字段和 UTC 展示文本，不执行授权、状态变更或敏感值净化；调用的 ASPX 标记使用 <c>&lt;%#:</c> 编码绑定负责 HTML 输出编码。</zh-CN>
+    ///   <en>This type only projects fields and UTC display text needed by the review list; it does not authorize, change status, or sanitize sensitive values. The consuming ASPX markup uses <c>&lt;%#:</c> encoded bindings for HTML output encoding.</en>
+    /// </lang>
+    /// </remarks>
     public sealed class EmployeeProfileCorrectionAdminRow
     {
         /// <summary>

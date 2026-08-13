@@ -8,9 +8,17 @@ using Unity;
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
-    /// 已部署模块包的运行状态。
-    /// Runtime state of a deployed module package.
+    /// <lang>
+    ///   <zh-CN>已部署模块包的受限运行状态快照。</zh-CN>
+    ///   <en>Restricted runtime-state snapshot of a deployed module package.</en>
+    /// </lang>
     /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>该快照只表达状态存储已返回的默认或显式事实；它不确认 manifest/物理部署可信、当前 Profile 允许、页面授权或控件已经加载。</zh-CN>
+    ///   <en>This snapshot states only the default or explicit fact returned by the state store; it does not confirm trusted manifest/physical deployment, current-profile allowance, page authorization, or control loading.</en>
+    /// </lang>
+    /// </remarks>
     public sealed class PortalModulePackageState
     {
         /// <summary>
@@ -19,6 +27,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Creates a runtime state snapshot for a module package.</en>
         /// </lang>
         /// </summary>
+        /// <param name="packageId"><l zh-CN="与该快照关联的稳定包标识；空值归一为稳定空文本，不在此重新验证部署。" en="Stable package identifier associated with this snapshot; null is normalized to stable empty text and deployment is not revalidated here." /></param>
+        /// <param name="isEnabled"><l zh-CN="状态表返回的显式启停值，或缺行时的兼容默认值；它不越过其它模块门禁。" en="Explicit enabled value returned by the state table, or the compatibility default for a missing row; it does not bypass other module gates." /></param>
+        /// <param name="isConfigured"><l zh-CN="是否已有显式状态行；false 与不可用状态表不同，后者不创建本快照。" en="Whether an explicit state row exists; false differs from an unavailable table, which does not create this snapshot." /></param>
+        /// <param name="updatedUtc"><l zh-CN="显式行的最近 UTC 时间；默认快照使用既有哨兵值。" en="Latest UTC time from an explicit row; the default snapshot uses the existing sentinel value." /></param>
+        /// <param name="updatedBy"><l zh-CN="显式行的操作人文本；空值归一为稳定空文本。" en="Actor text from an explicit row; null is normalized to stable empty text." /></param>
+        /// <param name="note"><l zh-CN="显式行的可选备注文本；空值归一为稳定空文本。" en="Optional note text from an explicit row; null is normalized to stable empty text." /></param>
         internal PortalModulePackageState(
             string packageId,
             bool isEnabled,
@@ -27,55 +41,84 @@ namespace ASPNET.StarterKit.Portal
             string updatedBy,
             string note)
         {
+            // <lang>
+            //   <zh-CN>该内部投影不读取数据库、不验证受信任部署，也不执行 Profile 或授权判断；调用方已决定此处是显式行还是兼容默认快照。</zh-CN>
+            //   <en>This internal projection neither reads the database nor validates trusted deployment, profile, or authorization; its caller has already decided whether this is an explicit row or a compatibility-default snapshot.</en>
+            // </lang>
             PackageId = packageId ?? string.Empty;
             IsEnabled = isEnabled;
             IsConfigured = isConfigured;
             UpdatedUtc = updatedUtc;
+
+            // <lang>
+            //   <zh-CN>可选元数据以空文本而非 null 暴露，保持读取消费者的稳定展示契约；这不净化、记录或传播底层异常详情。</zh-CN>
+            //   <en>Expose optional metadata as empty text rather than null to preserve a stable display contract for read consumers; this neither sanitizes, logs, nor propagates underlying exception detail.</en>
+            // </lang>
             UpdatedBy = updatedBy ?? string.Empty;
             Note = note ?? string.Empty;
         }
 
         /// <summary>
-        /// 与部署 manifest 对应的稳定包标识。
-        /// Stable package identifier matching the deployment manifest.
+        /// <lang>
+        ///   <zh-CN>与状态快照关联的稳定包标识。</zh-CN>
+        ///   <en>Stable package identifier associated with this state snapshot.</en>
+        /// </lang>
         /// </summary>
         public string PackageId { get; private set; }
 
         /// <summary>
-        /// 包是否允许参与当前请求的模块加载。
-        /// Whether the package may participate in module loading for the current request.
+        /// <lang>
+        ///   <zh-CN>状态存储给出的启用事实，可能为缺显式行时的兼容默认值。</zh-CN>
+        ///   <en>Enabled fact provided by the state store, which may be the compatibility default when no explicit row exists.</en>
+        /// </lang>
         /// </summary>
         public bool IsEnabled { get; private set; }
 
         /// <summary>
-        /// 数据库中是否存在显式状态覆盖。
-        /// Whether an explicit state override exists in the database.
+        /// <lang>
+        ///   <zh-CN>数据库是否存在显式状态行；false 表示可读状态表中没有该包行，而非状态表不可用。</zh-CN>
+        ///   <en>Whether the database has an explicit state row; false means the readable table has no row for this package, not that the table is unavailable.</en>
+        /// </lang>
         /// </summary>
         public bool IsConfigured { get; private set; }
 
         /// <summary>
-        /// 最近状态更新的 UTC 时间。
-        /// UTC time of the latest state update.
+        /// <lang>
+        ///   <zh-CN>显式状态行的最近更新时间；默认快照保留既有 UTC 哨兵值。</zh-CN>
+        ///   <en>Latest update time from an explicit state row; default snapshots retain the existing UTC sentinel value.</en>
+        /// </lang>
         /// </summary>
         public DateTime UpdatedUtc { get; private set; }
 
         /// <summary>
-        /// 最近更新的操作人。
-        /// Actor that performed the latest update.
+        /// <lang>
+        ///   <zh-CN>显式状态行的最近操作人文本；缺失数据库文本归一为稳定空值。</zh-CN>
+        ///   <en>Latest actor text from an explicit state row; missing database text is normalized to stable empty text.</en>
+        /// </lang>
         /// </summary>
         public string UpdatedBy { get; private set; }
 
         /// <summary>
-        /// 可选的非敏感状态备注。
-        /// Optional non-sensitive state note.
+        /// <lang>
+        ///   <zh-CN>显式状态行的可选备注文本；缺失数据库文本归一为稳定空值。</zh-CN>
+        ///   <en>Optional note text from an explicit state row; missing database text is normalized to stable empty text.</en>
+        /// </lang>
         /// </summary>
         public string Note { get; private set; }
     }
 
     /// <summary>
-    /// 模块包状态读取结果。
-    /// Module-package state read result.
+    /// <lang>
+    ///   <zh-CN>模块包状态存储读取的可用性与快照结果。</zh-CN>
+    ///   <en>Availability and snapshot result of a module-package state-store read.</en>
+    /// </lang>
     /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>本存储读取路径在 <see cref="IsAvailable"/> 为 false 时返回空 <see cref="State"/>，调用方须按既有兼容策略处理；可用缺行则返回未配置的默认启用快照。</zh-CN>
+    ///   <en>When its store-read path returns <see cref="IsAvailable"/> as false, it returns a null <see cref="State"/> and callers must apply the existing compatibility policy; an available missing row instead returns an unconfigured default-enabled snapshot.</en>
+    /// </lang>
+    /// </remarks>
     public sealed class PortalModulePackageStateReadResult
     {
         /// <summary>
@@ -84,21 +127,31 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Creates a module-package state read result.</en>
         /// </lang>
         /// </summary>
+        /// <param name="isAvailable"><l zh-CN="状态表是否可用；该事实不确认包部署、Profile、授权或加载。" en="Whether the state table is available; this fact does not confirm package deployment, profile, authorization, or loading." /></param>
+        /// <param name="state"><l zh-CN="可用时的默认或显式状态快照；本存储的不可用读取路径传入 null。" en="Default or explicit state snapshot when available; this store's unavailable read path passes null." /></param>
         internal PortalModulePackageStateReadResult(bool isAvailable, PortalModulePackageState state)
         {
+            // <lang>
+            //   <zh-CN>本存储的构造位置以成对事实传入可用性与状态：不可用读取不伪装为“未配置且默认启用”，本类型也不自行触发模块加载。</zh-CN>
+            //   <en>This store's construction sites pass availability and state as paired facts: an unavailable read is not disguised as “unconfigured and default enabled,” and this type does not initiate module loading.</en>
+            // </lang>
             IsAvailable = isAvailable;
             State = state;
         }
 
         /// <summary>
-        /// 状态表是否已部署并可读取。
-        /// Whether the state table is deployed and readable.
+        /// <lang>
+        ///   <zh-CN>状态表是否可连接且可读取；false 时没有可靠状态快照。</zh-CN>
+        ///   <en>Whether the state table can be connected and read; false means there is no reliable state snapshot.</en>
+        /// </lang>
         /// </summary>
         public bool IsAvailable { get; private set; }
 
         /// <summary>
-        /// 已读取状态；不可用时为 null。
-        /// Read state; null when the table is unavailable.
+        /// <lang>
+        ///   <zh-CN>可用状态表返回的默认或显式快照；不可用时为 null，而可用缺行时为未配置的默认启用快照。</zh-CN>
+        ///   <en>Default or explicit snapshot returned by an available state table; null when unavailable, and an unconfigured default-enabled snapshot when the available table has no row.</en>
+        /// </lang>
         /// </summary>
         public PortalModulePackageState State { get; private set; }
     }
@@ -172,14 +225,26 @@ namespace ASPNET.StarterKit.Portal
         private const string TableName = "PortalCfg_ModulePackageStates";
 
         /// <summary>
-        /// 读取一个模块包的当前状态。
-        /// Reads the current state of one module package.
+        /// <lang>
+        ///   <zh-CN>读取一个已验证部署模块包的受限状态快照。</zh-CN>
+        ///   <en>Reads the restricted state snapshot of one validated deployed module package.</en>
+        /// </lang>
         /// </summary>
-        /// <param name="packageId">已验证部署包的稳定标识。Stable identifier of a validated deployment package.</param>
-        /// <param name="context">用于受限诊断的当前 HTTP 上下文。Current HTTP context for restricted diagnostics.</param>
-        /// <returns>状态表可用性与默认或显式状态。Table availability and the default or explicit state.</returns>
+        /// <param name="packageId"><l zh-CN="调用方已通过受信任目录确认的稳定包标识；此方法只拒绝格式非法的值，不重新验证 manifest 或物理目录。" en="Stable package identifier already confirmed by the caller through the trusted catalog; this method rejects only format-invalid values and does not revalidate the manifest or physical directory." /></param>
+        /// <param name="context"><l zh-CN="仅传给受限异常诊断的可选 HTTP 上下文；它不参与包、Profile 或页面授权。" en="Optional HTTP context passed only to restricted exception diagnostics; it does not participate in package, profile, or page authorization." /></param>
+        /// <returns><l zh-CN="读取可用性与默认或显式快照：可用缺行返回未配置的默认启用状态；不可用或格式非法时状态为空。" en="Read availability and the default or explicit snapshot: an available missing row returns an unconfigured default-enabled state; unavailable or format-invalid input has no state." /></returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>状态表仅在受信任部署、Profile gate 和包校验之后表达允许范围内的启停。读取结果不授予访问、不确认模块已加载，且不应被直接调用者用来绕过这些独立门禁。</zh-CN>
+        ///   <en>The state table expresses enablement within the allowed scope only after trusted deployment, profile gating, and package validation. A read result grants no access, confirms no module load, and must not be used by direct callers to bypass those independent gates.</en>
+        /// </lang>
+        /// </remarks>
         public static PortalModulePackageStateReadResult Read(string packageId, HttpContext context = null)
         {
+            // <lang>
+            //   <zh-CN>格式非法的输入不进入连接或 SQL；这只保护存储输入边界，不把当前调用者或包声明为受信任/已授权。</zh-CN>
+            //   <en>Format-invalid input never reaches a connection or SQL; this protects only the store-input boundary and does not declare the current caller or package trusted or authorized.</en>
+            // </lang>
             if (!PortalModuleCatalog.IsValidPackageId(packageId))
             {
                 return new PortalModulePackageStateReadResult(false, null);
@@ -187,21 +252,37 @@ namespace ASPNET.StarterKit.Portal
 
             try
             {
+                // <lang>
+                //   <zh-CN>连接经受控容器路径创建并在 using 结束时释放；本存储不读取 appSettings、模块文件或 Profile，也不记录连接串。</zh-CN>
+                //   <en>Create the connection through the controlled container path and release it at the end of the using block; this store does not read appSettings, module files, or profiles, and never logs a connection string.</en>
+                // </lang>
                 using (SqlConnection connection = CreateConnection())
                 {
                     if (connection == null)
                     {
+                        // <lang>
+                        //   <zh-CN>没有连接来源时不伪造默认启用快照；调用方须从不可用事实走既有兼容回退。</zh-CN>
+                        //   <en>When no connection source exists, do not fabricate a default-enabled snapshot; callers must follow the existing compatibility fallback from the unavailable fact.</en>
+                        // </lang>
                         return new PortalModulePackageStateReadResult(false, null);
                     }
 
                     connection.Open();
                     if (!IsTableAvailable(connection))
                     {
+                        // <lang>
+                        //   <zh-CN>未迁移或不可读的状态表与“可读但没有该包行”不同；这里保留空状态，使上层能够区分基础设施缺口。</zh-CN>
+                        //   <en>An unmigrated or unreadable state table differs from a readable table with no row for this package; retain a null state here so upper layers can distinguish the infrastructure gap.</en>
+                        // </lang>
                         return new PortalModulePackageStateReadResult(false, null);
                     }
 
                     using (SqlCommand command = connection.CreateCommand())
                     {
+                        // <lang>
+                        //   <zh-CN>表名和选择字段是固定受控 SQL；包标识仅作为参数，不得影响对象名、谓词结构或排序。</zh-CN>
+                        //   <en>The table name and selected fields are fixed controlled SQL; the package identifier is only a parameter and cannot affect object names, predicate structure, or ordering.</en>
+                        // </lang>
                         command.CommandText = @"
 SELECT [IsEnabled], [UpdatedUtc], [UpdatedBy], [Note]
 FROM [dbo].[PortalCfg_ModulePackageStates]
@@ -212,11 +293,19 @@ WHERE [PackageId] = @PackageId;";
                         {
                             if (!reader.Read())
                             {
+                                // <lang>
+                                //   <zh-CN>可读表中的缺行是旧库兼容默认，而不是读取失败或显式启用记录：保留 IsConfigured=false 与既有 UTC 哨兵，供上层按事实继续处理。</zh-CN>
+                                //   <en>A missing row in a readable table is a legacy-compatibility default, not a read failure or explicit enabled record: retain IsConfigured=false and the existing UTC sentinel for upper layers to handle as facts.</en>
+                                // </lang>
                                 return new PortalModulePackageStateReadResult(
                                     true,
                                     new PortalModulePackageState(packageId, true, false, DateTime.MinValue, string.Empty, string.Empty));
                             }
 
+                            // <lang>
+                            //   <zh-CN>显式行只映射受控字段：启停布尔值与 UTC 时间保持数据库事实，可空操作人/备注归一为空文本；此处不净化、授权或加载模块。</zh-CN>
+                            //   <en>An explicit row maps only controlled fields: enabled Boolean and UTC time retain database facts while nullable actor/note text normalizes to empty text; this path does not sanitize, authorize, or load a module.</en>
+                            // </lang>
                             return new PortalModulePackageStateReadResult(
                                 true,
                                 new PortalModulePackageState(
@@ -232,6 +321,10 @@ WHERE [PackageId] = @PackageId;";
             }
             catch (Exception exception)
             {
+                // <lang>
+                //   <zh-CN>诊断层接收原始异常以便受控记录；返回值不回显异常、SQL 或连接详情，并保持不可用/空状态让调用方选择既有回退。</zh-CN>
+                //   <en>The diagnostics layer receives the original exception for controlled recording; the return value never echoes exception, SQL, or connection detail and retains an unavailable/null state for callers to choose the existing fallback.</en>
+                // </lang>
                 PortalDiagnostics.Error("ModulePackageState.Read", "Reading a module package state failed.", exception, context);
                 return new PortalModulePackageStateReadResult(false, null);
             }
