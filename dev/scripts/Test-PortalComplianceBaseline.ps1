@@ -182,8 +182,28 @@ function Get-PortalSourceFiles {
 }
 
 # <lang>
-#   <zh-CN>在受限源码文件集合中返回低敏匹配摘要，并限制结果数量避免证据膨胀。</zh-CN>
-#   <en>Return low-sensitivity match summaries from scoped source files with a result limit to avoid evidence bloat.</en>
+#   <zh-CN>判断源码匹配是否来自整行注释；合规风险扫描只用它排除说明性文档文本，不隐藏真实代码行或行尾注释附近的风险信号。</zh-CN>
+#   <en>Determine whether a source match came from a full-line comment; compliance risk scans use this only to exclude explanatory documentation text without hiding real code lines or risk signals near trailing comments.</en>
+# </lang>
+function Test-IsPortalSourceCommentLine {
+    param([string]$Line)
+
+    # <lang>
+    #   <zh-CN>去除左侧空白后的文本只在本函数生命周期内使用；它不包含秘密，也不写入 evidence。</zh-CN>
+    #   <en>The left-trimmed text is used only for this function call; it contains no secrets and is not written to evidence.</en>
+    # </lang>
+    $trimmedLine = $Line.TrimStart()
+
+    # <lang>
+    #   <zh-CN>只排除 C#/XML/Web Forms 常见整行注释前缀；未覆盖的可疑代码仍会进入人工复核证据。</zh-CN>
+    #   <en>Only common C#/XML/Web Forms full-line comment prefixes are excluded; suspicious code that is not covered still enters manual-review evidence.</en>
+    # </lang>
+    return $trimmedLine -match '^(//|///|/\*|\*|<!--|<%--)'
+}
+
+# <lang>
+#   <zh-CN>在受限源码文件集合中返回低敏匹配摘要，跳过整行注释命中，并限制结果数量避免证据膨胀。</zh-CN>
+#   <en>Return low-sensitivity match summaries from scoped source files, skip full-line comment matches, and enforce a result limit to avoid evidence bloat.</en>
 # </lang>
 function Find-PortalSourceMatch {
     param(
@@ -191,19 +211,56 @@ function Find-PortalSourceMatch {
         [int]$Limit = 8
     )
 
+    # <lang>
+    #   <zh-CN>低敏 evidence 摘要累加器；仅保存相对路径、行号和已裁剪的匹配行，不保存秘密值。</zh-CN>
+    #   <en>Low-sensitivity evidence accumulator; it stores only relative paths, line numbers, and trimmed matching lines, never secret values.</en>
+    # </lang>
     $matches = New-Object 'System.Collections.Generic.List[string]'
 
+    # <lang>
+    #   <zh-CN>逐个扫描受限源码文件，保持目录白名单和生成物排除由 `Get-PortalSourceFiles` 统一控制。</zh-CN>
+    #   <en>Scan each scoped source file while keeping directory allowlisting and generated-file exclusion centralized in `Get-PortalSourceFiles`.</en>
+    # </lang>
     foreach ($file in Get-PortalSourceFiles) {
+        # <lang>
+        #   <zh-CN>相对路径用于 evidence 定位，避免把完整本机路径扩散到合规报告主体。</zh-CN>
+        #   <en>The relative path is used for evidence location and avoids spreading the full local path into the compliance report body.</en>
+        # </lang>
         $relativePath = $file.FullName.Substring($repoRoot.Length + 1)
 
+        # <lang>
+        #   <zh-CN>每个正则命中先经过整行注释过滤；真实代码行仍保留给后续人工判断。</zh-CN>
+        #   <en>Each regex hit is first filtered for full-line comments; real code lines remain available for later manual judgment.</en>
+        # </lang>
         foreach ($match in Select-String -LiteralPath $file.FullName -Pattern $Pattern -AllMatches -ErrorAction SilentlyContinue) {
+            # <lang>
+            #   <zh-CN>说明性注释里的“不要记录密码/token”等防御性文字不是风险证据，跳过以降低误报。</zh-CN>
+            #   <en>Defensive wording such as "do not log password/token" inside explanatory comments is not risk evidence, so skip it to reduce false positives.</en>
+            # </lang>
+            if (Test-IsPortalSourceCommentLine -Line $match.Line) {
+                continue
+            }
+
+            # <lang>
+            #   <zh-CN>保存可审查摘要前裁剪空白，保持输出短小且不改变匹配来源。</zh-CN>
+            #   <en>Trim whitespace before storing the review summary so output stays compact without changing the match source.</en>
+            # </lang>
             $matches.Add(('{0}:{1}: {2}' -f $relativePath, $match.LineNumber, $match.Line.Trim()))
+
+            # <lang>
+            #   <zh-CN>达到调用方限制后立即返回，避免大型源码树把 evidence 膨胀成不可审查日志。</zh-CN>
+            #   <en>Return as soon as the caller limit is reached to keep large source trees from expanding evidence into unreadable logs.</en>
+            # </lang>
             if ($matches.Count -ge $Limit) {
                 return $matches
             }
         }
     }
 
+    # <lang>
+    #   <zh-CN>返回全部低敏匹配摘要；空集合表示当前启发式未发现需人工复核的代码行。</zh-CN>
+    #   <en>Return all low-sensitivity match summaries; an empty collection means the current heuristic found no code lines requiring manual review.</en>
+    # </lang>
     return $matches
 }
 
