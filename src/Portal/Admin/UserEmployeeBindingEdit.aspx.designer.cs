@@ -9,37 +9,59 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class UserEmployeeBindingEdit
     {
-        /// <summary>中文：返回用户管理页链接。English: Link back to user administration.</summary>
+        /// <summary>
+        /// <lang><zh-CN>返回用户管理页链接。</zh-CN><en>Link back to user administration.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.HyperLink ManageUserLink;
 
-        /// <summary>中文：页面提示。English: Page-level message.</summary>
+        /// <summary>
+        /// <lang><zh-CN>页面提示。</zh-CN><en>Page-level message.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label MessageLabel;
 
-        /// <summary>中文：当前有效绑定标识。English: Current active binding identifier.</summary>
+        /// <summary>
+        /// <lang><zh-CN>当前有效绑定标识。</zh-CN><en>Current active binding identifier.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.HiddenField ActiveBindingId;
 
-        /// <summary>中文：当前绑定说明。English: Current binding summary.</summary>
+        /// <summary>
+        /// <lang><zh-CN>当前绑定说明。</zh-CN><en>Current binding summary.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label CurrentBindingText;
 
-        /// <summary>中文：门户用户标识输入。English: Portal user-id input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>门户用户标识输入。</zh-CN><en>Portal user-id input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox UserIdTextBox;
 
-        /// <summary>中文：门户用户摘要。English: Portal user summary.</summary>
+        /// <summary>
+        /// <lang><zh-CN>门户用户摘要。</zh-CN><en>Portal user summary.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label UserSummaryText;
 
-        /// <summary>中文：员工号输入。English: Employee-code input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>员工号输入。</zh-CN><en>Employee-code input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox EmployeeCodeTextBox;
 
-        /// <summary>中文：员工摘要。English: Employee summary.</summary>
+        /// <summary>
+        /// <lang><zh-CN>员工摘要。</zh-CN><en>Employee summary.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label EmployeeSummaryText;
 
-        /// <summary>中文：绑定或解绑原因。English: Binding or unbinding reason.</summary>
+        /// <summary>
+        /// <lang><zh-CN>绑定或解绑原因。</zh-CN><en>Binding or unbinding reason.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox ReasonTextBox;
 
-        /// <summary>中文：建立绑定按钮。English: Create-binding button.</summary>
+        /// <summary>
+        /// <lang><zh-CN>建立绑定按钮。</zh-CN><en>Create-binding button.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton BindButton;
 
-        /// <summary>中文：结束绑定按钮。English: End-binding button.</summary>
+        /// <summary>
+        /// <lang><zh-CN>结束绑定按钮。</zh-CN><en>End-binding button.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton EndBindingButton;
     }
 }

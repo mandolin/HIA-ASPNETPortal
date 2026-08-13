@@ -9,37 +9,59 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class EmployeeDirectory
     {
-        /// <summary>中文：页面级提示信息。English: Page-level message text.</summary>
+        /// <summary>
+        /// <lang><zh-CN>页面级提示信息。</zh-CN><en>Page-level message text.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label MessageLabel;
 
-        /// <summary>中文：目录关键字筛选框。English: Directory keyword filter box.</summary>
+        /// <summary>
+        /// <lang><zh-CN>目录关键字筛选框。</zh-CN><en>Directory keyword filter box.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox KeywordTextBox;
 
-        /// <summary>中文：员工状态筛选下拉框。English: Employee-status filter drop-down.</summary>
+        /// <summary>
+        /// <lang><zh-CN>员工状态筛选下拉框。</zh-CN><en>Employee-status filter drop-down.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.DropDownList EmployeeStatusList;
 
-        /// <summary>中文：账号员工绑定状态筛选下拉框。English: User-employee binding-status filter drop-down.</summary>
+        /// <summary>
+        /// <lang><zh-CN>账号员工绑定状态筛选下拉框。</zh-CN><en>User-employee binding-status filter drop-down.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.DropDownList BindingStatusList;
 
-        /// <summary>中文：是否包含停用组织。English: Whether inactive organization units are included.</summary>
+        /// <summary>
+        /// <lang><zh-CN>是否包含停用组织。</zh-CN><en>Whether inactive organization units are included.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.CheckBox IncludeInactiveOrganizations;
 
-        /// <summary>中文：只读查询按钮。English: Read-only search button.</summary>
+        /// <summary>
+        /// <lang><zh-CN>只读查询按钮。</zh-CN><en>Read-only search button.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton SearchButton;
 
-        /// <summary>中文：P6.3 数据表状态提示。English: P6.3 schema status message.</summary>
+        /// <summary>
+        /// <lang><zh-CN>P6.3 数据表状态提示。</zh-CN><en>P6.3 schema status message.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label SchemaStatusLabel;
 
-        /// <summary>中文：只读查询结果统计。English: Read-only query result summary.</summary>
+        /// <summary>
+        /// <lang><zh-CN>只读查询结果统计。</zh-CN><en>Read-only query result summary.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label ResultLabel;
 
-        /// <summary>中文：组织单元只读列表。English: Read-only organization-unit list.</summary>
+        /// <summary>
+        /// <lang><zh-CN>组织单元只读列表。</zh-CN><en>Read-only organization-unit list.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Repeater OrganizationsRepeater;
 
-        /// <summary>中文：员工只读列表。English: Read-only employee list.</summary>
+        /// <summary>
+        /// <lang><zh-CN>员工只读列表。</zh-CN><en>Read-only employee list.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Repeater EmployeesRepeater;
 
-        /// <summary>中文：账号员工绑定只读列表。English: Read-only user-employee binding list.</summary>
+        /// <summary>
+        /// <lang><zh-CN>账号员工绑定只读列表。</zh-CN><en>Read-only user-employee binding list.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Repeater BindingsRepeater;
     }
 }

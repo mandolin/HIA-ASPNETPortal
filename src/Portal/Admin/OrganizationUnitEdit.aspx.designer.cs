@@ -9,34 +9,54 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class OrganizationUnitEdit
     {
-        /// <summary>中文：页面标题。English: Page title.</summary>
+        /// <summary>
+        /// <lang><zh-CN>页面标题。</zh-CN><en>Page title.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label TitleLabel;
 
-        /// <summary>中文：页面级安全提示。English: Page-level safe message.</summary>
+        /// <summary>
+        /// <lang><zh-CN>页面级安全提示。</zh-CN><en>Page-level safe message.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label MessageLabel;
 
-        /// <summary>中文：组织单元标识隐藏字段。English: Hidden organization-unit identifier field.</summary>
+        /// <summary>
+        /// <lang><zh-CN>组织单元标识隐藏字段。</zh-CN><en>Hidden organization-unit identifier field.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.HiddenField OrganizationUnitIdField;
 
-        /// <summary>中文：编辑前 UTC 更新时间隐藏字段。English: Hidden pre-edit UTC update-time field.</summary>
+        /// <summary>
+        /// <lang><zh-CN>编辑前 UTC 更新时间隐藏字段。</zh-CN><en>Hidden pre-edit UTC update-time field.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.HiddenField OriginalUpdatedUtcField;
 
-        /// <summary>中文：组织编码输入框。English: Organization-code input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>组织编码输入框。</zh-CN><en>Organization-code input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox OrganizationCodeTextBox;
 
-        /// <summary>中文：组织显示名输入框。English: Organization display-name input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>组织显示名输入框。</zh-CN><en>Organization display-name input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox DisplayNameTextBox;
 
-        /// <summary>中文：父级组织选择器。English: Parent organization selector.</summary>
+        /// <summary>
+        /// <lang><zh-CN>父级组织选择器。</zh-CN><en>Parent organization selector.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.DropDownList ParentOrganizationList;
 
-        /// <summary>中文：排序值输入框。English: Sort-order input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>排序值输入框。</zh-CN><en>Sort-order input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox SortOrderTextBox;
 
-        /// <summary>中文：启用状态复选框。English: Active-state checkbox.</summary>
+        /// <summary>
+        /// <lang><zh-CN>启用状态复选框。</zh-CN><en>Active-state checkbox.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.CheckBox IsActiveCheckBox;
 
-        /// <summary>中文：保存按钮。English: Save button.</summary>
+        /// <summary>
+        /// <lang><zh-CN>保存按钮。</zh-CN><en>Save button.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton SaveButton;
     }
 }

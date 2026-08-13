@@ -9,16 +9,49 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class OperationAudits
     {
+        /// <summary>
+        /// <lang><zh-CN>运营审计查询的起始日期输入框。</zh-CN><en>Start-date input for the operations-audit query.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox StartDateTextBox;
+        /// <summary>
+        /// <lang><zh-CN>运营审计查询的结束日期输入框。</zh-CN><en>End-date input for the operations-audit query.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox EndDateTextBox;
+        /// <summary>
+        /// <lang><zh-CN>审计分类筛选输入框。</zh-CN><en>Audit-category filter input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox CategoryFilter;
+        /// <summary>
+        /// <lang><zh-CN>审计动作筛选输入框。</zh-CN><en>Audit-action filter input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox ActionFilter;
+        /// <summary>
+        /// <lang><zh-CN>审计目标标识筛选输入框。</zh-CN><en>Audit-target identifier filter input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox TargetIdFilter;
+        /// <summary>
+        /// <lang><zh-CN>触发运营审计受控查询的按钮。</zh-CN><en>Button that starts the controlled operations-audit query.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton SearchButton;
+        /// <summary>
+        /// <lang><zh-CN>显示审计查询失败或状态提示。</zh-CN><en>Displays audit-query failures or status messages.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label MessageLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示运营审计查询结果摘要。</zh-CN><en>Displays the operations-audit result summary.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label ResultLabel;
+        /// <summary>
+        /// <lang><zh-CN>请求上一页审计结果的按钮。</zh-CN><en>Button that requests the previous audit-result page.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton PreviousButton;
+        /// <summary>
+        /// <lang><zh-CN>请求下一页审计结果的按钮。</zh-CN><en>Button that requests the next audit-result page.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton NextButton;
+        /// <summary>
+        /// <lang><zh-CN>绑定运营审计结果集合的重复器。</zh-CN><en>Repeater bound to the operations-audit result collection.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Repeater EntriesRepeater;
     }
 }

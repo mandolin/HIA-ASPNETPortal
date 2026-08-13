@@ -9,46 +9,74 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class EmployeeEdit
     {
-        /// <summary>中文：页面标题。English: Page title.</summary>
+        /// <summary>
+        /// <lang><zh-CN>页面标题。</zh-CN><en>Page title.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label TitleLabel;
 
-        /// <summary>中文：页面级安全提示。English: Page-level safe message.</summary>
+        /// <summary>
+        /// <lang><zh-CN>页面级安全提示。</zh-CN><en>Page-level safe message.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label MessageLabel;
 
-        /// <summary>中文：员工标识隐藏字段。English: Hidden employee identifier field.</summary>
+        /// <summary>
+        /// <lang><zh-CN>员工标识隐藏字段。</zh-CN><en>Hidden employee identifier field.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.HiddenField EmployeeIdField;
 
-        /// <summary>中文：编辑前 UTC 更新时间隐藏字段。English: Hidden pre-edit UTC update-time field.</summary>
+        /// <summary>
+        /// <lang><zh-CN>编辑前 UTC 更新时间隐藏字段。</zh-CN><en>Hidden pre-edit UTC update-time field.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.HiddenField OriginalUpdatedUtcField;
 
-        /// <summary>中文：员工号输入框。English: Employee-code input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>员工号输入框。</zh-CN><en>Employee-code input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox EmployeeCodeTextBox;
 
-        /// <summary>中文：员工显示名输入框。English: Employee display-name input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>员工显示名输入框。</zh-CN><en>Employee display-name input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox DisplayNameTextBox;
 
-        /// <summary>中文：偏好称呼输入框。English: Preferred-name input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>偏好称呼输入框。</zh-CN><en>Preferred-name input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox PreferredNameTextBox;
 
-        /// <summary>中文：工作邮箱输入框。English: Work-email input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>工作邮箱输入框。</zh-CN><en>Work-email input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox WorkEmailTextBox;
 
-        /// <summary>中文：所属组织选择器。English: Organization-unit selector.</summary>
+        /// <summary>
+        /// <lang><zh-CN>所属组织选择器。</zh-CN><en>Organization-unit selector.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.DropDownList OrganizationUnitList;
 
-        /// <summary>中文：员工状态选择器。English: Employee-status selector.</summary>
+        /// <summary>
+        /// <lang><zh-CN>员工状态选择器。</zh-CN><en>Employee-status selector.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.DropDownList EmploymentStatusList;
 
-        /// <summary>中文：入职 UTC 时间输入框。English: Joined-UTC input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>入职 UTC 时间输入框。</zh-CN><en>Joined-UTC input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox JoinedUtcTextBox;
 
-        /// <summary>中文：离职 UTC 时间输入框。English: Left-UTC input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>离职 UTC 时间输入框。</zh-CN><en>Left-UTC input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox LeftUtcTextBox;
 
-        /// <summary>中文：来源系统输入框。English: Source-system input.</summary>
+        /// <summary>
+        /// <lang><zh-CN>来源系统输入框。</zh-CN><en>Source-system input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox SourceSystemTextBox;
 
-        /// <summary>中文：保存按钮。English: Save button.</summary>
+        /// <summary>
+        /// <lang><zh-CN>保存按钮。</zh-CN><en>Save button.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton SaveButton;
     }
 }

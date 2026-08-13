@@ -54,8 +54,10 @@ namespace ASPNET.StarterKit.Portal
         protected global::System.Web.UI.WebControls.DropDownList TabThemeList;
 
         /// <summary>
-        /// 保存 Tab 覆盖操作。
-        /// Save-Tab-override action.
+        /// <lang>
+        ///   <zh-CN>提交当前 Tab 覆盖主题设置的操作控件。</zh-CN>
+        ///   <en>Action control that submits the current Tab theme override setting.</en>
+        /// </lang>
         /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton SaveTabThemeButton;
 

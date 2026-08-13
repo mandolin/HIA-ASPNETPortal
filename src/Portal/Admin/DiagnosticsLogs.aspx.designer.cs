@@ -9,16 +9,49 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class DiagnosticsLogs
     {
+        /// <summary>
+        /// <lang><zh-CN>诊断查询的起始日期输入框。</zh-CN><en>Start-date input for the diagnostic query.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox StartDateTextBox;
+        /// <summary>
+        /// <lang><zh-CN>诊断查询的结束日期输入框。</zh-CN><en>End-date input for the diagnostic query.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox EndDateTextBox;
+        /// <summary>
+        /// <lang><zh-CN>诊断级别筛选下拉框。</zh-CN><en>Diagnostic-level filter list.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.DropDownList LevelFilter;
+        /// <summary>
+        /// <lang><zh-CN>诊断分类筛选输入框。</zh-CN><en>Diagnostic-category filter input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox CategoryFilter;
+        /// <summary>
+        /// <lang><zh-CN>诊断事件标识筛选输入框。</zh-CN><en>Diagnostic-event identifier filter input.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox EventIdFilter;
+        /// <summary>
+        /// <lang><zh-CN>触发诊断日志受控查询的按钮。</zh-CN><en>Button that starts the controlled diagnostic-log query.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton SearchButton;
+        /// <summary>
+        /// <lang><zh-CN>显示查询失败或状态提示。</zh-CN><en>Displays query failures or status messages.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label MessageLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示诊断查询结果摘要。</zh-CN><en>Displays the diagnostic-query result summary.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label ResultLabel;
+        /// <summary>
+        /// <lang><zh-CN>请求上一页诊断结果的按钮。</zh-CN><en>Button that requests the previous diagnostic-result page.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton PreviousButton;
+        /// <summary>
+        /// <lang><zh-CN>请求下一页诊断结果的按钮。</zh-CN><en>Button that requests the next diagnostic-result page.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.LinkButton NextButton;
+        /// <summary>
+        /// <lang><zh-CN>绑定诊断日志结果集合的重复器。</zh-CN><en>Repeater bound to the diagnostic-log result collection.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Repeater EntriesRepeater;
     }
 }

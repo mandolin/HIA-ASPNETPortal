@@ -9,21 +9,69 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class DiagnosticLogDetail
     {
+        /// <summary>
+        /// <lang><zh-CN>显示诊断详情页的受控提示消息。</zh-CN><en>Displays the controlled status message for the diagnostic-detail page.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label MessageLabel;
+        /// <summary>
+        /// <lang><zh-CN>承载诊断详情字段的页面容器。</zh-CN><en>Container for the diagnostic-detail fields.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Panel DetailPanel;
+        /// <summary>
+        /// <lang><zh-CN>显示诊断事件的稳定标识。</zh-CN><en>Displays the stable identifier of the diagnostic event.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label EventIdLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示诊断事件的 UTC 时间。</zh-CN><en>Displays the diagnostic event time in UTC.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label UtcTimeLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示诊断事件级别。</zh-CN><en>Displays the diagnostic event level.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label LevelLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示诊断事件分类。</zh-CN><en>Displays the diagnostic event category.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label CategoryLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示经过页面净化策略处理的事件消息。</zh-CN><en>Displays the event message after the page's sanitization policy is applied.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label MessageTextLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示异常类型名称。</zh-CN><en>Displays the exception type name.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label ExceptionTypeLabel;
+        /// <summary>
+        /// <lang><zh-CN>在受控详情区域显示净化后的异常详情文本。</zh-CN><en>Displays sanitized exception-detail text in the controlled detail area.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.TextBox ExceptionDetailTextBox;
+        /// <summary>
+        /// <lang><zh-CN>显示与事件关联的请求路径诊断值。</zh-CN><en>Displays the request-path diagnostic value associated with the event.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label RequestPathLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示与事件关联的 HTTP 方法。</zh-CN><en>Displays the HTTP method associated with the event.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label HttpMethodLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示按既有低敏策略处理后的用户标识。</zh-CN><en>Displays the user identifier after the established low-sensitivity policy is applied.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label UserNameLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示按既有低敏策略处理后的客户端地址。</zh-CN><en>Displays the client address after the established low-sensitivity policy is applied.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label ClientIpLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示按诊断输出策略处理后的物理路径信息。</zh-CN><en>Displays physical-path information after the diagnostic-output policy is applied.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label PhysicalPathLabel;
+        /// <summary>
+        /// <lang><zh-CN>显示按诊断输出策略处理后的用户代理信息。</zh-CN><en>Displays user-agent information after the diagnostic-output policy is applied.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.Label UserAgentLabel;
+        /// <summary>
+        /// <lang><zh-CN>返回诊断列表或受控上一级页面的导航链接。</zh-CN><en>Navigation link back to the diagnostic list or controlled parent page.</en></lang>
+        /// </summary>
         protected global::System.Web.UI.WebControls.HyperLink BackLink;
     }
 }
