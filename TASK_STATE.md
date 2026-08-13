@@ -1029,7 +1029,11 @@
 | P26.5ug 注释补强 | 已将 116 个 SQL Server 生成对象边界头迁移为合法 SQL `/* <lang> ... */` 双语块：`LoadConfig=2`、`CreateDB=86`、`LoadData=28`；新增非注释 SQL `0`。`CreateDB` 动态 SQL 字符串内 8 个旧过程注释保持原状，避免进入 `sp_executesql N'...'` 字符串。见 [P26.5ug 结果](work-zone/dev/plans/W-anp-P26.5ug-generated-sql-comment-result.md)。 |
 | P26.5uh 静态验证 | 通过；三个目标去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，生成头残留 `0`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 通过；`<lang>` 总数分别为 `8/107/44`，动态 SQL 字符串内部旧过程注释保留 `8` 个并作为排除项。未执行真实 SQL Server 建库、清库、seed、SQL parser、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5uh 审计](work-zone/dev/plans/W-anp-P26.5uh-generated-sql-comment-audit-result.md)。 |
 | 当前失败与修正 | P26.5uf 只读扫描期间修正 PowerShell `$var:` 插值、`-LiteralPath` 通配符、typed list 返回三处脚本问题；P26.5uh 首次验证发现动态 SQL 字符串内部注释被误改，已按 P26.5ti 边界回退；外层注释扫描器对多行 `-- <lang>` 和 `sp_executesql` 误判后停止依赖该不稳定断言，改用去注释等价、生成头计数、动态字符串排除计数和编码/diff-check 收口。 |
-| 当前唯一下一步 | 进入 P26.5ui：重新扫描 clean 的 SQL/JS 剩余注释债，优先选择未触碰动态 SQL 字符串、非第三方、可稳定静态验证的下一组。 |
+| P26.5ui 选片 | clean SQL/JS 复扫确认仅剩 `Portal_CreateDB.sql` 动态 SQL 字符串内部 8 个旧过程注释，按 P26.5ti/P26.5uh 边界继续排除；第三方/minified JS、ESLint/VS binding 指令和已批准 JSDoc `@lang` 不作为本轮债。随后扩大到 clean tracked 低风险注释面，选择 13 个文件：4 个 DTO 实现、`Portal.DataProviderProof/Program.cs`、4 个 `AssemblyInfo.cs`、`UnityCfg.xml` 与 3 个 UnityCfg 环境模板。见 [P26.5ui 选片](work-zone/dev/plans/W-anp-P26.5ui-low-risk-comment-selection.md)。 |
+| P26.5uj 注释补强 | 已完成 78 个注释节点迁移/补强：4 个 DTO 实现类 42 个属性由 `<inheritdoc />` 替换为接口同源 `<summary><lang>`；SQLite proof 7 个普通注释迁移为 `// <lang>`；4 个 AssemblyInfo 文件 16 个 VS 模板普通注释迁移为 `// <lang>`；UnityCfg 运行配置和 3 个模板 13 个 XML 注释迁移/压缩为 `<!-- <lang> ... -->`。新增非注释 C#/XML 配置 `0`。见 [P26.5uj 结果](work-zone/dev/plans/W-anp-P26.5uj-low-risk-comment-result.md)。 |
+| P26.5uk 静态验证 | 通过；13 个目标 `CSharp_NONCOMMENT_STRIPPED_DIFF=0`、`XML_NONCOMMENT_STRIPPED_DIFF=0`、XML parser 可加载，UTF-8 无 BOM/CRLF、目标 `git diff --check` 通过；4 个 DTO 目标 `<inheritdoc>` 剩余 `0`，目标 `<lang>` 总数 `114`、`<l>` 总数 `51`；`mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 通过，Portal XML member count `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`，仅保留既有 `Roles.ModulesConfig` CS0108 警告。未运行 SQLite proof、真实数据库、IIS/HTTP、浏览器、真实连接串、账号、凭据或发布 proof。见 [P26.5uk 审计](work-zone/dev/plans/W-anp-P26.5uk-low-risk-comment-audit-result.md)。 |
+| 当前失败与修正 | P26.5ui 扫描器两次踩到 PowerShell `Sort-Object` 多键排序逗号写法，改用排序表达式数组后完成；P26.5uj AssemblyInfo 批量命令因外层单引号内出现模板单引号解析失败，未写文件，改用补丁；P26.5uj DTO 首个机械复制脚本把接口外壳误带入实现类并一度用过宽修复模式误删 class/constructor，已对 4 个本轮 DTO 精确恢复 `HEAD` 内容后用“只匹配紧邻属性的 XML doc”规则重做，最终去注释等价、构建和 XML gate 通过。 |
+| 当前唯一下一步 | 进入 P26.5ul：重新扫描 clean tracked 剩余 C#/XML/SQL/JS 注释债，优先选择未触碰动态 SQL 字符串、非第三方、同验证路径且可一次合并的下一组；不重复 P26.5ui-uk。 |
 
 ## Known Residual Working Tree Items
 
@@ -1066,6 +1070,7 @@
 | P26.5tn PowerShell 预检管道写法 | adjusted | 两次把 `foreach {}` 结果直接接管道导致 PowerShell 解析前失败，未执行验证也未改文件；改为 `$rows = foreach (...) { ... }` 后完成预检、编码和构建验证。 |
 | P26.5tq PostCSS here-string 预检 | adjusted | 首次把 JS here-string 放入外层 PowerShell 单引号 payload，导致 PowerShell 解析前失败，未执行验证也未改文件；改为不含单引号的 `node -e`。 |
 | P26.5tq PostCSS 根目录解析 | adjusted | 首次从仓库根运行 `node -e` 找不到 `postcss` 模块，未改文件；改到 `src/Portal` 工作上下文后 PostCSS parse 通过。 |
+| P26.5ui-uk 低风险注释批次 | adjusted | 扫描/验证脚本多次暴露 PowerShell 排序、here-string 和外层单引号边界；DTO 机械复制脚本曾误带入接口外壳并触发精确恢复重做。最终只保留注释-only 目标差异，去注释等价、XML parser、diff-check 和 Debug/XML gate 均通过。 |
 
 ## Anti-Loop Guard
 

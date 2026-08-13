@@ -58,7 +58,10 @@ namespace ASPNET.StarterKit.Portal.ProviderProof
 
             try
             {
-                // proof 仅使用 SQLite profile，不复用或改写门户主业务连接串。
+                // <lang>
+                //   <zh-CN>proof 仅使用 SQLite profile，不复用或改写门户主业务连接串。</zh-CN>
+                //   <en>The proof uses only the SQLite profile and never reuses or rewrites the portal's primary business connection string.</en>
+                // </lang>
                 var profile = new PortalDatabaseProfile(
                     "ProviderProof",
                     PortalDatabaseProviderNames.Sqlite,
@@ -83,7 +86,10 @@ namespace ASPNET.StarterKit.Portal.ProviderProof
             }
             catch (Exception exception)
             {
-                // 控制台输出不回显连接串、数据库路径或原始 provider 异常文本。
+                // <lang>
+                //   <zh-CN>控制台输出不回显连接串、数据库路径或原始 provider 异常文本。</zh-CN>
+                //   <en>Console output avoids echoing connection strings, database paths, or raw provider exception text.</en>
+                // </lang>
                 Console.Error.WriteLine("FAIL P3DP00.Startup - " + GetExceptionTypeChain(exception));
                 return 1;
             }
@@ -226,7 +232,10 @@ namespace ASPNET.StarterKit.Portal.ProviderProof
             public IReadOnlyList<ProofResult> Run()
             {
                 var results = new List<ProofResult>();
-                // 所有能力验证共享一个短生命周期连接，避免 proof 引入门户运行期的连接管理策略。
+                // <lang>
+                //   <zh-CN>所有能力验证共享一个短生命周期连接，避免 proof 引入门户运行期的连接管理策略。</zh-CN>
+                //   <en>All capability checks share one short-lived connection so the proof does not introduce portal runtime connection-management policy.</en>
+                // </lang>
                 using (DbConnection connection = _connectionFactory.CreateConnection(_profile))
                 {
                     connection.Open();
@@ -255,7 +264,10 @@ namespace ASPNET.StarterKit.Portal.ProviderProof
                 }
                 catch (Exception exception)
                 {
-                    // 错误类型足以定位 proof 失败类别，避免在控制台暴露敏感连接信息。
+                    // <lang>
+                    //   <zh-CN>错误类型足以定位 proof 失败类别，避免在控制台暴露敏感连接信息。</zh-CN>
+                    //   <en>The exception type is enough to classify proof failures while keeping sensitive connection details out of the console.</en>
+                    // </lang>
                     return new ProofResult(step, false, exception.GetType().Name);
                 }
             }
@@ -269,7 +281,10 @@ namespace ASPNET.StarterKit.Portal.ProviderProof
             private void ApplySchema(DbConnection connection)
             {
                 string schema = File.ReadAllText(_schemaPath);
-                // SQLite proof schema 受版本库控制，只含本 proof 的独立表。
+                // <lang>
+                //   <zh-CN>SQLite proof schema 受版本库控制，只含本 proof 的独立表。</zh-CN>
+                //   <en>The SQLite proof schema is repository-controlled and contains only tables isolated to this proof.</en>
+                // </lang>
                 using (DbCommand command = connection.CreateCommand())
                 {
                     command.CommandText = schema;
@@ -308,7 +323,10 @@ namespace ASPNET.StarterKit.Portal.ProviderProof
             /// </summary>
             private static void VerifyTransactionCommit(DbConnection connection)
             {
-                // 提交后必须可见，确认 provider 的基本事务提交语义。
+                // <lang>
+                //   <zh-CN>提交后必须可见，确认 provider 的基本事务提交语义。</zh-CN>
+                //   <en>The row must be visible after commit, confirming the provider's basic transaction-commit semantics.</en>
+                // </lang>
                 using (DbTransaction transaction = connection.BeginTransaction())
                 {
                     Insert(connection, "transaction-commit", DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture), "commit", transaction);
@@ -329,7 +347,10 @@ namespace ASPNET.StarterKit.Portal.ProviderProof
             /// </summary>
             private static void VerifyTransactionRollback(DbConnection connection)
             {
-                // 回滚后不得留下测试行，避免把仅能执行命令误判为具备事务能力。
+                // <lang>
+                //   <zh-CN>回滚后不得留下测试行，避免把仅能执行命令误判为具备事务能力。</zh-CN>
+                //   <en>Rollback must leave no test row behind so command execution alone is not mistaken for transaction support.</en>
+                // </lang>
                 using (DbTransaction transaction = connection.BeginTransaction())
                 {
                     Insert(connection, "transaction-rollback", DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture), "rollback", transaction);

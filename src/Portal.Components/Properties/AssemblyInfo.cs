@@ -1,9 +1,10 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
+// <lang>
+//   <zh-CN>以下程序集属性描述编译产物的标题、产品、公司和版权等元数据；修改这些值会影响程序集清单和文件属性显示。</zh-CN>
+//   <en>The following assembly attributes describe compiled-artifact metadata such as title, product, company, and copyright; changing them affects the assembly manifest and file properties.</en>
+// </lang>
 
 [assembly: AssemblyTitle("PortalCSVS.Components")]
 [assembly: AssemblyDescription("")]
@@ -14,26 +15,24 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
+// <lang>
+//   <zh-CN>默认不向 COM 组件公开程序集类型；只有确需 COM 互操作的类型才应单独调整可见性。</zh-CN>
+//   <en>Assembly types are hidden from COM components by default; expose individual types only when COM interop is explicitly required.</en>
+// </lang>
 
 [assembly: ComVisible(false)]
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
+// <lang>
+//   <zh-CN>当该程序集被公开为 COM 类型库时，下面的 GUID 用作类型库标识。</zh-CN>
+//   <en>When this assembly is exposed as a COM type library, the following GUID identifies that type library.</en>
+// </lang>
 
 [assembly: Guid("35f81c93-1448-440a-906b-f86057a61db6")]
 
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
+// <lang>
+//   <zh-CN>下面的版本属性保持显式固定版本，避免通配版本在旧发布和证据包比对中引入不可重复输出。</zh-CN>
+//   <en>The following version attributes keep an explicit fixed version to avoid non-repeatable outputs from wildcard versions during legacy release and evidence-package comparisons.</en>
+// </lang>
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

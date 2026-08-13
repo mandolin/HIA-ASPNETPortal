@@ -5,7 +5,12 @@
     </configSections>
 
     <unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
-        <!--定义Unity配置的命名空间和需要扫描的程序集，指示Unity将会在指定的程序集中查找类型进行注册和依赖注入。-->
+        <!--
+        <lang>
+          <zh-CN>模板声明 Unity 配置命名空间与可解析程序集；环境差异只通过模板值和外置配置注入，不改变程序集扫描边界。</zh-CN>
+          <en>The template declares the Unity configuration namespace and resolvable assemblies; environment differences enter through template values and external configuration, not by changing assembly scan boundaries.</en>
+        </lang>
+        -->
         <namespace name="ASPNET.StarterKit.Portal" />
         <assembly name="Portal" />
         <assembly name="Portal.Components" />
@@ -14,7 +19,12 @@
 
         <container>
 
-            <!-- connectionString 由启动代码从外置 connectionStrings.config 加载，本文件不保存真实连接串。 -->
+            <!--
+            <lang>
+              <zh-CN>connectionString 由启动代码从外置 connectionStrings.config 加载，本模板不保存真实连接串。</zh-CN>
+              <en>The connectionString value is loaded by startup code from external connectionStrings.config; this template does not store the real connection string.</en>
+            </lang>
+            -->
 
             <instance name="testStr" type="string"
                       value="test UnityCfg" />

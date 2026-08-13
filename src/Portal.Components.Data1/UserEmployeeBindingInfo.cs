@@ -136,40 +136,100 @@ namespace ASPNET.StarterKit.Portal
             Reason = reason ?? string.Empty;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定记录数值标识。</zh-CN>
+        ///   <en>Numeric binding identifier.</en>
+        /// </lang>
+        /// </summary>
         public int BindingId { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>门户账号标识。</zh-CN>
+        ///   <en>Portal user identifier.</en>
+        /// </lang>
+        /// </summary>
         public int UserId { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧门户用户名。</zh-CN>
+        ///   <en>Legacy Portal user name.</en>
+        /// </lang>
+        /// </summary>
         public string UserName { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工标识。</zh-CN>
+        ///   <en>Employee identifier.</en>
+        /// </lang>
+        /// </summary>
         public int EmployeeId { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工号。</zh-CN>
+        ///   <en>Employee code.</en>
+        /// </lang>
+        /// </summary>
         public string EmployeeCode { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工显示名。</zh-CN>
+        ///   <en>Employee display name.</en>
+        /// </lang>
+        /// </summary>
         public string EmployeeDisplayName { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定生命周期状态。</zh-CN>
+        ///   <en>Binding lifecycle status.</en>
+        /// </lang>
+        /// </summary>
         public string BindingStatus { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定创建时间 UTC。</zh-CN>
+        ///   <en>Binding creation time in UTC.</en>
+        /// </lang>
+        /// </summary>
         public DateTime BoundUtc { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定创建人标识。</zh-CN>
+        ///   <en>Binding creator identifier.</en>
+        /// </lang>
+        /// </summary>
         public string BoundBy { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定结束时间 UTC，可为空。</zh-CN>
+        ///   <en>Binding end time in UTC, when known.</en>
+        /// </lang>
+        /// </summary>
         public DateTime? EndedUtc { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定结束人标识。</zh-CN>
+        ///   <en>Binding ending-operator identifier.</en>
+        /// </lang>
+        /// </summary>
         public string EndedBy { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>非敏感绑定说明。</zh-CN>
+        ///   <en>Non-sensitive binding reason.</en>
+        /// </lang>
+        /// </summary>
         public string Reason { get; private set; }
     }
 }

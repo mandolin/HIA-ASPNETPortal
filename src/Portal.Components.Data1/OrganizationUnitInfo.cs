@@ -104,28 +104,68 @@ namespace ASPNET.StarterKit.Portal
             UpdatedUtc = updatedUtc;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织单元数值标识。</zh-CN>
+        ///   <en>Numeric organization-unit identifier.</en>
+        /// </lang>
+        /// </summary>
         public int OrganizationUnitId { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>父级组织单元标识；顶级组织为空。</zh-CN>
+        ///   <en>Parent organization-unit identifier; null for top-level units.</en>
+        /// </lang>
+        /// </summary>
         public int? ParentOrganizationUnitId { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>可选组织编码。</zh-CN>
+        ///   <en>Optional organization code.</en>
+        /// </lang>
+        /// </summary>
         public string OrganizationCode { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织显示名称。</zh-CN>
+        ///   <en>Display name of the organization unit.</en>
+        /// </lang>
+        /// </summary>
         public string DisplayName { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>同级排序值。</zh-CN>
+        ///   <en>Sibling sort order.</en>
+        /// </lang>
+        /// </summary>
         public int SortOrder { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织单元是否启用。</zh-CN>
+        ///   <en>Whether the organization unit is active.</en>
+        /// </lang>
+        /// </summary>
         public bool IsActive { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建时间 UTC。</zh-CN>
+        ///   <en>Creation time in UTC.</en>
+        /// </lang>
+        /// </summary>
         public DateTime CreatedUtc { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近更新时间 UTC。</zh-CN>
+        ///   <en>Last update time in UTC.</en>
+        /// </lang>
+        /// </summary>
         public DateTime UpdatedUtc { get; private set; }
     }
 }

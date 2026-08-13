@@ -1,5 +1,10 @@
 <unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
-    <!--定义Unity配置的命名空间和需要扫描的程序集，指示Unity将会在指定的程序集中查找类型进行注册和依赖注入。-->
+    <!--
+    <lang>
+      <zh-CN>声明 Unity 配置命名空间与可解析程序集，限定容器按门户旧命名空间扫描类型。</zh-CN>
+      <en>Declares the Unity configuration namespace and resolvable assemblies, limiting container type lookup to the legacy portal namespaces.</en>
+    </lang>
+    -->
     <namespace name="ASPNET.StarterKit.Portal" />
     <assembly name="Portal" />
     <assembly name="Portal.Components" />
@@ -8,30 +13,20 @@
 
     <container>
         <!--
-        连接串不再放在 Unity 配置中。
-        Application_Start 会从外置 connectionStrings.config 读取名为 Portal 的连接串，
-        再注册为 Unity 使用的 connectionString 命名实例。
+        <lang>
+          <zh-CN>Unity 配置不保存真实连接串；Application_Start 从外置 connectionStrings.config 读取 Portal 连接串，并注册为 connectionString 命名实例。</zh-CN>
+          <en>Unity configuration does not store the real connection string; Application_Start reads the Portal connection string from external connectionStrings.config and registers it as the named connectionString instance.</en>
+        </lang>
         -->
 
         <instance name="testStr" type="string"
                   value="default UnityCfg" />
 
-        <!--PORTAL SECURITY-->
-        <!--<register> 标签用于注册一个类型映射关系，指定当应用程序请求指定类型时，容器应该提供哪种类型的实例。-->
         <!--
-        以下面这段配置为例，做了以下几件事：
-
-        type="PortalSecurityDbContext": 指定要注册的接口类型或抽象类型。在这个例子中，PortalSecurityDbContext 是一个数据库上下文类（具体代码中为Entity Framework DbContext的子类）。
-
-        mapTo="PortalSecurityDbContext": 指定映射到的实际类型，这里也是PortalSecurityDbContext，说明接口类型和实现类型是同一个类，也就是说，PortalSecurityDbContext既是接口也是实现类。
-
-        <lifetime type="singleton">: 设置了注册类型的生命周期策略为单例（Singleton）。这意味着每当应用程序请求 PortalSecurityDbContext 类型的实例时，容器将始终返回同一个实例。
-
-        <constructor>: 表明要注入依赖项到类的构造函数中。
-
-        <param name="connectionString" dependencyName="connectionString" dependencyType="string" />: 在这个标签内，name="connectionString" 指定了注入到构造函数中的参数名称。dependencyName="connectionString" 表示这个参数值来自 Application_Start 从外置配置注册的命名实例，其类型为 string。这就意味着在创建 PortalSecurityDbContext 实例时，Unity将把外置数据库连接字符串注入到它的构造函数中。
-
-        总结来说，这段配置告诉Unity容器，每当应用程序请求 PortalSecurityDbContext 类型的实例时，应当创建一个单例的 PortalSecurityDbContext 实例，并在创建实例时，将其构造函数参数 connectionString 设置为启动时注册好的外置数据库连接字符串实例的值。这样，每次使用 PortalSecurityDbContext 的时候，都能使用同一份数据库连接，同时也避免了硬编码数据库连接字符串。
+        <lang>
+          <zh-CN>门户安全区注册旧 EF 安全上下文；容器以单例生命周期创建上下文，并通过启动期注册的 connectionString 命名实例注入外置连接串。</zh-CN>
+          <en>The portal security section registers the legacy EF security context; the container creates it as a singleton and injects the external connection string through the startup-registered connectionString named instance.</en>
+        </lang>
         -->
         <register type="PortalSecurityDbContext" mapTo="PortalSecurityDbContext">
             <lifetime type="singleton" />
@@ -41,22 +36,21 @@
         </register>
 
         <!--
-
-        再以以下这段Unity配置为例，作用为：
-
-        type="IUsersDb": 指定要注册的接口类型。IUsersDb 是一个接口，表示一种特定的服务契约或职责，例如可能包含了对用户数据进行CRUD操作的相关方法。
-
-        mapTo="UsersDb": 映射到实际的实现类型为 UsersDb。这意味着当应用程序请求 IUsersDb 类型的服务时，Unity容器将返回一个 UsersDb 类型的实例来满足这个请求。
-
-        <lifetime type="singleton">: 设置了 UsersDb 类型实例的生命周期策略为单例（Singleton）。这意味着在整个应用程序生命周期内，无论何时请求 IUsersDb 类型的服务，Unity容器都将返回同一个 UsersDb 类型的实例，以此来保证整个应用中用户数据库操作的全局一致性，同时提高性能（避免了每次请求都创建新实例的成本）。
-
-        综上所述，这段配置就是让Unity容器知道如何处理对 IUsersDb 接口的依赖注入请求，当有类需要 IUsersDb 类型的依赖时，容器会返回一个预先创建好的单例 UsersDb 类型实例。这样，开发者只需关注接口 IUsersDb，无需关心具体实现类 UsersDb 的实例化过程，实现了依赖倒置原则和控制反转（IoC）。
+        <lang>
+          <zh-CN>用户数据访问契约映射到旧 UsersDb 单例，维持 Web Forms 页面在应用生命周期内共享同一用户存储入口。</zh-CN>
+          <en>The user data-access contract maps to the legacy UsersDb singleton, preserving a shared user-store entry for Web Forms pages across the application lifetime.</en>
+        </lang>
         -->
         <register type="IUsersDb" mapTo="UsersDb">
             <lifetime type="singleton" />
         </register>
 
-        <!--P6.3 ENTERPRISE BUSINESS DIRECTORY-->
+        <!--
+        <lang>
+          <zh-CN>P6.3 企业业务目录区注册组织、员工、绑定、资料确认、更正、业务申请、协作事项、参考数据和工作项服务。</zh-CN>
+          <en>The P6.3 enterprise business directory section registers organization, employee, binding, profile confirmation, correction, business application, collaboration item, reference data, and work-item services.</en>
+        </lang>
+        -->
         <register type="PortalBizDbContext" mapTo="PortalBizDbContext">
             <lifetime type="singleton" />
             <constructor>
@@ -108,7 +102,12 @@
             <lifetime type="singleton" />
         </register>
 
-        <!--PORTAL CONFIGURATION-->
+        <!--
+        <lang>
+          <zh-CN>门户配置区注册旧 Tab、Module、Global 和运行时配置访问入口，继续使用单例生命周期匹配旧站点行为。</zh-CN>
+          <en>The portal configuration section registers legacy Tab, Module, Global, and runtime-configuration data-access entries, keeping singleton lifetimes to match legacy site behavior.</en>
+        </lang>
+        -->
 
         <register type="PortalCfgDbContext" mapTo="PortalCfgDbContext">
             <lifetime type="singleton" />
@@ -141,7 +140,12 @@
         </register>
 
 
-        <!--PORTAL MODULES-->
+        <!--
+        <lang>
+          <zh-CN>门户内容模块区注册旧模块数据访问实现；讨论区仍需要连接串构造参数，其余模块沿用默认单例映射。</zh-CN>
+          <en>The portal module section registers legacy module data-access implementations; Discussions still requires a connection-string constructor argument while the other modules keep default singleton mappings.</en>
+        </lang>
+        -->
         <register type="PortalDbContext" mapTo="PortalDbContext">
             <lifetime type="singleton" />
             <constructor>

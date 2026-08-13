@@ -118,34 +118,84 @@ namespace ASPNET.StarterKit.Portal
             Source = source ?? string.Empty;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧门户用户标识。</zh-CN>
+        ///   <en>Legacy Portal user identifier.</en>
+        /// </lang>
+        /// </summary>
         public int UserId { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧 <c>Portal_Users.Name</c>，P6.2.3 中只读展示。</zh-CN>
+        ///   <en>Legacy <c>Portal_Users.Name</c>, displayed as read-only in P6.2.3.</en>
+        /// </lang>
+        /// </summary>
         public string LegacyName { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>新的稳定登录名。</zh-CN>
+        ///   <en>New stable login name.</en>
+        /// </lang>
+        /// </summary>
         public string LoginName { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>正式显示名。</zh-CN>
+        ///   <en>Formal display name.</en>
+        /// </lang>
+        /// </summary>
         public string DisplayName { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>昵称或偏好称呼。</zh-CN>
+        ///   <en>Nickname or preferred name.</en>
+        /// </lang>
+        /// </summary>
         public string Nickname { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>偏好邮箱；非空时可作为登录标识。</zh-CN>
+        ///   <en>Preferred email; when non-empty it may be used as a sign-in identifier.</en>
+        /// </lang>
+        /// </summary>
         public string PreferredEmail { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>账号资料状态。</zh-CN>
+        ///   <en>Account profile status.</en>
+        /// </lang>
+        /// </summary>
         public string Status { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>非敏感状态说明。</zh-CN>
+        ///   <en>Non-sensitive status reason.</en>
+        /// </lang>
+        /// </summary>
         public string StatusReason { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>资料扩展表是否已部署并成功读取。</zh-CN>
+        ///   <en>Whether the profile extension table is deployed and was read successfully.</en>
+        /// </lang>
+        /// </summary>
         public bool IsAvailable { get; private set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>资料来源说明。</zh-CN>
+        ///   <en>Profile source description.</en>
+        /// </lang>
+        /// </summary>
         public string Source { get; private set; }
     }
 }
