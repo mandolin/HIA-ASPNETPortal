@@ -2,16 +2,19 @@
     MasterPageFile="~/Default.master" %>
 
 <%--
-   注释：
-   Register.aspx 页面用于使客户端能够在门户系统中注册一个新的唯一用户名和密码。
-   页面包含一个服务器事件处理器 -- RegisterBtn_Click -- 在页面的注册按钮被点击时执行。
-
-   Register.aspx 页面使用 UsersDB 类来管理实际的账户创建。
-   注意：用户名和密码存储在一个SQL数据库的表中。
+   <lang>
+     <zh-CN>Register.aspx 为公开或邀请式注册提供旧 Web Forms 表单；页面只收集账号、邮箱、员工号与密码输入，唯一性校验、邀请策略、密码处理和数据库写入均由 RegisterBtn_Click 及 UsersDB 服务器链路完成。</zh-CN>
+     <en>Register.aspx provides the legacy Web Forms surface for public or invitation registration; the page only collects account, email, employee code, and password input, while uniqueness checks, invitation policy, password handling, and database persistence are handled by RegisterBtn_Click and the UsersDB server path.</en>
+   </lang>
 --%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- 页面主体表格 --%>
+    <%--
+      <lang>
+        <zh-CN>外层表格保留 StarterKit 时代布局契约，避免注册页在旧主题和窄屏回退中脱离主内容列。</zh-CN>
+        <en>The outer table preserves the StarterKit-era layout contract so the registration page stays aligned with the main content column in legacy themes and narrow fallbacks.</en>
+      </lang>
+    --%>
     <table width="98%" cellspacing="0" cellpadding="4" border="0">
         <tr>
             <td width="150">
@@ -24,20 +27,35 @@
                             <table width="100%" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td>
-                                        <%-- 标题 --%>
+                                        <%--
+                                          <lang>
+                                            <zh-CN>标题文本是此页面的可见入口提示；账号创建结果仍以后续服务器消息为准。</zh-CN>
+                                            <en>The heading is the visible entry cue for this page; the outcome of account creation is still determined by the later server message.</en>
+                                          </lang>
+                                        --%>
                                         <span class="Head">Create a New Account </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <%-- 水平线 --%>
+                                        <%--
+                                          <lang>
+                                            <zh-CN>旧式水平线只承担视觉分隔作用，不表达验证、授权或流程状态。</zh-CN>
+                                            <en>The legacy horizontal rule is only a visual separator and does not express validation, authorization, or workflow state.</en>
+                                          </lang>
+                                        --%>
                                         <hr noshade size="1">
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
-                    <%-- 用户信息输入表格 --%>
+                    <%--
+                      <lang>
+                        <zh-CN>用户信息区域按回发字段组织输入；每个服务器控件的 ID 是后端读取和验证注册请求的稳定契约。</zh-CN>
+                        <en>The user information area groups postback fields; each server control ID is the stable contract used by the backend to read and validate the registration request.</en>
+                      </lang>
+                    --%>
                     <tr valign="top">
                         <td class="Normal">
                             <%--
@@ -46,7 +64,12 @@
                                 <en>Registration fields and validators construct a one-time account request; uniqueness, invited employee-code policy, normalization, and account persistence remain server-side.</en>
                               </lang>
                             --%>
-                            <%-- 姓名输入 --%>
+                            <%--
+                              <lang>
+                                <zh-CN>Name 字段承载注册用户名；标记层只要求非空，规范化、重复检查和持久化在服务器端完成。</zh-CN>
+                                <en>The Name field carries the requested user name; markup only requires a non-empty value, with normalization, duplicate checks, and persistence handled server-side.</en>
+                              </lang>
+                            --%>
                             Name:
                             <br>
                             <asp:TextBox size="25" ID="Name" runat="server" />
@@ -60,20 +83,28 @@
                             <asp:RequiredFieldValidator ControlToValidate="Name" ErrorMessage="'Name' must not be left blank."
                                 runat="server" ID="RequiredFieldValidator1" />
                             <p>
-                            <%-- 邮箱输入 --%>
+                            <%--
+                              <lang>
+                                <zh-CN>Email 字段用于注册联系地址；页面校验只覆盖基本格式和必填，邮箱可信度与后续使用策略不能由客户端验证替代。</zh-CN>
+                                <en>The Email field stores the registration contact address; page validators only cover basic format and presence, and cannot replace server-side trust or follow-up usage policy.</en>
+                              </lang>
+                            --%>
                             Email:
                             <br>
                             <asp:TextBox size="25" ID="Email" runat="server" />
                             &nbsp;
-                            <%-- 邮箱格式验证 --%>
                             <asp:RegularExpressionValidator ControlToValidate="Email" ValidationExpression="[\w\.-]+(\+[\w-]*)?@([\w-]+\.)+[\w-]+"
                                 Display="Dynamic" ErrorMessage="Must use a valid email address." runat="server"
                                 ID="RegularExpressionValidator1" />
-                            <%-- 必填项验证 --%>
                             <asp:RequiredFieldValidator ControlToValidate="Email" ErrorMessage="'Email' must not be left blank."
                                 runat="server" ID="RequiredFieldValidator2" />
                             <p>
-                            <%-- 员工号：企业临时注册链接流程中必填，普通自注册流程暂不强制。 --%>
+                            <%--
+                              <lang>
+                                <zh-CN>EmployeeCode 在企业临时邀请注册中作为必填绑定线索；普通自注册路径默认不强制，启用状态由服务器策略切换。</zh-CN>
+                                <en>EmployeeCode is the required binding hint for enterprise invitation registration; ordinary self-registration does not require it by default, and the enabled state is switched by server policy.</en>
+                              </lang>
+                            --%>
                             Employee Code:
                             <asp:Label ID="EmployeeCodeRequiredHint" CssClass="NormalRed" Text="*" Visible="false" runat="server" />
                             <br>
@@ -83,7 +114,6 @@
                                 ErrorMessage="'Employee Code' must not be left blank for invitation registration."
                                 Enabled="false" runat="server" ID="EmployeeCodeRequiredValidator" />
                             <p>
-                            <%-- 密码输入 --%>
                             Password:
                             <br>
                             <%--
@@ -95,24 +125,25 @@
                             <asp:TextBox size="25" ID="Password" TextMode="Password" runat="server" />
                             <asp:HiddenField ID="EncryptedPassword" runat="server" />
                             &nbsp;
-                            <%-- 必填项验证 --%>
                             <asp:RequiredFieldValidator ControlToValidate="Password" ErrorMessage="'Password' must not be left blank."
                                 runat="server" ID="RequiredFieldValidator3" />
                             <p>
-                            <%-- 确认密码输入 --%>
+                            <%--
+                              <lang>
+                                <zh-CN>确认密码字段只为本次回发提供一致性检查；匹配验证发生在页面层，服务器仍需重新确认明文/密文输入对应同一用户意图。</zh-CN>
+                                <en>The confirmation password field only supports consistency checks for this postback; matching validation occurs at the page layer, and the server must still re-confirm that plaintext or ciphertext input reflects the same user intent.</en>
+                              </lang>
+                            --%>
                             Confirm Password:
                             <br>
                             <asp:TextBox size="25" ID="ConfirmPassword" TextMode="Password" runat="server" />
                             <asp:HiddenField ID="EncryptedConfirmPassword" runat="server" />
                             &nbsp;
-                            <%-- 必填项验证 --%>
                             <asp:RequiredFieldValidator ControlToValidate="ConfirmPassword" Display="Dynamic"
                                 ErrorMessage="'Confirm' must not be left blank." runat="server" ID="RequiredFieldValidator4" />
-                            <%-- 密码匹配验证 --%>
                             <asp:CompareValidator ControlToValidate="ConfirmPassword" ControlToCompare="Password"
                                 ErrorMessage="Password fields do not match." runat="server" ID="CompareValidator1" />
                             <p>
-                            <%-- 注册按钮 --%>
                             <%--
                               <lang>
                                 <zh-CN>RegisterBtn_Click 是账号创建与失败提示的服务器入口；Message 只能反馈服务器结果，不能由页面标记宣称注册成功。</zh-CN>
@@ -124,7 +155,12 @@
                             <br>
                             <br>
                             <p>
-                                <%-- 显示消息标签 --%>
+                                <%--
+                                  <lang>
+                                    <zh-CN>Message 标签只显示服务器返回的注册结果或错误提示，不保存敏感输入，也不承担客户端状态同步职责。</zh-CN>
+                                    <en>The Message label only displays the registration result or error returned by the server; it does not store sensitive input or synchronize client-side state.</en>
+                                  </lang>
+                                --%>
                                 <asp:Label ID="Message" CssClass="NormalRed" runat="server" />
                             </p>
                         </td>

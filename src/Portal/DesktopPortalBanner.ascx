@@ -1,17 +1,10 @@
 <%@ Control CodeBehind="DesktopPortalBanner.ascx.cs" Language="c#" AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.DesktopPortalBanner" %>
 <%@ Import Namespace="ASPNET.StarterKit.Portal" %>
 <%--
-
-   The DesktopPortalBanner User Control is responsible for displaying the standard Portal
-   banner at the top of each .aspx page.
-
-   The DesktopPortalBanner uses the Portal Configuration System to obtain a list of the
-   portal's SiteName and tab settings. It then render's this content into the page.
-
-   桌面门户横幅用户控件负责显示每个 .aspx 页面顶部的标准门户横幅。
-
-   桌面门户横幅使用门户配置系统来获取门户的站点名称和tab设置列表。然后将内容呈现到页面中。
-
+    <lang>
+        <zh-CN>DesktopPortalBanner 是每个桌面门户页面共享的页眉控件；站点名称、用户栏和 Tab 列表均来自服务器端门户配置与身份上下文，标记层只负责按旧 Web Forms 模板输出。</zh-CN>
+        <en>DesktopPortalBanner is the shared header control for desktop portal pages; the site name, user bar, and tab list all come from server-side portal configuration and identity context, while markup only renders the legacy Web Forms template.</en>
+    </lang>
 --%>
 <div class="portal-header HeadBg">
     <div class="portal-header-inner">

@@ -1019,7 +1019,10 @@
 | P26.5tw 选片 | 已选择老 `src/Portal/App_Themes/Default/Default.css` 单文件 legacy 主题 CSS；覆盖 Web Forms 原生 Default Theme、字体回退、高风险配置编辑、页面背景、Banner/Tab/站点链接、模块特定 class、General 兼容 class 和 Generic/P7 回退组件；现代主题变体已在 P26.5tt-tv 完成，不重复治理。见 [P26.5tw 选片](work-zone/dev/plans/W-anp-P26.5tw-default-theme-css-locale-selection.md)。 |
 | P26.5tx 注释补强 | 已将老 Default.css 的 33 个普通/旧式注释块迁移或合并为 32 个合法 CSS `/* <lang> ... */` 语义块；新增非注释 CSS `0`，selector、声明、颜色、尺寸、media query、字体栈、legacy class 与 P7 回退组件均未改变。见 [P26.5tx 结果](work-zone/dev/plans/W-anp-P26.5tx-default-theme-css-locale-result.md)。 |
 | P26.5ty 静态验证 | 通过；去 CSS 注释后与 `HEAD` 对比 `CSS_NONCOMMENT_STRIPPED_DIFF=0`，`<lang>=32`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、`mise exec -- node` + PostCSS parse（`src/Portal` 模块解析上下文）通过；`mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 通过，Portal XML member count `1936`。未运行 Gulp/assets build、真实浏览器视觉回归、IIS/HTTP、主题切换截图、账号、凭据或发布 proof。见 [P26.5ty 审计](work-zone/dev/plans/W-anp-P26.5ty-default-theme-css-locale-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5tz：重新读取最新账本和源码盘点，继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口。 |
+| P26.5tz 选片 | 已选择 2 个 clean Web Forms 标记文件与 7 个小型 XML config/template 文件：`DesktopPortalBanner.ascx`、`Admin/Register.aspx`、`Portal.DataProviderProof/packages.config`、外置连接串模板、Config 隔离 Web.config、Uploads Web.config、Debug/Release/Test 转换模板；根 `src/Portal/Web.config` 因 55 个旧注释块较大，留作独立批次。见 [P26.5tz 选片](work-zone/dev/plans/W-anp-P26.5tz-markup-config-comment-selection.md)。 |
+| P26.5ua 注释补强 | 已将目标内剩余普通/旧式服务器端标记注释和 XML 注释迁移、合并或去除重复低值标记，形成 `<%-- <lang> ... --%>` 与 `<!-- <lang> ... -->` 合法双语表面；目标 `<lang>` 总数 `33`，非注释标记/XML 配置 `0` 变更。见 [P26.5ua 结果](work-zone/dev/plans/W-anp-P26.5ua-markup-config-comment-result.md)。 |
+| P26.5ub 静态验证 | 通过；2 个标记文件去服务器注释后与 `HEAD` 对比 `MARKUP_NONCOMMENT_STRIPPED_DIFF=0`，7 个 XML config 去 XML 注释后与 `HEAD` 对比 `XML_CONFIG_NONCOMMENT_STRIPPED_DIFF=0`，XML parser 全部可加载，非 `<lang>` 注释 `0`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 通过；`mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 通过，Portal XML member count `1936`。未运行 Web.config transform、IIS/HTTP、浏览器、真实注册/上传/连接串/凭据或发布 proof。见 [P26.5ub 审计](work-zone/dev/plans/W-anp-P26.5ub-markup-config-comment-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5uc：单独读取并评估根 `src/Portal/Web.config` 的 55 个 XML 注释块，按 XML config comment-only 路径处理，不与 JS/SQL/标记层混批。 |
 
 ## Known Residual Working Tree Items
 
