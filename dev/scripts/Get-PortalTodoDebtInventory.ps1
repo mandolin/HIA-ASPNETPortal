@@ -3,14 +3,10 @@
     Generates a read-only TODO/deferred-comment debt inventory for W-anp-P16.3.
 
 .DESCRIPTION
-    中文：本脚本只读取 Git 已追踪的 C#、Web Forms 标记、JavaScript、PowerShell 和主要 Markdown，
-    排除 designer/generated/temp/历史生成目录，并用启发式规则分类 TODO、FIXME、临时、延期、
-    后续、待确认等标记。它不改写源码、不构建项目、不生成 API 文档、不访问数据库或网络。
-    English: This script reads only Git-tracked C#, Web Forms markup, JavaScript, PowerShell, and
-    primary Markdown files, excludes designer/generated/temp/historical generated directories, and
-    classifies TODO, FIXME, temporary, deferred, follow-up, and confirmation-needed markers through
-    heuristics. It does not rewrite source, build the project, generate API docs, or access databases
-    or the network.
+<lang>
+  <zh-CN>本脚本只读取 Git 已追踪的 C#、Web Forms、JavaScript、PowerShell 和主要 Markdown，排除 designer/generated/temp/历史生成目录，并用启发式规则分类 TODO、FIXME、临时、延期、后续和待确认标记；不改写源码、不构建项目、不生成 API 文档、不访问数据库或网络。</zh-CN>
+  <en>This script reads only Git-tracked C#, Web Forms, JavaScript, PowerShell, and primary Markdown, excludes designer/generated/temp/historical directories, and heuristically classifies TODO, FIXME, temporary, deferred, follow-up, and confirmation-needed markers without rewriting source, building the project, generating API docs, or accessing databases or the network.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -49,6 +45,10 @@ $excludedPrefixes = @(
 
 $markerPattern = '(?i)(TODO|FIXME|HACK|XXX|UNDONE|待办\s*[:：]|待处理\s*[:：]|待确认|后续|延期|临时(?:策略|实现|方案|写法|处理|占位)|暂不|暂缓|以后|未来|后期|Pending|Deferred|temporary\s+(?:policy|implementation|workaround|placeholder)|follow[- ]?up|needs?\s+confirm|needs?\s+owner)'
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选 TODO 债务产物，并按需创建父目录。</zh-CN>
+#   <en>Writes optional TODO-debt artifacts as UTF-8 without BOM and creates the parent directory when needed.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -63,12 +63,20 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>将仓库路径统一为正斜杠形式，供过滤、区域和输出比较复用。</zh-CN>
+#   <en>Normalizes repository paths to slash-separated values reused by filtering, areas, and output comparisons.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([Parameter(Mandatory = $true)][string]$Path)
 
     return ($Path -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>按固定生成、临时和工具依赖目录前缀排除不应进入 TODO 盘点的路径。</zh-CN>
+#   <en>Excludes generated, temporary, and tool-dependency prefixes from the TODO inventory.</en>
+# </lang>
 function Test-IsExcludedPath {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -90,6 +98,10 @@ function Test-IsExcludedPath {
     return $false
 }
 
+# <lang>
+#   <zh-CN>按允许扩展名和排除前缀决定文件是否进入 TODO/延期标记盘点。</zh-CN>
+#   <en>Decides TODO/deferred inventory inclusion from allowed extensions and excluded prefixes.</en>
+# </lang>
 function Test-IsIncludedFile {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -100,12 +112,20 @@ function Test-IsIncludedFile {
     return $includedExtensions.Contains([System.IO.Path]::GetExtension($RelativePath))
 }
 
+# <lang>
+#   <zh-CN>把规范化相对路径解析为仓库内绝对路径，保持盘点根边界固定。</zh-CN>
+#   <en>Resolves a normalized relative path inside the repository while keeping the inventory root fixed.</en>
+# </lang>
 function Get-AbsolutePath {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
     return Join-Path $repoRoot ((ConvertTo-RepoPath -Path $RelativePath) -replace '/', '\')
 }
 
+# <lang>
+#   <zh-CN>按路径前缀把文件归入稳定区域，供 TODO 债务按域汇总。</zh-CN>
+#   <en>Assigns files to stable path-based areas for domain-level TODO debt summaries.</en>
+# </lang>
 function Get-Area {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -123,6 +143,10 @@ function Get-Area {
     return 'Other'
 }
 
+# <lang>
+#   <zh-CN>根据路径和正文关键词归类配置、安全、身份、路径、异常、审计、数据和发布风险。</zh-CN>
+#   <en>Classifies configuration, security, identity, path, diagnostics, audit, data, and release risks from path and text keywords.</en>
+# </lang>
 function Get-RiskCategory {
     param(
         [Parameter(Mandatory = $true)][string]$RelativePath,
@@ -150,6 +174,10 @@ function Get-RiskCategory {
     return 'General'
 }
 
+# <lang>
+#   <zh-CN>把匹配到的 TODO/延期文本映射为稳定分类；扫描器自身的规则描述单独标记，避免把检测逻辑误报为业务债务。</zh-CN>
+#   <en>Maps matched TODO/deferred text to a stable classification and separates scanner rule descriptions so detection logic is not reported as business debt.</en>
+# </lang>
 function Get-Classification {
     param(
         [Parameter(Mandatory = $true)][string]$RelativePath,
@@ -160,12 +188,12 @@ function Get-Classification {
     $sample = $Text.Trim()
 
     # <lang>
-    #   <zh-CN>扫描器自身会包含待办、修复和延期等匹配规则文本，这些是检测逻辑，不是真实债务。</zh-CN>
-    #   <en>The scanner itself contains matching-rule text for debt, fix and deferred markers; those lines describe detection logic rather than real debt.</en>
+    #   <zh-CN>两个注释债务扫描器自身会包含待办、修复和延期等匹配规则文本；命中扫描器术语时标记为 scanner-rule-text，保留可追踪性但不抬高业务债务严重度。</zh-CN>
+    #   <en>The two comment-debt scanners contain matching-rule text for debt, fix, and deferred markers; scanner terminology is classified as scanner-rule-text so it remains traceable without inflating business-debt severity.</en>
     # </lang>
-    if ($path -eq 'dev/scripts/Get-PortalTodoDebtInventory.ps1' -and
-        $sample -match '(?i)(TODO\|FIXME\|HACK\|XXX|markerPattern|Get-Classification)') {
-        return 'resolved-stale'
+    if ($path -in @('dev/scripts/Get-PortalTodoDebtInventory.ps1', 'dev/scripts/Get-PortalCommentDebtInventory.ps1') -and
+        $sample -match '(?i)(<lang>|markerPattern|Get-Classification|TODO|FIXME|HACK|XXX|待办|待确认|后续|债务|需要确认|owner|TBD)') {
+        return 'scanner-rule-text'
     }
 
     # <lang>
@@ -199,6 +227,10 @@ function Get-Classification {
     return 'deferred-plan'
 }
 
+# <lang>
+#   <zh-CN>根据标记分类和风险域计算排序用严重度。</zh-CN>
+#   <en>Computes a sorting severity from marker classification and risk domain.</en>
+# </lang>
 function Get-Severity {
     param(
         [Parameter(Mandatory = $true)][string]$Classification,
@@ -213,13 +245,17 @@ function Get-Severity {
         return 'Medium'
     }
 
-    if ($Classification -eq 'resolved-stale') {
+    if ($Classification -in @('resolved-stale', 'scanner-rule-text')) {
         return 'Low'
     }
 
     return 'Normal'
 }
 
+# <lang>
+#   <zh-CN>从指定行提取低敏上下文摘要，限制长度并保持盘点输出可读。</zh-CN>
+#   <en>Extracts a bounded low-sensitivity line context for readable inventory output.</en>
+# </lang>
 function Get-LineCommentContext {
     param(
         [Parameter(Mandatory = $true)][AllowEmptyString()][string[]]$Lines,

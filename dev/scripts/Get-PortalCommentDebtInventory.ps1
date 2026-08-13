@@ -3,14 +3,10 @@
     Generates a read-only old-comment debt inventory for W-anp-P15.3.
 
 .DESCRIPTION
-    中文：本脚本只读取 Git 已追踪的 C#、Web Forms 标记文件，以及少量高风险 PowerShell 脚本候选，
-    用启发式规则识别旧双语格式、乱码或 mojibake、客户端 HTML 注释、TODO/FIXME、低价值复述注释、
-    节点文档缺失和 P16.1 全量迁移候选。脚本不改写源码、不构建项目、不访问数据库或网络。
-    English: This script reads only Git-tracked C#, Web Forms markup, and a limited set of high-risk
-    PowerShell script candidates. It uses heuristic rules to find legacy bilingual comments, garbled
-    or mojibake text, client-visible HTML comments, TODO/FIXME markers, low-value restatement comments,
-    missing node documentation, and P16.1 migration candidates. It does not rewrite source, build the
-    project, access databases, or use the network.
+<lang>
+  <zh-CN>本脚本只读取 Git 已追踪的 C#、Web Forms 标记文件和少量高风险 PowerShell 候选，用启发式规则识别旧双语格式、乱码、客户端 HTML 注释、明确 TODO/延期标记、低价值复述、节点文档缺失和 P16.1 迁移候选；业务“待办”名词和正常后续生命周期描述不按债务计数，且不改写源码、不构建项目、不访问数据库或网络。</zh-CN>
+  <en>This script reads only Git-tracked C#, Web Forms markup, and a limited set of high-risk PowerShell candidates. It heuristically identifies legacy bilingual, garbled, client-visible HTML, explicit TODO/deferred markers, low-value, missing-node, and P16.1 migration findings; domain work-item nouns and normal follow-on lifecycle descriptions are not counted as debt, and the script does not rewrite source, build the project, or access databases or the network.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -58,6 +54,16 @@ $commentDebtWeights = @{
     LowValueRestatement = 4
 }
 
+# <lang>
+#   <zh-CN>只匹配带明确待办或延期意图的标记，避免把“待办”业务名词和普通后续流程描述误报为债务。</zh-CN>
+#   <en>Matches only explicit TODO or deferred intent so domain work-item nouns and ordinary follow-on flow descriptions are not reported as debt.</en>
+# </lang>
+$todoMarkerPattern = '(?i)(TODO|FIXME|HACK|待办\s*[:：]|待处理\s*[:：]|待确认|临时处理|后续\s*(?:任务|治理|实现|规划|确认|补齐|迁移|专题)|债务)'
+
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选债务清单产物，并按需创建父目录。</zh-CN>
+#   <en>Writes optional debt-inventory artifacts as UTF-8 without BOM and creates the parent directory when needed.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -72,12 +78,20 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>将仓库路径统一为正斜杠形式，供过滤和输出稳定复用。</zh-CN>
+#   <en>Normalizes repository paths to slash-separated values reused by filtering and stable output.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([Parameter(Mandatory = $true)][string]$Path)
 
     return ($Path -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>按固定生成目录和临时目录前缀排除不应进入债务盘点的路径。</zh-CN>
+#   <en>Excludes paths under fixed generated and temporary prefixes from the debt inventory.</en>
+# </lang>
 function Test-IsExcludedPath {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -91,6 +105,10 @@ function Test-IsExcludedPath {
     return $false
 }
 
+# <lang>
+#   <zh-CN>识别 P25 高风险 PowerShell 候选，保持脚本候选范围显式而有限。</zh-CN>
+#   <en>Identifies the bounded P25 high-risk PowerShell candidate set explicitly.</en>
+# </lang>
 function Test-IsHighRiskScriptCandidate {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -106,6 +124,10 @@ function Test-IsHighRiskScriptCandidate {
     return $repoPath -match '(Credential|Password|Secret|Token|Cert|Security|Compliance|Publish|Deploy|Release|IIS|Sql|Smoke|Evidence|Hardening)'
 }
 
+# <lang>
+#   <zh-CN>按主扩展名、排除前缀和高风险脚本例外决定文件是否进入盘点。</zh-CN>
+#   <en>Decides inventory inclusion from primary extensions, excluded prefixes, and the high-risk script exception.</en>
+# </lang>
 function Test-IsIncludedFile {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -121,6 +143,10 @@ function Test-IsIncludedFile {
     return Test-IsHighRiskScriptCandidate -RelativePath $RelativePath
 }
 
+# <lang>
+#   <zh-CN>为一个文件建立稳定的低敏债务状态容器，供后续发现项聚合。</zh-CN>
+#   <en>Creates a stable low-sensitivity debt-state container for one file before findings are aggregated.</en>
+# </lang>
 function New-FileDebtState {
     param(
         [Parameter(Mandatory = $true)][string]$RelativePath,
@@ -139,6 +165,10 @@ function New-FileDebtState {
     }
 }
 
+# <lang>
+#   <zh-CN>把分类、严重度、行号和摘要加入文件债务状态，保持发现项字段统一。</zh-CN>
+#   <en>Adds category, severity, line, and summary data to a file debt state with a uniform finding shape.</en>
+# </lang>
 function Add-Finding {
     param(
         [Parameter(Mandatory = $true)]$State,
@@ -173,6 +203,27 @@ function Add-Finding {
     }
 }
 
+# <lang>
+#   <zh-CN>识别注释债务扫描器自身的规则文本；这些行保留在源码中供维护，但不应成为被盘点的业务债务。</zh-CN>
+#   <en>Identifies rule text belonging to the comment-debt scanner itself; those lines remain maintainable source but must not become reported business debt.</en>
+# </lang>
+function Test-IsScannerRuleText {
+    param(
+        [Parameter(Mandatory = $true)][string]$RelativePath,
+        [Parameter(Mandatory = $true)][string]$Line
+    )
+
+    if ($RelativePath -ne 'dev/scripts/Get-PortalCommentDebtInventory.ps1') {
+        return $false
+    }
+
+    return $Line -match '(?i)(TODO|FIXME|HACK|TodoOrDeferredMarker|Add-Finding|待办|待确认|临时处理|后续|债务|scanner|扫描器)'
+}
+
+# <lang>
+#   <zh-CN>检查 C# 节点前方是否存在相邻 XML 文档，避免把已有节点说明重复列为缺失。</zh-CN>
+#   <en>Checks for nearby XML documentation before a C# node so existing node coverage is not reported as missing.</en>
+# </lang>
 function Test-HasNearbyXmlDocumentation {
     param(
         [string[]]$Lines,
@@ -208,6 +259,10 @@ function Test-HasNearbyXmlDocumentation {
     return $false
 }
 
+# <lang>
+#   <zh-CN>用受限正则识别需要人工复核的 C# 类型和成员声明。</zh-CN>
+#   <en>Uses bounded patterns to identify C# type and member declarations requiring review.</en>
+# </lang>
 function Test-IsCSharpNodeDeclaration {
     param([string]$Line)
 
@@ -229,6 +284,10 @@ function Test-IsCSharpNodeDeclaration {
     return $false
 }
 
+# <lang>
+#   <zh-CN>识别仅复述下一行代码的低价值注释，保持启发式结果可解释。</zh-CN>
+#   <en>Identifies comments that merely restate the next code line while keeping the heuristic explainable.</en>
+# </lang>
 function Test-IsLowValueComment {
     param([string]$CommentText)
 
@@ -240,6 +299,10 @@ function Test-IsLowValueComment {
     return $text -match '^(//+\s*)?(获取|设置|初始化|调用|返回|循环|遍历|判断|检查|创建|删除|更新|保存|读取|绑定|按钮|控件|字段|属性|方法|事件|区域性|命名空间|导入)\b'
 }
 
+# <lang>
+#   <zh-CN>按发现类别和安全影响映射稳定严重度，供排序和汇总使用。</zh-CN>
+#   <en>Maps finding categories to stable severities for sorting and aggregation.</en>
+# </lang>
 function Get-Severity {
     param([Parameter(Mandatory = $true)][string]$Type)
 
@@ -288,7 +351,8 @@ foreach ($relativePath in $includedFiles) {
             Add-Finding -State $state -Type 'ClientVisibleHtmlComment' -Severity 'Medium' -LineNumber $lineNumber -Message '客户端可见 HTML 注释；如为开发说明，应改为 Web Forms 服务端注释。' -Text $line
         }
 
-        if ($line -match '(TODO|FIXME|HACK|待办|待确认|临时处理|后续|债务)') {
+        if ([regex]::IsMatch($line, $todoMarkerPattern) -and
+            -not (Test-IsScannerRuleText -RelativePath $relativePath -Line $line)) {
             Add-Finding -State $state -Type 'TodoOrDeferredMarker' -Severity 'Medium' -LineNumber $lineNumber -Message '存在待办或延期标记，需要在 P15.3/P16 输入中分类。' -Text $line
         }
 
