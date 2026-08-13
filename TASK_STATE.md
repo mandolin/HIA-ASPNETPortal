@@ -1042,8 +1042,9 @@
 | P26.5ur 选片 | clean tracked 复扫确认资源 Designer 生成头仍作为可覆盖边界排除，`Portal_CreateDB.sql` 仅剩 8 个缺双语块注释且均为动态 SQL 字符串内部旧过程注释；选中 6 个资源 `.resx` 的 Microsoft ResX Schema 样板 XML 注释：`lang.en-us/resx/zh-cn` 与 `DesktopBanner.en-US/resx/zh-CN`。见 [P26.5ur 选片](work-zone/dev/plans/W-anp-P26.5ur-resx-schema-selection.md)。 |
 | P26.5us 注释补强 | 已将 6 个 `.resx` 顶部长英文 schema 样板注释收敛为短双语 `<lang>` XML comment；未改变 XML declaration、`xsd:schema`、`resheader`、`data` 资源键值、类型或 mimetype。见 [P26.5us 结果](work-zone/dev/plans/W-anp-P26.5us-resx-schema-result.md)。 |
 | P26.5ut 静态验证 | 通过；6 个目标均为 `comments=1`、`missing=0`、`lang=1`，`resheaders=4`、`schema=1`、`data` 计数与 HEAD 一致，UTF-8 无 BOM/CRLF、无 `CRCRLF`、目标 `git diff --check` 通过；`mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 通过，Portal XML member count `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`，仅保留既有 `Roles.ModulesConfig` CS0108 警告。未运行 ResX Designer 重新生成、真实资源切换、IIS/HTTP、浏览器、账号、凭据或发布 proof。见 [P26.5ut 审计](work-zone/dev/plans/W-anp-P26.5ut-resx-schema-audit-result.md)。 |
+| P26.5uu clean tracked 注释审计 | 通过；对 506 个 clean tracked 文件复扫 C# XML/普通注释、Web Forms 标记注释、XML/config/resx 注释、CSS 注释和 SQL 外层/行注释，可行动缺双语项 `0`；仅剩 `generatedHeaders=4`（强类型资源 Designer 可覆盖生成头）与 `dynamicSql=8`（`Portal_CreateDB.sql` 动态 SQL 字符串内部旧过程注释）作为显式排除。见 [P26.5uu 审计](work-zone/dev/plans/W-anp-P26.5uu-clean-comment-audit-result.md)。 |
 | 当前失败与修正 | P26.5uo 旧 locale 扫描首次因一个历史通知文件的 quoted 路径被 `Select-String` 误读而中断，未改文件；改用 `git -c core.quotePath=false ls-files -z` 并排除 `dev/notify/` 后完成。P26.5up PowerShell 转换器连续两次因引号/弯引号解析失败未执行写入，按反循环协议停止该方案，改用无单引号 Python 迁移器；其首次写入在 Windows 文本模式下产生 `CRCRLF`，已用 .NET UTF-8 无 BOM/CRLF 规范化并通过 diff-check。P26.5ut 首次 ResX XPath 审计因 PowerShell 双引号转义失败未执行；改用 `GetElementsByTagName` 后通过。P26.5ur 扫描器两次暴露空文件输入噪声和宽泛 SQL 总块计数，最终改为逐目标/逐 SQL 缺双语块审计，未影响源码。 |
-| 当前唯一下一步 | 进入 P26.5uu：继续扫描 clean tracked 剩余注释债；动态 SQL 字符串内部旧注释、第三方/minified、生成器可覆盖风险继续显式登记，不重复 P26.5uo-ut。 |
+| 当前唯一下一步 | 进入 P26.5uv：基于 P26.5uu 停止线整理 P26.5 clean tracked 注释治理 closeout，并转入 `W-anp-ROP-comment-governance-roadmap.md` 所述存量注释治理周期规划；不再原地重复 clean tracked 全量扫描。 |
 
 ## Known Residual Working Tree Items
 
