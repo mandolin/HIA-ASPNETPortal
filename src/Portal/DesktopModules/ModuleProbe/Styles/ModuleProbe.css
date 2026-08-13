@@ -1,4 +1,9 @@
-/* P3.2 ModuleProbe uses a package-scoped, IE9-compatible presentation without bundled fonts. */
+/*
+    <lang>
+      <zh-CN>ModuleProbe 使用包作用域前缀呈现诊断内容，保持 IE9 兼容属性集合且不捆绑字体；该样式只证明模块包资源加载，不定义业务视觉规范。</zh-CN>
+      <en>ModuleProbe renders diagnostics through a package-scoped prefix, keeps an IE9-compatible property set, and bundles no fonts; this style proves module-package resource loading rather than defining a business visual standard.</en>
+    </lang>
+*/
 .portal-package-hia-moduleprobe .module-probe {
     border: 1px solid #52718a;
     background-color: #f4f8fb;
@@ -6,22 +11,46 @@
     padding: 8px;
 }
 
+/*
+    <lang>
+      <zh-CN>探针标题只强调模块包输出的识别文本，避免依赖图标字体、Web 字体或现代 CSS 特性。</zh-CN>
+      <en>The probe title emphasizes the identifying text emitted by the module package while avoiding icon fonts, web fonts, or modern CSS features.</en>
+    </lang>
+*/
 .portal-package-hia-moduleprobe .module-probe-title {
     color: #1b4f72;
     font-size: 14px;
     font-weight: bold;
 }
 
+/*
+    <lang>
+      <zh-CN>摘要行提供标题下方的低优先级诊断说明，颜色只用于层级区分，不表达状态严重性。</zh-CN>
+      <en>The summary row provides lower-priority diagnostic text under the title; its color distinguishes hierarchy only and does not encode severity.</en>
+    </lang>
+*/
 .portal-package-hia-moduleprobe .module-probe-summary {
     margin-top: 3px;
     color: #496274;
 }
 
+/*
+    <lang>
+      <zh-CN>探针表格保持全宽以暴露宿主容器的可用空间，顶部间距仅分隔摘要与键值事实。</zh-CN>
+      <en>The probe table stays full-width to expose the host container's available space, and the top margin only separates the summary from key-value facts.</en>
+    </lang>
+*/
 .portal-package-hia-moduleprobe .module-probe-table {
     margin-top: 7px;
     width: 100%;
 }
 
+/*
+    <lang>
+      <zh-CN>标签列固定宽度用于让环境键名和运行值对齐；该宽度是诊断布局约束，不应被当作业务表格列宽。</zh-CN>
+      <en>The label column uses a fixed width to align environment keys with runtime values; this width is a diagnostics-layout constraint and should not be treated as a business table column width.</en>
+    </lang>
+*/
 .portal-package-hia-moduleprobe .module-probe-label {
     width: 92px;
     color: #31495c;

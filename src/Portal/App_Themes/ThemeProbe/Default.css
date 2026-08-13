@@ -1,27 +1,58 @@
 @import url("../Default/Default.css");
 
 /*
-    ThemeProbe is only a verification fixture for P1.2 theme switching.
-    ThemeProbe 仅用于验证 P1.2 主题切换机制，不作为正式视觉重设计。
+    <lang>
+      <zh-CN>ThemeProbe 是主题切换链路的验证夹具，先继承 Default 主题以保持布局基线，再只覆盖少量可观察颜色；它不作为正式视觉重设计或品牌主题分发。</zh-CN>
+      <en>ThemeProbe is a verification fixture for the theme-switching path: it inherits the Default theme to preserve the layout baseline and overrides only a few observable colors; it is not shipped as a formal visual redesign or brand theme.</en>
+    </lang>
 */
 
+/*
+    <lang>
+      <zh-CN>标题背景色提供最小可见差异，用于截图和手工检查确认主题 CSS 已经进入页面级资源链。</zh-CN>
+      <en>The title background color provides a minimal visible difference for screenshots and manual checks to confirm that the theme CSS has entered the page-level resource chain.</en>
+    </lang>
+*/
 .HeadBg {
     background-color: #1f4f7a;
 }
 
+/*
+    <lang>
+      <zh-CN>站点标题前景色只服务于探针主题的对比度验证，不改变标题文本、资源绑定或模块标题契约。</zh-CN>
+      <en>The site-title foreground color serves only the probe theme's contrast check and does not change title text, resource binding, or the module-title contract.</en>
+    </lang>
+*/
 .SiteTitle {
     color: #f5f5f5;
 }
 
+/*
+    <lang>
+      <zh-CN>选中 Tab 颜色沿用同一探针色，帮助区分当前主题是否覆盖了导航选中态。</zh-CN>
+      <en>The selected-tab color reuses the same probe color so checks can distinguish whether the current theme has overridden the navigation selected state.</en>
+    </lang>
+*/
 .SelectedTab {
     color: #1f4f7a;
 }
 
+/*
+    <lang>
+      <zh-CN>非选中 Tab 背景色用于观察旧 Tab 条的主题回退；它不调整 Tab 顺序、权限或移动端导航行为。</zh-CN>
+      <en>The unselected-tab background color observes the legacy tab bar's theme fallback; it does not adjust tab order, authorization, or mobile navigation behavior.</en>
+    </lang>
+*/
 .OtherTabsBg {
     background-color: #4f6678;
 }
 
-/* P3.1 模块作用域验证：包装元素不参与缓存输出，可安全用于纯 CSS 呈现差异。 */
+/*
+    <lang>
+      <zh-CN>模块外框只验证包裹元素的主题作用域，包装元素不参与缓存输出，可安全用于纯 CSS 呈现差异。</zh-CN>
+      <en>The module outline verifies only the themed scope around module wrapper elements; the wrapper does not participate in cached output and is safe for a CSS-only rendering difference.</en>
+    </lang>
+*/
 body.portal-theme-themeprobe .portal-module {
     outline: 1px solid #91a9bd;
 }

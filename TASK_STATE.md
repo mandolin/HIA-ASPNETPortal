@@ -1010,7 +1010,10 @@
 | P26.5tn 选片 | 已选择 `Default.aspx.cs` 与 `GenericErrorPage.aspx.cs`，同属门户根入口/通用错误出口 code-behind 生命周期边界；覆盖根入口跳转参数契约、诊断事件编号来源、未信任输入校验和 HTML 编码输出；已确认 `AccessDenied.aspx`、`EditAccessDenied.aspx`、`NotImplemented.aspx` 标记层已有合格服务器端 `<lang>` 注释，不重复治理。见 [P26.5tn 选片](work-zone/dev/plans/W-anp-P26.5tn-root-error-entry-selection.md)。 |
 | P26.5to 注释补强 | 已为 `Default.aspx.cs` 的 `Page_Load` 补齐 `sender`/`e` 参数 `<l>` 注释，为 `GenericErrorPage.aspx.cs` 的事件编号读取与输出赋值补齐方法内 `<lang>` 叙事；新增非注释 C# `0`，跳转目标、事件编号校验、HTML 编码和兜底文本均未改变。见 [P26.5to 结果](work-zone/dev/plans/W-anp-P26.5to-root-error-entry-result.md)。 |
 | P26.5tp 静态验证 | 通过；两个目标文件去 C# 注释后与 `HEAD` 对比 `CSharp_NONCOMMENT_STRIPPED_DIFF=0`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF 与目标 `git diff --check` 通过；经 `mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 验证 Debug 构建和 XML 文档门禁通过，Portal XML member count `1936`，仅保留既有 `Roles.ModulesConfig` 隐藏继承成员警告。见 [P26.5tp 审计](work-zone/dev/plans/W-anp-P26.5tp-root-error-entry-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5tq：重新读取最新账本和源码盘点，继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；不重复 Setup 两个大型 SQL 与本批根入口/错误出口。 |
+| P26.5tq 选片 | 已选择 `ThemeProbe/Default.css` 与 `ModuleProbe/Styles/ModuleProbe.css` 两个 clean、0 `<lang>` 的探针/诊断 CSS；覆盖主题切换夹具、模块包资源加载探针、IE9 兼容呈现、不捆绑字体和非业务视觉规范边界；大型主题 CSS、业务模块 CSS、标记层、真实浏览器 proof 与资产构建排除。见 [P26.5tq 选片](work-zone/dev/plans/W-anp-P26.5tq-probe-css-rop-selection.md)。 |
+| P26.5tr 注释补强 | 已为两个目标 CSS 补充合法 `/* <lang> ... */` ROP 注释，`ThemeProbe` `<lang>=6`、`ModuleProbe` `<lang>=5`，合计 `11`；新增非注释 CSS `0`，selector、声明、颜色、尺寸、import、作用域前缀和字体策略均未改变。见 [P26.5tr 结果](work-zone/dev/plans/W-anp-P26.5tr-probe-css-rop-result.md)。 |
+| P26.5ts 静态验证 | 通过；两个目标去 CSS 注释后与 `HEAD` 对比 `CSS_NONCOMMENT_STRIPPED_DIFF=0`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 与 `mise exec -- node` + PostCSS parse（在 `src/Portal` 模块解析上下文）通过；未运行 Gulp/assets build、真实浏览器、IIS/HTTP、模块包加载、主题切换截图、账号、凭据或发布 proof。见 [P26.5ts 审计](work-zone/dev/plans/W-anp-P26.5ts-probe-css-rop-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5tt：重新读取最新账本和源码盘点，继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；大型主题 CSS 建议单独批次处理。 |
 
 ## Known Residual Working Tree Items
 
@@ -1045,6 +1048,8 @@
 | P26.5tk 初次底部大型 apply_patch | adjusted | 首次底部多 hunk 补丁因 `Portal_Links` 尾部上下文手抄不完全匹配被拒绝且未应用；改为按表族边界拆分小补丁后完成注释补强。 |
 | P26.5tn 初次候选扫描 | adjusted | 首次对每个候选文件逐个调用 `git status` 导致只读扫描超时，未改文件；改为一次性取工作树状态集合并在内存中过滤候选。 |
 | P26.5tn PowerShell 预检管道写法 | adjusted | 两次把 `foreach {}` 结果直接接管道导致 PowerShell 解析前失败，未执行验证也未改文件；改为 `$rows = foreach (...) { ... }` 后完成预检、编码和构建验证。 |
+| P26.5tq PostCSS here-string 预检 | adjusted | 首次把 JS here-string 放入外层 PowerShell 单引号 payload，导致 PowerShell 解析前失败，未执行验证也未改文件；改为不含单引号的 `node -e`。 |
+| P26.5tq PostCSS 根目录解析 | adjusted | 首次从仓库根运行 `node -e` 找不到 `postcss` 模块，未改文件；改到 `src/Portal` 工作上下文后 PostCSS parse 通过。 |
 
 ## Anti-Loop Guard
 
