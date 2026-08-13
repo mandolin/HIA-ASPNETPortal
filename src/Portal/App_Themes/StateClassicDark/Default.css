@@ -1,12 +1,16 @@
 /*
-   P7.3 国企传统深色主题原型。
-   P7.3 State Classic Dark theme prototype.
-   中文：深蓝墨色底，红金只作弱强调；避免宣传屏化和高饱和。
-   English: Uses deep blue and ink backgrounds with restrained red and gold accents; avoids presentation-screen
-   styling and high saturation.
+   <lang>
+     <zh-CN>P7.3 国企传统深色主题原型使用深蓝墨色底，红金只作弱强调；它避免宣传屏化和高饱和，优先保证办公可读性。</zh-CN>
+     <en>The P7.3 State Classic Dark theme prototype uses deep blue and ink backgrounds with restrained red and gold accents; it avoids presentation-screen styling and high saturation while prioritizing office readability.</en>
+   </lang>
 */
 
-/* 中文 / English: P7.4.2-E 高风险配置编辑页的宽文本、并排短字段与图片预览样式。 */
+/*
+   <lang>
+     <zh-CN>P7.4.2-E 高风险配置编辑页样式覆盖宽文本、并排短字段与图片预览；这些规则只负责编辑表单的安全可读性，不承载保存、校验或权限逻辑。</zh-CN>
+     <en>The P7.4.2-E high-risk configuration editor styles cover wide text, side-by-side short fields, and image previews; these rules own only safe readability for edit forms and do not carry save, validation, or authorization logic.</en>
+   </lang>
+*/
 textarea.portal-code-textarea {
     min-height: 260px !important;
 }
@@ -486,7 +490,12 @@ body.portal-theme-stateclassicdark .employee-profile-form-field {
     display: inline-block;
 }
 
-/* 中文 / English: P7.4.2 内容模块、讨论详情和通用按钮组件。 */
+/*
+   <lang>
+     <zh-CN>P7.4.2 内容模块、讨论详情和通用按钮组件共用这一段视觉基线；它保留旧 Web Forms 标记结构，只调整可读性、间距和动作层级。</zh-CN>
+     <en>The P7.4.2 content modules, discussion details, and shared button components use this visual baseline; it preserves the legacy Web Forms markup structure and adjusts only readability, spacing, and action hierarchy.</en>
+   </lang>
+*/
 .portal-button,
 a.portal-button:link,
 a.portal-button:visited,
@@ -1081,7 +1090,12 @@ body.portal-theme-stateclassicdark input.portal-primary-action:hover {
     color: #ffffff;
 }
 
-/* 中文 / English: P7.4 后台页级组件，供系统健康、审计、目录等页面逐步复用。 */
+/*
+   <lang>
+     <zh-CN>P7.4 后台页级组件供系统健康、审计、目录等管理页逐步复用；这些规则统一页面壳、摘要卡片、区段和表格外观，不定义后台数据来源。</zh-CN>
+     <en>The P7.4 admin page-level components are reused gradually by health, audit, directory, and related management pages; these rules unify page shells, summary cards, sections, and tables without defining admin data sources.</en>
+   </lang>
+*/
 .portal-admin-page {
     font-size: 14px;
 }
@@ -1393,7 +1407,12 @@ body.portal-theme-stateclassicdark input.portal-primary-action:hover {
     word-break: break-word;
 }
 
-/* 中文 / English: TabLayout keeps legacy postback controls while presenting them as a layout workspace. */
+/*
+   <lang>
+     <zh-CN>TabLayout 区段把旧 postback 控件呈现为布局工作区，同时保留服务器事件、控件 ID 和回发模型。</zh-CN>
+     <en>The TabLayout section presents legacy postback controls as a layout workspace while preserving server events, control IDs, and the postback model.</en>
+   </lang>
+*/
 .portal-admin-tab-layout .portal-form-field-wide {
     width: 360px;
 }
@@ -1461,7 +1480,12 @@ body.portal-theme-stateclassicdark input.portal-primary-action:hover {
     text-align: center;
 }
 
-/* 中文 / English: P7.4.2-C 普通内容编辑页的表单、校验与危险操作样式。 */
+/*
+   <lang>
+     <zh-CN>P7.4.2-C 普通内容编辑页样式覆盖表单、校验提示和危险操作分组；这些规则只表达风险分层，不替代服务器端写入检查。</zh-CN>
+     <en>The P7.4.2-C standard content editor styles cover forms, validation hints, and dangerous-action grouping; these rules express risk layering only and do not replace server-side write checks.</en>
+   </lang>
+*/
 .portal-edit-page {
     max-width: 980px;
 }
@@ -1572,7 +1596,12 @@ button.portal-button-danger:hover {
     line-height: 1.5;
 }
 
-/* 中文 / English: 旧 Admin ASCX 兼容控件的最小布局补强。 */
+/*
+   <lang>
+     <zh-CN>旧 Admin ASCX 兼容控件只做最小布局补强，避免在主题层重写控件结构或生成器输出。</zh-CN>
+     <en>Legacy Admin ASCX compatibility controls receive only minimal layout reinforcement, avoiding structural rewrites or generated-output changes in the theme layer.</en>
+   </lang>
+*/
 .portal-legacy-listbox {
     width: 100% !important;
     max-width: 360px;

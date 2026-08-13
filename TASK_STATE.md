@@ -1013,7 +1013,10 @@
 | P26.5tq 选片 | 已选择 `ThemeProbe/Default.css` 与 `ModuleProbe/Styles/ModuleProbe.css` 两个 clean、0 `<lang>` 的探针/诊断 CSS；覆盖主题切换夹具、模块包资源加载探针、IE9 兼容呈现、不捆绑字体和非业务视觉规范边界；大型主题 CSS、业务模块 CSS、标记层、真实浏览器 proof 与资产构建排除。见 [P26.5tq 选片](work-zone/dev/plans/W-anp-P26.5tq-probe-css-rop-selection.md)。 |
 | P26.5tr 注释补强 | 已为两个目标 CSS 补充合法 `/* <lang> ... */` ROP 注释，`ThemeProbe` `<lang>=6`、`ModuleProbe` `<lang>=5`，合计 `11`；新增非注释 CSS `0`，selector、声明、颜色、尺寸、import、作用域前缀和字体策略均未改变。见 [P26.5tr 结果](work-zone/dev/plans/W-anp-P26.5tr-probe-css-rop-result.md)。 |
 | P26.5ts 静态验证 | 通过；两个目标去 CSS 注释后与 `HEAD` 对比 `CSS_NONCOMMENT_STRIPPED_DIFF=0`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 与 `mise exec -- node` + PostCSS parse（在 `src/Portal` 模块解析上下文）通过；未运行 Gulp/assets build、真实浏览器、IIS/HTTP、模块包加载、主题切换截图、账号、凭据或发布 proof。见 [P26.5ts 审计](work-zone/dev/plans/W-anp-P26.5ts-probe-css-rop-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5tt：重新读取最新账本和源码盘点，继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；大型主题 CSS 建议单独批次处理。 |
+| P26.5tt 选片 | 已选择 6 个现代主题变体 CSS：`EnterpriseLight`、`OaLight`、`OaDark`、`EnterpriseDark`、`StateClassicLight`、`StateClassicDark` 的 `Default.css`；覆盖主题原型总览、高风险配置编辑、内容模块/按钮、后台页级组件、TabLayout 工作区、普通内容编辑和旧 Admin ASCX 兼容布局区段；老 `App_Themes/Default/Default.css` 因 33 个旧注释块和 legacy 结构差异较大，留作独立批次。见 [P26.5tt 选片](work-zone/dev/plans/W-anp-P26.5tt-modern-theme-css-locale-selection.md)。 |
+| P26.5tu 注释补强 | 已将 6 个目标主题文件各 7 个旧普通中英注释块迁移/补强为合法 CSS `/* <lang> ... */`，合计 `<lang>=42`；新增非注释 CSS `0`，selector、声明、颜色、尺寸、media query、主题作用域 class、字体栈和资源策略均未改变。见 [P26.5tu 结果](work-zone/dev/plans/W-anp-P26.5tu-modern-theme-css-locale-result.md)。 |
+| P26.5tv 静态验证 | 通过；6 个目标去 CSS 注释后与 `HEAD` 对比 `CSS_NONCOMMENT_STRIPPED_DIFF=0`，每文件 `<lang>=7`、旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF、目标 `git diff --check`、`mise exec -- node` + PostCSS parse（`src/Portal` 模块解析上下文）通过；`mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 通过，Portal XML member count `1936`，保留既有 `Roles.ModulesConfig` CS0108 警告。未运行 Gulp/assets build、真实浏览器视觉回归、IIS/HTTP、主题切换截图、账号、凭据或发布 proof。见 [P26.5tv 审计](work-zone/dev/plans/W-anp-P26.5tv-modern-theme-css-locale-audit-result.md)。 |
+| 当前唯一下一步 | 进入 P26.5tw：重新读取最新账本和源码盘点，继续选择下一组 clean、同构、可静态验证、未重复的 ROP 注释治理缺口；老 `App_Themes/Default/Default.css` 建议单独批次处理。 |
 
 ## Known Residual Working Tree Items
 
