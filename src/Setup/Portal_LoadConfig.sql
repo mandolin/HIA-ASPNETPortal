@@ -11,14 +11,24 @@
 -- </lang>
 use [Portal]
 
-/****** Object:  Table [dbo].[PortalCfg_ModuleDefinitions]    Script Date: 02/28/2012 21:05:20 ******/
+/*
+<lang>
+  <zh-CN>SQL Server 生成的对象边界标记：Table [dbo].[PortalCfg_ModuleDefinitions]；仅作为脚本分段导航，后续 DDL/DML 语义由实际 SQL 语句决定。</zh-CN>
+  <en>SQL Server-generated object boundary marker: Table [dbo].[PortalCfg_ModuleDefinitions]; retained only as script-section navigation, while the following DDL/DML statements define the actual behavior.</en>
+</lang>
+*/
 -- <lang>
 --   <zh-CN>清空模块定义表，为后续固定 `ModuleDefId` seed 重建完整旧目录；执行会删除管理员已有模块定义。</zh-CN>
 --   <en>Clear the module-definition table before rebuilding the complete legacy catalog with fixed `ModuleDefId` seed values; execution removes administrator-maintained module definitions.</en>
 -- </lang>
 DELETE FROM [PortalCfg_ModuleDefinitions]
 GO
-/****** Object:  Table [dbo].[PortalCfg_ModuleDefinitions]    Script Date: 02/28/2012 21:05:20 ******/
+/*
+<lang>
+  <zh-CN>SQL Server 生成的对象边界标记：Table [dbo].[PortalCfg_ModuleDefinitions]；仅作为脚本分段导航，后续 DDL/DML 语义由实际 SQL 语句决定。</zh-CN>
+  <en>SQL Server-generated object boundary marker: Table [dbo].[PortalCfg_ModuleDefinitions]; retained only as script-section navigation, while the following DDL/DML statements define the actual behavior.</en>
+</lang>
+*/
 -- <lang>
 --   <zh-CN>临时启用 identity insert 以保留旧模块定义 ID；这些 ID 被历史配置和示例数据引用。</zh-CN>
 --   <en>Temporarily enable identity insert to preserve legacy module-definition ids referenced by historical configuration and sample data.</en>

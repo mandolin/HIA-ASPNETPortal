@@ -1025,7 +1025,11 @@
 | P26.5uc 选片 | 已选择根 `src/Portal/Web.config` 的 XML 注释迁移独立批次；覆盖仓库配置基线、多配置机制、section 注册、env、system.web、空连接串容器、appSettings、安全响应头、WCF 兼容入口和程序集绑定；真实环境配置和小型 config/template 已分批处理或排除。见 [P26.5uc 选片](work-zone/dev/plans/W-anp-P26.5uc-root-web-config-comment-selection.md)。 |
 | P26.5ud 注释补强 | 已将根 Web.config 的 55 个普通/旧式 XML 注释块迁移为合法 `<!-- <lang> ... -->` 双语语义块；被注释示例不再保留可复制 XML，改为说明其风险和启用条件；新增非注释 XML 配置 `0`。见 [P26.5ud 结果](work-zone/dev/plans/W-anp-P26.5ud-root-web-config-comment-result.md)。 |
 | P26.5ue 静态验证 | 通过；去 XML 注释后与 `HEAD` 对比 `XML_CONFIG_NONCOMMENT_STRIPPED_DIFF=0`，XML parser 可加载，`<lang>=55`，非 `<lang>` 注释 `0`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 通过；`mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 通过，Portal XML member count `1936`。未运行 Web.config transform 应用、IIS/HTTP、浏览器、真实连接串、环境 profile、账号、凭据或发布 proof。见 [P26.5ue 审计](work-zone/dev/plans/W-anp-P26.5ue-root-web-config-comment-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5uf：重新扫描 clean 的 JS/SQL/config/标记剩余注释债，优先选择同构、可去注释证明且未重复的下一组；不重复根 Web.config。 |
+| P26.5uf 选片 | 已选择 `Portal_LoadConfig.sql`、`Portal_CreateDB.sql` 与 `Portal_LoadData.sql` 的 SQL Server 生成对象边界头残留迁移；覆盖旧模块定义装载、旧建库总脚本和旧 seed 数据脚本中的外层 `/****** Object ... Script Date ... ******/` 注释。JSDoc `@lang`、ESLint/VS binding 指令、第三方 minified JS 和 `CreateDB` 动态 SQL 字符串内部注释排除。见 [P26.5uf 选片](work-zone/dev/plans/W-anp-P26.5uf-generated-sql-comment-selection.md)。 |
+| P26.5ug 注释补强 | 已将 116 个 SQL Server 生成对象边界头迁移为合法 SQL `/* <lang> ... */` 双语块：`LoadConfig=2`、`CreateDB=86`、`LoadData=28`；新增非注释 SQL `0`。`CreateDB` 动态 SQL 字符串内 8 个旧过程注释保持原状，避免进入 `sp_executesql N'...'` 字符串。见 [P26.5ug 结果](work-zone/dev/plans/W-anp-P26.5ug-generated-sql-comment-result.md)。 |
+| P26.5uh 静态验证 | 通过；三个目标去 SQL 注释后与 `HEAD` 对比 `SQL_NONCOMMENT_STRIPPED_DIFF=0`，生成头残留 `0`，旧式/未冻结标记 `0`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 通过；`<lang>` 总数分别为 `8/107/44`，动态 SQL 字符串内部旧过程注释保留 `8` 个并作为排除项。未执行真实 SQL Server 建库、清库、seed、SQL parser、数据库写入、账号、凭据、IIS/HTTP、浏览器或发布 proof。见 [P26.5uh 审计](work-zone/dev/plans/W-anp-P26.5uh-generated-sql-comment-audit-result.md)。 |
+| 当前失败与修正 | P26.5uf 只读扫描期间修正 PowerShell `$var:` 插值、`-LiteralPath` 通配符、typed list 返回三处脚本问题；P26.5uh 首次验证发现动态 SQL 字符串内部注释被误改，已按 P26.5ti 边界回退；外层注释扫描器对多行 `-- <lang>` 和 `sp_executesql` 误判后停止依赖该不稳定断言，改用去注释等价、生成头计数、动态字符串排除计数和编码/diff-check 收口。 |
+| 当前唯一下一步 | 进入 P26.5ui：重新扫描 clean 的 SQL/JS 剩余注释债，优先选择未触碰动态 SQL 字符串、非第三方、可稳定静态验证的下一组。 |
 
 ## Known Residual Working Tree Items
 
