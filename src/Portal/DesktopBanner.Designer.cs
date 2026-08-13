@@ -13,7 +13,10 @@ namespace ASPNET.StarterKit.Portal {
     
     
     /// <summary>
-    ///   一个强类型的资源类，用于查找本地化的字符串等。
+    /// <lang>
+    ///   <zh-CN>强类型资源访问器，用于查找本地化字符串等资源值。</zh-CN>
+    ///   <en>Strongly typed resource accessor used to look up localized strings and related resource values.</en>
+    /// </lang>
     /// </summary>
     // 此类是由 StronglyTypedResourceBuilder
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
@@ -33,7 +36,10 @@ namespace ASPNET.StarterKit.Portal {
         }
         
         /// <summary>
-        ///   返回此类使用的缓存的 ResourceManager 实例。
+        /// <lang>
+        ///   <zh-CN>返回此强类型资源访问器使用的缓存 ResourceManager 实例。</zh-CN>
+        ///   <en>Returns the cached ResourceManager instance used by this strongly typed resource accessor.</en>
+        /// </lang>
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
@@ -47,8 +53,10 @@ namespace ASPNET.StarterKit.Portal {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性，对
-        ///   使用此强类型资源类的所有资源查找执行重写。
+        /// <lang>
+        ///   <zh-CN>重写当前线程的 CurrentUICulture，影响此强类型资源类执行的所有资源查找。</zh-CN>
+        ///   <en>Overrides the current thread CurrentUICulture for all lookups performed by this strongly typed resource class.</en>
+        /// </lang>
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
@@ -61,7 +69,10 @@ namespace ASPNET.StarterKit.Portal {
         }
         
         /// <summary>
-        ///   查找类似 Welcome {0}! 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Welcome {0}!</zh-CN>
+        ///   <en>Looks up a localized string similar to: Welcome {0}!</en>
+        /// </lang>
         /// </summary>
         internal static string WelcomeMessage {
             get {

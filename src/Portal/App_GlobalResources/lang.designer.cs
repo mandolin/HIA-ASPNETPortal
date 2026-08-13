@@ -13,7 +13,10 @@ namespace Resources {
     
     
     /// <summary>
-    ///   一个强类型的资源类，用于查找本地化的字符串等。
+    /// <lang>
+    ///   <zh-CN>强类型资源访问器，用于查找本地化字符串等资源值。</zh-CN>
+    ///   <en>Strongly typed resource accessor used to look up localized strings and related resource values.</en>
+    /// </lang>
     /// </summary>
     // 此类是由 StronglyTypedResourceBuilder
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
@@ -33,7 +36,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   返回此类使用的缓存的 ResourceManager 实例。
+        /// <lang>
+        ///   <zh-CN>返回此强类型资源访问器使用的缓存 ResourceManager 实例。</zh-CN>
+        ///   <en>Returns the cached ResourceManager instance used by this strongly typed resource accessor.</en>
+        /// </lang>
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
@@ -47,8 +53,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性，对
-        ///   使用此强类型资源类的所有资源查找执行重写。
+        /// <lang>
+        ///   <zh-CN>重写当前线程的 CurrentUICulture，影响此强类型资源类执行的所有资源查找。</zh-CN>
+        ///   <en>Overrides the current thread CurrentUICulture for all lookups performed by this strongly typed resource class.</en>
+        /// </lang>
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
@@ -61,7 +69,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Access Denied 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Access Denied</zh-CN>
+        ///   <en>Looks up a localized string similar to: Access Denied</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_AccessDenied_AccessDenied {
             get {
@@ -70,7 +81,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Either you are not currently logged in, or you do not have access to this tab page within the portal. Please contact the portal administrator to obtain access. 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Either you are not currently logged in, or you do not have access to this tab page within the portal. Please contact the portal administrator to obtain access.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Either you are not currently logged in, or you do not have access to this tab page within the portal. Please contact the portal administrator to obtain access.</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_AccessDenied_DeniedAbout {
             get {
@@ -79,7 +93,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Return to the ASP.NET Portal Starter Kit Home 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Return to the ASP.NET Portal Starter Kit Home</zh-CN>
+        ///   <en>Looks up a localized string similar to: Return to the ASP.NET Portal Starter Kit Home</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_AccessDenied_ReturnToHome {
             get {
@@ -88,7 +105,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Edit Access Denied 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit Access Denied</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit Access Denied</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_EditAccessDenied_EditAccessDenied {
             get {
@@ -97,7 +117,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Add user to this role 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add user to this role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add user to this role</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_AddUserToRole {
             get {
@@ -106,7 +129,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Apply Name and Password Changes 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Apply Name and Password Changes</zh-CN>
+        ///   <en>Looks up a localized string similar to: Apply Name and Password Changes</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_ApplyNamePwdChange {
             get {
@@ -115,7 +141,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Confirm Password: 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Confirm Password:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Confirm Password:</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_ConfirmPwd {
             get {
@@ -124,7 +153,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Email (or Windows domain name): 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Email (or Windows domain name):</zh-CN>
+        ///   <en>Looks up a localized string similar to: Email (or Windows domain name):</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_Email {
             get {
@@ -133,7 +165,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Manage User 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Manage User</zh-CN>
+        ///   <en>Looks up a localized string similar to: Manage User</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_ManageUser {
             get {
@@ -142,7 +177,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Password: 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Password:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Password:</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_Password {
             get {
@@ -151,7 +189,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Remove user from this role 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Remove user from this role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Remove user from this role</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_RemoveFromRoleAlt {
             get {
@@ -160,7 +201,10 @@ namespace Resources {
         }
 
         /// <summary>
-        ///   查找类似 Remove 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Remove</zh-CN>
+        ///   <en>Looks up a localized string similar to: Remove</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_RemoveFromRoleText {
             get {
@@ -169,7 +213,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Save User Changes 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Save User Changes</zh-CN>
+        ///   <en>Looks up a localized string similar to: Save User Changes</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_ManageUsers_SaveUserChange {
             get {
@@ -178,7 +225,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Users must be registered to view secure content.  Users may add themselves using the Register form, and Administrators may add users to specific roles using the Security Roles function above.  This section permits Administrators to manage users and their security roles directly. 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Users must be registered to view secure content. Users may add themselves using the Register form, and Administrators may add users to specific roles using the Security Roles function above. This section permits Administrators to manage users and their security roles directly.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Users must be registered to view secure content. Users may add themselves using the Register form, and Administrators may add users to specific roles using the Security Roles function above. This section permits Administrators to manage users and their security roles directly.</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_Users_FormMsg {
             get {
@@ -187,7 +237,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Domain users do not need to be registered to access portal content that is available to \&quot;All Users\&quot;.  Administrators may add domain users to specific roles using the Security Roles function above.  This section permits Administrators to manage users and their security roles directly. 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Domain users do not need to be registered to access portal content that is available to \"All Users\". Administrators may add domain users to specific roles using the Security Roles function above. This section permits Administrators to manage users and their security roles directly.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Domain users do not need to be registered to access portal content that is available to \"All Users\". Administrators may add domain users to specific roles using the Security Roles function above. This section permits Administrators to manage users and their security roles directly.</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_Users_OtherMsg {
             get {
@@ -196,7 +249,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Registered Users: 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registered Users:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registered Users:</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_Users_RegisteredUsers {
             get {
@@ -205,7 +261,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Add New User 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add New User</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add New User</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_User_AddUser {
             get {
@@ -214,7 +273,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Delete this user 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Delete this user</zh-CN>
+        ///   <en>Looks up a localized string similar to: Delete this user</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_User_DelUser {
             get {
@@ -223,7 +285,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Edit this user 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit this user</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit this user</en>
+        /// </lang>
         /// </summary>
         internal static string Admin_User_EditUser {
             get {
@@ -232,7 +297,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 read more... 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：read more...</zh-CN>
+        ///   <en>Looks up a localized string similar to: read more...</en>
+        /// </lang>
         /// </summary>
         internal static string Announcements_readMore {
             get {
@@ -241,7 +309,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Manage Users 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Manage Users</zh-CN>
+        ///   <en>Looks up a localized string similar to: Manage Users</en>
+        /// </lang>
         /// </summary>
         internal static string Module_Name_ID_32 {
             get {
@@ -250,7 +321,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Account Login 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Account Login</zh-CN>
+        ///   <en>Looks up a localized string similar to: Account Login</en>
+        /// </lang>
         /// </summary>
         internal static string Signin_accountLogin {
             get {
@@ -259,7 +333,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Email: 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Email:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Email:</en>
+        /// </lang>
         /// </summary>
         internal static string Signin_email {
             get {
@@ -268,7 +345,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Email Or Name: 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Email Or Name:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Email Or Name:</en>
+        /// </lang>
         /// </summary>
         internal static string Signin_EmailOrName {
             get {
@@ -277,7 +357,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Login Failed! 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Login Failed!</zh-CN>
+        ///   <en>Looks up a localized string similar to: Login Failed!</en>
+        /// </lang>
         /// </summary>
         internal static string Signin_LoginFaild {
             get {
@@ -286,7 +369,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Password: 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Password:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Password:</en>
+        /// </lang>
         /// </summary>
         internal static string Signin_password {
             get {
@@ -295,7 +381,10 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查找类似 Remember Login 的本地化字符串。
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Remember Login</zh-CN>
+        ///   <en>Looks up a localized string similar to: Remember Login</en>
+        /// </lang>
         /// </summary>
         internal static string Signin_rememberLogin {
             get {

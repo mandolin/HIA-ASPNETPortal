@@ -1036,7 +1036,11 @@
 | P26.5ul 选片 | 已选择 `Portal.Components.Data1` 7 个 clean 数据访问实现类：`EmployeeDirectoryDb.cs`、`EmployeeProfileCorrectionRequestDb.cs`、`EmployeeDirectoryAdminDb.cs`、`PortalWorkItemDb.cs`、`UserEmployeeBindingAdminDb.cs`、`EmployeeProfileConfirmationDb.cs` 与 `ReferenceDataDb.cs`，统一处理 30 个实现方法 `<inheritdoc />`，接口均有已批准 `<lang>/<l>` 契约。见 [P26.5ul 选片](work-zone/dev/plans/W-anp-P26.5ul-data1-inheritdoc-selection.md)。 |
 | P26.5um 注释补强 | 已将 30 个实现方法 `<inheritdoc />` 替换为接口同源双语 XML 文档：目录读取 6、资料更正 6、目录后台维护 5、工作项 5、账号员工绑定后台 4、资料确认 3、参考数据 1；新增非注释 C# `0`。见 [P26.5um 结果](work-zone/dev/plans/W-anp-P26.5um-data1-inheritdoc-result.md)。 |
 | P26.5un 静态验证 | 通过；7 个目标 `CSharp_NONCOMMENT_STRIPPED_DIFF=0`，`<inheritdoc>` 剩余 `0`，目标 `<lang>` 总数 `275`、`<l>` 总数 `199`，UTF-8 无 BOM/CRLF、目标 `git diff --check` 通过；`mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 通过，Portal XML member count `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`，仅保留既有 `Roles.ModulesConfig` CS0108 警告。未运行真实数据库、IIS/HTTP、浏览器、真实账号/员工/工作项/参考数据写入或发布 proof。见 [P26.5un 审计](work-zone/dev/plans/W-anp-P26.5un-data1-inheritdoc-audit-result.md)。 |
-| 当前唯一下一步 | 进入 P26.5uo：继续扫描 clean tracked 剩余注释债，优先选择可一次合并且有稳定静态验证路径的 C#/XML/SQL/JS 批次；不重复 P26.5ul-un。 |
+| P26.5uo 选片 | clean tracked 复扫确认普通注释候选仅剩 `Portal_CreateDB.sql` 动态 SQL 字符串内部 8 个旧过程注释，继续排除；选中两个强类型资源 Designer：`src/Portal/App_GlobalResources/lang.designer.cs` 与 `src/Portal/DesktopBanner.Designer.cs`，处理生成器 XML summary 文档块。见 [P26.5uo 选片](work-zone/dev/plans/W-anp-P26.5uo-resource-designer-selection.md)。 |
+| P26.5up 注释补强 | 已将两个资源 Designer 的 34 个 XML `<summary>` 文档块迁移为 `<summary><lang>` 双语表面：`lang.designer.cs=30`、`DesktopBanner.Designer.cs=4`；保留生成器头、资源键、ResourceManager、Culture、getter 和资源查找语义不变。见 [P26.5up 结果](work-zone/dev/plans/W-anp-P26.5up-resource-designer-result.md)。 |
+| P26.5uq 静态验证 | 通过；两个目标 `CSharp_NONCOMMENT_STRIPPED_DIFF=0`，XML doc 缺 `<lang>/<l>` 块 `0`，`<lang>` 总数 `34`，UTF-8 无 BOM/CRLF、无 `CRCRLF`、目标 `git diff --check` 通过；`mise exec -- pwsh ... Test-PortalXmlDocumentation.ps1 -Build` 通过，Portal XML member count `1936`、Portal.Components `914`、Portal.Components.Data `21`、Portal.Components.Data1 `718`，仅保留既有 `Roles.ModulesConfig` CS0108 警告。未运行资源 Designer 重新生成、真实资源切换、IIS/HTTP、浏览器、账号、凭据或发布 proof。见 [P26.5uq 审计](work-zone/dev/plans/W-anp-P26.5uq-resource-designer-audit-result.md)。 |
+| 当前失败与修正 | P26.5uo 旧 locale 扫描首次因一个历史通知文件的 quoted 路径被 `Select-String` 误读而中断，未改文件；改用 `git -c core.quotePath=false ls-files -z` 并排除 `dev/notify/` 后完成。P26.5up PowerShell 转换器连续两次因引号/弯引号解析失败未执行写入，按反循环协议停止该方案，改用无单引号 Python 迁移器；其首次写入在 Windows 文本模式下产生 `CRCRLF`，已用 .NET UTF-8 无 BOM/CRLF 规范化并通过 diff-check。 |
+| 当前唯一下一步 | 进入 P26.5ur：继续扫描 clean tracked 剩余注释债；动态 SQL 字符串内部旧注释、第三方/minified、生成器可覆盖风险继续显式登记，不重复 P26.5uo-uq。 |
 
 ## Known Residual Working Tree Items
 
@@ -1074,6 +1078,7 @@
 | P26.5tq PostCSS here-string 预检 | adjusted | 首次把 JS here-string 放入外层 PowerShell 单引号 payload，导致 PowerShell 解析前失败，未执行验证也未改文件；改为不含单引号的 `node -e`。 |
 | P26.5tq PostCSS 根目录解析 | adjusted | 首次从仓库根运行 `node -e` 找不到 `postcss` 模块，未改文件；改到 `src/Portal` 工作上下文后 PostCSS parse 通过。 |
 | P26.5ui-uk 低风险注释批次 | adjusted | 扫描/验证脚本多次暴露 PowerShell 排序、here-string 和外层单引号边界；DTO 机械复制脚本曾误带入接口外壳并触发精确恢复重做。最终只保留注释-only 目标差异，去注释等价、XML parser、diff-check 和 Debug/XML gate 均通过。 |
+| P26.5uo-uq 资源 Designer 注释批次 | adjusted | 旧 locale 扫描因 quoted 路径中断一次；PowerShell summary 转换器因字符串边界连续失败两次后停止，改用 Python 迁移器；Python 文本写入带来 `CRCRLF` 后用 .NET 规范化。最终非注释 C# 等价、XML 文档覆盖、编码、diff-check 和 Debug/XML gate 均通过。 |
 
 ## Anti-Loop Guard
 
