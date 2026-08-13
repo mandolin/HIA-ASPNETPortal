@@ -4,11 +4,10 @@
 Generates a read-only inventory of the Portal/HIA peripheral integration boundary.
 
 .DESCRIPTION
-本脚本只读取仓库内已追踪契约、proof、文档和可选的 HIA-Documentation-Sys 通知目录。
-它不连接数据库、不加载外部程序集、不发起网络请求、不复制通知内容，也不读取连接串或凭据。
-This script reads only tracked contract, proof, documentation, and the optional HIA-Documentation-Sys
-notification directory. It does not connect to databases, load external assemblies, call networks,
-copy notification content, or read connection strings or credentials.
+<lang>
+  <zh-CN>本脚本只读取仓库内已追踪契约、proof、文档和可选的 HIA-Documentation-Sys 通知目录；不连接数据库、不加载外部程序集、不发起网络请求、不复制通知内容，也不读取连接串或凭据。</zh-CN>
+  <en>This script reads only tracked contracts, proof, documentation, and the optional HIA-Documentation-Sys notification directory. It does not connect to databases, load external assemblies, call networks, copy notification content, or read connection strings or credentials.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -30,6 +29,10 @@ if ([string]::IsNullOrWhiteSpace($DocumentationSysRoot)) {
     $DocumentationSysRoot = Join-Path (Split-Path -Parent $repoRoot) 'HIA-Documentation-Sys'
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选 HIA 集成盘点产物，并按需创建父目录。</zh-CN>
+#   <en>Writes optional HIA integration inventory artifacts as UTF-8 without BOM and creates the parent directory when needed.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)]
@@ -48,6 +51,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, $encoding)
 }
 
+# <lang>
+#   <zh-CN>把仓库内文件路径规范化为相对路径，供契约和通知边界比较使用。</zh-CN>
+#   <en>Normalizes repository file paths to relative values used by contract and notification-boundary comparisons.</en>
+# </lang>
 function Get-RepoRelativePath {
     param([string]$Path)
 
@@ -60,6 +67,10 @@ function Get-RepoRelativePath {
     return ($fullPath -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>将可选通知目录子项映射为低敏相对路径，不读取通知正文。</zh-CN>
+#   <en>Maps optional notification-directory children to low-sensitivity relative paths without reading notification bodies.</en>
+# </lang>
 function Get-ChildRelativePath {
     param(
         [string]$RootPath,
@@ -75,6 +86,10 @@ function Get-ChildRelativePath {
     return [System.IO.Path]::GetFileName($ChildPath)
 }
 
+# <lang>
+#   <zh-CN>建立统一的 HIA 集成边界检查结果对象，保留状态、摘要和低敏证据字段。</zh-CN>
+#   <en>Creates a uniform HIA integration-boundary check result with status, summary, and low-sensitivity evidence fields.</en>
+# </lang>
 function New-Check {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info', 'Pending')]
@@ -95,6 +110,10 @@ function New-Check {
     }
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 读取仓库内文本用于只读匹配，异常时返回空文本并保留检查可继续。</zh-CN>
+#   <en>Reads repository text as UTF-8 for read-only matching and returns empty text on failure so checks can continue.</en>
+# </lang>
 function Read-TextFile {
     param([string]$Path)
 
@@ -105,6 +124,10 @@ function Read-TextFile {
     return [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>从通知文件名提取低敏标题片段，不复制通知内容或凭据。</zh-CN>
+#   <en>Extracts a low-sensitivity title fragment from a notification filename without copying its contents or credentials.</en>
+# </lang>
 function Get-NotificationTitle {
     param(
         [string]$Content,
@@ -119,6 +142,10 @@ function Get-NotificationTitle {
     return [System.IO.Path]::GetFileNameWithoutExtension($FallbackName)
 }
 
+# <lang>
+#   <zh-CN>判断给定仓库相对路径是否存在且已被 Git 追踪，保持集成事实来源受限。</zh-CN>
+#   <en>Checks whether a repository-relative path exists and is Git-tracked so integration facts stay bounded.</en>
+# </lang>
 function Get-TrackedPathExists {
     param([string]$RelativePath)
 

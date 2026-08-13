@@ -3,13 +3,10 @@
     Generates a read-only source and documentation coverage inventory for P15.
 
 .DESCRIPTION
-    中文：本脚本只读取 Git 已追踪的源码、脚本和主要 Markdown，用启发式规则统计源码结构、
-    注释形态、高风险区域和文档化补强候选。它不读取未跟踪生成目录、不改写源码、不构建项目、
-    不生成 API 文档、不访问数据库或网络。
-    English: This script reads only Git-tracked source, script, and main Markdown files, then
-    uses heuristic rules to inventory source structure, comment styles, high-risk areas, and
-    documentation-improvement candidates. It does not read untracked generated output, rewrite
-    source files, build the project, generate API docs, or access databases or the network.
+<lang>
+  <zh-CN>本脚本只读取 Git 已追踪的源码、脚本和主要 Markdown，用启发式规则统计源码结构、注释形态、高风险区域和文档化补强候选；不读取未跟踪生成目录、不改写源码、不构建项目、不生成 API 文档、不访问数据库或网络。</zh-CN>
+  <en>This script reads only Git-tracked source, scripts, and main Markdown files, then uses heuristic rules to inventory source structure, comment styles, high-risk areas, and documentation-improvement candidates without reading untracked output, rewriting source, building the project, generating API docs, or accessing databases or the network.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -44,6 +41,10 @@ $excludedPrefixes = @(
     'node_modules/'
 )
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选盘点产物，并在需要时创建父目录；不改变盘点规则。</zh-CN>
+#   <en>Writes optional inventory artifacts as UTF-8 without BOM and creates the parent directory when needed without changing inventory rules.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -58,12 +59,20 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>将仓库路径规范化为正斜杠形式，供后续扩展名、前缀和输出比较复用。</zh-CN>
+#   <en>Normalizes repository paths to slash-separated values reused by extension, prefix, and output comparisons.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([Parameter(Mandatory = $true)][string]$Path)
 
     return ($Path -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>按排除前缀和允许扩展名过滤 Git 已追踪文件，保持盘点范围不扩张到生成物。</zh-CN>
+#   <en>Filters Git-tracked files by excluded prefixes and allowed extensions so generated output cannot expand the inventory scope.</en>
+# </lang>
 function Test-IsIncludedTrackedFile {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -77,12 +86,20 @@ function Test-IsIncludedTrackedFile {
     return $includedExtensions.Contains([System.IO.Path]::GetExtension($repoPath))
 }
 
+# <lang>
+#   <zh-CN>把规范化相对路径解析为当前仓库内绝对路径，不接受仓库外的替代根目录。</zh-CN>
+#   <en>Resolves a normalized relative path inside the current repository without accepting an alternate root outside it.</en>
+# </lang>
 function Get-AbsolutePath {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
     return Join-Path $repoRoot ((ConvertTo-RepoPath -Path $RelativePath) -replace '/', '\')
 }
 
+# <lang>
+#   <zh-CN>对非空文本执行不区分大小写的多行正则计数，并为空输入提供零值回退。</zh-CN>
+#   <en>Counts case-insensitive multiline regex matches in non-empty text and returns zero for empty input.</en>
+# </lang>
 function Get-TextMetric {
     param(
         [Parameter(Mandatory = $true)][AllowEmptyString()][string]$Text,
@@ -99,6 +116,10 @@ function Get-TextMetric {
         [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Multiline).Count
 }
 
+# <lang>
+#   <zh-CN>根据路径和正文的固定规则归类配置、安全、身份、路径、异常、审计、数据和发布风险。</zh-CN>
+#   <en>Classifies configuration, security, identity, path, diagnostics, audit, data, and release risks using fixed path-and-text rules.</en>
+# </lang>
 function Get-RiskCategories {
     param(
         [Parameter(Mandatory = $true)][string]$RelativePath,
@@ -128,6 +149,10 @@ function Get-RiskCategories {
     return @($categories | Select-Object -Unique)
 }
 
+# <lang>
+#   <zh-CN>把源码相对路径映射到稳定的区域标签，供结果分组而不改变文件内容。</zh-CN>
+#   <en>Maps a source-relative path to a stable area label for grouping without changing file contents.</en>
+# </lang>
 function Get-FileArea {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -147,6 +172,10 @@ function Get-FileArea {
     return 'Other'
 }
 
+# <lang>
+#   <zh-CN>读取已知生成目录的存在性和低敏计数，明确排除目录正文和未跟踪产物。</zh-CN>
+#   <en>Reads existence and low-sensitivity counts for known generated directories while excluding their contents and untracked artifacts.</en>
+# </lang>
 function Get-GeneratedDirectoryState {
     param(
         [Parameter(Mandatory = $true)][string]$RelativePath,

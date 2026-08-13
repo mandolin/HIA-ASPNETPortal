@@ -3,11 +3,10 @@
     Checks the P23.6 collaboration-item comment and workflow-rule implementation without changing a database.
 
 .DESCRIPTION
-    中文：本脚本执行 P23.6 静态门禁，核对事件时间线扩展、状态机、服务端身份复核、评论可见范围、
-    超期只读投影、页面审计及迁移登记。它不读取连接串，也不连接数据库。
-    English: This script performs P23.6 static gates for the event-timeline extension, state machine,
-    server-side identity recheck, comment visibility, read-only overdue projection, page audits, and
-    migration registration. It reads no connection string and never connects to a database.
+    <lang>
+      <zh-CN>本脚本执行 P23.6 静态门禁，核对事件时间线扩展、状态机、服务端身份复核、评论可见范围、超期只读投影、页面审计及迁移登记。它不读取连接串，也不连接数据库。</zh-CN>
+      <en>This script performs P23.6 static gates for the event-timeline extension, state machine, server-side identity recheck, comment visibility, read-only overdue projection, page audits, and migration registration. It reads no connection string and never connects to a database.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -21,6 +20,10 @@ $ErrorActionPreference = 'Stop'
 
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>追加一条 Workflow 静态检查结果；状态和证据只用于文本契约汇总，不代表数据库已迁移。</zh-CN>
+#   <en>Add one Workflow static-check result; status and evidence are for text-contract aggregation only and do not mean the database migrated.</en>
+# </lang>
 function Add-WorkflowCheck {
     param(
         [Parameter(Mandatory = $true)][string]$Code,
@@ -37,6 +40,10 @@ function Add-WorkflowCheck {
         })
 }
 
+# <lang>
+#   <zh-CN>按仓库相对路径读取必需文本；缺失立即失败，不连接数据库或读取连接串。</zh-CN>
+#   <en>Read required text by repository-relative path; fail immediately when missing without connecting to a database or reading connection strings.</en>
+# </lang>
 function Get-PortalText {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -48,6 +55,10 @@ function Get-PortalText {
     return [System.IO.File]::ReadAllText($path, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>确认所有固定 Workflow/页面/迁移锚点存在；这是序数静态断言，不执行迁移、权限或页面操作。</zh-CN>
+#   <en>Verify all fixed Workflow/page/migration anchors exist; this is an ordinal static assertion and does not run migrations, authorization, or page actions.</en>
+# </lang>
 function Test-ContainsAll {
     param(
         [Parameter(Mandatory = $true)][string]$Text,
@@ -148,6 +159,10 @@ Add-WorkflowCheck -Code 'P23-WORKFLOW-MIGRATION-TOOLING' -Status $(if ($toolingO
 
 $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })
 $warningChecks = @($checks | Where-Object { $_.Status -eq 'Warning' })
+# <lang>
+#   <zh-CN>结果保留失败/警告数量和完整检查列表；JSON 只提供低敏静态证据。</zh-CN>
+#   <en>Keep failure/warning counts and the full check list; JSON provides low-sensitivity static evidence only.</en>
+# </lang>
 $result = [pscustomobject]@{
     GeneratedUtc = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
     TotalChecks = $checks.Count
@@ -156,6 +171,10 @@ $result = [pscustomobject]@{
     Checks = @($checks.ToArray())
 }
 
+# <lang>
+#   <zh-CN>仅在提供 OutputJson 时写入 UTF-8 无 BOM 结果文件，不读取或写入数据库。</zh-CN>
+#   <en>Write a UTF-8-no-BOM result file only when OutputJson is supplied; do not read or write a database.</en>
+# </lang>
 if ($OutputJson) {
     $jsonPath = if ([System.IO.Path]::IsPathRooted($OutputJson)) { $OutputJson } else { Join-Path $RepoRoot $OutputJson }
     $jsonDirectory = Split-Path -Parent $jsonPath
@@ -168,6 +187,10 @@ if ($OutputJson) {
 
 $result
 
+# <lang>
+#   <zh-CN>存在 Fail 时抛出非零失败，避免迁移/契约锚点缺失被误报为通过。</zh-CN>
+#   <en>Throw a non-zero failure when any check is Fail so missing migration or contract anchors cannot be reported as passed.</en>
+# </lang>
 if ($failedChecks.Count -gt 0) {
     throw ('Portal collaboration workflow smoke test failed: ' + (($failedChecks | ForEach-Object { $_.Code }) -join ', '))
 }

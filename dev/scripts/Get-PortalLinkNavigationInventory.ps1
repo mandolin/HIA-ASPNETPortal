@@ -1,42 +1,32 @@
 <#
 .SYNOPSIS
-.LANG en
-Generates a read-only entry-link and navigation inventory for the Portal project.
+<lang>
+  <en>Generates a read-only entry-link and navigation inventory for the Portal project.</en>
+  <zh-CN>生成 Portal 项目的只读入口链接与导航链路盘点。</zh-CN>
+</lang>
 
-.LANG zh-CN
-生成 Portal 项目的只读入口链接与导航链路盘点。
-
-.LANG en
-Scans Git-tracked Web Forms markup, C#, and JavaScript files for navigation-like
-references such as href, NavigateUrl, PostBackUrl, form actions,
-Response.Redirect, Server.Transfer, and common client-side location assignments.
-The script does not modify source files, databases, IIS, or external configuration.
-
-.LANG zh-CN
-扫描 Git 已追踪的 Web Forms 标记、C# 和 JavaScript 文件，识别 href、NavigateUrl、
-PostBackUrl、form action、Response.Redirect、Server.Transfer 以及常见客户端 location
-赋值等导航痕迹。本脚本不修改源码、数据库、IIS 或外置配置。
+<lang>
+  <en>Scans Git-tracked Web Forms markup, C#, and JavaScript files for navigation-like references such as href, NavigateUrl, PostBackUrl, form actions, Response.Redirect, Server.Transfer, and common client-side location assignments. The script does not modify source files, databases, IIS, or external configuration.</en>
+  <zh-CN>扫描 Git 已追踪的 Web Forms 标记、C# 和 JavaScript 文件，识别 href、NavigateUrl、PostBackUrl、form action、Response.Redirect、Server.Transfer 以及常见客户端 location 赋值等导航痕迹。本脚本不修改源码、数据库、IIS 或外置配置。</zh-CN>
+</lang>
 
 .PARAMETER OutputJson
-.LANG en
-Optional UTF-8 no-BOM JSON output path.
-
-.LANG zh-CN
-可选 UTF-8 无 BOM JSON 输出路径。
+<lang>
+  <en>Optional UTF-8 no-BOM JSON output path.</en>
+  <zh-CN>可选 UTF-8 无 BOM JSON 输出路径。</zh-CN>
+</lang>
 
 .PARAMETER OutputMarkdown
-.LANG en
-Optional UTF-8 no-BOM Markdown summary output path.
-
-.LANG zh-CN
-可选 UTF-8 无 BOM Markdown 摘要输出路径。
+<lang>
+  <en>Optional UTF-8 no-BOM Markdown summary output path.</en>
+  <zh-CN>可选 UTF-8 无 BOM Markdown 摘要输出路径。</zh-CN>
+</lang>
 
 .PARAMETER AsJson
-.LANG en
-Writes the full inventory object to stdout as JSON.
-
-.LANG zh-CN
-将完整盘点对象以 JSON 写到标准输出。
+<lang>
+  <en>Writes the full inventory object to stdout as JSON.</en>
+  <zh-CN>将完整盘点对象以 JSON 写到标准输出。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -52,6 +42,10 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 
+# <lang>
+#   <zh-CN>以脚本所在目录推导仓库根目录，保证扫描和可选输出相对当前项目而非当前 shell 目录。</zh-CN>
+#   <en>Derive the repository root from the script location so scanning and optional output stay relative to the project, not the caller's shell directory.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -66,18 +60,30 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>统一内部路径显示分隔符；该 helper 不解析路径、不访问文件系统。</zh-CN>
+#   <en>Normalize internal path separators for display; this helper does not resolve paths or touch the file system.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([Parameter(Mandatory = $true)][string]$Path)
 
     return ($Path -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>将仓库相对路径解析为扫描用绝对路径；输入边界由调用方的 Git 文件列表限定。</zh-CN>
+#   <en>Resolve a repository-relative path for scanning; the caller constrains inputs to the Git file list.</en>
+# </lang>
 function Get-AbsolutePath {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
     return Join-Path $repoRoot ((ConvertTo-RepoPath -Path $RelativePath) -replace '/', '\')
 }
 
+# <lang>
+#   <zh-CN>只纳入已追踪的呈现与业务脚本扩展，排除 WorkZone、生成物、依赖包和本机配置以避免入口噪声。</zh-CN>
+#   <en>Include only tracked presentation and application-script extensions, excluding WorkZone, generated output, packages, and local settings from entry noise.</en>
+# </lang>
 function Test-IsIncludedFile {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -120,6 +126,10 @@ function Test-IsIncludedFile {
     return $true
 }
 
+# <lang>
+#   <zh-CN>依据匹配索引计算一基行号，供盘点证据定位；不改变源文本或匹配结果。</zh-CN>
+#   <en>Compute a one-based line number from a match index for inventory evidence without changing source text or match results.</en>
+# </lang>
 function Get-LineNumber {
     param(
         [Parameter(Mandatory = $true)][string]$Text,
@@ -133,6 +143,10 @@ function Get-LineNumber {
     return ([regex]::Matches($Text.Substring(0, $Index), "`n")).Count + 1
 }
 
+# <lang>
+#   <zh-CN>规范化目标文本的空白和 HTML 实体，保持原始目标语义供分类与摘要使用。</zh-CN>
+#   <en>Normalize target whitespace and HTML entities while preserving target semantics for classification and summaries.</en>
+# </lang>
 function Get-NormalizedTarget {
     param([AllowEmptyString()][string]$Value)
 
@@ -146,6 +160,10 @@ function Get-NormalizedTarget {
     return $trimmed
 }
 
+# <lang>
+#   <zh-CN>按固定优先级给目标分组；分类只是盘点标签，不代表路由可达、授权通过或运行时解析成功。</zh-CN>
+#   <en>Classify targets using fixed precedence; categories are inventory labels, not proof of route reachability, authorization, or runtime resolution.</en>
+# </lang>
 function Get-TargetCategory {
     param([AllowEmptyString()][string]$Target)
 
@@ -188,6 +206,10 @@ function Get-TargetCategory {
     return 'LiteralOrUnknown'
 }
 
+# <lang>
+#   <zh-CN>在单个已追踪文件内应用受控导航模式并保留行号、目标和短片段；匹配失败必须显式暴露而不静默丢证据。</zh-CN>
+#   <en>Apply controlled navigation patterns to one tracked file while retaining line, target, and short snippet; matching failures must surface instead of dropping evidence silently.</en>
+# </lang>
 function Get-NavigationRecords {
     param(
         [Parameter(Mandatory = $true)]$RelativePath,
@@ -245,6 +267,10 @@ function Get-NavigationRecords {
     return $records.ToArray()
 }
 
+# <lang>
+#   <zh-CN>只读取 Git 索引中的候选文件并集中生成低敏导航事实；脚本不执行修复、提交或运行时探测。</zh-CN>
+#   <en>Read only Git-index candidates and aggregate low-sensitivity navigation facts; the script performs no repair, commit, or runtime probing.</en>
+# </lang>
 $trackedFiles = @(& git -C $repoRoot ls-files)
 if ($LASTEXITCODE -ne 0) {
     throw '无法读取 Git 已追踪文件，无法生成入口链接盘点。'
@@ -295,6 +321,10 @@ $potentialManualEntries = @($records |
     } |
     Sort-Object Source, Line, Target)
 
+# <lang>
+#   <zh-CN>将原始记录投影为稳定摘要与完整记录集合；PotentialManualOrAdminEntries 只是后续人工复核提示，不是权限结论。</zh-CN>
+#   <en>Project raw records into stable summaries and complete records; PotentialManualOrAdminEntries only prompts later review and is not an authorization conclusion.</en>
+# </lang>
 $inventory = [pscustomobject][ordered]@{
     GeneratedUtc = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
     Scope = 'Git-tracked Portal entry-link and navigation references.'
@@ -359,6 +389,10 @@ foreach ($item in @($potentialManualEntries | Select-Object -First 40)) {
 $json = $inventory | ConvertTo-Json -Depth 8
 $markdown = ($markdownLines -join [Environment]::NewLine) + [Environment]::NewLine
 
+# <lang>
+#   <zh-CN>仅在显式提供输出参数时写入 UTF-8 无 BOM 文件；默认路径不落盘，避免扫描意外制造证据目录。</zh-CN>
+#   <en>Write UTF-8 no-BOM files only for explicit output parameters; no default path is created, preventing accidental evidence directories.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
     Write-Utf8NoBomFile -Path $OutputJson -Content $json
 }

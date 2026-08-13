@@ -46,6 +46,41 @@ SecureString password used only for authenticated smoke checks.
 
 .LANG zh-CN
 仅用于认证 smoke 检查的 SecureString 密码。
+
+.PARAMETER AdminUser
+.LANG en
+Administrator login name paired with AdminPassword; it is used only when authenticated checks are enabled.
+
+.LANG zh-CN
+与 AdminPassword 配对的管理员登录名；仅在启用认证检查时使用。
+
+.PARAMETER SkipAuthenticated
+.LANG en
+Skips authenticated checks even when administrator credentials are supplied.
+
+.LANG zh-CN
+即使提供管理员凭据也跳过认证检查。
+
+.PARAMETER CheckGenericErrorPage
+.LANG en
+Checks the generic error page and verifies that it does not expose a detailed exception response.
+
+.LANG zh-CN
+检查通用错误页，并验证其不会暴露详细异常响应。
+
+.PARAMETER CheckDocumentSafety
+.LANG en
+Checks the document safety path and its bounded response behavior.
+
+.LANG zh-CN
+检查文档安全路径及其受限响应行为。
+
+.PARAMETER CheckEditorSafety
+.LANG en
+Checks the editor safety path and its bounded response behavior.
+
+.LANG zh-CN
+检查编辑器安全路径及其受限响应行为。
 #>
 [CmdletBinding()]
 param(

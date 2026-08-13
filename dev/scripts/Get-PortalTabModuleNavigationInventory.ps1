@@ -1,57 +1,44 @@
 <#
 .SYNOPSIS
-.LANG en
-Builds a read-only Tab and Module navigation inventory for the Portal project.
+<lang>
+  <en>Builds a read-only Tab and Module navigation inventory for the Portal project.</en>
+  <zh-CN>生成 Portal 项目的只读 Tab 与模块导航配置盘点。</zh-CN>
+</lang>
 
-.LANG zh-CN
-生成 Portal 项目的只读 Tab 与模块导航配置盘点。
-
-.LANG en
-Combines Portal Tab rows, module instances, module definitions, trusted
-module-package manifests, and module Profile settings into one runtime-entry map.
-When a connection-string config file is provided, the script reads the target
-database in read-only mode; otherwise it falls back to the setup seed SQL files.
-It does not modify databases, IIS, source files, or external configuration.
-
-.LANG zh-CN
-将 Portal Tab 行、模块实例、模块定义、受信任模块包 manifest 和模块 Profile 设置合并成
-一份运行期入口地图。提供连接串配置文件时，脚本以只读方式读取目标数据库；否则回退
-到 Setup 种子 SQL 文件。本脚本不修改数据库、IIS、源码或外置配置。
+<lang>
+  <en>Combines Portal Tab rows, module instances, module definitions, trusted module-package manifests, and module Profile settings into one runtime-entry map. When a connection-string config file is provided, the script reads the target database in read-only mode; otherwise it falls back to the setup seed SQL files. It does not modify databases, IIS, source files, or external configuration.</en>
+  <zh-CN>将 Portal Tab 行、模块实例、模块定义、受信任模块包 manifest 和模块 Profile 设置合并成一份运行期入口地图。提供连接串配置文件时，脚本以只读方式读取目标数据库；否则回退到 Setup 种子 SQL 文件。本脚本不修改数据库、IIS、源码或外置配置。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-Optional connectionStrings.config file used to read the live Portal database.
-
-.LANG zh-CN
-可选 connectionStrings.config 文件，用于读取当前 Portal 数据库。
+<lang>
+  <en>Optional connectionStrings.config file used to read the live Portal database.</en>
+  <zh-CN>可选 connectionStrings.config 文件，用于读取当前 Portal 数据库。</zh-CN>
+</lang>
 
 .PARAMETER AppSettingsJson
-.LANG en
-AppSettings JSON file used to resolve the active module Profile.
-
-.LANG zh-CN
-用于解析当前模块 Profile 的 appSettings JSON 文件。
+<lang>
+  <en>AppSettings JSON file used to resolve the active module Profile.</en>
+  <zh-CN>用于解析当前模块 Profile 的 appSettings JSON 文件。</zh-CN>
+</lang>
 
 .PARAMETER OutputJson
-.LANG en
-Optional UTF-8 no-BOM JSON output path.
-
-.LANG zh-CN
-可选 UTF-8 无 BOM JSON 输出路径。
+<lang>
+  <en>Optional UTF-8 no-BOM JSON output path.</en>
+  <zh-CN>可选 UTF-8 无 BOM JSON 输出路径。</zh-CN>
+</lang>
 
 .PARAMETER OutputMarkdown
-.LANG en
-Optional UTF-8 no-BOM Markdown summary output path.
-
-.LANG zh-CN
-可选 UTF-8 无 BOM Markdown 摘要输出路径。
+<lang>
+  <en>Optional UTF-8 no-BOM Markdown summary output path.</en>
+  <zh-CN>可选 UTF-8 无 BOM Markdown 摘要输出路径。</zh-CN>
+</lang>
 
 .PARAMETER AsJson
-.LANG en
-Writes the full inventory object to stdout as JSON.
-
-.LANG zh-CN
-将完整盘点对象以 JSON 写到标准输出。
+<lang>
+  <en>Writes the full inventory object to stdout as JSON.</en>
+  <zh-CN>将完整盘点对象以 JSON 写到标准输出。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -74,10 +61,18 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+# <lang>
+#   <zh-CN>仓库根目录由脚本位置推导，默认 appSettings 只用于 Profile 解析；不自动发现外部环境配置。</zh-CN>
+#   <en>Derive the repository root from the script location; the default appSettings file is only a Profile input and no external environment configuration is discovered automatically.</en>
+# </lang>
 if ([string]::IsNullOrWhiteSpace($AppSettingsJson)) {
     $AppSettingsJson = Join-Path $repoRoot 'src/Portal/Config/appSettings.json'
 }
 
+# <lang>
+#   <zh-CN>仅在显式提供输出路径时写 UTF-8 无 BOM 文件；输出目录由调用方指定，默认盘点不产生落盘副作用。</zh-CN>
+#   <en>Write UTF-8 no-BOM files only for explicit output paths; the caller selects the output directory and default inventory has no file side effect.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -92,6 +87,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>把仓库内路径转换为稳定相对显示路径，仓库外路径保留绝对归属，不扩展扫描边界。</zh-CN>
+#   <en>Convert in-repository paths to stable relative display paths while preserving external paths as external, without expanding the scan boundary.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([Parameter(Mandatory = $true)][string]$Path)
 
@@ -104,6 +103,10 @@ function ConvertTo-RepoPath {
     return ($fullPath -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>从调用方指定的 XML 配置读取唯一非空连接串；错误只说明配置契约，不回显连接串内容。</zh-CN>
+#   <en>Read one non-empty connection string from caller-supplied XML; errors describe the configuration contract without echoing the connection string.</en>
+# </lang>
 function Get-ExternalConnectionString {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -129,6 +132,10 @@ function Get-ExternalConnectionString {
     return [string]$matches[0].connectionString
 }
 
+# <lang>
+#   <zh-CN>执行调用方提供的只读 SQL 查询并始终释放 command/reader；该 helper 不提交、不写表、不改变数据库。</zh-CN>
+#   <en>Execute caller-supplied read-only SQL and always dispose the command and reader; this helper never commits, writes tables, or changes the database.</en>
+# </lang>
 function Invoke-ReaderRows {
     param(
         [Parameter(Mandatory = $true)][System.Data.SqlClient.SqlConnection]$Connection,
@@ -163,6 +170,10 @@ function Invoke-ReaderRows {
     return $rows.ToArray()
 }
 
+# <lang>
+#   <zh-CN>解析 setup SQL 中的 N 字符串、外层引号和双单引号转义，保持 seed 文本值而不执行 SQL。</zh-CN>
+#   <en>Parse N-prefixed SQL literals, outer quotes, and doubled-quote escapes while preserving seed values without executing SQL.</en>
+# </lang>
 function ConvertFrom-SqlQuotedString {
     param([AllowEmptyString()][string]$Value)
 
@@ -182,6 +193,10 @@ function ConvertFrom-SqlQuotedString {
     return $trimmed -replace "''", "'"
 }
 
+# <lang>
+#   <zh-CN>从项目自带 seed SQL 提取 Tab、模块和定义作为首次安装静态基线；解析结果不代表当前数据库事实。</zh-CN>
+#   <en>Extract Tabs, modules, and definitions from bundled seed SQL as a first-install static baseline; results do not assert current database facts.</en>
+# </lang>
 function Read-StaticSeedRows {
     $loadDataPath = Join-Path $repoRoot 'src/Setup/Portal_LoadData.sql'
     $loadConfigPath = Join-Path $repoRoot 'src/Setup/Portal_LoadConfig.sql'
@@ -248,6 +263,10 @@ function Read-StaticSeedRows {
     }
 }
 
+# <lang>
+#   <zh-CN>以只读连接读取 live Tab/模块/定义和可选包状态表；连接、reader 和命令生命周期由该函数隔离管理。</zh-CN>
+#   <en>Read live Tabs, modules, definitions, and an optional package-state table through a read-only connection while isolating connection, reader, and command lifetimes.</en>
+# </lang>
 function Read-LiveDatabaseRows {
     param([Parameter(Mandatory = $true)][string]$ConnectionString)
 
@@ -299,6 +318,10 @@ ORDER BY PackageId;
     }
 }
 
+# <lang>
+#   <zh-CN>枚举受信任模块包 manifest 并投影低敏元数据；单个 manifest 解析失败保留错误记录，不阻断其它包盘点。</zh-CN>
+#   <en>Enumerate trusted module-package manifests and project low-sensitivity metadata; one manifest failure becomes an error record without blocking other packages.</en>
+# </lang>
 function Read-ModulePackages {
     $packageRoot = Join-Path $repoRoot 'src/Portal/DesktopModules'
     $packages = New-Object 'System.Collections.Generic.List[object]'
@@ -336,12 +359,20 @@ function Read-ModulePackages {
     return $packages.ToArray()
 }
 
+# <lang>
+#   <zh-CN>规范化模块入口路径的空白、波浪号、前导斜杠和分隔符，供 package/Profile/legacy 映射使用。</zh-CN>
+#   <en>Normalize module-entry whitespace, tildes, leading slashes, and separators for package, Profile, and legacy mapping.</en>
+# </lang>
 function Normalize-DesktopSource {
     param([AllowEmptyString()][string]$Source)
 
     return (($Source ?? '').Trim().TrimStart('~', '/') -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>只读取指定 appSettings JSON 的 appSettings 属性；缺失文件返回空集合，让 Profile 解析按默认值继续。</zh-CN>
+#   <en>Read only the appSettings property from the selected JSON; a missing file returns an empty map so Profile resolution can use defaults.</en>
+# </lang>
 function Read-AppSettings {
     param([Parameter(Mandatory = $true)][string]$Path)
 
@@ -360,6 +391,10 @@ function Read-AppSettings {
     return $settings
 }
 
+# <lang>
+#   <zh-CN>将逗号分隔配置拆成去空白、去空项的稳定包名集合；不校验包是否存在或是否获授权。</zh-CN>
+#   <en>Split comma-separated configuration into trimmed, non-empty package names without asserting package existence or authorization.</en>
+# </lang>
 function Split-Csv {
     param([AllowEmptyString()][string]$Value)
 
@@ -370,6 +405,10 @@ function Split-Csv {
     return @($Value.Split(',') | ForEach-Object { $_.Trim() } | Where-Object { $_.Length -gt 0 })
 }
 
+# <lang>
+#   <zh-CN>按活动 Profile、递归 Includes、默认包和显式启用包构造不可变式允许集合；visited 集合阻断循环展开。</zh-CN>
+#   <en>Build an immutable-style allow set from the active Profile, recursive Includes, defaults, and explicit enabled packages; visited entries stop include cycles.</en>
+# </lang>
 function Resolve-Profile {
     param([hashtable]$Settings)
 
@@ -392,6 +431,10 @@ function Resolve-Profile {
     $allowed = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
     $visited = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
 
+# <lang>
+#   <zh-CN>递归展开单个 Profile 的 Includes 后追加包名；空项、重复项和循环均在受控集合中被忽略。</zh-CN>
+#   <en>Recursively expand one Profile's Includes before adding package names; empty, duplicate, and cyclic entries are ignored through controlled sets.</en>
+# </lang>
     function Add-ProfilePackages {
         param([string]$ProfileName)
 
@@ -427,6 +470,10 @@ function Resolve-Profile {
     }
 }
 
+# <lang>
+#   <zh-CN>将历史 DesktopModules 路径映射为稳定 legacy 包键；未知路径返回空值供后续标记为 Unmapped。</zh-CN>
+#   <en>Map historical DesktopModules paths to stable legacy package keys; unknown paths return empty so callers can mark them Unmapped.</en>
+# </lang>
 function Get-LegacyPackageId {
     param([string]$DesktopSource)
 
@@ -451,6 +498,10 @@ function Get-LegacyPackageId {
     return ''
 }
 
+# <lang>
+#   <zh-CN>按 Core、受信任包、legacy 映射和未知顺序解析入口，并同时给出 Profile 与状态语义；分类不是页面授权结论。</zh-CN>
+#   <en>Resolve entries in Core, trusted-package, legacy-map, and unknown order while reporting Profile and state semantics; classification is not page authorization.</en>
+# </lang>
 function Resolve-ModuleEntry {
     param(
         [string]$DesktopSource,
@@ -497,6 +548,10 @@ function Resolve-ModuleEntry {
 $appSettings = Read-AppSettings -Path $AppSettingsJson
 $profile = Resolve-Profile -Settings $appSettings
 $packages = @(Read-ModulePackages)
+# <lang>
+#   <zh-CN>数据源选择明确区分静态 seed 与 live database：未提供连接串配置时只读 seed，提供时才建立只读数据库路径。</zh-CN>
+#   <en>Keep static-seed and live-database sources explicit: without a connection-string config use seed-only mode; only a supplied config enables the read-only database path.</en>
+# </lang>
 $data = if ([string]::IsNullOrWhiteSpace($ConnectionStringsConfigPath)) {
     Read-StaticSeedRows
 }
@@ -521,6 +576,10 @@ foreach ($state in $data.PackageStates) {
     }
 }
 
+# <lang>
+#   <zh-CN>索引定义、Tab 和包状态以稳定键关联模块实例；缺失关联保留空值，避免伪造入口事实。</zh-CN>
+#   <en>Index definitions, Tabs, and package states by stable keys; missing relationships remain empty rather than fabricating entry facts.</en>
+# </lang>
 $entries = New-Object 'System.Collections.Generic.List[object]'
 foreach ($module in $data.Modules) {
     $definition = if ($null -ne $module.ModuleDefId -and $definitionsById.ContainsKey([int]$module.ModuleDefId)) { $definitionsById[[int]$module.ModuleDefId] } else { $null }
@@ -547,6 +606,10 @@ foreach ($module in $data.Modules) {
             }))
 }
 
+# <lang>
+#   <zh-CN>将数据源、Profile、包、排序后的运行入口和摘要聚合为低敏盘点对象；ProfileBlocked/Unmapped 仅为风险提示。</zh-CN>
+#   <en>Aggregate source, Profile, packages, sorted runtime entries, and summary into a low-sensitivity inventory; ProfileBlocked and Unmapped are risk signals only.</en>
+# </lang>
 $inventory = [pscustomobject]([ordered]@{
         GeneratedUtc = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
         DataSource = $data.DataSource
@@ -605,6 +668,10 @@ foreach ($entry in $inventory.RuntimeEntries) {
 $json = $inventory | ConvertTo-Json -Depth 8
 $markdown = ($markdownLines -join [Environment]::NewLine) + [Environment]::NewLine
 
+# <lang>
+#   <zh-CN>只在显式要求时写 JSON/Markdown；默认输出到控制台，不创建证据目录，也不把盘点结果写入运行环境。</zh-CN>
+#   <en>Write JSON/Markdown only when explicitly requested; otherwise report to the console without creating evidence directories or changing the runtime environment.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
     Write-Utf8NoBomFile -Path $OutputJson -Content $json
 }

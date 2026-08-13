@@ -34,6 +34,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+# <lang>
+#   <zh-CN>清理单个注释片段的边界空白，不翻译、不推断也不改变正文语义。</zh-CN>
+#   <en>Trim boundary whitespace from one comment fragment without translating, inferring, or changing its meaning.</en>
+# </lang>
 function Convert-XmlText([string]$value) {
     if ($null -eq $value) {
         return ""
@@ -42,6 +46,10 @@ function Convert-XmlText([string]$value) {
     return (($value -replace "^\s+", "") -replace "\s+$", "")
 }
 
+# <lang>
+#   <zh-CN>丢弃空行并按空格拼接同一语言的注释行，保证 locale 节点得到稳定的单段文本。</zh-CN>
+#   <en>Discard empty lines and join one language's comment lines with spaces so the locale node receives stable paragraph text.</en>
+# </lang>
 function Join-CommentText([string[]]$lines) {
     $parts = New-Object System.Collections.Generic.List[string]
     foreach ($line in $lines) {
@@ -54,6 +62,10 @@ function Join-CommentText([string[]]$lines) {
     return [string]::Join(" ", $parts)
 }
 
+# <lang>
+#   <zh-CN>使用调用方缩进和注释前缀输出标准 locale 块；summary/remarks 使用 lang，其他成员节点使用 l。</zh-CN>
+#   <en>Emit a standard locale block with the caller's indentation and comment prefix; use lang for summary/remarks and l for other member nodes.</en>
+# </lang>
 function Add-LocaleBlock(
     [System.Collections.Generic.List[string]]$target,
     [string]$prefix,
@@ -67,6 +79,10 @@ function Add-LocaleBlock(
     $target.Add("$prefix</$wrapperName>")
 }
 
+# <lang>
+#   <zh-CN>只接受同时出现明确“中文：”和“English:”标记的内容，不为缺失语言做猜测。</zh-CN>
+#   <en>Accept only content with explicit "中文：" and "English:" markers, and never guess a missing language.</en>
+# </lang>
 function Try-SplitLegacyText(
     [string[]]$contentLines,
     [ref]$zhText,
@@ -113,6 +129,10 @@ function Try-SplitLegacyText(
     return $true
 }
 
+# <lang>
+#   <zh-CN>识别单行 XML 文档注释并保持原节点名称与属性，仅把旧双语正文包入 locale 标记。</zh-CN>
+#   <en>Recognize a single-line XML documentation comment and preserve its tag and attributes while wrapping legacy bilingual text in locale markup.</en>
+# </lang>
 function Convert-InlineXmlDocLine(
     [string]$line,
     [System.Collections.Generic.List[string]]$target,
@@ -140,6 +160,10 @@ function Convert-InlineXmlDocLine(
     return $true
 }
 
+# <lang>
+#   <zh-CN>扫描受支持的多行 XML 文档节点，只有成对闭合且两种语言都存在时才生成替换结果。</zh-CN>
+#   <en>Scan supported multiline XML documentation nodes and produce a replacement only when the pair is closed and both languages are present.</en>
+# </lang>
 function Convert-XmlDocBlock(
     [string[]]$lines,
     [int]$index,
@@ -192,6 +216,10 @@ function Convert-XmlDocBlock(
     return $true
 }
 
+# <lang>
+#   <zh-CN>把相邻的“中文：”与“English:”行注释转换为 locale 块，并保持原缩进。</zh-CN>
+#   <en>Convert adjacent "中文：" and "English:" line comments into a locale block while preserving the original indentation.</en>
+# </lang>
 function Convert-LineCommentPair(
     [string[]]$lines,
     [int]$index,
@@ -225,9 +253,17 @@ function Convert-LineCommentPair(
     return $true
 }
 
+# <lang>
+#   <zh-CN>为每个实际发生转换的输入文件收集节点计数；未变化文件不产生结果对象。</zh-CN>
+#   <en>Collect converted-node counts for each input file that changes; unchanged files produce no result object.</en>
+# </lang>
 $convertedFiles = New-Object System.Collections.Generic.List[object]
 
 foreach ($inputPath in $Path) {
+    # <lang>
+    #   <zh-CN>逐个解析调用方选定的文件，保留原始换行约定以降低迁移噪声。</zh-CN>
+    #   <en>Process each caller-selected file independently and preserve its original line-ending convention to limit migration noise.</en>
+    # </lang>
     $resolved = Resolve-Path -LiteralPath $inputPath
     $filePath = $resolved.Path
     $originalText = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
@@ -238,6 +274,10 @@ foreach ($inputPath in $Path) {
         $lines = $lines[0..($lines.Length - 2)]
     }
 
+    # <lang>
+    #   <zh-CN>按单行 XML、多行 XML、普通行注释的顺序尝试转换，避免同一节点被重复消费。</zh-CN>
+    #   <en>Try single-line XML, multiline XML, and ordinary line-comment conversion in order so one node is not consumed twice.</en>
+    # </lang>
     $output = New-Object System.Collections.Generic.List[string]
     $changed = $false
     $convertedNodes = 0
@@ -278,6 +318,10 @@ foreach ($inputPath in $Path) {
             [System.IO.File]::WriteAllText($filePath, [string]::Join($lineEnding, $output) + $lineEnding, $utf8NoBom)
         }
 
+        # <lang>
+        #   <zh-CN>WhatIf 只跳过写入，不隐藏可迁移节点计数，便于先审阅范围再执行实际迁移。</zh-CN>
+        #   <en>WhatIf skips only the write while retaining migratable-node counts so the scope can be reviewed before applying the migration.</en>
+        # </lang>
         $convertedFiles.Add([pscustomobject]@{
             Path = $filePath
             ConvertedNodes = $convertedNodes
@@ -285,4 +329,8 @@ foreach ($inputPath in $Path) {
     }
 }
 
+# <lang>
+#   <zh-CN>输出仅包含文件路径和转换节点数量，调用方可据此生成审计记录或继续人工复核。</zh-CN>
+#   <en>Output contains only file paths and converted-node counts so callers can create audit records or continue manual review.</en>
+# </lang>
 $convertedFiles

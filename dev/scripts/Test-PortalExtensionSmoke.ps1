@@ -7,16 +7,10 @@ Runs the portal extension smoke suite.
 运行门户扩展 smoke 套件。
 
 .DESCRIPTION
-.LANG en
-Orchestrates build, asset, provider proof, HIA boundary proof, root-site smoke,
-virtual-directory smoke, optional SQL compatibility, optional admin smoke, and
-optional theme/cache mutation proofs. Mutating checks require an explicit external
-Web configuration tree and are isolated to dedicated IIS Express ports.
-
-.LANG zh-CN
-编排构建、前端资产、provider proof、HIA 边界 proof、根站点 smoke、虚拟目录 smoke、可选 SQL 兼容、
-可选管理员 smoke、可选主题/缓存变更 proof。会变更状态的检查必须提供显式外置 Web 配置树，并隔离在专用
-IIS Express 端口上执行。
+<lang>
+  <en>Orchestrate build, asset, provider proof, HIA boundary proof, root-site smoke, virtual-directory smoke, optional SQL compatibility, optional admin smoke, and optional theme/cache mutation proofs. Mutating checks require an explicit external Web configuration tree and are isolated to dedicated IIS Express ports.</en>
+  <zh-CN>编排构建、前端资产、provider proof、HIA 边界 proof、根站点 smoke、虚拟目录 smoke、可选 SQL 兼容、可选管理员 smoke、可选主题/缓存变更 proof。会变更状态的检查必须提供显式外置 Web 配置树，并隔离在专用 IIS Express 端口上执行。</zh-CN>
+</lang>
 
 .PARAMETER Configuration
 .LANG en
@@ -187,6 +181,10 @@ $pwsh = 'C:\Program Files\PowerShell\7\pwsh.exe'
 $summary = New-Object 'System.Collections.Generic.List[string]'
 $virtualDirectoryStarted = $false
 
+# <lang>
+#   <zh-CN>运行受控 PowerShell 子 smoke，传播非零退出并只在成功后记录完成项；不吞掉失败。</zh-CN>
+#   <en>Run a controlled PowerShell child smoke, propagate non-zero exits, and record completion only after success.</en>
+# </lang>
 function Invoke-ChildPowerShell {
     param(
         [string]$Name,
@@ -204,6 +202,10 @@ function Invoke-ChildPowerShell {
     Write-Host ('[PASS] ' + $Name)
 }
 
+# <lang>
+#   <zh-CN>检查隔离 IIS Express 端口是否空闲，避免接管已有调试站点或错误归属进程。</zh-CN>
+#   <en>Check that an isolated IIS Express port is free without taking ownership of an existing debug site or process.</en>
+# </lang>
 function Test-AvailablePort {
     param([int]$Port)
 
@@ -213,6 +215,10 @@ function Test-AvailablePort {
     }
 }
 
+# <lang>
+#   <zh-CN>仅在可选 SQL/主题/缓存检查启用时要求外置配置文件，并保持连接串不进入日志。</zh-CN>
+#   <en>Require an external configuration file only when optional SQL/theme/cache checks are enabled, keeping connection strings out of logs.</en>
+# </lang>
 if ($IncludeSqlCompatibility -or $IncludeThemeMutation -or $IncludeCacheMutation) {
     if ([string]::IsNullOrWhiteSpace($ConnectionStringsConfigPath)) {
         throw 'ConnectionStringsConfigPath is required for SQL compatibility or cache-mutation checks.'
@@ -223,14 +229,26 @@ if ($IncludeSqlCompatibility -or $IncludeThemeMutation -or $IncludeCacheMutation
     }
 }
 
+# <lang>
+#   <zh-CN>管理员 smoke 必须显式提供账号名；密码保持 SecureString 并只传给子检查。</zh-CN>
+#   <en>Administrator smoke requires an explicit account name; the password remains SecureString and is passed only to the child check.</en>
+# </lang>
 if ($IncludeAdmin -and [string]::IsNullOrWhiteSpace($AdminUser)) {
     throw 'AdminUser is required when IncludeAdmin is specified.'
 }
 
+# <lang>
+#   <zh-CN>主题/缓存变更 proof 只能使用显式外置 Web 配置树，防止把仓库配置或生产树误作隔离环境。</zh-CN>
+#   <en>Theme/cache mutation proofs may use only an explicit external Web configuration tree so repository or production trees are not misused as isolation targets.</en>
+# </lang>
 if (($IncludeThemeMutation -or $IncludeCacheMutation) -and -not $ConnectionStringsConfigPath.Contains('\Web\HIA-ASPNETPortal\')) {
     throw 'Theme and cache mutation checks are restricted to the explicit external Web configuration tree.'
 }
 
+# <lang>
+#   <zh-CN>按开关编排构建、资产、provider/HIA、站点和可选变更 proof；真实运行仅在调用方显式授权时发生。</zh-CN>
+#   <en>Orchestrate build, asset, provider/HIA, site, and optional mutation proofs by switch; real execution occurs only with explicit caller authorization.</en>
+# </lang>
 try {
     if (-not $SkipBuild) {
         Invoke-ChildPowerShell -Name 'Debug solution build' -ScriptPath (Join-Path $PSScriptRoot 'Build-Solution.ps1') -Arguments @('-Configuration', 'Debug', '-Platform', 'Any CPU')
@@ -307,11 +325,19 @@ try {
     }
 }
 finally {
+# <lang>
+#   <zh-CN>只清理本脚本成功启动的虚拟目录实例，保留已有调试站点和外部进程。</zh-CN>
+#   <en>Clean up only the virtual-directory instance started by this script, leaving existing debug sites and external processes untouched.</en>
+# </lang>
     if ($virtualDirectoryStarted) {
         Invoke-ChildPowerShell -Name 'Virtual-directory IIS Express stop' -ScriptPath (Join-Path $PSScriptRoot 'Stop-IISExpress.ps1') -Arguments @('-Port', $VirtualDirectoryPort)
     }
 }
 
+# <lang>
+#   <zh-CN>输出低敏 smoke 完成摘要和可选范围，不输出管理员密码、连接串或 Cookie。</zh-CN>
+#   <en>Output a low-sensitivity smoke completion summary and optional scopes without exposing administrator passwords, connection strings, or cookies.</en>
+# </lang>
 [pscustomobject]@{
     TotalChecks = $summary.Count
     CompletedChecks = $summary

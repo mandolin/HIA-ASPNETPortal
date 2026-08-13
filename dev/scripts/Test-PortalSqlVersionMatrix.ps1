@@ -4,8 +4,10 @@
 Checks Portal SQL scripts against the SQL Server 2016+ version-matrix preparation rules.
 
 .DESCRIPTION
-默认执行静态预检，不连接数据库、不创建数据库、不执行 SQL。提供外置连接串文件时，只读取目标实例的版本和兼容级别，不输出连接串、服务器名或密码。
-By default this script performs static preflight only: it does not connect to a database, create a database, or execute SQL. When an external connection-string file is provided, it reads only version and compatibility metadata without printing the connection string, server name, or password.
+<lang>
+  <zh-CN>默认执行静态预检，不连接数据库、不创建数据库、不执行 SQL。提供外置连接串文件时，只读取目标实例的版本和兼容级别，不输出连接串、服务器名或密码。</zh-CN>
+  <en>By default this script performs static preflight only: it does not connect to a database, create a database, or execute SQL. When an external connection-string file is provided, it reads only version and compatibility metadata without printing the connection string, server name, or password.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -41,6 +43,10 @@ $targetMetadata = @{
     SqlServer2022 = [pscustomobject]@{ ProductMajor = 16; CompatibilityLevel = 160; Label = 'SQL Server 2022' }
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入矩阵 JSON 证据，并只创建指定输出目录。</zh-CN>
+#   <en>Write matrix JSON evidence as UTF-8 without a BOM, creating only the requested output directory.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [string]$Path,
@@ -56,6 +62,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, $encoding)
 }
 
+# <lang>
+#   <zh-CN>追加 Pass/Warning/Fail/Info/Pending 矩阵检查；Evidence 必须保持低敏。</zh-CN>
+#   <en>Add a Pass/Warning/Fail/Info/Pending matrix check while keeping Evidence low-sensitivity.</en>
+# </lang>
 function Add-MatrixCheck {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info', 'Pending')]
@@ -81,6 +91,10 @@ function Add-MatrixCheck {
     }
 }
 
+# <lang>
+#   <zh-CN>将仓库内路径归一化为相对路径，仓库外路径保持稳定绝对显示。</zh-CN>
+#   <en>Normalize in-repository paths to relative form while keeping external paths as stable absolute values.</en>
+# </lang>
 function Get-RepoRelativePath {
     param([string]$Path)
 
@@ -93,6 +107,10 @@ function Get-RepoRelativePath {
     return $fullPath
 }
 
+# <lang>
+#   <zh-CN>提取 SQL 匹配的路径/行号并净化密码、Token 等敏感片段后再进入证据。</zh-CN>
+#   <en>Extract SQL match path/line evidence and redact password/token-like fragments before recording it.</en>
+# </lang>
 function Get-SanitizedSqlEvidence {
     param([Microsoft.PowerShell.Commands.MatchInfo]$Match)
 
@@ -106,6 +124,10 @@ function Get-SanitizedSqlEvidence {
     return ('{0}:{1}: {2}' -f (Get-RepoRelativePath -Path $Match.Path), $Match.LineNumber, $line)
 }
 
+# <lang>
+#   <zh-CN>在受限 Setup SQL 文件中执行正则匹配并限制结果数量，避免证据膨胀。</zh-CN>
+#   <en>Run regex matches over scoped Setup SQL files with a result limit to avoid evidence bloat.</en>
+# </lang>
 function Find-SqlMatches {
     param(
         [string]$Pattern,
@@ -136,6 +158,10 @@ function Find-SqlMatches {
     return $matches
 }
 
+# <lang>
+#   <zh-CN>从显式外置 XML 读取唯一非空连接串；不输出连接串内容或秘密属性。</zh-CN>
+#   <en>Read one non-empty connection string from explicit external XML without outputting its content or secrets.</en>
+# </lang>
 function Get-ExternalConnectionString {
     param(
         [string]$Path,
@@ -161,6 +187,10 @@ function Get-ExternalConnectionString {
     return $matches[0].connectionString
 }
 
+# <lang>
+#   <zh-CN>可选读取目标 SQL Server 版本/兼容级别元数据并始终释放连接；真实结论仅属于目标实例证据。</zh-CN>
+#   <en>Optionally read target SQL Server version/compatibility metadata and always dispose the connection; conclusions belong only to target-instance evidence.</en>
+# </lang>
 function Get-LiveSqlServerInfo {
     param([string]$ConnectionString)
 
@@ -204,8 +234,10 @@ SELECT
     }
 }
 
-# 中文：静态预检只检查脚本形态和已知版本边界；真实 SQL Server 版本结论必须由目标实例补证。
-# English: Static preflight checks script shape and known version boundaries only; real version conclusions require target-instance evidence.
+# <lang>
+#   <zh-CN>静态预检只检查脚本形态和已知版本边界；真实 SQL Server 版本结论必须由目标实例补证。</zh-CN>
+#   <en>Static preflight checks script shape and known version boundaries only; real version conclusions require target-instance evidence.</en>
+# </lang>
 Add-MatrixCheck -Status 'Pass' -Code 'MATRIX-TARGETS' -Message 'SQL Server 2016+ target matrix is declared.' -Evidence (($TargetVersions | ForEach-Object { $targetMetadata[$_].Label }) -join '; ')
 
 $allSqlFiles = @(Get-ChildItem -LiteralPath $resolvedSetupPath -Recurse -File -Filter '*.sql' | Sort-Object FullName)
@@ -334,6 +366,10 @@ foreach ($statusName in @('Pass', 'Warning', 'Fail', 'Info', 'Pending')) {
     $counts[$statusName] = @($checks | Where-Object { $_.Status -eq $statusName }).Count
 }
 
+# <lang>
+#   <zh-CN>汇总 Setup 路径、目标版本、可选 live 元数据和 Pending 状态；不把静态结果伪装为全矩阵通过。</zh-CN>
+#   <en>Summarize Setup path, target versions, optional live metadata, and Pending states without treating static results as full-matrix approval.</en>
+# </lang>
 $summary = [pscustomobject]@{
     SetupPath = $resolvedSetupPath
     TargetVersions = $TargetVersions
@@ -343,6 +379,10 @@ $summary = [pscustomobject]@{
     Checks = $checks
 }
 
+# <lang>
+#   <zh-CN>仅在提供 OutputJson 时写入 UTF-8 无 BOM 证据。</zh-CN>
+#   <en>Write UTF-8-no-BOM evidence only when OutputJson is supplied.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
     Write-Utf8NoBomFile -Path $OutputJson -Content (($summary | ConvertTo-Json -Depth 8) + [Environment]::NewLine)
     Write-Host ('JSON: {0}' -f $OutputJson)
@@ -350,6 +390,10 @@ if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
 
 Write-Host ('SUMMARY: Pass={0}; Warning={1}; Fail={2}; Info={3}; Pending={4}' -f $counts.Pass, $counts.Warning, $counts.Fail, $counts.Info, $counts.Pending)
 
+# <lang>
+#   <zh-CN>Fail 或显式 FailOnWarning 下 Warning 返回非零；不自动创建数据库或升级兼容级别。</zh-CN>
+#   <en>Return non-zero for Fail or Warning under explicit FailOnWarning; never create databases or upgrade compatibility automatically.</en>
+# </lang>
 if ($counts.Fail -gt 0) {
     exit 1
 }

@@ -7,16 +7,10 @@ Generates a development/test SQL seed for the P22.4 enterprise workbench module.
 生成 P22.4 企业能力工作台模块的开发/测试 SQL seed。
 
 .DESCRIPTION
-.LANG en
-Creates a reviewable SQL file that enables the trusted EnterpriseCapabilityWorkbench
-module package, registers its module definition, and creates or updates a
-P22-Test-EnterpriseWorkbench portal Tab with one module instance. The script does
-not connect to SQL Server unless Apply is explicitly specified.
-
-.LANG zh-CN
-生成一份可审阅 SQL 文件，用于启用受信任 EnterpriseCapabilityWorkbench 模块包、注册模块定义，
-并创建或更新 P22-Test-EnterpriseWorkbench 门户 Tab 及一个模块实例。除非显式指定 Apply，
-否则本脚本不会连接 SQL Server。
+<lang>
+  <en>Creates a reviewable SQL file that enables the trusted EnterpriseCapabilityWorkbench module package, registers its module definition, and creates or updates a P22-Test-EnterpriseWorkbench portal Tab with one module instance. The script does not connect to SQL Server unless Apply is explicitly specified.</en>
+  <zh-CN>生成一份可审阅 SQL 文件，用于启用受信任 EnterpriseCapabilityWorkbench 模块包、注册模块定义，并创建或更新 P22-Test-EnterpriseWorkbench 门户 Tab 及一个模块实例。除非显式指定 Apply，否则本脚本不会连接 SQL Server。</zh-CN>
+</lang>
 
 .PARAMETER OutputPath
 .LANG en
@@ -65,6 +59,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# <lang>
+#   <zh-CN>将输入值安全转换为 SQL Unicode 字面量；空值保持为 NULL，单引号加倍转义。本函数只生成文本。</zh-CN>
+#   <en>Convert an input to a SQL Unicode literal; preserve null as NULL and double apostrophes for escaping. This function only generates text.</en>
+# </lang>
 function ConvertTo-SqlNVarCharLiteral {
     param([AllowNull()][string]$Value)
 
@@ -75,6 +73,10 @@ function ConvertTo-SqlNVarCharLiteral {
     return "N'" + ($Value -replace "'", "''") + "'"
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写出 SQL 模板并按需创建目录；文件写入本身不连接数据库。</zh-CN>
+#   <en>Write the SQL template as UTF-8 without a BOM and create the directory when needed; file output itself does not connect to a database.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -89,6 +91,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>读取人工指定的外置 connectionStrings.config 并校验唯一命名项/提供程序；只在 Apply 且用户确认后调用，连接串不写日志。</zh-CN>
+#   <en>Read a manually supplied connectionStrings.config and validate the unique named entry/provider; call only after Apply and user confirmation, and never log the connection string.</en>
+# </lang>
 function Get-ExternalPortalConnectionString {
     param(
         [string]$Path,
@@ -122,6 +128,10 @@ $desktopSource = 'DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabil
 $packageId = 'HIA.EnterpriseCapabilityWorkbench'
 $friendlyName = 'Enterprise Capability Workbench'
 
+# <lang>
+#   <zh-CN>以下 SQL 是供开发/测试库人工复核和执行的模板；不创建用户、不写密码，是否执行及事务环境由 Apply 调用方负责。</zh-CN>
+#   <en>The following SQL is a template for manual review and execution in a development/test database; it creates no users or passwords, and Apply callers own execution and transaction context.</en>
+# </lang>
 $sql = @"
 /*
     P22.4 企业能力工作台开发/测试挂载脚本。
@@ -279,9 +289,17 @@ SELECT
     @TabName AS [TabName];
 "@
 
+# <lang>
+#   <zh-CN>先将 SQL 模板写入指定文件；生成文件不代表数据库已变更。</zh-CN>
+#   <en>Write the SQL template to the requested file first; generating the file does not mean that a database changed.</en>
+# </lang>
 Write-Utf8NoBomFile -Path $OutputPath -Content ($sql -replace "`n", "`r`n")
 
 [bool]$applied = $false
+# <lang>
+#   <zh-CN>Apply 是显式高影响操作，必须提供外置连接串并通过 ShouldProcess；未启用时只生成文件。</zh-CN>
+#   <en>Apply is an explicit high-impact operation requiring an external connection string and ShouldProcess approval; when disabled, only the file is generated.</en>
+# </lang>
 if ($Apply) {
     if ([string]::IsNullOrWhiteSpace($ConnectionStringsConfigPath)) {
         throw 'ConnectionStringsConfigPath is required when Apply is specified.'

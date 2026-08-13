@@ -3,11 +3,10 @@
     Builds a read-only operations evidence package for Portal maintenance review.
 
 .DESCRIPTION
-    中文：本脚本编排 P13.2 运维只读门禁，包括运维 readiness、日志维护 dry-run、发布资源、公开文档、
-    基础合规和默认凭据风险检查。它不登录、不写数据库、不读取外置敏感配置、不创建计划任务，也不删除日志。
-    English: This script orchestrates the P13.2 read-only operations gates: operations readiness, log-maintenance
-    dry run, publish resources, public documentation, baseline compliance, and default-credential risk checks. It
-    does not sign in, write databases, read external secrets, create scheduled tasks, or delete logs.
+    <lang>
+      <zh-CN>本脚本编排 P13.2 运维只读门禁，包括运维 readiness、日志维护 dry-run、发布资源、公开文档、基础合规和默认凭据风险检查。它不登录、不写数据库、不读取外置敏感配置、不创建计划任务，也不删除日志。</zh-CN>
+      <en>This script orchestrates the P13.2 read-only operations gates: operations readiness, log-maintenance dry run, publish resources, public documentation, baseline compliance, and default-credential risk checks. It does not sign in, write databases, read external secrets, create scheduled tasks, or delete logs.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -42,6 +41,10 @@ $runId = (Get-Date).ToString('yyyyMMdd-HHmmss')
 $runDirectory = Join-Path $resolvedOutputRoot ('{0}-{1}' -f $runId, $Profile)
 $steps = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 创建证据日志、JSON 和说明文件；只写本次证据目录，不修改门禁、数据库或源代码。</zh-CN>
+#   <en>Write evidence logs, JSON, and readme files as UTF-8 without a BOM; write only under this run directory and do not modify gates, databases, or source.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -56,6 +59,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>仅为日志中的命令显示值添加引号；传给子进程的实际参数列表保持不变。</zh-CN>
+#   <en>Add quoting only to command values displayed in logs; preserve the actual argument list passed to child processes.</en>
+# </lang>
 function Format-EvidenceArgument {
     param([string]$Value)
 
@@ -66,6 +73,10 @@ function Format-EvidenceArgument {
     return $Value
 }
 
+# <lang>
+#   <zh-CN>优先返回项目约定的 PowerShell 7 执行器，找不到时回退到 PATH；未找到则抛出错误，本函数不启动子进程。</zh-CN>
+#   <en>Prefer the project-mandated PowerShell 7 executable and fall back to PATH; throw when none is found, without starting a child process here.</en>
+# </lang>
 function Get-PwshPath {
     $preferred = 'C:\Program Files\PowerShell\7\pwsh.exe'
     if (Test-Path -LiteralPath $preferred -PathType Leaf) {
@@ -80,6 +91,10 @@ function Get-PwshPath {
     throw 'PowerShell 7 (pwsh) was not found.'
 }
 
+# <lang>
+#   <zh-CN>运行一个运维只读门禁并捕获低敏输出；子步骤失败写入证据并参与汇总，不被转换为生产或目标环境通过。</zh-CN>
+#   <en>Run one read-only operations gate and capture low-sensitivity output; child failure remains in evidence and summary and is not converted into production or target-environment success.</en>
+# </lang>
 function Invoke-EvidenceStep {
     param(
         [string]$Name,
@@ -140,6 +155,10 @@ function Invoke-EvidenceStep {
     Write-Host ('[{0}] {1} -> {2}' -f $status.ToUpperInvariant(), $Name, $LogPath)
 }
 
+# <lang>
+#   <zh-CN>证据目录只在本脚本实际运行时创建；后续门禁仍由调用方环境和参数决定。</zh-CN>
+#   <en>Create the evidence directory only when this script actually runs; subsequent gates remain determined by the caller's environment and arguments.</en>
+# </lang>
 New-Item -ItemType Directory -Force -Path $runDirectory | Out-Null
 Write-Host ('Operations evidence directory: {0}' -f $runDirectory)
 
@@ -193,6 +212,10 @@ Invoke-EvidenceStep `
     -LogPath (Join-Path $runDirectory 'default-credential-risk.log.md')
 
 $failedSteps = @($steps | Where-Object { $_.ExitCode -ne 0 })
+# <lang>
+#   <zh-CN>摘要保留 Profile、可选 URL/日志目录、每个门禁结果和失败数量；不保存凭据或外置秘密。</zh-CN>
+#   <en>Keep the profile, optional URL/log directory, each gate result, and failure count in the summary; do not store credentials or external secrets.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     Profile = $Profile
     BaseUrl = $BaseUrl
@@ -240,6 +263,10 @@ Write-Utf8NoBomFile -Path (Join-Path $runDirectory 'README.md') -Content (($mark
 Write-Host ('SUMMARY: Steps={0}; Failed={1}' -f $steps.Count, $failedSteps.Count)
 Write-Host ('README: {0}' -f (Join-Path $runDirectory 'README.md'))
 
+# <lang>
+#   <zh-CN>AllowFailures 只改变最终退出码；失败步骤仍保留在日志、摘要和 README 中。</zh-CN>
+#   <en>AllowFailures changes only the final exit code; failed steps remain in the logs, summary, and README.</en>
+# </lang>
 if ($failedSteps.Count -gt 0 -and -not $AllowFailures) {
     exit 1
 }

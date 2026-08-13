@@ -3,11 +3,10 @@
     Generates a development/test SQL seed for the P12.5 sample business scenario.
 
 .DESCRIPTION
-    中文：本脚本只生成 SQL 文件，不连接数据库、不创建门户用户、不写密码。生成的 SQL 仅用于开发或测试库，
-    通过已有测试用户补齐组织、员工、用户资料和账号员工绑定，从而支持员工工号登录与资料更正样板路径。
-    English: This script only generates a SQL file. It does not connect to a database, create Portal users, or write
-    passwords. The generated SQL is for development or test databases only; it enriches an existing test user with
-    organization, employee, profile, and binding records for the employee-code sign-in and correction-request sample path.
+    <lang>
+      <zh-CN>本脚本只生成 SQL 文件，不连接数据库、不创建门户用户、不写密码。生成的 SQL 仅用于开发或测试库，通过已有测试用户补齐组织、员工、用户资料和账号员工绑定，从而支持员工工号登录与资料更正样板路径。</zh-CN>
+      <en>This script only generates a SQL file. It does not connect to a database, create Portal users, or write passwords. The generated SQL is for development or test databases only; it enriches an existing test user with organization, employee, profile, and binding records for the employee-code sign-in and correction-request sample path.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -33,6 +32,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# <lang>
+#   <zh-CN>将输入值转换为 SQL Unicode 字符串字面量；空值保持为 SQL NULL，并转义单引号。本函数只生成文本，不执行 SQL。</zh-CN>
+#   <en>Convert an input value to a SQL Unicode string literal; preserve null as SQL NULL and escape apostrophes. This function only generates text and never executes SQL.</en>
+# </lang>
 function ConvertTo-SqlNVarCharLiteral {
     param([string]$Value)
 
@@ -43,6 +46,10 @@ function ConvertTo-SqlNVarCharLiteral {
     return "N'" + ($Value -replace "'", "''") + "'"
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入生成的 SQL 文件；创建输出文件不会连接数据库，也不会改变门户数据。</zh-CN>
+#   <en>Write the generated SQL file as UTF-8 without a BOM; creating the output file does not connect to a database or change Portal data.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -57,7 +64,15 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>仅规范化 AllowRebind 的 SQL 字面量；该开关只改变生成脚本中的冲突保护条件，不会立即执行重绑。</zh-CN>
+#   <en>Normalize the AllowRebind SQL literal only; the switch changes conflict guards in the generated script and does not perform a rebinding immediately.</en>
+# </lang>
 $allowRebindValue = if ($AllowRebind) { '1' } else { '0' }
+# <lang>
+#   <zh-CN>以下内容是供调用方保存或人工复核的 SQL 模板；目标数据库的执行、事务和环境确认由调用方负责，脚本不注入密码或其他秘密值。</zh-CN>
+#   <en>The following content is an SQL template for the caller to save or review; target-database execution, transaction handling, and environment confirmation remain the caller's responsibility, and no password or other secret is injected.</en>
+# </lang>
 $sql = @"
 /*
     P12.5 员工资料更正样板路径开发/测试数据。

@@ -6,18 +6,10 @@ Checks the current Portal compliance baseline.
 .LANG zh-CN
 检查当前 Portal 合规基线。
 
-.LANG en
-Performs read-only compliance baseline checks for headers, security-related
-configuration, credential-risk markers, legacy compatibility warnings, and
-optional HTTP observations. It may issue HTTP GET requests when BaseUrl is
-provided, but it does not log in, mutate the site, change Web.config, write
-secrets, or execute external scanning tools.
-
-.LANG zh-CN
-对当前 Portal 合规基线执行只读检查，覆盖响应头、安全相关配置、凭据风险标记、
-旧兼容警告以及可选 HTTP 观测。当提供 BaseUrl 时，它可能发起 HTTP GET 请求；
-但不会登录、不会修改站点、不会改写 Web.config、不会写入密钥，也不会执行外部
-扫描工具。
+<lang>
+  <en>Performs read-only compliance baseline checks for headers, security-related configuration, credential-risk markers, legacy compatibility warnings, and optional HTTP observations. It may issue HTTP GET requests when BaseUrl is provided, but it does not log in, mutate the site, change Web.config, write secrets, or execute external scanning tools.</en>
+  <zh-CN>对当前 Portal 合规基线执行只读检查，覆盖响应头、安全相关配置、凭据风险标记、旧兼容警告以及可选 HTTP 观测。当提供 BaseUrl 时，它可能发起 HTTP GET 请求；但不会登录、不会修改站点、不会改写 Web.config、不会写入密钥，也不会执行外部扫描工具。</zh-CN>
+</lang>
 
 .PARAMETER Profile
 .LANG en
@@ -96,14 +88,26 @@ if ([string]::IsNullOrWhiteSpace($WebConfigPath)) {
 
 $resolvedWebConfigPath = [System.IO.Path]::GetFullPath($WebConfigPath)
 
+# <lang>
+#   <zh-CN>判断 Dev/Test/Prod/Scan/LegacyIe 中需要强制部署硬化的 Profile；只影响检查严重级别。</zh-CN>
+#   <en>Determine which Dev/Test/Prod/Scan/LegacyIe profiles require strict deployment hardening; this changes check severity only.</en>
+# </lang>
 function Test-StrictDeploymentProfile {
     return $Profile -in @('Test', 'Prod', 'Scan')
 }
 
+# <lang>
+#   <zh-CN>判断是否为生产相似 Profile；用于响应头和兼容策略的只读判定。</zh-CN>
+#   <en>Determine whether the profile is production-like for read-only header and compatibility classification.</en>
+# </lang>
 function Test-ProductionLikeProfile {
     return $Profile -in @('Prod', 'Scan')
 }
 
+# <lang>
+#   <zh-CN>追加低敏合规检查结果；Severity 只用于汇总/退出，不代表已完成外部扫描。</zh-CN>
+#   <en>Add a low-sensitivity compliance result; Severity feeds summary/exit only and does not represent an external scan.</en>
+# </lang>
 function Add-ComplianceCheck {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info')]
@@ -136,12 +140,20 @@ function Add-ComplianceCheck {
     }
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 读取合规检查目标文本；不读取秘密值并由调用方保证路径范围。</zh-CN>
+#   <en>Read compliance-target text as UTF-8; do not read secrets, with callers responsible for path scope.</en>
+# </lang>
 function Get-Utf8Text {
     param([string]$LiteralPath)
 
     return Get-Content -LiteralPath $LiteralPath -Encoding UTF8 -Raw
 }
 
+# <lang>
+#   <zh-CN>用正则在指定文本文件中执行只读断言；缺失文件或未命中返回 false。</zh-CN>
+#   <en>Run a read-only regex assertion in a text file; return false for missing files or no match.</en>
+# </lang>
 function Test-TextContains {
     param(
         [string]$LiteralPath,
@@ -155,6 +167,10 @@ function Test-TextContains {
     return [regex]::IsMatch((Get-Utf8Text -LiteralPath $LiteralPath), $Pattern, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 }
 
+# <lang>
+#   <zh-CN>枚举受限源码扩展名文件，排除生成物/外部目录，供静态扫描使用。</zh-CN>
+#   <en>Enumerate scoped source extensions while excluding generated/external directories for static scanning.</en>
+# </lang>
 function Get-PortalSourceFiles {
     $extensions = @('.aspx', '.ascx', '.ashx', '.cs', '.config', '.master')
 
@@ -165,6 +181,10 @@ function Get-PortalSourceFiles {
         }
 }
 
+# <lang>
+#   <zh-CN>在受限源码文件集合中返回低敏匹配摘要，并限制结果数量避免证据膨胀。</zh-CN>
+#   <en>Return low-sensitivity match summaries from scoped source files with a result limit to avoid evidence bloat.</en>
+# </lang>
 function Find-PortalSourceMatch {
     param(
         [string]$Pattern,
@@ -187,6 +207,10 @@ function Find-PortalSourceMatch {
     return $matches
 }
 
+# <lang>
+#   <zh-CN>从 HTTP 响应头集合读取不区分大小写的首个值；不记录请求凭据或 Cookie。</zh-CN>
+#   <en>Read the first case-insensitive value from an HTTP header collection; do not record request credentials or cookies.</en>
+# </lang>
 function Get-PortalHttpHeader {
     param(
         [System.Net.WebHeaderCollection]$Headers,
@@ -202,6 +226,10 @@ function Get-PortalHttpHeader {
     return ''
 }
 
+# <lang>
+#   <zh-CN>把 BaseUrl 规范化为本地 smoke URI 并拒绝不安全/缺失输入；URI 只用于可选 GET 观测。</zh-CN>
+#   <en>Normalize BaseUrl into a local smoke URI and reject unsafe/missing input; the URI is used only for optional GET observation.</en>
+# </lang>
 function Resolve-PortalSmokeUri {
     param([string]$Url)
 
@@ -213,8 +241,10 @@ function Resolve-PortalSmokeUri {
     return $baseUri
 }
 
-# 中文：先做只读基线检查，不主动扫描漏洞、不写数据库，也不改变 Web.config；Profile 只影响判定口径。
-# English: This script is a read-only baseline check; Profile affects expectations only and never modifies Web.config.
+# <lang>
+#   <zh-CN>先做只读基线检查，不主动扫描漏洞、不写数据库，也不改变 Web.config；Profile 只影响判定口径。</zh-CN>
+#   <en>This script is a read-only baseline check; Profile affects expectations only and never modifies Web.config.</en>
+# </lang>
 Write-Host ('PROFILE: {0}' -f $Profile)
 if (-not (Test-Path -LiteralPath $resolvedWebConfigPath)) {
     Add-ComplianceCheck -Severity Fail -Code 'CFG-001' -Message 'Web.config was not found.' -Evidence $resolvedWebConfigPath
@@ -582,6 +612,10 @@ $warningCount = @($checks | Where-Object { $_.Severity -eq 'Warning' }).Count
 $infoCount = @($checks | Where-Object { $_.Severity -eq 'Info' }).Count
 $passCount = @($checks | Where-Object { $_.Severity -eq 'Pass' }).Count
 
+# <lang>
+#   <zh-CN>摘要区分 Pass/Warning/Fail/Info，并保留 Profile、路径和可选 BaseUrl；不写凭据或生产证明。</zh-CN>
+#   <en>Keep Pass/Warning/Fail/Info distinct with profile, paths, and optional BaseUrl; do not write credentials or production proof.</en>
+# </lang>
 $summary = [pscustomobject]@{
     Profile = $Profile
     PortalPath = $resolvedPortalPath
@@ -599,6 +633,10 @@ $summary = [pscustomobject]@{
     Checks = $checks
 }
 
+# <lang>
+#   <zh-CN>仅在提供 OutputJson 时写入 UTF-8 无 BOM JSON；可选 HTTP 观测仍不等于浏览器或生产验收。</zh-CN>
+#   <en>Write UTF-8-no-BOM JSON only when OutputJson is supplied; optional HTTP observation is not browser or production acceptance.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
     $outputDirectory = Split-Path -Parent $OutputJson
     if (-not [string]::IsNullOrWhiteSpace($outputDirectory) -and -not (Test-Path -LiteralPath $outputDirectory)) {
@@ -611,6 +649,10 @@ if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
 
 Write-Host ('SUMMARY: Pass={0}; Warning={1}; Fail={2}; Info={3}' -f $passCount, $warningCount, $failCount, $infoCount)
 
+# <lang>
+#   <zh-CN>Fail 或显式 FailOnWarning 下的 Warning 返回非零；脚本不执行外部扫描、登录或写入。</zh-CN>
+#   <en>Return non-zero for Fail or Warning under explicit FailOnWarning; do not run external scans, sign in, or write state.</en>
+# </lang>
 if ($failCount -gt 0 -or ($FailOnWarning -and $warningCount -gt 0)) {
     exit 1
 }

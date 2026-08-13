@@ -7,15 +7,10 @@ Creates a read-only documentation baseline for tracked portal sources.
 为已追踪门户源码生成只读文档化基线。
 
 .DESCRIPTION
-.LANG en
-Counts tracked source files, C# XML documentation lines, public/protected
-declaration candidates, and known documentation-boundary directories. The output
-is an inventory snapshot only; it does not judge final documentation quality and
-does not adopt generated or local-only directories.
-
-.LANG zh-CN
-统计已追踪源码文件、C# XML 文档行、public/protected 声明候选和已知文档边界目录。
-输出只是 inventory 快照，不判定最终文档质量，也不采纳生成目录或本机专属目录。
+<lang>
+  <zh-CN>统计已追踪源码文件、C# XML 文档行、public/protected 声明候选和已知文档边界目录。输出只是 inventory 快照，不判定最终文档质量，也不采纳生成目录或本机专属目录。</zh-CN>
+  <en>Counts tracked source files, C# XML documentation lines, public/protected declaration candidates, and known documentation-boundary directories. The output is an inventory snapshot only; it does not judge final documentation quality or adopt generated or local-only directories.</en>
+</lang>
 
 .PARAMETER AsJson
 .LANG en
@@ -51,6 +46,10 @@ if ($LASTEXITCODE -ne 0) {
     throw '无法读取 Git 已追踪文件，无法生成文档化基线。'
 }
 
+# <lang>
+#   <zh-CN>从 Git 已追踪路径中筛选指定扩展名，保持基线不纳入未追踪生成物。</zh-CN>
+#   <en>Filters Git-tracked paths by extension so the baseline excludes untracked generated output.</en>
+# </lang>
 function Get-TrackedFilesByExtension {
     param(
         [Parameter(Mandatory = $true)]
@@ -65,6 +64,10 @@ function Get-TrackedFilesByExtension {
         })
 }
 
+# <lang>
+#   <zh-CN>读取文档边界目录的追踪文件数和存在性摘要，不采纳本机专属目录正文。</zh-CN>
+#   <en>Reads tracked-count and existence summaries for documentation-boundary directories without adopting local-only contents.</en>
+# </lang>
 function Get-TrackedDirectoryState {
     param(
         [Parameter(Mandatory = $true)]
@@ -101,6 +104,10 @@ function Get-TrackedDirectoryState {
     }
 }
 
+# <lang>
+#   <zh-CN>按源码区域汇总 C# 文件、XML 文档和 public/protected 声明候选，输出仅供盘点。</zh-CN>
+#   <en>Summarizes C# files, XML documentation, and public/protected declaration candidates by source area for inventory only.</en>
+# </lang>
 function Get-CSharpAreaSummary {
     param(
         [Parameter(Mandatory = $true)]

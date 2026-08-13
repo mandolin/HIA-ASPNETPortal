@@ -3,11 +3,10 @@
     Builds a read-only release summary from release and evidence artifacts.
 
 .DESCRIPTION
-    中文：本脚本汇总发布包 manifest、运维证据包、文档化证据包和当前 Git 状态，用于形成发布说明与内部 release ledger 的输入。
-    它不打 tag、不创建分支、不发布文件、不连接 IIS、不连接数据库，也不读取外置敏感配置。
-    English: This script summarizes the release manifest, operations evidence, documentation evidence, and current Git
-    state for release notes and the internal release ledger. It does not tag, create branches, publish files, connect to
-    IIS, connect to databases, or read external secret configuration.
+    <lang>
+      <zh-CN>本脚本汇总发布包 manifest、运维证据包、文档化证据包和当前 Git 状态，用于形成发布说明与内部 release ledger 的输入。它不打 tag、不创建分支、不发布文件、不连接 IIS、不连接数据库，也不读取外置敏感配置。</zh-CN>
+      <en>This script summarizes the release manifest, operations evidence, documentation evidence, and current Git state for release notes and the internal release ledger. It does not tag, create branches, publish files, connect to IIS, connect to databases, or read external secret configuration.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -33,6 +32,10 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入摘要文件，并只创建调用方指定的父目录。</zh-CN>
+#   <en>Write summary files as UTF-8 without a BOM, creating only the parent directory selected by the caller.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -47,6 +50,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>在仓库根目录只读执行 Git 元数据命令；失败时返回空值，不把命令错误升级为敏感输出。</zh-CN>
+#   <en>Run read-only Git metadata commands at the repository root; return null on failure without exposing command errors.</en>
+# </lang>
 function Get-GitValue {
     param([string[]]$Arguments)
 
@@ -63,6 +70,10 @@ function Get-GitValue {
     }
 }
 
+# <lang>
+#   <zh-CN>解析显式或默认 evidence 文件，默认选择包含目标文件的最新目录，不把本地运行路径写死。</zh-CN>
+#   <en>Resolve an explicit or default evidence file, selecting the newest directory containing the file without pinning one local run path.</en>
+# </lang>
 function Resolve-EvidenceFile {
     param(
         [string]$InputPath,
@@ -88,8 +99,10 @@ function Resolve-EvidenceFile {
         throw "Evidence root was not found: $rootPath"
     }
 
-    # 中文：默认选取最新可用证据目录，避免脚本为发布节奏写死某一次本地运行路径。
-    # English: Select the latest available evidence directory by default so release summaries are not pinned to one local run.
+    # <lang>
+    #   <zh-CN>默认选取最新可用证据目录，避免脚本为发布节奏写死某一次本地运行路径。</zh-CN>
+    #   <en>Select the latest available evidence directory by default so release summaries are not pinned to one local run.</en>
+    # </lang>
     $matches = @(Get-ChildItem -LiteralPath $rootPath -Directory -Recurse |
         Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName $FileName) -PathType Leaf } |
         Sort-Object LastWriteTimeUtc -Descending)
@@ -101,6 +114,10 @@ function Resolve-EvidenceFile {
     return (Join-Path $matches[0].FullName $FileName)
 }
 
+# <lang>
+#   <zh-CN>读取并解析低敏 JSON evidence；解析失败时抛出带路径的受控错误。</zh-CN>
+#   <en>Read and parse low-sensitivity JSON evidence, throwing a controlled path-aware error when parsing fails.</en>
+# </lang>
 function Read-JsonFile {
     param([string]$Path)
 
@@ -112,6 +129,10 @@ function Read-JsonFile {
     }
 }
 
+# <lang>
+#   <zh-CN>把步骤摘要投影为名称、状态和退出码，不复制额外运行时对象或秘密字段。</zh-CN>
+#   <en>Project step summaries to name, status, and exit code without copying extra runtime objects or secret fields.</en>
+# </lang>
 function Get-StepSummary {
     param([object]$RunSummary)
 
@@ -136,6 +157,10 @@ $releaseManifest = Read-JsonFile -Path $releaseManifestJsonPath
 $operationsSummary = Read-JsonFile -Path $operationsSummaryJsonPath
 $documentationSummary = Read-JsonFile -Path $documentationSummaryJsonPath
 
+# <lang>
+#   <zh-CN>只读取当前仓库 Git 摘要并记录脏状态计数；不会提交、回滚或修改索引。</zh-CN>
+#   <en>Read the current repository Git summary and dirty-state count without committing, reverting, or changing the index.</en>
+# </lang>
 $repositoryCommit = Get-GitValue -Arguments @('rev-parse', '--short', 'HEAD')
 $repositoryBranch = Get-GitValue -Arguments @('rev-parse', '--abbrev-ref', 'HEAD')
 $repositoryStatusOutput = Get-GitValue -Arguments @('status', '--short')
@@ -158,6 +183,10 @@ $operationsFailedSteps = [int]$operationsSummary.FailedStepCount
 $documentationFailedSteps = [int]$documentationSummary.FailedStepCount
 $documentationPendingSteps = if ($null -ne $documentationSummary.PendingStepCount) { [int]$documentationSummary.PendingStepCount } else { 0 }
 
+# <lang>
+#   <zh-CN>汇总发布包、证据步骤和目标环境 Pending 项；ReadyForInternalReleaseLedger 不等于真实生产发布通过。</zh-CN>
+#   <en>Summarize the release package, evidence steps, and target-environment pending items; ReadyForInternalReleaseLedger is not a real production-release pass.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     SchemaVersion = 'p13.4.release-summary.v1'
     GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
@@ -218,6 +247,10 @@ $summary = [pscustomobject][ordered]@{
     }
 }
 
+# <lang>
+#   <zh-CN>生成低敏 Markdown 摘要，保留目标环境待补证和只读边界，不写入连接串或凭据。</zh-CN>
+#   <en>Generate a low-sensitivity Markdown summary that preserves target-environment gaps and read-only boundaries without writing connection strings or credentials.</en>
+# </lang>
 $markdownLines = @(
     '# Portal Release Summary',
     '',
@@ -260,6 +293,10 @@ $markdownLines += @(
     '3. Target-environment supplement items are not failures; they mark evidence that cannot be produced on the local development machine.'
 )
 
+# <lang>
+#   <zh-CN>按显式输出参数写入 JSON/Markdown；未指定时只输出到控制台，不创建默认证据目录。</zh-CN>
+#   <en>Write JSON/Markdown only when explicit output parameters are provided; otherwise print to the console without creating a default evidence directory.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
     Write-Utf8NoBomFile -Path $OutputJson -Content (($summary | ConvertTo-Json -Depth 8) + [Environment]::NewLine)
     Write-Host ('RELEASE SUMMARY JSON: {0}' -f ([System.IO.Path]::GetFullPath($OutputJson)))
@@ -277,6 +314,10 @@ else {
     $markdownLines | ForEach-Object { Write-Host $_ }
 }
 
+# <lang>
+#   <zh-CN>发布摘要未达到内部 ledger 条件时返回非零；目标环境 Pending 不被伪装为通过。</zh-CN>
+#   <en>Return non-zero when the release summary is not ready for the internal ledger; target-environment pending items are never disguised as passes.</en>
+# </lang>
 if (-not $summary.Summary.ReadyForInternalReleaseLedger) {
     exit 1
 }

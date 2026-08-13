@@ -4,8 +4,10 @@
 Generates a read-only inventory of Portal data-access and database-dialect usage.
 
 .DESCRIPTION
-本脚本只扫描 Git 已追踪源码和脚本，不连接数据库、不读取仓库外连接串、不修改文件。输出用于 P11.2 的数据库兼容性标签盘点。
-This script scans only Git-tracked source and script files. It does not connect to a database, read external connection strings, or modify files. The output supports the P11.2 database compatibility labeling inventory.
+<lang>
+  <zh-CN>本脚本只扫描 Git 已追踪源码和脚本，不连接数据库、不读取仓库外连接串、不修改文件；输出用于 P11.2 数据库兼容性标签盘点。</zh-CN>
+  <en>This script scans only Git-tracked source and script files. It does not connect to a database, read external connection strings, or modify files; output supports the P11.2 database compatibility labeling inventory.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -28,6 +30,10 @@ if ([string]::IsNullOrWhiteSpace($SourceRoot)) {
 $resolvedSourceRoot = (Resolve-Path -LiteralPath $SourceRoot).Path
 $pathComparer = [System.StringComparer]::OrdinalIgnoreCase
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选数据访问盘点产物，并按需创建父目录。</zh-CN>
+#   <en>Writes optional data-access inventory artifacts as UTF-8 without BOM and creates the parent directory when needed.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [string]$Path,
@@ -43,6 +49,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, $encoding)
 }
 
+# <lang>
+#   <zh-CN>把文件绝对路径转换为仓库相对路径，保证规则匹配不越过仓库边界。</zh-CN>
+#   <en>Converts an absolute file path to a repository-relative path so rule matching stays within the repository boundary.</en>
+# </lang>
 function Get-RepoRelativePath {
     param([string]$Path)
 
@@ -55,6 +65,10 @@ function Get-RepoRelativePath {
     return ($fullPath -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>净化盘点证据文本中的换行和敏感片段，限制样例输出长度。</zh-CN>
+#   <en>Sanitizes line breaks and sensitive fragments in inventory evidence while bounding sample length.</en>
+# </lang>
 function Protect-EvidenceText {
     param([string]$Text)
 
@@ -68,6 +82,10 @@ function Protect-EvidenceText {
     return $value
 }
 
+# <lang>
+#   <zh-CN>按源码/脚本扩展名和仓库路径读取 Git 已追踪盘点文件，不读取外部目录。</zh-CN>
+#   <en>Reads Git-tracked inventory files by source/script extension and repository path without external directories.</en>
+# </lang>
 function Get-TrackedInventoryFiles {
     $gitFiles = @()
     try {
@@ -110,6 +128,10 @@ function Get-TrackedInventoryFiles {
     return @($files | Sort-Object)
 }
 
+# <lang>
+#   <zh-CN>建立数据访问或数据库方言匹配规则对象，供后续只读扫描复用。</zh-CN>
+#   <en>Creates a data-access or database-dialect matching rule for the later read-only scan.</en>
+# </lang>
 function New-Rule {
     param(
         [string]$Tag,

@@ -7,15 +7,10 @@ Runs static smoke checks for a trusted business module package.
 对受信任业务模块包运行静态 smoke 检查。
 
 .DESCRIPTION
-.LANG en
-Validates a deployed module directory, module.json manifest, expected package
-identity, desktop entry path, optional migration script, and trusted resource
-boundaries. The script reads files only and does not register modules, mutate the
-database, or start the portal runtime.
-
-.LANG zh-CN
-验证已部署模块目录、module.json manifest、预期包标识、桌面入口路径、可选迁移脚本和受信任资源边界。
-本脚本只读取文件，不注册模块、不修改数据库，也不启动门户运行时。
+<lang>
+  <en>Validate a deployed module directory, module.json manifest, expected package identity, desktop entry path, optional migration script, and trusted resource boundaries. The script reads files only and does not register modules, mutate the database, or start the portal runtime.</en>
+  <zh-CN>验证已部署模块目录、module.json manifest、预期包标识、桌面入口路径、可选迁移脚本和受信任资源边界。本脚本只读取文件，不注册模块、不修改数据库，也不启动门户运行时。</zh-CN>
+</lang>
 
 .PARAMETER ModuleName
 .LANG en
@@ -94,6 +89,10 @@ $setupRoot = Join-Path $repoRoot 'src\Setup'
 $hasFailures = $false
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>追加模块静态 smoke finding 并传播 Fail 状态；只记录事实，不注册模块或写入数据库。</zh-CN>
+#   <en>Add a static module-smoke finding and propagate Fail state; record facts only without registering modules or writing databases.</en>
+# </lang>
 function Add-BusinessModuleCheck {
     param(
         [string]$Name,
@@ -115,6 +114,10 @@ function Add-BusinessModuleCheck {
     Write-Host ('[{0}] {1}: {2}' -f $Status.ToUpperInvariant(), $Name, $Detail)
 }
 
+# <lang>
+#   <zh-CN>将相对输入解析到仓库根目录，绝对路径保持绝对形式；调用方继续负责模块目录边界。</zh-CN>
+#   <en>Resolve relative input under the repository root while preserving absolute paths; callers still own module-directory boundaries.</en>
+# </lang>
 function Get-FullPath {
     param([string]$Path)
 
@@ -125,6 +128,10 @@ function Get-FullPath {
     return [System.IO.Path]::GetFullPath((Join-Path $repoRoot $Path))
 }
 
+# <lang>
+#   <zh-CN>确认候选路径位于模块父目录内，防止桌面入口或资源逃逸模块包边界。</zh-CN>
+#   <en>Confirm a candidate path stays under the module parent to prevent desktop entries or resources escaping the package boundary.</en>
+# </lang>
 function Test-ChildPath {
     param(
         [string]$ParentPath,
@@ -136,6 +143,10 @@ function Test-ChildPath {
     return $child.StartsWith($parent + [System.IO.Path]::DirectorySeparatorChar, [System.StringComparison]::OrdinalIgnoreCase)
 }
 
+# <lang>
+#   <zh-CN>拒绝绝对、URL、盘符和上级段路径，只允许模块包内部的相对资源。</zh-CN>
+#   <en>Reject absolute, URL, drive-qualified, and parent-segment paths so resources remain package-relative.</en>
+# </lang>
 function Test-SafeRelativePath {
     param([string]$Path)
 
@@ -151,6 +162,10 @@ function Test-SafeRelativePath {
     return -not ($segments | Where-Object { $_ -eq '..' })
 }
 
+# <lang>
+#   <zh-CN>解析默认或显式模块目录，并将后续 manifest、资源、脚本和迁移检查限制在受控路径。</zh-CN>
+#   <en>Resolve the default or explicit module directory and constrain subsequent manifest, resource, script, and migration checks to controlled paths.</en>
+# </lang>
 $moduleRoot = if ([string]::IsNullOrWhiteSpace($ModuleDirectory)) {
     Join-Path $portalRoot ('DesktopModules\' + $ModuleName)
 }
@@ -316,6 +331,10 @@ if (Test-Path -LiteralPath $moduleRoot -PathType Container) {
     }
 }
 
+# <lang>
+#   <zh-CN>按显式开关检查迁移文件命名、数据库上下文、破坏性语句和幂等提示；不执行 SQL 或连接数据库。</zh-CN>
+#   <en>When enabled, inspect migration naming, database context, destructive statements, and idempotency hints without executing SQL or connecting to a database.</en>
+# </lang>
 if (-not $SkipSqlMigrationCheck) {
     $migrationFiles = @()
     if (-not [string]::IsNullOrWhiteSpace($SqlMigrationFile)) {
@@ -383,6 +402,10 @@ else {
 $failed = @($checks | Where-Object { $_.Status -eq 'Fail' }).Count
 $warnings = @($checks | Where-Object { $_.Status -eq 'Warning' }).Count
 
+# <lang>
+#   <zh-CN>汇总模块包静态检查和低敏路径事实；失败数不等于已执行部署或运行时注册。</zh-CN>
+#   <en>Summarize static package checks and low-sensitivity path facts; failure counts do not imply deployment or runtime registration occurred.</en>
+# </lang>
 $summary = [pscustomobject]@{
     ModuleName = $ModuleName
     ModuleDirectory = $moduleRoot
@@ -394,6 +417,10 @@ $summary = [pscustomobject]@{
 
 $summary
 
+# <lang>
+#   <zh-CN>存在静态 Fail 时返回非零；不自动修复模块目录、迁移脚本或配置。</zh-CN>
+#   <en>Return non-zero when a static Fail exists without automatically fixing module directories, migrations, or configuration.</en>
+# </lang>
 if ($hasFailures) {
     exit 1
 }

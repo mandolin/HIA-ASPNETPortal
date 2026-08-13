@@ -3,16 +3,10 @@
     Generates a read-only documentation map and artifact-boundary inventory for W-anp-P15.4.
 
 .DESCRIPTION
-    中文：本脚本只读取 Git 已追踪文件、WorkZone 已追踪文件摘要和少量本机生成目录状态，
-    用于整理公开文档、内部 WorkZone 文档、生成文档产物、历史 SHFB/Doxygen 现场、
-    HIA 文档化通知和文档化脚本入口。它不删除文件、不提交生成物、不升级文档工具链、
-    不访问数据库或网络。
-    English: This script reads only Git-tracked files, a summary of WorkZone tracked files,
-    and a small set of local generated-directory states. It maps public documentation,
-    internal WorkZone documentation, generated documentation artifacts, historical SHFB/Doxygen
-    footprints, HIA documentation notifications, and documentation-tool script entry points.
-    It does not delete files, commit generated output, upgrade documentation tooling, access
-    databases, or use the network.
+<lang>
+  <zh-CN>本脚本只读取 Git 已追踪文件、WorkZone 已追踪文件摘要和少量本机生成目录状态，用于整理公开文档、内部 WorkZone 文档、生成文档产物、历史 SHFB/Doxygen 现场、HIA 文档化通知和文档化脚本入口；不删除文件、不提交生成物、不升级文档工具链、不访问数据库或网络。</zh-CN>
+  <en>This script reads only Git-tracked files, a summary of WorkZone tracked files, and a small set of local generated-directory states. It maps public and internal documentation, generated artifacts, historical SHFB/Doxygen footprints, HIA documentation notifications, and documentation-tool entry points without deleting files, committing output, upgrading tooling, or accessing databases or the network.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -29,6 +23,10 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $workZoneRoot = Join-Path $repoRoot 'work-zone'
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选盘点产物，并在需要时创建父目录；该 helper 不决定产物内容。</zh-CN>
+#   <en>Writes optional inventory artifacts as UTF-8 without BOM and creates the parent directory when needed; it does not decide artifact content.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -43,12 +41,20 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>将 Git/文件系统路径统一为正斜杠相对表示，保证 JSON 和 Markdown 输出稳定。</zh-CN>
+#   <en>Normalizes Git and file-system paths to slash-separated relative values for stable JSON and Markdown output.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([Parameter(Mandatory = $true)][string]$Path)
 
     return ($Path -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>只读取指定仓库的 Git 已追踪路径；命令失败时显式终止，避免把不完整清单当成事实。</zh-CN>
+#   <en>Reads only Git-tracked paths from the specified repository and fails explicitly so an incomplete list is not treated as fact.</en>
+# </lang>
 function Get-GitTrackedFiles {
     param([Parameter(Mandatory = $true)][string]$Root)
 
@@ -60,6 +66,10 @@ function Get-GitTrackedFiles {
     return @($files | ForEach-Object { ConvertTo-RepoPath -Path $_ })
 }
 
+# <lang>
+#   <zh-CN>读取单个仓库内文件的存在性、长度和低敏时间摘要，不读取正文。</zh-CN>
+#   <en>Reads existence, length, and low-sensitivity timestamp metadata for one repository file without reading its contents.</en>
+# </lang>
 function Get-FileState {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -73,6 +83,10 @@ function Get-FileState {
     }
 }
 
+# <lang>
+#   <zh-CN>汇总目录存在性、文件计数、追踪计数和有限样例路径，避免把完整目录内容写入盘点结果。</zh-CN>
+#   <en>Summarizes directory existence, file counts, tracked counts, and limited sample paths without emitting the full directory contents.</en>
+# </lang>
 function Get-DirectoryState {
     param(
         [Parameter(Mandatory = $true)][string]$RelativePath,
@@ -107,6 +121,10 @@ function Get-DirectoryState {
     }
 }
 
+# <lang>
+#   <zh-CN>把同一文档边界的路径集合包装为稳定的名称、边界、计数和路径列表对象。</zh-CN>
+#   <en>Packages one documentation-boundary path set into a stable name, boundary, count, and path-list object.</en>
+# </lang>
 function Get-PathGroup {
     param(
         [Parameter(Mandatory = $true)][string]$Name,

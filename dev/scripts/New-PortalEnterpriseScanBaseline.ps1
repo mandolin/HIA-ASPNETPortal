@@ -3,17 +3,10 @@
     Builds a read-only enterprise-scan baseline evidence package.
 
 .DESCRIPTION
-    中文：本脚本生成企业扫描准备基线，最初用于 P14.3，现在也可被后续阶段复用。
-    它重点盘点 Web.config 中安全响应头、
-    Cookie、Forms Authentication、错误页、上传限制、machineKey 和发布转换线索。
-    脚本只读取仓库文件并输出证据包，不修改 Web.config，不连接数据库，不读取外置敏感配置，
-    也不把开发基线或源码转换文件宣称为真实企业扫描通过。
-    English: This script builds an enterprise-scan preparation baseline. It was introduced for
-    P14.3 and can be reused by later phases. It inventories
-    security headers, cookies, Forms Authentication, custom errors, upload limits, machineKey,
-    and transform hints from Web.config. It only reads repository files and writes an evidence
-    package; it does not modify Web.config, connect to a database, read external secret
-    configuration, or claim that a development/source baseline passed a real enterprise scan.
+    <lang>
+      <zh-CN>本脚本生成企业扫描准备基线，最初用于 P14.3，现在也可被后续阶段复用。它重点盘点 Web.config 中安全响应头、Cookie、Forms Authentication、错误页、上传限制、machineKey 和发布转换线索。脚本只读取仓库文件并输出证据包，不修改 Web.config，不连接数据库，不读取外置敏感配置，也不把开发基线或源码转换文件宣称为真实企业扫描通过。</zh-CN>
+      <en>This script builds an enterprise-scan preparation baseline. It was introduced for P14.3 and can be reused by later phases. It inventories security headers, cookies, Forms Authentication, custom errors, upload limits, machineKey, and transform hints from Web.config. It only reads repository files and writes an evidence package; it does not modify Web.config, connect to a database, read external secret configuration, or claim that a development/source baseline passed a real enterprise scan.</en>
+    </lang>
 
 .PARAMETER EvidencePackageTitle
     .LANG en
@@ -84,6 +77,10 @@ $runDirectory = Join-Path $resolvedOutputRoot ('{0}-{1}' -f $runId, $Profile)
 $findings = New-Object 'System.Collections.Generic.List[object]'
 $headers = [ordered]@{}
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入企业扫描 JSON/Markdown/README，并只创建指定证据目录。</zh-CN>
+#   <en>Write enterprise-scan JSON/Markdown/README as UTF-8 without a BOM, creating only the requested evidence directory.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -98,6 +95,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>将仓库内路径归一化为稳定相对形式，仓库外路径保持绝对形式，避免证据歧义。</zh-CN>
+#   <en>Normalize in-repository paths to stable relative form while keeping external paths absolute to avoid ambiguous evidence.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([string]$Path)
 
@@ -114,12 +115,20 @@ function ConvertTo-RepoPath {
     return $fullPath
 }
 
+# <lang>
+#   <zh-CN>按 UTF-8 读取仓库文本；调用方保证路径边界，不读取外置秘密配置。</zh-CN>
+#   <en>Read repository text as UTF-8; callers own path boundaries, and external secret configuration is not read.</en>
+# </lang>
 function Get-Utf8Text {
     param([string]$LiteralPath)
 
     return Get-Content -LiteralPath $LiteralPath -Encoding UTF8 -Raw
 }
 
+# <lang>
+#   <zh-CN>从 XML 节点安全读取属性并以空字符串回退；缺失节点不被视为硬化通过。</zh-CN>
+#   <en>Safely read an XML attribute with an empty-string fallback; missing nodes are not treated as hardening passes.</en>
+# </lang>
 function Get-XmlAttributeValue {
     param(
         [System.Xml.XmlNode]$Node,
@@ -138,14 +147,26 @@ function Get-XmlAttributeValue {
     return [string]$attribute.Value
 }
 
+# <lang>
+#   <zh-CN>判断 Profile 是否需要目标环境硬化复核；只影响分类，不修改配置。</zh-CN>
+#   <en>Determine whether the profile requires target-environment hardening review; classification only, with no configuration mutation.</en>
+# </lang>
 function Test-StrictDeploymentProfile {
     return $Profile -in @('Test', 'Prod', 'Scan')
 }
 
+# <lang>
+#   <zh-CN>判断 Profile 是否按生产相似口径分类，用于响应头和兼容项严重级别。</zh-CN>
+#   <en>Determine whether the profile is production-like for header and compatibility severity classification.</en>
+# </lang>
 function Test-ProductionLikeProfile {
     return $Profile -in @('Prod', 'Scan')
 }
 
+# <lang>
+#   <zh-CN>追加企业扫描准备 finding 和低敏显示；PendingTargetEnvironment 不等于真实扫描通过。</zh-CN>
+#   <en>Add an enterprise-scan preparation finding and low-sensitivity display; PendingTargetEnvironment is not a real scan pass.</en>
+# </lang>
 function Add-ScanFinding {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info', 'PendingTargetEnvironment')]
@@ -191,6 +212,10 @@ function Add-ScanFinding {
     Write-Host $display
 }
 
+# <lang>
+#   <zh-CN>读取 Web.config 自定义响应头声明，不发送 HTTP 响应或读取运行时头。</zh-CN>
+#   <en>Read custom response-header declarations from Web.config without sending HTTP responses or reading runtime headers.</en>
+# </lang>
 function Get-HeaderMap {
     param([xml]$WebConfig)
 
@@ -206,6 +231,10 @@ function Get-HeaderMap {
     return $headers
 }
 
+# <lang>
+#   <zh-CN>按指定正则评估响应头配置并记录低敏结果；缺失/不匹配只影响 finding。</zh-CN>
+#   <en>Evaluate a configured header with the supplied regex and record a low-sensitivity finding; missing/mismatch affects the finding only.</en>
+# </lang>
 function Test-HeaderValue {
     param(
         [System.Collections.IDictionary]$Headers,
@@ -228,6 +257,10 @@ function Test-HeaderValue {
     Add-ScanFinding -Status 'Pass' -EnterpriseSeverity 'NotApplicable' -Code ('HDR-{0}' -f $Name) -Area 'SecurityHeader' -Title ('安全响应头已配置：{0}' -f $Name) -Evidence $value -Source 'Web.config'
 }
 
+# <lang>
+#   <zh-CN>盘点 Release/Test 转换文件中的硬化信号，不执行转换、不宣称发布产物已验证。</zh-CN>
+#   <en>Inventory hardening signals in Release/Test transforms without executing transforms or claiming published output is verified.</en>
+# </lang>
 function Get-TransformInventory {
     $transformNames = @(
         'Web.Debug.config',
@@ -271,6 +304,10 @@ function Get-TransformInventory {
     return [object[]]$inventory.ToArray()
 }
 
+# <lang>
+#   <zh-CN>转义 Markdown 单元格中的竖线/换行，避免证据表结构被污染。</zh-CN>
+#   <en>Escape pipes and line breaks in Markdown cells so evidence tables remain structurally safe.</en>
+# </lang>
 function Format-MarkdownTableCell {
     param([string]$Value)
 
@@ -281,6 +318,10 @@ function Format-MarkdownTableCell {
     return ($Value -replace '\|', '\|' -replace '\r?\n', '<br>')
 }
 
+# <lang>
+#   <zh-CN>只在输出根下创建本次 evidence 目录；不会修改 Web.config、IIS、数据库或外置配置。</zh-CN>
+#   <en>Create only the current evidence directory under the selected output root; do not modify Web.config, IIS, databases, or external config.</en>
+# </lang>
 New-Item -ItemType Directory -Force -Path $runDirectory | Out-Null
 
 Add-ScanFinding -Status 'Info' -EnterpriseSeverity 'Info' -Code $BaselineScopeCode -Area 'Process' -Title '当前生成企业扫描准备 baseline，不代表真实扫描通过。' -Evidence $Profile -Recommendation '真实企业扫描报告到来后登记到 WorkZone 脱敏目录并逐项分流。'
@@ -447,6 +488,10 @@ else {
     Add-ScanFinding -Status 'Warning' -EnterpriseSeverity 'Low' -Code 'SCAN-REGISTER-TEMPLATE' -Area 'Process' -Title '企业扫描登记模板未找到。' -Evidence (ConvertTo-RepoPath -Path $ScanRegisterTemplatePath) -Recommendation '提交模板后重新生成 P14.3 baseline。'
 }
 
+# <lang>
+#   <zh-CN>汇总低敏 finding、Profile、转换清单和 PendingTargetEnvironment；不导入真实企业扫描报告。</zh-CN>
+#   <en>Summarize low-sensitivity findings, profile, transform inventory, and PendingTargetEnvironment without importing a real enterprise scan report.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     SchemaVersion = 'p14.3.enterprise-scan-baseline.v1'
     GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
@@ -467,6 +512,10 @@ $summary = [pscustomobject][ordered]@{
     PassedChecks = @($findings | Where-Object { $_.Status -eq 'Pass' }).Count
 }
 
+# <lang>
+#   <zh-CN>组合机器可读 baseline，保留响应头声明和 finding 证据边界，不输出 machineKey 真实值。</zh-CN>
+#   <en>Compose the machine-readable baseline with header declarations and finding boundaries without outputting real machineKey values.</en>
+# </lang>
 $baseline = [pscustomobject][ordered]@{
     Summary = $summary
     SecurityHeaders = @(
@@ -482,6 +531,10 @@ $baseline = [pscustomobject][ordered]@{
     Findings = [object[]]$findings.ToArray()
 }
 
+# <lang>
+#   <zh-CN>向 evidence 目录写入 JSON/Markdown/README；内容仅是准备基线，不替代真实扫描报告。</zh-CN>
+#   <en>Write JSON/Markdown/README under the evidence directory; these are preparation artifacts, not a real scan report.</en>
+# </lang>
 $jsonPath = Join-Path $runDirectory 'enterprise-scan-baseline.json'
 $tablePath = Join-Path $runDirectory 'enterprise-scan-baseline.md'
 $readmePath = Join-Path $runDirectory 'README.md'
@@ -542,6 +595,10 @@ Write-Utf8NoBomFile -Path $readmePath -Content (($readmeLines -join [Environment
 Write-Host ('{0}: {1}' -f $EvidencePackageTitle, (ConvertTo-RepoPath -Path $runDirectory))
 Write-Host ('Pass={0}; Warning={1}; Fail={2}; PendingTargetEnvironment={3}' -f $summary.PassedChecks, $summary.WarningChecks, $summary.FailedChecks, $summary.PendingTargetEnvironmentCount)
 
+# <lang>
+#   <zh-CN>存在 Fail 时返回非零；Warning/Pending 保留为证据分类，不自动升级为失败或通过。</zh-CN>
+#   <en>Return non-zero when a Fail exists; retain Warning/Pending as evidence classifications without automatic promotion.</en>
+# </lang>
 if ($summary.FailedChecks -gt 0) {
     exit 1
 }

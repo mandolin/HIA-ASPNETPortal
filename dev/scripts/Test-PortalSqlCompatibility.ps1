@@ -6,19 +6,10 @@ Checks or applies Portal SQL compatibility migrations.
 .LANG zh-CN
 检查或执行 Portal SQL 兼容性迁移。
 
-.LANG en
-Connects to the configured SQL Server database and verifies selected schema
-milestones. Apply switches execute migration scripts and therefore change the
-target database; require switches are read-only checks. Use only against a
-prepared development, test, or explicitly approved target database. The script
-does not print connection-string secrets and should be run with a template or
-external config file that is excluded from Git when it contains credentials.
-
-.LANG zh-CN
-连接到配置的 SQL Server 数据库，并验证指定的 schema 里程碑。Apply 开关会执行
-迁移脚本，因此会修改目标数据库；Require 开关仅做只读检查。请只在已准备好的
-开发库、测试库或明确批准的目标库上运行。本脚本不应打印连接串敏感值；当配置
-包含凭据时，应使用已排除入库的模板或外置配置文件。
+<lang>
+  <en>Connects to the configured SQL Server database and verifies selected schema milestones. Apply switches execute migration scripts and therefore change the target database; require switches are read-only checks. Use only against a prepared development, test, or explicitly approved target database. The script does not print connection-string secrets and should be run with a template or external config file excluded from Git when it contains credentials.</en>
+  <zh-CN>连接到配置的 SQL Server 数据库，并验证指定的 schema 里程碑。Apply 开关会执行迁移脚本，因此会修改目标数据库；Require 开关仅做只读检查。请只在已准备好的开发库、测试库或明确批准的目标库上运行。本脚本不应打印连接串敏感值；当配置包含凭据时，应使用已排除入库的模板或外置配置文件。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringsConfigPath
 .LANG en
@@ -149,6 +140,10 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>追加低敏数据库检查结果并输出状态；Detail 不得承载连接串或凭据。</zh-CN>
+#   <en>Add a low-sensitivity database check and print its status; Detail must not carry connection strings or credentials.</en>
+# </lang>
 function Add-DatabaseCheck {
     param(
         [string]$Name,
@@ -165,6 +160,10 @@ function Add-DatabaseCheck {
     Write-Host ('[{0}] {1}: {2}' -f $Status.ToUpperInvariant(), $Name, $Detail)
 }
 
+# <lang>
+#   <zh-CN>从外置 XML 读取指定连接串并验证唯一非空项；不回显秘密值。</zh-CN>
+#   <en>Read and validate one non-empty connection string from external XML without echoing its secret value.</en>
+# </lang>
 function Get-ExternalConnectionString {
     param(
         [string]$Path,
@@ -173,8 +172,10 @@ function Get-ExternalConnectionString {
 
     [xml]$document = [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
 
-    # 应用正式契约是 <connectionStrings> 根节点；同时兼容早期人工包装的 <configuration> 形态。
-    # The production contract uses a <connectionStrings> root; also accept the legacy <configuration> wrapper.
+    # <lang>
+    #   <zh-CN>应用正式契约是 &lt;connectionStrings&gt; 根节点；同时兼容早期人工包装的 &lt;configuration&gt; 形态。</zh-CN>
+    #   <en>The production contract uses a &lt;connectionStrings&gt; root; also accept the legacy &lt;configuration&gt; wrapper.</en>
+    # </lang>
     $connectionStringsNode = if ($document.DocumentElement -and
         $document.DocumentElement.Name -eq 'connectionStrings') {
         $document.DocumentElement
@@ -194,6 +195,10 @@ function Get-ExternalConnectionString {
     return $matches[0].connectionString
 }
 
+# <lang>
+#   <zh-CN>在已打开连接上执行只读标量查询并确保命令释放；调用方决定查询是否安全。</zh-CN>
+#   <en>Execute a scalar query on an open connection and dispose the command; callers own query-safety decisions.</en>
+# </lang>
 function Invoke-SqlScalar {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -211,6 +216,10 @@ function Invoke-SqlScalar {
     }
 }
 
+# <lang>
+#   <zh-CN>读取 SQL Server 版本/版本级别/数据库事实并释放 reader/command，不自动升级兼容级别。</zh-CN>
+#   <en>Read SQL Server version/edition/database facts and dispose reader/command without upgrading compatibility level.</en>
+# </lang>
 function Get-SqlServerInfo {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -245,6 +254,10 @@ SELECT
     }
 }
 
+# <lang>
+#   <zh-CN>用参数化表名查询现有 schema 表集合，避免把表名拼成未约束输入。</zh-CN>
+#   <en>Query existing schema tables with parameterized names instead of concatenating unconstrained table input.</en>
+# </lang>
 function Get-ExistingTableNames {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -280,11 +293,17 @@ function Get-ExistingTableNames {
     }
 }
 
+# <lang>
+#   <zh-CN>按独立裸 GO 分割迁移批次并拒绝重复计数/未知 sqlcmd 指令，保持迁移脚本边界明确。</zh-CN>
+#   <en>Split migration text on standalone bare GO and reject repeat counts/unknown sqlcmd directives to keep batch boundaries explicit.</en>
+# </lang>
 function Get-SqlBatches {
     param([string]$SqlText)
 
-    # 扩展迁移使用独立 GO 批次；只接受裸 GO，避免把未知 sqlcmd 指令静默当作 SQL 执行。
-    # Extension migrations use standalone GO batches; only bare GO is accepted to avoid treating unknown sqlcmd directives as SQL.
+    # <lang>
+    #   <zh-CN>扩展迁移使用独立 GO 批次；只接受裸 GO，避免把未知 sqlcmd 指令静默当作 SQL 执行。</zh-CN>
+    #   <en>Extension migrations use standalone GO batches; only bare GO is accepted to avoid treating unknown sqlcmd directives as SQL.</en>
+    # </lang>
     if ($SqlText -match '(?im)^\s*GO\s+\d+') {
         throw 'SQL batch repeat counts are not supported by this compatibility script.'
     }
@@ -293,6 +312,10 @@ function Get-SqlBatches {
         Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
 }
 
+# <lang>
+#   <zh-CN>按批次执行单个迁移文件并逐个释放命令；实际变更仅在显式 Apply 与 ShouldProcess 通过后发生。</zh-CN>
+#   <en>Execute one migration file batch by batch and dispose each command; changes occur only after explicit Apply and ShouldProcess approval.</en>
+# </lang>
 function Invoke-MigrationFile {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -313,6 +336,10 @@ function Invoke-MigrationFile {
     }
 }
 
+# <lang>
+#   <zh-CN>只从显式外置路径取得连接串并立即创建连接；本脚本不从仓库配置回退，也不记录连接串内容。</zh-CN>
+#   <en>Use only the explicitly supplied external path to create the connection; do not fall back to repository config or log its content.</en>
+# </lang>
 $connectionString = Get-ExternalConnectionString -Path $ConnectionStringsConfigPath -Name $ConnectionStringName
 $connection = New-Object System.Data.SqlClient.SqlConnection $connectionString
 
@@ -771,6 +798,10 @@ WHERE ([ReferenceSetKey] = N'CollaborationItemType' AND [ValueKey] IN (N'General
         Add-DatabaseCheck -Name 'P23.2 reference-data schema' -Status 'Warning' -Detail ('Not required for this run; missing: ' + ($missingP23ReferenceDataTables -join ', '))
     }
 
+    # <lang>
+    #   <zh-CN>汇总 schema/行计数检查并在 Fail 时抛出；Warning 不自动升级为数据库变更。</zh-CN>
+    #   <en>Summarize schema/row-count checks and throw on Fail; warnings never become database changes automatically.</en>
+    # </lang>
     $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })
     [pscustomobject]@{
         ProductVersion = $server.ProductVersion
@@ -785,6 +816,10 @@ WHERE ([ReferenceSetKey] = N'CollaborationItemType' AND [ValueKey] IN (N'General
         throw ('Portal SQL compatibility test failed: ' + (($failedChecks | ForEach-Object { $_.Name }) -join ', '))
     }
 }
+# <lang>
+#   <zh-CN>无论检查或迁移结果如何都释放连接；释放不代表已回滚已提交的迁移。</zh-CN>
+#   <en>Dispose the connection regardless of check/migration outcome; disposal does not roll back committed migrations.</en>
+# </lang>
 finally {
     $connection.Dispose()
 }

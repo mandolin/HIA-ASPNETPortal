@@ -18,16 +18,10 @@ IIS, production TLS, production ACL, production database, or business approval.
 生产数据库或业务签收结论。
 
 .DESCRIPTION
-    中文：本脚本编排 P14.2 近真实发布演练：重新生成 FileSystem 发布包、生成 release manifest、
-    启动或复用 IIS Express、执行 smoke、记录外置配置边界和回滚 dry-run，并可选捕获主题截图近似证据。
-    它不修改真实 IIS、不连接生产数据库、不执行破坏性迁移、不写业务数据、不读取或输出真实连接串、密码、
-    Token、Cookie 或证书私钥，也不把本机/IIS Express 结果宣称为生产通过。
-    English: This script orchestrates the P14.2 near-target release rehearsal: it regenerates a filesystem publish
-    package, creates a release manifest, starts or reuses IIS Express, runs smoke checks, records external-config
-    boundaries and rollback dry-run evidence, and can optionally capture approximate theme screenshots. It does not
-    modify real IIS, connect to production databases, run destructive migrations, write business data, read or output
-    real connection strings, passwords, tokens, cookies, or certificate private keys, and it never claims that local
-    or IIS Express evidence is production approval.
+    <lang>
+      <zh-CN>本脚本编排 P14.2 近真实发布演练：重新生成 FileSystem 发布包、生成 release manifest、启动或复用 IIS Express、执行 smoke、记录外置配置边界和回滚 dry-run，并可选捕获主题截图近似证据。它不修改真实 IIS、不连接生产数据库、不执行破坏性迁移、不写业务数据、不读取或输出真实连接串、密码、Token、Cookie 或证书私钥，也不把本机/IIS Express 结果宣称为生产通过。</zh-CN>
+      <en>This script orchestrates the P14.2 near-target release rehearsal: it regenerates a filesystem publish package, creates a release manifest, starts or reuses IIS Express, runs smoke checks, records external-config boundaries and rollback dry-run evidence, and can optionally capture approximate theme screenshots. It does not modify real IIS, connect to production databases, run destructive migrations, write business data, read or output real connection strings, passwords, tokens, cookies, or certificate private keys, and it never claims that local or IIS Express evidence is production approval.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -83,6 +77,10 @@ $screenshotOutput = Join-Path $runDirectory 'theme-screenshots'
 $steps = New-Object 'System.Collections.Generic.List[object]'
 $startedIISExpress = $false
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入演练证据，并只创建指定输出目录/文件。</zh-CN>
+#   <en>Write rehearsal evidence as UTF-8 without a BOM, creating only the requested output directory/file.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -97,6 +95,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>为日志显示安全引用子进程参数；不改变实际传给 pwsh 的参数数组。</zh-CN>
+#   <en>Safely quote child-process arguments for log display without changing the argument array passed to pwsh.</en>
+# </lang>
 function Format-EvidenceArgument {
     param([string]$Value)
 
@@ -107,6 +109,10 @@ function Format-EvidenceArgument {
     return $Value
 }
 
+# <lang>
+#   <zh-CN>优先解析固定 PowerShell 7 路径并回退到 PATH；缺失执行器时明确失败。</zh-CN>
+#   <en>Prefer the fixed PowerShell 7 path and fall back to PATH; fail explicitly when no executor is available.</en>
+# </lang>
 function Get-PwshPath {
     $preferred = 'C:\Program Files\PowerShell\7\pwsh.exe'
     if (Test-Path -LiteralPath $preferred -PathType Leaf) {
@@ -121,6 +127,10 @@ function Get-PwshPath {
     throw 'PowerShell 7 (pwsh) was not found.'
 }
 
+# <lang>
+#   <zh-CN>将仓库内路径转换为稳定相对路径，仓库外路径保持绝对形式以避免证据歧义。</zh-CN>
+#   <en>Convert in-repository paths to stable relative paths while keeping external paths absolute to avoid evidence ambiguity.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([string]$Path)
 
@@ -137,6 +147,10 @@ function ConvertTo-RepoPath {
     return $fullPath
 }
 
+# <lang>
+#   <zh-CN>只探测指定 TCP 端口是否已有监听，不创建 IIS、不发送业务请求。</zh-CN>
+#   <en>Probe whether the specified TCP port is already listening without creating IIS or sending a business request.</en>
+# </lang>
 function Test-TcpPort {
     param(
         [string]$ServerHost,
@@ -156,6 +170,10 @@ function Test-TcpPort {
     }
 }
 
+# <lang>
+#   <zh-CN>追加低敏演练步骤结果并归一化日志路径/时间；不把成功记录扩展为生产批准。</zh-CN>
+#   <en>Add a low-sensitivity rehearsal step result with normalized log path/time; success is not production approval.</en>
+# </lang>
 function Add-StepResult {
     param(
         [string]$Name,
@@ -183,6 +201,10 @@ function Add-StepResult {
         })
 }
 
+# <lang>
+#   <zh-CN>以独立 PowerShell 7 子进程执行一个演练步骤并记录输出/退出码；必需步骤失败时抛出，禁止泄露秘密。</zh-CN>
+#   <en>Run one rehearsal step in an isolated PowerShell 7 process and record output/exit code; throw for required failures without exposing secrets.</en>
+# </lang>
 function Invoke-RehearsalStep {
     param(
         [string]$Name,
@@ -247,6 +269,10 @@ function Invoke-RehearsalStep {
     }
 }
 
+# <lang>
+#   <zh-CN>仅记录 Web.config/模板路径、存在性和目标环境边界，不读取外置 connectionStrings 内容。</zh-CN>
+#   <en>Record Web.config/template paths, existence and target-environment boundaries without reading external connectionStrings content.</en>
+# </lang>
 function Write-ConfigurationBoundaryEvidence {
     param([string]$OutputPath)
 
@@ -284,6 +310,10 @@ function Write-ConfigurationBoundaryEvidence {
     return $result
 }
 
+# <lang>
+#   <zh-CN>生成回滚 dry-run 证据和待补环境清单，不执行复制、恢复、IIS 或数据库回滚。</zh-CN>
+#   <en>Generate rollback dry-run evidence and pending-environment items without copying, restoring, IIS, or database rollback.</en>
+# </lang>
 function Write-RollbackDryRunEvidence {
     param(
         [string]$OutputPath,
@@ -434,8 +464,10 @@ try {
             -Command 'internal'
     }
     else {
-        # 中文：`pwsh -File` 不适合直接展开 string[] 参数，这里按主题拆成独立步骤，避免第二个主题误绑定到其它参数。
-        # English: `pwsh -File` does not safely expand string[] values here, so capture each theme in its own step.
+        # <lang>
+        #   <zh-CN>`pwsh -File` 不适合直接展开 string[] 参数，这里按主题拆成独立步骤，避免第二个主题误绑定到其它参数。</zh-CN>
+        #   <en>`pwsh -File` does not safely expand string[] values here, so capture each theme in its own step.</en>
+        # </lang>
         foreach ($themeName in @('EnterpriseLight', 'StateClassicLight')) {
             $themeOutput = Join-Path $screenshotOutput $themeName
             $screenshotArgs = @('-BaseUrl', $BaseUrl, '-OutputDirectory', $themeOutput, '-Themes', $themeName)
@@ -476,6 +508,10 @@ else {
 
 $requiredFailures = @($steps | Where-Object { $_.Required -and $_.Status -eq 'Failed' })
 $optionalFailures = @($steps | Where-Object { -not $_.Required -and $_.Status -eq 'Failed' })
+# <lang>
+#   <zh-CN>汇总必需/可选步骤、发布清单和 PendingTargetEnvironment；本机演练不声明真实生产证据。</zh-CN>
+#   <en>Summarize required/optional steps, release-manifest facts, and PendingTargetEnvironment; local rehearsal never claims real production evidence.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     SchemaVersion = 'p14.2.near-target-release-rehearsal.v1'
     GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
@@ -517,6 +553,10 @@ $summary = [pscustomobject][ordered]@{
 }
 
 $summaryJsonPath = Join-Path $runDirectory 'near-target-release-rehearsal.json'
+# <lang>
+#   <zh-CN>只向演练目录写入 JSON/Markdown 和内部 release entry；路径由脚本参数和仓库边界决定。</zh-CN>
+#   <en>Write JSON/Markdown and the internal release entry only under rehearsal paths selected by parameters and repository boundaries.</en>
+# </lang>
 Write-Utf8NoBomFile -Path $summaryJsonPath -Content (($summary | ConvertTo-Json -Depth 12) + [Environment]::NewLine)
 
 $markdownLines = @(
@@ -628,6 +668,10 @@ Write-Host ('Near-target release rehearsal JSON: {0}' -f (ConvertTo-RepoPath -Pa
 Write-Host ('Near-target release rehearsal README: {0}' -f (ConvertTo-RepoPath -Path (Join-Path $runDirectory 'README.md')))
 Write-Host ('Internal release entry: {0}' -f (ConvertTo-RepoPath -Path $releaseEntryPath))
 
+# <lang>
+#   <zh-CN>必需步骤失败且未显式 AllowFailures 时返回失败；AllowFailures 只放宽演练退出，不改变证据含义。</zh-CN>
+#   <en>Fail when required steps fail without explicit AllowFailures; AllowFailures relaxes rehearsal exit only, not evidence meaning.</en>
+# </lang>
 if ($requiredFailures.Count -gt 0 -and -not $AllowFailures) {
     throw ('P14.2 near-target release rehearsal contains required failed steps: {0}' -f $requiredFailures.Count)
 }

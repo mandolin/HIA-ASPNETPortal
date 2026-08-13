@@ -6,16 +6,10 @@ Checks default-credential and legacy password-risk markers.
 .LANG zh-CN
 检查默认凭据和旧口令风险标记。
 
-.LANG en
-Runs read-only checks for seeded default credentials, legacy password hashes,
-documentation warnings, setup scripts, and profile-specific risk expectations.
-It does not connect to a live database, does not verify real passwords, does not
-print secrets, and does not change setup scripts or Web.config.
-
-.LANG zh-CN
-只读检查默认凭据 seed、旧口令哈希、文档警告、安装脚本以及不同 profile 下的风险
-期望。它不连接实时数据库、不校验真实密码、不输出密钥，也不修改安装脚本或
-Web.config。
+<lang>
+  <en>Runs read-only checks for seeded default credentials, legacy password hashes, documentation warnings, setup scripts, and profile-specific risk expectations. It does not connect to a live database, verify real passwords, print secrets, or change setup scripts or Web.config.</en>
+  <zh-CN>只读检查默认凭据 seed、旧口令哈希、文档警告、安装脚本以及不同 profile 下的风险期望。它不连接实时数据库、不校验真实密码、不输出密钥，也不修改安装脚本或 Web.config。</zh-CN>
+</lang>
 
 .PARAMETER Profile
 .LANG en
@@ -83,6 +77,10 @@ $resolvedSetupPath = (Resolve-Path -LiteralPath $SetupPath).Path
 $resolvedDocsPath = (Resolve-Path -LiteralPath $DocsPath).Path
 $findings = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入低敏 JSON 证据；只创建指定输出目录，不写秘密值。</zh-CN>
+#   <en>Write low-sensitivity JSON evidence as UTF-8 without a BOM, creating only the requested output directory and no secrets.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [string]$Path,
@@ -98,12 +96,20 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, $encoding)
 }
 
+# <lang>
+#   <zh-CN>按 UTF-8 读取受限扫描目标文本；调用方负责路径范围，本函数不连接数据库。</zh-CN>
+#   <en>Read scoped scan-target text as UTF-8; callers own path scope, and this helper never connects to a database.</en>
+# </lang>
 function Get-Utf8Text {
     param([string]$LiteralPath)
 
     return [System.IO.File]::ReadAllText($LiteralPath, [System.Text.Encoding]::UTF8)
 }
 
+# <lang>
+#   <zh-CN>把证据路径归一化为仓库相对形式，仓库外路径保持稳定显示且不展开秘密内容。</zh-CN>
+#   <en>Normalize evidence paths to repository-relative form while keeping external paths stable without expanding secret content.</en>
+# </lang>
 function Get-RelativeDisplayPath {
     param([string]$LiteralPath)
 
@@ -116,6 +122,10 @@ function Get-RelativeDisplayPath {
     return $fullPath
 }
 
+# <lang>
+#   <zh-CN>追加低敏凭据风险结果；Severity 只影响汇总/退出，不代表已验证真实密码。</zh-CN>
+#   <en>Add a low-sensitivity credential-risk result; Severity affects summary/exit only and does not verify real passwords.</en>
+# </lang>
 function Add-CredentialRiskFinding {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info')]
@@ -148,6 +158,10 @@ function Add-CredentialRiskFinding {
     }
 }
 
+# <lang>
+#   <zh-CN>枚举受限 Setup/Source/Docs 文件集合，排除生成物和外部目录供静态扫描。</zh-CN>
+#   <en>Enumerate scoped Setup/Source/Docs files while excluding generated/external directories for static scanning.</en>
+# </lang>
 function Get-ReviewFiles {
     param([string[]]$Roots)
 
@@ -166,6 +180,10 @@ function Get-ReviewFiles {
     }
 }
 
+# <lang>
+#   <zh-CN>从匹配对象提取低敏路径/行号/摘要并净化疑似密码，避免证据输出秘密。</zh-CN>
+#   <en>Extract low-sensitivity path/line/summary evidence and redact password-like values before output.</en>
+# </lang>
 function Get-SanitizedEvidence {
     param([Microsoft.PowerShell.Commands.MatchInfo]$Match)
 
@@ -180,6 +198,10 @@ function Get-SanitizedEvidence {
     return ('{0}:{1}: {2}' -f (Get-RelativeDisplayPath -LiteralPath $Match.Path), $Match.LineNumber, $line)
 }
 
+# <lang>
+#   <zh-CN>在受限文件集合中执行正则扫描并限制匹配数，避免证据膨胀和敏感值扩散。</zh-CN>
+#   <en>Run regex scans over scoped files with a result limit to avoid evidence bloat and sensitive-value spread.</en>
+# </lang>
 function Find-ReviewMatches {
     param(
         [string[]]$Roots,
@@ -200,6 +222,10 @@ function Find-ReviewMatches {
     return $matches
 }
 
+# <lang>
+#   <zh-CN>对单个文本文件执行只读正则断言；缺失文件或未命中返回 false。</zh-CN>
+#   <en>Run a read-only regex assertion against one text file; return false for missing files or no match.</en>
+# </lang>
 function Test-TextContains {
     param(
         [string]$LiteralPath,
@@ -213,6 +239,10 @@ function Test-TextContains {
     return [regex]::IsMatch((Get-Utf8Text -LiteralPath $LiteralPath), $Pattern, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 }
 
+# <lang>
+#   <zh-CN>扫描模式只读取源码/Setup/Docs，不做 HTTP 登录、数据库连接或真实密码尝试。</zh-CN>
+#   <en>Keep the scan static over source/Setup/Docs with no HTTP login, database connection, or real-password attempt.</en>
+# </lang>
 Write-Host ('PROFILE: {0}' -f $Profile)
 Write-Host 'MODE: static source/setup/document scan only; no HTTP login attempt and no database connection.'
 
@@ -295,6 +325,10 @@ $warningCount = @($findings | Where-Object { $_.Severity -eq 'Warning' }).Count
 $infoCount = @($findings | Where-Object { $_.Severity -eq 'Info' }).Count
 $passCount = @($findings | Where-Object { $_.Severity -eq 'Pass' }).Count
 
+# <lang>
+#   <zh-CN>汇总低敏路径、计数和 findings；不把静态风险结果解释为真实凭据验证。</zh-CN>
+#   <en>Summarize low-sensitivity paths, counts, and findings without treating static risk results as real credential verification.</en>
+# </lang>
 $summary = [pscustomobject]@{
     Profile = $Profile
     SourcePath = $resolvedSourcePath
@@ -310,6 +344,10 @@ $summary = [pscustomobject]@{
     Findings = $findings
 }
 
+# <lang>
+#   <zh-CN>仅在提供 OutputJson 时写入 UTF-8 无 BOM 证据文件。</zh-CN>
+#   <en>Write the UTF-8-no-BOM evidence file only when OutputJson is supplied.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
     Write-Utf8NoBomFile -Path $OutputJson -Content (($summary | ConvertTo-Json -Depth 6) + [Environment]::NewLine)
     Write-Host ('JSON: {0}' -f $OutputJson)
@@ -317,6 +355,10 @@ if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
 
 Write-Host ('SUMMARY: Pass={0}; Warning={1}; Fail={2}; Info={3}' -f $passCount, $warningCount, $failCount, $infoCount)
 
+# <lang>
+#   <zh-CN>Fail 或显式 FailOnWarning 下 Warning 返回非零；不触发登录、数据库或配置写入。</zh-CN>
+#   <en>Return non-zero for Fail or Warning under explicit FailOnWarning without login, database, or configuration writes.</en>
+# </lang>
 if ($failCount -gt 0 -or ($FailOnWarning -and $warningCount -gt 0)) {
     exit 1
 }

@@ -7,15 +7,10 @@ Validates the public Markdown documentation surface.
 验证公开 Markdown 文档面。
 
 .DESCRIPTION
-.LANG en
-Checks public Markdown entries, relative links, private-path leakage, credential
-assignment patterns, generated-directory boundaries, and required public guide
-markers. The gate intentionally ignores WorkZone and local generated output
-unless those paths are explicitly declared as public.
-
-.LANG zh-CN
-检查公开 Markdown 入口、相对链接、私有路径泄露、凭据赋值模式、生成目录边界和必需公开指南标记。
-除非路径被明确声明为公开面，本门禁会刻意忽略 WorkZone 和本地生成输出。
+<lang>
+  <zh-CN>检查公开 Markdown 入口、相对链接、私有路径泄露、凭据赋值模式、生成目录边界和必需公开指南标记。除非路径被明确声明为公开面，本门禁会刻意忽略 WorkZone 和本地生成输出。</zh-CN>
+  <en>Check public Markdown entries, relative links, private-path leakage, credential assignment patterns, generated-directory boundaries, and required public guide markers. The gate intentionally ignores WorkZone and local generated output unless those paths are explicitly declared as public.</en>
+</lang>
 #>
 [CmdletBinding()]
 param()
@@ -28,11 +23,19 @@ $ErrorActionPreference = 'Stop'
 #   <en>This gate reads only public Markdown, the Git index, and declared generated-directory boundaries. It never accesses WorkZone, the network, databases, or documentation generators.</en>
 # </lang>
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+# <lang>
+#   <zh-CN>正则只用于识别公开文档中的链接、绝对路径和凭据赋值风险，不读取网络或外部仓库。</zh-CN>
+#   <en>These expressions identify links, absolute paths, and credential-assignment risks in public docs without reading the network or external repositories.</en>
+# </lang>
 $checks = New-Object 'System.Collections.Generic.List[object]'
 $linkPattern = [regex]'\[(?<label>[^\]]+)\]\((?<target>[^)]+)\)'
 $absolutePathPattern = [regex]'(?<![A-Za-z0-9_])(?<path>[A-Za-z]:[\\/][^\r\n\x60"''<>]+)'
 $secretAssignmentPattern = [regex]'(?im)^\s*(?:password|pwd|token|api[_-]?key|secret|connectionstring)\s*[:=]\s*["''][^"'']+'
 
+# <lang>
+#   <zh-CN>追加结构化公开文档检查结果；本 helper 不改变输入文件或 Git 索引。</zh-CN>
+#   <en>Append one structured public-documentation check without changing input files or the Git index.</en>
+# </lang>
 function Add-PortalCheck {
     param(
         [Parameter(Mandatory = $true)]
@@ -52,11 +55,11 @@ function Add-PortalCheck {
         })
 }
 
+# <lang>
+#   <zh-CN>只从 Git 已追踪文件筛选公开文档面，避免未跟踪草稿、WorkZone 资料或生成物改变门禁结果。</zh-CN>
+#   <en>Select the public documentation surface from Git-tracked files only so untracked drafts, WorkZone material, or generated output cannot change the gate result.</en>
+# </lang>
 function Get-PublicMarkdownFiles {
-    # <lang>
-    #   <zh-CN>只从 Git 已追踪文件筛选公开文档面，避免未跟踪草稿、WorkZone 资料或生成物改变门禁结果。</zh-CN>
-    #   <en>Select the public documentation surface from Git-tracked files only so untracked drafts, WorkZone material, or generated output cannot change the gate result.</en>
-    # </lang>
     $trackedFiles = @(& git -C $repositoryRoot ls-files -- '*.md')
     if ($LASTEXITCODE -ne 0) {
         throw "Git 无法列出已追踪 Markdown，退出代码：$LASTEXITCODE"
@@ -70,6 +73,10 @@ function Get-PublicMarkdownFiles {
         } | Sort-Object)
 }
 
+# <lang>
+#   <zh-CN>检查公开 Markdown 的相对链接、外部链接和禁止的 WorkZone/.serena 目标，返回外部链接数量。</zh-CN>
+#   <en>Check public Markdown relative links, external links, and forbidden WorkZone/.serena targets, returning the external-link count.</en>
+# </lang>
 function Test-RelativeMarkdownLinks {
     param(
         [Parameter(Mandatory = $true)]
@@ -139,6 +146,10 @@ function Test-RelativeMarkdownLinks {
     return $externalLinkCount
 }
 
+# <lang>
+#   <zh-CN>检查公开文档中的绝对本机路径与凭据赋值模式，只报告风险，不泄露匹配正文。</zh-CN>
+#   <en>Check public docs for absolute local paths and credential-assignment patterns, reporting risks without exposing matched content.</en>
+# </lang>
 function Test-PublicDocumentationPrivacy {
     param(
         [Parameter(Mandatory = $true)]
@@ -187,11 +198,19 @@ function Test-PublicDocumentationPrivacy {
     Add-PortalCheck -Name 'No credential assignment patterns' -Passed ($secretAssignments.Count -eq 0) -Detail $secretAssignmentDetail
 }
 
+# <lang>
+#   <zh-CN>读取 Git 已追踪公开 Markdown 并要求至少存在一个输入，避免空集误报通过。</zh-CN>
+#   <en>Read Git-tracked public Markdown and require at least one input so an empty set cannot pass accidentally.</en>
+# </lang>
 $markdownFiles = Get-PublicMarkdownFiles
 if ($markdownFiles.Count -eq 0) {
     throw '未找到公开 Markdown 输入。'
 }
 
+# <lang>
+#   <zh-CN>验证根 README 到公开文档索引的入口，再检查 docs 索引覆盖每份公开文档。</zh-CN>
+#   <en>Verify the root README entry to the public documentation index, then check that the docs index covers every public document.</en>
+# </lang>
 $rootReadme = [System.IO.File]::ReadAllText((Join-Path $repositoryRoot 'README.md'))
 Add-PortalCheck -Name 'Root documentation entry' -Passed $rootReadme.Contains('(docs/README.md)') -Detail 'README.md -> docs/README.md'
 
@@ -207,6 +226,10 @@ else {
 }
 Add-PortalCheck -Name 'Public documentation index coverage' -Passed ($missingIndexEntries.Count -eq 0) -Detail $indexCoverageDetail
 
+# <lang>
+#   <zh-CN>执行链接与隐私检查后，针对生成目录逐项确认未被 Git 追踪，保持公开面最小化。</zh-CN>
+#   <en>Run link and privacy checks, then confirm generated directories are not Git-tracked to keep the public surface minimal.</en>
+# </lang>
 $externalLinkCount = Test-RelativeMarkdownLinks -MarkdownFiles $markdownFiles
 Test-PublicDocumentationPrivacy -MarkdownFiles $markdownFiles
 
@@ -234,6 +257,10 @@ foreach ($relativeDirectory in $excludedGeneratedDirectories) {
     Add-PortalCheck -Name ('Generated-directory boundary: ' + $relativeDirectory) -Passed ($trackedFiles.Count -eq 0) -Detail $generatedDirectoryDetail
 }
 
+# <lang>
+#   <zh-CN>汇总门禁结果并在任一检查失败时返回失败；本流程不生成或修改公开文档。</zh-CN>
+#   <en>Summarize gate results and fail when any check fails; this flow does not generate or modify public documentation.</en>
+# </lang>
 $failedChecks = @($checks | Where-Object { -not $_.Passed })
 $checks
 [pscustomobject][ordered]@{

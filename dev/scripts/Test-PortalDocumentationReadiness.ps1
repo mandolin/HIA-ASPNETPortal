@@ -1,15 +1,33 @@
 <#
 .SYNOPSIS
-    Checks the Portal documentation toolchain readiness contract.
+<lang>
+  <zh-CN>检查门户文档工具链的可交接 readiness 契约。</zh-CN>
+  <en>Checks the Portal documentation toolchain readiness contract.</en>
+</lang>
 
 .DESCRIPTION
-    中文：本脚本只读取仓库文件、Git 索引和可选的 HIA-Documentation-Sys 通知目录，检查公开文档、
-    XML 文档、JSDoc/DotNetDoc pilot、生成目录边界、coverage 分层和通知读取机制是否处于可交接状态。
-    它不改写源码注释、不执行 npm、不构建解决方案、不生成文档、不复制通知，也不访问数据库或网络。
-    English: This script reads repository files, the Git index, and the optional HIA-Documentation-Sys notification
-    directory to check whether public docs, XML docs, JSDoc/DotNetDoc pilots, generated-output boundaries, coverage tiers,
-    and notification pull mechanics are ready for handoff. It never rewrites comments, runs npm, builds the solution,
-    generates docs, copies notifications, or accesses databases or the network.
+<lang>
+  <zh-CN>本脚本只读取仓库文件、Git 索引和可选的 HIA-Documentation-Sys 通知目录，检查公开文档、XML 文档、JSDoc/DotNetDoc pilot、生成目录边界、coverage 分层和通知读取机制是否处于可交接状态。它不改写源码注释、不执行 npm、不构建解决方案、不生成文档、不复制通知，也不访问数据库或网络。</zh-CN>
+  <en>This script reads repository files, the Git index, and the optional HIA-Documentation-Sys notification directory to check whether public docs, XML docs, JSDoc/DotNetDoc pilots, generated-output boundaries, coverage tiers, and notification pull mechanics are ready for handoff. It never rewrites comments, runs npm, builds the solution, generates docs, copies notifications, or accesses databases or the network.</en>
+</lang>
+
+.PARAMETER HiaDocumentationRoot
+<lang>
+  <zh-CN>可选的 HIA-Documentation-Sys 仓库根目录；省略时使用同级仓库路径。</zh-CN>
+  <en>Optional HIA-Documentation-Sys repository root; when omitted, use the sibling repository path.</en>
+</lang>
+
+.PARAMETER OutputJson
+<lang>
+  <zh-CN>可选的 readiness JSON 输出路径；指定后只写入调用方明确提供的文件。</zh-CN>
+  <en>Optional readiness JSON output path; when supplied, write only to the caller-provided file.</en>
+</lang>
+
+.PARAMETER FailOnWarning
+<lang>
+  <zh-CN>将 Warning 结果升级为失败退出；不改变只读检查本身。</zh-CN>
+  <en>Promote Warning results to a failing exit code without changing the read-only checks.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -23,6 +41,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# <lang>
+#   <zh-CN>仓库根目录从脚本路径解析，Git 索引读取失败时立即停止，避免 readiness 结果缺少完整输入。</zh-CN>
+#   <en>Resolve the repository root from the script path and stop when the Git index cannot be read, avoiding a readiness result with incomplete inputs.</en>
+# </lang>
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $checks = New-Object 'System.Collections.Generic.List[object]'
 $trackedFiles = @(& git -C $repoRoot ls-files)
@@ -31,9 +53,17 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ([string]::IsNullOrWhiteSpace($HiaDocumentationRoot)) {
+    # <lang>
+    #   <zh-CN>默认只定位同级 HIA-Documentation-Sys 通知源；调用方可显式指定其他只读工作副本。</zh-CN>
+    #   <en>Default to the sibling HIA-Documentation-Sys notification source while allowing an explicit alternate read-only worktree.</en>
+    # </lang>
     $HiaDocumentationRoot = Join-Path (Split-Path -Parent $repoRoot) 'HIA-Documentation-Sys'
 }
 
+# <lang>
+#   <zh-CN>写 JSON 的 helper 只用于调用方指定的结果文件，并固定 UTF-8 无 BOM，避免工具版本差异改变证据编码。</zh-CN>
+#   <en>The JSON helper writes only to the caller-specified result file and fixes UTF-8 without BOM so tool-version differences cannot change evidence encoding.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -48,6 +78,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>追加一条结构化 readiness 检查并输出低敏摘要；Evidence 只携带调用方提供的路径或说明。</zh-CN>
+#   <en>Append one structured readiness check and print a low-sensitivity summary; Evidence carries only caller-supplied paths or descriptions.</en>
+# </lang>
 function Add-DocumentationCheck {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info', 'Pending')]
@@ -73,24 +107,40 @@ function Add-DocumentationCheck {
     }
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 读取文本输入，不在读取阶段改写文件或生成副本。</zh-CN>
+#   <en>Read text inputs as UTF-8 without BOM and do not rewrite files or create copies while reading.</en>
+# </lang>
 function Get-Utf8Text {
     param([Parameter(Mandatory = $true)][string]$LiteralPath)
 
     return [System.IO.File]::ReadAllText($LiteralPath, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>把仓库相对路径规范化为当前仓库绝对路径，避免检查越过既定根目录。</zh-CN>
+#   <en>Resolve a repository-relative path under the current repository root so checks cannot escape the declared boundary.</en>
+# </lang>
 function Get-RepoPath {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
     return Join-Path $repoRoot ($RelativePath -replace '/', '\')
 }
 
+# <lang>
+#   <zh-CN>只依据启动时读取的 Git 索引判断路径是否已追踪，不把未跟踪草稿或生成物纳入 readiness。</zh-CN>
+#   <en>Use only the Git index captured at startup to decide whether a path is tracked, excluding untracked drafts and generated artifacts from readiness.</en>
+# </lang>
 function Test-TrackedPath {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
     return $trackedFiles -contains ($RelativePath -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>在受控仓库文件中执行不区分大小写的文本契约检查；缺失文件直接产生失败结果。</zh-CN>
+#   <en>Evaluate a case-insensitive text contract within a controlled repository file; a missing file yields a failed result.</en>
+# </lang>
 function Test-TextContains {
     param(
         [Parameter(Mandatory = $true)][string]$RelativePath,
@@ -102,6 +152,10 @@ function Test-TextContains {
         [regex]::IsMatch((Get-Utf8Text -LiteralPath $path), $Pattern, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 }
 
+# <lang>
+#   <zh-CN>统计指定仓库相对目录下的 Git 已追踪路径，用于生成物公开边界门禁。</zh-CN>
+#   <en>Count Git-tracked paths under a repository-relative directory for generated-output publication boundaries.</en>
+# </lang>
 function Get-TrackedCountUnder {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -113,8 +167,16 @@ function Get-TrackedCountUnder {
         }).Count
 }
 
+# <lang>
+#   <zh-CN>从此处开始执行只读 readiness 编排；后续检查不得运行 npm、构建、通知复制或源码改写。</zh-CN>
+#   <en>Begin the read-only readiness orchestration; subsequent checks must not run npm, build, copy notifications, or rewrite source.</en>
+# </lang>
 Write-Host 'MODE: read-only documentation readiness check.'
 
+# <lang>
+#   <zh-CN>声明交接所需的文档脚本集合，缺失或未追踪任一项都会使 DOC-SCRIPTS 失败。</zh-CN>
+#   <en>Declare the scripts required for handoff; any missing or untracked item fails DOC-SCRIPTS.</en>
+# </lang>
 $requiredScripts = @(
     'dev/scripts/Get-PortalDocumentationBaseline.ps1',
     'dev/scripts/Test-PortalXmlDocumentation.ps1',
@@ -360,6 +422,10 @@ else {
     Add-DocumentationCheck -Severity Fail -Code 'DOC-DOTNETDOC-PILOT' -Message 'DotNetDoc pilot isolation, input, output, audit override or checker contract needs review.'
 }
 
+# <lang>
+#   <zh-CN>将历史或生成目录作为不可公开追踪的边界逐项检查，任何已追踪文件都会失败。</zh-CN>
+#   <en>Check historical or generated directories as non-public tracking boundaries; any tracked file fails the gate.</en>
+# </lang>
 $generatedBoundaries = @(
     'src/Documentation',
     'src/DoxyGen',
@@ -380,6 +446,10 @@ else {
     Add-DocumentationCheck -Severity Fail -Code 'DOC-GENERATED-BOUNDARY' -Message 'Generated or historical documentation output paths are tracked.' -Evidence ($trackedGenerated -join '; ')
 }
 
+# <lang>
+#   <zh-CN>通知源只做可选只读探测；缺失时记录 Pending，不复制通知也不把外部内容写入本仓库。</zh-CN>
+#   <en>Probe the notification source as optional read-only input; record Pending when absent, without copying notices or writing external content into this repository.</en>
+# </lang>
 $notifyRoot = Join-Path $HiaDocumentationRoot 'work-zone\notify'
 if (-not (Test-Path -LiteralPath $notifyRoot -PathType Container)) {
     Add-DocumentationCheck -Severity Pending -Code 'DOC-HIA-NOTIFY-SOURCE' -Message 'HIA-Documentation-Sys notify source is not available on this machine.' -Evidence $notifyRoot
@@ -390,8 +460,16 @@ else {
     Add-DocumentationCheck -Severity $severity -Code 'DOC-HIA-NOTIFY-SOURCE' -Message ('HIA-Documentation-Sys notify source is readable. Notifications={0}; ContentCopied=False' -f $notifications.Count) -Evidence $notifyRoot
 }
 
+# <lang>
+#   <zh-CN>显式记录本次 readiness 的无副作用契约，避免调用方把门禁误解为构建或生成流程。</zh-CN>
+#   <en>Record the readiness no-side-effect contract explicitly so callers do not mistake the gate for a build or generation flow.</en>
+# </lang>
 Add-DocumentationCheck -Severity Pass -Code 'DOC-NO-CODE-REWRITE' -Message 'Readiness completed without rewriting source comments, generating docs, copying notifications, or changing dependencies.'
 
+# <lang>
+#   <zh-CN>汇总所有检查及失败/警告/Pending 计数；只有调用方显式指定 OutputJson 时才写文件。</zh-CN>
+#   <en>Summarize all checks and failure/warning/pending counts; write a file only when OutputJson is explicit.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
     HiaDocumentationRoot = $HiaDocumentationRoot
@@ -405,10 +483,18 @@ $summary = [pscustomobject][ordered]@{
 $summary
 
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
+    # <lang>
+    #   <zh-CN>输出路径由调用方控制，写入保持 UTF-8 无 BOM，并不复制通知正文。</zh-CN>
+    #   <en>The caller controls the output path; writes remain UTF-8 without BOM and never copy notice bodies.</en>
+    # </lang>
     Write-Utf8NoBomFile -Path $OutputJson -Content (($summary | ConvertTo-Json -Depth 8) + [Environment]::NewLine)
     Write-Host ('JSON: {0}' -f $OutputJson)
 }
 
+# <lang>
+#   <zh-CN>失败检查始终返回失败；只有 -FailOnWarning 才把警告升级为失败，不改变检查内容。</zh-CN>
+#   <en>Failed checks always return failure; only -FailOnWarning promotes warnings, without changing the checks themselves.</en>
+# </lang>
 if ($summary.FailedChecks -gt 0 -or ($FailOnWarning -and $summary.WarningChecks -gt 0)) {
     exit 1
 }

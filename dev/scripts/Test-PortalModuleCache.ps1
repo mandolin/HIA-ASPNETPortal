@@ -7,15 +7,10 @@ Runs the module cache isolation proof against a test database configuration.
 针对测试数据库配置运行模块缓存隔离 proof。
 
 .DESCRIPTION
-.LANG en
-Uses an external Portal connection string, creates temporary ModuleProbe state,
-starts an isolated IIS Express instance, verifies cache behavior, and restores
-database state afterward. The script is intentionally restricted to the Portal SQL
-Server provider and should be run only against a disposable development database.
-
-.LANG zh-CN
-使用外置 Portal 连接串创建临时 ModuleProbe 状态，启动隔离 IIS Express 实例，验证缓存行为，并在结束后恢复
-数据库状态。本脚本有意限制为 Portal SQL Server provider，只应针对可丢弃的开发数据库运行。
+<lang>
+  <en>Uses an external Portal connection string, creates temporary ModuleProbe state, starts an isolated IIS Express instance, verifies cache behavior, and restores database state afterward. The script is intentionally restricted to the Portal SQL Server provider and should be run only against a disposable development database.</en>
+  <zh-CN>使用外置 Portal 连接串创建临时 ModuleProbe 状态，启动隔离 IIS Express 实例，验证缓存行为，并在结束后恢复数据库状态。本脚本有意限制为 Portal SQL Server provider，只应针对可丢弃的开发数据库运行。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringsConfigPath
 .LANG en
@@ -54,6 +49,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# <lang>
+#   <zh-CN>以下状态只属于本次隔离缓存 proof：测试 token、临时模块标识、包状态快照和 IIS 站点生命周期，不代表生产数据。</zh-CN>
+#   <en>The state below belongs only to this isolated cache proof: test token, temporary module identifiers, package snapshot, and IIS site lifetime; it is not production data.</en>
+# </lang>
 $repoRoot = Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')
 $packageId = 'HIA.ModuleProbe'
 $testToken = 'P3CacheProbe-' + [Guid]::NewGuid().ToString('N')
@@ -63,6 +62,10 @@ $moduleId = 0
 $stateSnapshot = $null
 $startedCacheSite = $false
 
+# <lang>
+#   <zh-CN>读取并校验唯一 Portal 外置连接串及 SQL Server provider，拒绝空值、重复项和非预期 provider。</zh-CN>
+#   <en>Reads and validates the single external Portal connection string and SQL Server provider, rejecting empty, duplicate, or unexpected provider entries.</en>
+# </lang>
 function Get-ExternalPortalConnectionString {
     param([string]$Path)
 
@@ -90,6 +93,10 @@ function Get-ExternalPortalConnectionString {
     return $entries[0].connectionString
 }
 
+# <lang>
+#   <zh-CN>将可空文本绑定为参数化 NVarChar，保持 NULL 语义并阻断 SQL 拼接。</zh-CN>
+#   <en>Binds nullable text as parameterized NVarChar, preserving NULL semantics and preventing SQL concatenation.</en>
+# </lang>
 function Add-TextParameter {
     param(
         [System.Data.SqlClient.SqlCommand]$Command,
@@ -102,6 +109,10 @@ function Add-TextParameter {
     $parameter.Value = if ($null -eq $Value) { [DBNull]::Value } else { $Value }
 }
 
+# <lang>
+#   <zh-CN>为 Tab、模块和模块定义键绑定类型化 Int 参数，避免字符串转换影响缓存 proof。</zh-CN>
+#   <en>Binds typed Int parameters for tab, module, and module-definition keys so string conversion cannot affect the cache proof.</en>
+# </lang>
 function Add-IntParameter {
     param(
         [System.Data.SqlClient.SqlCommand]$Command,
@@ -113,6 +124,10 @@ function Add-IntParameter {
     $parameter.Value = $Value
 }
 
+# <lang>
+#   <zh-CN>执行只读标量 SQL，并在 finally 释放命令；调用方负责参数化和连接生命周期。</zh-CN>
+#   <en>Executes scalar SQL and disposes the command in finally; callers own parameter binding and connection lifetime.</en>
+# </lang>
 function Invoke-SqlScalar {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -135,6 +150,10 @@ function Invoke-SqlScalar {
     }
 }
 
+# <lang>
+#   <zh-CN>执行临时状态写入/删除 SQL，并在 finally 释放命令；不吞掉数据库异常。</zh-CN>
+#   <en>Executes temporary-state insert/update/delete SQL and disposes the command in finally without hiding database errors.</en>
+# </lang>
 function Invoke-SqlNonQuery {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -157,6 +176,10 @@ function Invoke-SqlNonQuery {
     }
 }
 
+# <lang>
+#   <zh-CN>读取模块包状态完整快照，区分不存在、NULL Note 和可恢复审计字段，并保证 reader/command 释放。</zh-CN>
+#   <en>Reads the complete package-state snapshot, distinguishing absence, NULL Note, and restorable audit fields while releasing reader and command resources.</en>
+# </lang>
 function Get-PackageStateSnapshot {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -191,6 +214,10 @@ WHERE [PackageId] = @PackageId;
     }
 }
 
+# <lang>
+#   <zh-CN>以固定测试 actor 和当前 UTC 时间参数化写入/更新临时模块包状态，供缓存身份切换验证。</zh-CN>
+#   <en>Parameterizes temporary package-state insert/update with a fixed test actor and current UTC time for cache-identity transitions.</en>
+# </lang>
 function Set-PackageState {
     param(
         [System.Data.SqlClient.SqlConnection]$Connection,
@@ -227,6 +254,10 @@ END
     }
 }
 
+# <lang>
+#   <zh-CN>依据初始快照恢复包状态；原本不存在时删除临时记录，保持 proof 的最小持久化副作用。</zh-CN>
+#   <en>Restores package state from the initial snapshot; deletes the temporary row when none existed, minimizing persistent proof side effects.</en>
+# </lang>
 function Restore-PackageState {
     param([System.Data.SqlClient.SqlConnection]$Connection)
 
@@ -260,6 +291,10 @@ WHERE [PackageId] = @PackageId;
     }
 }
 
+# <lang>
+#   <zh-CN>在固定 HTTP 200 目标上进行有限轮询，为隔离站点首次编译留出时间但最终失败不降级。</zh-CN>
+#   <en>Polls the fixed target for HTTP 200 with a bounded retry window for first compilation, then fails instead of degrading.</en>
+# </lang>
 function Invoke-PortalPage {
     param([string]$Uri)
 
@@ -283,6 +318,10 @@ function Invoke-PortalPage {
     throw 'The isolated cache-proof site did not return HTTP 200 before the timeout.'
 }
 
+# <lang>
+#   <zh-CN>从 ModuleProbe HTML 中提取可比较的 Rendered UTC marker，缺失时拒绝继续缓存身份断言。</zh-CN>
+#   <en>Extracts a comparable Rendered UTC marker from ModuleProbe HTML and refuses to continue cache-identity assertions when absent.</en>
+# </lang>
 function Get-RenderedUtcMarker {
     param([string]$Html)
 
@@ -297,6 +336,10 @@ function Get-RenderedUtcMarker {
     return [System.Net.WebUtility]::HtmlDecode($match.Groups['value'].Value).Trim()
 }
 
+# <lang>
+#   <zh-CN>断言页面包含预期低敏文本；失败时抛出调用方提供的诊断消息。</zh-CN>
+#   <en>Asserts that the page contains expected low-sensitivity text and throws the caller-provided diagnostic on failure.</en>
+# </lang>
 function Assert-Contains {
     param(
         [string]$Html,
@@ -309,6 +352,10 @@ function Assert-Contains {
     }
 }
 
+# <lang>
+#   <zh-CN>断言页面不包含禁用模块或样式标识，防止包停用后仍误判为成功。</zh-CN>
+#   <en>Asserts that the page omits disabled-module or stylesheet markers so a disabled package cannot be misreported as successful.</en>
+# </lang>
 function Assert-DoesNotContain {
     param(
         [string]$Html,
@@ -321,6 +368,10 @@ function Assert-DoesNotContain {
     }
 }
 
+# <lang>
+#   <zh-CN>主流程先校验 schema、发现 Tab、创建临时模块和包状态，再切换到隔离 IIS/HTTP 缓存断言。</zh-CN>
+#   <en>The main flow validates the schema, discovers a tab, creates temporary module and package state, then switches to isolated IIS/HTTP cache assertions.</en>
+# </lang>
 $connection = $null
 try {
     $connection = [System.Data.SqlClient.SqlConnection]::new((Get-ExternalPortalConnectionString -Path $ConnectionStringsConfigPath))
@@ -346,6 +397,10 @@ ORDER BY [TabOrder], [TabId];
     }
 
     $stateSnapshot = Get-PackageStateSnapshot -Connection $connection
+# <lang>
+#   <zh-CN>所有临时定义/实例写入均使用参数化 SQL，并以唯一测试 token 作为可清理关联键。</zh-CN>
+#   <en>All temporary definition/instance writes use parameterized SQL and the unique test token as a cleanup correlation key.</en>
+# </lang>
     $definitionId = [int](Invoke-SqlScalar -Connection $connection -CommandText @'
 INSERT INTO [dbo].[PortalCfg_ModuleDefinitions]
     ([FriendlyName], [DesktopSourceFile], [MobileSourceFile])
@@ -381,6 +436,10 @@ VALUES
     $connection.Dispose()
     $connection = $null
 
+# <lang>
+#   <zh-CN>启动前再次检查端口并调用独立 IIS 入口；后续 URI 和 marker 只指向本次临时 Tab/模块。</zh-CN>
+#   <en>Checks the port again before invoking the independent IIS entry point; subsequent URI and markers target only this temporary tab/module.</en>
+# </lang>
     $listening = Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($listening) {
         throw "The isolated cache-proof port $Port is already in use."
@@ -395,6 +454,10 @@ VALUES
     # </lang>
     $moduleMarker = 'Id={0}; Source=DesktopModules/ModuleProbe/ModuleProbe.ascx' -f $moduleId
 
+# <lang>
+#   <zh-CN>依次验证首次渲染、缓存命中、包状态修订失效、停用隐藏和重新启用新身份，保持每步的观察值独立。</zh-CN>
+#   <en>Verifies first render, cache hit, package-state invalidation, disabled suppression, and fresh identity after re-enable with independent observations.</en>
+# </lang>
     $firstHtml = Invoke-PortalPage -Uri $probeUri
     Assert-Contains -Html $firstHtml -Expected $moduleMarker -Message 'The temporary ModuleProbe instance was not rendered on the first request.'
     Assert-Contains -Html $firstHtml -Expected 'DesktopModules/ModuleProbe/Styles/ModuleProbe.css' -Message 'The ModuleProbe CSS resource was not rendered while the package was enabled.'
@@ -450,6 +513,10 @@ VALUES
     Write-Host '[PASS] Re-enabled package rendered a fresh ModuleProbe cache entry.'
 }
 finally {
+# <lang>
+#   <zh-CN>无论 proof 成功或失败，都释放连接、停止本次站点、删除临时模块/定义并恢复包状态；清理异常继续传播。</zh-CN>
+#   <en>Whether the proof passes or fails, releases connections, stops this site, deletes temporary module/definition rows, and restores package state while propagating cleanup errors.</en>
+# </lang>
     if ($connection) {
         $connection.Dispose()
     }

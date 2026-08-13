@@ -3,11 +3,10 @@
     Checks the P12.3 lightweight work-item contract without changing the database.
 
 .DESCRIPTION
-    中文：本脚本只做静态门禁，确认轻量待办的 SQL、契约、Unity 注册、后台入口、
-    员工资料更正同步点和迁移工具声明仍保持连通。
-    English: This script performs static checks only, ensuring the lightweight work-item SQL,
-    contracts, Unity registration, administration entry, employee-profile correction sync points,
-    and migration-tool declarations remain connected.
+    <lang>
+      <zh-CN>本脚本只做静态门禁，确认轻量待办的 SQL、契约、Unity 注册、后台入口、员工资料更正同步点和迁移工具声明仍保持连通。</zh-CN>
+      <en>This script performs static checks only, ensuring the lightweight work-item SQL, contracts, Unity registration, administration entry, employee-profile correction sync points, and migration-tool declarations remain connected.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -21,6 +20,10 @@ $ErrorActionPreference = 'Stop'
 
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>追加轻量待办静态检查结果；Evidence 只保存调用方提供的低敏路径或说明。</zh-CN>
+#   <en>Adds a lightweight work-item static check result; Evidence contains only low-sensitivity paths or descriptions supplied by the caller.</en>
+# </lang>
 function Add-WorkItemCheck {
     param(
         [Parameter(Mandatory = $true)][string]$Code,
@@ -37,6 +40,10 @@ function Add-WorkItemCheck {
         })
 }
 
+# <lang>
+#   <zh-CN>读取仓库内必需文本；缺失文件立即失败，读取动作不连接数据库或解析连接串。</zh-CN>
+#   <en>Reads required repository text; a missing file fails immediately, and reading never connects to a database or parses a connection string.</en>
+# </lang>
 function Get-PortalText {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -48,6 +55,10 @@ function Get-PortalText {
     return [System.IO.File]::ReadAllText($path, [System.Text.Encoding]::UTF8)
 }
 
+# <lang>
+#   <zh-CN>检查文本是否按序包含全部稳定断言片段；这是静态契约检查，不执行片段代表的动作。</zh-CN>
+#   <en>Checks whether text contains every stable assertion fragment; this is a static contract check and does not execute the represented actions.</en>
+# </lang>
 function Test-ContainsAll {
     param(
         [Parameter(Mandatory = $true)][string]$Text,
@@ -63,6 +74,10 @@ function Test-ContainsAll {
     return $true
 }
 
+# <lang>
+#   <zh-CN>以下阶段只读取 SQL、C#、ASPX、XML、项目和迁移工具文本，验证轻量待办契约的静态连通性。</zh-CN>
+#   <en>The following stage reads SQL, C#, ASPX, XML, project, and migration-tool text only to verify static lightweight work-item contract connectivity.</en>
+# </lang>
 $workItemsSql = Get-PortalText 'src/Setup/PortalBiz_WorkItems.sql'
 $workItemEventsSql = Get-PortalText 'src/Setup/PortalBiz_WorkItemEvents.sql'
 $workItemContract = Get-PortalText 'src/Portal.Components/IPortalWorkItemDb.cs'
@@ -234,6 +249,10 @@ Add-WorkItemCheck `
     -Message 'Migration manifest, SQL version matrix, and optional SQL compatibility checks know about the P12.3 work-item scripts.' `
     -Evidence 'dev/scripts/*Migration*.ps1; Test-PortalSql*.ps1'
 
+# <lang>
+#   <zh-CN>汇总只反映静态断言结果；通过不等于数据库迁移、权限、Unity 运行时或后台页面已经回归。</zh-CN>
+#   <en>The summary reflects static assertions only; passing does not prove database migration, permissions, Unity runtime, or administration-page regression.</en>
+# </lang>
 $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })
 $warningChecks = @($checks | Where-Object { $_.Status -eq 'Warning' })
 $result = [pscustomobject]@{
@@ -244,6 +263,10 @@ $result = [pscustomobject]@{
     Checks       = @($checks.ToArray())
 }
 
+# <lang>
+#   <zh-CN>只有显式提供 OutputJson 才写入 JSON；失败检查通过异常退出，不伪造通过结果。</zh-CN>
+#   <en>JSON is written only when OutputJson is explicitly supplied; failed checks exit through an exception and never fabricate a pass.</en>
+# </lang>
 if ($OutputJson) {
     $jsonPath = if ([System.IO.Path]::IsPathRooted($OutputJson)) {
         $OutputJson

@@ -3,13 +3,10 @@
     Builds a read-only P14.1 target-environment readiness evidence package.
 
 .DESCRIPTION
-    中文：本脚本用于 P14.1，把目标环境矩阵、当前可用证据和不阻塞 Pending 项汇总成证据包。
-    它只读取仓库文件并调用现有只读门禁；不发布文件、不修改 IIS、不连接真实生产库、不写业务数据库、
-    不读取外置敏感配置，也不伪造真实生产环境通过证据。
-    English: This script builds the P14.1 target-environment readiness evidence package from the target matrix,
-    currently available evidence, and non-blocking Pending items. It only reads repository files and invokes
-    existing read-only gates; it does not publish files, change IIS, connect to real production databases, write
-    business data, read external secret configuration, or claim unverified production evidence.
+    <lang>
+      <zh-CN>本脚本用于 P14.1，把目标环境矩阵、当前可用证据和不阻塞 Pending 项汇总成证据包。它只读取仓库文件并调用现有只读门禁；不发布文件、不修改 IIS、不连接真实生产库、不写业务数据库、不读取外置敏感配置，也不伪造真实生产环境通过证据。</zh-CN>
+      <en>This script builds the P14.1 target-environment readiness evidence package from the target matrix, currently available evidence, and non-blocking Pending items. It only reads repository files and invokes existing read-only gates; it does not publish files, change IIS, connect to real production databases, write business data, read external secret configuration, or claim unverified production evidence.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -49,6 +46,10 @@ $runId = (Get-Date).ToString('yyyyMMdd-HHmmss')
 $runDirectory = Join-Path $resolvedOutputRoot ('{0}-{1}' -f $runId, $Profile)
 $steps = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入目标环境证据日志、JSON 和 README；只生成本次运行产物，不改变矩阵或门禁。</zh-CN>
+#   <en>Write target-environment evidence logs, JSON, and README as UTF-8 without a BOM; generate only run artifacts and do not change the matrix or gates.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -63,6 +64,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>只为日志中的命令显示值添加引号，不改变传给子进程的参数。</zh-CN>
+#   <en>Add quoting only to command values displayed in logs and preserve the child-process argument list.</en>
+# </lang>
 function Format-EvidenceArgument {
     param([string]$Value)
 
@@ -73,6 +78,10 @@ function Format-EvidenceArgument {
     return $Value
 }
 
+# <lang>
+#   <zh-CN>优先返回 PowerShell 7 固定路径，回退到 PATH；未找到则抛出错误，本函数不启动子进程。</zh-CN>
+#   <en>Prefer the fixed PowerShell 7 path and fall back to PATH; throw when missing, without starting a child process here.</en>
+# </lang>
 function Get-PwshPath {
     $preferred = 'C:\Program Files\PowerShell\7\pwsh.exe'
     if (Test-Path -LiteralPath $preferred -PathType Leaf) {
@@ -87,6 +96,10 @@ function Get-PwshPath {
     throw 'PowerShell 7 (pwsh) was not found.'
 }
 
+# <lang>
+#   <zh-CN>将仓库内绝对路径转为稳定相对路径，仓库外路径保持绝对形式，避免证据泄露不必要的本机前缀。</zh-CN>
+#   <en>Convert an in-repository absolute path to a stable relative path and keep external paths absolute, avoiding unnecessary local-prefix disclosure in evidence.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([string]$Path)
 
@@ -99,12 +112,20 @@ function ConvertTo-RepoPath {
     return $fullPath
 }
 
+# <lang>
+#   <zh-CN>按 Markdown 表格的竖线拆分单行并去除单元格两侧空白；调用方负责字段数量和转义边界。</zh-CN>
+#   <en>Split one Markdown table row on pipe separators and trim cell edges; callers remain responsible for cell count and escaping boundaries.</en>
+# </lang>
 function Split-MarkdownTableRow {
     param([string]$Line)
 
     return @($Line.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim() })
 }
 
+# <lang>
+#   <zh-CN>优先读取反引号包围的状态标签，否则按加号拆分；这里只解析标签，不判断状态真实性。</zh-CN>
+#   <en>Prefer backtick-delimited status labels and otherwise split on plus signs; this helper parses labels only and does not assert their truth.</en>
+# </lang>
 function Get-MatrixStatusLabels {
     param([string]$StatusCell)
 
@@ -116,6 +137,10 @@ function Get-MatrixStatusLabels {
     return @($StatusCell -split '\+' | ForEach-Object { $_.Trim() } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
 }
 
+# <lang>
+#   <zh-CN>读取目标环境矩阵的固定 Markdown 表格，忽略表头/分隔行并保留状态、证据和 P14 处理语义；不连接目标环境。</zh-CN>
+#   <en>Read the fixed target-environment Markdown table, skipping header/separator rows while preserving status, evidence, and P14 handling semantics; do not connect to the target environment.</en>
+# </lang>
 function Read-TargetMatrix {
     param([string]$Path)
 
@@ -157,11 +182,17 @@ function Read-TargetMatrix {
             })
     }
 
-    # 中文：显式转成 object[]，避免 PowerShell 动态枚举在单元素/多元素之间切换时触发绑定异常。
-    # English: Convert explicitly to object[] so PowerShell dynamic enumeration does not fail on scalar/list transitions.
+    # <lang>
+    #   <zh-CN>显式转成 object[]，避免 PowerShell 动态枚举在单元素/多元素之间切换时触发绑定异常。</zh-CN>
+    #   <en>Convert explicitly to object[] so PowerShell dynamic enumeration does not fail on scalar/list transitions.</en>
+    # </lang>
     return [object[]]$items.ToArray()
 }
 
+# <lang>
+#   <zh-CN>按矩阵状态标签计数并返回稳定对象；计数不代表目标环境已通过。</zh-CN>
+#   <en>Count matrix status labels and return a stable object; counts do not mean the target environment passed.</en>
+# </lang>
 function Get-StatusCounts {
     param([object[]]$Items)
 
@@ -179,6 +210,10 @@ function Get-StatusCounts {
     return [pscustomobject]$counts
 }
 
+# <lang>
+#   <zh-CN>在仓库内证据目录寻找最新指定文件；缺失时返回 Missing，不伪造证据路径或时间。</zh-CN>
+#   <en>Find the newest requested file under a repository evidence directory; return Missing when absent and never invent a path or timestamp.</en>
+# </lang>
 function Find-LatestEvidence {
     param(
         [string]$Code,
@@ -225,6 +260,10 @@ function Find-LatestEvidence {
     }
 }
 
+# <lang>
+#   <zh-CN>执行一个目标环境只读门禁并记录低敏输出；失败保留为 Failed，不把本地结果升级成生产 proof。</zh-CN>
+#   <en>Run one target-environment read-only gate and record low-sensitivity output; preserve failure as Failed and never upgrade local results to production proof.</en>
+# </lang>
 function Invoke-ReadinessStep {
     param(
         [string]$Name,
@@ -284,6 +323,10 @@ function Invoke-ReadinessStep {
     Write-Host ('[{0}] {1} -> {2}' -f $status.ToUpperInvariant(), $Name, $result.LogPath)
 }
 
+# <lang>
+#   <zh-CN>证据目录只在实际运行时创建；后续矩阵读取和门禁调用可能产生本地证据，但不改目标环境。</zh-CN>
+#   <en>Create the evidence directory only during execution; later matrix reads and gates may produce local evidence but do not alter the target environment.</en>
+# </lang>
 New-Item -ItemType Directory -Force -Path $runDirectory | Out-Null
 Write-Host ('Target environment evidence directory: {0}' -f $runDirectory)
 
@@ -343,6 +386,10 @@ $readyLocalItems = @($matrixItems | Where-Object { @($_.StatusLabels) -contains 
 $readyNearTargetItems = @($matrixItems | Where-Object { @($_.StatusLabels) -contains 'ReadyNearTarget' })
 $deferredItems = @($matrixItems | Where-Object { @($_.StatusLabels) -contains 'Deferred' })
 
+# <lang>
+#   <zh-CN>摘要区分门禁失败、矩阵状态和生产声明；ReadyForP14_2NearTargetDrill 不代表真实生产环境通过。</zh-CN>
+#   <en>Keep gate failures, matrix states, and production claims distinct; ReadyForP14_2NearTargetDrill does not mean the real production environment passed.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     SchemaVersion = 'p14.1.target-environment-readiness.v1'
     GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')

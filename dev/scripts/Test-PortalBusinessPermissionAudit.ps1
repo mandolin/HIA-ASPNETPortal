@@ -3,11 +3,10 @@
     Checks the P12.4 business permission and audit contract without changing the database.
 
 .DESCRIPTION
-    中文：本脚本只做静态门禁，确认 P12.4 拆分后的业务权限键、Admin 兼容 seed、
-    页面授权入口、待办分派键和关键运营审计调用保持一致。
-    English: This script performs static checks only, ensuring P12.4 fine-grained business
-    permission keys, Admin compatibility seeds, page authorization gates, work-item assignment,
-    and key operation-audit calls stay aligned.
+    <lang>
+      <zh-CN>本脚本只做静态门禁，确认 P12.4 拆分后的业务权限键、Admin 兼容 seed、页面授权入口、待办分派键和关键运营审计调用保持一致。</zh-CN>
+      <en>This script performs static checks only, ensuring P12.4 fine-grained business permission keys, Admin compatibility seeds, page authorization gates, work-item assignment, and key operation-audit calls stay aligned.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -21,6 +20,10 @@ $ErrorActionPreference = 'Stop'
 
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>追加一条权限/审计静态检查结果；结果只描述文本契约，不授予运行时权限。</zh-CN>
+#   <en>Add one permission/audit static-check result; it describes text contracts only and grants no runtime permission.</en>
+# </lang>
 function Add-BusinessPermissionCheck {
     param(
         [Parameter(Mandatory = $true)][string]$Code,
@@ -37,6 +40,10 @@ function Add-BusinessPermissionCheck {
         })
 }
 
+# <lang>
+#   <zh-CN>按仓库相对路径读取必需文本；缺失立即失败，不连接数据库或读取真实配置。</zh-CN>
+#   <en>Read required text by repository-relative path; fail immediately when missing without connecting to a database or reading real configuration.</en>
+# </lang>
 function Get-PortalText {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
 
@@ -48,6 +55,10 @@ function Get-PortalText {
     return [System.IO.File]::ReadAllText($path, [System.Text.Encoding]::UTF8)
 }
 
+# <lang>
+#   <zh-CN>确认所有固定权限/审计锚点存在；这是序数静态断言，不执行页面授权或数据库操作。</zh-CN>
+#   <en>Verify all fixed permission/audit anchors exist; this is an ordinal static assertion and does not execute page authorization or database operations.</en>
+# </lang>
 function Test-ContainsAll {
     param(
         [Parameter(Mandatory = $true)][string]$Text,
@@ -209,6 +220,10 @@ Add-BusinessPermissionCheck `
 
 $failedChecks = @($checks | Where-Object { $_.Status -eq 'Fail' })
 $warningChecks = @($checks | Where-Object { $_.Status -eq 'Warning' })
+# <lang>
+#   <zh-CN>结果保留失败/警告数量和完整检查列表；JSON 只用于证据，不等于真实授权回归。</zh-CN>
+#   <en>Keep failure/warning counts and the complete check list; JSON is evidence only and is not a real authorization regression.</en>
+# </lang>
 $result = [pscustomobject]@{
     GeneratedUtc   = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
     TotalChecks    = $checks.Count
@@ -217,6 +232,10 @@ $result = [pscustomobject]@{
     Checks         = @($checks.ToArray())
 }
 
+# <lang>
+#   <zh-CN>仅在提供 OutputJson 时写入 UTF-8 无 BOM 结果文件，且只写低敏静态结果。</zh-CN>
+#   <en>Write a UTF-8-no-BOM result file only when OutputJson is supplied, containing low-sensitivity static results only.</en>
+# </lang>
 if ($OutputJson) {
     $jsonPath = if ([System.IO.Path]::IsPathRooted($OutputJson)) {
         $OutputJson
@@ -237,6 +256,10 @@ if ($OutputJson) {
 
 $result
 
+# <lang>
+#   <zh-CN>存在 Fail 时抛出非零失败，避免静态权限契约缺失被误报为通过。</zh-CN>
+#   <en>Throw a non-zero failure when any check is Fail so a missing static permission contract cannot be reported as passed.</en>
+# </lang>
 if ($failedChecks.Count -gt 0) {
     throw ('Portal business permission/audit smoke test failed: ' + (($failedChecks | ForEach-Object { $_.Code }) -join ', '))
 }

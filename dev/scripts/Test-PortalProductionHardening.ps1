@@ -18,16 +18,10 @@ Web.config, external configuration, or sensitive values.
 或敏感值。
 
 .DESCRIPTION
-    中文：本脚本用于 P14.4 生产前硬化复核，读取源码或发布产物中的 Web.config、
-    发布转换线索、目录存在性/ACL 摘要和 P14.2 release manifest 警告，并输出 JSON/Markdown 证据。
-    它不会修改 IIS、Web.config、目录 ACL、外置配置或数据库；不会读取或输出真实连接串、密码、
-    Token、Cookie 或证书私钥。源码基线中的 HTTPS、HSTS、machineKey 等目标环境事项只记录为
-    PendingTargetEnvironment，不伪装为生产通过。
-    English: This script performs the P14.4 production-hardening preflight against source or a
-    filesystem-published package. It reads Web.config, transform hints, directory/ACL summaries,
-    and P14.2 release-manifest warnings, then writes JSON/Markdown evidence. It does not modify
-    IIS, Web.config, directory ACLs, external configuration, or databases, and it never reads or
-    prints real connection strings, passwords, tokens, cookies, or certificate private keys.
+    <lang>
+      <zh-CN>本脚本用于 P14.4 生产前硬化复核，读取源码或发布产物中的 Web.config、发布转换线索、目录存在性/ACL 摘要和 P14.2 release manifest 警告，并输出 JSON/Markdown 证据。它不会修改 IIS、Web.config、目录 ACL、外置配置或数据库；不会读取或输出真实连接串、密码、Token、Cookie 或证书私钥。源码基线中的 HTTPS、HSTS、machineKey 等目标环境事项只记录为 PendingTargetEnvironment，不伪装为生产通过。</zh-CN>
+      <en>This script performs the P14.4 production-hardening preflight against source or a filesystem-published package. It reads Web.config, transform hints, directory/ACL summaries, and P14.2 release-manifest warnings, then writes JSON/Markdown evidence. It does not modify IIS, Web.config, directory ACLs, external configuration, or databases, and it never reads or prints real connection strings, passwords, tokens, cookies, or certificate private keys.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -70,6 +64,10 @@ $targetRoot = if ($isPublishedPackage) { [System.IO.Path]::GetFullPath($Publishe
 $webConfigPath = Join-Path $targetRoot 'Web.config'
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入硬化 JSON/Markdown 证据；只写指定输出，不改变被检查对象。</zh-CN>
+#   <en>Write hardening JSON/Markdown evidence as UTF-8 without a BOM; write only the requested output and do not change inspected objects.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -84,6 +82,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>将仓库内绝对路径转为稳定相对路径，仓库外路径保持绝对形式，避免证据泄露不必要的本机前缀。</zh-CN>
+#   <en>Convert in-repository absolute paths to stable relative paths and keep external paths absolute, avoiding unnecessary local-prefix disclosure in evidence.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([string]$Path)
 
@@ -100,12 +102,20 @@ function ConvertTo-RepoPath {
     return $fullPath
 }
 
+# <lang>
+#   <zh-CN>按 UTF-8 读取指定文本文件；调用方负责路径边界，本函数不读取秘密配置或连接串。</zh-CN>
+#   <en>Read the specified text file as UTF-8; callers own path boundaries, and this function does not read secret configuration or connection strings.</en>
+# </lang>
 function Get-Utf8Text {
     param([string]$LiteralPath)
 
     return Get-Content -LiteralPath $LiteralPath -Encoding UTF8 -Raw
 }
 
+# <lang>
+#   <zh-CN>从 XML 节点读取属性值并以空字符串回退；缺失节点/属性不被解释为安全通过。</zh-CN>
+#   <en>Read an XML attribute with an empty-string fallback; a missing node/attribute is not interpreted as a security pass.</en>
+# </lang>
 function Get-XmlAttributeValue {
     param(
         [System.Xml.XmlNode]$Node,
@@ -119,10 +129,18 @@ function Get-XmlAttributeValue {
     return [string]$Node.Attributes[$Name].Value
 }
 
+# <lang>
+#   <zh-CN>判断 Profile 是否属于 Test/Prod/Scan 严格基线；只影响预检判定，不改变配置。</zh-CN>
+#   <en>Determine whether the profile uses the Test/Prod/Scan strict baseline; this affects preflight classification only and does not change configuration.</en>
+# </lang>
 function Test-StrictProfile {
     return $Profile -in @('Test', 'Prod', 'Scan')
 }
 
+# <lang>
+#   <zh-CN>追加硬化检查并输出低敏状态/证据摘要；PendingTargetEnvironment 不等于通过，Evidence 不应承载秘密。</zh-CN>
+#   <en>Add a hardening check and emit low-sensitivity status/evidence; PendingTargetEnvironment is not a pass, and Evidence must not carry secrets.</en>
+# </lang>
 function Add-HardeningCheck {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info', 'PendingTargetEnvironment')]
@@ -156,6 +174,10 @@ function Add-HardeningCheck {
     }
 }
 
+# <lang>
+#   <zh-CN>从 Web.config 提取自定义响应头映射；只读取声明值，不发送 HTTP 响应。</zh-CN>
+#   <en>Extract custom response-header values from Web.config; read declarations only and send no HTTP response.</en>
+# </lang>
 function Get-HeaderMap {
     param([xml]$WebConfig)
 
@@ -171,6 +193,10 @@ function Get-HeaderMap {
     return $headers
 }
 
+# <lang>
+#   <zh-CN>盘点发布转换文件及硬化信号；缺失转换记录为未存在，不执行转换或发布。</zh-CN>
+#   <en>Inventory publish-transform files and hardening signals; missing transforms are recorded as absent, with no transform or publish execution.</en>
+# </lang>
 function Get-TransformInventory {
     $transformNames = @(
         'Web.Debug.Template.config',
@@ -185,8 +211,10 @@ function Get-TransformInventory {
     foreach ($name in $transformNames) {
         $path = Join-Path $targetRoot $name
         if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-            # 中文：发布产物中转换文件应被排除；源码目录中本机转换文件可能被 .gitignore 忽略。
-            # English: Transform files should be excluded from published packages; local source transforms may be ignored by Git.
+            # <lang>
+            #   <zh-CN>发布产物中转换文件应被排除；源码目录中本机转换文件可能被 .gitignore 忽略。</zh-CN>
+            #   <en>Transform files should be excluded from published packages; local source transforms may be ignored by Git.</en>
+            # </lang>
             $items.Add([pscustomobject][ordered]@{
                     Name = $name
                     Exists = $false
@@ -216,6 +244,10 @@ function Get-TransformInventory {
     return [object[]]$items.ToArray()
 }
 
+# <lang>
+#   <zh-CN>在指定证据根目录寻找最新 release-manifest.json；缺失返回空，不伪造发布证据。</zh-CN>
+#   <en>Find the newest release-manifest.json under the evidence root; return empty when missing and never invent release evidence.</en>
+# </lang>
 function Find-LatestReleaseManifest {
     param([string]$Root)
 
@@ -232,6 +264,10 @@ function Find-LatestReleaseManifest {
     return $matches[0].FullName
 }
 
+# <lang>
+#   <zh-CN>只读检查目录存在性和有限 ACL 摘要；不创建目录、不写入测试文件，目标环境权限仍需人工复核。</zh-CN>
+#   <en>Read-only check directory existence and a limited ACL summary; create no directories or test files, and leave target-environment permission review to humans.</en>
+# </lang>
 function Add-DirectoryReadOnlyCheck {
     param(
         [string]$Code,
@@ -264,6 +300,10 @@ function Add-DirectoryReadOnlyCheck {
     }
 }
 
+# <lang>
+#   <zh-CN>转义 Markdown 单元格中的竖线和换行，避免证据表格结构被输入破坏。</zh-CN>
+#   <en>Escape pipes and newlines in Markdown cells so evidence-table structure cannot be broken by input.</en>
+# </lang>
 function Format-MarkdownCell {
     param([string]$Value)
 
@@ -534,6 +574,10 @@ $pendingCount = @($checks | Where-Object { $_.Status -eq 'PendingTargetEnvironme
 $passCount = @($checks | Where-Object { $_.Status -eq 'Pass' }).Count
 $infoCount = @($checks | Where-Object { $_.Status -eq 'Info' }).Count
 
+# <lang>
+#   <zh-CN>摘要区分 Fail、Warning、PendingTargetEnvironment、Pass 和 Info，并明确本脚本未修改环境、未读取外置秘密。</zh-CN>
+#   <en>Keep Fail, Warning, PendingTargetEnvironment, Pass, and Info distinct and state that this script did not modify the environment or read external secrets.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     SchemaVersion = 'p14.4.production-hardening-preflight.v1'
     GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
@@ -555,10 +599,18 @@ $result = [pscustomobject][ordered]@{
     Checks = [object[]]$checks.ToArray()
 }
 
+# <lang>
+#   <zh-CN>仅在提供 OutputJson 时写入 UTF-8 无 BOM JSON；输出只包含低敏硬化结果。</zh-CN>
+#   <en>Write UTF-8-no-BOM JSON only when OutputJson is supplied; output contains low-sensitivity hardening results only.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
     Write-Utf8NoBomFile -Path $OutputJson -Content (($result | ConvertTo-Json -Depth 8) + [Environment]::NewLine)
 }
 
+# <lang>
+#   <zh-CN>仅在提供 OutputMarkdown 时写入转义后的本地证据表，不修改 Web.config、ACL、IIS 或数据库。</zh-CN>
+#   <en>Write an escaped local evidence table only when OutputMarkdown is supplied; do not modify Web.config, ACLs, IIS, or databases.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputMarkdown)) {
     $lines = @(
         '# P14.4 Production Hardening Preflight',
@@ -585,6 +637,10 @@ if (-not [string]::IsNullOrWhiteSpace($OutputMarkdown)) {
 
 Write-Host ('P14.4 production hardening preflight: Pass={0}; Warning={1}; Fail={2}; PendingTargetEnvironment={3}; Info={4}' -f $passCount, $warningCount, $failCount, $pendingCount, $infoCount)
 
+# <lang>
+#   <zh-CN>Fail 返回 1，TreatWarningsAsErrors 下 Warning 返回 2；PendingTargetEnvironment 不被静默转换为生产通过。</zh-CN>
+#   <en>Return 1 for Fail and 2 for Warning under TreatWarningsAsErrors; PendingTargetEnvironment is never silently converted into production success.</en>
+# </lang>
 if ($failCount -gt 0) {
     exit 1
 }

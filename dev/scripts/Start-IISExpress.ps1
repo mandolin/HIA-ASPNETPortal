@@ -6,18 +6,11 @@ Starts IIS Express for the Portal development site.
 .LANG zh-CN
 为 Portal 开发站点启动 IIS Express。
 
-.LANG en
-Starts an IIS Express instance for the Portal site, usually on the fixed VSCode
-automation port 40001. When a non-root virtual path or non-localhost host name is
-requested, the script generates an isolated applicationhost.config under temp.
-It does not modify Visual Studio project files, global IIS settings, databases,
-or external configuration.
-
-.LANG zh-CN
-为 Portal 开发站点启动 IIS Express，通常使用 VSCode 自动化固定端口 40001。
-当请求非根虚拟目录或非 localhost 主机名时，脚本会在 temp 下生成隔离的
-applicationhost.config。它不修改 Visual Studio 项目文件、全局 IIS 设置、数据库
-或外置配置。
+.DESCRIPTION
+<lang>
+  <en>Starts an IIS Express instance for the Portal site, usually on the fixed VSCode automation port 40001. When a non-root virtual path or non-localhost host name is requested, the script generates an isolated applicationhost.config under temp. It does not modify Visual Studio project files, global IIS settings, databases, or external configuration.</en>
+  <zh-CN>为 Portal 开发站点启动 IIS Express，通常使用 VSCode 自动化固定端口 40001。当请求非根虚拟路径或非 localhost 主机名时，脚本会在 temp 下生成隔离的 applicationhost.config。它不修改 Visual Studio 项目文件、全局 IIS 设置、数据库或外置配置。</zh-CN>
+</lang>
 
 .PARAMETER Port
 .LANG en
@@ -61,6 +54,10 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+# <lang>
+#   <zh-CN>以下状态只描述本次本地 IIS Express 启动请求；不代表共享 IIS、生产站点或外置配置。</zh-CN>
+#   <en>The state below describes only this local IIS Express start request; it is not shared IIS, production-site, or external configuration state.</en>
+# </lang>
 $repoRoot = Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')
 if (-not $SitePath) {
     $SitePath = Join-Path $repoRoot 'src\Portal'
@@ -101,9 +98,10 @@ if ($useGeneratedConfig) {
 }
 $escapedConfigPath = if ($configPath) { [regex]::Escape($configPath) } else { $null }
 
-# 端口或本次虚拟目录配置是唯一进程边界，不能以同一物理站点路径误匹配其他调试实例。
-# The port or this virtual-directory configuration is the only process boundary; do not match another debug
-# instance merely because it uses the same physical site path.
+# <lang>
+#   <zh-CN>端口或本次虚拟目录配置是唯一进程边界，不能以同一物理站点路径误匹配其他调试实例。</zh-CN>
+#   <en>The port or this virtual-directory configuration is the only process boundary; do not match another debug instance merely because it uses the same physical site path.</en>
+# </lang>
 $existing = Get-CimInstance Win32_Process -Filter "name = 'iisexpress.exe'" -ErrorAction SilentlyContinue |
     Where-Object {
         $_.CommandLine -match "/port:$Port(\s|$)" -or
@@ -125,6 +123,10 @@ if ($listening) {
     throw "Port $Port is already in use by PID $($listening.OwningProcess)."
 }
 
+# <lang>
+#   <zh-CN>根路径和 localhost 使用 IIS Express 简化参数；其它虚拟路径或主机名转入隔离 XML 配置，避免修改用户级 IIS 全局文件。</zh-CN>
+#   <en>Root-path localhost uses the simple IIS Express arguments; other virtual paths or host names use an isolated XML config instead of changing the user-level global IIS file.</en>
+# </lang>
 if (-not $useGeneratedConfig) {
     $arguments = @(
         "/path:`"$SitePath`"",
@@ -147,6 +149,10 @@ else {
         [void]$sites.RemoveChild($existingSite)
     }
 
+# <lang>
+#   <zh-CN>创建最小 application/virtualDirectory 节点，保持生成配置只映射本次站点物理路径。</zh-CN>
+#   <en>Creates the minimal application/virtualDirectory nodes so the generated config maps only this site's physical paths.</en>
+# </lang>
     function New-IISExpressApplicationElement([xml]$Document, [string]$Path, [string]$PhysicalPath) {
         $application = $Document.CreateElement('application')
         $application.SetAttribute('path', $Path)
@@ -205,6 +211,10 @@ else {
     ) -join ' '
 }
 
+# <lang>
+#   <zh-CN>启动隐藏的 IIS Express 子进程后按相同端口/配置边界确认归属；未发现目标进程即失败。</zh-CN>
+#   <en>Starts the hidden IIS Express child process and verifies ownership using the same port/config boundary; absence of a matching process fails.</en>
+# </lang>
 Write-Host "Starting IIS Express: $iisExpress $arguments"
 Start-Process -FilePath $iisExpress -ArgumentList $arguments -WorkingDirectory $SitePath -WindowStyle Hidden
 
@@ -221,6 +231,10 @@ if (-not $started) {
     throw 'IIS Express did not appear to start. Check the IIS Express logs for details.'
 }
 
+# <lang>
+#   <zh-CN>非 localhost 主机名只输出需要人工配置的 URL ACL/防火墙提示，不自动修改主机策略。</zh-CN>
+#   <en>For non-localhost host names, emits manual URL ACL/firewall guidance only and never changes host policies automatically.</en>
+# </lang>
 $displayPath = if ($VirtualPath -eq '/') { '/' } else { "$VirtualPath/" }
 Write-Host "IIS Express started. PID: $($started.ProcessId); URL: http://localhost:$Port$displayPath"
 if (-not [string]::Equals($HostName, 'localhost', [System.StringComparison]::OrdinalIgnoreCase)) {

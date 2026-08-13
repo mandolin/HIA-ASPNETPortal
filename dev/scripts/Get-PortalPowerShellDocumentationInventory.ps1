@@ -11,7 +11,13 @@ read secrets.
 .LANG zh-CN
 扫描 Git 已追踪的 PowerShell 脚本，分类运行风险，并报告每个脚本是否具备
 comment-based help 与 HIA 双语语言标记。它不执行被扫描脚本、不连接服务、
-不改写文件，也不读取密钥。
+    不改写文件，也不读取密钥。
+
+.DESCRIPTION
+<lang>
+  <zh-CN>只读取 Git 已追踪 PowerShell 脚本，按运行风险分类并报告 comment-based help 与 HIA 双语标记；不执行脚本、不连接服务、不改写文件、不读取密钥。</zh-CN>
+  <en>Reads only Git-tracked PowerShell scripts, classifies operational risk, and reports comment-based help and HIA bilingual markers without executing scripts, connecting to services, rewriting files, or reading secrets.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -31,6 +37,10 @@ if ($LASTEXITCODE -ne 0) {
     throw 'Unable to read Git-tracked PowerShell scripts.'
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选 PowerShell inventory 产物，并按需创建父目录。</zh-CN>
+#   <en>Writes optional PowerShell inventory artifacts as UTF-8 without BOM and creates the parent directory when needed.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -45,6 +55,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>根据脚本路径和正文关键词计算风险域，保持分类规则只读且可复核。</zh-CN>
+#   <en>Computes a read-only, reviewable risk category from script paths and text keywords.</en>
+# </lang>
 function Get-RiskCategory {
     param([Parameter(Mandatory = $true)][string]$Name)
 
@@ -75,6 +89,10 @@ function Get-RiskCategory {
     return 'General'
 }
 
+# <lang>
+#   <zh-CN>把风险域映射为稳定等级，供清单排序和摘要使用。</zh-CN>
+#   <en>Maps risk categories to stable levels for inventory ordering and summaries.</en>
+# </lang>
 function Get-RiskLevel {
     param(
         [Parameter(Mandatory = $true)][string]$Name,
@@ -98,6 +116,10 @@ function Get-RiskLevel {
     return 'Medium'
 }
 
+# <lang>
+#   <zh-CN>从 PowerShell AST 提取参数名称，不读取参数值或任何秘密内容。</zh-CN>
+#   <en>Extracts parameter names from the PowerShell AST without reading values or secrets.</en>
+# </lang>
 function Get-ParameterNames {
     param([Parameter(Mandatory = $true)][string]$Content)
 

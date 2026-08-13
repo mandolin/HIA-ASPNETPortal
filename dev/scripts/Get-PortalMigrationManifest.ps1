@@ -4,8 +4,10 @@
 Generates the Portal database migration manifest draft and script risk inventory.
 
 .DESCRIPTION
-本脚本只读取仓库内 Git 已追踪的 SQL 脚本，不连接数据库、不执行 SQL、不读取外置连接串。输出用于 P11.3 的迁移、seed、回滚和数据修复规范。
-This script reads only Git-tracked SQL scripts inside the repository. It does not connect to a database, execute SQL, or read external connection strings. The output supports the P11.3 migration, seed, rollback, and data-repair rules.
+<lang>
+  <zh-CN>本脚本只读取仓库内 Git 已追踪的 SQL 脚本，不连接数据库、不执行 SQL、不读取外置连接串；输出用于 P11.3 的迁移、seed、回滚和数据修复规范。</zh-CN>
+  <en>This script reads only Git-tracked SQL scripts inside the repository. It does not connect to a database, execute SQL, or read external connection strings; output supports the P11.3 migration, seed, rollback, and data-repair rules.</en>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -26,6 +28,10 @@ if ([string]::IsNullOrWhiteSpace($SetupPath)) {
 
 $resolvedSetupPath = (Resolve-Path -LiteralPath $SetupPath).Path
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选 manifest JSON，并按需创建父目录。</zh-CN>
+#   <en>Writes optional manifest JSON as UTF-8 without BOM and creates the parent directory when needed.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [string]$Path,
@@ -41,6 +47,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, $encoding)
 }
 
+# <lang>
+#   <zh-CN>把 SQL 文件绝对路径规范化为仓库相对路径，保持 manifest 边界固定。</zh-CN>
+#   <en>Normalizes an absolute SQL-file path to a repository-relative value so the manifest boundary stays fixed.</en>
+# </lang>
 function Get-RepoRelativePath {
     param([string]$Path)
 
@@ -53,6 +63,10 @@ function Get-RepoRelativePath {
     return ($fullPath -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>净化 SQL 证据中的密码/秘密片段并限制长度，避免低敏输出泄露凭据。</zh-CN>
+#   <en>Redacts password/secret fragments and bounds SQL evidence length so low-sensitivity output cannot leak credentials.</en>
+# </lang>
 function Protect-EvidenceText {
     param([string]$Text)
 
@@ -66,12 +80,20 @@ function Protect-EvidenceText {
     return $value
 }
 
+# <lang>
+#   <zh-CN>以 UTF-8 读取仓库内 SQL 文本用于只读规则匹配，不执行内容。</zh-CN>
+#   <en>Reads repository SQL text as UTF-8 for read-only rule matching without executing its contents.</en>
+# </lang>
 function Get-SqlFileText {
     param([string]$Path)
 
     return [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>创建迁移 manifest 条目，集中保存顺序、类型、方言、幂等和回滚事实。</zh-CN>
+#   <en>Creates a migration manifest entry containing order, type, dialect, idempotence, and rollback facts.</en>
+# </lang>
 function New-MigrationEntry {
     param(
         [int]$Order,
@@ -99,6 +121,10 @@ function New-MigrationEntry {
     }
 }
 
+# <lang>
+#   <zh-CN>创建统一检查结果对象，保留状态、代码、消息和低敏证据字段。</zh-CN>
+#   <en>Creates a uniform check result with status, code, message, and low-sensitivity evidence fields.</en>
+# </lang>
 function New-Check {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info')]
@@ -116,12 +142,20 @@ function New-Check {
     }
 }
 
+# <lang>
+#   <zh-CN>将检查命中的 manifest 路径限制为前十项，用于可读且受控的证据摘要。</zh-CN>
+#   <en>Bounds matching manifest paths to the first ten entries for readable and controlled evidence summaries.</en>
+# </lang>
 function Join-ManifestPaths {
     param([object[]]$Entries)
 
     return (@($Entries | ForEach-Object { $_.Path } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -First 10) -join '; ')
 }
 
+# <lang>
+#   <zh-CN>静态定义迁移、seed、修复、legacy utility 和 provider proof 顺序；不执行其中 SQL。</zh-CN>
+#   <en>Defines migration, seed, repair, legacy-utility, and provider-proof order statically without executing SQL.</en>
+# </lang>
 $manifest = @(
     New-MigrationEntry 10 'src/Setup/Portal_CreateDB.sql' 'Base' 'LegacyBaseSchema' 'SqlServerOnly' $false 'ManualOnly' '历史基础建库脚本；由初始化 wrapper 改写目标库名后用于隔离空库。'
     New-MigrationEntry 20 'src/Setup/Portal_LoadConfig.sql' 'SeedRequired' 'LegacyBaseConfig' 'SqlServerOnly' $false 'CompensationOnly' '历史门户基础配置 seed，当前仍是运行所需基础数据。'
@@ -154,6 +188,10 @@ $manifest = @(
     New-MigrationEntry 1000 'src/Setup/Providers/SQLite/PortalDataProviderProof.sql' 'ProviderProof' 'SQLiteProof' 'ProviderProof' $false 'NotApplicable' 'SQLite 独立 proof 脚本，不代表门户主库正式支持。'
 )
 
+# <lang>
+#   <zh-CN>建立检查集合并只读盘点 setup 目录中的 SQL 文件覆盖、batch 和高风险标记。</zh-CN>
+#   <en>Builds the check collection and read-only scans setup SQL coverage, batches, and high-risk markers.</en>
+# </lang>
 $checks = New-Object 'System.Collections.Generic.List[object]'
 $existingSqlFiles = @(
     Get-ChildItem -LiteralPath $resolvedSetupPath -Recurse -File -Filter '*.sql' |
@@ -197,6 +235,10 @@ foreach ($entry in $manifest) {
         })
 }
 
+# <lang>
+#   <zh-CN>将 SQLCMD、GO 重复、legacy grant、删库/删表和安全 seed 命中归类为检查证据，不执行修复。</zh-CN>
+#   <en>Classifies SQLCMD, GO-repeat, legacy-grant, drop, and security-seed matches as evidence without applying fixes.</en>
+# </lang>
 $sqlCmdScripts = @($scriptAnalyses | Where-Object { $_.HasSqlCmdDirective })
 $goRepeatScripts = @($scriptAnalyses | Where-Object { $_.HasGoRepeatCount })
 $legacyGrantScripts = @($scriptAnalyses | Where-Object { $_.HasLegacyGrant })
@@ -240,6 +282,10 @@ $statusSummary = [ordered]@{
     Info = @($checks | Where-Object { $_.Status -eq 'Info' }).Count
 }
 
+# <lang>
+#   <zh-CN>组装稳定的 manifest、统计、分析和检查结果对象，供控制台或可选 JSON 输出使用。</zh-CN>
+#   <en>Assembles stable manifest, summary, analysis, and check objects for console or optional JSON output.</en>
+# </lang>
 $result = [pscustomobject]@{
     GeneratedAtUtc = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ', [System.Globalization.CultureInfo]::InvariantCulture)
     SetupPath = Get-RepoRelativePath -Path $resolvedSetupPath
@@ -251,6 +297,10 @@ $result = [pscustomobject]@{
     Checks = $checks
 }
 
+# <lang>
+#   <zh-CN>输出低敏检查结果，并在可选路径写入 JSON；FailOnWarning 仅改变最终失败门禁。</zh-CN>
+#   <en>Emits low-sensitivity check results and optionally writes JSON; FailOnWarning changes only the final failure gate.</en>
+# </lang>
 foreach ($check in $checks) {
     Write-Host ('[{0}] {1}: {2}' -f $check.Status.ToUpperInvariant(), $check.Code, $check.Message)
     if (-not [string]::IsNullOrWhiteSpace($check.Evidence)) {

@@ -1,42 +1,33 @@
 <#
 .SYNOPSIS
-.LANG en
-Checks portal publish readiness without deploying to IIS.
-
-.LANG zh-CN
-在不部署到 IIS 的情况下检查门户发布就绪状态。
+<lang>
+  <en>Checks portal publish readiness without deploying to IIS.</en>
+  <zh-CN>在不部署到 IIS 的情况下检查门户发布就绪状态。</zh-CN>
+</lang>
 
 .DESCRIPTION
-.LANG en
-Inspects Portal.csproj content and compile items, required publish files,
-tracked-file boundaries, optional filesystem publish output, and known deployment
-risks. The script is read-only for repository/project files and does not connect
-to real IIS or read external sensitive configuration.
-
-.LANG zh-CN
-检查 Portal.csproj 的 Content/Compile 项、必需发布文件、Git 追踪边界、可选文件系统发布输出和已知部署风险。
-本脚本对仓库和项目文件只读，不连接真实 IIS，也不读取外置敏感配置。
+<lang>
+  <en>Inspect Portal.csproj content and compile items, required publish files, tracked-file boundaries, optional filesystem publish output, and known deployment risks. The script is read-only for repository/project files and does not connect to real IIS or read external sensitive configuration.</en>
+  <zh-CN>检查 Portal.csproj 的 Content/Compile 项、必需发布文件、Git 追踪边界、可选文件系统发布输出和已知部署风险。本脚本对仓库和项目文件只读，不连接真实 IIS，也不读取外置敏感配置。</zh-CN>
+</lang>
 
 .PARAMETER PortalProjectPath
-.LANG en
-Path to Portal.csproj. Defaults to the repository Web Forms project.
-
-.LANG zh-CN
-Portal.csproj 路径。默认使用仓库中的 Web Forms 项目。
+<lang>
+  <en>Path to Portal.csproj. Defaults to the repository Web Forms project.</en>
+  <zh-CN>Portal.csproj 路径。默认使用仓库中的 Web Forms 项目。</zh-CN>
+</lang>
 
 .PARAMETER PublishedPath
-.LANG en
-Optional filesystem publish output to validate after WebPublish.
-
-.LANG zh-CN
-可选的文件系统发布输出目录，用于 WebPublish 后验证。
+<lang>
+  <en>Optional filesystem publish output to validate after WebPublish.</en>
+  <zh-CN>可选的文件系统发布输出目录，用于 WebPublish 后验证。</zh-CN>
+</lang>
 
 .PARAMETER TreatWarningsAsErrors
-.LANG en
-Returns a failing exit code when warning-level findings are present.
-
-.LANG zh-CN
-存在 Warning 级发现时返回失败退出码。
+<lang>
+  <en>Returns a failing exit code when warning-level findings are present.</en>
+  <zh-CN>存在 Warning 级发现时返回失败退出码。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -55,6 +46,14 @@ $portalProject = Resolve-Path -LiteralPath $PortalProjectPath
 $portalRoot = Split-Path -Parent $portalProject.Path
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>先固定项目和仓库根目录，后续所有路径检查均相对于该边界，不扩大到外置配置或运行时服务。</zh-CN>
+#   <en>Fix the project and repository roots first; all later path checks stay within that boundary and do not expand to external configuration or runtime services.</en>
+# </lang>
+# <lang>
+#   <zh-CN>追加发布就绪 finding 并立即输出；Status 只表示静态检查分类，不执行发布或 IIS 操作。</zh-CN>
+#   <en>Add and display a publish-readiness finding; Status is a static-check classification and does not deploy or operate IIS.</en>
+# </lang>
 function Add-PublishCheck {
     param(
         [string]$Name,
@@ -72,6 +71,10 @@ function Add-PublishCheck {
     Write-Host ('[{0}] {1}: {2}' -f $Status.ToUpperInvariant(), $Name, $Detail)
 }
 
+# <lang>
+#   <zh-CN>把仓库内路径转换为稳定相对路径，供 Git 追踪检查使用，不解析外置秘密路径。</zh-CN>
+#   <en>Convert a repository path to a stable relative path for Git tracking checks without resolving external secret paths.</en>
+# </lang>
 function ConvertTo-RepoPath {
     param([string]$Path)
 
@@ -79,6 +82,10 @@ function ConvertTo-RepoPath {
     return ($relative -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>只读查询路径是否由当前仓库 Git 追踪，不添加、删除或修改索引。</zh-CN>
+#   <en>Read whether a path is tracked by the current repository without adding, deleting, or modifying the index.</en>
+# </lang>
 function Test-GitTrackedPath {
     param([string]$Path)
 
@@ -87,6 +94,10 @@ function Test-GitTrackedPath {
     return -not [string]::IsNullOrWhiteSpace(($output -join ''))
 }
 
+# <lang>
+#   <zh-CN>按 MSBuild 命名空间读取带 Include 的项目项，缺失项由调用方转换为 finding。</zh-CN>
+#   <en>Read MSBuild items with Include attributes using the project namespace; callers turn missing items into findings.</en>
+# </lang>
 function Get-MsBuildItems {
     param(
         [xml]$Project,
@@ -98,6 +109,10 @@ function Get-MsBuildItems {
     return @($Project.SelectNodes("//msb:$ItemName[@Include]", $namespaceManager))
 }
 
+# <lang>
+#   <zh-CN>用大小写不敏感正则匹配 Content 路径，维持发布排除清单的静态语义。</zh-CN>
+#   <en>Match Content paths with case-insensitive regexes while preserving the static publish-exclusion semantics.</en>
+# </lang>
 function Test-ContentPathPattern {
     param(
         [string]$Include,
@@ -113,6 +128,10 @@ function Test-ContentPathPattern {
     return $false
 }
 
+# <lang>
+#   <zh-CN>在指定发布根目录下检查相对文件是否存在，不读取文件内容或连接运行时服务。</zh-CN>
+#   <en>Check whether a relative file exists under the selected publish root without reading its contents or contacting runtime services.</en>
+# </lang>
 function Test-RelativeLeafPath {
     param(
         [string]$RootPath,
@@ -123,6 +142,10 @@ function Test-RelativeLeafPath {
     return Test-Path -LiteralPath $candidatePath -PathType Leaf
 }
 
+# <lang>
+#   <zh-CN>枚举可选文件系统发布目录中的相对文件，用于静态禁入项检查，不执行发布。</zh-CN>
+#   <en>Enumerate relative files in an optional filesystem publish directory for static forbidden-item checks without publishing.</en>
+# </lang>
 function Get-RelativePublishedFiles {
     param([string]$RootPath)
 
@@ -165,6 +188,10 @@ foreach ($item in $contentItems) {
     }
 }
 
+# <lang>
+#   <zh-CN>Content 检查分别报告缺失与未追踪文件，通配项跳过逐文件断言；缺失不会被静默当作发布成功。</zh-CN>
+#   <en>Report missing and untracked Content files separately while skipping wildcard per-file assertions; absence is never silently treated as publish success.</en>
+# </lang>
 if ($missingContent.Count -eq 0) {
     Add-PublishCheck -Name 'Content files exist' -Status 'Pass' -Detail 'All non-wildcard Content files exist on disk.'
 }
@@ -198,6 +225,10 @@ foreach ($item in $contentItems) {
 }
 
 $missingRequired = @($requiredContent | Where-Object { -not $contentSet.Contains($_) })
+# <lang>
+#   <zh-CN>必需运行内容集合验证核心页面、配置模板和入口文件已声明为 Content；这仍是项目静态事实，不是 IIS 运行 proof。</zh-CN>
+#   <en>Validate that core pages, configuration templates, and entry files are declared as Content; this remains a project-static fact, not IIS runtime proof.</en>
+# </lang>
 if ($missingRequired.Count -eq 0) {
     Add-PublishCheck -Name 'Required runtime content declared' -Status 'Pass' -Detail 'Core Web.config, pages, templates and Admin/module entry files are Content.'
 }
@@ -259,6 +290,10 @@ $modulePackageNames = @($modulePackageContent |
     Sort-Object -Unique)
 
 $modulePackageIssues = New-Object 'System.Collections.Generic.List[string]'
+# <lang>
+#   <zh-CN>受信任模块包只允许声明 module.json 和非运行时资源；阻断资产发现会形成明确 Fail，不尝试自动清理。</zh-CN>
+#   <en>Trusted module packages may declare module.json and non-runtime assets only; blocked assets produce an explicit Fail without automatic cleanup.</en>
+# </lang>
 foreach ($moduleName in $modulePackageNames) {
     if (-not $contentSet.Contains("DesktopModules\$moduleName\module.json")) {
         $modulePackageIssues.Add("$moduleName missing module.json")
@@ -291,6 +326,10 @@ else {
 }
 
 if (-not [string]::IsNullOrWhiteSpace($PublishedPath)) {
+# <lang>
+#   <zh-CN>提供 PublishedPath 时才检查实际文件系统产物；该分支仍只读，不创建、删除或修复发布目录。</zh-CN>
+#   <en>Inspect a filesystem artifact only when PublishedPath is supplied; this branch remains read-only and never creates, deletes, or repairs the publish directory.</en>
+# </lang>
     $publishRoot = Resolve-Path -LiteralPath $PublishedPath -ErrorAction SilentlyContinue
     if (-not $publishRoot) {
         Add-PublishCheck -Name 'Published output exists' -Status 'Fail' -Detail "Published output folder not found: $PublishedPath"
@@ -356,6 +395,10 @@ if (-not [string]::IsNullOrWhiteSpace($PublishedPath)) {
     }
 }
 
+# <lang>
+#   <zh-CN>汇总项目、主题、模块包和发布目录检查；Warning/Fail 仍是静态证据，不等于真实 IIS proof。</zh-CN>
+#   <en>Summarize project, theme, module-package, and published-directory checks; Warning/Fail are static evidence, not real IIS proof.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     PortalProject = $portalProject.Path
     ContentItems = $contentItems.Count
@@ -368,6 +411,10 @@ $summary = [pscustomobject][ordered]@{
 
 $summary
 
+# <lang>
+#   <zh-CN>存在 Fail 或显式 TreatWarningsAsErrors 的 Warning 时返回非零；不会自动发布或修改配置。</zh-CN>
+#   <en>Return non-zero for Fail findings or warnings when TreatWarningsAsErrors is explicit; do not deploy or modify configuration.</en>
+# </lang>
 if ($summary.FailedChecks -gt 0 -or ($TreatWarningsAsErrors -and $summary.WarningChecks -gt 0)) {
     exit 1
 }

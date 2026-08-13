@@ -3,12 +3,10 @@
     Generates a release manifest for a filesystem publish package.
 
 .DESCRIPTION
-    中文：本脚本扫描已经生成的 FileSystem 发布目录，输出文件清单、SHA256、版本信息、排除项检查和门禁引用。
-    它不连接 IIS、不连接数据库、不读取外置敏感配置，也不会把真实密码、连接串、Token、Cookie 或证书私钥写入证据。
-    English: This script scans an existing filesystem publish directory and writes a file inventory, SHA256 hashes,
-    version metadata, exclusion checks, and optional gate-result references. It does not connect to IIS, connect to
-    databases, read external secret configuration, or write real passwords, connection strings, tokens, cookies, or
-    certificate private keys into evidence.
+    <lang>
+      <zh-CN>本脚本扫描已经生成的 FileSystem 发布目录，输出文件清单、SHA256、版本信息、排除项检查和门禁引用。它不连接 IIS、不连接数据库、不读取外置敏感配置，也不会把真实密码、连接串、Token、Cookie 或证书私钥写入证据。</zh-CN>
+      <en>This script scans an existing filesystem publish directory and writes a file inventory, SHA256 hashes, version metadata, exclusion checks, and optional gate-result references. It does not connect to IIS or databases, read external secret configuration, or write real passwords, connection strings, tokens, cookies, or certificate private keys into evidence.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -50,6 +48,10 @@ $runId = (Get-Date).ToString('yyyyMMdd-HHmmss')
 $runDirectory = Join-Path ([System.IO.Path]::GetFullPath($OutputRoot)) $runId
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入生成物；目录创建是输出准备动作，不代表发布包或真实环境已经存在。</zh-CN>
+#   <en>Writes generated artifacts as UTF-8 without a BOM; directory creation prepares output only and does not imply that a release package or real environment exists.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -64,6 +66,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>追加结构化门禁检查并输出低敏状态行；Evidence 由调用方控制，不在此处采集秘密值。</zh-CN>
+#   <en>Adds a structured gate check and emits a low-sensitivity status line; callers control Evidence and this helper does not collect secret values.</en>
+# </lang>
 function Add-ReleaseManifestCheck {
     param(
         [string]$Code,
@@ -83,6 +89,10 @@ function Add-ReleaseManifestCheck {
     Write-Host ('[{0}] {1}: {2}' -f $Status.ToUpperInvariant(), $Code, $Message)
 }
 
+# <lang>
+#   <zh-CN>读取仓库元数据的兼容 helper；git 失败统一返回空值，不能把失败解释为仓库干净或发布已验证。</zh-CN>
+#   <en>Reads repository metadata through a compatibility helper; git failures return null and must not be interpreted as a clean repository or validated release.</en>
+# </lang>
 function Get-GitValue {
     param([string[]]$Arguments)
 
@@ -99,6 +109,10 @@ function Get-GitValue {
     }
 }
 
+# <lang>
+#   <zh-CN>对已解析的本地文件流计算 SHA256；只返回哈希，不把文件内容写入清单或日志。</zh-CN>
+#   <en>Computes SHA256 over a resolved local file stream; returns only the hash and never writes file contents to the manifest or log.</en>
+# </lang>
 function Get-FileSha256 {
     param([string]$Path)
 
@@ -118,6 +132,10 @@ function Get-FileSha256 {
     }
 }
 
+# <lang>
+#   <zh-CN>按不区分大小写的正则检查发布相对路径；命中只表示路径策略信号，不执行删除或隔离。</zh-CN>
+#   <en>Checks a release-relative path against case-insensitive regular expressions; a match is a policy signal and does not delete or quarantine anything.</en>
+# </lang>
 function Test-ReleasePathPattern {
     param(
         [string]$RelativePath,
@@ -133,6 +151,10 @@ function Test-ReleasePathPattern {
     return $false
 }
 
+# <lang>
+#   <zh-CN>按扩展名筛选可做低敏文本信号检查的候选文件；筛选不读取文件内容。</zh-CN>
+#   <en>Selects text-file candidates for low-sensitivity signal checks by extension; selection alone does not read file contents.</en>
+# </lang>
 function Test-TextFileCandidate {
     param([string]$Path)
 
@@ -144,6 +166,10 @@ function Test-TextFileCandidate {
     return $extensions -contains ([System.IO.Path]::GetExtension($Path).ToLowerInvariant())
 }
 
+# <lang>
+#   <zh-CN>把包内绝对路径转换为使用正斜杠的相对路径，作为清单和证据的路径标识。</zh-CN>
+#   <en>Converts an in-package absolute path to a forward-slash relative path for manifest and evidence identifiers.</en>
+# </lang>
 function Get-RelativePathForManifest {
     param(
         [string]$Root,
@@ -153,6 +179,10 @@ function Get-RelativePathForManifest {
     return ([System.IO.Path]::GetRelativePath($Root, $Path) -replace '\\', '/')
 }
 
+# <lang>
+#   <zh-CN>以下阶段只读取已存在的发布包并生成清单；输出目录可以创建，但不会修改发布包内容。</zh-CN>
+#   <en>The following stage reads an existing publish package and generates a manifest; the output directory may be created, but package contents are not modified.</en>
+# </lang>
 New-Item -ItemType Directory -Force -Path $runDirectory | Out-Null
 
 $packageRootPath = $packageRoot.Path
@@ -263,6 +293,10 @@ else {
     Add-ReleaseManifestCheck -Code 'REVIEW-PATHS' -Status 'Warning' -Message 'Review optional release paths.' -Evidence ($warningFiles | Select-Object -First 30)
 }
 
+# <lang>
+#   <zh-CN>敏感信号扫描只收集相对路径，不收集匹配行或值；它是发布前提示，不是秘密检测的完整保证。</zh-CN>
+#   <en>The sensitive-signal scan collects relative paths only, never matching lines or values; it is a release warning and not a complete secret-detection guarantee.</en>
+# </lang>
 $secretPattern = '(?i)(password|passwd|pwd|secret|token|privateKey|connectionString)\s*[=:]'
 $secretSignalFiles = New-Object 'System.Collections.Generic.List[string]'
 foreach ($file in $packageFiles) {
@@ -277,8 +311,10 @@ foreach ($file in $packageFiles) {
         }
     }
     catch {
-        # 中文：无法按 UTF-8 读取的文本候选不记录内容，避免把二进制或未知编码误写入证据。
-        # English: If a text candidate cannot be read as UTF-8, do not record its content in evidence.
+        # <lang>
+        #   <zh-CN>无法按 UTF-8 读取的文本候选不记录内容，避免把二进制或未知编码误写入证据。</zh-CN>
+        #   <en>If a text candidate cannot be read as UTF-8, do not record its content in evidence.</en>
+        # </lang>
     }
 }
 
@@ -289,6 +325,10 @@ else {
     Add-ReleaseManifestCheck -Code 'SENSITIVE-CONTENT-SIGNALS' -Status 'Warning' -Message 'Potential secret-key text signals found; paths only are recorded and values are not captured.' -Evidence ($secretSignalFiles | Select-Object -First 30)
 }
 
+# <lang>
+#   <zh-CN>门禁引用只保存已解析文件的路径、大小和哈希；不存在的引用产生 Warning，不会伪造通过结果。</zh-CN>
+#   <en>Gate references retain resolved file paths, sizes, and hashes only; missing references produce a warning and never fabricate a pass result.</en>
+# </lang>
 $gateResults = New-Object 'System.Collections.Generic.List[object]'
 foreach ($gatePath in $GateResultPath) {
     if ([string]::IsNullOrWhiteSpace($gatePath)) {
@@ -322,6 +362,10 @@ if ($gateResults.Count -gt 0) {
 $failedCount = @($checks | Where-Object { $_.Status -eq 'Fail' }).Count
 $warningCount = @($checks | Where-Object { $_.Status -eq 'Warning' }).Count
 
+# <lang>
+#   <zh-CN>清单输出包含路径、大小、哈希、门禁引用和状态，不包含敏感值；失败检查或 TreatWarningsAsErrors 会通过退出码阻止成功。</zh-CN>
+#   <en>The manifest contains paths, sizes, hashes, gate references, and statuses but no secret values; failed checks or TreatWarningsAsErrors prevent success through the exit code.</en>
+# </lang>
 $manifest = [pscustomobject][ordered]@{
     SchemaVersion = 'p13.1.release-manifest.v1'
     GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')

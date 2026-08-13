@@ -3,11 +3,10 @@
     Checks the read-only operations readiness surface for the Portal project.
 
 .DESCRIPTION
-    中文：本脚本检查运维页面、诊断日志、运营审计、公开运行手册、发布门禁和目标环境补证边界。
-    它只读取仓库文件，不连接 IIS、数据库或外置配置，也不修改日志、任务计划、备份或系统设置。
-    English: This script checks operations pages, diagnostic logging, operation audits, public runbook material,
-    release gates, and target-environment evidence boundaries. It only reads repository files and never connects to
-    IIS, databases, or external configuration, nor modifies logs, scheduled tasks, backups, or system settings.
+    <lang>
+      <zh-CN>本脚本检查运维页面、诊断日志、运营审计、公开运行手册、发布门禁和目标环境补证边界。它只读取仓库文件，不连接 IIS、数据库或外置配置，也不修改日志、任务计划、备份或系统设置。</zh-CN>
+      <en>This script checks operations pages, diagnostic logging, operation audits, public runbook material, release gates, and target-environment evidence boundaries. It only reads repository files and never connects to IIS, databases, or external configuration, nor modifies logs, scheduled tasks, backups, or system settings.</en>
+    </lang>
 #>
 [CmdletBinding()]
 param(
@@ -44,6 +43,10 @@ $resolvedDocsPath = (Resolve-Path -LiteralPath $DocsPath).Path
 $resolvedScriptsPath = (Resolve-Path -LiteralPath $ScriptsPath).Path
 $checks = New-Object 'System.Collections.Generic.List[object]'
 
+# <lang>
+#   <zh-CN>以 UTF-8 无 BOM 写入可选 JSON 输出；输出动作不改变被检查的仓库文件。</zh-CN>
+#   <en>Writes optional JSON output as UTF-8 without a BOM; output does not modify the repository files being checked.</en>
+# </lang>
 function Write-Utf8NoBomFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -58,6 +61,10 @@ function Write-Utf8NoBomFile {
     [System.IO.File]::WriteAllText($Path, $Content, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>追加结构化运维检查并输出低敏摘要；Evidence 只保存调用方提供的路径或说明。</zh-CN>
+#   <en>Adds a structured operations check and emits a low-sensitivity summary; Evidence contains only paths or descriptions supplied by the caller.</en>
+# </lang>
 function Add-OperationsCheck {
     param(
         [ValidateSet('Pass', 'Warning', 'Fail', 'Info', 'Pending')]
@@ -83,12 +90,20 @@ function Add-OperationsCheck {
     }
 }
 
+# <lang>
+#   <zh-CN>按 UTF-8 无 BOM读取仓库文本供正则检查；读取失败由脚本的严格错误策略传播。</zh-CN>
+#   <en>Reads repository text as UTF-8 without a BOM for regex checks; read failures propagate through the script's strict error policy.</en>
+# </lang>
 function Get-Utf8Text {
     param([Parameter(Mandatory = $true)][string]$LiteralPath)
 
     return [System.IO.File]::ReadAllText($LiteralPath, [System.Text.UTF8Encoding]::new($false))
 }
 
+# <lang>
+#   <zh-CN>把仓库内路径转换为正斜杠相对显示路径；仓库外路径保留绝对路径，不伪造归属。</zh-CN>
+#   <en>Converts in-repository paths to forward-slash relative display paths; paths outside the repository remain absolute and are not reassigned.</en>
+# </lang>
 function ConvertTo-DisplayPath {
     param([string]$Path)
 
@@ -101,6 +116,10 @@ function ConvertTo-DisplayPath {
     return $fullPath
 }
 
+# <lang>
+#   <zh-CN>先确认文件存在，再对 UTF-8 文本执行不区分大小写正则检查；不会修改匹配文件。</zh-CN>
+#   <en>Confirms that a file exists before applying a case-insensitive regex to UTF-8 text; matching never modifies the file.</en>
+# </lang>
 function Test-FileContains {
     param(
         [string]$LiteralPath,
@@ -111,27 +130,47 @@ function Test-FileContains {
         [regex]::IsMatch((Get-Utf8Text -LiteralPath $LiteralPath), $Pattern, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 }
 
+# <lang>
+#   <zh-CN>将门户相对路径解析到预先确定的 Portal 根目录，不接受检查过程中的外部目录扩展。</zh-CN>
+#   <en>Resolves a Portal-relative path under the predetermined Portal root and does not expand the external directory scope during checks.</en>
+# </lang>
 function Resolve-PortalFile {
     param([string]$RelativePath)
 
     return Join-Path $resolvedPortalPath ($RelativePath -replace '/', '\')
 }
 
+# <lang>
+#   <zh-CN>将公开文档相对路径解析到预先确定的 docs 根目录。</zh-CN>
+#   <en>Resolves a public-document relative path under the predetermined docs root.</en>
+# </lang>
 function Resolve-DocsFile {
     param([string]$RelativePath)
 
     return Join-Path $resolvedDocsPath ($RelativePath -replace '/', '\')
 }
 
+# <lang>
+#   <zh-CN>将脚本相对路径解析到预先确定的 dev/scripts 根目录。</zh-CN>
+#   <en>Resolves a script-relative path under the predetermined dev/scripts root.</en>
+# </lang>
 function Resolve-ScriptFile {
     param([string]$RelativePath)
 
     return Join-Path $resolvedScriptsPath ($RelativePath -replace '/', '\')
 }
 
+# <lang>
+#   <zh-CN>以下阶段只读取固定的 Portal/docs/scripts 根目录，并输出检查状态；Profile 只影响证据标签，不触发环境切换。</zh-CN>
+#   <en>The following stage reads only the fixed Portal/docs/scripts roots and emits check statuses; Profile labels evidence and does not switch environments.</en>
+# </lang>
 Write-Host ('PROFILE: {0}' -f $Profile)
 Write-Host 'MODE: read-only repository operations readiness check.'
 
+# <lang>
+#   <zh-CN>页面、项目文件、诊断、审计、脚本和公开手册检查只产生 Pass/Fail/Warning 事实，不执行修复或外部操作。</zh-CN>
+#   <en>Page, project, diagnostics, audit, script, and runbook checks produce Pass/Fail/Warning facts only; they perform no repair or external operation.</en>
+# </lang>
 $adminPages = @(
     'Admin/SystemHealth.aspx',
     'Admin/SystemHealth.aspx.cs',
@@ -262,6 +301,10 @@ Add-OperationsCheck -Severity Pending -Code 'OPS-TARGET-IIS' -Message 'Real IIS 
 Add-OperationsCheck -Severity Pending -Code 'OPS-TARGET-SQL-BACKUP' -Message 'SQL Server backup job, restore drill and recovery objective evidence are target-environment responsibilities.'
 Add-OperationsCheck -Severity Pending -Code 'OPS-ALERT-INTEGRATION' -Message 'Email, IM and webhook alerts remain extension points; no external alert channel is configured in this stage.'
 
+# <lang>
+#   <zh-CN>汇总保留目标环境 Pending 项；静态仓库检查通过不等于真实 IIS、SQL 备份或告警渠道已验证。</zh-CN>
+#   <en>The summary retains target-environment Pending items; a passing repository check does not prove real IIS, SQL backup, or alert-channel validation.</en>
+# </lang>
 $summary = [pscustomobject][ordered]@{
     Profile = $Profile
     PortalPath = $resolvedPortalPath
@@ -277,6 +320,10 @@ $summary = [pscustomobject][ordered]@{
 
 $summary
 
+# <lang>
+#   <zh-CN>只有调用方显式提供 OutputJson 时才写出 JSON；FailOnWarning 仅改变退出码，不改变检查内容。</zh-CN>
+#   <en>JSON is written only when OutputJson is explicitly supplied; FailOnWarning changes the exit code only, not check content.</en>
+# </lang>
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {
     Write-Utf8NoBomFile -Path $OutputJson -Content (($summary | ConvertTo-Json -Depth 8) + [Environment]::NewLine)
     Write-Host ('JSON: {0}' -f $OutputJson)
