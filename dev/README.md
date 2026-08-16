@@ -21,6 +21,27 @@ dev/scripts/Get-PortalReleaseSummary.ps1
 
 `Get-PortalReleaseSummary.ps1` 汇总发布包 manifest、运维证据包、文档化证据包和当前 Git 状态，用于发布说明和内部 release ledger。它只读，不打 tag、不创建分支、不发布文件、不连接 IIS 或数据库。
 
+## 自动化测试与回归入口
+
+默认本机单元回归使用 P28 建立的 MSTest runner：
+
+```powershell
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1
+```
+
+只读静态契约 gate 可与单元测试组合为默认开发回归层，包括前端契约、待办、业务权限/审计、协同工作流、发布 readiness 和 Dev 合规 baseline。它们不连接真实数据库、不启动 IIS、不创建账号：
+
+```powershell
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Test-PortalFrontendContracts.ps1
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Test-PortalWorkItemSmoke.ps1
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Test-PortalBusinessPermissionAudit.ps1
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Test-PortalCollaborationWorkflowSmoke.ps1
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Test-PortalPublishReadiness.ps1
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Test-PortalComplianceBaseline.ps1 -Profile Dev
+```
+
+HTTP、数据库 fixture、认证浏览器和真实目标环境回归是 opt-in 层。需要先确认隔离 test 配置、短生命周期账号、清理 proof 或目标环境证据，不应把本机 IIS Express 或一次性浏览器 proof 宣称为生产通过。
+
 ## 运维证据与例行任务
 
 ```powershell

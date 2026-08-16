@@ -8,6 +8,16 @@
 - [ ] `Release|Any CPU` 构建成功。
 - [ ] 构建日志中无新增错误。
 
+## 自动化回归分层
+
+- [ ] `unit`：执行 `mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1`，确认 MSTest runner 通过。
+- [ ] `static-contract`：执行只读静态 gate，例如 `Test-PortalFrontendContracts.ps1`、`Test-PortalWorkItemSmoke.ps1`、`Test-PortalBusinessPermissionAudit.ps1`、`Test-PortalCollaborationWorkflowSmoke.ps1`、`Test-PortalPublishReadiness.ps1` 和 `Test-PortalComplianceBaseline.ps1 -Profile Dev`。
+- [ ] `sql-review`：只生成或审查 P19/P22/P23/P24 场景 SQL；未显式提供外置 test 配置和 `-Apply` 前不得连接数据库。
+- [ ] `http-local`：需要本机 IIS Express 时使用 `Test-PortalSmoke.ps1 -StartIISExpress -StopWhenComplete`，只作为开发侧 HTTP smoke，不等同于真实 IIS/HTTPS 证据。
+- [ ] `db-fixture`：仅在仓库外 test `connectionStrings.config` 已确认时运行 `Initialize-PortalTestDatabase.ps1` 或 fixture helper，并保留 Inspect/Remove/零计数证据。
+- [ ] `browser-smoke`：仅在可清理短生命周期账号、隔离测试库和浏览器环境齐备时执行；密码、Cookie、连接串不得写入命令、日志或配置。
+- [ ] `external-target`：真实 SQL Server 版本、IIS/HTTPS/ACL/TLS 和企业扫描仍按目标环境证据或 Pending/Gaps 处理，不用本机结果冒充生产通过。
+
 ## 数据库检查
 
 - [ ] `Portal_CreateDB.sql` 可执行。

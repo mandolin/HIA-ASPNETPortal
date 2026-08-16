@@ -181,7 +181,19 @@ Win7 VM 或其他局域网设备访问 IIS Express 时，不能使用默认 loca
 脚本会同时保留 `localhost` 绑定并输出外部 URL。若 VM 仍无法访问，按脚本提示在主机管理员命令行中添加 URLACL 或防火墙规则。
 默认不传 `-HostName` 时仍使用原有 localhost 启动方式，不影响 Visual Studio 和 VSCode 既有调试路径。
 
-## 自动 Smoke 与 SQL Server 兼容检查
+## 自动化测试、Smoke 与 SQL Server 兼容检查
+
+P28 起新增正式 MSTest runner，默认只运行本机单元/契约测试，不连接数据库、不启动 IIS、不创建账号：
+
+```powershell
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1
+```
+
+需要快速复用已构建的测试程序集时，可显式跳过还原和构建：
+
+```powershell
+mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1 -NoRestore -NoBuild
+```
 
 P2.5 新增的 HTTP smoke 默认只检查已经运行的站点，不写入数据库，也不要求管理员凭据：
 
