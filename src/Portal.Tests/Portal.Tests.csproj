@@ -53,6 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PortalPermissionRegistryTests.cs" />
+    <Compile Include="PortalPasswordPolicyTests.cs" />
+    <Compile Include="PortalDatabaseProfileTests.cs" />
+    <Compile Include="PortalNavigationRegistryTests.cs" />
+    <Compile Include="PortalRoleParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
