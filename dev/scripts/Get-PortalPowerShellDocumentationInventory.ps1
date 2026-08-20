@@ -490,7 +490,8 @@ if ($OutputJson) {
 
 if ($OutputMarkdown) {
     $lines = New-Object 'System.Collections.Generic.List[string]'
-    $lines.Add('# P16.4 PowerShell Documentation Inventory')
+    # <lang><zh-CN>Markdown 标题使用通用 inventory 名称，避免 P33 证据包继续携带历史 P16.4 阶段标签而误导交接读者。</zh-CN><en>The Markdown title uses a generic inventory name so P33 evidence packages do not continue carrying the historical P16.4 stage label and mislead handoff readers.</en></lang>
+    $lines.Add('# PowerShell Documentation Inventory')
     $lines.Add('')
     $lines.Add("Generated UTC: $($inventory.GeneratedAtUtc)")
     $lines.Add('')
@@ -512,7 +513,8 @@ if ($OutputMarkdown) {
     $lines.Add('| Script | Category | Has Help | Sensitive Parameter |')
     $lines.Add('| --- | --- | --- | --- |')
     foreach ($item in $highRiskMissingHia) {
-        $lines.Add("| `$($item.Name)` | $($item.RiskCategory) | $($item.HasCommentHelp) | $($item.HasSensitiveParameter) |")
+        # <lang><zh-CN>脚本名单元格直接展开 item.Name；不要用 PowerShell 反引号模拟 Markdown code span，否则会把对象表达式文本写入证据表。</zh-CN><en>The script-name cell expands item.Name directly; do not emulate Markdown code spans with PowerShell backticks because that writes object-expression text into the evidence table.</en></lang>
+        $lines.Add("| $($item.Name) | $($item.RiskCategory) | $($item.HasCommentHelp) | $($item.HasSensitiveParameter) |")
     }
     $lines.Add('')
     $lines.Add('## Missing Comment Help')
@@ -520,7 +522,8 @@ if ($OutputMarkdown) {
     $lines.Add('| Script | Risk | Category |')
     $lines.Add('| --- | --- | --- |')
     foreach ($item in $missingHelp) {
-        $lines.Add("| `$($item.Name)` | $($item.RiskLevel) | $($item.RiskCategory) |")
+        # <lang><zh-CN>缺 help 表格也使用同一直接展开策略，保持 Markdown 证据的可读性和机器输出一致性。</zh-CN><en>The missing-help table uses the same direct expansion strategy to keep Markdown evidence readable and aligned with machine output.</en></lang>
+        $lines.Add("| $($item.Name) | $($item.RiskLevel) | $($item.RiskCategory) |")
     }
     $lines.Add('')
     $lines.Add('## Legacy `.LANG` Help Surface')
@@ -528,7 +531,8 @@ if ($OutputMarkdown) {
     $lines.Add('| Script | Risk | Category | Legacy markers | Surface |')
     $lines.Add('| --- | --- | --- | ---: | --- |')
     foreach ($item in $legacyLangHelpSurface) {
-        $lines.Add("| `$($item.Name)` | $($item.RiskLevel) | $($item.RiskCategory) | $($item.LegacyLangHelpSurfaceCount) | $($item.LanguageHelpSurface) |")
+        # <lang><zh-CN>旧 `.LANG` 债务表是本轮主要人工交接入口，脚本名必须显示为实际文件名而不是 PowerShell 对象表达式。</zh-CN><en>The legacy `.LANG` debt table is this round's main human handoff entry, so script names must render as real file names rather than PowerShell object expressions.</en></lang>
+        $lines.Add("| $($item.Name) | $($item.RiskLevel) | $($item.RiskCategory) | $($item.LegacyLangHelpSurfaceCount) | $($item.LanguageHelpSurface) |")
     }
     $lines.Add('')
     $lines.Add('## Evidence Summary')
