@@ -189,8 +189,8 @@ namespace ASPNET.StarterKit.Portal.Util
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>当前唯一支持的外置 XML 文件名；JSON/YAML 兼容性保留给后续规划。</zh-CN>
-        ///   <en>Only supported external XML file name for now; JSON/YAML compatibility is reserved for later planning.</en>
+        ///   <zh-CN>当前运行时唯一支持的外置 XML 文件名；没有 JSON/YAML 发现、解析或回退通道，相关支持必须以后续独立设计和门禁形式进入。</zh-CN>
+        ///   <en>The only external XML file name supported by the current runtime; there is no JSON/YAML discovery, parser, or fallback path, and such support must arrive through a later independent design and gate.</en>
         /// </lang>
         /// </summary>
         public const string ConnectionStringsFileName = "connectionStrings.config";
@@ -240,12 +240,8 @@ namespace ASPNET.StarterKit.Portal.Util
             string configFile = Path.Combine(configRoot, env, ConnectionStringsFileName);
 
             // <lang>
-            //   <zh-CN>外置文件必须存在，即使后续使用环境变量覆盖连接串值，也不能绕过文件结构校验。</zh-CN>
-            //   <en>The external file must exist even when an environment variable later overrides the sensitive connection-string value; the file contract still has to be validated.</en>
-            // </lang>
-            // <lang>
-            //   <zh-CN>读取外置文件中的敏感连接串值；空值或缺项在 helper 内作为配置错误拒绝。</zh-CN>
-            //   <en>Read the sensitive connection-string value from the external file; the helper rejects missing or blank entries as configuration errors.</en>
+            //   <zh-CN>先读取并校验当前唯一外置 XML 中的敏感连接串；即使稍后用环境变量覆盖敏感值，也必须先通过文件存在、根节点、逻辑名称和非空值契约。</zh-CN>
+            //   <en>Read and validate the sensitive connection string from the only supported external XML first; even if an environment variable later overrides the sensitive value, file existence, root element, logical name, and non-empty value contracts must pass.</en>
             // </lang>
             string connectionString = ReadConnectionString(configFile, LogicalConnectionStringName);
 
@@ -277,6 +273,10 @@ namespace ASPNET.StarterKit.Portal.Util
                     env);
             }
 
+            // <lang>
+            //   <zh-CN>没有环境变量覆盖时，来源记录为已验证 XML 文件路径；调用方仍只能使用结果对象，不得记录或展示敏感连接串本身。</zh-CN>
+            //   <en>When there is no environment-variable override, record the validated XML file path as the source; callers still consume only the result object and must not log or display the sensitive connection string itself.</en>
+            // </lang>
             return new ExternalConnectionStringLoadResult(
                 connectionString,
                 providerInvariantName,
@@ -497,8 +497,8 @@ namespace ASPNET.StarterKit.Portal.Util
             if (document.Root == null || !string.Equals(document.Root.Name.LocalName, "connectionStrings", StringComparison.OrdinalIgnoreCase))
             {
                 // <lang>
-                //   <zh-CN>保持和 .NET connectionStrings 结构接近，后续迁移或扩展时更容易理解。</zh-CN>
-                //   <en>Keep the shape close to .NET connectionStrings so later migration or extension remains easy to understand.</en>
+                //   <zh-CN>根节点检查采用 fail-closed：此处只接受外置 XML 的 connectionStrings 形状；它贴近 .NET 配置是为了人工迁移和审计，不表示会读取 Web.config/App.config 或其它格式。</zh-CN>
+                //   <en>The root check is fail-closed: this path accepts only the external XML connectionStrings shape; matching the .NET configuration shape aids manual migration and review, but does not mean Web.config/App.config or other formats are read.</en>
                 // </lang>
                 throw new ConfigurationErrorsException(
                     "External connection string file must use <connectionStrings> as root. File: " + configFile);
@@ -550,8 +550,8 @@ namespace ASPNET.StarterKit.Portal.Util
             if (!string.Equals(providerInvariantName, PortalDatabaseProviderNames.SqlServer, StringComparison.OrdinalIgnoreCase))
             {
                 // <lang>
-                //   <zh-CN>P3.3 proof 使用独立 profile；正常门户仍不能误切换到未完成迁移的 provider。</zh-CN>
-                //   <en>The P3.3 proof uses a separate profile; the normal Portal path must not accidentally switch to a provider whose migration is not complete.</en>
+                //   <zh-CN>P3.3 proof 使用独立 profile；主门户启动路径对非 SQL Server provider 仍必须 fail-closed，避免把 proof provider 误当成生产支持。</zh-CN>
+                //   <en>The P3.3 proof uses a separate profile; the primary Portal startup path must still fail closed for non-SQL Server providers so a proof provider is not mistaken for production support.</en>
                 // </lang>
                 throw new ConfigurationErrorsException(
                     "The primary Portal connection currently supports only '" +
