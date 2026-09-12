@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Creates a portable legacy IE smoke-test package.
-
-.LANG zh-CN
-创建可移植的旧 IE smoke 测试包。
+<lang>
+  <en>Creates a portable legacy IE smoke-test package.</en>
+  <zh-CN>创建可移植的旧 IE smoke 测试包。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,25 +12,22 @@ Creates a portable legacy IE smoke-test package.
 </lang>
 
 .PARAMETER BaseUrl
-.LANG en
-Portal base URL reachable from the VM.
-
-.LANG zh-CN
-虚拟机可访问的 Portal 基础地址。
+<lang>
+  <en>Portal base URL reachable from the VM.</en>
+  <zh-CN>虚拟机可访问的 Portal 基础地址。</zh-CN>
+</lang>
 
 .PARAMETER TaskName
-.LANG en
-Task label used in generated package and result names.
-
-.LANG zh-CN
-用于生成包和结果名称的任务标签。
+<lang>
+  <en>Task label used in generated package and result names.</en>
+  <zh-CN>用于生成包和结果名称的任务标签。</zh-CN>
+</lang>
 
 .PARAMETER AdminUser
-.LANG en
-Logical admin user name used by the generated smoke script.
-
-.LANG zh-CN
-生成的 smoke 脚本使用的逻辑管理员用户名。
+<lang>
+  <en>Logical admin user name used by the generated smoke script.</en>
+  <zh-CN>生成的 smoke 脚本使用的逻辑管理员用户名。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Validates the portal XML documentation build outputs.
-
-.LANG zh-CN
-验证门户 XML 文档构建输出。
+<lang>
+  <en>Validates the portal XML documentation build outputs.</en>
+  <zh-CN>验证门户 XML 文档构建输出。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,11 +12,10 @@ Validates the portal XML documentation build outputs.
 </lang>
 
 .PARAMETER Build
-.LANG en
-Builds the solution before checking the XML documentation artifacts.
-
-.LANG zh-CN
-检查 XML 文档产物前先构建解决方案。
+<lang>
+  <en>Builds the solution before checking the XML documentation artifacts.</en>
+  <zh-CN>检查 XML 文档产物前先构建解决方案。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(
@@ -98,4 +96,36 @@ $results = foreach ($expectedDocument in $expectedDocuments) {
     }
 }
 
+# <lang>
+#   <zh-CN>按 P33.1 轻量证据摘要口径附上 EvidenceSummary，明确本 XML 文档验证证明什么、不证明什么、如何复现及待补证缺口。</zh-CN>
+#   <en>Append an EvidenceSummary under the P33.1 contract, stating what this XML documentation verification proves, does not prove, how to reproduce it, and which gaps still need review.</en>
+# </lang>
+$evidenceSummary = [pscustomobject][ordered]@{
+    SchemaVersion = 'p33.lightweight-evidence-summary.v1'
+    GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+    Tool = 'Test-PortalXmlDocumentation.ps1'
+    Command = 'pwsh -NoLogo -NoProfile -File dev/scripts/Test-PortalXmlDocumentation.ps1 [-Build]'
+    Scope = 'Four controlled assembly XML documentation outputs (Portal, Portal.Components, Portal.Components.Data, Portal.Components.Data1)'
+    ExecutionMode = if ($Build) { 'build-and-verify' } else { 'read-only-verify' }
+    ExitCodePolicy = 'Throws (non-zero exit) on any missing/unparseable/assembly-mismatched/empty XML; otherwise 0'
+    Writes = if ($Build) { @('Build-Solution.ps1 Debug|Any CPU outputs') } else { @('None; validates pre-existing XML outputs only') }
+    Proves = @(
+        'Each expected XML documentation file exists, parses as valid XML, declares the expected assembly name, and contains at least one member entry.'
+    )
+    DoesNotProve = @(
+        'Without -Build, it validates pre-existing build outputs only and does not confirm the current source compiles or that docs are up to date.'
+        'Does not confirm semantic completeness of XML docs, that all public APIs are documented, or target-environment build success.'
+    )
+    Counts = @($results | ForEach-Object {
+        [pscustomobject]@{ Name = ('XmlMembers.' + $_.Project); Value = $_.MemberCount; Meaning = 'Member entries in the validated XML documentation for this assembly.' }
+    })
+    Findings = @()
+    PendingGaps = @(
+        [pscustomobject]@{ Code = 'BUILD_REQUIRED_FOR_FRESH'; Reason = 'Without -Build, validation depends on previously built XML outputs in the working tree.'; OwnerHint = 'Run with -Build in CI or after a Visual Studio Debug|Any CPU build' }
+        [pscustomobject]@{ Code = 'SEMANTIC_DOC_COVERAGE'; Reason = 'Member count does not prove documentation quality or coverage of all public APIs.'; OwnerHint = 'Separate XML doc coverage review' }
+    )
+    RecommendedNextAction = 'Run with -Build in CI to validate current source; treat member counts as existence/structure signals, not coverage guarantees.'
+}
+
 $results
+$evidenceSummary

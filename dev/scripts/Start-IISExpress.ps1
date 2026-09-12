@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Starts IIS Express for the Portal development site.
-
-.LANG zh-CN
-为 Portal 开发站点启动 IIS Express。
+<lang>
+  <en>Starts IIS Express for the Portal development site.</en>
+  <zh-CN>为 Portal 开发站点启动 IIS Express。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,33 +12,28 @@ Starts IIS Express for the Portal development site.
 </lang>
 
 .PARAMETER Port
-.LANG en
-Local IIS Express port.
-
-.LANG zh-CN
-本地 IIS Express 端口。
+<lang>
+  <en>Local IIS Express port.</en>
+  <zh-CN>本地 IIS Express 端口。</zh-CN>
+</lang>
 
 .PARAMETER SitePath
-.LANG en
-Portal site physical path. Defaults to src/Portal.
-
-.LANG zh-CN
-Portal 站点物理路径，默认指向 src/Portal。
+<lang>
+  <en>Portal site physical path. Defaults to src/Portal.</en>
+  <zh-CN>Portal 站点物理路径，默认指向 src/Portal。</zh-CN>
+</lang>
 
 .PARAMETER VirtualPath
-.LANG en
-Optional virtual application path used to approximate IIS virtual-directory
-deployment.
-
-.LANG zh-CN
-可选虚拟应用路径，用于近似验证 IIS 虚拟目录部署形态。
+<lang>
+  <en>Optional virtual application path used to approximate IIS virtual-directory deployment.</en>
+  <zh-CN>可选虚拟应用路径，用于近似验证 IIS 虚拟目录部署形态。</zh-CN>
+</lang>
 
 .PARAMETER HostName
-.LANG en
-Host name for the generated IIS Express binding.
-
-.LANG zh-CN
-生成 IIS Express 绑定时使用的主机名。
+<lang>
+  <en>Host name for the generated IIS Express binding.</en>
+  <zh-CN>生成 IIS Express 绑定时使用的主机名。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

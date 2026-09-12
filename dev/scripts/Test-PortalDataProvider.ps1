@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Builds and runs the SQLite data-provider proof project.
-
-.LANG zh-CN
-构建并运行 SQLite 数据 provider proof 项目。
+<lang>
+  <en>Builds and runs the SQLite data-provider proof project.</en>
+  <zh-CN>构建并运行 SQLite 数据 provider proof 项目。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,25 +12,22 @@ Builds and runs the SQLite data-provider proof project.
 </lang>
 
 .PARAMETER Configuration
-.LANG en
-Build configuration for the proof project, normally Debug or Release.
-
-.LANG zh-CN
-proof 项目的构建配置，通常为 Debug 或 Release。
+<lang>
+  <en>Build configuration for the proof project, normally Debug or Release.</en>
+  <zh-CN>proof 项目的构建配置，通常为 Debug 或 Release。</zh-CN>
+</lang>
 
 .PARAMETER DatabasePath
-.LANG en
-Optional SQLite database path. The resolved path must stay under temp/provider-proof/data.
-
-.LANG zh-CN
-可选 SQLite 数据库路径。解析后的路径必须位于 temp/provider-proof/data 下。
+<lang>
+  <en>Optional SQLite database path. The resolved path must stay under temp/provider-proof/data.</en>
+  <zh-CN>可选 SQLite 数据库路径。解析后的路径必须位于 temp/provider-proof/data 下。</zh-CN>
+</lang>
 
 .PARAMETER KeepDatabase
-.LANG en
-Keeps an existing proof database instead of deleting it before the run.
-
-.LANG zh-CN
-运行前保留已有 proof 数据库，而不是先删除它。
+<lang>
+  <en>Keeps an existing proof database instead of deleting it before the run.</en>
+  <zh-CN>运行前保留已有 proof 数据库，而不是先删除它。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

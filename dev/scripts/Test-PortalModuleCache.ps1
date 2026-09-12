@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs the module cache isolation proof against a test database configuration.
-
-.LANG zh-CN
-针对测试数据库配置运行模块缓存隔离 proof。
+<lang>
+  <en>Runs the module cache isolation proof against a test database configuration.</en>
+  <zh-CN>针对测试数据库配置运行模块缓存隔离 proof。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,25 +12,22 @@ Runs the module cache isolation proof against a test database configuration.
 </lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-External connectionStrings.config file containing the Portal SQL Server connection string.
-
-.LANG zh-CN
-包含 Portal SQL Server 连接串的外置 connectionStrings.config 文件。
+<lang>
+  <en>External connectionStrings.config file containing the Portal SQL Server connection string.</en>
+  <zh-CN>包含 Portal SQL Server 连接串的外置 connectionStrings.config 文件。</zh-CN>
+</lang>
 
 .PARAMETER Port
-.LANG en
-IIS Express port used by the isolated cache proof site.
-
-.LANG zh-CN
-隔离缓存 proof 站点使用的 IIS Express 端口。
+<lang>
+  <en>IIS Express port used by the isolated cache proof site.</en>
+  <zh-CN>隔离缓存 proof 站点使用的 IIS Express 端口。</zh-CN>
+</lang>
 
 .PARAMETER CacheSeconds
-.LANG en
-Temporary cache duration used for the module instance under test.
-
-.LANG zh-CN
-测试模块实例使用的临时缓存秒数。
+<lang>
+  <en>Temporary cache duration used for the module instance under test.</en>
+  <zh-CN>测试模块实例使用的临时缓存秒数。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

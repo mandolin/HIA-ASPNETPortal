@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Checks or applies Portal SQL compatibility migrations.
-
-.LANG zh-CN
-检查或执行 Portal SQL 兼容性迁移。
+<lang>
+  <en>Checks or applies Portal SQL compatibility migrations.</en>
+  <zh-CN>检查或执行 Portal SQL 兼容性迁移。</zh-CN>
+</lang>
 
 <lang>
   <en>Connects to the configured SQL Server database and verifies selected schema milestones. Apply switches execute migration scripts and therefore change the target database; require switches are read-only checks. Use only against a prepared development, test, or explicitly approved target database. The script does not print connection-string secrets and should be run with a template or external config file excluded from Git when it contains credentials.</en>
@@ -12,74 +11,64 @@ Checks or applies Portal SQL compatibility migrations.
 </lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-Connection strings config file used to locate the target database.
-
-.LANG zh-CN
-用于定位目标数据库的连接串配置文件。
+<lang>
+  <en>Connection strings config file used to locate the target database.</en>
+  <zh-CN>用于定位目标数据库的连接串配置文件。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringName
-.LANG en
-Logical connection-string name, defaults to Portal.
-
-.LANG zh-CN
-逻辑连接串名称，默认为 Portal。
+<lang>
+  <en>Logical connection-string name, defaults to Portal.</en>
+  <zh-CN>逻辑连接串名称，默认为 Portal。</zh-CN>
+</lang>
 
 .PARAMETER ApplyP2Migrations
-.LANG en
-Applies P2 migration scripts and changes the target database.
-
-.LANG zh-CN
-执行 P2 迁移脚本，并会修改目标数据库。
+<lang>
+  <en>Applies P2 migration scripts and changes the target database.</en>
+  <zh-CN>执行 P2 迁移脚本，并会修改目标数据库。</zh-CN>
+</lang>
 
 .PARAMETER RequireP2Migrations
-.LANG en
-Checks P2 schema without applying changes.
-
-.LANG zh-CN
-仅检查 P2 schema，不执行变更。
+<lang>
+  <en>Checks P2 schema without applying changes.</en>
+  <zh-CN>仅检查 P2 schema，不执行变更。</zh-CN>
+</lang>
 
 .PARAMETER ApplyP21CollaborationItemMigration
-.LANG en
-Applies P21 collaboration-item migration scripts and changes the target database.
-
-.LANG zh-CN
-执行 P21 企业协同事项迁移脚本，并会修改目标数据库。
+<lang>
+  <en>Applies P21 collaboration-item migration scripts and changes the target database.</en>
+  <zh-CN>执行 P21 企业协同事项迁移脚本，并会修改目标数据库。</zh-CN>
+</lang>
 
 .PARAMETER RequireP21CollaborationItemMigration
-.LANG en
-Checks P21 collaboration-item schema without applying changes.
-
-.LANG zh-CN
-仅检查 P21 企业协同事项 schema，不执行变更。
+<lang>
+  <en>Checks P21 collaboration-item schema without applying changes.</en>
+  <zh-CN>仅检查 P21 企业协同事项 schema，不执行变更。</zh-CN>
+</lang>
 
 .PARAMETER ApplyP23ReferenceDataMigration
-.LANG en
-Applies the P23 governed business reference-data migration and changes the target database.
-
-.LANG zh-CN
-执行 P23 受治理业务参考数据迁移，并会修改目标数据库。
+<lang>
+  <en>Applies the P23 governed business reference-data migration and changes the target database.</en>
+  <zh-CN>执行 P23 受治理业务参考数据迁移，并会修改目标数据库。</zh-CN>
+</lang>
 
 .PARAMETER RequireP23ReferenceDataMigration
-.LANG en
-Checks P23 governed business reference-data schema without applying changes.
-
-.LANG zh-CN
-仅检查 P23 受治理业务参考数据 schema，不执行变更。
+<lang>
+  <en>Checks P23 governed business reference-data schema without applying changes.</en>
+  <zh-CN>仅检查 P23 受治理业务参考数据 schema，不执行变更。</zh-CN>
+</lang>
 
 .PARAMETER ApplyP23CollaborationCommentWorkflowMigration
-.LANG en
-Applies the P23.6 collaboration-item comment and workflow-rule migration and changes the target database.
-
-.LANG zh-CN
-执行 P23.6 协同事项评论与状态规则迁移，并会修改目标数据库。
+<lang>
+  <en>Applies the P23.6 collaboration-item comment and workflow-rule migration and changes the target database.</en>
+  <zh-CN>执行 P23.6 协同事项评论与状态规则迁移，并会修改目标数据库。</zh-CN>
+</lang>
 
 .PARAMETER RequireP23CollaborationCommentWorkflowMigration
-.LANG en
-Checks the P23.6 collaboration-item comment and workflow-rule schema without applying changes.
-
-.LANG zh-CN
-仅检查 P23.6 协同事项评论与状态规则 schema，不执行变更。
+<lang>
+  <en>Checks the P23.6 collaboration-item comment and workflow-rule schema without applying changes.</en>
+  <zh-CN>仅检查 P23.6 协同事项评论与状态规则 schema，不执行变更。</zh-CN>
+</lang>
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(

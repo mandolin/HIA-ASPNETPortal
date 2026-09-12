@@ -1,36 +1,27 @@
 <#
 .SYNOPSIS
-.LANG en
-Checks default-credential and legacy password-risk markers.
-
-.LANG zh-CN
-检查默认凭据和旧口令风险标记。
-
 <lang>
   <en>Runs read-only checks for seeded default credentials, legacy password hashes, documentation warnings, setup scripts, and profile-specific risk expectations. It does not connect to a live database, verify real passwords, print secrets, or change setup scripts or Web.config.</en>
   <zh-CN>只读检查默认凭据 seed、旧口令哈希、文档警告、安装脚本以及不同 profile 下的风险期望。它不连接实时数据库、不校验真实密码、不输出密钥，也不修改安装脚本或 Web.config。</zh-CN>
 </lang>
 
 .PARAMETER Profile
-.LANG en
-Risk profile used to classify Dev/Test/Prod/Scan expectations.
-
-.LANG zh-CN
-用于分类 Dev/Test/Prod/Scan 期望的风险 profile。
+<lang>
+  <en>Risk profile used to classify Dev/Test/Prod/Scan expectations.</en>
+  <zh-CN>用于分类 Dev/Test/Prod/Scan 期望的风险 profile。</zh-CN>
+</lang>
 
 .PARAMETER OutputJson
-.LANG en
-Optional JSON evidence output path.
-
-.LANG zh-CN
-可选 JSON 证据输出路径。
+<lang>
+  <en>Optional JSON evidence output path.</en>
+  <zh-CN>可选 JSON 证据输出路径。</zh-CN>
+</lang>
 
 .PARAMETER FailOnWarning
-.LANG en
-Treats warnings as a failed gate for stricter security runs.
-
-.LANG zh-CN
-在更严格的安全运行中将 Warning 视为门禁失败。
+<lang>
+  <en>Treats warnings as a failed gate for stricter security runs.</en>
+  <zh-CN>在更严格的安全运行中将 Warning 视为门禁失败。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

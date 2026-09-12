@@ -1,44 +1,38 @@
 <#
 .SYNOPSIS
-.LANG en
-Creates the VM task-agent package for legacy-browser automation.
+<lang>
+  <en>Creates the VM task-agent package for legacy-browser automation.</en>
+  <zh-CN>创建用于旧浏览器自动化的 VM 任务代理包。</zh-CN>
+</lang>
 
-.LANG zh-CN
-创建用于旧浏览器自动化的 VM 任务代理包。
-
-.LANG en
 <lang>
   <en>Builds a portable VM-side task-agent package that polls a shared tasks folder, executes approved task commands, and writes structured logs/results back to the shared root. The package generator writes files and optionally a zip archive; it does not start the VM agent, does not run browser tests locally, and does not embed passwords or production secrets.</en>
   <zh-CN>生成 VM 侧任务代理包。该代理会轮询共享 tasks 目录，执行经任务清单声明的命令，并把结构化日志和结果写回共享根目录。包生成脚本只写入文件并可选生成 zip；它不会启动 VM 代理、不会在本机运行浏览器测试，也不会内嵌密码或生产密钥。</zh-CN>
 </lang>
 
 .PARAMETER OutputRoot
-.LANG en
-Local folder where generated package folders and zip files are written.
-
-.LANG zh-CN
-写入生成包目录和 zip 文件的本地目录。
+<lang>
+  <en>Local folder where generated package folders and zip files are written.</en>
+  <zh-CN>写入生成包目录和 zip 文件的本地目录。</zh-CN>
+</lang>
 
 .PARAMETER DeployRoot
-.LANG en
-Optional shared VM folder where the generated package is copied.
-
-.LANG zh-CN
-可选的 VM 共享目录，用于复制生成后的代理包。
+<lang>
+  <en>Optional shared VM folder where the generated package is copied.</en>
+  <zh-CN>可选的 VM 共享目录，用于复制生成后的代理包。</zh-CN>
+</lang>
 
 .PARAMETER PollSeconds
-.LANG en
-Polling interval used by the generated VM agent.
-
-.LANG zh-CN
-生成的 VM 代理使用的轮询间隔。
+<lang>
+  <en>Polling interval used by the generated VM agent.</en>
+  <zh-CN>生成的 VM 代理使用的轮询间隔。</zh-CN>
+</lang>
 
 .PARAMETER MaxTaskSeconds
-.LANG en
-Maximum execution time enforced by the generated VM agent.
-
-.LANG zh-CN
-生成的 VM 代理强制执行的单任务最长运行时间。
+<lang>
+  <en>Maximum execution time enforced by the generated VM agent.</en>
+  <zh-CN>生成的 VM 代理强制执行的单任务最长运行时间。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

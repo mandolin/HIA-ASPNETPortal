@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs static smoke checks for a trusted business module package.
-
-.LANG zh-CN
-对受信任业务模块包运行静态 smoke 检查。
+<lang>
+  <en>Runs static smoke checks for a trusted business module package.</en>
+  <zh-CN>对受信任业务模块包运行静态 smoke 检查。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,53 +12,46 @@ Runs static smoke checks for a trusted business module package.
 </lang>
 
 .PARAMETER ModuleName
-.LANG en
-Module folder/name used to locate the default DesktopModules path and expected package identity.
-
-.LANG zh-CN
-用于定位默认 DesktopModules 路径和预期包标识的模块文件夹/名称。
+<lang>
+  <en>Module folder/name used to locate the default DesktopModules path and expected package identity.</en>
+  <zh-CN>用于定位默认 DesktopModules 路径和预期包标识的模块文件夹/名称。</zh-CN>
+</lang>
 
 .PARAMETER ModuleDirectory
-.LANG en
-Optional explicit module directory. When omitted, DesktopModules/ModuleName is used.
-
-.LANG zh-CN
-可选显式模块目录。省略时使用 DesktopModules/ModuleName。
+<lang>
+  <en>Optional explicit module directory. When omitted, DesktopModules/ModuleName is used.</en>
+  <zh-CN>可选显式模块目录。省略时使用 DesktopModules/ModuleName。</zh-CN>
+</lang>
 
 .PARAMETER ExpectedPackageId
-.LANG en
-Optional expected package id; defaults to HIA.ModuleName.
-
-.LANG zh-CN
-可选预期 package id；默认使用 HIA.ModuleName。
+<lang>
+  <en>Optional expected package id; defaults to HIA.ModuleName.</en>
+  <zh-CN>可选预期 package id；默认使用 HIA.ModuleName。</zh-CN>
+</lang>
 
 .PARAMETER ExpectedDesktopEntry
-.LANG en
-Optional expected desktop ASCX entry declared by the manifest.
-
-.LANG zh-CN
-可选预期桌面 ASCX 入口，用于与 manifest 声明对比。
+<lang>
+  <en>Optional expected desktop ASCX entry declared by the manifest.</en>
+  <zh-CN>可选预期桌面 ASCX 入口，用于与 manifest 声明对比。</zh-CN>
+</lang>
 
 .PARAMETER SqlMigrationFile
-.LANG en
-Optional migration script path that should exist under src/Setup.
-
-.LANG zh-CN
-可选迁移脚本路径，应位于 src/Setup 下。
+<lang>
+  <en>Optional migration script path that should exist under src/Setup.</en>
+  <zh-CN>可选迁移脚本路径，应位于 src/Setup 下。</zh-CN>
+</lang>
 
 .PARAMETER AllowModuleScripts
-.LANG en
-Allows module script resources for packages whose design explicitly permits them.
-
-.LANG zh-CN
-允许显式设计为可加载脚本资源的模块包。
+<lang>
+  <en>Allows module script resources for packages whose design explicitly permits them.</en>
+  <zh-CN>允许显式设计为可加载脚本资源的模块包。</zh-CN>
+</lang>
 
 .PARAMETER SkipSqlMigrationCheck
-.LANG en
-Skips the optional SQL migration file check.
-
-.LANG zh-CN
-跳过可选 SQL 迁移文件检查。
+<lang>
+  <en>Skips the optional SQL migration file check.</en>
+  <zh-CN>跳过可选 SQL 迁移文件检查。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

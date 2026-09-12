@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs an isolated theme-resolution proof against a test database configuration.
-
-.LANG zh-CN
-针对测试数据库配置运行隔离主题解析 proof。
+<lang>
+  <en>Runs an isolated theme-resolution proof against a test database configuration.</en>
+  <zh-CN>针对测试数据库配置运行隔离主题解析 proof。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,18 +12,16 @@ Runs an isolated theme-resolution proof against a test database configuration.
 </lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-External connectionStrings.config file containing the Portal SQL Server connection string.
-
-.LANG zh-CN
-包含 Portal SQL Server 连接串的外置 connectionStrings.config 文件。
+<lang>
+  <en>External connectionStrings.config file containing the Portal SQL Server connection string.</en>
+  <zh-CN>包含 Portal SQL Server 连接串的外置 connectionStrings.config 文件。</zh-CN>
+</lang>
 
 .PARAMETER Port
-.LANG en
-IIS Express port used by the isolated theme proof site.
-
-.LANG zh-CN
-隔离主题 proof 站点使用的 IIS Express 端口。
+<lang>
+  <en>IIS Express port used by the isolated theme proof site.</en>
+  <zh-CN>隔离主题 proof 站点使用的 IIS Express 端口。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

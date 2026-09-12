@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Captures reference screenshots for the deployed portal themes.
-
-.LANG zh-CN
-采集已部署门户主题的参考截图。
+<lang>
+  <en>Captures reference screenshots for the deployed portal themes.</en>
+  <zh-CN>采集已部署门户主题的参考截图。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,46 +12,40 @@ Captures reference screenshots for the deployed portal themes.
 </lang>
 
 .PARAMETER BaseUrl
-.LANG en
-Portal base URL used by the screenshot capture flow.
-
-.LANG zh-CN
-截图采集流程使用的门户基础 URL。
+<lang>
+  <en>Portal base URL used by the screenshot capture flow.</en>
+  <zh-CN>截图采集流程使用的门户基础 URL。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-External connectionStrings.config file used to update temporary theme settings.
-
-.LANG zh-CN
-用于更新临时主题设置的外置 connectionStrings.config 文件。
+<lang>
+  <en>External connectionStrings.config file used to update temporary theme settings.</en>
+  <zh-CN>用于更新临时主题设置的外置 connectionStrings.config 文件。</zh-CN>
+</lang>
 
 .PARAMETER P64ContextPath
-.LANG en
-Regression context JSON for employee profile confirmation screenshots.
-
-.LANG zh-CN
-员工资料确认截图使用的回归上下文 JSON。
+<lang>
+  <en>Regression context JSON for employee profile confirmation screenshots.</en>
+  <zh-CN>员工资料确认截图使用的回归上下文 JSON。</zh-CN>
+</lang>
 
 .PARAMETER P65ContextPath
-.LANG en
-Acceptance context JSON for employee profile correction screenshots.
-
-.LANG zh-CN
-员工资料更正截图使用的验收上下文 JSON。
+<lang>
+  <en>Acceptance context JSON for employee profile correction screenshots.</en>
+  <zh-CN>员工资料更正截图使用的验收上下文 JSON。</zh-CN>
+</lang>
 
 .PARAMETER OutputDirectory
-.LANG en
-Target directory for captured screenshots and related review artifacts.
-
-.LANG zh-CN
-截图和相关复核产物的目标目录。
+<lang>
+  <en>Target directory for captured screenshots and related review artifacts.</en>
+  <zh-CN>截图和相关复核产物的目标目录。</zh-CN>
+</lang>
 
 .PARAMETER Themes
-.LANG en
-Theme names to apply and capture.
-
-.LANG zh-CN
-需要应用并采集的主题名称列表。
+<lang>
+  <en>Theme names to apply and capture.</en>
+  <zh-CN>需要应用并采集的主题名称列表。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

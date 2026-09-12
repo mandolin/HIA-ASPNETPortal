@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Restores NuGet packages for the portal solution.
-
-.LANG zh-CN
-还原门户解决方案的 NuGet 包。
+<lang>
+  <en>Restores NuGet packages for the portal solution.</en>
+  <zh-CN>还原门户解决方案的 NuGet 包。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>

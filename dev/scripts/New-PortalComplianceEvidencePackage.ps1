@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Creates a compliance evidence package from existing read-only gates.
-
-.LANG zh-CN
-基于现有只读门禁生成合规证据包。
+<lang>
+  <en>Creates a compliance evidence package from existing read-only gates.</en>
+  <zh-CN>基于现有只读门禁生成合规证据包。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,32 +12,28 @@ Creates a compliance evidence package from existing read-only gates.
 </lang>
 
 .PARAMETER Profile
-.LANG en
-Compliance profile name used by downstream gates and the evidence directory name.
-
-.LANG zh-CN
-传给下游门禁并用于证据目录命名的合规 profile。
+<lang>
+  <en>Compliance profile name used by downstream gates and the evidence directory name.</en>
+  <zh-CN>传给下游门禁并用于证据目录命名的合规 profile。</zh-CN>
+</lang>
 
 .PARAMETER BaseUrl
-.LANG en
-Optional portal URL passed to gates that can inspect HTTP responses.
-
-.LANG zh-CN
-可选门户 URL，会传给能够检查 HTTP 响应的门禁。
+<lang>
+  <en>Optional portal URL passed to gates that can inspect HTTP responses.</en>
+  <zh-CN>可选门户 URL，会传给能够检查 HTTP 响应的门禁。</zh-CN>
+</lang>
 
 .PARAMETER OutputRoot
-.LANG en
-Optional evidence root. Defaults to WorkZone evidence when WorkZone exists, otherwise temp.
-
-.LANG zh-CN
-可选证据根目录。存在 WorkZone 时默认写入 WorkZone evidence，否则写入 temp。
+<lang>
+  <en>Optional evidence root. Defaults to WorkZone evidence when WorkZone exists, otherwise temp.</en>
+  <zh-CN>可选证据根目录。存在 WorkZone 时默认写入 WorkZone evidence，否则写入 temp。</zh-CN>
+</lang>
 
 .PARAMETER AllowFailures
-.LANG en
-Writes the package even when one or more gates fail, instead of returning a failing exit code.
-
-.LANG zh-CN
-即使一个或多个门禁失败也写出证据包，而不是返回失败退出码。
+<lang>
+  <en>Writes the package even when one or more gates fail, instead of returning a failing exit code.</en>
+  <zh-CN>即使一个或多个门禁失败也写出证据包，而不是返回失败退出码。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

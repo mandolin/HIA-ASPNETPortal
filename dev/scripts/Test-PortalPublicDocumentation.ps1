@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Validates the public Markdown documentation surface.
-
-.LANG zh-CN
-验证公开 Markdown 文档面。
+<lang>
+  <en>Validates the public Markdown documentation surface.</en>
+  <zh-CN>验证公开 Markdown 文档面。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>

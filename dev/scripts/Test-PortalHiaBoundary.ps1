@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Builds and runs the HIA boundary proof project.
-
-.LANG zh-CN
-构建并运行 HIA 边界 proof 项目。
+<lang>
+  <en>Builds and runs the HIA boundary proof project.</en>
+  <zh-CN>构建并运行 HIA 边界 proof 项目。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,11 +12,10 @@ Builds and runs the HIA boundary proof project.
 </lang>
 
 .PARAMETER Configuration
-.LANG en
-Build configuration for the proof project, normally Debug or Release.
-
-.LANG zh-CN
-proof 项目的构建配置，通常为 Debug 或 Release。
+<lang>
+  <en>Build configuration for the proof project, normally Debug or Release.</en>
+  <zh-CN>proof 项目的构建配置，通常为 Debug 或 Release。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

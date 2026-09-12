@@ -1,44 +1,38 @@
 <#
 .SYNOPSIS
-.LANG en
-Creates a task for the Win7/legacy-browser VM task agent.
+<lang>
+  <en>Creates a task for the Win7/legacy-browser VM task agent.</en>
+  <zh-CN>为 Win7/旧浏览器 VM 任务代理创建任务。</zh-CN>
+</lang>
 
-.LANG zh-CN
-为 Win7/旧浏览器 VM 任务代理创建任务。
-
-.LANG en
 <lang>
   <en>Writes a task manifest and optional package reference into the shared VM agent directory so the already-running VM agent can execute it. The script may copy command text and package paths to the shared folder, but it does not execute the task locally and should never include raw passwords, tokens, cookies, or connection strings in the task record. Use password placeholders resolved inside the VM-side credential files when authentication is required.</en>
   <zh-CN>向共享的 VM 代理目录写入任务清单和可选包引用，使已经运行的 VM 代理能够执行该任务。本脚本可能把命令文本和包路径写入共享目录，但不会在本机执行任务；任务记录中绝不能写入原始密码、Token、Cookie 或连接串。需要认证时，应使用占位符，由 VM 侧凭据文件解析。</zh-CN>
 </lang>
 
 .PARAMETER AgentRoot
-.LANG en
-Shared root directory watched by the VM task agent.
-
-.LANG zh-CN
-VM 任务代理监听的共享根目录。
+<lang>
+  <en>Shared root directory watched by the VM task agent.</en>
+  <zh-CN>VM 任务代理监听的共享根目录。</zh-CN>
+</lang>
 
 .PARAMETER TaskName
-.LANG en
-Human-readable task name used in manifest and result files.
-
-.LANG zh-CN
-写入任务清单和结果文件的人类可读任务名称。
+<lang>
+  <en>Human-readable task name used in manifest and result files.</en>
+  <zh-CN>写入任务清单和结果文件的人类可读任务名称。</zh-CN>
+</lang>
 
 .PARAMETER Command
-.LANG en
-Command lines to execute inside the VM agent.
-
-.LANG zh-CN
-由 VM 代理在虚拟机内执行的命令行。
+<lang>
+  <en>Command lines to execute inside the VM agent.</en>
+  <zh-CN>由 VM 代理在虚拟机内执行的命令行。</zh-CN>
+</lang>
 
 .PARAMETER RunUser
-.LANG en
-Logical user key used by the VM-side credential resolver.
-
-.LANG zh-CN
-供 VM 侧凭据解析器使用的逻辑用户键。
+<lang>
+  <en>Logical user key used by the VM-side credential resolver.</en>
+  <zh-CN>供 VM 侧凭据解析器使用的逻辑用户键。</zh-CN>
+</lang>
 #>
 [CmdletBinding(DefaultParameterSetName = 'Command')]
 param(

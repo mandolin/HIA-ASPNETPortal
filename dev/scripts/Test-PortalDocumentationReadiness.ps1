@@ -470,14 +470,62 @@ Add-DocumentationCheck -Severity Pass -Code 'DOC-NO-CODE-REWRITE' -Message 'Read
 #   <zh-CN>汇总所有检查及失败/警告/Pending 计数；只有调用方显式指定 OutputJson 时才写文件。</zh-CN>
 #   <en>Summarize all checks and failure/warning/pending counts; write a file only when OutputJson is explicit.</en>
 # </lang>
+# <lang>
+#   <zh-CN>按 P33.1 轻量证据摘要口径附上 EvidenceSummary，明确本 readiness 门禁证明什么、不证明什么、如何复现及待补证缺口。</zh-CN>
+#   <en>Append an EvidenceSummary under the P33.1 contract, stating what this readiness gate proves, does not prove, how to reproduce it, and which gaps still need review.</en>
+# </lang>
+$failedChecks = @($checks | Where-Object { $_.Severity -eq 'Fail' })
+$pendingChecks = @($checks | Where-Object { $_.Severity -eq 'Pending' })
+$evidenceSummary = [pscustomobject][ordered]@{
+    SchemaVersion = 'p33.lightweight-evidence-summary.v1'
+    GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+    Tool = 'Test-PortalDocumentationReadiness.ps1'
+    Command = 'pwsh -NoLogo -NoProfile -File dev/scripts/Test-PortalDocumentationReadiness.ps1 [-FailOnWarning]'
+    Scope = 'Repository docs, Git index, and optional HIA-Documentation-Sys notify source'
+    ExecutionMode = 'read-only-gate'
+    ExitCodePolicy = 'Exit 1 if FailedChecks>0 or (-FailOnWarning and WarningChecks>0); otherwise 0'
+    Writes = @('OutputJson (caller-specified)')
+    Proves = @(
+        'Confirms presence/tracking of required documentation scripts, public docs guide contract, JSDoc/DotNetDoc pilot isolation and locked versions, and generated-output boundaries.'
+        'Records each check with Pass/Warning/Fail/Pending severity and caller-supplied evidence paths.'
+    )
+    DoesNotProve = @(
+        'Read-only: never builds, generates docs, rewrites comments, copies notifications, or installs dependencies, so it cannot confirm generated docs are current or correct.'
+        'Pending notification-source checks mean HIA-Documentation-Sys content was not validated on this machine.'
+    )
+    Counts = @(
+        [pscustomobject]@{ Name = 'TotalChecks'; Value = $checks.Count; Meaning = 'Number of read-only readiness checks executed.' }
+        [pscustomobject]@{ Name = 'FailedChecks'; Value = $failedChecks.Count; Meaning = 'Checks that failed the handoff contract.' }
+        [pscustomobject]@{ Name = 'WarningChecks'; Value = @($checks | Where-Object { $_.Severity -eq 'Warning' }).Count; Meaning = 'Checks promoted to failure only with -FailOnWarning.' }
+        [pscustomobject]@{ Name = 'PendingChecks'; Value = $pendingChecks.Count; Meaning = 'Checks that could not be fully evaluated on this machine.' }
+    )
+    Findings = @($failedChecks | ForEach-Object {
+        [pscustomobject]@{
+            Category = $_.Code
+            Count = 1
+            Severity = 'Fail'
+            Meaning = $_.Message
+        }
+    })
+    PendingGaps = @($pendingChecks | ForEach-Object {
+        [pscustomobject]@{
+            Code = $_.Code
+            Reason = $_.Message
+            OwnerHint = 'Provide the optional HIA-Documentation-Sys notify source or re-run where available.'
+        }
+    })
+    RecommendedNextAction = 'Resolve any Fail checks before handoff; treat Warning/Pending as noted handoff conditions in the gate summary.'
+}
+
 $summary = [pscustomobject][ordered]@{
     GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
     HiaDocumentationRoot = $HiaDocumentationRoot
     Checks = $checks
     TotalChecks = $checks.Count
-    FailedChecks = @($checks | Where-Object { $_.Severity -eq 'Fail' }).Count
+    FailedChecks = $failedChecks.Count
     WarningChecks = @($checks | Where-Object { $_.Severity -eq 'Warning' }).Count
-    PendingChecks = @($checks | Where-Object { $_.Severity -eq 'Pending' }).Count
+    PendingChecks = $pendingChecks.Count
+    EvidenceSummary = $evidenceSummary
 }
 
 $summary

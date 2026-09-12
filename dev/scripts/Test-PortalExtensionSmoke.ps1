@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs the portal extension smoke suite.
-
-.LANG zh-CN
-运行门户扩展 smoke 套件。
+<lang>
+  <en>Runs the portal extension smoke suite.</en>
+  <zh-CN>运行门户扩展 smoke 套件。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,123 +12,106 @@ Runs the portal extension smoke suite.
 </lang>
 
 .PARAMETER Configuration
-.LANG en
-Build configuration used by the smoke suite when build steps are enabled.
-
-.LANG zh-CN
-启用构建步骤时 smoke 套件使用的构建配置。
+<lang>
+  <en>Build configuration used by the smoke suite when build steps are enabled.</en>
+  <zh-CN>启用构建步骤时 smoke 套件使用的构建配置。</zh-CN>
+</lang>
 
 .PARAMETER BaseUrl
-.LANG en
-Root portal URL used by HTTP smoke checks.
-
-.LANG zh-CN
-HTTP smoke 检查使用的根门户 URL。
+<lang>
+  <en>Root portal URL used by HTTP smoke checks.</en>
+  <zh-CN>HTTP smoke 检查使用的根门户 URL。</zh-CN>
+</lang>
 
 .PARAMETER StartIISExpress
-.LANG en
-Allows child smoke checks to start and stop an IIS Express root site.
-
-.LANG zh-CN
-允许子 smoke 检查启动并关闭 IIS Express 根站点。
+<lang>
+  <en>Allows child smoke checks to start and stop an IIS Express root site.</en>
+  <zh-CN>允许子 smoke 检查启动并关闭 IIS Express 根站点。</zh-CN>
+</lang>
 
 .PARAMETER SkipBuild
-.LANG en
-Skips Debug and Release solution build checks.
-
-.LANG zh-CN
-跳过 Debug 和 Release 解决方案构建检查。
+<lang>
+  <en>Skips Debug and Release solution build checks.</en>
+  <zh-CN>跳过 Debug 和 Release 解决方案构建检查。</zh-CN>
+</lang>
 
 .PARAMETER SkipAssets
-.LANG en
-Skips front-end asset build and npm audit checks.
-
-.LANG zh-CN
-跳过前端资产构建和 npm audit 检查。
+<lang>
+  <en>Skips front-end asset build and npm audit checks.</en>
+  <zh-CN>跳过前端资产构建和 npm audit 检查。</zh-CN>
+</lang>
 
 .PARAMETER SkipVirtualDirectory
-.LANG en
-Skips the virtual-directory IIS Express smoke check.
-
-.LANG zh-CN
-跳过 IIS Express 虚拟目录 smoke 检查。
+<lang>
+  <en>Skips the virtual-directory IIS Express smoke check.</en>
+  <zh-CN>跳过 IIS Express 虚拟目录 smoke 检查。</zh-CN>
+</lang>
 
 .PARAMETER VirtualDirectoryPort
-.LANG en
-IIS Express port for the isolated virtual-directory smoke check.
-
-.LANG zh-CN
-隔离虚拟目录 smoke 检查使用的 IIS Express 端口。
+<lang>
+  <en>IIS Express port for the isolated virtual-directory smoke check.</en>
+  <zh-CN>隔离虚拟目录 smoke 检查使用的 IIS Express 端口。</zh-CN>
+</lang>
 
 .PARAMETER VirtualPath
-.LANG en
-Virtual path mounted for the virtual-directory smoke check.
-
-.LANG zh-CN
-虚拟目录 smoke 检查挂载的虚拟路径。
+<lang>
+  <en>Virtual path mounted for the virtual-directory smoke check.</en>
+  <zh-CN>虚拟目录 smoke 检查挂载的虚拟路径。</zh-CN>
+</lang>
 
 .PARAMETER IncludeSqlCompatibility
-.LANG en
-Includes SQL compatibility checks that require an external connectionStrings.config.
-
-.LANG zh-CN
-纳入需要外置 connectionStrings.config 的 SQL 兼容检查。
+<lang>
+  <en>Includes SQL compatibility checks that require an external connectionStrings.config.</en>
+  <zh-CN>纳入需要外置 connectionStrings.config 的 SQL 兼容检查。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-External connection string config file used by optional SQL, theme, and cache checks.
-
-.LANG zh-CN
-可选 SQL、主题和缓存检查使用的外置连接串配置文件。
+<lang>
+  <en>External connection string config file used by optional SQL, theme, and cache checks.</en>
+  <zh-CN>可选 SQL、主题和缓存检查使用的外置连接串配置文件。</zh-CN>
+</lang>
 
 .PARAMETER IncludeAdmin
-.LANG en
-Includes authenticated administrator smoke checks.
-
-.LANG zh-CN
-纳入已认证管理员 smoke 检查。
+<lang>
+  <en>Includes authenticated administrator smoke checks.</en>
+  <zh-CN>纳入已认证管理员 smoke 检查。</zh-CN>
+</lang>
 
 .PARAMETER AdminUser
-.LANG en
-Administrator account name used when IncludeAdmin is enabled.
-
-.LANG zh-CN
-启用 IncludeAdmin 时使用的管理员账号名。
+<lang>
+  <en>Administrator account name used when IncludeAdmin is enabled.</en>
+  <zh-CN>启用 IncludeAdmin 时使用的管理员账号名。</zh-CN>
+</lang>
 
 .PARAMETER AdminPassword
-.LANG en
-Administrator password as a SecureString used only by the child smoke check.
-
-.LANG zh-CN
-以 SecureString 传入的管理员密码，只交给子 smoke 检查使用。
+<lang>
+  <en>Administrator password as a SecureString used only by the child smoke check.</en>
+  <zh-CN>以 SecureString 传入的管理员密码，只交给子 smoke 检查使用。</zh-CN>
+</lang>
 
 .PARAMETER IncludeThemeMutation
-.LANG en
-Includes isolated theme resolution mutation proof.
-
-.LANG zh-CN
-纳入隔离主题解析变更 proof。
+<lang>
+  <en>Includes isolated theme resolution mutation proof.</en>
+  <zh-CN>纳入隔离主题解析变更 proof。</zh-CN>
+</lang>
 
 .PARAMETER ThemeProofPort
-.LANG en
-IIS Express port used by the theme mutation proof.
-
-.LANG zh-CN
-主题变更 proof 使用的 IIS Express 端口。
+<lang>
+  <en>IIS Express port used by the theme mutation proof.</en>
+  <zh-CN>主题变更 proof 使用的 IIS Express 端口。</zh-CN>
+</lang>
 
 .PARAMETER IncludeCacheMutation
-.LANG en
-Includes isolated module cache mutation proof.
-
-.LANG zh-CN
-纳入隔离模块缓存变更 proof。
+<lang>
+  <en>Includes isolated module cache mutation proof.</en>
+  <zh-CN>纳入隔离模块缓存变更 proof。</zh-CN>
+</lang>
 
 .PARAMETER CacheProofPort
-.LANG en
-IIS Express port used by the module cache mutation proof.
-
-.LANG zh-CN
-模块缓存变更 proof 使用的 IIS Express 端口。
+<lang>
+  <en>IIS Express port used by the module cache mutation proof.</en>
+  <zh-CN>模块缓存变更 proof 使用的 IIS Express 端口。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

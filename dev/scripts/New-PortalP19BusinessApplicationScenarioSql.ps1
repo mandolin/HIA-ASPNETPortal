@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Generates a development/test SQL seed for the P19.5 business-application sample page.
-
-.LANG zh-CN
-生成 P19.5 业务申请样板页的开发/测试 SQL seed。
+<lang>
+  <en>Generates a development/test SQL seed for the P19.5 business-application sample page.</en>
+  <zh-CN>生成 P19.5 业务申请样板页的开发/测试 SQL seed。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,46 +12,40 @@ Generates a development/test SQL seed for the P19.5 business-application sample 
 </lang>
 
 .PARAMETER OutputPath
-.LANG en
-Target SQL file path. The default path is under temp/p19.5.
-
-.LANG zh-CN
-目标 SQL 文件路径。默认输出到 temp/p19.5 下。
+<lang>
+  <en>Target SQL file path. The default path is under temp/p19.5.</en>
+  <zh-CN>目标 SQL 文件路径。默认输出到 temp/p19.5 下。</zh-CN>
+</lang>
 
 .PARAMETER TabName
-.LANG en
-Portal Tab name used for the test page.
-
-.LANG zh-CN
-测试页使用的门户 Tab 名称。
+<lang>
+  <en>Portal Tab name used for the test page.</en>
+  <zh-CN>测试页使用的门户 Tab 名称。</zh-CN>
+</lang>
 
 .PARAMETER ModuleTitle
-.LANG en
-Module instance title shown on the test page.
-
-.LANG zh-CN
-测试页上显示的模块实例标题。
+<lang>
+  <en>Module instance title shown on the test page.</en>
+  <zh-CN>测试页上显示的模块实例标题。</zh-CN>
+</lang>
 
 .PARAMETER PortalId
-.LANG en
-Legacy Portal id that owns the test Tab.
-
-.LANG zh-CN
-拥有测试 Tab 的旧 Portal 编号。
+<lang>
+  <en>Legacy Portal id that owns the test Tab.</en>
+  <zh-CN>拥有测试 Tab 的旧 Portal 编号。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-Optional external connectionStrings.config path. Required only when Apply is specified.
-
-.LANG zh-CN
-可选外置 connectionStrings.config 路径。只有指定 Apply 时才需要。
+<lang>
+  <en>Optional external connectionStrings.config path. Required only when Apply is specified.</en>
+  <zh-CN>可选外置 connectionStrings.config 路径。只有指定 Apply 时才需要。</zh-CN>
+</lang>
 
 .PARAMETER Apply
-.LANG en
-Executes the generated SQL against the configured development/test database.
-
-.LANG zh-CN
-将生成的 SQL 执行到已配置的开发/测试数据库。
+<lang>
+  <en>Executes the generated SQL against the configured development/test database.</en>
+  <zh-CN>将生成的 SQL 执行到已配置的开发/测试数据库。</zh-CN>
+</lang>
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(

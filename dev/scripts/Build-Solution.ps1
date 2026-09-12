@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Builds the portal Visual Studio solution.
-
-.LANG zh-CN
-构建门户 Visual Studio 解决方案。
+<lang>
+  <en>Builds the portal Visual Studio solution.</en>
+  <zh-CN>构建门户 Visual Studio 解决方案。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,18 +12,16 @@ Builds the portal Visual Studio solution.
 </lang>
 
 .PARAMETER Configuration
-.LANG en
-Build configuration to pass to MSBuild, normally Debug or Release.
-
-.LANG zh-CN
-传给 MSBuild 的构建配置，通常为 Debug 或 Release。
+<lang>
+  <en>Build configuration to pass to MSBuild, normally Debug or Release.</en>
+  <zh-CN>传给 MSBuild 的构建配置，通常为 Debug 或 Release。</zh-CN>
+</lang>
 
 .PARAMETER Platform
-.LANG en
-MSBuild platform value. The legacy solution normally uses Any CPU.
-
-.LANG zh-CN
-MSBuild 平台值。旧解决方案通常使用 Any CPU。
+<lang>
+  <en>MSBuild platform value. The legacy solution normally uses Any CPU.</en>
+  <zh-CN>MSBuild 平台值。旧解决方案通常使用 Any CPU。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

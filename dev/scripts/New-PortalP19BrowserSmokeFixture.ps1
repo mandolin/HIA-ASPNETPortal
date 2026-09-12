@@ -1,69 +1,45 @@
 <#
 .SYNOPSIS
-.LANG en
-Creates, inspects, or removes a minimum-privilege P19.5 browser-smoke fixture in an explicit test database.
-
-.LANG zh-CN
-在显式 test 数据库中创建、检查或删除最小权限的 P19.5 浏览器 smoke fixture。
+<lang>
+  <en>Creates, inspects, or removes a minimum-privilege P19.5 browser-smoke fixture in an explicit test database.</en>
+  <zh-CN>在显式 test 数据库中创建、检查或删除最小权限的 P19.5 浏览器 smoke fixture。</zh-CN>
+</lang>
 
 .DESCRIPTION
-.LANG en
-This helper is deliberately limited to an external connectionStrings.config whose
-parent directory is named test. Create adds one ordinary participant without a
-physical role and one administrator with only the existing Admins role. Passwords
-are accepted as SecureString values, are used only in memory to derive the current
-PBKDF2-HMAC-SHA256 credential material, and are never emitted. Remove deletes only
-the two deterministic fixture accounts and their P19 business-application records
-in one transaction; it never accepts an arbitrary user name or role identifier.
-
-.LANG zh-CN
-本 helper 被刻意限制为父目录名为 test 的外置 connectionStrings.config。Create 创建一个
-没有实体角色的普通参与者和一个只拥有既有 Admins 角色的管理员。密码以 SecureString 接收，
-仅在内存中短暂用于派生当前 PBKDF2-HMAC-SHA256 凭据材料，绝不输出。Remove 在同一事务中
-只删除两个确定性 fixture 账号及其 P19 业务申请记录；它不接受任意用户名或角色标识。
+<lang>
+  <en>This helper is deliberately limited to an external connectionStrings.config whose parent directory is named test. Create adds one ordinary participant without a physical role and one administrator with only the existing Admins role. Passwords are accepted as SecureString values, are used only in memory to derive the current PBKDF2-HMAC-SHA256 credential material, and are never emitted. Remove deletes only the two deterministic fixture accounts and their P19 business-application records in one transaction; it never accepts an arbitrary user name or role identifier.</en>
+  <zh-CN>本 helper 被刻意限制为父目录名为 test 的外置 connectionStrings.config。Create 创建一个 没有实体角色的普通参与者和一个只拥有既有 Admins 角色的管理员。密码以 SecureString 接收， 仅在内存中短暂用于派生当前 PBKDF2-HMAC-SHA256 凭据材料，绝不输出。Remove 在同一事务中 只删除两个确定性 fixture 账号及其 P19 业务申请记录；它不接受任意用户名或角色标识。</zh-CN>
+</lang>
 
 .PARAMETER Action
-.LANG en
-Create adds the two accounts, Inspect reports only non-sensitive fixture facts, and
-Remove deletes the fixture plus P19 records created or reviewed by it.
-
-.LANG zh-CN
-Create 新建两个账号；Inspect 只报告非敏感 fixture 事实；Remove 删除 fixture 及由其创建或
-审核的 P19 记录。
+<lang>
+  <en>Create adds the two accounts, Inspect reports only non-sensitive fixture facts, and Remove deletes the fixture plus P19 records created or reviewed by it.</en>
+  <zh-CN>Create 新建两个账号；Inspect 只报告非敏感 fixture 事实；Remove 删除 fixture 及由其创建或 审核的 P19 记录。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-Required path to an external test connectionStrings.config file. The helper rejects
-paths whose direct parent directory is not named test.
-
-.LANG zh-CN
-必填的外置 test connectionStrings.config 文件路径。helper 会拒绝直接父目录不叫 test 的路径。
+<lang>
+  <en>Required path to an external test connectionStrings.config file. The helper rejects paths whose direct parent directory is not named test.</en>
+  <zh-CN>必填的外置 test connectionStrings.config 文件路径。helper 会拒绝直接父目录不叫 test 的路径。</zh-CN>
+</lang>
 
 .PARAMETER FixtureId
-.LANG en
-Lower-case, deterministic identifier used only to derive two bounded fixture login
-names. It is not a password and must not contain personal data.
-
-.LANG zh-CN
-仅用于派生两个受限 fixture 登录名的小写确定性标识。它不是密码，且不得包含个人资料。
+<lang>
+  <en>Lower-case, deterministic identifier used only to derive two bounded fixture login names. It is not a password and must not contain personal data.</en>
+  <zh-CN>仅用于派生两个受限 fixture 登录名的小写确定性标识。它不是密码，且不得包含个人资料。</zh-CN>
+</lang>
 
 .PARAMETER ParticipantPassword
-.LANG en
-Password for the ordinary participant, required for Create only. Pass a newly
-generated SecureString from the short-lived caller process; never place it on a
-command line, in source code, or in a log.
-
-.LANG zh-CN
-普通参与者密码，仅 Create 时必填。应由短生命周期调用进程新生成 SecureString 传入；不得放入
-命令行、源码或日志。
+<lang>
+  <en>Password for the ordinary participant, required for Create only. Pass a newly generated SecureString from the short-lived caller process; never place it on a command line, in source code, or in a log.</en>
+  <zh-CN>普通参与者密码，仅 Create 时必填。应由短生命周期调用进程新生成 SecureString 传入；不得放入 命令行、源码或日志。</zh-CN>
+</lang>
 
 .PARAMETER AdministratorPassword
-.LANG en
-Password for the administrator, required for Create only. It follows the same
-in-memory-only boundary as ParticipantPassword.
-
-.LANG zh-CN
-管理员密码，仅 Create 时必填。它与 ParticipantPassword 一样只能处于内存边界内。
+<lang>
+  <en>Password for the administrator, required for Create only. It follows the same in-memory-only boundary as ParticipantPassword.</en>
+  <zh-CN>管理员密码，仅 Create 时必填。它与 ParticipantPassword 一样只能处于内存边界内。</zh-CN>
+</lang>
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(

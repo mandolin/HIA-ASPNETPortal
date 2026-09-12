@@ -1,21 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Performs a read-only P14.4 production-hardening preflight.
-
-.LANG zh-CN
-执行只读的 P14.4 生产前硬化预检。
-
-.LANG en
-Performs a read-only hardening preflight against source or filesystem publish
-output. It checks configuration and environment evidence boundaries, records
-target-environment pending items, and must not change IIS, ACLs, databases,
-Web.config, external configuration, or sensitive values.
-
-.LANG zh-CN
-对源码或文件系统发布产物执行只读生产前硬化预检。它检查配置和环境证据边界，
-记录目标环境待补证事项，并且不得修改 IIS、ACL、数据库、Web.config、外置配置
-或敏感值。
+<lang>
+  <en>Performs a read-only P14.4 production-hardening preflight against source or a filesystem-published package.</en>
+  <zh-CN>对源码或文件系统发布产物执行只读的 P14.4 生产前硬化预检。</zh-CN>
+</lang>
 
 .DESCRIPTION
     <lang>

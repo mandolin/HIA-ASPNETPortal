@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Checks local Edge IE mode automation readiness.
-
-.LANG zh-CN
-检查本机 Edge IE mode 自动化准备状态。
+<lang>
+  <en>Checks local Edge IE mode automation readiness.</en>
+  <zh-CN>检查本机 Edge IE mode 自动化准备状态。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,11 +12,10 @@ Checks local Edge IE mode automation readiness.
 </lang>
 
 .PARAMETER FailWhenNotReady
-.LANG en
-Returns a failing exit code when one or more readiness checks fail.
-
-.LANG zh-CN
-当一个或多个准备项失败时返回失败退出码。
+<lang>
+  <en>Returns a failing exit code when one or more readiness checks fail.</en>
+  <zh-CN>当一个或多个准备项失败时返回失败退出码。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

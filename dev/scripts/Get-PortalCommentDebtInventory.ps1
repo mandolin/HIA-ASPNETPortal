@@ -386,9 +386,54 @@ foreach ($relativePath in $includedFiles) {
 
 $priorityFiles = @($fileSummaries | Sort-Object -Property @{ Expression = 'PriorityScore'; Descending = $true }, @{ Expression = 'Path'; Ascending = $true } | Select-Object -First $Top)
 
+$resultScope = 'Git-tracked .cs/.aspx/.ascx/.master plus high-risk dev/scripts/*.ps1 candidates'
+
+# <lang>
+#   <zh-CN>按 P33.1 轻量证据摘要口径附上 EvidenceSummary，明确本盘点证明什么、不证明什么、如何复现及待补证缺口。</zh-CN>
+#   <en>Append an EvidenceSummary under the P33.1 lightweight-evidence-summary contract, stating what this inventory proves, does not prove, how to reproduce it, and which gaps still need review.</en>
+# </lang>
+$evidenceSummary = [pscustomobject][ordered]@{
+    SchemaVersion = 'p33.lightweight-evidence-summary.v1'
+    GeneratedAtUtc = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+    Tool = 'Get-PortalCommentDebtInventory.ps1'
+    Command = 'pwsh -NoLogo -NoProfile -File dev/scripts/Get-PortalCommentDebtInventory.ps1 -AsJson'
+    Scope = $resultScope
+    ExecutionMode = 'read-only-inventory'
+    ExitCodePolicy = 'Returns 0 after producing output; throws before output only when the Git index cannot be read.'
+    Writes = @('OutputJson (caller-specified)', 'OutputMarkdown (caller-specified)')
+    Proves = @(
+        'Heuristically identifies legacy bilingual formats, garbled/mojibake, client-visible HTML comments, explicit TODO/deferred markers, high-risk script candidates, missing public/protected/internal C# node documentation, and low-value restatements across Git-tracked .cs/.aspx/.ascx/.master and a bounded high-risk dev/scripts/*.ps1 set.'
+        'Aggregates findings per category and ranks files by priority score so W-anp-P15.3/P16 can consume the input directly.'
+    )
+    DoesNotProve = @(
+        'Does not rewrite source, build the project, or access databases/network, so it cannot confirm that fixes were applied or that runtime behavior is correct.'
+        'Heuristics can miss context-dependent debt or over-report benign text; every finding requires human classification before being treated as a defect.'
+        'Excludes generated/designer files and untracked drafts, so debt in those paths is intentionally out of scope.'
+    )
+    Counts = @(
+        [pscustomobject]@{ Name = 'IncludedFileCount'; Value = $includedFiles.Count; Meaning = 'Files scanned by the inventory (not a defect count).' }
+        [pscustomobject]@{ Name = 'FilesWithFindings'; Value = $fileSummaries.Count; Meaning = 'Files with at least one heuristic finding (needs human review).' }
+    ) + @($globalCounts.GetEnumerator() | ForEach-Object {
+        [pscustomobject]@{ Name = $_.Key; Value = $_.Value; Meaning = 'Heuristic findings for this category; not a confirmed defect count.' }
+    })
+    Findings = @($globalCounts.GetEnumerator() | ForEach-Object {
+        [pscustomobject]@{
+            Category = $_.Key
+            Count = $_.Value
+            Severity = (Get-Severity -Type $_.Key)
+            Meaning = 'Heuristic candidate requiring human classification before being treated as debt.'
+        }
+    })
+    PendingGaps = @(
+        [pscustomobject]@{ Code = 'SEMANTIC_REVIEW_REQUIRED'; Reason = 'Heuristic findings need human classification before being treated as defects.'; OwnerHint = 'W-anp-P15.3/P16 input and ROP governance roadmap' }
+        [pscustomobject]@{ Code = 'GENERATED_PATHS_EXCLUDED'; Reason = 'Generated/designer and untracked paths are excluded from the inventory.'; OwnerHint = 'Separate build-output governance' }
+    )
+    RecommendedNextAction = 'Use as input for W-anp-P15.3/P16 comment-conditioning; do not treat as a final code-review verdict.'
+}
+
 $result = [pscustomobject][ordered]@{
     GeneratedAt = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
-    Scope = 'Git-tracked .cs/.aspx/.ascx/.master plus high-risk dev/scripts/*.ps1 candidates'
+    Scope = $resultScope
     IncludedFileCount = $includedFiles.Count
     FilesWithFindings = $fileSummaries.Count
     FindingCounts = $globalCounts
@@ -396,6 +441,7 @@ $result = [pscustomobject][ordered]@{
     P16MigrationRule = 'W-anp-P16.1 启动 `<lang>` / `<l>` 全量迁移与注释丰富度提升；P15.3/P15.4 只提供输入。'
     PriorityFiles = $priorityFiles
     AllFilesWithFindings = $fileSummaries
+    EvidenceSummary = $evidenceSummary
 }
 
 if (-not [string]::IsNullOrWhiteSpace($OutputJson)) {

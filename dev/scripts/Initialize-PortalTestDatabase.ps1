@@ -1,22 +1,24 @@
 <#
 .SYNOPSIS
-.LANG en
-Initializes an isolated Portal test database selected by an external connection string.
+<lang>
+  <en>Initializes an isolated Portal test database selected by an external connection string.</en>
+  <zh-CN>初始化外置连接串指定的隔离 Portal 测试数据库。</zh-CN>
+</lang>
 
-.LANG zh-CN
-初始化外置连接串指定的隔离 Portal 测试数据库。
-
-.LANG en
-Initializes a development or test Portal database only when the target database
-does not already exist and the caller explicitly confirms the operation. The
-script reads the connection string from an external config file, executes the
-known setup/migration scripts, and must not print passwords, server names, or
-full connection-string values.
-
-.LANG zh-CN
-仅在目标数据库尚不存在且调用方明确确认时，初始化开发或测试用 Portal 数据库。
-脚本从外置配置文件读取连接串，执行已知的初始化和迁移脚本，并且不得输出密码、
-服务器名称或完整连接串。
+<lang>
+  <en>
+  Initializes a development or test Portal database only when the target database
+  does not already exist and the caller explicitly confirms the operation. The
+  script reads the connection string from an external config file, executes the
+  known setup/migration scripts, and must not print passwords, server names, or
+  full connection-string values.
+  </en>
+  <zh-CN>
+  仅在目标数据库尚不存在且调用方明确确认时，初始化开发或测试用 Portal 数据库。
+  脚本从外置配置文件读取连接串，执行已知的初始化和迁移脚本，并且不得输出密码、
+  服务器名称或完整连接串。
+  </zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>

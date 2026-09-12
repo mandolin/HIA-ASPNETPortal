@@ -1,43 +1,33 @@
 <#
 .SYNOPSIS
-.LANG en
-Checks the current Portal compliance baseline.
-
-.LANG zh-CN
-检查当前 Portal 合规基线。
-
 <lang>
   <en>Performs read-only compliance baseline checks for headers, security-related configuration, credential-risk markers, legacy compatibility warnings, and optional HTTP observations. It may issue HTTP GET requests when BaseUrl is provided, but it does not log in, mutate the site, change Web.config, write secrets, or execute external scanning tools.</en>
   <zh-CN>对当前 Portal 合规基线执行只读检查，覆盖响应头、安全相关配置、凭据风险标记、旧兼容警告以及可选 HTTP 观测。当提供 BaseUrl 时，它可能发起 HTTP GET 请求；但不会登录、不会修改站点、不会改写 Web.config、不会写入密钥，也不会执行外部扫描工具。</zh-CN>
 </lang>
 
 .PARAMETER Profile
-.LANG en
-Compliance profile used to tune Dev/Test/Prod/Scan/LegacyIe expectations.
-
-.LANG zh-CN
-用于调整 Dev/Test/Prod/Scan/LegacyIe 期望的合规 profile。
+<lang>
+  <en>Compliance profile used to tune Dev/Test/Prod/Scan/LegacyIe expectations.</en>
+  <zh-CN>用于调整 Dev/Test/Prod/Scan/LegacyIe 期望的合规 profile。</zh-CN>
+</lang>
 
 .PARAMETER BaseUrl
-.LANG en
-Optional HTTP base URL for runtime observations.
-
-.LANG zh-CN
-用于运行时观测的可选 HTTP 基础地址。
+<lang>
+  <en>Optional HTTP base URL for runtime observations.</en>
+  <zh-CN>用于运行时观测的可选 HTTP 基础地址。</zh-CN>
+</lang>
 
 .PARAMETER OutputJson
-.LANG en
-Optional JSON evidence output path.
-
-.LANG zh-CN
-可选 JSON 证据输出路径。
+<lang>
+  <en>Optional JSON evidence output path.</en>
+  <zh-CN>可选 JSON 证据输出路径。</zh-CN>
+</lang>
 
 .PARAMETER FailOnWarning
-.LANG en
-Treats warnings as a non-zero result for stricter gates.
-
-.LANG zh-CN
-在更严格门禁中将 Warning 视为非零结果。
+<lang>
+  <en>Treats warnings as a non-zero result for stricter gates.</en>
+  <zh-CN>在更严格门禁中将 Warning 视为非零结果。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

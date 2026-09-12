@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Creates a read-only documentation baseline for tracked portal sources.
-
-.LANG zh-CN
-为已追踪门户源码生成只读文档化基线。
+<lang>
+  <en>Creates a read-only documentation baseline for tracked portal sources.</en>
+  <zh-CN>为已追踪门户源码生成只读文档化基线。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,18 +12,16 @@ Creates a read-only documentation baseline for tracked portal sources.
 </lang>
 
 .PARAMETER AsJson
-.LANG en
-Writes the baseline object to the pipeline as JSON.
-
-.LANG zh-CN
-以 JSON 形式将基线对象写入管道。
+<lang>
+  <en>Writes the baseline object to the pipeline as JSON.</en>
+  <zh-CN>以 JSON 形式将基线对象写入管道。</zh-CN>
+</lang>
 
 .PARAMETER OutputJson
-.LANG en
-Optional file path for a UTF-8 no BOM JSON baseline artifact.
-
-.LANG zh-CN
-可选的 UTF-8 无 BOM JSON 基线证据输出路径。
+<lang>
+  <en>Optional file path for a UTF-8 no BOM JSON baseline artifact.</en>
+  <zh-CN>可选的 UTF-8 无 BOM JSON 基线证据输出路径。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

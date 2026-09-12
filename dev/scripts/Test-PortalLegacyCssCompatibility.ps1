@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs the static legacy-browser CSS compatibility gate.
-
-.LANG zh-CN
-运行旧浏览器 CSS 兼容性静态门禁。
+<lang>
+  <en>Runs the static legacy-browser CSS compatibility gate.</en>
+  <zh-CN>运行旧浏览器 CSS 兼容性静态门禁。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,18 +12,16 @@ Runs the static legacy-browser CSS compatibility gate.
 </lang>
 
 .PARAMETER FailOnWarning
-.LANG en
-Treats warning-level findings, such as IE8 visual degradation markers, as failures.
-
-.LANG zh-CN
-将 Warning 级发现也视为失败，例如 IE8 视觉降级标记。
+<lang>
+  <en>Treats warning-level findings, such as IE8 visual degradation markers, as failures.</en>
+  <zh-CN>将 Warning 级发现也视为失败，例如 IE8 视觉降级标记。</zh-CN>
+</lang>
 
 .PARAMETER MaxSamplesPerRule
-.LANG en
-Maximum number of sample findings to print for each rule.
-
-.LANG zh-CN
-每条规则最多输出的样例发现数量。
+<lang>
+  <en>Maximum number of sample findings to print for each rule.</en>
+  <zh-CN>每条规则最多输出的样例发现数量。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

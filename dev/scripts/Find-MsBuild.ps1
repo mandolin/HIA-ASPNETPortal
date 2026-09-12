@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Finds an installed MSBuild executable for local portal automation.
-
-.LANG zh-CN
-为门户本地自动化查找已安装的 MSBuild 可执行文件。
+<lang>
+  <en>Finds an installed MSBuild executable for local portal automation.</en>
+  <zh-CN>为门户本地自动化查找已安装的 MSBuild 可执行文件。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>

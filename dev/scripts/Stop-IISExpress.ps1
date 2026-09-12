@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Stops the Portal IIS Express process for a known port or generated config.
-
-.LANG zh-CN
-按指定端口或生成配置停止 Portal IIS Express 进程。
+<lang>
+  <en>Stops the Portal IIS Express process for a known port or generated config.</en>
+  <zh-CN>按指定端口或生成配置停止 Portal IIS Express 进程。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,27 +12,22 @@ Stops the Portal IIS Express process for a known port or generated config.
 </lang>
 
 .PARAMETER Port
-.LANG en
-Local IIS Express port used as the primary process boundary.
-
-.LANG zh-CN
-作为主要进程边界的本地 IIS Express 端口。
+<lang>
+  <en>Local IIS Express port used as the primary process boundary.</en>
+  <zh-CN>作为主要进程边界的本地 IIS Express 端口。</zh-CN>
+</lang>
 
 .PARAMETER SitePath
-.LANG en
-Compatibility parameter kept for older task invocations; process matching does
-not rely on the physical site path.
-
-.LANG zh-CN
-为旧任务调用保留的兼容参数；进程匹配不依赖物理站点路径。
+<lang>
+  <en>Compatibility parameter kept for older task invocations; process matching does not rely on the physical site path.</en>
+  <zh-CN>为旧任务调用保留的兼容参数；进程匹配不依赖物理站点路径。</zh-CN>
+</lang>
 
 .PARAMETER VirtualPath
-.LANG en
-Compatibility parameter for matching generated same-port virtual-directory
-configuration.
-
-.LANG zh-CN
-用于匹配同端口虚拟目录生成配置的兼容参数。
+<lang>
+  <en>Compatibility parameter for matching generated same-port virtual-directory configuration.</en>
+  <zh-CN>用于匹配同端口虚拟目录生成配置的兼容参数。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs the isolated HIA JSDoc pilot workspace.
-
-.LANG zh-CN
-运行隔离的 HIA JSDoc 试点工作区。
+<lang>
+  <en>Runs the isolated HIA JSDoc pilot workspace.</en>
+  <zh-CN>运行隔离的 HIA JSDoc 试点工作区。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,11 +12,10 @@ Runs the isolated HIA JSDoc pilot workspace.
 </lang>
 
 .PARAMETER SkipRestore
-.LANG en
-Skips npm ci when the existing node_modules directory is acceptable for the caller.
-
-.LANG zh-CN
-当调用方接受现有 node_modules 目录状态时，跳过 npm ci。
+<lang>
+  <en>Skips npm ci when the existing node_modules directory is acceptable for the caller.</en>
+  <zh-CN>当调用方接受现有 node_modules 目录状态时，跳过 npm ci。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

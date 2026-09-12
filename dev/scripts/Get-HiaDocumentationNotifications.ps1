@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Reads notification documents from the HIA-Documentation-Sys WorkZone.
-
-.LANG zh-CN
-读取 HIA-Documentation-Sys WorkZone 中的通知文档。
+<lang>
+  <en>Reads notification documents from the HIA-Documentation-Sys WorkZone.</en>
+  <zh-CN>读取 HIA-Documentation-Sys WorkZone 中的通知文档。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,32 +12,28 @@ Reads notification documents from the HIA-Documentation-Sys WorkZone.
 </lang>
 
 .PARAMETER HiaDocumentationRoot
-.LANG en
-Optional root path of the HIA-Documentation-Sys repository. When omitted, the script uses the sibling repository path.
-
-.LANG zh-CN
-可选的 HIA-Documentation-Sys 仓库根目录。省略时使用同级仓库路径。
+<lang>
+  <en>Optional root path of the HIA-Documentation-Sys repository. When omitted, the script uses the sibling repository path.</en>
+  <zh-CN>可选的 HIA-Documentation-Sys 仓库根目录。省略时使用同级仓库路径。</zh-CN>
+</lang>
 
 .PARAMETER Since
-.LANG en
-Only returns notices whose last write time is greater than or equal to this value.
-
-.LANG zh-CN
-只返回最后写入时间大于或等于该值的通知。
+<lang>
+  <en>Only returns notices whose last write time is greater than or equal to this value.</en>
+  <zh-CN>只返回最后写入时间大于或等于该值的通知。</zh-CN>
+</lang>
 
 .PARAMETER Latest
-.LANG en
-Maximum number of recent notices to return.
-
-.LANG zh-CN
-最多返回的近期通知数量。
+<lang>
+  <en>Maximum number of recent notices to return.</en>
+  <zh-CN>最多返回的近期通知数量。</zh-CN>
+</lang>
 
 .PARAMETER ShowContent
-.LANG en
-Prints full notice content instead of the summary table.
-
-.LANG zh-CN
-输出完整通知内容，而不是摘要表格。
+<lang>
+  <en>Prints full notice content instead of the summary table.</en>
+  <zh-CN>输出完整通知内容，而不是摘要表格。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

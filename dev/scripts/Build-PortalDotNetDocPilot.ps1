@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs the HIA DotNetDoc pilot for the portal codebase.
-
-.LANG zh-CN
-为门户代码库运行 HIA DotNetDoc 试点生成流程。
+<lang>
+  <en>Runs the HIA DotNetDoc pilot for the portal codebase.</en>
+  <zh-CN>为门户代码库运行 HIA DotNetDoc 试点生成流程。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,32 +12,28 @@ Runs the HIA DotNetDoc pilot for the portal codebase.
 </lang>
 
 .PARAMETER SkipRestore
-.LANG en
-Skips npm ci when node_modules already exists and the caller accepts the current local dependency state.
-
-.LANG zh-CN
-当 node_modules 已存在且调用方接受当前本地依赖状态时，跳过 npm ci。
+<lang>
+  <en>Skips npm ci when node_modules already exists and the caller accepts the current local dependency state.</en>
+  <zh-CN>当 node_modules 已存在且调用方接受当前本地依赖状态时，跳过 npm ci。</zh-CN>
+</lang>
 
 .PARAMETER SkipXmlBuild
-.LANG en
-Skips the XML documentation build precheck and consumes existing XML outputs.
-
-.LANG zh-CN
-跳过 XML 文档构建预检，直接使用现有 XML 输出。
+<lang>
+  <en>Skips the XML documentation build precheck and consumes existing XML outputs.</en>
+  <zh-CN>跳过 XML 文档构建预检，直接使用现有 XML 输出。</zh-CN>
+</lang>
 
 .PARAMETER ApiOnly
-.LANG en
-Runs the API-only DotNetDoc script instead of the full documentation build.
-
-.LANG zh-CN
-运行 API-only DotNetDoc 脚本，而不是完整文档构建。
+<lang>
+  <en>Runs the API-only DotNetDoc script instead of the full documentation build.</en>
+  <zh-CN>运行 API-only DotNetDoc 脚本，而不是完整文档构建。</zh-CN>
+</lang>
 
 .PARAMETER SourceProbe
-.LANG en
-Runs the source-probe DotNetDoc script for parser and source extraction checks.
-
-.LANG zh-CN
-运行 source-probe DotNetDoc 脚本，用于解析器和源码抽取检查。
+<lang>
+  <en>Runs the source-probe DotNetDoc script for parser and source extraction checks.</en>
+  <zh-CN>运行 source-probe DotNetDoc 脚本，用于解析器和源码抽取检查。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

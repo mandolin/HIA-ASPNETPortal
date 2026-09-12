@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs the portal automated test assembly through Visual Studio Test Platform.
-
-.LANG zh-CN
-通过 Visual Studio Test Platform 运行门户自动化测试程序集。
+<lang>
+  <en>Runs the portal automated test assembly through Visual Studio Test Platform.</en>
+  <zh-CN>通过 Visual Studio Test Platform 运行门户自动化测试程序集。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,32 +12,28 @@ Runs the portal automated test assembly through Visual Studio Test Platform.
 </lang>
 
 .PARAMETER Configuration
-.LANG en
-Build configuration for the solution and the test assembly path.
-
-.LANG zh-CN
-用于解决方案构建与测试程序集路径的构建配置。
+<lang>
+  <en>Build configuration for the solution and the test assembly path.</en>
+  <zh-CN>用于解决方案构建与测试程序集路径的构建配置。</zh-CN>
+</lang>
 
 .PARAMETER Platform
-.LANG en
-MSBuild platform value. The legacy solution normally uses Any CPU.
-
-.LANG zh-CN
-MSBuild 平台值。旧解决方案通常使用 Any CPU。
+<lang>
+  <en>MSBuild platform value. The legacy solution normally uses Any CPU.</en>
+  <zh-CN>MSBuild 平台值。旧解决方案通常使用 Any CPU。</zh-CN>
+</lang>
 
 .PARAMETER NoRestore
-.LANG en
-Skips package restore when the caller already restored packages.
-
-.LANG zh-CN
-调用方已还原包时跳过包还原。
+<lang>
+  <en>Skips package restore when the caller already restored packages.</en>
+  <zh-CN>调用方已还原包时跳过包还原。</zh-CN>
+</lang>
 
 .PARAMETER NoBuild
-.LANG en
-Skips solution build and runs the existing test assembly.
-
-.LANG zh-CN
-跳过解决方案构建并运行现有测试程序集。
+<lang>
+  <en>Skips solution build and runs the existing test assembly.</en>
+  <zh-CN>跳过解决方案构建并运行现有测试程序集。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

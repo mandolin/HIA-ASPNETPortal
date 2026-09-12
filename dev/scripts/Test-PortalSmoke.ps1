@@ -1,86 +1,68 @@
 <#
 .SYNOPSIS
-.LANG en
-Runs Portal HTTP smoke checks.
+<lang>
+  <en>Runs Portal HTTP smoke checks.</en>
+  <zh-CN>执行 Portal HTTP smoke 检查。</zh-CN>
+</lang>
 
-.LANG zh-CN
-执行 Portal HTTP smoke 检查。
-
-.LANG en
-Runs lightweight HTTP smoke checks against a local or supplied Portal base URL.
-It can optionally start IIS Express, attempt authenticated admin checks when
-credentials are supplied, and verify generic error, document safety, and editor
-safety paths. Do not pass or log plaintext credentials; use SecureString input
-for AdminPassword and keep any captured evidence free of cookies or tokens.
-
-.LANG zh-CN
-针对本地或指定的 Portal BaseUrl 执行轻量 HTTP smoke 检查。它可以按需启动
-IIS Express，在提供凭据时尝试管理员认证检查，并验证通用错误页、文档安全和
-编辑器安全路径。不要传入或记录明文凭据；AdminPassword 应使用 SecureString，
-并确保采集证据中不包含 Cookie 或 Token。
+<lang>
+  <en>Runs lightweight HTTP smoke checks against a local or supplied Portal base URL. It can optionally start IIS Express, attempt authenticated admin checks when credentials are supplied, and verify generic error, document safety, and editor safety paths. Do not pass or log plaintext credentials; use SecureString input for AdminPassword and keep any captured evidence free of cookies or tokens.</en>
+  <zh-CN>针对本地或指定的 Portal BaseUrl 执行轻量 HTTP smoke 检查。它可以按需启动 IIS Express，在提供凭据时尝试管理员认证检查，并验证通用错误页、文档安全和 编辑器安全路径。不要传入或记录明文凭据；AdminPassword 应使用 SecureString， 并确保采集证据中不包含 Cookie 或 Token。</zh-CN>
+</lang>
 
 .PARAMETER BaseUrl
-.LANG en
-Portal HTTP base URL.
-
-.LANG zh-CN
-Portal HTTP 基础地址。
+<lang>
+  <en>Portal HTTP base URL.</en>
+  <zh-CN>Portal HTTP 基础地址。</zh-CN>
+</lang>
 
 .PARAMETER StartIISExpress
-.LANG en
-Starts IIS Express before running checks.
-
-.LANG zh-CN
-在执行检查前启动 IIS Express。
+<lang>
+  <en>Starts IIS Express before running checks.</en>
+  <zh-CN>在执行检查前启动 IIS Express。</zh-CN>
+</lang>
 
 .PARAMETER StopWhenComplete
-.LANG en
-Stops the IIS Express instance started by this script after checks finish.
-
-.LANG zh-CN
-检查结束后停止由本脚本启动的 IIS Express 实例。
+<lang>
+  <en>Stops the IIS Express instance started by this script after checks finish.</en>
+  <zh-CN>检查结束后停止由本脚本启动的 IIS Express 实例。</zh-CN>
+</lang>
 
 .PARAMETER AdminPassword
-.LANG en
-SecureString password used only for authenticated smoke checks.
-
-.LANG zh-CN
-仅用于认证 smoke 检查的 SecureString 密码。
+<lang>
+  <en>SecureString password used only for authenticated smoke checks.</en>
+  <zh-CN>仅用于认证 smoke 检查的 SecureString 密码。</zh-CN>
+</lang>
 
 .PARAMETER AdminUser
-.LANG en
-Administrator login name paired with AdminPassword; it is used only when authenticated checks are enabled.
-
-.LANG zh-CN
-与 AdminPassword 配对的管理员登录名；仅在启用认证检查时使用。
+<lang>
+  <en>Administrator login name paired with AdminPassword; it is used only when authenticated checks are enabled.</en>
+  <zh-CN>与 AdminPassword 配对的管理员登录名；仅在启用认证检查时使用。</zh-CN>
+</lang>
 
 .PARAMETER SkipAuthenticated
-.LANG en
-Skips authenticated checks even when administrator credentials are supplied.
-
-.LANG zh-CN
-即使提供管理员凭据也跳过认证检查。
+<lang>
+  <en>Skips authenticated checks even when administrator credentials are supplied.</en>
+  <zh-CN>即使提供管理员凭据也跳过认证检查。</zh-CN>
+</lang>
 
 .PARAMETER CheckGenericErrorPage
-.LANG en
-Checks the generic error page and verifies that it does not expose a detailed exception response.
-
-.LANG zh-CN
-检查通用错误页，并验证其不会暴露详细异常响应。
+<lang>
+  <en>Checks the generic error page and verifies that it does not expose a detailed exception response.</en>
+  <zh-CN>检查通用错误页，并验证其不会暴露详细异常响应。</zh-CN>
+</lang>
 
 .PARAMETER CheckDocumentSafety
-.LANG en
-Checks the document safety path and its bounded response behavior.
-
-.LANG zh-CN
-检查文档安全路径及其受限响应行为。
+<lang>
+  <en>Checks the document safety path and its bounded response behavior.</en>
+  <zh-CN>检查文档安全路径及其受限响应行为。</zh-CN>
+</lang>
 
 .PARAMETER CheckEditorSafety
-.LANG en
-Checks the editor safety path and its bounded response behavior.
-
-.LANG zh-CN
-检查编辑器安全路径及其受限响应行为。
+<lang>
+  <en>Checks the editor safety path and its bounded response behavior.</en>
+  <zh-CN>检查编辑器安全路径及其受限响应行为。</zh-CN>
+</lang>
 #>
 [CmdletBinding()]
 param(

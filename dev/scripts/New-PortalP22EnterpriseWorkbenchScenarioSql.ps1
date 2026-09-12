@@ -1,10 +1,9 @@
 <#
 .SYNOPSIS
-.LANG en
-Generates a development/test SQL seed for the P22.4 enterprise workbench module.
-
-.LANG zh-CN
-生成 P22.4 企业能力工作台模块的开发/测试 SQL seed。
+<lang>
+  <en>Generates a development/test SQL seed for the P22.4 enterprise workbench module.</en>
+  <zh-CN>生成 P22.4 企业能力工作台模块的开发/测试 SQL seed。</zh-CN>
+</lang>
 
 .DESCRIPTION
 <lang>
@@ -13,18 +12,16 @@ Generates a development/test SQL seed for the P22.4 enterprise workbench module.
 </lang>
 
 .PARAMETER OutputPath
-.LANG en
-Target SQL file path. The default path is under temp/p22.4.
-
-.LANG zh-CN
-目标 SQL 文件路径。默认输出到 temp/p22.4 下。
+<lang>
+  <en>Target SQL file path. The default path is under temp/p22.4.</en>
+  <zh-CN>目标 SQL 文件路径。默认输出到 temp/p22.4 下。</zh-CN>
+</lang>
 
 .PARAMETER ConnectionStringsConfigPath
-.LANG en
-Optional external connectionStrings.config path. Required only when Apply is specified.
-
-.LANG zh-CN
-可选外置 connectionStrings.config 路径。只有指定 Apply 时才需要。
+<lang>
+  <en>Optional external connectionStrings.config path. Required only when Apply is specified.</en>
+  <zh-CN>可选外置 connectionStrings.config 路径。只有指定 Apply 时才需要。</zh-CN>
+</lang>
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(
