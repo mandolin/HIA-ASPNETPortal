@@ -76,12 +76,30 @@ namespace ASPNET.StarterKit.Portal
         internal static PortalPasswordHash CreateHash(string password)
         {
             // <lang>
+            //   <zh-CN>无参重载沿用组件默认成本，保持与既有调用点完全一致的行为。</zh-CN>
+            //   <en>The parameterless overload keeps the component default cost, preserving behavior identical to existing call sites.</en>
+            // </lang>
+            return CreateHash(password, DefaultIterationCount);
+        }
+
+        internal static PortalPasswordHash CreateHash(string password, int iterationCount)
+        {
+            // <lang>
             //   <zh-CN>明文密码只接受调用方已经确认的原始输入；这里不做裁剪或规范化，避免改变用户实际提交的凭据语义。</zh-CN>
             //   <en>The plain-text password accepts only the raw input already confirmed by the caller; this method does not trim or normalize it, avoiding changes to the submitted credential semantics.</en>
             // </lang>
             if (password == null)
             {
                 throw new ArgumentNullException("password");
+            }
+
+            // <lang>
+            //   <zh-CN>非正的迭代次数代表无效成本参数；一律回落到默认成本，绝不因配置问题产生弱哈希。</zh-CN>
+            //   <en>A non-positive iteration count represents an invalid cost parameter; always fall back to the default cost so configuration problems never produce a weak hash.</en>
+            // </lang>
+            if (iterationCount <= 0)
+            {
+                iterationCount = DefaultIterationCount;
             }
 
             // <lang>
@@ -99,14 +117,14 @@ namespace ASPNET.StarterKit.Portal
             }
 
             // <lang>
-            //   <zh-CN>返回对象显式携带算法和成本参数，使数据库记录可以在未来按账号独立升级迭代次数。</zh-CN>
-            //   <en>The returned object carries the algorithm and cost parameters explicitly so database records can later upgrade iteration counts per account.</en>
+            //   <zh-CN>返回对象显式携带算法和本次实际成本参数，使数据库记录可以按账号独立升级迭代次数。</zh-CN>
+            //   <en>The returned object carries the algorithm and the actual cost parameter used, so database records can upgrade iteration counts per account.</en>
             // </lang>
             return new PortalPasswordHash(
                 Format,
-                DefaultIterationCount,
+                iterationCount,
                 salt,
-                DeriveHash(password, salt, DefaultIterationCount));
+                DeriveHash(password, salt, iterationCount));
         }
 
         /// <summary>

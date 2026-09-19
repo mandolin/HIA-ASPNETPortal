@@ -125,6 +125,21 @@ namespace ASPNET.StarterKit.Portal
                 }
 
                 // <lang>
+                //   <zh-CN>凭据按更高迭代次数重哈希后单独记录审计；只写用户标识，不写密码、盐或哈希材料。</zh-CN>
+                //   <en>Record a separate audit when the credential was rehashed to a higher iteration count; only the user identifier is written, never the password, salt, or hash material.</en>
+                // </lang>
+                if (signInResult.CredentialCostUpgraded)
+                {
+                    PortalOperationAudit.Record(
+                        PortalOperationAuditEvents.SecurityCredentialsCategory,
+                        PortalOperationAuditEvents.CredentialCostUpgraded,
+                        PortalOperationAuditEvents.UserTargetType,
+                        signInResult.UserId.ToString(),
+                        "Credential rehashed to a higher iteration count after successful sign-in.",
+                        Context);
+                }
+
+                // <lang>
                 //   <zh-CN>回到应用根路径，沿用既有登录后导航。</zh-CN>
                 //   <en>Return to the application root and retain legacy post-sign-in navigation.</en>
                 // </lang>

@@ -1057,11 +1057,25 @@ ORDER BY [Roles].[RoleName]",
                     }
 
                     // <lang>
-                    //   <zh-CN>强凭据验证成功后只更新最后验证时间并返回安全版本，不重新读取或暴露哈希材料。</zh-CN>
-                    //   <en>After strong-credential verification, update only the last-verified time and return the security version; never re-read or expose hash material.</en>
+                    //   <zh-CN>强凭据验证成功后先按需提升哈希成本，再更新最后验证时间；全程不重新读取或暴露哈希材料。</zh-CN>
+                    //   <en>After strong-credential verification, raise the hashing cost when needed and then update the last-verified time; hash material is never re-read or exposed.</en>
                     // </lang>
+                    bool credentialCostUpgraded = TryUpgradeCredentialCost(
+                        item.UserId,
+                        password,
+                        credential.IterationCount,
+                        credential.LastVerifiedUtc,
+                        credential.LegacyUpgradedUtc);
+
                     MarkCredentialVerified(item.UserId);
-                    return new PortalSignInResult(true, item.UserId, SafeName(item.Name), GetSecurityVersionByUserId(item.UserId), false, false);
+                    return new PortalSignInResult(
+                        true,
+                        item.UserId,
+                        SafeName(item.Name),
+                        GetSecurityVersionByUserId(item.UserId),
+                        false,
+                        false,
+                        credentialCostUpgraded);
                 }
             }
 
@@ -1096,6 +1110,98 @@ ORDER BY [Roles].[RoleName]",
                 GetSecurityVersionByUserId(item.UserId),
                 upgradedLegacyCredential,
                 false);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>在凭据迭代次数低于目标成本时，于事务内按新成本重哈希，并保留原有的最后验证与 legacy 升级时间。</zh-CN>
+        ///   <en>When a credential's iteration count is below the target cost, rehash it at the new cost inside a transaction while preserving the existing last-verified and legacy-upgraded times.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户标识。</zh-CN>
+        ///   <en>User identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>本次登录已校验通过的明文密码，只在此处交给哈希器。</zh-CN>
+        ///   <en>Plain-text password already validated by this sign-in; it is passed to the hasher only here.</en>
+        /// </l>
+        /// </param>
+        /// <param name="storedIterationCount">
+        /// <l>
+        ///   <zh-CN>凭据中已持久化的迭代次数。</zh-CN>
+        ///   <en>Iteration count persisted on the credential.</en>
+        /// </l>
+        /// </param>
+        /// <param name="lastVerifiedUtc">
+        /// <l>
+        ///   <zh-CN>凭据原有的最后验证时间，必须原样回写。</zh-CN>
+        ///   <en>Existing last-verified time of the credential; it must be written back unchanged.</en>
+        /// </l>
+        /// </param>
+        /// <param name="legacyUpgradedUtc">
+        /// <l>
+        ///   <zh-CN>凭据原有的 legacy 升级时间，必须原样回写。</zh-CN>
+        ///   <en>Existing legacy-upgraded time of the credential; it must be written back unchanged.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>是否实际完成了哈希成本升级。</zh-CN>
+        ///   <en>Whether the hashing-cost upgrade was actually performed.</en>
+        /// </l>
+        /// </returns>
+        private bool TryUpgradeCredentialCost(
+            int userId,
+            string password,
+            int storedIterationCount,
+            DateTime? lastVerifiedUtc,
+            DateTime? legacyUpgradedUtc)
+        {
+            // <lang>
+            //   <zh-CN>仅低于目标成本时才写入；默认目标等于现有默认成本，因此默认不产生任何写操作。</zh-CN>
+            //   <en>Write only when below the target cost; the default target equals the current default cost, so no write happens by default.</en>
+            // </lang>
+            if (!PortalPasswordIterationPolicy.NeedsRehash(storedIterationCount))
+            {
+                return false;
+            }
+
+            int targetIterationCount = PortalPasswordIterationPolicy.ResolveTargetIterationCount();
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>重哈希与 legacy 升级同样放在事务内；必须显式回传原有时间字段，否则 UpsertCredential 会把它们清空。</zh-CN>
+                //   <en>Rehashing runs in a transaction like the legacy upgrade; the original time fields must be passed back explicitly, otherwise UpsertCredential clears them.</en>
+                // </lang>
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    UpsertCredential(
+                        userId,
+                        password,
+                        legacyUpgradedUtc,
+                        lastVerifiedUtc,
+                        false,
+                        null,
+                        targetIterationCount);
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+
+                return true;
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>重哈希失败不影响本次已成功的登录；凭据保持原成本，后续登录会再次尝试。</zh-CN>
+                //   <en>A failed rehash does not affect the already-successful sign-in; the credential keeps its old cost and later sign-ins retry.</en>
+                // </lang>
+                return false;
+            }
         }
 
         /// <summary>
@@ -1688,7 +1794,8 @@ FROM
             DateTime? legacyUpgradedUtc,
             DateTime? lastVerifiedUtc,
             bool requiresReset,
-            string resetReason)
+            string resetReason,
+            int? iterationCount = null)
         {
             if (!HasCredentialTables())
             {
@@ -1696,10 +1803,12 @@ FROM
             }
 
             // <lang>
-            //   <zh-CN>哈希器负责随机盐和迭代策略；本层只保存其结果，不记录或回写原始密码。</zh-CN>
-            //   <en>The hasher owns salt and iteration policy; this layer persists only its result and never logs or writes the raw password.</en>
+            //   <zh-CN>传入目标迭代次数时按该成本重哈希；未传入则沿用组件默认成本，保持既有写入行为不变。非正成本由哈希器兜底回落到默认值。</zh-CN>
+            //   <en>When a target iteration count is supplied, rehash at that cost; otherwise the component default cost is used so existing write behavior is unchanged. The hasher clamps non-positive costs back to the default.</en>
             // </lang>
-            PortalPasswordHash hash = PortalPasswordHasher.CreateHash(password);
+            PortalPasswordHash hash = iterationCount.HasValue
+                ? PortalPasswordHasher.CreateHash(password, iterationCount.Value)
+                : PortalPasswordHasher.CreateHash(password);
             DateTime nowUtc = DateTime.UtcNow;
             var credential = _context.UserCredentials.SingleOrDefault(i => i.UserId == userId);
             if (credential == null)

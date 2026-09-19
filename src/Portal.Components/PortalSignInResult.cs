@@ -56,13 +56,20 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Whether the user credential requires a reset before sign-in.</en>
         /// </l>
         /// </param>
+        /// <param name="credentialCostUpgraded">
+        /// <l>
+        ///   <zh-CN>本次登录是否把已存在的强哈希凭据提升到更高的迭代次数；默认 <c>false</c> 以保持既有调用点行为。</zh-CN>
+        ///   <en>Whether this sign-in raised an existing strong-hash credential to a higher iteration count; defaults to <c>false</c> so existing call sites keep their behavior.</en>
+        /// </l>
+        /// </param>
         public PortalSignInResult(
             bool succeeded,
             int userId,
             string userName,
             long securityVersion,
             bool upgradedLegacyCredential,
-            bool requiresReset)
+            bool requiresReset,
+            bool credentialCostUpgraded = false)
         {
             Succeeded = succeeded;
             UserId = userId;
@@ -70,6 +77,7 @@ namespace ASPNET.StarterKit.Portal
             SecurityVersion = securityVersion;
             UpgradedLegacyCredential = upgradedLegacyCredential;
             RequiresReset = requiresReset;
+            CredentialCostUpgraded = credentialCostUpgraded;
         }
 
         /// <summary>
@@ -111,6 +119,14 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public bool UpgradedLegacyCredential { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>本次登录是否把已存在的强哈希凭据提升到更高的迭代次数。</zh-CN>
+        ///   <en>Whether this sign-in raised an existing strong-hash credential to a higher iteration count.</en>
+        /// </lang>
+        /// </summary>
+        public bool CredentialCostUpgraded { get; private set; }
 
         /// <summary>
         /// <lang>

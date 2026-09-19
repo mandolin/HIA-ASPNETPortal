@@ -178,6 +178,14 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>凭据在登录成功后按更高的哈希迭代次数重哈希。</zh-CN>
+        ///   <en>Credential was rehashed to a higher hash iteration count after a successful sign-in.</en>
+        /// </lang>
+        /// </summary>
+        public const string CredentialCostUpgraded = "CredentialCostUpgraded";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>用户被加入角色。</zh-CN>
         ///   <en>User was added to a role.</en>
         /// </lang>
