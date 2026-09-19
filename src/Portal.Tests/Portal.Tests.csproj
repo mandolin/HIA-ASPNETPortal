@@ -55,6 +55,7 @@
     <Compile Include="PortalPermissionRegistryTests.cs" />
     <Compile Include="PortalPasswordPolicyTests.cs" />
     <Compile Include="PortalCookiePolicyTests.cs" />
+    <Compile Include="PortalPasswordIterationTests.cs" />
     <Compile Include="PortalDatabaseProfileTests.cs" />
     <Compile Include="PortalNavigationRegistryTests.cs" />
     <Compile Include="PortalRoleParserTests.cs" />
