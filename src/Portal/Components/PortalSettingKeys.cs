@@ -130,6 +130,22 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>身份与角色 Cookie 是否下发 Secure 属性的设置键；仅 HTTPS 部署方可启用。</zh-CN>
+        ///   <en>Setting key for whether identity and role cookies emit the Secure attribute; only enable for HTTPS deployments.</en>
+        /// </lang>
+        /// </summary>
+        public const string CookiesSecure = "Portal.Security.Cookies.Secure";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>身份与角色 Cookie 的 SameSite 模式设置键；取值 None 时必须配合 Secure 使用。</zh-CN>
+        ///   <en>Setting key for the SameSite mode of identity and role cookies; the None value must be combined with Secure.</en>
+        /// </lang>
+        /// </summary>
+        public const string CookiesSameSite = "Portal.Security.Cookies.SameSite";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>临时注册链接默认有效天数的设置键。</zh-CN>
         ///   <en>Setting key for default validity days of temporary registration invite links.</en>
         /// </lang>

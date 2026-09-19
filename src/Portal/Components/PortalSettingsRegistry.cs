@@ -392,6 +392,46 @@ namespace ASPNET.StarterKit.Portal
                 "HiaBoundary",
                 sourceLevel: "AppSettings");
 
+        // <lang>
+        //   <zh-CN>身份与角色 Cookie 传输安全策略：默认与现状一致，不下发 Secure 也不下发 SameSite；只有显式配置后才收紧，避免破坏 HTTP 或 IE9+ 旧浏览器部署。</zh-CN>
+        //   <en>Identity and role cookie transport-security policy: defaults match current behavior and emit neither Secure nor SameSite; tightening happens only after explicit configuration so HTTP or IE9+ legacy-browser deployments are not broken.</en>
+        // </lang>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>控制身份与角色 Cookie 是否下发 Secure 属性的设置定义，默认关闭。</zh-CN>
+        ///   <en>Setting definition controlling whether identity and role cookies emit the Secure attribute; disabled by default.</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition CookiesSecure =
+            new PortalSettingDefinition(
+                PortalSettingKeys.CookiesSecure,
+                "Cookie 启用 Secure",
+                "控制身份与角色 Cookie 是否下发 Secure 属性；仅 HTTPS 部署可启用，HTTP 环境启用会导致浏览器不回传 Cookie（表现为登录即掉线）。默认关闭。",
+                PortalSettingValueType.Boolean,
+                "false",
+                true,
+                false,
+                "Admins",
+                "Security");
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>控制身份与角色 Cookie SameSite 模式的设置定义，默认不下发该属性。</zh-CN>
+        ///   <en>Setting definition controlling the SameSite mode of identity and role cookies; the attribute is not emitted by default.</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition CookiesSameSite =
+            new PortalSettingDefinition(
+                PortalSettingKeys.CookiesSameSite,
+                "Cookie SameSite 模式",
+                "控制身份与角色 Cookie 的 SameSite 模式；取值 Unset、Lax、Strict 或 None。None 必须同时启用 Secure，否则自动降级为 Unset。默认 Unset。",
+                PortalSettingValueType.String,
+                "Unset",
+                true,
+                false,
+                "Admins",
+                "Security");
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>按稳定声明顺序保存的全部受控设置定义只读集合。</zh-CN>
@@ -428,7 +468,9 @@ namespace ASPNET.StarterKit.Portal
                 DiagnosticsMaxFileBytes,
                 DiagnosticsRetentionDays,
                 DiagnosticsAllowAdminDetailView,
-                HiaPortalInstanceId
+                HiaPortalInstanceId,
+                CookiesSecure,
+                CookiesSameSite
             }.AsReadOnly();
 
         /// <summary>
