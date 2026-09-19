@@ -177,6 +177,7 @@
     <Compile Include="PortalWorkItemStatuses.cs" />
     <Compile Include="PortalWorkflowActions.cs" />
     <Compile Include="PortalSecurity.cs" />
+    <Compile Include="PortalAuthenticationCookiePolicy.cs" />
     <Compile Include="UserEmployeeBindingEndRequest.cs" />
     <Compile Include="UserEmployeeBindingSaveRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
