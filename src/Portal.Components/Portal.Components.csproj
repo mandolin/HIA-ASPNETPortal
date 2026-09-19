@@ -163,6 +163,7 @@
     <Compile Include="PortalEmployeeStatuses.cs" />
     <Compile Include="PortalHiaBoundaryContracts.cs" />
     <Compile Include="PortalPasswordPolicy.cs" />
+    <Compile Include="PortalPasswordIterationPolicy.cs" />
     <Compile Include="PortalSignInResult.cs" />
     <Compile Include="PortalUserRegistrationStatuses.cs" />
     <Compile Include="PortalUserEmployeeBindingStatuses.cs" />

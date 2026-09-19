@@ -136,6 +136,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             PortalDiagnostics.CheckSqlConnection(portalConnectionString.ConnectionString);
             RegisterPasswordPolicyOptionsProvider();
+            RegisterPasswordIterationPolicyProvider();
 
             // <lang>
             //   <zh-CN>启动期最小自检只解析关键服务和环境覆盖字符串，验证容器 wiring；不在这里执行业务迁移或破坏性数据修复。</zh-CN>
@@ -170,6 +171,28 @@ namespace ASPNET.StarterKit.Portal
                     PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordRequiredCategoryCount),
                     PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.PasswordWeakDictionaryEnabled),
                     PortalRuntimeSettings.GetBoolean(PortalSettingsRegistry.PasswordDisallowContextTerms)));
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>注入密码哈希目标迭代次数提供器。</zh-CN>
+        ///   <en>Registers the password-hash target iteration-count provider.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN><see cref="PortalPasswordIterationPolicy"/> 位于独立组件项目，不能反向依赖 Web 配置读取器；因此启动期通过委托注入当前目标迭代次数。读取失败或配置低于硬下限时，策略类自身会回退到硬下限 210000。</zh-CN>
+        ///   <en><see cref="PortalPasswordIterationPolicy"/> lives in the independent components project and must not depend back on the Web configuration resolver, so startup injects a delegate for the target iteration count. The policy class falls back to its hard lower bound of 210000 if reads fail or configuration is lower.</en>
+        /// </lang>
+        /// </remarks>
+        private static void RegisterPasswordIterationPolicyProvider()
+        {
+            // <lang>
+            //   <zh-CN>只从受控设置读取目标迭代次数；提供器不接触密码、盐或哈希材料。</zh-CN>
+            //   <en>Only the controlled setting is read for the target iteration count; the provider never touches passwords, salts, or hash material.</en>
+            // </lang>
+            PortalPasswordIterationPolicy.ConfigureTargetProvider(
+                () => PortalRuntimeSettings.GetInt32(PortalSettingsRegistry.PasswordIterationCount));
         }
 
         /// <summary>
