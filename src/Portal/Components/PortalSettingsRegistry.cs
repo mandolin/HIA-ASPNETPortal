@@ -162,6 +162,26 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>强密码哈希目标迭代次数的设置定义，硬下限为 210000。</zh-CN>
+        ///   <en>Setting definition for the target strong-hash iteration count, with a 210000 hard lower bound.</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition PasswordIterationCount =
+            new PortalSettingDefinition(
+                PortalSettingKeys.PasswordIterationCount,
+                "密码哈希迭代次数",
+                "控制新建与重哈希凭据使用的 PBKDF2 迭代次数；低于 210000 的配置会被视为无效并回落，避免降低既有哈希强度。",
+                PortalSettingValueType.Integer,
+                "210000",
+                true,
+                false,
+                "Admins",
+                "Security",
+                minIntegerValue: 210000,
+                maxIntegerValue: 10000000);
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>临时注册链接默认有效天数的设置定义。</zh-CN>
         ///   <en>Setting definition for the default validity period of temporary registration invite links.</en>
         /// </lang>
@@ -458,6 +478,7 @@ namespace ASPNET.StarterKit.Portal
                 PasswordRequiredCategoryCount,
                 PasswordWeakDictionaryEnabled,
                 PasswordDisallowContextTerms,
+                PasswordIterationCount,
                 RegistrationInviteDefaultExpiryDays,
                 AllowPendingEmployeeBinding,
                 MaxUploadBytes,

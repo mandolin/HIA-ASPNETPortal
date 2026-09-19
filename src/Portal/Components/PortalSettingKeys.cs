@@ -130,6 +130,14 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>强密码哈希目标 PBKDF2 迭代次数的设置键；低于当前默认值的配置会被视为无效并回落，强度只增不减。</zh-CN>
+        ///   <en>Setting key for the target PBKDF2 iteration count of strong password hashes; values below the current default are treated as invalid and clamped up, so strength only increases.</en>
+        /// </lang>
+        /// </summary>
+        public const string PasswordIterationCount = "Portal.Security.Password.IterationCount";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>身份与角色 Cookie 是否下发 Secure 属性的设置键；仅 HTTPS 部署方可启用。</zh-CN>
         ///   <en>Setting key for whether identity and role cookies emit the Secure attribute; only enable for HTTPS deployments.</en>
         /// </lang>
