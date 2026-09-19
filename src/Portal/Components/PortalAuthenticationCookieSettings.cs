@@ -1,3 +1,5 @@
+using System.Web;
+
 namespace ASPNET.StarterKit.Portal
 {
     /// <summary>
@@ -67,6 +69,64 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Delegate to the pure policy class so constraints such as "None requires Secure" hold on every read path.</en>
             // </lang>
             return PortalAuthenticationCookiePolicy.Normalize(secure, sameSite, reason);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把当前解析出的传输安全属性应用到指定 Cookie；Unset 时不触碰 SameSite，保持框架默认。</zh-CN>
+        ///   <en>Applies the currently resolved transport-security attributes to the specified cookie; Unset leaves SameSite untouched so the framework default is preserved.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="cookie">
+        /// <l>
+        ///   <zh-CN>要应用属性的 Cookie；为 null 时直接返回。</zh-CN>
+        ///   <en>Cookie to apply attributes to; returns directly when null.</en>
+        /// </l>
+        /// </param>
+        public static void ApplyTo(HttpCookie cookie)
+        {
+            // <lang>
+            //   <zh-CN>空引用不抛异常：Cookie 写入路径不应因策略调用新增失败模式。</zh-CN>
+            //   <en>Null never throws: the cookie-write path must not gain a new failure mode from the policy call.</en>
+            // </lang>
+            if (cookie == null)
+            {
+                return;
+            }
+
+            PortalCookieSecurityOptions options = Resolve();
+
+            // <lang>
+            //   <zh-CN>Secure 总是按策略显式赋值；默认 false 与历史行为一致。</zh-CN>
+            //   <en>Secure is always assigned explicitly from policy; the false default matches historical behavior.</en>
+            // </lang>
+            cookie.Secure = options.Secure;
+
+            // <lang>
+            //   <zh-CN>Unset 不触碰 SameSite 属性，确保默认部署不额外下发该属性，与历史行为完全一致。</zh-CN>
+            //   <en>Unset leaves the SameSite property untouched so default deployments emit no extra attribute, exactly matching historical behavior.</en>
+            // </lang>
+            if (options.SameSite == PortalCookieSameSiteMode.Unset)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只在明确配置 Lax/Strict/None 时映射到框架 SameSiteMode；None 已在策略层校验必须配合 Secure。</zh-CN>
+            //   <en>Map to the framework SameSiteMode only for explicitly configured Lax/Strict/None; None was already validated at the policy layer to require Secure.</en>
+            // </lang>
+            switch (options.SameSite)
+            {
+                case PortalCookieSameSiteMode.Lax:
+                    cookie.SameSite = SameSiteMode.Lax;
+                    break;
+                case PortalCookieSameSiteMode.Strict:
+                    cookie.SameSite = SameSiteMode.Strict;
+                    break;
+                case PortalCookieSameSiteMode.None:
+                    cookie.SameSite = SameSiteMode.None;
+                    break;
+            }
         }
     }
 }

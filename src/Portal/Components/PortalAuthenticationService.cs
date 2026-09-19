@@ -92,14 +92,20 @@ namespace ASPNET.StarterKit.Portal
                 FormatSecurityVersion(securityVersion));
 
             // <lang>
-            //   <zh-CN>创建 HttpOnly 身份 Cookie，并复用虚拟目录 Path 规则；Secure/SameSite 仍由部署策略负责。</zh-CN>
-            //   <en>Create the HttpOnly identity cookie using the virtual-directory Path rule; deployment policy still owns Secure/SameSite.</en>
+            //   <zh-CN>创建 HttpOnly 身份 Cookie，并复用虚拟目录 Path 规则；Secure/SameSite 由传输安全策略统一应用，默认与历史行为一致（均不下发）。</zh-CN>
+            //   <en>Create the HttpOnly identity cookie using the virtual-directory Path rule; Secure/SameSite are applied centrally by the transport-security policy and default to historical behavior (neither emitted).</en>
             // </lang>
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket))
             {
                 HttpOnly = true,
                 Path = GetCookiePath(request)
             };
+
+            // <lang>
+            //   <zh-CN>应用传输安全策略：默认不下发 Secure/SameSite；配置缺失或读取异常时同样回落默认，不会阻断登录。</zh-CN>
+            //   <en>Apply the transport-security policy: by default neither Secure nor SameSite is emitted; missing or failing configuration also falls back to the default without blocking sign-in.</en>
+            // </lang>
+            PortalAuthenticationCookieSettings.ApplyTo(cookie);
 
             if (isPersistent)
             {
@@ -280,12 +286,18 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         private static void ExpireAuthenticationCookie(HttpResponse response, HttpRequest request)
         {
-            response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, string.Empty)
+            // <lang>
+            //   <zh-CN>失效 Cookie 必须与写入时使用同一 Path 与安全属性，否则浏览器可能不会覆盖目标 Cookie。</zh-CN>
+            //   <en>An expiring cookie must reuse the same Path and security attributes as the write, otherwise the browser may not overwrite the target cookie.</en>
+            // </lang>
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, string.Empty)
             {
                 Expires = DateTime.Now.AddDays(-1),
                 HttpOnly = true,
                 Path = GetCookiePath(request)
-            });
+            };
+            PortalAuthenticationCookieSettings.ApplyTo(cookie);
+            response.Cookies.Add(cookie);
         }
     }
 }

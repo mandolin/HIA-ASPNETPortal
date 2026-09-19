@@ -203,8 +203,8 @@ namespace ASPNET.StarterKit.Portal
                 roleData);
 
             // <lang>
-            //   <zh-CN>当前保持 HttpOnly 与虚拟目录 Path；Secure/SameSite 由后续部署安全策略统一配置。</zh-CN>
-            //   <en>Keep HttpOnly and the virtual-directory Path for now; Secure/SameSite are configured by later deployment-security policy.</en>
+            //   <zh-CN>当前保持 HttpOnly 与虚拟目录 Path；Secure/SameSite 由传输安全策略统一应用，默认与历史行为一致（均不下发）。</zh-CN>
+            //   <en>Keep HttpOnly and the virtual-directory Path; Secure/SameSite are applied centrally by the transport-security policy and default to historical behavior (neither emitted).</en>
             // </lang>
             // <lang>
             //   <zh-CN>封装加密票据为角色 Cookie，并复用 Path 规则；不把角色文本直接写入 Cookie value。</zh-CN>
@@ -215,6 +215,12 @@ namespace ASPNET.StarterKit.Portal
                 HttpOnly = true,
                 Path = GetCookiePath(request)
             };
+
+            // <lang>
+            //   <zh-CN>应用传输安全策略，使角色 Cookie 与身份票据在 Secure/SameSite 上保持一致；默认不额外下发任何属性。</zh-CN>
+            //   <en>Apply the transport-security policy so the role cookie stays consistent with the identity ticket for Secure/SameSite; by default no extra attribute is emitted.</en>
+            // </lang>
+            PortalAuthenticationCookieSettings.ApplyTo(cookie);
 
             if (isPersistent)
             {
@@ -248,12 +254,18 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         public static void ExpireRolesCookie(HttpResponse response, HttpRequest request)
         {
-            response.Cookies.Add(new HttpCookie(RolesCookieName, string.Empty)
+            // <lang>
+            //   <zh-CN>失效 Cookie 必须与写入时使用同一 Path 与安全属性，否则浏览器可能不会覆盖目标 Cookie。</zh-CN>
+            //   <en>An expiring cookie must reuse the same Path and security attributes as the write, otherwise the browser may not overwrite the target cookie.</en>
+            // </lang>
+            var cookie = new HttpCookie(RolesCookieName, string.Empty)
             {
                 Expires = DateTime.Now.AddDays(-1),
                 HttpOnly = true,
                 Path = GetCookiePath(request)
-            });
+            };
+            PortalAuthenticationCookieSettings.ApplyTo(cookie);
+            response.Cookies.Add(cookie);
         }
 
         /// <summary>
