@@ -238,12 +238,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private static string GetDisplayText(PortalNavigationEntry entry)
         {
-            if (!string.IsNullOrWhiteSpace(entry.DisplayNameZhCn))
-            {
-                return entry.DisplayNameZhCn;
-            }
-
-            return entry.DisplayNameEn;
+            // <lang>
+            //   <zh-CN>按当前界面文化解析显示名：与 Web.config 的 globalization uiCulture 同源，切换语言时页头链接与页面文案一起切换，避免中英混排。</zh-CN>
+            //   <en>Resolve the display name from the current UI culture: it shares the Web.config globalization uiCulture source, so switching languages switches the header links and the page text together and avoids a mixed-language surface.</en>
+            // </lang>
+            return entry.GetDisplayName(System.Globalization.CultureInfo.CurrentUICulture);
         }
 
         /// <summary>

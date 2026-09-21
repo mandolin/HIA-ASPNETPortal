@@ -59,6 +59,7 @@
     <Compile Include="PortalDatabaseProfileTests.cs" />
     <Compile Include="PortalNavigationRegistryTests.cs" />
     <Compile Include="PortalNavigationVisibilityPolicyTests.cs" />
+    <Compile Include="PortalNavigationEntryDisplayNameTests.cs" />
     <Compile Include="PortalRoleParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

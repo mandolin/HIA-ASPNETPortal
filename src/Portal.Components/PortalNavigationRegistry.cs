@@ -324,6 +324,65 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>按界面语言返回入口显示名：中文文化取中文名，其余文化取英文名；缺失一侧时回落到另一侧。</zh-CN>
+        ///   <en>Return the entry display name for a UI culture: Chinese cultures use the Chinese name, other cultures use the English name, and a missing side falls back to the other.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="culture">
+        /// <l>
+        ///   <zh-CN>目标界面文化；为 null 时使用当前线程界面文化。</zh-CN>
+        ///   <en>Target UI culture; null uses the current thread UI culture.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>显示名；两侧均缺失时返回稳定键，保证标签不为空。</zh-CN>
+        ///   <en>Display name; when both sides are missing the stable key is returned so the label is never blank.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>判定依据是界面文化的语言代码，与 Web.config 的 globalization uiCulture 以及 App_GlobalResources/lang.* 的解析保持同源；因此切换 uiCulture 时，管理面页头链接与页面文案会一起切换，不会出现中英混排。</zh-CN>
+        ///   <en>The decision uses the UI culture language code and stays aligned with the Web.config globalization uiCulture and App_GlobalResources/lang.* resolution; switching uiCulture therefore switches both the admin header links and the page text together, avoiding a mixed-language surface.</en>
+        /// </lang>
+        /// </remarks>
+        public string GetDisplayName(System.Globalization.CultureInfo culture)
+        {
+            // <lang>
+            //   <zh-CN>未显式传入文化时取当前线程界面文化，保证调用方无需自行读取全球化配置。</zh-CN>
+            //   <en>When no culture is supplied, use the current thread UI culture so callers need not read globalization configuration themselves.</en>
+            // </lang>
+            System.Globalization.CultureInfo effectiveCulture = culture ?? System.Globalization.CultureInfo.CurrentUICulture;
+
+            // <lang>
+            //   <zh-CN>以两字母语言代码判定中文，兼容 zh-CN、zh-TW 等区域变体。</zh-CN>
+            //   <en>Detect Chinese by the two-letter language code, covering regional variants such as zh-CN and zh-TW.</en>
+            // </lang>
+            bool preferChinese = effectiveCulture != null &&
+                string.Equals(effectiveCulture.TwoLetterISOLanguageName, "zh", StringComparison.OrdinalIgnoreCase);
+
+            string preferred = preferChinese ? DisplayNameZhCn : DisplayNameEn;
+            string fallback = preferChinese ? DisplayNameEn : DisplayNameZhCn;
+
+            if (!string.IsNullOrWhiteSpace(preferred))
+            {
+                return preferred;
+            }
+
+            if (!string.IsNullOrWhiteSpace(fallback))
+            {
+                return fallback;
+            }
+
+            // <lang>
+            //   <zh-CN>两侧都缺失时返回稳定键：宁可显示键名也不留空标签。</zh-CN>
+            //   <en>Return the stable key when both sides are missing: showing the key beats an empty label.</en>
+            // </lang>
+            return EntryKey ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>入口目标，可能是模块入口、后台页或文档路径。</zh-CN>
         ///   <en>Entry target, such as a module entry, admin page, or document path.</en>
         /// </lang>
