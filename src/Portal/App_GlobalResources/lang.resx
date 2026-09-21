@@ -213,4 +213,100 @@
   <data name="Admin_SystemHealth_ColumnRestart" xml:space="preserve">
     <value>Restart</value>
   </data>
+  <data name="Admin_ModuleCatalog_Title" xml:space="preserve">
+    <value>Module Catalog</value>
+  </data>
+  <data name="Admin_ModuleCatalog_Subtitle" xml:space="preserve">
+    <value>Manage trusted deployed module packages without upload, extraction, or script loading.</value>
+  </data>
+  <data name="Admin_ModuleCatalog_DiscoveryNotePre" xml:space="preserve">
+    <value>Packages are discovered from deployed</value>
+  </data>
+  <data name="Admin_ModuleCatalog_DiscoveryNotePost" xml:space="preserve">
+    <value>files. This page never uploads, deletes, extracts, compiles, or loads package scripts.</value>
+  </data>
+  <data name="Admin_ModuleCatalog_TrustedPackagesSectionTitle" xml:space="preserve">
+    <value>Trusted Packages</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnPackageId" xml:space="preserve">
+    <value>Package ID</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnDesktopEntry" xml:space="preserve">
+    <value>Desktop Entry</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnProfile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnDefinition" xml:space="preserve">
+    <value>Definition</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnInstances" xml:space="preserve">
+    <value>Instances</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ButtonRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ButtonEnable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ButtonDisable" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ButtonPreflight" xml:space="preserve">
+    <value>Preflight</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_Title" xml:space="preserve">
+    <value>Module Type Definition</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_Subtitle" xml:space="preserve">
+    <value>Legacy definition maintenance for trusted deployed modules.</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_RegisterGuidance" xml:space="preserve">
+    <value>New module definitions should be registered from verified packages in Module Catalog.</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ReadOnlyPathsNote" xml:space="preserve">
+    <value>Desktop and mobile source paths are read-only here to preserve the trusted deployment boundary.</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_MetadataSectionTitle" xml:space="preserve">
+    <value>Definition Metadata</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_LabelFriendlyName" xml:space="preserve">
+    <value>Friendly Name</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ValidationFriendlyNameRequired" xml:space="preserve">
+    <value>Enter a Module Name</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_LabelDesktopSource" xml:space="preserve">
+    <value>Desktop Source</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ValidationDesktopSourceRequired" xml:space="preserve">
+    <value>You Must Enter Source Path for the Desktop Module</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ValidationDesktopSourcePath" xml:space="preserve">
+    <value>Desktop Source must be a relative .ascx path under DesktopModules/ or Admin/.</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_LabelMobileSource" xml:space="preserve">
+    <value>Mobile Source</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ButtonUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ButtonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ButtonDelete" xml:space="preserve">
+    <value>Delete this module type</value>
+  </data>
 </root>

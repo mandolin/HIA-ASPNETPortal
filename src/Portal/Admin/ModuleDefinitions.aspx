@@ -18,8 +18,8 @@
     <div class="portal-admin-page portal-admin-module-definition-edit">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Module Type Definition</h1>
-                <p class="Normal portal-admin-subtitle">Legacy definition maintenance for trusted deployed modules.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_ModuleDefinitions_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_ModuleDefinitions_Subtitle %></p>
             </div>
             <%= PortalNavigationEntryRenderer.RenderActions("Admin.Modules.Definitions", Context) %>
         </div>
@@ -28,16 +28,16 @@
 
         <div class="portal-status-strip">
             <div class="Normal portal-status-line">
-                New module definitions should be registered from verified packages in Module Catalog.
+                <%= lang.Admin_ModuleDefinitions_RegisterGuidance %>
             </div>
             <div class="Normal portal-status-line">
-                Desktop and mobile source paths are read-only here to preserve the trusted deployment boundary.
+                <%= lang.Admin_ModuleDefinitions_ReadOnlyPathsNote %>
             </div>
         </div>
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Definition Metadata</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_ModuleDefinitions_MetadataSectionTitle %></h2>
             </div>
             <%--
               <lang>
@@ -47,7 +47,7 @@
             --%>
             <div class="portal-form-grid">
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Friendly Name</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ModuleDefinitions_LabelFriendlyName %></span>
                     <asp:TextBox
                         ID="FriendlyName"
                         CssClass="NormalTextBox portal-form-input"
@@ -58,13 +58,13 @@
                         <asp:RequiredFieldValidator
                             ID="Req1"
                             Display="Dynamic"
-                            ErrorMessage="Enter a Module Name"
+                            ErrorMessage="<%$ Resources:lang, Admin_ModuleDefinitions_ValidationFriendlyNameRequired %>"
                             ControlToValidate="FriendlyName"
                             runat="server" />
                     </span>
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Desktop Source</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ModuleDefinitions_LabelDesktopSource %></span>
                     <asp:TextBox
                         ID="DesktopSrc"
                         CssClass="NormalTextBox portal-form-input"
@@ -75,7 +75,7 @@
                         <asp:RequiredFieldValidator
                             ID="Req2"
                             Display="Dynamic"
-                            ErrorMessage="You Must Enter Source Path for the Desktop Module"
+                            ErrorMessage="<%$ Resources:lang, Admin_ModuleDefinitions_ValidationDesktopSourceRequired %>"
                             ControlToValidate="DesktopSrc"
                             runat="server" />
                         <%--
@@ -87,14 +87,14 @@
                         <asp:CustomValidator
                             ID="DesktopSrcPathValidator"
                             Display="Dynamic"
-                            ErrorMessage="Desktop Source must be a relative .ascx path under DesktopModules/ or Admin/."
+                            ErrorMessage="<%$ Resources:lang, Admin_ModuleDefinitions_ValidationDesktopSourcePath %>"
                             ControlToValidate="DesktopSrc"
                             OnServerValidate="DesktopSrcPathValidator_ServerValidate"
                             runat="server" />
                     </span>
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Mobile Source</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ModuleDefinitions_LabelMobileSource %></span>
                     <asp:TextBox
                         ID="MobileSrc"
                         CssClass="NormalTextBox portal-form-input"
@@ -112,20 +112,20 @@
             <div class="portal-form-actions">
                 <asp:LinkButton
                     ID="updateButton"
-                    Text="Update"
+                    Text="<%$ Resources:lang, Admin_ModuleDefinitions_ButtonUpdate %>"
                     runat="server"
                     CssClass="CommandButton portal-primary-action"
                     OnClick="UpdateBtn_Click" />
                 <asp:LinkButton
                     ID="cancelButton"
-                    Text="Cancel"
+                    Text="<%$ Resources:lang, Admin_ModuleDefinitions_ButtonCancel %>"
                     CausesValidation="False"
                     runat="server"
                     CssClass="CommandButton portal-secondary-action"
                     OnClick="CancelBtn_Click" />
                 <asp:LinkButton
                     ID="deleteButton"
-                    Text="Delete this module type"
+                    Text="<%$ Resources:lang, Admin_ModuleDefinitions_ButtonDelete %>"
                     CausesValidation="False"
                     runat="server"
                     CssClass="CommandButton portal-danger-action"

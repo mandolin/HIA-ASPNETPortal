@@ -643,5 +643,389 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnRestart", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Catalog</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Catalog</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_Title {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Manage trusted deployed module packages without upload, extraction, or script loading.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Manage trusted deployed module packages without upload, extraction, or script loading.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Packages are discovered from deployed</zh-CN>
+        ///   <en>Looks up a localized string similar to: Packages are discovered from deployed</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_DiscoveryNotePre {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_DiscoveryNotePre", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：files. This page never uploads, deletes, extracts, compiles, or loads package scripts.</zh-CN>
+        ///   <en>Looks up a localized string similar to: files. This page never uploads, deletes, extracts, compiles, or loads package scripts.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_DiscoveryNotePost {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_DiscoveryNotePost", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Trusted Packages</zh-CN>
+        ///   <en>Looks up a localized string similar to: Trusted Packages</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_TrustedPackagesSectionTitle {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_TrustedPackagesSectionTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Package ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: Package ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnPackageId {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnPackageId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnName {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Version</zh-CN>
+        ///   <en>Looks up a localized string similar to: Version</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnVersion {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnVersion", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Desktop Entry</zh-CN>
+        ///   <en>Looks up a localized string similar to: Desktop Entry</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnDesktopEntry {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnDesktopEntry", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Profile</zh-CN>
+        ///   <en>Looks up a localized string similar to: Profile</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnProfile {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnProfile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：State</zh-CN>
+        ///   <en>Looks up a localized string similar to: State</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnState {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnState", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Definition</zh-CN>
+        ///   <en>Looks up a localized string similar to: Definition</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnDefinition {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnDefinition", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Instances</zh-CN>
+        ///   <en>Looks up a localized string similar to: Instances</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnInstances {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnInstances", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Actions</zh-CN>
+        ///   <en>Looks up a localized string similar to: Actions</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ColumnActions {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnActions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Register</zh-CN>
+        ///   <en>Looks up a localized string similar to: Register</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ButtonRegister {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ButtonRegister", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enable</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enable</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ButtonEnable {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ButtonEnable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Disable</zh-CN>
+        ///   <en>Looks up a localized string similar to: Disable</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ButtonDisable {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ButtonDisable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Preflight</zh-CN>
+        ///   <en>Looks up a localized string similar to: Preflight</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_ButtonPreflight {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ButtonPreflight", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Type Definition</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Type Definition</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_Title {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Legacy definition maintenance for trusted deployed modules.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Legacy definition maintenance for trusted deployed modules.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：New module definitions should be registered from verified packages in Module Catalog.</zh-CN>
+        ///   <en>Looks up a localized string similar to: New module definitions should be registered from verified packages in Module Catalog.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_RegisterGuidance {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_RegisterGuidance", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Desktop and mobile source paths are read-only here to preserve the trusted deployment boundary.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Desktop and mobile source paths are read-only here to preserve the trusted deployment boundary.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_ReadOnlyPathsNote {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ReadOnlyPathsNote", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Definition Metadata</zh-CN>
+        ///   <en>Looks up a localized string similar to: Definition Metadata</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_MetadataSectionTitle {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_MetadataSectionTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Friendly Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Friendly Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_LabelFriendlyName {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_LabelFriendlyName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a Module Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter a Module Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_ValidationFriendlyNameRequired {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ValidationFriendlyNameRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Desktop Source</zh-CN>
+        ///   <en>Looks up a localized string similar to: Desktop Source</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_LabelDesktopSource {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_LabelDesktopSource", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You Must Enter Source Path for the Desktop Module</zh-CN>
+        ///   <en>Looks up a localized string similar to: You Must Enter Source Path for the Desktop Module</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_ValidationDesktopSourceRequired {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ValidationDesktopSourceRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Desktop Source must be a relative .ascx path under DesktopModules/ or Admin/.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Desktop Source must be a relative .ascx path under DesktopModules/ or Admin/.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_ValidationDesktopSourcePath {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ValidationDesktopSourcePath", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Source</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mobile Source</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_LabelMobileSource {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_LabelMobileSource", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Update</zh-CN>
+        ///   <en>Looks up a localized string similar to: Update</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_ButtonUpdate {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ButtonUpdate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Cancel</zh-CN>
+        ///   <en>Looks up a localized string similar to: Cancel</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_ButtonCancel {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ButtonCancel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Delete this module type</zh-CN>
+        ///   <en>Looks up a localized string similar to: Delete this module type</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_ButtonDelete {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_ButtonDelete", resourceCulture);
+            }
+        }
     }
 }

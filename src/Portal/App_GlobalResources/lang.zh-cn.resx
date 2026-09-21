@@ -213,4 +213,100 @@
   <data name="Admin_SystemHealth_ColumnRestart" xml:space="preserve">
     <value>需重启</value>
   </data>
+  <data name="Admin_ModuleCatalog_Title" xml:space="preserve">
+    <value>模块包目录</value>
+  </data>
+  <data name="Admin_ModuleCatalog_Subtitle" xml:space="preserve">
+    <value>管理受信任的已部署模块包；不提供上传、解包或脚本加载。</value>
+  </data>
+  <data name="Admin_ModuleCatalog_DiscoveryNotePre" xml:space="preserve">
+    <value>模块包由已部署的</value>
+  </data>
+  <data name="Admin_ModuleCatalog_DiscoveryNotePost" xml:space="preserve">
+    <value>文件发现。本页绝不上传、删除、解包、编译或加载包脚本。</value>
+  </data>
+  <data name="Admin_ModuleCatalog_TrustedPackagesSectionTitle" xml:space="preserve">
+    <value>受信任的包</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnPackageId" xml:space="preserve">
+    <value>包标识</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnVersion" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnDesktopEntry" xml:space="preserve">
+    <value>桌面端入口</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnProfile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnState" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnDefinition" xml:space="preserve">
+    <value>定义</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnInstances" xml:space="preserve">
+    <value>实例数</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ColumnActions" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ButtonRegister" xml:space="preserve">
+    <value>注册</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ButtonEnable" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ButtonDisable" xml:space="preserve">
+    <value>停用</value>
+  </data>
+  <data name="Admin_ModuleCatalog_ButtonPreflight" xml:space="preserve">
+    <value>预检</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_Title" xml:space="preserve">
+    <value>模块类型定义</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_Subtitle" xml:space="preserve">
+    <value>受信任已部署模块的历史定义维护。</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_RegisterGuidance" xml:space="preserve">
+    <value>新的模块定义应从模块包目录中已校验的包注册。</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ReadOnlyPathsNote" xml:space="preserve">
+    <value>桌面端与移动端源路径在此只读，以保持受信任部署边界。</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_MetadataSectionTitle" xml:space="preserve">
+    <value>定义元数据</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_LabelFriendlyName" xml:space="preserve">
+    <value>友好名称</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ValidationFriendlyNameRequired" xml:space="preserve">
+    <value>请输入模块名称</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_LabelDesktopSource" xml:space="preserve">
+    <value>桌面端源路径</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ValidationDesktopSourceRequired" xml:space="preserve">
+    <value>必须输入桌面端模块的源路径</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ValidationDesktopSourcePath" xml:space="preserve">
+    <value>桌面端源路径必须是 DesktopModules/ 或 Admin/ 下的相对 .ascx 路径。</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_LabelMobileSource" xml:space="preserve">
+    <value>移动端源路径</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ButtonUpdate" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ButtonCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_ButtonDelete" xml:space="preserve">
+    <value>删除此模块类型</value>
+  </data>
 </root>

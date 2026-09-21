@@ -24,8 +24,8 @@
     <div class="portal-admin-page portal-admin-module-catalog">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Module Catalog</h1>
-                <p class="Normal portal-admin-subtitle">Manage trusted deployed module packages without upload, extraction, or script loading.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_ModuleCatalog_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_ModuleCatalog_Subtitle %></p>
             </div>
             <%= PortalNavigationEntryRenderer.RenderActions("Admin.ModuleCatalog", Context) %>
         </div>
@@ -37,14 +37,13 @@
                 <asp:Label ID="ResultLabel" EnableViewState="false" runat="server" />
             </div>
             <div class="Normal portal-status-line">
-                Packages are discovered from deployed <code>module.json</code> files. This page never uploads,
-                deletes, extracts, compiles, or loads package scripts.
+                <%= lang.Admin_ModuleCatalog_DiscoveryNotePre %> <code>module.json</code> <%= lang.Admin_ModuleCatalog_DiscoveryNotePost %>
             </div>
         </div>
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Trusted Packages</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_ModuleCatalog_TrustedPackagesSectionTitle %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -65,26 +64,26 @@
                     OnRowCommand="PackagesGrid_RowCommand"
                     runat="server">
                     <Columns>
-                        <asp:BoundField DataField="PackageId" HeaderText="Package ID" />
-                        <asp:BoundField DataField="DisplayName" HeaderText="Name" />
-                        <asp:BoundField DataField="Version" HeaderText="Version" />
-                        <asp:BoundField DataField="DesktopEntry" HeaderText="Desktop Entry" />
-                        <asp:BoundField DataField="ProfileText" HeaderText="Profile" />
-                        <asp:BoundField DataField="StateText" HeaderText="State" />
-                        <asp:BoundField DataField="DefinitionText" HeaderText="Definition" />
-                        <asp:BoundField DataField="InstanceCount" HeaderText="Instances" />
+                        <asp:BoundField DataField="PackageId" HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnPackageId %>" />
+                        <asp:BoundField DataField="DisplayName" HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnName %>" />
+                        <asp:BoundField DataField="Version" HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnVersion %>" />
+                        <asp:BoundField DataField="DesktopEntry" HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnDesktopEntry %>" />
+                        <asp:BoundField DataField="ProfileText" HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnProfile %>" />
+                        <asp:BoundField DataField="StateText" HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnState %>" />
+                        <asp:BoundField DataField="DefinitionText" HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnDefinition %>" />
+                        <asp:BoundField DataField="InstanceCount" HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnInstances %>" />
                         <%--
                           <lang>
                             <zh-CN>动作按钮的 Visible 标志只反映当前行能力投影；注册、启停和预检不会在标记层上传、解包、编译或加载脚本。</zh-CN>
                             <en>Action-button visibility only projects the current row's capabilities; registration, enable/disable, and preflight never upload, extract, compile, or load scripts in the markup layer.</en>
                           </lang>
                         --%>
-                        <asp:TemplateField HeaderText="Actions">
+                        <asp:TemplateField HeaderText="<%$ Resources:lang, Admin_ModuleCatalog_ColumnActions %>">
                             <ItemTemplate>
                                 <div class="portal-row-actions">
                                     <asp:LinkButton
                                         ID="RegisterButton"
-                                        Text="Register"
+                                        Text="<%$ Resources:lang, Admin_ModuleCatalog_ButtonRegister %>"
                                         CommandName="Register"
                                         CommandArgument='<%# Eval("PackageId") %>'
                                         CssClass="CommandButton"
@@ -93,7 +92,7 @@
                                         runat="server" />
                                     <asp:LinkButton
                                         ID="EnableButton"
-                                        Text="Enable"
+                                        Text="<%$ Resources:lang, Admin_ModuleCatalog_ButtonEnable %>"
                                         CommandName="Enable"
                                         CommandArgument='<%# Eval("PackageId") %>'
                                         CssClass="CommandButton"
@@ -102,7 +101,7 @@
                                         runat="server" />
                                     <asp:LinkButton
                                         ID="DisableButton"
-                                        Text="Disable"
+                                        Text="<%$ Resources:lang, Admin_ModuleCatalog_ButtonDisable %>"
                                         CommandName="Disable"
                                         CommandArgument='<%# Eval("PackageId") %>'
                                         CssClass="CommandButton"
@@ -111,7 +110,7 @@
                                         runat="server" />
                                     <asp:LinkButton
                                         ID="PreflightButton"
-                                        Text="Preflight"
+                                        Text="<%$ Resources:lang, Admin_ModuleCatalog_ButtonPreflight %>"
                                         CommandName="Preflight"
                                         CommandArgument='<%# Eval("PackageId") %>'
                                         CssClass="CommandButton"
