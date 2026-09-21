@@ -651,7 +651,252 @@ namespace ASPNET.StarterKit.Portal
                 new string[0],
                 new string[0],
                 new string[0],
-                "Registered for governance only; actual registration flow is deferred to an account-system phase.")
+                "Registered for governance only; actual registration flow is deferred to an account-system phase."),
+
+            // <lang>
+            //   <zh-CN>核心管理模块组（当前唯一在运行的一批）：元数据仅声明管理员与对应权限键，不等同于页面写入授权。</zh-CN>
+            //   <en>Core administration group (currently the only running set): metadata declares only administrators and the matching permission key, and does not itself grant page write authorization.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Core.Admin.SiteSettings",
+                PortalNavigationEntryKind.AdminPage,
+                "站点设置",
+                "Site Settings",
+                "Admin/SiteSettings.ascx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                10,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.SettingsView },
+                new[] { "Core" },
+                new string[0],
+                "P44.5: core administration module running under the CoreOnly profile."),
+
+            new PortalNavigationEntry(
+                "Core.Admin.Tabs",
+                PortalNavigationEntryKind.AdminPage,
+                "选项卡管理",
+                "Tabs Administration",
+                "Admin/Tabs.ascx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                20,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.PortalTabsEdit },
+                new[] { "Core" },
+                new string[0],
+                "P44.5: core administration module running under the CoreOnly profile."),
+
+            new PortalNavigationEntry(
+                "Core.Admin.Roles",
+                PortalNavigationEntryKind.AdminPage,
+                "角色管理",
+                "Roles Administration",
+                "Admin/Roles.ascx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                30,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.AdminRolesEdit },
+                new[] { "Core" },
+                new string[0],
+                "P44.5: core administration module running under the CoreOnly profile."),
+
+            new PortalNavigationEntry(
+                "Core.Admin.Users",
+                PortalNavigationEntryKind.AdminPage,
+                "用户管理",
+                "Users Administration",
+                "Admin/Users.ascx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                40,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.AdminUsersView },
+                new[] { "Core" },
+                new string[0],
+                "P44.5: core administration module running under the CoreOnly profile."),
+
+            new PortalNavigationEntry(
+                "Core.Admin.ModuleDefs",
+                PortalNavigationEntryKind.AdminPage,
+                "模块类型",
+                "Module Types",
+                "Admin/ModuleDefs.ascx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                50,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.PortalModulesEdit },
+                new[] { "Core" },
+                new string[0],
+                "P44.5: core administration module running under the CoreOnly profile."),
+
+            // <lang>
+            //   <zh-CN>错误与占位入口：仅为治理/诊断登记，不进入普通导航，也不改变实际拒绝或占位流程。</zh-CN>
+            //   <en>Error and placeholder entries: registered for governance and diagnostics only; they stay out of ordinary navigation and do not alter the actual denial or placeholder flow.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Error.AccessDenied",
+                PortalNavigationEntryKind.AdminPage,
+                "访问被拒绝",
+                "Access Denied",
+                "Admin/AccessDenied.aspx",
+                PortalNavigationVisibilityMode.DiagnosticOnly,
+                PortalNavigationLifecycleState.Active,
+                910,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "P44.5: denial flow target, registered for diagnostics only."),
+
+            new PortalNavigationEntry(
+                "Admin.Error.EditAccessDenied",
+                PortalNavigationEntryKind.AdminPage,
+                "编辑被拒绝",
+                "Edit Access Denied",
+                "Admin/EditAccessDenied.aspx",
+                PortalNavigationVisibilityMode.DiagnosticOnly,
+                PortalNavigationLifecycleState.Active,
+                920,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "P44.5: denial flow target, registered for diagnostics only."),
+
+            new PortalNavigationEntry(
+                "Admin.Error.NotImplemented",
+                PortalNavigationEntryKind.AdminPage,
+                "未实现页面",
+                "Not Implemented",
+                "Admin/NotImplemented.aspx",
+                PortalNavigationVisibilityMode.DiagnosticOnly,
+                PortalNavigationLifecycleState.Deprecated,
+                930,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "P44.5: placeholder page kept out of ordinary navigation."),
+
+            // <lang>
+            //   <zh-CN>运维诊断组：诊断日志与运营审计进入管理员导航；参数化详情页仅作诊断登记。</zh-CN>
+            //   <en>Operations diagnostics group: logs and audits enter administrator navigation, while the parameterized detail page is diagnostics-only.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Ops.DiagnosticsLogs",
+                PortalNavigationEntryKind.AdminPage,
+                "诊断日志",
+                "Diagnostics Logs",
+                "Admin/DiagnosticsLogs.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                330,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.OpsDiagnosticsView },
+                new string[0],
+                new string[0],
+                "P44.5: operations diagnostics entry."),
+
+            new PortalNavigationEntry(
+                "Admin.Ops.DiagnosticLogDetail",
+                PortalNavigationEntryKind.AdminPage,
+                "诊断日志详情",
+                "Diagnostics Log Detail",
+                "Admin/DiagnosticLogDetail.aspx",
+                PortalNavigationVisibilityMode.DiagnosticOnly,
+                PortalNavigationLifecycleState.Active,
+                340,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.OpsDiagnosticsDetail },
+                new string[0],
+                new string[0],
+                "P44.5: parameterized detail page, diagnostics only."),
+
+            new PortalNavigationEntry(
+                "Admin.Ops.OperationAudits",
+                PortalNavigationEntryKind.AdminPage,
+                "运营审计",
+                "Operation Audits",
+                "Admin/OperationAudits.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                350,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.AuditOperationView },
+                new string[0],
+                new string[0],
+                "P44.5: operations audit entry."),
+
+            // <lang>
+            //   <zh-CN>模块治理组：模块定义、模块设置与选项卡布局的管理入口。</zh-CN>
+            //   <en>Module governance group: administration entries for module definitions, module settings, and tab layout.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Modules.Definitions",
+                PortalNavigationEntryKind.AdminPage,
+                "模块定义",
+                "Module Definitions",
+                "Admin/ModuleDefinitions.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                360,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.ModuleDefinitionEdit },
+                new string[0],
+                new string[0],
+                "P44.5: module governance entry."),
+
+            new PortalNavigationEntry(
+                "Admin.Modules.Settings",
+                PortalNavigationEntryKind.AdminPage,
+                "模块设置",
+                "Module Settings",
+                "Admin/ModuleSettings.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                370,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.PortalModulesEdit },
+                new string[0],
+                new string[0],
+                "P44.5: module governance entry."),
+
+            new PortalNavigationEntry(
+                "Admin.Modules.TabLayout",
+                PortalNavigationEntryKind.AdminPage,
+                "选项卡布局",
+                "Tab Layout",
+                "Admin/TabLayout.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                380,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.PortalTabsEdit },
+                new string[0],
+                new string[0],
+                "P44.5: module governance entry."),
+
+            // <lang>
+            //   <zh-CN>企业能力管理：业务申请后台与协同事项、待办同属能力管理组（既有键保留，分组由消费侧映射）。</zh-CN>
+            //   <en>Enterprise capability administration: business applications belongs to the same capability group as collaboration items and work items (existing keys are preserved and grouping is mapped by the consumer).</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.BusinessApplications",
+                PortalNavigationEntryKind.AdminPage,
+                "业务申请后台",
+                "Business Applications Administration",
+                "Admin/BusinessApplications.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                220,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.BusinessApplicationAdmin },
+                new string[0],
+                new string[0],
+                "P44.5: enterprise capability administration entry.")
         };
 
         /// <summary>
