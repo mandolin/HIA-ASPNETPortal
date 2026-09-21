@@ -10,8 +10,8 @@
 
 namespace Resources {
     using System;
-    
-    
+
+
     /// <summary>
     /// <lang>
     ///   <zh-CN>强类型资源访问器，用于查找本地化字符串等资源值。</zh-CN>
@@ -26,15 +26,15 @@ namespace Resources {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class lang {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal lang() {
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>返回此强类型资源访问器使用的缓存 ResourceManager 实例。</zh-CN>
@@ -51,7 +51,7 @@ namespace Resources {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>重写当前线程的 CurrentUICulture，影响此强类型资源类执行的所有资源查找。</zh-CN>
@@ -67,7 +67,7 @@ namespace Resources {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Access Denied</zh-CN>
@@ -79,7 +79,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_AccessDenied_AccessDenied", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Either you are not currently logged in, or you do not have access to this tab page within the portal. Please contact the portal administrator to obtain access.</zh-CN>
@@ -91,7 +91,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_AccessDenied_DeniedAbout", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Return to the ASP.NET Portal Starter Kit Home</zh-CN>
@@ -103,7 +103,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_AccessDenied_ReturnToHome", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Edit Access Denied</zh-CN>
@@ -115,7 +115,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_EditAccessDenied_EditAccessDenied", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Add user to this role</zh-CN>
@@ -127,7 +127,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_AddUserToRole", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Apply Name and Password Changes</zh-CN>
@@ -139,7 +139,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_ApplyNamePwdChange", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Confirm Password:</zh-CN>
@@ -151,7 +151,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_ConfirmPwd", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Email (or Windows domain name):</zh-CN>
@@ -163,7 +163,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_Email", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Manage User</zh-CN>
@@ -175,7 +175,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_ManageUser", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Password:</zh-CN>
@@ -187,7 +187,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_Password", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Remove user from this role</zh-CN>
@@ -211,7 +211,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_RemoveFromRoleText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Save User Changes</zh-CN>
@@ -223,7 +223,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ManageUsers_SaveUserChange", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Users must be registered to view secure content. Users may add themselves using the Register form, and Administrators may add users to specific roles using the Security Roles function above. This section permits Administrators to manage users and their security roles directly.</zh-CN>
@@ -235,7 +235,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_Users_FormMsg", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Domain users do not need to be registered to access portal content that is available to \"All Users\". Administrators may add domain users to specific roles using the Security Roles function above. This section permits Administrators to manage users and their security roles directly.</zh-CN>
@@ -247,7 +247,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_Users_OtherMsg", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Registered Users:</zh-CN>
@@ -259,7 +259,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_Users_RegisteredUsers", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Add New User</zh-CN>
@@ -271,7 +271,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_User_AddUser", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Delete this user</zh-CN>
@@ -283,7 +283,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_User_DelUser", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Edit this user</zh-CN>
@@ -295,7 +295,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_User_EditUser", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：read more...</zh-CN>
@@ -307,7 +307,7 @@ namespace Resources {
                 return ResourceManager.GetString("Announcements_readMore", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Manage Users</zh-CN>
@@ -319,7 +319,7 @@ namespace Resources {
                 return ResourceManager.GetString("Module_Name_ID_32", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Account Login</zh-CN>
@@ -331,7 +331,7 @@ namespace Resources {
                 return ResourceManager.GetString("Signin_accountLogin", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Email:</zh-CN>
@@ -343,7 +343,7 @@ namespace Resources {
                 return ResourceManager.GetString("Signin_email", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Email Or Name:</zh-CN>
@@ -355,7 +355,7 @@ namespace Resources {
                 return ResourceManager.GetString("Signin_EmailOrName", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Login Failed!</zh-CN>
@@ -367,7 +367,7 @@ namespace Resources {
                 return ResourceManager.GetString("Signin_LoginFaild", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Password:</zh-CN>
@@ -379,7 +379,7 @@ namespace Resources {
                 return ResourceManager.GetString("Signin_password", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Remember Login</zh-CN>
@@ -391,7 +391,7 @@ namespace Resources {
                 return ResourceManager.GetString("Signin_rememberLogin", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：System Health</zh-CN>
@@ -403,7 +403,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_Title", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Runtime diagnostics and configuration registry overview.</zh-CN>
@@ -415,7 +415,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_Subtitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Overall Status</zh-CN>
@@ -427,7 +427,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_OverallStatus", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Last Checked</zh-CN>
@@ -439,7 +439,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_LastChecked", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Recheck</zh-CN>
@@ -451,7 +451,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_Recheck", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Health Checks</zh-CN>
@@ -463,7 +463,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ChecksSectionTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Settings Registry</zh-CN>
@@ -475,7 +475,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_SettingsSectionTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Category</zh-CN>
@@ -487,7 +487,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnCategory", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Check</zh-CN>
@@ -499,7 +499,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnCheck", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
@@ -511,7 +511,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnStatus", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Summary</zh-CN>
@@ -523,7 +523,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnSummary", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Detail</zh-CN>
@@ -535,7 +535,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnDetail", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Event ID</zh-CN>
@@ -547,7 +547,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnEventId", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Key</zh-CN>
@@ -559,7 +559,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnKey", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Name</zh-CN>
@@ -571,7 +571,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnName", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Type</zh-CN>
@@ -583,7 +583,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnType", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Current Value</zh-CN>
@@ -595,7 +595,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnCurrentValue", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Source</zh-CN>
@@ -607,7 +607,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnSource", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Sensitive</zh-CN>
@@ -619,7 +619,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnSensitive", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Editable</zh-CN>
@@ -631,7 +631,7 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_SystemHealth_ColumnEditable", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Restart</zh-CN>
