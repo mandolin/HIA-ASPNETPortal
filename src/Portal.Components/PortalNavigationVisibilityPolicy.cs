@@ -176,6 +176,26 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>相关入口数量下限；同组入口不足时用常用入口兜底补足，避免动作区因分组过窄而整块消失。</zh-CN>
+        ///   <en>Minimum number of related entries; common entries top up the list when a group is too narrow, preventing the action area from vanishing entirely.</en>
+        /// </lang>
+        /// </summary>
+        public const int MinimumRelatedEntries = 2;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>常用入口兜底键；仅在同组入口不足下限时使用，且仍受 registry 与可见性策略管辖。</zh-CN>
+        ///   <en>Fallback keys for common entries; used only when a group falls below the minimum, and still governed by the registry and the visibility policy.</en>
+        /// </lang>
+        /// </summary>
+        private static readonly string[] CommonFallbackEntryKeys =
+        {
+            "Admin.SystemHealth",
+            "Admin.ModuleCatalog"
+        };
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>核心管理组。</zh-CN>
         ///   <en>Core administration group.</en>
         /// </lang>
@@ -454,16 +474,84 @@ namespace ASPNET.StarterKit.Portal
                 return new List<PortalNavigationEntry>().AsReadOnly();
             }
 
-            return PortalNavigationRegistry.GetEntries()
+            List<PortalNavigationEntry> related = PortalNavigationRegistry.GetEntries()
                 .Where(entry => string.Equals(GetGroupKey(entry), group, StringComparison.OrdinalIgnoreCase))
                 .Where(entry => !string.Equals(entry.EntryKey, entryKey, StringComparison.OrdinalIgnoreCase))
                 .Where(entry => entry.LifecycleState == PortalNavigationLifecycleState.Active)
                 .Where(entry => entry.VisibilityMode != PortalNavigationVisibilityMode.DiagnosticOnly)
+                .Where(IsNavigable)
                 .OrderBy(entry => entry.SortOrder)
                 .ThenBy(entry => entry.EntryKey, StringComparer.OrdinalIgnoreCase)
                 .Take(maxCount)
+                .ToList();
+
+            // <lang>
+            //   <zh-CN>同组入口不足下限时用显式常用入口补足：避免只因分组过窄就让动作区整块消失，同时补的是受 registry 管辖的入口而非新硬编码。</zh-CN>
+            //   <en>When same-group entries fall below the minimum, top up with explicit common entries: this prevents the action area from vanishing only because a group is narrow, and the top-up entries still come from the registry rather than new hardcoded links.</en>
+            // </lang>
+            if (related.Count < MinimumRelatedEntries)
+            {
+                foreach (string fallbackKey in CommonFallbackEntryKeys)
+                {
+                    if (related.Count >= MinimumRelatedEntries)
+                    {
+                        break;
+                    }
+
+                    if (string.Equals(fallbackKey, entryKey, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    if (related.Any(entry => string.Equals(entry.EntryKey, fallbackKey, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        continue;
+                    }
+
+                    PortalNavigationEntry fallback = PortalNavigationRegistry.FindByKey(fallbackKey);
+                    if (fallback != null && IsNavigable(fallback))
+                    {
+                        related.Add(fallback);
+                    }
+                }
+            }
+
+            return related
+                .Take(maxCount)
                 .ToList()
                 .AsReadOnly();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断入口是否可直接导航；只有页面型目标才可生成链接，模块控件（.ascx）不是可导航入口。</zh-CN>
+        ///   <en>Decide whether an entry is directly navigable; only page-style targets may become links, while module controls (.ascx) are not navigable entries.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="entry">
+        /// <l>
+        ///   <zh-CN>待判断入口；为 null 时返回 false。</zh-CN>
+        ///   <en>Entry to check; returns false when null.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>目标为页面时返回 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the target is a page.</en>
+        /// </l>
+        /// </returns>
+        public static bool IsNavigable(PortalNavigationEntry entry)
+        {
+            // <lang>
+            //   <zh-CN>以 .aspx 作为可导航目标的判定依据：Admin/*.ascx 是模块控件，直接生成 href 会指向不可访问的资源。</zh-CN>
+            //   <en>Use the .aspx extension as the navigability test: Admin/*.ascx are module controls, and generating an href to them would point at an unreachable resource.</en>
+            // </lang>
+            if (entry == null || string.IsNullOrWhiteSpace(entry.Target))
+            {
+                return false;
+            }
+
+            return entry.Target.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>

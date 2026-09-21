@@ -24,11 +24,7 @@
                 <h1 class="Head portal-admin-title">System Health</h1>
                 <p class="Normal portal-admin-subtitle">Runtime diagnostics and configuration registry overview.</p>
             </div>
-            <div class="portal-admin-actions">
-                <a class="CommandButton" href="ThemeSettings.aspx">Theme Settings</a>
-                <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-            </div>
+            <%= PortalNavigationEntryRenderer.RenderActions("Admin.SystemHealth", Context) %>
         </div>
 
         <div class="portal-admin-summary-grid">

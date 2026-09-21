@@ -441,6 +441,7 @@
     <Compile Include="Components\IPortalModuleControl.cs" />
     <Compile Include="Components\PortalAuthenticationCookies.cs" />
     <Compile Include="Components\PortalAuthenticationCookieSettings.cs" />
+    <Compile Include="Components\PortalNavigationEntryRenderer.cs" />
     <Compile Include="Components\PortalAuthenticationService.cs" />
     <Compile Include="Components\PortalAdministrationPolicy.cs" />
     <Compile Include="Components\PortalAuthorization.cs" />

@@ -24,10 +24,7 @@
                 <h1 class="Head portal-admin-title">Module Catalog</h1>
                 <p class="Normal portal-admin-subtitle">Manage trusted deployed module packages without upload, extraction, or script loading.</p>
             </div>
-            <div class="portal-admin-actions">
-                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
-                <a class="CommandButton" href="ModuleDefinitions.aspx">Legacy Module Definitions</a>
-            </div>
+            <%= PortalNavigationEntryRenderer.RenderActions("Admin.ModuleCatalog", Context) %>
         </div>
 
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />

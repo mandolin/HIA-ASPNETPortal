@@ -73,18 +73,24 @@ namespace ASPNET.StarterKit.Portal.Tests
         /// </lang>
         /// </summary>
         [TestMethod]
-        public void GetRelatedEntries_ReturnsSameGroupExcludingSelf()
+        public void GetRelatedEntries_FallsBackForNonNavigableGroup()
         {
+            // <lang>
+            //   <zh-CN>核心管理组的目标都是 .ascx 模块控件（不是可导航页面），同组候选被过滤后由常用入口兜底补足到下限。</zh-CN>
+            //   <en>Core administration targets are .ascx module controls rather than navigable pages, so after filtering the group the list is topped up with common entries up to the minimum.</en>
+            // </lang>
             var related = PortalNavigationVisibilityPolicy.GetRelatedEntries("Core.Admin.SiteSettings");
 
-            // <lang>
-            //   <zh-CN>核心管理组共 5 个入口，去掉自身应剩 4 个，正好等于默认上限。</zh-CN>
-            //   <en>The core administration group has five entries, so excluding itself leaves four, exactly the default limit.</en>
-            // </lang>
-            Assert.AreEqual(4, related.Count);
+            Assert.AreEqual(
+                PortalNavigationVisibilityPolicy.MinimumRelatedEntries,
+                related.Count,
+                "同组不足下限时应由常用入口兜底补足。");
             Assert.IsFalse(
                 System.Linq.Enumerable.Any(related, entry => entry.EntryKey == "Core.Admin.SiteSettings"),
                 "相关入口不应包含自身。");
+            Assert.IsTrue(
+                System.Linq.Enumerable.All(related, entry => PortalNavigationVisibilityPolicy.IsNavigable(entry)),
+                "兜底后仍应只包含可导航入口。");
         }
 
         /// <summary>

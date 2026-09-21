@@ -18,10 +18,7 @@
                 <h1 class="Head portal-admin-title">Module Type Definition</h1>
                 <p class="Normal portal-admin-subtitle">Legacy definition maintenance for trusted deployed modules.</p>
             </div>
-            <div class="portal-admin-actions">
-                <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
-                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
-            </div>
+            <%= PortalNavigationEntryRenderer.RenderActions("Admin.Modules.Definitions", Context) %>
         </div>
 
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
