@@ -391,5 +391,257 @@ namespace Resources {
                 return ResourceManager.GetString("Signin_rememberLogin", resourceCulture);
             }
         }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：System Health</zh-CN>
+        ///   <en>Looks up a localized string similar to: System Health</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_Title {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Runtime diagnostics and configuration registry overview.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Runtime diagnostics and configuration registry overview.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Overall Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Overall Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_OverallStatus {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_OverallStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Last Checked</zh-CN>
+        ///   <en>Looks up a localized string similar to: Last Checked</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_LastChecked {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_LastChecked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Recheck</zh-CN>
+        ///   <en>Looks up a localized string similar to: Recheck</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_Recheck {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_Recheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Health Checks</zh-CN>
+        ///   <en>Looks up a localized string similar to: Health Checks</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ChecksSectionTitle {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ChecksSectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Settings Registry</zh-CN>
+        ///   <en>Looks up a localized string similar to: Settings Registry</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_SettingsSectionTitle {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_SettingsSectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Category</zh-CN>
+        ///   <en>Looks up a localized string similar to: Category</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnCategory {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Check</zh-CN>
+        ///   <en>Looks up a localized string similar to: Check</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnCheck {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnStatus {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Summary</zh-CN>
+        ///   <en>Looks up a localized string similar to: Summary</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnSummary {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Detail</zh-CN>
+        ///   <en>Looks up a localized string similar to: Detail</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnDetail {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Event ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: Event ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnEventId {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnEventId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Key</zh-CN>
+        ///   <en>Looks up a localized string similar to: Key</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnKey {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnName {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Type</zh-CN>
+        ///   <en>Looks up a localized string similar to: Type</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnType {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Current Value</zh-CN>
+        ///   <en>Looks up a localized string similar to: Current Value</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnCurrentValue {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnCurrentValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Source</zh-CN>
+        ///   <en>Looks up a localized string similar to: Source</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnSource {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Sensitive</zh-CN>
+        ///   <en>Looks up a localized string similar to: Sensitive</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnSensitive {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnSensitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Editable</zh-CN>
+        ///   <en>Looks up a localized string similar to: Editable</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnEditable {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnEditable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Restart</zh-CN>
+        ///   <en>Looks up a localized string similar to: Restart</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_ColumnRestart {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_ColumnRestart", resourceCulture);
+            }
+        }
     }
 }

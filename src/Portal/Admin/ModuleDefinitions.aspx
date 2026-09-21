@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.ModuleDefinitions" 
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%--
         <lang>

@@ -150,4 +150,67 @@
   <data name="Signin_rememberLogin" xml:space="preserve">
     <value>Remember Login</value>
   </data>
+  <data name="Admin_SystemHealth_Title" xml:space="preserve">
+    <value>System Health</value>
+  </data>
+  <data name="Admin_SystemHealth_Subtitle" xml:space="preserve">
+    <value>Runtime diagnostics and configuration registry overview.</value>
+  </data>
+  <data name="Admin_SystemHealth_OverallStatus" xml:space="preserve">
+    <value>Overall Status</value>
+  </data>
+  <data name="Admin_SystemHealth_LastChecked" xml:space="preserve">
+    <value>Last Checked</value>
+  </data>
+  <data name="Admin_SystemHealth_Recheck" xml:space="preserve">
+    <value>Recheck</value>
+  </data>
+  <data name="Admin_SystemHealth_ChecksSectionTitle" xml:space="preserve">
+    <value>Health Checks</value>
+  </data>
+  <data name="Admin_SystemHealth_SettingsSectionTitle" xml:space="preserve">
+    <value>Settings Registry</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnCheck" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnDetail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnEventId" xml:space="preserve">
+    <value>Event ID</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnKey" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnCurrentValue" xml:space="preserve">
+    <value>Current Value</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnSource" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnSensitive" xml:space="preserve">
+    <value>Sensitive</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnEditable" xml:space="preserve">
+    <value>Editable</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnRestart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
 </root>

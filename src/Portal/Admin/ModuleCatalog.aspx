@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.ModuleCatalog"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
   <lang>
     <zh-CN>P3.2 只管理受信任部署包的注册和启停；不提供 ZIP、DLL、脚本、外链或在线编译入口。</zh-CN>

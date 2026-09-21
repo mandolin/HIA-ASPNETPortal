@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.SystemHealth"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
 <lang>
   <zh-CN>P2.2 只读系统健康页仅展示检查结果、设置 registry 摘要和重新检测入口，不在页面上提供自动修复、配置写入或命令执行能力。</zh-CN>
@@ -21,8 +24,8 @@
     <div class="portal-admin-page portal-admin-health">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">System Health</h1>
-                <p class="Normal portal-admin-subtitle">Runtime diagnostics and configuration registry overview.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_SystemHealth_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_SystemHealth_Subtitle %></p>
             </div>
             <%= PortalNavigationEntryRenderer.RenderActions("Admin.SystemHealth", Context) %>
         </div>
@@ -35,13 +38,13 @@
             </lang>
             --%>
             <div class="portal-admin-summary-item">
-                <div class="SubHead portal-summary-label">Overall Status</div>
+                <div class="SubHead portal-summary-label"><%= lang.Admin_SystemHealth_OverallStatus %></div>
                 <div class="Normal portal-summary-value">
                     <asp:Label ID="OverallStatusLabel" runat="server" />
                 </div>
             </div>
             <div class="portal-admin-summary-item">
-                <div class="SubHead portal-summary-label">Last Checked</div>
+                <div class="SubHead portal-summary-label"><%= lang.Admin_SystemHealth_LastChecked %></div>
                 <div class="Normal portal-summary-value">
                     <asp:Label ID="GeneratedUtcLabel" runat="server" />
                 </div>
@@ -49,7 +52,7 @@
             <div class="portal-admin-summary-item portal-summary-command">
                 <asp:LinkButton
                     ID="RefreshButton"
-                    Text="Recheck"
+                    Text="<%$ Resources:lang, Admin_SystemHealth_Recheck %>"
                     CssClass="CommandButton"
                     CausesValidation="False"
                     OnClick="RefreshButton_Click"
@@ -59,7 +62,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Health Checks</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_SystemHealth_ChecksSectionTitle %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -72,12 +75,12 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="110" class="SubHead">Category</th>
-                                <th scope="col" width="150" class="SubHead">Check</th>
-                                <th scope="col" width="90" class="SubHead">Status</th>
-                                <th scope="col" width="220" class="SubHead">Summary</th>
-                                <th scope="col" class="SubHead">Detail</th>
-                                <th scope="col" width="150" class="SubHead">Event ID</th>
+                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCategory %></th>
+                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCheck %></th>
+                                <th scope="col" width="90" class="SubHead"><%= lang.Admin_SystemHealth_ColumnStatus %></th>
+                                <th scope="col" width="220" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSummary %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_SystemHealth_ColumnDetail %></th>
+                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_SystemHealth_ColumnEventId %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -99,7 +102,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Settings Registry</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_SystemHealth_SettingsSectionTitle %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -112,14 +115,14 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="230" class="SubHead">Key</th>
-                                <th scope="col" width="150" class="SubHead">Name</th>
-                                <th scope="col" width="80" class="SubHead">Type</th>
-                                <th scope="col" width="150" class="SubHead">Current Value</th>
-                                <th scope="col" width="120" class="SubHead">Source</th>
-                                <th scope="col" width="80" class="SubHead">Sensitive</th>
-                                <th scope="col" width="90" class="SubHead">Editable</th>
-                                <th scope="col" width="90" class="SubHead">Restart</th>
+                                <th scope="col" width="230" class="SubHead"><%= lang.Admin_SystemHealth_ColumnKey %></th>
+                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_SystemHealth_ColumnName %></th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_SystemHealth_ColumnType %></th>
+                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCurrentValue %></th>
+                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSource %></th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSensitive %></th>
+                                <th scope="col" width="90" class="SubHead"><%= lang.Admin_SystemHealth_ColumnEditable %></th>
+                                <th scope="col" width="90" class="SubHead"><%= lang.Admin_SystemHealth_ColumnRestart %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>

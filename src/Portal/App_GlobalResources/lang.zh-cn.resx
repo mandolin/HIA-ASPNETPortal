@@ -150,4 +150,67 @@
   <data name="Signin_EmailOrName" xml:space="preserve">
       <value>邮箱、用户名或员工号</value>
   </data>
+  <data name="Admin_SystemHealth_Title" xml:space="preserve">
+    <value>系统健康状态</value>
+  </data>
+  <data name="Admin_SystemHealth_Subtitle" xml:space="preserve">
+    <value>运行时诊断与配置 registry 概览。</value>
+  </data>
+  <data name="Admin_SystemHealth_OverallStatus" xml:space="preserve">
+    <value>总体状态</value>
+  </data>
+  <data name="Admin_SystemHealth_LastChecked" xml:space="preserve">
+    <value>上次检测时间</value>
+  </data>
+  <data name="Admin_SystemHealth_Recheck" xml:space="preserve">
+    <value>重新检测</value>
+  </data>
+  <data name="Admin_SystemHealth_ChecksSectionTitle" xml:space="preserve">
+    <value>健康检查</value>
+  </data>
+  <data name="Admin_SystemHealth_SettingsSectionTitle" xml:space="preserve">
+    <value>设置 registry</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnCategory" xml:space="preserve">
+    <value>类别</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnCheck" xml:space="preserve">
+    <value>检查项</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnSummary" xml:space="preserve">
+    <value>摘要</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnDetail" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnEventId" xml:space="preserve">
+    <value>事件 ID</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnKey" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnType" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnCurrentValue" xml:space="preserve">
+    <value>当前值</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnSource" xml:space="preserve">
+    <value>来源</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnSensitive" xml:space="preserve">
+    <value>敏感</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnEditable" xml:space="preserve">
+    <value>可编辑</value>
+  </data>
+  <data name="Admin_SystemHealth_ColumnRestart" xml:space="preserve">
+    <value>需重启</value>
+  </data>
 </root>
