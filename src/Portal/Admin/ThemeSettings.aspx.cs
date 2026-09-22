@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -104,7 +105,7 @@ namespace ASPNET.StarterKit.Portal
             string reason;
             if (!PortalThemeCatalog.TryGetTrustedPackage(GlobalThemeList.SelectedValue, out package, out reason))
             {
-                ShowMessage("Select a validated deployed global theme.");
+                ShowMessage(lang.Admin_ThemeSettings_MessageSelectGlobalTheme);
                 return;
             }
 
@@ -246,7 +247,7 @@ namespace ASPNET.StarterKit.Portal
             int tabId;
             if (!TryGetSelectedTabId(out tabId))
             {
-                ShowMessage("Select a portal tab before applying an override.");
+                ShowMessage(lang.Admin_ThemeSettings_MessageSelectTabBeforeApply);
                 return;
             }
 
@@ -304,7 +305,7 @@ namespace ASPNET.StarterKit.Portal
             int tabId;
             if (!TryGetSelectedTabId(out tabId))
             {
-                ShowMessage("Select a portal tab before clearing an override.");
+                ShowMessage(lang.Admin_ThemeSettings_MessageSelectTabBeforeClear);
                 return;
             }
 
@@ -376,20 +377,20 @@ namespace ASPNET.StarterKit.Portal
             int tabId;
             if (!TryGetSelectedTabId(out tabId))
             {
-                TabThemeStatusLabel.Text = "No portal tab is available.";
+                TabThemeStatusLabel.Text = lang.Admin_ThemeSettings_MessageNoPortalTab;
                 return;
             }
 
             PortalTabThemeOverrideReadResult result = PortalTabThemeOverrides.Read(tabId, Context);
             if (!result.IsAvailable)
             {
-                TabThemeStatusLabel.Text = "The tab-theme migration has not been applied.";
+                TabThemeStatusLabel.Text = lang.Admin_ThemeSettings_MessageTabThemeMigrationMissing;
                 return;
             }
 
             if (!result.IsFound)
             {
-                TabThemeStatusLabel.Text = "Global theme applies.";
+                TabThemeStatusLabel.Text = lang.Admin_ThemeSettings_MessageGlobalThemeApplies;
                 return;
             }
 

@@ -4831,5 +4831,509 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_ModuleCatalog_MessagePackageNotDeployed", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細All</zh-CN>
+        ///   <en>Looks up a localized string similar to: All</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Common_AllOption {
+            get {
+                return ResourceManager.GetString("Admin_Common_AllOption", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Due UTC must be empty or use yyyy-MM-dd HH:mm:ss.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Due UTC must be empty or use yyyy-MM-dd HH:mm:ss.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageDueUtcFormat {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageDueUtcFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item submitted.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration item submitted.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageSubmitted {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageSubmitted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid collaboration item id.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid collaboration item id.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageInvalidId {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageInvalidId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Unsupported collaboration action.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Unsupported collaboration action.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageUnsupportedAction {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageUnsupportedAction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item state updated.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration item state updated.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageStateUpdated {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageStateUpdated", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item data service is not registered.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration item data service is not registered.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageServiceNotRegistered {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageServiceNotRegistered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item schema is unavailable. Run the P21.3 item migrations and P23.6 PortalBiz_CollaborationItemCommentWorkflow.sql.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration item schema is unavailable. Run the P21.3 item migrations and P23.6 PortalBiz_CollaborationItemCommentWorkflow.sql.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageSchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Showing up to {0} collaboration items; count: {1}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Showing up to {0} collaboration items; count: {1}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessagePageInfo {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessagePageInfo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item comment added.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration item comment added.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageCommentAdded {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageCommentAdded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Binding saved; the target user old sessions will be invalidated on subsequent requests.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Binding saved; the target user old sessions will be invalidated on subsequent requests.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageBoundSaved {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageBoundSaved", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Binding failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Binding failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageBindFailed {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageBindFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細There is no active binding to end.</zh-CN>
+        ///   <en>Looks up a localized string similar to: There is no active binding to end.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageNoActiveBindingToEnd {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageNoActiveBindingToEnd", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The binding record no longer exists; reopen the page.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The binding record no longer exists; reopen the page.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageBindingGone {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageBindingGone", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Binding ended; the target user old sessions will be invalidated on subsequent requests.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Binding ended; the target user old sessions will be invalidated on subsequent requests.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageBindingEnded {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageBindingEnded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Ending the binding failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Ending the binding failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageUnbindFailed {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageUnbindFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細User-employee binding services are not registered.</zh-CN>
+        ///   <en>Looks up a localized string similar to: User-employee binding services are not registered.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageServiceNotRegistered {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageServiceNotRegistered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 employee binding schema is unavailable. Run the P6.3 SQL scripts before editing bindings.</zh-CN>
+        ///   <en>Looks up a localized string similar to: P6.3 employee binding schema is unavailable. Run the P6.3 SQL scripts before editing bindings.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageSchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細User not found.</zh-CN>
+        ///   <en>Looks up a localized string similar to: User not found.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageUserNotFound {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageUserNotFound", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細No active binding.</zh-CN>
+        ///   <en>Looks up a localized string similar to: No active binding.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageNoActiveBinding {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageNoActiveBinding", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Enter a valid Portal User ID.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter a valid Portal User ID.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageInvalidPortalUserId {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageInvalidPortalUserId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Unavailable.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Unavailable.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_MessageUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_MessageUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Unsupported request status.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Unsupported request status.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_MessageUnsupportedStatus {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_MessageUnsupportedStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee-profile correction request data service is not registered.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee-profile correction request data service is not registered.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid request id.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid request id.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_MessageInvalidId {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_MessageInvalidId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Correction request status updated.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Correction request status updated.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_MessageStatusUpdated {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_MessageStatusUpdated", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.4 employee-profile correction request schema is unavailable. Run PortalBiz_EmployeeProfileCorrectionRequests.sql.</zh-CN>
+        ///   <en>Looks up a localized string similar to: P6.4 employee-profile correction request schema is unavailable. Run PortalBiz_EmployeeProfileCorrectionRequests.sql.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_MessageSchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Showing up to {0} requests; count: {1}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Showing up to {0} requests; count: {1}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_MessagePageInfo {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_MessagePageInfo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Active</zh-CN>
+        ///   <en>Looks up a localized string similar to: Active</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_OptionBindingActive {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_OptionBindingActive", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee-directory data service is not registered.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee-directory data service is not registered.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_MessageServiceNotRegistered {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_MessageServiceNotRegistered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 employee-directory schema is unavailable. Run the P6.3 SQL scripts in an isolated database before expecting data.</zh-CN>
+        ///   <en>Looks up a localized string similar to: P6.3 employee-directory schema is unavailable. Run the P6.3 SQL scripts in an isolated database before expecting data.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_MessageSchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 schema available. This page is read-only.</zh-CN>
+        ///   <en>Looks up a localized string similar to: P6.3 schema available. This page is read-only.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_MessageSchemaAvailableReadOnly {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_MessageSchemaAvailableReadOnly", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 schema unavailable.</zh-CN>
+        ///   <en>Looks up a localized string similar to: P6.3 schema unavailable.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_MessageSchemaUnavailableShort {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_MessageSchemaUnavailableShort", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Showing up to {0} rows per section; organizations: {1}, employees: {2}, bindings: {3}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Showing up to {0} rows per section; organizations: {1}, employees: {2}, bindings: {3}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_MessagePageInfo {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_MessagePageInfo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a validated deployed global theme.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select a validated deployed global theme.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ThemeSettings_MessageSelectGlobalTheme {
+            get {
+                return ResourceManager.GetString("Admin_ThemeSettings_MessageSelectGlobalTheme", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a portal tab before applying an override.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select a portal tab before applying an override.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ThemeSettings_MessageSelectTabBeforeApply {
+            get {
+                return ResourceManager.GetString("Admin_ThemeSettings_MessageSelectTabBeforeApply", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a portal tab before clearing an override.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select a portal tab before clearing an override.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ThemeSettings_MessageSelectTabBeforeClear {
+            get {
+                return ResourceManager.GetString("Admin_ThemeSettings_MessageSelectTabBeforeClear", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細No portal tab is available.</zh-CN>
+        ///   <en>Looks up a localized string similar to: No portal tab is available.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ThemeSettings_MessageNoPortalTab {
+            get {
+                return ResourceManager.GetString("Admin_ThemeSettings_MessageNoPortalTab", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The tab-theme migration has not been applied.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The tab-theme migration has not been applied.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ThemeSettings_MessageTabThemeMigrationMissing {
+            get {
+                return ResourceManager.GetString("Admin_ThemeSettings_MessageTabThemeMigrationMissing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Global theme applies.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Global theme applies.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ThemeSettings_MessageGlobalThemeApplies {
+            get {
+                return ResourceManager.GetString("Admin_ThemeSettings_MessageGlobalThemeApplies", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Diagnostic detail viewing is disabled by deployment configuration.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Diagnostic detail viewing is disabled by deployment configuration.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_MessageViewingDisabled {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_MessageViewingDisabled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The requested diagnostic event was not found in structured logs.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The requested diagnostic event was not found in structured logs.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_MessageEventNotFound {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_MessageEventNotFound", resourceCulture);
+            }
+        }
     }
 }

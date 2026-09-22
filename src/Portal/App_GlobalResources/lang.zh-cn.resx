@@ -1260,4 +1260,130 @@
   <data name="Admin_ModuleCatalog_MessagePackageNotDeployed" xml:space="preserve">
     <value>所选模块包已不再部署或无效。</value>
   </data>
+  <data name="Admin_Common_AllOption" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageDueUtcFormat" xml:space="preserve">
+    <value>截止时间必须为空或使用 yyyy-MM-dd HH:mm:ss 格式。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageSubmitted" xml:space="preserve">
+    <value>协同事项已提交。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageInvalidId" xml:space="preserve">
+    <value>无效的协同事项编号。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageUnsupportedAction" xml:space="preserve">
+    <value>不支持的协同操作。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageStateUpdated" xml:space="preserve">
+    <value>协同事项状态已更新。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageServiceNotRegistered" xml:space="preserve">
+    <value>协同事项数据服务未注册。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageSchemaUnavailable" xml:space="preserve">
+    <value>协同事项 schema 不可用。请运行 P21.3 事项迁移与 P23.6 PortalBiz_CollaborationItemCommentWorkflow.sql。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessagePageInfo" xml:space="preserve">
+    <value>最多显示 {0} 条协同事项；计数：{1}。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageCommentAdded" xml:space="preserve">
+    <value>协同事项评论已添加。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageBoundSaved" xml:space="preserve">
+    <value>绑定已保存，目标用户旧会话将在后续请求中失效。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageBindFailed" xml:space="preserve">
+    <value>绑定失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageNoActiveBindingToEnd" xml:space="preserve">
+    <value>没有可结束的当前有效绑定。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageBindingGone" xml:space="preserve">
+    <value>绑定记录已不存在，请重新打开页面。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageBindingEnded" xml:space="preserve">
+    <value>绑定已结束，目标用户旧会话将在后续请求中失效。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageUnbindFailed" xml:space="preserve">
+    <value>解绑失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageServiceNotRegistered" xml:space="preserve">
+    <value>用户-员工绑定服务未注册。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageSchemaUnavailable" xml:space="preserve">
+    <value>P6.3 员工绑定 schema 不可用。编辑绑定前请先运行 P6.3 SQL 脚本。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageUserNotFound" xml:space="preserve">
+    <value>用户未找到。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageNoActiveBinding" xml:space="preserve">
+    <value>无有效绑定。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageInvalidPortalUserId" xml:space="preserve">
+    <value>请输入有效的 Portal User ID。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_MessageUnavailable" xml:space="preserve">
+    <value>不可用。</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_MessageUnsupportedStatus" xml:space="preserve">
+    <value>不支持的状态。</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered" xml:space="preserve">
+    <value>员工资料更正请求数据服务未注册。</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_MessageInvalidId" xml:space="preserve">
+    <value>无效的请求编号。</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_MessageStatusUpdated" xml:space="preserve">
+    <value>更正请求状态已更新。</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_MessageSchemaUnavailable" xml:space="preserve">
+    <value>P6.4 员工资料更正请求 schema 不可用。请运行 PortalBiz_EmployeeProfileCorrectionRequests.sql。</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_MessagePageInfo" xml:space="preserve">
+    <value>最多显示 {0} 条请求；计数：{1}。</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_OptionBindingActive" xml:space="preserve">
+    <value>有效</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_MessageServiceNotRegistered" xml:space="preserve">
+    <value>员工目录数据服务未注册。</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_MessageSchemaUnavailable" xml:space="preserve">
+    <value>P6.3 员工目录 schema 不可用。请先在隔离数据库中运行 P6.3 SQL 脚本再期待数据。</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_MessageSchemaAvailableReadOnly" xml:space="preserve">
+    <value>P6.3 schema 可用。本页为只读。</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_MessageSchemaUnavailableShort" xml:space="preserve">
+    <value>P6.3 schema 不可用。</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_MessagePageInfo" xml:space="preserve">
+    <value>最多显示 {0} 条记录／分区；组织：{1}，员工：{2}，绑定：{3}。</value>
+  </data>
+  <data name="Admin_ThemeSettings_MessageSelectGlobalTheme" xml:space="preserve">
+    <value>请选择一个已校验的已部署全局主题。</value>
+  </data>
+  <data name="Admin_ThemeSettings_MessageSelectTabBeforeApply" xml:space="preserve">
+    <value>应用覆盖前请先选择门户页签。</value>
+  </data>
+  <data name="Admin_ThemeSettings_MessageSelectTabBeforeClear" xml:space="preserve">
+    <value>清除覆盖前请先选择门户页签。</value>
+  </data>
+  <data name="Admin_ThemeSettings_MessageNoPortalTab" xml:space="preserve">
+    <value>没有可用的门户页签。</value>
+  </data>
+  <data name="Admin_ThemeSettings_MessageTabThemeMigrationMissing" xml:space="preserve">
+    <value>尚未应用页签主题迁移。</value>
+  </data>
+  <data name="Admin_ThemeSettings_MessageGlobalThemeApplies" xml:space="preserve">
+    <value>全局主题生效。</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_MessageViewingDisabled" xml:space="preserve">
+    <value>诊断详情查看已被部署配置禁用。</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_MessageEventNotFound" xml:space="preserve">
+    <value>未在结构化日志中找到所请求的诊断事件。</value>
+  </data>
 </root>

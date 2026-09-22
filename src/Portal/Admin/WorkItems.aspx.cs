@@ -148,7 +148,7 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>仅暴露稳定状态契约及空值“全部”选项；列表顺序和值同时构成当前 UI 与后端筛选的兼容边界。</zh-CN>
             //   <en>Expose only the stable status contract and the empty-value “All” option; their order and values together form the current UI-to-backend filtering compatibility boundary.</en>
             // </lang>
-            StatusFilterList.Items.Add(new ListItem("All", string.Empty));
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
             StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Open, PortalWorkItemStatuses.Open));
             StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.InProgress, PortalWorkItemStatuses.InProgress));
             StatusFilterList.Items.Add(new ListItem(PortalWorkItemStatuses.Completed, PortalWorkItemStatuses.Completed));

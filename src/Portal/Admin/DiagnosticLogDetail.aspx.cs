@@ -1,4 +1,5 @@
 using System;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -51,7 +52,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (!PortalDiagnostics.AreAdminLogDetailsEnabled())
             {
-                MessageLabel.Text = "Diagnostic detail viewing is disabled by deployment configuration.";
+                MessageLabel.Text = lang.Admin_DiagnosticLogDetail_MessageViewingDisabled;
                 return;
             }
 
@@ -67,7 +68,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>未知或已清理事件统一落到固定未找到提示，避免回显查询值或底层异常。</zh-CN>
                 //   <en>Unknown or purged events use a fixed not-found message, avoiding reflection of the query value or backend exception.</en>
                 // </lang>
-                MessageLabel.Text = "The requested diagnostic event was not found in structured logs.";
+                MessageLabel.Text = lang.Admin_DiagnosticLogDetail_MessageEventNotFound;
                 return;
             }
 

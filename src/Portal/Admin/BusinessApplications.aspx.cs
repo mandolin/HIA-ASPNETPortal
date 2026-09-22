@@ -181,7 +181,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Use stable status keys for filters while preserving the existing administration-compatible display text.</en>
             // </lang>
             StatusFilterList.Items.Clear();
-            StatusFilterList.Items.Add(new ListItem("All", string.Empty));
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
             StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.Submitted, PortalBusinessApplicationStatuses.Submitted));
             StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.InReview, PortalBusinessApplicationStatuses.InReview));
             StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.Returned, PortalBusinessApplicationStatuses.Returned));

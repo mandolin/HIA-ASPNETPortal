@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -102,7 +103,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Rebuild employee-status filters with a stable “all” empty value and approved status constants instead of trusting postback markup to extend them.</en>
             // </lang>
             EmployeeStatusList.Items.Clear();
-            EmployeeStatusList.Items.Add(new ListItem("All", string.Empty));
+            EmployeeStatusList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
             EmployeeStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Active, PortalEmployeeStatuses.Active));
             EmployeeStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Pending, PortalEmployeeStatuses.Pending));
             EmployeeStatusList.Items.Add(new ListItem(PortalEmployeeStatuses.Suspended, PortalEmployeeStatuses.Suspended));
@@ -113,8 +114,8 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Apply the same fixed-option strategy to binding status and default to active bindings only.</en>
             // </lang>
             BindingStatusList.Items.Clear();
-            BindingStatusList.Items.Add(new ListItem("Active", PortalUserEmployeeBindingStatuses.Active));
-            BindingStatusList.Items.Add(new ListItem("All", string.Empty));
+            BindingStatusList.Items.Add(new ListItem(lang.Admin_EmployeeDirectory_OptionBindingActive, PortalUserEmployeeBindingStatuses.Active));
+            BindingStatusList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
             BindingStatusList.Items.Add(new ListItem(PortalUserEmployeeBindingStatuses.Pending, PortalUserEmployeeBindingStatuses.Pending));
             BindingStatusList.Items.Add(new ListItem(PortalUserEmployeeBindingStatuses.Disabled, PortalUserEmployeeBindingStatuses.Disabled));
             BindingStatusList.Items.Add(new ListItem(PortalUserEmployeeBindingStatuses.Ended, PortalUserEmployeeBindingStatuses.Ended));
@@ -135,7 +136,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (EmployeeDirectoryDb == null)
             {
-                ShowUnavailable("Employee-directory data service is not registered.");
+                ShowUnavailable(lang.Admin_EmployeeDirectory_MessageServiceNotRegistered);
                 return;
             }
 
@@ -146,7 +147,7 @@ namespace ASPNET.StarterKit.Portal
             bool schemaAvailable = EmployeeDirectoryDb.IsSchemaAvailable();
             if (!schemaAvailable)
             {
-                ShowUnavailable("P6.3 employee-directory schema is unavailable. Run the P6.3 SQL scripts in an isolated database before expecting data.");
+                ShowUnavailable(lang.Admin_EmployeeDirectory_MessageSchemaUnavailable);
                 return;
             }
 
@@ -224,11 +225,14 @@ namespace ASPNET.StarterKit.Portal
             //   <en>After successful binding, clear stale messages and display each section's count using invariant formatting.</en>
             // </lang>
             MessageLabel.Text = string.Empty;
-            SchemaStatusLabel.Text = "P6.3 schema available. This page is read-only.";
-            ResultLabel.Text = "Showing up to " + PageSize.ToString(CultureInfo.InvariantCulture) +
-                               " rows per section; organizations: " + organizations.Count.ToString(CultureInfo.InvariantCulture) +
-                               ", employees: " + employees.Count.ToString(CultureInfo.InvariantCulture) +
-                               ", bindings: " + bindings.Count.ToString(CultureInfo.InvariantCulture) + ".";
+            SchemaStatusLabel.Text = lang.Admin_EmployeeDirectory_MessageSchemaAvailableReadOnly;
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_EmployeeDirectory_MessagePageInfo,
+                PageSize,
+                organizations.Count,
+                employees.Count,
+                bindings.Count);
         }
 
         /// <summary>
@@ -264,7 +268,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The unavailable state clears all three result sets so users cannot see stale data from a previous successful read.</en>
             // </lang>
             MessageLabel.Text = message ?? string.Empty;
-            SchemaStatusLabel.Text = "P6.3 schema unavailable.";
+            SchemaStatusLabel.Text = lang.Admin_EmployeeDirectory_MessageSchemaUnavailableShort;
             ResultLabel.Text = string.Empty;
             OrganizationsRepeater.DataSource = Enumerable.Empty<OrganizationDirectoryRow>();
             OrganizationsRepeater.DataBind();

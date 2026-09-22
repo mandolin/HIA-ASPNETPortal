@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -103,7 +104,7 @@ namespace ASPNET.StarterKit.Portal
             DateTime? dueUtc;
             if (!TryParseDueUtc(DueUtcTextBox.Text, out dueUtc))
             {
-                MessageLabel.Text = "Due UTC must be empty or use yyyy-MM-dd HH:mm:ss.";
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageDueUtcFormat;
                 return;
             }
 
@@ -147,7 +148,7 @@ namespace ASPNET.StarterKit.Portal
 
             TryEnsureWorkItem(result.ItemId, result.ItemCode, TitleTextBox.Text, SummaryTextBox.Text, OwnerRoleKeyTextBox.Text, dueUtc);
             ClearCreateForm();
-            MessageLabel.Text = "Collaboration item submitted.";
+            MessageLabel.Text = lang.Admin_CollaborationItems_MessageSubmitted;
             BindItems();
         }
 
@@ -183,7 +184,7 @@ namespace ASPNET.StarterKit.Portal
             long itemId;
             if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId) || itemId <= 0)
             {
-                MessageLabel.Text = "Invalid collaboration item id.";
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageInvalidId;
                 return;
             }
 
@@ -206,7 +207,7 @@ namespace ASPNET.StarterKit.Portal
 
             if (!IsSupportedAction(actionKey))
             {
-                MessageLabel.Text = "Unsupported collaboration action.";
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageUnsupportedAction;
                 BindItems();
                 return;
             }
@@ -252,7 +253,7 @@ namespace ASPNET.StarterKit.Portal
                 TryCompleteWorkItem(result.ItemId, actionKey, actionComment);
             }
 
-            MessageLabel.Text = "Collaboration item state updated.";
+            MessageLabel.Text = lang.Admin_CollaborationItems_MessageStateUpdated;
             BindItems();
         }
 
@@ -269,7 +270,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Use fixed contract keys for status values while preserving the administration page's existing display values.</en>
             // </lang>
             StatusFilterList.Items.Clear();
-            StatusFilterList.Items.Add(new ListItem("All", string.Empty));
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
             StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Submitted, PortalCollaborationItemStatuses.Submitted));
             StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.InProgress, PortalCollaborationItemStatuses.InProgress));
             StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Returned, PortalCollaborationItemStatuses.Returned));
@@ -335,13 +336,13 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (CollaborationItemDb == null)
             {
-                ShowUnavailable("Collaboration item data service is not registered.");
+                ShowUnavailable(lang.Admin_CollaborationItems_MessageServiceNotRegistered);
                 return;
             }
 
             if (!CollaborationItemDb.IsSchemaAvailable())
             {
-                ShowUnavailable("Collaboration item schema is unavailable. Run the P21.3 item migrations and P23.6 PortalBiz_CollaborationItemCommentWorkflow.sql.");
+                ShowUnavailable(lang.Admin_CollaborationItems_MessageSchemaUnavailable);
                 return;
             }
 
@@ -358,8 +359,11 @@ namespace ASPNET.StarterKit.Portal
                 CollaborationItemDb.GetVisibleEvents(item.ItemId, currentUserId))).ToList();
             ItemsRepeater.DataBind();
 
-            ResultLabel.Text = "Showing up to " + PageSize.ToString(CultureInfo.InvariantCulture) +
-                               " collaboration items; count: " + items.Count.ToString(CultureInfo.InvariantCulture) + ".";
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_CollaborationItems_MessagePageInfo,
+                PageSize,
+                items.Count);
         }
 
         /// <summary>
@@ -595,7 +599,7 @@ namespace ASPNET.StarterKit.Portal
                 "; VisibilityScope=" + visibilityScope +
                 "; Length=" + NormalizeInput(comment, 1000).Length.ToString(CultureInfo.InvariantCulture),
                 Context);
-            MessageLabel.Text = "Collaboration item comment added.";
+            MessageLabel.Text = lang.Admin_CollaborationItems_MessageCommentAdded;
         }
 
         /// <summary>

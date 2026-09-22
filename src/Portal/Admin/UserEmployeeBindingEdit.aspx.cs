@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -165,7 +166,7 @@ namespace ASPNET.StarterKit.Portal
                     result.EntityId.ToString(CultureInfo.InvariantCulture),
                     "Bound user id " + userId.ToString(CultureInfo.InvariantCulture) + " to employee code.",
                     Context);
-                ShowMessage("绑定已保存，目标用户旧会话将在后续请求中失效。", false);
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBoundSaved, false);
                 RefreshCurrentState(userId, EmployeeCodeTextBox.Text);
             }
             catch (Exception exception)
@@ -175,7 +176,7 @@ namespace ASPNET.StarterKit.Portal
                     "Binding user to employee failed. UserId=" + userId,
                     exception,
                     Context);
-                ShowMessage("绑定失败，系统已记录本次错误。事件编号：" + eventId, true);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_UserEmployeeBindingEdit_MessageBindFailed, eventId), true);
             }
         }
 
@@ -214,14 +215,14 @@ namespace ASPNET.StarterKit.Portal
             if (!int.TryParse(ActiveBindingId.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out bindingId) ||
                 bindingId <= 0)
             {
-                ShowMessage("没有可结束的当前有效绑定。", true);
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageNoActiveBindingToEnd, true);
                 return;
             }
 
             IUserEmployeeBindingInfo binding = BindingAdminDb.GetBindingById(bindingId);
             if (binding == null)
             {
-                ShowMessage("绑定记录已不存在，请重新打开页面。", true);
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBindingGone, true);
                 return;
             }
 
@@ -265,7 +266,7 @@ namespace ASPNET.StarterKit.Portal
                     bindingId.ToString(CultureInfo.InvariantCulture),
                     "Ended employee binding for user id " + binding.UserId.ToString(CultureInfo.InvariantCulture) + ".",
                     Context);
-                ShowMessage("绑定已结束，目标用户旧会话将在后续请求中失效。", false);
+                ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageBindingEnded, false);
                 RefreshCurrentState(binding.UserId, binding.EmployeeCode);
             }
             catch (Exception exception)
@@ -275,7 +276,7 @@ namespace ASPNET.StarterKit.Portal
                     "Ending user employee binding failed. BindingId=" + bindingId,
                     exception,
                     Context);
-                ShowMessage("解绑失败，系统已记录本次错误。事件编号：" + eventId, true);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_UserEmployeeBindingEdit_MessageUnbindFailed, eventId), true);
             }
         }
 
@@ -295,13 +296,13 @@ namespace ASPNET.StarterKit.Portal
         {
             if (BindingAdminDb == null || EmployeeDirectoryDb == null || EmployeeAdminDb == null || UsersDb == null)
             {
-                ShowUnavailable("User-employee binding services are not registered.");
+                ShowUnavailable(lang.Admin_UserEmployeeBindingEdit_MessageServiceNotRegistered);
                 return;
             }
 
             if (!BindingAdminDb.IsSchemaAvailable() || !EmployeeDirectoryDb.IsSchemaAvailable())
             {
-                ShowUnavailable("P6.3 employee binding schema is unavailable. Run the P6.3 SQL scripts before editing bindings.");
+                ShowUnavailable(lang.Admin_UserEmployeeBindingEdit_MessageSchemaUnavailable);
                 return;
             }
 
@@ -387,7 +388,7 @@ namespace ASPNET.StarterKit.Portal
             IUserItem user = UsersDb.FindUserById(userId);
             if (user == null)
             {
-                UserSummaryText.Text = "User not found.";
+                UserSummaryText.Text = lang.Admin_UserEmployeeBindingEdit_MessageUserNotFound;
                 ManageUserLink.Visible = false;
                 return;
             }
@@ -472,7 +473,7 @@ namespace ASPNET.StarterKit.Portal
             if (binding == null)
             {
                 ActiveBindingId.Value = string.Empty;
-                CurrentBindingText.Text = "No active binding.";
+                CurrentBindingText.Text = lang.Admin_UserEmployeeBindingEdit_MessageNoActiveBinding;
                 EndBindingButton.Visible = false;
                 BindButton.Visible = true;
                 return;
@@ -516,7 +517,7 @@ namespace ASPNET.StarterKit.Portal
                 return true;
             }
 
-            ShowMessage("请输入有效的 Portal User ID。", true);
+            ShowMessage(lang.Admin_UserEmployeeBindingEdit_MessageInvalidPortalUserId, true);
             return false;
         }
 
@@ -575,7 +576,7 @@ namespace ASPNET.StarterKit.Portal
             ShowMessage(message, true);
             BindButton.Enabled = false;
             EndBindingButton.Enabled = false;
-            CurrentBindingText.Text = "Unavailable.";
+            CurrentBindingText.Text = lang.Admin_UserEmployeeBindingEdit_MessageUnavailable;
         }
 
         /// <summary>

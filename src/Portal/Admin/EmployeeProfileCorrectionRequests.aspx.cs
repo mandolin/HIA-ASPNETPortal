@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -99,7 +100,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>命令名来自回发控件，不能直接当作任意状态传入数据层；未知值只刷新列表并返回。</zh-CN>
                 //   <en>The command name comes from a postback control and cannot be passed to the data layer as an arbitrary status; unknown values only refresh the list and return.</en>
                 // </lang>
-                MessageLabel.Text = "Unsupported request status.";
+                MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageUnsupportedStatus;
                 BindRequests();
                 return;
             }
@@ -115,14 +116,14 @@ namespace ASPNET.StarterKit.Portal
 
             if (CorrectionRequestDb == null)
             {
-                ShowUnavailable("Employee-profile correction request data service is not registered.");
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered);
                 return;
             }
 
             long requestId;
             if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out requestId))
             {
-                MessageLabel.Text = "Invalid request id.";
+                MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageInvalidId;
                 return;
             }
 
@@ -163,7 +164,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             TryCompleteWorkItem(result.RequestId, targetStatus, reviewNote);
 
-            MessageLabel.Text = "Correction request status updated.";
+            MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageStatusUpdated;
             BindRequests();
         }
 
@@ -176,7 +177,7 @@ namespace ASPNET.StarterKit.Portal
         private void BindStatusFilter()
         {
             StatusFilterList.Items.Clear();
-            StatusFilterList.Items.Add(new ListItem("All", string.Empty));
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
             StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Submitted, EmployeeProfileCorrectionRequestStatuses.Submitted));
             StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Reviewed, EmployeeProfileCorrectionRequestStatuses.Reviewed));
             StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Closed, EmployeeProfileCorrectionRequestStatuses.Closed));
@@ -200,13 +201,13 @@ namespace ASPNET.StarterKit.Portal
         {
             if (CorrectionRequestDb == null)
             {
-                ShowUnavailable("Employee-profile correction request data service is not registered.");
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered);
                 return;
             }
 
             if (!CorrectionRequestDb.IsSchemaAvailable())
             {
-                ShowUnavailable("P6.4 employee-profile correction request schema is unavailable. Run PortalBiz_EmployeeProfileCorrectionRequests.sql.");
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageSchemaUnavailable);
                 return;
             }
 
@@ -216,8 +217,11 @@ namespace ASPNET.StarterKit.Portal
             RequestsRepeater.DataSource = requests.Select(request => new EmployeeProfileCorrectionAdminRow(request)).ToList();
             RequestsRepeater.DataBind();
 
-            ResultLabel.Text = "Showing up to " + PageSize.ToString(CultureInfo.InvariantCulture) +
-                               " requests; count: " + requests.Count.ToString(CultureInfo.InvariantCulture) + ".";
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_EmployeeProfileCorrectionRequests_MessagePageInfo,
+                PageSize,
+                requests.Count);
         }
 
         /// <summary>
