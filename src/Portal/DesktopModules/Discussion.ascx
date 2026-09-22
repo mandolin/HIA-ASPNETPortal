@@ -41,7 +41,7 @@
                             CssClass='<%# NodeToggleCssClass((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
                             Text='<%# NodeToggleText((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
                             Enabled='<%# HasChildMessages((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
-                            ToolTip="Expand this thread"
+                            ToolTip="<%$ Resources:lang,Discussion_ExpandThread %>"
                             CommandName='<%# NodeCommandName((int) DataBinder.Eval(Container.DataItem, "ChildCount")) %>'
                             runat="server" />
             <span class="portal-discussion-main">
@@ -53,8 +53,8 @@
                 --%>
                 <asp:hyperlink CssClass="portal-discussion-title" Text='<%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "Title")) %>' NavigateUrl='<%# FormatUrl((int) DataBinder.Eval(Container.DataItem, "ItemID")) %>' Target="_blank" runat="server" ID="Hyperlink1" />
                 <span class="portal-discussion-meta">
-                    from <%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "CreatedByUser")) %>
-                    , posted <%# DataBinder.Eval(Container.DataItem, "CreatedDate", "{0:g}") %>
+                    <%= lang.Discussion_From %> <%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "CreatedByUser")) %>
+                    <%= lang.Discussion_Posted %> <%# DataBinder.Eval(Container.DataItem, "CreatedDate", "{0:g}") %>
                 </span>
             </span>
         </div>
@@ -69,7 +69,7 @@
             </lang>
             --%>
             <asp:LinkButton id="btnCollapse" CssClass="CommandButton portal-discussion-toggle portal-secondary-action portal-discussion-toggle-selected"
-                Text="Collapse" ToolTip="Collapse this thread" runat="server" CommandName="collapse" />
+                Text="<%$ Resources:lang,Discussion_Collapse %>" ToolTip="<%$ Resources:lang,Discussion_CollapseThread %>" runat="server" CommandName="collapse" />
             <span class="portal-discussion-main">
                 <%--
                 <lang>
@@ -79,8 +79,8 @@
                 --%>
                 <asp:hyperlink CssClass="portal-discussion-title" Text='<%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "Title")) %>' NavigateUrl='<%# FormatUrl((int) DataBinder.Eval(Container.DataItem, "ItemID")) %>' Target="_blank" runat="server" ID="Hyperlink2" />
                 <span class="portal-discussion-meta">
-                    from <%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "CreatedByUser")) %>
-                    , posted <%# DataBinder.Eval(Container.DataItem, "CreatedDate", "{0:g}") %>
+                    <%= lang.Discussion_From %> <%# EncodeDisplayText(DataBinder.Eval(Container.DataItem, "CreatedByUser")) %>
+                    <%= lang.Discussion_Posted %> <%# DataBinder.Eval(Container.DataItem, "CreatedDate", "{0:g}") %>
                 </span>
             </span>
         </div>
@@ -115,8 +115,8 @@
                             Target="_blank"
                             runat="server" />
                         <span class="portal-discussion-meta">
-                            from <%# EncodeDisplayText(Eval("CreatedByUser")) %>
-                            , posted <%# FormatDate(Eval("CreatedDate")) %>
+                            <%= lang.Discussion_From %> <%# EncodeDisplayText(Eval("CreatedByUser")) %>
+                            <%= lang.Discussion_Posted %> <%# FormatDate(Eval("CreatedDate")) %>
                         </span>
                     </span>
                 </div>

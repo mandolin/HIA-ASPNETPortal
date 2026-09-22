@@ -1080,6 +1080,21 @@
   <data name="DiscussDetails_LabelDate" xml:space="preserve">
     <value>日期：</value>
   </data>
+  <data name="Discussion_ExpandThread" xml:space="preserve">
+    <value>展开此话题</value>
+  </data>
+  <data name="Discussion_Collapse" xml:space="preserve">
+    <value>收起</value>
+  </data>
+  <data name="Discussion_CollapseThread" xml:space="preserve">
+    <value>收起此话题</value>
+  </data>
+  <data name="Discussion_From" xml:space="preserve">
+    <value>来自</value>
+  </data>
+  <data name="Discussion_Posted" xml:space="preserve">
+    <value>，发布于</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
   </data>

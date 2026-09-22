@@ -4124,6 +4124,66 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Expand this thread</zh-CN>
+        ///   <en>Looks up a localized string similar to: Expand this thread</en>
+        /// </lang>
+        /// </summary>
+        internal static string Discussion_ExpandThread {
+            get {
+                return ResourceManager.GetString("Discussion_ExpandThread", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collapse</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collapse</en>
+        /// </lang>
+        /// </summary>
+        internal static string Discussion_Collapse {
+            get {
+                return ResourceManager.GetString("Discussion_Collapse", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collapse this thread</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collapse this thread</en>
+        /// </lang>
+        /// </summary>
+        internal static string Discussion_CollapseThread {
+            get {
+                return ResourceManager.GetString("Discussion_CollapseThread", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：from</zh-CN>
+        ///   <en>Looks up a localized string similar to: from</en>
+        /// </lang>
+        /// </summary>
+        internal static string Discussion_From {
+            get {
+                return ResourceManager.GetString("Discussion_From", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：, posted</zh-CN>
+        ///   <en>Looks up a localized string similar to: , posted</en>
+        /// </lang>
+        /// </summary>
+        internal static string Discussion_Posted {
+            get {
+                return ResourceManager.GetString("Discussion_Posted", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

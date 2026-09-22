@@ -1080,6 +1080,21 @@
   <data name="DiscussDetails_LabelDate" xml:space="preserve">
     <value>Date:</value>
   </data>
+  <data name="Discussion_ExpandThread" xml:space="preserve">
+    <value>Expand this thread</value>
+  </data>
+  <data name="Discussion_Collapse" xml:space="preserve">
+    <value>Collapse</value>
+  </data>
+  <data name="Discussion_CollapseThread" xml:space="preserve">
+    <value>Collapse this thread</value>
+  </data>
+  <data name="Discussion_From" xml:space="preserve">
+    <value>from</value>
+  </data>
+  <data name="Discussion_Posted" xml:space="preserve">
+    <value>, posted</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>
