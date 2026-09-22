@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.EmployeeDirectory"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
   <lang>
     <zh-CN>P6.3-S4 员工组织目录页的列表本身只读，新增和编辑交给独立维护页处理。</zh-CN>
@@ -21,16 +24,22 @@
     <div class="portal-admin-page portal-admin-employee-directory">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Employee Directory</h1>
-                <p class="Normal portal-admin-subtitle">Read-only overview for organizations, employees, and user bindings.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_EmployeeDirectory_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_EmployeeDirectory_Subtitle %></p>
             </div>
+            <%--
+              <lang>
+                <zh-CN>页面自有入口：新建组织单元、新建员工、绑定用户／员工属该页维护动作；用户管理、资料更正请求与系统健康的目标页在导航 registry 中尚无入口，故一并保留在页面内并只做文案本地化，避免交给渲染器后因分组无法解析而整块消失。</zh-CN>
+                <en>Page-owned entries: new organization unit, new employee, and bind user/employee are this page's maintenance actions; the targets of user administration, profile corrections, and system health have no navigation-registry entries yet, so they also stay in the page and are localized only, instead of being dropped by the renderer when a group cannot be resolved.</en>
+              </lang>
+            --%>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
-                <a class="CommandButton" href="ManageUsers.aspx">User Administration</a>
-                <a class="CommandButton" href="OrganizationUnitEdit.aspx">New Organization Unit</a>
-                <a class="CommandButton" href="EmployeeEdit.aspx">New Employee</a>
-                <a class="CommandButton" href="UserEmployeeBindingEdit.aspx">Bind User/Employee</a>
-                <a class="CommandButton" href="EmployeeProfileCorrectionRequests.aspx">Profile Corrections</a>
+                <a class="CommandButton" href="SystemHealth.aspx"><%= lang.Admin_EmployeeDirectory_LinkSystemHealth %></a>
+                <a class="CommandButton" href="ManageUsers.aspx"><%= lang.Admin_EmployeeDirectory_LinkUserAdministration %></a>
+                <a class="CommandButton" href="OrganizationUnitEdit.aspx"><%= lang.Admin_EmployeeDirectory_LinkNewOrganizationUnit %></a>
+                <a class="CommandButton" href="EmployeeEdit.aspx"><%= lang.Admin_EmployeeDirectory_LinkNewEmployee %></a>
+                <a class="CommandButton" href="UserEmployeeBindingEdit.aspx"><%= lang.Admin_EmployeeDirectory_LinkBindUserEmployee %></a>
+                <a class="CommandButton" href="EmployeeProfileCorrectionRequests.aspx"><%= lang.Admin_EmployeeDirectory_LinkProfileCorrections %></a>
             </div>
         </div>
 
@@ -45,24 +54,24 @@
             --%>
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Keyword</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_EmployeeDirectory_LabelKeyword %></span>
                     <asp:TextBox ID="KeywordTextBox" CssClass="NormalTextBox portal-filter-input" Width="150" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Employee Status</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_EmployeeDirectory_LabelEmployeeStatus %></span>
                     <asp:DropDownList ID="EmployeeStatusList" CssClass="NormalTextBox portal-filter-input" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Binding Status</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_EmployeeDirectory_LabelBindingStatus %></span>
                     <asp:DropDownList ID="BindingStatusList" CssClass="NormalTextBox portal-filter-input" runat="server" />
                 </div>
                 <div class="portal-filter-field portal-checkbox-field">
-                    <asp:CheckBox ID="IncludeInactiveOrganizations" Text="Include inactive organization units" runat="server" />
+                    <asp:CheckBox ID="IncludeInactiveOrganizations" Text="<%$ Resources:lang, Admin_EmployeeDirectory_CheckboxIncludeInactiveOrganizations %>" runat="server" />
                 </div>
                 <div class="portal-filter-actions">
                     <asp:LinkButton
                         ID="SearchButton"
-                        Text="Search"
+                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonSearch %>"
                         CssClass="CommandButton"
                         CausesValidation="False"
                         OnClick="SearchButton_Click"
@@ -82,7 +91,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Organization Units</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_EmployeeDirectory_SectionOrganizations %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -95,13 +104,13 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="70" class="SubHead">ID</th>
-                                <th scope="col" width="120" class="SubHead">Code</th>
-                                <th scope="col" class="SubHead">Name</th>
-                                <th scope="col" width="190" class="SubHead">Parent</th>
-                                <th scope="col" width="70" class="SubHead">Sort</th>
-                                <th scope="col" width="80" class="SubHead">Active</th>
-                                <th scope="col" width="70" class="SubHead">Action</th>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnId %></th>
+                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnCode %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnOrgName %></th>
+                                <th scope="col" width="190" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnParent %></th>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnSort %></th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnActive %></th>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -115,7 +124,7 @@
                                 <td>
                                     <asp:HyperLink
                                         CssClass="CommandButton"
-                                        Text="Edit"
+                                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonEdit %>"
                                         NavigateUrl='<%# Eval("EditUrl") %>'
                                         runat="server" />
                                 </td>
@@ -130,7 +139,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Employees</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_EmployeeDirectory_SectionEmployees %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -143,14 +152,14 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="110" class="SubHead">Employee Code</th>
-                                <th scope="col" width="140" class="SubHead">Name</th>
-                                <th scope="col" width="120" class="SubHead">Preferred</th>
-                                <th scope="col" width="180" class="SubHead">Work Email</th>
-                                <th scope="col" class="SubHead">Organization</th>
-                                <th scope="col" width="95" class="SubHead">Status</th>
-                                <th scope="col" width="90" class="SubHead">Source</th>
-                                <th scope="col" width="100" class="SubHead">Action</th>
+                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></th>
+                                <th scope="col" width="140" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeName %></th>
+                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnPreferred %></th>
+                                <th scope="col" width="180" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnWorkEmail %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnOrganization %></th>
+                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnStatus %></th>
+                                <th scope="col" width="90" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnSource %></th>
+                                <th scope="col" width="100" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -165,7 +174,7 @@
                                 <td>
                                     <asp:HyperLink
                                         CssClass="CommandButton"
-                                        Text="Edit"
+                                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonEdit %>"
                                         NavigateUrl='<%# Eval("EditUrl") %>'
                                         runat="server" />
                                     <%--
@@ -176,7 +185,7 @@
                                     --%>
                                     <asp:HyperLink
                                         CssClass="CommandButton"
-                                        Text="Bind"
+                                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonBind %>"
                                         NavigateUrl='<%# Eval("BindUrl") %>'
                                         runat="server" />
                                 </td>
@@ -191,22 +200,22 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Portal User Bindings</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_EmployeeDirectory_SectionBindings %></h2>
             </div>
             <div class="portal-table-wrap">
                 <asp:Repeater ID="BindingsRepeater" runat="server">
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="80" class="SubHead">Binding ID</th>
-                                <th scope="col" width="80" class="SubHead">User ID</th>
-                                <th scope="col" width="140" class="SubHead">User Name</th>
-                                <th scope="col" width="120" class="SubHead">Employee Code</th>
-                                <th scope="col" width="150" class="SubHead">Employee Name</th>
-                                <th scope="col" width="95" class="SubHead">Status</th>
-                                <th scope="col" width="155" class="SubHead">Bound UTC</th>
-                                <th scope="col" width="80" class="SubHead">Action</th>
-                                <th scope="col" class="SubHead">Reason</th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBindingId %></th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnUserId %></th>
+                                <th scope="col" width="140" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnUserName %></th>
+                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></th>
+                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBindingEmployeeName %></th>
+                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnStatus %></th>
+                                <th scope="col" width="155" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBoundUtc %></th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnReason %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -221,7 +230,7 @@
                                 <td>
                                     <asp:HyperLink
                                         CssClass="CommandButton"
-                                        Text="Manage"
+                                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonManage %>"
                                         NavigateUrl='<%# Eval("EditUrl") %>'
                                         runat="server" />
                                 </td>

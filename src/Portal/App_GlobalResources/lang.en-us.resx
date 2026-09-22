@@ -507,4 +507,190 @@
   <data name="Admin_DiagnosticLogDetail_FieldUserAgent" xml:space="preserve">
     <value>User-Agent</value>
   </data>
+  <data name="Admin_EmployeeDirectory_Title" xml:space="preserve">
+    <value>Employee Directory</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_Subtitle" xml:space="preserve">
+    <value>Read-only overview for organizations, employees, and user bindings.</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkSystemHealth" xml:space="preserve">
+    <value>System Health</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkUserAdministration" xml:space="preserve">
+    <value>User Administration</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkNewOrganizationUnit" xml:space="preserve">
+    <value>New Organization Unit</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkNewEmployee" xml:space="preserve">
+    <value>New Employee</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkBindUserEmployee" xml:space="preserve">
+    <value>Bind User/Employee</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkProfileCorrections" xml:space="preserve">
+    <value>Profile Corrections</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LabelKeyword" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LabelEmployeeStatus" xml:space="preserve">
+    <value>Employee Status</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LabelBindingStatus" xml:space="preserve">
+    <value>Binding Status</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_CheckboxIncludeInactiveOrganizations" xml:space="preserve">
+    <value>Include inactive organization units</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ButtonSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_SectionOrganizations" xml:space="preserve">
+    <value>Organization Units</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_SectionEmployees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_SectionBindings" xml:space="preserve">
+    <value>Portal User Bindings</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnOrgName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnParent" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnSort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnEmployeeCode" xml:space="preserve">
+    <value>Employee Code</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnEmployeeName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnPreferred" xml:space="preserve">
+    <value>Preferred</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnWorkEmail" xml:space="preserve">
+    <value>Work Email</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnOrganization" xml:space="preserve">
+    <value>Organization</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnSource" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnBindingId" xml:space="preserve">
+    <value>Binding ID</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnUserId" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnUserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnBindingEmployeeName" xml:space="preserve">
+    <value>Employee Name</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnBoundUtc" xml:space="preserve">
+    <value>Bound UTC</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ButtonEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ButtonBind" xml:space="preserve">
+    <value>Bind</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ButtonManage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_Title" xml:space="preserve">
+    <value>Employee Profile Correction Requests</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_Subtitle" xml:space="preserve">
+    <value>Review employee-submitted profile correction requests without directly changing master data.</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LinkEmployeeDirectory" xml:space="preserve">
+    <value>Employee Directory</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LinkWorkItems" xml:space="preserve">
+    <value>Work Items</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LinkOperationAudits" xml:space="preserve">
+    <value>Operation Audits</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ButtonSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_SectionCorrectionRequests" xml:space="preserve">
+    <value>Correction Requests</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnSubmittedUtc" xml:space="preserve">
+    <value>Submitted UTC</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnEmployee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnField" xml:space="preserve">
+    <value>Field</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnCurrentProposed" xml:space="preserve">
+    <value>Current / Proposed</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnReview" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelCurrent" xml:space="preserve">
+    <value>Current:</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelProposed" xml:space="preserve">
+    <value>Proposed:</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelNote" xml:space="preserve">
+    <value>Note:</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelReview" xml:space="preserve">
+    <value>Review:</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ButtonApprove" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ButtonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ButtonReject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
 </root>

@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.EmployeeProfileCorrectionRequests"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
   <lang>
     <zh-CN>P6.4.3 员工资料更正请求后台处理页只处理请求状态，不直接修改员工主数据。</zh-CN>
@@ -21,13 +24,19 @@
     <div class="portal-admin-page portal-admin-correction-requests">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Employee Profile Correction Requests</h1>
-                <p class="Normal portal-admin-subtitle">Review employee-submitted profile correction requests without directly changing master data.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_EmployeeProfileCorrectionRequests_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_EmployeeProfileCorrectionRequests_Subtitle %></p>
             </div>
+            <%--
+              <lang>
+                <zh-CN>页面自有导航入口：目标页在导航 registry 中尚无入口（员工目录等），故保留在页面内并只做文案本地化，不交给渲染器，避免入口因无法解析分组而消失。</zh-CN>
+                <en>Page-owned navigation entries: their targets have no navigation-registry entries yet (employee directory and others), so they stay in the page and are localized only; they are not handed to the renderer, which would drop entries whose group cannot be resolved.</en>
+              </lang>
+            --%>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                <a class="CommandButton" href="WorkItems.aspx">Work Items</a>
-                <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_EmployeeProfileCorrectionRequests_LinkEmployeeDirectory %></a>
+                <a class="CommandButton" href="WorkItems.aspx"><%= lang.Admin_EmployeeProfileCorrectionRequests_LinkWorkItems %></a>
+                <a class="CommandButton" href="OperationAudits.aspx"><%= lang.Admin_EmployeeProfileCorrectionRequests_LinkOperationAudits %></a>
             </div>
         </div>
 
@@ -42,13 +51,13 @@
         <div class="portal-admin-section portal-filter-panel">
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Status</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelStatus %></span>
                     <asp:DropDownList ID="StatusFilterList" CssClass="NormalTextBox portal-filter-input" runat="server" />
                 </div>
                 <div class="portal-filter-actions">
                     <asp:LinkButton
                         ID="SearchButton"
-                        Text="Search"
+                        Text="<%$ Resources:lang, Admin_EmployeeProfileCorrectionRequests_ButtonSearch %>"
                         CssClass="CommandButton"
                         CausesValidation="False"
                         OnClick="SearchButton_Click"
@@ -65,7 +74,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Correction Requests</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_EmployeeProfileCorrectionRequests_SectionCorrectionRequests %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -78,14 +87,14 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="70" class="SubHead">ID</th>
-                                <th scope="col" width="145" class="SubHead">Submitted UTC</th>
-                                <th scope="col" width="110" class="SubHead">Employee</th>
-                                <th scope="col" width="120" class="SubHead">User</th>
-                                <th scope="col" width="110" class="SubHead">Field</th>
-                                <th scope="col" class="SubHead">Current / Proposed</th>
-                                <th scope="col" width="95" class="SubHead">Status</th>
-                                <th scope="col" width="230" class="SubHead">Review</th>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnId %></th>
+                                <th scope="col" width="145" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnSubmittedUtc %></th>
+                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnEmployee %></th>
+                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnUser %></th>
+                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnField %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnCurrentProposed %></th>
+                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnStatus %></th>
+                                <th scope="col" width="230" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnReview %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -97,10 +106,10 @@
                                 <td><%#: Eval("FieldName") %></td>
                                 <td>
                                     <div class="portal-value-stack">
-                                        <div><span class="SubHead">Current:</span> <%#: Eval("CurrentValueSnapshot") %></div>
-                                        <div><span class="SubHead">Proposed:</span> <%#: Eval("ProposedValue") %></div>
-                                        <div><span class="SubHead">Note:</span> <%#: Eval("RequestNote") %></div>
-                                        <div><span class="SubHead">Review:</span> <%#: Eval("ReviewText") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelCurrent %></span> <%#: Eval("CurrentValueSnapshot") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelProposed %></span> <%#: Eval("ProposedValue") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelNote %></span> <%#: Eval("RequestNote") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelReview %></span> <%#: Eval("ReviewText") %></div>
                                     </div>
                                 </td>
                                 <td><%#: Eval("RequestStatus") %></td>
@@ -113,9 +122,9 @@
                                     --%>
                                     <asp:TextBox ID="ReviewNoteTextBox" CssClass="NormalTextBox portal-review-note" Width="210" MaxLength="1000" TextMode="MultiLine" Rows="3" runat="server" />
                                     <div class="portal-row-actions">
-                                        <asp:LinkButton ID="ReviewedButton" Text="Approve" CssClass="CommandButton" CommandName="Reviewed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
-                                        <asp:LinkButton ID="ClosedButton" Text="Cancel" CssClass="CommandButton" CommandName="Closed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
-                                        <asp:LinkButton ID="RejectedButton" Text="Reject" CssClass="CommandButton" CommandName="Rejected" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="ReviewedButton" Text="<%$ Resources:lang, Admin_EmployeeProfileCorrectionRequests_ButtonApprove %>" CssClass="CommandButton" CommandName="Reviewed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="ClosedButton" Text="<%$ Resources:lang, Admin_EmployeeProfileCorrectionRequests_ButtonCancel %>" CssClass="CommandButton" CommandName="Closed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="RejectedButton" Text="<%$ Resources:lang, Admin_EmployeeProfileCorrectionRequests_ButtonReject %>" CssClass="CommandButton" CommandName="Rejected" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
                                     </div>
                                 </td>
                             </tr>

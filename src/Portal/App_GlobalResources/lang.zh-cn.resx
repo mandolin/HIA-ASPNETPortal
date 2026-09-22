@@ -510,4 +510,190 @@
   <data name="Admin_DiagnosticLogDetail_FieldUserAgent" xml:space="preserve">
     <value>User-Agent</value>
   </data>
+  <data name="Admin_EmployeeDirectory_Title" xml:space="preserve">
+    <value>员工目录</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_Subtitle" xml:space="preserve">
+    <value>组织、员工与用户绑定的只读总览。</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkSystemHealth" xml:space="preserve">
+    <value>系统健康状态</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkUserAdministration" xml:space="preserve">
+    <value>用户管理</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkNewOrganizationUnit" xml:space="preserve">
+    <value>新建组织单元</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkNewEmployee" xml:space="preserve">
+    <value>新建员工</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkBindUserEmployee" xml:space="preserve">
+    <value>绑定用户／员工</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LinkProfileCorrections" xml:space="preserve">
+    <value>资料更正请求</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LabelKeyword" xml:space="preserve">
+    <value>关键字</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LabelEmployeeStatus" xml:space="preserve">
+    <value>员工状态</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_LabelBindingStatus" xml:space="preserve">
+    <value>绑定状态</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_CheckboxIncludeInactiveOrganizations" xml:space="preserve">
+    <value>包含已停用组织单元</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ButtonSearch" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_SectionOrganizations" xml:space="preserve">
+    <value>组织单元</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_SectionEmployees" xml:space="preserve">
+    <value>员工</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_SectionBindings" xml:space="preserve">
+    <value>门户用户绑定</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnCode" xml:space="preserve">
+    <value>编码</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnOrgName" xml:space="preserve">
+    <value>组织名称</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnParent" xml:space="preserve">
+    <value>上级</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnSort" xml:space="preserve">
+    <value>排序</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnActive" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnAction" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnEmployeeCode" xml:space="preserve">
+    <value>员工编号</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnEmployeeName" xml:space="preserve">
+    <value>姓名</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnPreferred" xml:space="preserve">
+    <value>常用名</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnWorkEmail" xml:space="preserve">
+    <value>工作邮箱</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnOrganization" xml:space="preserve">
+    <value>组织</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnSource" xml:space="preserve">
+    <value>来源</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnBindingId" xml:space="preserve">
+    <value>绑定 ID</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnUserId" xml:space="preserve">
+    <value>用户 ID</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnUserName" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnBindingEmployeeName" xml:space="preserve">
+    <value>员工姓名</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnBoundUtc" xml:space="preserve">
+    <value>绑定时间 (UTC)</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ColumnReason" xml:space="preserve">
+    <value>原因</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ButtonEdit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ButtonBind" xml:space="preserve">
+    <value>绑定</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_ButtonManage" xml:space="preserve">
+    <value>管理</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_Title" xml:space="preserve">
+    <value>员工资料更正请求</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_Subtitle" xml:space="preserve">
+    <value>审阅员工提交的资料更正请求，不直接改动主数据。</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LinkEmployeeDirectory" xml:space="preserve">
+    <value>员工目录</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LinkWorkItems" xml:space="preserve">
+    <value>业务待办</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LinkOperationAudits" xml:space="preserve">
+    <value>运营审计</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ButtonSearch" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_SectionCorrectionRequests" xml:space="preserve">
+    <value>更正请求</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnSubmittedUtc" xml:space="preserve">
+    <value>提交时间 (UTC)</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnEmployee" xml:space="preserve">
+    <value>员工</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnUser" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnField" xml:space="preserve">
+    <value>字段</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnCurrentProposed" xml:space="preserve">
+    <value>当前值／提议值</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ColumnReview" xml:space="preserve">
+    <value>审核</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelCurrent" xml:space="preserve">
+    <value>当前值：</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelProposed" xml:space="preserve">
+    <value>提议值：</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelNote" xml:space="preserve">
+    <value>备注：</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_LabelReview" xml:space="preserve">
+    <value>审核：</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ButtonApprove" xml:space="preserve">
+    <value>通过</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ButtonCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_ButtonReject" xml:space="preserve">
+    <value>拒绝</value>
+  </data>
 </root>
