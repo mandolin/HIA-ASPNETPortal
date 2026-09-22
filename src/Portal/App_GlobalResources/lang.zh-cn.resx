@@ -771,6 +771,57 @@
   <data name="EditImage_MessageInvalidSize" xml:space="preserve">
     <value>图片宽度和高度必须是非负整数，留空表示不限制该尺寸。</value>
   </data>
+  <data name="EditHtml_Heading" xml:space="preserve">
+    <value>HTML 设置</value>
+  </data>
+  <data name="EditHtml_LabelDesktopHtml" xml:space="preserve">
+    <value>桌面端 HTML 内容</value>
+  </data>
+  <data name="EditHtml_LabelMobileSummary" xml:space="preserve">
+    <value>移动端摘要（可选）</value>
+  </data>
+  <data name="EditHtml_LabelMobileDetails" xml:space="preserve">
+    <value>移动端详情（可选）</value>
+  </data>
+  <data name="EditHtml_SectionTrustedHtml" xml:space="preserve">
+    <value>受信任的原始 HTML 入口</value>
+  </data>
+  <data name="EditHtml_HintTrustedHtml" xml:space="preserve">
+    <value>此入口仅面向受信任管理员。内容会按旧机制保存为 HTML 编码文本，未来将由“原始 HTML”细粒度权限继续收拢。</value>
+  </data>
+  <data name="EditHtml_SectionMobileFallback" xml:space="preserve">
+    <value>移动端回退</value>
+  </data>
+  <data name="EditHtml_HintMobileFallback" xml:space="preserve">
+    <value>移动端字段保留旧数据兼容；移动端展示方案稳定后再统一收拢。</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddContent" xml:space="preserve">
+    <value>添加内容…</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddSummary" xml:space="preserve">
+    <value>添加摘要…</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddDetails" xml:space="preserve">
+    <value>添加详情…</value>
+  </data>
+  <data name="EditXml_Heading" xml:space="preserve">
+    <value>XML 设置</value>
+  </data>
+  <data name="EditXml_LabelXmlDataFile" xml:space="preserve">
+    <value>XML 数据文件</value>
+  </data>
+  <data name="EditXml_LabelXsltFile" xml:space="preserve">
+    <value>XSL/T 转换文件</value>
+  </data>
+  <data name="EditXml_SectionDeploymentResources" xml:space="preserve">
+    <value>仅限部署资源</value>
+  </data>
+  <data name="EditXml_HintDeploymentResources" xml:space="preserve">
+    <value>XML 与 XSL/T 文件必须位于当前应用部署目录内。本页只维护路径，不提供上传、在线编辑、外部 URL 或任意物理路径能力。</value>
+  </data>
+  <data name="EditXml_MessageInvalidResourcePath" xml:space="preserve">
+    <value>XML 和 XSL/T 文件必须是当前应用目录内已部署的资源路径。</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
   </data>

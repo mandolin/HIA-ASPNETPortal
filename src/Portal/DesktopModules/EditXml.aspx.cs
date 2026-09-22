@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -129,7 +130,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>路径策略会拒绝应用外路径、远程地址和不存在的资源；页面只返回低敏提示，不暴露物理路径。</zh-CN>
                 //   <en>The path policy rejects outside-application paths, remote addresses, and missing resources; the page returns only low-sensitivity guidance and does not expose physical paths.</en>
                 // </lang>
-                ShowValidationMessage("XML 和 XSL/T 文件必须是当前应用目录内已部署的资源路径。");
+                ShowValidationMessage(lang.EditXml_MessageInvalidResourcePath);
                 return;
             }
 

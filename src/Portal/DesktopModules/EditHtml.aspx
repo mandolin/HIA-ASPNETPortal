@@ -11,13 +11,13 @@
     --%>
     <section class="portal-page-section portal-edit-page portal-edit-html">
         <div class="portal-page-heading-row">
-            <h1 class="portal-page-title">Html Settings</h1>
+            <h1 class="portal-page-title"><%= lang.EditHtml_Heading %></h1>
         </div>
 
         <div class="portal-detail-card portal-edit-form">
             <div class="portal-option-stack">
-                <strong>Trusted raw HTML entry</strong>
-                <span class="portal-field-help">此入口仅面向受信任管理员。内容会按旧机制保存为 HTML 编码文本，未来将由“原始 HTML”细粒度权限继续收拢。</span>
+                <strong><%= lang.EditHtml_SectionTrustedHtml %></strong>
+                <span class="portal-field-help"><%= lang.EditHtml_HintTrustedHtml %></span>
             </div>
 
             <%--
@@ -28,7 +28,7 @@
             --%>
             <div class="portal-field-stack">
                 <asp:Label ID="DesktopTextLabel" CssClass="portal-field-stack-label" AssociatedControlID="DesktopText"
-                    runat="server" Text="Desktop Html Content" />
+                    runat="server" Text="<%$ Resources:lang,EditHtml_LabelDesktopHtml %>" />
                 <%--
                 <lang>
                   <zh-CN>允许受信任管理员输入原始 HTML；这里必须保持普通请求验证关闭，否则旧 Web Forms 回发无法保存真实 HTML 片段。</zh-CN>
@@ -46,20 +46,20 @@
                   <en>Mobile summary and detail are legacy-compatibility fields; their optionality and display fallback are decided by the server content model.</en>
                 </lang>
                 --%>
-                <h2 class="portal-edit-subtitle">Mobile Fallback</h2>
-                <p class="portal-field-help">移动端字段保留旧数据兼容；移动端展示方案稳定后再统一收拢。</p>
+                <h2 class="portal-edit-subtitle"><%= lang.EditHtml_SectionMobileFallback %></h2>
+                <p class="portal-field-help"><%= lang.EditHtml_HintMobileFallback %></p>
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="MobileSummaryLabel" CssClass="portal-field-stack-label" AssociatedControlID="MobileSummary"
-                    runat="server" Text="Mobile Summary (optional)" />
+                    runat="server" Text="<%$ Resources:lang,EditHtml_LabelMobileSummary %>" />
                 <asp:TextBox ID="MobileSummary" CssClass="NormalTextBox portal-input portal-small-textarea"
                     Columns="75" Rows="3" TextMode="MultiLine" runat="server" />
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="MobileDetailsLabel" CssClass="portal-field-stack-label" AssociatedControlID="MobileDetails"
-                    runat="server" Text="Mobile Details (optional)" />
+                    runat="server" Text="<%$ Resources:lang,EditHtml_LabelMobileDetails %>" />
                 <asp:TextBox ID="MobileDetails" CssClass="NormalTextBox portal-input portal-small-textarea"
                     Columns="75" Rows="5" TextMode="MultiLine" runat="server" />
             </div>
@@ -71,10 +71,10 @@
                   <en>Update and Cancel enter the existing save or leave flows; the buttons do not implement HTML sanitization, authorization, or rollback on the client.</en>
                 </lang>
                 --%>
-                <asp:LinkButton ID="updateButton" Text="Update" runat="server"
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none"
                     OnClick="UpdateBtn_Click" />
-                <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
                     CssClass="portal-button portal-button-secondary" BorderStyle="none"
                     OnClick="CancelBtn_Click" />
             </div>

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -92,9 +93,9 @@ namespace ASPNET.StarterKit.Portal
                     //   <zh-CN>没有已有记录时使用固定提示，避免把空数据库值误当成可渲染 HTML。</zh-CN>
                     //   <en>Use fixed prompts when no record exists instead of treating an empty database value as renderable HTML.</en>
                     // </lang>
-                    DesktopText.Text = "Add content...";
-                    MobileSummary.Text = "Add summary...";
-                    MobileDetails.Text = "Add details...";
+                    DesktopText.Text = lang.EditHtml_PlaceholderAddContent;
+                    MobileSummary.Text = lang.EditHtml_PlaceholderAddSummary;
+                    MobileDetails.Text = lang.EditHtml_PlaceholderAddDetails;
                 }
                 else
                 {

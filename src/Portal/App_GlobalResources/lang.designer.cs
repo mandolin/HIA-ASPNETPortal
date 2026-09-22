@@ -2888,6 +2888,210 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Html Settings</zh-CN>
+        ///   <en>Looks up a localized string similar to: Html Settings</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_Heading {
+            get {
+                return ResourceManager.GetString("EditHtml_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Desktop Html Content</zh-CN>
+        ///   <en>Looks up a localized string similar to: Desktop Html Content</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_LabelDesktopHtml {
+            get {
+                return ResourceManager.GetString("EditHtml_LabelDesktopHtml", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Summary (optional)</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mobile Summary (optional)</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_LabelMobileSummary {
+            get {
+                return ResourceManager.GetString("EditHtml_LabelMobileSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Details (optional)</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mobile Details (optional)</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_LabelMobileDetails {
+            get {
+                return ResourceManager.GetString("EditHtml_LabelMobileDetails", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Trusted raw HTML entry</zh-CN>
+        ///   <en>Looks up a localized string similar to: Trusted raw HTML entry</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_SectionTrustedHtml {
+            get {
+                return ResourceManager.GetString("EditHtml_SectionTrustedHtml", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This entry is for trusted administrators only. Content is stored as HTML-encoded text under the legacy mechanism, and will later be tightened further by the fine-grained raw-HTML permission.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This entry is for trusted administrators only. Content is stored as HTML-encoded text under the legacy mechanism, and will later be tightened further by the fine-grained raw-HTML permission.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_HintTrustedHtml {
+            get {
+                return ResourceManager.GetString("EditHtml_HintTrustedHtml", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Fallback</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mobile Fallback</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_SectionMobileFallback {
+            get {
+                return ResourceManager.GetString("EditHtml_SectionMobileFallback", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The mobile fields preserve legacy data compatibility; they will be consolidated once the mobile display approach stabilises.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The mobile fields preserve legacy data compatibility; they will be consolidated once the mobile display approach stabilises.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_HintMobileFallback {
+            get {
+                return ResourceManager.GetString("EditHtml_HintMobileFallback", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add content...</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add content...</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_PlaceholderAddContent {
+            get {
+                return ResourceManager.GetString("EditHtml_PlaceholderAddContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add summary...</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add summary...</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_PlaceholderAddSummary {
+            get {
+                return ResourceManager.GetString("EditHtml_PlaceholderAddSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add details...</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add details...</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditHtml_PlaceholderAddDetails {
+            get {
+                return ResourceManager.GetString("EditHtml_PlaceholderAddDetails", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：XML Settings</zh-CN>
+        ///   <en>Looks up a localized string similar to: XML Settings</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditXml_Heading {
+            get {
+                return ResourceManager.GetString("EditXml_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：XML Data File</zh-CN>
+        ///   <en>Looks up a localized string similar to: XML Data File</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditXml_LabelXmlDataFile {
+            get {
+                return ResourceManager.GetString("EditXml_LabelXmlDataFile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：XSL/T Transform File</zh-CN>
+        ///   <en>Looks up a localized string similar to: XSL/T Transform File</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditXml_LabelXsltFile {
+            get {
+                return ResourceManager.GetString("EditXml_LabelXsltFile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Deployment resources only</zh-CN>
+        ///   <en>Looks up a localized string similar to: Deployment resources only</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditXml_SectionDeploymentResources {
+            get {
+                return ResourceManager.GetString("EditXml_SectionDeploymentResources", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：XML and XSL/T files must live inside the current application deployment directory. This page maintains paths only; it offers no upload, online editing, external URL, or arbitrary physical path capability.</zh-CN>
+        ///   <en>Looks up a localized string similar to: XML and XSL/T files must live inside the current application deployment directory. This page maintains paths only; it offers no upload, online editing, external URL, or arbitrary physical path capability.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditXml_HintDeploymentResources {
+            get {
+                return ResourceManager.GetString("EditXml_HintDeploymentResources", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：XML and XSL/T files must be deployed resource paths inside the current application directory.</zh-CN>
+        ///   <en>Looks up a localized string similar to: XML and XSL/T files must be deployed resource paths inside the current application directory.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditXml_MessageInvalidResourcePath {
+            get {
+                return ResourceManager.GetString("EditXml_MessageInvalidResourcePath", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

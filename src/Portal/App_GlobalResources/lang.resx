@@ -771,6 +771,57 @@
   <data name="EditImage_MessageInvalidSize" xml:space="preserve">
     <value>Image width and height must be non-negative integers; leaving them empty means that dimension is unrestricted.</value>
   </data>
+  <data name="EditHtml_Heading" xml:space="preserve">
+    <value>Html Settings</value>
+  </data>
+  <data name="EditHtml_LabelDesktopHtml" xml:space="preserve">
+    <value>Desktop Html Content</value>
+  </data>
+  <data name="EditHtml_LabelMobileSummary" xml:space="preserve">
+    <value>Mobile Summary (optional)</value>
+  </data>
+  <data name="EditHtml_LabelMobileDetails" xml:space="preserve">
+    <value>Mobile Details (optional)</value>
+  </data>
+  <data name="EditHtml_SectionTrustedHtml" xml:space="preserve">
+    <value>Trusted raw HTML entry</value>
+  </data>
+  <data name="EditHtml_HintTrustedHtml" xml:space="preserve">
+    <value>This entry is for trusted administrators only. Content is stored as HTML-encoded text under the legacy mechanism, and will later be tightened further by the fine-grained raw-HTML permission.</value>
+  </data>
+  <data name="EditHtml_SectionMobileFallback" xml:space="preserve">
+    <value>Mobile Fallback</value>
+  </data>
+  <data name="EditHtml_HintMobileFallback" xml:space="preserve">
+    <value>The mobile fields preserve legacy data compatibility; they will be consolidated once the mobile display approach stabilises.</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddContent" xml:space="preserve">
+    <value>Add content...</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddSummary" xml:space="preserve">
+    <value>Add summary...</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddDetails" xml:space="preserve">
+    <value>Add details...</value>
+  </data>
+  <data name="EditXml_Heading" xml:space="preserve">
+    <value>XML Settings</value>
+  </data>
+  <data name="EditXml_LabelXmlDataFile" xml:space="preserve">
+    <value>XML Data File</value>
+  </data>
+  <data name="EditXml_LabelXsltFile" xml:space="preserve">
+    <value>XSL/T Transform File</value>
+  </data>
+  <data name="EditXml_SectionDeploymentResources" xml:space="preserve">
+    <value>Deployment resources only</value>
+  </data>
+  <data name="EditXml_HintDeploymentResources" xml:space="preserve">
+    <value>XML and XSL/T files must live inside the current application deployment directory. This page maintains paths only; it offers no upload, online editing, external URL, or arbitrary physical path capability.</value>
+  </data>
+  <data name="EditXml_MessageInvalidResourcePath" xml:space="preserve">
+    <value>XML and XSL/T files must be deployed resource paths inside the current application directory.</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>
