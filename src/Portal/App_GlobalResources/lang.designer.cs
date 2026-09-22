@@ -3572,6 +3572,66 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee profile confirmation</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee profile confirmation</en>
+        /// </lang>
+        /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This account has no active employee profile to confirm.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This account has no active employee profile to confirm.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_MessageNoActiveProfile {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageNoActiveProfile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The profile confirmation has been recorded.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The profile confirmation has been recorded.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_MessageConfirmed {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageConfirmed", resourceCulture);
+            }
+        }
+
+        internal static string EmployeeProfileConfirm_Heading {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Confirm profile is correct</zh-CN>
+        ///   <en>Looks up a localized string similar to: Confirm profile is correct</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_ButtonConfirm {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_ButtonConfirm", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Last confirmed</zh-CN>
+        ///   <en>Looks up a localized string similar to: Last confirmed</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_LabelLastConfirmed {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelLastConfirmed", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

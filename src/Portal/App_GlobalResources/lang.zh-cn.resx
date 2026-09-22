@@ -942,6 +942,21 @@
   <data name="EmployeeProfileCorrectionRequest_MessageSubmitted" xml:space="preserve">
     <value>更正请求已提交，等待管理员处理。</value>
   </data>
+  <data name="EmployeeProfileConfirm_MessageNoActiveProfile" xml:space="preserve">
+    <value>当前账号没有可确认的在职员工资料。</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageConfirmed" xml:space="preserve">
+    <value>资料确认已记录。</value>
+  </data>
+  <data name="EmployeeProfileConfirm_Heading" xml:space="preserve">
+    <value>员工资料确认</value>
+  </data>
+  <data name="EmployeeProfileConfirm_ButtonConfirm" xml:space="preserve">
+    <value>确认资料无误</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelLastConfirmed" xml:space="preserve">
+    <value>上次确认</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
   </data>

@@ -942,6 +942,21 @@
   <data name="EmployeeProfileCorrectionRequest_MessageSubmitted" xml:space="preserve">
     <value>The correction request was submitted and is awaiting administrator review.</value>
   </data>
+  <data name="EmployeeProfileConfirm_MessageNoActiveProfile" xml:space="preserve">
+    <value>This account has no active employee profile to confirm.</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageConfirmed" xml:space="preserve">
+    <value>The profile confirmation has been recorded.</value>
+  </data>
+  <data name="EmployeeProfileConfirm_Heading" xml:space="preserve">
+    <value>Employee profile confirmation</value>
+  </data>
+  <data name="EmployeeProfileConfirm_ButtonConfirm" xml:space="preserve">
+    <value>Confirm profile is correct</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelLastConfirmed" xml:space="preserve">
+    <value>Last confirmed</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>

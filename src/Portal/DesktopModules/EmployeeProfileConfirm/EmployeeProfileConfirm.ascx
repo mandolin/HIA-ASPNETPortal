@@ -7,7 +7,7 @@
     </lang>
 --%>
 <div class="employee-profile-confirm">
-    <div class="employee-profile-confirm-title">员工资料确认</div>
+    <div class="employee-profile-confirm-title"><%= lang.EmployeeProfileConfirm_Heading %></div>
     <asp:Label ID="MessageLabel" CssClass="employee-profile-confirm-message" runat="server" />
 
     <%--
@@ -31,31 +31,31 @@
         --%>
         <div class="employee-profile-field-grid">
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label">员工号</span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelEmployeeCode %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="EmployeeCodeLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label">姓名</span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelName %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="DisplayNameLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label">称呼</span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelSalutation %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="PreferredNameLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label">工作邮箱</span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelWorkEmail %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="WorkEmailLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label">组织</span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelOrganization %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="OrganizationLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label">状态</span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_ColumnStatus %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="EmploymentStatusLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field employee-profile-field-wide">
-                <span class="employee-profile-confirm-label employee-profile-field-label">上次确认</span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelLastConfirmed %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="LastConfirmedLabel" runat="server" /></span>
             </div>
         </div>
@@ -67,7 +67,7 @@
             </lang>
         --%>
         <div class="employee-profile-confirm-actions">
-            <asp:Button ID="ConfirmButton" CssClass="CommandButton" Text="确认资料无误" OnClick="ConfirmButton_Click" runat="server" />
+            <asp:Button ID="ConfirmButton" CssClass="CommandButton" Text="<%$ Resources:lang,EmployeeProfileConfirm_ButtonConfirm %>" OnClick="ConfirmButton_Click" runat="server" />
         </div>
     </asp:Panel>
 </div>

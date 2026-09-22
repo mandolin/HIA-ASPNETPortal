@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -71,7 +72,7 @@ namespace ASPNET.StarterKit.Portal
             EmployeeProfileConfirmationView profile = GetCurrentProfile(userId);
             if (profile == null)
             {
-                ShowMessage("当前账号没有可确认的在职员工资料。");
+                ShowMessage(lang.EmployeeProfileConfirm_MessageNoActiveProfile);
                 return;
             }
 
@@ -103,7 +104,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>After writing the confirmation snapshot, the module refreshes so the latest confirmation time comes from the database path rather than transient page state.</en>
             // </lang>
             BindProfile();
-            ShowMessage("资料确认已记录。");
+            ShowMessage(lang.EmployeeProfileConfirm_MessageConfirmed);
         }
 
         /// <summary>
