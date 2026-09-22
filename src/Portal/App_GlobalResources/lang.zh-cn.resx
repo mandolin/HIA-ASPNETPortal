@@ -1386,4 +1386,61 @@
   <data name="Admin_DiagnosticLogDetail_MessageEventNotFound" xml:space="preserve">
     <value>未在结构化日志中找到所请求的诊断事件。</value>
   </data>
+  <data name="Admin_ModuleDefinitions_MessageInvalidName" xml:space="preserve">
+    <value>模块定义名称无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_MessageSaveFailed" xml:space="preserve">
+    <value>模块定义保存失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_MessageInUseByInstances" xml:space="preserve">
+    <value>该模块定义仍被 {0} 个模块实例使用。请先禁用、迁移或显式清理这些实例。</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_MessageDeleteFailed" xml:space="preserve">
+    <value>模块定义删除失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_SiteSettings_MessageInvalidSiteName" xml:space="preserve">
+    <value>站点名称无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_SiteSettings_MessageSaveFailed" xml:space="preserve">
+    <value>站点设置保存失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_SecurityRoles_MessageSelectValidUser" xml:space="preserve">
+    <value>请选择一个有效用户。</value>
+  </data>
+  <data name="Admin_SecurityRoles_MessageMemberAddFailed" xml:space="preserve">
+    <value>角色成员添加失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_SecurityRoles_MessageMemberRemoveFailed" xml:space="preserve">
+    <value>角色成员移除失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_ModuleSettings_MessageInvalidNameOrCache" xml:space="preserve">
+    <value>模块名称或缓存秒数无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ModuleSettings_MessageSaveFailed" xml:space="preserve">
+    <value>模块设置保存失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_Tabs_MessageReorderFailed" xml:space="preserve">
+    <value>Tab 排序失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_Tabs_MessageCoreTabProtected" xml:space="preserve">
+    <value>核心后台 Tab 不能删除。</value>
+  </data>
+  <data name="Admin_Tabs_MessageDeleteFailed" xml:space="preserve">
+    <value>Tab 删除失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_Tabs_MessageCreateFailed" xml:space="preserve">
+    <value>Tab 创建失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_Users_MessageDeleteFailed" xml:space="preserve">
+    <value>删除失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_Users_MessageCreateFailed" xml:space="preserve">
+    <value>无法创建新用户，系统未完成本次写入。</value>
+  </data>
+  <data name="Admin_Users_MessageSelectValidUser" xml:space="preserve">
+    <value>请选择一个有效用户。</value>
+  </data>
+  <data name="Admin_Users_MessageBindFailed" xml:space="preserve">
+    <value>数据绑定失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
 </root>

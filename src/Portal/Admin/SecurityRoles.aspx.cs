@@ -1,7 +1,9 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -176,7 +178,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (allUsers.SelectedItem == null)
             {
-                ShowMessage("请选择一个有效用户。");
+                ShowMessage(lang.Admin_SecurityRoles_MessageSelectValidUser);
                 return;
             }
 
@@ -219,7 +221,7 @@ namespace ASPNET.StarterKit.Portal
                     "Adding a role member failed. RoleId=" + roleId + "; UserId=" + userId,
                     exception,
                     Context);
-                ShowMessage("角色成员添加失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_SecurityRoles_MessageMemberAddFailed, eventId));
             }
         }
 
@@ -293,7 +295,7 @@ namespace ASPNET.StarterKit.Portal
                     "Removing a role member failed. RoleId=" + roleId + "; UserId=" + userId,
                     exception,
                     Context);
-                ShowMessage("角色成员移除失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_SecurityRoles_MessageMemberRemoveFailed, eventId));
             }
         }
 

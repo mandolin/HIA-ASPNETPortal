@@ -1,7 +1,9 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -228,7 +230,7 @@ namespace ASPNET.StarterKit.Portal
             string friendlyName;
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(FriendlyName.Text, 150, out friendlyName))
             {
-                ShowMessage("模块定义名称无效，未保存本次修改。");
+                ShowMessage(lang.Admin_ModuleDefinitions_MessageInvalidName);
                 return;
             }
 
@@ -269,7 +271,7 @@ namespace ASPNET.StarterKit.Portal
                     "Updating a legacy module definition failed. ModuleDefinitionId=" + defId,
                     exception,
                     Context);
-                ShowMessage("模块定义保存失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ModuleDefinitions_MessageSaveFailed, eventId));
             }
         }
 
@@ -321,7 +323,7 @@ namespace ASPNET.StarterKit.Portal
                  *   <en>Legacy deletion cascades into business module data, so referenced definitions are blocked here and administrators must handle instance-level impact first.</en>
                  * </lang>
                  */
-                ShowMessage("该模块定义仍被 " + instanceCount + " 个模块实例使用。请先禁用、迁移或显式清理这些实例。");
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ModuleDefinitions_MessageInUseByInstances, instanceCount));
                 return;
             }
 
@@ -352,7 +354,7 @@ namespace ASPNET.StarterKit.Portal
                     "Deleting a legacy module definition failed. ModuleDefinitionId=" + defId,
                     exception,
                     Context);
-                ShowMessage("模块定义删除失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ModuleDefinitions_MessageDeleteFailed, eventId));
             }
         }
 

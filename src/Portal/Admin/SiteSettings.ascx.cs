@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -104,7 +106,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(SiteName.Text, 150, out portalName))
             {
-                ShowMessage("站点名称无效，未保存本次修改。");
+                ShowMessage(lang.Admin_SiteSettings_MessageInvalidSiteName);
                 return;
             }
 
@@ -140,7 +142,7 @@ namespace ASPNET.StarterKit.Portal
                     "Updating site settings failed.",
                     exception,
                     Context);
-                ShowMessage("站点设置保存失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_SiteSettings_MessageSaveFailed, eventId));
             }
         }
 

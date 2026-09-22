@@ -1386,4 +1386,61 @@
   <data name="Admin_DiagnosticLogDetail_MessageEventNotFound" xml:space="preserve">
     <value>The requested diagnostic event was not found in structured logs.</value>
   </data>
+  <data name="Admin_ModuleDefinitions_MessageInvalidName" xml:space="preserve">
+    <value>Invalid module definition name; the change was not saved.</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_MessageSaveFailed" xml:space="preserve">
+    <value>Saving the module definition failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_MessageInUseByInstances" xml:space="preserve">
+    <value>This module definition is still used by {0} module instance(s). Disable, migrate, or explicitly clean those instances first.</value>
+  </data>
+  <data name="Admin_ModuleDefinitions_MessageDeleteFailed" xml:space="preserve">
+    <value>Deleting the module definition failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_SiteSettings_MessageInvalidSiteName" xml:space="preserve">
+    <value>Invalid site name; the change was not saved.</value>
+  </data>
+  <data name="Admin_SiteSettings_MessageSaveFailed" xml:space="preserve">
+    <value>Saving site settings failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_SecurityRoles_MessageSelectValidUser" xml:space="preserve">
+    <value>Select a valid user.</value>
+  </data>
+  <data name="Admin_SecurityRoles_MessageMemberAddFailed" xml:space="preserve">
+    <value>Adding the role member failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_SecurityRoles_MessageMemberRemoveFailed" xml:space="preserve">
+    <value>Removing the role member failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_ModuleSettings_MessageInvalidNameOrCache" xml:space="preserve">
+    <value>Invalid module name or cache seconds; the change was not saved.</value>
+  </data>
+  <data name="Admin_ModuleSettings_MessageSaveFailed" xml:space="preserve">
+    <value>Saving module settings failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_Tabs_MessageReorderFailed" xml:space="preserve">
+    <value>Reordering tabs failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_Tabs_MessageCoreTabProtected" xml:space="preserve">
+    <value>The core Admin tab cannot be deleted.</value>
+  </data>
+  <data name="Admin_Tabs_MessageDeleteFailed" xml:space="preserve">
+    <value>Deleting the tab failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_Tabs_MessageCreateFailed" xml:space="preserve">
+    <value>Creating the tab failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_Users_MessageDeleteFailed" xml:space="preserve">
+    <value>Deleting the user failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_Users_MessageCreateFailed" xml:space="preserve">
+    <value>The new user could not be created; the write was not completed.</value>
+  </data>
+  <data name="Admin_Users_MessageSelectValidUser" xml:space="preserve">
+    <value>Select a valid user.</value>
+  </data>
+  <data name="Admin_Users_MessageBindFailed" xml:space="preserve">
+    <value>Data binding failed; the system recorded this error. Event id: {0}</value>
+  </data>
 </root>

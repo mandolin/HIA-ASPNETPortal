@@ -1,9 +1,11 @@
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -187,7 +189,7 @@ namespace ASPNET.StarterKit.Portal
                     "Ordering a Tab failed. TabId=" + selectedTab.TabId,
                     exception,
                     Context);
-                ShowMessage("Tab 排序失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Tabs_MessageReorderFailed, eventId));
             }
         }
 
@@ -229,7 +231,7 @@ namespace ASPNET.StarterKit.Portal
 
             if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(selectedTab.TabName))
             {
-                ShowMessage("核心后台 Tab 不能删除。");
+                ShowMessage(lang.Admin_Tabs_MessageCoreTabProtected);
                 return;
             }
 
@@ -263,7 +265,7 @@ namespace ASPNET.StarterKit.Portal
                     "Deleting a Tab failed. TabId=" + selectedTab.TabId,
                     exception,
                     Context);
-                ShowMessage("Tab 删除失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Tabs_MessageDeleteFailed, eventId));
             }
         }
 
@@ -329,7 +331,7 @@ namespace ASPNET.StarterKit.Portal
                     "Adding a Tab failed.",
                     exception,
                     Context);
-                ShowMessage("Tab 创建失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Tabs_MessageCreateFailed, eventId));
             }
         }
 

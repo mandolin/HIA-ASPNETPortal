@@ -1,8 +1,10 @@
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -152,7 +154,7 @@ namespace ASPNET.StarterKit.Portal
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(moduleTitle.Text, 150, out title) ||
                 !int.TryParse(cacheTime.Text, out cacheSeconds) || cacheSeconds < 0 || cacheSeconds > MaximumCacheSeconds)
             {
-                ShowMessage("模块名称或缓存秒数无效，未保存本次修改。");
+                ShowMessage(lang.Admin_ModuleSettings_MessageInvalidNameOrCache);
                 return;
             }
 
@@ -204,7 +206,7 @@ namespace ASPNET.StarterKit.Portal
                     "Updating module settings failed. ModuleId=" + moduleId + "; TabId=" + tabId,
                     exception,
                     Context);
-                ShowMessage("模块设置保存失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ModuleSettings_MessageSaveFailed, eventId));
             }
         }
 

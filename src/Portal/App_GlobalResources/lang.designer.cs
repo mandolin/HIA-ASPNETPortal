@@ -5335,5 +5335,233 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_DiagnosticLogDetail_MessageEventNotFound", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid module definition name; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid module definition name; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_MessageInvalidName {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_MessageInvalidName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Saving the module definition failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Saving the module definition failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_MessageSaveFailed {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_MessageSaveFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細This module definition is still used by {0} module instance(s). Disable, migrate, or explicitly clean those instances first.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This module definition is still used by {0} module instance(s). Disable, migrate, or explicitly clean those instances first.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_MessageInUseByInstances {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_MessageInUseByInstances", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the module definition failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Deleting the module definition failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefinitions_MessageDeleteFailed {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_MessageDeleteFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid site name; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid site name; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_MessageInvalidSiteName {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_MessageInvalidSiteName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Saving site settings failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Saving site settings failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_MessageSaveFailed {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_MessageSaveFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a valid user.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select a valid user.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_MessageSelectValidUser {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_MessageSelectValidUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Adding the role member failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Adding the role member failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_MessageMemberAddFailed {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_MessageMemberAddFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Removing the role member failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Removing the role member failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_MessageMemberRemoveFailed {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_MessageMemberRemoveFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid module name or cache seconds; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid module name or cache seconds; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_MessageInvalidNameOrCache {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_MessageInvalidNameOrCache", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Saving module settings failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Saving module settings failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_MessageSaveFailed {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_MessageSaveFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Reordering tabs failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reordering tabs failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_MessageReorderFailed {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_MessageReorderFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The core Admin tab cannot be deleted.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The core Admin tab cannot be deleted.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_MessageCoreTabProtected {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_MessageCoreTabProtected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the tab failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Deleting the tab failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_MessageDeleteFailed {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_MessageDeleteFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Creating the tab failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Creating the tab failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_MessageCreateFailed {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_MessageCreateFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the user failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Deleting the user failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_MessageDeleteFailed {
+            get {
+                return ResourceManager.GetString("Admin_Users_MessageDeleteFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The new user could not be created; the write was not completed.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The new user could not be created; the write was not completed.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_MessageCreateFailed {
+            get {
+                return ResourceManager.GetString("Admin_Users_MessageCreateFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a valid user.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select a valid user.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_MessageSelectValidUser {
+            get {
+                return ResourceManager.GetString("Admin_Users_MessageSelectValidUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Data binding failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Data binding failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_MessageBindFailed {
+            get {
+                return ResourceManager.GetString("Admin_Users_MessageBindFailed", resourceCulture);
+            }
+        }
     }
 }

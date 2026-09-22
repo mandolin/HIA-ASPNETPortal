@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
@@ -164,7 +165,7 @@ namespace ASPNET.StarterKit.Portal
                     "Deleting a user from the admin Users module failed. UserId=" + user.UserId,
                     exception,
                     Context);
-                ShowMessage("删除失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Users_MessageDeleteFailed, eventId));
             }
         }
 
@@ -269,7 +270,7 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>达到固定尝试上限仍失败时不再继续写入，仅展示受控提示。</zh-CN>
             //   <en>When the fixed attempt limit is exhausted, stop writing and show only a controlled message.</en>
             // </lang>
-            ShowMessage("无法创建新用户，系统未完成本次写入。");
+            ShowMessage(lang.Admin_Users_MessageCreateFailed);
         }
 
         private bool TryReadNavigationParameters()
@@ -343,7 +344,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (ddl_AllUsers.SelectedItem == null)
             {
-                ShowMessage("请选择一个有效用户。");
+                ShowMessage(lang.Admin_Users_MessageSelectValidUser);
                 return false;
             }
 
@@ -427,7 +428,7 @@ namespace ASPNET.StarterKit.Portal
                     "Binding users in the admin Users module failed.",
                     exception,
                     Context);
-                ShowMessage("数据绑定失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Users_MessageBindFailed, eventId));
             }
         }
 
