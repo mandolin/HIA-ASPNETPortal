@@ -92,7 +92,13 @@ namespace ASPNET.StarterKit.Portal
                 {
                     string logoffUrl = HttpUtility.HtmlAttributeEncode(
                         Global.GetApplicationPath(Request) + "/Admin/Logoff.aspx");
-                    LogoffLink = "<a href=\"" + logoffUrl + "\" class=\"SiteLink portal-toplink portal-logoff\">Logoff</a>";
+
+                    // <lang>
+                    //   <zh-CN>注销链接文案改为取自本地资源 DesktopBanner.resx，随界面语言切换；此前为硬编码英文字面量，中文界面下仍显示英文。文本按 HTML 编码后拼接，避免资源值污染标记。</zh-CN>
+                    //   <en>The logoff link text now comes from the local resource DesktopBanner.resx and follows the UI language; it was previously a hardcoded English literal that stayed English on Chinese pages. The value is HTML-encoded before concatenation so resource text cannot corrupt the markup.</en>
+                    // </lang>
+                    LogoffLink = "<a href=\"" + logoffUrl + "\" class=\"SiteLink portal-toplink portal-logoff\">" +
+                        HttpUtility.HtmlEncode(DesktopBanner.Logoff) + "</a>";
                 }
             }
 

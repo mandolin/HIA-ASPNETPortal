@@ -66,4 +66,7 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Welcome {0}!</value>
   </data>
+  <data name="Logoff" xml:space="preserve">
+    <value>Logoff</value>
+  </data>
 </root>

@@ -66,4 +66,7 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>欢迎 {0}!</value>
   </data>
+  <data name="Logoff" xml:space="preserve">
+    <value>注销</value>
+  </data>
 </root>

@@ -79,5 +79,17 @@ namespace ASPNET.StarterKit.Portal {
                 return ResourceManager.GetString("WelcomeMessage", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找页眉注销链接的本地化文案；仅 Forms 身份会渲染该链接。</zh-CN>
+        ///   <en>Looks up the localized text of the header logoff link; only Forms identities render that link.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Logoff {
+            get {
+                return ResourceManager.GetString("Logoff", resourceCulture);
+            }
+        }
     }
 }
