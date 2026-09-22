@@ -1,8 +1,10 @@
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -170,7 +172,7 @@ namespace ASPNET.StarterKit.Portal
                     "Adding a role failed.",
                     exception,
                     Context);
-                ShowMessage("角色创建失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Roles_MessageCreateFailed, eventId));
             }
         }
 
@@ -457,7 +459,7 @@ namespace ASPNET.StarterKit.Portal
             string roleName;
             if (!PortalAdministrationPolicy.TryNormalizeRoleName(requestedName, out roleName))
             {
-                ShowMessage("角色名称无效，未保存本次修改。");
+                ShowMessage(lang.Admin_Roles_MessageInvalidRoleName);
                 return false;
             }
 
@@ -479,7 +481,7 @@ namespace ASPNET.StarterKit.Portal
                 string.Equals(item.RoleName, roleName, StringComparison.OrdinalIgnoreCase));
             if (duplicate)
             {
-                ShowMessage("当前门户已存在同名角色，未保存本次修改。");
+                ShowMessage(lang.Admin_Roles_MessageDuplicateRoleName);
                 return false;
             }
 
@@ -498,7 +500,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (string.Equals(role.RoleName, PortalRoleNames.Administrators, StringComparison.OrdinalIgnoreCase))
             {
-                ShowMessage("核心管理员角色不能改名。");
+                ShowMessage(lang.Admin_Roles_MessageCoreRoleRenameBlocked);
                 return false;
             }
 
@@ -531,7 +533,7 @@ namespace ASPNET.StarterKit.Portal
                     "Renaming a role failed. RoleId=" + role.RoleId,
                     exception,
                     Context);
-                ShowMessage("角色改名失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Roles_MessageRenameFailed, eventId));
                 return false;
             }
         }
@@ -633,13 +635,13 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (string.Equals(role.RoleName, PortalRoleNames.Administrators, StringComparison.OrdinalIgnoreCase))
             {
-                ShowMessage("核心管理员角色不能删除。");
+                ShowMessage(lang.Admin_Roles_MessageCoreRoleDeleteBlocked);
                 return;
             }
 
             if (RolesDB.GetRoleMembers(role.RoleId).Any())
             {
-                ShowMessage("角色仍包含成员，不能删除。");
+                ShowMessage(lang.Admin_Roles_MessageRoleHasMembers);
                 return;
             }
 
@@ -650,7 +652,7 @@ namespace ASPNET.StarterKit.Portal
             PortalSettings portalSettings = PortalContext.GetPortalSettings();
             if (HasRoleReferences(portalSettings, role.RoleName))
             {
-                ShowMessage("角色仍被 Tab 或模块引用，不能删除。");
+                ShowMessage(lang.Admin_Roles_MessageRoleReferenced);
                 return;
             }
 
@@ -682,7 +684,7 @@ namespace ASPNET.StarterKit.Portal
                     "Deleting a role failed. RoleId=" + role.RoleId,
                     exception,
                     Context);
-                ShowMessage("角色删除失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Roles_MessageDeleteFailed, eventId));
             }
         }
 

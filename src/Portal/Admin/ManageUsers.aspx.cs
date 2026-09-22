@@ -1,8 +1,10 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -178,7 +180,7 @@ namespace ASPNET.StarterKit.Portal
                     userId.ToString(),
                     "Added role id " + role.RoleId + " to user.",
                     Context);
-                ShowRegistrationMessage("角色已加入当前用户。", false);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRoleJoined, false);
                 BindData();
             }
             catch (Exception exception)
@@ -188,7 +190,7 @@ namespace ASPNET.StarterKit.Portal
                     "Adding a role to user failed. UserId=" + userId + "; RoleId=" + role.RoleId,
                     exception,
                     Context);
-                ShowRegistrationMessage("加入角色失败，系统已记录本次错误。事件编号：" + eventId, true);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageJoinRoleFailed, eventId), true);
             }
         }
 
@@ -227,28 +229,28 @@ namespace ASPNET.StarterKit.Portal
             string email;
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(Email.Text, 256, out email))
             {
-                ShowRegistrationMessage("邮箱格式无效，未保存本次修改。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidEmail, true);
                 return;
             }
 
             string loginName;
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(LoginName.Text, 100, out loginName))
             {
-                ShowRegistrationMessage("登录名格式无效，未保存本次修改。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidLoginName, true);
                 return;
             }
 
             string displayName;
             if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(DisplayName.Text, 150, out displayName))
             {
-                ShowRegistrationMessage("显示名格式无效，未保存本次修改。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidDisplayName, true);
                 return;
             }
 
             string nickname;
             if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(Nickname.Text, 100, out nickname))
             {
-                ShowRegistrationMessage("昵称格式无效，未保存本次修改。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageInvalidNickName, true);
                 return;
             }
 
@@ -275,7 +277,7 @@ namespace ASPNET.StarterKit.Portal
 
             if (shouldResetPassword && !string.Equals(password, confirmPassword, StringComparison.Ordinal))
             {
-                ShowRegistrationMessage("两次输入的密码不一致，未保存本次修改。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessagePasswordMismatch, true);
                 return;
             }
 
@@ -331,7 +333,7 @@ namespace ASPNET.StarterKit.Portal
                     "Updating user profile failed. UserId=" + userId,
                     exception,
                     Context);
-                ShowRegistrationMessage("资料更新失败，系统已记录本次错误。事件编号：" + eventId, true);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageProfileUpdateFailed, eventId), true);
             }
         }
 
@@ -461,7 +463,7 @@ namespace ASPNET.StarterKit.Portal
                         "PasswordSubmissionEncryption",
                         "Administrator password-reset submission was incomplete: one encrypted password field was missing.",
                         Context);
-                    ShowRegistrationMessage("密码提交不完整，未保存本次修改。", true);
+                    ShowRegistrationMessage(lang.Admin_ManageUsers_MessagePasswordIncomplete, true);
                     return false;
                 }
 
@@ -481,7 +483,7 @@ namespace ASPNET.StarterKit.Portal
                     return true;
                 }
 
-                ShowRegistrationMessage("密码提交验证失败，系统已记录本次错误。事件编号：" + eventId, true);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessagePasswordVerifyFailed, eventId), true);
                 return false;
             }
 
@@ -491,7 +493,7 @@ namespace ASPNET.StarterKit.Portal
                     "PasswordSubmissionEncryption",
                     "Administrator password reset was submitted without the required encrypted fields.",
                     Context);
-                ShowRegistrationMessage("密码提交验证失败，未保存本次修改。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessagePasswordVerifyRejected, true);
                 return false;
             }
 
@@ -547,7 +549,7 @@ namespace ASPNET.StarterKit.Portal
                     userId.ToString(),
                     "Registration approved.",
                     Context);
-                ShowRegistrationMessage("Registration approved.", false);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRegistrationApproved, false);
                 BindData();
             }
             catch (Exception exception)
@@ -557,7 +559,7 @@ namespace ASPNET.StarterKit.Portal
                     "Approving user registration failed. UserId=" + userId,
                     exception,
                     Context);
-                ShowRegistrationMessage("审核失败，系统已记录本次错误。事件编号：" + eventId, true);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageApprovalFailed, eventId), true);
             }
         }
 
@@ -607,7 +609,7 @@ namespace ASPNET.StarterKit.Portal
                     userId.ToString(),
                     "Registration rejected.",
                     Context);
-                ShowRegistrationMessage("Registration rejected.", false);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRegistrationRejected, false);
                 BindData();
             }
             catch (Exception exception)
@@ -617,7 +619,7 @@ namespace ASPNET.StarterKit.Portal
                     "Rejecting user registration failed. UserId=" + userId,
                     exception,
                     Context);
-                ShowRegistrationMessage("拒绝审核失败，系统已记录本次错误。事件编号：" + eventId, true);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageRejectionFailed, eventId), true);
             }
         }
 
@@ -897,7 +899,7 @@ namespace ASPNET.StarterKit.Portal
             role = null;
             if (allRoles.SelectedItem == null)
             {
-                ShowRegistrationMessage("请选择一个有效角色。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageSelectValidRole, true);
                 return false;
             }
 
@@ -1047,7 +1049,7 @@ namespace ASPNET.StarterKit.Portal
 
             if (EmployeeDirectoryDb == null || !EmployeeDirectoryDb.IsSchemaAvailable())
             {
-                EmployeeBindingText.Text = "P6.3 schema unavailable.";
+                EmployeeBindingText.Text = lang.Admin_Common_MessageP63SchemaUnavailable;
                 return;
             }
 
@@ -1146,7 +1148,7 @@ namespace ASPNET.StarterKit.Portal
 
             if (string.Equals(status, PortalUserProfileStatuses.Disabled, StringComparison.Ordinal) && IsCurrentTargetSelf())
             {
-                ShowRegistrationMessage("不能在当前会话中禁用自己的账号。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageCannotDisableSelf, true);
                 return;
             }
 
@@ -1154,7 +1156,7 @@ namespace ASPNET.StarterKit.Portal
             if (registration != null &&
                 string.Equals(registration.Status, PortalUserRegistrationStatuses.Rejected, StringComparison.Ordinal))
             {
-                ShowRegistrationMessage("该账号的注册申请已拒绝，请先使用批准注册动作恢复。", true);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRegistrationAlreadyRejected, true);
                 return;
             }
 

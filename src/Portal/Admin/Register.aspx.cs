@@ -1,6 +1,8 @@
 using System;
+using System.Globalization;
 using System.Web;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -139,7 +141,7 @@ namespace ASPNET.StarterKit.Portal
                     //   <zh-CN>空密码不进入邀请码、策略或用户创建流程。</zh-CN>
                     //   <en>Do not enter invite, policy, or user-creation flows with an empty password.</en>
                     // </lang>
-                    Message.Text = "'Password' and 'Confirm Password' must not be left blank.";
+                    Message.Text = lang.Admin_Register_MessagePasswordBlank;
                     return;
                 }
 
@@ -149,7 +151,7 @@ namespace ASPNET.StarterKit.Portal
                     //   <zh-CN>确认值比较只在当前进程内完成，失败提示不包含任一密码内容。</zh-CN>
                     //   <en>Compare the confirmation value only in process and never include either password in the failure message.</en>
                     // </lang>
-                    Message.Text = "Password fields do not match.";
+                    Message.Text = lang.Admin_Register_MessagePasswordMismatch;
                     return;
                 }
 
@@ -184,7 +186,7 @@ namespace ASPNET.StarterKit.Portal
                     //   <zh-CN>邀请注册的员工号门禁在创建用户前执行，待绑定兼容开关决定是否允许空值。</zh-CN>
                     //   <en>Apply the invited-registration employee-code gate before user creation; the pending-binding switch decides whether blank is allowed.</en>
                     // </lang>
-                    Message.Text = "Employee Code is required for invitation registration.";
+                    Message.Text = lang.Admin_Register_MessageEmployeeCodeRequired;
                     return;
                 }
 
@@ -218,7 +220,7 @@ namespace ASPNET.StarterKit.Portal
                         "Self-registration failed for userName=" + userName + "; email=" + email,
                         ex,
                         Context);
-                    Message.Text = "Registration failed. The system recorded this error. Event ID: " + eventId;
+                    Message.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_Register_MessageRegistrationFailedWithEventId, eventId);
                     return;
                 }
 
@@ -248,7 +250,7 @@ namespace ASPNET.StarterKit.Portal
                         // </lang>
                         RegisterBtn.Visible = false;
                         Message.CssClass = "Normal";
-                        Message.Text = "Registration submitted. Please wait for administrator approval.";
+                        Message.Text = lang.Admin_Register_MessageRegistrationSubmitted;
                         return;
                     }
 
@@ -278,7 +280,7 @@ namespace ASPNET.StarterKit.Portal
                     //   <zh-CN>保持对外提示泛化，避免暴露数据库或邀请码校验细节。</zh-CN>
                     //   <en>Keep the user-facing message generic and avoid exposing database or invite-validation details.</en>
                     // </lang>
-                    Message.Text = "Registration failed. The user name or email may already exist, or registration metadata is not available.";
+                    Message.Text = lang.Admin_Register_MessageRegistrationRejected;
                 }
             }
         }
@@ -429,7 +431,7 @@ namespace ASPNET.StarterKit.Portal
                         "PasswordSubmissionEncryption",
                         "Registration password submission was incomplete: one encrypted password field was missing.",
                         Context);
-                    Message.Text = "密码提交不完整，请刷新页面后重试。";
+                    Message.Text = lang.Admin_Register_MessagePasswordIncomplete;
                     return false;
                 }
 
@@ -460,7 +462,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>解密失败只显示刷新重试提示，绝不回显密文、异常或事件细节。</zh-CN>
                 //   <en>On decryption failure, show only a refresh-and-retry message and never echo ciphertext, exceptions, or event details.</en>
                 // </lang>
-                Message.Text = "密码提交验证失败，请刷新页面后重试。";
+                Message.Text = lang.Admin_Register_MessagePasswordVerifyFailed;
                 return false;
             }
 
@@ -474,7 +476,7 @@ namespace ASPNET.StarterKit.Portal
                     "PasswordSubmissionEncryption",
                     "Registration password was submitted without the required encrypted fields.",
                     Context);
-                Message.Text = "密码提交验证失败，请刷新页面后重试。";
+                Message.Text = lang.Admin_Register_MessagePasswordVerifyFailed;
                 return false;
             }
 

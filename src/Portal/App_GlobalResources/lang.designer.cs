@@ -5767,5 +5767,425 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_TabLayout_MessageTabSettingsSaveFailed", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The role was added to the current user.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The role was added to the current user.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageRoleJoined {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageRoleJoined", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Adding the role failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Adding the role failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageJoinRoleFailed {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageJoinRoleFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid email format; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid email format; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageInvalidEmail {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageInvalidEmail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid login-name format; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid login-name format; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageInvalidLoginName {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageInvalidLoginName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid display-name format; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid display-name format; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageInvalidDisplayName {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageInvalidDisplayName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid nickname format; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid nickname format; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageInvalidNickName {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageInvalidNickName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The two entered passwords do not match; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The two entered passwords do not match; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessagePasswordMismatch {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessagePasswordMismatch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Updating the profile failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Updating the profile failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageProfileUpdateFailed {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageProfileUpdateFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The password submission was incomplete; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The password submission was incomplete; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessagePasswordIncomplete {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessagePasswordIncomplete", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Password submission verification failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Password submission verification failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessagePasswordVerifyFailed {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessagePasswordVerifyFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Password submission verification failed; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Password submission verification failed; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessagePasswordVerifyRejected {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessagePasswordVerifyRejected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration approved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registration approved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageRegistrationApproved {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageRegistrationApproved", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Approving the registration failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Approving the registration failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageApprovalFailed {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageApprovalFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration rejected.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registration rejected.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageRegistrationRejected {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageRegistrationRejected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Rejecting the registration failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Rejecting the registration failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageRejectionFailed {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageRejectionFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a valid role.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select a valid role.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageSelectValidRole {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageSelectValidRole", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細You cannot disable your own account in the current session.</zh-CN>
+        ///   <en>Looks up a localized string similar to: You cannot disable your own account in the current session.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageCannotDisableSelf {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageCannotDisableSelf", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細This account's registration request was rejected; use the approve action to restore it first.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This account's registration request was rejected; use the approve action to restore it first.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageRegistrationAlreadyRejected {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageRegistrationAlreadyRejected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細'Password' and 'Confirm Password' must not be left blank.</zh-CN>
+        ///   <en>Looks up a localized string similar to: 'Password' and 'Confirm Password' must not be left blank.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessagePasswordBlank {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessagePasswordBlank", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Password fields do not match.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Password fields do not match.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessagePasswordMismatch {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessagePasswordMismatch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee Code is required for invitation registration.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee Code is required for invitation registration.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageEmployeeCodeRequired {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageEmployeeCodeRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration failed. The system recorded this error. Event ID: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registration failed. The system recorded this error. Event ID: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageRegistrationFailedWithEventId {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageRegistrationFailedWithEventId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration submitted. Please wait for administrator approval.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registration submitted. Please wait for administrator approval.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageRegistrationSubmitted {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageRegistrationSubmitted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration failed. The user name or email may already exist, or registration metadata is not available.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registration failed. The user name or email may already exist, or registration metadata is not available.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageRegistrationRejected {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageRegistrationRejected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The password submission was incomplete; refresh the page and try again.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The password submission was incomplete; refresh the page and try again.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessagePasswordIncomplete {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessagePasswordIncomplete", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Password submission verification failed; refresh the page and try again.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Password submission verification failed; refresh the page and try again.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessagePasswordVerifyFailed {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessagePasswordVerifyFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Creating the role failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Creating the role failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageCreateFailed {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageCreateFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid role name; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid role name; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageInvalidRoleName {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageInvalidRoleName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細A role with the same name already exists in this portal; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: A role with the same name already exists in this portal; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageDuplicateRoleName {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageDuplicateRoleName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The core administrator role cannot be renamed.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The core administrator role cannot be renamed.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageCoreRoleRenameBlocked {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageCoreRoleRenameBlocked", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Renaming the role failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Renaming the role failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageRenameFailed {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageRenameFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The core administrator role cannot be deleted.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The core administrator role cannot be deleted.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageCoreRoleDeleteBlocked {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageCoreRoleDeleteBlocked", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The role still has members and cannot be deleted.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The role still has members and cannot be deleted.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageRoleHasMembers {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageRoleHasMembers", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The role is still referenced by tabs or modules and cannot be deleted.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The role is still referenced by tabs or modules and cannot be deleted.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageRoleReferenced {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageRoleReferenced", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the role failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Deleting the role failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_MessageDeleteFailed {
+            get {
+                return ResourceManager.GetString("Admin_Roles_MessageDeleteFailed", resourceCulture);
+            }
+        }
     }
 }

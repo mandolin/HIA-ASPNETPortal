@@ -1494,4 +1494,109 @@
   <data name="Admin_TabLayout_MessageTabSettingsSaveFailed" xml:space="preserve">
     <value>Tab 设置保存失败，系统已记录本次错误。事件编号：{0}</value>
   </data>
+  <data name="Admin_ManageUsers_MessageRoleJoined" xml:space="preserve">
+    <value>角色已加入当前用户。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageJoinRoleFailed" xml:space="preserve">
+    <value>加入角色失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageInvalidEmail" xml:space="preserve">
+    <value>邮箱格式无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageInvalidLoginName" xml:space="preserve">
+    <value>登录名格式无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageInvalidDisplayName" xml:space="preserve">
+    <value>显示名格式无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageInvalidNickName" xml:space="preserve">
+    <value>昵称格式无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessagePasswordMismatch" xml:space="preserve">
+    <value>两次输入的密码不一致，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageProfileUpdateFailed" xml:space="preserve">
+    <value>资料更新失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessagePasswordIncomplete" xml:space="preserve">
+    <value>密码提交不完整，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessagePasswordVerifyFailed" xml:space="preserve">
+    <value>密码提交验证失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessagePasswordVerifyRejected" xml:space="preserve">
+    <value>密码提交验证失败，未保存本次修改。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageRegistrationApproved" xml:space="preserve">
+    <value>注册申请已批准。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageApprovalFailed" xml:space="preserve">
+    <value>审核失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageRegistrationRejected" xml:space="preserve">
+    <value>注册申请已拒绝。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageRejectionFailed" xml:space="preserve">
+    <value>拒绝审核失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageSelectValidRole" xml:space="preserve">
+    <value>请选择一个有效角色。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageCannotDisableSelf" xml:space="preserve">
+    <value>不能在当前会话中禁用自己的账号。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageRegistrationAlreadyRejected" xml:space="preserve">
+    <value>该账号的注册申请已拒绝，请先使用批准注册动作恢复。</value>
+  </data>
+  <data name="Admin_Register_MessagePasswordBlank" xml:space="preserve">
+    <value>"密码"与"确认密码"不能为空。</value>
+  </data>
+  <data name="Admin_Register_MessagePasswordMismatch" xml:space="preserve">
+    <value>两次输入的密码不一致。</value>
+  </data>
+  <data name="Admin_Register_MessageEmployeeCodeRequired" xml:space="preserve">
+    <value>邀请注册必须填写员工编号。</value>
+  </data>
+  <data name="Admin_Register_MessageRegistrationFailedWithEventId" xml:space="preserve">
+    <value>注册失败。系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_Register_MessageRegistrationSubmitted" xml:space="preserve">
+    <value>注册申请已提交，请等待管理员审核。</value>
+  </data>
+  <data name="Admin_Register_MessageRegistrationRejected" xml:space="preserve">
+    <value>注册失败。用户名或邮箱可能已存在，或注册元数据不可用。</value>
+  </data>
+  <data name="Admin_Register_MessagePasswordIncomplete" xml:space="preserve">
+    <value>密码提交不完整，请刷新页面后重试。</value>
+  </data>
+  <data name="Admin_Register_MessagePasswordVerifyFailed" xml:space="preserve">
+    <value>密码提交验证失败，请刷新页面后重试。</value>
+  </data>
+  <data name="Admin_Roles_MessageCreateFailed" xml:space="preserve">
+    <value>角色创建失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_Roles_MessageInvalidRoleName" xml:space="preserve">
+    <value>角色名称无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_Roles_MessageDuplicateRoleName" xml:space="preserve">
+    <value>当前门户已存在同名角色，未保存本次修改。</value>
+  </data>
+  <data name="Admin_Roles_MessageCoreRoleRenameBlocked" xml:space="preserve">
+    <value>核心管理员角色不能改名。</value>
+  </data>
+  <data name="Admin_Roles_MessageRenameFailed" xml:space="preserve">
+    <value>角色改名失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_Roles_MessageCoreRoleDeleteBlocked" xml:space="preserve">
+    <value>核心管理员角色不能删除。</value>
+  </data>
+  <data name="Admin_Roles_MessageRoleHasMembers" xml:space="preserve">
+    <value>角色仍包含成员，不能删除。</value>
+  </data>
+  <data name="Admin_Roles_MessageRoleReferenced" xml:space="preserve">
+    <value>角色仍被 Tab 或模块引用，不能删除。</value>
+  </data>
+  <data name="Admin_Roles_MessageDeleteFailed" xml:space="preserve">
+    <value>角色删除失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
 </root>

@@ -1491,4 +1491,109 @@
   <data name="Admin_TabLayout_MessageTabSettingsSaveFailed" xml:space="preserve">
     <value>Saving tab settings failed; the system recorded this error. Event id: {0}</value>
   </data>
+  <data name="Admin_ManageUsers_MessageRoleJoined" xml:space="preserve">
+    <value>The role was added to the current user.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageJoinRoleFailed" xml:space="preserve">
+    <value>Adding the role failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageInvalidEmail" xml:space="preserve">
+    <value>Invalid email format; the change was not saved.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageInvalidLoginName" xml:space="preserve">
+    <value>Invalid login-name format; the change was not saved.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageInvalidDisplayName" xml:space="preserve">
+    <value>Invalid display-name format; the change was not saved.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageInvalidNickName" xml:space="preserve">
+    <value>Invalid nickname format; the change was not saved.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessagePasswordMismatch" xml:space="preserve">
+    <value>The two entered passwords do not match; the change was not saved.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageProfileUpdateFailed" xml:space="preserve">
+    <value>Updating the profile failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessagePasswordIncomplete" xml:space="preserve">
+    <value>The password submission was incomplete; the change was not saved.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessagePasswordVerifyFailed" xml:space="preserve">
+    <value>Password submission verification failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessagePasswordVerifyRejected" xml:space="preserve">
+    <value>Password submission verification failed; the change was not saved.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageRegistrationApproved" xml:space="preserve">
+    <value>Registration approved.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageApprovalFailed" xml:space="preserve">
+    <value>Approving the registration failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageRegistrationRejected" xml:space="preserve">
+    <value>Registration rejected.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageRejectionFailed" xml:space="preserve">
+    <value>Rejecting the registration failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageSelectValidRole" xml:space="preserve">
+    <value>Select a valid role.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageCannotDisableSelf" xml:space="preserve">
+    <value>You cannot disable your own account in the current session.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageRegistrationAlreadyRejected" xml:space="preserve">
+    <value>This account's registration request was rejected; use the approve action to restore it first.</value>
+  </data>
+  <data name="Admin_Register_MessagePasswordBlank" xml:space="preserve">
+    <value>'Password' and 'Confirm Password' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessagePasswordMismatch" xml:space="preserve">
+    <value>Password fields do not match.</value>
+  </data>
+  <data name="Admin_Register_MessageEmployeeCodeRequired" xml:space="preserve">
+    <value>Employee Code is required for invitation registration.</value>
+  </data>
+  <data name="Admin_Register_MessageRegistrationFailedWithEventId" xml:space="preserve">
+    <value>Registration failed. The system recorded this error. Event ID: {0}</value>
+  </data>
+  <data name="Admin_Register_MessageRegistrationSubmitted" xml:space="preserve">
+    <value>Registration submitted. Please wait for administrator approval.</value>
+  </data>
+  <data name="Admin_Register_MessageRegistrationRejected" xml:space="preserve">
+    <value>Registration failed. The user name or email may already exist, or registration metadata is not available.</value>
+  </data>
+  <data name="Admin_Register_MessagePasswordIncomplete" xml:space="preserve">
+    <value>The password submission was incomplete; refresh the page and try again.</value>
+  </data>
+  <data name="Admin_Register_MessagePasswordVerifyFailed" xml:space="preserve">
+    <value>Password submission verification failed; refresh the page and try again.</value>
+  </data>
+  <data name="Admin_Roles_MessageCreateFailed" xml:space="preserve">
+    <value>Creating the role failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_Roles_MessageInvalidRoleName" xml:space="preserve">
+    <value>Invalid role name; the change was not saved.</value>
+  </data>
+  <data name="Admin_Roles_MessageDuplicateRoleName" xml:space="preserve">
+    <value>A role with the same name already exists in this portal; the change was not saved.</value>
+  </data>
+  <data name="Admin_Roles_MessageCoreRoleRenameBlocked" xml:space="preserve">
+    <value>The core administrator role cannot be renamed.</value>
+  </data>
+  <data name="Admin_Roles_MessageRenameFailed" xml:space="preserve">
+    <value>Renaming the role failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_Roles_MessageCoreRoleDeleteBlocked" xml:space="preserve">
+    <value>The core administrator role cannot be deleted.</value>
+  </data>
+  <data name="Admin_Roles_MessageRoleHasMembers" xml:space="preserve">
+    <value>The role still has members and cannot be deleted.</value>
+  </data>
+  <data name="Admin_Roles_MessageRoleReferenced" xml:space="preserve">
+    <value>The role is still referenced by tabs or modules and cannot be deleted.</value>
+  </data>
+  <data name="Admin_Roles_MessageDeleteFailed" xml:space="preserve">
+    <value>Deleting the role failed; the system recorded this error. Event id: {0}</value>
+  </data>
 </root>
