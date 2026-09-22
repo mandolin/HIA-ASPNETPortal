@@ -926,6 +926,18 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Module Catalog</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The selected module package is deployed, but it is not allowed by active module profile '{0}'.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The selected module package is deployed, but it is not allowed by active module profile '{0}'.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_MessagePackageNotAllowedByProfile {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_MessagePackageNotAllowedByProfile", resourceCulture);
+            }
+        }
+
         internal static string Admin_ModuleCatalog_Title {
             get {
                 return ResourceManager.GetString("Admin_ModuleCatalog_Title", resourceCulture);
@@ -5954,6 +5966,102 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Employee save failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Maintain employee master data used by directory, binding, and profile workflows.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Maintain employee master data used by directory, binding, and profile workflows.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Profile</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee Profile</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_SectionEmployeeProfile {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_SectionEmployeeProfile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Preferred Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Preferred Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_LabelPreferredName {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_LabelPreferredName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Joined UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Joined UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_LabelJoinedUtc {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_LabelJoinedUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Left UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Left UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_LabelLeftUtc {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_LabelLeftUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Source System</zh-CN>
+        ///   <en>Looks up a localized string similar to: Source System</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_LabelSourceSystem {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_LabelSourceSystem", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Save</zh-CN>
+        ///   <en>Looks up a localized string similar to: Save</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_ButtonSave {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_ButtonSave", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：(none)</zh-CN>
+        ///   <en>Looks up a localized string similar to: (none)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_OptionNone {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_OptionNone", resourceCulture);
+            }
+        }
+
         internal static string Admin_EmployeeEdit_MessageSaveFailed {
             get {
                 return ResourceManager.GetString("Admin_EmployeeEdit_MessageSaveFailed", resourceCulture);

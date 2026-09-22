@@ -282,6 +282,9 @@
   <data name="Admin_SystemHealth_ColumnRestart" xml:space="preserve">
     <value>需重启</value>
   </data>
+  <data name="Admin_ModuleCatalog_MessagePackageNotAllowedByProfile" xml:space="preserve">
+    <value>所选模块包已部署，但当前生效的模块配置不允许它：'{0}'。</value>
+  </data>
   <data name="Admin_ModuleCatalog_Title" xml:space="preserve">
     <value>模块包目录</value>
   </data>
@@ -1538,6 +1541,30 @@
   </data>
   <data name="Admin_Common_MessageP63SchemaUnavailable" xml:space="preserve">
     <value>P6.3 schema 不可用。</value>
+  </data>
+  <data name="Admin_EmployeeEdit_Subtitle" xml:space="preserve">
+    <value>维护员工主数据，供员工目录、绑定与资料流程使用。</value>
+  </data>
+  <data name="Admin_EmployeeEdit_SectionEmployeeProfile" xml:space="preserve">
+    <value>员工资料</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelPreferredName" xml:space="preserve">
+    <value>常用名</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelJoinedUtc" xml:space="preserve">
+    <value>入职时间（UTC）</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelLeftUtc" xml:space="preserve">
+    <value>离职时间（UTC）</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelSourceSystem" xml:space="preserve">
+    <value>来源系统</value>
+  </data>
+  <data name="Admin_EmployeeEdit_ButtonSave" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Admin_EmployeeEdit_OptionNone" xml:space="preserve">
+    <value>（无）</value>
   </data>
   <data name="Admin_EmployeeEdit_MessageSaveFailed" xml:space="preserve">
     <value>员工保存失败，系统已记录本次错误。事件编号：{0}</value>

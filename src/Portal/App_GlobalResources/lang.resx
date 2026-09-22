@@ -282,6 +282,9 @@
   <data name="Admin_SystemHealth_ColumnRestart" xml:space="preserve">
     <value>Restart</value>
   </data>
+  <data name="Admin_ModuleCatalog_MessagePackageNotAllowedByProfile" xml:space="preserve">
+    <value>The selected module package is deployed, but it is not allowed by active module profile '{0}'.</value>
+  </data>
   <data name="Admin_ModuleCatalog_Title" xml:space="preserve">
     <value>Module Catalog</value>
   </data>
@@ -1538,6 +1541,30 @@
   </data>
   <data name="Admin_Common_MessageP63SchemaUnavailable" xml:space="preserve">
     <value>P6.3 schema is unavailable.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_Subtitle" xml:space="preserve">
+    <value>Maintain employee master data used by directory, binding, and profile workflows.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_SectionEmployeeProfile" xml:space="preserve">
+    <value>Employee Profile</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelPreferredName" xml:space="preserve">
+    <value>Preferred Name</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelJoinedUtc" xml:space="preserve">
+    <value>Joined UTC</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelLeftUtc" xml:space="preserve">
+    <value>Left UTC</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelSourceSystem" xml:space="preserve">
+    <value>Source System</value>
+  </data>
+  <data name="Admin_EmployeeEdit_ButtonSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Admin_EmployeeEdit_OptionNone" xml:space="preserve">
+    <value>(none)</value>
   </data>
   <data name="Admin_EmployeeEdit_MessageSaveFailed" xml:space="preserve">
     <value>Employee save failed; the system recorded this error. Event id: {0}</value>

@@ -139,8 +139,10 @@ namespace ASPNET.StarterKit.Portal
                 !profile.IsPackageAllowed(package.PackageId))
             {
                 ShowMessage(
-                    "The selected module package is deployed, but it is not allowed by active module profile '" +
-                    profile.ActiveProfile + "'.");
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        lang.Admin_ModuleCatalog_MessagePackageNotAllowedByProfile,
+                        profile.ActiveProfile));
                 BindPackages();
                 return;
             }

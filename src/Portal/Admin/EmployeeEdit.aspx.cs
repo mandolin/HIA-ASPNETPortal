@@ -285,7 +285,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Clear old options and retain an empty sentinel so “no organization” is distinct from any organization identifier.</en>
             // </lang>
             OrganizationUnitList.Items.Clear();
-            OrganizationUnitList.Items.Add(new ListItem("(none)", string.Empty));
+            OrganizationUnitList.Items.Add(new ListItem(lang.Admin_EmployeeEdit_OptionNone, string.Empty));
 
             // <lang>
             //   <zh-CN>查询包含停用组织但限制最多 500 条；这是修复历史记录的候选集，不是权限或循环校验。</zh-CN>

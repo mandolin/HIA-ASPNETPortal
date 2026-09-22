@@ -22,12 +22,12 @@
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
                 <asp:Label ID="TitleLabel" CssClass="Head portal-admin-title" runat="server" />
-                <p class="Normal portal-admin-subtitle">Maintain employee master data used by directory, binding, and profile workflows.</p>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_EmployeeEdit_Subtitle %></p>
             </div>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                <a class="CommandButton" href="OrganizationUnitEdit.aspx">New Organization Unit</a>
-                <a class="CommandButton" href="UserEmployeeBindingEdit.aspx">Bind User/Employee</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_EmployeeDirectory_Title %></a>
+                <a class="CommandButton" href="OrganizationUnitEdit.aspx"><%= lang.Admin_EmployeeDirectory_LinkNewOrganizationUnit %></a>
+                <a class="CommandButton" href="UserEmployeeBindingEdit.aspx"><%= lang.Admin_EmployeeDirectory_LinkBindUserEmployee %></a>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Employee Profile</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_EmployeeEdit_SectionEmployeeProfile %></h2>
             </div>
             <%--
               <lang>
@@ -53,39 +53,39 @@
             --%>
             <div class="portal-form-grid">
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Employee Code</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></span>
                     <asp:TextBox ID="EmployeeCodeTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="64" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Display Name</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_LabelDisplayName %></span>
                     <asp:TextBox ID="DisplayNameTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="150" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Preferred Name</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeEdit_LabelPreferredName %></span>
                     <asp:TextBox ID="PreferredNameTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="100" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Work Email</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeDirectory_ColumnWorkEmail %></span>
                     <asp:TextBox ID="WorkEmailTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="256" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Organization</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeDirectory_ColumnOrganization %></span>
                     <asp:DropDownList ID="OrganizationUnitList" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Status</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_SystemHealth_ColumnStatus %></span>
                     <asp:DropDownList ID="EmploymentStatusList" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Joined UTC</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeEdit_LabelJoinedUtc %></span>
                     <asp:TextBox ID="JoinedUtcTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="25" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Left UTC</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeEdit_LabelLeftUtc %></span>
                     <asp:TextBox ID="LeftUtcTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="25" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Source System</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeEdit_LabelSourceSystem %></span>
                     <asp:TextBox ID="SourceSystemTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="80" runat="server" />
                 </div>
             </div>
@@ -99,11 +99,11 @@
                 <asp:LinkButton
                     ID="SaveButton"
                     CssClass="CommandButton portal-primary-action"
-                    Text="Save"
+                    Text="<%$ Resources:lang,Admin_EmployeeEdit_ButtonSave %>"
                     CausesValidation="False"
                     OnClick="SaveButton_Click"
                     runat="server" />
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Cancel</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_ModuleDefinitions_ButtonCancel %></a>
             </div>
         </div>
     </div>

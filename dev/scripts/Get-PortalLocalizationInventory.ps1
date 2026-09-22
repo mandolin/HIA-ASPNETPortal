@@ -29,6 +29,12 @@
     #       - 技术令牌（形如 Business.Collaboration.Handle 的点号标识符、module.json 之类的文件名）：
     #         它们是数据/文件名而非面向用户的文案，属性侧与元素侧一律剔除。
     #
+    #     已知误报类（**须人工剔除，不得计入交付**）：
+    #       - 作为数据载体的控件文本。典型例子：`SourceSystemTextBox.Text = "Portal";`
+    #         写入的是"来源系统代码值"，属员工记录的数据而非界面文案；一旦本地化就会污染数据。
+    #         本工具无法从语法上区分"赋给控件的文案"与"赋给控件的数据值"，故此类须由人工判定。
+    #         实测：Admin 区曾出现的 1 处代码侧命中即属此类。
+    #
     #     因此本口径得到的数字与早期记录的"124 处"**定义不同，不可相加**：早期清单偏向"硬编码中文"，
     #     本口径偏向"字面量文案（不分语种）"。
     #   </zh-CN>
@@ -59,6 +65,13 @@
     #       - Technical tokens (dotted identifiers such as Business.Collaboration.Handle, file names such as
     #         module.json): data or file names rather than user-facing copy, removed on both the attribute and
     #         element sides.
+    #
+    #     Known false-positive class (must be removed by hand and never counted as deliverable work):
+    #       - Control text used as a data carrier. Canonical example: `SourceSystemTextBox.Text = "Portal";`
+    #         writes a source-system code value, which is employee-record data rather than UI copy; localizing it
+    #         would corrupt data. The tool cannot distinguish by syntax between copy assigned to a control and a
+    #         data value assigned to a control, so this class requires human judgement. In practice one such
+    #         code-side hit occurred in the Admin area.
     #
     #     The resulting number therefore has a different definition from the earlier "124 sites" record and the two
     #     must not be added together: the earlier list leaned toward hard-coded Chinese, this one toward literal
