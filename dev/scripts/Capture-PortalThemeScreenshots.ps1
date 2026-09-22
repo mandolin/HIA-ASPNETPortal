@@ -332,21 +332,25 @@ ORDER BY
             $targets = New-Object 'System.Collections.Generic.List[object]'
             while ($reader.Read()) {
                 $sourceFile = $reader.GetString(3)
+                # <lang>
+                #   <zh-CN>scrollText 必须与“运行期实际渲染的语言”一致：这些页头标题已改为资源驱动并随请求语言切换，而截图浏览器上下文固定 locale=zh-CN（应用据此切换界面语言），故期望文本为中文。若把 scrollText 写回英文，这五项目标会因找不到文本而超时失败。</zh-CN>
+                #   <en>scrollText must match the language actually rendered at run time: these page titles are resource-driven and follow the request language, while the capture browser context pins locale=zh-CN (which is what drives the app's language switch), so the expected text is Chinese. Writing English back here makes these five targets time out because no matching text exists.</en>
+                # </lang>
                 $targetMeta = switch ($sourceFile) {
                     'Admin/ModuleDefs.ascx' {
-                        @{ id = 'admin-legacy-module-defs'; title = '旧模块定义 ASCX'; scrollText = 'Legacy Module Definitions' }
+                        @{ id = 'admin-legacy-module-defs'; title = '旧模块定义 ASCX'; scrollText = '旧版模块定义' }
                     }
                     'Admin/SiteSettings.ascx' {
-                        @{ id = 'admin-legacy-site-settings'; title = '旧站点设置 ASCX'; scrollText = 'Legacy Site Settings' }
+                        @{ id = 'admin-legacy-site-settings'; title = '旧站点设置 ASCX'; scrollText = '旧版站点设置' }
                     }
                     'Admin/Tabs.ascx' {
-                        @{ id = 'admin-legacy-tabs'; title = '旧 Tab 管理 ASCX'; scrollText = 'Legacy Tab Administration' }
+                        @{ id = 'admin-legacy-tabs'; title = '旧 Tab 管理 ASCX'; scrollText = '旧版页签管理' }
                     }
                     'Admin/Roles.ascx' {
-                        @{ id = 'admin-legacy-roles'; title = '旧角色管理 ASCX'; scrollText = 'Legacy Role Administration' }
+                        @{ id = 'admin-legacy-roles'; title = '旧角色管理 ASCX'; scrollText = '旧版角色管理' }
                     }
                     'Admin/Users.ascx' {
-                        @{ id = 'admin-legacy-users'; title = '旧用户入口 ASCX'; scrollText = 'Legacy User Entry' }
+                        @{ id = 'admin-legacy-users'; title = '旧用户入口 ASCX'; scrollText = '旧版用户入口' }
                     }
                     default {
                         $null
