@@ -306,6 +306,35 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>重定向到普通访问拒绝页，并避免 <see cref="HttpResponse.End"/> 造成线程中止。</zh-CN>
+        ///   <en>Redirects to the general access-denied page while avoiding the thread abort caused by <see cref="HttpResponse.End"/>.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前 HTTP 上下文。</zh-CN>
+        ///   <en>Current HTTP context.</en>
+        /// </l>
+        /// </param>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>调用方必须自行结束当前流程：本方法使用 `endResponse: false` 并调用 `CompleteRequest`，不会像默认 `Response.Redirect` 那样抛出线程中止异常，因此调用点的后续语句仍会执行，需要显式 `return`。该出口取代页面对 `~/Admin/AccessDenied.aspx` 的硬编码重定向。</zh-CN>
+        ///   <en>Callers must end their own flow: this method uses `endResponse: false` and calls `CompleteRequest`, so unlike the default `Response.Redirect` it does not throw a thread-abort exception and subsequent statements at the call site still run, requiring an explicit `return`. This exit replaces hardcoded redirects to `~/Admin/AccessDenied.aspx`.</en>
+        /// </lang>
+        /// </remarks>
+        public static void RedirectToAccessDenied(HttpContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            context.Response.Redirect("~/Admin/AccessDenied.aspx", false);
+            context.ApplicationInstance.CompleteRequest();
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>尝试读取正整数请求参数。</zh-CN>
         ///   <en>Attempts to read a positive integer request parameter.</en>
         /// </lang>

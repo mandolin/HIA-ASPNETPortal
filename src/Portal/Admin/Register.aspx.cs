@@ -56,7 +56,12 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (!PortalRegistrationOptions.AllowSelfRegistration)
             {
-                Response.Redirect("~/Admin/AccessDenied.aspx");
+                // <lang>
+                //   <zh-CN>拒绝出口统一走集中策略；该策略不抛线程中止异常，因此必须显式 return，避免开关关闭后继续执行后续逻辑。</zh-CN>
+                //   <en>The denial exit now goes through the centralized policy; because that policy does not throw a thread-abort exception, an explicit return is required so later logic does not run once the switch is disabled.</en>
+                // </lang>
+                PortalNavigationPolicy.RedirectToAccessDenied(Context);
+                return;
             }
 
             // <lang>
@@ -92,7 +97,12 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (!PortalRegistrationOptions.AllowSelfRegistration)
             {
-                Response.Redirect("~/Admin/AccessDenied.aspx");
+                // <lang>
+                //   <zh-CN>拒绝出口统一走集中策略；该策略不抛线程中止异常，因此必须显式 return，避免开关关闭后继续执行后续逻辑。</zh-CN>
+                //   <en>The denial exit now goes through the centralized policy; because that policy does not throw a thread-abort exception, an explicit return is required so later logic does not run once the switch is disabled.</en>
+                // </lang>
+                PortalNavigationPolicy.RedirectToAccessDenied(Context);
+                return;
             }
 
             // <lang>

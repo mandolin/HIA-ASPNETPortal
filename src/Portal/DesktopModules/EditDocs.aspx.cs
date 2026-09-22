@@ -448,8 +448,11 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private void RedirectToEditAccessDenied()
         {
-            Response.Redirect("~/Admin/EditAccessDenied.aspx", false);
-            Context.ApplicationInstance.CompleteRequest();
+            // <lang>
+            //   <zh-CN>收敛为集中拒绝出口：此前本方法自带目标 URL 字面量，构成页面级旁路；现委托 PortalNavigationPolicy，调用点与 `false` + CompleteRequest 的既有行为均不变。</zh-CN>
+            //   <en>Converged onto the centralized denial exit: this method previously carried its own target URL literal as a page-level bypass; it now delegates to PortalNavigationPolicy while keeping the call sites and the existing `false` + CompleteRequest behavior unchanged.</en>
+            // </lang>
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
         }
 
         /// <summary>

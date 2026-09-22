@@ -59,7 +59,12 @@ namespace ASPNET.StarterKit.Portal
             // 确保访问用户有权限访问当前页面
             if (!PortalSecurity.IsInRoles(portalSettings.ActiveTab.AuthorizedRoles))
             {
-                Response.Redirect("~/Admin/AccessDenied.aspx");
+                // <lang>
+                //   <zh-CN>拒绝出口统一走集中策略；该策略不抛线程中止异常，因此必须显式 return，避免无权用户继续触发后续模块注入。</zh-CN>
+                //   <en>The denial exit now goes through the centralized policy; because that policy does not throw a thread-abort exception, an explicit return is required so an unauthorized user cannot continue into later module injection.</en>
+                // </lang>
+                PortalNavigationPolicy.RedirectToAccessDenied(Context);
+                return;
             }
 
             // Dynamically inject a signin login module into the top left-hand corner
