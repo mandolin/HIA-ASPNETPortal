@@ -636,6 +636,27 @@
   <data name="EditLinks_Heading" xml:space="preserve">
     <value>链接详情</value>
   </data>
+  <data name="EditEvents_MessageInvalidExpirationDate" xml:space="preserve">
+    <value>请输入有效的到期日期。</value>
+  </data>
+  <data name="EditEvents_Heading" xml:space="preserve">
+    <value>事件详情</value>
+  </data>
+  <data name="EditEvents_LabelWhereWhen" xml:space="preserve">
+    <value>时间地点</value>
+  </data>
+  <data name="EditEvents_LabelExpires" xml:space="preserve">
+    <value>过期时间</value>
+  </data>
+  <data name="EditEvents_MessageValidDescription" xml:space="preserve">
+    <value>必须填写有效的说明</value>
+  </data>
+  <data name="EditEvents_MessageValidTimeLocation" xml:space="preserve">
+    <value>必须填写有效的时间／地点</value>
+  </data>
+  <data name="EditEvents_MessageValidExpirationDate" xml:space="preserve">
+    <value>必须填写有效的过期日期</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
   </data>

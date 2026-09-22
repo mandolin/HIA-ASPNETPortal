@@ -636,6 +636,27 @@
   <data name="EditLinks_Heading" xml:space="preserve">
     <value>Link Details</value>
   </data>
+  <data name="EditEvents_MessageInvalidExpirationDate" xml:space="preserve">
+    <value>Enter a valid expiration date.</value>
+  </data>
+  <data name="EditEvents_Heading" xml:space="preserve">
+    <value>Event Details</value>
+  </data>
+  <data name="EditEvents_LabelWhereWhen" xml:space="preserve">
+    <value>Where/When</value>
+  </data>
+  <data name="EditEvents_LabelExpires" xml:space="preserve">
+    <value>Expires</value>
+  </data>
+  <data name="EditEvents_MessageValidDescription" xml:space="preserve">
+    <value>You Must Enter a Valid Description</value>
+  </data>
+  <data name="EditEvents_MessageValidTimeLocation" xml:space="preserve">
+    <value>You Must Enter a Valid Time/Location</value>
+  </data>
+  <data name="EditEvents_MessageValidExpirationDate" xml:space="preserve">
+    <value>You Must Enter a Valid Expiration Date</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>

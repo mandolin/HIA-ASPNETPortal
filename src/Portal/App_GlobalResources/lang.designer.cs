@@ -2348,6 +2348,90 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Event Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Event Details</en>
+        /// </lang>
+        /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a valid expiration date.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter a valid expiration date.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditEvents_MessageInvalidExpirationDate {
+            get {
+                return ResourceManager.GetString("EditEvents_MessageInvalidExpirationDate", resourceCulture);
+            }
+        }
+
+        internal static string EditEvents_Heading {
+            get {
+                return ResourceManager.GetString("EditEvents_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Where/When</zh-CN>
+        ///   <en>Looks up a localized string similar to: Where/When</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditEvents_LabelWhereWhen {
+            get {
+                return ResourceManager.GetString("EditEvents_LabelWhereWhen", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Expires</zh-CN>
+        ///   <en>Looks up a localized string similar to: Expires</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditEvents_LabelExpires {
+            get {
+                return ResourceManager.GetString("EditEvents_LabelExpires", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You Must Enter a Valid Description</zh-CN>
+        ///   <en>Looks up a localized string similar to: You Must Enter a Valid Description</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditEvents_MessageValidDescription {
+            get {
+                return ResourceManager.GetString("EditEvents_MessageValidDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You Must Enter a Valid Time/Location</zh-CN>
+        ///   <en>Looks up a localized string similar to: You Must Enter a Valid Time/Location</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditEvents_MessageValidTimeLocation {
+            get {
+                return ResourceManager.GetString("EditEvents_MessageValidTimeLocation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You Must Enter a Valid Expiration Date</zh-CN>
+        ///   <en>Looks up a localized string similar to: You Must Enter a Valid Expiration Date</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditEvents_MessageValidExpirationDate {
+            get {
+                return ResourceManager.GetString("EditEvents_MessageValidExpirationDate", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

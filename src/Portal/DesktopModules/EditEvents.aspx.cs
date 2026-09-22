@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -151,7 +152,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>旧页面仍用当前文化解析日期；失败时只显示低敏校验提示，不暴露服务器区域性或异常细节。</zh-CN>
                 //   <en>The legacy page still parses dates using current culture; failures show only a low-sensitivity validation message without exposing server culture or exception details.</en>
                 // </lang>
-                ShowValidationMessage("请输入有效的到期日期。");
+                ShowValidationMessage(lang.EditEvents_MessageInvalidExpirationDate);
                 return;
             }
 
