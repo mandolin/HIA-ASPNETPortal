@@ -1440,4 +1440,55 @@
   <data name="Admin_Users_MessageBindFailed" xml:space="preserve">
     <value>Data binding failed; the system recorded this error. Event id: {0}</value>
   </data>
+  <data name="Admin_Common_MessageP63SchemaUnavailable" xml:space="preserve">
+    <value>P6.3 schema is unavailable.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageSaveFailed" xml:space="preserve">
+    <value>Employee save failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_EmployeeEdit_TitleNew" xml:space="preserve">
+    <value>New Employee</value>
+  </data>
+  <data name="Admin_EmployeeEdit_TitleEdit" xml:space="preserve">
+    <value>Edit Employee: {0}</value>
+  </data>
+  <data name="Admin_EmployeeEdit_TitlePage" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageSaveFailed" xml:space="preserve">
+    <value>Organization unit save failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_TitleNew" xml:space="preserve">
+    <value>New Organization Unit</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_TitleEdit" xml:space="preserve">
+    <value>Edit Organization Unit: {0}</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_TitlePage" xml:space="preserve">
+    <value>Organization Unit</value>
+  </data>
+  <data name="Admin_TabLayout_MessageInvalidModuleName" xml:space="preserve">
+    <value>Invalid module name; the module was not created.</value>
+  </data>
+  <data name="Admin_TabLayout_MessageModuleCreateFailed" xml:space="preserve">
+    <value>Creating the module failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_TabLayout_MessageModuleReorderFailed" xml:space="preserve">
+    <value>Reordering modules failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_TabLayout_MessageModuleMoveFailed" xml:space="preserve">
+    <value>Moving the module failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_TabLayout_MessageModuleDeleteFailed" xml:space="preserve">
+    <value>Deleting the module failed; the system recorded this error. Event id: {0}</value>
+  </data>
+  <data name="Admin_TabLayout_MessageInvalidTabName" xml:space="preserve">
+    <value>Invalid tab name; the change was not saved.</value>
+  </data>
+  <data name="Admin_TabLayout_MessageCoreTabRenameBlocked" xml:space="preserve">
+    <value>The core Admin tab cannot be renamed.</value>
+  </data>
+  <data name="Admin_TabLayout_MessageTabSettingsSaveFailed" xml:space="preserve">
+    <value>Saving tab settings failed; the system recorded this error. Event id: {0}</value>
+  </data>
 </root>

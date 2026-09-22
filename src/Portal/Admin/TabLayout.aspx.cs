@@ -1,9 +1,11 @@
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -227,7 +229,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(moduleTitle.Text, 150, out title))
             {
-                ShowMessage("模块名称无效，未创建模块。");
+                ShowMessage(lang.Admin_TabLayout_MessageInvalidModuleName);
                 return;
             }
 
@@ -272,7 +274,7 @@ namespace ASPNET.StarterKit.Portal
                     "Adding a module instance failed. TabId=" + tabId,
                     exception,
                     Context);
-                ShowMessage("模块创建失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleCreateFailed, eventId));
             }
         }
 
@@ -367,7 +369,7 @@ namespace ASPNET.StarterKit.Portal
                     "Ordering a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
                     exception,
                     Context);
-                ShowMessage("模块排序失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleReorderFailed, eventId));
             }
         }
 
@@ -460,7 +462,7 @@ namespace ASPNET.StarterKit.Portal
                     "Moving a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
                     exception,
                     Context);
-                ShowMessage("模块移动失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleMoveFailed, eventId));
             }
         }
 
@@ -669,7 +671,7 @@ namespace ASPNET.StarterKit.Portal
                     "Deleting a module failed. TabId=" + tabId + "; ModuleId=" + selectedModule.ModuleId,
                     exception,
                     Context);
-                ShowMessage("模块删除失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageModuleDeleteFailed, eventId));
             }
         }
 
@@ -736,7 +738,7 @@ namespace ASPNET.StarterKit.Portal
             if (!PortalAdministrationPolicy.TryNormalizeRequiredSingleLineText(tabName.Text, 150, out normalizedTabName) ||
                 !PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(mobileTabName.Text, 150, out normalizedMobileTabName))
             {
-                ShowMessage("Tab 名称无效，未保存本次修改。");
+                ShowMessage(lang.Admin_TabLayout_MessageInvalidTabName);
                 return false;
             }
 
@@ -747,7 +749,7 @@ namespace ASPNET.StarterKit.Portal
             if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(currentTab.TabName) &&
                 !string.Equals(currentTab.TabName, normalizedTabName, StringComparison.Ordinal))
             {
-                ShowMessage("核心后台 Tab 不能改名。");
+                ShowMessage(lang.Admin_TabLayout_MessageCoreTabRenameBlocked);
                 return false;
             }
 
@@ -793,7 +795,7 @@ namespace ASPNET.StarterKit.Portal
                     "Saving Tab settings failed. TabId=" + tabId,
                     exception,
                     Context);
-                ShowMessage("Tab 设置保存失败，系统已记录本次错误。事件编号：" + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_TabLayout_MessageTabSettingsSaveFailed, eventId));
                 return false;
             }
         }

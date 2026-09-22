@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -106,7 +107,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (EmployeeDirectoryAdminDb == null || !EmployeeDirectoryAdminDb.IsSchemaAvailable())
             {
-                ShowMessage("P6.3 schema is unavailable.");
+                ShowMessage(lang.Admin_Common_MessageP63SchemaUnavailable);
                 return;
             }
 
@@ -178,7 +179,7 @@ namespace ASPNET.StarterKit.Portal
                     "Saving employee failed. EmployeeId=" + request.EmployeeId,
                     exception,
                     Context);
-                ShowMessage("Employee save failed. Event id: " + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_EmployeeEdit_MessageSaveFailed, eventId));
             }
         }
 
@@ -224,7 +225,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>新增员工时不生成工号或姓名默认值，避免页面层创造业务标识；实际内容由管理员明确输入。</zh-CN>
                 //   <en>New employees do not receive generated employee-code or name defaults at the page layer; administrators must enter business identifiers explicitly.</en>
                 // </lang>
-                TitleLabel.Text = "New Employee";
+                TitleLabel.Text = lang.Admin_EmployeeEdit_TitleNew;
                 EmployeeIdField.Value = "0";
                 OriginalUpdatedUtcField.Value = string.Empty;
                 SourceSystemTextBox.Text = "Portal";
@@ -247,7 +248,7 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            TitleLabel.Text = "Edit Employee: " + Server.HtmlEncode(employee.DisplayName);
+            TitleLabel.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_EmployeeEdit_TitleEdit, Server.HtmlEncode(employee.DisplayName));
             EmployeeIdField.Value = employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
             OriginalUpdatedUtcField.Value = FormatRoundTripUtc(employee.UpdatedUtc);
             EmployeeCodeTextBox.Text = employee.EmployeeCode;
@@ -689,7 +690,7 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>禁用所有会改变员工主数据的控件；只保留低敏提示，不清空已加载的只读上下文。</zh-CN>
             //   <en>Disable every control that could change employee master data while retaining the loaded read-only context and a low-sensitivity message.</en>
             // </lang>
-            TitleLabel.Text = "Employee";
+            TitleLabel.Text = lang.Admin_EmployeeEdit_TitlePage;
             SaveButton.Enabled = false;
             EmployeeCodeTextBox.Enabled = false;
             DisplayNameTextBox.Enabled = false;

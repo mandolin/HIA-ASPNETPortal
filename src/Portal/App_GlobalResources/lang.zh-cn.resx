@@ -1443,4 +1443,55 @@
   <data name="Admin_Users_MessageBindFailed" xml:space="preserve">
     <value>数据绑定失败，系统已记录本次错误。事件编号：{0}</value>
   </data>
+  <data name="Admin_Common_MessageP63SchemaUnavailable" xml:space="preserve">
+    <value>P6.3 schema 不可用。</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageSaveFailed" xml:space="preserve">
+    <value>员工保存失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_EmployeeEdit_TitleNew" xml:space="preserve">
+    <value>新建员工</value>
+  </data>
+  <data name="Admin_EmployeeEdit_TitleEdit" xml:space="preserve">
+    <value>编辑员工：{0}</value>
+  </data>
+  <data name="Admin_EmployeeEdit_TitlePage" xml:space="preserve">
+    <value>员工</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageSaveFailed" xml:space="preserve">
+    <value>组织单元保存失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_TitleNew" xml:space="preserve">
+    <value>新建组织单元</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_TitleEdit" xml:space="preserve">
+    <value>编辑组织单元：{0}</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_TitlePage" xml:space="preserve">
+    <value>组织单元</value>
+  </data>
+  <data name="Admin_TabLayout_MessageInvalidModuleName" xml:space="preserve">
+    <value>模块名称无效，未创建模块。</value>
+  </data>
+  <data name="Admin_TabLayout_MessageModuleCreateFailed" xml:space="preserve">
+    <value>模块创建失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_TabLayout_MessageModuleReorderFailed" xml:space="preserve">
+    <value>模块排序失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_TabLayout_MessageModuleMoveFailed" xml:space="preserve">
+    <value>模块移动失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_TabLayout_MessageModuleDeleteFailed" xml:space="preserve">
+    <value>模块删除失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
+  <data name="Admin_TabLayout_MessageInvalidTabName" xml:space="preserve">
+    <value>Tab 名称无效，未保存本次修改。</value>
+  </data>
+  <data name="Admin_TabLayout_MessageCoreTabRenameBlocked" xml:space="preserve">
+    <value>核心后台 Tab 不能改名。</value>
+  </data>
+  <data name="Admin_TabLayout_MessageTabSettingsSaveFailed" xml:space="preserve">
+    <value>Tab 设置保存失败，系统已记录本次错误。事件编号：{0}</value>
+  </data>
 </root>

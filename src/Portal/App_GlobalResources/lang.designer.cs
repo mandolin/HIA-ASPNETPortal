@@ -5563,5 +5563,209 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_Users_MessageBindFailed", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 schema is unavailable.</zh-CN>
+        ///   <en>Looks up a localized string similar to: P6.3 schema is unavailable.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Common_MessageP63SchemaUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_Common_MessageP63SchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee save failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee save failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_MessageSaveFailed {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_MessageSaveFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細New Employee</zh-CN>
+        ///   <en>Looks up a localized string similar to: New Employee</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_TitleNew {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_TitleNew", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Edit Employee: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit Employee: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_TitleEdit {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_TitleEdit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_TitlePage {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_TitlePage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Organization unit save failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization unit save failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_MessageSaveFailed {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageSaveFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細New Organization Unit</zh-CN>
+        ///   <en>Looks up a localized string similar to: New Organization Unit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_TitleNew {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_TitleNew", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Edit Organization Unit: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit Organization Unit: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_TitleEdit {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_TitleEdit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Organization Unit</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization Unit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_TitlePage {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_TitlePage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid module name; the module was not created.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid module name; the module was not created.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageInvalidModuleName {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageInvalidModuleName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Creating the module failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Creating the module failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageModuleCreateFailed {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageModuleCreateFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Reordering modules failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reordering modules failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageModuleReorderFailed {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageModuleReorderFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Moving the module failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Moving the module failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageModuleMoveFailed {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageModuleMoveFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the module failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Deleting the module failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageModuleDeleteFailed {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageModuleDeleteFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid tab name; the change was not saved.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid tab name; the change was not saved.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageInvalidTabName {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageInvalidTabName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The core Admin tab cannot be renamed.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The core Admin tab cannot be renamed.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageCoreTabRenameBlocked {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageCoreTabRenameBlocked", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Saving tab settings failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Saving tab settings failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageTabSettingsSaveFailed {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageTabSettingsSaveFailed", resourceCulture);
+            }
+        }
     }
 }

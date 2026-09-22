@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -90,7 +91,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (EmployeeDirectoryAdminDb == null || !EmployeeDirectoryAdminDb.IsSchemaAvailable())
             {
-                ShowMessage("P6.3 schema is unavailable.");
+                ShowMessage(lang.Admin_Common_MessageP63SchemaUnavailable);
                 return;
             }
 
@@ -162,7 +163,7 @@ namespace ASPNET.StarterKit.Portal
                     "Saving organization unit failed. OrganizationUnitId=" + request.OrganizationUnitId,
                     exception,
                     Context);
-                ShowMessage("Organization unit save failed. Event id: " + eventId);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_OrganizationUnitEdit_MessageSaveFailed, eventId));
             }
         }
 
@@ -207,7 +208,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>新增组织不自动生成编码或名称，避免页面层创造业务标识；管理员必须明确录入。</zh-CN>
                 //   <en>New organizations do not receive generated codes or names at the page layer; administrators must enter business identifiers explicitly.</en>
                 // </lang>
-                TitleLabel.Text = "New Organization Unit";
+                TitleLabel.Text = lang.Admin_OrganizationUnitEdit_TitleNew;
                 OrganizationUnitIdField.Value = "0";
                 OriginalUpdatedUtcField.Value = string.Empty;
                 SortOrderTextBox.Text = "0";
@@ -230,7 +231,7 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            TitleLabel.Text = "Edit Organization Unit: " + Server.HtmlEncode(organization.DisplayName);
+            TitleLabel.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_OrganizationUnitEdit_TitleEdit, Server.HtmlEncode(organization.DisplayName));
             OrganizationUnitIdField.Value = organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture);
             OriginalUpdatedUtcField.Value = FormatRoundTripUtc(organization.UpdatedUtc);
             OrganizationCodeTextBox.Text = organization.OrganizationCode;
@@ -584,7 +585,7 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>禁用全部组织写入控件，同时保留只读上下文并显示低敏原因。</zh-CN>
             //   <en>Disable every organization-writing control while retaining read-only context and showing a low-sensitivity reason.</en>
             // </lang>
-            TitleLabel.Text = "Organization Unit";
+            TitleLabel.Text = lang.Admin_OrganizationUnitEdit_TitlePage;
             SaveButton.Enabled = false;
             OrganizationCodeTextBox.Enabled = false;
             DisplayNameTextBox.Enabled = false;
