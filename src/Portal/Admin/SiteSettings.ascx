@@ -1,6 +1,8 @@
 <%@ Control Inherits="ASPNET.StarterKit.Portal.SiteSettings" CodeBehind="SiteSettings.ascx.cs" Language="c#" AutoEventWireup="True" %>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Title" Src="~/DesktopModuleTitle.ascx"%>
 
+<%@ Import Namespace="Resources" %>
+
 <ASPNETPortal:title runat="server" id=Title1 />
 
 <%--
@@ -12,8 +14,8 @@
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-site-settings">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">
-            <h2 class="Head portal-admin-title">Legacy Site Settings</h2>
-            <p class="Normal portal-admin-subtitle">Maintain portal title and legacy edit-button visibility.</p>
+            <h2 class="Head portal-admin-title"><%= lang.Admin_SiteSettings_Title %></h2>
+            <p class="Normal portal-admin-subtitle"><%= lang.Admin_SiteSettings_Subtitle %></p>
         </div>
     </div>
 
@@ -27,7 +29,7 @@
 
     <div class="portal-admin-section">
         <div class="portal-section-header">
-            <h3 class="Head portal-section-title">Portal Metadata</h3>
+            <h3 class="Head portal-section-title"><%= lang.Admin_SiteSettings_SectionPortalMetadata %></h3>
         </div>
         <div class="portal-form-grid">
             <%--
@@ -37,12 +39,12 @@
             </lang>
             --%>
             <div class="portal-form-field">
-                <span class="SubHead portal-form-label">Site Title</span>
+                <span class="SubHead portal-form-label"><%= lang.Admin_SiteSettings_LabelSiteTitle %></span>
                 <asp:TextBox ID="SiteName" CssClass="NormalTextBox portal-form-input" MaxLength="150" runat="server" />
             </div>
             <div class="portal-form-field portal-checkbox-field">
-                <span class="SubHead portal-form-label">Edit Button Visibility</span>
-                <asp:CheckBox ID="showEdit" Text="Always show edit button" runat="server" />
+                <span class="SubHead portal-form-label"><%= lang.Admin_SiteSettings_LabelEditButtonVisibility %></span>
+                <asp:CheckBox ID="showEdit" Text="<%$ Resources:lang, Admin_SiteSettings_CheckboxAlwaysShowEditButton %>" runat="server" />
             </div>
             <div class="portal-form-field portal-form-actions-field">
                 <span class="SubHead portal-form-label">&nbsp;</span>
@@ -55,7 +57,7 @@
                 <asp:LinkButton
                     ID="applyBtn"
                     CssClass="portal-button portal-button-primary"
-                    Text="Apply Changes"
+                    Text="<%$ Resources:lang, Admin_SiteSettings_ButtonApplyChanges %>"
                     OnClick="Apply_Click"
                     runat="server" />
             </div>

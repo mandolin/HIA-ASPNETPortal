@@ -1086,4 +1086,115 @@
   <data name="Admin_TabLayout_ButtonApplyChanges" xml:space="preserve">
     <value>应用更改</value>
   </data>
+  <data name="Admin_Users_Title" xml:space="preserve">
+    <value>旧版用户入口</value>
+  </data>
+  <data name="Admin_Users_Subtitle" xml:space="preserve">
+    <value>选择现有用户、创建占位账号，或进入现代用户管理页。</value>
+  </data>
+  <data name="Admin_Users_LabelUser" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="Admin_Users_LabelActions" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Admin_Users_DeleteWarning" xml:space="preserve">
+    <value>删除用户是真实写操作，不由 P7 截图矩阵执行。</value>
+  </data>
+  <data name="Admin_ModuleDefs_Title" xml:space="preserve">
+    <value>旧版模块定义</value>
+  </data>
+  <data name="Admin_ModuleDefs_Subtitle" xml:space="preserve">
+    <value>此处列出既有模块定义；新的业务模块应从受信任的已部署包注册。</value>
+  </data>
+  <data name="Admin_ModuleDefs_ButtonOpenModuleCatalog" xml:space="preserve">
+    <value>打开模块包目录</value>
+  </data>
+  <data name="Admin_ModuleDefs_SectionExistingDefinitions" xml:space="preserve">
+    <value>现有定义</value>
+  </data>
+  <data name="Admin_ModuleDefs_ButtonEditDefinition" xml:space="preserve">
+    <value>编辑定义</value>
+  </data>
+  <data name="Admin_Roles_Title" xml:space="preserve">
+    <value>旧版角色管理</value>
+  </data>
+  <data name="Admin_Roles_Subtitle" xml:space="preserve">
+    <value>管理旧版门户角色并进入角色成员管理。</value>
+  </data>
+  <data name="Admin_Roles_ButtonAddNewRole" xml:space="preserve">
+    <value>新增角色</value>
+  </data>
+  <data name="Admin_Roles_SectionPortalRoles" xml:space="preserve">
+    <value>门户角色</value>
+  </data>
+  <data name="Admin_Roles_ButtonEdit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Admin_Roles_ButtonDelete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Admin_Roles_ButtonApply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="Admin_Roles_ButtonChangeRoleMembers" xml:space="preserve">
+    <value>更改角色成员</value>
+  </data>
+  <data name="Admin_Roles_DeleteWarning" xml:space="preserve">
+    <value>当仍有成员或授权引用时，角色删除会被阻止。</value>
+  </data>
+  <data name="Admin_SiteSettings_Title" xml:space="preserve">
+    <value>旧版站点设置</value>
+  </data>
+  <data name="Admin_SiteSettings_Subtitle" xml:space="preserve">
+    <value>维护门户标题与旧版编辑按钮可见性。</value>
+  </data>
+  <data name="Admin_SiteSettings_SectionPortalMetadata" xml:space="preserve">
+    <value>门户元数据</value>
+  </data>
+  <data name="Admin_SiteSettings_LabelSiteTitle" xml:space="preserve">
+    <value>站点标题</value>
+  </data>
+  <data name="Admin_SiteSettings_LabelEditButtonVisibility" xml:space="preserve">
+    <value>编辑按钮可见性</value>
+  </data>
+  <data name="Admin_SiteSettings_CheckboxAlwaysShowEditButton" xml:space="preserve">
+    <value>始终显示编辑按钮</value>
+  </data>
+  <data name="Admin_SiteSettings_ButtonApplyChanges" xml:space="preserve">
+    <value>应用更改</value>
+  </data>
+  <data name="Admin_Tabs_Title" xml:space="preserve">
+    <value>旧版页签管理</value>
+  </data>
+  <data name="Admin_Tabs_Subtitle" xml:space="preserve">
+    <value>管理页签顺序并进入现代页签布局编辑器。</value>
+  </data>
+  <data name="Admin_Tabs_ButtonAddNewTab" xml:space="preserve">
+    <value>新增页签</value>
+  </data>
+  <data name="Admin_Tabs_SectionPortalTabs" xml:space="preserve">
+    <value>门户页签</value>
+  </data>
+  <data name="Admin_Tabs_LabelTabs" xml:space="preserve">
+    <value>页签</value>
+  </data>
+  <data name="Admin_Tabs_LabelActions" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Admin_Tabs_ButtonMoveUp" xml:space="preserve">
+    <value>上移</value>
+  </data>
+  <data name="Admin_Tabs_ButtonMoveDown" xml:space="preserve">
+    <value>下移</value>
+  </data>
+  <data name="Admin_Tabs_ButtonEditLayout" xml:space="preserve">
+    <value>编辑布局</value>
+  </data>
+  <data name="Admin_Tabs_ButtonDeleteSelectedTab" xml:space="preserve">
+    <value>删除所选页签</value>
+  </data>
+  <data name="Admin_Tabs_DeleteWarning" xml:space="preserve">
+    <value>删除会移除所选的非核心页签及其模块实例；核心管理页签保持受保护。</value>
+  </data>
 </root>

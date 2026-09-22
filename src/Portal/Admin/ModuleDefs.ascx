@@ -4,6 +4,8 @@ CodeBehind="ModuleDefs.ascx.cs"
 Language="c#" 
 AutoEventWireup="True" %>
 
+<%@ Import Namespace="Resources" %>
+
 <%@ Register 
 TagPrefix="ASPNETPortal" 
 TagName="Title" 
@@ -20,8 +22,8 @@ Src="~/DesktopModuleTitle.ascx"%>
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-module-defs">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">
-            <h2 class="Head portal-admin-title">Legacy Module Definitions</h2>
-            <p class="Normal portal-admin-subtitle">Existing module definitions are listed here; new business modules should be registered from trusted deployed packages.</p>
+            <h2 class="Head portal-admin-title"><%= lang.Admin_ModuleDefs_Title %></h2>
+            <p class="Normal portal-admin-subtitle"><%= lang.Admin_ModuleDefs_Subtitle %></p>
         </div>
         <div class="portal-admin-actions">
             <%--
@@ -33,7 +35,7 @@ Src="~/DesktopModuleTitle.ascx"%>
             <asp:LinkButton
                 ID="AddDefBtn"
                 CssClass="portal-button portal-button-primary"
-                Text="Open Module Catalog"
+                Text="<%$ Resources:lang, Admin_ModuleDefs_ButtonOpenModuleCatalog %>"
                 CausesValidation="False"
                 OnClick="AddDef_Click"
                 runat="server" />
@@ -42,7 +44,7 @@ Src="~/DesktopModuleTitle.ascx"%>
 
     <div class="portal-admin-section">
         <div class="portal-section-header">
-            <h3 class="Head portal-section-title">Existing Definitions</h3>
+            <h3 class="Head portal-section-title"><%= lang.Admin_ModuleDefs_SectionExistingDefinitions %></h3>
         </div>
         <div class="portal-chip-list-wrap">
             <%--
@@ -71,7 +73,7 @@ Src="~/DesktopModuleTitle.ascx"%>
                             CssClass="Normal portal-chip-text"
                             runat="server" />
                         <asp:LinkButton
-                            Text="Edit Definition"
+                            Text="<%$ Resources:lang, Admin_ModuleDefs_ButtonEditDefinition %>"
                             CommandName="edit"
                             CssClass="portal-button portal-button-secondary portal-button-compact"
                             CausesValidation="False"

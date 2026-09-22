@@ -1,6 +1,8 @@
 <%@ Control Inherits="ASPNET.StarterKit.Portal.Tabs" CodeBehind="Tabs.ascx.cs" Language="c#" AutoEventWireup="True" %>
 <%@ Register TagPrefix="ASPNETPortal" TagName="Title" Src="~/DesktopModuleTitle.ascx" %>
 
+<%@ Import Namespace="Resources" %>
+
 <ASPNETPortal:Title runat="server" ID="Title1" />
 
 <%--
@@ -12,8 +14,8 @@
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-tabs">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">
-            <h2 class="Head portal-admin-title">Legacy Tab Administration</h2>
-            <p class="Normal portal-admin-subtitle">Manage tab order and enter the modern tab layout editor.</p>
+            <h2 class="Head portal-admin-title"><%= lang.Admin_Tabs_Title %></h2>
+            <p class="Normal portal-admin-subtitle"><%= lang.Admin_Tabs_Subtitle %></p>
         </div>
         <div class="portal-admin-actions">
             <%--
@@ -25,7 +27,7 @@
             <asp:LinkButton
                 ID="addBtn"
                 CssClass="portal-button portal-button-primary"
-                Text="Add New Tab"
+                Text="<%$ Resources:lang, Admin_Tabs_ButtonAddNewTab %>"
                 CausesValidation="False"
                 OnClick="AddTab_Click"
                 runat="server" />
@@ -36,11 +38,11 @@
 
     <div class="portal-admin-section">
         <div class="portal-section-header">
-            <h3 class="Head portal-section-title">Portal Tabs</h3>
+            <h3 class="Head portal-section-title"><%= lang.Admin_Tabs_SectionPortalTabs %></h3>
         </div>
         <div class="portal-form-grid portal-legacy-tab-grid">
             <div class="portal-form-field portal-form-field-wide">
-                <span class="SubHead portal-form-label">Tabs</span>
+                <span class="SubHead portal-form-label"><%= lang.Admin_Tabs_LabelTabs %></span>
                 <%--
                     <lang>
                         <zh-CN>列表由 PortalTabs 数据源提供 Tab 顺序和 ID；选中项只作为后续服务器命令的目标，不直接决定权限。</zh-CN>
@@ -57,7 +59,7 @@
                     runat="server" />
             </div>
             <div class="portal-form-field portal-form-actions-field">
-                <span class="SubHead portal-form-label">Actions</span>
+                <span class="SubHead portal-form-label"><%= lang.Admin_Tabs_LabelActions %></span>
                 <div class="portal-action-row portal-legacy-action-stack">
                     <%--
                         <lang>
@@ -68,7 +70,7 @@
                     <asp:LinkButton
                         ID="upBtn"
                         CssClass="portal-button portal-button-secondary portal-button-compact"
-                        Text="Move Up"
+                        Text="<%$ Resources:lang, Admin_Tabs_ButtonMoveUp %>"
                         CommandName="up"
                         CausesValidation="False"
                         OnClick="UpDown_Click"
@@ -76,7 +78,7 @@
                     <asp:LinkButton
                         ID="downBtn"
                         CssClass="portal-button portal-button-secondary portal-button-compact"
-                        Text="Move Down"
+                        Text="<%$ Resources:lang, Admin_Tabs_ButtonMoveDown %>"
                         CommandName="down"
                         CausesValidation="False"
                         OnClick="UpDown_Click"
@@ -84,19 +86,19 @@
                     <asp:LinkButton
                         ID="editBtn"
                         CssClass="portal-button portal-button-primary portal-button-compact"
-                        Text="Edit Layout"
+                        Text="<%$ Resources:lang, Admin_Tabs_ButtonEditLayout %>"
                         CausesValidation="False"
                         OnClick="EditBtn_Click"
                         runat="server" />
                     <asp:LinkButton
                         ID="deleteBtn"
                         CssClass="portal-button portal-button-danger portal-button-compact"
-                        Text="Delete Selected Tab"
+                        Text="<%$ Resources:lang, Admin_Tabs_ButtonDeleteSelectedTab %>"
                         CausesValidation="False"
                         OnClick="DeleteBtn_Click"
                         runat="server" />
                 </div>
-                <p class="Normal portal-status-line">Delete removes the selected non-core tab and its module instances. Core Admin tab remains protected.</p>
+                <p class="Normal portal-status-line"><%= lang.Admin_Tabs_DeleteWarning %></p>
             </div>
         </div>
     </div>

@@ -12,8 +12,8 @@
 <div class="portal-admin-page portal-legacy-admin-module portal-legacy-users">
     <div class="portal-admin-header">
         <div class="portal-admin-heading">
-            <h2 class="Head portal-admin-title">Legacy User Entry</h2>
-            <p class="Normal portal-admin-subtitle">Select an existing user, create a placeholder account, or enter the modern user management page.</p>
+            <h2 class="Head portal-admin-title"><%= lang.Admin_Users_Title %></h2>
+            <p class="Normal portal-admin-subtitle"><%= lang.Admin_Users_Subtitle %></p>
         </div>
         <div class="portal-admin-actions">
             <%--
@@ -43,7 +43,7 @@
         </div>
         <div class="portal-form-grid portal-legacy-user-grid">
             <div class="portal-form-field portal-form-field-wide">
-                <span class="SubHead portal-form-label">User</span>
+                <span class="SubHead portal-form-label"><%= lang.Admin_Users_LabelUser %></span>
                 <%--
                     <lang>
                         <zh-CN>下拉列表以 UserID 作为服务器目标键、Email 作为展示文本；选中项不能单独证明当前管理员可操作该账号。</zh-CN>
@@ -58,7 +58,7 @@
                     runat="server" />
             </div>
             <div class="portal-form-field portal-form-actions-field">
-                <span class="SubHead portal-form-label">Actions</span>
+                <span class="SubHead portal-form-label"><%= lang.Admin_Users_LabelActions %></span>
                 <div class="portal-action-row portal-legacy-action-stack">
                     <%--
                         <lang>
@@ -82,7 +82,7 @@
                         OnClick="btn_DeleteUser_Click"
                         runat="server" />
                 </div>
-                <p class="Normal portal-status-line">Deleting a user is a real write operation and is not executed by the P7 screenshot matrix.</p>
+                <p class="Normal portal-status-line"><%= lang.Admin_Users_DeleteWarning %></p>
             </div>
         </div>
     </div>

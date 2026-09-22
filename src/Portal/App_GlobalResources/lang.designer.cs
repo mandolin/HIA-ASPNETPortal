@@ -4135,5 +4135,449 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_TabLayout_ButtonApplyChanges", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Legacy User Entry</zh-CN>
+        ///   <en>Looks up a localized string similar to: Legacy User Entry</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_Title {
+            get {
+                return ResourceManager.GetString("Admin_Users_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Select an existing user, create a placeholder account, or enter the modern user management page.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select an existing user, create a placeholder account, or enter the modern user management page.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_Users_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User</zh-CN>
+        ///   <en>Looks up a localized string similar to: User</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_LabelUser {
+            get {
+                return ResourceManager.GetString("Admin_Users_LabelUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Actions</zh-CN>
+        ///   <en>Looks up a localized string similar to: Actions</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_LabelActions {
+            get {
+                return ResourceManager.GetString("Admin_Users_LabelActions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Deleting a user is a real write operation and is not executed by the P7 screenshot matrix.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Deleting a user is a real write operation and is not executed by the P7 screenshot matrix.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Users_DeleteWarning {
+            get {
+                return ResourceManager.GetString("Admin_Users_DeleteWarning", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Legacy Module Definitions</zh-CN>
+        ///   <en>Looks up a localized string similar to: Legacy Module Definitions</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefs_Title {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefs_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Existing module definitions are listed here; new business modules should be registered from trusted deployed packages.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Existing module definitions are listed here; new business modules should be registered from trusted deployed packages.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefs_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefs_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Open Module Catalog</zh-CN>
+        ///   <en>Looks up a localized string similar to: Open Module Catalog</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefs_ButtonOpenModuleCatalog {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefs_ButtonOpenModuleCatalog", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Existing Definitions</zh-CN>
+        ///   <en>Looks up a localized string similar to: Existing Definitions</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefs_SectionExistingDefinitions {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefs_SectionExistingDefinitions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit Definition</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit Definition</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleDefs_ButtonEditDefinition {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefs_ButtonEditDefinition", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Legacy Role Administration</zh-CN>
+        ///   <en>Looks up a localized string similar to: Legacy Role Administration</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_Title {
+            get {
+                return ResourceManager.GetString("Admin_Roles_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Manage legacy portal roles and enter role membership management.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Manage legacy portal roles and enter role membership management.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_Roles_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add New Role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add New Role</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_ButtonAddNewRole {
+            get {
+                return ResourceManager.GetString("Admin_Roles_ButtonAddNewRole", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Portal Roles</zh-CN>
+        ///   <en>Looks up a localized string similar to: Portal Roles</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_SectionPortalRoles {
+            get {
+                return ResourceManager.GetString("Admin_Roles_SectionPortalRoles", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_ButtonEdit {
+            get {
+                return ResourceManager.GetString("Admin_Roles_ButtonEdit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Delete</zh-CN>
+        ///   <en>Looks up a localized string similar to: Delete</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_ButtonDelete {
+            get {
+                return ResourceManager.GetString("Admin_Roles_ButtonDelete", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Apply</zh-CN>
+        ///   <en>Looks up a localized string similar to: Apply</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_ButtonApply {
+            get {
+                return ResourceManager.GetString("Admin_Roles_ButtonApply", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Change Role Members</zh-CN>
+        ///   <en>Looks up a localized string similar to: Change Role Members</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_ButtonChangeRoleMembers {
+            get {
+                return ResourceManager.GetString("Admin_Roles_ButtonChangeRoleMembers", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Role deletion is blocked when members or authorization references still exist.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Role deletion is blocked when members or authorization references still exist.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Roles_DeleteWarning {
+            get {
+                return ResourceManager.GetString("Admin_Roles_DeleteWarning", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Legacy Site Settings</zh-CN>
+        ///   <en>Looks up a localized string similar to: Legacy Site Settings</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_Title {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Maintain portal title and legacy edit-button visibility.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Maintain portal title and legacy edit-button visibility.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Portal Metadata</zh-CN>
+        ///   <en>Looks up a localized string similar to: Portal Metadata</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_SectionPortalMetadata {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_SectionPortalMetadata", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Site Title</zh-CN>
+        ///   <en>Looks up a localized string similar to: Site Title</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_LabelSiteTitle {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_LabelSiteTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit Button Visibility</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit Button Visibility</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_LabelEditButtonVisibility {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_LabelEditButtonVisibility", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Always show edit button</zh-CN>
+        ///   <en>Looks up a localized string similar to: Always show edit button</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_CheckboxAlwaysShowEditButton {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_CheckboxAlwaysShowEditButton", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Apply Changes</zh-CN>
+        ///   <en>Looks up a localized string similar to: Apply Changes</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SiteSettings_ButtonApplyChanges {
+            get {
+                return ResourceManager.GetString("Admin_SiteSettings_ButtonApplyChanges", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Legacy Tab Administration</zh-CN>
+        ///   <en>Looks up a localized string similar to: Legacy Tab Administration</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_Title {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Manage tab order and enter the modern tab layout editor.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Manage tab order and enter the modern tab layout editor.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add New Tab</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add New Tab</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_ButtonAddNewTab {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_ButtonAddNewTab", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Portal Tabs</zh-CN>
+        ///   <en>Looks up a localized string similar to: Portal Tabs</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_SectionPortalTabs {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_SectionPortalTabs", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Tabs</zh-CN>
+        ///   <en>Looks up a localized string similar to: Tabs</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_LabelTabs {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_LabelTabs", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Actions</zh-CN>
+        ///   <en>Looks up a localized string similar to: Actions</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_LabelActions {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_LabelActions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Move Up</zh-CN>
+        ///   <en>Looks up a localized string similar to: Move Up</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_ButtonMoveUp {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_ButtonMoveUp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Move Down</zh-CN>
+        ///   <en>Looks up a localized string similar to: Move Down</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_ButtonMoveDown {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_ButtonMoveDown", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit Layout</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit Layout</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_ButtonEditLayout {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_ButtonEditLayout", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Delete Selected Tab</zh-CN>
+        ///   <en>Looks up a localized string similar to: Delete Selected Tab</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_ButtonDeleteSelectedTab {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_ButtonDeleteSelectedTab", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Delete removes the selected non-core tab and its module instances. Core Admin tab remains protected.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Delete removes the selected non-core tab and its module instances. Core Admin tab remains protected.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Tabs_DeleteWarning {
+            get {
+                return ResourceManager.GetString("Admin_Tabs_DeleteWarning", resourceCulture);
+            }
+        }
     }
 }

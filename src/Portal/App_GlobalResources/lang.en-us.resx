@@ -1083,4 +1083,115 @@
   <data name="Admin_TabLayout_ButtonApplyChanges" xml:space="preserve">
     <value>Apply Changes</value>
   </data>
+  <data name="Admin_Users_Title" xml:space="preserve">
+    <value>Legacy User Entry</value>
+  </data>
+  <data name="Admin_Users_Subtitle" xml:space="preserve">
+    <value>Select an existing user, create a placeholder account, or enter the modern user management page.</value>
+  </data>
+  <data name="Admin_Users_LabelUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Admin_Users_LabelActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Admin_Users_DeleteWarning" xml:space="preserve">
+    <value>Deleting a user is a real write operation and is not executed by the P7 screenshot matrix.</value>
+  </data>
+  <data name="Admin_ModuleDefs_Title" xml:space="preserve">
+    <value>Legacy Module Definitions</value>
+  </data>
+  <data name="Admin_ModuleDefs_Subtitle" xml:space="preserve">
+    <value>Existing module definitions are listed here; new business modules should be registered from trusted deployed packages.</value>
+  </data>
+  <data name="Admin_ModuleDefs_ButtonOpenModuleCatalog" xml:space="preserve">
+    <value>Open Module Catalog</value>
+  </data>
+  <data name="Admin_ModuleDefs_SectionExistingDefinitions" xml:space="preserve">
+    <value>Existing Definitions</value>
+  </data>
+  <data name="Admin_ModuleDefs_ButtonEditDefinition" xml:space="preserve">
+    <value>Edit Definition</value>
+  </data>
+  <data name="Admin_Roles_Title" xml:space="preserve">
+    <value>Legacy Role Administration</value>
+  </data>
+  <data name="Admin_Roles_Subtitle" xml:space="preserve">
+    <value>Manage legacy portal roles and enter role membership management.</value>
+  </data>
+  <data name="Admin_Roles_ButtonAddNewRole" xml:space="preserve">
+    <value>Add New Role</value>
+  </data>
+  <data name="Admin_Roles_SectionPortalRoles" xml:space="preserve">
+    <value>Portal Roles</value>
+  </data>
+  <data name="Admin_Roles_ButtonEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Admin_Roles_ButtonDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Admin_Roles_ButtonApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Admin_Roles_ButtonChangeRoleMembers" xml:space="preserve">
+    <value>Change Role Members</value>
+  </data>
+  <data name="Admin_Roles_DeleteWarning" xml:space="preserve">
+    <value>Role deletion is blocked when members or authorization references still exist.</value>
+  </data>
+  <data name="Admin_SiteSettings_Title" xml:space="preserve">
+    <value>Legacy Site Settings</value>
+  </data>
+  <data name="Admin_SiteSettings_Subtitle" xml:space="preserve">
+    <value>Maintain portal title and legacy edit-button visibility.</value>
+  </data>
+  <data name="Admin_SiteSettings_SectionPortalMetadata" xml:space="preserve">
+    <value>Portal Metadata</value>
+  </data>
+  <data name="Admin_SiteSettings_LabelSiteTitle" xml:space="preserve">
+    <value>Site Title</value>
+  </data>
+  <data name="Admin_SiteSettings_LabelEditButtonVisibility" xml:space="preserve">
+    <value>Edit Button Visibility</value>
+  </data>
+  <data name="Admin_SiteSettings_CheckboxAlwaysShowEditButton" xml:space="preserve">
+    <value>Always show edit button</value>
+  </data>
+  <data name="Admin_SiteSettings_ButtonApplyChanges" xml:space="preserve">
+    <value>Apply Changes</value>
+  </data>
+  <data name="Admin_Tabs_Title" xml:space="preserve">
+    <value>Legacy Tab Administration</value>
+  </data>
+  <data name="Admin_Tabs_Subtitle" xml:space="preserve">
+    <value>Manage tab order and enter the modern tab layout editor.</value>
+  </data>
+  <data name="Admin_Tabs_ButtonAddNewTab" xml:space="preserve">
+    <value>Add New Tab</value>
+  </data>
+  <data name="Admin_Tabs_SectionPortalTabs" xml:space="preserve">
+    <value>Portal Tabs</value>
+  </data>
+  <data name="Admin_Tabs_LabelTabs" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="Admin_Tabs_LabelActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Admin_Tabs_ButtonMoveUp" xml:space="preserve">
+    <value>Move Up</value>
+  </data>
+  <data name="Admin_Tabs_ButtonMoveDown" xml:space="preserve">
+    <value>Move Down</value>
+  </data>
+  <data name="Admin_Tabs_ButtonEditLayout" xml:space="preserve">
+    <value>Edit Layout</value>
+  </data>
+  <data name="Admin_Tabs_ButtonDeleteSelectedTab" xml:space="preserve">
+    <value>Delete Selected Tab</value>
+  </data>
+  <data name="Admin_Tabs_DeleteWarning" xml:space="preserve">
+    <value>Delete removes the selected non-core tab and its module instances. Core Admin tab remains protected.</value>
+  </data>
 </root>
