@@ -852,4 +852,103 @@
   <data name="Admin_WorkItems_ButtonOpenSource" xml:space="preserve">
     <value>Open Source</value>
   </data>
+  <data name="Admin_BusinessApplications_Title" xml:space="preserve">
+    <value>Business Applications</value>
+  </data>
+  <data name="Admin_BusinessApplications_Subtitle" xml:space="preserve">
+    <value>Review low-sensitivity abstract business applications and validate the lightweight workflow sample.</value>
+  </data>
+  <data name="Admin_BusinessApplications_LabelStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_BusinessApplications_ButtonSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Admin_BusinessApplications_SectionApplicationRequests" xml:space="preserve">
+    <value>Application Requests</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnSubmittedUtc" xml:space="preserve">
+    <value>Submitted UTC</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnApplicant" xml:space="preserve">
+    <value>Applicant</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnApplication" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnReview" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineTitle" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineCategory" xml:space="preserve">
+    <value>Category:</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineSummary" xml:space="preserve">
+    <value>Summary:</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineBody" xml:space="preserve">
+    <value>Body:</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineLatestReview" xml:space="preserve">
+    <value>Latest Review:</value>
+  </data>
+  <data name="Admin_BusinessApplications_ButtonApprove" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="Admin_BusinessApplications_ButtonReturn" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Admin_BusinessApplications_ButtonReject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_Title" xml:space="preserve">
+    <value>User Employee Binding</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_Subtitle" xml:space="preserve">
+    <value>Bind one portal account to one employee record and invalidate old sessions after changes.</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LinkEmployeeDirectory" xml:space="preserve">
+    <value>Employee Directory</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LinkUserAdministration" xml:space="preserve">
+    <value>User Administration</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LabelCurrentBinding" xml:space="preserve">
+    <value>Current Binding</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_SectionBindingOperation" xml:space="preserve">
+    <value>Binding Operation</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LabelPortalUserId" xml:space="preserve">
+    <value>Portal User ID</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LabelEmployeeCode" xml:space="preserve">
+    <value>Employee Code</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LabelReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_ButtonBindUserToEmployee" xml:space="preserve">
+    <value>Bind User To Employee</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_ButtonEndActiveBinding" xml:space="preserve">
+    <value>End Active Binding</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_ConfirmEndBinding" xml:space="preserve">
+    <value>return confirm('End the current employee binding?');</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LinkManageUser" xml:space="preserve">
+    <value>Manage User</value>
+  </data>
 </root>

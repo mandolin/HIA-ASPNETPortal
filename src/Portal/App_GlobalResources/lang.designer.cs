@@ -3211,5 +3211,401 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_WorkItems_ButtonOpenSource", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Business Applications</zh-CN>
+        ///   <en>Looks up a localized string similar to: Business Applications</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_Title {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Review low-sensitivity abstract business applications and validate the lightweight workflow sample.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Review low-sensitivity abstract business applications and validate the lightweight workflow sample.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_LabelStatus {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_LabelStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Search</zh-CN>
+        ///   <en>Looks up a localized string similar to: Search</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ButtonSearch {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ButtonSearch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Application Requests</zh-CN>
+        ///   <en>Looks up a localized string similar to: Application Requests</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_SectionApplicationRequests {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_SectionApplicationRequests", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ColumnId {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ColumnId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Submitted UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submitted UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ColumnSubmittedUtc {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ColumnSubmittedUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Code</zh-CN>
+        ///   <en>Looks up a localized string similar to: Code</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ColumnCode {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ColumnCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Applicant</zh-CN>
+        ///   <en>Looks up a localized string similar to: Applicant</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ColumnApplicant {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ColumnApplicant", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Application</zh-CN>
+        ///   <en>Looks up a localized string similar to: Application</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ColumnApplication {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ColumnApplication", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ColumnStatus {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ColumnStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Review</zh-CN>
+        ///   <en>Looks up a localized string similar to: Review</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ColumnReview {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ColumnReview", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Title:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_InlineTitle {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_InlineTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Category:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Category:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_InlineCategory {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_InlineCategory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Summary:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Summary:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_InlineSummary {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_InlineSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Body:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Body:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_InlineBody {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_InlineBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Latest Review:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Latest Review:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_InlineLatestReview {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_InlineLatestReview", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Approve</zh-CN>
+        ///   <en>Looks up a localized string similar to: Approve</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ButtonApprove {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ButtonApprove", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Return</zh-CN>
+        ///   <en>Looks up a localized string similar to: Return</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ButtonReturn {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ButtonReturn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Reject</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reject</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ButtonReject {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ButtonReject", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User Employee Binding</zh-CN>
+        ///   <en>Looks up a localized string similar to: User Employee Binding</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_Title {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Bind one portal account to one employee record and invalidate old sessions after changes.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Bind one portal account to one employee record and invalidate old sessions after changes.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Directory</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee Directory</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_LinkEmployeeDirectory {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LinkEmployeeDirectory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User Administration</zh-CN>
+        ///   <en>Looks up a localized string similar to: User Administration</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_LinkUserAdministration {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LinkUserAdministration", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Current Binding</zh-CN>
+        ///   <en>Looks up a localized string similar to: Current Binding</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_LabelCurrentBinding {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LabelCurrentBinding", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Binding Operation</zh-CN>
+        ///   <en>Looks up a localized string similar to: Binding Operation</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_SectionBindingOperation {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_SectionBindingOperation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Portal User ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: Portal User ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_LabelPortalUserId {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LabelPortalUserId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Code</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee Code</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_LabelEmployeeCode {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LabelEmployeeCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Reason</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reason</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_LabelReason {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LabelReason", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Bind User To Employee</zh-CN>
+        ///   <en>Looks up a localized string similar to: Bind User To Employee</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_ButtonBindUserToEmployee {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_ButtonBindUserToEmployee", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：End Active Binding</zh-CN>
+        ///   <en>Looks up a localized string similar to: End Active Binding</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_ButtonEndActiveBinding {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_ButtonEndActiveBinding", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：return confirm('End the current employee binding?');</zh-CN>
+        ///   <en>Looks up a localized string similar to: return confirm('End the current employee binding?');</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_ConfirmEndBinding {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_ConfirmEndBinding", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Manage User</zh-CN>
+        ///   <en>Looks up a localized string similar to: Manage User</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_UserEmployeeBindingEdit_LinkManageUser {
+            get {
+                return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LinkManageUser", resourceCulture);
+            }
+        }
     }
 }

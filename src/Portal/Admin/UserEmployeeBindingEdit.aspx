@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.UserEmployeeBindingEdit"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
     <lang>
         <zh-CN>P6.3-S5 门户账号与员工单条绑定维护页。</zh-CN>
@@ -21,13 +24,19 @@
     <div class="portal-admin-page portal-admin-user-employee-binding">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">User Employee Binding</h1>
-                <p class="Normal portal-admin-subtitle">Bind one portal account to one employee record and invalidate old sessions after changes.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_UserEmployeeBindingEdit_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_UserEmployeeBindingEdit_Subtitle %></p>
             </div>
+            <%--
+              <lang>
+                <zh-CN>页面自有导航入口：员工目录与用户管理的目标页在导航 registry 中尚无入口键，若改交渲染器，链接会因分组无法解析而静默消失；待 registry 补齐后再统一改造。ManageUserLink 由 code-behind 决定可见性与目标，此处只本地化其文案。</zh-CN>
+                <en>Page-owned navigation entries: the employee-directory and user-administration targets have no navigation-registry entries yet, so handing them to the renderer would silently drop them when no group can be resolved; switch after the registry is complete. ManageUserLink has its visibility and target decided by code-behind, so only its text is localized here.</en>
+              </lang>
+            --%>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                <a class="CommandButton" href="ManageUsers.aspx">User Administration</a>
-                <asp:HyperLink ID="ManageUserLink" CssClass="CommandButton" Text="Manage User" Visible="false" runat="server" />
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_UserEmployeeBindingEdit_LinkEmployeeDirectory %></a>
+                <a class="CommandButton" href="ManageUsers.aspx"><%= lang.Admin_UserEmployeeBindingEdit_LinkUserAdministration %></a>
+                <asp:HyperLink ID="ManageUserLink" CssClass="CommandButton" Text="<%$ Resources:lang, Admin_UserEmployeeBindingEdit_LinkManageUser %>" Visible="false" runat="server" />
             </div>
         </div>
 
@@ -41,7 +50,7 @@
         <asp:HiddenField ID="ActiveBindingId" runat="server" />
 
         <div class="portal-status-strip">
-            <div class="SubHead portal-status-line">Current Binding</div>
+            <div class="SubHead portal-status-line"><%= lang.Admin_UserEmployeeBindingEdit_LabelCurrentBinding %></div>
             <div class="Normal portal-status-line">
                 <asp:Label ID="CurrentBindingText" runat="server" />
             </div>
@@ -49,7 +58,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Binding Operation</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_UserEmployeeBindingEdit_SectionBindingOperation %></h2>
             </div>
             <%--
               <lang>
@@ -59,17 +68,17 @@
             --%>
             <div class="portal-form-grid">
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Portal User ID</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_UserEmployeeBindingEdit_LabelPortalUserId %></span>
                     <asp:TextBox ID="UserIdTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="12" runat="server" />
                     <span class="Normal portal-field-value"><asp:Label ID="UserSummaryText" runat="server" /></span>
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Employee Code</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_UserEmployeeBindingEdit_LabelEmployeeCode %></span>
                     <asp:TextBox ID="EmployeeCodeTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="64" runat="server" />
                     <span class="Normal portal-field-value"><asp:Label ID="EmployeeSummaryText" runat="server" /></span>
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Reason</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_UserEmployeeBindingEdit_LabelReason %></span>
                     <asp:TextBox ID="ReasonTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="200" runat="server" />
                 </div>
             </div>
@@ -80,11 +89,17 @@
               </lang>
             --%>
             <div class="portal-form-actions">
-                <asp:LinkButton ID="BindButton" CssClass="CommandButton portal-primary-action" Text="Bind User To Employee"
+                <asp:LinkButton ID="BindButton" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang, Admin_UserEmployeeBindingEdit_ButtonBindUserToEmployee %>"
                     OnClick="BindButton_Click" runat="server" />
-                <asp:LinkButton ID="EndBindingButton" CssClass="CommandButton" Text="End Active Binding"
+                <%--
+                  <lang>
+                    <zh-CN>结束绑定按钮的 OnClientClick 原先硬编码中文确认文案，英文界面下会显示中文；现整体取自资源（该资源值必须保持为合法的 JS 语句，且消息文本使用单引号，避免破坏标记属性）。</zh-CN>
+                    <en>The end-binding button previously hardcoded Chinese confirmation text, which showed Chinese even in an English UI; the whole statement now comes from a resource (the value must stay a valid JS statement with single-quoted text so the markup attribute is not broken).</en>
+                  </lang>
+                --%>
+                <asp:LinkButton ID="EndBindingButton" CssClass="CommandButton" Text="<%$ Resources:lang, Admin_UserEmployeeBindingEdit_ButtonEndActiveBinding %>"
                     CausesValidation="False" OnClick="EndBindingButton_Click"
-                    OnClientClick="return confirm('确认结束当前员工绑定？');" runat="server" />
+                    OnClientClick="<%$ Resources:lang, Admin_UserEmployeeBindingEdit_ConfirmEndBinding %>" runat="server" />
             </div>
         </div>
     </div>

@@ -855,4 +855,103 @@
   <data name="Admin_WorkItems_ButtonOpenSource" xml:space="preserve">
     <value>打开来源</value>
   </data>
+  <data name="Admin_BusinessApplications_Title" xml:space="preserve">
+    <value>业务申请</value>
+  </data>
+  <data name="Admin_BusinessApplications_Subtitle" xml:space="preserve">
+    <value>审阅低敏的抽象业务申请并验证轻量工作流样例。</value>
+  </data>
+  <data name="Admin_BusinessApplications_LabelStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_BusinessApplications_ButtonSearch" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="Admin_BusinessApplications_SectionApplicationRequests" xml:space="preserve">
+    <value>申请请求</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnSubmittedUtc" xml:space="preserve">
+    <value>提交时间 (UTC)</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnCode" xml:space="preserve">
+    <value>编号</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnApplicant" xml:space="preserve">
+    <value>申请人</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnApplication" xml:space="preserve">
+    <value>申请</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_BusinessApplications_ColumnReview" xml:space="preserve">
+    <value>审核</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineTitle" xml:space="preserve">
+    <value>标题：</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineCategory" xml:space="preserve">
+    <value>分类：</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineSummary" xml:space="preserve">
+    <value>摘要：</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineBody" xml:space="preserve">
+    <value>正文：</value>
+  </data>
+  <data name="Admin_BusinessApplications_InlineLatestReview" xml:space="preserve">
+    <value>最新审核：</value>
+  </data>
+  <data name="Admin_BusinessApplications_ButtonApprove" xml:space="preserve">
+    <value>通过</value>
+  </data>
+  <data name="Admin_BusinessApplications_ButtonReturn" xml:space="preserve">
+    <value>退回</value>
+  </data>
+  <data name="Admin_BusinessApplications_ButtonReject" xml:space="preserve">
+    <value>拒绝</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_Title" xml:space="preserve">
+    <value>用户员工绑定</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_Subtitle" xml:space="preserve">
+    <value>将一个门户账号绑定到一个员工记录，并在变更后使旧会话失效。</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LinkEmployeeDirectory" xml:space="preserve">
+    <value>员工目录</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LinkUserAdministration" xml:space="preserve">
+    <value>用户管理</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LabelCurrentBinding" xml:space="preserve">
+    <value>当前绑定</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_SectionBindingOperation" xml:space="preserve">
+    <value>绑定操作</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LabelPortalUserId" xml:space="preserve">
+    <value>门户用户 ID</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LabelEmployeeCode" xml:space="preserve">
+    <value>员工编号</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LabelReason" xml:space="preserve">
+    <value>原因</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_ButtonBindUserToEmployee" xml:space="preserve">
+    <value>绑定用户到员工</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_ButtonEndActiveBinding" xml:space="preserve">
+    <value>结束当前绑定</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_ConfirmEndBinding" xml:space="preserve">
+    <value>return confirm('确认结束当前员工绑定？');</value>
+  </data>
+  <data name="Admin_UserEmployeeBindingEdit_LinkManageUser" xml:space="preserve">
+    <value>管理用户</value>
+  </data>
 </root>
