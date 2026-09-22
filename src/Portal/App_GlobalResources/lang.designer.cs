@@ -3968,6 +3968,162 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Message Detail</zh-CN>
+        ///   <en>Looks up a localized string similar to: Message Detail</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_Heading {
+            get {
+                return ResourceManager.GetString("DiscussDetails_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Previous</zh-CN>
+        ///   <en>Looks up a localized string similar to: Previous</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_Previous {
+            get {
+                return ResourceManager.GetString("DiscussDetails_Previous", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Next</zh-CN>
+        ///   <en>Looks up a localized string similar to: Next</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_Next {
+            get {
+                return ResourceManager.GetString("DiscussDetails_Next", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Previous Message</zh-CN>
+        ///   <en>Looks up a localized string similar to: Previous Message</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_PrevTooltip {
+            get {
+                return ResourceManager.GetString("DiscussDetails_PrevTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Next Message</zh-CN>
+        ///   <en>Looks up a localized string similar to: Next Message</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_NextTooltip {
+            get {
+                return ResourceManager.GetString("DiscussDetails_NextTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Reply to this Message</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reply to this Message</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_ButtonReply {
+            get {
+                return ResourceManager.GetString("DiscussDetails_ButtonReply", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Submit</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submit</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("DiscussDetails_ButtonSubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Title:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title:</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_LabelTitle {
+            get {
+                return ResourceManager.GetString("DiscussDetails_LabelTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Body:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Body:</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_LabelBody {
+            get {
+                return ResourceManager.GetString("DiscussDetails_LabelBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Original Message:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Original Message:</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_SectionOriginalMessage {
+            get {
+                return ResourceManager.GetString("DiscussDetails_SectionOriginalMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Subject:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Subject:</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_LabelSubject {
+            get {
+                return ResourceManager.GetString("DiscussDetails_LabelSubject", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Author:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Author:</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_LabelAuthor {
+            get {
+                return ResourceManager.GetString("DiscussDetails_LabelAuthor", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Date:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Date:</en>
+        /// </lang>
+        /// </summary>
+        internal static string DiscussDetails_LabelDate {
+            get {
+                return ResourceManager.GetString("DiscussDetails_LabelDate", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

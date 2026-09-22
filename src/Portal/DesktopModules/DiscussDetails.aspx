@@ -18,12 +18,12 @@
         </lang>
         --%>
         <div class="portal-page-heading-row">
-            <h1 class="portal-page-title">Message Detail</h1>
+            <h1 class="portal-page-title"><%= lang.DiscussDetails_Heading %></h1>
             <asp:Panel ID="ButtonPanel" CssClass="portal-page-actions" runat="server">
-                <a class="portal-button portal-button-secondary portal-button-compact portal-icon-nav" id="prevItem" title="Previous Message" runat="server">Previous</a>
-                <a class="portal-button portal-button-secondary portal-button-compact portal-icon-nav" id="nextItem" title="Next Message" runat="server">Next</a>
+                <a class="portal-button portal-button-secondary portal-button-compact portal-icon-nav" id="prevItem" title="<%$ Resources:lang,DiscussDetails_PrevTooltip %>" runat="server"><%= lang.DiscussDetails_Previous %></a>
+                <a class="portal-button portal-button-secondary portal-button-compact portal-icon-nav" id="nextItem" title="<%$ Resources:lang,DiscussDetails_NextTooltip %>" runat="server"><%= lang.DiscussDetails_Next %></a>
                 <asp:LinkButton ID="ReplyBtn" runat="server" EnableViewState="false" CssClass="portal-button portal-button-primary portal-button-compact"
-                    Text="Reply to this Message" OnClick="ReplyBtn_Click"></asp:LinkButton>
+                    Text="<%$ Resources:lang,DiscussDetails_ButtonReply %>" OnClick="ReplyBtn_Click"></asp:LinkButton>
             </asp:Panel>
         </div>
 
@@ -35,12 +35,12 @@
         --%>
         <asp:Panel ID="EditPanel" CssClass="portal-edit-panel portal-detail-card" runat="server" Visible="false">
             <div class="portal-field-stack">
-                <span class="portal-field-stack-label">Title:</span>
+                <span class="portal-field-stack-label"><%= lang.DiscussDetails_LabelTitle %></span>
                 <asp:TextBox ID="TitleField" runat="server" MaxLength="100" Columns="40" Width="500"
                     CssClass="NormalTextBox portal-input"></asp:TextBox>
             </div>
             <div class="portal-field-stack">
-                <span class="portal-field-stack-label">Body:</span>
+                <span class="portal-field-stack-label"><%= lang.DiscussDetails_LabelBody %></span>
                 <asp:TextBox ID="BodyField" runat="server" Columns="59" Width="500" Rows="15" TextMode="Multiline" CssClass="portal-input"></asp:TextBox>
             </div>
             <%--
@@ -50,12 +50,12 @@
             </lang>
             --%>
             <div class="portal-form-actions">
-                <asp:LinkButton CssClass="portal-button portal-button-primary" ID="updateButton" runat="server" Text="Submit"
+                <asp:LinkButton CssClass="portal-button portal-button-primary" ID="updateButton" runat="server" Text="<%$ Resources:lang,DiscussDetails_ButtonSubmit %>"
                     OnClick="UpdateBtn_Click"></asp:LinkButton>
-                <asp:LinkButton CssClass="portal-button portal-button-secondary" ID="cancelButton" runat="server" Text="Cancel"
+                <asp:LinkButton CssClass="portal-button portal-button-secondary" ID="cancelButton" runat="server" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>"
                     CausesValidation="False" OnClick="CancelBtn_Click"></asp:LinkButton>
             </div>
-            <div class="portal-content-item-meta">Original Message:</div>
+            <div class="portal-content-item-meta"><%= lang.DiscussDetails_SectionOriginalMessage %></div>
         </asp:Panel>
 
         <%--
@@ -66,15 +66,15 @@
         --%>
         <div class="portal-detail-card portal-message-detail-card">
             <div class="portal-detail-row">
-                <span class="portal-detail-label">Subject:</span>
+                <span class="portal-detail-label"><%= lang.DiscussDetails_LabelSubject %></span>
                 <asp:Label ID="Subject" runat="server"></asp:Label>
             </div>
             <div class="portal-detail-row">
-                <span class="portal-detail-label">Author:</span>
+                <span class="portal-detail-label"><%= lang.DiscussDetails_LabelAuthor %></span>
                 <asp:Label ID="CreatedByUser" runat="server"></asp:Label>
             </div>
             <div class="portal-detail-row">
-                <span class="portal-detail-label">Date:</span>
+                <span class="portal-detail-label"><%= lang.DiscussDetails_LabelDate %></span>
                 <asp:Label ID="CreatedDate" runat="server"></asp:Label>
             </div>
             <div class="portal-message-body">

@@ -1041,6 +1041,45 @@
   <data name="EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench" xml:space="preserve">
     <value>This account is not permitted to use the enterprise capability workbench.</value>
   </data>
+  <data name="DiscussDetails_Heading" xml:space="preserve">
+    <value>Message Detail</value>
+  </data>
+  <data name="DiscussDetails_Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="DiscussDetails_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="DiscussDetails_PrevTooltip" xml:space="preserve">
+    <value>Previous Message</value>
+  </data>
+  <data name="DiscussDetails_NextTooltip" xml:space="preserve">
+    <value>Next Message</value>
+  </data>
+  <data name="DiscussDetails_ButtonReply" xml:space="preserve">
+    <value>Reply to this Message</value>
+  </data>
+  <data name="DiscussDetails_ButtonSubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="DiscussDetails_LabelTitle" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="DiscussDetails_LabelBody" xml:space="preserve">
+    <value>Body:</value>
+  </data>
+  <data name="DiscussDetails_SectionOriginalMessage" xml:space="preserve">
+    <value>Original Message:</value>
+  </data>
+  <data name="DiscussDetails_LabelSubject" xml:space="preserve">
+    <value>Subject:</value>
+  </data>
+  <data name="DiscussDetails_LabelAuthor" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="DiscussDetails_LabelDate" xml:space="preserve">
+    <value>Date:</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>
