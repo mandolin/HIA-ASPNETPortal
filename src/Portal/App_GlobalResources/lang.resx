@@ -627,6 +627,12 @@
   <data name="Portal_Title" xml:space="preserve">
     <value>ASP.NET Portal Starter Kit</value>
   </data>
+  <data name="EditLinks_MessageInvalidViewOrder" xml:space="preserve">
+    <value>Enter a valid display order.</value>
+  </data>
+  <data name="EditLinks_MessageInvalidUrl" xml:space="preserve">
+    <value>The link address must be a site-local or HTTP(S) address.</value>
+  </data>
   <data name="EditLinks_Heading" xml:space="preserve">
     <value>Link Details</value>
   </data>

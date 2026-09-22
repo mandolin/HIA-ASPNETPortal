@@ -2318,6 +2318,30 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Link Details</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a valid display order.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter a valid display order.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditLinks_MessageInvalidViewOrder {
+            get {
+                return ResourceManager.GetString("EditLinks_MessageInvalidViewOrder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The link address must be a site-local or HTTP(S) address.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The link address must be a site-local or HTTP(S) address.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditLinks_MessageInvalidUrl {
+            get {
+                return ResourceManager.GetString("EditLinks_MessageInvalidUrl", resourceCulture);
+            }
+        }
+
         internal static string EditLinks_Heading {
             get {
                 return ResourceManager.GetString("EditLinks_Heading", resourceCulture);

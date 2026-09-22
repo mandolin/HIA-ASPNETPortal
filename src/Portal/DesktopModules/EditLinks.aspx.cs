@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -152,7 +153,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>显示顺序只接受旧数据库可保存的整数值，失败时输出低敏校验提示。</zh-CN>
                 //   <en>Display order accepts only integer values that the legacy database can persist; failures emit a low-sensitivity validation message.</en>
                 // </lang>
-                ShowValidationMessage("请输入有效的显示顺序。");
+                ShowValidationMessage(lang.EditLinks_MessageInvalidViewOrder);
                 return;
             }
 
@@ -169,7 +170,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>链接地址沿用统一浏览地址策略，避免在编辑页绕过前台链接过滤。</zh-CN>
                 //   <en>Link URLs reuse the shared browse-URL policy so the edit page cannot bypass front-end link filtering.</en>
                 // </lang>
-                ShowValidationMessage("链接地址只能使用站内地址或 HTTP(S) 地址。");
+                ShowValidationMessage(lang.EditLinks_MessageInvalidUrl);
                 return;
             }
 
