@@ -309,4 +309,100 @@
   <data name="Admin_ModuleDefinitions_ButtonDelete" xml:space="preserve">
     <value>删除此模块类型</value>
   </data>
+  <data name="Admin_ThemeSettings_Title" xml:space="preserve">
+    <value>主题设置</value>
+  </data>
+  <data name="Admin_ThemeSettings_Subtitle" xml:space="preserve">
+    <value>为门户与各页签选择受信任的已部署主题。</value>
+  </data>
+  <data name="Admin_ThemeSettings_GlobalThemeSectionTitle" xml:space="preserve">
+    <value>全局主题</value>
+  </data>
+  <data name="Admin_ThemeSettings_LabelGlobalTheme" xml:space="preserve">
+    <value>全局主题</value>
+  </data>
+  <data name="Admin_ThemeSettings_ButtonApply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="Admin_ThemeSettings_ButtonResetOverride" xml:space="preserve">
+    <value>重置覆盖</value>
+  </data>
+  <data name="Admin_ThemeSettings_EffectiveSourceLabel" xml:space="preserve">
+    <value>生效来源：</value>
+  </data>
+  <data name="Admin_ThemeSettings_TabOverrideSectionTitle" xml:space="preserve">
+    <value>页签覆盖</value>
+  </data>
+  <data name="Admin_ThemeSettings_LabelPortalTab" xml:space="preserve">
+    <value>门户页签</value>
+  </data>
+  <data name="Admin_ThemeSettings_LabelOverrideTheme" xml:space="preserve">
+    <value>覆盖主题</value>
+  </data>
+  <data name="Admin_ThemeSettings_ButtonClearOverride" xml:space="preserve">
+    <value>清除覆盖</value>
+  </data>
+  <data name="Admin_ThemeSettings_CurrentOverrideLabel" xml:space="preserve">
+    <value>当前覆盖：</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_Title" xml:space="preserve">
+    <value>诊断日志</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_Subtitle" xml:space="preserve">
+    <value>面向管理员的结构化运行时事件。</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelStartUtc" xml:space="preserve">
+    <value>起始 UTC</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelEndUtc" xml:space="preserve">
+    <value>结束 UTC</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelLevel" xml:space="preserve">
+    <value>级别</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LevelAll" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LevelInfo" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LevelWarning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LevelError" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelCategory" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelEventId" xml:space="preserve">
+    <value>事件 ID</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ButtonSearch" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ButtonPrevious" xml:space="preserve">
+    <value>上一页</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ButtonNext" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_SectionLogEntries" xml:space="preserve">
+    <value>日志条目</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnLevel" xml:space="preserve">
+    <value>级别</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnCategory" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnMessage" xml:space="preserve">
+    <value>消息</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnEventId" xml:space="preserve">
+    <value>事件 ID</value>
+  </data>
 </root>

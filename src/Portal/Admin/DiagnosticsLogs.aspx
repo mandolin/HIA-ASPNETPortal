@@ -24,8 +24,8 @@
     <div class="portal-admin-page portal-admin-diagnostics-logs">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Diagnostics Logs</h1>
-                <p class="Normal portal-admin-subtitle">Structured runtime events for administrators.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_DiagnosticsLogs_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_DiagnosticsLogs_Subtitle %></p>
             </div>
             <%= PortalNavigationEntryRenderer.RenderActions("Admin.Ops.DiagnosticsLogs", Context) %>
         </div>
@@ -39,32 +39,32 @@
         <div class="portal-admin-section portal-filter-panel">
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Start UTC</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_DiagnosticsLogs_LabelStartUtc %></span>
                     <asp:TextBox ID="StartDateTextBox" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">End UTC</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_DiagnosticsLogs_LabelEndUtc %></span>
                     <asp:TextBox ID="EndDateTextBox" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Level</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_DiagnosticsLogs_LabelLevel %></span>
                     <asp:DropDownList ID="LevelFilter" CssClass="NormalTextBox portal-filter-input" runat="server">
-                        <asp:ListItem Text="All" Value="" />
-                        <asp:ListItem Text="Info" Value="Info" />
-                        <asp:ListItem Text="Warning" Value="Warning" />
-                        <asp:ListItem Text="Error" Value="Error" />
+                        <asp:ListItem Text="<%$ Resources:lang, Admin_DiagnosticsLogs_LevelAll %>" Value="" />
+                        <asp:ListItem Text="<%$ Resources:lang, Admin_DiagnosticsLogs_LevelInfo %>" Value="Info" />
+                        <asp:ListItem Text="<%$ Resources:lang, Admin_DiagnosticsLogs_LevelWarning %>" Value="Warning" />
+                        <asp:ListItem Text="<%$ Resources:lang, Admin_DiagnosticsLogs_LevelError %>" Value="Error" />
                     </asp:DropDownList>
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Category</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_DiagnosticsLogs_LabelCategory %></span>
                     <asp:TextBox ID="CategoryFilter" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Event ID</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_DiagnosticsLogs_LabelEventId %></span>
                     <asp:TextBox ID="EventIdFilter" CssClass="NormalTextBox portal-filter-input" Width="150" runat="server" />
                 </div>
                 <div class="portal-filter-actions">
-                    <asp:LinkButton ID="SearchButton" Text="Search" CssClass="CommandButton" CausesValidation="False" OnClick="SearchButton_Click" runat="server" />
+                    <asp:LinkButton ID="SearchButton" Text="<%$ Resources:lang, Admin_DiagnosticsLogs_ButtonSearch %>" CssClass="CommandButton" CausesValidation="False" OnClick="SearchButton_Click" runat="server" />
                 </div>
             </div>
             <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" runat="server" />
@@ -81,14 +81,14 @@
                 <asp:Label ID="ResultLabel" runat="server" />
             </div>
             <div class="portal-pager-actions">
-                <asp:LinkButton ID="PreviousButton" Text="Previous" CssClass="CommandButton" CausesValidation="False" OnClick="PreviousButton_Click" runat="server" />
-                <asp:LinkButton ID="NextButton" Text="Next" CssClass="CommandButton" CausesValidation="False" OnClick="NextButton_Click" runat="server" />
+                <asp:LinkButton ID="PreviousButton" Text="<%$ Resources:lang, Admin_DiagnosticsLogs_ButtonPrevious %>" CssClass="CommandButton" CausesValidation="False" OnClick="PreviousButton_Click" runat="server" />
+                <asp:LinkButton ID="NextButton" Text="<%$ Resources:lang, Admin_DiagnosticsLogs_ButtonNext %>" CssClass="CommandButton" CausesValidation="False" OnClick="NextButton_Click" runat="server" />
             </div>
         </div>
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Log Entries</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_DiagnosticsLogs_SectionLogEntries %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -101,11 +101,11 @@
                     <HeaderTemplate>
                         <table class="portal-data-table portal-diagnostics-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="155" class="SubHead">UTC</th>
-                                <th scope="col" width="75" class="SubHead">Level</th>
-                                <th scope="col" width="150" class="SubHead">Category</th>
-                                <th scope="col" class="SubHead">Message</th>
-                                <th scope="col" width="195" class="SubHead">Event ID</th>
+                                <th scope="col" width="155" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnUtc %></th>
+                                <th scope="col" width="75" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnLevel %></th>
+                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnCategory %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnMessage %></th>
+                                <th scope="col" width="195" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnEventId %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>

@@ -309,4 +309,100 @@
   <data name="Admin_ModuleDefinitions_ButtonDelete" xml:space="preserve">
     <value>Delete this module type</value>
   </data>
+  <data name="Admin_ThemeSettings_Title" xml:space="preserve">
+    <value>Theme Settings</value>
+  </data>
+  <data name="Admin_ThemeSettings_Subtitle" xml:space="preserve">
+    <value>Select trusted deployed themes for the portal and individual tabs.</value>
+  </data>
+  <data name="Admin_ThemeSettings_GlobalThemeSectionTitle" xml:space="preserve">
+    <value>Global Theme</value>
+  </data>
+  <data name="Admin_ThemeSettings_LabelGlobalTheme" xml:space="preserve">
+    <value>Global Theme</value>
+  </data>
+  <data name="Admin_ThemeSettings_ButtonApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Admin_ThemeSettings_ButtonResetOverride" xml:space="preserve">
+    <value>Reset Override</value>
+  </data>
+  <data name="Admin_ThemeSettings_EffectiveSourceLabel" xml:space="preserve">
+    <value>Effective Source:</value>
+  </data>
+  <data name="Admin_ThemeSettings_TabOverrideSectionTitle" xml:space="preserve">
+    <value>Tab Override</value>
+  </data>
+  <data name="Admin_ThemeSettings_LabelPortalTab" xml:space="preserve">
+    <value>Portal Tab</value>
+  </data>
+  <data name="Admin_ThemeSettings_LabelOverrideTheme" xml:space="preserve">
+    <value>Override Theme</value>
+  </data>
+  <data name="Admin_ThemeSettings_ButtonClearOverride" xml:space="preserve">
+    <value>Clear Override</value>
+  </data>
+  <data name="Admin_ThemeSettings_CurrentOverrideLabel" xml:space="preserve">
+    <value>Current Override:</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_Title" xml:space="preserve">
+    <value>Diagnostics Logs</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_Subtitle" xml:space="preserve">
+    <value>Structured runtime events for administrators.</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelStartUtc" xml:space="preserve">
+    <value>Start UTC</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelEndUtc" xml:space="preserve">
+    <value>End UTC</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelLevel" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LevelAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LevelInfo" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LevelWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LevelError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_LabelEventId" xml:space="preserve">
+    <value>Event ID</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ButtonSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ButtonPrevious" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ButtonNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_SectionLogEntries" xml:space="preserve">
+    <value>Log Entries</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnLevel" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ColumnEventId" xml:space="preserve">
+    <value>Event ID</value>
+  </data>
 </root>
