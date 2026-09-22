@@ -957,6 +957,90 @@
   <data name="EmployeeProfileConfirm_LabelLastConfirmed" xml:space="preserve">
     <value>Last confirmed</value>
   </data>
+  <data name="EnterpriseCapabilityWorkbench_Heading" xml:space="preserve">
+    <value>Enterprise Capability Workbench</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonSubmit" xml:space="preserve">
+    <value>Submit collaboration item</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonAddComment" xml:space="preserve">
+    <value>Add participant comment</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonResubmit" xml:space="preserve">
+    <value>Resubmit after return</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemTitle" xml:space="preserve">
+    <value>Item title</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemType" xml:space="preserve">
+    <value>Item type</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelPriority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelDueUtc" xml:space="preserve">
+    <value>Due UTC</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemDetail" xml:space="preserve">
+    <value>Item details</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_SectionMyRecentItems" xml:space="preserve">
+    <value>My recent items</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnRecentComment" xml:space="preserve">
+    <value>Latest note</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_SectionFollowUp" xml:space="preserve">
+    <value>Participate / follow up</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelLatestCommentPrefix" xml:space="preserve">
+    <value>Latest comment: </value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit" xml:space="preserve">
+    <value>Sign in before submitting a collaboration item.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageNoPermissionSubmit" xml:space="preserve">
+    <value>This account is not permitted to submit enterprise collaboration items.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageInvalidDueUtc" xml:space="preserve">
+    <value>The due UTC must be empty, or use yyyy-MM-dd / yyyy-MM-dd HH:mm:ss.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageTitleRequired" xml:space="preserve">
+    <value>Enter the item title.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageContentRequired" xml:space="preserve">
+    <value>Enter a summary or item details.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSubmittedPrefix" xml:space="preserve">
+    <value>Enterprise collaboration item submitted, no.: </value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredAction" xml:space="preserve">
+    <value>Sign in before operating on a collaboration item.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageInvalidItemId" xml:space="preserve">
+    <value>The collaboration item identifier is invalid.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageCommentAdded" xml:space="preserve">
+    <value>A participant-scope comment was added.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageResubmitted" xml:space="preserve">
+    <value>The collaboration item was resubmitted.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageUnsupportedAction" xml:space="preserve">
+    <value>Unsupported collaboration item operation.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredWorkbench" xml:space="preserve">
+    <value>Sign in before using the enterprise capability workbench.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageModuleNotInitialized" xml:space="preserve">
+    <value>The enterprise collaboration item module has not finished database initialisation.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench" xml:space="preserve">
+    <value>This account is not permitted to use the enterprise capability workbench.</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>

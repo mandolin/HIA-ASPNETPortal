@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -103,7 +104,7 @@ namespace ASPNET.StarterKit.Portal
             int userId = GetCurrentUserId();
             if (userId <= 0)
             {
-                ShowMessage("请先登录后再提交协同事项。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit);
                 BindModule();
                 return;
             }
@@ -112,7 +113,7 @@ namespace ASPNET.StarterKit.Portal
                 PortalPermissionKeys.BusinessCollaborationCreate,
                 PortalPermissionKeys.BusinessCollaborationAdmin))
             {
-                ShowMessage("当前账号没有提交企业协同事项的权限。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageNoPermissionSubmit);
                 BindModule();
                 return;
             }
@@ -124,7 +125,7 @@ namespace ASPNET.StarterKit.Portal
             DateTime? dueUtc;
             if (!TryParseDueUtc(DueUtcTextBox.Text, out dueUtc))
             {
-                ShowMessage("期限 UTC 必须为空，或使用 yyyy-MM-dd / yyyy-MM-dd HH:mm:ss。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageInvalidDueUtc);
                 return;
             }
 
@@ -137,13 +138,13 @@ namespace ASPNET.StarterKit.Portal
             string description = NormalizeInput(DescriptionTextBox.Text, 4000);
             if (string.IsNullOrWhiteSpace(title))
             {
-                ShowMessage("请填写事项标题。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageTitleRequired);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(summary) && string.IsNullOrWhiteSpace(description))
             {
-                ShowMessage("请填写摘要或事项说明。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageContentRequired);
                 return;
             }
 
@@ -187,7 +188,7 @@ namespace ASPNET.StarterKit.Portal
 
             TryEnsureWorkItem(result.ItemId, result.ItemCode, title, summary, dueUtc);
             ClearSubmitForm();
-            ShowMessage("企业协同事项已提交，编号：" + result.ItemCode);
+            ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSubmittedPrefix + result.ItemCode);
             BindModule();
         }
 
@@ -206,7 +207,7 @@ namespace ASPNET.StarterKit.Portal
             int userId = GetCurrentUserId();
             if (userId <= 0 || !IsCurrentUserAuthenticated())
             {
-                ShowMessage("请先登录后再操作协同事项。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredAction);
                 BindModule();
                 return;
             }
@@ -214,7 +215,7 @@ namespace ASPNET.StarterKit.Portal
             long itemId;
             if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId) || itemId <= 0)
             {
-                ShowMessage("协同事项标识无效。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageInvalidItemId);
                 BindModule();
                 return;
             }
@@ -250,7 +251,7 @@ namespace ASPNET.StarterKit.Portal
                 }
 
                 RecordCommentAudit(commentResult, PortalCollaborationItemVisibilityScopes.ItemParticipants, comment);
-                ShowMessage("已添加参与者范围评论。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageCommentAdded);
                 BindModule();
                 return;
             }
@@ -285,12 +286,12 @@ namespace ASPNET.StarterKit.Portal
                 }
 
                 RecordActionAudit(result);
-                ShowMessage("协同事项已重新提交。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageResubmitted);
                 BindModule();
                 return;
             }
 
-            ShowMessage("不支持的协同事项操作。");
+            ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageUnsupportedAction);
             BindModule();
         }
 
@@ -311,7 +312,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 WorkbenchPanel.Visible = false;
                 BindRecentItems(0);
-                ShowMessage("请先登录后再使用企业能力工作台。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredWorkbench);
                 return;
             }
 
@@ -319,7 +320,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 WorkbenchPanel.Visible = false;
                 BindRecentItems(0);
-                ShowMessage("企业协同事项模块尚未完成数据库初始化。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageModuleNotInitialized);
                 return;
             }
 
@@ -335,7 +336,7 @@ namespace ASPNET.StarterKit.Portal
             if (!canUseWorkbench)
             {
                 BindRecentItems(0);
-                ShowMessage("当前账号没有使用企业能力工作台的权限。");
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench);
                 return;
             }
 

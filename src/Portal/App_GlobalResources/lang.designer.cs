@@ -3632,6 +3632,342 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enterprise Capability Workbench</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enterprise Capability Workbench</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_Heading {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Submit collaboration item</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submit collaboration item</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ButtonSubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add participant comment</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add participant comment</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_ButtonAddComment {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ButtonAddComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Resubmit after return</zh-CN>
+        ///   <en>Looks up a localized string similar to: Resubmit after return</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_ButtonResubmit {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ButtonResubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Item title</zh-CN>
+        ///   <en>Looks up a localized string similar to: Item title</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelItemTitle {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelItemTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Item type</zh-CN>
+        ///   <en>Looks up a localized string similar to: Item type</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelItemType {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelItemType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Priority</zh-CN>
+        ///   <en>Looks up a localized string similar to: Priority</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelPriority {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelPriority", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Summary</zh-CN>
+        ///   <en>Looks up a localized string similar to: Summary</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelSummary {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Due UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Due UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelDueUtc {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelDueUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Item details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Item details</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelItemDetail {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelItemDetail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：My recent items</zh-CN>
+        ///   <en>Looks up a localized string similar to: My recent items</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_SectionMyRecentItems {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_SectionMyRecentItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Latest note</zh-CN>
+        ///   <en>Looks up a localized string similar to: Latest note</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_ColumnRecentComment {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ColumnRecentComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Participate / follow up</zh-CN>
+        ///   <en>Looks up a localized string similar to: Participate / follow up</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_SectionFollowUp {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_SectionFollowUp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Latest comment: </zh-CN>
+        ///   <en>Looks up a localized string similar to: Latest comment: </en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelLatestCommentPrefix {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelLatestCommentPrefix", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Sign in before submitting a collaboration item.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Sign in before submitting a collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This account is not permitted to submit enterprise collaboration items.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This account is not permitted to submit enterprise collaboration items.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageNoPermissionSubmit {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageNoPermissionSubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The due UTC must be empty, or use yyyy-MM-dd / yyyy-MM-dd HH:mm:ss.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The due UTC must be empty, or use yyyy-MM-dd / yyyy-MM-dd HH:mm:ss.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageInvalidDueUtc {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageInvalidDueUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter the item title.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter the item title.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageTitleRequired {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageTitleRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a summary or item details.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter a summary or item details.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageContentRequired {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageContentRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enterprise collaboration item submitted, no.: </zh-CN>
+        ///   <en>Looks up a localized string similar to: Enterprise collaboration item submitted, no.: </en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageSubmittedPrefix {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageSubmittedPrefix", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Sign in before operating on a collaboration item.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Sign in before operating on a collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageSignInRequiredAction {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageSignInRequiredAction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The collaboration item identifier is invalid.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The collaboration item identifier is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageInvalidItemId {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageInvalidItemId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：A participant-scope comment was added.</zh-CN>
+        ///   <en>Looks up a localized string similar to: A participant-scope comment was added.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageCommentAdded {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageCommentAdded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The collaboration item was resubmitted.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The collaboration item was resubmitted.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageResubmitted {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageResubmitted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Unsupported collaboration item operation.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Unsupported collaboration item operation.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageUnsupportedAction {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageUnsupportedAction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Sign in before using the enterprise capability workbench.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Sign in before using the enterprise capability workbench.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageSignInRequiredWorkbench {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageSignInRequiredWorkbench", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The enterprise collaboration item module has not finished database initialisation.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The enterprise collaboration item module has not finished database initialisation.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageModuleNotInitialized {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageModuleNotInitialized", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This account is not permitted to use the enterprise capability workbench.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This account is not permitted to use the enterprise capability workbench.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

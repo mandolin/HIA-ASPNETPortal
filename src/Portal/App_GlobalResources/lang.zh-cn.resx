@@ -957,6 +957,90 @@
   <data name="EmployeeProfileConfirm_LabelLastConfirmed" xml:space="preserve">
     <value>上次确认</value>
   </data>
+  <data name="EnterpriseCapabilityWorkbench_Heading" xml:space="preserve">
+    <value>企业能力工作台</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonSubmit" xml:space="preserve">
+    <value>提交协同事项</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonAddComment" xml:space="preserve">
+    <value>添加参与者评论</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonResubmit" xml:space="preserve">
+    <value>退回后重新提交</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemTitle" xml:space="preserve">
+    <value>事项标题</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemType" xml:space="preserve">
+    <value>事项类型</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelPriority" xml:space="preserve">
+    <value>优先级</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelSummary" xml:space="preserve">
+    <value>摘要</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelDueUtc" xml:space="preserve">
+    <value>期限 UTC</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemDetail" xml:space="preserve">
+    <value>事项说明</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_SectionMyRecentItems" xml:space="preserve">
+    <value>我的最近事项</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnRecentComment" xml:space="preserve">
+    <value>最近意见</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_SectionFollowUp" xml:space="preserve">
+    <value>参与跟进</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelLatestCommentPrefix" xml:space="preserve">
+    <value>最新评论：</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit" xml:space="preserve">
+    <value>请先登录后再提交协同事项。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageNoPermissionSubmit" xml:space="preserve">
+    <value>当前账号没有提交企业协同事项的权限。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageInvalidDueUtc" xml:space="preserve">
+    <value>期限 UTC 必须为空，或使用 yyyy-MM-dd / yyyy-MM-dd HH:mm:ss。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageTitleRequired" xml:space="preserve">
+    <value>请填写事项标题。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageContentRequired" xml:space="preserve">
+    <value>请填写摘要或事项说明。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSubmittedPrefix" xml:space="preserve">
+    <value>企业协同事项已提交，编号：</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredAction" xml:space="preserve">
+    <value>请先登录后再操作协同事项。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageInvalidItemId" xml:space="preserve">
+    <value>协同事项标识无效。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageCommentAdded" xml:space="preserve">
+    <value>已添加参与者范围评论。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageResubmitted" xml:space="preserve">
+    <value>协同事项已重新提交。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageUnsupportedAction" xml:space="preserve">
+    <value>不支持的协同事项操作。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredWorkbench" xml:space="preserve">
+    <value>请先登录后再使用企业能力工作台。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageModuleNotInitialized" xml:space="preserve">
+    <value>企业协同事项模块尚未完成数据库初始化。</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench" xml:space="preserve">
+    <value>当前账号没有使用企业能力工作台的权限。</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
   </data>
