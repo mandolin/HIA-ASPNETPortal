@@ -1,5 +1,6 @@
 using System;
 using System.Web.UI.HtmlControls;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -56,6 +57,17 @@ namespace ASPNET.StarterKit.Portal
                 //   <en>Use InnerText to force plain-text output and never treat the request parameter as HTML.</en>
                 // </lang>
                 title.InnerText = Request.Params["title"];
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>未提供 title 时写入资源中的默认标题。默认标题不能写在标记里：该控件会被设置 InnerText，
+                //         一旦标记内含代码块，其内容就不再是字面内容，赋值会抛"内容非字面"异常。</zh-CN>
+                //   <en>Write the resource default title when no title is supplied. The default cannot live in markup:
+                //         this control gets InnerText assigned, and a code block in the markup makes its contents
+                //         non-literal, so the assignment throws a "contents are not literal" exception.</en>
+                // </lang>
+                title.InnerText = lang.Admin_NotImplemented_Title;
             }
         }
     }

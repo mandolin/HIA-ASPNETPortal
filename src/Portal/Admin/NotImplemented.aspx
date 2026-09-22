@@ -16,7 +16,13 @@
           <en>The server control keeps the title as the sample landing-page identifier; this page does not load an unimplemented module or execute a business command carried by the link.</en>
         </lang>
         --%>
-        <div class="Head portal-static-message-title" id="title" runat="server"><%= lang.Admin_NotImplemented_Title %></div>
+        <%--
+        <lang>
+          <zh-CN>标题元素由服务器控制，默认标题由 code-behind 从资源写入；此处不能放代码块，否则设置 InnerText 会因"内容非字面"而抛异常。</zh-CN>
+          <en>The title element is server-controlled and its default text is written by code-behind from resources; a code block must not be placed here, otherwise setting InnerText throws because the contents are not literal.</en>
+        </lang>
+        --%>
+        <div class="Head portal-static-message-title" id="title" runat="server"></div>
         <%--
         <lang>
           <zh-CN>正文只解释样例链接没有提供内容，保持静态信息边界，不把样例数据当作可用业务资源。</zh-CN>
