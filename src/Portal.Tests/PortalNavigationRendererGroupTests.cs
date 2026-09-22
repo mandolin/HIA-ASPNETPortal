@@ -38,6 +38,12 @@ namespace ASPNET.StarterKit.Portal.Tests
         [DataRow("Admin.CollaborationItems")]
         [DataRow("Admin.WorkItems")]
         [DataRow("Admin.Capability.BusinessApplications")]
+        [DataRow("Admin.Capability.EmployeeDirectory")]
+        [DataRow("Admin.Capability.EmployeeEdit")]
+        [DataRow("Admin.Capability.OrganizationUnitEdit")]
+        [DataRow("Admin.Capability.UserEmployeeBindingEdit")]
+        [DataRow("Admin.Capability.EmployeeProfileCorrectionRequests")]
+        [DataRow("Admin.Account.ManageUsers")]
         public void GetRelatedEntries_ReturnsGovernedEntriesAndExcludesSelf(string entryKey)
         {
             IList<PortalNavigationEntry> related = PortalNavigationVisibilityPolicy.GetRelatedEntries(entryKey, 5);

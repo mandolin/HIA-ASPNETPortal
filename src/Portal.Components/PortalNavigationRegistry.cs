@@ -637,6 +637,120 @@ namespace ASPNET.StarterKit.Portal
                 "Administration and diagnostic entry for business work items."),
 
             // <lang>
+            //   <zh-CN>员工目录后台：为页面动作区提供受 registry 管辖的入口。此声明只表达显示依赖，不构成数据读取或写入授权；分组按 Admin.Capability. 前缀落在 Admin.Capability 族。</zh-CN>
+            //   <en>Employee-directory administration: supplies a registry-governed entry for the page action area. The declaration expresses display dependencies only and authorizes neither reads nor writes; the Admin.Capability. prefix places it in the Admin.Capability group.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.EmployeeDirectory",
+                PortalNavigationEntryKind.AdminPage,
+                "员工目录",
+                "Employee Directory",
+                "Admin/EmployeeDirectory.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                220,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.EmployeeDirectoryView },
+                new string[0],
+                new string[0],
+                "Read-only directory overview entry; page-level access control remains authoritative."),
+
+            // <lang>
+            //   <zh-CN>员工维护页：单条员工记录的维护入口；权限键仅表达页面显示依赖，保存权限仍由页面与数据层复核。</zh-CN>
+            //   <en>Employee maintenance page: the maintenance entry for a single employee record; the permission key expresses display dependency only, while save authorization is rechecked by the page and data layer.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.EmployeeEdit",
+                PortalNavigationEntryKind.AdminPage,
+                "员工维护",
+                "Employee Maintenance",
+                "Admin/EmployeeEdit.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                222,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.EmployeeDirectoryEdit },
+                new string[0],
+                new string[0],
+                "Employee create/edit entry; write authorization stays with the page."),
+
+            // <lang>
+            //   <zh-CN>组织单元维护页：目录组织结构维护入口；此条目不建立任何组织层级或数据范围结论。</zh-CN>
+            //   <en>Organization-unit maintenance page: the directory-structure maintenance entry; the entry establishes no organization hierarchy or data-scope conclusion.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.OrganizationUnitEdit",
+                PortalNavigationEntryKind.AdminPage,
+                "组织单元维护",
+                "Organization Unit Maintenance",
+                "Admin/OrganizationUnitEdit.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                224,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.EmployeeDirectoryEdit },
+                new string[0],
+                new string[0],
+                "Organization-unit create/edit entry; scope rules remain server-side."),
+
+            // <lang>
+            //   <zh-CN>用户-员工绑定页：单条绑定维护入口；绑定与解绑的授权、并发版本与审计仍由页面负责。</zh-CN>
+            //   <en>User-employee binding page: the single-binding maintenance entry; bind/unbind authorization, concurrency version, and auditing stay with the page.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.UserEmployeeBindingEdit",
+                PortalNavigationEntryKind.AdminPage,
+                "用户员工绑定",
+                "User-Employee Binding",
+                "Admin/UserEmployeeBindingEdit.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                226,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.EmployeeDirectoryBind },
+                new string[0],
+                new string[0],
+                "Binding maintenance entry; bind/unbind effects remain page-owned."),
+
+            // <lang>
+            //   <zh-CN>员工资料更正请求审核页：审核入口的显示依赖；状态迁移、请求归属与审计仍由页面校验，本条目不改变主数据。</zh-CN>
+            //   <en>Employee-profile correction-request review page: display dependency for the review entry; state transitions, request ownership, and auditing remain page-validated, and this entry changes no master data.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.EmployeeProfileCorrectionRequests",
+                PortalNavigationEntryKind.AdminPage,
+                "员工资料更正请求",
+                "Employee Profile Correction Requests",
+                "Admin/EmployeeProfileCorrectionRequests.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                228,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.EmployeeProfileCorrectionRequestReview },
+                new string[0],
+                new string[0],
+                "Review-console entry; master data is never modified directly from here."),
+
+            // <lang>
+            //   <zh-CN>现代用户管理页：按 Admin.Account. 前缀落在 Admin.Account 族；用户创建、角色与密码操作仍由页面与数据层授权。</zh-CN>
+            //   <en>Modern user-administration page: the Admin.Account. prefix places it in the Admin.Account group; user creation plus role and password operations remain authorized by the page and data layer.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Account.ManageUsers",
+                PortalNavigationEntryKind.AdminPage,
+                "用户管理",
+                "User Administration",
+                "Admin/ManageUsers.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                190,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.AdminUsersView },
+                new string[0],
+                new string[0],
+                "Current user-administration entry; the legacy Core.Admin.Users entry stays separate."),
+
+            // <lang>
             //   <zh-CN>模块目录后台：为包/Profile 可见性诊断登记的管理员入口；此说明不使任意包或 Profile 自动可见。</zh-CN>
             //   <en>Module-catalog administration: administrator entry registered for package/Profile visibility diagnostics; this declaration does not make any package or Profile automatically visible.</en>
             // </lang>
