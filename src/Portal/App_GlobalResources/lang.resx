@@ -582,6 +582,51 @@
   <data name="Admin_DiagnosticLogDetail_FieldUserAgent" xml:space="preserve">
     <value>User-Agent</value>
   </data>
+  <data name="Admin_NotImplemented_Brand" xml:space="preserve">
+    <value>ASP.NET Portal Starter Kit</value>
+  </data>
+  <data name="Admin_NotImplemented_Title" xml:space="preserve">
+    <value>Linked Content Not Provided</value>
+  </data>
+  <data name="Admin_NotImplemented_BodyPre" xml:space="preserve">
+    <value>The link you clicked was provided as a part of the sample data for the</value>
+  </data>
+  <data name="Admin_NotImplemented_BodyPost" xml:space="preserve">
+    <value>. The content for this link is not provided as part of the sample application.</value>
+  </data>
+  <data name="Admin_NotImplemented_ReturnHome" xml:space="preserve">
+    <value>Return to ASP.NET Portal Starter Kit Home</value>
+  </data>
+  <data name="GenericError_Title" xml:space="preserve">
+    <value>Application Error</value>
+  </data>
+  <data name="GenericError_Heading" xml:space="preserve">
+    <value>The application could not complete the request.</value>
+  </data>
+  <data name="GenericError_Body" xml:space="preserve">
+    <value>The system recorded this error. Try again later, or give the event id below to an administrator.</value>
+  </data>
+  <data name="GenericError_EventIdLabel" xml:space="preserve">
+    <value>Event id: </value>
+  </data>
+  <data name="GenericError_ReturnHome" xml:space="preserve">
+    <value>Return to home page</value>
+  </data>
+  <data name="PortalBanner_Subtitle" xml:space="preserve">
+    <value>Enterprise Portal</value>
+  </data>
+  <data name="PortalBanner_Home" xml:space="preserve">
+    <value>Portal Home</value>
+  </data>
+  <data name="PortalBanner_Documentation" xml:space="preserve">
+    <value>Portal Documentation</value>
+  </data>
+  <data name="ModuleTitle_EditToolTipFormat" xml:space="preserve">
+    <value>Open module action: {0}</value>
+  </data>
+  <data name="Portal_Title" xml:space="preserve">
+    <value>ASP.NET Portal Starter Kit</value>
+  </data>
   <data name="Admin_EmployeeDirectory_Title" xml:space="preserve">
     <value>Employee Directory</value>
   </data>
@@ -1712,6 +1757,45 @@
   </data>
   <data name="Admin_ManageUsers_MessageRegistrationAlreadyRejected" xml:space="preserve">
     <value>This account's registration request was rejected; use the approve action to restore it first.</value>
+  </data>
+  <data name="Admin_Register_Heading" xml:space="preserve">
+    <value>Create a New Account</value>
+  </data>
+  <data name="Admin_Register_LabelName" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="Admin_Register_LabelEmail" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Admin_Register_LabelEmployeeCode" xml:space="preserve">
+    <value>Employee Code:</value>
+  </data>
+  <data name="Admin_Register_LabelPassword" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="Admin_Register_LabelConfirmPassword" xml:space="preserve">
+    <value>Confirm Password:</value>
+  </data>
+  <data name="Admin_Register_MessageNameBlank" xml:space="preserve">
+    <value>'Name' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessageEmailBlank" xml:space="preserve">
+    <value>'Email' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessageEmployeeCodeBlankRequired" xml:space="preserve">
+    <value>'Employee Code' must not be left blank for invitation registration.</value>
+  </data>
+  <data name="Admin_Register_ValidatorPasswordRequired" xml:space="preserve">
+    <value>'Password' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessageConfirmBlank" xml:space="preserve">
+    <value>'Confirm' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessageInvalidEmail" xml:space="preserve">
+    <value>Must use a valid email address.</value>
+  </data>
+  <data name="Admin_Register_ButtonSubmit" xml:space="preserve">
+    <value>Submit Registration</value>
   </data>
   <data name="Admin_Register_MessagePasswordBlank" xml:space="preserve">
     <value>'Password' and 'Confirm Password' must not be left blank.</value>

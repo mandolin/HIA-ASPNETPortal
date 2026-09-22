@@ -582,6 +582,51 @@
   <data name="Admin_DiagnosticLogDetail_FieldUserAgent" xml:space="preserve">
     <value>User-Agent</value>
   </data>
+  <data name="Admin_NotImplemented_Brand" xml:space="preserve">
+    <value>ASP.NET 门户入门套件</value>
+  </data>
+  <data name="Admin_NotImplemented_Title" xml:space="preserve">
+    <value>未提供关联内容</value>
+  </data>
+  <data name="Admin_NotImplemented_BodyPre" xml:space="preserve">
+    <value>您点击的链接属于示例数据的一部分，用于</value>
+  </data>
+  <data name="Admin_NotImplemented_BodyPost" xml:space="preserve">
+    <value>。本示例应用未提供该链接的内容。</value>
+  </data>
+  <data name="Admin_NotImplemented_ReturnHome" xml:space="preserve">
+    <value>返回 ASP.NET 门户入门套件首页</value>
+  </data>
+  <data name="GenericError_Title" xml:space="preserve">
+    <value>应用程序错误</value>
+  </data>
+  <data name="GenericError_Heading" xml:space="preserve">
+    <value>应用程序暂时无法完成请求。</value>
+  </data>
+  <data name="GenericError_Body" xml:space="preserve">
+    <value>系统已记录本次错误。请稍后重试，或将下面的事件编号提供给管理员。</value>
+  </data>
+  <data name="GenericError_EventIdLabel" xml:space="preserve">
+    <value>事件编号：</value>
+  </data>
+  <data name="GenericError_ReturnHome" xml:space="preserve">
+    <value>返回首页</value>
+  </data>
+  <data name="PortalBanner_Subtitle" xml:space="preserve">
+    <value>企业门户</value>
+  </data>
+  <data name="PortalBanner_Home" xml:space="preserve">
+    <value>门户首页</value>
+  </data>
+  <data name="PortalBanner_Documentation" xml:space="preserve">
+    <value>门户文档</value>
+  </data>
+  <data name="ModuleTitle_EditToolTipFormat" xml:space="preserve">
+    <value>模块操作：{0}</value>
+  </data>
+  <data name="Portal_Title" xml:space="preserve">
+    <value>ASP.NET 门户入门套件</value>
+  </data>
   <data name="Admin_EmployeeDirectory_Title" xml:space="preserve">
     <value>员工目录</value>
   </data>
@@ -1712,6 +1757,45 @@
   </data>
   <data name="Admin_ManageUsers_MessageRegistrationAlreadyRejected" xml:space="preserve">
     <value>该账号的注册申请已拒绝，请先使用批准注册动作恢复。</value>
+  </data>
+  <data name="Admin_Register_Heading" xml:space="preserve">
+    <value>创建新账号</value>
+  </data>
+  <data name="Admin_Register_LabelName" xml:space="preserve">
+    <value>姓名：</value>
+  </data>
+  <data name="Admin_Register_LabelEmail" xml:space="preserve">
+    <value>电子邮件：</value>
+  </data>
+  <data name="Admin_Register_LabelEmployeeCode" xml:space="preserve">
+    <value>员工编号：</value>
+  </data>
+  <data name="Admin_Register_LabelPassword" xml:space="preserve">
+    <value>密码：</value>
+  </data>
+  <data name="Admin_Register_LabelConfirmPassword" xml:space="preserve">
+    <value>确认密码：</value>
+  </data>
+  <data name="Admin_Register_MessageNameBlank" xml:space="preserve">
+    <value>“姓名”不能为空。</value>
+  </data>
+  <data name="Admin_Register_MessageEmailBlank" xml:space="preserve">
+    <value>“电子邮件”不能为空。</value>
+  </data>
+  <data name="Admin_Register_MessageEmployeeCodeBlankRequired" xml:space="preserve">
+    <value>邀请注册时“员工编号”不能为空。</value>
+  </data>
+  <data name="Admin_Register_ValidatorPasswordRequired" xml:space="preserve">
+    <value>“密码”不能为空。</value>
+  </data>
+  <data name="Admin_Register_MessageConfirmBlank" xml:space="preserve">
+    <value>“确认密码”不能为空。</value>
+  </data>
+  <data name="Admin_Register_MessageInvalidEmail" xml:space="preserve">
+    <value>必须使用有效的电子邮件地址。</value>
+  </data>
+  <data name="Admin_Register_ButtonSubmit" xml:space="preserve">
+    <value>提交注册</value>
   </data>
   <data name="Admin_Register_MessagePasswordBlank" xml:space="preserve">
     <value>"密码"与"确认密码"不能为空。</value>

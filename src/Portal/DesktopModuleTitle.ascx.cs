@@ -1,6 +1,8 @@
 using System;
+using System.Globalization;
 using System.Web;
 using System.Web.UI;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -97,7 +99,7 @@ namespace ASPNET.StarterKit.Portal
                 EditButton.Text = EditText;
                 EditButton.NavigateUrl = EditUrl + "?mid=" + portalModule.ModuleId;
                 EditButton.Target = EditTarget;
-                EditButton.ToolTip = "Open module action: " + EditText;
+                EditButton.ToolTip = string.Format(CultureInfo.CurrentCulture, lang.ModuleTitle_EditToolTipFormat, EditText);
                 EditButton.Visible = true;
                 ModuleActions.Visible = true;
             }

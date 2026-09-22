@@ -17,7 +17,7 @@
       <en>The page title remains a legacy fixed value. Native Web Forms Theme loading attaches theme CSS during the page lifecycle, so the Master markup does not concatenate it manually.</en>
     </lang>
     --%>
-    <title>ASP.NET Portal Starter Kit</title>
+    <title><%= lang.Portal_Title %></title>
 </head>
 <%--
 <lang>

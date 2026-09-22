@@ -2126,6 +2126,186 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Employee Directory</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Linked Content Not Provided</zh-CN>
+        ///   <en>Looks up a localized string similar to: Linked Content Not Provided</en>
+        /// </lang>
+        /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：ASP.NET Portal Starter Kit</zh-CN>
+        ///   <en>Looks up a localized string similar to: ASP.NET Portal Starter Kit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_NotImplemented_Brand {
+            get {
+                return ResourceManager.GetString("Admin_NotImplemented_Brand", resourceCulture);
+            }
+        }
+
+        internal static string Admin_NotImplemented_Title {
+            get {
+                return ResourceManager.GetString("Admin_NotImplemented_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The link you clicked was provided as a part of the sample data for the</zh-CN>
+        ///   <en>Looks up a localized string similar to: The link you clicked was provided as a part of the sample data for the</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_NotImplemented_BodyPre {
+            get {
+                return ResourceManager.GetString("Admin_NotImplemented_BodyPre", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：. The content for this link is not provided as part of the sample application.</zh-CN>
+        ///   <en>Looks up a localized string similar to: . The content for this link is not provided as part of the sample application.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_NotImplemented_BodyPost {
+            get {
+                return ResourceManager.GetString("Admin_NotImplemented_BodyPost", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Return to ASP.NET Portal Starter Kit Home</zh-CN>
+        ///   <en>Looks up a localized string similar to: Return to ASP.NET Portal Starter Kit Home</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_NotImplemented_ReturnHome {
+            get {
+                return ResourceManager.GetString("Admin_NotImplemented_ReturnHome", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Application Error</zh-CN>
+        ///   <en>Looks up a localized string similar to: Application Error</en>
+        /// </lang>
+        /// </summary>
+        internal static string GenericError_Title {
+            get {
+                return ResourceManager.GetString("GenericError_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The application could not complete the request.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The application could not complete the request.</en>
+        /// </lang>
+        /// </summary>
+        internal static string GenericError_Heading {
+            get {
+                return ResourceManager.GetString("GenericError_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The system recorded this error. Try again later, or give the event id below to an administrator.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The system recorded this error. Try again later, or give the event id below to an administrator.</en>
+        /// </lang>
+        /// </summary>
+        internal static string GenericError_Body {
+            get {
+                return ResourceManager.GetString("GenericError_Body", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Event id: </zh-CN>
+        ///   <en>Looks up a localized string similar to: Event id: </en>
+        /// </lang>
+        /// </summary>
+        internal static string GenericError_EventIdLabel {
+            get {
+                return ResourceManager.GetString("GenericError_EventIdLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Return to home page</zh-CN>
+        ///   <en>Looks up a localized string similar to: Return to home page</en>
+        /// </lang>
+        /// </summary>
+        internal static string GenericError_ReturnHome {
+            get {
+                return ResourceManager.GetString("GenericError_ReturnHome", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enterprise Portal</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enterprise Portal</en>
+        /// </lang>
+        /// </summary>
+        internal static string PortalBanner_Subtitle {
+            get {
+                return ResourceManager.GetString("PortalBanner_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Portal Home</zh-CN>
+        ///   <en>Looks up a localized string similar to: Portal Home</en>
+        /// </lang>
+        /// </summary>
+        internal static string PortalBanner_Home {
+            get {
+                return ResourceManager.GetString("PortalBanner_Home", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Portal Documentation</zh-CN>
+        ///   <en>Looks up a localized string similar to: Portal Documentation</en>
+        /// </lang>
+        /// </summary>
+        internal static string PortalBanner_Documentation {
+            get {
+                return ResourceManager.GetString("PortalBanner_Documentation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Open module action: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Open module action: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string ModuleTitle_EditToolTipFormat {
+            get {
+                return ResourceManager.GetString("ModuleTitle_EditToolTipFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：ASP.NET Portal Starter Kit</zh-CN>
+        ///   <en>Looks up a localized string similar to: ASP.NET Portal Starter Kit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Portal_Title {
+            get {
+                return ResourceManager.GetString("Portal_Title", resourceCulture);
+            }
+        }
+
         internal static string Admin_EmployeeDirectory_Title {
             get {
                 return ResourceManager.GetString("Admin_EmployeeDirectory_Title", resourceCulture);
@@ -6650,6 +6830,162 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: 'Password' and 'Confirm Password' must not be left blank.</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Create a New Account</zh-CN>
+        ///   <en>Looks up a localized string similar to: Create a New Account</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_Heading {
+            get {
+                return ResourceManager.GetString("Admin_Register_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Name:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Name:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_LabelName {
+            get {
+                return ResourceManager.GetString("Admin_Register_LabelName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Email:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Email:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_LabelEmail {
+            get {
+                return ResourceManager.GetString("Admin_Register_LabelEmail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Code:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee Code:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_LabelEmployeeCode {
+            get {
+                return ResourceManager.GetString("Admin_Register_LabelEmployeeCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Password:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Password:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_LabelPassword {
+            get {
+                return ResourceManager.GetString("Admin_Register_LabelPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Confirm Password:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Confirm Password:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_LabelConfirmPassword {
+            get {
+                return ResourceManager.GetString("Admin_Register_LabelConfirmPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：'Name' must not be left blank.</zh-CN>
+        ///   <en>Looks up a localized string similar to: 'Name' must not be left blank.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageNameBlank {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageNameBlank", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：'Email' must not be left blank.</zh-CN>
+        ///   <en>Looks up a localized string similar to: 'Email' must not be left blank.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageEmailBlank {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageEmailBlank", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：'Employee Code' must not be left blank for invitation registration.</zh-CN>
+        ///   <en>Looks up a localized string similar to: 'Employee Code' must not be left blank for invitation registration.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageEmployeeCodeBlankRequired {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageEmployeeCodeBlankRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：'Password' must not be left blank.</zh-CN>
+        ///   <en>Looks up a localized string similar to: 'Password' must not be left blank.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_ValidatorPasswordRequired {
+            get {
+                return ResourceManager.GetString("Admin_Register_ValidatorPasswordRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：'Confirm' must not be left blank.</zh-CN>
+        ///   <en>Looks up a localized string similar to: 'Confirm' must not be left blank.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageConfirmBlank {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageConfirmBlank", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Must use a valid email address.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Must use a valid email address.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageInvalidEmail {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageInvalidEmail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Submit Registration</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submit Registration</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("Admin_Register_ButtonSubmit", resourceCulture);
+            }
+        }
+
         internal static string Admin_Register_MessagePasswordBlank {
             get {
                 return ResourceManager.GetString("Admin_Register_MessagePasswordBlank", resourceCulture);

@@ -11,7 +11,7 @@
         <div class="portal-brand-row">
             <div class="portal-brand-block">
                 <asp:Label ID="SiteName" CssClass="SiteTitle" EnableViewState="false" runat="server" />
-                <span class="portal-brand-subtitle">Enterprise Portal</span>
+                <span class="portal-brand-subtitle"><%= lang.PortalBanner_Subtitle %></span>
             </div>
             <div class="portal-userbar SiteLink">
                 <%--
@@ -21,8 +21,8 @@
                     </lang>
                 --%>
                 <asp:Label ID="WelcomeMessage" CssClass="portal-welcome" runat="server" />
-                <a href="<%= Global.GetApplicationPath(Request) %>/DesktopDefault.aspx" class="SiteLink portal-toplink">Portal Home</a>
-                <a href="<%= Global.GetApplicationPath(Request) %>/admin/NotImplemented.aspx" class="SiteLink portal-toplink">Portal Documentation</a>
+                <a href="<%= Global.GetApplicationPath(Request) %>/DesktopDefault.aspx" class="SiteLink portal-toplink"><%= lang.PortalBanner_Home %></a>
+                <a href="<%= Global.GetApplicationPath(Request) %>/admin/NotImplemented.aspx" class="SiteLink portal-toplink"><%= lang.PortalBanner_Documentation %></a>
                 <%= LogoffLink %>
             </div>
         </div>

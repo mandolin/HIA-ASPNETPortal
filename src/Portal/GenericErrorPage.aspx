@@ -16,7 +16,7 @@
 <html>
 <head runat="server">
     <meta charset="utf-8" />
-    <title>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x9519;&#x8BEF;</title>
+    <title><%= lang.GenericError_Title %></title>
     <style>
         body {
             margin: 0;
@@ -51,15 +51,15 @@
     <form id="form1" runat="server">
         <%--
            <lang>
-             <zh-CN>面板文本使用实体编码和服务端事件编号表达式；视觉样式保持内联最小化，避免依赖外部主题资产。</zh-CN>
-             <en>The panel text uses entity encoding and a server-side event-id expression; visual styling stays minimal and inline to avoid depending on external theme assets.</en>
+             <zh-CN>面板文本改为资源驱动：原先使用实体编码的硬编码中文，导致英文界面下错误页仍显示中文（与本地化目标冲突）。实体编码不再必要，因为文案已移入 UTF-8 且带编码声明的资源文件。事件编号仍由服务端表达式输出；视觉样式保持内联最小化，避免依赖外部主题资产。</zh-CN>
+             <en>The panel text is now resource-driven: it previously used entity-encoded hard-coded Chinese, which made the error page display Chinese even in the English UI and conflicted with the localization goal. Entity encoding is no longer needed because the copy now lives in a UTF-8 resource file with an encoding declaration. The event id still comes from a server-side expression, and visual styling stays minimal and inline to avoid depending on external theme assets.</en>
            </lang>
         --%>
         <div class="error-panel">
-            <h1 class="error-title">&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6682;&#x65F6;&#x65E0;&#x6CD5;&#x5B8C;&#x6210;&#x8BF7;&#x6C42;</h1>
-            <p>&#x7CFB;&#x7EDF;&#x5DF2;&#x8BB0;&#x5F55;&#x672C;&#x6B21;&#x9519;&#x8BEF;&#x3002;&#x8BF7;&#x7A0D;&#x540E;&#x91CD;&#x8BD5;&#xFF0C;&#x6216;&#x5C06;&#x4E0B;&#x9762;&#x7684;&#x4E8B;&#x4EF6;&#x7F16;&#x53F7;&#x63D0;&#x4F9B;&#x7ED9;&#x7BA1;&#x7406;&#x5458;&#x3002;</p>
-            <p class="error-id">&#x4E8B;&#x4EF6;&#x7F16;&#x53F7;&#xFF1A;<%= EventIdText %></p>
-            <p><a href="Default.aspx">&#x8FD4;&#x56DE;&#x9996;&#x9875;</a></p>
+            <h1 class="error-title"><%= lang.GenericError_Heading %></h1>
+            <p><%= lang.GenericError_Body %></p>
+            <p class="error-id"><%= lang.GenericError_EventIdLabel %><%= EventIdText %></p>
+            <p><a href="Default.aspx"><%= lang.GenericError_ReturnHome %></a></p>
         </div>
     </form>
 </body>

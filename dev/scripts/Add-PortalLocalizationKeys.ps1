@@ -40,7 +40,13 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][string]$Prefix,
-    [Parameter(Mandatory)][ValidateScript({ Test-Path -LiteralPath $_ -PathType Leaf })][string]$KeysJsonPath
+    [Parameter(Mandatory)][ValidateScript({ Test-Path -LiteralPath $_ -PathType Leaf })][string]$KeysJsonPath,
+
+    # <lang>
+    #   <zh-CN>可选：当该页此前没有任何键（故无从按前缀定位）时，指定一个既有键名作为插入锚点。</zh-CN>
+    #   <en>Optional: when the page has no keys yet (so no prefix anchor exists), name an existing key to insert before.</en>
+    # </lang>
+    [string]$AnchorName
 )
 
 Set-StrictMode -Version Latest
@@ -70,11 +76,12 @@ function Insert-ResxEntries {
 
     $lines = New-Object System.Collections.Generic.List[string]
     $lines.AddRange([IO.File]::ReadAllLines($Path))
+    $needle = if ($AnchorName) { 'name="' + $AnchorName + '"' } else { 'name="' + $Prefix }
     $at = -1
     for ($i = 0; $i -lt $lines.Count; $i++) {
-        if ($lines[$i] -like ('*name="' + $Prefix + '*')) { $at = $i; break }
+        if ($lines[$i] -like ('*' + $needle + '*')) { $at = $i; break }
     }
-    if ($at -lt 0) { throw "未找到插入锚点（前缀 $Prefix）: $Path" }
+    if ($at -lt 0) { throw "未找到插入锚点（$needle）: $Path" }
 
     $block = New-Object System.Collections.Generic.List[string]
     foreach ($d in $defs) {
@@ -92,12 +99,12 @@ function Insert-DesignerProperties {
 
     $lines = New-Object System.Collections.Generic.List[string]
     $lines.AddRange([IO.File]::ReadAllLines($Path))
-    $needle = 'internal static string ' + $Prefix
+    $needle = 'internal static string ' + $(if ($AnchorName) { $AnchorName + ' ' } else { $Prefix })
     $at = -1
     for ($i = 0; $i -lt $lines.Count; $i++) {
         if ($lines[$i] -like ('*' + $needle + '*')) { $at = $i; break }
     }
-    if ($at -lt 0) { throw "未找到 designer 插入锚点（前缀 $Prefix）: $Path" }
+    if ($at -lt 0) { throw "未找到 designer 插入锚点（$needle）: $Path" }
 
     $indent = $lines[$at].Substring(0, $lines[$at].Length - $lines[$at].TrimStart().Length)
     $block = New-Object System.Collections.Generic.List[string]

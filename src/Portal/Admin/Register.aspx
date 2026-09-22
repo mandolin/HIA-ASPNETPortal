@@ -33,7 +33,7 @@
                                             <en>The heading is the visible entry cue for this page; the outcome of account creation is still determined by the later server message.</en>
                                           </lang>
                                         --%>
-                                        <span class="Head">Create a New Account </span>
+                                        <span class="Head"><%= lang.Admin_Register_Heading %></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -70,7 +70,7 @@
                                 <en>The Name field carries the requested user name; markup only requires a non-empty value, with normalization, duplicate checks, and persistence handled server-side.</en>
                               </lang>
                             --%>
-                            Name:
+                            <%= lang.Admin_Register_LabelName %>
                             <br>
                             <asp:TextBox size="25" ID="Name" runat="server" />
                             &nbsp;
@@ -80,7 +80,7 @@
                                 <en>Public registration only requires a non-empty value here; stricter user-name format rules should be governed through system settings.</en>
                               </lang>
                             --%>
-                            <asp:RequiredFieldValidator ControlToValidate="Name" ErrorMessage="'Name' must not be left blank."
+                            <asp:RequiredFieldValidator ControlToValidate="Name" ErrorMessage="<%$ Resources:lang,Admin_Register_MessageNameBlank %>"
                                 runat="server" ID="RequiredFieldValidator1" />
                             <p>
                             <%--
@@ -89,14 +89,14 @@
                                 <en>The Email field stores the registration contact address; page validators only cover basic format and presence, and cannot replace server-side trust or follow-up usage policy.</en>
                               </lang>
                             --%>
-                            Email:
+                            <%= lang.Admin_Register_LabelEmail %>
                             <br>
                             <asp:TextBox size="25" ID="Email" runat="server" />
                             &nbsp;
                             <asp:RegularExpressionValidator ControlToValidate="Email" ValidationExpression="[\w\.-]+(\+[\w-]*)?@([\w-]+\.)+[\w-]+"
-                                Display="Dynamic" ErrorMessage="Must use a valid email address." runat="server"
+                                Display="Dynamic" ErrorMessage="<%$ Resources:lang,Admin_Register_MessageInvalidEmail %>" runat="server"
                                 ID="RegularExpressionValidator1" />
-                            <asp:RequiredFieldValidator ControlToValidate="Email" ErrorMessage="'Email' must not be left blank."
+                            <asp:RequiredFieldValidator ControlToValidate="Email" ErrorMessage="<%$ Resources:lang,Admin_Register_MessageEmailBlank %>"
                                 runat="server" ID="RequiredFieldValidator2" />
                             <p>
                             <%--
@@ -105,16 +105,16 @@
                                 <en>EmployeeCode is the required binding hint for enterprise invitation registration; ordinary self-registration does not require it by default, and the enabled state is switched by server policy.</en>
                               </lang>
                             --%>
-                            Employee Code:
+                            <%= lang.Admin_Register_LabelEmployeeCode %>
                             <asp:Label ID="EmployeeCodeRequiredHint" CssClass="NormalRed" Text="*" Visible="false" runat="server" />
                             <br>
                             <asp:TextBox size="25" ID="EmployeeCode" runat="server" />
                             &nbsp;
                             <asp:RequiredFieldValidator ControlToValidate="EmployeeCode" Display="Dynamic"
-                                ErrorMessage="'Employee Code' must not be left blank for invitation registration."
+                                ErrorMessage="<%$ Resources:lang,Admin_Register_MessageEmployeeCodeBlankRequired %>"
                                 Enabled="false" runat="server" ID="EmployeeCodeRequiredValidator" />
                             <p>
-                            Password:
+                            <%= lang.Admin_Register_LabelPassword %>
                             <br>
                             <%--
                               <lang>
@@ -125,7 +125,7 @@
                             <asp:TextBox size="25" ID="Password" TextMode="Password" runat="server" />
                             <asp:HiddenField ID="EncryptedPassword" runat="server" />
                             &nbsp;
-                            <asp:RequiredFieldValidator ControlToValidate="Password" ErrorMessage="'Password' must not be left blank."
+                            <asp:RequiredFieldValidator ControlToValidate="Password" ErrorMessage="<%$ Resources:lang,Admin_Register_ValidatorPasswordRequired %>"
                                 runat="server" ID="RequiredFieldValidator3" />
                             <p>
                             <%--
@@ -134,15 +134,15 @@
                                 <en>The confirmation password field only supports consistency checks for this postback; matching validation occurs at the page layer, and the server must still re-confirm that plaintext or ciphertext input reflects the same user intent.</en>
                               </lang>
                             --%>
-                            Confirm Password:
+                            <%= lang.Admin_Register_LabelConfirmPassword %>
                             <br>
                             <asp:TextBox size="25" ID="ConfirmPassword" TextMode="Password" runat="server" />
                             <asp:HiddenField ID="EncryptedConfirmPassword" runat="server" />
                             &nbsp;
                             <asp:RequiredFieldValidator ControlToValidate="ConfirmPassword" Display="Dynamic"
-                                ErrorMessage="'Confirm' must not be left blank." runat="server" ID="RequiredFieldValidator4" />
+                                ErrorMessage="<%$ Resources:lang,Admin_Register_MessageConfirmBlank %>" runat="server" ID="RequiredFieldValidator4" />
                             <asp:CompareValidator ControlToValidate="ConfirmPassword" ControlToCompare="Password"
-                                ErrorMessage="Password fields do not match." runat="server" ID="CompareValidator1" />
+                                ErrorMessage="<%$ Resources:lang,Admin_Register_MessagePasswordMismatch %>" runat="server" ID="CompareValidator1" />
                             <p>
                             <%--
                               <lang>
@@ -150,7 +150,7 @@
                                 <en>RegisterBtn_Click is the server entry for account creation and failure messaging; Message reports the server result and cannot be used by markup to claim registration success.</en>
                               </lang>
                             --%>
-                            <asp:LinkButton class="CommandButton" Text="Submit Registration" runat="server"
+                            <asp:LinkButton class="CommandButton" Text="<%$ Resources:lang,Admin_Register_ButtonSubmit %>" runat="server"
                                 ID="RegisterBtn" OnClick="RegisterBtn_Click" />
                             <br>
                             <br>

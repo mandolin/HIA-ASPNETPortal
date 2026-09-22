@@ -66,7 +66,11 @@
     #         module.json): data or file names rather than user-facing copy, removed on both the attribute and
     #         element sides.
     #
-    #     Known false-positive class (must be removed by hand and never counted as deliverable work):
+    #     v5 adds two more signals, again found by reconciling the inventory against a manual read-through:
+#       - element text that starts after a newline or indentation was never counted, because the leading
+#         character class excluded whitespace; indented paragraphs and bare labels were missed as a result;
+#       - ErrorMessage (validator prompts) was missing from the attribute list even though it is visible copy.
+#     Known false-positive class (must be removed by hand and never counted as deliverable work):
     #       - Control text used as a data carrier. Canonical example: `SourceSystemTextBox.Text = "Portal";`
     #         writes a source-system code value, which is employee-record data rather than UI copy; localizing it
     #         would corrupt data. The tool cannot distinguish by syntax between copy assigned to a control and a
@@ -199,12 +203,11 @@ function Remove-MarkupNonUi {
     return $t
 }
 
-$markupAttrPattern = [regex]("(?<![\w-])(?:Text|Title|ToolTip|HeaderText|AlternateText|ConfirmText|InfoMessage)\s*=\s*`"(?<v>[^`"<>]{2,})`"")
-$markupElemPattern = [regex](">(?<v>[^\s<>`"=][^<>`"=]{1,})<")
+$markupAttrPattern = [regex]("(?<![\w-])(?:Text|Title|ToolTip|HeaderText|AlternateText|ConfirmText|InfoMessage|ErrorMessage)\s*=\s*`"(?<v>[^`"<>]{2,})`"")
+$markupElemPattern = [regex](">\s*(?<v>[^<>`"=]{2,})<")
 $elemEntityPattern = [regex]'^&[A-Za-z]+;$'
 $onClientClickPattern = [regex]("OnClientClick\s*=\s*`"[^`"]*[\u4e00-\u9fff][^`"]*`"")
-$elemNoisePattern = [regex]'^(?:amp|nbsp|lt|gt|quot|apos|#\d+)$|</|^\s*$'
-$elemNoisePattern = [regex]'^(?:amp|nbsp|lt|gt|quot|apos|#\d+)$|^&[A-Za-z]+;$|</|^\s*$'
+$elemNoisePattern = [regex]'^\s*(?:&[A-Za-z]+;|&#\d+;)\s*$|</|^\s*$'
 # <lang>
 #   <zh-CN>技术令牌：点号标识符与常见文件名，属数据而非界面文案，属性侧与元素侧都剔除。</zh-CN>
 #   <en>Technical tokens: dotted identifiers and common file names, which are data rather than UI copy and are removed on both the attribute and element sides.</en>
