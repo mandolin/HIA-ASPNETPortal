@@ -7,8 +7,8 @@
     </lang>
 --%>
 <div class="module-probe">
-    <div class="module-probe-title">Module Probe</div>
-    <div class="module-probe-summary">Trusted deployment-package verification module.</div>
+    <div class="module-probe-title"><%= lang.ModuleProbe_Heading %></div>
+    <div class="module-probe-summary"><%= lang.ModuleProbe_Summary %></div>
     <%--
         <lang>
             <zh-CN>表格字段只呈现服务器提供的包、模块、放置、主题范围和渲染时间诊断值，不把它们当作客户端可修改配置。</zh-CN>
@@ -23,23 +23,23 @@
             </lang>
         --%>
         <tr>
-            <td class="module-probe-label">Package:</td>
+            <td class="module-probe-label"><%= lang.ModuleProbe_LabelPackage %></td>
             <td><asp:Label ID="PackageLabel" runat="server" /></td>
         </tr>
         <tr>
-            <td class="module-probe-label">Module:</td>
+            <td class="module-probe-label"><%= lang.ModuleProbe_LabelModule %></td>
             <td><asp:Label ID="ModuleLabel" runat="server" /></td>
         </tr>
         <tr>
-            <td class="module-probe-label">Placement:</td>
+            <td class="module-probe-label"><%= lang.ModuleProbe_LabelPlacement %></td>
             <td><asp:Label ID="PlacementLabel" runat="server" /></td>
         </tr>
         <tr>
-            <td class="module-probe-label">Theme Scope:</td>
+            <td class="module-probe-label"><%= lang.ModuleProbe_LabelThemeScope %></td>
             <td><asp:Label ID="ThemeScopeLabel" runat="server" /></td>
         </tr>
         <tr>
-            <td class="module-probe-label">Rendered UTC:</td>
+            <td class="module-probe-label"><%= lang.ModuleProbe_LabelRenderedUtc %></td>
             <td><asp:Label ID="RenderedUtcLabel" runat="server" /></td>
         </tr>
     </table>

@@ -4268,6 +4268,90 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Probe</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Probe</en>
+        /// </lang>
+        /// </summary>
+        internal static string ModuleProbe_Heading {
+            get {
+                return ResourceManager.GetString("ModuleProbe_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Trusted deployment-package verification module.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Trusted deployment-package verification module.</en>
+        /// </lang>
+        /// </summary>
+        internal static string ModuleProbe_Summary {
+            get {
+                return ResourceManager.GetString("ModuleProbe_Summary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Package:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Package:</en>
+        /// </lang>
+        /// </summary>
+        internal static string ModuleProbe_LabelPackage {
+            get {
+                return ResourceManager.GetString("ModuleProbe_LabelPackage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module:</en>
+        /// </lang>
+        /// </summary>
+        internal static string ModuleProbe_LabelModule {
+            get {
+                return ResourceManager.GetString("ModuleProbe_LabelModule", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Placement:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Placement:</en>
+        /// </lang>
+        /// </summary>
+        internal static string ModuleProbe_LabelPlacement {
+            get {
+                return ResourceManager.GetString("ModuleProbe_LabelPlacement", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Theme Scope:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Theme Scope:</en>
+        /// </lang>
+        /// </summary>
+        internal static string ModuleProbe_LabelThemeScope {
+            get {
+                return ResourceManager.GetString("ModuleProbe_LabelThemeScope", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Rendered UTC:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Rendered UTC:</en>
+        /// </lang>
+        /// </summary>
+        internal static string ModuleProbe_LabelRenderedUtc {
+            get {
+                return ResourceManager.GetString("ModuleProbe_LabelRenderedUtc", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

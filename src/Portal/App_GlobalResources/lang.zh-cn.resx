@@ -1116,6 +1116,27 @@
   <data name="Document_LabelLastUpdated" xml:space="preserve">
     <value>最后更新</value>
   </data>
+  <data name="ModuleProbe_Heading" xml:space="preserve">
+    <value>模块探针</value>
+  </data>
+  <data name="ModuleProbe_Summary" xml:space="preserve">
+    <value>受信任的部署包校验模块。</value>
+  </data>
+  <data name="ModuleProbe_LabelPackage" xml:space="preserve">
+    <value>部署包：</value>
+  </data>
+  <data name="ModuleProbe_LabelModule" xml:space="preserve">
+    <value>模块：</value>
+  </data>
+  <data name="ModuleProbe_LabelPlacement" xml:space="preserve">
+    <value>位置：</value>
+  </data>
+  <data name="ModuleProbe_LabelThemeScope" xml:space="preserve">
+    <value>主题作用域：</value>
+  </data>
+  <data name="ModuleProbe_LabelRenderedUtc" xml:space="preserve">
+    <value>渲染时间（UTC）：</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
   </data>

@@ -34,6 +34,12 @@
     #         写入的是"来源系统代码值"，属员工记录的数据而非界面文案；一旦本地化就会污染数据。
     #         本工具无法从语法上区分"赋给控件的文案"与"赋给控件的数据值"，故此类须由人工判定。
     #         实测：Admin 区曾出现的 1 处代码侧命中即属此类。
+    #       - 已资源驱动消息里的 **HTML 包裹字面量**。典型例子：
+    #         `Message.Text = string.Format("<br>{0}<br/>", lang.Signin_LoginFaild);`
+    #         消息本身取自资源，字面量只是换行/标签包裹；本地化它没有意义且会破坏标签结构。
+    #         实测：Signin 控件的 2 处命中即属此类。
+    #     这两类必须由人工判定并**保留原样**，清单数字里会一直带着它们——这是刻意的：
+    #     宁可让数字带可解释的噪音，也不要把它们"改掉"。
     #
     #     因此本口径得到的数字与早期记录的"124 处"**定义不同，不可相加**：早期清单偏向"硬编码中文"，
     #     本口径偏向"字面量文案（不分语种）"。
@@ -71,11 +77,17 @@
 #         character class excluded whitespace; indented paragraphs and bare labels were missed as a result;
 #       - ErrorMessage (validator prompts) was missing from the attribute list even though it is visible copy.
 #     Known false-positive class (must be removed by hand and never counted as deliverable work):
-    #       - Control text used as a data carrier. Canonical example: `SourceSystemTextBox.Text = "Portal";`
-    #         writes a source-system code value, which is employee-record data rather than UI copy; localizing it
-    #         would corrupt data. The tool cannot distinguish by syntax between copy assigned to a control and a
-    #         data value assigned to a control, so this class requires human judgement. In practice one such
-    #         code-side hit occurred in the Admin area.
+#       - Control text used as a data carrier. Canonical example: `SourceSystemTextBox.Text = "Portal";`
+#         writes a source-system code value, which is employee-record data rather than UI copy; localizing it
+#         would corrupt data. The tool cannot distinguish by syntax between copy assigned to a control and a
+#         data value assigned to a control, so this class requires human judgement. In practice one such
+#         code-side hit occurred in the Admin area.
+#       - HTML wrapper literals inside already resource-driven messages. Canonical example:
+#         `Message.Text = string.Format("<br>{0}<br/>", lang.Signin_LoginFaild);` — the message itself comes
+#         from resources and the literal is only line-break or tag wrapping; localizing it is meaningless and
+#         would break the markup structure. Two such hits occurred in the Signin control.
+#     Both classes must be judged by hand and left untouched. They deliberately remain in the reported number:
+#     a number carrying explainable noise is better than silently changing copy that must not change.
     #
     #     The resulting number therefore has a different definition from the earlier "124 sites" record and the two
     #     must not be added together: the earlier list leaned toward hard-coded Chinese, this one toward literal

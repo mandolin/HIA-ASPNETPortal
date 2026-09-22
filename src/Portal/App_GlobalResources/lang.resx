@@ -1116,6 +1116,27 @@
   <data name="Document_LabelLastUpdated" xml:space="preserve">
     <value>Last Updated</value>
   </data>
+  <data name="ModuleProbe_Heading" xml:space="preserve">
+    <value>Module Probe</value>
+  </data>
+  <data name="ModuleProbe_Summary" xml:space="preserve">
+    <value>Trusted deployment-package verification module.</value>
+  </data>
+  <data name="ModuleProbe_LabelPackage" xml:space="preserve">
+    <value>Package:</value>
+  </data>
+  <data name="ModuleProbe_LabelModule" xml:space="preserve">
+    <value>Module:</value>
+  </data>
+  <data name="ModuleProbe_LabelPlacement" xml:space="preserve">
+    <value>Placement:</value>
+  </data>
+  <data name="ModuleProbe_LabelThemeScope" xml:space="preserve">
+    <value>Theme Scope:</value>
+  </data>
+  <data name="ModuleProbe_LabelRenderedUtc" xml:space="preserve">
+    <value>Rendered UTC:</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>
