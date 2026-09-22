@@ -882,6 +882,66 @@
   <data name="BusinessApplicationRequest_MessageModuleNotInitialized" xml:space="preserve">
     <value>The business application module has not finished database initialisation.</value>
   </data>
+  <data name="EmployeeProfileCorrectionRequest_Heading" xml:space="preserve">
+    <value>Employee profile correction request</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ButtonSubmit" xml:space="preserve">
+    <value>Submit correction request</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ButtonSubmitCorrection" xml:space="preserve">
+    <value>Submit correction</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelEmployeeCode" xml:space="preserve">
+    <value>Employee code</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelSalutation" xml:space="preserve">
+    <value>Salutation</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelWorkEmail" xml:space="preserve">
+    <value>Work email</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelOrganization" xml:space="preserve">
+    <value>Organization</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelCorrectionFields" xml:space="preserve">
+    <value>Correction fields</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelSuggestedValue" xml:space="preserve">
+    <value>Suggested value</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_SectionRecentRequests" xml:space="preserve">
+    <value>Recent requests</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnField" xml:space="preserve">
+    <value>Field</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot" xml:space="preserve">
+    <value>Current value snapshot</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile" xml:space="preserve">
+    <value>This account has no active employee profile that can submit a correction request.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSuggestedValueRequired" xml:space="preserve">
+    <value>Enter a suggested value.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageNoChangeNeeded" xml:space="preserve">
+    <value>The suggested value equals the current value, so no correction request is needed.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSubmitted" xml:space="preserve">
+    <value>The correction request was submitted and is awaiting administrator review.</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>

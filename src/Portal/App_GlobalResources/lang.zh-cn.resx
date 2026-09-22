@@ -882,6 +882,66 @@
   <data name="BusinessApplicationRequest_MessageModuleNotInitialized" xml:space="preserve">
     <value>业务申请模块尚未完成数据库初始化。</value>
   </data>
+  <data name="EmployeeProfileCorrectionRequest_Heading" xml:space="preserve">
+    <value>员工资料更正请求</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ButtonSubmit" xml:space="preserve">
+    <value>提交更正请求</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ButtonSubmitCorrection" xml:space="preserve">
+    <value>提交更正</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelEmployeeCode" xml:space="preserve">
+    <value>员工号</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelName" xml:space="preserve">
+    <value>姓名</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelSalutation" xml:space="preserve">
+    <value>称呼</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelWorkEmail" xml:space="preserve">
+    <value>工作邮箱</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelOrganization" xml:space="preserve">
+    <value>组织</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelCorrectionFields" xml:space="preserve">
+    <value>更正字段</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelSuggestedValue" xml:space="preserve">
+    <value>建议值</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelNote" xml:space="preserve">
+    <value>说明</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_SectionRecentRequests" xml:space="preserve">
+    <value>最近请求</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnField" xml:space="preserve">
+    <value>字段</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot" xml:space="preserve">
+    <value>当前值快照</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile" xml:space="preserve">
+    <value>当前账号没有可提交更正请求的在职员工资料。</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSuggestedValueRequired" xml:space="preserve">
+    <value>请填写建议值。</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageNoChangeNeeded" xml:space="preserve">
+    <value>建议值与当前值相同，无需提交更正请求。</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSubmitted" xml:space="preserve">
+    <value>更正请求已提交，等待管理员处理。</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
   </data>

@@ -3332,6 +3332,246 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee profile correction request</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee profile correction request</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_Heading {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Submit correction request</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submit correction request</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ButtonSubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Submit correction</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submit correction</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_ButtonSubmitCorrection {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ButtonSubmitCorrection", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee code</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee code</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_LabelEmployeeCode {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelEmployeeCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_LabelName {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Salutation</zh-CN>
+        ///   <en>Looks up a localized string similar to: Salutation</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_LabelSalutation {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelSalutation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Work email</zh-CN>
+        ///   <en>Looks up a localized string similar to: Work email</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_LabelWorkEmail {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelWorkEmail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Organization</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_LabelOrganization {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelOrganization", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Correction fields</zh-CN>
+        ///   <en>Looks up a localized string similar to: Correction fields</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_LabelCorrectionFields {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelCorrectionFields", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Suggested value</zh-CN>
+        ///   <en>Looks up a localized string similar to: Suggested value</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_LabelSuggestedValue {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelSuggestedValue", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Note</zh-CN>
+        ///   <en>Looks up a localized string similar to: Note</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_LabelNote {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelNote", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Recent requests</zh-CN>
+        ///   <en>Looks up a localized string similar to: Recent requests</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_SectionRecentRequests {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_SectionRecentRequests", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_ColumnUtc {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ColumnUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Field</zh-CN>
+        ///   <en>Looks up a localized string similar to: Field</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_ColumnField {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ColumnField", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Current value snapshot</zh-CN>
+        ///   <en>Looks up a localized string similar to: Current value snapshot</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_ColumnStatus {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_ColumnStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This account has no active employee profile that can submit a correction request.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This account has no active employee profile that can submit a correction request.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a suggested value.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter a suggested value.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_MessageSuggestedValueRequired {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageSuggestedValueRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The suggested value equals the current value, so no correction request is needed.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The suggested value equals the current value, so no correction request is needed.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_MessageNoChangeNeeded {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageNoChangeNeeded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The correction request was submitted and is awaiting administrator review.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The correction request was submitted and is awaiting administrator review.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_MessageSubmitted {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageSubmitted", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

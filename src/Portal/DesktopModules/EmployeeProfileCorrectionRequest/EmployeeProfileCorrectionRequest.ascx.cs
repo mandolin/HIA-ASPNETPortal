@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -127,7 +128,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>没有可用在职绑定时停止写入，避免把请求挂到未知员工或未初始化 schema。</zh-CN>
                 //   <en>Stop before writes when no active binding is available, preventing a request from attaching to an unknown employee or an uninitialized schema.</en>
                 // </lang>
-                ShowMessage("当前账号没有可提交更正请求的在职员工资料。");
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile);
                 return;
             }
 
@@ -149,7 +150,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>空建议没有可审核的业务事实，因此不调用数据访问层。</zh-CN>
                 //   <en>An empty proposal has no reviewable business fact, so do not call the data-access layer.</en>
                 // </lang>
-                ShowMessage("请填写建议值。");
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageSuggestedValueRequired);
                 return;
             }
 
@@ -159,7 +160,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (string.Equals(GetCurrentValue(profile, fieldName), proposedValue, StringComparison.Ordinal))
             {
-                ShowMessage("建议值与当前值相同，无需提交更正请求。");
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoChangeNeeded);
                 return;
             }
 
@@ -216,7 +217,7 @@ namespace ASPNET.StarterKit.Portal
             ProposedValueTextBox.Text = string.Empty;
             RequestNoteTextBox.Text = string.Empty;
             BindProfile();
-            ShowMessage("更正请求已提交，等待管理员处理。");
+            ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageSubmitted);
         }
 
         /// <summary>
@@ -237,10 +238,10 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>以下四项是当前允许更正的低敏字段；新增字段必须同时审查数据访问、审计和输出边界。</zh-CN>
             //   <en>These four entries are the currently permitted low-sensitivity fields; any new field requires a joint review of data access, audit, and output boundaries.</en>
             // </lang>
-            FieldNameList.Items.Add(new ListItem("姓名", "DisplayName"));
-            FieldNameList.Items.Add(new ListItem("称呼", "PreferredName"));
-            FieldNameList.Items.Add(new ListItem("工作邮箱", "WorkEmail"));
-            FieldNameList.Items.Add(new ListItem("组织", "OrganizationDisplayName"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelName, "DisplayName"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelSalutation, "PreferredName"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelWorkEmail, "WorkEmail"));
+            FieldNameList.Items.Add(new ListItem(lang.EmployeeProfileCorrectionRequest_LabelOrganization, "OrganizationDisplayName"));
         }
 
         /// <summary>
@@ -402,7 +403,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             return userId <= 0
                 ? "当前登录账号无法解析到门户用户。"
-                : "当前账号没有可提交更正请求的在职员工资料。";
+                : lang.EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile;
         }
 
         /// <summary>

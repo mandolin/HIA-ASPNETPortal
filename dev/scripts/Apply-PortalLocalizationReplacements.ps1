@@ -55,6 +55,26 @@ foreach ($row in $plan) {
         continue
     }
     $text = [IO.File]::ReadAllText($path)
+
+    # <lang>
+    #   <zh-CN>
+    #     幂等保护：若替换结果里**仍包含**目标字符串（例如 old="using Unity;"、new="using Unity;\r\nusing Resources;"），
+    #     则重复运行本计划会**再次插入**同一内容。实测已发生过一次（重跑后出现两行 using Resources;）。
+    #     这种计划应改为"只匹配一次且结果不再包含目标"的写法，故在此直接拒绝，避免靠人工记忆避免重跑。
+    #   </zh-CN>
+    #   <en>
+    #     Idempotence guard: when the replacement still contains the target string (for example old="using Unity;" and
+    #     new="using Unity;\r\nusing Resources;"), re-running the plan inserts the same content again. This happened
+    #     once in practice (two using Resources; lines after a re-run). Such a plan must be rewritten so the result no
+    #     longer contains the target; rejecting it here avoids relying on humans remembering not to re-run.
+    #   </en>
+    # </lang>
+    if ($row.new.Contains($row.old)) {
+        Write-Host ("  [失败] {0} : 替换结果仍包含目标字符串，重跑会重复插入 -> [{1}]" -f $row.file, $row.old)
+        $fail++
+        continue
+    }
+
     $count = ([regex]::Matches($text, [regex]::Escape($row.old))).Count
     if ($count -ne [int]$row.expect) {
         Write-Host ("  [失败] {0} : 期望 {1} 处、实际 {2} 处 -> [{3}]" -f $row.file, $row.expect, $count, $row.old)
