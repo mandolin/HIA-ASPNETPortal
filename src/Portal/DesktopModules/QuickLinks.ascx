@@ -14,7 +14,7 @@
     --%>
     <div class="portal-module-header portal-quicklinks-header">
         <div class="portal-module-title-wrap">
-            <span class="SubSubHead portal-module-title portal-quicklinks-title">Quick Launch</span>
+            <span class="SubSubHead portal-module-title portal-quicklinks-title"><%= lang.QuickLinks_Heading %></span>
         </div>
         <%--
             <lang>
@@ -41,7 +41,7 @@
                     <en>The edit link gets an edit address only when the current module is editable; invalid or disallowed legacy addresses fall back to encoded text without external-navigation side effects.</en>
                 </lang>
             --%>
-            <asp:hyperlink id="editLink" CssClass="CommandButton portal-content-edit-action" Text="Edit"
+            <asp:hyperlink id="editLink" CssClass="CommandButton portal-content-edit-action" Text="<%$ Resources:lang,PortalModule_ButtonEdit %>"
                 navigateurl='<%# ChooseUrl(DataBinder.Eval(Container.DataItem, "ItemID"), DataBinder.Eval(Container.DataItem, "Url")) %>'
                 visible='<%# IsEditable %>' runat="server" />
             <span class="Normal portal-content-link-main">

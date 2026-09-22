@@ -4184,6 +4184,90 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit</en>
+        /// </lang>
+        /// </summary>
+        internal static string PortalModule_ButtonEdit {
+            get {
+                return ResourceManager.GetString("PortalModule_ButtonEdit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Quick Launch</zh-CN>
+        ///   <en>Looks up a localized string similar to: Quick Launch</en>
+        /// </lang>
+        /// </summary>
+        internal static string QuickLinks_Heading {
+            get {
+                return ResourceManager.GetString("QuickLinks_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add Link</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add Link</en>
+        /// </lang>
+        /// </summary>
+        internal static string QuickLinks_ButtonAddLink {
+            get {
+                return ResourceManager.GetString("QuickLinks_ButtonAddLink", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Open module action: Add Link</zh-CN>
+        ///   <en>Looks up a localized string similar to: Open module action: Add Link</en>
+        /// </lang>
+        /// </summary>
+        internal static string QuickLinks_TooltipAddLink {
+            get {
+                return ResourceManager.GetString("QuickLinks_TooltipAddLink", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Owner</zh-CN>
+        ///   <en>Looks up a localized string similar to: Owner</en>
+        /// </lang>
+        /// </summary>
+        internal static string Document_LabelOwner {
+            get {
+                return ResourceManager.GetString("Document_LabelOwner", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Area</zh-CN>
+        ///   <en>Looks up a localized string similar to: Area</en>
+        /// </lang>
+        /// </summary>
+        internal static string Document_LabelArea {
+            get {
+                return ResourceManager.GetString("Document_LabelArea", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Last Updated</zh-CN>
+        ///   <en>Looks up a localized string similar to: Last Updated</en>
+        /// </lang>
+        /// </summary>
+        internal static string Document_LabelLastUpdated {
+            get {
+                return ResourceManager.GetString("Document_LabelLastUpdated", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

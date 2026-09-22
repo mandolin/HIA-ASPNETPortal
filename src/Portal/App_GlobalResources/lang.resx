@@ -1095,6 +1095,27 @@
   <data name="Discussion_Posted" xml:space="preserve">
     <value>, posted</value>
   </data>
+  <data name="PortalModule_ButtonEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="QuickLinks_Heading" xml:space="preserve">
+    <value>Quick Launch</value>
+  </data>
+  <data name="QuickLinks_ButtonAddLink" xml:space="preserve">
+    <value>Add Link</value>
+  </data>
+  <data name="QuickLinks_TooltipAddLink" xml:space="preserve">
+    <value>Open module action: Add Link</value>
+  </data>
+  <data name="Document_LabelOwner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Document_LabelArea" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="Document_LabelLastUpdated" xml:space="preserve">
+    <value>Last Updated</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>

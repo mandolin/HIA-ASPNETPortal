@@ -33,7 +33,7 @@
         <div class="portal-content-list-item portal-announcement-item">
             <div class="portal-content-item-title-row">
                 <span class="ItemTitle portal-content-item-title"><%#: DataBinder.Eval(Container.DataItem, "Title") %></span>
-                <asp:HyperLink id="editLink" CssClass="CommandButton portal-content-edit-action" Text="Edit"
+                <asp:HyperLink id="editLink" CssClass="CommandButton portal-content-edit-action" Text="<%$ Resources:lang,PortalModule_ButtonEdit %>"
                     NavigateUrl='<%# "~/DesktopModules/EditAnnouncements.aspx?ItemID=" +
                                      DataBinder.Eval(Container.DataItem, "ItemId").ToString() +
                                      "&mid=" + ModuleId %>'

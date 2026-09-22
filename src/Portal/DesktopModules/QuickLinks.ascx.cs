@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -66,9 +67,9 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>新增入口只给模块编辑者显示；普通访问者即使能看链接，也不能看到编辑页地址。</zh-CN>
                 //   <en>The add action is shown only to module editors; ordinary visitors may see links but not edit-page URLs.</en>
                 // </lang>
-                EditButton.Text = "Add Link";
+                EditButton.Text = lang.QuickLinks_ButtonAddLink;
                 EditButton.NavigateUrl = "~/DesktopModules/EditLinks.aspx?mid=" + ModuleId;
-                EditButton.ToolTip = "Open module action: Add Link";
+                EditButton.ToolTip = lang.QuickLinks_TooltipAddLink;
                 EditButton.Visible = true;
                 QuickLinkActions.Visible = true;
             }

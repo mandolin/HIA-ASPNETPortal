@@ -28,10 +28,10 @@
         <table class="portal-data-table portal-content-table" cellspacing="0" cellpadding="0" border="0" width="100%">
             <tr>
                 <th></th>
-                <th>Title</th>
-                <th>Owner</th>
-                <th>Area</th>
-                <th>Last Updated</th>
+                <th><%= lang.BusinessApplicationRequest_LabelTitle %></th>
+                <th><%= lang.Document_LabelOwner %></th>
+                <th><%= lang.Document_LabelArea %></th>
+                <th><%= lang.Document_LabelLastUpdated %></th>
             </tr>
     </HeaderTemplate>
     <ItemTemplate>
@@ -52,7 +52,7 @@
                     <asp:HyperLink
                         ID="editLink"
                         CssClass="CommandButton portal-content-edit-action"
-                        Text="Edit"
+                        Text="<%$ Resources:lang,PortalModule_ButtonEdit %>"
                         NavigateUrl='<%# "~/DesktopModules/EditDocs.aspx?ItemID=" + DataBinder.Eval(Container.DataItem, "ItemID") + "&mid=" + ModuleId %>'
                         Visible="<%# IsEditable %>"
                         runat="server" />

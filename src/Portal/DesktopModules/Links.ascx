@@ -34,7 +34,7 @@
                     <en>The edit address uses an in-site ItemID path only in the IsEditable context; browse URLs must pass navigation policy, with invalid legacy values falling back to encoded text.</en>
                 </lang>
             --%>
-            <asp:hyperlink id="editLink" CssClass="CommandButton portal-content-edit-action" Text="Edit"
+            <asp:hyperlink id="editLink" CssClass="CommandButton portal-content-edit-action" Text="<%$ Resources:lang,PortalModule_ButtonEdit %>"
                 navigateurl='<%# ChooseUrl(DataBinder.Eval(Container.DataItem, "ItemID"), DataBinder.Eval(Container.DataItem, "Url")) %>'
                 target='<%# ChooseTarget() %>' tooltip='<%# ChooseTip(DataBinder.Eval(Container.DataItem, "Description")) %>'
                 visible='<%# IsEditable %>' runat="server" />

@@ -28,11 +28,11 @@
         <table class="portal-data-table portal-content-table" cellspacing="0" cellpadding="0" border="0" width="100%">
             <tr>
                 <th></th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Email</th>
-                <th>Contact 1</th>
-                <th>Contact 2</th>
+                <th><%= lang.EmployeeProfileCorrectionRequest_LabelName %></th>
+                <th><%= lang.LegacyEdit_LabelRole %></th>
+                <th><%= lang.LegacyEdit_LabelEmail %></th>
+                <th><%= lang.LegacyEdit_LabelContact1 %></th>
+                <th><%= lang.LegacyEdit_LabelContact2 %></th>
             </tr>
     </HeaderTemplate>
     <ItemTemplate>
@@ -53,7 +53,7 @@
                     <asp:HyperLink
                         ID="editLink"
                         CssClass="CommandButton portal-content-edit-action"
-                        Text="Edit"
+                        Text="<%$ Resources:lang,PortalModule_ButtonEdit %>"
                         NavigateUrl='<%# "~/DesktopModules/EditContacts.aspx?ItemID=" + DataBinder.Eval(Container.DataItem, "ItemID") + "&mid=" + ModuleId %>'
                         Visible='<%# IsEditable %>'
                         runat="server" />

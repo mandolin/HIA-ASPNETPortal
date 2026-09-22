@@ -43,7 +43,7 @@
                 --%>
                 <asp:HyperLink id="editLink"
                                CssClass="portal-button portal-button-secondary portal-button-compact portal-content-edit-action"
-                               Text="Edit"
+                               Text="<%$ Resources:lang,PortalModule_ButtonEdit %>"
                                NavigateUrl='<%# "~/DesktopModules/EditEvents.aspx?ItemID=" +
                                                 DataBinder.Eval(Container.DataItem, "ItemID") +
                                                 "&mid=" + ModuleId %>'
