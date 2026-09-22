@@ -1542,6 +1542,21 @@
   <data name="Admin_Common_MessageP63SchemaUnavailable" xml:space="preserve">
     <value>P6.3 schema is unavailable.</value>
   </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidEmployeeId" xml:space="preserve">
+    <value>Employee id is invalid.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidOrganizationId" xml:space="preserve">
+    <value>Organization id is invalid.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidJoinedUtc" xml:space="preserve">
+    <value>Joined UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidLeftUtc" xml:space="preserve">
+    <value>Left UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidTimestamp" xml:space="preserve">
+    <value>The edit timestamp is invalid. Reload before saving again.</value>
+  </data>
   <data name="Admin_EmployeeEdit_Subtitle" xml:space="preserve">
     <value>Maintain employee master data used by directory, binding, and profile workflows.</value>
   </data>
@@ -1577,6 +1592,36 @@
   </data>
   <data name="Admin_EmployeeEdit_TitlePage" xml:space="preserve">
     <value>Employee</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_Subtitle" xml:space="preserve">
+    <value>Maintain organization units used by employee directory grouping and profile workflows.</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_SectionOrganizationMetadata" xml:space="preserve">
+    <value>Organization Metadata</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_LabelOrganizationCode" xml:space="preserve">
+    <value>Organization Code</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_LabelSortOrder" xml:space="preserve">
+    <value>Sort Order</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_EnableCheckBox" xml:space="preserve">
+    <value>Enable this organization unit</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_OptionRoot" xml:space="preserve">
+    <value>(root)</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidUnitId" xml:space="preserve">
+    <value>Organization unit id is invalid.</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidParentId" xml:space="preserve">
+    <value>Parent organization id is invalid.</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidSortOrder" xml:space="preserve">
+    <value>Sort order must be an integer.</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidTimestamp" xml:space="preserve">
+    <value>The edit timestamp is invalid. Reload before saving again.</value>
   </data>
   <data name="Admin_OrganizationUnitEdit_MessageSaveFailed" xml:space="preserve">
     <value>Organization unit save failed; the system recorded this error. Event id: {0}</value>

@@ -270,7 +270,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Clear old candidates and retain the root sentinel so no parent is distinct from a concrete parent.</en>
             // </lang>
             ParentOrganizationList.Items.Clear();
-            ParentOrganizationList.Items.Add(new ListItem("(root)", string.Empty));
+            ParentOrganizationList.Items.Add(new ListItem(lang.Admin_OrganizationUnitEdit_OptionRoot, string.Empty));
 
             // <lang>
             //   <zh-CN>候选查询包含停用组织并限制 500 条，用于修复历史树结构；父级存在性和循环校验仍由数据层负责。</zh-CN>
@@ -350,7 +350,7 @@ namespace ASPNET.StarterKit.Portal
             if (!int.TryParse(OrganizationUnitIdField.Value, NumberStyles.None, CultureInfo.InvariantCulture, out organizationUnitId) ||
                 organizationUnitId < 0)
             {
-                message = "Organization unit id is invalid.";
+                message = lang.Admin_OrganizationUnitEdit_MessageInvalidUnitId;
                 return false;
             }
 
@@ -361,7 +361,7 @@ namespace ASPNET.StarterKit.Portal
             int? parentOrganizationUnitId;
             if (!TryReadOptionalListInt32(ParentOrganizationList.SelectedValue, out parentOrganizationUnitId))
             {
-                message = "Parent organization id is invalid.";
+                message = lang.Admin_OrganizationUnitEdit_MessageInvalidParentId;
                 return false;
             }
 
@@ -372,7 +372,7 @@ namespace ASPNET.StarterKit.Portal
             int sortOrder;
             if (!int.TryParse(SortOrderTextBox.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out sortOrder))
             {
-                message = "Sort order must be an integer.";
+                message = lang.Admin_OrganizationUnitEdit_MessageInvalidSortOrder;
                 return false;
             }
 
@@ -383,7 +383,7 @@ namespace ASPNET.StarterKit.Portal
             DateTime? originalUpdatedUtc;
             if (!TryReadOriginalUpdatedUtc(organizationUnitId, OriginalUpdatedUtcField.Value, out originalUpdatedUtc))
             {
-                message = "The edit timestamp is invalid. Reload before saving again.";
+                message = lang.Admin_OrganizationUnitEdit_MessageInvalidTimestamp;
                 return false;
             }
 

@@ -1542,6 +1542,21 @@
   <data name="Admin_Common_MessageP63SchemaUnavailable" xml:space="preserve">
     <value>P6.3 schema 不可用。</value>
   </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidEmployeeId" xml:space="preserve">
+    <value>员工编号无效。</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidOrganizationId" xml:space="preserve">
+    <value>组织编号无效。</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidJoinedUtc" xml:space="preserve">
+    <value>入职时间必须使用 yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss 格式。</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidLeftUtc" xml:space="preserve">
+    <value>离职时间必须使用 yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss 格式。</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidTimestamp" xml:space="preserve">
+    <value>编辑时间戳无效。请重新载入后再保存。</value>
+  </data>
   <data name="Admin_EmployeeEdit_Subtitle" xml:space="preserve">
     <value>维护员工主数据，供员工目录、绑定与资料流程使用。</value>
   </data>
@@ -1577,6 +1592,36 @@
   </data>
   <data name="Admin_EmployeeEdit_TitlePage" xml:space="preserve">
     <value>员工</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_Subtitle" xml:space="preserve">
+    <value>维护组织单元，供员工目录分组与资料流程使用。</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_SectionOrganizationMetadata" xml:space="preserve">
+    <value>组织元数据</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_LabelOrganizationCode" xml:space="preserve">
+    <value>组织代码</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_LabelSortOrder" xml:space="preserve">
+    <value>排序</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_EnableCheckBox" xml:space="preserve">
+    <value>启用此组织单元</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_OptionRoot" xml:space="preserve">
+    <value>（根）</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidUnitId" xml:space="preserve">
+    <value>组织单元编号无效。</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidParentId" xml:space="preserve">
+    <value>上级组织编号无效。</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidSortOrder" xml:space="preserve">
+    <value>排序必须是整数。</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidTimestamp" xml:space="preserve">
+    <value>编辑时间戳无效。请重新载入后再保存。</value>
   </data>
   <data name="Admin_OrganizationUnitEdit_MessageSaveFailed" xml:space="preserve">
     <value>组织单元保存失败，系统已记录本次错误。事件编号：{0}</value>

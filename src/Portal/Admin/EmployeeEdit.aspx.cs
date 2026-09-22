@@ -381,7 +381,7 @@ namespace ASPNET.StarterKit.Portal
             if (!int.TryParse(EmployeeIdField.Value, NumberStyles.None, CultureInfo.InvariantCulture, out employeeId) ||
                 employeeId < 0)
             {
-                message = "Employee id is invalid.";
+                message = lang.Admin_EmployeeEdit_MessageInvalidEmployeeId;
                 return false;
             }
 
@@ -392,7 +392,7 @@ namespace ASPNET.StarterKit.Portal
             int? organizationUnitId;
             if (!TryReadOptionalListInt32(OrganizationUnitList.SelectedValue, out organizationUnitId))
             {
-                message = "Organization id is invalid.";
+                message = lang.Admin_EmployeeEdit_MessageInvalidOrganizationId;
                 return false;
             }
 
@@ -403,7 +403,7 @@ namespace ASPNET.StarterKit.Portal
             DateTime? joinedUtc;
             if (!TryReadOptionalUtc(JoinedUtcTextBox.Text, out joinedUtc))
             {
-                message = "Joined UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.";
+                message = lang.Admin_EmployeeEdit_MessageInvalidJoinedUtc;
                 return false;
             }
 
@@ -414,7 +414,7 @@ namespace ASPNET.StarterKit.Portal
             DateTime? leftUtc;
             if (!TryReadOptionalUtc(LeftUtcTextBox.Text, out leftUtc))
             {
-                message = "Left UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.";
+                message = lang.Admin_EmployeeEdit_MessageInvalidLeftUtc;
                 return false;
             }
 
@@ -425,7 +425,7 @@ namespace ASPNET.StarterKit.Portal
             DateTime? originalUpdatedUtc;
             if (!TryReadOriginalUpdatedUtc(employeeId, OriginalUpdatedUtcField.Value, out originalUpdatedUtc))
             {
-                message = "The edit timestamp is invalid. Reload before saving again.";
+                message = lang.Admin_EmployeeEdit_MessageInvalidTimestamp;
                 return false;
             }
 

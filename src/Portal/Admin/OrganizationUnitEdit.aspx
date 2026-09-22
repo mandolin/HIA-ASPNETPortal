@@ -22,12 +22,12 @@
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
                 <asp:Label ID="TitleLabel" CssClass="Head portal-admin-title" runat="server" />
-                <p class="Normal portal-admin-subtitle">Maintain organization units used by employee directory grouping and profile workflows.</p>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_OrganizationUnitEdit_Subtitle %></p>
             </div>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                <a class="CommandButton" href="EmployeeEdit.aspx">New Employee</a>
-                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_EmployeeDirectory_Title %></a>
+                <a class="CommandButton" href="EmployeeEdit.aspx"><%= lang.Admin_EmployeeDirectory_LinkNewEmployee %></a>
+                <a class="CommandButton" href="SystemHealth.aspx"><%= lang.Admin_SystemHealth_Title %></a>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Organization Metadata</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_OrganizationUnitEdit_SectionOrganizationMetadata %></h2>
             </div>
             <div class="portal-form-grid">
                 <%--
@@ -53,24 +53,24 @@
                 </lang>
                 --%>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Organization Code</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_OrganizationUnitEdit_LabelOrganizationCode %></span>
                     <asp:TextBox ID="OrganizationCodeTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="100" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Display Name</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_LabelDisplayName %></span>
                     <asp:TextBox ID="DisplayNameTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="150" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Parent</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeDirectory_ColumnParent %></span>
                     <asp:DropDownList ID="ParentOrganizationList" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Sort Order</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_OrganizationUnitEdit_LabelSortOrder %></span>
                     <asp:TextBox ID="SortOrderTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="10" runat="server" />
                 </div>
                 <div class="portal-form-field portal-checkbox-field">
-                    <span class="SubHead portal-form-label">Active</span>
-                    <asp:CheckBox ID="IsActiveCheckBox" Text="Enable this organization unit" runat="server" />
+                    <span class="SubHead portal-form-label"><%= lang.Admin_EmployeeDirectory_ColumnActive %></span>
+                    <asp:CheckBox ID="IsActiveCheckBox" Text="<%$ Resources:lang,Admin_OrganizationUnitEdit_EnableCheckBox %>" runat="server" />
                 </div>
             </div>
             <div class="portal-form-actions">
@@ -83,11 +83,11 @@
                 <asp:LinkButton
                     ID="SaveButton"
                     CssClass="CommandButton portal-primary-action"
-                    Text="Save"
+                    Text="<%$ Resources:lang,Admin_EmployeeEdit_ButtonSave %>"
                     CausesValidation="False"
                     OnClick="SaveButton_Click"
                     runat="server" />
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Cancel</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_ModuleDefinitions_ButtonCancel %></a>
             </div>
         </div>
     </div>

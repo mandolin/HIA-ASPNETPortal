@@ -5972,6 +5972,66 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Maintain employee master data used by directory, binding, and profile workflows.</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee id is invalid.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee id is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_MessageInvalidEmployeeId {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_MessageInvalidEmployeeId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Organization id is invalid.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization id is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_MessageInvalidOrganizationId {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_MessageInvalidOrganizationId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Joined UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Joined UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_MessageInvalidJoinedUtc {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_MessageInvalidJoinedUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Left UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Left UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_MessageInvalidLeftUtc {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_MessageInvalidLeftUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The edit timestamp is invalid. Reload before saving again.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The edit timestamp is invalid. Reload before saving again.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeEdit_MessageInvalidTimestamp {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_MessageInvalidTimestamp", resourceCulture);
+            }
+        }
+
         internal static string Admin_EmployeeEdit_Subtitle {
             get {
                 return ResourceManager.GetString("Admin_EmployeeEdit_Subtitle", resourceCulture);
@@ -6110,6 +6170,126 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Organization unit save failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Maintain organization units used by employee directory grouping and profile workflows.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Maintain organization units used by employee directory grouping and profile workflows.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Organization Metadata</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization Metadata</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_SectionOrganizationMetadata {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_SectionOrganizationMetadata", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Organization Code</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization Code</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_LabelOrganizationCode {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_LabelOrganizationCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Sort Order</zh-CN>
+        ///   <en>Looks up a localized string similar to: Sort Order</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_LabelSortOrder {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_LabelSortOrder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enable this organization unit</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enable this organization unit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_EnableCheckBox {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_EnableCheckBox", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：(root)</zh-CN>
+        ///   <en>Looks up a localized string similar to: (root)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_OptionRoot {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_OptionRoot", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Organization unit id is invalid.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization unit id is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_MessageInvalidUnitId {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageInvalidUnitId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Parent organization id is invalid.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Parent organization id is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_MessageInvalidParentId {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageInvalidParentId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Sort order must be an integer.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Sort order must be an integer.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_MessageInvalidSortOrder {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageInvalidSortOrder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The edit timestamp is invalid. Reload before saving again.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The edit timestamp is invalid. Reload before saving again.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OrganizationUnitEdit_MessageInvalidTimestamp {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageInvalidTimestamp", resourceCulture);
+            }
+        }
+
         internal static string Admin_OrganizationUnitEdit_MessageSaveFailed {
             get {
                 return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageSaveFailed", resourceCulture);
