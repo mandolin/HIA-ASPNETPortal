@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.CollaborationItems"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
   <lang>
     <zh-CN>P21.3 企业协同事项后台页用于验证泛化企业能力对象，不承载具体领域字段。</zh-CN>
@@ -15,21 +18,17 @@
     <div class="portal-admin-page portal-admin-collaboration-items">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Collaboration Items</h1>
-                <p class="Normal portal-admin-subtitle">Create and handle low-sensitivity enterprise collaboration items.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_CollaborationItems_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_CollaborationItems_Subtitle %></p>
             </div>
-            <div class="portal-admin-actions">
-                <a class="CommandButton" href="WorkItems.aspx">Work Items</a>
-                <a class="CommandButton" href="BusinessApplications.aspx">Business Applications</a>
-                <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
-            </div>
+            <%= PortalNavigationEntryRenderer.RenderActions("Admin.CollaborationItems", Context) %>
         </div>
 
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Create Collaboration Item</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_CollaborationItems_SectionCreate %></h2>
             </div>
             <div class="portal-form-grid">
                 <%--
@@ -39,37 +38,37 @@
                     </lang>
                 --%>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Type Key</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelTypeKey %></span>
                     <asp:DropDownList ID="ItemTypeList" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Owner Role</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelOwnerRole %></span>
                     <asp:TextBox ID="OwnerRoleKeyTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="120" Text="Business.Collaboration.Handle" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Priority</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelPriority %></span>
                     <asp:DropDownList ID="PriorityList" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Due UTC</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelDueUtc %></span>
                     <asp:TextBox ID="DueUtcTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="19" runat="server" />
                 </div>
                 <div class="portal-form-field portal-form-field-wide">
-                    <span class="SubHead portal-form-label">Title</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelTitle %></span>
                     <asp:TextBox ID="TitleTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="200" runat="server" />
                 </div>
                 <div class="portal-form-field portal-form-field-wide">
-                    <span class="SubHead portal-form-label">Summary</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelSummary %></span>
                     <asp:TextBox ID="SummaryTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="500" runat="server" />
                 </div>
                 <div class="portal-form-field portal-form-field-wide">
-                    <span class="SubHead portal-form-label">Description</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelDescription %></span>
                     <asp:TextBox ID="DescriptionTextBox" CssClass="NormalTextBox portal-form-input" TextMode="MultiLine" Rows="4" runat="server" />
                 </div>
                 <div class="portal-form-actions">
                     <asp:Button
                         ID="CreateButton"
-                        Text="Create and Submit"
+                        Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonCreateAndSubmit %>"
                         CssClass="CommandButton"
                         CausesValidation="False"
                         OnClick="CreateButton_Click"
@@ -87,13 +86,13 @@
             --%>
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Status</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_CollaborationItems_LabelStatus %></span>
                     <asp:DropDownList ID="StatusFilterList" CssClass="NormalTextBox portal-filter-input" runat="server" />
                 </div>
                 <div class="portal-filter-actions">
                     <asp:Button
                         ID="SearchButton"
-                        Text="Search"
+                        Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonSearch %>"
                         CssClass="CommandButton"
                         CausesValidation="False"
                         OnClick="SearchButton_Click"
@@ -110,7 +109,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Collaboration Item List</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_CollaborationItems_SectionList %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -123,13 +122,13 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="70" class="SubHead">ID</th>
-                                <th scope="col" width="145" class="SubHead">Action UTC</th>
-                                <th scope="col" width="155" class="SubHead">Code</th>
-                                <th scope="col" width="140" class="SubHead">Owner</th>
-                                <th scope="col" class="SubHead">Item</th>
-                                <th scope="col" width="110" class="SubHead">Status</th>
-                                <th scope="col" width="390" class="SubHead">Handle / Comment</th>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_CollaborationItems_ColumnId %></th>
+                                <th scope="col" width="145" class="SubHead"><%= lang.Admin_CollaborationItems_ColumnActionUtc %></th>
+                                <th scope="col" width="155" class="SubHead"><%= lang.Admin_CollaborationItems_ColumnCode %></th>
+                                <th scope="col" width="140" class="SubHead"><%= lang.Admin_CollaborationItems_ColumnOwner %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_CollaborationItems_ColumnItem %></th>
+                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_CollaborationItems_ColumnStatus %></th>
+                                <th scope="col" width="390" class="SubHead"><%= lang.Admin_CollaborationItems_ColumnHandleComment %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -140,28 +139,28 @@
                                 <td><%#: Eval("OwnerText") %></td>
                                 <td>
                                     <div class="portal-value-stack">
-                                        <div><span class="SubHead">Title:</span> <%#: Eval("Title") %></div>
-                                        <div><span class="SubHead">Type:</span> <%#: Eval("ItemTypeKey") %></div>
-                                        <div><span class="SubHead">Priority:</span> <%#: Eval("PriorityKey") %></div>
-                                        <div><span class="SubHead">Summary:</span> <%#: Eval("Summary") %></div>
-                                        <div><span class="SubHead">Description:</span> <%#: Eval("Description") %></div>
-                                        <div><span class="SubHead">Latest Workflow Comment:</span> <%#: Eval("LastActionComment") %></div>
-                                        <div><span class="SubHead">Latest Visible Timeline Comment:</span> <%#: Eval("LatestVisibleComment") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineTitle %></span> <%#: Eval("Title") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineType %></span> <%#: Eval("ItemTypeKey") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlinePriority %></span> <%#: Eval("PriorityKey") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineSummary %></span> <%#: Eval("Summary") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineDescription %></span> <%#: Eval("Description") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineWorkflowComment %></span> <%#: Eval("LastActionComment") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineTimelineComment %></span> <%#: Eval("LatestVisibleComment") %></div>
                                     </div>
                                 </td>
                                 <td><%#: Eval("ItemStatus") %></td>
                                 <td>
                                     <asp:TextBox ID="ActionCommentTextBox" CssClass="NormalTextBox portal-review-note" Width="280" MaxLength="1000" TextMode="MultiLine" Rows="3" runat="server" />
                                     <div class="portal-row-actions">
-                                        <asp:Button ID="StartButton" Text="Start" CssClass="CommandButton" CommandName="Start" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
-                                        <asp:Button ID="CompleteButton" Text="Complete" CssClass="CommandButton" CommandName="Complete" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
-                                        <asp:Button ID="ReturnButton" Text="Return" CssClass="CommandButton" CommandName="Return" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
-                                        <asp:Button ID="ResubmitButton" Text="Resubmit" CssClass="CommandButton" CommandName="Resubmit" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
-                                        <asp:Button ID="RejectButton" Text="Reject" CssClass="CommandButton CommandButtonDanger" CommandName="Reject" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
-                                        <asp:Button ID="CancelButton" Text="Cancel" CssClass="CommandButton CommandButtonDanger" CommandName="Cancel" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
-                                        <asp:Button ID="CloseButton" Text="Close" CssClass="CommandButton" CommandName="Close" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
-                                        <asp:Button ID="AddParticipantCommentButton" Text="Participant Comment" CssClass="CommandButton" CommandName="AddParticipantComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
-                                        <asp:Button ID="AddAdministratorCommentButton" Text="Administrator Comment" CssClass="CommandButton" CommandName="AddAdministratorComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="StartButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonStart %>" CssClass="CommandButton" CommandName="Start" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="CompleteButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonComplete %>" CssClass="CommandButton" CommandName="Complete" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="ReturnButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonReturn %>" CssClass="CommandButton" CommandName="Return" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="ResubmitButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonResubmit %>" CssClass="CommandButton" CommandName="Resubmit" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="RejectButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonReject %>" CssClass="CommandButton CommandButtonDanger" CommandName="Reject" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="CancelButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonCancel %>" CssClass="CommandButton CommandButtonDanger" CommandName="Cancel" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="CloseButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonClose %>" CssClass="CommandButton" CommandName="Close" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="AddParticipantCommentButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonParticipantComment %>" CssClass="CommandButton" CommandName="AddParticipantComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="AddAdministratorCommentButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonAdministratorComment %>" CssClass="CommandButton" CommandName="AddAdministratorComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                     </div>
                                 </td>
                             </tr>

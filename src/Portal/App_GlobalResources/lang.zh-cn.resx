@@ -696,4 +696,163 @@
   <data name="Admin_EmployeeProfileCorrectionRequests_ButtonReject" xml:space="preserve">
     <value>拒绝</value>
   </data>
+  <data name="Admin_CollaborationItems_Title" xml:space="preserve">
+    <value>企业协同事项</value>
+  </data>
+  <data name="Admin_CollaborationItems_Subtitle" xml:space="preserve">
+    <value>创建与处理低敏企业协同事项。</value>
+  </data>
+  <data name="Admin_CollaborationItems_SectionCreate" xml:space="preserve">
+    <value>创建协同事项</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelTypeKey" xml:space="preserve">
+    <value>类型键</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelOwnerRole" xml:space="preserve">
+    <value>责任角色</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelPriority" xml:space="preserve">
+    <value>优先级</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelDueUtc" xml:space="preserve">
+    <value>截止时间 (UTC)</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelTitle" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelSummary" xml:space="preserve">
+    <value>摘要</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonCreateAndSubmit" xml:space="preserve">
+    <value>创建并提交</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonSearch" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="Admin_CollaborationItems_SectionList" xml:space="preserve">
+    <value>协同事项列表</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnActionUtc" xml:space="preserve">
+    <value>动作时间 (UTC)</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnCode" xml:space="preserve">
+    <value>编号</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnOwner" xml:space="preserve">
+    <value>责任人</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnItem" xml:space="preserve">
+    <value>事项</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnHandleComment" xml:space="preserve">
+    <value>处理／评论</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineTitle" xml:space="preserve">
+    <value>标题：</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineType" xml:space="preserve">
+    <value>类型：</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlinePriority" xml:space="preserve">
+    <value>优先级：</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineSummary" xml:space="preserve">
+    <value>摘要：</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineDescription" xml:space="preserve">
+    <value>描述：</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineWorkflowComment" xml:space="preserve">
+    <value>最新工作流评论：</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineTimelineComment" xml:space="preserve">
+    <value>最新可见时间线评论：</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonStart" xml:space="preserve">
+    <value>开始</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonComplete" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonReturn" xml:space="preserve">
+    <value>退回</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonResubmit" xml:space="preserve">
+    <value>重新提交</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonReject" xml:space="preserve">
+    <value>拒绝</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonClose" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonParticipantComment" xml:space="preserve">
+    <value>参与人评论</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonAdministratorComment" xml:space="preserve">
+    <value>管理员评论</value>
+  </data>
+  <data name="Admin_WorkItems_Title" xml:space="preserve">
+    <value>业务待办</value>
+  </data>
+  <data name="Admin_WorkItems_Subtitle" xml:space="preserve">
+    <value>查看轻量业务待办及其当前处理状态。</value>
+  </data>
+  <data name="Admin_WorkItems_LinkCorrectionRequests" xml:space="preserve">
+    <value>资料更正请求</value>
+  </data>
+  <data name="Admin_WorkItems_LinkCollaborationItems" xml:space="preserve">
+    <value>企业协同事项</value>
+  </data>
+  <data name="Admin_WorkItems_LinkOperationAudits" xml:space="preserve">
+    <value>运营审计</value>
+  </data>
+  <data name="Admin_WorkItems_LabelStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_WorkItems_ButtonSearch" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="Admin_WorkItems_SectionCurrentWorkItems" xml:space="preserve">
+    <value>当前业务待办</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnBusiness" xml:space="preserve">
+    <value>业务</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnTitleSummary" xml:space="preserve">
+    <value>标题／摘要</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnAssignedTo" xml:space="preserve">
+    <value>分派给</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnCreatedUtc" xml:space="preserve">
+    <value>创建时间 (UTC)</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnCompletedUtc" xml:space="preserve">
+    <value>完成时间 (UTC)</value>
+  </data>
+  <data name="Admin_WorkItems_ButtonOpenSource" xml:space="preserve">
+    <value>打开来源</value>
+  </data>
 </root>

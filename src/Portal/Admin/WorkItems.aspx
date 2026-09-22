@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.WorkItems"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
   <lang>
     <zh-CN>P12.3 轻量待办后台入口：第一版只读集中查看，不提供流程设计器或转办；P21.3 起同时承接协同事项待办投影。</zh-CN>
@@ -15,13 +18,19 @@
     <div class="portal-admin-page portal-admin-work-items">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Work Items</h1>
-                <p class="Normal portal-admin-subtitle">Review lightweight business work items and their current handling state.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_WorkItems_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_WorkItems_Subtitle %></p>
             </div>
+            <%--
+              <lang>
+                <zh-CN>页面自有导航入口：其中"资料更正请求"的目标页在导航 registry 中尚无入口键，若整体交给渲染器，该入口会因分组解析不到而静默消失；待 registry 补齐后再统一改为渲染器。</zh-CN>
+                <en>Page-owned navigation entries: the target of "Correction Requests" has no navigation-registry entry yet, so handing the block to the renderer would silently drop that entry when no group can be resolved; switch to the renderer once the registry is complete.</en>
+              </lang>
+            --%>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="EmployeeProfileCorrectionRequests.aspx">Correction Requests</a>
-                <a class="CommandButton" href="CollaborationItems.aspx">Collaboration Items</a>
-                <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
+                <a class="CommandButton" href="EmployeeProfileCorrectionRequests.aspx"><%= lang.Admin_WorkItems_LinkCorrectionRequests %></a>
+                <a class="CommandButton" href="CollaborationItems.aspx"><%= lang.Admin_WorkItems_LinkCollaborationItems %></a>
+                <a class="CommandButton" href="OperationAudits.aspx"><%= lang.Admin_WorkItems_LinkOperationAudits %></a>
             </div>
         </div>
 
@@ -42,13 +51,13 @@
             --%>
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Status</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_WorkItems_LabelStatus %></span>
                     <asp:DropDownList ID="StatusFilterList" CssClass="NormalTextBox portal-filter-input" runat="server" />
                 </div>
                 <div class="portal-filter-actions">
                     <asp:LinkButton
                         ID="SearchButton"
-                        Text="Search"
+                        Text="<%$ Resources:lang, Admin_WorkItems_ButtonSearch %>"
                         CssClass="CommandButton"
                         CausesValidation="False"
                         OnClick="SearchButton_Click"
@@ -71,7 +80,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Current Work Items</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_WorkItems_SectionCurrentWorkItems %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -84,13 +93,13 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="70" class="SubHead">ID</th>
-                                <th scope="col" width="95" class="SubHead">Status</th>
-                                <th scope="col" width="180" class="SubHead">Business</th>
-                                <th scope="col" class="SubHead">Title / Summary</th>
-                                <th scope="col" width="190" class="SubHead">Assigned To</th>
-                                <th scope="col" width="145" class="SubHead">Created UTC</th>
-                                <th scope="col" width="145" class="SubHead">Completed UTC</th>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_WorkItems_ColumnId %></th>
+                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_WorkItems_ColumnStatus %></th>
+                                <th scope="col" width="180" class="SubHead"><%= lang.Admin_WorkItems_ColumnBusiness %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_WorkItems_ColumnTitleSummary %></th>
+                                <th scope="col" width="190" class="SubHead"><%= lang.Admin_WorkItems_ColumnAssignedTo %></th>
+                                <th scope="col" width="145" class="SubHead"><%= lang.Admin_WorkItems_ColumnCreatedUtc %></th>
+                                <th scope="col" width="145" class="SubHead"><%= lang.Admin_WorkItems_ColumnCompletedUtc %></th>
                             </tr>
                     </HeaderTemplate>
                     <%--
@@ -112,7 +121,7 @@
                                 <td>
                                     <div class="portal-value-stack">
                                         <div><%#: Eval("BusinessKind") %></div>
-                                        <div><a class="CommandButton" href='<%#: Eval("BusinessUrl") %>'>Open Source</a></div>
+                                        <div><a class="CommandButton" href='<%#: Eval("BusinessUrl") %>'><%= lang.Admin_WorkItems_ButtonOpenSource %></a></div>
                                     </div>
                                 </td>
                                 <td>

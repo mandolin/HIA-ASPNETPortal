@@ -693,4 +693,163 @@
   <data name="Admin_EmployeeProfileCorrectionRequests_ButtonReject" xml:space="preserve">
     <value>Reject</value>
   </data>
+  <data name="Admin_CollaborationItems_Title" xml:space="preserve">
+    <value>Collaboration Items</value>
+  </data>
+  <data name="Admin_CollaborationItems_Subtitle" xml:space="preserve">
+    <value>Create and handle low-sensitivity enterprise collaboration items.</value>
+  </data>
+  <data name="Admin_CollaborationItems_SectionCreate" xml:space="preserve">
+    <value>Create Collaboration Item</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelTypeKey" xml:space="preserve">
+    <value>Type Key</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelOwnerRole" xml:space="preserve">
+    <value>Owner Role</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelPriority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelDueUtc" xml:space="preserve">
+    <value>Due UTC</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonCreateAndSubmit" xml:space="preserve">
+    <value>Create and Submit</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Admin_CollaborationItems_SectionList" xml:space="preserve">
+    <value>Collaboration Item List</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnActionUtc" xml:space="preserve">
+    <value>Action UTC</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnOwner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnItem" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnHandleComment" xml:space="preserve">
+    <value>Handle / Comment</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineTitle" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineType" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlinePriority" xml:space="preserve">
+    <value>Priority:</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineSummary" xml:space="preserve">
+    <value>Summary:</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineDescription" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineWorkflowComment" xml:space="preserve">
+    <value>Latest Workflow Comment:</value>
+  </data>
+  <data name="Admin_CollaborationItems_InlineTimelineComment" xml:space="preserve">
+    <value>Latest Visible Timeline Comment:</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonComplete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonReturn" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonResubmit" xml:space="preserve">
+    <value>Resubmit</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonReject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonParticipantComment" xml:space="preserve">
+    <value>Participant Comment</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonAdministratorComment" xml:space="preserve">
+    <value>Administrator Comment</value>
+  </data>
+  <data name="Admin_WorkItems_Title" xml:space="preserve">
+    <value>Work Items</value>
+  </data>
+  <data name="Admin_WorkItems_Subtitle" xml:space="preserve">
+    <value>Review lightweight business work items and their current handling state.</value>
+  </data>
+  <data name="Admin_WorkItems_LinkCorrectionRequests" xml:space="preserve">
+    <value>Correction Requests</value>
+  </data>
+  <data name="Admin_WorkItems_LinkCollaborationItems" xml:space="preserve">
+    <value>Collaboration Items</value>
+  </data>
+  <data name="Admin_WorkItems_LinkOperationAudits" xml:space="preserve">
+    <value>Operation Audits</value>
+  </data>
+  <data name="Admin_WorkItems_LabelStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_WorkItems_ButtonSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Admin_WorkItems_SectionCurrentWorkItems" xml:space="preserve">
+    <value>Current Work Items</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnBusiness" xml:space="preserve">
+    <value>Business</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnTitleSummary" xml:space="preserve">
+    <value>Title / Summary</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnAssignedTo" xml:space="preserve">
+    <value>Assigned To</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnCreatedUtc" xml:space="preserve">
+    <value>Created UTC</value>
+  </data>
+  <data name="Admin_WorkItems_ColumnCompletedUtc" xml:space="preserve">
+    <value>Completed UTC</value>
+  </data>
+  <data name="Admin_WorkItems_ButtonOpenSource" xml:space="preserve">
+    <value>Open Source</value>
+  </data>
 </root>

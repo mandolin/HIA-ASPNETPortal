@@ -35,6 +35,8 @@ namespace ASPNET.StarterKit.Portal.Tests
         [DataRow("Admin.Ops.DiagnosticsLogs")]
         [DataRow("Admin.Ops.OperationAudits")]
         [DataRow("Admin.Ops.DiagnosticLogDetail")]
+        [DataRow("Admin.CollaborationItems")]
+        [DataRow("Admin.WorkItems")]
         public void GetRelatedEntries_ReturnsGovernedEntriesAndExcludesSelf(string entryKey)
         {
             IList<PortalNavigationEntry> related = PortalNavigationVisibilityPolicy.GetRelatedEntries(entryKey, 5);

@@ -2575,5 +2575,641 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_ButtonReject", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration Items</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration Items</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_Title {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Create and handle low-sensitivity enterprise collaboration items.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Create and handle low-sensitivity enterprise collaboration items.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Create Collaboration Item</zh-CN>
+        ///   <en>Looks up a localized string similar to: Create Collaboration Item</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_SectionCreate {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_SectionCreate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Type Key</zh-CN>
+        ///   <en>Looks up a localized string similar to: Type Key</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelTypeKey {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelTypeKey", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Owner Role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Owner Role</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelOwnerRole {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelOwnerRole", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Priority</zh-CN>
+        ///   <en>Looks up a localized string similar to: Priority</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelPriority {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelPriority", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Due UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Due UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelDueUtc {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelDueUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Title</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelTitle {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Summary</zh-CN>
+        ///   <en>Looks up a localized string similar to: Summary</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelSummary {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Description</zh-CN>
+        ///   <en>Looks up a localized string similar to: Description</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelDescription {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Create and Submit</zh-CN>
+        ///   <en>Looks up a localized string similar to: Create and Submit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonCreateAndSubmit {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonCreateAndSubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelStatus {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Search</zh-CN>
+        ///   <en>Looks up a localized string similar to: Search</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonSearch {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonSearch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration Item List</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration Item List</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_SectionList {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_SectionList", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnId {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Action UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Action UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnActionUtc {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnActionUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Code</zh-CN>
+        ///   <en>Looks up a localized string similar to: Code</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnCode {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Owner</zh-CN>
+        ///   <en>Looks up a localized string similar to: Owner</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnOwner {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnOwner", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Item</zh-CN>
+        ///   <en>Looks up a localized string similar to: Item</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnItem {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnItem", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnStatus {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Handle / Comment</zh-CN>
+        ///   <en>Looks up a localized string similar to: Handle / Comment</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnHandleComment {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnHandleComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Title:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_InlineTitle {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_InlineTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Type:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Type:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_InlineType {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_InlineType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Priority:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Priority:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_InlinePriority {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_InlinePriority", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Summary:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Summary:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_InlineSummary {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_InlineSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Description:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Description:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_InlineDescription {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_InlineDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Latest Workflow Comment:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Latest Workflow Comment:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_InlineWorkflowComment {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_InlineWorkflowComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Latest Visible Timeline Comment:</zh-CN>
+        ///   <en>Looks up a localized string similar to: Latest Visible Timeline Comment:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_InlineTimelineComment {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_InlineTimelineComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Start</zh-CN>
+        ///   <en>Looks up a localized string similar to: Start</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonStart {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonStart", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Complete</zh-CN>
+        ///   <en>Looks up a localized string similar to: Complete</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonComplete {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonComplete", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Return</zh-CN>
+        ///   <en>Looks up a localized string similar to: Return</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonReturn {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonReturn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Resubmit</zh-CN>
+        ///   <en>Looks up a localized string similar to: Resubmit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonResubmit {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonResubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Reject</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reject</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonReject {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonReject", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Cancel</zh-CN>
+        ///   <en>Looks up a localized string similar to: Cancel</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonCancel {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonCancel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Close</zh-CN>
+        ///   <en>Looks up a localized string similar to: Close</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonClose {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonClose", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Participant Comment</zh-CN>
+        ///   <en>Looks up a localized string similar to: Participant Comment</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonParticipantComment {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonParticipantComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Administrator Comment</zh-CN>
+        ///   <en>Looks up a localized string similar to: Administrator Comment</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonAdministratorComment {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonAdministratorComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Work Items</zh-CN>
+        ///   <en>Looks up a localized string similar to: Work Items</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_Title {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Review lightweight business work items and their current handling state.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Review lightweight business work items and their current handling state.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Correction Requests</zh-CN>
+        ///   <en>Looks up a localized string similar to: Correction Requests</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_LinkCorrectionRequests {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_LinkCorrectionRequests", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration Items</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration Items</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_LinkCollaborationItems {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_LinkCollaborationItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Operation Audits</zh-CN>
+        ///   <en>Looks up a localized string similar to: Operation Audits</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_LinkOperationAudits {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_LinkOperationAudits", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_LabelStatus {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_LabelStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Search</zh-CN>
+        ///   <en>Looks up a localized string similar to: Search</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ButtonSearch {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ButtonSearch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Current Work Items</zh-CN>
+        ///   <en>Looks up a localized string similar to: Current Work Items</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_SectionCurrentWorkItems {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_SectionCurrentWorkItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ColumnId {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ColumnId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ColumnStatus {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ColumnStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Business</zh-CN>
+        ///   <en>Looks up a localized string similar to: Business</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ColumnBusiness {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ColumnBusiness", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Title / Summary</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title / Summary</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ColumnTitleSummary {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ColumnTitleSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Assigned To</zh-CN>
+        ///   <en>Looks up a localized string similar to: Assigned To</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ColumnAssignedTo {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ColumnAssignedTo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Created UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Created UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ColumnCreatedUtc {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ColumnCreatedUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Completed UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Completed UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ColumnCompletedUtc {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ColumnCompletedUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Open Source</zh-CN>
+        ///   <en>Looks up a localized string similar to: Open Source</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_ButtonOpenSource {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ButtonOpenSource", resourceCulture);
+            }
+        }
     }
 }
