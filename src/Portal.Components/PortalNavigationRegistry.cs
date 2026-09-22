@@ -1069,7 +1069,120 @@ namespace ASPNET.StarterKit.Portal
                 new[] { PortalPermissionKeys.BusinessApplicationAdmin },
                 new string[0],
                 new string[0],
-                "P44.5: enterprise capability administration entry.")
+                "P44.5: enterprise capability administration entry."),
+
+            // <lang>
+            //   <zh-CN>主导航 Tab 组（新一轮 W44.5）：稳定键为 Tab.&lt;门户配置中的 Tab 名&gt;，不含 TabId。这些条目只承载 gate 门控元数据——Target 留空、不生成链接、不进入 Admin 动作区；Tab 的名称、顺序与 URL 仍以门户配置为唯一真源。依赖只声明"必须存在的能力约束"，不得声明超出库配置的角色限制，以免门控打开后反而放宽或收紧角色语义。</zh-CN>
+            //   <en>Main-navigation tab group (new-round W44.5): stable keys are Tab.&lt;tab name from portal configuration&gt; and never contain the TabId. These entries carry gate metadata only: the target stays blank, no link is produced, and they never enter the Admin action area; tab names, order, and URLs remain sourced solely from portal configuration. Dependencies declare only capability constraints that must hold, never role restrictions beyond the database configuration, so enabling the gate cannot widen or tighten role semantics.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Tab.Home",
+                PortalNavigationEntryKind.Tab,
+                "首页",
+                "Home",
+                string.Empty,
+                PortalNavigationVisibilityMode.HideWhenBlocked,
+                PortalNavigationLifecycleState.Active,
+                1000,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "W44.5: gate entry for the seeded Home tab; the tab itself is still defined by portal configuration."),
+
+            new PortalNavigationEntry(
+                "Tab.Employee Info",
+                PortalNavigationEntryKind.Tab,
+                "员工信息",
+                "Employee Info",
+                string.Empty,
+                PortalNavigationVisibilityMode.HideWhenBlocked,
+                PortalNavigationLifecycleState.Active,
+                1002,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "W44.5: gate entry for the seeded Employee Info tab."),
+
+            new PortalNavigationEntry(
+                "Tab.Product Info",
+                PortalNavigationEntryKind.Tab,
+                "产品信息",
+                "Product Info",
+                string.Empty,
+                PortalNavigationVisibilityMode.HideWhenBlocked,
+                PortalNavigationLifecycleState.Active,
+                1004,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "W44.5: gate entry for the seeded Product Info tab."),
+
+            new PortalNavigationEntry(
+                "Tab.Discussions",
+                PortalNavigationEntryKind.Tab,
+                "讨论区",
+                "Discussions",
+                string.Empty,
+                PortalNavigationVisibilityMode.HideWhenBlocked,
+                PortalNavigationLifecycleState.Active,
+                1006,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "W44.5: gate entry for the seeded Discussions tab."),
+
+            new PortalNavigationEntry(
+                "Tab.About the Portal",
+                PortalNavigationEntryKind.Tab,
+                "关于门户",
+                "About the Portal",
+                string.Empty,
+                PortalNavigationVisibilityMode.HideWhenBlocked,
+                PortalNavigationLifecycleState.Active,
+                1008,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "W44.5: gate entry for the seeded About the Portal tab."),
+
+            new PortalNavigationEntry(
+                "Tab.Admin",
+                PortalNavigationEntryKind.Tab,
+                "后台管理",
+                "Admin",
+                string.Empty,
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                1010,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "W44.5: gate entry for the seeded Admin tab; administrators only, matching the administrative nature of the tab itself."),
+
+            // <lang>
+            //   <zh-CN>文档入口预留（W44.4 裁定 3）：当前仍由页眉占位链接指向 NotImplemented.aspx，故本条保持 Draft 且不参与普通导航；等真实文档目标就绪后改为 Active 并接入页眉渲染。</zh-CN>
+            //   <en>Reserved documentation entry (W44.4 decision 3): the header placeholder link still points at NotImplemented.aspx, so this entry stays Draft and out of ordinary navigation; once a real documentation target exists it becomes Active and is wired into the header rendering.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Documentation.Portal",
+                PortalNavigationEntryKind.Documentation,
+                "门户文档",
+                "Portal Documentation",
+                "Admin/NotImplemented.aspx",
+                PortalNavigationVisibilityMode.HideWhenBlocked,
+                PortalNavigationLifecycleState.Draft,
+                1100,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "W44.4 decision 3: reserved until a real documentation target replaces the NotImplemented placeholder.")
         };
 
         /// <summary>

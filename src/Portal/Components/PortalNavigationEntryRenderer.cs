@@ -113,93 +113,10 @@ namespace ASPNET.StarterKit.Portal
         private static PortalNavigationVisibilityContext BuildContext(IEnumerable<PortalNavigationEntry> candidates)
         {
             // <lang>
-            //   <zh-CN>管理员身份由既有授权入口判定；它不是放行条件，后续仍逐项校验角色、权限、包与 Profile。</zh-CN>
-            //   <en>Administrator identity comes from the existing authorization entry point; it is not a bypass, because roles, permissions, packages, and Profiles are still checked individually.</en>
+            //   <zh-CN>上下文组装已抽到 PortalNavigationVisibilityContextFactory，与主导航 Tab 门控共用同一份语义；此处只做转调，不再各自维护一份实现。</zh-CN>
+            //   <en>Context assembly moved to PortalNavigationVisibilityContextFactory so it is shared with the main-navigation tab gate; this method now only delegates instead of maintaining a second copy.</en>
             // </lang>
-            bool isAdministrator = PortalAuthorization.IsAdmin();
-
-            List<string> roles = new List<string>();
-            List<string> permissions = new List<string>();
-
-            foreach (PortalNavigationEntry entry in candidates)
-            {
-                foreach (string role in entry.RequiredRoles)
-                {
-                    if (!roles.Contains(role) && PortalSecurity.IsInRole(role))
-                    {
-                        roles.Add(role);
-                    }
-                }
-
-                foreach (string key in entry.RequiredPermissionKeys)
-                {
-                    if (!permissions.Contains(key) && PortalAuthorization.HasPermission(key))
-                    {
-                        permissions.Add(key);
-                    }
-                }
-            }
-
-            // <lang>
-            //   <zh-CN>部署侧状态取自 Profile resolver；读取失败时退化为"无允许包、无包含 Profile"，宁可不显示也不放行。</zh-CN>
-            //   <en>Deployment state comes from the Profile resolver; on failure it degrades to "no allowed packages, no included profiles", preferring to hide rather than grant.</en>
-            // </lang>
-            string activeProfile = string.Empty;
-            IList<string> allowedPackages = new string[0];
-            IList<string> includedProfiles = new string[0];
-
-            try
-            {
-                PortalModuleProfileSnapshot snapshot = PortalModuleProfileResolver.Resolve(HttpContext.Current);
-                if (snapshot != null)
-                {
-                    activeProfile = snapshot.ActiveProfile ?? string.Empty;
-                    allowedPackages = snapshot.AllowedPackageIds ?? new string[0];
-                    includedProfiles = ReadIncludedProfiles(activeProfile);
-                }
-            }
-            catch
-            {
-                // <lang>
-                //   <zh-CN>Profile 解析异常不影响页面其余部分：按最保守状态处理。</zh-CN>
-                //   <en>A Profile resolution failure must not affect the rest of the page: fall back to the most conservative state.</en>
-                // </lang>
-            }
-
-            return new PortalNavigationVisibilityContext(
-                isAdministrator,
-                roles,
-                permissions,
-                allowedPackages,
-                activeProfile,
-                includedProfiles);
-        }
-
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>读取当前 Profile 通过 Includes 传递包含的 Profile 列表；配置缺失或异常时返回空集合。</zh-CN>
-        ///   <en>Read the Profiles transitively included by the current Profile through Includes; returns an empty set when configuration is missing or faulty.</en>
-        /// </lang>
-        /// </summary>
-        private static IList<string> ReadIncludedProfiles(string activeProfile)
-        {
-            if (string.IsNullOrWhiteSpace(activeProfile))
-            {
-                return new string[0];
-            }
-
-            string configured = ConfigurationManager.AppSettings["Portal.ModuleProfiles." + activeProfile + ".Includes"];
-            if (string.IsNullOrWhiteSpace(configured))
-            {
-                return new string[0];
-            }
-
-            return configured
-                .Split(',')
-                .Select(value => value.Trim())
-                .Where(value => !string.IsNullOrWhiteSpace(value))
-                .ToList()
-                .AsReadOnly();
+            return PortalNavigationVisibilityContextFactory.Create(candidates);
         }
 
         /// <summary>

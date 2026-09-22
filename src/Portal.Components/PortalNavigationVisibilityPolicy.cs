@@ -260,6 +260,14 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>主导航 Tab 入口组。Tab 条目只承载门控元数据，既不出现在 Admin 动作区的相关入口组中，也不生成动作区链接。</zh-CN>
+        ///   <en>Main-navigation tab entry group. Tab entries carry gate metadata only: they never appear in Admin action-area related groups and never produce action-area links.</en>
+        /// </lang>
+        /// </summary>
+        public const string GroupTab = "Tab";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>阻断原因：入口生命周期不允许显示。</zh-CN>
         ///   <en>Blocked because the entry lifecycle forbids display.</en>
         /// </lang>
@@ -418,6 +426,15 @@ namespace ASPNET.StarterKit.Portal
             if (entryKey.StartsWith("Admin.Error.", StringComparison.OrdinalIgnoreCase))
             {
                 return GroupAdminError;
+            }
+
+            // <lang>
+            //   <zh-CN>Tab 条目自成一组的判定必须早于普通业务前缀：它只做门控，不能因为键形相近而被并入 Admin 动作区的相关入口。</zh-CN>
+            //   <en>The tab-entry group check must run before ordinary business prefixes: tab entries exist for gating only and must never be folded into an Admin action-area related group because their keys look similar.</en>
+            // </lang>
+            if (entryKey.StartsWith(TabEntryKeyPrefix, StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupTab;
             }
 
             if (entryKey.StartsWith("Enterprise.", StringComparison.OrdinalIgnoreCase))
@@ -724,6 +741,151 @@ namespace ASPNET.StarterKit.Portal
                 .Take(maxCount <= 0 ? DefaultMaxRelatedEntries : maxCount)
                 .ToList()
                 .AsReadOnly();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 级入口键前缀：Tab 条目的稳定键统一为 <c>Tab.&lt;TabName&gt;</c>，不使用 TabId，避免库数据进入稳定键。</zh-CN>
+        ///   <en>Entry-key prefix for tab-level entries: a tab entry's stable key is always <c>Tab.&lt;TabName&gt;</c> and never includes the TabId, keeping database data out of stable keys.</en>
+        /// </lang>
+        /// </summary>
+        public const string TabEntryKeyPrefix = "Tab.";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>由门户配置中的 Tab 名构造稳定入口键；空白名返回空字符串，表示没有可判定的 Tab 键。</zh-CN>
+        ///   <en>Builds the stable entry key from a portal-configuration tab name; a blank name yields an empty string, meaning there is no tab key to evaluate.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tabName">
+        /// <l>
+        ///   <zh-CN>门户配置中的 Tab 名称。</zh-CN>
+        ///   <en>Tab name from portal configuration.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>稳定入口键；Tab 名为空白时为空字符串。</zh-CN>
+        ///   <en>Stable entry key; empty when the tab name is blank.</en>
+        /// </l>
+        /// </returns>
+        public static string BuildTabEntryKey(string tabName)
+        {
+            // <lang>
+            //   <zh-CN>只做去空白拼接，不做大小写折叠或字符替换：稳定键必须可被 registry 精确命中，任何隐式改写都会让登记与运行结果不一致。</zh-CN>
+            //   <en>Only trim and concatenate; no case folding or character replacement, because the stable key must be matched exactly by the registry and any implicit rewrite would desynchronize registration from runtime behaviour.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(tabName))
+            {
+                return string.Empty;
+            }
+
+            return TabEntryKeyPrefix + tabName.Trim();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析主导航 Tab 门控开关的原始配置值；关闭是默认值，只有显式的真值才启用。</zh-CN>
+        ///   <en>Parses the raw configuration value of the main-navigation tab gate switch; off is the default and only explicit truthy values enable it.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="configuredValue">
+        /// <l>
+        ///   <zh-CN>配置中的开关原始文本；由调用方读取，本策略不访问配置源。</zh-CN>
+        ///   <en>Raw switch text from configuration, read by the caller because this policy never touches configuration sources.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>显式启用时为 <c>true</c>；空白或不能识别时为 <c>false</c>。</zh-CN>
+        ///   <en><c>true</c> only for explicit enablement; <c>false</c> when blank or unrecognized.</en>
+        /// </l>
+        /// </returns>
+        public static bool IsTabGateEnabled(string configuredValue)
+        {
+            // <lang>
+            //   <zh-CN>识别范围保持保守：只接受 true/1/yes/on（忽略大小写与空白）。无法识别的一律按关闭处理，使配置写错时退回现状而不是改变导航。</zh-CN>
+            //   <en>Recognition stays conservative: only true/1/yes/on (case-insensitive, trimmed) count. Anything unrecognized is treated as off, so a bad configuration falls back to current behaviour instead of changing navigation.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(configuredValue))
+            {
+                return false;
+            }
+
+            string normalized = configuredValue.Trim();
+            return string.Equals(normalized, "true", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(normalized, "1", StringComparison.Ordinal)
+                || string.Equals(normalized, "yes", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(normalized, "on", StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判定门户配置中的 Tab 是否被入口 gate 阻断；只有"已登记且依赖不满足"才返回原因码。</zh-CN>
+        ///   <en>Decides whether a portal-configuration tab is blocked by the entry gate; a reason code is returned only when the tab is registered and its dependencies are unsatisfied.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tabName">
+        /// <l>
+        ///   <zh-CN>门户配置中的 Tab 名称。</zh-CN>
+        ///   <en>Tab name from portal configuration.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前用户与部署状态；为 null 时按放行处理（见备注）。</zh-CN>
+        ///   <en>Current user and deployment state; treated as allowed when null (see remarks).</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>阻断原因码；放行时为 <c>null</c>。</zh-CN>
+        ///   <en>Blocked reason code; <c>null</c> when the tab is allowed.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法刻意采用与动作区相反的失败方向：未登记 Tab、空白名或上下文缺失一律**放行**。原因是主导航在调用本方法前已按角色过滤，放行不会泄露超权入口；反之若 gate 故障导致全部 Tab 消失，会把"治理增强"变成可用性事故。阻断判定本身仍复用统一的六步可见性判定，不另立规则。</zh-CN>
+        ///   <en>This method deliberately fails in the opposite direction from the action area: an unregistered tab, a blank name, or a missing context is always allowed. The main navigation has already been filtered by role before this call, so allowing cannot leak an over-permissioned entry, whereas losing every tab to a gate fault would turn a governance improvement into an availability incident. The blocking decision itself still reuses the shared six-step visibility evaluation rather than defining new rules.</en>
+        /// </lang>
+        /// </remarks>
+        public static string GetTabBlockedReason(string tabName, PortalNavigationVisibilityContext context)
+        {
+            // <lang>
+            //   <zh-CN>空白 Tab 名没有可判定对象：返回放行，让渲染层按既有"数据缺失不渲染该项"的规则处理，而不是在这里制造一种新的隐藏原因。</zh-CN>
+            //   <en>A blank tab name has nothing to evaluate: return allowed so the rendering layer applies its existing "skip entries with missing data" rule instead of inventing a new hiding reason here.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(tabName))
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>上下文缺失即放行：本阶段不引入新的失败模式，gate 只有在能完成判定时才可能阻断。</zh-CN>
+            //   <en>A missing context is allowed: this phase introduces no new failure mode, so the gate can block only when a decision can actually be completed.</en>
+            // </lang>
+            if (context == null)
+            {
+                return null;
+            }
+
+            string entryKey = BuildTabEntryKey(tabName);
+            if (entryKey.Length == 0)
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>未登记即为放行（零回归兜底）：registry 只对**已登记**的 Tab 施加门控，未登记 Tab 继续沿用既有的角色过滤结果。</zh-CN>
+            //   <en>Unregistered means allowed (zero-regression fallback): the registry only gates **registered** tabs, while unregistered tabs keep the existing role-filtered outcome.</en>
+            // </lang>
+            PortalNavigationEntry entry = PortalNavigationRegistry.FindByKey(entryKey);
+            if (entry == null)
+            {
+                return null;
+            }
+
+            return GetBlockedReason(entry, context);
         }
 
         /// <summary>

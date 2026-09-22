@@ -459,6 +459,7 @@
     <Compile Include="Components\PortalDiagnostics.cs" />
     <Compile Include="Components\PortalDocumentPolicy.cs" />
     <Compile Include="Components\PortalNavigationPolicy.cs" />
+    <Compile Include="Components\PortalNavigationVisibilityContextFactory.cs" />
     <Compile Include="Components\PortalDiagnosticEntry.cs" />
     <Compile Include="Components\PortalDiagnosticQuery.cs" />
     <Compile Include="Components\PortalDiagnosticQueryService.cs" />

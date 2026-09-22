@@ -40,15 +40,19 @@
                 RepeatDirection="Horizontal"
                 RepeatLayout="Flow"
                 EnableViewState="false"
+                OnItemDataBound="Tabs_ItemDataBound"
                 runat="server">
                 <ItemTemplate>
                     <%--
                         <lang>
-                            <zh-CN>普通 Tab 项输出服务器绑定的名称和 ID；模板只呈现导航，不把绑定值当作客户端权限判断。</zh-CN>
-                            <en>A regular tab item renders the server-bound name and ID; the template presents navigation and does not treat bound values as client-side authorization decisions.</en>
+                            <zh-CN>普通 Tab 项输出服务器绑定的名称与 URL；模板只呈现导航，不把绑定值当作客户端权限判断。URL 改由 code-behind 方法生成，避免在服务器控件属性中使用 &lt;%= %&gt; 代码块（Web Forms 不允许）。每项同时输出一个默认隐藏的禁用态元素，供 Tab 门控在管理员可见时替换显示并携带阻断原因；默认隐藏使其在门控关闭时完全不输出 HTML。</zh-CN>
+                            <en>A regular tab item renders the server-bound name and URL; the template presents navigation and does not treat bound values as client-side authorization decisions. The URL is now produced by a code-behind method because a &lt;%= %&gt; code block is not allowed inside a server-control attribute in Web Forms. Each item also emits a hidden disabled element that the tab gate can reveal for administrators together with the blocked reason; because it defaults to hidden it emits no HTML at all while the gate is off.</en>
                         </lang>
                     --%>
-                    <a href='<%= Global.GetApplicationPath(Request) %>/DesktopDefault.aspx?tabindex=<%# Container.ItemIndex %>&tabid=<%# ((ITabItem) Container.DataItem).TabId %>' class="portal-tab OtherTabs"><%# ((ITabItem) Container.DataItem).TabName %></a>
+                    <asp:HyperLink ID="TabLink" runat="server" CssClass="portal-tab OtherTabs"
+                        NavigateUrl='<%# BuildTabUrl(Container.ItemIndex, (ITabItem) Container.DataItem) %>'
+                        Text='<%# ((ITabItem) Container.DataItem).TabName %>' />
+                    <asp:Label ID="TabDisabled" runat="server" Visible="false" CssClass="portal-tab portal-tab-disabled" />
                 </ItemTemplate>
                 <SelectedItemTemplate>
                     <span class="portal-tab portal-tab-selected SelectedTab"><%# ((ITabItem) Container.DataItem).TabName %></span>
