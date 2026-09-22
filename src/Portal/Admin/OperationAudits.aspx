@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.OperationAudits"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
 <lang>
   <zh-CN>P2.4 只读运营审计页用于查询高价值状态变更；普通查看行为当前不写审计，相关策略扩展由审计策略配置统一控制。</zh-CN>
@@ -21,13 +24,10 @@
     <div class="portal-admin-page portal-admin-audits">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Operation Audits</h1>
-                <p class="Normal portal-admin-subtitle">Review high-value administration and workflow changes.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_OperationAudits_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_OperationAudits_Subtitle %></p>
             </div>
-            <div class="portal-admin-actions">
-                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-            </div>
+            <%= PortalNavigationEntryRenderer.RenderActions("Admin.Ops.OperationAudits", Context) %>
         </div>
 
         <%--
@@ -39,27 +39,27 @@
         <div class="portal-admin-section portal-filter-panel">
             <div class="portal-filter-grid">
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Start UTC</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_OperationAudits_LabelStartUtc %></span>
                     <asp:TextBox ID="StartDateTextBox" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">End UTC</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_OperationAudits_LabelEndUtc %></span>
                     <asp:TextBox ID="EndDateTextBox" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Category</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_OperationAudits_LabelCategory %></span>
                     <asp:TextBox ID="CategoryFilter" CssClass="NormalTextBox portal-filter-input" Width="120" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Action</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_OperationAudits_LabelAction %></span>
                     <asp:TextBox ID="ActionFilter" CssClass="NormalTextBox portal-filter-input" Width="110" runat="server" />
                 </div>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">Target ID</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_OperationAudits_LabelTargetId %></span>
                     <asp:TextBox ID="TargetIdFilter" CssClass="NormalTextBox portal-filter-input" Width="150" runat="server" />
                 </div>
                 <div class="portal-filter-actions">
-                    <asp:LinkButton ID="SearchButton" Text="Search" CssClass="CommandButton" CausesValidation="False" OnClick="SearchButton_Click" runat="server" />
+                    <asp:LinkButton ID="SearchButton" Text="<%$ Resources:lang, Admin_OperationAudits_ButtonSearch %>" CssClass="CommandButton" CausesValidation="False" OnClick="SearchButton_Click" runat="server" />
                 </div>
             </div>
             <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" runat="server" />
@@ -76,14 +76,14 @@
                 <asp:Label ID="ResultLabel" runat="server" />
             </div>
             <div class="portal-pager-actions">
-                <asp:LinkButton ID="PreviousButton" Text="Previous" CssClass="CommandButton" CausesValidation="False" OnClick="PreviousButton_Click" runat="server" />
-                <asp:LinkButton ID="NextButton" Text="Next" CssClass="CommandButton" CausesValidation="False" OnClick="NextButton_Click" runat="server" />
+                <asp:LinkButton ID="PreviousButton" Text="<%$ Resources:lang, Admin_OperationAudits_ButtonPrevious %>" CssClass="CommandButton" CausesValidation="False" OnClick="PreviousButton_Click" runat="server" />
+                <asp:LinkButton ID="NextButton" Text="<%$ Resources:lang, Admin_OperationAudits_ButtonNext %>" CssClass="CommandButton" CausesValidation="False" OnClick="NextButton_Click" runat="server" />
             </div>
         </div>
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Audit Entries</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_OperationAudits_SectionAuditEntries %></h2>
             </div>
             <div class="portal-table-wrap">
                 <%--
@@ -96,13 +96,13 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="155" class="SubHead">UTC</th>
-                                <th scope="col" width="130" class="SubHead">Category</th>
-                                <th scope="col" width="110" class="SubHead">Action</th>
-                                <th scope="col" width="110" class="SubHead">Actor</th>
-                                <th scope="col" width="95" class="SubHead">Target</th>
-                                <th scope="col" width="100" class="SubHead">Target ID</th>
-                                <th scope="col" class="SubHead">Summary</th>
+                                <th scope="col" width="155" class="SubHead"><%= lang.Admin_OperationAudits_ColumnUtc %></th>
+                                <th scope="col" width="130" class="SubHead"><%= lang.Admin_OperationAudits_ColumnCategory %></th>
+                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_OperationAudits_ColumnAction %></th>
+                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_OperationAudits_ColumnActor %></th>
+                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_OperationAudits_ColumnTarget %></th>
+                                <th scope="col" width="100" class="SubHead"><%= lang.Admin_OperationAudits_ColumnTargetId %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_OperationAudits_ColumnSummary %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>

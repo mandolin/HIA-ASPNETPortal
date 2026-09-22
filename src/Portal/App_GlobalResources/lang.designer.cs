@@ -1411,5 +1411,425 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_DiagnosticsLogs_ColumnEventId", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Operation Audits</zh-CN>
+        ///   <en>Looks up a localized string similar to: Operation Audits</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_Title {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Review high-value administration and workflow changes.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Review high-value administration and workflow changes.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Start UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Start UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_LabelStartUtc {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_LabelStartUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：End UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: End UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_LabelEndUtc {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_LabelEndUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Category</zh-CN>
+        ///   <en>Looks up a localized string similar to: Category</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_LabelCategory {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_LabelCategory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Action</zh-CN>
+        ///   <en>Looks up a localized string similar to: Action</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_LabelAction {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_LabelAction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Target ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: Target ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_LabelTargetId {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_LabelTargetId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Search</zh-CN>
+        ///   <en>Looks up a localized string similar to: Search</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ButtonSearch {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ButtonSearch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Previous</zh-CN>
+        ///   <en>Looks up a localized string similar to: Previous</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ButtonPrevious {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ButtonPrevious", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Next</zh-CN>
+        ///   <en>Looks up a localized string similar to: Next</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ButtonNext {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ButtonNext", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Audit Entries</zh-CN>
+        ///   <en>Looks up a localized string similar to: Audit Entries</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_SectionAuditEntries {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_SectionAuditEntries", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ColumnUtc {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ColumnUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Category</zh-CN>
+        ///   <en>Looks up a localized string similar to: Category</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ColumnCategory {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ColumnCategory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Action</zh-CN>
+        ///   <en>Looks up a localized string similar to: Action</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ColumnAction {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ColumnAction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Actor</zh-CN>
+        ///   <en>Looks up a localized string similar to: Actor</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ColumnActor {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ColumnActor", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Target</zh-CN>
+        ///   <en>Looks up a localized string similar to: Target</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ColumnTarget {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ColumnTarget", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Target ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: Target ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ColumnTargetId {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ColumnTargetId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Summary</zh-CN>
+        ///   <en>Looks up a localized string similar to: Summary</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_ColumnSummary {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_ColumnSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Diagnostic Log Detail</zh-CN>
+        ///   <en>Looks up a localized string similar to: Diagnostic Log Detail</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_Title {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：One structured diagnostic event.</zh-CN>
+        ///   <en>Looks up a localized string similar to: One structured diagnostic event.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Back to Logs</zh-CN>
+        ///   <en>Looks up a localized string similar to: Back to Logs</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_LinkBackToLogs {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_LinkBackToLogs", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Event Detail</zh-CN>
+        ///   <en>Looks up a localized string similar to: Event Detail</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_SectionEventDetail {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_SectionEventDetail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Event ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: Event ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldEventId {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldEventId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldUtc {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Level</zh-CN>
+        ///   <en>Looks up a localized string similar to: Level</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldLevel {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldLevel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Category</zh-CN>
+        ///   <en>Looks up a localized string similar to: Category</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldCategory {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldCategory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Message</zh-CN>
+        ///   <en>Looks up a localized string similar to: Message</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldMessage {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Exception Type</zh-CN>
+        ///   <en>Looks up a localized string similar to: Exception Type</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldExceptionType {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldExceptionType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Exception Detail</zh-CN>
+        ///   <en>Looks up a localized string similar to: Exception Detail</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldExceptionDetail {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldExceptionDetail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Request Path</zh-CN>
+        ///   <en>Looks up a localized string similar to: Request Path</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldRequestPath {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldRequestPath", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：HTTP Method</zh-CN>
+        ///   <en>Looks up a localized string similar to: HTTP Method</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldHttpMethod {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldHttpMethod", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: User Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldUserName {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldUserName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Client IP</zh-CN>
+        ///   <en>Looks up a localized string similar to: Client IP</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldClientIp {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldClientIp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Physical Path</zh-CN>
+        ///   <en>Looks up a localized string similar to: Physical Path</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldPhysicalPath {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldPhysicalPath", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User-Agent</zh-CN>
+        ///   <en>Looks up a localized string similar to: User-Agent</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticLogDetail_FieldUserAgent {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldUserAgent", resourceCulture);
+            }
+        }
     }
 }

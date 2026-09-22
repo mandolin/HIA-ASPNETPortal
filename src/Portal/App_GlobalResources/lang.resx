@@ -405,4 +405,109 @@
   <data name="Admin_DiagnosticsLogs_ColumnEventId" xml:space="preserve">
     <value>Event ID</value>
   </data>
+  <data name="Admin_OperationAudits_Title" xml:space="preserve">
+    <value>Operation Audits</value>
+  </data>
+  <data name="Admin_OperationAudits_Subtitle" xml:space="preserve">
+    <value>Review high-value administration and workflow changes.</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelStartUtc" xml:space="preserve">
+    <value>Start UTC</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelEndUtc" xml:space="preserve">
+    <value>End UTC</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelTargetId" xml:space="preserve">
+    <value>Target ID</value>
+  </data>
+  <data name="Admin_OperationAudits_ButtonSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Admin_OperationAudits_ButtonPrevious" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Admin_OperationAudits_ButtonNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Admin_OperationAudits_SectionAuditEntries" xml:space="preserve">
+    <value>Audit Entries</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnActor" xml:space="preserve">
+    <value>Actor</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnTarget" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnTargetId" xml:space="preserve">
+    <value>Target ID</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_Title" xml:space="preserve">
+    <value>Diagnostic Log Detail</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_Subtitle" xml:space="preserve">
+    <value>One structured diagnostic event.</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_LinkBackToLogs" xml:space="preserve">
+    <value>Back to Logs</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_SectionEventDetail" xml:space="preserve">
+    <value>Event Detail</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldEventId" xml:space="preserve">
+    <value>Event ID</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldLevel" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldExceptionType" xml:space="preserve">
+    <value>Exception Type</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldExceptionDetail" xml:space="preserve">
+    <value>Exception Detail</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldRequestPath" xml:space="preserve">
+    <value>Request Path</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldHttpMethod" xml:space="preserve">
+    <value>HTTP Method</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldUserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldClientIp" xml:space="preserve">
+    <value>Client IP</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldPhysicalPath" xml:space="preserve">
+    <value>Physical Path</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldUserAgent" xml:space="preserve">
+    <value>User-Agent</value>
+  </data>
 </root>

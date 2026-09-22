@@ -405,4 +405,109 @@
   <data name="Admin_DiagnosticsLogs_ColumnEventId" xml:space="preserve">
     <value>事件 ID</value>
   </data>
+  <data name="Admin_OperationAudits_Title" xml:space="preserve">
+    <value>运营审计</value>
+  </data>
+  <data name="Admin_OperationAudits_Subtitle" xml:space="preserve">
+    <value>审阅高价值的管理与工作流变更。</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelStartUtc" xml:space="preserve">
+    <value>起始 UTC</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelEndUtc" xml:space="preserve">
+    <value>结束 UTC</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelCategory" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelAction" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Admin_OperationAudits_LabelTargetId" xml:space="preserve">
+    <value>目标编号</value>
+  </data>
+  <data name="Admin_OperationAudits_ButtonSearch" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="Admin_OperationAudits_ButtonPrevious" xml:space="preserve">
+    <value>上一页</value>
+  </data>
+  <data name="Admin_OperationAudits_ButtonNext" xml:space="preserve">
+    <value>下一页</value>
+  </data>
+  <data name="Admin_OperationAudits_SectionAuditEntries" xml:space="preserve">
+    <value>审计条目</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnCategory" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnAction" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnActor" xml:space="preserve">
+    <value>操作者</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnTarget" xml:space="preserve">
+    <value>目标</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnTargetId" xml:space="preserve">
+    <value>目标编号</value>
+  </data>
+  <data name="Admin_OperationAudits_ColumnSummary" xml:space="preserve">
+    <value>摘要</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_Title" xml:space="preserve">
+    <value>诊断日志详情</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_Subtitle" xml:space="preserve">
+    <value>单条结构化诊断事件。</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_LinkBackToLogs" xml:space="preserve">
+    <value>返回日志列表</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_SectionEventDetail" xml:space="preserve">
+    <value>事件详情</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldEventId" xml:space="preserve">
+    <value>事件编号</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldLevel" xml:space="preserve">
+    <value>级别</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldCategory" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldMessage" xml:space="preserve">
+    <value>消息</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldExceptionType" xml:space="preserve">
+    <value>异常类型</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldExceptionDetail" xml:space="preserve">
+    <value>异常详情</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldRequestPath" xml:space="preserve">
+    <value>请求路径</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldHttpMethod" xml:space="preserve">
+    <value>HTTP 方法</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldUserName" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldClientIp" xml:space="preserve">
+    <value>客户端 IP</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldPhysicalPath" xml:space="preserve">
+    <value>物理路径</value>
+  </data>
+  <data name="Admin_DiagnosticLogDetail_FieldUserAgent" xml:space="preserve">
+    <value>User-Agent</value>
+  </data>
 </root>
