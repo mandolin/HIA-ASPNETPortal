@@ -657,6 +657,69 @@
   <data name="EditEvents_MessageValidExpirationDate" xml:space="preserve">
     <value>You Must Enter a Valid Expiration Date</value>
   </data>
+  <data name="LegacyEdit_LabelName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LegacyEdit_LabelCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="LegacyEdit_LabelBrowseUrl" xml:space="preserve">
+    <value>URL to Browse</value>
+  </data>
+  <data name="LegacyEdit_LabelUploadOption" xml:space="preserve">
+    <value>Upload document to server</value>
+  </data>
+  <data name="LegacyEdit_LabelFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="LegacyEdit_LabelStoreInDatabase" xml:space="preserve">
+    <value>Store in database (web farm support)</value>
+  </data>
+  <data name="LegacyEdit_LabelRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="LegacyEdit_LabelEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LegacyEdit_LabelContact1" xml:space="preserve">
+    <value>Contact 1</value>
+  </data>
+  <data name="LegacyEdit_LabelContact2" xml:space="preserve">
+    <value>Contact 2</value>
+  </data>
+  <data name="LegacyEdit_LabelReadMoreLink" xml:space="preserve">
+    <value>Read More Link</value>
+  </data>
+  <data name="LegacyEdit_LabelReadMoreMobile" xml:space="preserve">
+    <value>Read More (Mobile)</value>
+  </data>
+  <data name="LegacyEdit_MessageValidName" xml:space="preserve">
+    <value>You Must Enter a Valid Name</value>
+  </data>
+  <data name="EditDocs_MessageDatabaseStorageDisabled" xml:space="preserve">
+    <value>Database file storage is not enabled yet; choose server upload or enter a browse address.</value>
+  </data>
+  <data name="EditDocs_MessageUploadSelected" xml:space="preserve">
+    <value>Server upload is selected; choose the file to upload.</value>
+  </data>
+  <data name="EditDocs_MessageInvalidBrowseUrl" xml:space="preserve">
+    <value>Enter an application-relative address or an http/https browse address.</value>
+  </data>
+  <data name="EditDocs_UploadSizeLimitPrefix" xml:space="preserve">
+    <value>Maximum file size: </value>
+  </data>
+  <data name="EditDocs_Heading" xml:space="preserve">
+    <value>Document Details</value>
+  </data>
+  <data name="EditAnnouncements_MessageInvalidReadMoreUrl" xml:space="preserve">
+    <value>The read-more link must be a site-local or HTTP(S) address.</value>
+  </data>
+  <data name="EditAnnouncements_Heading" xml:space="preserve">
+    <value>Announcement Details</value>
+  </data>
+  <data name="EditContacts_Heading" xml:space="preserve">
+    <value>Contact Details</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>

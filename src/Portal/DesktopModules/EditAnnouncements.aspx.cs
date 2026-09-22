@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -152,7 +153,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>旧页面仍用当前文化解析日期；本轮只补低敏校验提示，不改变历史输入格式。</zh-CN>
                 //   <en>The legacy page still parses dates using current culture; this pass only adds a low-sensitivity validation message and does not change historical input format.</en>
                 // </lang>
-                ShowValidationMessage("请输入有效的到期日期。");
+                ShowValidationMessage(lang.EditEvents_MessageInvalidExpirationDate);
                 return;
             }
 
@@ -165,7 +166,7 @@ namespace ASPNET.StarterKit.Portal
             if (!TryNormalizeOptionalBrowseUrl(MoreLinkField.Text, out moreLink) ||
                 !TryNormalizeOptionalBrowseUrl(MobileMoreField.Text, out mobileMoreLink))
             {
-                ShowValidationMessage("“查看更多”链接只能使用站内地址或 HTTP(S) 地址。");
+                ShowValidationMessage(lang.EditAnnouncements_MessageInvalidReadMoreUrl);
                 return;
             }
 

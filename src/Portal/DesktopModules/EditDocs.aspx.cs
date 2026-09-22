@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -120,7 +121,7 @@ namespace ASPNET.StarterKit.Portal
 
             if (storeInDatabase.Checked)
             {
-                UploadMessage.Text = "数据库文件存储暂未启用，请选择上传到服务器或填写浏览地址。";
+                UploadMessage.Text = lang.EditDocs_MessageDatabaseStorageDisabled;
                 return;
             }
 
@@ -139,7 +140,7 @@ namespace ASPNET.StarterKit.Portal
                     // </lang>
                     if (!HasUploadedFile())
                     {
-                        UploadMessage.Text = "已选择上传到服务器，请选择要上传的文件。";
+                        UploadMessage.Text = lang.EditDocs_MessageUploadSelected;
                         return;
                     }
 
@@ -164,7 +165,7 @@ namespace ASPNET.StarterKit.Portal
                     string normalizedUrl;
                     if (!PortalNavigationPolicy.TryNormalizeBrowseUrl(PathField.Text, Request, out normalizedUrl))
                     {
-                        UploadMessage.Text = "请输入应用内相对地址或 http/https 浏览地址。";
+                        UploadMessage.Text = lang.EditDocs_MessageInvalidBrowseUrl;
                         return;
                     }
 
@@ -341,7 +342,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             storeInDatabase.Checked = false;
             storeInDatabase.Enabled = false;
-            UploadPolicyHint.Text = "单文件上限：" + PortalDocumentPolicy.GetMaximumUploadSizeDisplayText() +
+            UploadPolicyHint.Text = lang.EditDocs_UploadSizeLimitPrefix + PortalDocumentPolicy.GetMaximumUploadSizeDisplayText() +
                                     "；允许扩展名：" + PortalDocumentPolicy.GetAllowedExtensionsDisplayText() +
                                     "。服务器上传会重命名后保存到 " + PortalDocumentPolicy.UploadVirtualDirectory + "。";
         }

@@ -2432,6 +2432,258 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelName {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Category</zh-CN>
+        ///   <en>Looks up a localized string similar to: Category</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelCategory {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelCategory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：URL to Browse</zh-CN>
+        ///   <en>Looks up a localized string similar to: URL to Browse</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelBrowseUrl {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelBrowseUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Upload document to server</zh-CN>
+        ///   <en>Looks up a localized string similar to: Upload document to server</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelUploadOption {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelUploadOption", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：File</zh-CN>
+        ///   <en>Looks up a localized string similar to: File</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelFile {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelFile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Store in database (web farm support)</zh-CN>
+        ///   <en>Looks up a localized string similar to: Store in database (web farm support)</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelStoreInDatabase {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelStoreInDatabase", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Role</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelRole {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelRole", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Email</zh-CN>
+        ///   <en>Looks up a localized string similar to: Email</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelEmail {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelEmail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Contact 1</zh-CN>
+        ///   <en>Looks up a localized string similar to: Contact 1</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelContact1 {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelContact1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Contact 2</zh-CN>
+        ///   <en>Looks up a localized string similar to: Contact 2</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelContact2 {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelContact2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Read More Link</zh-CN>
+        ///   <en>Looks up a localized string similar to: Read More Link</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelReadMoreLink {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelReadMoreLink", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Read More (Mobile)</zh-CN>
+        ///   <en>Looks up a localized string similar to: Read More (Mobile)</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelReadMoreMobile {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelReadMoreMobile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You Must Enter a Valid Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: You Must Enter a Valid Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_MessageValidName {
+            get {
+                return ResourceManager.GetString("LegacyEdit_MessageValidName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Document Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Document Details</en>
+        /// </lang>
+        /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Database file storage is not enabled yet; choose server upload or enter a browse address.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Database file storage is not enabled yet; choose server upload or enter a browse address.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_MessageDatabaseStorageDisabled {
+            get {
+                return ResourceManager.GetString("EditDocs_MessageDatabaseStorageDisabled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Server upload is selected; choose the file to upload.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Server upload is selected; choose the file to upload.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_MessageUploadSelected {
+            get {
+                return ResourceManager.GetString("EditDocs_MessageUploadSelected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter an application-relative address or an http/https browse address.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter an application-relative address or an http/https browse address.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_MessageInvalidBrowseUrl {
+            get {
+                return ResourceManager.GetString("EditDocs_MessageInvalidBrowseUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Maximum file size: </zh-CN>
+        ///   <en>Looks up a localized string similar to: Maximum file size: </en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_UploadSizeLimitPrefix {
+            get {
+                return ResourceManager.GetString("EditDocs_UploadSizeLimitPrefix", resourceCulture);
+            }
+        }
+
+        internal static string EditDocs_Heading {
+            get {
+                return ResourceManager.GetString("EditDocs_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Announcement Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Announcement Details</en>
+        /// </lang>
+        /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The read-more link must be a site-local or HTTP(S) address.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The read-more link must be a site-local or HTTP(S) address.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditAnnouncements_MessageInvalidReadMoreUrl {
+            get {
+                return ResourceManager.GetString("EditAnnouncements_MessageInvalidReadMoreUrl", resourceCulture);
+            }
+        }
+
+        internal static string EditAnnouncements_Heading {
+            get {
+                return ResourceManager.GetString("EditAnnouncements_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Contact Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Contact Details</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditContacts_Heading {
+            get {
+                return ResourceManager.GetString("EditContacts_Heading", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

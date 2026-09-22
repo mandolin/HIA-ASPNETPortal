@@ -10,7 +10,7 @@
     --%>
     <section class="portal-page-section portal-edit-page portal-edit-announcements">
         <div class="portal-page-heading-row">
-            <h1 class="portal-page-title">Announcement Details</h1>
+            <h1 class="portal-page-title"><%= lang.EditAnnouncements_Heading %></h1>
         </div>
 
         <div class="portal-detail-card portal-edit-form">
@@ -22,11 +22,11 @@
             --%>
             <div class="portal-field-stack">
                 <asp:Label ID="TitleLabel" CssClass="portal-field-stack-label" AssociatedControlID="TitleField"
-                    runat="server" Text="Title" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelTitle %>" />
                 <asp:TextBox ID="TitleField" CssClass="NormalTextBox portal-input" Columns="30" MaxLength="100"
                     runat="server" />
                 <asp:RequiredFieldValidator ID="Req1" CssClass="portal-validation-message" Display="Static"
-                    ErrorMessage="You Must Enter a Valid Title" ControlToValidate="TitleField" runat="server" />
+                    ErrorMessage="<%$ Resources:lang,LegacyEdit_MessageValidTitle %>" ControlToValidate="TitleField" runat="server" />
             </div>
 
             <div class="portal-field-stack">
@@ -37,37 +37,37 @@
                     </lang>
                 --%>
                 <asp:Label ID="MoreLinkLabel" CssClass="portal-field-stack-label" AssociatedControlID="MoreLinkField"
-                    runat="server" Text="Read More Link" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelReadMoreLink %>" />
                 <asp:TextBox ID="MoreLinkField" CssClass="NormalTextBox portal-input" Columns="30"
                     MaxLength="100" runat="server" />
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="MobileMoreLabel" CssClass="portal-field-stack-label" AssociatedControlID="MobileMoreField"
-                    runat="server" Text="Read More (Mobile)" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelReadMoreMobile %>" />
                 <asp:TextBox ID="MobileMoreField" CssClass="NormalTextBox portal-input" Columns="30"
                     MaxLength="100" runat="server" />
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="DescriptionLabel" CssClass="portal-field-stack-label" AssociatedControlID="DescriptionField"
-                    runat="server" Text="Description" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelDescription %>" />
                 <asp:TextBox ID="DescriptionField" CssClass="NormalTextBox portal-input" TextMode="Multiline"
                     Columns="44" Rows="6" runat="server" />
                 <asp:RequiredFieldValidator ID="Req2" CssClass="portal-validation-message" Display="Static"
-                    ErrorMessage="You Must Enter a Valid Description" ControlToValidate="DescriptionField" runat="server" />
+                    ErrorMessage="<%$ Resources:lang,EditEvents_MessageValidDescription %>" ControlToValidate="DescriptionField" runat="server" />
             </div>
 
             <div class="portal-field-stack portal-edit-date-field">
                 <asp:Label ID="ExpireLabel" CssClass="portal-field-stack-label" AssociatedControlID="ExpireField"
-                    runat="server" Text="Expires" />
+                    runat="server" Text="<%$ Resources:lang,EditEvents_LabelExpires %>" />
                 <asp:TextBox ID="ExpireField" Text="12/31/2025" CssClass="NormalTextBox portal-input" Columns="8"
                     runat="server" />
                 <asp:RequiredFieldValidator Display="Static" ID="RequiredExpireDate" CssClass="portal-validation-message"
-                    runat="server" ErrorMessage="You Must Enter a Valid Expiration Date" ControlToValidate="ExpireField" />
+                    runat="server" ErrorMessage="<%$ Resources:lang,EditEvents_MessageValidExpirationDate %>" ControlToValidate="ExpireField" />
                 <asp:CompareValidator Display="Static" ID="VerifyExpireDate" CssClass="portal-validation-message"
                     runat="server" Operator="DataTypeCheck" ControlToValidate="ExpireField" Type="Date"
-                    ErrorMessage="You Must Enter a Valid Expiration Date" />
+                    ErrorMessage="<%$ Resources:lang,EditEvents_MessageValidExpirationDate %>" />
             </div>
 
             <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message" EnableViewState="false"
@@ -80,18 +80,18 @@
                 </lang>
             --%>
             <div class="portal-form-actions">
-                <asp:LinkButton ID="updateButton" Text="Update" runat="server"
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
-                <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
                     CssClass="portal-button portal-button-secondary" BorderStyle="none" OnClick="CancelBtn_Click" />
-                <asp:LinkButton ID="deleteButton" Text="Delete this item" CausesValidation="False" runat="server"
+                <asp:LinkButton ID="deleteButton" Text="<%$ Resources:lang,LegacyEdit_ButtonDelete %>" CausesValidation="False" runat="server"
                     CssClass="portal-button portal-button-danger" BorderStyle="none" OnClick="DeleteBtn_Click" />
             </div>
         </div>
 
         <p class="portal-edit-metadata">
-            Created by <asp:Label ID="CreatedBy" runat="server" />
-            on <asp:Label ID="CreatedDate" runat="server" />
+            <%= lang.LegacyEdit_CreatedBy %> <asp:Label ID="CreatedBy" runat="server" />
+            <%= lang.LegacyEdit_CreatedOn %> <asp:Label ID="CreatedDate" runat="server" />
         </p>
     </section>
 </asp:Content>

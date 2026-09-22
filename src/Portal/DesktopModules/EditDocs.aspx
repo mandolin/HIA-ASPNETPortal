@@ -10,23 +10,23 @@
     --%>
     <section class="portal-page-section portal-edit-page portal-edit-docs">
         <div class="portal-page-heading-row">
-            <h1 class="portal-page-title">Document Details</h1>
+            <h1 class="portal-page-title"><%= lang.EditDocs_Heading %></h1>
         </div>
 
         <div class="portal-detail-card portal-edit-form">
             <div class="portal-field-stack">
                 <asp:Label ID="NameLabel" CssClass="portal-field-stack-label" AssociatedControlID="NameField"
-                    runat="server" Text="Name" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelName %>" />
                 <asp:TextBox ID="NameField" CssClass="NormalTextBox portal-input" Columns="28" MaxLength="150"
                     runat="server" />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="portal-validation-message"
-                    Display="Static" runat="server" ErrorMessage="You Must Enter a Valid Name"
+                    Display="Static" runat="server" ErrorMessage="<%$ Resources:lang,LegacyEdit_MessageValidName %>"
                     ControlToValidate="NameField" />
             </div>
 
             <div class="portal-field-stack portal-edit-short-field">
                 <asp:Label ID="CategoryLabel" CssClass="portal-field-stack-label" AssociatedControlID="CategoryField"
-                    runat="server" Text="Category" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelCategory %>" />
                 <asp:TextBox ID="CategoryField" CssClass="NormalTextBox portal-input" Columns="28"
                     MaxLength="50" runat="server" />
             </div>
@@ -44,7 +44,7 @@
                 </lang>
                 --%>
                 <asp:Label ID="PathLabel" CssClass="portal-field-stack-label" AssociatedControlID="PathField"
-                    runat="server" Text="URL to Browse" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelBrowseUrl %>" />
                 <asp:TextBox ID="PathField" CssClass="NormalTextBox portal-input" Columns="28" MaxLength="250"
                     runat="server" />
             </div>
@@ -61,14 +61,14 @@
             </div>
 
             <div class="portal-option-stack">
-                <asp:CheckBox ID="Upload" CssClass="Normal portal-checkbox" Text="Upload document to server"
+                <asp:CheckBox ID="Upload" CssClass="Normal portal-checkbox" Text="<%$ Resources:lang,LegacyEdit_LabelUploadOption %>"
                     runat="server" />
                 <span class="portal-field-help">选择后将使用本次上传文件覆盖上方浏览地址。</span>
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="FileUploadLabel" CssClass="portal-field-stack-label" AssociatedControlID="FileUpload"
-                    runat="server" Text="File" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelFile %>" />
                 <input type="file" id="FileUpload" class="portal-input portal-file-input" runat="server"
                     name="FileUpload" />
                 <asp:Label ID="UploadMessage" CssClass="NormalRed portal-validation-message" runat="server" />
@@ -76,7 +76,7 @@
 
             <div class="portal-option-stack portal-disabled-option">
                 <asp:CheckBox ID="storeInDatabase" CssClass="Normal portal-checkbox"
-                    Text="Store in database (web farm support)" runat="server" />
+                    Text="<%$ Resources:lang,LegacyEdit_LabelStoreInDatabase %>" runat="server" />
                 <span class="portal-field-help">数据库文件存储属于后置能力，本阶段不接收二进制内容入库。</span>
             </div>
 
@@ -87,19 +87,19 @@
                   <en>Update, Cancel, and Delete enter the existing document state flow; database storage is currently disabled, so a page option cannot be treated as an enabled capability.</en>
                 </lang>
                 --%>
-                <asp:LinkButton ID="updateButton" Text="Update" runat="server"
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
-                <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
                     CssClass="portal-button portal-button-secondary" BorderStyle="none" OnClick="CancelBtn_Click" />
-                <asp:LinkButton ID="deleteButton" Text="Delete this item" CausesValidation="False"
+                <asp:LinkButton ID="deleteButton" Text="<%$ Resources:lang,LegacyEdit_ButtonDelete %>" CausesValidation="False"
                     runat="server" CssClass="portal-button portal-button-danger" BorderStyle="none"
                     OnClick="DeleteBtn_Click" />
             </div>
         </div>
 
         <p class="portal-edit-metadata">
-            Created by <asp:Label ID="CreatedBy" runat="server" />
-            on <asp:Label ID="CreatedDate" runat="server" />
+            <%= lang.LegacyEdit_CreatedBy %> <asp:Label ID="CreatedBy" runat="server" />
+            <%= lang.LegacyEdit_CreatedOn %> <asp:Label ID="CreatedDate" runat="server" />
         </p>
     </section>
 </asp:Content>

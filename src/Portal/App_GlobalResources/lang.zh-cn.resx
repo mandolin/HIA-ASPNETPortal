@@ -657,6 +657,69 @@
   <data name="EditEvents_MessageValidExpirationDate" xml:space="preserve">
     <value>必须填写有效的过期日期</value>
   </data>
+  <data name="LegacyEdit_LabelName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="LegacyEdit_LabelCategory" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="LegacyEdit_LabelBrowseUrl" xml:space="preserve">
+    <value>浏览地址</value>
+  </data>
+  <data name="LegacyEdit_LabelUploadOption" xml:space="preserve">
+    <value>上传文档到服务器</value>
+  </data>
+  <data name="LegacyEdit_LabelFile" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="LegacyEdit_LabelStoreInDatabase" xml:space="preserve">
+    <value>存入数据库（支持 Web 场）</value>
+  </data>
+  <data name="LegacyEdit_LabelRole" xml:space="preserve">
+    <value>角色</value>
+  </data>
+  <data name="LegacyEdit_LabelEmail" xml:space="preserve">
+    <value>电子邮件</value>
+  </data>
+  <data name="LegacyEdit_LabelContact1" xml:space="preserve">
+    <value>联系方式 1</value>
+  </data>
+  <data name="LegacyEdit_LabelContact2" xml:space="preserve">
+    <value>联系方式 2</value>
+  </data>
+  <data name="LegacyEdit_LabelReadMoreLink" xml:space="preserve">
+    <value>延伸阅读链接</value>
+  </data>
+  <data name="LegacyEdit_LabelReadMoreMobile" xml:space="preserve">
+    <value>延伸阅读链接（移动端）</value>
+  </data>
+  <data name="LegacyEdit_MessageValidName" xml:space="preserve">
+    <value>必须填写有效的名称</value>
+  </data>
+  <data name="EditDocs_MessageDatabaseStorageDisabled" xml:space="preserve">
+    <value>数据库文件存储暂未启用，请选择上传到服务器或填写浏览地址。</value>
+  </data>
+  <data name="EditDocs_MessageUploadSelected" xml:space="preserve">
+    <value>已选择上传到服务器，请选择要上传的文件。</value>
+  </data>
+  <data name="EditDocs_MessageInvalidBrowseUrl" xml:space="preserve">
+    <value>请输入应用内相对地址或 http/https 浏览地址。</value>
+  </data>
+  <data name="EditDocs_UploadSizeLimitPrefix" xml:space="preserve">
+    <value>单文件上限：</value>
+  </data>
+  <data name="EditDocs_Heading" xml:space="preserve">
+    <value>文档详情</value>
+  </data>
+  <data name="EditAnnouncements_MessageInvalidReadMoreUrl" xml:space="preserve">
+    <value>“查看更多”链接只能使用站内地址或 HTTP(S) 地址。</value>
+  </data>
+  <data name="EditAnnouncements_Heading" xml:space="preserve">
+    <value>公告详情</value>
+  </data>
+  <data name="EditContacts_Heading" xml:space="preserve">
+    <value>联系人详情</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
   </data>
