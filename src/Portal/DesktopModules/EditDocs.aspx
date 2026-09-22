@@ -32,8 +32,8 @@
             </div>
 
             <div class="portal-edit-subsection">
-                <h2 class="portal-edit-subtitle">Browse URL</h2>
-                <p class="portal-field-help">填写站内相对地址，或填写 http/https 浏览地址。</p>
+                <h2 class="portal-edit-subtitle"><%= lang.EditDocs_SectionBrowseUrl %></h2>
+                <p class="portal-field-help"><%= lang.EditDocs_HintBrowseUrl %></p>
             </div>
 
             <div class="portal-field-stack">
@@ -56,14 +56,14 @@
                   <en>The upload area combines the Upload option, file input, and server policy hint; filename, size, type, storage location, and overwrite behavior cannot be decided by the client.</en>
                 </lang>
                 --%>
-                <h2 class="portal-edit-subtitle">Server Upload</h2>
+                <h2 class="portal-edit-subtitle"><%= lang.EditDocs_SectionServerUpload %></h2>
                 <asp:Label ID="UploadPolicyHint" CssClass="portal-field-help portal-upload-policy" runat="server" />
             </div>
 
             <div class="portal-option-stack">
                 <asp:CheckBox ID="Upload" CssClass="Normal portal-checkbox" Text="<%$ Resources:lang,LegacyEdit_LabelUploadOption %>"
                     runat="server" />
-                <span class="portal-field-help">选择后将使用本次上传文件覆盖上方浏览地址。</span>
+                <span class="portal-field-help"><%= lang.EditDocs_HintUploadOverride %></span>
             </div>
 
             <div class="portal-field-stack">
@@ -77,7 +77,7 @@
             <div class="portal-option-stack portal-disabled-option">
                 <asp:CheckBox ID="storeInDatabase" CssClass="Normal portal-checkbox"
                     Text="<%$ Resources:lang,LegacyEdit_LabelStoreInDatabase %>" runat="server" />
-                <span class="portal-field-help">数据库文件存储属于后置能力，本阶段不接收二进制内容入库。</span>
+                <span class="portal-field-help"><%= lang.EditDocs_HintDatabaseDisabled %></span>
             </div>
 
             <div class="portal-form-actions">

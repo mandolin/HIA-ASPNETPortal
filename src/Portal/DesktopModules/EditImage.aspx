@@ -10,7 +10,7 @@
     --%>
     <section class="portal-page-section portal-edit-page portal-edit-image">
         <div class="portal-page-heading-row">
-            <h1 class="portal-page-title">Image Settings</h1>
+            <h1 class="portal-page-title"><%= lang.EditImage_Heading %></h1>
         </div>
 
         <div class="portal-detail-card portal-edit-form">
@@ -21,27 +21,27 @@
                 </lang>
             --%>
             <div class="portal-edit-subsection">
-                <h2 class="portal-edit-subtitle">Image Source</h2>
-                <p class="portal-field-help">优先使用站内图片路径；HTTP(S) 外链图片会按当前兼容策略保留，但应只指向受信任来源。</p>
+                <h2 class="portal-edit-subtitle"><%= lang.EditImage_SectionImageSource %></h2>
+                <p class="portal-field-help"><%= lang.EditImage_HintSource %></p>
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="SrcLabel" CssClass="portal-field-stack-label" AssociatedControlID="Src"
-                    runat="server" Text="Src Location" />
+                    runat="server" Text="<%$ Resources:lang,EditImage_LabelSrcLocation %>" />
                 <asp:TextBox ID="Src" CssClass="NormalTextBox portal-input" Columns="30" MaxLength="250"
                     runat="server" />
             </div>
 
             <asp:Panel ID="ImagePreviewPanel" CssClass="portal-option-stack portal-image-preview"
                 Visible="false" runat="server">
-                <asp:Image ID="ImagePreview" CssClass="portal-image-preview-image" AlternateText="Image preview"
+                <asp:Image ID="ImagePreview" CssClass="portal-image-preview-image" AlternateText="<%$ Resources:lang,EditImage_LabelImagePreview %>"
                     runat="server" />
-                <span class="portal-field-help">预览仅显示当前可识别地址；图片加载失败不会改变保存校验结果。</span>
+                <span class="portal-field-help"><%= lang.EditImage_HintPreview %></span>
             </asp:Panel>
 
             <div class="portal-edit-subsection">
-                <h2 class="portal-edit-subtitle">Display Size</h2>
-                <p class="portal-field-help">宽度和高度可留空；填写时必须是非负整数。</p>
+                <h2 class="portal-edit-subtitle"><%= lang.EditImage_SectionDisplaySize %></h2>
+                <p class="portal-field-help"><%= lang.EditImage_HintSize %></p>
             </div>
 
             <div class="portal-inline-field-grid">
@@ -54,7 +54,7 @@
                 <div class="portal-inline-field">
                     <div class="portal-field-stack portal-edit-short-field">
                         <asp:Label ID="WidthLabel" CssClass="portal-field-stack-label" AssociatedControlID="Width"
-                            runat="server" Text="Image Width" />
+                            runat="server" Text="<%$ Resources:lang,EditImage_LabelImageWidth %>" />
                         <asp:TextBox ID="Width" CssClass="NormalTextBox portal-input" Columns="12" MaxLength="8"
                             runat="server" />
                     </div>
@@ -62,7 +62,7 @@
                 <div class="portal-inline-field">
                     <div class="portal-field-stack portal-edit-short-field">
                         <asp:Label ID="HeightLabel" CssClass="portal-field-stack-label" AssociatedControlID="Height"
-                            runat="server" Text="Image Height" />
+                            runat="server" Text="<%$ Resources:lang,EditImage_LabelImageHeight %>" />
                         <asp:TextBox ID="Height" CssClass="NormalTextBox portal-input" Columns="12" MaxLength="8"
                             runat="server" />
                     </div>
@@ -79,10 +79,10 @@
                 </lang>
             --%>
             <div class="portal-form-actions">
-                <asp:LinkButton ID="updateButton" Text="Update" runat="server"
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none"
                     OnClick="UpdateBtn_Click" />
-                <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
                     CssClass="portal-button portal-button-secondary" BorderStyle="none"
                     OnClick="CancelBtn_Click" />
             </div>

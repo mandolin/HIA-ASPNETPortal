@@ -696,6 +696,21 @@
   <data name="LegacyEdit_MessageValidName" xml:space="preserve">
     <value>You Must Enter a Valid Name</value>
   </data>
+  <data name="EditDocs_SectionBrowseUrl" xml:space="preserve">
+    <value>Browse URL</value>
+  </data>
+  <data name="EditDocs_HintBrowseUrl" xml:space="preserve">
+    <value>Enter an application-relative address, or an http/https browse address.</value>
+  </data>
+  <data name="EditDocs_SectionServerUpload" xml:space="preserve">
+    <value>Server Upload</value>
+  </data>
+  <data name="EditDocs_HintUploadOverride" xml:space="preserve">
+    <value>The selected upload will replace the browse address above.</value>
+  </data>
+  <data name="EditDocs_HintDatabaseDisabled" xml:space="preserve">
+    <value>Database file storage is a later capability; this stage does not accept binary content into the database.</value>
+  </data>
   <data name="EditDocs_MessageDatabaseStorageDisabled" xml:space="preserve">
     <value>Database file storage is not enabled yet; choose server upload or enter a browse address.</value>
   </data>
@@ -719,6 +734,42 @@
   </data>
   <data name="EditContacts_Heading" xml:space="preserve">
     <value>Contact Details</value>
+  </data>
+  <data name="EditImage_Heading" xml:space="preserve">
+    <value>Image Settings</value>
+  </data>
+  <data name="EditImage_LabelSrcLocation" xml:space="preserve">
+    <value>Src Location</value>
+  </data>
+  <data name="EditImage_LabelImagePreview" xml:space="preserve">
+    <value>Image preview</value>
+  </data>
+  <data name="EditImage_LabelImageWidth" xml:space="preserve">
+    <value>Image Width</value>
+  </data>
+  <data name="EditImage_LabelImageHeight" xml:space="preserve">
+    <value>Image Height</value>
+  </data>
+  <data name="EditImage_SectionImageSource" xml:space="preserve">
+    <value>Image Source</value>
+  </data>
+  <data name="EditImage_HintSource" xml:space="preserve">
+    <value>Prefer a site-local image path; HTTP(S) external images are kept under the current compatibility policy but should point only to trusted sources.</value>
+  </data>
+  <data name="EditImage_HintPreview" xml:space="preserve">
+    <value>The preview only shows a currently recognisable address; a failed image load does not change the save validation result.</value>
+  </data>
+  <data name="EditImage_SectionDisplaySize" xml:space="preserve">
+    <value>Display Size</value>
+  </data>
+  <data name="EditImage_HintSize" xml:space="preserve">
+    <value>Width and height may be left empty; when entered they must be non-negative integers.</value>
+  </data>
+  <data name="EditImage_MessageInvalidUrl" xml:space="preserve">
+    <value>The image address must be a site-local or HTTP(S) address.</value>
+  </data>
+  <data name="EditImage_MessageInvalidSize" xml:space="preserve">
+    <value>Image width and height must be non-negative integers; leaving them empty means that dimension is unrestricted.</value>
   </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>

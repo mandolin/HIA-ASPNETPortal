@@ -2600,6 +2600,66 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Database file storage is not enabled yet; choose server upload or enter a browse address.</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Browse URL</zh-CN>
+        ///   <en>Looks up a localized string similar to: Browse URL</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_SectionBrowseUrl {
+            get {
+                return ResourceManager.GetString("EditDocs_SectionBrowseUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter an application-relative address, or an http/https browse address.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter an application-relative address, or an http/https browse address.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_HintBrowseUrl {
+            get {
+                return ResourceManager.GetString("EditDocs_HintBrowseUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Server Upload</zh-CN>
+        ///   <en>Looks up a localized string similar to: Server Upload</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_SectionServerUpload {
+            get {
+                return ResourceManager.GetString("EditDocs_SectionServerUpload", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The selected upload will replace the browse address above.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The selected upload will replace the browse address above.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_HintUploadOverride {
+            get {
+                return ResourceManager.GetString("EditDocs_HintUploadOverride", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Database file storage is a later capability; this stage does not accept binary content into the database.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Database file storage is a later capability; this stage does not accept binary content into the database.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_HintDatabaseDisabled {
+            get {
+                return ResourceManager.GetString("EditDocs_HintDatabaseDisabled", resourceCulture);
+            }
+        }
+
         internal static string EditDocs_MessageDatabaseStorageDisabled {
             get {
                 return ResourceManager.GetString("EditDocs_MessageDatabaseStorageDisabled", resourceCulture);
@@ -2681,6 +2741,150 @@ namespace Resources {
         internal static string EditContacts_Heading {
             get {
                 return ResourceManager.GetString("EditContacts_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Image Settings</zh-CN>
+        ///   <en>Looks up a localized string similar to: Image Settings</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_Heading {
+            get {
+                return ResourceManager.GetString("EditImage_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Src Location</zh-CN>
+        ///   <en>Looks up a localized string similar to: Src Location</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_LabelSrcLocation {
+            get {
+                return ResourceManager.GetString("EditImage_LabelSrcLocation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Image preview</zh-CN>
+        ///   <en>Looks up a localized string similar to: Image preview</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_LabelImagePreview {
+            get {
+                return ResourceManager.GetString("EditImage_LabelImagePreview", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Image Width</zh-CN>
+        ///   <en>Looks up a localized string similar to: Image Width</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_LabelImageWidth {
+            get {
+                return ResourceManager.GetString("EditImage_LabelImageWidth", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Image Height</zh-CN>
+        ///   <en>Looks up a localized string similar to: Image Height</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_LabelImageHeight {
+            get {
+                return ResourceManager.GetString("EditImage_LabelImageHeight", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Image Source</zh-CN>
+        ///   <en>Looks up a localized string similar to: Image Source</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_SectionImageSource {
+            get {
+                return ResourceManager.GetString("EditImage_SectionImageSource", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Prefer a site-local image path; HTTP(S) external images are kept under the current compatibility policy but should point only to trusted sources.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Prefer a site-local image path; HTTP(S) external images are kept under the current compatibility policy but should point only to trusted sources.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_HintSource {
+            get {
+                return ResourceManager.GetString("EditImage_HintSource", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The preview only shows a currently recognisable address; a failed image load does not change the save validation result.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The preview only shows a currently recognisable address; a failed image load does not change the save validation result.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_HintPreview {
+            get {
+                return ResourceManager.GetString("EditImage_HintPreview", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Display Size</zh-CN>
+        ///   <en>Looks up a localized string similar to: Display Size</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_SectionDisplaySize {
+            get {
+                return ResourceManager.GetString("EditImage_SectionDisplaySize", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Width and height may be left empty; when entered they must be non-negative integers.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Width and height may be left empty; when entered they must be non-negative integers.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_HintSize {
+            get {
+                return ResourceManager.GetString("EditImage_HintSize", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The image address must be a site-local or HTTP(S) address.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The image address must be a site-local or HTTP(S) address.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_MessageInvalidUrl {
+            get {
+                return ResourceManager.GetString("EditImage_MessageInvalidUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Image width and height must be non-negative integers; leaving them empty means that dimension is unrestricted.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Image width and height must be non-negative integers; leaving them empty means that dimension is unrestricted.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditImage_MessageInvalidSize {
+            get {
+                return ResourceManager.GetString("EditImage_MessageInvalidSize", resourceCulture);
             }
         }
 

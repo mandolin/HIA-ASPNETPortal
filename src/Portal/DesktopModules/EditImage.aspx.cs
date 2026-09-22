@@ -3,6 +3,7 @@ using System.Collections;
 using System.Globalization;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -137,7 +138,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>图片地址失败时只展示低敏提示，并清空预览，避免把不可接受地址继续渲染到页面。</zh-CN>
                 //   <en>When image URL validation fails, show only a low-sensitivity message and clear the preview so rejected addresses are not rendered back to the page.</en>
                 // </lang>
-                ShowValidationMessage("图片地址只能使用站内地址或 HTTP(S) 地址。");
+                ShowValidationMessage(lang.EditImage_MessageInvalidUrl);
                 ApplyImagePreview(string.Empty);
                 return;
             }
@@ -148,7 +149,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>尺寸字段保持旧模块的“空值表示不限制”语义，只接受非负整数以避免样式注入。</zh-CN>
                 //   <en>Dimension fields keep the legacy "blank means unrestricted" semantics and accept only non-negative integers to avoid style injection.</en>
                 // </lang>
-                ShowValidationMessage("图片宽度和高度必须是非负整数，留空表示不限制该尺寸。");
+                ShowValidationMessage(lang.EditImage_MessageInvalidSize);
                 ApplyImagePreview(imageUrl);
                 return;
             }

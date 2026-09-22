@@ -696,6 +696,21 @@
   <data name="LegacyEdit_MessageValidName" xml:space="preserve">
     <value>必须填写有效的名称</value>
   </data>
+  <data name="EditDocs_SectionBrowseUrl" xml:space="preserve">
+    <value>浏览地址</value>
+  </data>
+  <data name="EditDocs_HintBrowseUrl" xml:space="preserve">
+    <value>填写站内相对地址，或填写 http/https 浏览地址。</value>
+  </data>
+  <data name="EditDocs_SectionServerUpload" xml:space="preserve">
+    <value>服务器上传</value>
+  </data>
+  <data name="EditDocs_HintUploadOverride" xml:space="preserve">
+    <value>选择后将使用本次上传文件覆盖上方浏览地址。</value>
+  </data>
+  <data name="EditDocs_HintDatabaseDisabled" xml:space="preserve">
+    <value>数据库文件存储属于后置能力，本阶段不接收二进制内容入库。</value>
+  </data>
   <data name="EditDocs_MessageDatabaseStorageDisabled" xml:space="preserve">
     <value>数据库文件存储暂未启用，请选择上传到服务器或填写浏览地址。</value>
   </data>
@@ -719,6 +734,42 @@
   </data>
   <data name="EditContacts_Heading" xml:space="preserve">
     <value>联系人详情</value>
+  </data>
+  <data name="EditImage_Heading" xml:space="preserve">
+    <value>图片设置</value>
+  </data>
+  <data name="EditImage_LabelSrcLocation" xml:space="preserve">
+    <value>图片地址</value>
+  </data>
+  <data name="EditImage_LabelImagePreview" xml:space="preserve">
+    <value>图片预览</value>
+  </data>
+  <data name="EditImage_LabelImageWidth" xml:space="preserve">
+    <value>图片宽度</value>
+  </data>
+  <data name="EditImage_LabelImageHeight" xml:space="preserve">
+    <value>图片高度</value>
+  </data>
+  <data name="EditImage_SectionImageSource" xml:space="preserve">
+    <value>图片来源</value>
+  </data>
+  <data name="EditImage_HintSource" xml:space="preserve">
+    <value>优先使用站内图片路径；HTTP(S) 外链图片会按当前兼容策略保留，但应只指向受信任来源。</value>
+  </data>
+  <data name="EditImage_HintPreview" xml:space="preserve">
+    <value>预览仅显示当前可识别地址；图片加载失败不会改变保存校验结果。</value>
+  </data>
+  <data name="EditImage_SectionDisplaySize" xml:space="preserve">
+    <value>显示尺寸</value>
+  </data>
+  <data name="EditImage_HintSize" xml:space="preserve">
+    <value>宽度和高度可留空；填写时必须是非负整数。</value>
+  </data>
+  <data name="EditImage_MessageInvalidUrl" xml:space="preserve">
+    <value>图片地址只能使用站内地址或 HTTP(S) 地址。</value>
+  </data>
+  <data name="EditImage_MessageInvalidSize" xml:space="preserve">
+    <value>图片宽度和高度必须是非负整数，留空表示不限制该尺寸。</value>
   </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>标题</value>
