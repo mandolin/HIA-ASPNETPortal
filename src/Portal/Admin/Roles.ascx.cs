@@ -64,7 +64,7 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         [Dependency]
-        public IModulesDb ModulesConfig { private get; set; }
+        public new IModulesDb ModulesConfig { private get; set; }
 
         /// <summary>
         /// <lang>

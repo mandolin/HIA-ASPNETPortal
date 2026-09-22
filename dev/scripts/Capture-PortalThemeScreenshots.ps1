@@ -52,6 +52,13 @@ param(
     [ValidatePattern('^https?://')]
     [string]$BaseUrl = 'http://localhost:40001/',
 
+    # <lang>
+    #   <zh-CN>截图语言：决定浏览器上下文 locale，而应用在 BeginRequest 依据 Accept-Language 切换界面语言，因此该参数等于选择"证据用哪种语言拍摄"。默认中文侧；英文侧证据用 en-US。</zh-CN>
+    #   <en>Capture language: sets the browser context locale, and the application switches its UI language from Accept-Language during BeginRequest, so this parameter selects which language the evidence is captured in. Defaults to the Chinese side; use en-US for English-side evidence.</en>
+    # </lang>
+    [ValidateSet('zh-CN', 'en-US')]
+    [string]$Locale = 'zh-CN',
+
     [ValidateScript({ Test-Path -LiteralPath $_ -PathType Leaf })]
     [string]$ConnectionStringsConfigPath = (Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings.config'),
 
@@ -333,24 +340,25 @@ ORDER BY
             while ($reader.Read()) {
                 $sourceFile = $reader.GetString(3)
                 # <lang>
-                #   <zh-CN>scrollText 必须与“运行期实际渲染的语言”一致：这些页头标题已改为资源驱动并随请求语言切换，而截图浏览器上下文固定 locale=zh-CN（应用据此切换界面语言），故期望文本为中文。若把 scrollText 写回英文，这五项目标会因找不到文本而超时失败。</zh-CN>
-                #   <en>scrollText must match the language actually rendered at run time: these page titles are resource-driven and follow the request language, while the capture browser context pins locale=zh-CN (which is what drives the app's language switch), so the expected text is Chinese. Writing English back here makes these five targets time out because no matching text exists.</en>
+                #   <zh-CN>scrollText 必须与"运行期实际渲染的语言"一致：这些页头标题已改为资源驱动并随请求语言切换，而浏览器上下文的 locale 决定应用切到哪种界面语言，故期望文本随 -Locale 取值。两侧文本并存而不是只留一种，避免换语言取证时静默失配（本次英文侧取证正是依赖这一处）。</zh-CN>
+                #   <en>scrollText must match the language actually rendered at run time: these page titles are resource-driven and follow the request language, which the browser context locale drives. The expected text therefore follows -Locale. Both languages are kept rather than one, so switching the evidence language cannot silently break matching (the English-side capture depends on exactly this).</en>
                 # </lang>
+                $useEnglishUi = $Locale -like 'en*'
                 $targetMeta = switch ($sourceFile) {
                     'Admin/ModuleDefs.ascx' {
-                        @{ id = 'admin-legacy-module-defs'; title = '旧模块定义 ASCX'; scrollText = '旧版模块定义' }
+                        @{ id = 'admin-legacy-module-defs'; title = '旧模块定义 ASCX'; scrollText = $(if ($useEnglishUi) { 'Legacy Module Definitions' } else { '旧版模块定义' }) }
                     }
                     'Admin/SiteSettings.ascx' {
-                        @{ id = 'admin-legacy-site-settings'; title = '旧站点设置 ASCX'; scrollText = '旧版站点设置' }
+                        @{ id = 'admin-legacy-site-settings'; title = '旧站点设置 ASCX'; scrollText = $(if ($useEnglishUi) { 'Legacy Site Settings' } else { '旧版站点设置' }) }
                     }
                     'Admin/Tabs.ascx' {
-                        @{ id = 'admin-legacy-tabs'; title = '旧 Tab 管理 ASCX'; scrollText = '旧版页签管理' }
+                        @{ id = 'admin-legacy-tabs'; title = '旧 Tab 管理 ASCX'; scrollText = $(if ($useEnglishUi) { 'Legacy Tab Administration' } else { '旧版页签管理' }) }
                     }
                     'Admin/Roles.ascx' {
-                        @{ id = 'admin-legacy-roles'; title = '旧角色管理 ASCX'; scrollText = '旧版角色管理' }
+                        @{ id = 'admin-legacy-roles'; title = '旧角色管理 ASCX'; scrollText = $(if ($useEnglishUi) { 'Legacy Role Administration' } else { '旧版角色管理' }) }
                     }
                     'Admin/Users.ascx' {
-                        @{ id = 'admin-legacy-users'; title = '旧用户入口 ASCX'; scrollText = '旧版用户入口' }
+                        @{ id = 'admin-legacy-users'; title = '旧用户入口 ASCX'; scrollText = $(if ($useEnglishUi) { 'Legacy User Entry' } else { '旧版用户入口' }) }
                     }
                     default {
                         $null
@@ -1078,14 +1086,16 @@ async function capture(page, target) {
 
   const bodyText = await page.locator('body').innerText().catch(() => '');
   const html = await page.content().catch(() => '');
-  if (bodyText.includes('应用程序暂时无法完成请求') || page.url().includes('GenericErrorPage.aspx')) {
+  // <lang>
+  //   <zh-CN>错误页与拒绝访问检测同时匹配中英两套文本，而不只匹配当前 locale：通用错误页当前是硬编码中文（不随语言切换），拒绝访问页则是资源驱动（会随语言切换）。只匹配一种语言会让守卫在另一种语言下静默失效，把失败页当成通过。</zh-CN>
+  //   <en>Error-page and access-denied detection match both Chinese and English text rather than only the current locale: the generic error page is currently hard-coded Chinese (does not switch), while the access-denied page is resource-driven (does switch). Matching a single language would let the guards silently stop working in the other language and pass a failure page as success.</en>
+  // </lang>
+  if (bodyText.includes('应用程序暂时无法完成请求') || bodyText.includes('could not complete the request') ||
+      page.url().includes('GenericErrorPage.aspx')) {
     throw new Error('Generic error page detected.');
   }
-  // <lang>
-  //   <zh-CN>截图回归不能把拒绝访问页误判为目标页正常渲染。</zh-CN>
-  //   <en>The screenshot smoke must not treat access-denied fallbacks as successful target renders.</en>
-  // </lang>
   if (!target.allowAccessDenied && (bodyText.includes('拒绝编辑') || bodyText.includes('访问被拒绝') ||
+      bodyText.includes('Edit Access Denied') || bodyText.includes('Access Denied') ||
       page.url().includes('AccessDenied.aspx') || page.url().includes('EditAccessDenied.aspx'))) {
     throw new Error('Access denied page detected.');
   }
@@ -1301,6 +1311,12 @@ if (results.some(item => item.status !== 'Pass')) {
 }
 '@
 
+    # <lang>
+    #   <zh-CN>把截图语言作为常量注入运行时脚本，而不是在 JavaScript 里写死：同一份脚本因此可以按 -Locale 产出中英两侧证据。登录态校验里的问候语按用户名拼接，天然与语言无关。</zh-CN>
+    #   <en>Inject the capture locale into the runtime script as a constant instead of hard-coding it in JavaScript, so the same script can produce Chinese- and English-side evidence via -Locale. The sign-in check composes its greeting from the user name and is language-independent.</en>
+    # </lang>
+    $script = $script.Replace("locale: 'zh-CN'", 'locale: CAPTURE_LOCALE')
+    $script = "const CAPTURE_LOCALE = '$Locale';" + "`n" + $script
     [System.IO.File]::WriteAllText($Path, $script, [System.Text.UTF8Encoding]::new($false))
 }
 
