@@ -2306,6 +2306,174 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Title</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title</en>
+        /// </lang>
+        /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Link Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Link Details</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditLinks_Heading {
+            get {
+                return ResourceManager.GetString("EditLinks_Heading", resourceCulture);
+            }
+        }
+
+        internal static string LegacyEdit_LabelTitle {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Url</zh-CN>
+        ///   <en>Looks up a localized string similar to: Url</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelUrl {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Url</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mobile Url</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelMobileUrl {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelMobileUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Description</zh-CN>
+        ///   <en>Looks up a localized string similar to: Description</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelDescription {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：View Order</zh-CN>
+        ///   <en>Looks up a localized string similar to: View Order</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_LabelViewOrder {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelViewOrder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Update</zh-CN>
+        ///   <en>Looks up a localized string similar to: Update</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_ButtonUpdate {
+            get {
+                return ResourceManager.GetString("LegacyEdit_ButtonUpdate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Cancel</zh-CN>
+        ///   <en>Looks up a localized string similar to: Cancel</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_ButtonCancel {
+            get {
+                return ResourceManager.GetString("LegacyEdit_ButtonCancel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Delete this item</zh-CN>
+        ///   <en>Looks up a localized string similar to: Delete this item</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_ButtonDelete {
+            get {
+                return ResourceManager.GetString("LegacyEdit_ButtonDelete", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You Must Enter a Valid Title</zh-CN>
+        ///   <en>Looks up a localized string similar to: You Must Enter a Valid Title</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_MessageValidTitle {
+            get {
+                return ResourceManager.GetString("LegacyEdit_MessageValidTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You Must Enter a Valid URL</zh-CN>
+        ///   <en>Looks up a localized string similar to: You Must Enter a Valid URL</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_MessageValidUrl {
+            get {
+                return ResourceManager.GetString("LegacyEdit_MessageValidUrl", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You Must Enter a Valid View Order</zh-CN>
+        ///   <en>Looks up a localized string similar to: You Must Enter a Valid View Order</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_MessageValidViewOrder {
+            get {
+                return ResourceManager.GetString("LegacyEdit_MessageValidViewOrder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Created by</zh-CN>
+        ///   <en>Looks up a localized string similar to: Created by</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_CreatedBy {
+            get {
+                return ResourceManager.GetString("LegacyEdit_CreatedBy", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：on</zh-CN>
+        ///   <en>Looks up a localized string similar to: on</en>
+        /// </lang>
+        /// </summary>
+        internal static string LegacyEdit_CreatedOn {
+            get {
+                return ResourceManager.GetString("LegacyEdit_CreatedOn", resourceCulture);
+            }
+        }
+
         internal static string Admin_EmployeeDirectory_Title {
             get {
                 return ResourceManager.GetString("Admin_EmployeeDirectory_Title", resourceCulture);

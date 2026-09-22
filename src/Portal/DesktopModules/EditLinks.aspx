@@ -10,7 +10,7 @@
     --%>
     <section class="portal-page-section portal-edit-page portal-edit-links">
         <div class="portal-page-heading-row">
-            <h1 class="portal-page-title">Link Details</h1>
+            <h1 class="portal-page-title"><%= lang.EditLinks_Heading %></h1>
         </div>
 
         <div class="portal-detail-card portal-edit-form">
@@ -22,32 +22,32 @@
             --%>
             <div class="portal-field-stack">
                 <asp:Label ID="TitleLabel" CssClass="portal-field-stack-label" AssociatedControlID="TitleField"
-                    runat="server" Text="Title" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelTitle %>" />
                 <asp:TextBox ID="TitleField" CssClass="NormalTextBox portal-input" Columns="30" MaxLength="150"
                     runat="server" />
                 <asp:RequiredFieldValidator ID="Req1" CssClass="portal-validation-message" Display="Static"
-                    ErrorMessage="You Must Enter a Valid Title" ControlToValidate="TitleField" runat="server" />
+                    ErrorMessage="<%$ Resources:lang,LegacyEdit_MessageValidTitle %>" ControlToValidate="TitleField" runat="server" />
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="UrlLabel" CssClass="portal-field-stack-label" AssociatedControlID="UrlField"
-                    runat="server" Text="Url" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelUrl %>" />
                 <asp:TextBox ID="UrlField" CssClass="NormalTextBox portal-input" Columns="30" MaxLength="150"
                     runat="server" />
                 <asp:RequiredFieldValidator ID="Req2" CssClass="portal-validation-message" Display="Static"
-                    runat="server" ErrorMessage="You Must Enter a Valid URL" ControlToValidate="UrlField" />
+                    runat="server" ErrorMessage="<%$ Resources:lang,LegacyEdit_MessageValidUrl %>" ControlToValidate="UrlField" />
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="MobileUrlLabel" CssClass="portal-field-stack-label" AssociatedControlID="MobileUrlField"
-                    runat="server" Text="Mobile Url" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelMobileUrl %>" />
                 <asp:TextBox ID="MobileUrlField" CssClass="NormalTextBox portal-input" Columns="30"
                     MaxLength="150" runat="server" />
             </div>
 
             <div class="portal-field-stack">
                 <asp:Label ID="DescriptionLabel" CssClass="portal-field-stack-label" AssociatedControlID="DescriptionField"
-                    runat="server" Text="Description" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelDescription %>" />
                 <asp:TextBox ID="DescriptionField" CssClass="NormalTextBox portal-input" Columns="30"
                     MaxLength="150" runat="server" />
             </div>
@@ -60,14 +60,14 @@
                     </lang>
                 --%>
                 <asp:Label ID="ViewOrderLabel" CssClass="portal-field-stack-label" AssociatedControlID="ViewOrderField"
-                    runat="server" Text="View Order" />
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelViewOrder %>" />
                 <asp:TextBox ID="ViewOrderField" CssClass="NormalTextBox portal-input" Columns="30"
                     MaxLength="3" runat="server" />
                 <asp:RequiredFieldValidator Display="Static" ID="RequiredViewOrder" CssClass="portal-validation-message"
-                    runat="server" ControlToValidate="ViewOrderField" ErrorMessage="You Must Enter a Valid View Order" />
+                    runat="server" ControlToValidate="ViewOrderField" ErrorMessage="<%$ Resources:lang,LegacyEdit_MessageValidViewOrder %>" />
                 <asp:CompareValidator Display="Static" ID="VerifyViewOrder" CssClass="portal-validation-message"
                     runat="server" Operator="DataTypeCheck" ControlToValidate="ViewOrderField" Type="Integer"
-                    ErrorMessage="You Must Enter a Valid View Order" />
+                    ErrorMessage="<%$ Resources:lang,LegacyEdit_MessageValidViewOrder %>" />
             </div>
 
             <asp:Label ID="ValidationMessage" CssClass="NormalRed portal-validation-message" EnableViewState="false"
@@ -80,18 +80,18 @@
                 </lang>
             --%>
             <div class="portal-form-actions">
-                <asp:LinkButton ID="updateButton" Text="Update" runat="server"
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
                     CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
-                <asp:LinkButton ID="cancelButton" Text="Cancel" CausesValidation="False" runat="server"
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
                     CssClass="portal-button portal-button-secondary" BorderStyle="none" OnClick="CancelBtn_Click" />
-                <asp:LinkButton ID="deleteButton" Text="Delete this item" CausesValidation="False" runat="server"
+                <asp:LinkButton ID="deleteButton" Text="<%$ Resources:lang,LegacyEdit_ButtonDelete %>" CausesValidation="False" runat="server"
                     CssClass="portal-button portal-button-danger" BorderStyle="none" OnClick="DeleteBtn_Click" />
             </div>
         </div>
 
         <p class="portal-edit-metadata">
-            Created by <asp:Label ID="CreatedBy" runat="server" />
-            on <asp:Label ID="CreatedDate" runat="server" />
+            <%= lang.LegacyEdit_CreatedBy %> <asp:Label ID="CreatedBy" runat="server" />
+            <%= lang.LegacyEdit_CreatedOn %> <asp:Label ID="CreatedDate" runat="server" />
         </p>
     </section>
 </asp:Content>
