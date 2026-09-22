@@ -1,5 +1,19 @@
 {
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "comment",
+                "settings": {
+                    "foreground": "#1f0757",
+                    "fontStyle": ""
+                }
+            }
+        ]
+    },
     "workbench.colorCustomizations": {
+
+
+
         "titleBar.activeForeground": "#B6FFA4",
         "titleBar.activeBackground": "#072400",
         "titleBar.inactiveForeground": "#84FF66",
@@ -23,5 +37,12 @@
     "docwriter.style": "JSDoc",
     "files.encoding": "utf8",
     "dotnet.preferCSharpExtension": true,
-    "dotnet.server.useOmnisharp": false
+    "dotnet.server.useOmnisharp": false,
+    "workbench.colorTheme": "Solarized Light",
+    "chat.editor.fontSize": 18,
+    "chat.fontSize": 18,
+    "editor.fontSize": 20,
+    "editor.fontFamily": "'等距更纱黑体 SC',Consolas, 'Courier New', monospace",
+    "chat.fontFamily": "霞鹜文楷等宽",
+    "chat.editor.fontFamily": "霞鹜文楷等宽"
 }
