@@ -199,17 +199,49 @@ function Remove-MarkupNonUi {
     return $t
 }
 
-$markupAttrPattern = [regex]("(?<![\w-])(?:Text|Title|ToolTip|HeaderText|AlternateText|ConfirmText|InfoMessage)\s*=\s*`"(?<v>[A-Za-z\u4e00-\u9fff][^`"<>]{1,})`"")
-$markupElemPattern = [regex](">(?<v>[A-Za-z\u4e00-\u9fff][A-Za-z0-9 ,\.''!\?&/\-\(\):;\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]{1,})<")
+$markupAttrPattern = [regex]("(?<![\w-])(?:Text|Title|ToolTip|HeaderText|AlternateText|ConfirmText|InfoMessage)\s*=\s*`"(?<v>[^`"<>]{2,})`"")
+$markupElemPattern = [regex](">(?<v>[^\s<>`"=][^<>`"=]{1,})<")
+$elemEntityPattern = [regex]'^&[A-Za-z]+;$'
 $onClientClickPattern = [regex]("OnClientClick\s*=\s*`"[^`"]*[\u4e00-\u9fff][^`"]*`"")
 $elemNoisePattern = [regex]'^(?:amp|nbsp|lt|gt|quot|apos|#\d+)$|</|^\s*$'
+$elemNoisePattern = [regex]'^(?:amp|nbsp|lt|gt|quot|apos|#\d+)$|^&[A-Za-z]+;$|</|^\s*$'
 # <lang>
 #   <zh-CN>技术令牌：点号标识符与常见文件名，属数据而非界面文案，属性侧与元素侧都剔除。</zh-CN>
 #   <en>Technical tokens: dotted identifiers and common file names, which are data rather than UI copy and are removed on both the attribute and element sides.</en>
 # </lang>
 $techTokenPattern = [regex]'^[A-Za-z][A-Za-z0-9]*(\.[A-Za-z0-9]+)+$'
-$codeAssignPattern = [regex]("(?:^|[^A-Za-z0-9_])(?:Text|ErrorText|InfoMessage|Message|ConfirmText|ToolTip|HeaderText|AlternateText|InnerText|InnerHtml)\s*=\s*(?:string\.Format\(\s*)?`"(?<v>[A-Za-z\u4e00-\u9fff][^`"]{1,})`"")
-$codeCallPattern = [regex]("(?:Show[A-Za-z]*|new\s+ListItem)\(\s*`"(?<v>[A-Za-z\u4e00-\u9fff][^`"]{1,})`"")
+
+# <lang>
+#   <zh-CN>
+#     统一的"是否界面文案"判定（口径 v4）。v4 修正两个漏计缺陷，两者都是通过"清单与人工通读对账"暴露的：
+#       ① 大小写敏感：原信号只列 `Message`，因此 `message = "Organization unit id is invalid."` 这类
+#          小写局部变量承载的校验消息**全部漏计**；
+#       ② 首字符过窄：原要求字母/汉字开头，因此 `new ListItem("(none)")`、`"(root)"` 这类
+#          括号开头的下拉哨兵项**漏计**。
+#     放宽匹配后必须靠本函数收紧，否则会把纯数字、符号和无意义片段算成文案。
+#   </zh-CN>
+#   <en>
+#     Shared "is this UI copy" test (metric v4). v4 fixes two under-counting defects, both exposed by reconciling
+#     the inventory against a manual read-through:
+#       ① case sensitivity: the signals only listed `Message`, so validation messages held in lowercase locals such
+#          as `message = "Organization unit id is invalid."` were never counted;
+#       ② leading character too narrow: a leading letter or Han character was required, so dropdown sentinel items
+#          such as `new ListItem("(none)")` and `"(root)"` were never counted.
+#     Widening the patterns requires this function to tighten them again, otherwise bare numbers, symbols, and
+#     meaningless fragments would be counted as copy.
+#   </en>
+# </lang>
+function Test-IsUiCopy {
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Value)
+
+    $v = $Value.Trim()
+    if ($v.Length -lt 2) { return $false }
+    if ($techTokenPattern.IsMatch($v)) { return $false }
+    if (-not [regex]::IsMatch($v, '[A-Za-z\u4e00-\u9fff]')) { return $false }
+    return $true
+}
+$codeAssignPattern = [regex]("(?i)(?:^|[^A-Za-z0-9_])(?:Text|ErrorText|InfoMessage|Message|ConfirmText|ToolTip|HeaderText|AlternateText|InnerText|InnerHtml)\s*=\s*(?:string\.Format\(\s*)?`"(?<v>[^`"]{2,})`"")
+$codeCallPattern = [regex]("(?i)(?:Show[A-Za-z]*|new\s+ListItem)\(\s*`"(?<v>[^`"]{2,})`"")
 
 # <lang>
 #   <zh-CN>按相对路径归类到区域，用于把"已完成区"与"未覆盖区"分开呈现。</zh-CN>
@@ -244,13 +276,13 @@ foreach ($file in $files) {
     $m1 = 0; $m2 = 0; $c1 = 0
     if ($file.Extension -eq '.cs') {
         $body = Remove-CodeComments -Text $raw
-        $c1 = $codeAssignPattern.Matches($body).Count + $codeCallPattern.Matches($body).Count
+        foreach ($match in $codeAssignPattern.Matches($body)) { if (Test-IsUiCopy -Value $match.Groups['v'].Value) { $c1++ } }
+        foreach ($match in $codeCallPattern.Matches($body)) { if (Test-IsUiCopy -Value $match.Groups['v'].Value) { $c1++ } }
     }
     else {
         $body = Remove-MarkupNonUi -Text $raw
         foreach ($match in $markupAttrPattern.Matches($body)) {
-            $value = $match.Groups['v'].Value.Trim()
-            if ($techTokenPattern.IsMatch($value)) { continue }
+            if (-not (Test-IsUiCopy -Value $match.Groups['v'].Value)) { continue }
             $m1++
         }
         $m1 += $onClientClickPattern.Matches($body).Count
