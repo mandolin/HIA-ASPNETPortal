@@ -1,6 +1,9 @@
 <%@ Page CodeBehind="ModuleSettings.aspx.cs" Language="c#" AutoEventWireup="True"
     Inherits="ASPNET.StarterKit.Portal.ModuleSettingsPage" MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%--
     <lang>
@@ -11,12 +14,18 @@
     <div class="portal-admin-page portal-admin-module-settings">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <h1 class="Head portal-admin-title">Module Settings</h1>
-                <p class="Normal portal-admin-subtitle">Edit a module instance title, cache policy, editor roles, and legacy mobile visibility.</p>
+                <h1 class="Head portal-admin-title"><%= lang.Admin_ModuleSettings_Title %></h1>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_ModuleSettings_Subtitle %></p>
             </div>
+            <%--
+              <lang>
+                <zh-CN>页面自有导航入口：员工目录的目标页在导航 registry 中尚无入口键，若改交渲染器会因分组无法解析而静默消失，故保留在页面内并只做文案本地化。</zh-CN>
+                <en>Page-owned navigation entries: the employee-directory target has no navigation-registry entry yet, so handing it to the renderer would silently drop it when no group can be resolved; it stays in the page and is localized only.</en>
+              </lang>
+            --%>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
+                <a class="CommandButton" href="ModuleCatalog.aspx"><%= lang.Admin_ModuleSettings_LinkModuleCatalog %></a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_ModuleSettings_LinkEmployeeDirectory %></a>
             </div>
         </div>
 
@@ -24,7 +33,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Instance Metadata</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_ModuleSettings_SectionInstanceMetadata %></h2>
             </div>
             <%--
               <lang>
@@ -34,23 +43,23 @@
             --%>
             <div class="portal-form-grid">
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Module Name</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ModuleSettings_LabelModuleName %></span>
                     <asp:TextBox ID="moduleTitle" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">Cache Timeout (seconds)</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ModuleSettings_LabelCacheTimeout %></span>
                     <asp:TextBox ID="cacheTime" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <div class="portal-form-field portal-checkbox-field">
-                    <span class="SubHead portal-form-label">Mobile Compatibility</span>
-                    <asp:CheckBox ID="showMobile" Text="Show to mobile users" runat="server" />
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ModuleSettings_LabelMobileCompatibility %></span>
+                    <asp:CheckBox ID="showMobile" Text="<%$ Resources:lang, Admin_ModuleSettings_CheckboxShowToMobileUsers %>" runat="server" />
                 </div>
             </div>
         </div>
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Editor Roles</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_ModuleSettings_SectionEditorRoles %></h2>
             </div>
             <%--
               <lang>
@@ -69,7 +78,7 @@
               </lang>
             --%>
             <div class="portal-form-actions">
-                <asp:LinkButton CssClass="CommandButton portal-primary-action" Text="Apply Module Changes" runat="server"
+                <asp:LinkButton CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang, Admin_ModuleSettings_ButtonApplyModuleChanges %>" runat="server"
                     ID="ApplyButton" OnClick="ApplyChanges_Click" />
             </div>
         </div>

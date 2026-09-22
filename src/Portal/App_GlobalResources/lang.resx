@@ -954,4 +954,136 @@
   <data name="Admin_UserEmployeeBindingEdit_LinkManageUser" xml:space="preserve">
     <value>Manage User</value>
   </data>
+  <data name="Admin_ModuleSettings_Title" xml:space="preserve">
+    <value>Module Settings</value>
+  </data>
+  <data name="Admin_ModuleSettings_Subtitle" xml:space="preserve">
+    <value>Edit a module instance title, cache policy, editor roles, and legacy mobile visibility.</value>
+  </data>
+  <data name="Admin_ModuleSettings_LinkModuleCatalog" xml:space="preserve">
+    <value>Module Catalog</value>
+  </data>
+  <data name="Admin_ModuleSettings_LinkEmployeeDirectory" xml:space="preserve">
+    <value>Employee Directory</value>
+  </data>
+  <data name="Admin_ModuleSettings_SectionInstanceMetadata" xml:space="preserve">
+    <value>Instance Metadata</value>
+  </data>
+  <data name="Admin_ModuleSettings_LabelModuleName" xml:space="preserve">
+    <value>Module Name</value>
+  </data>
+  <data name="Admin_ModuleSettings_LabelCacheTimeout" xml:space="preserve">
+    <value>Cache Timeout (seconds)</value>
+  </data>
+  <data name="Admin_ModuleSettings_LabelMobileCompatibility" xml:space="preserve">
+    <value>Mobile Compatibility</value>
+  </data>
+  <data name="Admin_ModuleSettings_CheckboxShowToMobileUsers" xml:space="preserve">
+    <value>Show to mobile users</value>
+  </data>
+  <data name="Admin_ModuleSettings_SectionEditorRoles" xml:space="preserve">
+    <value>Editor Roles</value>
+  </data>
+  <data name="Admin_ModuleSettings_ButtonApplyModuleChanges" xml:space="preserve">
+    <value>Apply Module Changes</value>
+  </data>
+  <data name="Admin_TabLayout_Title" xml:space="preserve">
+    <value>Tab Name and Layout</value>
+  </data>
+  <data name="Admin_TabLayout_Subtitle" xml:space="preserve">
+    <value>Configure tab metadata, access roles, and module placement.</value>
+  </data>
+  <data name="Admin_TabLayout_LinkModuleCatalog" xml:space="preserve">
+    <value>Module Catalog</value>
+  </data>
+  <data name="Admin_TabLayout_LinkSecurityRoles" xml:space="preserve">
+    <value>Security Roles</value>
+  </data>
+  <data name="Admin_TabLayout_SectionTabSettings" xml:space="preserve">
+    <value>Tab Settings</value>
+  </data>
+  <data name="Admin_TabLayout_LabelTabName" xml:space="preserve">
+    <value>Tab Name</value>
+  </data>
+  <data name="Admin_TabLayout_LabelAuthorizedRoles" xml:space="preserve">
+    <value>Authorized Roles</value>
+  </data>
+  <data name="Admin_TabLayout_LabelMobileVisibility" xml:space="preserve">
+    <value>Mobile Visibility</value>
+  </data>
+  <data name="Admin_TabLayout_CheckboxShowToMobileUsers" xml:space="preserve">
+    <value>Show to mobile users</value>
+  </data>
+  <data name="Admin_TabLayout_LabelMobileTabName" xml:space="preserve">
+    <value>Mobile Tab Name</value>
+  </data>
+  <data name="Admin_TabLayout_SectionAddModule" xml:space="preserve">
+    <value>Add Module</value>
+  </data>
+  <data name="Admin_TabLayout_LabelModuleType" xml:space="preserve">
+    <value>Module Type</value>
+  </data>
+  <data name="Admin_TabLayout_LabelModuleName" xml:space="preserve">
+    <value>Module Name</value>
+  </data>
+  <data name="Admin_TabLayout_DefaultNewModuleName" xml:space="preserve">
+    <value>New Module Name</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonAddToOrganizeModules" xml:space="preserve">
+    <value>Add to Organize Modules</value>
+  </data>
+  <data name="Admin_TabLayout_SectionOrganizeModules" xml:space="preserve">
+    <value>Organize Modules</value>
+  </data>
+  <data name="Admin_TabLayout_PaneTitleLeft" xml:space="preserve">
+    <value>Left Mini Pane</value>
+  </data>
+  <data name="Admin_TabLayout_PaneTitleContent" xml:space="preserve">
+    <value>Content Pane</value>
+  </data>
+  <data name="Admin_TabLayout_PaneTitleRight" xml:space="preserve">
+    <value>Right Mini Pane</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonUp" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonDown" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveUp" xml:space="preserve">
+    <value>Move selected module up in list</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveDown" xml:space="preserve">
+    <value>Move selected module down in list</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveToContentPane" xml:space="preserve">
+    <value>Move selected module to the content pane</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveToLeftPane" xml:space="preserve">
+    <value>Move selected module to the left pane</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveToRightPane" xml:space="preserve">
+    <value>Move selected module to the right pane</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipEditItem" xml:space="preserve">
+    <value>Edit this item</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipDeleteItem" xml:space="preserve">
+    <value>Delete this item</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonApplyChanges" xml:space="preserve">
+    <value>Apply Changes</value>
+  </data>
 </root>

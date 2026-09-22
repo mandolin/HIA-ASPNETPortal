@@ -954,4 +954,136 @@
   <data name="Admin_UserEmployeeBindingEdit_LinkManageUser" xml:space="preserve">
     <value>管理用户</value>
   </data>
+  <data name="Admin_ModuleSettings_Title" xml:space="preserve">
+    <value>模块设置</value>
+  </data>
+  <data name="Admin_ModuleSettings_Subtitle" xml:space="preserve">
+    <value>编辑模块实例标题、缓存策略、编辑角色与旧版移动端可见性。</value>
+  </data>
+  <data name="Admin_ModuleSettings_LinkModuleCatalog" xml:space="preserve">
+    <value>模块包目录</value>
+  </data>
+  <data name="Admin_ModuleSettings_LinkEmployeeDirectory" xml:space="preserve">
+    <value>员工目录</value>
+  </data>
+  <data name="Admin_ModuleSettings_SectionInstanceMetadata" xml:space="preserve">
+    <value>实例元数据</value>
+  </data>
+  <data name="Admin_ModuleSettings_LabelModuleName" xml:space="preserve">
+    <value>模块名称</value>
+  </data>
+  <data name="Admin_ModuleSettings_LabelCacheTimeout" xml:space="preserve">
+    <value>缓存超时（秒）</value>
+  </data>
+  <data name="Admin_ModuleSettings_LabelMobileCompatibility" xml:space="preserve">
+    <value>移动端兼容</value>
+  </data>
+  <data name="Admin_ModuleSettings_CheckboxShowToMobileUsers" xml:space="preserve">
+    <value>对移动端用户可见</value>
+  </data>
+  <data name="Admin_ModuleSettings_SectionEditorRoles" xml:space="preserve">
+    <value>编辑角色</value>
+  </data>
+  <data name="Admin_ModuleSettings_ButtonApplyModuleChanges" xml:space="preserve">
+    <value>应用模块更改</value>
+  </data>
+  <data name="Admin_TabLayout_Title" xml:space="preserve">
+    <value>页签名称与布局</value>
+  </data>
+  <data name="Admin_TabLayout_Subtitle" xml:space="preserve">
+    <value>配置页签元数据、访问角色与模块位置。</value>
+  </data>
+  <data name="Admin_TabLayout_LinkModuleCatalog" xml:space="preserve">
+    <value>模块包目录</value>
+  </data>
+  <data name="Admin_TabLayout_LinkSecurityRoles" xml:space="preserve">
+    <value>安全角色</value>
+  </data>
+  <data name="Admin_TabLayout_SectionTabSettings" xml:space="preserve">
+    <value>页签设置</value>
+  </data>
+  <data name="Admin_TabLayout_LabelTabName" xml:space="preserve">
+    <value>页签名称</value>
+  </data>
+  <data name="Admin_TabLayout_LabelAuthorizedRoles" xml:space="preserve">
+    <value>授权角色</value>
+  </data>
+  <data name="Admin_TabLayout_LabelMobileVisibility" xml:space="preserve">
+    <value>移动端可见性</value>
+  </data>
+  <data name="Admin_TabLayout_CheckboxShowToMobileUsers" xml:space="preserve">
+    <value>对移动端用户可见</value>
+  </data>
+  <data name="Admin_TabLayout_LabelMobileTabName" xml:space="preserve">
+    <value>移动端页签名称</value>
+  </data>
+  <data name="Admin_TabLayout_SectionAddModule" xml:space="preserve">
+    <value>新增模块</value>
+  </data>
+  <data name="Admin_TabLayout_LabelModuleType" xml:space="preserve">
+    <value>模块类型</value>
+  </data>
+  <data name="Admin_TabLayout_LabelModuleName" xml:space="preserve">
+    <value>模块名称</value>
+  </data>
+  <data name="Admin_TabLayout_DefaultNewModuleName" xml:space="preserve">
+    <value>新模块名称</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonAddToOrganizeModules" xml:space="preserve">
+    <value>添加到模块编排</value>
+  </data>
+  <data name="Admin_TabLayout_SectionOrganizeModules" xml:space="preserve">
+    <value>模块编排</value>
+  </data>
+  <data name="Admin_TabLayout_PaneTitleLeft" xml:space="preserve">
+    <value>左侧小面板</value>
+  </data>
+  <data name="Admin_TabLayout_PaneTitleContent" xml:space="preserve">
+    <value>内容面板</value>
+  </data>
+  <data name="Admin_TabLayout_PaneTitleRight" xml:space="preserve">
+    <value>右侧小面板</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonUp" xml:space="preserve">
+    <value>上移</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonDown" xml:space="preserve">
+    <value>下移</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonLeft" xml:space="preserve">
+    <value>左移</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonRight" xml:space="preserve">
+    <value>右移</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonEdit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonDelete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveUp" xml:space="preserve">
+    <value>在列表中上移所选模块</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveDown" xml:space="preserve">
+    <value>在列表中下移所选模块</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveToContentPane" xml:space="preserve">
+    <value>将所选模块移到内容面板</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveToLeftPane" xml:space="preserve">
+    <value>将所选模块移到左侧面板</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipMoveToRightPane" xml:space="preserve">
+    <value>将所选模块移到右侧面板</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipEditItem" xml:space="preserve">
+    <value>编辑此项</value>
+  </data>
+  <data name="Admin_TabLayout_TooltipDeleteItem" xml:space="preserve">
+    <value>删除此项</value>
+  </data>
+  <data name="Admin_TabLayout_ButtonApplyChanges" xml:space="preserve">
+    <value>应用更改</value>
+  </data>
 </root>

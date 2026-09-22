@@ -3607,5 +3607,533 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_UserEmployeeBindingEdit_LinkManageUser", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Settings</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Settings</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_Title {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit a module instance title, cache policy, editor roles, and legacy mobile visibility.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit a module instance title, cache policy, editor roles, and legacy mobile visibility.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Catalog</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Catalog</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_LinkModuleCatalog {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_LinkModuleCatalog", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Directory</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee Directory</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_LinkEmployeeDirectory {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_LinkEmployeeDirectory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Instance Metadata</zh-CN>
+        ///   <en>Looks up a localized string similar to: Instance Metadata</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_SectionInstanceMetadata {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_SectionInstanceMetadata", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_LabelModuleName {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_LabelModuleName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Cache Timeout (seconds)</zh-CN>
+        ///   <en>Looks up a localized string similar to: Cache Timeout (seconds)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_LabelCacheTimeout {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_LabelCacheTimeout", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Compatibility</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mobile Compatibility</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_LabelMobileCompatibility {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_LabelMobileCompatibility", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Show to mobile users</zh-CN>
+        ///   <en>Looks up a localized string similar to: Show to mobile users</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_CheckboxShowToMobileUsers {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_CheckboxShowToMobileUsers", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Editor Roles</zh-CN>
+        ///   <en>Looks up a localized string similar to: Editor Roles</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_SectionEditorRoles {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_SectionEditorRoles", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Apply Module Changes</zh-CN>
+        ///   <en>Looks up a localized string similar to: Apply Module Changes</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_ButtonApplyModuleChanges {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_ButtonApplyModuleChanges", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Tab Name and Layout</zh-CN>
+        ///   <en>Looks up a localized string similar to: Tab Name and Layout</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_Title {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Configure tab metadata, access roles, and module placement.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Configure tab metadata, access roles, and module placement.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Catalog</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Catalog</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LinkModuleCatalog {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LinkModuleCatalog", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Security Roles</zh-CN>
+        ///   <en>Looks up a localized string similar to: Security Roles</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LinkSecurityRoles {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LinkSecurityRoles", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Tab Settings</zh-CN>
+        ///   <en>Looks up a localized string similar to: Tab Settings</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_SectionTabSettings {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_SectionTabSettings", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Tab Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Tab Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LabelTabName {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelTabName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Authorized Roles</zh-CN>
+        ///   <en>Looks up a localized string similar to: Authorized Roles</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LabelAuthorizedRoles {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelAuthorizedRoles", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Visibility</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mobile Visibility</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LabelMobileVisibility {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelMobileVisibility", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Show to mobile users</zh-CN>
+        ///   <en>Looks up a localized string similar to: Show to mobile users</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_CheckboxShowToMobileUsers {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_CheckboxShowToMobileUsers", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Tab Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mobile Tab Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LabelMobileTabName {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelMobileTabName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add Module</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add Module</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_SectionAddModule {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_SectionAddModule", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Type</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Type</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LabelModuleType {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelModuleType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LabelModuleName {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelModuleName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：New Module Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: New Module Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_DefaultNewModuleName {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_DefaultNewModuleName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add to Organize Modules</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add to Organize Modules</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_ButtonAddToOrganizeModules {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_ButtonAddToOrganizeModules", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Organize Modules</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organize Modules</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_SectionOrganizeModules {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_SectionOrganizeModules", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Left Mini Pane</zh-CN>
+        ///   <en>Looks up a localized string similar to: Left Mini Pane</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_PaneTitleLeft {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_PaneTitleLeft", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Content Pane</zh-CN>
+        ///   <en>Looks up a localized string similar to: Content Pane</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_PaneTitleContent {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_PaneTitleContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Right Mini Pane</zh-CN>
+        ///   <en>Looks up a localized string similar to: Right Mini Pane</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_PaneTitleRight {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_PaneTitleRight", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Up</zh-CN>
+        ///   <en>Looks up a localized string similar to: Up</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_ButtonUp {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_ButtonUp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Down</zh-CN>
+        ///   <en>Looks up a localized string similar to: Down</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_ButtonDown {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_ButtonDown", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Left</zh-CN>
+        ///   <en>Looks up a localized string similar to: Left</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_ButtonLeft {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_ButtonLeft", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Right</zh-CN>
+        ///   <en>Looks up a localized string similar to: Right</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_ButtonRight {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_ButtonRight", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_ButtonEdit {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_ButtonEdit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Delete</zh-CN>
+        ///   <en>Looks up a localized string similar to: Delete</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_ButtonDelete {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_ButtonDelete", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Move selected module up in list</zh-CN>
+        ///   <en>Looks up a localized string similar to: Move selected module up in list</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_TooltipMoveUp {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_TooltipMoveUp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Move selected module down in list</zh-CN>
+        ///   <en>Looks up a localized string similar to: Move selected module down in list</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_TooltipMoveDown {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_TooltipMoveDown", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Move selected module to the content pane</zh-CN>
+        ///   <en>Looks up a localized string similar to: Move selected module to the content pane</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_TooltipMoveToContentPane {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_TooltipMoveToContentPane", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Move selected module to the left pane</zh-CN>
+        ///   <en>Looks up a localized string similar to: Move selected module to the left pane</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_TooltipMoveToLeftPane {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_TooltipMoveToLeftPane", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Move selected module to the right pane</zh-CN>
+        ///   <en>Looks up a localized string similar to: Move selected module to the right pane</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_TooltipMoveToRightPane {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_TooltipMoveToRightPane", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit this item</zh-CN>
+        ///   <en>Looks up a localized string similar to: Edit this item</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_TooltipEditItem {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_TooltipEditItem", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Delete this item</zh-CN>
+        ///   <en>Looks up a localized string similar to: Delete this item</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_TooltipDeleteItem {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_TooltipDeleteItem", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Apply Changes</zh-CN>
+        ///   <en>Looks up a localized string similar to: Apply Changes</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_ButtonApplyChanges {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_ButtonApplyChanges", resourceCulture);
+            }
+        }
     }
 }
