@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -232,13 +233,17 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>审计表缺失时保留服务返回的空结果并给出固定迁移提示，不泄露连接或 SQL 细节。</zh-CN>
                 //   <en>When the audit table is missing, keep the service-provided empty result and show a fixed migration hint without exposing connection or SQL details.</en>
                 // </lang>
-                MessageLabel.Text = "The operations audit table is unavailable. Run PortalCfg_OperationAudits.sql for this database.";
+                MessageLabel.Text = lang.Admin_OperationAudits_TableUnavailable;
                 ResultLabel.Text = string.Empty;
                 return;
             }
 
             MessageLabel.Text = string.Empty;
-            ResultLabel.Text = "Page " + (CurrentPage + 1) + "; entries: " + result.Entries.Count + ".";
+            // <lang>
+            //   <zh-CN>用户可见消息统一取自资源并用编号占位符 ＋ CurrentCulture 格式化数字；跨页完全相同的消息共用一个 Admin_Common_* 键，避免同文案出现多份翻译来源。</zh-CN>
+            //   <en>User-visible messages come from resources with numbered placeholders, formatted with CurrentCulture; messages that are identical across pages share one Admin_Common_* key so the same text never has two translation sources.</en>
+            // </lang>
+            ResultLabel.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_Common_PageInfo, CurrentPage + 1, result.Entries.Count);
         }
 
         /// <summary>
@@ -286,7 +291,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>只接受不带本地化歧义的 yyyy-MM-dd 文本，失败时不向审计服务传递部分解析值。</zh-CN>
                 //   <en>Accept only unambiguous yyyy-MM-dd text and do not pass partially parsed values to the audit service on failure.</en>
                 // </lang>
-                MessageLabel.Text = "Enter Start UTC and End UTC using yyyy-MM-dd.";
+                MessageLabel.Text = lang.Admin_Common_DateRangeFormat;
                 return false;
             }
 
@@ -296,7 +301,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>结束日期不得早于起始日期，保持审计查询区间方向稳定。</zh-CN>
                 //   <en>The end date cannot precede the start date, keeping the audit-query interval direction stable.</en>
                 // </lang>
-                MessageLabel.Text = "End UTC must be on or after Start UTC.";
+                MessageLabel.Text = lang.Admin_Common_EndBeforeStart;
                 return false;
             }
 
@@ -306,7 +311,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>限制小于 31 天的输入窗口，避免运营审计查询放大扫描成本。</zh-CN>
                 //   <en>Limit the input window to fewer than 31 days to avoid amplifying the operations-audit scan cost.</en>
                 // </lang>
-                MessageLabel.Text = "The date range must not exceed 31 days.";
+                MessageLabel.Text = lang.Admin_Common_DateRangeMax31Days;
                 return false;
             }
 

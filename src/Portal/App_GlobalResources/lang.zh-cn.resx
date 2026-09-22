@@ -1197,4 +1197,22 @@
   <data name="Admin_Tabs_DeleteWarning" xml:space="preserve">
     <value>删除会移除所选的非核心页签及其模块实例；核心管理页签保持受保护。</value>
   </data>
+  <data name="Admin_Common_PageInfo" xml:space="preserve">
+    <value>第 {0} 页；条目数：{1}。</value>
+  </data>
+  <data name="Admin_Common_DateRangeFormat" xml:space="preserve">
+    <value>请使用 yyyy-MM-dd 格式输入起始与结束 UTC。</value>
+  </data>
+  <data name="Admin_Common_EndBeforeStart" xml:space="preserve">
+    <value>结束 UTC 必须晚于或等于起始 UTC。</value>
+  </data>
+  <data name="Admin_Common_DateRangeMax31Days" xml:space="preserve">
+    <value>日期范围不得超过 31 天。</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ScanLimitReached" xml:space="preserve">
+    <value>已达到服务器扫描上限，请缩小日期范围或筛选条件。</value>
+  </data>
+  <data name="Admin_OperationAudits_TableUnavailable" xml:space="preserve">
+    <value>运营审计表不可用。请为该数据库运行 PortalCfg_OperationAudits.sql。</value>
+  </data>
 </root>

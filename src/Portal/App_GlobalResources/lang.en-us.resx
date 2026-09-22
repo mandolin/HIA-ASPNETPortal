@@ -1194,4 +1194,22 @@
   <data name="Admin_Tabs_DeleteWarning" xml:space="preserve">
     <value>Delete removes the selected non-core tab and its module instances. Core Admin tab remains protected.</value>
   </data>
+  <data name="Admin_Common_PageInfo" xml:space="preserve">
+    <value>Page {0}; entries: {1}.</value>
+  </data>
+  <data name="Admin_Common_DateRangeFormat" xml:space="preserve">
+    <value>Enter Start UTC and End UTC using yyyy-MM-dd.</value>
+  </data>
+  <data name="Admin_Common_EndBeforeStart" xml:space="preserve">
+    <value>End UTC must be on or after Start UTC.</value>
+  </data>
+  <data name="Admin_Common_DateRangeMax31Days" xml:space="preserve">
+    <value>The date range must not exceed 31 days.</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_ScanLimitReached" xml:space="preserve">
+    <value>The server scan limit was reached. Narrow the date range or filters.</value>
+  </data>
+  <data name="Admin_OperationAudits_TableUnavailable" xml:space="preserve">
+    <value>The operations audit table is unavailable. Run PortalCfg_OperationAudits.sql for this database.</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Web;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -255,10 +256,14 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             PreviousButton.Visible = CurrentPage > 0;
             NextButton.Visible = result.HasMore;
-            ResultLabel.Text = "Page " + (CurrentPage + 1) + "; entries: " + result.Entries.Count + ".";
+            // <lang>
+            //   <zh-CN>用户可见消息统一取自资源并用编号占位符 ＋ CurrentCulture 格式化数字；跨页完全相同的消息共用一个 Admin_Common_* 键，避免同文案出现多份翻译来源。</zh-CN>
+            //   <en>User-visible messages come from resources with numbered placeholders, formatted with CurrentCulture; messages that are identical across pages share one Admin_Common_* key so the same text never has two translation sources.</en>
+            // </lang>
+            ResultLabel.Text = string.Format(CultureInfo.CurrentCulture, lang.Admin_Common_PageInfo, CurrentPage + 1, result.Entries.Count);
             if (result.WasTruncated)
             {
-                MessageLabel.Text = "The server scan limit was reached. Narrow the date range or filters.";
+                MessageLabel.Text = lang.Admin_DiagnosticsLogs_ScanLimitReached;
             }
             else
             {
@@ -311,7 +316,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>只接受不带本地化歧义的 yyyy-MM-dd 文本，失败时不向查询服务传递部分解析值。</zh-CN>
                 //   <en>Accept only unambiguous yyyy-MM-dd text and do not pass partially parsed values to the query service on failure.</en>
                 // </lang>
-                MessageLabel.Text = "Enter Start UTC and End UTC using yyyy-MM-dd.";
+                MessageLabel.Text = lang.Admin_Common_DateRangeFormat;
                 return false;
             }
 
@@ -321,7 +326,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>结束日期不得早于起始日期，保持服务端区间方向稳定。</zh-CN>
                 //   <en>The end date cannot precede the start date, keeping the service interval direction stable.</en>
                 // </lang>
-                MessageLabel.Text = "End UTC must be on or after Start UTC.";
+                MessageLabel.Text = lang.Admin_Common_EndBeforeStart;
                 return false;
             }
 
@@ -331,7 +336,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>限制小于 31 天的输入窗口，避免后台查询放大扫描成本。</zh-CN>
                 //   <en>Limit the input window to fewer than 31 days to avoid amplifying the administrative scan cost.</en>
                 // </lang>
-                MessageLabel.Text = "The date range must not exceed 31 days.";
+                MessageLabel.Text = lang.Admin_Common_DateRangeMax31Days;
                 return false;
             }
 

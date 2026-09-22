@@ -4579,5 +4579,77 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_Tabs_DeleteWarning", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Page {0}; entries: {1}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Page {0}; entries: {1}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Common_PageInfo {
+            get {
+                return ResourceManager.GetString("Admin_Common_PageInfo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter Start UTC and End UTC using yyyy-MM-dd.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter Start UTC and End UTC using yyyy-MM-dd.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Common_DateRangeFormat {
+            get {
+                return ResourceManager.GetString("Admin_Common_DateRangeFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：End UTC must be on or after Start UTC.</zh-CN>
+        ///   <en>Looks up a localized string similar to: End UTC must be on or after Start UTC.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Common_EndBeforeStart {
+            get {
+                return ResourceManager.GetString("Admin_Common_EndBeforeStart", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The date range must not exceed 31 days.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The date range must not exceed 31 days.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Common_DateRangeMax31Days {
+            get {
+                return ResourceManager.GetString("Admin_Common_DateRangeMax31Days", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The server scan limit was reached. Narrow the date range or filters.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The server scan limit was reached. Narrow the date range or filters.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticsLogs_ScanLimitReached {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticsLogs_ScanLimitReached", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The operations audit table is unavailable. Run PortalCfg_OperationAudits.sql for this database.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The operations audit table is unavailable. Run PortalCfg_OperationAudits.sql for this database.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_TableUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_TableUnavailable", resourceCulture);
+            }
+        }
     }
 }
