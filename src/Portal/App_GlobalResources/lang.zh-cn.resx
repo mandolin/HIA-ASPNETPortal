@@ -1215,4 +1215,49 @@
   <data name="Admin_OperationAudits_TableUnavailable" xml:space="preserve">
     <value>运营审计表不可用。请为该数据库运行 PortalCfg_OperationAudits.sql。</value>
   </data>
+  <data name="Admin_ModuleCatalog_MessageNoPackage" xml:space="preserve">
+    <value>未找到已校验的已部署模块包。</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessageAlreadyRegistered" xml:space="preserve">
+    <value>该包入口已注册为模块定义 {0}。</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessageRegistered" xml:space="preserve">
+    <value>已校验的包已注册为模块定义 {0}。</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessageNoLegacyDefinition" xml:space="preserve">
+    <value>该包没有已注册的旧版模块定义。</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessagePreflight" xml:space="preserve">
+    <value>定义 {0} 有 {1} 个模块实例。移除前请先停用、迁移或显式清理实例。</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageUnsupportedAction" xml:space="preserve">
+    <value>不支持的工作流动作。</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageInvalidId" xml:space="preserve">
+    <value>无效的申请编号。</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageStateUpdated" xml:space="preserve">
+    <value>业务申请状态已更新。</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageServiceNotRegistered" xml:space="preserve">
+    <value>业务申请数据服务未注册。</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageSchemaUnavailable" xml:space="preserve">
+    <value>P19.4 业务申请 schema 不可用。请运行 PortalBiz_BusinessApplications.sql 与 PortalBiz_WorkflowEvents.sql。</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessagePageInfo" xml:space="preserve">
+    <value>最多显示 {0} 条申请；计数：{1}。</value>
+  </data>
+  <data name="Admin_WorkItems_MessagePageInfo" xml:space="preserve">
+    <value>最多显示 {0} 条业务待办；计数：{1}。</value>
+  </data>
+  <data name="Admin_WorkItems_MessageServiceNotRegistered" xml:space="preserve">
+    <value>业务待办数据服务未注册。</value>
+  </data>
+  <data name="Admin_WorkItems_MessageSchemaUnavailable" xml:space="preserve">
+    <value>P12.3 业务待办 schema 不可用。请运行 PortalBiz_WorkItems.sql 与 PortalBiz_WorkItemEvents.sql。</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessagePackageNotDeployed" xml:space="preserve">
+    <value>所选模块包已不再部署或无效。</value>
+  </data>
 </root>

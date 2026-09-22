@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -181,7 +182,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (WorkItemDb == null)
             {
-                ShowUnavailable("Portal work-item data service is not registered.");
+                ShowUnavailable(lang.Admin_WorkItems_MessageServiceNotRegistered);
                 return;
             }
 
@@ -191,7 +192,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (!WorkItemDb.IsSchemaAvailable())
             {
-                ShowUnavailable("P12.3 work-item schema is unavailable. Run PortalBiz_WorkItems.sql and PortalBiz_WorkItemEvents.sql.");
+                ShowUnavailable(lang.Admin_WorkItems_MessageSchemaUnavailable);
                 return;
             }
 
@@ -214,8 +215,11 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>用不随服务器区域设置变化的数字格式报告固定上限与实际计数，避免管理页摘要产生文化相关歧义。</zh-CN>
             //   <en>Report the fixed limit and actual count with culture-invariant number formatting so the administration summary has no server-locale ambiguity.</en>
             // </lang>
-            ResultLabel.Text = "Showing up to " + PageSize.ToString(CultureInfo.InvariantCulture) +
-                               " work items; count: " + workItems.Count.ToString(CultureInfo.InvariantCulture) + ".";
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_WorkItems_MessagePageInfo,
+                PageSize,
+                workItems.Count);
         }
 
         /// <summary>

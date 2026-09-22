@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -124,7 +125,7 @@ namespace ASPNET.StarterKit.Portal
             string reason;
             if (!PortalModuleCatalog.TryGetTrustedPackage(packageId, out package, out reason))
             {
-                ShowMessage("The selected module package is no longer deployed or is invalid.");
+                ShowMessage(lang.Admin_ModuleCatalog_MessagePackageNotDeployed);
                 BindPackages();
                 return;
             }
@@ -247,7 +248,7 @@ namespace ASPNET.StarterKit.Portal
             PackagesGrid.DataBind();
             if (rows.Count == 0)
             {
-                ResultLabel.Text = "No validated deployed module package was found.";
+                ResultLabel.Text = lang.Admin_ModuleCatalog_MessageNoPackage;
             }
         }
 
@@ -277,8 +278,14 @@ namespace ASPNET.StarterKit.Portal
             IModuleDefinitionItem existing = FindDefinition(definitions, package.DesktopEntry);
             if (existing != null)
             {
-                ResultLabel.Text = "The package entry is already registered as module definition " +
-                                   existing.ModuleDefId.ToString(CultureInfo.InvariantCulture) + ".";
+                // <lang>
+                //   <zh-CN>带数值的用户可见消息：消息文本取自资源，标识符值用 InvariantCulture 预格式化，避免定义 ID 在不同区域设置下出现千分位。</zh-CN>
+                //   <en>User-visible messages with values: the message text comes from a resource, and identifier values are pre-formatted with InvariantCulture so a definition id never gains locale-specific group separators.</en>
+                // </lang>
+                ResultLabel.Text = string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Admin_ModuleCatalog_MessageAlreadyRegistered,
+                    existing.ModuleDefId.ToString(CultureInfo.InvariantCulture));
                 return;
             }
 
@@ -302,8 +309,10 @@ namespace ASPNET.StarterKit.Portal
                 "Registered module definition " + definitionId.ToString(CultureInfo.InvariantCulture) +
                 " from validated deployed package.",
                 Context);
-            ResultLabel.Text = "The validated package was registered as module definition " +
-                               definitionId.ToString(CultureInfo.InvariantCulture) + ".";
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_ModuleCatalog_MessageRegistered,
+                definitionId.ToString(CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -366,7 +375,7 @@ namespace ASPNET.StarterKit.Portal
                 package.DesktopEntry);
             if (definition == null)
             {
-                ResultLabel.Text = "The package has no registered legacy module definition.";
+                ResultLabel.Text = lang.Admin_ModuleCatalog_MessageNoLegacyDefinition;
                 return;
             }
 
@@ -375,9 +384,11 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The reference count only informs the dangerous-delete warning; preflight itself writes neither definitions, instances, nor physical directories.</en>
             // </lang>
             int instanceCount = ModulesConfig.GetModulesByModuleDefId(definition.ModuleDefId).Count();
-            ResultLabel.Text = "Definition " + definition.ModuleDefId.ToString(CultureInfo.InvariantCulture) +
-                               " has " + instanceCount.ToString(CultureInfo.InvariantCulture) +
-                               " module instance(s). Disable, migrate, or explicitly clean instances before any removal.";
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_ModuleCatalog_MessagePreflight,
+                definition.ModuleDefId.ToString(CultureInfo.InvariantCulture),
+                instanceCount);
         }
 
         /// <summary>

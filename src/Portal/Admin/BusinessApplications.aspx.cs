@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
 using Unity;
 
 namespace ASPNET.StarterKit.Portal
@@ -104,7 +105,7 @@ namespace ASPNET.StarterKit.Portal
             string actionKey = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
             if (!IsSupportedAction(actionKey))
             {
-                MessageLabel.Text = "Unsupported workflow action.";
+                MessageLabel.Text = lang.Admin_BusinessApplications_MessageUnsupportedAction;
                 BindApplications();
                 return;
             }
@@ -117,7 +118,7 @@ namespace ASPNET.StarterKit.Portal
             long applicationId;
             if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out applicationId))
             {
-                MessageLabel.Text = "Invalid application id.";
+                MessageLabel.Text = lang.Admin_BusinessApplications_MessageInvalidId;
                 return;
             }
 
@@ -163,7 +164,7 @@ namespace ASPNET.StarterKit.Portal
 
             TryCompleteWorkItem(result.ApplicationId, actionKey, reviewComment);
 
-            MessageLabel.Text = "Business application state updated.";
+            MessageLabel.Text = lang.Admin_BusinessApplications_MessageStateUpdated;
             BindApplications();
         }
 
@@ -204,13 +205,13 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (BusinessApplicationDb == null)
             {
-                ShowUnavailable("Business application data service is not registered.");
+                ShowUnavailable(lang.Admin_BusinessApplications_MessageServiceNotRegistered);
                 return;
             }
 
             if (!BusinessApplicationDb.IsSchemaAvailable())
             {
-                ShowUnavailable("P19.4 business application schema is unavailable. Run PortalBiz_BusinessApplications.sql and PortalBiz_WorkflowEvents.sql.");
+                ShowUnavailable(lang.Admin_BusinessApplications_MessageSchemaUnavailable);
                 return;
             }
 
@@ -224,8 +225,11 @@ namespace ASPNET.StarterKit.Portal
             ApplicationsRepeater.DataSource = applications.Select(application => new BusinessApplicationAdminRow(application)).ToList();
             ApplicationsRepeater.DataBind();
 
-            ResultLabel.Text = "Showing up to " + PageSize.ToString(CultureInfo.InvariantCulture) +
-                               " applications; count: " + applications.Count.ToString(CultureInfo.InvariantCulture) + ".";
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_BusinessApplications_MessagePageInfo,
+                PageSize,
+                applications.Count);
         }
 
         /// <summary>

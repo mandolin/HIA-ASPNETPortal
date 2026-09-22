@@ -4651,5 +4651,185 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_OperationAudits_TableUnavailable", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No validated deployed module package was found.</zh-CN>
+        ///   <en>Looks up a localized string similar to: No validated deployed module package was found.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_MessageNoPackage {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_MessageNoPackage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The package entry is already registered as module definition {0}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The package entry is already registered as module definition {0}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_MessageAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_MessageAlreadyRegistered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The validated package was registered as module definition {0}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The validated package was registered as module definition {0}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_MessageRegistered {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_MessageRegistered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The package has no registered legacy module definition.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The package has no registered legacy module definition.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_MessageNoLegacyDefinition {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_MessageNoLegacyDefinition", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Definition {0} has {1} module instance(s). Disable, migrate, or explicitly clean instances before any removal.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Definition {0} has {1} module instance(s). Disable, migrate, or explicitly clean instances before any removal.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_MessagePreflight {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_MessagePreflight", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Unsupported workflow action.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Unsupported workflow action.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_MessageUnsupportedAction {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_MessageUnsupportedAction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid application id.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invalid application id.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_MessageInvalidId {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_MessageInvalidId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Business application state updated.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Business application state updated.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_MessageStateUpdated {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_MessageStateUpdated", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Business application data service is not registered.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Business application data service is not registered.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_MessageServiceNotRegistered {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_MessageServiceNotRegistered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：P19.4 business application schema is unavailable. Run PortalBiz_BusinessApplications.sql and PortalBiz_WorkflowEvents.sql.</zh-CN>
+        ///   <en>Looks up a localized string similar to: P19.4 business application schema is unavailable. Run PortalBiz_BusinessApplications.sql and PortalBiz_WorkflowEvents.sql.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_MessageSchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Showing up to {0} applications; count: {1}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Showing up to {0} applications; count: {1}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_MessagePageInfo {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_MessagePageInfo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Showing up to {0} work items; count: {1}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Showing up to {0} work items; count: {1}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_MessagePageInfo {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_MessagePageInfo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Portal work-item data service is not registered.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Portal work-item data service is not registered.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_MessageServiceNotRegistered {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_MessageServiceNotRegistered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：P12.3 work-item schema is unavailable. Run PortalBiz_WorkItems.sql and PortalBiz_WorkItemEvents.sql.</zh-CN>
+        ///   <en>Looks up a localized string similar to: P12.3 work-item schema is unavailable. Run PortalBiz_WorkItems.sql and PortalBiz_WorkItemEvents.sql.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_MessageSchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The selected module package is no longer deployed or is invalid.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The selected module package is no longer deployed or is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleCatalog_MessagePackageNotDeployed {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_MessagePackageNotDeployed", resourceCulture);
+            }
+        }
     }
 }

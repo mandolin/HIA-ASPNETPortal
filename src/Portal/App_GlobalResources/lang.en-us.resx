@@ -1212,4 +1212,49 @@
   <data name="Admin_OperationAudits_TableUnavailable" xml:space="preserve">
     <value>The operations audit table is unavailable. Run PortalCfg_OperationAudits.sql for this database.</value>
   </data>
+  <data name="Admin_ModuleCatalog_MessageNoPackage" xml:space="preserve">
+    <value>No validated deployed module package was found.</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessageAlreadyRegistered" xml:space="preserve">
+    <value>The package entry is already registered as module definition {0}.</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessageRegistered" xml:space="preserve">
+    <value>The validated package was registered as module definition {0}.</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessageNoLegacyDefinition" xml:space="preserve">
+    <value>The package has no registered legacy module definition.</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessagePreflight" xml:space="preserve">
+    <value>Definition {0} has {1} module instance(s). Disable, migrate, or explicitly clean instances before any removal.</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageUnsupportedAction" xml:space="preserve">
+    <value>Unsupported workflow action.</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageInvalidId" xml:space="preserve">
+    <value>Invalid application id.</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageStateUpdated" xml:space="preserve">
+    <value>Business application state updated.</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageServiceNotRegistered" xml:space="preserve">
+    <value>Business application data service is not registered.</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessageSchemaUnavailable" xml:space="preserve">
+    <value>P19.4 business application schema is unavailable. Run PortalBiz_BusinessApplications.sql and PortalBiz_WorkflowEvents.sql.</value>
+  </data>
+  <data name="Admin_BusinessApplications_MessagePageInfo" xml:space="preserve">
+    <value>Showing up to {0} applications; count: {1}.</value>
+  </data>
+  <data name="Admin_WorkItems_MessagePageInfo" xml:space="preserve">
+    <value>Showing up to {0} work items; count: {1}.</value>
+  </data>
+  <data name="Admin_WorkItems_MessageServiceNotRegistered" xml:space="preserve">
+    <value>Portal work-item data service is not registered.</value>
+  </data>
+  <data name="Admin_WorkItems_MessageSchemaUnavailable" xml:space="preserve">
+    <value>P12.3 work-item schema is unavailable. Run PortalBiz_WorkItems.sql and PortalBiz_WorkItemEvents.sql.</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessagePackageNotDeployed" xml:space="preserve">
+    <value>The selected module package is no longer deployed or is invalid.</value>
+  </data>
 </root>
