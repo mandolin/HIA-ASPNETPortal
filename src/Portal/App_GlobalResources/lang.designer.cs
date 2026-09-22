@@ -3092,6 +3092,246 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Business Application</zh-CN>
+        ///   <en>Looks up a localized string similar to: Business Application</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_Heading {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_Heading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Submit application</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submit application</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_ButtonSubmit", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Title</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_LabelTitle {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_LabelTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Category</zh-CN>
+        ///   <en>Looks up a localized string similar to: Category</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_LabelCategory {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_LabelCategory", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Summary</zh-CN>
+        ///   <en>Looks up a localized string similar to: Summary</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_LabelSummary {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_LabelSummary", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Request details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Request details</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_LabelRequestDetail {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_LabelRequestDetail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Recent requests</zh-CN>
+        ///   <en>Looks up a localized string similar to: Recent requests</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_SectionRecentRequests {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_SectionRecentRequests", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_ColumnUtc {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_ColumnUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No.</zh-CN>
+        ///   <en>Looks up a localized string similar to: No.</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_ColumnId {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_ColumnId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_ColumnStatus {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_ColumnStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Review note</zh-CN>
+        ///   <en>Looks up a localized string similar to: Review note</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_ColumnReviewNote {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_ColumnReviewNote", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Sign in before submitting a business application.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Sign in before submitting a business application.</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_MessageSignInRequired {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_MessageSignInRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This account is not permitted to submit business applications.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This account is not permitted to submit business applications.</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_MessageNoPermission {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_MessageNoPermission", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter the application title.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter the application title.</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_MessageTitleRequired {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_MessageTitleRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a summary or request details.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter a summary or request details.</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_MessageContentRequired {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_MessageContentRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Business application submitted, no.: </zh-CN>
+        ///   <en>Looks up a localized string similar to: Business application submitted, no.: </en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_MessageSubmittedPrefix {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_MessageSubmittedPrefix", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：General request</zh-CN>
+        ///   <en>Looks up a localized string similar to: General request</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_OptionGeneral {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_OptionGeneral", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Content request</zh-CN>
+        ///   <en>Looks up a localized string similar to: Content request</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_OptionContent {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_OptionContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Operations request</zh-CN>
+        ///   <en>Looks up a localized string similar to: Operations request</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_OptionOperations {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_OptionOperations", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The business application module has not finished database initialisation.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The business application module has not finished database initialisation.</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_MessageModuleNotInitialized {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_MessageModuleNotInitialized", resourceCulture);
+            }
+        }
+
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);

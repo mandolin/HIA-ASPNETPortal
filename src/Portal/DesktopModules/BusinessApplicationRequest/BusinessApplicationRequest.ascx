@@ -7,7 +7,7 @@
     </lang>
 --%>
 <div class="business-application-request">
-    <div class="business-application-title">业务申请 / Business Application</div>
+    <div class="business-application-title"><%= lang.BusinessApplicationRequest_Heading %></div>
     <asp:Label ID="MessageLabel" CssClass="business-application-message" EnableViewState="false" runat="server" />
 
     <%--
@@ -31,19 +31,19 @@
                 </lang>
             --%>
             <div class="business-application-form-field business-application-form-field-wide">
-                <span class="SubHead business-application-label">标题</span>
+                <span class="SubHead business-application-label"><%= lang.BusinessApplicationRequest_LabelTitle %></span>
                 <asp:TextBox ID="TitleTextBox" CssClass="NormalTextBox business-application-input" MaxLength="200" runat="server" />
             </div>
             <div class="business-application-form-field">
-                <span class="SubHead business-application-label">分类</span>
+                <span class="SubHead business-application-label"><%= lang.BusinessApplicationRequest_LabelCategory %></span>
                 <asp:DropDownList ID="CategoryList" CssClass="NormalTextBox business-application-input" runat="server" />
             </div>
             <div class="business-application-form-field business-application-form-field-wide">
-                <span class="SubHead business-application-label">摘要</span>
+                <span class="SubHead business-application-label"><%= lang.BusinessApplicationRequest_LabelSummary %></span>
                 <asp:TextBox ID="SummaryTextBox" CssClass="NormalTextBox business-application-input" MaxLength="500" runat="server" />
             </div>
             <div class="business-application-form-field business-application-form-field-full">
-                <span class="SubHead business-application-label">申请说明</span>
+                <span class="SubHead business-application-label"><%= lang.BusinessApplicationRequest_LabelRequestDetail %></span>
                 <asp:TextBox ID="BodyTextBox" CssClass="NormalTextBox business-application-input business-application-body"
                     MaxLength="4000" TextMode="MultiLine" Rows="6" runat="server" />
             </div>
@@ -56,20 +56,20 @@
             </lang>
         --%>
         <div class="business-application-actions">
-            <asp:Button ID="SubmitButton" CssClass="CommandButton" Text="提交申请" OnClick="SubmitButton_Click" runat="server" />
+            <asp:Button ID="SubmitButton" CssClass="CommandButton" Text="<%$ Resources:lang,BusinessApplicationRequest_ButtonSubmit %>" OnClick="SubmitButton_Click" runat="server" />
         </div>
 
-        <div class="business-application-subtitle">最近申请</div>
+        <div class="business-application-subtitle"><%= lang.BusinessApplicationRequest_SectionRecentRequests %></div>
         <div class="business-application-list-wrap">
             <asp:Repeater ID="RecentApplicationsRepeater" runat="server">
                 <HeaderTemplate>
                     <table class="business-application-list" cellspacing="0" cellpadding="4" border="0">
                         <tr>
-                            <th>UTC</th>
-                            <th>编号</th>
-                            <th>标题</th>
-                            <th>状态</th>
-                            <th>审核意见</th>
+                            <th><%= lang.BusinessApplicationRequest_ColumnUtc %></th>
+                            <th><%= lang.BusinessApplicationRequest_ColumnId %></th>
+                            <th><%= lang.BusinessApplicationRequest_LabelTitle %></th>
+                            <th><%= lang.BusinessApplicationRequest_ColumnStatus %></th>
+                            <th><%= lang.BusinessApplicationRequest_ColumnReviewNote %></th>
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>

@@ -822,6 +822,66 @@
   <data name="EditXml_MessageInvalidResourcePath" xml:space="preserve">
     <value>XML and XSL/T files must be deployed resource paths inside the current application directory.</value>
   </data>
+  <data name="BusinessApplicationRequest_Heading" xml:space="preserve">
+    <value>Business Application</value>
+  </data>
+  <data name="BusinessApplicationRequest_ButtonSubmit" xml:space="preserve">
+    <value>Submit application</value>
+  </data>
+  <data name="BusinessApplicationRequest_LabelTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="BusinessApplicationRequest_LabelCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="BusinessApplicationRequest_LabelSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="BusinessApplicationRequest_LabelRequestDetail" xml:space="preserve">
+    <value>Request details</value>
+  </data>
+  <data name="BusinessApplicationRequest_SectionRecentRequests" xml:space="preserve">
+    <value>Recent requests</value>
+  </data>
+  <data name="BusinessApplicationRequest_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="BusinessApplicationRequest_ColumnId" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="BusinessApplicationRequest_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="BusinessApplicationRequest_ColumnReviewNote" xml:space="preserve">
+    <value>Review note</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageSignInRequired" xml:space="preserve">
+    <value>Sign in before submitting a business application.</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageNoPermission" xml:space="preserve">
+    <value>This account is not permitted to submit business applications.</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageTitleRequired" xml:space="preserve">
+    <value>Enter the application title.</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageContentRequired" xml:space="preserve">
+    <value>Enter a summary or request details.</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageSubmittedPrefix" xml:space="preserve">
+    <value>Business application submitted, no.: </value>
+  </data>
+  <data name="BusinessApplicationRequest_OptionGeneral" xml:space="preserve">
+    <value>General request</value>
+  </data>
+  <data name="BusinessApplicationRequest_OptionContent" xml:space="preserve">
+    <value>Content request</value>
+  </data>
+  <data name="BusinessApplicationRequest_OptionOperations" xml:space="preserve">
+    <value>Operations request</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageModuleNotInitialized" xml:space="preserve">
+    <value>The business application module has not finished database initialisation.</value>
+  </data>
   <data name="LegacyEdit_LabelTitle" xml:space="preserve">
     <value>Title</value>
   </data>

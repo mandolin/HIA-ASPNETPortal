@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -93,7 +94,7 @@ namespace ASPNET.StarterKit.Portal
             int userId = GetCurrentUserId();
             if (userId <= 0)
             {
-                ShowMessage("请先登录后再提交业务申请。");
+                ShowMessage(lang.BusinessApplicationRequest_MessageSignInRequired);
                 BindModule();
                 return;
             }
@@ -106,7 +107,7 @@ namespace ASPNET.StarterKit.Portal
                 PortalPermissionKeys.BusinessApplicationSubmit,
                 PortalPermissionKeys.BusinessApplicationAdmin))
             {
-                ShowMessage("当前账号没有提交业务申请的权限。");
+                ShowMessage(lang.BusinessApplicationRequest_MessageNoPermission);
                 BindModule();
                 return;
             }
@@ -124,7 +125,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (string.IsNullOrWhiteSpace(title))
             {
-                ShowMessage("请填写申请标题。");
+                ShowMessage(lang.BusinessApplicationRequest_MessageTitleRequired);
                 return;
             }
 
@@ -134,7 +135,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (string.IsNullOrWhiteSpace(summary) && string.IsNullOrWhiteSpace(body))
             {
-                ShowMessage("请填写摘要或申请说明。");
+                ShowMessage(lang.BusinessApplicationRequest_MessageContentRequired);
                 return;
             }
 
@@ -191,7 +192,7 @@ namespace ASPNET.StarterKit.Portal
             TitleTextBox.Text = string.Empty;
             SummaryTextBox.Text = string.Empty;
             BodyTextBox.Text = string.Empty;
-            ShowMessage("业务申请已提交，编号：" + result.ApplicationCode);
+            ShowMessage(lang.BusinessApplicationRequest_MessageSubmittedPrefix + result.ApplicationCode);
             BindModule();
         }
 
@@ -212,9 +213,9 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>分类值是提交契约，展示文本可本地化但值保持稳定。</zh-CN>
             //   <en>Category values are the submission contract; display text may be localized while values remain stable.</en>
             // </lang>
-            CategoryList.Items.Add(new ListItem("通用申请", "General"));
-            CategoryList.Items.Add(new ListItem("资料/内容申请", "Content"));
-            CategoryList.Items.Add(new ListItem("资源/运维申请", "Operations"));
+            CategoryList.Items.Add(new ListItem(lang.BusinessApplicationRequest_OptionGeneral, "General"));
+            CategoryList.Items.Add(new ListItem(lang.BusinessApplicationRequest_OptionContent, "Content"));
+            CategoryList.Items.Add(new ListItem(lang.BusinessApplicationRequest_OptionOperations, "Operations"));
         }
 
         /// <summary>
@@ -238,7 +239,7 @@ namespace ASPNET.StarterKit.Portal
                 // </lang>
                 RequestPanel.Visible = false;
                 BindRecentApplications(0);
-                ShowMessage("请先登录后再提交业务申请。");
+                ShowMessage(lang.BusinessApplicationRequest_MessageSignInRequired);
                 return;
             }
 
@@ -250,7 +251,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 RequestPanel.Visible = false;
                 BindRecentApplications(0);
-                ShowMessage("业务申请模块尚未完成数据库初始化。");
+                ShowMessage(lang.BusinessApplicationRequest_MessageModuleNotInitialized);
                 return;
             }
 
@@ -269,7 +270,7 @@ namespace ASPNET.StarterKit.Portal
                 //   <en>Without submit permission, do not reach business creation; bind an empty recent list and show a low-sensitivity message.</en>
                 // </lang>
                 BindRecentApplications(0);
-                ShowMessage("当前账号没有提交业务申请的权限。");
+                ShowMessage(lang.BusinessApplicationRequest_MessageNoPermission);
                 return;
             }
 
