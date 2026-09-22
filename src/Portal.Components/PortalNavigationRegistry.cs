@@ -1072,6 +1072,25 @@ namespace ASPNET.StarterKit.Portal
                 "P44.5: enterprise capability administration entry."),
 
             // <lang>
+            //   <zh-CN>遗留角色成员管理页登记（W44.5 裁定）：SecurityRoles.aspx 是旧角色成员管理宿主页，与 Core.Admin.Roles（指向 Roles.ascx 控件）目标不同；两者并存，故本条按遗留登记且只作诊断，不进普通导航，也不生成动作区链接。</zh-CN>
+            //   <en>Legacy role-membership page registration (W44.5 decision): SecurityRoles.aspx is the legacy role-membership host page and has a different target from Core.Admin.Roles (which points at the Roles.ascx control); both coexist, so this entry is registered as legacy for diagnostics only and never enters ordinary navigation or produces action-area links.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.SecurityRoles.Legacy",
+                PortalNavigationEntryKind.AdminPage,
+                "遗留角色成员管理",
+                "Legacy Role Membership",
+                "Admin/SecurityRoles.aspx",
+                PortalNavigationVisibilityMode.DiagnosticOnly,
+                PortalNavigationLifecycleState.Legacy,
+                940,
+                new string[0],
+                new string[0],
+                new string[0],
+                new string[0],
+                "W44.5 decision: coexists with Core.Admin.Roles (Roles.ascx) as a legacy host page; kept for governance visibility only."),
+
+            // <lang>
             //   <zh-CN>主导航 Tab 组（新一轮 W44.5）：稳定键为 Tab.&lt;门户配置中的 Tab 名&gt;，不含 TabId。这些条目只承载 gate 门控元数据——Target 留空、不生成链接、不进入 Admin 动作区；Tab 的名称、顺序与 URL 仍以门户配置为唯一真源。依赖只声明"必须存在的能力约束"，不得声明超出库配置的角色限制，以免门控打开后反而放宽或收紧角色语义。</zh-CN>
             //   <en>Main-navigation tab group (new-round W44.5): stable keys are Tab.&lt;tab name from portal configuration&gt; and never contain the TabId. These entries carry gate metadata only: the target stays blank, no link is produced, and they never enter the Admin action area; tab names, order, and URLs remain sourced solely from portal configuration. Dependencies declare only capability constraints that must hold, never role restrictions beyond the database configuration, so enabling the gate cannot widen or tighten role semantics.</en>
             // </lang>
