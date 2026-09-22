@@ -17,12 +17,12 @@
     <div class="portal-admin-page portal-admin-role-membership">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <span id="title" class="Head portal-admin-title" runat="server">Role Membership</span>
-                <p class="Normal portal-admin-subtitle">Manage users assigned to the selected portal role.</p>
+                <span id="title" class="Head portal-admin-title" runat="server"><%= lang.Admin_SecurityRoles_Title %></span>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_SecurityRoles_Subtitle %></p>
             </div>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_EmployeeDirectory_Title %></a>
+                <a class="CommandButton" href="SystemHealth.aspx"><%= lang.Admin_SystemHealth_Title %></a>
             </div>
         </div>
 
@@ -50,11 +50,11 @@
                   </lang>
                 --%>
                 <div class="portal-filter-field">
-                    <span class="SubHead portal-filter-label">User</span>
+                    <span class="SubHead portal-filter-label"><%= lang.Admin_SecurityRoles_LabelUser %></span>
                     <asp:DropDownList ID="allUsers" CssClass="NormalTextBox portal-filter-input" DataTextField="Name" DataValueField="UserID" runat="server" />
                 </div>
                 <div class="portal-filter-actions">
-                    <asp:LinkButton ID="addExisting" CssClass="CommandButton portal-primary-action" Text="Add existing user to role"
+                    <asp:LinkButton ID="addExisting" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang, Admin_SecurityRoles_ButtonAddExisting %>"
                         runat="server" OnClick="AddUser_Click" />
                 </div>
             </div>
@@ -62,7 +62,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Users In Role</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_SecurityRoles_SectionUsersInRole %></h2>
             </div>
             <%--
               <lang>
@@ -74,7 +74,7 @@
                 <asp:DataList ID="usersInRole" CssClass="portal-chip-list" RepeatColumns="2" DataKeyField="UserId" OnItemCommand="usersInRole_ItemCommand" runat="server">
                     <ItemStyle Width="225" CssClass="portal-chip-item" />
                     <ItemTemplate>
-                        <asp:LinkButton CommandName="delete" Text="Remove" CssClass="CommandButton portal-chip-delete portal-danger-action"
+                        <asp:LinkButton CommandName="delete" Text="<%$ Resources:lang, Admin_SecurityRoles_ButtonRemove %>" CssClass="CommandButton portal-chip-delete portal-danger-action"
                             CausesValidation="False" runat="server" />
                         <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "Name") %>' CssClass="Normal portal-chip-text"
                             runat="server" />
@@ -90,7 +90,7 @@
           </lang>
         --%>
         <div class="portal-form-actions">
-            <asp:LinkButton ID="saveBtn" CssClass="CommandButton portal-primary-action" Text="Save Role Changes" runat="server"
+            <asp:LinkButton ID="saveBtn" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang, Admin_SecurityRoles_ButtonSave %>" runat="server"
                 OnClick="Save_Click" />
         </div>
     </div>

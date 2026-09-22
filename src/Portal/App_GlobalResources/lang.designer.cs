@@ -5414,6 +5414,102 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Select a valid user.</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Role Membership</zh-CN>
+        ///   <en>Looks up a localized string similar to: Role Membership</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_Title {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Role Membership: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Role Membership: {0}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_TitleFormat {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_TitleFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Manage users assigned to the selected portal role.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Manage users assigned to the selected portal role.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User</zh-CN>
+        ///   <en>Looks up a localized string similar to: User</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_LabelUser {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_LabelUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add existing user to role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add existing user to role</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_ButtonAddExisting {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_ButtonAddExisting", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Users In Role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Users In Role</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_SectionUsersInRole {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_SectionUsersInRole", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Remove</zh-CN>
+        ///   <en>Looks up a localized string similar to: Remove</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_ButtonRemove {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_ButtonRemove", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Save Role Changes</zh-CN>
+        ///   <en>Looks up a localized string similar to: Save Role Changes</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SecurityRoles_ButtonSave {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_ButtonSave", resourceCulture);
+            }
+        }
+
         internal static string Admin_SecurityRoles_MessageSelectValidUser {
             get {
                 return ResourceManager.GetString("Admin_SecurityRoles_MessageSelectValidUser", resourceCulture);

@@ -1404,6 +1404,30 @@
   <data name="Admin_SiteSettings_MessageSaveFailed" xml:space="preserve">
     <value>Saving site settings failed; the system recorded this error. Event id: {0}</value>
   </data>
+  <data name="Admin_SecurityRoles_Title" xml:space="preserve">
+    <value>Role Membership</value>
+  </data>
+  <data name="Admin_SecurityRoles_TitleFormat" xml:space="preserve">
+    <value>Role Membership: {0}</value>
+  </data>
+  <data name="Admin_SecurityRoles_Subtitle" xml:space="preserve">
+    <value>Manage users assigned to the selected portal role.</value>
+  </data>
+  <data name="Admin_SecurityRoles_LabelUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Admin_SecurityRoles_ButtonAddExisting" xml:space="preserve">
+    <value>Add existing user to role</value>
+  </data>
+  <data name="Admin_SecurityRoles_SectionUsersInRole" xml:space="preserve">
+    <value>Users In Role</value>
+  </data>
+  <data name="Admin_SecurityRoles_ButtonRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Admin_SecurityRoles_ButtonSave" xml:space="preserve">
+    <value>Save Role Changes</value>
+  </data>
   <data name="Admin_SecurityRoles_MessageSelectValidUser" xml:space="preserve">
     <value>Select a valid user.</value>
   </data>

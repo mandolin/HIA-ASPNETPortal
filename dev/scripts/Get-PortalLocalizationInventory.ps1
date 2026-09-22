@@ -15,7 +15,10 @@
     #                        刻意不含 OnClientClick：该属性的值是 JS 代码，其中真正的文案是属性内的字符串字面量，属另一类信号。
     #       M2 标记元素文本：&gt;文字&lt; 且内容由字母/数字/空格/常见标点组成、长度 &gt;= 4。
     #       C1 代码可见消息：Text/ErrorText/InfoMessage/Message/ConfirmText/ToolTip/HeaderText/AlternateText
-    #                        赋值右侧（含 string.Format 前缀）为字面量；以及 Show*("...") 与 new ListItem("...")。
+    #                        赋值右侧（含 string.Format 前缀）为字面量；以及 InnerText/InnerHtml 赋值、
+    #                        Show*("...") 与 new ListItem("...")。
+    #                        刻意不含 Value：Value 既可能承载界面文案，也可能是隐藏字段的数据值（如 "edit"），
+    #                        纳入会产生大量误报，其代价高于漏报。
     #
     #     排除项（这是本口径与早期交互式统计的关键差别）：
     #       - 代码注释：行注释 // 、块注释 /* */ 、XML 文档注释 /// 内的文本一律不计。
@@ -23,6 +26,8 @@
     #       - 标记注释 &lt;!-- --&gt; 与 &lt;%-- --%&gt;（本项目 &lt;lang&gt; 双语注释即位于其中）。
     #       - &lt;script&gt; 与 &lt;style&gt; 区域内的内容。
     #       - *.designer.cs、obj/、bin/。
+    #       - 技术令牌（形如 Business.Collaboration.Handle 的点号标识符、module.json 之类的文件名）：
+    #         它们是数据/文件名而非面向用户的文案，属性侧与元素侧一律剔除。
     #
     #     因此本口径得到的数字与早期记录的"124 处"**定义不同，不可相加**：早期清单偏向"硬编码中文"，
     #     本口径偏向"字面量文案（不分语种）"。
@@ -40,7 +45,10 @@
     #       M2 markup element text: &gt;text&lt; where the content is letters/digits/spaces/common punctuation, length &gt;= 4.
     #       C1 code visible messages: literal right-hand side of Text/ErrorText/InfoMessage/Message/ConfirmText/
     #                                 ToolTip/HeaderText/AlternateText assignments (including a string.Format prefix),
-    #                                 plus Show*("...") and new ListItem("...").
+    #                                 plus InnerText/InnerHtml assignments, Show*("...") and new ListItem("...").
+    #                                 Value is deliberately excluded: it may carry UI copy but just as often a hidden
+    #                                 field's data value (e.g. "edit"), and the false positives would cost more than
+    #                                 the misses.
     #
     #     Exclusions (this is the key difference from the earlier interactive count):
     #       - Code comments: text inside //, /* */ and /// is never counted. The earlier count lacked this exclusion
@@ -48,6 +56,9 @@
     #       - Markup comments &lt;!-- --&gt; and &lt;%-- --%&gt; (this project's &lt;lang&gt; bilingual comments live there).
     #       - Content inside &lt;script&gt; and &lt;style&gt;.
     #       - *.designer.cs, obj/, bin/.
+    #       - Technical tokens (dotted identifiers such as Business.Collaboration.Handle, file names such as
+    #         module.json): data or file names rather than user-facing copy, removed on both the attribute and
+    #         element sides.
     #
     #     The resulting number therefore has a different definition from the earlier "124 sites" record and the two
     #     must not be added together: the earlier list leaned toward hard-coded Chinese, this one toward literal
@@ -178,7 +189,12 @@ function Remove-MarkupNonUi {
 $markupAttrPattern = [regex]'(?<![\w-])(?:Text|Title|ToolTip|HeaderText|AlternateText|ConfirmText|InfoMessage)\s*=\s*"(?<v>[A-Za-z][^"<>]{1,})"'
 $markupElemPattern = [regex]'>(?<v>[A-Za-z][A-Za-z0-9 ,\.''!\?&/\-\(\):;]{3,})<'
 $elemNoisePattern = [regex]'^(?:amp|nbsp|lt|gt|quot|apos|#\d+)$|</|^\s*$'
-$codeAssignPattern = [regex]'(?:^|[^A-Za-z0-9_])(?:Text|ErrorText|InfoMessage|Message|ConfirmText|ToolTip|HeaderText|AlternateText)\s*=\s*(?:string\.Format\(\s*)?"(?<v>[A-Za-z][^"]{1,})"'
+# <lang>
+#   <zh-CN>技术令牌：点号标识符与常见文件名，属数据而非界面文案，属性侧与元素侧都剔除。</zh-CN>
+#   <en>Technical tokens: dotted identifiers and common file names, which are data rather than UI copy and are removed on both the attribute and element sides.</en>
+# </lang>
+$techTokenPattern = [regex]'^[A-Za-z][A-Za-z0-9]*(\.[A-Za-z0-9]+)+$'
+$codeAssignPattern = [regex]'(?:^|[^A-Za-z0-9_])(?:Text|ErrorText|InfoMessage|Message|ConfirmText|ToolTip|HeaderText|AlternateText|InnerText|InnerHtml)\s*=\s*(?:string\.Format\(\s*)?"(?<v>[A-Za-z][^"]{1,})"'
 $codeCallPattern = [regex]'(?:Show[A-Za-z]*|new\s+ListItem)\(\s*"(?<v>[A-Za-z][^"]{1,})"'
 
 # <lang>
@@ -218,11 +234,16 @@ foreach ($file in $files) {
     }
     else {
         $body = Remove-MarkupNonUi -Text $raw
-        $m1 = $markupAttrPattern.Matches($body).Count
+        foreach ($match in $markupAttrPattern.Matches($body)) {
+            $value = $match.Groups['v'].Value.Trim()
+            if ($techTokenPattern.IsMatch($value)) { continue }
+            $m1++
+        }
         foreach ($match in $markupElemPattern.Matches($body)) {
             $value = $match.Groups['v'].Value
             if ($elemNoisePattern.IsMatch($value)) { continue }
             if (-not [regex]::IsMatch($value, '[A-Za-z]{2,}')) { continue }
+            if ($techTokenPattern.IsMatch($value.Trim())) { continue }
             $m2++
         }
     }

@@ -404,7 +404,7 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>标题使用已验证角色快照，成员和用户列表从当前门户数据源绑定。</zh-CN>
             //   <en>Use the verified role snapshot for the title and bind member/user lists from current Portal data sources.</en>
             // </lang>
-            title.InnerText = "Role Membership: " + (currentRole.RoleName ?? string.Empty);
+            title.InnerText = string.Format(CultureInfo.CurrentCulture, lang.Admin_SecurityRoles_TitleFormat, currentRole.RoleName ?? string.Empty);
             usersInRole.DataSource = RolesDB.GetRoleMembers(roleId);
             usersInRole.DataBind();
             allUsers.DataSource = RolesDB.GetUsers();
