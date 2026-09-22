@@ -122,6 +122,282 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: Add user to this role</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Account profile, registration review, lifecycle, and role membership.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Account profile, registration review, lifecycle, and role membership.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registration Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registration Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelRegistrationStatus {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelRegistrationStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Approve Registration</zh-CN>
+        ///   <en>Looks up a localized string similar to: Approve Registration</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_ApproveRegistration {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_ApproveRegistration", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Reject Registration</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reject Registration</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_RejectRegistration {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_RejectRegistration", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Binding</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee Binding</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelEmployeeBinding {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelEmployeeBinding", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Manage Binding</zh-CN>
+        ///   <en>Looks up a localized string similar to: Manage Binding</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_ManageBinding {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_ManageBinding", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Profile Status</zh-CN>
+        ///   <en>Looks up a localized string similar to: Profile Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelProfileStatus {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelProfileStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Disable Account</zh-CN>
+        ///   <en>Looks up a localized string similar to: Disable Account</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_DisableAccount {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_DisableAccount", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：return confirm('Disable this account?');</zh-CN>
+        ///   <en>Looks up a localized string similar to: return confirm('Disable this account?');</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_ConfirmDisableJs {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_ConfirmDisableJs", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Restore Account</zh-CN>
+        ///   <en>Looks up a localized string similar to: Restore Account</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_RestoreAccount {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_RestoreAccount", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registration Metadata</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registration Metadata</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_SectionRegistrationMetadata {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_SectionRegistrationMetadata", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registration Source</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registration Source</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelRegistrationSource {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelRegistrationSource", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invite Code</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invite Code</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelInviteCode {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelInviteCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registered UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Registered UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelRegisteredUtc {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelRegisteredUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Approved UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: Approved UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelApprovedUtc {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelApprovedUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Profile Source</zh-CN>
+        ///   <en>Looks up a localized string similar to: Profile Source</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelProfileSource {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelProfileSource", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Account Profile</zh-CN>
+        ///   <en>Looks up a localized string similar to: Account Profile</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_SectionAccountProfile {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_SectionAccountProfile", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Legacy User Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Legacy User Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelLegacyUserName {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelLegacyUserName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Login Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Login Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelLoginName {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelLoginName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Display Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: Display Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelDisplayName {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelDisplayName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Nickname</zh-CN>
+        ///   <en>Looks up a localized string similar to: Nickname</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelNickname {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelNickname", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Role Membership</zh-CN>
+        ///   <en>Looks up a localized string similar to: Role Membership</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_SectionRoleMembership {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_SectionRoleMembership", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Role</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_LabelRole {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_LabelRole", resourceCulture);
+            }
+        }
+
         internal static string Admin_ManageUsers_AddUserToRole {
             get {
                 return ResourceManager.GetString("Admin_ManageUsers_AddUserToRole", resourceCulture);

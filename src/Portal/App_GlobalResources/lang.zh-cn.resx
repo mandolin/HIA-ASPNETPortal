@@ -75,6 +75,75 @@
   <data name="Admin_EditAccessDenied_EditAccessDenied" xml:space="preserve">
     <value>拒绝编辑</value>
   </data>
+  <data name="Admin_ManageUsers_Subtitle" xml:space="preserve">
+    <value>账号资料、注册审核、生命周期与角色成员关系。</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegistrationStatus" xml:space="preserve">
+    <value>注册状态</value>
+  </data>
+  <data name="Admin_ManageUsers_ApproveRegistration" xml:space="preserve">
+    <value>批准注册</value>
+  </data>
+  <data name="Admin_ManageUsers_RejectRegistration" xml:space="preserve">
+    <value>拒绝注册</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelEmployeeBinding" xml:space="preserve">
+    <value>员工绑定</value>
+  </data>
+  <data name="Admin_ManageUsers_ManageBinding" xml:space="preserve">
+    <value>管理绑定</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelProfileStatus" xml:space="preserve">
+    <value>账号资料状态</value>
+  </data>
+  <data name="Admin_ManageUsers_DisableAccount" xml:space="preserve">
+    <value>禁用账号</value>
+  </data>
+  <data name="Admin_ManageUsers_ConfirmDisableJs" xml:space="preserve">
+    <value>return confirm('确认禁用此账号？');</value>
+  </data>
+  <data name="Admin_ManageUsers_RestoreAccount" xml:space="preserve">
+    <value>恢复启用</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionRegistrationMetadata" xml:space="preserve">
+    <value>注册元数据</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegistrationSource" xml:space="preserve">
+    <value>注册来源</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelInviteCode" xml:space="preserve">
+    <value>邀请码</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegisteredUtc" xml:space="preserve">
+    <value>注册时间（UTC）</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelApprovedUtc" xml:space="preserve">
+    <value>批准时间（UTC）</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelProfileSource" xml:space="preserve">
+    <value>资料来源</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionAccountProfile" xml:space="preserve">
+    <value>账号资料</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelLegacyUserName" xml:space="preserve">
+    <value>旧账号名</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelLoginName" xml:space="preserve">
+    <value>登录名</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelDisplayName" xml:space="preserve">
+    <value>显示名</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelNickname" xml:space="preserve">
+    <value>昵称</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionRoleMembership" xml:space="preserve">
+    <value>角色成员</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRole" xml:space="preserve">
+    <value>角色</value>
+  </data>
   <data name="Admin_ManageUsers_AddUserToRole" xml:space="preserve">
     <value>把用户加入此角色</value>
   </data>

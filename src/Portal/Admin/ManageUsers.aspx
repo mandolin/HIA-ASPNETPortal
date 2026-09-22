@@ -27,11 +27,11 @@
                 --%>
                 <asp:Label ID="TitleText" CssClass="Head portal-admin-title" Text="<%$ Resources:lang,Admin_ManageUsers_ManageUser %>"
                     runat="server" />
-                <p class="Normal portal-admin-subtitle">Account profile, registration review, lifecycle, and role membership.</p>
+                <p class="Normal portal-admin-subtitle"><%= lang.Admin_ManageUsers_Subtitle %></p>
             </div>
             <div class="portal-admin-actions">
-                <a class="CommandButton" href="EmployeeDirectory.aspx">Employee Directory</a>
-                <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_EmployeeDirectory_Title %></a>
+                <a class="CommandButton" href="OperationAudits.aspx"><%= lang.Admin_OperationAudits_Title %></a>
             </div>
         </div>
 
@@ -43,14 +43,14 @@
               </lang>
             --%>
             <div class="portal-admin-summary-item">
-                <div class="SubHead portal-summary-label">Registration Status</div>
+                <div class="SubHead portal-summary-label"><%= lang.Admin_ManageUsers_LabelRegistrationStatus %></div>
                 <div class="Normal portal-summary-value">
                     <asp:Label ID="RegistrationStatus" runat="server" />
                 </div>
                 <div class="portal-inline-actions">
-                    <asp:LinkButton ID="ApproveRegistrationBtn" CssClass="CommandButton portal-primary-action" Text="Approve Registration"
+                    <asp:LinkButton ID="ApproveRegistrationBtn" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang,Admin_ManageUsers_ApproveRegistration %>"
                         CausesValidation="False" Visible="False" runat="server" OnClick="ApproveRegistration_Click" />
-                    <asp:LinkButton ID="RejectRegistrationBtn" CssClass="CommandButton portal-danger-action" Text="Reject Registration"
+                    <asp:LinkButton ID="RejectRegistrationBtn" CssClass="CommandButton portal-danger-action" Text="<%$ Resources:lang,Admin_ManageUsers_RejectRegistration %>"
                         CausesValidation="False" Visible="False" runat="server" OnClick="RejectRegistration_Click" />
                 </div>
             </div>
@@ -61,12 +61,12 @@
               </lang>
             --%>
             <div class="portal-admin-summary-item">
-                <div class="SubHead portal-summary-label">Employee Binding</div>
+                <div class="SubHead portal-summary-label"><%= lang.Admin_ManageUsers_LabelEmployeeBinding %></div>
                 <div class="Normal portal-summary-value">
                     <asp:Label ID="EmployeeBindingText" runat="server" />
                 </div>
                 <div class="portal-inline-actions">
-                    <asp:HyperLink ID="EmployeeBindingLink" CssClass="CommandButton" Text="Manage Binding" runat="server" />
+                    <asp:HyperLink ID="EmployeeBindingLink" CssClass="CommandButton" Text="<%$ Resources:lang,Admin_ManageUsers_ManageBinding %>" runat="server" />
                 </div>
             </div>
             <%--
@@ -76,15 +76,15 @@
               </lang>
             --%>
             <div class="portal-admin-summary-item">
-                <div class="SubHead portal-summary-label">Profile Status</div>
+                <div class="SubHead portal-summary-label"><%= lang.Admin_ManageUsers_LabelProfileStatus %></div>
                 <div class="Normal portal-summary-value">
                     <asp:Label ID="ProfileStatusText" runat="server" />
                 </div>
                 <div class="portal-inline-actions">
-                    <asp:LinkButton ID="DisableUserBtn" CssClass="CommandButton portal-danger-action" Text="禁用账号"
+                    <asp:LinkButton ID="DisableUserBtn" CssClass="CommandButton portal-danger-action" Text="<%$ Resources:lang,Admin_ManageUsers_DisableAccount %>"
                         CausesValidation="False" Visible="False" runat="server" OnClick="DisableUser_Click"
-                        OnClientClick="return confirm('确认禁用此账号？');" />
-                    <asp:LinkButton ID="RestoreUserBtn" CssClass="CommandButton portal-primary-action" Text="恢复启用"
+                        OnClientClick="<%$ Resources:lang,Admin_ManageUsers_ConfirmDisableJs %>" />
+                    <asp:LinkButton ID="RestoreUserBtn" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang,Admin_ManageUsers_RestoreAccount %>"
                         CausesValidation="False" Visible="False" runat="server" OnClick="RestoreUser_Click" />
                 </div>
             </div>
@@ -100,31 +100,31 @@
         --%>
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Registration Metadata</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_ManageUsers_SectionRegistrationMetadata %></h2>
             </div>
             <div class="portal-field-grid">
                 <div class="portal-field">
-                    <span class="SubHead portal-field-label">Registration Source</span>
+                    <span class="SubHead portal-field-label"><%= lang.Admin_ManageUsers_LabelRegistrationSource %></span>
                     <span class="Normal portal-field-value"><asp:Label ID="RegistrationSource" runat="server" /></span>
                 </div>
                 <div class="portal-field">
-                    <span class="SubHead portal-field-label">Employee Code</span>
+                    <span class="SubHead portal-field-label"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></span>
                     <span class="Normal portal-field-value"><asp:Label ID="EmployeeCodeText" runat="server" /></span>
                 </div>
                 <div class="portal-field">
-                    <span class="SubHead portal-field-label">Invite Code</span>
+                    <span class="SubHead portal-field-label"><%= lang.Admin_ManageUsers_LabelInviteCode %></span>
                     <span class="Normal portal-field-value"><asp:Label ID="InviteCodeText" runat="server" /></span>
                 </div>
                 <div class="portal-field">
-                    <span class="SubHead portal-field-label">Registered UTC</span>
+                    <span class="SubHead portal-field-label"><%= lang.Admin_ManageUsers_LabelRegisteredUtc %></span>
                     <span class="Normal portal-field-value"><asp:Label ID="RegisteredUtcText" runat="server" /></span>
                 </div>
                 <div class="portal-field">
-                    <span class="SubHead portal-field-label">Approved UTC</span>
+                    <span class="SubHead portal-field-label"><%= lang.Admin_ManageUsers_LabelApprovedUtc %></span>
                     <span class="Normal portal-field-value"><asp:Label ID="ApprovedUtcText" runat="server" /></span>
                 </div>
                 <div class="portal-field">
-                    <span class="SubHead portal-field-label">Profile Source</span>
+                    <span class="SubHead portal-field-label"><%= lang.Admin_ManageUsers_LabelProfileSource %></span>
                     <span class="Normal portal-field-value"><asp:Label ID="ProfileSourceText" runat="server" /></span>
                 </div>
             </div>
@@ -132,7 +132,7 @@
 
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Account Profile</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_ManageUsers_SectionAccountProfile %></h2>
             </div>
             <div class="portal-form-grid">
                 <%--
@@ -142,7 +142,7 @@
                   </lang>
                 --%>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">旧账号名</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_LabelLegacyUserName %></span>
                     <span class="Normal portal-field-value"><asp:Label ID="LegacyUserNameText" runat="server" /></span>
                 </div>
                 <%--
@@ -152,7 +152,7 @@
                   </lang>
                 --%>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">登录名</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_LabelLoginName %></span>
                     <asp:TextBox ID="LoginName" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <%--
@@ -162,7 +162,7 @@
                   </lang>
                 --%>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">显示名</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_LabelDisplayName %></span>
                     <asp:TextBox ID="DisplayName" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <%--
@@ -172,7 +172,7 @@
                   </lang>
                 --%>
                 <div class="portal-form-field">
-                    <span class="SubHead portal-form-label">昵称</span>
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ManageUsers_LabelNickname %></span>
                     <asp:TextBox ID="Nickname" Width="200" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
                 <%--
@@ -229,12 +229,12 @@
         --%>
         <div class="portal-admin-section">
             <div class="portal-section-header">
-                <h2 class="Head portal-section-title">Role Membership</h2>
+                <h2 class="Head portal-section-title"><%= lang.Admin_ManageUsers_SectionRoleMembership %></h2>
             </div>
             <div class="portal-filter-panel">
                 <div class="portal-filter-grid">
                     <div class="portal-filter-field">
-                        <span class="SubHead portal-filter-label">Role</span>
+                        <span class="SubHead portal-filter-label"><%= lang.Admin_ManageUsers_LabelRole %></span>
                         <asp:DropDownList ID="allRoles" CssClass="NormalTextBox portal-filter-input" DataTextField="RoleName" DataValueField="RoleID"
                             runat="server" />
                     </div>

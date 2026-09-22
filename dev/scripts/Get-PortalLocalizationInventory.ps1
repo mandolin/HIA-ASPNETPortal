@@ -186,16 +186,17 @@ function Remove-MarkupNonUi {
     return $t
 }
 
-$markupAttrPattern = [regex]'(?<![\w-])(?:Text|Title|ToolTip|HeaderText|AlternateText|ConfirmText|InfoMessage)\s*=\s*"(?<v>[A-Za-z][^"<>]{1,})"'
-$markupElemPattern = [regex]'>(?<v>[A-Za-z][A-Za-z0-9 ,\.''!\?&/\-\(\):;]{3,})<'
+$markupAttrPattern = [regex]("(?<![\w-])(?:Text|Title|ToolTip|HeaderText|AlternateText|ConfirmText|InfoMessage)\s*=\s*`"(?<v>[A-Za-z\u4e00-\u9fff][^`"<>]{1,})`"")
+$markupElemPattern = [regex](">(?<v>[A-Za-z\u4e00-\u9fff][A-Za-z0-9 ,\.''!\?&/\-\(\):;\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]{1,})<")
+$onClientClickPattern = [regex]("OnClientClick\s*=\s*`"[^`"]*[\u4e00-\u9fff][^`"]*`"")
 $elemNoisePattern = [regex]'^(?:amp|nbsp|lt|gt|quot|apos|#\d+)$|</|^\s*$'
 # <lang>
 #   <zh-CN>技术令牌：点号标识符与常见文件名，属数据而非界面文案，属性侧与元素侧都剔除。</zh-CN>
 #   <en>Technical tokens: dotted identifiers and common file names, which are data rather than UI copy and are removed on both the attribute and element sides.</en>
 # </lang>
 $techTokenPattern = [regex]'^[A-Za-z][A-Za-z0-9]*(\.[A-Za-z0-9]+)+$'
-$codeAssignPattern = [regex]'(?:^|[^A-Za-z0-9_])(?:Text|ErrorText|InfoMessage|Message|ConfirmText|ToolTip|HeaderText|AlternateText|InnerText|InnerHtml)\s*=\s*(?:string\.Format\(\s*)?"(?<v>[A-Za-z][^"]{1,})"'
-$codeCallPattern = [regex]'(?:Show[A-Za-z]*|new\s+ListItem)\(\s*"(?<v>[A-Za-z][^"]{1,})"'
+$codeAssignPattern = [regex]("(?:^|[^A-Za-z0-9_])(?:Text|ErrorText|InfoMessage|Message|ConfirmText|ToolTip|HeaderText|AlternateText|InnerText|InnerHtml)\s*=\s*(?:string\.Format\(\s*)?`"(?<v>[A-Za-z\u4e00-\u9fff][^`"]{1,})`"")
+$codeCallPattern = [regex]("(?:Show[A-Za-z]*|new\s+ListItem)\(\s*`"(?<v>[A-Za-z\u4e00-\u9fff][^`"]{1,})`"")
 
 # <lang>
 #   <zh-CN>按相对路径归类到区域，用于把"已完成区"与"未覆盖区"分开呈现。</zh-CN>
@@ -239,10 +240,20 @@ foreach ($file in $files) {
             if ($techTokenPattern.IsMatch($value)) { continue }
             $m1++
         }
+        $m1 += $onClientClickPattern.Matches($body).Count
         foreach ($match in $markupElemPattern.Matches($body)) {
             $value = $match.Groups['v'].Value
             if ($elemNoisePattern.IsMatch($value)) { continue }
-            if (-not [regex]::IsMatch($value, '[A-Za-z]{2,}')) { continue }
+            # <lang>
+            #   <zh-CN>长度判定必须语言感知：英文按"至少两个字母"，中文按"至少两个汉字"。
+            #         此前统一要求 4 个字符，导致"昵称"这类两字中文标签被漏计（实测 ManageUsers 页漏了 3 处）。</zh-CN>
+            #   <en>The length test must be language-aware: at least two letters for English, at least two Han
+            #         characters for Chinese. The earlier uniform four-character threshold dropped two-character
+            #         Chinese labels (three sites were missed on the ManageUsers page in practice).</en>
+            # </lang>
+            $hasAscii = [regex]::IsMatch($value, '[A-Za-z]{2,}')
+            $hasCjk = ([regex]::Matches($value, '[\u4e00-\u9fff]')).Count -ge 2
+            if (-not $hasAscii -and -not $hasCjk) { continue }
             if ($techTokenPattern.IsMatch($value.Trim())) { continue }
             $m2++
         }

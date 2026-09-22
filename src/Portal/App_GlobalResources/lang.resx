@@ -75,6 +75,75 @@
   <data name="Admin_EditAccessDenied_EditAccessDenied" xml:space="preserve">
     <value>Edit Access Denied</value>
   </data>
+  <data name="Admin_ManageUsers_Subtitle" xml:space="preserve">
+    <value>Account profile, registration review, lifecycle, and role membership.</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegistrationStatus" xml:space="preserve">
+    <value>Registration Status</value>
+  </data>
+  <data name="Admin_ManageUsers_ApproveRegistration" xml:space="preserve">
+    <value>Approve Registration</value>
+  </data>
+  <data name="Admin_ManageUsers_RejectRegistration" xml:space="preserve">
+    <value>Reject Registration</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelEmployeeBinding" xml:space="preserve">
+    <value>Employee Binding</value>
+  </data>
+  <data name="Admin_ManageUsers_ManageBinding" xml:space="preserve">
+    <value>Manage Binding</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelProfileStatus" xml:space="preserve">
+    <value>Profile Status</value>
+  </data>
+  <data name="Admin_ManageUsers_DisableAccount" xml:space="preserve">
+    <value>Disable Account</value>
+  </data>
+  <data name="Admin_ManageUsers_ConfirmDisableJs" xml:space="preserve">
+    <value>return confirm('Disable this account?');</value>
+  </data>
+  <data name="Admin_ManageUsers_RestoreAccount" xml:space="preserve">
+    <value>Restore Account</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionRegistrationMetadata" xml:space="preserve">
+    <value>Registration Metadata</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegistrationSource" xml:space="preserve">
+    <value>Registration Source</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelInviteCode" xml:space="preserve">
+    <value>Invite Code</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegisteredUtc" xml:space="preserve">
+    <value>Registered UTC</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelApprovedUtc" xml:space="preserve">
+    <value>Approved UTC</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelProfileSource" xml:space="preserve">
+    <value>Profile Source</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionAccountProfile" xml:space="preserve">
+    <value>Account Profile</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelLegacyUserName" xml:space="preserve">
+    <value>Legacy User Name</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelLoginName" xml:space="preserve">
+    <value>Login Name</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelDisplayName" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelNickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionRoleMembership" xml:space="preserve">
+    <value>Role Membership</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
   <data name="Admin_ManageUsers_AddUserToRole" xml:space="preserve">
     <value>Add user to this role</value>
   </data>
