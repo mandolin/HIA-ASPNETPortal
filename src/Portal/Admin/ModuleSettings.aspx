@@ -19,8 +19,8 @@
             </div>
             <%--
               <lang>
-                <zh-CN>页面自有导航入口：员工目录的目标页在导航 registry 中尚无入口键，若改交渲染器会因分组无法解析而静默消失，故保留在页面内并只做文案本地化。</zh-CN>
-                <en>Page-owned navigation entries: the employee-directory target has no navigation-registry entry yet, so handing it to the renderer would silently drop it when no group can be resolved; it stays in the page and is localized only.</en>
+                <zh-CN>页面自有导航入口：Employee Directory 属 Admin.Capability 族，而本页入口属 Admin.Modules 族；渲染器按族输出、无法表达该跨族链接，故整块保留在页面内并只做文案本地化。</zh-CN>
+                <en>Page-owned navigation entries: Employee Directory belongs to Admin.Capability while this page belongs to Admin.Modules; the group-scoped renderer cannot express that cross-group link, so the block stays in the page and is localized only.</en>
               </lang>
             --%>
             <div class="portal-admin-actions">

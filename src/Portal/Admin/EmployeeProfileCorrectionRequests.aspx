@@ -29,8 +29,8 @@
             </div>
             <%--
               <lang>
-                <zh-CN>页面自有导航入口：目标页在导航 registry 中尚无入口（员工目录等），故保留在页面内并只做文案本地化，不交给渲染器，避免入口因无法解析分组而消失。</zh-CN>
-                <en>Page-owned navigation entries: their targets have no navigation-registry entries yet (employee directory and others), so they stay in the page and are localized only; they are not handed to the renderer, which would drop entries whose group cannot be resolved.</en>
+                <zh-CN>页面自有导航入口：Operation Audits 属 Admin.Ops 族，而本页入口属 Admin.Capability 族；渲染器按族输出、只表达同族入口，无法表达该跨族链接，故整块保留在页面内并只做文案本地化。</zh-CN>
+                <en>Page-owned navigation entries: Operation Audits belongs to Admin.Ops while this page belongs to Admin.Capability. The group-scoped renderer expresses only same-group entries and cannot express that cross-group link, so the block stays in the page and is localized only.</en>
               </lang>
             --%>
             <div class="portal-admin-actions">

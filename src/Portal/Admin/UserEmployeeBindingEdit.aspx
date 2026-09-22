@@ -29,8 +29,8 @@
             </div>
             <%--
               <lang>
-                <zh-CN>页面自有导航入口：员工目录与用户管理的目标页在导航 registry 中尚无入口键，若改交渲染器，链接会因分组无法解析而静默消失；待 registry 补齐后再统一改造。ManageUserLink 由 code-behind 决定可见性与目标，此处只本地化其文案。</zh-CN>
-                <en>Page-owned navigation entries: the employee-directory and user-administration targets have no navigation-registry entries yet, so handing them to the renderer would silently drop them when no group can be resolved; switch after the registry is complete. ManageUserLink has its visibility and target decided by code-behind, so only its text is localized here.</en>
+                <zh-CN>页面自有导航入口：User Administration 属 Admin.Account 族，而本页入口属 Admin.Capability 族；渲染器按族输出、无法表达该跨族链接，故整块保留在页面内并只做文案本地化。ManageUserLink 由 code-behind 决定可见性与目标，此处只本地化其文案。</zh-CN>
+                <en>Page-owned navigation entries: User Administration belongs to Admin.Account while this page belongs to Admin.Capability; the group-scoped renderer cannot express that cross-group link, so the block stays in the page and is localized only. ManageUserLink has its visibility and target decided by code-behind, so only its text is localized here.</en>
               </lang>
             --%>
             <div class="portal-admin-actions">

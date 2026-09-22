@@ -29,8 +29,8 @@
             </div>
             <%--
               <lang>
-                <zh-CN>页面自有入口：新建组织单元、新建员工、绑定用户／员工属该页维护动作；用户管理、资料更正请求与系统健康的目标页在导航 registry 中尚无入口，故一并保留在页面内并只做文案本地化，避免交给渲染器后因分组无法解析而整块消失。</zh-CN>
-                <en>Page-owned entries: new organization unit, new employee, and bind user/employee are this page's maintenance actions; the targets of user administration, profile corrections, and system health have no navigation-registry entries yet, so they also stay in the page and are localized only, instead of being dropped by the renderer when a group cannot be resolved.</en>
+                <zh-CN>页面自有导航入口：本页刻意汇集跨族入口——System Health 属 Admin.Ops 族、User Administration 属 Admin.Account 族，其余属 Admin.Capability 族；渲染器按族输出、只表达同族入口，无法覆盖这些跨族链接，故整块保留在页面内并只做文案本地化。其中新建组织单元、新建员工、绑定用户／员工同时是本页的维护动作入口。</zh-CN>
+                <en>Page-owned navigation entries: this page deliberately aggregates cross-group entries - System Health belongs to Admin.Ops, User Administration to Admin.Account, and the rest to Admin.Capability. The renderer is group-scoped and expresses only same-group entries, so it cannot cover these cross-group links and the block stays in the page, localized only. New organization unit, new employee, and bind user/employee are also this page's maintenance actions.</en>
               </lang>
             --%>
             <div class="portal-admin-actions">

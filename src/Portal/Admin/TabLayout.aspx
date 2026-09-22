@@ -19,8 +19,8 @@
             </div>
             <%--
               <lang>
-                <zh-CN>页面自有导航入口：安全角色的目标页在导航 registry 中尚无入口键，若改交渲染器会因分组无法解析而静默消失，故保留在页面内并只做文案本地化。</zh-CN>
-                <en>Page-owned navigation entries: the security-roles target has no navigation-registry entry yet, so handing it to the renderer would silently drop it when no group can be resolved; it stays in the page and is localized only.</en>
+                <zh-CN>页面自有导航入口：Security Roles 仍是旧控件宿主页，registry 中的 Core.Admin.Roles 指向 Roles.ascx、目标并不相同，故该链接无法由渲染器表达；且本页入口属 Admin.Modules 族、渲染器按族输出，故整块保留在页面内并只做文案本地化。</zh-CN>
+                <en>Page-owned navigation entries: Security Roles is still the legacy control host page and the registry entry Core.Admin.Roles targets Roles.ascx rather than this page, so the renderer cannot express that link; this page also belongs to Admin.Modules and the renderer is group-scoped, so the block stays in the page and is localized only.</en>
               </lang>
             --%>
             <div class="portal-admin-actions">

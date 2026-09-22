@@ -23,8 +23,8 @@
             </div>
             <%--
               <lang>
-                <zh-CN>页面自有导航入口：其中"资料更正请求"的目标页在导航 registry 中尚无入口键，若整体交给渲染器，该入口会因分组解析不到而静默消失；待 registry 补齐后再统一改为渲染器。</zh-CN>
-                <en>Page-owned navigation entries: the target of "Correction Requests" has no navigation-registry entry yet, so handing the block to the renderer would silently drop that entry when no group can be resolved; switch to the renderer once the registry is complete.</en>
+                <zh-CN>页面自有导航入口：Operation Audits 属 Admin.Ops 族，而本页入口属 Admin.Capability 族；渲染器按族输出、无法表达跨族链接，故整块保留在页面内并只做文案本地化（资料更正请求的 registry 入口已补齐）。</zh-CN>
+                <en>Page-owned navigation entries: Operation Audits belongs to Admin.Ops while this page belongs to Admin.Capability; the group-scoped renderer cannot express cross-group links, so the block stays in the page and is localized only (the correction-requests entry now exists in the registry).</en>
               </lang>
             --%>
             <div class="portal-admin-actions">
