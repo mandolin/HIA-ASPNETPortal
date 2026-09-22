@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.ThemeSettings"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
     <lang>
         <zh-CN>P3.1 主题选择页：管理员仅能选择已部署且通过 manifest 校验的主题，不提供包上传或在线样式编辑。</zh-CN>
@@ -24,10 +27,7 @@
                 <h1 class="Head portal-admin-title">Theme Settings</h1>
                 <p class="Normal portal-admin-subtitle">Select trusted deployed themes for the portal and individual tabs.</p>
             </div>
-            <div class="portal-admin-actions">
-                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
-                <a class="CommandButton" href="ModuleCatalog.aspx">Module Catalog</a>
-            </div>
+            <%= PortalNavigationEntryRenderer.RenderActions("Admin.ThemeSettings", Context) %>
         </div>
 
         <asp:Label ID="MessageLabel" CssClass="NormalRed portal-status-line" EnableViewState="false" runat="server" />

@@ -5,6 +5,9 @@
     Inherits="ASPNET.StarterKit.Portal.DiagnosticsLogs"
     MasterPageFile="~/Default.master" %>
 
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
+<%@ Import Namespace="Resources" %>
+
 <%--
   <lang>
     <zh-CN>P2.4 只读诊断日志页仅查询受限 NDJSON 记录，不提供下载、删除或路径输入。</zh-CN>
@@ -24,10 +27,7 @@
                 <h1 class="Head portal-admin-title">Diagnostics Logs</h1>
                 <p class="Normal portal-admin-subtitle">Structured runtime events for administrators.</p>
             </div>
-            <div class="portal-admin-actions">
-                <a class="CommandButton" href="SystemHealth.aspx">System Health</a>
-                <a class="CommandButton" href="OperationAudits.aspx">Operation Audits</a>
-            </div>
+            <%= PortalNavigationEntryRenderer.RenderActions("Admin.Ops.DiagnosticsLogs", Context) %>
         </div>
 
         <%--
