@@ -17,7 +17,13 @@
     <div class="portal-admin-page portal-admin-role-membership">
         <div class="portal-admin-header">
             <div class="portal-admin-heading">
-                <span id="title" class="Head portal-admin-title" runat="server"><%= lang.Admin_SecurityRoles_Title %></span>
+                <%--
+                  <lang>
+                    <zh-CN>标题元素由服务器控制，文案由 code-behind 用资源格式串写入；此处不能放代码块，否则设置 InnerText 会因"内容非字面"而抛异常。</zh-CN>
+                    <en>The title element is server-controlled and its text is written by code-behind using a resource format string; a code block must not be placed here, otherwise setting InnerText throws because the contents are not literal.</en>
+                  </lang>
+                --%>
+                <span id="title" class="Head portal-admin-title" runat="server"></span>
                 <p class="Normal portal-admin-subtitle"><%= lang.Admin_SecurityRoles_Subtitle %></p>
             </div>
             <div class="portal-admin-actions">
