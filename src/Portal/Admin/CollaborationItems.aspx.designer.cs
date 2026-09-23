@@ -24,6 +24,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>协同事项期限 UTC 输入框。</zh-CN><en>UTC due-time input for the collaboration item.</en></lang></summary>
         protected global::System.Web.UI.WebControls.TextBox DueUtcTextBox;
 
+        /// <summary><lang><zh-CN>P47.4 协同事项父事项编号输入框；空白表示顶层事项。</zh-CN><en>P47.4 parent-item code input for the collaboration item; blank marks a top-level item.</en></lang></summary>
+        protected global::System.Web.UI.WebControls.TextBox ParentItemTextBox;
+
         /// <summary><lang><zh-CN>协同事项标题输入框。</zh-CN><en>Collaboration-item title input.</en></lang></summary>
         protected global::System.Web.UI.WebControls.TextBox TitleTextBox;
 

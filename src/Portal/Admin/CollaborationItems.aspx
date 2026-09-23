@@ -53,6 +53,16 @@
                     <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelDueUtc %></span>
                     <asp:TextBox ID="DueUtcTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="19" runat="server" />
                 </div>
+                <%--
+                    <lang>
+                      <zh-CN>P47.4 父事项输入：空白表示顶层事项；存在性、终态与层级深度校验由数据层承担，标记层只收集低敏编号文本。</zh-CN>
+                      <en>P47.4 parent item input: blank marks a top-level item; existence, terminal state, and depth checks belong to the data layer, while markup only collects the low-sensitivity code text.</en>
+                    </lang>
+                --%>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelParentItem %></span>
+                    <asp:TextBox ID="ParentItemTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="19" runat="server" />
+                </div>
                 <div class="portal-form-field portal-form-field-wide">
                     <span class="SubHead portal-form-label"><%= lang.Admin_CollaborationItems_LabelTitle %></span>
                     <asp:TextBox ID="TitleTextBox" CssClass="NormalTextBox portal-form-input" MaxLength="200" runat="server" />
@@ -139,13 +149,14 @@
                                 <td><%#: Eval("OwnerText") %></td>
                                 <td>
                                     <div class="portal-value-stack">
-                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineTitle %></span> <%#: Eval("Title") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineTitle %></span><%# Convert.ToBoolean(Eval("HasParentItem")) ? " &#9656; " : " " %><%#: Eval("Title") %></div>
                                         <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineType %></span> <%#: Eval("ItemTypeKey") %></div>
                                         <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlinePriority %></span> <%#: Eval("PriorityKey") %></div>
                                         <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineSummary %></span> <%#: Eval("Summary") %></div>
                                         <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineDescription %></span> <%#: Eval("Description") %></div>
                                         <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineWorkflowComment %></span> <%#: Eval("LastActionComment") %></div>
                                         <div><span class="SubHead"><%= lang.Admin_CollaborationItems_InlineTimelineComment %></span> <%#: Eval("LatestVisibleComment") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_CollaborationItems_LabelParticipants %></span> <%#: Eval("ParticipantsText") %></div>
                                     </div>
                                 </td>
                                 <td><%#: Eval("ItemStatus") %></td>
@@ -161,6 +172,22 @@
                                         <asp:Button ID="CloseButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonClose %>" CssClass="CommandButton" CommandName="Close" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="AddParticipantCommentButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonParticipantComment %>" CssClass="CommandButton" CommandName="AddParticipantComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="AddAdministratorCommentButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonAdministratorComment %>" CssClass="CommandButton" CommandName="AddAdministratorComment" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                    </div>
+                                    <%--
+                                        <lang>
+                                          <zh-CN>P47.4 参与人增删：用户标识与角色来自当前行控件，添加与移除共用同一输入；授权与重复校验由数据层承担，标记层不做授权判断。</zh-CN>
+                                          <en>P47.4 participant add/remove: user id and role come from the current row controls and both commands share one input; authorization and duplication checks belong to the data layer, and markup performs no authorization decision.</en>
+                                        </lang>
+                                    --%>
+                                    <div class="portal-participant-actions">
+                                        <span class="SubHead"><%= lang.Admin_CollaborationItems_LabelParticipantUser %></span>
+                                        <asp:TextBox ID="ParticipantUserTextBox" CssClass="NormalTextBox" Width="60" MaxLength="10" runat="server" />
+                                        <asp:DropDownList ID="ParticipantRoleList" CssClass="NormalTextBox" runat="server">
+                                            <asp:ListItem Text="Collaborator" Value="Collaborator" Selected="True" />
+                                            <asp:ListItem Text="Watcher" Value="Watcher" />
+                                        </asp:DropDownList>
+                                        <asp:Button ID="AddParticipantButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonAddParticipant %>" CssClass="CommandButton" CommandName="AddParticipant" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
+                                        <asp:Button ID="RemoveParticipantButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonRemoveParticipant %>" CssClass="CommandButton" CommandName="RemoveParticipant" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                     </div>
                                 </td>
                             </tr>

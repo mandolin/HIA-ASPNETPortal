@@ -86,11 +86,18 @@
                         <tr>
                             <td><%#: Eval("LastActionUtcText") %></td>
                             <td><%#: Eval("ItemCode") %></td>
-                            <td><%#: Eval("Title") %></td>
+                            <td><%# Convert.ToBoolean(Eval("HasParentItem")) ? "&#9656; " : "" %><%#: Eval("Title") %></td>
                             <td><%#: Eval("StatusText") %></td>
                             <td><%#: Eval("PriorityKey") %></td>
                             <td><%#: Eval("LastActionComment") %></td>
                             <td>
+                                <%--
+                                    <lang>
+                                      <zh-CN>P47.4 前台只展示参与人集合，不提供添加或移除入口。</zh-CN>
+                                      <en>P47.4 the front end only displays the participant set and offers no add or remove entry.</en>
+                                    </lang>
+                                --%>
+                                <div><span class="SubHead"><%= lang.EnterpriseCapabilityWorkbench_LabelParticipants %></span> <%#: Eval("ParticipantsText") %></div>
                                 <div><span class="SubHead"><%= lang.EnterpriseCapabilityWorkbench_LabelLatestCommentPrefix %></span><%#: Eval("LatestParticipantComment") %></div>
                                 <asp:TextBox ID="ParticipantCommentTextBox" CssClass="NormalTextBox enterprise-workbench-input" MaxLength="1000" TextMode="MultiLine" Rows="2" runat="server" />
                                 <div class="enterprise-workbench-actions">

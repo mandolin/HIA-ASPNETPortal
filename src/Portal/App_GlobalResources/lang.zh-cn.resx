@@ -1044,6 +1044,9 @@
   <data name="EnterpriseCapabilityWorkbench_LabelLatestCommentPrefix" xml:space="preserve">
     <value>最新评论：</value>
   </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelParticipants" xml:space="preserve">
+    <value>参与人</value>
+  </data>
   <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit" xml:space="preserve">
     <value>请先登录后再提交协同事项。</value>
   </data>
@@ -1517,6 +1520,36 @@
   </data>
   <data name="Admin_CollaborationItems_ButtonAdministratorComment" xml:space="preserve">
     <value>管理员评论</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelParentItem" xml:space="preserve">
+    <value>父事项编号</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelParticipants" xml:space="preserve">
+    <value>参与人</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelParticipantUser" xml:space="preserve">
+    <value>用户标识</value>
+  </data>
+  <data name="Admin_CollaborationItems_LabelParticipantRole" xml:space="preserve">
+    <value>角色</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonAddParticipant" xml:space="preserve">
+    <value>添加参与人</value>
+  </data>
+  <data name="Admin_CollaborationItems_ButtonRemoveParticipant" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageParticipantAdded" xml:space="preserve">
+    <value>参与人已添加。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageParticipantRemoved" xml:space="preserve">
+    <value>参与人已移除。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageParticipantFailed" xml:space="preserve">
+    <value>参与人操作失败。</value>
+  </data>
+  <data name="Admin_CollaborationItems_MessageParentItemInvalid" xml:space="preserve">
+    <value>父事项编号无效。</value>
   </data>
   <data name="Admin_WorkItems_Title" xml:space="preserve">
     <value>业务待办</value>

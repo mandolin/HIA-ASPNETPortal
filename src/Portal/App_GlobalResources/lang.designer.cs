@@ -3982,6 +3982,18 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Participants</zh-CN>
+        ///   <en>Looks up a localized string similar to: Participants</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelParticipants {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelParticipants", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Sign in before submitting a collaboration item.</zh-CN>
         ///   <en>Looks up a localized string similar to: Sign in before submitting a collaboration item.</en>
         /// </lang>
@@ -5861,6 +5873,126 @@ namespace Resources {
         internal static string Admin_CollaborationItems_ButtonAdministratorComment {
             get {
                 return ResourceManager.GetString("Admin_CollaborationItems_ButtonAdministratorComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Parent Item Code</zh-CN>
+        ///   <en>Looks up a localized string similar to: Parent Item Code</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelParentItem {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelParentItem", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Participants</zh-CN>
+        ///   <en>Looks up a localized string similar to: Participants</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelParticipants {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelParticipants", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User ID</zh-CN>
+        ///   <en>Looks up a localized string similar to: User ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelParticipantUser {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelParticipantUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Role</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_LabelParticipantRole {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_LabelParticipantRole", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add Participant</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add Participant</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonAddParticipant {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonAddParticipant", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Remove</zh-CN>
+        ///   <en>Looks up a localized string similar to: Remove</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ButtonRemoveParticipant {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ButtonRemoveParticipant", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Participant added.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Participant added.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageParticipantAdded {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageParticipantAdded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Participant removed.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Participant removed.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageParticipantRemoved {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageParticipantRemoved", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Participant operation failed.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Participant operation failed.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageParticipantFailed {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageParticipantFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Parent item code is invalid.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Parent item code is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_MessageParentItemInvalid {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_MessageParentItemInvalid", resourceCulture);
             }
         }
 

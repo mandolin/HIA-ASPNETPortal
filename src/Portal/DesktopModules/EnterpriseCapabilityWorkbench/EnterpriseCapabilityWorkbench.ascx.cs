@@ -413,9 +413,14 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>可见事件由数据服务按当前用户裁剪，展示行只做排序和低敏文本转换。</zh-CN>
             //   <en>The data service scopes visible events to the current user; the display row only sorts and converts low-sensitivity text.</en>
             // </lang>
+            // <lang>
+            //   <zh-CN>逐行读取参与人集合（受前台固定条数上限约束的轻量查询）；前台只展示，不做增删。</zh-CN>
+            //   <en>Read the participant set per row (a lightweight query bounded by the front-end item limit); the front end only displays and never adds or removes.</en>
+            // </lang>
             RecentItemsRepeater.DataSource = items.Select(item => new EnterpriseCapabilityWorkbenchItemRow(
                 item,
-                CollaborationItemDb.GetVisibleEvents(item.ItemId, userId))).ToList();
+                CollaborationItemDb.GetVisibleEvents(item.ItemId, userId),
+                CollaborationItemDb.GetParticipants(item.ItemId))).ToList();
             RecentItemsRepeater.DataBind();
         }
 
@@ -676,7 +681,10 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Converts a domain item and events visible to the current user into a read-only display model.</en>
         /// </lang>
         /// </summary>
-        internal EnterpriseCapabilityWorkbenchItemRow(CollaborationItemInfo item, IList<CollaborationItemEventInfo> visibleEvents)
+        internal EnterpriseCapabilityWorkbenchItemRow(
+            CollaborationItemInfo item,
+            IList<CollaborationItemEventInfo> visibleEvents,
+            IList<CollaborationItemParticipantInfo> participants)
         {
             // <lang>
             //   <zh-CN>展示模型保留稳定主键和低敏字段，空值统一回退为占位文本。</zh-CN>
@@ -703,6 +711,12 @@ namespace ASPNET.StarterKit.Portal
                 .ThenByDescending(itemEvent => itemEvent.EventId)
                 .FirstOrDefault();
             LatestParticipantComment = latestComment == null ? "(none)" : EmptyToNone(latestComment.Comment);
+            // <lang>
+            //   <zh-CN>前台只做只读呈现：子项（有父项）在列表里缩进显示，参与人集合由数据层提供并按角色标注。</zh-CN>
+            //   <en>The front end renders read-only: children (those with a parent) render indented, and the participant set comes from the data layer with role labels.</en>
+            // </lang>
+            HasParentItem = item.ParentItemId.HasValue;
+            ParticipantsText = BuildParticipantsText(participants);
         }
 
         /// <summary><lang><zh-CN>协同事项主键。</zh-CN><en>Collaboration-item primary key.</en></lang></summary>
@@ -731,6 +745,31 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary><lang><zh-CN>当前用户可见的最新评论。</zh-CN><en>Latest comment visible to the current user.</en></lang></summary>
         public string LatestParticipantComment { get; private set; }
+
+        /// <summary><lang><zh-CN>是否为子事项（存在父项），用于列表缩进呈现。</zh-CN><en>Whether this is a child item (has a parent), used for list indentation.</en></lang></summary>
+        public bool HasParentItem { get; private set; }
+
+        /// <summary><lang><zh-CN>参与人集合的只读展示文本（前台不做增删）。</zh-CN><en>Read-only display text for the participant set (the front end performs no add or remove).</en></lang></summary>
+        public string ParticipantsText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把参与人集合转换为只读展示文本；角色沿用稳定键文本，不在此引入新的本地化词表。</zh-CN>
+        ///   <en>Converts the participant set to read-only display text; roles keep their stable-key text without introducing a new localized vocabulary here.</en>
+        /// </lang>
+        /// </summary>
+        private static string BuildParticipantsText(IList<CollaborationItemParticipantInfo> participants)
+        {
+            if (participants == null || participants.Count == 0)
+            {
+                return "(none)";
+            }
+
+            return string.Join(
+                ", ",
+                participants.Select(participant =>
+                    EmptyToNone(participant.UserName) + " (" + participant.ParticipantRoleKey + ")"));
+        }
 
         /// <summary>
         /// <lang>

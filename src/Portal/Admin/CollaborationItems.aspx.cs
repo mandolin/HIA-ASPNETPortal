@@ -109,6 +109,17 @@ namespace ASPNET.StarterKit.Portal
             }
 
             // <lang>
+            //   <zh-CN>父事项编号为空表示顶层事项；非空必须是正整数，具体存在性、终态与层级深度校验由数据层承担。</zh-CN>
+            //   <en>A blank parent code marks a top-level item; a non-blank value must be a positive integer, while existence, terminal state, and depth checks belong to the data layer.</en>
+            // </lang>
+            long? parentItemId;
+            if (!TryParseParentItemId(ParentItemTextBox.Text, out parentItemId))
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParentItemInvalid;
+                return;
+            }
+
+            // <lang>
             //   <zh-CN>创建请求保留后台指定的处理角色和当前管理员身份，服务层负责事实与状态写入。</zh-CN>
             //   <en>The create request preserves the administration-selected handling role and current administrator identity while the service writes the fact and state.</en>
             // </lang>
@@ -124,7 +135,8 @@ namespace ASPNET.StarterKit.Portal
                     PriorityKey = PriorityList.SelectedValue,
                     DueUtc = dueUtc,
                     SubmittedUtc = DateTime.UtcNow,
-                    SubmittedBy = GetCurrentUserName()
+                    SubmittedBy = GetCurrentUserName(),
+                    ParentItemId = parentItemId
                 });
 
             if (!result.Succeeded)
@@ -181,6 +193,43 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Validate the list action first, separate comments from state actions, and protect domain actions with the handling-permission gate.</en>
             // </lang>
             string actionKey = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+
+            // <lang>
+            //   <zh-CN>参与人命令先于状态动作处理：添加以事项标识为参数，移除以"事项标识|用户标识"为参数，授权由数据层复核。</zh-CN>
+            //   <en>Participant commands are handled before state actions: Add takes the item identifier, Remove takes "item id|user id", and the data layer rechecks authorization.</en>
+            // </lang>
+            if (string.Equals(actionKey, "AddParticipant", StringComparison.Ordinal))
+            {
+                long addItemId;
+                if (long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out addItemId) && addItemId > 0)
+                {
+                    TryAddParticipant(addItemId, e.Item);
+                }
+                else
+                {
+                    MessageLabel.Text = lang.Admin_CollaborationItems_MessageInvalidId;
+                }
+
+                BindItems();
+                return;
+            }
+
+            if (string.Equals(actionKey, "RemoveParticipant", StringComparison.Ordinal))
+            {
+                long removeItemId;
+                if (long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out removeItemId) && removeItemId > 0)
+                {
+                    TryRemoveParticipant(removeItemId, e.Item);
+                }
+                else
+                {
+                    MessageLabel.Text = lang.Admin_CollaborationItems_MessageInvalidId;
+                }
+
+                BindItems();
+                return;
+            }
+
             long itemId;
             if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId) || itemId <= 0)
             {
@@ -354,9 +403,14 @@ namespace ASPNET.StarterKit.Portal
                 StatusFilterList.SelectedValue,
                 PageSize);
             int currentUserId = GetCurrentUserId();
+            // <lang>
+            //   <zh-CN>逐行读取参与人集合（受固定分页上限约束的轻量查询）；参与人只影响展示与可见性，不参与授权判定。</zh-CN>
+            //   <en>Read the participant set per row (a lightweight query bounded by the fixed page limit); participants affect display and visibility only, never authorization.</en>
+            // </lang>
             ItemsRepeater.DataSource = items.Select(item => new CollaborationItemAdminRow(
                 item,
-                CollaborationItemDb.GetVisibleEvents(item.ItemId, currentUserId))).ToList();
+                CollaborationItemDb.GetVisibleEvents(item.ItemId, currentUserId),
+                CollaborationItemDb.GetParticipants(item.ItemId))).ToList();
             ItemsRepeater.DataBind();
 
             ResultLabel.Text = string.Format(
@@ -834,6 +888,107 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Trims and limits administration input length, treating null as an empty string.</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析可选的父事项编号；空白返回空父项，非空必须是正整数。</zh-CN>
+        ///   <en>Parses the optional parent item code; blank yields no parent, while a non-blank value must be a positive integer.</en>
+        /// </lang>
+        /// </summary>
+        private static bool TryParseParentItemId(string value, out long? parentItemId)
+        {
+            parentItemId = null;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return true;
+            }
+
+            long parsed;
+            if (!long.TryParse(value.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed) || parsed <= 0)
+            {
+                return false;
+            }
+
+            parentItemId = parsed;
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从当前列表行的输入控件添加一个参与人。</zh-CN>
+        ///   <en>Adds one participant from the current list-row input controls.</en>
+        /// </lang>
+        /// </summary>
+        private void TryAddParticipant(long itemId, RepeaterItem rowItem)
+        {
+            // <lang>
+            //   <zh-CN>用户标识必须为正整数、角色来自封闭词表；存在性、重复性和操作者授权均由数据层复核，标记层不做授权判断。</zh-CN>
+            //   <en>The user identifier must be a positive integer and the role must come from the closed vocabulary; existence, duplication, and actor authorization are all rechecked by the data layer, and markup performs no authorization decision.</en>
+            // </lang>
+            TextBox userBox = rowItem == null ? null : rowItem.FindControl("ParticipantUserTextBox") as TextBox;
+            DropDownList roleList = rowItem == null ? null : rowItem.FindControl("ParticipantRoleList") as DropDownList;
+            if (userBox == null || roleList == null || CollaborationItemDb == null)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParticipantFailed;
+                return;
+            }
+
+            int userId;
+            if (!int.TryParse(userBox.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out userId) || userId <= 0)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParticipantFailed;
+                return;
+            }
+
+            CollaborationItemParticipantResult result = CollaborationItemDb.AddParticipant(
+                new CollaborationItemParticipantCreateRequest
+                {
+                    ItemId = itemId,
+                    UserId = userId,
+                    ParticipantRoleKey = roleList.SelectedValue,
+                    ActorUserId = GetCurrentUserId()
+                });
+
+            MessageLabel.Text = result.Success
+                ? lang.Admin_CollaborationItems_MessageParticipantAdded
+                : result.Message;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按"事项标识|用户标识"参数移除一个参与人。</zh-CN>
+        ///   <en>Removes one participant using the "item id|user id" argument.</en>
+        /// </lang>
+        /// </summary>
+        private void TryRemoveParticipant(long itemId, RepeaterItem rowItem)
+        {
+            // <lang>
+            //   <zh-CN>用户标识来自当前列表行输入控件且必须为正整数；操作者授权由数据层复核，标记层不做授权判断。</zh-CN>
+            //   <en>The user identifier comes from the current list-row input control and must be a positive integer; actor authorization is rechecked by the data layer and markup performs no authorization decision.</en>
+            // </lang>
+            TextBox userBox = rowItem == null ? null : rowItem.FindControl("ParticipantUserTextBox") as TextBox;
+            if (userBox == null || CollaborationItemDb == null)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParticipantFailed;
+                return;
+            }
+
+            int userId;
+            if (!int.TryParse(userBox.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out userId) || userId <= 0)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParticipantFailed;
+                return;
+            }
+
+            CollaborationItemParticipantResult result = CollaborationItemDb.RemoveParticipant(
+                itemId,
+                userId,
+                GetCurrentUserId());
+
+            MessageLabel.Text = result.Success
+                ? lang.Admin_CollaborationItems_MessageParticipantRemoved
+                : result.Message;
+        }
+
         private static string NormalizeInput(string value, int maxLength)
         {
             // <lang>
@@ -859,7 +1014,10 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Converts a collaboration item and administrator-visible events into a read-only administration display model.</en>
         /// </lang>
         /// </summary>
-        internal CollaborationItemAdminRow(CollaborationItemInfo item, IList<CollaborationItemEventInfo> visibleEvents)
+        internal CollaborationItemAdminRow(
+            CollaborationItemInfo item,
+            IList<CollaborationItemEventInfo> visibleEvents,
+            IList<CollaborationItemParticipantInfo> participants)
         {
             // <lang>
             //   <zh-CN>展示行保留稳定主键和必要低敏字段，并将空值统一为占位文本。</zh-CN>
@@ -888,6 +1046,12 @@ namespace ASPNET.StarterKit.Portal
                 .ThenByDescending(itemEvent => itemEvent.EventId)
                 .FirstOrDefault();
             LatestVisibleComment = latestComment == null ? "(none)" : EmptyToNone(latestComment.Comment);
+            // <lang>
+            //   <zh-CN>层级与参与人只作为展示事实：子项（有父项）在列表里缩进呈现，参与人集合由数据层提供并按角色标注。</zh-CN>
+            //   <en>Hierarchy and participants are display facts only: children (those with a parent) render indented, and the participant set comes from the data layer with role labels.</en>
+            // </lang>
+            HasParentItem = item.ParentItemId.HasValue;
+            ParticipantsText = BuildParticipantsText(participants);
         }
 
         /// <summary><lang><zh-CN>协同事项主键。</zh-CN><en>Collaboration-item primary key.</en></lang></summary>
@@ -926,6 +1090,12 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>当前管理员可见的最新评论。</zh-CN><en>Latest comment visible to the current administrator.</en></lang></summary>
         public string LatestVisibleComment { get; private set; }
 
+        /// <summary><lang><zh-CN>是否为子事项（存在父项），用于列表缩进呈现。</zh-CN><en>Whether this is a child item (has a parent), used for list indentation.</en></lang></summary>
+        public bool HasParentItem { get; private set; }
+
+        /// <summary><lang><zh-CN>参与人集合的只读展示文本。</zh-CN><en>Read-only display text for the participant set.</en></lang></summary>
+        public string ParticipantsText { get; private set; }
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>将负责人用户或角色信息转换为后台展示文本。</zh-CN>
@@ -944,6 +1114,25 @@ namespace ASPNET.StarterKit.Portal
             }
 
             return EmptyToNone(item.OwnerRoleKey);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把参与人集合转换为只读展示文本；角色沿用稳定键文本，不在此引入新的本地化词表。</zh-CN>
+        ///   <en>Converts the participant set to read-only display text; roles keep their stable-key text without introducing a new localized vocabulary here.</en>
+        /// </lang>
+        /// </summary>
+        private static string BuildParticipantsText(IList<CollaborationItemParticipantInfo> participants)
+        {
+            if (participants == null || participants.Count == 0)
+            {
+                return "(none)";
+            }
+
+            return string.Join(
+                ", ",
+                participants.Select(participant =>
+                    EmptyToNone(participant.UserName) + " (" + participant.ParticipantRoleKey + ")"));
         }
 
         /// <summary>
