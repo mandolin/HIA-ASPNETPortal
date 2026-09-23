@@ -48,5 +48,8 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary><lang><zh-CN>提交人账号名。</zh-CN><en>Submitter account name.</en></lang></summary>
         public string SubmittedBy { get; set; }
+
+        /// <summary><lang><zh-CN>可选父事项标识；为空表示顶层事项，非空则必须指向已存在事项且不得指向自身或后代。</zh-CN><en>Optional parent item identifier; null marks a top-level item, while a non-null value must reference an existing item and must not reference itself or a descendant.</en></lang></summary>
+        public long? ParentItemId { get; set; }
     }
 }

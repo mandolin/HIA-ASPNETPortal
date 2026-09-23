@@ -65,5 +65,29 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         CollaborationItemResult ApplyAction(CollaborationItemActionRequest request);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取事项的参与人集合。</zh-CN>
+        ///   <en>Reads the participant set of an item.</en>
+        /// </lang>
+        /// </summary>
+        IList<CollaborationItemParticipantInfo> GetParticipants(long itemId);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>添加一个事项参与人；服务端重新校验操作者授权。</zh-CN>
+        ///   <en>Adds one item participant; the server revalidates actor authorization.</en>
+        /// </lang>
+        /// </summary>
+        CollaborationItemParticipantResult AddParticipant(CollaborationItemParticipantCreateRequest request);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>移除一个事项参与人；服务端重新校验操作者授权。</zh-CN>
+        ///   <en>Removes one item participant; the server revalidates actor authorization.</en>
+        /// </lang>
+        /// </summary>
+        CollaborationItemParticipantResult RemoveParticipant(long itemId, int userId, int actorUserId);
     }
 }

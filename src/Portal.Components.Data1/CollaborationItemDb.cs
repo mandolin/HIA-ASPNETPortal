@@ -22,6 +22,12 @@ namespace ASPNET.StarterKit.Portal
     {
         private const string ItemTableName = "PortalBiz_CollaborationItems";
         private const string EventTableName = "PortalBiz_CollaborationItemEvents";
+
+        // <lang>
+        //   <zh-CN>父子层级最大深度（顶层为 1）。超出该深度的新子项会被拒绝。</zh-CN>
+        //   <en>Maximum parent-child hierarchy depth (top level is 1). A new child beyond this depth is rejected.</en>
+        // </lang>
+        private const int MaxHierarchyDepth = 5;
         private readonly PortalBizDbContext context;
         private readonly IReferenceDataDb referenceDataDb;
         private readonly IUsersDb usersDb;
@@ -143,6 +149,34 @@ namespace ASPNET.StarterKit.Portal
             }
 
             // <lang>
+            //   <zh-CN>父项校验：父项列必须已迁移，父项必须存在且非终态，且新子项深度不得超出层级上限。新建事项不可能成为既有事项的祖先，因此创建路径无需成环检查。</zh-CN>
+            //   <en>Parent validation: the parent column must be migrated, the parent must exist and be non-terminal, and the new child must not exceed the depth limit. A new item cannot become an ancestor of any existing item, so the create path needs no cycle check.</en>
+            // </lang>
+            if (normalized.ParentItemId.HasValue)
+            {
+                if (!HasColumn(ItemTableName, "ParentItemId"))
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration hierarchy is not available in this deployment.");
+                }
+
+                CollaborationItemInfo parent = FindItem(normalized.ParentItemId.Value);
+                if (parent == null)
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Parent item was not found.");
+                }
+
+                if (IsTerminalStatus(parent.ItemStatus))
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Parent item is closed and cannot accept child items.");
+                }
+
+                if (GetItemDepth(parent.ItemId) >= MaxHierarchyDepth)
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration hierarchy depth limit reached.");
+                }
+            }
+
+            // <lang>
             //   <zh-CN>将请求类型复核为当前启用的参考数据稳定键；调用方不能借由自由文本绕过目录治理。</zh-CN>
             //   <en>Revalidate the requested type as an active reference-data stable key so callers cannot bypass catalog governance with free text.</en>
             // </lang>
@@ -205,7 +239,8 @@ INSERT INTO [dbo].[PortalBiz_CollaborationItems]
      [CreatedUtc],
      [CreatedBy],
      [UpdatedUtc],
-     [UpdatedBy])
+     [UpdatedBy],
+     [ParentItemId])
 VALUES
     (@ItemCode,
      @ItemTypeKey,
@@ -227,7 +262,8 @@ VALUES
      @SubmittedUtc,
      @SubmittedBy,
      @SubmittedUtc,
-     @SubmittedBy);
+     @SubmittedBy,
+     @ParentItemId);
 
 SET @ItemId = CONVERT(BIGINT, SCOPE_IDENTITY());
 
@@ -250,16 +286,26 @@ SELECT @ItemId;",
                     CreateNullableStringParameter("@PriorityKey", normalized.PriorityKey),
                     CreateNullableDateTimeParameter("@DueUtc", normalized.DueUtc),
                     new SqlParameter("@SubmittedUtc", normalized.SubmittedUtc.Value),
-                    new SqlParameter("@SubmittedBy", normalized.SubmittedBy)).ToList();
+                    new SqlParameter("@SubmittedBy", normalized.SubmittedBy),
+                    CreateNullableLongParameter("@ParentItemId", normalized.ParentItemId)).ToList();
 
                 // <lang>
                 //   <zh-CN>仅接受数据库批次明确返回的首个标识；空结果按创建失败处理，避免将未知写入状态报告为成功。</zh-CN>
                 //   <en>Accept only the first identifier explicitly returned by the database batch; treat an empty result as creation failure rather than reporting an unknown write state as success.</en>
                 // </lang>
                 long itemId = rows.Count == 0 ? 0 : rows[0];
-                return itemId <= 0
-                    ? new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item was not created.")
-                    : new CollaborationItemResult(true, itemId, itemCode, PortalCollaborationItemActions.Submit, "Collaboration item submitted.");
+                if (itemId <= 0)
+                {
+                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item was not created.");
+                }
+
+                // <lang>
+                //   <zh-CN>事项事实写入成功后旁路投影待办；投影失败不回滚事项。</zh-CN>
+                //   <en>Project the work item as a sidecar after the item fact succeeds; a projection failure does not roll back the item.</en>
+                // </lang>
+                ProjectWorkItemEnsure(itemCode, normalized.Title, normalized.Summary, normalized.OwnerUserId, normalized.OwnerRoleKey, normalized.DueUtc, normalized.SubmittedUtc.Value, normalized.SubmittedBy);
+
+                return new CollaborationItemResult(true, itemId, itemCode, PortalCollaborationItemActions.Submit, "Collaboration item submitted.");
             }
             catch (Exception)
             {
@@ -680,6 +726,15 @@ SELECT CONVERT(BIGINT, SCOPE_IDENTITY());",
                 return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "A plain-text handling comment is required for this action.");
             }
 
+            // <lang>
+            //   <zh-CN>父子状态约束：进入终态前必须无未终态后代，防止父项在子项仍进行时被关闭。</zh-CN>
+            //   <en>Parent-child state constraint: an item must have no non-terminal descendant before it becomes terminal, preventing a parent from being closed while children are still in progress.</en>
+            // </lang>
+            if (IsTerminalStatus(targetStatus) && HasOpenDescendants(item.ItemId))
+            {
+                return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "Item has unfinished child items and cannot be closed.");
+            }
+
             try
             {
                 // <lang>
@@ -765,9 +820,18 @@ FROM @Updated;",
                 //   <en>Confirm the state update only when the batch returns an item code; an empty result consistently means the item is absent or no longer accepts the action, avoiding disclosure of concurrency detail.</en>
                 // </lang>
                 CollaborationItemWriteRow row = rows.Count == 0 ? null : rows[0];
-                return row == null || string.IsNullOrWhiteSpace(row.ItemCode)
-                    ? new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item was not found or cannot accept this action.")
-                    : new CollaborationItemResult(true, row.ItemId, row.ItemCode, normalized.ActionKey, "Collaboration item state updated.");
+                if (row == null || string.IsNullOrWhiteSpace(row.ItemCode))
+                {
+                    return new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item was not found or cannot accept this action.");
+                }
+
+                // <lang>
+                //   <zh-CN>事项状态更新成功后旁路投影待办；投影失败不回滚事项状态。</zh-CN>
+                //   <en>Project the work item as a sidecar after the item state update succeeds; a projection failure does not roll back the item state.</en>
+                // </lang>
+                ProjectWorkItemForAction(normalized.ActionKey, row.ItemCode, item, normalized.OccurredUtc.Value, normalized.ActorName);
+
+                return new CollaborationItemResult(true, row.ItemId, row.ItemCode, normalized.ActionKey, "Collaboration item state updated.");
             }
             catch (Exception)
             {
@@ -779,8 +843,180 @@ FROM @Updated;",
             }
         }
 
+        /// <inheritdoc />
+        public IList<CollaborationItemParticipantInfo> GetParticipants(long itemId)
+        {
+            if (itemId <= 0 || !HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return new List<CollaborationItemParticipantInfo>();
+            }
+
+            try
+            {
+                return context.Database.SqlQuery<CollaborationItemParticipantInfo>(@"
+SELECT
+    [P].[ParticipantId],
+    [P].[ItemId],
+    [P].[UserId],
+    [U].[Name] AS [UserName],
+    [P].[ParticipantRoleKey],
+    [P].[CreatedUtc]
+FROM [dbo].[PortalBiz_CollaborationItemParticipants] AS [P]
+LEFT JOIN [dbo].[Portal_Users] AS [U]
+    ON [U].[UserID] = [P].[UserId]
+WHERE [P].[ItemId] = @ItemId
+ORDER BY [P].[ParticipantId];",
+                    new SqlParameter("@ItemId", itemId)).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<CollaborationItemParticipantInfo>();
+            }
+        }
+
+        /// <inheritdoc />
+        public CollaborationItemParticipantResult AddParticipant(CollaborationItemParticipantCreateRequest request)
+        {
+            if (request == null)
+            {
+                return new CollaborationItemParticipantResult(false, "Participant request is missing.");
+            }
+
+            long itemId = request.ItemId;
+            int userId = request.UserId;
+            string roleKey = NormalizeOptionalText(request.ParticipantRoleKey, 20);
+
+            if (itemId <= 0 || userId <= 0)
+            {
+                return new CollaborationItemParticipantResult(false, "A valid item and user are required.");
+            }
+
+            if (!string.Equals(roleKey, PortalCollaborationItemParticipantRoles.Collaborator, StringComparison.Ordinal) &&
+                !string.Equals(roleKey, PortalCollaborationItemParticipantRoles.Watcher, StringComparison.Ordinal))
+            {
+                return new CollaborationItemParticipantResult(false, "Participant role is not allowed.");
+            }
+
+            if (!HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return new CollaborationItemParticipantResult(false, "Participant schema is unavailable.");
+            }
+
+            // <lang>
+            //   <zh-CN>服务端重新校验操作者授权：发起人、负责人或协同事项管理员方可管理参与人。</zh-CN>
+            //   <en>Revalidate actor authorization on the server: only the initiator, owner, or collaboration-item administrator may manage participants.</en>
+            // </lang>
+            CollaborationItemInfo item = FindItem(itemId);
+            if (item == null)
+            {
+                return new CollaborationItemParticipantResult(false, "Collaboration item was not found.");
+            }
+
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(request.ActorUserId, out actor))
+            {
+                return new CollaborationItemParticipantResult(false, "A signed-in portal user is required.");
+            }
+
+            if (!actor.IsAdministrator &&
+                item.InitiatorUserId != actor.ActorUserId &&
+                !(item.OwnerUserId.HasValue && item.OwnerUserId.Value == actor.ActorUserId))
+            {
+                return new CollaborationItemParticipantResult(false, "The current user is not allowed to manage participants.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>参与人必须是真实用户；重复添加按既有语义拒绝，不覆盖角色。</zh-CN>
+                //   <en>The participant must be a real user; a duplicate add is rejected per existing semantics and does not overwrite the role.</en>
+                // </lang>
+                if (usersDb == null || usersDb.FindUserById(userId) == null)
+                {
+                    return new CollaborationItemParticipantResult(false, "Participant user was not found.");
+                }
+
+                if (IsParticipant(itemId, userId))
+                {
+                    return new CollaborationItemParticipantResult(false, "The user is already a participant.");
+                }
+
+                context.Database.ExecuteSqlCommand(@"
+INSERT INTO [dbo].[PortalBiz_CollaborationItemParticipants]
+    ([ItemId], [UserId], [ParticipantRoleKey], [CreatedUtc], [CreatedBy])
+VALUES
+    (@ItemId, @UserId, @RoleKey, SYSUTCDATETIME(), @CreatedBy);",
+                    new SqlParameter("@ItemId", itemId),
+                    new SqlParameter("@UserId", userId),
+                    new SqlParameter("@RoleKey", roleKey),
+                    new SqlParameter("@CreatedBy", actor.ActorName ?? "system"));
+
+                return new CollaborationItemParticipantResult(true, "Participant added.");
+            }
+            catch (Exception)
+            {
+                return new CollaborationItemParticipantResult(false, "Participant add failed.");
+            }
+        }
+
+        /// <inheritdoc />
+        public CollaborationItemParticipantResult RemoveParticipant(long itemId, int userId, int actorUserId)
+        {
+            if (itemId <= 0 || userId <= 0)
+            {
+                return new CollaborationItemParticipantResult(false, "A valid item and user are required.");
+            }
+
+            if (!HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return new CollaborationItemParticipantResult(false, "Participant schema is unavailable.");
+            }
+
+            CollaborationItemInfo item = FindItem(itemId);
+            if (item == null)
+            {
+                return new CollaborationItemParticipantResult(false, "Collaboration item was not found.");
+            }
+
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(actorUserId, out actor))
+            {
+                return new CollaborationItemParticipantResult(false, "A signed-in portal user is required.");
+            }
+
+            if (!actor.IsAdministrator &&
+                item.InitiatorUserId != actor.ActorUserId &&
+                !(item.OwnerUserId.HasValue && item.OwnerUserId.Value == actor.ActorUserId))
+            {
+                return new CollaborationItemParticipantResult(false, "The current user is not allowed to manage participants.");
+            }
+
+            try
+            {
+                context.Database.ExecuteSqlCommand(@"
+DELETE FROM [dbo].[PortalBiz_CollaborationItemParticipants]
+WHERE [ItemId] = @ItemId AND [UserId] = @UserId;",
+                    new SqlParameter("@ItemId", itemId),
+                    new SqlParameter("@UserId", userId));
+
+                return new CollaborationItemParticipantResult(true, "Participant removed.");
+            }
+            catch (Exception)
+            {
+                return new CollaborationItemParticipantResult(false, "Participant remove failed.");
+            }
+        }
+
         private IList<CollaborationItemInfo> QueryItems(string whereClause, int take, params SqlParameter[] parameters)
         {
+            // <lang>
+            //   <zh-CN>父项列是 P47.1 的部署级迁移；迁移未执行时列可能不存在，因此用元数据探测选择实际列或 NULL 投影，避免旧库上的读取失败。</zh-CN>
+            //   <en>The parent column is a P47.1 deployment-level migration; the column may be absent before migration runs, so probe metadata to select either the real column or a NULL projection and avoid read failures on old databases.</en>
+            // </lang>
+            string parentColumn = HasColumn(ItemTableName, "ParentItemId")
+                ? "    [Item].[ParentItemId]\n"
+                : "    CAST(NULL AS BIGINT) AS [ParentItemId]\n";
+
             string sql = @"
 SELECT TOP (@Take)
     [Item].[ItemId],
@@ -811,8 +1047,8 @@ SELECT TOP (@Take)
     [Item].[ClosedUtc],
     [Item].[LastActionUtc],
     [Item].[LastActionByUserId],
-    [Item].[LastActionComment]
-FROM [dbo].[PortalBiz_CollaborationItems] AS [Item]
+    [Item].[LastActionComment],
+" + parentColumn + @"FROM [dbo].[PortalBiz_CollaborationItems] AS [Item]
 LEFT JOIN [dbo].[Portal_Users] AS [Initiator]
     ON [Initiator].[UserID] = [Item].[InitiatorUserId]
 LEFT JOIN [dbo].[Portal_Users] AS [Owner]
@@ -911,13 +1147,53 @@ WHERE [Item].[ItemId] = @ItemId",
             }
         }
 
-        private static bool CanParticipate(CollaborationItemInfo item, CollaborationItemActorAuthorization actor)
+        private bool CanParticipate(CollaborationItemInfo item, CollaborationItemActorAuthorization actor)
         {
-            return item != null && actor != null &&
-                   (actor.IsAdministrator ||
-                    item.InitiatorUserId == actor.ActorUserId ||
-                    (item.OwnerUserId.HasValue && item.OwnerUserId.Value == actor.ActorUserId) ||
-                    HasOwnerRolePermission(item, actor));
+            if (item == null || actor == null)
+            {
+                return false;
+            }
+
+            if (actor.IsAdministrator ||
+                item.InitiatorUserId == actor.ActorUserId ||
+                (item.OwnerUserId.HasValue && item.OwnerUserId.Value == actor.ActorUserId) ||
+                HasOwnerRolePermission(item, actor))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>参与人集合成员（协办/关注）也可参与；发起人与负责人已在上面短路，其余角色查询参与人表。</zh-CN>
+            //   <en>Participant-set members (Collaborator/Watcher) may also participate; the initiator and owner short-circuit above, while other roles check the participant table.</en>
+            // </lang>
+            return IsParticipant(item.ItemId, actor.ActorUserId);
+        }
+
+        // <lang>
+        //   <zh-CN>判断用户是否属于事项的参与人集合（协办/关注）。</zh-CN>
+        //   <en>Determines whether a user belongs to the item participant set (Collaborator/Watcher).</en>
+        // </lang>
+        private bool IsParticipant(long itemId, int userId)
+        {
+            if (itemId <= 0 || userId <= 0 || !HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return false;
+            }
+
+            try
+            {
+                return context.Database.SqlQuery<int>(@"
+SELECT CASE WHEN EXISTS (
+    SELECT 1 FROM [dbo].[PortalBiz_CollaborationItemParticipants]
+    WHERE [ItemId] = @ItemId AND [UserId] = @UserId
+) THEN 1 ELSE 0 END;",
+                    new SqlParameter("@ItemId", itemId),
+                    new SqlParameter("@UserId", userId)).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private static bool CanApplyAction(CollaborationItemInfo item, string actionKey, CollaborationItemActorAuthorization actor)
@@ -967,6 +1243,211 @@ WHERE [Item].[ItemId] = @ItemId",
                    string.Equals(visibilityScope, PortalCollaborationItemVisibilityScopes.Administrators, StringComparison.Ordinal);
         }
 
+        // <lang>
+        //   <zh-CN>判断事项状态是否为终态；终态事项不得再作为父项，也不得作为子项遗留。</zh-CN>
+        //   <en>Determines whether an item status is terminal; a terminal item can no longer be a parent nor remain as a child.</en>
+        // </lang>
+        private static bool IsTerminalStatus(string status)
+        {
+            return string.Equals(status, PortalCollaborationItemStatuses.Completed, StringComparison.Ordinal) ||
+                   string.Equals(status, PortalCollaborationItemStatuses.Rejected, StringComparison.Ordinal) ||
+                   string.Equals(status, PortalCollaborationItemStatuses.Cancelled, StringComparison.Ordinal) ||
+                   string.Equals(status, PortalCollaborationItemStatuses.Closed, StringComparison.Ordinal);
+        }
+
+        // <lang>
+        //   <zh-CN>沿父链递归计算事项深度（顶层为 1）；迁移未执行或读取失败时保守返回 1，不阻断单层创建。</zh-CN>
+        //   <en>Recursively computes the item depth along the parent chain (top level is 1); conservatively returns 1 when the migration is absent or the read fails, so single-level creation is not blocked.</en>
+        // </lang>
+        private int GetItemDepth(long itemId)
+        {
+            if (itemId <= 0 || !HasColumn(ItemTableName, "ParentItemId"))
+            {
+                return 1;
+            }
+
+            try
+            {
+                return context.Database.SqlQuery<int>(@"
+;WITH [ParentChain] AS
+(
+    SELECT [ItemId], [ParentItemId], 1 AS [Depth]
+    FROM [dbo].[PortalBiz_CollaborationItems]
+    WHERE [ItemId] = @ItemId
+    UNION ALL
+    SELECT [Child].[ItemId], [Child].[ParentItemId], [ParentChain].[Depth] + 1
+    FROM [dbo].[PortalBiz_CollaborationItems] AS [Child]
+    INNER JOIN [ParentChain] ON [Child].[ItemId] = [ParentChain].[ParentItemId]
+    WHERE [ParentChain].[Depth] < @MaxDepth
+)
+SELECT MAX([Depth]) FROM [ParentChain];",
+                    new SqlParameter("@ItemId", itemId),
+                    new SqlParameter("@MaxDepth", MaxHierarchyDepth)).Single();
+            }
+            catch (Exception)
+            {
+                return 1;
+            }
+        }
+
+        // <lang>
+        //   <zh-CN>判断事项是否仍有未终态的后代；父项进入终态前必须无未终态后代。</zh-CN>
+        //   <en>Determines whether an item still has non-terminal descendants; an item must have no non-terminal descendant before it becomes terminal.</en>
+        // </lang>
+        private bool HasOpenDescendants(long itemId)
+        {
+            if (itemId <= 0 || !HasColumn(ItemTableName, "ParentItemId"))
+            {
+                return false;
+            }
+
+            try
+            {
+                return context.Database.SqlQuery<int>(@"
+;WITH [Descendants] AS
+(
+    SELECT [ItemId], [ParentItemId], [ItemStatus]
+    FROM [dbo].[PortalBiz_CollaborationItems]
+    WHERE [ParentItemId] = @ItemId
+    UNION ALL
+    SELECT [Child].[ItemId], [Child].[ParentItemId], [Child].[ItemStatus]
+    FROM [dbo].[PortalBiz_CollaborationItems] AS [Child]
+    INNER JOIN [Descendants] ON [Child].[ParentItemId] = [Descendants].[ItemId]
+)
+SELECT CASE WHEN EXISTS (
+    SELECT 1 FROM [Descendants]
+    WHERE [ItemStatus] NOT IN (N'Completed', N'Rejected', N'Cancelled', N'Closed')
+) THEN 1 ELSE 0 END;",
+                    new SqlParameter("@ItemId", itemId)).Single() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        // <lang>
+        //   <zh-CN>确保事项存在一条活跃待办投影（幂等）：已存在则更新分派与标题，不存在则插入 Open。待办是派生态，写入失败只记诊断、不回滚事项事实。</zh-CN>
+        //   <en>Ensures one active work-item projection for the item (idempotent): updates assignment and title when present, otherwise inserts Open. Work items are derived, so a write failure only logs diagnostics and never rolls back the item fact.</en>
+        // </lang>
+        private void ProjectWorkItemEnsure(string itemCode, string title, string summary, int? assignedUserId, string assignedRoleKey, DateTime? dueUtc, DateTime occurredUtc, string actorName)
+        {
+            if (string.IsNullOrWhiteSpace(itemCode) || !HasTable("PortalBiz_WorkItems"))
+            {
+                return;
+            }
+
+            try
+            {
+                context.Database.ExecuteSqlCommand(@"
+IF EXISTS (SELECT 1 FROM [dbo].[PortalBiz_WorkItems] WHERE [BusinessKind] = @Kind AND [BusinessId] = @Id AND [WorkItemStatus] IN (N'Open', N'InProgress'))
+BEGIN
+    UPDATE [dbo].[PortalBiz_WorkItems]
+    SET [Title] = @Title,
+        [Summary] = @Summary,
+        [AssignedUserId] = @AssignedUserId,
+        [AssignedRoleKey] = @AssignedRoleKey,
+        [DueUtc] = @DueUtc
+    WHERE [BusinessKind] = @Kind AND [BusinessId] = @Id AND [WorkItemStatus] IN (N'Open', N'InProgress');
+END
+ELSE
+BEGIN
+    INSERT INTO [dbo].[PortalBiz_WorkItems]
+        ([BusinessKind], [BusinessId], [Title], [Summary], [WorkItemStatus], [AssignedUserId], [AssignedRoleKey], [CreatedUtc], [CreatedBy], [DueUtc])
+    VALUES
+        (@Kind, @Id, @Title, @Summary, N'Open', @AssignedUserId, @AssignedRoleKey, @OccurredUtc, @ActorName, @DueUtc);
+END",
+                    new SqlParameter("@Kind", PortalWorkItemBusinessKinds.CollaborationItem),
+                    new SqlParameter("@Id", itemCode),
+                    new SqlParameter("@Title", title ?? string.Empty),
+                    CreateNullableStringParameter("@Summary", summary),
+                    CreateNullableIntParameter("@AssignedUserId", assignedUserId),
+                    CreateNullableStringParameter("@AssignedRoleKey", assignedRoleKey),
+                    CreateNullableDateTimeParameter("@DueUtc", dueUtc),
+                    new SqlParameter("@OccurredUtc", occurredUtc),
+                    new SqlParameter("@ActorName", actorName ?? "system"));
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>待办是派生态：投影失败静默、不回滚事项事实；诊断由调用页面按上下文记录，数据层不依赖 Web 层日志组件。</zh-CN>
+                //   <en>Work items are derived: a projection failure is silent and never rolls back the item fact; the calling page records diagnostics by context because the data layer does not depend on web-layer logging.</en>
+                // </lang>
+            }
+        }
+
+        // <lang>
+        //   <zh-CN>把事项状态变化投影到活跃待办：更新待办状态，并在终态时写入完成时间与办理人。待办是派生态，写入失败只记诊断、不回滚事项事实。</zh-CN>
+        //   <en>Projects an item state change onto the active work item: updates the work-item status and writes completion time and actor for terminal states. Work items are derived, so a write failure only logs diagnostics and never rolls back the item fact.</en>
+        // </lang>
+        private void ProjectWorkItemStateChange(string itemCode, string targetStatus, DateTime occurredUtc, string actorName)
+        {
+            if (string.IsNullOrWhiteSpace(itemCode) || !HasTable("PortalBiz_WorkItems"))
+            {
+                return;
+            }
+
+            try
+            {
+                context.Database.ExecuteSqlCommand(@"
+UPDATE [dbo].[PortalBiz_WorkItems]
+SET [WorkItemStatus] = @TargetStatus,
+    [CompletedUtc] = CASE WHEN @TargetStatus IN (N'Completed', N'Cancelled') THEN @OccurredUtc ELSE NULL END,
+    [CompletedBy] = CASE WHEN @TargetStatus IN (N'Completed', N'Cancelled') THEN @ActorName ELSE NULL END
+WHERE [BusinessKind] = @Kind
+  AND [BusinessId] = @Id
+  AND [WorkItemStatus] IN (N'Open', N'InProgress');",
+                    new SqlParameter("@Kind", PortalWorkItemBusinessKinds.CollaborationItem),
+                    new SqlParameter("@Id", itemCode),
+                    new SqlParameter("@TargetStatus", targetStatus),
+                    new SqlParameter("@OccurredUtc", occurredUtc),
+                    new SqlParameter("@ActorName", actorName ?? "system"));
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>待办是派生态：投影失败静默、不回滚事项事实；诊断由调用页面按上下文记录，数据层不依赖 Web 层日志组件。</zh-CN>
+                //   <en>Work items are derived: a projection failure is silent and never rolls back the item fact; the calling page records diagnostics by context because the data layer does not depend on web-layer logging.</en>
+                // </lang>
+            }
+        }
+
+        // <lang>
+        //   <zh-CN>按事项状态动作把结果投影到待办：处理动作推进待办状态，退回动作把待办切回发起人，提交/重新提交把待办切回负责人。</zh-CN>
+        //   <en>Projects an item state action onto the work item: handling actions advance the work-item status, Return reassigns it back to the initiator, and Submit/Resubmit reassign it to the owner.</en>
+        // </lang>
+        private void ProjectWorkItemForAction(string actionKey, string itemCode, CollaborationItemInfo item, DateTime occurredUtc, string actorName)
+        {
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal))
+            {
+                ProjectWorkItemStateChange(itemCode, "InProgress", occurredUtc, actorName);
+                return;
+            }
+
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Complete, StringComparison.Ordinal) ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal) ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Close, StringComparison.Ordinal))
+            {
+                ProjectWorkItemStateChange(itemCode, "Completed", occurredUtc, actorName);
+                return;
+            }
+
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Cancel, StringComparison.Ordinal))
+            {
+                ProjectWorkItemStateChange(itemCode, "Cancelled", occurredUtc, actorName);
+                return;
+            }
+
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal))
+            {
+                ProjectWorkItemEnsure(itemCode, item.Title, item.Summary, item.InitiatorUserId, null, item.DueUtc, occurredUtc, actorName);
+                return;
+            }
+
+            // Submit / Resubmit：待办切回负责人。
+            ProjectWorkItemEnsure(itemCode, item.Title, item.Summary, item.OwnerUserId, item.OwnerRoleKey, item.DueUtc, occurredUtc, actorName);
+        }
+
         private static CollaborationItemCreateRequest NormalizeCreateRequest(CollaborationItemCreateRequest request)
         {
             request = request ?? new CollaborationItemCreateRequest();
@@ -985,7 +1466,8 @@ WHERE [Item].[ItemId] = @ItemId",
                 PriorityKey = NormalizePriority(request.PriorityKey),
                 DueUtc = request.DueUtc,
                 SubmittedUtc = submittedUtc,
-                SubmittedBy = string.IsNullOrWhiteSpace(request.SubmittedBy) ? "system" : NormalizeText(request.SubmittedBy, 100)
+                SubmittedBy = string.IsNullOrWhiteSpace(request.SubmittedBy) ? "system" : NormalizeText(request.SubmittedBy, 100),
+                ParentItemId = request.ParentItemId.HasValue && request.ParentItemId.Value > 0 ? request.ParentItemId : null
             };
         }
 
@@ -1114,6 +1596,11 @@ WHERE [Item].[ItemId] = @ItemId",
         }
 
         private static SqlParameter CreateNullableIntParameter(string name, int? value)
+        {
+            return new SqlParameter(name, value.HasValue ? (object)value.Value : DBNull.Value);
+        }
+
+        private static SqlParameter CreateNullableLongParameter(string name, long? value)
         {
             return new SqlParameter(name, value.HasValue ? (object)value.Value : DBNull.Value);
         }

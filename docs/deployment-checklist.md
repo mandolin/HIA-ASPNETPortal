@@ -45,6 +45,8 @@
 - [ ] 如使用 `Portal_LoadData.sql` 初始化数据库，默认 admin 已在开放访问前完成替换、禁用、删除或迁移，并记录处理结果。
 - [ ] `Portal_UserCredentials`、`Portal_UserSecurityStates` 和 `PortalCfg_RolePermissions` 的执行状态已记录。
 - [ ] `PortalCfg_RolePermissions` 已包含 `Admins` 兼容权限映射；后续非管理员权限映射需有审计或变更记录。
+- [ ] **W45 起**：`PortalCfg_RolePermissions.sql` 中新增的 `EnterpriseCapability.*` 分层键种子映射**必须在部署时执行**——该脚本是部署动作、应用启动**不会**自动执行；未执行时新键对非管理员完全不可用（仅 `Admins` 因管理员短路可用）。
+- [ ] **W47 起**：`PortalBiz_CollaborationItems.sql`（为父项列 `ParentItemId` 幂等补列）与 `PortalBiz_CollaborationItemParticipants.sql`（新表）迁移脚本**必须在部署时执行**；两者均幂等（`IF NOT EXISTS` / `IF COL_LENGTH ... IS NULL`），不影响既有数据。
 - [ ] `machineKey`、Cookie `Secure` / `SameSite` 和 HTTPS 策略已按目标环境确认；真实密钥不得进入仓库。
 
 ## Profile 分层

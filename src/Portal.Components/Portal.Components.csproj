@@ -119,6 +119,9 @@
     <Compile Include="CollaborationItemEventInfo.cs" />
     <Compile Include="CollaborationItemInfo.cs" />
     <Compile Include="CollaborationItemResult.cs" />
+    <Compile Include="CollaborationItemParticipantInfo.cs" />
+    <Compile Include="CollaborationItemParticipantResult.cs" />
+    <Compile Include="CollaborationItemParticipantCreateRequest.cs" />
     <Compile Include="ReferenceDataItem.cs" />
     <Compile Include="EmployeeProfileConfirmationRequest.cs" />
     <Compile Include="EmployeeProfileConfirmationResult.cs" />
@@ -162,6 +165,7 @@
     <Compile Include="PortalCollaborationItemEventTypes.cs" />
     <Compile Include="PortalCollaborationItemStatuses.cs" />
     <Compile Include="PortalCollaborationItemVisibilityScopes.cs" />
+    <Compile Include="PortalCollaborationItemParticipantRoles.cs" />
     <Compile Include="PortalDatabaseProfile.cs" />
     <Compile Include="PortalEmployeeStatuses.cs" />
     <Compile Include="PortalHiaBoundaryContracts.cs" />

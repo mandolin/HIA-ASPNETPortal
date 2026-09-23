@@ -78,5 +78,8 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary><lang><zh-CN>最近办理意见。</zh-CN><en>Latest handling comment.</en></lang></summary>
         public string LastActionComment { get; set; }
+
+        /// <summary><lang><zh-CN>可选父事项标识；空表示顶层事项。</zh-CN><en>Optional parent item identifier; null marks a top-level item.</en></lang></summary>
+        public long? ParentItemId { get; set; }
     }
 }

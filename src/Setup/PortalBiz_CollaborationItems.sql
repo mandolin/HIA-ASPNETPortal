@@ -196,3 +196,34 @@ BEGIN
     WHERE [OwnerRoleKey] IS NOT NULL
 END
 GO
+
+-- <lang>
+--   <zh-CN>P47.1 父项列：为协同事项补充父子层级（邻接表 + 自引用外键）。补列幂等，不改写既有列、约束或索引；父项为空表示顶层事项。</zh-CN>
+--   <en>P47.1 parent column: adds parent-child hierarchy (adjacency list with a self-referencing foreign key) to collaboration items. The column addition is idempotent and rewrites no existing column, constraint, or index; a null parent marks a top-level item.</en>
+-- </lang>
+IF COL_LENGTH(N'[dbo].[PortalBiz_CollaborationItems]', N'ParentItemId') IS NULL
+BEGIN
+    -- <lang>
+    --   <zh-CN>父项必须指向已存在事项（外键强制），且不得指向自身（禁自环的最简数据库层）；更深层的环检测由应用层递归校验承担。</zh-CN>
+    --   <en>A parent must reference an existing item (enforced by the foreign key) and must not reference itself (the simplest database-level cycle guard); deeper cycle detection belongs to application-layer recursive validation.</en>
+    -- </lang>
+    ALTER TABLE [dbo].[PortalBiz_CollaborationItems]
+    ADD [ParentItemId] BIGINT NULL
+        CONSTRAINT [FK_PortalBiz_CollaborationItems_Parent]
+            FOREIGN KEY REFERENCES [dbo].[PortalBiz_CollaborationItems] ([ItemId]),
+        CONSTRAINT [CK_PortalBiz_CollaborationItems_ParentNotSelf]
+            CHECK ([ParentItemId] IS NULL OR [ParentItemId] <> [ItemId]);
+END
+GO
+
+-- <lang>
+--   <zh-CN>父项过滤索引服务子任务聚合，只覆盖有父项的行。</zh-CN>
+--   <en>The parent filtered index serves subtask aggregation and covers only rows that have a parent.</en>
+-- </lang>
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_PortalBiz_CollaborationItems_Parent' AND object_id = OBJECT_ID(N'[dbo].[PortalBiz_CollaborationItems]'))
+BEGIN
+    CREATE INDEX [IX_PortalBiz_CollaborationItems_Parent]
+    ON [dbo].[PortalBiz_CollaborationItems] ([ParentItemId], [ItemStatus], [LastActionUtc] DESC)
+    WHERE [ParentItemId] IS NOT NULL
+END
+GO
