@@ -674,6 +674,186 @@ namespace Resources {
         ///   <en>Looks up a localized string similar to: System Health</en>
         /// </lang>
         /// </summary>
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Capability Permissions</zh-CN>
+        ///   <en>Looks up a localized string similar to: Capability Permissions</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_Title {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_Title", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Read-only view of role-to-permission-key mappings, grouped by enterprise capability layer. Granting is not available here.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Read-only view of role-to-permission-key mappings, grouped by enterprise capability layer. Granting is not available here.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_Subtitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Legend: granted / not granted / disabled (mapping exists but is not effective).</zh-CN>
+        ///   <en>Looks up a localized string similar to: Legend: granted / not granted / disabled (mapping exists but is not effective).</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_Legend {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_Legend", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The permission mapping table is unavailable or holds no mapping.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The permission mapping table is unavailable or holds no mapping.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_Unavailable {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_Unavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No permission definition is registered.</zh-CN>
+        ///   <en>Looks up a localized string similar to: No permission definition is registered.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_EmptyDefinitions {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_EmptyDefinitions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Permission key</zh-CN>
+        ///   <en>Looks up a localized string similar to: Permission key</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_ColumnPermissionKey {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_ColumnPermissionKey", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Foundation Core</zh-CN>
+        ///   <en>Looks up a localized string similar to: Foundation Core</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_LayerFoundation {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_LayerFoundation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enterprise Basic Business</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enterprise Basic Business</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_LayerBasicBusiness {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_LayerBasicBusiness", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Platform Capability</zh-CN>
+        ///   <en>Looks up a localized string similar to: Platform Capability</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_LayerPlatform {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_LayerPlatform", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：✓</zh-CN>
+        ///   <en>Looks up a localized string similar to: ✓</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_MarkGranted {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_MarkGranted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：—</zh-CN>
+        ///   <en>Looks up a localized string similar to: —</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_MarkNotGranted {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_MarkNotGranted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Disabled</zh-CN>
+        ///   <en>Looks up a localized string similar to: Disabled</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_MarkDisabled {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_MarkDisabled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Granted</zh-CN>
+        ///   <en>Looks up a localized string similar to: Granted</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_StateGranted {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_StateGranted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Not granted</zh-CN>
+        ///   <en>Looks up a localized string similar to: Not granted</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_StateNotGranted {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_StateNotGranted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Mapping exists but is disabled</zh-CN>
+        ///   <en>Looks up a localized string similar to: Mapping exists but is disabled</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CapabilityPermissionMatrix_StateDisabled {
+            get {
+                return ResourceManager.GetString("Admin_CapabilityPermissionMatrix_StateDisabled", resourceCulture);
+            }
+        }
+
         internal static string Admin_SystemHealth_Title {
             get {
                 return ResourceManager.GetString("Admin_SystemHealth_Title", resourceCulture);

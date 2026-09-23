@@ -153,6 +153,7 @@
     <Compile Include="PortalRoles.cs" />
     <Compile Include="PortalPermissions.cs" />
     <Compile Include="RolePermissionEntry.cs" />
+    <Compile Include="PortalCapabilityPermissionMatrixRenderer.cs" />
     <Compile Include="PortalNavigationRegistry.cs" />
     <Compile Include="PortalNavigationVisibilityPolicy.cs" />
     <Compile Include="PortalReferenceDataSets.cs" />

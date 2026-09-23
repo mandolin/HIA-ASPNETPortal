@@ -219,6 +219,51 @@
   <data name="Signin_EmailOrName" xml:space="preserve">
       <value>邮箱、用户名或员工号</value>
   </data>
+  <data name="Admin_CapabilityPermissionMatrix_Title" xml:space="preserve">
+    <value>能力权限</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Subtitle" xml:space="preserve">
+    <value>按企业能力分层展示角色与权限键映射的只读视图；此处不提供在线赋权。</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Legend" xml:space="preserve">
+    <value>图例：已授权 ／ 未授权 ／ 已禁用（映射存在但未生效）。</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Unavailable" xml:space="preserve">
+    <value>权限映射表不可用，或尚未配置任何角色映射。</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_EmptyDefinitions" xml:space="preserve">
+    <value>暂无权限定义。</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_ColumnPermissionKey" xml:space="preserve">
+    <value>权限键</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerFoundation" xml:space="preserve">
+    <value>基础核心（Foundation Core）</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerBasicBusiness" xml:space="preserve">
+    <value>企业基础业务（Enterprise Basic Business）</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerPlatform" xml:space="preserve">
+    <value>平台能力（Platform Capability）</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkGranted" xml:space="preserve">
+    <value>✓</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkNotGranted" xml:space="preserve">
+    <value>—</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkDisabled" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateGranted" xml:space="preserve">
+    <value>已授权</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateNotGranted" xml:space="preserve">
+    <value>未授权</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateDisabled" xml:space="preserve">
+    <value>映射存在但已禁用</value>
+  </data>
   <data name="Admin_SystemHealth_Title" xml:space="preserve">
     <value>系统健康状态</value>
   </data>

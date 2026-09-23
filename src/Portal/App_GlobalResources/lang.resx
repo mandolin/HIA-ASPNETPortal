@@ -219,6 +219,51 @@
   <data name="Signin_rememberLogin" xml:space="preserve">
     <value>Remember Login</value>
   </data>
+  <data name="Admin_CapabilityPermissionMatrix_Title" xml:space="preserve">
+    <value>Capability Permissions</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Subtitle" xml:space="preserve">
+    <value>Read-only view of role-to-permission-key mappings, grouped by enterprise capability layer. Granting is not available here.</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Legend" xml:space="preserve">
+    <value>Legend: granted / not granted / disabled (mapping exists but is not effective).</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Unavailable" xml:space="preserve">
+    <value>The permission mapping table is unavailable or holds no mapping.</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_EmptyDefinitions" xml:space="preserve">
+    <value>No permission definition is registered.</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_ColumnPermissionKey" xml:space="preserve">
+    <value>Permission key</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerFoundation" xml:space="preserve">
+    <value>Foundation Core</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerBasicBusiness" xml:space="preserve">
+    <value>Enterprise Basic Business</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerPlatform" xml:space="preserve">
+    <value>Platform Capability</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkGranted" xml:space="preserve">
+    <value>✓</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkNotGranted" xml:space="preserve">
+    <value>—</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkDisabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateGranted" xml:space="preserve">
+    <value>Granted</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateNotGranted" xml:space="preserve">
+    <value>Not granted</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateDisabled" xml:space="preserve">
+    <value>Mapping exists but is disabled</value>
+  </data>
   <data name="Admin_SystemHealth_Title" xml:space="preserve">
     <value>System Health</value>
   </data>

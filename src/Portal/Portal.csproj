@@ -118,6 +118,7 @@
     <Content Include="Admin\EmployeeProfileCorrectionRequests.aspx" />
     <Content Include="Admin\OperationAudits.aspx" />
     <Content Include="Admin\OrganizationUnitEdit.aspx" />
+    <Content Include="Admin\CapabilityPermissionMatrix.aspx" />
     <Content Include="Admin\SystemHealth.aspx" />
     <Content Include="Admin\ThemeSettings.aspx" />
     <Content Include="Admin\TabLayout.aspx" />
@@ -380,6 +381,13 @@
     </Compile>
     <Compile Include="Admin\OrganizationUnitEdit.aspx.designer.cs">
       <DependentUpon>OrganizationUnitEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\CapabilityPermissionMatrix.aspx.cs">
+      <DependentUpon>CapabilityPermissionMatrix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CapabilityPermissionMatrix.aspx.designer.cs">
+      <DependentUpon>CapabilityPermissionMatrix.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\SystemHealth.aspx.cs">
       <DependentUpon>SystemHealth.aspx</DependentUpon>

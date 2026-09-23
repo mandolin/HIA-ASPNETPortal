@@ -62,6 +62,7 @@
     <Compile Include="PortalNavigationEntryDisplayNameTests.cs" />
     <Compile Include="PortalNavigationRendererGroupTests.cs" />
     <Compile Include="PortalNavigationTabGateTests.cs" />
+    <Compile Include="PortalCapabilityPermissionMatrixTests.cs" />
     <Compile Include="PortalRoleParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
