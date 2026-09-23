@@ -161,6 +161,8 @@
     <Compile Include="PortalNavigationVisibilityPolicy.cs" />
     <Compile Include="PortalReferenceDataSets.cs" />
     <Compile Include="PortalBusinessApplicationStatuses.cs" />
+    <Compile Include="PortalCapabilityRegistry.cs" />
+    <Compile Include="PortalCapabilityRoles.cs" />
     <Compile Include="PortalCollaborationItemActions.cs" />
     <Compile Include="PortalCollaborationItemEventTypes.cs" />
     <Compile Include="PortalCollaborationItemStatuses.cs" />

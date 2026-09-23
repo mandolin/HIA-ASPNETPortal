@@ -29,7 +29,9 @@ namespace ASPNET.StarterKit.Portal
             string version,
             string minimumPortalVersion,
             string desktopEntry,
-            IList<string> resources)
+            IList<string> resources,
+            string capabilityId,
+            string capabilityRole)
         {
             DirectoryName = directoryName ?? string.Empty;
             PackageId = packageId ?? string.Empty;
@@ -38,6 +40,8 @@ namespace ASPNET.StarterKit.Portal
             MinimumPortalVersion = minimumPortalVersion ?? string.Empty;
             DesktopEntry = desktopEntry ?? string.Empty;
             Resources = new List<string>(resources ?? new List<string>()).AsReadOnly();
+            CapabilityId = capabilityId ?? string.Empty;
+            CapabilityRole = capabilityRole ?? string.Empty;
         }
 
         /// <summary>
@@ -81,6 +85,22 @@ namespace ASPNET.StarterKit.Portal
         /// Declared static resources located inside the package directory.
         /// </summary>
         public IList<string> Resources { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>包声明的能力键；未声明能力时为稳定空文本。</zh-CN>
+        ///   <en>Capability key declared by the package; a stable empty string when no capability is declared.</en>
+        /// </lang>
+        /// </summary>
+        public string CapabilityId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>包在该能力中的角色；未声明能力时为稳定空文本。</zh-CN>
+        ///   <en>Role of the package within the capability; a stable empty string when no capability is declared.</en>
+        /// </lang>
+        /// </summary>
+        public string CapabilityRole { get; private set; }
     }
 
     /// <summary>
@@ -268,7 +288,7 @@ namespace ASPNET.StarterKit.Portal
         //   <zh-CN>仅接受当前受控 manifest schema；版本不匹配时整包不会进入可信目录，不能用宽松解析猜测未来字段语义。</zh-CN>
         //   <en>Accept only the current controlled manifest schema; a version mismatch keeps the whole package out of the trusted catalog rather than using permissive parsing to guess future field semantics.</en>
         // </lang>
-        private const int ManifestSchemaVersion = 1;
+        private const int ManifestSchemaVersion = 2;
 
         // <lang>
         //   <zh-CN>模块发现只能从应用内固定虚拟根开始；manifest、目录名或请求值都不能替换此根。</zh-CN>
@@ -905,6 +925,37 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>资源列表先完整验证后才形成不可变包快照；单个越界、缺失或禁止扩展资源会拒绝整包，而不是悄悄丢弃声明。</zh-CN>
                 //   <en>Validate the resource list completely before forming the immutable package snapshot; one escaping, missing, or prohibited-extension resource rejects the whole package instead of silently dropping the declaration.</en>
                 // </lang>
+                // <lang>
+                //   <zh-CN>P47.3：可选 capability 段声明模块的能力归属与角色；未声明时保持空值（Unclassified），声明则能力键必须能解析到权威词表且角色合法。</zh-CN>
+                //   <en>P47.3: the optional capability section declares the module's capability and role; empty values remain when absent (Unclassified), while a declaration must resolve in the authority registry with a valid role.</en>
+                // </lang>
+                string capabilityId = string.Empty;
+                string capabilityRole = string.Empty;
+                JObject capability = manifest["capability"] as JObject;
+                if (capability != null)
+                {
+                    capabilityId = ReadOptionalString(capability, "capabilityId", 100);
+                    capabilityRole = ReadOptionalString(capability, "role", 40);
+                    if (string.IsNullOrWhiteSpace(capabilityId) || string.IsNullOrWhiteSpace(capabilityRole))
+                    {
+                        reason = "Module manifest capability is invalid.";
+                        return false;
+                    }
+
+                    PortalCapabilityDefinition definition;
+                    if (!PortalCapabilityRegistry.TryGet(capabilityId, out definition))
+                    {
+                        reason = "Module manifest capability is not registered.";
+                        return false;
+                    }
+
+                    if (!IsValidCapabilityRole(capabilityRole))
+                    {
+                        reason = "Module manifest capability role is invalid.";
+                        return false;
+                    }
+                }
+
                 IList<string> resources = ReadAndValidateResources(manifest, packagePath);
                 package = new PortalModulePackage(
                     directoryName,
@@ -913,7 +964,9 @@ namespace ASPNET.StarterKit.Portal
                     version,
                     minimumPortalVersion,
                     normalizedEntry,
-                    resources);
+                    resources,
+                    capabilityId,
+                    capabilityRole);
                 return true;
             }
             catch (Exception exception) when (
@@ -942,11 +995,30 @@ namespace ASPNET.StarterKit.Portal
         private static bool IsSchemaVersionSupported(JObject manifest)
         {
             // <lang>
-            //   <zh-CN>版本字段必须存在、是 JSON 整数且精确等于当前版本；缺失、字符串数值或未来版本均不能通过宽松兼容解释。</zh-CN>
-            //   <en>The version field must exist, be a JSON integer, and equal the current version exactly; missing values, numeric strings, and future versions cannot pass through permissive compatibility interpretation.</en>
+            //   <zh-CN>版本字段必须存在且为 JSON 整数；当前支持版本 1（无 capability 段）与版本 2（可选 capability 段），未来版本仍按严格拒绝处理。</zh-CN>
+            //   <en>The version field must exist and be a JSON integer; versions 1 (no capability section) and 2 (optional capability section) are supported, while future versions are still rejected strictly.</en>
             // </lang>
             JToken token = manifest["schemaVersion"];
-            return token != null && token.Type == JTokenType.Integer && token.Value<int>() == ManifestSchemaVersion;
+            if (token == null || token.Type != JTokenType.Integer)
+            {
+                return false;
+            }
+
+            int version = token.Value<int>();
+            return version == 1 || version == ManifestSchemaVersion;
+        }
+
+        // <lang>
+        //   <zh-CN>判断能力角色是否属于封闭的五值词表。</zh-CN>
+        //   <en>Determines whether a capability role belongs to the closed five-value vocabulary.</en>
+        // </lang>
+        private static bool IsValidCapabilityRole(string role)
+        {
+            return string.Equals(role, PortalCapabilityRoles.Primary, StringComparison.Ordinal) ||
+                   string.Equals(role, PortalCapabilityRoles.Contributor, StringComparison.Ordinal) ||
+                   string.Equals(role, PortalCapabilityRoles.Projection, StringComparison.Ordinal) ||
+                   string.Equals(role, PortalCapabilityRoles.Adapter, StringComparison.Ordinal) ||
+                   string.Equals(role, PortalCapabilityRoles.Block, StringComparison.Ordinal);
         }
 
         /// <summary>

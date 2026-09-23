@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "packageId": "HIA.EnterpriseCapabilityWorkbench",
   "displayName": "企业能力工作台 / Enterprise Capability Workbench",
   "version": "1.0.0",
@@ -7,5 +7,9 @@
   "desktopEntry": "DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
   "resources": [
     "Styles/EnterpriseCapabilityWorkbench.css"
-  ]
+  ],
+  "capability": {
+    "capabilityId": "BasicBusiness.Collaboration",
+    "role": "Primary"
+  }
 }
