@@ -736,6 +736,8 @@ namespace ASPNET.StarterKit.Portal
             //   <en>P45.5 Step3 aggregation entry: registers the capability permission matrix as a formal entry inside the Admin.Capability group so the existing renderer aggregates it into the action areas of capability-related pages without introducing a new rendering path. Its dependency is the EnterpriseCapability.View key added by P45.5; visibility only expresses display, while the page itself remains responsible for its own permission gate.</en>
             //   <zh-CN>该条目刻意**不声明角色依赖**：入口可见性应由权限键决定，这样将来把 View 键授予非管理员角色时入口会随之出现，而不会被额外的角色条件挡住。</zh-CN>
             //   <en>This entry deliberately declares no role dependency: entry visibility should be decided by the permission key alone, so granting the View key to a non-administrator role later makes the entry appear instead of being blocked by an extra role condition.</en>
+            //   <zh-CN>排序值取 205：动作区默认只呈现同族前 4 条，本入口若排在能力族既有入口（220 及以上）之后会被上限整条截断、几乎不可见，因此置于族内靠前位置；这是运行期截图发现并按实际呈现修正的结果。</zh-CN>
+            //   <en>The sort value is 205 because the action area shows only the first four same-group entries; an entry placed after the existing capability entries (220 and above) would be truncated away and stay effectively invisible, so it sits near the front of the group. This was found and corrected through runtime screenshot evidence.</en>
             // </lang>
             new PortalNavigationEntry(
                 "Admin.Capability.PermissionMatrix",
@@ -745,7 +747,7 @@ namespace ASPNET.StarterKit.Portal
                 "Admin/CapabilityPermissionMatrix.aspx",
                 PortalNavigationVisibilityMode.HideWhenBlocked,
                 PortalNavigationLifecycleState.Active,
-                230,
+                205,
                 new string[0],
                 new[] { PortalPermissionKeys.EnterpriseCapabilityView },
                 new string[0],
