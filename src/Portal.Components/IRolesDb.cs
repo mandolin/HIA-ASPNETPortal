@@ -209,5 +209,25 @@ namespace ASPNET.StarterKit.Portal
         /// </l>
         /// </param>
         void SaveRolePermissions(int roleId, IEnumerable<string> permissionKeys, string updatedBy);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取全部角色权限映射的只读投影，用于能力权限矩阵。</zh-CN>
+        ///   <en>Reads a read-only projection of every role-permission mapping for the capability permission matrix.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>按角色名与权限键排序的映射集合；权限表缺失或查询失败时返回空集合。</zh-CN>
+        ///   <en>Mappings ordered by role name and permission key; empty when the permission table is missing or the query fails.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法**只读**：不修改映射、不递增安全版本、不缓存跨请求结果。返回结果中的 `IsEnabled` 表示该映射是否生效，调用方必须把它与"未授权"区分呈现。</zh-CN>
+        ///   <en>This method is read-only: it changes no mapping, increments no security version, and caches nothing across requests. The returned `IsEnabled` states whether a mapping is effective, and callers must render it distinctly from "not granted".</en>
+        /// </lang>
+        /// </remarks>
+        IEnumerable<RolePermissionEntry> GetRolePermissionEntries();
     }
 }

@@ -345,6 +345,62 @@ ORDER BY [RolePermissions].[PermissionKey]",
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>读取全部角色权限映射的只读投影，供能力权限矩阵按"能力层 → 权限分类 → 角色"呈现现状。</zh-CN>
+        ///   <en>Reads a read-only projection of every role-permission mapping so the capability permission matrix can present the current state by capability layer, permission category, and role.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>按角色名与权限键排序的映射集合；权限表缺失或查询失败时返回空集合。</zh-CN>
+        ///   <en>Mappings ordered by role name and permission key; empty when the permission table is missing or the query fails.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>只读实现：使用与既有权限查询一致的表存在性守卫与失败降级（返回空集合而非抛异常），不写库、不递增安全版本、不缓存。`IsEnabled` 直接投影数据库生效态，禁用映射不得被展示为"未授权"。</zh-CN>
+        ///   <en>Read-only implementation: it reuses the table-existence guard and failure degradation (empty result instead of an exception) of the existing permission query, and it writes nothing, increments no security version, and caches nothing. `IsEnabled` is projected straight from the effective database state, and a disabled mapping must never be rendered as "not granted".</en>
+        /// </lang>
+        /// </remarks>
+        public IEnumerable<RolePermissionEntry> GetRolePermissionEntries()
+        {
+            // <lang>
+            //   <zh-CN>权限表未部署时直接返回空集合：矩阵页据此显示"权限映射表不可用"，而不是让整页失败。</zh-CN>
+            //   <en>Return an empty set when the permission table is not deployed, so the matrix page can show "permission mapping table unavailable" instead of failing as a whole.</en>
+            // </lang>
+            if (!HasRolePermissionsTable())
+            {
+                return Enumerable.Empty<RolePermissionEntry>();
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>只投影矩阵需要的四列（角色、角色名、权限键、生效态），并按角色名与权限键稳定排序，保证同一数据每次呈现顺序一致。</zh-CN>
+                //   <en>Project only the four columns the matrix needs (role, role name, permission key, effective state) and order stably by role name then permission key so the same data renders in the same order every time.</en>
+                // </lang>
+                return _context.Database.SqlQuery<RolePermissionEntry>(
+                    @"
+SELECT [RolePermissions].[RoleId] AS [RoleId],
+       [Roles].[RoleName] AS [RoleName],
+       [RolePermissions].[PermissionKey] AS [PermissionKey],
+       [RolePermissions].[IsEnabled] AS [IsEnabled]
+FROM [dbo].[PortalCfg_RolePermissions] AS [RolePermissions]
+INNER JOIN [dbo].[Portal_Roles] AS [Roles]
+    ON [Roles].[RoleID] = [RolePermissions].[RoleId]
+ORDER BY [Roles].[RoleName], [RolePermissions].[PermissionKey]").ToList();
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>查询失败一律降级为空集合：与既有权限读取保持同一失败语义，避免只读诊断视图把异常扩散到页面其余部分。</zh-CN>
+                //   <en>Degrade every query failure to an empty set, matching the existing permission read semantics so a read-only diagnostic view never spreads an exception into the rest of the page.</en>
+                // </lang>
+                return Enumerable.Empty<RolePermissionEntry>();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>替换角色权限映射，并递增该角色成员的安全版本以使旧票据在下一请求重新判定。</zh-CN>
         ///   <en>Replaces role-permission mappings and increments member security versions so older tickets are re-evaluated on the next request.</en>
         /// </lang>
