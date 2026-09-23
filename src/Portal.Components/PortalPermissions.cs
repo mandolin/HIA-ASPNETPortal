@@ -385,6 +385,67 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string ContentUploadManage = "Content.Upload.Manage";
+
+        // <lang>
+        //   <zh-CN>以下 7 个键属 P45.5 新增的 `EnterpriseCapability.*` 分层键族（跨层 1 键 + 在用 3 层 × 管理/审核 6 键）。分层口径取自 W-anp-P19.2 的「能力分层」表（本项目企业能力分类权威定义），**禁止使用扁平单层键**（如 `EnterpriseCapability.Manage`）。层内能力共享层键；候选层（BusinessCapability / Professional / Industry）当前无能力实现，故不建键，待对应能力进入实现时按同一规则补键。</zh-CN>
+        //   <en>The seven keys below are the layered `EnterpriseCapability.*` family added by P45.5 (one cross-layer key plus six manage/review keys for the three layers in use). The layering follows the capability-layering table in W-anp-P19.2, which is the authoritative classification for this project; flat single-layer keys such as `EnterpriseCapability.Manage` are forbidden. Capabilities inside a layer share that layer's keys, and the candidate layers (BusinessCapability / Professional / Industry) have no capability implementation yet, so they get no keys until such capabilities enter implementation.</en>
+        // </lang>
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看能力治理视图（按企业能力分层的只读权限矩阵）。</zh-CN>
+        ///   <en>View the capability governance view: the read-only permission matrix grouped by enterprise capability layer.</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseCapabilityView = "EnterpriseCapability.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理 Foundation Core 层能力（身份与账户、组织拓扑、授权与数据范围、审计等基础能力的配置与装配）。</zh-CN>
+        ///   <en>Manage Foundation Core layer capabilities (configuration and assembly of identity, organization, authorization scope, and audit foundations).</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseCapabilityFoundationManage = "EnterpriseCapability.Foundation.Manage";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Foundation Core 层的统一审核委派；本轮保留定义但不授予任何角色，且只能与既有细粒度审核键以"任一满足"方式并列使用。 </zh-CN>
+        ///   <en>Cross-capability review delegation for the Foundation Core layer; defined but not granted to any role in this round, and usable only as an "any" alternative alongside existing fine-grained review keys.</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseCapabilityFoundationReview = "EnterpriseCapability.Foundation.Review";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理 Enterprise Basic Business 层能力（人员与任职、参考数据、项目与工作协同等）。</zh-CN>
+        ///   <en>Manage Enterprise Basic Business layer capabilities (people and assignment, reference data, project and work collaboration).</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseCapabilityBasicBusinessManage = "EnterpriseCapability.BasicBusiness.Manage";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Enterprise Basic Business 层的统一审核委派；本轮保留定义但不授予任何角色，使用口径同上。</zh-CN>
+        ///   <en>Cross-capability review delegation for the Enterprise Basic Business layer; defined but ungranted in this round, with the same usage rule as above.</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseCapabilityBasicBusinessReview = "EnterpriseCapability.BasicBusiness.Review";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理 Platform Capability 层能力（本 Portal 自身的导航、主题、模块装配与治理）。</zh-CN>
+        ///   <en>Manage Platform Capability layer capabilities (this Portal's own navigation, theme, and module assembly governance).</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseCapabilityPlatformManage = "EnterpriseCapability.Platform.Manage";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Platform Capability 层的统一审核委派；本轮保留定义但不授予任何角色，使用口径同上。</zh-CN>
+        ///   <en>Cross-capability review delegation for the Platform Capability layer; defined but ungranted in this round, with the same usage rule as above.</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseCapabilityPlatformReview = "EnterpriseCapability.Platform.Review";
     }
 
     /// <summary>
@@ -522,7 +583,18 @@ namespace ASPNET.StarterKit.Portal
             new PortalPermissionDefinition(PortalPermissionKeys.PortalTabsEdit, "PortalStructure", "编辑门户 Tab。"),
             new PortalPermissionDefinition(PortalPermissionKeys.PortalModulesEdit, "PortalStructure", "编辑门户模块实例和布局。"),
             new PortalPermissionDefinition(PortalPermissionKeys.ContentRawHtmlEdit, "Content", "编辑原始 HTML 内容。"),
-            new PortalPermissionDefinition(PortalPermissionKeys.ContentUploadManage, "Content", "管理上传内容策略。")
+            new PortalPermissionDefinition(PortalPermissionKeys.ContentUploadManage, "Content", "管理上传内容策略。"),
+            // <lang>
+            //   <zh-CN>P45.5 分层键族定义：Category 直接承载"能力层"（矩阵按层分组的数据源）。跨层 View 用 `EnterpriseCapability`，其余按层后缀，层标识与 W-anp-P19.2 的能力分层表一致。</zh-CN>
+            //   <en>P45.5 layered family definitions: the Category itself carries the capability layer, which is the data source for grouping the matrix. The cross-layer View uses `EnterpriseCapability`, and the rest are suffixed by layer, matching the layering table in W-anp-P19.2.</en>
+            // </lang>
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityView, "EnterpriseCapability", "查看能力治理视图（只读权限矩阵）。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityFoundationManage, "EnterpriseCapability.Foundation", "管理 Foundation Core 层能力。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityFoundationReview, "EnterpriseCapability.Foundation", "Foundation Core 层审核委派（预留，未授予非管理员）。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityBasicBusinessManage, "EnterpriseCapability.BasicBusiness", "管理 Enterprise Basic Business 层能力。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityBasicBusinessReview, "EnterpriseCapability.BasicBusiness", "Enterprise Basic Business 层审核委派（预留，未授予非管理员）。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityPlatformManage, "EnterpriseCapability.Platform", "管理 Platform Capability 层能力。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityPlatformReview, "EnterpriseCapability.Platform", "Platform Capability 层审核委派（预留，未授予非管理员）。")
         };
 
         // <lang>

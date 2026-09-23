@@ -147,7 +147,18 @@ BEGIN
         (N'Portal.Tabs.Edit'),
         (N'Portal.Modules.Edit'),
         (N'Content.RawHtml.Edit'),
-        (N'Content.Upload.Manage');
+        (N'Content.Upload.Manage'),
+        -- <lang>
+        --   <zh-CN>P45.5 新增 `EnterpriseCapability.*` 分层键族（7 个）。此处只把它们纳入 Admins 兼容授权清单；**不向任何非管理员角色授予**——其中 3 个 `Review` 键为预留定义（管理员因短路与兼容授权天然拥有，非管理员不应因本种子获得审核委派）。</zh-CN>
+        --   <en>P45.5 adds the layered `EnterpriseCapability.*` family (seven keys). They are listed here only for the Admins compatibility grant and are never granted to a non-administrator role; the three `Review` keys are reserved definitions that administrators hold naturally through the short-circuit and compatibility grant, while non-administrators must not gain review delegation from this seed.</en>
+        -- </lang>
+        (N'EnterpriseCapability.View'),
+        (N'EnterpriseCapability.Foundation.Manage'),
+        (N'EnterpriseCapability.Foundation.Review'),
+        (N'EnterpriseCapability.BasicBusiness.Manage'),
+        (N'EnterpriseCapability.BasicBusiness.Review'),
+        (N'EnterpriseCapability.Platform.Manage'),
+        (N'EnterpriseCapability.Platform.Review');
 
     -- <lang>
     --   <zh-CN>只插入缺失授权，保留管理员已存在映射的启停状态、更新时间和备注。</zh-CN>
