@@ -294,18 +294,9 @@ SELECT @ItemId;",
                 //   <en>Accept only the first identifier explicitly returned by the database batch; treat an empty result as creation failure rather than reporting an unknown write state as success.</en>
                 // </lang>
                 long itemId = rows.Count == 0 ? 0 : rows[0];
-                if (itemId <= 0)
-                {
-                    return new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item was not created.");
-                }
-
-                // <lang>
-                //   <zh-CN>事项事实写入成功后旁路投影待办；投影失败不回滚事项。</zh-CN>
-                //   <en>Project the work item as a sidecar after the item fact succeeds; a projection failure does not roll back the item.</en>
-                // </lang>
-                ProjectWorkItemEnsure(itemCode, normalized.Title, normalized.Summary, normalized.OwnerUserId, normalized.OwnerRoleKey, normalized.DueUtc, normalized.SubmittedUtc.Value, normalized.SubmittedBy);
-
-                return new CollaborationItemResult(true, itemId, itemCode, PortalCollaborationItemActions.Submit, "Collaboration item submitted.");
+                return itemId <= 0
+                    ? new CollaborationItemResult(false, 0, string.Empty, PortalCollaborationItemActions.Submit, "Collaboration item was not created.")
+                    : new CollaborationItemResult(true, itemId, itemCode, PortalCollaborationItemActions.Submit, "Collaboration item submitted.");
             }
             catch (Exception)
             {
@@ -820,18 +811,9 @@ FROM @Updated;",
                 //   <en>Confirm the state update only when the batch returns an item code; an empty result consistently means the item is absent or no longer accepts the action, avoiding disclosure of concurrency detail.</en>
                 // </lang>
                 CollaborationItemWriteRow row = rows.Count == 0 ? null : rows[0];
-                if (row == null || string.IsNullOrWhiteSpace(row.ItemCode))
-                {
-                    return new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item was not found or cannot accept this action.");
-                }
-
-                // <lang>
-                //   <zh-CN>事项状态更新成功后旁路投影待办；投影失败不回滚事项状态。</zh-CN>
-                //   <en>Project the work item as a sidecar after the item state update succeeds; a projection failure does not roll back the item state.</en>
-                // </lang>
-                ProjectWorkItemForAction(normalized.ActionKey, row.ItemCode, item, normalized.OccurredUtc.Value, normalized.ActorName);
-
-                return new CollaborationItemResult(true, row.ItemId, row.ItemCode, normalized.ActionKey, "Collaboration item state updated.");
+                return row == null || string.IsNullOrWhiteSpace(row.ItemCode)
+                    ? new CollaborationItemResult(false, normalized.ItemId, string.Empty, normalized.ActionKey, "Collaboration item was not found or cannot accept this action.")
+                    : new CollaborationItemResult(true, row.ItemId, row.ItemCode, normalized.ActionKey, "Collaboration item state updated.");
             }
             catch (Exception)
             {
@@ -1324,128 +1306,6 @@ SELECT CASE WHEN EXISTS (
             {
                 return false;
             }
-        }
-
-        // <lang>
-        //   <zh-CN>确保事项存在一条活跃待办投影（幂等）：已存在则更新分派与标题，不存在则插入 Open。待办是派生态，写入失败只记诊断、不回滚事项事实。</zh-CN>
-        //   <en>Ensures one active work-item projection for the item (idempotent): updates assignment and title when present, otherwise inserts Open. Work items are derived, so a write failure only logs diagnostics and never rolls back the item fact.</en>
-        // </lang>
-        private void ProjectWorkItemEnsure(string itemCode, string title, string summary, int? assignedUserId, string assignedRoleKey, DateTime? dueUtc, DateTime occurredUtc, string actorName)
-        {
-            if (string.IsNullOrWhiteSpace(itemCode) || !HasTable("PortalBiz_WorkItems"))
-            {
-                return;
-            }
-
-            try
-            {
-                context.Database.ExecuteSqlCommand(@"
-IF EXISTS (SELECT 1 FROM [dbo].[PortalBiz_WorkItems] WHERE [BusinessKind] = @Kind AND [BusinessId] = @Id AND [WorkItemStatus] IN (N'Open', N'InProgress'))
-BEGIN
-    UPDATE [dbo].[PortalBiz_WorkItems]
-    SET [Title] = @Title,
-        [Summary] = @Summary,
-        [AssignedUserId] = @AssignedUserId,
-        [AssignedRoleKey] = @AssignedRoleKey,
-        [DueUtc] = @DueUtc
-    WHERE [BusinessKind] = @Kind AND [BusinessId] = @Id AND [WorkItemStatus] IN (N'Open', N'InProgress');
-END
-ELSE
-BEGIN
-    INSERT INTO [dbo].[PortalBiz_WorkItems]
-        ([BusinessKind], [BusinessId], [Title], [Summary], [WorkItemStatus], [AssignedUserId], [AssignedRoleKey], [CreatedUtc], [CreatedBy], [DueUtc])
-    VALUES
-        (@Kind, @Id, @Title, @Summary, N'Open', @AssignedUserId, @AssignedRoleKey, @OccurredUtc, @ActorName, @DueUtc);
-END",
-                    new SqlParameter("@Kind", PortalWorkItemBusinessKinds.CollaborationItem),
-                    new SqlParameter("@Id", itemCode),
-                    new SqlParameter("@Title", title ?? string.Empty),
-                    CreateNullableStringParameter("@Summary", summary),
-                    CreateNullableIntParameter("@AssignedUserId", assignedUserId),
-                    CreateNullableStringParameter("@AssignedRoleKey", assignedRoleKey),
-                    CreateNullableDateTimeParameter("@DueUtc", dueUtc),
-                    new SqlParameter("@OccurredUtc", occurredUtc),
-                    new SqlParameter("@ActorName", actorName ?? "system"));
-            }
-            catch (Exception)
-            {
-                // <lang>
-                //   <zh-CN>待办是派生态：投影失败静默、不回滚事项事实；诊断由调用页面按上下文记录，数据层不依赖 Web 层日志组件。</zh-CN>
-                //   <en>Work items are derived: a projection failure is silent and never rolls back the item fact; the calling page records diagnostics by context because the data layer does not depend on web-layer logging.</en>
-                // </lang>
-            }
-        }
-
-        // <lang>
-        //   <zh-CN>把事项状态变化投影到活跃待办：更新待办状态，并在终态时写入完成时间与办理人。待办是派生态，写入失败只记诊断、不回滚事项事实。</zh-CN>
-        //   <en>Projects an item state change onto the active work item: updates the work-item status and writes completion time and actor for terminal states. Work items are derived, so a write failure only logs diagnostics and never rolls back the item fact.</en>
-        // </lang>
-        private void ProjectWorkItemStateChange(string itemCode, string targetStatus, DateTime occurredUtc, string actorName)
-        {
-            if (string.IsNullOrWhiteSpace(itemCode) || !HasTable("PortalBiz_WorkItems"))
-            {
-                return;
-            }
-
-            try
-            {
-                context.Database.ExecuteSqlCommand(@"
-UPDATE [dbo].[PortalBiz_WorkItems]
-SET [WorkItemStatus] = @TargetStatus,
-    [CompletedUtc] = CASE WHEN @TargetStatus IN (N'Completed', N'Cancelled') THEN @OccurredUtc ELSE NULL END,
-    [CompletedBy] = CASE WHEN @TargetStatus IN (N'Completed', N'Cancelled') THEN @ActorName ELSE NULL END
-WHERE [BusinessKind] = @Kind
-  AND [BusinessId] = @Id
-  AND [WorkItemStatus] IN (N'Open', N'InProgress');",
-                    new SqlParameter("@Kind", PortalWorkItemBusinessKinds.CollaborationItem),
-                    new SqlParameter("@Id", itemCode),
-                    new SqlParameter("@TargetStatus", targetStatus),
-                    new SqlParameter("@OccurredUtc", occurredUtc),
-                    new SqlParameter("@ActorName", actorName ?? "system"));
-            }
-            catch (Exception)
-            {
-                // <lang>
-                //   <zh-CN>待办是派生态：投影失败静默、不回滚事项事实；诊断由调用页面按上下文记录，数据层不依赖 Web 层日志组件。</zh-CN>
-                //   <en>Work items are derived: a projection failure is silent and never rolls back the item fact; the calling page records diagnostics by context because the data layer does not depend on web-layer logging.</en>
-                // </lang>
-            }
-        }
-
-        // <lang>
-        //   <zh-CN>按事项状态动作把结果投影到待办：处理动作推进待办状态，退回动作把待办切回发起人，提交/重新提交把待办切回负责人。</zh-CN>
-        //   <en>Projects an item state action onto the work item: handling actions advance the work-item status, Return reassigns it back to the initiator, and Submit/Resubmit reassign it to the owner.</en>
-        // </lang>
-        private void ProjectWorkItemForAction(string actionKey, string itemCode, CollaborationItemInfo item, DateTime occurredUtc, string actorName)
-        {
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal))
-            {
-                ProjectWorkItemStateChange(itemCode, "InProgress", occurredUtc, actorName);
-                return;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Complete, StringComparison.Ordinal) ||
-                string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal) ||
-                string.Equals(actionKey, PortalCollaborationItemActions.Close, StringComparison.Ordinal))
-            {
-                ProjectWorkItemStateChange(itemCode, "Completed", occurredUtc, actorName);
-                return;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Cancel, StringComparison.Ordinal))
-            {
-                ProjectWorkItemStateChange(itemCode, "Cancelled", occurredUtc, actorName);
-                return;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal))
-            {
-                ProjectWorkItemEnsure(itemCode, item.Title, item.Summary, item.InitiatorUserId, null, item.DueUtc, occurredUtc, actorName);
-                return;
-            }
-
-            // Submit / Resubmit：待办切回负责人。
-            ProjectWorkItemEnsure(itemCode, item.Title, item.Summary, item.OwnerUserId, item.OwnerRoleKey, item.DueUtc, occurredUtc, actorName);
         }
 
         private static CollaborationItemCreateRequest NormalizeCreateRequest(CollaborationItemCreateRequest request)
