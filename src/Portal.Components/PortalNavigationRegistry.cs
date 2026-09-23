@@ -732,6 +732,27 @@ namespace ASPNET.StarterKit.Portal
                 "Review-console entry; master data is never modified directly from here."),
 
             // <lang>
+            //   <zh-CN>P45.5 Step3 聚合入口：把能力权限矩阵登记为 Admin.Capability 族内的正式入口，由既有渲染器在能力相关页面的动作区聚合呈现，不新建渲染路径。依赖键为 P45.5 新增的 EnterpriseCapability.View；可见性只表达"是否展示"，页面自身的权限门禁仍由 CapabilityPermissionMatrix 页面承担。</zh-CN>
+            //   <en>P45.5 Step3 aggregation entry: registers the capability permission matrix as a formal entry inside the Admin.Capability group so the existing renderer aggregates it into the action areas of capability-related pages without introducing a new rendering path. Its dependency is the EnterpriseCapability.View key added by P45.5; visibility only expresses display, while the page itself remains responsible for its own permission gate.</en>
+            //   <zh-CN>该条目刻意**不声明角色依赖**：入口可见性应由权限键决定，这样将来把 View 键授予非管理员角色时入口会随之出现，而不会被额外的角色条件挡住。</zh-CN>
+            //   <en>This entry deliberately declares no role dependency: entry visibility should be decided by the permission key alone, so granting the View key to a non-administrator role later makes the entry appear instead of being blocked by an extra role condition.</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.PermissionMatrix",
+                PortalNavigationEntryKind.AdminPage,
+                "能力权限",
+                "Capability Permissions",
+                "Admin/CapabilityPermissionMatrix.aspx",
+                PortalNavigationVisibilityMode.HideWhenBlocked,
+                PortalNavigationLifecycleState.Active,
+                230,
+                new string[0],
+                new[] { PortalPermissionKeys.EnterpriseCapabilityView },
+                new string[0],
+                new string[0],
+                "Read-only capability permission matrix entry; shows the layered role-to-key mapping and grants no write capability."),
+
+            // <lang>
             //   <zh-CN>现代用户管理页：按 Admin.Account. 前缀落在 Admin.Account 族；用户创建、角色与密码操作仍由页面与数据层授权。</zh-CN>
             //   <en>Modern user-administration page: the Admin.Account. prefix places it in the Admin.Account group; user creation plus role and password operations remain authorized by the page and data layer.</en>
             // </lang>
