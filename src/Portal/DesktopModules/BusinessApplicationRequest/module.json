@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "packageId": "HIA.BusinessApplicationRequest",
   "displayName": "业务申请 / Business Application Request",
   "version": "1.0.0",
@@ -7,5 +7,9 @@
   "desktopEntry": "DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx",
   "resources": [
     "Styles/BusinessApplicationRequest.css"
-  ]
+  ],
+  "capability": {
+    "capabilityId": "BasicBusiness.ApplicationRequest",
+    "role": "Primary"
+  }
 }

@@ -100,6 +100,9 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>企业协同事项能力键。</zh-CN><en>Enterprise collaboration-item capability key.</en></lang></summary>
         public const string Collaboration = "BasicBusiness.Collaboration";
 
+        /// <summary><lang><zh-CN>业务申请能力键；与 <c>BasicBusiness.Collaboration</c> 同属基础业务层，复用既有 <c>Business.Application</c> 权限键族。</zh-CN><en>Business application request capability key; shares the BasicBusiness layer with <c>BasicBusiness.Collaboration</c> and reuses the existing <c>Business.Application</c> permission-key family.</en></lang></summary>
+        public const string ApplicationRequest = "BasicBusiness.ApplicationRequest";
+
         private static readonly PortalCapabilityDefinition[] DefinitionArray =
         {
             new PortalCapabilityDefinition(
@@ -109,7 +112,15 @@ namespace ASPNET.StarterKit.Portal
                 "HIA.EnterpriseCapabilityWorkbench",
                 "Business.Collaboration",
                 "企业协同事项",
-                "Enterprise Collaboration Item")
+                "Enterprise Collaboration Item"),
+            new PortalCapabilityDefinition(
+                ApplicationRequest,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.BusinessApplicationRequest",
+                "Business.Application",
+                "业务申请",
+                "Business Application Request")
         };
 
         private static readonly IList<PortalCapabilityDefinition> ReadOnlyDefinitions =
