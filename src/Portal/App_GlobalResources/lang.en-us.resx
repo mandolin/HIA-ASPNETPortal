@@ -816,6 +816,12 @@
   <data name="Admin_CollaborationItems_LabelParticipantRole" xml:space="preserve">
     <value>Role</value>
   </data>
+  <data name="Admin_CollaborationItems_RoleType_Collaborator" xml:space="preserve">
+    <value>Collaborator</value>
+  </data>
+  <data name="Admin_CollaborationItems_RoleType_Watcher" xml:space="preserve">
+    <value>Watcher</value>
+  </data>
   <data name="Admin_CollaborationItems_ButtonAddParticipant" xml:space="preserve">
     <value>Add Participant</value>
   </data>

@@ -182,9 +182,13 @@
                                     <div class="portal-participant-actions">
                                         <span class="SubHead"><%= lang.Admin_CollaborationItems_LabelParticipantUser %></span>
                                         <asp:TextBox ID="ParticipantUserTextBox" CssClass="NormalTextBox" Width="60" MaxLength="10" runat="server" />
+                                        <%--
+                                            <zh-CN>参与人角色下拉：显示名本地化为 RoleType 键，Value 保持角色类型键（不可翻译）。</zh-CN>
+                                            <en>Participant role dropdown: display names localized via RoleType keys; Value keeps the untranslatable role-type key.</en>
+                                        --%>
                                         <asp:DropDownList ID="ParticipantRoleList" CssClass="NormalTextBox" runat="server">
-                                            <asp:ListItem Text="Collaborator" Value="Collaborator" Selected="True" />
-                                            <asp:ListItem Text="Watcher" Value="Watcher" />
+                                            <asp:ListItem Text="<%$ Resources:lang, Admin_CollaborationItems_RoleType_Collaborator %>" Value="Collaborator" Selected="True" />
+                                            <asp:ListItem Text="<%$ Resources:lang, Admin_CollaborationItems_RoleType_Watcher %>" Value="Watcher" />
                                         </asp:DropDownList>
                                         <asp:Button ID="AddParticipantButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonAddParticipant %>" CssClass="CommandButton" CommandName="AddParticipant" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="RemoveParticipantButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonRemoveParticipant %>" CssClass="CommandButton" CommandName="RemoveParticipant" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
