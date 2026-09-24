@@ -6,7 +6,7 @@
 #>
 
 param(
-    # <lang><zh-CN>仓库根目录；留空时取脚本所在目录的上级目录。</zh-CN><en>Repository root; when empty, the parent of the script directory is used.</en></lang>
+    # <lang><zh-CN>仓库根目录；留空时取脚本所在目录的上两级目录（dev\\scripts 的上两级即仓库根）。</zh-CN><en>Repository root; when empty, two levels above the script directory (dev\\scripts -> repository root).</en></lang>
     [string]$RepoRoot
 )
 
@@ -14,7 +14,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
-    $RepoRoot = Split-Path -Parent $PSScriptRoot
+    $RepoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 
 # <lang>
