@@ -4,7 +4,7 @@
 
 ## 一、当前入口
 
-**`W-anp-P63` 数据范围契约（`C-anp-P11` 第 3 阶段）**：`P63.0` 细节对标已完成；当前进入 **`P63.1` 契约收敛 → `P63.2` 落地协同事项**。
+**`W-anp-P64` 状态机显式化（`C-anp-P11` 第 3 阶段收口后顺延）**：`W-anp-P63` 数据范围契约已于 2026-09-26 全部完成（P63.0–P63.3，closeout 见 `work-zone/dev/plans/W-anp-P63.3-closeout.md`）。当前进入 **`W-anp-P64` 状态机显式化**：合法迁移表 + 强制校验 + 迁移必写事件 + 流转说明。
 
 ## 二、周期位置（重要：周期组有并行/插队）
 
@@ -93,6 +93,6 @@
 - 审计保留期：`docs/audit-retention-policy.md`
 - 对标规范：`docs/detail-level-benchmark-spec.md`
 - 周期组：`work-zone/dev/plans/C-anp-P10.md`、`C-anp-P11.md`
-- 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P59.md`
+- 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P63.3-closeout.md`、`W-anp-P64.md`、`W-anp-P59.md`
 - 调研（Foundation 八条目）：`work-zone/dev/research/foundation-*.md`
-- 索引：`work-zone/dev/plans/W-anp-INDEX.md`（最新条目 466）、`work-zone/dev/research/README.md`
+- 索引：`work-zone/dev/plans/W-anp-INDEX.md`（最新条目 467）、`work-zone/dev/research/README.md`
