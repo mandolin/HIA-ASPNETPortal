@@ -10,8 +10,8 @@ namespace ASPNET.StarterKit.Portal
     /// </summary>
     /// <remarks>
     /// <lang>
-    ///   <zh-CN>本类不依赖 System.Web，也不反向依赖 Web 配置读取器：Web 启动期通过 ConfigureTargetProvider 注入当前配置值，未注入或注入失败一律回落到硬下限 MinimumIterationCount（210000），确保哈希强度只增不减，且登录流程不受配置故障影响。</zh-CN>
-    ///   <en>This class depends on neither System.Web nor the Web configuration resolver: Web startup injects the current configured value through ConfigureTargetProvider, and missing or failing injection always falls back to the hard lower bound MinimumIterationCount (210000), so hashing strength only increases and sign-in is never affected by configuration faults.</en>
+    ///   <zh-CN>本类不依赖 System.Web，也不反向依赖 Web 配置读取器：Web 启动期通过 ConfigureTargetProvider 注入当前配置值，未注入或注入失败一律回落到硬下限 MinimumIterationCount（600000），确保哈希强度只增不减，且登录流程不受配置故障影响。</zh-CN>
+    ///   <en>This class depends on neither System.Web nor the Web configuration resolver: Web startup injects the current configured value through ConfigureTargetProvider, and missing or failing injection always falls back to the hard lower bound MinimumIterationCount (600000), so hashing strength only increases and sign-in is never affected by configuration faults.</en>
     /// </lang>
     /// </remarks>
     public static class PortalPasswordIterationPolicy
@@ -22,7 +22,7 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Hard lower bound for the iteration count, equal to the component's current default cost; lower configured values always fall back to it.</en>
         /// </lang>
         /// </summary>
-        public const int MinimumIterationCount = 210000;
+        public const int MinimumIterationCount = 600000;
 
         /// <summary>
         /// <lang>

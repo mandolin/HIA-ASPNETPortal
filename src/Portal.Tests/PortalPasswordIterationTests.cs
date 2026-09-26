@@ -55,7 +55,7 @@ namespace ASPNET.StarterKit.Portal.Tests
                 PortalPasswordIterationPolicy.MinimumIterationCount,
                 PortalPasswordIterationPolicy.ResolveTargetIterationCount(),
                 "未注入提供器时应直接使用硬下限。");
-            Assert.AreEqual(210000, PortalPasswordIterationPolicy.MinimumIterationCount, "硬下限应等于当前默认成本。");
+            Assert.AreEqual(600000, PortalPasswordIterationPolicy.MinimumIterationCount, "硬下限应等于 OWASP 对 PBKDF2-HMAC-SHA256 推荐的当前默认成本。");
         }
 
         /// <summary>
@@ -88,10 +88,10 @@ namespace ASPNET.StarterKit.Portal.Tests
         [TestMethod]
         public void ResolveTargetIterationCount_UsesHigherConfiguredValue()
         {
-            PortalPasswordIterationPolicy.ConfigureTargetProvider(() => 310000);
+            PortalPasswordIterationPolicy.ConfigureTargetProvider(() => 700000);
 
             Assert.AreEqual(
-                310000,
+                700000,
                 PortalPasswordIterationPolicy.ResolveTargetIterationCount(),
                 "高于下限的配置应被采纳。");
         }
@@ -138,7 +138,7 @@ namespace ASPNET.StarterKit.Portal.Tests
                 PortalPasswordIterationPolicy.NeedsRehash(210000, 210000),
                 "等于目标成本时不应重哈希。");
             Assert.IsFalse(
-                PortalPasswordIterationPolicy.NeedsRehash(310000, 210000),
+                PortalPasswordIterationPolicy.NeedsRehash(700000, 210000),
                 "高于目标成本时不应重哈希。");
         }
 
@@ -152,10 +152,10 @@ namespace ASPNET.StarterKit.Portal.Tests
         public void NeedsRehash_IsFalseForNonPositiveStoredCount()
         {
             Assert.IsFalse(
-                PortalPasswordIterationPolicy.NeedsRehash(0, 210000),
+                PortalPasswordIterationPolicy.NeedsRehash(0, 600000),
                 "零值代表缺失或损坏，不应触发重哈希。");
             Assert.IsFalse(
-                PortalPasswordIterationPolicy.NeedsRehash(-1, 210000),
+                PortalPasswordIterationPolicy.NeedsRehash(-1, 600000),
                 "负值代表缺失或损坏，不应触发重哈希。");
         }
 
@@ -173,14 +173,14 @@ namespace ASPNET.StarterKit.Portal.Tests
             //   <en>Without an injected provider the target is the hard lower bound, so credentials already at that value must not trigger a write.</en>
             // </lang>
             Assert.IsFalse(
-                PortalPasswordIterationPolicy.NeedsRehash(210000),
+                PortalPasswordIterationPolicy.NeedsRehash(600000),
                 "默认配置下等于硬下限的凭据不应触发重哈希。");
 
             // <lang>
             //   <zh-CN>注入更高成本后，同一凭据应当需要重哈希。</zh-CN>
             //   <en>After a higher cost is injected, the same credential should need rehashing.</en>
             // </lang>
-            PortalPasswordIterationPolicy.ConfigureTargetProvider(() => 310000);
+            PortalPasswordIterationPolicy.ConfigureTargetProvider(() => 700000);
             Assert.IsTrue(
                 PortalPasswordIterationPolicy.NeedsRehash(210000),
                 "目标提高后，低于目标的凭据应需要重哈希。");
