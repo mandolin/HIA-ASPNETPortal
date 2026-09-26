@@ -186,6 +186,22 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>认证分类：登录成功与失败等身份鉴别事件；失败尝试是撞库与口令爆破的早期检测依据。</zh-CN>
+        ///   <en>Authentication category: identity-verification events such as sign-in success and failure; failed attempts are an early indicator of credential stuffing and password spraying.</en>
+        /// </lang>
+        /// </summary>
+        public const string SecurityAuthenticationCategory = "SecurityAuthentication";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>登录失败动作；仅记录登录标识这类非敏感事实，绝不写入口令、盐或哈希材料。</zh-CN>
+        ///   <en>Failed sign-in action; records only non-sensitive facts such as the login identifier and never writes passwords, salts, or hash material.</en>
+        /// </lang>
+        /// </summary>
+        public const string SignInFailed = "SignInFailed";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>用户被加入角色。</zh-CN>
         ///   <en>User was added to a role.</en>
         /// </lang>

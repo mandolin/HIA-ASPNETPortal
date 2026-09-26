@@ -148,6 +148,20 @@ namespace ASPNET.StarterKit.Portal
             else
             {
                 // <lang>
+                //   <zh-CN>认证失败属于必须审计的安全事件：写入真实的失败事实（Outcome=Failure），只携带登录标识这类非敏感事实，绝不写入口令、盐或哈希材料；审计写入失败不影响登录流程。</zh-CN>
+                //   <en>A failed authentication is a security event that must be audited: a genuine failure fact is written (Outcome=Failure) carrying only non-sensitive facts such as the login identifier, never passwords, salts, or hash material; an audit write failure never affects the sign-in flow.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.SecurityAuthenticationCategory,
+                    PortalOperationAuditEvents.SignInFailed,
+                    PortalOperationAuditEvents.UserTargetType,
+                    loginIdentifier ?? string.Empty,
+                    "Sign-in failed for the submitted login identifier.",
+                    Context,
+                    null,
+                    "Failure");
+
+                // <lang>
                 //   <zh-CN>使用通用失败提示，不暴露用户是否存在、审核状态或摘要比较细节。</zh-CN>
                 //   <en>Use a generic failure message and do not expose user existence, review status, or digest-comparison details.</en>
                 // </lang>
