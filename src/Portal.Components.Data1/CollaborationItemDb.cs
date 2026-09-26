@@ -738,6 +738,15 @@ SELECT CONVERT(BIGINT, SCOPE_IDENTITY());",
             }
 
             // <lang>
+            //   <zh-CN>显式状态机门禁：从当前状态发起该动作不合法时直接拒绝（fail-closed），在数据库守卫之外提供可单测的服务端判定；未知动作已由 MapActionToStatus 先行拦截。</zh-CN>
+            //   <en>Explicit state-machine gate: deny directly when starting the action from the current status is not a legal transition (fail-closed), adding a testable server-side decision on top of the database guard; unknown actions were already intercepted by MapActionToStatus.</en>
+            // </lang>
+            if (!PortalCollaborationItemTransitions.IsLegalTransition(item.ItemStatus, normalized.ActionKey))
+            {
+                return new CollaborationItemResult(false, normalized.ItemId, item.ItemCode, normalized.ActionKey, "This action is not allowed from the current item status.");
+            }
+
+            // <lang>
             //   <zh-CN>退回和拒绝等需要处理意见的动作不能产生无说明的状态事件；其他动作保留可选评论契约。</zh-CN>
             //   <en>Actions such as return and reject that require a handling reason cannot create an unexplained state event; other actions retain the optional-comment contract.</en>
             // </lang>
@@ -789,22 +798,7 @@ SET [ItemStatus] = @TargetStatus,
 OUTPUT inserted.[ItemId], inserted.[ItemCode], deleted.[ItemStatus]
 INTO @Updated ([ItemId], [ItemCode], [FromStatus])
 WHERE [ItemId] = @ItemId
-  AND (
-        (@ActionKey = N'Submit' AND [ItemStatus] = N'Draft')
-        OR
-        (@ActionKey = N'Start' AND [ItemStatus] = N'Submitted')
-        OR
-        (@ActionKey = N'Complete' AND [ItemStatus] IN (N'Submitted', N'InProgress'))
-        OR
-        (@ActionKey = N'Return' AND [ItemStatus] IN (N'Submitted', N'InProgress'))
-        OR
-        (@ActionKey = N'Resubmit' AND [ItemStatus] = N'Returned')
-        OR
-        (@ActionKey = N'Reject' AND [ItemStatus] IN (N'Submitted', N'InProgress'))
-        OR
-        (@ActionKey = N'Cancel' AND [ItemStatus] IN (N'Draft', N'Submitted', N'Returned'))
-        OR
-        (@ActionKey = N'Close' AND [ItemStatus] IN (N'Completed', N'Rejected', N'Cancelled'))
+  AND (" + PortalCollaborationItemTransitions.BuildSqlStatusPredicate() + @"
       );
 
 INSERT INTO [dbo].[PortalBiz_CollaborationItemEvents]
@@ -1496,49 +1490,15 @@ SELECT CASE WHEN EXISTS (
             };
         }
 
+        // <lang>
+        //   <zh-CN>动作到目标状态的映射由显式迁移表派生（当前设计中同一动作目标唯一）；未知动作返回空串沿用既有"不支持动作"语义。</zh-CN>
+        //   <en>The action-to-target mapping derives from the explicit transition table (each action has a unique target in the current design); an unknown action returns an empty string, preserving the established "unsupported action" behavior.</en>
+        // </lang>
         private static string MapActionToStatus(string actionKey)
         {
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Submit, StringComparison.Ordinal))
-            {
-                return PortalCollaborationItemStatuses.Submitted;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal))
-            {
-                return PortalCollaborationItemStatuses.InProgress;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Complete, StringComparison.Ordinal))
-            {
-                return PortalCollaborationItemStatuses.Completed;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Return, StringComparison.Ordinal))
-            {
-                return PortalCollaborationItemStatuses.Returned;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
-            {
-                return PortalCollaborationItemStatuses.Submitted;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Reject, StringComparison.Ordinal))
-            {
-                return PortalCollaborationItemStatuses.Rejected;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Cancel, StringComparison.Ordinal))
-            {
-                return PortalCollaborationItemStatuses.Cancelled;
-            }
-
-            if (string.Equals(actionKey, PortalCollaborationItemActions.Close, StringComparison.Ordinal))
-            {
-                return PortalCollaborationItemStatuses.Closed;
-            }
-
-            return string.Empty;
+            CollaborationItemTransition transition = PortalCollaborationItemTransitions.All
+                .FirstOrDefault(candidate => string.Equals(candidate.ActionKey, actionKey, StringComparison.Ordinal));
+            return transition.ToStatus ?? string.Empty;
         }
 
         private static string CreateItemCode(DateTime submittedUtc)

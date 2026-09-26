@@ -168,6 +168,7 @@
     <Compile Include="PortalCollaborationItemActions.cs" />
     <Compile Include="PortalCollaborationItemEventTypes.cs" />
     <Compile Include="PortalCollaborationItemStatuses.cs" />
+    <Compile Include="PortalCollaborationItemTransitions.cs" />
     <Compile Include="PortalCollaborationItemVisibilityScopes.cs" />
     <Compile Include="PortalCollaborationItemParticipantRoles.cs" />
     <Compile Include="PortalDatabaseProfile.cs" />
