@@ -300,6 +300,20 @@ namespace ASPNET.StarterKit.Portal
                 throw new ArgumentNullException("context");
             }
 
+            // <lang>
+            //   <zh-CN>授权失败属于必须审计的安全事件：在重定向前尽力写入真实的被拒事实（Outcome=Failure），只记录请求路径这类非敏感事实；审计写入失败绝不阻断拒绝流程。</zh-CN>
+            //   <en>A denied authorization is a security event that must be audited: before redirecting, a genuine denial fact is written best-effort (Outcome=Failure) carrying only non-sensitive facts such as the request path; an audit write failure never blocks the denial flow.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.SecurityAuthorizationCategory,
+                PortalOperationAuditEvents.EditAccessDenied,
+                "Request",
+                context.Request.Path ?? string.Empty,
+                "Edit access denied.",
+                context,
+                null,
+                "Failure");
+
             context.Response.Redirect("~/Admin/EditAccessDenied.aspx", false);
             context.ApplicationInstance.CompleteRequest();
         }
@@ -328,6 +342,20 @@ namespace ASPNET.StarterKit.Portal
             {
                 throw new ArgumentNullException("context");
             }
+
+            // <lang>
+            //   <zh-CN>授权失败属于必须审计的安全事件：在重定向前尽力写入真实的被拒事实（Outcome=Failure），只记录请求路径这类非敏感事实；审计写入失败绝不阻断拒绝流程。</zh-CN>
+            //   <en>A denied authorization is a security event that must be audited: before redirecting, a genuine denial fact is written best-effort (Outcome=Failure) carrying only non-sensitive facts such as the request path; an audit write failure never blocks the denial flow.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.SecurityAuthorizationCategory,
+                PortalOperationAuditEvents.AccessDenied,
+                "Request",
+                context.Request.Path ?? string.Empty,
+                "Access denied.",
+                context,
+                null,
+                "Failure");
 
             context.Response.Redirect("~/Admin/AccessDenied.aspx", false);
             context.ApplicationInstance.CompleteRequest();

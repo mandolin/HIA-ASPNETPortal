@@ -202,6 +202,30 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>授权分类：访问控制失败等被拒绝的越权尝试事件。</zh-CN>
+        ///   <en>Authorization category: access-control failure events such as denied authorization attempts.</en>
+        /// </lang>
+        /// </summary>
+        public const string SecurityAuthorizationCategory = "SecurityAuthorization";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>普通访问被拒动作。</zh-CN>
+        ///   <en>General access-denied action.</en>
+        /// </lang>
+        /// </summary>
+        public const string AccessDenied = "AccessDenied";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑访问被拒动作。</zh-CN>
+        ///   <en>Edit access-denied action.</en>
+        /// </lang>
+        /// </summary>
+        public const string EditAccessDenied = "EditAccessDenied";
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>用户被加入角色。</zh-CN>
         ///   <en>User was added to a role.</en>
         /// </lang>
