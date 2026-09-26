@@ -28,7 +28,7 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>稳定的动作名称，用于表示已发生的状态变化或管理操作。</zh-CN><en>Stable action name that represents the completed state change or administrative operation.</en></lang></summary>
         public string Action { get; set; }
 
-        /// <summary><lang><zh-CN>记录时确定的动作结果；写入门面当前只写成功事实，失败会转入诊断而不伪造审计成功记录。</zh-CN><en>Outcome known when the audit is recorded; the facade currently writes successful facts only, while failures go to diagnostics instead of fabricating a successful audit record.</en></lang></summary>
+        /// <summary><lang><zh-CN>记录时确定的动作结果；写入门面默认只写成功事实，安全类必需事件（认证失败、授权失败）可显式写入失败事实，任何情况下都不伪造成功记录。</zh-CN><en>Outcome known when the audit is recorded; the facade writes success facts by default, while security-critical required events (authentication failures, authorization failures) may explicitly write failure facts; a success record is never fabricated under any circumstance.</en></lang></summary>
         public string Outcome { get; set; }
 
         /// <summary><lang><zh-CN>执行动作的门户用户名；没有可用 HTTP 身份时写入受限回退值。</zh-CN><en>Portal user name that performed the action; a constrained fallback is written when no HTTP identity is available.</en></lang></summary>
@@ -154,8 +154,8 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>尽力写入一条高价值状态变化的运营审计记录；本方法只应在主业务动作已成功后调用。</zh-CN>
-        ///   <en>Best-effort writes one operations-audit record for a high-value state change; callers must invoke it only after the primary business action has succeeded.</en>
+        ///   <zh-CN>尽力写入一条高价值状态变化的运营审计记录；默认记录成功事实（outcome="Success"），安全类必需事件（认证失败、授权失败）可显式传入 outcome="Failure" 以记录真实的失败事实。</zh-CN>
+        ///   <en>Best-effort writes one operations-audit record for a high-value state change; it records a success fact by default (outcome="Success"), and security-critical required events (authentication failures, authorization failures) may pass outcome="Failure" to record a genuine failure fact.</en>
         /// </lang>
         /// </summary>
         /// <param name="category"><l><zh-CN>稳定分类，例如 Registration 或 UserAdministration。</zh-CN><en>Stable category, such as Registration or UserAdministration.</en></l></param>
@@ -165,6 +165,7 @@ namespace ASPNET.StarterKit.Portal
         /// <param name="summary"><l><zh-CN>不含口令、Token 或业务正文的低敏摘要。</zh-CN><en>Low-sensitivity summary without passwords, tokens, or business body text.</en></l></param>
         /// <param name="context"><l><zh-CN>可选 HTTP 上下文，用于受限读取动作人和请求元数据及诊断关联。</zh-CN><en>Optional HTTP context used for restricted actor/request metadata and diagnostic correlation.</en></l></param>
         /// <param name="relatedEventId"><l><zh-CN>可选的既有诊断事件编号，不复制事件正文。</zh-CN><en>Optional existing diagnostics event identifier; its body is not copied.</en></l></param>
+        /// <param name="outcome"><l><zh-CN>动作结果的稳定值；默认 "Success"。安全类必需事件（认证失败、授权失败）传入 "Failure" 以记录真实的失败事实，任何情况下都不伪造成功记录。</zh-CN><en>Stable action-outcome value; defaults to "Success". Security-critical required events (authentication failures, authorization failures) pass "Failure" to record a genuine failure fact; a success record is never fabricated under any circumstance.</en></l></param>
         public static void Record(
             string category,
             string action,
@@ -172,7 +173,8 @@ namespace ASPNET.StarterKit.Portal
             string targetId,
             string summary,
             HttpContext context = null,
-            string relatedEventId = null)
+            string relatedEventId = null,
+            string outcome = "Success")
         {
             // <lang>
             //   <zh-CN>审计失败不得影响已经成功的主业务动作；整个写入路径因此保持尽力而为并仅在 catch 中记录诊断。</zh-CN>
@@ -212,15 +214,15 @@ namespace ASPNET.StarterKit.Portal
                     using (SqlCommand command = connection.CreateCommand())
                     {
                         // <lang>
-                        //   <zh-CN>固定 INSERT 列表使审计 schema、参数命名和低敏字段边界可审查；Outcome 固定为成功，因为本方法不记录失败业务动作。</zh-CN>
-                        //   <en>The fixed INSERT column list keeps the audit schema, parameter naming, and low-sensitivity field boundary reviewable; Outcome is fixed to success because this method does not record failed business actions.</en>
+                        //   <zh-CN>固定 INSERT 列表使审计 schema、参数命名和低敏字段边界可审查；Outcome 由调用方以受长度约束的参数提供，默认成功，安全类必需事件可传失败。</zh-CN>
+                        //   <en>The fixed INSERT column list keeps the audit schema, parameter naming, and low-sensitivity field boundary reviewable; Outcome is supplied by the caller through a length-bounded parameter, defaulting to success while security-critical required events may pass failure.</en>
                         // </lang>
                         command.CommandText = @"
 INSERT INTO [dbo].[PortalCfg_OperationAudits]
     ([OccurredUtc], [Category], [Action], [Outcome], [ActorUserName], [TargetType], [TargetId],
      [Summary], [RelatedEventId], [ClientIp], [UserAgent], [CorrelationId])
 VALUES
-    (@OccurredUtc, @Category, @Action, N'Success', @ActorUserName, @TargetType, @TargetId,
+    (@OccurredUtc, @Category, @Action, @Outcome, @ActorUserName, @TargetType, @TargetId,
      @Summary, @RelatedEventId, @ClientIp, @UserAgent, @CorrelationId);";
 
                         // <lang>
@@ -235,6 +237,7 @@ VALUES
                         // </lang>
                         AddTextParameter(command, "@Category", 80, category, "General");
                         AddTextParameter(command, "@Action", 80, action, "Update");
+                        AddTextParameter(command, "@Outcome", 40, outcome, "Success");
                         AddTextParameter(command, "@ActorUserName", 100, GetActorUserName(context), "(anonymous)");
                         AddTextParameter(command, "@TargetType", 80, targetType, "Unknown");
                         AddTextParameter(command, "@TargetId", 200, targetId, string.Empty);
@@ -609,8 +612,8 @@ OFFSET @Offset ROWS FETCH NEXT @Take ROWS ONLY;";
         private static string NormalizeFilter(string value, int maximumLength)
         {
             // <lang>
-            //   <zh-CN>空白输入代表“未筛选”，统一为空字符串以配合 SQL 中受参数控制的精确可选条件。</zh-CN>
-            //   <en>Blank input represents “not filtered” and is normalized to the empty string to match the parameter-controlled exact optional SQL conditions.</en>
+            //   <zh-CN>空白输入代表"未筛选"，统一为空字符串以配合 SQL 中受参数控制的精确可选条件。</zh-CN>
+            //   <en>Blank input represents "not filtered" and is normalized to the empty string to match the parameter-controlled exact optional SQL conditions.</en>
             // </lang>
             if (string.IsNullOrWhiteSpace(value))
             {
