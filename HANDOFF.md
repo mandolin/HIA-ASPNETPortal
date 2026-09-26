@@ -4,7 +4,7 @@
 
 ## 一、当前入口
 
-**`C-anp-P11` 收口（`W61`–`W64` 全部完成）**：`W-anp-P64` 状态机显式化已于 2026-09-26 全部完成（P64.0–P64.4，见 `work-zone/dev/plans/W-anp-P64.md` 与 `docs/collaboration-item-state-machine.md`）。当前进入 **`C-anp-P11` 收口**：汇总 W61–W64 成果、`v0.3.0` 就绪证据更新、closeout 文档。`W-anp-P58`/`W-anp-P60` 仍按方案 B 排在 `C-anp-P12` 之前。
+**`W-anp-P65` Watcher 语义与消息定位（`C-anp-P11` 第 5 阶段）**：`W-anp-P64` 状态机显式化已于 2026-09-26 全部完成（P64.0–P64.4，见 `work-zone/dev/plans/W-anp-P64.md` 与 `docs/collaboration-item-state-machine.md`）；`C-anp-P11` 的 `W61`–`W64` 已完成，仍余 `W65`/`W66`。当前进入 **`W-anp-P65` Watcher 语义与消息定位**（Q2 裁定＝修正语义描述，与"待办即通知"定位一致）。`W-anp-P58`/`W-anp-P60` 仍按方案 B 排在 `C-anp-P12` 之前。
 
 ## 二、周期位置（重要：周期组有并行/插队）
 
@@ -93,7 +93,7 @@
 - 审计保留期：`docs/audit-retention-policy.md`
 - 对标规范：`docs/detail-level-benchmark-spec.md`
 - 周期组：`work-zone/dev/plans/C-anp-P10.md`、`C-anp-P11.md`
-- 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P63.3-closeout.md`、`W-anp-P64.md`、`W-anp-P59.md`
+- 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P63.3-closeout.md`、`W-anp-P64.md`、`W-anp-P65.md`、`W-anp-P59.md`
 - 调研（Foundation 八条目）：`work-zone/dev/research/foundation-*.md`
 - 状态机文档：`docs/collaboration-item-state-machine.md`
-- 索引：`work-zone/dev/plans/W-anp-INDEX.md`（最新条目 468）、`work-zone/dev/research/README.md`
+- 索引：`work-zone/dev/plans/W-anp-INDEX.md`（最新条目 469）、`work-zone/dev/research/README.md`
