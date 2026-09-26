@@ -4,7 +4,7 @@
 
 ## 一、当前入口
 
-**`W-anp-P65` Watcher 语义与消息定位（`C-anp-P11` 第 5 阶段）**：`W-anp-P64` 状态机显式化已于 2026-09-26 全部完成（P64.0–P64.4，见 `work-zone/dev/plans/W-anp-P64.md` 与 `docs/collaboration-item-state-machine.md`）；`C-anp-P11` 的 `W61`–`W64` 已完成，仍余 `W65`/`W66`。当前进入 **`W-anp-P65` Watcher 语义与消息定位**（Q2 裁定＝修正语义描述，与"待办即通知"定位一致）。`W-anp-P58`/`W-anp-P60` 仍按方案 B 排在 `C-anp-P12` 之前。
+**`W-anp-P66` closeout 与下一蓝图（`C-anp-P11` 第 6 阶段）**：`W-anp-P65` Watcher 语义与消息定位已于 2026-09-26 全部完成（P65.0–P65.3，见 `work-zone/dev/plans/W-anp-P65.md`）；`C-anp-P11` 的 `W61`–`W65` 已完成，仅余 `W66`。当前进入 **`W-anp-P66` closeout 与下一蓝图**：汇总 `C-anp-P11` 成果、`v0.3.0` 就绪证据更新、产出 `C-anp-P12` 候选蓝图。`W-anp-P58`/`W-anp-P60` 仍按方案 B 排在 `C-anp-P12` 之前。
 
 ## 二、周期位置（重要：周期组有并行/插队）
 
