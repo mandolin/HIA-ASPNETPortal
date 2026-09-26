@@ -65,6 +65,7 @@
     <Compile Include="PortalCapabilityPermissionMatrixTests.cs" />
     <Compile Include="PortalCapabilityRegistryTests.cs" />
     <Compile Include="PortalRoleParserTests.cs" />
+    <Compile Include="PortalCollaborationItemDataScopeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

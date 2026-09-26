@@ -116,6 +116,8 @@
     <Compile Include="CollaborationItemCommentCreateRequest.cs" />
     <Compile Include="CollaborationItemCommentResult.cs" />
     <Compile Include="CollaborationItemCreateRequest.cs" />
+    <Compile Include="CollaborationItemDataScope.cs" />
+    <Compile Include="CollaborationItemDataScopePolicy.cs" />
     <Compile Include="CollaborationItemEventInfo.cs" />
     <Compile Include="CollaborationItemInfo.cs" />
     <Compile Include="CollaborationItemResult.cs" />

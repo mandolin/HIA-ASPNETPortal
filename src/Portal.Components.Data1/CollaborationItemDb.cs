@@ -33,6 +33,12 @@ namespace ASPNET.StarterKit.Portal
         private readonly IUsersDb usersDb;
         private readonly IRolesDb rolesDb;
 
+        // <lang>
+        //   <zh-CN>可选员工组织目录读取服务，用于解析当前动作人的组织范围；为空时组织维度不授予可见性（fail-closed）。</zh-CN>
+        //   <en>Optional employee-directory reader used to resolve the current actor's organization scope; when null the organization dimension grants no visibility (fail-closed).</en>
+        // </lang>
+        private readonly IEmployeeDirectoryDb employeeDirectoryDb;
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>初始化企业协同事项数据访问实现。</zh-CN>
@@ -63,12 +69,19 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Role-permission service used to check current handler and administrator permissions.</en>
         /// </l>
         /// </param>
-        public CollaborationItemDb(PortalBizDbContext context, IReferenceDataDb referenceDataDb, IUsersDb usersDb, IRolesDb rolesDb)
+        /// <param name="employeeDirectoryDb">
+        /// <l>
+        ///   <zh-CN>可选员工组织目录读取服务，用于解析当前动作人所属组织单元；为空引用或读取失败时组织维度不授予可见性。</zh-CN>
+        ///   <en>Optional employee-directory reader used to resolve the current actor's organization unit; a null reference or a read failure leaves the organization dimension granting no visibility.</en>
+        /// </l>
+        /// </param>
+        public CollaborationItemDb(PortalBizDbContext context, IReferenceDataDb referenceDataDb, IUsersDb usersDb, IRolesDb rolesDb, IEmployeeDirectoryDb employeeDirectoryDb)
         {
             this.context = context;
             this.referenceDataDb = referenceDataDb;
             this.usersDb = usersDb;
             this.rolesDb = rolesDb;
+            this.employeeDirectoryDb = employeeDirectoryDb;
         }
 
         /// <inheritdoc />
@@ -316,14 +329,30 @@ SELECT @ItemId;",
                 return new List<CollaborationItemInfo>();
             }
 
+            // <lang>
+            //   <zh-CN>列表读取前先在服务端重新解析动作人授权；身份无法确认时不返回任何事项，避免用客户端传入的用户标识直接换取数据。</zh-CN>
+            //   <en>Re-resolve actor authorization on the server before the list read; when the identity cannot be confirmed, return no items so a client-supplied user identifier cannot by itself fetch data.</en>
+            // </lang>
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(userId, out actor))
+            {
+                return new List<CollaborationItemInfo>();
+            }
+
             try
             {
+                // <lang>
+                //   <zh-CN>SQL 只做粗筛，返回前统一用数据范围判定裁剪；列表与详情共用同一判定，避免两条路径出现不同的可见性口径。</zh-CN>
+                //   <en>The SQL only pre-filters; every row is trimmed by the data-scope decision before returning, so list and detail share one decision instead of two visibility rules.</en>
+                // </lang>
                 return QueryItems(
                     @"
 WHERE [Item].[InitiatorUserId] = @UserId
    OR [Item].[OwnerUserId] = @UserId",
                     NormalizeTake(take, 20),
-                    new SqlParameter("@UserId", userId));
+                    new SqlParameter("@UserId", userId))
+                    .Where(item => CanView(item, actor))
+                    .ToList();
             }
             catch (Exception)
             {
@@ -376,8 +405,8 @@ WHERE [Item].[ItemStatus] = @ItemStatus",
         /// </param>
         /// <returns>
         /// <l>
-        ///   <zh-CN>按发生时间和事件标识升序排列的可见事件；无效输入、无参与权、schema 不可用或读取异常时返回空集合且不泄露内部原因。</zh-CN>
-        ///   <en>Visible events ordered by occurrence time and event identifier; invalid input, missing participation, unavailable schema, or read failure returns an empty collection without exposing the internal reason.</en>
+        ///   <zh-CN>按发生时间和事件标识升序排列的可见事件；无效输入、无参与权、不在数据范围内、schema 不可用或读取异常时返回空集合且不泄露内部原因。</zh-CN>
+        ///   <en>Visible events ordered by occurrence time and event identifier; invalid input, missing participation, out-of-scope data, unavailable schema, or read failure returns an empty collection without exposing the internal reason.</en>
         /// </l>
         /// </returns>
         /// <remarks>
@@ -403,7 +432,7 @@ WHERE [Item].[ItemStatus] = @ItemStatus",
             // </lang>
             CollaborationItemInfo item = FindItem(itemId);
             CollaborationItemActorAuthorization actor;
-            if (item == null || !TryGetActorAuthorization(actorUserId, out actor) || !CanParticipate(item, actor))
+            if (item == null || !TryGetActorAuthorization(actorUserId, out actor) || !CanParticipate(item, actor) || !CanView(item, actor))
             {
                 return new List<CollaborationItemEventInfo>();
             }
@@ -1149,6 +1178,128 @@ WHERE [Item].[ItemId] = @ItemId",
             //   <en>Participant-set members (Collaborator/Watcher) may also participate; the initiator and owner short-circuit above, while other roles check the participant table.</en>
             // </lang>
             return IsParticipant(item.ItemId, actor.ActorUserId);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按数据范围契约判定当前动作人是否可见指定协同事项，列表与详情共用本判定。</zh-CN>
+        ///   <en>Decides whether the current actor may view the specified collaboration item under the data-scope contract; list and detail reads share this decision.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="item">
+        /// <l>
+        ///   <zh-CN>待判定的协同事项投影；为空引用时判定失败。</zh-CN>
+        ///   <en>Collaboration-item projection to evaluate; a null reference fails the decision.</en>
+        /// </l>
+        /// </param>
+        /// <param name="actor">
+        /// <l>
+        ///   <zh-CN>服务端重新解析出的动作人授权快照；为空引用时判定失败。</zh-CN>
+        ///   <en>Actor-authorization snapshot re-resolved by the server; a null reference fails the decision.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>归属、参与人或组织任一维度成立时为 <c>true</c>；证据不足时一律为 <c>false</c>（fail-closed）。</zh-CN>
+        ///   <en><c>true</c> when the ownership, participant, or organization dimension holds; always <c>false</c> when evidence is insufficient (fail-closed).</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法只做可见性判定，不改变 <c>CanParticipate</c> 的既有结果：写动作与参与资格仍由 <c>CanParticipate</c> 负责，本方法是在其之上追加的数据范围层。判定逻辑集中在 <see cref="CollaborationItemDataScopePolicy"/>，本方法只负责收集服务端证据。</zh-CN>
+        ///   <en>This method only decides visibility and never changes the existing result of <c>CanParticipate</c>: write actions and participation eligibility remain owned by <c>CanParticipate</c>, while this method adds the data-scope layer on top. The decision logic lives in <see cref="CollaborationItemDataScopePolicy"/>; this method only collects server-side evidence.</en>
+        /// </lang>
+        /// </remarks>
+        private bool CanView(CollaborationItemInfo item, CollaborationItemActorAuthorization actor)
+        {
+            // <lang>
+            //   <zh-CN>事项或动作人快照缺失时无法安全判定，直接拒绝而不是放行。</zh-CN>
+            //   <en>Deny directly rather than allow when the item or the actor snapshot is missing and no safe decision is possible.</en>
+            // </lang>
+            if (item == null || actor == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>参与人与组织范围都在服务端现查，避免调用方自行声明范围边界；查询失败时对应维度退化为拒绝。</zh-CN>
+            //   <en>Resolve the participant flag and the organization scope on the server so callers cannot declare their own scope; a failed query degrades the related dimension to deny.</en>
+            // </lang>
+            CollaborationItemDataScope scope = new CollaborationItemDataScope(
+                actor.ActorUserId,
+                actor.IsAdministrator,
+                IsParticipant(item.ItemId, actor.ActorUserId),
+                ResolveVisibleOrganizationUnitIds(actor.ActorUserId));
+
+            return CollaborationItemDataScopePolicy.CanView(item, scope);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析当前动作人可见的组织单元范围；范围未知时返回空集合，使组织维度不授予可见性。</zh-CN>
+        ///   <en>Resolves the organization-unit scope visible to the current actor; returns an empty collection when the scope is unknown so the organization dimension grants no visibility.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="actorUserId">
+        /// <l>
+        ///   <zh-CN>服务端重新解析得到的门户用户标识；非正值直接返回空集合。</zh-CN>
+        ///   <en>Portal-user identifier re-resolved by the server; a non-positive value returns an empty collection directly.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>可见组织单元标识集合；当前只解析动作人所属组织单元本身，子树展开留作后续深化项。</zh-CN>
+        ///   <en>Visible organization-unit identifiers; currently only the actor's own organization unit is resolved, while subtree expansion remains a later deepening item.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>组织范围来自账号与员工的有效绑定及员工主数据；缺目录服务、缺绑定、缺员工号或读取异常一律返回空集合，绝不因组织维度解析失败而放宽可见性。</zh-CN>
+        ///   <en>The organization scope comes from the active user-to-employee binding and employee master data; a missing directory service, missing binding, missing employee code, or read failure all return an empty collection, and the organization dimension is never widened by a resolution failure.</en>
+        /// </lang>
+        /// </remarks>
+        private IList<int> ResolveVisibleOrganizationUnitIds(int actorUserId)
+        {
+            if (employeeDirectoryDb == null || actorUserId <= 0)
+            {
+                return new int[0];
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>没有有效绑定的账号没有组织身份，组织维度不授予任何可见性。</zh-CN>
+                //   <en>An account without an active binding has no organization identity, so the organization dimension grants nothing.</en>
+                // </lang>
+                IUserEmployeeBindingInfo binding = employeeDirectoryDb.GetActiveBindingByUserId(actorUserId);
+                if (binding == null || binding.EmployeeId <= 0 || string.IsNullOrWhiteSpace(binding.EmployeeCode))
+                {
+                    return new int[0];
+                }
+
+                // <lang>
+                //   <zh-CN>用员工号作为关键字回查员工主数据，并按员工标识精确取回，避免模糊匹配把其他员工带进组织范围。</zh-CN>
+                //   <en>Look the employee master data back up by employee code and select strictly by employee identifier so fuzzy matching cannot pull another employee into the organization scope.</en>
+                // </lang>
+                IEmployeeInfo employee = employeeDirectoryDb
+                    .GetEmployees(new EmployeeDirectoryQuery { Keyword = binding.EmployeeCode, Take = 20 })
+                    .FirstOrDefault(candidate => candidate.EmployeeId == binding.EmployeeId);
+
+                if (employee == null || !employee.OrganizationUnitId.HasValue || employee.OrganizationUnitId.Value <= 0)
+                {
+                    return new int[0];
+                }
+
+                return new[] { employee.OrganizationUnitId.Value };
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>目录读取失败按范围未知处理；此处不记录异常细节，避免低敏组织信息之外的内容进入调用方反馈。</zh-CN>
+                //   <en>Treat a directory read failure as unknown scope; no exception detail is recorded here so nothing beyond low-sensitivity organization data can reach caller feedback.</en>
+                // </lang>
+                return new int[0];
+            }
         }
 
         // <lang>
