@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 
 namespace ASPNET.StarterKit.Portal
@@ -362,6 +363,150 @@ ORDER BY [WorkItem].[CreatedUtc] DESC, [WorkItem].[WorkItemId] DESC;",
             catch (Exception)
             {
                 return new List<PortalWorkItemInfo>();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指派给指定用户或其持有角色键的待办快照，用于前台"我的待办"聚合入口。</zh-CN>
+        ///   <en>Reads a snapshot of work items assigned to the specified user or to role keys the user holds, for the front-end "My To-Do Items" aggregation entry.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>命中条件为"指派用户标识等于传入用户"或"指派角色键落在传入的受控键集合内"。本方法不解析角色成员关系，键集合由调用方用既有授权能力解析后传入。用户标识非正数且键集合为空时按 fail-closed 返回成功但空的结果，不退化成全量查询。结果显式区分"成功且无命中"与"读取失败"。</zh-CN>
+        ///   <en>A row matches when the assigned user identifier equals the supplied user, or when the assigned role key falls inside the supplied controlled key set. This method does not resolve role membership; the caller resolves the key set with existing authorization capability. When the user identifier is non-positive and the key set is empty, the method fails closed with a successful but empty result instead of degrading to an unrestricted query. The result explicitly separates "succeeded with no matches" from "read failure".</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>当前门户用户标识；非正数表示不按用户标识命中。</zh-CN>
+        ///   <en>The current Portal user identifier; a non-positive value disables matching by user identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="assignedRoleKeys">
+        /// <l>
+        ///   <zh-CN>当前用户持有的受控角色或权限键集合；可为空。空白项被丢弃，重复项被合并，超出上限的部分被截断。</zh-CN>
+        ///   <en>The controlled role or permission keys held by the current user; may be null. Blank entries are discarded, duplicates are merged, and entries beyond the cap are truncated.</en>
+        /// </l>
+        /// </param>
+        /// <param name="status">
+        /// <l>
+        ///   <zh-CN>精确状态筛选；空白表示仅未完成（<see cref="PortalWorkItemStatuses.Open"/>）。当前实现只裁剪文本，不校验是否为常量。</zh-CN>
+        ///   <en>Exact status filter; blank means unfinished items only (<see cref="PortalWorkItemStatuses.Open"/>). The current implementation only trims the text and does not validate it against the constants.</en>
+        /// </l>
+        /// </param>
+        /// <param name="take">
+        /// <l>
+        ///   <zh-CN>期望最大条数；非正数使用 50，上限限制为 200。</zh-CN>
+        ///   <en>Requested maximum row count; non-positive values use 50 and the count is capped at 200.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>包含成功标记与最新优先待办投影的查询结果；架构不可用或查询异常时返回失败结果且列表为空。</zh-CN>
+        ///   <en>A query result carrying the success flag and the newest-first projections; unavailable schema or query failures yield a failed result with an empty list.</en>
+        /// </l>
+        /// </returns>
+        public PortalWorkItemQueryResult GetWorkItemsForUser(int userId, IEnumerable<string> assignedRoleKeys, string status, int take)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return new PortalWorkItemQueryResult(false, null);
+            }
+
+            // <lang>
+            //   <zh-CN>角色键集合先裁剪、去空白、去重并截断到上限，避免把调用方传入的任意文本拼成过长的 SQL 列表。</zh-CN>
+            //   <en>The role-key set is trimmed, stripped of blanks, de-duplicated, and truncated to a cap so caller-supplied text cannot expand into an oversized SQL list.</en>
+            // </lang>
+            const int maxRoleKeys = 32;
+            List<string> keys = new List<string>();
+            if (assignedRoleKeys != null)
+            {
+                foreach (string rawKey in assignedRoleKeys)
+                {
+                    if (keys.Count >= maxRoleKeys)
+                    {
+                        break;
+                    }
+
+                    string key = NormalizeText(rawKey, 120);
+                    if (!string.IsNullOrEmpty(key) && !keys.Contains(key))
+                    {
+                        keys.Add(key);
+                    }
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>没有任何指派依据时按 fail-closed 返回空结果：既不查全量，也不把"无法判定归属"伪装成读取失败。</zh-CN>
+            //   <en>With no assignment basis the method fails closed and returns an empty result: it neither queries everything nor disguises "ownership undecidable" as a read failure.</en>
+            // </lang>
+            if (userId <= 0 && keys.Count == 0)
+            {
+                return new PortalWorkItemQueryResult(true, new List<PortalWorkItemInfo>());
+            }
+
+            string normalizedStatus = NormalizeStatusFilter(status);
+            if (string.IsNullOrEmpty(normalizedStatus))
+            {
+                normalizedStatus = PortalWorkItemStatuses.Open;
+            }
+
+            int safeTake = NormalizeTake(take, 50);
+            try
+            {
+                // <lang>
+                //   <zh-CN>角色键逐个作为参数绑定，键集合为空时用永不命中的占位表达式，保证 IN 子句恒为合法 SQL 且不受文本注入影响。</zh-CN>
+                //   <en>Each role key is bound as its own parameter, and an empty key set uses a never-matching placeholder expression, so the IN clause is always valid SQL and immune to text injection.</en>
+                // </lang>
+                List<string> parameterNames = new List<string>();
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@Take", safeTake));
+                parameters.Add(new SqlParameter("@Status", normalizedStatus));
+                parameters.Add(new SqlParameter("@UserId", userId));
+                parameters.Add(new SqlParameter("@HasRoleKeys", keys.Count > 0 ? 1 : 0));
+                for (int index = 0; index < keys.Count; index++)
+                {
+                    string parameterName = "@RoleKey" + index.ToString(CultureInfo.InvariantCulture);
+                    parameterNames.Add(parameterName);
+                    parameters.Add(new SqlParameter(parameterName, keys[index]));
+                }
+
+                string roleKeyList = parameterNames.Count > 0 ? string.Join(", ", parameterNames.ToArray()) : "N''";
+                return new PortalWorkItemQueryResult(
+                    true,
+                    context.Database.SqlQuery<PortalWorkItemInfo>(
+                        @"
+SELECT TOP (@Take)
+    [WorkItem].[WorkItemId],
+    [WorkItem].[BusinessKind],
+    [WorkItem].[BusinessId],
+    [WorkItem].[Title],
+    [WorkItem].[Summary],
+    [WorkItem].[WorkItemStatus],
+    [WorkItem].[AssignedUserId],
+    [User].[Name] AS [AssignedUserName],
+    [WorkItem].[AssignedRoleKey],
+    [WorkItem].[CreatedUtc],
+    [WorkItem].[CreatedBy],
+    [WorkItem].[DueUtc],
+    [WorkItem].[CompletedUtc],
+    [WorkItem].[CompletedBy]
+FROM [dbo].[PortalBiz_WorkItems] AS [WorkItem]
+LEFT JOIN [dbo].[Portal_Users] AS [User]
+    ON [User].[UserID] = [WorkItem].[AssignedUserId]
+WHERE [WorkItem].[WorkItemStatus] = @Status
+  AND (
+        ([WorkItem].[AssignedUserId] IS NOT NULL AND [WorkItem].[AssignedUserId] = @UserId)
+        OR (@HasRoleKeys = 1 AND [WorkItem].[AssignedRoleKey] IN (" + roleKeyList + @"))
+      )
+ORDER BY [WorkItem].[CreatedUtc] DESC, [WorkItem].[WorkItemId] DESC;",
+                        parameters.ToArray()).ToList());
+            }
+            catch (Exception)
+            {
+                return new PortalWorkItemQueryResult(false, null);
             }
         }
 

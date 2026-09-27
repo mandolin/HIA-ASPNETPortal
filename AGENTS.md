@@ -27,8 +27,9 @@
 ## AI 工作区
 
 - `work-zone/ai/share/` 是共享区，所有 AI 可读写。
-- `work-zone/ai/codex/`、`work-zone/ai/qoder/`、`work-zone/ai/comate/` 分别由对应 AI 维护。
+- `work-zone/ai/codebuddy/`、`work-zone/ai/codex/`、`work-zone/ai/qoder/`、`work-zone/ai/comate/` 分别由对应 AI 维护。
 - 不直接修改其他 AI 的专属目录；交接、审查和冲突讨论统一写入 `work-zone/ai/share/`。
+- **会话日志写入各自专属目录**：路径统一为 `work-zone/ai/<ai>/chatlog/YYYY-MM-DD/主题-HHmmss.md`（例如 CodeBuddy 写 `work-zone/ai/codebuddy/chatlog/`）。**不得把本 AI 的日志写入其他 AI 的目录**；引用日志规则前须先确认其所属小节是否为本 AI 专属。
 - 修改已有文档或代码前先读取现状并检查 Git 状态，不覆盖用户或其他协作者的未提交改动。
 
 ## 发展原则：禁止闭门造车，坚持对外调研与持续积累
@@ -85,7 +86,8 @@
 
 ## Codex 日志与提交提醒
 
-- 每次会话在 `work-zone/ai/codex/chatlog/YYYY-MM-DD/主题-HHmmss.md` 记录可公开的工程过程，并在最终回复附上日志链接。
+- 【**本节仅适用于 Codex**】每次会话在 `work-zone/ai/codex/chatlog/YYYY-MM-DD/主题-HHmmss.md` 记录可公开的工程过程，并在最终回复附上日志链接。
+- **其他 AI 不适用上一条**：各 AI 一律写入自己的 `work-zone/ai/<ai>/chatlog/`（见「AI 工作区」小节），不得以本节的 `codex` 路径为通用规则。
 - 日志按时间片记录工作内容、数字序号进度说明、执行命令、关键输出、失败重试、验证结果和后续事项；不记录逐字私有思维链。
 - 当改动文件较多或存在较多未提交内容时，提醒用户考虑分批提交，但不主动执行 `git add` 或 `git commit`。
 - 提交提醒要区分两个仓库：项目代码和公开文档提交到主仓库，内部资料与日志提交到 WorkZone 私有仓库。

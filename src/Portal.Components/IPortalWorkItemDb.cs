@@ -151,5 +151,49 @@ namespace ASPNET.StarterKit.Portal
         /// </l>
         /// </returns>
         IList<PortalWorkItemEventInfo> GetWorkItemEvents(long workItemId, int take);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指派给指定用户或其持有角色键的待办快照，用于前台"我的待办"聚合入口。</zh-CN>
+        ///   <en>Reads a snapshot of work items assigned to the specified user or to role keys the user holds, for the front-end "My To-Do Items" aggregation entry.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>命中条件为"指派用户标识等于当前用户"或"指派角色键落在传入的受控键集合内"。本契约不解析角色成员关系：键集合必须由调用方用既有授权能力解析后传入，避免数据层越权推导归属。传入的用户标识非正数且键集合为空时按 fail-closed 返回成功但空的结果，不退化成全量查询。结果显式区分"成功且无命中"与"读取失败"，供前台分别呈现空态与失败态。</zh-CN>
+        ///   <en>A row matches when the assigned user identifier equals the current user, or when the assigned role key falls inside the supplied controlled key set. This contract does not resolve role membership: the caller must resolve the key set with existing authorization capability and pass it in, so the data layer never infers ownership beyond its authority. When the supplied user identifier is non-positive and the key set is empty, the method fails closed and returns a successful but empty result instead of degrading to an unrestricted query. The result explicitly separates "succeeded with no matches" from "read failure" so a front end can render empty and failure states separately.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>当前门户用户标识；非正数表示不按用户标识命中，此时仅按角色键命中。</zh-CN>
+        ///   <en>The current Portal user identifier. A non-positive value disables matching by user identifier, leaving role-key matching only.</en>
+        /// </l>
+        /// </param>
+        /// <param name="assignedRoleKeys">
+        /// <l>
+        ///   <zh-CN>当前用户持有的受控角色或权限键集合；可为空引用或空集合。空白项被丢弃，重复项被合并，数量超出实现上限的部分被截断。</zh-CN>
+        ///   <en>The controlled role or permission keys held by the current user. It may be null or empty. Blank entries are discarded, duplicates are merged, and entries beyond the implementation cap are truncated.</en>
+        /// </l>
+        /// </param>
+        /// <param name="status">
+        /// <l>
+        ///   <zh-CN>精确状态筛选；空白表示仅未完成（<see cref="PortalWorkItemStatuses.Open"/>）。当前实现只裁剪文本，不校验是否为 <see cref="PortalWorkItemStatuses"/> 常量。</zh-CN>
+        ///   <en>Exact status filter; blank means unfinished items only (<see cref="PortalWorkItemStatuses.Open"/>). The current implementation only trims the text and does not validate it against <see cref="PortalWorkItemStatuses"/> constants.</en>
+        /// </l>
+        /// </param>
+        /// <param name="take">
+        /// <l>
+        ///   <zh-CN>期望最大条数；当前实现对非正数使用 50，并把上限限制为 200。</zh-CN>
+        ///   <en>Requested maximum row count; the current implementation uses 50 for non-positive values and caps the count at 200.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>包含成功标记与最新优先待办投影的查询结果；架构不可用或查询异常时返回失败结果且列表为空。</zh-CN>
+        ///   <en>A query result carrying the success flag and the newest-first work-item projections; unavailable schema or query failures yield a failed result with an empty list.</en>
+        /// </l>
+        /// </returns>
+        PortalWorkItemQueryResult GetWorkItemsForUser(int userId, IEnumerable<string> assignedRoleKeys, string status, int take);
     }
 }
