@@ -12,7 +12,7 @@
 | --- | --- |
 | `C-anp-P9`（W50–W55） | ✅ 已收口 |
 | `C-anp-P10`（W56–W60） | ⚠ **未收口**：`W56`✅ `W57`✅ `W59`✅（按方案 B 插队先做）｜**`W58`（BasicBusiness 盘点对标）、`W60`（P10 closeout）待做**——按用户裁定的**方案 B**，二者排在 **`C-anp-P12` 之前**完成（W58 是 P12 的前置调研）。 |
-| `C-anp-P11`（W61–W66） | 进行中：`W61`✅ `W62`✅ ｜ `W63` 进行中（P63.0 完成）｜ `W64` 状态机显式化、`W65` Watcher 语义、`W66` closeout 待做 |
+| `C-anp-P11`（W61–W66） | ✅ 已收口（`W61`–`W66` 全部完成；closeout 见 `work-zone/dev/plans/C-anp-P11-closeout.md`） |
 
 ## 三、本机 dev 环境（已跑通，可复现）
 
@@ -34,47 +34,32 @@
 | `W61` | PBKDF2 下限 `210000 → 600000`（OWASP；实测 407ms < 1s）；`minimumPortalVersion` 语义定义；上传白名单移除 `zip` |
 | `W62` | 审计补齐：门面 `Outcome` 参数化；**认证失败**入审计（`Signin.ascx.cs` 失败分支）；**授权失败**入审计（`PortalNavigationPolicy` 两个集中出口）；保留期策略 `docs/audit-retention-policy.md` |
 | `W59` | 细节级对标规范 `docs/detail-level-benchmark-spec.md`（八维度 + 模板 + 检查表） |
-| `W63 P63.0` | 数据范围八维度对标（采纳 fail-closed、先应用层；不采纳立即 RLS/hierarchyid） |
+| `W63`（P63.0–P63.3） | 数据范围契约：八维度对标（采纳 fail-closed、先应用层；不采纳立即 RLS/hierarchyid）+ `CanView` 落地（列表/详情共用、10 例单测）+ closeout（见 `W-anp-P63.3-closeout.md`） |
+| `W64`（P64.0–P64.4） | 状态机显式化：显式迁移表单一事实源 + `IsLegalTransition` 门禁 + SQL 守卫由表生成 + 迁移必写事件 + 流转说明（`docs/collaboration-item-state-machine.md`）+ 6 例单测 |
+| `W65`（P65.0–P65.3） | Watcher 语义修正：与"待办即通知"定位一致；确证无独立通知发送 |
 
-**版本**：当前 `v0.1.0`（tag 已推送）；`C-anp-P10` 产出 `v0.2.0`、`C-anp-P11` 产出 `v0.3.0`。
+**版本**：当前 `v0.1.0`（tag 已推送）；`C-anp-P10` 产出 `v0.2.0`、`C-anp-P11` 产出 `v0.3.0`（就绪证据已汇总，实际版本推进 `W60(v0.2.0)→C-anp-P11(v0.3.0)` 待确认后执行；见 `C-anp-P11-closeout.md` §七）。
 
-## 五、下一步：`P63.1` → `P63.2`（精确实施步骤）
+## 五、下一步：`W58` → `W60` → `C-anp-P12`（方案 B 排序）
 
-**目标**：为协同事项（`BasicBusiness.Collaboration`）落地**数据范围**过滤：越权数据不可见（fail-closed）。
+**当前入口**：`W58`（BasicBusiness 盘点对标，`C-anp-P10` 遗留，是 `C-anp-P12` 前置调研）。
 
-**关键文件**：`src/Portal.Components.Data1/CollaborationItemDb.cs`
+**序列**（方案 B）：
+1. `W58`（BasicBusiness 盘点对标）→
+2. `W60`（`P10` closeout，协调 `v0.2.0` 版本推进）→
+3. `C-anp-P12`（BasicBusiness 完善，`v0.4.0`；候选蓝图见 `work-zone/dev/plans/C-anp-P12-candidate-blueprint.md`）。
 
-| 位置 | 说明 |
-| --- | --- |
-| `GetRecentItemsForUser(int userId, int take)`（约 L312） | **用户视角列表**，已有 `userId` → 施加范围过滤的主入口 |
-| `GetAdminItems(status, take)`（约 L335） | 管理员视角（保持既有权限约束，不扩权） |
-| `QueryItems(whereClause, take, params)`（约 L992） | 内部查询辅助 |
-| `CanParticipate(item, actor)`（约 L1132） | 既有**写**权限判定（并集扩展）→ **不改其语义**，只**追加**可见性层 |
-
-**步骤**
-
-1. 新增 `private bool CanView(CollaborationItemInfo item, CollaborationItemActorAuthorization actor)`：
-   - 维度：① **归属**（`InitiatorUserId` / `OwnerUserId` == 当前用户）；② **参与人**（参与人集合含当前用户，`Collaborator`/`Watcher`）；③ **组织**（涉及员工的 `OrganizationUnitId` 落在当前用户可见组织范围内）。
-   - **fail-closed**：`item` 或 `actor` 为空 / 信息不足 → 返回 `false`。
-2. 在 `GetRecentItemsForUser` 的返回前，用 `CanView` 过滤结果（列表与详情共用同一判定；不引入"部分可见"UI 状态）。
-3. 新增单测（`src/Portal.Tests/`）：范围外用户读取该事项 → **不可见/被拒**（必须有 fail-closed 证据）。
-4. 构建 **0 错 0 警** + `Portal.Tests` 单测全绿（当前基线 **70** 个）。
-
-**约束**：只落**应用层**，不引入 DB 层 RLS / 视图 / `SESSION_CONTEXT`；不改 `CanParticipate`。
+**`C-anp-P11` 已收口**（`W61`–`W66`）：closeout 与 `v0.3.0` 就绪证据见 `work-zone/dev/plans/C-anp-P11-closeout.md`；实际版本号推进（`CHANGELOG` + 程序集 `0.1.0.0 → 0.3.0.0` + `git tag`）作为发行动作，建议序列 `W60(v0.2.0) → C-anp-P11(v0.3.0)`，待用户确认后执行（不倒置 tag 顺序）。
 
 ## 六、剩余待办
 
-**C-anp-P11**：`W63`（P63.1/P63.2 落地）→ `W64`（状态机显式化：合法迁移表 + 强制校验 + 迁移必写事件 + 流转说明）
-→ `W65`（`Watcher` 语义落差：按 Q2 裁定**修正描述**为主，契约明确"站内通知由待办投影承担"）
-→ `W66`（closeout + `C-anp-P12` 蓝图）
-**方案 B 剩余**：`W58`（BasicBusiness 盘点对标）→ `W60`（P10 closeout），均在 `C-anp-P12` 之前。
+**`C-anp-P11` 已收口**（`W61`–`W66`）：见 `C-anp-P11-closeout.md`，5 项历史待回看均已处置（Watcher 语义→W65；`minimumPortalVersion` 语义→W61/`docs/versioning.md` §八；PBKDF2→W61 600000；zip→W61 移除；认证/授权审计→W62 补齐）。
 
-**待回看项（5 项，P57.9/W66 决定处置）**
-1. `Watcher` 语义—实现落差（已在 W65 处理）
-2. `minimumPortalVersion:"1.0"` 与产品版本 `v0.1.0` 冲突（W61 已定义语义，待各 `module.json` 按约定收敛）
-3. PBKDF2 迭代 210000 仅达 OWASP 35%（W61 已修复为 600000）
-4. 上传白名单 `zip`（OWASP 不建议，W61 已移除）
-5. 认证/授权审计缺失（W62 已补齐）
+**方案 B 剩余**：`W58`（BasicBusiness 盘点对标）→ `W60`（P10 closeout，协调 `v0.2.0`），均在 `C-anp-P12` 之前。
+
+**`C-anp-P12` 候选蓝图**（待裁定）：`W67` 组织子树展开、`W68` 列表"我可见的事项"语义 + SQL 放宽、`W69` 真实通知通道/"待办即通知"呈现、`W70` 负责人角色键读取边界收敛、`W71+` BasicBusiness 其余能力完善；见 `C-anp-P12-candidate-blueprint.md`。
+
+**结转开放项**：① 组织子树展开；② 负责人角色键读取边界；③ 列表 SQL 放宽/"我可见"语义（需先出 UI 原型）；④ 真实通知呈现（依赖工作项投影 + UI）；以上均归入 `C-anp-P12` 候选包。
 
 ## 七、纪律与注意事项
 
@@ -93,7 +78,9 @@
 - 审计保留期：`docs/audit-retention-policy.md`
 - 对标规范：`docs/detail-level-benchmark-spec.md`
 - 周期组：`work-zone/dev/plans/C-anp-P10.md`、`C-anp-P11.md`
-- 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P63.3-closeout.md`、`W-anp-P64.md`、`W-anp-P65.md`、`W-anp-P59.md`
+- 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P63.3-closeout.md`、`W-anp-P64.md`、`W-anp-P65.md`、`W-anp-P66.md`、`W-anp-P59.md`
+- `C-anp-P11` 收口：`work-zone/dev/plans/C-anp-P11-closeout.md`
+- `C-anp-P12` 候选蓝图：`work-zone/dev/plans/C-anp-P12-candidate-blueprint.md`
 - 调研（Foundation 八条目）：`work-zone/dev/research/foundation-*.md`
 - 状态机文档：`docs/collaboration-item-state-machine.md`
-- 索引：`work-zone/dev/plans/W-anp-INDEX.md`（最新条目 469）、`work-zone/dev/research/README.md`
+- 索引：`work-zone/dev/plans/W-anp-INDEX.md`（最新条目 470）、`work-zone/dev/research/README.md`
