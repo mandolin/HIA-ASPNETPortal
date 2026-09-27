@@ -4,7 +4,7 @@
 
 ## 一、当前入口
 
-**`W-anp-P66` closeout 与下一蓝图（`C-anp-P11` 第 6 阶段）**：`W-anp-P65` Watcher 语义与消息定位已于 2026-09-26 全部完成（P65.0–P65.3，见 `work-zone/dev/plans/W-anp-P65.md`）；`C-anp-P11` 的 `W61`–`W65` 已完成，仅余 `W66`。当前进入 **`W-anp-P66` closeout 与下一蓝图**：汇总 `C-anp-P11` 成果、`v0.3.0` 就绪证据更新、产出 `C-anp-P12` 候选蓝图。`W-anp-P58`/`W-anp-P60` 仍按方案 B 排在 `C-anp-P12` 之前。
+**`W67` 前台「我的待办」聚合入口 + 操作审计（`C-anp-P12` 第 1 阶段，原则二 gate）**：`C-anp-P10`（W56–W60，`v0.2.0`）与 `C-anp-P11`（W61–W66，`v0.3.0`）已全部收口并发布；`W58`/`W60` 两项方案 B 前置已全部完成。**`C-anp-P12`（BasicBusiness 完善，`v0.4.0`）已固化**（D1–D4 裁定已确认），首个执行项 `W67` 的 **`P67.1` 原型与设计稿已产出，待用户确认后进入实现**。详见 `work-zone/dev/plans/W-anp-P67.md` 与 `work-zone/dev/plans/W-anp-P67.1-prototype-and-design.md`。
 
 ## 二、周期位置（重要：周期组有并行/插队）
 
@@ -13,6 +13,7 @@
 | `C-anp-P9`（W50–W55） | ✅ 已收口 |
 | `C-anp-P10`（W56–W60） | ✅ **已收口**（2026-09-28）：`W56`✅ `W57`✅ `W58`✅ `W59`✅ `W60`✅；`v0.2.0` tag 已推送，一致性门禁 Pass；closeout 见 `work-zone/dev/plans/C-anp-P10-closeout.md`；L10 里程碑文档已建立 `work-zone/dev/milestones/M-ANP-RELEASE-READY-PORTAL.md`。 |
 | `C-anp-P11`（W61–W66） | ✅ 已收口（`W61`–`W66` 全部完成；closeout 见 `work-zone/dev/plans/C-anp-P11-closeout.md`） |
+| **`C-anp-P12`（W67–W75）** | **进行中**：已**固化**（D1–D4 已裁定，见 `work-zone/dev/plans/C-anp-P12.md`）；`W67` 处于 **`P67.1` 原型与设计稿 gate（待确认）**；后续 `W68` 目录子树 → `W69` 更正闭环 → P2/P3 → `W75` closeout（`v0.4.0`） |
 
 ## 三、本机 dev 环境（已跑通，可复现）
 
@@ -42,23 +43,26 @@
 
 **版本**：当前 **`v0.3.0`**（tag 已推送，2026-09-28；CHANGELOG + 5 个程序集 `0.3.0.0` 联动，一致性门禁 Pass）。`v0.2.0`（`C-anp-P10`）与 `v0.3.0`（`C-anp-P11`）均已按推荐序列发布，无版本滞后。
 
-## 五、下一步：`v0.3.0` 推进 → `C-anp-P12`
+## 五、下一步：`W67` 原型 gate → 实现 → `W68` → `W69`
 
-**当前入口**：`C-anp-P12`（BasicBusiness 完善，`v0.4.0`）；其前置发行动作为 **`v0.3.0` 版本推进**。
+**当前入口**：`W67` 前台"我的待办"聚合入口 + 操作审计，处于 **`P67.1` 原型与设计稿 gate（待用户确认）**。
 
 **状态**
 
 | 周期组 | 状态 |
 | --- | --- |
-| `C-anp-P10`（W56–W60） | ✅ 已收口（2026-09-28）；`v0.2.0` tag 已推送，一致性门禁 Pass |
-| `C-anp-P11`（W61–W66） | ✅ 已收口；**`v0.3.0` 待切**（下一个发行动作：CHANGELOG 条目 + 程序集 `0.2.0.0 → 0.3.0.0` + tag，见 `C-anp-P11-closeout.md` §七） |
-| `C-anp-P12`（BasicBusiness 完善） | 候选蓝图已按 `W58` 对标结论定稿为 P1/P2/P3，**待用户裁定 4 项**后固化 |
+| `C-anp-P10`（W56–W60） | ✅ 已收口；`v0.2.0` tag 已推送 |
+| `C-anp-P11`（W61–W66） | ✅ 已收口；`v0.3.0` tag 已推送（当前版本锚点） |
+| **`C-anp-P12`（W67–W75）** | **已固化**（D1–D4 已裁定）；`W67` 原型产出，**待确认后进实现** |
 
-**待用户裁定（4 项）**：① `Business.Workflow` 归属三选一（合并到 `BusinessApplicationRequest` / 正式登记能力 / 移除死键）；② 三个孤儿模块是否补 `capabilityId`；③ UI 原型产出安排（`W-WI-1`/`W-UI-1`）；④ 员工资料更正"批准 → 回写"是否需二次审批。
+**D1–D4 裁定（用户 2026-09-28 确认）**：① `Business.Workflow` **合并到 `BusinessApplicationRequest`**（两键保留为历史兼容别名，不再使用）；② `EmployeeProfileConfirm`/`EmployeeProfileCorrectionRequest` **补 `capabilityId`** 并新增两条能力登记，`ModuleProbe` 归 Platform 不补；③ **先做前台"我的待办"**（`W67`），原型确认后方可实现；④ 更正回写**不引入二次审批**（单一审批 + 白名单 4 低敏字段 + 必写审计与事件）。
+
+**`W67` 原型要点**：新增 DesktopModule `HIA.MyWorkItems`；仅本人未完成待办（fail-closed）；不可就地办理（跳转到业务对象）；10 项关键状态（含空态、读取失败、权限不足、禁用、超期）；a11y + IE9+ + 六套主题兼容；双语串清单；待裁定 T1–T5（含模块挂载 Tab、BusinessKind 前台可达性）。
+**已识别风险**：既有 `GetBusinessUrl` 映射到**后台 Admin 页**，普通用户跳转可能 403 → 原型规定不可达则禁用链接 + 提示。
 
 **`W58` 关键结论**：7 个 BasicBusiness 能力方向中仅 `Collaboration` 达"初步完善"，**单测覆盖 1/7**；P1＝目录组织子树查询（原 `W67` 的数据层前置）+ `WorkItems` 前台"我的待办"入口（GitLab 一手印证）+ `CorrectionRequest` 批准回写闭环；详见研究文档。
 
-**`C-anp-P11` 已收口**（`W61`–`W66`）：closeout 与 `v0.3.0` 就绪证据见 `work-zone/dev/plans/C-anp-P11-closeout.md`；实际版本号推进（`CHANGELOG` + 程序集 `0.1.0.0 → 0.3.0.0` + `git tag`）作为发行动作，建议序列 `W60(v0.2.0) → C-anp-P11(v0.3.0)`，待用户确认后执行（不倒置 tag 顺序）。
+**`C-anp-P11` 已收口**（`W61`–`W66`）：closeout 与 `v0.3.0` 就绪证据见 `work-zone/dev/plans/C-anp-P11-closeout.md`；**版本推进已完成**（2026-09-28，按序列 `v0.2.0 → v0.3.0`：`CHANGELOG` + 程序集 `0.3.0.0` + `git tag v0.3.0` + 一致性门禁 Pass）。
 
 ## 六、剩余待办
 
@@ -88,7 +92,9 @@
 - 对标规范：`docs/detail-level-benchmark-spec.md`
 - 周期组：`work-zone/dev/plans/C-anp-P10.md`、`C-anp-P11.md`
 - 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P63.3-closeout.md`、`W-anp-P64.md`、`W-anp-P65.md`、`W-anp-P66.md`、`W-anp-P58.md`、`W-anp-P59.md`、`W-anp-P60.md`
+- 周期组：`work-zone/dev/plans/C-anp-P12.md`（已固化，D1–D4）、`C-anp-P10.md`、`C-anp-P11.md`
 - 周期组收口：`work-zone/dev/plans/C-anp-P10-closeout.md`、`C-anp-P11-closeout.md`
+- `C-anp-P12` 阶段：`work-zone/dev/plans/W-anp-P67.md`；原型与设计稿 `work-zone/dev/plans/W-anp-P67.1-prototype-and-design.md`（原则二 gate）
 - 里程碑 L10：`work-zone/dev/milestones/M-ANP-RELEASE-READY-PORTAL.md`（索引见 `work-zone/dev/milestones/README.md`）
 - BasicBusiness 能力对标（`W58`）：`work-zone/dev/research/basicbusiness-capability-reference-2026-09-28.md`
 - `C-anp-P11` 收口：`work-zone/dev/plans/C-anp-P11-closeout.md`
