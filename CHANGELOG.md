@@ -4,6 +4,37 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [SemVer](https://semver.org/lang/zh-CN/)。
 
+## [v0.3.0] - 2026-09-28
+
+**Foundation（核心）能力初步完善**（`C-anp-P11`：W61–W66）。
+
+### 已加入
+
+- **W61 密码成本与版本语义**：PBKDF2 迭代下限 `210000 → 600000`（依据 OWASP Password Storage Cheat Sheet，目标环境实测 407 ms < 1 s）；`minimumPortalVersion` 语义在 `docs/versioning.md` 第八节定义（模块对宿主门户的兼容性声明，与产品版本号是两个独立维度）；上传白名单移除 `zip`（OWASP 不建议）。
+- **W62 审计补齐**：审计门面支持 `Outcome` 参数化；**认证失败**入审计（`Signin.ascx.cs` 失败分支）；**授权失败**入审计（`PortalNavigationPolicy` 两个集中拒绝出口）——补齐 OWASP Logging Cheat Sheet 要求的必须事件类型；新增保留期策略 `docs/audit-retention-policy.md`。
+- **W63 数据范围契约**：新增 `CollaborationItemDataScope` 与 `CollaborationItemDataScopePolicy.CanView`（判定顺序 管理员 → 归属 → 参与人 → 组织，**fail-closed**）；列表与详情共用同一判定且由服务端强制；既有 `CanParticipate` 语义未改变；**新增 10 例单测**。
+- **W64 状态机显式化**：新增 `PortalCollaborationItemTransitions`（8 状态 / 8 动作 / 15 条迁移的单一事实源）；`MapActionToStatus` 与 SQL 写入守卫谓词均由该表派生，消除映射漂移；`ApplyAction` 新增 `IsLegalTransition` 服务端门禁；迁移必写 `WorkflowAction` 事件（`FromStatus`/`ToStatus` 留痕）；新增状态流转说明 `docs/collaboration-item-state-machine.md`；**新增 6 例单测**。
+- **W65 Watcher 语义修正**：`Watcher` / `Collaborator` 描述与"待办即通知"定位对齐，消除"关注者仅接收通知"语义与实际无通知发送之间的落差；全仓确证协同事项无独立通知发送。
+
+### 里程碑状态（截至本版本）
+
+| 里程碑 | 级别 | 状态 |
+| --- | --- | --- |
+| `M-ANP-MAINTAINABLE-BASE` | L3 | 已达成 |
+| `M-ANP-OPERABLE-PORTAL` | L4 | 已达成（当前基线） |
+| `M-ANP-EXTENSIBLE-PORTAL` | L5 | 已达成 |
+| `M-ANP-DOCUMENTED-PORTAL` | L6 | 已达成 |
+| `M-ANP-TRUSTED-PORTAL` | L7 | 评估中，未无条件达成 |
+| `M-ANP-BUSINESS-READY-PORTAL` | L8 | 条件式达成 |
+| `M-ANP-ENTERPRISE-UI-PORTAL` | L9 | 条件式达成 |
+| `M-ANP-RELEASE-READY-PORTAL` | L10 | 未达成（目标 `v1.0.0`）：**Foundation 侧已达初步完善**，BasicBusiness 侧待 `C-anp-P12` 执行（见 `work-zone/dev/milestones/M-ANP-RELEASE-READY-PORTAL.md`） |
+
+### 说明
+
+- 本版本为**内部基线锚点**，不对外宣传；`v1.0.0` 之前口径限于"可用 / 参考 / 研究基线"。
+- 质量门禁：构建 `0 错 0 警`、单测 `86/86`、XML 文档门禁通过。
+- `C-anp-P11` 的规划产出（`W66` closeout 与 `C-anp-P12` 候选蓝图）属内部计划，见 `work-zone/`。
+
 ## [v0.2.0] - 2026-09-28
 
 **版本机制 + 两大能力层盘点与深度对标**（`C-anp-P10`：W56–W60）。
