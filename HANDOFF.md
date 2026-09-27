@@ -11,7 +11,7 @@
 | 周期组 | 状态 |
 | --- | --- |
 | `C-anp-P9`（W50–W55） | ✅ 已收口 |
-| `C-anp-P10`（W56–W60） | ⚠ **未收口**：`W56`✅ `W57`✅ `W58`✅ `W59`✅｜**`W60`（P10 closeout，协调 `v0.2.0`）待做**——按用户裁定的**方案 B**，`W58`/`W60` 排在 **`C-anp-P12` 之前**完成；`W58` 已于 2026-09-28 完成（七能力方向盘点 + 对标，见 `work-zone/dev/research/basicbusiness-capability-reference-2026-09-28.md`）。 |
+| `C-anp-P10`（W56–W60） | ✅ **已收口**（2026-09-28）：`W56`✅ `W57`✅ `W58`✅ `W59`✅ `W60`✅；`v0.2.0` tag 已推送，一致性门禁 Pass；closeout 见 `work-zone/dev/plans/C-anp-P10-closeout.md`；L10 里程碑文档已建立 `work-zone/dev/milestones/M-ANP-RELEASE-READY-PORTAL.md`。 |
 | `C-anp-P11`（W61–W66） | ✅ 已收口（`W61`–`W66` 全部完成；closeout 见 `work-zone/dev/plans/C-anp-P11-closeout.md`） |
 
 ## 三、本机 dev 环境（已跑通，可复现）
@@ -38,17 +38,23 @@
 | `W64`（P64.0–P64.4） | 状态机显式化：显式迁移表单一事实源 + `IsLegalTransition` 门禁 + SQL 守卫由表生成 + 迁移必写事件 + 流转说明（`docs/collaboration-item-state-machine.md`）+ 6 例单测 |
 | `W65`（P65.0–P65.3） | Watcher 语义修正：与"待办即通知"定位一致；确证无独立通知发送 |
 | `W58`（P58.0–P58.3） | BasicBusiness 盘点对标（方案 B 前置调研）：七能力方向现状盘点 + 外部对标（转引本项目已核实的一手来源）+ `C-anp-P12` 候选清单定稿为 P1/P2/P3；**纯调研无代码改动** |
+| `W60`（P60.0–P60.3） | `C-anp-P10` 收口 + **L10 里程碑文档建立**（`M-ANP-RELEASE-READY-PORTAL`，七条判据 R1–R7 与基线证据）+ **`v0.2.0` 版本推进**：CHANGELOG 条目、5 个程序集 `0.2.0.0`、`git tag v0.2.0`、一致性门禁 Pass；构建 0 错 0 警、单测 86/86 |
 
-**版本**：当前 `v0.1.0`（tag 已推送）；`C-anp-P10` 产出 `v0.2.0`、`C-anp-P11` 产出 `v0.3.0`（就绪证据已汇总，实际版本推进 `W60(v0.2.0)→C-anp-P11(v0.3.0)` 待确认后执行；见 `C-anp-P11-closeout.md` §七）。
+**版本**：当前 **`v0.2.0`**（tag 已推送，2026-09-28；CHANGELOG + 5 个程序集 `0.2.0.0` 联动）。`C-anp-P11` 产出 **`v0.3.0`** —— 源码成果已全部完成，**版本推进为下一个发行动作**（按推荐序列 `v0.2.0 → v0.3.0`；见 `C-anp-P11-closeout.md` §七）。
 
-## 五、下一步：`W60` → `C-anp-P12`（方案 B 排序）
+## 五、下一步：`v0.3.0` 推进 → `C-anp-P12`
 
-**当前入口**：`W60`（`C-anp-P10` 周期组 closeout，协调 `v0.2.0` 版本推进）。
+**当前入口**：`C-anp-P12`（BasicBusiness 完善，`v0.4.0`）；其前置发行动作为 **`v0.3.0` 版本推进**。
 
-**序列**（方案 B）：
-1. ~~`W58`（BasicBusiness 盘点对标）~~ ✅ 已完成（2026-09-28）→
-2. **`W60`（`P10` closeout，协调 `v0.2.0` 版本推进）**→
-3. `C-anp-P12`（BasicBusiness 完善，`v0.4.0`；候选蓝图已按 `W58` 对标结论定稿为 P1/P2/P3，见 `work-zone/dev/plans/C-anp-P12-candidate-blueprint.md`）。
+**状态**
+
+| 周期组 | 状态 |
+| --- | --- |
+| `C-anp-P10`（W56–W60） | ✅ 已收口（2026-09-28）；`v0.2.0` tag 已推送，一致性门禁 Pass |
+| `C-anp-P11`（W61–W66） | ✅ 已收口；**`v0.3.0` 待切**（下一个发行动作：CHANGELOG 条目 + 程序集 `0.2.0.0 → 0.3.0.0` + tag，见 `C-anp-P11-closeout.md` §七） |
+| `C-anp-P12`（BasicBusiness 完善） | 候选蓝图已按 `W58` 对标结论定稿为 P1/P2/P3，**待用户裁定 4 项**后固化 |
+
+**待用户裁定（4 项）**：① `Business.Workflow` 归属三选一（合并到 `BusinessApplicationRequest` / 正式登记能力 / 移除死键）；② 三个孤儿模块是否补 `capabilityId`；③ UI 原型产出安排（`W-WI-1`/`W-UI-1`）；④ 员工资料更正"批准 → 回写"是否需二次审批。
 
 **`W58` 关键结论**：7 个 BasicBusiness 能力方向中仅 `Collaboration` 达"初步完善"，**单测覆盖 1/7**；P1＝目录组织子树查询（原 `W67` 的数据层前置）+ `WorkItems` 前台"我的待办"入口（GitLab 一手印证）+ `CorrectionRequest` 批准回写闭环；详见研究文档。
 
@@ -58,7 +64,7 @@
 
 **`C-anp-P11` 已收口**（`W61`–`W66`）：见 `C-anp-P11-closeout.md`，5 项历史待回看均已处置（Watcher 语义→W65；`minimumPortalVersion` 语义→W61/`docs/versioning.md` §八；PBKDF2→W61 600000；zip→W61 移除；认证/授权审计→W62 补齐）。
 
-**方案 B 剩余**：~~`W58`~~ ✅ 已完成 → **`W60`**（P10 closeout，协调 `v0.2.0`），在 `C-anp-P12` 之前。
+**方案 B 剩余**：~~`W58`~~ ✅ ~~`W60`~~ ✅ 全部完成（均在 `C-anp-P12` 之前）。**待执行**：`v0.3.0` 版本推进（发行动作）。
 
 **`C-anp-P12` 候选蓝图**（已由 `W58` 对标定稿，待裁定）：**P1**＝`W-ED-1` 目录组织子树查询（原 `W67` 的数据层前置）+ `W-WI-1` `WorkItems` 前台"我的待办"入口与审计（原 `W69`）+ `W-CR-1` `CorrectionRequest` 批准回写闭环与自撤回与前台权限；**P2**＝`W-PC-1` `Confirm` 权限/幂等/本地化、`W-AR-1` `ApplicationRequest` 显式迁移表 + Resubmit + 单测、`W-DS-2` 数据范围沿用 `CanView`、`W-CR-2` 负责人角色键边界；**P3**＝`W-GV-1` `Business.Workflow` 死键归属裁定与孤儿模块补 `capabilityId`、`W-UI-1` UI 打磨（需先出原型）。见 `C-anp-P12-candidate-blueprint.md`。
 
@@ -81,10 +87,12 @@
 - 审计保留期：`docs/audit-retention-policy.md`
 - 对标规范：`docs/detail-level-benchmark-spec.md`
 - 周期组：`work-zone/dev/plans/C-anp-P10.md`、`C-anp-P11.md`
-- 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P63.3-closeout.md`、`W-anp-P64.md`、`W-anp-P65.md`、`W-anp-P66.md`、`W-anp-P58.md`、`W-anp-P59.md`
+- 阶段文档：`work-zone/dev/plans/W-anp-P61.md`、`W-anp-P62.md`、`W-anp-P63.md`、`W-anp-P63.3-closeout.md`、`W-anp-P64.md`、`W-anp-P65.md`、`W-anp-P66.md`、`W-anp-P58.md`、`W-anp-P59.md`、`W-anp-P60.md`
+- 周期组收口：`work-zone/dev/plans/C-anp-P10-closeout.md`、`C-anp-P11-closeout.md`
+- 里程碑 L10：`work-zone/dev/milestones/M-ANP-RELEASE-READY-PORTAL.md`（索引见 `work-zone/dev/milestones/README.md`）
 - BasicBusiness 能力对标（`W58`）：`work-zone/dev/research/basicbusiness-capability-reference-2026-09-28.md`
 - `C-anp-P11` 收口：`work-zone/dev/plans/C-anp-P11-closeout.md`
 - `C-anp-P12` 候选蓝图：`work-zone/dev/plans/C-anp-P12-candidate-blueprint.md`
 - 调研（Foundation 八条目）：`work-zone/dev/research/foundation-*.md`
 - 状态机文档：`docs/collaboration-item-state-machine.md`
-- 索引：`work-zone/dev/plans/W-anp-INDEX.md`（最新条目 471）、`work-zone/dev/research/README.md`
+- 索引：`work-zone/dev/plans/W-anp-INDEX.md`（最新条目 472）、`work-zone/dev/research/README.md`

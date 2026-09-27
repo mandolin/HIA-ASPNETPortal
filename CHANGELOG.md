@@ -4,12 +4,35 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [SemVer](https://semver.org/lang/zh-CN/)。
 
-## [Unreleased]
+## [v0.2.0] - 2026-09-28
 
-### 进行中
+**版本机制 + 两大能力层盘点与深度对标**（`C-anp-P10`：W56–W60）。
 
-- `W-anp-P55`（C-anp-P9 closeout 与能力机制成熟度证据更新）：`P55.0` 盘点与战略头脑风暴备忘、`P55.3` 下一阶段建议定稿已完成；`P55.1` 实治汇总、`P55.2` 里程碑证据更新待完成。
-- `W-anp-P56`（版本号机制建立）：版本策略文档与 `CHANGELOG.md` 建立中。
+### 已加入
+
+- **W56 版本号机制建立**：`docs/versioning.md` 版本策略（SemVer + 版本与程序集联动 + 发行流程 + 宣传口径约束 + `minimumPortalVersion` 语义）、`CHANGELOG.md`、`git tag v0.1.0`（已推送）、一致性门禁 `dev/scripts/Test-PortalVersionConsistency.ps1`，5 个程序集版本联动。
+- **W57 Foundation 能力盘点与深度对标**：八个条目（身份账户、组织拓扑、授权与数据范围、流程编排、消息、文件、审计、集成标识）逐一给出现状 / 缺口 / 对标 / 建议，产出 6 份研究文档并登记来源强度与不适用清单；并产出 `C-anp-P11` 候选蓝图。
+- **W58 BasicBusiness 能力盘点与对标**：七能力方向盘点（能力登记 2 条、孤儿模块 3 个、**业务单测覆盖 1/7**、Top 共性缺口 8 项）+ 外部对标（转引本项目已核实的一手来源）+ `C-anp-P12` 候选清单定稿为 P1/P2/P3。
+- **W59 细节级对标规范**：`docs/detail-level-benchmark-spec.md`（八维度 + 来源强度标注 + 不适用清单 + 验收检查表），供 P11–P13 复用。
+- **W60 P10 收口**：closeout、建立 L10 里程碑文档 `M-ANP-RELEASE-READY-PORTAL` 并登记七条判据与基线证据、本版本 tag。
+
+### 里程碑状态（截至本版本）
+
+| 里程碑 | 级别 | 状态 |
+| --- | --- | --- |
+| `M-ANP-MAINTAINABLE-BASE` | L3 | 已达成 |
+| `M-ANP-OPERABLE-PORTAL` | L4 | 已达成（当前基线） |
+| `M-ANP-EXTENSIBLE-PORTAL` | L5 | 已达成 |
+| `M-ANP-DOCUMENTED-PORTAL` | L6 | 已达成 |
+| `M-ANP-TRUSTED-PORTAL` | L7 | 评估中，未无条件达成 |
+| `M-ANP-BUSINESS-READY-PORTAL` | L8 | 条件式达成 |
+| `M-ANP-ENTERPRISE-UI-PORTAL` | L9 | 条件式达成 |
+| `M-ANP-RELEASE-READY-PORTAL` | L10 | 未达成（目标 `v1.0.0`；**本 Cycle 新登记**，判据与基线证据见 `work-zone/dev/milestones/M-ANP-RELEASE-READY-PORTAL.md`） |
+
+### 说明
+
+- 本版本为**内部基线锚点**，不对外宣传；`v1.0.0` 之前口径限于"可用 / 参考 / 研究基线"，不得宣称生产级可信。
+- `C-anp-P11`（Foundation 能力初步完善）的源码成果已合入，其版本锚点 `v0.3.0` 按推荐序列作为**后续发行动作**推进（不在本版本内）。
 
 ## [v0.1.0] - 2026-09-25
 
