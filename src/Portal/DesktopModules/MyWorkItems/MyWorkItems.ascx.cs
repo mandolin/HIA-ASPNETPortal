@@ -81,7 +81,13 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>权限门禁失败即拒绝并写审计：这是 W62 补齐的"授权失败必须可审计"能力在本模块的落点。</zh-CN>
             //   <en>A failed permission gate denies access and writes an audit: this is where the W62 "authorization failures must be auditable" capability lands in this module.</en>
             // </lang>
-            if (!PortalAuthorization.HasAnyPermission(PortalPermissionKeys.BusinessWorkItemsView))
+            // <lang>
+            //   <zh-CN>门禁同时接受查看与管理两个权限键，与 PortalNavigationRegistry 中该模块的既有用法一致；只判 View 会把仅持有 Admin 键的管理员误拒。</zh-CN>
+            //   <en>The gate accepts both the view and administration permission keys, matching the established usage for this area in PortalNavigationRegistry; checking only View would wrongly reject administrators who hold just the Admin key.</en>
+            // </lang>
+            if (!PortalAuthorization.HasAnyPermission(
+                    PortalPermissionKeys.BusinessWorkItemsView,
+                    PortalPermissionKeys.BusinessWorkItemsAdmin))
             {
                 ContentPanel.Visible = false;
                 FailurePanel.Visible = false;
@@ -90,7 +96,7 @@ namespace ASPNET.StarterKit.Portal
                     "WorkItemsViewed",
                     "WorkItem",
                     GetCurrentUserId().ToString(CultureInfo.InvariantCulture),
-                    "My work items view denied. MissingPermission=" + PortalPermissionKeys.BusinessWorkItemsView,
+                    "My work items view denied. RequiredAny=" + PortalPermissionKeys.BusinessWorkItemsView + "|" + PortalPermissionKeys.BusinessWorkItemsAdmin,
                     Context,
                     null,
                     "Failure");
