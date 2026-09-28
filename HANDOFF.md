@@ -4,7 +4,7 @@
 
 ## 一、当前入口
 
-**`W67` 前台「我的待办」聚合入口 + 操作审计（`C-anp-P12` 第 1 阶段，原则二 gate）**：`C-anp-P10`（W56–W60，`v0.2.0`）与 `C-anp-P11`（W61–W66，`v0.3.0`）已全部收口并发布；`W58`/`W60` 两项方案 B 前置已全部完成。**`C-anp-P12`（BasicBusiness 完善，`v0.4.0`）已固化**（D1–D4 裁定已确认），首个执行项 `W67` 的 **`P67.1` 原型与设计稿已产出，待用户确认后进入实现**。详见 `work-zone/dev/plans/W-anp-P67.md` 与 `work-zone/dev/plans/W-anp-P67.1-prototype-and-design.md`。
+**`W67` 前台「我的待办」聚合入口 + 操作审计（`C-anp-P12` 第 1 阶段，原则二 gate）**：`C-anp-P10`（W56–W60，`v0.2.0`）与 `C-anp-P11`（W61–W66，`v0.3.0`）已全部收口并发布；`W58`/`W60` 两项方案 B 前置已全部完成。**`C-anp-P12`（BasicBusiness 完善，`v0.4.0`）已固化**（D1–D4 裁定已确认），首个执行项 **`W67`（前台「我的待办」）已全部完成并收口**（P67.0–P67.6：数据层契约 + 前台模块 + 三语资源 + T3 可达性确证 + 审计与权限复核；构建 0 错 0 警、单测 `90/90`）。**当前入口 `W68`（`EnterpriseDirectory` 组织子树查询 + 异常语义）** —— 它是 `W63` 数据范围深化的数据层前置。详见 `work-zone/dev/plans/W-anp-P67.md` 与 `work-zone/dev/plans/W-anp-P67.1-prototype-and-design.md`。
 
 ## 二、周期位置（重要：周期组有并行/插队）
 
