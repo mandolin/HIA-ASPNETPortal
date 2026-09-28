@@ -308,8 +308,8 @@ namespace ASPNET.StarterKit.Portal
             }
 
             // <lang>
-            //   <zh-CN>前台可达目标尚未确证（T3），因此当前一律不渲染跳转链接；确证映射后再启用链接与"不可达"提示。</zh-CN>
-            //   <en>Front-end reachable targets are not yet confirmed (T3), so no navigation link is rendered for now; links and the unreachable hint are enabled after the mapping is confirmed.</en>
+            //   <zh-CN>T3 已确证：三类业务对象在前台均没有详情页，办理入口是后台 Admin 页，普通用户跳转会被拒绝；因此不渲染链接，改为呈现"暂无在线办理入口"提示。</zh-CN>
+            //   <en>T3 is confirmed: none of the three business kinds has a front-end detail page; processing happens on administration pages that a normal user cannot open. No link is rendered and the "no online processing entry" hint is shown instead.</en>
             // </lang>
             string targetUrl = ResolveItemUrl(item);
             if (itemLink != null)
@@ -327,20 +327,30 @@ namespace ASPNET.StarterKit.Portal
                 titleLabel.Visible = string.IsNullOrEmpty(targetUrl);
             }
 
+            // <lang>
+            //   <zh-CN>不可达时给出明确提示而不是静默无链接，避免用户以为界面缺失；提示文本不含内部路径或异常细节。</zh-CN>
+            //   <en>When unreachable, an explicit hint is shown instead of a silent missing link so users do not think the UI is broken; the hint carries no internal path or exception detail.</en>
+            // </lang>
             if (unavailableLabel != null)
             {
-                unavailableLabel.Visible = false;
+                unavailableLabel.Visible = string.IsNullOrEmpty(targetUrl);
             }
         }
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>解析待办对应业务对象的前台可达地址；当前返回空串，待 T3 确证映射后填充。</zh-CN>
-        ///   <en>Resolves the front-end reachable URL of the business object behind a work item; it currently returns an empty string pending the T3 mapping confirmation.</en>
+        ///   <zh-CN>解析待办对应业务对象的前台可达地址；三类业务当前都没有前台详情页，故恒返回空串。</zh-CN>
+        ///   <en>Resolves the front-end reachable URL of the business object behind a work item; it always returns an empty string because none of the three kinds currently has a front-end detail page.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>T3 勘察结论（2026-09-29）：① 后台 <c>Admin/WorkItems.aspx</c> 既有的 <c>GetBusinessUrl</c> 只把三类业务映射到后台 Admin 页，未知类型落 <c>NotImplemented.aspx</c>；② 前台模块（协同工作台、业务申请、资料更正）只有提交表单与最近列表，没有业务对象详情页；③ 前台模块的 URL 依赖运行时 Tab 挂载（<c>tabid</c> 来自库配置），<c>PortalNavigationRegistry</c> 的 Tab 条目明确"Target 留空、不生成链接"，因此不存在可静态解析的前台深链。综合判定：普通用户侧三类待办均不可达，跳转会导致 403，故一律不渲染链接。若要提供深链，需新增"按 desktopEntry 反查承载 Tab"的能力（依赖 <c>IModulesDb</c>/<c>ITabsDb</c>），登记为后续深化项。</zh-CN>
+        ///   <en>T3 investigation conclusion (2026-09-29): (1) the existing <c>GetBusinessUrl</c> on <c>Admin/WorkItems.aspx</c> maps all three kinds only to administration pages and sends unknown kinds to <c>NotImplemented.aspx</c>; (2) the front-end modules (collaboration workbench, business application, profile correction) expose only submit forms and recent lists, with no per-object detail page; (3) a front-end module URL depends on runtime tab placement (<c>tabid</c> comes from database configuration), and <c>PortalNavigationRegistry</c> tab entries explicitly keep the target blank and produce no link, so no statically resolvable front-end deep link exists. Verdict: all three kinds are unreachable for a normal user and navigating would yield 403, so no link is rendered. Providing deep links would require a new "resolve the hosting tab by desktopEntry" capability (depending on <c>IModulesDb</c>/<c>ITabsDb</c>), which is registered as a follow-up.</en>
+        /// </lang>
+        /// </remarks>
         /// <param name="item"><l><zh-CN>待办投影。</zh-CN><en>The work-item projection.</en></l></param>
-        /// <returns><l><zh-CN>可达的相对地址；未确证或不可达时为空串。</zh-CN><en>A reachable relative URL, or an empty string when unconfirmed or unreachable.</en></l></returns>
+        /// <returns><l><zh-CN>可达的相对地址；当前恒为空串表示不可达。</zh-CN><en>A reachable relative URL; it is always an empty string, meaning unreachable.</en></l></returns>
         private static string ResolveItemUrl(PortalWorkItemInfo item)
         {
             return string.Empty;
