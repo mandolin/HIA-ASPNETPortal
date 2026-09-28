@@ -210,6 +210,9 @@
     <Content Include="DesktopModules\EmployeeProfileConfirm\module.json" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx" />
     <Content Include="DesktopModules\EmployeeProfileConfirm\Styles\EmployeeProfileConfirm.css" />
+    <Content Include="DesktopModules\MyWorkItems\module.json" />
+    <Content Include="DesktopModules\MyWorkItems\MyWorkItems.ascx" />
+    <Content Include="DesktopModules\MyWorkItems\Styles\MyWorkItems.css" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\module.json" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\Styles\EmployeeProfileCorrectionRequest.css" />
@@ -658,6 +661,13 @@
     </Compile>
     <Compile Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx.designer.cs">
       <DependentUpon>EmployeeProfileConfirm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\MyWorkItems\MyWorkItems.ascx.cs">
+      <DependentUpon>MyWorkItems.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\MyWorkItems\MyWorkItems.ascx.designer.cs">
+      <DependentUpon>MyWorkItems.ascx</DependentUpon>
     </Compile>
     <Compile Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx.cs">
       <DependentUpon>EmployeeProfileCorrectionRequest.ascx</DependentUpon>

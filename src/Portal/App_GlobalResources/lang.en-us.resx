@@ -1632,4 +1632,49 @@
   <data name="Admin_Roles_MessageDeleteFailed" xml:space="preserve">
     <value>Deleting the role failed; the system recorded this error. Event id: {0}</value>
   </data>
+  <data name="MyWorkItems_Heading" xml:space="preserve">
+    <value>My To-Do Items</value>
+  </data>
+  <data name="MyWorkItems_ColumnType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="MyWorkItems_ColumnItem" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="MyWorkItems_ColumnCreated" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="MyWorkItems_ColumnDue" xml:space="preserve">
+    <value>Due</value>
+  </data>
+  <data name="MyWorkItems_FilterAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="MyWorkItems_FilterOverdue" xml:space="preserve">
+    <value>Overdue only</value>
+  </data>
+  <data name="MyWorkItems_EmptyNone" xml:space="preserve">
+    <value>No to-do items</value>
+  </data>
+  <data name="MyWorkItems_EmptyNoMatch" xml:space="preserve">
+    <value>No matching to-do items</value>
+  </data>
+  <data name="MyWorkItems_ErrorLoadFailed" xml:space="preserve">
+    <value>Could not load to-do items. Please try again later.</value>
+  </data>
+  <data name="MyWorkItems_OverdueDays" xml:space="preserve">
+    <value>Overdue by {0} days</value>
+  </data>
+  <data name="MyWorkItems_NoOnlineEntry" xml:space="preserve">
+    <value>No online processing entry available</value>
+  </data>
+  <data name="MyWorkItems_KindCollaborationItem" xml:space="preserve">
+    <value>Collaboration item</value>
+  </data>
+  <data name="MyWorkItems_KindBusinessApplication" xml:space="preserve">
+    <value>Business application</value>
+  </data>
+  <data name="MyWorkItems_KindEmployeeProfileCorrectionRequest" xml:space="preserve">
+    <value>Profile correction request</value>
+  </data>
 </root>

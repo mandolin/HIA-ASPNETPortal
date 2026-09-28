@@ -1,0 +1,38 @@
+<%--
+    <lang>
+        <zh-CN>我的待办模块的本地样式：仅定义块级间距与状态文本样式，颜色一律继承主题变量，不在此引入硬编码配色。</zh-CN>
+        <en>Local styles for the My To-Do Items module: only block spacing and status text styles are defined; colors always inherit theme variables and no hard-coded palette is introduced here.</en>
+    </lang>
+--%>
+.my-work-items-title {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.my-work-items-filter {
+    margin-bottom: 0.5em;
+}
+
+.my-work-items-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.my-work-items-table th,
+.my-work-items-table td {
+    text-align: left;
+    padding: 0.25em 0.5em;
+    vertical-align: top;
+}
+
+.my-work-items-message {
+    margin-bottom: 0.5em;
+}
+
+.my-work-items-overdue {
+    font-weight: bold;
+}
+
+.my-work-items-unavailable {
+    font-style: italic;
+}

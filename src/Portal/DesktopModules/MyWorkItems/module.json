@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 2,
+  "packageId": "HIA.MyWorkItems",
+  "displayName": "我的待办 / My To-Do Items",
+  "version": "1.0.0",
+  "minimumPortalVersion": "1.0",
+  "desktopEntry": "DesktopModules/MyWorkItems/MyWorkItems.ascx",
+  "resources": [
+    "Styles/MyWorkItems.css"
+  ]
+}
