@@ -447,6 +447,94 @@ ORDER BY [Request].[SubmittedUtc] DESC, [Request].[RequestId] DESC;",
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>撤回本人提出的、尚在处理中的更正请求。</zh-CN>
+        ///   <en>Withdraws a still-pending correction request submitted by the requesting user.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>请求表状态受检查约束限定为 <c>Submitted</c>/<c>Reviewed</c>/<c>Closed</c>/<c>Rejected</c>，且非 <c>Submitted</c> 时必须同时具备审核时间与审核人。因此撤回复用 <c>Closed</c> 并把提交人本人记为操作人，在备注中留痕：<b>无需任何架构迁移</b>，也不引入新的终态语义。归属不符、状态不允许或请求不存在一律失败且不改变任何行。</zh-CN>
+        ///   <en>The request table constrains status to <c>Submitted</c>/<c>Reviewed</c>/<c>Closed</c>/<c>Rejected</c> and requires a review time and reviewer for any non-<c>Submitted</c> row. Withdrawal therefore reuses <c>Closed</c>, records the requester as the actor, and leaves a note: <b>no schema migration is needed</b> and no new terminal semantics are introduced. Ownership mismatch, a disallowed status, or a missing request all fail without changing any row.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="userId"><l><zh-CN>当前门户用户标识；非正值返回失败。</zh-CN><en>The current Portal user identifier; a non-positive value fails.</en></l></param>
+        /// <param name="requestId"><l><zh-CN>更正请求标识；非正值返回失败。</zh-CN><en>The correction request identifier; a non-positive value fails.</en></l></param>
+        /// <param name="actorName"><l><zh-CN>操作人账号名或系统标识；空白时使用 <c>system</c>。</zh-CN><en>Actor account name or system identifier; blank becomes <c>system</c>.</en></l></param>
+        /// <returns><l><zh-CN>撤回结果；失败时包含低敏说明。</zh-CN><en>The withdrawal result; failures carry a low-sensitivity explanation.</en></l></returns>
+        public EmployeeProfileCorrectionRequestResult CancelOwnRequest(int userId, long requestId, string actorName)
+        {
+            if (userId <= 0 || requestId <= 0)
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "A valid user and correction request are required.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee profile correction schema is unavailable.");
+            }
+
+            EmployeeProfileCorrectionRequestInfo pending = LoadRequestForReview(requestId);
+            if (pending == null)
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Correction request was not found.");
+            }
+
+            // <lang>
+            //   <zh-CN>归属校验必须严格相等：撤回权来自"这是本人提交的请求"，不匹配即拒绝，且不回显他人请求细节。</zh-CN>
+            //   <en>Ownership must match exactly: the right to withdraw comes from "this is my own request"; a mismatch is rejected and no details of another user's request are echoed.</en>
+            // </lang>
+            if (pending.UserId != userId)
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Only the submitter can withdraw this correction request.");
+            }
+
+            // <lang>
+            //   <zh-CN>只允许撤回仍在处理中的请求：已进入审核结论的终态不应被提交人改写。</zh-CN>
+            //   <en>Only still-pending requests may be withdrawn: terminal review outcomes must not be rewritten by the submitter.</en>
+            // </lang>
+            if (!string.Equals(pending.RequestStatus, EmployeeProfileCorrectionRequestStatuses.Submitted, StringComparison.Ordinal))
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Only pending correction requests can be withdrawn.");
+            }
+
+            string actor = string.IsNullOrWhiteSpace(actorName) ? "system" : actorName.Trim();
+            DateTime withdrawnUtc = DateTime.UtcNow;
+
+            try
+            {
+                int affectedRows = context.Database.ExecuteSqlCommand(
+                    @"
+UPDATE [dbo].[PortalBiz_EmployeeProfileCorrectionRequests]
+SET [RequestStatus] = @RequestStatus,
+    [ReviewedUtc] = @ReviewedUtc,
+    [ReviewedBy] = @ReviewedBy,
+    [ReviewNote] = @ReviewNote
+WHERE [RequestId] = @RequestId
+  AND [UserId] = @UserId
+  AND [RequestStatus] = @PendingStatus;",
+                    new SqlParameter("@RequestStatus", EmployeeProfileCorrectionRequestStatuses.Closed),
+                    new SqlParameter("@ReviewedUtc", withdrawnUtc),
+                    new SqlParameter("@ReviewedBy", actor),
+                    new SqlParameter("@ReviewNote", "Withdrawn by the requester."),
+                    new SqlParameter("@RequestId", requestId),
+                    new SqlParameter("@UserId", userId),
+                    new SqlParameter("@PendingStatus", EmployeeProfileCorrectionRequestStatuses.Submitted));
+
+                if (affectedRows <= 0)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "The correction request could not be withdrawn.");
+                }
+
+                return new EmployeeProfileCorrectionRequestResult(true, requestId, "Correction request withdrawn.");
+            }
+            catch (Exception)
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "The correction request could not be withdrawn.");
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>读取审核回写所需的请求要素（员工标识、字段名、建议值）。</zh-CN>
         ///   <en>Reads the request elements needed for review write-back (employee identifier, field name, proposed value).</en>
         /// </lang>
@@ -476,6 +564,7 @@ ORDER BY [Request].[SubmittedUtc] DESC, [Request].[RequestId] DESC;",
 SELECT TOP (1)
     [RequestId],
     [EmployeeId],
+    [UserId],
     [FieldName],
     [ProposedValue],
     [RequestStatus]
