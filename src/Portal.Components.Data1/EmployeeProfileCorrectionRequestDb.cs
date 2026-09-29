@@ -31,6 +31,14 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>员工主数据管理门面，供审核通过后回写更正结果；可为 null，此时回写路径直接失败而不是回退到旧的无回写行为。</zh-CN>
+        ///   <en>Employee master-data administration facade used to write back an approved correction; it may be null, in which case the write-back path fails instead of silently reverting to the previous no-write behavior.</en>
+        /// </lang>
+        /// </summary>
+        private readonly IEmployeeDirectoryAdminDb employeeAdminDb;
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>初始化员工资料更正请求数据访问实现。</zh-CN>
         ///   <en>Initializes the employee-profile correction-request data-access implementation.</en>
         /// </lang>
@@ -41,9 +49,16 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Enterprise business foundation data context.</en>
         /// </l>
         /// </param>
-        public EmployeeProfileCorrectionRequestDb(PortalBizDbContext context)
+        /// <param name="employeeAdminDb">
+        /// <l>
+        ///   <zh-CN>员工主数据管理门面；容器自动装配。为空时审核通过无法回写主数据，会以明确失败返回。</zh-CN>
+        ///   <en>Employee master-data administration facade, wired automatically by the container. When it is null, an approval cannot write master data back and returns an explicit failure.</en>
+        /// </l>
+        /// </param>
+        public EmployeeProfileCorrectionRequestDb(PortalBizDbContext context, IEmployeeDirectoryAdminDb employeeAdminDb = null)
         {
             this.context = context;
+            this.employeeAdminDb = employeeAdminDb;
         }
 
         /// <summary>
@@ -432,10 +447,60 @@ ORDER BY [Request].[SubmittedUtc] DESC, [Request].[RequestId] DESC;",
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>读取审核回写所需的请求要素（员工标识、字段名、建议值）。</zh-CN>
+        ///   <en>Reads the request elements needed for review write-back (employee identifier, field name, proposed value).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="requestId"><l><zh-CN>更正请求标识；非正数返回 <c>null</c>。</zh-CN><en>Correction request identifier; a non-positive value returns <c>null</c>.</en></l></param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>请求投影；不存在或读取失败时返回 <c>null</c>，调用方按失败处理。</zh-CN>
+        ///   <en>The request projection; <c>null</c> when it does not exist or reading fails, which the caller treats as a failure.</en>
+        /// </l>
+        /// </returns>
+        private EmployeeProfileCorrectionRequestInfo LoadRequestForReview(long requestId)
+        {
+            if (requestId <= 0)
+            {
+                return null;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>只取回写判定所需的四列，避免把业务正文带入审核路径；复用公开 DTO 承接，不新增映射类型。</zh-CN>
+                //   <en>Only the four columns needed for the write-back decision are read, keeping domain content out of the review path; the public DTO is reused so no new mapping type is added.</en>
+                // </lang>
+                return context.Database.SqlQuery<EmployeeProfileCorrectionRequestInfo>(
+                    @"
+SELECT TOP (1)
+    [RequestId],
+    [EmployeeId],
+    [FieldName],
+    [ProposedValue],
+    [RequestStatus]
+FROM [dbo].[PortalBiz_EmployeeProfileCorrectionRequests]
+WHERE [RequestId] = @RequestId;",
+                    new SqlParameter("@RequestId", requestId)).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>管理员更新更正请求处理状态。</zh-CN>
         ///   <en>Updates the administrator review status of a correction request.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>W69 起，审核通过（<c>Reviewed</c>）会先按服务端白名单把建议值回写到员工主数据，成功后再置位；回写失败、字段需人工处理或字段不受支持时一律不置位，请求保持原状态。组织显示名因需映射为组织标识且存在重名歧义，不自动回写。</zh-CN>
+        ///   <en>From W69 onward, an approval (<c>Reviewed</c>) first writes the proposed value into employee master data according to the server-side allow list and only then sets the status; a failed write, a manually handled field, or an unsupported field all leave the status unchanged. The organization display name is never written back automatically because it must map to an organization identifier and display names may be ambiguous.</en>
+        /// </lang>
+        /// </remarks>
         /// <param name="request">
         /// <l>
         ///   <zh-CN>处理请求。</zh-CN>
@@ -468,6 +533,75 @@ ORDER BY [Request].[SubmittedUtc] DESC, [Request].[RequestId] DESC;",
             if (!IsSchemaAvailable())
             {
                 return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee profile correction schema is unavailable.");
+            }
+
+            // <lang>
+            //   <zh-CN>W69：审核通过（Reviewed）必须先产生业务结果——把建议值回写到员工主数据，成功后再置位；任何失败都不置位，杜绝"已批准但未生效"的静默不一致。</zh-CN>
+            //   <en>W69: an approval (Reviewed) must first produce the business result by writing the proposed value into employee master data, and only then set the status; any failure leaves the status unchanged, eliminating the silent inconsistency of "approved but not applied".</en>
+            // </lang>
+            if (string.Equals(normalized.RequestStatus, EmployeeProfileCorrectionRequestStatuses.Reviewed, StringComparison.Ordinal))
+            {
+                EmployeeProfileCorrectionRequestInfo pending = LoadRequestForReview(normalized.RequestId);
+                if (pending == null)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "Correction request was not found.");
+                }
+
+                // <lang>
+                //   <zh-CN>字段名必须由服务端再次校验：前端白名单可被绕过，未知字段一律拒绝。</zh-CN>
+                //   <en>The field name must be re-validated server-side: the front-end allow list can be bypassed, so unknown fields are always rejected.</en>
+                // </lang>
+                if (EmployeeProfileCorrectionWriteBackPolicy.RequiresManualHandling(pending.FieldName))
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "This field requires manual maintenance and was not written back automatically.");
+                }
+
+                if (!EmployeeProfileCorrectionWriteBackPolicy.CanAutoApply(pending.FieldName))
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "This correction field is not supported.");
+                }
+
+                if (employeeAdminDb == null)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee master data administration is unavailable.");
+                }
+
+                IEmployeeInfo employee = employeeAdminDb.GetEmployeeById(pending.EmployeeId);
+                if (employee == null)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "The employee for this correction request was not found.");
+                }
+
+                // <lang>
+                //   <zh-CN>回写是全量更新且带乐观并发条件，因此必须带齐现有值与加载时的更新时间戳；否则既会覆盖其它字段，也会因缺少时间戳失败。</zh-CN>
+                //   <en>The write-back is a full update guarded by optimistic concurrency, so it must carry the current values and the update timestamp from load time; otherwise it would overwrite other fields and fail the timestamp check.</en>
+                // </lang>
+                EmployeeSaveRequest saveRequest = new EmployeeSaveRequest
+                {
+                    EmployeeId = employee.EmployeeId,
+                    EmployeeCode = employee.EmployeeCode,
+                    DisplayName = employee.DisplayName,
+                    PreferredName = employee.PreferredName,
+                    WorkEmail = employee.WorkEmail,
+                    OrganizationUnitId = employee.OrganizationUnitId,
+                    EmploymentStatus = employee.EmploymentStatus,
+                    JoinedUtc = employee.JoinedUtc,
+                    LeftUtc = employee.LeftUtc,
+                    SourceSystem = employee.SourceSystem,
+                    OriginalUpdatedUtc = employee.UpdatedUtc,
+                    ActorName = normalized.ReviewedBy
+                };
+
+                if (!EmployeeProfileCorrectionWriteBackPolicy.TryApply(saveRequest, pending.FieldName, pending.ProposedValue))
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "The proposed value could not be applied to employee master data.");
+                }
+
+                EmployeeDirectoryWriteResult writeResult = employeeAdminDb.SaveEmployee(saveRequest);
+                if (!writeResult.Succeeded)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "The approved correction could not be written to employee master data.");
+                }
             }
 
             try
