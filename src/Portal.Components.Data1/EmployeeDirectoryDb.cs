@@ -137,6 +137,68 @@ OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>读取以指定组织为根的子树组织单元标识集合（含根节点）。</zh-CN>
+        ///   <en>Reads the identifier set of the organization subtree rooted at the specified unit (root included).</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>W68 新增。取数只读取展开所需的两个标识列，展开由 <see cref="PortalOrganizationTreeExpander"/> 纯函数完成，因此这部分语义可在无数据库环境中被单测覆盖；深度上限与"已访问"集合共同保证即使出现环路也不会无限递归。失败一律返回空集合，不退化为全量。</zh-CN>
+        ///   <en>Added in W68. The query reads only the two identifier columns needed for expansion, and the expansion itself runs through the <see cref="PortalOrganizationTreeExpander"/> pure function so this semantics stays unit testable without a database; the depth cap and the visited set together keep a malformed cycle from recursing forever. Failures always yield an empty set rather than degrading to a full scan.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="organizationUnitId">
+        /// <l>
+        ///   <zh-CN>子树根组织单元标识；非正值返回空集合。</zh-CN>
+        ///   <en>The subtree root organization unit identifier; a non-positive value yields an empty set.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>子树组织单元标识列表（含根节点）；架构不可用或读取失败时为空列表。</zh-CN>
+        ///   <en>The subtree identifier list (root included); empty when the schema is unavailable or reading fails.</en>
+        /// </l>
+        /// </returns>
+        public IList<int> GetOrganizationUnitSubtreeIds(int organizationUnitId)
+        {
+            if (organizationUnitId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<int>();
+            }
+
+            // <lang>
+            //   <zh-CN>深度上限与协同事项层级（≤5）对齐；写入侧已有防环，此处仍保留上限作为纵深防御。</zh-CN>
+            //   <en>The depth cap aligns with the collaboration-item hierarchy (≤5); the write side already guards cycles, and the cap remains as defense in depth.</en>
+            // </lang>
+            const int maxDepth = 5;
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>复用既有组织投影：未选择的列保持默认值，不影响只取两个标识列的目的。</zh-CN>
+                //   <en>Reuse the existing organization projection: unselected columns keep their default values and do not affect the goal of reading only two identifier columns.</en>
+                // </lang>
+                var rows = _context.Database.SqlQuery<OrganizationUnitProjection>(
+                    @"
+SELECT
+    [OrganizationUnitId],
+    [ParentOrganizationUnitId]
+FROM [dbo].[PortalBiz_OrganizationUnits];").ToList();
+
+                IList<PortalOrganizationTreeEdge> edges = rows
+                    .Select(row => new PortalOrganizationTreeEdge(row.OrganizationUnitId, row.ParentOrganizationUnitId))
+                    .ToList();
+
+                return PortalOrganizationTreeExpander.ExpandSubtreeIds(edges, organizationUnitId, maxDepth);
+            }
+            catch (Exception)
+            {
+                return new List<int>();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>读取员工主数据列表。</zh-CN>
         ///   <en>Reads employee master-data rows.</en>
         /// </lang>

@@ -186,6 +186,7 @@
     <Compile Include="PortalWorkItemEventInfo.cs" />
     <Compile Include="PortalWorkItemEventTypes.cs" />
     <Compile Include="PortalWorkItemInfo.cs" />
+    <Compile Include="PortalOrganizationTreeExpander.cs" />
     <Compile Include="PortalWorkItemQueryResult.cs" />
     <Compile Include="PortalWorkItemResult.cs" />
     <Compile Include="PortalWorkItemStatuses.cs" />

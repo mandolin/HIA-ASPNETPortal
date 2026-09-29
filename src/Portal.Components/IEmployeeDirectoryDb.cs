@@ -52,6 +52,32 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>读取以指定组织为根的子树组织单元标识集合（含根节点），用于把目录查询圈定在组织范围内。</zh-CN>
+        ///   <en>Reads the identifier set of the organization subtree rooted at the specified unit (root included), so a directory query can be bounded to an organization scope.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>W68 新增：既有目录查询只能按关键字与状态过滤，无法表达"某组织及其后代"。本方法提供子树标识，供组织范围过滤与后续 <c>W63</c> 可见性扩展复用。契约按 fail-closed 处理：根节点非正值、不存在、架构不可用或读取失败一律返回空集合，不退化为全量；调用方仍须自行完成授权，标识集合本身不授予任何访问权。</zh-CN>
+        ///   <en>Added in W68: existing directory queries filter only by keyword and status and cannot express "one organization and its descendants". This method supplies the subtree identifiers for organization-scoped filtering and for the later W63 visibility extension. The contract is fail-closed: a non-positive, missing, or unreadable root, as well as schema or read failures, all yield an empty set instead of a full scan. Callers must still authorize; the identifier set itself grants no access.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="organizationUnitId">
+        /// <l>
+        ///   <zh-CN>子树根组织单元标识；非正值返回空集合。</zh-CN>
+        ///   <en>The subtree root organization unit identifier; a non-positive value yields an empty set.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>子树组织单元标识列表（含根节点）；失败时为空列表。</zh-CN>
+        ///   <en>The subtree organization unit identifier list (root included); empty on failure.</en>
+        /// </l>
+        /// </returns>
+        IList<int> GetOrganizationUnitSubtreeIds(int organizationUnitId);
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>读取员工主数据列表。</zh-CN>
         ///   <en>Reads employee master-data rows.</en>
         /// </lang>
