@@ -67,6 +67,7 @@
     <Compile Include="PortalRoleParserTests.cs" />
     <Compile Include="PortalCollaborationItemDataScopeTests.cs" />
     <Compile Include="PortalCollaborationItemTransitionsTests.cs" />
+    <Compile Include="EmployeeProfileCorrectionWriteBackPolicyTests.cs" />
     <Compile Include="PortalOrganizationTreeExpanderTests.cs" />
     <Compile Include="PortalWorkItemQueryResultTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
