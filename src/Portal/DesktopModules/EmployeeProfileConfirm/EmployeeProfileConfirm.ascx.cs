@@ -54,6 +54,24 @@ namespace ASPNET.StarterKit.Portal
                 // </lang>
                 BindProfile();
             }
+
+            // <lang>
+            //   <zh-CN>W70 渲染期门禁：只有持有确认或管理权限的用户才启用确认按钮；按钮状态只是界面提示，真正的授权判定在提交时由服务端再次执行。</zh-CN>
+            //   <en>W70 render-time gate: only users holding the confirm or administration permission get an enabled confirm button; the button state is a UI hint only and the real authorization decision is repeated server-side on submit.</en>
+            // </lang>
+            bool canConfirm = IsCurrentUserAuthenticated() && PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.EmployeeProfileConfirmConfirm,
+                PortalPermissionKeys.EmployeeProfileConfirmAdmin);
+
+            ConfirmButton.Enabled = canConfirm;
+            if (!canConfirm && IsCurrentUserAuthenticated())
+            {
+                // <lang>
+                //   <zh-CN>仅在已认证但无权限时给出提示；未认证的情形由资料门禁给出登录提示，避免两条提示互相覆盖。</zh-CN>
+                //   <en>Show the hint only when the user is authenticated but unauthorized; the unauthenticated case is covered by the profile gate's sign-in hint so the two messages do not overwrite each other.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileConfirm_MessageNoPermission);
+            }
         }
 
         /// <summary>
@@ -64,6 +82,30 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
+            // <lang>
+            //   <zh-CN>W70：提交前再次校验权限。确认按钮的启用状态来自上一次渲染，可被绕过，不能作为授权依据；校验失败即拒绝并写授权失败审计。</zh-CN>
+            //   <en>W70: re-check permission before submitting. The confirm button's enabled state comes from the previous render and can be bypassed, so it is not an authorization basis; a failed check is denied and recorded as an authorization-failure audit.</en>
+            // </lang>
+            if (!PortalAuthorization.HasAnyPermission(
+                    PortalPermissionKeys.EmployeeProfileConfirmConfirm,
+                    PortalPermissionKeys.EmployeeProfileConfirmAdmin))
+            {
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.BusinessModuleCategory,
+                    PortalOperationAuditEvents.AccessDenied,
+                    "Request",
+                    Context.Request.Path ?? string.Empty,
+                    "Employee profile confirmation denied. RequiredAny=" +
+                        PortalPermissionKeys.EmployeeProfileConfirmConfirm + "|" +
+                        PortalPermissionKeys.EmployeeProfileConfirmAdmin,
+                    Context,
+                    null,
+                    "Failure");
+
+                ShowMessage(lang.EmployeeProfileConfirm_MessageNoPermission);
+                return;
+            }
+
             // <lang>
             //   <zh-CN>确认动作重新读取当前绑定资料，避免用户在页面加载后绑定状态变化时仍提交旧员工标识。</zh-CN>
             //   <en>The confirm action reloads the current bound profile so a user cannot submit a stale employee identifier after binding state changes.</en>
@@ -223,17 +265,17 @@ namespace ASPNET.StarterKit.Portal
         {
             if (!IsCurrentUserAuthenticated())
             {
-                return "请先登录后再确认员工资料。";
+                return lang.EmployeeProfileConfirm_MessageNotAuthenticated;
             }
 
             if (EmployeeProfileConfirmationDb == null || !EmployeeProfileConfirmationDb.IsSchemaAvailable())
             {
-                return "员工资料确认模块尚未完成数据库初始化。";
+                return lang.EmployeeProfileConfirm_MessageSchemaUnavailable;
             }
 
             return userId <= 0
-                ? "当前登录账号无法解析到门户用户。"
-                : "当前账号没有可确认的在职员工资料。";
+                ? lang.EmployeeProfileConfirm_MessageUserUnresolved
+                : lang.EmployeeProfileConfirm_MessageNoActiveProfile;
         }
 
         /// <summary>

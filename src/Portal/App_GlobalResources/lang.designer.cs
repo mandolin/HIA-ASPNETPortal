@@ -3802,6 +3802,54 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：请先登录后再确认员工资料。</zh-CN>
+        ///   <en>Looks up a localized string similar to: Please sign in before confirming your employee profile.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_MessageNotAuthenticated {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageNotAuthenticated", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：员工资料确认模块尚未完成数据库初始化。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The employee profile confirmation module is not initialized.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageSchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：当前登录账号无法解析到门户用户。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The signed-in account cannot be resolved to a portal user.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_MessageUserUnresolved {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageUserUnresolved", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有确认员工资料的权限。</zh-CN>
+        ///   <en>Looks up a localized string similar to: You do not have permission to confirm employee profiles.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_MessageNoPermission {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageNoPermission", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Confirm profile is correct</zh-CN>
         ///   <en>Looks up a localized string similar to: Confirm profile is correct</en>
         /// </lang>

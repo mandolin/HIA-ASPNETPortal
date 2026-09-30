@@ -1680,4 +1680,16 @@
   <data name="EmployeeProfileCorrectionRequest_MessageNoPermission" xml:space="preserve">
     <value>You do not have permission to submit profile correction requests.</value>
   </data>
+  <data name="EmployeeProfileConfirm_MessageNotAuthenticated" xml:space="preserve">
+    <value>Please sign in before confirming your employee profile.</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageSchemaUnavailable" xml:space="preserve">
+    <value>The employee profile confirmation module is not initialized.</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageUserUnresolved" xml:space="preserve">
+    <value>The signed-in account cannot be resolved to a portal user.</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageNoPermission" xml:space="preserve">
+    <value>You do not have permission to confirm employee profiles.</value>
+  </data>
 </root>

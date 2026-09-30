@@ -2529,4 +2529,16 @@
   <data name="EmployeeProfileCorrectionRequest_MessageNoPermission" xml:space="preserve">
     <value>没有提交员工资料更正请求的权限。</value>
   </data>
+  <data name="EmployeeProfileConfirm_MessageNotAuthenticated" xml:space="preserve">
+    <value>请先登录后再确认员工资料。</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageSchemaUnavailable" xml:space="preserve">
+    <value>员工资料确认模块尚未完成数据库初始化。</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageUserUnresolved" xml:space="preserve">
+    <value>当前登录账号无法解析到门户用户。</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageNoPermission" xml:space="preserve">
+    <value>没有确认员工资料的权限。</value>
+  </data>
 </root>
