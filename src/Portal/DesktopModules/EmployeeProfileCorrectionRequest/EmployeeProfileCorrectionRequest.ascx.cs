@@ -89,6 +89,24 @@ namespace ASPNET.StarterKit.Portal
                 BindFieldList();
                 BindProfile();
             }
+
+            // <lang>
+            //   <zh-CN>W69：渲染期门禁——只有持有提交或管理权限的用户才启用提交入口；按钮状态只是界面提示，真正的授权判定在提交时由服务端再次执行。</zh-CN>
+            //   <en>W69 render-time gate: only users holding the submit or administration permission get an enabled submit entry; the button state is a UI hint only, and the real authorization decision is repeated server-side on submit.</en>
+            // </lang>
+            bool canSubmit = IsCurrentUserAuthenticated() && PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+
+            SubmitButton.Enabled = canSubmit;
+            if (!canSubmit)
+            {
+                // <lang>
+                //   <zh-CN>禁用入口并给出低敏说明：避免用户填完表单才发现无法提交，也不泄露具体角色或权限配置。</zh-CN>
+                //   <en>Disable the entry and show a low-sensitivity explanation so users do not discover the restriction only after filling the form, without leaking role or permission configuration.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoPermission);
+            }
         }
 
         /// <summary>
@@ -116,6 +134,30 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Use zero when identity resolution fails and let the profile gate produce the shared low-detail unavailable message.</en>
             // </lang>
             int userId = GetCurrentUserId();
+
+            // <lang>
+            //   <zh-CN>W69：提交前再次校验权限。按钮启用状态来自上一次渲染，可被绕过，不能作为授权依据；校验失败即拒绝并写授权失败审计。</zh-CN>
+            //   <en>W69: re-check permission before submitting. The enabled button state comes from the previous render and can be bypassed, so it is not an authorization basis; a failed check is denied and recorded as an authorization-failure audit.</en>
+            // </lang>
+            if (!PortalAuthorization.HasAnyPermission(
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin))
+            {
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.BusinessModuleCategory,
+                    PortalOperationAuditEvents.AccessDenied,
+                    "Request",
+                    Context.Request.Path ?? string.Empty,
+                    "Profile correction submit denied. RequiredAny=" +
+                        PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit + "|" +
+                        PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin,
+                    Context,
+                    null,
+                    "Failure");
+
+                ShowMessage(lang.EmployeeProfileCorrectionRequest_MessageNoPermission);
+                return;
+            }
 
             // <lang>
             //   <zh-CN>资料快照由服务按用户绑定关系返回；模块不接受客户端提交的员工标识作为信任来源。</zh-CN>

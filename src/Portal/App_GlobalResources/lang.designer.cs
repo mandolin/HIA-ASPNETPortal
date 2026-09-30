@@ -3718,6 +3718,18 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有提交员工资料更正请求的权限。</zh-CN>
+        ///   <en>Looks up a localized string similar to: You do not have permission to submit profile correction requests.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_MessageNoPermission {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageNoPermission", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a suggested value.</zh-CN>
         ///   <en>Looks up a localized string similar to: Enter a suggested value.</en>
         /// </lang>

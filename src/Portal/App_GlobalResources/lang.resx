@@ -2526,4 +2526,7 @@
   <data name="MyWorkItems_KindEmployeeProfileCorrectionRequest" xml:space="preserve">
     <value>Profile correction request</value>
   </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageNoPermission" xml:space="preserve">
+    <value>You do not have permission to submit profile correction requests.</value>
+  </data>
 </root>
