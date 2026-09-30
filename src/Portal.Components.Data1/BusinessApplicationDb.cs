@@ -388,7 +388,8 @@ SET [ApplicationStatus] = @TargetStatus,
 OUTPUT INSERTED.[ApplicationId], INSERTED.[ApplicationCode], DELETED.[ApplicationStatus]
 INTO @Updated ([ApplicationId], [ApplicationCode], [FromStatus])
 WHERE [ApplicationId] = @ApplicationId
-  AND [ApplicationStatus] IN (N'Submitted', N'InReview');
+  AND (" + PortalBusinessApplicationTransitions.BuildSqlStatusPredicate() + @"
+      );
 
 DECLARE @ApplicationCode NVARCHAR(40);
 DECLARE @FromStatus NVARCHAR(20);
@@ -645,31 +646,14 @@ ORDER BY [Application].[SubmittedUtc] DESC, [Application].[ApplicationId] DESC;"
         /// </returns>
         private static string MapActionToStatus(string actionKey)
         {
-            if (string.Equals(actionKey, PortalWorkflowActions.Approve, StringComparison.Ordinal))
-            {
-                // <lang>
-                //   <zh-CN>动作到状态映射只接受固定常量，未知动作由方法末尾返回空字符串。</zh-CN>
-                //   <en>Action-to-status mapping accepts only fixed constants; unknown actions return an empty string at the end.</en>
-                // </lang>
-                return PortalBusinessApplicationStatuses.Approved;
-            }
-
-            if (string.Equals(actionKey, PortalWorkflowActions.Return, StringComparison.Ordinal))
-            {
-                return PortalBusinessApplicationStatuses.Returned;
-            }
-
-            if (string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal))
-            {
-                return PortalBusinessApplicationStatuses.Rejected;
-            }
-
-            if (string.Equals(actionKey, PortalWorkflowActions.Close, StringComparison.Ordinal))
-            {
-                return PortalBusinessApplicationStatuses.Closed;
-            }
-
-            return string.Empty;
+            // <lang>
+            //   <zh-CN>W71：动作到目标状态的映射由显式迁移表派生（单一事实源），未知动作返回空字符串，沿用既有"不支持动作"语义。</zh-CN>
+            //   <en>W71: the action-to-target mapping derives from the explicit transition table (single source of truth); an unknown action returns an empty string, preserving the established "unsupported action" behavior.</en>
+            // </lang>
+            string targetStatus;
+            return PortalBusinessApplicationTransitions.TryGetTargetStatus(actionKey, out targetStatus)
+                ? targetStatus
+                : string.Empty;
         }
 
         /// <summary>

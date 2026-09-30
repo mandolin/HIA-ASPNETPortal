@@ -71,5 +71,13 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string Close = "Close";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请人自助重提：把被退回的业务申请重新送回待审核窗口。W71 新增，来源状态仅 `Returned`，且不走后台审核路径。</zh-CN>
+        ///   <en>Applicant self-service resubmission: sends a returned business application back into the review window. Added in W71; its only source status is `Returned` and it does not travel the administration review path.</en>
+        /// </lang>
+        /// </summary>
+        public const string Resubmit = "Resubmit";
     }
 }
