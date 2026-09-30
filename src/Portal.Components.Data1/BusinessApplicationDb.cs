@@ -444,6 +444,113 @@ SELECT
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>申请人重提被退回的业务申请，把它送回待审核窗口。</zh-CN>
+        ///   <en>Lets the applicant resubmit a returned business application, sending it back into the review window.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法是申请人自助动作，不写入审核人字段。归属与状态条件写在同一个 UPDATE 语句中（`ApplicantUserId` 与 `ApplicationStatus = Returned`），因此不存在"先查后改"的中间窗口。由于表的检查约束要求 <c>Submitted</c> 状态下审核时间与审核人都为空，语句必须同时把这两列置空，否则会被约束拒绝；审核意见列被保留，权威历史由迁移事件承载。</zh-CN>
+        ///   <en>This method is an applicant self-service action and writes no reviewer fields. Ownership and status conditions live in the same UPDATE statement (`ApplicantUserId` and `ApplicationStatus = Returned`), so there is no read-then-write window. Because a table check constraint requires the review time and reviewer to be null in the <c>Submitted</c> state, the statement must clear both or the constraint rejects the change; the review comment column is retained while the authoritative history lives in transition events.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="applicationId"><l><zh-CN>业务申请标识。</zh-CN><en>The business application identifier.</en></l></param>
+        /// <param name="applicantUserId"><l><zh-CN>提交人门户用户标识。</zh-CN><en>The applicant's Portal user identifier.</en></l></param>
+        /// <param name="actorName"><l><zh-CN>操作人账号名或系统标识。</zh-CN><en>Actor account name or system identifier.</en></l></param>
+        /// <returns><l><zh-CN>重提结果；失败时为低敏说明。</zh-CN><en>The resubmission result, with a low-sensitivity explanation on failure.</en></l></returns>
+        public BusinessApplicationResult ResubmitApplication(long applicationId, int applicantUserId, string actorName)
+        {
+            if (applicationId <= 0 || applicantUserId <= 0)
+            {
+                return new BusinessApplicationResult(false, 0, string.Empty, "A valid application and applicant are required.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new BusinessApplicationResult(false, 0, string.Empty, "Business application schema is unavailable.");
+            }
+
+            string actor = string.IsNullOrWhiteSpace(actorName) ? "system" : actorName.Trim();
+
+            // <lang>
+            //   <zh-CN>重提时间统一为本方法的 UTC 时刻，避免调用方传入时钟造成提交时间与事件时间不一致。</zh-CN>
+            //   <en>The resubmission time is always this method's UTC instant, so a caller-supplied clock cannot make the submission time disagree with the event time.</en>
+            // </lang>
+            DateTime occurredUtc = DateTime.UtcNow;
+
+            try
+            {
+                List<BusinessApplicationReviewWriteRow> rows = context.Database.SqlQuery<BusinessApplicationReviewWriteRow>(
+                    @"
+DECLARE @Updated TABLE
+(
+    [ApplicationId] BIGINT NOT NULL,
+    [ApplicationCode] NVARCHAR(40) NOT NULL,
+    [FromStatus] NVARCHAR(20) NOT NULL
+);
+
+UPDATE [dbo].[PortalBiz_BusinessApplications]
+SET [ApplicationStatus] = @TargetStatus,
+    [ReviewedUtc] = NULL,
+    [ReviewedByUserId] = NULL,
+    [SubmittedUtc] = @OccurredUtc,
+    [UpdatedUtc] = @OccurredUtc,
+    [UpdatedBy] = @ActorName
+OUTPUT INSERTED.[ApplicationId], INSERTED.[ApplicationCode], DELETED.[ApplicationStatus]
+INTO @Updated ([ApplicationId], [ApplicationCode], [FromStatus])
+WHERE [ApplicationId] = @ApplicationId
+  AND [ApplicantUserId] = @ApplicantUserId
+  AND [ApplicationStatus] = @AllowedFromStatus;
+
+DECLARE @ApplicationCode NVARCHAR(40);
+DECLARE @FromStatus NVARCHAR(20);
+
+SELECT TOP (1)
+    @ApplicationCode = [ApplicationCode],
+    @FromStatus = [FromStatus]
+FROM @Updated;
+
+IF @ApplicationCode IS NOT NULL
+BEGIN
+    INSERT INTO [dbo].[PortalBiz_WorkflowEvents]
+        ([BusinessKind], [BusinessId], [OccurredUtc], [ActionKey], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
+    VALUES
+        (N'BusinessApplication',
+         CONVERT(NVARCHAR(80), @ApplicationId),
+         @OccurredUtc,
+         @ActionKey,
+         @ApplicantUserId,
+         @ActorName,
+         @FromStatus,
+         @TargetStatus,
+         N'Resubmitted by the applicant.',
+         NULL);
+END
+
+SELECT
+    @ApplicationId AS [ApplicationId],
+    ISNULL(@ApplicationCode, N'') AS [ApplicationCode];",
+                    new SqlParameter("@ApplicationId", applicationId),
+                    new SqlParameter("@ApplicantUserId", applicantUserId),
+                    new SqlParameter("@TargetStatus", PortalBusinessApplicationStatuses.Submitted),
+                    new SqlParameter("@AllowedFromStatus", PortalBusinessApplicationStatuses.Returned),
+                    new SqlParameter("@OccurredUtc", occurredUtc),
+                    new SqlParameter("@ActorName", actor),
+                    new SqlParameter("@ActionKey", PortalWorkflowActions.Resubmit)).ToList();
+
+                BusinessApplicationReviewWriteRow row = rows.Count == 0 ? null : rows[0];
+                return row == null || string.IsNullOrWhiteSpace(row.ApplicationCode)
+                    ? new BusinessApplicationResult(false, 0, string.Empty, "Application was not found or cannot be resubmitted.")
+                    : new BusinessApplicationResult(true, row.ApplicationId, row.ApplicationCode, "Business application resubmitted.");
+            }
+            catch (Exception)
+            {
+                return new BusinessApplicationResult(false, 0, string.Empty, "Business application resubmission failed.");
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>使用受控 where 片段和参数查询申请投影。</zh-CN>
         ///   <en>Queries application projections with a controlled where fragment and parameters.</en>
         /// </lang>
