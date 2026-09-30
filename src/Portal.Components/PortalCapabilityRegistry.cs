@@ -103,6 +103,12 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>业务申请能力键；与 <c>BasicBusiness.Collaboration</c> 同属基础业务层，复用既有 <c>Business.Application</c> 权限键族。</zh-CN><en>Business application request capability key; shares the BasicBusiness layer with <c>BasicBusiness.Collaboration</c> and reuses the existing <c>Business.Application</c> permission-key family.</en></lang></summary>
         public const string ApplicationRequest = "BasicBusiness.ApplicationRequest";
 
+        /// <summary><lang><zh-CN>员工资料确认能力键；W73 新增，用于消除 `HIA.EmployeeProfileConfirm` 的孤儿声明状态，复用既有 `Business.EmployeeProfileConfirm` 权限键族。</zh-CN><en>Employee profile confirmation capability key; added in W73 to end the orphan-declaration state of `HIA.EmployeeProfileConfirm`, reusing the existing `Business.EmployeeProfileConfirm` permission-key family.</en></lang></summary>
+        public const string EmployeeProfileConfirm = "BasicBusiness.EmployeeProfileConfirm";
+
+        /// <summary><lang><zh-CN>员工资料更正请求能力键；W73 新增，用于消除 `HIA.EmployeeProfileCorrectionRequest` 的孤儿声明状态，复用既有 `Business.EmployeeProfileCorrectionRequest` 权限键族。</zh-CN><en>Employee profile correction request capability key; added in W73 to end the orphan-declaration state of `HIA.EmployeeProfileCorrectionRequest`, reusing the existing `Business.EmployeeProfileCorrectionRequest` permission-key family.</en></lang></summary>
+        public const string EmployeeProfileCorrectionRequest = "BasicBusiness.EmployeeProfileCorrectionRequest";
+
         private static readonly PortalCapabilityDefinition[] DefinitionArray =
         {
             new PortalCapabilityDefinition(
@@ -120,7 +126,23 @@ namespace ASPNET.StarterKit.Portal
                 "HIA.BusinessApplicationRequest",
                 "Business.Application",
                 "业务申请",
-                "Business Application Request")
+                "Business Application Request"),
+            new PortalCapabilityDefinition(
+                EmployeeProfileConfirm,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.EmployeeProfileConfirm",
+                "Business.EmployeeProfileConfirm",
+                "员工资料确认",
+                "Employee Profile Confirmation"),
+            new PortalCapabilityDefinition(
+                EmployeeProfileCorrectionRequest,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.EmployeeProfileCorrectionRequest",
+                "Business.EmployeeProfileCorrectionRequest",
+                "员工资料更正请求",
+                "Employee Profile Correction Request")
         };
 
         private static readonly IList<PortalCapabilityDefinition> ReadOnlyDefinitions =

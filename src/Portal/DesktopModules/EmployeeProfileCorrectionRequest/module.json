@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "packageId": "HIA.EmployeeProfileCorrectionRequest",
   "displayName": "员工资料更正请求 / Employee Profile Correction Request",
   "version": "1.0.0",
@@ -7,5 +7,9 @@
   "desktopEntry": "DesktopModules/EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx",
   "resources": [
     "Styles/EmployeeProfileCorrectionRequest.css"
-  ]
+  ],
+  "capability": {
+    "capabilityId": "BasicBusiness.EmployeeProfileCorrectionRequest",
+    "role": "Primary"
+  }
 }

@@ -44,29 +44,65 @@ namespace ASPNET.StarterKit.Portal.Tests
         /// </lang>
         /// </summary>
         [TestMethod]
-        public void Definitions_ContainsBothCollaborationAndApplicationRequest()
+        public void Definitions_ContainsAllRegisteredCapabilities()
         {
             // <lang>
-            //   <zh-CN>只读集合用于断言条数，新增能力不得改变既有协同事项条目，也不得引入重复键。</zh-CN>
-            //   <en>The read-only set asserts the entry count: the new capability must not alter the existing collaboration entry nor introduce a duplicate key.</en>
+            //   <zh-CN>只读集合用于断言条数：W73 新增两条 BasicBusiness 能力后共四条；新增能力不得改变既有条目，也不得引入重复键。</zh-CN>
+            //   <en>The read-only set asserts the entry count: after W73 added two BasicBusiness capabilities there are four; a new capability must not alter existing entries nor introduce a duplicate key.</en>
             // </lang>
             Assert.AreEqual(
-                2,
+                4,
                 PortalCapabilityRegistry.Definitions.Count,
-                "W51 后应恰好有两条能力定义（Collaboration + ApplicationRequest）。");
+                "W73 后应恰好有四条能力定义（Collaboration + ApplicationRequest + EmployeeProfileConfirm + EmployeeProfileCorrectionRequest）。");
 
             // <lang>
-            //   <zh-CN>分别解析两条键，确认二者都可作为权威锚点被解析到。</zh-CN>
-            //   <en>Resolve both keys separately to confirm each is resolvable as an authority anchor.</en>
+            //   <zh-CN>分别解析四条键，确认它们都可作为权威锚点被解析到——manifest 的 capabilityId 依赖词表解析，解析不到则该包不能声明该能力。</zh-CN>
+            //   <en>Resolve the four keys separately to confirm each is resolvable as an authority anchor: a manifest capabilityId depends on the registry, and an unresolvable key means the package cannot declare that capability.</en>
             // </lang>
             PortalCapabilityDefinition collaboration;
             PortalCapabilityDefinition applicationRequest;
+            PortalCapabilityDefinition confirm;
+            PortalCapabilityDefinition correctionRequest;
             Assert.IsTrue(
                 PortalCapabilityRegistry.TryGet(PortalCapabilityRegistry.Collaboration, out collaboration),
                 "协同事项能力必须仍可解析。");
             Assert.IsTrue(
                 PortalCapabilityRegistry.TryGet(PortalCapabilityRegistry.ApplicationRequest, out applicationRequest),
                 "业务申请能力必须可被解析（P51.1 已注册）。");
+            Assert.IsTrue(
+                PortalCapabilityRegistry.TryGet(PortalCapabilityRegistry.EmployeeProfileConfirm, out confirm),
+                "W73 新增的员工资料确认能力必须可解析（两个 manifest 已声明它）。");
+            Assert.IsTrue(
+                PortalCapabilityRegistry.TryGet(PortalCapabilityRegistry.EmployeeProfileCorrectionRequest, out correctionRequest),
+                "W73 新增的员工资料更正能力必须可解析（两个 manifest 已声明它）。");
+
+            // <lang>
+            //   <zh-CN>钉住两条新登记能力的关键字段：层、生命周期、主责包与权限键前缀必须与既有权限键分类一致，否则能力矩阵会显示错误的归属。</zh-CN>
+            //   <en>Pin the key fields of the two new capabilities: layer, lifecycle, primary package, and permission-key prefix must match the existing permission categories, or the capability matrix would show wrong ownership.</en>
+            // </lang>
+            Assert.AreEqual("BasicBusiness", confirm.Layer, "员工资料确认应归属 BasicBusiness 层。");
+            Assert.AreEqual(
+                PortalCapabilityLifecycleStates.Active,
+                confirm.LifecycleState,
+                "已有主责模块实现的能力应为 Active。");
+            Assert.AreEqual("HIA.EmployeeProfileConfirm", confirm.PrimaryModuleId, "主责包标识必须与 manifest 的 packageId 一致。");
+            Assert.AreEqual(
+                "Business.EmployeeProfileConfirm",
+                confirm.PermissionKeyPrefix,
+                "权限键前缀必须与既有权限定义分类一致。");
+            Assert.AreEqual("BasicBusiness", correctionRequest.Layer, "员工资料更正应归属 BasicBusiness 层。");
+            Assert.AreEqual(
+                PortalCapabilityLifecycleStates.Active,
+                correctionRequest.LifecycleState,
+                "已有主责模块实现的能力应为 Active。");
+            Assert.AreEqual(
+                "HIA.EmployeeProfileCorrectionRequest",
+                correctionRequest.PrimaryModuleId,
+                "主责包标识必须与 manifest 的 packageId 一致。");
+            Assert.AreEqual(
+                "Business.EmployeeProfileCorrectionRequest",
+                correctionRequest.PermissionKeyPrefix,
+                "权限键前缀必须与既有权限定义分类一致。");
         }
 
         /// <summary>

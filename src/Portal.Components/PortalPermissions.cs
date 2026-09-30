@@ -256,6 +256,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>View business workflow events.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>W73（D1 裁定）：`Business.Workflow` 已**合并到 `BusinessApplicationRequest`**。本键仅作为**历史兼容别名保留**，代码中**没有任何引用点**，不得再作为新功能的门禁使用；业务申请的门禁请使用 `Business.Application.*` 键族。删除本常量会破坏历史角色映射的兼容性，因此保留而不移除。</zh-CN>
+        ///   <en>W73 (decision D1): `Business.Workflow` has been **merged into `BusinessApplicationRequest`**. This key remains only as a **historical compatibility alias**, has **no reference sites in code**, and must not be used as a gate for new functionality; use the `Business.Application.*` family for business-application gates instead. Removing the constant would break historical role-mapping compatibility, so it is retained rather than deleted.</en>
+        /// </lang>
+        /// </remarks>
         public const string BusinessWorkflowView = "Business.Workflow.View";
 
         /// <summary>
@@ -264,6 +270,12 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Administer business workflow events and related configuration.</en>
         /// </lang>
         /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>W73（D1 裁定）：与 <see cref="BusinessWorkflowView"/> 同为**历史兼容别名**，已随 `Business.Workflow` 合并到 `BusinessApplicationRequest`；代码中无任何引用点，不作为门禁使用。业务申请的管理门禁请使用 `Business.Application.Admin`。</zh-CN>
+        ///   <en>W73 (decision D1): like <see cref="BusinessWorkflowView"/>, this is a **historical compatibility alias** that followed the merge of `Business.Workflow` into `BusinessApplicationRequest`; it has no reference sites in code and is not used as a gate. Use `Business.Application.Admin` for business-application administration gating.</en>
+        /// </lang>
+        /// </remarks>
         public const string BusinessWorkflowAdmin = "Business.Workflow.Admin";
 
         /// <summary>
