@@ -227,6 +227,24 @@ WHERE [Binding].[UserId] = @UserId
   AND [Employee].[EmployeeId] = @EmployeeId
   AND [Binding].[BindingStatus] = N'Active'
   AND [Employee].[EmploymentStatus] = N'Active'
+  AND NOT EXISTS
+      (
+          SELECT 1
+          FROM [dbo].[PortalBiz_EmployeeProfileConfirmations] AS [Latest]
+          WHERE [Latest].[ConfirmationId] =
+                (
+                    SELECT TOP (1) [Prior].[ConfirmationId]
+                    FROM [dbo].[PortalBiz_EmployeeProfileConfirmations] AS [Prior]
+                    WHERE [Prior].[UserId] = [Binding].[UserId]
+                      AND [Prior].[EmployeeId] = [Employee].[EmployeeId]
+                    ORDER BY [Prior].[ConfirmedUtc] DESC, [Prior].[ConfirmationId] DESC
+                )
+            AND ISNULL([Latest].[SnapshotEmployeeCode], N'') = ISNULL([Employee].[EmployeeCode], N'')
+            AND ISNULL([Latest].[SnapshotDisplayName], N'') = ISNULL([Employee].[DisplayName], N'')
+            AND ISNULL([Latest].[SnapshotPreferredName], N'') = ISNULL([Employee].[PreferredName], N'')
+            AND ISNULL([Latest].[SnapshotWorkEmail], N'') = ISNULL([Employee].[WorkEmail], N'')
+            AND ISNULL([Latest].[SnapshotOrganizationDisplayName], N'') = ISNULL([Organization].[DisplayName], N'')
+      )
 ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;
 
 SELECT [ConfirmationId] FROM @Inserted;",
@@ -236,12 +254,31 @@ SELECT [ConfirmationId] FROM @Inserted;",
                     new SqlParameter("@ConfirmedBy", normalized.ConfirmedBy)).ToList();
 
                 long confirmationId = rows.Count == 0 ? 0 : rows[0];
-                if (confirmationId <= 0)
+                if (confirmationId > 0)
                 {
-                    return new EmployeeProfileConfirmationResult(false, 0, "No active employee profile is available for confirmation.");
+                    return new EmployeeProfileConfirmationResult(true, confirmationId, "Employee profile confirmed.");
                 }
 
-                return new EmployeeProfileConfirmationResult(true, confirmationId, "Employee profile confirmed.");
+                // <lang>
+                //   <zh-CN>没有插入行有两种可能：确实没有可用在职资料，或最近一次确认的快照与当前资料完全一致（幂等跳过）。回查最近一次确认标识以区分两者——查到即视为"已确认且未重复记录"，否则按没有可用资料失败。</zh-CN>
+                //   <en>A missing inserted row has two causes: no active profile is available, or the latest confirmation already matches the current profile (idempotent skip). Look the latest confirmation identifier up to distinguish them: if it exists the call is an already-confirmed no-op, otherwise there is no active profile available.</en>
+                // </lang>
+                List<long> latest = context.Database.SqlQuery<long>(
+                    @"
+SELECT TOP (1) [ConfirmationId]
+FROM [dbo].[PortalBiz_EmployeeProfileConfirmations]
+WHERE [UserId] = @UserId
+  AND [EmployeeId] = @EmployeeId
+ORDER BY [ConfirmedUtc] DESC, [ConfirmationId] DESC;",
+                    new SqlParameter("@UserId", normalized.UserId),
+                    new SqlParameter("@EmployeeId", normalized.EmployeeId)).ToList();
+
+                if (latest.Count > 0 && latest[0] > 0)
+                {
+                    return new EmployeeProfileConfirmationResult(true, latest[0], "Employee profile was already confirmed with the same data.");
+                }
+
+                return new EmployeeProfileConfirmationResult(false, 0, "No active employee profile is available for confirmation.");
             }
             catch (Exception)
             {
