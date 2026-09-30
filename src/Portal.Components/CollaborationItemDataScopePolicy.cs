@@ -42,8 +42,8 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         /// <remarks>
         /// <lang>
-        ///   <zh-CN>维度判定顺序为：管理员延续既有集中查看能力 → 归属（发起人或负责人）→ 参与人集合 → 组织范围。组织维度要求事项组织单元标识存在且落在可见集合内；事项未标注组织或可见集合为空时该维度不授予可见性。</zh-CN>
-        ///   <en>The dimension order is: administrator continues the existing centralized viewing capability, then ownership (initiator or owner), then the participant set, then the organization scope. The organization dimension requires the item to carry an organization-unit identifier that falls inside the visible collection; an item without an organization unit or an empty visible collection grants nothing through this dimension.</en>
+        ///   <zh-CN>维度判定顺序为：管理员延续既有集中查看能力 → 归属（发起人或负责人用户）→ **负责人角色键**（W72 新增，与既有写资格对齐）→ 参与人集合 → 组织范围。组织维度要求事项组织单元标识存在且落在可见集合内；事项未标注组织或可见集合为空时该维度不授予可见性。</zh-CN>
+        ///   <en>The dimension order is: administrator continues the existing centralized viewing capability, then ownership (initiator or owner user), then the **owner role key** (added in W72 to align with the existing write eligibility), then the participant set, then the organization scope. The organization dimension requires the item to carry an organization-unit identifier that falls inside the visible collection; an item without an organization unit or an empty visible collection grants nothing through this dimension.</en>
         /// </lang>
         /// </remarks>
         public static bool CanView(CollaborationItemInfo item, CollaborationItemDataScope scope)
@@ -72,6 +72,15 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (item.InitiatorUserId == scope.ActorUserId ||
                 (item.OwnerUserId.HasValue && item.OwnerUserId.Value == scope.ActorUserId))
+            {
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>W72：负责人角色键维度——动作人持有该事项的受控负责人角色键时可见。既有 `CanParticipate` 已用同一条件授予写/处理资格，若读取不同步，处理者会因打不开详情而无法执行动作（写资格名存实亡）。该键本身是受控权限键且只对本事项授予，因此不扩大可见范围。</zh-CN>
+            //   <en>W72 owner-role-key dimension: an actor holding the item's controlled owner role key may view it. The existing `CanParticipate` already grants write/handling eligibility on the same condition; if reads did not align, a handler could not open the detail page and therefore could not act (the write eligibility would be nominal). The key is a controlled permission key scoped to this item, so visibility is not widened.</en>
+            // </lang>
+            if (scope.HoldsOwnerRoleKey)
             {
                 return true;
             }

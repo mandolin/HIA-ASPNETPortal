@@ -1219,11 +1219,16 @@ WHERE [Item].[ItemId] = @ItemId",
             //   <zh-CN>参与人与组织范围都在服务端现查，避免调用方自行声明范围边界；查询失败时对应维度退化为拒绝。</zh-CN>
             //   <en>Resolve the participant flag and the organization scope on the server so callers cannot declare their own scope; a failed query degrades the related dimension to deny.</en>
             // </lang>
+            // <lang>
+            //   <zh-CN>W72：负责人角色键证据沿用 `HasOwnerRolePermission` 的既有判定（与写资格同一条件），使"能处理"与"能看到"一致；比较仍在服务端完成，策略只接收布尔证据。</zh-CN>
+            //   <en>W72: the owner-role-key evidence reuses the existing `HasOwnerRolePermission` judgement (the same condition as write eligibility) so "may handle" and "may view" agree; the comparison still happens server-side and the policy receives only a boolean evidence flag.</en>
+            // </lang>
             CollaborationItemDataScope scope = new CollaborationItemDataScope(
                 actor.ActorUserId,
                 actor.IsAdministrator,
                 IsParticipant(item.ItemId, actor.ActorUserId),
-                ResolveVisibleOrganizationUnitIds(actor.ActorUserId));
+                ResolveVisibleOrganizationUnitIds(actor.ActorUserId),
+                HasOwnerRolePermission(item, actor));
 
             return CollaborationItemDataScopePolicy.CanView(item, scope);
         }

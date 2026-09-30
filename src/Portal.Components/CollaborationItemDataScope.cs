@@ -47,7 +47,18 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Organization-unit identifiers visible to the current user; may be null, and an empty collection is treated as "scope unknown".</en>
         /// </l>
         /// </param>
-        public CollaborationItemDataScope(int actorUserId, bool isAdministrator, bool isParticipant, IEnumerable<int> visibleOrganizationUnitIds)
+        /// <param name="holdsOwnerRoleKey">
+        /// <l>
+        ///   <zh-CN>当前用户是否持有该事项的负责人角色键（受控权限键），由服务端比较后传入；策略本身不接触权限集合。W72 新增，用于让读取边界与既有写资格对齐。</zh-CN>
+        ///   <en>Whether the current user holds the item's owner role key (a controlled permission key), supplied after a server-side comparison; the policy itself never touches a permission collection. Added in W72 so the read boundary aligns with the existing write eligibility.</en>
+        /// </l>
+        /// </param>
+        public CollaborationItemDataScope(
+            int actorUserId,
+            bool isAdministrator,
+            bool isParticipant,
+            IEnumerable<int> visibleOrganizationUnitIds,
+            bool holdsOwnerRoleKey = false)
         {
             // <lang>
             //   <zh-CN>先固定身份、管理员和参与三项标量证据，使后续判定只依赖本次快照而不依赖可变入参。</zh-CN>
@@ -56,6 +67,7 @@ namespace ASPNET.StarterKit.Portal
             ActorUserId = actorUserId;
             IsAdministrator = isAdministrator;
             IsParticipant = isParticipant;
+            HoldsOwnerRoleKey = holdsOwnerRoleKey;
 
             // <lang>
             //   <zh-CN>复制组织标识集合并丢弃非正值、去重后固定为只读列表，避免调用方后续修改集合影响已完成的判定。</zh-CN>
@@ -91,6 +103,14 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public bool IsParticipant { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前用户是否持有该事项的负责人角色键；该维度只对齐既有写资格，不推断角色继承。</zh-CN>
+        ///   <en>Whether the current user holds the item's owner role key; this dimension only aligns with the existing write eligibility and infers no role inheritance.</en>
+        /// </lang>
+        /// </summary>
+        public bool HoldsOwnerRoleKey { get; private set; }
 
         /// <summary>
         /// <lang>
