@@ -65,6 +65,15 @@
 - **浅色与深色各出一套**（主题兼容是最低要求，不是可选）。
 - 关键状态（空态、加载中、提交中、成功、失败、权限不足、禁用、超期）应在预设计稿中被**实际画出来**，不能只在文档里列清单。
 
+### 原型必须基于项目真实主题皮肤与类体系（硬性）
+
+- 原型/设计图**必须体现本项目真实的主题皮肤与门户类体系**，**禁止**使用与本项目风格无关的通用设计稿或 AI 自由发挥的企业风图。
+- 出图方式：优先**真实渲染出图** —— 写静态 HTML 原型页并引用真实的 `App_Themes/<Theme>/Default.css` 与真实类，再用项目既有截图链路（`dev/scripts/Capture-PortalThemeScreenshots.ps1`、IIS Express + playwright）截图；**不得**用文生图工具"想象"界面。
+- 原型中必须使用既有类：基础/遗留层（`.Head`、`.SubHead`、`.CommandButton`、`.Message`、`table[border="1"]` 等）、门户外壳层（`.portal-header`、`.portal-nav-row`、`.portal-tab`、`.portal-main-shell`、`.portal-content-stage`、`.portal-module`、`.portal-pane-*` 等）；模块私有类只承担**布局**，颜色/边框/字体由主题层决定。
+- **主题皮肤现状**：`src/Portal/App_Themes/` 下 6 套正式皮肤（`EnterpriseLight` / `EnterpriseDark` / `OaLight` / `OaDark` / `StateClassicLight` / `StateClassicDark`）+ `Default` 回退；主题通过 `body.portal-theme-<规范化主题名>` 作用域生效（见 `PortalThemeResolver.GetCurrentCssClass`）。
+- **新增模块或新增可见元素时，必须在本项目 6 套正式皮肤的 `Default.css` 中补齐对应的 `body.portal-theme-<名> .<模块类>` 作用域规则**（参照既有模块如 `employee-profile-confirm` / `employee-profile-correction` 的既有做法）；只写模块自带 `Styles/<Module>.css` 而**不在主题层补规则**，会导致该模块在多数皮肤下丢失主题化样式 —— 视为未完成。
+- 上述为**实现级硬性要求**，不只是设计图要求：设计图与实现都必须落到真实主题类体系上。
+
 ### 高保真设计图（新模块 / 较大 UI 变化，硬性）
 
 - **新增模块（新增页面或新增 DesktopModule）以及会带来较大 UI 变化的新功能**，在前期**除预设计稿外，还必须有高保真设计图**。
