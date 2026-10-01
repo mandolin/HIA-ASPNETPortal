@@ -725,7 +725,7 @@ namespace ASPNET.StarterKit.Portal
             PriorityKey = EmptyToNone(item.PriorityKey);
             LastActionUtcText = item.LastActionUtc.HasValue
                 ? item.LastActionUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
-                : "(none)";
+                : lang.Common_NonePlaceholder;
             LastActionComment = EmptyToNone(item.LastActionComment);
             // <lang>
             //   <zh-CN>最新评论只从当前用户可见且属于参与者范围的评论事件中按时间和事件号稳定选取。</zh-CN>
@@ -737,13 +737,17 @@ namespace ASPNET.StarterKit.Portal
                 .OrderByDescending(itemEvent => itemEvent.OccurredUtc)
                 .ThenByDescending(itemEvent => itemEvent.EventId)
                 .FirstOrDefault();
-            LatestParticipantComment = latestComment == null ? "(none)" : EmptyToNone(latestComment.Comment);
+            LatestParticipantComment = latestComment == null ? lang.Common_NonePlaceholder : EmptyToNone(latestComment.Comment);
             // <lang>
             //   <zh-CN>前台只做只读呈现：子项（有父项）在列表里缩进显示，参与人集合由数据层提供并按角色标注。</zh-CN>
             //   <en>The front end renders read-only: children (those with a parent) render indented, and the participant set comes from the data layer with role labels.</en>
             // </lang>
             HasParentItem = item.ParentItemId.HasValue;
-            ParticipantsText = BuildParticipantsText(participants);
+            // <lang>
+            //   <zh-CN>P74.4 起参与人文本走共享渲染器：角色键映射为本地化角色名，未知键回退原始键，空集合用本地化占位。</zh-CN>
+            //   <en>Since P74.4 participant text goes through the shared renderer: role keys map to localized role names, unknown keys fall back to the raw key, and an empty set uses the localized placeholder.</en>
+            // </lang>
+            ParticipantsText = PortalCollaborationParticipantText.BuildParticipantsText(participants);
         }
 
         /// <summary><lang><zh-CN>协同事项主键。</zh-CN><en>Collaboration-item primary key.</en></lang></summary>
@@ -781,32 +785,13 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>把参与人集合转换为只读展示文本；角色沿用稳定键文本，不在此引入新的本地化词表。</zh-CN>
-        ///   <en>Converts the participant set to read-only display text; roles keep their stable-key text without introducing a new localized vocabulary here.</en>
-        /// </lang>
-        /// </summary>
-        private static string BuildParticipantsText(IList<CollaborationItemParticipantInfo> participants)
-        {
-            if (participants == null || participants.Count == 0)
-            {
-                return "(none)";
-            }
-
-            return string.Join(
-                ", ",
-                participants.Select(participant =>
-                    EmptyToNone(participant.UserName) + " (" + participant.ParticipantRoleKey + ")"));
-        }
-
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>将空白展示字段转换为统一的占位文本。</zh-CN>
-        ///   <en>Converts blank display fields to a consistent placeholder.</en>
+        ///   <zh-CN>将空白展示字段转换为本地化占位文本。</zh-CN>
+        ///   <en>Converts blank display fields to the localized placeholder.</en>
         /// </lang>
         /// </summary>
         private static string EmptyToNone(string value)
         {
-            return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
         }
     }
 }

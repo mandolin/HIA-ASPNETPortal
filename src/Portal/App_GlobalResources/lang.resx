@@ -1533,12 +1533,6 @@
   <data name="Admin_CollaborationItems_LabelParticipantRole" xml:space="preserve">
     <value>Role</value>
   </data>
-  <data name="Admin_CollaborationItems_RoleType_Collaborator" xml:space="preserve">
-    <value>Collaborator</value>
-  </data>
-  <data name="Admin_CollaborationItems_RoleType_Watcher" xml:space="preserve">
-    <value>Watcher</value>
-  </data>
   <data name="Admin_CollaborationItems_ButtonAddParticipant" xml:space="preserve">
     <value>Add Participant</value>
   </data>
@@ -2624,5 +2618,17 @@
   </data>
   <data name="Admin_WorkItems_EmptyNoMatches" xml:space="preserve">
     <value>No matching work items</value>
+  </data>
+  <data name="Collaboration_ParticipantRole_Collaborator" xml:space="preserve">
+    <value>Collaborator</value>
+  </data>
+  <data name="Collaboration_ParticipantRole_Watcher" xml:space="preserve">
+    <value>Watcher</value>
+  </data>
+  <data name="Common_NonePlaceholder" xml:space="preserve">
+    <value>(none)</value>
+  </data>
+  <data name="Collaboration_ParticipantDisplayFormat" xml:space="preserve">
+    <value>{0} ({1})</value>
   </data>
 </root>

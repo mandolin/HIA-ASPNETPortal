@@ -187,8 +187,8 @@
                                             <en>Participant role dropdown: display names localized via RoleType keys; Value keeps the untranslatable role-type key.</en>
                                         --%>
                                         <asp:DropDownList ID="ParticipantRoleList" CssClass="NormalTextBox" runat="server">
-                                            <asp:ListItem Text="<%$ Resources:lang, Admin_CollaborationItems_RoleType_Collaborator %>" Value="Collaborator" Selected="True" />
-                                            <asp:ListItem Text="<%$ Resources:lang, Admin_CollaborationItems_RoleType_Watcher %>" Value="Watcher" />
+                                            <asp:ListItem Text="<%$ Resources:lang, Collaboration_ParticipantRole_Collaborator %>" Value="Collaborator" Selected="True" />
+                                            <asp:ListItem Text="<%$ Resources:lang, Collaboration_ParticipantRole_Watcher %>" Value="Watcher" />
                                         </asp:DropDownList>
                                         <asp:Button ID="AddParticipantButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonAddParticipant %>" CssClass="CommandButton" CommandName="AddParticipant" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />
                                         <asp:Button ID="RemoveParticipantButton" Text="<%$ Resources:lang, Admin_CollaborationItems_ButtonRemoveParticipant %>" CssClass="CommandButton" CommandName="RemoveParticipant" CommandArgument='<%# Eval("ItemId") %>' CausesValidation="False" runat="server" />

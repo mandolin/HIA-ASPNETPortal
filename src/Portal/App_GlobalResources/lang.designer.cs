@@ -10099,5 +10099,53 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_WorkItems_EmptyNoMatches", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：协办</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaborator</en>
+        /// </lang>
+        /// </summary>
+        internal static string Collaboration_ParticipantRole_Collaborator {
+            get {
+                return ResourceManager.GetString("Collaboration_ParticipantRole_Collaborator", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：关注</zh-CN>
+        ///   <en>Looks up a localized string similar to: Watcher</en>
+        /// </lang>
+        /// </summary>
+        internal static string Collaboration_ParticipantRole_Watcher {
+            get {
+                return ResourceManager.GetString("Collaboration_ParticipantRole_Watcher", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：（无）</zh-CN>
+        ///   <en>Looks up a localized string similar to: (none)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_NonePlaceholder {
+            get {
+                return ResourceManager.GetString("Common_NonePlaceholder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：{0}（{1}）</zh-CN>
+        ///   <en>Looks up a localized string similar to: {0} ({1})</en>
+        /// </lang>
+        /// </summary>
+        internal static string Collaboration_ParticipantDisplayFormat {
+            get {
+                return ResourceManager.GetString("Collaboration_ParticipantDisplayFormat", resourceCulture);
+            }
+        }
     }
 }
