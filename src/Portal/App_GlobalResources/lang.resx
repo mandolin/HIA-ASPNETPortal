@@ -2574,4 +2574,7 @@
   <data name="Contacts_LabelName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="EnterpriseCapabilityWorkbench_EmptyNoItems" xml:space="preserve">
+    <value>No collaboration items</value>
+  </data>
 </root>

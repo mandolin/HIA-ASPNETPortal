@@ -417,12 +417,39 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>逐行读取参与人集合（受前台固定条数上限约束的轻量查询）；前台只展示，不做增删。</zh-CN>
             //   <en>Read the participant set per row (a lightweight query bounded by the front-end item limit); the front end only displays and never adds or removes.</en>
             // </lang>
-            RecentItemsRepeater.DataSource = items.Select(item => new EnterpriseCapabilityWorkbenchItemRow(
+            List<EnterpriseCapabilityWorkbenchItemRow> rows = items.Select(item => new EnterpriseCapabilityWorkbenchItemRow(
                 item,
                 CollaborationItemDb.GetVisibleEvents(item.ItemId, userId),
                 CollaborationItemDb.GetParticipants(item.ItemId))).ToList();
+
+            // <lang>
+            //   <zh-CN>先记下行数再绑定：模板在 Footer 用该计数决定是否渲染空态行（Repeater 的表头与表尾在零条时仍会渲染，故空态行必须放在 Footer 内才能保持"表头 + 提示行"的表格结构）。</zh-CN>
+            //   <en>Record the row count before binding: the markup uses it in the footer to decide whether to render the empty-state row (a Repeater still renders its header and footer with zero rows, so the empty row must live in the footer to keep the header-plus-hint table structure).</en>
+            // </lang>
+            recentItemRowCount = rows.Count;
+
+            RecentItemsRepeater.DataSource = rows;
             RecentItemsRepeater.DataBind();
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近事项列表当前已渲染的行数，供标记层在零条时渲染空态提示。</zh-CN>
+        ///   <en>Number of rows currently rendered in the recent-items list; the markup uses it to render the empty-state hint when it is zero.</en>
+        /// </lang>
+        /// </summary>
+        protected int RecentItemCount
+        {
+            get { return recentItemRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近事项列表的已渲染行数，由 <c>BindRecentItems</c> 在绑定前写入。</zh-CN>
+        ///   <en>Rendered row count of the recent-items list, written by <c>BindRecentItems</c> before binding.</en>
+        /// </lang>
+        /// </summary>
+        private int recentItemRowCount;
 
         /// <summary>
         /// <lang>

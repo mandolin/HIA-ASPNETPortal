@@ -9895,5 +9895,17 @@ namespace Resources {
                 return ResourceManager.GetString("Contacts_LabelName", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无协同事项</zh-CN>
+        ///   <en>Looks up a localized string similar to: No collaboration items</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_EmptyNoItems {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_EmptyNoItems", resourceCulture);
+            }
+        }
     }
 }

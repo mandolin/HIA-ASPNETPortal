@@ -1690,3 +1690,13 @@ body.portal-theme-stateclassiclight .enterprise-workbench-list td,
 body.portal-theme-stateclassiclight .enterprise-workbench-list th {
     border-bottom-color: #e6dcc2;
 }
+
+/* <lang>
+ *   <zh-CN>列表空态共享类（P74.3）：零条记录时表格内单行提示。配色复用本皮肤既有中性文本色（与 .portal-admin-subtitle 同色），属既有调色板内的弱化层级而非新造颜色。样式作用在单元格内的 div 上（见 PortalEmptyStateRenderer），避免与表格 td 的对齐规则同属性竞争。</zh-CN>
+ *   <en>Shared empty-state class for lists (P74.3): a single in-table hint row when there are zero records. The color reuses this skin's existing neutral text color (the same value as .portal-admin-subtitle), so it stays in the existing muted tier instead of introducing a new color. The style applies to a div inside the cell (see PortalEmptyStateRenderer) so it cannot lose the alignment cascade to the table's td rules.</en>
+ * </lang> */
+.portal-empty-state {
+    padding: 18px 10px;
+    color: #665f4f;
+    text-align: center;
+}
