@@ -19,7 +19,12 @@
     </lang>
 --%>
 <div class="my-work-items">
-    <div class="my-work-items-title"><asp:Literal Text="<%$ Resources:lang,MyWorkItems_Heading %>" runat="server" /></div>
+    <%--
+        <lang>
+            <zh-CN>模块标题由门户的模块标题栏（`DesktopModuleTitle.ascx`，使用 `.Head` 与 `.portal-module-*` 类）统一渲染，模块自身**不得**再画一层标题：否则会出现重复标题栏，且自绘标题拿不到主题层为 `.Head` 定义的字号与字重。此结论由真实主题渲染的原型核对得出。</zh-CN>
+            <en>The module title is rendered by the portal's module-title chrome (`DesktopModuleTitle.ascx`, using `.Head` and `.portal-module-*` classes) and a module must **not** draw its own title layer: doing so duplicates the title bar and the hand-drawn title misses the font size and weight the theme layer defines for `.Head`. This conclusion came from reviewing the real-theme rendered prototype.</en>
+        </lang>
+    --%>
 
     <%--
         <lang>

@@ -4,11 +4,10 @@
         <en>Local styles for the My To-Do Items module: only block spacing and status text styles are defined; colors always inherit theme variables and no hard-coded palette is introduced here.</en>
     </lang>
 --%>
-.my-work-items-title {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-}
-
+/* <lang>
+ *   <zh-CN>不再定义模块标题样式：标题由门户模块标题栏（DesktopModuleTitle.ascx 的 .Head）提供，模块自绘标题会重复标题栏。</zh-CN>
+ *   <en>No module-title styles are defined: the title comes from the portal module-title chrome (the `.Head` class in DesktopModuleTitle.ascx), and a hand-drawn module title would duplicate the title bar.</en>
+ * </lang> */
 .my-work-items-filter {
     margin-bottom: 0.5em;
 }

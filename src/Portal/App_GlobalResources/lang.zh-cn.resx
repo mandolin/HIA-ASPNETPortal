@@ -2481,9 +2481,6 @@
   <data name="Admin_Roles_MessageDeleteFailed" xml:space="preserve">
     <value>角色删除失败，系统已记录本次错误。事件编号：{0}</value>
   </data>
-  <data name="MyWorkItems_Heading" xml:space="preserve">
-    <value>我的待办</value>
-  </data>
   <data name="MyWorkItems_ColumnType" xml:space="preserve">
     <value>类型</value>
   </data>

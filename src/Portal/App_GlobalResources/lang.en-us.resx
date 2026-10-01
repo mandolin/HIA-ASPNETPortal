@@ -1632,9 +1632,6 @@
   <data name="Admin_Roles_MessageDeleteFailed" xml:space="preserve">
     <value>Deleting the role failed; the system recorded this error. Event id: {0}</value>
   </data>
-  <data name="MyWorkItems_Heading" xml:space="preserve">
-    <value>My To-Do Items</value>
-  </data>
   <data name="MyWorkItems_ColumnType" xml:space="preserve">
     <value>Type</value>
   </data>
