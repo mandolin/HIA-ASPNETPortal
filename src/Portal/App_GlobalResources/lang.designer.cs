@@ -9751,5 +9751,149 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_Roles_MessageDeleteFailed", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：UTC</zh-CN>
+        ///   <en>Looks up a localized string similar to: UTC</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_ColumnUtc {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ColumnUtc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：编号</zh-CN>
+        ///   <en>Looks up a localized string similar to: No.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_ColumnId {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ColumnId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：标题</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_LabelTitle {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：状态</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string EnterpriseCapabilityWorkbench_ColumnStatus {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ColumnStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：员工号</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee code</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_LabelEmployeeCode {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelEmployeeCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：姓名</zh-CN>
+        ///   <en>Looks up a localized string similar to: Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_LabelName {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：称呼</zh-CN>
+        ///   <en>Looks up a localized string similar to: Salutation</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_LabelSalutation {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelSalutation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：工作邮箱</zh-CN>
+        ///   <en>Looks up a localized string similar to: Work email</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_LabelWorkEmail {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelWorkEmail", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：组织</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_LabelOrganization {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelOrganization", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：状态</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileConfirm_LabelEmploymentStatus {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_LabelEmploymentStatus", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：标题</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title</en>
+        /// </lang>
+        /// </summary>
+        internal static string Document_LabelTitle {
+            get {
+                return ResourceManager.GetString("Document_LabelTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：姓名</zh-CN>
+        ///   <en>Looks up a localized string similar to: Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Contacts_LabelName {
+            get {
+                return ResourceManager.GetString("Contacts_LabelName", resourceCulture);
+            }
+        }
     }
 }

@@ -31,27 +31,33 @@
         --%>
         <div class="employee-profile-field-grid">
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelEmployeeCode %></span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelEmployeeCode %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="EmployeeCodeLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelName %></span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelName %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="DisplayNameLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelSalutation %></span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelSalutation %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="PreferredNameLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelWorkEmail %></span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelWorkEmail %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="WorkEmailLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelOrganization %></span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelOrganization %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="OrganizationLabel" runat="server" /></span>
             </div>
+            <%--
+                <lang>
+                    <zh-CN>P74.2 起"在职状态"改用本模块自有键 EmployeeProfileConfirm_LabelEmploymentStatus：此前借用资料更正模块的"状态列"标题，属**语义借用**（用列表列标题表达在职状态），任一方改文案都会误伤对方。文案值保持"状态"不变，属纯键归属整理；把文案改为更明确的"在职状态"属可见文案变化，另作候选登记。</zh-CN>
+                    <en>Since P74.2 the employment-status field uses this module's own key EmployeeProfileConfirm_LabelEmploymentStatus; it previously borrowed the correction module's list-column title, which is a **semantic borrow** (a list column title standing in for employment status) that made either side's wording change break the other. The value stays "状态", so this is pure key-ownership cleanup; renaming it to a clearer "在职状态" is a visible wording change and is registered as a separate candidate.</en>
+                </lang>
+            --%>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_ColumnStatus %></span>
+                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelEmploymentStatus %></span>
                 <span class="employee-profile-field-value"><asp:Label ID="EmploymentStatusLabel" runat="server" /></span>
             </div>
             <div class="employee-profile-field employee-profile-field-wide">

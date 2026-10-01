@@ -28,7 +28,13 @@
         <table class="portal-data-table portal-content-table" cellspacing="0" cellpadding="0" border="0" width="100%">
             <tr>
                 <th></th>
-                <th><%= lang.BusinessApplicationRequest_LabelTitle %></th>
+                <%--
+                    <lang>
+                        <zh-CN>P74.2 起改用本模块自有资源键，不再借用 BusinessApplicationRequest 的键。</zh-CN>
+                        <en>Since P74.2 this header uses the module's own resource key instead of borrowing a key from BusinessApplicationRequest.</en>
+                    </lang>
+                --%>
+                <th><%= lang.Document_LabelTitle %></th>
                 <th><%= lang.Document_LabelOwner %></th>
                 <th><%= lang.Document_LabelArea %></th>
                 <th><%= lang.Document_LabelLastUpdated %></th>

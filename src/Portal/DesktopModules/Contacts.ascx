@@ -28,7 +28,13 @@
         <table class="portal-data-table portal-content-table" cellspacing="0" cellpadding="0" border="0" width="100%">
             <tr>
                 <th></th>
-                <th><%= lang.EmployeeProfileCorrectionRequest_LabelName %></th>
+                <%--
+                    <lang>
+                        <zh-CN>P74.2 起改用本模块自有资源键（文案保持"姓名"不变），不再借用 EmployeeProfileCorrectionRequest 的键；同族的 LegacyEdit_LabelName 文案为"名称"，直接改用会造成可见文案变化，故不采用。</zh-CN>
+                        <en>Since P74.2 this header uses the module's own resource key (the wording stays "姓名") instead of borrowing a key from EmployeeProfileCorrectionRequest; the sibling LegacyEdit_LabelName says "名称", so reusing it would change visible wording and was rejected.</en>
+                    </lang>
+                --%>
+                <th><%= lang.Contacts_LabelName %></th>
                 <th><%= lang.LegacyEdit_LabelRole %></th>
                 <th><%= lang.LegacyEdit_LabelEmail %></th>
                 <th><%= lang.LegacyEdit_LabelContact1 %></th>

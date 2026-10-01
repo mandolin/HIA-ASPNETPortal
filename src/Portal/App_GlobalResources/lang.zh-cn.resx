@@ -2538,4 +2538,40 @@
   <data name="EmployeeProfileConfirm_MessageNoPermission" xml:space="preserve">
     <value>没有确认员工资料的权限。</value>
   </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnId" xml:space="preserve">
+    <value>编号</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelTitle" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelEmployeeCode" xml:space="preserve">
+    <value>员工号</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelName" xml:space="preserve">
+    <value>姓名</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelSalutation" xml:space="preserve">
+    <value>称呼</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelWorkEmail" xml:space="preserve">
+    <value>工作邮箱</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelOrganization" xml:space="preserve">
+    <value>组织</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelEmploymentStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Document_LabelTitle" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="Contacts_LabelName" xml:space="preserve">
+    <value>姓名</value>
+  </data>
 </root>

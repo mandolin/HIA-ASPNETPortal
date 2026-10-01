@@ -73,10 +73,16 @@
                 <HeaderTemplate>
                     <table class="enterprise-workbench-list" cellspacing="0" cellpadding="4" border="0">
                         <tr>
-                            <th><%= lang.BusinessApplicationRequest_ColumnUtc %></th>
-                            <th><%= lang.BusinessApplicationRequest_ColumnId %></th>
-                            <th><%= lang.BusinessApplicationRequest_LabelTitle %></th>
-                            <th><%= lang.BusinessApplicationRequest_ColumnStatus %></th>
+                            <%--
+                                <lang>
+                                    <zh-CN>P74.2 起改用本模块自有资源键，不再借用 BusinessApplicationRequest 的键：借用会使两模块的改名与文案互相牵动。</zh-CN>
+                                    <en>Since P74.2 these headers use the module's own resource keys instead of borrowing keys from BusinessApplicationRequest, because borrowing couples the two modules' renames and wording.</en>
+                                </lang>
+                            --%>
+                            <th><%= lang.EnterpriseCapabilityWorkbench_ColumnUtc %></th>
+                            <th><%= lang.EnterpriseCapabilityWorkbench_ColumnId %></th>
+                            <th><%= lang.EnterpriseCapabilityWorkbench_LabelTitle %></th>
+                            <th><%= lang.EnterpriseCapabilityWorkbench_ColumnStatus %></th>
                             <th><%= lang.EnterpriseCapabilityWorkbench_LabelPriority %></th>
                             <th><%= lang.EnterpriseCapabilityWorkbench_ColumnRecentComment %></th>
                             <th><%= lang.EnterpriseCapabilityWorkbench_SectionFollowUp %></th>

@@ -2538,4 +2538,40 @@
   <data name="EmployeeProfileConfirm_MessageNoPermission" xml:space="preserve">
     <value>You do not have permission to confirm employee profiles.</value>
   </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnId" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelEmployeeCode" xml:space="preserve">
+    <value>Employee code</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelSalutation" xml:space="preserve">
+    <value>Salutation</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelWorkEmail" xml:space="preserve">
+    <value>Work email</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelOrganization" xml:space="preserve">
+    <value>Organization</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelEmploymentStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Document_LabelTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Contacts_LabelName" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>
