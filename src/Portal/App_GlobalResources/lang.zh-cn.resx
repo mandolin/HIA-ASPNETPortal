@@ -2577,4 +2577,10 @@
   <data name="EnterpriseCapabilityWorkbench_EmptyNoItems" xml:space="preserve">
     <value>暂无协同事项</value>
   </data>
+  <data name="BusinessApplicationRequest_EmptyNoItems" xml:space="preserve">
+    <value>暂无业务申请</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_EmptyNoItems" xml:space="preserve">
+    <value>暂无资料更正请求</value>
+  </data>
 </root>

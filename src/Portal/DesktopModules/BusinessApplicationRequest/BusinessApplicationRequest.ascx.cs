@@ -311,13 +311,41 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>只把申请读模型转换为展示行，模板层不直接接触数据访问对象。</zh-CN>
             //   <en>Convert application read models into display rows so templates do not consume data-access objects directly.</en>
             // </lang>
-            RecentApplicationsRepeater.DataSource = applications.Select(application => new BusinessApplicationRecentRow(application)).ToList();
+            List<BusinessApplicationRecentRow> rows = applications
+                .Select(application => new BusinessApplicationRecentRow(application)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前先记录行数：标记层在表尾用该计数决定是否渲染空态提示行（Repeater 在零条时仍渲染表头与表尾）。</zh-CN>
+            //   <en>Record the row count before binding: the markup uses it in the footer to decide whether to render the empty-state hint (a Repeater still renders header and footer with zero rows).</en>
+            // </lang>
+            recentApplicationRowCount = rows.Count;
+
+            RecentApplicationsRepeater.DataSource = rows;
             // <lang>
             //   <zh-CN>提交数据源后触发 Web Forms 重复器绑定。</zh-CN>
             //   <en>Bind the Web Forms repeater after assigning its data source.</en>
             // </lang>
             RecentApplicationsRepeater.DataBind();
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近申请列表当前已渲染的行数，供标记层在零条时渲染空态提示。</zh-CN>
+        ///   <en>Rows currently rendered in the recent-applications list; the markup uses it to render the empty-state hint when it is zero.</en>
+        /// </lang>
+        /// </summary>
+        protected int RecentApplicationCount
+        {
+            get { return recentApplicationRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近申请列表的已渲染行数，由 <c>BindRecentApplications</c> 在绑定前写入。</zh-CN>
+        ///   <en>Rendered row count of the recent-applications list, written by <c>BindRecentApplications</c> before binding.</en>
+        /// </lang>
+        /// </summary>
+        private int recentApplicationRowCount;
 
         /// <summary>
         /// <lang>

@@ -312,6 +312,11 @@ namespace ASPNET.StarterKit.Portal
                 //   <en>Hide the submit panel and bind an empty collection so stale postback data cannot remain visibly submittable.</zh-CN>
                 // </lang>
                 RequestPanel.Visible = false;
+                // <lang>
+                //   <zh-CN>该分支不渲染列表行，故空态计数显式归零，避免沿用上一次绑定的计数而误判为空态。</zh-CN>
+                //   <en>This branch renders no rows, so the empty-state count is reset explicitly instead of reusing the previous binding's count and mis-reporting an empty state.</en>
+                // </lang>
+                recentRequestRowCount = 0;
                 RecentRequestsRepeater.DataSource = Enumerable.Empty<EmployeeProfileCorrectionRecentRequestRow>();
                 RecentRequestsRepeater.DataBind();
                 ShowMessage(GetUnavailableMessage(userId));
@@ -352,7 +357,16 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>把数据访问投影转换为只读展示行，避免 Repeater 直接接触内部数据访问对象。</zh-CN>
             //   <en>Convert the data-access projection into display rows so the Repeater does not bind directly to internal data-access objects.</en>
             // </lang>
-            RecentRequestsRepeater.DataSource = requests.Select(request => new EmployeeProfileCorrectionRecentRequestRow(request)).ToList();
+            List<EmployeeProfileCorrectionRecentRequestRow> rows = requests
+                .Select(request => new EmployeeProfileCorrectionRecentRequestRow(request)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前先记录行数：标记层在表尾用该计数决定是否渲染空态提示行（Repeater 在零条时仍渲染表头与表尾）。</zh-CN>
+            //   <en>Record the row count before binding: the markup uses it in the footer to decide whether to render the empty-state hint (a Repeater still renders header and footer with zero rows).</en>
+            // </lang>
+            recentRequestRowCount = rows.Count;
+
+            RecentRequestsRepeater.DataSource = rows;
 
             // <lang>
             //   <zh-CN>提交绑定结果，让标记层显示当前用户的最近请求集合。</zh-CN>
@@ -360,6 +374,25 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             RecentRequestsRepeater.DataBind();
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近更正请求列表当前已渲染的行数，供标记层在零条时渲染空态提示。</zh-CN>
+        ///   <en>Rows currently rendered in the recent-correction-request list; the markup uses it to render the empty-state hint when it is zero.</en>
+        /// </lang>
+        /// </summary>
+        protected int RecentRequestCount
+        {
+            get { return recentRequestRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近更正请求列表的已渲染行数；由 <c>BindRecentRequests</c> 在绑定前写入，资料不可用分支显式归零。</zh-CN>
+        ///   <en>Rendered row count of the recent-correction-request list; written by <c>BindRecentRequests</c> before binding and reset explicitly when the profile is unavailable.</en>
+        /// </lang>
+        /// </summary>
+        private int recentRequestRowCount;
 
         /// <summary>
         /// <lang>

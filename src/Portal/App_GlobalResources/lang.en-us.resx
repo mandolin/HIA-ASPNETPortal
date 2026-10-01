@@ -1728,4 +1728,10 @@
   <data name="EnterpriseCapabilityWorkbench_EmptyNoItems" xml:space="preserve">
     <value>No collaboration items</value>
   </data>
+  <data name="BusinessApplicationRequest_EmptyNoItems" xml:space="preserve">
+    <value>No business applications</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_EmptyNoItems" xml:space="preserve">
+    <value>No profile correction requests</value>
+  </data>
 </root>

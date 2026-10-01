@@ -9907,5 +9907,29 @@ namespace Resources {
                 return ResourceManager.GetString("EnterpriseCapabilityWorkbench_EmptyNoItems", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无业务申请</zh-CN>
+        ///   <en>Looks up a localized string similar to: No business applications</en>
+        /// </lang>
+        /// </summary>
+        internal static string BusinessApplicationRequest_EmptyNoItems {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_EmptyNoItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无资料更正请求</zh-CN>
+        ///   <en>Looks up a localized string similar to: No profile correction requests</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_EmptyNoItems {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_EmptyNoItems", resourceCulture);
+            }
+        }
     }
 }

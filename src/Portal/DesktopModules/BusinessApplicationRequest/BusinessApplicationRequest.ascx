@@ -82,6 +82,13 @@
                         </tr>
                 </ItemTemplate>
                 <FooterTemplate>
+                    <%--
+                        <lang>
+                            <zh-CN>P74.3 空态：零条时在表尾渲染"表头 + 提示行"，整行居中且弱化。放在 FooterTemplate 内，因为 Repeater 在零条时仍渲染表头与表尾；有数据时渲染器返回空串，无需分支。列数（5）与本表表头一致。</zh-CN>
+                            <en>P74.3 empty state: with zero rows the footer renders the header-plus-hint row, centered and muted. It lives in the FooterTemplate because a Repeater still renders header and footer with zero rows, and the renderer returns an empty string when rows exist so no branch is needed. The column count (5) matches this table's header.</en>
+                        </lang>
+                    --%>
+                    <%= PortalEmptyStateRenderer.Render(RecentApplicationCount, lang.BusinessApplicationRequest_EmptyNoItems, 5) %>
                     </table>
                 </FooterTemplate>
             </asp:Repeater>
