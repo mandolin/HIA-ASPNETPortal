@@ -1668,3 +1668,33 @@ body.portal-theme-stateclassicdark .my-work-items-overdue {
 body.portal-theme-stateclassicdark .my-work-items-unavailable {
     color: #dfb35c;
 }
+
+/* <lang>
+ *   <zh-CN>企业能力工作台主题适配（P74 U5）：模块自带 CSS 硬编码浅色（白底深字），深色皮肤下会变成浅字压白底、几乎不可读。此处按本皮肤调色板覆盖容器底色与边框、标题与副标题文字色、消息告警色、表单与列表分隔线色。选择器特异性高于模块类，故不受主题/模块样式表加载顺序影响；仅覆盖颜色，不改布局。</zh-CN>
+ *   <en>Enterprise-capability workbench theme adaptation (P74 U5): the module CSS hard-codes light colors (white ground, dark text), which on dark skins becomes light text on a white ground and is effectively unreadable. These rules take the container ground and border, title and subtitle text colors, message alert color, and form and list divider colors from this skin's palette. The selectors are more specific than the module classes, so stylesheet load order does not matter; colors only, no layout changes.</en>
+ * </lang> */
+body.portal-theme-stateclassicdark .enterprise-workbench {
+    border-color: #3d4450;
+    background-color: #181f28;
+}
+
+body.portal-theme-stateclassicdark .enterprise-workbench-title {
+    color: #fff4d7;
+}
+
+body.portal-theme-stateclassicdark .enterprise-workbench-subtitle {
+    color: #fff4d7;
+}
+
+body.portal-theme-stateclassicdark .enterprise-workbench-message {
+    color: #ff9c99;
+}
+
+body.portal-theme-stateclassicdark .enterprise-workbench-form-field {
+    border-bottom-color: #3d4450;
+}
+
+body.portal-theme-stateclassicdark .enterprise-workbench-list td,
+body.portal-theme-stateclassicdark .enterprise-workbench-list th {
+    border-bottom-color: #3d4450;
+}
