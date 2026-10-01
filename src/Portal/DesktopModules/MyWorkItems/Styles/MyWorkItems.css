@@ -29,6 +29,16 @@
     margin-bottom: 0.5em;
 }
 
+/* <lang>
+ *   <zh-CN>空态与失败态必须分开呈现：空态是弱化提示（居中），失败态是告警提示。两者在模块层只定义排版，颜色一律由主题层（App_Themes/<Theme>/Default.css）的 portal-theme-<名> 作用域规则决定，避免模块硬编码颜色导致深色皮肤下观感割裂。</zh-CN>
+ *   <en>The empty state and the failure state must render separately: the empty state is a weak centered hint while the failure state is an alert. This module layer defines layout only; all colors come from the theme layer (App_Themes/<Theme>/Default.css) under the portal-theme-<name> scope, so hard-coded module colors cannot break dark skins.</en>
+ * </lang> */
+.my-work-items-empty {
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+}
+
 .my-work-items-overdue {
     font-weight: bold;
 }

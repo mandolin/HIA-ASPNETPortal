@@ -1615,3 +1615,50 @@ button.portal-button-danger:hover {
 .portal-legacy-role-edit .portal-form-input {
     margin-right: 8px;
 }
+
+/* <lang>
+ *   <zh-CN>我的待办模块在本皮肤下的外观适配：颜色与边框由主题层定义，模块自带样式只负责布局，避免模块硬编码颜色在深色皮肤下造成观感割裂。</zh-CN>
+ *   <en>Appearance adaptation of the My To-Do Items module for this skin: colors and borders are defined by the theme layer while the module stylesheet handles layout only, so hard-coded module colors cannot break dark skins.</en>
+ * </lang> */
+body.portal-theme-oadark .my-work-items {
+    border: 1px solid #324b54;
+    background-color: #1a242a;
+    color: #dde6ea;
+    padding: 12px;
+}
+
+body.portal-theme-oadark .my-work-items-title {
+    color: #f4fbfc;
+}
+
+body.portal-theme-oadark .my-work-items-filter a,
+body.portal-theme-oadark .my-work-items-filter a:link,
+body.portal-theme-oadark .my-work-items-filter a:visited {
+    color: #95dce8;
+}
+
+body.portal-theme-oadark .my-work-items-table th {
+    color: #95dce8;
+    border-bottom: 1px solid #324b54;
+}
+
+body.portal-theme-oadark .my-work-items-table td {
+    border-bottom: 1px solid #324b54;
+}
+
+body.portal-theme-oadark .my-work-items-message {
+    color: #ff9b9b;
+    font-weight: 700;
+}
+
+body.portal-theme-oadark .my-work-items-empty {
+    color: #95dce8;
+}
+
+body.portal-theme-oadark .my-work-items-overdue {
+    color: #ff9b9b;
+}
+
+body.portal-theme-oadark .my-work-items-unavailable {
+    color: #95dce8;
+}

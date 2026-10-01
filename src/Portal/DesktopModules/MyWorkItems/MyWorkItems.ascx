@@ -96,7 +96,7 @@
                 <en>The empty state and the "no matching filter" state use different wording so "no to-do items" is distinguishable from "no matching to-do items".</en>
             </lang>
         --%>
-        <asp:Panel ID="EmptyPanel" CssClass="my-work-items-message" Visible="false" runat="server">
+        <asp:Panel ID="EmptyPanel" CssClass="my-work-items-empty" Visible="false" runat="server">
             <asp:Label ID="EmptyLabel" runat="server" />
         </asp:Panel>
     </asp:Panel>
