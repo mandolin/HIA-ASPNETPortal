@@ -2583,4 +2583,22 @@
   <data name="EmployeeProfileCorrectionRequest_EmptyNoItems" xml:space="preserve">
     <value>No profile correction requests</value>
   </data>
+  <data name="Admin_BusinessApplications_EmptyNoItems" xml:space="preserve">
+    <value>No business applications</value>
+  </data>
+  <data name="Admin_BusinessApplications_EmptyNoMatches" xml:space="preserve">
+    <value>No matching business applications</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_EmptyNoItems" xml:space="preserve">
+    <value>No profile correction requests</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_EmptyNoMatches" xml:space="preserve">
+    <value>No matching profile correction requests</value>
+  </data>
+  <data name="Admin_CollaborationItems_EmptyNoItems" xml:space="preserve">
+    <value>No collaboration items</value>
+  </data>
+  <data name="Admin_CollaborationItems_EmptyNoMatches" xml:space="preserve">
+    <value>No matching collaboration items</value>
+  </data>
 </root>

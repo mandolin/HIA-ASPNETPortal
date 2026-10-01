@@ -214,7 +214,16 @@ namespace ASPNET.StarterKit.Portal
             IList<EmployeeProfileCorrectionRequestInfo> requests = CorrectionRequestDb.GetAdminRequests(
                 StatusFilterList.SelectedValue,
                 PageSize);
-            RequestsRepeater.DataSource = requests.Select(request => new EmployeeProfileCorrectionAdminRow(request)).ToList();
+            List<EmployeeProfileCorrectionAdminRow> rows = requests
+                .Select(request => new EmployeeProfileCorrectionAdminRow(request)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it, and <c>null</c> suppresses it on failure paths.</en>
+            // </lang>
+            requestsEmptyStateRowCount = rows.Count;
+
+            RequestsRepeater.DataSource = rows;
             RequestsRepeater.DataBind();
 
             ResultLabel.Text = string.Format(
@@ -223,6 +232,41 @@ namespace ASPNET.StarterKit.Portal
                 PageSize,
                 requests.Count);
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态行数：有数据为正数、零条为 0、失败或不可用为 <c>null</c>（抑制空态，避免把故障说成"暂无"）。</zh-CN>
+        ///   <en>Empty-state row count: positive when rows exist, zero when the result set is empty, and <c>null</c> on failure and unavailable paths, which suppress the empty state so a fault is not presented as "nothing here".</en>
+        /// </lang>
+        /// </summary>
+        protected int? EmptyStateRowCount
+        {
+            get { return requestsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态文案：筛选值为空（"全部"）时用"无数据"，否则用"筛选无结果"。本页默认选中"已提交"，因此默认即筛选态，空态文案相应为"筛选无结果"。</zh-CN>
+        ///   <en>Empty-state wording: "no data" when the filter value is empty ("all") and "no matches" otherwise. This page preselects the submitted status, so its default view is already filtered and the wording is correspondingly "no matches".</en>
+        /// </lang>
+        /// </summary>
+        protected string EmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(StatusFilterList.SelectedValue)
+                    ? lang.Admin_EmployeeProfileCorrectionRequests_EmptyNoItems
+                    : lang.Admin_EmployeeProfileCorrectionRequests_EmptyNoMatches;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>资料更正列表的空态行数；由 <c>BindRequests</c> 在绑定前写入，失败路径置为 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the correction-request list; written by <c>BindRequests</c> before binding and set to <c>null</c> on failure paths.</en>
+        /// </lang>
+        /// </summary>
+        private int? requestsEmptyStateRowCount;
 
         /// <summary>
         /// <lang>
@@ -240,6 +284,11 @@ namespace ASPNET.StarterKit.Portal
         {
             MessageLabel.Text = message ?? string.Empty;
             ResultLabel.Text = string.Empty;
+            // <lang>
+            //   <zh-CN>显式抑制空态：本页失败时表格仍然可见，若再渲染"暂无请求"会与上方错误提示自相矛盾。</zh-CN>
+            //   <en>Suppress the empty state explicitly: this page keeps the table visible on failure, so rendering "no requests" would contradict the error message shown above.</en>
+            // </lang>
+            requestsEmptyStateRowCount = null;
             RequestsRepeater.DataSource = Enumerable.Empty<EmployeeProfileCorrectionAdminRow>();
             RequestsRepeater.DataBind();
         }

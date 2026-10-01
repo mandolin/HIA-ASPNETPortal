@@ -19,14 +19,14 @@ namespace ASPNET.StarterKit.Portal
     {
         /// <summary>
         /// <lang>
-        ///   <zh-CN>渲染零条记录时的表格内提示行；有数据时返回空字符串。</zh-CN>
-        ///   <en>Renders the in-table hint row for a zero-row result; returns an empty string when rows exist.</en>
+        ///   <zh-CN>渲染零条记录时的表格内提示行；有数据或调用方要求抑制时返回空字符串。</zh-CN>
+        ///   <en>Renders the in-table hint row for a zero-row result; returns an empty string when rows exist or when the caller asks to suppress it.</en>
         /// </lang>
         /// </summary>
         /// <param name="rowCount">
         /// <l>
-        ///   <zh-CN>当前列表已渲染的数据行数；大于 0 时不输出任何内容。</zh-CN>
-        ///   <en>The number of data rows already rendered; when greater than zero nothing is emitted.</en>
+        ///   <zh-CN>列表已渲染的行数：大于 0 表示有数据，等于 0 表示"查询成功但没有记录"，<c>null</c> 表示**抑制空态**——调用方处在失败或不可用路径（此时页面已给出错误提示，再渲染"暂无"会把故障说成没有数据）。仅当表体在失败时仍然可见（例如后台页只清空列表、不隐藏表格）才需要传 <c>null</c>；失败时整块区域被隐藏的调用方传 0 即可。</zh-CN>
+        ///   <en>The number of rows already rendered: greater than zero means data exists, zero means "the query succeeded with no records", and <c>null</c> means **suppress the empty state** because the caller is on a failure or unavailable path (the page already shows an error, and rendering "nothing here" would present a fault as absent data). Pass <c>null</c> only where the table body stays visible on failure (for example an Admin page that merely clears the list without hiding the table); callers that hide the whole area on failure can pass 0.</en>
         /// </l>
         /// </param>
         /// <param name="message">
@@ -43,17 +43,17 @@ namespace ASPNET.StarterKit.Portal
         /// </param>
         /// <returns>
         /// <l>
-        ///   <zh-CN>内嵌空态提示的 <c>tr</c> 标记；有数据时为空字符串。</zh-CN>
-        ///   <en>The <c>tr</c> markup carrying the empty-state hint, or an empty string when rows exist.</en>
+        ///   <zh-CN>内嵌空态提示的 <c>tr</c> 标记；有数据或被抑制时为空字符串。</zh-CN>
+        ///   <en>The <c>tr</c> markup carrying the empty-state hint, or an empty string when rows exist or the state is suppressed.</en>
         /// </l>
         /// </returns>
-        public static string Render(int rowCount, string message, int columnCount)
+        public static string Render(int? rowCount, string message, int columnCount)
         {
             // <lang>
-            //   <zh-CN>有数据时不输出空态：调用方无需在外层写条件分支，模板保持单一写法。</zh-CN>
-            //   <en>Emit nothing when rows exist: the caller needs no outer conditional and the template keeps one shape.</en>
+            //   <zh-CN>三态一次判完：null = 抑制（失败路径），> 0 = 有数据，二者都不输出空态。</zh-CN>
+            //   <en>All three states resolve here: null means suppressed (failure path) and a positive count means data exists; neither emits an empty state.</en>
             // </lang>
-            if (rowCount > 0)
+            if (!rowCount.HasValue || rowCount.Value > 0)
             {
                 return string.Empty;
             }

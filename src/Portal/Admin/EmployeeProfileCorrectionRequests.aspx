@@ -130,6 +130,13 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%--
+                            <lang>
+                                <zh-CN>P74.3 空态：零条时在表尾渲染"表头 + 提示行"，文案按是否处于筛选态区分（本页默认选中"已提交"，故默认即筛选态）；失败路径由 EmptyStateRowCount 为 null 抑制，避免与错误提示矛盾。列数（8）与本表表头一致。</zh-CN>
+                                <en>P74.3 empty state: with zero rows the footer renders the header-plus-hint row whose wording depends on whether a filter is active (this page preselects the submitted status, so its default view is already filtered); failure paths suppress it by passing a null count so it cannot contradict the error message. The column count (8) matches this table's header.</en>
+                            </lang>
+                        --%>
+                        <%= PortalEmptyStateRenderer.Render(EmptyStateRowCount, EmptyStateText, 8) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>

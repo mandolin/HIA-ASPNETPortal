@@ -2583,4 +2583,22 @@
   <data name="EmployeeProfileCorrectionRequest_EmptyNoItems" xml:space="preserve">
     <value>暂无资料更正请求</value>
   </data>
+  <data name="Admin_BusinessApplications_EmptyNoItems" xml:space="preserve">
+    <value>暂无业务申请</value>
+  </data>
+  <data name="Admin_BusinessApplications_EmptyNoMatches" xml:space="preserve">
+    <value>没有符合条件的业务申请</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_EmptyNoItems" xml:space="preserve">
+    <value>暂无资料更正请求</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_EmptyNoMatches" xml:space="preserve">
+    <value>没有符合条件的资料更正请求</value>
+  </data>
+  <data name="Admin_CollaborationItems_EmptyNoItems" xml:space="preserve">
+    <value>暂无协同事项</value>
+  </data>
+  <data name="Admin_CollaborationItems_EmptyNoMatches" xml:space="preserve">
+    <value>没有符合条件的协同事项</value>
+  </data>
 </root>

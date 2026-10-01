@@ -9931,5 +9931,77 @@ namespace Resources {
                 return ResourceManager.GetString("EmployeeProfileCorrectionRequest_EmptyNoItems", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无业务申请</zh-CN>
+        ///   <en>Looks up a localized string similar to: No business applications</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_EmptyNoItems {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_EmptyNoItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有符合条件的业务申请</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching business applications</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_EmptyNoMatches {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_EmptyNoMatches", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无资料更正请求</zh-CN>
+        ///   <en>Looks up a localized string similar to: No profile correction requests</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_EmptyNoItems {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_EmptyNoItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有符合条件的资料更正请求</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching profile correction requests</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_EmptyNoMatches {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_EmptyNoMatches", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无协同事项</zh-CN>
+        ///   <en>Looks up a localized string similar to: No collaboration items</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_EmptyNoItems {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_EmptyNoItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有符合条件的协同事项</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching collaboration items</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_EmptyNoMatches {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_EmptyNoMatches", resourceCulture);
+            }
+        }
     }
 }

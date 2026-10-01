@@ -407,10 +407,18 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>逐行读取参与人集合（受固定分页上限约束的轻量查询）；参与人只影响展示与可见性，不参与授权判定。</zh-CN>
             //   <en>Read the participant set per row (a lightweight query bounded by the fixed page limit); participants affect display and visibility only, never authorization.</en>
             // </lang>
-            ItemsRepeater.DataSource = items.Select(item => new CollaborationItemAdminRow(
+            List<CollaborationItemAdminRow> rows = items.Select(item => new CollaborationItemAdminRow(
                 item,
                 CollaborationItemDb.GetVisibleEvents(item.ItemId, currentUserId),
                 CollaborationItemDb.GetParticipants(item.ItemId))).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it, and <c>null</c> suppresses it on failure paths.</en>
+            // </lang>
+            itemsEmptyStateRowCount = rows.Count;
+
+            ItemsRepeater.DataSource = rows;
             ItemsRepeater.DataBind();
 
             ResultLabel.Text = string.Format(
@@ -419,6 +427,41 @@ namespace ASPNET.StarterKit.Portal
                 PageSize,
                 items.Count);
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态行数：有数据为正数、零条为 0、失败或不可用为 <c>null</c>（抑制空态，避免把故障说成"暂无"）。</zh-CN>
+        ///   <en>Empty-state row count: positive when rows exist, zero when the result set is empty, and <c>null</c> on failure and unavailable paths, which suppress the empty state so a fault is not presented as "nothing here".</en>
+        /// </lang>
+        /// </summary>
+        protected int? EmptyStateRowCount
+        {
+            get { return itemsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态文案：筛选值为空（"全部"）时用"无数据"，否则用"筛选无结果"，两者不混用。</zh-CN>
+        ///   <en>Empty-state wording: "no data" when the filter value is empty ("all") and "no matches" otherwise; the two are never mixed.</en>
+        /// </lang>
+        /// </summary>
+        protected string EmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(StatusFilterList.SelectedValue)
+                    ? lang.Admin_CollaborationItems_EmptyNoItems
+                    : lang.Admin_CollaborationItems_EmptyNoMatches;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>协同事项列表的空态行数；由 <c>BindItems</c> 在绑定前写入，失败路径置为 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the collaboration-item list; written by <c>BindItems</c> before binding and set to <c>null</c> on failure paths.</en>
+        /// </lang>
+        /// </summary>
+        private int? itemsEmptyStateRowCount;
 
         /// <summary>
         /// <lang>
@@ -434,6 +477,11 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             MessageLabel.Text = message ?? string.Empty;
             ResultLabel.Text = string.Empty;
+            // <lang>
+            //   <zh-CN>显式抑制空态：本页失败时表格仍然可见，若再渲染"暂无协同事项"会与上方错误提示自相矛盾。</zh-CN>
+            //   <en>Suppress the empty state explicitly: this page keeps the table visible on failure, so rendering "no collaboration items" would contradict the error message shown above.</en>
+            // </lang>
+            itemsEmptyStateRowCount = null;
             ItemsRepeater.DataSource = Enumerable.Empty<CollaborationItemAdminRow>();
             ItemsRepeater.DataBind();
         }
