@@ -72,7 +72,10 @@ const browser = await chromium.launch({ headless: true });
 try {
   for (const sourceName of sources) {
     const outputName = sourceName.replace(/\.html$/i, '.png');
-    const page = await browser.newPage({ viewport: { width: 1100, height: 900 } });
+    const page = await browser.newPage({
+      viewport: { width: 1440, height: 1000 },
+      deviceScaleFactor: 2
+    });
     const url = 'file:///' + path.join(prototypeDirectory, sourceName).replace(/\\/g, '/');
     await page.goto(url, { waitUntil: 'load', timeout: 30000 });
     await page.screenshot({ path: path.join(prototypeDirectory, outputName), fullPage: true });
