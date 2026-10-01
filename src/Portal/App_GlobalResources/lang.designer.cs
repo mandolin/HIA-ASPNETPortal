@@ -10003,5 +10003,101 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_CollaborationItems_EmptyNoMatches", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无组织记录</zh-CN>
+        ///   <en>Looks up a localized string similar to: No organization records</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_EmptyNoOrganizations {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_EmptyNoOrganizations", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有符合条件的组织记录</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching organization records</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_EmptyNoMatchingOrganizations {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_EmptyNoMatchingOrganizations", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无员工记录</zh-CN>
+        ///   <en>Looks up a localized string similar to: No employee records</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_EmptyNoEmployees {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_EmptyNoEmployees", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有符合条件的员工记录</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching employee records</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_EmptyNoMatchingEmployees {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_EmptyNoMatchingEmployees", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无账号员工绑定</zh-CN>
+        ///   <en>Looks up a localized string similar to: No account-employee bindings</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_EmptyNoBindings {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_EmptyNoBindings", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有符合条件的账号员工绑定</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching account-employee bindings</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeDirectory_EmptyNoMatchingBindings {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_EmptyNoMatchingBindings", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无待办</zh-CN>
+        ///   <en>Looks up a localized string similar to: No work items</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_EmptyNoItems {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_EmptyNoItems", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：没有符合条件的待办</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching work items</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_WorkItems_EmptyNoMatches {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_EmptyNoMatches", resourceCulture);
+            }
+        }
     }
 }

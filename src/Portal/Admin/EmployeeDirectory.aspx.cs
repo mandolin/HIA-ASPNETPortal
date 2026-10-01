@@ -201,23 +201,39 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>投影层只生成低敏展示行和固定站内编辑地址，不把原始数据对象直接交给标记层。</zh-CN>
             //   <en>The projection creates only low-sensitivity display rows and fixed in-application edit URLs instead of passing raw data objects to markup.</en>
             // </lang>
-            OrganizationsRepeater.DataSource = organizations
+            List<OrganizationDirectoryRow> organizationRows = organizations
                 .Select(organization => new OrganizationDirectoryRow(organization, GetParentText(organization, organizationNames)))
                 .ToList();
+
+            // <lang>
+            //   <zh-CN>三个列表各自记录绑定前的行数：标记层在各自表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>
+            //   <en>Each of the three lists records its pre-bind row count: the markup renders the empty-state row in each footer from it, and <c>null</c> suppresses it on failure paths.</en>
+            // </lang>
+            organizationsEmptyStateRowCount = organizationRows.Count;
+
+            OrganizationsRepeater.DataSource = organizationRows;
             OrganizationsRepeater.DataBind();
 
             // <lang>
             //   <zh-CN>员工展示行集中处理组织回退、状态和编辑/绑定地址，保持标记层只消费已约束字段。</zh-CN>
             //   <en>Employee display rows centralize organization fallback, status and edit/binding URLs so markup consumes only constrained fields.</en>
             // </lang>
-            EmployeesRepeater.DataSource = employees.Select(employee => new EmployeeDirectoryRow(employee)).ToList();
+            List<EmployeeDirectoryRow> employeeRows = employees
+                .Select(employee => new EmployeeDirectoryRow(employee)).ToList();
+            employeesEmptyStateRowCount = employeeRows.Count;
+
+            EmployeesRepeater.DataSource = employeeRows;
             EmployeesRepeater.DataBind();
 
             // <lang>
             //   <zh-CN>绑定展示行只输出账号、员工和非敏感原因摘要，不在页面层启用绑定或改变关系状态。</zh-CN>
             //   <en>Binding rows expose only account, employee and non-sensitive reason summaries; the page does not enable binding or change relationship state.</en>
             // </lang>
-            BindingsRepeater.DataSource = bindings.Select(binding => new UserEmployeeBindingDirectoryRow(binding)).ToList();
+            List<UserEmployeeBindingDirectoryRow> bindingRows = bindings
+                .Select(binding => new UserEmployeeBindingDirectoryRow(binding)).ToList();
+            bindingsEmptyStateRowCount = bindingRows.Count;
+
+            BindingsRepeater.DataSource = bindingRows;
             BindingsRepeater.DataBind();
 
             // <lang>
@@ -257,6 +273,159 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>组织列表的空态行数：有数据为正数、零条为 0、失败或不可用为 <c>null</c>（抑制空态）。</zh-CN>
+        ///   <en>Empty-state row count of the organization list: positive when rows exist, zero when empty, and <c>null</c> on failure and unavailable paths, which suppress the empty state.</en>
+        /// </lang>
+        /// </summary>
+        protected int? OrganizationsEmptyStateRowCount
+        {
+            get { return organizationsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工列表的空态行数：有数据为正数、零条为 0、失败或不可用为 <c>null</c>（抑制空态）。</zh-CN>
+        ///   <en>Empty-state row count of the employee list: positive when rows exist, zero when empty, and <c>null</c> on failure and unavailable paths, which suppress the empty state.</en>
+        /// </lang>
+        /// </summary>
+        protected int? EmployeesEmptyStateRowCount
+        {
+            get { return employeesEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>账号-员工绑定列表的空态行数：有数据为正数、零条为 0、失败或不可用为 <c>null</c>（抑制空态）。</zh-CN>
+        ///   <en>Empty-state row count of the account-employee binding list: positive when rows exist, zero when empty, and <c>null</c> on failure and unavailable paths, which suppress the empty state.</en>
+        /// </lang>
+        /// </summary>
+        protected int? BindingsEmptyStateRowCount
+        {
+            get { return bindingsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>组织列表空态文案：关键字非空视为筛选态。</zh-CN>
+        ///   <en>Empty-state wording for the organization list: a non-empty keyword counts as a filtered view.</en>
+        /// </lang>
+        /// </summary>
+        protected string OrganizationsEmptyStateText
+        {
+            get
+            {
+                return BuildEmptyStateText(
+                    lang.Admin_EmployeeDirectory_EmptyNoOrganizations,
+                    lang.Admin_EmployeeDirectory_EmptyNoMatchingOrganizations,
+                    KeywordTextBox.Text);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工列表空态文案：关键字或员工状态筛选非空视为筛选态。</zh-CN>
+        ///   <en>Empty-state wording for the employee list: a non-empty keyword or employee-status selection counts as a filtered view.</en>
+        /// </lang>
+        /// </summary>
+        protected string EmployeesEmptyStateText
+        {
+            get
+            {
+                return BuildEmptyStateText(
+                    lang.Admin_EmployeeDirectory_EmptyNoEmployees,
+                    lang.Admin_EmployeeDirectory_EmptyNoMatchingEmployees,
+                    KeywordTextBox.Text,
+                    EmployeeStatusList.SelectedValue);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定列表空态文案：关键字或绑定状态筛选非空视为筛选态；本页默认选中"有效"，故默认视图即筛选态。</zh-CN>
+        ///   <en>Empty-state wording for the binding list: a non-empty keyword or binding-status selection counts as a filtered view; this page preselects the active status, so its default view is already filtered.</en>
+        /// </lang>
+        /// </summary>
+        protected string BindingsEmptyStateText
+        {
+            get
+            {
+                return BuildEmptyStateText(
+                    lang.Admin_EmployeeDirectory_EmptyNoBindings,
+                    lang.Admin_EmployeeDirectory_EmptyNoMatchingBindings,
+                    KeywordTextBox.Text,
+                    BindingStatusList.SelectedValue);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按筛选是否生效选择空态文案：任一筛选值为非空即视为筛选态。</zh-CN>
+        ///   <en>Chooses the empty-state wording by whether any filter is active: a non-empty value in any supplied filter counts as a filtered view.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="noItemsText">
+        /// <l>
+        ///   <zh-CN>无筛选条件且零条时的文案。</zh-CN>
+        ///   <en>Wording used when no filter is active and the result set is empty.</en>
+        /// </l>
+        /// </param>
+        /// <param name="noMatchesText">
+        /// <l>
+        ///   <zh-CN>存在筛选条件且零条时的文案。</zh-CN>
+        ///   <en>Wording used when a filter is active and the result set is empty.</en>
+        /// </l>
+        /// </param>
+        /// <param name="filterValues">
+        /// <l>
+        ///   <zh-CN>构成筛选态的取值集合（关键字、状态等）；空白项忽略。</zh-CN>
+        ///   <en>The values that constitute the filtered state (keyword, status, and similar); blank entries are ignored.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>与当前筛选状态匹配的空态文案。</zh-CN>
+        ///   <en>The empty-state wording matching the current filter state.</en>
+        /// </l>
+        /// </returns>
+        private string BuildEmptyStateText(string noItemsText, string noMatchesText, params string[] filterValues)
+        {
+            foreach (string value in filterValues)
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    return noMatchesText;
+                }
+            }
+
+            return noItemsText;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>三个列表的空态行数；由目录绑定在各自绑定前写入，失败路径统一置为 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row counts for the three lists; written by the directory binding before each bind and reset to <c>null</c> on failure paths.</en>
+        /// </lang>
+        /// </summary>
+        private int? organizationsEmptyStateRowCount;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工列表的空态行数。</zh-CN>
+        ///   <en>Empty-state row count of the employee list.</en>
+        /// </lang>
+        /// </summary>
+        private int? employeesEmptyStateRowCount;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>账号-员工绑定列表的空态行数。</zh-CN>
+        ///   <en>Empty-state row count of the account-employee binding list.</en>
+        /// </lang>
+        /// </summary>
+        private int? bindingsEmptyStateRowCount;
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>显示数据服务或 schema 不可用提示，并清空只读结果区。</zh-CN>
         ///   <en>Displays data-service or schema-unavailable messages and clears the read-only result area.</en>
         /// </lang>
@@ -270,6 +439,13 @@ namespace ASPNET.StarterKit.Portal
             MessageLabel.Text = message ?? string.Empty;
             SchemaStatusLabel.Text = lang.Admin_EmployeeDirectory_MessageSchemaUnavailableShort;
             ResultLabel.Text = string.Empty;
+            // <lang>
+            //   <zh-CN>显式抑制三个列表的空态：本页失败时表格仍然可见，若再渲染"暂无…"会与上方错误提示自相矛盾。</zh-CN>
+            //   <en>Suppress the empty state for all three lists explicitly: this page keeps the tables visible on failure, so rendering "nothing here" would contradict the error message shown above.</en>
+            // </lang>
+            organizationsEmptyStateRowCount = null;
+            employeesEmptyStateRowCount = null;
+            bindingsEmptyStateRowCount = null;
             OrganizationsRepeater.DataSource = Enumerable.Empty<OrganizationDirectoryRow>();
             OrganizationsRepeater.DataBind();
             EmployeesRepeater.DataSource = Enumerable.Empty<EmployeeDirectoryRow>();

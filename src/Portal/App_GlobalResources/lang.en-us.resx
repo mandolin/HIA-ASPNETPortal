@@ -1752,4 +1752,28 @@
   <data name="Admin_CollaborationItems_EmptyNoMatches" xml:space="preserve">
     <value>No matching collaboration items</value>
   </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoOrganizations" xml:space="preserve">
+    <value>No organization records</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoMatchingOrganizations" xml:space="preserve">
+    <value>No matching organization records</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoEmployees" xml:space="preserve">
+    <value>No employee records</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoMatchingEmployees" xml:space="preserve">
+    <value>No matching employee records</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoBindings" xml:space="preserve">
+    <value>No account-employee bindings</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoMatchingBindings" xml:space="preserve">
+    <value>No matching account-employee bindings</value>
+  </data>
+  <data name="Admin_WorkItems_EmptyNoItems" xml:space="preserve">
+    <value>No work items</value>
+  </data>
+  <data name="Admin_WorkItems_EmptyNoMatches" xml:space="preserve">
+    <value>No matching work items</value>
+  </data>
 </root>

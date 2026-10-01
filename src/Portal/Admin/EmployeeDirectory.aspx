@@ -131,6 +131,8 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%-- P74.3 空态：零条时渲染表头 + 提示行；失败路径由 null 计数抑制。 / Empty state: header-plus-hint row when there are zero rows; a null count suppresses it on failure paths. --%>
+                        <%= PortalEmptyStateRenderer.Render(OrganizationsEmptyStateRowCount, OrganizationsEmptyStateText, 7) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
@@ -192,6 +194,8 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%-- P74.3 空态：零条时渲染表头 + 提示行；失败路径由 null 计数抑制。 / Empty state: header-plus-hint row when there are zero rows; a null count suppresses it on failure paths. --%>
+                        <%= PortalEmptyStateRenderer.Render(EmployeesEmptyStateRowCount, EmployeesEmptyStateText, 8) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
@@ -238,6 +242,8 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%-- P74.3 空态：零条时渲染表头 + 提示行；失败路径由 null 计数抑制。 / Empty state: header-plus-hint row when there are zero rows; a null count suppresses it on failure paths. --%>
+                        <%= PortalEmptyStateRenderer.Render(BindingsEmptyStateRowCount, BindingsEmptyStateText, 9) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>

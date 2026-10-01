@@ -2601,4 +2601,28 @@
   <data name="Admin_CollaborationItems_EmptyNoMatches" xml:space="preserve">
     <value>没有符合条件的协同事项</value>
   </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoOrganizations" xml:space="preserve">
+    <value>暂无组织记录</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoMatchingOrganizations" xml:space="preserve">
+    <value>没有符合条件的组织记录</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoEmployees" xml:space="preserve">
+    <value>暂无员工记录</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoMatchingEmployees" xml:space="preserve">
+    <value>没有符合条件的员工记录</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoBindings" xml:space="preserve">
+    <value>暂无账号员工绑定</value>
+  </data>
+  <data name="Admin_EmployeeDirectory_EmptyNoMatchingBindings" xml:space="preserve">
+    <value>没有符合条件的账号员工绑定</value>
+  </data>
+  <data name="Admin_WorkItems_EmptyNoItems" xml:space="preserve">
+    <value>暂无待办</value>
+  </data>
+  <data name="Admin_WorkItems_EmptyNoMatches" xml:space="preserve">
+    <value>没有符合条件的待办</value>
+  </data>
 </root>

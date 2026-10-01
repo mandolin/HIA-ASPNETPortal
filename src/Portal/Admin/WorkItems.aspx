@@ -136,6 +136,8 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%-- P74.3 空态：零条时渲染表头 + 提示行；失败路径由 null 计数抑制。 / Empty state: header-plus-hint row when there are zero rows; a null count suppresses it on failure paths. --%>
+                        <%= PortalEmptyStateRenderer.Render(EmptyStateRowCount, EmptyStateText, 7) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
