@@ -5,8 +5,8 @@
     </lang>
 --%>
 /* <lang>
- *   <zh-CN>不再定义模块标题样式：标题由门户模块标题栏（DesktopModuleTitle.ascx 的 .Head）提供，模块自绘标题会重复标题栏。</zh-CN>
- *   <en>No module-title styles are defined: the title comes from the portal module-title chrome (the `.Head` class in DesktopModuleTitle.ascx), and a hand-drawn module title would duplicate the title bar.</en>
+ *   <zh-CN>不再定义模块标题样式：标题由共享控件 DesktopModuleTitle（输出 .Head 与 .portal-module-* 类）渲染，样式归主题层；本模块不另写标题类。</zh-CN>
+ *   <en>No module-title styles are defined: the title is rendered by the shared DesktopModuleTitle control (which emits `.Head` and `.portal-module-*` classes) and is styled by the theme layer; this module adds no title class of its own.</en>
  * </lang> */
 .my-work-items-filter {
     margin-bottom: 0.5em;

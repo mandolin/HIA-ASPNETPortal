@@ -9,6 +9,9 @@ namespace ASPNET.StarterKit.Portal
 {
     public partial class MyWorkItems
     {
+        /// <summary><lang><zh-CN>共享模块标题控件；渲染模块配置标题。本模块不配置 EditText，故不出现编辑入口。</zh-CN><en>Shared module-title control that renders the configured module title; this module configures no EditText, so no edit entry appears.</en></lang></summary>
+        protected global::ASPNET.StarterKit.Portal.DesktopModuleTitle Title1;
+
         /// <summary><lang><zh-CN>承载读取失败提示的面板；仅当查询失败时可见。</zh-CN><en>Panel that hosts the read-failure message; visible only when the query fails.</en></lang></summary>
         protected global::System.Web.UI.WebControls.Panel FailurePanel;
 

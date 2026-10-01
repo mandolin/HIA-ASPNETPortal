@@ -1,4 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MyWorkItems.ascx.cs" Inherits="ASPNET.StarterKit.Portal.MyWorkItems" %>
+<%@ Register TagPrefix="ASPNETPortal" TagName="Title" Src="~/DesktopModuleTitle.ascx" %>
 
 <%--
     <lang>
@@ -18,14 +19,15 @@
         <en>All text goes through runtime resource expressions so new resource keys do not require maintaining the generated property class; the code-behind falls back to the key name when a resource is missing.</en>
     </lang>
 --%>
-<div class="my-work-items">
-    <%--
-        <lang>
-            <zh-CN>模块标题由门户的模块标题栏（`DesktopModuleTitle.ascx`，使用 `.Head` 与 `.portal-module-*` 类）统一渲染，模块自身**不得**再画一层标题：否则会出现重复标题栏，且自绘标题拿不到主题层为 `.Head` 定义的字号与字重。此结论由真实主题渲染的原型核对得出。</zh-CN>
-            <en>The module title is rendered by the portal's module-title chrome (`DesktopModuleTitle.ascx`, using `.Head` and `.portal-module-*` classes) and a module must **not** draw its own title layer: doing so duplicates the title bar and the hand-drawn title misses the font size and weight the theme layer defines for `.Head`. This conclusion came from reviewing the real-theme rendered prototype.</en>
-        </lang>
-    --%>
+<%--
+    <lang>
+        <zh-CN>模块标题必须**由模块自己渲染**：门户不会自动注入标题栏。共享控件 `DesktopModuleTitle` 要求作为模块标记的**根级子元素**——其 `Page_Load` 通过 `(IPortalModuleControl)Parent` 读取模块配置标题，放进普通容器会取不到模块而抛异常。本模块**复用该共享控件**，而不是自绘一层标题：自绘标题拿不到主题为 `.Head` 定义的字号与字重（真实渲染核对得出）。不配置 `EditText` 时不出现编辑入口，符合本模块只读定位。</zh-CN>
+        <en>The module must render its own title: the portal does not inject a title bar. The shared `DesktopModuleTitle` control has to be a **root-level child** of the module markup — its `Page_Load` reads the configured module title through `(IPortalModuleControl)Parent`, so nesting it inside a plain container cannot resolve the module and throws. This module reuses that shared control instead of hand-drawing a title layer, because a hand-drawn title misses the font size and weight the theme defines for `.Head` (confirmed by real-theme rendering). With no `EditText` configured no edit entry appears, which matches this module's read-only role.</en>
+    </lang>
+--%>
+<ASPNETPortal:Title runat="server" ID="Title1" />
 
+<div class="my-work-items">
     <%--
         <lang>
             <zh-CN>失败态与空态必须分开呈现：读取失败不能退化成"暂无待办"，否则用户会把故障误认为无事项。</zh-CN>
