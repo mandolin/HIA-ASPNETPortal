@@ -1,4 +1,11 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmployeeProfileCorrectionRequest.ascx.cs" Inherits="ASPNET.StarterKit.Portal.EmployeeProfileCorrectionRequest" %>
+<%--
+    <lang>
+        <zh-CN>P74.3 空态渲染器位于 ASPNET.StarterKit.Portal 命名空间，而 Web.config 只全局导入 Resources：标记层若引用该类型必须显式导入本命名空间，否则**运行期编译**报 CS0103（msbuild 构建不会校验 ASCX）。</zh-CN>
+        <en>The P74.3 empty-state renderer lives in the ASPNET.StarterKit.Portal namespace while Web.config imports only Resources globally: markup that references that type must import this namespace explicitly, otherwise the **runtime compilation** of the ASCX reports CS0103 (an msbuild build does not validate ASCX files).</en>
+    </lang>
+--%>
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
 
 <%--
     <lang>
