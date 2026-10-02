@@ -28,6 +28,12 @@ namespace ASPNET.StarterKit.Portal
         //   <en>Maximum parent-child hierarchy depth (top level is 1). A new child beyond this depth is rejected.</en>
         // </lang>
         private const int MaxHierarchyDepth = 5;
+
+        // <lang>
+        //   <zh-CN>批量读取允许的最大事项数：为 IN 列表与参数个数设上限，避免调用方传入的超长集合把语句撑大。</zh-CN>
+        //   <en>Maximum item count allowed in a batch read: bounds the IN list and parameter count so an oversized caller-supplied collection cannot inflate the statement.</en>
+        // </lang>
+        private const int MaxBatchItemIds = 200;
         private readonly PortalBizDbContext context;
         private readonly IReferenceDataDb referenceDataDb;
         private readonly IUsersDb usersDb;
@@ -479,6 +485,340 @@ ORDER BY [Event].[OccurredUtc] ASC, [Event].[EventId] ASC;",
                 // </lang>
                 return new List<CollaborationItemEventInfo>();
             }
+        }
+
+        /// <inheritdoc />
+        public IDictionary<long, IList<CollaborationItemEventInfo>> GetVisibleEventsForItems(IList<long> itemIds, int actorUserId)
+        {
+            // <lang>
+            //   <zh-CN>先把请求标识规范化并预置空桶：调用方对任何请求标识都能取到集合，无需区分"未授权""不存在""无事件"。</zh-CN>
+            //   <en>Normalize the requested identifiers and pre-create empty buckets so callers always get a collection per requested identifier without distinguishing unauthorized, missing, or event-less items.</en>
+            // </lang>
+            List<long> requestedIds = NormalizeItemIdList(itemIds);
+            if (requestedIds.Count == 0 || !IsSchemaAvailable())
+            {
+                return CreateEmptyEventMap(requestedIds);
+            }
+
+            // <lang>
+            //   <zh-CN>动作人授权与标识无关，批量路径只计算一次 —— 这是 N+1 的主要来源之一（逐条路径每个事项都会重算）。</zh-CN>
+            //   <en>Actor authorization does not depend on the item, so the batch path computes it once — one of the main sources of the N+1 pattern, since the per-item path recomputes it for every item.</en>
+            // </lang>
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(actorUserId, out actor))
+            {
+                return CreateEmptyEventMap(requestedIds);
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>批量取事项事实后**逐条**执行 CanParticipate 与 CanView —— 可见性校验不因性能而合并，未通过者不进入事件查询。</zh-CN>
+                //   <en>After loading item facts in one batch, run CanParticipate and CanView **per item** — visibility checks are never collapsed for performance, and items that fail them never enter the event query.</en>
+                // </lang>
+                List<long> visibleIds = FilterVisibleItemIds(requestedIds, actor);
+                if (visibleIds.Count == 0)
+                {
+                    return CreateEmptyEventMap(requestedIds);
+                }
+
+                string visibilityClause = actor.IsAdministrator
+                    ? string.Empty
+                    : @"
+  AND ([Event].[EventType] = N'WorkflowAction' OR [Event].[VisibilityScope] = N'ItemParticipants')";
+
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                string itemIdList = BuildItemIdParameterList(visibleIds, parameters);
+
+                List<CollaborationItemEventInfo> events = context.Database.SqlQuery<CollaborationItemEventInfo>(
+                    @"
+SELECT
+    [Event].[EventId],
+    [Event].[ItemId],
+    [Event].[EventType],
+    [Event].[ActionKey],
+    [Event].[VisibilityScope],
+    [Event].[ActorUserId],
+    [Event].[ActorName],
+    [Event].[OccurredUtc],
+    [Event].[FromStatus],
+    [Event].[ToStatus],
+    [Event].[Comment]
+FROM [dbo].[PortalBiz_CollaborationItemEvents] AS [Event]
+WHERE [Event].[ItemId] IN (" + itemIdList + ")" + visibilityClause + @"
+ORDER BY [Event].[ItemId] ASC, [Event].[OccurredUtc] ASC, [Event].[EventId] ASC;",
+                    parameters.ToArray()).ToList();
+
+                IDictionary<long, IList<CollaborationItemEventInfo>> eventsByItem = CreateEmptyEventMap(requestedIds);
+                foreach (CollaborationItemEventInfo itemEvent in events)
+                {
+                    IList<CollaborationItemEventInfo> bucket;
+                    if (itemEvent != null && eventsByItem.TryGetValue(itemEvent.ItemId, out bucket))
+                    {
+                        bucket.Add(itemEvent);
+                    }
+                }
+
+                return eventsByItem;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>读取失败一律回到"全部空列表"，不返回部分结果，避免页面把半截时间线当成完整事实。</zh-CN>
+                //   <en>On read failure, return all-empty lists rather than partial results so a page cannot present a half-loaded timeline as complete fact.</en>
+                // </lang>
+                return CreateEmptyEventMap(requestedIds);
+            }
+        }
+
+        /// <inheritdoc />
+        public IDictionary<long, IList<CollaborationItemParticipantInfo>> GetParticipantsForItems(IList<long> itemIds)
+        {
+            List<long> requestedIds = NormalizeItemIdList(itemIds);
+            if (requestedIds.Count == 0 || !HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return CreateEmptyParticipantMap(requestedIds);
+            }
+
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                string itemIdList = BuildItemIdParameterList(requestedIds, parameters);
+
+                List<CollaborationItemParticipantInfo> participants = context.Database.SqlQuery<CollaborationItemParticipantInfo>(@"
+SELECT
+    [P].[ParticipantId],
+    [P].[ItemId],
+    [P].[UserId],
+    [U].[Name] AS [UserName],
+    [P].[ParticipantRoleKey],
+    [P].[CreatedUtc]
+FROM [dbo].[PortalBiz_CollaborationItemParticipants] AS [P]
+LEFT JOIN [dbo].[Portal_Users] AS [U]
+    ON [U].[UserID] = [P].[UserId]
+WHERE [P].[ItemId] IN (" + itemIdList + @")
+ORDER BY [P].[ItemId] ASC, [P].[ParticipantId] ASC;",
+                    parameters.ToArray()).ToList();
+
+                IDictionary<long, IList<CollaborationItemParticipantInfo>> participantsByItem = CreateEmptyParticipantMap(requestedIds);
+                foreach (CollaborationItemParticipantInfo participant in participants)
+                {
+                    IList<CollaborationItemParticipantInfo> bucket;
+                    if (participant != null && participantsByItem.TryGetValue(participant.ItemId, out bucket))
+                    {
+                        bucket.Add(participant);
+                    }
+                }
+
+                return participantsByItem;
+            }
+            catch (Exception)
+            {
+                return CreateEmptyParticipantMap(requestedIds);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>规范化批量事项标识：丢弃非正数与重复项，并按上限截断，避免把调用方传入的任意长度集合拼成过长的 IN 列表。</zh-CN>
+        ///   <en>Normalizes batch item identifiers: discards non-positive and duplicate entries and truncates at a cap so a caller-supplied collection cannot expand into an oversized IN list.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="itemIds">
+        /// <l>
+        ///   <zh-CN>原始标识集合，可为 <c>null</c>。</zh-CN>
+        ///   <en>The raw identifier collection, possibly <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>规范化后的标识列表，保持输入顺序。</zh-CN>
+        ///   <en>The normalized identifier list, preserving input order.</en>
+        /// </l>
+        /// </returns>
+        private static List<long> NormalizeItemIdList(IList<long> itemIds)
+        {
+            List<long> normalized = new List<long>();
+            if (itemIds == null)
+            {
+                return normalized;
+            }
+
+            foreach (long itemId in itemIds)
+            {
+                if (normalized.Count >= MaxBatchItemIds)
+                {
+                    break;
+                }
+
+                if (itemId > 0 && !normalized.Contains(itemId))
+                {
+                    normalized.Add(itemId);
+                }
+            }
+
+            return normalized;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为每个请求标识预置空的可见事件桶，使调用方可以无分支取值。</zh-CN>
+        ///   <en>Pre-creates an empty visible-event bucket per requested identifier so callers can read values without branching.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="itemIds">
+        /// <l>
+        ///   <zh-CN>已规范化的标识集合。</zh-CN>
+        ///   <en>The normalized identifier collection.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>标识到空事件列表的字典。</zh-CN>
+        ///   <en>A dictionary from identifier to an empty event list.</en>
+        /// </l>
+        /// </returns>
+        private static IDictionary<long, IList<CollaborationItemEventInfo>> CreateEmptyEventMap(List<long> itemIds)
+        {
+            Dictionary<long, IList<CollaborationItemEventInfo>> map = new Dictionary<long, IList<CollaborationItemEventInfo>>();
+            foreach (long itemId in itemIds)
+            {
+                map[itemId] = new List<CollaborationItemEventInfo>();
+            }
+
+            return map;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为每个请求标识预置空的参与人桶，使调用方可以无分支取值。</zh-CN>
+        ///   <en>Pre-creates an empty participant bucket per requested identifier so callers can read values without branching.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="itemIds">
+        /// <l>
+        ///   <zh-CN>已规范化的标识集合。</zh-CN>
+        ///   <en>The normalized identifier collection.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>标识到空参与人列表的字典。</zh-CN>
+        ///   <en>A dictionary from identifier to an empty participant list.</en>
+        /// </l>
+        /// </returns>
+        private static IDictionary<long, IList<CollaborationItemParticipantInfo>> CreateEmptyParticipantMap(List<long> itemIds)
+        {
+            Dictionary<long, IList<CollaborationItemParticipantInfo>> map = new Dictionary<long, IList<CollaborationItemParticipantInfo>>();
+            foreach (long itemId in itemIds)
+            {
+                map[itemId] = new List<CollaborationItemParticipantInfo>();
+            }
+
+            return map;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把标识集合转换为逐个绑定的参数名列表，并追加对应 SQL 参数；不做文本拼接，避免注入面。</zh-CN>
+        ///   <en>Converts identifiers into individually bound parameter names and appends the matching SQL parameters; nothing is concatenated from text, so no injection surface is added.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="itemIds">
+        /// <l>
+        ///   <zh-CN>已规范化的标识集合，必须非空。</zh-CN>
+        ///   <en>The normalized identifier collection, which must be non-empty.</en>
+        /// </l>
+        /// </param>
+        /// <param name="parameters">
+        /// <l>
+        ///   <zh-CN>接收新增参数的集合。</zh-CN>
+        ///   <en>The collection that receives the added parameters.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>形如 <c>@ItemId0, @ItemId1</c> 的参数名列表。</zh-CN>
+        ///   <en>The parameter-name list, for example <c>@ItemId0, @ItemId1</c>.</en>
+        /// </l>
+        /// </returns>
+        private static string BuildItemIdParameterList(List<long> itemIds, List<SqlParameter> parameters)
+        {
+            List<string> names = new List<string>();
+            for (int index = 0; index < itemIds.Count; index++)
+            {
+                string name = "@BatchItemId" + index.ToString(CultureInfo.InvariantCulture);
+                names.Add(name);
+                parameters.Add(new SqlParameter(name, itemIds[index]));
+            }
+
+            return string.Join(", ", names.ToArray());
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>批量取事项事实并对每个事项执行可见性校验，返回通过校验的标识（保持请求顺序）。</zh-CN>
+        ///   <en>Loads item facts in one batch and applies the visibility check per item, returning the identifiers that pass in request order.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="itemIds">
+        /// <l>
+        ///   <zh-CN>已规范化的请求标识集合。</zh-CN>
+        ///   <en>The normalized requested identifier collection.</en>
+        /// </l>
+        /// </param>
+        /// <param name="actor">
+        /// <l>
+        ///   <zh-CN>已解析的动作人授权；为空时返回空集合。</zh-CN>
+        ///   <en>The resolved actor authorization; a null value yields an empty collection.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>通过 <c>CanParticipate</c> 与 <c>CanView</c> 的标识集合。</zh-CN>
+        ///   <en>The identifiers that pass <c>CanParticipate</c> and <c>CanView</c>.</en>
+        /// </l>
+        /// </returns>
+        private List<long> FilterVisibleItemIds(List<long> itemIds, CollaborationItemActorAuthorization actor)
+        {
+            List<long> visibleIds = new List<long>();
+            if (actor == null)
+            {
+                return visibleIds;
+            }
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            string itemIdList = BuildItemIdParameterList(itemIds, parameters);
+
+            // <lang>
+            //   <zh-CN>一次读取全部事项事实（上限取请求条数），随后在内存中逐条判定；事项缺失即视为不可见，与逐条路径一致。</zh-CN>
+            //   <en>Read every item fact in one pass (taking at most the requested count) and then decide per item in memory; a missing item counts as invisible, matching the per-item path.</en>
+            // </lang>
+            IList<CollaborationItemInfo> items = QueryItems(
+                @"
+WHERE [Item].[ItemId] IN (" + itemIdList + ")",
+                itemIds.Count,
+                parameters.ToArray());
+
+            Dictionary<long, CollaborationItemInfo> itemsById = new Dictionary<long, CollaborationItemInfo>();
+            foreach (CollaborationItemInfo item in items)
+            {
+                if (item != null && !itemsById.ContainsKey(item.ItemId))
+                {
+                    itemsById[item.ItemId] = item;
+                }
+            }
+
+            foreach (long itemId in itemIds)
+            {
+                CollaborationItemInfo item;
+                if (itemsById.TryGetValue(itemId, out item) && CanParticipate(item, actor) && CanView(item, actor))
+                {
+                    visibleIds.Add(itemId);
+                }
+            }
+
+            return visibleIds;
         }
 
         /// <summary>

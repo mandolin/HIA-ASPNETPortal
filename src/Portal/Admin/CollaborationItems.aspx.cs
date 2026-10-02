@@ -404,13 +404,38 @@ namespace ASPNET.StarterKit.Portal
                 PageSize);
             int currentUserId = GetCurrentUserId();
             // <lang>
-            //   <zh-CN>逐行读取参与人集合（受固定分页上限约束的轻量查询）；参与人只影响展示与可见性，不参与授权判定。</zh-CN>
-            //   <en>Read the participant set per row (a lightweight query bounded by the fixed page limit); participants affect display and visibility only, never authorization.</en>
+            //   <zh-CN>P74.5 起改为批量读取：一次性取回本页所有事项的可见事件与参与人集合，再在内存中按事项装配（逐行版本约 4N 次往返，批量版为常数次）。
+            //   可见性语义不变：服务层仍对每个事项执行 CanParticipate 与 CanView；参与人只影响展示与可见性，不参与授权判定。</zh-CN>
+            //   <en>Since P74.5 this reads in batch: it fetches every visible event and participant set for the page's items once and assembles them in memory (the per-row version took roughly 4N round trips; the batch version takes a constant number).
+            //   Visibility semantics are unchanged: the service still applies CanParticipate and CanView per item; participants affect display and visibility only, never authorization.</en>
             // </lang>
-            List<CollaborationItemAdminRow> rows = items.Select(item => new CollaborationItemAdminRow(
-                item,
-                CollaborationItemDb.GetVisibleEvents(item.ItemId, currentUserId),
-                CollaborationItemDb.GetParticipants(item.ItemId))).ToList();
+            List<long> adminItemIds = items.Select(item => item.ItemId).ToList();
+            IDictionary<long, IList<CollaborationItemEventInfo>> adminVisibleEventsByItem =
+                CollaborationItemDb.GetVisibleEventsForItems(adminItemIds, currentUserId);
+            IDictionary<long, IList<CollaborationItemParticipantInfo>> adminParticipantsByItem =
+                CollaborationItemDb.GetParticipantsForItems(adminItemIds);
+
+            // <lang>
+            //   <zh-CN>按原顺序逐行装配，保证列表内容与顺序不变；字典缺键回退空集合，不引入新的失败模式。</zh-CN>
+            //   <en>Assemble row by row in the original order so list content and ordering are unchanged; a missing dictionary key falls back to an empty collection instead of introducing a new failure mode.</en>
+            // </lang>
+            List<CollaborationItemAdminRow> rows = new List<CollaborationItemAdminRow>();
+            foreach (CollaborationItemInfo item in items)
+            {
+                IList<CollaborationItemEventInfo> visibleEvents;
+                if (!adminVisibleEventsByItem.TryGetValue(item.ItemId, out visibleEvents))
+                {
+                    visibleEvents = new List<CollaborationItemEventInfo>();
+                }
+
+                IList<CollaborationItemParticipantInfo> participants;
+                if (!adminParticipantsByItem.TryGetValue(item.ItemId, out participants))
+                {
+                    participants = new List<CollaborationItemParticipantInfo>();
+                }
+
+                rows.Add(new CollaborationItemAdminRow(item, visibleEvents, participants));
+            }
 
             // <lang>
             //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>

@@ -414,13 +414,40 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The data service scopes visible events to the current user; the display row only sorts and converts low-sensitivity text.</en>
             // </lang>
             // <lang>
-            //   <zh-CN>逐行读取参与人集合（受前台固定条数上限约束的轻量查询）；前台只展示，不做增删。</zh-CN>
-            //   <en>Read the participant set per row (a lightweight query bounded by the front-end item limit); the front end only displays and never adds or removes.</en>
+            //   <zh-CN>P74.5 起改为批量读取：先一次性取回本页所有事项的可见事件与参与人集合，再在内存中按事项装配。
+            //   逐行版本对每个事项都会重算动作人授权并各发两条查询（实际约 4N 次往返）；批量版把动作人授权算一次、事项事实一次、事件与参与人各一次，即常数次往返。
+            //   可见性语义不变：服务层仍对**每个事项**执行 CanParticipate 与 CanView，未通过者不会出现在事件结果里；前台只展示，不做增删。</zh-CN>
+            //   <en>Since P74.5 this reads in batch: it fetches every visible event and participant set for the page's items once and assembles them in memory.
+            //   The per-row version recomputed actor authorization per item and issued two queries each (roughly 4N round trips); the batch version computes authorization once and runs one item-fact query, one event query, and one participant query, which is a constant number of round trips.
+            //   Visibility semantics are unchanged: the service still applies CanParticipate and CanView **per item**, and items that fail never appear in the event results; the front end only displays and never adds or removes.</en>
             // </lang>
-            List<EnterpriseCapabilityWorkbenchItemRow> rows = items.Select(item => new EnterpriseCapabilityWorkbenchItemRow(
-                item,
-                CollaborationItemDb.GetVisibleEvents(item.ItemId, userId),
-                CollaborationItemDb.GetParticipants(item.ItemId))).ToList();
+            List<long> workbenchItemIds = items.Select(item => item.ItemId).ToList();
+            IDictionary<long, IList<CollaborationItemEventInfo>> visibleEventsByItem =
+                CollaborationItemDb.GetVisibleEventsForItems(workbenchItemIds, userId);
+            IDictionary<long, IList<CollaborationItemParticipantInfo>> participantsByItem =
+                CollaborationItemDb.GetParticipantsForItems(workbenchItemIds);
+
+            // <lang>
+            //   <zh-CN>仍按原顺序遍历事项并逐行装配，因此列表内容与顺序与逐行版本完全一致；字典缺键时回退为空集合，不引入新的失败模式。</zh-CN>
+            //   <en>Iterate the items in their original order and assemble row by row, so list content and ordering stay identical to the per-row version; a missing dictionary key falls back to an empty collection instead of introducing a new failure mode.</en>
+            // </lang>
+            List<EnterpriseCapabilityWorkbenchItemRow> rows = new List<EnterpriseCapabilityWorkbenchItemRow>();
+            foreach (CollaborationItemInfo item in items)
+            {
+                IList<CollaborationItemEventInfo> visibleEvents;
+                if (!visibleEventsByItem.TryGetValue(item.ItemId, out visibleEvents))
+                {
+                    visibleEvents = new List<CollaborationItemEventInfo>();
+                }
+
+                IList<CollaborationItemParticipantInfo> participants;
+                if (!participantsByItem.TryGetValue(item.ItemId, out participants))
+                {
+                    participants = new List<CollaborationItemParticipantInfo>();
+                }
+
+                rows.Add(new EnterpriseCapabilityWorkbenchItemRow(item, visibleEvents, participants));
+            }
 
             // <lang>
             //   <zh-CN>先记下行数再绑定：模板在 Footer 用该计数决定是否渲染空态行（Repeater 的表头与表尾在零条时仍会渲染，故空态行必须放在 Footer 内才能保持"表头 + 提示行"的表格结构）。</zh-CN>
