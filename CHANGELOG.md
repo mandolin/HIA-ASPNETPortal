@@ -4,6 +4,48 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [SemVer](https://semver.org/lang/zh-CN/)。
 
+## [v0.4.0] - 2026-10-02
+
+**BasicBusiness（基础业务）能力初步完善**（`C-anp-P12`：W67–W75）。
+
+### 已加入
+
+- **W67 `WorkItems` 前台「我的待办」聚合入口 + 操作审计**：数据层 `PortalWorkItemQueryResult` 与 `IPortalWorkItemDb.GetWorkItemsForUser`（fail-closed、空/失败语义分离、角色键逐参数绑定）；前台模块 `HIA.MyWorkItems`；查看与筛选操作审计。
+- **W68 `EnterpriseDirectory` 组织子树查询 + 异常语义修正**：`EmployeeDirectoryQuery` 增加 `OrganizationUnitId`（fail-closed）与 `IncludeDescendants`；`IEmployeeDirectoryDb.GetOrganizationUnitSubtreeIds`；纯函数 `PortalOrganizationTreeExpander`（数据范围深化的数据层前置）。
+- **W69 `CorrectionRequest` 闭环（审核 → 回写主数据）**：审核通过按服务端白名单真正回写员工主数据（此前只改状态），含回写策略纯函数与事件/审计；按裁定 `D4` **不引入二次审批**。
+- **W70 `EmployeeProfileConfirm` 前台权限 + 幂等 + 本地化**：渲染期权限门禁 + 提交前二次校验 + 授权失败审计；确认由"快照追加"改为幂等；清理未本地化硬编码。
+- **W71 `ApplicationRequest` 状态机显式化 + Resubmit**：显式迁移表作为单一事实源（含 `ViaReviewPath` 隔离自助动作），映射与 SQL 守卫均由表派生，并附**等价性单测**；新增 `ResubmitApplication`。
+- **W72 负责人角色键读取边界对齐**：修复 `CanParticipate`（写资格）与 `CanView`（读资格）不一致，持有负责人角色键须两者同时通过。
+- **W73 治理**：`Business.Workflow` 归属合并到 `BusinessApplicationRequest`（`D1`）；`EmployeeProfileConfirm` / `EmployeeProfileCorrectionRequest` 补 `capabilityId`，`ModuleProbe` 明确归 Platform（`D2`）。
+
+### 已改进
+
+- **W74 UI 打磨（空态 / 资源键 / 角色名 / N+1）**：
+  - **列表空态**：业务前后台共 **8 个列表**接入共享空态（表头保留 + 整行居中弱化提示），并区分"无数据"与"筛选无结果"；服务不可用路径**抑制空态**，不把故障说成"暂无"。
+  - **资源键归属**：消除跨模块借用（借用方建自有键；角色词表等共享领域事实改用共享键），清理失效键。
+  - **参与人角色名本地化**：界面不再暴露内部权限键（`Collaborator` / `Watcher`），改为本地化角色名，未知键回退原始键；空集合用本地化占位。
+  - **N+1**：协同事项列表改为批量取数（逐行约 4N 次往返 → 常数次），**逐条可见性校验保留**。
+  - **主题适配**：`MyWorkItems` 与工作台在 6 套正式皮肤补齐主题作用域规则，修复深色皮肤下"浅字压白底"（实测对比度由约 1:1 提升到 12.9:1）。
+  - **模块注册**：通用场景脚本 `New-PortalModuleScenarioSql.ps1`；`HIA.MyWorkItems` 补齐模块定义/包状态/页签/实例，并归入新增 `BasicBusiness` 档位。
+
+### 里程碑状态（截至本版本）
+
+| 里程碑 | 级别 | 状态 |
+| --- | --- | --- |
+| `M-ANP-MAINTAINABLE-BASE` | L3 | 已达成 |
+| `M-ANP-OPERABLE-PORTAL` | L4 | 已达成（当前基线） |
+| `M-ANP-EXTENSIBLE-PORTAL` | L5 | 已达成 |
+| `M-ANP-DOCUMENTED-PORTAL` | L6 | 已达成 |
+| `M-ANP-TRUSTED-PORTAL` | L7 | 评估中，未无条件达成 |
+| `M-ANP-BUSINESS-READY-PORTAL` | L8 | 条件式达成 |
+| `M-ANP-ENTERPRISE-UI-PORTAL` | L9 | 条件式达成 |
+| `M-ANP-RELEASE-READY-PORTAL` | L10 | 未达成（目标 `v1.0.0`）：R1 随本周期推进（BasicBusiness 七方向达"初步完善"）、R7 达成；R2/R3/R4/R5 部分达成；R6 未达成 |
+
+### 说明
+
+- 本版本为**内部基线锚点**，不对外宣传；`v1.0.0` 之前口径限于"可用 / 参考 / 研究基线"，不得宣称生产级可信。
+- 本周期起将**运行期验证**（LocalDB + IIS Express + 浏览器断言）纳入常规门禁，并新增 `Test-PortalModuleRuntimeEvidence.mjs` 与 `Test-PortalAdminListUiEvidence.mjs` 两个证据脚本；它当场发现了静态门禁看不到的问题（ASCX 运行期编译错误、深色皮肤可读性）。
+
 ## [v0.3.0] - 2026-09-28
 
 **Foundation（核心）能力初步完善**（`C-anp-P11`：W61–W66）。
