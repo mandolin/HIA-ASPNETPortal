@@ -69,6 +69,7 @@
 
 - 原型/设计图**必须体现本项目真实的主题皮肤与门户类体系**，**禁止**使用与本项目风格无关的通用设计稿或 AI 自由发挥的企业风图。
 - 出图方式：优先**真实渲染出图** —— 写静态 HTML 原型页并引用真实的 `App_Themes/<Theme>/Default.css` 与真实类，再用项目既有截图链路（`dev/scripts/Capture-PortalThemeScreenshots.ps1`、IIS Express + playwright）截图；**不得**用文生图工具"想象"界面。
+- **运行期验证不得以"无环境"为由跳过**：本机开发验证使用 **LocalDB（`(localdb)\MSSQLLocalDB`，库 `Portal`）** 与 **IIS Express**（`dev/scripts/Start-IISExpress.ps1`，默认端口 40001），外置连接串位于 `%USERPROFILE%\Web\HIA-ASPNETPortal\dev\connectionStrings.config`；**只有发布正式版本前才需要真实 IIS / SQL Server**。涉及可见呈现、数据分支、权限或本地化的改动，必须对**运行中的站点**做运行期断言并留档产物（参考既有 `dev/scripts/Test-Portal*Smoke.ps1`、`dev/scripts/Capture-PortalThemeScreenshots.ps1`、`dev/scripts/Test-PortalAdminListUiEvidence.mjs`）；只做静态渲染、或只跑构建与单测就宣称"已验证"，视为**未完成**。不得把"无 IIS/DB"写成限制来免除运行期验证。
 - 原型中必须使用既有类：基础/遗留层（`.Head`、`.SubHead`、`.CommandButton`、`.Message`、`table[border="1"]` 等）、门户外壳层（`.portal-header`、`.portal-nav-row`、`.portal-tab`、`.portal-main-shell`、`.portal-content-stage`、`.portal-module`、`.portal-pane-*` 等）；模块私有类只承担**布局**，颜色/边框/字体由主题层决定。
 - **主题皮肤现状**：`src/Portal/App_Themes/` 下 6 套正式皮肤（`EnterpriseLight` / `EnterpriseDark` / `OaLight` / `OaDark` / `StateClassicLight` / `StateClassicDark`）+ `Default` 回退；主题通过 `body.portal-theme-<规范化主题名>` 作用域生效（见 `PortalThemeResolver.GetCurrentCssClass`）。
 - **新增模块或新增可见元素时，必须在本项目 6 套正式皮肤的 `Default.css` 中补齐对应的 `body.portal-theme-<名> .<模块类>` 作用域规则**（参照既有模块如 `employee-profile-confirm` / `employee-profile-correction` 的既有做法）；只写模块自带 `Styles/<Module>.css` 而**不在主题层补规则**，会导致该模块在多数皮肤下丢失主题化样式 —— 视为未完成。
