@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -258,9 +257,11 @@ namespace ASPNET.StarterKit.Portal
                 return string.Empty;
             }
 
-            return Global.GetApplicationPath(Request) + "/DesktopDefault.aspx?tabindex=" +
-                itemIndex.ToString(CultureInfo.InvariantCulture) + "&tabid=" +
-                tab.TabId.ToString(CultureInfo.InvariantCulture);
+            // <lang>
+            //   <zh-CN>地址形状改由共享构造点提供（P77.3 收敛）：此前页签导航与待办深链各自拼接同一形状，存在随时间漂移的风险。</zh-CN>
+            //   <en>The URL shape now comes from the shared construction point (converged in P77.3): tab navigation and work-item deep links had each assembled the same shape, which risked drifting apart over time.</en>
+            // </lang>
+            return PortalDesktopTabUrl.Build(Global.GetApplicationPath(Request), itemIndex, tab.TabId);
         }
 
         /// <summary>

@@ -2506,7 +2506,7 @@
     <value>Overdue by {0} days</value>
   </data>
   <data name="MyWorkItems_NoOnlineEntry" xml:space="preserve">
-    <value>No online processing entry available</value>
+    <value>No online entry is available; use the related business page or contact an administrator</value>
   </data>
   <data name="MyWorkItems_KindCollaborationItem" xml:space="preserve">
     <value>Collaboration item</value>

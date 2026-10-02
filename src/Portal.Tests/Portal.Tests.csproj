@@ -72,6 +72,7 @@
     <Compile Include="EmployeeProfileCorrectionWriteBackPolicyTests.cs" />
     <Compile Include="PortalOrganizationTreeExpanderTests.cs" />
     <Compile Include="PortalWorkItemQueryResultTests.cs" />
+    <Compile Include="PortalWorkItemTargetResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2506,7 +2506,7 @@
     <value>已超期 {0} 天</value>
   </data>
   <data name="MyWorkItems_NoOnlineEntry" xml:space="preserve">
-    <value>暂无在线办理入口</value>
+    <value>暂无线上办理入口，请在相关业务页面办理或联系管理员</value>
   </data>
   <data name="MyWorkItems_KindCollaborationItem" xml:space="preserve">
     <value>协同事项</value>

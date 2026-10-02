@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Unity;
@@ -35,6 +36,30 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>角色数据访问门面，用于解析当前用户持有的受控权限键。</zh-CN><en>Role data-access facade used to resolve the controlled permission keys held by the current user.</en></lang></summary>
         [Dependency]
         public IRolesDb RolesDb { private get; set; }
+
+        /// <summary><lang><zh-CN>页签数据访问门面，用于把模块实例归属的页签解析为可导航目标；缺失时一律降级为不可办理，不猜测地址。</zh-CN><en>Tab data-access facade used to resolve the tab owning a module instance into a navigable target; when it is missing every row degrades to non-navigable and no URL is guessed.</en></lang></summary>
+        [Dependency]
+        public ITabsDb TabsConfig { private get; set; }
+
+        /// <summary><lang><zh-CN>模块定义数据访问门面，用于按已验证桌面入口定位模块定义；缺失时一律降级。</zh-CN><en>Module-definition data-access facade used to locate a definition by its validated desktop entry; when it is missing every row degrades.</en></lang></summary>
+        [Dependency]
+        public IModuleDefsDb ModuleDefinitionsConfig { private get; set; }
+
+        /// <summary><lang><zh-CN>模块实例数据访问门面，用于按模块定义标识枚举实例并读回其承载页签。基类已注入同类型的私有副本（其 getter 为 private，派生类与嵌套类型都读不到），故此处保留本模块可读的注入点；两处注入的是同一容器注册的同一实现，不产生第二套数据源。</zh-CN><en>Module-instance data-access facade used to enumerate instances by definition identifier and read back their hosting tab. The base class already injects a private copy of the same type whose getter is private, so neither derived nor nested types can read it; this keeps an injection point this module can read. Both injections resolve the same container registration, so no second data source appears.</en></lang></summary>
+        [Dependency]
+        public IModulesDb ModuleInstancesConfig { private get; set; }
+
+        /// <summary><lang><zh-CN>最近一次绑定中已解析出可导航目标的行数；仅用于本次查看的审计统计，不跨请求保留。</zh-CN><en>Rows whose navigable target resolved during the latest bind; used only for this view's audit counters and never kept across requests.</en></lang></summary>
+        private int resolvedTargetCount;
+
+        /// <summary><lang><zh-CN>最近一次绑定中降级（不可办理）的行数。</zh-CN><en>Rows that degraded to non-navigable during the latest bind.</en></lang></summary>
+        private int degradedTargetCount;
+
+        /// <summary><lang><zh-CN>降级原因计数，键为解析器原因码；用于审计正文的非敏感统计。</zh-CN><en>Degradation reason counts keyed by resolver reason code, used for the non-sensitive statistics in the audit text.</en></lang></summary>
+        private readonly IDictionary<string, int> degradationReasonCounts = new Dictionary<string, int>(StringComparer.Ordinal);
+
+        /// <summary><lang><zh-CN>本次绑定使用的反查数据端口；在绑定前创建，避免逐行重复读取部署清单。</zh-CN><en>Reverse-lookup data port used by the current bind; created before binding so the deployment manifest is not reread for every row.</en></lang></summary>
+        private IPortalModuleTargetSource targetSource;
 
         /// <summary>
         /// <lang>
@@ -93,8 +118,8 @@ namespace ASPNET.StarterKit.Portal
                 FailurePanel.Visible = false;
                 PortalOperationAudit.Record(
                     PortalOperationAuditEvents.BusinessModuleCategory,
-                    "WorkItemsViewed",
-                    "WorkItem",
+                    PortalOperationAuditEvents.WorkItemsViewed,
+                    PortalOperationAuditEvents.WorkItemTargetType,
                     GetCurrentUserId().ToString(CultureInfo.InvariantCulture),
                     "My work items view denied. RequiredAny=" + PortalPermissionKeys.BusinessWorkItemsView + "|" + PortalPermissionKeys.BusinessWorkItemsAdmin,
                     Context,
@@ -158,8 +183,8 @@ namespace ASPNET.StarterKit.Portal
                 FailurePanel.Visible = true;
                 PortalOperationAudit.Record(
                     PortalOperationAuditEvents.BusinessModuleCategory,
-                    "WorkItemsViewed",
-                    "WorkItem",
+                    PortalOperationAuditEvents.WorkItemsViewed,
+                    PortalOperationAuditEvents.WorkItemTargetType,
                     userId.ToString(CultureInfo.InvariantCulture),
                     "My work items read failed.",
                     Context,
@@ -174,22 +199,58 @@ namespace ASPNET.StarterKit.Portal
             FailurePanel.Visible = false;
             WorkItemRepeater.Visible = items.Count > 0;
             WorkItemRepeater.DataSource = items;
+
+            // <lang>
+            //   <zh-CN>绑定前重置解析统计并创建反查端口：行绑定期间累加，随后一次性进入审计，避免每行写一条审计记录。</zh-CN>
+            //   <en>Reset the resolution counters and create the reverse-lookup port before binding: row binding accumulates them and they enter the audit once afterwards, instead of writing one audit record per row.</en>
+            // </lang>
+            resolvedTargetCount = 0;
+            degradedTargetCount = 0;
+            degradationReasonCounts.Clear();
+            targetSource = new PortalModuleTargetSource(this);
+
             WorkItemRepeater.DataBind();
             EmptyPanel.Visible = items.Count == 0;
             EmptyLabel.Text = ShowOverdueOnly ? GetResource("MyWorkItems_EmptyNoMatch") : GetResource("MyWorkItems_EmptyNone");
 
             // <lang>
-            //   <zh-CN>查看与筛选只记录条数与筛选态，不写标题或业务正文，避免审计承载业务数据。</zh-CN>
-            //   <en>Viewing and filtering record only the row count and filter state; titles and domain content are never written so the audit does not carry business data.</en>
+            //   <zh-CN>查看与筛选只记录条数、筛选态、解析成功/降级计数与降级原因分布；标题、业务正文与地址一律不写，避免审计承载业务数据或可被复用的跳转细节。目标解析统计是本模块"点击跳转待补审计"的落点：普通超链接的点击本身对服务器不可见，故以**本次呈现**解析到多少可达目标作为替代证据，并在文档中如实说明其边界。</zh-CN>
+            //   <en>Viewing and filtering record only the row count, filter state, resolved/degraded counters, and the reason breakdown; titles, domain content, and URLs are never written so the audit carries neither business data nor reusable navigation detail. The resolution counters are where this module's pending "click-through audit" lands: a plain hyperlink click is invisible to the server, so how many navigable targets **this render** resolved stands in as the evidence, with its limits stated in the documents.</en>
             // </lang>
             PortalOperationAudit.Record(
                 PortalOperationAuditEvents.BusinessModuleCategory,
-                "WorkItemsViewed",
-                "WorkItem",
+                PortalOperationAuditEvents.WorkItemsViewed,
+                PortalOperationAuditEvents.WorkItemTargetType,
                 userId.ToString(CultureInfo.InvariantCulture),
                 "My work items viewed. Count=" + items.Count.ToString(CultureInfo.InvariantCulture) +
-                "; OverdueOnly=" + ShowOverdueOnly.ToString(CultureInfo.InvariantCulture),
+                "; OverdueOnly=" + ShowOverdueOnly.ToString(CultureInfo.InvariantCulture) +
+                "; ResolvedTargets=" + resolvedTargetCount.ToString(CultureInfo.InvariantCulture) +
+                "; DegradedTargets=" + degradedTargetCount.ToString(CultureInfo.InvariantCulture) +
+                "; DegradationReasons=" + BuildDegradationReasonSummary(),
                 Context);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把降级原因计数汇总为稳定的非敏感文本；无降级时返回 <c>none</c>。键按序排序，使同一状态的审计文本可复现、可比较。</zh-CN>
+        ///   <en>Summarizes the degradation reason counts into stable non-sensitive text, returning <c>none</c> when nothing degraded. Keys are sorted so the audit text for the same state is reproducible and comparable.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns><l><zh-CN>形如 <c>NoModuleDefinition:2,NoAccessibleTab:1</c> 的汇总文本。</zh-CN><en>Summary text such as <c>NoModuleDefinition:2,NoAccessibleTab:1</c>.</en></l></returns>
+        private string BuildDegradationReasonSummary()
+        {
+            if (degradationReasonCounts.Count == 0)
+            {
+                return "none";
+            }
+
+            IList<string> parts = new List<string>();
+            foreach (string reasonCode in degradationReasonCounts.Keys.OrderBy(key => key, StringComparer.Ordinal))
+            {
+                parts.Add(reasonCode + ":" + degradationReasonCounts[reasonCode].ToString(CultureInfo.InvariantCulture));
+            }
+
+            return string.Join(",", parts.ToArray());
         }
 
         /// <summary>
@@ -345,21 +406,236 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>解析待办对应业务对象的前台可达地址；三类业务当前都没有前台详情页，故恒返回空串。</zh-CN>
-        ///   <en>Resolves the front-end reachable URL of the business object behind a work item; it always returns an empty string because none of the three kinds currently has a front-end detail page.</en>
+        ///   <zh-CN>解析待办对应业务对象的前台可达地址；解析落空或当前用户无权访问承载页签时返回空串，由标记层改为降级提示。</zh-CN>
+        ///   <en>Resolves the front-end reachable URL of the business object behind a work item; when resolution falls through or the current user may not access the hosting tab it returns an empty string and the markup shows the degraded hint instead.</en>
         /// </lang>
         /// </summary>
         /// <remarks>
         /// <lang>
-        ///   <zh-CN>T3 勘察结论（2026-09-29）：① 后台 <c>Admin/WorkItems.aspx</c> 既有的 <c>GetBusinessUrl</c> 只把三类业务映射到后台 Admin 页，未知类型落 <c>NotImplemented.aspx</c>；② 前台模块（协同工作台、业务申请、资料更正）只有提交表单与最近列表，没有业务对象详情页；③ 前台模块的 URL 依赖运行时 Tab 挂载（<c>tabid</c> 来自库配置），<c>PortalNavigationRegistry</c> 的 Tab 条目明确"Target 留空、不生成链接"，因此不存在可静态解析的前台深链。综合判定：普通用户侧三类待办均不可达，跳转会导致 403，故一律不渲染链接。若要提供深链，需新增"按 desktopEntry 反查承载 Tab"的能力（依赖 <c>IModulesDb</c>/<c>ITabsDb</c>），登记为后续深化项。</zh-CN>
-        ///   <en>T3 investigation conclusion (2026-09-29): (1) the existing <c>GetBusinessUrl</c> on <c>Admin/WorkItems.aspx</c> maps all three kinds only to administration pages and sends unknown kinds to <c>NotImplemented.aspx</c>; (2) the front-end modules (collaboration workbench, business application, profile correction) expose only submit forms and recent lists, with no per-object detail page; (3) a front-end module URL depends on runtime tab placement (<c>tabid</c> comes from database configuration), and <c>PortalNavigationRegistry</c> tab entries explicitly keep the target blank and produce no link, so no statically resolvable front-end deep link exists. Verdict: all three kinds are unreachable for a normal user and navigating would yield 403, so no link is rendered. Providing deep links would require a new "resolve the hosting tab by desktopEntry" capability (depending on <c>IModulesDb</c>/<c>ITabsDb</c>), which is registered as a follow-up.</en>
+        ///   <zh-CN>P77.3 取代原 T3 判定（2026-09-29 的「三类业务在前台恒不可达、故恒返回空串」）。原判定只看到「没有可静态解析的前台深链」，**漏掉了运行期反查**：模块实例归属的页签本就登记在库中，可按「业务类型 → 能力键 → 主责模块包 → 已验证桌面入口 → 模块定义 → 模块实例 → 承载页签」逐环反查，再用当次请求的角色检查确认可达性（见 <see cref="PortalWorkItemTargetResolver"/>）。命中即产出地址，任一环落空即降级为提示；后台 <c>Admin/WorkItems.aspx</c> 的 Admin 映射与这里的普通用户可达性判定互不替代。</zh-CN>
+        ///   <en>P77.3 supersedes the original T3 verdict (2026-09-29: every kind is unreachable in the front end, so always return an empty string). That verdict saw only that no statically resolvable front-end deep link exists and **missed the runtime reverse lookup**: the tab owning a module instance is already registered in the database, so the chain from business kind to capability key to primary module package to validated desktop entry to module definition to module instance to hosting tab can be walked, and the current request's role check then confirms reachability (see <see cref="PortalWorkItemTargetResolver"/>). A full pass yields a URL while any failed link degrades to the hint. The Admin mapping on <c>Admin/WorkItems.aspx</c> and this ordinary-user reachability decision do not substitute for each other.</en>
         /// </lang>
         /// </remarks>
-        /// <param name="item"><l><zh-CN>待办投影。</zh-CN><en>The work-item projection.</en></l></param>
-        /// <returns><l><zh-CN>可达的相对地址；当前恒为空串表示不可达。</zh-CN><en>A reachable relative URL; it is always an empty string, meaning unreachable.</en></l></returns>
-        private static string ResolveItemUrl(PortalWorkItemInfo item)
+        /// <param name="item"><l><zh-CN>待办投影；为 <c>null</c> 或业务类型未知时按降级处理。</zh-CN><en>The work-item projection; a <c>null</c> value or an unknown business kind degrades.</en></l></param>
+        /// <returns><l><zh-CN>可导航的应用相对地址；不可达时为空串。</zh-CN><en>A navigable application-relative URL, or an empty string when unreachable.</en></l></returns>
+        private string ResolveItemUrl(PortalWorkItemInfo item)
         {
-            return string.Empty;
+            // <lang>
+            //   <zh-CN>解析故障不得让整块待办变成错误页：任何异常都按"读取注册事实失败"降级，行仍以纯文本加速提示呈现。</zh-CN>
+            //   <en>A resolution fault must not turn the whole to-do block into an error page: every exception degrades as "registration facts unreadable" and the row still renders as plain text plus a hint.</en>
+            // </lang>
+            try
+            {
+                PortalWorkItemTargetResolution resolution = PortalWorkItemTargetResolver.Resolve(
+                    item == null ? null : item.BusinessKind,
+                    targetSource);
+
+                if (!resolution.IsResolved)
+                {
+                    degradedTargetCount++;
+                    IncrementDegradationReason(resolution.ReasonCode);
+                    return string.Empty;
+                }
+
+                resolvedTargetCount++;
+
+                // <lang>
+                //   <zh-CN>地址形状走共享构造点；<c>tabindex</c> 只影响目标页的匿名登录注入启发式，授权由 <c>tabid</c> 决定（P77.2 裁定 D2），因此这里取门户桌面列表下标并在取不到时退化为 0，绝不生成负下标。</zh-CN>
+                //   <en>The URL shape comes from the shared construction point; <c>tabindex</c> only affects the target page's anonymous-login injection heuristic while authorization is decided by <c>tabid</c> (decision D2 from P77.2), so this reads the portal desktop-list index and degrades it to 0 when absent, never producing a negative subscript.</en>
+                // </lang>
+                return PortalDesktopTabUrl.Build(
+                    Global.GetApplicationPath(Request),
+                    ResolveTabIndex(resolution.Tab.TabId),
+                    resolution.Tab.TabId);
+            }
+            catch (Exception)
+            {
+                degradedTargetCount++;
+                IncrementDegradationReason(PortalWorkItemTargetResolver.ReasonResolutionFailed);
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>累加一个降级原因码的计数；空白原因码归入"读取注册事实失败"，避免统计出现空键。</zh-CN>
+        ///   <en>Increments the count of one degradation reason code, filing a blank code under "registration facts unreadable" so the counters never gain an empty key.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="reasonCode"><l><zh-CN>解析器原因码。</zh-CN><en>A resolver reason code.</en></l></param>
+        private void IncrementDegradationReason(string reasonCode)
+        {
+            string key = string.IsNullOrEmpty(reasonCode)
+                ? PortalWorkItemTargetResolver.ReasonSourceUnavailable
+                : reasonCode;
+
+            degradationReasonCounts[key] = degradationReasonCounts.ContainsKey(key)
+                ? degradationReasonCounts[key] + 1
+                : 1;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按门户桌面列表取页签下标，供地址中的 <c>tabindex</c> 使用。</zh-CN>
+        ///   <en>Reads the tab index from the portal desktop list for the URL's <c>tabindex</c>.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tabId"><l><zh-CN>页签标识。</zh-CN><en>The tab identifier.</en></l></param>
+        /// <returns><l><zh-CN>非负下标；列表缺失或未命中时为 0。</zh-CN><en>A non-negative index, or 0 when the list is missing or the tab is not found.</en></l></returns>
+        private int ResolveTabIndex(int tabId)
+        {
+            PortalSettings settings = PortalContext.GetPortalSettings(Context);
+            if (settings == null || settings.DesktopTabs == null)
+            {
+                return 0;
+            }
+
+            int index = settings.DesktopTabs.FindIndex(tab => tab != null && tab.TabId == tabId);
+
+            // <lang>
+            //   <zh-CN>未命中时退化为 0 而不是 -1：目标页的 tabindex 参数按非负解析，负数没有意义，而授权真源是 tabid。</zh-CN>
+            //   <en>Degrade to 0 rather than -1 when not found: the target page parses the tabindex parameter as non-negative, a negative value is meaningless, and the authorization source of truth is tabid.</en>
+            // </lang>
+            return index < 0 ? 0 : index;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把本模块已注入的数据门面与角色判定适配为解析器所需的最小端口。</zh-CN>
+        ///   <en>Adapts the data facades and role check already injected into this module to the minimal port the resolver needs.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本类不新增数据访问，只做转发与一次绑定内的缓存：门面缺失时返回空集合或 <c>null</c>，使解析器按"未注册/未挂载"降级而不是抛错。</zh-CN>
+        ///   <en>This class adds no data access; it only forwards and caches within one bind. A missing facade yields an empty collection or <c>null</c> so the resolver degrades as "not registered or not mounted" instead of throwing.</en>
+        /// </lang>
+        /// </remarks>
+        private sealed class PortalModuleTargetSource : IPortalModuleTargetSource
+        {
+            /// <summary><l><zh-CN>宿主模块，用于读取已注入的门面。</zh-CN><en>The hosting module, used to read the injected facades.</en></l></summary>
+            private readonly MyWorkItems owner;
+
+            /// <summary><l><zh-CN>一次绑定内复用的"包标识 → 桌面入口"索引；未构建时为 <c>null</c>。</zh-CN><en>The package-to-desktop-entry index reused within one bind, or <c>null</c> before it is built.</en></l></summary>
+            private IDictionary<string, string> desktopEntries;
+
+            /// <summary><l><zh-CN>创建适配器。</zh-CN><en>Creates the adapter.</en></l></summary>
+            /// <param name="owner"><l><zh-CN>宿主模块。</zh-CN><en>The hosting module.</en></l></param>
+            internal PortalModuleTargetSource(MyWorkItems owner)
+            {
+                this.owner = owner;
+            }
+
+            /// <summary><l><zh-CN>按包标识读取已验证桌面入口；包不存在时为空串。</zh-CN><en>Reads the validated desktop entry by package identifier, or an empty string when absent.</en></l></summary>
+            /// <param name="packageId"><l><zh-CN>模块包标识。</zh-CN><en>The module package identifier.</en></l></param>
+            /// <returns><l><zh-CN>桌面入口虚拟路径或空串。</zh-CN><en>The desktop entry virtual path or an empty string.</en></l></returns>
+            public string GetDesktopEntry(string packageId)
+            {
+                if (string.IsNullOrEmpty(packageId))
+                {
+                    return string.Empty;
+                }
+
+                string entry;
+                return GetDesktopEntries().TryGetValue(packageId, out entry) ? entry : string.Empty;
+            }
+
+            /// <summary><l><zh-CN>读取全部模块定义；门面缺失时为空集合。</zh-CN><en>Reads all module definitions, or an empty collection when the facade is missing.</en></l></summary>
+            /// <returns><l><zh-CN>模块定义集合。</zh-CN><en>The module-definition collection.</en></l></returns>
+            public IEnumerable<IModuleDefinitionItem> GetModuleDefinitions()
+            {
+                IModuleDefsDb definitions = owner.ModuleDefinitionsConfig;
+                if (definitions == null)
+                {
+                    return Enumerable.Empty<IModuleDefinitionItem>();
+                }
+
+                return definitions.GetModuleDefinitions() ?? Enumerable.Empty<IModuleDefinitionItem>();
+            }
+
+            /// <summary><l><zh-CN>读取引用指定定义的模块实例标识；门面缺失时为空集合。</zh-CN><en>Reads the module-instance identifiers referencing the definition, or an empty collection when the facade is missing.</en></l></summary>
+            /// <param name="definitionId"><l><zh-CN>模块定义标识。</zh-CN><en>The module-definition identifier.</en></l></param>
+            /// <returns><l><zh-CN>模块实例标识集合。</zh-CN><en>The module-instance identifier collection.</en></l></returns>
+            public IEnumerable<int> GetModuleIdsByDefinitionId(int definitionId)
+            {
+                IModulesDb modules = owner.ModuleInstancesConfig;
+                if (modules == null)
+                {
+                    return Enumerable.Empty<int>();
+                }
+
+                return modules.GetModulesByModuleDefId(definitionId) ?? Enumerable.Empty<int>();
+            }
+
+            /// <summary><l><zh-CN>按标识查找模块实例；门面缺失时为 <c>null</c>。</zh-CN><en>Finds a module instance by identifier, or <c>null</c> when the facade is missing.</en></l></summary>
+            /// <param name="moduleId"><l><zh-CN>模块实例标识。</zh-CN><en>The module-instance identifier.</en></l></param>
+            /// <returns><l><zh-CN>模块实例或 <c>null</c>。</zh-CN><en>The module instance or <c>null</c>.</en></l></returns>
+            public IModuleItem FindModuleById(int moduleId)
+            {
+                IModulesDb modules = owner.ModuleInstancesConfig;
+                return modules == null ? null : modules.FindModuleById(moduleId);
+            }
+
+            /// <summary><l><zh-CN>按标识查找页签；门面缺失时为 <c>null</c>。</zh-CN><en>Finds a tab by identifier, or <c>null</c> when the facade is missing.</en></l></summary>
+            /// <param name="tabId"><l><zh-CN>页签标识。</zh-CN><en>The tab identifier.</en></l></param>
+            /// <returns><l><zh-CN>页签或 <c>null</c>。</zh-CN><en>The tab or <c>null</c>.</en></l></returns>
+            public ITabItem FindTabById(int tabId)
+            {
+                ITabsDb tabs = owner.TabsConfig;
+                return tabs == null ? null : tabs.FindTabById(tabId);
+            }
+
+            /// <summary><l><zh-CN>按既有安全策略判定当前请求是否满足角色串（无请求上下文时为 <c>false</c>）。</zh-CN><en>Decides with the established security policy whether the current request satisfies the role string (<c>false</c> with no request context).</en></l></summary>
+            /// <param name="accessRoles"><l><zh-CN>页签访问角色串。</zh-CN><en>The tab access-role string.</en></l></param>
+            /// <returns><l><zh-CN>满足时为 <c>true</c>。</zh-CN><en><c>true</c> when satisfied.</en></l></returns>
+            public bool IsInRoles(string accessRoles)
+            {
+                return PortalSecurity.IsInRoles(accessRoles);
+            }
+
+            /// <summary>
+            /// <lang>
+            ///   <zh-CN>构建并缓存"包标识 → 桌面入口"索引：部署清单的读取与校验有成本，不宜逐行重复。清单读取异常按"无可用入口"降级，使一次部署损坏只影响提示而不影响页面渲染。</zh-CN>
+            ///   <en>Builds and caches the package-to-desktop-entry index, because reading and validating deployment manifests is costly and must not repeat per row. A manifest read failure degrades to "no entry available" so one broken deployment affects the hint only, not page rendering.</en>
+            /// </lang>
+            /// </summary>
+            /// <returns><l><zh-CN>包标识到桌面入口的索引；可能为空但不会为 <c>null</c>。</zh-CN><en>The package-to-desktop-entry index, which may be empty but is never <c>null</c>.</en></l></returns>
+            private IDictionary<string, string> GetDesktopEntries()
+            {
+                if (desktopEntries != null)
+                {
+                    return desktopEntries;
+                }
+
+                desktopEntries = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                IList<PortalModulePackage> packages;
+                try
+                {
+                    packages = PortalModuleCatalog.GetTrustedPackages();
+                }
+                catch (Exception)
+                {
+                    return desktopEntries;
+                }
+
+                if (packages == null)
+                {
+                    return desktopEntries;
+                }
+
+                foreach (PortalModulePackage package in packages)
+                {
+                    if (package == null || string.IsNullOrEmpty(package.PackageId))
+                    {
+                        continue;
+                    }
+
+                    desktopEntries[package.PackageId] = package.DesktopEntry ?? string.Empty;
+                }
+
+                return desktopEntries;
+            }
         }
 
         /// <summary>

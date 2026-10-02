@@ -192,6 +192,8 @@
     <Compile Include="PortalWorkItemQueryResult.cs" />
     <Compile Include="PortalWorkItemResult.cs" />
     <Compile Include="PortalWorkItemStatuses.cs" />
+    <Compile Include="PortalWorkItemTargetResolver.cs" />
+    <Compile Include="PortalDesktopTabUrl.cs" />
     <Compile Include="PortalWorkflowActions.cs" />
     <Compile Include="PortalSecurity.cs" />
     <Compile Include="PortalAuthenticationCookiePolicy.cs" />

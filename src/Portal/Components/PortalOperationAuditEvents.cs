@@ -399,5 +399,21 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string CollaborationItemCommentAdded = "CollaborationItemCommentAdded";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>前台「我的待办」被查看的表现动作，含列表条数、筛选态与目标解析统计。此前散写为字面量，P77.3 收敛到此。</zh-CN>
+        ///   <en>Presentation action for a front-end "My To-Do Items" view, carrying the row count, filter state, and target-resolution counters. It was previously scattered as a literal and was converged here in P77.3.</en>
+        /// </lang>
+        /// </summary>
+        public const string WorkItemsViewed = "WorkItemsViewed";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审计目标类型：待办条目。注意此处指**待办投影本身**（前台聚合视图的元素），与 <see cref="CollaborationItemTargetType"/> 等业务对象目标类型不同层。</zh-CN>
+        ///   <en>Audit target type for a work-item entry. Note this denotes the **work-item projection itself** (an element of the front-end aggregate view), a different layer from business-object target types such as <see cref="CollaborationItemTargetType"/>.</en>
+        /// </lang>
+        /// </summary>
+        public const string WorkItemTargetType = "WorkItem";
     }
 }
