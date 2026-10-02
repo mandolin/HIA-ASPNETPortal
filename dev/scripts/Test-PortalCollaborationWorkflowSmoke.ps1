@@ -116,8 +116,17 @@ $serverAuthorizationOk = Test-ContainsAll $dataAccess @(
     'CanApplyAction',
     'CanParticipate',
     'PortalCollaborationItemActions.Resubmit',
-    "@ActionKey = N'Resubmit' AND [ItemStatus] = N'Returned'",
-    "@ActionKey = N'Submit' AND [ItemStatus] = N'Draft'",
+    # <lang>
+    #   <zh-CN>W64 把"逐动作硬编码的原子状态谓词"改为**由显式迁移表派生**（IsLegalTransition 先判合法性，BuildSqlStatusPredicate 生成 SQL 守卫），
+    #   原先的 `@ActionKey = N'Resubmit' AND [ItemStatus] = N'Returned'` 一类字面量因此不再存在。断言改为校验派生机制，
+    #   语义覆盖不变：状态写入仍重新解析动作人，并对完整迁移矩阵保留原子当前状态谓词。</zh-CN>
+    #   <en>W64 replaced the per-action hard-coded atomic status predicates with ones **derived from the explicit transition table**
+    #   (IsLegalTransition checks legality first; BuildSqlStatusPredicate generates the SQL guard), so literals such as
+    #   `@ActionKey = N'Resubmit' AND [ItemStatus] = N'Returned'` no longer exist. The assertion now checks the derivation mechanism,
+    #   with identical semantic coverage: state writes still re-resolve the actor and retain an atomic current-status predicate across the full transition matrix.</en>
+    # </lang>
+    'PortalCollaborationItemTransitions.IsLegalTransition',
+    'PortalCollaborationItemTransitions.BuildSqlStatusPredicate',
     'ActionRequiresComment',
     'A plain-text handling comment is required for this action.',
     'WHERE [ItemId] = @ItemId'

@@ -13,7 +13,7 @@
 | `C-anp-P9`（W50–W55） | ✅ 已收口 |
 | `C-anp-P10`（W56–W60） | ✅ **已收口**（2026-09-28）：`W56`✅ `W57`✅ `W58`✅ `W59`✅ `W60`✅；`v0.2.0` tag 已推送，一致性门禁 Pass；closeout 见 `work-zone/dev/plans/C-anp-P10-closeout.md`；L10 里程碑文档已建立 `work-zone/dev/milestones/M-ANP-RELEASE-READY-PORTAL.md`。 |
 | `C-anp-P11`（W61–W66） | ✅ 已收口（`W61`–`W66` 全部完成；closeout 见 `work-zone/dev/plans/C-anp-P11-closeout.md`） |
-| **`C-anp-P12`（W67–W75）** | **进行中**：已**固化**（D1–D4 已裁定，见 `work-zone/dev/plans/C-anp-P12.md`）；`W67` 处于 **`P67.1` 原型与设计稿 gate（待确认）**；后续 `W68` 目录子树 → `W69` 更正闭环 → P2/P3 → `W75` closeout（`v0.4.0`） |
+| **`C-anp-P12`（W67–W75）** | **进行中**：已**固化**（D1–D4 已裁定）；`W67`–`W74` **全部完成**（`W74` 已于 2026-10-02 收口，见 `work-zone/dev/plans/W-anp-P74-closeout.md`：空态 8/8 列表、资源键归属、角色名本地化、N+1 批量取数、U5 深色可读性，均含**运行期验证**）；**当前入口 `W75`（closeout + `v0.4.0` 版本推进）** |
 
 ## 三、本机 dev 环境（已跑通，可复现）
 

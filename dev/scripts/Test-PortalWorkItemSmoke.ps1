@@ -191,8 +191,14 @@ Add-WorkItemCheck `
 $adminPageOk = (Test-ContainsAll $workItemPage @(
     'Inherits="ASPNET.StarterKit.Portal.WorkItems"',
     'StatusFilterList',
-    'Current Work Items',
-    'Correction Requests'
+    # <lang>
+    #   <zh-CN>标题与链接文字已随本地化改为资源键（原先的英文硬编码文本在"本地化批次 6"中被移除），
+    #   断言因此改为校验资源键，语义覆盖不变：该页仍暴露"当前待办"区块与"更正请求"入口。</zh-CN>
+    #   <en>Section and link text became resource keys during localization (the original hard-coded English text was removed in localization batch 6),
+    #   so the assertion now checks the resource keys with identical semantic coverage: the page still exposes a current-work-items section and a correction-requests entry.</en>
+    # </lang>
+    'lang.Admin_WorkItems_SectionCurrentWorkItems',
+    'lang.Admin_WorkItems_LinkCorrectionRequests'
 )) -and (Test-ContainsAll $workItemPageCode @(
     'PortalAuthorization.EnsureAnyPermission',
     'PortalPermissionKeys.BusinessWorkItemsView',
@@ -220,9 +226,15 @@ $businessSyncOk = (Test-ContainsAll $correctionModule @(
     'MapWorkItemStatus'
 )) -and (Test-ContainsAll $correctionAdminMarkup @(
     'href="WorkItems.aspx"',
-    'Text="Approve"',
-    'Text="Cancel"',
-    'Text="Reject"'
+    # <lang>
+    #   <zh-CN>按钮文字同样已本地化（英文硬编码在"本地化批次 5"中被移除），故断言资源键而非英文文本；
+    #   语义覆盖不变：审核、关闭、驳回三个动作入口仍在。</zh-CN>
+    #   <en>Button text was localized as well (the hard-coded English was removed in localization batch 5), so the assertion checks resource keys instead of English text;
+    #   semantic coverage is unchanged: the approve, cancel, and reject action entries still exist.</en>
+    # </lang>
+    'Admin_EmployeeProfileCorrectionRequests_ButtonApprove',
+    'Admin_EmployeeProfileCorrectionRequests_ButtonCancel',
+    'Admin_EmployeeProfileCorrectionRequests_ButtonReject'
 ))
 Add-WorkItemCheck `
     -Code 'P12-WORKITEM-BUSINESS-SYNC' `
