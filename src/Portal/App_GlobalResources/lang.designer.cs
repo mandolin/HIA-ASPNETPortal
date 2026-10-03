@@ -118,12 +118,6 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Add user to this role</zh-CN>
-        ///   <en>Looks up a localized string similar to: Add user to this role</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Account profile, registration review, lifecycle, and role membership.</zh-CN>
         ///   <en>Looks up a localized string similar to: Account profile, registration review, lifecycle, and role membership.</en>
         /// </lang>
@@ -670,12 +664,6 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：System Health</zh-CN>
-        ///   <en>Looks up a localized string similar to: System Health</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Capability Permissions</zh-CN>
         ///   <en>Looks up a localized string similar to: Capability Permissions</en>
         /// </lang>
@@ -1100,12 +1088,6 @@ namespace Resources {
             }
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Catalog</zh-CN>
-        ///   <en>Looks up a localized string similar to: Module Catalog</en>
-        /// </lang>
-        /// </summary>
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：The selected module package is deployed, but it is not allowed by active module profile '{0}'.</zh-CN>
@@ -2302,18 +2284,6 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Directory</zh-CN>
-        ///   <en>Looks up a localized string similar to: Employee Directory</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Linked Content Not Provided</zh-CN>
-        ///   <en>Looks up a localized string similar to: Linked Content Not Provided</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：ASP.NET Portal Starter Kit</zh-CN>
         ///   <en>Looks up a localized string similar to: ASP.NET Portal Starter Kit</en>
         /// </lang>
@@ -2488,18 +2458,6 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Title</zh-CN>
-        ///   <en>Looks up a localized string similar to: Title</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Link Details</zh-CN>
-        ///   <en>Looks up a localized string similar to: Link Details</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a valid display order.</zh-CN>
         ///   <en>Looks up a localized string similar to: Enter a valid display order.</en>
         /// </lang>
@@ -2528,12 +2486,6 @@ namespace Resources {
             }
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Event Details</zh-CN>
-        ///   <en>Looks up a localized string similar to: Event Details</en>
-        /// </lang>
-        /// </summary>
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a valid expiration date.</zh-CN>
@@ -2770,18 +2722,6 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Document Details</zh-CN>
-        ///   <en>Looks up a localized string similar to: Document Details</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Database file storage is not enabled yet; choose server upload or enter a browse address.</zh-CN>
-        ///   <en>Looks up a localized string similar to: Database file storage is not enabled yet; choose server upload or enter a browse address.</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Browse URL</zh-CN>
         ///   <en>Looks up a localized string similar to: Browse URL</en>
         /// </lang>
@@ -2888,12 +2828,6 @@ namespace Resources {
             }
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Announcement Details</zh-CN>
-        ///   <en>Looks up a localized string similar to: Announcement Details</en>
-        /// </lang>
-        /// </summary>
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：The read-more link must be a site-local or HTTP(S) address.</zh-CN>
@@ -3764,12 +3698,6 @@ namespace Resources {
             }
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee profile confirmation</zh-CN>
-        ///   <en>Looks up a localized string similar to: Employee profile confirmation</en>
-        /// </lang>
-        /// </summary>
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：This account has no active employee profile to confirm.</zh-CN>
@@ -7870,7 +7798,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細All</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：All</zh-CN>
         ///   <en>Looks up a localized string similar to: All</en>
         /// </lang>
         /// </summary>
@@ -7882,7 +7810,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Due UTC must be empty or use yyyy-MM-dd HH:mm:ss.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Due UTC must be empty or use yyyy-MM-dd HH:mm:ss.</zh-CN>
         ///   <en>Looks up a localized string similar to: Due UTC must be empty or use yyyy-MM-dd HH:mm:ss.</en>
         /// </lang>
         /// </summary>
@@ -7894,7 +7822,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item submitted.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration item submitted.</zh-CN>
         ///   <en>Looks up a localized string similar to: Collaboration item submitted.</en>
         /// </lang>
         /// </summary>
@@ -7906,7 +7834,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid collaboration item id.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid collaboration item id.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid collaboration item id.</en>
         /// </lang>
         /// </summary>
@@ -7918,7 +7846,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Unsupported collaboration action.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Unsupported collaboration action.</zh-CN>
         ///   <en>Looks up a localized string similar to: Unsupported collaboration action.</en>
         /// </lang>
         /// </summary>
@@ -7930,7 +7858,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item state updated.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration item state updated.</zh-CN>
         ///   <en>Looks up a localized string similar to: Collaboration item state updated.</en>
         /// </lang>
         /// </summary>
@@ -7942,7 +7870,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item data service is not registered.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration item data service is not registered.</zh-CN>
         ///   <en>Looks up a localized string similar to: Collaboration item data service is not registered.</en>
         /// </lang>
         /// </summary>
@@ -7954,7 +7882,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item schema is unavailable. Run the P21.3 item migrations and P23.6 PortalBiz_CollaborationItemCommentWorkflow.sql.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration item schema is unavailable. Run the P21.3 item migrations and P23.6 PortalBiz_CollaborationItemCommentWorkflow.sql.</zh-CN>
         ///   <en>Looks up a localized string similar to: Collaboration item schema is unavailable. Run the P21.3 item migrations and P23.6 PortalBiz_CollaborationItemCommentWorkflow.sql.</en>
         /// </lang>
         /// </summary>
@@ -7966,7 +7894,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Showing up to {0} collaboration items; count: {1}.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Showing up to {0} collaboration items; count: {1}.</zh-CN>
         ///   <en>Looks up a localized string similar to: Showing up to {0} collaboration items; count: {1}.</en>
         /// </lang>
         /// </summary>
@@ -7978,7 +7906,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Collaboration item comment added.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration item comment added.</zh-CN>
         ///   <en>Looks up a localized string similar to: Collaboration item comment added.</en>
         /// </lang>
         /// </summary>
@@ -7990,7 +7918,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Binding saved; the target user old sessions will be invalidated on subsequent requests.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Binding saved; the target user old sessions will be invalidated on subsequent requests.</zh-CN>
         ///   <en>Looks up a localized string similar to: Binding saved; the target user old sessions will be invalidated on subsequent requests.</en>
         /// </lang>
         /// </summary>
@@ -8002,7 +7930,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Binding failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Binding failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Binding failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8014,7 +7942,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細There is no active binding to end.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：There is no active binding to end.</zh-CN>
         ///   <en>Looks up a localized string similar to: There is no active binding to end.</en>
         /// </lang>
         /// </summary>
@@ -8026,7 +7954,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The binding record no longer exists; reopen the page.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The binding record no longer exists; reopen the page.</zh-CN>
         ///   <en>Looks up a localized string similar to: The binding record no longer exists; reopen the page.</en>
         /// </lang>
         /// </summary>
@@ -8038,7 +7966,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Binding ended; the target user old sessions will be invalidated on subsequent requests.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Binding ended; the target user old sessions will be invalidated on subsequent requests.</zh-CN>
         ///   <en>Looks up a localized string similar to: Binding ended; the target user old sessions will be invalidated on subsequent requests.</en>
         /// </lang>
         /// </summary>
@@ -8050,7 +7978,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Ending the binding failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Ending the binding failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Ending the binding failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8062,7 +7990,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細User-employee binding services are not registered.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User-employee binding services are not registered.</zh-CN>
         ///   <en>Looks up a localized string similar to: User-employee binding services are not registered.</en>
         /// </lang>
         /// </summary>
@@ -8074,7 +8002,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 employee binding schema is unavailable. Run the P6.3 SQL scripts before editing bindings.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：P6.3 employee binding schema is unavailable. Run the P6.3 SQL scripts before editing bindings.</zh-CN>
         ///   <en>Looks up a localized string similar to: P6.3 employee binding schema is unavailable. Run the P6.3 SQL scripts before editing bindings.</en>
         /// </lang>
         /// </summary>
@@ -8086,7 +8014,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細User not found.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：User not found.</zh-CN>
         ///   <en>Looks up a localized string similar to: User not found.</en>
         /// </lang>
         /// </summary>
@@ -8098,7 +8026,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細No active binding.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No active binding.</zh-CN>
         ///   <en>Looks up a localized string similar to: No active binding.</en>
         /// </lang>
         /// </summary>
@@ -8110,7 +8038,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Enter a valid Portal User ID.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Enter a valid Portal User ID.</zh-CN>
         ///   <en>Looks up a localized string similar to: Enter a valid Portal User ID.</en>
         /// </lang>
         /// </summary>
@@ -8122,7 +8050,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Unavailable.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Unavailable.</zh-CN>
         ///   <en>Looks up a localized string similar to: Unavailable.</en>
         /// </lang>
         /// </summary>
@@ -8134,7 +8062,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Unsupported request status.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Unsupported request status.</zh-CN>
         ///   <en>Looks up a localized string similar to: Unsupported request status.</en>
         /// </lang>
         /// </summary>
@@ -8146,7 +8074,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee-profile correction request data service is not registered.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee-profile correction request data service is not registered.</zh-CN>
         ///   <en>Looks up a localized string similar to: Employee-profile correction request data service is not registered.</en>
         /// </lang>
         /// </summary>
@@ -8158,7 +8086,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid request id.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid request id.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid request id.</en>
         /// </lang>
         /// </summary>
@@ -8170,7 +8098,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Correction request status updated.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Correction request status updated.</zh-CN>
         ///   <en>Looks up a localized string similar to: Correction request status updated.</en>
         /// </lang>
         /// </summary>
@@ -8182,7 +8110,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.4 employee-profile correction request schema is unavailable. Run PortalBiz_EmployeeProfileCorrectionRequests.sql.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：P6.4 employee-profile correction request schema is unavailable. Run PortalBiz_EmployeeProfileCorrectionRequests.sql.</zh-CN>
         ///   <en>Looks up a localized string similar to: P6.4 employee-profile correction request schema is unavailable. Run PortalBiz_EmployeeProfileCorrectionRequests.sql.</en>
         /// </lang>
         /// </summary>
@@ -8194,7 +8122,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Showing up to {0} requests; count: {1}.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Showing up to {0} requests; count: {1}.</zh-CN>
         ///   <en>Looks up a localized string similar to: Showing up to {0} requests; count: {1}.</en>
         /// </lang>
         /// </summary>
@@ -8206,7 +8134,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Active</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Active</zh-CN>
         ///   <en>Looks up a localized string similar to: Active</en>
         /// </lang>
         /// </summary>
@@ -8218,7 +8146,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee-directory data service is not registered.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee-directory data service is not registered.</zh-CN>
         ///   <en>Looks up a localized string similar to: Employee-directory data service is not registered.</en>
         /// </lang>
         /// </summary>
@@ -8230,7 +8158,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 employee-directory schema is unavailable. Run the P6.3 SQL scripts in an isolated database before expecting data.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：P6.3 employee-directory schema is unavailable. Run the P6.3 SQL scripts in an isolated database before expecting data.</zh-CN>
         ///   <en>Looks up a localized string similar to: P6.3 employee-directory schema is unavailable. Run the P6.3 SQL scripts in an isolated database before expecting data.</en>
         /// </lang>
         /// </summary>
@@ -8242,7 +8170,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 schema available. This page is read-only.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：P6.3 schema available. This page is read-only.</zh-CN>
         ///   <en>Looks up a localized string similar to: P6.3 schema available. This page is read-only.</en>
         /// </lang>
         /// </summary>
@@ -8254,7 +8182,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 schema unavailable.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：P6.3 schema unavailable.</zh-CN>
         ///   <en>Looks up a localized string similar to: P6.3 schema unavailable.</en>
         /// </lang>
         /// </summary>
@@ -8266,7 +8194,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Showing up to {0} rows per section; organizations: {1}, employees: {2}, bindings: {3}.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Showing up to {0} rows per section; organizations: {1}, employees: {2}, bindings: {3}.</zh-CN>
         ///   <en>Looks up a localized string similar to: Showing up to {0} rows per section; organizations: {1}, employees: {2}, bindings: {3}.</en>
         /// </lang>
         /// </summary>
@@ -8278,7 +8206,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a validated deployed global theme.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Select a validated deployed global theme.</zh-CN>
         ///   <en>Looks up a localized string similar to: Select a validated deployed global theme.</en>
         /// </lang>
         /// </summary>
@@ -8290,7 +8218,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a portal tab before applying an override.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Select a portal tab before applying an override.</zh-CN>
         ///   <en>Looks up a localized string similar to: Select a portal tab before applying an override.</en>
         /// </lang>
         /// </summary>
@@ -8302,7 +8230,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a portal tab before clearing an override.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Select a portal tab before clearing an override.</zh-CN>
         ///   <en>Looks up a localized string similar to: Select a portal tab before clearing an override.</en>
         /// </lang>
         /// </summary>
@@ -8314,7 +8242,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細No portal tab is available.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No portal tab is available.</zh-CN>
         ///   <en>Looks up a localized string similar to: No portal tab is available.</en>
         /// </lang>
         /// </summary>
@@ -8326,7 +8254,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The tab-theme migration has not been applied.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The tab-theme migration has not been applied.</zh-CN>
         ///   <en>Looks up a localized string similar to: The tab-theme migration has not been applied.</en>
         /// </lang>
         /// </summary>
@@ -8338,7 +8266,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Global theme applies.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Global theme applies.</zh-CN>
         ///   <en>Looks up a localized string similar to: Global theme applies.</en>
         /// </lang>
         /// </summary>
@@ -8350,7 +8278,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Diagnostic detail viewing is disabled by deployment configuration.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Diagnostic detail viewing is disabled by deployment configuration.</zh-CN>
         ///   <en>Looks up a localized string similar to: Diagnostic detail viewing is disabled by deployment configuration.</en>
         /// </lang>
         /// </summary>
@@ -8362,7 +8290,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The requested diagnostic event was not found in structured logs.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The requested diagnostic event was not found in structured logs.</zh-CN>
         ///   <en>Looks up a localized string similar to: The requested diagnostic event was not found in structured logs.</en>
         /// </lang>
         /// </summary>
@@ -8374,7 +8302,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid module definition name; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid module definition name; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid module definition name; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -8386,7 +8314,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Saving the module definition failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Saving the module definition failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Saving the module definition failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8398,7 +8326,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細This module definition is still used by {0} module instance(s). Disable, migrate, or explicitly clean those instances first.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This module definition is still used by {0} module instance(s). Disable, migrate, or explicitly clean those instances first.</zh-CN>
         ///   <en>Looks up a localized string similar to: This module definition is still used by {0} module instance(s). Disable, migrate, or explicitly clean those instances first.</en>
         /// </lang>
         /// </summary>
@@ -8410,7 +8338,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the module definition failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Deleting the module definition failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Deleting the module definition failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8422,7 +8350,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid site name; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid site name; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid site name; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -8434,7 +8362,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Saving site settings failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Saving site settings failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Saving site settings failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8444,12 +8372,6 @@ namespace Resources {
             }
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a valid user.</zh-CN>
-        ///   <en>Looks up a localized string similar to: Select a valid user.</en>
-        /// </lang>
-        /// </summary>
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Role Membership</zh-CN>
@@ -8554,7 +8476,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Adding the role member failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Adding the role member failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Adding the role member failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8566,7 +8488,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Removing the role member failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Removing the role member failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Removing the role member failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8578,7 +8500,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid module name or cache seconds; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid module name or cache seconds; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid module name or cache seconds; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -8590,7 +8512,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Saving module settings failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Saving module settings failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Saving module settings failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8602,7 +8524,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Reordering tabs failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Reordering tabs failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Reordering tabs failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8614,7 +8536,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The core Admin tab cannot be deleted.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The core Admin tab cannot be deleted.</zh-CN>
         ///   <en>Looks up a localized string similar to: The core Admin tab cannot be deleted.</en>
         /// </lang>
         /// </summary>
@@ -8626,7 +8548,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the tab failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Deleting the tab failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Deleting the tab failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8638,7 +8560,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Creating the tab failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Creating the tab failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Creating the tab failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8650,7 +8572,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the user failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Deleting the user failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Deleting the user failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8662,7 +8584,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The new user could not be created; the write was not completed.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The new user could not be created; the write was not completed.</zh-CN>
         ///   <en>Looks up a localized string similar to: The new user could not be created; the write was not completed.</en>
         /// </lang>
         /// </summary>
@@ -8674,7 +8596,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a valid user.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Select a valid user.</zh-CN>
         ///   <en>Looks up a localized string similar to: Select a valid user.</en>
         /// </lang>
         /// </summary>
@@ -8686,7 +8608,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Data binding failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Data binding failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Data binding failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -8698,7 +8620,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細P6.3 schema is unavailable.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：P6.3 schema is unavailable.</zh-CN>
         ///   <en>Looks up a localized string similar to: P6.3 schema is unavailable.</en>
         /// </lang>
         /// </summary>
@@ -8708,18 +8630,6 @@ namespace Resources {
             }
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee save failed; the system recorded this error. Event id: {0}</zh-CN>
-        ///   <en>Looks up a localized string similar to: Employee save failed; the system recorded this error. Event id: {0}</en>
-        /// </lang>
-        /// </summary>
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>查找类似以下内容的本地化字符串：Maintain employee master data used by directory, binding, and profile workflows.</zh-CN>
-        ///   <en>Looks up a localized string similar to: Maintain employee master data used by directory, binding, and profile workflows.</en>
-        /// </lang>
-        /// </summary>
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Employee id is invalid.</zh-CN>
@@ -8878,7 +8788,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細New Employee</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：New Employee</zh-CN>
         ///   <en>Looks up a localized string similar to: New Employee</en>
         /// </lang>
         /// </summary>
@@ -8890,7 +8800,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Edit Employee: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit Employee: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Edit Employee: {0}</en>
         /// </lang>
         /// </summary>
@@ -8902,7 +8812,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee</zh-CN>
         ///   <en>Looks up a localized string similar to: Employee</en>
         /// </lang>
         /// </summary>
@@ -8912,12 +8822,6 @@ namespace Resources {
             }
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Organization unit save failed; the system recorded this error. Event id: {0}</zh-CN>
-        ///   <en>Looks up a localized string similar to: Organization unit save failed; the system recorded this error. Event id: {0}</en>
-        /// </lang>
-        /// </summary>
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Maintain organization units used by employee directory grouping and profile workflows.</zh-CN>
@@ -9046,7 +8950,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細New Organization Unit</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：New Organization Unit</zh-CN>
         ///   <en>Looks up a localized string similar to: New Organization Unit</en>
         /// </lang>
         /// </summary>
@@ -9058,7 +8962,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Edit Organization Unit: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Edit Organization Unit: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Edit Organization Unit: {0}</en>
         /// </lang>
         /// </summary>
@@ -9070,7 +8974,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Organization Unit</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Organization Unit</zh-CN>
         ///   <en>Looks up a localized string similar to: Organization Unit</en>
         /// </lang>
         /// </summary>
@@ -9082,7 +8986,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid module name; the module was not created.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid module name; the module was not created.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid module name; the module was not created.</en>
         /// </lang>
         /// </summary>
@@ -9094,7 +8998,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Creating the module failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Creating the module failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Creating the module failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9106,7 +9010,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Reordering modules failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Reordering modules failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Reordering modules failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9118,7 +9022,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Moving the module failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Moving the module failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Moving the module failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9130,7 +9034,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the module failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Deleting the module failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Deleting the module failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9142,7 +9046,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid tab name; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid tab name; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid tab name; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9154,7 +9058,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The core Admin tab cannot be renamed.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The core Admin tab cannot be renamed.</zh-CN>
         ///   <en>Looks up a localized string similar to: The core Admin tab cannot be renamed.</en>
         /// </lang>
         /// </summary>
@@ -9166,7 +9070,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Saving tab settings failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Saving tab settings failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Saving tab settings failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9178,7 +9082,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The role was added to the current user.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The role was added to the current user.</zh-CN>
         ///   <en>Looks up a localized string similar to: The role was added to the current user.</en>
         /// </lang>
         /// </summary>
@@ -9190,7 +9094,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Adding the role failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Adding the role failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Adding the role failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9202,7 +9106,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid email format; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid email format; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid email format; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9214,7 +9118,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid login-name format; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid login-name format; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid login-name format; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9226,7 +9130,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid display-name format; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid display-name format; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid display-name format; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9238,7 +9142,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid nickname format; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid nickname format; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid nickname format; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9250,7 +9154,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The two entered passwords do not match; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The two entered passwords do not match; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: The two entered passwords do not match; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9262,7 +9166,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Updating the profile failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Updating the profile failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Updating the profile failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9274,7 +9178,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The password submission was incomplete; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The password submission was incomplete; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: The password submission was incomplete; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9286,7 +9190,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Password submission verification failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Password submission verification failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Password submission verification failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9298,7 +9202,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Password submission verification failed; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Password submission verification failed; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Password submission verification failed; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9310,7 +9214,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration approved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registration approved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Registration approved.</en>
         /// </lang>
         /// </summary>
@@ -9322,7 +9226,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Approving the registration failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Approving the registration failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Approving the registration failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9334,7 +9238,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration rejected.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registration rejected.</zh-CN>
         ///   <en>Looks up a localized string similar to: Registration rejected.</en>
         /// </lang>
         /// </summary>
@@ -9346,7 +9250,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Rejecting the registration failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Rejecting the registration failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Rejecting the registration failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9358,7 +9262,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Select a valid role.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Select a valid role.</zh-CN>
         ///   <en>Looks up a localized string similar to: Select a valid role.</en>
         /// </lang>
         /// </summary>
@@ -9370,7 +9274,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細You cannot disable your own account in the current session.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：You cannot disable your own account in the current session.</zh-CN>
         ///   <en>Looks up a localized string similar to: You cannot disable your own account in the current session.</en>
         /// </lang>
         /// </summary>
@@ -9382,7 +9286,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細This account's registration request was rejected; use the approve action to restore it first.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This account's registration request was rejected; use the approve action to restore it first.</zh-CN>
         ///   <en>Looks up a localized string similar to: This account's registration request was rejected; use the approve action to restore it first.</en>
         /// </lang>
         /// </summary>
@@ -9392,12 +9296,6 @@ namespace Resources {
             }
         }
 
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細'Password' and 'Confirm Password' must not be left blank.</zh-CN>
-        ///   <en>Looks up a localized string similar to: 'Password' and 'Confirm Password' must not be left blank.</en>
-        /// </lang>
-        /// </summary>
         /// <summary>
         /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Create a New Account</zh-CN>
@@ -9562,7 +9460,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Password fields do not match.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Password fields do not match.</zh-CN>
         ///   <en>Looks up a localized string similar to: Password fields do not match.</en>
         /// </lang>
         /// </summary>
@@ -9574,7 +9472,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Employee Code is required for invitation registration.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Code is required for invitation registration.</zh-CN>
         ///   <en>Looks up a localized string similar to: Employee Code is required for invitation registration.</en>
         /// </lang>
         /// </summary>
@@ -9586,7 +9484,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration failed. The system recorded this error. Event ID: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registration failed. The system recorded this error. Event ID: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Registration failed. The system recorded this error. Event ID: {0}</en>
         /// </lang>
         /// </summary>
@@ -9598,7 +9496,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration submitted. Please wait for administrator approval.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registration submitted. Please wait for administrator approval.</zh-CN>
         ///   <en>Looks up a localized string similar to: Registration submitted. Please wait for administrator approval.</en>
         /// </lang>
         /// </summary>
@@ -9610,7 +9508,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Registration failed. The user name or email may already exist, or registration metadata is not available.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Registration failed. The user name or email may already exist, or registration metadata is not available.</zh-CN>
         ///   <en>Looks up a localized string similar to: Registration failed. The user name or email may already exist, or registration metadata is not available.</en>
         /// </lang>
         /// </summary>
@@ -9622,7 +9520,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The password submission was incomplete; refresh the page and try again.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The password submission was incomplete; refresh the page and try again.</zh-CN>
         ///   <en>Looks up a localized string similar to: The password submission was incomplete; refresh the page and try again.</en>
         /// </lang>
         /// </summary>
@@ -9634,7 +9532,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Password submission verification failed; refresh the page and try again.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Password submission verification failed; refresh the page and try again.</zh-CN>
         ///   <en>Looks up a localized string similar to: Password submission verification failed; refresh the page and try again.</en>
         /// </lang>
         /// </summary>
@@ -9646,7 +9544,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Creating the role failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Creating the role failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Creating the role failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9658,7 +9556,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Invalid role name; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Invalid role name; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: Invalid role name; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9670,7 +9568,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細A role with the same name already exists in this portal; the change was not saved.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：A role with the same name already exists in this portal; the change was not saved.</zh-CN>
         ///   <en>Looks up a localized string similar to: A role with the same name already exists in this portal; the change was not saved.</en>
         /// </lang>
         /// </summary>
@@ -9682,7 +9580,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The core administrator role cannot be renamed.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The core administrator role cannot be renamed.</zh-CN>
         ///   <en>Looks up a localized string similar to: The core administrator role cannot be renamed.</en>
         /// </lang>
         /// </summary>
@@ -9694,7 +9592,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Renaming the role failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Renaming the role failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Renaming the role failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
@@ -9706,7 +9604,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The core administrator role cannot be deleted.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The core administrator role cannot be deleted.</zh-CN>
         ///   <en>Looks up a localized string similar to: The core administrator role cannot be deleted.</en>
         /// </lang>
         /// </summary>
@@ -9718,7 +9616,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The role still has members and cannot be deleted.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The role still has members and cannot be deleted.</zh-CN>
         ///   <en>Looks up a localized string similar to: The role still has members and cannot be deleted.</en>
         /// </lang>
         /// </summary>
@@ -9730,7 +9628,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細The role is still referenced by tabs or modules and cannot be deleted.</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The role is still referenced by tabs or modules and cannot be deleted.</zh-CN>
         ///   <en>Looks up a localized string similar to: The role is still referenced by tabs or modules and cannot be deleted.</en>
         /// </lang>
         /// </summary>
@@ -9742,7 +9640,7 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>鏌ユ壘绫讳技浠ヤ笅鍐呭鐨勬湰鍦板寲瀛楃涓诧細Deleting the role failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Deleting the role failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Deleting the role failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
         /// </summary>
