@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web.UI.WebControls;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -196,7 +197,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Legacy data and DataBinder may represent a missing date as either null or DBNull, so both need the same placeholder output.</en>
             // </lang>
             if (dateObj == null || dateObj == DBNull.Value)
-                return "未知时间";
+                return lang.Legacy_Discussion_UnknownDate;
 
             // <lang>
             //   <zh-CN>格式化只发生在服务器端，返回值随后进入普通文本节点，不携带 HTML 标记。</zh-CN>

@@ -1,4 +1,5 @@
 using System;
+using Resources;
 using System.IO;
 using System.Web.UI;
 
@@ -59,7 +60,7 @@ namespace ASPNET.StarterKit.Portal
             }
             else if (!string.IsNullOrWhiteSpace(Settings["xmlsrc"] as string))
             {
-                AddConfigurationMessage("XML 数据文件当前不可用。");
+                AddConfigurationMessage(lang.Legacy_XmlModule_MessageXmlUnavailable);
             }
 
             // <lang>
@@ -77,7 +78,7 @@ namespace ASPNET.StarterKit.Portal
             }
             else if (!string.IsNullOrWhiteSpace(Settings["xslsrc"] as string))
             {
-                AddConfigurationMessage("XSL/T 转换文件当前不可用。");
+                AddConfigurationMessage(lang.Legacy_XmlModule_MessageXsltUnavailable);
             }
         }
 

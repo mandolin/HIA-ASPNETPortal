@@ -1,4 +1,5 @@
 using System;
+using Resources;
 using System.Web.UI;
 
 namespace ASPNET.StarterKit.Portal
@@ -49,7 +50,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The token is rendered only when it matches the diagnostics-id contract, and is HTML-encoded before reaching the markup expression; invalid or missing values fall back to low-sensitivity text.</en>
             // </lang>
             EventIdText = Server.HtmlEncode(
-                PortalDiagnosticQueryService.IsValidEventId(eventId) ? eventId : "未提供");
+                PortalDiagnosticQueryService.IsValidEventId(eventId) ? eventId : lang.GenericError_EventIdNotProvided);
         }
     }
 }

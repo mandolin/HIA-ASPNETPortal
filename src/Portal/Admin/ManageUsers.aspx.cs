@@ -711,8 +711,8 @@ namespace ASPNET.StarterKit.Portal
                 PortalUserProfileStatuses.Disabled,
                 PortalOperationAuditEvents.UserDisabled,
                 "User account disabled by administrator.",
-                "账号已禁用。",
-                "禁用账号失败，系统已记录本次错误。事件编号：");
+                lang.Admin_ManageUsers_MessageUserDisabled,
+                lang.Admin_ManageUsers_MessageUserDisabledFailed);
         }
 
         /// <summary>
@@ -739,8 +739,8 @@ namespace ASPNET.StarterKit.Portal
                 PortalUserProfileStatuses.Active,
                 PortalOperationAuditEvents.UserRestored,
                 "User account restored by administrator.",
-                "账号已恢复启用。",
-                "恢复启用失败，系统已记录本次错误。事件编号：");
+                lang.Admin_ManageUsers_MessageUserRestored,
+                lang.Admin_ManageUsers_MessageUserRestoredFailed);
         }
 
         /// <summary>

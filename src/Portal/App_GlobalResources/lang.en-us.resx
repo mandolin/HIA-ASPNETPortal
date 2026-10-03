@@ -1791,4 +1791,34 @@
   <data name="EmployeeProfileCorrectionRequest_MessageUserNotResolved" xml:space="preserve">
     <value>The current sign-in account cannot be resolved to a portal user.</value>
   </data>
+  <data name="Legacy_Discussion_UnknownDate" xml:space="preserve">
+    <value>Unknown date</value>
+  </data>
+  <data name="Legacy_Discussion_AnonymousAuthor" xml:space="preserve">
+    <value>Anonymous</value>
+  </data>
+  <data name="Legacy_XmlModule_MessageXmlUnavailable" xml:space="preserve">
+    <value>The XML data file is currently unavailable.</value>
+  </data>
+  <data name="Legacy_XmlModule_MessageXsltUnavailable" xml:space="preserve">
+    <value>The XSL/T transform file is currently unavailable.</value>
+  </data>
+  <data name="GenericError_EventIdNotProvided" xml:space="preserve">
+    <value>Not provided</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageUserDisabled" xml:space="preserve">
+    <value>The account has been disabled.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageUserDisabledFailed" xml:space="preserve">
+    <value>Failed to disable the account; the error has been recorded. Event id:</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageUserRestored" xml:space="preserve">
+    <value>The account has been restored.</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageUserRestoredFailed" xml:space="preserve">
+    <value>Failed to restore the account; the error has been recorded. Event id:</value>
+  </data>
+  <data name="EditDocs_UploadPolicyHintFormat" xml:space="preserve">
+    <value>{0}; allowed extensions: {1}. Server uploads are renamed and saved to {2}.</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Practices.Unity;
 using Unity;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -359,8 +360,8 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             Subject.Text = EncodeDisplayText(item.Title);
             Body.Text = EncodeDisplayText(item.Body);
-            CreatedByUser.Text = EncodeDisplayText(item.CreatedByUser ?? "匿名");
-            CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("d") : "未知时间";
+            CreatedByUser.Text = EncodeDisplayText(item.CreatedByUser ?? lang.Legacy_Discussion_AnonymousAuthor);
+            CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("d") : lang.Legacy_Discussion_UnknownDate;
 
             // <lang>
             //   <zh-CN>回复标题使用解码后的主题文本生成，避免把历史实体文本继续累积到输入框中。</zh-CN>

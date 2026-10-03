@@ -10081,5 +10081,125 @@ namespace Resources {
                 return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageUserNotResolved", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：未知时间</zh-CN>
+        ///   <en>Looks up a localized string similar to: Unknown date</en>
+        /// </lang>
+        /// </summary>
+        internal static string Legacy_Discussion_UnknownDate {
+            get {
+                return ResourceManager.GetString("Legacy_Discussion_UnknownDate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：匿名</zh-CN>
+        ///   <en>Looks up a localized string similar to: Anonymous</en>
+        /// </lang>
+        /// </summary>
+        internal static string Legacy_Discussion_AnonymousAuthor {
+            get {
+                return ResourceManager.GetString("Legacy_Discussion_AnonymousAuthor", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：XML 数据文件当前不可用。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The XML data file is currently unavailable.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Legacy_XmlModule_MessageXmlUnavailable {
+            get {
+                return ResourceManager.GetString("Legacy_XmlModule_MessageXmlUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：XSL/T 转换文件当前不可用。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The XSL/T transform file is currently unavailable.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Legacy_XmlModule_MessageXsltUnavailable {
+            get {
+                return ResourceManager.GetString("Legacy_XmlModule_MessageXsltUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：未提供</zh-CN>
+        ///   <en>Looks up a localized string similar to: Not provided</en>
+        /// </lang>
+        /// </summary>
+        internal static string GenericError_EventIdNotProvided {
+            get {
+                return ResourceManager.GetString("GenericError_EventIdNotProvided", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：账号已禁用。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The account has been disabled.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageUserDisabled {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageUserDisabled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：禁用账号失败，系统已记录本次错误。事件编号：</zh-CN>
+        ///   <en>Looks up a localized string similar to: Failed to disable the account; the error has been recorded. Event id:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageUserDisabledFailed {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageUserDisabledFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：账号已恢复启用。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The account has been restored.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageUserRestored {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageUserRestored", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：恢复启用失败，系统已记录本次错误。事件编号：</zh-CN>
+        ///   <en>Looks up a localized string similar to: Failed to restore the account; the error has been recorded. Event id:</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ManageUsers_MessageUserRestoredFailed {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageUserRestoredFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：{0}；允许扩展名：{1}。服务器上传会重命名后保存到 {2}。</zh-CN>
+        ///   <en>Looks up a localized string similar to: {0}; allowed extensions: {1}. Server uploads are renamed and saved to {2}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EditDocs_UploadPolicyHintFormat {
+            get {
+                return ResourceManager.GetString("EditDocs_UploadPolicyHintFormat", resourceCulture);
+            }
+        }
     }
 }

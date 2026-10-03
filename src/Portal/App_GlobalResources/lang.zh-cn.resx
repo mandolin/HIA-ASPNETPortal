@@ -2640,4 +2640,34 @@
   <data name="EmployeeProfileCorrectionRequest_MessageUserNotResolved" xml:space="preserve">
     <value>当前登录账号无法解析到门户用户。</value>
   </data>
+  <data name="Legacy_Discussion_UnknownDate" xml:space="preserve">
+    <value>未知时间</value>
+  </data>
+  <data name="Legacy_Discussion_AnonymousAuthor" xml:space="preserve">
+    <value>匿名</value>
+  </data>
+  <data name="Legacy_XmlModule_MessageXmlUnavailable" xml:space="preserve">
+    <value>XML 数据文件当前不可用。</value>
+  </data>
+  <data name="Legacy_XmlModule_MessageXsltUnavailable" xml:space="preserve">
+    <value>XSL/T 转换文件当前不可用。</value>
+  </data>
+  <data name="GenericError_EventIdNotProvided" xml:space="preserve">
+    <value>未提供</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageUserDisabled" xml:space="preserve">
+    <value>账号已禁用。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageUserDisabledFailed" xml:space="preserve">
+    <value>禁用账号失败，系统已记录本次错误。事件编号：</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageUserRestored" xml:space="preserve">
+    <value>账号已恢复启用。</value>
+  </data>
+  <data name="Admin_ManageUsers_MessageUserRestoredFailed" xml:space="preserve">
+    <value>恢复启用失败，系统已记录本次错误。事件编号：</value>
+  </data>
+  <data name="EditDocs_UploadPolicyHintFormat" xml:space="preserve">
+    <value>{0}；允许扩展名：{1}。服务器上传会重命名后保存到 {2}。</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using Microsoft.Practices.Unity;
 using Unity;
@@ -342,9 +343,12 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             storeInDatabase.Checked = false;
             storeInDatabase.Enabled = false;
-            UploadPolicyHint.Text = lang.EditDocs_UploadSizeLimitPrefix + PortalDocumentPolicy.GetMaximumUploadSizeDisplayText() +
-                                    "；允许扩展名：" + PortalDocumentPolicy.GetAllowedExtensionsDisplayText() +
-                                    "。服务器上传会重命名后保存到 " + PortalDocumentPolicy.UploadVirtualDirectory + "。";
+            UploadPolicyHint.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.EditDocs_UploadPolicyHintFormat,
+                lang.EditDocs_UploadSizeLimitPrefix + PortalDocumentPolicy.GetMaximumUploadSizeDisplayText(),
+                PortalDocumentPolicy.GetAllowedExtensionsDisplayText(),
+                PortalDocumentPolicy.UploadVirtualDirectory);
         }
 
         /// <summary>
