@@ -2631,4 +2631,13 @@
   <data name="Collaboration_ParticipantDisplayFormat" xml:space="preserve">
     <value>{0}（{1}）</value>
   </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSignInRequired" xml:space="preserve">
+    <value>请先登录后再提交员工资料更正请求。</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSchemaUnavailable" xml:space="preserve">
+    <value>员工资料更正请求模块尚未完成数据库初始化。</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageUserNotResolved" xml:space="preserve">
+    <value>当前登录账号无法解析到门户用户。</value>
+  </data>
 </root>

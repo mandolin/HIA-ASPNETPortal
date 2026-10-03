@@ -460,7 +460,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (!IsCurrentUserAuthenticated())
             {
-                return "请先登录后再提交员工资料更正请求。";
+                return lang.EmployeeProfileCorrectionRequest_MessageSignInRequired;
             }
 
             // <lang>
@@ -469,15 +469,19 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (CorrectionRequestDb == null || !CorrectionRequestDb.IsSchemaAvailable())
             {
-                return "员工资料更正请求模块尚未完成数据库初始化。";
+                return lang.EmployeeProfileCorrectionRequest_MessageSchemaUnavailable;
             }
 
             // <lang>
             //   <zh-CN>最后区分用户解析失败与没有在职绑定，保持前台提示低敏且可行动。</zh-CN>
             //   <en>Finally distinguish user-resolution failure from the absence of an active binding while keeping the front-end message low sensitivity and actionable.</en>
             // </lang>
+            // <lang>
+            //   <zh-CN>三条前台提示自 2026-10-04 起一律走资源键：此前前三条是**硬编码中文字面量**、第四条已是资源键，同一方法混用两种来源 —— 英文界面下只要走到前三条就会露出中文。中文值与原字面量逐字相同，故中文界面零可见变化。</zh-CN>
+            //   <en>Since 2026-10-04 all three front-end messages come from resource keys: the first three were **hard-coded Chinese literals** while the fourth already used a key, so one method mixed two sources and any path reaching the first three would show Chinese in the English UI. The Chinese values are character-for-character identical to the former literals, so the Chinese UI shows no visible change.</en>
+            // </lang>
             return userId <= 0
-                ? "当前登录账号无法解析到门户用户。"
+                ? lang.EmployeeProfileCorrectionRequest_MessageUserNotResolved
                 : lang.EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile;
         }
 

@@ -10147,5 +10147,41 @@ namespace Resources {
                 return ResourceManager.GetString("Collaboration_ParticipantDisplayFormat", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：请先登录后再提交员工资料更正请求。</zh-CN>
+        ///   <en>Looks up a localized string similar to: Please sign in before submitting an employee-profile correction request.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_MessageSignInRequired {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageSignInRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：员工资料更正请求模块尚未完成数据库初始化。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The employee-profile correction request module has not finished database initialization.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageSchemaUnavailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：当前登录账号无法解析到门户用户。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The current sign-in account cannot be resolved to a portal user.</en>
+        /// </lang>
+        /// </summary>
+        internal static string EmployeeProfileCorrectionRequest_MessageUserNotResolved {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageUserNotResolved", resourceCulture);
+            }
+        }
     }
 }

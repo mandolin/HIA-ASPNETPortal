@@ -1782,4 +1782,13 @@
   <data name="Collaboration_ParticipantDisplayFormat" xml:space="preserve">
     <value>{0} ({1})</value>
   </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSignInRequired" xml:space="preserve">
+    <value>Please sign in before submitting an employee-profile correction request.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSchemaUnavailable" xml:space="preserve">
+    <value>The employee-profile correction request module has not finished database initialization.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageUserNotResolved" xml:space="preserve">
+    <value>The current sign-in account cannot be resolved to a portal user.</value>
+  </data>
 </root>
