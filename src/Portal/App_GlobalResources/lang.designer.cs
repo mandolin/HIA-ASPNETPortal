@@ -9652,6 +9652,30 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Actions</zh-CN>
+        ///   <en>Looks up a localized string similar to: Actions</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnActions {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnActions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Participants</zh-CN>
+        ///   <en>Looks up a localized string similar to: Participants</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_CollaborationItems_ColumnParticipants {
+            get {
+                return ResourceManager.GetString("Admin_CollaborationItems_ColumnParticipants", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：UTC</zh-CN>
         ///   <en>Looks up a localized string similar to: UTC</en>
         /// </lang>

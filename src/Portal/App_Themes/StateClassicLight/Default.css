@@ -1320,6 +1320,16 @@ body.portal-theme-stateclassiclight input.portal-primary-action:hover {
     margin-bottom: 5px;
 }
 
+/* <lang>
+ *   <zh-CN>协同事项后台参与人列：用户标识输入框与角色下拉都按相对宽度充满所在列。文本框默认是 content-box，
+ *   主题层给 <c>input[type="text"]</c> 的内边距与边框会**叠加在 100% 之外**，实测每侧多 8px（合 16px），
+ *   控件因此比单元格内容框还宽并溢出格子；显式改为 border-box 后宽度才真正等于列宽。意见框已由 .portal-review-note 同样处理。</zh-CN>
+ *   <en>Collaboration-items admin participants column: both the user-id input and the role dropdown fill their column through relative widths. A text input is content-box by default, so the theme's padding and border for <c>input[type="text"]</c> are **added on top of** the 100%, measured at 8px per side (16px in total), which made the control wider than the cell content box and overflow the cell; declaring border-box makes the width equal the column width again. The comment box already receives the same treatment from .portal-review-note.</en>
+ * </lang> */
+body.portal-theme-stateclassiclight .portal-participant-actions .NormalTextBox {
+    box-sizing: border-box;
+}
+
 .portal-user-summary-grid .portal-admin-summary-item {
     width: 33%;
 }

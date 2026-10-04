@@ -2475,6 +2475,12 @@
   <data name="Admin_Roles_MessageDeleteFailed" xml:space="preserve">
     <value>角色删除失败，系统已记录本次错误。事件编号：{0}</value>
   </data>
+  <data name="Admin_CollaborationItems_ColumnActions" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Admin_CollaborationItems_ColumnParticipants" xml:space="preserve">
+    <value>参与人</value>
+  </data>
   <data name="MyWorkItems_ColumnType" xml:space="preserve">
     <value>类型</value>
   </data>
