@@ -748,7 +748,7 @@ namespace ASPNET.StarterKit.Portal
             ItemCode = EmptyToNone(item.ItemCode);
             Title = EmptyToNone(item.Title);
             ItemStatus = EmptyToNone(item.ItemStatus);
-            StatusText = item.IsOverdue ? ItemStatus + " / Overdue" : ItemStatus;
+            StatusText = item.IsOverdue ? ItemStatus + lang.Common_OverdueSuffix : ItemStatus;
             PriorityKey = EmptyToNone(item.PriorityKey);
             LastActionUtcText = item.LastActionUtc.HasValue
                 ? item.LastActionUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)

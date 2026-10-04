@@ -1821,4 +1821,19 @@
   <data name="EditDocs_UploadPolicyHintFormat" xml:space="preserve">
     <value>{0}; allowed extensions: {1}. Server uploads are renamed and saved to {2}.</value>
   </data>
+  <data name="Common_OverdueSuffix" xml:space="preserve">
+    <value>(Overdue)</value>
+  </data>
+  <data name="Admin_BusinessApplications_ApplicantFormat" xml:space="preserve">
+    <value>Applicant: {0} ({1})</value>
+  </data>
+  <data name="Admin_BusinessApplications_ReviewFormat" xml:space="preserve">
+    <value>Reviewed on {0} by {1}; note: {2}</value>
+  </data>
+  <data name="Admin_BusinessApplications_NotReviewed" xml:space="preserve">
+    <value>(not reviewed)</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_NotReviewed" xml:space="preserve">
+    <value>(not reviewed)</value>
+  </data>
 </root>

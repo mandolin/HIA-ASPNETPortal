@@ -1055,7 +1055,7 @@ namespace ASPNET.StarterKit.Portal
 
             IUserEmployeeBindingInfo binding = EmployeeDirectoryDb.GetActiveBindingByUserId(currentUserId);
             EmployeeBindingText.Text = binding == null
-                ? "(none)"
+                ? lang.Common_NonePlaceholder
                 : EncodeDisplay(binding.EmployeeCode + " / " + binding.EmployeeDisplayName);
         }
 
@@ -1579,7 +1579,7 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static string EmptyToNone(string value)
         {
-            return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
         }
 
         /// <summary>
@@ -1648,7 +1648,7 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static string FormatUtc(DateTime? value)
         {
-            return value.HasValue ? FormatUtc(value.Value) : "(none)";
+            return value.HasValue ? FormatUtc(value.Value) : lang.Common_NonePlaceholder;
         }
     }
 }

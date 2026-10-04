@@ -630,7 +630,7 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>空展示值统一替换为固定占位符，避免页面在空值和缺失状态间产生歧义。</zh-CN>
             //   <en>Replace blank display values with one fixed placeholder so the page does not confuse blank and unavailable states.</en>
             // </lang>
-            return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
         }
 
         /// <summary>
@@ -677,7 +677,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             SubmittedUtcText = request.SubmittedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
             FieldName = request.FieldName;
-            CurrentValueSnapshot = string.IsNullOrWhiteSpace(request.CurrentValueSnapshot) ? "(none)" : request.CurrentValueSnapshot;
+            CurrentValueSnapshot = string.IsNullOrWhiteSpace(request.CurrentValueSnapshot) ? lang.Common_NonePlaceholder : request.CurrentValueSnapshot;
             ProposedValue = request.ProposedValue;
             RequestStatus = request.RequestStatus;
         }

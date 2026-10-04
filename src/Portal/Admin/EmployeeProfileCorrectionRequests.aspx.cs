@@ -476,7 +476,7 @@ namespace ASPNET.StarterKit.Portal
                 ? request.ReviewedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture) +
                   " / " + EmptyToNone(request.ReviewedBy) +
                   " / " + EmptyToNone(request.ReviewNote)
-                : "(not reviewed)";
+                : lang.Admin_EmployeeProfileCorrectionRequests_NotReviewed;
         }
 
         /// <summary>
@@ -567,7 +567,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private static string EmptyToNone(string value)
         {
-            return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
         }
     }
 }

@@ -477,16 +477,25 @@ namespace ASPNET.StarterKit.Portal
             CategoryKey = EmptyToNone(application.CategoryKey);
             Summary = EmptyToNone(application.Summary);
             Body = EmptyToNone(application.Body);
-            ApplicantText = application.ApplicantUserId.ToString(CultureInfo.InvariantCulture) + " / " + EmptyToNone(application.ApplicantUserName);
+            ApplicantText = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_BusinessApplications_ApplicantFormat,
+                application.ApplicantUserId.ToString(CultureInfo.InvariantCulture),
+                EmptyToNone(application.ApplicantUserName));
             ApplicationStatus = application.ApplicationStatus;
             SubmittedUtcText = application.SubmittedUtc.HasValue
                 ? application.SubmittedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
-                : "(none)";
+                : lang.Common_NonePlaceholder;
             ReviewText = application.ReviewedUtc.HasValue
-                ? application.ReviewedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture) +
-                  " / User " + (application.ReviewedByUserId.HasValue ? application.ReviewedByUserId.Value.ToString(CultureInfo.InvariantCulture) : "(none)") +
-                  " / " + EmptyToNone(application.ReviewComment)
-                : "(not reviewed)";
+                ? string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Admin_BusinessApplications_ReviewFormat,
+                    application.ReviewedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture),
+                    application.ReviewedByUserId.HasValue
+                        ? application.ReviewedByUserId.Value.ToString(CultureInfo.InvariantCulture)
+                        : lang.Common_NonePlaceholder,
+                    EmptyToNone(application.ReviewComment))
+                : lang.Admin_BusinessApplications_NotReviewed;
         }
 
         /// <summary>
@@ -577,7 +586,7 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         private static string EmptyToNone(string value)
         {
-            return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
         }
     }
 }

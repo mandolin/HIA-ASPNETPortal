@@ -2670,4 +2670,19 @@
   <data name="EditDocs_UploadPolicyHintFormat" xml:space="preserve">
     <value>{0}；允许扩展名：{1}。服务器上传会重命名后保存到 {2}。</value>
   </data>
+  <data name="Common_OverdueSuffix" xml:space="preserve">
+    <value>（已超期）</value>
+  </data>
+  <data name="Admin_BusinessApplications_ApplicantFormat" xml:space="preserve">
+    <value>申请人：{0}（{1}）</value>
+  </data>
+  <data name="Admin_BusinessApplications_ReviewFormat" xml:space="preserve">
+    <value>审核于 {0}，审核人 {1}，备注：{2}</value>
+  </data>
+  <data name="Admin_BusinessApplications_NotReviewed" xml:space="preserve">
+    <value>未审核</value>
+  </data>
+  <data name="Admin_EmployeeProfileCorrectionRequests_NotReviewed" xml:space="preserve">
+    <value>未审核</value>
+  </data>
 </root>

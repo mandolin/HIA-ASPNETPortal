@@ -557,7 +557,7 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>将无展示内容的三种等价输入归一为固定占位；含实际字符的文本必须保留原值，交由标记层按既有规则编码。</zh-CN>
             //   <en>Normalize the three equivalent no-display-content inputs to the fixed placeholder; text containing actual characters must retain its original value for markup to encode under its established rules.</en>
             // </lang>
-            return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
         }
     }
 }

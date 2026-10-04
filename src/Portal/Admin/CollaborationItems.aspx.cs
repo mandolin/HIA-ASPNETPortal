@@ -1102,7 +1102,7 @@ namespace ASPNET.StarterKit.Portal
             Title = EmptyToNone(item.Title);
             Summary = EmptyToNone(item.Summary);
             Description = EmptyToNone(item.Description);
-            ItemStatus = item.IsOverdue ? item.ItemStatus + " / Overdue" : item.ItemStatus;
+            ItemStatus = item.IsOverdue ? item.ItemStatus + lang.Common_OverdueSuffix : item.ItemStatus;
             PriorityKey = EmptyToNone(item.PriorityKey);
             OwnerText = GetOwnerText(item);
             LastActionUtcText = item.LastActionUtc.HasValue

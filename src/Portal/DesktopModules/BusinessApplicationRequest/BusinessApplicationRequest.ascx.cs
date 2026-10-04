@@ -573,12 +573,12 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             SubmittedUtcText = application.SubmittedUtc.HasValue
                 ? application.SubmittedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
-                : "(none)";
+                : lang.Common_NonePlaceholder;
             // <lang>
             //   <zh-CN>审核意见为空时不暴露 null，列表仍保持稳定可渲染。</zh-CN>
             //   <en>Do not expose null for a missing review comment so the list remains stable and renderable.</en>
             // </lang>
-            ReviewComment = string.IsNullOrWhiteSpace(application.ReviewComment) ? "(none)" : application.ReviewComment;
+            ReviewComment = string.IsNullOrWhiteSpace(application.ReviewComment) ? lang.Common_NonePlaceholder : application.ReviewComment;
         }
 
         /// <summary>

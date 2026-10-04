@@ -10201,5 +10201,65 @@ namespace Resources {
                 return ResourceManager.GetString("EditDocs_UploadPolicyHintFormat", resourceCulture);
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：（已超期）</zh-CN>
+        ///   <en>Looks up a localized string similar to: (Overdue)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_OverdueSuffix {
+            get {
+                return ResourceManager.GetString("Common_OverdueSuffix", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：申请人：{0}（{1}）</zh-CN>
+        ///   <en>Looks up a localized string similar to: Applicant: {0} ({1})</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ApplicantFormat {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ApplicantFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：审核于 {0}，审核人 {1}，备注：{2}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reviewed on {0} by {1}; note: {2}</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_ReviewFormat {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_ReviewFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：未审核</zh-CN>
+        ///   <en>Looks up a localized string similar to: (not reviewed)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_BusinessApplications_NotReviewed {
+            get {
+                return ResourceManager.GetString("Admin_BusinessApplications_NotReviewed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：未审核</zh-CN>
+        ///   <en>Looks up a localized string similar to: (not reviewed)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_EmployeeProfileCorrectionRequests_NotReviewed {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_NotReviewed", resourceCulture);
+            }
+        }
     }
 }

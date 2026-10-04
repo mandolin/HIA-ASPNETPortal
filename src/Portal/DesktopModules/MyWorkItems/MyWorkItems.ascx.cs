@@ -356,7 +356,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 dueLabel.Text = item.DueUtc.HasValue
                     ? item.DueUtc.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
-                    : "—";
+                    : GetResource("Common_NonePlaceholder");
             }
 
             // <lang>

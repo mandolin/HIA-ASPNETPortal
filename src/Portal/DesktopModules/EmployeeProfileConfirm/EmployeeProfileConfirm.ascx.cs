@@ -375,7 +375,7 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         private static string EmptyToNone(string value)
         {
-            return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
         }
 
         /// <summary>
