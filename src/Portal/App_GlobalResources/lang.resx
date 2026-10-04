@@ -202,7 +202,7 @@
     <value>Email:</value>
   </data>
   <data name="Signin_EmailOrName" xml:space="preserve">
-      <value>邮箱、用户名或员工号</value>
+    <value>Email, username, or employee code:</value>
   </data>
   <data name="Signin_LoginFaild" xml:space="preserve">
     <value>Login Failed!</value>

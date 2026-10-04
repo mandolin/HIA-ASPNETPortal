@@ -392,6 +392,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Add user to this role</zh-CN>
+        ///   <en>Looks up a localized string similar to: Add user to this role</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_ManageUsers_AddUserToRole {
             get {
                 return ResourceManager.GetString("Admin_ManageUsers_AddUserToRole", resourceCulture);
@@ -842,6 +848,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：System Health</zh-CN>
+        ///   <en>Looks up a localized string similar to: System Health</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_SystemHealth_Title {
             get {
                 return ResourceManager.GetString("Admin_SystemHealth_Title", resourceCulture);
@@ -1100,6 +1112,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Module Catalog</zh-CN>
+        ///   <en>Looks up a localized string similar to: Module Catalog</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_ModuleCatalog_Title {
             get {
                 return ResourceManager.GetString("Admin_ModuleCatalog_Title", resourceCulture);
@@ -2294,6 +2312,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Linked Content Not Provided</zh-CN>
+        ///   <en>Looks up a localized string similar to: Linked Content Not Provided</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_NotImplemented_Title {
             get {
                 return ResourceManager.GetString("Admin_NotImplemented_Title", resourceCulture);
@@ -2480,6 +2504,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Link Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Link Details</en>
+        /// </lang>
+        /// </summary>
         internal static string EditLinks_Heading {
             get {
                 return ResourceManager.GetString("EditLinks_Heading", resourceCulture);
@@ -2498,6 +2528,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Event Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Event Details</en>
+        /// </lang>
+        /// </summary>
         internal static string EditEvents_Heading {
             get {
                 return ResourceManager.GetString("EditEvents_Heading", resourceCulture);
@@ -2780,6 +2816,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Database file storage is not enabled yet; choose server upload or enter a browse address.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Database file storage is not enabled yet; choose server upload or enter a browse address.</en>
+        /// </lang>
+        /// </summary>
         internal static string EditDocs_MessageDatabaseStorageDisabled {
             get {
                 return ResourceManager.GetString("EditDocs_MessageDatabaseStorageDisabled", resourceCulture);
@@ -2822,6 +2864,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Document Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Document Details</en>
+        /// </lang>
+        /// </summary>
         internal static string EditDocs_Heading {
             get {
                 return ResourceManager.GetString("EditDocs_Heading", resourceCulture);
@@ -2840,6 +2888,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Announcement Details</zh-CN>
+        ///   <en>Looks up a localized string similar to: Announcement Details</en>
+        /// </lang>
+        /// </summary>
         internal static string EditAnnouncements_Heading {
             get {
                 return ResourceManager.GetString("EditAnnouncements_Heading", resourceCulture);
@@ -3722,6 +3776,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee profile confirmation</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee profile confirmation</en>
+        /// </lang>
+        /// </summary>
         internal static string EmployeeProfileConfirm_Heading {
             get {
                 return ResourceManager.GetString("EmployeeProfileConfirm_Heading", resourceCulture);
@@ -4532,6 +4592,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Title</zh-CN>
+        ///   <en>Looks up a localized string similar to: Title</en>
+        /// </lang>
+        /// </summary>
         internal static string LegacyEdit_LabelTitle {
             get {
                 return ResourceManager.GetString("LegacyEdit_LabelTitle", resourceCulture);
@@ -4682,6 +4748,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee Directory</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee Directory</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_EmployeeDirectory_Title {
             get {
                 return ResourceManager.GetString("Admin_EmployeeDirectory_Title", resourceCulture);
@@ -8468,6 +8540,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Select a valid user.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select a valid user.</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_SecurityRoles_MessageSelectValidUser {
             get {
                 return ResourceManager.GetString("Admin_SecurityRoles_MessageSelectValidUser", resourceCulture);
@@ -8690,6 +8768,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Maintain employee master data used by directory, binding, and profile workflows.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Maintain employee master data used by directory, binding, and profile workflows.</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_EmployeeEdit_Subtitle {
             get {
                 return ResourceManager.GetString("Admin_EmployeeEdit_Subtitle", resourceCulture);
@@ -8780,6 +8864,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Employee save failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Employee save failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_EmployeeEdit_MessageSaveFailed {
             get {
                 return ResourceManager.GetString("Admin_EmployeeEdit_MessageSaveFailed", resourceCulture);
@@ -8942,6 +9032,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Organization unit save failed; the system recorded this error. Event id: {0}</zh-CN>
+        ///   <en>Looks up a localized string similar to: Organization unit save failed; the system recorded this error. Event id: {0}</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_OrganizationUnitEdit_MessageSaveFailed {
             get {
                 return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageSaveFailed", resourceCulture);
@@ -9452,6 +9548,12 @@ namespace Resources {
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：'Password' and 'Confirm Password' must not be left blank.</zh-CN>
+        ///   <en>Looks up a localized string similar to: 'Password' and 'Confirm Password' must not be left blank.</en>
+        /// </lang>
+        /// </summary>
         internal static string Admin_Register_MessagePasswordBlank {
             get {
                 return ResourceManager.GetString("Admin_Register_MessagePasswordBlank", resourceCulture);
@@ -10283,6 +10385,198 @@ namespace Resources {
         internal static string Admin_EmployeeProfileCorrectionRequests_NotReviewed {
             get {
                 return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_NotReviewed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Sign In</zh-CN>
+        ///   <en>Looks up a localized string similar to: Sign In</en>
+        /// </lang>
+        /// </summary>
+        internal static string Signin_LoginText {
+            get {
+                return ResourceManager.GetString("Signin_LoginText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Register</zh-CN>
+        ///   <en>Looks up a localized string similar to: Register</en>
+        /// </lang>
+        /// </summary>
+        internal static string Signin_RegisterText {
+            get {
+                return ResourceManager.GetString("Signin_RegisterText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Type</zh-CN>
+        ///   <en>Looks up a localized string similar to: Type</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_ColumnType {
+            get {
+                return ResourceManager.GetString("MyWorkItems_ColumnType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Item</zh-CN>
+        ///   <en>Looks up a localized string similar to: Item</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_ColumnItem {
+            get {
+                return ResourceManager.GetString("MyWorkItems_ColumnItem", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Created</zh-CN>
+        ///   <en>Looks up a localized string similar to: Created</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_ColumnCreated {
+            get {
+                return ResourceManager.GetString("MyWorkItems_ColumnCreated", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Due</zh-CN>
+        ///   <en>Looks up a localized string similar to: Due</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_ColumnDue {
+            get {
+                return ResourceManager.GetString("MyWorkItems_ColumnDue", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：All</zh-CN>
+        ///   <en>Looks up a localized string similar to: All</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_FilterAll {
+            get {
+                return ResourceManager.GetString("MyWorkItems_FilterAll", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Overdue only</zh-CN>
+        ///   <en>Looks up a localized string similar to: Overdue only</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_FilterOverdue {
+            get {
+                return ResourceManager.GetString("MyWorkItems_FilterOverdue", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No to-do items</zh-CN>
+        ///   <en>Looks up a localized string similar to: No to-do items</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_EmptyNone {
+            get {
+                return ResourceManager.GetString("MyWorkItems_EmptyNone", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No matching to-do items</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching to-do items</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_EmptyNoMatch {
+            get {
+                return ResourceManager.GetString("MyWorkItems_EmptyNoMatch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Could not load to-do items. Please try again later.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Could not load to-do items. Please try again later.</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_ErrorLoadFailed {
+            get {
+                return ResourceManager.GetString("MyWorkItems_ErrorLoadFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Overdue by {0} days</zh-CN>
+        ///   <en>Looks up a localized string similar to: Overdue by {0} days</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_OverdueDays {
+            get {
+                return ResourceManager.GetString("MyWorkItems_OverdueDays", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No online entry is available; use the related business page or contact an administrator</zh-CN>
+        ///   <en>Looks up a localized string similar to: No online entry is available; use the related business page or contact an administrator</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_NoOnlineEntry {
+            get {
+                return ResourceManager.GetString("MyWorkItems_NoOnlineEntry", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Collaboration item</zh-CN>
+        ///   <en>Looks up a localized string similar to: Collaboration item</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_KindCollaborationItem {
+            get {
+                return ResourceManager.GetString("MyWorkItems_KindCollaborationItem", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Business application</zh-CN>
+        ///   <en>Looks up a localized string similar to: Business application</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_KindBusinessApplication {
+            get {
+                return ResourceManager.GetString("MyWorkItems_KindBusinessApplication", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Profile correction request</zh-CN>
+        ///   <en>Looks up a localized string similar to: Profile correction request</en>
+        /// </lang>
+        /// </summary>
+        internal static string MyWorkItems_KindEmployeeProfileCorrectionRequest {
+            get {
+                return ResourceManager.GetString("MyWorkItems_KindEmployeeProfileCorrectionRequest", resourceCulture);
             }
         }
     }

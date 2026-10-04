@@ -75,6 +75,75 @@
   <data name="Admin_EditAccessDenied_EditAccessDenied" xml:space="preserve">
     <value>Edit Access Denied</value>
   </data>
+  <data name="Admin_ManageUsers_Subtitle" xml:space="preserve">
+    <value>Account profile, registration review, lifecycle, and role membership.</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegistrationStatus" xml:space="preserve">
+    <value>Registration Status</value>
+  </data>
+  <data name="Admin_ManageUsers_ApproveRegistration" xml:space="preserve">
+    <value>Approve Registration</value>
+  </data>
+  <data name="Admin_ManageUsers_RejectRegistration" xml:space="preserve">
+    <value>Reject Registration</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelEmployeeBinding" xml:space="preserve">
+    <value>Employee Binding</value>
+  </data>
+  <data name="Admin_ManageUsers_ManageBinding" xml:space="preserve">
+    <value>Manage Binding</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelProfileStatus" xml:space="preserve">
+    <value>Profile Status</value>
+  </data>
+  <data name="Admin_ManageUsers_DisableAccount" xml:space="preserve">
+    <value>Disable Account</value>
+  </data>
+  <data name="Admin_ManageUsers_ConfirmDisableJs" xml:space="preserve">
+    <value>return confirm('Disable this account?');</value>
+  </data>
+  <data name="Admin_ManageUsers_RestoreAccount" xml:space="preserve">
+    <value>Restore Account</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionRegistrationMetadata" xml:space="preserve">
+    <value>Registration Metadata</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegistrationSource" xml:space="preserve">
+    <value>Registration Source</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelInviteCode" xml:space="preserve">
+    <value>Invite Code</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRegisteredUtc" xml:space="preserve">
+    <value>Registered UTC</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelApprovedUtc" xml:space="preserve">
+    <value>Approved UTC</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelProfileSource" xml:space="preserve">
+    <value>Profile Source</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionAccountProfile" xml:space="preserve">
+    <value>Account Profile</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelLegacyUserName" xml:space="preserve">
+    <value>Legacy User Name</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelLoginName" xml:space="preserve">
+    <value>Login Name</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelDisplayName" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelNickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="Admin_ManageUsers_SectionRoleMembership" xml:space="preserve">
+    <value>Role Membership</value>
+  </data>
+  <data name="Admin_ManageUsers_LabelRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
   <data name="Admin_ManageUsers_AddUserToRole" xml:space="preserve">
     <value>Add user to this role</value>
   </data>
@@ -123,6 +192,9 @@
   <data name="Announcements_readMore" xml:space="preserve">
     <value>read more...</value>
   </data>
+  <data name="Module_Name_ID_32" xml:space="preserve">
+    <value>Manage Users</value>
+  </data>
   <data name="Signin_accountLogin" xml:space="preserve">
     <value>Account Login</value>
   </data>
@@ -145,7 +217,52 @@
     <value>Remember Login</value>
   </data>
   <data name="Signin_EmailOrName" xml:space="preserve">
-      <value>Email, username, or employee code:</value>
+    <value>Email, username, or employee code:</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Title" xml:space="preserve">
+    <value>Capability Permissions</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Subtitle" xml:space="preserve">
+    <value>Read-only view of role-to-permission-key mappings, grouped by enterprise capability layer. Granting is not available here.</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Legend" xml:space="preserve">
+    <value>Legend: granted / not granted / disabled (mapping exists but is not effective).</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_Unavailable" xml:space="preserve">
+    <value>The permission mapping table is unavailable or holds no mapping.</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_EmptyDefinitions" xml:space="preserve">
+    <value>No permission definition is registered.</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_ColumnPermissionKey" xml:space="preserve">
+    <value>Permission key</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerFoundation" xml:space="preserve">
+    <value>Foundation Core</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerBasicBusiness" xml:space="preserve">
+    <value>Enterprise Basic Business</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_LayerPlatform" xml:space="preserve">
+    <value>Platform Capability</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkGranted" xml:space="preserve">
+    <value>✓</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkNotGranted" xml:space="preserve">
+    <value>—</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_MarkDisabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateGranted" xml:space="preserve">
+    <value>Granted</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateNotGranted" xml:space="preserve">
+    <value>Not granted</value>
+  </data>
+  <data name="Admin_CapabilityPermissionMatrix_StateDisabled" xml:space="preserve">
+    <value>Mapping exists but is disabled</value>
   </data>
   <data name="Admin_SystemHealth_Title" xml:space="preserve">
     <value>System Health</value>
@@ -209,6 +326,9 @@
   </data>
   <data name="Admin_SystemHealth_ColumnRestart" xml:space="preserve">
     <value>Restart</value>
+  </data>
+  <data name="Admin_ModuleCatalog_MessagePackageNotAllowedByProfile" xml:space="preserve">
+    <value>The selected module package is deployed, but it is not allowed by active module profile '{0}'.</value>
   </data>
   <data name="Admin_ModuleCatalog_Title" xml:space="preserve">
     <value>Module Catalog</value>
@@ -506,6 +626,603 @@
   </data>
   <data name="Admin_DiagnosticLogDetail_FieldUserAgent" xml:space="preserve">
     <value>User-Agent</value>
+  </data>
+  <data name="Admin_NotImplemented_Brand" xml:space="preserve">
+    <value>ASP.NET Portal Starter Kit</value>
+  </data>
+  <data name="Admin_NotImplemented_Title" xml:space="preserve">
+    <value>Linked Content Not Provided</value>
+  </data>
+  <data name="Admin_NotImplemented_BodyPre" xml:space="preserve">
+    <value>The link you clicked was provided as a part of the sample data for the</value>
+  </data>
+  <data name="Admin_NotImplemented_BodyPost" xml:space="preserve">
+    <value>. The content for this link is not provided as part of the sample application.</value>
+  </data>
+  <data name="Admin_NotImplemented_ReturnHome" xml:space="preserve">
+    <value>Return to ASP.NET Portal Starter Kit Home</value>
+  </data>
+  <data name="GenericError_Title" xml:space="preserve">
+    <value>Application Error</value>
+  </data>
+  <data name="GenericError_Heading" xml:space="preserve">
+    <value>The application could not complete the request.</value>
+  </data>
+  <data name="GenericError_Body" xml:space="preserve">
+    <value>The system recorded this error. Try again later, or give the event id below to an administrator.</value>
+  </data>
+  <data name="GenericError_EventIdLabel" xml:space="preserve">
+    <value>Event id: </value>
+  </data>
+  <data name="GenericError_ReturnHome" xml:space="preserve">
+    <value>Return to home page</value>
+  </data>
+  <data name="PortalBanner_Subtitle" xml:space="preserve">
+    <value>Enterprise Portal</value>
+  </data>
+  <data name="PortalBanner_Home" xml:space="preserve">
+    <value>Portal Home</value>
+  </data>
+  <data name="PortalBanner_Documentation" xml:space="preserve">
+    <value>Portal Documentation</value>
+  </data>
+  <data name="ModuleTitle_EditToolTipFormat" xml:space="preserve">
+    <value>Open module action: {0}</value>
+  </data>
+  <data name="Portal_Title" xml:space="preserve">
+    <value>ASP.NET Portal Starter Kit</value>
+  </data>
+  <data name="EditLinks_MessageInvalidViewOrder" xml:space="preserve">
+    <value>Enter a valid display order.</value>
+  </data>
+  <data name="EditLinks_MessageInvalidUrl" xml:space="preserve">
+    <value>The link address must be a site-local or HTTP(S) address.</value>
+  </data>
+  <data name="EditLinks_Heading" xml:space="preserve">
+    <value>Link Details</value>
+  </data>
+  <data name="EditEvents_MessageInvalidExpirationDate" xml:space="preserve">
+    <value>Enter a valid expiration date.</value>
+  </data>
+  <data name="EditEvents_Heading" xml:space="preserve">
+    <value>Event Details</value>
+  </data>
+  <data name="EditEvents_LabelWhereWhen" xml:space="preserve">
+    <value>Where/When</value>
+  </data>
+  <data name="EditEvents_LabelExpires" xml:space="preserve">
+    <value>Expires</value>
+  </data>
+  <data name="EditEvents_MessageValidDescription" xml:space="preserve">
+    <value>You Must Enter a Valid Description</value>
+  </data>
+  <data name="EditEvents_MessageValidTimeLocation" xml:space="preserve">
+    <value>You Must Enter a Valid Time/Location</value>
+  </data>
+  <data name="EditEvents_MessageValidExpirationDate" xml:space="preserve">
+    <value>You Must Enter a Valid Expiration Date</value>
+  </data>
+  <data name="LegacyEdit_LabelName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LegacyEdit_LabelCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="LegacyEdit_LabelBrowseUrl" xml:space="preserve">
+    <value>URL to Browse</value>
+  </data>
+  <data name="LegacyEdit_LabelUploadOption" xml:space="preserve">
+    <value>Upload document to server</value>
+  </data>
+  <data name="LegacyEdit_LabelFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="LegacyEdit_LabelStoreInDatabase" xml:space="preserve">
+    <value>Store in database (web farm support)</value>
+  </data>
+  <data name="LegacyEdit_LabelRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="LegacyEdit_LabelEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LegacyEdit_LabelContact1" xml:space="preserve">
+    <value>Contact 1</value>
+  </data>
+  <data name="LegacyEdit_LabelContact2" xml:space="preserve">
+    <value>Contact 2</value>
+  </data>
+  <data name="LegacyEdit_LabelReadMoreLink" xml:space="preserve">
+    <value>Read More Link</value>
+  </data>
+  <data name="LegacyEdit_LabelReadMoreMobile" xml:space="preserve">
+    <value>Read More (Mobile)</value>
+  </data>
+  <data name="LegacyEdit_MessageValidName" xml:space="preserve">
+    <value>You Must Enter a Valid Name</value>
+  </data>
+  <data name="EditDocs_SectionBrowseUrl" xml:space="preserve">
+    <value>Browse URL</value>
+  </data>
+  <data name="EditDocs_HintBrowseUrl" xml:space="preserve">
+    <value>Enter an application-relative address, or an http/https browse address.</value>
+  </data>
+  <data name="EditDocs_SectionServerUpload" xml:space="preserve">
+    <value>Server Upload</value>
+  </data>
+  <data name="EditDocs_HintUploadOverride" xml:space="preserve">
+    <value>The selected upload will replace the browse address above.</value>
+  </data>
+  <data name="EditDocs_HintDatabaseDisabled" xml:space="preserve">
+    <value>Database file storage is a later capability; this stage does not accept binary content into the database.</value>
+  </data>
+  <data name="EditDocs_MessageDatabaseStorageDisabled" xml:space="preserve">
+    <value>Database file storage is not enabled yet; choose server upload or enter a browse address.</value>
+  </data>
+  <data name="EditDocs_MessageUploadSelected" xml:space="preserve">
+    <value>Server upload is selected; choose the file to upload.</value>
+  </data>
+  <data name="EditDocs_MessageInvalidBrowseUrl" xml:space="preserve">
+    <value>Enter an application-relative address or an http/https browse address.</value>
+  </data>
+  <data name="EditDocs_UploadSizeLimitPrefix" xml:space="preserve">
+    <value>Maximum file size: </value>
+  </data>
+  <data name="EditDocs_Heading" xml:space="preserve">
+    <value>Document Details</value>
+  </data>
+  <data name="EditAnnouncements_MessageInvalidReadMoreUrl" xml:space="preserve">
+    <value>The read-more link must be a site-local or HTTP(S) address.</value>
+  </data>
+  <data name="EditAnnouncements_Heading" xml:space="preserve">
+    <value>Announcement Details</value>
+  </data>
+  <data name="EditContacts_Heading" xml:space="preserve">
+    <value>Contact Details</value>
+  </data>
+  <data name="EditImage_Heading" xml:space="preserve">
+    <value>Image Settings</value>
+  </data>
+  <data name="EditImage_LabelSrcLocation" xml:space="preserve">
+    <value>Src Location</value>
+  </data>
+  <data name="EditImage_LabelImagePreview" xml:space="preserve">
+    <value>Image preview</value>
+  </data>
+  <data name="EditImage_LabelImageWidth" xml:space="preserve">
+    <value>Image Width</value>
+  </data>
+  <data name="EditImage_LabelImageHeight" xml:space="preserve">
+    <value>Image Height</value>
+  </data>
+  <data name="EditImage_SectionImageSource" xml:space="preserve">
+    <value>Image Source</value>
+  </data>
+  <data name="EditImage_HintSource" xml:space="preserve">
+    <value>Prefer a site-local image path; HTTP(S) external images are kept under the current compatibility policy but should point only to trusted sources.</value>
+  </data>
+  <data name="EditImage_HintPreview" xml:space="preserve">
+    <value>The preview only shows a currently recognisable address; a failed image load does not change the save validation result.</value>
+  </data>
+  <data name="EditImage_SectionDisplaySize" xml:space="preserve">
+    <value>Display Size</value>
+  </data>
+  <data name="EditImage_HintSize" xml:space="preserve">
+    <value>Width and height may be left empty; when entered they must be non-negative integers.</value>
+  </data>
+  <data name="EditImage_MessageInvalidUrl" xml:space="preserve">
+    <value>The image address must be a site-local or HTTP(S) address.</value>
+  </data>
+  <data name="EditImage_MessageInvalidSize" xml:space="preserve">
+    <value>Image width and height must be non-negative integers; leaving them empty means that dimension is unrestricted.</value>
+  </data>
+  <data name="EditHtml_Heading" xml:space="preserve">
+    <value>Html Settings</value>
+  </data>
+  <data name="EditHtml_LabelDesktopHtml" xml:space="preserve">
+    <value>Desktop Html Content</value>
+  </data>
+  <data name="EditHtml_LabelMobileSummary" xml:space="preserve">
+    <value>Mobile Summary (optional)</value>
+  </data>
+  <data name="EditHtml_LabelMobileDetails" xml:space="preserve">
+    <value>Mobile Details (optional)</value>
+  </data>
+  <data name="EditHtml_SectionTrustedHtml" xml:space="preserve">
+    <value>Trusted raw HTML entry</value>
+  </data>
+  <data name="EditHtml_HintTrustedHtml" xml:space="preserve">
+    <value>This entry is for trusted administrators only. Content is stored as HTML-encoded text under the legacy mechanism, and will later be tightened further by the fine-grained raw-HTML permission.</value>
+  </data>
+  <data name="EditHtml_SectionMobileFallback" xml:space="preserve">
+    <value>Mobile Fallback</value>
+  </data>
+  <data name="EditHtml_HintMobileFallback" xml:space="preserve">
+    <value>The mobile fields preserve legacy data compatibility; they will be consolidated once the mobile display approach stabilises.</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddContent" xml:space="preserve">
+    <value>Add content...</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddSummary" xml:space="preserve">
+    <value>Add summary...</value>
+  </data>
+  <data name="EditHtml_PlaceholderAddDetails" xml:space="preserve">
+    <value>Add details...</value>
+  </data>
+  <data name="EditXml_Heading" xml:space="preserve">
+    <value>XML Settings</value>
+  </data>
+  <data name="EditXml_LabelXmlDataFile" xml:space="preserve">
+    <value>XML Data File</value>
+  </data>
+  <data name="EditXml_LabelXsltFile" xml:space="preserve">
+    <value>XSL/T Transform File</value>
+  </data>
+  <data name="EditXml_SectionDeploymentResources" xml:space="preserve">
+    <value>Deployment resources only</value>
+  </data>
+  <data name="EditXml_HintDeploymentResources" xml:space="preserve">
+    <value>XML and XSL/T files must live inside the current application deployment directory. This page maintains paths only; it offers no upload, online editing, external URL, or arbitrary physical path capability.</value>
+  </data>
+  <data name="EditXml_MessageInvalidResourcePath" xml:space="preserve">
+    <value>XML and XSL/T files must be deployed resource paths inside the current application directory.</value>
+  </data>
+  <data name="BusinessApplicationRequest_Heading" xml:space="preserve">
+    <value>Business Application</value>
+  </data>
+  <data name="BusinessApplicationRequest_ButtonSubmit" xml:space="preserve">
+    <value>Submit application</value>
+  </data>
+  <data name="BusinessApplicationRequest_LabelTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="BusinessApplicationRequest_LabelCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="BusinessApplicationRequest_LabelSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="BusinessApplicationRequest_LabelRequestDetail" xml:space="preserve">
+    <value>Request details</value>
+  </data>
+  <data name="BusinessApplicationRequest_SectionRecentRequests" xml:space="preserve">
+    <value>Recent requests</value>
+  </data>
+  <data name="BusinessApplicationRequest_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="BusinessApplicationRequest_ColumnId" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="BusinessApplicationRequest_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="BusinessApplicationRequest_ColumnReviewNote" xml:space="preserve">
+    <value>Review note</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageSignInRequired" xml:space="preserve">
+    <value>Sign in before submitting a business application.</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageNoPermission" xml:space="preserve">
+    <value>This account is not permitted to submit business applications.</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageTitleRequired" xml:space="preserve">
+    <value>Enter the application title.</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageContentRequired" xml:space="preserve">
+    <value>Enter a summary or request details.</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageSubmittedPrefix" xml:space="preserve">
+    <value>Business application submitted, no.: </value>
+  </data>
+  <data name="BusinessApplicationRequest_OptionGeneral" xml:space="preserve">
+    <value>General request</value>
+  </data>
+  <data name="BusinessApplicationRequest_OptionContent" xml:space="preserve">
+    <value>Content request</value>
+  </data>
+  <data name="BusinessApplicationRequest_OptionOperations" xml:space="preserve">
+    <value>Operations request</value>
+  </data>
+  <data name="BusinessApplicationRequest_MessageModuleNotInitialized" xml:space="preserve">
+    <value>The business application module has not finished database initialisation.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_Heading" xml:space="preserve">
+    <value>Employee profile correction request</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ButtonSubmit" xml:space="preserve">
+    <value>Submit correction request</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ButtonSubmitCorrection" xml:space="preserve">
+    <value>Submit correction</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelEmployeeCode" xml:space="preserve">
+    <value>Employee code</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelSalutation" xml:space="preserve">
+    <value>Salutation</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelWorkEmail" xml:space="preserve">
+    <value>Work email</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelOrganization" xml:space="preserve">
+    <value>Organization</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelCorrectionFields" xml:space="preserve">
+    <value>Correction fields</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelSuggestedValue" xml:space="preserve">
+    <value>Suggested value</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_LabelNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_SectionRecentRequests" xml:space="preserve">
+    <value>Recent requests</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnUtc" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnField" xml:space="preserve">
+    <value>Field</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot" xml:space="preserve">
+    <value>Current value snapshot</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageNoEmployeeProfile" xml:space="preserve">
+    <value>This account has no active employee profile that can submit a correction request.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSuggestedValueRequired" xml:space="preserve">
+    <value>Enter a suggested value.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageNoChangeNeeded" xml:space="preserve">
+    <value>The suggested value equals the current value, so no correction request is needed.</value>
+  </data>
+  <data name="EmployeeProfileCorrectionRequest_MessageSubmitted" xml:space="preserve">
+    <value>The correction request was submitted and is awaiting administrator review.</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageNoActiveProfile" xml:space="preserve">
+    <value>This account has no active employee profile to confirm.</value>
+  </data>
+  <data name="EmployeeProfileConfirm_MessageConfirmed" xml:space="preserve">
+    <value>The profile confirmation has been recorded.</value>
+  </data>
+  <data name="EmployeeProfileConfirm_Heading" xml:space="preserve">
+    <value>Employee profile confirmation</value>
+  </data>
+  <data name="EmployeeProfileConfirm_ButtonConfirm" xml:space="preserve">
+    <value>Confirm profile is correct</value>
+  </data>
+  <data name="EmployeeProfileConfirm_LabelLastConfirmed" xml:space="preserve">
+    <value>Last confirmed</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_Heading" xml:space="preserve">
+    <value>Enterprise Capability Workbench</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonSubmit" xml:space="preserve">
+    <value>Submit collaboration item</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonAddComment" xml:space="preserve">
+    <value>Add participant comment</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ButtonResubmit" xml:space="preserve">
+    <value>Resubmit after return</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemTitle" xml:space="preserve">
+    <value>Item title</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemType" xml:space="preserve">
+    <value>Item type</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelPriority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelDueUtc" xml:space="preserve">
+    <value>Due UTC</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelItemDetail" xml:space="preserve">
+    <value>Item details</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_SectionMyRecentItems" xml:space="preserve">
+    <value>My recent items</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_ColumnRecentComment" xml:space="preserve">
+    <value>Latest note</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_SectionFollowUp" xml:space="preserve">
+    <value>Participate / follow up</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelLatestCommentPrefix" xml:space="preserve">
+    <value>Latest comment: </value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_LabelParticipants" xml:space="preserve">
+    <value>Participants</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit" xml:space="preserve">
+    <value>Sign in before submitting a collaboration item.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageNoPermissionSubmit" xml:space="preserve">
+    <value>This account is not permitted to submit enterprise collaboration items.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageInvalidDueUtc" xml:space="preserve">
+    <value>The due UTC must be empty, or use yyyy-MM-dd / yyyy-MM-dd HH:mm:ss.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageTitleRequired" xml:space="preserve">
+    <value>Enter the item title.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageContentRequired" xml:space="preserve">
+    <value>Enter a summary or item details.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSubmittedPrefix" xml:space="preserve">
+    <value>Enterprise collaboration item submitted, no.: </value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredAction" xml:space="preserve">
+    <value>Sign in before operating on a collaboration item.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageInvalidItemId" xml:space="preserve">
+    <value>The collaboration item identifier is invalid.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageCommentAdded" xml:space="preserve">
+    <value>A participant-scope comment was added.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageResubmitted" xml:space="preserve">
+    <value>The collaboration item was resubmitted.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageUnsupportedAction" xml:space="preserve">
+    <value>Unsupported collaboration item operation.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageSignInRequiredWorkbench" xml:space="preserve">
+    <value>Sign in before using the enterprise capability workbench.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageModuleNotInitialized" xml:space="preserve">
+    <value>The enterprise collaboration item module has not finished database initialisation.</value>
+  </data>
+  <data name="EnterpriseCapabilityWorkbench_MessageNoPermissionWorkbench" xml:space="preserve">
+    <value>This account is not permitted to use the enterprise capability workbench.</value>
+  </data>
+  <data name="DiscussDetails_Heading" xml:space="preserve">
+    <value>Message Detail</value>
+  </data>
+  <data name="DiscussDetails_Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="DiscussDetails_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="DiscussDetails_PrevTooltip" xml:space="preserve">
+    <value>Previous Message</value>
+  </data>
+  <data name="DiscussDetails_NextTooltip" xml:space="preserve">
+    <value>Next Message</value>
+  </data>
+  <data name="DiscussDetails_ButtonReply" xml:space="preserve">
+    <value>Reply to this Message</value>
+  </data>
+  <data name="DiscussDetails_ButtonSubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="DiscussDetails_LabelTitle" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="DiscussDetails_LabelBody" xml:space="preserve">
+    <value>Body:</value>
+  </data>
+  <data name="DiscussDetails_SectionOriginalMessage" xml:space="preserve">
+    <value>Original Message:</value>
+  </data>
+  <data name="DiscussDetails_LabelSubject" xml:space="preserve">
+    <value>Subject:</value>
+  </data>
+  <data name="DiscussDetails_LabelAuthor" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="DiscussDetails_LabelDate" xml:space="preserve">
+    <value>Date:</value>
+  </data>
+  <data name="Discussion_ExpandThread" xml:space="preserve">
+    <value>Expand this thread</value>
+  </data>
+  <data name="Discussion_Collapse" xml:space="preserve">
+    <value>Collapse</value>
+  </data>
+  <data name="Discussion_CollapseThread" xml:space="preserve">
+    <value>Collapse this thread</value>
+  </data>
+  <data name="Discussion_From" xml:space="preserve">
+    <value>from</value>
+  </data>
+  <data name="Discussion_Posted" xml:space="preserve">
+    <value>, posted</value>
+  </data>
+  <data name="PortalModule_ButtonEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="QuickLinks_Heading" xml:space="preserve">
+    <value>Quick Launch</value>
+  </data>
+  <data name="QuickLinks_ButtonAddLink" xml:space="preserve">
+    <value>Add Link</value>
+  </data>
+  <data name="QuickLinks_TooltipAddLink" xml:space="preserve">
+    <value>Open module action: Add Link</value>
+  </data>
+  <data name="Document_LabelOwner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Document_LabelArea" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="Document_LabelLastUpdated" xml:space="preserve">
+    <value>Last Updated</value>
+  </data>
+  <data name="ModuleProbe_Heading" xml:space="preserve">
+    <value>Module Probe</value>
+  </data>
+  <data name="ModuleProbe_Summary" xml:space="preserve">
+    <value>Trusted deployment-package verification module.</value>
+  </data>
+  <data name="ModuleProbe_LabelPackage" xml:space="preserve">
+    <value>Package:</value>
+  </data>
+  <data name="ModuleProbe_LabelModule" xml:space="preserve">
+    <value>Module:</value>
+  </data>
+  <data name="ModuleProbe_LabelPlacement" xml:space="preserve">
+    <value>Placement:</value>
+  </data>
+  <data name="ModuleProbe_LabelThemeScope" xml:space="preserve">
+    <value>Theme Scope:</value>
+  </data>
+  <data name="ModuleProbe_LabelRenderedUtc" xml:space="preserve">
+    <value>Rendered UTC:</value>
+  </data>
+  <data name="LegacyEdit_LabelTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="LegacyEdit_LabelUrl" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="LegacyEdit_LabelMobileUrl" xml:space="preserve">
+    <value>Mobile Url</value>
+  </data>
+  <data name="LegacyEdit_LabelDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LegacyEdit_LabelViewOrder" xml:space="preserve">
+    <value>View Order</value>
+  </data>
+  <data name="LegacyEdit_ButtonUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="LegacyEdit_ButtonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LegacyEdit_ButtonDelete" xml:space="preserve">
+    <value>Delete this item</value>
+  </data>
+  <data name="LegacyEdit_MessageValidTitle" xml:space="preserve">
+    <value>You Must Enter a Valid Title</value>
+  </data>
+  <data name="LegacyEdit_MessageValidUrl" xml:space="preserve">
+    <value>You Must Enter a Valid URL</value>
+  </data>
+  <data name="LegacyEdit_MessageValidViewOrder" xml:space="preserve">
+    <value>You Must Enter a Valid View Order</value>
+  </data>
+  <data name="LegacyEdit_CreatedBy" xml:space="preserve">
+    <value>Created by</value>
+  </data>
+  <data name="LegacyEdit_CreatedOn" xml:space="preserve">
+    <value>on</value>
   </data>
   <data name="Admin_EmployeeDirectory_Title" xml:space="preserve">
     <value>Employee Directory</value>
@@ -1431,6 +2148,30 @@
   <data name="Admin_SiteSettings_MessageSaveFailed" xml:space="preserve">
     <value>Saving site settings failed; the system recorded this error. Event id: {0}</value>
   </data>
+  <data name="Admin_SecurityRoles_Title" xml:space="preserve">
+    <value>Role Membership</value>
+  </data>
+  <data name="Admin_SecurityRoles_TitleFormat" xml:space="preserve">
+    <value>Role Membership: {0}</value>
+  </data>
+  <data name="Admin_SecurityRoles_Subtitle" xml:space="preserve">
+    <value>Manage users assigned to the selected portal role.</value>
+  </data>
+  <data name="Admin_SecurityRoles_LabelUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Admin_SecurityRoles_ButtonAddExisting" xml:space="preserve">
+    <value>Add existing user to role</value>
+  </data>
+  <data name="Admin_SecurityRoles_SectionUsersInRole" xml:space="preserve">
+    <value>Users In Role</value>
+  </data>
+  <data name="Admin_SecurityRoles_ButtonRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Admin_SecurityRoles_ButtonSave" xml:space="preserve">
+    <value>Save Role Changes</value>
+  </data>
   <data name="Admin_SecurityRoles_MessageSelectValidUser" xml:space="preserve">
     <value>Select a valid user.</value>
   </data>
@@ -1473,6 +2214,45 @@
   <data name="Admin_Common_MessageP63SchemaUnavailable" xml:space="preserve">
     <value>P6.3 schema is unavailable.</value>
   </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidEmployeeId" xml:space="preserve">
+    <value>Employee id is invalid.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidOrganizationId" xml:space="preserve">
+    <value>Organization id is invalid.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidJoinedUtc" xml:space="preserve">
+    <value>Joined UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidLeftUtc" xml:space="preserve">
+    <value>Left UTC must use yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_MessageInvalidTimestamp" xml:space="preserve">
+    <value>The edit timestamp is invalid. Reload before saving again.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_Subtitle" xml:space="preserve">
+    <value>Maintain employee master data used by directory, binding, and profile workflows.</value>
+  </data>
+  <data name="Admin_EmployeeEdit_SectionEmployeeProfile" xml:space="preserve">
+    <value>Employee Profile</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelPreferredName" xml:space="preserve">
+    <value>Preferred Name</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelJoinedUtc" xml:space="preserve">
+    <value>Joined UTC</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelLeftUtc" xml:space="preserve">
+    <value>Left UTC</value>
+  </data>
+  <data name="Admin_EmployeeEdit_LabelSourceSystem" xml:space="preserve">
+    <value>Source System</value>
+  </data>
+  <data name="Admin_EmployeeEdit_ButtonSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Admin_EmployeeEdit_OptionNone" xml:space="preserve">
+    <value>(none)</value>
+  </data>
   <data name="Admin_EmployeeEdit_MessageSaveFailed" xml:space="preserve">
     <value>Employee save failed; the system recorded this error. Event id: {0}</value>
   </data>
@@ -1484,6 +2264,36 @@
   </data>
   <data name="Admin_EmployeeEdit_TitlePage" xml:space="preserve">
     <value>Employee</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_Subtitle" xml:space="preserve">
+    <value>Maintain organization units used by employee directory grouping and profile workflows.</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_SectionOrganizationMetadata" xml:space="preserve">
+    <value>Organization Metadata</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_LabelOrganizationCode" xml:space="preserve">
+    <value>Organization Code</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_LabelSortOrder" xml:space="preserve">
+    <value>Sort Order</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_EnableCheckBox" xml:space="preserve">
+    <value>Enable this organization unit</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_OptionRoot" xml:space="preserve">
+    <value>(root)</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidUnitId" xml:space="preserve">
+    <value>Organization unit id is invalid.</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidParentId" xml:space="preserve">
+    <value>Parent organization id is invalid.</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidSortOrder" xml:space="preserve">
+    <value>Sort order must be an integer.</value>
+  </data>
+  <data name="Admin_OrganizationUnitEdit_MessageInvalidTimestamp" xml:space="preserve">
+    <value>The edit timestamp is invalid. Reload before saving again.</value>
   </data>
   <data name="Admin_OrganizationUnitEdit_MessageSaveFailed" xml:space="preserve">
     <value>Organization unit save failed; the system recorded this error. Event id: {0}</value>
@@ -1574,6 +2384,45 @@
   </data>
   <data name="Admin_ManageUsers_MessageRegistrationAlreadyRejected" xml:space="preserve">
     <value>This account's registration request was rejected; use the approve action to restore it first.</value>
+  </data>
+  <data name="Admin_Register_Heading" xml:space="preserve">
+    <value>Create a New Account</value>
+  </data>
+  <data name="Admin_Register_LabelName" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="Admin_Register_LabelEmail" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Admin_Register_LabelEmployeeCode" xml:space="preserve">
+    <value>Employee Code:</value>
+  </data>
+  <data name="Admin_Register_LabelPassword" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="Admin_Register_LabelConfirmPassword" xml:space="preserve">
+    <value>Confirm Password:</value>
+  </data>
+  <data name="Admin_Register_MessageNameBlank" xml:space="preserve">
+    <value>'Name' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessageEmailBlank" xml:space="preserve">
+    <value>'Email' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessageEmployeeCodeBlankRequired" xml:space="preserve">
+    <value>'Employee Code' must not be left blank for invitation registration.</value>
+  </data>
+  <data name="Admin_Register_ValidatorPasswordRequired" xml:space="preserve">
+    <value>'Password' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessageConfirmBlank" xml:space="preserve">
+    <value>'Confirm' must not be left blank.</value>
+  </data>
+  <data name="Admin_Register_MessageInvalidEmail" xml:space="preserve">
+    <value>Must use a valid email address.</value>
+  </data>
+  <data name="Admin_Register_ButtonSubmit" xml:space="preserve">
+    <value>Submit Registration</value>
   </data>
   <data name="Admin_Register_MessagePasswordBlank" xml:space="preserve">
     <value>'Password' and 'Confirm Password' must not be left blank.</value>
