@@ -56,15 +56,15 @@
         <div class="employee-profile-correction-subtitle"><%= lang.EmployeeProfileCorrectionRequest_ButtonSubmitCorrection %></div>
         <div class="employee-profile-form-grid">
             <div class="employee-profile-form-field">
-                <span class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelCorrectionFields %></span>
+                <label class="employee-profile-correction-label employee-profile-field-label" for="<%= FieldNameList.ClientID %>"><%= lang.EmployeeProfileCorrectionRequest_LabelCorrectionFields %></label>
                 <asp:DropDownList ID="FieldNameList" CssClass="NormalTextBox employee-profile-correction-input" runat="server" />
             </div>
             <div class="employee-profile-form-field">
-                <span class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelSuggestedValue %></span>
+                <label class="employee-profile-correction-label employee-profile-field-label" for="<%= ProposedValueTextBox.ClientID %>"><%= lang.EmployeeProfileCorrectionRequest_LabelSuggestedValue %></label>
                 <asp:TextBox ID="ProposedValueTextBox" CssClass="NormalTextBox employee-profile-correction-input" MaxLength="512" runat="server" />
             </div>
             <div class="employee-profile-form-field employee-profile-form-field-wide">
-                <span class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelNote %></span>
+                <label class="employee-profile-correction-label employee-profile-field-label" for="<%= RequestNoteTextBox.ClientID %>"><%= lang.EmployeeProfileCorrectionRequest_LabelNote %></label>
                 <asp:TextBox ID="RequestNoteTextBox" CssClass="NormalTextBox employee-profile-correction-input employee-profile-correction-note"
                     MaxLength="1000" TextMode="MultiLine" Rows="4" runat="server" />
             </div>
@@ -91,11 +91,11 @@
                 <HeaderTemplate>
                     <table class="employee-profile-correction-list" cellspacing="0" cellpadding="4" border="0">
                         <tr>
-                            <th><%= lang.EmployeeProfileCorrectionRequest_ColumnUtc %></th>
-                            <th><%= lang.EmployeeProfileCorrectionRequest_ColumnField %></th>
-                            <th><%= lang.EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot %></th>
-                            <th><%= lang.EmployeeProfileCorrectionRequest_LabelSuggestedValue %></th>
-                            <th><%= lang.EmployeeProfileCorrectionRequest_ColumnStatus %></th>
+                            <th scope="col"><%= lang.EmployeeProfileCorrectionRequest_ColumnUtc %></th>
+                            <th scope="col"><%= lang.EmployeeProfileCorrectionRequest_ColumnField %></th>
+                            <th scope="col"><%= lang.EmployeeProfileCorrectionRequest_ColumnCurrentSnapshot %></th>
+                            <th scope="col"><%= lang.EmployeeProfileCorrectionRequest_LabelSuggestedValue %></th>
+                            <th scope="col"><%= lang.EmployeeProfileCorrectionRequest_ColumnStatus %></th>
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>

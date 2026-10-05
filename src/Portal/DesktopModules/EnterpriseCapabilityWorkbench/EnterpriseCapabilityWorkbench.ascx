@@ -38,27 +38,27 @@
                 </lang>
             --%>
             <div class="enterprise-workbench-form-field enterprise-workbench-form-field-wide">
-                <span class="SubHead enterprise-workbench-label"><%= lang.EnterpriseCapabilityWorkbench_LabelItemTitle %></span>
+                <label class="SubHead enterprise-workbench-label" for="<%= TitleTextBox.ClientID %>"><%= lang.EnterpriseCapabilityWorkbench_LabelItemTitle %></label>
                 <asp:TextBox ID="TitleTextBox" CssClass="NormalTextBox enterprise-workbench-input" MaxLength="200" runat="server" />
             </div>
             <div class="enterprise-workbench-form-field">
-                <span class="SubHead enterprise-workbench-label"><%= lang.EnterpriseCapabilityWorkbench_LabelItemType %></span>
+                <label class="SubHead enterprise-workbench-label" for="<%= ItemTypeList.ClientID %>"><%= lang.EnterpriseCapabilityWorkbench_LabelItemType %></label>
                 <asp:DropDownList ID="ItemTypeList" CssClass="NormalTextBox enterprise-workbench-input" runat="server" />
             </div>
             <div class="enterprise-workbench-form-field">
-                <span class="SubHead enterprise-workbench-label"><%= lang.EnterpriseCapabilityWorkbench_LabelPriority %></span>
+                <label class="SubHead enterprise-workbench-label" for="<%= PriorityList.ClientID %>"><%= lang.EnterpriseCapabilityWorkbench_LabelPriority %></label>
                 <asp:DropDownList ID="PriorityList" CssClass="NormalTextBox enterprise-workbench-input" runat="server" />
             </div>
             <div class="enterprise-workbench-form-field enterprise-workbench-form-field-wide">
-                <span class="SubHead enterprise-workbench-label"><%= lang.EnterpriseCapabilityWorkbench_LabelSummary %></span>
+                <label class="SubHead enterprise-workbench-label" for="<%= SummaryTextBox.ClientID %>"><%= lang.EnterpriseCapabilityWorkbench_LabelSummary %></label>
                 <asp:TextBox ID="SummaryTextBox" CssClass="NormalTextBox enterprise-workbench-input" MaxLength="500" runat="server" />
             </div>
             <div class="enterprise-workbench-form-field">
-                <span class="SubHead enterprise-workbench-label"><%= lang.EnterpriseCapabilityWorkbench_LabelDueUtc %></span>
+                <label class="SubHead enterprise-workbench-label" for="<%= DueUtcTextBox.ClientID %>"><%= lang.EnterpriseCapabilityWorkbench_LabelDueUtc %></label>
                 <asp:TextBox ID="DueUtcTextBox" CssClass="NormalTextBox enterprise-workbench-input" MaxLength="19" runat="server" />
             </div>
             <div class="enterprise-workbench-form-field enterprise-workbench-form-field-full">
-                <span class="SubHead enterprise-workbench-label"><%= lang.EnterpriseCapabilityWorkbench_LabelItemDetail %></span>
+                <label class="SubHead enterprise-workbench-label" for="<%= DescriptionTextBox.ClientID %>"><%= lang.EnterpriseCapabilityWorkbench_LabelItemDetail %></label>
                 <asp:TextBox ID="DescriptionTextBox" CssClass="NormalTextBox enterprise-workbench-input enterprise-workbench-body"
                     MaxLength="4000" TextMode="MultiLine" Rows="6" runat="server" />
             </div>
@@ -86,13 +86,13 @@
                                     <en>Since P74.2 these headers use the module's own resource keys instead of borrowing keys from BusinessApplicationRequest, because borrowing couples the two modules' renames and wording.</en>
                                 </lang>
                             --%>
-                            <th><%= lang.EnterpriseCapabilityWorkbench_ColumnUtc %></th>
-                            <th><%= lang.EnterpriseCapabilityWorkbench_ColumnId %></th>
-                            <th><%= lang.EnterpriseCapabilityWorkbench_LabelTitle %></th>
-                            <th><%= lang.EnterpriseCapabilityWorkbench_ColumnStatus %></th>
-                            <th><%= lang.EnterpriseCapabilityWorkbench_LabelPriority %></th>
-                            <th><%= lang.EnterpriseCapabilityWorkbench_ColumnRecentComment %></th>
-                            <th><%= lang.EnterpriseCapabilityWorkbench_SectionFollowUp %></th>
+                            <th scope="col"><%= lang.EnterpriseCapabilityWorkbench_ColumnUtc %></th>
+                            <th scope="col"><%= lang.EnterpriseCapabilityWorkbench_ColumnId %></th>
+                            <th scope="col"><%= lang.EnterpriseCapabilityWorkbench_LabelTitle %></th>
+                            <th scope="col"><%= lang.EnterpriseCapabilityWorkbench_ColumnStatus %></th>
+                            <th scope="col"><%= lang.EnterpriseCapabilityWorkbench_LabelPriority %></th>
+                            <th scope="col"><%= lang.EnterpriseCapabilityWorkbench_ColumnRecentComment %></th>
+                            <th scope="col"><%= lang.EnterpriseCapabilityWorkbench_SectionFollowUp %></th>
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>

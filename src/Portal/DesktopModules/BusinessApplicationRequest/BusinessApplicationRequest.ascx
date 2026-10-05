@@ -38,19 +38,19 @@
                 </lang>
             --%>
             <div class="business-application-form-field business-application-form-field-wide">
-                <span class="SubHead business-application-label"><%= lang.BusinessApplicationRequest_LabelTitle %></span>
+                <label class="SubHead business-application-label" for="<%= TitleTextBox.ClientID %>"><%= lang.BusinessApplicationRequest_LabelTitle %></label>
                 <asp:TextBox ID="TitleTextBox" CssClass="NormalTextBox business-application-input" MaxLength="200" runat="server" />
             </div>
             <div class="business-application-form-field">
-                <span class="SubHead business-application-label"><%= lang.BusinessApplicationRequest_LabelCategory %></span>
+                <label class="SubHead business-application-label" for="<%= CategoryList.ClientID %>"><%= lang.BusinessApplicationRequest_LabelCategory %></label>
                 <asp:DropDownList ID="CategoryList" CssClass="NormalTextBox business-application-input" runat="server" />
             </div>
             <div class="business-application-form-field business-application-form-field-wide">
-                <span class="SubHead business-application-label"><%= lang.BusinessApplicationRequest_LabelSummary %></span>
+                <label class="SubHead business-application-label" for="<%= SummaryTextBox.ClientID %>"><%= lang.BusinessApplicationRequest_LabelSummary %></label>
                 <asp:TextBox ID="SummaryTextBox" CssClass="NormalTextBox business-application-input" MaxLength="500" runat="server" />
             </div>
             <div class="business-application-form-field business-application-form-field-full">
-                <span class="SubHead business-application-label"><%= lang.BusinessApplicationRequest_LabelRequestDetail %></span>
+                <label class="SubHead business-application-label" for="<%= BodyTextBox.ClientID %>"><%= lang.BusinessApplicationRequest_LabelRequestDetail %></label>
                 <asp:TextBox ID="BodyTextBox" CssClass="NormalTextBox business-application-input business-application-body"
                     MaxLength="4000" TextMode="MultiLine" Rows="6" runat="server" />
             </div>
@@ -72,11 +72,11 @@
                 <HeaderTemplate>
                     <table class="business-application-list" cellspacing="0" cellpadding="4" border="0">
                         <tr>
-                            <th><%= lang.BusinessApplicationRequest_ColumnUtc %></th>
-                            <th><%= lang.BusinessApplicationRequest_ColumnId %></th>
-                            <th><%= lang.BusinessApplicationRequest_LabelTitle %></th>
-                            <th><%= lang.BusinessApplicationRequest_ColumnStatus %></th>
-                            <th><%= lang.BusinessApplicationRequest_ColumnReviewNote %></th>
+                            <th scope="col"><%= lang.BusinessApplicationRequest_ColumnUtc %></th>
+                            <th scope="col"><%= lang.BusinessApplicationRequest_ColumnId %></th>
+                            <th scope="col"><%= lang.BusinessApplicationRequest_LabelTitle %></th>
+                            <th scope="col"><%= lang.BusinessApplicationRequest_ColumnStatus %></th>
+                            <th scope="col"><%= lang.BusinessApplicationRequest_ColumnReviewNote %></th>
                         </tr>
                 </HeaderTemplate>
                 <ItemTemplate>
