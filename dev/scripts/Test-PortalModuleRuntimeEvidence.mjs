@@ -75,7 +75,19 @@ async function loadChromium() {
 }
 
 const repoRoot = path.resolve(process.cwd());
-const outputDir = path.join(repoRoot, 'temp', 'p74', 'module-verify');
+// <lang>
+//   <zh-CN>输出目录默认沿用 `temp\p74\module-verify`（保持既有调用方行为不变），但允许用
+//   `PORTAL_MODULE_EVIDENCE_DIR` 覆盖 —— 编排层 `Invoke-PortalModuleRuntimeGate.ps1` 要按"组"分别留证，
+//   三组写进同一目录会互相覆盖截图与摘要。这是**只增不改**：不设该变量时行为与之前完全一致。</zh-CN>
+//   <en>The output directory keeps the existing `temp\p74\module-verify` default (existing callers are unaffected) but may be
+//   overridden through `PORTAL_MODULE_EVIDENCE_DIR`, because the orchestration layer
+//   `Invoke-PortalModuleRuntimeGate.ps1` archives evidence **per group** and three groups writing into one directory would
+//   overwrite each other's screenshots and summary. This is additive only: with the variable unset the behavior is identical
+//   to before.</en>
+// </lang>
+const outputDir = process.env.PORTAL_MODULE_EVIDENCE_DIR
+  ? path.resolve(process.env.PORTAL_MODULE_EVIDENCE_DIR)
+  : path.join(repoRoot, 'temp', 'p74', 'module-verify');
 fs.mkdirSync(outputDir, { recursive: true });
 
 const contextPath = path.join(repoRoot, 'temp', 'p65', 'p65-acceptance-context.json');
@@ -146,7 +158,25 @@ try {
       const text = await page.locator('body').innerText().catch(() => '');
 
       record.facts.errorPage = /GenericErrorPage|应用程序暂时无法完成请求/.test(html);
-      record.facts.modulePresent = html.includes(target.moduleSelector.slice(1));
+      // <lang>
+      //   <zh-CN>`moduleSelector` 是**可选**的加强断言，不是必需项：编排层按 ascx 标记推导根 class，通用模块
+      //   （HtmlModule / XmlModule / ImageModule 等）没有专属根 class，推导会失败。此时**只**保留"未落通用错误页"
+      //   这一条核心断言 —— 它已经等价于"运行期编译与加载成功"，也正是本门禁存在的理由。
+      //   早先版本在这里无条件调用 `target.moduleSelector.slice(1)`，选择器缺失时抛
+      //   "Cannot read properties of null"，把"覆盖不足"伪装成"门禁崩溃"，反而更难定位。</zh-CN>
+      //   <en>`moduleSelector` is an **optional** stronger assertion, not a requirement: the orchestration layer derives the root
+      //   class from the ascx markup, and generic modules (HtmlModule / XmlModule / ImageModule and the like) have no dedicated
+      //   root class, so derivation yields nothing for them. In that case only the core assertion — "did not fall back to the
+      //   generic error page" — is kept, and that alone already means "runtime compilation and load succeeded", which is the
+      //   whole reason this gate exists. An earlier version called `target.moduleSelector.slice(1)` unconditionally, so a
+      //   missing selector threw "Cannot read properties of null", disguising "insufficient coverage" as "the gate crashed",
+      //   which is much harder to diagnose.</en>
+      // </lang>
+      const selector = target.moduleSelector || null;
+      record.facts.selectorAvailable = Boolean(selector);
+      if (selector) {
+        record.facts.modulePresent = html.includes(selector.slice(1));
+      }
       record.facts.emptyStateClass = html.includes('portal-empty-state');
       record.facts.emptyMarkers = (target.expectEmptyStateMarker || []).filter((marker) => text.includes(marker));
       record.facts.sharedTitleText = await page.locator('.portal-module-header .portal-module-title').first().innerText().catch(() => '');
@@ -156,7 +186,7 @@ try {
         record.status = 'Fail';
         record.notes.push('The page fell back to the generic error page (runtime compilation or load failure).');
       }
-      if (!record.facts.modulePresent) {
+      if (selector && !record.facts.modulePresent) {
         record.status = 'Fail';
         record.notes.push(`Module root for ${target.moduleSelector} was not found.`);
       }
