@@ -118,6 +118,8 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%-- P81.3 空态：仅在"查询成功且零条"时渲染；输入无效分支由代码后置把计数置为 null 抑制，避免把错误说成"暂无日志"。 --%>
+                        <%= PortalEmptyStateRenderer.Render(EntriesEmptyStateRowCount, EntriesEmptyStateText, 5) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>

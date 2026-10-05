@@ -2625,6 +2625,30 @@
   <data name="Admin_WorkItems_EmptyNoMatches" xml:space="preserve">
     <value>没有符合条件的待办</value>
   </data>
+  <data name="Admin_SystemHealth_EmptyNoChecks" xml:space="preserve">
+    <value>暂无健康检查项</value>
+  </data>
+  <data name="Admin_SystemHealth_EmptyNoSettings" xml:space="preserve">
+    <value>暂无系统设置项</value>
+  </data>
+  <data name="Admin_OperationAudits_EmptyNoEntries" xml:space="preserve">
+    <value>暂无操作审计记录</value>
+  </data>
+  <data name="Admin_OperationAudits_EmptyNoMatches" xml:space="preserve">
+    <value>没有符合条件的操作审计记录</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_EmptyNoEntries" xml:space="preserve">
+    <value>暂无诊断日志</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_EmptyNoMatches" xml:space="preserve">
+    <value>没有符合条件的诊断日志</value>
+  </data>
+  <data name="Contacts_EmptyNoContacts" xml:space="preserve">
+    <value>暂无联系人</value>
+  </data>
+  <data name="Document_EmptyNoDocuments" xml:space="preserve">
+    <value>暂无文档</value>
+  </data>
   <data name="Collaboration_ParticipantRole_Collaborator" xml:space="preserve">
     <value>协办</value>
   </data>

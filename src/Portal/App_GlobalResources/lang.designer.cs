@@ -10579,5 +10579,100 @@ namespace Resources {
                 return ResourceManager.GetString("MyWorkItems_KindEmployeeProfileCorrectionRequest", resourceCulture);
             }
         }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No health checks</zh-CN>
+        ///   <en>Looks up a localized string similar to: No health checks</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_EmptyNoChecks {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_EmptyNoChecks", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No system settings</zh-CN>
+        ///   <en>Looks up a localized string similar to: No system settings</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_SystemHealth_EmptyNoSettings {
+            get {
+                return ResourceManager.GetString("Admin_SystemHealth_EmptyNoSettings", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No operation audit entries</zh-CN>
+        ///   <en>Looks up a localized string similar to: No operation audit entries</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_EmptyNoEntries {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_EmptyNoEntries", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No matching operation audit entries</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching operation audit entries</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_OperationAudits_EmptyNoMatches {
+            get {
+                return ResourceManager.GetString("Admin_OperationAudits_EmptyNoMatches", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No diagnostic logs</zh-CN>
+        ///   <en>Looks up a localized string similar to: No diagnostic logs</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticsLogs_EmptyNoEntries {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticsLogs_EmptyNoEntries", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No matching diagnostic logs</zh-CN>
+        ///   <en>Looks up a localized string similar to: No matching diagnostic logs</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_DiagnosticsLogs_EmptyNoMatches {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticsLogs_EmptyNoMatches", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No contacts</zh-CN>
+        ///   <en>Looks up a localized string similar to: No contacts</en>
+        /// </lang>
+        /// </summary>
+        internal static string Contacts_EmptyNoContacts {
+            get {
+                return ResourceManager.GetString("Contacts_EmptyNoContacts", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：No documents</zh-CN>
+        ///   <en>Looks up a localized string similar to: No documents</en>
+        /// </lang>
+        /// </summary>
+        internal static string Document_EmptyNoDocuments {
+            get {
+                return ResourceManager.GetString("Document_EmptyNoDocuments", resourceCulture);
+            }
+        }
     }
 }

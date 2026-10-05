@@ -117,6 +117,8 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%-- P81.3 空态：仅在"查询成功且零条"时渲染；输入无效与审计表不可用两个分支由代码后置把计数置为 null 抑制，避免把错误/故障说成"暂无记录"。 --%>
+                        <%= PortalEmptyStateRenderer.Render(EntriesEmptyStateRowCount, EntriesEmptyStateText, 7) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>

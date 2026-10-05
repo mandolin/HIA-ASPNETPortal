@@ -248,10 +248,15 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             PackagesGrid.DataSource = rows;
             PackagesGrid.DataBind();
-            if (rows.Count == 0)
-            {
-                ResultLabel.Text = lang.Admin_ModuleCatalog_MessageNoPackage;
-            }
+
+            // <lang>
+            //   <zh-CN>原先把零条写进 ResultLabel，会与 P81.3 的表内空态（EmptyDataTemplate）重复呈现同一信息，故移除该赋值。
+            //   GridView 的 EmptyDataTemplate 只在零条时渲染，故本页不需要像 Repeater 那样把行数传给标记层。</zh-CN>
+            //   <en>The previous code wrote the zero-row message into ResultLabel, which would duplicate the same information now
+            //   shown by the in-table empty state (EmptyDataTemplate), so that assignment is removed. A GridView renders its
+            //   EmptyDataTemplate only when it has zero rows, so this page — unlike the Repeater-based ones — does not need to
+            //   pass a row count to the markup.</en>
+            // </lang>
         }
 
         /// <summary>

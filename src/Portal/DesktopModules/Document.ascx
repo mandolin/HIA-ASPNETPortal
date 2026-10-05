@@ -1,4 +1,9 @@
 <%@ Control language="c#" Inherits="ASPNET.StarterKit.Portal.Document" CodeBehind="Document.ascx.cs" AutoEventWireup="True" %>
+<%--
+    P81.3 空态需要引用共享渲染器。ASCX 标记**不进 msbuild**（构建/单测/XML 三道门禁都看不见），
+    缺这条 Import 只在**运行期**抛 CS0103，故此处必须显式写出（沿用 W74 已验证的结论）。
+--%>
+<%@ Import Namespace="ASPNET.StarterKit.Portal" %>
 
 <%--
     <lang>
@@ -78,6 +83,8 @@
             </tr>
     </ItemTemplate>
     <FooterTemplate>
+        <%-- P81.3 空态：无文档时给出说明行，避免出现"只有表头"的空白表格。 --%>
+        <%= PortalEmptyStateRenderer.Render(DocumentEmptyStateRowCount, DocumentEmptyStateText, 5) %>
         </table>
     </FooterTemplate>
 </asp:Repeater>

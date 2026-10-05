@@ -94,6 +94,7 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%= PortalEmptyStateRenderer.Render(HealthChecksEmptyStateRowCount, lang.Admin_SystemHealth_EmptyNoChecks, 6) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
@@ -138,6 +139,7 @@
                             </tr>
                     </ItemTemplate>
                     <FooterTemplate>
+                        <%= PortalEmptyStateRenderer.Render(SettingsEmptyStateRowCount, lang.Admin_SystemHealth_EmptyNoSettings, 8) %>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>

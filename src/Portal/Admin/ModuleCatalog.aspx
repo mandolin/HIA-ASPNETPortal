@@ -52,8 +52,18 @@
                     <en>The GridView projects only trusted deployed-package state and metadata; a bound package id is not a trust boundary, so RowCommand must parse and validate it again on the server.</en>
                   </lang>
                 --%>
+                <%--
+                    <lang>
+                      <zh-CN>P81.3 空态：GridView 零条时默认不渲染表格，因而用 <c>EmptyDataTemplate</c> 并开启
+                      <c>ShowHeaderWhenEmpty</c>，使"表头 + 居中提示行"形态与其余六个列表一致。</zh-CN>
+                      <en>P81.3 empty state: a GridView renders no table when it has zero rows, so <c>EmptyDataTemplate</c>
+                      is used together with <c>ShowHeaderWhenEmpty</c> so the "header plus centred hint row" shape matches
+                      the other six lists.</en>
+                    </lang>
+                --%>
                 <asp:GridView
                     ID="PackagesGrid"
+                    ShowHeaderWhenEmpty="true"
                     AutoGenerateColumns="False"
                     GridLines="None"
                     CssClass="portal-data-table portal-module-catalog-table"
@@ -120,6 +130,18 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
+                    <%--
+                        <lang>
+                          <zh-CN>P81.3 空态：GridView 零条时默认不渲染表格，故用 EmptyDataTemplate 承载提示；
+                          配合 <c>ShowHeaderWhenEmpty="true"</c> 保留表头，使形态与其余六个列表一致。</zh-CN>
+                          <en>P81.3 empty state: a GridView renders no table when it has zero rows, so the hint lives in an
+                          EmptyDataTemplate; together with <c>ShowHeaderWhenEmpty="true"</c> the header is preserved so the
+                          shape matches the other six lists.</en>
+                        </lang>
+                    --%>
+                    <EmptyDataTemplate>
+                        <div class="portal-empty-state"><%= lang.Admin_ModuleCatalog_MessageNoPackage %></div>
+                    </EmptyDataTemplate>
                 </asp:GridView>
             </div>
         </div>

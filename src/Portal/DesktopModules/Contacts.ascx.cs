@@ -51,9 +51,48 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>联系人列表没有复杂页面状态；每次请求都重新按模块读取，避免旧缓存显示错误模块的数据。</zh-CN>
             //   <en>The contact list has no complex page state; each request reloads by module so stale cache cannot show another module's data.</en>
             // </lang>
-            myDataGrid.DataSource = ContactsDB.GetContacts(ModuleId);
+            // <lang>
+            //   <zh-CN>绑定前先取行数：表尾空态依赖它，且必须早于 DataBind 写入。
+            //   数据源类型保持 <c>IEnumerable</c> 不变（不改成 List），以免改变既有绑定与枚举行为。</zh-CN>
+            //   <en>Take the row count before binding: the footer's empty state depends on it and it must be written before
+            //   DataBind. The data source type stays <c>IEnumerable</c> (not converted to a List) so existing binding and
+            //   enumeration behaviour is unchanged.</en>
+            // </lang>
+            System.Collections.Generic.IEnumerable<IContactItem> contacts = ContactsDB.GetContacts(ModuleId);
+            contactsEmptyStateRowCount = System.Linq.Enumerable.Count(contacts);
+            myDataGrid.DataSource = contacts;
             myDataGrid.DataBind();
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>联系人列表的空态行数：有数据为正数、零条为 <c>0</c>；本页无失败路径，故不会取 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the contact list: positive when rows exist and <c>0</c> when the result is empty; this module has no failure path, so it never becomes <c>null</c>.</en>
+        /// </lang>
+        /// </summary>
+        protected int? ContactsEmptyStateRowCount
+        {
+            get { return contactsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态文案：旧内容模块无筛选条件，零条即"暂无联系人"。</zh-CN>
+        ///   <en>Empty-state wording: the legacy module has no filters, so zero rows simply means "no contacts".</en>
+        /// </lang>
+        /// </summary>
+        protected string ContactsEmptyStateText
+        {
+            get { return Resources.lang.Contacts_EmptyNoContacts; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>联系人列表的空态行数；由 <see cref="Page_Load"/> 在绑定前写入。</zh-CN>
+        ///   <en>Empty-state row count of the contact list; written by <see cref="Page_Load"/> before binding.</en>
+        /// </lang>
+        /// </summary>
+        private int? contactsEmptyStateRowCount;
 
         /// <summary>
         /// <lang>

@@ -224,6 +224,12 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>输入无效时同时清空列表和分页控件，避免继续展示上一组日期的诊断数据。</zh-CN>
                 //   <en>Clear both the list and paging controls for invalid input so diagnostics from the previous date range are not left visible.</en>
                 // </lang>
+                // <lang>
+                //   <zh-CN>显式抑制空态：此处是**输入无效**而非"没有日志"，渲染"暂无…"会把错误提示混成空结果。</zh-CN>
+                //   <en>Suppress the empty state explicitly: this is **invalid input** rather than "no logs", so rendering
+                //   "nothing here" would blend an error message into an empty result.</en>
+                // </lang>
+                entriesEmptyStateRowCount = null;
                 EntriesRepeater.DataSource = null;
                 EntriesRepeater.DataBind();
                 PreviousButton.Visible = false;
@@ -247,6 +253,12 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The query carries only controlled filters and page bounds; the service owns availability, scan limits, and low-sensitivity projection.</en>
             // </lang>
             PortalDiagnosticQueryResult result = PortalDiagnosticQueryService.Query(query);
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（输入无效路径）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it; <c>null</c> suppresses it on the invalid-input path.</en>
+            // </lang>
+            entriesEmptyStateRowCount = result.Entries.Count;
             EntriesRepeater.DataSource = result.Entries;
             EntriesRepeater.DataBind();
 
@@ -342,5 +354,40 @@ namespace ASPNET.StarterKit.Portal
 
             return true;
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>条目列表的空态行数：有数据为正数、零条为 <c>0</c>、输入无效为 <c>null</c>（抑制空态）。</zh-CN>
+        ///   <en>Empty-state row count of the entry list: positive when rows exist, <c>0</c> when the result is empty, and <c>null</c> for invalid input, which suppresses the empty state.</en>
+        /// </lang>
+        /// </summary>
+        protected int? EntriesEmptyStateRowCount
+        {
+            get { return entriesEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态文案：只有日期范围（查询必需边界）时用"无日志"；级别/类别/事件号任一非空时用"筛选无结果"。</zh-CN>
+        ///   <en>Empty-state wording: "no logs" when only the date range (a required query bound) is set, and "no matching logs" when any of level, category, or event id is non-empty.</en>
+        /// </lang>
+        /// </summary>
+        protected string EntriesEmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(LevelFilter.SelectedValue) && string.IsNullOrEmpty(CategoryFilter.Text) && string.IsNullOrEmpty(EventIdFilter.Text)
+                    ? lang.Admin_DiagnosticsLogs_EmptyNoEntries
+                    : lang.Admin_DiagnosticsLogs_EmptyNoMatches;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>条目列表的空态行数；由 <see cref="BindEntries"/> 在绑定前写入，输入无效时置为 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the entry list; written by <see cref="BindEntries"/> before binding and set to <c>null</c> for invalid input.</en>
+        /// </lang>
+        /// </summary>
+        private int? entriesEmptyStateRowCount;
     }
 }

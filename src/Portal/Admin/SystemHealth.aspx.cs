@@ -113,11 +113,56 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>三个控件只绑定快照投影，避免页面重复查询或把设置值当作可编辑配置。</zh-CN>
             //   <en>Bind only the snapshot projections to the three controls so the page neither repeats queries nor treats settings as editable configuration.</en>
             // </lang>
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在各自表尾据此渲染空态行；两者都无筛选条件，故零条即"暂无"。</zh-CN>
+            //   <en>Record the row counts before binding: the markup renders the empty-state row in each footer from them. Neither list has filters, so zero rows simply means "nothing here".</en>
+            // </lang>
+            healthChecksEmptyStateRowCount = snapshot.Checks.Count;
+            settingsEmptyStateRowCount = snapshot.Settings.Count;
+
             HealthChecksRepeater.DataSource = snapshot.Checks;
             HealthChecksRepeater.DataBind();
 
             SettingsRepeater.DataSource = snapshot.Settings;
             SettingsRepeater.DataBind();
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>健康检查列表的空态行数：有数据为正数、零条为 <c>0</c>；本页无失败路径，故不会取 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the health-check list: positive when rows exist and <c>0</c> when the result is empty; this page has no failure path, so it never becomes <c>null</c>.</en>
+        /// </lang>
+        /// </summary>
+        protected int? HealthChecksEmptyStateRowCount
+        {
+            get { return healthChecksEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>系统设置列表的空态行数：有数据为正数、零条为 <c>0</c>。</zh-CN>
+        ///   <en>Empty-state row count of the system-setting list: positive when rows exist and <c>0</c> when the result is empty.</en>
+        /// </lang>
+        /// </summary>
+        protected int? SettingsEmptyStateRowCount
+        {
+            get { return settingsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>健康检查列表的空态行数；由 <see cref="BindHealthSnapshot"/> 在绑定前写入。</zh-CN>
+        ///   <en>Empty-state row count of the health-check list; written by <see cref="BindHealthSnapshot"/> before binding.</en>
+        /// </lang>
+        /// </summary>
+        private int? healthChecksEmptyStateRowCount;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>系统设置列表的空态行数；由 <see cref="BindHealthSnapshot"/> 在绑定前写入。</zh-CN>
+        ///   <en>Empty-state row count of the system-setting list; written by <see cref="BindHealthSnapshot"/> before binding.</en>
+        /// </lang>
+        /// </summary>
+        private int? settingsEmptyStateRowCount;
     }
 }

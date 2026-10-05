@@ -2625,6 +2625,30 @@
   <data name="Admin_WorkItems_EmptyNoMatches" xml:space="preserve">
     <value>No matching work items</value>
   </data>
+  <data name="Admin_SystemHealth_EmptyNoChecks" xml:space="preserve">
+    <value>No health checks</value>
+  </data>
+  <data name="Admin_SystemHealth_EmptyNoSettings" xml:space="preserve">
+    <value>No system settings</value>
+  </data>
+  <data name="Admin_OperationAudits_EmptyNoEntries" xml:space="preserve">
+    <value>No operation audit entries</value>
+  </data>
+  <data name="Admin_OperationAudits_EmptyNoMatches" xml:space="preserve">
+    <value>No matching operation audit entries</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_EmptyNoEntries" xml:space="preserve">
+    <value>No diagnostic logs</value>
+  </data>
+  <data name="Admin_DiagnosticsLogs_EmptyNoMatches" xml:space="preserve">
+    <value>No matching diagnostic logs</value>
+  </data>
+  <data name="Contacts_EmptyNoContacts" xml:space="preserve">
+    <value>No contacts</value>
+  </data>
+  <data name="Document_EmptyNoDocuments" xml:space="preserve">
+    <value>No documents</value>
+  </data>
   <data name="Collaboration_ParticipantRole_Collaborator" xml:space="preserve">
     <value>Collaborator</value>
   </data>

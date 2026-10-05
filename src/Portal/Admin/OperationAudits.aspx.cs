@@ -194,6 +194,13 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>输入无效时同时清空列表和分页控件，避免继续展示上一组日期的审计数据。</zh-CN>
                 //   <en>Clear both the list and paging controls for invalid input so audit records from the previous date range are not left visible.</en>
                 // </lang>
+                // <lang>
+                //   <zh-CN>显式抑制空态：此处是**输入无效**而不是"查询到零条"，
+                //   若渲染"暂无…"就会把一条错误消息当成空结果呈现。</zh-CN>
+                //   <en>Suppress the empty state explicitly: this branch is **invalid input**, not "zero rows found",
+                //   so rendering "nothing here" would present an error message as an empty result.</en>
+                // </lang>
+                entriesEmptyStateRowCount = null;
                 EntriesRepeater.DataSource = null;
                 EntriesRepeater.DataBind();
                 PreviousButton.Visible = false;
@@ -217,6 +224,12 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The query uses the current request context for the service's audit-read boundary; the page itself neither writes audit records nor changes authorization.</en>
             // </lang>
             PortalOperationAuditQueryResult result = PortalOperationAudit.Query(query, Context);
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（输入无效 / 存储不可用）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it, and <c>null</c> suppresses it for invalid input or unavailable storage.</en>
+            // </lang>
+            entriesEmptyStateRowCount = result.Entries.Count;
             EntriesRepeater.DataSource = result.Entries;
             EntriesRepeater.DataBind();
 
@@ -233,6 +246,14 @@ namespace ASPNET.StarterKit.Portal
                 //   <zh-CN>审计表缺失时保留服务返回的空结果并给出固定迁移提示，不泄露连接或 SQL 细节。</zh-CN>
                 //   <en>When the audit table is missing, keep the service-provided empty result and show a fixed migration hint without exposing connection or SQL details.</en>
                 // </lang>
+
+                // <lang>
+                //   <zh-CN>显式抑制空态：审计表不可用属**读取失败**，与"没有记录"是两种状态；
+                //   此时表格仍可见，若再渲染"暂无…"会与上方提示自相矛盾。</zh-CN>
+                //   <en>Suppress the empty state explicitly: an unavailable audit table is a **read failure**, a different state
+                //   from "no records"; the table stays visible, so rendering "nothing here" would contradict the hint above.</en>
+                // </lang>
+                entriesEmptyStateRowCount = null;
                 MessageLabel.Text = lang.Admin_OperationAudits_TableUnavailable;
                 ResultLabel.Text = string.Empty;
                 return;
@@ -317,5 +338,40 @@ namespace ASPNET.StarterKit.Portal
 
             return true;
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>条目列表的空态行数：有数据为正数、零条为 <c>0</c>、输入无效或审计表不可用为 <c>null</c>（抑制空态）。</zh-CN>
+        ///   <en>Empty-state row count of the entry list: positive when rows exist, <c>0</c> when the result is empty, and <c>null</c> for invalid input or an unavailable audit table, which suppresses the empty state.</en>
+        /// </lang>
+        /// </summary>
+        protected int? EntriesEmptyStateRowCount
+        {
+            get { return entriesEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态文案：只有日期范围（查询必需边界）时用"无记录"；类别/动作/目标任一非空时用"筛选无结果"。</zh-CN>
+        ///   <en>Empty-state wording: "no entries" when only the date range (a required query bound) is set, and "no matching entries" when any of category, action, or target is non-empty.</en>
+        /// </lang>
+        /// </summary>
+        protected string EntriesEmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(CategoryFilter.Text) && string.IsNullOrEmpty(ActionFilter.Text) && string.IsNullOrEmpty(TargetIdFilter.Text)
+                    ? lang.Admin_OperationAudits_EmptyNoEntries
+                    : lang.Admin_OperationAudits_EmptyNoMatches;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>条目列表的空态行数；由 <see cref="BindEntries"/> 在绑定前写入，输入无效与审计表不可用时置为 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the entry list; written by <see cref="BindEntries"/> before binding and set to <c>null</c> for invalid input or an unavailable audit table.</en>
+        /// </lang>
+        /// </summary>
+        private int? entriesEmptyStateRowCount;
     }
 }
