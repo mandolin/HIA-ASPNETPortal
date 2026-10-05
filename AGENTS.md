@@ -120,11 +120,11 @@
 
 ## 任务账本与反循环协议
 
-- 长任务开始、上下文恢复、阶段切换或继续推进前，必须先读取根目录 `TASK_STATE.md`、最新 `work-zone/dev/CURRENT_STATUS_YYYY-MM-DD.md`、`work-zone/dev/plans/W-anp-INDEX.md` 和相关阶段计划。
+- 长任务开始、上下文恢复、阶段切换或继续推进前，必须先读取`work-zone/dev/TASK_STATE.md`、最新 `work-zone/dev/CURRENT_STATUS_YYYY-MM-DD.md`、`work-zone/dev/plans/W-anp-INDEX.md` 和相关阶段计划。
 - 继续动手前同时核对主仓库与 WorkZone 的 `git status --short`，并识别哪些是既有残留、哪些是本轮相关改动。
-- `TASK_STATE.md` 记录动态状态：当前目标、完成条件、当前里程碑、已完成项及验证证据、失败尝试、唯一下一步、最后代码状态和连续无进展次数。
-- 阶段完成、进入新阶段、改变下一步唯一动作、出现失败重试或准备长时间暂停时，必须更新 `TASK_STATE.md`。
+- `work-zone/dev/TASK_STATE.md` 记录动态状态：当前目标、完成条件、当前里程碑、已完成项及验证证据、失败尝试、唯一下一步、最后代码状态和连续无进展次数。
+- 阶段完成、进入新阶段、改变下一步唯一动作、出现失败重试或准备长时间暂停时，必须更新 `work-zone/dev/TASK_STATE.md`。
 - 不得重复执行已标记为 `completed`、`abandoned` 或 `deferred` 的动作，除非用户明确要求复核。
 - 同一命令或同一方案连续失败 2 次，或连续 2 轮没有新代码、测试结果、文档证据或用户确认时，必须暂停并报告，不得继续循环。
 - 达到可验证完成条件后，应写入结果/closeout 或任务账本，再进入下一讨论节点；不要因为上下文缺失而重新开始已完成阶段。
-- `TASK_STATE.md` 不记录密码、连接串、Token、Cookie、证书私钥、生产配置或敏感截图；详细内部依据放在 WorkZone 计划、证据或日志中。
+- `work-zone/dev/TASK_STATE.md` 不记录密码、连接串、Token、Cookie、证书私钥、生产配置或敏感截图；详细内部依据放在 WorkZone 计划、证据或日志中。

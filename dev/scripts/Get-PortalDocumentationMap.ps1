@@ -162,8 +162,7 @@ $publicDevEntrypoints = @($rootTrackedFiles | Where-Object {
         'ai/README.md',
         'src/Setup/SystemReqs.md',
         'src/Libs/readme.md',
-        'AGENTS.md',
-        'TASK_STATE.md'
+        'AGENTS.md'
     )
 })
 
