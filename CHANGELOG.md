@@ -4,7 +4,7 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [SemVer](https://semver.org/lang/zh-CN/)。
 
-## [Unreleased]
+## [v0.5.0] - 2026-10-05
 
 **Cycle 13 打磨收口**（`C-anp-P13`：W76–W83）。本 Cycle 围绕"实测优先、登记可纠"推进，多处台账登记在勘察后被实测推翻并修正。
 
