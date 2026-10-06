@@ -4,6 +4,29 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [SemVer](https://semver.org/lang/zh-CN/)。
 
+## [v0.7.0] - 2026-10-07
+
+**界面与语义打磨收口**（`C-anp-P14`：B2 + C1–C4）。本版本是 `v0.6.0` 门禁体系化的**首次应用** —— 上一版本建立的门禁套件在本批改动全程保持全绿。
+
+### 已加入
+
+- **C1 三个业务模块补标题语义**（`W82` 遗留未闭合项）：实测它们并非"无标题"，而是标题用**普通 `div`**，共享标题控件的语义覆盖不到。改为只加 `role="heading"` 与 `aria-level`，`class` 与元素名不动 → 视觉零变化。运行期实测三个模块均 `role=heading aria-level=1`。
+- **C2 只读字段语义化**（用户裁定方案 A，接受视觉变化）：`EmployeeProfileConfirm` **7 对** + `EmployeeProfileCorrectionRequest` **5 对**只读字段由 `span` 标签改 `<dl>/<dt>/<dd>`（中间层 `div` 保留 —— HTML5 允许 `dl` 内用 `div` 分组）；6 套皮肤补**作用域限定**的 `dl{margin}` 等规则，不污染其他 `dl`。
+- **C3 参与人逐人一行**：数据层新增 `BuildParticipantLines`，与逗号串**共用同一格式串**（避免两处格式漂移）；前台工作台与后台协同事项均改 `ul/li` 渲染。
+- **C4 后台列表页列宽相对化**：**7 个页面**逐表配平（沿用 `W79` 已确认的 D2 方案）；`EmployeeDirectory` 三张表分别配平；`DiagnosticLogDetail` 仅 1 个固定列，未纳入。
+- **B2 对标证据索引**：新增 `Get-PortalBenchmarkIndex.ps1`（inventory 工具，非门禁），输出 JSON + Markdown 双视图。
+
+### 已修复
+
+- **验证脚本盲区**（配套 C1）：原脚本只查共享标题控件 `.portal-module-title`，抓不到自带标题的模块 —— 会把"已修好"误判成"未修复"。已改为同时覆盖两类来源。
+- **账本编号冲突**（如实登记，暂不擅自修正）：`C-anp-P14` 中 C1 的包号与 A3 重复（同为 `W87`），实际编号待确认后再改。
+
+### 验证
+
+- 门禁套件 **14 个全绿**（`Invoke-PortalGateSuite.ps1`，L0/L1/L2 分层，失败 0、跳过 0）。
+- 语义标记门禁**双档位**通过：`BusinessWorkflow` 档位 front 4 模块全 Pass（含 C1 新增的三个 `div` 标题）；`LegacyContent` 档位 legacy 组全 Pass，且模块标题计算样式与 `v0.6.0` 基线**逐项一致**（`21px/600`、`margin 0px,0px`、`line-height 27.3px`）→ 本批改动未引入意外视觉变化。
+- 模块运行期门禁 Pass：**38 个模块实例 / 11 个 URL**。
+
 ## [v0.6.0] - 2026-10-07
 
 **门禁体系化**（`C-anp-P14`：W85–W88）。本版本不含功能改动，全部是**机制性改进**：把散落、靠人记的门禁变成一条命令可跑、失败信号统一、覆盖面可核查的体系。
