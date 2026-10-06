@@ -50,6 +50,7 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalResourceContract.ps1';      Runner = 'ps1'; Kind = '资源契约'; Args = @() }
         @{ File = 'Test-PortalVersionConsistency.ps1';    Runner = 'ps1'; Kind = '版本一致性'; Args = @() }
         @{ File = 'Test-PortalLegacyCssCompatibility.ps1'; Runner = 'ps1'; Kind = '旧版 CSS 兼容'; Args = @() }
+        @{ File = 'Test-PortalAscxCompilationContract.ps1'; Runner = 'ps1'; Kind = 'ASCX 编译契约'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
