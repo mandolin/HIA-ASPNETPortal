@@ -105,11 +105,11 @@
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnId %></th>
-                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnCode %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnCode %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnOrgName %></th>
-                                <th scope="col" width="190" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnParent %></th>
+                                <th scope="col" width="22%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnParent %></th>
                                 <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnSort %></th>
-                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnActive %></th>
+                                <th scope="col" width="9%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnActive %></th>
                                 <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
                             </tr>
                     </HeaderTemplate>
@@ -154,13 +154,13 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></th>
-                                <th scope="col" width="140" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeName %></th>
-                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnPreferred %></th>
-                                <th scope="col" width="180" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnWorkEmail %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></th>
+                                <th scope="col" width="16%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeName %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnPreferred %></th>
+                                <th scope="col" width="20%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnWorkEmail %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnOrganization %></th>
                                 <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnStatus %></th>
-                                <th scope="col" width="90" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnSource %></th>
+                                <th scope="col" width="10%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnSource %></th>
                                 <th scope="col" width="100" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
                             </tr>
                     </HeaderTemplate>
@@ -211,13 +211,13 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBindingId %></th>
-                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnUserId %></th>
-                                <th scope="col" width="140" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnUserName %></th>
-                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></th>
-                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBindingEmployeeName %></th>
+                                <th scope="col" width="8%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBindingId %></th>
+                                <th scope="col" width="8%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnUserId %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnUserName %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBindingEmployeeName %></th>
                                 <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnStatus %></th>
-                                <th scope="col" width="155" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBoundUtc %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBoundUtc %></th>
                                 <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnReason %></th>
                             </tr>
