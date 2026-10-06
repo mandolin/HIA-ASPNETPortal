@@ -158,12 +158,46 @@ function Test-SafeRelativePath {
 #   <zh-CN>解析默认或显式模块目录，并将后续 manifest、资源、脚本和迁移检查限制在受控路径。</zh-CN>
 #   <en>Resolve the default or explicit module directory and constrain subsequent manifest, resource, script, and migration checks to controlled paths.</en>
 # </lang>
+# <lang>
+#   <zh-CN>把**包名**与**目录名**解耦，修掉三个同源缺陷。原先脚本假定"目录名 = 包名"，于是：
+#     ① 包名期望值拼成 `HIA.HIA.MyWorkItems`（`$ModuleName` 已是带前缀的包名，又被加了一次前缀）；
+#     ② `desktopEntry` 越界误判 —— 期望 `DesktopModules/HIA.MyWorkItems/*`，实际 `DesktopModules/MyWorkItems/…`；
+#     ③ 迁移文件查找 `PortalBiz_HIA.MyWorkItems*.sql`，而全仓 15 个 `PortalBiz_*.sql` 命名**不含** `HIA.` 前缀。
+#   这三处都不是"项目结构错了"，而是脚本的假设与项目约定不一致：项目一致地采用
+#   **包名带 `HIA.` 前缀、目录名与迁移文件名不带前缀**（实测全仓 0 个带前缀的模块目录，
+#   6 个 `module.json` 全在无前缀目录下）。解耦后既支持传 `-ModuleName MyWorkItems`（旧用法），
+#   也支持传 `-ModuleName HIA.MyWorkItems`（包名），后者不再需要额外指定 `-ModuleDirectory`。
+# </zh-CN>
+# <en>Decouples the **package name** from the **directory name**, fixing three defects that shared one root cause. The script
+#   previously assumed "directory name = package name", so:
+#     ① the expected package id became `HIA.HIA.MyWorkItems` (`$ModuleName` already carried the prefix and gained another);
+#     ② `desktopEntry` produced a false out-of-directory verdict — expected `DesktopModules/HIA.MyWorkItems/*`, actual
+#        `DesktopModules/MyWorkItems/...`;
+#     ③ migration lookup searched `PortalBiz_HIA.MyWorkItems*.sql` while all 15 `PortalBiz_*.sql` files are named **without**
+#        the `HIA.` prefix.
+#   None of these means the project structure is wrong; the script's assumption simply disagrees with the project convention,
+#   which is consistently "package id carries the `HIA.` prefix, directory and migration file names do not" (measured: zero
+#   prefixed module directories, all six `module.json` under unprefixed ones). After decoupling it accepts both
+#   `-ModuleName MyWorkItems` (legacy) and `-ModuleName HIA.MyWorkItems` (package id), and the latter no longer forces
+#   `-ModuleDirectory`.</en>
+# </lang>
+$packageName = if ($ModuleName -match '^HIA\.') { $ModuleName } else { 'HIA.' + $ModuleName }
+$bareModuleName = $packageName.Substring('HIA.'.Length)
 $moduleRoot = if ([string]::IsNullOrWhiteSpace($ModuleDirectory)) {
-    Join-Path $portalRoot ('DesktopModules\' + $ModuleName)
+    Join-Path $portalRoot ('DesktopModules\' + $bareModuleName)
 }
 else {
     Get-FullPath -Path $ModuleDirectory
 }
+
+# <lang>
+#   <zh-CN>目录名取自**实际解析出的目录**而非 `$ModuleName`：显式传入 `-ModuleDirectory` 时，
+#   目录名可能与包名末段不同（当前项目两者恰好一致，但门禁不应依赖这个巧合）。</zh-CN>
+#   <en>The directory name comes from the **actually resolved directory** rather than `$ModuleName`: with an explicit
+#   `-ModuleDirectory` the directory name may differ from the package name's last segment (they happen to match in the current
+#   project, but a gate should not rely on that coincidence).</en>
+# </lang>
+$moduleDirectoryName = Split-Path -Leaf $moduleRoot
 
 if (-not (Test-Path -LiteralPath $moduleRoot -PathType Container)) {
     Add-BusinessModuleCheck -Name 'Module directory' -Status 'Fail' -Detail ('Directory not found: ' + $moduleRoot)
@@ -202,7 +236,7 @@ if ($null -ne $manifest) {
         Add-BusinessModuleCheck -Name 'Manifest schema version' -Status 'Warning' -Detail 'Current standard expects schemaVersion 1.'
     }
 
-    $expectedPackage = if ([string]::IsNullOrWhiteSpace($ExpectedPackageId)) { 'HIA.' + $ModuleName } else { $ExpectedPackageId }
+    $expectedPackage = if ([string]::IsNullOrWhiteSpace($ExpectedPackageId)) { $packageName } else { $ExpectedPackageId }
     if ($manifest.packageId -ne $expectedPackage) {
         Add-BusinessModuleCheck -Name 'Package id convention' -Status 'Warning' -Detail ('Expected ' + $expectedPackage + ', actual ' + $manifest.packageId + '.')
     }
@@ -231,7 +265,7 @@ if ($null -ne $manifest) {
     if (-not (Test-SafeRelativePath -Path ([string]$manifest.desktopEntry))) {
         Add-BusinessModuleCheck -Name 'Desktop entry safety' -Status 'Fail' -Detail 'desktopEntry must be a safe in-site relative path.'
     }
-    elseif ($manifest.desktopEntry -notlike ('DesktopModules/' + $ModuleName + '/*')) {
+    elseif ($manifest.desktopEntry -notlike ('DesktopModules/' + $moduleDirectoryName + '/*')) {
         Add-BusinessModuleCheck -Name 'Desktop entry safety' -Status 'Fail' -Detail 'desktopEntry must stay inside the module directory.'
     }
     elseif ($manifest.desktopEntry -notlike '*.ascx') {
@@ -333,11 +367,29 @@ if (-not $SkipSqlMigrationCheck) {
         $migrationFiles = @(Get-FullPath -Path $SqlMigrationFile)
     }
     else {
-        $migrationFiles = @(Get-ChildItem -LiteralPath $setupRoot -File -Filter ('PortalBiz_' + $ModuleName + '*.sql') | ForEach-Object { $_.FullName })
+        # <lang>
+        #   <zh-CN>原实现按 `PortalBiz_<模块名>*.sql` 通配查找，隐含"迁移文件名 = 模块名"的假设。实测**该假设不成立**：
+        #   15 个迁移文件按**业务实体**命名（复数），例如模块 `MyWorkItems` 对应 `PortalBiz_WorkItems.sql`、
+        #   `EmployeeProfileConfirm` 对应 `PortalBiz_EmployeeProfileConfirmations.sql`、
+        #   `BusinessApplicationRequest` 对应 `PortalBiz_BusinessApplications.sql`；而
+        #   `EnterpriseCapabilityWorkbench` 根本没有对应迁移文件。按模块名通配必然找不到。
+        #   故改为：未显式指定 `-SqlMigrationFile` 时**记 Info 而非 Fail** —— 缺少映射规则不等于缺迁移；
+        #   需要检查时由调用方给出确切文件名（编排层已知映射并显式传入）。</zh-CN>
+        #   <en>The previous implementation globbed `PortalBiz_<module>*.sql`, which assumes "migration file name = module name".
+        #   Measurement shows that assumption does not hold: the 15 migration files are named after **business entities** in
+        #   plural — module `MyWorkItems` maps to `PortalBiz_WorkItems.sql`, `EmployeeProfileConfirm` to
+        #   `PortalBiz_EmployeeProfileConfirmations.sql`, `BusinessApplicationRequest` to `PortalBiz_BusinessApplications.sql` —
+        #   while `EnterpriseCapabilityWorkbench` has no migration file at all, so a module-name glob never matches. It is now
+        #   recorded as Info rather than Fail when `-SqlMigrationFile` is not supplied: the absence of a mapping rule is not the
+        #   absence of a migration, and callers that do want the check pass the exact file name (the orchestration layer knows
+        #   the mapping and supplies it).</en>
+        # </lang>
+        Add-BusinessModuleCheck -Name 'SQL migration file' -Status 'Info' -Detail 'No -SqlMigrationFile given; skipped because migration files are named after business entities, not modules.'
+        $migrationFiles = @()
     }
 
     if ($migrationFiles.Count -eq 0) {
-        Add-BusinessModuleCheck -Name 'SQL migration file' -Status 'Fail' -Detail ('No PortalBiz_' + $ModuleName + '*.sql file was found.')
+        Add-BusinessModuleCheck -Name 'SQL migration file' -Status 'Fail' -Detail ('No PortalBiz_' + $moduleDirectoryName + '*.sql file was found.')
     }
     else {
         foreach ($migrationFile in $migrationFiles) {

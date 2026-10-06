@@ -55,6 +55,28 @@ $gateLayers = [ordered]@{
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
         @{ File = 'Invoke-PortalTests.ps1';               Runner = 'ps1'; Kind = '单元测试'; Args = @() }
         # <lang>
+        #   <zh-CN>三处同源缺陷（包名重复加前缀、desktopEntry 越界误判、迁移文件按模块名通配）已在
+        #   Test-PortalBusinessModuleSmoke.ps1 内修复：包名与目录名已解耦，故此处传 -ModuleName HIA.MyWorkItems
+        #   即可命中 DesktopModules\MyWorkItems，不再需要 -ModuleDirectory。
+        #   迁移文件**显式**给出，因为它们按业务实体命名而非模块名（实测 15 个，如 MyWorkItems 对应
+        #   PortalBiz_WorkItems.sql）；EnterpriseCapabilityWorkbench 确实没有对应迁移文件，对它用
+        #   -SkipSqlMigrationCheck —— 那是**据实**豁免，不是为了过门禁而编造。</zh-CN>
+        #   <en>The three same-root defects (double package prefix, false desktopEntry verdict, module-name migration glob)
+        #   are fixed inside Test-PortalBusinessModuleSmoke.ps1: the package name is decoupled from the directory name, so
+        #   `-ModuleName HIA.MyWorkItems` resolves to DesktopModules\MyWorkItems with no -ModuleDirectory.
+        #   Migration files are given **explicitly** because they are named after business entities rather than modules
+        #   (15 measured, e.g. MyWorkItems to PortalBiz_WorkItems.sql); EnterpriseCapabilityWorkbench genuinely has none
+        #   and gets -SkipSqlMigrationCheck — a truthful exemption, not an invented one to turn the gate green.</en>
+        # </lang>
+        @{ File = 'Test-PortalBusinessModuleSmoke.ps1';   Runner = 'ps1'; Kind = '业务模块冒烟';
+           ArgSets = @(
+               @('-ModuleName', 'HIA.MyWorkItems', '-SqlMigrationFile', 'src\Setup\PortalBiz_WorkItems.sql'),
+               @('-ModuleName', 'HIA.EmployeeProfileConfirm', '-SqlMigrationFile', 'src\Setup\PortalBiz_EmployeeProfileConfirmations.sql'),
+               @('-ModuleName', 'HIA.EmployeeProfileCorrectionRequest', '-SqlMigrationFile', 'src\Setup\PortalBiz_EmployeeProfileCorrectionRequests.sql'),
+               @('-ModuleName', 'HIA.EnterpriseCapabilityWorkbench', '-SkipSqlMigrationCheck'),
+               @('-ModuleName', 'HIA.BusinessApplicationRequest', '-SqlMigrationFile', 'src\Setup\PortalBiz_BusinessApplications.sql')
+           ) }
+        # <lang>
         #   <zh-CN>`Test-PortalBusinessModuleSmoke.ps1` **一次只测一个模块**（`-ModuleName` 必填），
         #   所以这里用 `ArgSets` 给出多组参数、逐组各跑一次。首版只给了空的 `Args`，运行后报
         #   "missing mandatory parameters: ModuleName" —— 与主题解析那次是同一类错误：
@@ -68,57 +90,6 @@ $gateLayers = [ordered]@{
         #   The module names come from `Portal.ModuleProfiles.*.Packages` in `src\Portal\Config\appSettings.json`
         #   (five `HIA.*` entries) rather than a hand-written list that would drift from the package configuration.</en>
         # </lang>
-        # <lang>
-        #   <zh-CN>必须显式给 `-ModuleDirectory`：脚本默认按 `DesktopModules\$ModuleName` 找，而 `-ModuleName`
-        #   是带 `HIA.` 前缀的**包名**（`HIA.MyWorkItems`），实际目录却是**不带前缀**的模块名
-        #   （`DesktopModules\MyWorkItems`）—— 全仓 0 个带 `HIA.` 前缀的目录，而 6 个 `module.json`
-        #   都在无前缀目录下。首版只传 `-ModuleName`，五个模块全部报
-        #   "Directory not found: ...\DesktopModules\HIA.EmployeeProfileConfirm"。
-        #   这说明该脚本此前**从未在编排里被真正跑通过**（项目结构演进后未同步）。</zh-CN>
-        #   <en>`-ModuleDirectory` must be supplied explicitly: the script defaults to `DesktopModules\$ModuleName`, but
-        #   `-ModuleName` is the `HIA.`-prefixed **package name** (`HIA.MyWorkItems`) while the real directory uses the
-        #   **unprefixed** module name (`DesktopModules\MyWorkItems`) — the repository has zero `HIA.`-prefixed directories,
-        #   and all six `module.json` files live under unprefixed ones. Passing only `-ModuleName` made all five modules
-        #   report "Directory not found: ...\DesktopModules\HIA.EmployeeProfileConfirm", which shows this gate had never
-        #   actually been run through orchestration before (the project structure moved on without it).</en>
-        # </lang>
-        # <lang>
-        #   <zh-CN>**暂时排除 `Test-PortalBusinessModuleSmoke.ps1`**（2026-10-06 实测，登记为待修复）：
-        #   该脚本自身有缺陷，对当前项目结构**必然失败**，不是编排层能修的。三项证据：
-        #     ① `[WARNING] Package id convention: Expected HIA.HIA.MyWorkItems, actual HIA.MyWorkItems`
-        #        —— 包名约定检查把 `HIA.` 前缀**加了两次**，说明脚本内部按"目录名 = HIA.<模块名>"的假设构造期望值，
-        #        而全仓 0 个带前缀目录；
-        #     ② `[FAIL] Desktop entry safety: desktopEntry must stay inside the module directory`
-        #        —— 由 ① 派生的**误判**：实际 `DesktopModules/MyWorkItems/MyWorkItems.ascx` 就在模块目录内；
-        #     ③ `[FAIL] SQL migration file: No PortalBiz_HIA.MyWorkItems*.sql`
-        #        —— 实际 15 个 `PortalBiz_*.sql` 的命名不含 `HIA.` 前缀。
-        #   处理原则：既不为了"让它绿"而加豁免，也不留着红着不管 —— 移出清单并如实登记，
-        #   修复脚本后（对齐目录命名约定）再接回。这比"红着"更有用，因为红着久了会被当成背景噪音忽略。
-        # </lang>
-        # <en>**`Test-PortalBusinessModuleSmoke.ps1` is temporarily excluded** (measured 2026-10-06, registered as
-        #   needing repair): the script itself is defective and **necessarily fails** against the current project structure,
-        #   which orchestration cannot fix. Three pieces of evidence:
-        #     ① `[WARNING] Package id convention: Expected HIA.HIA.MyWorkItems, actual HIA.MyWorkItems` — the package-id
-        #        convention check prefixes `HIA.` **twice**, revealing the internal assumption "directory = HIA.&lt;module&gt;"
-        #        while the repository has zero prefixed directories;
-        #     ② `[FAIL] Desktop entry safety: desktopEntry must stay inside the module directory` — a **false positive**
-        #        derived from ①: `DesktopModules/MyWorkItems/MyWorkItems.ascx` does sit inside the module directory;
-        #     ③ `[FAIL] SQL migration file: No PortalBiz_HIA.MyWorkItems*.sql` — the 15 actual `PortalBiz_*.sql` files are
-        #        named without the `HIA.` prefix.
-        #   Principle: neither exempt it just to turn it green nor leave it red and ignored — it is removed from the list and
-        #   honestly registered, to be reconnected once the script is fixed (aligned with the directory naming convention).
-        #   That is more useful than a permanent red, which after a while is treated as background noise.</en>
-        # </lang>
-        <#
-        @{ File = 'Test-PortalBusinessModuleSmoke.ps1';   Runner = 'ps1'; Kind = '业务模块冒烟';
-           ArgSets = @(
-               @('-ModuleName', 'HIA.MyWorkItems', '-ModuleDirectory', 'src\Portal\DesktopModules\MyWorkItems'),
-               @('-ModuleName', 'HIA.EmployeeProfileConfirm', '-ModuleDirectory', 'src\Portal\DesktopModules\EmployeeProfileConfirm'),
-               @('-ModuleName', 'HIA.EmployeeProfileCorrectionRequest', '-ModuleDirectory', 'src\Portal\DesktopModules\EmployeeProfileCorrectionRequest'),
-               @('-ModuleName', 'HIA.EnterpriseCapabilityWorkbench', '-ModuleDirectory', 'src\Portal\DesktopModules\EnterpriseCapabilityWorkbench'),
-               @('-ModuleName', 'HIA.BusinessApplicationRequest', '-ModuleDirectory', 'src\Portal\DesktopModules\BusinessApplicationRequest')
-           ) }
-        #>
     )
     # <lang>
     #   <zh-CN>`Test-PortalThemeResolution.ps1` 归 **L2** 而不是 L0：它自带 `-Port 40005` 且**会自行启动
