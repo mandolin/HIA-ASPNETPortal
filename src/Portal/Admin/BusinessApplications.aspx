@@ -72,12 +72,12 @@
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <th scope="col" width="70" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnId %></th>
-                                <th scope="col" width="145" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnSubmittedUtc %></th>
-                                <th scope="col" width="155" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnCode %></th>
-                                <th scope="col" width="140" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnApplicant %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnSubmittedUtc %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnCode %></th>
+                                <th scope="col" width="14%" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnApplicant %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnApplication %></th>
                                 <th scope="col" width="95" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnStatus %></th>
-                                <th scope="col" width="250" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnReview %></th>
+                                <th scope="col" width="24%" class="SubHead"><%= lang.Admin_BusinessApplications_ColumnReview %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>

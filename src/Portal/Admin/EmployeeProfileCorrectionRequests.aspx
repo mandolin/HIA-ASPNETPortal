@@ -88,13 +88,13 @@
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnId %></th>
-                                <th scope="col" width="145" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnSubmittedUtc %></th>
-                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnEmployee %></th>
-                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnUser %></th>
-                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnField %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnSubmittedUtc %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnEmployee %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnUser %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnField %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnCurrentProposed %></th>
                                 <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnStatus %></th>
-                                <th scope="col" width="230" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnReview %></th>
+                                <th scope="col" width="22%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnReview %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>

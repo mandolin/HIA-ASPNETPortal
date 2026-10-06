@@ -95,11 +95,11 @@
                             <tr>
                                 <th scope="col" width="70" class="SubHead"><%= lang.Admin_WorkItems_ColumnId %></th>
                                 <th scope="col" width="95" class="SubHead"><%= lang.Admin_WorkItems_ColumnStatus %></th>
-                                <th scope="col" width="180" class="SubHead"><%= lang.Admin_WorkItems_ColumnBusiness %></th>
+                                <th scope="col" width="17%" class="SubHead"><%= lang.Admin_WorkItems_ColumnBusiness %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_WorkItems_ColumnTitleSummary %></th>
-                                <th scope="col" width="190" class="SubHead"><%= lang.Admin_WorkItems_ColumnAssignedTo %></th>
-                                <th scope="col" width="145" class="SubHead"><%= lang.Admin_WorkItems_ColumnCreatedUtc %></th>
-                                <th scope="col" width="145" class="SubHead"><%= lang.Admin_WorkItems_ColumnCompletedUtc %></th>
+                                <th scope="col" width="18%" class="SubHead"><%= lang.Admin_WorkItems_ColumnAssignedTo %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_WorkItems_ColumnCreatedUtc %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_WorkItems_ColumnCompletedUtc %></th>
                             </tr>
                     </HeaderTemplate>
                     <%--

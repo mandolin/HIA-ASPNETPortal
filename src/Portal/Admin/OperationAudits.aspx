@@ -96,12 +96,12 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="155" class="SubHead"><%= lang.Admin_OperationAudits_ColumnUtc %></th>
-                                <th scope="col" width="130" class="SubHead"><%= lang.Admin_OperationAudits_ColumnCategory %></th>
-                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_OperationAudits_ColumnAction %></th>
-                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_OperationAudits_ColumnActor %></th>
-                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_OperationAudits_ColumnTarget %></th>
-                                <th scope="col" width="100" class="SubHead"><%= lang.Admin_OperationAudits_ColumnTargetId %></th>
+                                <th scope="col" width="16%" class="SubHead"><%= lang.Admin_OperationAudits_ColumnUtc %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_OperationAudits_ColumnCategory %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_OperationAudits_ColumnAction %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_OperationAudits_ColumnActor %></th>
+                                <th scope="col" width="11%" class="SubHead"><%= lang.Admin_OperationAudits_ColumnTarget %></th>
+                                <th scope="col" width="11%" class="SubHead"><%= lang.Admin_OperationAudits_ColumnTargetId %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_OperationAudits_ColumnSummary %></th>
                             </tr>
                     </HeaderTemplate>
