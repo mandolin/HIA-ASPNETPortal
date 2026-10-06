@@ -1,0 +1,64 @@
+name: 缺陷报告
+description: 报告可复现的缺陷
+title: "[缺陷] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢报告缺陷。请先确认：门禁是否已通过（若缺陷只在门禁未覆盖的范围内出现，也请说明）。
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 运行环境
+      description: 操作系统、SQL Server / LocalDB 版本、IIS Express 或 IIS 版本、浏览器与版本
+      placeholder: |
+        Windows 11
+        SQL Server 2019 (LocalDB)
+        IIS Express 10.0
+        Edge 120
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开 http://localhost:40001/
+        2. 点击「我的待办」
+        3. 观察到……
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 门禁输出或截图
+      description: 相关门禁的输出、运行期证据截图路径（`work-zone/dev/evidence/`），或报错堆栈
+      render: markdown
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前自查
+      options:
+        - label: 我未在仓库中提交任何连接串、口令或其他凭据
+          required: true
+        - label: 我已在仓库外准备连接串配置
+          required: false

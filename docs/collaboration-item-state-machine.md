@@ -1,6 +1,6 @@
 # 协同事项状态机（Collaboration Item State Machine）
 
-> 归属：`W-anp-P64` 状态机显式化（[W-anp-P64](../work-zone/dev/plans/W-anp-P64.md)）。代码事实源：`src/Portal.Components/PortalCollaborationItemTransitions.cs`。
+> 归属：`W-anp-P64` 状态机显式化（内部计划，未公开）。代码事实源：`src/Portal.Components/PortalCollaborationItemTransitions.cs`。
 
 ## 一、状态词汇表（Status）
 

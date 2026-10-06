@@ -1,7 +1,7 @@
 # 业务申请状态机（Business Application State Machine）
 
-> 归属：`W-anp-P71` 状态机显式化（[W-anp-P71](../work-zone/dev/plans/W-anp-P71.md)）。代码事实源：`src/Portal.Components/PortalBusinessApplicationTransitions.cs`。
-> 判据来源：`work-zone/dev/research/foundation-process-orchestration-reference-2026-09-26.md`（"初步完善"四条判据：显式迁移表、写入前 fail-closed、迁移必写事件、状态流转说明）。
+> 归属：`W-anp-P71` 状态机显式化（内部计划，未公开）。代码事实源：`src/Portal.Components/PortalBusinessApplicationTransitions.cs`。
+> 判据来源：内部对标研究（"初步完善"四条判据：显式迁移表、写入前 fail-closed、迁移必写事件、状态流转说明）。
 
 ## 一、状态词汇表（Status）
 
