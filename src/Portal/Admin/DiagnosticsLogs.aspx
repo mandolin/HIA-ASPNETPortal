@@ -101,11 +101,11 @@
                     <HeaderTemplate>
                         <table class="portal-data-table portal-diagnostics-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="155" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnUtc %></th>
+                                <th scope="col" width="14%" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnUtc %></th>
                                 <th scope="col" width="75" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnLevel %></th>
-                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnCategory %></th>
+                                <th scope="col" width="14%" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnCategory %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnMessage %></th>
-                                <th scope="col" width="195" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnEventId %></th>
+                                <th scope="col" width="14%" class="SubHead"><%= lang.Admin_DiagnosticsLogs_ColumnEventId %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
