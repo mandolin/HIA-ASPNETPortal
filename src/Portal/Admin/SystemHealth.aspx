@@ -75,12 +75,12 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="110" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCategory %></th>
-                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCheck %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCategory %></th>
+                                <th scope="col" width="16%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCheck %></th>
                                 <th scope="col" width="90" class="SubHead"><%= lang.Admin_SystemHealth_ColumnStatus %></th>
-                                <th scope="col" width="220" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSummary %></th>
+                                <th scope="col" width="22%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSummary %></th>
                                 <th scope="col" class="SubHead"><%= lang.Admin_SystemHealth_ColumnDetail %></th>
-                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_SystemHealth_ColumnEventId %></th>
+                                <th scope="col" width="16%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnEventId %></th>
                             </tr>
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -116,11 +116,11 @@
                     <HeaderTemplate>
                         <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <th scope="col" width="230" class="SubHead"><%= lang.Admin_SystemHealth_ColumnKey %></th>
-                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_SystemHealth_ColumnName %></th>
+                                <th scope="col" width="20%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnKey %></th>
+                                <th scope="col" width="14%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnName %></th>
                                 <th scope="col" width="80" class="SubHead"><%= lang.Admin_SystemHealth_ColumnType %></th>
-                                <th scope="col" width="150" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCurrentValue %></th>
-                                <th scope="col" width="120" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSource %></th>
+                                <th scope="col" width="16%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCurrentValue %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSource %></th>
                                 <th scope="col" width="80" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSensitive %></th>
                                 <th scope="col" width="90" class="SubHead"><%= lang.Admin_SystemHealth_ColumnEditable %></th>
                                 <th scope="col" width="90" class="SubHead"><%= lang.Admin_SystemHealth_ColumnRestart %></th>
