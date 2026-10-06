@@ -126,7 +126,27 @@
                                       <en>P47.4 the front end only displays the participant set and offers no add or remove entry.</en>
                                     </lang>
                                 --%>
-                                <div><span class="SubHead"><%= lang.EnterpriseCapabilityWorkbench_LabelParticipants %></span> <%#: Eval("ParticipantsText") %></div>
+                                <%--
+                                    <lang>
+                                      <zh-CN>W90 起参与人改为逐人一行：逗号串在多人与长姓名时会挤成一行、换行位置不可控；逐行后
+                                      每个"用户名（角色）"独立成行，可稳定换行且便于逐个阅读。数据层新增的
+                                      BuildParticipantLines 与逗号串共用同一条格式串，故两种呈现不会本地化漂移。
+                                      用 ul/li 而非多个 div：列表语义让辅助技术能播报项数，换行由浏览器保证。
+                                      空集合由数据层返回单元素占位序列，故此处无需判空。</zh-CN>
+                                      <en>Since W90 participants render one per line: a comma-joined string crowds several people
+                                      onto one line with unpredictable wrapping, whereas one line each lets every "user name (role)"
+                                      wrap stably and be read individually. BuildParticipantLines shares the same format string as the
+                                      joined text, so the two cannot drift. A ul/li list is used so assistive tech can announce the
+                                      count and wrapping is guaranteed by the browser. An empty set yields one placeholder line from
+                                      the data layer, so no null check is needed.</en>
+                                    </lang>
+                                --%>
+                                <div><span class="SubHead"><%= lang.EnterpriseCapabilityWorkbench_LabelParticipants %></span></div>
+                                <ul class="enterprise-workbench-participants">
+                                    <asp:Repeater ID="ParticipantLinesRepeater" DataSource='<%# Eval("ParticipantLines") %>' runat="server">
+                                        <ItemTemplate><li><%#: Container.DataItem %></li></ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
                                 <div><span class="SubHead"><%= lang.EnterpriseCapabilityWorkbench_LabelLatestCommentPrefix %></span><%#: Eval("LatestParticipantComment") %></div>
                                 <asp:TextBox ID="ParticipantCommentTextBox" CssClass="NormalTextBox enterprise-workbench-input" MaxLength="1000" TextMode="MultiLine" Rows="2" runat="server" />
                                 <div class="enterprise-workbench-actions">

@@ -775,6 +775,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Since P74.4 participant text goes through the shared renderer: role keys map to localized role names, unknown keys fall back to the raw key, and an empty set uses the localized placeholder.</en>
             // </lang>
             ParticipantsText = PortalCollaborationParticipantText.BuildParticipantsText(participants);
+            ParticipantLines = PortalCollaborationParticipantText.BuildParticipantLines(participants);
         }
 
         /// <summary><lang><zh-CN>协同事项主键。</zh-CN><en>Collaboration-item primary key.</en></lang></summary>
@@ -809,6 +810,17 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary><lang><zh-CN>参与人集合的只读展示文本（前台不做增删）。</zh-CN><en>Read-only display text for the participant set (the front end performs no add or remove).</en></lang></summary>
         public string ParticipantsText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>参与人的**逐人一行**展示序列（前台不做增删）。保留逗号串 <see cref="ParticipantsText"/> 用于
+        ///   窄列或摘要场景，逐行序列用于列表呈现 —— 两者由同一条格式串产出，不会漂移。</zh-CN>
+        ///   <en>The **one line per person** display sequence for participants (the front end performs no add or remove). The
+        ///   comma-joined <see cref="ParticipantsText"/> is kept for narrow columns or summary contexts, while the per-line
+        ///   sequence serves list rendering — both come from the same format string and cannot drift apart.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> ParticipantLines { get; private set; }
 
         /// <summary>
         /// <lang>

@@ -1129,6 +1129,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Since P74.4 participant text goes through the shared renderer, sharing one role vocabulary and placeholder with the front-end workbench so the two implementations cannot drift apart again.</en>
             // </lang>
             ParticipantsText = PortalCollaborationParticipantText.BuildParticipantsText(participants);
+            ParticipantLines = PortalCollaborationParticipantText.BuildParticipantLines(participants);
         }
 
         /// <summary><lang><zh-CN>协同事项主键。</zh-CN><en>Collaboration-item primary key.</en></lang></summary>
@@ -1172,6 +1173,17 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary><lang><zh-CN>参与人集合的只读展示文本。</zh-CN><en>Read-only display text for the participant set.</en></lang></summary>
         public string ParticipantsText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>参与人的**逐人一行**展示序列。保留逗号串 <see cref="ParticipantsText"/> 用于摘要场景；
+        ///   两者由同一条格式串产出，不会漂移。</zh-CN>
+        ///   <en>The **one line per person** display sequence for participants. The comma-joined
+        ///   <see cref="ParticipantsText"/> is kept for summary contexts; both come from the same format string and cannot
+        ///   drift apart.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> ParticipantLines { get; private set; }
 
         /// <summary>
         /// <lang>

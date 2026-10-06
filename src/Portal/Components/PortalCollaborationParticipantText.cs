@@ -128,5 +128,62 @@ namespace ASPNET.StarterKit.Portal
 
             return builder.ToString();
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把参与人集合渲染为**逐人一行**的展示序列；空集合返回仅含占位文本的单元素序列。</zh-CN>
+        ///   <en>Renders the participant set as **one line per person**; an empty set returns a single placeholder line.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="participants">
+        /// <l>
+        ///   <zh-CN>参与人集合，可为 <c>null</c>；条目或其用户名为空时按占位文本呈现。</zh-CN>
+        ///   <en>The participant collection, which may be <c>null</c>; a blank entry or blank user name renders as the placeholder.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>每项为"用户名（本地化角色名）"的只读序列；空集合为仅含占位文本的序列。</zh-CN>
+        ///   <en>A read-only sequence whose items are "user name (localized role name)", or a sequence holding only the placeholder when the set is empty.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>与 <see cref="BuildParticipantsText"/> **共用同一条格式串** <c>Collaboration_ParticipantDisplayFormat</c>，
+        ///   因此"逗号连接"与"逐人一行"两种呈现不会出现本地化排版的漂移 —— 这正是 <c>P74.4</c> 引入共享渲染器要防的问题。
+        ///   本方法是**新增**而非替换：逗号串仍被前台与后台的两处只读展示使用，逐行呈现按需选用，互不影响。</zh-CN>
+        ///   <en>This method **shares the same format string** <c>Collaboration_ParticipantDisplayFormat</c> with
+        ///   <see cref="BuildParticipantsText"/>, so the "comma-joined" and "one line per person" renderings cannot drift apart
+        ///   in localized typography — exactly what the shared renderer introduced in P74.4 was meant to prevent. It is
+        ///   **added rather than replacing**: the comma-joined text is still used by the two read-only displays in the front
+        ///   office and the admin area, while the per-line rendering is opted into where needed.</en>
+        /// </lang>
+        /// </remarks>
+        public static IList<string> BuildParticipantLines(IList<CollaborationItemParticipantInfo> participants)
+        {
+            if (participants == null || participants.Count == 0)
+            {
+                return new[] { lang.Common_NonePlaceholder };
+            }
+
+            List<string> lines = new List<string>(participants.Count);
+            foreach (CollaborationItemParticipantInfo participant in participants)
+            {
+                string userName = participant == null || string.IsNullOrWhiteSpace(participant.UserName)
+                    ? lang.Common_NonePlaceholder
+                    : participant.UserName.Trim();
+                string roleText = participant == null
+                    ? string.Empty
+                    : GetRoleDisplayText(participant.ParticipantRoleKey);
+
+                lines.Add(string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Collaboration_ParticipantDisplayFormat,
+                    userName,
+                    roleText));
+            }
+
+            return lines;
+        }
     }
 }

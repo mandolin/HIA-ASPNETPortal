@@ -203,7 +203,24 @@
                                         </lang>
                                     --%>
                                     <div class="portal-participant-actions">
-                                        <div><%#: Eval("ParticipantsText") %></div>
+                                        <%--
+                                        <lang>
+                                          <zh-CN>W90 起参与人改为逐人一行（与前台工作台同法）：P79 已把参与人拆为独立列，但逗号串在
+                                          多人与长姓名时仍会挤成一行、换行位置不可控。数据层新增的 BuildParticipantLines
+                                          与逗号串共用同一条格式串，故两种呈现不会本地化漂移。空集合由数据层返回单元素
+                                          占位序列，故此处无需判空。</zh-CN>
+                                          <en>Since W90 participants render one per line (same as the front-office workbench): P79
+                                          split participants into a standalone column, but a comma-joined string still crowds several
+                                          people onto one line with unpredictable wrapping. BuildParticipantLines shares the same
+                                          format string as the joined text, so the two cannot drift. An empty set yields one placeholder
+                                          line from the data layer, so no null check is needed.</en>
+                                        </lang>
+                                    --%>
+                                    <ul class="portal-participant-lines">
+                                        <asp:Repeater ID="ParticipantLinesRepeater" DataSource='<%# Eval("ParticipantLines") %>' runat="server">
+                                            <ItemTemplate><li><%#: Container.DataItem %></li></ItemTemplate>
+                                        </asp:Repeater>
+                                    </ul>
                                         <span class="SubHead"><%= lang.Admin_CollaborationItems_LabelParticipantUser %></span>
                                         <asp:TextBox ID="ParticipantUserTextBox" CssClass="NormalTextBox" Width="100%" MaxLength="10" runat="server" />
                                         <%--
