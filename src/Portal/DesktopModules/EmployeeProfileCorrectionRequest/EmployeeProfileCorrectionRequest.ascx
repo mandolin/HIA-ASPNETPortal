@@ -14,7 +14,15 @@
     </lang>
 --%>
 <div class="employee-profile-correction">
-    <div class="employee-profile-correction-title"><%= lang.EmployeeProfileCorrectionRequest_Heading %></div>
+    <%--
+    <lang>
+        <zh-CN>标题语义（W87 补）：同 EnterpriseCapabilityWorkbench —— 模块自带标题 div，显式补
+        role="heading" 与 aria-level="1"，只加属性不改 class，视觉零变化。</zh-CN>
+        <en>Title semantics (added in W87): as in EnterpriseCapabilityWorkbench — the module renders its own title div, so
+        role="heading" and aria-level="1" are set explicitly; attributes only, no class change, no visual change.</en>
+    </lang>
+--%>
+<div class="employee-profile-correction-title" role="heading" aria-level="1"><%= lang.EmployeeProfileCorrectionRequest_Heading %></div>
     <asp:Label ID="MessageLabel" CssClass="employee-profile-correction-message" runat="server" />
 
     <asp:Panel ID="RequestPanel" CssClass="employee-profile-correction-panel" Visible="false" runat="server">

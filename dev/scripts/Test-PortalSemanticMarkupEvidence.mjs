@@ -160,7 +160,19 @@ try {
         //   and its computed style is recorded **item by item** — the proof of zero visual change rests on these numbers,
         //   not on "it looks the same".</en>
         // </lang>
-        const titleElement = document.querySelector('.portal-module-title');
+        // <lang>
+        //   <zh-CN>标题元素先找共享控件 `.portal-module-title`，找不到则回退到**任何** `role="heading"` 元素。
+        //   原因（W87 实测）：项目内并存两套标题实现 —— 多数模块复用共享控件，而工作台 /
+        //   资料确认 / 资料更正三个模块自带标题 div。只查共享控件会让后者的 ARIA 语义改动
+        //   **完全测不到**，表现为 `titleTag=null`，与"没有标题"无法区分。
+        // </zh-CN>
+        //   <en>The title element is first looked up as the shared `.portal-module-title` control, falling back to **any**
+        //   `role="heading"` element. Reason (measured in W87): the project carries two title implementations — most modules
+        //   reuse the shared control, while the workbench / profile-confirm / profile-correction modules render their own title
+        //   divs. Querying only the shared control leaves the latter's ARIA semantics **entirely unmeasured**, surfacing as
+        //   `titleTag=null`, indistinguishable from "there is no title at all".</en>
+        // </lang>
+        const titleElement = document.querySelector('.portal-module-title') || document.querySelector('[role="heading"]');
         let moduleTitleStyles = null;
         if (titleElement) {
           const c = window.getComputedStyle(titleElement);

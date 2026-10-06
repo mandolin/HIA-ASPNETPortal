@@ -14,7 +14,23 @@
     </lang>
 --%>
 <div class="enterprise-workbench">
-    <div class="enterprise-workbench-title"><%= lang.EnterpriseCapabilityWorkbench_Heading %></div>
+    <%--
+    <lang>
+        <zh-CN>标题语义（W87 补）：本模块自带标题 div 而不复用共享控件 DesktopModuleTitle，故此处显式补
+        role="heading" 与 aria-level，使其对辅助技术等价于一级标题。只加属性、不改 class，
+        因此视觉零变化（与 W82 对共享控件的处理同法）。前台模块固定 1 级：门户 chrome 没有 h1，
+        模块标题即页面主内容入口；后台模块由共享控件按页面路径判为 2 级，此处不涉及。
+        遗留：项目内因此并存两套标题实现（共享控件 + 模块自带 div），统一属独立项。</zh-CN>
+        <en>Title semantics (added in W87): this module renders its own title div instead of reusing the shared
+        DesktopModuleTitle control, so role="heading" and aria-level are set explicitly here to make it equivalent to a
+        first-level heading for assistive technology. Only attributes are added and no class changes, so the visuals are
+        unchanged (the same approach W82 took for the shared control). Level 1 is fixed because this is a front-office
+        module: the portal chrome has no h1 and the module title is the page's primary content entry; admin modules are
+        judged as level 2 by the shared control from the page path, which does not apply here. Left over: the project
+        therefore carries two title implementations (shared control and module-local div); unifying them is a separate item.</en>
+    </lang>
+--%>
+<div class="enterprise-workbench-title" role="heading" aria-level="1"><%= lang.EnterpriseCapabilityWorkbench_Heading %></div>
     <asp:Label ID="MessageLabel" CssClass="enterprise-workbench-message" EnableViewState="false" runat="server" />
 
     <%--
