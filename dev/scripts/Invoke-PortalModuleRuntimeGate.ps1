@@ -129,12 +129,36 @@ function Get-ModuleSelector([string] $sourceFile) {
     #    change (4 targets had a modulePresent assertion). A weakened gate is more dangerous than a failing one: it still looks
     #    green. Hence the first usable token is taken instead, excluding the shared portal- shell classes.</en>
     # </lang>
-    foreach ($div in [regex]::Matches($markup, '<div[^>]*\bclass="([^"]+)"')) {
-        foreach ($token in ($div.Groups[1].Value -split '\s+')) {
-            if ($token -and -not $token.StartsWith('portal-') -and $token -notmatch '^(row|container|wrapper|content|main|inner|outer)$') {
-                return '.' + $token
-            }
+    # <lang>
+    #   <zh-CN>判据取"在 ascx 中**只出现一次**的 class"，不再排除 `portal-` 前缀 —— 这是 `W87` 实测得出的修正：
+    #   旧内容模块**只有** `portal-` 前缀的 class（Contacts -> portal-content-table-wrap、
+    #   QuickLinks -> portal-quicklinks），早先"排除 portal- 前缀"的写法恰好把它们的唯一标识也排除了，
+    #   结果 11 个目标全部 `module=undefined`，断言退化为"只断言未落错误页"（比改造前更弱却显示通过）。
+    #   仅排除三个公共壳类（模块标题/动作区），它们每个模块都有、不具区分度。
+    #   已知局限：Repeater 模板里的行级 class（如 portal-content-list-item）在标记中也只出现一次，
+    #   会被选中 —— 此时断言语义从"模块根存在"弱化为"模块渲染出了内容"，仍比没有断言强。
+    # </zh-CN>
+    #   <en>The criterion is a class occurring **exactly once** in the ascx, and the `portal-` prefix is no longer excluded — a
+    #   correction established by measurement in `W87`: legacy modules have **only** `portal-`-prefixed classes (Contacts ->
+    #   portal-content-table-wrap, QuickLinks -> portal-quicklinks), so the earlier "skip portal- prefixed" rule discarded the
+    #   very tokens that identify them, leaving all 11 targets with `module=undefined` and degrading the assertion to "did not
+    #   fall back to the error page" — weaker than before the change, yet still shown as a pass. Only the three shared shell
+    #   classes are excluded (module header/title/actions); every module has them, so they carry no signal. Known limitation:
+    #   a row-level class inside a Repeater template (such as portal-content-list-item) also occurs once in the markup and will
+    #   be selected — the assertion then weakens from "the module root exists" to "the module rendered content", which is
+    #   still better than no assertion.</en>
+    # </lang>
+    $counts = @{}
+    $shellClasses = @('portal-module-header', 'portal-module-title-wrap', 'portal-module-actions')
+    foreach ($cm in [regex]::Matches($markup, 'class="([^"]+)"')) {
+        foreach ($token in ($cm.Groups[1].Value -split '\s+')) {
+            if (-not $token -or $shellClasses -contains $token) { continue }
+            if (-not $counts.ContainsKey($token)) { $counts[$token] = 0 }
+            $counts[$token]++
         }
+    }
+    foreach ($token in ($counts.Keys | Sort-Object)) {
+        if ($counts[$token] -eq 1) { return '.' + $token }
     }
     return $null
 }
