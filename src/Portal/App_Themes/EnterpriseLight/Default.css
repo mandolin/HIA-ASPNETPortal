@@ -1700,3 +1700,20 @@ body.portal-theme-enterpriselight .enterprise-workbench-list th {
     color: #5f7185;
     text-align: center;
 }
+
+/* <lang>
+ *   <zh-CN>W90 只读字段语义化：模块改用 dl/dt/dd 表达"名称-值对"，需清掉浏览器的默认外边距，
+ *   否则 <dd> 的默认 40px 左缩进与 <dl> 的默认 1em 外边距会让字段块整体位移。
+ *   作用域限定到 .employee-profile-field-grid，避免影响项目里其他 dl。</zh-CN>
+ *   <en>W90 read-only field semantics: the module now uses dl/dt/dd to express name-value pairs, so the browser default
+ *   margins must be cleared — otherwise dd's default 40px left indent and dl's default 1em margin shift the whole field
+ *   block. Scoped to .employee-profile-field-grid so no other dl in the project is affected.</en>
+ * </lang> */
+body.portal-theme-enterpriselight .employee-profile-field-grid dl,
+body.portal-theme-enterpriselight dl.employee-profile-field-grid {
+    margin: 0;
+}
+body.portal-theme-enterpriselight .employee-profile-field-grid dd,
+body.portal-theme-enterpriselight dl.employee-profile-field-grid dd {
+    margin-left: 0;
+}

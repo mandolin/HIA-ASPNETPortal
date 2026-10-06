@@ -37,26 +37,26 @@
                 <en>Field values bind from the current user's server-side profile view and follow display encoding rules; the page does not accept a client employee identifier to choose the confirmation target.</en>
             </lang>
         --%>
-        <div class="employee-profile-field-grid">
+        <dl class="employee-profile-field-grid">
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelEmployeeCode %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="EmployeeCodeLabel" runat="server" /></span>
+                <dt class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelEmployeeCode %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="EmployeeCodeLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelName %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="DisplayNameLabel" runat="server" /></span>
+                <dt class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelName %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="DisplayNameLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelSalutation %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="PreferredNameLabel" runat="server" /></span>
+                <dt class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelSalutation %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="PreferredNameLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelWorkEmail %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="WorkEmailLabel" runat="server" /></span>
+                <dt class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelWorkEmail %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="WorkEmailLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelOrganization %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="OrganizationLabel" runat="server" /></span>
+                <dt class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelOrganization %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="OrganizationLabel" runat="server" /></dd>
             </div>
             <%--
                 <lang>
@@ -65,14 +65,14 @@
                 </lang>
             --%>
             <div class="employee-profile-field">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelEmploymentStatus %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="EmploymentStatusLabel" runat="server" /></span>
+                <dt class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelEmploymentStatus %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="EmploymentStatusLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field employee-profile-field-wide">
-                <span class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelLastConfirmed %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="LastConfirmedLabel" runat="server" /></span>
+                <dt class="employee-profile-confirm-label employee-profile-field-label"><%= lang.EmployeeProfileConfirm_LabelLastConfirmed %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="LastConfirmedLabel" runat="server" /></dd>
             </div>
-        </div>
+        </dl>
 
         <%--
             <lang>

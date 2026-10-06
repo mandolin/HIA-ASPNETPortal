@@ -32,28 +32,28 @@
                 <en>The current profile snapshot renders in a field grid; the submission area keeps the original control IDs and events to preserve code-behind binding and postback compatibility.</en>
             </lang>
         --%>
-        <div class="employee-profile-field-grid">
+        <dl class="employee-profile-field-grid">
             <div class="employee-profile-field">
-                <span class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelEmployeeCode %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="EmployeeCodeLabel" runat="server" /></span>
+                <dt class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelEmployeeCode %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="EmployeeCodeLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelName %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="DisplayNameLabel" runat="server" /></span>
+                <dt class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelName %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="DisplayNameLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelSalutation %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="PreferredNameLabel" runat="server" /></span>
+                <dt class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelSalutation %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="PreferredNameLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field">
-                <span class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelWorkEmail %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="WorkEmailLabel" runat="server" /></span>
+                <dt class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelWorkEmail %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="WorkEmailLabel" runat="server" /></dd>
             </div>
             <div class="employee-profile-field employee-profile-field-wide">
-                <span class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelOrganization %></span>
-                <span class="employee-profile-field-value"><asp:Label ID="OrganizationLabel" runat="server" /></span>
+                <dt class="employee-profile-correction-label employee-profile-field-label"><%= lang.EmployeeProfileCorrectionRequest_LabelOrganization %></dt>
+                <dd class="employee-profile-field-value"><asp:Label ID="OrganizationLabel" runat="server" /></dd>
             </div>
-        </div>
+        </dl>
 
         <%--
             <lang>
