@@ -134,13 +134,47 @@ if (process.env.PORTAL_MODULE_TARGETS) {
 
 const results = [];
 const chromium = await loadChromium();
+
+// <lang>
+//   <zh-CN>可重试导航：应用域回收期间的导航会以 net::ERR_ABORTED / ERR_CONNECTION_RESET / ERR_EMPTY_RESPONSE 失败。
+//   这是**瞬时**错误，重试即可恢复，而单纯加长固定等待只是把猜测的时长写死。
+//   触发场景已实测：统一编排跑全量时，L1 构建替换站点 bin 触发一次回收，L2 切档位改 web.config 又触发一次，
+//   导航恰好落在回收窗口内就会 ERR_ABORTED —— 表现为"单独跑 L2 通过、跑全量 L2 失败"，很容易被误判成代码回归。
+//   故这里对导航做有限次重试，并采用递增间隔。</zh-CN>
+//   <en>Retryable navigation: while the application domain recycles, navigation fails with net::ERR_ABORTED / ERR_CONNECTION_RESET /
+//   ERR_EMPTY_RESPONSE. These are **transient** errors that a retry recovers from, whereas simply lengthening a fixed wait only hardcodes
+//   a guessed duration. The triggering scenario is measured: when the unified suite runs all layers, the L1 build replacing the site bin
+//   triggers one recycle and the L2 profile switch touching web.config triggers another; a navigation landing inside that window fails
+//   with ERR_ABORTED, which presents as "L2 passes alone but fails in a full run" and is easily misread as a code regression. Navigation
+//   therefore retries a bounded number of times with an increasing interval.</en>
+// </lang>
+const TRANSIENT_NAV_ERRORS = ['ERR_ABORTED', 'ERR_CONNECTION_RESET', 'ERR_EMPTY_RESPONSE', 'ERR_CONNECTION_REFUSED'];
+
+async function gotoWithRetry(page, url, attempts = 4) {
+  let lastError = null;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    } catch (error) {
+      lastError = error;
+      const message = error instanceof Error ? error.message : String(error);
+      const transient = TRANSIENT_NAV_ERRORS.some((code) => message.includes(code));
+      if (!transient || attempt === attempts) {
+        throw error;
+      }
+      await page.waitForTimeout(1000 * attempt);
+    }
+  }
+  throw lastError;
+}
+
 const browser = await chromium.launch({ headless: true });
 try {
   const browserContext = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1, locale: 'zh-CN' });
   const page = await browserContext.newPage();
   page.setDefaultTimeout(40000);
 
-  await page.goto(context.baseUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await gotoWithRetry(page, context.baseUrl);
   await page.locator('input[id$="EmailOrName"]').fill(context.adminUserName);
   await page.locator('input[id$="password"]').fill(context.password);
   await Promise.all([
@@ -152,7 +186,7 @@ try {
   for (const target of targets) {
     const record = { id: target.id, url: target.url, status: 'Pass', facts: {}, notes: [] };
     try {
-      await page.goto(target.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await gotoWithRetry(page, target.url);
       await page.waitForTimeout(800);
       const html = await page.content();
       const text = await page.locator('body').innerText().catch(() => '');

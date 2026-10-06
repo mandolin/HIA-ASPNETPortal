@@ -52,6 +52,26 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalLegacyCssCompatibility.ps1'; Runner = 'ps1'; Kind = '旧版 CSS 兼容'; Args = @() }
         @{ File = 'Test-PortalAscxCompilationContract.ps1'; Runner = 'ps1'; Kind = 'ASCX 编译契约'; Args = @() }
         @{ File = 'Test-PortalBenchmarkChecklist.ps1'; Runner = 'ps1'; Kind = '对标检查表'; Args = @() }
+        # <lang>
+        #   <zh-CN>文档与开源就绪度四门禁（W98 接入）：此前它们存在但不在编排内，因此"跑全门禁"并不包含它们。
+        #   Test-PortalPublicDocumentation 长期返回 exit 1（公开文档索引缺失 + 指向私有仓库的链接），从未被处理，
+        #   原因就是没接进编排 —— 这是"门禁写好了但等于没写"的直接实例。</zh-CN>
+        #   <en>Four documentation and open-source readiness gates (added in W98): they existed but stayed outside the suite, so
+        #   "running the whole gate suite" did not actually include them. Test-PortalPublicDocumentation returned exit 1 for a long
+        #   time (missing public documentation index entries plus links into the private repository) and was never acted on, purely
+        #   because it was not wired in — a direct instance of "a gate that exists but is effectively absent".</en>
+        # </lang>
+        # <lang>
+        #   <zh-CN>Test-PortalSecretLeakage 为 W97 新增：现有门禁只覆盖默认凭据与公开文档的赋值形态，
+        #   私钥块 / 云厂商密钥 / 访问令牌一类高置信度形态此前无人检查。</zh-CN>
+        #   <en>Test-PortalSecretLeakage is new in W97: existing gates only cover default credentials and assignment shapes in public
+        #   documentation, leaving high-confidence shapes such as private key blocks, cloud access keys and access tokens
+        #   unchecked.</en>
+        # </lang>
+        @{ File = 'Test-PortalPublicDocumentation.ps1';    Runner = 'ps1'; Kind = '公开文档合规'; Args = @() }
+        @{ File = 'Test-PortalDocumentationReadiness.ps1'; Runner = 'ps1'; Kind = '文档就绪度'; Args = @() }
+        @{ File = 'Test-PortalSecretLeakage.ps1';          Runner = 'ps1'; Kind = '密钥泄露扫描'; Args = @() }
+        @{ File = 'Test-PortalDefaultCredentialRisk.ps1';  Runner = 'ps1'; Kind = '默认凭据风险'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
