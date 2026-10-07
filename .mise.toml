@@ -1,0 +1,13 @@
+# <lang>
+#   <zh-CN>项目级工具版本（mise）：把前端资产构建所需的 Node 固定为 LTS 主版本，避免"每台机器 Node 版本不同"
+#   导致的依赖树与审计结果不一致。此前本机 Node 为 v20.9.0 —— 该主版本已于 2026-04 结束支持，
+#   且不在 PATH 中，曾直接造成扩展冒烟失败（见 `C-anp-P16.md` §2.8 / §2.10）。
+#   固定为 22（LTS）：既能重建依赖树以消除传递依赖漏洞，又保持对既有 gulp 5 工具链的兼容。</zh-CN>
+#   <en>Project-level tool versions (mise): pin the Node major used by the front-end asset build to an LTS release so the
+#   dependency tree and audit results cannot diverge across machines. The local Node was previously v20.9.0 — a major
+#   that reached end of support in 2026-04 and was absent from PATH, which directly broke the extension smoke
+#   (see `C-anp-P16.md` §2.8 / §2.10). Pinning 22 (LTS) both allows rebuilding the tree to clear transitive
+#   vulnerabilities and stays compatible with the existing gulp 5 toolchain.</en>
+# </lang>
+[tools]
+node = "22"
