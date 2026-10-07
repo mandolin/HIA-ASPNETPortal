@@ -359,6 +359,23 @@ foreach ($layerName in $layersToRun) {
                     & $pwsh -NoProfile -File (Join-Path (Split-Path $gatePath -Parent) $fixture.Script) @applyArgs 2>&1 | Out-Null
                 }
             }
+            # <lang>
+            #   <zh-CN>夹具行要在**应用域回收后**才对站点可见：数据层在构造时把页签与模块实例读入内存快照
+            #   （`New-PortalP77SupplementFixture.ps1` 的文档明确要求回收），回收前新插入的行不可见，
+            #   多实例取舍会退化为"只有既有页签一个候选"，断言随之失败。这里以**完全相同的字节**重写
+            #   `Web.config`：只更新写入时间以触发回收，内容零变化，故 `git diff` 必为空。</zh-CN>
+            #   <en>Fixture rows become visible to the site only after an **application-domain recycle**: the data layer
+            #   snapshots tabs and module instances at construction time (documented as a recycle requirement by
+            #   `New-PortalP77SupplementFixture.ps1`), so newly inserted rows are invisible until then and multi-instance
+            #   selection degrades to "only the pre-existing tab is a candidate", failing the assertion. `Web.config` is
+            #   rewritten with **byte-identical content** here: only the write time changes to trigger the recycle, the
+            #   content is untouched, so `git diff` necessarily stays empty.</en>
+            # </lang>
+            $recycleTrigger = Join-Path $repoRoot 'src\Portal\Web.config'
+            if (Test-Path -LiteralPath $recycleTrigger) {
+                [System.IO.File]::WriteAllBytes($recycleTrigger, [System.IO.File]::ReadAllBytes($recycleTrigger))
+                Start-Sleep -Seconds 5
+            }
         }
 
         try {
@@ -437,6 +454,18 @@ foreach ($layerName in $layersToRun) {
                             Write-Step ("  [Warn] 夹具移除失败：{0} {1} —— {2}" -f $fixture.Script, ($removeArgs -join ' '), $_.Exception.Message)
                         }
                     }
+                }
+                # <lang>
+                #   <zh-CN>移除夹具后同样要回收：否则后续门禁仍读到"含夹具"的内存快照，污染与"忘记移除"完全等价。
+                #   同样只重写相同字节以触发回收，不改变文件内容。</zh-CN>
+                #   <en>A recycle is equally required after removal: otherwise later gates still read the "fixture-present"
+                #   in-memory snapshot, which is exactly equivalent to forgetting to remove it. The same byte-identical
+                #   rewrite is used to trigger the recycle without changing file content.</en>
+                # </lang>
+                $recycleTrigger = Join-Path $repoRoot 'src\Portal\Web.config'
+                if (Test-Path -LiteralPath $recycleTrigger) {
+                    [System.IO.File]::WriteAllBytes($recycleTrigger, [System.IO.File]::ReadAllBytes($recycleTrigger))
+                    Start-Sleep -Seconds 5
                 }
             }
         }
