@@ -222,17 +222,31 @@ $failureIndicators = @(
 
 function Test-GateFailed([string] $output, [int] $exitCode) {
     if ($exitCode -ne 0) { return $true }
+    # <lang>
+    #   <zh-CN>门禁用缩进附注（`note:`）输出诊断与"跳过"原因，其中常含"缺失 / 未渲染 / 未能"等描述词；
+    #   它们解释**原因**，不是失败结论。若把这些行计入正则匹配，会把 `[Skip]` 误判成 Fail —— 实测：
+    #   `Test-PortalSemanticMarkupEvidence` 打印 `note: 目标模块未渲染（表头标记缺失），记为跳过。`，
+    #   命中中文失败标志 `'未能|缺失|...'`，而该门禁自身退出码为 0、结论是 "0 failed"。
+    #   故检测前剔除附注行；行级失败标志（`[Fail]` / `RESULT: Fail`）依然生效，不会漏判真实失败。</zh-CN>
+    #   <en>Gates emit indented notes (`note:`) carrying diagnostics and skip reasons, and those routinely contain words like
+    #   "missing" / "not rendered" / "failed to". They explain the **cause**, not a verdict. Including them in the regex turns
+    #   a `[Skip]` into a Fail — measured: `Test-PortalSemanticMarkupEvidence` prints `note: target module not rendered
+    #   (header marker missing), recorded as skipped.`, which matched the Chinese marker `'未能|缺失|...'`, although the gate
+    #   itself exited 0 and concluded "0 failed". Note lines are therefore stripped before matching; line-level failure
+    #   markers (`[Fail]` / `RESULT: Fail`) remain in force, so real failures are still caught.</en>
+    # </lang>
+    $effectiveOutput = (($output -split "`r?`n") | Where-Object { $_ -notmatch '^\s*note\s*:' }) -join "`n"
     foreach ($indicator in $failureIndicators) {
-        if ($output -match $indicator.Pattern) {
+        if ($effectiveOutput -match $indicator.Pattern) {
             # <lang>
-            #   <zh-CN>命中失败标志后还要检查同一行（或紧邻）是否是否定形式 —— 例如
+            #   <zh-CN>命中失败标志后还要检查同一段输出是否同时出现否定形式 —— 例如
             #   "Failed              : False" 既含 Failed 又含 False，应判为通过。
             #   不做这步的话，通过的输出会被误判成失败，门禁就永远红着，很快会被人忽略。</zh-CN>
-            #   <en>After a failure marker matches, the same (or adjacent) text is checked for the negated form — for example
+            #   <en>After a failure marker matches, the effective output is checked for the negated form — for example
             #   "Failed              : False" contains both "Failed" and "False" and must count as a pass. Without this step a
             #   passing run is scored as a failure, the gate stays permanently red, and people start ignoring it.</en>
             # </lang>
-            if ($indicator.Negation -and ($output -match $indicator.Negation)) { continue }
+            if ($indicator.Negation -and ($effectiveOutput -match $indicator.Negation)) { continue }
             return $true
         }
     }

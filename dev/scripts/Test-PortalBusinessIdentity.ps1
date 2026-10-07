@@ -170,8 +170,17 @@ Add-BusinessIdentityCheck `
     -Message 'SignIn module passes the raw login identifier to IUsersDb.SignIn instead of pre-classifying it in the page.' `
     -Evidence 'src/Portal/DesktopModules/Signin.ascx.cs'
 
+# <lang>
+#   <zh-CN>中性资源 `lang.resx` 是本项目的**英文回退**（同文件其余 `Admin_*` 条目亦为英文），故其期望串
+#   与 `lang.en-us.resx` 同口径。原断言在此处误用了 zh 的期望串，把"回退资源按其自身语言表述"误报为
+#   契约缺口 —— 契约实质是"三份资源都表达邮箱/用户名/员工号三种标识"，中性用英文表述同样满足该语义。</zh-CN>
+#   <en>The neutral resource `lang.resx` is this project's **English fallback** (its other `Admin_*` entries are likewise
+#   English), so its expected string matches `lang.en-us.resx`. The previous assertion mistakenly reused the zh expected
+#   string and reported "the fallback is worded in its own language" as a contract gap — the contract is really "all three
+#   resources advertise email / username / employee-code identifiers", which the English fallback satisfies equally.</en>
+# </lang>
 $labelOk = (Test-ContainsAll $signinMarkup @('lang.Signin_EmailOrName')) -and
-    (Test-ContainsAll $langNeutral @('邮箱、用户名或员工号')) -and
+    (Test-ContainsAll $langNeutral @('Email, username, or employee code:')) -and
     (Test-ContainsAll $langZh @('邮箱、用户名或员工号')) -and
     (Test-ContainsAll $langEn @('Email, username, or employee code:'))
 Add-BusinessIdentityCheck `
