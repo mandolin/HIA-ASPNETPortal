@@ -247,10 +247,20 @@ try {
         #   absolute `npm.cmd` is therefore preferred, falling back to `npm` on PATH only when absent — this fixes the
         #   local machine without breaking machines whose PATH is already configured.</en>
         # </lang>
-        $npmCommand = Join-Path $env:ProgramFiles 'nodejs\npm.cmd'
-        if (-not (Test-Path -LiteralPath $npmCommand)) {
-            $npmCommand = 'npm'
+        # <lang>
+        #   <zh-CN>仅把 npm 换成绝对路径不够：实测 npm.cmd 能启动，但它的子进程 gulp 再去解析 `node` 时仍然报
+        #   "node is not recognized"。故这里把 Node 安装目录补进 PATH，使 npm 及其派生的 node 调用都可解析；
+        #   已在 PATH 中的机器不会被重复追加。</zh-CN>
+        #   <en>Replacing npm with an absolute path alone is not enough: npm.cmd does start, but its child process gulp then
+        #   fails to resolve `node` with "node is not recognized". The Node installation directory is therefore appended to
+        #   PATH so both npm and its derived node invocations resolve; machines that already have it on PATH are not
+        #   appended twice.</en>
+        # </lang>
+        $nodeDirectory = Join-Path $env:ProgramFiles 'nodejs'
+        if ((Test-Path -LiteralPath (Join-Path $nodeDirectory 'node.exe')) -and ($env:PATH -notlike "*$nodeDirectory*")) {
+            $env:PATH = $nodeDirectory + [IO.Path]::PathSeparator + $env:PATH
         }
+        $npmCommand = 'npm'
         Write-Host '[RUN] Frontend assets build'
         Push-Location (Join-Path $repoRoot 'src\Portal')
         try {
