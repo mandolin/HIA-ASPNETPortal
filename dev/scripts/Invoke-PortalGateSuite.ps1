@@ -196,7 +196,21 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalPlatformEmptyStateEvidence.mjs'; Runner = 'mjs'; Kind = '空态证据'; Args = @() }
         @{ File = 'Test-PortalResourceContractEvidence.mjs'; Runner = 'mjs'; Kind = '资源契约证据'; Args = @() }
         @{ File = 'Test-PortalSemanticMarkupEvidence.mjs';  Runner = 'mjs'; Kind = '语义标记证据'; Args = @() }
-        @{ File = 'Test-PortalWorkItemReachabilityEvidence.mjs'; Runner = 'mjs'; Kind = '待办可达性证据'; Args = @() }
+        # <lang>
+        #   <zh-CN>本门禁断言"我的待办"的三种可达性状态，**必须有业务行数据**才能测到。此前它在
+        #   `Test-PortalP77SupplementEvidence` 之后运行，而后者结束时已把同一套夹具移除，导致它无数据可测
+        #   （实测表现为 `modulePresent=true` 却 `tablePresent=false`、各 row / link 均为 null）。故由编排为它
+        #   **独立**声明同一套夹具，使它的前置状态不再依赖别个门禁的清理时机。</zh-CN>
+        #   <en>This gate asserts the three reachability states of "My To-Do Items" and **needs business rows** to assert
+        #   anything. It previously ran after `Test-PortalP77SupplementEvidence`, which had already removed the same
+        #   fixture on completion, leaving nothing to assert on (measured as `modulePresent=true` but `tablePresent=false`
+        #   with every row / link null). The suite therefore declares the fixture for this gate **independently**, so its
+        #   preconditions no longer depend on another gate's cleanup timing.</en>
+        # </lang>
+        @{ File = 'Test-PortalWorkItemReachabilityEvidence.mjs'; Runner = 'mjs'; Kind = '待办可达性证据'; Args = @();
+           Fixture = @{ Script = 'New-PortalP77ReachabilityFixture.ps1'
+                        Apply  = @(, @('-Action', 'Seed'))
+                        Remove = @(, @('-Action', 'Remove')) } }
     )
 }
 
