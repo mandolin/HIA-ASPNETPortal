@@ -72,6 +72,25 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalDocumentationReadiness.ps1'; Runner = 'ps1'; Kind = '文档就绪度'; Args = @() }
         @{ File = 'Test-PortalSecretLeakage.ps1';          Runner = 'ps1'; Kind = '密钥泄露扫描'; Args = @() }
         @{ File = 'Test-PortalDefaultCredentialRisk.ps1';  Runner = 'ps1'; Kind = '默认凭据风险'; Args = @() }
+        # <lang>
+        #   <zh-CN>C-anp-P16 / A3（W96，2026-10-07）：以下 13 个为原未接入编排的 `Test-Portal*.ps1` 静态门禁，
+        #   按"只读源码/配置、不连 DB/IIS"判定归入 L0（原则 2 调研现状、原则 3 以实测为准）。</zh-CN>
+        #   <en>C-anp-P16 / A3 (W96, 2026-10-07): the 13 `Test-Portal*.ps1` static gates below were previously outside the
+        #   suite; judged L0 because they read only source/config and touch no DB/IIS (principle 2 survey, principle 3 measure).</en>
+        # </lang>
+        @{ File = 'Test-PortalBusinessIdentity.ps1';        Runner = 'ps1'; Kind = '业务身份契约'; Args = @() }
+        @{ File = 'Test-PortalBusinessPermissionAudit.ps1';  Runner = 'ps1'; Kind = '业务权限审计'; Args = @() }
+        @{ File = 'Test-PortalCollaborationWorkflowSmoke.ps1'; Runner = 'ps1'; Kind = '协同工作流'; Args = @() }
+        @{ File = 'Test-PortalComplianceBaseline.ps1';       Runner = 'ps1'; Kind = '合规基线'; Args = @() }
+        @{ File = 'Test-PortalFrontendContracts.ps1';       Runner = 'ps1'; Kind = '前端契约'; Args = @() }
+        @{ File = 'Test-PortalIeModeReadiness.ps1';         Runner = 'ps1'; Kind = 'IE 模式就绪'; Args = @() }
+        @{ File = 'Test-PortalLogMaintenance.ps1';          Runner = 'ps1'; Kind = '日志留存'; Args = @() }
+        @{ File = 'Test-PortalOperationsReadiness.ps1';     Runner = 'ps1'; Kind = '运维就绪'; Args = @() }
+        @{ File = 'Test-PortalProductionHardening.ps1';     Runner = 'ps1'; Kind = '生产硬化预检'; Args = @() }
+        @{ File = 'Test-PortalPublishReadiness.ps1';        Runner = 'ps1'; Kind = '发布就绪'; Args = @() }
+        @{ File = 'Test-PortalReferenceDataSmoke.ps1';      Runner = 'ps1'; Kind = '参考数据'; Args = @() }
+        @{ File = 'Test-PortalSqlVersionMatrix.ps1';        Runner = 'ps1'; Kind = 'SQL 版本矩阵'; Args = @() }
+        @{ File = 'Test-PortalWorkItemSmoke.ps1';           Runner = 'ps1'; Kind = '轻量待办'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
@@ -99,6 +118,12 @@ $gateLayers = [ordered]@{
                @('-ModuleName', 'HIA.BusinessApplicationRequest', '-SqlMigrationFile', 'src\Setup\PortalBiz_BusinessApplications.sql')
            ) }
         # <lang>
+        #   <zh-CN>C-anp-P16 / A3（W96，2026-10-07）：以下 2 个为"构建隔离 proof 项目"门禁，归入 L1（需先构建产物）。</zh-CN>
+        #   <en>C-anp-P16 / A3 (W96, 2026-10-07): the 2 build-isolated proof gates below belong in L1 (require build output first).</en>
+        # </lang>
+        @{ File = 'Test-PortalDataProvider.ps1';            Runner = 'ps1'; Kind = '数据 provider proof'; Args = @() }
+        @{ File = 'Test-PortalHiaBoundary.ps1';             Runner = 'ps1'; Kind = 'HIA 边界 proof'; Args = @() }
+        # <lang>
         #   <zh-CN>`Test-PortalBusinessModuleSmoke.ps1` **一次只测一个模块**（`-ModuleName` 必填），
         #   所以这里用 `ArgSets` 给出多组参数、逐组各跑一次。首版只给了空的 `Args`，运行后报
         #   "missing mandatory parameters: ModuleName" —— 与主题解析那次是同一类错误：
@@ -125,6 +150,18 @@ $gateLayers = [ordered]@{
     # </lang>
     L2 = @(
         @{ File = 'Invoke-PortalModuleRuntimeGate.ps1';   Runner = 'ps1'; Kind = '模块运行期加载'; Args = @() }
+        # <lang>
+        #   <zh-CN>C-anp-P16 / A3（W96，2026-10-07）：以下 4 个为需运行期环境（IIS Express / SQL Server）的门禁，归入 L2。
+        #   ModuleCache / SqlCompatibility 的 ConnectionStringsConfigPath 为必填，复用与 ThemeResolution 相同的开发库连接串路径；
+        #   若开发库/连接串未就绪，编排如实记 Fail（原则 3：不以"感觉该通过"替代实测）。</zh-CN>
+        #   <en>C-anp-P16 / A3 (W96, 2026-10-07): the 4 gates below need a runtime (IIS Express / SQL Server) and belong in L2.
+        #   ModuleCache / SqlCompatibility require ConnectionStringsConfigPath (mandatory), reusing the dev-db path from ThemeResolution;
+        #   if the dev DB / connection string is not ready, the suite records Fail truthfully (principle 3: measure, do not assume).</en>
+        # </lang>
+        @{ File = 'Test-PortalModuleCache.ps1';             Runner = 'ps1'; Kind = '模块缓存隔离'; Args = @('-ConnectionStringsConfigPath', (Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings.config')) }
+        @{ File = 'Test-PortalSqlCompatibility.ps1';        Runner = 'ps1'; Kind = 'SQL 兼容'; Args = @('-ConnectionStringsConfigPath', (Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings.config')) }
+        @{ File = 'Test-PortalSmoke.ps1';                   Runner = 'ps1'; Kind = 'HTTP smoke'; Args = @() }
+        @{ File = 'Test-PortalExtensionSmoke.ps1';          Runner = 'ps1'; Kind = '扩展 smoke'; Args = @() }
     )
 }
 
@@ -254,9 +291,23 @@ foreach ($layerName in $layersToRun) {
             #   backslashes in paths break easily when concatenated, and a parameter that never arrives surfaces as
             #   "missing mandatory parameters", which is easy to misread as a defect in the gate itself.</en>
             # </lang>
-            $gateArgs = @('-NoProfile', '-File', $gatePath)
-            if ($invokeArgs.Count -gt 0) { $gateArgs += $invokeArgs }
-            $raw = & $pwsh @gateArgs 2>&1
+            if ($gate.Runner -eq 'mjs') {
+                # <lang>
+                #   <zh-CN>A1（W93）：`mjs` 门禁由 Node 直接运行（无需 `-File` 开关）。其运行期环境变量
+                #   （如 `PORTAL_PLAYWRIGHT_MODULE`）由调用方在 `$env` 中预先设置；门禁自身如有必填参数，
+                #   通过 `Args` 以数组展开传入。解释器据此选 Node 而非 pwsh。</zh-CN>
+                #   <en>A1 (W93): an `mjs` gate runs directly under Node (no `-File` switch). Its runtime environment
+                #   variables (e.g. PORTAL_PLAYWRIGHT_MODULE) are preset by the caller in $env; a gate's own mandatory
+                #   arguments, if any, come through `Args` via array splatting. The interpreter is Node, not pwsh.</en>
+                # </lang>
+                $gateArgs = @($gatePath)
+                if ($invokeArgs.Count -gt 0) { $gateArgs += $invokeArgs }
+                $raw = & $nodeExe @gateArgs 2>&1
+            } else {
+                $gateArgs = @('-NoProfile', '-File', $gatePath)
+                if ($invokeArgs.Count -gt 0) { $gateArgs += $invokeArgs }
+                $raw = & $pwsh @gateArgs 2>&1
+            }
             $exit = $LASTEXITCODE
             $text = ($raw | Out-String)
             $record.exitCode = $exit
