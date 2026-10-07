@@ -85,7 +85,24 @@ const esjs = () => {
     //   <zh-CN>以 `*.src.js` 作为唯一输入契约，输出同目录 `.js` 与 source map，避免自动化任务扫描或创建额外目录。</zh-CN>
     //   <en>Use `*.src.js` as the only input contract and emit adjacent `.js` files plus source maps without scanning or creating extra directories.</en>
     // </lang>
-    return gulp.src('js/**/*.src.js', { sourcemaps: true })
+    // <lang>
+    //   <zh-CN>源目录不存在时**直接跳过**，不让 `gulp.src` 抛 ENOENT 中断整条 `assets:build`。实测本机
+    //   `js/`、`css/` 均不存在（全仓 `*.src.js` 数量为 0），底层 `scandir` 会抛 ENOENT；而 `allowEmpty`
+    //   只覆盖"目录存在但无匹配文件"，覆盖不到这种情况。此前正因如此把整个扩展冒烟判成失败 —— 它既掩盖了
+    //   "当前没有源文件需要构建"这一真实结论，也挡住了真正的构建错误。`allowEmpty` 仍保留，用于目录存在
+    //   但没有匹配源文件的情形。</zh-CN>
+    //   <en>Skip outright when the source folder is absent instead of letting `gulp.src` throw ENOENT and abort the whole
+    //   `assets:build`. On this machine neither `js/` nor `css/` exists (zero `*.src.js` repo-wide) and the underlying
+    //   `scandir` throws ENOENT, which `allowEmpty` does not cover because it only handles "folder exists but nothing
+    //   matches". That previously failed the entire extension smoke, hiding both the true conclusion "there are no
+    //   sources to build" and any real build error. `allowEmpty` is kept for the case where the folder exists but has no
+    //   matching sources.</en>
+    // </lang>
+    if (!fs.existsSync('js/')) {
+        console.log('esjs skipped: source folder js/ does not exist.');
+        return Promise.resolve();
+    }
+    return gulp.src('js/**/*.src.js', { sourcemaps: true, allowEmpty: true })
         // <lang>
         //   <zh-CN>按目标 `.js` 文件判断是否变化，避免源文件后缀与输出后缀不同导致每次都重建。</zh-CN>
         //   <en>Compare against the target `.js` file so the source/output suffix difference does not force a rebuild every time.</en>
@@ -159,7 +176,12 @@ const coffeejs = () => {
     //   <zh-CN>CoffeeScript 管线只处理现有 `.coffee` 源文件，并以相邻 `.js` 作为增量输出目标。</zh-CN>
     //   <en>The CoffeeScript pipeline processes only existing `.coffee` sources and uses adjacent `.js` files as incremental output targets.</en>
     // </lang>
-    return gulp.src('js/**/*.coffee', { sourcemaps: true })
+    // <lang><zh-CN>同 `esjs`：源目录不存在时跳过而非抛错；`js/` 不存在时上一条任务已返回。</zh-CN><en>As in `esjs`: skip rather than throw when the source folder is absent; if `js/` does not exist this pipeline has nothing to do.</en></lang>
+    if (!fs.existsSync('js/')) {
+        console.log('coffeejs skipped: source folder js/ does not exist.');
+        return Promise.resolve();
+    }
+    return gulp.src('js/**/*.coffee', { sourcemaps: true, allowEmpty: true })
         .pipe(changed('js/', { extension: '.js' }))
         .pipe(sourcemaps.init())
         // <lang>
@@ -198,7 +220,12 @@ const sasscss = () => {
     //   <zh-CN>Sass/SCSS 共用同一输出目录与 source map 策略，避免主题 CSS 构建在两种语法间分叉。</zh-CN>
     //   <en>Sass and SCSS share the same output folder and source-map strategy so theme CSS builds do not diverge by syntax.</en>
     // </lang>
-    return gulp.src(['css/**/*.scss', 'css/**/*.sass'], { sourcemaps: true })
+    // <lang><zh-CN>同 `esjs`：源目录不存在时跳过而非抛错，避免整条 `assets:build` 被 Sass 输入目录缺失打断。</zh-CN><en>As in `esjs`: skip rather than throw when the source folder is absent, so a missing Sass input folder cannot abort the whole `assets:build`.</en></lang>
+    if (!fs.existsSync('css/')) {
+        console.log('sasscss skipped: source folder css/ does not exist.');
+        return Promise.resolve();
+    }
+    return gulp.src(['css/**/*.scss', 'css/**/*.sass'], { sourcemaps: true, allowEmpty: true })
         .pipe(changed('css/', { extension: '.css' }))
         .pipe(sourcemaps.init())
         // <lang>
