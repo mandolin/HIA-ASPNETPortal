@@ -175,7 +175,23 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalCollaborationLayoutEvidence.mjs'; Runner = 'mjs'; Kind = '协同布局证据'; Args = @() }
         @{ File = 'Test-PortalLocalizationLeakEvidence.mjs'; Runner = 'mjs'; Kind = '语言泄漏证据'; Args = @() }
         @{ File = 'Test-PortalModuleRuntimeEvidence.mjs';    Runner = 'mjs'; Kind = '模块运行期证据'; Args = @() }
-        @{ File = 'Test-PortalP77SupplementEvidence.mjs';    Runner = 'mjs'; Kind = 'P77补充证据'; Args = @() }
+        # <lang>
+        #   <zh-CN>本门禁是唯一需要**临时夹具**的证据门禁：`DarkTheme` 提供深色皮肤页签覆盖、`MultiInstance`
+        #   提供多实例取舍场景。二者必须由编排在门禁前应用、门禁后移除（见夹具生命周期说明），否则会污染
+        #   其它运行期门禁的页签取舍结果。</zh-CN>
+        #   <en>This is the only evidence gate needing **temporary fixtures**: `DarkTheme` supplies the dark-skin tab
+        #   override and `MultiInstance` the multi-instance selection scenario. The suite applies them before this gate
+        #   and removes them after (see the fixture-lifecycle note); otherwise they pollute tab resolution for the other
+        #   runtime gates.</en>
+        # </lang>
+        @{ File = 'Test-PortalP77SupplementEvidence.mjs';    Runner = 'mjs'; Kind = 'P77补充证据'; Args = @();
+           Fixture = @(
+             @{ Script = 'New-PortalP77ReachabilityFixture.ps1'
+                Apply  = @(, @('-Action', 'Seed'))
+                Remove = @(, @('-Action', 'Remove')) },
+             @{ Script = 'New-PortalP77SupplementFixture.ps1'
+                Apply  = @(, @('-Action', 'DarkTheme'), , @('-Action', 'MultiInstance'))
+                Remove = @(, @('-Action', 'MultiInstanceOff'), , @('-Action', 'DarkThemeOff')) } ) }
         @{ File = 'Test-PortalPlaceholderEvidence.mjs';      Runner = 'mjs'; Kind = '占位文案证据'; Args = @() }
         @{ File = 'Test-PortalPlatformEmptyStateEvidence.mjs'; Runner = 'mjs'; Kind = '空态证据'; Args = @() }
         @{ File = 'Test-PortalResourceContractEvidence.mjs'; Runner = 'mjs'; Kind = '资源契约证据'; Args = @() }
@@ -316,6 +332,35 @@ foreach ($layerName in $layersToRun) {
             continue
         }
 
+        # <lang>
+        #   <zh-CN>夹具生命周期（2026-10-08）：部分证据门禁必须依赖临时造数/临时注册行才能进入它要断言的状态
+        #   （实测 `Test-PortalP77SupplementEvidence` 需要 `DarkTheme` + `MultiInstance` 夹具）。但这些夹具会
+        #   **改变全局取舍结果** —— 实测把 `Invoke-PortalModuleRuntimeGate`、`Test-PortalAdminListUiEvidence`、
+        #   `Test-PortalModuleRuntimeEvidence` 三个门禁由 Pass 拖成 Fail。故不能"一次种下、全量跑完"，只能在
+        #   本门禁前应用、跑完立即移除，把副作用严格限制在本门禁的时间窗内。</zh-CN>
+        #   <en>Fixture lifecycle (2026-10-08): some evidence gates only reach the state they assert on with temporary
+        #   seeded/registration rows (measured: `Test-PortalP77SupplementEvidence` needs the `DarkTheme` + `MultiInstance`
+        #   fixtures). Those fixtures **change global resolution outcomes** — measured to flip
+        #   `Invoke-PortalModuleRuntimeGate`, `Test-PortalAdminListUiEvidence` and `Test-PortalModuleRuntimeEvidence` from
+        #   Pass to Fail. They therefore cannot be "seeded once, run everything"; they are applied just before this gate
+        #   and removed immediately after, confining side effects to this gate's own time window.</en>
+        # </lang>
+        # <lang>
+        #   <zh-CN>一个门禁可能需要**多套**夹具（实测 `Test-PortalP77SupplementEvidence`：既需要业务行数据，
+        #   也需要深色皮肤与多实例注册行），故统一按数组处理，单套与多套写法对编排透明。</zh-CN>
+        #   <en>A gate may need **several** fixture sets (measured for `Test-PortalP77SupplementEvidence`: it needs both
+        #   business rows and the dark-skin/multi-instance registration rows), so they are handled uniformly as an array,
+        #   making single- and multi-set declarations transparent to the suite.</en>
+        # </lang>
+        if ($gate.ContainsKey('Fixture')) {
+            $fixtureSets = if ($gate.Fixture -is [array]) { $gate.Fixture } else { @($gate.Fixture) }
+            foreach ($fixture in $fixtureSets) {
+                foreach ($applyArgs in $fixture.Apply) {
+                    & $pwsh -NoProfile -File (Join-Path (Split-Path $gatePath -Parent) $fixture.Script) @applyArgs 2>&1 | Out-Null
+                }
+            }
+        }
+
         try {
             # <lang>
             #   <zh-CN>参数用**数组展开**传入，而不是拼进命令行字符串：路径里的空格与反斜杠在拼串时极易出错，
@@ -372,6 +417,28 @@ foreach ($layerName in $layersToRun) {
             $record.status = 'Fail'
             $overallFailed = $true
             $record.note = $_.Exception.Message
+        } finally {
+            # <lang>
+            #   <zh-CN>夹具必须在门禁结束后移除，且**无论门禁通过还是失败都要移除** —— 否则一次失败的门禁会把
+            #   夹具永久留在开发库里，后续所有门禁与人工验证都跑在污染状态下，且很难追溯到是哪一次跑留下的。
+            #   移除动作自身失败时在此记录并继续，不能让"清理失败"掩盖门禁本身的结论。</zh-CN>
+            #   <en>Fixtures must be removed once the gate finishes, **whether it passed or failed** — otherwise one failing
+            #   gate leaves the fixture permanently in the development database, and every later gate and manual check
+            #   runs against polluted state with little trace of which run left it. A failing removal is recorded here and
+            #   execution continues, so "cleanup failed" never masks the gate's own verdict.</en>
+            # </lang>
+            if ($gate.ContainsKey('Fixture')) {
+                $fixtureSets = if ($gate.Fixture -is [array]) { $gate.Fixture } else { @($gate.Fixture) }
+                foreach ($fixture in $fixtureSets) {
+                    foreach ($removeArgs in $fixture.Remove) {
+                        try {
+                            & $pwsh -NoProfile -File (Join-Path (Split-Path $gatePath -Parent) $fixture.Script) @removeArgs 2>&1 | Out-Null
+                        } catch {
+                            Write-Step ("  [Warn] 夹具移除失败：{0} {1} —— {2}" -f $fixture.Script, ($removeArgs -join ' '), $_.Exception.Message)
+                        }
+                    }
+                }
+            }
         }
 
         Write-Step ("  [{0}] {1}（{2}）{3}exit={4}{5}" -f $record.status, $gate.File, $gate.Kind, $suffix, $record.exitCode, $(if ($record.note) { '  ' + $record.note } else { '' }))
