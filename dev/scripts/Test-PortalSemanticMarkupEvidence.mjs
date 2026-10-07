@@ -39,6 +39,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 /// <summary>
 /// <lang><zh-CN>解析 playwright 模块，优先环境变量指定位置，否则按包名解析并给出明确指引。</zh-CN><en>Resolves the playwright module, preferring the environment-variable location and otherwise falling back to package-name resolution with clear guidance.</en></lang>
@@ -72,12 +73,12 @@ const phase = process.env.PORTAL_P82_PHASE || 'baseline';
 
 // <lang>
 //   <zh-CN>目标覆盖三类：① 前台业务模块（走 `h1` 路线）；② 旧内容模块（纯列表）；③ 后台 Admin 页（**已达标**，
-//   作对照 —— 若连它都"变了"，说明测量口径本身有问题）。页签 id 与 tabindex 实测自开发库
-//   （`PortalCfg_Modules` / `PortalCfg_Tabs`，`tabindex = TabOrder`），不是沿用交接文档里的旧值。</zh-CN>
+//   作对照 —— 若连它都"变了"，说明测量口径本身有问题）。页签 `tabid` 是稳定主键故保留；`tabindex` 自
+//   C-anp-P16 / A2（W94）起改为**运行时**从开发库 `PortalCfg_Tabs.TabOrder` 发现，不再硬编码。</zh-CN>
 //   <en>Targets cover three kinds: (1) front-office business modules (the `h1` route); (2) legacy modules (plain lists);
 //   (3) an already-compliant admin page kept as a control — if even that one "changes", the measurement method is at fault.
-//   Tab ids and tabindex values were measured from the development database (`PortalCfg_Modules` / `PortalCfg_Tabs`,
-//   where `tabindex = TabOrder`) rather than taken from stale values in the handoff document.</en>
+//   Tab ids are stable primary keys and are kept; since C-anp-P16 / A2 (W94) `tabindex` is **discovered at runtime**
+//   from `PortalCfg_Tabs.TabOrder` in the development database instead of being hardcoded.</en>
 // </lang>
 // <lang>
 //   <zh-CN>本脚本需**按档位分两轮**跑，不能一次跑完 —— 实测原因：`Portal.ModuleProfiles.Active` 决定哪些包可见，
@@ -93,15 +94,70 @@ const phase = process.env.PORTAL_P82_PHASE || 'baseline';
 //   The profile must be switched back and forth between passes and always restored afterwards, otherwise the working tree
 //   would carry a temporary configuration.</en>
 // </lang>
-const targets = [
-  { id: 'front-workbench', url: new URL('DesktopDefault.aspx?tabindex=21&tabid=1010', baseUrl).toString(), expectAriaLevel: '1' },
-  { id: 'front-correction', url: new URL('DesktopDefault.aspx?tabindex=20&tabid=1009', baseUrl).toString(), expectAriaLevel: '1' },
-  { id: 'front-confirm', url: new URL('DesktopDefault.aspx?tabindex=20&tabid=1008', baseUrl).toString(), expectAriaLevel: '1' },
-  { id: 'front-myworkitems', url: new URL('DesktopDefault.aspx?tabindex=23&tabid=1011', baseUrl).toString(), expectAriaLevel: '1' },
-  { id: 'legacy-contacts', url: new URL('DesktopDefault.aspx?tabindex=3&tabid=2', baseUrl).toString(), expectAriaLevel: '1', moduleMarkerKey: 'Contacts_LabelName' },
-  { id: 'legacy-document', url: new URL('DesktopDefault.aspx?tabindex=7&tabid=4', baseUrl).toString(), expectAriaLevel: '1', moduleMarkerKey: 'Document_LabelTitle' },
-  { id: 'admin-workitems-control', url: new URL('Admin/WorkItems.aspx', baseUrl).toString(), expectAriaLevel: '2', isControl: true }
+// <lang>
+//   <zh-CN>C-anp-P16 / A2（W94，2026-10-07）：`tabindex` 改为运行时从开发库发现（`PortalCfg_Tabs.TabOrder`），不再硬编码。
+//   实测依据：硬编码值已漂移 —— `tabid=1009` 的脚本值原为 `tabindex=20`，而 2026-10-07 实测开发库该页签
+//   `TabOrder=21`（插入新页签后 `TabOrder` 位移）。`tabid` 是稳定主键故保留；DB 不可达或目标页签缺失时
+//   **直接抛错**，不回退硬编码 —— 回退会把"测量无效"伪装成"通过"。</zh-CN>
+//   <en>C-anp-P16 / A2 (W94, 2026-10-07): `tabindex` is now discovered at runtime from the development database
+//   (`PortalCfg_Tabs.TabOrder`) instead of being hardcoded. Measured evidence: the hardcoded value had already drifted —
+//   the script used `tabindex=20` for `tabid=1009` while the development database reported `TabOrder=21` on 2026-10-07
+//   (the order shifted once a new tab was inserted). `tabid` is kept because it is a stable primary key; if the database is
+//   unreachable or a target tab is missing the script **throws** instead of falling back to hardcoded values, because a
+//   fallback would disguise "measurement invalid" as "passed".</en>
+// </lang>
+// <lang>
+//   <zh-CN>调用发现脚本（pwsh + ADO.NET；本机无可用的 SqlServer 模块，故不用 Invoke-Sqlcmd），返回
+//   `{ [TabID]: TabOrder }` 映射；连接串可用 `PORTAL_TAB_DISCOVERY_CONNECTION` 覆盖默认开发库。</zh-CN>
+//   <en>Calls the discovery script (pwsh + ADO.NET; no usable SqlServer module exists here, so Invoke-Sqlcmd is not used)
+//   and returns a `{ [TabID]: TabOrder }` map; the connection string can override the default development database through
+//   `PORTAL_TAB_DISCOVERY_CONNECTION`.</en>
+// </lang>
+function discoverTabOrders() {
+  const scriptPath = path.join(repoRoot, 'dev', 'scripts', 'Get-PortalTabDiscovery.ps1');
+  const args = ['-NoProfile', '-File', scriptPath];
+  if (process.env.PORTAL_TAB_DISCOVERY_CONNECTION) {
+    args.push('-ConnectionString', process.env.PORTAL_TAB_DISCOVERY_CONNECTION);
+  }
+  const raw = execFileSync(process.env.PORTAL_PWSH_PATH || 'pwsh', args, { encoding: 'utf8', cwd: repoRoot });
+  const start = raw.indexOf('[');
+  const end = raw.lastIndexOf(']');
+  if (start < 0 || end < start) {
+    throw new Error('Tab discovery produced no JSON array: ' + raw.trim());
+  }
+  const rows = JSON.parse(raw.slice(start, end + 1));
+  const map = {};
+  for (const row of rows) {
+    map[String(row.TabID)] = row.TabOrder;
+  }
+  return map;
+}
+
+const tabTargets = [
+  { id: 'front-workbench', tabId: 1010, expectAriaLevel: '1' },
+  { id: 'front-correction', tabId: 1009, expectAriaLevel: '1' },
+  { id: 'front-confirm', tabId: 1008, expectAriaLevel: '1' },
+  { id: 'front-myworkitems', tabId: 1011, expectAriaLevel: '1' },
+  { id: 'legacy-contacts', tabId: 2, expectAriaLevel: '1', moduleMarkerKey: 'Contacts_LabelName' },
+  { id: 'legacy-document', tabId: 4, expectAriaLevel: '1', moduleMarkerKey: 'Document_LabelTitle' }
 ];
+
+const tabOrders = discoverTabOrders();
+const targets = tabTargets.map((target) => {
+  const tabIndex = tabOrders[String(target.tabId)];
+  if (typeof tabIndex !== 'number') {
+    throw new Error('Tab ' + target.tabId + ' is absent from PortalCfg_Tabs; its URL cannot be built without a discovered TabOrder.');
+  }
+  return Object.assign({}, target, {
+    url: new URL('DesktopDefault.aspx?tabindex=' + tabIndex + '&tabid=' + target.tabId, baseUrl).toString()
+  });
+});
+targets.push({
+  id: 'admin-workitems-control',
+  url: new URL('Admin/WorkItems.aspx', baseUrl).toString(),
+  expectAriaLevel: '2',
+  isControl: true
+});
 
 function readResxValue(fileName, key) {
   const resx = fs.readFileSync(path.join(repoRoot, 'src', 'Portal', 'App_GlobalResources', fileName), 'utf8');
