@@ -162,6 +162,25 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalSqlCompatibility.ps1';        Runner = 'ps1'; Kind = 'SQL 兼容'; Args = @('-ConnectionStringsConfigPath', (Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings.config')) }
         @{ File = 'Test-PortalSmoke.ps1';                   Runner = 'ps1'; Kind = 'HTTP smoke'; Args = @() }
         @{ File = 'Test-PortalExtensionSmoke.ps1';          Runner = 'ps1'; Kind = '扩展 smoke'; Args = @() }
+        # <lang>
+        #   <zh-CN>C-anp-P16 / A1（W93，2026-10-07）：以下 10 个 `Test-Portal*.mjs` 语义/证据门禁此前因编排无 mjs
+        #   runner 分支而架构上无法接入，现随 A1 分支补齐全量接入。它们均依赖运行期（IIS Express :40001 +
+        #   外置连接串 + 验收上下文 + playwright）；本环境 IIS Express 未常驻时如实记 Fail（原则 3）。</zh-CN>
+        #   <en>C-anp-P16 / A1 (W93, 2026-10-07): the 10 `Test-Portal*.mjs` semantic/evidence gates below could not be
+        #   wired in before A1 added the mjs runner branch; they are now fully onboarded. They all need a runtime
+        #   (IIS Express :40001 + external connection string + acceptance context + playwright); when IIS Express is
+        #   not running here, the suite records Fail truthfully (principle 3).</en>
+        # </lang>
+        @{ File = 'Test-PortalAdminListUiEvidence.mjs';     Runner = 'mjs'; Kind = '后台列表UI证据'; Args = @() }
+        @{ File = 'Test-PortalCollaborationLayoutEvidence.mjs'; Runner = 'mjs'; Kind = '协同布局证据'; Args = @() }
+        @{ File = 'Test-PortalLocalizationLeakEvidence.mjs'; Runner = 'mjs'; Kind = '语言泄漏证据'; Args = @() }
+        @{ File = 'Test-PortalModuleRuntimeEvidence.mjs';    Runner = 'mjs'; Kind = '模块运行期证据'; Args = @() }
+        @{ File = 'Test-PortalP77SupplementEvidence.mjs';    Runner = 'mjs'; Kind = 'P77补充证据'; Args = @() }
+        @{ File = 'Test-PortalPlaceholderEvidence.mjs';      Runner = 'mjs'; Kind = '占位文案证据'; Args = @() }
+        @{ File = 'Test-PortalPlatformEmptyStateEvidence.mjs'; Runner = 'mjs'; Kind = '空态证据'; Args = @() }
+        @{ File = 'Test-PortalResourceContractEvidence.mjs'; Runner = 'mjs'; Kind = '资源契约证据'; Args = @() }
+        @{ File = 'Test-PortalSemanticMarkupEvidence.mjs';  Runner = 'mjs'; Kind = '语义标记证据'; Args = @() }
+        @{ File = 'Test-PortalWorkItemReachabilityEvidence.mjs'; Runner = 'mjs'; Kind = '待办可达性证据'; Args = @() }
     )
 }
 
@@ -293,13 +312,16 @@ foreach ($layerName in $layersToRun) {
             # </lang>
             if ($gate.Runner -eq 'mjs') {
                 # <lang>
-                #   <zh-CN>A1（W93）：`mjs` 门禁由 Node 直接运行（无需 `-File` 开关）。其运行期环境变量
-                #   （如 `PORTAL_PLAYWRIGHT_MODULE`）由调用方在 `$env` 中预先设置；门禁自身如有必填参数，
-                #   通过 `Args` 以数组展开传入。解释器据此选 Node 而非 pwsh。</zh-CN>
-                #   <en>A1 (W93): an `mjs` gate runs directly under Node (no `-File` switch). Its runtime environment
-                #   variables (e.g. PORTAL_PLAYWRIGHT_MODULE) are preset by the caller in $env; a gate's own mandatory
-                #   arguments, if any, come through `Args` via array splatting. The interpreter is Node, not pwsh.</en>
+                #   <zh-CN>A1（W93）：`mjs` 门禁由 Node 直接运行（无需 `-File` 开关）。本分支在调用前设置
+                #   `PORTAL_PLAYWRIGHT_MODULE`（指向本机开发期依赖 `temp\node_modules\playwright`，不入库），
+                #   满足语义/证据类门禁的运行期依赖；门禁自身如有必填参数，通过 `Args` 以数组展开传入。</zh-CN>
+                #   <en>A1 (W93): an `mjs` gate runs directly under Node (no `-File` switch). This branch sets
+                #   PORTAL_PLAYWRIGHT_MODULE (to the local dev-only dependency `temp\node_modules\playwright`, not
+                #   committed) before invoking, satisfying runtime deps of semantic/evidence gates; a gate's own
+                #   mandatory arguments, if any, come through `Args` via array splatting.</en>
                 # </lang>
+                $pwDir = Join-Path $repoRoot 'temp\node_modules\playwright'
+                if (Test-Path $pwDir) { $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path $pwDir).Path }
                 $gateArgs = @($gatePath)
                 if ($invokeArgs.Count -gt 0) { $gateArgs += $invokeArgs }
                 $raw = & $nodeExe @gateArgs 2>&1
