@@ -55,26 +55,35 @@ function Get-LatestTagVersion {
 }
 
 # <lang>
-#   <zh-CN>读取所有 AssemblyInfo.cs 中的 AssemblyVersion 值集合。</zh-CN>
-#   <en>Reads the set of AssemblyVersion values from all AssemblyInfo.cs files.</en>
+#   <zh-CN>C-anp-P16 / B1（W95，2026-10-07）：同时读取所有 AssemblyInfo.cs 中的 AssemblyVersion 与
+#   AssemblyFileVersion，并核对单个文件内两者是否一致。返回去重后的两个集合，供主逻辑与 CHANGELOG 比对。</zh-CN>
+#   <en>C-anp-P16 / B1 (W95, 2026-10-07): reads both AssemblyVersion and AssemblyFileVersion from every
+#   AssemblyInfo.cs and checks intra-file agreement, returning two de-duplicated sets for the main logic to
+#   compare against CHANGELOG.</en>
 # </lang>
-function Get-AssemblyVersions {
+function Get-AssemblyVersionSets {
     param([string]$Root)
 
     $files = Get-ChildItem -Path (Join-Path $Root 'src') -Recurse -Filter 'AssemblyInfo.cs' -File -ErrorAction SilentlyContinue
-    $values = @()
+    $av = @(); $fv = @()
     foreach ($file in $files) {
         $content = Get-Content -LiteralPath $file.FullName -Raw
-        if ($content -match 'AssemblyVersion\("(\d+\.\d+\.\d+)\.\d+"\)') {
-            $values += $Matches[1]
+        $mAv = [regex]::Match($content, 'AssemblyVersion\("(\d+\.\d+\.\d+)\.\d+"\)')
+        $mFv = [regex]::Match($content, 'AssemblyFileVersion\("(\d+\.\d+\.\d+)\.\d+"\)')
+        if ($mAv.Success) { $av += $mAv.Groups[1].Value }
+        if ($mFv.Success) { $fv += $mFv.Groups[1].Value }
+        if ($mAv.Success -and $mFv.Success -and $mAv.Groups[1].Value -ne $mFv.Groups[1].Value) {
+            Write-Host ('  note: ' + $file.Name + ' AssemblyVersion=' + $mAv.Groups[1].Value + ' 与 AssemblyFileVersion=' + $mFv.Groups[1].Value + ' 不一致（文件内漂移）')
         }
     }
-    return ($values | Sort-Object -Unique)
+    return @{ AV = @($av | Sort-Object -Unique); FV = @($fv | Sort-Object -Unique) }
 }
 
 $changelog = Get-LatestChangelogVersion -Root $RepoRoot
 $tag = Get-LatestTagVersion -Root $RepoRoot
-$assemblies = Get-AssemblyVersions -Root $RepoRoot
+$sets = Get-AssemblyVersionSets -Root $RepoRoot
+$assemblies = $sets.AV
+$fileVersions = $sets.FV
 
 Write-Output ('CHANGELOG latest : ' + $(if ($changelog) { $changelog } else { '<none>' }))
 Write-Output ('Git tag latest   : ' + $(if ($tag) { $tag } else { '<none>' }))
@@ -89,6 +98,20 @@ if ($changelog -and $tag -and $changelog -ne $tag) {
 foreach ($assembly in $assemblies) {
     if ($changelog -and $assembly -ne $changelog) {
         $problems += ('程序集版本 ' + $assembly + ' 与 CHANGELOG 版本 ' + $changelog + ' 不一致')
+    }
+}
+# <lang>
+#   <zh-CN>B1（W95）：AssemblyFileVersion 必须与 CHANGELOG 对齐（与 AssemblyVersion 同口径），且文件内
+#   不应缺失。缺省即版本锚点未同步，属 R6 缺口。</zh-CN>
+#   <en>B1 (W95): AssemblyFileVersion must align with CHANGELOG (same basis as AssemblyVersion) and must not
+#   be missing per file; absence means the version anchor is unsynced, an R6 gap.</en>
+# </lang>
+if ($assemblies.Count -gt 0 -and $fileVersions.Count -eq 0) {
+    $problems += 'AssemblyInfo.cs 缺少 AssemblyFileVersion（版本锚点未同步，R6 缺口）'
+}
+foreach ($fv in $fileVersions) {
+    if ($changelog -and $fv -ne $changelog) {
+        $problems += ('程序集文件版本 AssemblyFileVersion ' + $fv + ' 与 CHANGELOG 版本 ' + $changelog + ' 不一致')
     }
 }
 
