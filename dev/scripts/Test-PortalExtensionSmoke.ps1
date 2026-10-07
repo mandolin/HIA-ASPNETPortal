@@ -238,10 +238,23 @@ try {
     }
 
     if (-not $SkipAssets) {
+        # <lang>
+        #   <zh-CN>本机实测 Node 安装目录不在 PATH，直接调用 `npm` 会报 "npm is not recognized"，
+        #   而它是前端资产构建与依赖审计的唯一入口。故优先取绝对路径的 `npm.cmd`，只有取不到时才
+        #   回落到 PATH 上的 `npm` —— 修好本机的同时不破坏 PATH 已配置好的机器。</zh-CN>
+        #   <en>Measured on this machine: the Node installation directory is not on PATH, so calling `npm` directly fails
+        #   with "npm is not recognized", yet `npm` is the only entry point for the asset build and dependency audit. The
+        #   absolute `npm.cmd` is therefore preferred, falling back to `npm` on PATH only when absent — this fixes the
+        #   local machine without breaking machines whose PATH is already configured.</en>
+        # </lang>
+        $npmCommand = Join-Path $env:ProgramFiles 'nodejs\npm.cmd'
+        if (-not (Test-Path -LiteralPath $npmCommand)) {
+            $npmCommand = 'npm'
+        }
         Write-Host '[RUN] Frontend assets build'
         Push-Location (Join-Path $repoRoot 'src\Portal')
         try {
-            & npm run assets:build
+            & $npmCommand run assets:build
             if ($LASTEXITCODE -ne 0) {
                 throw 'Frontend assets build failed.'
             }
@@ -250,7 +263,7 @@ try {
             #   <zh-CN>本机可能将默认 registry 指向不实现 audit API 的镜像；审计固定走官方端点，避免把镜像能力误判成依赖风险。</zh-CN>
             #   <en>Some local registries do not implement the audit API. Use the official endpoint so mirror capability is not mistaken for dependency risk.</en>
             # </lang>
-            & npm audit --audit-level=moderate --registry=https://registry.npmjs.org
+            & $npmCommand audit --audit-level=moderate --registry=https://registry.npmjs.org
             if ($LASTEXITCODE -ne 0) {
                 throw 'npm audit reported a moderate-or-higher vulnerability.'
             }
