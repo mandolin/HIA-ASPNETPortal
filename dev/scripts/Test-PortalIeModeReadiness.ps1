@@ -266,3 +266,19 @@ $checks | Format-Table -AutoSize
 if ($FailWhenNotReady -and -not $readyForIeModeAutomation) {
     throw 'Portal Edge IE mode readiness check failed.'
 }
+
+# <lang>
+#   <zh-CN>默认不失败（`-FailWhenNotReady` 才转失败），因此"全部检查 False"会以 exit 0 结束 —— 编排按退出码
+#   判 Pass，绿色会掩盖"本机 IE 模式自动化其实不可用"这一事实（V3 已裁定本门禁不计入 L10 首发硬性判定）。
+#   这里通过 `[GATE-NOTE]` 把结论显式送进编排汇总行，避免"看起来是绿的"。
+#   措辞刻意避开编排失败标志里的"未能 / 缺失 / 不存在"等字样（且注释行本就不参与失败匹配）。</zh-CN>
+#   <en>The default is not to fail (only `-FailWhenNotReady` converts it), so "every check False" still ends with exit 0 —
+#   the suite judges by exit code, and the green result then hides the fact that IE-mode automation is unavailable on this
+#   machine (V3 ruled that this gate does not count towards the L10 first-release verdict). The `[GATE-NOTE]` channel
+#   therefore carries the conclusion explicitly into the suite summary line instead of leaving it looking green. The wording
+#   deliberately avoids the suite's failure markers such as 未能 / 缺失 / 不存在 (and note lines never take part in failure
+#   matching anyway).</en>
+# </lang>
+if (-not $readyForIeModeAutomation -or -not $readyForEnterpriseSiteList) {
+    Write-Output ('[GATE-NOTE] IE 模式自动化未就绪（ReadyForIeModeAutomation={0} / ReadyForEnterpriseSiteList={1}）；按 V3 裁定不计入 L10 首发硬性判定，仅作 L9 兼容性提示。' -f $readyForIeModeAutomation, $readyForEnterpriseSiteList)
+}

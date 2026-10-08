@@ -267,7 +267,16 @@ function Test-GateFailed([string] $output, [int] $exitCode) {
     #   itself exited 0 and concluded "0 failed". Note lines are therefore stripped before matching; line-level failure
     #   markers (`[Fail]` / `RESULT: Fail`) remain in force, so real failures are still caught.</en>
     # </lang>
-    $effectiveOutput = (($output -split "`r?`n") | Where-Object { $_ -notmatch '^\s*note\s*:' }) -join "`n"
+    # <lang>
+    #   <zh-CN>`[GATE-NOTE]` 是门禁自述的**注释通道**（见下方提取逻辑）：它用于带出"通过但值得注意"的结论，
+    #   例如某门禁 exit 0 但其内部就绪指标为 False。注释文本可能含"缺失/未就绪"一类字样，
+    #   若参与失败匹配就会把通过的门禁判成失败，故在此剔除 —— 与既有 `note:` 行同一处理原则。</zh-CN>
+    #   <en>`[GATE-NOTE]` is a gate's self-reported **annotation channel** (extracted below): it surfaces "passing but worth
+    #   attention" conclusions, such as a gate that exits 0 while its own readiness indicators are False. Annotation text may
+    #   contain words like "missing" or "not ready", so including it in failure matching would score a passing gate as
+    #   failing; it is therefore stripped here, applying the same principle already used for `note:` lines.</en>
+    # </lang>
+    $effectiveOutput = (($output -split "`r?`n") | Where-Object { $_ -notmatch '^\s*note\s*:' -and $_ -notmatch '\[GATE-NOTE\]' }) -join "`n"
     foreach ($indicator in $failureIndicators) {
         if ($effectiveOutput -match $indicator.Pattern) {
             # <lang>
@@ -473,6 +482,25 @@ foreach ($layerName in $layersToRun) {
                 $record.status = 'Fail'
                 $overallFailed = $true
                 $record.note = '退出码或输出含失败标志'
+            }
+            # <lang>
+            #   <zh-CN>提取门禁自述的 `[GATE-NOTE]` 注释并附到汇总行：这类门禁**通过但带有值得注意的结论**
+            #   （实测典型：`Test-PortalIeModeReadiness` exit 0 而其就绪指标全为 False）。只看退出码的话，
+            #   绿色会把"该能力实际不可用"这一事实掩盖掉 —— 即 `W83` 所说"**门禁变弱比门禁报错更危险**"。
+            #   注释只进汇总与证据，**不改变通过/失败判定**（是否失败仍由退出码与失败标志决定）。</zh-CN>
+            #   <en>Extract a gate's self-reported `[GATE-NOTE]` annotations and attach them to the summary line: such gates
+            #   **pass but carry a conclusion worth attention** (the measured example: `Test-PortalIeModeReadiness` exits 0
+            #   while all of its readiness indicators are False). Judging by exit code alone lets the green result hide the
+            #   fact that the capability is actually unavailable — precisely what `W83` called "**a weakened gate is more
+            #   dangerous than a failing one**". Annotations reach the summary and the evidence only; they **never change the
+            #   pass/fail verdict**, which still rests on the exit code and the failure markers.</en>
+            # </lang>
+            $gateNotes = @()
+            foreach ($noteLine in ($text -split "`r?`n")) {
+                if ($noteLine -match '\[GATE-NOTE\]\s*(.+)') { $gateNotes += $Matches[1].Trim() }
+            }
+            if ($gateNotes.Count -gt 0) {
+                $record.note = if ($record.note) { $record.note + '; ' + ($gateNotes -join '; ') } else { ($gateNotes -join '; ') }
             }
             # <lang>
             #   <zh-CN>每个门禁的完整输出都留档：汇总里只记结论，排障要看原始输出。</zh-CN>
