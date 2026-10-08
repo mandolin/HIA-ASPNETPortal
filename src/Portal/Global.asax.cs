@@ -87,7 +87,28 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>先解析当前环境标识；后续 appSettings、Unity 覆盖和外置连接串都以它作为选择维度。</zh-CN>
             //   <en>Resolve the current environment marker first; later appSettings, Unity overrides, and external connection strings all use it as the selection dimension.</en>
             // </lang>
-            var env = (EnvSection)ConfigurationManager.GetSection("env") ?? "dev";
+            // <lang>
+            //   <zh-CN>先解析当前环境标识：Web.config 的 &lt;env&gt; 为部署期固定值，进程环境变量 HIA_PORTAL_ENV 可在其之上做本地/CI 模式切换；
+            //   二者都只选择“基础配置 + 环境覆盖”的覆盖文件名，不携带任何敏感值；非法环境名收敛为 dev 以阻止路径穿越。</zh-CN>
+            //   <en>Resolve the current environment marker: the Web.config &lt;env&gt; element is the deployment-time fixed value, while the
+            //   HIA_PORTAL_ENV process variable can switch the local/CI mode on top of it; both only select the override-file name for
+            //   "base configuration plus environment override" and carry no sensitive values; an invalid environment name converges to dev to block path traversal.</en>
+            // </lang>
+            string env = (string)(EnvSection)ConfigurationManager.GetSection("env");
+            string envVarOverride = Environment.GetEnvironmentVariable("HIA_PORTAL_ENV");
+            if (!string.IsNullOrWhiteSpace(envVarOverride) &&
+                System.Text.RegularExpressions.Regex.IsMatch(envVarOverride, @"^[A-Za-z0-9_-]{1,32}$"))
+            {
+                // <lang>
+                //   <zh-CN>仅接受稳定环境名，避免未规范化输入拼接出任意配置文件路径（如 appSettings.{env}.json）。</zh-CN>
+                //   <en>Accept only a stable environment name so unnormalized input cannot compose an arbitrary configuration-file path such as appSettings.{env}.json.</en>
+                // </lang>
+                env = envVarOverride;
+            }
+            if (string.IsNullOrWhiteSpace(env))
+            {
+                env = "dev";
+            }
             GlobalInfo.Environment = env;
 
             // <lang>
