@@ -12,7 +12,8 @@
 #
 # 用法（仓库根目录）：
 #   & "C:\Program Files\PowerShell\7\pwsh.exe" -NoProfile -File dev\scripts\Invoke-PortalGateSuite.ps1
-#   开关：-Layer L0|L1|L2|All（默认 All）；-EvidenceDir <路径>；-StopOnFirstFailure
+#   开关：-Layer L0|L1|L2|All（默认 All）；-EvidenceDir <路径>；-StopOnFirstFailure；
+#         -SkipProfileSwitch（L2 不自动切模块档位，供自行管理档位的 CI 使用）
 # 退出码：0 全部通过；1 有门禁失败；2 前置条件缺失。
 
 param(
@@ -20,7 +21,8 @@ param(
     [string] $Layer = 'All',
     [string] $EvidenceDir,
     [switch] $StopOnFirstFailure,
-    [switch] $IncludeSlow
+    [switch] $IncludeSlow,
+    [switch] $SkipProfileSwitch
 )
 
 $ErrorActionPreference = 'Stop'
@@ -299,6 +301,50 @@ foreach ($layerName in $layersToRun) {
     Write-Step "--- 层 $layerName ---"
     $gates = @($gateLayers[$layerName])
     if ($IncludeSlow -and $layerName -eq 'L2') { $gates += $slowGates }
+
+    # <lang>
+    #   <zh-CN>L2 档位自管（2026-10-09）：语义/证据类门禁断言前台业务模块与 DevProbe 包，而默认档位 `CoreOnly`
+    #   下这些模块**根本不渲染**，表现为"模块不存在"而不是门禁失败 —— 历史上 P81 / P82 / P83 / v0.7.0 四次靠
+    #   人工切档位，本次排查又因此把一整天耗在"异常被吞、面板空白"上。故由编排在 L2 开始前切到
+    #   `BusinessWorkflow`（前台业务模块）+ `HIA.ModuleProbe`（模块缓存门禁需要的 DevProbe 包），并在
+    #   `finally` 中还原，使切档位成为**代码责任**而非操作员记忆。
+    #   手段沿用 `Invoke-PortalModuleRuntimeGate.ps1` 已验证的做法：重写 gitignore 的 `appSettings.dev.json`
+    #   （不入库）+ 更新 `web.config` 时间戳触发应用域回收；两者都是临时改动，故必须兜底还原 —— 否则门禁失败、
+    #   断言抛错或 Ctrl+C 都会把临时档位留在工作树里，下一个人看到的模块可见性与预期不符且极难定位。</zh-CN>
+    #   <en>L2 profile self-management (2026-10-09): the semantic/evidence gates assert the front-office business modules and
+    #   the DevProbe package, yet under the default `CoreOnly` profile those modules **do not render at all**, which surfaces
+    #   as "module missing" rather than a gate failure — P81 / P82 / P83 / v0.7.0 each needed a manual profile switch, and the
+    #   present investigation lost a whole day to the resulting "swallowed exception, blank pane". The suite therefore switches
+    #   to `BusinessWorkflow` (front-office business modules) + `HIA.ModuleProbe` (the DevProbe package the module-cache gate
+    #   needs) before L2 and restores it in `finally`, making the switch a **code responsibility** rather than operator memory.
+    #   The mechanism reuses the approach already proven by `Invoke-PortalModuleRuntimeGate.ps1`: rewrite the git-ignored
+    #   `appSettings.dev.json` (never committed) and update the `web.config` timestamp to recycle the app domain. Both are
+    #   temporary changes, so restoration must be guaranteed — otherwise a failing gate, a thrown assertion, or Ctrl+C leaves
+    #   the temporary profile in the working tree, and the next person sees module visibility that differs from expectations
+    #   with almost no way to trace it.</en>
+    # </lang>
+    $moduleSettingsPath = Join-Path $repoRoot 'src\Portal\Config\appSettings.dev.json'
+    $webConfigPath = Join-Path $repoRoot 'src\Portal\web.config'
+    $moduleSettingsBackup = $null
+    $webConfigStamp = $null
+    $profileManaged = $false
+    if ($layerName -eq 'L2' -and -not $SkipProfileSwitch) {
+        if (Test-Path $moduleSettingsPath) { $moduleSettingsBackup = [System.IO.File]::ReadAllText($moduleSettingsPath, [System.Text.Encoding]::UTF8) }
+        $webConfigStamp = (Get-Item $webConfigPath).LastWriteTime
+        # <lang>
+        #   <zh-CN>`Enabled` 必须带上 `HIA.ModuleProbe`：`Test-PortalModuleCache` 断言 DevProbe 包，而它不在
+        #   `BusinessWorkflow` 的 include 图里，只能由部署级 `Enabled` 追加。</zh-CN>
+        #   <en>`Enabled` must carry `HIA.ModuleProbe`: `Test-PortalModuleCache` asserts the DevProbe package, which is not part
+        #   of the `BusinessWorkflow` include graph and can therefore only be appended through the deployment-level `Enabled`.</en>
+        # </lang>
+        $profileJson = '{' + [char]10 + '    "appSettings": {' + [char]10 + '        "TestItem": "dev item",' + [char]10 + '        "Portal.ModuleProfiles.Active": "BusinessWorkflow",' + [char]10 + '        "Portal.ModulePackages.Enabled": "HIA.ModuleProbe"' + [char]10 + '    }' + [char]10 + '}'
+        [System.IO.File]::WriteAllText($moduleSettingsPath, $profileJson, [System.Text.UTF8Encoding]::new($false))
+        (Get-Item $webConfigPath).LastWriteTime = Get-Date
+        $profileManaged = $true
+        Start-Sleep -Seconds 3
+        Write-Step 'L2 档位已切换 → BusinessWorkflow + HIA.ModuleProbe'
+    }
+    try {
     foreach ($gate in $gates) {
         $gatePath = Join-Path $scriptDir $gate.File
         # <lang>
@@ -491,6 +537,24 @@ foreach ($layerName in $layersToRun) {
             Write-Step "遇到首个失败即停止（-StopOnFirstFailure）"
             break
         }
+        }
+    }
+    }
+    finally {
+        # <lang>
+        #   <zh-CN>无论门禁通过、失败还是被中断，L2 临时档位都必须还原；还原配置后再恢复 `web.config` 时间戳，
+        #   使工作树回到进入 L2 之前的状态。仅当确实由本层切换过档位时才还原，避免覆盖 CI 自行管理的档位。</zh-CN>
+        #   <en>Whatever happens — gates passing, failing, or the run being interrupted — the temporary L2 profile must be
+        #   restored; the `web.config` timestamp is restored afterwards so the working tree returns to its pre-L2 state.
+        #   Restoration runs only when this layer itself switched the profile, so a profile managed by CI is never
+        #   overwritten.</en>
+        # </lang>
+        if ($profileManaged) {
+            if ($null -ne $moduleSettingsBackup) {
+                [System.IO.File]::WriteAllText($moduleSettingsPath, $moduleSettingsBackup, [System.Text.UTF8Encoding]::new($false))
+            }
+            (Get-Item $webConfigPath).LastWriteTime = $webConfigStamp
+            Write-Step 'L2 档位已还原'
         }
     }
     if ($StopOnFirstFailure -and $overallFailed) { break }
