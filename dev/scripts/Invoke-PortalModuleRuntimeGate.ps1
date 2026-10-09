@@ -51,6 +51,16 @@ foreach ($entry in $connectionXml.connectionStrings.add) {
 }
 if (-not $connectionString) { Write-Error '连接串配置里没有名为 Portal 的连接。'; exit 2 }
 
+# <lang>
+#   <zh-CN>预热用的站点基址：优先取 `temp\p65\p65-acceptance-context.json` 的 baseUrl，缺省回退 40001。
+#   仅用于回收后预热（填充模块运行期缓存），与门禁真实导航目标一致。</zh-CN>
+# </lang>
+$baseUrl = 'http://localhost:40001/'
+$acceptanceCtxPath = Join-Path $repoRoot 'temp\p65\p65-acceptance-context.json'
+if (Test-Path $acceptanceCtxPath) {
+    try { $acc = Get-Content $acceptanceCtxPath -Raw -Encoding UTF8 | ConvertFrom-Json; if ($acc.baseUrl) { $baseUrl = $acc.baseUrl } } catch { }
+}
+
 $connection = New-Object System.Data.SqlClient.SqlConnection $connectionString
 $connection.Open()
 $command = $connection.CreateCommand()
@@ -245,10 +255,77 @@ function Restore-Profile {
     Write-Step '档位已还原'
 }
 
-function Set-Profile([string] $profile) {
-    $json = '{' + [char]10 + '    "appSettings": {' + [char]10 + '        "TestItem": "dev item",' + [char]10 + '        "Portal.ModuleProfiles.Active": "' + $profile + '"' + [char]10 + '    }' + [char]10 + '}'
-    [System.IO.File]::WriteAllText($settingsPath, $json, [System.Text.UTF8Encoding]::new($false))
+function Set-Profile([string] $profile, [string] $enabledPackages = $null) {
+    # <lang>
+    #   <zh-CN>切档位时**保留** `appSettings` 的其它键（尤其 `Portal.ModulePackages.Enabled`）。
+    #   早先实现把 dev.json 整体覆盖成只含 `Active` 的 JSON，会**一并抹掉** `Enabled=HIA.ModuleProbe` —— 于是
+    #   business 组切回 BusinessWorkflow 后 ModuleProbe 包被禁用、模块不再渲染，门禁误报 `module=false`
+    #   （这正是 2026-10-09 L2 14/15 的元凶）。`enabledPackages` 显式传入（business 组）时覆盖该键，
+    #   保证被测包在验证期间启用。</zh-CN>
+    #   <en>When switching profiles, **preserve** the other keys of `appSettings` (especially
+    #   `Portal.ModulePackages.Enabled`). The earlier implementation overwrote dev.json wholesale with a JSON containing
+    #   only `Active`, which also **erased** `Enabled=HIA.ModuleProbe` — so after the business group switched back to
+    #   BusinessWorkflow the ModuleProbe package was disabled, the module stopped rendering, and the gate falsely reported
+    #   `module=false` (the cause of L2 14/15 on 2026-10-09). When `enabledPackages` is passed explicitly (business group)
+    #   it overrides that key so the probed package stays enabled during verification.</en>
+    # </lang>
+    $appSettings = [pscustomobject]@{ TestItem = 'dev item' }
+    if (Test-Path $settingsPath) {
+        try {
+            $prev = Get-Content $settingsPath -Raw -Encoding UTF8 | ConvertFrom-Json
+            if ($prev.appSettings) {
+                foreach ($k in $prev.appSettings.PSObject.Properties.Name) {
+                    $appSettings | Add-Member -NotePropertyName $k -NotePropertyValue $prev.appSettings.$k -Force
+                }
+            }
+        } catch { }
+    }
+    # <lang>
+    #   <zh-CN>`appSettings` 的键是**平面点号键**（如 `Portal.ModuleProfiles.Active`）。直接用 `$obj.'a.b.c' = $v`
+    #   会被 PowerShell 当成嵌套路径导航而报错（属性不存在）。故用 `Add-Member -Force`：点号按字面键名处理，
+    #   既合并既有键也新增键。`[string]` 形参会把 `$null` 转空串，故用 `IsNullOrEmpty` 判空。</zh-CN>
+    # </lang>
+    $appSettings | Add-Member -NotePropertyName 'Portal.ModuleProfiles.Active' -NotePropertyValue $profile -Force
+    if (-not [string]::IsNullOrEmpty($enabledPackages)) {
+        $appSettings | Add-Member -NotePropertyName 'Portal.ModulePackages.Enabled' -NotePropertyValue $enabledPackages -Force
+    }
+    $nextJson = ([pscustomobject]@{ appSettings = $appSettings } | ConvertTo-Json -Depth 4)
+    [System.IO.File]::WriteAllText($settingsPath, $nextJson, [System.Text.UTF8Encoding]::new($false))
     (Get-Item $webConfigPath).LastWriteTime = Get-Date
+}
+
+# <lang>
+#   <zh-CN>回收后预热：改 web.config 时间戳触发应用域回收，回收后首个请求需重新编译，往往超过 Set-Profile 后的 3s 睡眠。
+#   若门禁在实例就绪前就导航（尤其某组首个目标），会打到未渲染完成的页面而误判失败。故切档位后显式预热：读外置连接串、
+#   查 PortalCfg_Modules 全部非空 TabId 并逐个请求至 200。取页签失败则退化为仅首页预热。</zh-CN>
+# </lang>
+function WarmUp-Instance([string] $urlBase) {
+    $warmUrls = @($urlBase.TrimEnd('/') + '/')
+    try {
+        $c = New-Object System.Data.SqlClient.SqlConnection $connectionString
+        $c.Open()
+        $q = $c.CreateCommand()
+        $q.CommandText = 'SELECT DISTINCT TabId FROM PortalCfg_Modules WHERE TabId IS NOT NULL'
+        $rd = $q.ExecuteReader()
+        while ($rd.Read()) { $warmUrls += ($urlBase.TrimEnd('/') + '/DesktopDefault.aspx?tabid=' + $rd['TabId']) }
+        $rd.Close(); $c.Close()
+        Write-Step ('预热覆盖 ' + ($warmUrls.Count - 1) + ' 个已部署页签')
+    } catch {
+        Write-Step ('预热取页签失败（' + $_.Exception.Message + '），退化为首页预热')
+    }
+    $ok = $false
+    for ($wi = 1; $wi -le 40; $wi++) {
+        $allOk = $true
+        foreach ($u in $warmUrls) {
+            try {
+                $r = Invoke-WebRequest -Uri $u -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
+                if ($r.StatusCode -ne 200) { $allOk = $false; break }
+            } catch { $allOk = $false; break }
+        }
+        if ($allOk) { $ok = $true; break }
+        Start-Sleep -Seconds 2
+    }
+    if ($ok) { Write-Step '预热完成' } else { Write-Step '预热未完成（门禁可能误判，建议手动确认实例）' }
 }
 
 $overallFailed = $false
@@ -283,9 +360,16 @@ try {
         $profile = $groups[$groupKey].Profile
 
         if (-not $SkipProfileSwitch) {
-            Write-Step "切换档位 → $profile"
-            Set-Profile $profile
+            # <lang>
+            #   <zh-CN>business 组显式启用 HIA.ModuleProbe：否则切档位会把它禁用、模块不渲染 → 门禁误判
+            #   （见 Set-Profile 注释，L2 14/15 元凶）。legacy 组无需启用。切档位后预热，避免回收竞态。</zh-CN>
+            # </lang>
+            $enableArg = $null
+            if ($groupKey -eq 'business') { $enableArg = 'HIA.ModuleProbe' }
+            Write-Step ("切换档位 → $profile" + $(if ($enableArg) { ' + HIA.ModuleProbe' }))
+            Set-Profile $profile $enableArg
             Start-Sleep -Seconds 3
+            WarmUp-Instance $baseUrl
         }
 
         $roundDir = Join-Path $EvidenceDir $groupKey
