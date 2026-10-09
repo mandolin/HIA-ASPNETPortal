@@ -197,7 +197,22 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalPlaceholderEvidence.mjs';      Runner = 'mjs'; Kind = '占位文案证据'; Args = @() }
         @{ File = 'Test-PortalPlatformEmptyStateEvidence.mjs'; Runner = 'mjs'; Kind = '空态证据'; Args = @() }
         @{ File = 'Test-PortalResourceContractEvidence.mjs'; Runner = 'mjs'; Kind = '资源契约证据'; Args = @() }
-        @{ File = 'Test-PortalSemanticMarkupEvidence.mjs';  Runner = 'mjs'; Kind = '语义标记证据'; Args = @() }
+        # <lang>
+        #   <zh-CN>`Env` 声明该门禁**必须**以哪个档位运行。实测依据（2026-10-09 注入法）：本脚本
+        #   `phase = PORTAL_P82_PHASE || 'baseline'`，而语义断言（`<th>` 全带 `scope`、无孤儿 span 标签、
+        #   标题 `role=heading` + `aria-level`）**只在 `after` 档生效**；`baseline` 档只断言"模块已渲染"。
+        #   注入一个缺 `scope` 的 `<th>` 后实测：`baseline` 档 exit 0 / "0 failed"（**抓不到**），
+        #   `after` 档 exit 1 / "1 failed"（**抓得到**）。故编排若沿用默认档，该门禁就是"通过但什么都没断言"。
+        # </zh-CN>
+        #   <en>`Env` declares the phase this gate **must** run in. Measured basis (2026-10-09, injection method): the script
+        #   sets `phase = PORTAL_P82_PHASE || 'baseline'`, while the semantic assertions (every `<th>` carries `scope`, no
+        #   orphan span labels, title has `role=heading` + `aria-level`) apply **only in the `after` phase**; `baseline` asserts
+        #   merely that the module rendered. After injecting one `<th>` without `scope`: `baseline` gave exit 0 / "0 failed"
+        #   (**did not catch it**), `after` gave exit 1 / "1 failed" (**caught it**). Letting the suite keep the default would
+        #   therefore leave this gate passing while asserting nothing.</en>
+        # </lang>
+        @{ File = 'Test-PortalSemanticMarkupEvidence.mjs';  Runner = 'mjs'; Kind = '语义标记证据'; Args = @();
+           Env = @{ PORTAL_P82_PHASE = 'after' } }
         # <lang>
         #   <zh-CN>本门禁断言"我的待办"的三种可达性状态，**必须有业务行数据**才能测到。此前它在
         #   `Test-PortalP77SupplementEvidence` 之后运行，而后者结束时已把同一套夹具移除，导致它无数据可测
@@ -350,8 +365,63 @@ foreach ($layerName in $layersToRun) {
         [System.IO.File]::WriteAllText($moduleSettingsPath, $profileJson, [System.Text.UTF8Encoding]::new($false))
         (Get-Item $webConfigPath).LastWriteTime = Get-Date
         $profileManaged = $true
-        Start-Sleep -Seconds 3
-        Write-Step 'L2 档位已切换 → BusinessWorkflow + HIA.ModuleProbe'
+        # <lang>
+        #   <zh-CN>改 web.config 时间戳会触发应用域回收，回收后首个请求需重新编译，耗时往往超过 3s。
+        #   若不等就绪就跑门禁，首个门禁（如 Invoke-PortalModuleRuntimeGate）会打到未就绪实例而**误判失败**——
+        #   这正是 2026-10-09 首次冷启动 L2 时出现过的竞态。故显式预热：轮询 40001 直到返回 HTTP 200
+        #   （最多约 60s）；预热失败只告警、不终止，因为门禁本身也会重试/超时。</zh-CN>
+        #   <en>Changing the web.config timestamp triggers an app-domain recycle; the first request afterwards recompiles and
+        #   often takes longer than 3s. Running gates before the instance is ready makes the first gate (e.g.
+        #   Invoke-PortalModuleRuntimeGate) hit an unready instance and **fail spuriously** — exactly the cold-start race seen
+        #   on the first L2 run of 2026-10-09. We therefore warm up explicitly: poll 40001 until it returns HTTP 200 (up to
+        #   ~60s); a failed warm-up only warns rather than stopping, because the gates themselves retry and time out.</en>
+        # </lang>
+        # <lang>
+        #   <zh-CN>模块运行期缓存按"首次访问对应页签"填充；只打首页或少数页签，`Invoke-PortalModuleRuntimeGate`
+        #   遍历 DB 中**全部**已部署模块实例时会打到未就绪模块而误判失败。故预热要覆盖所有已部署页签：
+        #   读外置连接串 → 查 `PortalCfg_Modules` 中全部非空 TabId → 逐个请求直到返回 200（取页签失败则退化为首页预热）。</zh-CN>
+        #   <en>The module runtime cache is populated per "first visit to the tab"; hitting only the homepage or a few tabs makes
+        #   `Invoke-PortalModuleRuntimeGate` (which walks **every** deployed instance from the DB) hit not-yet-ready modules and
+        #   fail spuriously. Warm-up must therefore cover every deployed tab: read the external connection string, query all
+        #   non-null TabIds from `PortalCfg_Modules`, and request each until it returns 200 (falls back to homepage-only warm-up
+        #   if the tab list cannot be read).</en>
+        # </lang>
+        $warmupUrls = @('http://localhost:40001/')
+        try {
+            $ccPath = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings.config'
+            [xml]$cc = Get-Content $ccPath
+            $cs = ''
+            foreach ($a in $cc.connectionStrings.add) { if ($a.name -match 'Portal') { $cs = $a.connectionString; break } }
+            if ($cs) {
+                $conn = New-Object System.Data.SqlClient.SqlClient.SqlConnection $cs
+                $conn.Open()
+                $cmd = $conn.CreateCommand()
+                $cmd.CommandText = 'SELECT DISTINCT TabId FROM PortalCfg_Modules WHERE TabId IS NOT NULL'
+                $rd = $cmd.ExecuteReader()
+                while ($rd.Read()) { $warmupUrls += ('http://localhost:40001/DesktopDefault.aspx?tabid=' + $rd['TabId']) }
+                $rd.Close(); $conn.Close()
+                Write-Step ('L2 预热覆盖 ' + ($warmupUrls.Count - 1) + ' 个已部署页签')
+            }
+        } catch {
+            Write-Step ('L2 预热取页签失败（' + $_.Exception.Message + '），退化为首页预热')
+        }
+        $warmupOk = $false
+        for ($wi = 1; $wi -le 60; $wi++) {
+            $allOk = $true
+            foreach ($u in $warmupUrls) {
+                try {
+                    $r = Invoke-WebRequest -Uri $u -UseBasicParsing -TimeoutSec 8 -ErrorAction Stop
+                    if ($r.StatusCode -ne 200) { $allOk = $false; break }
+                } catch { $allOk = $false; break }
+            }
+            if ($allOk) { $warmupOk = $true; break }
+            Start-Sleep -Seconds 2
+        }
+        if ($warmupOk) {
+            Write-Step 'L2 档位已切换并预热 → BusinessWorkflow + HIA.ModuleProbe'
+        } else {
+            Write-Step 'L2 档位已切换，但 40001 预热未完成（门禁可能误判，建议手动确认实例）'
+        }
     }
     try {
     foreach ($gate in $gates) {
@@ -455,6 +525,22 @@ foreach ($layerName in $layersToRun) {
             #   backslashes in paths break easily when concatenated, and a parameter that never arrives surfaces as
             #   "missing mandatory parameters", which is easy to misread as a defect in the gate itself.</en>
             # </lang>
+            # <lang>
+            #   <zh-CN>门禁专属环境变量（清单 `Env` 声明）：有的门禁默认档位只"记录现状"而不下断言，编排沿用默认档
+            #   就会让它**通过却什么都没断言**（见该门禁清单处的注入法实测）。这里在调用前设置并在 `finally` 还原。</zh-CN>
+            #   <en>Gate-specific environment variables (declared by the manifest's `Env`): some gates default to a phase that
+            #   only records the current state and asserts nothing, so letting the suite use the default leaves them **passing
+            #   while asserting nothing** (see the injection measurement recorded at that gate's manifest entry). They are set
+            #   here before invocation and restored in `finally`.</en>
+            # </lang>
+            $envBackup = @{}
+            if ($gate.ContainsKey('Env')) {
+                foreach ($envKey in $gate.Env.Keys) {
+                    $envBackup[$envKey] = [Environment]::GetEnvironmentVariable($envKey)
+                    [Environment]::SetEnvironmentVariable($envKey, [string]$gate.Env[$envKey])
+                }
+            }
+
             if ($gate.Runner -eq 'mjs') {
                 # <lang>
                 #   <zh-CN>A1（W93）：`mjs` 门禁由 Node 直接运行（无需 `-File` 开关）。本分支在调用前设置
@@ -523,6 +609,19 @@ foreach ($layerName in $layersToRun) {
             $overallFailed = $true
             $record.note = $_.Exception.Message
         } finally {
+            # <lang>
+            #   <zh-CN>门禁专属环境变量**必须**还原，理由与夹具相同：一次失败或中断若把 `PORTAL_P82_PHASE=after`
+            #   之类的档位留在进程环境里，后续门禁乃至下一次编排运行会在错误档位下得出看似正确的结论。
+            #   `$envBackup` 未初始化时（该门禁无 `Env` 声明或在设置前就抛错）循环自然为空，无需额外判空。</zh-CN>
+            #   <en>Gate-specific environment variables **must** be restored, for the same reason as fixtures: a failure or
+            #   interruption that leaves something like `PORTAL_P82_PHASE=after` in the process environment would make later
+            #   gates — or the very next suite run — reach conclusions under the wrong phase while still looking correct.
+            #   When `$envBackup` was never initialised (the gate declares no `Env`, or it threw before the values were set)
+            #   the loop is naturally empty, so no extra null check is needed.</en>
+            # </lang>
+            foreach ($envKey in $envBackup.Keys) {
+                [Environment]::SetEnvironmentVariable($envKey, $envBackup[$envKey])
+            }
             # <lang>
             #   <zh-CN>夹具必须在门禁结束后移除，且**无论门禁通过还是失败都要移除** —— 否则一次失败的门禁会把
             #   夹具永久留在开发库里，后续所有门禁与人工验证都跑在污染状态下，且很难追溯到是哪一次跑留下的。
