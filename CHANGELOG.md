@@ -4,6 +4,38 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [SemVer](https://semver.org/lang/zh-CN/)。
 
+## [v1.0.0] - 2026-10-09
+
+**首发发行版**（`C-anp-P17`）：达成 `M-ANP-RELEASE-READY-PORTAL`（L10）七条判据，按 `docs/versioning.md` 第四节切 `v1.0.0`。本版本不对功能做新增，只做判据复核、版本锚点与对外口径（原则 4：文档化贯穿开发周期）。
+
+### 已达成（判据复核）
+
+- **R1 能力覆盖** ✅：Foundation + BasicBusiness 登记能力均达"初步完善"。
+- **R2 对标深度** ✅：逐条目对标覆盖率 **19/19 = 100%**、八维度 **8/8**、来源强度标注率 **82/82 = 100%（全部一手）**，`Test-PortalBenchmarkChecklist` **Pass（阻断级违规 0）**。
+- **R3 质量门禁** ✅：统一编排 **44 门禁条目**，L0 **23/23**、L1 **9/9**、**L2 15/15 全绿**；单测 **123/123**；构建 **0 错 0 警**。
+- **R4 文档就绪** ✅：README（7 步快速上手）、模块开发指南（10.9 KB）、架构说明、公开文档索引全覆盖。
+- **R5 开源就绪度** ✅：LICENSE（MIT）、CONTRIBUTING、`.github/` 模板、通用密钥泄露扫描门禁。
+- **R6 版本锚点** ✅：本版本切 `v1.0.0` 标签，CHANGELOG / 标签 / 5 个 `AssemblyInfo` 三锚点一致（一致性门禁守护）。
+- **R7 口径约束** ✅：`docs/versioning.md` 第六节约束已确立。
+
+### 已修复（门禁可信度）
+
+- **ModuleRuntimeGate 对 ModuleProbe 的误判**（`a869907`）：`Set-Profile` 曾把 `appSettings.dev.json` 整体覆盖、抹掉 `Portal.ModulePackages.Enabled=HIA.ModuleProbe`，导致 business 组切档后 ModuleProbe 包被禁用、模块不渲染、门禁误报 `module=false`（L2 14/15 的元凶，非模块缺陷）。改为读-合并既有键、business 组显式启用该包，并新增切档后实例预热。L2 恢复 **15/15**。
+- **语义标记门禁默认档弱化**（`ad2b10c`）：`Test-PortalSemanticMarkupEvidence` 默认 `baseline` 档只断言"模块已渲染"，语义断言仅在 `after` 档生效；编排新增 `Env` 清单声明以 `after` 档运行该门禁（注入法双向证明：缺 `scope` 的 `<th>` 在 `baseline` 抓不到、`after` 抓得到）。
+- **IeModeReadiness 假绿**（`03f604d`）：新增 `[GATE-NOTE]` 注释通道，使 `exit 0` 但内部就绪指标全 False 的结论在编排汇总行显式可见（仍不计入 L10 硬性判定）。
+
+### 验证
+
+- 门禁套件 **47 个全绿**（L0 23 / L1 9 / L2 15），失败 0、跳过 0。
+- 版本一致性门禁 Pass（CHANGELOG 最新 `v1.0.0` == 标签 `v1.0.0` == 全部 `AssemblyVersion` / `AssemblyFileVersion` / `AssemblyInformationalVersion` = `1.0.0.0`）。
+
+### 对外口径（R7 / D2）
+
+- 口径限于"**可用 / 参考 / 研究基线**"。**不得宣称生产级 / 企业级可信**：`M-ANP-TRUSTED-PORTAL`（L7，真实环境证据下的生产就绪）仍为独立里程碑，未达成前禁用该表述。
+- 本版本是四大一级工程原则（设计基线优先 / 调研先行 / 测试与复核为验收标准 / 文档化贯穿开发周期）的**对外生效节点**；closeout 逐条声明四项原则遵守情况。
+
+> **发布即承诺**：首发口径必须明确标注 L7 未达成，避免使用者误判适用范围。
+
 ## [v0.8.0] - 2026-10-07
 
 **文档就绪与开源就绪度**（`C-anp-P15`：`W93`–`W98`）。本版本补回 `C-anp-P10` 原本为 `C-anp-P14` 规划、但被门禁体系化顶替掉的主题，对应首发里程碑 `M-ANP-RELEASE-READY-PORTAL` 的 **R4 / R5** 两条判据。
