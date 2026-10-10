@@ -1,32 +1,32 @@
 /* <lang>
- *   <zh-CN>业务应用申请模块的根容器提供独立白底卡片边界，避免旧门户主题背景直接干扰表单可读性。</zh-CN>
- *   <en>The business-application request root container provides an isolated white card boundary so legacy portal theme backgrounds do not reduce form readability.</en>
+ *   <zh-CN>业务应用申请模块的根容器提供独立卡片边界；表面与边框改用主题语义变量（--portal-surface / --portal-border），避免旧门户浅色硬编码在深色皮肤下形成白色块。</zh-CN>
+ *   <en>The business-application request root container provides an isolated card boundary; surface and border now use the themed semantic variables (--portal-surface / --portal-border) so legacy light hardcoding no longer produces a white block on dark skins.</en>
  * </lang> */
 .business-application-request {
-    border: 1px solid #d8dee8;
+    border: 1px solid var(--portal-border, #d8dee8);
     padding: 12px;
     width: 100%;
     box-sizing: border-box;
-    background: #fff;
+    background: var(--portal-surface, #fff);
 }
 
 /* <lang>
- *   <zh-CN>标题层级使用固定颜色、字号和粗体，形成模块内部的视觉入口而不依赖外层主题标题样式。</zh-CN>
- *   <en>The title tier uses fixed color, size, and weight to create the module-local visual entry point without depending on outer theme heading styles.</en>
+ *   <zh-CN>标题层级使用主题语义变量（--portal-text-strong），形成模块内部的视觉入口而不依赖外层主题标题样式。</zh-CN>
+ *   <en>The title tier uses the themed semantic variable (--portal-text-strong) to create the module-local visual entry point without depending on outer theme heading styles.</en>
  * </lang> */
 .business-application-title {
-    color: #2f475f;
+    color: var(--portal-text-strong, #2f475f);
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
 /* <lang>
- *   <zh-CN>副标题标记表单分区边界；上边距大于下边距，用于和前一组字段保持可读间隔。</zh-CN>
- *   <en>The subtitle marks form-section boundaries; its top margin is larger than its bottom margin to keep readable spacing from the previous field group.</en>
+ *   <zh-CN>副标题标记表单分区边界，同样使用主题语义变量（--portal-text-strong）。</zh-CN>
+ *   <en>The subtitle marks form-section boundaries and also uses the themed semantic variable (--portal-text-strong).</en>
  * </lang> */
 .business-application-subtitle {
-    color: #41556b;
+    color: var(--portal-text-strong, #41556b);
     font-size: 15px;
     font-weight: 700;
     margin: 16px 0 8px;
@@ -60,7 +60,7 @@
     max-width: 100%;
     margin: 10px 0 0 12px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #edf1f5;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
     vertical-align: top;
 }
 
@@ -140,7 +140,7 @@
  * </lang> */
 .business-application-list td,
 .business-application-list th {
-    border-bottom: 1px solid #edf1f5;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
     padding: 6px 4px;
     text-align: left;
 }

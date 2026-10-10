@@ -1,33 +1,33 @@
 /* <lang>
- *   <zh-CN>员工资料更正模块使用独立白底边框容器，隔离外层门户主题并给当前资料、申请表和历史列表提供统一边界。</zh-CN>
- *   <en>The employee-profile correction module uses an isolated white bordered container, separating it from the outer portal theme and giving current data, the request form, and history list one boundary.</en>
+ *   <zh-CN>员工资料更正模块使用独立边框容器，表面与边框改用主题语义变量（--portal-surface / --portal-border），避免浅色硬编码在深色皮肤下形成白色块。</zh-CN>
+ *   <en>The employee-profile correction module uses an isolated bordered container; surface and border now use the themed semantic variables (--portal-surface / --portal-border) so light hardcoding no longer forms a white block on dark skins.</en>
  * </lang> */
 .employee-profile-correction {
-    border: 1px solid #d8dee8;
+    border: 1px solid var(--portal-border, #d8dee8);
     padding: 12px;
     width: 100%;
     max-width: none;
     box-sizing: border-box;
-    background: #fff;
+    background: var(--portal-surface, #fff);
 }
 
 /* <lang>
- *   <zh-CN>主标题建立更正申请的视觉入口，避免当前资料和历史记录在页面上缺少模块级归属。</zh-CN>
- *   <en>The main title establishes the correction-request visual entry point so current data and history records retain module-level ownership on the page.</en>
+ *   <zh-CN>主标题建立更正申请的视觉入口，颜色使用主题语义变量（--portal-text-strong）。</zh-CN>
+ *   <en>The main title establishes the correction-request visual entry point, using the themed semantic variable (--portal-text-strong).</en>
  * </lang> */
 .employee-profile-correction-title {
-    color: #2f475f;
+    color: var(--portal-text-strong, #2f475f);
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
 /* <lang>
- *   <zh-CN>副标题分隔当前资料、申请填写和历史列表等区域，提供稳定的阅读节奏。</zh-CN>
- *   <en>Subtitles separate current profile, request entry, and history-list areas to provide a stable reading rhythm.</en>
+ *   <zh-CN>副标题分隔当前资料、申请填写和历史列表等区域，颜色同样使用主题语义变量（--portal-text-strong）。</zh-CN>
+ *   <en>Subtitles separate current profile, request entry, and history-list areas and also use the themed semantic variable (--portal-text-strong).</en>
  * </lang> */
 .employee-profile-correction-subtitle {
-    color: #41556b;
+    color: var(--portal-text-strong, #41556b);
     font-size: 15px;
     font-weight: 700;
     margin: 14px 0 8px;
@@ -62,7 +62,7 @@
 .employee-profile-correction-form td,
 .employee-profile-correction-list td,
 .employee-profile-correction-list th {
-    border-bottom: 1px solid #edf1f5;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
     padding: 6px 4px;
     text-align: left;
 }
@@ -73,7 +73,7 @@
  * </lang> */
 .employee-profile-correction-label {
     width: 120px;
-    color: #41556b;
+    color: var(--portal-text-strong, #41556b);
     font-weight: 700;
 }
 
@@ -97,7 +97,7 @@
     max-width: 100%;
     margin: 10px 0 0 12px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #edf1f5;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
     vertical-align: top;
 }
 

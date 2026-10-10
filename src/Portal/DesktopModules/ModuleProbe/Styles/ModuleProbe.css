@@ -5,9 +5,9 @@
     </lang>
 */
 .portal-package-hia-moduleprobe .module-probe {
-    border: 1px solid #52718a;
-    background-color: #f4f8fb;
-    color: #1f3546;
+    border: 1px solid var(--portal-border, #52718a);
+    background-color: var(--portal-surface, #f4f8fb);
+    color: var(--portal-text-strong, #1f3546);
     padding: 8px;
 }
 
@@ -18,7 +18,7 @@
     </lang>
 */
 .portal-package-hia-moduleprobe .module-probe-title {
-    color: #1b4f72;
+    color: var(--portal-text-strong, #1b4f72);
     font-size: 14px;
     font-weight: bold;
 }
@@ -31,7 +31,7 @@
 */
 .portal-package-hia-moduleprobe .module-probe-summary {
     margin-top: 3px;
-    color: #496274;
+    color: var(--portal-text-muted, #496274);
 }
 
 /*
@@ -53,6 +53,6 @@
 */
 .portal-package-hia-moduleprobe .module-probe-label {
     width: 92px;
-    color: #31495c;
+    color: var(--portal-text-strong, #31495c);
     font-weight: bold;
 }

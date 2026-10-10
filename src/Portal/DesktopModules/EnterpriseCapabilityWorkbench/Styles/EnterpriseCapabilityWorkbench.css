@@ -1,32 +1,32 @@
 /* <lang>
- *   <zh-CN>企业能力工作台根容器创建独立白底模块区，承载能力需求表单与列表并隔离外层门户主题背景。</zh-CN>
- *   <en>The enterprise-capability workbench root container creates an isolated white module area for capability forms and lists, separating them from the outer portal theme background.</en>
+ *   <zh-CN>企业能力工作台根容器创建独立模块区，表面与边框改用主题语义变量（--portal-surface / --portal-border），避免浅色硬编码在深色皮肤下形成白色块。</zh-CN>
+ *   <en>The enterprise-capability workbench root container creates an isolated module area; surface and border now use the themed semantic variables (--portal-surface / --portal-border) so light hardcoding no longer forms a white block on dark skins.</en>
  * </lang> */
 .enterprise-workbench {
-    border: 1px solid #d8dee8;
+    border: 1px solid var(--portal-border, #d8dee8);
     padding: 12px;
     width: 100%;
     box-sizing: border-box;
-    background: #fff;
+    background: var(--portal-surface, #fff);
 }
 
 /* <lang>
- *   <zh-CN>标题提供工作台的视觉入口，避免列表、表单和页面其他模块混在同一层级。</zh-CN>
- *   <en>The title provides the workbench visual entry point so lists, forms, and neighboring page modules do not blend into one hierarchy.</en>
+ *   <zh-CN>标题提供工作台的视觉入口，颜色使用主题语义变量（--portal-text-strong）。</zh-CN>
+ *   <en>The title provides the workbench visual entry point, using the themed semantic variable (--portal-text-strong).</en>
  * </lang> */
 .enterprise-workbench-title {
-    color: #2f475f;
+    color: var(--portal-text-strong, #2f475f);
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
 /* <lang>
- *   <zh-CN>副标题划分新增/编辑区与清单区，上下间距表达当前区块的开始位置。</zh-CN>
- *   <en>Subtitles separate create/edit areas from list areas, with spacing that communicates where the current section begins.</en>
+ *   <zh-CN>副标题划分新增/编辑区与清单区，颜色同样使用主题语义变量（--portal-text-strong）。</zh-CN>
+ *   <en>Subtitles separate create/edit areas from list areas and also use the themed semantic variable (--portal-text-strong).</en>
  * </lang> */
 .enterprise-workbench-subtitle {
-    color: #41556b;
+    color: var(--portal-text-strong, #41556b);
     font-size: 15px;
     font-weight: 700;
     margin: 16px 0 8px;
@@ -60,7 +60,7 @@
     max-width: 100%;
     margin: 10px 0 0 12px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #edf1f5;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
     vertical-align: top;
 }
 
@@ -140,7 +140,7 @@
  * </lang> */
 .enterprise-workbench-list td,
 .enterprise-workbench-list th {
-    border-bottom: 1px solid #edf1f5;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
     padding: 6px 4px;
     text-align: left;
 }

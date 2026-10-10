@@ -1717,3 +1717,17 @@ body.portal-theme-enterpriselight .employee-profile-field-grid dd,
 body.portal-theme-enterpriselight dl.employee-profile-field-grid dd {
     margin-left: 0;
 }
+/* P18 semantic theme tokens: debt/business modules reference these via var(--portal-*, fallback) so module surfaces, borders and text follow each skin instead of hardcoded light colors. Appended 2026-10-10. */
+body.portal-theme-enterpriselight {
+    --portal-surface: #ffffff;
+    --portal-surface-2: #f5f8fb;
+    --portal-border: #d8dee8;
+    --portal-border-subtle: #edf1f5;
+    --portal-border-strong: #c2ccd8;
+    --portal-text-strong: #2f475f;
+    --portal-text-muted: #5b6b7d;
+    --portal-field-bg: #ffffff;
+    --portal-field-border: #cdd7e2;
+    --portal-field-text: #1f2d3d;
+    --portal-list-header-bg: #eef2f7;
+    --portal-list-row-alt: #f7f9fc;}

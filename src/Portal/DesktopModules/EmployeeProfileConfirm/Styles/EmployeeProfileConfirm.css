@@ -1,22 +1,22 @@
 /* <lang>
- *   <zh-CN>员工资料确认模块以独立白底容器呈现，避免确认数据被外层门户主题背景或窄 pane 压缩。</zh-CN>
- *   <en>The employee-profile confirmation module renders in its own white container so confirmation data is not compressed by outer portal theme backgrounds or narrow panes.</en>
+ *   <zh-CN>员工资料确认模块以独立容器呈现，表面与边框改用主题语义变量（--portal-surface / --portal-border），避免浅色硬编码在深色皮肤下形成白色块。</zh-CN>
+ *   <en>The employee-profile confirmation module renders in its own container; surface and border now use the themed semantic variables (--portal-surface / --portal-border) so light hardcoding no longer forms a white block on dark skins.</en>
  * </lang> */
 .employee-profile-confirm {
-    border: 1px solid #d8dee8;
+    border: 1px solid var(--portal-border, #d8dee8);
     padding: 12px;
     width: 100%;
     max-width: none;
     box-sizing: border-box;
-    background: #fff;
+    background: var(--portal-surface, #fff);
 }
 
 /* <lang>
- *   <zh-CN>标题样式固定确认页入口层级，帮助用户区分资料核对区域与普通模块内容。</zh-CN>
- *   <en>The title style fixes the confirmation-page entry hierarchy, helping users distinguish the profile-review area from ordinary module content.</en>
+ *   <zh-CN>标题样式固定确认页入口层级，颜色使用主题语义变量（--portal-text-strong）。</zh-CN>
+ *   <en>The title style fixes the confirmation-page entry hierarchy, using the themed semantic variable (--portal-text-strong).</en>
  * </lang> */
 .employee-profile-confirm-title {
-    color: #2f475f;
+    color: var(--portal-text-strong, #2f475f);
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 10px;
@@ -46,7 +46,7 @@
  *   <en>Confirmation table cells share bottom borders and padding to create a scannable item-by-item review rhythm.</en>
  * </lang> */
 .employee-profile-confirm-table td {
-    border-bottom: 1px solid #edf1f5;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
     padding: 6px 4px;
 }
 
@@ -56,7 +56,7 @@
  * </lang> */
 .employee-profile-confirm-label {
     width: 120px;
-    color: #41556b;
+    color: var(--portal-text-strong, #41556b);
     font-weight: 700;
 }
 
@@ -86,7 +86,7 @@
     max-width: 100%;
     margin: 10px 0 0 12px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #edf1f5;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
     vertical-align: top;
 }
 
