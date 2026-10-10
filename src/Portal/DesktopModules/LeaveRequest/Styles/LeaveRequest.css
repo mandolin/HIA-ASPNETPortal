@@ -1,0 +1,87 @@
+/* <lang>
+ *   <zh-CN>请假申请模块根容器：表面/边框/文字全部引用 P18 已注入的语义变量（--portal-surface / --portal-border / --portal-text-*），从设计原型阶段即主题无关，规避深色皮肤白色块。</zh-CN>
+ *   <en>Leave-request root container: surface, border, and text all reference the P18 semantic variables (--portal-surface / --portal-border / --portal-text-*), making the module theme-agnostic from the prototype stage and avoiding white blocks on dark skins.</en>
+ * </lang> */
+.leave-request {
+    border: 1px solid var(--portal-border, #d8dee8);
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--portal-surface, #fff);
+}
+
+.leave-request-title {
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.leave-request-subtitle {
+    color: var(--portal-text-strong, #41556b);
+    font-size: 15px;
+    font-weight: 700;
+    margin: 16px 0 8px;
+}
+
+.leave-request-message {
+    color: var(--portal-text-muted, #5b6b7d);
+    font-size: 12px;
+}
+
+.leave-request-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+}
+
+.leave-request-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+
+.leave-request-form-field-wide {
+    grid-column: 1 / -1;
+}
+
+.leave-request-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.leave-request-body {
+    min-height: 96px;
+}
+
+.leave-request-actions {
+    margin-top: 12px;
+}
+
+.leave-request-list-wrap {
+    margin-top: 4px;
+}
+
+.leave-request-list {
+    width: 100%;
+    border: 1px solid var(--portal-border, #d8dee8);
+    border-collapse: collapse;
+}
+
+.leave-request-list th {
+    background: var(--portal-surface-2, #f5f8fb);
+    color: var(--portal-text-strong, #2f475f);
+    border-bottom: 1px solid var(--portal-border, #d8dee8);
+    text-align: left;
+    padding: 6px 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.leave-request-list td {
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
+    color: var(--portal-text-strong, #2f475f);
+    padding: 6px 8px;
+    font-size: 13px;
+}
