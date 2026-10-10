@@ -219,6 +219,12 @@
     <Content Include="DesktopModules\ModuleProbe\module.json" />
     <Content Include="DesktopModules\ModuleProbe\ModuleProbe.ascx" />
     <Content Include="DesktopModules\ModuleProbe\Styles\ModuleProbe.css" />
+    <Content Include="DesktopModules\LeaveRequest\module.json" />
+    <Content Include="DesktopModules\LeaveRequest\LeaveRequest.ascx" />
+    <Content Include="DesktopModules\LeaveRequest\Styles\LeaveRequest.css" />
+    <Content Include="DesktopModules\ExpenseReimbursement\module.json" />
+    <Content Include="DesktopModules\ExpenseReimbursement\ExpenseReimbursement.ascx" />
+    <Content Include="DesktopModules\ExpenseReimbursement\Styles\ExpenseReimbursement.css" />
     <Content Include="DesktopModules\QuickLinks.ascx" />
     <Content Include="DesktopModules\Signin.ascx" />
     <Content Include="DesktopModules\ViewDocument.aspx" />
@@ -677,6 +683,20 @@
     </Compile>
     <Compile Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx.designer.cs">
       <DependentUpon>EmployeeProfileCorrectionRequest.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\LeaveRequest\LeaveRequest.ascx.cs">
+      <DependentUpon>LeaveRequest.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\LeaveRequest\LeaveRequest.ascx.designer.cs">
+      <DependentUpon>LeaveRequest.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\ExpenseReimbursement\ExpenseReimbursement.ascx.cs">
+      <DependentUpon>ExpenseReimbursement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesktopModules\ExpenseReimbursement\ExpenseReimbursement.ascx.designer.cs">
+      <DependentUpon>ExpenseReimbursement.ascx</DependentUpon>
     </Compile>
     <Compile Include="DesktopModules\ModuleProbe\ModuleProbe.ascx.cs">
       <DependentUpon>ModuleProbe.ascx</DependentUpon>

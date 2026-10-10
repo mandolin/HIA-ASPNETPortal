@@ -19,7 +19,7 @@
 
 1. **代码内文档**：v1.0.0 重盘 474 文件扫描、35 有发现（29 高风险脚本候选 + 5 待办/延期标记 + 2 缺节点文档）。由 `C-anp-P19` 接续 `W-anp-P32`–`W-anp-P37` 收口。
 2. **API 与技术契约（边界判定）**：本项目为 **Web Forms 门户（.NET FW4.8）**，**无对外 REST/GraphQL API** → "公开 REST/GraphQL API 参考"标记**不适用**（理由：架构无此类对外面）。但存在**模块契约 / 配置契约 / 接口契约**（模块 Profile、`appSettings` 契约、企业能力对象契约）→ 适用，建议建 `docs/contracts/` 收纳机器可读契约 + 人类可读说明。
-3. **产品功能与使用**：`user-guide.md` 已存在但偏总览。缺口 = 逐功能 how-to / 教程 / FAQ / 故障排除 + 产品介绍与定位专页（README 兼任，建议 `docs/products/intro`）。`C-anp-P20` 新模块须在此族登记使用文档。
+3. **产品功能与使用**：`user-guide.md` 已存在但偏总览。缺口 = 逐功能 how-to / 教程 / FAQ / 故障排除 + 产品介绍与定位专页（README 兼任，建议 `docs/products/intro`）。**`C-anp-P20` 新模块已在此族登记**：`user-guide.md` 新增「业务模块：请假申请与费用报销」节（启用前提、字段与校验、待办生成、常见问题）；逐功能 how-to / 产品介绍专页仍为未闭合缺口。
 4. **开发者与贡献者**：`dev-guide` / `module-development-guide` / `frontend-asset-guide` / `theme-package-guide` 已较全。
 5. **运维部署安全**：`deployment-checklist` / `deployment-default-credentials` / `deployment-rollback-guide` / `operations-runbook` / `audit-retention-policy` / `font-policy-and-audit` / `third-party-dependencies` 已较全。
 6. **架构设计决策**：`architecture.md` + 两个状态机文档 + WorkZone ADR / milestones。
@@ -29,6 +29,6 @@
 
 - 文档地图 / 导航（`docs/INDEX` 或 README 导航，串 7 族读者路径）
 - 产品介绍与定位专页
-- 逐功能 how-to / FAQ / 故障排除（与 `C-anp-P20` 新模块同步）
+- 逐功能 how-to / FAQ / 故障排除（`C-anp-P20` 两个新模块**已同步**入 `user-guide.md`；其余既有模块的逐功能 how-to 仍缺）
 - API/集成契约文档（先按边界判定建 `docs/contracts/`）
 - 文档验证门禁（链接检查 / 示例运行 / 双语一致 / 可读性走查）

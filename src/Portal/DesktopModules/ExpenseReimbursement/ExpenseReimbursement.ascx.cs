@@ -25,6 +25,7 @@ namespace ASPNET.StarterKit.Portal
         [Dependency]
         public IPortalWorkItemDb WorkItemDb { private get; set; }
 
+        /// <summary><lang><zh-CN>页面加载：首次进入时渲染“我的报销”列表；回发时保留表单状态，交由提交处理。</zh-CN><en>Page load: renders the "My Reimbursement" list on first entry; on postback the form state is preserved and handled by submit.</en></lang></summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -57,6 +58,7 @@ namespace ASPNET.StarterKit.Portal
             pnlEmpty.Visible = false;
         }
 
+        /// <summary><lang><zh-CN>提交费用报销：校验金额为正数后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。</zh-CN><en>Submits the expense reimbursement: validates that the amount is positive, writes the business row, and creates a work item assigned to the approval role; any failure surfaces as a low-sensitivity message.</en></lang></summary>
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             int userId = GetCurrentUserId();

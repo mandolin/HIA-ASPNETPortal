@@ -1739,3 +1739,54 @@ body.portal-theme-oadark {
     --portal-field-text: #dce6f0;
     --portal-list-header-bg: #1e2a38;
     --portal-list-row-alt: #161f2a;}
+
+
+/* <lang>
+ *   <zh-CN>请假申请与费用报销模块的主题作用域规则：容器、标题、小标题、标签、消息、输入控件、字段与列表分隔线、空态均取自本皮肤既有调色板（与 my-work-items 同族取值），并为不支持 var() 的 IE9+ 提供显式回退。</zh-CN>
+ *   <en>Theme-scoped rules for the leave-request and expense-reimbursement modules: container, title, subtitle, label, message, inputs, field/list dividers and empty state reuse this skin's existing palette (same family as my-work-items) and provide an explicit fallback for IE9+, which does not support var().</en>
+ * </lang> */
+body.portal-theme-oadark .leave-request,
+body.portal-theme-oadark .expense-reimbursement {
+    border: 1px solid #324b54;
+    background-color: #1a242a;
+    color: #dde6ea;
+}
+
+body.portal-theme-oadark .leave-request-title,
+body.portal-theme-oadark .leave-request-subtitle,
+body.portal-theme-oadark .expense-reimbursement-title,
+body.portal-theme-oadark .expense-reimbursement-subtitle {
+    color: #95dce8;
+}
+
+body.portal-theme-oadark .leave-request-label,
+body.portal-theme-oadark .expense-reimbursement-label {
+    color: #95dce8;
+}
+
+body.portal-theme-oadark .leave-request-message,
+body.portal-theme-oadark .expense-reimbursement-message {
+    color: #ff9b9b;
+    font-weight: 700;
+}
+
+body.portal-theme-oadark .leave-request-input,
+body.portal-theme-oadark .expense-reimbursement-input {
+    border: 1px solid #324b54;
+    background-color: #1a242a;
+    color: #dde6ea;
+}
+
+body.portal-theme-oadark .leave-request-form-field,
+body.portal-theme-oadark .expense-reimbursement-form-field,
+body.portal-theme-oadark .leave-request-list th,
+body.portal-theme-oadark .leave-request-list td,
+body.portal-theme-oadark .expense-reimbursement-list th,
+body.portal-theme-oadark .expense-reimbursement-list td {
+    border-bottom: 1px solid #324b54;
+}
+
+body.portal-theme-oadark .leave-request-empty,
+body.portal-theme-oadark .expense-reimbursement-empty {
+    color: #95dce8;
+}

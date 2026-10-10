@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ExpenseReimbursement.ascx.cs" Inherits="ASPNET.StarterKit.Portal.ExpenseReimbursement" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ExpenseReimbursement.ascx.cs" Inherits="ASPNET.StarterKit.Portal.ExpenseReimbursement" %>
 <div class="expense-reimbursement">
     <div class="expense-reimbursement-title">费用报销</div>
     <asp:Panel ID="pnlMessage" runat="server" Visible="false">
@@ -33,7 +33,7 @@
     <div class="expense-reimbursement-subtitle">我的报销</div>
     <div class="expense-reimbursement-list-wrap">
         <asp:Panel ID="pnlEmpty" runat="server" Visible="false">
-            <span class="expense-reimbursement-message">暂无报销记录</span>
+            <span class="expense-reimbursement-empty">暂无报销记录</span>
         </asp:Panel>
         <asp:Repeater ID="rptRecent" runat="server" Visible="false">
             <HeaderTemplate>

@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="LeaveRequest.ascx.cs" Inherits="ASPNET.StarterKit.Portal.LeaveRequest" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="LeaveRequest.ascx.cs" Inherits="ASPNET.StarterKit.Portal.LeaveRequest" %>
 <div class="leave-request">
     <div class="leave-request-title">请假申请</div>
     <asp:Panel ID="pnlMessage" runat="server" Visible="false">
@@ -41,7 +41,7 @@
     <div class="leave-request-subtitle">我的请假</div>
     <div class="leave-request-list-wrap">
         <asp:Panel ID="pnlEmpty" runat="server" Visible="false">
-            <span class="leave-request-message">暂无请假记录</span>
+            <span class="leave-request-empty">暂无请假记录</span>
         </asp:Panel>
         <asp:Repeater ID="rptRecent" runat="server" Visible="false">
             <HeaderTemplate>

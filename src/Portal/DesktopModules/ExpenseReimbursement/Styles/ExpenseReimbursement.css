@@ -1,6 +1,6 @@
 /* <lang>
- *   <zh-CN>费用报销模块以独立容器呈现，表面与边框改用主题语义变量，避免浅色硬编码在深色皮肤下形成白色块。</zh-CN>
- *   <en>The expense-reimbursement module renders in its own container; surface and border use themed semantic variables so light hardcoding does not form a white block on dark skins.</en>
+ *   <zh-CN>费用报销模块样式。类名以标记层（ExpenseReimbursement.ascx）为准：容器、标题、消息、空态、表单网格与字段、输入控件、动作区与最近列表。颜色优先取主题语义变量，保证深浅皮肤下不出现浅底压浅字。</zh-CN>
+ *   <en>Expense-reimbursement module styles. Class names follow the markup (ExpenseReimbursement.ascx): container, title, message, empty state, form grid and fields, inputs, action area and recent list. Colors prefer themed semantic variables so light-on-light never occurs on dark skins.</en>
  * </lang> */
 .expense-reimbursement {
     border: 1px solid var(--portal-border, #d8dee8);
@@ -12,8 +12,8 @@
 }
 
 /* <lang>
- *   <zh-CN>标题样式固定模块入口层级，颜色使用主题语义变量（--portal-text-strong）。</zh-CN>
- *   <en>The title style fixes the module entry hierarchy, using the themed semantic variable (--portal-text-strong).</en>
+ *   <zh-CN>标题固定模块入口层级，颜色取主题强文本变量。</zh-CN>
+ *   <en>The title fixes the module entry hierarchy, using the themed strong-text variable.</en>
  * </lang> */
 .expense-reimbursement-title {
     color: var(--portal-text-strong, #2f475f);
@@ -23,7 +23,7 @@
 }
 
 /* <lang>
- *   <zh-CN>消息区域承载提交结果或校验提示，块级显示防止提示文本与表单混排。</zh-CN>
+ *   <zh-CN>消息区域承载提交结果或校验提示，块级显示防止与表单混排。</zh-CN>
  *   <en>The message area carries submit results or validation prompts, using block display to avoid mixing with the form.</en>
  * </lang> */
 .expense-reimbursement-message {
@@ -33,18 +33,28 @@
 }
 
 /* <lang>
- *   <zh-CN>表单网格用于字段排布，负外边距抵消子字段 gutters，保持首列与容器边界对齐。</zh-CN>
- *   <en>The form grid hosts fields, using negative margins to offset child gutters and align the first column with the container edge.</en>
+ *   <zh-CN>空态提示使用弱化文本，与错误提示在语义和配色上区分。</zh-CN>
+ *   <en>The empty-state hint uses de-emphasized text, distinguished semantically and chromatically from error messages.</en>
  * </lang> */
-.expense-reimbursement-grid {
+.expense-reimbursement-empty {
+    display: block;
+    color: var(--portal-text-muted, #6b7c8f);
+    margin: 6px 0 10px;
+}
+
+/* <lang>
+ *   <zh-CN>表单网格承载字段排布，负外边距抵消子字段 gutter，使首列与容器左边界对齐。</zh-CN>
+ *   <en>The form grid hosts field layout; negative margins offset child gutters so the first column aligns with the container edge.</en>
+ * </lang> */
+.expense-reimbursement-form-grid {
     margin: -10px 0 0 -12px;
 }
 
 /* <lang>
- *   <zh-CN>字段块以 inline-block 排布，固定宽度服务桌面门户布局；max-width 防止窄 pane 溢出。</zh-CN>
- *   <en>Field blocks use inline-block layout with a fixed desktop width, while max-width prevents overflow in narrow panes.</en>
+ *   <zh-CN>字段块以 inline-block 排布并给出桌面宽度；max-width 保证窄 pane 内不溢出。</zh-CN>
+ *   <en>Field blocks use inline-block layout with a desktop width, while max-width prevents overflow in narrow panes.</en>
  * </lang> */
-.expense-reimbursement-field {
+.expense-reimbursement-form-field {
     display: inline-block;
     width: 210px;
     max-width: 100%;
@@ -55,15 +65,15 @@
 }
 
 /* <lang>
- *   <zh-CN>宽字段给事由等较长内容保留更多横向空间。</zh-CN>
- *   <en>Wide fields reserve more horizontal space for longer content such as reasons.</en>
+ *   <zh-CN>宽字段给事由等多行内容保留更多横向空间。</zh-CN>
+ *   <en>Wide fields reserve more horizontal space for multi-line content such as the reason.</en>
  * </lang> */
-.expense-reimbursement-field-wide {
+.expense-reimbursement-form-field-wide {
     width: 320px;
 }
 
 /* <lang>
- *   <zh-CN>字段标签单独成行，保证输入值在视觉上属于其上方说明。</zh-CN>
+ *   <zh-CN>字段标签单独成行，使输入值在视觉上归属于其上方说明。</zh-CN>
  *   <en>The field label occupies its own line so the input value is visually associated with the label above it.</en>
  * </lang> */
 .expense-reimbursement-label {
@@ -74,8 +84,8 @@
 }
 
 /* <lang>
- *   <zh-CN>输入控件继承边框语义变量并允许窄 pane 内收缩。</zh-CN>
- *   <en>Inputs inherit the border semantic variable and can shrink inside narrow panes.</en>
+ *   <zh-CN>输入控件继承边框与表面变量，并允许在窄 pane 内收缩。</zh-CN>
+ *   <en>Inputs inherit border and surface variables and can shrink inside narrow panes.</en>
  * </lang> */
 .expense-reimbursement-input {
     width: 100%;
@@ -88,34 +98,53 @@
 }
 
 /* <lang>
- *   <zh-CN>提交动作区与表单保持间距，避免提交按钮贴近最后一行字段造成误触。</zh-CN>
- *   <en>The action area keeps spacing from the form so submit buttons do not sit too close to the final field.</en>
+ *   <zh-CN>正文输入是多行文本框，固定高度避免 Rows 属性在旧浏览器下被撑开。</zh-CN>
+ *   <en>The body input is a multi-line text box; a fixed height keeps the Rows attribute from being stretched on legacy browsers.</en>
+ * </lang> */
+.expense-reimbursement-body {
+    height: 96px;
+    resize: vertical;
+}
+
+/* <lang>
+ *   <zh-CN>动作区与表单保持间距，避免提交按钮贴近最后一行字段造成误触。</zh-CN>
+ *   <en>The action area keeps spacing from the form so the submit button does not sit too close to the final field.</en>
  * </lang> */
 .expense-reimbursement-actions {
     margin-top: 12px;
 }
 
 /* <lang>
- *   <zh-CN>近期列表区域在提交成功后展示用户自己的报销单，使用折叠边框稳定呈现。</zh-CN>
- *   <en>The recent list shows the user's own reimbursements after a successful submit, using collapsed borders for stable rendering.</en>
+ *   <zh-CN>列表小标题区分“表单”与“我的报销”两个区块。</zh-CN>
+ *   <en>The list subtitle separates the "form" and "My Reimbursement" blocks.</en>
  * </lang> */
-.expense-reimbursement-recent {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.expense-reimbursement-recent td {
-    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
-    padding: 6px 4px;
+.expense-reimbursement-subtitle {
+    margin-top: 16px;
+    font-weight: 700;
+    color: var(--portal-text-strong, #2f475f);
 }
 
 /* <lang>
- *   <zh-CN>空态提示使用弱化文本，避免与错误提示混淆。</zh-CN>
- *   <en>The empty-state hint uses de-emphasized text so it is not confused with an error message.</en>
+ *   <zh-CN>列表包裹层约束表格横向滚动，避免宽表撑破模块容器。</zh-CN>
+ *   <en>The list wrapper constrains horizontal table scrolling so a wide table cannot break out of the module container.</en>
  * </lang> */
-.expense-reimbursement-empty {
-    display: block;
-    color: var(--portal-text-muted, #6b7c8f);
-    margin: 6px 0 10px;
+.expense-reimbursement-list-wrap {
+    overflow-x: auto;
+}
+
+/* <lang>
+ *   <zh-CN>最近列表用折叠边框稳定呈现，表头与单元格共享分隔线口径。</zh-CN>
+ *   <en>The recent list uses collapsed borders for stable rendering; header and cells share the same divider treatment.</en>
+ * </lang> */
+.expense-reimbursement-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+
+.expense-reimbursement-list th,
+.expense-reimbursement-list td {
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
+    padding: 6px 4px;
+    text-align: left;
 }

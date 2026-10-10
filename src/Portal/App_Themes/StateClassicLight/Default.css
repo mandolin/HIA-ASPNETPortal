@@ -1741,3 +1741,54 @@ body.portal-theme-stateclassiclight {
     --portal-field-text: #1f2d3d;
     --portal-list-header-bg: #eef2f7;
     --portal-list-row-alt: #f7f9fc;}
+
+
+/* <lang>
+ *   <zh-CN>请假申请与费用报销模块的主题作用域规则：容器、标题、小标题、标签、消息、输入控件、字段与列表分隔线、空态均取自本皮肤既有调色板（与 my-work-items 同族取值），并为不支持 var() 的 IE9+ 提供显式回退。</zh-CN>
+ *   <en>Theme-scoped rules for the leave-request and expense-reimbursement modules: container, title, subtitle, label, message, inputs, field/list dividers and empty state reuse this skin's existing palette (same family as my-work-items) and provide an explicit fallback for IE9+, which does not support var().</en>
+ * </lang> */
+body.portal-theme-stateclassiclight .leave-request,
+body.portal-theme-stateclassiclight .expense-reimbursement {
+    border: 1px solid #d8ceb5;
+    background-color: #fffdf7;
+    color: #262b33;
+}
+
+body.portal-theme-stateclassiclight .leave-request-title,
+body.portal-theme-stateclassiclight .leave-request-subtitle,
+body.portal-theme-stateclassiclight .expense-reimbursement-title,
+body.portal-theme-stateclassiclight .expense-reimbursement-subtitle {
+    color: #8a2524;
+}
+
+body.portal-theme-stateclassiclight .leave-request-label,
+body.portal-theme-stateclassiclight .expense-reimbursement-label {
+    color: #8a2524;
+}
+
+body.portal-theme-stateclassiclight .leave-request-message,
+body.portal-theme-stateclassiclight .expense-reimbursement-message {
+    color: #8a2524;
+    font-weight: 700;
+}
+
+body.portal-theme-stateclassiclight .leave-request-input,
+body.portal-theme-stateclassiclight .expense-reimbursement-input {
+    border: 1px solid #d8ceb5;
+    background-color: #fffdf7;
+    color: #262b33;
+}
+
+body.portal-theme-stateclassiclight .leave-request-form-field,
+body.portal-theme-stateclassiclight .expense-reimbursement-form-field,
+body.portal-theme-stateclassiclight .leave-request-list th,
+body.portal-theme-stateclassiclight .leave-request-list td,
+body.portal-theme-stateclassiclight .expense-reimbursement-list th,
+body.portal-theme-stateclassiclight .expense-reimbursement-list td {
+    border-bottom: 1px solid #e6dcc2;
+}
+
+body.portal-theme-stateclassiclight .leave-request-empty,
+body.portal-theme-stateclassiclight .expense-reimbursement-empty {
+    color: #8a2524;
+}
