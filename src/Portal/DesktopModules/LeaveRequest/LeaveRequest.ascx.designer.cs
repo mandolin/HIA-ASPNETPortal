@@ -5,7 +5,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.DesktopModules.LeaveRequest
+namespace ASPNET.StarterKit.Portal
 {
     public partial class LeaveRequest
     {

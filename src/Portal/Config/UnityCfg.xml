@@ -93,6 +93,12 @@
         <register type="IPortalWorkItemDb" mapTo="PortalWorkItemDb">
             <lifetime type="singleton" />
         </register>
+        <register type="ILeaveRequestDb" mapTo="LeaveRequestDb">
+            <lifetime type="singleton" />
+        </register>
+        <register type="IExpenseReimbursementDb" mapTo="ExpenseReimbursementDb">
+            <lifetime type="singleton" />
+        </register>
 
         <register type="IRolesDb" mapTo="RolesDb">
             <lifetime type="singleton" />

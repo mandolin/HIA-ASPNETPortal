@@ -1,27 +1,31 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Data.SqlClient;
 using System.Linq;
-using Portal;
-using Portal.Components;
 
-namespace Portal.Components.Data1
+namespace ASPNET.StarterKit.Portal
 {
     /// <summary><lang>
-    ///   <zh-CN>费用报销数据访问实现；业务数据落在 PortalBiz_ExpenseReimbursements（与员工资料更正同构，独立于结构配置库）。</zh-CN>
-    ///   <en>Expense-reimbursement data-access implementation; business data lives in PortalBiz_ExpenseReimbursements (isomorphic to employee-profile correction, isolated from the structural config store).</en>
+    ///   <zh-CN>费用报销数据访问实现；业务数据落在 PortalBiz_ExpenseReimbursements（与员工资料更正同构，独立于结构配置库）。PortalBizDbContext 由 Unity 以单例形式注入外置连接串。</zh-CN>
+    ///   <en>Expense-reimbursement data-access implementation; business data lives in PortalBiz_ExpenseReimbursements (isomorphic to employee-profile correction, isolated from the structural config store). PortalBizDbContext is injected by Unity as a singleton carrying the external connection string.</en>
     /// </lang></summary>
-    [Export(typeof(IExpenseReimbursementDb))]
     public sealed class ExpenseReimbursementDb : IExpenseReimbursementDb
     {
         private const string TableName = "PortalBiz_ExpenseReimbursements";
+        private readonly PortalBizDbContext context;
 
-        private static bool HasTable(PortalBizDbContext ctx, string name)
+        /// <summary><lang><zh-CN>通过 Unity 构造函数注入企业业务基础数据上下文。</zh-CN><en>Enterprise business foundation data context injected by Unity via constructor.</en></lang></summary>
+        /// <param name="context"><l><zh-CN>企业业务基础数据上下文。</zh-CN><en>Enterprise business foundation data context.</en></l></param>
+        public ExpenseReimbursementDb(PortalBizDbContext context)
+        {
+            this.context = context;
+        }
+
+        private bool HasTable(string name)
         {
             try
             {
-                var cnt = ctx.Database.SqlQuery<int>(
+                var cnt = context.Database.SqlQuery<int>(
                     "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = @Name;",
                     new SqlParameter("@Name", name)).SingleOrDefault();
                 return cnt > 0;
@@ -32,62 +36,68 @@ namespace Portal.Components.Data1
             }
         }
 
+        /// <summary><lang>
+        ///   <zh-CN>探测业务表 <c>PortalBiz_ExpenseReimbursements</c> 是否存在，作为降级与运行期装配的前置检查。</zh-CN>
+        ///   <en>Probes whether the business table <c>PortalBiz_ExpenseReimbursements</c> exists, used as a precondition for graceful degradation and runtime assembly.</en>
+        /// </lang></summary>
+        /// <returns><l><zh-CN>表存在返回 <c>true</c>，否则 <c>false</c>（含探测异常）。</zh-CN><en><c>true</c> when the table exists, otherwise <c>false</c> (including probe exceptions).</en></l></returns>
         public bool IsSchemaAvailable()
         {
             try
             {
-                using (var ctx = new PortalBizDbContext())
-                {
-                    return HasTable(ctx, TableName);
-                }
+                return HasTable(TableName);
             }
-            catch (Exception ex)
+            catch
             {
-                PortalErrorLog.Record(ex, "ExpenseReimbursementDb.IsSchemaAvailable");
                 return false;
             }
         }
 
+        /// <summary><lang>
+        ///   <zh-CN>插入一条费用报销，状态固定为 <c>Pending</c>，并以 <c>OUTPUT INSERTED</c> 取回自增主键。</zh-CN>
+        ///   <en>Inserts an expense reimbursement with status fixed to <c>Pending</c> and returns the identity key via <c>OUTPUT INSERTED</c>.</en>
+        /// </lang></summary>
+        /// <param name="request"><l><zh-CN>费用报销创建请求（含申请人、类别、金额、事由与附件名）。</zh-CN><en>Expense-reimbursement creation request (applicant, category, amount, reason, attachment name).</en></l></param>
+        /// <returns><l><zh-CN>成功时 <see cref="ExpenseReimbursementResult.Ok"/> 为 <c>true</c> 且携带新主键；失败返回低敏失败结果。</zh-CN><en>On success <see cref="ExpenseReimbursementResult.Ok"/> is <c>true</c> with the new identity key; otherwise a low-sensitivity failure result.</en></l></returns>
         public ExpenseReimbursementResult CreateRequest(ExpenseReimbursementCreateRequest request)
         {
             try
             {
-                using (var ctx = new PortalBizDbContext())
-                {
-                    var id = ctx.Database.SqlQuery<long>(
-                        "INSERT INTO dbo.PortalBiz_ExpenseReimbursements (UserId, Category, Amount, Reason, AttachmentName, Status, CreatedUtc) " +
-                        "OUTPUT INSERTED.RequestId VALUES (@UserId, @Category, @Amount, @Reason, @AttachmentName, N'Pending', SYSUTCDATETIME());",
-                        new SqlParameter("@UserId", request.UserId),
-                        new SqlParameter("@Category", (object)request.Category ?? DBNull.Value),
-                        new SqlParameter("@Amount", request.Amount),
-                        new SqlParameter("@Reason", (object)request.Reason ?? DBNull.Value),
-                        new SqlParameter("@AttachmentName", (object)request.AttachmentName ?? DBNull.Value)).Single();
-                    return new ExpenseReimbursementResult { Ok = true, RequestId = id };
-                }
+                var id = context.Database.SqlQuery<long>(
+                    "INSERT INTO dbo.PortalBiz_ExpenseReimbursements (UserId, Category, Amount, Reason, AttachmentName, Status, CreatedUtc) " +
+                    "OUTPUT INSERTED.RequestId VALUES (@UserId, @Category, @Amount, @Reason, @AttachmentName, N'Pending', SYSUTCDATETIME());",
+                    new SqlParameter("@UserId", request.UserId),
+                    new SqlParameter("@Category", (object)request.Category ?? DBNull.Value),
+                    new SqlParameter("@Amount", request.Amount),
+                    new SqlParameter("@Reason", (object)request.Reason ?? DBNull.Value),
+                    new SqlParameter("@AttachmentName", (object)request.AttachmentName ?? DBNull.Value)).Single();
+                return new ExpenseReimbursementResult { Ok = true, RequestId = id };
             }
-            catch (Exception ex)
+            catch
             {
-                PortalErrorLog.Record(ex, "ExpenseReimbursementDb.CreateRequest");
                 return new ExpenseReimbursementResult { Ok = false, ErrorCode = "DbError" };
             }
         }
 
+        /// <summary><lang>
+        ///   <zh-CN>按申请人取最近若干条费用报销（按创建时间倒序），供模块“我的报销”列表展示。</zh-CN>
+        ///   <en>Returns the most recent expense reimbursements for a user (descending by creation time) for the module's "My Reimbursement" list.</en>
+        /// </lang></summary>
+        /// <param name="userId"><l><zh-CN>申请人用户标识。</zh-CN><en>Applicant user identifier.</en></l></param>
+        /// <param name="limit"><l><zh-CN>返回条数上限。</zh-CN><en>Maximum number of rows to return.</en></l></param>
+        /// <returns><l><zh-CN>只读费用报销列表；查询异常时返回空列表而非抛错。</zh-CN><en>A read-only list of reimbursements; returns an empty list on query failure instead of throwing.</en></l></returns>
         public IReadOnlyList<ExpenseReimbursementInfo> GetRecentByUser(int userId, int limit)
         {
             try
             {
-                using (var ctx = new PortalBizDbContext())
-                {
-                    return ctx.Database.SqlQuery<ExpenseReimbursementInfo>(
-                        "SELECT TOP (@Limit) RequestId, Category, Amount, Reason, AttachmentName, Status, CreatedUtc " +
-                        "FROM dbo.PortalBiz_ExpenseReimbursements WHERE UserId = @UserId ORDER BY CreatedUtc DESC;",
-                        new SqlParameter("@Limit", limit),
-                        new SqlParameter("@UserId", userId)).ToList();
-                }
+                return context.Database.SqlQuery<ExpenseReimbursementInfo>(
+                    "SELECT TOP (@Limit) RequestId, Category, Amount, Reason, AttachmentName, Status, CreatedUtc " +
+                    "FROM dbo.PortalBiz_ExpenseReimbursements WHERE UserId = @UserId ORDER BY CreatedUtc DESC;",
+                    new SqlParameter("@Limit", limit),
+                    new SqlParameter("@UserId", userId)).ToList();
             }
-            catch (Exception ex)
+            catch
             {
-                PortalErrorLog.Record(ex, "ExpenseReimbursementDb.GetRecentByUser");
                 return new List<ExpenseReimbursementInfo>();
             }
         }

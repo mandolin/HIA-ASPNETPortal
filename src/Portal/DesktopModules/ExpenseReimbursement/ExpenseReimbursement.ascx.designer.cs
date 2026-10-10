@@ -5,7 +5,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.DesktopModules.ExpenseReimbursement
+namespace ASPNET.StarterKit.Portal
 {
     public partial class ExpenseReimbursement
     {

@@ -1,14 +1,15 @@
 {
+  "schemaVersion": 2,
   "packageId": "HIA.LeaveRequest",
   "displayName": "请假申请",
   "version": "1.0.0",
-  "schemaVersion": 1,
-  "desktopEntry": "LeaveRequest.ascx",
+  "minimumPortalVersion": "1.0",
+  "desktopEntry": "DesktopModules/LeaveRequest/LeaveRequest.ascx",
   "resources": [
-    { "type": "stylesheet", "path": "Styles/LeaveRequest.css" }
+    "Styles/LeaveRequest.css"
   ],
   "capability": {
     "capabilityId": "BasicBusiness.LeaveRequest",
-    "role": "Employee"
+    "role": "Primary"
   }
 }

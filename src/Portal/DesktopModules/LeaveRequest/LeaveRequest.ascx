@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="LeaveRequest.ascx.cs" Inherits="Portal.DesktopModules.LeaveRequest.LeaveRequest" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="LeaveRequest.ascx.cs" Inherits="ASPNET.StarterKit.Portal.LeaveRequest" %>
 <div class="leave-request">
     <div class="leave-request-title">请假申请</div>
     <asp:Panel ID="pnlMessage" runat="server" Visible="false">

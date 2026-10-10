@@ -1,14 +1,15 @@
 {
+  "schemaVersion": 2,
   "packageId": "HIA.ExpenseReimbursement",
   "displayName": "费用报销",
   "version": "1.0.0",
-  "schemaVersion": 1,
-  "desktopEntry": "ExpenseReimbursement.ascx",
+  "minimumPortalVersion": "1.0",
+  "desktopEntry": "DesktopModules/ExpenseReimbursement/ExpenseReimbursement.ascx",
   "resources": [
-    { "type": "stylesheet", "path": "Styles/ExpenseReimbursement.css" }
+    "Styles/ExpenseReimbursement.css"
   ],
   "capability": {
     "capabilityId": "BasicBusiness.ExpenseReimbursement",
-    "role": "Employee"
+    "role": "Primary"
   }
 }

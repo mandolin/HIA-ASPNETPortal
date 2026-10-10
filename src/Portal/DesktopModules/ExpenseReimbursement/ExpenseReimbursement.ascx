@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ExpenseReimbursement.ascx.cs" Inherits="Portal.DesktopModules.ExpenseReimbursement.ExpenseReimbursement" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ExpenseReimbursement.ascx.cs" Inherits="ASPNET.StarterKit.Portal.ExpenseReimbursement" %>
 <div class="expense-reimbursement">
     <div class="expense-reimbursement-title">费用报销</div>
     <asp:Panel ID="pnlMessage" runat="server" Visible="false">

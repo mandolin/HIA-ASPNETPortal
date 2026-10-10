@@ -1,15 +1,20 @@
 /* <lang>
- *   <zh-CN>请假申请模块根容器：表面/边框/文字全部引用 P18 已注入的语义变量（--portal-surface / --portal-border / --portal-text-*），从设计原型阶段即主题无关，规避深色皮肤白色块。</zh-CN>
- *   <en>Leave-request root container: surface, border, and text all reference the P18 semantic variables (--portal-surface / --portal-border / --portal-text-*), making the module theme-agnostic from the prototype stage and avoiding white blocks on dark skins.</en>
+ *   <zh-CN>请假申请模块以独立容器呈现，表面与边框改用主题语义变量（--portal-surface / --portal-border），避免浅色硬编码在深色皮肤下形成白色块。</zh-CN>
+ *   <en>The leave-request module renders in its own container; surface and border use themed semantic variables so light hardcoding does not form a white block on dark skins.</en>
  * </lang> */
 .leave-request {
     border: 1px solid var(--portal-border, #d8dee8);
     padding: 12px;
     width: 100%;
+    max-width: none;
     box-sizing: border-box;
     background: var(--portal-surface, #fff);
 }
 
+/* <lang>
+ *   <zh-CN>标题样式固定模块入口层级，颜色使用主题语义变量（--portal-text-strong）。</zh-CN>
+ *   <en>The title style fixes the module entry hierarchy, using the themed semantic variable (--portal-text-strong).</en>
+ * </lang> */
 .leave-request-title {
     color: var(--portal-text-strong, #2f475f);
     font-size: 18px;
@@ -17,71 +22,100 @@
     margin-bottom: 10px;
 }
 
-.leave-request-subtitle {
-    color: var(--portal-text-strong, #41556b);
-    font-size: 15px;
-    font-weight: 700;
-    margin: 16px 0 8px;
-}
-
+/* <lang>
+ *   <zh-CN>消息区域承载提交结果或校验提示，块级显示防止提示文本与表单混排。</zh-CN>
+ *   <en>The message area carries submit results or validation prompts, using block display to avoid mixing with the form.</en>
+ * </lang> */
 .leave-request-message {
-    color: var(--portal-text-muted, #5b6b7d);
-    font-size: 12px;
+    display: block;
+    color: #8a1f1f;
+    margin: 6px 0 10px;
 }
 
-.leave-request-form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px 16px;
+/* <lang>
+ *   <zh-CN>表单网格用于字段排布，负外边距抵消子字段 gutters，保持首列与容器边界对齐。</zh-CN>
+ *   <en>The form grid hosts fields, using negative margins to offset child gutters and align the first column with the container edge.</en>
+ * </lang> */
+.leave-request-grid {
+    margin: -10px 0 0 -12px;
 }
 
-.leave-request-form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 2px;
+/* <lang>
+ *   <zh-CN>字段块以 inline-block 排布，固定宽度服务桌面门户布局；max-width 防止窄 pane 溢出。</zh-CN>
+ *   <en>Field blocks use inline-block layout with a fixed desktop width, while max-width prevents overflow in narrow panes.</en>
+ * </lang> */
+.leave-request-field {
+    display: inline-block;
+    width: 210px;
+    max-width: 100%;
+    margin: 10px 0 0 12px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
+    vertical-align: top;
 }
 
-.leave-request-form-field-wide {
-    grid-column: 1 / -1;
+/* <lang>
+ *   <zh-CN>宽字段给起止日期、事由等较长内容保留更多横向空间。</zh-CN>
+ *   <en>Wide fields reserve more horizontal space for longer content such as dates or reasons.</en>
+ * </lang> */
+.leave-request-field-wide {
+    width: 320px;
 }
 
+/* <lang>
+ *   <zh-CN>字段标签单独成行，保证输入值在视觉上属于其上方说明。</zh-CN>
+ *   <en>The field label occupies its own line so the input value is visually associated with the label above it.</en>
+ * </lang> */
+.leave-request-label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--portal-text-strong, #41556b);
+    font-weight: 700;
+}
+
+/* <lang>
+ *   <zh-CN>输入控件继承边框语义变量并允许窄 pane 内收缩。</zh-CN>
+ *   <en>Inputs inherit the border semantic variable and can shrink inside narrow panes.</en>
+ * </lang> */
 .leave-request-input {
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
+    color: var(--portal-text, #1f2d3d);
+    padding: 4px 6px;
 }
 
-.leave-request-body {
-    min-height: 96px;
-}
-
+/* <lang>
+ *   <zh-CN>提交动作区与表单保持间距，避免提交按钮贴近最后一行字段造成误触。</zh-CN>
+ *   <en>The action area keeps spacing from the form so submit buttons do not sit too close to the final field.</en>
+ * </lang> */
 .leave-request-actions {
     margin-top: 12px;
 }
 
-.leave-request-list-wrap {
-    margin-top: 4px;
-}
-
-.leave-request-list {
+/* <lang>
+ *   <zh-CN>近期列表区域在提交成功后展示用户自己的申请，使用折叠边框稳定呈现。</zh-CN>
+ *   <en>The recent list shows the user's own requests after a successful submit, using collapsed borders for stable rendering.</en>
+ * </lang> */
+.leave-request-recent {
     width: 100%;
-    border: 1px solid var(--portal-border, #d8dee8);
     border-collapse: collapse;
+    margin-top: 10px;
 }
 
-.leave-request-list th {
-    background: var(--portal-surface-2, #f5f8fb);
-    color: var(--portal-text-strong, #2f475f);
-    border-bottom: 1px solid var(--portal-border, #d8dee8);
-    text-align: left;
-    padding: 6px 8px;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.leave-request-list td {
+.leave-request-recent td {
     border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
-    color: var(--portal-text-strong, #2f475f);
-    padding: 6px 8px;
-    font-size: 13px;
+    padding: 6px 4px;
+}
+
+/* <lang>
+ *   <zh-CN>空态提示使用弱化文本，避免与错误提示混淆。</zh-CN>
+ *   <en>The empty-state hint uses de-emphasized text so it is not confused with an error message.</en>
+ * </lang> */
+.leave-request-empty {
+    display: block;
+    color: var(--portal-text-muted, #6b7c8f);
+    margin: 6px 0 10px;
 }

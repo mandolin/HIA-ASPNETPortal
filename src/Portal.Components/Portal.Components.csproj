@@ -144,6 +144,8 @@
     <Compile Include="IReferenceDataDb.cs" />
     <Compile Include="IEmployeeProfileConfirmationDb.cs" />
     <Compile Include="IEmployeeProfileCorrectionRequestDb.cs" />
+    <Compile Include="LeaveRequestContracts.cs" />
+    <Compile Include="ExpenseReimbursementContracts.cs" />
     <Compile Include="IOrganizationUnitInfo.cs" />
     <Compile Include="IPortalWorkItemDb.cs" />
     <Compile Include="OrganizationUnitSaveRequest.cs" />
