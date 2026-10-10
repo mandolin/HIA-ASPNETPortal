@@ -37,5 +37,21 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string CollaborationItem = "CollaborationItem";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请假申请业务对象（P20 新增）。</zh-CN>
+        ///   <en>Leave-request business object (added in P20).</en>
+        /// </lang>
+        /// </summary>
+        public const string LeaveRequest = "LeaveRequest";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>费用报销业务对象（P20 新增）。</zh-CN>
+        ///   <en>Expense-reimbursement business object (added in P20).</en>
+        /// </lang>
+        /// </summary>
+        public const string ExpenseReimbursement = "ExpenseReimbursement";
     }
 }

@@ -21,8 +21,8 @@ namespace ASPNET.StarterKit.Portal.Tests
     {
         /// <summary>
         /// <lang>
-        ///   <zh-CN>验证三个已知业务类型各自映射到权威词表中的能力键，未知、空白与 <c>null</c> 一律返回空串而不猜测。</zh-CN>
-        ///   <en>Verifies that the three known business kinds map to their authority-registry capability keys, while unknown, blank, and <c>null</c> values return an empty string instead of a guess.</en>
+        ///   <zh-CN>验证五个已知业务类型各自映射到权威词表中的能力键，未知、空白与 <c>null</c> 一律返回空串而不猜测。</zh-CN>
+        ///   <en>Verifies that the five known business kinds map to their authority-registry capability keys, while unknown, blank, and <c>null</c> values return an empty string instead of a guess.</en>
         /// </lang>
         /// </summary>
         [TestMethod]
@@ -37,6 +37,12 @@ namespace ASPNET.StarterKit.Portal.Tests
             Assert.AreEqual(
                 PortalCapabilityRegistry.EmployeeProfileCorrectionRequest,
                 PortalWorkItemTargetResolver.GetCapabilityId(PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest));
+            Assert.AreEqual(
+                PortalCapabilityRegistry.LeaveRequest,
+                PortalWorkItemTargetResolver.GetCapabilityId(PortalWorkItemBusinessKinds.LeaveRequest));
+            Assert.AreEqual(
+                PortalCapabilityRegistry.ExpenseReimbursement,
+                PortalWorkItemTargetResolver.GetCapabilityId(PortalWorkItemBusinessKinds.ExpenseReimbursement));
 
             // <lang>
             //   <zh-CN>未知与空输入必须返回空串：反查链的第一环落空即降级，不能回退到某个"默认业务"。</zh-CN>

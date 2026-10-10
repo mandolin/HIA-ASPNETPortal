@@ -201,6 +201,16 @@ namespace ASPNET.StarterKit.Portal
                 return PortalCapabilityRegistry.EmployeeProfileCorrectionRequest;
             }
 
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.LeaveRequest, StringComparison.Ordinal))
+            {
+                return PortalCapabilityRegistry.LeaveRequest;
+            }
+
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.ExpenseReimbursement, StringComparison.Ordinal))
+            {
+                return PortalCapabilityRegistry.ExpenseReimbursement;
+            }
+
             return string.Empty;
         }
 

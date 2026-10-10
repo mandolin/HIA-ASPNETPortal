@@ -109,6 +109,12 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>员工资料更正请求能力键；W73 新增，用于消除 `HIA.EmployeeProfileCorrectionRequest` 的孤儿声明状态，复用既有 `Business.EmployeeProfileCorrectionRequest` 权限键族。</zh-CN><en>Employee profile correction request capability key; added in W73 to end the orphan-declaration state of `HIA.EmployeeProfileCorrectionRequest`, reusing the existing `Business.EmployeeProfileCorrectionRequest` permission-key family.</en></lang></summary>
         public const string EmployeeProfileCorrectionRequest = "BasicBusiness.EmployeeProfileCorrectionRequest";
 
+        /// <summary><lang><zh-CN>请假申请能力键；P20 新增，复用既有 `Business.LeaveRequest` 权限键族。</zh-CN><en>Leave-request capability key; added in P20, reusing the existing `Business.LeaveRequest` permission-key family.</en></lang></summary>
+        public const string LeaveRequest = "BasicBusiness.LeaveRequest";
+
+        /// <summary><lang><zh-CN>费用报销能力键；P20 新增，复用既有 `Business.ExpenseReimbursement` 权限键族。</zh-CN><en>Expense-reimbursement capability key; added in P20, reusing the existing `Business.ExpenseReimbursement` permission-key family.</en></lang></summary>
+        public const string ExpenseReimbursement = "BasicBusiness.ExpenseReimbursement";
+
         private static readonly PortalCapabilityDefinition[] DefinitionArray =
         {
             new PortalCapabilityDefinition(
@@ -142,7 +148,23 @@ namespace ASPNET.StarterKit.Portal
                 "HIA.EmployeeProfileCorrectionRequest",
                 "Business.EmployeeProfileCorrectionRequest",
                 "员工资料更正请求",
-                "Employee Profile Correction Request")
+                "Employee Profile Correction Request"),
+            new PortalCapabilityDefinition(
+                LeaveRequest,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.LeaveRequest",
+                "Business.LeaveRequest",
+                "请假申请",
+                "Leave Request"),
+            new PortalCapabilityDefinition(
+                ExpenseReimbursement,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.ExpenseReimbursement",
+                "Business.ExpenseReimbursement",
+                "费用报销",
+                "Expense Reimbursement")
         };
 
         private static readonly IList<PortalCapabilityDefinition> ReadOnlyDefinitions =
