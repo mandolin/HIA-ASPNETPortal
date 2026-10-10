@@ -248,8 +248,11 @@ function Test-HasNearbyXmlDocumentation {
         }
 
         if ($previous -match '^\s*\[.+\]\s*$') {
+            # <lang>
+            #   <zh-CN>特性行（如 [TestMethod]/[DataRow]）只是元数据，不应占用"相邻文档"窗口预算；否则带大量特性的方法会被错误判为缺文档。</zh-CN>
+            #   <en>Attribute lines (e.g. [TestMethod]/[DataRow]) are metadata only and must not consume the nearby-documentation window budget; otherwise attribute-heavy methods are wrongly reported as missing docs.</en>
+            # </lang>
             $cursor--
-            $checkedMeaningfulLines++
             continue
         }
 

@@ -82,6 +82,30 @@ namespace ASPNET.StarterKit.Portal
             return CreateHash(password, DefaultIterationCount);
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>以显式迭代次数创建强哈希；当调用方需要根据已保存凭据记录复用其成本参数时使用（例如验证流程读回迭代次数）。</zh-CN>
+        ///   <en>Creates a strong hash with an explicit iteration count, used when the caller must reuse a saved credential record's cost parameter (for example, when verification reads the iteration count back).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>仅在内存中短暂使用的明文密码；本方法不做裁剪或规范化，保持与首个重载一致的语义。</zh-CN>
+        ///   <en>The plain-text password used briefly in memory only; this method does not trim or normalize it, preserving identical semantics with the first overload.</en>
+        /// </l>
+        /// </param>
+        /// <param name="iterationCount">
+        /// <l>
+        ///   <zh-CN>显式 PBKDF2 迭代次数（通常来自已保存凭据记录）；非正值时回落默认成本。</zh-CN>
+        ///   <en>Explicit PBKDF2 iteration count, typically read from a saved credential record; a non-positive value falls back to the default cost.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>包含格式、迭代次数、随机盐和派生哈希的凭据哈希对象。</zh-CN>
+        ///   <en>A credential-hash object containing the format, iteration count, random salt, and derived hash.</en>
+        /// </l>
+        /// </returns>
         internal static PortalPasswordHash CreateHash(string password, int iterationCount)
         {
             // <lang>
