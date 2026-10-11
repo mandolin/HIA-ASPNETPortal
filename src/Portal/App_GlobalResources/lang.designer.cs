@@ -10486,6 +10486,54 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The password must be at least {0} characters and must cover at least {1} of these categories: uppercase, lowercase, digit, special character.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The password must be at least {0} characters and must cover at least {1} of these categories: uppercase, lowercase, digit, special character.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_PasswordMessageComplexityPolicy {
+            get {
+                return ResourceManager.GetString("Common_PasswordMessageComplexityPolicy", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The password is too common or easy to guess; choose one that does not appear in the weak-password dictionary.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The password is too common or easy to guess; choose one that does not appear in the weak-password dictionary.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_PasswordMessageWeakDictionaryMatch {
+            get {
+                return ResourceManager.GetString("Common_PasswordMessageWeakDictionaryMatch", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The password must not contain account-related information such as the user name, email, employee code, or display name.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The password must not contain account-related information such as the user name, email, employee code, or display name.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_PasswordMessageContainsAccountContextTerm {
+            get {
+                return ResourceManager.GetString("Common_PasswordMessageContainsAccountContextTerm", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The password does not satisfy the current policy.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The password does not satisfy the current policy.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_PasswordMessageRejected {
+            get {
+                return ResourceManager.GetString("Common_PasswordMessageRejected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：申请人：{0}（{1}）</zh-CN>
         ///   <en>Looks up a localized string similar to: Applicant: {0} ({1})</en>
         /// </lang>

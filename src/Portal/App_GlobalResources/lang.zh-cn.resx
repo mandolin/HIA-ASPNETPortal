@@ -2739,6 +2739,18 @@
   <data name="Common_ModulePathMessageOutsideAllowedDirectories" xml:space="preserve">
     <value>桌面模块控件路径只能位于 DesktopModules/ 或 Admin/ 目录下。</value>
   </data>
+  <data name="Common_PasswordMessageComplexityPolicy" xml:space="preserve">
+    <value>密码至少 {0} 位，并且需要在大写字母、小写字母、数字、特殊字符中至少包含 {1} 类。</value>
+  </data>
+  <data name="Common_PasswordMessageWeakDictionaryMatch" xml:space="preserve">
+    <value>密码过于常见或容易猜测，请更换为不在弱口令字典中的密码。</value>
+  </data>
+  <data name="Common_PasswordMessageContainsAccountContextTerm" xml:space="preserve">
+    <value>密码不能包含用户名、邮箱、员工号、显示名等账号相关信息。</value>
+  </data>
+  <data name="Common_PasswordMessageRejected" xml:space="preserve">
+    <value>密码不满足当前策略要求。</value>
+  </data>
   <data name="Admin_BusinessApplications_ApplicantFormat" xml:space="preserve">
     <value>申请人：{0}（{1}）</value>
   </data>

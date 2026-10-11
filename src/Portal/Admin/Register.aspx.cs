@@ -127,7 +127,7 @@ namespace ASPNET.StarterKit.Portal
                 string submittedPassword;
                 string submittedConfirmPassword;
                 PortalRegistrationInviteRejection inviteRejection;
-                string passwordPolicyMessage;
+                PortalPasswordRejection passwordRejection;
 
                 if (!TryResolveRegistrationPasswords(out submittedPassword, out submittedConfirmPassword))
                 {
@@ -198,13 +198,32 @@ namespace ASPNET.StarterKit.Portal
                 if (!PortalPasswordPolicy.TryValidate(
                     submittedPassword,
                     BuildPasswordPolicyContextTerms(userName, email, employeeCode),
-                    out passwordPolicyMessage))
+                    out passwordRejection))
                 {
                     // <lang>
-                    //   <zh-CN>密码策略失败时只返回策略消息，不记录密码或完整上下文词项。</zh-CN>
-                    //   <en>On password-policy failure, return only the policy message and never log the password or full context terms.</en>
+                    //   <zh-CN>密码策略失败时按原因码显示对应本地化文案，不记录密码或完整上下文词项；复杂度类提示所需的长度与类别数取自当前有效策略。</zh-CN>
+                    //   <en>On password-policy failure, show the localized text for the rejection code and never log the password or full context terms; the length and category counts for the complexity prompt come from the current effective policy.</en>
                     // </lang>
-                    Message.Text = passwordPolicyMessage;
+                    switch (passwordRejection)
+                    {
+                        case PortalPasswordRejection.BelowComplexityPolicy:
+                            PortalPasswordPolicyOptions passwordPolicyOptions = PortalPasswordPolicy.GetEffectiveOptions();
+                            Message.Text = string.Format(
+                                CultureInfo.CurrentCulture,
+                                lang.Common_PasswordMessageComplexityPolicy,
+                                passwordPolicyOptions.MinimumLength,
+                                passwordPolicyOptions.RequiredCategoryCount);
+                            break;
+                        case PortalPasswordRejection.WeakDictionaryMatch:
+                            Message.Text = lang.Common_PasswordMessageWeakDictionaryMatch;
+                            break;
+                        case PortalPasswordRejection.ContainsAccountContextTerm:
+                            Message.Text = lang.Common_PasswordMessageContainsAccountContextTerm;
+                            break;
+                        default:
+                            Message.Text = lang.Common_PasswordMessageRejected;
+                            break;
+                    }
                     return;
                 }
 

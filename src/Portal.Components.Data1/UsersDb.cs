@@ -79,12 +79,12 @@ namespace ASPNET.StarterKit.Portal
         public int AddUser(string fullName, string email, string password)
         {
             string normalizedPassword = password ?? string.Empty;
-            string passwordPolicyMessage;
+            PortalPasswordRejection passwordRejection;
             if (!string.IsNullOrEmpty(normalizedPassword) &&
                 !PortalPasswordPolicy.TryValidate(
                     normalizedPassword,
                     BuildPasswordPolicyContextTerms(fullName, email),
-                    out passwordPolicyMessage))
+                    out passwordRejection))
             {
                 return -1;
             }
@@ -207,11 +207,11 @@ namespace ASPNET.StarterKit.Portal
                 return -1;
             }
 
-            string passwordPolicyMessage;
+            PortalPasswordRejection passwordRejection;
             if (!PortalPasswordPolicy.TryValidate(
                 password,
                 BuildPasswordPolicyContextTerms(fullName, email, employeeCode),
-                out passwordPolicyMessage))
+                out passwordRejection))
             {
                 return -1;
             }
@@ -694,14 +694,14 @@ namespace ASPNET.StarterKit.Portal
                 throw new InvalidOperationException("Credential metadata tables are not available.");
             }
 
-            string passwordPolicyMessage;
+            PortalPasswordRejection passwordRejection;
             if (shouldResetCredential &&
                 !PortalPasswordPolicy.TryValidate(
                     normalizedPassword,
                     BuildPasswordPolicyContextTerms(loginName, displayName, nickname, email),
-                    out passwordPolicyMessage))
+                    out passwordRejection))
             {
-                throw new InvalidOperationException(passwordPolicyMessage);
+                throw new InvalidOperationException("PasswordPolicyRejection." + passwordRejection);
             }
 
             using (var transaction = _context.Database.BeginTransaction())

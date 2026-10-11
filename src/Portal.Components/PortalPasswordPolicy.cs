@@ -118,10 +118,10 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>One-time submitted password input; callers must not log it.</en>
         /// </l>
         /// </param>
-        /// <param name="message">
+        /// <param name="rejection">
         /// <l>
-        ///   <zh-CN>可显示给用户的失败说明。</zh-CN>
-        ///   <en>Display-safe failure message.</en>
+        ///   <zh-CN>校验失败时的拒绝原因码；通过时为 <c>None</c>。策略层不产出展示文案。</zh-CN>
+        ///   <en>Rejection code when validation fails; <c>None</c> when it passes. The policy layer produces no display text.</en>
         /// </l>
         /// </param>
         /// <returns>
@@ -130,13 +130,13 @@ namespace ASPNET.StarterKit.Portal
         ///   <en><c>true</c> when the policy is satisfied.</en>
         /// </l>
         /// </returns>
-        public static bool TryValidate(string password, out string message)
+        public static bool TryValidate(string password, out PortalPasswordRejection rejection)
         {
             // <lang>
             //   <zh-CN>将无上下文场景委托给完整入口，保持所有长度、类别和字典判断使用同一实现。</zh-CN>
             //   <en>Delegate the no-context scenario to the complete entry point so length, category, and dictionary checks use one implementation.</en>
             // </lang>
-            return TryValidate(password, null, out message);
+            return TryValidate(password, null, out rejection);
         }
 
         /// <summary>
@@ -157,10 +157,10 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Optional user name, email, employee code, display name, and similar context terms; callers must not log them.</en>
         /// </l>
         /// </param>
-        /// <param name="message">
+        /// <param name="rejection">
         /// <l>
-        ///   <zh-CN>可显示给用户的失败说明。</zh-CN>
-        ///   <en>Display-safe failure message.</en>
+        ///   <zh-CN>校验失败时的拒绝原因码；通过时为 <c>None</c>。策略层不产出展示文案。</zh-CN>
+        ///   <en>Rejection code when validation fails; <c>None</c> when it passes. The policy layer produces no display text.</en>
         /// </l>
         /// </param>
         /// <returns>
@@ -169,7 +169,7 @@ namespace ASPNET.StarterKit.Portal
         ///   <en><c>true</c> when the policy is satisfied.</en>
         /// </l>
         /// </returns>
-        public static bool TryValidate(string password, IEnumerable<string> contextTerms, out string message)
+        public static bool TryValidate(string password, IEnumerable<string> contextTerms, out PortalPasswordRejection rejection)
         {
             // <lang>
             //   <zh-CN>读取已按硬下限规范化的当前策略；该对象只保存参数，不包含密码或上下文原文。</zh-CN>
@@ -178,7 +178,7 @@ namespace ASPNET.StarterKit.Portal
             PortalPasswordPolicyOptions options = GetEffectiveOptions();
             if (password == null || password.Length < options.MinimumLength)
             {
-                message = BuildDisplayMessage(options);
+                rejection = PortalPasswordRejection.BelowComplexityPolicy;
                 return false;
             }
 
@@ -189,45 +189,24 @@ namespace ASPNET.StarterKit.Portal
             int categoryCount = CountCategories(password);
             if (categoryCount < options.RequiredCategoryCount)
             {
-                message = BuildDisplayMessage(options);
+                rejection = PortalPasswordRejection.BelowComplexityPolicy;
                 return false;
             }
 
             if (options.WeakDictionaryEnabled && IsWeakPassword(password))
             {
-                message = "密码过于常见或容易猜测，请更换为不在弱口令字典中的密码。";
+                rejection = PortalPasswordRejection.WeakDictionaryMatch;
                 return false;
             }
 
             if (options.DisallowContextTerms && ContainsContextTerm(password, contextTerms))
             {
-                message = "密码不能包含用户名、邮箱、员工号、显示名等账号相关信息。";
+                rejection = PortalPasswordRejection.ContainsAccountContextTerm;
                 return false;
             }
 
-            message = string.Empty;
+            rejection = PortalPasswordRejection.None;
             return true;
-        }
-
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>返回当前策略的可展示说明。</zh-CN>
-        ///   <en>Returns a display-safe description of the current policy.</en>
-        /// </lang>
-        /// </summary>
-        /// <returns>
-        /// <l>
-        ///   <zh-CN>策略说明。</zh-CN>
-        ///   <en>Policy description.</en>
-        /// </l>
-        /// </returns>
-        public static string BuildDisplayMessage()
-        {
-            // <lang>
-            //   <zh-CN>按当前有效策略生成固定格式展示提示，不包含导致失败的密码或账号上下文。</zh-CN>
-            //   <en>Build a fixed-format display prompt from the current effective policy without including the failed password or account context.</en>
-            // </lang>
-            return BuildDisplayMessage(GetEffectiveOptions());
         }
 
         /// <summary>
@@ -275,20 +254,6 @@ namespace ASPNET.StarterKit.Portal
                 // </lang>
                 return PortalPasswordPolicyOptions.CreateDefault();
             }
-        }
-
-        /// <summary>
-        /// <lang>
-        ///   <zh-CN>根据已规范化策略生成不回显密码的固定展示说明。</zh-CN>
-        ///   <en>Builds a fixed display description from normalized policy without echoing a password.</en>
-        /// </lang>
-        /// </summary>
-        private static string BuildDisplayMessage(PortalPasswordPolicyOptions options)
-        {
-            return string.Format(
-                "密码至少 {0} 位，并且需要在大写字母、小写字母、数字、特殊字符中至少包含 {1} 类。",
-                options.MinimumLength,
-                options.RequiredCategoryCount);
         }
 
         /// <summary>

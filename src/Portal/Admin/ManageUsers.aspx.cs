@@ -281,13 +281,34 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            string passwordPolicyMessage;
+            PortalPasswordRejection passwordRejection;
             if (shouldResetPassword && !PortalPasswordPolicy.TryValidate(
                 password,
                 BuildPasswordPolicyContextTerms(loginName, displayName, nickname, email),
-                out passwordPolicyMessage))
+                out passwordRejection))
             {
-                ShowRegistrationMessage(passwordPolicyMessage, true);
+                // <lang>
+                //   <zh-CN>密码策略失败时按原因码显示对应本地化文案，不记录密码或完整上下文词项。</zh-CN>
+                //   <en>On password-policy failure, show the localized text for the rejection code and never log the password or full context terms.</en>
+                // </lang>
+                switch (passwordRejection)
+                {
+                    case PortalPasswordRejection.BelowComplexityPolicy:
+                        PortalPasswordPolicyOptions passwordPolicyOptions = PortalPasswordPolicy.GetEffectiveOptions();
+                        ShowRegistrationMessage(
+                            string.Format(lang.Common_PasswordMessageComplexityPolicy, passwordPolicyOptions.MinimumLength, passwordPolicyOptions.RequiredCategoryCount),
+                            true);
+                        break;
+                    case PortalPasswordRejection.WeakDictionaryMatch:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageWeakDictionaryMatch, true);
+                        break;
+                    case PortalPasswordRejection.ContainsAccountContextTerm:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageContainsAccountContextTerm, true);
+                        break;
+                    default:
+                        ShowRegistrationMessage(lang.Common_PasswordMessageRejected, true);
+                        break;
+                }
                 return;
             }
 

@@ -65,16 +65,16 @@ namespace ASPNET.StarterKit.Portal.Tests
             const string SampleCandidate = "Fixture9!";
 
             // <lang>
-            //   <zh-CN>消息变量接收用户可见失败说明；通过场景应保持为空。</zh-CN>
-            //   <en>The message variable receives display-safe failure text and should remain empty in a passing scenario.</en>
+            //   <zh-CN>原因码变量接收拒绝类别；通过场景应为 None。</zh-CN>
+            //   <en>The rejection variable receives the rejection category and should be None in a passing scenario.</en>
             // </lang>
-            string message;
+            PortalPasswordRejection rejection;
 
             // <lang>
             //   <zh-CN>验证结果记录默认策略对公开样例的判断，生命周期仅限本测试。</zh-CN>
             //   <en>The validation result records the default policy decision for the public sample and lives only for this test.</en>
             // </lang>
-            bool isValid = PortalPasswordPolicy.TryValidate(SampleCandidate, out message);
+            bool isValid = PortalPasswordPolicy.TryValidate(SampleCandidate, out rejection);
 
             // <lang>
             //   <zh-CN>通过断言固定默认策略的最小可用强度入口。</zh-CN>
@@ -83,10 +83,10 @@ namespace ASPNET.StarterKit.Portal.Tests
             Assert.IsTrue(isValid);
 
             // <lang>
-            //   <zh-CN>消息断言确保通过场景不会回显样例候选或产生误导性失败文本。</zh-CN>
-            //   <en>The message assertion ensures a passing scenario does not echo the sample candidate or produce misleading failure text.</en>
+            //   <zh-CN>原因码断言确保通过场景不会产生任何拒绝类别，也不回显样例候选或失败文案。</zh-CN>
+            //   <en>The rejection assertion ensures a passing scenario produces no rejection category and echoes neither the sample candidate nor failure text.</en>
             // </lang>
-            Assert.AreEqual(string.Empty, message);
+            Assert.AreEqual(PortalPasswordRejection.None, rejection);
         }
 
         /// <summary>
@@ -163,16 +163,16 @@ namespace ASPNET.StarterKit.Portal.Tests
             };
 
             // <lang>
-            //   <zh-CN>消息变量接收预期的上下文词拒绝说明，不应包含样例候选本身。</zh-CN>
-            //   <en>The message variable receives the expected context-term rejection text and should not contain the sample candidate itself.</en>
+            //   <zh-CN>原因码变量应收到账号上下文词拒绝类别，且原因码本身既不含样例候选也不含展示文案。</zh-CN>
+            //   <en>The rejection variable should receive the account-context-term rejection category, and the code itself carries neither the sample candidate nor display text.</en>
             // </lang>
-            string message;
+            PortalPasswordRejection rejection;
 
             // <lang>
             //   <zh-CN>验证结果记录策略对包含上下文词样例的拒绝判断。</zh-CN>
             //   <en>The validation result records the policy rejection decision for a sample containing a context term.</en>
             // </lang>
-            bool isValid = PortalPasswordPolicy.TryValidate(SampleCandidate, contextTerms, out message);
+            bool isValid = PortalPasswordPolicy.TryValidate(SampleCandidate, contextTerms, out rejection);
 
             // <lang>
             //   <zh-CN>失败断言固定账号上下文词不能出现在候选密码中的安全边界。</zh-CN>
@@ -181,10 +181,10 @@ namespace ASPNET.StarterKit.Portal.Tests
             Assert.IsFalse(isValid);
 
             // <lang>
-            //   <zh-CN>消息断言只检查低敏原因类别，避免把候选字符串本身写入断言期望值。</zh-CN>
-            //   <en>The message assertion checks only the low-sensitivity reason category and avoids writing the candidate string into expected text.</en>
+            //   <zh-CN>原因码断言只检查低敏的类别枚举，避免把候选字符串或展示文案写入断言期望值。</zh-CN>
+            //   <en>The rejection assertion checks only the low-sensitivity category enum and avoids writing the candidate string or display text into expected values.</en>
             // </lang>
-            StringAssert.Contains(message, "账号相关信息");
+            Assert.AreEqual(PortalPasswordRejection.ContainsAccountContextTerm, rejection);
         }
     }
 }
