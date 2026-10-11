@@ -2448,6 +2448,21 @@
   <data name="Admin_Register_MessagePasswordVerifyFailed" xml:space="preserve">
     <value>Password submission verification failed; refresh the page and try again.</value>
   </data>
+  <data name="Admin_Register_MessageInviteTableMissing" xml:space="preserve">
+    <value>The registration link table has not been deployed.</value>
+  </data>
+  <data name="Admin_Register_MessageInviteNotFound" xml:space="preserve">
+    <value>The registration link does not exist.</value>
+  </data>
+  <data name="Admin_Register_MessageInviteDisabled" xml:space="preserve">
+    <value>The registration link is disabled.</value>
+  </data>
+  <data name="Admin_Register_MessageInviteExpired" xml:space="preserve">
+    <value>The registration link has expired.</value>
+  </data>
+  <data name="Admin_Register_MessageInviteUsageLimitReached" xml:space="preserve">
+    <value>The registration link has reached its usage limit.</value>
+  </data>
   <data name="Admin_Roles_MessageCreateFailed" xml:space="preserve">
     <value>Creating the role failed; the system recorded this error. Event id: {0}</value>
   </data>

@@ -326,10 +326,10 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Optional invite code.</en>
         /// </l>
         /// </param>
-        /// <param name="message">
+        /// <param name="rejection">
         /// <l>
-        ///   <zh-CN>校验失败时可展示的说明。</zh-CN>
-        ///   <en>Display-safe message when validation fails.</en>
+        ///   <zh-CN>校验失败时的拒绝原因码；通过时为 <c>None</c>。数据层不产出面向用户的文案。</zh-CN>
+        ///   <en>Rejection code when validation fails; <c>None</c> when it passes. The data layer produces no user-facing text.</en>
         /// </l>
         /// </param>
         /// <returns>
@@ -338,7 +338,7 @@ namespace ASPNET.StarterKit.Portal
         ///   <en><c>true</c> when the code is valid or an empty code is currently allowed.</en>
         /// </l>
         /// </returns>
-        bool ValidateRegistrationInvite(string inviteCode, out string message);
+        bool ValidateRegistrationInvite(string inviteCode, out PortalRegistrationInviteRejection rejection);
 
         /// <summary>
         /// <lang>

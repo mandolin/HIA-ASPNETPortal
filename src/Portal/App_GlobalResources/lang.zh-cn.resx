@@ -2448,6 +2448,21 @@
   <data name="Admin_Register_MessagePasswordVerifyFailed" xml:space="preserve">
     <value>密码提交验证失败，请刷新页面后重试。</value>
   </data>
+  <data name="Admin_Register_MessageInviteTableMissing" xml:space="preserve">
+    <value>注册链接数据表尚未部署。</value>
+  </data>
+  <data name="Admin_Register_MessageInviteNotFound" xml:space="preserve">
+    <value>注册链接不存在。</value>
+  </data>
+  <data name="Admin_Register_MessageInviteDisabled" xml:space="preserve">
+    <value>注册链接已停用。</value>
+  </data>
+  <data name="Admin_Register_MessageInviteExpired" xml:space="preserve">
+    <value>注册链接已过期。</value>
+  </data>
+  <data name="Admin_Register_MessageInviteUsageLimitReached" xml:space="preserve">
+    <value>注册链接已达到使用次数上限。</value>
+  </data>
   <data name="Admin_Roles_MessageCreateFailed" xml:space="preserve">
     <value>角色创建失败，系统已记录本次错误。事件编号：{0}</value>
   </data>

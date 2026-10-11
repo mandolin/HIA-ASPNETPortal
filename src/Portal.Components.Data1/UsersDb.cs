@@ -217,8 +217,8 @@ namespace ASPNET.StarterKit.Portal
             }
 
             string normalizedInviteCode = Normalize(inviteCode);
-            string inviteMessage;
-            if (!ValidateRegistrationInvite(normalizedInviteCode, out inviteMessage))
+            PortalRegistrationInviteRejection inviteRejection;
+            if (!ValidateRegistrationInvite(normalizedInviteCode, out inviteRejection))
             {
                 return -1;
             }
@@ -485,10 +485,10 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Optional invite code.</en>
         /// </l>
         /// </param>
-        /// <param name="message">
+        /// <param name="rejection">
         /// <l>
-        ///   <zh-CN>失败时可安全展示的说明；成功时为空。</zh-CN>
-        ///   <en>Display-safe explanation on failure; empty on success.</en>
+        ///   <zh-CN>失败时的拒绝原因码；成功时为 <c>None</c>。原因码只描述失败类别，不含任何展示文案。</zh-CN>
+        ///   <en>Rejection code on failure; <c>None</c> on success. The code names only the failure category and carries no display text.</en>
         /// </l>
         /// </param>
         /// <returns>
@@ -497,7 +497,7 @@ namespace ASPNET.StarterKit.Portal
         ///   <en><c>true</c> when the code is valid or an empty code is currently allowed.</en>
         /// </l>
         /// </returns>
-        public bool ValidateRegistrationInvite(string inviteCode, out string message)
+        public bool ValidateRegistrationInvite(string inviteCode, out PortalRegistrationInviteRejection rejection)
         {
             // <lang>
             //   <zh-CN>空邀请码当前表示允许的非邀请注册，未来“必须邀请码”策略应作为独立设置实现。</zh-CN>
@@ -506,42 +506,42 @@ namespace ASPNET.StarterKit.Portal
             string normalizedInviteCode = Normalize(inviteCode);
             if (string.IsNullOrEmpty(normalizedInviteCode))
             {
-                message = string.Empty;
+                rejection = PortalRegistrationInviteRejection.None;
                 return true;
             }
 
             if (!HasInviteTable())
             {
-                message = "注册链接数据表尚未部署。";
+                rejection = PortalRegistrationInviteRejection.InviteTableMissing;
                 return false;
             }
 
             var invite = _context.RegistrationInvites.SingleOrDefault(i => i.InviteCode == normalizedInviteCode);
             if (invite == null)
             {
-                message = "注册链接不存在。";
+                rejection = PortalRegistrationInviteRejection.InviteNotFound;
                 return false;
             }
 
             if (!invite.IsEnabled)
             {
-                message = "注册链接已停用。";
+                rejection = PortalRegistrationInviteRejection.InviteDisabled;
                 return false;
             }
 
             if (invite.ExpiresUtc < DateTime.UtcNow)
             {
-                message = "注册链接已过期。";
+                rejection = PortalRegistrationInviteRejection.InviteExpired;
                 return false;
             }
 
             if (invite.MaxUses.HasValue && invite.UsedCount >= invite.MaxUses.Value)
             {
-                message = "注册链接已达到使用次数上限。";
+                rejection = PortalRegistrationInviteRejection.InviteUsageLimitReached;
                 return false;
             }
 
-            message = string.Empty;
+            rejection = PortalRegistrationInviteRejection.None;
             return true;
         }
 

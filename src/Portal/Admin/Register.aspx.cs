@@ -126,7 +126,7 @@ namespace ASPNET.StarterKit.Portal
                 // </lang>
                 string submittedPassword;
                 string submittedConfirmPassword;
-                string inviteMessage;
+                PortalRegistrationInviteRejection inviteRejection;
                 string passwordPolicyMessage;
 
                 if (!TryResolveRegistrationPasswords(out submittedPassword, out submittedConfirmPassword))
@@ -165,13 +165,33 @@ namespace ASPNET.StarterKit.Portal
                     return;
                 }
 
-                if (!UsersDB.ValidateRegistrationInvite(inviteCode, out inviteMessage))
+                if (!UsersDB.ValidateRegistrationInvite(inviteCode, out inviteRejection))
                 {
                     // <lang>
-                    //   <zh-CN>邀请码服务负责启用、到期和次数门禁；页面只显示契约返回的低敏消息。</zh-CN>
-                    //   <en>The invite service owns enabled, expiry, and usage gates; the page displays only its contract-level low-sensitivity message.</en>
+                    //   <zh-CN>邀请码服务负责启用、到期和次数门禁，只回传拒绝原因码；页面按当前语言把原因码映射为本地化文案，使数据层不再包含任何展示文本。未知原因码回退到通用拒绝文案，不显示空白。</zh-CN>
+                    //   <en>The invite service owns enabled, expiry, and usage gates and returns only a rejection code; the page maps that code to localized text for the current language so the data layer carries no display text. An unknown code falls back to the generic rejection text rather than showing a blank message.</en>
                     // </lang>
-                    Message.Text = inviteMessage;
+                    switch (inviteRejection)
+                    {
+                        case PortalRegistrationInviteRejection.InviteTableMissing:
+                            Message.Text = lang.Admin_Register_MessageInviteTableMissing;
+                            break;
+                        case PortalRegistrationInviteRejection.InviteNotFound:
+                            Message.Text = lang.Admin_Register_MessageInviteNotFound;
+                            break;
+                        case PortalRegistrationInviteRejection.InviteDisabled:
+                            Message.Text = lang.Admin_Register_MessageInviteDisabled;
+                            break;
+                        case PortalRegistrationInviteRejection.InviteExpired:
+                            Message.Text = lang.Admin_Register_MessageInviteExpired;
+                            break;
+                        case PortalRegistrationInviteRejection.InviteUsageLimitReached:
+                            Message.Text = lang.Admin_Register_MessageInviteUsageLimitReached;
+                            break;
+                        default:
+                            Message.Text = lang.Admin_Register_MessageRegistrationRejected;
+                            break;
+                    }
                     return;
                 }
 

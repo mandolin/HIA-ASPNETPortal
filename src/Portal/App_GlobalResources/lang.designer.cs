@@ -9646,6 +9646,66 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The registration link table has not been deployed.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The registration link table has not been deployed.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageInviteTableMissing {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageInviteTableMissing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The registration link does not exist.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The registration link does not exist.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageInviteNotFound {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageInviteNotFound", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The registration link is disabled.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The registration link is disabled.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageInviteDisabled {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageInviteDisabled", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The registration link has expired.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The registration link has expired.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageInviteExpired {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageInviteExpired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The registration link has reached its usage limit.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The registration link has reached its usage limit.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_Register_MessageInviteUsageLimitReached {
+            get {
+                return ResourceManager.GetString("Admin_Register_MessageInviteUsageLimitReached", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Creating the role failed; the system recorded this error. Event id: {0}</zh-CN>
         ///   <en>Looks up a localized string similar to: Creating the role failed; the system recorded this error. Event id: {0}</en>
         /// </lang>
