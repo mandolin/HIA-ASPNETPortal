@@ -31,6 +31,11 @@ $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $plansDir = Join-Path $repoRoot 'work-zone\dev\plans'
 $utf8 = [System.Text.UTF8Encoding]::new($false)
 
+# <lang>
+#   <zh-CN>本脚本是 inventory 工具（Get-*），只报告对标证据现状、不做阻断，故不接入 Invoke-PortalGateSuite。来源强度与维度均为启发式推断：强度靠 URL 所在行或其上下 3 行是否含强度声明，维度靠前文最近维度名关键词匹配（噪声大）。推断偏差只影响索引可读性，不影响任何门禁判定。</zh-CN>
+#   <en>This script is an inventory tool (Get-*): it only reports benchmarking-evidence status and never blocks, so it is not wired into Invoke-PortalGateSuite. Source strength and dimension are heuristic: strength from the URL line or its ±3 lines containing a strength statement, dimension from the nearest preceding dimension keyword (noisy). Inference error only affects index readability, never any gate decision.</en>
+# </lang>
+
 # 维度名取自规范 §三（八项）
 $dimensions = @(
     @{ Index = 1; Name = '设计意图' }
@@ -63,6 +68,10 @@ foreach ($doc in $documents) {
             $url = $um.Value.TrimEnd('.', ',', ';')
             # 来源强度：先在本行找，找不到就在上下 3 行内找 —— 引用常写成
             # "来源强度：一手" 与 "引用：<URL>" 两行
+            # <lang>
+            #   <zh-CN>来源强度为启发式：先在本行匹配"一手/二手/社区/自有"，否则在上下 3 行回看。引用常分两行写（"来源强度"与"引用：URL"），故需上下文窗口；匹配不到记为"(未标注)"，属 inventory 工具的已知局限，不影响门禁。</zh-CN>
+            #   <en>Source strength is heuristic: match 一手/二手/社区/自有 on the same line, else look back/forward 3 lines. References are often split across two lines ("来源强度" and "引用：URL"), hence the context window; unmatched becomes "(未标注)" — a known inventory-tool limitation that does not affect gates.</en>
+            # </lang>
             $strength = ''
             $sm = if ($line -match '来源强度') { [regex]::Match($line, '(一手|二手|社区|自有)') } else { $null }
             if ($sm -and $sm.Success) { $strength = $sm.Groups[1].Value }
@@ -74,6 +83,10 @@ foreach ($doc in $documents) {
                 }
             }
             # 维度：在该行及其前文最近的维度标题里找
+            # <lang>
+            #   <zh-CN>维度为关键词匹配：从该 URL 行向前最多 40 行找最近维度名（编号或八项名）。属近似，安全事实等条目偏多；彻底结构化需各文档统一规范输出模板，属独立项。</zh-CN>
+            #   <en>Dimension is keyword matching: scan up to 40 lines back from the URL line for the nearest dimension name (index or eight-item name). Approximate; security-fact entries are over-represented. Full structuring needs every document to adopt the spec output template — a separate item.</en>
+            # </lang>
             $dimension = ''
             $idx2 = [array]::IndexOf($lines, $line)
             for ($k = $idx2; $k -ge [Math]::Max(0, $idx2 - 40); $k--) {

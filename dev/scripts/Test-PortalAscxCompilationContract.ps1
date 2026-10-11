@@ -19,11 +19,20 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $utf8 = [System.Text.UTF8Encoding]::new($false)
 $violations = @()
+# <lang>
+#   <zh-CN>违规收集器：所有 C1–C4 检查只追加到此数组，最后统一汇总；脚本只依赖源码、不改写任何文件，属编排入口 L0 层。漏报（类型表未覆盖的歧义）优先于误报，与设计"宁可漏检不可误报"一致。</zh-CN>
+#   <en>Violation collector: every C1–C4 check only appends here and is summarized at the end; the script reads source only and rewrites nothing, sitting at orchestration L0. Missing (ambiguities absent from the type table) is preferred over false positives, matching the "leak over false-positive" design.</en>
+# </lang>
 function Add-Violation([string] $f, [string] $rule, [string] $detail) {
     $script:violations += [pscustomobject]@{ file = $f; rule = $rule; detail = $detail }
 }
 
 # 步骤 1：建立「类型名 → 命名空间」映射
+
+# <lang>
+#   <zh-CN>建立"类型名 → 命名空间"映射：同一类型名可能跨命名空间（Portal 与 Portal.Components 同名），故保留全部候选，判定按"任一候选被覆盖即通过"。这会漏掉真正歧义但不误报。</zh-CN>
+#   <en>Build the "type name → namespace" map: a name may span namespaces (Portal and Portal.Components share names), so all candidates are kept and a match on any passes. True ambiguity can leak but is never falsely reported.</en>
+# </lang>
 # 只收 class/interface/struct/enum 的显式命名空间声明。同一类型名可能出现在多个命名空间
 # （Portal 与 Portal.Components 都有同名类型），故保留全部候选，判定按"任一候选被覆盖即通过"
 # —— 会漏掉真正的歧义，但不会误报，与"宁可漏检"一致。
@@ -78,6 +87,11 @@ foreach ($ascx in $ascxFiles) {
     }
 
     # C3 标记层表达式引用的类型可解析
+
+# <lang>
+#   <zh-CN>C3 只校验"命名空间/类型位置"的标识符（前面不是点号，排除 Render、属性名等成员访问）；标识符若不在全仓类型表则视为资源键/局部变量跳过。仅当类型表确有该名且其命名空间均未被引用时才判未解析（防运行期 CS0103）。</zh-CN>
+#   <en>C3 checks only identifiers at namespace/type position (not preceded by a dot, excluding member access like Render or property names); identifiers absent from the repo type table are treated as resource keys/locals and skipped. Unresolved is reported only when the type exists yet none of its namespaces is in scope (prevents runtime CS0103).</en>
+# </lang>
     # 覆盖集合 = Import 声明 + Inherits 的命名空间 + 代码后置的 using
     $covered = New-Object System.Collections.Generic.List[string]
     foreach ($im in [regex]::Matches($markup, '<%@\s*Import\s+Namespace\s*=\s*"([^"]+)"')) { $covered.Add($im.Groups[1].Value) }

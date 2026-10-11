@@ -49,19 +49,34 @@ foreach ($doc in $candidates) {
     $firstHand = ([regex]::Matches($text, '一手')).Count
     $decision = ([regex]::Matches($text, '决定|采纳|不采纳')).Count
 
-    # R1（阻断）：既无来源强度也无不适用声明 —— 等于没对标
+    # R1（阻断）：既无来源强度也无不适用声明
+
+    # <lang>
+    #   <zh-CN>R1（阻断）：既无"来源强度"也无"不适用"声明视为未产出对标依据（规范 §四/§五）。这是唯一硬阻断，其余靠提示，避免门禁长期红被忽略。</zh-CN>
+    #   <en>R1 (blocking): neither "来源强度" nor a "不适用" statement means no benchmarking basis was produced (spec §四/§五). The only hard block; everything else is advisory, so the gate never stays red-and-ignored.</en>
+    # </lang> —— 等于没对标
     if ($strength -eq 0 -and $notApplicable -eq 0) {
         $blocking += [pscustomobject]@{ doc = $name; rule = 'R1'; detail = '既无"来源强度"也无"不适用"声明 —— 未产出对标依据（规范 §四/§五）' }
     }
 
-    # R2（仅对规范建立后的文档阻断）：声称一手却无 URL —— 违反 §五"一手来源须 URL + 要点"
+    # R2（仅对规范建立后的文档阻断）
+
+    # <lang>
+    #   <zh-CN>R2：声称"一手"却无 URL 违反 §五。仅对规范建立后（P60+）且为 *.1-benchmark.md 的文档阻断；历史文档（P59 前）按"规范不溯及既往"降级为提示，避免对已成文的旧文档误报阻断。</zh-CN>
+    #   <en>R2: claiming "一手" without a URL violates §五. Blocking only for post-spec (P60+) *.1-benchmark.md docs; pre-spec history docs are downgraded to advisory under "spec is not retroactive", avoiding false blocking of already-written old docs.</en>
+    # </lang>：声称一手却无 URL —— 违反 §五"一手来源须 URL + 要点"
     if ($isCurrent -and $firstHand -gt 0 -and $url -eq 0) {
         $blocking += [pscustomobject]@{ doc = $name; rule = 'R2'; detail = '声称"一手"来源但全文无 URL（规范 §五：一手须 URL + 要点）' }
     } elseif (-not $isCurrent -and $firstHand -gt 0 -and $url -eq 0) {
             $advisory += [pscustomobject]@{ doc = $name; rule = 'R2'; detail = ('声称"一手"但无 URL —— ' + $(if ($packageNumber -lt 60) { '成文于规范建立前（规范不溯及既往）' } else { '非 benchmark 文档（对标产出在对应 .1-benchmark.md，需人工核对）' }) + '；规范 §五 要求一手附 URL + 要点') }
     }
 
-    # R3（提示）：缺"决定" —— 规范 §四 要求每个差异都有决定
+    # R3（提示）：缺"决定"
+
+    # <lang>
+    #   <zh-CN>R3（提示）：缺"决定/采纳/不采纳"违反 §四"每个差异都要有决定"。属提示不阻断，因部分文档的合理写法是对重点维度给决定、其余走不适用声明。</zh-CN>
+    #   <en>R3 (advisory): missing "决定/采纳/不采纳" violates §四 ("every difference needs a decision"). Advisory not blocking, because a valid pattern is a decision on key dimensions plus a 不适用 statement for the rest.</en>
+    # </lang> —— 规范 §四 要求每个差异都有决定
     if ($decision -eq 0) {
         $advisory += [pscustomobject]@{ doc = $name; rule = 'R3'; detail = '未见"决定/采纳/不采纳"（规范 §四：每个差异都要有决定）' }
     }
