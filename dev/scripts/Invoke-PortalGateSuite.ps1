@@ -53,6 +53,19 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalVersionConsistency.ps1';    Runner = 'ps1'; Kind = '版本一致性'; Args = @() }
         @{ File = 'Test-PortalLegacyCssCompatibility.ps1'; Runner = 'ps1'; Kind = '旧版 CSS 兼容'; Args = @() }
         @{ File = 'Test-PortalAscxCompilationContract.ps1'; Runner = 'ps1'; Kind = 'ASCX 编译契约'; Args = @() }
+        # <lang>
+        #   <zh-CN>C-anp-P20 新增模块就绪门禁（L0 静态）：把"新增业务模块时四类构建看不出、运行期才炸"的坑
+        #   （csproj 登记 / CodeBehind 标记 / 6 皮肤主题规则 / 标记与 CSS 类名一致性）前移为静态检查。
+        #   每模块一组参数，逐组各跑一次（与业务模块冒烟同源的 ArgSets 写法）。</zh-CN>
+        #   <en>C-anp-P20 new-module readiness gate (L0 static): moves the four "builds fine but fails at runtime" pitfalls of
+        #   adding a business module (csproj registration / CodeBehind marker / six-skin theme rules / markup-CSS class-name
+        #   consistency) into a static check. One argument set per module, run once each (same ArgSets shape as the smoke gate).</en>
+        # </lang>
+        @{ File = 'Test-PortalNewModuleReadiness.ps1';    Runner = 'ps1'; Kind = '新增模块就绪';
+           ArgSets = @(
+               @('-ModuleName', 'LeaveRequest', '-ModuleCssPrefix', 'leave-request', '-ExpectedPackageId', 'HIA.LeaveRequest'),
+               @('-ModuleName', 'ExpenseReimbursement', '-ModuleCssPrefix', 'expense-reimbursement', '-ExpectedPackageId', 'HIA.ExpenseReimbursement')
+           ) }
         @{ File = 'Test-PortalBenchmarkChecklist.ps1'; Runner = 'ps1'; Kind = '对标检查表'; Args = @() }
         # <lang>
         #   <zh-CN>文档与开源就绪度四门禁（W98 接入）：此前它们存在但不在编排内，因此"跑全门禁"并不包含它们。

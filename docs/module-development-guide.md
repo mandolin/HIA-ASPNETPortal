@@ -21,7 +21,7 @@ DesktopModules/
       ModuleProbe.css
 ```
 
-`PackageFolder` 必须匹配 `^[A-Za-z][A-Za-z0-9_-]{0,63}$`。`module.json` 当前使用 `schemaVersion: 1`：
+`PackageFolder` 必须匹配 `^[A-Za-z][A-Za-z0-9_-]{0,63}$`。`moduleFolder` 下的 `module.json` 当前对只读参考包（如 `ModuleProbe`）使用 `schemaVersion: 1`：
 
 ```json
 {
@@ -36,6 +36,8 @@ DesktopModules/
   ]
 }
 ```
+
+> **`schemaVersion` 现状（C-anp-P20 实测）**：`ModuleProbe` 这类只读参考包用 `1`；但**所有业务模块（`HIA.*`）的 manifest 实际为 `2`**——`PortalModuleControl<T>` 加载器要求 `capability` 块，而该块由 `schemaVersion: 2` 引入。`Test-PortalBusinessModuleSmoke.ps1` 目前仍打印"期望 `schemaVersion: 1`"，属门禁口径陈旧（全部业务模块均为 2），**不要**为过门禁把业务模块降回 1。
 
 规则如下：
 
@@ -174,6 +176,24 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 | 页面有模块但样式未生效 | `resources` 是否声明了 CSS、selector 是否用了稳定 scope |
 | 门禁报 `Desktop entry safety` | `desktopEntry` 是否写了包目录外的路径或非 `.ascx` |
 | 实例渲染但数据为空 | 是否绕过数据范围控制，或迁移脚本未执行 |
+| 前台模块整页空白但构建通过 | 是否登记进 `Portal.csproj` 的 `<Compile>`；`.ascx` 是否用 `CodeBehind`；标记层类名与模块 CSS 是否一致；业务包是否加入 `Portal.ModulePackages.Enabled` |
+| 模块在部分皮肤下样式丢失 | 对应皮肤的 `Default.css` 是否补了 `.<模块前缀类>` 主题作用域规则（仅模块自带 `Styles/*.css` 不够） |
+
+## 新增模块的隐藏陷阱（C-anp-P20 实测）
+
+以下四类缺陷**构建与单测全绿时不会出现，只在运行期以"页面空白 / 门禁误判"形式暴露**，是 `C-anp-P20` 交付两个业务模块时逐项踩出的。新增任何模块都先过一遍：
+
+1. **代码后置必须登记进 `Portal.csproj`。** `src/Portal` 是 **Web Application 项目**（有 `Portal.csproj`），既有模块的 `.ascx.cs` 编译进 `bin/Portal.dll`。新增模块若只在磁盘上放文件、未在 csproj 登记 `<Compile Include="DesktopModules\{Module}\{Module}.ascx.cs">`（及 `.ascx.designer.cs`）与 `<Content Include="...{Module}.ascx / module.json / Styles/*.css">`，则 `CodeBehind` 在运行期报"未能加载类型 ASPNET.StarterKit.Portal.{Module}"；更隐蔽的是**未登记时 MSBuild 不编译这些文件**，于是 `out var`、`long→string` 一类编译错误只在运行期炸。
+2. **6 套正式皮肤必须补齐主题作用域规则。** 只写模块自带 `Styles/{Module}.css` 而**不在 `src/Portal/App_Themes/<Theme>/Default.css` 补 `body.portal-theme-<规范化名> .<模块前缀类>` 规则**，模块在多数皮肤下丢失主题化样式（AGENTS.md 硬性要求）。取值取自各皮肤既有 `my-work-items` 同族调色板，并为不支持 `var()` 的 IE9+ 提供显式回退。
+3. **标记层与 CSS 类名必须一致。** 标记层用 `form-grid` / `form-field` / `list` 而模块 CSS 写 `.grid` / `.field` / `.recent` 时，模块样式与主题规则会**全部落空却无任何报错**。以标记层（`.ascx` 的 `class=` 与 Web Forms 控件的 `CssClass=`）为权威，模块 CSS 与主题规则只承载布局与取色。
+4. **本机配置生效源是 `Web.config` 的 `<appSettings>`。** 业务包需经 `Portal.ModulePackages.Enabled` 白名单放行；在开发机上改 `src/Portal/Config/appSettings.dev.json`（gitignore，不入库）的 `Set` 值**不落地**，运行期读的是 `Web.config` 的既有 `<appSettings>`。放行业务包时两处一并改，并确认 `appSettings.dev.json` 的档位（`Portal.ModuleProfiles.Active`）含该包所在档位。
+
+> 上述 1–3 已由静态门禁 `Test-PortalNewModuleReadiness.ps1` 守护（L0 层，只依赖源码，无需 IIS/DB）：
+> ```powershell
+> & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalNewModuleReadiness.ps1 `
+>     -ModuleName LeaveRequest -ModuleCssPrefix leave-request -ExpectedPackageId HIA.LeaveRequest
+> ```
+> 门禁检查：R1 csproj 登记、R2 `.ascx` 用 `CodeBehind`、R3 6 套皮肤均含 `<prefix>` 主题规则、R4 模块 CSS 类选择符均在 `.ascx` 出现（含 `CssClass`）。确有 JS/代码后置专属类时用 `-SkipClassConsistency` 据实豁免并在提交信息写明。
 
 ## 提交前检查清单
 
@@ -184,6 +204,9 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 - [ ] 模块标题带 `role="heading"` 与 `aria-level`
 - [ ] 无 JavaScript、无内联脚本、无 DLL/可执行文件
 - [ ] 业务迁移脚本命名为 `PortalBiz_*.sql` 且不含 `USE [database]`
+- [ ] `.ascx.cs` 与 `.ascx.designer.cs` 已登记进 `Portal.csproj` 的 `<Compile>`（Web Application 项目，遗漏会让 `CodeBehind` 运行期报"未能加载类型"）
+- [ ] 6 套正式皮肤的 `Default.css` 均已补 `.<模块前缀类>` 主题作用域规则
+- [ ] `Test-PortalNewModuleReadiness.ps1 -ModuleName <Module>` 通过（csproj / CodeBehind / 6 皮肤 / 标记与 CSS 类名一致性）
 - [ ] `Test-PortalBusinessModuleSmoke.ps1 -ModuleName HIA.YourModule` 通过
-- [ ] 新增接入编排：把该模块的冒烟检查加入 `dev/scripts/Invoke-PortalGateSuite.ps1` 的 L1 层
+- [ ] 新增接入编排：把该模块的冒烟检查与就绪检查加入 `dev/scripts/Invoke-PortalGateSuite.ps1`（L1 冒烟 / L0 就绪）
 - [ ] 门禁套件全绿：`Invoke-PortalGateSuite.ps1`

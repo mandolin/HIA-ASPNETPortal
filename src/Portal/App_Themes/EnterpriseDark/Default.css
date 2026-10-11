@@ -1742,8 +1742,8 @@ body.portal-theme-enterprisedark {
 
 
 /* <lang>
- *   <zh-CN>请假申请与费用报销模块的主题作用域规则：容器、标题、小标题、标签、消息、输入控件、字段与列表分隔线、空态均取自本皮肤既有调色板（与 my-work-items 同族取值），并为不支持 var() 的 IE9+ 提供显式回退。</zh-CN>
- *   <en>Theme-scoped rules for the leave-request and expense-reimbursement modules: container, title, subtitle, label, message, inputs, field/list dividers and empty state reuse this skin's existing palette (same family as my-work-items) and provide an explicit fallback for IE9+, which does not support var().</en>
+ *   <zh-CN>请假申请与费用报销模块的主题作用域规则：容器、标题、小标题、标签、消息、输入控件、字段与列表分隔线、空态均取自本皮肤既有调色板（与 my-work-items 同族取值），并为不支持 CSS 自定义属性的 IE9+ 提供显式回退。</zh-CN>
+ *   <en>Theme-scoped rules for the leave-request and expense-reimbursement modules: container, title, subtitle, label, message, inputs, field/list dividers and empty state reuse this skin's existing palette (same family as my-work-items) and provide an explicit fallback for IE9+, which does not support CSS custom properties.</en>
  * </lang> */
 body.portal-theme-enterprisedark .leave-request,
 body.portal-theme-enterprisedark .expense-reimbursement {
