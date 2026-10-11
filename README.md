@@ -60,6 +60,8 @@ Copy-Item src\Portal\Config\Templates\connectionStrings.config "$env:USERPROFILE
 
 脚本按 `Portal_CreateDB.sql` → `Portal_LoadConfig.sql` → `Portal_LoadData.sql` → 后续幂等迁移的顺序执行。手工执行顺序与逐脚本说明见 [开发指南](docs/dev-guide.md)。
 
+> **若目标库已存在**：脚本会直接抛错（`This script never replaces an existing database`）而不是覆盖，这是防误删的安全护栏，首次执行不会遇到。重复执行如需重建，请先手工删除目标库再重跑本步骤，或改用 [开发指南](docs/dev-guide.md) 中的手工执行顺序做增量迁移。
+
 ### 5. 构建
 
 ```powershell

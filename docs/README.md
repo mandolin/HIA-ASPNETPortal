@@ -13,6 +13,8 @@
 - `user-guide.md`：运行和使用入口说明。
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。
+- `documentation-registry.md`：7 个文档族的适用性登记（适用对象、维护责任、更新触发条件）与已登记缺口。
+- `documentation-map.md`：7 族文档的导航地图、阅读路径与缺口指向，用于按角色快速定位文档。
 - `deployment-checklist.md`：SQL Server、IIS、外置配置和发布后回归清单。
 - `deployment-rollback-guide.md`：文件、配置、数据库和证据回滚准备说明。
 - `release-notes-template.md`：版本号、变更、验证摘要、延期补证和回滚入口模板。
