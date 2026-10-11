@@ -74,7 +74,7 @@
 - 与安全相关的延期项（在线安装/上传扩展包、在线 ZIP 上传、在线编译、外部 URL 模块加载、自动脚本）**不是永久禁止**：在**保证安全、有权限控制、可控**的前提下应尽可能实现，它们有明确价值。
 - 跨数据库 / 多数据库、代码生成工作流属于"暂不实用"，**保持开放，不得绝对否定**。
 - 动态表单引擎、内容树 CMS、内容站点定位、MVC 等：**本体与核心不采纳**，但应提供**容纳机制**让独立模块（含 MVC 模块）能够安装使用，以提升开放性与可扩展性。
-- 开放候选与独立模块需求统一登记在 `work-zone/dev/plans/enterprise-capability-extension-backlog.md`；边界分级示例见 `work-zone/dev/research/webform-portal-reference-2026-09-22.md` 第七节。
+- 开放候选与独立模块需求统一登记在 `work-zone/dev/plans/archive/enterprise-capability-extension-backlog.md`（原 `plans/` 根路径已迁至 `archive/`，此处同步更正）；边界分级示例见 `work-zone/dev/research/webform-portal-reference-2026-09-22.md` 第七节。
 
 ## UI 原型与设计稿前置（硬性要求）
 
