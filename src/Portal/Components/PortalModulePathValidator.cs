@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -63,7 +64,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (string.IsNullOrWhiteSpace(normalizedSource))
             {
-                errorMessage = "桌面模块控件路径不能为空。";
+                errorMessage = lang.Common_ModulePathMessageEmpty;
                 return false;
             }
 
@@ -84,7 +85,7 @@ namespace ASPNET.StarterKit.Portal
                 normalizedSource.Contains("://") ||
                 normalizedSource.Split('/').Any(part => part == ".."))
             {
-                errorMessage = "桌面模块控件路径必须是站点内相对路径，不能包含绝对路径、外部 URL 或上级目录。";
+                errorMessage = lang.Common_ModulePathMessageNotSiteRelative;
                 return false;
             }
 
@@ -94,7 +95,7 @@ namespace ASPNET.StarterKit.Portal
             // </lang>
             if (!normalizedSource.EndsWith(".ascx", StringComparison.OrdinalIgnoreCase))
             {
-                errorMessage = "桌面模块控件路径必须指向 .ascx 用户控件。";
+                errorMessage = lang.Common_ModulePathMessageNotAscx;
                 return false;
             }
 
@@ -111,7 +112,7 @@ namespace ASPNET.StarterKit.Portal
                 candidateSource.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
             if (!allowedPrefix)
             {
-                errorMessage = "桌面模块控件路径只能位于 DesktopModules/ 或 Admin/ 目录下。";
+                errorMessage = lang.Common_ModulePathMessageOutsideAllowedDirectories;
                 return false;
             }
 

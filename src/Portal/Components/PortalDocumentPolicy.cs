@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Web;
+using Resources;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -92,7 +93,7 @@ namespace ASPNET.StarterKit.Portal
             errorMessage = string.Empty;
             if (postedFile == null || postedFile.ContentLength <= 0)
             {
-                errorMessage = "请选择要上传的文件。";
+                errorMessage = lang.Common_DocumentMessageNoFileSelected;
                 return false;
             }
 
@@ -103,8 +104,11 @@ namespace ASPNET.StarterKit.Portal
             int maximumBytes = GetMaximumUploadBytes();
             if (postedFile.ContentLength > maximumBytes)
             {
-                errorMessage = "上传文件不能超过 " + FormatFileSize(maximumBytes) + "。当前文件大小为 " +
-                               FormatFileSize(postedFile.ContentLength) + "。";
+                errorMessage = string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Common_DocumentMessageUploadTooLarge,
+                    FormatFileSize(maximumBytes),
+                    FormatFileSize(postedFile.ContentLength));
                 return false;
             }
 
@@ -115,7 +119,7 @@ namespace ASPNET.StarterKit.Portal
             string extension = GetNormalizedExtension(postedFile.FileName);
             if (!IsExtensionAllowed(extension))
             {
-                errorMessage = "该文件类型不在当前文档上传允许范围内。";
+                errorMessage = lang.Common_DocumentMessageExtensionNotAllowed;
                 return false;
             }
 

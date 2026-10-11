@@ -2717,6 +2717,27 @@
   </data>
   <data name="Common_OverdueSuffix" xml:space="preserve">
     <value>(Overdue)</value>
+    </data>
+  <data name="Common_DocumentMessageNoFileSelected" xml:space="preserve">
+    <value>Select a file to upload.</value>
+  </data>
+  <data name="Common_DocumentMessageUploadTooLarge" xml:space="preserve">
+    <value>The uploaded file cannot exceed {0}. The current file size is {1}.</value>
+  </data>
+  <data name="Common_DocumentMessageExtensionNotAllowed" xml:space="preserve">
+    <value>This file type is not allowed for document uploads.</value>
+  </data>
+  <data name="Common_ModulePathMessageEmpty" xml:space="preserve">
+    <value>The desktop module control path cannot be empty.</value>
+  </data>
+  <data name="Common_ModulePathMessageNotSiteRelative" xml:space="preserve">
+    <value>The desktop module control path must be site-relative and cannot contain absolute paths, external URLs, or parent directories.</value>
+  </data>
+  <data name="Common_ModulePathMessageNotAscx" xml:space="preserve">
+    <value>The desktop module control path must point to an .ascx user control.</value>
+  </data>
+  <data name="Common_ModulePathMessageOutsideAllowedDirectories" xml:space="preserve">
+    <value>The desktop module control path can only be under DesktopModules/ or Admin/.</value>
   </data>
   <data name="Admin_BusinessApplications_ApplicantFormat" xml:space="preserve">
     <value>Applicant: {0} ({1})</value>

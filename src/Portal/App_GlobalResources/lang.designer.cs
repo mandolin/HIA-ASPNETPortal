@@ -10402,6 +10402,90 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Select a file to upload.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Select a file to upload.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_DocumentMessageNoFileSelected {
+            get {
+                return ResourceManager.GetString("Common_DocumentMessageNoFileSelected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The uploaded file cannot exceed {0}. The current file size is {1}.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The uploaded file cannot exceed {0}. The current file size is {1}.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_DocumentMessageUploadTooLarge {
+            get {
+                return ResourceManager.GetString("Common_DocumentMessageUploadTooLarge", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：This file type is not allowed for document uploads.</zh-CN>
+        ///   <en>Looks up a localized string similar to: This file type is not allowed for document uploads.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_DocumentMessageExtensionNotAllowed {
+            get {
+                return ResourceManager.GetString("Common_DocumentMessageExtensionNotAllowed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The desktop module control path cannot be empty.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The desktop module control path cannot be empty.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_ModulePathMessageEmpty {
+            get {
+                return ResourceManager.GetString("Common_ModulePathMessageEmpty", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The desktop module control path must be site-relative and cannot contain absolute paths, external URLs, or parent directories.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The desktop module control path must be site-relative and cannot contain absolute paths, external URLs, or parent directories.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_ModulePathMessageNotSiteRelative {
+            get {
+                return ResourceManager.GetString("Common_ModulePathMessageNotSiteRelative", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The desktop module control path must point to an .ascx user control.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The desktop module control path must point to an .ascx user control.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_ModulePathMessageNotAscx {
+            get {
+                return ResourceManager.GetString("Common_ModulePathMessageNotAscx", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：The desktop module control path can only be under DesktopModules/ or Admin/.</zh-CN>
+        ///   <en>Looks up a localized string similar to: The desktop module control path can only be under DesktopModules/ or Admin/.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_ModulePathMessageOutsideAllowedDirectories {
+            get {
+                return ResourceManager.GetString("Common_ModulePathMessageOutsideAllowedDirectories", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：申请人：{0}（{1}）</zh-CN>
         ///   <en>Looks up a localized string similar to: Applicant: {0} ({1})</en>
         /// </lang>
