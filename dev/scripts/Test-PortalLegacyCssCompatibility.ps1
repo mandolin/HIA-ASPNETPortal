@@ -112,8 +112,18 @@ $rules = @(
     [pscustomobject]@{
         Severity = 'Blocker'
         Rule = 'NoCssVariablesOrModernFunctions'
-        Pattern = '(?i)var\s*\(|clamp\s*\(|minmax\s*\(|@supports'
-        Reason = 'IE9/IE8 不支持 CSS 变量、clamp/minmax 或 @supports。'
+        # <lang>
+        #   <zh-CN>IE9/IE8 不支持 CSS 变量、clamp/minmax 或 @supports。但项目 P18 确立的语义主题变量
+        #   `var(--portal-*)` 一律以「显式 hex 在前、var() 在后」的双声明范式书写，回退值即 IE9+ 可见值，
+        #   故对 `--portal-` 一类放行（负向预查排除），避免门禁对自家约定长期误报而沦为背景噪音；
+        #   其余任意 `var(--非portal)`、clamp/minmax/@supports 仍严格拦截。</zh-CN>
+        #   <en>IE9/IE8 do not support CSS variables, clamp/minmax or @supports. However the P18 semantic theme
+        #   variables `var(--portal-*)` always use the dual-declaration pattern (explicit hex first, var() second)
+        #   where the fallback is the IE9+-visible value, so `--portal-` usages are whitelisted via negative
+        #   lookahead; any other `var(--non-portal)`, clamp/minmax/@supports is still blocked.</en>
+        # </lang>
+        Pattern = '(?i)var\s*\((?!--portal-)|clamp\s*\(|minmax\s*\(|@supports'
+        Reason = 'IE9/IE8 不支持非 --portal- 的 CSS 变量、clamp/minmax 或 @supports（--portal-* 语义变量带显式回退，放行）。'
     },
     [pscustomobject]@{
         Severity = 'Blocker'
