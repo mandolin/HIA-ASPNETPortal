@@ -5,9 +5,13 @@
 //   依赖说明：`playwright` 属**开发期依赖且不入库**（本机位于 `temp/node_modules/playwright`，而 `temp/` 已由 `.gitignore` 忽略），
 //   因此 ESM 无法凭自身解析它。执行前须通过环境变量 `PORTAL_PLAYWRIGHT_MODULE` 指向该模块（目录或入口文件均可）。
 //
-//   用法（node 由 mise 提供，路径见 HANDOFF.md）：
+//   扩展名说明：本脚本使用 ESM `import`，而 `dev/scripts/` 没有被 `"type": "module"` 的 package.json 覆盖
+//   （仓库内仅 `src/Portal/package.json` 声明了 `type: module`），因此必须以 `.mjs` 结尾 —— `.mjs` 在任何
+//   package.json 配置下都按 ESM 解析。此前以 `.js` 提交时用普通 `node` 直接运行会报
+//   "Cannot use import statement outside a module"，属既有缺陷，2026-10-12 正名为 `.mjs`。
+//   （项目内其余证据类脚本同样一律使用 `.mjs`。）
 //     $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path 'temp\node_modules\playwright').Path
-//     & $node 'dev\scripts\Capture-PortalPrototypeScreenshots.js' (Resolve-Path 'work-zone\dev\research\prototypes').Path
+//     & $node 'dev\scripts\Capture-PortalPrototypeScreenshots.mjs' (Resolve-Path 'work-zone\dev\research\prototypes').Path
 //   </zh-CN>
 //   <en>Prototype screenshot tool: captures every `*.html` prototype page in the given directory into a same-named `*.png` full-page image.
 //   A prototype page must link the **real theme CSS** (`src/Portal/App_Themes/<Theme>/Default.css`) and real portal classes, so the artifact is a real render rather than a drawn mock-up or a text-to-image guess.
@@ -17,7 +21,7 @@
 //
 //   Usage (node is provided by mise; see HANDOFF.md for its path):
 //     $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path 'temp\node_modules\playwright').Path
-//     & $node 'dev\scripts\Capture-PortalPrototypeScreenshots.js' (Resolve-Path 'work-zone\dev\research\prototypes').Path
+//     & $node 'dev\scripts\Capture-PortalPrototypeScreenshots.mjs' (Resolve-Path 'work-zone\dev\research\prototypes').Path
 //   </en>
 // </lang>
 import fs from 'node:fs';
