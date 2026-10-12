@@ -33,12 +33,12 @@
 }
 
 /* <lang>
- *   <zh-CN>消息文本用于权限、保存或校验反馈，块级错误色区域保证反馈不会被表单字段吞没。</zh-CN>
- *   <en>The message text is for permission, save, or validation feedback; a block-level error-colored area keeps feedback from being swallowed by form fields.</en>
+ *   <zh-CN>消息文本用于权限、保存或校验反馈，块级区域保证反馈不会被表单字段吞没；错误色取自主题语义变量 --portal-danger-text（各皮肤取其既有 .NormalRed），不再硬编码浅色主题红，并保留原值 #8a1f1f 作旧内核回退。</zh-CN>
+ *   <en>The message text is for permission, save, or validation feedback; a block-level area keeps feedback from being swallowed by form fields, and the error color comes from the themed semantic variable --portal-danger-text (each skin reuses its existing .NormalRed) instead of a hard-coded light-theme red, with the original #8a1f1f kept as a fallback for legacy kernels without CSS variables.</en>
  * </lang> */
 .enterprise-workbench-message {
     display: block;
-    color: #8a1f1f;
+    color: var(--portal-danger-text, #8a1f1f);
     margin: 6px 0 10px;
 }
 

@@ -33,12 +33,12 @@
 }
 
 /* <lang>
- *   <zh-CN>消息文本承载保存/校验反馈，采用低饱和错误色并保持块级占位，避免与输入控件挤在同一行。</zh-CN>
- *   <en>The message text carries save and validation feedback, using a muted error color and block layout so it does not crowd input controls on the same line.</en>
+ *   <zh-CN>消息文本承载保存/校验反馈，保持块级占位以避免与输入控件挤在同一行；错误色取自主题语义变量 --portal-danger-text（各皮肤取其既有 .NormalRed），不再硬编码浅色主题红，并保留原值 #8a1f1f 作不支持 CSS 变量的旧内核回退。</zh-CN>
+ *   <en>The message text carries save and validation feedback in a block layout so it does not crowd input controls; the error color comes from the themed semantic variable --portal-danger-text (each skin reuses its existing .NormalRed) instead of a hard-coded light-theme red, with the original #8a1f1f kept as a fallback for legacy kernels without CSS variables.</en>
  * </lang> */
 .business-application-message {
     display: block;
-    color: #8a1f1f;
+    color: var(--portal-danger-text, #8a1f1f);
     margin: 6px 0 10px;
 }
 

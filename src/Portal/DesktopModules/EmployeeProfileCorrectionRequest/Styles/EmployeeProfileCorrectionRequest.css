@@ -34,12 +34,12 @@
 }
 
 /* <lang>
- *   <zh-CN>消息文本显示校验或提交反馈，使用块级错误色区域避免与表单控件混淆。</zh-CN>
- *   <en>The message text displays validation or submission feedback using a block-level error-colored area so it is not confused with form controls.</en>
+ *   <zh-CN>消息文本显示校验或提交反馈，使用块级区域避免与表单控件混淆；错误色取自主题语义变量 --portal-danger-text（各皮肤取其既有 .NormalRed），不再硬编码浅色主题红，并保留原值 #8a1f1f 作旧内核回退。</zh-CN>
+ *   <en>The message text displays validation or submission feedback in a block-level area so it is not confused with form controls; the error color comes from the themed semantic variable --portal-danger-text (each skin reuses its existing .NormalRed) instead of a hard-coded light-theme red, with the original #8a1f1f kept as a fallback for legacy kernels without CSS variables.</en>
  * </lang> */
 .employee-profile-correction-message {
     display: block;
-    color: #8a1f1f;
+    color: var(--portal-danger-text, #8a1f1f);
     margin: 6px 0 10px;
 }
 

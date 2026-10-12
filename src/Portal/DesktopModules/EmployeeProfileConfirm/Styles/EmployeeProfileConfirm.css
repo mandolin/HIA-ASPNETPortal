@@ -23,12 +23,12 @@
 }
 
 /* <lang>
- *   <zh-CN>消息区域承载确认结果或校验提示，块级显示防止提示文本与按钮、字段混排。</zh-CN>
- *   <en>The message area carries confirmation results or validation prompts, using block display to avoid mixing prompt text with buttons or fields.</en>
+ *   <zh-CN>消息区域承载确认结果或校验提示，块级显示防止提示文本与按钮、字段混排；错误色取自主题语义变量 --portal-danger-text（各皮肤取其既有 .NormalRed），不再硬编码浅色主题红，并保留原值 #8a1f1f 作旧内核回退。</zh-CN>
+ *   <en>The message area carries confirmation results or validation prompts in a block layout to avoid mixing prompt text with buttons or fields; the error color comes from the themed semantic variable --portal-danger-text (each skin reuses its existing .NormalRed) instead of a hard-coded light-theme red, with the original #8a1f1f kept as a fallback for legacy kernels without CSS variables.</en>
  * </lang> */
 .employee-profile-confirm-message {
     display: block;
-    color: #8a1f1f;
+    color: var(--portal-danger-text, #8a1f1f);
     margin: 6px 0 10px;
 }
 

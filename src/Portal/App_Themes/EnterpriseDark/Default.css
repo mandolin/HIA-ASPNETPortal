@@ -1725,7 +1725,7 @@ body.portal-theme-enterprisedark .employee-profile-field-grid dd,
 body.portal-theme-enterprisedark dl.employee-profile-field-grid dd {
     margin-left: 0;
 }
-/* P18 semantic theme tokens: debt/business modules reference these via var(--portal-*, fallback) so module surfaces, borders and text follow each skin instead of hardcoded light colors. Appended 2026-10-10. */
+/* P18 semantic theme tokens: debt/business modules reference these via var(--portal-*, fallback) so module surfaces, borders and text follow each skin instead of hardcoded light colors. --portal-danger-text carries the error/message text color and takes this skin's existing .NormalRed value (added 2026-10-12, W-anp-P98) so a module never hardcodes a light-theme red that vanishes on dark skins. */
 body.portal-theme-enterprisedark {
     --portal-surface: #18222e;
     --portal-surface-2: #1f2b3a;
@@ -1738,7 +1738,8 @@ body.portal-theme-enterprisedark {
     --portal-field-border: #33425a;
     --portal-field-text: #dce6f0;
     --portal-list-header-bg: #1e2a38;
-    --portal-list-row-alt: #161f2a;}
+    --portal-list-row-alt: #161f2a;
+    --portal-danger-text: #ff8b8b;}
 
 
 /* <lang>
