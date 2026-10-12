@@ -106,6 +106,19 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalReferenceDataSmoke.ps1';      Runner = 'ps1'; Kind = '参考数据'; Args = @() }
         @{ File = 'Test-PortalSqlVersionMatrix.ps1';        Runner = 'ps1'; Kind = 'SQL 版本矩阵'; Args = @() }
         @{ File = 'Test-PortalWorkItemSmoke.ps1';           Runner = 'ps1'; Kind = '轻量待办'; Args = @() }
+        # <lang>
+        #   <zh-CN>W100 / C-anp-P18 新增：模块语义类皮肤覆盖门禁（L0 静态）。扫描 `DesktopModules/**/module.json`
+        #   的 CSS resources，提取模块类选择器，比对 7 套正式皮肤 `Default.css` 的覆盖；两层判定 ——
+        #   硬规则（阻断）：模块 CSS 在 `var()` 之外的裸色值不得出现（否则深色皮肤必裂，W98 后应恒为 0）；
+        #   软指标（上报）：模块类在主题层的覆盖缺口（目标 4「补齐缺的规则」遗留债），经 `[GATE-NOTE]` 留档不阻断。
+        #   把"登记会过期、唯一可靠的是可重复检查"落到机器可跑的检查上。</zh-CN>
+        #   <en>W100 / C-anp-P18 new: module semantic-class skin-coverage gate (L0 static). It scans the CSS resources
+        #   declared in `DesktopModules/**/module.json`, extracts module class selectors, and compares coverage against the
+        #   seven official skins' `Default.css`. Two tiers: a hard (blocking) rule that no raw color literal may appear outside
+        #   `var()` in module CSS (would break dark skins; must stay 0 after W98), and a soft (reported) metric for the theme
+        #   coverage gap of module classes — the C-anp-P18 goal-4 debt — surfaced via `[GATE-NOTE]` without blocking.</en>
+        # </lang>
+        @{ File = 'Test-PortalModuleSkinCoverage.ps1';      Runner = 'ps1'; Kind = '模块语义类皮肤覆盖'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
