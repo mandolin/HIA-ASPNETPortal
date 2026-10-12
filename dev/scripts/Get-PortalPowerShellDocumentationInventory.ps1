@@ -166,10 +166,19 @@ function Get-LanguageMarkerSurface {
     param([Parameter(Mandatory = $true)][string]$Content)
 
     # <lang>
-    #   <zh-CN>旧 help 表面沿用 P33.0 的严格行首 `^\.LANG en|zh-CN` 口径，避免因缩进文本或说明文字扩大债务范围。</zh-CN>
-    #   <en>Legacy help surfaces reuse P33.0's strict line-start `^\.LANG en|zh-CN` rule so indented text or explanatory prose cannot widen the debt scope.</en>
+    #   <zh-CN>旧 help 表面按"行首（允许缩进）`\.LANG en|zh-CN`"口径匹配。
+    #     C-anp-P19 W108 修正：P33.0 沿用的严格列 0 行首 `^\.LANG` 口径会漏掉缩进在 comment-help 块内的
+    #     `.LANG` 关键字（实践中普遍缩进 4 空格），使 inventory 报出**假零** —— 实测真实为 26 处 / 3 个脚本，
+    #     而修正前读数为 0。为避免把缩进的说明文字误算成债，仍要求 `.LANG` 是行内首个非空内容且后随
+    #     en/zh-CN 语言标记；已验证本脚本自身文档中的 `.LANG` 说明文字不会被误捕。</zh-CN>
+    #   <en>Legacy help surfaces match the "line-start (indentation allowed) `\.LANG en|zh-CN`" form.
+    #     C-anp-P19 W108 fix: P33.0's strict column-0 `^\.LANG` rule missed `.LANG` keywords indented inside comment-help
+    #     blocks (commonly 4 spaces in practice), so the inventory reported a **false zero** — the real count is 26 markers
+    #     across 3 scripts versus a pre-fix reading of 0. To avoid counting indented prose as debt, `.LANG` must still be the
+    #     first non-whitespace content on the line and be followed by an en/zh-CN locale tag; verified that this script's own
+    #     documentation prose is not caught.</en>
     # </lang>
-    $legacyLangMatches = [regex]::Matches($Content, '(?m)^\.LANG\s+(?:en|zh-CN)\b')
+    $legacyLangMatches = [regex]::Matches($Content, '(?m)^\s*\.LANG\s+(?:en|zh-CN)\b')
 
     # <lang>
     #   <zh-CN>标准 block 统计 `<lang>` 开始标签；这覆盖 help 与普通注释中的当前批准表面。</zh-CN>
