@@ -1,0 +1,34 @@
+[
+  {
+    "gate": "Test-PortalReferenceDataSmoke.ps1",
+    "note": "在参考数据迁移中引入 MERGE（该门禁明确要求避免 MERGE）",
+    "patches": [
+      {
+        "file": "src/Setup/PortalBiz_ReferenceData.sql",
+        "mode": "append",
+        "content": "\n-- zz gate injection probe\nMERGE INTO [dbo].[PortalBiz_ReferenceData] AS t USING (SELECT 1 AS x) AS s ON 1=0 WHEN NOT MATCHED THEN INSERT ([ReferenceSetKey]) VALUES (N'zz');\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalProductionHardening.ps1",
+    "note": "移除 Web.config（该门禁的 CFG-WEBCONFIG 为 Fail 级，且不限于严格档位）",
+    "patches": [
+      {
+        "file": "src/Portal/Web.config",
+        "mode": "remove"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalBenchmarkChecklist.ps1",
+    "note": "在受检目录制造一篇既无对标依据、也未声明不适用的对标职责文档（R1 阻断；探针文案不得含那两个字样）",
+    "patches": [
+      {
+        "file": "work-zone/dev/plans/W-anp-P99-zz-probe.md",
+        "mode": "create",
+        "content": "# W-anp-P99 注入探针\n\n## 对标对象\n\nzz gate injection probe：本篇为空文档，没有任何依据。\n"
+      }
+    ]
+  }
+]

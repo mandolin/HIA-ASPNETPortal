@@ -1,0 +1,38 @@
+[
+  {
+    "gate": "Test-PortalReferenceDataSmoke.ps1",
+    "note": "改写参考数据目录表中唯一锚点列定义（参考数据冒烟要求该锚点存在）",
+    "patches": [
+      {
+        "file": "src/Setup/PortalBiz_ReferenceData.sql",
+        "mode": "replace",
+        "old": "[IsSystemSeed] BIT NOT NULL",
+        "content": "[ZzGateInjectionProbe] BIT NOT NULL"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalProductionHardening.ps1",
+    "note": "在严格档位（Scan）下把 Web.Release.config 的 compilation debug 改回 true（生产产物不得为 debug）",
+    "args": [ "-Profile", "Scan" ],
+    "patches": [
+      {
+        "file": "src/Portal/Web.Release.config",
+        "mode": "replace",
+        "old": "<compilation debug=\"false\" xdt:Transform=\"SetAttributes(debug)\" />",
+        "content": "<compilation debug=\"true\" xdt:Transform=\"SetAttributes(debug)\" />"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalBenchmarkChecklist.ps1",
+    "note": "在门禁实际扫描目录制造一篇只写\"对标对象\"、无来源强度的文档（R1 阻断）",
+    "patches": [
+      {
+        "file": "work-zone/dev/plans/W-anp-P99-zz-probe.md",
+        "mode": "create",
+        "content": "# W-anp-P99 注入探针\n\n## 对标对象\n\nzz gate injection probe：本篇未声明来源强度，也未声明不适用。\n"
+      }
+    ]
+  }
+]

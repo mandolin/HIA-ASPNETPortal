@@ -1,0 +1,12 @@
+[
+  {
+    "gate": "Test-PortalDocumentationReadiness.ps1",
+    "note": "移除交接必需的文档脚本（DOC-SCRIPTS 要求其存在且被 Git 追踪）",
+    "patches": [
+      {
+        "file": "dev/scripts/Get-HiaDocumentationNotifications.ps1",
+        "mode": "remove"
+      }
+    ]
+  }
+]

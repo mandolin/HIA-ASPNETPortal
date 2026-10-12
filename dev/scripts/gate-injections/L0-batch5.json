@@ -1,0 +1,109 @@
+[
+  {
+    "gate": "Test-PortalBusinessIdentity.ps1",
+    "note": "改写员工号边界查询中的列名锚点（业务身份契约要求该锚点存在）",
+    "patches": [
+      {
+        "file": "src/Portal.Components.Data1/PortalLoginIdentifierResolver.cs",
+        "mode": "replace",
+        "old": "[Employee].[EmployeeCode] = @p0",
+        "content": "[Employee].[ZzGateInjectionProbe] = @p0"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalBusinessPermissionAudit.ps1",
+    "note": "重命名授权入口方法签名（权限审计要求该签名存在）",
+    "patches": [
+      {
+        "file": "src/Portal/Components/PortalAuthorization.cs",
+        "mode": "replace",
+        "old": "public static bool HasAnyPermission(params string[] permissionKeys)",
+        "content": "public static bool ZzGateInjectionProbe(params string[] permissionKeys)"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalCollaborationWorkflowSmoke.ps1",
+    "note": "改写事件时间线迁移中的列定义锚点（协同工作流要求该锚点存在）",
+    "patches": [
+      {
+        "file": "src/Setup/PortalBiz_CollaborationItemCommentWorkflow.sql",
+        "mode": "replace",
+        "old": "[EventType] NVARCHAR(30) NOT NULL",
+        "content": "[ZzGateInjectionProbe] NVARCHAR(30) NOT NULL"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalReferenceDataSmoke.ps1",
+    "note": "改写参考数据目录表中的列名锚点（参考数据冒烟要求该锚点存在）",
+    "patches": [
+      {
+        "file": "src/Setup/PortalBiz_ReferenceData.sql",
+        "mode": "replace",
+        "old": "[ReferenceSetKey] NVARCHAR(80) NOT NULL,",
+        "content": "[ZzGateInjectionProbe] NVARCHAR(80) NOT NULL,"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalWorkItemSmoke.ps1",
+    "note": "改写待办迁移中的前置依赖断言文案（待办冒烟要求该锚点存在）",
+    "patches": [
+      {
+        "file": "src/Setup/PortalBiz_WorkItems.sql",
+        "mode": "replace",
+        "old": "Portal_Users must exist before PortalBiz_WorkItems.",
+        "content": "Zz gate injection probe."
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalProductionHardening.ps1",
+    "note": "从 Web.Release.config 移除 httpCookies 的 requireSSL=true（生产发布须启用）",
+    "patches": [
+      {
+        "file": "src/Portal/Web.Release.config",
+        "mode": "replace",
+        "old": "<httpCookies requireSSL=\"true\" xdt:Transform=\"SetAttributes(requireSSL)\" />",
+        "content": "<httpCookies xdt:Transform=\"SetAttributes(requireSSL)\" />"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalBenchmarkChecklist.ps1",
+    "note": "给一篇未声明来源强度的对标职责文档加上\"对标对象\"，使其进入受检范围却无对标依据（R1 阻断）",
+    "patches": [
+      {
+        "file": "work-zone/dev/plans/work/W-anp-P8.md",
+        "mode": "append",
+        "content": "\n## 对标对象\n\nzz gate injection probe：本篇未声明来源强度，也未声明不适用。\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNewModuleReadiness.ps1",
+    "note": "给 ExpenseReimbursement 私有 CSS 中加入标记层不存在的类选择符（R4 类名漂移）",
+    "args": [ "-ModuleName", "ExpenseReimbursement", "-ModuleCssPrefix", "expense-reimbursement", "-ExpectedPackageId", "HIA.ExpenseReimbursement" ],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/ExpenseReimbursement/Styles/ExpenseReimbursement.css",
+        "mode": "append",
+        "content": "\n.zz-gate-injection-probe-css-only { color: #333; }\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalLogMaintenance.ps1",
+    "note": "在诊断日志目录放入一个不受管文件，并以 -FailOnWarning 运行（UNMANAGED-LOGFILES 为 Warning 级）",
+    "args": [ "-FailOnWarning" ],
+    "patches": [
+      {
+        "file": "src/Portal/App_Data/Logs/zz-gate-injection-probe.txt",
+        "mode": "create",
+        "content": "zz gate injection probe: unmanaged log file\n"
+      }
+    ]
+  }
+]

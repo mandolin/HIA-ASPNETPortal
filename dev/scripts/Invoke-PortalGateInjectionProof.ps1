@@ -94,6 +94,37 @@ function Apply-Patch {
     )
 
     $fullPath = Join-Path $repositoryRoot $RelativePath
+
+    # <lang>
+    #   <zh-CN>create 模式用于"制造一个原本不存在的文件即可触发"的门禁（如日志目录中出现不受管文件）；此时没有原文可读。</zh-CN>
+    #   <en>The create mode serves gates triggered by producing a file that did not exist (for example an unmanaged file appearing in the log directory); there is no original text to read.</en>
+    # </lang>
+    if ($Mode -eq 'create') {
+        if (Test-Path -LiteralPath $fullPath) {
+            throw ("create patch target already exists: $RelativePath")
+        }
+        $parent = Split-Path -Parent $fullPath
+        if (-not (Test-Path -LiteralPath $parent)) {
+            New-Item -ItemType Directory -Force -Path $parent | Out-Null
+        }
+        $createContent = if ($null -eq $Content) { '' } else { ($Content -replace "`r`n", "`n") -replace "`n", "`r`n" }
+        [System.IO.File]::WriteAllText($fullPath, $createContent, $utf8NoBom)
+        return $null
+    }
+
+    # <lang>
+    #   <zh-CN>remove 模式用于"受检文件缺失即失败"的门禁；原文已在调用方备份，还原时按备份回写。</zh-CN>
+    #   <en>The remove mode serves gates that fail when a checked file is absent; the caller already backed up the original and restores it by writing the backup back.</en>
+    # </lang>
+    if ($Mode -eq 'remove') {
+        if (-not (Test-Path -LiteralPath $fullPath)) {
+            throw ("remove patch target not found: $RelativePath")
+        }
+        $existing = [System.IO.File]::ReadAllText($fullPath)
+        Remove-Item -LiteralPath $fullPath -Force
+        return $existing
+    }
+
     if (-not (Test-Path -LiteralPath $fullPath)) {
         throw ("patch target not found: $RelativePath")
     }
@@ -156,7 +187,13 @@ foreach ($fixture in $fixtures) {
 
     try {
         foreach ($patch in $patches) {
-            $backups[$patch.file] = [System.IO.File]::ReadAllText((Join-Path $repositoryRoot $patch.file))
+            $targetFullPath = Join-Path $repositoryRoot $patch.file
+            $backups[$patch.file] = if (Test-Path -LiteralPath $targetFullPath) {
+                [System.IO.File]::ReadAllText($targetFullPath)
+            }
+            else {
+                $null
+            }
         }
 
         if (-not $SkipBaseline) {
@@ -190,7 +227,23 @@ foreach ($fixture in $fixtures) {
     finally {
         foreach ($file in $backups.Keys) {
             $fullPath = Join-Path $repositoryRoot $file
-            if (Test-Path -LiteralPath $fullPath) {
+            if ($null -eq $backups[$file]) {
+                # <lang>
+                #   <zh-CN>备份为空说明该文件是本次 create 出来的，还原即删除，避免把探针文件留在仓库里。</zh-CN>
+                #   <en>An empty backup means the file was produced by this create patch, so restoring means deleting it and leaving no probe behind.</en>
+                # </lang>
+                if (Test-Path -LiteralPath $fullPath) {
+                    Remove-Item -LiteralPath $fullPath -Force
+                }
+            }
+            elseif ($null -ne $backups[$file]) {
+                # <lang>
+                #   <zh-CN>有原文就无条件回写，不能再以 Test-Path 为前提：remove 模式删除文件后目标已不存在，
+                #   若沿用"存在才回写"的条件，被删的文件永远不会被还原（曾因此把 Web.config 留在删除状态）。</zh-CN>
+                #   <en>Write the backup back unconditionally when it exists; existence must not be a precondition, because
+                #   a file deleted by the remove mode no longer exists and an "only if present" guard would never restore it
+                #   (this once left Web.config deleted).</en>
+                # </lang>
                 [System.IO.File]::WriteAllText($fullPath, $backups[$file], $utf8NoBom)
             }
         }
