@@ -1,0 +1,36 @@
+[
+  {
+    "gate": "Test-PortalFrontendContracts.ps1",
+    "note": "把 Default 主题 theme.json 改成非法 JSON（原生主题清单契约须可解析）",
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/Default/theme.json",
+        "mode": "append",
+        "content": "\nZZ-GATE-INJECTION-PROBE-NOT-JSON"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalOperationsReadiness.ps1",
+    "note": "从 Portal.csproj 移除 SystemHealth.aspx 的 Content 登记（运维页必须登记）",
+    "patches": [
+      {
+        "file": "src/Portal/Portal.csproj",
+        "mode": "replace",
+        "old": "  <Content Include=\"Admin\\SystemHealth.aspx\" />\r\n",
+        "content": ""
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalSqlVersionMatrix.ps1",
+    "note": "在 setup SQL 末尾追加 GO 重复计数批（GO-REPEAT 为 Fail 级）",
+    "patches": [
+      {
+        "file": "src/Setup/Portal_LoadData.sql",
+        "mode": "append",
+        "content": "\nGO 5\n"
+      }
+    ]
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "gate": "Test-PortalSqlVersionMatrix.ps1",
+    "note": "在 setup SQL 中注入 STRING_SPLIT（低于最低支持版本的构造）",
+    "patches": [
+      {
+        "file": "src/Setup/Portal_LoadData.sql",
+        "mode": "append",
+        "content": "\n-- zz gate injection probe\nSELECT value FROM STRING_SPLIT(N'zz,probe', N',');\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalProductionHardening.ps1",
+    "note": "把 Web.config 的 httpOnlyCookies 从 true 改成 false（生产硬化要求 HttpOnly）",
+    "patches": [
+      {
+        "file": "src/Portal/Web.config",
+        "mode": "replace",
+        "old": "<httpCookies requireSSL=\"false\" httpOnlyCookies=\"true\" />",
+        "content": "<httpCookies requireSSL=\"false\" httpOnlyCookies=\"false\" />"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalOperationsReadiness.ps1",
+    "note": "重命名 PortalDiagnostics 中的日志清理锚点方法（运维就绪要求该锚点存在）",
+    "patches": [
+      {
+        "file": "src/Portal/Components/PortalDiagnostics.cs",
+        "mode": "replace",
+        "old": "private static void CleanupExpiredLogs(string logDirectory, DateTime currentUtcDate)",
+        "content": "private static void ZzGateInjectionProbe(string logDirectory, DateTime currentUtcDate)"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalFrontendContracts.ps1",
+    "note": "在 Default 主题 CSS 中引入外部字体 URL（违反默认主题字体边界）",
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/Default/Default.css",
+        "mode": "append",
+        "content": "\n@import url('https://fonts.example.com/css?family=ZzGateInjectionProbe');\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalPublishReadiness.ps1",
+    "note": "在 Portal.csproj 登记一个不存在的 Content 文件（发布就绪要求声明的内容文件真实存在）",
+    "patches": [
+      {
+        "file": "src/Portal/Portal.csproj",
+        "mode": "append",
+        "content": "\n  <Content Include=\"DesktopModules\\ZzGateInjectionProbe.ascx\" />"
+      }
+    ]
+  }
+]
