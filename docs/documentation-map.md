@@ -27,6 +27,7 @@
 - `frontend-asset-guide.md` — 前端资源指南
 - `theme-package-guide.md` — 主题包指南（衔接 C-anp-P18）
 - `theme-semantic-variables.md` — 主题语义变量矩阵（7 主题 × 13 变量、用途速查、使用规则）
+- `theme-module-contract.md` — 模块外观契约（层间分工、外观类族、回退值含义与差异）
 - `documentation-artifacts-guide.md` — 文档产物指南
 - `testing-checklist.md` — 测试清单
 
