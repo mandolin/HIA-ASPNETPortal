@@ -15,7 +15,7 @@
 - 新增皮肤只需补齐变量值，不会漏；
 - 回退值保证不支持 CSS 自定义属性的旧内核仍得原色。
 
-## 二、变量矩阵（7 套主题 × 13 个变量）
+## 二、变量矩阵（7 套主题 × 14 个变量）
 
 7 套主题指 6 套正式皮肤 + `Default` 回退主题：`EnterpriseLight` / `EnterpriseDark` / `OaLight` / `OaDark` / `StateClassicLight` / `StateClassicDark` / `Default`。
 
@@ -28,6 +28,7 @@
 | `--portal-border-strong` | `#c2ccd8` | `#c2ccd8` | `#3a4d63` | `#c2ccd8` | `#3a4d63` | `#c2ccd8` | `#3a4d63` |
 | `--portal-text-strong` | `#2f475f` | `#2f475f` | `#e6edf5` | `#2f475f` | `#e6edf5` | `#2f475f` | `#e6edf5` |
 | `--portal-text-muted` | `#5b6b7d` | `#5b6b7d` | `#9fb0c3` | `#5b6b7d` | `#9fb0c3` | `#5b6b7d` | `#9fb0c3` |
+| `--portal-text-subtle` | `#41556b` | `#41556b` | `#c2cadf` | `#41556b` | `#c2cadf` | `#41556b` | `#c2cadf` |
 | `--portal-field-bg` | `#ffffff` | `#ffffff` | `#121a24` | `#ffffff` | `#121a24` | `#ffffff` | `#121a24` |
 | `--portal-field-border` | `#cdd7e2` | `#cdd7e2` | `#33425a` | `#cdd7e2` | `#33425a` | `#cdd7e2` | `#33425a` |
 | `--portal-field-text` | `#1f2d3d` | `#1f2d3d` | `#dce6f0` | `#1f2d3d` | `#dce6f0` | `#1f2d3d` | `#dce6f0` |
@@ -37,7 +38,7 @@
 
 ### 矩阵的两个规律（新增变量前先理解）
 
-1. **前 12 个变量按「浅色族 / 深色族」各一套**：4 套浅色主题（Default / EnterpriseLight / OaLight / StateClassicLight）取值完全相同，3 套深色主题（EnterpriseDark / OaDark / StateClassicDark）取值也完全相同。它们表达的是**明暗基调**，不区分主题族风格。
+1. **前 13 个变量按「浅色族 / 深色族」各一套**：4 套浅色主题（Default / EnterpriseLight / OaLight / StateClassicLight）取值完全相同，3 套深色主题（EnterpriseDark / OaDark / StateClassicDark）取值也完全相同。它们表达的是**明暗基调**，不区分主题族风格（含 C-anp-P23 新增的 `--portal-text-subtle`）。
 2. **`--portal-danger-text` 是唯一按主题族区分的变量**：因为它不表达明暗，而表达**各主题族自己的错误色**（直接取该主题既有的 `.NormalRed`）。Enterprise 族与 Oa 族的浅色错误色相同（`#b42318`）但深色不同（`#ff8b8b` / `#ff9b9b`）；StateClassic 族则两端都不同（`#9e2f2e` / `#ff9c99`）。
 
 **推论**：新增语义变量时，先判断它属于哪一类——表达明暗基调的应加入「浅/深两套」；表达主题族固有属性（如错误色、强调色）的必须**逐主题族**取值，且优先复用该主题既有类（如 `.NormalRed`）而不要新造颜色。
@@ -53,6 +54,7 @@
 | `--portal-border-strong` | 需要强调的边框（如焦点态、选中态） |
 | `--portal-text-strong` | 标题、副标题等强文本 |
 | `--portal-text-muted` | 弱化文本、说明文字、占位文案 |
+| `--portal-text-subtle` | 副标题层级，取值介于 `--portal-text-strong` 与 `--portal-text-muted` 之间，用于标题与副标题的色层次（C-anp-P23 D3 裁定新增） |
 | `--portal-field-bg` | 输入控件背景 |
 | `--portal-field-border` | 输入控件边框 |
 | `--portal-field-text` | 输入控件内文字 |
@@ -83,7 +85,7 @@ foreach ($t in $themes) {
 }
 ```
 
-**一致性期望**：7 套主题输出的变量名集合应完全相同（当前为 13 个）；若某主题缺少某个变量，即为漏定义，须补齐。
+**一致性期望**：7 套主题输出的变量名集合应完全相同（当前为 14 个）；若某主题缺少某个变量，即为漏定义，须补齐。
 
 ## 六、相关文档
 
