@@ -32,7 +32,7 @@
 
 4. **文档化贯穿开发周期。**
    - 代码说明、API/技术契约、产品功能和使用文档等适用材料，在规划时纳入交付，在设计与实现中同步维护，并于任务、阶段和里程碑收尾时核对完整性、准确性及其与实际交付的一致性；**不得留到最后集中补写**。
-   - 具体落实见「设计与开发」中的 ROP 强制基线、C# XML `<lang>` 双语注释与文档化要求；每个 Cycle 的规划阶段须显式列出文档交付面（范例见 `work-zone/dev/plans/C-anp-P17.md` §3.3）。
+   - 具体落实见「设计与开发」中的 ROP 强制基线、C# XML `<lang>` 双语注释与文档化要求；每个 Cycle 的规划阶段须显式列出文档交付面（范例见 `work-zone/dev/plans/cycles/C-anp-P17.md` §3.3）。
 
 **原则与判据的关系**：原则是"如何做事"的总体约束；里程碑文档 `M-ANP-RELEASE-READY-PORTAL.md` 的 R1–R7 判据是"做到了什么"的度量。两者并行，缺一不可。closeout 与里程碑复核须逐条声明四项原则的遵守情况，其中原则 4 要求逐条记录文档检查证据。
 
@@ -148,7 +148,7 @@
 
 ## 任务账本与反循环协议
 
-- 长任务开始、上下文恢复、阶段切换或继续推进前，必须先读取`work-zone/dev/TASK_STATE.md`、最新 `work-zone/dev/CURRENT_STATUS_YYYY-MM-DD.md`、`work-zone/dev/plans/W-anp-INDEX.md` 和相关阶段计划。
+- 长任务开始、上下文恢复、阶段切换或继续推进前，必须先读取`work-zone/dev/TASK_STATE.md`、最新 `work-zone/dev/CURRENT_STATUS_YYYY-MM-DD.md`、`work-zone/dev/plans/index.md`（计划总索引）和相关阶段计划。
 - 继续动手前同时核对主仓库与 WorkZone 的 `git status --short`，并识别哪些是既有残留、哪些是本轮相关改动。
 - `work-zone/dev/TASK_STATE.md` 记录动态状态：当前目标、完成条件、当前里程碑、已完成项及验证证据、失败尝试、唯一下一步、最后代码状态和连续无进展次数。
 - 阶段完成、进入新阶段、改变下一步唯一动作、出现失败重试或准备长时间暂停时，必须更新 `work-zone/dev/TASK_STATE.md`。
