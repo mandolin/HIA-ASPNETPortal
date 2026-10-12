@@ -76,7 +76,7 @@
     "note": "给一篇未声明来源强度的对标职责文档加上\"对标对象\"，使其进入受检范围却无对标依据（R1 阻断）",
     "patches": [
       {
-        "file": "work-zone/dev/plans/work/W-anp-P8.md",
+        "file": "work-zone/dev/plans/works/W-anp-P8.md",
         "mode": "append",
         "content": "\n## 对标对象\n\nzz gate injection probe：本篇未声明来源强度，也未声明不适用。\n"
       }
