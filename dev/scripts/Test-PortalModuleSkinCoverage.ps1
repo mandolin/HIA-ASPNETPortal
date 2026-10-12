@@ -186,17 +186,20 @@ foreach ($m in $moduleDirs) {
 }
 
 # <lang>
-#   <zh-CN>W106（C-anp-P23）升级：零覆盖（7 套皮肤均无主题规则）升为硬失败，守护 W105 补齐成果；
-#   部分覆盖（缺 1–6 套）仍为软指标上报，不阻断。</zh-CN>
-#   <en>W106 (C-anp-P23) promotion: zero-coverage (no theme rule in any of the 7 skins) becomes a hard failure, guarding
-#     the W105 fill; partial coverage (missing 1–6 skins) remains a soft reported metric, not blocking.</en>
+#   <zh-CN>W106（C-anp-P23）二段升级：在 51 零覆盖类补齐、48 部分覆盖类残留清零后（覆盖率达 100%），
+#   把"任何覆盖缺口"升为硬失败 —— 只要某模块类未在全部 7 套皮肤覆盖即 Fail，完整守护 §四.4 合规；
+#   合计缺口为 0 时通过。</zh-CN>
+#   <en>W106 (C-anp-P23) second promotion: after the 51 zero-coverage classes were filled and the 48 partial-coverage
+#     residue cleared (coverage now 100%), any coverage gap becomes a hard failure — a module class missing from any of
+#     the 7 skins fails the gate, fully guarding §四.4 compliance; passes when the total gap is 0.</en>
 # </lang>
 foreach ($c in $softCoverage) {
-    if ($c.missingInNone.Count -gt 0) {
+    if ($c.missingInAny.Count -gt 0) {
         $hardViolations += [pscustomobject]@{
-            module       = $c.module
-            css          = $c.css
-            zeroCoverage = $c.missingInNone
+            module        = $c.module
+            css           = $c.css
+            missingInAny  = $c.missingInAny
+            zeroCoverage  = $c.missingInNone
         }
     }
 }
@@ -235,18 +238,23 @@ if ($hardViolations.Count -gt 0) {
             # </lang>
             Write-Host ('  - 裸色值违规 {0}/{1}：{2}' -f $v.module, $v.css, ($v.colors -join ', '))
         }
-        if ($v.PSObject.Properties.Name -contains 'zeroCoverage') {
+        if ($v.PSObject.Properties.Name -contains 'missingInAny') {
             # <lang>
-            #   <zh-CN>存在零覆盖类（7 套皮肤均无主题规则），W105 补齐成果被回归。</zh-CN>
-            #   <en>Zero-coverage classes exist (no theme rule in any of the 7 skins); W105 fill was regressed.</en>
+            #   <zh-CN>存在未在全部 7 套皮肤覆盖的类（含零覆盖与部分覆盖），§四.4 合规被回归。</zh-CN>
+            #   <en>Classes are not covered in all 7 skins (zero or partial coverage); §四.4 compliance was regressed.</en>
             # </lang>
-            Write-Host ('  - 零覆盖违规 {0}/{1}：{2}' -f $v.module, $v.css, ($v.zeroCoverage -join ', '))
+            $tail = if ($v.PSObject.Properties.Name -contains 'zeroCoverage' -and $v.zeroCoverage.Count -gt 0) { '（其中零覆盖：' + ($v.zeroCoverage -join ', ') + '）' } else { '' }
+            Write-Host ('  - 覆盖缺口违规 {0}/{1}：{2}{3}' -f $v.module, $v.css, ($v.missingInAny -join ', '), $tail)
         }
     }
     Write-Host 'RESULT: Fail'
     exit 1
 }
 
-Write-GateNote ('覆盖缺口汇总：共 ' + $totalGap + ' 个"未在所有皮肤覆盖"的类（其中零覆盖 ' + $totalNone + ' 个），属目标 4「补齐缺的规则」遗留债，已据实上报，不阻断。')
+if ($totalGap -eq 0) {
+    Write-GateNote ('覆盖完整：全部模块语义类在 7 套正式皮肤均有主题层作用域规则（§四.4 合规达成，C-anp-P23 成果）。')
+} else {
+    Write-GateNote ('覆盖缺口汇总：共 ' + $totalGap + ' 个"未在所有皮肤覆盖"的类（其中零覆盖 ' + $totalNone + ' 个）——已升为硬失败，需补齐后放行。')
+}
 Write-Host 'RESULT: Pass'
 exit 0

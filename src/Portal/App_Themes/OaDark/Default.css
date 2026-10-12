@@ -1803,7 +1803,7 @@ body.portal-theme-oadark .business-application-body { /* <lang><zh-CN>布局类�
 }
 
 body.portal-theme-oadark .business-application-form-field {
-    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5)
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
 }
 
 body.portal-theme-oadark .business-application-form-field-full { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
@@ -1828,24 +1828,24 @@ body.portal-theme-oadark .business-application-list-wrap { /* <lang><zh-CN>布�
 }
 
 body.portal-theme-oadark .business-application-message {
-    color: var(--portal-danger-text, #8a1f1f)
+    color: var(--portal-danger-text, #8a1f1f);
 }
 
 body.portal-theme-oadark .business-application-request {
-    border: 1px solid var(--portal-border, #d8dee8)
-    background: var(--portal-surface, #fff)
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
 }
 
 body.portal-theme-oadark .business-application-subtitle {
-    color: var(--portal-text-subtle, #41556b)
-    font-size: 15px
-    font-weight: 700
+    color: var(--portal-text-subtle, #41556b);
+    font-size: 15px;
+    font-weight: 700;
 }
 
 body.portal-theme-oadark .business-application-title {
-    color: var(--portal-text-strong, #2f475f)
-    font-size: 18px
-    font-weight: 700
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
 }
 
 body.portal-theme-oadark .employee-profile-confirm-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
@@ -1942,27 +1942,27 @@ body.portal-theme-oadark .leave-request-list-wrap { /* <lang><zh-CN>布局类：
 }
 
 body.portal-theme-oadark .module-probe {
-    border: 1px solid var(--portal-border, #52718a)
-    background-color: var(--portal-surface, #f4f8fb)
-    color: var(--portal-text-strong, #1f3546)
+    border: 1px solid var(--portal-border, #52718a);
+    background-color: var(--portal-surface, #f4f8fb);
+    color: var(--portal-text-strong, #1f3546);
 }
 
 body.portal-theme-oadark .module-probe-label {
-    color: var(--portal-text-strong, #31495c)
-    font-weight: bold
+    color: var(--portal-text-strong, #31495c);
+    font-weight: bold;
 }
 
 body.portal-theme-oadark .module-probe-summary {
-    color: var(--portal-text-muted, #496274)
+    color: var(--portal-text-muted, #496274);
 }
 
 body.portal-theme-oadark .module-probe-table { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
 }
 
 body.portal-theme-oadark .module-probe-title {
-    color: var(--portal-text-strong, #1b4f72)
-    font-size: 14px
-    font-weight: bold
+    color: var(--portal-text-strong, #1b4f72);
+    font-size: 14px;
+    font-weight: bold;
 }
 
 body.portal-theme-oadark .portal-package-hia-moduleprobe { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */

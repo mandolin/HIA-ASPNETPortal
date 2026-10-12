@@ -1008,7 +1008,7 @@ body.portal-theme-default .business-application-body { /* <lang><zh-CN>布局类
 }
 
 body.portal-theme-default .business-application-form-field {
-    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5)
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
 }
 
 body.portal-theme-default .business-application-form-field-full { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
@@ -1033,24 +1033,24 @@ body.portal-theme-default .business-application-list-wrap { /* <lang><zh-CN>布�
 }
 
 body.portal-theme-default .business-application-message {
-    color: var(--portal-danger-text, #8a1f1f)
+    color: var(--portal-danger-text, #8a1f1f);
 }
 
 body.portal-theme-default .business-application-request {
-    border: 1px solid var(--portal-border, #d8dee8)
-    background: var(--portal-surface, #fff)
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
 }
 
 body.portal-theme-default .business-application-subtitle {
-    color: var(--portal-text-subtle, #41556b)
-    font-size: 15px
-    font-weight: 700
+    color: var(--portal-text-subtle, #41556b);
+    font-size: 15px;
+    font-weight: 700;
 }
 
 body.portal-theme-default .business-application-title {
-    color: var(--portal-text-strong, #2f475f)
-    font-size: 18px
-    font-weight: 700
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
 }
 
 body.portal-theme-default .employee-profile-confirm-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
@@ -1147,28 +1147,238 @@ body.portal-theme-default .leave-request-list-wrap { /* <lang><zh-CN>布局类�
 }
 
 body.portal-theme-default .module-probe {
-    border: 1px solid var(--portal-border, #52718a)
-    background-color: var(--portal-surface, #f4f8fb)
-    color: var(--portal-text-strong, #1f3546)
+    border: 1px solid var(--portal-border, #52718a);
+    background-color: var(--portal-surface, #f4f8fb);
+    color: var(--portal-text-strong, #1f3546);
 }
 
 body.portal-theme-default .module-probe-label {
-    color: var(--portal-text-strong, #31495c)
-    font-weight: bold
+    color: var(--portal-text-strong, #31495c);
+    font-weight: bold;
 }
 
 body.portal-theme-default .module-probe-summary {
-    color: var(--portal-text-muted, #496274)
+    color: var(--portal-text-muted, #496274);
 }
 
 body.portal-theme-default .module-probe-table { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
 }
 
 body.portal-theme-default .module-probe-title {
-    color: var(--portal-text-strong, #1b4f72)
-    font-size: 14px
-    font-weight: bold
+    color: var(--portal-text-strong, #1b4f72);
+    font-size: 14px;
+    font-weight: bold;
 }
 
 body.portal-theme-default .portal-package-hia-moduleprobe { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+/* <lang><zh-CN>C-anp-P23 残留补齐：仅部分皮肤覆盖类在缺失皮肤的主题层作用域规则。</zh-CN><en>C-anp-P23 residual fill: theme-layer scope rules for partially-covered classes in their missing skins.</en></lang> */
+
+
+body.portal-theme-default .employee-profile-confirm {
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
+}
+
+body.portal-theme-default .employee-profile-confirm-label {
+    color: var(--portal-text-strong, #41556b);
+    font-weight: 700;
+}
+
+body.portal-theme-default .employee-profile-confirm-message {
+    color: var(--portal-danger-text, #8a1f1f);
+}
+
+body.portal-theme-default .employee-profile-confirm-table td,body.portal-theme-default .employee-profile-correction-table td,body.portal-theme-default .employee-profile-correction-form td,body.portal-theme-default .employee-profile-correction-list td,body.portal-theme-default .employee-profile-correction-list th,body.portal-theme-default .employee-profile-field,body.portal-theme-default .employee-profile-form-field {
+    border-bottom: 1px solid #e5edf5;
+}
+
+body.portal-theme-default .employee-profile-confirm-title {
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+body.portal-theme-default .employee-profile-field {
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
+}
+
+body.portal-theme-default .employee-profile-field-grid dl,body.portal-theme-default dl.employee-profile-field-grid {
+    margin: 0;
+}
+
+body.portal-theme-default .employee-profile-field-grid dd,body.portal-theme-default dl.employee-profile-field-grid dd {
+    margin-left: 0;
+}
+
+body.portal-theme-default .employee-profile-correction {
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
+}
+
+body.portal-theme-default .employee-profile-correction-label {
+    color: var(--portal-text-strong, #41556b);
+    font-weight: 700;
+}
+
+body.portal-theme-default .employee-profile-correction-message {
+    color: var(--portal-danger-text, #8a1f1f);
+}
+
+body.portal-theme-default .employee-profile-correction-subtitle {
+    color: var(--portal-text-subtle, #41556b);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+body.portal-theme-default .employee-profile-correction-title {
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+body.portal-theme-default .employee-profile-form-field {
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
+}
+
+body.portal-theme-default .enterprise-workbench {
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
+}
+
+body.portal-theme-default .enterprise-workbench-form-field {
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
+}
+
+body.portal-theme-default .enterprise-workbench-list td,body.portal-theme-default .enterprise-workbench-list th {
+    border-bottom-color: #e1eaf3;
+}
+
+body.portal-theme-default .enterprise-workbench-message {
+    color: var(--portal-danger-text, #8a1f1f);
+}
+
+body.portal-theme-default .enterprise-workbench-subtitle {
+    color: var(--portal-text-subtle, #41556b);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+body.portal-theme-default .enterprise-workbench-title {
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+body.portal-theme-default .expense-reimbursement {
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
+}
+
+body.portal-theme-default .expense-reimbursement-empty {
+    color: var(--portal-text-muted, #6b7c8f);
+}
+
+body.portal-theme-default .expense-reimbursement-form-field {
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
+}
+
+body.portal-theme-default .expense-reimbursement-input {
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
+    color: var(--portal-text, #1f2d3d);
+}
+
+body.portal-theme-default .expense-reimbursement-label {
+    color: var(--portal-text-strong, #41556b);
+    font-weight: 700;
+}
+
+body.portal-theme-default .leave-request-form-field,body.portal-theme-default .expense-reimbursement-form-field,body.portal-theme-default .leave-request-list th,body.portal-theme-default .leave-request-list td,body.portal-theme-default .expense-reimbursement-list th,body.portal-theme-default .expense-reimbursement-list td {
+    border-bottom: 1px solid #e5edf5;
+}
+
+body.portal-theme-default .expense-reimbursement-message {
+    color: var(--portal-danger-text, #8a1f1f);
+}
+
+body.portal-theme-default .expense-reimbursement-subtitle {
+    font-weight: 700;
+    color: var(--portal-text-subtle, #41556b);
+}
+
+body.portal-theme-default .expense-reimbursement-title {
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+body.portal-theme-default .leave-request {
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
+}
+
+body.portal-theme-default .leave-request-empty {
+    color: var(--portal-text-muted, #6b7c8f);
+}
+
+body.portal-theme-default .leave-request-form-field {
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
+}
+
+body.portal-theme-default .leave-request-input {
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
+    color: var(--portal-text, #1f2d3d);
+}
+
+body.portal-theme-default .leave-request-label {
+    color: var(--portal-text-strong, #41556b);
+    font-weight: 700;
+}
+
+body.portal-theme-default .leave-request-message {
+    color: var(--portal-danger-text, #8a1f1f);
+}
+
+body.portal-theme-default .leave-request-subtitle {
+    font-weight: 700;
+    color: var(--portal-text-subtle, #41556b);
+}
+
+body.portal-theme-default .leave-request-title {
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+body.portal-theme-default .my-work-items-empty {
+    color: #31546f;
+}
+
+body.portal-theme-default .my-work-items-filter a,body.portal-theme-default .my-work-items-filter a:link,body.portal-theme-default .my-work-items-filter a:visited {
+    color: #31546f;
+}
+
+body.portal-theme-default .my-work-items-message {
+    color: #8a1f1f;
+    font-weight: 700;
+}
+
+body.portal-theme-default .my-work-items-overdue {
+    font-weight: bold;
+}
+
+body.portal-theme-default .my-work-items-table th {
+    color: #31546f;
+    border-bottom: 1px solid #e5edf5;
+}
+
+body.portal-theme-default .my-work-items-table td {
+    border-bottom: 1px solid #e5edf5;
+}
+
+body.portal-theme-default .my-work-items-unavailable {
+    font-style: italic;
 }

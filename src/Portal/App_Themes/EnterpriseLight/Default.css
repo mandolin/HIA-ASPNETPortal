@@ -1795,7 +1795,7 @@ body.portal-theme-enterpriselight .business-application-body { /* <lang><zh-CN>�
 }
 
 body.portal-theme-enterpriselight .business-application-form-field {
-    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5)
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5);
 }
 
 body.portal-theme-enterpriselight .business-application-form-field-full { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
@@ -1820,24 +1820,24 @@ body.portal-theme-enterpriselight .business-application-list-wrap { /* <lang><zh
 }
 
 body.portal-theme-enterpriselight .business-application-message {
-    color: var(--portal-danger-text, #8a1f1f)
+    color: var(--portal-danger-text, #8a1f1f);
 }
 
 body.portal-theme-enterpriselight .business-application-request {
-    border: 1px solid var(--portal-border, #d8dee8)
-    background: var(--portal-surface, #fff)
+    border: 1px solid var(--portal-border, #d8dee8);
+    background: var(--portal-surface, #fff);
 }
 
 body.portal-theme-enterpriselight .business-application-subtitle {
-    color: var(--portal-text-subtle, #41556b)
-    font-size: 15px
-    font-weight: 700
+    color: var(--portal-text-subtle, #41556b);
+    font-size: 15px;
+    font-weight: 700;
 }
 
 body.portal-theme-enterpriselight .business-application-title {
-    color: var(--portal-text-strong, #2f475f)
-    font-size: 18px
-    font-weight: 700
+    color: var(--portal-text-strong, #2f475f);
+    font-size: 18px;
+    font-weight: 700;
 }
 
 body.portal-theme-enterpriselight .employee-profile-confirm-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
@@ -1934,28 +1934,39 @@ body.portal-theme-enterpriselight .leave-request-list-wrap { /* <lang><zh-CN>布
 }
 
 body.portal-theme-enterpriselight .module-probe {
-    border: 1px solid var(--portal-border, #52718a)
-    background-color: var(--portal-surface, #f4f8fb)
-    color: var(--portal-text-strong, #1f3546)
+    border: 1px solid var(--portal-border, #52718a);
+    background-color: var(--portal-surface, #f4f8fb);
+    color: var(--portal-text-strong, #1f3546);
 }
 
 body.portal-theme-enterpriselight .module-probe-label {
-    color: var(--portal-text-strong, #31495c)
-    font-weight: bold
+    color: var(--portal-text-strong, #31495c);
+    font-weight: bold;
 }
 
 body.portal-theme-enterpriselight .module-probe-summary {
-    color: var(--portal-text-muted, #496274)
+    color: var(--portal-text-muted, #496274);
 }
 
 body.portal-theme-enterpriselight .module-probe-table { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
 }
 
 body.portal-theme-enterpriselight .module-probe-title {
-    color: var(--portal-text-strong, #1b4f72)
-    font-size: 14px
-    font-weight: bold
+    color: var(--portal-text-strong, #1b4f72);
+    font-size: 14px;
+    font-weight: bold;
 }
 
 body.portal-theme-enterpriselight .portal-package-hia-moduleprobe { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+/* <lang><zh-CN>C-anp-P23 残留补齐：仅部分皮肤覆盖类在缺失皮肤的主题层作用域规则。</zh-CN><en>C-anp-P23 residual fill: theme-layer scope rules for partially-covered classes in their missing skins.</en></lang> */
+
+
+body.portal-theme-enterpriselight .employee-profile-confirm-message {
+    color: var(--portal-danger-text, #8a1f1f);
+}
+
+body.portal-theme-enterpriselight .employee-profile-correction-message {
+    color: var(--portal-danger-text, #8a1f1f);
 }
