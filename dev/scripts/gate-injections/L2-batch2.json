@@ -1,0 +1,26 @@
+[
+  {
+    "gate": "Test-PortalSmoke.ps1",
+    "note": "把站点 web.config 改成非法 XML（HTTP 冒烟必须失败）",
+    "args": [ "-BaseUrl", "http://localhost:40001/" ],
+    "patches": [
+      {
+        "file": "src/Portal/web.config",
+        "mode": "append",
+        "content": "\n<<< NOT VALID XML >>>\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalExtensionSmoke.ps1",
+    "note": "在组件源码注入非法 C#（扩展冒烟含 Debug 构建，必须失败）",
+    "args": [ "-Configuration", "Debug" ],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalDatabaseProfile.cs",
+        "mode": "append",
+        "content": "\nthis is not valid c# and must break the build\n"
+      }
+    ]
+  }
+]

@@ -1,0 +1,73 @@
+[
+  {
+    "gate": "Build-Solution.ps1",
+    "note": "在组件源码末尾注入非法 C#（构建必须报错）",
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalDatabaseProfile.cs",
+        "mode": "append",
+        "content": "\nthis is not valid c# and must break the build\n"
+      }
+    ]
+  },
+  {
+    "gate": "Invoke-PortalTests.ps1",
+    "note": "把一个单元测试的断言改成错误期望（测试必须失败）",
+    "patches": [
+      {
+        "file": "src/Portal.Tests/PortalPasswordPolicyTests.cs",
+        "mode": "replace",
+        "old": "Assert.AreEqual(PortalPasswordRejection.None, rejection);",
+        "content": "Assert.AreEqual(PortalPasswordRejection.WeakDictionaryMatch, rejection);"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalDataProvider.ps1",
+    "note": "破坏数据 provider 隔离 proof 项目的 csproj（隔离构建必须失败）",
+    "patches": [
+      {
+        "file": "src/Portal.DataProviderProof/Portal.DataProviderProof.csproj",
+        "mode": "append",
+        "content": "\n<<< NOT VALID XML >>>\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalHiaBoundary.ps1",
+    "note": "破坏 HIA 边界隔离 proof 项目的 csproj（隔离构建必须失败）",
+    "patches": [
+      {
+        "file": "src/Portal.HiaBoundaryProof/Portal.HiaBoundaryProof.csproj",
+        "mode": "append",
+        "content": "\n<<< NOT VALID XML >>>\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalBusinessModuleSmoke.ps1",
+    "note": "把 MyWorkItems 的 module.json desktopEntry 指向不存在的控件（模块冒烟必须失败）",
+    "args": [ "-ModuleName", "HIA.MyWorkItems", "-SqlMigrationFile", "src\\Setup\\PortalBiz_WorkItems.sql" ],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/MyWorkItems/module.json",
+        "mode": "replace",
+        "old": "\"desktopEntry\": \"DesktopModules/MyWorkItems/MyWorkItems.ascx\",",
+        "content": "\"desktopEntry\": \"DesktopModules/MyWorkItems/ZzGateInjectionProbe.ascx\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalBusinessModuleSmoke.ps1",
+    "note": "把 EmployeeProfileConfirm 的 module.json desktopEntry 指向不存在的控件（模块冒烟必须失败）",
+    "args": [ "-ModuleName", "HIA.EmployeeProfileConfirm", "-SqlMigrationFile", "src\\Setup\\PortalBiz_EmployeeProfileConfirmations.sql" ],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/EmployeeProfileConfirm/module.json",
+        "mode": "replace",
+        "old": "\"desktopEntry\": \"DesktopModules/EmployeeProfileConfirm/EmployeeProfileConfirm.ascx\",",
+        "content": "\"desktopEntry\": \"DesktopModules/EmployeeProfileConfirm/ZzGateInjectionProbe.ascx\","
+      }
+    ]
+  }
+]

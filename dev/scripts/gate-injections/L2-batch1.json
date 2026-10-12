@@ -1,0 +1,59 @@
+[
+  {
+    "gate": "Invoke-PortalModuleRuntimeGate.ps1",
+    "note": "把 appSettings.dev.json 改成非法 JSON（模块运行期门禁须读取档位配置）",
+    "patches": [
+      {
+        "file": "src/Portal/Config/appSettings.dev.json",
+        "mode": "append",
+        "content": "\nZZ-GATE-INJECTION-PROBE-NOT-JSON\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalSqlCompatibility.ps1",
+    "note": "在凭据迁移脚本末尾注入非法 SQL（迁移应用必须失败）",
+    "args": [ "-ConnectionStringsConfigPath", "%USERPROFILE%\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config" ],
+    "patches": [
+      {
+        "file": "src/Setup/Portal_UserCredentials.sql",
+        "mode": "append",
+        "content": "\n-- zz gate injection probe\nTHIS IS NOT VALID SQL;\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalSmoke.ps1",
+    "note": "把站点 web.config 改成非法 XML（HTTP 冒烟必须失败）",
+    "patches": [
+      {
+        "file": "src/Portal/web.config",
+        "mode": "append",
+        "content": "\n<<< NOT VALID XML >>>\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalExtensionSmoke.ps1",
+    "note": "在组件源码注入非法 C#（扩展冒烟含 Debug/Release 构建，必须失败）",
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalDatabaseProfile.cs",
+        "mode": "append",
+        "content": "\nthis is not valid c# and must break the build\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalThemeResolution.ps1",
+    "note": "把 Default 主题 theme.json 改成非法 JSON（主题解析必须失败）",
+    "args": [ "-ConnectionStringsConfigPath", "%USERPROFILE%\\Web\\HIA-ASPNETPortal\\dev\\connectionStrings.config" ],
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/Default/theme.json",
+        "mode": "append",
+        "content": "\nZZ-GATE-INJECTION-PROBE-NOT-JSON\n"
+      }
+    ]
+  }
+]

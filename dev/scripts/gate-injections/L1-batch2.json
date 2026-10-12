@@ -1,0 +1,41 @@
+[
+  {
+    "gate": "Test-PortalBusinessModuleSmoke.ps1",
+    "note": "把 EmployeeProfileCorrectionRequest 的 desktopEntry 指向不存在的控件",
+    "args": [ "-ModuleName", "HIA.EmployeeProfileCorrectionRequest", "-SqlMigrationFile", "src\\Setup\\PortalBiz_EmployeeProfileCorrectionRequests.sql" ],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/EmployeeProfileCorrectionRequest/module.json",
+        "mode": "replace",
+        "old": "\"desktopEntry\": \"DesktopModules/EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx\",",
+        "content": "\"desktopEntry\": \"DesktopModules/EmployeeProfileCorrectionRequest/ZzGateInjectionProbe.ascx\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalBusinessModuleSmoke.ps1",
+    "note": "把 EnterpriseCapabilityWorkbench 的 desktopEntry 指向不存在的控件（该模块无迁移文件，用 -SkipSqlMigrationCheck 据实豁免）",
+    "args": [ "-ModuleName", "HIA.EnterpriseCapabilityWorkbench", "-SkipSqlMigrationCheck" ],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/module.json",
+        "mode": "replace",
+        "old": "\"desktopEntry\": \"DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx\",",
+        "content": "\"desktopEntry\": \"DesktopModules/EnterpriseCapabilityWorkbench/ZzGateInjectionProbe.ascx\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalBusinessModuleSmoke.ps1",
+    "note": "把 BusinessApplicationRequest 的 desktopEntry 指向不存在的控件",
+    "args": [ "-ModuleName", "HIA.BusinessApplicationRequest", "-SqlMigrationFile", "src\\Setup\\PortalBiz_BusinessApplications.sql" ],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/BusinessApplicationRequest/module.json",
+        "mode": "replace",
+        "old": "\"desktopEntry\": \"DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx\",",
+        "content": "\"desktopEntry\": \"DesktopModules/BusinessApplicationRequest/ZzGateInjectionProbe.ascx\","
+      }
+    ]
+  }
+]

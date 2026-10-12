@@ -1,0 +1,16 @@
+[
+  {
+    "gate": "Test-PortalPlaceholderEvidence.mjs",
+    "note": "在前台模块标记层注入硬编码英文字面量（占位/字面量泄漏证据必须失败）",
+    "env": {
+      "PORTAL_PLAYWRIGHT_MODULE": "%REPO%\\temp\\node_modules\\playwright"
+    },
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/MyWorkItems/MyWorkItems.ascx",
+        "mode": "append",
+        "content": "\n<span class=\"zz-gate-injection-probe\">HardcodedLiteralProbe</span>\n"
+      }
+    ]
+  }
+]

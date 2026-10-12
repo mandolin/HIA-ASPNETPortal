@@ -63,12 +63,42 @@ function Invoke-GateRun {
         throw ("gate script not found: $GateFile")
     }
 
-    $runner = if ($GateFile -like '*.mjs') { 'node' } else { 'pwsh' }
-    $argumentList = if ($runner -eq 'node') {
-        @($gatePath) + @($GateArgs)
+    # <lang>
+    #   <zh-CN>node 不一定在 PATH 中（编排脚本本身也是硬编码全路径）。按"先 PATH、后常见安装目录"解析，
+    #   与 Invoke-PortalGateSuite.ps1 的做法保持一致，避免脚手架因找不到 node 而把所有 mjs 门禁误判为失败。</zh-CN>
+    #   <en>Node is not necessarily on PATH (the orchestration script itself hard-codes a full path). Resolve it as
+    #   "PATH first, then common install directories", matching Invoke-PortalGateSuite.ps1, so the harness never
+    #   misreports every mjs gate as failed merely because node could not be found.</en>
+    # </lang>
+    $nodeExe = 'node'
+    if ($GateFile -like '*.mjs') {
+        $nodeOnPath = Get-Command 'node' -ErrorAction SilentlyContinue
+        if ($nodeOnPath) {
+            $nodeExe = $nodeOnPath.Source
+        }
+        else {
+            foreach ($candidate in @("$env:ProgramFiles\nodejs\node.exe", "${env:ProgramFiles(x86)}\nodejs\node.exe")) {
+                if (Test-Path -LiteralPath $candidate) { $nodeExe = $candidate; break }
+            }
+        }
+    }
+
+    $runner = if ($GateFile -like '*.mjs') { $nodeExe } else { 'pwsh' }
+
+    # <lang>
+    #   <zh-CN>夹具参数支持 %ENV% 占位（如 %USERPROFILE%），由脚手架展开，避免把本机绝对路径写进版本库。</zh-CN>
+    #   <en>Fixture arguments support %ENV% placeholders (for example %USERPROFILE%), expanded by the harness so machine-specific absolute paths never enter the repository.</en>
+    # </lang>
+    $expandedArgs = @()
+    foreach ($argument in @($GateArgs)) {
+        $expandedArgs += [System.Environment]::ExpandEnvironmentVariables([string]$argument)
+    }
+
+    $argumentList = if ($GateFile -like '*.mjs') {
+        @($gatePath) + $expandedArgs
     }
     else {
-        @('-NoProfile', '-NoLogo', '-File', $gatePath) + @($GateArgs)
+        @('-NoProfile', '-NoLogo', '-File', $gatePath) + $expandedArgs
     }
 
     $output = & $runner @argumentList 2>&1
@@ -185,6 +215,31 @@ foreach ($fixture in $fixtures) {
     $verdict = 'proved'
     $detail = ''
 
+    # <lang>
+    #   <zh-CN>运行期门禁（mjs 语义/证据类）要求特定环境变量（如 PORTAL_PLAYWRIGHT_MODULE、PORTAL_P82_PHASE）。
+    #   由夹具声明，证明结束后按原值还原，避免把调用方环境永久改掉。</zh-CN>
+    #   <en>Runtime gates (the mjs semantic/evidence family) require specific environment variables such as
+    #   PORTAL_PLAYWRIGHT_MODULE and PORTAL_P82_PHASE. Fixtures declare them, and the harness restores the
+    #   original values afterwards so the caller's environment is never permanently changed.</en>
+    # </lang>
+    $fixtureEnv = if ($fixture.PSObject.Properties.Name -contains 'env') { $fixture.env } else { $null }
+    $savedEnv = @{}
+    if ($fixtureEnv) {
+        foreach ($property in $fixtureEnv.PSObject.Properties) {
+            $savedEnv[$property.Name] = [System.Environment]::GetEnvironmentVariable($property.Name)
+            $expandedValue = [System.Environment]::ExpandEnvironmentVariables([string]$property.Value)
+            # <lang>
+            #   <zh-CN>额外支持 %REPO% 占位符展开为仓库根，使夹具可以引用仓库内但不入库的开发期依赖
+            #   （如 temp\node_modules\playwright），而不必把本机绝对路径写进版本库。</zh-CN>
+            #   <en>Also support a %REPO% placeholder that expands to the repository root, so a fixture can reference
+            #   in-repo but uncommitted development dependencies (such as temp\node_modules\playwright) without
+            #   hard-coding a machine-specific absolute path in the repository.</en>
+            # </lang>
+            $expandedValue = $expandedValue -replace '%REPO%', $repositoryRoot
+            [System.Environment]::SetEnvironmentVariable($property.Name, $expandedValue)
+        }
+    }
+
     try {
         foreach ($patch in $patches) {
             $targetFullPath = Join-Path $repositoryRoot $patch.file
@@ -225,6 +280,10 @@ foreach ($fixture in $fixtures) {
         if ($verdict -eq 'proved') { $verdict = 'harness-error' }
     }
     finally {
+        foreach ($name in $savedEnv.Keys) {
+            [System.Environment]::SetEnvironmentVariable($name, $savedEnv[$name])
+        }
+
         foreach ($file in $backups.Keys) {
             $fullPath = Join-Path $repositoryRoot $file
             if ($null -eq $backups[$file]) {
