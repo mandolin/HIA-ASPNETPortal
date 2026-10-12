@@ -1,0 +1,61 @@
+[
+  {
+    "gate": "Test-PortalXmlDocumentation.ps1",
+    "note": "把构建产物 XML 的 assembly 名称改成不匹配值（该门禁实际只验存在/可解析/程序集名/成员数，不校验逐成员文档）",
+    "patches": [
+      {
+        "file": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+        "mode": "replace",
+        "old": "<name>Portal.Components</name>",
+        "content": "<name>ZzGateInjectionProbe</name>"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAscxCompilationContract.ps1",
+    "note": "把 module.json 的 desktopEntry 指向不存在的文件（C4 违规）",
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/BusinessApplicationRequest/module.json",
+        "mode": "replace",
+        "old": "\"desktopEntry\": \"DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx\",",
+        "content": "\"desktopEntry\": \"DesktopModules/BusinessApplicationRequest/ZzGateInjectionProbe.ascx\","
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalVersionConsistency.ps1",
+    "note": "改掉 CHANGELOG 首个正式版本条目，使其与 git tag / 程序集版本脱钩",
+    "patches": [
+      {
+        "file": "CHANGELOG.md",
+        "mode": "replace",
+        "old": "## [v1.0.0] - 2026-10-09",
+        "content": "## [v9.9.9] - 2026-10-12"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNewModuleReadiness.ps1",
+    "note": "在 LeaveRequest 私有 CSS 中加入标记层不存在的类选择符（R4 类名漂移）",
+    "args": [ "-ModuleName", "LeaveRequest", "-ModuleCssPrefix", "leave-request", "-ExpectedPackageId", "HIA.LeaveRequest" ],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/LeaveRequest/Styles/LeaveRequest.css",
+        "mode": "append",
+        "content": "\n.zz-gate-injection-probe-css-only { color: #333; }\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalDefaultCredentialRisk.ps1",
+    "note": "在 setup SQL 中注入凭据表明文口令 INSERT（默认凭据/旧哈希风险）",
+    "patches": [
+      {
+        "file": "src/Setup/Portal_LoadData.sql",
+        "mode": "append",
+        "content": "\n-- zz gate injection probe\nINSERT INTO [dbo].[Portal_UserCredentials] ([UserId], [Password], [PasswordSalt]) VALUES (1, N'ZzGateInjectionProbe', N'ZzGateInjectionProbeSalt');\n"
+      }
+    ]
+  }
+]

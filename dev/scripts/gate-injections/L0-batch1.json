@@ -1,0 +1,117 @@
+[
+  {
+    "gate": "Test-PortalXmlDocumentation.ps1",
+    "note": "给公开枚举加一个无 XML 文档的成员（需重建以刷新 bin 下 XML）",
+    "args": [ "-Build" ],
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalRegistrationInviteRejection.cs",
+        "mode": "replace",
+        "old": "        InviteUsageLimitReached,\n    }\n}",
+        "content": "        InviteUsageLimitReached,\n\n        ZzGateInjectionProbe,\n    }\n}"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalResourceContract.ps1",
+    "note": "只在 lang.resx 增加一个键，另两份 resx 与 designer 不同步（违反四方一致）",
+    "patches": [
+      {
+        "file": "src/Portal/App_GlobalResources/lang.resx",
+        "mode": "replace",
+        "old": "</root>",
+        "content": "  <data name=\"ZzGateInjectionProbe\" xml:space=\"preserve\">\n    <value>probe</value>\n  </data>\n</root>"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalVersionConsistency.ps1",
+    "note": "在 CHANGELOG 顶部伪造一个更新的版本段，与程序集/tag 版本脱钩",
+    "patches": [
+      {
+        "file": "CHANGELOG.md",
+        "mode": "append",
+        "content": "\n## [9.9.9] - 2026-10-12\n\n### 注入夹具\n\n- zz gate injection probe：本段不存在于程序集版本与 tag。\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalLegacyCssCompatibility.ps1",
+    "note": "在已追踪 CSS 中注入 var() 用法（非 --portal- 语义变量）",
+    "patches": [
+      {
+        "file": "src/Portal/App_Themes/Default/Default.css",
+        "mode": "append",
+        "content": "\n.zz-gate-injection-probe { color: var(--zz-probe); }\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalAscxCompilationContract.ps1",
+    "note": "在已追踪 ASCX 中注入未闭合的服务器标签",
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/Signin.ascx",
+        "mode": "append",
+        "content": "\n<asp:PlaceHolder runat=\"server\">\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalNewModuleReadiness.ps1",
+    "note": "给 LeaveRequest 标记层加一个 CSS 中不存在的类（违反标记-CSS 类名一致性）",
+    "args": [ "-ModuleName", "LeaveRequest", "-ModuleCssPrefix", "leave-request", "-ExpectedPackageId", "HIA.LeaveRequest" ],
+    "patches": [
+      {
+        "file": "src/Portal/DesktopModules/LeaveRequest/LeaveRequest.ascx",
+        "mode": "append",
+        "content": "\n<div class=\"zz-gate-injection-probe-not-in-css\"></div>\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalPublicDocumentation.ps1",
+    "note": "从 docs/README.md 删除一条索引登记（公开文档索引覆盖缺失）",
+    "patches": [
+      {
+        "file": "docs/README.md",
+        "mode": "replace",
+        "old": "- `documentation-registry.md`：7 个文档族的适用性登记（适用对象、维护责任、更新触发条件）与已登记缺口。\n",
+        "content": ""
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalSecretLeakage.ps1",
+    "note": "在已追踪源码中注入私钥块头（高置信度泄露形态）",
+    "patches": [
+      {
+        "file": "src/Portal.Components/PortalDatabaseProfile.cs",
+        "mode": "append",
+        "content": "\n// zz gate injection probe: -----BEGIN RSA PRIVATE KEY-----\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalDefaultCredentialRisk.ps1",
+    "note": "在已追踪源码中注入旧版 PortalSecurity.Encrypt( 调用形态",
+    "patches": [
+      {
+        "file": "src/Portal.Components.Data1/UsersDb.cs",
+        "mode": "append",
+        "content": "\n// zz gate injection probe: PortalSecurity.Encrypt(\n"
+      }
+    ]
+  },
+  {
+    "gate": "Test-PortalComplianceBaseline.ps1",
+    "note": "在 Web.config 注入与合规基线冲突的 X-Frame-Options 值",
+    "patches": [
+      {
+        "file": "src/Portal/Web.config",
+        "mode": "append",
+        "content": "\n<!-- zz gate injection probe --><add name=\"X-Frame-Options\" value=\"ALLOWALL\" />\n"
+      }
+    ]
+  }
+]
