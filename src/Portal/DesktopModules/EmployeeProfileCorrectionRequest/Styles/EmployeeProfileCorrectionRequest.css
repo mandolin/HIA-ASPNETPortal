@@ -23,11 +23,11 @@
 }
 
 /* <lang>
- *   <zh-CN>副标题分隔当前资料、申请填写和历史列表等区域，颜色同样使用主题语义变量（--portal-text-strong）。</zh-CN>
+ *   <zh-CN>副标题分隔当前资料、申请填写和历史列表等区域，使用主题语义变量（--portal-text-subtle，副标题弱化层级，介于 strong 与 muted 之间）。</zh-CN>
  *   <en>Subtitles separate current profile, request entry, and history-list areas and also use the themed semantic variable (--portal-text-strong).</en>
  * </lang> */
 .employee-profile-correction-subtitle {
-    color: var(--portal-text-strong, #41556b);
+    color: var(--portal-text-subtle, #41556b);
     font-size: 15px;
     font-weight: 700;
     margin: 14px 0 8px;

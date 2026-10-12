@@ -186,10 +186,26 @@ foreach ($m in $moduleDirs) {
 }
 
 # <lang>
+#   <zh-CN>W106（C-anp-P23）升级：零覆盖（7 套皮肤均无主题规则）升为硬失败，守护 W105 补齐成果；
+#   部分覆盖（缺 1–6 套）仍为软指标上报，不阻断。</zh-CN>
+#   <en>W106 (C-anp-P23) promotion: zero-coverage (no theme rule in any of the 7 skins) becomes a hard failure, guarding
+#     the W105 fill; partial coverage (missing 1–6 skins) remains a soft reported metric, not blocking.</en>
+# </lang>
+foreach ($c in $softCoverage) {
+    if ($c.missingInNone.Count -gt 0) {
+        $hardViolations += [pscustomobject]@{
+            module       = $c.module
+            css          = $c.css
+            zeroCoverage = $c.missingInNone
+        }
+    }
+}
+
+# <lang>
 #   <zh-CN>输出：先打软指标（覆盖缺口）到 `[GATE-NOTE]`，再据硬违规给最终结论。</zh-CN>
 #   <en>Output: emit the soft coverage gaps as `[GATE-NOTE]` first, then the final verdict based on hard violations.</en>
 # </lang>
-Write-Host ('== 模块语义类皮肤覆盖门禁（W100 / C-anp-P18）==')
+Write-Host ('== 模块语义类皮肤覆盖门禁（W100 / C-anp-P18，W106 已升级零覆盖为硬失败）==')
 Write-Host ('正式皮肤数：' + $themeDirs.Count + '（排除 ' + ($excludeThemes -join ', ') + '）')
 Write-Host ('模块数：' + $moduleDirs.Count)
 
@@ -210,9 +226,22 @@ foreach ($c in $softCoverage) {
 }
 
 if ($hardViolations.Count -gt 0) {
-    Write-Host ('硬违规：模块 CSS 出现 var() 之外的裸色值，深色皮肤下必然形成浅块。')
+    Write-Host ('硬违规（门禁失败）：')
     foreach ($v in $hardViolations) {
-        Write-Host ('  - {0}/{1}：{2}' -f $v.module, $v.css, ($v.colors -join ', '))
+        if ($v.PSObject.Properties.Name -contains 'colors') {
+            # <lang>
+            #   <zh-CN>模块 CSS 在 var() 之外出现裸色值，深色皮肤下必然形成浅块。</zh-CN>
+            #   <en>Module CSS has raw color literal outside `var()`, which would break dark skins.</en>
+            # </lang>
+            Write-Host ('  - 裸色值违规 {0}/{1}：{2}' -f $v.module, $v.css, ($v.colors -join ', '))
+        }
+        if ($v.PSObject.Properties.Name -contains 'zeroCoverage') {
+            # <lang>
+            #   <zh-CN>存在零覆盖类（7 套皮肤均无主题规则），W105 补齐成果被回归。</zh-CN>
+            #   <en>Zero-coverage classes exist (no theme rule in any of the 7 skins); W105 fill was regressed.</en>
+            # </lang>
+            Write-Host ('  - 零覆盖违规 {0}/{1}：{2}' -f $v.module, $v.css, ($v.zeroCoverage -join ', '))
+        }
     }
     Write-Host 'RESULT: Fail'
     exit 1

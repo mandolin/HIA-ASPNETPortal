@@ -115,13 +115,13 @@
 }
 
 /* <lang>
- *   <zh-CN>列表小标题区分“表单”与“我的请假”两个区块。</zh-CN>
+ *   <zh-CN>列表小标题区分“表单”与“我的请假”两个区块；颜色使用主题语义变量（--portal-text-subtle，副标题弱化层级，介于 strong 与 muted 之间）。</zh-CN>
  *   <en>The list subtitle separates the "form" and "My Leave" blocks.</en>
  * </lang> */
 .leave-request-subtitle {
     margin-top: 16px;
     font-weight: 700;
-    color: var(--portal-text-strong, #2f475f);
+    color: var(--portal-text-subtle, #41556b);
 }
 
 /* <lang>

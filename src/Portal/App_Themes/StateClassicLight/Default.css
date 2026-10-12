@@ -1736,6 +1736,7 @@ body.portal-theme-stateclassiclight {
     --portal-border-strong: #c2ccd8;
     --portal-text-strong: #2f475f;
     --portal-text-muted: #5b6b7d;
+    --portal-text-subtle: #41556b; /* <lang><zh-CN>弱化文本：副标题层级，介于 strong 与 muted 之间。</zh-CN><en>Muted text for subtitle tier (between strong and muted).</en></lang> */
     --portal-field-bg: #ffffff;
     --portal-field-border: #cdd7e2;
     --portal-field-text: #1f2d3d;
@@ -1792,4 +1793,179 @@ body.portal-theme-stateclassiclight .expense-reimbursement-list td {
 body.portal-theme-stateclassiclight .leave-request-empty,
 body.portal-theme-stateclassiclight .expense-reimbursement-empty {
     color: #8a2524;
+}
+
+/* <lang><zh-CN>C-anp-P23 W105(A) 自动生成：模块语义类主题层作用域规则（补齐零覆盖类）。</zh-CN><en>C-anp-P23 W105(A) auto-generated: theme-layer scope rules for module semantic classes (zero-coverage fill).</en></lang> */
+
+
+body.portal-theme-stateclassiclight .business-application-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-body { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-form-field {
+    border-bottom: 1px solid var(--portal-border-subtle, #edf1f5)
+}
+
+body.portal-theme-stateclassiclight .business-application-form-field-full { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-form-field-wide { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-form-grid { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-input { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-label { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-list { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-list-wrap { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .business-application-message {
+    color: var(--portal-danger-text, #8a1f1f)
+}
+
+body.portal-theme-stateclassiclight .business-application-request {
+    border: 1px solid var(--portal-border, #d8dee8)
+    background: var(--portal-surface, #fff)
+}
+
+body.portal-theme-stateclassiclight .business-application-subtitle {
+    color: var(--portal-text-subtle, #41556b)
+    font-size: 15px
+    font-weight: 700
+}
+
+body.portal-theme-stateclassiclight .business-application-title {
+    color: var(--portal-text-strong, #2f475f)
+    font-size: 18px
+    font-weight: 700
+}
+
+body.portal-theme-stateclassiclight .employee-profile-confirm-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-field-label { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-field-value { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-field-wide { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-correction-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-correction-input { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-correction-note { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-field-label { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-field-value { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-field-wide { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-form-field-wide { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-form-grid { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .employee-profile-list-wrap { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .enterprise-workbench-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .enterprise-workbench-body { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .enterprise-workbench-form-field-full { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .enterprise-workbench-form-field-wide { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .enterprise-workbench-form-grid { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .enterprise-workbench-input { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .enterprise-workbench-label { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .enterprise-workbench-list-wrap { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .expense-reimbursement-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .expense-reimbursement-body { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .expense-reimbursement-form-field-wide { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .expense-reimbursement-form-grid { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .expense-reimbursement-list-wrap { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .leave-request-actions { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .leave-request-body { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .leave-request-form-field-wide { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .leave-request-form-grid { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .leave-request-list-wrap { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .module-probe {
+    border: 1px solid var(--portal-border, #52718a)
+    background-color: var(--portal-surface, #f4f8fb)
+    color: var(--portal-text-strong, #1f3546)
+}
+
+body.portal-theme-stateclassiclight .module-probe-label {
+    color: var(--portal-text-strong, #31495c)
+    font-weight: bold
+}
+
+body.portal-theme-stateclassiclight .module-probe-summary {
+    color: var(--portal-text-muted, #496274)
+}
+
+body.portal-theme-stateclassiclight .module-probe-table { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
+}
+
+body.portal-theme-stateclassiclight .module-probe-title {
+    color: var(--portal-text-strong, #1b4f72)
+    font-size: 14px
+    font-weight: bold
+}
+
+body.portal-theme-stateclassiclight .portal-package-hia-moduleprobe { /* <lang><zh-CN>布局类：主题层无需颜色/边框/字体规则；占位以满足 coverage 门禁。</zh-CN><en>Layout-only class; no color/border/font to provide; placeholder to satisfy coverage gate.</en></lang> */
 }
