@@ -9,6 +9,7 @@
 - `versioning.md`：版本号规则、版本与里程碑的关系、程序集版本联动、发布流程与宣传口径约束。
 - `frontend-asset-guide.md`：Web Forms 呈现、主题、模块 CSS、Gulp 与前端资产边界。
 - `theme-package-guide.md`：受信任主题包的目录、启用、回退和发布边界。
+- `theme-semantic-variables.md`：主题层 `--portal-*` 语义变量的矩阵（7 套主题 × 13 个变量）、用途速查、使用规则与复现命令。
 - `module-development-guide.md`：受信任部署模块包的开发、注册、启停和移除边界。
 - `user-guide.md`：运行和使用入口说明。
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。

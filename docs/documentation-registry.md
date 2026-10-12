@@ -20,7 +20,7 @@
 1. **代码内文档**：v1.0.0 重盘 474 文件扫描、35 有发现（29 高风险脚本候选 + 5 待办/延期标记 + 2 缺节点文档）。由 `C-anp-P19` 接续 `W-anp-P32`–`W-anp-P37` 收口。
 2. **API 与技术契约（边界判定）**：本项目为 **Web Forms 门户（.NET FW4.8）**，**无对外 REST/GraphQL API** → "公开 REST/GraphQL API 参考"标记**不适用**（理由：架构无此类对外面）。但存在**模块契约 / 配置契约 / 接口契约**（模块 Profile、`appSettings` 契约、企业能力对象契约）→ 适用，建议建 `docs/contracts/` 收纳机器可读契约 + 人类可读说明。
 3. **产品功能与使用**：`user-guide.md` 已存在但偏总览。缺口 = 逐功能 how-to / 教程 / FAQ / 故障排除 + 产品介绍与定位专页（README 兼任，建议 `docs/products/intro`）。**`C-anp-P20` 新模块已在此族登记**：`user-guide.md` 新增「业务模块：请假申请与费用报销」节（启用前提、字段与校验、待办生成、常见问题）；逐功能 how-to / 产品介绍专页仍为未闭合缺口。
-4. **开发者与贡献者**：`dev-guide` / `module-development-guide` / `frontend-asset-guide` / `theme-package-guide` 已较全。
+4. **开发者与贡献者**：`dev-guide` / `module-development-guide` / `frontend-asset-guide` / `theme-package-guide` / `theme-semantic-variables` 已较全。其中 `theme-semantic-variables.md` 为 `C-anp-P18` / `W-anp-P97` 产出，登记主题层 `--portal-*` 语义变量矩阵（7 套主题 × 13 个变量）；其权威来源是 CSS 本身与 `W-anp-P100` 门禁，文档为提取快照，过期时以门禁为准。
 5. **运维部署安全**：`deployment-checklist` / `deployment-default-credentials` / `deployment-rollback-guide` / `operations-runbook` / `audit-retention-policy` / `font-policy-and-audit` / `third-party-dependencies` 已较全。
 6. **架构设计决策**：`architecture.md` + 两个状态机文档 + WorkZone ADR / milestones。
 7. **变更兼容发布**：`versioning.md` + `CHANGELOG` + `release-notes-template.md`。
