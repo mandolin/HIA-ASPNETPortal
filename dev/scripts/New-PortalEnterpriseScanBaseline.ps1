@@ -9,22 +9,16 @@
     </lang>
 
 .PARAMETER EvidencePackageTitle
-    .LANG en
-    Optional title written into the generated README. Leave the default value for the original
-    P14.3 package, or pass the current phase name when the same read-only baseline script is reused.
-
-    .LANG zh-CN
-    写入生成 README 的可选标题。原 P14.3 证据包可保持默认值；后续阶段复用本只读
-    baseline 脚本时，可传入当前阶段名称，避免证据目录与标题互相误导。
+    <lang>
+      <en>Optional title written into the generated README. Leave the default value for the original P14.3 package, or pass the current phase name when the same read-only baseline script is reused.</en>
+      <zh-CN>写入生成 README 的可选标题。原 P14.3 证据包可保持默认值；后续阶段复用本只读 baseline 脚本时，可传入当前阶段名称，避免证据目录与标题互相误导。</zh-CN>
+    </lang>
 
 .PARAMETER BaselineScopeCode
-    .LANG en
-    Finding code used for the generated package scope record. Keep the default for P14.3, or pass
-    a later phase code when the same read-only scan baseline is reused.
-
-    .LANG zh-CN
-    生成证据包范围说明记录时使用的 finding code。P14.3 可保持默认值；后续阶段复用本
-    只读扫描 baseline 时，可传入新的阶段 code，避免结果里混入过期阶段编号。
+    <lang>
+      <en>Finding code used for the generated package scope record. Keep the default for P14.3, or pass a later phase code when the same read-only scan baseline is reused.</en>
+      <zh-CN>生成证据包范围说明记录时使用的 finding code。P14.3 可保持默认值；后续阶段复用本只读扫描 baseline 时，可传入新的阶段 code，避免结果里混入过期阶段编号。</zh-CN>
+    </lang>
 #>
 [CmdletBinding()]
 param(

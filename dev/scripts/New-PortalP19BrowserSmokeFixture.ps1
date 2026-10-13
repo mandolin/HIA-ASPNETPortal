@@ -82,11 +82,10 @@ $credentialHashLength = 32
 function Assert-PortalP19TestConfigPath {
     <#
     .SYNOPSIS
-    .LANG en
-    Resolves and constrains the external configuration path to the test directory convention.
-
-    .LANG zh-CN
-    解析外置配置路径，并将其限制为 test 目录约定。
+    <lang>
+      <en>Resolves and constrains the external configuration path to the test directory convention.</en>
+      <zh-CN>解析外置配置路径，并将其限制为 test 目录约定。</zh-CN>
+    </lang>
     #>
     param(
         [Parameter(Mandatory = $true)]
@@ -125,11 +124,10 @@ function Assert-PortalP19TestConfigPath {
 function Get-ExternalPortalConnectionString {
     <#
     .SYNOPSIS
-    .LANG en
-    Loads one named SQL Server connection string without writing it to output.
-
-    .LANG zh-CN
-    读取一个具名 SQL Server 连接串，但不将其写入输出。
+    <lang>
+      <en>Loads one named SQL Server connection string without writing it to output.</en>
+      <zh-CN>读取一个具名 SQL Server 连接串，但不将其写入输出。</zh-CN>
+    </lang>
     #>
     param(
         [Parameter(Mandatory = $true)]
@@ -186,11 +184,10 @@ function Get-ExternalPortalConnectionString {
 function New-PortalP19PasswordMaterial {
     <#
     .SYNOPSIS
-    .LANG en
-    Derives the current Portal PBKDF2 credential material from a SecureString.
-
-    .LANG zh-CN
-    从 SecureString 派生当前 Portal PBKDF2 凭据材料。
+    <lang>
+      <en>Derives the current Portal PBKDF2 credential material from a SecureString.</en>
+      <zh-CN>从 SecureString 派生当前 Portal PBKDF2 凭据材料。</zh-CN>
+    </lang>
     #>
     param(
         [Parameter(Mandatory = $true)]
@@ -286,11 +283,10 @@ function New-PortalP19PasswordMaterial {
 function Add-PortalP19SqlParameter {
     <#
     .SYNOPSIS
-    .LANG en
-    Adds one explicitly typed SQL parameter without string interpolation.
-
-    .LANG zh-CN
-    添加一个显式类型的 SQL 参数，不进行字符串插值。
+    <lang>
+      <en>Adds one explicitly typed SQL parameter without string interpolation.</en>
+      <zh-CN>添加一个显式类型的 SQL 参数，不进行字符串插值。</zh-CN>
+    </lang>
     #>
     param(
         [Parameter(Mandatory = $true)]
@@ -326,11 +322,10 @@ function Add-PortalP19SqlParameter {
 function Add-PortalP19BinaryParameter {
     <#
     .SYNOPSIS
-    .LANG en
-    Adds one explicitly typed binary SQL parameter while preserving the byte-array boundary.
-
-    .LANG zh-CN
-    添加一个显式类型的二进制 SQL 参数，并保持字节数组边界。
+    <lang>
+      <en>Adds one explicitly typed binary SQL parameter while preserving the byte-array boundary.</en>
+      <zh-CN>添加一个显式类型的二进制 SQL 参数，并保持字节数组边界。</zh-CN>
+    </lang>
     #>
     param(
         [Parameter(Mandatory = $true)]
@@ -359,11 +354,10 @@ function Add-PortalP19BinaryParameter {
 function Invoke-PortalP19FixtureRowCommand {
     <#
     .SYNOPSIS
-    .LANG en
-    Executes one fixture command and returns the single non-sensitive result row.
-
-    .LANG zh-CN
-    执行一个 fixture 命令并返回唯一的非敏感结果行。
+    <lang>
+      <en>Executes one fixture command and returns the single non-sensitive result row.</en>
+      <zh-CN>执行一个 fixture 命令并返回唯一的非敏感结果行。</zh-CN>
+    </lang>
     #>
     param(
         [Parameter(Mandatory = $true)]

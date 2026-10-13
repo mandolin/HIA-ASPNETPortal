@@ -52,18 +52,16 @@ $ErrorActionPreference = 'Stop'
 function Find-PortalVsTestConsole {
     <#
     .SYNOPSIS
-    .LANG en
-    Finds `vstest.console.exe` from the current environment or installed Visual Studio instances.
-
-    .LANG zh-CN
-    从当前环境或已安装 Visual Studio 实例中查找 `vstest.console.exe`。
+    <lang>
+      <en>Finds `vstest.console.exe` from the current environment or installed Visual Studio instances.</en>
+      <zh-CN>从当前环境或已安装 Visual Studio 实例中查找 `vstest.console.exe`。</zh-CN>
+    </lang>
 
     .OUTPUTS
-    .LANG en
-    Absolute path to `vstest.console.exe`.
-
-    .LANG zh-CN
-    `vstest.console.exe` 的绝对路径。
+    <lang>
+      <en>Absolute path to `vstest.console.exe`.</en>
+      <zh-CN>`vstest.console.exe` 的绝对路径。</zh-CN>
+    </lang>
     #>
     [CmdletBinding()]
     param()
@@ -128,25 +126,22 @@ function Find-PortalVsTestConsole {
 function New-PortalMSTestAdapterDirectory {
     <#
     .SYNOPSIS
-    .LANG en
-    Creates a temporary MSTest adapter directory with runtime dependencies for VSTest.
-
-    .LANG zh-CN
-    为 VSTest 创建包含运行时依赖的临时 MSTest adapter 目录。
+    <lang>
+      <en>Creates a temporary MSTest adapter directory with runtime dependencies for VSTest.</en>
+      <zh-CN>为 VSTest 创建包含运行时依赖的临时 MSTest adapter 目录。</zh-CN>
+    </lang>
 
     .PARAMETER RepositoryRoot
-    .LANG en
-    Absolute repository root used to resolve restored package paths.
-
-    .LANG zh-CN
-    用于解析已还原包路径的仓库根目录绝对路径。
+    <lang>
+      <en>Absolute repository root used to resolve restored package paths.</en>
+      <zh-CN>用于解析已还原包路径的仓库根目录绝对路径。</zh-CN>
+    </lang>
 
     .OUTPUTS
-    .LANG en
-    Absolute path to the temporary adapter directory.
-
-    .LANG zh-CN
-    临时 adapter 目录的绝对路径。
+    <lang>
+      <en>Absolute path to the temporary adapter directory.</en>
+      <zh-CN>临时 adapter 目录的绝对路径。</zh-CN>
+    </lang>
     #>
     [CmdletBinding()]
     param(
