@@ -178,6 +178,10 @@ namespace ASPNET.StarterKit.Portal
                 return false;
             }
 
+            // <lang>
+            //   <zh-CN>空集合直接拒绝：任一权限检查不接受"没有键"作为通过条件，也不因调用方漏传而回退到管理员或宽松判定。</zh-CN>
+            //   <en>An empty set is denied directly: an any-permission check never treats "no keys" as a pass, and a caller omission never falls back to an administrator or permissive verdict.</en>
+            // </lang>
             if (normalizedKeys.Length == 0)
             {
                 PortalDiagnostics.Warn(

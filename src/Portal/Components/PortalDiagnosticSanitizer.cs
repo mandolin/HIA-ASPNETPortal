@@ -81,8 +81,9 @@ namespace ASPNET.StarterKit.Portal
             try
             {
                 // <lang>
-                //   <zh-CN>先遮蔽连接串和数据源，再覆盖可能携带多个字段的认证/Cookie 整行，最后处理紧凑赋值；顺序保留既有净化覆盖面。</zh-CN>
-                //   <en>Redact connection strings and data sources first, then full authorization/Cookie lines that may carry multiple fields, and finally compact assignments; the order preserves established sanitization coverage.</en>
+                //   <zh-CN>`sanitized` 是逐级遮蔽的累加器：每一步都基于上一步的结果再替换，因此顺序不可调换；
+                //   先遮蔽连接串和数据源，再覆盖可能携带多个字段的认证/Cookie 整行，最后处理紧凑赋值，该顺序保留既有净化覆盖面。</zh-CN>
+                //   <en>`sanitized` is a progressive-redaction accumulator: each step replaces into the previous step's result, so the order cannot be rearranged. Connection strings and data sources are redacted first, then full authorization/Cookie lines that may carry multiple fields, and finally compact assignments; that order preserves established sanitization coverage.</en>
                 // </lang>
                 string sanitized = ConnectionStringPattern.Replace(value, ReplaceAssignment);
                 sanitized = DataSourceConnectionPattern.Replace(sanitized, "[REDACTED_CONNECTION_STRING]");
