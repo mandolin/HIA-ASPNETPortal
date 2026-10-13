@@ -12,9 +12,11 @@
 ### 1. 代码内文档（→ C-anp-P19 ROP，源码注释）
 不在 `docs/`，位于源码节点/流程注释；由 ROP 门禁 `Get-PortalCommentDebtInventory` 保障。
 
-### 2. API 与技术契约（待建 `docs/contracts/`）
-- 边界判定：Web Forms 门户**无对外 REST/GraphQL API**；适用"模块契约 / 配置契约 / 接口契约"（模块 Profile、`appSettings`、企业能力对象契约）。
-- 现状：**缺口**，待 `W-anp-P125` 建 `docs/contracts/`。
+### 2. API 与技术契约（`W-anp-P125` 已建 `docs/contracts/`）
+- 边界判定：Web Forms 门户**无对外 REST/GraphQL API**；适用"模块契约 / 配置契约 / 企业能力对象契约"。
+- `contracts/README.md` — 契约总览、边界判定表（REST/GraphQL/OpenAPI **不适用**）、权威源指向与验证方式
+- `contracts/module-manifest.md` — 模块契约（`module.json` 字段、`schemaVersion` 1/2、可选 `capability`、被显式拒绝的声明）
+- `contracts/app-settings.md` — 配置契约（`appSettings` 键族、两层生效机制、档位与包放行的区别）
 
 ### 3. 产品功能与使用
 - `product-overview.md` — **产品概览与定位**（`W-anp-P124` 交付）：是什么 / 给谁用 / 能力地图 / 边界 / 兼容性与运行环境 / 许可证与归属 / 成熟度口径

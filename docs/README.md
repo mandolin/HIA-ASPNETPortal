@@ -16,6 +16,7 @@
 - `user-guide.md`：运行和使用入口说明，含门户配置流程、管理员常用操作与故障排除。
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。
+- `contracts/`：技术契约目录 —— 边界判定（无对外 REST/GraphQL）、[模块契约](contracts/module-manifest.md)（`module.json`）、[配置契约](contracts/app-settings.md)（`appSettings`）；入口见 [contracts/README.md](contracts/README.md)。
 - `documentation-registry.md`：7 个文档族的适用性登记（适用对象、维护责任、更新触发条件）与已登记缺口。
 - `documentation-map.md`：7 族文档的导航地图、阅读路径与缺口指向，用于按角色快速定位文档。
 - `deployment-checklist.md`：SQL Server、IIS、外置配置和发布后回归清单。
