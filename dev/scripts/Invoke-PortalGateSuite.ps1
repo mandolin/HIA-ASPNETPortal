@@ -111,6 +111,21 @@ $gateLayers = [ordered]@{
            ) }
         @{ File = 'Test-PortalBenchmarkChecklist.ps1'; Runner = 'ps1'; Kind = '对标检查表'; Args = @() }
         # <lang>
+        #   <zh-CN>C-anp-P19（ROP 注释治理独立周期）W112 新增：ROP 注释基线门禁。把 W108–W111 达成的基线固化为
+        #   机器可跑断言 —— 硬断言（阻断）：legacy `.LANG` 表面 0、legacy 标记 0、混合语言表面 0、高风险脚本缺 HIA 标记 0、
+        #   缺 comment-based help 0；软指标（上报不阻断）：`HighRiskScriptCandidate`（按文件名生成的候选集）与
+        #   `TodoOrDeferredMarker`（按四分法登记的延期项）—— 二者都不是缺陷计数，阻断只会制造无意义的历史搅动。
+        #   门禁注释中明示证明边界：只证明结构标记存在或缺失，不证明注释语义充分性。</zh-CN>
+        #   <en>C-anp-P19 (independent ROP comment-governance cycle) W112 new: the ROP comment-baseline gate. It pins the baseline
+        #   reached in W108–W111 into machine-runnable assertions — hard (blocking): legacy `.LANG` surface 0, legacy markers 0,
+        #   mixed language surface 0, high-risk scripts missing HIA markers 0, missing comment-based help 0; soft (reported,
+        #   non-blocking): `HighRiskScriptCandidate` (a file-name keyword candidate set) and `TodoOrDeferredMarker` (items
+        #   registered under the four-way split) — neither is a defect count, and blocking on them would only create pointless
+        #   historical churn. The gate's own documentation states the proof boundary: it proves only that structural markers exist
+        #   or are absent, never that comments are semantically sufficient.</en>
+        # </lang>
+        @{ File = 'Test-PortalRopCommentBaseline.ps1'; Runner = 'ps1'; Kind = 'ROP 注释基线'; Args = @() }
+        # <lang>
         #   <zh-CN>文档与开源就绪度四门禁（W98 接入）：此前它们存在但不在编排内，因此"跑全门禁"并不包含它们。
         #   Test-PortalPublicDocumentation 长期返回 exit 1（公开文档索引缺失 + 指向私有仓库的链接），从未被处理，
         #   原因就是没接进编排 —— 这是"门禁写好了但等于没写"的直接实例。</zh-CN>
