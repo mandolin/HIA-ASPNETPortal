@@ -232,8 +232,30 @@ if ($null -ne $manifest) {
         }
     }
 
-    if ($manifest.schemaVersion -ne 1) {
-        Add-BusinessModuleCheck -Name 'Manifest schema version' -Status 'Warning' -Detail 'Current standard expects schemaVersion 1.'
+    # <lang>
+    #   <zh-CN>校准 schemaVersion 期望值（C-anp-P20 遗留，据实测更正）：业务模块（`HIA.*`）的 manifest 实际为 **2** ——
+    #   `capability` 块由 schemaVersion 2 引入，而 `PortalModuleControl<T>` 加载器要求该块；只读参考包
+    #   （如 `ModuleProbe`）不含 `capability` 块，故 schemaVersion **1** 对它合法。
+    #   门禁原写"当前标准期望 1"，导致 **7 个业务模块长期报 Warning** 而被当成背景噪音忽略 ——
+    #   与 P20 closeout 批评的"门禁写了等于没写"是同一类问题。校准后的口径：
+    #   2 = 业务模块合规；1 且无 `capability` 块 = 只读参考包合规；其余才报 Warning。</zh-CN>
+    #   <en>Calibrated the schemaVersion expectation (C-anp-P20 leftover, corrected from measurement): business modules
+    #   (`HIA.*`) actually use **2** — the `capability` block was introduced by schemaVersion 2 and is required by the
+    #   `PortalModuleControl<T>` loader; read-only reference packages (e.g. `ModuleProbe`) carry no `capability` block, so
+    #   schemaVersion **1** is legitimate for them. The gate previously said "current standard expects 1", which made
+    #   **seven business modules warn permanently** and be dismissed as background noise — the same "a gate that always
+    #   warns is no gate" problem criticised in the P20 closeout. Calibrated rule: 2 = business module compliant; 1 with no
+    #   `capability` block = read-only reference package compliant; anything else warns.</en>
+    # </lang>
+    $hasCapability = ($manifest.PSObject.Properties.Name -contains 'capability')
+    if ([int]$manifest.schemaVersion -eq 2) {
+        Add-BusinessModuleCheck -Name 'Manifest schema version' -Status 'Pass' -Detail 'schemaVersion 2: business-module standard, which introduces the required capability block.'
+    }
+    elseif ((-not $hasCapability) -and [int]$manifest.schemaVersion -eq 1) {
+        Add-BusinessModuleCheck -Name 'Manifest schema version' -Status 'Pass' -Detail 'schemaVersion 1 without a capability block: legitimate for a read-only reference package such as ModuleProbe.'
+    }
+    else {
+        Add-BusinessModuleCheck -Name 'Manifest schema version' -Status 'Warning' -Detail 'Expected schemaVersion 2 for business modules, or 1 with no capability block for read-only reference packages.'
     }
 
     $expectedPackage = if ([string]::IsNullOrWhiteSpace($ExpectedPackageId)) { $packageName } else { $ExpectedPackageId }

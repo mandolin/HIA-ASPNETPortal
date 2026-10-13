@@ -186,7 +186,11 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 1. **代码后置必须登记进 `Portal.csproj`。** `src/Portal` 是 **Web Application 项目**（有 `Portal.csproj`），既有模块的 `.ascx.cs` 编译进 `bin/Portal.dll`。新增模块若只在磁盘上放文件、未在 csproj 登记 `<Compile Include="DesktopModules\{Module}\{Module}.ascx.cs">`（及 `.ascx.designer.cs`）与 `<Content Include="...{Module}.ascx / module.json / Styles/*.css">`，则 `CodeBehind` 在运行期报"未能加载类型 ASPNET.StarterKit.Portal.{Module}"；更隐蔽的是**未登记时 MSBuild 不编译这些文件**，于是 `out var`、`long→string` 一类编译错误只在运行期炸。
 2. **6 套正式皮肤必须补齐主题作用域规则。** 只写模块自带 `Styles/{Module}.css` 而**不在 `src/Portal/App_Themes/<Theme>/Default.css` 补 `body.portal-theme-<规范化名> .<模块前缀类>` 规则**，模块在多数皮肤下丢失主题化样式（AGENTS.md 硬性要求）。取值取自各皮肤既有 `my-work-items` 同族调色板，并为不支持 `var()` 的 IE9+ 提供显式回退。
 3. **标记层与 CSS 类名必须一致。** 标记层用 `form-grid` / `form-field` / `list` 而模块 CSS 写 `.grid` / `.field` / `.recent` 时，模块样式与主题规则会**全部落空却无任何报错**。以标记层（`.ascx` 的 `class=` 与 Web Forms 控件的 `CssClass=`）为权威，模块 CSS 与主题规则只承载布局与取色。
-4. **本机配置生效源是 `Web.config` 的 `<appSettings>`。** 业务包需经 `Portal.ModulePackages.Enabled` 白名单放行；在开发机上改 `src/Portal/Config/appSettings.dev.json`（gitignore，不入库）的 `Set` 值**不落地**，运行期读的是 `Web.config` 的既有 `<appSettings>`。放行业务包时两处一并改，并确认 `appSettings.dev.json` 的档位（`Portal.ModuleProfiles.Active`）含该包所在档位。
+4. **配置生效源分两层，判断依据是「JSON 文件是否存在于站点根目录」。** 业务包需经 `Portal.ModulePackages.Enabled` 白名单放行。机制如下（见 `src/Portal/Util/AppSettingsLoader.cs`）：
+   - **基础值**：`Web.config` 的 `<appSettings>` 始终先生效；
+   - **覆盖值**：`AppSettingsLoader.LoadConfig` 只在其参数指向的文件**确实存在于站点根目录**时，才把该 JSON 的 `appSettings` 键 `Set` 进 `ConfigurationManager.AppSettings`（覆盖同名键，未声明的键按 `preservePrevious` 保留或移除）；**文件不存在则静默跳过**，不做任何覆盖。
+   - 由此产生的两个实践结论：① 在开发机上改 `src/Portal/Config/appSettings.dev.json`（gitignore，不入库、通常也不在站点根目录）的 `Set` 值**不会落地**，本机运行期读的是 `Web.config` 的既有 `<appSettings>`；② 部署环境把 `appSettings.json` 随包放进站点根目录后，该文件的覆盖**才会**生效（详见 [user-guide.md](user-guide.md)「启用前提」）。
+   - 放行业务包时两处一并改，并确认档位键（`Portal.ModuleProfiles.Active`）含该包所在档位。
 
 > 上述 1–3 已由静态门禁 `Test-PortalNewModuleReadiness.ps1` 守护（L0 层，只依赖源码，无需 IIS/DB）：
 > ```powershell

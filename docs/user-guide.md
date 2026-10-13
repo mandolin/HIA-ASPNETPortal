@@ -36,6 +36,8 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 1. 执行业务表迁移脚本：`src/Setup/PortalBiz_LeaveRequests.sql` 与 `src/Setup/PortalBiz_ExpenseReimbursements.sql`。两个脚本可重复执行（建表前用 `OBJECT_ID` 守卫判断）。
 2. 在模块包白名单中放行：`Portal.ModulePackages.Enabled` 追加 `HIA.LeaveRequest,HIA.ExpenseReimbursement`（`appSettings.json` 及环境覆盖文件）。该键与 Profile 无关，用于跨档位放行部署包。
+
+   > **覆盖生效的前提**：`appSettings.json` 只有**部署到站点根目录**时才会覆盖 `Web.config` 的同名 `<appSettings>` 键——`AppSettingsLoader` 在文件不存在时静默跳过，此时运行期读到的仍是 `Web.config` 的基础值。开发机上改动不入库的 `appSettings.dev.json` 不会落地。完整机制见 [module-development-guide.md](module-development-guide.md)「新增模块的隐藏陷阱」第 4 条。
 3. 由管理员在页签上挂载模块实例（模块定义在包启用后才会出现在可挂载列表）。
 
 ### 请假申请
