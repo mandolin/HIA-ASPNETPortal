@@ -14,7 +14,7 @@
 
 ### 2. API 与技术契约（待建 `docs/contracts/`）
 - 边界判定：Web Forms 门户**无对外 REST/GraphQL API**；适用"模块契约 / 配置契约 / 接口契约"（模块 Profile、`appSettings`、企业能力对象契约）。
-- 现状：**缺口**，待 D5 建 `docs/contracts/`。
+- 现状：**缺口**，待 `W-anp-P125` 建 `docs/contracts/`。
 
 ### 3. 产品功能与使用
 - `user-guide.md` — 产品总览与使用（偏总览）
@@ -26,7 +26,7 @@
 - `module-development-guide.md` — 模块开发指南
 - `frontend-asset-guide.md` — 前端资源指南
 - `theme-package-guide.md` — 主题包指南（衔接 C-anp-P18）
-- `theme-semantic-variables.md` — 主题语义变量矩阵（7 主题 × 13 变量、用途速查、使用规则）
+- `theme-semantic-variables.md` — 主题语义变量矩阵（7 主题 × **14 变量**、用途速查、使用规则；第 14 个 `--portal-text-subtle` 由 `C-anp-P23` D3 裁定新增）
 - `theme-module-contract.md` — 模块外观契约（层间分工、外观类族、回退值含义与差异）
 - `documentation-artifacts-guide.md` — 文档产物指南
 - `testing-checklist.md` — 测试清单
