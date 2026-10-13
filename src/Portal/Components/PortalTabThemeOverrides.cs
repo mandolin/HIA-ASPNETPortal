@@ -464,6 +464,17 @@ WHERE [TabId] = @TabId;";
             // </lang>
             using (SqlCommand command = connection.CreateCommand())
             {
+                // <lang>
+                //   <zh-CN>表名以字符串内插进 OBJECT_ID —— 这是本类唯一不把标识符参数化的位置，因此安全不变量必须成立：
+                //   TableName 是私有编译期常量（PortalCfg_TabThemeOverrides），不接受任何来自页面、查询串或外部输入的标识符。
+                //   该约束无法由普通静态检查证明，故与 PortalModulePackageStates / PortalOperationAudit /
+                //   PortalSystemSettingsStore 的同类探针保持同一登记口径。</zh-CN>
+                //   <en>The table name is interpolated into OBJECT_ID — the only place in this class where an identifier is not
+                //   parameterized, so the safety invariant must hold: TableName is a private compile-time constant
+                //   (PortalCfg_TabThemeOverrides) and never accepts an identifier from a page, query string, or other external
+                //   input. Ordinary static checks cannot prove that constraint, so it is registered here in the same form as the
+                //   equivalent probes in PortalModulePackageStates, PortalOperationAudit and PortalSystemSettingsStore.</en>
+                // </lang>
                 command.CommandText =
                     "SELECT CASE WHEN OBJECT_ID(N'[dbo].[" + TableName + "]', N'U') IS NULL THEN 0 ELSE 1 END;";
                 // <lang>
