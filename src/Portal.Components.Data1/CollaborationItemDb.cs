@@ -1411,6 +1411,26 @@ ORDER BY ISNULL([Item].[LastActionUtc], [Item].[CreatedUtc]) DESC, [Item].[ItemI
             return context.Database.SqlQuery<CollaborationItemInfo>(sql, sqlParameters.ToArray()).ToList();
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>
+        ///     按表名探测数据库对象是否存在，用于在读写前判断迁移是否已执行。
+        ///     表名以字符串内插进 SQL —— 这是本类唯一不把标识符参数化的地方，因此**安全不变量**必须成立：
+        ///     调用方只允许传入编译期常量（本类的 <see cref="ItemTableName"/> / <see cref="EventTableName"/>，
+        ///     或同一文件内的字面量表名），绝不允许传入来自页面、查询串或任何外部输入的标识符。
+        ///     该约束无法由普通静态检查证明，故在此显式登记。
+        ///   </zh-CN>
+        ///   <en>
+        ///     Probes whether a database object exists by table name, used to decide before reads or writes whether a
+        ///     migration has already run. The table name is interpolated into the SQL string — the only place in this
+        ///     class where an identifier is not parameterized — so the **safety invariant** must hold: callers may pass
+        ///     only compile-time constants (this class's <see cref="ItemTableName"/> / <see cref="EventTableName"/>, or
+        ///     literal table names within this file), never an identifier from a page, query string, or any other
+        ///     external input. Ordinary static checks cannot prove that constraint, so it is registered here
+        ///     explicitly.
+        ///   </en>
+        /// </lang>
+        /// </summary>
         private bool HasTable(string tableName)
         {
             try
@@ -1426,6 +1446,23 @@ ORDER BY ISNULL([Item].[LastActionUtc], [Item].[CreatedUtc]) DESC, [Item].[ItemI
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>
+        ///     按表名与列名探测列是否存在，用于 P47.1 父项列等**部署级迁移**的兼容判断：
+        ///     迁移未执行时列可能不存在，读取前先探测，据此选择真实列投影或 NULL 投影，避免旧库上读取失败。
+        ///     与 <see cref="HasTable"/> 同样，表名只允许来自编译期常量；列名则通过
+        ///     <see cref="SqlParameter"/> 参数化传入，不参与 SQL 文本拼接。
+        ///   </zh-CN>
+        ///   <en>
+        ///     Probes whether a column exists, used for deployment-level migrations such as the P47.1 parent column:
+        ///     the column may be absent before the migration runs, so it is probed before reads to choose either the
+        ///     real column projection or a NULL projection, avoiding read failures on older databases.
+        ///     As with <see cref="HasTable"/>, the table name may only come from a compile-time constant; the column
+        ///     name is passed through a <see cref="SqlParameter"/> and never participates in SQL text concatenation.
+        ///   </en>
+        /// </lang>
+        /// </summary>
         private bool HasColumn(string tableName, string columnName)
         {
             try
