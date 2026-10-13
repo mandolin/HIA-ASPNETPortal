@@ -1,4 +1,14 @@
 <#
+.SYNOPSIS
+<lang>
+  <zh-CN>资源契约一致性门禁：校验「三份 resx + 签入的强类型 designer + 标记层/代码层引用」这四处之间的契约。</zh-CN>
+  <en>Resource-contract consistency gate: verifies the contract across "three resx files + the checked-in strong-typed designer + markup/code references".</en>
+</lang>
+.DESCRIPTION
+<lang>
+  <zh-CN>把资源键、强类型属性、标记层引用与代码层引用之间的契约做成**可重复运行、可门禁**的检查，而不是靠人记。**前置条件**：源码可读，属编排入口 L0 层，不连数据库、不启动 IIS、不执行浏览器。**验证方式**：退出码 0 通过、1 有阻断级违规；六项检查（C1 键集一致、C2 属性对应、C3 双语块配对、C4 en-us 不漂移及 en-us 覆盖豁免）逐项列出违规资源键。**低敏边界**：只读取资源文件与源码文本，不读取凭据、连接串或业务数据，不改写任何文件。</zh-CN>
+  <en>Turns the contract between resource keys, strong-typed properties, markup references and code references into a **repeatable, gated** check instead of something kept in someone's head. **Prerequisites**: readable source — an L0-layer gate with no database, IIS or browser access. **Verification**: exit code 0 passes, 1 means blocking violations; the six checks (C1 key-set consistency, C2 property correspondence, C3 bilingual block pairing, C4 en-us non-drift, plus en-us override exemption) list each offending resource key. **Low-sensitivity boundary**: only resource files and source text are read — no credentials, connection strings or business data, and nothing is rewritten.</en>
+</lang>
 <lang>
   <zh-CN>
     资源契约一致性门禁（W-anp-P80 `P80.4`）：把「三份 resx + 签入的强类型 designer + 标记层/代码层引用」

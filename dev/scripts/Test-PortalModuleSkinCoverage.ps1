@@ -1,3 +1,22 @@
+<#
+.SYNOPSIS
+  <lang>
+    <zh-CN>模块语义类皮肤覆盖门禁：校验业务模块颜色的主题化来源与主题层作用域规则覆盖。</zh-CN>
+    <en>Module semantic-class skin coverage gate: verifies the theming source of business-module colors and the coverage of theme-layer scope rules.</en>
+  </lang>
+.DESCRIPTION
+  <lang>
+    <zh-CN>两层判定：**硬规则（阻断）** 模块自带 `Styles/<Module>.css` 中任何颜色相关裸字面量（`#hex` / `rgb()` / `hsl()`）不得出现在 `var(...)` 之外 —— 一旦裸写颜色，深色皮肤下必形成浅块；**软指标（上报不阻断）** 模块语义类在 7 套正式皮肤 `Default.css` 的覆盖缺口，逐模块列出"未在全部皮肤覆盖"的类名。
+    **前置条件**：只需源码可读，属编排入口 L0 层；不连数据库、不启动 IIS、不执行浏览器。
+    **验证方式**：退出码 0 无硬违规、1 存在裸色值硬违规、2 前置条件缺失；覆盖缺口以 `[GATE-NOTE]` 留档不阻断。
+    **低敏边界**：只读取模块 CSS 与主题 CSS 文本，不读取连接串、凭据或业务数据，不改写任何文件。</zh-CN>
+    <en>Two tiers: the **hard (blocking) rule** requires that no raw color literal (`#hex` / `rgb()` / `hsl()`) appears outside `var(...)` in module `Styles/<Module>.css`, because a hardcoded color inevitably produces light blocks on dark skins; the **soft (reported, non-blocking) metric** lists, per module, the classes not covered across all seven official skins' `Default.css`.
+    **Prerequisites**: source only — an L0-layer gate with no database, IIS or browser access.
+    **Verification**: exit code 0 means no hard violation, 1 means a raw-color hard violation, 2 means missing prerequisites; coverage gaps are recorded as `[GATE-NOTE]` without blocking.
+    **Low-sensitivity boundary**: only module and theme CSS text is read — no connection strings, credentials or business data, and nothing is rewritten.</en>
+  </lang>
+#>
+
 # W100 门禁：模块语义类皮肤覆盖（C-anp-P18）
 #
 # 依据 `C-anp-P18` 目标 4 与 `docs/theme-module-contract.md` §四.4：业务模块的语义类，其**颜色**

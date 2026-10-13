@@ -1,3 +1,22 @@
+<#
+.SYNOPSIS
+  <lang>
+    <zh-CN>对标检查表门禁：把《细节级对标规范》§七 的 7 条检查表固化为可重复运行的检查。</zh-CN>
+    <en>Benchmark checklist gate: turns the seven checklist items in §七 of the detail-level benchmark spec into repeatable checks.</en>
+  </lang>
+.DESCRIPTION
+  <lang>
+    <zh-CN>三条来自体检的设计决定：① **范围必须限定** —— 只检查承担对标职责的文档，排除蓝图/索引/closeout，否则产出无意义违规；② **规范不溯及既往** —— 规范建立前成文的历史文档只*提示*不*阻断*；③ **不适用声明是合法答案** —— 判定为"四要素 **或** 不适用声明，二者必有其一"，不机械要求八个维度都填满。
+    **前置条件**：`work-zone\dev\plans` 可读；无数据库、IIS、浏览器依赖。
+    **验证方式**：退出码 0 通过、1 有阻断级违规；提示级问题只汇总不阻断。
+    **低敏边界**：只读取计划文档文本，不读取连接串、凭据或业务数据。</zh-CN>
+    <en>Three design decisions taken from the review: ① **the scope must be bounded** — only documents carrying benchmarking responsibility are checked, excluding blueprints, indexes and closeouts, which would otherwise produce meaningless violations; ② **the spec is not retroactive** — historical documents written before the spec existed are *advisory only*, never blocking; ③ **a not-applicable statement is a legal answer** — the verdict is "four elements **or** an explicit not-applicable statement, one of the two", rather than mechanically requiring all eight dimensions to be filled.
+    **Prerequisites**: `work-zone\dev\plans` must be readable; no database, IIS or browser dependency.
+    **Verification**: exit code 0 passes, 1 means blocking-level violations; advisory issues are summarised without blocking.
+    **Low-sensitivity boundary**: only plan document text is read — no connection strings, credentials or business data.</en>
+  </lang>
+#>
+
 # W88 对标检查表门禁：把规范 §七 的 7 条检查表固化为可重复运行的检查。
 #
 # 规范：work-zone/docs/standards/detail-level-benchmark-spec.md《细节级对标规范》（§三 八维度 /

@@ -1,3 +1,32 @@
+<#
+.SYNOPSIS
+  <lang>
+    <zh-CN>发布前门禁编排层：从数据库自动发现全部启用模块，逐档位验证其运行期可加载。</zh-CN>
+    <en>Pre-release gate orchestration: auto-discovers every enabled module from the database and verifies each one is runtime-loadable, profile by profile.</en>
+  </lang>
+.DESCRIPTION
+  <lang>
+    <zh-CN>把 `Test-PortalModuleRuntimeEvidence.mjs` 原先写死在源码里的目标清单改为以数据库为权威来源，使新增模块在原理上不可能静默落在门禁范围之外。
+    **前置条件**：本机 `node` 运行时、开发期 `playwright` 本地依赖、外置 `connectionStrings.config`；任一缺失即以退出码 2 停止，不猜测替代路径。
+    **验证方式**：退出码 0 表示全部通过、1 表示有模块加载或断言失败、2 表示前置条件缺失；证据写入 `-EvidenceDir` 指定目录。
+    **低敏边界**：脚本不读取、不回显连接串内容或任何凭据；日志与证据只保留模块标识与断言结果。</zh-CN>
+    <en>Changes the previously hardcoded target list of `Test-PortalModuleRuntimeEvidence.mjs` to treat the database as the authoritative source, so a newly added module cannot silently fall outside gate scope in principle.
+    **Prerequisites**: a local `node` runtime, the development-time local `playwright` dependency, and the external `connectionStrings.config`; if any is missing the script stops with exit code 2 instead of guessing a substitute.
+    **Verification**: exit code 0 means all passed, 1 means a module load or assertion failed, 2 means missing prerequisites; evidence is written to `-EvidenceDir`.
+    **Low-sensitivity boundary**: the script neither reads nor echoes connection-string contents or any credentials; logs and evidence keep only module identity and assertion results.</en>
+  </lang>
+.PARAMETER EvidenceDir
+  <lang>
+    <zh-CN>证据输出目录；留空时使用带时间戳的默认目录。</zh-CN>
+    <en>Evidence output directory; when empty, a timestamped default directory is used.</en>
+  </lang>
+.PARAMETER SkipProfileSwitch
+  <lang>
+    <zh-CN>不切换模块档位，供由 CI 自行管理档位的场景使用。</zh-CN>
+    <en>Does not switch module profiles, for scenarios where CI manages the profile itself.</en>
+  </lang>
+#>
+
 # W83 P83.3 发布前门禁编排层：自动发现全部启用模块，逐档位验证其运行期可加载。
 #
 # 为什么需要它（P83.0 实测）：既有门禁 Test-PortalModuleRuntimeEvidence.mjs 的目标清单**写死在源码里**。

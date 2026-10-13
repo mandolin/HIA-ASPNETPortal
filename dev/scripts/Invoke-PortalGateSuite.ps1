@@ -1,3 +1,47 @@
+<#
+.SYNOPSIS
+  <lang>
+    <zh-CN>门禁统一编排入口：按层（L0 静态 / L1 构建后 / L2 运行期）依次执行全部门禁，一次看到全部问题。</zh-CN>
+    <en>Unified gate orchestration entry: runs every gate layer by layer (L0 static, L1 post-build, L2 runtime) so all issues are visible in a single pass.</en>
+  </lang>
+.DESCRIPTION
+  <lang>
+    <zh-CN>把 `dev/scripts/` 下的门禁从"跑哪几个、什么顺序全靠人记"改为统一编排。两个刻意设计：**失败不中断**（逐个跑完再汇总，一次暴露全部问题）；**退出码与输出双判定**（多数门禁只打印 PASS/FAIL 而不设退出码，只依赖 `$LASTEXITCODE` 会把失败误判为通过）。
+    **前置条件**：本机 `C:\Program Files\PowerShell\7\pwsh.exe`；L2 层另需 IIS Express、LocalDB `Portal` 库、本地 `playwright` 与 `node`。
+    **验证方式**：退出码 0 表示全部通过、1 表示有门禁失败、2 表示前置条件缺失；运行结束后汇总"门禁数 / 失败数 / 跳过数"并写入证据目录。
+    **低敏边界**：脚本只执行 `dev/scripts/` 下的门禁并读取其输出，不读取、不回显连接串、凭据或业务数据。</zh-CN>
+    <en>Turns the gates under `dev/scripts/` from "which to run and in what order depends on memory" into a single orchestration. Two deliberate choices: **no early exit on failure** (run all gates, then summarise, so every issue is exposed at once) and **dual exit-code/output detection** (most gates print PASS/FAIL without setting an exit code, so relying on `$LASTEXITCODE` alone would misjudge failures as passes).
+    **Prerequisites**: a local `C:\Program Files\PowerShell\7\pwsh.exe`; the L2 layer additionally requires IIS Express, the LocalDB `Portal` database, local `playwright` and `node`.
+    **Verification**: exit code 0 means all passed, 1 means some gate failed, 2 means missing prerequisites; a summary of "gates / failures / skips" is printed and evidence is written to the evidence directory.
+    **Low-sensitivity boundary**: the script only executes gates under `dev/scripts/` and reads their output; it neither reads nor echoes connection strings, credentials or business data.</en>
+  </lang>
+.PARAMETER Layer
+  <lang>
+    <zh-CN>要执行的层：`L0` 静态、`L1` 构建后、`L2` 运行期，或 `All`（默认）。</zh-CN>
+    <en>Layer to execute: `L0` static, `L1` post-build, `L2` runtime, or `All` (default).</en>
+  </lang>
+.PARAMETER EvidenceDir
+  <lang>
+    <zh-CN>证据输出目录；留空时使用带时间戳的默认目录。</zh-CN>
+    <en>Evidence output directory; when empty, a timestamped default directory is used.</en>
+  </lang>
+.PARAMETER StopOnFirstFailure
+  <lang>
+    <zh-CN>遇到首个失败即停止，用于快速定位；默认失败不中断以一次暴露全部问题。</zh-CN>
+    <en>Stops at the first failure for fast triage; by default execution continues so all issues are exposed at once.</en>
+  </lang>
+.PARAMETER IncludeSlow
+  <lang>
+    <zh-CN>包含耗时的门禁；默认跳过以便快速反馈。</zh-CN>
+    <en>Includes slow gates; skipped by default for fast feedback.</en>
+  </lang>
+.PARAMETER SkipProfileSwitch
+  <lang>
+    <zh-CN>L2 层不自动切模块档位，供自行管理档位的 CI 使用。</zh-CN>
+    <en>The L2 layer does not switch module profiles automatically, for CI that manages the profile itself.</en>
+  </lang>
+#>
+
 # W85 门禁统一编排入口：按层依次执行全部门禁，一次看到所有问题。
 #
 # 为什么要它（`P85.0` 实测）：`dev/scripts/` 下 88 个文件里真正的门禁候选是 38 个

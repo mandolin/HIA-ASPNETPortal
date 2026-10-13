@@ -266,10 +266,20 @@ foreach ($relativePath in $scriptPaths) {
     $category = Get-RiskCategory -Name $name
 
     # <lang>
-    #   <zh-CN>hasHelp 只检测 comment-based help 结构存在性，不判断 help 内容是否语义充分。</zh-CN>
-    #   <en>`hasHelp` detects only the existence of comment-based help structure, not whether the help text is semantically sufficient.</en>
+    #   <zh-CN>hasHelp 只检测 comment-based help 结构存在性，不判断 help 内容是否语义充分。
+    #     C-anp-P19 W109 修正：原正则 `(?s)^\s*<#...` 的 `^` 无 `(?m)`，只匹配文件开头；而合法脚本首行常为
+    #     `#requires -Version 5.1`（help 块从第 2 行开始），会被误判为"缺 comment-based help"（实测
+    #     `Get-PortalTabDiscovery.ps1` 有完整 `.SYNOPSIS/.DESCRIPTION/.PARAMETER/.EXAMPLE` 却被判缺）。
+    #     修正为正则允许文件开头有若干 `#requires` 指令行，再出现 `<#` help 块。</zh-CN>
+    #   <en>`hasHelp` detects only the existence of comment-based help structure, not whether the help text is
+    #     semantically sufficient.
+    #     C-anp-P19 W109 fix: the old `(?s)^\s*<#...` pattern anchors `^` without `(?m)`, so it matched only the very
+    #     start of the file; legitimate scripts commonly begin with `#requires -Version 5.1` (help block on line 2+)
+    #     and were misreported as lacking comment-based help (`Get-PortalTabDiscovery.ps1` has a full
+    #     `.SYNOPSIS/.DESCRIPTION/.PARAMETER/.EXAMPLE` block yet was flagged). The pattern now allows leading
+    #     `#requires` directive lines before the `<#` help block.</en>
     # </lang>
-    $hasHelp = $content -match '(?s)^\s*<#.*?\.(SYNOPSIS|DESCRIPTION|PARAMETER)'
+    $hasHelp = $content -match '(?s)^(?:\s*#requires[^\r\n]*\r?\n)*\s*<#.*?\.(SYNOPSIS|DESCRIPTION|PARAMETER)'
 
     # <lang>
     #   <zh-CN>languageSurface 单列旧 `.LANG`、标准 `<lang>` 和混合表面，补足 P33.0 发现的证据误读缺口。</zh-CN>

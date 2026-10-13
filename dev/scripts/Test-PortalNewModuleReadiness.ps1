@@ -1,3 +1,42 @@
+<#
+.SYNOPSIS
+  <lang>
+    <zh-CN>新增模块就绪门禁：把"新增业务模块时构建看不出、运行期才炸"的四类问题前移为静态检查。</zh-CN>
+    <en>New-module readiness gate: moves the four classes of new-module problems that a build cannot see but runtime explodes on into static checks.</en>
+  </lang>
+.DESCRIPTION
+  <lang>
+    <zh-CN>依据 `docs/module-development-guide.md`（C-anp-P20 补强的四道坑）。四项检查均为 Fail 级：**R1** 代码后置必须登记进 `Portal.csproj`（`src/Portal` 是 Web Application 项目，未登记 `Compile` 的文件不进 `bin/Portal.dll`，运行期才报"未能加载类型"）；**R2** `.ascx` 必须使用 `CodeBehind` 而非 `CodeFile`；**R3** 6 套正式皮肤 `Default.css` 均须含 `.<prefix>` 主题作用域规则；**R4** 模块私有 CSS 的类选择符必须在 `.ascx` 标记层出现（防止标记层与 CSS 类名漂移导致样式与主题规则全部落空）。
+    **前置条件**：只需源码可读，属编排入口 L0 层，不连数据库、不启动 IIS、不执行浏览器。
+    **验证方式**：退出码 0 通过、1 有违规；输出逐项列出违规文件与原因。
+    **低敏边界**：脚本只读取源码与项目文件，不读取连接串、凭据或业务数据。</zh-CN>
+    <en>Based on `docs/module-development-guide.md` (the four pitfalls reinforced in C-anp-P20). All four checks are Fail-level: **R1** the code-behind must be registered in `Portal.csproj` (`src/Portal` is a Web Application project; files not registered as `Compile` do not enter `bin/Portal.dll` and only fail at runtime with "could not load type"); **R2** `.ascx` must use `CodeBehind`, not `CodeFile`; **R3** all six official skins' `Default.css` must contain a `.<prefix>` theme scope rule; **R4** every class selector in the module's private CSS must appear in the `.ascx` markup, preventing markup/CSS class drift that would silently void both module styles and theme rules.
+    **Prerequisites**: source only — this is an L0-layer gate with no database, IIS or browser access.
+    **Verification**: exit code 0 passes, 1 means violations; the output lists each offending file and reason.
+    **Low-sensitivity boundary**: the script reads only source and project files — no connection strings, credentials or business data.</en>
+  </lang>
+.PARAMETER ModuleName
+  <lang>
+    <zh-CN>受检模块目录名，如 `LeaveRequest`。</zh-CN>
+    <en>Name of the module directory under check, e.g. `LeaveRequest`.</en>
+  </lang>
+.PARAMETER ModuleCssPrefix
+  <lang>
+    <zh-CN>模块 CSS 类前缀；留空时取模块名小写（`LeaveRequest` → `leave-request`）。</zh-CN>
+    <en>Module CSS class prefix; when empty, the lower-cased module name is used (`LeaveRequest` → `leave-request`).</en>
+  </lang>
+.PARAMETER ExpectedPackageId
+  <lang>
+    <zh-CN>期望的模块包标识，用于校验 `module.json` 登记。</zh-CN>
+    <en>Expected module package id, used to validate the `module.json` registration.</en>
+  </lang>
+.PARAMETER SkipClassConsistency
+  <lang>
+    <zh-CN>跳过 R4 类一致性比对，供确有 JS 或代码后置专属类时据实豁免；需在提交信息写明理由。</zh-CN>
+    <en>Skips the R4 class-consistency comparison for a justified exemption when JS or code-behind-only classes genuinely exist; the reason must be stated in the commit message.</en>
+  </lang>
+#>
+
 # C-anp-P20 新增模块就绪门禁：把"新增业务模块时四类构建看不出、运行期才炸"的坑前移为静态检查。
 #
 # 依据见 docs/module-development-guide.md（C-anp-P20 补强的四道坑）。本门禁只依赖源码，属编排入口 L0 层。

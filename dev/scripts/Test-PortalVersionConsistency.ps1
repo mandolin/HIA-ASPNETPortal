@@ -1,7 +1,22 @@
 <#
+.SYNOPSIS
 <lang>
-  <zh-CN>版本一致性门禁脚本。校验「CHANGELOG 最新条目版本」「最新 git 标签版本」「程序集版本」三者一致，防止版本锚点漂移。本脚本只读取文件与 git 标签，不连接网络、不写入任何文件、不创建或修改标签。</zh-CN>
-  <en>Version-consistency gate script. Verifies that the latest CHANGELOG entry, the latest git tag, and the assembly versions all agree so version anchors cannot drift. It only reads files and git tags: no network, no file writes, and no tag creation or modification.</en>
+  <zh-CN>版本一致性门禁：校验「CHANGELOG 最新条目版本」「最新 git 标签版本」「程序集版本」三者一致，防止版本锚点漂移。</zh-CN>
+  <en>Version-consistency gate: verifies that the latest CHANGELOG entry, the latest git tag and the assembly versions all agree so version anchors cannot drift.</en>
+</lang>
+.DESCRIPTION
+<lang>
+  <zh-CN>**前置条件**：Git 仓库可读、根 `CHANGELOG.md` 存在；本脚本不连接网络、不写入任何文件、不创建或修改标签。
+  **验证方式**：退出码 0 表示三者一致、1 表示存在漂移；输出逐项列出不一致的版本锚点。
+  **低敏边界**：只读取版本文本与 git 标签名，不读取凭据、连接串或业务数据。</zh-CN>
+  <en>**Prerequisites**: a readable Git repository and an existing root `CHANGELOG.md`; this script does not use the network, write any file, or create or modify tags.
+  **Verification**: exit code 0 means all three agree, 1 means drift; the output lists each inconsistent version anchor.
+  **Low-sensitivity boundary**: only version text and git tag names are read — no credentials, connection strings or business data.</en>
+</lang>
+.PARAMETER RepoRoot
+<lang>
+  <zh-CN>仓库根目录；留空时取脚本所在目录的上两级目录（`dev\scripts` 的上两级即仓库根）。</zh-CN>
+  <en>Repository root; when empty, two levels above the script directory (`dev\scripts` -> repository root).</en>
 </lang>
 #>
 

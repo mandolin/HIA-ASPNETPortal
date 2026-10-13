@@ -1,3 +1,34 @@
+<#
+.SYNOPSIS
+  <lang>
+    <zh-CN>对标证据索引生成器：把"哪份一手来源支撑了哪个包的哪个决定"变成可查询的 JSON / Markdown 视图。</zh-CN>
+    <en>Benchmark evidence index generator: turns "which first-hand source backs which package's which decision" into a queryable JSON/Markdown view.</en>
+  </lang>
+.DESCRIPTION
+  <lang>
+    <zh-CN>刻意做成**脚本生成**而非手写索引文档：手写索引会过期（与本 Cycle 反复出现的"登记项会过期"同类）。本工具是 **inventory 工具（`Get-*`）而非门禁（`Test-*`）**，只报告现状、不做阻断，故不接入 `Invoke-PortalGateSuite.ps1`。
+    **已知局限（实测登记）**：来源强度靠 URL 所在行或其上下 3 行内是否出现强度声明推断；维度靠向前 40 行内最近的维度名推断（关键词匹配，存在噪声）。索引属 inventory 工具，不影响门禁判定。
+    **前置条件**：`work-zone\dev\plans` 可读；无数据库、IIS、浏览器依赖。
+    **验证方式**：成功后写出 JSON 与 Markdown 并以退出码 0 结束；输出条目数应与计划文档数相符。
+    **低敏边界**：只读取计划文档，不读取连接串、凭据或业务数据。</zh-CN>
+    <en>Deliberately implemented as a **generated index** rather than a hand-written document, because hand-written indexes go stale (the same "registrations expire" problem seen repeatedly in this cycle). This is an **inventory tool (`Get-*`), not a gate (`Test-*`)**: it reports current state without blocking, so it is not wired into `Invoke-PortalGateSuite.ps1`.
+    **Known limitations (measured)**: source strength is inferred from whether a strength declaration appears on the URL line or within three lines around it; dimension is inferred from the nearest dimension name within the preceding 40 lines (keyword matching, noisy). As an inventory tool it does not affect gate verdicts.
+    **Prerequisites**: `work-zone\dev\plans` must be readable; no database, IIS or browser dependency.
+    **Verification**: on success JSON and Markdown are written and the script exits 0; the emitted entry count should match the number of plan documents.
+    **Low-sensitivity boundary**: only plan documents are read — no connection strings, credentials or business data.</en>
+  </lang>
+.PARAMETER OutputJson
+  <lang>
+    <zh-CN>JSON 输出路径；留空时使用默认证据目录。</zh-CN>
+    <en>JSON output path; when empty, the default evidence directory is used.</en>
+  </lang>
+.PARAMETER OutputMarkdown
+  <lang>
+    <zh-CN>Markdown 输出路径；留空时使用默认证据目录。</zh-CN>
+    <en>Markdown output path; when empty, the default evidence directory is used.</en>
+  </lang>
+#>
+
 # W89 对标证据索引：把"哪份一手来源支撑了哪个包的哪个决定"变成可查询的视图。
 #
 # 规范 §九 后续候选 2："建立对标证据索引，按功能维度检索"。

@@ -1,3 +1,24 @@
+<#
+.SYNOPSIS
+  <lang>
+    <zh-CN>ASCX 编译契约静态门禁：把"运行期才暴露的标记层问题"前移到静态检查。</zh-CN>
+    <en>ASCX compilation-contract static gate: moves markup-layer problems that only surface at runtime into static checks.</en>
+  </lang>
+.DESCRIPTION
+  <lang>
+    <zh-CN>覆盖后台管理型模块无可访问 URL、运行期门禁覆盖不到的缺口，使全部 ASCX 进入门禁。四项检查：**C1** CodeBehind 文件存在；**C2** `Inherits` 与代码后置 namespace+class 一致；**C3** 标记层表达式引用的类型可解析（防 CS0103）；**C4** `module.json` 的 `desktopEntry` 存在且能提取模块级唯一 class。
+    关键设计**宁可漏检、不可误报**：C3 只对"全仓 `.cs` 中确实存在同名类型"的标识符生效，资源键与表达式成员自然排除；误报会让门禁长期红着而被当成背景噪音，等于门禁不存在。
+    **前置条件**：只需源码可读，属编排入口 L0 层；不连数据库、不启动 IIS、不执行浏览器。
+    **验证方式**：退出码 0 通过、1 有违规；逐项列出违规文件与规则编号。
+    **低敏边界**：只读取源码与项目文件，不读取连接串、凭据或业务数据，不改写任何文件。</zh-CN>
+    <en>Closes the gap where admin-type modules have no reachable URL and therefore escape runtime gates, bringing every ASCX into gate coverage. Four checks: **C1** the CodeBehind file exists; **C2** `Inherits` matches the code-behind namespace+class; **C3** types referenced by markup expressions resolve (prevents CS0103); **C4** `module.json` declares a `desktopEntry` and a module-unique class can be extracted.
+    The key design is **leak over false positive**: C3 applies only to identifiers for which an identically named type genuinely exists across `.cs` files, so resource keys and expression members are naturally excluded; false positives would keep the gate permanently red until it is dismissed as background noise, which is equivalent to having no gate.
+    **Prerequisites**: source only — an L0-layer gate with no database, IIS or browser access.
+    **Verification**: exit code 0 passes, 1 means violations; each offending file and rule number is listed.
+    **Low-sensitivity boundary**: only source and project files are read — no connection strings, credentials or business data, and nothing is rewritten.</en>
+  </lang>
+#>
+
 # W87 ASCX 编译契约静态门禁：把"运行期才暴露的标记层问题"前移到静态检查。
 #
 # 覆盖 W86 遗留缺口：5 个后台管理型模块（tab=6）无可访问 URL，运行期门禁覆盖不到。
