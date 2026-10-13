@@ -28,6 +28,17 @@
   <en>Compatibility parameter for matching generated same-port virtual-directory configuration.</en>
   <zh-CN>用于匹配同端口虚拟目录生成配置的兼容参数。</zh-CN>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      验证方式：退出码 0 表示已停止匹配的 IIS Express 进程；再次探测该端口确认不再监听即可复核。
+      低敏边界：只按端口或生成的 applicationhost.config 路径匹配进程，停止范围被刻意限制，不会读取或输出连接串、凭据或业务数据。
+    </zh-CN>
+    <en>
+      Verification: exit code 0 means the matching IIS Express processes were stopped; probing the port again and confirming it no longer listens re-checks the result.
+      Low-sensitivity boundary: processes are matched only by port or generated applicationhost.config path, the stop scope is deliberately bounded, and no connection strings, credentials or business data are read or echoed.
+    </en>
+  </lang>
 #>
 [CmdletBinding()]
 param(

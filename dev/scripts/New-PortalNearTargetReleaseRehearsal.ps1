@@ -64,6 +64,19 @@
       <zh-CN>允许存在必需步骤失败时仍写出摘要并以成功退出交回调用方；用于收集证据，不得解读为发布批准。</zh-CN>
       <en>Allows the script to write a summary and return success even when required steps fail; it is for evidence collection and must not be interpreted as release approval.</en>
     </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：仓库根可读；MSBuild 可用；IIS Express 可启动或可复用；目标端口可用；发布与证据目录可写。
+      验证方式：退出码 0 表示演练各阶段完成并写出证据包；任一阶段失败即非零退出，证据中记录首个失败阶段。
+      低敏边界：不读取或输出真实连接串、密码、Token、Cookie 或证书私钥；不修改真实 IIS、不连生产库、不做破坏性迁移。
+    </zh-CN>
+    <en>
+      Prerequisites: the repository root is readable; MSBuild is available; IIS Express can be started or reused; the target port is free; publish and evidence directories are writable.
+      Verification: exit code 0 means every rehearsal stage completed and the evidence package was written; any stage failure returns non-zero and the evidence records the first failing stage.
+      Low-sensitivity boundary: no real connection strings, passwords, tokens, cookies or certificate private keys are read or echoed; real IIS is untouched, no production database is contacted, and no destructive migration runs.
+    </en>
+  </lang>
 #>
 [CmdletBinding()]
 param(

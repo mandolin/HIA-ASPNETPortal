@@ -22,6 +22,19 @@
   <en>Treats warnings as a failed gate for stricter security runs.</en>
   <zh-CN>在更严格的安全运行中将 Warning 视为门禁失败。</zh-CN>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：源码与安装脚本可读；-Profile 决定采用哪套 Dev/Test/Prod/Scan 期望。
+      验证方式：退出码 0 表示未发现阻断级默认凭据风险、1 表示有；可用 -OutputJson 落证据。
+      低敏边界：不连接实时数据库、不校验真实密码、不输出密钥；只读取源码与安装脚本文本。
+    </zh-CN>
+    <en>
+      Prerequisites: the source and setup scripts are readable; -Profile selects which Dev/Test/Prod/Scan expectation set applies.
+      Verification: exit code 0 means no blocking default-credential risk was found, 1 means one was; -OutputJson writes evidence.
+      Low-sensitivity boundary: no live database connection, no real password verification and no secret output; only source and setup-script text is read.
+    </en>
+  </lang>
 #>
 [CmdletBinding()]
 param(

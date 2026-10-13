@@ -34,6 +34,19 @@
   <en>Host name for the generated IIS Express binding.</en>
   <zh-CN>生成 IIS Express 绑定时使用的主机名。</zh-CN>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：本机装有 IIS Express；站点物理路径（默认 src/Portal）存在；目标端口未被占用。
+      验证方式：成功启动后以退出码 0 返回；可对 http://localhost:<端口>/ 发 HTTP 请求确认返回 200 以复核。
+      低敏边界：不读取或输出连接串、凭据与 Web.config 敏感值；仅在 temp 下生成隔离的 applicationhost.config，不修改全局 IIS 或项目文件。
+    </zh-CN>
+    <en>
+      Prerequisites: IIS Express is installed locally; the site physical path (src/Portal by default) exists; the target port is free.
+      Verification: exit code 0 is returned after a successful start; an HTTP request to http://localhost:<port>/ returning 200 confirms it.
+      Low-sensitivity boundary: no connection strings, credentials or sensitive Web.config values are read or echoed; only an isolated applicationhost.config under temp is generated, leaving global IIS and project files untouched.
+    </en>
+  </lang>
 #>
 [CmdletBinding()]
 param(

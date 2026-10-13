@@ -10,6 +10,19 @@
       <zh-CN>本脚本用于 P14.4 生产前硬化复核，读取源码或发布产物中的 Web.config、发布转换线索、目录存在性/ACL 摘要和 P14.2 release manifest 警告，并输出 JSON/Markdown 证据。它不会修改 IIS、Web.config、目录 ACL、外置配置或数据库；不会读取或输出真实连接串、密码、Token、Cookie 或证书私钥。源码基线中的 HTTPS、HSTS、machineKey 等目标环境事项只记录为 PendingTargetEnvironment，不伪装为生产通过。</zh-CN>
       <en>This script performs the P14.4 production-hardening preflight against source or a filesystem-published package. It reads Web.config, transform hints, directory/ACL summaries, and P14.2 release-manifest warnings, then writes JSON/Markdown evidence. It does not modify IIS, Web.config, directory ACLs, external configuration, or databases, and it never reads or prints real connection strings, passwords, tokens, cookies, or certificate private keys.</en>
     </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：源码或文件系统发布产物可读；P14.2 release manifest 存在（用于交叉核对警告）。
+      验证方式：退出码 0 表示无阻断级硬化缺口、1 表示有；JSON/Markdown 证据区分已核对项与 PendingTargetEnvironment 项。
+      低敏边界：不修改 IIS、Web.config、目录 ACL、外置配置或数据库；不读取或输出真实连接串、密码、Token、Cookie 或证书私钥。
+    </zh-CN>
+    <en>
+      Prerequisites: the source or filesystem publish output is readable; the P14.2 release manifest exists (used to cross-check warnings).
+      Verification: exit code 0 means no blocking hardening gap, 1 means one exists; the JSON/Markdown evidence separates verified items from PendingTargetEnvironment items.
+      Low-sensitivity boundary: IIS, Web.config, directory ACLs, external configuration and databases are not modified; real connection strings, passwords, tokens, cookies and certificate private keys are never read or echoed.
+    </en>
+  </lang>
 #>
 [CmdletBinding()]
 param(

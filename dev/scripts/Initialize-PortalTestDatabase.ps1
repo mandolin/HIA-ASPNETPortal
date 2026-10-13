@@ -25,6 +25,19 @@
   <zh-CN>仅当目标数据库不存在且调用方显式确认时，按历史基础脚本和当前 P2/P3/P5 迁移建立测试库。真实连接串只从仓库外 XML 文件读取，脚本不会输出或保存密码、服务器地址或完整连接串。</zh-CN>
   <en>Only when the target database is absent and the caller explicitly confirms, runs the legacy base scripts and current P2/P3/P5 migrations. The real connection string is read only from an external XML file; passwords, server addresses, and full connection strings are never output or persisted.</en>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：外置连接串配置文件可读且目标库为开发/测试用途；目标数据库尚不存在，或调用方显式传入确认开关。
+      验证方式：退出码 0 表示初始化完成，输出列出已执行的基础脚本与迁移；失败时以非零退出并给出首个失败脚本，不留下半初始化库。
+      低敏边界：连接串只从仓库外 XML 读取；密码、服务器名与完整连接串不回显、不落盘到证据。
+    </zh-CN>
+    <en>
+      Prerequisites: the external connection-string config is readable and the target is a development/test database; the target database does not exist yet, or the caller passes an explicit confirmation switch.
+      Verification: exit code 0 means initialization completed, and the output lists the base scripts and migrations executed; on failure a non-zero exit is returned with the first failing script, leaving no half-initialized database.
+      Low-sensitivity boundary: the connection string is read only from the external XML; passwords, server names and full connection strings are neither echoed nor persisted into evidence.
+    </en>
+  </lang>
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(

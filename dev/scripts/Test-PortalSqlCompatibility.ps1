@@ -69,6 +69,17 @@
   <en>Checks the P23.6 collaboration-item comment and workflow-rule schema without applying changes.</en>
   <zh-CN>仅检查 P23.6 协同事项评论与状态规则 schema，不执行变更。</zh-CN>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      验证方式：-Require* 开关为只读检查，里程碑缺失即失败（非零退出）；-Apply* 开关会真正执行迁移并改写目标库，须显式指定。
+      低敏边界：连接串从外置配置读取；不回显密码或完整连接串；含凭据的配置应使用已排除入库的模板或外置文件。
+    </zh-CN>
+    <en>
+      Verification: -Require* switches are read-only checks and fail (non-zero exit) when a milestone is missing; -Apply* switches actually execute migrations and rewrite the target database, so they must be requested explicitly.
+      Low-sensitivity boundary: connection strings come from external configuration; passwords and full connection strings are never echoed; credential-bearing configuration should use a template or external file excluded from Git.
+    </en>
+  </lang>
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(

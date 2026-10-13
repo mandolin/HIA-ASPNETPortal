@@ -33,6 +33,19 @@
   <en>Logical user key used by the VM-side credential resolver.</en>
   <zh-CN>供 VM 侧凭据解析器使用的逻辑用户键。</zh-CN>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：VM 代理监听的共享根目录存在且可写；VM 侧代理已在运行，能读取该目录。
+      验证方式：任务清单写入共享目录后以退出码 0 返回；执行结果以 VM 侧结构化日志与结果文件复核。
+      低敏边界：任务记录绝不写入原始密码、Token、Cookie 或连接串；认证用占位符由 VM 侧凭据文件解析。
+    </zh-CN>
+    <en>
+      Prerequisites: the shared root watched by the VM agent exists and is writable; the VM-side agent is already running and can read that directory.
+      Verification: exit code 0 is returned once the task manifest is written into the shared directory; execution is re-checked through the VM-side structured logs and result files.
+      Low-sensitivity boundary: the task record never contains raw passwords, tokens, cookies or connection strings; authentication uses placeholders resolved by VM-side credential files.
+    </en>
+  </lang>
 #>
 [CmdletBinding(DefaultParameterSetName = 'Command')]
 param(

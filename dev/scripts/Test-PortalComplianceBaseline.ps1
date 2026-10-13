@@ -28,6 +28,19 @@
   <en>Treats warnings as a non-zero result for stricter gates.</en>
   <zh-CN>在更严格门禁中将 Warning 视为非零结果。</zh-CN>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：源码可读（全部静态检查）；仅在需要运行期 HTTP 观测时才提供 -BaseUrl。
+      验证方式：退出码 0 表示无阻断级违规、1 表示有违规；可用 -OutputJson 落证据供复核。
+      低敏边界：不写入密钥、不改写 Web.config、不执行外部扫描工具；HTTP 只发 GET，不登录、不改站点，不回显连接串或凭据。
+    </zh-CN>
+    <en>
+      Prerequisites: the source is readable (all static checks); -BaseUrl is only needed when runtime HTTP observation is wanted.
+      Verification: exit code 0 means no blocking-level violation, 1 means violations exist; -OutputJson writes evidence for re-checking.
+      Low-sensitivity boundary: no secrets are written, Web.config is not modified, no external scanner is executed; HTTP is GET-only with no login and no site changes, and connection strings or credentials are never echoed.
+    </en>
+  </lang>
 #>
 [CmdletBinding()]
 param(

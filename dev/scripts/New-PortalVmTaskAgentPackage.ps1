@@ -33,6 +33,19 @@
   <en>Maximum execution time enforced by the generated VM agent.</en>
   <zh-CN>生成的 VM 代理强制执行的单任务最长运行时间。</zh-CN>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：输出目录可写；打包所需的代理源文件与脚本存在。
+      验证方式：成功生成包目录与可选 zip 后以退出码 0 返回；产物结构可逐项核对。
+      低敏边界：不在包内内嵌密码或生产密钥；不启动 VM 代理、不在本机运行浏览器测试。
+    </zh-CN>
+    <en>
+      Prerequisites: the output directory is writable; the agent source files and scripts required for packaging exist.
+      Verification: exit code 0 is returned once the package folder and optional zip are produced; the artifact structure can be checked item by item.
+      Low-sensitivity boundary: no passwords or production secrets are embedded in the package; the VM agent is not started and browser tests are not run locally.
+    </en>
+  </lang>
 #>
 [CmdletBinding()]
 param(

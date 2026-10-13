@@ -27,6 +27,19 @@
   <en>Target filesystem publish folder. Leave empty to create a timestamped folder under temp/publish; an existing folder is rejected to protect previous packages and manual targets.</en>
   <zh-CN>目标文件系统发布目录。留空时会在 temp/publish 下创建带时间戳的目录；若目录已存在则拒绝执行，以保护既有发布包和人工维护目标。</zh-CN>
 </lang>
+.NOTES
+  <lang>
+    <zh-CN>
+      前置条件：MSBuild 可用；src/Portal/Portal.csproj 可构建；目标发布目录尚不存在（已存在即失败，避免覆盖既有产物）。
+      验证方式：退出码 0 表示发布与前后两次就绪检查均通过；失败时以非零退出并指出未通过的检查项。
+      低敏边界：只写入指定发布目录；不修改 IIS、数据库、外置配置、凭据或生产机器，不读取或输出连接串。
+    </zh-CN>
+    <en>
+      Prerequisites: MSBuild is available; src/Portal/Portal.csproj builds; the target publish folder does not already exist (an existing folder fails the run so existing output is never overwritten).
+      Verification: exit code 0 means publishing and both pre/post readiness checks passed; on failure a non-zero exit names the check that did not pass.
+      Low-sensitivity boundary: only the selected publish folder is written; IIS, databases, external configuration, credentials and production machines are untouched, and connection strings are never read or echoed.
+    </en>
+  </lang>
 #>
 [CmdletBinding()]
 param(
