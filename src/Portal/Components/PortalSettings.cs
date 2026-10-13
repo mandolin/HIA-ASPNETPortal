@@ -34,8 +34,12 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>移动版兼容导航页签列表；其保留范围和未来移动端展现方案由后续规划确定。</zh-CN>
-        ///   <en>Mobile-compatibility navigation-tab list; its retention scope and future mobile presentation are decided by later planning.</en>
+        ///   <zh-CN>移动版兼容导航页签列表；其保留范围和未来移动端展现方案由后续规划确定。
+        ///   C-anp-P19 `W-anp-P111` 延期项登记（四分法：**外部 Pending——规划未决**）——判定依据：保留或下线移动兼容导航取决于尚未形成的移动端方案，本周期无法在无方案的前提下决策，故只登记不处置。
+        ///   所有者：产品/规划侧（移动端方案决策）。再入条件：移动端展现方案形成并明确本列表去留时。再入前不得单独删除本成员（它仍被既有移动兼容路径读取）。</zh-CN>
+        ///   <en>Mobile-compatibility navigation-tab list; its retention scope and future mobile presentation are decided by later planning.
+        ///   C-anp-P19 `W-anp-P111` deferred-item registration (four-way split: **external Pending — planning undecided**) — basis: whether to keep or retire the mobile-compatibility navigation depends on a mobile presentation plan that does not exist yet, so no decision can be made in this cycle; registered only, not acted on.
+        ///   Owner: product/planning (mobile presentation decision). Re-entry condition: the mobile presentation plan is formed and states this list's fate. Until then this member must not be removed on its own, since existing mobile-compatibility paths still read it.</en>
         /// </lang>
         /// </summary>
         public readonly List<ITabItem> MobileTabs = new List<ITabItem>();

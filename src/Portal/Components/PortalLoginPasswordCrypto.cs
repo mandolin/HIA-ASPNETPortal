@@ -418,7 +418,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 // <lang>
                 //   <zh-CN>RSA 解密失败不回退为明文；返回稳定分类并清除已消费的密钥。</zh-CN>
-                //   <en>Do not fall back to plaintext after RSA decryption fails; return a stable category while the consumed key remains cleared.</zh-CN>
+                //   <en>Do not fall back to plaintext after RSA decryption fails; return a stable category while the consumed key remains cleared.</en>
                 // </lang>
                 failureCode = "DecryptFailed";
                 eventId = PortalDiagnostics.Error(
@@ -847,7 +847,7 @@ namespace ASPNET.StarterKit.Portal
         {
             // <lang>
             //   <zh-CN>空值不让 ASN.1 INTEGER 变成零长度，保留一个零字节作为合法数值。</zh-CN>
-            //   <en>Do not let null or empty input become a zero-length ASN.1 INTEGER; retain one zero byte as a valid value.</zh-CN>
+            //   <en>Do not let null or empty input become a zero-length ASN.1 INTEGER; retain one zero byte as a valid value.</en>
             // </lang>
             if (value == null || value.Length == 0)
             {
@@ -856,7 +856,7 @@ namespace ASPNET.StarterKit.Portal
 
             // <lang>
             //   <zh-CN>跳过冗余前导零，但始终保留最后一个字节，避免全零数值被清空。</zh-CN>
-            //   <en>Skip redundant leading zeros while retaining the final byte so an all-zero value is never emptied.</zh-CN>
+            //   <en>Skip redundant leading zeros while retaining the final byte so an all-zero value is never emptied.</en>
             // </lang>
             int index = 0;
             while (index < value.Length - 1 && value[index] == 0)

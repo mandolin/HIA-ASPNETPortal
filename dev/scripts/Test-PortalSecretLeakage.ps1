@@ -133,13 +133,26 @@ $selfPathMarker = [System.IO.Path]::DirectorySeparatorChar + 'scripts' + [System
 # <lang>
 #   <zh-CN>当前唯一例外：JSEncrypt v2.3.1 是第三方库（文件头自带版本与许可证声明），其源码内置了一个
 #   用于自测的 demo RSA 私钥，形态上就是私钥块。该密钥属于公开库的公开内容，**不是本项目的凭据**，
-#   因此不构成泄露。但它同时说明两件事：① 该文件仍需保留在仓库中（受信任发布契约未排除 Scripts 目录）；
-#   ② 仓库内未发现任何页面引用它，是否仍需保留**待确认**，已登记为 C-anp-P15 的遗留项。</zh-CN>
+#   因此不构成泄露。
+#   C-anp-P19 `W-anp-P111` 据实订正：原注释称"仓库内未发现任何页面引用它，是否仍需保留（当时记为未决）"——
+#   该前提**不成立**。实测三个页面在加密提交路径上主动注册该脚本（`Admin/Register.aspx.cs`、
+#   `Admin/ManageUsers.aspx.cs`、`DesktopModules/Signin.ascx.cs` 均 `RegisterClientScriptInclude`
+#   `JSEncryptIE6`），且 `Scripts/Security/PortalLoginPasswordEncryption.js` 实际调用
+#   `new window.JSEncrypt()`。故"是否仍需保留"已有确定答案：**需要保留**，该未决项据此关闭。
+#   保留它的边界不变：它只服务既有 IE6 兼容的登录/注册/建号加密提交，不扩大用途，也不因它存在
+#   私钥形态就视为可存放真实凭据。</zh-CN>
 #   <en>The only current exception: JSEncrypt v2.3.1 is a third-party library (its header carries the version and license notice) whose
 #   source embeds a demo RSA private key used for self-test, which has exactly the shape of a private key block. That key is public
-#   content of a public library and **not a credential of this project**, so it is not a leak. It also surfaces two facts: first, the
-#   file still has to stay in the repository (the trusted publish contract does not exclude the Scripts directory); second, no page in
-#   the repository references it, so whether it is still needed is **unconfirmed** and is registered as a C-anp-P15 leftover item.</en>
+#   content of a public library and **not a credential of this project**, so it is not a leak.
+#   C-anp-P19 `W-anp-P111` factual correction: the earlier comment claimed "no page in the repository references it, so whether it is
+#   still needed is unconfirmed" — that premise **does not hold**. Measured evidence shows three pages actively register the script on
+#   the encrypted-submission path (`Admin/Register.aspx.cs`, `Admin/ManageUsers.aspx.cs`, and
+#   `DesktopModules/Signin.ascx.cs` all call `RegisterClientScriptInclude` for `JSEncryptIE6`), and
+#   `Scripts/Security/PortalLoginPasswordEncryption.js` actually calls `new window.JSEncrypt()`.
+#   The question "is it still needed" therefore has a definite answer: **yes, keep it**, and the former unconfirmed item is closed.
+#   Its boundary is unchanged: it serves only the existing IE6-compatible encrypted submission for sign-in, registration and user
+#   creation; its scope is not widened, and the mere presence of a private-key shape is never treated as licence to store real
+#   credentials there.</en>
 # </lang>
 $knownThirdPartyExceptions = @(
     [pscustomobject]@{

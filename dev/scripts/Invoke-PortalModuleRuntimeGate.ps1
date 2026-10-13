@@ -83,6 +83,8 @@ if (-not $connectionString) { Write-Error '连接串配置里没有名为 Portal
 # <lang>
 #   <zh-CN>预热用的站点基址：优先取 `temp\p65\p65-acceptance-context.json` 的 baseUrl，缺省回退 40001。
 #   仅用于回收后预热（填充模块运行期缓存），与门禁真实导航目标一致。</zh-CN>
+#   <en>Base URL used for warm-up: prefer `baseUrl` from `temp\p65\p65-acceptance-context.json`, falling back to 40001.
+#   It is used only for post-recycle warm-up (priming the module runtime cache) and matches the gate's real navigation target.</en>
 # </lang>
 $baseUrl = 'http://localhost:40001/'
 $acceptanceCtxPath = Join-Path $repoRoot 'temp\p65\p65-acceptance-context.json'
@@ -135,6 +137,7 @@ if ($orphan.Count -gt 0) {
 # is needed, and a new module **defaults into some group** (a subdirectory means business module) instead of being unclaimed
 # and skipped — which is precisely what default-deny must prevent. Known limitation: should a business module ever sit at the
 # root or a legacy module move into a subdirectory, the grouping is wrong and should be replaced by the package configuration.
+#   </en>
 # </lang>
 function Get-ModuleGroup([string] $sourceFile) {
     $normalized = $sourceFile.Replace('\', '/')
@@ -271,6 +274,7 @@ Write-Step "目标清单已留证：$discoveryPath"
 #   web.config timestamp. Why finally is mandatory: if the gate fails, an assertion throws, or the run is interrupted, an
 #   unrestored profile stays **in the working tree**, and the next person who builds may see module visibility that differs
 #   from expectations — such contamination is extremely hard to trace.
+#   </en>
 # </lang>
 $settingsBackup = $null
 if (Test-Path $settingsPath) { $settingsBackup = [System.IO.File]::ReadAllText($settingsPath, [System.Text.Encoding]::UTF8) }
@@ -313,6 +317,10 @@ function Set-Profile([string] $profile, [string] $enabledPackages = $null) {
     #   <zh-CN>`appSettings` 的键是**平面点号键**（如 `Portal.ModuleProfiles.Active`）。直接用 `$obj.'a.b.c' = $v`
     #   会被 PowerShell 当成嵌套路径导航而报错（属性不存在）。故用 `Add-Member -Force`：点号按字面键名处理，
     #   既合并既有键也新增键。`[string]` 形参会把 `$null` 转空串，故用 `IsNullOrEmpty` 判空。</zh-CN>
+    #   <en>`appSettings` keys are **flat dotted keys** (e.g. `Portal.ModuleProfiles.Active`). Assigning via `$obj.'a.b.c' = $v`
+    #   makes PowerShell treat the dots as nested path navigation and fail (the property does not exist), so `Add-Member -Force`
+    #   is used: dots are handled as literal key names, merging existing keys as well as adding new ones. A `[string]` parameter
+    #   turns `$null` into an empty string, so `IsNullOrEmpty` performs the emptiness check.</en>
     # </lang>
     $appSettings | Add-Member -NotePropertyName 'Portal.ModuleProfiles.Active' -NotePropertyValue $profile -Force
     if (-not [string]::IsNullOrEmpty($enabledPackages)) {
@@ -327,6 +335,11 @@ function Set-Profile([string] $profile, [string] $enabledPackages = $null) {
 #   <zh-CN>回收后预热：改 web.config 时间戳触发应用域回收，回收后首个请求需重新编译，往往超过 Set-Profile 后的 3s 睡眠。
 #   若门禁在实例就绪前就导航（尤其某组首个目标），会打到未渲染完成的页面而误判失败。故切档位后显式预热：读外置连接串、
 #   查 PortalCfg_Modules 全部非空 TabId 并逐个请求至 200。取页签失败则退化为仅首页预热。</zh-CN>
+#   <en>Post-recycle warm-up: touching the web.config timestamp recycles the app domain, and the first request afterwards must
+#   recompile, which usually exceeds the 3-second sleep after Set-Profile. Navigating before the instance is ready (especially
+#   for a group's first target) hits a page that has not finished rendering and misreports a failure. Warm-up is therefore
+#   explicit after a profile switch: read the external connection string, query PortalCfg_Modules for every non-empty TabId, and
+#   request each until it returns 200. If the tab lookup fails, degrade to home-page warm-up only.</en>
 # </lang>
 function WarmUp-Instance([string] $urlBase) {
     $warmUrls = @($urlBase.TrimEnd('/') + '/')
@@ -392,6 +405,9 @@ try {
             # <lang>
             #   <zh-CN>business 组显式启用 HIA.ModuleProbe：否则切档位会把它禁用、模块不渲染 → 门禁误判
             #   （见 Set-Profile 注释，L2 14/15 元凶）。legacy 组无需启用。切档位后预热，避免回收竞态。</zh-CN>
+            #   <en>The business group explicitly enables HIA.ModuleProbe: otherwise the profile switch disables it, the module
+            #   does not render, and the gate misjudges the result (see the Set-Profile note — the cause of L2 14/15). The legacy
+            #   group needs no such enable. Warm up after the switch to avoid a recycle race.</en>
             # </lang>
             $enableArg = $null
             if ($groupKey -eq 'business') { $enableArg = 'HIA.ModuleProbe' }

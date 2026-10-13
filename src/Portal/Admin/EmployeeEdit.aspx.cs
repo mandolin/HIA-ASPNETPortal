@@ -649,7 +649,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 // <lang>
                 //   <zh-CN>新增没有旧版本可比较，直接接受空时间戳；更新路径仍必须提供合法值。</zh-CN>
-                //   <en>Creation has no prior version to compare, so accept a null timestamp; update paths still require a valid value.</zh-CN>
+                //   <en>Creation has no prior version to compare, so accept a null timestamp; update paths still require a valid value.</en>
                 // </lang>
                 return true;
             }

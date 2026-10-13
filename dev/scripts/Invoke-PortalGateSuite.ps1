@@ -82,13 +82,12 @@ function Write-Step([string] $message) { Write-Host "[gate] $message" }
 #     L0 静态 —— 只依赖源码，随时可跑；
 #     L1 构建后 —— 须先构建出产物（单测与冒烟依赖 bin/）；
 #     L2 运行期 —— 须有 IIS Express、数据库、playwright，且部分还要临时切模块档位。
-#   把 L2 与 L0 混在一起，会让"环境没起"和"代码有问题"两种失败互相掩盖。
-# </lang>
-# <en>Layering exists because the gates depend on **different prerequisites**, so they cannot be run as one lump:
+#   把 L2 与 L0 混在一起，会让"环境没起"和"代码有问题"两种失败互相掩盖。</zh-CN>
+#   <en>Layering exists because the gates depend on **different prerequisites**, so they cannot be run as one lump:
 #     L0 static — depends only on source and can run any time;
 #     L1 post-build — requires build output first (unit tests and smoke tests depend on bin/);
 #     L2 runtime — requires IIS Express, the database, playwright, and for some gates a temporary module-profile switch.
-#   Mixing L2 with L0 would let two different failures — "the environment is down" and "the code is broken" — mask each other.
+#     Mixing L2 with L0 would let two different failures — "the environment is down" and "the code is broken" — mask each other.</en>
 # </lang>
 $gateLayers = [ordered]@{
     L0 = @(
@@ -327,6 +326,7 @@ $slowGates = @(
 #   print results in different shapes, and a single regex produces both kinds of misjudgement — reading a **passing**
 #   "Failed: False" as a failure, or a **passing** "0 violation(s)" as one. Every marker is therefore paired with the
 #   pattern that means the opposite.
+#   </en>
 # </lang>
 $failureIndicators = @(
     @{ Pattern = 'RESULT:\s*Fail';                 Negation = 'RESULT:\s*Pass' }

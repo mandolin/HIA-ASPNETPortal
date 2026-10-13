@@ -309,7 +309,7 @@ namespace ASPNET.StarterKit.Portal
             {
                 // <lang>
                 //   <zh-CN>隐藏提交面板并绑定空集合，避免旧回发数据继续显示为可提交状态。</zh-CN>
-                //   <en>Hide the submit panel and bind an empty collection so stale postback data cannot remain visibly submittable.</zh-CN>
+                //   <en>Hide the submit panel and bind an empty collection so stale postback data cannot remain visibly submittable.</en>
                 // </lang>
                 RequestPanel.Visible = false;
                 // <lang>

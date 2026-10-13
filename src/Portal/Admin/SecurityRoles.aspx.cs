@@ -329,7 +329,7 @@ namespace ASPNET.StarterKit.Portal
             PortalSettings portalSettings = PortalContext.GetPortalSettings();
             // <lang>
             //   <zh-CN>只在当前门户角色集合中匹配 roleId，阻断跨门户或不存在角色的操作。</zh-CN>
-            //   <en>Match roleId only within the current Portal role set, blocking cross-Portal or missing-role operations.</zh-CN>
+            //   <en>Match roleId only within the current Portal role set, blocking cross-Portal or missing-role operations.</en>
             // </lang>
             currentRole = RolesDB.GetPortalRoles(portalSettings.PortalId)
                 .FirstOrDefault(role => role.RoleId == roleId);
