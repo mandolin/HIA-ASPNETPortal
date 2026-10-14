@@ -633,6 +633,17 @@ ORDER BY [OccurredUtc] DESC, [EventId] DESC;",
         ///   <en>The creation request after trimming lengths and filling default UTC time and system actor.</en>
         /// </l>
         /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>`"system"` 是**身份缺失时的兜底字面量**，不是真实身份：它只表示"本次创建未记录到具体操作者"，
+        /// 审计与排查不得据此判定为系统自动执行。该兜底**不替代调用方传递身份的责任** ——
+        /// 需要可追溯的创建者时调用方必须显式传入，否则审计链在该记录上断掉。</zh-CN>
+        ///   <en>`"system"` is a **fallback literal for a missing identity**, not a real identity: it only means "this creation recorded no
+        /// specific actor", and audits or troubleshooting must not read it as automatic system execution. The fallback **does not replace the
+        /// caller's duty to pass identity** — when a traceable creator is required the caller must pass it explicitly, otherwise the audit
+        /// chain breaks on that record.</en>
+        /// </lang>
+        /// </remarks>
         private static PortalWorkItemCreateRequest NormalizeCreateRequest(PortalWorkItemCreateRequest request)
         {
             request = request ?? new PortalWorkItemCreateRequest();
@@ -645,6 +656,15 @@ ORDER BY [OccurredUtc] DESC, [EventId] DESC;",
                 AssignedUserId = request.AssignedUserId.HasValue && request.AssignedUserId.Value > 0 ? request.AssignedUserId : null,
                 AssignedRoleKey = NormalizeOptionalText(request.AssignedRoleKey, 120),
                 CreatedUtc = request.CreatedUtc ?? DateTime.UtcNow,
+                // <lang>
+                //   <zh-CN>调用方未显式提供创建者时，统一落库为字面量 `"system"`。**它不是真实身份**，只表示"本次创建未记录到具体操作者"，
+                // 审计与排查时不得据此判定"是系统自动执行的"。需要可追溯的创建者时，调用方必须显式传入；
+                // 该兜底不替代调用方的身份传递责任。</zh-CN>
+                //   <en>When the caller does not supply a creator explicitly, the literal `"system"` is stored. **It is not a real identity** — it
+                // only means "this creation recorded no specific actor", so audits and troubleshooting must not read it as "the system did this
+                // automatically". When a traceable creator is needed, the caller must pass it explicitly; this fallback does not replace the
+                // caller's responsibility to pass identity.</en>
+                // </lang>
                 CreatedBy = string.IsNullOrWhiteSpace(request.CreatedBy) ? "system" : NormalizeText(request.CreatedBy, 100),
                 DueUtc = request.DueUtc
             };
@@ -678,6 +698,13 @@ ORDER BY [OccurredUtc] DESC, [EventId] DESC;",
                 EventType = NormalizeText(request.EventType, 40),
                 TargetStatus = NormalizeText(request.TargetStatus, 20),
                 ActorUserId = request.ActorUserId.HasValue && request.ActorUserId.Value > 0 ? request.ActorUserId : null,
+                // <lang>
+                //   <zh-CN>与创建者的 `"system"` 兜底同一口径：未显式提供操作者时落库为该字面量，它**不是真实身份**，
+                // 不得在审计中解读为"系统自动处理"；追溯真实操作者须由调用方显式传入。</zh-CN>
+                //   <en>The same rule as the `"system"` creator fallback: when no actor is supplied explicitly this literal is stored, and it is
+                // **not a real identity** — audits must not read it as "handled automatically by the system". Tracing the real actor requires the
+                // caller to pass it explicitly.</en>
+                // </lang>
                 ActorName = string.IsNullOrWhiteSpace(request.ActorName) ? "system" : NormalizeText(request.ActorName, 100),
                 Comment = NormalizeOptionalText(request.Comment, 1000),
                 OccurredUtc = request.OccurredUtc ?? DateTime.UtcNow
