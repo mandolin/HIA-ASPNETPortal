@@ -1,0 +1,117 @@
+# <lang>
+#   <zh-CN>官网发布工作流（C-anp-P22 `W-anp-P134`）。
+#
+#     **它做什么**：在 `main` 变更时重新生成站点 → 跑三项不需要编译的静态门禁 → 发布到 `gh-pages` 分支。
+#
+#     **与既有 L0 门禁套件的关系（不重复、不冲突）**：
+#     - 本工作流**只跑不需要编译的静态子集**（生成 + 双语/N1/N2 + 公开面 + 文档合规）。
+#       **完整 L0 门禁套件**（`Invoke-PortalGateSuite.ps1 -Layer L0`，现 29 个）仍需在**本地**运行 ——
+#       其中含 .NET Framework 4.8 的构建类门禁，需要 Windows + Visual Studio/MSBuild 环境，不适合在 CI 内重跑。
+#     - 因此**不存在重复**：CI 守"发布面"，本地 L0 守"代码与文档整体"；两者的公共部分（如公开面门禁）
+#       是**同一个脚本**，不是各写一套。
+#
+#     **为什么用 windows-latest**：站点脚本是 PowerShell（`Build-PortalSite.ps1` 等），
+#       Windows 运行器自带 PowerShell，无需额外安装。
+#
+#     **⚠️ 未实测声明（重要）**：本工作流在本仓库**尚未在 GitHub 上实际运行过**（远端尚无 `gh-pages` 分支）。
+#       首次启用需：① 在仓库 Settings → Pages 把发布源设为 `gh-pages` 分支；② 观察首次运行结果。
+#       若推送步骤失败，站点不会更新，但**不会**影响 `main` 分支内容。</zh-CN>
+#   <en>Website publishing workflow (C-anp-P22 `W-anp-P134`).
+#
+#     **What it does**: on changes to `main`, regenerate the site → run three compile-free static gates → publish to the
+#     `gh-pages` branch.
+#
+#     **Relationship to the existing L0 gate suite (no duplication, no conflict)**:
+#     - This workflow runs **only the compile-free static subset** (generation + bilingual/N1/N2 + public surface + docs
+#       compliance). The **full L0 suite** (`Invoke-PortalGateSuite.ps1 -Layer L0`, currently 29 gates) still runs
+#       **locally** — it contains .NET Framework 4.8 build gates that need Windows + Visual Studio/MSBuild and are not
+#       suited to re-running inside CI.
+#     - Hence **no duplication**: CI guards the "publication surface", local L0 guards "code and docs as a whole"; the
+#       overlapping parts (e.g. the public-surface gate) are **the same script**, not two implementations.
+#
+#     **Why windows-latest**: the site scripts are PowerShell (`Build-PortalSite.ps1` and friends), and the Windows runner
+#       ships with PowerShell, so nothing extra must be installed.
+#
+#     **⚠️ Not-yet-executed notice (important)**: this workflow **has not actually run on GitHub for this repository** yet
+#       (the remote has no `gh-pages` branch). To enable it: ① set the publishing source to the `gh-pages` branch under
+#       Settings → Pages; ② watch the first run. If the push step fails the site will not update, but it will **not**
+#       affect the contents of `main`.</en>
+# </lang>
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'docs/**'
+      - 'dev/scripts/Build-PortalSite.ps1'
+      - 'dev/scripts/Test-PortalSitePublicSurface.ps1'
+      - 'dev/scripts/Test-PortalPublicDocumentation.ps1'
+      - '.github/workflows/publish-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # <lang>
+      #   <zh-CN>生成站点页面，同时执行双语一致性（缺译即失败）、N1（parent 有效）、N2（站内链接可达）。</zh-CN>
+      #   <en>Generates site pages while enforcing bilingual parity (a missing translation fails), N1 (valid parent) and N2 (reachable in-site links).</en>
+      # </lang>
+      - name: Generate site (bilingual + N1 + N2)
+        shell: pwsh
+        run: ./dev/scripts/Build-PortalSite.ps1
+
+      - name: Verify site public surface (S1-S4)
+        shell: pwsh
+        run: ./dev/scripts/Test-PortalSitePublicSurface.ps1
+
+      - name: Verify public documentation compliance
+        shell: pwsh
+        run: ./dev/scripts/Test-PortalPublicDocumentation.ps1
+
+      # <lang>
+      #   <zh-CN>发布到 `gh-pages`：把生成后的 `site/` 内容作为分支根。
+      #     站点是**生成物**，故以覆盖方式发布；`main` 分支内容不受影响。
+      #     使用内置 `GITHUB_TOKEN`，不引入任何第三方 action，也不写入任何密钥。</zh-CN>
+      #   <en>Publishes to `gh-pages` with the generated `site/` content as the branch root.
+      #     The site is **generated output**, so publishing overwrites; the `main` branch is unaffected.
+      #     It uses the built-in `GITHUB_TOKEN`, introduces no third-party action and writes no secrets.</en>
+      # </lang>
+      - name: Publish to gh-pages
+        if: github.ref == 'refs/heads/main'
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $publishDir = Join-Path $env:RUNNER_TEMP 'site-publish'
+          if (Test-Path -LiteralPath $publishDir) { Remove-Item -Recurse -Force $publishDir }
+          New-Item -ItemType Directory -Path $publishDir | Out-Null
+          Copy-Item -Path (Join-Path 'site' '*') -Destination $publishDir -Recurse -Force
+
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          git switch --orphan gh-pages
+          Get-ChildItem -Force | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force
+          Copy-Item -Path (Join-Path $publishDir '*') -Destination '.' -Recurse -Force
+
+          git add -A
+          $hasChanges = -not (git diff --cached --quiet)
+          if (-not $hasChanges) {
+            Write-Host 'No site changes to publish.'
+            exit 0
+          }
+          git commit -m ('Publish site from ' + $env:GITHUB_SHA)
+          git push --force origin gh-pages
+          Write-Host 'Published to gh-pages.'
