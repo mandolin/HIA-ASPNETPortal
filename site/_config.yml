@@ -1,0 +1,36 @@
+# <lang>
+#   <zh-CN>Jekyll 站点配置（C-anp-P22 `W-anp-P130`）。
+#     主题：`Just the Docs`（**远程主题**）—— 由 GitHub Pages **原生构建**，无自建 CI 链路；
+#     该主题"无需特殊插件"，可跑在 GitHub Pages 标准 Jekyll 编译器上，从而绕开其插件白名单限制。
+#     以上取舍依据见 `work-zone/dev/plans/works/W-anp-P129-github-pages-research.md`。
+#   <en>Jekyll site configuration (C-anp-P22 `W-anp-P130`).
+#     Theme: `Just the Docs` (**remote theme**) — built **natively** by GitHub Pages with no custom CI in the path;
+#     the theme "requires no special plugins" and runs on GitHub Pages' standard Jekyll compiler, thereby sidestepping
+#     its plugin allowlist. See `work-zone/dev/plans/works/W-anp-P129-github-pages-research.md` for the trade-offs.</en>
+# </lang>
+title: HIA-ASPNETPortal
+description: 企业内网 Web Forms 门户平台 / Enterprise intranet portal platform on ASP.NET Web Forms
+remote_theme: just-the-docs/just-the-docs
+
+# <lang>
+#   <zh-CN>双语并行：中文位于站点根，英文位于 /en/。两棵树的页面**一一对应**，
+#     不存在"只有中文没有英文"的已上架页面 —— 这是本周期的硬约束。</zh-CN>
+#   <en>Bilingual parity: Chinese lives at the site root, English under /en/. The two trees are **one-to-one**;
+#     no published page may exist in Chinese without its English counterpart — a hard constraint of this cycle.</en>
+# </lang>
+lang: zh-CN
+
+# <lang>
+#   <zh-CN>生成物由 `dev/scripts/Build-PortalSite.ps1` 从 `docs/` 与翻译源产出；
+#     本目录为**站点源码版本化位置**，不是运行期输出。</zh-CN>
+#   <en>Output is produced by `dev/scripts/Build-PortalSite.ps1` from `docs/` plus the translation source;
+#   this directory is the **versioned site source**, not runtime output.</en>
+# </lang>
+exclude:
+  - README.md
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+
+search_enabled: true
+heading_anchors: true
