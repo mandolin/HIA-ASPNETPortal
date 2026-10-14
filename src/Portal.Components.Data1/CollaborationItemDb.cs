@@ -1493,6 +1493,43 @@ WHERE [Item].[ItemId] = @ItemId",
             }
         }
 
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>解析操作者在其协作事项上的授权快照（权限键集合与是否管理员）。</zh-CN>
+        ///   <en>Resolves an actor's authorization snapshot over a collaboration item (permission key set and administrator flag).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="actorUserId">
+        /// <l>
+        ///   <zh-CN>操作者用户 Id；为空或非正数时直接判定为未授权。</zh-CN>
+        ///   <en>Actor user Id; empty or non-positive is judged unauthorized immediately.</en>
+        /// </l>
+        /// </param>
+        /// <param name="authorization">
+        /// <l>
+        ///   <zh-CN>成功时输出授权快照；失败时为 <c>null</c>。</zh-CN>
+        ///   <en>The authorization snapshot on success; <c>null</c> on failure.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>取得授权快照时为 <c>true</c>；否则为 <c>false</c>。</zh-CN>
+        ///   <en><c>true</c> when an authorization snapshot was obtained; otherwise <c>false</c>.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>**fail-closed 不变量**：任一前置缺失都判为"未授权"而不是放行 —— 无用户 Id、`usersDb` 不可用、
+        /// 按 Id 找不到用户、用户名为空，或读取过程中抛异常，一律返回 <c>false</c>。`rolesDb` 不可用时权限键集合为**空**，
+        /// 不会因此获得任何权限（管理员标志仍由角色名或显式权限键决定，不因依赖缺失而被提升）。
+        /// 该约束无法由普通静态检查证明，故显式登记：调用方不得把"取不到授权"当作"有权限"处理。</zh-CN>
+        ///   <en>**Fail-closed invariant**: any missing prerequisite is judged "unauthorized" rather than allowed — no user id, an unavailable
+        /// `usersDb`, no user found by id, an empty user name, or an exception during the read all return <c>false</c>. When `rolesDb` is
+        /// unavailable the permission key set is **empty**, which grants nothing (the administrator flag still depends on a role name or an
+        /// explicit permission key and is never elevated by a missing dependency). Ordinary static checks cannot prove that constraint, so it
+        /// is registered here explicitly: callers must never treat "authorization unavailable" as "authorized".</en>
+        /// </lang>
+        /// </remarks>
         private bool TryGetActorAuthorization(int? actorUserId, out CollaborationItemActorAuthorization authorization)
         {
             authorization = null;
@@ -1841,6 +1878,14 @@ SELECT CASE WHEN EXISTS (
             DateTime submittedUtc = request.SubmittedUtc ?? DateTime.UtcNow;
             return new CollaborationItemCreateRequest
             {
+                // <lang>
+                //   <zh-CN>事项类型为空时回退到参考数据集的常规类型（`PortalReferenceDataSets.GeneralItemType`），而不是拒绝创建 ——
+                // 类型是**可分类属性**而非准入条件；调用方需要特定类型时必须显式传入，否则记录落入"常规"而影响后续按类型的统计与筛选。</zh-CN>
+                //   <en>An empty item type falls back to the reference dataset's general type (`PortalReferenceDataSets.GeneralItemType`)
+                // rather than rejecting the creation — the type is a **classifiable attribute**, not an admission condition; a caller needing a
+                // specific type must pass it explicitly, otherwise the record lands in "general" and skews later per-type statistics and
+                // filtering.</en>
+                // </lang>
                 ItemTypeKey = string.IsNullOrWhiteSpace(request.ItemTypeKey) ? PortalReferenceDataSets.GeneralItemType : NormalizeText(request.ItemTypeKey, 80),
                 Title = NormalizeText(request.Title, 200),
                 Summary = NormalizeOptionalText(request.Summary, 500),
@@ -1853,6 +1898,13 @@ SELECT CASE WHEN EXISTS (
                 PriorityKey = NormalizePriority(request.PriorityKey),
                 DueUtc = request.DueUtc,
                 SubmittedUtc = submittedUtc,
+                // <lang>
+                //   <zh-CN>与 `PortalWorkItemDb` 的 `"system"` 兜底同一口径：未显式提供提交者时落库为该字面量，它**不是真实身份**，
+                // 只表示"本次提交未记录到具体操作者"；审计与排查不得据此判定为系统自动执行，追溯真实提交者须由调用方显式传入。</zh-CN>
+                //   <en>The same rule as `PortalWorkItemDb`'s `"system"` fallback: when no submitter is supplied explicitly this literal is stored, and
+                // it is **not a real identity** — it only means "this submission recorded no specific actor". Audits and troubleshooting must not
+                // read it as automatic system execution; tracing the real submitter requires the caller to pass it explicitly.</en>
+                // </lang>
                 SubmittedBy = string.IsNullOrWhiteSpace(request.SubmittedBy) ? "system" : NormalizeText(request.SubmittedBy, 100),
                 ParentItemId = request.ParentItemId.HasValue && request.ParentItemId.Value > 0 ? request.ParentItemId : null
             };

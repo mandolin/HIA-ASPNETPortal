@@ -710,6 +710,15 @@ namespace ASPNET.StarterKit.Portal
                 string normalizedLoginName = string.IsNullOrWhiteSpace(loginName)
                     ? Normalize(item.Name)
                     : Normalize(loginName);
+                // <lang>
+                //   <zh-CN>注意：显示名的空值回退策略与登录名**不同** —— 登录名为空时保留**旧值**（`item.Name`），
+                // 而显示名为空时**不保留旧显示名**，而是回退到本次规范化后的登录名。调用方若想保留原显示名，
+                // 必须显式传入原值，不能靠"传空"实现。</zh-CN>
+                //   <en>Note: the empty-value fallback for the display name differs from the login name's — an empty login name preserves
+                // the **old value** (`item.Name`), whereas an empty display name does **not** preserve the old display name and instead
+                // falls back to this run's normalized login name. A caller that wants to keep the original display name must pass it
+                // explicitly; passing empty will not do it.</en>
+                // </lang>
                 string normalizedDisplayName = string.IsNullOrWhiteSpace(displayName)
                     ? normalizedLoginName
                     : Normalize(displayName);
