@@ -3,16 +3,8 @@ layout: default
 lang: en
 parent: 产品概览
 permalink: /en/overview/
-title: 产品概览
----
----
-layout: default
 title: Product overview
-lang: en
-parent: Product overview
-nav_order: 1
 ---
-
 # Product overview and positioning (HIA-ASPNETPortal)
 
 > **`W-anp-P124` deliverable**. This page answers "what it is, who it is for, what it can do, and where its

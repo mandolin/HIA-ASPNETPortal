@@ -156,18 +156,46 @@ foreach ($e in $entries) {
     }
 
     $pathSeg = if ([string]::IsNullOrWhiteSpace($e.path)) { [System.IO.Path]::GetFileNameWithoutExtension($e.doc) } else { $e.path }
-    $zhTitle = if ($e.parent) { $e.parent } else { $pathSeg }
+
+    # <lang>
+    #   <zh-CN>**页面标题取自文档自身，不取分区名**（`W-anp-P136` 修正，由上线后实测发现）：
+    #     初版把中英两页的 `title` 都写成 `parent`（分区名，中文），导致**英文页面的浏览器标签与
+    #     `<title>` 显示中文**（实测 `/en/overview/` 的 title 为"产品概览"）。
+    #     现改为：中文页取其正文首个 `#` 一级标题；英文页取译本 front matter 的 `title`。
+    #     两者都取不到时才回退到 `parent`。`parent` 仍只用于**导航分组**，不兼任页面标题。</zh-CN>
+    # </lang>
+    # 先读取两侧正文，再从正文里取标题（顺序不可颠倒：标题提取依赖已读入的正文）
+    $zhBody = [System.IO.File]::ReadAllText($zhPath, $utf8)
+    $enBody = [System.IO.File]::ReadAllText($enSource, $utf8)
+
+    $zhTitle = $e.parent
+    $zhH1 = [regex]::Match($zhBody, '(?m)^#\s+(.+?)\s*$')
+    if ($zhH1.Success) { $zhTitle = $zhH1.Groups[1].Value.Trim() }
+
+    $enTitle = $e.parent
+    $enFmTitle = [regex]::Match($enBody, '(?m)^title:\s*(.+?)\s*$')
+    if ($enFmTitle.Success) { $enTitle = $enFmTitle.Groups[1].Value.Trim() }
+    else {
+        $enH1 = [regex]::Match($enBody, '(?m)^#\s+(.+?)\s*$')
+        if ($enH1.Success) { $enTitle = $enH1.Groups[1].Value.Trim() }
+    }
+
+    # <lang>
+    #   <zh-CN>**剥离源文本自带的 front matter**（`W-anp-P136` 修正，由上线后直接读生成产物发现）：
+    #     英文译本（`site/_translations/*.md`）本身带 front matter，若不剥离，生成的页面会有**两份 front matter**
+    #     （`--- … ---` 紧接着又一组 `--- … ---`），Jekyll 只解析第一份，第二份的 YAML 会被**当正文渲染到页面上**。
+    #     标题已在上面先提取完成，故此处剥离不会丢失信息。中文源同样做防御性剥离（当前 `docs/` 无 front matter）。</zh-CN>
+    # </lang>
+    $zhBody = [regex]::Replace($zhBody, '(?s)\A\s*---\r?\n.*?\r?\n---\s*\r?\n?', '')
+    $enBody = [regex]::Replace($enBody, '(?s)\A\s*---\r?\n.*?\r?\n---\s*\r?\n?', '')
 
     $targetDir = Join-Path $siteDir $pathSeg
     if (-not (Test-Path -LiteralPath $targetDir)) { $null = New-Item -ItemType Directory -Path $targetDir }
-    $zhBody = [System.IO.File]::ReadAllText($zhPath, $utf8)
     $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $e.parent + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
     [System.IO.File]::WriteAllText((Join-Path $targetDir 'index.md'), ($zhFm + $zhBody), $utf8)
 
     $enDir = Join-Path $targetDir 'en'
     if (-not (Test-Path -LiteralPath $enDir)) { $null = New-Item -ItemType Directory -Path $enDir }
-    $enBody = [System.IO.File]::ReadAllText($enSource, $utf8)
-    $enTitle = $e.parent
     $enFm = "---`nlayout: default`nlang: en`nparent: " + $e.parent + "`npermalink: /en/" + $pathSeg + "/`ntitle: " + $enTitle + "`n---`n"
     [System.IO.File]::WriteAllText((Join-Path $enDir 'index.md'), ($enFm + $enBody), $utf8)
 

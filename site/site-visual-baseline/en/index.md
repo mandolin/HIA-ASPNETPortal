@@ -3,16 +3,8 @@ layout: default
 lang: en
 parent: 参考
 permalink: /en/site-visual-baseline/
-title: 参考
----
----
-layout: default
 title: Site visual baseline
-lang: en
-parent: Site visual baseline
-nav_order: 1
 ---
-
 > `C-anp-P22` (project website) `W-anp-P131` deliverable. Principle 1 gate: **produce the site visual prototype
 > before landing content**.
 >

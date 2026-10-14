@@ -3,7 +3,7 @@ layout: default
 lang: zh-CN
 parent: 参考
 permalink: /site-visual-baseline/
-title: 参考
+title: 官网视觉基线
 ---
 > `C-anp-P22`（项目官网）`W-anp-P131` 交付。原则1 gate：**先出站点视觉原型，再落地内容填充**。
 >
