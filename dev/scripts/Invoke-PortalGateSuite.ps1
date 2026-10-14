@@ -142,6 +142,26 @@ $gateLayers = [ordered]@{
         #   unchecked.</en>
         # </lang>
         @{ File = 'Test-PortalPublicDocumentation.ps1';    Runner = 'ps1'; Kind = '公开文档合规'; Args = @() }
+        # <lang>
+        #   <zh-CN>C-anp-P21（`W-anp-P127`）新增：文档示例有效性门禁。补的是 `Test-PortalPublicDocumentation` 的盲区 ——
+        #   后者只校验 Markdown **相对链接**，而**命令示例里的路径**（`dev\scripts\*.ps1`、`src\Setup\*.sql`）不在其范围；
+        #   脚本改名或删除后这些示例会静默过期，文档仍显示跑不通的命令却无人报错。三项检查：E1 脚本示例存在、
+        #   E2 SQL 示例存在、E3 README 中英双语结构齐备。
+        #   教学示例的**占位路径**（如 `HIA.YourModule`、`PortalBiz_YourEntities.sql`）注定不存在，已按占位标记豁免并
+        #   在 `[GATE-NOTE]` 透明报告豁免数 —— 否则门禁会永久 FAIL，沦为"长期红着被当成背景噪音"的老问题。
+        #   门禁自带证明边界声明：只证明引用存在与结构齐备，**不证明**示例输出正确、参数有效或语义与实现一致。</zh-CN>
+        #   <en>C-anp-P21 (`W-anp-P127`) new: the documentation-example validity gate. It closes a blind spot of
+        #   `Test-PortalPublicDocumentation`, which validates only Markdown **relative links** — **paths inside command
+        #   examples** (`dev\scripts\*.ps1`, `src\Setup\*.sql`) fall outside its scope, so after a script is renamed or deleted
+        #   those examples go silently stale while the docs still show a command that cannot run. Three checks: E1 script
+        #   examples exist, E2 SQL examples exist, E3 the README's bilingual structure is present.
+        #   **Placeholder paths** in teaching examples (e.g. `HIA.YourModule`, `PortalBiz_YourEntities.sql`) can never exist, so
+        #   they are exempted by placeholder marker and the exemption count is transparently reported via `[GATE-NOTE]` —
+        #   otherwise the gate would fail permanently and fall into the old "stays red, dismissed as background noise" trap.
+        #   The gate declares its own proof boundary: it proves only that references exist and the structure is present, **not**
+        #   that an example's output is correct, its arguments are valid, or its semantics match the implementation.</en>
+        # </lang>
+        @{ File = 'Test-PortalDocumentationExamples.ps1'; Runner = 'ps1'; Kind = '文档示例有效性'; Args = @() }
         @{ File = 'Test-PortalDocumentationReadiness.ps1'; Runner = 'ps1'; Kind = '文档就绪度'; Args = @() }
         @{ File = 'Test-PortalSecretLeakage.ps1';          Runner = 'ps1'; Kind = '密钥泄露扫描'; Args = @() }
         @{ File = 'Test-PortalDefaultCredentialRisk.ps1';  Runner = 'ps1'; Kind = '默认凭据风险'; Args = @() }

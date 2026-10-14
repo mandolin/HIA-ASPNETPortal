@@ -56,5 +56,6 @@
 
 ## 元文档
 - `documentation-registry.md` — D1 登记表（适用/不适用 + 责任/触发/验证）
-- `documentation-map.md` — 本图（D2 导航）
-- `README.md` — 仓库入口（建议补文档分区导航指向本图）
+- `documentation-map.md` — 本图（导航）
+- `documentation-review-checklist.md` — **人工走查清单**（自动化门禁无法证明的部分：正确性 / 双语对等 / 读者可达性 / 不误信门禁）
+- `README.md` — 仓库入口（含文档分区导航指向本图）
