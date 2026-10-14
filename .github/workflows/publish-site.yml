@@ -94,24 +94,76 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $ErrorActionPreference = 'Stop'
+
+          # <lang>
+          #   <zh-CN>**每个 git 命令都必须显式检查退出码**。这是首次运行失败的**第二个**根因：
+          #     `$ErrorActionPreference = 'Stop'` 只对 PowerShell **cmdlet** 生效，对 `git.exe` 这类**原生命令无效** ——
+          #     git 失败时脚本**不会抛异常**，会带着错误状态继续往下跑，把一个小失败放大成难以理解的后续报错。
+          #     故此处用包装函数把原生命令的失败转成异常。</zh-CN>
+          #   <en>**Every git command must have its exit code checked explicitly.** This was the **second** root cause of the first
+          #     failed run: `$ErrorActionPreference = 'Stop'` applies only to PowerShell **cmdlets**, **not to native commands** such
+          #     as `git.exe` — when git fails the script does **not** throw and keeps running in a broken state, turning one small
+          #     failure into a confusing downstream error. This wrapper converts native-command failure into an exception.</en>
+          # </lang>
+          function Invoke-Git {
+            param([string[]] $GitArgs)
+            & git @GitArgs
+            if ($LASTEXITCODE -ne 0) {
+              throw ('git ' + ($GitArgs -join ' ') + ' 失败，退出码 ' + $LASTEXITCODE)
+            }
+          }
+
           $publishDir = Join-Path $env:RUNNER_TEMP 'site-publish'
           if (Test-Path -LiteralPath $publishDir) { Remove-Item -Recurse -Force $publishDir }
           New-Item -ItemType Directory -Path $publishDir | Out-Null
           Copy-Item -Path (Join-Path 'site' '*') -Destination $publishDir -Recurse -Force
 
-          git config user.name  'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          # <lang>
+          #   <zh-CN>发布前剔除**构建缓存与生成输出**。它们不是站点内容，且会把本地构建痕迹带进公开分支。
+          #     （本地 `jekyll build` 会在 `site/` 下产生 `.jekyll-cache/`；若不剔除，它会被一起发布。）</zh-CN>
+          #   <en>Remove **build cache and generated output** before publishing. They are not site content and would carry local build
+          #     traces into the public branch. (A local `jekyll build` creates `.jekyll-cache/` under `site/`; without this it would be
+          #     published along with everything else.)</en>
+          # </lang>
+          foreach ($junk in @('.jekyll-cache', '_site')) {
+            $p = Join-Path $publishDir $junk
+            if (Test-Path -LiteralPath $p) { Remove-Item -Recurse -Force $p }
+          }
 
-          git switch --orphan gh-pages
-          Get-ChildItem -Force | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force
-          Copy-Item -Path (Join-Path $publishDir '*') -Destination '.' -Recurse -Force
+          # <lang>
+          #   <zh-CN>**在一个独立的临时仓库里发布**，不切换主工作区的分支。
+          #     这是首次运行失败的**第一个**根因：原实现在主工作区执行 `git switch --orphan gh-pages`，
+          #     而**上一步的生成脚本已经改写了 `site/` 下的页面**，工作区是脏的，于是 git 拒绝切换
+          #     （`error: Your local changes ... would be overwritten by checkout`）。
+          #     改为独立仓库后，主工作区是否脏**完全无关**，也不再有"误提交到 main"的风险。
+          #     （首次运行时，失败后脚本继续在主工作区 commit，日志中出现 `[main …] Publish site from …`；
+          #     因 push 目标为 `gh-pages` 且失败，远端 main 未受影响。）</zh-CN>
+          #   <en>**Publish from a separate temporary repository** and never switch branches in the main workspace.
+          #     This was the **first** root cause of the failed run: the original code ran
+          #     `git switch --orphan gh-pages` in the main workspace, but **the generation step had already rewritten pages under
+          #     `site/`**, leaving the workspace dirty, so git refused to switch
+          #     (`error: Your local changes ... would be overwritten by checkout`).
+          #     With a separate repository the dirty state of the main workspace is **irrelevant**, and the risk of "committing to
+          #     main by mistake" disappears. (In the failed run the script continued and committed in the main workspace — the log
+          #     shows `[main …] Publish site from …`; since the push targeted `gh-pages` and failed, remote `main` was unaffected.)</en>
+          # </lang>
+          Invoke-Git @('init', $publishDir)
+          Invoke-Git @('-C', $publishDir, 'checkout', '-b', 'gh-pages')
+          Invoke-Git @('-C', $publishDir, 'config', 'user.name', 'github-actions[bot]')
+          Invoke-Git @('-C', $publishDir, 'config', 'user.email', 'github-actions[bot]@users.noreply.github.com')
+          Invoke-Git @('-C', $publishDir, 'add', '-A')
 
-          git add -A
-          $hasChanges = -not (git diff --cached --quiet)
-          if (-not $hasChanges) {
+          # <lang>
+          #   <zh-CN>`git diff --cached --quiet` 无变更时退出码为 0，有变更时为 1 ——
+          #     这里**直接判断退出码**，不再用 `-not` 包装（包装会让语义绕一圈，且易读错）。</zh-CN>
+          # </lang>
+          & git -C $publishDir diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
             Write-Host 'No site changes to publish.'
             exit 0
           }
-          git commit -m ('Publish site from ' + $env:GITHUB_SHA)
-          git push --force origin gh-pages
+
+          Invoke-Git @('-C', $publishDir, 'commit', '-m', ('Publish site from ' + $env:GITHUB_SHA))
+          Invoke-Git @('-C', $publishDir, 'remote', 'add', 'origin', ('https://x-access-token:' + $env:GITHUB_TOKEN + '@github.com/' + $env:GITHUB_REPOSITORY + '.git'))
+          Invoke-Git @('-C', $publishDir, 'push', '--force', 'origin', 'HEAD:gh-pages')
           Write-Host 'Published to gh-pages.'
