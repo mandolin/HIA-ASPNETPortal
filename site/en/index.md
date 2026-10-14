@@ -47,10 +47,12 @@ Current version: **v1.0.0** (first release, 2026-10-09).
 ## Start here
 
 - [Product overview](/en/overview/) — what it is, who it is for, and its boundaries
-- [Quick start](/en/quickstart/) — run it locally
-- [Developer docs](/en/develop/) — build modules and themes
-- [Operations docs](/en/operate/) — deploy and operate
-- [Changelog](/en/changes/) — release notes
+- [Site visual baseline](/en/site-visual-baseline/) — the basis for palette, type and typography values
+
+> The site is being published in batches: the remaining navigation sections (evaluate / quick start / learn / reference /
+> develop / operate / changes) have no content yet, so only **published pages** are listed here — no links that would
+> resolve to 404 (fixed in `W-anp-P132`: the first version listed idealised paths before the pages existed, making every
+> link broken).
 
 ---
 

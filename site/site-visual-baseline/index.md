@@ -1,3 +1,10 @@
+---
+layout: default
+lang: zh-CN
+parent: 参考
+permalink: /site-visual-baseline/
+title: 参考
+---
 > `C-anp-P22`（项目官网）`W-anp-P131` 交付。原则1 gate：**先出站点视觉原型，再落地内容填充**。
 >
 > 本页是官网的**视觉基线规范**：规定配色、字体、排版层级、代码块与表格取色、以及导航骨架的呈现约定。
