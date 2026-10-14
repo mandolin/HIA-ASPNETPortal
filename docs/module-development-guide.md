@@ -37,7 +37,8 @@ DesktopModules/
 }
 ```
 
-> **`schemaVersion` 现状（C-anp-P20 实测）**：`ModuleProbe` 这类只读参考包用 `1`；但**所有业务模块（`HIA.*`）的 manifest 实际为 `2`**——`PortalModuleControl<T>` 加载器要求 `capability` 块，而该块由 `schemaVersion: 2` 引入。`Test-PortalBusinessModuleSmoke.ps1` 目前仍打印"期望 `schemaVersion: 1`"，属门禁口径陈旧（全部业务模块均为 2），**不要**为过门禁把业务模块降回 1。
+> **`schemaVersion` 与 `capability` 现状（C-anp-P20 实测，C-anp-P21 `W-anp-P126` 据源码订正）**：`ModuleProbe` 这类只读参考包用 `1`；**所有业务模块（`HIA.*`）的 manifest 实际为 `2`**。`capability` 块**由 `schemaVersion: 2` 引入，但是可选的** —— 未声明时模块为 Unclassified（合法），并非缺失。一旦声明，`capabilityId` 必须能在能力注册表解析到、`role` 必须属于封闭五值词表（`Primary` / `Contributor` / `Projection` / `Adapter` / `Block`）。实测 `MyWorkItems` 即 `schemaVersion: 2` 且无 `capability` 段，属合法形态。
+> **门禁口径已校准**（C-anp-P19 / P21）：`Test-PortalBusinessModuleSmoke.ps1` 不再要求"一律为 1"，而是分场景判定 —— `2` = 业务模块合规；`1` 且无 `capability` = 只读参考包合规。**不要**为过门禁把业务模块降回 1，也不要为了"看起来完整"给不需要的模块硬加 `capability`。
 
 规则如下：
 
@@ -184,7 +185,7 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 以下四类缺陷**构建与单测全绿时不会出现，只在运行期以"页面空白 / 门禁误判"形式暴露**，是 `C-anp-P20` 交付两个业务模块时逐项踩出的。新增任何模块都先过一遍：
 
 1. **代码后置必须登记进 `Portal.csproj`。** `src/Portal` 是 **Web Application 项目**（有 `Portal.csproj`），既有模块的 `.ascx.cs` 编译进 `bin/Portal.dll`。新增模块若只在磁盘上放文件、未在 csproj 登记 `<Compile Include="DesktopModules\{Module}\{Module}.ascx.cs">`（及 `.ascx.designer.cs`）与 `<Content Include="...{Module}.ascx / module.json / Styles/*.css">`，则 `CodeBehind` 在运行期报"未能加载类型 ASPNET.StarterKit.Portal.{Module}"；更隐蔽的是**未登记时 MSBuild 不编译这些文件**，于是 `out var`、`long→string` 一类编译错误只在运行期炸。
-2. **6 套正式皮肤必须补齐主题作用域规则。** 只写模块自带 `Styles/{Module}.css` 而**不在 `src/Portal/App_Themes/<Theme>/Default.css` 补 `body.portal-theme-<规范化名> .<模块前缀类>` 规则**，模块在多数皮肤下丢失主题化样式（AGENTS.md 硬性要求）。取值取自各皮肤既有 `my-work-items` 同族调色板，并为不支持 `var()` 的 IE9+ 提供显式回退。
+2. **7 套正式皮肤（含 `Default` 回退主题）必须补齐主题作用域规则。** 只写模块自带 `Styles/{Module}.css` 而**不在 `src/Portal/App_Themes/<Theme>/Default.css` 补 `body.portal-theme-<规范化名> .<模块前缀类>` 规则**，模块在多数皮肤下丢失主题化样式（AGENTS.md 硬性要求）。取值取自各皮肤既有 `my-work-items` 同族调色板，并为不支持 `var()` 的 IE9+ 提供显式回退。`Default` 虽是回退主题，同样受覆盖门禁约束，不能只补 6 套正式皮肤而漏它。
 3. **标记层与 CSS 类名必须一致。** 标记层用 `form-grid` / `form-field` / `list` 而模块 CSS 写 `.grid` / `.field` / `.recent` 时，模块样式与主题规则会**全部落空却无任何报错**。以标记层（`.ascx` 的 `class=` 与 Web Forms 控件的 `CssClass=`）为权威，模块 CSS 与主题规则只承载布局与取色。
 4. **配置生效源分两层，判断依据是「JSON 文件是否存在于站点根目录」。** 业务包需经 `Portal.ModulePackages.Enabled` 白名单放行。机制如下（见 `src/Portal/Util/AppSettingsLoader.cs`）：
    - **基础值**：`Web.config` 的 `<appSettings>` 始终先生效；

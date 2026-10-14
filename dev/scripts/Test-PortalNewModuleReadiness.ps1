@@ -6,11 +6,11 @@
   </lang>
 .DESCRIPTION
   <lang>
-    <zh-CN>依据 `docs/module-development-guide.md`（C-anp-P20 补强的四道坑）。四项检查均为 Fail 级：**R1** 代码后置必须登记进 `Portal.csproj`（`src/Portal` 是 Web Application 项目，未登记 `Compile` 的文件不进 `bin/Portal.dll`，运行期才报"未能加载类型"）；**R2** `.ascx` 必须使用 `CodeBehind` 而非 `CodeFile`；**R3** 6 套正式皮肤 `Default.css` 均须含 `.<prefix>` 主题作用域规则；**R4** 模块私有 CSS 的类选择符必须在 `.ascx` 标记层出现（防止标记层与 CSS 类名漂移导致样式与主题规则全部落空）。
+    <zh-CN>依据 `docs/module-development-guide.md`（C-anp-P20 补强的四道坑）。四项检查均为 Fail 级：**R1** 代码后置必须登记进 `Portal.csproj`（`src/Portal` 是 Web Application 项目，未登记 `Compile` 的文件不进 `bin/Portal.dll`，运行期才报"未能加载类型"）；**R2** `.ascx` 必须使用 `CodeBehind` 而非 `CodeFile`；**R3** 7 套正式皮肤（含 `Default` 回退主题）`Default.css` 均须含 `.<prefix>` 主题作用域规则；**R4** 模块私有 CSS 的类选择符必须在 `.ascx` 标记层出现（防止标记层与 CSS 类名漂移导致样式与主题规则全部落空）。
     **前置条件**：只需源码可读，属编排入口 L0 层，不连数据库、不启动 IIS、不执行浏览器。
     **验证方式**：退出码 0 通过、1 有违规；输出逐项列出违规文件与原因。
     **低敏边界**：脚本只读取源码与项目文件，不读取连接串、凭据或业务数据。</zh-CN>
-    <en>Based on `docs/module-development-guide.md` (the four pitfalls reinforced in C-anp-P20). All four checks are Fail-level: **R1** the code-behind must be registered in `Portal.csproj` (`src/Portal` is a Web Application project; files not registered as `Compile` do not enter `bin/Portal.dll` and only fail at runtime with "could not load type"); **R2** `.ascx` must use `CodeBehind`, not `CodeFile`; **R3** all six official skins' `Default.css` must contain a `.<prefix>` theme scope rule; **R4** every class selector in the module's private CSS must appear in the `.ascx` markup, preventing markup/CSS class drift that would silently void both module styles and theme rules.
+    <en>Based on `docs/module-development-guide.md` (the four pitfalls reinforced in C-anp-P20). All four checks are Fail-level: **R1** the code-behind must be registered in `Portal.csproj` (`src/Portal` is a Web Application project; files not registered as `Compile` do not enter `bin/Portal.dll` and only fail at runtime with "could not load type"); **R2** `.ascx` must use `CodeBehind`, not `CodeFile`; **R3** all seven official skins' `Default.css` (including the `Default` fallback theme) must contain a `.<prefix>` theme scope rule; **R4** every class selector in the module's private CSS must appear in the `.ascx` markup, preventing markup/CSS class drift that would silently void both module styles and theme rules.
     **Prerequisites**: source only — this is an L0-layer gate with no database, IIS or browser access.
     **Verification**: exit code 0 passes, 1 means violations; the output lists each offending file and reason.
     **Low-sensitivity boundary**: the script reads only source and project files — no connection strings, credentials or business data.</en>
@@ -46,7 +46,7 @@
 #       bin/Portal.dll；新增模块若只在磁盘上存在而未登记 Compile，CodeBehind 在运行期报"未能加载类型"，
 #       且 MSBuild 不会编译这些文件，故 out var / long->string 一类错误只在运行期暴露。
 #   R2 .ascx 必须使用 CodeBehind（非 CodeFile）。
-#   R3 6 套正式皮肤 Default.css 均须含 .<prefix> 主题作用域规则（AGENTS.md 硬性要求；只写模块自带 Styles/*.css
+#   R3 7 套正式皮肤 Default.css 均须含 .<prefix> 主题作用域规则（AGENTS.md 硬性要求；只写模块自带 Styles/*.css
 #       而主题层不补规则，模块在多数皮肤下丢失主题化样式）。
 #   R4 模块私有 CSS 的类选择符必须在 .ascx 标记层出现。标记层与 CSS 类名漂移（如标记用 form-grid / list、
 #       CSS 写 .grid / .recent）会让模块样式与主题规则全部落空却无报错。
@@ -80,7 +80,18 @@ if ([string]::IsNullOrWhiteSpace($ModuleCssPrefix)) { $ModuleCssPrefix = $Module
 
 $moduleDir = Join-Path $repoRoot ('src\Portal\DesktopModules\' + $ModuleName)
 $csprojPath = Join-Path $repoRoot 'src\Portal\Portal.csproj'
-$themes = @('EnterpriseLight', 'EnterpriseDark', 'OaLight', 'OaDark', 'StateClassicLight', 'StateClassicDark')
+# <lang>
+#   <zh-CN>R3 检查的主题清单 = 全部 7 套正式皮肤（含 `Default` 回退主题）。
+#     C-anp-P21 `W-anp-P126` 修正：原清单只有 6 套（漏 `Default`），而 `Test-PortalModuleSkinCoverage.ps1`
+#     自 C-anp-P23 起已把"7 套皮肤全覆盖"升为硬失败 —— 两个门禁口径不一致会让"缺 Default 皮肤规则"的
+#     模块通过 R3 却被 W100 拦截，产生互相矛盾的结论。现统一为 7 套。</zh-CN>
+#   <en>R3's theme list = all seven official skins (including the `Default` fallback theme).
+#     C-anp-P21 `W-anp-P126` fix: the original list had only six (missing `Default`), while
+#     `Test-PortalModuleSkinCoverage.ps1` has promoted "full coverage across all 7 skins" to a hard failure since
+#     C-anp-P23 — the mismatched scopes let a module missing the `Default` rule pass R3 yet be blocked by W100,
+#     producing contradictory verdicts. Both are now aligned at seven.</en>
+# </lang>
+$themes = @('Default', 'EnterpriseLight', 'EnterpriseDark', 'OaLight', 'OaDark', 'StateClassicLight', 'StateClassicDark')
 
 $violations = @()
 function Add-Violation([string] $rule, [string] $detail) {
@@ -141,8 +152,8 @@ if (-not [string]::IsNullOrWhiteSpace($ExpectedPackageId)) {
     }
 }
 
-# R3：6 套正式皮肤均含 .<prefix> 主题作用域规则
-Write-Host '[readiness] R3 6 套皮肤主题规则'
+# R3：7 套正式皮肤（含 Default 回退主题）均含 .<prefix> 主题作用域规则
+Write-Host '[readiness] R3 7 套皮肤主题规则（含 Default 回退主题）'
 foreach ($theme in $themes) {
     $themeCss = Join-Path $repoRoot ('src\Portal\App_Themes\' + $theme + '\Default.css')
     if (-not (Test-Path $themeCss)) {

@@ -8,7 +8,7 @@
 
 Enterprise intranet portal platform on ASP.NET Web Forms, forked from the original ASP.NET Portal Starter Kit on Codeplex and extended with permission and data-scope enforcement, workflow state machines, auditing, module package governance, theme governance, and an automated gate suite.
 
-Current version: **v0.7.0**. Maturity is stated as **usable / reference / research baseline** — no production-environment evidence yet, so production-grade reliability is **not** claimed.
+Current version: **v1.0.0** (first release, `M-ANP-RELEASE-READY-PORTAL` / L10). Maturity is stated as **usable / reference / research baseline**: the seven L10 criteria are met, but production readiness under real target-environment evidence (`M-ANP-TRUSTED-PORTAL` / L7) is **not** yet achieved, so production-grade reliability is **not** claimed. See [versioning.md](docs/versioning.md) for the wording rules.
 
 ## 功能特性
 
@@ -21,7 +21,7 @@ Current version: **v0.7.0**. Maturity is stated as **usable / reference / resear
 | 主题治理 | 主题包契约校验与回退 |
 | 业务模块 | 6 个受信任模块包：员工目录、待办工作台、员工资料确认 / 更正、业务申请 |
 | 国际化 | 中文 / 英文双语资源，强类型资源键，资源契约门禁 |
-| 自动化门禁 | **14 个门禁统一编排**，按 L0/L1/L2 分层，退出码与输出双判定 |
+| 自动化门禁 | **门禁统一编排**，按 L0/L1/L2 分层，退出码与输出双判定（数量随治理推进而增长，以实跑汇总为准） |
 
 ## 快速上手（本地开发）
 
