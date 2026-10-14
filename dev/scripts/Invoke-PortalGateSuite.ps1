@@ -162,6 +162,34 @@ $gateLayers = [ordered]@{
         #   that an example's output is correct, its arguments are valid, or its semantics match the implementation.</en>
         # </lang>
         @{ File = 'Test-PortalDocumentationExamples.ps1'; Runner = 'ps1'; Kind = '文档示例有效性'; Args = @() }
+        # <lang>
+        #   <zh-CN>C-anp-P22（`W-anp-P133`）新增：**站点公开面**门禁。补的是一条**发布面**盲区 ——
+        #     既有 `Test-PortalPublicDocumentation.ps1` 只扫描 `docs/*.md`，**不覆盖 `site/`**；
+        #     而 `site/` 是**将被发布到公开官网**的目录（含生成产物与翻译源），一旦把内部链接、
+        #     内部计划路径或凭据形态发布出去就是对外事故，且不像代码缺陷那样能被本地测试发现。
+        #     四项检查：S1 私有仓库链接、S2 凭据赋值形态、S3 绝对本地路径、S4 内部计划/ADR 路径。
+        #     **口径对齐**：S1 只查**链接/URL 形态**，与既有文档门禁只查链接目标一致 ——
+        #     初版用裸词匹配会把文档里"内部资料留在 `work-zone/`"这类**纯文本提及**也判违规，
+        #     从而与 docs/ 门禁对同一内容给出矛盾结论（`W-anp-P126` 批评过的口径不一致）。
+        #     口径约定：**命中只报告文件与行号，不打印命中文本**（避免为证无问题而把疑似敏感片段写进日志）。
+        #     证明边界：只守"公开面不含私有内容"，不证明内容正确、译本等价或链接可达
+        #     （后两者分别归 `Build-PortalSite.ps1` 的 N1/N2 与人工走查）。</zh-CN>
+        #   <en>C-anp-P22 (`W-anp-P133`) new: the **site public surface** gate. It closes a **publication-surface** blind spot — the
+        #     existing `Test-PortalPublicDocumentation.ps1` scans only `docs/*.md` and **does not cover `site/`**, yet `site/` is the
+        #     directory **published to the public website** (including generated output and translation sources); publishing an
+        #     internal link, an internal plan path or a credential shape is an external incident, and unlike a code defect it is not
+        #     caught by local tests. Four checks: S1 private-repository links, S2 credential assignment shapes, S3 absolute local
+        #     paths, S4 internal plan / ADR paths.
+        #     **Aligned scope**: S1 matches **link/URL forms only**, matching the existing documentation gate's link-target-only
+        #     check — the first version used a bare word and flagged *prose mentions* such as "internal material stays in
+        #     `work-zone/`", which would contradict the docs gate on the same content (the scope mismatch criticised in
+        #     `W-anp-P126`). Convention: **a hit reports file and line number only, never the matched text** (so a suspected
+        #     sensitive fragment is not written into the log just to prove nothing is wrong).
+        #     Proof boundary: it guards only "the public surface carries no private content"; it does not prove content is
+        #     correct, that translations are equivalent, or that links resolve (those belong to `Build-PortalSite.ps1` N1/N2 and
+        #     to the human walkthrough).</en>
+        # </lang>
+        @{ File = 'Test-PortalSitePublicSurface.ps1';    Runner = 'ps1'; Kind = '站点公开面'; Args = @() }
         @{ File = 'Test-PortalDocumentationReadiness.ps1'; Runner = 'ps1'; Kind = '文档就绪度'; Args = @() }
         @{ File = 'Test-PortalSecretLeakage.ps1';          Runner = 'ps1'; Kind = '密钥泄露扫描'; Args = @() }
         @{ File = 'Test-PortalDefaultCredentialRisk.ps1';  Runner = 'ps1'; Kind = '默认凭据风险'; Args = @() }
