@@ -21,6 +21,30 @@ remote_theme: just-the-docs/just-the-docs
 lang: zh-CN
 
 # <lang>
+#   <zh-CN>视觉基调：**浅色**（原则1 gate 要求）。当前取 Just the Docs **内置** `light` 方案 ——
+#     不经插件、不经自定义 Sass，构建链路最短且行为可验证。
+#
+#     若后续要**严格同源**产品的 `EnterpriseLight` 皮肤配色，须先核对**远程主题** `_variables.scss`
+#     中的实际变量名再定义自定义 scheme（`_sass/color_schemes/<name>.scss` + `color_scheme: <name>`）：
+#     该主题文档明确警告「不要直接编辑 `_sass/support/variables.scss`」，且**覆盖调色板变量后依赖它的
+#     变量不会自动级联更新**，必须手动重写依赖规则。在变量名被核实前**不写猜测的变量名** ——
+#     那会导致样式静默失效，比不接入更难发现。取色基准见 `docs/site-visual-baseline.md`。</zh-CN>
+#   <en>Visual tone: **light** (required by the Principle 1 gate). The current setting uses Just the Docs'
+#     **built-in** `light` scheme — no plugins, no custom Sass, shortest and most verifiable build path.
+#
+#     To later match the product's `EnterpriseLight` skin **exactly**, first verify the actual variable names in the
+#     **remote theme's** `_variables.scss`, then define a custom scheme (`_sass/color_schemes/<name>.scss` plus
+#     `color_scheme: <name>`): the theme docs explicitly warn “do not edit `_sass/support/variables.scss`
+#     directly”, and **variables depending on an overridden palette variable do not cascade automatically** —
+#     dependent rules must be rewritten by hand. Until the names are verified, **no guessed variable names are
+#     written** — a silently dead style is harder to detect than no override at all. See
+#     `docs/site-visual-baseline.md` for the palette baseline.</en>
+# </lang>
+color_scheme: light
+search_enabled: true
+heading_anchors: true
+
+# <lang>
 #   <zh-CN>生成物由 `dev/scripts/Build-PortalSite.ps1` 从 `docs/` 与翻译源产出；
 #     本目录为**站点源码版本化位置**，不是运行期输出。</zh-CN>
 #   <en>Output is produced by `dev/scripts/Build-PortalSite.ps1` from `docs/` plus the translation source;
@@ -31,6 +55,3 @@ exclude:
   - vendor
   - Gemfile
   - Gemfile.lock
-
-search_enabled: true
-heading_anchors: true

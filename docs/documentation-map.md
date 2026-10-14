@@ -57,5 +57,6 @@
 ## 元文档
 - `documentation-registry.md` — D1 登记表（适用/不适用 + 责任/触发/验证）
 - `documentation-map.md` — 本图（导航）
+- `site-visual-baseline.md` — **官网视觉基线**（配色 / 字体 / 排版层级 / 代码块与表格取色 / 导航骨架）
 - `documentation-review-checklist.md` — **人工走查清单**（自动化门禁无法证明的部分：正确性 / 双语对等 / 读者可达性 / 不误信门禁）
 - `README.md` — 仓库入口（含文档分区导航指向本图）
