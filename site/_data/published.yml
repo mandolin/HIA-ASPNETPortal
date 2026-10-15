@@ -77,6 +77,10 @@
   path: theme-semantic-variables
   parent: 参考
 
+- doc: frontend-asset-guide.md
+  path: frontend-asset-guide
+  parent: 开发
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
