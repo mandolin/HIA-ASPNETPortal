@@ -133,6 +133,10 @@
   path: docs-index
   parent: 产品概览
 
+- doc: documentation-review-checklist.md
+  path: documentation-review-checklist
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考

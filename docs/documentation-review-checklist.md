@@ -44,7 +44,8 @@
 | --- | --- |
 | Markdown 相对链接有效性 | `Test-PortalPublicDocumentation.ps1` |
 | 公开文档索引进度 | `Test-PortalPublicDocumentation.ps1` |
-| 私有仓库链接 / 绝对路径 / 凭据形态 | `Test-PortalPublicDocumentation.ps1` |
+| 私有仓库链接 / 绝对路径 / 凭据形态（`docs/`） | `Test-PortalPublicDocumentation.ps1` |
+| 私有仓库名 / 凭据形态 / 绝对路径 / 内部计划路径（**站点发布面 `site/`**） | `Test-PortalSitePublicSurface.ps1` |
 | 命令示例引用的脚本 / SQL 路径存在 | `Test-PortalDocumentationExamples.ps1` |
 | README 中英双语结构 | `Test-PortalDocumentationExamples.ps1` |
 | 版本一致性（CHANGELOG / git tag / 程序集） | `Test-PortalVersionConsistency.ps1` |
@@ -58,4 +59,4 @@
 1. **可即时修正**（错别字、过期数字、坏链）→ 直接改，并在提交信息说明；
 2. **需决策或超范围** → 登记为延期项，写明**所有者、判定依据、再入条件**，不静默搁置。
 
-走查结论（含"无问题"）应记录在当周期 WorkZone 完成记录中，**不得只做不记**。
+走查结论（含"无问题"）应记录在当周期的**内部完成记录**中，**不得只做不记**。
