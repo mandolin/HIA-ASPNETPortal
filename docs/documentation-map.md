@@ -47,7 +47,7 @@
 - `architecture.md` — 总体架构
 - `business-application-state-machine.md` — 业务应用状态机
 - `collaboration-item-state-machine.md` — 协作项状态机
-- （重大决策 ADR / milestones 见 WorkZone）
+- （重大决策 ADR / milestones 见**独立私有仓库**，不随公开文档发布）
 
 ### 7. 变更兼容发布
 - `versioning.md` — 版本与兼容策略
@@ -60,3 +60,8 @@
 - `site-visual-baseline.md` — **官网视觉基线**（配色 / 字体 / 排版层级 / 代码块与表格取色 / 导航骨架）
 - `documentation-review-checklist.md` — **人工走查清单**（自动化门禁无法证明的部分：正确性 / 双语对等 / 读者可达性 / 不误信门禁）
 - `README.md` — 仓库入口（含文档分区导航指向本图）
+
+## 对外发布形态（官网）
+
+`docs/` 是**中文权威源**；`site/_translations/` 是**英文译本**。`dev/scripts/Build-PortalSite.ps1` 从两者生成双语站点并强制「中英两版齐备方可声明上架」，再发布到 `gh-pages` 分支。
+因此本图所列文档**只有在译本齐备后才出现在官网**；未上架文档在站点上不存在对应页面，这是预期行为而非缺失。
