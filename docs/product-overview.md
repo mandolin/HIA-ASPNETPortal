@@ -14,7 +14,7 @@
 
 定位为 **可用 / 参考 / 研究基线**：本版本达成 `M-ANP-RELEASE-READY-PORTAL`（**L10**）七条判据 —— 能力覆盖、逐条目对标、质量门禁、文档就绪、开源就绪、版本锚点、口径约束。
 
-但**真实生产环境证据下的生产就绪（`M-ANP-TRUSTED-PORTAL` / L7）尚未达成**，因此**不宣称生产级可信**。完整口径约束见 [versioning.md](versioning.md)；目标环境证据的现状与缺口见 `work-zone/` 内的阶段证据（公开文档不登记待补证据）。
+但**真实生产环境证据下的生产就绪（`M-ANP-TRUSTED-PORTAL` / L7）尚未达成**，因此**不宣称生产级可信**。完整口径约束见 [versioning.md](versioning.md)；目标环境证据的现状与缺口记录在本项目的**内部阶段证据**中（公开文档不登记待补证据）。
 
 ## 二、适用对象
 
@@ -51,7 +51,7 @@
 - **不宣称生产级可信**（L7 证据未达成）；
 - 不支持现代前端框架或前后端分离；
 - 生成文档目录（`src/Documentation/`、`src/Portal.Components.Data/Documentation/`、`src/DoxyGen/`）为**生成物输出**，不是维护文档入口（见 `documentation-artifacts-guide.md`）；
-- 内部计划、ADR、AI 协作资料统一留在私有仓库 `work-zone/`，不进公开 `docs/`。
+- 内部计划、ADR、AI 协作资料统一留在**独立的私有仓库**中，不进公开 `docs/`。
 
 ## 五、兼容性与运行环境
 

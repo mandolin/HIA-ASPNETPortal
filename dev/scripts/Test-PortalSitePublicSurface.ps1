@@ -99,7 +99,16 @@ $patterns = @(
     [pscustomobject]@{ Id = 'S1'; Name = '私有仓库链接'; Regex = '(?i)(\]\([^)]*(work-zone|\.serena)|https?://[^\s)]*(work-zone|\.serena))' },
     [pscustomobject]@{ Id = 'S2'; Name = '凭据赋值形态'; Regex = '(?i)(password|passwd|pwd|secret|token|api[_-]?key|connectionstring|conn[_-]?str)\s*[:=]' },
     [pscustomobject]@{ Id = 'S3'; Name = '绝对本地路径'; Regex = '[A-Za-z]:\\' },
-    [pscustomobject]@{ Id = 'S4'; Name = '内部计划/ADR 路径'; Regex = '(?i)(\]\([^)]*work-zone[\\/](dev[\\/]plans|docs[\\/]adr)|work-zone[\\/](dev[\\/]plans|docs[\\/]adr)[A-Za-z0-9._\\/-]*\.(md|json))' }
+    # <lang>
+    #   <zh-CN>S4 扩大（`W-anp-P137`）：初版只匹配 `work-zone/dev/plans` 与 `work-zone/docs/adr` 两个子路径。
+    #     系统扫描 `docs/` 后发现 **16 处** `work-zone/` 路径提及分布在 **9 个**文档里，形态远不止这两个
+    #     （如 `work-zone/notify/`、`work-zone\dev\evidence\p13.3\*.json`、`work-zone/dev/plans/C-anp-P10.md`）。
+    #     只要任何一个被上架，就会把私有仓库的内部路径发布到公开官网，而旧 S4 **抓不到**。
+    #     现改为匹配 `work-zone` 后接分隔符的**任意路径形态**（链接或纯文本均是）——
+    #     这样"待上架文档含内部路径"会在**上架时**被拦住，而不是等发布后靠人发现。
+    #     注意：本检查只针对 `site/`（发布面），不动 `docs/`；`docs/` 里的同类提及按批次随上架清理。</zh-CN>
+    # </lang>
+    [pscustomobject]@{ Id = 'S4'; Name = '内部计划/证据/ADR 路径'; Regex = '(?i)work-zone\s*[\\/]' }
 )
 
 $files = @(git -C $RepoRoot ls-files 'site' | Where-Object { $_ -like '*.md' } | ForEach-Object { Join-Path $RepoRoot $_ })

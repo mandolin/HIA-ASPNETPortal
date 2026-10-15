@@ -72,7 +72,7 @@ achieved, so production-grade reliability is **not** claimed. Full wording rules
 - No support for modern frontend frameworks or a separated frontend/backend architecture;
 - Generated documentation directories (`src/Documentation/`, `src/Portal.Components.Data/Documentation/`, `src/DoxyGen/`)
   are **generated output**, not maintained documentation entry points;
-- Internal plans, ADRs and AI-collaboration material stay in the private `work-zone/` repo, not in public `docs/`.
+- Internal plans, ADRs and AI-collaboration material stay in the private `a separate private repository/` repo, not in public `docs/`.
 
 ## 5. Compatibility and runtime
 
