@@ -93,6 +93,10 @@
   path: deployment-rollback-guide
   parent: 运维
 
+- doc: theme-package-guide.md
+  path: theme-package-guide
+  parent: 开发
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
