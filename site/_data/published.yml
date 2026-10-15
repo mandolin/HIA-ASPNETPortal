@@ -113,6 +113,10 @@
   path: business-application-state-machine
   parent: 参考
 
+- doc: collaboration-item-state-machine.md
+  path: collaboration-item-state-machine
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
