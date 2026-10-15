@@ -111,6 +111,26 @@ $patterns = @(
     [pscustomobject]@{ Id = 'S4'; Name = '内部计划/证据/ADR 路径'; Regex = '(?i)work-zone\s*[\\/]' }
 )
 
+# <lang>
+#   <zh-CN>**S3 允许列表（与 docs 门禁口径对齐，`W-anp-P139` 修正）**：初版 S3 用裸 `[A-Za-z]:\` 匹配所有盘符路径，
+#     把文档命令示例里的 `C:\Program Files\PowerShell\7\pwsh.exe` 也判为违规（译本批次 4 一入库即误报 9 处）。
+#     但既有 `Test-PortalPublicDocumentation.ps1` 有**显式允许列表**，其中就含该路径 —— 它是文档里
+#     说明"如何在本机运行"的正常运行时路径，不含用户数据或私有目录。
+#     两处口径不一致会造成"同一内容在 docs 放行、在 site 报错"（正是 W133 修正 S1 时的同类问题）。
+#     故此处采用同一允许列表；**新增允许项必须同时在两处添加**，并在提交信息说明理由。</zh-CN>
+#   <en>**S3 allow-list (aligned with the docs gate, `W-anp-P139` fix)**: the first version of S3 matched every drive-letter path with a
+#     bare `[A-Za-z]:\`, flagging `C:\Program Files\PowerShell\7\pwsh.exe` inside command examples as a violation (translation
+#     batch 4 triggered 9 false positives as soon as it was committed). But the existing
+#     `Test-PortalPublicDocumentation.ps1` has an **explicit allow-list** containing exactly that path — it is the normal
+#     runtime path used to show "how to run this locally", containing no user data or private directory.
+#     Mismatched scopes would mean "the same content passes in docs but fails in site" (the same class of problem fixed for S1
+#     in W133). The same allow-list is therefore used here; **any new allow-list entry must be added in both places**, with the
+#     reason stated in the commit message.</en>
+# </lang>
+$allowedAbsolutePaths = @(
+    'C:\Program Files\PowerShell\7\pwsh.exe'
+)
+
 $files = @(git -C $RepoRoot ls-files 'site' | Where-Object { $_ -like '*.md' } | ForEach-Object { Join-Path $RepoRoot $_ })
 $violations = New-Object 'System.Collections.Generic.List[string]'
 
@@ -121,6 +141,17 @@ foreach ($f in $files) {
     for ($i = 0; $i -lt $lines.Count; $i++) {
         foreach ($p in $patterns) {
             if ($lines[$i] -match $p.Regex) {
+                # <lang>
+                #   <zh-CN>S3 的允许项：命中行若包含任一允许路径（如命令示例里的 `pwsh.exe`），不计违规。
+                #     用"行内包含"而非"整行相等"——命令示例里该路径前后还有参数。</zh-CN>
+                # </lang>
+                if ($p.Id -eq 'S3') {
+                    $isAllowed = $false
+                    foreach ($allowed in $allowedAbsolutePaths) {
+                        if ($lines[$i].IndexOf($allowed, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) { $isAllowed = $true; break }
+                    }
+                    if ($isAllowed) { continue }
+                }
                 $violations.Add(('{0} {1} :: {2}:{3}' -f $p.Id, $p.Name, $rel, ($i + 1)))
             }
         }
