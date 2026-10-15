@@ -9,7 +9,7 @@
 - [ ] 已运行 `dev/scripts/Test-PortalPublishReadiness.ps1`，项目 Content 清单、主题包和模块包检查通过。
 - [ ] 如使用本地文件系统发布包，已运行 `dev/scripts/Publish-PortalFileSystem.ps1`，并对发布输出目录执行二次门禁。
 - [ ] 已对 FileSystem 发布输出运行 `dev/scripts/New-PortalReleaseManifest.ps1 -PackagePath <发布目录>`，生成发布包 manifest。
-- [ ] 发布包 manifest 确认没有 `work-zone/`、`temp/`、`dev/`、`src/`、上传目录业务文件、真实配置、Web.config transform 或证书私钥文件；`Uploads/web.config` 作为安全配置文件允许随包发布。
+- [ ] 发布包 manifest 确认没有**内部仓库目录**、`temp/`、`dev/`、`src/`、上传目录业务文件、真实配置、Web.config transform 或证书私钥文件；`Uploads/web.config` 作为安全配置文件允许随包发布。
 - [ ] 已运行 `dev/scripts/Get-PortalReleaseSummary.ps1` 汇总发布 manifest、运维证据和文档化证据；脚本不得自动打 tag、创建分支或推送。
 - [ ] 已按 `docs/release-notes-template.md` 整理公开发布说明，并明确真实 IIS/TLS/ACL、SQL Server 2016/2017/2019、企业扫描和 HIA consumer 属于目标环境补证项。
 - [ ] 使用独立的 `test` 或 `prod` 外置配置目录，不使用开发机 LocalDB 或开发连接串。
@@ -74,7 +74,7 @@
 ## 回滚与记录
 
 - [ ] 已记录发布包/提交编号、外置配置版本、数据库迁移状态和验证时间。
-- [ ] 已记录版本号；P13 阶段默认使用 `0.13.N` 预 1.0 口径，真实 tag 和 release 分支仅在人工确认后创建。
+- [ ] 已记录版本号；当前为 **`v1.0.0`**（首发发行版），真实 tag 和 release 分支仅在人工确认后创建（版本规则见 [versioning.md](versioning.md)）。
 - [ ] 已按 `docs/deployment-rollback-guide.md` 准备文件、配置、数据库和证据回滚材料。
 - [ ] 应用回滚、配置回滚和数据库恢复步骤均可执行。
-- [ ] 真实 IIS 复测结果、已知限制和延期项已写入内部 WorkZone 记录。
+- [ ] 真实 IIS 复测结果、已知限制和延期项已写入内部记录（不随公开文档发布）。

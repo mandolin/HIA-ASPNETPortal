@@ -57,6 +57,10 @@
   path: module-development
   parent: 开发
 
+- doc: deployment-checklist.md
+  path: deployment-checklist
+  parent: 运维
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
