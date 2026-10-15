@@ -73,6 +73,10 @@
   path: p12-sample-business-flow
   parent: 学习
 
+- doc: theme-semantic-variables.md
+  path: theme-semantic-variables
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
