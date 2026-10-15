@@ -129,6 +129,10 @@
   path: documentation-registry
   parent: 参考
 
+- doc: README.md
+  path: docs-index
+  parent: 产品概览
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
