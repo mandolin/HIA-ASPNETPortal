@@ -112,6 +112,30 @@ foreach ($g in $gates) {
         continue
     }
 
+    # <lang>
+    #   <zh-CN>**生成产物必须先入库，再让门禁扫描**（`W-anp-P142` 修正，由译本批次 13 实测暴露）。
+    #     门禁（含 `Test-PortalSitePublicSurface.ps1`）用 git 追踪列表枚举文件。
+    #     `Build-PortalSite.ps1` 会**新生成** `site/<path>/index.md`，而这些文件在生成时**尚未入库** ——
+    #     若不在生成后补一次 `git add`，门禁看到的就不含新页面，**新上架页面的生成产物要延迟一个批次才被检查**。
+    #     实测证据：批次 13 故意保留两处私有仓提及上架，门禁只报了译本（`_translations/`，手写即入库）
+    #     **未报生成页**（`site/deployment-rollback-guide/`，当时未入库）。
+    #     本脚本本就要求"先 add 再跑"，此处补 add 与流程语义一致（不是代用户决定提交内容）。
+    #     只 add 站点目录 `site/`，不触碰其他路径。</zh-CN>
+    #   <en>**Generated output must be staged before the gates scan it** (`W-anp-P142` fix, exposed by translation batch 13).
+    #     The gates (including `Test-PortalSitePublicSurface.ps1`) enumerate files via the git tracked list.
+    #     `Build-PortalSite.ps1` **newly generates** `site/<path>/index.md`, and those files are **not yet staged** when it
+    #     finishes — without an extra `git add` after generation, the gates do not see the new pages, so **the generated output
+    #     of a newly published page is only checked one batch later**.
+    #     Evidence: in batch 13 two private-repository mentions were published deliberately; the gate reported only the
+    #     translation source (`_translations/`, hand-written and therefore staged) and **not the generated page**
+    #     (`site/deployment-rollback-guide/`, unstaged at the time).
+    #     This script already requires "add first, then run", so adding here is consistent with the flow (it does not decide
+    #     commit contents for the user). Only the site directory `site/` is added; no other path is touched.</en>
+    # </lang>
+    if ((Split-Path $g -Leaf) -ne 'Build-PortalSite.ps1') {
+        $null = & git -C $RepoRoot add -A 'site' 2>&1
+    }
+
     Write-Host ''
     Write-Host ('[ready] === ' + (Split-Path $g -Leaf) + ' ===')
     & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoProfile -File $path 2>&1 | Out-String | Write-Host

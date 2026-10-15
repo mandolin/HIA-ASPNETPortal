@@ -89,6 +89,10 @@
   path: deployment-default-credentials
   parent: 运维
 
+- doc: deployment-rollback-guide.md
+  path: deployment-rollback-guide
+  parent: 运维
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
