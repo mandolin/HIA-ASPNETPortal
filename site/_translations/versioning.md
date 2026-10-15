@@ -81,7 +81,7 @@ the module requires**. It is a **separate dimension** from the product version (
 
 **Current disposition (2026-09-26)**: the `"1.0"` values written in historical `module.json` files are **early placeholder
 values** and do **not** mean the product has released `v1.0.0`. To avoid the ambiguity of "requires 1.0 while the product is
-only at `v0.1.0`", the convention is:
+the portal-kernel capability baseline is not the same dimension", the convention is:
 
 1. before the first release (`v1.0.0`), new modules uniformly use a value consistent with the current portal-kernel
    baseline;

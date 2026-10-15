@@ -130,6 +130,44 @@ foreach ($fv in $fileVersions) {
     }
 }
 
+# <lang>
+#   <zh-CN>**B2：公开面文档的"当前版本"声明必须与权威源一致**（`W-anp-P138` 新增）。
+#     背景：本项目已三次出现过期版本号 —— 根 README 英文版 `v0.7.0`（`W-anp-P126` 修）、
+#     `docs/versioning.md` 第七节 `v0.1.0`（`W-anp-P137` 修）、以及同文档第八节
+#     "产品仅 `v0.1.0`"的矛盾表述（本包修）。既有三项检查（CHANGELOG / tag / 程序集）**都不看文档正文**，
+#     所以文档里的版本号可以随便过期而门禁全绿。
+#     本项只查**显式声明"当前版本"的位置**（中文"当前版本 … vX.Y.Z"、英文"Current version … vX.Y.Z"），
+#     不查版本里程碑表里的历史轨迹与预留版本 —— 那些是**有意保留的历史记录**，
+#     一律要求等于当前版本会把它们误判为过期（与 W123"辨明非过期项未误改"是同类教训）。</zh-CN>
+#   <en>**B2: a "current version" declaration in public-facing docs must match the authoritative source** (new in
+#     `W-anp-P138`). Background: this project has now had three stale version numbers — the English root README's `v0.7.0`
+#     (fixed in `W-anp-P126`), section 7 of `docs/versioning.md` saying `v0.1.0` (fixed in `W-anp-P137`), and the
+#     contradictory "product only at `v0.1.0`" in section 8 of the same file (fixed here). The existing three checks
+#     (CHANGELOG / tag / assemblies) **never look at documentation prose**, so a stale version in docs can pass every gate.
+#     This check only inspects positions that **explicitly declare the "current version"** (Chinese "当前版本 … vX.Y.Z",
+#     English "Current version … vX.Y.Z") and deliberately ignores historical trajectories and reserved versions inside
+#     version/milestone tables — those are **intentional historical records**, and demanding equality with the current
+#     version would misflag them as stale (the same lesson as W123's "identify non-stale items instead of editing them").</en>
+# </lang>
+$declarationTargets = New-Object 'System.Collections.Generic.List[string]'
+foreach ($rel in @('README.md', 'docs/versioning.md')) {
+    $p = Join-Path $RepoRoot $rel
+    if (Test-Path -LiteralPath $p) { $declarationTargets.Add($p) }
+}
+
+foreach ($p in $declarationTargets) {
+    $rel = $p.Substring($RepoRoot.Length + 1).Replace('\', '/')
+    $text = [System.IO.File]::ReadAllText($p, [System.Text.UTF8Encoding]::new($false))
+    $declares = [regex]::Matches($text, '(?i)(当前版本|Current version)[^\r\n]{0,80}?(v\d+\.\d+\.\d+)')
+    foreach ($d in $declares) {
+        $declared = ($d.Groups[2].Value -replace '^v', '')
+        $authoritative = ($tag -replace '^v', '')
+        if ($authoritative -and $declared -ne $authoritative) {
+            $problems += ('公开面文档 ' + $rel + ' 声明的当前版本 ' + $d.Groups[2].Value + ' 与权威版本 ' + $tag + ' 不一致（过期版本号）')
+        }
+    }
+}
+
 if ($problems.Count -gt 0) {
     Write-Output 'RESULT: Fail'
     foreach ($problem in $problems) { Write-Output ('  - ' + $problem) }
