@@ -109,6 +109,10 @@
   path: dev-guide
   parent: 开发
 
+- doc: business-application-state-machine.md
+  path: business-application-state-machine
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
