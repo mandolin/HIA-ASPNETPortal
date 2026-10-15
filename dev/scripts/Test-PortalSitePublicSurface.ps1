@@ -97,7 +97,35 @@ if (-not (Test-Path -LiteralPath $siteDir)) {
 # </lang>
 $patterns = @(
     [pscustomobject]@{ Id = 'S1'; Name = '私有仓库链接'; Regex = '(?i)(\]\([^)]*(work-zone|\.serena)|https?://[^\s)]*(work-zone|\.serena))' },
-    [pscustomobject]@{ Id = 'S2'; Name = '凭据赋值形态'; Regex = '(?i)(password|passwd|pwd|secret|token|api[_-]?key|connectionstring|conn[_-]?str)\s*[:=]' },
+    # <lang>
+    #   <zh-CN>**S2 与 docs 门禁口径完全对齐**（`W-anp-P143` 修正，本项目**第三次**跨门禁口径不一致）。
+    #     初版 S2 用 `(?i)(password|...)\\s*[:=]`：无行首锚定、无词边界、不要求等号后是引号值 ——
+    #     于是把文档里**正确的安全示范**也判为违规（译本批次 17 一入库即误报 6 处）：
+    #         `$participantPassword = Read-Host -AsSecureString '...'`
+    #     那是"用 SecureString 交互式读入密码"的**推荐写法**，文档还紧接着声明
+    #     "不得把密码写入命令行、脚本、日志或配置" —— 把它报成泄露，是门禁帮了倒忙。
+    #     既有 `Test-PortalPublicDocumentation.ps1` 的同一检查有三重收窄，故对同一内容**不报**：
+    #       ① `^\s*` 行首锚定；② 关键词须独立成词；③ `["'][^"']+` 等号后必须是引号包裹的字符串值。
+    #     现**逐字采用**该正则，不再自行加宽（再一次更宽就再制造一次"两门禁对同一内容矛盾"）。
+    #     **注意 S4 是唯一刻意不同的规则**：docs 门禁刻意忽略 WorkZone（它扫 docs/，满是内部提及），
+    #     而本门禁扫 `site/`（**发布到公开官网**的目录）必须拦截 —— 目标不同，差异是有理由的且已记录。</zh-CN>
+    #   <en>**S2 is now fully aligned with the docs gate** (`W-anp-P143` fix; the **third** cross-gate scope mismatch in this
+    #     project). The first version of S2 used `(?i)(password|...)\\s*[:=]`: no line-start anchor, no word boundary, and no
+    #     requirement that a quoted value follow `=` — so it flagged the **correct security demonstration** in the docs as a
+    #     violation (translation batch 17 produced 6 false positives as soon as it was committed):
+    #         `$participantPassword = Read-Host -AsSecureString '...'`
+    #     That is the **recommended** way to read a password interactively as a SecureString, and the doc immediately states
+    #     "passwords must not be written to the command line, scripts, logs or configuration" — reporting it as a leak makes
+    #     the gate actively counterproductive.
+    #     The same check in `Test-PortalPublicDocumentation.ps1` has three narrowing conditions, so it does **not** report it:
+    #       (1) `^\s*` line-start anchor; (2) the keyword must stand alone as a word; (3) `["'][^"']+` — a quoted string value
+    #     must follow `=`. That regex is now adopted **verbatim** rather than widened here (widening again would recreate
+    #     "two gates contradicting each other on the same content").
+    #     **Note that S4 is the one rule deliberately different**: the docs gate intentionally ignores WorkZone (it scans
+    #     `docs/`, full of internal mentions), whereas this gate scans `site/` — the directory **published to the public
+    #     website** — and must block them. The goals differ, so the difference is deliberate and recorded.</en>
+    # </lang>
+    [pscustomobject]@{ Id = 'S2'; Name = '凭据赋值形态'; Regex = '(?im)^\s*(?:password|pwd|token|api[_-]?key|secret|connectionstring)\s*[:=]\s*["''][^"'']+' },
     [pscustomobject]@{ Id = 'S3'; Name = '绝对本地路径'; Regex = '[A-Za-z]:\\' },
     # <lang>
     #   <zh-CN>**S4 的两次扩大（`W-anp-P137` 路径形态 → `W-anp-P141` 裸提名形态）**

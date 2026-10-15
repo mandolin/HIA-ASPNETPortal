@@ -65,7 +65,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 
 ## 文档化基线
 
-公开文档门禁只读取根 README、`docs/` 与 JSDoc 工具 README；它不联网、不读取 WorkZone、不生成文档，
+公开文档门禁只读取根 README、`docs/` 与 JSDoc 工具 README；它不联网、不读取私有目录、不生成文档，
 也不会访问配置或数据库：
 
 ```powershell
@@ -82,10 +82,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -AsJson
 ```
 
-如需把 baseline 写入证据目录，可使用：
+如需把 baseline 写入证据目录，可使用（`<内部证据目录>` 按本项目的实际内部路径替换）：
 
 ```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -OutputJson work-zone\dev\evidence\p13.3\documentation-baseline.json
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -OutputJson <内部证据目录>\p13.3\documentation-baseline.json
 ```
 
 脚本不会生成、发布、删除或修改文档。`src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`、`src/Portal/js/`、`src/Portal/css/` 和 `temp/` 均不会被自动纳入输入；JSDoc 验证生成物写入被忽略的 `temp/documentation/`，公开发布策略见[文档产物与工具链边界](documentation-artifacts-guide.md)。
@@ -97,7 +97,7 @@ P13.3 起，文档化 readiness 和证据包可以用以下脚本执行：
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalDocumentationEvidencePackage.ps1
 ```
 
-readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JSDoc pilot 隔离、.NET XML 延期边界、生成物未入库和 HIA 通知读取。证据包默认写入 WorkZone；它不修改源码注释、不提交生成物、不读取敏感配置，也不连接数据库。
+readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JSDoc pilot 隔离、.NET XML 延期边界、生成物未入库和 HIA 通知读取。证据包默认写入内部证据目录（不随公开文档发布）；它不修改源码注释、不提交生成物、不读取敏感配置，也不连接数据库。
 
 ## JavaScript 文档化 Pilot
 
@@ -244,7 +244,7 @@ P11.2 起提供只读数据访问 inventory，用于扫描已追踪源码中的 
 需要保留 JSON 证据时显式指定输出路径：
 
 ```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1 -OutputJson work-zone\dev\evidence\p11.2\data-access-inventory.json
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1 -OutputJson <内部证据目录>\p11.2\data-access-inventory.json
 ```
 
 P11.3 起提供只读迁移 manifest 检查，用于盘点 `src/Setup` 脚本的执行顺序、迁移类型、幂等性、provider 标签、回滚模式和 legacy 风险：
@@ -256,7 +256,7 @@ P11.3 起提供只读迁移 manifest 检查，用于盘点 `src/Setup` 脚本的
 需要保留 JSON 证据时显式指定输出路径：
 
 ```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalMigrationManifest.ps1 -OutputJson work-zone\dev\evidence\p11.3\migration-manifest.json
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalMigrationManifest.ps1 -OutputJson <内部证据目录>\p11.3\migration-manifest.json
 ```
 
 既有测试库需要补齐 P5/P6 schema 时，必须显式使用外置 `test` 连接串和 `Test-PortalSqlCompatibility.ps1` 的 `-Apply*` 开关。该操作会写入目标测试库，只应指向隔离测试实例：
@@ -308,7 +308,7 @@ P11.4 起可生成 HIA 外围集成边界 inventory。它只盘点当前契约�
 需要保留 JSON 证据时显式指定输出路径：
 
 ```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalHiaIntegrationInventory.ps1 -OutputJson work-zone\dev\evidence\p11.4\hia-integration-inventory.json
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalHiaIntegrationInventory.ps1 -OutputJson <内部证据目录>\p11.4\hia-integration-inventory.json
 ```
 
 如 HIA-Documentation-Sys 不在默认同级目录，可通过 `-DocumentationSysRoot` 指定；脚本只记录通知标题、相对路径和是否提及当前项目，不复制通知正文。

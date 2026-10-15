@@ -105,6 +105,10 @@
   path: font-policy-and-audit
   parent: 参考
 
+- doc: dev-guide.md
+  path: dev-guide
+  parent: 开发
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考

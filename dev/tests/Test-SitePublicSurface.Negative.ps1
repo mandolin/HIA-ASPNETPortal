@@ -30,7 +30,12 @@ if ($base.Exit -ne 0) { Write-Host '  ⚠️ 基线失败'; $failures++ } else {
 $probe = @(
     'S1 probe: [internal](https://example.invalid/work-zone/dev/plans/x.md)',
     '',
-    'S2 probe: password: hunter2',
+    # <lang>
+    #   <zh-CN>S2 探针必须是**真实凭据赋值**形态（`W-anp-P143` 修正）。旧探针 `password: hunter2`
+    #     在对齐 docs 口径后**不再被抓**（无引号值），若保留就会让负向测试假通过 ——
+    #     那正是"门禁看起来在检查、其实抓不到"的橡皮章形态。故改为引号包裹的赋值形式。</zh-CN>
+    # </lang>
+    'password = "hunter2"',
     '',
     'S3 probe: K:\Project\secret-notes.md',
     '',
