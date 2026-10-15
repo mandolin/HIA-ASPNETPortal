@@ -81,6 +81,10 @@
   path: frontend-asset-guide
   parent: 开发
 
+- doc: third-party-dependencies.md
+  path: third-party-dependencies
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考

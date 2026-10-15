@@ -12,7 +12,7 @@
 
 1. proof 项目使用 packages.config 恢复包；`src/packages/` 仍由现有忽略规则排除，不提交二进制包。
 2. SQLite 运行时文件随 proof 输出到 `temp/provider-proof/`，不进入站点 `bin`、发布包或门户正常启动路径。
-3. 生成的 `.sqlite` 文件只用于开发/测试，脚本会默认重新创建；不得放入仓库、WorkZone 或外置生产配置目录。
+3. 生成的 `.sqlite` 文件只用于开发/测试，脚本会默认重新创建；不得放入仓库、内部目录或外置生产配置目录。
 4. 若未来将 SQLite、MySQL、PostgreSQL 等 provider 用于真实门户能力，必须新增对应版本、许可证、native 运行时和部署说明审计，并完成独立 ADR 与回归。
 
 ## 外部依据
