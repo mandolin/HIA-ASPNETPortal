@@ -110,3 +110,26 @@ title: 官网视觉基线
 - 中文树位于站点根，英文树位于 `/en/`；**路径与文件名一一对应**（如 `product-overview/` ↔ `en/product-overview/`）。
 - 每页在**顶部**提供对译语言入口（首页已含），保证任意页面都能一键切换。
 - 双语**不得**只用机器占位：译本与原文须语义对等，由人工走查确认（见 `docs/documentation-review-checklist.md`）。
+
+## 9. `<html lang>` 覆盖与主题版本耦合（C-anp-P22 收官任务③）
+
+**背景**：上游 `just-the-docs` 的 `_layouts/default.html` 第 7 行只读**站点级** `site.lang`，**不看 `page.lang`**，
+于是英文页也输出 `<html lang="zh-CN">`，影响可访问性（屏幕阅读器用中文发音读英文内容）与 SEO。
+
+**已采取的处置**：
+
+1. `site/_layouts/default.html` 是上游 layout 的**受控覆盖**，与上游的**唯一差异**是 `<html lang>` 改为
+   `{{ page.lang | default: site.lang | default: 'en-US' }}`。其余行逐字复制，**不做顺手优化**（否则将来无法与上游 diff）。
+2. `_config.yml` 的 `remote_theme` **固定到 `v0.12.0`**，与本地 gem 一致 —— 否则 Pages 拉到更新版主题、其 include/Sass
+   已变而覆盖文件仍是旧版，会造成"部分新部分旧"的错配。
+
+**升级主题时的动作**：取新版 `_layouts/default.html`，只把 `<html lang>` 一行替换为上述表达式，其余照抄；
+若上游在别处也改了 `<html>` 或 `head.html` 的 lang 逻辑，须一并复核。
+
+**两条实测得到的教训（写在这里以免重犯）**：
+
+- **不要在 layout 注释里写字面的 html-lang 标记样例**。覆盖文件初版的注释里写了一处这样的样例，
+  结果任何基于该标记的检查都**先命中注释里的假标记**，把"修复已生效"误判成"修复失败"，
+  并引出三轮无效排查。**注释中的示例文本不得与真实标记形成可匹配的同形文本。**
+- **不要在该 layout 里使用 Liquid 注释 `{#- ... -#}`**。曾用 Liquid 注释写双语说明，结果整个 layout 被静默旁路
+  （Jekyll 回退到主题 layout），页面看起来正常、但 lang 修复完全失效。说明文字一律用 HTML 注释或独立文档承载。

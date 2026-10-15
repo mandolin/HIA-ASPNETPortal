@@ -10,7 +10,7 @@
 # </lang>
 title: HIA-ASPNETPortal
 description: 企业内网 Web Forms 门户平台 / Enterprise intranet portal platform on ASP.NET Web Forms
-remote_theme: just-the-docs/just-the-docs
+remote_theme: just-the-docs/just-the-docs@v0.12.0
 
 # <lang>
 #   <zh-CN>双语并行：中文位于站点根，英文位于 /en/。两棵树的页面**一一对应**，
