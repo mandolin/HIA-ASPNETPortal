@@ -69,6 +69,10 @@
   path: testing-checklist
   parent: 参考
 
+- doc: p12-sample-business-flow.md
+  path: p12-sample-business-flow
+  parent: 学习
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考

@@ -25,7 +25,7 @@ dev/scripts/New-PortalP12EvidencePackage.ps1
 3. P12.4 业务权限与审计门禁。
 4. 解决方案构建。
 
-证据默认写入 `work-zone/dev/evidence/p12.5/`。如果没有 `work-zone/`，会写入 `temp/evidence/p12.5/`。
+证据默认写入内部证据目录；若该目录不存在，则写入 `temp/evidence/p12.5/`。
 
 ## 样例数据 SQL
 
