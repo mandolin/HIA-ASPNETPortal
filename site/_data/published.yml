@@ -117,6 +117,10 @@
   path: collaboration-item-state-machine
   parent: 参考
 
+- doc: audit-retention-policy.md
+  path: audit-retention-policy
+  parent: 运维
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
