@@ -145,6 +145,18 @@
   path: documentation-artifacts-guide
   parent: 参考
 
+- doc: contracts/README.md
+  path: contracts-readme
+  parent: 参考
+
+- doc: contracts/module-manifest.md
+  path: contracts-module-manifest
+  parent: 参考
+
+- doc: contracts/app-settings.md
+  path: contracts-app-settings
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考

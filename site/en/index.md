@@ -46,13 +46,67 @@ Current version: **v1.0.0** (first release, 2026-10-09).
 
 ## Start here
 
+> All **31 pages** are now published with both Chinese and English versions. They are grouped into eight sections following
+> the reader path in the [documentation map](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-map.md).
+
+**Product overview**
+
 - [Product overview](/en/overview/) — what it is, who it is for, and its boundaries
+- [Documentation index](/en/docs-index/) — a one-line description of every publicly maintained document
+
+**Evaluate**
+
+- [Architecture overview](/en/architecture/) — system structure, data access and the four current architecture risks
+
+**Quick start**
+
+- [User guide](/en/user-guide/) — run locally, external configuration, initial accounts and common modules
+
+**Learn**
+
+- [P12 employee-profile correction sample business path](/en/p12-sample-business-flow/) — a sample business flow, sample data SQL and the acceptance entry
+
+**Reference**
+
+- [Testing checklist](/en/testing-checklist/) — the seven-layer automated regression tiers and pre-release checks
+- [Technical contracts (entry)](/en/contracts-readme/) — boundary decision: no external REST/GraphQL; module, configuration and enterprise capability object contracts apply
+- [Module contract (`module.json`)](/en/contracts-module-manifest/) — fields, `schemaVersion` 1/2, the optional `capability`, and explicitly rejected declarations
+- [Configuration contract (`appSettings`)](/en/contracts-app-settings/) — the two-layer effective mechanism, key families, and the difference between profiles and package enablement
+- [Theme semantic variables](/en/theme-semantic-variables/) — 7 themes × 14 variables
+- [Theme-module appearance contract](/en/theme-module-contract/) — division of labour between theme and module layers, the real meaning of fallbacks
+- [Third-party dependency audit](/en/third-party-dependencies/) — purpose, licence and distribution boundaries
+- [Font policy and audit](/en/font-policy-and-audit/) — usage principles and licence boundaries
+- [Business application state machine](/en/business-application-state-machine/) — status vocabulary, transition table and fail-closed constraints
+- [Collaboration item state machine](/en/collaboration-item-state-machine/) — status vocabulary, transition table and handling-role semantics
+- [Audit retention policy](/en/audit-retention-policy/) — retention and disposal rules for the operational audit table
+- [Documentation registry](/en/documentation-registry/) — the applicability registry for the 7 documentation families
+- [Documentation review walkthrough checklist](/en/documentation-review-checklist/) — what the automated gates cannot prove
+- [Documentation map](/en/documentation-map/) — navigation map and reader paths for the 7 families
+- [Documentation artefacts and toolchain boundaries](/en/documentation-artifacts-guide/) — public documentation, documentation inputs and reproducible artefacts
 - [Site visual baseline](/en/site-visual-baseline/) — the basis for palette, type and typography values
 
-> The site is being published in batches: the remaining navigation sections (evaluate / quick start / learn / reference /
-> develop / operate / changes) have no content yet, so only **published pages** are listed here — no links that would
-> resolve to 404 (fixed in `W-anp-P132`: the first version listed idealised paths before the pages existed, making every
-> link broken).
+**Develop**
+
+- [Deployed module package development guide](/en/module-development/) — module package development, registration, enable/disable and hidden traps
+- [Frontend assets guide](/en/frontend-asset-guide/) — Web Forms presentation, themes, module CSS and asset boundaries
+- [Theme package deployment guide](/en/theme-package-guide/) — theme package directory, manifest, selection and release rollback
+- [Developer guide](/en/dev-guide/) — environment, build, debug, tests and database initialisation
+
+**Operate**
+
+- [Release and compatibility checklist](/en/deployment-checklist/) — pre-release boundaries, IIS, database and post-release regression
+- [Operations runbook](/en/operations-runbook/) — routine checks, logging maintenance, audit queries and evidence packages
+- [Default credentials and legacy password governance](/en/deployment-default-credentials/) — default accounts and the legacy MD5 compatibility path
+- [Release rollback guide](/en/deployment-rollback-guide/) — file, configuration, database and evidence rollback preparation
+
+**Changes**
+
+- [Versioning policy](/en/versioning/) — version numbering rules, milestone relationships and publicity framing constraints
+- [Release notes template](/en/release-notes-template/) — version, changes, verification summary and rollback entry points
+
+> This site is **bilingual (Chinese and English in parallel)**: every section has a corresponding English page (path prefixed
+> with `/en/`). Chinese lives at the root and English under `/en/`, as two one-to-one trees; a page may only be published
+> when both versions exist (enforced by `Build-PortalSite.ps1`).
 
 ---
 
