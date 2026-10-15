@@ -7,7 +7,7 @@
 1. `src/Setup/Portal_LoadData.sql` 仍保留旧 Starter Kit 的本地样例 `admin` 用户和旧 `Portal_Users.Password` 摘要。
 2. `src/Setup/Portal_UserCredentials.sql` 只创建强哈希凭据表和安全版本表，不写入任何新强哈希口令 seed。
 3. P5.2 起，新建、注册和管理员重置密码写入 `Portal_UserCredentials`；旧 MD5 只允许作为历史账号首次登录兼容升级路径。
-4. 生产、共享测试和客户演示环境不得沿用默认 admin 口令，也不得把共享开发密码写入仓库、WorkZone、日志或截图。
+4. 生产、共享测试和客户演示环境不得沿用默认 admin 口令，也不得把共享开发密码写入仓库、内部目录、日志或截图。
 
 ## 发布前要求
 

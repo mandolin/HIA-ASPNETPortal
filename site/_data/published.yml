@@ -85,6 +85,10 @@
   path: third-party-dependencies
   parent: 参考
 
+- doc: deployment-default-credentials.md
+  path: deployment-default-credentials
+  parent: 运维
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
