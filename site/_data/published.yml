@@ -121,6 +121,10 @@
   path: audit-retention-policy
   parent: 运维
 
+- doc: release-notes-template.md
+  path: release-notes-template
+  parent: 变更
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
