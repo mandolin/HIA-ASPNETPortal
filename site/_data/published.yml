@@ -101,6 +101,10 @@
   path: theme-module-contract
   parent: 开发
 
+- doc: font-policy-and-audit.md
+  path: font-policy-and-audit
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考

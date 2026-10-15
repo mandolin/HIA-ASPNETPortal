@@ -46,4 +46,4 @@ font-family: "Sarasa Mono SC", "Noto Sans Mono CJK SC", "Source Han Mono SC", "L
 - `src/Portal/App_Themes/` 未发现 `@font-face`、远程字体 URL 或 `data:font`。
 - P7 主题继续使用上述开源字体优先栈，并保留 `sans-serif` / `monospace` 通用回退。
 - `Default`、`EnterpriseLight/Dark`、`OaLight/Dark`、`StateClassicLight/Dark` 和 `ThemeProbe` 未主动引用 Verdana、Arial、Helvetica、Times New Roman、Courier New、Consolas、Segoe UI、Microsoft YaHei 或微软雅黑。
-- 完整 P7.5 资源审计记录见 WorkZone 内部计划 `W-anp-P7.5-resource-license-audit.md`。
+- 完整 P7.5 资源审计记录保存在本项目的**内部计划文档**中（不随公开文档发布）。
