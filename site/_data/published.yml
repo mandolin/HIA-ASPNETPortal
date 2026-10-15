@@ -41,6 +41,10 @@
   path: overview
   parent: 产品概览
 
+- doc: architecture.md
+  path: architecture
+  parent: 评估
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
