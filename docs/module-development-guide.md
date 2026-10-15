@@ -198,7 +198,7 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 > & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalNewModuleReadiness.ps1 `
 >     -ModuleName LeaveRequest -ModuleCssPrefix leave-request -ExpectedPackageId HIA.LeaveRequest
 > ```
-> 门禁检查：R1 csproj 登记、R2 `.ascx` 用 `CodeBehind`、R3 6 套皮肤均含 `<prefix>` 主题规则、R4 模块 CSS 类选择符均在 `.ascx` 出现（含 `CssClass`）。确有 JS/代码后置专属类时用 `-SkipClassConsistency` 据实豁免并在提交信息写明。
+> 门禁检查：R1 csproj 登记、R2 `.ascx` 用 `CodeBehind`、R3 7 套皮肤（含 `Default` 回退主题）均含 `<prefix>` 主题规则、R4 模块 CSS 类选择符均在 `.ascx` 出现（含 `CssClass`）。确有 JS/代码后置专属类时用 `-SkipClassConsistency` 据实豁免并在提交信息写明。
 
 ## 提交前检查清单
 
@@ -210,8 +210,8 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 - [ ] 无 JavaScript、无内联脚本、无 DLL/可执行文件
 - [ ] 业务迁移脚本命名为 `PortalBiz_*.sql` 且不含 `USE [database]`
 - [ ] `.ascx.cs` 与 `.ascx.designer.cs` 已登记进 `Portal.csproj` 的 `<Compile>`（Web Application 项目，遗漏会让 `CodeBehind` 运行期报"未能加载类型"）
-- [ ] 6 套正式皮肤的 `Default.css` 均已补 `.<模块前缀类>` 主题作用域规则
-- [ ] `Test-PortalNewModuleReadiness.ps1 -ModuleName <Module>` 通过（csproj / CodeBehind / 6 皮肤 / 标记与 CSS 类名一致性）
+- [ ] 7 套正式皮肤（含 `Default` 回退主题）的 `Default.css` 均已补 `.<模块前缀类>` 主题作用域规则
+- [ ] `Test-PortalNewModuleReadiness.ps1 -ModuleName <Module>` 通过（csproj / CodeBehind / 7 皮肤 / 标记与 CSS 类名一致性）
 - [ ] `Test-PortalBusinessModuleSmoke.ps1 -ModuleName HIA.YourModule` 通过
 - [ ] 新增接入编排：把该模块的冒烟检查与就绪检查加入 `dev/scripts/Invoke-PortalGateSuite.ps1`（L1 冒烟 / L0 就绪）
 - [ ] 门禁套件全绿：`Invoke-PortalGateSuite.ps1`

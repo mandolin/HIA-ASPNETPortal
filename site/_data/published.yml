@@ -53,6 +53,10 @@
   path: versioning
   parent: 变更
 
+- doc: module-development-guide.md
+  path: module-development
+  parent: 开发
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
