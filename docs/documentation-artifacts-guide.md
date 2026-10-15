@@ -1,12 +1,12 @@
 # 文档产物与工具链边界
 
 本文说明 HIA-ASPNETPortal 的公开维护文档、文档化输入和可再生产物之间的边界。目标是让维护者能够在不依赖
-WorkZone、门户运行时或其他 HIA 项目本地目录的前提下，重复执行已有验证。
+**独立私有仓库**、门户运行时或其他 HIA 项目本地目录的前提下，重复执行已有验证。
 
 ## 公开文档与私有资料
 
 - 根 `README.md` 与本目录下的 Markdown 是主仓库的公开维护文档。
-- `work-zone/` 是独立私有仓库，用于计划、ADR、AI 协作资料和阶段证据；公开文档不得链接到其中的文件。
+- 内部计划、ADR、AI 协作资料与阶段证据保存在**独立私有仓库**中；公开文档不得链接到其中的文件。
 - 文档可以使用 `{ExternalCfgPath}`、`$env:USERPROFILE`、模板文件名和逻辑连接串名称说明可复现的配置方式，
   不得写入真实连接串、密码、Token、Cookie、证书、生产备份或项目本机绝对路径。
 
@@ -56,7 +56,7 @@ P13.3 起，文档化覆盖率不使用单一百分比表示，而按风险和�
 ## HIA 文档化通知
 
 HIA-Documentation-Sys 的目标项目通知已改为拉取式通知。本项目不再等待外部项目写入 `dev/notify/`，而是在需要检查
-文档化工具链变化时主动读取 HIA-Documentation-Sys 的 `work-zone/notify/`。
+文档化工具链变化时主动读取 HIA-Documentation-Sys 的**内部通知目录**（位于该项目的私有仓库中）。
 
 可使用 `dev/scripts/Get-HiaDocumentationNotifications.ps1` 查看最近通知。该脚本只读取通知内容，不复制文件、不修改源码、
 不改变依赖，也不把 HIA-Documentation-Sys 变成本项目构建、测试、IIS Express 启动或发布流程的硬依赖。

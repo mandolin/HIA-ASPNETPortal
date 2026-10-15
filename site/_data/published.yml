@@ -141,6 +141,10 @@
   path: documentation-map
   parent: 参考
 
+- doc: documentation-artifacts-guide.md
+  path: documentation-artifacts-guide
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
