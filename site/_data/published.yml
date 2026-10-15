@@ -61,6 +61,10 @@
   path: deployment-checklist
   parent: 运维
 
+- doc: operations-runbook.md
+  path: operations-runbook
+  parent: 运维
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
