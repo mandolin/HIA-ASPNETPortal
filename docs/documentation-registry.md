@@ -1,6 +1,6 @@
 # 文档登记表（HIA-ASPNETPortal）
 
-> **P21 D1 交付物**。按《HIA 项目文档化结构与模板说明》的 7 文档族登记本项目"适用 / 不适用"，并标注权威位置、维护责任、同步触发、验证方式。内部规划 / ADR / 研究草稿留 WorkZone，仅审阅后适合受众内容进公开 `docs/`。
+> **P21 D1 交付物**。按《HIA 项目文档化结构与模板说明》的 7 文档族登记本项目"适用 / 不适用"，并标注权威位置、维护责任、同步触发、验证方式。内部规划 / ADR / 研究草稿留**独立私有仓库**，仅审阅后适合受众内容进公开 `docs/`。
 > 原则四（文档化贯穿开发周期）落地载体：本表是文档工程的"总账"，后续 `W-anp-P124`–`P127` 据此补齐缺口（2026-10-14 起本 Cycle 改用 W 编号，原 D1–D7 仅作历史映射）。
 
 ## 登记总览
@@ -12,7 +12,7 @@
 | 3 | 产品功能与使用 | 适用 | `docs/user-guide.md` + 待补 how-to/FAQ | docs | 功能变更 | 可读性走查 / 示例运行 |
 | 4 | 开发者与贡献者 | 适用 | `docs/dev-guide.md` 等 | docs | 架构 / 工具变更 | 示例运行 |
 | 5 | 运维部署安全 | 适用 | `docs/deployment-*`、`operations-runbook` 等 | docs | 部署 / 依赖变更 | 部署演练 |
-| 6 | 架构设计决策 | 适用 | `docs/architecture.md` + WorkZone ADR | docs+WZ | 重大决策 | 评审 |
+| 6 | 架构设计决策 | 适用 | `docs/architecture.md` + 内部 ADR | docs+内部 | 重大决策 | 评审 |
 | 7 | 变更兼容发布 | 适用 | `docs/versioning.md` + 根 `CHANGELOG` | docs+root | 发版 | 版本一致性门禁 |
 
 ## 逐项说明与缺口
@@ -27,7 +27,7 @@
    - **剩余缺口**（如实登记）：运行截图；既有内容模块（公告、联系人、讨论、文档、事件、图片、链接等）的逐项操作说明；请假与报销的审批流转界面（本期仅落库与生成待办，审批操作不在本模块内）。
 4. **开发者与贡献者**：`dev-guide` / `module-development-guide` / `frontend-asset-guide` / `theme-package-guide` / `theme-semantic-variables` / `theme-module-contract` 已较全。其中 `theme-semantic-variables.md` 为 `C-anp-P18` / `W-anp-P97` 产出，登记主题层 `--portal-*` 语义变量矩阵（7 套主题 × **14 个变量** —— 第 14 个 `--portal-text-subtle` 由 `C-anp-P23` D3 裁定新增，用于副标题与标题的色层次）；`theme-module-contract.md` 为 `W-anp-P99` 产出，登记模块外观契约与 `var()` 回退值审计结论 —— 原记的**待裁定 D3**（副标题与标题颜色层次在变量迁移后被抹平）已由 `C-anp-P23` **裁定为（b）新增 `--portal-text-subtle` 并落地**，不再是未决项；该周期同时把主题层模块语义类覆盖补齐至 8 模块 × 7 皮肤 100%，并将覆盖缺口升为门禁硬失败。两者权威来源均为 CSS 本身与 `W-anp-P100` 门禁，文档为提取快照，过期时以门禁为准。
 5. **运维部署安全**：`deployment-checklist` / `deployment-default-credentials` / `deployment-rollback-guide` / `operations-runbook` / `audit-retention-policy` / `font-policy-and-audit` / `third-party-dependencies` 已较全。
-6. **架构设计决策**：`architecture.md` + 两个状态机文档 + WorkZone ADR / milestones。
+6. **架构设计决策**：`architecture.md` + 两个状态机文档 + 内部 ADR / milestones。
 7. **变更兼容发布**：`versioning.md` + `CHANGELOG` + `release-notes-template.md`。
 
 ## 待建（`W-anp-P124`–`P127`；原 D3–D6，2026-10-14 改 W 编号）

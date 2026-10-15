@@ -125,6 +125,10 @@
   path: release-notes-template
   parent: 变更
 
+- doc: documentation-registry.md
+  path: documentation-registry
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
