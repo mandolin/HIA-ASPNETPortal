@@ -100,15 +100,56 @@ $patterns = @(
     [pscustomobject]@{ Id = 'S2'; Name = '凭据赋值形态'; Regex = '(?i)(password|passwd|pwd|secret|token|api[_-]?key|connectionstring|conn[_-]?str)\s*[:=]' },
     [pscustomobject]@{ Id = 'S3'; Name = '绝对本地路径'; Regex = '[A-Za-z]:\\' },
     # <lang>
-    #   <zh-CN>S4 扩大（`W-anp-P137`）：初版只匹配 `work-zone/dev/plans` 与 `work-zone/docs/adr` 两个子路径。
+    #   <zh-CN>**S4 的两次扩大（`W-anp-P137` 路径形态 → `W-anp-P141` 裸提名形态）**
+    #
+    #     第一次（`W-anp-P137`）：初版只匹配 `work-zone/dev/plans` 与 `work-zone/docs/adr` 两个子路径。
     #     系统扫描 `docs/` 后发现 **16 处** `work-zone/` 路径提及分布在 **9 个**文档里，形态远不止这两个
     #     （如 `work-zone/notify/`、`work-zone\dev\evidence\p13.3\*.json`、`work-zone/dev/plans/C-anp-P10.md`）。
     #     只要任何一个被上架，就会把私有仓库的内部路径发布到公开官网，而旧 S4 **抓不到**。
-    #     现改为匹配 `work-zone` 后接分隔符的**任意路径形态**（链接或纯文本均是）——
-    #     这样"待上架文档含内部路径"会在**上架时**被拦住，而不是等发布后靠人发现。
+    #     当时改为匹配 `work-zone` 后接分隔符的**任意路径形态**。
+    #
+    #     第二次（本包，`W-anp-P141`）：**"后接分隔符"这个条件本身就是盲区**。
+    #     译本批次 11（`third-party-dependencies`）与批次 12（`deployment-default-credentials`）连续两批出现
+    #     **裸提名**形态 —— 「不得放入仓库、WorkZone **或**外置生产配置目录」「不得把共享开发密码写入仓库、
+    #     WorkZone**、**日志或截图」。`WorkZone` 后接的是中文"或"/"，"而非路径分隔符，S4 一律漏网，
+    #     两批都只能靠人工审查补。同一盲区连续命中 = 该固化为机制，而不是每批人工兜。
+    #
+    #     现改为 `work[-_]?zone`（大小写不敏感）：
+    #       - 覆盖路径形态 `work-zone/notify/`（连带后面的路径部分）
+    #       - 覆盖裸提名 `WorkZone`（驼峰）、`workzone`（连写）、`work_zone`
+    #       - **刻意不允许空格**：`work\s*zone` 会把英文正常词 "work zone"（工作区）也判为违规 ——
+    #         那才是真正的橡皮章反面：靠误报制造"看起来在检查"的假象，实际把真问题淹没在噪音里。
+    #         故分隔符只允许 `-` 或 `_`，且最多一个。
+    #     路径与裸提名合并为**单一 S4**（不新增并列 ID），避免同一行被两条规则重复报两次。
     #     注意：本检查只针对 `site/`（发布面），不动 `docs/`；`docs/` 里的同类提及按批次随上架清理。</zh-CN>
+    #   <en>**Two widenings of S4 (`W-anp-P137` path forms → `W-anp-P141` bare-name forms)**
+    #
+    #     First (`W-anp-P137`): the initial version matched only the two subpaths `work-zone/dev/plans` and
+    #     `work-zone/docs/adr`. A systematic scan of `docs/` found **16** `work-zone/` mentions across **9** documents, in
+    #     far more shapes than those two (e.g. `work-zone/notify/`, `work-zone\dev\evidence\p13.3\*.json`,
+    #     `work-zone/dev/plans/C-anp-P10.md`). Publishing any of them would put private-repository internal paths on the
+    #     public website, and the old S4 caught **none** of them. It was then widened to match **any path form** after
+    #     `work-zone`.
+    #
+    #     Second (this package, `W-anp-P141`): **the "followed by a separator" condition was itself a blind spot.**
+    #     Translation batches 11 (`third-party-dependencies`) and 12 (`deployment-default-credentials`) both hit a
+    #     **bare-name** form — “must not put … in the repository, WorkZone **or** external production config directories”
+    #     and “must not write shared development passwords into the repository, WorkZone, logs or screenshots”, where
+    #     `WorkZone` is followed by Chinese "或"/"，" rather than a path separator. S4 missed both, and both were only
+    #     caught by human review. The same blind spot hitting twice = it belongs in the mechanism, not in per-batch manual
+    #     catch-up.
+    #
+    #     Now `work[-_]?zone` (case-insensitive):
+    #       - covers path forms such as `work-zone/notify/` (the regex matches the `work-zone` part)
+    #       - covers bare names `WorkZone` (CamelCase), `workzone` (joined), `work_zone`
+    #       - **deliberately disallows a space**: `work\s*zone` would also flag the ordinary English phrase
+    #         "work zone" — which is the true opposite of a real gate: manufacturing the appearance of checking while
+    #         drowning real findings in noise. Only `-` or `_` are allowed as the separator, and at most one.
+    #     Paths and bare names are merged into a **single S4** (no parallel ID) so one line is not reported twice.
+    #     Note: this check targets `site/` (the publication surface) only, not `docs/`; mentions in `docs/` are cleaned up
+    #     per batch as pages are published.</en>
     # </lang>
-    [pscustomobject]@{ Id = 'S4'; Name = '内部计划/证据/ADR 路径'; Regex = '(?i)work-zone\s*[\\/]' }
+    [pscustomobject]@{ Id = 'S4'; Name = '私有仓库名/路径提及（含裸提名）'; Regex = '(?i)work[-_]?zone' }
 )
 
 # <lang>
