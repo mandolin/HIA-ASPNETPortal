@@ -45,6 +45,10 @@
   path: architecture
   parent: 评估
 
+- doc: user-guide.md
+  path: user-guide
+  parent: 快速上手
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
