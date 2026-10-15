@@ -97,6 +97,10 @@
   path: theme-package-guide
   parent: 开发
 
+- doc: theme-module-contract.md
+  path: theme-module-contract
+  parent: 开发
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
