@@ -49,6 +49,10 @@
   path: user-guide
   parent: 快速上手
 
+- doc: versioning.md
+  path: versioning
+  parent: 变更
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
