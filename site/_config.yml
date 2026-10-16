@@ -21,22 +21,24 @@ remote_theme: just-the-docs/just-the-docs@v0.12.0
 lang: zh-CN
 
 # <lang>
-#   <zh-CN>视觉基调：**浅色 + 严格同源**产品 `EnterpriseLight` 皮肤（原则1 gate）。
-#     自定义方案定义在 `site/_sass/color_schemes/enterpriselight.scss`，变量名已对照本地
-#     gem `just-the-docs v0.12.0` 的 `_sass/color_schemes/light.scss` 逐一核实（非猜测）。
-#     取值逐字来自产品 CSS 的 `--portal-*` 语义变量与产品链接色，映射关系写在方案文件
-#     的注释里；取色基准见 `docs/site-visual-baseline.md` 第 2 节。
+#   <zh-CN>视觉基调：**HIA 系列主配色**（用户指定）。配色权威源是 HIA 系列自己的设计令牌 ——
+#     `HIA-Theme-Builder/HIA/web/src/style.css` 的 `:root`（primary `#0047AB`、secondary `#00A8D3`、
+#     蓝色阶 p50–p900、surface/panel/line/text/muted、Inter + Noto Sans CJK SC）。
+#     自定义方案定义在 `site/_sass/color_schemes/hia.scss`（变量名已对照本地 gem
+#     `just-the-docs v0.12.0` 的 `light.scss` 核实）；landing 组件样式（hero 渐变卡、
+#     分区卡片网格、页头品牌线）在 `site/_sass/custom/custom.scss`，取值同源。
 #     注意主题文档警告「不要直接编辑 `_sass/support/variables.scss`」——本文件走的是
 #     主题支持的 `color_scheme` 机制，不触碰主题内部文件。</zh-CN>
-#   <en>Visual tone: **light + strictly sourced** from the product's `EnterpriseLight` skin (Principle 1 gate).
-#     The custom scheme lives in `site/_sass/color_schemes/enterpriselight.scss`; variable names were verified one by one
-#     against the local gem `just-the-docs v0.12.0` (`_sass/color_schemes/light.scss`), not guessed. Values are taken
-#     verbatim from the product CSS `--portal-*` semantic tokens and product link colours; the mapping is documented in
-#     comments inside the scheme file. The palette baseline is `docs/site-visual-baseline.md` section 2.
-#     Note the theme docs warn "do not edit `_sass/support/variables.scss` directly" — this uses the theme-supported
-#     `color_scheme` mechanism and touches no theme-internal files.</en>
+#   <en>Visual tone: the **HIA series' main palette** (user request). The colour authority is the HIA series' own
+#     design tokens — the `:root` of `HIA-Theme-Builder/HIA/web/src/style.css` (primary `#0047AB`, secondary
+#     `#00A8D3`, blue scale p50–p900, surface/panel/line/text/muted, Inter + Noto Sans CJK SC).
+#     The custom scheme lives in `site/_sass/color_schemes/hia.scss` (variable names verified against the local
+#     gem `just-the-docs v0.12.0` `light.scss`); landing component styles (hero gradient card, section card grid,
+#     header brand line) are in `site/_sass/custom/custom.scss`, same source. Note the theme docs warn "do not edit
+#     `_sass/support/variables.scss` directly" — this uses the theme-supported `color_scheme` mechanism and touches
+#     no theme-internal files.</en>
 # </lang>
-color_scheme: enterpriselight
+color_scheme: hia
 search_enabled: true
 heading_anchors: true
 

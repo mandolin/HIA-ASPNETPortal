@@ -125,18 +125,25 @@
 - **不要在该 layout 里使用 Liquid 注释 `{#- ... -#}`**。曾用 Liquid 注释写双语说明，结果整个 layout 被静默旁路
   （Jekyll 回退到主题 layout），页面看起来正常、但 lang 修复完全失效。说明文字一律用 HTML 注释或独立文档承载。
 
-## 10. 自定义配色方案 `enterpriselight`（同源接线）
+## 10. HIA 系列主配色与 landing 样式（同源接线）
 
-`site/_config.yml` 的 `color_scheme` 已从内置 `light` 切换为自定义方案 **`enterpriselight`**，
-定义在 `site/_sass/color_schemes/enterpriselight.scss`。
+`site/_config.yml` 的 `color_scheme` 为自定义方案 **`hia`**（定义在 `site/_sass/color_schemes/hia.scss`）。
 
-- **取值来源**：第 2 节配色表的 `--portal-*` 语义变量（逐字取用）+ 产品链接色
-  （`a { color: #1769aa; }`、`a:hover { color: #0f4f82; }`，取自产品 CSS 的链接规则）。
+- **配色权威源（用户指定）**：HIA 系列自己的设计令牌 ——
+  `HIA-Theme-Builder/HIA/web/src/style.css` 的 `:root`
+  （primary `#0047AB`、secondary `#00A8D3`、蓝色阶 p50–p900、cyan 阶 s50–s900、
+  `surface #F3F6F9` / `surface-2 #EAF0F5` / `panel #FFFFFF` / `line #DCE5EC`、
+  `text #172633` / `muted #667782`、字体 Inter + Noto Sans CJK SC）。
+  本文件第 2 节的 `--portal-*` 矩阵仍是**产品门户皮肤**的取值依据（站点与其保持同源的产品语义，
+  但站点自身品牌色以 HIA 系列令牌为准）。
+- **landing 组件样式**：`site/_sass/custom/custom.scss`（主题官方覆盖点，经
+  `_includes/css/custom.scss.liquid` 编入）。包含 hero 渐变卡
+  （`linear-gradient(135deg, p700 0%, p700 72%, p300 100%)`，同 HIA web 的 carousel 渐变）、
+  药丸眉题、CTA 按钮、分区卡片网格（panel + line + shadow，hover 抬升）、页头品牌线。
+  组件形态移植自 HIA web 的 `.pc-carousel-card` / `.pc-carousel-label` 等，不做新设计。
 - **变量名**：对照本地 gem `just-the-docs v0.12.0` 的 `_sass/color_schemes/light.scss`
-  逐一核实后使用，非猜测；映射关系以注释形式写在该方案文件内。
+  逐一核实后使用，非猜测。
 - **代码高亮**：方案文件末尾保留上游的
   `@import "./vendor/accessible-pygments/github-light"`（与 `light.scss` 一致）。
-- **字体**：`$body-font-family` / `$mono-font-family` 取第 3 节的产品字体栈
-  —— 站点以中文为主，默认 `system-ui` 栈经平台回退渲染中文，会与产品观感分叉。
 - **升级主题时**：重新核对新版 `light.scss` 的变量名；若上游改名或增删调色板变量，
-  需同步本方案文件。本机制走主题支持的 `color_scheme`，不触碰主题内部文件。
+  需同步方案文件与 custom.scss。本机制走主题支持的 `color_scheme` 与 custom 挂钩，不触碰主题内部文件。

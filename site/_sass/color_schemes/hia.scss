@@ -1,0 +1,49 @@
+// HIA series brand color scheme (C-anp-P22 overhaul).
+//
+// Authority: the HIA series' own design tokens —
+//   HIA-Theme-Builder / HIA/web/src/style.css, :root block
+//   (primary #0047AB, secondary #00A8D3, blue scale p50–p900, cyan scale s50–s900,
+//    surface #F3F6F9, surface-2 #EAF0F5, panel #FFFFFF, line #DCE5EC,
+//    text #172633, muted #667782, font Inter + Noto Sans CJK SC).
+// This replaces the earlier `enterpriselight` scheme: the user asked for the HIA
+// series' main palette, not the single portal skin. Variable names were verified
+// against just-the-docs v0.12.0 `_sass/color_schemes/light.scss`, not guessed.
+// docs/site-visual-baseline.md section 10 records the wiring and upgrade steps.
+
+$color-scheme: light;
+
+// --panel: #FFFFFF
+$body-background-color: #ffffff;
+// --text: #172633 (HIA web uses it for body text and inherited headings)
+$body-heading-color: #172633;
+// --text: #172633
+$body-text-color: #172633;
+// --primary: #0047AB (HIA brand cobalt)
+$link-color: #0047AB;
+// --muted: #667782
+$nav-child-link-color: #667782;
+// --surface: #F3F6F9
+$sidebar-color: #f3f6f9;
+// --line: #DCE5EC
+$border-color: #dce5ec;
+// --surface-2: #EAF0F5
+$base-button-color: #eaf0f5;
+// --primary: #0047AB (primary buttons use the brand cobalt)
+$btn-primary-color: #0047ab;
+// --surface: #F3F6F9
+$code-background-color: #f3f6f9;
+// --p50: #EFF6FF (HIA callout gradient base)
+$feedback-color: #eff6ff;
+// --panel: #FFFFFF
+$table-background-color: #ffffff;
+// --panel: #FFFFFF
+$search-background-color: #ffffff;
+// --muted: #667782
+$search-result-preview-color: #667782;
+
+// HIA web font stack: Inter + CJK (html,body rule in style.css)
+$body-font-family: inter, "noto sans cjk sc", "microsoft yahei", system-ui, sans-serif;
+// HIA web mono stack (.gradient-config-code)
+$mono-font-family: ui-monospace, "sfmono-regular", consolas, monospace;
+
+@import "./vendor/accessible-pygments/github-light";
