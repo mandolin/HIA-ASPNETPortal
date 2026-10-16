@@ -25,7 +25,7 @@ maintainers. Internal planning and collaboration material are not published with
 - `module-development-guide.md`: development, registration, enable/disable and removal boundaries for trusted deployed module
   packages.
 - `product-overview.md`: product overview and positioning (what it is, who it is for, capability map, boundaries,
-  compatibility and licence, maturity framing).
+  compatibility and licence, where it fits).
 - `user-guide.md`: how to run and use the portal, including the portal configuration flow, common administrator operations
   and troubleshooting.
 - `testing-checklist.md`: build, test, manual verification and pre-release checklists.

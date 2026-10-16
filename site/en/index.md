@@ -28,10 +28,12 @@ gates** built out on top of it.
 | **Runs on** | Windows · IIS / IIS Express · SQL Server or LocalDB |
 | **Licence** | MIT |
 
-> **Maturity framing**
-> This release meets all seven criteria of `M-ANP-RELEASE-READY-PORTAL` (L10) and is positioned as a
-> **usable / reference / research baseline**. Production readiness under real production evidence
-> (`M-ANP-TRUSTED-PORTAL` / L7) has **not** been achieved, so **no production-grade trust is claimed**.
+> **Where it fits**
+> The current version suits **development, testing, demonstration and reference** scenarios, and already provides the full
+> set of capabilities: permissions and data scope, workflow state machines, auditing, module package governance, theme
+> governance and automated gates.
+> Before putting it into production, complete your own security assessment, backup and operations rehearsal — this project
+> **provides no production-environment validation evidence**.
 > See the [versioning policy]({{ site.baseurl }}/en/versioning/).
 
 ## What this is
@@ -59,7 +61,7 @@ gates** built out on top of it.
 
 | Section | Contents |
 | --- | --- |
-| **[Product overview]({{ site.baseurl }}/en/sections/product-overview/)** | Positioning, maturity framing and the full documentation index |
+| **[Product overview]({{ site.baseurl }}/en/sections/product-overview/)** | Product positioning, where it fits, and the full documentation index |
 | **[Evaluate]({{ site.baseurl }}/en/sections/evaluate/)** | System structure, data access and current architecture risks |
 | **[Quick start]({{ site.baseurl }}/en/sections/quick-start/)** | Run locally, external configuration and common modules |
 | **[Learn]({{ site.baseurl }}/en/sections/learn/)** | A complete business path showing how the capabilities work together |

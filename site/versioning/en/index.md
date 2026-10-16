@@ -27,8 +27,8 @@ carrier of the criteria for "publicity / first-release milestone".
 | --- | --- |
 | `v0.1.0` | Closed-loop baseline for the mechanism (the four layers capability ↔ module ↔ Profile ↔ permission connected and verifiable locally) |
 | `v0.2.0` – `v0.6.0` | Evolution versions on the way to the first release (the roadmap lives in this project's internal planning docs and is not published with the public documentation) |
-| **`v1.0.0`** | **First release = the `M-ANP-RELEASE-READY-PORTAL` (L10) publicity milestone** |
-| `v2.0.0` (reserved) | The production-ready version after `M-ANP-TRUSTED-PORTAL` (L7) real-environment evidence is achieved |
+| **`v1.0.0`** | **First formal release** — capability coverage, quality gates, documentation and open-source readiness all complete |
+| `v2.0.0` (reserved) | The production-ready version, once real-environment validation evidence is obtained |
 
 **Criteria must never be relaxed because a version advanced**: replacing "gather evidence" with "change the criteria" is not
 allowed.
@@ -60,14 +60,15 @@ allowed.
 ## 6. Publicity wording constraints
 
 - Before `v1.0.0`: **no external publicity**.
-- From `v1.0.0` onward: wording is limited to "**usable / reference / research baseline**".
-- **Production-grade or enterprise-grade trust must not be claimed** — `M-ANP-TRUSTED-PORTAL` (L7) real-environment
-  evidence remains a separate milestone, and that wording is forbidden until it is achieved.
+- From `v1.0.0` onward: wording is limited to "**development, testing, demonstration and reference**".
+- **Production-grade or enterprise-grade trust must not be claimed** — real-environment validation evidence remains a
+  separate milestone, and that wording is forbidden until it is obtained.
 
 ## 7. Current version
 
-**`v1.0.0`** (first release, 2026-10-09) — the seven `M-ANP-RELEASE-READY-PORTAL` (L10) criteria are met; the external
-wording is limited to "usable / reference / research baseline" (see section 6). See `CHANGELOG.md` for details.
+**`v1.0.0`** (first formal release, 2026-10-09) — capability coverage, quality gates, documentation and open-source
+readiness are all complete; the external wording is limited to "development, testing, demonstration and reference"
+(see section 6). See `CHANGELOG.md` for details.
 
 ## 8. `minimumPortalVersion` semantics in module manifests
 

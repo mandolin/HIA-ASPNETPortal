@@ -12,7 +12,7 @@
 - `theme-semantic-variables.md`：主题层 `--portal-*` 语义变量的矩阵（7 套主题 × **14 个变量**）、用途速查、使用规则与复现命令。
 - `theme-module-contract.md`：模块外观契约（主题层与模块层的分工、七族外观类与所用变量、`var()` 回退值的真实含义与已审计差异）。
 - `module-development-guide.md`：受信任部署模块包的开发、注册、启停和移除边界。
-- `product-overview.md`：产品概览与定位（是什么、给谁用、能力地图、边界、兼容性与许可证、成熟度口径）。
+- `product-overview.md`：产品概览与定位（是什么、给谁用、能力地图、边界、兼容性与许可证、适用场景）。
 - `user-guide.md`：运行和使用入口说明，含门户配置流程、管理员常用操作与故障排除。
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。

@@ -116,11 +116,25 @@ if (Test-Path -LiteralPath $publishedPath) {
 #     （负向测试插入无效 parent 竟仍通过）。解析失败必须暴露，不能让门禁悄悄失效。</zh-CN>
 # </lang>
 $navigationPath = Join-Path $dataDir 'navigation.yml'
-$navTitles = New-Object 'System.Collections.Generic.List[string]'
+# <lang>
+#   <zh-CN>分区条目同时收集中文与英文标题（`W-anp-P148`）。初版只收中文 `title`，导致
+#     `W-anp-P148` 要给英文页面注入英文分区名时无从取数。`Zh` 供 N1 校验与中文页 parent 使用，
+#     `En` 供英文页 parent 使用。</zh-CN>
+# </lang>
+$navTitles = New-Object 'System.Collections.Generic.List[object]'
 if (Test-Path -LiteralPath $navigationPath) {
+    $cur = $null
     foreach ($line in ([System.IO.File]::ReadAllText($navigationPath, $utf8) -split "`r?`n")) {
-        if ($line.Trim() -match '^(?:-\s*)?title:\s*(.+)$') { $navTitles.Add($Matches[1].Trim()) }
+        $t = $line.Trim()
+        if ($t -match '^(?:-\s*)?title:\s*(.+)$') {
+            if ($cur) { $navTitles.Add($cur) }
+            $cur = [pscustomobject]@{ Zh = $Matches[1].Trim(); En = $null }
+        }
+        elseif ($cur -and $t -match '^title_en:\s*(.+)$') {
+            $cur.En = $Matches[1].Trim()
+        }
     }
+    if ($cur) { $navTitles.Add($cur) }
 }
 else {
     $gaps.Add('缺少 _data/navigation.yml，无法校验 parent')
@@ -128,6 +142,7 @@ else {
 if ((Test-Path -LiteralPath $navigationPath) -and $navTitles.Count -eq 0) {
     $gaps.Add('_data/navigation.yml 未解析出任何分区标题（正则或格式变更？）—— N1 校验无法进行')
 }
+$navTitleZhList = @($navTitles | ForEach-Object { $_.Zh })
 
 # <lang>
 #   <zh-CN>遍历已声明上架的页面：中文取自 `docs/`，英文取自 `site/_translations/`；
@@ -327,7 +342,7 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     }
 
     # N1：parent 必须存在于导航骨架
-    if ($navTitles.Count -gt 0 -and -not $navTitles.Contains($e.parent)) {
+    if ($navTitles.Count -gt 0 -and -not $navTitleZhList.Contains($e.parent)) {
         $gaps.Add(('N1 parent 无效: ' + $e.doc + ' 的 parent="' + $e.parent + '" 不在 _data/navigation.yml 中'))
         continue
     }
@@ -400,8 +415,29 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
 
     $targetDir = Join-Path $siteDir $pathSeg
     if (-not (Test-Path -LiteralPath $targetDir)) { $null = New-Item -ItemType Directory -Path $targetDir }
+    # <lang>
+    #   <zh-CN>**parent 必须按页面语言注入对应语言的分区名**（`W-anp-P148`，由用户截图发现）。
+    #     初版中英两页都注入 `$e.parent`（中文分区名），于是**英文内容页全挂到了中文分区下**，
+    #     而英文分区页（title: Reference）名下没有任何子页 —— 侧边栏里中英节点混在同一个分区下展开。
+    #     Just the Docs 的 children 收集逻辑是 `nav_parenthood | where: "name", node.title`，
+    #     即**用父页面的 title 去匹配子页面的 parent 字符串**，二者必须**同语言**才能对上。
+    #     分区名映射来自 `_data/navigation.yml`（title ↔ title_en），与 N1 校验同源。</zh-CN>
+    #   <en>**parent must be injected in the matching language for each page** (`W-anp-P148`, found from a user screenshot).
+    #     The first version injected `$e.parent` (the Chinese section name) into both language versions, so **all English
+    #     content pages hung under the Chinese section**, while the English section page (title: Reference) had no children at
+    #     all — Chinese and English nodes then expanded mixed together under one section in the sidebar.
+    #     Just the Docs collects children with `nav_parenthood | where: "name", node.title`, i.e. it **matches the child's
+    #     parent string against the parent page's title**, so the two must be **in the same language** to line up.
+    #     Section names come from `_data/navigation.yml` (title ↔ title_en), the same source as the N1 check.</en>
+    # </lang>
+    $enParent = $e.parent
+    foreach ($nv in $navTitles) {
+        if ($nv.Zh -eq $e.parent -and $nv.En) { $enParent = $nv.En; break }
+    }
     $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $e.parent + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
     [System.IO.File]::WriteAllText((Join-Path $targetDir 'index.md'), ($zhFm + $zhBody), $utf8)
+
+    $enFm = "---`nlayout: default`nlang: en`nparent: " + $enParent + "`npermalink: /en/" + $pathSeg + "/`ntitle: " + $enTitle + "`n---`n"
 
     $enDir = Join-Path $targetDir 'en'
     if (-not (Test-Path -LiteralPath $enDir)) { $null = New-Item -ItemType Directory -Path $enDir }

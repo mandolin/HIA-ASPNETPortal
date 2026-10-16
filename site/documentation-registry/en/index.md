@@ -51,7 +51,7 @@ title: Documentation registry
      wording in `module-development-guide.md` that "the loader requires a capability block" is **inaccurate** and has been
      logged for review and correction.
 3. **Product features and usage**: strengthened by  — added **`product-overview.md`** (product overview and
-   positioning: what it is / who it is for / capability map / boundaries / compatibility / licence / maturity framing);
+   positioning: what it is / who it is for / capability map / boundaries / compatibility / licence / where it fits);
    `user-guide.md` gained **a typical portal configuration flow**, **common administrator operations** and
    **troubleshooting**, and the original "to be supplemented" list was tightened into an honest "not yet covered" list.
    **The new modules of  are registered in this family**: `user-guide.md` contains a "Business modules: leave

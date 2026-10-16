@@ -40,7 +40,7 @@ Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate 
 ### 3. Product features and usage
 
 - `product-overview.md` — **product overview and positioning**: what it is / who it is for /
-  capability map / boundaries / compatibility and runtime environment / licence and attribution / maturity framing
+  capability map / boundaries / compatibility and runtime environment / licence and attribution / where it fits
 - `user-guide.md` — how to run and use the portal; includes the **typical portal configuration flow**, **common
   administrator operations** and **troubleshooting**
 - `p12-sample-business-flow.md` — a sample business flow

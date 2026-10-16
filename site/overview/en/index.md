@@ -23,14 +23,14 @@ SPA and has no client-side routing; pages and modules render through the Web For
 
 Current version: **v1.0.0** (first release, 2026-10-09).
 
-### Maturity wording (important — do not extrapolate)
+### Where it fits
 
-Stated as **usable / reference / research baseline**: this release meets the seven criteria of
-`M-ANP-RELEASE-READY-PORTAL` (**L10**) — capability coverage, item-by-item benchmarking, quality gates, documentation
-readiness, open-source readiness, version anchoring, and wording constraints.
+This is the **first formal release**, with complete capability coverage, quality gates, documentation and open-source
+readiness, version anchoring, and consistent wording.
 
-However, production readiness under real target-environment evidence (`M-ANP-TRUSTED-PORTAL` / **L7**) is **not** yet
-achieved, so production-grade reliability is **not** claimed. Full wording rules are in `docs/versioning.md`.
+However, **no production-environment validation evidence is provided yet** (real IIS, TLS, application pool ACLs, target
+SQL Server, enterprise scanning, and so on), so **direct production use is not recommended**. Full version rules are in
+`docs/versioning.md`.
 
 ## 2. Who it is for
 

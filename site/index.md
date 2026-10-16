@@ -26,9 +26,10 @@ lang: zh-CN
 | **运行环境** | Windows · IIS / IIS Express · SQL Server 或 LocalDB |
 | **许可** | MIT |
 
-> **成熟度口径**
-> 本版本达成 `M-ANP-RELEASE-READY-PORTAL`（L10）七条判据，定位为**可用 / 参考 / 研究基线**。
-> 真实生产环境证据下的生产就绪（`M-ANP-TRUSTED-PORTAL` / L7）**尚未达成**，因此**不宣称生产级可信**。
+> **适用场景**
+> 当前版本适合**开发、测试、演示与参考**场景；已具备权限与数据范围、流程状态机、审计、模块包治理、
+> 主题治理与自动化门禁等完整能力。
+> 在投入生产环境前，请自行完成安全评估、备份与运维演练 —— 本项目**未提供生产环境验证证据**。
 > 详见[版本策略]({{ site.baseurl }}/versioning/)。
 
 ## 这是什么
@@ -54,7 +55,7 @@ lang: zh-CN
 
 | 分区 | 内容 |
 | --- | --- |
-| **[产品概览]({{ site.baseurl }}/sections/product-overview/)** | 定位、成熟度口径与全部文档索引 |
+| **[产品概览]({{ site.baseurl }}/sections/product-overview/)** | 产品定位、适用场景与全部文档索引 |
 | **[评估]({{ site.baseurl }}/sections/evaluate/)** | 系统结构、数据访问与当前架构风险 |
 | **[快速上手]({{ site.baseurl }}/sections/quick-start/)** | 本地运行、外置配置与常见模块 |
 | **[学习]({{ site.baseurl }}/sections/learn/)** | 完整业务路径，理解各能力如何协同 |

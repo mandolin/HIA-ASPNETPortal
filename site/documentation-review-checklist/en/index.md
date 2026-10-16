@@ -31,13 +31,13 @@ title: Documentation review walkthrough checklist
 - [ ] Cited **defaults / version numbers / counts** are not a copied old snapshot (were they updated when the code changed?)
 - [ ] The stated **boundaries and "things we do not do"** still hold (for example, "no external REST API" — is that still
       true?)
-- [ ] The **maturity framing** has not been inadvertently overstated (for example, do not write "achieved L10" as
-      "production ready")
+- [ ] The **where-it-fits description** has not been inadvertently overstated (for example, do not write "first formal
+      release" as "production ready")
 
 ### B. Bilingual equivalence
 
 - [ ] The Chinese section and the `## English` section of the root `README.md` are **factually consistent** (version number,
-      capability list and maturity framing aligned item by item)
+      capability list and where-it-fits description aligned item by item)
 - [ ] The `<lang>` blocks in code comments are **semantically equivalent between Chinese and English**, not a one-way
       translation (semantic equivalence, not word-for-word correspondence)
 - [ ] Terminology is consistent (one concept does not mix several translated names)
