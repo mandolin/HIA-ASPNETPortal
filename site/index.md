@@ -52,16 +52,16 @@ lang: zh-CN
 
 ## 按分区浏览
 
-| 分区 | 文档 |
+| 分区 | 内容 |
 | --- | --- |
-| **产品概览** | [产品概览与定位]({{ site.baseurl }}/overview/) · [文档索引]({{ site.baseurl }}/docs-index/) |
-| **评估** | [架构概览]({{ site.baseurl }}/architecture/) |
-| **快速上手** | [用户指南]({{ site.baseurl }}/user-guide/) |
-| **学习** | [P12 员工资料更正样板业务路径]({{ site.baseurl }}/p12-sample-business-flow/) |
-| **参考** | [测试清单]({{ site.baseurl }}/testing-checklist/) · [主题语义变量矩阵]({{ site.baseurl }}/theme-semantic-variables/) · [模块外观契约]({{ site.baseurl }}/theme-module-contract/) · [第三方依赖审计]({{ site.baseurl }}/third-party-dependencies/) · [字体政策与审计]({{ site.baseurl }}/font-policy-and-audit/) · [业务申请状态机]({{ site.baseurl }}/business-application-state-machine/) · [协同事项状态机]({{ site.baseurl }}/collaboration-item-state-machine/) · [审计保留期策略]({{ site.baseurl }}/audit-retention-policy/) · [文档登记表]({{ site.baseurl }}/documentation-registry/) · [文档复核走查清单]({{ site.baseurl }}/documentation-review-checklist/) · [文档地图]({{ site.baseurl }}/documentation-map/) · [文档产物与工具链边界]({{ site.baseurl }}/documentation-artifacts-guide/) · [技术契约]({{ site.baseurl }}/contracts-readme/) · [模块契约]({{ site.baseurl }}/contracts-module-manifest/) · [配置契约]({{ site.baseurl }}/contracts-app-settings/) · [官网视觉基线]({{ site.baseurl }}/site-visual-baseline/) |
-| **开发** | [模块包开发指南]({{ site.baseurl }}/module-development/) · [前端资源指南]({{ site.baseurl }}/frontend-asset-guide/) · [主题包部署指南]({{ site.baseurl }}/theme-package-guide/) · [开发指南]({{ site.baseurl }}/dev-guide/) |
-| **运维** | [发布与兼容检查清单]({{ site.baseurl }}/deployment-checklist/) · [运维运行手册]({{ site.baseurl }}/operations-runbook/) · [默认凭据与旧口令治理]({{ site.baseurl }}/deployment-default-credentials/) · [发布回滚指南]({{ site.baseurl }}/deployment-rollback-guide/) |
-| **变更** | [版本策略]({{ site.baseurl }}/versioning/) · [发布说明模板]({{ site.baseurl }}/release-notes-template/) |
+| **[产品概览]({{ site.baseurl }}/sections/product-overview/)** | 定位、成熟度口径与全部文档索引 |
+| **[评估]({{ site.baseurl }}/sections/evaluate/)** | 系统结构、数据访问与当前架构风险 |
+| **[快速上手]({{ site.baseurl }}/sections/quick-start/)** | 本地运行、外置配置与常见模块 |
+| **[学习]({{ site.baseurl }}/sections/learn/)** | 完整业务路径，理解各能力如何协同 |
+| **[参考]({{ site.baseurl }}/sections/reference/)** | 测试分层、主题契约、状态机、合规策略与文档体系 |
+| **[开发]({{ site.baseurl }}/sections/develop/)** | 模块与主题开发、前端资产、开发环境 |
+| **[运维]({{ site.baseurl }}/sections/operate/)** | 部署、运维、默认凭据治理与回滚 |
+| **[变更]({{ site.baseurl }}/sections/changes/)** | 版本规则与发布说明模板 |
 
 ## 主要能力明细
 

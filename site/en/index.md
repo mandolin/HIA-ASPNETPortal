@@ -57,16 +57,16 @@ gates** built out on top of it.
 
 ## Browse by section
 
-| Section | Documents |
+| Section | Contents |
 | --- | --- |
-| **Product overview** | [Product overview]({{ site.baseurl }}/en/overview/) · [Documentation index]({{ site.baseurl }}/en/docs-index/) |
-| **Evaluate** | [Architecture overview]({{ site.baseurl }}/en/architecture/) |
-| **Quick start** | [User guide]({{ site.baseurl }}/en/user-guide/) |
-| **Learn** | [P12 employee-profile correction sample business path]({{ site.baseurl }}/en/p12-sample-business-flow/) |
-| **Reference** | [Testing checklist]({{ site.baseurl }}/en/testing-checklist/) · [Theme semantic variables]({{ site.baseurl }}/en/theme-semantic-variables/) · [Theme-module appearance contract]({{ site.baseurl }}/en/theme-module-contract/) · [Third-party dependency audit]({{ site.baseurl }}/en/third-party-dependencies/) · [Font policy and audit]({{ site.baseurl }}/en/font-policy-and-audit/) · [Business application state machine]({{ site.baseurl }}/en/business-application-state-machine/) · [Collaboration item state machine]({{ site.baseurl }}/en/collaboration-item-state-machine/) · [Audit retention policy]({{ site.baseurl }}/en/audit-retention-policy/) · [Documentation registry]({{ site.baseurl }}/en/documentation-registry/) · [Documentation review walkthrough checklist]({{ site.baseurl }}/en/documentation-review-checklist/) · [Documentation map]({{ site.baseurl }}/en/documentation-map/) · [Documentation artefacts and toolchain boundaries]({{ site.baseurl }}/en/documentation-artifacts-guide/) · [Technical contracts]({{ site.baseurl }}/en/contracts-readme/) · [Module contract]({{ site.baseurl }}/en/contracts-module-manifest/) · [Configuration contract]({{ site.baseurl }}/en/contracts-app-settings/) · [Site visual baseline]({{ site.baseurl }}/en/site-visual-baseline/) |
-| **Develop** | [Deployed module package development guide]({{ site.baseurl }}/en/module-development/) · [Frontend assets guide]({{ site.baseurl }}/en/frontend-asset-guide/) · [Theme package deployment guide]({{ site.baseurl }}/en/theme-package-guide/) · [Developer guide]({{ site.baseurl }}/en/dev-guide/) |
-| **Operate** | [Release and compatibility checklist]({{ site.baseurl }}/en/deployment-checklist/) · [Operations runbook]({{ site.baseurl }}/en/operations-runbook/) · [Default credentials and legacy password governance]({{ site.baseurl }}/en/deployment-default-credentials/) · [Release rollback guide]({{ site.baseurl }}/en/deployment-rollback-guide/) |
-| **Changes** | [Versioning policy]({{ site.baseurl }}/en/versioning/) · [Release notes template]({{ site.baseurl }}/en/release-notes-template/) |
+| **[Product overview]({{ site.baseurl }}/en/sections/product-overview/)** | Positioning, maturity framing and the full documentation index |
+| **[Evaluate]({{ site.baseurl }}/en/sections/evaluate/)** | System structure, data access and current architecture risks |
+| **[Quick start]({{ site.baseurl }}/en/sections/quick-start/)** | Run locally, external configuration and common modules |
+| **[Learn]({{ site.baseurl }}/en/sections/learn/)** | A complete business path showing how the capabilities work together |
+| **[Reference]({{ site.baseurl }}/en/sections/reference/)** | Test tiers, theme contracts, state machines, compliance policy and the documentation system |
+| **[Develop]({{ site.baseurl }}/en/sections/develop/)** | Module and theme development, frontend assets, development environment |
+| **[Operate]({{ site.baseurl }}/en/sections/operate/)** | Deployment, operations, default credential governance and rollback |
+| **[Changes]({{ site.baseurl }}/en/sections/changes/)** | Version rules and the release notes template |
 
 ## Where to go next
 

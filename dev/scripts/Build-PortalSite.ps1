@@ -429,6 +429,49 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
 #     裸绝对路径 `/xxx/` 一律判坏链 —— 在项目子路径站点下它必然 404。</zh-CN>
 # </lang>
 $pageFiles = @(Get-ChildItem -Path $siteDir -Recurse -Filter 'index.md' -File -ErrorAction SilentlyContinue)
+
+# <lang>
+#   <zh-CN>**手写页面的双语成对检查（`W-anp-P146`）**：`site/index.md`、`site/en/index.md` 与
+#     `site/sections/**` 这些分区索引页是**手写**的，不经上面的生成流程，因此不受"缺译即 Fail"保护。
+#     若只写中文忘写英文，双语并行就成了空话 —— 而这个缺口此前没有任何检查覆盖。
+#     规则：`site/**/index.md`（非生成目录）必须同时存在 `en/index.md`，反之亦然。
+#     生成目录（`site/<path>/`，其下直接有 index.md 与 en/index.md 且由 published.yml 声明）天然成对，
+#     故只检查**不在 published.yml path 列表中**的目录，避免重复校验。</zh-CN>
+#   <en>**Pairing check for hand-written pages (`W-anp-P146`)**: `site/index.md`, `site/en/index.md` and the section index
+#     pages under `site/sections/**` are **hand-written** and bypass the generation flow above, so they are not protected by
+#     "a missing translation fails". If Chinese is written and English forgotten, bilingual parity becomes an empty phrase —
+#     and no check covered that gap before.
+#     Rule: every `site/**/index.md` (outside generated directories) must have a matching `en/index.md`, and vice versa.
+#     Generated directories (which hold both `index.md` and `en/index.md` and are declared in published.yml) are naturally
+#     paired, so only directories **not in the published.yml path list** are checked, avoiding duplicate validation.</en>
+# </lang>
+$publishedPaths = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($e in $entries) { if ($e.path) { $null = $publishedPaths.Add($e.path) } }
+
+foreach ($pf in $pageFiles) {
+    $rel = $pf.FullName.Substring($siteDir.Length).Replace('\', '/').TrimStart('/')
+    $dir = Split-Path $rel -Parent
+    if ($dir -eq '') { $dir = '.' }
+    $seg = if ($dir -eq '.') { '' } else { $dir }
+    # 跳过生成目录（其 path 已在 published.yml 中声明）
+    if ($seg -ne '' -and $publishedPaths.Contains($seg)) { continue }
+    if ($rel -like 'en/*' -or $rel -like '*/en/index.md') { continue }
+
+    $enPair = Join-Path $pf.DirectoryName 'en/index.md'
+    if (-not (Test-Path -LiteralPath $enPair)) {
+        $gaps.Add(('手写页面缺英文版: site/' + $rel + ' -> 应有 site/' + $seg + '/en/index.md'))
+    }
+}
+# 反向：存在英文手写页但缺中文
+foreach ($pf in $pageFiles) {
+    $rel = $pf.FullName.Substring($siteDir.Length).Replace('\', '/').TrimStart('/')
+    if ($rel -notlike '*/en/index.md') { continue }
+    $zhPair = Join-Path $pf.Directory.Parent.FullName 'index.md'
+    if (-not (Test-Path -LiteralPath $zhPair)) {
+        $gaps.Add(('手写页面缺中文版: site/' + $rel))
+    }
+}
+
 foreach ($pf in $pageFiles) {
     $rel = $pf.FullName.Substring($siteDir.Length).Replace('\', '/')
     $text = [System.IO.File]::ReadAllText($pf.FullName, $utf8)
