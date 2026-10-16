@@ -144,10 +144,11 @@ title: 官网视觉基线
   本文件第 2 节的 `--portal-*` 矩阵仍是**产品门户皮肤**的取值依据（站点与其保持同源的产品语义，
   但站点自身品牌色以 HIA 系列令牌为准）。
 - **landing 组件样式**：`site/_sass/custom/custom.scss`（主题官方覆盖点，经
-  `_includes/css/custom.scss.liquid` 编入）。包含 hero 渐变卡
-  （`linear-gradient(135deg, p700 0%, p700 72%, p300 100%)`，同 HIA web 的 carousel 渐变）、
-  药丸眉题、CTA 按钮、分区卡片网格（panel + line + shadow，hover 抬升）、页头品牌线。
-  组件形态移植自 HIA web 的 `.pc-carousel-card` / `.pc-carousel-label` 等，不做新设计。
+  `_includes/css/custom.scss.liquid` 编入）。**对标基准为 Serilog.net**（用户指定换更简明的产品官网）：
+  首页使用独立的全宽 layout（`site/_layouts/home.html`，无侧边栏、无面包屑，单栏 46rem 居中），
+  内容为居中 hero（眉题药丸 p50 底 + 大标题 + 副文 + 双 CTA）+ 文档链接列表（发丝分隔线）+
+  能力清单 —— 无卡片装饰，靠留白与字体层级。品牌色保持 HIA 令牌（链接/主按钮 `#0047AB`），
+  页头保留 2px 品牌线。CTA 按钮为品牌钴蓝实心/发丝描边两式。
 - **变量名**：对照本地 gem `just-the-docs v0.12.0` 的 `_sass/color_schemes/light.scss`
   逐一核实后使用，非猜测。
 - **代码高亮**：方案文件末尾保留上游的

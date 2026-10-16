@@ -129,10 +129,12 @@ product entry → evaluate → quick start → learn → reference → develop �
   The `--portal-*` matrix in section 2 of this file remains the value basis for the **product portal skins**
   (the site keeps product-semantic alignment), but the site's own brand colours follow the HIA series tokens.
 - **Landing component styles**: `site/_sass/custom/custom.scss` (the theme's official override point, compiled via
-  `_includes/css/custom.scss.liquid`). It contains the hero gradient card
-  (`linear-gradient(135deg, p700 0%, p700 72%, p300 100%)`, same as the HIA web carousel gradient),
-  the pill eyebrow, CTA buttons, the section card grid (panel + line + shadow, hover lift) and the header brand line.
-  Component shapes are ported from the HIA web `.pc-carousel-card` / `.pc-carousel-label` etc. — no new design.
+  `_includes/css/custom.scss.liquid`). **The benchmark is Serilog.net** (user requested a simpler product page):
+  the home page uses a dedicated full-width layout (`site/_layouts/home.html` — no sidebar, no breadcrumbs, a single
+  46rem centered column). Content is a centered hero (p50 pill eyebrow + big headline + subline + two CTAs) plus a
+  documentation link list (hairline separators) and a capabilities list — no card decoration, whitespace and type scale
+  do the work. Brand colours stay HIA tokens (links/primary button `#0047AB`), header keeps the 2px brand line.
+  CTA buttons come in solid cobalt and hairline-outline variants.
 - **Variable names**: verified one by one against the local gem `just-the-docs v0.12.0`
   (`_sass/color_schemes/light.scss`), not guessed.
 - **Code highlighting**: the scheme file keeps the upstream

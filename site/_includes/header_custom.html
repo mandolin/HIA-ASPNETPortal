@@ -1,0 +1,26 @@
+{%- comment -%}
+  Language switcher (C-anp-P22).
+  The site's URL structure is perfectly regular — Chinese at the root, English under /en/,
+  and the two trees are one-to-one (enforced by the bilingual pairing checks in
+  Build-PortalSite.ps1) — so the counterpart URL is derivable from page.url alone:
+  strip the /en/ prefix (en -> zh) or prepend it (zh -> en). The landing pages map / <-> /en/.
+  Rendered via the theme's unconditional `header_custom.html` hook, so it appears on every
+  page including the sidebar-less landing layout.
+{%- endcomment -%}
+{%- assign u = page.url | default: '/' -%}
+{%- if u == '/en/' or u == '/en' -%}
+  {%- assign alt_url = '/' -%}
+  {%- assign alt_label = '中文' -%}
+{%- elsif u == '/' or u == '' -%}
+  {%- assign alt_url = '/en/' -%}
+  {%- assign alt_label = 'English' -%}
+{%- elsif u contains '/en/' -%}
+  {%- assign alt_url = u | remove_first: '/en' -%}
+  {%- assign alt_label = '中文' -%}
+{%- else -%}
+  {%- assign alt_url = '/en' | append: u -%}
+  {%- assign alt_label = 'English' -%}
+{%- endif -%}
+<div class="lang-switch">
+  <a class="lang-switch-link" href="{{ alt_url | relative_url }}">{{ alt_label }}</a>
+</div>

@@ -1,0 +1,46 @@
+---
+layout: table_wrappers
+nav_enabled: false
+---
+
+<!--
+  Landing layout for the site home page (C-anp-P22 overhaul, Serilog-style benchmark).
+  Derived from the controlled default.html override; the ONLY structural change is:
+  no sidebar and no breadcrumbs — the landing page is a single centered column,
+  like a product marketing page, not a docs page. The html-lang expression and all
+  other upstream structure are kept identical to default.html (same upgrade rules:
+  re-diff against upstream when bumping the theme version).
+  Do not add Liquid comments ({#- ... -#}) here — see the note in default.html.
+-->
+
+<!DOCTYPE html>
+
+<html lang="{{ page.lang | default: site.lang | default: 'en-US' }}">
+{% include head.html %}
+<body>
+  <a class="skip-to-main" href="#main-content">Skip to main content</a>
+  {% include icons/icons.html %}
+  <div class="main" id="top">
+    {% include components/header.html %}
+    <div class="main-content-wrap">
+      <div id="main-content" class="main-content main-content--home">
+        <main>
+          {% if site.heading_anchors != false %}
+            {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><use xlink:href=\"#svg-link\"></use></svg>" anchorClass="anchor-heading" anchorAttrs="aria-labelledby=\"%html_id%\"" %}
+          {% else %}
+            {{ content }}
+          {% endif %}
+        </main>
+        {% include components/footer.html %}
+      </div>
+    </div>
+    {% if site.search_enabled != false %}
+      {% include components/search_footer.html %}
+    {% endif %}
+  </div>
+
+  {% if site.mermaid %}
+    {% include components/mermaid.html %}
+  {% endif %}
+</body>
+</html>
