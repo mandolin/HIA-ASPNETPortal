@@ -131,3 +131,19 @@ title: 官网视觉基线
   并引出三轮无效排查。**注释中的示例文本不得与真实标记形成可匹配的同形文本。**
 - **不要在该 layout 里使用 Liquid 注释 `{#- ... -#}`**。曾用 Liquid 注释写双语说明，结果整个 layout 被静默旁路
   （Jekyll 回退到主题 layout），页面看起来正常、但 lang 修复完全失效。说明文字一律用 HTML 注释或独立文档承载。
+
+## 10. 自定义配色方案 `enterpriselight`（同源接线）
+
+`site/_config.yml` 的 `color_scheme` 已从内置 `light` 切换为自定义方案 **`enterpriselight`**，
+定义在 `site/_sass/color_schemes/enterpriselight.scss`。
+
+- **取值来源**：第 2 节配色表的 `--portal-*` 语义变量（逐字取用）+ 产品链接色
+  （`a { color: #1769aa; }`、`a:hover { color: #0f4f82; }`，取自产品 CSS 的链接规则）。
+- **变量名**：对照本地 gem `just-the-docs v0.12.0` 的 `_sass/color_schemes/light.scss`
+  逐一核实后使用，非猜测；映射关系以注释形式写在该方案文件内。
+- **代码高亮**：方案文件末尾保留上游的
+  `@import "./vendor/accessible-pygments/github-light"`（与 `light.scss` 一致）。
+- **字体**：`$body-font-family` / `$mono-font-family` 取第 3 节的产品字体栈
+  —— 站点以中文为主，默认 `system-ui` 栈经平台回退渲染中文，会与产品观感分叉。
+- **升级主题时**：重新核对新版 `light.scss` 的变量名；若上游改名或增删调色板变量，
+  需同步本方案文件。本机制走主题支持的 `color_scheme`，不触碰主题内部文件。

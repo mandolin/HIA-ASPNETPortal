@@ -117,3 +117,21 @@ product entry → evaluate → quick start → learn → reference → develop �
   one click.
 - Bilingual text must **not** be machine placeholder: a translation must be semantically equivalent to its source,
   confirmed by a human walkthrough (see `docs/documentation-review-checklist.md`).
+
+## 10. Custom color scheme `enterpriselight` (sourced wiring)
+
+`color_scheme` in `site/_config.yml` has been switched from the built-in `light` to the custom scheme
+**`enterpriselight`**, defined in `site/_sass/color_schemes/enterpriselight.scss`.
+
+- **Value source**: the `--portal-*` semantic tokens in the section-2 palette (taken verbatim) plus the product link
+  colours (`a { color: #1769aa; }`, `a:hover { color: #0f4f82; }`, from the product CSS link rules).
+- **Variable names**: verified one by one against the local gem `just-the-docs v0.12.0`
+  (`_sass/color_schemes/light.scss`), not guessed; the mapping is documented in comments inside the scheme file.
+- **Code highlighting**: the scheme file keeps the upstream
+  `@import "./vendor/accessible-pygments/github-light"` at the end (same as `light.scss`).
+- **Fonts**: `$body-font-family` / `$mono-font-family` use the product font stacks from section 3 — the site is
+  Chinese-first, and the default `system-ui` stack renders CJK through platform fallbacks, which diverges from the
+  product's look.
+- **On theme upgrades**: re-verify the new version's `light.scss` variable names; if upstream renames or adds/removes
+  palette variables, update this scheme file accordingly. The mechanism uses the theme-supported `color_scheme` and
+  touches no theme-internal files.

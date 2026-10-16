@@ -21,26 +21,22 @@ remote_theme: just-the-docs/just-the-docs@v0.12.0
 lang: zh-CN
 
 # <lang>
-#   <zh-CN>视觉基调：**浅色**（原则1 gate 要求）。当前取 Just the Docs **内置** `light` 方案 ——
-#     不经插件、不经自定义 Sass，构建链路最短且行为可验证。
-#
-#     若后续要**严格同源**产品的 `EnterpriseLight` 皮肤配色，须先核对**远程主题** `_variables.scss`
-#     中的实际变量名再定义自定义 scheme（`_sass/color_schemes/<name>.scss` + `color_scheme: <name>`）：
-#     该主题文档明确警告「不要直接编辑 `_sass/support/variables.scss`」，且**覆盖调色板变量后依赖它的
-#     变量不会自动级联更新**，必须手动重写依赖规则。在变量名被核实前**不写猜测的变量名** ——
-#     那会导致样式静默失效，比不接入更难发现。取色基准见 `docs/site-visual-baseline.md`。</zh-CN>
-#   <en>Visual tone: **light** (required by the Principle 1 gate). The current setting uses Just the Docs'
-#     **built-in** `light` scheme — no plugins, no custom Sass, shortest and most verifiable build path.
-#
-#     To later match the product's `EnterpriseLight` skin **exactly**, first verify the actual variable names in the
-#     **remote theme's** `_variables.scss`, then define a custom scheme (`_sass/color_schemes/<name>.scss` plus
-#     `color_scheme: <name>`): the theme docs explicitly warn “do not edit `_sass/support/variables.scss`
-#     directly”, and **variables depending on an overridden palette variable do not cascade automatically** —
-#     dependent rules must be rewritten by hand. Until the names are verified, **no guessed variable names are
-#     written** — a silently dead style is harder to detect than no override at all. See
-#     `docs/site-visual-baseline.md` for the palette baseline.</en>
+#   <zh-CN>视觉基调：**浅色 + 严格同源**产品 `EnterpriseLight` 皮肤（原则1 gate）。
+#     自定义方案定义在 `site/_sass/color_schemes/enterpriselight.scss`，变量名已对照本地
+#     gem `just-the-docs v0.12.0` 的 `_sass/color_schemes/light.scss` 逐一核实（非猜测）。
+#     取值逐字来自产品 CSS 的 `--portal-*` 语义变量与产品链接色，映射关系写在方案文件
+#     的注释里；取色基准见 `docs/site-visual-baseline.md` 第 2 节。
+#     注意主题文档警告「不要直接编辑 `_sass/support/variables.scss`」——本文件走的是
+#     主题支持的 `color_scheme` 机制，不触碰主题内部文件。</zh-CN>
+#   <en>Visual tone: **light + strictly sourced** from the product's `EnterpriseLight` skin (Principle 1 gate).
+#     The custom scheme lives in `site/_sass/color_schemes/enterpriselight.scss`; variable names were verified one by one
+#     against the local gem `just-the-docs v0.12.0` (`_sass/color_schemes/light.scss`), not guessed. Values are taken
+#     verbatim from the product CSS `--portal-*` semantic tokens and product link colours; the mapping is documented in
+#     comments inside the scheme file. The palette baseline is `docs/site-visual-baseline.md` section 2.
+#     Note the theme docs warn "do not edit `_sass/support/variables.scss` directly" — this uses the theme-supported
+#     `color_scheme` mechanism and touches no theme-internal files.</en>
 # </lang>
-color_scheme: light
+color_scheme: enterpriselight
 search_enabled: true
 heading_anchors: true
 

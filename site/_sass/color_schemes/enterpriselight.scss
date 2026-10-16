@@ -1,0 +1,50 @@
+// EnterpriseLight color scheme for the documentation site (C-anp-P22 closing task P2-1).
+//
+// Values are NOT a new design: they map the product portal's semantic tokens
+// (src/Portal/App_Themes/EnterpriseLight/Default.css, the --portal-* block on
+// body.portal-theme-enterpriselight) onto just-the-docs v0.12.0 scheme variables.
+// Variable names were verified against the gem's _sass/color_schemes/light.scss,
+// not guessed. docs/site-visual-baseline.md section 2 is the spec; the product CSS
+// is the authority — when the product tokens change, update here.
+//
+// Upstream import (code-highlight palette) is kept at the bottom, same as light.scss.
+
+$color-scheme: light;
+
+// --portal-surface: #ffffff
+$body-background-color: #ffffff;
+// --portal-text-strong: #2f475f
+$body-heading-color: #2f475f;
+// --portal-field-text: #1f2d3d
+$body-text-color: #1f2d3d;
+// product link colours: a { color: #1769aa; }  a:hover { color: #0f4f82; }
+$link-color: #1769aa;
+// --portal-text-muted: #5b6b7d
+$nav-child-link-color: #5b6b7d;
+// --portal-surface-2: #f5f8fb
+$sidebar-color: #f5f8fb;
+// --portal-border: #d8dee8
+$border-color: #d8dee8;
+// --portal-surface-2 (button base)
+$base-button-color: #f5f8fb;
+// product primary blue (same family as $link-color)
+$btn-primary-color: #1769aa;
+// --portal-surface-2 (documented as the code-block background)
+$code-background-color: #f5f8fb;
+// --portal-list-header-bg: #eef2f7
+$feedback-color: #eef2f7;
+// --portal-surface
+$table-background-color: #ffffff;
+// --portal-field-bg: #ffffff
+$search-background-color: #ffffff;
+// --portal-text-muted
+$search-result-preview-color: #5b6b7d;
+
+// Typography aligned with the product (docs/site-visual-baseline.md section 3):
+// the site is Chinese-first, and the default system-ui stack renders CJK through
+// platform fallbacks, which diverges from the product's documented stack.
+$body-font-family: "Noto Sans SC", "Source Han Sans SC", "Sarasa Gothic SC", "Liberation Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+// product: BLOCKQUOTE, PRE { font-family: "Sarasa Mono SC", ... }
+$mono-font-family: "Sarasa Mono SC", "Noto Sans Mono CJK SC", "Source Han Mono SC", "Liberation Mono", consolas, monospace;
+
+@import "./vendor/accessible-pygments/github-light";
