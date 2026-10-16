@@ -3,6 +3,7 @@ layout: default
 title: Changes
 nav_order: 8
 lang: en
+permalink: /en/sections/changes/
 ---
 
 # Changes

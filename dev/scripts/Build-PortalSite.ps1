@@ -445,30 +445,72 @@ $pageFiles = @(Get-ChildItem -Path $siteDir -Recurse -Filter 'index.md' -File -E
 #     Generated directories (which hold both `index.md` and `en/index.md` and are declared in published.yml) are naturally
 #     paired, so only directories **not in the published.yml path list** are checked, avoiding duplicate validation.</en>
 # </lang>
+# <lang>
+#   <zh-CN>**手写页面的双语成对检查（`W-anp-P146`）**：`site/index.md`、`site/en/index.md`、
+#     `site/sections/**` 这些分区索引页是**手写**的，不经上面的生成流程，因此不受"缺译即 Fail"保护。
+#     若只写中文忘写英文，双语并行就成了空话 —— 而这个缺口此前没有任何检查覆盖。
+#
+#     **站点结构约定（`W-anp-P147` 修正后）**：英文树统一挂在 `site/en/` 下，即
+#       中文 `site/sections/<slug>/index.md` ↔ 英文 `site/en/sections/<slug>/index.md`。
+#     初版按"同目录下的 en/ 子目录"配对，在我把英文分区页移到 `site/en/sections/` 后**立刻误报 8 处** ——
+#     这正说明该检查是活的（不是橡皮章）：结构约定变了，检查必须跟着变，否则它会用过期口径制造假失败。
+#     规则：凡 `site/**/index.md` 且不在 published.yml path 列表中，
+#       ① 中文页（`site/sections/<slug>/index.md`）→ 须有 `site/en/sections/<slug>/index.md`；
+#       ② 站点根 `site/index.md` → 须有 `site/en/index.md`；
+#       ③ 反向同理。</zh-CN>
+#   <en>**Pairing check for hand-written pages (`W-anp-P146`)**: `site/index.md`, `site/en/index.md` and the section index
+#     pages under `site/sections/**` are **hand-written** and bypass the generation flow above, so they are not protected by
+#     "a missing translation fails". If Chinese is written and English forgotten, bilingual parity becomes an empty phrase —
+#     and no check covered that gap before.
+#
+#     **Site structure convention (after the `W-anp-P147` fix)**: the English tree hangs uniformly under `site/en/`, i.e.
+#       Chinese `site/sections/<slug>/index.md` ↔ English `site/en/sections/<slug>/index.md`.
+#     The first version paired by "an `en/` subdirectory in the same directory" and **immediately produced 8 false reports**
+#     after I moved the English section pages to `site/en/sections/` — which shows the check is alive (not a rubber stamp):
+#     when the structure convention changes, the check must change with it, or it manufactures false failures from a stale
+#     convention. Rule: for any `site/**/index.md` not in the published.yml path list,
+#       (1) a Chinese page (`site/sections/<slug>/index.md`) must have `site/en/sections/<slug>/index.md`;
+#       (2) the site root `site/index.md` must have `site/en/index.md`;
+#       (3) and vice versa.</en>
+# </lang>
 $publishedPaths = New-Object 'System.Collections.Generic.HashSet[string]'
 foreach ($e in $entries) { if ($e.path) { $null = $publishedPaths.Add($e.path) } }
 
 foreach ($pf in $pageFiles) {
     $rel = $pf.FullName.Substring($siteDir.Length).Replace('\', '/').TrimStart('/')
-    $dir = Split-Path $rel -Parent
-    if ($dir -eq '') { $dir = '.' }
-    $seg = if ($dir -eq '.') { '' } else { $dir }
-    # 跳过生成目录（其 path 已在 published.yml 中声明）
-    if ($seg -ne '' -and $publishedPaths.Contains($seg)) { continue }
-    if ($rel -like 'en/*' -or $rel -like '*/en/index.md') { continue }
+    if ($rel -notmatch '^sections/[^/]+/index\.md$' -and $rel -ne 'index.md') { continue }
 
-    $enPair = Join-Path $pf.DirectoryName 'en/index.md'
+    # rel 形如 sections/<slug>/index.md 或 index.md；slug 直接从 rel 取，避免对根路径再 Split-Path
+    if ($rel -eq 'index.md') {
+        $enRel = 'en/index.md'
+    }
+    else {
+        $slug = ($rel -split '/')[1]
+        $enRel = 'en/sections/' + $slug + '/index.md'
+    }
+    $enPair = Join-Path $siteDir ($enRel -replace '/', '\')
     if (-not (Test-Path -LiteralPath $enPair)) {
-        $gaps.Add(('手写页面缺英文版: site/' + $rel + ' -> 应有 site/' + $seg + '/en/index.md'))
+        $gaps.Add(('手写页面缺英文版: site/' + $rel + ' -> 应有 site/' + $enRel))
     }
 }
-# 反向：存在英文手写页但缺中文
+# 反向：英文手写页存在但缺中文
 foreach ($pf in $pageFiles) {
     $rel = $pf.FullName.Substring($siteDir.Length).Replace('\', '/').TrimStart('/')
-    if ($rel -notlike '*/en/index.md') { continue }
-    $zhPair = Join-Path $pf.Directory.Parent.FullName 'index.md'
+    if ($publishedPaths.Contains((Split-Path $rel -Parent))) { continue }
+    if ($rel -notmatch '^en/sections/[^/]+/index\.md$' -and $rel -ne 'en/index.md') { continue }
+
+    if ($rel -eq 'en/index.md') {
+        $zhRel = 'index.md'
+    }
+    else {
+        # rel 形如 en/sections/<slug>/index.md，其父目录是 en/sections/<slug>
+        $slug = Split-Path (Split-Path $rel -Parent) -Leaf -ErrorAction SilentlyContinue
+        if ([string]::IsNullOrWhiteSpace($slug)) { continue }
+        $zhRel = 'sections/' + $slug + '/index.md'
+    }
+    $zhPair = Join-Path $siteDir ($zhRel -replace '/', '\')
     if (-not (Test-Path -LiteralPath $zhPair)) {
-        $gaps.Add(('手写页面缺中文版: site/' + $rel))
+        $gaps.Add(('手写页面缺中文版: site/' + $rel + ' -> 应有 site/' + $zhRel))
     }
 }
 

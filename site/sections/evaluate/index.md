@@ -3,6 +3,7 @@ layout: default
 title: 评估
 nav_order: 2
 lang: zh-CN
+permalink: /sections/evaluate/
 ---
 
 # 评估

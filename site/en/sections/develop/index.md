@@ -3,6 +3,7 @@ layout: default
 title: Develop
 nav_order: 6
 lang: en
+permalink: /en/sections/develop/
 ---
 
 # Develop

@@ -3,6 +3,7 @@ layout: default
 title: 开发
 nav_order: 6
 lang: zh-CN
+permalink: /sections/develop/
 ---
 
 # 开发

@@ -3,6 +3,7 @@ layout: default
 title: Reference
 nav_order: 5
 lang: en
+permalink: /en/sections/reference/
 ---
 
 # Reference

@@ -3,6 +3,7 @@ layout: default
 title: 运维
 nav_order: 7
 lang: zh-CN
+permalink: /sections/operate/
 ---
 
 # 运维

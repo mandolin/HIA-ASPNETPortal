@@ -3,6 +3,7 @@ layout: default
 title: Quick start
 nav_order: 3
 lang: en
+permalink: /en/sections/quick-start/
 ---
 
 # Quick start

@@ -3,6 +3,7 @@ layout: default
 title: Learn
 nav_order: 4
 lang: en
+permalink: /en/sections/learn/
 ---
 
 # Learn

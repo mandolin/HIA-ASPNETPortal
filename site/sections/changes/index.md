@@ -3,6 +3,7 @@ layout: default
 title: 变更
 nav_order: 8
 lang: zh-CN
+permalink: /sections/changes/
 ---
 
 # 变更
