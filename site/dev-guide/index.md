@@ -190,7 +190,7 @@ Win7 VM 或其他局域网设备访问 IIS Express 时，不能使用默认 loca
 
 ## 自动化测试、Smoke 与 SQL Server 兼容检查
 
-P28 起新增正式 MSTest runner，默认只运行本机单元/契约测试，不连接数据库、不启动 IIS、不创建账号：
+新增正式 MSTest runner，默认只运行本机单元/契约测试，不连接数据库、不启动 IIS、不创建账号：
 
 ```powershell
 mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1

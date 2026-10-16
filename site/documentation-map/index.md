@@ -7,7 +7,7 @@ title: 文档地图 / 导航索引（HIA-ASPNETPortal）
 ---
 # 文档地图 / 导航索引（HIA-ASPNETPortal）
 
-> **P21 D2 交付物**。按《HIA 项目文档化结构与模板说明》7 文档族对 `docs/` 现有文档做导航索引，并标注缺口。与 `documentation-registry.md`（D1，登记适用/不适用）配套：registry 记"该不该有"，本图记"在哪、怎么串"。
+> 按《HIA 项目文档化结构与模板说明》7 文档族对 `docs/` 现有文档做导航索引，并标注缺口。与 `documentation-registry.md`（登记适用/不适用）配套：registry 记"该不该有"，本图记"在哪、怎么串"。
 
 ## 读者路径
 - **用户/实施方**：产品功能与使用 → 运维部署安全 → 变更兼容发布
@@ -35,7 +35,7 @@ title: 文档地图 / 导航索引（HIA-ASPNETPortal）
 - `dev-guide.md` — 开发总指南
 - `module-development-guide.md` — 模块开发指南
 - `frontend-asset-guide.md` — 前端资源指南
-- `theme-package-guide.md` — 主题包指南（衔接 C-anp-P18）
+- `theme-package-guide.md` — 主题包指南
 - `theme-semantic-variables.md` — 主题语义变量矩阵
 - `theme-module-contract.md` — 模块外观契约（层间分工、外观类族、回退值含义与差异）
 - `documentation-artifacts-guide.md` — 文档产物指南

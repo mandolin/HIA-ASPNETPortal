@@ -179,7 +179,7 @@ The script keeps the `localhost` binding and also prints the external URL. If th
 
 ## Automated tests, smoke and SQL Server compatibility checks
 
-From P28 there is a formal MSTest runner; by default it runs only local unit / contract tests, does not connect to a database, does not start IIS and does not create accounts:
+There is a formal MSTest runner; by default it runs only local unit / contract tests, does not connect to a database, does not start IIS and does not create accounts:
 
 ```powershell
 mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1

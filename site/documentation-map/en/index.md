@@ -53,7 +53,7 @@ Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate 
 - `dev-guide.md` — the general development guide
 - `module-development-guide.md` — module development guide
 - `frontend-asset-guide.md` — frontend asset guide
-- `theme-package-guide.md` — theme package guide (links to C-anp-P18)
+- `theme-package-guide.md` — theme package guide
 - `theme-semantic-variables.md` — the theme semantic variable matrix
 - `theme-module-contract.md` — module appearance contract (layer division of labour, appearance class families, fallback
   meaning and differences)

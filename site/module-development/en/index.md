@@ -55,7 +55,7 @@ DesktopModules/
 > belong to the closed five-value vocabulary (`Primary` / `Contributor` / `Projection` / `Adapter` / `Block`). `MyWorkItems`
 > is in fact `schemaVersion: 2` with no `capability` block, which is a legal shape.
 >
-> **Gate wording has been calibrated** (C-anp-P19 / P21): `Test-PortalBusinessModuleSmoke.ps1` no longer requires "always
+> **Gate wording has been calibrated**: `Test-PortalBusinessModuleSmoke.ps1` no longer requires "always
 > 1" but decides per scenario — `2` means a compliant business module; `1` with no `capability` means a compliant read-only
 > reference package. **Do not** downgrade a business module to 1 just to pass a gate, and do not bolt a `capability` block
 > onto a module that does not need one just to "look complete".

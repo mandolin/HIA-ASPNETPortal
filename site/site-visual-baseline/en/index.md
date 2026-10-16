@@ -9,7 +9,7 @@ title: Site visual baseline
 > sources for code blocks, tables and the navigation skeleton. It is the source of truth for the values in
 > `site/_config.yml` and `site/_sass/` (if overridden) — **change it here, never hand-edit generated output**.
 >
-> **Single-source discipline (Principle 4)**: the values below are **not a new design** — they are extracted from the
+> **Single-source discipline**: the values below are **not a new design** — they are extracted from the
 > project's existing CSS so the website matches the product portal. Authoritative sources:
 > `src/Portal/App_Themes/EnterpriseLight/Default.css` (the `--portal-*` variable block) and
 > `src/Portal/App_Themes/Default/Default.css` (type stack and sizes). When a snapshot goes stale, the CSS wins.

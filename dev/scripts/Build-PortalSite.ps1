@@ -288,6 +288,7 @@ function Convert-PublicText {
     $b = $b -replace '`W-anp-P1\d\d`–`P1\d\d`;\s*formerly\s*D3–D6,\s*renumbered to W on\s*20\d\d-\d\d-\d\d', '相关规划'
     # 测试清单里的内部阶段编号
     $b = $b -replace 'P1\d/P2\d/P2\d/P2\d\s*scenario SQL', 'scenario SQL'
+    $b = $b -replace 'P1\d/P2\d/P2\d/P2\d\s*场景 SQL', '场景 SQL'
     # 复合出处前缀：「**P21 `W-anp-P124` 交付物**。」
     $b = $b -replace '\*\*P21\s*`W-anp-P[\d.]+`\s*交付物\*\*。\s*', ''
     $b = $b -replace '\*\*`W-anp-P[\d.]+`\s*deliverable\*\*\.\s*', ''
@@ -313,6 +314,25 @@ function Convert-PublicText {
     $b = $b -replace 'A P21 D2 deliverable', 'Documentation navigation map'
     $b = $b -replace '`P21\s*`W-anp-P125`\s*交付物`', '技术契约目录'
     $b = $b -replace 'A P21 `W-anp-P125` deliverable', 'Technical contracts'
+    # <lang>
+    #   <zh-CN>**无反引号的编号形态（第三批补漏）**：前两批都假设编号带反引号 `C-anp-P18`，
+    #     但实际文档里还有大量**裸写**形态 —— 「（衔接 C-anp-P18）」「（C-anp-P19 / P21）」
+    #     「（C-anp-P23 D3 裁定新增）」「**P21 D1 交付物**」「原则四（……）落地载体」「P28 起」。
+    #     这些对外读者同样只是噪音。括号组整删仍放前面（避免残迹）。</zh-CN>
+    # </lang>
+    $b = [regex]::Replace($b, '\s*[（(][^）)]*(?:C|W)-anp-P[\d.]+[^）)]*[）)]', '')
+    $b = $b -replace '\s*衔接\s*(?:C|W)-anp-P[\d.]+', ''
+    $b = $b -replace '\s*links to\s*(?:C|W)-anp-P[\d.]+', ''
+    $b = $b -replace '\*\*P21\s*D\d\s*交付物\*\*。?\s*', ''
+    $b = $b -replace '\*\*A\s+P21\s+D\d\s+deliverable\*\*\.?\s*', ''
+    $b = $b -replace '（D1，登记适用/不适用）', '（登记适用/不适用）'
+    $b = $b -replace '\(D1, registering applicability[^)]*\)', '(registering applicability)'
+    $b = $b -replace '原则四（[^）]*）落地载体：\s*', ''
+    $b = $b -replace 'Vehicle for Principle 4 \([^)]*\):\s*', ''
+    $b = $b -replace '\s*\(Principle 4\)', ''
+    $b = $b -replace '\s*[（(]2026-\d\d-\d\d 起本 Cycle 改用 W 编号[^）)]*[）)]', ''
+    $b = $b -replace 'P28 起新增', '新增'
+    $b = $b -replace 'From P28 there is a formal MSTest runner', 'There is a formal MSTest runner'
     # <lang>
     #   <zh-CN>**残迹清理（必须在所有删号规则之后）**：先删散号会让「**A P21 `W-anp-P125` deliverable.**」
     #     变成「**A P21  deliverable.**」—— 编号删干净了，却留下孤立前缀与空括号，比不过滤更难看。

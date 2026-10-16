@@ -75,7 +75,7 @@ rather than inventing a new colour.
 | `--portal-border-strong` | Border needing emphasis (e.g. focus, selected) |
 | `--portal-text-strong` | Strong text such as headings and subtitles |
 | `--portal-text-muted` | De-emphasised text, explanatory text, placeholder wording |
-| `--portal-text-subtle` | Subtitle level, valued between `--portal-text-strong` and `--portal-text-muted`, for colour layering between heading and subtitle (added by the C-anp-P23 D3 ruling) |
+| `--portal-text-subtle` | Subtitle level, valued between `--portal-text-strong` and `--portal-text-muted`, for colour layering between heading and subtitle |
 | `--portal-field-bg` | Input control background |
 | `--portal-field-border` | Input control border |
 | `--portal-field-text` | Text inside an input control |

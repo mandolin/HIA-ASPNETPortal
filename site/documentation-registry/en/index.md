@@ -11,7 +11,7 @@ title: Documentation registry
 > families of the *HIA project documentation structure and template specification*, and records the authoritative location,
 > maintenance responsibility, sync trigger and verification method for each. Internal planning / ADRs / research drafts stay
 > in a **separate private repository**; only content reviewed as suitable for its audience enters the public `docs/`.
-> Vehicle for Principle 4 (documentation throughout the development cycle): this table is the "ledger" of documentation
+> this table is the "ledger" of documentation
 > engineering, and 相关规划 use it to close the gaps (from 2026-10-14 this Cycle switched to W numbering; the old
 > D1–D7 remain only as a historical mapping).
 
@@ -19,7 +19,7 @@ title: Documentation registry
 
 | # | Documentation family | Applicability | Authoritative location | Maintenance responsibility | Sync trigger | Verification method |
 |---|---|---|---|---|---|---|
-| 1 | In-code documentation | Applicable | Source comments + ROP governance (C-anp-P19) | dev | Per-cycle code changes | ROP gate `Get-PortalCommentDebtInventory` |
+| 1 | In-code documentation | Applicable | Source comments + ROP governance | dev | Per-cycle code changes | ROP gate `Get-PortalCommentDebtInventory` |
 | 2 | API and technical contracts | Applicable (boundary decision below) | `docs/contracts/` (to be built) | dev | Module / interface / configuration changes | Contract consistency gate |
 | 3 | Product features and usage | Applicable | `docs/user-guide.md` + pending how-to/FAQ | docs | Feature changes | Readability walkthrough / example runs |
 | 4 | Developers and contributors | Applicable | `docs/dev-guide.md` and others | docs | Architecture / tool changes | Example runs |
