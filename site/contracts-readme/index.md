@@ -24,25 +24,25 @@ title: 技术契约（HIA-ASPNETPortal）
 | **配置契约** | **适用** | `appSettings` 平面点号键族 |
 | **企业能力对象契约** | **适用** | 能力键与角色构成封闭词表 |
 
-边界判定的完整登记见 [documentation-registry.md](../documentation-registry.md) 第 2 族。
+边界判定的完整登记见 [documentation-registry.md]({{ site.baseurl }}/documentation-registry/) 第 2 族。
 
 ## 二、契约清单
 
 | 契约 | 权威源（机器可读） | 人类可读说明 |
 | --- | --- | --- |
-| **模块契约** | `DesktopModules/<模块>/module.json`；校验实现 `src/Portal/Components/PortalModulePackage.cs` | [module-manifest.md](module-manifest.md) |
-| **配置契约** | `src/Portal/Web.config` 的 `<appSettings>`；键常量 `src/Portal/Components/PortalSettingKeys.cs`；环境覆盖 `src/Portal/Config/appSettings*.json` | [app-settings.md](app-settings.md) |
-| **企业能力对象契约** | 能力注册表 `src/Portal.Components/PortalCapabilityRegistry.cs`；角色词表 `src/Portal.Components/PortalCapabilityRoles.cs` | [module-manifest.md](module-manifest.md)「企业能力（capability）」一节 |
+| **模块契约** | `DesktopModules/<模块>/module.json`；校验实现 `src/Portal/Components/PortalModulePackage.cs` | [module-manifest.md]({{ site.baseurl }}/contracts-module-manifest/) |
+| **配置契约** | `src/Portal/Web.config` 的 `<appSettings>`；键常量 `src/Portal/Components/PortalSettingKeys.cs`；环境覆盖 `src/Portal/Config/appSettings*.json` | [app-settings.md]({{ site.baseurl }}/contracts-app-settings/) |
+| **企业能力对象契约** | 能力注册表 `src/Portal.Components/PortalCapabilityRegistry.cs`；角色词表 `src/Portal.Components/PortalCapabilityRoles.cs` | [module-manifest.md]({{ site.baseurl }}/contracts-module-manifest/)「企业能力（capability）」一节 |
 
 ## 三、共同约束
 
 1. **受信任边界**：模块包是"受信任部署"模型 —— 只允许受控 ASCX 入口与站内静态资源；manifest 中声明 `script` / `scripts` / `externalUrl` / `externalUrls` / 程序集 / 包 URL 会被**显式拒绝**，manifest 声明不能改变执行或下载能力。
 2. **默认值以源为准**：本目录不复制默认值（会过期）。查默认值请看 `src/Portal/Web.config` 的 `<appSettings>` 与各环境 `appSettings*.json`。
-3. **配置生效源**：`Web.config` 是基础值；只有**部署到站点根目录**的 `appSettings.json` 才会覆盖同名键（不存在则静默跳过）。见 [../module-development-guide.md](../module-development-guide.md)「新增模块的隐藏陷阱」第 4 条。
+3. **配置生效源**：`Web.config` 是基础值；只有**部署到站点根目录**的 `appSettings.json` 才会覆盖同名键（不存在则静默跳过）。见 [../module-development-guide.md]({{ site.baseurl }}/module-development/)「新增模块的隐藏陷阱」第 4 条。
 4. **契约变更须同步**：改契约实现时，同步更新本目录对应说明与 `PortalSettingKeys.cs` 等常量源；验证方式是跑门禁套件（`dev/scripts/Invoke-PortalGateSuite.ps1`）。
 
 ## 四、验证
 
 - 模块契约的机器校验：`dev/scripts/Test-PortalNewModuleReadiness.ps1`、`Test-PortalBusinessModuleSmoke.ps1`（L0）。
 - 资源与主题契约：`Test-PortalModuleSkinCoverage.ps1`（L0）。
-- 具体命令见 [../testing-checklist.md](../testing-checklist.md)。
+- 具体命令见 [../testing-checklist.md]({{ site.baseurl }}/testing-checklist/)。

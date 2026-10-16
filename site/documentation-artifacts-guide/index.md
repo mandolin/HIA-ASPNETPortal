@@ -23,7 +23,7 @@ title: 文档产物与工具链边界
 `src/Portal/gulpfile.js` 与 `src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js`，用于验证中英双语内容、
 源码链接、HIA metadata 和 integration JSON。两个输入均为受控白名单；增删时必须同步审查配置、readiness gate 和本说明。
 
-执行方式见 [开发指南](dev-guide.md#javascript-文档化-pilot)。首次运行会在该工具目录执行 `npm ci`；之后可使用
+执行方式见 [开发指南]({{ site.baseurl }}/dev-guide/#javascript-文档化-pilot)。首次运行会在该工具目录执行 `npm ci`；之后可使用
 `portal: build JavaScript documentation pilot` VSCode 任务，或执行 `dev/scripts/Build-PortalJsdocPilot.ps1`。
 
 生成的 HTML、metadata 和 integration JSON 只写入被忽略的 `temp/documentation/jsdoc/`。这些文件是本机验证产物，

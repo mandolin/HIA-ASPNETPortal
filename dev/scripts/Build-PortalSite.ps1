@@ -133,6 +133,50 @@ if ((Test-Path -LiteralPath $navigationPath) -and $navTitles.Count -eq 0) {
 #   <zh-CN>遍历已声明上架的页面：中文取自 `docs/`，英文取自 `site/_translations/`；
 #     缺任一即登记为缺口并 Fail。路径由 `path` 唯一决定，并注入 front matter（含 permalink 与 parent）。</zh-CN>
 # </lang>
+# <lang>
+#   <zh-CN>**把 `docs/` 里的相对 Markdown 链接改写成站点可用形态**（`W-anp-P144`）。
+#     站点把页面拍平为 `site/<path>/index.md`，而 `docs/` 是嵌套目录，所以源码里正确的相对链接
+#     在站点上大多 404。按当前文档所在目录解析后分三种情况处理（详见调用处的说明）。
+#     注意：**源文件不被改动**，改写只发生在生成侧。</zh-CN>
+#   <en>**Rewrite relative Markdown links from `docs/` into a form the site can use** (`W-anp-P144`).
+#     The site flattens pages to `site/<path>/index.md` while `docs/` is nested, so links that are correct in the
+#     source mostly 404 on the site. Resolve against the current document's directory, then handle three cases
+#     (see the call site for details). Note: **source files are never modified** — rewriting happens only on the
+#     generation side.</en>
+# </lang>
+function Convert-DocLink {
+    param(
+        [string] $Body,
+        [string] $CurDoc
+    )
+    $docsRoot = (Join-Path $RepoRoot 'docs')
+    return [regex]::Replace($Body, '\]\(([^)]+)\)', {
+        param($m)
+        $raw = $m.Groups[1].Value.Trim()
+        # 拆出锚点：链接可能是 `doc.md#anchor` 形态
+        $hash = $raw.IndexOf('#')
+        $link = if ($hash -ge 0) { $raw.Substring(0, $hash) } else { $raw }
+        $anchor = if ($hash -ge 0) { $raw.Substring($hash) } else { '' }
+        # 外链、站内已带 baseurl 的、纯锚点、绝对路径：不处理
+        if ($link -match '^(https?:|mailto:|#|//)' -or $link -match '^\{\{' -or $link -match '^/') { return $m.Value }
+        if ($link -eq '') { return $m.Value }
+        $curDir = Split-Path $CurDoc -Parent
+        $combined = if ($curDir) { Join-Path $curDir $link } else { $link }
+        try { $full = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($docsRoot, $combined)) }
+        catch { return $m.Value }
+        if ($full.StartsWith($docsRoot + [System.IO.Path]::DirectorySeparatorChar)) {
+            $relDoc = $full.Substring($docsRoot.Length + 1).Replace('\', '/')
+            $mapped = $null
+            foreach ($e in $entries) { if ($e.doc -eq $relDoc -and $e.path) { $mapped = $e.path; break } }
+            if ($mapped) { return ']({{ site.baseurl }}/' + $mapped + '/' + $anchor + ')' }
+            return $m.Value
+        }
+        # 指向 docs/ 之外（仓库根）→ GitHub 绝对地址
+        $repoRel = $full.Substring($RepoRoot.Length + 1).Replace('\', '/')
+        return '](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/' + $repoRel + $anchor + ')'
+    })
+}
+
 foreach ($e in $entries) {
     if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.Add('上架清单存在缺 doc 的条目'); continue }
 
@@ -189,6 +233,35 @@ foreach ($e in $entries) {
     $zhBody = [regex]::Replace($zhBody, '(?s)\A\s*---\r?\n.*?\r?\n---\s*\r?\n?', '')
     $enBody = [regex]::Replace($enBody, '(?s)\A\s*---\r?\n.*?\r?\n---\s*\r?\n?', '')
 
+    # <lang>
+    #   <zh-CN>**链接重写（`W-anp-P144`）**：`docs/` 下的相对 Markdown 链接在 GitHub 上浏览源码时是正确的，
+    #     但**在站点结构下大多 404** —— 站点把页面拍平为 `site/<path>/index.md`，而 `docs/` 是嵌套目录。
+    #     此前靠"在译本里手动改成 GitHub 绝对地址"绕过，但中文源没改，于是生成的中文页全是坏链
+    #     （`contracts-*` 三页首次上架即暴露 31 处）。
+    #     现按**当前文档所在目录**解析相对链接，再分三种情况处理：
+    #       ① 解析结果命中 `_data/published.yml` 的 doc → path 映射 → 改写为 `{{ site.baseurl }}/<path>/`
+    #          （站点内跳转，必须带 baseurl，否则浏览器丢失 Pages 注入的项目前缀而 404）；
+    #       ② 解析结果在 `docs/` 内但未上架 → 保持原样（站点本就没有对应页面可指）；
+    #       ③ 解析结果在 `docs/` **之外**（如 `../LICENSE`、`../README-old.md`，指向仓库根）→
+    #          改写为 GitHub 绝对地址（站点没有这些文件，只能回源码仓库看）。
+    #     **源文件保持 GitHub 友好**（不被改动），适配只发生在生成侧。</zh-CN>
+    #   <en>**Link rewriting (`W-anp-P144`)**: relative Markdown links under `docs/` are correct when browsing the source on
+    #     GitHub, but **mostly 404 under the site structure** — the site flattens pages to `site/<path>/index.md` while
+    #     `docs/` is nested. This was previously worked around by manually changing translations to GitHub absolute URLs,
+    #     but the Chinese sources were left alone, so every generated Chinese page had broken links (the three `contracts-*`
+    #     pages exposed 31 of them the moment they were published).
+    #     Relative links are now resolved **against the current document's directory**, then handled in three cases:
+    #       (1) the resolved target matches a doc → path mapping in `_data/published.yml` → rewritten to
+    #           `{{ site.baseurl }}/<path>/` (in-site navigation; baseurl is mandatory, otherwise the browser loses the
+    #           Pages-injected project prefix and 404s);
+    #       (2) the resolved target is inside `docs/` but not published → left as-is (the site has no such page to point at);
+    #       (3) the resolved target is **outside** `docs/` (e.g. `../LICENSE`, `../README-old.md`, pointing at the repo root)
+    #           → rewritten to a GitHub absolute URL (the site does not carry those files).
+    #     **Source files stay GitHub-friendly** (untouched); adaptation happens only on the generation side.</en>
+    # </lang>
+    $zhBody = Convert-DocLink -Body $zhBody -CurDoc $e.doc
+    $enBody = Convert-DocLink -Body $enBody -CurDoc $e.doc
+
     $targetDir = Join-Path $siteDir $pathSeg
     if (-not (Test-Path -LiteralPath $targetDir)) { $null = New-Item -ItemType Directory -Path $targetDir }
     $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $e.parent + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
@@ -203,18 +276,42 @@ foreach ($e in $entries) {
 }
 
 # <lang>
-#   <zh-CN>N2：站点页面中的站内链接必须可达 —— 这是 `W-anp-P132` 为"导航/首页链接全部 404 而门禁未发现"
-#     补的检查。注意只检查 `site/**/index.md`（生成产物与手写页面），_config.yml 等源码不在其列。</zh-CN>
+#   <zh-CN>N2：站点页面中的站内链接必须**既形态合法、又目标存在** —— 这是 `W-anp-P132` 为
+#     "导航/首页链接全部 404 而门禁未发现"补的检查。注意只检查 `site/**/index.md`
+#     （生成产物与手写页面），_config.yml 等源码不在其列。
+#
+#     **`W-anp-P144` 口径修正（本项此前是"假通过"的典型）**：初版只判断
+#     "`site/<seg>/index.md` 这个文件在不在"，**完全不看链接的写法**。于是首页手写的
+#     裸绝对路径 `/overview/` 被判为"可达"（因为 `site/overview/index.md` 确实存在）——
+#     而浏览器实际把它解析成 `https://mandolin.github.io/overview/`，**丢失 Pages 注入的
+#     `/HIA-ASPNETPortal` 前缀**，点击即 404。线上 31 个首页链接全是这么坏的，
+#     而门禁一路绿灯（`W-anp-P132` 修过一次同类问题，本项却没拦住第二次）。
+#     根因与本项目反复出现的教训同源：**门禁的"可达"定义 ≠ 用户点击后的真实结果**。
+#     现要求站内链接必须是两种合法形态之一：
+#       ① `{{ site.baseurl }}/...`（推荐；Pages 会自动把 baseurl 注入为 `/HIA-ASPNETPortal`）；
+#       ② 同目录相对路径（如 `foo.md`、`./foo.md`）。
+#     裸绝对路径 `/xxx/` 一律判坏链 —— 在项目子路径站点下它必然 404。</zh-CN>
 # </lang>
 $pageFiles = @(Get-ChildItem -Path $siteDir -Recurse -Filter 'index.md' -File -ErrorAction SilentlyContinue)
 foreach ($pf in $pageFiles) {
     $rel = $pf.FullName.Substring($siteDir.Length).Replace('\', '/')
     $text = [System.IO.File]::ReadAllText($pf.FullName, $utf8)
-    foreach ($m in [regex]::Matches($text, '\]\((/[A-Za-z0-9/_-]*/?)\)')) {
-        $target = $m.Groups[1].Value
-        if ($target -eq '/' -or $target -eq '/en/') { continue }
-        $seg = $target.Trim('/')
+    foreach ($m in [regex]::Matches($text, '\]\(([^)]+)\)')) {
+        $target = $m.Groups[1].Value.Trim()
+        if ($target -eq '' -or $target -eq '/' -or $target -eq '/en/') { continue }
+        # 外链、锚点、mailto 不在本站内链接范畴
+        if ($target -match '^(https?:|mailto:|#|//)') { continue }
+        # 形态校验：必须带 {{ site.baseurl }} 或是相对路径
+        if ($target -notmatch '^\{\{\s*site\.baseurl\s*\}\}') {
+            if ($target -notmatch '^\.{0,2}/?[A-Za-z0-9._-]+\.md(#.*)?$' -and $target -notmatch '^\.{1,2}/[A-Za-z0-9._/-]+$') {
+                $gaps.Add(('N2 站内链接未带 baseurl（项目子路径站点下浏览器解析必 404）: site' + $rel + ' -> ' + $target))
+                continue
+            }
+        }
+        $seg = ($target -replace '^\{\{\s*site\.baseurl\s*\}\}', '')
+        $seg = ($seg -split '#')[0].Trim('/')
         if ($seg.StartsWith('en/')) { $seg = $seg.Substring(3) }
+        if ($seg -eq '') { continue }
         $exists = Test-Path -LiteralPath (Join-Path $siteDir ($seg + '\index.md'))
         if (-not $exists) {
             $gaps.Add(('N2 站内坏链: site' + $rel + ' -> ' + $target))

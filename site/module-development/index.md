@@ -63,7 +63,7 @@ DesktopModules/
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmployeeProfileConfirm.ascx.cs" Inherits="ASPNET.StarterKit.Portal.EmployeeProfileConfirm" %>
 ```
 
-> **必须写全限定名**。`Inherits` 只写类名时，标记层在运行期找不到类，会抛 `CS0103`；而 **msbuild 编译不出这个错误**（代码后置已单独编译进 `bin/Portal.dll`）。这类问题只能由运行期门禁发现，详见 [开发指南](dev-guide.md) 与 `Test-PortalAscxCompilationContract.ps1`。
+> **必须写全限定名**。`Inherits` 只写类名时，标记层在运行期找不到类，会抛 `CS0103`；而 **msbuild 编译不出这个错误**（代码后置已单独编译进 `bin/Portal.dll`）。这类问题只能由运行期门禁发现，详见 [开发指南]({{ site.baseurl }}/dev-guide/) 与 `Test-PortalAscxCompilationContract.ps1`。
 
 标记层与代码后置中的注释使用双语块：
 
@@ -197,7 +197,7 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 4. **配置生效源分两层，判断依据是「JSON 文件是否存在于站点根目录」。** 业务包需经 `Portal.ModulePackages.Enabled` 白名单放行。机制如下（见 `src/Portal/Util/AppSettingsLoader.cs`）：
    - **基础值**：`Web.config` 的 `<appSettings>` 始终先生效；
    - **覆盖值**：`AppSettingsLoader.LoadConfig` 只在其参数指向的文件**确实存在于站点根目录**时，才把该 JSON 的 `appSettings` 键 `Set` 进 `ConfigurationManager.AppSettings`（覆盖同名键，未声明的键按 `preservePrevious` 保留或移除）；**文件不存在则静默跳过**，不做任何覆盖。
-   - 由此产生的两个实践结论：① 在开发机上改 `src/Portal/Config/appSettings.dev.json`（gitignore，不入库、通常也不在站点根目录）的 `Set` 值**不会落地**，本机运行期读的是 `Web.config` 的既有 `<appSettings>`；② 部署环境把 `appSettings.json` 随包放进站点根目录后，该文件的覆盖**才会**生效（详见 [user-guide.md](user-guide.md)「启用前提」）。
+   - 由此产生的两个实践结论：① 在开发机上改 `src/Portal/Config/appSettings.dev.json`（gitignore，不入库、通常也不在站点根目录）的 `Set` 值**不会落地**，本机运行期读的是 `Web.config` 的既有 `<appSettings>`；② 部署环境把 `appSettings.json` 随包放进站点根目录后，该文件的覆盖**才会**生效（详见 [user-guide.md]({{ site.baseurl }}/user-guide/)「启用前提」）。
    - 放行业务包时两处一并改，并确认档位键（`Portal.ModuleProfiles.Active`）含该包所在档位。
 
 > 上述 1–3 已由静态门禁 `Test-PortalNewModuleReadiness.ps1` 守护（L0 层，只依赖源码，无需 IIS/DB）：

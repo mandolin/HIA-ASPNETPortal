@@ -125,7 +125,7 @@ external configuration.
 - [ ] The release package / commit number, external configuration version, database migration status and verification time
       are recorded.
 - [ ] The version number is recorded; the current version is **`v1.0.0`** (first release), and real tags and release
-      branches are created only after manual confirmation (see [versioning.md](versioning.md) for the version rules).
+      branches are created only after manual confirmation (see [versioning.md]({{ site.baseurl }}/versioning/) for the version rules).
 - [ ] File, configuration, database and evidence rollback materials are prepared per
       `docs/deployment-rollback-guide.md`.
 - [ ] Application rollback, configuration rollback and database recovery steps are all executable.

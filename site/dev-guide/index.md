@@ -95,7 +95,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -OutputJson <内部证据目录>\p13.3\documentation-baseline.json
 ```
 
-脚本不会生成、发布、删除或修改文档。`src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`、`src/Portal/js/`、`src/Portal/css/` 和 `temp/` 均不会被自动纳入输入；JSDoc 验证生成物写入被忽略的 `temp/documentation/`，公开发布策略见[文档产物与工具链边界](documentation-artifacts-guide.md)。
+脚本不会生成、发布、删除或修改文档。`src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`、`src/Portal/js/`、`src/Portal/css/` 和 `temp/` 均不会被自动纳入输入；JSDoc 验证生成物写入被忽略的 `temp/documentation/`，公开发布策略见[文档产物与工具链边界]({{ site.baseurl }}/documentation-artifacts-guide/)。
 
 P13.3 起，文档化 readiness 和证据包可以用以下脚本执行：
 
@@ -280,7 +280,7 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Initialize-PortalTestDatabase.ps1 -ConnectionStringsConfigPath $testConfig
 ```
 
-可先增加 `-WhatIf` 检查目标库和执行意图。该脚本绝不覆盖既有数据库，任一步失败后也不会自动删库；只可用于隔离测试实例。发布前请使用 [deployment-checklist.md](deployment-checklist.md)。
+可先增加 `-WhatIf` 检查目标库和执行意图。该脚本绝不覆盖既有数据库，任一步失败后也不会自动删库；只可用于隔离测试实例。发布前请使用 [deployment-checklist.md]({{ site.baseurl }}/deployment-checklist/)。
 
 ## 数据提供程序 Proof
 
@@ -407,7 +407,7 @@ $administratorPassword = Read-Host -AsSecureString 'P19 fixture administrator pa
 ## 前端资源
 
 Web Forms Master、主题、模块 CSS、Gulp 输入输出、Visual Studio/VSCode 边界和未跟踪资产策略见
-[frontend-asset-guide.md](frontend-asset-guide.md)。
+[frontend-asset-guide.md]({{ site.baseurl }}/frontend-asset-guide/)。
 
 `src/Portal/gulpfile.js` 保留 Visual Studio Task Runner 原绑定：
 

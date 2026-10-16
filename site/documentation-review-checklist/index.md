@@ -36,7 +36,7 @@ title: 文档复核走查清单
 
 ### C. 读者可达性
 
-- [ ] 新读者能按 [documentation-map.md](documentation-map.md) 的**读者路径**找到需要的文档，不会迷路
+- [ ] 新读者能按 [documentation-map.md]({{ site.baseurl }}/documentation-map/) 的**读者路径**找到需要的文档，不会迷路
 - [ ] 文档间的链接形成闭环，不存在"被引用但不被索引"的孤岛
 - [ ] 示例**可直接复制运行**（或明确写出前置条件）
 

@@ -19,7 +19,7 @@ title: 模块外观契约（Theme → Module Contract）
 | 主题 `App_Themes/<Theme>/Default.css` | 颜色（经 `--portal-*` 语义变量） | 不管模块布局 |
 | 门户基础层（`.Head` / `.SubHead` / `.CommandButton` / `.NormalTextBox` / `.portal-*`） | 通用控件与外壳形态 | 不管模块私有布局 |
 
-模块私有类**只承担布局**；颜色一律 `var(--portal-*, 回退值)`。变量矩阵见 [`theme-semantic-variables.md`](theme-semantic-variables.md)。
+模块私有类**只承担布局**；颜色一律 `var(--portal-*, 回退值)`。变量矩阵见 [`theme-semantic-variables.md`]({{ site.baseurl }}/theme-semantic-variables/)。
 
 ## 二、模块外观类族与所用变量
 
@@ -56,7 +56,7 @@ title: 模块外观契约（Theme → Module Contract）
 
 **问题**：迁移前标题 `#2f475f`、副标题 `#41556b`（副标题略浅）；迁移后两者都解析为主题 `--portal-text-strong`（浅色族 `#2f475f`、深色族 `#e6edf5`），**副标题变得和标题一样深**，颜色层次消失。
 
-**D3 裁定采用（b）新增变量**：新增 `--portal-text-subtle`，取值介于 `--portal-text-strong` 与 `--portal-text-muted` 之间，7 套主题各定义一次（浅色族 `#41556b`、深色族 `#c2cadf`），恢复副标题的中间色。矩阵见 [`theme-semantic-variables.md`](theme-semantic-variables.md)。
+**D3 裁定采用（b）新增变量**：新增 `--portal-text-subtle`，取值介于 `--portal-text-strong` 与 `--portal-text-muted` 之间，7 套主题各定义一次（浅色族 `#41556b`、深色族 `#c2cadf`），恢复副标题的中间色。矩阵见 [`theme-semantic-variables.md`]({{ site.baseurl }}/theme-semantic-variables/)。
 
 被否决的两个选项：
 
@@ -73,7 +73,7 @@ title: 模块外观契约（Theme → Module Contract）
 
 ## 五、相关文档
 
-- [`theme-semantic-variables.md`](theme-semantic-variables.md)：`--portal-*` 变量矩阵与使用规则。
-- [`theme-package-guide.md`](theme-package-guide.md)：受信任主题包的目录、启用、回退和发布边界。
-- [`frontend-asset-guide.md`](frontend-asset-guide.md)：Web Forms 呈现、主题、模块 CSS 与前端资产边界。
-- [`module-development-guide.md`](module-development-guide.md)：受信任部署模块包的开发、注册、启停和移除边界（含新增模块的隐藏陷阱）。
+- [`theme-semantic-variables.md`]({{ site.baseurl }}/theme-semantic-variables/)：`--portal-*` 变量矩阵与使用规则。
+- [`theme-package-guide.md`]({{ site.baseurl }}/theme-package-guide/)：受信任主题包的目录、启用、回退和发布边界。
+- [`frontend-asset-guide.md`]({{ site.baseurl }}/frontend-asset-guide/)：Web Forms 呈现、主题、模块 CSS 与前端资产边界。
+- [`module-development-guide.md`]({{ site.baseurl }}/module-development/)：受信任部署模块包的开发、注册、启停和移除边界（含新增模块的隐藏陷阱）。

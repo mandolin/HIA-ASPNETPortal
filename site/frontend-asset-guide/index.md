@@ -16,7 +16,7 @@ title: Web Forms 呈现与前端资产维护
 
 1. `src/Portal/Components/PortalPage.cs` 在 `PreInit` 解析并应用唯一的原生 Web Forms Theme。
 2. `src/Portal/App_Themes/{ThemeName}/` 提供主题清单和 `Default.css`；主题选择、Tab 覆盖和回退规则见
-   [theme-package-guide.md](theme-package-guide.md)。
+   [theme-package-guide.md]({{ site.baseurl }}/theme-package-guide/)。
 3. `src/Portal/Default.master` 提供默认 Banner、唯一的 server form 和 `MainContent` 占位符。
 4. `src/Portal/Default.master.cs` 在渲染前写入稳定的主题/Tab CSS class，并仅为当前 Tab 的已启用、受信任模块包
    挂载已验证的站内 CSS。
@@ -24,7 +24,7 @@ title: Web Forms 呈现与前端资产维护
    和模块 JavaScript 不会由 Master 页面自动加载。
 
 默认主题继续支持 IE9+ 兼容 CSS。不要在主题中依赖 CSS variables、Grid、Flexbox、远程字体、远程资源或主题脚本。
-普通文字使用开源字体优先栈和 generic fallback，具体许可证边界见 [font-policy-and-audit.md](font-policy-and-audit.md)。
+普通文字使用开源字体优先栈和 generic fallback，具体许可证边界见 [font-policy-and-audit.md]({{ site.baseurl }}/font-policy-and-audit/)。
 
 ## Gulp 与开发工具边界
 
@@ -65,7 +65,7 @@ npm run assets:stop-watch
 ```
 
 脚本验证默认 Master 结构、主题和模块 CSS 加载边界、Visual Studio/VSCode Gulp 任务、IE9+ Browserslist、主题清单、字体禁用
-清单和公开文档入口。真实页面加载仍应结合 [testing-checklist.md](testing-checklist.md) 中的 IIS Express smoke 复核。
+清单和公开文档入口。真实页面加载仍应结合 [testing-checklist.md]({{ site.baseurl }}/testing-checklist/) 中的 IIS Express smoke 复核。
 
 旧浏览器兼容专项还应执行静态门禁：
 

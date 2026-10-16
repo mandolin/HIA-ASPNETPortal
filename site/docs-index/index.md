@@ -24,7 +24,7 @@ title: HIA-ASPNETPortal 文档
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。
 - `documentation-review-checklist.md`：文档复核**人工走查清单**（正确性 / 双语对等 / 读者可达性 / 不误信门禁），对应自动化门禁无法证明的部分。
-- `contracts/`：技术契约目录 —— 边界判定（无对外 REST/GraphQL）、[模块契约](contracts/module-manifest.md)（`module.json`）、[配置契约](contracts/app-settings.md)（`appSettings`）；入口见 [contracts/README.md](contracts/README.md)。
+- `contracts/`：技术契约目录 —— 边界判定（无对外 REST/GraphQL）、[模块契约]({{ site.baseurl }}/contracts-module-manifest/)（`module.json`）、[配置契约]({{ site.baseurl }}/contracts-app-settings/)（`appSettings`）；入口见 [contracts/README.md]({{ site.baseurl }}/contracts-readme/)。
 - `site-visual-baseline.md`：**官网视觉基线**（配色 / 字体 / 排版层级 / 代码块与表格取色 / 导航骨架），是 `site/` 取值的依据。
 - `documentation-registry.md`：7 个文档族的适用性登记（适用对象、维护责任、更新触发条件）与已登记缺口。
 - `documentation-map.md`：7 族文档的导航地图、阅读路径与缺口指向，用于按角色快速定位文档。

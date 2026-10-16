@@ -23,7 +23,7 @@ title: 配置契约（`appSettings`）
 
 键名是**平面点号键**（如 `Portal.ModuleProfiles.Active`）。直接对配置对象用 `$obj.'a.b.c'` 赋值会被当成嵌套路径导航而报错，须按键名字面处理。
 
-完整机制与排错见 [../module-development-guide.md](../module-development-guide.md)「新增模块的隐藏陷阱」第 4 条。
+完整机制与排错见 [../module-development-guide.md]({{ site.baseurl }}/module-development/)「新增模块的隐藏陷阱」第 4 条。
 
 ## 二、键族
 
@@ -58,6 +58,6 @@ title: 配置契约（`appSettings`）
 
 ## 四、相关文档
 
-- 启用业务模块的操作步骤：[../user-guide.md](../user-guide.md)「业务模块：请假申请与费用报销」。
-- 部署配置：[../deployment-checklist.md](../deployment-checklist.md)。
-- 外置连接串（**不入库**）：见 [../dev-guide.md](../dev-guide.md) 与 `src/Portal/Config/Templates/connectionStrings.config`。
+- 启用业务模块的操作步骤：[../user-guide.md]({{ site.baseurl }}/user-guide/)「业务模块：请假申请与费用报销」。
+- 部署配置：[../deployment-checklist.md]({{ site.baseurl }}/deployment-checklist/)。
+- 外置连接串（**不入库**）：见 [../dev-guide.md]({{ site.baseurl }}/dev-guide/) 与 `src/Portal/Config/Templates/connectionStrings.config`。

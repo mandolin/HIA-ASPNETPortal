@@ -84,4 +84,4 @@ title: 模块契约（`module.json`）
 
 - 新增模块就绪检查：`dev/scripts/Test-PortalNewModuleReadiness.ps1`（R1 csproj 登记 / R2 `CodeBehind` / R3 主题作用域规则 / R4 标记与 CSS 类名一致）。
 - 业务模块冒烟：`dev/scripts/Test-PortalBusinessModuleSmoke.ps1`。
-- 开发流程与陷阱：[../module-development-guide.md](../module-development-guide.md)。
+- 开发流程与陷阱：[../module-development-guide.md]({{ site.baseurl }}/module-development/)。

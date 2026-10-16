@@ -7,7 +7,7 @@ title: 用户指南
 ---
 # 用户指南
 
-> 产品定位、适用对象、能力地图与边界见 [product-overview.md](product-overview.md)。本页聚焦**怎么跑起来、怎么用、出问题怎么办**。
+> 产品定位、适用对象、能力地图与边界见 [product-overview.md]({{ site.baseurl }}/overview/)。本页聚焦**怎么跑起来、怎么用、出问题怎么办**。
 
 ## 项目用途
 
@@ -46,7 +46,7 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 1. 执行业务表迁移脚本：`src/Setup/PortalBiz_LeaveRequests.sql` 与 `src/Setup/PortalBiz_ExpenseReimbursements.sql`。两个脚本可重复执行（建表前用 `OBJECT_ID` 守卫判断）。
 2. 在模块包白名单中放行：`Portal.ModulePackages.Enabled` 追加 `HIA.LeaveRequest,HIA.ExpenseReimbursement`（`appSettings.json` 及环境覆盖文件）。该键与 Profile 无关，用于跨档位放行部署包。
 
-   > **覆盖生效的前提**：`appSettings.json` 只有**部署到站点根目录**时才会覆盖 `Web.config` 的同名 `<appSettings>` 键——`AppSettingsLoader` 在文件不存在时静默跳过，此时运行期读到的仍是 `Web.config` 的基础值。开发机上改动不入库的 `appSettings.dev.json` 不会落地。完整机制见 [module-development-guide.md](module-development-guide.md)「新增模块的隐藏陷阱」第 4 条。
+   > **覆盖生效的前提**：`appSettings.json` 只有**部署到站点根目录**时才会覆盖 `Web.config` 的同名 `<appSettings>` 键——`AppSettingsLoader` 在文件不存在时静默跳过，此时运行期读到的仍是 `Web.config` 的基础值。开发机上改动不入库的 `appSettings.dev.json` 不会落地。完整机制见 [module-development-guide.md]({{ site.baseurl }}/module-development/)「新增模块的隐藏陷阱」第 4 条。
 3. 由管理员在页签上挂载模块实例（模块定义在包启用后才会出现在可挂载列表）。
 
 ### 请假申请
@@ -81,7 +81,7 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 6. **挂载模块**：在该页签上挂载模块实例。模块必须**先启用**才会出现在可挂载列表 —— 受信任模块包经 `Portal.ModulePackages.Enabled` 放行（详见下文「业务模块」节）。
 7. **设主题**：在站点设置中选择皮肤。主题变量与回退约定见 `theme-semantic-variables.md`。
 
-> **改了配置没生效？** 先看配置生效源：`Web.config` 的 `<appSettings>` 是基础值，只有**部署到站点根目录**的 `appSettings.json` 才会覆盖同名键；开发机上改动不入库的 `appSettings.dev.json` 不会落地。完整机制见 [module-development-guide.md](module-development-guide.md)「新增模块的隐藏陷阱」第 4 条。
+> **改了配置没生效？** 先看配置生效源：`Web.config` 的 `<appSettings>` 是基础值，只有**部署到站点根目录**的 `appSettings.json` 才会覆盖同名键；开发机上改动不入库的 `appSettings.dev.json` 不会落地。完整机制见 [module-development-guide.md]({{ site.baseurl }}/module-development/)「新增模块的隐藏陷阱」第 4 条。
 
 ## 管理员常用操作（how-to）
 

@@ -23,12 +23,12 @@ title: 发布说明模板
 
 ## 版本定位
 
-简要说明本次发布解决什么问题、面向什么验证场景；成熟度与宣传口径遵循 [versioning.md](versioning.md) 的对外约束。
+简要说明本次发布解决什么问题、面向什么验证场景；成熟度与宣传口径遵循 [versioning.md]({{ site.baseurl }}/versioning/) 的对外约束。
 
 示例：
 
 ```text
-本版本重点验证发布包、部署模板、运维证据、文档化准备和发布说明材料，面向的验证场景为 <内部验证 / 测试交付 / 生产候选 / 正式发布>；其成熟度与宣传口径遵循 [versioning.md](versioning.md)。
+本版本重点验证发布包、部署模板、运维证据、文档化准备和发布说明材料，面向的验证场景为 <内部验证 / 测试交付 / 生产候选 / 正式发布>；其成熟度与宣传口径遵循 [versioning.md]({{ site.baseurl }}/versioning/)。
 ```
 
 ## 主要变更
@@ -54,9 +54,9 @@ title: 发布说明模板
 
 ## 发布与部署说明
 
-1. 按 [部署检查清单](deployment-checklist.md) 确认目标环境、外置配置、数据库和回滚责任人。
-2. 按 [回滚指南](deployment-rollback-guide.md) 准备文件、配置、数据库和证据回滚材料。
-3. 按 [运维运行手册](operations-runbook.md) 完成发布后健康检查、日志维护 dry-run、审计查询和备份提醒。
+1. 按 [部署检查清单]({{ site.baseurl }}/deployment-checklist/) 确认目标环境、外置配置、数据库和回滚责任人。
+2. 按 [回滚指南]({{ site.baseurl }}/deployment-rollback-guide/) 准备文件、配置、数据库和证据回滚材料。
+3. 按 [运维运行手册]({{ site.baseurl }}/operations-runbook/) 完成发布后健康检查、日志维护 dry-run、审计查询和备份提醒。
 4. 发布前不得将开发连接串、共享默认密码、真实证书私钥、生产备份或内部证据目录放入发布包。
 
 ## 已知限制与延期补证
