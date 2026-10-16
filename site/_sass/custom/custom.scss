@@ -2,77 +2,159 @@
 // just-the-docs 0.12.0 compiles this via `_includes/css/custom.scss.liquid`
 // (@import "./custom/custom").
 //
-// Landing benchmark (user request): Serilog.net — a minimal .NET product page:
-// single centered column, big headline, generous whitespace, plain link lists,
-// no card chrome. Brand colours stay HIA (HIA-Theme-Builder tokens: primary
-// #0047AB, text #172633, muted #667782, line #DCE5EC, p50 #EFF6FF).
+// Two benchmarks, mirroring exactly how orchardcore.net splits its surfaces:
+//   - landing / marketing pages (site/_layouts/home.html): orchardcore.net main-site layout —
+//     own top nav, big hero with a copyable command block, stat row, card grids, CTA bands,
+//     FAQ accordion, multi-column footer.
+//   - documentation pages (site/_layouts/default.html): the theme's own docs layout
+//     (sidebar + search) — deliberately a different style, as on Orchard Core's docs subsite.
+// Block structure is copied; colours stay the HIA series tokens
+// (HIA-Theme-Builder: primary #0047AB, text #172633, muted #667782, line #DCE5EC, p50 #EFF6FF).
 
-// ---- Landing layout (site/_layouts/home.html) -------------------------------
+// ---- Top navigation (landing) ----------------------------------------------
 
-.main-content--home {
-  max-width: 46rem;
-  margin: 0 auto;
-}
-
-// Hero: centered headline block, no background card — whitespace does the work.
-.main-content .hia-home-hero {
-  text-align: center;
-  padding: 3.4rem 0 2.6rem;
-  border-bottom: 1px solid #edf2f7;
-  margin-bottom: 2.2rem;
-}
-
-.main-content .hia-home-eyebrow {
-  display: inline-flex;
+.oc-nav {
+  display: flex;
   align-items: center;
-  padding: 0.26rem 0.8rem;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.85rem 2rem;
+  background: #ffffff;
+  border-bottom: 1px solid #dce5ec;
+}
+
+.oc-nav-brand {
+  color: #172633;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+
+  &:hover {
+    color: #0047ab;
+    text-decoration: none;
+  }
+}
+
+.oc-nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.35rem;
+  margin-left: auto;
+}
+
+.oc-nav-link {
+  color: #172633;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: #0047ab;
+    text-decoration: none;
+  }
+}
+
+.oc-page {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+// ---- Hero (headline + command block + dual CTA) -----------------------------
+
+.oc-hero {
+  text-align: center;
+  padding: 4rem 0 3rem;
+}
+
+.oc-hero-tag {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
   border-radius: 999px;
   background: #eff6ff;
   border: 1px solid #dbeafe;
   color: #0047ab;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
 }
 
-.main-content .hia-home-title {
+.oc-hero-title {
   color: #172633;
-  font-size: 2.35rem;
+  font-size: 2.5rem;
   line-height: 1.22;
-  margin: 1.1rem 0 0.75rem;
+  max-width: 44rem;
+  margin: 1.1rem auto 0.9rem;
 }
 
-.main-content .hia-home-sub {
+.oc-hero-lead {
   color: #667782;
-  font-size: 1.04rem;
+  font-size: 1.05rem;
   line-height: 1.8;
-  max-width: 38rem;
-  margin: 0 auto 1.7rem;
+  max-width: 40rem;
+  margin: 0 auto 2rem;
 }
 
-.main-content .hia-home-cta {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+.oc-code {
+  position: relative;
+  max-width: 46rem;
+  margin: 0 auto 1.3rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #e6edf3;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.oc-code pre {
   margin: 0;
+  font-family: ui-monospace, "sfmono-regular", consolas, monospace;
+  font-size: 0.84rem;
+  line-height: 1.75;
 }
 
-// ---- Buttons (HIA primary cobalt / hairline ghost) --------------------------
+.oc-code-comment {
+  color: #93c5fd;
+}
 
-.main-content .hia-btn {
+.oc-code-copy {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #dbeafe;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.oc-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+// ---- Buttons (HIA cobalt primary / hairline ghost) --------------------------
+
+.oc-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.62rem 1.35rem;
+  padding: 0.66rem 1.4rem;
   border-radius: 8px;
   font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
 }
 
-.main-content .hia-btn-primary {
+.oc-btn-primary {
   background: #0047ab;
   color: #ffffff;
 
@@ -83,7 +165,7 @@
   }
 }
 
-.main-content .hia-btn-ghost {
+.oc-btn-ghost {
   border: 1px solid #dce5ec;
   color: #0047ab;
 
@@ -94,22 +176,201 @@
   }
 }
 
-// ---- Documentation link list (Serilog-style plain list, hairline separators) -
+// ---- Sections, eyebrows, grids ---------------------------------------------
 
-.main-content .hia-doclist {
-  list-style: none;
-  padding-left: 0;
-  margin: 1.1rem 0 2rem;
+.oc-section {
+  padding: 3.4rem 0;
+  border-top: 1px solid #e8eef4;
 }
 
-.main-content .hia-doclist li {
-  padding: 0.55rem 0;
-  border-bottom: 1px solid #edf2f7;
+.oc-eyebrow {
+  color: #0047ab;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  margin: 0 0 0.5rem;
+}
+
+.oc-h2 {
+  color: #172633;
+  font-size: 1.9rem;
+  line-height: 1.3;
+  margin: 0 0 0.8rem;
+}
+
+.oc-lead {
+  color: #667782;
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 44rem;
   margin: 0;
 }
 
-.main-content .hia-doclist li:last-child {
-  border-bottom: none;
+.oc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.15rem;
+  margin-top: 2rem;
+}
+
+.oc-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.15rem;
+  margin-top: 2rem;
+}
+
+.oc-card {
+  display: block;
+  padding: 1.3rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid #dce5ec;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+
+  &:hover {
+    border-color: #0047ab;
+    box-shadow: 0 8px 30px rgba(25, 41, 58, 0.12);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+}
+
+.oc-card-title {
+  color: #172633;
+  font-weight: 800;
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.oc-card p {
+  color: #667782;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.oc-card-more {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: #0047ab;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+// ---- Stat row ---------------------------------------------------------------
+
+.oc-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid #e8eef4;
+  border-bottom: 1px solid #e8eef4;
+}
+
+.oc-stat-val {
+  color: #0047ab;
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.oc-stat-label {
+  color: #667782;
+  font-size: 0.84rem;
+}
+
+// ---- CTA band ---------------------------------------------------------------
+
+.oc-band {
+  margin: 3rem 0 0;
+  padding: 2.6rem 1.5rem;
+  border-radius: 12px;
+  background: #f3f6f9;
+  text-align: center;
+}
+
+// ---- FAQ accordion (native <details>, no JS) --------------------------------
+
+.oc-faq {
+  margin-top: 1.8rem;
+}
+
+.oc-faq details {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #e8eef4;
+}
+
+.oc-faq summary {
+  color: #172633;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.oc-faq p {
+  color: #667782;
+  font-size: 0.94rem;
+  line-height: 1.8;
+  margin: 0.7rem 0 0;
+}
+
+// ---- Footer columns ---------------------------------------------------------
+
+.oc-footer {
+  margin-top: 3rem;
+  padding: 2.6rem 0 3rem;
+  border-top: 1px solid #dce5ec;
+}
+
+.oc-footer-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.6rem;
+}
+
+.oc-footer-title {
+  color: #172633;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.7rem;
+}
+
+.oc-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.oc-footer li {
+  margin: 0.35rem 0;
+}
+
+.oc-footer a {
+  color: #667782;
+  font-size: 0.9rem;
+  text-decoration: none;
+
+  &:hover {
+    color: #0047ab;
+    text-decoration: none;
+  }
+}
+
+.oc-footer-note {
+  margin: 1.6rem 0 0;
+  color: #667782;
+  font-size: 0.84rem;
+}
+
+.oc-footer-provenance {
+  margin: 0.3rem 0 0;
+  color: #96a1ad;
+  font-size: 0.78rem;
 }
 
 // ---- Language switcher (header_custom.html, every page) ---------------------
@@ -117,18 +378,16 @@
 .lang-switch {
   display: flex;
   align-items: center;
-  margin-left: auto;
-  padding-right: 1.25rem;
 }
 
 .lang-switch-link {
   display: inline-flex;
   align-items: center;
-  padding: 0.28rem 0.85rem;
+  padding: 0.24rem 0.8rem;
   border: 1px solid #dce5ec;
   border-radius: 999px;
   color: #0047ab;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
@@ -140,7 +399,7 @@
   }
 }
 
-// ---- Header brand accent ----------------------------------------------------
+// ---- Documentation-style pages keep the theme look, brand accent only -------
 
 .site-header {
   border-bottom: 2px solid #0047ab;

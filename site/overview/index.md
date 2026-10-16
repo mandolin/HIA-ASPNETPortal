@@ -11,9 +11,11 @@ title: 产品概览与定位（HIA-ASPNETPortal）
 
 ## 一、产品概览
 
-**HIA-ASPNETPortal** 是一个**企业内网 Web Forms 门户平台**。它 fork 自 Codeplex 上的 ASP.NET Portal Starter Kit，在其基础上补齐了**权限与数据范围、流程状态机、审计、模块包治理、主题治理与自动化门禁**六类能力。
+**HIA-ASPNETPortal** 是一个**企业内网 Web Forms 门户平台**，提供**权限与数据范围、流程状态机、审计、模块包治理、主题治理与自动化门禁**六类能力。
 
 技术形态：**ASP.NET Web Forms**（.NET Framework 4.8），Windows + IIS Express + SQL Server / LocalDB。它不是 SPA，也没有单页路由；页面与模块以 Web Forms 控件树方式呈现。
+
+> 溯源：本项目源自 CodePlex 上的 ASP.NET Portal Starter Kit，已在其基础上大量重构与扩展。
 
 当前版本 **v1.0.0**（2026-10-09 首发发行版）。
 

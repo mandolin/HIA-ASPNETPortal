@@ -15,12 +15,13 @@ nav_order: 1
 
 ## 1. Product overview
 
-**HIA-ASPNETPortal** is an **enterprise intranet portal platform**. It is forked from the ASP.NET Portal Starter Kit on
-Codeplex and extended with **permission and data scoping, workflow state machines, auditing, module package governance,
-theme governance, and automated gates**.
+**HIA-ASPNETPortal** is an **enterprise intranet portal platform** providing **permission and data scoping, workflow state machines, auditing, module package governance, theme governance, and automated gates**.
 
 Technical form: **ASP.NET Web Forms** (.NET Framework 4.8), Windows + IIS Express + SQL Server / LocalDB. It is not an
 SPA and has no client-side routing; pages and modules render through the Web Forms control tree.
+
+> Provenance: this project derives from the ASP.NET Portal Starter Kit published on CodePlex, and has since been
+> reworked and extended extensively.
 
 Current version: **v1.0.0** (first release, 2026-10-09).
 

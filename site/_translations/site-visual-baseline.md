@@ -129,13 +129,13 @@ product entry → evaluate → quick start → learn → reference → develop �
   `text #172633` / `muted #667782`, fonts Inter + Noto Sans CJK SC).
   The `--portal-*` matrix in section 2 of this file remains the value basis for the **product portal skins**
   (the site keeps product-semantic alignment), but the site's own brand colours follow the HIA series tokens.
-- **Landing component styles**: `site/_sass/custom/custom.scss` (the theme's official override point, compiled via
-  `_includes/css/custom.scss.liquid`). **The benchmark is Serilog.net** (user requested a simpler product page):
-  the home page uses a dedicated full-width layout (`site/_layouts/home.html` — no sidebar, no breadcrumbs, a single
-  46rem centered column). Content is a centered hero (p50 pill eyebrow + big headline + subline + two CTAs) plus a
-  documentation link list (hairline separators) and a capabilities list — no card decoration, whitespace and type scale
-  do the work. Brand colours stay HIA tokens (links/primary button `#0047AB`), header keeps the 2px brand line.
-  CTA buttons come in solid cobalt and hairline-outline variants.
+- **Landing styles**: `site/_sass/custom/custom.scss` + `site/_layouts/home.html` (theme override point and custom layout).
+  **The benchmark is orchardcore.net** (user request), following its "main site vs documentation, two distinct styles"
+  approach: **the landing/marketing page** copies the main-site block order — own top nav, hero (big headline +
+  copyable command block + dual CTA), stat row, capability and feature card grids with small-caps section eyebrows,
+  CTA band, getting-started cards, FAQ accordion (native `<details>`, no JS) and a multi-column footer; **documentation
+  pages** keep the theme's sidebar + search style (the counterpart of Orchard Core's documentation subsite). The two are
+  deliberately different. Block structure is copied; colours stay HIA tokens.
 - **Variable names**: verified one by one against the local gem `just-the-docs v0.12.0`
   (`_sass/color_schemes/light.scss`), not guessed.
 - **Code highlighting**: the scheme file keeps the upstream
