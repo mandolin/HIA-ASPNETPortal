@@ -95,11 +95,3 @@ Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate 
 - `documentation-review-checklist.md` — the **manual walkthrough checklist** (what automated gates cannot prove:
   correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)
-
-## Public release form (the website)
-
-`docs/` is the **Chinese authoritative source**; `site/_translations/` holds the **English translations**.
-`dev/scripts/Build-PortalSite.ps1` generates the bilingual site from both and enforces "a page may only be declared published
-when both the Chinese and English versions exist", then publishes to the `gh-pages` branch.
-A document in this map therefore **appears on the website only once its translation is complete**; a document not yet
-published has no corresponding site page, which is expected rather than a gap.

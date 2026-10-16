@@ -7,7 +7,7 @@ title: Documentation map and navigation index
 ---
 # Documentation map / navigation index (HIA-ASPNETPortal)
 
-> **A P21 D2 deliverable.** A navigation index of the existing `docs/` against the 7 documentation families of the *HIA
+> **Documentation navigation map.** A navigation index of the existing `docs/` against the 7 documentation families of the *HIA
 > project documentation structure and template specification*, with gaps marked. It pairs with
 > `documentation-registry.md` (D1, which registers applicable/not applicable): the registry records "should this exist",
 > this map records "where it is and how it connects".
@@ -22,11 +22,11 @@ title: Documentation map and navigation index
 
 ## Documentation family index
 
-### 1. In-code documentation (→ C-anp-P19 ROP, source comments)
+### 1. In-code documentation
 
 Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate `Get-PortalCommentDebtInventory`.
 
-### 2. API and technical contracts (`docs/contracts/` built by `W-anp-P125`)
+### 2. API and technical contracts
 
 - Boundary decision: as a Web Forms portal there is **no external REST/GraphQL API**; what applies is "module contract /
   configuration contract / enterprise capability object contract".
@@ -39,10 +39,10 @@ Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate 
 
 ### 3. Product features and usage
 
-- `product-overview.md` — **product overview and positioning** (a `W-anp-P124` deliverable): what it is / who it is for /
+- `product-overview.md` — **product overview and positioning**: what it is / who it is for /
   capability map / boundaries / compatibility and runtime environment / licence and attribution / maturity framing
 - `user-guide.md` — how to run and use the portal; includes the **typical portal configuration flow**, **common
-  administrator operations** and **troubleshooting** (strengthened by `W-anp-P124`)
+  administrator operations** and **troubleshooting**
 - `p12-sample-business-flow.md` — a sample business flow
 - **Remaining gaps**: runtime screenshots; item-by-item operating instructions for existing content modules
   (announcements, contacts, discussions, documents, events, images, links, etc.); the approval flow UI for leave and
@@ -54,8 +54,7 @@ Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate 
 - `module-development-guide.md` — module development guide
 - `frontend-asset-guide.md` — frontend asset guide
 - `theme-package-guide.md` — theme package guide (links to C-anp-P18)
-- `theme-semantic-variables.md` — the theme semantic variable matrix (7 themes × **14 variables**, purpose quick-reference,
-  usage rules; the 14th, `--portal-text-subtle`, was added by the `C-anp-P23` D3 ruling)
+- `theme-semantic-variables.md` — the theme semantic variable matrix
 - `theme-module-contract.md` — module appearance contract (layer division of labour, appearance class families, fallback
   meaning and differences)
 - `documentation-artifacts-guide.md` — documentation artefacts guide
@@ -94,11 +93,3 @@ Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate 
 - `documentation-review-checklist.md` — the **manual walkthrough checklist** (what automated gates cannot prove:
   correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)
-
-## Public release form (the website)
-
-`docs/` is the **Chinese authoritative source**; `site/_translations/` holds the **English translations**.
-`dev/scripts/Build-PortalSite.ps1` generates the bilingual site from both and enforces "a page may only be declared published
-when both the Chinese and English versions exist", then publishes to the `gh-pages` branch.
-A document in this map therefore **appears on the website only once its translation is complete**; a document not yet
-published has no corresponding site page, which is expected rather than a gap.

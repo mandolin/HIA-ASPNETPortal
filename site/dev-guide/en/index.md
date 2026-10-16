@@ -80,7 +80,7 @@ The public documentation gate reads only the root README, `docs/` and the JSDoc 
 
 The gate verifies public entry points, relative file links, the documentation index, absolute project paths / credential shapes and the Git boundary of unconfirmed generated directories. It allows reproducible examples such as `$env:USERPROFILE`, `{ExternalCfgPath}` and the common PowerShell 7 install path, but does not verify complex Markdown anchors, external links or network reachability.
 
-`Get-PortalDocumentationBaseline.ps1` is the read-only baseline tool of `W-anp-P4.1`. It only counts Git-tracked `src/` sources and outputs file counts for C#, Web Forms, frontend and configuration, an inventory of C# XML documentation, and the boundary state of known generated / untracked directories; these numbers are not a documentation quality or coverage percentage.
+`Get-PortalDocumentationBaseline.ps1` is the read-only baseline tool of . It only counts Git-tracked `src/` sources and outputs file counts for C#, Web Forms, frontend and configuration, an inventory of C# XML documentation, and the boundary state of known generated / untracked directories; these numbers are not a documentation quality or coverage percentage.
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -AsJson

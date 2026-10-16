@@ -39,7 +39,7 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 ## 业务模块：请假申请与费用报销
 
-这两个模块（`HIA.LeaveRequest`、`HIA.ExpenseReimbursement`）是面向员工自助（ESS）的业务模块，由 `C-anp-P20` 交付。它们按模块包方式部署，**默认不随核心档位启用**。
+这两个模块（`HIA.LeaveRequest`、`HIA.ExpenseReimbursement`）是面向员工自助（ESS）的业务模块，由 。它们按模块包方式部署，**默认不随核心档位启用**。
 
 ### 启用前提
 

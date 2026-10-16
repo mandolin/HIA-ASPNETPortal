@@ -12,7 +12,7 @@ This document is the human-readable baseline for the portal theme layer's **sema
 
 > **Authority note**: this document is a **snapshot extracted from `src/Portal/App_Themes/*/Default.css`**, provided for
 > reading and cross-checking. The machine-checkable authoritative source is the CSS itself plus the corresponding gate
-> (`C-anp-P18` / `W-anp-P100`). Where the two disagree, **the CSS and the gate win**, and this document should be updated.
+>. Where the two disagree, **the CSS and the gate win**, and this document should be updated.
 > This follows the project's standing principle: registry entries go stale, and the only reliable thing is a repeatable
 > check.
 
@@ -53,7 +53,7 @@ The 7 themes are the 6 official skins plus the `Default` fallback theme: `Enterp
 1. **The first 13 variables come in one light-family set and one dark-family set**: the 4 light themes
    (Default / EnterpriseLight / OaLight / StateClassicLight) have identical values, and the 3 dark themes
    (EnterpriseDark / OaDark / StateClassicDark) also have identical values. They express **light/dark tonality**, not
-   theme-family style (including `--portal-text-subtle`, added in C-anp-P23).
+   theme-family style (including `--portal-text-subtle`, added by the theme engineering decision).
 2. **`--portal-danger-text` is the only variable distinguished by theme family**: because it does not express light/dark
    but rather **each theme family's own error colour** (taken directly from that theme's existing `.NormalRed`). The
    Enterprise and Oa families share the same light error colour (`#b42318`) but differ in dark (`#ff8b8b` / `#ff9b9b`);
@@ -119,4 +119,4 @@ theme lacks a variable, that is a missing definition and must be filled in.
 - `theme-package-guide.md`: directory, enablement, fallback and release boundaries for trusted theme packages.
 - `frontend-asset-guide.md`: Web Forms presentation, themes, module CSS and frontend asset boundaries.
 - For the module appearance contract (the class set for container / heading / partition / table / notice / muted / danger,
-  plus per-skin palettes), see the output of `C-anp-P18` / `W-anp-P99`.
+  plus per-skin palettes), see the output of 主题契约门禁.

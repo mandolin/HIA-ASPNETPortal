@@ -12,7 +12,7 @@ side owns layout and structure, the theme layer owns colour. It also records the
 `var(--portal-*, fallback)` and the known inconsistencies.
 
 > Authority is the same as `theme-semantic-variables.md`: this document is a snapshot extracted from the live code, while the
-> machine-checkable authoritative source is the CSS and the `C-anp-P18` / `W-anp-P100` gates.
+> machine-checkable authoritative source is the CSS and the 自动化门禁 gates.
 
 ## 1. Division of labour
 
@@ -59,7 +59,7 @@ layer; see the matrix in `theme-semantic-variables.md`.
 | **One variable, two fallback values** | `--portal-text-strong`: title `#2f475f` / subtitle `#41556b` | **The original design used different colours for title and subtitle**; after migration both take the same theme value → the colour layering was flattened (see below) |
 | Fallback diverges from theme value | `--portal-text-muted`: `#6b7c8f` ≠ theme `#5b6b7d` | Slightly darker than the theme on older engines |
 | A whole module's own palette | `ModuleProbe` has 6 fallback values (`#52718a` / `#f4f8fb` / `#1f3546` / `#1b4f72` / `#496274` / `#31495c`) | A diagnostic module's own palette; none matches a theme value, and it is a low-priority diagnostic surface by design |
-| Error colour | `--portal-danger-text`: `#8a1f1f` ≠ theme light `#b42318` | `W-anp-P98` changed the module side to take the variable; the difference is visible only as a fallback on older engines |
+| Error colour | `--portal-danger-text`: `#8a1f1f` ≠ theme light `#b42318` |  changed the module side to take the variable; the difference is visible only as a fallback on older engines |
 
 ### D3 ruling: the colour layering of subtitle vs title (closed)
 

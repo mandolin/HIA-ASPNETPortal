@@ -51,7 +51,7 @@ and page layout management.
 ## Business modules: leave requests and expense reimbursements
 
 These two modules (`HIA.LeaveRequest`, `HIA.ExpenseReimbursement`) are employee self-service (ESS) business modules delivered
-by `C-anp-P20`. They are deployed as module packages and are **not enabled by default with the core profile**.
+. They are deployed as module packages and are **not enabled by default with the core profile**.
 
 ### Enabling prerequisites
 

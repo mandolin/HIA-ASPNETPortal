@@ -15,7 +15,7 @@ an old package from this list does **not** mean its licence has been audited.
 
 | Dependency | Locked version | Purpose | Licence / basis | Current boundary |
 | --- | --- | --- | --- | --- |
-| `System.Data.SQLite.Core` | `1.0.119.0` | The .NET Framework 4.8 SQLite ADO.NET capability proof for `W-anp-P3.3`. | The package metadata links to the SQLite Public Domain copyright notice; its net46 build target is also declared Public Domain. | Used only by the standalone proof project; it does not enter the portal's main business runtime path. |
+| `System.Data.SQLite.Core` | `1.0.119.0` | The .NET Framework 4.8 SQLite ADO.NET capability proof for . | The package metadata links to the SQLite Public Domain copyright notice; its net46 build target is also declared Public Domain. | Used only by the standalone proof project; it does not enter the portal's main business runtime path. |
 
 ## Usage and distribution constraints
 

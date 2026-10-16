@@ -9,8 +9,7 @@ nav_order: 1
 # HIA-ASPNETPortal documentation
 
 This directory is the project's public maintained-documentation entry point, addressed to users, developers and future
-maintainers. Internal planning, phase status, ADRs and AI collaboration material are kept together in a **separate private
-repository** and are not published with the public documentation.
+maintainers. Internal planning and collaboration material are not published with this site.
 
 ## Documentation index
 
@@ -65,13 +64,8 @@ repository** and are not published with the public documentation.
 - `font-policy-and-audit.md`: font usage principles, licence boundaries and current audit results.
 - `third-party-dependencies.md`: purpose, licence and distribution boundaries of newly added third-party dependencies.
 
-## Current conventions
+## How to use this documentation
 
-- The root `docs/` directory holds only stable documentation suitable for publication.
-- Internal planning and internal ADRs live in the **separate private repository** and are not published with the public
-  documentation.
-- `src/Documentation/` and `src/Portal.Components.Data/Documentation/` are treated as generated documentation output for now
-  and are not maintained-documentation entry points.
-- New formal documentation is written in Chinese by default, **with an English translation maintained in parallel**
-  (`site/_translations/`); only when both versions exist may a page be declared published on the website. Parallel
-  bilingualism is a hard constraint, enforced by `dev/scripts/Build-PortalSite.ps1`.
+- This documentation is available in both Chinese and English, switchable at any time.
+- Documents are organised into eight sections — product overview / evaluate / quick start / learn / reference / develop /
+  operate / changes; see the [documentation map](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-map.md).

@@ -6,9 +6,6 @@ parent: Site visual baseline
 nav_order: 1
 ---
 
-> `C-anp-P22` (project website) `W-anp-P131` deliverable. Principle 1 gate: **produce the site visual prototype
-> before landing content**.
->
 > This page is the site's **visual baseline specification**: it fixes the palette, typeface, type scale, and the colour
 > sources for code blocks, tables and the navigation skeleton. It is the source of truth for the values in
 > `site/_config.yml` and `site/_sass/` (if overridden) — **change it here, never hand-edit generated output**.
@@ -110,7 +107,7 @@ product entry → evaluate → quick start → learn → reference → develop �
 | --- | --- |
 | Sidebar | Driven by `site/_data/navigation.yml` (Just the Docs) |
 | Language switch | Each page's front matter `lang` selects its tree; Chinese pages link `/en/<same path>/`, English pages link `/<same path>/` |
-| One-to-one | Any published page must have both language versions; a missing translation voids the publish declaration (`Build-PortalSite.ps1` gate) |
+| One-to-one | Every page is available in both Chinese and English, switchable at any time |
 
 ## 8. Bilingual typography conventions
 

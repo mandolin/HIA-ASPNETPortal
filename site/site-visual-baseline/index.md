@@ -5,12 +5,10 @@ parent: 参考
 permalink: /site-visual-baseline/
 title: 官网视觉基线
 ---
-> `C-anp-P22`（项目官网）`W-anp-P131` 交付。原则1 gate：**先出站点视觉原型，再落地内容填充**。
->
 > 本页是官网的**视觉基线规范**：规定配色、字体、排版层级、代码块与表格取色、以及导航骨架的呈现约定。
 > 它是 `site/_config.yml` 与 `site/_sass/`（如有覆盖）的取值依据 —— **改这里，不要直接改生成产物**。
 >
-> **同源纪律（原则4）**：下列取值**不是新设计**，而是从项目既有 CSS 提取，与产品门户保持一致。
+> **同源纪律**：下列取值**不是新设计**，而是从项目既有 CSS 提取，与产品门户保持一致。
 > 权威源：`src/Portal/App_Themes/EnterpriseLight/Default.css`（`--portal-*` 变量块）与
 > `src/Portal/App_Themes/Default/Default.css`（字体栈与字号）。快照过期时以 CSS 为准。
 
@@ -47,7 +45,7 @@ title: 官网视觉基线
 | 列表隔行底色 | `--portal-list-row-alt` | `#f7f9fc` |
 | 错误 / 失败 / 校验反馈 | `--portal-danger-text` | `#b42318` |
 
-> `--portal-text-subtle` 由 `C-anp-P23` D3 裁定新增，用于标题与副标题的色层次。
+> `--portal-text-subtle` 由 主题工程裁定新增，用于标题与副标题的色层次。
 > `--portal-danger-text` 是唯一按主题族区分的变量（见 `docs/theme-semantic-variables.md`）；
 > 官网取 Enterprise 族浅色值 `#b42318`。
 
@@ -103,7 +101,7 @@ title: 官网视觉基线
 | --- | --- |
 | 侧栏导航 | 由 `site/_data/navigation.yml` 驱动（Just the Docs） |
 | 语言切换 | 每个页面的 front matter `lang` 决定所属树；中文页链 `/en/<同路径>/`，英文页链 `/<同路径>/` |
-| 一一对应 | 任一上架页面必须中英两版齐备，缺译即上架声明无效（`Build-PortalSite.ps1` 门禁） |
+| 一一对应 | 任一页面都同时提供中英两版，可随时切换 |
 
 ## 8. 中英双语并行的排版约定
 
@@ -111,7 +109,7 @@ title: 官网视觉基线
 - 每页在**顶部**提供对译语言入口（首页已含），保证任意页面都能一键切换。
 - 双语**不得**只用机器占位：译本与原文须语义对等，由人工走查确认（见 `docs/documentation-review-checklist.md`）。
 
-## 9. `<html lang>` 覆盖与主题版本耦合（C-anp-P22 收官任务③）
+## 9. `<html lang>` 覆盖与主题版本耦合
 
 **背景**：上游 `just-the-docs` 的 `_layouts/default.html` 第 7 行只读**站点级** `site.lang`，**不看 `page.lang`**，
 于是英文页也输出 `<html lang="zh-CN">`，影响可访问性（屏幕阅读器用中文发音读英文内容）与 SEO。

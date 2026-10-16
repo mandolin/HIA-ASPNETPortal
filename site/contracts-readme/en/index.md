@@ -7,7 +7,7 @@ title: Technical contracts
 ---
 # Technical contracts (HIA-ASPNETPortal)
 
-> **A P21 `W-anp-P125` deliverable.** This directory holds this project's **machine-readable contracts plus human-readable
+> This directory holds this project's **machine-readable contracts plus human-readable
 > explanation**, corresponding to the "API and technical contracts" documentation family. The authoritative source is always
 > **the code and configuration files themselves**; the explanations here are extracted snapshots — **when the two conflict,
 > the source wins**.

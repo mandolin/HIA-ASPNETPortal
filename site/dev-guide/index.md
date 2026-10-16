@@ -83,7 +83,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 `$env:USERPROFILE`、`{ExternalCfgPath}` 和 PowerShell 7 通用安装路径等可复现示例，但不会验证复杂 Markdown 锚点、
 外部链接或网络可达性。
 
-`Get-PortalDocumentationBaseline.ps1` 是 `W-anp-P4.1` 的只读基线工具。它只统计 Git 已追踪的 `src/` 源码，输出 C#、Web Forms、前端与配置的文件数量、C# XML 文档 inventory，以及已知生成/未跟踪目录的边界状态；这些数值不是文档质量或覆盖率百分比。
+`Get-PortalDocumentationBaseline.ps1` 是 只读基线工具。它只统计 Git 已追踪的 `src/` 源码，输出 C#、Web Forms、前端与配置的文件数量、C# XML 文档 inventory，以及已知生成/未跟踪目录的边界状态；这些数值不是文档质量或覆盖率百分比。
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -AsJson

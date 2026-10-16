@@ -177,8 +177,141 @@ function Convert-DocLink {
     })
 }
 
-foreach ($e in $entries) {
-    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.Add('上架清单存在缺 doc 的条目'); continue }
+# <lang>
+#   <zh-CN>**发布面文本过滤（`W-anp-P145`）**：官网是给**外部访客**（使用者、评估者）看的，
+#     而 `docs/` 的源文本带有内部协作色彩 —— 工作项编号（`W-anp-P71`、`C-anp-P20`）、
+#     "（内部计划，未公开）"、批次上架状态、构建脚本名、"原则4" 之类。
+#     这些对内部协作者是必要的溯源信息，**对外部读者只是噪音**，还会让官网显得像内部协作平台。
+#     此前（`W-anp-P133`）已把"是否过滤"登记为待办并**刻意未处置**，现在由用户明确要求去掉。
+#
+#     **处置原则（避免误删）**：
+#       - 删"元信息"：工作项编号、"（内部计划，未公开）"、构建流程说明；
+#       - 留"内容"：`docs/` 里讲产品本身怎么用的文字（命令示例、契约说明、权威源指向）。
+#     所以过滤是**外科手术式**的——逐条列出要删的形态并保留其余文本，不是"见编号就删整行"。
+#     源文件保持内部友好（不被改动），适配只发生在生成侧，与 `Convert-DocLink` 同一思路。
+#
+#     注意：`site/index.md` 等**手写页面**不经本函数（它们不走生成流程），其内部文字直接在手写源里改。</zh-CN>
+#   <en>**Publication-surface text filtering (`W-anp-P145`)**: the website is for **external visitors** (users, evaluators),
+#     while the `docs/` source text carries internal-collaboration colour — work-item IDs (`W-anp-P71`, `C-anp-P20`),
+#     "(internal planning, not public)", batch-publishing status, build script names, "Principle 4" and the like.
+#     These are necessary provenance for internal collaborators but are **noise to external readers**, and they make the
+#     site look like an internal collaboration platform. Whether to filter was registered as a to-do back in `W-anp-P133`
+#     and was **deliberately left undone**; the user has now explicitly asked for it to be removed.
+#
+#     **Principle (avoid over-deletion)**:
+#       - remove "meta-information": work-item IDs, "(internal planning, not public)", build-process notes;
+#       - keep "content": text in `docs/` about how to use the product itself (command examples, contract notes,
+#         authoritative-source pointers).
+#     The filtering is therefore **surgical** — each form to remove is listed explicitly and the rest of the text is kept,
+#     not "delete the whole line when an ID appears".
+#     Source files stay internally friendly (untouched); adaptation happens only on the generation side, the same idea as
+#     `Convert-DocLink`.
+#
+#     Note: hand-written pages such as `site/index.md` do not go through this function (they bypass generation); their
+#     internal wording is fixed directly in the hand-written source.</en>
+# </lang>
+function Convert-PublicText {
+    param([string] $Body)
+    $b = $Body
+    # <lang>
+    #   <zh-CN>**顺序很关键**：先删"含编号的完整括号组/标题后缀"，再删散落编号。
+    #     若反过来（先删散号），组内剩下的文字会变成「（ ， 据源码订正）」这类残迹 —— 比不过滤更糟。
+    #     这是本函数第一次实现时踩的坑：编号删干净了，却留出一堆空括号和双空格。</zh-CN>
+    # </lang>
+    # ① 含工作项编号的完整括号组 → 整组删除（中文/英文括号都要覆盖）
+    $b = [regex]::Replace($b, '\s*[（(][^）)]*`(?:C|W)-anp-P[\d.]+`[^）)]*[）)]', '')
+    # ② 标题行的出处后缀
+    $b = [regex]::Replace($b, '(?m)(^#{1,6}\s+[^\r\n]*?)（[^）\r\n]*(?:C|W)-anp-P[\d.]+[^）\r\n]*）', '$1')
+    $b = [regex]::Replace($b, '(?m)(^#{1,6}\s+[^\r\n]*?)\s*\([^)\r\n]*(?:C|W)-anp-P[\d.]+[^)\r\n]*\)', '$1')
+    # ③ 出处前缀整句
+    $b = $b -replace '\*\*A\s+P21\s+deliverable\.\*\*\s*', ''
+    $b = $b -replace '\*\*P21\s+交付物\*\*。\s*', ''
+    $b = $b -replace '\*\*P21\s*`W-anp-P[\d.]+`\s*交付物\*\*。\s*', ''
+    $b = $b -replace '\*\*P21\s*`W-anp-P[\d.]+`\s*交付物\*\*\.\s*', ''
+    # 整段删除：出处/阶段说明里的"（内部计划，未公开）"
+    $b = $b -replace '（内部计划，未公开）', ''
+    $b = $b -replace '\(internal planning, not public\)', ''
+    # 整段删除：「归属：`W-anp-P71` 状态机显式化。」这类溯源前缀
+    $b = $b -replace '归属：`W-anp-P[\d.]+`\s*状态机显式化。\s*', ''
+    $b = $b -replace 'Source: `W-anp-P[\d.]+` state-machine explicitisation\.\s*', ''
+    # 整段删除：「阶段：`W-anp-P62` `P62.4`」
+    $b = $b -replace '阶段：`W-anp-P[\d.]+`\s*`P[\d.]+`\s*', ''
+    $b = $b -replace 'Phase: `W-anp-P[\d.]+`\s*`P[\d.]+`\s*', ''
+    # 门禁编号 → 通用说法（保留"有自动化门禁守护"这个有用信息）
+    $b = $b -replace '`C-anp-P18`\s*/\s*`W-anp-P100`', '自动化门禁'
+    $b = $b -replace '`C-anp-P18`\s*/\s*`W-anp-P99`', '主题契约门禁'
+    $b = $b -replace 'C-anp-P18\s*/\s*W-anp-P100', 'the automated gates'
+    $b = $b -replace 'C-anp-P18\s*/\s*W-anp-P99', 'the theme-contract gates'
+    $b = $b -replace '`C-anp-P23`\s*D3\s*裁定新增', '主题工程裁定新增'
+    $b = $b -replace 'added in C-anp-P23', 'added by the theme engineering decision'
+    # 正文中的裸工作项编号：删编号、保留描述
+    $b = $b -replace '`W-anp-P[\d.]+`\s*的\s*', ''
+    $b = $b -replace '`C-anp-P\d+(?:\.\d+)?`\s*交付', ''
+    $b = $b -replace '由\s*`C-anp-P\d+(?:\.\d+)?`\s*交付', ''
+    $b = $b -replace '`W-anp-P\d+(?:\.\d+)?`\s*产出', ''
+    $b = $b -replace 'by\s*`C-anp-P\d+(?:\.\d+)?`', ''
+    $b = $b -replace '`W-anp-P\d+(?:\.\d+)?`\s*已把', ''
+    # 括号内的交付方标注：删整个括号组
+    $b = $b -replace '\s*[（(]\s*`W-anp-P[\d.]+`\s*交付\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*`W-anp-P[\d.]+`\s*补强\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*a\s*`W-anp-P[\d.]+`\s*deliverable\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*strengthened by\s*`W-anp-P[\d.]+`\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*`W-anp-P[\d.]+`\s*已建\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*`docs/contracts/`\s*built by\s*`W-anp-P[\d.]+`\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*→\s*`C-anp-P\d+`\s*ROP[，,]\s*源码注释\s*[）)]', '（源码注释）'
+    $b = $b -replace '\s*[（(]\s*→\s*`C-anp-P\d+`\s*ROP,\s*source comments\s*[）)]', ' (source comments)'
+    $b = $b -replace '\s*[（(]\s*衔接\s*`C-anp-P\d+`\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*links to\s*`C-anp-P\d+`\s*[）)]', ''
+    # 归属/来源短语
+    $b = $b -replace '`W-anp-P[\d.]+`\s*has created\s*', 'The project has created '
+    $b = $b -replace 'is the output of\s*`C-anp-P\d+(?:\.\d+)?`\s*/\s*`W-anp-P\d+(?:\.\d+)?`\s*and registers', 'documents'
+    $b = $b -replace '`W-anp-P\d+(?:\.\d+)?`\s*and registers', 'documents'
+    $b = $b -replace 'logged for\s*`W-anp-P\d+(?:\.\d+)?`\s*to review and fix', 'logged for review and correction'
+    $b = $b -replace 'was added by the\s*`C-anp-P\d+`\s*D3 ruling', 'was added by the theme engineering decision'
+    # 编号区间（待建清单）
+    $b = $b -replace '`W-anp-P1\d\d`–`P1\d\d`', '相关规划'
+    $b = $b -replace '`W-anp-P1\d\d`–`P1\d\d`;\s*formerly\s*D3–D6,\s*renumbered to W on\s*20\d\d-\d\d-\d\d', '相关规划'
+    # 测试清单里的内部阶段编号
+    $b = $b -replace 'P1\d/P2\d/P2\d/P2\d\s*scenario SQL', 'scenario SQL'
+    # 复合出处前缀：「**P21 `W-anp-P124` 交付物**。」
+    $b = $b -replace '\*\*P21\s*`W-anp-P[\d.]+`\s*交付物\*\*。\s*', ''
+    $b = $b -replace '\*\*`W-anp-P[\d.]+`\s*deliverable\*\*\.\s*', ''
+    # 括号内的实测/出处标注
+    $b = $b -replace '\s*[（(]\s*`C-anp-P\d+(?:\.\d+)?`\s*实测\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*verified in\s*`C-anp-P\d+(?:\.\d+)?`[^）)]*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*`C-anp-P\d+(?:\.\d+)?`\s*/\s*`W-anp-P\d+(?:\.\d+)?`\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*`C-anp-P\d+(?:\.\d+)?`\s*/\s*P21\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*`C-anp-P\d+(?:\.\d+)?`\s*D3\s*裁定新增\s*[）)]', ''
+    $b = $b -replace '\s*[（(]\s*added by the\s*`C-anp-P\d+`\s*D3 ruling\s*[）)]', ''
+    # 标题里的出处后缀
+    $b = $b -replace '(##\s*[^\r\n]*?)（`C-anp-P\d+(?:\.\d+)?`[^）\r\n]*）', '$1'
+    $b = $b -replace '(##\s*[^\r\n]*?)\s*\(`C-anp-P\d+(?:\.\d+)?`[^)\r\n]*\)', '$1'
+    # 零散裸编号（保底）：删掉剩余的 `W-anp-Pxxx` / `C-anp-Pxxx` 标记本身
+    $b = $b -replace '`W-anp-P[\d.]+`', ''
+    $b = $b -replace '`C-anp-P\d+(?:\.\d+)?`', ''
+    # 交付物前缀 → 通用说法
+    $b = $b -replace '`P21`\s*`W-anp-P127`\s*交付物', '文档复核清单'
+    $b = $b -replace 'A P21 `W-anp-P127` deliverable', 'Documentation review checklist'
+    $b = $b -replace '`P21\s*D1\s*交付物`', '文档工程登记表'
+    $b = $b -replace 'A P21 D1 deliverable', 'Documentation engineering registry'
+    $b = $b -replace '`P21\s*D2\s*交付物`', '文档导航地图'
+    $b = $b -replace 'A P21 D2 deliverable', 'Documentation navigation map'
+    $b = $b -replace '`P21\s*`W-anp-P125`\s*交付物`', '技术契约目录'
+    $b = $b -replace 'A P21 `W-anp-P125` deliverable', 'Technical contracts'
+    # <lang>
+    #   <zh-CN>**残迹清理（必须在所有删号规则之后）**：先删散号会让「**A P21 `W-anp-P125` deliverable.**」
+    #     变成「**A P21  deliverable.**」—— 编号删干净了，却留下孤立前缀与空括号，比不过滤更难看。
+    #     这些形态只有删号后才出现，故放在末尾统一收口。
+    #     **刻意不做全局双空格压缩**（`[ \t]{2,}` → ' '）：那会破坏代码块的对齐。</zh-CN>
+    # </lang>
+    $b = $b -replace '\*\*A\s+P21\s+deliverable\.\*\*\s*', ''
+    $b = $b -replace '\*\*P21\s+交付物\*\*。\s*', ''
+    $b = $b -replace '（\s*[，,、]\s*）', ''
+    $b = $b -replace '\(\s*,\s*\)', ''
+    return $b
+}
+
+foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.Add('上架清单存在缺 doc 的条目'); continue }
 
     $zhPath = Join-Path $docsDir $e.doc
     $enSource = Join-Path $translationsDir $e.doc
@@ -261,6 +394,9 @@ foreach ($e in $entries) {
     # </lang>
     $zhBody = Convert-DocLink -Body $zhBody -CurDoc $e.doc
     $enBody = Convert-DocLink -Body $enBody -CurDoc $e.doc
+    # 发布面文本过滤：去掉内部协作色彩（工作项编号、"内部计划，未公开"等），源文件不动
+    $zhBody = Convert-PublicText -Body $zhBody
+    $enBody = Convert-PublicText -Body $enBody
 
     $targetDir = Join-Path $siteDir $pathSeg
     if (-not (Test-Path -LiteralPath $targetDir)) { $null = New-Item -ItemType Directory -Path $targetDir }

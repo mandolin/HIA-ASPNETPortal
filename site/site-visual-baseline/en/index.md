@@ -5,9 +5,6 @@ parent: 参考
 permalink: /en/site-visual-baseline/
 title: Site visual baseline
 ---
-> `C-anp-P22` (project website) `W-anp-P131` deliverable. Principle 1 gate: **produce the site visual prototype
-> before landing content**.
->
 > This page is the site's **visual baseline specification**: it fixes the palette, typeface, type scale, and the colour
 > sources for code blocks, tables and the navigation skeleton. It is the source of truth for the values in
 > `site/_config.yml` and `site/_sass/` (if overridden) — **change it here, never hand-edit generated output**.
@@ -54,7 +51,7 @@ Taken from `EnterpriseLight`'s `--portal-*` semantic variables (light family; `D
 | Zebra-stripe row | `--portal-list-row-alt` | `#f7f9fc` |
 | Error / failure / validation feedback | `--portal-danger-text` | `#b42318` |
 
-> `--portal-text-subtle` was added by the `C-anp-P23` D3 ruling, for colour layering between heading and subheading.
+> `--portal-text-subtle` was added by the theme engineering decision, for colour layering between heading and subheading.
 > `--portal-danger-text` is the only variable that differs per theme family (see `docs/theme-semantic-variables.md`);
 > the site uses the Enterprise light value `#b42318`.
 
@@ -109,7 +106,7 @@ product entry → evaluate → quick start → learn → reference → develop �
 | --- | --- |
 | Sidebar | Driven by `site/_data/navigation.yml` (Just the Docs) |
 | Language switch | Each page's front matter `lang` selects its tree; Chinese pages link `/en/<same path>/`, English pages link `/<same path>/` |
-| One-to-one | Any published page must have both language versions; a missing translation voids the publish declaration (`Build-PortalSite.ps1` gate) |
+| One-to-one | Every page is available in both Chinese and English, switchable at any time |
 
 ## 8. Bilingual typography conventions
 

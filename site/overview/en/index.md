@@ -7,7 +7,7 @@ title: Product overview
 ---
 # Product overview and positioning (HIA-ASPNETPortal)
 
-> **`W-anp-P124` deliverable**. This page answers "what it is, who it is for, what it can do, and where its
+> This page answers "what it is, who it is for, what it can do, and where its
 > boundaries lie". For step-by-step operations see
 > [user-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/user-guide.md); for deployment and
 > operations see `deployment-checklist.md` and `operations-runbook.md`.

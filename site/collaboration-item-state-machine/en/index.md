@@ -7,7 +7,7 @@ title: Collaboration item state machine
 ---
 # Collaboration item state machine
 
-> Source: `W-anp-P64` state-machine explicitisation (internal planning, not public). Code source of truth:
+> Source:  state-machine explicitisation . Code source of truth:
 > `src/Portal.Components/PortalCollaborationItemTransitions.cs`.
 
 ## 1. Status vocabulary

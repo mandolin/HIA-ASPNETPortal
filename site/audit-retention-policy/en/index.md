@@ -9,7 +9,6 @@ title: Audit retention policy
 
 Basis: the OWASP Logging Cheat Sheet (primary source) — log data "**must not be destroyed before the retention period
 expires, nor kept beyond that period**"; legal, regulatory and contractual obligations may affect the concrete period.
-Phase: `W-anp-P62` `P62.4` (internal planning, not public)
 Date: 2026-09-26
 
 ## 1. Scope
