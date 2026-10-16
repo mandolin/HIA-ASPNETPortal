@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考（分区）
+parent: 参考
 permalink: /site-visual-baseline/
 title: 官网视觉基线
 ---

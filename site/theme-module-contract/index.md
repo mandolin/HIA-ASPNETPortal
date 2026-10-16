@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 开发（分区）
+parent: 开发
 permalink: /theme-module-contract/
 title: 模块外观契约（Theme → Module Contract）
 ---

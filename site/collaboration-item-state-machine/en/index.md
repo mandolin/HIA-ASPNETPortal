@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference (section)
+parent: Reference
 permalink: /en/collaboration-item-state-machine/
 title: Collaboration item state machine
 ---

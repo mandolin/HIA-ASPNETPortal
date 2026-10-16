@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 学习（分区）
+title: 学习
 nav_order: 4
 lang: zh-CN
 permalink: /sections/learn/

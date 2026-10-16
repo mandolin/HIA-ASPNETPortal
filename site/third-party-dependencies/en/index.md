@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference (section)
+parent: Reference
 permalink: /en/third-party-dependencies/
 title: Third-party dependency audit
 ---

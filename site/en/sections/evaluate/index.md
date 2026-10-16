@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Evaluate (section)
+title: Evaluate
 nav_order: 2
 lang: en
 permalink: /en/sections/evaluate/

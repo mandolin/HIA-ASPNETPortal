@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 参考（分区）
+title: 参考
 nav_order: 5
 lang: zh-CN
 permalink: /sections/reference/

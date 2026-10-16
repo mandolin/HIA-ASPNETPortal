@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考（分区）
+parent: 参考
 permalink: /third-party-dependencies/
 title: 第三方依赖审计
 ---

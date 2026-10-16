@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 开发（分区）
+parent: 开发
 permalink: /theme-package-guide/
 title: 主题包部署指南
 ---

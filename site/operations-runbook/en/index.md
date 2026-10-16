@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Operate (section)
+parent: Operate
 permalink: /en/operations-runbook/
 title: Operations runbook
 ---

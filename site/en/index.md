@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Home
-parent: Product overview (section)
+parent: Product overview
 nav_order: 1
 lang: en
 ---

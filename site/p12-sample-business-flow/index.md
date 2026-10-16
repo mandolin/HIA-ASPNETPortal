@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 学习（分区）
+parent: 学习
 permalink: /p12-sample-business-flow/
 title: P12 员工资料更正样板业务路径
 ---

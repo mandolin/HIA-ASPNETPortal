@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Changes (section)
+parent: Changes
 permalink: /en/release-notes-template/
 title: Release notes template
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 变更（分区）
+parent: 变更
 permalink: /versioning/
 title: 版本策略
 ---
@@ -55,17 +55,11 @@ title: 版本策略
 - 程序集版本（5 个 `AssemblyInfo.cs`）与上述版本一致；
 - 版本未变更时阻止重复打标签。
 
-## 六、宣传口径约束
+## 六、当前版本
 
-- `v1.0.0` 之前：**不对外宣传**。
-- `v1.0.0` 起：对外描述限于"**开发、测试、演示与参考场景**"。
-- **不得宣称生产级 / 企业级可信** —— 真实环境验证证据仍是独立里程碑，取得前请勿使用该表述。
+**`v1.0.0`**（首个正式发行版，2026-10-09）—— 能力覆盖、质量门禁、文档与开源就绪均已完成。详见 `CHANGELOG.md`。
 
-## 七、当前版本
-
-**`v1.0.0`**（首个正式发行版，2026-10-09）—— 能力覆盖、质量门禁、文档与开源就绪均已完成；对外描述限于「开发、测试、演示与参考场景」（见第六节）。详见 `CHANGELOG.md`。
-
-## 八、模块 manifest 的 `minimumPortalVersion` 语义
+## 七、模块 manifest 的 `minimumPortalVersion` 语义
 
 模块包 `module.json` 中的 `minimumPortalVersion` 表示**该模块要求的门户内核最低能力基线**，与产品版本号（`MAJOR.MINOR.PATCH`）是**两个独立维度**：
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference (section)
+parent: Reference
 permalink: /en/documentation-artifacts-guide/
 title: Documentation artefacts and toolchain boundaries
 ---

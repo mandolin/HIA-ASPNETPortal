@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Quick start (section)
+parent: Quick start
 permalink: /en/user-guide/
 title: User guide
 ---

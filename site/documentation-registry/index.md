@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考（分区）
+parent: 参考
 permalink: /documentation-registry/
 title: 文档登记表（HIA-ASPNETPortal）
 ---

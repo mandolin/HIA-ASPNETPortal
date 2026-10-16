@@ -58,20 +58,13 @@ allowed.
 - the assembly versions (five `AssemblyInfo.cs` files) match that version;
 - duplicate tagging is blocked when the version has not changed.
 
-## 6. Publicity wording constraints
-
-- Before `v1.0.0`: **no external publicity**.
-- From `v1.0.0` onward: wording is limited to "**development, testing, demonstration and reference**".
-- **Production-grade or enterprise-grade trust must not be claimed** — real-environment validation evidence remains a
-  separate milestone, and that wording is forbidden until it is obtained.
-
-## 7. Current version
+## 6. Current version
 
 **`v1.0.0`** (first formal release, 2026-10-09) — capability coverage, quality gates, documentation and open-source
 readiness are all complete; the external wording is limited to "development, testing, demonstration and reference"
 (see section 6). See `CHANGELOG.md` for details.
 
-## 8. `minimumPortalVersion` semantics in module manifests
+## 7. `minimumPortalVersion` semantics in module manifests
 
 In a module package's `module.json`, `minimumPortalVersion` expresses the **minimum portal-kernel capability baseline that
 the module requires**. It is a **separate dimension** from the product version (`MAJOR.MINOR.PATCH`):

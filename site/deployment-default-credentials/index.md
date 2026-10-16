@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 运维（分区）
+parent: 运维
 permalink: /deployment-default-credentials/
 title: 默认凭据与旧口令治理
 ---

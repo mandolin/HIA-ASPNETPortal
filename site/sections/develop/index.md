@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 开发（分区）
+title: 开发
 nav_order: 6
 lang: zh-CN
 permalink: /sections/develop/

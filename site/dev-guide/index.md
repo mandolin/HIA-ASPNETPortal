@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 开发（分区）
+parent: 开发
 permalink: /dev-guide/
 title: 开发指南
 ---

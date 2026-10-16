@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 产品概览（分区）
+parent: 产品概览
 permalink: /docs-index/
 title: HIA-ASPNETPortal 文档
 ---

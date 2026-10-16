@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Learn (section)
+title: Learn
 nav_order: 4
 lang: en
 permalink: /en/sections/learn/

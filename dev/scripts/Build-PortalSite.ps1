@@ -433,25 +433,29 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     # <lang>
     #   <zh-CN>**parent 按语言映射到分区页的实际标题**（`W-anp-P148`）。`published.yml` 的 `parent`
     #     是**中文裸分区名**（与 `_data/navigation.yml` 的 `title` 对应，人类可读，N1 也按它校验）；
-    #     而 Just the Docs 要求子页的 parent **字符串等于父页的 title** —— 分区页的 title
-    #     为「<中文裸名>（分区）」/「<英文分区名> (section)」（加标识是为了避免与分区内某页标题相同，
-    #     那种相同会触发主题的 `∞` 保护分支并破坏整个侧边栏结构）。
-    #     故：中文侧 = 中文裸名 + 「（分区）」；英文侧 = `navigation.yml` 的 `title_en` + 「 (section)」。</zh-CN>
+    #     而 Just the Docs 要求子页的 parent **字符串等于父页的 title**，分区页 title 就是裸分区名
+    #     （中文）/ `title_en`（英文）。
+    #     注意：分区页标题**不加任何后缀** —— 曾有版本加「（分区）/(section)」来避开"页面 title 与父页 title
+    #     相同"的主题保护分支，结果侧边栏每个分区都显示成「产品概览（分区）」，用户明确指出难看。
+    #     正确做法是让**冲突的那一个页面**让路（本站仅 `en/overview` 的标题与英文分区页相同，
+    #     已改为 `Product overview and positioning`），而不是给全部分区页加后缀。</zh-CN>
     #   <en>**parent is mapped per language to the section page's actual title** (`W-anp-P148`). The `parent` in
     #     `published.yml` is the **bare Chinese section name** (matching `title` in `_data/navigation.yml`, human-readable,
-    #     and what N1 checks); but Just the Docs requires a child's parent **string to equal the parent page's title** — and
-    #     the section page's title is "<Chinese bare name>（分区）" / "<English section name> (section)" (the marker prevents
-    #     it from colliding with a page title inside that section, which would trigger the theme's `∞` guard branch and break
-    #     the whole sidebar structure). So: the Chinese side is the Chinese bare name + "（分区）", and the English side is
-    #     `title_en` from `navigation.yml` + " (section)".</en>
+    #     and what N1 checks); Just the Docs requires a child's parent **string to equal the parent page's title**, and the
+    #     section page title is exactly the bare section name (Chinese) / `title_en` (English).
+    #     Note: section page titles carry **no suffix** — an earlier version appended "（分区）/ (section)" to avoid the
+    #     theme's "page title equals parent page title" guard, but that made every sidebar entry read "产品概览（分区）",
+    #     which the user explicitly called ugly. The right fix is to let **the one conflicting page** yield (here only
+    #     `en/overview`'s title collided with the English section page, and it is now
+    #     `Product overview and positioning`), not to suffix every section page.</en>
     # </lang>
-    $zhParent = ($e.parent + '（分区）')
+    $zhParent = $e.parent
     $enBare = $e.parent
     foreach ($nv in $navTitles) {
         if ($nv.Zh -eq $e.parent -and $nv.En) { $enBare = $nv.En; break }
     }
-    $enParent = ($enBare + ' (section)')
-    $zhParent = ($e.parent + '（分区）')
+    $enParent = $enBare
+    $zhParent = $e.parent
     $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $zhParent + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
     [System.IO.File]::WriteAllText((Join-Path $targetDir 'index.md'), ($zhFm + $zhBody), $utf8)
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Product overview
+title: Product overview and positioning
 lang: en
 parent: Product overview
 nav_order: 1

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Develop (section)
+title: Develop
 nav_order: 6
 lang: en
 permalink: /en/sections/develop/

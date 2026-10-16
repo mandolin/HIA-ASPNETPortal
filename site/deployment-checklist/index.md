@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 运维（分区）
+parent: 运维
 permalink: /deployment-checklist/
 title: 发布与兼容检查清单
 ---

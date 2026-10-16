@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Evaluate (section)
+parent: Evaluate
 permalink: /en/architecture/
 title: Architecture overview
 ---

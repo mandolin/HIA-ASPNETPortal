@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 评估（分区）
+parent: 评估
 permalink: /architecture/
 title: 架构概览
 ---

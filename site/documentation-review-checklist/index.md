@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考（分区）
+parent: 参考
 permalink: /documentation-review-checklist/
 title: 文档复核走查清单
 ---

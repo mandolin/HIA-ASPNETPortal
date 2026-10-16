@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Develop (section)
+parent: Develop
 permalink: /en/dev-guide/
 title: Developer guide
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference (section)
+parent: Reference
 permalink: /en/theme-semantic-variables/
 title: Theme semantic variables
 ---

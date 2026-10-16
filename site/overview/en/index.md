@@ -1,9 +1,9 @@
 ---
 layout: default
 lang: en
-parent: Product overview (section)
+parent: Product overview
 permalink: /en/overview/
-title: Product overview
+title: Product overview and positioning
 ---
 # Product overview and positioning (HIA-ASPNETPortal)
 

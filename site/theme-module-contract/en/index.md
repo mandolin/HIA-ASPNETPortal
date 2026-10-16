@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Develop (section)
+parent: Develop
 permalink: /en/theme-module-contract/
 title: Theme-module appearance contract
 ---

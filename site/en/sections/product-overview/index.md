@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Product overview (section)
+title: Product overview
 nav_order: 1
 lang: en
 permalink: /en/sections/product-overview/

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Reference (section)
+title: Reference
 nav_order: 5
 lang: en
 permalink: /en/sections/reference/

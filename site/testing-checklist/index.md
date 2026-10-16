@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考（分区）
+parent: 参考
 permalink: /testing-checklist/
 title: 测试清单
 ---
