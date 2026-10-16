@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 参考（分区）
 permalink: /business-application-state-machine/
 title: 业务申请状态机（Business Application State Machine）
 ---

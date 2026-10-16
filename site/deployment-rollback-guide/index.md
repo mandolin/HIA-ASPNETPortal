@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 运维
+parent: 运维（分区）
 permalink: /deployment-rollback-guide/
 title: 发布回滚指南
 ---

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Operate
+title: Operate (section)
 nav_order: 7
 lang: en
 permalink: /en/sections/operate/

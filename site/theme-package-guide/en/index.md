@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 开发
+parent: Develop (section)
 permalink: /en/theme-package-guide/
 title: Theme package deployment guide
 ---

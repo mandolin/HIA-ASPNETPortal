@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 参考
+parent: Reference (section)
 permalink: /en/contracts-module-manifest/
 title: Module contract (module.json)
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 参考（分区）
 permalink: /collaboration-item-state-machine/
 title: 协同事项状态机（Collaboration Item State Machine）
 ---

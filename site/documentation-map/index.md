@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 参考（分区）
 permalink: /documentation-map/
 title: 文档地图 / 导航索引（HIA-ASPNETPortal）
 ---

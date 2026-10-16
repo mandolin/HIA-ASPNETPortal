@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 参考（分区）
 permalink: /theme-semantic-variables/
 title: 主题语义变量矩阵（`--portal-*`）
 ---

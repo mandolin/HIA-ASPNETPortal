@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 参考（分区）
 permalink: /documentation-artifacts-guide/
 title: 文档产物与工具链边界
 ---

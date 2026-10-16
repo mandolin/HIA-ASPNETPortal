@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 快速上手
+parent: 快速上手（分区）
 permalink: /user-guide/
 title: 用户指南
 ---

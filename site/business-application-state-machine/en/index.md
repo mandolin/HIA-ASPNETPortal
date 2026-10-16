@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 参考
+parent: Reference (section)
 permalink: /en/business-application-state-machine/
 title: Business application state machine
 ---

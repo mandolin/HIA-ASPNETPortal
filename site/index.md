@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 首页
-parent: 产品概览
+parent: 产品概览（分区）
 nav_order: 1
 lang: zh-CN
 ---

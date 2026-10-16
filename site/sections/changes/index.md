@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 变更
+title: 变更（分区）
 nav_order: 8
 lang: zh-CN
 permalink: /sections/changes/

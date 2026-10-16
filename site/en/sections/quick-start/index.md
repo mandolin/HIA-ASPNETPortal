@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Quick start
+title: Quick start (section)
 nav_order: 3
 lang: en
 permalink: /en/sections/quick-start/

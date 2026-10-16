@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 运维
+parent: Operate (section)
 permalink: /en/audit-retention-policy/
 title: Audit retention policy
 ---

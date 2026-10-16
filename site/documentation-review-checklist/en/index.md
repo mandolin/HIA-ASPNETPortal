@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 参考
+parent: Reference (section)
 permalink: /en/documentation-review-checklist/
 title: Documentation review walkthrough checklist
 ---

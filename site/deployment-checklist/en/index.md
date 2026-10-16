@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 运维
+parent: Operate (section)
 permalink: /en/deployment-checklist/
 title: Release and compatibility checklist
 ---

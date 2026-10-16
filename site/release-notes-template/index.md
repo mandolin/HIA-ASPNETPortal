@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 变更
+parent: 变更（分区）
 permalink: /release-notes-template/
 title: 发布说明模板
 ---

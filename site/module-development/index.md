@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 开发
+parent: 开发（分区）
 permalink: /module-development/
 title: 部署式模块包开发指南
 ---

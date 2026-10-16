@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 参考（分区）
 permalink: /contracts-module-manifest/
 title: 模块契约（`module.json`）
 ---

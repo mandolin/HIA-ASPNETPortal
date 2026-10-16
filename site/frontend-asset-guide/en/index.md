@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 开发
+parent: Develop (section)
 permalink: /en/frontend-asset-guide/
 title: Web Forms presentation and frontend assets
 ---

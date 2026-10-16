@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 运维
+parent: Operate (section)
 permalink: /en/deployment-default-credentials/
 title: Default credentials and legacy password governance
 ---

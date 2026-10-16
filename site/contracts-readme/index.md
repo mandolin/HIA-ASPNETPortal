@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 参考（分区）
 permalink: /contracts-readme/
 title: 技术契约（HIA-ASPNETPortal）
 ---

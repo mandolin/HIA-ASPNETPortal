@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 快速上手
+title: 快速上手（分区）
 nav_order: 3
 lang: zh-CN
 permalink: /sections/quick-start/

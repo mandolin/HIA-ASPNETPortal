@@ -430,18 +430,35 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     #     parent string against the parent page's title**, so the two must be **in the same language** to line up.
     #     Section names come from `_data/navigation.yml` (title ↔ title_en), the same source as the N1 check.</en>
     # </lang>
-    $enParent = $e.parent
+    # <lang>
+    #   <zh-CN>**parent 按语言映射到分区页的实际标题**（`W-anp-P148`）。`published.yml` 的 `parent`
+    #     是**中文裸分区名**（与 `_data/navigation.yml` 的 `title` 对应，人类可读，N1 也按它校验）；
+    #     而 Just the Docs 要求子页的 parent **字符串等于父页的 title** —— 分区页的 title
+    #     为「<中文裸名>（分区）」/「<英文分区名> (section)」（加标识是为了避免与分区内某页标题相同，
+    #     那种相同会触发主题的 `∞` 保护分支并破坏整个侧边栏结构）。
+    #     故：中文侧 = 中文裸名 + 「（分区）」；英文侧 = `navigation.yml` 的 `title_en` + 「 (section)」。</zh-CN>
+    #   <en>**parent is mapped per language to the section page's actual title** (`W-anp-P148`). The `parent` in
+    #     `published.yml` is the **bare Chinese section name** (matching `title` in `_data/navigation.yml`, human-readable,
+    #     and what N1 checks); but Just the Docs requires a child's parent **string to equal the parent page's title** — and
+    #     the section page's title is "<Chinese bare name>（分区）" / "<English section name> (section)" (the marker prevents
+    #     it from colliding with a page title inside that section, which would trigger the theme's `∞` guard branch and break
+    #     the whole sidebar structure). So: the Chinese side is the Chinese bare name + "（分区）", and the English side is
+    #     `title_en` from `navigation.yml` + " (section)".</en>
+    # </lang>
+    $zhParent = ($e.parent + '（分区）')
+    $enBare = $e.parent
     foreach ($nv in $navTitles) {
-        if ($nv.Zh -eq $e.parent -and $nv.En) { $enParent = $nv.En; break }
+        if ($nv.Zh -eq $e.parent -and $nv.En) { $enBare = $nv.En; break }
     }
-    $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $e.parent + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
+    $enParent = ($enBare + ' (section)')
+    $zhParent = ($e.parent + '（分区）')
+    $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $zhParent + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
     [System.IO.File]::WriteAllText((Join-Path $targetDir 'index.md'), ($zhFm + $zhBody), $utf8)
 
     $enFm = "---`nlayout: default`nlang: en`nparent: " + $enParent + "`npermalink: /en/" + $pathSeg + "/`ntitle: " + $enTitle + "`n---`n"
 
     $enDir = Join-Path $targetDir 'en'
     if (-not (Test-Path -LiteralPath $enDir)) { $null = New-Item -ItemType Directory -Path $enDir }
-    $enFm = "---`nlayout: default`nlang: en`nparent: " + $e.parent + "`npermalink: /en/" + $pathSeg + "/`ntitle: " + $enTitle + "`n---`n"
     [System.IO.File]::WriteAllText((Join-Path $enDir 'index.md'), ($enFm + $enBody), $utf8)
 
     $generated++

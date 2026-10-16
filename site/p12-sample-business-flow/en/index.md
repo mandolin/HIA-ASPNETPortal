@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 学习
+parent: Learn (section)
 permalink: /en/p12-sample-business-flow/
 title: P12 sample business flow
 ---

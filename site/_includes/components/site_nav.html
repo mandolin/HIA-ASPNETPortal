@@ -1,0 +1,87 @@
+{%- comment -%}
+  Controlled override of the just-the-docs `components/site_nav.html` (C-anp-P22, W-anp-P148).
+
+  WHY (two changes, both required):
+   1. **Cache key**: upstream is included via `include_cached` with no parameters, so Jekyll reuses one
+      rendering for the whole site. The paired `sidebar.html` override now passes `lang=page.lang`, which
+      makes the cache per-language.
+   2. **Language filtering**: `site.html_pages` contains BOTH language trees, so without filtering the
+      sidebar mixes Chinese and English nodes. This override filters the page set by the requested
+      language: Chinese pages are those whose URL does not start with `/en/`, English pages those that do.
+
+  Everything else is copied verbatim from just-the-docs v0.12.0.
+  When upgrading the theme, re-diff this file against upstream.
+{%- endcomment -%}
+
+{%- assign nav_lang = include.lang | default: page.lang -%}
+
+{%- if nav_lang == 'en' -%}
+  {%- assign nav_pages = site.html_pages | where_exp: "item", "item.url contains '/en/'" -%}
+{%- else -%}
+  {%- assign en_pages = site.html_pages | where_exp: "item", "item.url contains '/en/'" -%}
+  {%- assign nav_pages = "" | split: "" -%}
+  {%- for item in site.html_pages -%}
+    {%- assign is_en = false -%}
+    {%- for ep in en_pages -%}
+      {%- if ep.url == item.url -%}{%- assign is_en = true -%}{%- break -%}{%- endif -%}
+    {%- endfor -%}
+    {%- unless is_en -%}{%- assign nav_pages = nav_pages | push: item -%}{%- endunless -%}
+  {%- endfor -%}
+{%- endif -%}
+
+<nav aria-label="Main" id="site-nav" class="site-nav">
+  {% assign pages_top_size = nav_pages
+        | where_exp:"item", "item.title != nil"
+        | where_exp:"item", "item.parent == nil"
+        | where_exp:"item", "item.nav_exclude != true"
+        | size %}
+  {% if pages_top_size > 0 %}
+    {% include components/nav/pages.html pages=nav_pages all=include.all %}
+  {% endif %}
+  {%- if site.nav_external_links -%}
+    <ul class="nav-list">
+      {%- for node in site.nav_external_links -%}
+        <li class="nav-list-item external">
+          <a href="{{ node.url | absolute_url }}" class="nav-list-link external"
+            {% if node.opens_in_new_tab or node.opens_in_new_tab == nil and site.nav_external_links_new_tab %}
+              target="_blank" rel="noopener noreferrer"
+            {% endif %}
+          >
+            {{ node.title }}
+            {% unless node.hide_icon %}<svg viewBox="0 0 24 24" aria-labelledby="svg-external-link-title"><use xlink:href="#svg-external-link"></use></svg>{% endunless %}
+          </a>
+        </li>
+      {%- endfor -%}
+
+    </ul>
+  {%- endif -%}
+  {% if site.just_the_docs.collections %}
+    {% assign collections_size = site.just_the_docs.collections | size %}
+    {% for collection_entry in site.just_the_docs.collections %}
+      {% assign collection_key = collection_entry[0] %}
+      {% assign collection_value = collection_entry[1] %}
+      {% assign collection = site[collection_key] %}
+      {% if collection_value.nav_exclude != true %}
+        {% if collections_size > 1 or pages_top_size > 0 %}
+          {% if collection_value.nav_fold == true %}
+            <ul class="nav-list nav-category-list">
+              <li class="nav-list-item">
+                {%- if collection.size > 0 -%}
+                <button class="nav-list-expander btn-reset" aria-label="{{ collection_value.name }} collection" aria-expanded="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+                </button>
+                {%- endif -%}
+                <div class="nav-category">{{ collection_value.name }}</div>
+                {% include components/nav/pages.html pages=collection all=include.all %}
+              </li>
+            </ul>
+          {% else %}
+            {% include components/nav/pages.html pages=collection all=include.all %}
+          {% endif %}
+        {% else %}
+          {% include components/nav/pages.html pages=collection all=include.all %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</nav>

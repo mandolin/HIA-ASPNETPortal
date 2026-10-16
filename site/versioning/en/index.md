@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 变更
+parent: Changes (section)
 permalink: /en/versioning/
 title: Versioning policy
 ---

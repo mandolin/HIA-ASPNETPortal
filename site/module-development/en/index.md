@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: 开发
+parent: Develop (section)
 permalink: /en/module-development/
 title: Deployed module package development guide
 ---
