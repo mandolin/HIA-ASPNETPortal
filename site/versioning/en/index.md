@@ -59,9 +59,10 @@ allowed.
 
 ## 6. Current version
 
-**`v1.0.0`** (first formal release, 2026-10-09) — capability coverage, quality gates, documentation and open-source
-readiness are all complete; the external wording is limited to "development, testing, demonstration and reference"
-(see section 6). See `CHANGELOG.md` for details.
+**`v1.1.0`** (2026-10-17, current) — the product website and documentation subsite were overhauled. The first formal
+release `v1.0.0` (2026-10-09) completed capability coverage, quality gates, documentation and open-source readiness;
+the external wording remains limited to "development, testing, demonstration and reference" (see section 6).
+See `CHANGELOG.md` for details.
 
 ## 7. `minimumPortalVersion` semantics in module manifests
 
