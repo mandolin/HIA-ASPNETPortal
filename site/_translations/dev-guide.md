@@ -256,7 +256,7 @@ To keep JSON evidence, specify the output path explicitly:
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalMigrationManifest.ps1 -OutputJson <internal evidence directory>\p11.3\migration-manifest.json
 ```
 
-When an existing test database needs P5/P6 schema completion, you must explicitly use the external `test` connection string and the `-Apply*` switches of `Test-PortalSqlCompatibility.ps1`. This writes to the target test database and must point only at an isolated test instance:
+When an existing test database needs schema completion, you must explicitly use the external `test` connection string and the `-Apply*` switches of `Test-PortalSqlCompatibility.ps1`. This writes to the target test database and must point only at an isolated test instance:
 
 ```powershell
 $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
@@ -329,7 +329,7 @@ The business-application sample page can first generate reviewable SQL without m
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1
 ```
 
-To execute against a confirmed development/test database, complete the P5/P12/P19 migrations first, then pass the external connection string explicitly and use `-Apply`:
+To execute against a confirmed development/test database, complete the corresponding migrations first, then pass the external connection string explicitly and use `-Apply`:
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath '<external>\connectionStrings.config' -ApplyP5Migrations -ApplyP12WorkItemMigration -ApplyP19BusinessApplicationMigration -RequireP5Migrations -RequireP12WorkItemMigration -RequireP19BusinessApplicationMigration -Confirm:$false

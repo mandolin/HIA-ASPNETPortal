@@ -12,4 +12,4 @@ permalink: /sections/learn/
 
 | 页面 | |
 | --- | --- |
-| [P12 员工资料更正样板业务路径]({{ site.baseurl }}/p12-sample-business-flow/) | |
+| [员工资料更正样板业务路径]({{ site.baseurl }}/p12-sample-business-flow/) | |

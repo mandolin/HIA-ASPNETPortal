@@ -43,7 +43,7 @@ external configuration.
 - [ ] The target database has been backed up, the change window is set, and the rollback owner is named.
 - [ ] Full initialisation scripts are executed only on an isolated test database under explicit manual operation;
       historical scripts hard-code the database name `Portal` and include rebuild/clear behaviour.
-- [ ] P2/P3/P5 incremental migrations have first been verified on a separate test database; application startup does not run
+- [ ] Incremental migrations have first been verified on a separate test database; application startup does not run
       migrations automatically.
 - [ ] credential migration, permission mapping and deployment policy all have rollback or deferral records.
 

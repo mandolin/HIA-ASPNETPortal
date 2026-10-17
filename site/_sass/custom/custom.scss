@@ -14,13 +14,35 @@
 // ---- Top navigation (landing) ----------------------------------------------
 
 .oc-nav {
+  // Fixed header, like orchardcore.net (sticky top-0 z-40; visually equivalent).
+  // Inner content aligns with the landing container: inline padding equals the
+  // centred 68rem .oc-page container's side margin, falling back to 2rem on
+  // narrow screens. Backdrop blur over page content while scrolled.
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  height: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 0.85rem 2rem;
-  background: #ffffff;
+  padding: 0 max(2rem, calc((100% - 68rem) / 2));
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid #dce5ec;
+}
+
+// Fixed nav leaves the flow — offset the landing body, and keep anchor jumps
+// clear of the bar.
+.oc-main {
+  padding-top: 3.5rem;
+}
+
+.oc-main [id] {
+  scroll-margin-top: 4.5rem;
 }
 
 .oc-nav-brand {
@@ -400,16 +422,38 @@
 // Colours stay HIA: bar #172633, primary #0047AB, line #DCE5EC, muted #667782.
 
 .docs-topbar {
-  position: relative;
-  z-index: 20;
+  // Fixed header (same behaviour as the landing nav / orchardcore.net's sticky
+  // top-0). Explicit height keeps the fixed sidebar offset stable; inner content
+  // stays aligned to the centred --docs-container via the max() padding.
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  height: 4rem;
   display: flex;
   align-items: center;
   gap: 1.4rem;
   // Brand/search/repo align with the layout container: inline padding equals the
   // centred container's side margin on wide screens (tracks --docs-container),
   // falling back to 1.6rem below the container width.
-  padding: 0.7rem max(1.6rem, calc((100% - var(--docs-container, 1220px)) / 2));
+  padding: 0 max(1.6rem, calc((100% - var(--docs-container, 1220px)) / 2));
   background: #172633;
+}
+
+// The topbar left the flow: anchor the fixed sidebar below it (the theme relies
+// on the topbar's static position for this — with a fixed topbar that breaks),
+// offset the article body, and keep anchor jumps clear of the bar.
+.docs-body .side-bar {
+  top: 4rem;
+}
+
+.docs-body .main {
+  padding-top: 4rem;
+}
+
+.docs-body [id] {
+  scroll-margin-top: 5rem;
 }
 
 .docs-brand {

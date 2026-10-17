@@ -21,7 +21,7 @@ content, role permissions and back-office administration.
 Running locally usually requires:
 
 1. Preparing SQL Server or LocalDB.
-2. Executing the database scripts under `src/Setup/`, which must at least include the base scripts, the P2/P3 incremental
+2. Executing the database scripts under `src/Setup/`, which must at least include the base scripts, incremental
    scripts and `Portal_UserCredentials.sql`.
 3. Copying the template from `src/Portal/Config/Templates/connectionStrings.config` to the external configuration directory
    and configuring the `Portal` connection string.
@@ -102,7 +102,7 @@ These two modules (`HIA.LeaveRequest`, `HIA.ExpenseReimbursement`) are employee 
 
 The typical order from nothing to "a portal page with modules is visible":
 
-1. **Prepare the database**: run the scripts under `src/Setup/` (base scripts, P2/P3 incremental scripts,
+1. **Prepare the database**: run the scripts under `src/Setup/` (base scripts, incremental scripts,
    `Portal_UserCredentials.sql`).
 2. **Configure the connection string**: copy the template from `src/Portal/Config/Templates/connectionStrings.config` to the
    external configuration directory and fill in the `Portal` connection string (see "Running it locally — overview" above for

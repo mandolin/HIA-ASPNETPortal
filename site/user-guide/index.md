@@ -18,7 +18,7 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 本地运行通常需要：
 
 1. 准备 SQL Server 或 LocalDB。
-2. 执行 `src/Setup/` 下的数据库脚本，至少包含基础脚本、P2/P3 增量脚本和 `Portal_UserCredentials.sql`。
+2. 执行 `src/Setup/` 下的数据库脚本，至少包含基础脚本、增量脚本和 `Portal_UserCredentials.sql`。
 3. 从 `src/Portal/Config/Templates/connectionStrings.config` 复制模板到外置配置目录，并配置 `Portal` 连接串。
 4. 使用 Visual Studio 构建并运行 `src/master.sln`。
 5. 访问启动后的站点。
@@ -73,7 +73,7 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 从零到"能看到一个带模块的门户页"的典型顺序：
 
-1. **准备数据库**：执行 `src/Setup/` 下的脚本（基础脚本、P2/P3 增量脚本、`Portal_UserCredentials.sql`）。
+1. **准备数据库**：执行 `src/Setup/` 下的脚本（基础脚本、增量脚本、`Portal_UserCredentials.sql`）。
 2. **配置连接串**：从 `src/Portal/Config/Templates/connectionStrings.config` 复制模板到外置配置目录并填好 `Portal` 连接串（默认外置目录见上文「本地运行概览」）。连接串**不入库**。
 3. **构建并启动**：Visual Studio 构建并运行 `src/master.sln`，或按 `dev-guide.md` 用命令行构建。
 4. **登录**：用管理员账号登录（默认账号的安全约束见「初始账号」一节）。

@@ -266,7 +266,7 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalMigrationManifest.ps1 -OutputJson <内部证据目录>\p11.3\migration-manifest.json
 ```
 
-既有测试库需要补齐 P5/P6 schema 时，必须显式使用外置 `test` 连接串和 `Test-PortalSqlCompatibility.ps1` 的 `-Apply*` 开关。该操作会写入目标测试库，只应指向隔离测试实例：
+既有测试库需要补齐对应 schema 时，必须显式使用外置 `test` 连接串和 `Test-PortalSqlCompatibility.ps1` 的 `-Apply*` 开关。该操作会写入目标测试库，只应指向隔离测试实例：
 
 ```powershell
 $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
@@ -339,7 +339,7 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1
 ```
 
-如需在已确认的开发/测试库中执行，应先补齐 P5/P12/P19 迁移，再显式传入外置连接串并使用 `-Apply`：
+如需在已确认的开发/测试库中执行，应先补齐相应迁移，再显式传入外置连接串并使用 `-Apply`：
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath '<仓库外>\connectionStrings.config' -ApplyP5Migrations -ApplyP12WorkItemMigration -ApplyP19BusinessApplicationMigration -RequireP5Migrations -RequireP12WorkItemMigration -RequireP19BusinessApplicationMigration -Confirm:$false
