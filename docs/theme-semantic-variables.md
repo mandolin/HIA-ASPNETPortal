@@ -54,7 +54,7 @@
 | `--portal-border-strong` | 需要强调的边框（如焦点态、选中态） |
 | `--portal-text-strong` | 标题、副标题等强文本 |
 | `--portal-text-muted` | 弱化文本、说明文字、占位文案 |
-| `--portal-text-subtle` | 副标题层级，取值介于 `--portal-text-strong` 与 `--portal-text-muted` 之间，用于标题与副标题的色层次（C-anp-P23 D3 裁定新增） |
+| `--portal-text-subtle` | 副标题层级，取值介于 `--portal-text-strong` 与 `--portal-text-muted` 之间，用于标题与副标题的色层次 |
 | `--portal-field-bg` | 输入控件背景 |
 | `--portal-field-border` | 输入控件边框 |
 | `--portal-field-text` | 输入控件内文字 |

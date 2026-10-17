@@ -7,7 +7,7 @@
 
 | # | 文档族 | 适用性 | 权威位置 | 维护责任 | 同步触发 | 验证方式 |
 |---|--------|--------|----------|----------|----------|----------|
-| 1 | 代码内文档 | 适用 | 源码注释 + ROP 治理（C-anp-P19） | dev | 每 Cycle 代码变更 | ROP 门禁 `Get-PortalCommentDebtInventory` |
+| 1 | 代码内文档 | 适用 | 源码注释 + ROP 治理 | dev | 每 Cycle 代码变更 | ROP 门禁 `Get-PortalCommentDebtInventory` |
 | 2 | API 与技术契约 | 适用（边界判定见下） | `docs/contracts/`（待建） | dev | 模块 / 接口 / 配置变更 | 契约一致性门禁 |
 | 3 | 产品功能与使用 | 适用 | `docs/user-guide.md` + 待补 how-to/FAQ | docs | 功能变更 | 可读性走查 / 示例运行 |
 | 4 | 开发者与贡献者 | 适用 | `docs/dev-guide.md` 等 | docs | 架构 / 工具变更 | 示例运行 |

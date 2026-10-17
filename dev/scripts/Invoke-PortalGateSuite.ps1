@@ -225,6 +225,9 @@ $gateLayers = [ordered]@{
         #   coverage gap of module classes — the C-anp-P18 goal-4 debt — surfaced via `[GATE-NOTE]` without blocking.</en>
         # </lang>
         @{ File = 'Test-PortalModuleSkinCoverage.ps1';      Runner = 'ps1'; Kind = '模块语义类皮肤覆盖'; Args = @() }
+        # 编号规范：防并行冲突（N1）、防号段遗漏（N2）、包数约定（N3）、防内部编号外泄（N4）。
+        # 台账 work-zone/ 不在公开仓，缺失时本门禁跳过而非误报绿。
+        @{ File = 'Test-PortalWorkItemNumbering.ps1';       Runner = 'ps1'; Kind = '工作项编号规范'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

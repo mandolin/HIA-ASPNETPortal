@@ -20,7 +20,7 @@ nav_order: 1
 
 | # | Documentation family | Applicability | Authoritative location | Maintenance responsibility | Sync trigger | Verification method |
 |---|---|---|---|---|---|---|
-| 1 | In-code documentation | Applicable | Source comments + ROP governance (C-anp-P19) | dev | Per-cycle code changes | ROP gate `Get-PortalCommentDebtInventory` |
+| 1 | In-code documentation | Applicable | Source comments + ROP governance | dev | Per-cycle code changes | ROP gate `Get-PortalCommentDebtInventory` |
 | 2 | API and technical contracts | Applicable (boundary decision below) | `docs/contracts/` (to be built) | dev | Module / interface / configuration changes | Contract consistency gate |
 | 3 | Product features and usage | Applicable | `docs/user-guide.md` + pending how-to/FAQ | docs | Feature changes | Readability walkthrough / example runs |
 | 4 | Developers and contributors | Applicable | `docs/dev-guide.md` and others | docs | Architecture / tool changes | Example runs |

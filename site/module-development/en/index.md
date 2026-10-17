@@ -49,7 +49,7 @@ DesktopModules/
 }
 ```
 
-> **Current state of `schemaVersion` and `capability`**: read-only reference packages such as `ModuleProbe` use `1`; **all business modules (`HIA.*`) actually have
+> **Current state of `schemaVersion` and `capability`** (verified and corrected from source): read-only reference packages such as `ModuleProbe` use `1`; **all business modules (`HIA.*`) actually have
 > manifest `2`**. The `capability` block is **introduced by `schemaVersion: 2` but is optional** — when undeclared the module
 > is Unclassified (legal), not missing. Once declared, `capabilityId` must resolve in the capability registry and `role` must
 > belong to the closed five-value vocabulary (`Primary` / `Contributor` / `Projection` / `Adapter` / `Block`). `MyWorkItems`
@@ -238,7 +238,7 @@ Common faults and where to look:
 | The front-end module is a whole blank page but the build passes | Whether it is registered in `Portal.csproj`'s `<Compile>`; whether the `.ascx` uses `CodeBehind`; whether the markup class names match the module CSS; whether the business package was added to `Portal.ModulePackages.Enabled` |
 | Styling is lost in some skins | Whether the corresponding skin's `Default.css` has the `.<module prefix class>` theme scope rule (the module's own `Styles/*.css` alone is not enough) |
 
-## Hidden traps when adding a module
+## Hidden traps when adding a module (verified)
 
 The following four classes of defect **do not appear when builds and unit tests are green; they surface only at runtime as
 "blank page / gate misjudgement"**, and were found one by one while  delivered the two business modules. Run

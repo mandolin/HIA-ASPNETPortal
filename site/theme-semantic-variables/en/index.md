@@ -53,7 +53,7 @@ The 7 themes are the 6 official skins plus the `Default` fallback theme: `Enterp
 1. **The first 13 variables come in one light-family set and one dark-family set**: the 4 light themes
    (Default / EnterpriseLight / OaLight / StateClassicLight) have identical values, and the 3 dark themes
    (EnterpriseDark / OaDark / StateClassicDark) also have identical values. They express **light/dark tonality**, not
-   theme-family style (including `--portal-text-subtle`, added by the theme engineering decision).
+   theme-family style (including `--portal-text-subtle`, added).
 2. **`--portal-danger-text` is the only variable distinguished by theme family**: because it does not express light/dark
    but rather **each theme family's own error colour** (taken directly from that theme's existing `.NormalRed`). The
    Enterprise and Oa families share the same light error colour (`#b42318`) but differ in dark (`#ff8b8b` / `#ff9b9b`);
