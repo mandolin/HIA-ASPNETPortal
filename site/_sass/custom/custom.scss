@@ -405,7 +405,10 @@
   display: flex;
   align-items: center;
   gap: 1.4rem;
-  padding: 0.7rem 1.6rem;
+  // Brand/search/repo align with the layout container: inline padding equals the
+  // centred 61rem container's side margin on wide screens (Material behaviour),
+  // falling back to 1.6rem when the viewport is narrower than the container.
+  padding: 0.7rem max(1.6rem, calc((100% - 61rem) / 2));
   background: #172633;
 }
 
@@ -597,12 +600,58 @@
   .docs-toc { display: none; }
 }
 
+// ---- Material container geometry (>=66rem) ----------------------------------
+// docs.orchardcore.net locks header content AND all three columns into ONE
+// centred 61rem container: sidebar hugs the container's left edge, the TOC hugs
+// its right edge, the article is what remains. jtd's own lg geometry instead
+// centres a 50rem article and lets the sidebar fill the leftover left margin,
+// which reads as "left-anchored" on wide screens. Take over the geometry:
+@media (min-width: 66rem) {
+  .docs-body .side-bar {
+    left: calc((100% - 61rem) / 2);
+    width: 13rem;
+    // Theme clamps the sidebar with min-width: $nav-width at lg — release it.
+    min-width: 13rem;
+    // Topbar is 4rem tall and sits above the fixed sidebar in flow.
+    height: calc(100vh - 4rem);
+  }
+
+  // The nav column inside the sidebar is 15.5rem at lg — narrow it with the bar.
+  .docs-body .side-bar .site-nav,
+  .docs-body .side-bar .site-footer {
+    width: 13rem;
+  }
+
+  // Content area = container width minus the sidebar; the docs-grid then fills
+  // it edge to edge (article + right TOC rail).
+  .docs-body .side-bar + .main {
+    margin-left: calc((100% - 61rem) / 2 + 13rem);
+    margin-right: calc((100% - 61rem) / 2);
+  }
+
+  // jtd's content wrappers add ~2rem padding each side, which would inset the
+  // grid and break the container alignment — zero them here.
+  .docs-body .main-content-wrap,
+  .docs-body .main-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .docs-body .main .docs-grid {
+    max-width: none;
+    margin: 0;
+  }
+}
+
 // Material-style headings: uppercase display + tighter tracking (CJK unaffected).
 
 // Sidebar bottom theme credit ("This site uses Just the Docs") — Material's
 // sidebar has no such block; hide it (upstream licence note stays in the repo).
+// The element carries the theme utility `d-md-block` (display:block !important
+// at md+), so a plain display:none loses — this needs !important too; ours wins
+// on specificity (0,3,0 vs 0,1,0).
 .docs-body .side-bar .site-footer {
-  display: none;
+  display: none !important;
 }
 
 .docs-body .main-content h1,
