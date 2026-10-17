@@ -2,13 +2,13 @@
 
 企业内网 Web Forms 门户平台。fork 自 Codeplex 上的 ASP.NET Portal Starter Kit，在其基础上补齐了**权限与数据范围、流程状态机、审计、模块包治理、主题治理与自动化门禁**。
 
-当前版本：**v1.0.0**（首发发行版 `M-ANP-RELEASE-READY-PORTAL` / L10）。成熟度定位为 **可用 / 参考 / 研究基线**：本版本达成 L10 七条判据（能力覆盖、逐条目对标、质量门禁、文档就绪、开源就绪、版本锚点、口径约束），但**真实生产环境证据下的生产就绪（`M-ANP-TRUSTED-PORTAL` / L7）尚未达成**，故**不宣称生产级可信**（口径约束见 [版本策略](docs/versioning.md)）。
+当前版本：**v1.1.0**（2026-10-17，官网与文档子站整体改版；首发 v1.0.0 达成 `M-ANP-RELEASE-READY-PORTAL` / L10 七条判据）。成熟度定位为 **可用 / 参考 / 研究基线**：首发判据（能力覆盖、逐条目对标、质量门禁、文档就绪、开源就绪、版本锚点、口径约束）均已达成，但**真实生产环境证据下的生产就绪（`M-ANP-TRUSTED-PORTAL` / L7）尚未达成**，故**不宣称生产级可信**（口径约束见 [版本策略](docs/versioning.md)）。
 
 ## English
 
 Enterprise intranet portal platform on ASP.NET Web Forms, forked from the original ASP.NET Portal Starter Kit on Codeplex and extended with permission and data-scope enforcement, workflow state machines, auditing, module package governance, theme governance, and an automated gate suite.
 
-Current version: **v1.0.0** (first release, `M-ANP-RELEASE-READY-PORTAL` / L10). Maturity is stated as **usable / reference / research baseline**: the seven L10 criteria are met, but production readiness under real target-environment evidence (`M-ANP-TRUSTED-PORTAL` / L7) is **not** yet achieved, so production-grade reliability is **not** claimed. See [versioning.md](docs/versioning.md) for the wording rules.
+Current version: **v1.1.0** (2026-10-17, product-website and docs-subsite overhaul; the first release v1.0.0 met the seven `M-ANP-RELEASE-READY-PORTAL` / L10 criteria). Maturity is stated as **usable / reference / research baseline**: the first-release criteria are all met, but production readiness under real target-environment evidence (`M-ANP-TRUSTED-PORTAL` / L7) is **not** yet achieved, so production-grade reliability is **not** claimed. See [versioning.md](docs/versioning.md) for the wording rules.
 
 ## 功能特性
 
