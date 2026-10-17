@@ -406,9 +406,9 @@
   align-items: center;
   gap: 1.4rem;
   // Brand/search/repo align with the layout container: inline padding equals the
-  // centred 61rem container's side margin on wide screens (Material behaviour),
-  // falling back to 1.6rem when the viewport is narrower than the container.
-  padding: 0.7rem max(1.6rem, calc((100% - 61rem) / 2));
+  // centred 1220px container's side margin on wide screens (measured on
+  // docs.orchardcore.net), falling back to 1.6rem below the container width.
+  padding: 0.7rem max(1.6rem, calc((100% - 1220px) / 2));
   background: #172633;
 }
 
@@ -601,32 +601,32 @@
 }
 
 // ---- Material container geometry (>=66rem) ----------------------------------
-// docs.orchardcore.net locks header content AND all three columns into ONE
-// centred 61rem container: sidebar hugs the container's left edge, the TOC hugs
-// its right edge, the article is what remains. jtd's own lg geometry instead
-// centres a 50rem article and lets the sidebar fill the leftover left margin,
-// which reads as "left-anchored" on wide screens. Take over the geometry:
+// Values measured live on docs.orchardcore.net (Material for MkDocs, root 20px):
+// grid 1220px centred; primary sidebar 242px; article 736px; TOC 242px with a
+// left border but NO gap between the columns. Material's own rem numbers
+// (61rem / 12.1rem) assume a 20px root — at jtd's 16px root they would render
+// 20% too narrow, so the px values are used directly.
 @media (min-width: 66rem) {
   .docs-body .side-bar {
-    left: calc((100% - 61rem) / 2);
-    width: 13rem;
+    left: max(0px, calc((100% - 1220px) / 2));
+    width: 242px;
     // Theme clamps the sidebar with min-width: $nav-width at lg — release it.
-    min-width: 13rem;
+    min-width: 242px;
     // Topbar is 4rem tall and sits above the fixed sidebar in flow.
     height: calc(100vh - 4rem);
   }
 
-  // The nav column inside the sidebar is 15.5rem at lg — narrow it with the bar.
+  // The nav column inside the sidebar is 15.5rem at lg — match the bar width.
   .docs-body .side-bar .site-nav,
   .docs-body .side-bar .site-footer {
-    width: 13rem;
+    width: 242px;
   }
 
-  // Content area = container width minus the sidebar; the docs-grid then fills
-  // it edge to edge (article + right TOC rail).
+  // Content area = container minus the sidebar; the docs-grid then fills it
+  // edge to edge (article + right TOC rail, no gap — as measured on Orchard).
   .docs-body .side-bar + .main {
-    margin-left: calc((100% - 61rem) / 2 + 13rem);
-    margin-right: calc((100% - 61rem) / 2);
+    margin-left: calc(max(0px, (100% - 1220px) / 2) + 242px);
+    margin-right: max(0px, calc((100% - 1220px) / 2));
   }
 
   // jtd's content wrappers add ~2rem padding each side, which would inset the
@@ -640,6 +640,13 @@
   .docs-body .main .docs-grid {
     max-width: none;
     margin: 0;
+    grid-template-columns: minmax(0, 1fr) 242px;
+    gap: 0;
+  }
+
+  // Keep article text off the TOC's left border (the TOC pads itself).
+  .docs-body .docs-article {
+    padding-right: 1.5rem;
   }
 }
 
@@ -752,7 +759,7 @@
 // Dark footer bar (Material sandwich: dark — light — dark).
 
 .docs-footer {
-  max-width: 61rem;
+  max-width: 1220px;
   margin: 3rem auto 0;
   background: #172633;
   border-radius: 0 0 10px 10px;
