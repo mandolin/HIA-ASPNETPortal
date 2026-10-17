@@ -85,11 +85,11 @@ external configuration.
       recorded.
 - [ ] `PortalCfg_RolePermissions` contains the `Admins` compatibility permission mapping; subsequent non-administrator
       permission mappings require an audit or change record.
-- [ ] **Since W45**: the new `EnterpriseCapability.*` layered key seed mappings in `PortalCfg_RolePermissions.sql` **must be
+- [ ] The new `EnterpriseCapability.*` layered key seed mappings in `PortalCfg_RolePermissions.sql` **must be
       executed at deployment time** — that script is a deployment action and application startup does **not** execute it
       automatically; when unexecuted, the new keys are entirely unavailable to non-administrators (only `Admins` can use them
       via the administrator short-circuit).
-- [ ] **Since W47**: `PortalBiz_CollaborationItems.sql` (idempotent column addition for the parent-item column
+- [ ]  `PortalBiz_CollaborationItems.sql` (idempotent column addition for the parent-item column
       `ParentItemId`) and `PortalBiz_CollaborationItemParticipants.sql` (new table) migration scripts **must be executed at
       deployment time**; both are idempotent (`IF NOT EXISTS` / `IF COL_LENGTH ... IS NULL`) and do not affect existing data.
 - [ ] `machineKey`, Cookie `Secure` / `SameSite` and the HTTPS policy have been confirmed against the target environment;

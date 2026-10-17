@@ -180,6 +180,25 @@ foreach ($l in ($leaks | Select-Object -First 10)) {
     Write-Host ('  [Fail] N4 内部编号外泄: ' + $l)
 }
 
+# --- N5: 引用周期/工作包必须写全称，禁止裸缩写（P24 / W118）---
+# 裸缩写无法区分「周期组编号」与「工作包编号」，必须写作
+# `C-anp-P<周期组>` 或 `W-anp-P<工作包>`。排除小写设计令牌（如色阶 `p50`）。
+$bared = [System.Collections.Generic.List[string]]::new()
+foreach ($p in $publicPaths) {
+    if (-not (Test-Path -LiteralPath $p)) { continue }
+    foreach ($ln in (Get-ProseLines -FilePath $p)) {
+        if ($ln.Text -cmatch '(?<![A-Za-z0-9\-/])[PW]\d+(?![A-Za-z0-9.\-])') {
+            $rel = $p.Replace($RepoRoot + [IO.Path]::DirectorySeparatorChar, '')
+            $bared.Add(('{0}:{1}' -f $rel, $ln.Number))
+        }
+    }
+}
+
+Add-Check -Code 'N5-FULL-NAME' -Passed ($bared.Count -eq 0) -Detail ('裸编号缩写命中 ' + $bared.Count + ' 处')
+foreach ($b in ($bared | Select-Object -First 15)) {
+    Write-Host ('  [Fail] N5 裸缩写（请写 C-anp-Pn / W-anp-Pnnn 全称）: ' + $b)
+}
+
 # ------------------------------------------------- N1/N2/N3: 内部台账 -----
 if (-not $hasLedger) {
     Write-Host '  [GATE-NOTE] 未检测到内部台账 work-zone/dev/plans/ —— 跳过 N1/N2/N3'

@@ -1,6 +1,6 @@
 # 产品概览与定位（HIA-ASPNETPortal）
 
-> **P21 `W-anp-P124` 交付物**。本页回答"它是什么、给谁用、能做什么、边界在哪"，是产品族的定位入口；具体操作步骤见 [user-guide.md](user-guide.md)，部署与运维见 `deployment-checklist.md` 与 `operations-runbook.md`。
+> 本页回答"它是什么、给谁用、能做什么、边界在哪"，是产品族的定位入口；具体操作步骤见 [user-guide.md](user-guide.md)，部署与运维见 `deployment-checklist.md` 与 `operations-runbook.md`。
 
 ## 一、产品概览
 

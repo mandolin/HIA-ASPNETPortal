@@ -23,7 +23,7 @@ title: Testing checklist
       `Test-PortalWorkItemSmoke.ps1`, `Test-PortalBusinessPermissionAudit.ps1`,
       `Test-PortalCollaborationWorkflowSmoke.ps1`, `Test-PortalPublishReadiness.ps1` and
       `Test-PortalComplianceBaseline.ps1 -Profile Dev`.
-- [ ] `sql-review`: only generate or review scenario SQL; do not connect to a database unless an external
+- [ ] `sql-review`: only generate or review the scenario SQL for the specified release segment; do not connect to a database unless an external
       test configuration and `-Apply` are explicitly provided.
 - [ ] `http-local`: when local IIS Express is needed use `Test-PortalSmoke.ps1 -StartIISExpress -StopWhenComplete`,
       strictly as a development-side HTTP smoke — not equivalent to real IIS/HTTPS evidence.

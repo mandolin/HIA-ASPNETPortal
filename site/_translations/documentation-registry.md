@@ -48,10 +48,10 @@ nav_order: 1
    contracts** do exist → applicable. **`W-anp-P125` has created `docs/contracts/`**: `README.md` (boundary decision table +
    authoritative sources), `module-manifest.md` (the `module.json` contract) and `app-settings.md` (the `appSettings`
    contract), holding machine-readable contracts plus human-readable explanation.
-   - **Corrected to the facts** (W125 measured `PortalModulePackage.cs`): `schemaVersion: 2` does **not** require a
+   - **Corrected to the facts** (measured `PortalModulePackage.cs`): `schemaVersion: 2` does **not** require a
      `capability` section — `capability` is **optional**, and a module that does not declare it is Unclassified (legal); the
      wording in `module-development-guide.md` that "the loader requires a capability block" is **inaccurate** and has been
-     logged for `W-anp-P126` to review and fix.
+     logged for review and fix.
 3. **Product features and usage**: strengthened by `W-anp-P124` — added **`product-overview.md`** (product overview and
    positioning: what it is / who it is for / capability map / boundaries / compatibility / licence / where it fits);
    `user-guide.md` gained **a typical portal configuration flow**, **common administrator operations** and
