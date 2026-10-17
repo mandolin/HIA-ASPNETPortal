@@ -5,22 +5,29 @@ layout: table_wrappers
 <!--
   Controlled override of the just-the-docs theme's _layouts/default.html (C-anp-P22).
   Upstream source: just-the-docs v0.12.0, _layouts/default.html (47 lines).
-  Kept from upstream: the html-lang expression on the real <html> tag below
-  (page.lang -> site.lang -> 'en-US'; upstream ignores page.lang, which used to emit the
-  Chinese lang value on every English page), the sidebar include conditions, and the
-  search machinery (search_footer powers the overlay).
-  Deliberate restyle (C-anp-P22 docs overhaul, benchmark: docs.orchardcore.net =
-  "Material for MkDocs"): dark top bar with brand + search box + repo link + language
-  switch; left sidebar tree (upstream component, restyled); no breadcrumb bar
-  (Material has none); content grid with a sticky right "Table of contents" rail
-  (built below by splitting the rendered HTML on h2 ids); prev/next pagination within
-  the same section; dark footer bar. Landing pages use layouts/home.html and are
-  unaffected.
-  Upgrade rule: re-diff against upstream when bumping the theme version; re-apply the
-  html-lang expression first, then this shell.
-  NOTE: never write a literal html-lang markup sample inside this comment, and do not
-  use Liquid comments ({#- ... -#}) — both previously caused false "fix did not work"
-  conclusions or a silently bypassed layout (see docs/site-visual-baseline.md).
+
+  **DOM order is upstream's, verbatim**: sidebar include first, then .main — this is not
+  cosmetic. The theme's layout CSS keys on the ADJACENT sibling selector `.side-bar + .main`
+  (margin-left for the fixed sidebar). An earlier revision nested the sidebar inside .main,
+  which silently disabled that selector and broke the whole docs layout (sidebar floating,
+  content under the fixed column). Keep `sidebar → .main` adjacent, exactly like upstream.
+
+  Restyle (C-anp-P22 docs overhaul, benchmark: docs.orchardcore.net = Material for MkDocs):
+  a full-width dark top bar (body level, above the fixed sidebar) with brand + search box +
+  repo link + language switch; no breadcrumb bar (Material has none); content grid with a
+  sticky right "Table of contents" rail built below by splitting the rendered HTML on h2
+  ids; prev/next pagination within the same section; dark footer bar. Landing pages use
+  layouts/home.html and are unaffected.
+
+  Kept from upstream: the html-lang expression on the real <html> tag below (page.lang ->
+  site.lang -> 'en-US'; upstream ignores page.lang, which used to emit the Chinese lang
+  value on every English page), and the search machinery (search_footer powers the overlay).
+  Upgrade rule: re-diff against upstream on theme bumps; re-apply the html-lang expression
+  and this shell.
+
+  NOTE: never write a literal html-lang markup sample inside this comment, and do not use
+  Liquid comments ({#- ... -#}) — both previously caused false conclusions or a silently
+  bypassed layout (see docs/site-visual-baseline.md).
 -->
 
 <!DOCTYPE html>
@@ -45,14 +52,15 @@ layout: table_wrappers
     {% include header_custom.html %}
   </header>
 
+  {% if page.nav_enabled == true %}
+    {% include components/sidebar.html %}
+  {% elsif layout.nav_enabled == true and page.nav_enabled == nil %}
+    {% include components/sidebar.html %}
+  {% elsif site.nav_enabled != false and layout.nav_enabled == nil and page.nav_enabled == nil %}
+    {% include components/sidebar.html %}
+  {% endif %}
+
   <div class="main" id="top">
-    {% if page.nav_enabled == true %}
-      {% include components/sidebar.html %}
-    {% elsif layout.nav_enabled == true and page.nav_enabled == nil %}
-      {% include components/sidebar.html %}
-    {% elsif site.nav_enabled != false and layout.nav_enabled == nil and page.nav_enabled == nil %}
-      {% include components/sidebar.html %}
-    {% endif %}
     <div class="main-content-wrap">
       <div id="main-content" class="main-content">
         <div class="docs-grid">

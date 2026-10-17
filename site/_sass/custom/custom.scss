@@ -400,6 +400,8 @@
 // Colours stay HIA: bar #172633, primary #0047AB, line #DCE5EC, muted #667782.
 
 .docs-topbar {
+  position: relative;
+  z-index: 20;
   display: flex;
   align-items: center;
   gap: 1.4rem;
@@ -477,9 +479,11 @@
   &:hover { border-color: #ffffff; color: #ffffff; }
 }
 
-// Content grid: article + sticky right TOC rail.
+// Content grid: article + sticky right TOC rail. The theme's .main carries a
+// max-width ($content-width, 50rem) that would clamp the three-column grid —
+// release it here and let .docs-grid own the 61rem Material container width.
 
-.docs-body .main-content {
+.docs-body .main {
   max-width: none;
 }
 
@@ -490,6 +494,32 @@
   align-items: start;
   max-width: 61rem;
   margin: 0 auto;
+}
+
+// Typography scale matched to Material for MkDocs (docs.orchardcore.net):
+// 16px body, ~32px h1, ~24px h2, 1.6 line height.
+
+.docs-article {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.docs-article h1 {
+  font-size: 2em;
+  line-height: 1.25;
+  margin: 0 0 1em;
+}
+
+.docs-article h2 {
+  font-size: 1.5em;
+  line-height: 1.3;
+  margin: 1.8em 0 0.7em;
+}
+
+.docs-article h3 {
+  font-size: 1.17em;
+  line-height: 1.35;
+  margin: 1.5em 0 0.6em;
 }
 
 .docs-toc {
@@ -534,6 +564,12 @@
 }
 
 // Material-style headings: uppercase display + tighter tracking (CJK unaffected).
+
+// Sidebar bottom theme credit ("This site uses Just the Docs") — Material's
+// sidebar has no such block; hide it (upstream licence note stays in the repo).
+.docs-body .side-bar .site-footer {
+  display: none;
+}
 
 .docs-body .main-content h1,
 .docs-body .main-content h2 {

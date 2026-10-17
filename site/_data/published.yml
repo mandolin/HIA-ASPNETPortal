@@ -38,7 +38,7 @@
 #     navigation skeleton.</en>
 # </lang>
 - doc: product-overview.md
-  path: overview
+  path: product-overview
   parent: 产品概览
 
 - doc: architecture.md

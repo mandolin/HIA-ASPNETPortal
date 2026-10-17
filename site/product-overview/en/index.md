@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Product overview
-permalink: /en/overview/
+permalink: /en/product-overview/
 title: Product overview and positioning
 ---
 # Product overview and positioning (HIA-ASPNETPortal)

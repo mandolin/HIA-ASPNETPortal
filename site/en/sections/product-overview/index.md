@@ -13,5 +13,5 @@ Answers "what this is, whether it is usable, and how to start".
 | Page | |
 | --- | --- |
 | [Home]({{ site.baseurl }}/en/) | |
-| [Product overview]({{ site.baseurl }}/en/overview/) | |
+| [Product overview]({{ site.baseurl }}/en/product-overview/) | |
 | [Documentation index]({{ site.baseurl }}/en/docs-index/) | |

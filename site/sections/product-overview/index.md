@@ -13,5 +13,5 @@ permalink: /sections/product-overview/
 | 页面 | |
 | --- | --- |
 | [首页]({{ site.baseurl }}/) | |
-| [产品概览与定位]({{ site.baseurl }}/overview/) | |
+| [产品概览与定位]({{ site.baseurl }}/product-overview/) | |
 | [文档索引]({{ site.baseurl }}/docs-index/) | |

@@ -555,15 +555,22 @@ foreach ($e in $entries) { if ($e.path) { $null = $publishedPaths.Add($e.path) }
 
 foreach ($pf in $pageFiles) {
     $rel = $pf.FullName.Substring($siteDir.Length).Replace('\', '/').TrimStart('/')
-    if ($rel -notmatch '^sections/[^/]+/index\.md$' -and $rel -ne 'index.md') { continue }
+    if ($rel -notmatch '^sections/[^/]+/index\.md$' -and $rel -ne 'index.md' -and $rel -notmatch '^[a-z0-9-]+/index\.md$') { continue }
+    if ($rel -match '^en/') { continue }  # en/ 树由下面的反向循环检查，这里只查中文侧
 
-    # rel 形如 sections/<slug>/index.md 或 index.md；slug 直接从 rel 取，避免对根路径再 Split-Path
+    # rel 形如 sections/<slug>/index.md、<顶层目录>/index.md 或 index.md；slug 直接从 rel 取，
+    # 避免对根路径再 Split-Path。顶层目录手写页（overview/features/compare 等营销页）也纳入成对检查 ——
+    # 但若该目录是 published.yml 声明的**生成目录**（如 product-overview），则跳过（生成流程已保证成对）。
     if ($rel -eq 'index.md') {
         $enRel = 'en/index.md'
     }
+    elseif ($rel -match '^sections/([^/]+)/index\.md$') {
+        $enRel = 'en/sections/' + $Matches[1] + '/index.md'
+    }
     else {
-        $slug = ($rel -split '/')[1]
-        $enRel = 'en/sections/' + $slug + '/index.md'
+        $seg = ($rel -split '/')[0]
+        if ($publishedPaths.Contains($seg)) { continue }
+        $enRel = 'en/' + $seg + '/index.md'
     }
     $enPair = Join-Path $siteDir ($enRel -replace '/', '\')
     if (-not (Test-Path -LiteralPath $enPair)) {
@@ -574,16 +581,19 @@ foreach ($pf in $pageFiles) {
 foreach ($pf in $pageFiles) {
     $rel = $pf.FullName.Substring($siteDir.Length).Replace('\', '/').TrimStart('/')
     if ($publishedPaths.Contains((Split-Path $rel -Parent))) { continue }
-    if ($rel -notmatch '^en/sections/[^/]+/index\.md$' -and $rel -ne 'en/index.md') { continue }
+    if ($rel -notmatch '^en/sections/[^/]+/index\.md$' -and $rel -ne 'en/index.md' -and $rel -notmatch '^en/[a-z0-9-]+/index\.md$') { continue }
 
     if ($rel -eq 'en/index.md') {
         $zhRel = 'index.md'
     }
+    elseif ($rel -match '^en/sections/([^/]+)/index\.md$') {
+        $zhRel = 'sections/' + $Matches[1] + '/index.md'
+    }
     else {
-        # rel 形如 en/sections/<slug>/index.md，其父目录是 en/sections/<slug>
-        $slug = Split-Path (Split-Path $rel -Parent) -Leaf -ErrorAction SilentlyContinue
-        if ([string]::IsNullOrWhiteSpace($slug)) { continue }
-        $zhRel = 'sections/' + $slug + '/index.md'
+        # rel 形如 en/<顶层目录>/index.md；若该目录是 published.yml 声明的生成目录则跳过
+        $seg = ($rel -split '/')[1]
+        if ($publishedPaths.Contains($seg)) { continue }
+        $zhRel = $seg + '/index.md'
     }
     $zhPair = Join-Path $siteDir ($zhRel -replace '/', '\')
     if (-not (Test-Path -LiteralPath $zhPair)) {

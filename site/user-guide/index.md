@@ -7,7 +7,7 @@ title: 用户指南
 ---
 # 用户指南
 
-> 产品定位、适用对象、能力地图与边界见 [product-overview.md]({{ site.baseurl }}/overview/)。本页聚焦**怎么跑起来、怎么用、出问题怎么办**。
+> 产品定位、适用对象、能力地图与边界见 [product-overview.md]({{ site.baseurl }}/product-overview/)。本页聚焦**怎么跑起来、怎么用、出问题怎么办**。
 
 ## 项目用途
 

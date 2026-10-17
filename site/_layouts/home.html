@@ -32,17 +32,17 @@ nav_enabled: false
     <a class="oc-nav-brand" href="{{ '/' | relative_url }}">HIA-ASPNETPortal</a>
     <nav class="oc-nav-links" aria-label="{{ '主导航' | default: 'Main' }}">
       {%- if is_en -%}
+        <a class="oc-nav-link" href="{{ '/en/overview/' | relative_url }}">Overview</a>
+        <a class="oc-nav-link" href="{{ '/en/features/' | relative_url }}">Features</a>
+        <a class="oc-nav-link" href="{{ '/en/compare/' | relative_url }}">Compare</a>
         <a class="oc-nav-link" href="{{ '/en/user-guide/' | relative_url }}">Get started</a>
-        <a class="oc-nav-link" href="{{ '/en/sections/reference/' | relative_url }}">Reference</a>
-        <a class="oc-nav-link" href="{{ '/en/sections/develop/' | relative_url }}">Develop</a>
-        <a class="oc-nav-link" href="{{ '/en/sections/operate/' | relative_url }}">Operate</a>
         <a class="oc-nav-link" href="{{ '/en/docs-index/' | relative_url }}">Docs</a>
         <a class="oc-nav-link" href="https://github.com/mandolin/HIA-ASPNETPortal">GitHub</a>
       {%- else -%}
+        <a class="oc-nav-link" href="{{ '/overview/' | relative_url }}">产品总览</a>
+        <a class="oc-nav-link" href="{{ '/features/' | relative_url }}">功能</a>
+        <a class="oc-nav-link" href="{{ '/compare/' | relative_url }}">选型对比</a>
         <a class="oc-nav-link" href="{{ '/user-guide/' | relative_url }}">快速上手</a>
-        <a class="oc-nav-link" href="{{ '/sections/reference/' | relative_url }}">参考</a>
-        <a class="oc-nav-link" href="{{ '/sections/develop/' | relative_url }}">开发</a>
-        <a class="oc-nav-link" href="{{ '/sections/operate/' | relative_url }}">运维</a>
         <a class="oc-nav-link" href="{{ '/docs-index/' | relative_url }}">全部文档</a>
         <a class="oc-nav-link" href="https://github.com/mandolin/HIA-ASPNETPortal">GitHub</a>
       {%- endif -%}
