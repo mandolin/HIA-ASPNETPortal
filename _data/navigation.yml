@@ -1,0 +1,46 @@
+# <lang>
+#   <zh-CN>双语导航骨架（C-anp-P22 `W-anp-P130` 建立，`W-anp-P132` 改为**纯分区**）。
+#     顺序严格沿用 `docs/documentation-map.md` 的读者路径：
+#     产品入口 → 评估 → 快速上手 → 学习 → 参考 → 开发 → 运维 → 变更。
+#     每条必须**同时提供中文与英文标题**，缺一即视为未就绪（原则4：双语并行）。
+#
+#     **为何没有 `url`（`W-anp-P132` 的修正）**：初版给每个分区都写了理想化的 `url`
+#     （`/overview/`、`/quickstart/`…），但当时**并没有对应页面**，于是导航项直接指向 404，
+#     且没有任何门禁发现。现改为**纯分区**：分区只作为分组标题，**不带链接**；
+#     真正可点的是通过 front matter `parent` 挂到该分区下的**已上架页面**
+#     （其路径由 `_data/published.yml` 的 `path` 唯一决定）。
+#     分区下暂无页面时只是不展开，**不会出现坏链**。</zh-CN>
+#   <en>Bilingual navigation skeleton (established in C-anp-P22 `W-anp-P130`, changed to **pure sections** in `W-anp-P132`).
+#     The order strictly follows the reader path in `docs/documentation-map.md`:
+#     product entry → evaluate → quick start → learn → reference → develop → operate → change.
+#     Every entry must carry **both Chinese and English titles**; a missing one means not ready (Principle 4: bilingual parity).
+#
+#     **Why there is no `url` (`W-anp-P132` fix)**: the first version gave every section an idealised `url`
+#     (`/overview/`, `/quickstart/`…) when **no corresponding page existed**, so navigation items pointed straight at 404s
+#     and no gate noticed. Sections are now **pure groups**: they act as group headings with **no link**, and the clickable
+#     items are the **published pages** attached via front matter `parent` (their path is determined solely by `path` in
+#     `_data/published.yml`). A section with no pages simply does not expand — **no broken links**.</en>
+# </lang>
+- title: 产品概览
+  title_en: Product overview
+
+- title: 评估
+  title_en: Evaluate
+
+- title: 快速上手
+  title_en: Quick start
+
+- title: 学习
+  title_en: Learn
+
+- title: 参考
+  title_en: Reference
+
+- title: 开发
+  title_en: Develop
+
+- title: 运维
+  title_en: Operate
+
+- title: 变更
+  title_en: Changes

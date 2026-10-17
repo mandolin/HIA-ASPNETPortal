@@ -1,0 +1,119 @@
+---
+layout: table_wrappers
+nav_enabled: false
+---
+
+<!--
+  Landing layout for the site home page (C-anp-P22 overhaul).
+  Benchmark: https://orchardcore.net/ — its main site is a full-width marketing shell
+  (own top nav, hero with copyable command block, stat row, card grids, CTA bands,
+  FAQ accordion, multi-column footer), while its *documentation* is a separate subsite
+  with a different style. We mirror exactly that split:
+    - this layout  = OrchardCore main-site style (no sidebar, no theme header)
+    - default.html = the documentation style (sidebar + search), unchanged.
+  Derived from the controlled default.html override: the html-lang expression below is
+  kept identical (page.lang -> site.lang -> 'en-US') and the same upgrade rule applies
+  (re-diff against upstream on theme bumps). No Liquid comments ({#- ... -#}) here —
+  see the note in default.html for why.
+-->
+
+<!DOCTYPE html>
+
+<html lang="{{ page.lang | default: site.lang | default: 'en-US' }}">
+{% include head.html %}
+<body>
+  {% include icons/icons.html %}
+
+  {%- assign is_en = false -%}
+  {%- if page.lang == 'en' -%}{%- assign is_en = true -%}{%- endif -%}
+  {%- assign nav_items = site.data.navigation -%}
+
+  <header class="oc-nav">
+    <a class="oc-nav-brand" href="{{ '/' | relative_url }}">HIA-ASPNETPortal</a>
+    <nav class="oc-nav-links" aria-label="{{ '主导航' | default: 'Main' }}">
+      {%- if is_en -%}
+        <a class="oc-nav-link" href="{{ '/en/overview/' | relative_url }}">Overview</a>
+        <a class="oc-nav-link" href="{{ '/en/features/' | relative_url }}">Features</a>
+        <a class="oc-nav-link" href="{{ '/en/compare/' | relative_url }}">Compare</a>
+        <a class="oc-nav-link" href="{{ '/en/user-guide/' | relative_url }}">Get started</a>
+        <a class="oc-nav-link" href="{{ '/en/docs-index/' | relative_url }}">Docs</a>
+        <a class="oc-nav-link" href="https://github.com/mandolin/HIA-ASPNETPortal">GitHub</a>
+      {%- else -%}
+        <a class="oc-nav-link" href="{{ '/overview/' | relative_url }}">产品总览</a>
+        <a class="oc-nav-link" href="{{ '/features/' | relative_url }}">功能</a>
+        <a class="oc-nav-link" href="{{ '/compare/' | relative_url }}">选型对比</a>
+        <a class="oc-nav-link" href="{{ '/user-guide/' | relative_url }}">快速上手</a>
+        <a class="oc-nav-link" href="{{ '/docs-index/' | relative_url }}">全部文档</a>
+        <a class="oc-nav-link" href="https://github.com/mandolin/HIA-ASPNETPortal">GitHub</a>
+      {%- endif -%}
+      {% include header_custom.html %}
+    </nav>
+  </header>
+
+  <main id="main-content" class="oc-main">
+    {{ content }}
+  </main>
+
+  <footer class="oc-footer">
+    <div class="oc-page">
+      <div class="oc-footer-cols">
+        <div>
+          <h4 class="oc-footer-title">{%- if is_en -%}Documentation{%- else -%}文档{%- endif -%}</h4>
+          <ul>
+            {%- if is_en -%}
+              <li><a href="{{ '/en/sections/product-overview/' | relative_url }}">Product overview</a></li>
+              <li><a href="{{ '/en/sections/quick-start/' | relative_url }}">Quick start</a></li>
+              <li><a href="{{ '/en/sections/reference/' | relative_url }}">Reference</a></li>
+              <li><a href="{{ '/en/documentation-map/' | relative_url }}">Documentation map</a></li>
+            {%- else -%}
+              <li><a href="{{ '/sections/product-overview/' | relative_url }}">产品概览</a></li>
+              <li><a href="{{ '/sections/quick-start/' | relative_url }}">快速上手</a></li>
+              <li><a href="{{ '/sections/reference/' | relative_url }}">参考</a></li>
+              <li><a href="{{ '/documentation-map/' | relative_url }}">文档地图</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+        <div>
+          <h4 class="oc-footer-title">{%- if is_en -%}Operations{%- else -%}运维与治理{%- endif -%}</h4>
+          <ul>
+            {%- if is_en -%}
+              <li><a href="{{ '/en/sections/operate/' | relative_url }}">Deployment and operations</a></li>
+              <li><a href="{{ '/en/audit-retention-policy/' | relative_url }}">Audit retention</a></li>
+              <li><a href="{{ '/en/deployment-checklist/' | relative_url }}">Release checklist</a></li>
+              <li><a href="{{ '/en/deployment-default-credentials/' | relative_url }}">Default credentials</a></li>
+            {%- else -%}
+              <li><a href="{{ '/sections/operate/' | relative_url }}">部署与运维</a></li>
+              <li><a href="{{ '/audit-retention-policy/' | relative_url }}">审计保留期</a></li>
+              <li><a href="{{ '/deployment-checklist/' | relative_url }}">发布检查清单</a></li>
+              <li><a href="{{ '/deployment-default-credentials/' | relative_url }}">默认凭据治理</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+        <div>
+          <h4 class="oc-footer-title">{%- if is_en -%}Project{%- else -%}项目{%- endif -%}</h4>
+          <ul>
+            {%- if is_en -%}
+              <li><a href="{{ '/en/versioning/' | relative_url }}">Versioning</a></li>
+              <li><a href="{{ '/en/architecture/' | relative_url }}">Architecture</a></li>
+              <li><a href="{{ '/en/third-party-dependencies/' | relative_url }}">Dependencies</a></li>
+              <li><a href="https://github.com/mandolin/HIA-ASPNETPortal">GitHub repository</a></li>
+            {%- else -%}
+              <li><a href="{{ '/versioning/' | relative_url }}">版本策略</a></li>
+              <li><a href="{{ '/architecture/' | relative_url }}">架构概览</a></li>
+              <li><a href="{{ '/third-party-dependencies/' | relative_url }}">第三方依赖</a></li>
+              <li><a href="https://github.com/mandolin/HIA-ASPNETPortal">GitHub 仓库</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+      </div>
+      <p class="oc-footer-note">
+        {%- if is_en -%}
+          MIT licensed. ASP.NET Web Forms on .NET Framework 4.8. This documentation site is bilingual (Chinese / English).
+        {%- else -%}
+          MIT 许可 · ASP.NET Web Forms / .NET Framework 4.8 · 本站点提供中英双语文档
+        {%- endif -%}
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

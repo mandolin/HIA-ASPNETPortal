@@ -1,0 +1,55 @@
+# <lang>
+#   <zh-CN>Jekyll 站点配置（C-anp-P22 `W-anp-P130`）。
+#     主题：`Just the Docs`（**远程主题**）—— 由 GitHub Pages **原生构建**，无自建 CI 链路；
+#     该主题"无需特殊插件"，可跑在 GitHub Pages 标准 Jekyll 编译器上，从而绕开其插件白名单限制。
+#     以上取舍依据见 `work-zone/dev/plans/works/W-anp-P129-github-pages-research.md`。
+#   <en>Jekyll site configuration (C-anp-P22 `W-anp-P130`).
+#     Theme: `Just the Docs` (**remote theme**) — built **natively** by GitHub Pages with no custom CI in the path;
+#     the theme "requires no special plugins" and runs on GitHub Pages' standard Jekyll compiler, thereby sidestepping
+#     its plugin allowlist. See `work-zone/dev/plans/works/W-anp-P129-github-pages-research.md` for the trade-offs.</en>
+# </lang>
+title: HIA-ASPNETPortal
+description: 企业内网 Web Forms 门户平台 / Enterprise intranet portal platform on ASP.NET Web Forms
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+
+# <lang>
+#   <zh-CN>双语并行：中文位于站点根，英文位于 /en/。两棵树的页面**一一对应**，
+#     不存在"只有中文没有英文"的已上架页面 —— 这是本周期的硬约束。</zh-CN>
+#   <en>Bilingual parity: Chinese lives at the site root, English under /en/. The two trees are **one-to-one**;
+#     no published page may exist in Chinese without its English counterpart — a hard constraint of this cycle.</en>
+# </lang>
+lang: zh-CN
+
+# <lang>
+#   <zh-CN>视觉基调：**HIA 系列主配色**（用户指定）。配色权威源是 HIA 系列自己的设计令牌 ——
+#     `HIA-Theme-Builder/HIA/web/src/style.css` 的 `:root`（primary `#0047AB`、secondary `#00A8D3`、
+#     蓝色阶 p50–p900、surface/panel/line/text/muted、Inter + Noto Sans CJK SC）。
+#     自定义方案定义在 `site/_sass/color_schemes/hia.scss`（变量名已对照本地 gem
+#     `just-the-docs v0.12.0` 的 `light.scss` 核实）；landing 组件样式（hero 渐变卡、
+#     分区卡片网格、页头品牌线）在 `site/_sass/custom/custom.scss`，取值同源。
+#     注意主题文档警告「不要直接编辑 `_sass/support/variables.scss`」——本文件走的是
+#     主题支持的 `color_scheme` 机制，不触碰主题内部文件。</zh-CN>
+#   <en>Visual tone: the **HIA series' main palette** (user request). The colour authority is the HIA series' own
+#     design tokens — the `:root` of `HIA-Theme-Builder/HIA/web/src/style.css` (primary `#0047AB`, secondary
+#     `#00A8D3`, blue scale p50–p900, surface/panel/line/text/muted, Inter + Noto Sans CJK SC).
+#     The custom scheme lives in `site/_sass/color_schemes/hia.scss` (variable names verified against the local
+#     gem `just-the-docs v0.12.0` `light.scss`); landing component styles (hero gradient card, section card grid,
+#     header brand line) are in `site/_sass/custom/custom.scss`, same source. Note the theme docs warn "do not edit
+#     `_sass/support/variables.scss` directly" — this uses the theme-supported `color_scheme` mechanism and touches
+#     no theme-internal files.</en>
+# </lang>
+color_scheme: hia
+search_enabled: true
+heading_anchors: true
+
+# <lang>
+#   <zh-CN>生成物由 `dev/scripts/Build-PortalSite.ps1` 从 `docs/` 与翻译源产出；
+#     本目录为**站点源码版本化位置**，不是运行期输出。</zh-CN>
+#   <en>Output is produced by `dev/scripts/Build-PortalSite.ps1` from `docs/` plus the translation source;
+#   this directory is the **versioned site source**, not runtime output.</en>
+# </lang>
+exclude:
+  - README.md
+  - vendor
+  - Gemfile
+  - Gemfile.lock
