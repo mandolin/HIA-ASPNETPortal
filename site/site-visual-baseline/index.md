@@ -146,8 +146,12 @@ title: 官网视觉基线
 - **landing 样式**：`site/_sass/custom/custom.scss` + `site/_layouts/home.html`（主题官方覆盖点与自定义 layout）。
   **对标基准为 orchardcore.net**（用户指定），且照它"主站与文档两套风格"的做法：**首页/营销页**照搬
   主站板块顺序——自带顶部导航、hero（大字标题 + 可复制命令块 + 双 CTA）、统计行、全大写小标题的能力卡与功能卡栅格、
-  CTA 带、入手方式、FAQ 折叠（原生 `<details>`，无 JS 依赖）、多列页脚；**文档页**仍用主题的 sidebar + 搜索风格
-  （即 Orchard Core 文档子站的另一套风格），两者刻意不同。板块结构照搬，配色保持 HIA 令牌。
+  CTA 带、入手方式、FAQ 折叠（原生 `<details>`，无 JS 依赖）、多列页脚；
+  **文档页**重写为 docs.orchardcore.net（Material for MkDocs）的风格：深色顶栏（品牌 + 搜索框 +
+  仓库链接 + 语言切换）、左侧导航树（沿用主题组件重新着色）、**无面包屑**（与 Material 一致）、
+  正文 + **右栏 sticky「本页目录」**（由 layout 对渲染 HTML 按 h2 拆分生成）、同一分区内**上一篇/下一篇**分页、
+  大写标题带锚点、admonition 式引用块（HIA p50 底 + 主色左条）、**深色代码块**、深色页脚条。
+  两套风格刻意不同（对应 OC 主站与文档子站的划分）。板块结构照搬，配色保持 HIA 令牌。
 - **变量名**：对照本地 gem `just-the-docs v0.12.0` 的 `_sass/color_schemes/light.scss`
   逐一核实后使用，非猜测。
 - **代码高亮**：方案文件末尾保留上游的
