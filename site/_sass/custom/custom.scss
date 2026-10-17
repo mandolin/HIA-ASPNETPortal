@@ -406,9 +406,9 @@
   align-items: center;
   gap: 1.4rem;
   // Brand/search/repo align with the layout container: inline padding equals the
-  // centred 1220px container's side margin on wide screens (measured on
-  // docs.orchardcore.net), falling back to 1.6rem below the container width.
-  padding: 0.7rem max(1.6rem, calc((100% - 1220px) / 2));
+  // centred container's side margin on wide screens (tracks --docs-container),
+  // falling back to 1.6rem below the container width.
+  padding: 0.7rem max(1.6rem, calc((100% - var(--docs-container, 1220px)) / 2));
   background: #172633;
 }
 
@@ -601,17 +601,38 @@
 }
 
 // ---- Material container geometry (>=66rem) ----------------------------------
-// Values measured live on docs.orchardcore.net (Material for MkDocs, root 20px):
-// grid 1220px centred; primary sidebar 242px; article 736px; TOC 242px with a
-// left border but NO gap between the columns. Material's own rem numbers
-// (61rem / 12.1rem) assume a 20px root — at jtd's 16px root they would render
-// 20% too narrow, so the px values are used directly.
+// Measured live on docs.orchardcore.net (Material for MkDocs): the layout is
+// rem-based against a root font-size that STEPS UP on wide screens —
+// root 20px (grid 1220, sidebar 242) → 22px (1342/266) at ~1500w → 24px
+// (1464/290) at ~1900w. Our first port fixed 1220px, which reads "too narrow"
+// on wide monitors exactly because Orchard keeps growing. Replicated with two
+// custom properties stepped at 1500px/1900px; article inner padding measured
+// there too (margin-inline 28.8px, padding-top 14.4px at root 24 → 1.2rem/0.6rem).
+.docs-body {
+  --docs-container: 1220px;
+  --docs-sidebar: 242px;
+}
+
+@media (min-width: 1500px) {
+  .docs-body {
+    --docs-container: 1342px;
+    --docs-sidebar: 266px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .docs-body {
+    --docs-container: 1464px;
+    --docs-sidebar: 290px;
+  }
+}
+
 @media (min-width: 66rem) {
   .docs-body .side-bar {
-    left: max(0px, calc((100% - 1220px) / 2));
-    width: 242px;
+    left: max(0px, calc((100% - var(--docs-container)) / 2));
+    width: var(--docs-sidebar);
     // Theme clamps the sidebar with min-width: $nav-width at lg — release it.
-    min-width: 242px;
+    min-width: var(--docs-sidebar);
     // Topbar is 4rem tall and sits above the fixed sidebar in flow.
     height: calc(100vh - 4rem);
   }
@@ -619,18 +640,19 @@
   // The nav column inside the sidebar is 15.5rem at lg — match the bar width.
   .docs-body .side-bar .site-nav,
   .docs-body .side-bar .site-footer {
-    width: 242px;
+    width: var(--docs-sidebar);
   }
 
   // Content area = container minus the sidebar; the docs-grid then fills it
   // edge to edge (article + right TOC rail, no gap — as measured on Orchard).
   .docs-body .side-bar + .main {
-    margin-left: calc(max(0px, (100% - 1220px) / 2) + 242px);
-    margin-right: max(0px, calc((100% - 1220px) / 2));
+    margin-left: calc(max(0px, (100% - var(--docs-container)) / 2) + var(--docs-sidebar));
+    margin-right: max(0px, calc((100% - var(--docs-container)) / 2));
   }
 
   // jtd's content wrappers add ~2rem padding each side, which would inset the
-  // grid and break the container alignment — zero them here.
+  // grid and break the container alignment — zero them here (the article below
+  // carries the inner padding instead, like Material's .md-content__inner).
   .docs-body .main-content-wrap,
   .docs-body .main-content {
     padding-left: 0;
@@ -640,13 +662,15 @@
   .docs-body .main .docs-grid {
     max-width: none;
     margin: 0;
-    grid-template-columns: minmax(0, 1fr) 242px;
+    grid-template-columns: minmax(0, 1fr) var(--docs-sidebar);
     gap: 0;
   }
 
-  // Keep article text off the TOC's left border (the TOC pads itself).
+  // Article inner padding (Orchard: 28.8px sides, 14.4px top at root 24):
+  // keeps text off the sidebar edge on the left and off the TOC's left border
+  // on the right.
   .docs-body .docs-article {
-    padding-right: 1.5rem;
+    padding: 1rem 1.8rem 2rem;
   }
 }
 
@@ -759,7 +783,7 @@
 // Dark footer bar (Material sandwich: dark — light — dark).
 
 .docs-footer {
-  max-width: 1220px;
+  max-width: var(--docs-container, 1220px);
   margin: 3rem auto 0;
   background: #172633;
   border-radius: 0 0 10px 10px;
