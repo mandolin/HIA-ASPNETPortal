@@ -39,11 +39,10 @@ surface 和 solution/project discovery。生成的 DotNetDoc extraction、HIA do
 
 `dotnetdoc.api-only.config.json` 是排障回退配置，只消费四份 XML 文档。`dotnetdoc.source-probe.config.json` 是 source relation
 研究配置，用于观察 C# source extractor 在缺少完整项目上下文时的诊断表现；它不作为默认门禁，也不阻塞门户文档化主线。
-当 HIA-Documentation-Sys 后续提供更稳定的项目级 source linkage 后，再把 source relation 提升为默认 contract。
 
 ## 覆盖率分层
 
-P13.3 起，文档化覆盖率不使用单一百分比表示，而按风险和交付价值拆成三档：
+文档化覆盖率不使用单一百分比表示，而按风险和交付价值拆成三档：
 
 | 分层 | 范围 | 当前要求 |
 | --- | --- | --- |
@@ -53,16 +52,6 @@ P13.3 起，文档化覆盖率不使用单一百分比表示，而按风险和�
 
 `Get-PortalDocumentationBaseline.ps1` 输出的是 inventory，而不是覆盖率分数。它可以记录哪些区域含 XML 注释、哪些目录属于生成物边界，但不替代人工判断注释是否准确。
 
-## HIA 文档化通知
-
-HIA-Documentation-Sys 的目标项目通知已改为拉取式通知。本项目不再等待外部项目写入 `dev/notify/`，而是在需要检查
-文档化工具链变化时主动读取 HIA-Documentation-Sys 的**内部通知目录**（位于该项目的私有仓库中）。
-
-可使用 `dev/scripts/Get-HiaDocumentationNotifications.ps1` 查看最近通知。该脚本只读取通知内容，不复制文件、不修改源码、
-不改变依赖，也不把 HIA-Documentation-Sys 变成本项目构建、测试、IIS Express 启动或发布流程的硬依赖。
-
-P13.3 的 `Test-PortalDocumentationReadiness.ps1` 会把通知来源可读性作为固定检查项。若本机没有 HIA-Documentation-Sys，
-结果记录为 `Pending`，不代表门户自身构建失败。
 
 ## 生成目录与提交策略
 
@@ -76,9 +65,6 @@ P13.3 的 `Test-PortalDocumentationReadiness.ps1` 会把通知来源可读性作
 `portal: verify public documentation` 会检查这些未确认生成目录没有进入 Git 已追踪文件。若将来需要发布版本化文档，
 必须先定义所有权、许可证、清理方式、发布位置、访问边界和回退方案，并更新本指南、公开索引和门禁。
 
-当 HIA-Documentation-Sys 的 .NET 文档化机制、输出 contract、source linkage 和生成产物边界稳定后，旧 SHFB/Doxygen
-现场不再作为长期兼容目标保留。届时可按内部清理计划删除上述历史生成输出和空配置足迹；若仍需保留少量信息，应先迁移为
-HIA 文档化工具链输入说明，而不是继续提交或发布 SHFB/Doxygen 生成物。
 
 ## 本地验证顺序
 
@@ -86,7 +72,7 @@ HIA 文档化工具链输入说明，而不是继续提交或发布 SHFB/Doxygen
 2. 需要确认 JavaScript 文档工具时，运行 JSDoc pilot；生成物保持在被忽略目录。
 3. 需要确认 C# XML 输出时，运行 `portal: verify .NET XML documentation`；必要时由该任务先构建 Debug 配置。
 4. 需要确认 HIA DotNetDoc 输出 contract 时，运行 `portal: build .NET DotNetDoc pilot`。
-5. 需要留存 P13.3 文档化证据时，运行：
+5. 需要留存 文档化证据时，运行：
 
 ```powershell
 dev/scripts/New-PortalDocumentationEvidencePackage.ps1

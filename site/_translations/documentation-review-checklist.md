@@ -8,7 +8,7 @@ nav_order: 1
 
 # Documentation review walkthrough checklist
 
-> **A P21 `W-anp-P127` deliverable.** This is a **manual walkthrough checklist** covering the part of documentation
+> **A `W-anp-P127` deliverable.** This is a **manual walkthrough checklist** covering the part of documentation
 > validation that "automation cannot prove".
 > Automated gates prove only structure (links resolve, references exist, bilingual structure is complete, index coverage);
 > **whether the semantics are correct, whether the examples actually run, and whether the wording misleads readers must be

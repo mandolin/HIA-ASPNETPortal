@@ -8,7 +8,7 @@ nav_order: 1
 
 # Documentation registry (HIA-ASPNETPortal)
 
-> **A P21 D1 deliverable.** Registers this project's "applicable / not applicable" stance against the 7 documentation
+> **A D1 deliverable.** Registers this project's "applicable / not applicable" stance against the 7 documentation
 > families of the *HIA project documentation structure and template specification*, and records the authoritative location,
 > maintenance responsibility, sync trigger and verification method for each. Internal planning / ADRs / research drafts stay
 > in a **separate private repository**; only content reviewed as suitable for its audience enters the public `docs/`.
@@ -37,7 +37,7 @@ nav_order: 1
    mixed-language surfaces **0**, 12 high-risk scripts with **0** missing the HIA marker — all gated by
    `Test-PortalRopCommentBaseline.ps1` (L0).
    - ⚠️ This line originally recorded "474 files / 35 findings / 5 to-dos / 2 missing node documentation", registered **at the
-     time of v1.0.0** and since changed by the P19 governance; `W-anp-P123` refreshed it against measurement.
+     time of v1.0.0** and since changed by the governance; `W-anp-P123` refreshed it against measurement.
    - `HighRiskScriptCandidate` (29) is a candidate set generated **by filename keyword** and is **not a defect count**; it
      and the PowerShell layer's `RiskLevel=High` (12) are two different sets.
    - **Semantic boundary**: complete structural markers ≠ semantically sufficient comments. Semantic quality is carried by

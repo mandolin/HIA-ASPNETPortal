@@ -125,17 +125,9 @@
   path: release-notes-template
   parent: 变更
 
-- doc: documentation-registry.md
-  path: documentation-registry
-  parent: 参考
-
 - doc: README.md
   path: docs-index
   parent: 产品概览
-
-- doc: documentation-review-checklist.md
-  path: documentation-review-checklist
-  parent: 参考
 
 - doc: documentation-map.md
   path: documentation-map

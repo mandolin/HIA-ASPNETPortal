@@ -116,7 +116,7 @@ product entry → evaluate → quick start → learn → reference → develop �
 - Each page offers a cross-language entry at the **top** (already present on the home page) so any page can be switched in
   one click.
 - Bilingual text must **not** be machine placeholder: a translation must be semantically equivalent to its source,
-  confirmed by a human walkthrough (see `docs/documentation-review-checklist.md`).
+  confirmed by a human walkthrough.
 
 ## 10. HIA series main palette and landing styles (sourced wiring)
 

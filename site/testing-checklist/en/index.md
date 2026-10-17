@@ -54,8 +54,6 @@ title: Testing checklist
       is covered by the manifest, along with its type, idempotency, provider labels and rollback boundary.
 - [ ] Any `-Apply*` database migration rehearsal may target only an isolated test database, and must retain the apply
       output plus the subsequent read-only require output.
-- [ ] Before adding or changing HIA peripheral integration contracts, draft fixtures, documentation-notification reading or
-      evidence-reference rules, run `dev/scripts/Get-PortalHiaIntegrationInventory.ps1` and confirm the contract version,
       standalone proof, notification reading and privacy boundary remain reviewable.
 
 ## Runtime checks
@@ -101,7 +99,7 @@ title: Testing checklist
       JSDoc pilot, XML boundaries and the HIA notification reading mechanism.
 - [ ] `dev/scripts/Get-PortalDocumentationBaseline.ps1 -OutputJson <evidence path>` has recorded the documentation
       inventory of tracked source.
-- [ ] For P13.3 documentation evidence, run `dev/scripts/New-PortalDocumentationEvidencePackage.ps1` and confirm
+- [ ] For documentation evidence, run `dev/scripts/New-PortalDocumentationEvidencePackage.ps1` and confirm
       `Failed=0`.
 - [ ] `src/Documentation/`, `src/DoxyGen/`, `src/Portal.Components.Data/Documentation/`, `src/Portal/Documentation/` and
       `src/Portal.shfbproj` are not committed as formal generated output.

@@ -7,7 +7,7 @@ title: Release rollback guide
 ---
 # Release rollback guide
 
-This document prepares rollback for file-system release packages from P13.1 onward. It accompanies the release checklist and
+This document prepares rollback for file-system release packages. It accompanies the release checklist and
 does not replace the operating procedures of a real IIS, database, backup platform or enterprise change system.
 
 ## Basic principles

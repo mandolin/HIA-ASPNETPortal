@@ -25,16 +25,15 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 ## 数据和依赖
 
 - 数据库初始化脚本位于 `src/Setup/`。
-- P5.2 起，用户强哈希凭据位于 `Portal_UserCredentials`，会话安全版本位于 `Portal_UserSecurityStates`；旧 `Portal_Users.Password` 只保留既有 MD5 数据的兼容迁移样本。
+- 用户强哈希凭据位于 `Portal_UserCredentials`，会话安全版本位于 `Portal_UserSecurityStates`；旧 `Portal_Users.Password` 只保留既有 MD5 数据的兼容迁移样本。
 - 新增 provider 专用脚本位于 `src/Setup/Providers/{ProviderId}/`；首轮 SQLite proof 位于 `Providers/SQLite/`，未来可并列增加 MySQL、PostgreSQL 等 provider，而不迁移既有 SQL Server 脚本。
 - 本地数据库文件位于 `db/MSSQLLocalDB/`。
 - 数据访问使用 Entity Framework 6.1.0。
 - 依赖注入使用 Unity 5.x。
 - Web 项目仍使用经典 `packages.config` 和 `src/packages/` NuGet 包目录。
 - `src/Portal.DataProviderProof/` 是未加入主解决方案的 .NET Framework 4.8 开发/测试 proof 项目；它验证 ADO.NET provider factory 与 SQLite 基础事务能力，不参与正常门户部署。
-- `src/Portal.HiaBoundaryProof/` 是未加入主解决方案的 .NET Framework 4.8 契约 proof 项目；它通过 fixtures 验证 HIA 外围能力描述的版本、字段与隐私边界，不添加 HIA 运行时依赖或 transport。
 
-数据访问兼容性标签从 P11.2 起按四类记录：
+数据访问兼容性标签按四类记录：
 
 - `SqlServerOnly`：当前只能视为 SQL Server 能力，例如 `System.Data.SqlClient`、EF SQL Server provider、`[dbo]`、`OBJECT_ID`、`SYSUTCDATETIME()`、`IDENTITY`、`ROWVERSION`。
 - `NeedsDialect`：具备抽象可能但必须按 provider 改写的 SQL，例如 `SELECT TOP`、锁提示、`OUTPUT INSERTED` 和 table variable。
@@ -43,17 +42,6 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 
 可用 `dev/scripts/Get-PortalDataAccessInventory.ps1` 生成只读 inventory。脚本只扫描 Git 已追踪源码，不读取真实连接串或仓库外配置。
 
-## HIA 外围协作基线
-
-`Portal.Components/PortalHiaBoundaryContracts.cs` 定义门户拥有的 `hia.portal.peripheral@0.1.0-draft` 契约 DTO 和离线验证器。当前仅覆盖模块、主题、设置 registry 元数据、健康和受限诊断引用，且通过显式版本、白名单字段和路径/敏感字段检查保持边界清晰。
-
-这是一项可演进的协作基线，不是 HIA 平台强耦合或通用远程 API。正常门户不会发现或加载外部 adapter，也不需要 HIA 仓库、DLL 或服务存在。未来如需真实 consumer、传输、身份映射或写操作，应新增设计决策、版本化契约与独立运行回归。
-
-P11.4 起，HIA 外围集成按分层候选管理：用户与 HIA 身份只做映射设计，不替换本地 `Portal_Users`；员工、组织和用户资料是第一批只读/导入候选；模块包、主题包和设置 registry 是第二批元数据候选；诊断、审计和合规证据只允许摘要与引用，不暴露日志正文、物理路径、连接串或敏感字段。`src/Portal.HiaBoundaryProof/Fixtures/Draft/` 中的 P11.4 样例仅用于契约讨论，不会被当前运行时验证器接受。
-
-HIA-Documentation-Sys 通知机制采用目标项目主动读取。当前项目通过 `dev/scripts/Get-HiaDocumentationNotifications.ps1` 查看**上游通知目录**（位于本项目的独立私有仓库中，不随公开文档发布），不会恢复向本项目 `dev/notify/` 主动投递的新通知机制。
-
-可用 `dev/scripts/Get-PortalHiaIntegrationInventory.ps1` 生成只读 HIA 集成边界 inventory。该脚本不连接数据库、不加载 HIA 外部程序集、不发起网络请求，也不复制通知正文。
 
 ## 当前架构风险
 

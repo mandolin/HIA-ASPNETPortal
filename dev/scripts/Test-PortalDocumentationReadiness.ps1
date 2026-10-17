@@ -199,14 +199,13 @@ $docsGuideReady =
     (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'Required') -and
     (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'Recommended') -and
     (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'Deferred') -and
-    (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'Get-HiaDocumentationNotifications\.ps1') -and
     (Test-TextContains -RelativePath 'docs/documentation-artifacts-guide.md' -Pattern 'src/Documentation/') -and
     (Test-TextContains -RelativePath 'docs/README.md' -Pattern 'documentation-artifacts-guide\.md')
 if ($docsGuideReady) {
-    Add-DocumentationCheck -Severity Pass -Code 'DOC-PUBLIC-GUIDE' -Message 'Public documentation artifacts guide covers tiers, HIA notifications and generated-output boundaries.'
+    Add-DocumentationCheck -Severity Pass -Code 'DOC-PUBLIC-GUIDE' -Message 'Public documentation artifacts guide covers tiers and generated-output boundaries.'
 }
 else {
-    Add-DocumentationCheck -Severity Fail -Code 'DOC-PUBLIC-GUIDE' -Message 'Public documentation artifacts guide needs P13.3 contract updates.'
+    Add-DocumentationCheck -Severity Fail -Code 'DOC-PUBLIC-GUIDE' -Message 'Public documentation artifacts guide needs contract updates.'
 }
 
 # <lang>

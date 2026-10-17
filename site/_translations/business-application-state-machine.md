@@ -118,5 +118,5 @@ vocabulary nor action constants (`PortalCollaborationItemActions` and `PortalWor
 - **Changing the legal source statuses of back-office review actions** (e.g. whether `Close` should be allowed from
   `Approved`): a separate decision; the current behaviour is kept for this round.
 - **The legacy business-application sample**: this state machine **is** the explicitisation of `BusinessApplicationDb` (the old
-  P19 sample); there is no "second business-application state machine".
+  sample); there is no "second business-application state machine".
 - This round **adds or removes no statuses** and changes no business semantics and no UI.

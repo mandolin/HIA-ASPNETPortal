@@ -97,7 +97,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 
 脚本不会生成、发布、删除或修改文档。`src/Documentation/`、`src/DoxyGen/`、`src/Portal/Documentation/`、`src/Portal/js/`、`src/Portal/css/` 和 `temp/` 均不会被自动纳入输入；JSDoc 验证生成物写入被忽略的 `temp/documentation/`，公开发布策略见[文档产物与工具链边界]({{ site.baseurl }}/documentation-artifacts-guide/)。
 
-P13.3 起，文档化 readiness 和证据包可以用以下脚本执行：
+文档化 readiness 和证据包可以用以下脚本执行：
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalDocumentationReadiness.ps1
@@ -202,7 +202,7 @@ mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1
 mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1 -NoRestore -NoBuild
 ```
 
-P2.5 新增的 HTTP smoke 默认只检查已经运行的站点，不写入数据库，也不要求管理员凭据：
+新增的 HTTP smoke 默认只检查已经运行的站点，不写入数据库，也不要求管理员凭据：
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSmoke.ps1
@@ -227,9 +227,9 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath $testConfig -RequireP2Migrations -RequireP3Migrations -RequireP5Migrations -RequireP6UserProfileMigration -RequireP6EmployeeOrganizationMigration
 ```
 
-P6 用户资料迁移会先检查旧用户名称和邮箱是否存在会破坏唯一性的历史数据；P6.3 员工组织迁移按 `PortalBiz_OrganizationUnits.sql`、`PortalBiz_Employees.sql`、`PortalBiz_UserEmployeeBindings.sql` 的顺序执行。两者都只应指向隔离开发库或测试库，不要指向生产配置。
+用户资料迁移会先检查旧用户名称和邮箱是否存在会破坏唯一性的历史数据；员工组织迁移按 `PortalBiz_OrganizationUnits.sql`、`PortalBiz_Employees.sql`、`PortalBiz_UserEmployeeBindings.sql` 的顺序执行。两者都只应指向隔离开发库或测试库，不要指向生产配置。
 
-SQL Server 版本矩阵预检用于 P11 之后的多版本补证。默认只做静态扫描，不连接数据库、不创建数据库、不执行 SQL：
+SQL Server 版本矩阵预检用于多版本补证。默认只做静态扫描，不连接数据库、不创建数据库、不执行 SQL：
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlVersionMatrix.ps1
@@ -242,7 +242,7 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlVersionMatrix.ps1 -ConnectionStringsConfigPath $testConfig
 ```
 
-P11.2 起提供只读数据访问 inventory，用于扫描已追踪源码中的 SQL Server 专属依赖、需要 provider 方言处理的 SQL、可抽象入口和 provider proof 边界。它不连接数据库、不读取仓库外连接串，也不会扫描未跟踪生成目录：
+提供只读数据访问 inventory，用于扫描已追踪源码中的 SQL Server 专属依赖、需要 provider 方言处理的 SQL、可抽象入口和 provider proof 边界。它不连接数据库、不读取仓库外连接串，也不会扫描未跟踪生成目录：
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1
@@ -254,7 +254,7 @@ P11.2 起提供只读数据访问 inventory，用于扫描已追踪源码中的 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1 -OutputJson <内部证据目录>\p11.2\data-access-inventory.json
 ```
 
-P11.3 起提供只读迁移 manifest 检查，用于盘点 `src/Setup` 脚本的执行顺序、迁移类型、幂等性、provider 标签、回滚模式和 legacy 风险：
+提供只读迁移 manifest 检查，用于盘点 `src/Setup` 脚本的执行顺序、迁移类型、幂等性、provider 标签、回滚模式和 legacy 风险：
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalMigrationManifest.ps1
@@ -273,7 +273,7 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath $testConfig -ApplyP5Migrations -ApplyP6UserProfileMigration -ApplyP6EmployeeOrganizationMigration -ApplyP6BusinessModuleMigration -RequireP2Migrations -RequireP3Migrations -RequireP5Migrations -RequireP6UserProfileMigration -RequireP6EmployeeOrganizationMigration -RequireP6BusinessModuleMigration
 ```
 
-首次创建隔离的 SQL Server 2016+ 测试库时，可显式运行初始化脚本。它从外置连接串读取目标库名，要求目标库不存在，并在确认后导入历史基础数据、P2、P3 与 P5 迁移；不会输出或保存连接串：
+首次创建隔离的 SQL Server 2016+ 测试库时，可显式运行初始化脚本。它从外置连接串读取目标库名，要求目标库不存在，并在确认后导入历史基础数据与既有迁移；不会输出或保存连接串：
 
 ```powershell
 $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
@@ -284,7 +284,7 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 
 ## 数据提供程序 Proof
 
-P3.3 提供一个不加入 `src/master.sln` 的 SQLite capability proof，用于验证新增 provider profile、ADO.NET factory、参数化读写、UTC、事务和唯一约束。它不切换门户主业务数据库，不需要修改外置 `Portal` 连接串，也不参与站点发布。
+提供一个不加入 `src/master.sln` 的 SQLite capability proof，用于验证新增 provider profile、ADO.NET factory、参数化读写、UTC、事务和唯一约束。它不切换门户主业务数据库，不需要修改外置 `Portal` 连接串，也不参与站点发布。
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalDataProvider.ps1 -Configuration Debug
@@ -294,35 +294,10 @@ P3.3 提供一个不加入 `src/master.sln` 的 SQLite capability proof，用于
 
 新增 provider 专用 DDL 放在 `src\Setup\Providers\{ProviderId}\`。当前只有 `SQLite` proof；未来 MySQL、PostgreSQL 等 provider 应各自增加目录、依赖/许可证审计、方言实现、迁移与回归，不应覆盖既有 SQL Server 脚本。
 
-## HIA 外围契约 Proof
 
-P3.4 提供独立的 HIA 外围能力描述 proof。它仅验证门户拥有的 JSON envelope、版本、字段范围和隐私边界；不加载 HIA 外部程序集、不开放 HTTP/消息/文件 transport，也不影响门户正常启动与发布。
+## 扩展性验收
 
-```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalHiaBoundary.ps1 -Configuration Debug
-```
-
-Proof 项目位于 `src\Portal.HiaBoundaryProof\`，未加入 `src\master.sln`，输出仅写入被忽略的 `temp\hia-boundary-proof\`。当前草案允许模块、主题、设置 registry 元数据、健康状态和受限诊断引用；不会接受用户/角色/认证、设置实际值、日志详情、审计正文、路径、连接串或任何凭据。
-
-`Portal.Hia.InstanceId` 是可选的部署级、非敏感稳定标识。默认留空，留空不会启用任何对外适配器。需要为未来受控协作准备时，可设置为 GUID 或小写字母、数字、`.`、`_`、`-` 组成的稳定标识；不得由机器名、数据库名、域名、用户名或其他个人/环境信息推导。后续若接入真实 HIA consumer 或 transport，应先更新 ADR、契约版本和独立运行回归。
-
-P11.4 起可生成 HIA 外围集成边界 inventory。它只盘点当前契约、proof、draft fixtures、文档化通知读取机制和候选分层，不启用真实 HIA transport，也不会读取连接串、凭据或日志正文：
-
-```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalHiaIntegrationInventory.ps1
-```
-
-需要保留 JSON 证据时显式指定输出路径：
-
-```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalHiaIntegrationInventory.ps1 -OutputJson <内部证据目录>\p11.4\hia-integration-inventory.json
-```
-
-如 HIA-Documentation-Sys 不在默认同级目录，可通过 `-DocumentationSysRoot` 指定；脚本只记录通知标题、相对路径和是否提及当前项目，不复制通知正文。
-
-## P3 扩展性验收
-
-`Test-PortalExtensionSmoke.ps1` 汇总 P3 的构建、前端资源、SQLite provider、HIA 契约、根站点和虚拟目录回归。默认不写数据库、不要求管理员凭据，也不会停止正在使用的 `40001` 站点；虚拟目录使用临时 IIS Express 端口并在结束后停止。
+`Test-PortalExtensionSmoke.ps1` 汇总构建、前端资源、SQLite provider、根站点和虚拟目录回归。默认不写数据库、不要求管理员凭据，也不会停止正在使用的 `40001` 站点；虚拟目录使用临时 IIS Express 端口并在结束后停止。
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalExtensionSmoke.ps1
@@ -358,7 +333,7 @@ $config = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connectionStrings
 4. 复制 `src/Portal/Config/Templates/connectionStrings.config` 到外置配置目录，并修改其中的 `Portal` 连接串。
 5. 构建并运行站点。
 
-P19.5 业务申请样板页可以先生成可审阅 SQL，不直接修改数据库：
+业务申请样板页可以先生成可审阅 SQL，不直接修改数据库：
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1
@@ -372,7 +347,7 @@ P19.5 业务申请样板页可以先生成可审阅 SQL，不直接修改数据�
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1 -ConnectionStringsConfigPath '<仓库外>\connectionStrings.config' -Apply -Confirm:$false
 ```
 
-需要补齐 P19.5 的认证浏览器回归时，可使用受限的 fixture helper。它只接受直接父目录名为 `test` 的外置 `connectionStrings.config`，且只创建由 `FixtureId` 确定的一个普通参与者和一个仅具 `Admins` 实体角色的管理员。Create 的密码必须由短生命周期进程以 `SecureString` 交互输入；不得把密码写入命令行、脚本、日志或配置。完成提交和管理员审核后，必须先 Inspect 再 Remove，并确认最终计数均为零：
+需要补齐认证浏览器回归时，可使用受限的 fixture helper。它只接受直接父目录名为 `test` 的外置 `connectionStrings.config`，且只创建由 `FixtureId` 确定的一个普通参与者和一个仅具 `Admins` 实体角色的管理员。Create 的密码必须由短生命周期进程以 `SecureString` 交互输入；不得把密码写入命令行、脚本、日志或配置。完成提交和管理员审核后，必须先 Inspect 再 Remove，并确认最终计数均为零：
 
 ```powershell
 $testConfig = '<仓库外>\test\connectionStrings.config'
@@ -399,7 +374,7 @@ $administratorPassword = Read-Host -AsSecureString 'P19 fixture administrator pa
   -Confirm:$false
 ```
 
-该 helper 只输出计数级事实，不输出连接串、密码、盐、哈希或申请正文。Remove 在单一事务中按依赖顺序删除该 fixture 的 P19 记录、实体角色关系和两个账号；它不能按任意用户名、角色或前缀删除数据。它只证明 test 数据库与隔离浏览器闭环，不能替代真实 IIS/HTTPS、生产或企业扫描证明。
+该 helper 只输出计数级事实，不输出连接串、密码、盐、哈希或申请正文。Remove 在单一事务中按依赖顺序删除该 fixture 的记录、实体角色关系和两个账号；它不能按任意用户名、角色或前缀删除数据。它只证明 test 数据库与隔离浏览器闭环，不能替代真实 IIS/HTTPS、生产或企业扫描证明。
 
 部署或共享环境中不得使用默认账号和弱密码。
 默认凭据和旧口令治理见 `docs/deployment-default-credentials.md`；发布前应运行 `dev/scripts/Test-PortalDefaultCredentialRisk.ps1`。

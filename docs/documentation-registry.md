@@ -18,7 +18,7 @@
 ## 逐项说明与缺口
 
 1. **代码内文档**：`C-anp-P19`（`W-anp-P108`–`P112`）**已收口**。2026-10-14 实测基线 —— **源码层**：486 文件、33 有发现（`HighRiskScriptCandidate` 29、`TodoOrDeferredMarker` **4**；`MissingNodeDocumentation` 与乱码 / 旧双语 / 客户端 HTML 注释 / 低价值复述五类已清零）；**PowerShell 层**：87 脚本、comment-based help **87/87**、标准 `<lang>` 块 1689 个、legacy `.LANG` **0**、混合语言表面 **0**、高风险脚本 12 个且缺 HIA 标记 **0**，已由 `Test-PortalRopCommentBaseline.ps1`（L0）门禁化。
-   - ⚠️ 本行原记"474 文件 / 35 有发现 / 5 待办 / 2 缺节点文档"是 **v1.0.0 时期登记**，已被 P19 治理改变，`W-anp-P123` 据实测刷新。
+   - ⚠️ 本行原记"474 文件 / 35 有发现 / 5 待办 / 2 缺节点文档"是 **v1.0.0 时期登记**，现据实测刷新。
    - `HighRiskScriptCandidate`（29）是按**文件名关键词**自动生成的候选集，**不是缺陷计数**；它与 PowerShell 层的 `RiskLevel=High`（12）是两套不同集合。
    - **语义边界**：结构标记齐备 ≠ 注释语义充分。语义质量由 `C-anp-P25`（`W-anp-P113` 起）人工抽样承接，首批（安全路径）已完成。
 2. **API 与技术契约（边界判定）**：本项目为 **Web Forms 门户（.NET FW4.8）**，**无对外 REST/GraphQL API** → "公开 REST/GraphQL API 参考"标记**不适用**（理由：架构无此类对外面）。但存在**模块契约 / 配置契约 / 企业能力对象契约** → 适用。**`W-anp-P125` 已建 `docs/contracts/`**：`README.md`（边界判定表 + 权威源）、`module-manifest.md`（`module.json` 契约）、`app-settings.md`（`appSettings` 契约），收纳机器可读契约 + 人类可读说明。

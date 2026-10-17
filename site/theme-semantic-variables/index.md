@@ -45,7 +45,7 @@ title: 主题语义变量矩阵（`--portal-*`）
 
 ### 矩阵的两个规律（新增变量前先理解）
 
-1. **前 13 个变量按「浅色族 / 深色族」各一套**：4 套浅色主题（Default / EnterpriseLight / OaLight / StateClassicLight）取值完全相同，3 套深色主题（EnterpriseDark / OaDark / StateClassicDark）取值也完全相同。它们表达的是**明暗基调**，不区分主题族风格。
+1. **前 13 个变量按「浅色族 / 深色族」各一套**：4 套浅色主题（Default / EnterpriseLight / OaLight / StateClassicLight）取值完全相同，3 套深色主题（EnterpriseDark / OaDark / StateClassicDark）取值也完全相同。它们表达的是**明暗基调**，不区分主题族风格（含 C-anp-新增的 `--portal-text-subtle`）。
 2. **`--portal-danger-text` 是唯一按主题族区分的变量**：因为它不表达明暗，而表达**各主题族自己的错误色**（直接取该主题既有的 `.NormalRed`）。Enterprise 族与 Oa 族的浅色错误色相同（`#b42318`）但深色不同（`#ff8b8b` / `#ff9b9b`）；StateClassic 族则两端都不同（`#9e2f2e` / `#ff9c99`）。
 
 **推论**：新增语义变量时，先判断它属于哪一类——表达明暗基调的应加入「浅/深两套」；表达主题族固有属性（如错误色、强调色）的必须**逐主题族**取值，且优先复用该主题既有类（如 `.NormalRed`）而不要新造颜色。

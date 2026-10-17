@@ -58,12 +58,12 @@ the browser falls back to the generic family, so site startup is unaffected.
   SIL OFL 1.1, the code under MIT and the icons under CC BY 4.0; that directory is still treated as generated output and is
   not part of this repository's font distribution.
 
-## Audit result, 2026-07-19 (P7.5)
+## Audit result, 2026-07-19
 
-- The six P7 official themes ship no `.eot`, `.otf`, `.ttf`, `.woff` or `.woff2` font binaries.
+- The six official themes ship no `.eot`, `.otf`, `.ttf`, `.woff` or `.woff2` font binaries.
 - No `@font-face`, remote font URL or `data:font` was found under `src/Portal/App_Themes/`.
-- The P7 themes continue to use the open-source-first stacks above and keep the `sans-serif` / `monospace` generic fallbacks.
+- The themes continue to use the open-source-first stacks above and keep the `sans-serif` / `monospace` generic fallbacks.
 - `Default`, `EnterpriseLight/Dark`, `OaLight/Dark`, `StateClassicLight/Dark` and `ThemeProbe` do not actively reference
   Verdana, Arial, Helvetica, Times New Roman, Courier New, Consolas, Segoe UI, Microsoft YaHei or 微软雅黑.
-- The full P7.5 asset audit record is kept in this project's **internal planning document** (not published with the public
+- The full asset audit record is kept in this project's **internal planning document** (not published with the public
   documentation).

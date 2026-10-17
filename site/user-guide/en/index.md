@@ -34,7 +34,7 @@ uses the `dev` environment, i.e. `...\HIA-ASPNETPortal\dev\connectionStrings.con
 ## Initial account
 
 Historical notes mention that `admin/admin` can be used to sign in. That information is only for local verification on older
-versions; **any** shared, test or production environment must change the default account and password policy. Since P5.2, an
+versions; **any** shared, test or production environment must change the default account and password policy. An
 old account is migrated to a strong-hash credential on its first successful sign-in; creating, registering and resetting
 passwords no longer writes legacy MD5 digests.
 
@@ -135,7 +135,7 @@ Back-office pages live under `src/Portal/Admin/`. Common operations:
 | Site settings | Site settings | Site-level configuration, including the skin (theme) choice |
 | Page layout | Page layout management | Add, edit, delete and reorder tabs, plus per-tab access roles |
 
-**Passwords**: since P5.2, an old account is migrated to strong-hash (PBKDF2) credentials on its first successful sign-in;
+**Passwords**: An old account is migrated to strong-hash (PBKDF2) credentials on its first successful sign-in;
 creating, registering and resetting passwords no longer writes legacy MD5 digests. Legacy MD5 digests are kept only for
 existing-data compatibility; for the disposal strategy see `deployment-default-credentials.md`.
 

@@ -95,7 +95,7 @@ To write the baseline into the evidence directory (substitute `<internal evidenc
 
 The script never generates, publishes, deletes or modifies documentation. `src/Documentation/`, `src/DoxyGen/`, `src/Portal/Documentation/`, `src/Portal/js/`, `src/Portal/css/` and `temp/` are never pulled in as inputs automatically; JSDoc verification output goes to the ignored `temp/documentation/`. For the public release policy see [Documentation artifacts and toolchain boundaries](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-artifacts-guide.md).
 
-From P13.3 on, documentation readiness and the evidence package can be run with:
+Documentation readiness and the evidence package can be run with:
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalDocumentationReadiness.ps1
@@ -180,7 +180,7 @@ The script keeps the `localhost` binding and also prints the external URL. If th
 
 ## Automated tests, smoke and SQL Server compatibility checks
 
-From P28 there is a formal MSTest runner; by default it runs only local unit / contract tests, does not connect to a database, does not start IIS and does not create accounts:
+There is a formal MSTest runner; by default it runs only local unit / contract tests, does not connect to a database, does not start IIS and does not create accounts:
 
 ```powershell
 mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1
@@ -192,7 +192,7 @@ To reuse already-built test assemblies quickly, skip restore and build explicitl
 mise exec -- pwsh -NoLogo -NoProfile -File dev/scripts/Invoke-PortalTests.ps1 -NoRestore -NoBuild
 ```
 
-The HTTP smoke added in P2.5 by default only checks an already-running site, writes nothing to the database and needs no administrator credentials:
+The HTTP smoke by default only checks an already-running site, writes nothing to the database and needs no administrator credentials:
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSmoke.ps1
@@ -217,7 +217,7 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath $testConfig -RequireP2Migrations -RequireP3Migrations -RequireP5Migrations -RequireP6UserProfileMigration -RequireP6EmployeeOrganizationMigration
 ```
 
-The P6 user-profile migration first checks whether legacy user names and emails contain historical data that would break uniqueness; the P6.3 employee-organization migration runs in the order `PortalBiz_OrganizationUnits.sql`, `PortalBiz_Employees.sql`, `PortalBiz_UserEmployeeBindings.sql`. Both must point only at an isolated development or test database, never at production configuration.
+The user-profile migration first checks whether legacy user names and emails contain historical data that would break uniqueness; the employee-organization migration runs in the order `PortalBiz_OrganizationUnits.sql`, `PortalBiz_Employees.sql`, `PortalBiz_UserEmployeeBindings.sql`. Both must point only at an isolated development or test database, never at production configuration.
 
 The SQL Server version-matrix preflight supports the multi-version evidence collection after P11. By default it is a static scan only: it does not connect to a database, create one or execute SQL:
 
@@ -232,7 +232,7 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlVersionMatrix.ps1 -ConnectionStringsConfigPath $testConfig
 ```
 
-From P11.2 there is a read-only data-access inventory for scanning tracked sources for SQL Server-specific dependencies, SQL needing provider dialect handling, abstractable entry points and provider proof boundaries. It does not connect to a database, does not read connection-string files outside the repository, and does not scan untracked generated directories:
+There is a read-only data-access inventory for scanning tracked sources for SQL Server-specific dependencies, SQL needing provider dialect handling, abstractable entry points and provider proof boundaries. It does not connect to a database, does not read connection-string files outside the repository, and does not scan untracked generated directories:
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1
@@ -244,7 +244,7 @@ To keep JSON evidence, specify the output path explicitly:
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDataAccessInventory.ps1 -OutputJson <internal evidence directory>\p11.2\data-access-inventory.json
 ```
 
-From P11.3 there is a read-only migration manifest check, inventorying the execution order, migration type, idempotency, provider tag, rollback mode and legacy risk of `src/Setup` scripts:
+There is a read-only migration manifest check, inventorying the execution order, migration type, idempotency, provider tag, rollback mode and legacy risk of `src/Setup` scripts:
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalMigrationManifest.ps1
@@ -263,7 +263,7 @@ $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionSt
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 -ConnectionStringsConfigPath $testConfig -ApplyP5Migrations -ApplyP6UserProfileMigration -ApplyP6EmployeeOrganizationMigration -ApplyP6BusinessModuleMigration -RequireP2Migrations -RequireP3Migrations -RequireP5Migrations -RequireP6UserProfileMigration -RequireP6EmployeeOrganizationMigration -RequireP6BusinessModuleMigration
 ```
 
-When creating an isolated SQL Server 2016+ test database for the first time, you can run the initialisation script explicitly. It reads the target database name from the external connection string, requires that the target database does not exist, and after confirmation imports the historical base data plus the P2, P3 and P5 migrations; it never prints or stores the connection string:
+When creating an isolated SQL Server 2016+ test database for the first time, you can run the initialisation script explicitly. It reads the target database name from the external connection string, requires that the target database does not exist, and after confirmation imports the historical base data and the existing migrations; it never prints or stores the connection string:
 
 ```powershell
 $testConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\test\connectionStrings.config'
@@ -274,7 +274,7 @@ You can add `-WhatIf` first to check the target database and intended action. Th
 
 ## Data provider proof
 
-P3.3 provides a SQLite capability proof that is not added to `src/master.sln`, verifying a new provider profile, ADO.NET factory, parameterised reads/writes, UTC, transactions and unique constraints. It does not switch the portal's main business database, does not require modifying the external `Portal` connection string, and does not take part in site publishing.
+Provides a SQLite capability proof that is not added to `src/master.sln`, verifying a new provider profile, ADO.NET factory, parameterised reads/writes, UTC, transactions and unique constraints. It does not switch the portal's main business database, does not require modifying the external `Portal` connection string, and does not take part in site publishing.
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalDataProvider.ps1 -Configuration Debug
@@ -284,35 +284,10 @@ The script restores the proof project's packages.config separately, builds into 
 
 Provider-specific DDL goes in `src\Setup\Providers\{ProviderId}\`. Currently only the `SQLite` proof exists; future providers such as MySQL and PostgreSQL should each add their own directory, dependency/licence audit, dialect implementation, migration and regression, and must not overwrite the existing SQL Server scripts.
 
-## HIA boundary contract proof
 
-P3.4 provides a standalone HIA peripheral capability description proof. It verifies only the JSON envelope, version, field range and privacy boundary that the portal owns; it does not load HIA external assemblies, does not open HTTP/message/file transports, and does not affect normal portal startup or publishing.
+## Extensibility acceptance
 
-```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalHiaBoundary.ps1 -Configuration Debug
-```
-
-The proof project lives at `src\Portal.HiaBoundaryProof\`, is not added to `src\master.sln`, and writes only to the ignored `temp\hia-boundary-proof\`. The current draft allows module, theme, settings registry metadata, health state and restricted diagnostic references; it does not accept users/roles/authentication, actual settings values, log details, audit bodies, paths, connection strings or any credentials.
-
-`Portal.Hia.InstanceId` is an optional deployment-level, non-sensitive stable identifier. It is empty by default, and leaving it empty enables no external adapter. When preparing for future controlled collaboration it may be set to a GUID or a stable identifier of lowercase letters, digits, `.`, `_` and `-`; it must not be derived from a machine name, database name, domain name, username or other personal/environmental information. If a real HIA consumer or transport is later connected, update the ADR, contract version and standalone regression first.
-
-From P11.4 you can generate a HIA integration boundary inventory. It only inventories the current contract, proof, draft fixtures, the documentation notification reader and candidate layering; it does not enable real HIA transport and does not read connection strings, credentials or log bodies:
-
-```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalHiaIntegrationInventory.ps1
-```
-
-To keep JSON evidence, specify the output path explicitly:
-
-```powershell
-& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalHiaIntegrationInventory.ps1 -OutputJson <internal evidence directory>\p11.4\hia-integration-inventory.json
-```
-
-If HIA-Documentation-Sys is not in the default sibling directory, pass `-DocumentationSysRoot`; the script records only notification titles, relative paths and whether the current project is mentioned, and never copies notification bodies.
-
-## P3 extensibility acceptance
-
-`Test-PortalExtensionSmoke.ps1` aggregates the P3 build, frontend assets, SQLite provider, HIA contract, root site and virtual-directory regressions. By default it does not write to a database, needs no administrator credentials, and does not stop an in-use `40001` site; the virtual directory uses a temporary IIS Express port and stops it afterwards.
+`Test-PortalExtensionSmoke.ps1` aggregates the build, frontend assets, SQLite provider, root site and virtual-directory regressions. By default it does not write to a database, needs no administrator credentials, and does not stop an in-use `40001` site; the virtual directory uses a temporary IIS Express port and stops it afterwards.
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalExtensionSmoke.ps1
@@ -348,7 +323,7 @@ See `src/ReadMe.txt`; the basic flow is:
 4. Copy `src/Portal/Config/Templates/connectionStrings.config` to the external configuration directory and edit the `Portal` connection string in it.
 5. Build and run the site.
 
-The P19.5 business-application sample page can first generate reviewable SQL without modifying the database directly:
+The business-application sample page can first generate reviewable SQL without modifying the database directly:
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1
@@ -362,7 +337,7 @@ To execute against a confirmed development/test database, complete the P5/P12/P1
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BusinessApplicationScenarioSql.ps1 -ConnectionStringsConfigPath '<external>\connectionStrings.config' -Apply -Confirm:$false
 ```
 
-To complete the P19.5 authenticated browser regression, use the restricted fixture helper. It accepts only an external `connectionStrings.config` whose immediate parent directory is named `test`, and creates exactly one ordinary participant and one administrator holding only the `Admins` entity role, both determined by `FixtureId`. The Create password must be entered interactively as a `SecureString` by a short-lived process; passwords must not be written to the command line, scripts, logs or configuration. After completing submission and administrator review, you must Inspect before Remove and confirm both final counts are zero:
+To complete the authenticated browser regression, use the restricted fixture helper. It accepts only an external `connectionStrings.config` whose immediate parent directory is named `test`, and creates exactly one ordinary participant and one administrator holding only the `Admins` entity role, both determined by `FixtureId`. The Create password must be entered interactively as a `SecureString` by a short-lived process; passwords must not be written to the command line, scripts, logs or configuration. After completing submission and administrator review, you must Inspect before Remove and confirm both final counts are zero:
 
 ```powershell
 $testConfig = '<external>\test\connectionStrings.config'
@@ -389,7 +364,7 @@ $administratorPassword = Read-Host -AsSecureString 'P19 fixture administrator pa
   -Confirm:$false
 ```
 
-The helper outputs only count-level facts, never connection strings, passwords, salts, hashes or application bodies. Remove deletes, in a single transaction and in dependency order, that fixture's P19 records, entity-role relations and both accounts; it cannot delete data by arbitrary username, role or prefix. It proves only that the test database and an isolated browser form a closed loop, and cannot substitute for real IIS/HTTPS, production or enterprise-scan evidence.
+The helper outputs only count-level facts, never connection strings, passwords, salts, hashes or application bodies. Remove deletes, in a single transaction and in dependency order, that fixture's records, entity-role relations and both accounts; it cannot delete data by arbitrary username, role or prefix. It proves only that the test database and an isolated browser form a closed loop, and cannot substitute for real IIS/HTTPS, production or enterprise-scan evidence.
 
 Default accounts and weak passwords must not be used in deployed or shared environments. For default credentials and legacy password governance see [deployment-default-credentials.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-default-credentials.md); before releasing run `dev/scripts/Test-PortalDefaultCredentialRisk.ps1`.
 

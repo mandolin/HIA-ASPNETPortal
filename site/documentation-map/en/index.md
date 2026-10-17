@@ -7,10 +7,7 @@ title: Documentation map and navigation index
 ---
 # Documentation map / navigation index (HIA-ASPNETPortal)
 
-> **Documentation navigation map.** A navigation index of the existing `docs/` against the 7 documentation families of the *HIA
-> project documentation structure and template specification*, with gaps marked. It pairs with
-> `documentation-registry.md` (D1, which registers applicable/not applicable): the registry records "should this exist",
-> this map records "where it is and how it connects".
+> A navigation index of the existing `docs/` against the 7 documentation families, with gaps marked: this map records "where it is and how it connects"\.
 
 ## Reader paths
 
@@ -22,11 +19,11 @@ title: Documentation map and navigation index
 
 ## Documentation family index
 
-### 1. In-code documentation
+### 1. In-code documentation (source comments)
 
-Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate `Get-PortalCommentDebtInventory`.
+Not in `docs/`; lives in source node/flow comments.
 
-### 2. API and technical contracts
+### 2. API and technical contracts (`docs/contracts/`)
 
 - Boundary decision: as a Web Forms portal there is **no external REST/GraphQL API**; what applies is "module contract /
   configuration contract / enterprise capability object contract".
@@ -39,22 +36,23 @@ Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate 
 
 ### 3. Product features and usage
 
-- `product-overview.md` — **product overview and positioning**: what it is / who it is for /
+- `product-overview.md` — **product overview and positioning** : what it is / who it is for /
   capability map / boundaries / compatibility and runtime environment / licence and attribution / where it fits
 - `user-guide.md` — how to run and use the portal; includes the **typical portal configuration flow**, **common
-  administrator operations** and **troubleshooting**
+  administrator operations** and **troubleshooting** 
 - `p12-sample-business-flow.md` — a sample business flow
 - **Remaining gaps**: runtime screenshots; item-by-item operating instructions for existing content modules
   (announcements, contacts, discussions, documents, events, images, links, etc.); the approval flow UI for leave and
-  reimbursement (this cycle only persists data and generates to-dos; approval is not inside these modules)
+  reimbursement (approval is not inside these modules)
 
 ### 4. Developers and contributors
 
 - `dev-guide.md` — the general development guide
 - `module-development-guide.md` — module development guide
 - `frontend-asset-guide.md` — frontend asset guide
-- `theme-package-guide.md` — theme package guide
-- `theme-semantic-variables.md` — the theme semantic variable matrix
+- `theme-package-guide.md` — theme package guide 
+- `theme-semantic-variables.md` — the theme semantic variable matrix (7 themes × **14 variables**, purpose quick-reference,
+  usage rules)
 - `theme-module-contract.md` — module appearance contract (layer division of labour, appearance class families, fallback
   meaning and differences)
 - `documentation-artifacts-guide.md` — documentation artefacts guide
@@ -86,10 +84,7 @@ Not in `docs/`; lives in source node/flow comments, safeguarded by the ROP gate 
 
 ## Meta-documents
 
-- `documentation-registry.md` — the D1 registry (applicable/not applicable + responsibility/trigger/verification)
-- `documentation-map.md` — this map (navigation)
 - `site-visual-baseline.md` — the **site visual baseline** (palette / fonts / typographic hierarchy / code-block and table
   colours / navigation skeleton)
-- `documentation-review-checklist.md` — the **manual walkthrough checklist** (what automated gates cannot prove:
   correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)

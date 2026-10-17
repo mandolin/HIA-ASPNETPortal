@@ -53,7 +53,7 @@ maintainers. Internal planning and collaboration material are not published with
   the evidence package.
 - `deployment-default-credentials.md`: default accounts, sample passwords in initialisation scripts and legacy credential
   governance.
-- `p12-sample-business-flow.md`: the employee-profile-correction sample business path, sample data SQL and the P12 acceptance
+- `p12-sample-business-flow.md`: the employee-profile-correction sample business path, sample data SQL and the acceptance
   entry.
 - `business-application-state-machine.md`: the status vocabulary, allowed transitions and fail-closed write constraints of
   business applications.

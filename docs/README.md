@@ -26,7 +26,7 @@
 - `release-notes-template.md`：版本号、变更、验证摘要、延期补证和回滚入口模板。
 - `operations-runbook.md`：运维入口、例行检查、日志维护、审计查询、备份提醒和证据包说明。
 - `deployment-default-credentials.md`：默认账号、初始化脚本样例口令和旧凭据治理说明。
-- `p12-sample-business-flow.md`：员工资料更正样板业务路径、样例数据 SQL 和 P12 验收入口。
+- `p12-sample-business-flow.md`：员工资料更正样板业务路径、样例数据 SQL 和 验收入口。
 - `business-application-state-machine.md`：业务申请的状态词汇、允许迁移与 fail-closed 写入约束。
 - `collaboration-item-state-machine.md`：协同事项的状态词汇、允许迁移与处理角色语义。
 - `audit-retention-policy.md`：运营审计表的保留期原则与依据。

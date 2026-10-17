@@ -64,7 +64,7 @@ dev/scripts/Test-PortalComplianceBaseline.ps1 -Profile Test
 dev/scripts/Test-PortalDefaultCredentialRisk.ps1 -Profile Test
 ```
 
-When P13.2 operations evidence must be retained:
+When operations evidence must be retained:
 
 ```powershell
 dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Test

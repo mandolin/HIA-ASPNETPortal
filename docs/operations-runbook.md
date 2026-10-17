@@ -49,7 +49,7 @@ dev/scripts/Test-PortalComplianceBaseline.ps1 -Profile Test
 dev/scripts/Test-PortalDefaultCredentialRisk.ps1 -Profile Test
 ```
 
-需要留存 P13.2 运维证据时执行：
+需要留存 运维证据时执行：
 
 ```powershell
 dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Test

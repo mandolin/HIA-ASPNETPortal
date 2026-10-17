@@ -24,7 +24,7 @@ title: 技术契约（HIA-ASPNETPortal）
 | **配置契约** | **适用** | `appSettings` 平面点号键族 |
 | **企业能力对象契约** | **适用** | 能力键与角色构成封闭词表 |
 
-边界判定的完整登记见 [documentation-registry.md]({{ site.baseurl }}/documentation-registry/) 第 2 族。
+边界判定的完整登记见 本文档第 2 族。
 
 ## 二、契约清单
 

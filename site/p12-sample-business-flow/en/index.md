@@ -3,11 +3,11 @@ layout: default
 lang: en
 parent: Learn
 permalink: /en/p12-sample-business-flow/
-title: P12 sample business flow
+title: Sample business flow
 ---
-# P12 employee profile correction sample business flow
+# Employee profile correction sample business flow
 
-This page describes the minimal enterprise business path P12 currently uses for demonstration and regression: an ordinary
+This page describes the minimal enterprise business path currently uses for demonstration and regression: an ordinary
 employee signs in with an existing account and submits a profile correction request based on a valid employee binding; an
 administrator reviews the request in the back office and tracks it through work items, audits and the employee directory.
 
@@ -24,7 +24,7 @@ administrator reviews the request in the back office and tracks it through work 
 
 ## Automated-side acceptance
 
-Run the P12.5 evidence package script:
+Run the evidence package script:
 
 ```powershell
 dev/scripts/New-PortalP12EvidencePackage.ps1
@@ -32,9 +32,9 @@ dev/scripts/New-PortalP12EvidencePackage.ps1
 
 The script orchestrates the following read-only checks and, by default, runs one solution build:
 
-1. P12.2 business identity gate.
-2. P12.3 lightweight work-item gate.
-3. P12.4 business permission and audit gate.
+1. Business identity gate.
+2. Lightweight work-item gate.
+3. Business permission and audit gate.
 4. Solution build.
 
 Evidence is written to an internal evidence directory by default; if that directory does not exist, it falls back to
@@ -79,7 +79,7 @@ account-employee binding, but never creates users or modifies passwords.
 2. An account with no employee binding cannot submit a profile correction request.
 3. A successful profile correction submission produces an operations audit record and a lightweight work item.
 4. A successful administrator review produces a review audit record and syncs the work item status.
-5. Current permissions still retain `Admins` compatibility, but code entry points already use P12.4 fine-grained business
+5. Current permissions still retain `Admins` compatibility, but code entry points already use fine-grained business
    permissions.
 
 ## Follow-up deepening directions

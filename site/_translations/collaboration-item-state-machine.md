@@ -93,6 +93,6 @@ zero-row update writes no orphan event.
 
 ## 6. Out of scope
 
-- The legacy business application `BusinessApplicationDb` (the old P19 sample) has its own state machine and is outside this
+- The legacy business application `BusinessApplicationDb` (the old sample) has its own state machine and is outside this
   state machine's scope.
 - This round adds or removes no status or transition, and changes no business semantics and no UI.

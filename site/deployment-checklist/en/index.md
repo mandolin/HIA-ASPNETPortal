@@ -13,7 +13,7 @@ external configuration.
 
 ## Pre-release boundaries
 
-- [ ] The target machine has .NET Framework 4.8 installed; do not deploy P5.2+ versions when 4.8 is missing.
+- [ ] The target machine has .NET Framework 4.8 installed; do not deploy new builds when 4.8 is missing.
 - [ ] The release profile is confirmed — Dev, Test, Prod, Scan or LegacyIe — and the mapping between profile and Web.config
       transform is recorded.
 - [ ] `dev/scripts/Test-PortalPublishReadiness.ps1` has been run, and the project Content manifest, theme packages and
@@ -45,7 +45,7 @@ external configuration.
       historical scripts hard-code the database name `Portal` and include rebuild/clear behaviour.
 - [ ] P2/P3/P5 incremental migrations have first been verified on a separate test database; application startup does not run
       migrations automatically.
-- [ ] P5.2 credential migration, P5.3 permission mapping and P5.4 deployment policy all have rollback or deferral records.
+- [ ] credential migration, permission mapping and deployment policy all have rollback or deferral records.
 
 ## IIS and application pool
 
@@ -108,7 +108,7 @@ external configuration.
 
 - [ ] The home page, sign-in, sign-out, the Admin main entry and core modules are accessible.
 - [ ] Unauthenticated access to back-office resources, logs and audit pages is denied.
-- [ ] Administrators can reach the first batch of P5.3 permission entries normally; ordinary users or users lacking
+- [ ] Administrators can reach the first batch of permission entries normally; ordinary users or users lacking
       permissions are denied those entries.
 - [ ] After a role or permission is tightened, the target user's next request is re-evaluated or they are required to sign
       in again.

@@ -17,7 +17,7 @@ password automatically.
    `Portal_Users.Password` digest.
 2. `src/Setup/Portal_UserCredentials.sql` only creates the strong-hash credential table and the security-state table; it
    writes no new strong-hash password seed.
-3. Since P5.2, creating a user, registering and an administrator resetting a password all write to `Portal_UserCredentials`;
+3. Creating a user, registering and an administrator resetting a password all write to `Portal_UserCredentials`;
    the legacy MD5 is allowed only as a first-sign-in compatibility upgrade path for historical accounts.
 4. Production, shared test and customer demo environments must not keep the default admin password, and must not write shared
    development passwords into the repository, internal directories, logs or screenshots.

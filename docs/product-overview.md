@@ -28,7 +28,7 @@
 
 **不适合**：
 
-- 需要**对外 REST / GraphQL API** 的集成场景 —— 本项目为 Web Forms 门户，**无此类对外面**（边界判定见 [documentation-registry.md](documentation-registry.md) 第 2 族）；
+- 需要**对外 REST / GraphQL API** 的集成场景 —— 本项目为 Web Forms 门户，**无此类对外面**（边界判定见 [contracts/README.md](contracts/README.md)）；
 - 需要现代前端框架（React / Vue）或前后端分离架构的场景；
 - 直接上生产且要求生产环境验证证据的场景 —— 该证据尚未提供（见上节）。
 

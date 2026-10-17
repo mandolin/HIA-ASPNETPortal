@@ -55,12 +55,10 @@ output checks; when Debug XML already exists, pass `-SkipXmlBuild` explicitly.
 `dotnetdoc.api-only.config.json` is the troubleshooting fallback configuration, consuming only the four XML documentation
 files. `dotnetdoc.source-probe.config.json` is a source-relation research configuration, used to observe how the C# source
 extractor behaves when full project context is missing; it is not a default gate and does not block the portal documentation
-main line. When HIA-Documentation-Sys later provides a more stable project-level source linkage, source relations can be
-promoted to the default contract.
 
 ## Coverage tiers
 
-From P13.3 on, documentation coverage is not expressed as a single percentage; it is split by risk and delivery value into
+Documentation coverage is not expressed as a single percentage; it is split by risk and delivery value into
 three tiers:
 
 | Tier | Scope | Current requirement |
@@ -73,19 +71,6 @@ three tiers:
 comments and which directories belong to generated-output boundaries, but it does not replace human judgement on whether the
 comments are accurate.
 
-## HIA documentation notifications
-
-Target-project notifications from HIA-Documentation-Sys have moved to a pull-based model. This project no longer waits for an
-external project to write `dev/notify/`; instead it actively reads HIA-Documentation-Sys's **internal notification
-directory** (in that project's private repository) when it needs to check documentation toolchain changes.
-
-Use `dev/scripts/Get-HiaDocumentationNotifications.ps1` to view recent notifications. The script only reads notification
-content; it does not copy files, modify sources, change dependencies, or make HIA-Documentation-Sys a hard dependency of this
-project's build, test, IIS Express startup or release process.
-
-The P13.3 `Test-PortalDocumentationReadiness.ps1` treats notification-source readability as a fixed check. If
-HIA-Documentation-Sys is absent on the machine, the result is recorded as `Pending`, which does not mean the portal's own build
-failed.
 
 ## Generated directories and commit policy
 
@@ -103,11 +88,6 @@ ownership:
 If versioned documentation ever needs to be published, ownership, licence, cleanup method, publication location, access
 boundary and rollback plan must be defined first, and this guide, the public index and the gates must be updated.
 
-Once the .NET documentation mechanism, output contract, source linkage and generated-artefact boundaries of
-HIA-Documentation-Sys stabilise, the old SHFB/Doxygen sites will no longer be kept as a long-term compatibility target. At
-that point the historical generated output and empty configuration footprints above may be deleted per an internal cleanup
-plan; if a little information still needs keeping, it should first be migrated into HIA documentation toolchain input
-documentation rather than continuing to commit or publish SHFB/Doxygen generated output.
 
 ## Local verification order
 
@@ -117,7 +97,7 @@ documentation rather than continuing to commit or publish SHFB/Doxygen generated
 3. To confirm C# XML output, run `portal: verify .NET XML documentation`; if necessary let that task build the Debug
    configuration first.
 4. To confirm the HIA DotNetDoc output contract, run `portal: build .NET DotNetDoc pilot`.
-5. To retain P13.3 documentation evidence, run:
+5. To retain documentation evidence, run:
 
 ```powershell
 dev/scripts/New-PortalDocumentationEvidencePackage.ps1

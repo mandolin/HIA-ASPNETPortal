@@ -38,7 +38,6 @@ title: 测试清单
 - [ ] 新增或调整数据访问代码前，运行 `dev/scripts/Get-PortalDataAccessInventory.ps1`，确认 SQL/provider 标签和方言风险已记录。
 - [ ] 新增或调整数据库脚本前，运行 `dev/scripts/Get-PortalMigrationManifest.ps1`，确认脚本已纳入 manifest、类型、幂等性、provider 标签和回滚边界。
 - [ ] 任何 `-Apply*` 数据库迁移演练均只允许指向隔离测试库，并保留 apply 输出和随后的只读 require 输出。
-- [ ] 新增或调整 HIA 外围集成契约、draft fixture、文档化通知读取或证据引用规则前，运行 `dev/scripts/Get-PortalHiaIntegrationInventory.ps1`，确认契约版本、独立 proof、通知读取和隐私边界仍可复核。
 
 ## 运行检查
 
@@ -77,7 +76,7 @@ title: 测试清单
 
 - [ ] `dev/scripts/Test-PortalDocumentationReadiness.ps1` 对公开文档化指南、coverage 分层、JSDoc pilot、XML 边界和 HIA 通知读取机制通过。
 - [ ] `dev/scripts/Get-PortalDocumentationBaseline.ps1 -OutputJson <证据路径>` 已记录已追踪源码的文档化 inventory。
-- [ ] 如需 P13.3 文档化证据，执行 `dev/scripts/New-PortalDocumentationEvidencePackage.ps1` 并确认 `Failed=0`。
+- [ ] 如需 文档化证据，执行 `dev/scripts/New-PortalDocumentationEvidencePackage.ps1` 并确认 `Failed=0`。
 - [ ] `src/Documentation/`、`src/DoxyGen/`、`src/Portal.Components.Data/Documentation/`、`src/Portal/Documentation/` 和 `src/Portal.shfbproj` 未作为正式生成物提交。
 
 ## 发布前检查

@@ -20,8 +20,6 @@ For lookup: test tiers, theme contracts, state machines, compliance policy and t
 | [Business application state machine]({{ site.baseurl }}/en/business-application-state-machine/) | |
 | [Collaboration item state machine]({{ site.baseurl }}/en/collaboration-item-state-machine/) | |
 | [Audit retention policy]({{ site.baseurl }}/en/audit-retention-policy/) | |
-| [Documentation registry]({{ site.baseurl }}/en/documentation-registry/) | |
-| [Documentation review walkthrough checklist]({{ site.baseurl }}/en/documentation-review-checklist/) | |
 | [Documentation map]({{ site.baseurl }}/en/documentation-map/) | |
 | [Documentation artefacts and toolchain boundaries]({{ site.baseurl }}/en/documentation-artifacts-guide/) | |
 | [Technical contracts]({{ site.baseurl }}/en/contracts-readme/) | |
