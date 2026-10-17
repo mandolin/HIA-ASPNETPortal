@@ -11,7 +11,7 @@ has_toc: false
 <section class="oc-hero">
   <span class="oc-hero-tag">产品总览</span>
   <h1 class="oc-hero-title">一个门户平台，两种使用方式</h1>
-  <p class="oc-hero-lead">HIA-ASPNETPortal 是面向企业内网的 Web Forms 门户平台：既能作为**现成的门户底座**直接启用，也能作为**参考基线**，借鉴其中的状态机、审计与治理设计。</p>
+  <p class="oc-hero-lead">HIA-ASPNETPortal 是面向企业内网的 Web Forms 门户平台：既能作为<strong>现成的门户底座</strong>直接启用，也能作为<strong>参考基线</strong>，借鉴其中的状态机、审计与治理设计。</p>
   <p class="oc-cta-row">
     <a class="oc-btn oc-btn-primary" href="{{ site.baseurl }}/user-guide/">快速上手</a>
     <a class="oc-btn oc-btn-ghost" href="{{ site.baseurl }}/product-overview/">阅读详细定位</a>

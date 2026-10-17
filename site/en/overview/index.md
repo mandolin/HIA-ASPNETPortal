@@ -11,7 +11,7 @@ has_toc: false
 <section class="oc-hero">
   <span class="oc-hero-tag">Overview</span>
   <h1 class="oc-hero-title">One portal platform, two ways to use it</h1>
-  <p class="oc-hero-lead">HIA-ASPNETPortal is a Web Forms portal platform for the enterprise intranet: use it as a **ready-made portal foundation**, or take it as a **reference baseline** for its state-machine, auditing and governance designs.</p>
+  <p class="oc-hero-lead">HIA-ASPNETPortal is a Web Forms portal platform for the enterprise intranet: use it as a <strong>ready-made portal foundation</strong>, or take it as a <strong>reference baseline</strong> for its state-machine, auditing and governance designs.</p>
   <p class="oc-cta-row">
     <a class="oc-btn oc-btn-primary" href="{{ site.baseurl }}/en/user-guide/">Get started</a>
     <a class="oc-btn oc-btn-ghost" href="{{ site.baseurl }}/en/product-overview/">Full positioning</a>

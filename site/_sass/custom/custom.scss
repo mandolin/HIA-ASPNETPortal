@@ -479,6 +479,40 @@
   &:hover { border-color: #ffffff; color: #ffffff; }
 }
 
+// Sidebar top site-title (theme default, duplicates the topbar brand; Material
+// has no such element) — hide it on docs pages.
+.docs-body .side-bar .site-title {
+  display: none;
+}
+
+// Topbar search box: give it explicit box geometry — inherited theme rules
+// collapse it to a thin line inside the flex topbar.
+.docs-topbar .search {
+  display: block;
+}
+
+.docs-topbar .search-input-wrap {
+  display: flex;
+  align-items: center;
+  height: 2.1rem;
+  padding: 0 0.7rem;
+}
+
+.docs-topbar .search-input {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+// At >=50rem the theme forces `.search { height: 100% !important; padding: 0 !important }`
+// — designed for its own fixed-height `.main-header`. Our topbar is content-sized, so
+// height:100% resolves to 0 and the box collapses to a thin line. Re-anchor explicitly;
+// !important is required to outbid the theme's own !important rule.
+.docs-topbar .search {
+  height: 2.6rem !important;
+  padding: 0.3rem 0.5rem !important;
+}
+
 // Content grid: article + sticky right TOC rail. The theme's .main carries a
 // max-width ($content-width, 50rem) that would clamp the three-column grid —
 // release it here and let .docs-grid own the 61rem Material container width.
