@@ -533,6 +533,31 @@ $gateLayers = [ordered]@{
         #   (the static rule follows the known list).</en>
         # </lang>
         @{ File = 'Test-PortalPerformanceBaseline.mjs';      Runner = 'mjs'; Kind = '性能基线'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P27`（`W-anp-P149`，`C-anp-P24` 残余项）新增：**默认主题视觉回归基线**门禁（L2）。
+        #   P24 裁定残余项为"`Default` 回退主题纳入视觉回归（补 Default 规则的运行期证据）"；既有 C-anp-P18/W101
+        #   的 258 张截图矩阵是人工复核证据而非机器判据，且收口建议"截图转为按需生成 + 摘要入库"。
+        #   故本门禁把视觉回归固化为**结构化指标**：每页采集关键元素的计算样式（CSS 决定，跨机器确定）与几何（容差），
+        #   与基线图 dev\default-theme-visual-baseline.json 比对。主题只能由「Tab 覆盖 → 数据库运行设置 → appSettings →
+        #   Default」决定（解析器不接受 URL 覆盖），故依赖 fixture `New-PortalDefaultThemeFixture.ps1` 临时切换到 Default
+        #   并在结束后恢复；A0 断言每页 body 必须带 portal-theme-default class——fixture 未生效即失败，不假装通过。
+        #   采样页第 5 页（tabid=1101）来自实测：前四页对 95 条 Default 作用域规则命中 0 条（指标空转），该页命中 23/95。</zh-CN>
+        #   <en>`C-anp-P27` (`W-anp-P149`, the `C-anp-P24` residual) addition: the **default-theme visual regression baseline**
+        #   gate (L2). The residual ruled by P24 is "bring the `Default` fallback theme into visual regression (add runtime
+        #   evidence for the Default rules)"; the existing C-anp-P18/W101 258-shot matrix is human-reviewed evidence, not a machine
+        #   criterion, and its closeout recommended moving screenshots to "generate on demand + commit a summary". This gate
+        #   therefore turns visual regression into **structured metrics**: per page it captures key elements' computed styles
+        #   (CSS-determined, stable across machines) and geometry (tolerance), compared against
+        #   dev\default-theme-visual-baseline.json. A theme is selected only by "tab override → database setting → appSettings →
+        #   Default" (the resolver rejects URL overrides), so the fixture `New-PortalDefaultThemeFixture.ps1` switches to Default
+        #   temporarily and restores afterwards; A0 asserts every page's body carries the portal-theme-default class — if the
+        #   fixture did not take effect the gate fails rather than pretending to pass. The fifth sampled page (tabid=1101) comes
+        #   from measurement: the first four pages matched 0 of the 95 Default-scoped rules (a vacuous metric); this one hits 23/95.</en>
+        # </lang>
+        @{ File = 'Test-PortalDefaultThemeVisualBaseline.mjs'; Runner = 'mjs'; Kind = '默认主题视觉基线'; Args = @();
+           Fixture = @{ Script = 'New-PortalDefaultThemeFixture.ps1'
+                        Apply  = @(, @('-Action', 'Apply'))
+                        Remove = @(, @('-Action', 'Remove')) } }
     )
 }
 

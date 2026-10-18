@@ -208,6 +208,22 @@
       "gate": "Test-PortalGateCoverageMap.ps1"
     },
     {
+      "id": "default-theme-visual",
+      "name": "默认主题（Default 回退主题）视觉回归基线（计算样式 + 几何 vs 基线图）",
+      "layer": "L2",
+      "coverage": "partial",
+      "boundary": "只证明采样页上关键元素的 Default 计算样式与几何未漂移；不证明像素级外观（不比对截图，字体/抗锯齿/DPI 会造成不可靠噪声），也不证明全部 Default 规则都有运行期证据——95 条 portal-theme-default 作用域规则中仅 23 条在采样页命中元素（其余见 uncovered 面 default-rule-evidence-coverage）。",
+      "gate": "Test-PortalDefaultThemeVisualBaseline.mjs"
+    },
+    {
+      "id": "default-rule-evidence-coverage",
+      "name": "Default.css 剩余规则的运行期证据（95 条中 72 条在采样页无命中元素）",
+      "coverage": "uncovered",
+      "owner": "项目维护者",
+      "reEntry": "补充能渲染 business-application-* / 编辑页专属 class 的采样页后重采基线（PORTAL_VISUAL_CAPTURE=1）并登记覆盖面。",
+      "basis": "W-anp-P149 实测：95 条 portal-theme-default 作用域规则全部指向业务模块/编辑页专属 class，当前 5 个采样页中仅 tabid=1101 命中 23 条。"
+    },
+    {
       "id": "landing-stats",
       "name": "landing 统计数字（文档子站首页统计与可计算真值一致）",
       "layer": "L0",

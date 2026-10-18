@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "note": "默认主题（Default 回退主题）视觉基线——每页每个探针的运行期计算样式与几何。来源：主题 fixture 切到 Default 后由 Test-PortalDefaultThemeVisualBaseline.mjs 在真实渲染下采集（2026-10-19）。变更铁律：基线变动必须是**有意变更**（主题/CSS 设计改动），须以 PORTAL_VISUAL_CAPTURE=1 重采并人工核对后提交，禁止为了让门禁变绿而随手改基线。",
+  "generatedUtc": "2026-10-18T19:03:16.559Z",
+  "pages": {
+    "home": {
+      "probes": {
+        "body": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)"
+          }
+        },
+        "siteTitle": {
+          "present": true,
+          "values": {
+            "color": "rgb(204, 204, 153)",
+            "fontSize": "20px"
+          }
+        },
+        "selectedTab": {
+          "present": true,
+          "values": {
+            "color": "rgb(139, 0, 0)",
+            "fontSize": "13px"
+          }
+        },
+        "otherTabs": {
+          "present": true,
+          "values": {
+            "color": "rgb(238, 238, 238)"
+          }
+        },
+        "head": {
+          "present": false
+        },
+        "normal": {
+          "present": false
+        },
+        "tabBg": {
+          "present": false
+        },
+        "headBg": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(139, 0, 0)"
+          }
+        }
+      }
+    },
+    "workbench": {
+      "probes": {
+        "body": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)"
+          }
+        },
+        "siteTitle": {
+          "present": true,
+          "values": {
+            "color": "rgb(204, 204, 153)",
+            "fontSize": "20px"
+          }
+        },
+        "selectedTab": {
+          "present": true,
+          "values": {
+            "color": "rgb(139, 0, 0)",
+            "fontSize": "13px"
+          }
+        },
+        "otherTabs": {
+          "present": true,
+          "values": {
+            "color": "rgb(238, 238, 238)"
+          }
+        },
+        "head": {
+          "present": false
+        },
+        "normal": {
+          "present": false
+        },
+        "tabBg": {
+          "present": false
+        },
+        "headBg": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(139, 0, 0)"
+          }
+        }
+      }
+    },
+    "myworkitems": {
+      "probes": {
+        "body": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)"
+          }
+        },
+        "siteTitle": {
+          "present": true,
+          "values": {
+            "color": "rgb(204, 204, 153)",
+            "fontSize": "20px"
+          }
+        },
+        "selectedTab": {
+          "present": true,
+          "values": {
+            "color": "rgb(139, 0, 0)",
+            "fontSize": "13px"
+          }
+        },
+        "otherTabs": {
+          "present": true,
+          "values": {
+            "color": "rgb(238, 238, 238)"
+          }
+        },
+        "head": {
+          "present": false
+        },
+        "normal": {
+          "present": false
+        },
+        "tabBg": {
+          "present": false
+        },
+        "headBg": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(139, 0, 0)"
+          }
+        }
+      }
+    },
+    "adminTab": {
+      "probes": {
+        "body": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)"
+          }
+        },
+        "siteTitle": {
+          "present": true,
+          "values": {
+            "color": "rgb(204, 204, 153)",
+            "fontSize": "20px"
+          }
+        },
+        "selectedTab": {
+          "present": true,
+          "values": {
+            "color": "rgb(139, 0, 0)",
+            "fontSize": "13px"
+          }
+        },
+        "otherTabs": {
+          "present": true,
+          "values": {
+            "color": "rgb(238, 238, 238)"
+          }
+        },
+        "head": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(18, 56, 95)"
+          },
+          "geometry": {
+            "width": 1440,
+            "height": 23
+          }
+        },
+        "normal": {
+          "present": true,
+          "values": {
+            "color": "rgb(105, 105, 105)"
+          }
+        },
+        "tabBg": {
+          "present": false
+        },
+        "headBg": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(139, 0, 0)"
+          }
+        }
+      }
+    },
+    "leaveExpense": {
+      "probes": {
+        "body": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(0, 0, 0)"
+          }
+        },
+        "siteTitle": {
+          "present": true,
+          "values": {
+            "color": "rgb(204, 204, 153)",
+            "fontSize": "20px"
+          }
+        },
+        "selectedTab": {
+          "present": true,
+          "values": {
+            "color": "rgb(139, 0, 0)",
+            "fontSize": "13px"
+          }
+        },
+        "otherTabs": {
+          "present": true,
+          "values": {
+            "color": "rgb(238, 238, 238)"
+          }
+        },
+        "head": {
+          "present": false
+        },
+        "normal": {
+          "present": false
+        },
+        "tabBg": {
+          "present": false
+        },
+        "headBg": {
+          "present": true,
+          "values": {
+            "backgroundColor": "rgb(139, 0, 0)"
+          }
+        }
+      }
+    }
+  },
+  "defaultRuleEvidence": {
+    "home": {
+      "total": 95,
+      "withEvidence": 0
+    },
+    "workbench": {
+      "total": 95,
+      "withEvidence": 0
+    },
+    "myworkitems": {
+      "total": 95,
+      "withEvidence": 0
+    },
+    "adminTab": {
+      "total": 95,
+      "withEvidence": 0
+    },
+    "leaveExpense": {
+      "total": 95,
+      "withEvidence": 23
+    }
+  }
+}
