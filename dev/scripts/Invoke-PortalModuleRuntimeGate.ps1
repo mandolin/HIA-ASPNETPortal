@@ -72,8 +72,18 @@ $connectionConfig = Join-Path $env:USERPROFILE 'Web\HIA-ASPNETPortal\dev\connect
 
 function Write-Step([string] $message) { Write-Host "[p83] $message" }
 
+# <lang>
+#   <zh-CN>`W-anp-P139`：前置条件缺失必须**显式 exit 2**（表示"环境没装"，不是"代码坏了"），并写入证据、不与代码缺陷（exit 1）混报。
+#   早先这里用 `Write-Error ...; exit 2`，但本脚本头 `$ErrorActionPreference='Stop'` 会把 `Write-Error` 当成**终止错误**抛出，
+#   `exit 2` 根本执行不到，实际以 exit 1 退出 —— 于是 playwright 缺失被误判成产品缺陷。改用 `Write-Step`（`Write-Host`）避免进错误流，确保 exit 2 命中。</zh-CN>
+#   <en>`W-anp-P139`: a missing prerequisite must exit **2** explicitly (meaning "environment not installed", not "product broken")
+#   and be recorded, never conflated with a code defect (exit 1). Earlier this used `Write-Error ...; exit 2`, but the script header
+#   `$ErrorActionPreference='Stop'` turns `Write-Error` into a **terminating** error, so `exit 2` was never reached and the script
+#   actually exited 1 — playwright missing was misjudged as a product defect. Using `Write-Step` (`Write-Host`) keeps it off the error
+#   stream so exit 2 actually fires.</en>
+# </lang>
 foreach ($required in @(@{ Path = $nodeExe; Hint = 'node 运行时' }, @{ Path = $playwrightPath; Hint = 'playwright 模块（开发期依赖，不入库）' }, @{ Path = $connectionConfig; Hint = '外置连接串' })) {
-    if (-not (Test-Path $required.Path)) { Write-Error ("前置条件缺失：{0}（{1}）" -f $required.Hint, $required.Path); exit 2 }
+    if (-not (Test-Path $required.Path)) { Write-Step ("前置条件缺失：{0}（{1}）" -f $required.Hint, $required.Path); exit 2 }
 }
 
 if (-not $EvidenceDir) {

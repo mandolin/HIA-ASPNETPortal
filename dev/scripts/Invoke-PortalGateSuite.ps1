@@ -516,6 +516,16 @@ Write-Step "证据目录：$EvidenceDir"
 
 $results = @()
 $overallFailed = $false
+# <lang>
+#   <zh-CN>`$prereqMissing` 标记本层是否有门禁因**前置条件缺失**而被跳过（exit 2）：这类跳过不是代码缺陷，
+#   编排必须把它与真实失败（exit 1）分开，并以整体退出码 2 明示"前置缺失"，否则 CI 会把"环境没装 playwright"
+#   误判成"产品坏了"。对应 `W-anp-P139`（playwright 前置固化）。</zh-CN>
+#   <en>`$prereqMissing` marks whether any gate in this layer was **skipped for a missing prerequisite** (exit 2): such a skip is
+#   not a code defect, and the suite must keep it separate from a real failure (exit 1) and surface it with an overall exit code of
+#   2 meaning "prerequisite missing", so CI never misreads "playwright not installed" as "the product is broken". Belongs to
+#   `W-anp-P139` (formalizing the playwright prerequisite).</en>
+# </lang>
+$prereqMissing = $false
 
 foreach ($layerName in $layersToRun) {
     Write-Step "--- 层 $layerName ---"
@@ -758,8 +768,36 @@ foreach ($layerName in $layersToRun) {
                 #   committed) before invoking, satisfying runtime deps of semantic/evidence gates; a gate's own
                 #   mandatory arguments, if any, come through `Args` via array splatting.</en>
                 # </lang>
+                # <lang>
+                #   <zh-CN>`W-anp-P139`：playwright 是开发期依赖、不入库。所有 `mjs` 门禁都通过 `loadChromium()` 依赖它，
+                #   缺失时门禁会抛 `Unable to resolve "playwright"`（exit 1）并被误判为**代码缺陷** —— 这正是本工作包要消的混报。
+                #   故在此**统一**判定：playwright 可用 ⇔ 外部已设 `PORTAL_PLAYWRIGHT_MODULE` 且路径存在，或仓库
+                #   `temp\node_modules\playwright` 存在。两者皆否则**显式跳过**（记 `Skip`、exit 2、写明原因），
+                #   不调用 Node、不记失败。这样无论将来新增多少 `mjs` 门禁，前置缺失口径自动覆盖，无需逐门禁改。</zh-CN>
+                #   <en>`W-anp-P139`: playwright is a dev-only dependency and is not committed. Every `mjs` gate depends on it through
+                #   `loadChromium()`; when absent the gate throws `Unable to resolve "playwright"` (exit 1) and is misjudged as a
+                #   **code defect** — exactly the misreport this work item removes. So the check is made **uniformly here**: playwright
+                #   is available iff an external `PORTAL_PLAYWRIGHT_MODULE` is set to an existing path, or the repo's
+                #   `temp\node_modules\playwright` exists. If neither holds, the gate is **explicitly skipped** (recorded as `Skip`,
+                #   exit 2, with the reason stated), Node is not invoked and no failure is recorded. Thus however many `mjs` gates are
+                #   added later, the missing-prerequisite convention covers them automatically without per-gate edits.</en>
+                # </lang>
                 $pwDir = Join-Path $repoRoot 'temp\node_modules\playwright'
-                if (Test-Path $pwDir) { $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path $pwDir).Path }
+                $pwAvailable = $false
+                if ($env:PORTAL_PLAYWRIGHT_MODULE -and (Test-Path -LiteralPath $env:PORTAL_PLAYWRIGHT_MODULE)) {
+                    $pwAvailable = $true
+                } elseif (Test-Path -LiteralPath $pwDir) {
+                    $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path $pwDir).Path
+                    $pwAvailable = $true
+                }
+                if (-not $pwAvailable) {
+                    $record.status = 'Skip'
+                    $record.exitCode = 2
+                    $record.note = 'playwright 前置缺失（未设置 PORTAL_PLAYWRIGHT_MODULE 且 temp\node_modules\playwright 不存在）；按 W-anp-P139 跳过，非代码缺陷'
+                    Write-Step ("  [Skip] {0}（playwright 前置缺失）" -f $gate.File)
+                    $results += $record
+                    continue
+                }
                 $gateArgs = @($gatePath)
                 if ($invokeArgs.Count -gt 0) { $gateArgs += $invokeArgs }
                 $raw = & $nodeExe @gateArgs 2>&1
@@ -771,7 +809,18 @@ foreach ($layerName in $layersToRun) {
             $exit = $LASTEXITCODE
             $text = ($raw | Out-String)
             $record.exitCode = $exit
-            if (Test-GateFailed $text $exit) {
+            if ($exit -eq 2) {
+                # <lang>
+                #   <zh-CN>门禁自报 `exit 2` = 前置条件缺失（不是代码缺陷）。`W-anp-P139` 之前这里被 `Test-GateFailed`
+                #   的"非零退出码即失败"判定误记成 `Fail` —— 正是"环境没装"与"产品坏了"混报的根因。此处显式识别为 `Skip`。</zh-CN>
+                #   <en>A gate's own `exit 2` means a missing prerequisite, not a code defect. Before `W-anp-P139` this was
+                #   mis-scored as `Fail` by `Test-GateFailed`'s "non-zero exit means failure" rule — the very root of conflating
+                #   "environment not installed" with "product broken". Here it is explicitly recognised as `Skip`.</en>
+                # </lang>
+                $record.status = 'Skip'
+                if (-not $record.note) { $record.note = '门禁自报前置条件缺失（exit 2）' }
+                $prereqMissing = $true
+            } elseif (Test-GateFailed $text $exit) {
                 $record.status = 'Fail'
                 $overallFailed = $true
                 $record.note = '退出码或输出含失败标志'
@@ -898,10 +947,11 @@ $summary = [pscustomobject]@{
     phase = 'W-anp-P85 gate suite'
     generatedUtc = (Get-Date).ToUniversalTime().ToString('o')
     layer = $Layer
-    result = if ($overallFailed) { 'Fail' } else { 'Pass' }
+    result = if ($overallFailed) { 'Fail' } elseif ($prereqMissing) { 'PassWithSkips' } else { 'Pass' }
     gateCount = $results.Count
     failedCount = ($results | Where-Object { $_.status -eq 'Fail' }).Count
     skippedCount = ($results | Where-Object { $_.status -eq 'Skip' }).Count
+    prereqMissing = $prereqMissing
     results = $results
 }
 $summaryPath = Join-Path $EvidenceDir 'gate-suite-summary.json'
@@ -911,5 +961,6 @@ Write-Host ''
 Write-Step ("结果：{0}｜门禁 {1} 个，失败 {2}，跳过 {3}" -f $summary.result, $summary.gateCount, $summary.failedCount, $summary.skippedCount)
 Write-Step "证据：$EvidenceDir"
 if ($overallFailed) { exit 1 }
+if ($prereqMissing) { exit 2 }
 exit 0
 
