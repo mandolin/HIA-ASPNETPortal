@@ -284,6 +284,20 @@ $gateLayers = [ordered]@{
         #   together form the complete coverage statement.</en>
         # </lang>
         @{ File = 'Test-PortalEvidenceCoverage.ps1';          Runner = 'ps1'; Kind = '证据覆盖台账'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P27`（`W-anp-P143`）新增：**无障碍基线**门禁（L0 静态）——补上完全无门禁的盲区面。
+        #   硬断言（阈值先经探针实测当前读数再定）：六套正式主题正文与语义文本变量对背景 ≥ 4.5（WCAG AA 正文）、
+        #   必须定义 :focus 可见样式、img 必须有 alt、非可聚焦元素禁挂内联 onclick、`<a>` 无 href 必须是命名锚；
+        #   软指标上报明细与 Default/ThemeProbe 观察。证明边界：只证明 CSS 声明值与标记属性，
+        #   不证明渲染级对比度/真实键盘焦点顺序（后续 L2 工作）。</zh-CN>
+        #   <en>`C-anp-P27` (`W-anp-P143`) addition: the **accessibility baseline** gate (L0, static) — filling a blind spot with
+        #   no gate at all. Hard assertions (thresholds measured against the current tree before fixing): the six official themes'
+        #   body text and semantic text variables vs background >= 4.5 (WCAG AA body), visible :focus styling required, img must
+        #   carry alt, non-focusable elements must not carry inline onclick, and an `<a>` without href must be a named anchor;
+        #   soft metrics report details and the Default/ThemeProbe observations. Proof boundary: proves declared CSS values and
+        #   markup attributes only — rendered contrast / real keyboard focus order are future L2 work.</en>
+        # </lang>
+        @{ File = 'Test-PortalAccessibilityBaseline.ps1';     Runner = 'ps1'; Kind = '无障碍基线'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
