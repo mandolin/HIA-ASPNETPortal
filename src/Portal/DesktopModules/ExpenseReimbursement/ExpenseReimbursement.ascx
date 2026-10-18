@@ -7,7 +7,7 @@
     </lang>
 --%>
 <div class="expense-reimbursement">
-    <div class="expense-reimbursement-title">费用报销</div>
+    <div class="expense-reimbursement-title"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_Title%>" runat="server" /></div>
     <%--
         <lang>
             <zh-CN>消息面板默认隐藏，仅在 code-behind 判定成功或失败后置可见；文案由 code-behind 写入 Literal，不在此处拼接。</zh-CN>
@@ -26,24 +26,24 @@
     --%>
     <div class="expense-reimbursement-form-grid">
         <div class="expense-reimbursement-form-field expense-reimbursement-form-field-wide">
-            <label class="SubHead expense-reimbursement-label">费用类别</label>
+            <label class="SubHead expense-reimbursement-label"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_LabelCategory%>" runat="server" /></label>
             <asp:DropDownList ID="ddlCategory" runat="server" CssClass="NormalTextBox expense-reimbursement-input">
-                <asp:ListItem Text="差旅" Value="差旅" />
-                <asp:ListItem Text="餐饮" Value="餐饮" />
-                <asp:ListItem Text="办公" Value="办公" />
-                <asp:ListItem Text="其他" Value="其他" />
+                <asp:ListItem Text="<%$ Resources:lang,ExpenseReimbursement_CategoryTravel %>" Value="差旅" />
+                <asp:ListItem Text="<%$ Resources:lang,ExpenseReimbursement_CategoryMeal %>" Value="餐饮" />
+                <asp:ListItem Text="<%$ Resources:lang,ExpenseReimbursement_CategoryOffice %>" Value="办公" />
+                <asp:ListItem Text="<%$ Resources:lang,ExpenseReimbursement_CategoryOther %>" Value="其他" />
             </asp:DropDownList>
         </div>
         <div class="expense-reimbursement-form-field">
-            <label class="SubHead expense-reimbursement-label">报销金额</label>
+            <label class="SubHead expense-reimbursement-label"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_LabelAmount%>" runat="server" /></label>
             <asp:TextBox ID="txtAmount" runat="server" CssClass="NormalTextBox expense-reimbursement-input" />
         </div>
         <div class="expense-reimbursement-form-field">
-            <label class="SubHead expense-reimbursement-label">发票/附件</label>
+            <label class="SubHead expense-reimbursement-label"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_LabelInvoice%>" runat="server" /></label>
             <asp:FileUpload ID="fileAttach" runat="server" CssClass="expense-reimbursement-input" />
         </div>
         <div class="expense-reimbursement-form-field expense-reimbursement-form-field-wide">
-            <label class="SubHead expense-reimbursement-label">费用事由</label>
+            <label class="SubHead expense-reimbursement-label"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_LabelReason%>" runat="server" /></label>
             <asp:TextBox ID="txtReason" runat="server" TextMode="MultiLine" Rows="5" CssClass="NormalTextBox expense-reimbursement-input expense-reimbursement-body" />
         </div>
     </div>
@@ -55,7 +55,7 @@
         </lang>
     --%>
     <div class="expense-reimbursement-actions">
-        <asp:Button ID="btnSubmit" runat="server" CssClass="CommandButton" Text="提交报销单" OnClick="btnSubmit_Click" />
+        <asp:Button ID="btnSubmit" runat="server" CssClass="CommandButton" Text="<%$ Resources:lang,ExpenseReimbursement_ButtonSubmit %>" OnClick="btnSubmit_Click" />
     </div>
     <%--
         <lang>
@@ -64,15 +64,15 @@
             <en>The list area is read-only: the Repeater binds the caller's own expense records supplied by the code-behind, and the Header/Item/Footer templates only render — no edit or delete entry point exists, and an empty-state panel covers the no-records case. Amounts use a fixed two-decimal format; no currency conversion happens here.</en>
         </lang>
     --%>
-    <div class="expense-reimbursement-subtitle">我的报销</div>
+    <div class="expense-reimbursement-subtitle"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_SubtitleMyClaims%>" runat="server" /></div>
     <div class="expense-reimbursement-list-wrap">
         <asp:Panel ID="pnlEmpty" runat="server" Visible="false">
-            <span class="expense-reimbursement-empty">暂无报销记录</span>
+            <span class="expense-reimbursement-empty"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_EmptyState%>" runat="server" /></span>
         </asp:Panel>
         <asp:Repeater ID="rptRecent" runat="server" Visible="false">
             <HeaderTemplate>
                 <table class="expense-reimbursement-list" cellspacing="0" cellpadding="4" border="0">
-                    <tr><th scope="col">编号</th><th scope="col">类别</th><th scope="col">金额</th><th scope="col">状态</th></tr>
+                    <tr><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnId%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnCategory%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnAmount%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnStatus%>" runat="server" /></th></tr>
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>

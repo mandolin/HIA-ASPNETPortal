@@ -6778,6 +6778,347 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：请假申请</zh-CN>
+        ///   <en>Looks up a localized string similar to: Leave Request</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_Title {
+            get {
+                return ResourceManager.GetString("LeaveRequest_Title", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：请假类型</zh-CN>
+        ///   <en>Looks up a localized string similar to: Leave Type</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_LabelLeaveType {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelLeaveType", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：开始日期</zh-CN>
+        ///   <en>Looks up a localized string similar to: Start Date</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_LabelStartDate {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelStartDate", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：结束日期</zh-CN>
+        ///   <en>Looks up a localized string similar to: End Date</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_LabelEndDate {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelEndDate", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：请假天数</zh-CN>
+        ///   <en>Looks up a localized string similar to: Days</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_LabelDays {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelDays", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：请假附件</zh-CN>
+        ///   <en>Looks up a localized string similar to: Attachment</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_LabelAttachment {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelAttachment", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：请假事由</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reason</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_LabelReason {
+            get {
+                return ResourceManager.GetString("LeaveRequest_LabelReason", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：提交申请</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submit Request</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ButtonSubmit", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：我的请假</zh-CN>
+        ///   <en>Looks up a localized string similar to: My Leave Requests</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_SubtitleMyRequests {
+            get {
+                return ResourceManager.GetString("LeaveRequest_SubtitleMyRequests", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无请假记录</zh-CN>
+        ///   <en>Looks up a localized string similar to: No leave requests yet</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_EmptyState {
+            get {
+                return ResourceManager.GetString("LeaveRequest_EmptyState", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：编号</zh-CN>
+        ///   <en>Looks up a localized string similar to: ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_ColumnId {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnId", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：类型</zh-CN>
+        ///   <en>Looks up a localized string similar to: Type</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_ColumnType {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnType", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：起止</zh-CN>
+        ///   <en>Looks up a localized string similar to: Period</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_ColumnPeriod {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnPeriod", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：天数</zh-CN>
+        ///   <en>Looks up a localized string similar to: Days</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_ColumnDays {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnDays", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：状态</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_ColumnStatus {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnStatus", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：费用报销</zh-CN>
+        ///   <en>Looks up a localized string similar to: Expense Reimbursement</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_Title {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_Title", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：费用类别</zh-CN>
+        ///   <en>Looks up a localized string similar to: Expense Category</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_LabelCategory {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_LabelCategory", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：报销金额</zh-CN>
+        ///   <en>Looks up a localized string similar to: Amount</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_LabelAmount {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_LabelAmount", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：发票/附件</zh-CN>
+        ///   <en>Looks up a localized string similar to: Invoice / Attachment</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_LabelInvoice {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_LabelInvoice", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：费用事由</zh-CN>
+        ///   <en>Looks up a localized string similar to: Reason</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_LabelReason {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_LabelReason", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：提交报销单</zh-CN>
+        ///   <en>Looks up a localized string similar to: Submit Claim</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_ButtonSubmit {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ButtonSubmit", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：我的报销</zh-CN>
+        ///   <en>Looks up a localized string similar to: My Claims</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_SubtitleMyClaims {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_SubtitleMyClaims", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：暂无报销记录</zh-CN>
+        ///   <en>Looks up a localized string similar to: No claims yet</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_EmptyState {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_EmptyState", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：编号</zh-CN>
+        ///   <en>Looks up a localized string similar to: ID</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_ColumnId {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ColumnId", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：类别</zh-CN>
+        ///   <en>Looks up a localized string similar to: Category</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_ColumnCategory {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ColumnCategory", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：金额</zh-CN>
+        ///   <en>Looks up a localized string similar to: Amount</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_ColumnAmount {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ColumnAmount", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：状态</zh-CN>
+        ///   <en>Looks up a localized string similar to: Status</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_ColumnStatus {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ColumnStatus", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：差旅</zh-CN>
+        ///   <en>Looks up a localized string similar to: Travel</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_CategoryTravel {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_CategoryTravel", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：餐饮</zh-CN>
+        ///   <en>Looks up a localized string similar to: Meals</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_CategoryMeal {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_CategoryMeal", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：办公</zh-CN>
+        ///   <en>Looks up a localized string similar to: Office</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_CategoryOffice {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_CategoryOffice", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：其他</zh-CN>
+        ///   <en>Looks up a localized string similar to: Other</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_CategoryOther {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_CategoryOther", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Compatibility</zh-CN>
         ///   <en>Looks up a localized string similar to: Mobile Compatibility</en>
         /// </lang>

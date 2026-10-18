@@ -2787,4 +2787,97 @@
   <data name="Admin_EmployeeProfileCorrectionRequests_NotReviewed" xml:space="preserve">
     <value>(not reviewed)</value>
   </data>
+<data name="LeaveRequest_Title" xml:space="preserve">
+    <value>Leave Request</value>
+</data>
+<data name="LeaveRequest_LabelLeaveType" xml:space="preserve">
+    <value>Leave Type</value>
+</data>
+<data name="LeaveRequest_LabelStartDate" xml:space="preserve">
+    <value>Start Date</value>
+</data>
+<data name="LeaveRequest_LabelEndDate" xml:space="preserve">
+    <value>End Date</value>
+</data>
+<data name="LeaveRequest_LabelDays" xml:space="preserve">
+    <value>Days</value>
+</data>
+<data name="LeaveRequest_LabelAttachment" xml:space="preserve">
+    <value>Attachment</value>
+</data>
+<data name="LeaveRequest_LabelReason" xml:space="preserve">
+    <value>Reason</value>
+</data>
+<data name="LeaveRequest_ButtonSubmit" xml:space="preserve">
+    <value>Submit Request</value>
+</data>
+<data name="LeaveRequest_SubtitleMyRequests" xml:space="preserve">
+    <value>My Leave Requests</value>
+</data>
+<data name="LeaveRequest_EmptyState" xml:space="preserve">
+    <value>No leave requests yet</value>
+</data>
+<data name="LeaveRequest_ColumnId" xml:space="preserve">
+    <value>ID</value>
+</data>
+<data name="LeaveRequest_ColumnType" xml:space="preserve">
+    <value>Type</value>
+</data>
+<data name="LeaveRequest_ColumnPeriod" xml:space="preserve">
+    <value>Period</value>
+</data>
+<data name="LeaveRequest_ColumnDays" xml:space="preserve">
+    <value>Days</value>
+</data>
+<data name="LeaveRequest_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+</data>
+<data name="ExpenseReimbursement_Title" xml:space="preserve">
+    <value>Expense Reimbursement</value>
+</data>
+<data name="ExpenseReimbursement_LabelCategory" xml:space="preserve">
+    <value>Expense Category</value>
+</data>
+<data name="ExpenseReimbursement_LabelAmount" xml:space="preserve">
+    <value>Amount</value>
+</data>
+<data name="ExpenseReimbursement_LabelInvoice" xml:space="preserve">
+    <value>Invoice / Attachment</value>
+</data>
+<data name="ExpenseReimbursement_LabelReason" xml:space="preserve">
+    <value>Reason</value>
+</data>
+<data name="ExpenseReimbursement_ButtonSubmit" xml:space="preserve">
+    <value>Submit Claim</value>
+</data>
+<data name="ExpenseReimbursement_SubtitleMyClaims" xml:space="preserve">
+    <value>My Claims</value>
+</data>
+<data name="ExpenseReimbursement_EmptyState" xml:space="preserve">
+    <value>No claims yet</value>
+</data>
+<data name="ExpenseReimbursement_ColumnId" xml:space="preserve">
+    <value>ID</value>
+</data>
+<data name="ExpenseReimbursement_ColumnCategory" xml:space="preserve">
+    <value>Category</value>
+</data>
+<data name="ExpenseReimbursement_ColumnAmount" xml:space="preserve">
+    <value>Amount</value>
+</data>
+<data name="ExpenseReimbursement_ColumnStatus" xml:space="preserve">
+    <value>Status</value>
+</data>
+<data name="ExpenseReimbursement_CategoryTravel" xml:space="preserve">
+    <value>Travel</value>
+</data>
+<data name="ExpenseReimbursement_CategoryMeal" xml:space="preserve">
+    <value>Meals</value>
+</data>
+<data name="ExpenseReimbursement_CategoryOffice" xml:space="preserve">
+    <value>Office</value>
+</data>
+<data name="ExpenseReimbursement_CategoryOther" xml:space="preserve">
+    <value>Other</value>
+</data>
 </root>
