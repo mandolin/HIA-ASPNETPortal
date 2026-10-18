@@ -87,14 +87,101 @@ $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $docsDir = Join-Path $repoRoot 'docs'
 $siteDir = Join-Path $repoRoot 'site'
 
-# <lang><zh-CN>A1：已上架文档篇数 = docs 下有对应 site 页面的篇数（contracts/*.md 对应 site/contracts-<名>）。</zh-CN>
-# <en>A1: published docs = docs that have a matching site page (contracts/*.md maps to site/contracts-<name>).</en></lang>
-$sitePages = @(Get-ChildItem $siteDir -Directory | Where-Object { $_.Name -notmatch '^(_|en$)' } | ForEach-Object { $_.Name })
-$publishedDocs = @(); $unpublishedDocs = @()
+$failures = @()
+
+# <lang>
+#   <zh-CN>A1：已上架文档篇数 = docs 与 site 页面**按标题匹配**（docs 的 H1 ↔ site 页 front-matter `title`），
+#   文件名匹配仅作回退。
+#
+#   **教训与修正（2026-10-19，W-anp-P150）**：初版按「文件名 = 站点目录名」映射，漏掉两个别名
+#   （`module-development-guide.md` → `site/module-development/`、`README.md` → `site/docs-index/`），
+#   把正确的 **29** 误判为 27，并据此把 landing 上原本正确的数字改错。
+#   自动取数若映射规则有缺陷，比手工数字更危险——它带着"机器算的"权威感，错得更隐蔽。
+#   故改为按标题匹配（别名天然成立，不依赖目录命名），并加三道保险：
+#     ① 标题歧义（多篇文档/多页同标题）→ 失败（无法判定即失败）；
+#     ② 未匹配文档必须在 `INTENTIONALLY_UNPUBLISHED` 白名单中并附依据 → 否则失败
+#        （default-deny：新文档要么上架、要么显式登记"刻意不上架"及理由）；
+#     ③ 白名单条目本身漂移（文档已删除仍留在白名单）→ 失败。
+#   真值交叉验证（两种独立口径一致）：站点页 32 − 非文档页 3 = 29；docs 31 − 未上架 2 = 29。</zh-CN>
+#   <en>A1: published docs = docs matched to site pages **by title** (docs H1 ↔ site front-matter `title`); file-name matching
+#   is only a fallback.
+#
+#   **Lesson and correction (2026-10-19, W-anp-P150)**: the first version mapped "file name = site directory name" and missed two
+#   aliases (`module-development-guide.md` → `site/module-development/`, `README.md` → `site/docs-index/`), reading the correct
+#   **29** as 27 and "correcting" a landing number that had been right. A flawed automatic derivation is more dangerous than a
+#   hand-written number: it borrows the authority of "computed by machine" and hides its error better. Matching is therefore
+#   title-based (aliases hold naturally, independent of directory naming) with three safeguards:
+#     ① title ambiguity (several docs or pages sharing a title) → fail (undecidable means failure);
+#     ② an unmatched doc must appear in `INTENTIONALLY_UNPUBLISHED` with a basis → otherwise fail (default-deny: a new doc is
+#        either published or explicitly registered as intentionally unpublished with a reason);
+#     ③ allowlist drift (an entry whose doc no longer exists) → fail.
+#   Truth cross-checked by two independent derivations: 32 site pages − 3 non-doc pages = 29; 31 docs − 2 unpublished = 29.</en>
+# </lang>
+function Get-FirstHeading([string] $path) {
+    foreach ($line in [System.IO.File]::ReadAllLines($path)) {
+        if ($line -match '^#\s+(.+?)\s*$') { return $Matches[1].Trim() }
+    }
+    return $null
+}
+
+# <lang><zh-CN>刻意不上架的文档（内部治理文档，非公开文档集）——必须附依据，default-deny。</zh-CN>
+# <en>Deliberately unpublished docs (internal governance docs, not part of the public set) — a basis is required, default-deny.</en></lang>
+$INTENTIONALLY_UNPUBLISHED = @{
+    'documentation-registry.md' = '内部文档治理台账（登记与复核用），不属公开文档集。'
+    'documentation-review-checklist.md' = '内部文档复核走查清单（流程工具），不属公开文档集。'
+}
+
+$sitePages = @()
+foreach ($dir in (Get-ChildItem $siteDir -Directory | Where-Object { $_.Name -notmatch '^(_|en$)' })) {
+    $indexPath = Join-Path $dir.FullName 'index.md'
+    if (-not (Test-Path -LiteralPath $indexPath)) { continue }
+    $text = [System.IO.File]::ReadAllText($indexPath)
+    $title = $null
+    if ($text -match '(?m)^title:\s*(.+?)\s*$') { $title = $Matches[1].Trim() }
+    if (-not $title) { $title = Get-FirstHeading $indexPath }
+    $sitePages += [pscustomobject]@{ dir = $dir.Name; title = $title }
+}
+
+$docs = @()
 foreach ($md in (Get-ChildItem $docsDir -Recurse -File -Filter '*.md')) {
     $rel = $md.FullName.Substring($docsDir.Length + 1)
-    $slug = if ($rel -like 'contracts*') { 'contracts-' + [IO.Path]::GetFileNameWithoutExtension($md.Name) } else { [IO.Path]::GetFileNameWithoutExtension($md.Name) }
-    if ($sitePages -contains $slug) { $publishedDocs += $rel } else { $unpublishedDocs += $rel }
+    $docs += [pscustomobject]@{ rel = $rel; name = $md.Name; title = (Get-FirstHeading $md.FullName) }
+}
+
+# <lang><zh-CN>① 标题歧义：多篇文档或多页同标题会让匹配不可判定 → 直接失败。</zh-CN>
+# <en>① Title ambiguity: several docs or pages sharing a title makes matching undecidable → fail outright.</en></lang>
+foreach ($g in @($docs | Where-Object { $_.title } | Group-Object -Property title | Where-Object { $_.Count -gt 1 })) {
+    $failures += ("A1 docs 标题重复：「{0}」（{1} 篇）——按标题匹配会产生歧义，无法判定上架状态。" -f $g.Name, $g.Count)
+}
+foreach ($g in @($sitePages | Where-Object { $_.title } | Group-Object -Property title | Where-Object { $_.Count -gt 1 })) {
+    $failures += ("A1 site 页面标题重复：「{0}」（{1} 页）——按标题匹配会产生歧义。" -f $g.Name, $g.Count)
+}
+
+$publishedDocs = @(); $unpublishedDocs = @()
+foreach ($doc in $docs) {
+    $match = $null
+    if ($doc.title) { $match = @($sitePages | Where-Object { $_.title -eq $doc.title } | Select-Object -First 1)[0] }
+    if (-not $match) {
+        $slug = if ($doc.rel -like 'contracts*') { 'contracts-' + [IO.Path]::GetFileNameWithoutExtension($doc.name) } else { [IO.Path]::GetFileNameWithoutExtension($doc.name) }
+        $match = @($sitePages | Where-Object { $_.dir -ieq $slug } | Select-Object -First 1)[0]
+    }
+    if ($match) {
+        $publishedDocs += $doc.rel
+        continue
+    }
+    $unpublishedDocs += $doc.rel
+    # <lang><zh-CN>② default-deny：未匹配且未在白名单 → 失败。</zh-CN>
+    # <en>② default-deny: unmatched and not allowlisted → fail.</en></lang>
+    if (-not $INTENTIONALLY_UNPUBLISHED.ContainsKey($doc.rel)) {
+        $failures += ("A1 文档既未匹配到站点页、也不在刻意不上架白名单中：{0}（新增文档必须上架，或显式登记「刻意不上架」依据）。" -f $doc.rel)
+    }
+}
+# <lang><zh-CN>③ 白名单漂移：条目对应的文档已不存在 → 失败。</zh-CN>
+# <en>③ Allowlist drift: an entry whose doc no longer exists → fail.</en></lang>
+foreach ($key in @($INTENTIONALLY_UNPUBLISHED.Keys)) {
+    if (-not ($docs | Where-Object { $_.rel -eq $key })) {
+        $failures += ("A1 白名单条目已不存在（漂移，请清理）：{0}。" -f $key)
+    }
 }
 
 # <lang><zh-CN>A2：皮肤数 = 主题目录排除 ThemeProbe（探针主题不是皮肤）。</zh-CN>
@@ -123,7 +210,8 @@ if (Test-Path -LiteralPath $licensePath) {
 # ---------------------------------------------------------------------------
 # 核对：landing 声明值 vs 真值
 # ---------------------------------------------------------------------------
-$failures = @()
+# <lang><zh-CN>注意：`$failures` 在 A1 之前已声明（A1 的映射违规也登记在其中），此处**不可**再重置。</zh-CN>
+# <en>Note: `$failures` is declared before A1 (A1 mapping violations register there too); it must **not** be reset here.</en></lang>
 $zhText = [System.IO.File]::ReadAllText((Join-Path $repoRoot 'site\index.md'))
 $enText = [System.IO.File]::ReadAllText((Join-Path $repoRoot 'site\en\index.md'))
 
