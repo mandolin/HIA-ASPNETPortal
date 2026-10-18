@@ -19,10 +19,11 @@
   断言项：RT0 登录态已建立；RT1/RT2/RT3 页签名 zh 取中文列、en 取英文列、zh 不泄漏英文；
   RT12/RT13 清洗后的种子页签名；RT7 稳定 tabid 不漂移；RT14 共享标题控件已渲染；
   RT15/RT16/RT17 模块标题 zh 取中文列、en 取英文列、en 不泄漏中文；
-  RT18/RT19/RT20 自绘标题模块资源键改造后随语言切换；RT11 负向对照。
+  RT18/RT19/RT20 自绘标题模块资源键改造后随语言切换；RT11 负向对照；
+  RT21 第三语言 JSON 列端到端生效（fr-FR：首页渲染出 `Accueil`）。
 
-  证明边界：只证明页签名与模块标题在 zh / en 下取到对应语言列值且门控键不漂移；
-  不证明翻译内容正确、第三语言 JSON 列生效（那由单元测试覆盖）、或页面其它部分本地化正确。</zh-CN>
+  证明边界：证明页签名与模块标题在 zh / en / 第三语言（JSON 列）下分别取到对应语言值且门控键不漂移；
+  不证明翻译内容正确、或页面其它部分本地化正确。</zh-CN>
   <en>Prerequisites: IIS Express running (default port 40001); temp\p65\p65-acceptance-context.json present;
   PORTAL_PLAYWRIGHT_MODULE pointing at the local temp\node_modules\playwright. When a prerequisite is missing the gate is
   explicitly skipped and registered (exit 2) rather than failing with exit=1 — the convention C-anp-P26 W-anp-P139 is meant to
@@ -37,11 +38,11 @@
   under en, and zh does not leak the English value; RT12/RT13 cleaned seed tab names; RT7 stable tabid does not drift;
   RT14 shared title control rendered; RT15/RT16/RT17 module titles take the Chinese column under zh, the English column under en,
   and en does not leak the Chinese value; RT18/RT19/RT20 self-drawn-title modules follow the language switch after the resource-key
-  conversion; RT11 negative control.
+  conversion; RT11 negative control; RT21 the third-language JSON column works end-to-end (fr-FR: the home tab renders `Accueil`).
 
-  Proof boundary: proves only that tab names and module titles take their language-specific column values under zh and en and that
-  the gate key does not drift; it does not prove translation correctness, that the third-language JSON column works (covered by
-  unit tests), or that the rest of the page is localized correctly.</en>
+  Proof boundary: proves that tab names and module titles take their language-specific column values under zh, en, and a third
+  language (the JSON column), and that the gate key does not drift; it does not prove translation correctness, or that the rest of
+  the page is localized correctly.</en>
 </lang>
 #>
 
@@ -140,6 +141,15 @@ $probes = @{
     ExpenseEnglishTitle   = 'Expense Reimbursement'
     BusinessTabIdQuery    = 'tabid=' + $BusinessTabId
     SharedTitleTabIdQuery = 'tabid=' + $SharedTitleTabId
+    # <lang>
+    #   <zh-CN>第三语言 JSON 列端到端验证用的探测串。`fr-FR` 是种子数据里已经存在的第三语言（首页的
+    #   `TabNameLocalizedJson` 含 `{"fr-FR":"Accueil",...}`），无需改库即可验证 JSON 列在真实站点上生效。</zh-CN>
+    #   <en>Probe string for the end-to-end third-language JSON-column check. `fr-FR` is a third language already present in the seed
+    #   data (the home tab's `TabNameLocalizedJson` contains `{"fr-FR":"Accueil",...}`), so the JSON column can be verified on the
+    #   live site without mutating the database.</en>
+    # </lang>
+    ThirdLangCulture     = 'fr-FR'
+    ThirdLangValue       = 'Accueil'
 }
 
 $checks = [System.Collections.Generic.List[object]]::new()
@@ -269,6 +279,7 @@ try {
                 @{ key = 'businessEn'; culture = 'en-US'; tabId = $BusinessTabId }
                 @{ key = 'sharedZh';   culture = 'zh-CN'; tabId = $SharedTitleTabId }
                 @{ key = 'sharedEn';   culture = 'en-US'; tabId = $SharedTitleTabId }
+                @{ key = 'jsonFr';     culture = $probes.ThirdLangCulture; tabId = $BusinessTabId }
             )
         } | ConvertTo-Json -Depth 6),
         $utf8)
@@ -285,6 +296,7 @@ try {
     $en = [string] $pages.businessEn
     $zhShared = [string] $pages.sharedZh
     $enShared = [string] $pages.sharedEn
+    $fr = [string] $pages.jsonFr
 
     Write-Host ('lengths businessZh=' + $zh.Length + ' businessEn=' + $en.Length + ' sharedZh=' + $zhShared.Length + ' sharedEn=' + $enShared.Length)
 
@@ -315,6 +327,17 @@ try {
 
     $noSharedOnBusiness = (-not $zh.Contains($probes.SharedTitleControl)) -and (-not $en.Contains($probes.SharedTitleControl))
     New-ContainsCheck 'RT11-NO-SHARED-TITLE-ON-BUSINESS' $noSharedOnBusiness '业务页两种文化下均不经共享标题控件（负向对照）'
+
+    # <lang>
+    #   <zh-CN>第三语言 JSON 列端到端验证：以 `fr-FR` 文化请求业务页，导航里首页（id=1）的 `TabNameLocalizedJson` 含
+    #   `{"fr-FR":"Accueil"}`，解析器三级键匹配命中 `fr-FR`，因此首页名应渲染为 `Accueil`。这条证明 JSON 列在真实站点上生效，
+    #   无需改动数据库（数据本就存在）。</zh-CN>
+    #   <en>End-to-end third-language JSON-column check: request the business page under the `fr-FR` culture; the home tab (id=1) in the
+    #   navigation carries `{"fr-FR":"Accueil"}` in `TabNameLocalizedJson`, the resolver's three-tier key lookup hits `fr-FR`, so the
+    #   home tab name should render as `Accueil`. This proves the JSON column works on the live site without mutating the database
+    #   (the data is already there).</en>
+    # </lang>
+    New-ContainsCheck 'RT21-JSON-THIRD-LANG' $fr.Contains($probes.ThirdLangValue) ('fr-FR 文化下首页渲染出 JSON 列值 ' + $probes.ThirdLangValue)
 }
 finally {
     # <lang>
@@ -348,7 +371,7 @@ foreach ($c in $checks) {
 
 $resultPolicy = 'exit 2 when prerequisites are missing / exit 1 when an assertion fails'
 $resultProves = 'zh and en resolve tab names and module titles to their own language columns, gate key does not drift'
-$resultNotProves = 'translation correctness, the third-language JSON column, or localization of the rest of the page'
+$resultNotProves = 'translation correctness or localization of the rest of the page'
 Write-Output ([pscustomobject]@{
     Gate           = 'Test-PortalLocalizedNameRuntimeEvidence.ps1'
     ExecutionMode  = 'runtime-evidence'

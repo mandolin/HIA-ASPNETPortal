@@ -463,7 +463,7 @@
     <value>当前覆盖：</value>
   </data>
   <data name="Admin_DiagnosticsLogs_Title" xml:space="preserve">
-    <value>诊断日志</value>
+    <value>监控日志</value>
   </data>
   <data name="Admin_DiagnosticsLogs_Subtitle" xml:space="preserve">
     <value>面向管理员的结构化运行时事件。</value>

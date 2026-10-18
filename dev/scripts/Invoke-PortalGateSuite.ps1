@@ -600,7 +600,7 @@ foreach ($layerName in $layersToRun) {
             $cs = ''
             foreach ($a in $cc.connectionStrings.add) { if ($a.name -match 'Portal') { $cs = $a.connectionString; break } }
             if ($cs) {
-                $conn = New-Object System.Data.SqlClient.SqlClient.SqlConnection $cs
+                $conn = New-Object System.Data.SqlClient.SqlConnection $cs
                 $conn.Open()
                 $cmd = $conn.CreateCommand()
                 $cmd.CommandText = 'SELECT DISTINCT TabId FROM PortalCfg_Modules WHERE TabId IS NOT NULL'

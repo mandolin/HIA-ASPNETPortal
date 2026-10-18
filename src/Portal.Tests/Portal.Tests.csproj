@@ -73,6 +73,7 @@
     <Compile Include="PortalOrganizationTreeExpanderTests.cs" />
     <Compile Include="PortalWorkItemQueryResultTests.cs" />
     <Compile Include="PortalDisplayNameResolverTests.cs" />
+    <Compile Include="PortalAdministrationPolicyTests.cs" />
     <Compile Include="PortalWorkItemTargetResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
