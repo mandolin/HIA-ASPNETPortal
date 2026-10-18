@@ -1,0 +1,290 @@
+{
+  "version": 1,
+  "note": "门禁覆盖地图（W-anp-P147）：登记「哪些面有门禁、哪些没有」以及缺口的所有者/再入条件/判定依据。铁律：新增门禁必须登记进本地图（否则 L0 门禁 Test-PortalGateCoverageMap.ps1 失败，default-deny）；partial 覆盖面必须声明 boundary（不证明什么）；uncovered 面必须带 owner/reEntry/basis。coverage 取值：full | partial | uncovered。",
+  "surfaces": [
+    {
+      "id": "build-and-unit",
+      "name": "构建与单元测试",
+      "layer": "L1",
+      "coverage": "full",
+      "gate": "Build-Solution.ps1",
+      "gates": ["Invoke-PortalTests.ps1"]
+    },
+    {
+      "id": "documentation-consistency",
+      "name": "文档结构/公开面合规/示例有效性",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明文档结构齐备、登记一致、示例可运行与公开面合规；不证明文档内容的技术正确性与时效性（人工评审承载）。",
+      "gate": "Test-PortalXmlDocumentation.ps1",
+      "gates": [
+        "Test-PortalPublicDocumentation.ps1",
+        "Test-PortalDocumentationReadiness.ps1",
+        "Test-PortalDocumentationExamples.ps1",
+        "Test-PortalSitePublicSurface.ps1"
+      ]
+    },
+    {
+      "id": "comments-and-rop",
+      "name": "注释与 ROP 基线（双语注释/契约文件齐备）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalRopCommentBaseline.ps1"
+    },
+    {
+      "id": "resource-contract",
+      "name": "资源契约（键集一致、designer 属性、en-us 逐字、引用存在性）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalResourceContract.ps1",
+      "gates": ["Test-PortalResourceContractEvidence.mjs"]
+    },
+    {
+      "id": "i18n-content",
+      "name": "i18n 内容级一致性（占位符/花括号值级对齐）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明声明值的结构对齐（占位符集合、花括号健全）；不证明译文语义正确性与通顺度（人工双语抽样承载）。",
+      "gate": "Test-PortalI18nContentParity.ps1"
+    },
+    {
+      "id": "i18n-runtime",
+      "name": "多语言运行期（链路齐备、运行期证据、语言泄漏）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明多语言链路齐备、运行期渲染语言不漂移/不泄漏；不证明译文质量。",
+      "gate": "Test-PortalLocalizedNameGate.ps1",
+      "gates": ["Test-PortalLocalizedNameRuntimeEvidence.ps1", "Test-PortalLocalizationLeakEvidence.mjs"]
+    },
+    {
+      "id": "accessibility",
+      "name": "无障碍静态基线（对比度/:focus/语义标记属性）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明 CSS 声明值与标记属性；不证明运行期真实渲染对比度（计算样式/渐变叠加）与真实键盘焦点顺序（见 uncovered 面 a11y-runtime）。",
+      "gate": "Test-PortalAccessibilityBaseline.ps1"
+    },
+    {
+      "id": "performance",
+      "name": "性能基线（首屏/列表行数上限/服务端 TTFB）",
+      "layer": "L2",
+      "coverage": "partial",
+      "boundary": "只证明页面级 TTFB/load 与列表面行数上限；不证明直接 SQL 层耗时（见 sql-query-timing）与浏览器渲染指标 FCP/LCP（见 browser-web-vitals）。",
+      "gate": "Test-PortalPerformanceBaseline.mjs"
+    },
+    {
+      "id": "dependency-vulnerability",
+      "name": "依赖漏洞基线（三向对齐 + 高危地板 + NuGet 实扫）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明已审计依赖集一致、地板达标、漏洞数据源无命中；不证明传递依赖（见 dependency-transitive）与许可证合规（见 license-compliance）。",
+      "gate": "Test-PortalDependencyVulnerabilityBaseline.ps1"
+    },
+    {
+      "id": "secrets-and-credentials",
+      "name": "密钥泄露与默认凭据风险",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalSecretLeakage.ps1",
+      "gates": ["Test-PortalDefaultCredentialRisk.ps1"]
+    },
+    {
+      "id": "business-domain-contracts",
+      "name": "业务域契约（身份/权限/编号/工作流/参考数据）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalBusinessIdentity.ps1",
+      "gates": [
+        "Test-PortalBusinessPermissionAudit.ps1",
+        "Test-PortalWorkItemNumbering.ps1",
+        "Test-PortalCollaborationWorkflowSmoke.ps1",
+        "Test-PortalWorkItemSmoke.ps1",
+        "Test-PortalReferenceDataSmoke.ps1"
+      ]
+    },
+    {
+      "id": "compliance-ops-release",
+      "name": "合规/运维/发布/生产硬化/日志留存/对标检查表",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalComplianceBaseline.ps1",
+      "gates": [
+        "Test-PortalOperationsReadiness.ps1",
+        "Test-PortalPublishReadiness.ps1",
+        "Test-PortalProductionHardening.ps1",
+        "Test-PortalLogMaintenance.ps1",
+        "Test-PortalBenchmarkChecklist.ps1"
+      ]
+    },
+    {
+      "id": "module-runtime",
+      "name": "模块运行期（加载/证据/缓存隔离/皮肤覆盖/档位包集合/新模块就绪）",
+      "layer": "L2",
+      "coverage": "full",
+      "gate": "Invoke-PortalModuleRuntimeGate.ps1",
+      "gates": [
+        "Test-PortalModuleRuntimeEvidence.mjs",
+        "Test-PortalModuleCache.ps1",
+        "Test-PortalModuleSkinCoverage.ps1",
+        "Test-PortalRuntimeGatePackageSet.ps1",
+        "Test-PortalNewModuleReadiness.ps1"
+      ]
+    },
+    {
+      "id": "http-smoke",
+      "name": "HTTP 与扩展冒烟（站点/扩展/业务模块）",
+      "layer": "L2",
+      "coverage": "full",
+      "gate": "Test-PortalSmoke.ps1",
+      "gates": ["Test-PortalExtensionSmoke.ps1", "Test-PortalBusinessModuleSmoke.ps1"]
+    },
+    {
+      "id": "sql-and-data",
+      "name": "SQL 兼容/版本矩阵/数据 provider 与 HIA 边界 proof",
+      "layer": "L1",
+      "coverage": "full",
+      "gate": "Test-PortalSqlCompatibility.ps1",
+      "gates": [
+        "Test-PortalSqlVersionMatrix.ps1",
+        "Test-PortalDataProvider.ps1",
+        "Test-PortalHiaBoundary.ps1"
+      ]
+    },
+    {
+      "id": "frontend-contracts",
+      "name": "前端契约/IE 模式/旧版 CSS/ASCX 编译/版本一致性",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalFrontendContracts.ps1",
+      "gates": [
+        "Test-PortalIeModeReadiness.ps1",
+        "Test-PortalLegacyCssCompatibility.ps1",
+        "Test-PortalAscxCompilationContract.ps1",
+        "Test-PortalVersionConsistency.ps1"
+      ]
+    },
+    {
+      "id": "ui-evidence",
+      "name": "UI 证据（后台列表/协同布局/空态/占位文案/待办可达性/P77 补充）",
+      "layer": "L2",
+      "coverage": "full",
+      "gate": "Test-PortalAdminListUiEvidence.mjs",
+      "gates": [
+        "Test-PortalCollaborationLayoutEvidence.mjs",
+        "Test-PortalPlatformEmptyStateEvidence.mjs",
+        "Test-PortalPlaceholderEvidence.mjs",
+        "Test-PortalWorkItemReachabilityEvidence.mjs",
+        "Test-PortalP77SupplementEvidence.mjs"
+      ]
+    },
+    {
+      "id": "semantic-markup",
+      "name": "语义标记证据（th scope/role heading/aria-level 等）",
+      "layer": "L2",
+      "coverage": "partial",
+      "boundary": "只在 after 档断言语义标记（编排以 PORTAL_P82_PHASE=after 强制）；baseline 档仅断言模块已渲染，语义断言不生效。",
+      "gate": "Test-PortalSemanticMarkupEvidence.mjs"
+    },
+    {
+      "id": "evidence-coverage",
+      "name": "运行期证据覆盖台账（已覆盖/总数、未覆盖清单、V3 所有者机器强制）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalEvidenceCoverage.ps1"
+    },
+    {
+      "id": "theme-resolution",
+      "name": "主题解析 proof（耗时档 -IncludeSlow）",
+      "layer": "slow",
+      "coverage": "partial",
+      "boundary": "只证明主题解析 proof 可跑通并在 -IncludeSlow 下产出；不证明视觉回归基线的机器判据（见 visual-regression-default-theme）。",
+      "gate": "Test-PortalThemeResolution.ps1"
+    },
+    {
+      "id": "gate-coverage-map",
+      "name": "门禁覆盖地图完整性（本门禁）",
+      "layer": "L0",
+      "coverage": "full",
+      "gate": "Test-PortalGateCoverageMap.ps1"
+    },
+    {
+      "id": "a11y-runtime",
+      "name": "运行期键盘焦点顺序/可达路径与渲染级对比度（计算样式、渐变叠加）",
+      "coverage": "uncovered",
+      "owner": "项目维护者",
+      "reEntry": "需运行期遍历与像素取样（playwright 已具备）；先定判定口径（焦点顺序基线、取样点集合）再落成门禁。",
+      "basis": "W-anp-P143 交付时显式声明的证明边界：静态门禁只证明 CSS 声明值与标记属性，未覆盖运行期键盘与渲染级对比度。"
+    },
+    {
+      "id": "sql-query-timing",
+      "name": "直接 SQL 层耗时/慢查询直测（不经页面的语句级阈值）",
+      "coverage": "uncovered",
+      "owner": "项目维护者",
+      "reEntry": "DB 驱动直连计时，或把既有页面 TTFB 口径扩展为语句级；需先定语句清单与阈值。",
+      "basis": "W-anp-P144 交付时显式声明的证明边界：当前由页面 TTFB 间接覆盖其背后 DB 工作，无语句级直测。"
+    },
+    {
+      "id": "dependency-transitive",
+      "name": "传递依赖盘点（transitive 面）",
+      "coverage": "uncovered",
+      "owner": "项目维护者",
+      "reEntry": "恢复后按 src/packages 目录盘点实际还原结果并纳入依赖基线，再并入漏洞匹配。",
+      "basis": "W-anp-P145 实测：packages.config 无 lock 语义，传递面无法静态枚举，登记为后续工作。"
+    },
+    {
+      "id": "license-compliance",
+      "name": "许可证合规自动校验",
+      "coverage": "uncovered",
+      "owner": "项目维护者",
+      "reEntry": "引入许可证数据源，或把 docs/third-party-dependencies.md 的人工审计结论机器化后纳入门禁。",
+      "basis": "W-anp-P145 实测：许可证合规由登记表人工审计承载，门禁只保证登记与现实一致。"
+    },
+    {
+      "id": "i18n-semantics",
+      "name": "译文语义正确性（准确/通顺/术语一致）",
+      "coverage": "uncovered",
+      "owner": "项目维护者（人工双语抽样口径，P111）",
+      "reEntry": "人工双语抽样结论机器化（抽样集固化为基线）后纳入门禁。",
+      "basis": "W-anp-P146 交付时显式声明的证明边界：只证明值级结构对齐，语义正确性归人工抽样。"
+    },
+    {
+      "id": "browser-web-vitals",
+      "name": "浏览器端渲染指标（FCP / LCP / CLS）",
+      "coverage": "uncovered",
+      "owner": "项目维护者",
+      "reEntry": "扩展性能基线门禁采集 web-vitals 指标并定阈值。",
+      "basis": "W-anp-P144 实测边界：当前只采集 load 事件，未采 FCP/LCP/CLS。"
+    },
+    {
+      "id": "visual-regression-default-theme",
+      "name": "Default 主题视觉回归基线（P24 残余项）",
+      "coverage": "uncovered",
+      "owner": "W-anp-P149",
+      "reEntry": "本周期 P149 交付：把主题解析与截图工具产出的基线固化为可重复的机器判据并落地为门禁条目。",
+      "basis": "P24 裁定关闭时登记的残余项；当前仅 P149 计划承载，尚无门禁。"
+    },
+    {
+      "id": "landing-stats-automation",
+      "name": "landing 页面统计数字自动化（上架页数/统计行）",
+      "coverage": "uncovered",
+      "owner": "W-anp-P148",
+      "reEntry": "本周期 P148 交付：统计数字自动取数，杜绝再次过期。",
+      "basis": "本轮已手工修 31→29 的过期统计，说明该面无门禁必然漂移。"
+    },
+    {
+      "id": "theme-settings-entry",
+      "name": "Admin/ThemeSettings.aspx 可达入口",
+      "coverage": "uncovered",
+      "owner": "项目维护者",
+      "reEntry": "补导航链接须先出原型/设计稿（导航属界面改动，硬性前置），或裁定为主题运维直链专用。",
+      "basis": "W-anp-P138 运行期核实全仓 0 入链、运行期不可达；已登记进 dev/evidence-coverage.json 未覆盖清单。"
+    }
+  ],
+  "tooling": [
+    { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
+    { "id": "Invoke-PortalGateInjectionProof.ps1", "basis": "门禁有效性（注入法）验证工具，按需手工执行，不进日常编排。" },
+    { "id": "Build-PortalSite.ps1", "basis": "站点构建辅助脚本，非质量门禁。" },
+    { "id": "Build-PortalDotNetDocPilot.ps1", "basis": ".NET 文档试点生成工具，非质量门禁。" },
+    { "id": "Build-PortalJsdocPilot.ps1", "basis": "JSDoc 试点生成工具，非质量门禁。" }
+  ]
+}

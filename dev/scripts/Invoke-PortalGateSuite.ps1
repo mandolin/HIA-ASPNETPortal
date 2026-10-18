@@ -330,6 +330,21 @@ $gateLayers = [ordered]@{
         #   outliers (8x; 4x measured to be Chinese information-density noise), untranslated candidates, and placeholder gaps.</en>
         # </lang>
         @{ File = 'Test-PortalI18nContentParity.ps1';        Runner = 'ps1'; Kind = 'i18n 内容级一致性'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P27`（`W-anp-P147`）新增：**门禁覆盖地图**门禁（L0）。地图文件 `dev\gate-coverage-map.json`
+        #   登记"哪些面有门禁、哪些没有"，本门禁让它不漂移、不漏登记：M1 编排门禁必须被某面登记（新增门禁未登记即 Fail，
+        #   default-deny）；M2 地图引用的门禁必须在编排中且文件存在；M3 未覆盖面必须带 owner/reEntry/basis（V3 机器强制）；
+        #   M4 部分覆盖面必须声明 boundary（不证明什么）；M5 门禁类脚本不得成孤儿（未接入编排须在 tooling 显式声明）。
+        #   本门禁**先接入编排再运行**——地图自指它自身，否则会被 M2 判为幽灵。</zh-CN>
+        #   <en>`C-anp-P27` (`W-anp-P147`) addition: the **gate coverage map** gate (L0). The map file
+        #   `dev\gate-coverage-map.json` records "which surfaces have gates and which do not"; this gate keeps it drift-free
+        #   and complete: M1 every wired gate must be registered by a surface (unregistered new gate → Fail, default-deny);
+        #   M2 gates referenced by the map must be wired and present on disk; M3 uncovered surfaces must carry
+        #   owner/reEntry/basis (V3 machine-enforced); M4 partial surfaces must declare a boundary (what is not proven);
+        #   M5 no orphan gate scripts (unwired ones must be declared in tooling). This gate is **wired first and run
+        #   afterwards** — the map references itself, so a missing entry would trip M2 as a phantom.</en>
+        # </lang>
+        @{ File = 'Test-PortalGateCoverageMap.ps1';          Runner = 'ps1'; Kind = '门禁覆盖地图'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
