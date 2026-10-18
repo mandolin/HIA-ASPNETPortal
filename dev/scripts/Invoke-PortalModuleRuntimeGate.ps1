@@ -435,27 +435,21 @@ try {
         if ($targets.Count -eq 0) { Write-Step "组 $groupKey 无目标，跳过"; continue }
 
         # <lang>
-        #   <zh-CN>后台管理型模块（Admin\*.ascx）**如实跳过**而不是硬凑一个 URL：实测 DesktopDefault.aspx?tabid=6
-        #   与 Admin\TabLayout.aspx 都不渲染它们（module=false）—— 这些模块只在页签布局编辑器的**编辑模式**下出现，
-        #   没有面向普通请求的独立 URL。default-deny 要求不漏，但"用一个必然失败的 URL 去假装覆盖"更糟：它会把门禁
-        #   永久钉在失败上，反而掩盖真实回归。未覆盖量与原因都写进证据，由后续包补静态校验（检查 Inherits 类型存在性
-        #   与 <%@ Import %> 覆盖），而不是在这里假装已覆盖。</zh-CN>
-        #   <en>Admin modules (Admin\*.ascx) are **honestly skipped** rather than given a made-up URL: neither
-        #   `DesktopDefault.aspx?tabid=6` nor `Admin\TabLayout.aspx` renders them (`module=false`) — these modules only appear
-        #   in the tab-layout editor's **edit mode** and have no URL for ordinary requests. Default-deny demands no gaps, but
-        #   "covering" them with a URL that can only fail is worse: it pins the gate to permanent failure and would mask real
-        #   regressions. The uncovered count and the reason are written into the evidence, and a later package adds static
-        #   checks (existence of the `Inherits` type, `<%@ Import %>` coverage) instead of pretending coverage here.</en>
+        #   <zh-CN>历史登记修正（`W-anp-P140`）：本处曾把 admin 组**整体跳过**，理由是"实测 DesktopDefault.aspx?tabid=6
+        #   与 Admin\TabLayout.aspx 都不渲染它们（module=false），仅在页签布局编辑模式出现"。该测量已**过期**——
+        #   `W-anp-P138`（2026-10-18）以管理员登录访问 tabid=6，5 个后台管理模块全部渲染（截图留证），且按本编排器
+        #   同款 URL 构造（tabindex=TabOrder&tabid=6）重跑 `Test-PortalModuleRuntimeEvidence.mjs` 断言 Pass
+        #   （errorPage=false、modulePresent=true）。"登记会过期，唯一可靠的是可重复检查"：故删除该跳过，
+        #   让 admin 组与其他组走完全相同的真实探测路径，由门禁每次运行重新证明，而不是靠一条旧测量永久豁免。</zh-CN>
+        #   <en>Stale-registration correction (`W-anp-P140`): this spot used to **skip** the admin group entirely on the claim that
+        #   neither `DesktopDefault.aspx?tabid=6` nor `Admin\TabLayout.aspx` rendered those modules (`module=false`), since they
+        #   would appear only in the tab-layout editor's edit mode. That measurement is **outdated** — `W-anp-P138` (2026-10-18)
+        #   signed in as administrator, visited tabid=6, and all five admin modules rendered (screenshot archived); re-running
+        #   `Test-PortalModuleRuntimeEvidence.mjs` with this orchestrator's exact URL construction (tabindex=TabOrder&tabid=6)
+        #   passed its own assertions (errorPage=false, modulePresent=true). "Registrations go stale; only repeatable checks are
+        #   reliable": the skip is therefore removed so the admin group takes exactly the same real probing path as the other
+        #   groups, re-proved by every gate run instead of being permanently exempted by one old measurement.</en>
         # </lang>
-        if ($groupKey -eq 'admin') {
-            Write-Step ("组 admin 有 {0} 个实例，但后台管理型模块无可访问 URL（实测两种候选均 module=false），如实记为未覆盖" -f $targets.Count)
-            foreach ($target in $targets) {
-                $skippedInstances += [pscustomobject]@{ Title = ($target.expectTitle -join ' / '); Reason = '后台管理型模块：仅在页签布局编辑模式渲染，无独立可访问 URL' }
-            }
-            $roundSummaries += [pscustomobject]@{ group = 'admin'; profile = $groups[$groupKey].Profile; urlCount = 0; exitCode = 0; skipped = $targets.Count }
-            continue
-        }
-
         $profile = $groups[$groupKey].Profile
 
         if (-not $SkipProfileSwitch) {
@@ -508,6 +502,25 @@ try {
     Restore-Profile
 }
 
+# <lang>
+#   <zh-CN>`W-anp-P140`：把"运行期证据覆盖面"从人工翻台账变成**本门禁每次运行自动产出**的机器可读数字。
+#   `coverage` 块给出模块实例面的「已验证 / 总数」与未覆盖明细（孤儿页签引用、缺 DesktopSourceFile 的实例）——
+#   数据库是权威清单来源，因此模块实例面**不在静态台账硬编码**（必然漂移），而由本门禁运行期枚举并留证。
+#   静态面（后台管理页/模块入口台账）由 L0 的 `Test-PortalEvidenceCoverage.ps1` 负责，两层合起来覆盖全部运行期证据面。</zh-CN>
+#   <en>`W-anp-P140`: turns the "runtime-evidence coverage" from a manually maintained ledger into numbers **produced
+#   automatically by this gate on every run**. The `coverage` block reports the module-instance surface as "verified / total"
+#   plus the uncovered detail (orphan tab references, instances whose definition lacks DesktopSourceFile) — the database is the
+#   authoritative inventory, so that surface is deliberately **not hardcoded** into the static ledger (it would drift); this gate
+#   enumerates it at runtime and archives the result. Static surfaces (the admin-page/module entry ledger) are owned by the L0
+#   `Test-PortalEvidenceCoverage.ps1`; together the two layers cover all runtime-evidence surfaces.</en>
+# </lang>
+$coverage = [pscustomobject]@{
+    total = $instances.Count
+    deployed = $deployed.Count
+    verifiedUrls = ($roundSummaries | Measure-Object -Property urlCount -Sum).Sum
+    uncoveredCount = $skippedInstances.Count
+    uncovered = $skippedInstances
+}
 $summary = [pscustomobject]@{
     phase = 'W-anp-P83 P83.4'
     generatedUtc = (Get-Date).ToUniversalTime().ToString('o')
@@ -515,6 +528,7 @@ $summary = [pscustomobject]@{
     moduleInstances = $instances.Count
     deployedInstances = $deployed.Count
     verifiedUrls = ($roundSummaries | Measure-Object -Property urlCount -Sum).Sum
+    coverage = $coverage
     rounds = $roundSummaries
     skippedInstances = $skippedInstances
 }
@@ -522,7 +536,7 @@ $summaryPath = Join-Path $EvidenceDir 'gate-summary.json'
 ($summary | ConvertTo-Json -Depth 8) | Set-Content -Path $summaryPath -Encoding UTF8
 
 Write-Host ''
-Write-Step ("结果：{0}｜模块实例 {1} 个（已部署 {2}）｜验证 URL 合计 {3} 个" -f $summary.result, $summary.moduleInstances, $summary.deployedInstances, $summary.verifiedUrls)
+Write-Step ("结果：{0}｜模块实例 {1} 个（已部署 {2}）｜验证 URL 合计 {3} 个｜未覆盖 {4} 个" -f $summary.result, $summary.moduleInstances, $summary.deployedInstances, $summary.verifiedUrls, $coverage.uncoveredCount)
 Write-Step "证据：$EvidenceDir"
 if ($overallFailed) { exit 1 }
 exit 0

@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "comment": "运行期证据覆盖台账（W-anp-P140）。inventory=static 的面由 L0 门禁 Test-PortalEvidenceCoverage.ps1 按 enum 双向核对：源码存在但台账未分类 → Fail（default-deny）；台账登记但源码不存在 → Fail（漂移）。covered=false 的项必须带 owner/reEntry/basis（C-anp-P26 验收 V3）。inventory=database 的面不在本台账硬编码（会漂移），由其 gate 运行期从数据库枚举并输出 coverage 块。条目 id 一律为相对 src/Portal 的路径（与 PortalCfg_ModuleDefinitions.DesktopSourceFile 同口径）。",
+  "surfaces": [
+    {
+      "id": "admin-ascx-modules",
+      "title": "后台管理型模块（Admin/*.ascx）",
+      "inventory": "static",
+      "enum": { "dir": "src/Portal/Admin", "idBase": "src/Portal", "pattern": "*.ascx" },
+      "items": [
+        { "id": "Admin/ModuleDefs.ascx", "covered": true, "entry": "主导航 Admin 页签（tabid=6，仅 Admins）；模块内 postback 进 ModuleCatalog/ModuleDefinitions（W-anp-P138 运行期实测 2/2 PASS）", "verification": "L2 Invoke-PortalModuleRuntimeGate.ps1 admin 组运行期探测（W-anp-P140 起取消过期跳过）" },
+        { "id": "Admin/Roles.ascx", "covered": true, "entry": "主导航 Admin 页签（tabid=6）；跨链 SecurityRoles.aspx（Roles.ascx.cs:250）", "verification": "L2 admin 组运行期探测" },
+        { "id": "Admin/SiteSettings.ascx", "covered": true, "entry": "主导航 Admin 页签（tabid=6）", "verification": "L2 admin 组运行期探测" },
+        { "id": "Admin/Tabs.ascx", "covered": true, "entry": "主导航 Admin 页签（tabid=6）；跨链 TabLayout.aspx（Tabs.ascx.cs:321/376）", "verification": "L2 admin 组运行期探测" },
+        { "id": "Admin/Users.ascx", "covered": true, "entry": "主导航 Admin 页签（tabid=6）；行级 postback 进 ManageUsers.aspx（Users.ascx.cs:392-397）", "verification": "L2 admin 组运行期探测" }
+      ],
+      "excluded": []
+    },
+    {
+      "id": "admin-feature-pages",
+      "title": "后台管理功能页（Admin/*.aspx）",
+      "inventory": "static",
+      "enum": { "dir": "src/Portal/Admin", "idBase": "src/Portal", "pattern": "*.aspx" },
+      "items": [
+        { "id": "Admin/BusinessApplications.aspx", "covered": true, "entry": "注册表动作区互链（PortalNavigationRegistry Admin.Capability.BusinessApplications）+ CollaborationItems/CapabilityPermissionMatrix 动作区暴露" },
+        { "id": "Admin/CapabilityPermissionMatrix.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Capability.PermissionMatrix）+ CollaborationItems/BusinessApplications 动作区暴露" },
+        { "id": "Admin/CollaborationItems.aspx", "covered": true, "entry": "注册表动作区互链（Admin.CollaborationItems）+ CapabilityPermissionMatrix/BusinessApplications 动作区暴露" },
+        { "id": "Admin/DiagnosticLogDetail.aspx", "covered": true, "entry": "DiagnosticsLogs 行级日志详情链接" },
+        { "id": "Admin/DiagnosticsLogs.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Ops.DiagnosticsLogs）+ OperationAudits/SystemHealth 动作区暴露" },
+        { "id": "Admin/EmployeeDirectory.aspx", "covered": true, "entry": "注册表动作区暴露（Admin.Capability.EmployeeDirectory）+ 自身为 HR 维护页枢纽（动作区硬链 5 页）" },
+        { "id": "Admin/EmployeeEdit.aspx", "covered": true, "entry": "EmployeeDirectory.aspx:40 动作区硬链 + 行级编辑链接（EmployeeDirectory.aspx.cs:620）+ OrganizationUnitEdit.aspx:29" },
+        { "id": "Admin/EmployeeProfileCorrectionRequests.aspx", "covered": true, "entry": "WorkItems.aspx:31 动作区硬链 + WorkItems.aspx.cs:514 业务类型路由 + EmployeeDirectory.aspx:42" },
+        { "id": "Admin/ManageUsers.aspx", "covered": true, "entry": "用户管理模块行级 postback 重定向（Users.ascx.cs:392-397）" },
+        { "id": "Admin/ModuleCatalog.aspx", "covered": true, "entry": "注册表动作区互链（Admin.ModuleCatalog）+ 兜底键（PortalNavigationVisibilityPolicy.cs:193）+ 模块定义模块 postback（W-anp-P138 运行期实测）" },
+        { "id": "Admin/ModuleDefinitions.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Modules.Definitions）+ 模块定义模块行命令 postback（W-anp-P138 运行期实测）" },
+        { "id": "Admin/ModuleSettings.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Modules.Settings）+ TabLayout.aspx.cs:598 跨链" },
+        { "id": "Admin/OperationAudits.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Ops.OperationAudits）+ SystemHealth/DiagnosticsLogs 动作区暴露" },
+        { "id": "Admin/OrganizationUnitEdit.aspx", "covered": true, "entry": "EmployeeDirectory.aspx:39 动作区硬链 + 行级编辑链接（EmployeeDirectory.aspx.cs:519）+ EmployeeEdit.aspx:29" },
+        { "id": "Admin/SecurityRoles.aspx", "covered": true, "entry": "安全角色模块跨链（Roles.ascx.cs:250）；Account 注册为 Admin.SecurityRoles.Legacy/DiagnosticOnly" },
+        { "id": "Admin/SystemHealth.aspx", "covered": true, "entry": "注册表动作区互链（Admin.SystemHealth）+ 兜底键（PortalNavigationVisibilityPolicy.cs:193）" },
+        { "id": "Admin/TabLayout.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Modules.TabLayout）+ 页签模块跨链（Tabs.ascx.cs:321/376）" },
+        { "id": "Admin/UserEmployeeBindingEdit.aspx", "covered": true, "entry": "ManageUsers.aspx.cs:1067 绑定链接 + EmployeeDirectory.aspx:41 硬链 + 行级 BindUrl（EmployeeDirectory.aspx.cs:621/737）" },
+        { "id": "Admin/WorkItems.aspx", "covered": true, "entry": "注册表动作区互链（Admin.WorkItems）+ 自身动作区硬链 3 页（WorkItems.aspx:31-33）" },
+        { "id": "Admin/ThemeSettings.aspx", "covered": false, "owner": "项目维护者", "reEntry": "①进入导航/UI 类周期补导航链接（硬性前置：先出原型与设计稿并经确认）；或②裁定为主题运维直链专用页，维持「直链可达、不入导航」口径并同步站点文档", "basis": "全仓入链审计 0 处引用（除注册条目 PortalNavigationRegistry.cs:818-831 与自身文件）；W-anp-P138 运行期锚点爬取不可达；无 postback 入口（works/W-anp-P138-admin-module-access-entries.md 第五节）" }
+      ],
+      "excluded": [
+        { "id": "Admin/AccessDenied.aspx", "basis": "基础设施页（访问拒绝占位），无导航入口需求" },
+        { "id": "Admin/EditAccessDenied.aspx", "basis": "基础设施页（编辑拒绝占位），由安全导航策略进入" },
+        { "id": "Admin/Logoff.aspx", "basis": "基础设施页（登出动作），由横幅登出链接进入" },
+        { "id": "Admin/NotImplemented.aspx", "basis": "横幅「文档」占位链接目标（DesktopPortalBanner.ascx:25）+ WorkItems 未知业务类型兜底（WorkItems.aspx.cs:539），遗留观感项，非管理功能入口（C-anp-P26 范围边界内不顺手改）" },
+        { "id": "Admin/Register.aspx", "basis": "账号注册页（Account.Register.Legacy/DiagnosticOnly），由前台登录页注册入口进入（Signin.ascx:57），非后台管理功能页" }
+      ]
+    },
+    {
+      "id": "module-instances",
+      "title": "页签挂载模块实例运行期验证",
+      "inventory": "database",
+      "gate": "dev/scripts/Invoke-PortalModuleRuntimeGate.ps1",
+      "note": "数据库为权威清单（总数/分组/URL 全部运行期枚举）；「已验证/总数/未覆盖」由该 L2 门禁每次运行写入 gate-summary.json 的 coverage 块。不在此静态硬编码——实例随部署漂移，硬编码必然过期。"
+    }
+  ]
+}

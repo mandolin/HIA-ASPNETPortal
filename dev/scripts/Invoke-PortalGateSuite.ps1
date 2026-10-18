@@ -269,6 +269,21 @@ $gateLayers = [ordered]@{
         #   Classified L0: only source, SQL, and resource files are read — no database, no site start-up, no configuration writes.</en>
         # </lang>
         @{ File = 'Test-PortalLocalizedNameGate.ps1';         Runner = 'ps1'; Kind = '多语言链路齐备'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P26`（`W-anp-P140`）新增：**运行期证据覆盖台账**门禁（L0 静态）。
+        #   把"覆盖面说不清、人工翻台账"变成每次运行自动产出「已覆盖/总数」与未覆盖清单：台账
+        #   `dev\evidence-coverage.json` 与源码双向 default-deny 核对（新页面未分类 → Fail；台账漂移 → Fail），
+        #   并机器强制 V3 —— 未覆盖项必须带所有者/再入条件/判定依据。数据库面（模块实例）不静态枚举，
+        #   由 L2 `Invoke-PortalModuleRuntimeGate.ps1` 运行期产出 coverage 块，两层合成完整覆盖陈述。</zh-CN>
+        #   <en>`C-anp-P26` (`W-anp-P140`) addition: the **runtime-evidence coverage ledger** gate (L0, static). Replaces
+        #   "unstateable coverage, manually dug from ledgers" with automatically produced "covered / total" numbers and the
+        #   uncovered list on every run: the ledger `dev\evidence-coverage.json` is cross-checked bidirectionally against source
+        #   under default-deny (an unclassified new page → Fail; ledger drift → Fail), and V3 is machine-enforced — uncovered
+        #   items must carry owner / re-entry condition / basis. The database surface (module instances) is not statically
+        #   enumerated; the L2 `Invoke-PortalModuleRuntimeGate.ps1` produces its coverage block at runtime, and the two layers
+        #   together form the complete coverage statement.</en>
+        # </lang>
+        @{ File = 'Test-PortalEvidenceCoverage.ps1';          Runner = 'ps1'; Kind = '证据覆盖台账'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
