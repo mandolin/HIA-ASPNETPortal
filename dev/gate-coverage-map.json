@@ -224,6 +224,14 @@
       "basis": "W-anp-P149 实测：95 条 portal-theme-default 作用域规则全部指向业务模块/编辑页专属 class，当前 5 个采样页中仅 tabid=1101 命中 23 条。"
     },
     {
+      "id": "runtime-screenshot-baseline",
+      "name": "运行截图基线（可复现采集规范 + 证据清单与目标清单一致）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明采集规范固定（1440×1000 / DPR 1 / zh-CN / 只截视口）、目标清单与证据清单一致、本地截图非空；不证明截图内容与页面语义相符（人工复核承载），不要求跨机器像素一致（字体/渲染/数据状态差异天然存在，哈希差异仅作软指标），不证明覆盖全部产品页面（按已登记目标清单 default-deny，新增页面须登记进 TARGETS）。",
+      "gate": "Test-PortalRuntimeScreenshotBaseline.ps1"
+    },
+    {
       "id": "landing-stats",
       "name": "landing 统计数字（文档子站首页统计与可计算真值一致）",
       "layer": "L0",

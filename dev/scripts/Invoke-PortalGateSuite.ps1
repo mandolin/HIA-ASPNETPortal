@@ -361,6 +361,30 @@ $gateLayers = [ordered]@{
         #   drifted 29 was corrected to the true 27 on delivery.</en>
         # </lang>
         @{ File = 'Test-PortalLandingStats.ps1';             Runner = 'ps1'; Kind = 'landing 统计数字'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P28`（`W-anp-P151`）新增：**运行截图基线**门禁（L0）。`docs/documentation-registry.md` 与
+        #   `docs/documentation-map.md` 长期把「运行截图」登记为剩余缺口（`user-guide.md` 更列入"没有文档支持"）——
+        #   手工贴一次必然腐坏且与源码脱节，故必须**可复现**。本门禁把验收判据 V2（有脚本/有规范/进证据包）
+        #   变成机器核对：A1 采集工具固化规范（视口 1440×1000 / DPR 1 / zh-CN / 只截视口）；
+        #   A2 目标清单 default-deny（≥10 个、业务页与后台页两类都覆盖、area+id 唯一）；
+        #   A3 证据清单与目标清单一致（缺条目/未登记条目/命名不合规范即失败；清单缺失 → exit 2 前置缺失）；
+        #   A4 本地截图非空（哈希差异仅软指标——跨机器字体/渲染差异是天然现象，强一致会造成假阳性）。
+        #   截图本身**不入库**（P18 收口"按需生成 + 摘要入库"、operations-runbook 不把截图放入根仓库），
+        #   入库的是清单。采集由 `Capture-PortalRuntimeScreenshots.mjs` 按需执行（非门禁）。</zh-CN>
+        #   <en>`C-anp-P28` (`W-anp-P151`) addition: the **runtime screenshot baseline** gate (L0). `docs/documentation-registry.md`
+        #   and `docs/documentation-map.md` have long listed "runtime screenshots" as a remaining gap (`user-guide.md` even lists
+        #   it among items with no documentation support) — screenshots pasted by hand inevitably rot and drift from the source,
+        #   so they must be **reproducible**. This gate turns acceptance criterion V2 (script / spec / evidence package) into a
+        #   machine check: A1 the capture tool pins the spec (viewport 1440x1000 / DPR 1 / zh-CN / viewport-only shots);
+        #   A2 default-deny target list (>= 10 targets, both business and admin areas, unique area+id);
+        #   A3 the manifest agrees with the target list (missing/unregistered entries or non-conforming names fail; a missing
+        #   manifest exits 2 as a prerequisite gap); A4 local screenshots are non-empty (hash differences are soft only —
+        #   cross-machine font/rendering differences are inherent and requiring equality would be a false positive).
+        #   Screenshots themselves are **not committed** (the P18 closeout rule of "generate on demand + commit the summary",
+        #   and operations-runbook keeps screenshots out of the root repository); the manifest is what gets committed. Capture
+        #   runs on demand via `Capture-PortalRuntimeScreenshots.mjs` (not a gate).</en>
+        # </lang>
+        @{ File = 'Test-PortalRuntimeScreenshotBaseline.ps1'; Runner = 'ps1'; Kind = '运行截图基线'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

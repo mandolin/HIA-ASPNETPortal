@@ -66,6 +66,33 @@ surface 和 solution/project discovery。生成的 DotNetDoc extraction、HIA do
 必须先定义所有权、许可证、清理方式、发布位置、访问边界和回退方案，并更新本指南、公开索引和门禁。
 
 
+## 运行截图基线
+
+`W-anp-P151` 交付：把长期登记为缺口的「运行截图」变成**可复现产物**——手工贴一次的截图必然随时间腐坏且与源码脱节。
+
+规范与既有主题截图工具（`Capture-PortalThemeScreenshots.ps1`）同源，不另起一套：
+
+| 项 | 口径 |
+| --- | --- |
+| 视口 | 1440 × 1000，`deviceScaleFactor: 1`，locale `zh-CN` |
+| 采集 | 管理员登录后按登记目标逐个采集，**只截视口**（`fullPage: false`）——固定视口是可复现的前提，整页截图随内容高度变化而不可比 |
+| 命名 | `p151-<area>-<target>-zh-CN-1440x1000.png` |
+| 覆盖 | 业务页（前台门户页签）+ 后台页（`/Admin/*.aspx`）；目标在脚本 `TARGETS` 中登记，default-deny |
+| 校验 | 落通用错误页 / 文件 < 1KB / 导航失败 = 该目标失败，不静默产出坏图 |
+| 产物 | 截图 → **内部证据目录**（私有，不随公开文档发布，受私有仓 `.gitignore` 保护；`operations-runbook.md`：公开交付只引用脱敏摘要，不把内部证据或截图放入根仓库）；清单 → 同目录 `screenshot-manifest.json`（**入库**，含 sha256 / 字节数 / 视口 / locale / 目标 URL / 采集时间）。具体路径见采集脚本与 `operations-runbook.md` |
+
+复现命令（仓库根目录）：
+
+```powershell
+$env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path 'temp\node_modules\playwright').Path
+& $node 'dev\scripts\Capture-PortalRuntimeScreenshots.mjs'          # 按需采集（非门禁）
+& 'dev\scripts\Test-PortalRuntimeScreenshotBaseline.ps1'            # L0 门禁：校验规范与清单一致
+```
+
+边界：截图**不进入公开文档与根仓库**（`operations-runbook.md`：公开交付只引用脱敏摘要，不把内部证据或生产截图放入根仓库）；
+门禁只证明「规范固定、目标与清单一致、图片非空」，**不证明截图内容与页面语义相符**（人工复核承载），
+也**不要求跨机器像素一致**（字体 / 渲染 / 数据状态差异天然存在，哈希差异仅作软指标登记）。
+
 ## 本地验证顺序
 
 1. 运行 `portal: verify public documentation`，检查公开入口、相对链接、隐私和生成目录边界。
