@@ -345,6 +345,22 @@ $gateLayers = [ordered]@{
         #   afterwards** — the map references itself, so a missing entry would trip M2 as a phantom.</en>
         # </lang>
         @{ File = 'Test-PortalGateCoverageMap.ps1';          Runner = 'ps1'; Kind = '门禁覆盖地图'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P27`（`W-anp-P148`）新增：**landing 统计数字**门禁（L0）。landing（`site/index.md` 与
+        #   `site/en/index.md`）上的统计数字此前手工维护并已实测漂移（本轮手工把"篇文档"从 31 改到 29，
+        #   而真值=已上架文档篇数 27）。本门禁把五个数字全部改为机器取数：已上架文档篇数、
+        #   皮肤数（主题目录排除 ThemeProbe 探针）、UI 语言数（lang.*.resx）、版本（docs/versioning.md）、
+        #   许可证（根 LICENSE）；并 default-deny —— landing 上任何**未识别**的统计块即失败，
+        #   防止新增一个没人核对的数字。交付时已把漂移的 29 修正为真值 27。</zh-CN>
+        #   <en>`C-anp-P27` (`W-anp-P148`) addition: the **landing statistics** gate (L0). The statistics on the landing pages
+        #   (`site/index.md` and `site/en/index.md`) were hand-maintained and had measurably drifted (this cycle corrected
+        #   "Documents" from 31 to 29 by hand, while the truth — published document count — is 27). This gate makes all five
+        #   numbers machine-derived: published document count, skin count (theme directories excluding the `ThemeProbe` probe
+        #   theme), UI languages (`lang.*.resx`), version (`docs/versioning.md`) and licence (root `LICENSE`); plus default-deny
+        #   — any **unrecognised** statistic block on the landing fails, so no new number can appear without a check. The
+        #   drifted 29 was corrected to the true 27 on delivery.</en>
+        # </lang>
+        @{ File = 'Test-PortalLandingStats.ps1';             Runner = 'ps1'; Kind = 'landing 统计数字'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

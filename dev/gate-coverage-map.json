@@ -208,6 +208,14 @@
       "gate": "Test-PortalGateCoverageMap.ps1"
     },
     {
+      "id": "landing-stats",
+      "name": "landing 统计数字（文档子站首页统计与可计算真值一致）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明 landing 声明的五个数字等于所定义口径的真值（已上架文档/皮肤/语言/版本/许可）；不证明文档内容质量，也不证明未上架文档是刻意决定（上架取舍属内容范围，已如实登记为软指标）。",
+      "gate": "Test-PortalLandingStats.ps1"
+    },
+    {
       "id": "a11y-runtime",
       "name": "运行期键盘焦点顺序/可达路径与渲染级对比度（计算样式、渐变叠加）",
       "coverage": "uncovered",

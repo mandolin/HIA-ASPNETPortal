@@ -36,7 +36,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
     <div><div class="oc-stat-val">MIT</div><div class="oc-stat-label">Licence</div></div>
     <div><div class="oc-stat-val">7</div><div class="oc-stat-label">Official skins</div></div>
     <div><div class="oc-stat-val">2</div><div class="oc-stat-label">UI languages</div></div>
-    <div><div class="oc-stat-val">29</div><div class="oc-stat-label">Documents</div></div>
+    <div><div class="oc-stat-val">27</div><div class="oc-stat-label">Documents</div></div>
   </div>
 </section>
 
