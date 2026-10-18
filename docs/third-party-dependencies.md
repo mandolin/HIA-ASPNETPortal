@@ -7,6 +7,12 @@
 | 依赖 | 锁定版本 | 用途 | 许可证/依据 | 当前边界 |
 | --- | --- | --- | --- | --- |
 | `System.Data.SQLite.Core` | `1.0.119.0` | `W-anp-P3.3` 的 .NET Framework 4.8 SQLite ADO.NET capability proof。 | package 元数据链接至 SQLite Public Domain 版权声明；其 net46 build target 也声明为 Public Domain。 | 仅由独立 proof 项目使用，不进入门户主业务运行路径。 |
+| `Stub.System.Data.SQLite.Core.NetFramework` | `1.0.119.0` | 上一行的同族安装期 stub（net48 target 的 native 运行时安放辅助），与主包同版本锁定。 | 与主包同源：SQLite Public Domain 版权声明。 | 仅随 proof 项目恢复，不进入门户主业务运行路径。 |
+| `playwright` | `1.62.1` | L2 运行期证据/基线门禁（模块运行期、性能基线等）的浏览器自动化运行时。 | Apache-2.0（package.json 声明）。 | **开发期依赖、不入库**：位于 `temp/node_modules/playwright`，经 `PORTAL_PLAYWRIGHT_MODULE` 指向；不进入站点 `bin`、发布包或任何运行路径。 |
+
+## 机器可读基线与变更铁律
+
+`dev/dependency-baseline.json` 是**已审计依赖集**的机器快照（含全部 packages.config 声明与上述开发期依赖）。依赖集任何增删或版本变更必须三处同步：①本文件登记；②重估漏洞面（L0 门禁自动扫描 NuGet 漏洞数据源）；③有意更新该基线。缺任何一处，门禁 `Test-PortalDependencyVulnerabilityBaseline.ps1` 即失败（default-deny：不允许未经审计的依赖变更）。
 
 ## 使用与分发约束
 

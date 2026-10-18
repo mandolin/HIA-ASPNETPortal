@@ -298,6 +298,21 @@ $gateLayers = [ordered]@{
         #   markup attributes only — rendered contrast / real keyboard focus order are future L2 work.</en>
         # </lang>
         @{ File = 'Test-PortalAccessibilityBaseline.ps1';     Runner = 'ps1'; Kind = '无障碍基线'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P27`（`W-anp-P145`）新增：**依赖漏洞基线**门禁（L0）。三层：A1 基线↔packages.config↔
+        #   公开登记表三份事实双向 default-deny（依赖任何增删/版本变更缺登记即 Fail）；A2 离线高危版本地板
+        #   （Newtonsoft.Json >= 13.0.0，只登记有公开依据的地板）；B 按 NuGet VulnerabilityInfo 协议实扫漏洞库
+        #   （服务索引 → base+update 合并 → 区间语义匹配），命中即 Fail（附 GHSA 链接）。数据源不可达 → 显式
+        #   exit 2（前置缺失不伪装通过）。证明边界：不证传递依赖（packages.config 无 lock 语义）与许可证合规。</zh-CN>
+        #   <en>`C-anp-P27` (`W-anp-P145`) addition: the **dependency vulnerability baseline** gate (L0). Three layers:
+        #   A1 bidirectional default-deny across baseline ↔ packages.config ↔ the public register (any dependency
+        #   add/remove/version change without registration fails); A2 offline known-bad version floors
+        #   (Newtonsoft.Json >= 13.0.0 — only publicly justified floors); B a real scan of the vulnerability database per the
+        #   NuGet VulnerabilityInfo protocol (service index → base+update merge → range-semantics matching), a hit fails with
+        #   the GHSA link. Unreachable data source → explicit exit 2 (a missing prerequisite is never faked as a pass).
+        #   Proof boundary: does not prove transitive dependencies (packages.config has no lock semantics) nor license compliance.</en>
+        # </lang>
+        @{ File = 'Test-PortalDependencyVulnerabilityBaseline.ps1'; Runner = 'ps1'; Kind = '依赖漏洞基线'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

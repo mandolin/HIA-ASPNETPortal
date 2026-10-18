@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "note": "已审计依赖集机器快照（W-anp-P145）。铁律：依赖集任何增删/版本变更必须三处同步——①docs/third-party-dependencies.md 登记行；②重估漏洞面（门禁 B 层自动扫）；③有意更新本基线。缺任何一处，L0 门禁 Test-PortalDependencyVulnerabilityBaseline.ps1 即 Fail（default-deny：不允许未经审计的依赖变更）。",
+  "docRequired": [
+    "System.Data.SQLite.Core",
+    "Stub.System.Data.SQLite.Core.NetFramework",
+    "playwright"
+  ],
+  "packages": [
+    { "id": "Linq.Extras", "version": "5.0.0", "projects": ["Portal"] },
+    { "id": "Newtonsoft.Json", "version": "13.0.4", "projects": ["Portal"] },
+    { "id": "System.Runtime.CompilerServices.Unsafe", "version": "4.5.2", "projects": ["Portal"] },
+    { "id": "System.Runtime.CompilerServices.Unsafe", "version": "6.1.2", "projects": ["Portal.Tests"] },
+    { "id": "System.Threading.Tasks.Extensions", "version": "4.5.2", "projects": ["Portal"] },
+    { "id": "System.Threading.Tasks.Extensions", "version": "4.5.4", "projects": ["Portal.Tests"] },
+    { "id": "Unity", "version": "5.11.10", "projects": ["Portal"] },
+    { "id": "Unity.Abstractions", "version": "5.11.2", "projects": ["Portal"] },
+    { "id": "Unity.Configuration", "version": "5.11.2", "projects": ["Portal"] },
+    { "id": "Unity.Container", "version": "5.11.5", "projects": ["Portal"] },
+    { "id": "EntityFramework", "version": "6.1.0", "projects": ["Portal.Components.Data", "Portal.Components.Data1"] },
+    { "id": "System.Data.SQLite.Core", "version": "1.0.119.0", "projects": ["Portal.DataProviderProof"] },
+    { "id": "Stub.System.Data.SQLite.Core.NetFramework", "version": "1.0.119.0", "projects": ["Portal.DataProviderProof"] },
+    { "id": "System.Buffers", "version": "4.6.1", "projects": ["Portal.Tests"] },
+    { "id": "System.Memory", "version": "4.6.3", "projects": ["Portal.Tests"] },
+    { "id": "System.Numerics.Vectors", "version": "4.6.1", "projects": ["Portal.Tests"] },
+    { "id": "MSTest.TestAdapter", "version": "4.3.3", "projects": ["Portal.Tests"] },
+    { "id": "MSTest.TestFramework", "version": "4.3.3", "projects": ["Portal.Tests"] }
+  ],
+  "devTools": [
+    { "id": "playwright", "version": "1.62.1", "path": "temp/node_modules/playwright/package.json", "boundary": "开发期依赖、不入库；仅运行期证据门禁使用" }
+  ]
+}
