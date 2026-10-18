@@ -135,6 +135,12 @@ const targets = [
   { id: 'myworkitems', url: base + '/DesktopDefault.aspx?tabindex=10&tabid=1011' },
   { id: 'adminTab', url: base + '/DesktopDefault.aspx?tabindex=9&tabid=6' },
   { id: 'leaveExpense', url: base + '/DesktopDefault.aspx?tabindex=990&tabid=1101' }
+  // <lang><zh-CN>实测记录（P150 阶段）：曾追加员工资料确认（tabid=1008）与更正（tabid=1009）两页以扩大
+  // Default 规则证据覆盖面，实测**两页命中均为 0/95**（这些页不渲染 Default 作用域规则所指向的 class），
+  // 只增加运行耗时而无证据增量 → 已回退。保留此记录以免后续重复尝试。</zh-CN>
+  // <en>Measurement note (P150 phase): the employee-profile confirmation (tabid=1008) and correction (tabid=1009) tabs were added
+  // to widen Default rule evidence, but both measured **0/95** (they do not render the classes those Default-scoped rules target),
+  // adding runtime cost with no evidence gain → reverted. Kept as a note so the attempt is not repeated blindly.</en></lang>
 ];
 
 // <lang><zh-CN>探针：取 Default.css 定义的历史门户 class（portal 基础外观层），计算样式跨机器确定；几何带容差。</zh-CN>
@@ -236,16 +242,27 @@ try {
           } catch (error) {
             continue; // <lang><zh-CN>跨域样式表无法读 cssRules，跳过（不影响同源 Default.css 统计）。</zh-CN><en>Cross-origin sheets cannot be read; skip (Default.css is same-origin).</en></lang>
           }
-          for (const rule of rules) {
-            const selectorText = rule && rule.selectorText ? String(rule.selectorText) : '';
-            if (!selectorText.includes('portal-theme-default')) continue;
-            total += 1;
-            try {
-              if (document.querySelectorAll(selectorText).length > 0) withEvidence += 1;
-            } catch (error) {
-              // <lang><zh-CN>选择器语法当前浏览器不支持 → 不计入命中。</zh-CN><en>Unsupported selector syntax: not counted as a hit.</en></lang>
+          // <lang><zh-CN>递归遍历：@media / @supports 内还有嵌套规则，扁平遍历会把它们漏掉
+          // （实测分母 95 低于 Default.css 静态 111，即为此因）。</zh-CN>
+          // <en>Recursive walk: @media / @supports hold nested rules, and a flat walk misses them (measured denominator 95 vs
+          // the static 111 in Default.css — this was the cause).</en></lang>
+          const walk = (list) => {
+            for (const rule of list) {
+              if (rule.cssRules && rule.cssRules.length > 0) {
+                walk(Array.from(rule.cssRules));
+                continue;
+              }
+              const selectorText = rule && rule.selectorText ? String(rule.selectorText) : '';
+              if (!selectorText.includes('portal-theme-default')) continue;
+              total += 1;
+              try {
+                if (document.querySelectorAll(selectorText).length > 0) withEvidence += 1;
+              } catch (error) {
+                // <lang><zh-CN>选择器语法当前浏览器不支持 → 不计入命中。</zh-CN><en>Unsupported selector syntax: not counted as a hit.</en></lang>
+              }
             }
-          }
+          };
+          walk(rules);
         }
       } catch (error) {
         // <lang><zh-CN>样式表遍历整体失败时保留已统计值，不阻断。</zh-CN><en>If the sheet walk fails entirely, keep what was counted and continue.</en></lang>

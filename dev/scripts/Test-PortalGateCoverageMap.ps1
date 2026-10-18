@@ -19,6 +19,10 @@
      依据 P82 教训——"通过但什么都没断言"的门禁比没有门禁更危险）。
   M5 无孤儿门禁脚本：`dev\scripts` 下 `Test-*` / `Build-*` / `Invoke-Portal*` 文件必须要么已接入编排，
      要么在地图 `tooling` 列表中并带 basis（工具/编排自身不是门禁，必须显式声明）。
+  M6 证明边界必须显式声明（本周期新增）：地图 `boundaryRequiredGates` 清单内的门禁，脚本内必须含
+     中英双语的「证明边界 / Proof boundary」小节——把散落在工作文档里的 caveat 变成机器核对的不变量。
+     硬断言只针对该清单（本周期七个新门禁 + 今后新增）；既有老门禁未声明者**只作软指标上报**，
+     避免一刀切把 L0 打红并掩盖真实缺陷信号（收编路径见软指标输出）。
 
   证明边界：只证明"地图与门禁集一致、缺口登记质量达标"；**不证明每个门禁的断言强度足够**
   （强度由各门禁自身的负向测试与证明边界声明承载，本门禁只管"有没有、登记没登记"）。
@@ -41,6 +45,10 @@
      what is and is not proven; per the P82 lesson — a gate that passes while asserting nothing is worse than no gate).
   M5 no orphan gate scripts: files under `dev\scripts` named `Test-*` / `Build-*` / `Invoke-Portal*` must be wired in the
      suite or listed in the map's `tooling` with a basis (tooling and the orchestrator are not gates and must say so).
+  M6 explicit proof boundary required (added this cycle): gates listed in the map's `boundaryRequiredGates` must contain a
+     bilingual "证明边界 / Proof boundary" section — turning caveats scattered across work docs into a machine-checked
+     invariant. The hard assertion covers only that list (this cycle's seven new gates plus any future one); older gates
+     without it are **reported as a soft metric**, so a blanket rule cannot red-line L0 and bury the real signal.
 
   Proof boundary: proves only that "the map agrees with the gate set and gap registration meets the bar"; it does **not**
   prove that each gate's assertions are strong enough (strength belongs to each gate's own negative tests and declared
@@ -163,6 +171,32 @@ foreach ($f in (Get-ChildItem $scriptsDir -File | Where-Object { $_.Name -match 
     $failures += "M5 门禁类脚本既未接入编排也未登记为工具类：$($f.Name)（补接入编排或在地图 tooling 中声明）。"
 }
 
+# <lang>
+#   <zh-CN>M6：清单内门禁必须含中英双语「证明边界 / Proof boundary」小节；清单外既有门禁未声明者只作软指标上报。
+#   注意：清单条目本身漂移（文件已不存在）也要报，避免清单随时间腐坏。</zh-CN>
+#   <en>M6: gates in the list must contain a bilingual "证明边界 / Proof boundary" section; older gates outside the list are
+#   reported as a soft metric. Drift in the list itself (a file that no longer exists) is reported too, so the list cannot rot.</en>
+# </lang>
+$requiredBoundary = @(@($map.boundaryRequiredGates) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+foreach ($gateName in $requiredBoundary) {
+    $path = Join-Path $scriptsDir $gateName
+    if (-not (Test-Path -LiteralPath $path)) {
+        $failures += "M6 清单中的门禁文件不存在：$gateName（漂移，请清理 boundaryRequiredGates）。"
+        continue
+    }
+    $text = [System.IO.File]::ReadAllText($path)
+    if (-not $text.Contains('证明边界')) { $failures += "M6 门禁未声明中文「证明边界」小节：$gateName。" }
+    if (-not $text.Contains('Proof boundary')) { $failures += "M6 门禁未声明英文「Proof boundary」小节：$gateName（双语纪律）。" }
+}
+$boundaryDebt = @()
+foreach ($gate in $wired) {
+    if ($requiredBoundary -contains $gate) { continue }
+    $path = Join-Path $scriptsDir $gate
+    if (-not (Test-Path -LiteralPath $path)) { continue }
+    $text = [System.IO.File]::ReadAllText($path)
+    if (-not ($text.Contains('证明边界') -or $text.Contains('Proof boundary'))) { $boundaryDebt += $gate }
+}
+
 # ---------------------------------------------------------------------------
 # 统计落盘 + 输出
 # ---------------------------------------------------------------------------
@@ -182,6 +216,8 @@ $report = [pscustomobject]@{
         uncovered = @($byCoverage.uncovered)
     }
     tooling = @($map.tooling).Count
+    boundaryRequired = @($requiredBoundary).Count
+    boundaryDebt = $boundaryDebt
     failures = $failures
 }
 [System.IO.File]::WriteAllText($StatsPath, ($report | ConvertTo-Json -Depth 6), [System.Text.UTF8Encoding]::new($false))
@@ -193,6 +229,7 @@ foreach ($id in @($byCoverage.uncovered)) {
     $s = @($map.surfaces | Where-Object { $_.id -eq $id })[0]
     Write-Host ("    未覆盖：{0}（所有者：{1}）" -f $id, $s.owner)
 }
+Write-Host ("证明边界：清单内 {0} 个均已声明；清单外既有门禁未声明 {1} 个（软指标，逐步收编）" -f @($requiredBoundary).Count, @($boundaryDebt).Count)
 Write-Host ("统计已写入：$StatsPath")
 
 if ($failures.Count -gt 0) {

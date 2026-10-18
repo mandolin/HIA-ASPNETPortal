@@ -197,7 +197,7 @@
       "name": "主题解析 proof（耗时档 -IncludeSlow）",
       "layer": "slow",
       "coverage": "partial",
-      "boundary": "只证明主题解析 proof 可跑通并在 -IncludeSlow 下产出；不证明视觉回归基线的机器判据（见 visual-regression-default-theme）。",
+      "boundary": "只证明主题解析 proof 可跑通并在 -IncludeSlow 下产出；不证明视觉回归的机器判据（见 default-theme-visual 面，已由 W-anp-P149 交付）。",
       "gate": "Test-PortalThemeResolution.ps1"
     },
     {
@@ -280,22 +280,6 @@
       "basis": "W-anp-P144 实测边界：当前只采集 load 事件，未采 FCP/LCP/CLS。"
     },
     {
-      "id": "visual-regression-default-theme",
-      "name": "Default 主题视觉回归基线（P24 残余项）",
-      "coverage": "uncovered",
-      "owner": "W-anp-P149",
-      "reEntry": "本周期 P149 交付：把主题解析与截图工具产出的基线固化为可重复的机器判据并落地为门禁条目。",
-      "basis": "P24 裁定关闭时登记的残余项；当前仅 P149 计划承载，尚无门禁。"
-    },
-    {
-      "id": "landing-stats-automation",
-      "name": "landing 页面统计数字自动化（上架页数/统计行）",
-      "coverage": "uncovered",
-      "owner": "W-anp-P148",
-      "reEntry": "本周期 P148 交付：统计数字自动取数，杜绝再次过期。",
-      "basis": "本轮已手工修 31→29 的过期统计，说明该面无门禁必然漂移。"
-    },
-    {
       "id": "theme-settings-entry",
       "name": "Admin/ThemeSettings.aspx 可达入口",
       "coverage": "uncovered",
@@ -303,6 +287,15 @@
       "reEntry": "补导航链接须先出原型/设计稿（导航属界面改动，硬性前置），或裁定为主题运维直链专用。",
       "basis": "W-anp-P138 运行期核实全仓 0 入链、运行期不可达；已登记进 dev/evidence-coverage.json 未覆盖清单。"
     }
+  ],
+  "boundaryRequiredGates": [
+    "Test-PortalAccessibilityBaseline.ps1",
+    "Test-PortalPerformanceBaseline.mjs",
+    "Test-PortalDependencyVulnerabilityBaseline.ps1",
+    "Test-PortalI18nContentParity.ps1",
+    "Test-PortalGateCoverageMap.ps1",
+    "Test-PortalLandingStats.ps1",
+    "Test-PortalDefaultThemeVisualBaseline.mjs"
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
