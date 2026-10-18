@@ -313,6 +313,23 @@ $gateLayers = [ordered]@{
         #   Proof boundary: does not prove transitive dependencies (packages.config has no lock semantics) nor license compliance.</en>
         # </lang>
         @{ File = 'Test-PortalDependencyVulnerabilityBaseline.ps1'; Runner = 'ps1'; Kind = '依赖漏洞基线'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P27`（`W-anp-P146`）新增：**i18n 内容级一致性**门禁（L0）——超越既有资源契约门禁的
+        #   "键存在 + en-us 逐字"层面，比对**值的内部结构**：A1 占位符集合跨语言一致（939 键、51 个含占位符键，
+        #   丢 {0} = 运行期 FormatException/错位输出）；A2 花括号健全（去 {{}} 转义后 {==}，不平衡 = String.Format
+        #   运行期抛异常；禁全角 ｛｝ 静默错误）。阈值先实测（三项违规现状全 0）；含标签键实测 0 → 标签一致性
+        #   今天是空覆盖，降为软指标并注明未来引入标签时必须增设硬断言。软指标另含长度比离群（8x，实测 4x 为
+        #   中文信息密度噪声）、未翻译候选、占位符断档。</zh-CN>
+        #   <en>`C-anp-P27` (`W-anp-P146`) addition: the **i18n content-level parity** gate (L0) — going beyond the existing
+        #   resource-contract gate's "keys exist + en-us verbatim" level to compare the **internal structure of values**:
+        #   A1 placeholder sets identical across locales (939 keys, 51 bearing placeholders; dropping {0} = a runtime
+        #   FormatException or misaligned output); A2 brace sanity (after removing {{}} escapes, { must equal }, imbalance =
+        #   String.Format throwing at runtime; full-width ｛｝ banned as a silent typo). Thresholds measured first (all three
+        #   violation classes currently 0); tag-bearing keys measured 0 → tag parity is vacuous today, demoted to a soft metric
+        #   with the note that a hard tag assertion must be added if tags ever appear. Soft metrics also include length-ratio
+        #   outliers (8x; 4x measured to be Chinese information-density noise), untranslated candidates, and placeholder gaps.</en>
+        # </lang>
+        @{ File = 'Test-PortalI18nContentParity.ps1';        Runner = 'ps1'; Kind = 'i18n 内容级一致性'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
