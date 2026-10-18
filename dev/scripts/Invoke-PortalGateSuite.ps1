@@ -354,6 +354,25 @@ $gateLayers = [ordered]@{
         @{ File = 'Test-PortalLocalizationLeakEvidence.mjs'; Runner = 'mjs'; Kind = '语言泄漏证据'; Args = @() }
         @{ File = 'Test-PortalModuleRuntimeEvidence.mjs';    Runner = 'mjs'; Kind = '模块运行期证据'; Args = @() }
         # <lang>
+        #   <zh-CN>`C-anp-P29` 收口三件事之「固化」：页签名与模块标题多语言的**运行期**证据门禁。
+        #   与 L0 的 `Test-PortalLocalizedNameGate` 分工：静态门禁证明链路齐备且互相引用正确，本门禁证明链路在
+        #   真实站点上真的把中英文分开了。只做静态检查会漏掉「接线正确但档位不含该包」—— 实测 `MyWorkItems`
+        #   在默认 `CoreOnly` 档位下整页不渲染，静态检查对此完全无感。
+        #   归 L2：需运行站点 + playwright（开发期依赖、不入库）+ 验收上下文；前置缺失时**显式跳过并 exit 2**，
+        #   不以 exit=1 冒充失败，这正是 `W-anp-P139` 要固化的口径，本门禁先行采用。
+        #   门禁自带档位切换并在 `finally` 逐字节还原 `appSettings.dev.json`。</zh-CN>
+        #   <en>`C-anp-P29` closeout item "formalize": the **runtime** evidence gate for localized tab names and module titles.
+        #   Division of labour with the L0 `Test-PortalLocalizedNameGate`: the static gate proves the chain is complete and
+        #   cross-references correctly, while this gate proves the chain really separates Chinese from English on a live site.
+        #   Static checks alone would miss "correctly wired but the profile does not include that package" — measured, `MyWorkItems`
+        #   renders nothing at all under the default `CoreOnly` profile, which static checks are entirely blind to.
+        #   Classified L2: needs a running site, playwright (a development-only dependency, not committed), and the acceptance
+        #   context; when a prerequisite is missing it is **explicitly skipped with exit 2** rather than failing with exit=1, which
+        #   is precisely the convention `W-anp-P139` is meant to formalize, adopted here ahead of that work item.
+        #   The gate switches the deployment profile itself and restores `appSettings.dev.json` byte-for-byte in `finally`.</en>
+        # </lang>
+        @{ File = 'Test-PortalLocalizedNameRuntimeEvidence.ps1'; Runner = 'ps1'; Kind = '多语言运行期证据'; Args = @() }
+        # <lang>
         #   <zh-CN>本门禁是唯一需要**临时夹具**的证据门禁：`DarkTheme` 提供深色皮肤页签覆盖、`MultiInstance`
         #   提供多实例取舍场景。二者必须由编排在门禁前应用、门禁后移除（见夹具生命周期说明），否则会污染
         #   其它运行期门禁的页签取舍结果。</zh-CN>
