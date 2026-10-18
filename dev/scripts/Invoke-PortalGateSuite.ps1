@@ -452,6 +452,24 @@ $gateLayers = [ordered]@{
            Fixture = @{ Script = 'New-PortalP77ReachabilityFixture.ps1'
                         Apply  = @(, @('-Action', 'Seed'))
                         Remove = @(, @('-Action', 'Remove')) } }
+        # <lang>
+        #   <zh-CN>`C-anp-P27`（`W-anp-P144`）新增：**性能基线**门禁（L2）。性能没有"对错"只有"快慢"，
+        #   编译与功能门禁对 N+1 查询 / 无界列表完全失明。断言：五个已知列表面必须声明行数上限常量且 ≤100
+        #   （本项目"列表分页"的正确形态是服务端行数上限）；全仓 Limit/PageSize 常量 ≤100；
+        #   五个代表页登录后预热 1 次再测 5 轮取中位数——服务端 TTFB（含其背后全部 DB 工作，即慢查询经 UI 的
+        #   表现）≤ 2000ms、浏览器 load ≤ 10000ms。阈值实测定线（服务端中位 11–43ms），env 可覆盖供负向测试。
+        #   证明边界：不证明直接 SQL 层耗时（需 DB 驱动，后续工作）、不发现未知新列表面（静态规则按已知清单）。</zh-CN>
+        #   <en>`C-anp-P27` (`W-anp-P144`) addition: the **performance baseline** gate (L2). Performance has no
+        #   "correct/incorrect", only "fast/slow", and build/functional gates are blind to N+1 queries and unbounded lists.
+        #   Assertions: the five known list surfaces must declare a row-cap constant <= 100 (this project's shape of list
+        #   pagination is a server-side row cap); every Limit/PageSize constant in the repo <= 100; and five representative
+        #   pages, signed in and warmed up once then timed 5 rounds taking the median — server TTFB (which includes all DB
+        #   work behind the page, i.e. how slow queries surface through the UI) <= 2000ms and browser load <= 10000ms.
+        #   Thresholds are measured-first (server medians 11–43ms); env-overridable for negative testing. Proof boundary:
+        #   does not prove direct SQL-level timings (needs a DB driver, future work) nor discover unknown new list surfaces
+        #   (the static rule follows the known list).</en>
+        # </lang>
+        @{ File = 'Test-PortalPerformanceBaseline.mjs';      Runner = 'mjs'; Kind = '性能基线'; Args = @() }
     )
 }
 
