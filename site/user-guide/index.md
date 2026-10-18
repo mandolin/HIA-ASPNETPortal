@@ -33,6 +33,88 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 当前源码包含的门户模块包括公告、联系人、讨论、文档、事件、HTML、图片、链接、快速链接和 XML 模块。具体可见 `src/Portal/DesktopModules/`。
 
+下面逐个说明**既有内容模块**的用途、显示内容、编辑字段与入口。字段一律写成「中文标签 + 源码控件 id」，校验取自 `Edit*.aspx` 源码的验证控件，部署位置取自开发库实测（2026-10-19）；所有已部署实例的编辑角色均为 `Admins`，即**编辑入口仅管理员可见**。（文档与源码的一致性由门禁 `Test-PortalContentModuleDocs.ps1` 机器核对：源码控件漏写、或必填项数量与源码不符即失败。）
+
+### 公告（Announcements）
+
+- 用途：发布带有效期的站内公告，过期后不再显示。
+- 显示：标题 + 描述 + 过期时间；每条右侧有编辑入口（仅编辑权限可见）。
+- 编辑页 `DesktopModules/EditAnnouncements.aspx`：
+  - `TitleField` 标题（**必填**）
+  - `MoreLinkField` 详情链接（可选）
+  - `MobileMoreField` 移动端链接（可选）
+  - `DescriptionField` 描述（**必填**）
+  - `ExpireField` 过期日期（**必填**，另有日期格式比较校验 `VerifyExpireDate`）
+- 新建入口：模块标题栏「Add New Announcement」。
+- 当前部署：TabId=1「新闻与特写」、TabId=2「人事福利」、TabId=3「竞赛：TradeCraft / 监视 / 保护」。
+
+### 联系人（Contacts）
+
+- 用途：维护联系人名录（姓名、角色、邮箱、两个联系方式）。
+- 显示：姓名 / 角色 / 邮箱（可点击发信）/ 联系方式；每条有编辑入口。
+- 编辑页 `DesktopModules/EditContacts.aspx`：
+  - `NameField` 姓名（**必填**）
+  - `RoleField` 角色
+  - `EmailField` 邮箱
+  - `Contact1Field` 联系方式一
+  - `Contact2Field` 联系方式二
+- **注意：仅姓名必填**，角色 / 邮箱 / 联系方式均无必填与格式校验，可留空——录入时须自行核对。
+- 新建入口：「Add New Contact」。当前部署：TabId=2「员工联系信息」。
+
+### 讨论（Discussion）
+
+- 用途：主题式讨论区，支持主题下的回复层级。
+- 显示：主题列表（可展开 / 折叠子回复，展开状态按子回复数显示），每条显示作者与发布时间，标题链接到详情页（新窗口）。
+- 详情页 `DesktopModules/DiscussDetails.aspx?ItemID=<编号>&mid=<模块号>`：显示标题 / 作者 / 日期 / 正文；提供回复表单（`TitleField` 最长 100 字符、`BodyField` 多行、`ReplyBtn` 提交），并可在上一条 / 下一条之间翻页。
+- 新建入口：模块标题栏「Add New Thread」（新窗口打开详情页）。
+- 当前部署：TabId=4「TradeCraft 技巧与装备」「实战手册」。
+
+### 文档（Document）
+
+- 用途：文档条目（上传文件或指向已有路径），供下载或新窗口查看。
+- 显示：文档链接（新窗口打开）+ 编辑入口。
+- 编辑页 `DesktopModules/EditDocs.aspx`：
+  - `NameField` 文档名（**必填**）
+  - `CategoryField` 分类
+  - `PathField` 路径
+  - `Upload` 是否上传（勾选）
+  - `storeInDatabase` 是否存入数据库（勾选）
+- 查看走 `DesktopModules/ViewDocument.aspx`。新建入口：「Add New Document」。
+- 当前部署：TabId=2「新员工文档」、TabId=4「好书推荐」。
+
+### 事件（Events）
+
+- 用途：发布活动（含时间地点），过期后不再显示。
+- 显示：标题 + 描述 + 时间地点。
+- 编辑页 `DesktopModules/EditEvents.aspx`：
+  - `TitleField` 标题（**必填**）
+  - `DescriptionField` 描述（**必填**）
+  - `WhereWhenField` 时间地点（**必填**）
+  - `ExpireField` 过期日期（**必填**，另有日期格式比较校验 `VerifyExpireDate`）
+- 新建入口：「Add New Event」。当前部署：TabId=1「近期活动」。
+
+### 图片（ImageModule）
+
+- 用途：在页签上展示单张图片。
+- 编辑页 `DesktopModules/EditImage.aspx`：`Src` 图片路径、`Width` 宽、`Height` 高。**均无必填校验**。
+- 新建 / 编辑入口：「Edit」。当前部署：TabId=3「夜视镜」。
+
+### 链接（Links）
+
+- 用途：维护链接列表（站点导航或资源入口）。
+- 显示：链接标题（可点击跳转）+ 编辑入口。
+- 编辑页 `DesktopModules/EditLinks.aspx`：
+  - `TitleField` 标题（**必填**）
+  - `UrlField` 地址（**必填**）
+  - `MobileUrlField` 移动端地址（可选）
+  - `DescriptionField` 描述（可选）
+  - `ViewOrderField` 显示顺序（**必填**，另有数值比较校验 `VerifyViewOrder`）
+- 新建入口：「Add Link」。当前部署：**TabId=1004 测试页「测试链接模块」**——即当前仅部署在测试页，正式页签暂未使用。
+
+### 未在本节逐项展开的模块
+
+`HTML`、`快速链接（QuickLinks）`、`XML` 三个模块本次未逐项展开（待补，已登记为文档缺口）。
+
 ## 管理入口
 
 后台管理相关页面位于 `src/Portal/Admin/`，包括用户、角色、模块定义、模块设置、站点设置和页面布局管理等。
@@ -119,4 +201,5 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - ~~运行截图~~ —— **已交付**：`W-anp-P151` 建立**运行截图基线**（固定视口 1440×1000 的可复现采集脚本、统一命名规范、产物进内部证据包、清单入库），规范见 `documentation-artifacts-guide.md`「运行截图基线」节。
 - 生产部署注意事项（部署相关请以 `deployment-checklist.md` 与 `operations-runbook.md` 为准；本页不重复给出部署步骤）。
 - 请假与报销的**审批流转界面** —— 本期仅落库与生成待办，审批操作不在本模块内。
-- 各既有内容模块（公告、联系人、讨论、文档、事件、图片、链接等）的逐项操作说明。
+- ~~各既有内容模块（公告、联系人、讨论、文档、事件、图片、链接等）的逐项操作说明~~ —— **已交付**：见上文「常见模块」各子节（`W-anp-P152`）。
+- `HTML`、`快速链接（QuickLinks）`、`XML` 三个模块的逐项操作说明（本次未展开，待补）。

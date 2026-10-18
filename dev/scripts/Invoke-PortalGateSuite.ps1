@@ -385,6 +385,32 @@ $gateLayers = [ordered]@{
         #   runs on demand via `Capture-PortalRuntimeScreenshots.mjs` (not a gate).</en>
         # </lang>
         @{ File = 'Test-PortalRuntimeScreenshotBaseline.ps1'; Runner = 'ps1'; Kind = '运行截图基线'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P28`（`W-anp-P152`）新增：**既有内容模块文档一致性**门禁（L0）。
+        #   `documentation-registry.md` 与 `documentation-map.md` 长期把「既有内容模块（公告 / 联系人 / 讨论 /
+        #   文档 / 事件 / 图片 / 链接）的逐项操作说明」登记为剩余缺口，本包已补齐 `docs/user-guide.md`
+        #   「常见模块」各子节（字段写成"中文标签 + 源码控件 id"）。但**文档会因源码改动而腐烂**——改一个字段名、
+        #   加一个必填校验，文档就静默过期，故把一致性变成机器核对：
+        #   A1 七个模块的显示控件与编辑页必须存在；A2 文档必须为每个模块设有小节；
+        #   A3 编辑页每个输入控件 id 必须出现在对应小节（源码有、文档缺即失败）；
+        #   A4 源码 `RequiredFieldValidator` 数 == 小节内 `**必填**` 标注数。
+        #   注册表外模块（HtmlModule / QuickLinks / Signin / XmlModule）只作软指标上报，是下一批待补文档清单。
+        #   证明边界显式：只做"源码 → 文档"方向，不证语义正确（人工复核承载）、不查文档多写的文字、
+        #   不核对部署位置（TabId/ModuleId 为交付时实测快照）。</zh-CN>
+        #   <en>`C-anp-P28` (`W-anp-P152`) addition: the **legacy content-module doc consistency** gate (L0).
+        #   `documentation-registry.md` and `documentation-map.md` have long listed "per-module operating instructions for the
+        #   legacy content modules (announcements / contacts / discussion / documents / events / pictures / links)" as a remaining
+        #   gap; this work item filled them in `docs/user-guide.md` under "common modules" (fields written as "Chinese label +
+        #   source control id"). But **docs rot as the source changes** — rename a field or add a required validator and the doc
+        #   silently goes stale, so consistency is turned into a machine check: A1 the seven modules' view controls and edit pages
+        #   must exist; A2 the doc must have a section per module; A3 every input control id in the edit page must appear in the
+        #   matching section (present in source, missing from the doc → fail); A4 the number of `RequiredFieldValidator` controls
+        #   equals the number of `**必填**` markers in the section. Modules outside the registry (HtmlModule / QuickLinks / Signin /
+        #   XmlModule) are reported as a soft metric — the backlog for the next doc batch.
+        #   Proof boundary: source → doc only; it does not prove semantic correctness (human review), does not check prose the doc
+        #   adds, and does not verify deployment locations (TabId/ModuleId are a delivery-time snapshot).</en>
+        # </lang>
+        @{ File = 'Test-PortalContentModuleDocs.ps1';         Runner = 'ps1'; Kind = '内容模块文档一致性'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
