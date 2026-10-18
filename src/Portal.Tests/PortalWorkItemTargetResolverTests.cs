@@ -411,8 +411,14 @@ namespace ASPNET.StarterKit.Portal.Tests
             /// <summary><l><zh-CN>模块在 pane 内的排序值。</zh-CN><en>Module order inside its pane.</en></l></summary>
             public int? ModuleOrder { get; set; }
 
-            /// <summary><l><zh-CN>模块实例标题。</zh-CN><en>Module-instance title.</en></l></summary>
+            /// <summary><l><zh-CN>模块实例标题（中文列兼默认回退列）。</zh-CN><en>Module-instance title (Chinese column and default fallback).</en></l></summary>
             public string ModuleTitle { get; set; }
+
+            /// <summary><l><zh-CN>模块标题的英文列；反查不读取该字段。</zh-CN><en>English column of the module title; the reverse lookup never reads it.</en></l></summary>
+            public string ModuleTitleEn { get; set; }
+
+            /// <summary><l><zh-CN>模块标题的其它语言 JSON 列；反查不读取该字段。</zh-CN><en>Other-languages JSON column of the module title; the reverse lookup never reads it.</en></l></summary>
+            public string ModuleTitleLocalizedJson { get; set; }
 
             /// <summary><l><zh-CN>所在 pane 名称。</zh-CN><en>Owning pane name.</en></l></summary>
             public string PaneName { get; set; }
@@ -442,8 +448,17 @@ namespace ASPNET.StarterKit.Portal.Tests
             /// <summary><l><zh-CN>同级排序值。</zh-CN><en>Sort value among siblings.</en></l></summary>
             public int? TabOrder { get; set; }
 
-            /// <summary><l><zh-CN>页签名称。</zh-CN><en>Tab name.</en></l></summary>
+            /// <summary><l><zh-CN>页签名称（中文列兼默认回退列）。</zh-CN><en>Tab name (Chinese column and default fallback).</en></l></summary>
             public string TabName { get; set; }
+
+            /// <summary><l><zh-CN>页签名的英文列；反查不读取该字段。</zh-CN><en>English column of the tab name; the reverse lookup never reads it.</en></l></summary>
+            public string TabNameEn { get; set; }
+
+            /// <summary><l><zh-CN>页签名的其它语言 JSON 列；反查不读取该字段。</zh-CN><en>Other-languages JSON column of the tab name; the reverse lookup never reads it.</en></l></summary>
+            public string TabNameLocalizedJson { get; set; }
+
+            /// <summary><l><zh-CN>导航门控稳定键；反查不读取该字段。</zh-CN><en>Navigation gate stable key; the reverse lookup never reads it.</en></l></summary>
+            public string NavigationKey { get; set; }
 
             /// <summary><l><zh-CN>页签标识。</zh-CN><en>Tab identifier.</en></l></summary>
             public int TabId { get; set; }
@@ -451,8 +466,14 @@ namespace ASPNET.StarterKit.Portal.Tests
             /// <summary><l><zh-CN>访问角色串。</zh-CN><en>Access-role string.</en></l></summary>
             public string AccessRoles { get; set; }
 
-            /// <summary><l><zh-CN>历史移动端页签名。</zh-CN><en>Legacy mobile tab name.</en></l></summary>
+            /// <summary><l><zh-CN>历史移动端页签名（中文列兼默认回退列）。</zh-CN><en>Legacy mobile tab name (Chinese column and default fallback).</en></l></summary>
             public string MobileTabName { get; set; }
+
+            /// <summary><l><zh-CN>移动端页签名的英文列；反查不读取该字段。</zh-CN><en>English column of the mobile tab name; the reverse lookup never reads it.</en></l></summary>
+            public string MobileTabNameEn { get; set; }
+
+            /// <summary><l><zh-CN>移动端页签名的其它语言 JSON 列；反查不读取该字段。</zh-CN><en>Other-languages JSON column of the mobile tab name; the reverse lookup never reads it.</en></l></summary>
+            public string MobileTabNameLocalizedJson { get; set; }
 
             /// <summary><l><zh-CN>历史移动端展示开关；反查不读取该字段。</zh-CN><en>Legacy mobile-display flag; the reverse lookup never reads it.</en></l></summary>
             public bool? ShowMobile { get; set; }

@@ -260,8 +260,27 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Legacy mobile visibility flag.</en>
         /// </l>
         /// </param>
+        /// <param name="tabNameEn">
+        /// <l>
+        ///   <zh-CN>页签名的英文列；为空表示保持数据库现值，不清空已配置值。</zh-CN>
+        ///   <en>English column of the tab name; blank keeps the current database value instead of wiping a configured one.</en>
+        /// </l>
+        /// </param>
+        /// <param name="tabNameLocalizedJson">
+        /// <l>
+        ///   <zh-CN>页签名的其它语言列；为空表示保持数据库现值。</zh-CN>
+        ///   <en>Other-languages column of the tab name; blank keeps the current database value.</en>
+        /// </l>
+        /// </param>
+        /// <param name="navigationKey">
+        /// <l>
+        ///   <zh-CN>导航门控稳定键；为空表示保持数据库现值。</zh-CN>
+        ///   <en>Navigation gate stable key; blank keeps the current database value.</en>
+        /// </l>
+        /// </param>
         public void UpdateTab(int portalId, int tabId, string tabName, int tabOrder, string authorizedRoles,
-                              string mobileTabName, bool showMobile)
+                              string mobileTabName, bool showMobile,
+                              string tabNameEn = null, string tabNameLocalizedJson = null, string navigationKey = null)
         {
             // <lang>
             //   <zh-CN>更新路径使用 `Single` 保持旧后台的强一致假设：目标 Tab 缺失应暴露为配置问题。</zh-CN>
@@ -274,6 +293,15 @@ namespace ASPNET.StarterKit.Portal
             tabRow.AccessRoles = authorizedRoles;
             tabRow.MobileTabName = mobileTabName;
             tabRow.ShowMobile = showMobile;
+
+            // <lang>
+            //   <zh-CN>多语言列与稳定键按"显式提供才写入"处理：调用方（旧保存路径）未传这三项时保持数据库现值，
+            //   这样不感知多语言的后台操作不会把已配置的英文名或稳定键清空。</zh-CN>
+            //   <en>The multilingual columns and stable key follow a "write only when explicitly supplied" rule: when a caller (a legacy save path) does not pass these three, the current database value is kept, so admin operations unaware of multilingualism cannot wipe already-configured English names or stable keys.</en>
+            // </lang>
+            if (!string.IsNullOrEmpty(tabNameEn)) { tabRow.TabNameEn = tabNameEn; }
+            if (!string.IsNullOrEmpty(tabNameLocalizedJson)) { tabRow.TabNameLocalizedJson = tabNameLocalizedJson; }
+            if (!string.IsNullOrEmpty(navigationKey)) { tabRow.NavigationKey = navigationKey; }
 
             _context.SaveChanges();
 

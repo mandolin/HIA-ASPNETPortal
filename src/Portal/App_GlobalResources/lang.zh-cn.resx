@@ -1716,7 +1716,19 @@
   <data name="Admin_ModuleSettings_LabelModuleName" xml:space="preserve">
     <value>模块名称</value>
   </data>
-  <data name="Admin_ModuleSettings_LabelCacheTimeout" xml:space="preserve">
+  <data name="Admin_ModuleSettings_LabelModuleNameEn" xml:space="preserve">
+<value>英文模块标题</value>
+</data>
+<data name="Admin_ModuleSettings_LabelModuleNameLocalized" xml:space="preserve">
+<value>其它语言模块标题（JSON）</value>
+</data>
+<data name="Admin_ModuleSettings_HintModuleNameLocalized" xml:space="preserve">
+<value>按文化名填写，例如 {"ja-JP":"休暇申請","fr-FR":"Demande"}；留空表示不提供其它语言。</value>
+</data>
+<data name="Admin_ModuleSettings_MessageInvalidLocalizedName" xml:space="preserve">
+<value>英文标题或其它语言 JSON 不合法：英文标题不可超过 150 字符，JSON 不可超过 4000 字符且不能包含控制字符。</value>
+</data>
+<data name="Admin_ModuleSettings_LabelCacheTimeout" xml:space="preserve">
     <value>缓存超时（秒）</value>
   </data>
   <data name="Admin_ModuleSettings_LabelMobileCompatibility" xml:space="preserve">
@@ -1761,7 +1773,19 @@
   <data name="Admin_TabLayout_LabelMobileTabName" xml:space="preserve">
     <value>移动端页签名称</value>
   </data>
-  <data name="Admin_TabLayout_SectionAddModule" xml:space="preserve">
+  <data name="Admin_TabLayout_LabelTabNameEn" xml:space="preserve">
+<value>英文页签名称</value>
+</data>
+<data name="Admin_TabLayout_LabelTabNameLocalized" xml:space="preserve">
+<value>其它语言页签名称（JSON）</value>
+</data>
+<data name="Admin_TabLayout_HintTabNameLocalized" xml:space="preserve">
+<value>按文化名填写，例如 {"ja-JP":"ホーム","fr-FR":"Accueil"}；留空表示不提供其它语言。</value>
+</data>
+<data name="Admin_TabLayout_MessageInvalidLocalizedName" xml:space="preserve">
+<value>英文名称或其它语言 JSON 不合法：英文名不可超过 150 字符，JSON 不可超过 4000 字符且不能包含控制字符。</value>
+</data>
+<data name="Admin_TabLayout_SectionAddModule" xml:space="preserve">
     <value>新增模块</value>
   </data>
   <data name="Admin_TabLayout_LabelModuleType" xml:space="preserve">

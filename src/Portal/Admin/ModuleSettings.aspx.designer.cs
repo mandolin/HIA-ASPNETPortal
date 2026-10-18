@@ -15,6 +15,12 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>当前模块标题输入框。</zh-CN><en>Input for the current module title.</en></lang></summary>
         protected global::System.Web.UI.WebControls.TextBox moduleTitle;
 
+        /// <summary><lang><zh-CN>当前模块标题的英文名输入框（多语言英文列）。</zh-CN><en>Input for the current module title's English name (multilingual English column).</en></lang></summary>
+        protected global::System.Web.UI.WebControls.TextBox moduleTitleEn;
+
+        /// <summary><lang><zh-CN>当前模块标题的其它语言 JSON 输入框。</zh-CN><en>Input for the current module title's other-language names as JSON.</en></lang></summary>
+        protected global::System.Web.UI.WebControls.TextBox moduleTitleLocalizedJson;
+
         /// <summary><lang><zh-CN>模块输出缓存时间输入框。</zh-CN><en>Input for the module output-cache duration.</en></lang></summary>
         protected global::System.Web.UI.WebControls.TextBox cacheTime;
 

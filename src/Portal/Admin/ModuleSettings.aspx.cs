@@ -158,6 +158,20 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
+            // <lang>
+            //   <zh-CN>英文名与其它语言 JSON 按可选单行/多行契约校验；坏 JSON 在这里拦下，
+            //   不流到数据库 CHECK 约束（否则管理员看到的是 SQL 错误而不是业务提示）。</zh-CN>
+            //   <en>Validate the English name and other-languages JSON against the optional single-line/multi-line contracts; broken JSON is stopped here instead of reaching the database CHECK constraint, which would show the administrator a SQL error rather than a business message.</en>
+            // </lang>
+            string titleEn;
+            string titleLocalizedJson;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(moduleTitleEn.Text, 150, out titleEn) ||
+                !PortalAdministrationPolicy.TryNormalizeOptionalMultilineText(moduleTitleLocalizedJson.Text, 4000, out titleLocalizedJson))
+            {
+                ShowMessage(lang.Admin_ModuleSettings_MessageInvalidLocalizedName);
+                return;
+            }
+
             try
             {
                 // <lang>
@@ -169,8 +183,9 @@ namespace ASPNET.StarterKit.Portal
                         .Where(item => item.Selected)
                         .Select(item => item.Text));
                 // <lang>
-                //   <zh-CN>使用已验证模块快照中的布局字段，仅替换允许编辑的标题、缓存、角色和移动端开关。</zh-CN>
-                //   <en>Use layout fields from the verified module snapshot and replace only the editable title, cache, roles, and mobile flag.</en>
+                //   <zh-CN>使用已验证模块快照中的布局字段，仅替换允许编辑的标题、缓存、角色和移动端开关；
+                //   多语言列只在管理员显式填写时写入，避免清空已配置值。</zh-CN>
+                //   <en>Use layout fields from the verified module snapshot and replace only the editable title, cache, roles, and mobile flag; the multilingual columns are written only when an administrator fills them in explicitly, so configured values are never wiped.</en>
                 // </lang>
                 ModulesDb.UpdateModule(
                     moduleId,
@@ -179,7 +194,9 @@ namespace ASPNET.StarterKit.Portal
                     title,
                     cacheSeconds,
                     editRoles,
-                    showMobile.Checked);
+                    showMobile.Checked,
+                    titleEn,
+                    titleLocalizedJson);
                 // <lang>
                 //   <zh-CN>模块设置影响页面运行时行为，成功后写运营审计，再回到当前 Tab 布局页确认结果。</zh-CN>
                 //   <en>Module settings affect runtime page behavior, so successful saves write an operation audit before returning to the current Tab layout page.</en>
@@ -290,6 +307,13 @@ namespace ASPNET.StarterKit.Portal
             moduleTitle.Text = currentModule.ModuleTitle;
             cacheTime.Text = currentModule.CacheTime.ToString();
             showMobile.Checked = currentModule.ShowMobile;
+
+            // <lang>
+            //   <zh-CN>回填多语言列；数据库为 NULL 时显示空串，管理员看到的是"未配置"而不是 "null"。</zh-CN>
+            //   <en>Backfill the multilingual columns; a NULL in the database renders as an empty string so administrators see "not configured" rather than "null".</en>
+            // </lang>
+            moduleTitleEn.Text = currentModule.ModuleTitleEn ?? string.Empty;
+            moduleTitleLocalizedJson.Text = currentModule.ModuleTitleLocalizedJson ?? string.Empty;
             PopulateRoleList(
                 PortalRoleParser.Parse(currentModule.AuthorizedEditRoles),
                 RolesDb.GetPortalRoles(PortalContext.GetPortalSettings().PortalId));

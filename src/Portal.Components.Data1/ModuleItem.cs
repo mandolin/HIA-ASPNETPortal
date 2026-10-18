@@ -47,11 +47,29 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         ///   <l>
-        ///     <zh-CN>模块实例标题，展示层输出前必须编码。</zh-CN>
-        ///     <en>Module instance title; presentation code must encode it before output.</en>
+        ///     <zh-CN>模块实例标题，展示层输出前必须编码；多语言体系下为中文列兼默认回退列。</zh-CN>
+        ///     <en>Module instance title; presentation code must encode it before output. It is the Chinese column and default
+        ///     fallback within the multilingual scheme.</en>
         ///   </l>
         /// </summary>
         public string ModuleTitle { get; set; }
+
+        /// <summary>
+        ///   <l>
+        ///     <zh-CN>模块标题的英文列；为空时渲染回退到 `ModuleTitle`。</zh-CN>
+        ///     <en>English column for the module title; rendering falls back to `ModuleTitle` when it is blank.</en>
+        ///   </l>
+        /// </summary>
+        public string ModuleTitleEn { get; set; }
+
+        /// <summary>
+        ///   <l>
+        ///     <zh-CN>模块标题的其它语言列，存以文化名为键的 JSON 文本；合法性由数据库 CHECK 约束 `ISJSON` 保证。</zh-CN>
+        ///     <en>Other-languages column for the module title, storing culture-keyed JSON text; validity is guaranteed by the
+        ///     database `ISJSON` CHECK constraint.</en>
+        ///   </l>
+        /// </summary>
+        public string ModuleTitleLocalizedJson { get; set; }
 
         /// <summary>
         ///   <l>

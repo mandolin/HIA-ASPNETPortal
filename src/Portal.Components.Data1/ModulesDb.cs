@@ -352,8 +352,20 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Legacy mobile visibility flag.</en>
         /// </l>
         /// </param>
+        /// <param name="titleEn">
+        /// <l>
+        ///   <zh-CN>模块标题的英文列；为空表示保持数据库现值，不清空已配置值。</zh-CN>
+        ///   <en>English column of the module title; blank keeps the current database value instead of wiping a configured one.</en>
+        /// </l>
+        /// </param>
+        /// <param name="titleLocalizedJson">
+        /// <l>
+        ///   <zh-CN>模块标题的其它语言列；为空表示保持数据库现值。</zh-CN>
+        ///   <en>Other-languages column of the module title; blank keeps the current database value.</en>
+        /// </l>
+        /// </param>
         public void UpdateModule(int moduleId, int moduleOrder, string paneName, string title, int cacheTime,
-                                 string editRoles, bool showMobile)
+                                 string editRoles, bool showMobile, string titleEn = null, string titleLocalizedJson = null)
         {
             // <lang>
             //   <zh-CN>更新路径保持严格查找；管理员页面不应悄悄忽略不存在的模块实例。</zh-CN>
@@ -367,6 +379,13 @@ namespace ASPNET.StarterKit.Portal
             moduleRow.CacheTimeout = cacheTime;
             moduleRow.EditRoles = editRoles;
             moduleRow.ShowMobile = showMobile;
+
+            // <lang>
+            //   <zh-CN>多语言列同样"显式提供才写入"，使不感知多语言的保存路径不会清空已配置的英文名或其它语言 JSON。</zh-CN>
+            //   <en>The multilingual columns likewise follow "write only when explicitly supplied", so save paths unaware of multilingualism cannot wipe already-configured English titles or other-languages JSON.</en>
+            // </lang>
+            if (!string.IsNullOrEmpty(titleEn)) { moduleRow.ModuleTitleEn = titleEn; }
+            if (!string.IsNullOrEmpty(titleLocalizedJson)) { moduleRow.ModuleTitleLocalizedJson = titleLocalizedJson; }
 
             _context.SaveChanges();
 

@@ -42,8 +42,10 @@ namespace ASPNET.StarterKit.Portal
         /// </exception>
         public ModuleSettings(IModuleItem module, IModuleDefsDb moduleDefConfig)
         {
-            ModuleTitle         = module.ModuleTitle;
-            ModuleId            = module.ModuleId;            
+            ModuleTitle              = module.ModuleTitle;
+            ModuleTitleEn            = module.ModuleTitleEn;
+            ModuleTitleLocalizedJson = module.ModuleTitleLocalizedJson;
+            ModuleId                 = module.ModuleId;            
             ModuleOrder         = module.ModuleOrder.Value;            
             PaneName            = module.PaneName;
             AuthorizedEditRoles = module.EditRoles;
@@ -115,11 +117,28 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>管理员配置的模块显示标题。</zh-CN>
-        ///   <en>Module display title configured by an administrator.</en>
+        ///   <zh-CN>管理员配置的模块显示标题；多语言体系下为中文列兼默认回退列，永不置空。</zh-CN>
+        ///   <en>Module display title configured by an administrator; within the multilingual scheme it is the Chinese column and
+        ///   default fallback, never blank.</en>
         /// </lang>
         /// </summary>
         public string ModuleTitle { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块标题的英文列；为空时渲染回退到中文列。</zh-CN>
+        ///   <en>English column for the module title; rendering falls back to the Chinese column when it is blank.</en>
+        /// </lang>
+        /// </summary>
+        public string ModuleTitleEn { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>模块标题的其它语言列，取值为以文化名为键的 JSON 文本。</zh-CN>
+        ///   <en>Other-languages column for the module title, holding culture-keyed JSON text.</en>
+        /// </lang>
+        /// </summary>
+        public string ModuleTitleLocalizedJson { get; private set; }
 
         /// <summary>
         /// <lang>

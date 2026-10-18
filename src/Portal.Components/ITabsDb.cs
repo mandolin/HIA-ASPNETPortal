@@ -170,8 +170,27 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Whether the Tab should appear in the mobile-compatibility list.</en>
         /// </l>
         /// </param>
+        /// <param name="tabNameEn">
+        /// <l>
+        ///   <zh-CN>页签名的英文列；为空表示未提供英文名。</zh-CN>
+        ///   <en>English column of the tab name; blank means no English name was supplied.</en>
+        /// </l>
+        /// </param>
+        /// <param name="tabNameLocalizedJson">
+        /// <l>
+        ///   <zh-CN>页签名的其它语言列，以文化名为键的 JSON 文本。</zh-CN>
+        ///   <en>Other-languages column of the tab name: culture-keyed JSON text.</en>
+        /// </l>
+        /// </param>
+        /// <param name="navigationKey">
+        /// <l>
+        ///   <zh-CN>导航门控稳定键；为空表示沿用数据库现值。</zh-CN>
+        ///   <en>Navigation gate stable key; blank means keep the current database value.</en>
+        /// </l>
+        /// </param>
         void UpdateTab(int portalId, int tabId, string tabName, int tabOrder, string authorizedRoles,
-                       string mobileTabName, bool showMobile);
+                       string mobileTabName, bool showMobile,
+                       string tabNameEn = null, string tabNameLocalizedJson = null, string navigationKey = null);
 
         /// <summary>
         /// <lang>

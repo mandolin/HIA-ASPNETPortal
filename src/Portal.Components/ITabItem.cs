@@ -24,11 +24,44 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <l>
-        ///   <zh-CN>桌面端导航中展示的页签名称。</zh-CN>
-        ///   <en>Tab name displayed in desktop navigation.</en>
+        ///   <zh-CN>桌面端导航中展示的页签名称；多语言体系下它同时是**中文列**与**默认回退列**，因此永不置空。
+        ///   改名或本地化都不会影响门控稳定键，稳定键由 `NavigationKey` 承载。</zh-CN>
+        ///   <en>Tab name displayed in desktop navigation; within the multilingual scheme it is also the **Chinese column** and the
+        ///   **default fallback column**, so it is never blank. Renaming or localizing it never affects the gate stable key, which
+        ///   `NavigationKey` carries.</en>
         /// </l>
         /// </summary>
         string TabName { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>页签名称的英文列；为空时渲染回退到中文列。</zh-CN>
+        ///   <en>English column for the tab name; when blank, rendering falls back to the Chinese column.</en>
+        /// </l>
+        /// </summary>
+        string TabNameEn { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>页签名称的其它语言列，取值为以文化名为键的 JSON 对象（如 `{"ja-JP":"ホーム"}`）。
+        ///   本契约只约定"是 JSON 文本"，键名是否为受支持的文化由解析器判定。</zh-CN>
+        ///   <en>Other-languages column for the tab name, holding a JSON object keyed by culture name (for example
+        ///   `{"ja-JP":"ホーム"}`). This contract only requires JSON text; whether a key is a supported culture is decided by
+        ///   the resolver.</en>
+        /// </l>
+        /// </summary>
+        string TabNameLocalizedJson { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>导航门控的稳定键；为空时门控回退到 `TabName`，保证历史部署零回归。
+        ///   它与显示名解耦，因此显示名可以自由本地化而不改变 `Tab.*` 键。</zh-CN>
+        ///   <en>Stable key for the navigation gate; when blank the gate falls back to `TabName`, keeping legacy deployments
+        ///   regression-free. It is decoupled from the display name, so the display name can be localized freely without
+        ///   changing `Tab.*` keys.</en>
+        /// </l>
+        /// </summary>
+        string NavigationKey { get; set; }
 
         /// <summary>
         /// <l>
@@ -48,11 +81,28 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <l>
-        ///   <zh-CN>旧移动端页签名，当前仅作为历史兼容字段保留。</zh-CN>
-        ///   <en>Legacy mobile tab name, currently retained only as a backward-compatibility field.</en>
+        ///   <zh-CN>旧移动端页签名，当前仅作为历史兼容字段保留；多语言体系下它同时是**中文列**与默认回退列。</zh-CN>
+        ///   <en>Legacy mobile tab name, currently retained only as a backward-compatibility field; within the multilingual
+        ///   scheme it is also the **Chinese column** and the default fallback.</en>
         /// </l>
         /// </summary>
         string MobileTabName { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>移动端页签名的英文列；为空时回退到中文列。</zh-CN>
+        ///   <en>English column for the mobile tab name; when blank it falls back to the Chinese column.</en>
+        /// </l>
+        /// </summary>
+        string MobileTabNameEn { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>移动端页签名的其它语言列，取值形态与 `TabNameLocalizedJson` 相同。</zh-CN>
+        ///   <en>Other-languages column for the mobile tab name, with the same shape as `TabNameLocalizedJson`.</en>
+        /// </l>
+        /// </summary>
+        string MobileTabNameLocalizedJson { get; set; }
 
         /// <summary>
         /// <l>

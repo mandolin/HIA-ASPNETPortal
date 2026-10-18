@@ -50,6 +50,23 @@
                     <span class="SubHead portal-form-label"><%= lang.Admin_ModuleSettings_LabelCacheTimeout %></span>
                     <asp:TextBox ID="cacheTime" CssClass="NormalTextBox portal-form-input" runat="server" />
                 </div>
+                <%--
+                    <lang>
+                        <zh-CN>模块标题多语言区：中文标题就是上面的 `moduleTitle`（中文列兼默认回退列），
+                        这里只补英文列与"其它语言" JSON 列，两个字段都只在管理员显式填写时才写入。</zh-CN>
+                        <en>Module-title multilingual area: the Chinese title is the `moduleTitle` field above (Chinese column and default fallback); only the English column and the "other languages" JSON column are added here, and both are written only when an administrator fills them in explicitly.</en>
+                    </lang>
+                --%>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ModuleSettings_LabelModuleNameEn %></span>
+                    <asp:TextBox ID="moduleTitleEn" CssClass="NormalTextBox portal-form-input" runat="server" />
+                </div>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label"><%= lang.Admin_ModuleSettings_LabelModuleNameLocalized %></span>
+                    <asp:TextBox ID="moduleTitleLocalizedJson" CssClass="NormalTextBox portal-form-input" runat="server"
+                        TextMode="MultiLine" Rows="3" />
+                    <span class="portal-form-hint"><%= lang.Admin_ModuleSettings_HintModuleNameLocalized %></span>
+                </div>
                 <div class="portal-form-field portal-checkbox-field">
                     <span class="SubHead portal-form-label"><%= lang.Admin_ModuleSettings_LabelMobileCompatibility %></span>
                     <asp:CheckBox ID="showMobile" Text="<%$ Resources:lang, Admin_ModuleSettings_CheckboxShowToMobileUsers %>" runat="server" />

@@ -771,16 +771,59 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static string BuildTabEntryKey(string tabName)
         {
+            return BuildTabEntryKey(tabName, null);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>构造主导航 Tab 的稳定入口键；**导航稳定键优先**，缺失时回退到 Tab 显示名称。</zh-CN>
+        ///   <en>Builds the stable entry key of a main-navigation Tab; the **navigation stable key takes precedence**, falling back to the Tab display name when absent.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>为什么需要稳定键：页签名本地化后，同一页签在不同界面文化下显示名不同（`首页` / `Home`），
+        ///   管理员还可以把它改成任意文本。若键仍由显示名派生，registry 里登记的 `Tab.Home` 会在中文界面下失配，
+        ///   门控静默退化为"未登记即放行" —— 那不是安全的放行，而是**权限检查凭空消失**。
+        ///   迁移脚本已把存量页签名回填为稳定键，因此存量部署的 `Tab.*` 键逐字节不变。</zh-CN>
+        ///   <en>Why a stable key is needed: once tab names are localized, the same tab displays differently per UI culture
+        ///   (`首页` / `Home`), and an administrator can rename it to anything. If the key were still derived from the display
+        ///   name, the registered `Tab.Home` would fail to match under the Chinese UI and the gate would silently degrade to
+        ///   "unregistered means allowed" — which is not a safe allow but the **vanishing of a permission check**.
+        ///   The migration backfills existing tab names as stable keys, so existing deployments keep their `Tab.*` keys byte-identical.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="tabName">
+        /// <l>
+        ///   <zh-CN>门户配置中的 Tab 名称，作为稳定键缺失时的回退。</zh-CN>
+        ///   <en>Tab name from portal configuration, used as the fallback when the stable key is absent.</en>
+        /// </l>
+        /// </param>
+        /// <param name="navigationKey">
+        /// <l>
+        ///   <zh-CN>导航稳定键；为空时回退到 Tab 名称。</zh-CN>
+        ///   <en>Navigation stable key; the Tab name is used when it is blank.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>稳定入口键；Tab 名与稳定键均为空白时为空字符串。</zh-CN>
+        ///   <en>Stable entry key; empty when both the Tab name and the stable key are blank.</en>
+        /// </l>
+        /// </returns>
+        public static string BuildTabEntryKey(string tabName, string navigationKey)
+        {
             // <lang>
             //   <zh-CN>只做去空白拼接，不做大小写折叠或字符替换：稳定键必须可被 registry 精确命中，任何隐式改写都会让登记与运行结果不一致。</zh-CN>
             //   <en>Only trim and concatenate; no case folding or character replacement, because the stable key must be matched exactly by the registry and any implicit rewrite would desynchronize registration from runtime behaviour.</en>
             // </lang>
-            if (string.IsNullOrWhiteSpace(tabName))
+            string keySource = string.IsNullOrWhiteSpace(navigationKey) ? tabName : navigationKey;
+            if (string.IsNullOrWhiteSpace(keySource))
             {
                 return string.Empty;
             }
 
-            return TabEntryKeyPrefix + tabName.Trim();
+            return TabEntryKeyPrefix + keySource.Trim();
         }
 
         /// <summary>
@@ -851,6 +894,49 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         public static string GetTabBlockedReason(string tabName, PortalNavigationVisibilityContext context)
         {
+            return GetTabBlockedReason(tabName, null, context);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判定门户配置中的 Tab 是否被入口 gate 阻断；阻断判定按**导航稳定键**查 registry，缺失时才回退到显示名。</zh-CN>
+        ///   <en>Decides whether a portal-configuration tab is blocked by the entry gate; the registry lookup uses the **navigation stable key**, falling back to the display name only when it is absent.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tabName">
+        /// <l>
+        ///   <zh-CN>门户配置中的 Tab 名称，作为稳定键缺失时的回退。</zh-CN>
+        ///   <en>Tab name from portal configuration, used as the fallback when the stable key is absent.</en>
+        /// </l>
+        /// </param>
+        /// <param name="navigationKey">
+        /// <l>
+        ///   <zh-CN>导航稳定键；为空时回退到 Tab 名称。</zh-CN>
+        ///   <en>Navigation stable key; the Tab name is used when it is blank.</en>
+        /// </l>
+        /// </param>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>当前用户与部署状态；为 null 时按放行处理（见备注）。</zh-CN>
+        ///   <en>Current user and deployment state; treated as allowed when null (see remarks).</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>阻断原因码；放行时为 <c>null</c>。</zh-CN>
+        ///   <en>Blocked reason code; <c>null</c> when the tab is allowed.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本方法刻意采用与动作区相反的失败方向：未登记 Tab、空白名或上下文缺失一律**放行**。原因是主导航在调用本方法前已按角色过滤，放行不会泄露超权入口；反之若 gate 故障导致全部 Tab 消失，会把"治理增强"变成可用性事故。阻断判定本身仍复用统一的六步可见性判定，不另立规则。
+        ///   这也解释了为什么必须传稳定键：放行兜底很安全，但"因为显示名本地化导致查不到登记项"而放行，等于让一条治理规则无声消失。</zh-CN>
+        ///   <en>This method deliberately fails in the opposite direction from the action area: an unregistered tab, a blank name, or a missing context is always allowed. The main navigation has already been filtered by role before this call, so allowing cannot leak an over-permissioned entry, whereas losing every tab to a gate fault would turn a governance improvement into an availability incident. The blocking decision itself still reuses the shared six-step visibility evaluation rather than defining new rules.
+        ///   This is also why the stable key must be passed: the allow-fallback is safe, but allowing *because a localized display name missed the registry* silently removes a governance rule.</en>
+        /// </lang>
+        /// </remarks>
+        public static string GetTabBlockedReason(string tabName, string navigationKey, PortalNavigationVisibilityContext context)
+        {
             // <lang>
             //   <zh-CN>空白 Tab 名没有可判定对象：返回放行，让渲染层按既有"数据缺失不渲染该项"的规则处理，而不是在这里制造一种新的隐藏原因。</zh-CN>
             //   <en>A blank tab name has nothing to evaluate: return allowed so the rendering layer applies its existing "skip entries with missing data" rule instead of inventing a new hiding reason here.</en>
@@ -869,7 +955,7 @@ namespace ASPNET.StarterKit.Portal
                 return null;
             }
 
-            string entryKey = BuildTabEntryKey(tabName);
+            string entryKey = BuildTabEntryKey(tabName, navigationKey);
             if (entryKey.Length == 0)
             {
                 return null;

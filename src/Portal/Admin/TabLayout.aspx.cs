@@ -500,7 +500,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Identify the administration Tab through the protected-name policy rather than taking it from request parameters.</en>
             // </lang>
             ITabItem administrationTab = currentPortalSettings.DesktopTabs.FirstOrDefault(tab =>
-                PortalAdministrationPolicy.IsProtectedAdministrationTabName(tab.TabName));
+                PortalAdministrationPolicy.IsProtectedAdministrationTabName(tab.TabName, tab.NavigationKey));
             if (administrationTab == null)
             {
                 PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ResolveUrl("~/DesktopDefault.aspx"));
@@ -746,7 +746,7 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>受保护后台 Tab 不允许被重命名，避免破坏管理入口识别策略。</zh-CN>
             //   <en>Protected administration Tabs cannot be renamed, preserving the administration-entry recognition policy.</en>
             // </lang>
-            if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(currentTab.TabName) &&
+            if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(currentTab.TabName, currentTab.NavigationKey) &&
                 !string.Equals(currentTab.TabName, normalizedTabName, StringComparison.Ordinal))
             {
                 ShowMessage(lang.Admin_TabLayout_MessageCoreTabRenameBlocked);
@@ -761,6 +761,21 @@ namespace ASPNET.StarterKit.Portal
                 authRoles.Items.Cast<ListItem>()
                     .Where(item => item.Selected)
                     .Select(item => item.Text));
+
+            // <lang>
+            //   <zh-CN>英文名与"其它语言" JSON 列同样按单行/可选文本契约校验：非法值在这里就拦下，
+            //   不让坏 JSON 流到数据库 CHECK 约束（那样管理员看到的是 SQL 错误而不是业务提示）。</zh-CN>
+            //   <en>The English name and the "other languages" JSON column follow the same single-line/optional contracts: invalid values are stopped here rather than reaching the database CHECK constraint, which would surface a SQL error to the administrator instead of a business message.</en>
+            // </lang>
+            string normalizedTabNameEn;
+            string normalizedTabNameLocalizedJson;
+            if (!PortalAdministrationPolicy.TryNormalizeOptionalSingleLineText(tabNameEn.Text, 150, out normalizedTabNameEn) ||
+                !PortalAdministrationPolicy.TryNormalizeOptionalMultilineText(tabNameLocalizedJson.Text, 4000, out normalizedTabNameLocalizedJson))
+            {
+                ShowMessage(lang.Admin_TabLayout_MessageInvalidLocalizedName);
+                return false;
+            }
+
             try
             {
                 // <lang>
@@ -774,7 +789,9 @@ namespace ASPNET.StarterKit.Portal
                     currentTab.TabOrder,
                     authorizedRoles,
                     normalizedMobileTabName,
-                    showMobile.Checked);
+                    showMobile.Checked,
+                    normalizedTabNameEn,
+                    normalizedTabNameLocalizedJson);
                 PortalOperationAudit.Record(
                     "TabAdministration",
                     "Update",
@@ -809,6 +826,13 @@ namespace ASPNET.StarterKit.Portal
             tabName.Text = currentTab.TabName;
             mobileTabName.Text = currentTab.MobileTabName;
             showMobile.Checked = currentTab.ShowMobile;
+
+            // <lang>
+            //   <zh-CN>回填多语言列：英文名与其它语言 JSON。数据库里为 NULL 时显示空串，管理员看到的是"未配置"而不是 "null"。</zh-CN>
+            //   <en>Backfill the multilingual columns: the English name and other-languages JSON. NULL in the database renders as an empty string so administrators see "not configured" rather than "null".</en>
+            // </lang>
+            tabNameEn.Text = currentTab.TabNameEn ?? string.Empty;
+            tabNameLocalizedJson.Text = currentTab.TabNameLocalizedJson ?? string.Empty;
 
             // <lang>
             //   <zh-CN>清理旧角色选项，保留 All Users 的兼容公开语义。</zh-CN>

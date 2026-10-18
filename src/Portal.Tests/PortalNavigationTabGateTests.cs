@@ -82,6 +82,100 @@ namespace ASPNET.StarterKit.Portal.Tests
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>**零回归钉子**：安装脚本的 6 个种子页签在本地化改造前后必须产出**逐字节一致**的 `Tab.*` 键。
+        ///   迁移脚本把种子页签名回填为稳定键，因此"键 + 回退名"的组合仍应等于改造前的键。</zh-CN>
+        ///   <en>**Zero-regression anchor**: the six seeded tabs from the installer must produce **byte-identical** `Tab.*` keys before and after the localization change. The migration backfills seeded tab names as stable keys, so the "key + fallback name" pair must still equal the pre-change key.</en>
+        /// </lang>
+        /// </summary>
+        [TestMethod]
+        public void BuildTabEntryKey_SeededTabsKeepByteIdenticalKeys()
+        {
+            // <lang>
+            //   <zh-CN>逐条列出种子页签名与期望键；一旦有人改动种子名或键拼接规则，这里会立刻失败，
+            //   而不是等到门控在某次部署中静默失配才被发现。</zh-CN>
+            //   <en>List each seeded tab name with its expected key; anyone changing a seed name or the key concatenation rule fails here immediately, instead of the mismatch being discovered only after the gate silently stops matching in some deployment.</en>
+            // </lang>
+            var seededTabs = new[]
+            {
+                new { TabName = "Home", NavigationKey = "Home", ExpectedKey = "Tab.Home" },
+                new { TabName = "Employee Info", NavigationKey = "Employee Info", ExpectedKey = "Tab.Employee Info" },
+                new { TabName = "Product Info", NavigationKey = "Product Info", ExpectedKey = "Tab.Product Info" },
+                new { TabName = "Discussions", NavigationKey = "Discussions", ExpectedKey = "Tab.Discussions" },
+                new { TabName = "About the Portal", NavigationKey = "About the Portal", ExpectedKey = "Tab.About the Portal" },
+                new { TabName = "Admin", NavigationKey = "Admin", ExpectedKey = "Tab.Admin" }
+            };
+
+            foreach (var seeded in seededTabs)
+            {
+                // <lang>
+                //   <zh-CN>改造前只有显示名，改造后是"稳定键 + 回退显示名"；两者必须给出同一结果。</zh-CN>
+                //   <en>Before the change there was only a display name, afterwards there is "stable key plus fallback display name"; both must yield the same result.</en>
+                // </lang>
+                Assert.AreEqual(seeded.ExpectedKey, PortalNavigationVisibilityPolicy.BuildTabEntryKey(seeded.TabName),
+                    "种子页签名与改造前不一致。");
+                Assert.AreEqual(seeded.ExpectedKey, PortalNavigationVisibilityPolicy.BuildTabEntryKey(seeded.TabName, seeded.NavigationKey),
+                    "稳定键与回退名的组合必须仍等于改造前的键。");
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>**负向**：显示名本地化后，门控键必须仍由稳定键派生，不能跟着显示名漂移。</zh-CN>
+        ///   <en>**Negative**: after a display name is localized, the gate key must still derive from the stable key and must not drift with the display name.</en>
+        /// </lang>
+        /// </summary>
+        [TestMethod]
+        public void BuildTabEntryKey_PrefersStableKeyOverLocalizedDisplayName()
+        {
+            // <lang>
+            //   <zh-CN>管理员把 Admin 改成"后台管理"：键必须保持 `Tab.Admin`，否则 registry 登记项失配，
+            //   门控会退化为"未登记即放行" —— 那等于让一条治理规则无声消失。</zh-CN>
+            //   <en>An administrator renames Admin to "后台管理": the key must stay `Tab.Admin`, otherwise the registry entry stops matching and the gate degrades to "unregistered means allowed", which silently removes a governance rule.</en>
+            // </lang>
+            Assert.AreEqual("Tab.Admin", PortalNavigationVisibilityPolicy.BuildTabEntryKey("后台管理", "Admin"));
+
+            // <lang>
+            //   <zh-CN>稳定键缺失时回退到显示名，保证未回填的历史部署行为连续。</zh-CN>
+            //   <en>When the stable key is absent, fall back to the display name so legacy deployments that were not backfilled keep continuous behaviour.</en>
+            // </lang>
+            Assert.AreEqual("Tab.后台管理", PortalNavigationVisibilityPolicy.BuildTabEntryKey("后台管理", null));
+            Assert.AreEqual("Tab.后台管理", PortalNavigationVisibilityPolicy.BuildTabEntryKey("后台管理", "   "));
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>**负向**：本地化后，**仅凭显示名**构造的门控键会与稳定键分叉，说明"按名识别"的思路已不可靠。</zh-CN>
+        ///   <en>**Negative**: after localization, a gate key built **from the display name alone** diverges from the stable-key one, which is exactly what makes "recognize by name" unreliable.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>本测试刻意只断言键层面，不断言 `PortalAdministrationPolicy.IsProtectedAdministrationTabName`：
+        ///   该类型位于 Portal 项目，而本测试项目只引用 `Portal.Components`（不引用 Web 应用项目，避免把整个站点编译进测试程序集）。
+        ///   这意味着**受保护后台 Tab 的识别策略目前没有任何自动化覆盖** —— 这是既有盲区，已登记到
+        ///   `C-anp-P29-closeout.md` 的"发现未处理"一节，建议后续为 Portal 项目建立测试引用或用独立断言脚本覆盖。</zh-CN>
+        ///   <en>This test deliberately asserts only at the key level, never `PortalAdministrationPolicy.IsProtectedAdministrationTabName`:
+        ///   that type lives in the Portal project while this test project references only `Portal.Components` (it does not reference the web application project, to avoid compiling the whole site into the test assembly).
+        ///   This means **the protected administration-tab recognition policy currently has no automated coverage at all** — a pre-existing blind spot recorded in the "found, not handled" section of `C-anp-P29-closeout.md`, with the recommendation of either establishing a test reference to the Portal project or covering it with a standalone assertion script later.</en>
+        /// </lang>
+        /// </remarks>
+        [TestMethod]
+        public void BuildTabEntryKey_LocalizedNameAloneDivergesFromStableKey()
+        {
+            // <lang>
+            //   <zh-CN>同一页签：本地化显示名单独构造出的键与稳定键构造出的键不同，证明"键不能跟着显示名走"。</zh-CN>
+            //   <en>For the same tab, the key built from the localized display name alone differs from the one built with the stable key, proving the key must not follow the display name.</en>
+            // </lang>
+            string localizedOnly = PortalNavigationVisibilityPolicy.BuildTabEntryKey("后台管理");
+            string withStableKey = PortalNavigationVisibilityPolicy.BuildTabEntryKey("后台管理", "Admin");
+
+            Assert.AreEqual("Tab.后台管理", localizedOnly);
+            Assert.AreEqual("Tab.Admin", withStableKey);
+            Assert.AreNotEqual(localizedOnly, withStableKey);
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>验证未登记 Tab、空白名与缺失上下文一律放行，这是门控的零回归兜底。</zh-CN>
         ///   <en>Verifies that unregistered tabs, blank names, and a missing context are always allowed, which is the gate's zero-regression fallback.</en>
         /// </lang>

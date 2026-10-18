@@ -46,6 +46,15 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>模块标题解析的降级原因；仅 JSON 列损坏时非空，供诊断记录使用，不参与渲染。</zh-CN>
+        ///   <en>Fallback reason of the module-title resolution; non-blank only when the JSON column is damaged, used for
+        ///   diagnostics and never for rendering.</en>
+        /// </lang>
+        /// </summary>
+        private string moduleTitleDiagnostic;
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>根据父模块配置写入标题，并在用户具备编辑权限时显示编辑入口。</zh-CN>
         ///   <en>Writes the title from the parent module configuration and shows the edit action when the user has permission.</en>
         /// </lang>
@@ -80,7 +89,31 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>每次加载都按当前模块配置重写标题，并默认隐藏动作区；后续条件满足时再显式打开编辑入口。</zh-CN>
             //   <en>Each load writes the title from the current module configuration and hides the action area by default; the edit action is then explicitly enabled only when all conditions pass.</en>
             // </lang>
-            ModuleTitle.Text = portalModule.ModuleConfiguration.ModuleTitle;
+            // <lang>
+            //   <zh-CN>标题按当前界面文化解析：模块标题已支持中/英/其它语言（JSON）三列，直接输出中文列会让英文界面里出现
+            //   "英文正文 + 中文标题"的反向混排。解析失败时解析器内部降级回中文列，这里不需要再判空。</zh-CN>
+            //   <en>The title is resolved by the current UI culture: module titles now support Chinese / English / other-languages (JSON)
+            //   columns, so writing the Chinese column directly would produce the reverse mixing of "English body with a Chinese
+            //   title". The resolver degrades back to the Chinese column on its own, so no extra blank check is needed here.</en>
+            // </lang>
+            ModuleTitle.Text = PortalDisplayNameResolver.Resolve(
+                portalModule.ModuleConfiguration.ModuleTitle,
+                portalModule.ModuleConfiguration.ModuleTitleEn,
+                portalModule.ModuleConfiguration.ModuleTitleLocalizedJson,
+                CultureInfo.CurrentUICulture,
+                out moduleTitleDiagnostic);
+
+            // <lang>
+            //   <zh-CN>降级原因只在 JSON 列损坏时出现，此时记一条 Warn：标题仍能显示，但脏数据需要被发现，
+            //   否则管理员永远不知道"其它语言"那一列填错了。缺翻译不产生诊断，避免日志被噪声淹没。</zh-CN>
+            //   <en>The fallback reason appears only when the JSON column is damaged, and then a single Warn is recorded: the title
+            //   still renders, but dirty data needs to be surfaced, otherwise an administrator never learns the "other languages"
+            //   column is wrong. A missing translation produces no diagnostic so logs are not drowned in noise.</en>
+            // </lang>
+            if (!string.IsNullOrEmpty(moduleTitleDiagnostic))
+            {
+                PortalDiagnostics.Warn("ModuleTitle", moduleTitleDiagnostic);
+            }
             ModuleActions.Visible = false;
             EditButton.Visible = false;
 

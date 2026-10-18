@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -158,7 +159,7 @@ namespace ASPNET.StarterKit.Portal
                     foreach (ITabItem tab in roleFilteredTabs)
                     {
                         PortalNavigationEntry registeredEntry = PortalNavigationRegistry.FindByKey(
-                            PortalNavigationVisibilityPolicy.BuildTabEntryKey(tab.TabName));
+                            PortalNavigationVisibilityPolicy.BuildTabEntryKey(tab.TabName, tab.NavigationKey));
                         if (registeredEntry != null)
                         {
                             registeredEntries[tab.TabId] = registeredEntry;
@@ -221,6 +222,14 @@ namespace ASPNET.StarterKit.Portal
                 Tabs.DataBind();
             }
         }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>页签名解析的降级原因；仅 JSON 列损坏时非空，供诊断记录使用，不参与渲染。</zh-CN>
+        ///   <en>Fallback reason of the tab-name resolution; non-blank only when the JSON column is damaged, used for diagnostics and never for rendering.</en>
+        /// </lang>
+        /// </summary>
+        private string tabNameDiagnostic;
 
         /// <summary>
         /// <lang>
@@ -325,15 +334,69 @@ namespace ASPNET.StarterKit.Portal
             if (disabledTab != null)
             {
                 disabledTab.Visible = true;
-                disabledTab.Text = boundTab.TabName;
+                disabledTab.Text = BuildTabDisplayName(boundTab);
 
                 // <lang>
-                //   <zh-CN>原因码只进入工具提示，不成为可见文案，避免内部诊断信息变成普通界面文本。</zh-CN>
-                //   <en>The reason code only goes into the tooltip and never becomes visible text, keeping internal diagnostics out of the ordinary interface copy.</en>
+                //   <zh-CN>原因码只进入工具提示，不成为可见文案，避免内部诊断信息变成普通界面文本。
+                //   提示文本同样用本地化名，使管理员看到的名称与界面一致。</zh-CN>
+                //   <en>The reason code only goes into the tooltip and never becomes visible text, keeping internal diagnostics out of the ordinary interface copy.
+                //   The tooltip uses the localized name as well so administrators see the same label the interface shows.</en>
                 // </lang>
-                disabledTab.ToolTip = boundTab.TabName + " (" + blockedReason + ")";
+                disabledTab.ToolTip = BuildTabDisplayName(boundTab) + " (" + blockedReason + ")";
                 disabledTab.Attributes["aria-disabled"] = "true";
             }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按当前界面文化解析页签显示名（中文列 / 英文列 / 其它语言 JSON 列）。</zh-CN>
+        ///   <en>Resolves the tab display name by the current UI culture (Chinese column / English column / other-languages JSON column).</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>页签名本地化前，这一行就是 `boundTab.TabName`；本地化后必须经解析器，否则英文界面会显示中文页签名。
+        ///   解析器内部降级到中文列，因此这里不再判空 —— 但**门控键不走本方法**，键仍由 `NavigationKey` 派生，
+        ///   否则"同一个页签在不同语言下键不同"会让 registry 失配。</zh-CN>
+        ///   <en>Before tab names were localized this line was simply `boundTab.TabName`; afterwards it must go through the resolver, or an English UI would show Chinese tab names. The resolver degrades to the Chinese column internally, so no blank check is needed here — but the **gate key never goes through this method**: the key still derives from `NavigationKey`, otherwise "the same tab having different keys per language" would break registry matching.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="tab">
+        /// <l>
+        ///   <zh-CN>当前绑定的页签。</zh-CN>
+        ///   <en>Currently bound tab.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>该界面文化下的页签显示名。</zh-CN>
+        ///   <en>Tab display name for the current UI culture.</en>
+        /// </l>
+        /// </returns>
+        protected string BuildTabDisplayName(ITabItem tab)
+        {
+            if (tab == null)
+            {
+                return string.Empty;
+            }
+
+            // <lang>
+            //   <zh-CN>JSON 列损坏时记 Warn：页签名仍能显示，但脏数据要被发现。缺翻译不记录，避免噪声。</zh-CN>
+            //   <en>Record a Warn when the JSON column is damaged: the tab name still renders, but dirty data must be surfaced. A missing translation is not recorded, to avoid noise.</en>
+            // </lang>
+            string displayName = PortalDisplayNameResolver.Resolve(
+                tab.TabName,
+                tab.TabNameEn,
+                tab.TabNameLocalizedJson,
+                CultureInfo.CurrentUICulture,
+                out tabNameDiagnostic);
+
+            if (!string.IsNullOrEmpty(tabNameDiagnostic))
+            {
+                PortalDiagnostics.Warn("TabName", tabNameDiagnostic);
+            }
+
+            return displayName;
         }
     }
 }

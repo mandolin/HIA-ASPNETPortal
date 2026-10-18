@@ -24,11 +24,31 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <l>
-        ///   <zh-CN>模块实例标题，通常展示在容器标题栏或后台模块列表中。</zh-CN>
-        ///   <en>Module-instance title, typically shown in the container title bar or administration module lists.</en>
+        ///   <zh-CN>模块实例标题，通常展示在容器标题栏或后台模块列表中；多语言体系下它同时是**中文列**与**默认回退列**。</zh-CN>
+        ///   <en>Module-instance title, typically shown in the container title bar or administration module lists; within the
+        ///   multilingual scheme it is also the **Chinese column** and the **default fallback column**.</en>
         /// </l>
         /// </summary>
         string ModuleTitle { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>模块标题的英文列；为空时渲染回退到中文列。</zh-CN>
+        ///   <en>English column for the module title; rendering falls back to the Chinese column when it is blank.</en>
+        /// </l>
+        /// </summary>
+        string ModuleTitleEn { get; set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>模块标题的其它语言列，取值为以文化名为键的 JSON 对象（如 `{"ja-JP":"休暇申請"}`）。
+        ///   本契约只约定"是 JSON 文本"，键名是否为受支持的文化由解析器判定。</zh-CN>
+        ///   <en>Other-languages column for the module title, holding a JSON object keyed by culture name (for example
+        ///   `{"ja-JP":"休暇申請"}`). This contract only requires JSON text; whether a key is a supported culture is decided by
+        ///   the resolver.</en>
+        /// </l>
+        /// </summary>
+        string ModuleTitleLocalizedJson { get; set; }
 
         /// <summary>
         /// <l>

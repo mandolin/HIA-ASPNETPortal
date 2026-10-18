@@ -24,6 +24,12 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>当前 Tab 移动端标题输入框。</zh-CN><en>Input for the current Tab mobile title.</en></lang></summary>
         protected global::System.Web.UI.WebControls.TextBox mobileTabName;
 
+        /// <summary><lang><zh-CN>当前 Tab 的英文页签名输入框（多语言英文列）。</zh-CN><en>Input for the current Tab's English name (multilingual English column).</en></lang></summary>
+        protected global::System.Web.UI.WebControls.TextBox tabNameEn;
+
+        /// <summary><lang><zh-CN>当前 Tab 的其它语言页签名 JSON 输入框。</zh-CN><en>Input for the current Tab's other-language names as JSON.</en></lang></summary>
+        protected global::System.Web.UI.WebControls.TextBox tabNameLocalizedJson;
+
         /// <summary><lang><zh-CN>可添加模块定义选择控件。</zh-CN><en>Selector for an eligible module definition to add.</en></lang></summary>
         protected global::System.Web.UI.WebControls.DropDownList moduleType;
 

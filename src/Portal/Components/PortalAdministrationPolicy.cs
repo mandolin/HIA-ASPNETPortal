@@ -122,6 +122,74 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>校验可选多行文本（用于"其它语言" JSON 列）：允许空、允许换行，但不允许控制字符，并限制长度。</zh-CN>
+        ///   <en>Validates optional multi-line text (used by the "other languages" JSON column): blank and newlines are allowed, while control characters are not and a length limit applies.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="candidate">
+        /// <l>
+        ///   <zh-CN>管理员提交的候选多行文本。</zh-CN>
+        ///   <en>Candidate multi-line text submitted by an administrator.</en>
+        /// </l>
+        /// </param>
+        /// <param name="maximumLength">
+        /// <l>
+        ///   <zh-CN>目标存储字段允许的最大字符数。</zh-CN>
+        ///   <en>Maximum characters allowed by the target storage field.</en>
+        /// </l>
+        /// </param>
+        /// <param name="normalizedValue">
+        /// <l>
+        ///   <zh-CN>成功时返回规范文本；失败时为空。</zh-CN>
+        ///   <en>Normalized text on success; otherwise empty.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>文本为空或为合法多行文本时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when text is empty or valid multi-line text.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>JSON 列必须允许换行：管理员会为了可读性把它格式化后再粘贴，用单行校验会把合法 JSON 拒掉。
+        ///   但换行只放开 `\r` 与 `\n`，其余控制字符仍拒绝 —— 控制字符会让 JSON 校验与后续诊断都变得不可读。</zh-CN>
+        ///   <en>The JSON column must allow newlines: administrators format it for readability before pasting, and single-line validation would reject valid JSON. Only `\r` and `\n` are permitted though; every other control character stays rejected, because such characters make both JSON validation and later diagnostics unreadable.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool TryNormalizeOptionalMultilineText(
+            string candidate,
+            int maximumLength,
+            out string normalizedValue)
+        {
+            normalizedValue = Normalize(candidate);
+            if (maximumLength <= 0)
+            {
+                return false;
+            }
+
+            if (normalizedValue.Length > maximumLength)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>按字符逐个判断控制字符，只放行回车与换行；不引入正则以保持与既有实现一致的判定口径。</zh-CN>
+            //   <en>Judge control characters character by character and allow only carriage return and line feed; no regex is introduced, keeping the decision consistent with existing implementations.</en>
+            // </lang>
+            foreach (char character in normalizedValue)
+            {
+                if (char.IsControl(character) && character != '\r' && character != '\n')
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>校验旧门户角色名称，排除分号分隔符和 <c>All Users</c> 虚拟角色。</zh-CN>
         ///   <en>Validates a legacy Portal role name, excluding the semicolon delimiter and the <c>All Users</c> virtual role.</en>
         /// </lang>
@@ -167,8 +235,8 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <param name="tabName">
         /// <l>
-        ///   <zh-CN>Tab 显示名称。</zh-CN>
-        ///   <en>Tab display name.</en>
+        ///   <zh-CN>Tab 显示名称；仅在未提供导航稳定键时作为识别依据。</zh-CN>
+        ///   <en>Tab display name; used for recognition only when no navigation stable key is supplied.</en>
         /// </l>
         /// </param>
         /// <returns>
@@ -179,7 +247,50 @@ namespace ASPNET.StarterKit.Portal
         /// </returns>
         public static bool IsProtectedAdministrationTabName(string tabName)
         {
-            return string.Equals(tabName, "Admin", StringComparison.OrdinalIgnoreCase);
+            return IsProtectedAdministrationTabName(tabName, null);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按**导航稳定键**（优先）或显示名称（回退）判断 Tab 是否为受保护的核心后台 Tab。</zh-CN>
+        ///   <en>Decides whether a Tab is the protected core administration Tab by its **navigation stable key** (preferred) or display name (fallback).</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>为什么必须引入稳定键：页签名（`TabName`）已支持多语言，显示名会随界面文化改变甚至被管理员改成中文，
+        ///   而"后台入口保护""禁止重命名""后台 Tab 排到最后"这些策略都按名识别。若继续按显示名判定，
+        ///   把 Admin 改成"后台管理"的那一刻，保护就会静默失效 —— 这正是页签名本地化最危险的连带破坏点。
+        ///   迁移脚本 `PortalCfg_TabModuleMultilingualNames.sql` 已把既有页签名回填为稳定键，因此存量部署零回归。</zh-CN>
+        ///   <en>Why a stable key is required: tab names (`TabName`) are now multilingual, so the display name changes with the UI culture and can even be renamed to Chinese by an administrator, while "administration entry protection", "rename blocked", and "keep the administration Tab last" all recognize by name. If recognition stayed on the display name, the moment `Admin` became "后台管理" the protection would silently stop working — the most dangerous knock-on effect of localizing tab names. Migration `PortalCfg_TabModuleMultilingualNames.sql` backfills existing tab names as stable keys, so existing deployments regress not at all.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="tabName">
+        /// <l>
+        ///   <zh-CN>Tab 显示名称，作为稳定键缺失时的回退依据。</zh-CN>
+        ///   <en>Tab display name, used as the fallback when the stable key is absent.</en>
+        /// </l>
+        /// </param>
+        /// <param name="navigationKey">
+        /// <l>
+        ///   <zh-CN>导航稳定键；为空时回退到显示名称。</zh-CN>
+        ///   <en>Navigation stable key; the display name is used when it is blank.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>命中受保护名称时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the protected name matches.</en>
+        /// </l>
+        /// </returns>
+        public static bool IsProtectedAdministrationTabName(string tabName, string navigationKey)
+        {
+            // <lang>
+            //   <zh-CN>稳定键优先：只有它为空（历史数据未回填）才退化为按显示名判定，保证改造期间行为连续。</zh-CN>
+            //   <en>The stable key wins: only when it is blank (legacy data not yet backfilled) does recognition degrade to the display name, keeping behaviour continuous during the migration.</en>
+            // </lang>
+            string recognitionSource = string.IsNullOrWhiteSpace(navigationKey) ? tabName : navigationKey;
+            return string.Equals(recognitionSource, "Admin", StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>

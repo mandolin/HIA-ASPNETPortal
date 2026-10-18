@@ -1716,7 +1716,19 @@
   <data name="Admin_ModuleSettings_LabelModuleName" xml:space="preserve">
     <value>Module Name</value>
   </data>
-  <data name="Admin_ModuleSettings_LabelCacheTimeout" xml:space="preserve">
+  <data name="Admin_ModuleSettings_LabelModuleNameEn" xml:space="preserve">
+<value>English Module Title</value>
+</data>
+<data name="Admin_ModuleSettings_LabelModuleNameLocalized" xml:space="preserve">
+<value>Other-language Module Titles (JSON)</value>
+</data>
+<data name="Admin_ModuleSettings_HintModuleNameLocalized" xml:space="preserve">
+<value>Enter culture-keyed values, e.g. {"fr-FR":"Accueil","es-ES":"Inicio"}; leave blank to provide no other languages.</value>
+</data>
+<data name="Admin_ModuleSettings_MessageInvalidLocalizedName" xml:space="preserve">
+<value>The English title or other-languages JSON is invalid: the English title may not exceed 150 characters, and the JSON may not exceed 4000 characters or contain control characters.</value>
+</data>
+<data name="Admin_ModuleSettings_LabelCacheTimeout" xml:space="preserve">
     <value>Cache Timeout (seconds)</value>
   </data>
   <data name="Admin_ModuleSettings_LabelMobileCompatibility" xml:space="preserve">
@@ -1761,7 +1773,19 @@
   <data name="Admin_TabLayout_LabelMobileTabName" xml:space="preserve">
     <value>Mobile Tab Name</value>
   </data>
-  <data name="Admin_TabLayout_SectionAddModule" xml:space="preserve">
+  <data name="Admin_TabLayout_LabelTabNameEn" xml:space="preserve">
+<value>English Tab Name</value>
+</data>
+<data name="Admin_TabLayout_LabelTabNameLocalized" xml:space="preserve">
+<value>Other-language Tab Names (JSON)</value>
+</data>
+<data name="Admin_TabLayout_HintTabNameLocalized" xml:space="preserve">
+<value>Enter culture-keyed values, e.g. {"ja-JP":"ホーム","fr-FR":"Accueil"}; leave blank to provide no other languages.</value>
+</data>
+<data name="Admin_TabLayout_MessageInvalidLocalizedName" xml:space="preserve">
+<value>The English name or other-languages JSON is invalid: the English name may not exceed 150 characters, and the JSON may not exceed 4000 characters or contain control characters.</value>
+</data>
+<data name="Admin_TabLayout_SectionAddModule" xml:space="preserve">
     <value>Add Module</value>
   </data>
   <data name="Admin_TabLayout_LabelModuleType" xml:space="preserve">

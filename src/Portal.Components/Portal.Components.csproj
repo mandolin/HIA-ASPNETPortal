@@ -75,6 +75,16 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <!-- <lang>
+      <zh-CN>`System.Web.Extensions` 提供 `JavaScriptSerializer`，用于解析其它语言 JSON 列。它是 .NET Framework 自带程序集，
+      因此本次多语言化**不引入任何第三方依赖**；选择它而非 `DataContractJsonSerializer`，是因为后者默认把字典序列化成
+      键值数组形态，与管理员手填的 `{"ja-JP":"值"}` 不一致。</zh-CN>
+      <en>`System.Web.Extensions` supplies `JavaScriptSerializer`, used to parse the other-languages JSON column. It ships with
+      the .NET Framework, so this multilingual change **adds no third-party dependency**; it is chosen over
+      `DataContractJsonSerializer` because the latter emits dictionaries as key/value arrays by default, which does not match the
+      hand-edited `{"ja-JP":"value"}` shape.</en>
+    </lang> -->
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -163,6 +173,7 @@
     <Compile Include="PortalPermissions.cs" />
     <Compile Include="RolePermissionEntry.cs" />
     <Compile Include="PortalCapabilityPermissionMatrixRenderer.cs" />
+    <Compile Include="PortalDisplayNameResolver.cs" />
     <Compile Include="PortalNavigationRegistry.cs" />
     <Compile Include="PortalNavigationVisibilityPolicy.cs" />
     <Compile Include="PortalReferenceDataSets.cs" />

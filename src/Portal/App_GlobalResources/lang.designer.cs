@@ -6730,6 +6730,54 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：English Module Title</zh-CN>
+        ///   <en>Looks up a localized string similar to: English Module Title</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_LabelModuleNameEn {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_LabelModuleNameEn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Other-language Module Titles (JSON)</zh-CN>
+        ///   <en>Looks up a localized string similar to: Other-language Module Titles (JSON)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_LabelModuleNameLocalized {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_LabelModuleNameLocalized", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：按文化名填写，例如 {"ja-JP":"休暇申請","fr-FR":"Demande"}；留空表示不提供其它语言。</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter culture-keyed values, e.g. {"ja-JP":"休暇申請","fr-FR":"Demande"}; leave blank to provide no other languages.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_HintModuleNameLocalized {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_HintModuleNameLocalized", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：英文标题或其它语言 JSON 不合法。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The English title or other-languages JSON is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ModuleSettings_MessageInvalidLocalizedName {
+            get {
+                return ResourceManager.GetString("Admin_ModuleSettings_MessageInvalidLocalizedName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Mobile Compatibility</zh-CN>
         ///   <en>Looks up a localized string similar to: Mobile Compatibility</en>
         /// </lang>
@@ -6893,6 +6941,54 @@ namespace Resources {
         internal static string Admin_TabLayout_LabelMobileTabName {
             get {
                 return ResourceManager.GetString("Admin_TabLayout_LabelMobileTabName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：English Tab Name</zh-CN>
+        ///   <en>Looks up a localized string similar to: English Tab Name</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LabelTabNameEn {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelTabNameEn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Other-language Tab Names (JSON)</zh-CN>
+        ///   <en>Looks up a localized string similar to: Other-language Tab Names (JSON)</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_LabelTabNameLocalized {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelTabNameLocalized", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：按文化名填写，例如 {"ja-JP":"ホーム","fr-FR":"Accueil"}；留空表示不提供其它语言。</zh-CN>
+        ///   <en>Looks up a localized string similar to: Enter culture-keyed values, e.g. {"ja-JP":"ホーム","fr-FR":"Accueil"}; leave blank to provide no other languages.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_HintTabNameLocalized {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_HintTabNameLocalized", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：英文名称或其它语言 JSON 不合法。</zh-CN>
+        ///   <en>Looks up a localized string similar to: The English name or other-languages JSON is invalid.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_TabLayout_MessageInvalidLocalizedName {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageInvalidLocalizedName", resourceCulture);
             }
         }
 

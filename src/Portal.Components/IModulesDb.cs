@@ -260,8 +260,20 @@ namespace ASPNET.StarterKit.Portal
         ///   <en>Legacy mobile visibility flag.</en>
         /// </l>
         /// </param>
+        /// <param name="titleEn">
+        /// <l>
+        ///   <zh-CN>模块标题的英文列；为空表示未提供英文名。</zh-CN>
+        ///   <en>English column of the module title; blank means no English title was supplied.</en>
+        /// </l>
+        /// </param>
+        /// <param name="titleLocalizedJson">
+        /// <l>
+        ///   <zh-CN>模块标题的其它语言列，以文化名为键的 JSON 文本。</zh-CN>
+        ///   <en>Other-languages column of the module title: culture-keyed JSON text.</en>
+        /// </l>
+        /// </param>
         void UpdateModule(int moduleId, int moduleOrder, string paneName, string title, int cacheTime, string editRoles,
-                          bool showMobile);
+                          bool showMobile, string titleEn = null, string titleLocalizedJson = null);
 
         /// <summary>
         /// <lang>

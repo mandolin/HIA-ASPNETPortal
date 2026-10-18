@@ -181,6 +181,7 @@ $manifest = @(
     New-MigrationEntry 220 'src/Setup/PortalBiz_CollaborationItemEvents.sql' 'FeatureMigration' 'BusinessWorkflow' 'SqlServerOnly' $true 'CompensationOnly' 'P21.3 企业协同事项事件事实表。'
     New-MigrationEntry 230 'src/Setup/PortalBiz_ReferenceData.sql' 'FeatureMigration' 'BusinessReferenceData' 'SqlServerOnly' $true 'CompensationOnly' 'P23.2 受治理业务参考数据目录与协同事项类型、优先级种子。'
     New-MigrationEntry 240 'src/Setup/PortalBiz_CollaborationItemCommentWorkflow.sql' 'FeatureMigration' 'BusinessWorkflow' 'SqlServerOnly' $true 'CompensationOnly' 'P23.6 协同事项评论事件与状态规则扩展。'
+    New-MigrationEntry 250 'src/Setup/PortalCfg_TabModuleMultilingualNames.sql' 'FeatureMigration' 'Localization' 'SqlServerOnly' $true 'CompensationOnly' 'C-anp-P29 页签名与模块标题多语言化：中英各一列 + 其它语言 JSON 列 + 导航稳定键 NavigationKey；加列与回填均幂等，不改写既有显示值。'
     New-MigrationEntry 900 'src/Setup/Portal_CleanUp.sql' 'LegacyUtility' 'LegacyMaintenance' 'SqlServerOnly' $false 'ManualOnly' '历史清理脚本，不能进入自动迁移链。'
     New-MigrationEntry 910 'src/Setup/Portal_DropDB.sql' 'LegacyUtility' 'LegacyMaintenance' 'SqlServerOnly' $false 'ManualOnly' '历史删库脚本，仅限人工维护或隔离环境。'
     New-MigrationEntry 920 'src/Setup/Portal_GrantPermissions_ForLocal.sql' 'LegacyUtility' 'LegacySecurity' 'SqlServerOnly' $false 'ManualOnly' '历史授权脚本，含 legacy grant 写法，不进入现代矩阵路径。'

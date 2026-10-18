@@ -39,11 +39,37 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>Tab 显示名称。</zh-CN>
-        ///   <en>Display name of the tab.</en>
+        ///   <zh-CN>Tab 显示名称；多语言体系下为中文列兼默认回退列。</zh-CN>
+        ///   <en>Display name of the tab; the Chinese column and default fallback within the multilingual scheme.</en>
         /// </lang>
         /// </summary>
         public string TabName { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 名称的英文列；为空时渲染回退到 `TabName`。</zh-CN>
+        ///   <en>English column for the tab name; rendering falls back to `TabName` when it is blank.</en>
+        /// </lang>
+        /// </summary>
+        public string TabNameEn { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>Tab 名称的其它语言列，存以文化名为键的 JSON 文本；合法性由数据库 CHECK 约束 `ISJSON` 保证，键名语义由解析器负责。</zh-CN>
+        ///   <en>Other-languages column for the tab name, storing culture-keyed JSON text; validity is guaranteed by the database
+        ///   `ISJSON` CHECK constraint while key semantics belong to the resolver.</en>
+        /// </lang>
+        /// </summary>
+        public string TabNameLocalizedJson { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>导航门控稳定键；为空时门控回退到 `TabName`。它使显示名可以自由本地化而不改变 `Tab.*` 键。</zh-CN>
+        ///   <en>Navigation gate stable key; the gate falls back to `TabName` when it is blank. It lets the display name be
+        ///   localized freely without changing `Tab.*` keys.</en>
+        /// </lang>
+        /// </summary>
+        public string NavigationKey { get; set; }
 
         /// <summary>
         /// <lang>
@@ -64,11 +90,28 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
-        ///   <zh-CN>旧移动端 Tab 名称字段，作为历史兼容数据保留。</zh-CN>
-        ///   <en>Legacy mobile tab-name field retained as historical compatibility data.</en>
+        ///   <zh-CN>旧移动端 Tab 名称字段，作为历史兼容数据保留；多语言体系下为中文列兼默认回退列。</zh-CN>
+        ///   <en>Legacy mobile tab-name field retained as historical compatibility data; the Chinese column and default fallback
+        ///   within the multilingual scheme.</en>
         /// </lang>
         /// </summary>
         public string MobileTabName { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>移动端 Tab 名称的英文列；为空时回退到 `MobileTabName`。</zh-CN>
+        ///   <en>English column for the mobile tab name; falls back to `MobileTabName` when blank.</en>
+        /// </lang>
+        /// </summary>
+        public string MobileTabNameEn { get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>移动端 Tab 名称的其它语言列，取值形态与 `TabNameLocalizedJson` 相同。</zh-CN>
+        ///   <en>Other-languages column for the mobile tab name, with the same shape as `TabNameLocalizedJson`.</en>
+        /// </lang>
+        /// </summary>
+        public string MobileTabNameLocalizedJson { get; set; }
 
         /// <summary>
         /// <lang>

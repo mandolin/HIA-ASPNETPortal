@@ -82,11 +82,37 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <l>
-        ///   <zh-CN>桌面端显示的 Tab 名称。</zh-CN>
-        ///   <en>Tab name displayed on desktop navigation.</en>
+        ///   <zh-CN>桌面端显示的 Tab 名称；多语言体系下为中文列兼默认回退列，永不置空。</zh-CN>
+        ///   <en>Tab name displayed on desktop navigation; within the multilingual scheme it is the Chinese column and default
+        ///   fallback, never blank.</en>
         /// </l>
         /// </summary>
         public string TabName { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>Tab 名称的英文列；为空时渲染回退到中文列。</zh-CN>
+        ///   <en>English column for the tab name; rendering falls back to the Chinese column when it is blank.</en>
+        /// </l>
+        /// </summary>
+        public string TabNameEn { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>Tab 名称的其它语言列，取值为以文化名为键的 JSON 文本。</zh-CN>
+        ///   <en>Other-languages column for the tab name, holding culture-keyed JSON text.</en>
+        /// </l>
+        /// </summary>
+        public string TabNameLocalizedJson { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>导航门控稳定键；为空时门控回退到 `TabName`。它与显示名解耦，使显示名可自由本地化。</zh-CN>
+        ///   <en>Navigation gate stable key; the gate falls back to `TabName` when it is blank. It is decoupled from the display
+        ///   name so the display name can be localized freely.</en>
+        /// </l>
+        /// </summary>
+        public string NavigationKey { get; private set; }
 
         /// <summary>
         /// <l>
@@ -106,11 +132,28 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <l>
-        ///   <zh-CN>历史移动端显示名称；当前保留为旧数据兼容字段。</zh-CN>
-        ///   <en>Historical mobile display name; currently retained as a legacy-data compatibility field.</en>
+        ///   <zh-CN>历史移动端显示名称；当前保留为旧数据兼容字段，多语言体系下为中文列兼默认回退列。</zh-CN>
+        ///   <en>Historical mobile display name; currently retained as a legacy-data compatibility field, and the Chinese column
+        ///   plus default fallback within the multilingual scheme.</en>
         /// </l>
         /// </summary>
         public string MobileTabName { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>移动端显示名称的英文列；为空时回退到中文列。</zh-CN>
+        ///   <en>English column for the mobile display name; falls back to the Chinese column when blank.</en>
+        /// </l>
+        /// </summary>
+        public string MobileTabNameEn { get; private set; }
+
+        /// <summary>
+        /// <l>
+        ///   <zh-CN>移动端显示名称的其它语言列，取值形态与 `TabNameLocalizedJson` 相同。</zh-CN>
+        ///   <en>Other-languages column for the mobile display name, with the same shape as `TabNameLocalizedJson`.</en>
+        /// </l>
+        /// </summary>
+        public string MobileTabNameLocalizedJson { get; private set; }
 
         /// <summary>
         /// <l>
@@ -140,12 +183,17 @@ namespace ASPNET.StarterKit.Portal
         /// </remarks>
         public TabSettings(ITabItem item)
         {
-            AuthorizedRoles = item.AccessRoles;
-            MobileTabName   = item.MobileTabName;
-            ShowMobile      = item.ShowMobile.Value;
-            TabId           = item.TabId;
-            TabName         = item.TabName;
-            TabOrder        = item.TabOrder.Value;
+            AuthorizedRoles            = item.AccessRoles;
+            MobileTabName              = item.MobileTabName;
+            MobileTabNameEn            = item.MobileTabNameEn;
+            MobileTabNameLocalizedJson = item.MobileTabNameLocalizedJson;
+            ShowMobile                 = item.ShowMobile.Value;
+            TabId                      = item.TabId;
+            TabName                    = item.TabName;
+            TabNameEn                  = item.TabNameEn;
+            TabNameLocalizedJson       = item.TabNameLocalizedJson;
+            NavigationKey              = item.NavigationKey;
+            TabOrder                   = item.TabOrder.Value;
         }
 
         /// <summary>

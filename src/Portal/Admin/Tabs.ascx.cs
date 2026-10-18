@@ -229,7 +229,7 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(selectedTab.TabName))
+            if (PortalAdministrationPolicy.IsProtectedAdministrationTabName(selectedTab.TabName, selectedTab.NavigationKey))
             {
                 ShowMessage(lang.Admin_Tabs_MessageCoreTabProtected);
                 return;
@@ -518,7 +518,7 @@ namespace ASPNET.StarterKit.Portal
             //   <en>Identify the core administration Tab by its protected name, assign the maximum order, then sort.</en>
             // </lang>
             TabSettings administrationTab = PortalTabs.FirstOrDefault(tab =>
-                PortalAdministrationPolicy.IsProtectedAdministrationTabName(tab.TabName));
+                PortalAdministrationPolicy.IsProtectedAdministrationTabName(tab.TabName, tab.NavigationKey));
             if (administrationTab != null)
             {
                 administrationTab.TabOrder = int.MaxValue;

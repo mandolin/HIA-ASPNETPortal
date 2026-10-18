@@ -61,6 +61,25 @@
                     <asp:TextBox ID="mobileTabName" CssClass="NormalTextBox portal-form-input" runat="server"
                         OnTextChanged="TabSettings_Change" />
                 </div>
+                <%--
+                    <lang>
+                        <zh-CN>页签名多语言区：中文名就是上面的 `tabName`（中文列兼默认回退列，不重复输入），
+                        这里只补英文列与"其它语言"JSON 列。JSON 列的示例文案来自资源键，避免把文化名写死在标记层。
+                        两个输入都挂 `TabSettings_Change`，与既有字段共用同一条变更 → 保存链路。</zh-CN>
+                        <en>Tab-name multilingual area: the Chinese name is the `tabName` field above (the Chinese column and default fallback, so it is not entered twice); only the English column and the "other languages" JSON column are added here. The JSON column's sample text comes from a resource key so culture names are not hard-coded in markup. Both inputs reuse `TabSettings_Change`, sharing the existing change → save path.</en>
+                    </lang>
+                --%>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label"><%= lang.Admin_TabLayout_LabelTabNameEn %></span>
+                    <asp:TextBox ID="tabNameEn" CssClass="NormalTextBox portal-form-input" runat="server"
+                        OnTextChanged="TabSettings_Change" />
+                </div>
+                <div class="portal-form-field">
+                    <span class="SubHead portal-form-label"><%= lang.Admin_TabLayout_LabelTabNameLocalized %></span>
+                    <asp:TextBox ID="tabNameLocalizedJson" CssClass="NormalTextBox portal-form-input" runat="server"
+                        TextMode="MultiLine" Rows="3" OnTextChanged="TabSettings_Change" />
+                    <span class="portal-form-hint"><%= lang.Admin_TabLayout_HintTabNameLocalized %></span>
+                </div>
             </div>
         </div>
 
