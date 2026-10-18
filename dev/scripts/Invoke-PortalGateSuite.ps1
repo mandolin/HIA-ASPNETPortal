@@ -74,6 +74,16 @@ $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $scriptDir = Join-Path $repoRoot 'dev\scripts'
 $pwsh = 'C:\Program Files\PowerShell\7\pwsh.exe'
 $nodeExe = 'C:\Program Files\nodejs\node.exe'
+# <lang>
+#   <zh-CN>L2 切档位时的包集合由共享脚本按"基线显式启用包 ∪ 本层需要追加的包"求得，本脚本不再硬编码 `Enabled`。
+#   硬编码 `HIA.ModuleProbe` 会替换掉基线里的 `HIA.LeaveRequest,HIA.ExpenseReimbursement`（只靠 `Enabled`
+#   进入门户、不在任何 Profile 的 include 图里），使这些模块在 L2 期间不渲染 —— `W-anp-P137` 实测根因。</zh-CN>
+#   <en>The package set for the L2 profile switch comes from the shared script as "baseline explicitly enabled packages ∪
+#   packages this layer must append"; this script no longer hardcodes `Enabled`. Hardcoding `HIA.ModuleProbe` replaces the
+#   baseline's `HIA.LeaveRequest,HIA.ExpenseReimbursement` (which reach the Portal only through `Enabled` and appear in no
+#   Profile's include graph), leaving those modules unrendered during L2 — the root cause measured in `W-anp-P137`.</en>
+# </lang>
+. (Join-Path $scriptDir 'Resolve-PortalRuntimeGatePackages.ps1')
 
 function Write-Step([string] $message) { Write-Host "[gate] $message" }
 
@@ -228,6 +238,37 @@ $gateLayers = [ordered]@{
         # 编号规范：防并行冲突（N1）、防号段遗漏（N2）、包数约定（N3）、防内部编号外泄（N4）。
         # 台账 work-zone/ 不在公开仓，缺失时本门禁跳过而非误报绿。
         @{ File = 'Test-PortalWorkItemNumbering.ps1';       Runner = 'ps1'; Kind = '工作项编号规范'; Args = @() }
+        # <lang>
+        #   <zh-CN>C-anp-P26（`W-anp-P137`）新增：**运行期门禁档位包集合**门禁。
+        #   防的是一条已实测发生、且编译与本地测试都发现不了的门禁自伤：`HIA.LeaveRequest` /
+        #   `HIA.ExpenseReimbursement` 不在任何 Profile 的 include 图里，只靠部署级 `Enabled` 进入门户；
+        #   两处切档位代码把该键整体替换为 `HIA.ModuleProbe`，于是这两个模块**不渲染**，运行期门禁却报
+        #   "模块根找不到"（`modulePresent=false` / `errorPage=false`）——产品侧正常，是门禁自己把证据打没了。
+        #   六项检查（U1–U6）中含三项负向：替换语义回归、空并集必须显式抛错、调用点不得硬编码包集合。
+        #   归 L0：只读取包配置与门禁脚本源码，不连库、不启动站点、不写配置。</zh-CN>
+        #   <en>C-anp-P26 (`W-anp-P137`) new: the **runtime-gate package-set** gate. It guards against a self-inflicted gate
+        #   injury that has already been measured and that neither compilation nor local tests can see:
+        #   `HIA.LeaveRequest` / `HIA.ExpenseReimbursement` appear in no Profile's include graph and reach the Portal only
+        #   through deployment-level `Enabled`; two profile-switch code paths replaced that key wholesale with
+        #   `HIA.ModuleProbe`, so both modules **did not render** while the runtime gate reported "module root not found"
+        #   (`modulePresent=false` / `errorPage=false`) — the product was fine, the gate had destroyed its own evidence.
+        #   Of the six checks (U1–U6), three are negative: replacement-semantics regression, an empty union must throw loudly,
+        #   and call sites must not hardcode the package set. Classified L0 because it only reads package configuration and
+        #   gate script source — no database, no site start-up, no configuration writes.</en>
+        # </lang>
+        @{ File = 'Test-PortalRuntimeGatePackageSet.ps1';    Runner = 'ps1'; Kind = '档位包集合并集'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P29`（`W-anp-P164`）新增：**页签名与模块标题多语言链路**门禁。
+        #   防的是一条编译期完全无声、直到界面上出现半中半英才被发现的链路断裂：渲染点没接解析器、保存链路断一环、
+        #   迁移脚本没登记、资源键三处不同步、门控键跟着显示名漂移。六项检查（L1–L6）均为只读取证。
+        #   归 L0：只读源码/SQL/资源文件，不连库、不启动站点、不写配置。</zh-CN>
+        #   <en>`C-anp-P29` (`W-anp-P164`) new: the **localized tab-name and module-title chain** gate. It guards a class of
+        #   breakage that is completely silent at compile time and only surfaces as half-Chinese, half-English UI: a render point
+        #   not wired to the resolver, a broken save-path link, an unregistered migration script, resource keys out of sync across
+        #   three files, or a gate key drifting with the display name. All six checks (L1–L6) are read-only.
+        #   Classified L0: only source, SQL, and resource files are read — no database, no site start-up, no configuration writes.</en>
+        # </lang>
+        @{ File = 'Test-PortalLocalizedNameGate.ps1';         Runner = 'ps1'; Kind = '多语言链路齐备'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
@@ -493,11 +534,22 @@ foreach ($layerName in $layersToRun) {
         $webConfigStamp = (Get-Item $webConfigPath).LastWriteTime
         # <lang>
         #   <zh-CN>`Enabled` 必须带上 `HIA.ModuleProbe`：`Test-PortalModuleCache` 断言 DevProbe 包，而它不在
-        #   `BusinessWorkflow` 的 include 图里，只能由部署级 `Enabled` 追加。</zh-CN>
+        #   `BusinessWorkflow` 的 include 图里，只能由部署级 `Enabled` 追加。
+        #   但**不能只有**它：基线里显式启用的 `HIA.LeaveRequest,HIA.ExpenseReimbursement` 同样只靠 `Enabled`
+        #   进入门户，早先把该键整体写成 `HIA.ModuleProbe` 会把它们一起抹掉，于是整个 L2 期间这两个模块
+        #   被 Profile 门禁阻断、不渲染 —— 运行期门禁因此报"模块根找不到"（`W-anp-P137` 实测根因）。
+        #   故取**并集**：基线显式启用包 ∪ `HIA.ModuleProbe`，由共享脚本统一求解。</zh-CN>
         #   <en>`Enabled` must carry `HIA.ModuleProbe`: `Test-PortalModuleCache` asserts the DevProbe package, which is not part
-        #   of the `BusinessWorkflow` include graph and can therefore only be appended through the deployment-level `Enabled`.</en>
+        #   of the `BusinessWorkflow` include graph and can therefore only be appended through the deployment-level `Enabled`.
+        #   It must **not carry only** that value, though: the baseline's explicitly enabled `HIA.LeaveRequest,HIA.ExpenseReimbursement`
+        #   also reach the Portal solely through `Enabled`, so writing the key wholesale as `HIA.ModuleProbe` erased them too and
+        #   left both modules blocked by the profile gate and unrendered throughout L2 — which is why the runtime gate reported
+        #   "module root not found" (the root cause measured in `W-anp-P137`). Hence a **union**: baseline explicitly enabled
+        #   packages ∪ `HIA.ModuleProbe`, resolved by the shared script.</en>
         # </lang>
-        $profileJson = '{' + [char]10 + '    "appSettings": {' + [char]10 + '        "TestItem": "dev item",' + [char]10 + '        "Portal.ModuleProfiles.Active": "BusinessWorkflow",' + [char]10 + '        "Portal.ModulePackages.Enabled": "HIA.ModuleProbe"' + [char]10 + '    }' + [char]10 + '}'
+        $l2EnabledPackages = Resolve-PortalRuntimeGatePackages -RepoRoot $repoRoot -GroupPackages @('HIA.ModuleProbe')
+        Write-Step ("L2 档位 Enabled = $l2EnabledPackages")
+        $profileJson = '{' + [char]10 + '    "appSettings": {' + [char]10 + '        "TestItem": "dev item",' + [char]10 + '        "Portal.ModuleProfiles.Active": "BusinessWorkflow",' + [char]10 + '        "Portal.ModulePackages.Enabled": "' + $l2EnabledPackages + '"' + [char]10 + '    }' + [char]10 + '}'
         [System.IO.File]::WriteAllText($moduleSettingsPath, $profileJson, [System.Text.UTF8Encoding]::new($false))
         (Get-Item $webConfigPath).LastWriteTime = Get-Date
         $profileManaged = $true

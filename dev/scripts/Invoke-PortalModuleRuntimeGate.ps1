@@ -52,6 +52,19 @@ param(
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $nodeExe = 'C:\Program Files\nodejs\node.exe'
+# <lang>
+#   <zh-CN>切档位时的包集合由共享脚本按"基线显式启用包 ∪ 本组被测包"求得；本脚本不再自行拼 `Enabled` 值。
+#   早先在此处把 `Enabled` 写死为 `HIA.ModuleProbe`，会**替换掉**基线里的 `HIA.LeaveRequest,HIA.ExpenseReimbursement`
+#   （二者不在任何 Profile 的 include 图里，只靠 `Enabled` 进入门户），于是被测模块被 Profile 门禁阻断而不渲染，
+#   门禁把"部署策略不允许"读成"模块根找不到" —— 这是 `W-anp-P137` 实测到的根因，也是同一处 2026-10-09 故障的复发。</zh-CN>
+#   <en>The package set used when switching profiles comes from the shared script as "baseline explicitly enabled packages ∪
+#   packages probed by this group"; this script no longer composes `Enabled` itself. Hardcoding `Enabled` to `HIA.ModuleProbe`
+#   here **replaced** the baseline's `HIA.LeaveRequest,HIA.ExpenseReimbursement` (neither appears in any Profile's include
+#   graph; they reach the Portal only through `Enabled`), so the probed module was blocked by the profile gate and never
+#   rendered, and the gate read "deployment policy disallows this" as "module root not found" — the root cause measured in
+#   `W-anp-P137` and a recurrence of the same 2026-10-09 failure at this very spot.</en>
+# </lang>
+. (Join-Path $PSScriptRoot 'Resolve-PortalRuntimeGatePackages.ps1')
 $settingsPath = Join-Path $repoRoot 'src\Portal\Config\appSettings.dev.json'
 $webConfigPath = Join-Path $repoRoot 'src\Portal\web.config'
 $playwrightPath = Join-Path $repoRoot 'temp\node_modules\playwright'
@@ -225,11 +238,20 @@ foreach ($instance in $deployed) {
     if (-not $instance.SourceFile) { $skippedInstances += [pscustomobject]@{ Title = $instance.Title; Reason = '模块定义缺失 DesktopSourceFile' }; continue }
     $groupKey = Get-ModuleGroup $instance.SourceFile
     $selector = Get-ModuleSelector $instance.SourceFile
+    # <lang>
+    #   <zh-CN>顺带解析实例的包标识：切档位时它必须进入 `Enabled`，否则"被测模块被 Profile 门禁阻断"
+    #   会被读成"模块没渲染出来"。无 manifest 的旧内容/后台模块返回 `$null`，不参与并集。</zh-CN>
+    #   <en>Also resolve the instance's package id: it must enter `Enabled` when the profile switches, otherwise "the probed
+    #   module is blocked by the profile gate" is read as "the module did not render". Modules without a manifest (legacy
+    #   content and admin) return `$null` and do not take part in the union.</en>
+    # </lang>
+    $packageId = Get-PortalModulePackageId -RepoRoot $repoRoot -SourceFile $instance.SourceFile
     $groups[$groupKey].Targets += [pscustomobject]@{
         id             = "$($instance.SourceFile.Replace('DesktopModules/', '').Replace('.ascx', '').Replace('/', '-'))-$($instance.TabId)"
         url            = ([string]$baseUrl).TrimEnd('/') + "/DesktopDefault.aspx?tabindex=$($instance.TabOrder)&tabid=$($instance.TabId)"
         moduleSelector = $selector
         expectTitle    = $instance.Title
+        packageId      = $packageId
     }
 }
 
@@ -242,11 +264,36 @@ foreach ($groupKey in @('legacy', 'business', 'admin')) {
     $deduped = @()
     foreach ($target in $groups[$groupKey].Targets) {
         $existing = $deduped | Where-Object { $_.url -eq $target.url } | Select-Object -First 1
-        if ($existing) { $existing.expectTitle = @($existing.expectTitle) + $target.expectTitle; continue }
+        if ($existing) {
+            $existing.expectTitle = @($existing.expectTitle) + $target.expectTitle
+            # <lang>
+            #   <zh-CN>同一 URL 上的多个实例可能分属不同包（实测 1101 同时挂 `HIA.LeaveRequest` 与
+            #   `HIA.ExpenseReimbursement`）；去重只合并 URL，**包名必须逐个保留**，否则并集会漏包、
+            #   漏掉的那个包在验证期间仍被阻断。</zh-CN>
+            #   <en>Several instances on one URL may belong to different packages (measured: tab 1101 carries both
+            #   `HIA.LeaveRequest` and `HIA.ExpenseReimbursement`); deduplication merges URLs only, so **every package name
+            #   must be kept** — otherwise the union misses a package and that package stays blocked during verification.</en>
+            # </lang>
+            $existing.packageIds = @($existing.packageIds) + @($target.packageId)
+            continue
+        }
+        # <lang>
+        #   <zh-CN>首见的 URL 直接入列，并把单值 `packageId` 归一为数组，使后续合并无需区分标量与集合。</zh-CN>
+        #   <en>A first-seen URL goes in directly and its scalar `packageId` is normalized to an array, so later merges need not distinguish scalar from collection.</en>
+        # </lang>
+        $target | Add-Member -NotePropertyName 'packageIds' -NotePropertyValue @($target.packageId) -Force
         $deduped += $target
     }
     $groups[$groupKey].Targets = $deduped
-    Write-Step ("组 {0,-8} 档位 {1,-16} URL {2} 个（模块实例 {3} 个）" -f $groupKey, $groups[$groupKey].Profile, $deduped.Count, $groups[$groupKey].Targets.Count)
+    # <lang>
+    #   <zh-CN>本组被测包的并集：切档位时写入 `Enabled`，保证被测模块在验证期间**允许渲染** ——
+    #   门禁要证明的是"运行期能否加载"，而"当前部署策略是否允许"是另一回事，被它挡住就什么都证明不了。</zh-CN>
+    #   <en>Union of the packages probed by this group: written into `Enabled` when the profile switches so the probed modules are
+    #   **allowed to render** during verification — the gate exists to prove "can it load at runtime", whereas "does the current
+    #   deployment policy allow it" is a separate question, and being blocked by it proves nothing.</en>
+    # </lang>
+    $groups[$groupKey].Packages = @($deduped | ForEach-Object { $_.packageIds } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique)
+    Write-Step ("组 {0,-8} 档位 {1,-16} URL {2} 个（模块实例 {3} 个）｜被测包 {4} 个：{5}" -f $groupKey, $groups[$groupKey].Profile, $deduped.Count, $deduped.Count, $groups[$groupKey].Packages.Count, ($groups[$groupKey].Packages -join ', '))
 }
 
 $discovery = [pscustomobject]@{
@@ -403,15 +450,23 @@ try {
 
         if (-not $SkipProfileSwitch) {
             # <lang>
-            #   <zh-CN>business 组显式启用 HIA.ModuleProbe：否则切档位会把它禁用、模块不渲染 → 门禁误判
-            #   （见 Set-Profile 注释，L2 14/15 元凶）。legacy 组无需启用。切档位后预热，避免回收竞态。</zh-CN>
-            #   <en>The business group explicitly enables HIA.ModuleProbe: otherwise the profile switch disables it, the module
-            #   does not render, and the gate misjudges the result (see the Set-Profile note — the cause of L2 14/15). The legacy
-            #   group needs no such enable. Warm up after the switch to avoid a recycle race.</en>
+            #   <zh-CN>切档位时 `Enabled` 取**并集**：基线显式启用包 ∪ 本组被测包。
+            #   早先只写 `HIA.ModuleProbe`（2026-10-09 为修 L2 14/15 引入），会**替换掉**基线里的
+            #   `HIA.LeaveRequest,HIA.ExpenseReimbursement` —— 二者不在任何 Profile 的 include 图里、只靠 `Enabled`
+            #   进入门户，于是被测模块被 Profile 门禁阻断、不渲染，门禁却报"模块根找不到"
+            #   （`W-anp-P137` 实测根因：`modulePresent=false` / `errorPage=false`，而同一 URL 在默认档位下渲染正常）。
+            #   改成并集后，本组被测包（含 `HIA.ModuleProbe`）与基线显式启用包在验证期间**同时**允许渲染。</zh-CN>
+            #   <en>When switching profiles, `Enabled` is a **union**: baseline explicitly enabled packages ∪ packages probed by this
+            #   group. Writing only `HIA.ModuleProbe` (introduced on 2026-10-09 to fix L2 14/15) **replaced** the baseline's
+            #   `HIA.LeaveRequest,HIA.ExpenseReimbursement` — neither appears in any Profile's include graph and they reach the
+            #   Portal only through `Enabled`, so the probed module was blocked by the profile gate and did not render while the
+            #   gate reported "module root not found" (the root cause measured in `W-anp-P137`: `modulePresent=false` /
+            #   `errorPage=false`, while the same URL renders fine under the default profile). With the union, both the probed
+            #   packages (including `HIA.ModuleProbe`) and the baseline's explicitly enabled packages are allowed to render
+            #   during verification.</en>
             # </lang>
-            $enableArg = $null
-            if ($groupKey -eq 'business') { $enableArg = 'HIA.ModuleProbe' }
-            Write-Step ("切换档位 → $profile" + $(if ($enableArg) { ' + HIA.ModuleProbe' }))
+            $enableArg = Resolve-PortalRuntimeGatePackages -RepoRoot $repoRoot -GroupPackages $groups[$groupKey].Packages
+            Write-Step ("切换档位 → $profile ｜ Enabled = $enableArg")
             Set-Profile $profile $enableArg
             Start-Sleep -Seconds 3
             WarmUp-Instance $baseUrl
