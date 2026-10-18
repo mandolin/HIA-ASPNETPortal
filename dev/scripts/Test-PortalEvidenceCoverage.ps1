@@ -135,12 +135,24 @@ foreach ($surface in $ledger.surfaces) {
             }
         }
 
+        # <lang>
+        #   <zh-CN>`W-anp-P141`：未覆盖清单**逐项**输出（id + 所有者），使"未覆盖面所有者登记"有机器可读的事实源，
+        #   而不是只给一个计数——计数能告诉你有没有无主项，清单才能告诉你找谁。</zh-CN>
+        #   <en>`W-anp-P141`: the uncovered list is emitted **item by item** (id + owner), giving the owner-registration of the
+        #   uncovered surface a machine-readable source of truth instead of a bare count — a count tells you whether an ownerless
+        #   item exists, only the list tells you whom to ask.</en>
+        # </lang>
+        $uncoveredItems = @(@($surface.items) | Where-Object { -not $_.covered } | ForEach-Object {
+            [pscustomobject]@{ id = [string]$_.id; owner = [string]$_.owner }
+        })
+
         $stats += [pscustomobject]@{
             surface = $surface.id
             inventory = 'static'
             total = $actual.Count
             covered = $coveredCount
             uncovered = (@($surface.items).Count - $coveredCount)
+            uncoveredItems = $uncoveredItems
             excluded = @($surface.excluded).Count
         }
     } elseif ($surface.inventory -eq 'database') {
@@ -189,6 +201,9 @@ Write-Host '=== 运行期证据覆盖率（已覆盖 / 总数） ==='
 foreach ($s in $stats) {
     if ($s.inventory -eq 'static') {
         Write-Host ("面 {0}: 已覆盖 {1} / 总数 {2}（另排除 {3} 个基础设施/非管理入口页）" -f $s.surface, $s.covered, $s.total, $s.excluded)
+        foreach ($u in @($s.uncoveredItems)) {
+            Write-Host ("    未覆盖：{0}（所有者：{1}）" -f $u.id, $u.owner)
+        }
     } else {
         Write-Host ("面 {0}: 由 L2 门禁 {1} 运行期产出（数据库权威清单，gate-summary.json 的 coverage 块）" -f $s.surface, $s.gate)
     }
