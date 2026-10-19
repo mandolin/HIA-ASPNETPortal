@@ -103,6 +103,11 @@ $MODULES = @(
     # <en>`C-anp-P31` (`W-anp-P171`) adds the HTML text module. Note that its edit page has **no RequiredFieldValidator**, so the
     # doc section must **not** contain any `**必填**` marker (A4 compares counts).</en></lang>
     [pscustomobject]@{ name = 'HTML 文本'; heading = 'HTML 文本模块（HtmlModule）'; view = 'HtmlModule.ascx'; edit = 'EditHtml.aspx' }
+    # <lang><zh-CN>`C-anp-P31`（`W-anp-P172`）新增快速链接。它与「链接（Links）」**共用** `EditLinks.aspx`，
+    # 因此字段与必填数量与 Links 一致（5 个控件 / 3 个 RequiredFieldValidator）——是源码实测结果，不是照抄。</zh-CN>
+    # <en>`C-anp-P31` (`W-anp-P172`) adds Quick Links. It **shares** `EditLinks.aspx` with Links, so its fields and required count
+    # match Links (5 controls / 3 RequiredFieldValidators) — measured from source, not copied.</en></lang>
+    [pscustomobject]@{ name = '快速链接'; heading = '快速链接（QuickLinks）'; view = 'QuickLinks.ascx'; edit = 'EditLinks.aspx' }
 )
 
 $failures = @()
@@ -143,8 +148,16 @@ foreach ($module in $MODULES) {
     $controls = @([regex]::Matches($editText, '(?i)<asp:(?:TextBox|DropDownList|CheckBox|HtmlTextArea)[^>]*\sID="(?<id>[^"]+)"') |
         ForEach-Object { $_.Groups['id'].Value } | Sort-Object -Unique)
     foreach ($control in $controls) {
-        if ($sectionText -notmatch [regex]::Escape($control)) {
-            $failures += "A3 文档未记录字段：$($module.name) 的编辑页控件 $control（源码有、文档缺）。"
+        # <lang><zh-CN>必须用**词边界**匹配，不能用子串——`W-anp-P172` 注入实测证明子串是弱断言：
+        # 把文档里的 `TitleField` 改成 `LinkTitleField`（含原 id 作为子串）时门禁仍然通过，
+        # 等于"改了个名也查不出来"。词边界要求 id 两侧都不是单词字符，文档里写成 `` `TitleField` `` 或
+        # 「TitleField 标题」都可命中，而 `LinkTitleField` 不再命中。</zh-CN>
+        # <en>Must match on a **word boundary**, not a substring — injection testing during `W-anp-P172` proved substring matching is
+        # a weak assertion: renaming the doc's `TitleField` to `LinkTitleField` (which contains the original id as a substring) still
+        # passed, i.e. a renamed field could not be detected. A word boundary requires non-word characters on both sides, so
+        # documenting it as `` `TitleField` `` or "TitleField ..." matches, while `LinkTitleField` no longer does.</en></lang>
+        if ($sectionText -notmatch ('(?<![\w])' + [regex]::Escape($control) + '(?![\w])')) {
+            $failures += "A3 文档未记录字段：$($module.name) 的编辑页控件 $control（源码有、文档缺；须以完整 id 出现，不能只作子串）。"
         }
     }
 

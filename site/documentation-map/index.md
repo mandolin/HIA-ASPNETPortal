@@ -29,7 +29,7 @@ title: 文档地图 / 导航索引（HIA-ASPNETPortal）
 - `product-overview.md` — **产品概览与定位**：是什么 / 给谁用 / 能力地图 / 边界 / 兼容性与运行环境 / 许可证与归属 / 适用场景
 - `user-guide.md` — 运行与使用入口；含**典型门户配置流程**、**管理员常用操作**、**故障排除**
 - `p12-sample-business-flow.md` — 示例业务流程
-- **剩余缺口**：`快速链接（QuickLinks）` / `XML` / `Signin` 三个模块的逐项操作说明。」；~~`HTML` 模块~~ 已由  交付，见 `user-guide.md`「HTML 文本模块（HtmlModule）」）
+- **剩余缺口**：`XML` / `Signin` 两个模块的逐项操作说明。」；~~`HTML` 模块~~ 已由  交付，见 `user-guide.md`「HTML 文本模块（HtmlModule）」；~~`QuickLinks` 模块~~ 已由  交付，见 `user-guide.md`「快速链接（QuickLinks）」）
 
 ### 4. 开发者与贡献者
 - `dev-guide.md` — 开发总指南
