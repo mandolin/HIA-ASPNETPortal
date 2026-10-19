@@ -8,6 +8,10 @@ Checks Portal SQL scripts against the SQL Server 2016+ version-matrix preparatio
   <zh-CN>默认执行静态预检，不连接数据库、不创建数据库、不执行 SQL。提供外置连接串文件时，只读取目标实例的版本和兼容级别，不输出连接串、服务器名或密码。</zh-CN>
   <en>By default this script performs static preflight only: it does not connect to a database, create a database, or execute SQL. When an external connection-string file is provided, it reads only version and compatibility metadata without printing the connection string, server name, or password.</en>
 </lang>
+
+  证明边界：默认只做**静态预检**（不连库、不建库、不执行 SQL）；提供外置连接串文件时只读取目标实例的版本与兼容级别，不输出连接串、服务器名或密码；不证明应用在该实例上功能正常。
+
+  Proof boundary: By default performs a **static precheck** only (no connect / create / execute); with an external connection-string file it reads only the target instance version and compatibility level and never prints the connection string, server name or password; it does not prove the application works on that instance.
 #>
 [CmdletBinding()]
 param(

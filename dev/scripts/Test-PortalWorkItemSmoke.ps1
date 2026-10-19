@@ -7,6 +7,10 @@
       <zh-CN>本脚本只做静态门禁，确认轻量待办的 SQL、契约、Unity 注册、后台入口、员工资料更正同步点和迁移工具声明仍保持连通。</zh-CN>
       <en>This script performs static checks only, ensuring the lightweight work-item SQL, contracts, Unity registration, administration entry, employee-profile correction sync points, and migration-tool declarations remain connected.</en>
     </lang>
+
+  证明边界：只证明轻量待办的 SQL、契约、Unity 注册、后台入口、员工资料更正同步点与迁移工具声明的**源码锚点保持连通**（静态）；不证明运行期待办行为正确（由运行期证据承载），不连接数据库。
+
+  Proof boundary: Proves only that the **source anchors** of lightweight work items (SQL, contracts, Unity registration, admin entry, employee-profile sync point, migration tool declaration) remain connected (static); it does not prove runtime work-item behaviour (runtime evidence does) and connects to no database.
 #>
 [CmdletBinding()]
 param(

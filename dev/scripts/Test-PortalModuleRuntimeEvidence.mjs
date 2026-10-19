@@ -43,6 +43,10 @@
 //   Output: `temp\p74\module-verify\` (screenshots plus module-verify-summary.json); exits with code 1 when any assertion fails.
 //   </en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻**各登记模块在运行中站点上"能编译加载并渲染"；不证明模块业务语义正确，不覆盖未登记的模块目标页，不证明跨机器 / 跨数据稳定（截图与结构随数据变化）。
+//
+// Proof boundary: Proves only that, **at collection time**, registered modules "compile, load and render" on the running site; it does not prove business semantics, does not cover unregistered module targets, and does not prove cross-machine / cross-data stability (screenshots and structure vary with data).
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

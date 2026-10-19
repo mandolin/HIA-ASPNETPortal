@@ -28,6 +28,10 @@
   <en>Returns a failing exit code when warning-level findings are present.</en>
   <zh-CN>存在 Warning 级发现时返回失败退出码。</zh-CN>
 </lang>
+
+  证明边界：只证明**在不部署到 IIS 的前提下**可检查的发布就绪项齐备；不证明部署后站点可用（需部署与目标环境证据），不执行部署、不改 IIS。
+
+  Proof boundary: Proves only that the publish-readiness items checkable **without deploying to IIS** are satisfied; it does not prove the deployed site works (needs deployment and target-environment evidence), performs no deployment and touches no IIS.
 #>
 [CmdletBinding()]
 param(

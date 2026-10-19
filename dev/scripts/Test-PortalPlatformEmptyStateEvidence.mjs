@@ -41,6 +41,10 @@
 //   Output: `work-zone\dev\evidence\p81.4\<timestamp>-Dev\*.png` and `empty-state-summary.json`; exit code 1 on failure.
 //   </en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻、当前数据集**下平台与旧内容模块的空态渲染符合预期（空态行 / `EmptyDataTemplate`）；数据集非空时无法断言空态（依赖当前数据），不证明其它状态（错误态 / 加载态）。
+//
+// Proof boundary: Proves only that, **at collection time with the current dataset**, platform and legacy content modules render the expected empty state (empty row / `EmptyDataTemplate`); an empty state cannot be asserted when the dataset is non-empty (data dependent), and other states (error / loading) are not covered.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

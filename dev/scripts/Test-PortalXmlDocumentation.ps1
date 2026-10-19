@@ -16,6 +16,10 @@
   <en>Builds the solution before checking the XML documentation artifacts.</en>
   <zh-CN>检查 XML 文档产物前先构建解决方案。</zh-CN>
 </lang>
+
+  证明边界：只证明门户 XML 文档构建输出能按契约生成且必需产物存在；不证明文档内容正确或完整（人工复核承载），不覆盖未纳入构建的程序集。
+
+  Proof boundary: Proves only that the portal XML documentation build output is produced per contract with the required artefacts present; it does not prove documentation content is correct or complete (human review does) and does not cover assemblies excluded from the build.
 #>
 [CmdletBinding()]
 param(

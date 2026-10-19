@@ -46,6 +46,10 @@
 //   Output: `temp\localization-leak\` (screenshots for both languages plus localization-leak-summary.json); exits with code 1 when CJK is detected under en-US.
 //   </en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻**在 `en-US` 渲染下指定区域不含中文字符（针对硬编码中文）；不覆盖未登记的区域与页面，不证明译文语义正确（由人工抽样承载），不覆盖其它语言界面。
+//
+// Proof boundary: Proves only that, **at collection time**, the specified regions contain no Chinese characters under en-US rendering (targeting hard-coded Chinese); it does not cover unregistered regions or pages, does not prove translation semantics (human sampling does), and does not cover other UI languages.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

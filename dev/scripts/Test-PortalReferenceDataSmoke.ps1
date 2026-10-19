@@ -7,6 +7,10 @@
       <zh-CN>本脚本执行静态门禁，确认 P23.2 参考数据迁移、只读目录服务、Unity 注册、类型/优先级消费者、写入层复核及迁移工具保持一致。它不读取连接串，也不连接数据库。</zh-CN>
       <en>This script performs static gates for the P23.2 reference-data migration, catalog reader, Unity registration, type/priority consumers, write-layer validation, and migration tooling. It reads no connection string and never connects to a database.</en>
     </lang>
+
+  证明边界：只证明 P23.2 参考数据迁移、只读目录服务、Unity 注册、类型 / 优先级消费者、写入层复核与迁移工具的**源码锚点存在**（静态）；不证明迁移已执行或数据正确，不连接数据库、不读取连接串。
+
+  Proof boundary: Proves only that the **source anchors** for reference-data migration, read-only directory service, Unity registration, type / priority consumers, write-layer recheck and migration tools exist (static); it does not prove migrations ran or data is correct, connects to no database and reads no connection string.
 #>
 [CmdletBinding()]
 param(

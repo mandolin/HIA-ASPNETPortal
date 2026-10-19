@@ -15,6 +15,10 @@
     **Verification**: exit code 0 means no hard violation, 1 means a raw-color hard violation, 2 means missing prerequisites; coverage gaps are recorded as `[GATE-NOTE]` without blocking.
     **Low-sensitivity boundary**: only module and theme CSS text is read — no connection strings, credentials or business data, and nothing is rewritten.</en>
   </lang>
+
+  证明边界：只证明业务模块颜色的**主题化来源**与主题层作用域规则被覆盖（静态核对）；不证明视觉呈现正确（由视觉回归基线承载），不覆盖未登记为语义类的样式。
+
+  Proof boundary: Proves only that business-module colours come from theming sources and that theme-layer scoping rules are covered (static checks); it does not prove visual rendering (the visual regression baseline does) and does not cover styles not registered as semantic classes.
 #>
 
 # W100 门禁：模块语义类皮肤覆盖（C-anp-P18）

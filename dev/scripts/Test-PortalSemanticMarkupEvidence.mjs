@@ -36,6 +36,10 @@
 //     $env:PORTAL_P82_PHASE = 'after';    & $node 'dev\scripts\Test-PortalSemanticMarkupEvidence.mjs'<br>
 //   Output: `work-zone\dev\evidence\p82.4\<phase>-<timestamp>-Dev\semantic-markup-summary.json` plus screenshots; exit code 1 on failure.</en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻**登记页面的语义标记与标题**计算样式**符合断言；不证明可访问性达标（由无障碍基线承载），不覆盖未登记页面，不证明跨浏览器一致。
+//
+// Proof boundary: Proves only that, **at collection time**, semantic markup and the **computed styles** of headings on registered pages match the assertions; it does not prove accessibility conformance (the a11y baseline does), does not cover unregistered pages, and does not prove cross-browser consistency.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

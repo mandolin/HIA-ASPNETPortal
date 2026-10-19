@@ -80,6 +80,10 @@
       Low-sensitivity boundary: connection strings come from external configuration; passwords and full connection strings are never echoed; credential-bearing configuration should use a template or external file excluded from Git.
     </en>
   </lang>
+
+  证明边界：只证明 SQL 兼容性迁移脚本与声明在**仓库层面**一致（或按参数执行迁移）；不证明目标 SQL Server 实例上的实际兼容性（需版本矩阵与目标环境证据），默认不连接数据库。
+
+  Proof boundary: Proves only that SQL compatibility migration scripts and declarations agree at the repository level (or runs the migration when asked); it does not prove actual compatibility on a target SQL Server instance (the version matrix and target-environment evidence do) and by default connects to no database.
 #>
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
 param(

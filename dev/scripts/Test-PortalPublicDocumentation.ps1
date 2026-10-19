@@ -10,6 +10,10 @@
   <zh-CN>检查公开 Markdown 入口、相对链接、私有路径泄露、凭据赋值模式、生成目录边界和必需公开指南标记。除非路径被明确声明为公开面，本门禁会刻意忽略 WorkZone 和本地生成输出。</zh-CN>
   <en>Check public Markdown entries, relative links, private-path leakage, credential assignment patterns, generated-directory boundaries, and required public guide markers. The gate intentionally ignores WorkZone and local generated output unless those paths are explicitly declared as public.</en>
 </lang>
+
+  证明边界：只证明公开 Markdown 文档面的**结构与契约**（存在性、必需小节、链接与私有内容约束等）；不证明文档内容正确（由内容类门禁与人工复核承载），不覆盖未登记为公开面的文档。
+
+  Proof boundary: Proves only the **structure and contract** of the public Markdown surface (existence, required sections, link and private-content constraints); it does not prove content correctness (content gates and human review do) and does not cover docs not registered as public.
 #>
 [CmdletBinding()]
 param()

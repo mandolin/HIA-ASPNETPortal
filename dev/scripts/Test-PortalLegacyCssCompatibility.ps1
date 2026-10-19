@@ -22,6 +22,10 @@
   <en>Maximum number of sample findings to print for each rule.</en>
   <zh-CN>每条规则最多输出的样例发现数量。</zh-CN>
 </lang>
+
+  证明边界：只证明旧浏览器 CSS 兼容性的**静态**禁用形态未出现；不证明真实旧浏览器下的渲染结果（需目标环境复测），不覆盖 JS 层面的兼容问题。
+
+  Proof boundary: Proves only that the **statically** detectable incompatible CSS patterns are absent; it does not prove rendering in real legacy browsers (needs target-environment retesting) and does not cover JavaScript-level compatibility.
 #>
 [CmdletBinding()]
 param(

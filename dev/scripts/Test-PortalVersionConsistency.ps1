@@ -18,6 +18,10 @@
   <zh-CN>仓库根目录；留空时取脚本所在目录的上两级目录（`dev\scripts` 的上两级即仓库根）。</zh-CN>
   <en>Repository root; when empty, two levels above the script directory (`dev\scripts` -> repository root).</en>
 </lang>
+
+  证明边界：只证明「CHANGELOG 最新条目版本 / 最新 git 标签版本 / 程序集版本」三者一致；不证明发布流程已执行或产物已发布，不校验版本号语义（是否该升主版本由人决定）。
+
+  Proof boundary: Proves only that the three version anchors (latest CHANGELOG entry, latest git tag, assembly version) agree; it does not prove a release was performed or artefacts published, and does not judge version-number semantics (whether a major bump is warranted is a human decision).
 #>
 
 param(

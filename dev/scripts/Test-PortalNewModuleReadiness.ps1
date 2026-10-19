@@ -35,6 +35,10 @@
     <zh-CN>跳过 R4 类一致性比对，供确有 JS 或代码后置专属类时据实豁免；需在提交信息写明理由。</zh-CN>
     <en>Skips the R4 class-consistency comparison for a justified exemption when JS or code-behind-only classes genuinely exist; the reason must be stated in the commit message.</en>
   </lang>
+
+  证明边界：只证明新增模块的四类"构建看不出、运行期才炸"的问题已前移为**静态**检查并通过；不证明模块运行期可用（由运行期证据与模块门禁承载），不覆盖四类之外的问题。
+
+  Proof boundary: Proves only that the four classes of "builds clean, fails at runtime" problems for new modules are caught by **static** checks and pass; it does not prove the module is usable at runtime (runtime evidence and module gates do) and does not cover problem classes beyond those four.
 #>
 
 # C-anp-P20 新增模块就绪门禁：把"新增业务模块时四类构建看不出、运行期才炸"的坑前移为静态检查。

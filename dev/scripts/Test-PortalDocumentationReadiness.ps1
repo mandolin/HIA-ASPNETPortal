@@ -28,6 +28,10 @@
   <zh-CN>将 Warning 结果升级为失败退出；不改变只读检查本身。</zh-CN>
   <en>Promote Warning results to a failing exit code without changing the read-only checks.</en>
 </lang>
+
+  证明边界：只证明门户文档工具链的**可交接 readiness 契约**（脚本存在、可调用、产物可达）；不证明文档内容正确或完整（由内容类门禁与人工复核承载），不检查未登记进契约的文档。
+
+  Proof boundary: Proves only the handover readiness contract of the doc toolchain (scripts exist, are callable, outputs reachable); it does not prove documentation content is correct or complete (content gates and human review do), and does not check docs outside the contract.
 #>
 [CmdletBinding()]
 param(

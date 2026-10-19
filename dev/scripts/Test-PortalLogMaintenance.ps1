@@ -7,6 +7,10 @@
       <zh-CN>本脚本只读取结构化诊断日志目录，按 portal-yyyyMMdd-nnn.jsonl 命名规则列出当前会被保留或清理的文件。它不会删除、移动或压缩任何日志，也不会读取日志正文，适合发布前或例行运维时确认保留策略。</zh-CN>
       <en>This script only reads the structured diagnostics log directory and lists files that would be kept or cleaned according to the portal-yyyyMMdd-nnn.jsonl naming convention. It never deletes, moves, compresses, or reads log content, making it suitable for release and routine operations review.</en>
     </lang>
+
+  证明边界：只证明按命名规则**当前会被保留或清理的日志文件集合**（列出清单）；不删除、不移动、不压缩任何日志，也不读取日志正文，不证明日志内容合规。
+
+  Proof boundary: Proves only **which log files would currently be retained or cleaned** per the naming rule (it lists them); it deletes, moves and compresses nothing, reads no log body, and does not prove log content compliance.
 #>
 [CmdletBinding()]
 param(

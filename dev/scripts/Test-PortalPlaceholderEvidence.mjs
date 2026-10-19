@@ -11,6 +11,10 @@
 //   references and unit tests use in-memory stand-ins, so neither can prove the page output is free of literals. This script runs both
 //   locales (zh-CN and en-US) across five administration list pages and four front-end business tabs.</en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻**登记页面的渲染结果里不再出现**已登记**的占位类硬编码字面量；不覆盖未登记页面与未登记字面量（新增占位词须先登记），不证明文案措辞得当。
+//
+// Proof boundary: Proves only that, **at collection time**, registered pages no longer render the **registered** placeholder literals; it does not cover unregistered pages or literals (a new placeholder word must be registered first) and does not prove the wording is good.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

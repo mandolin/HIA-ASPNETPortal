@@ -34,6 +34,10 @@
 //   Output: `temp\p77\reachability\` (screenshots plus reachability-summary.json); exits with code 1 when any assertion fails.
 //   </en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻**前台「我的待办」在管理员与非管理员登录下区分三态；依赖运行库中的注册事实（模块定义 / 实例 / 页签 / 角色），不证明其它模块可达性，不证明权限模型正确（由权限审计承载）。
+//
+// Proof boundary: Proves only that, **at collection time**, the front-end "My work items" page distinguishes the three states for admin and non-admin logins; it depends on registration facts in the runtime database (module definition / instance / tab / roles), does not prove reachability of other modules, and does not prove the permission model (the permission audit does).
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

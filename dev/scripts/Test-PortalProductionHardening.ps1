@@ -23,6 +23,10 @@
       Low-sensitivity boundary: IIS, Web.config, directory ACLs, external configuration and databases are not modified; real connection strings, passwords, tokens, cookies and certificate private keys are never read or echoed.
     </en>
   </lang>
+
+  证明边界：只证明 P14.4 生产前硬化预检在**源码或文件系统发布产物**上通过（只读）；不连接生产环境、不改配置、不证明线上行为，不覆盖需真实 IIS / TLS / ACL 的项（已登记在 L7 环境证据清单）。
+
+  Proof boundary: Proves only that the P14.4 pre-production hardening precheck passes against **source or filesystem publish output** (read-only); it connects to no production environment, changes no configuration, proves no online behaviour, and does not cover items needing real IIS / TLS / ACL (registered in the L7 evidence registry).
 #>
 [CmdletBinding()]
 param(

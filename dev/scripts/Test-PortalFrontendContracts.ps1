@@ -10,6 +10,10 @@
   <en>Checks the master page, native theme manifests, module CSS boundaries, Gulp task bindings, package scripts, browser targets, and public front-end guide text. The gate is read-only and does not run npm, Gulp, IIS Express, or the runtime database.</en>
   <zh-CN>检查 master 页、原生主题 manifest、模块 CSS 边界、Gulp 任务绑定、package scripts、浏览器目标和公开前端指南文本。本门禁为只读行为，不运行 npm、Gulp、IIS Express 或运行时数据库。</zh-CN>
 </lang>
+
+  证明边界：只证明已追踪的 Web Forms 呈现层与前端构建契约**在仓库层面**成立（静态核对）；不证明浏览器端渲染结果（由运行期证据脚本承载），不覆盖未登记为"已追踪"的呈现层文件。
+
+  Proof boundary: Proves only that the tracked Web Forms presentation layer and frontend build contracts hold at the repository level (static checks); it does not prove browser-rendered results (runtime evidence scripts do) and does not cover presentation files not registered as tracked.
 #>
 [CmdletBinding()]
 param()

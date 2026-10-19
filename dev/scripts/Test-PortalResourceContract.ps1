@@ -78,6 +78,10 @@
     start IIS, or write production configuration.
   </en>
 </lang>
+
+  证明边界：只证明「三份 resx + 签入的强类型 designer + 标记层 / 代码层引用」四处契约一致；不证明译文语义正确（由人工抽样承载），不证明运行期呈现（由资源契约运行期证据承载）。
+
+  Proof boundary: Proves only that the four places (three resx files, the checked-in strongly typed designer, and markup / code references) agree; it does not prove translation semantics (human sampling does) and does not prove runtime rendering (the resource-contract runtime evidence does).
 #>
 [CmdletBinding(SupportsShouldProcess = $true)]
 param(

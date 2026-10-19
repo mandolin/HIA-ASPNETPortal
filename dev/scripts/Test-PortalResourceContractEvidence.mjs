@@ -49,6 +49,10 @@
 //   Output: `work-zone\dev\evidence\p80.4\<timestamp>-Dev\*.png` and `contract-summary.json`; exit code 1 on failure.
 //   </en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻**资源改动在运行中站点上**零用户可见变化**；不证明资源键值语义正确（人工复核承载），不覆盖未登记页面。
+//
+// Proof boundary: Proves only that, **at collection time**, the resource change produces **zero user-visible difference** on the running site; it does not prove resource key / value semantics (human review does) and does not cover unregistered pages.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

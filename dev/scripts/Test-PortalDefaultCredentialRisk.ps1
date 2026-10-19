@@ -35,6 +35,10 @@
       Low-sensitivity boundary: no live database connection, no real password verification and no secret output; only source and setup-script text is read.
     </en>
   </lang>
+
+  证明边界：只证明默认凭据 seed、旧口令哈希、文档警告、安装脚本与各 profile 风险期望在**仓库文本层面**符合预期（只读）；不连接实时数据库、不校验真实密码强度或能否登录、不输出密钥、不修改安装脚本或 Web.config。
+
+  Proof boundary: Proves only that default-credential seeds, legacy password hashes, doc warnings, install scripts and per-profile risk expectations match at the repository text level (read-only); it connects to no live database, does not validate real passwords or logins, prints no secrets, and never modifies install scripts or Web.config.
 #>
 [CmdletBinding()]
 param(

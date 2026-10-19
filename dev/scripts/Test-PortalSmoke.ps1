@@ -63,6 +63,10 @@
   <en>Checks the editor safety path and its bounded response behavior.</en>
   <zh-CN>检查编辑器安全路径及其受限响应行为。</zh-CN>
 </lang>
+
+  证明边界：只证明 HTTP smoke 目标在**当前站点**可达并返回预期状态；不证明页面内容或业务语义正确，不覆盖未登记 URL，不证明性能与安全（由性能与合规门禁承载）。
+
+  Proof boundary: Proves only that the HTTP smoke targets are reachable on the **current site** and return the expected status; it does not prove page content or business semantics, does not cover unregistered URLs, and does not prove performance or security (performance and compliance gates do).
 #>
 [CmdletBinding()]
 param(

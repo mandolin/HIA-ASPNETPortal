@@ -60,6 +60,10 @@
   <en>Treats warnings as a failed gate for stricter security runs.</en>
   <zh-CN>在更严格的安全运行中将 Warning 视为门禁失败。</zh-CN>
 </lang>
+
+  证明边界：只证明 **Git 已追踪文件**中的高置信度密钥形态未出现（只读正则扫描）；不扫描未追踪文件与历史提交，不证明无低置信度 / 变形泄漏（存在漏报与误报，需人工复核），不撤销任何已泄漏凭据。
+
+  Proof boundary: Proves only that high-confidence secret patterns are absent from **Git-tracked files** (read-only regex scan); it does not scan untracked files or history, does not prove absence of low-confidence / obfuscated leaks (false negatives and positives exist, human review required), and revokes no leaked credential.
 #>
 [CmdletBinding()]
 param(

@@ -16,6 +16,10 @@
   <en>Returns a failing exit code when one or more readiness checks fail.</en>
   <zh-CN>当一个或多个准备项失败时返回失败退出码。</zh-CN>
 </lang>
+
+  证明边界：只证明**本机** Edge IE mode 自动化的准备状态（策略 / 驱动 / 配置）；不证明 IE9+ 真实浏览器下的页面表现（需目标环境复测，已登记在 L7 环境证据清单），不跨机器生效。
+
+  Proof boundary: Proves only the readiness of **this machine** for Edge IE-mode automation (policy / driver / config); it does not prove page behaviour in real IE9+ browsers (needs target-environment retesting, registered in the L7 evidence registry) and does not generalise to other machines.
 #>
 [CmdletBinding()]
 param(

@@ -45,6 +45,10 @@
 //   Output: `temp\p77\supplement\` (screenshots plus supplement-summary.json); exits with code 1 when any assertion fails.
 //   </en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻**深色皮肤对比度等 P77 补充项在运行中站点上满足断言（并留档截图）；不覆盖全部页面与全部皮肤组合（仅登记目标），不证明跨浏览器一致。
+//
+// Proof boundary: Proves only that, **at collection time**, the P77 supplementary items (e.g. dark-skin contrast) satisfy assertions on the running site (screenshots archived); it does not cover all pages or every skin combination (only registered targets) and does not prove cross-browser consistency.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

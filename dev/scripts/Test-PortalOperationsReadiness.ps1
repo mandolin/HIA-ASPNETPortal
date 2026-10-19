@@ -7,6 +7,10 @@
       <zh-CN>本脚本检查运维页面、诊断日志、运营审计、公开运行手册、发布门禁和目标环境补证边界。它只读取仓库文件，不连接 IIS、数据库或外置配置，也不修改日志、任务计划、备份或系统设置。</zh-CN>
       <en>This script checks operations pages, diagnostic logging, operation audits, public runbook material, release gates, and target-environment evidence boundaries. It only reads repository files and never connects to IIS, databases, or external configuration, nor modifies logs, scheduled tasks, backups, or system settings.</en>
     </lang>
+
+  证明边界：只证明运维页面、诊断日志、运营审计、公开运行手册、发布门禁与目标环境补证边界在**仓库文件层面**齐备；不连接 IIS、数据库或外置配置，不修改日志、任务计划、备份或系统设置，不证明线上运维动作可执行。
+
+  Proof boundary: Proves only that operations pages, diagnostic logs, operational audit, the public runbook, release gates and the target-environment evidence boundary exist at the repository file level; it connects to no IIS, database or external config, modifies no logs, scheduled tasks, backups or system settings, and does not prove online operational actions can run.
 #>
 [CmdletBinding()]
 param(

@@ -112,6 +112,10 @@
   <en>IIS Express port used by the module cache mutation proof.</en>
   <zh-CN>模块缓存变更 proof 使用的 IIS Express 端口。</zh-CN>
 </lang>
+
+  证明边界：只证明扩展 smoke 套件所覆盖的契约通过；不证明扩展在生产配置下的行为，不覆盖套件未登记的扩展点。
+
+  Proof boundary: Proves only that the contracts covered by the extension smoke suite pass; it does not prove behaviour under the production configuration and does not cover extension points not registered in the suite.
 #>
 [CmdletBinding()]
 param(
