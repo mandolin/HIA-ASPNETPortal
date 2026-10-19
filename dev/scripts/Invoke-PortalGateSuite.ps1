@@ -535,6 +535,35 @@ $gateLayers = [ordered]@{
         #   own explanatory note, so it was narrowed.</en>
         # </lang>
         @{ File = 'Test-PortalPlanLedgerConsistency.ps1';    Runner = 'ps1'; Kind = '计划账本一致性'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P30`（`W-anp-P166`）新增：**`docs` ↔ `site` 镜像一致性**门禁（L0）。`C-anp-P28` 期间每改一次公开文档都要
+        #   **人工**同步 `site/` 镜像页，再用临时脚本人工校验——**没有任何门禁校验这件事**，改了 docs 忘同步则 L0 全绿。
+        #   本门禁以 `site/_data/published.yml` 上架清单为事实源：A1 每个条目的源文件与镜像页都必须存在；
+        #   A2 镜像必须是**构建产物形状**——A2a 无裸相对 `.md` 链接（站点上必然 404，须由构建重写为 `{{ site.baseurl }}/...`）、
+        #   A2b 无 `W-anp-P*` / `C-anp-P*` 内部编号外泄（公开面过滤契约）、A2c 首标题与 docs 一致（兜底"整页没重新生成"）；
+        #   A3 front matter 契约（`lang: zh-CN` / `permalink: /<path>/` / `parent` 与清单一致）；A4 未上架 docs 仅作软指标列出。
+        #   **关键口径修正（首跑实测推翻原设计）**：初版要求"镜像正文 == docs 原文"，结果 29 页中 16 页失败——
+        #   但差异全部来自构建的两项合法变换（链接重写 + 公开面文本过滤），行数一致，即"不等"是设计如此；
+        #   真问题在另一侧：`C-anp-P28` 我手工同步的若干页是"docs 原文直抄"，**缺了这两项变换**
+        #   （裸相对链接 404 + 内部编号外泄）。故改为核对形状不变量，并跑一次 `Build-PortalSite.ps1`
+        #   把这几页修回构建产物（实测 29 页中英生成、82 页检查 Pass，仅 4 个文件变更）。</zh-CN>
+        #   <en>`C-anp-P30` (`W-anp-P166`) addition: the **`docs` ↔ `site` mirror consistency** gate (L0). During `C-anp-P28`, every
+        #   public-doc change required **manually** syncing the `site/` mirror page plus a scratch-script check — **no gate checked
+        #   it**, so a forgotten sync left L0 green. This gate takes the `site/_data/published.yml` manifest as its source of truth:
+        #   A1 source file and mirror page must exist per entry; A2 the mirror must be **build-output shaped** — A2a no raw
+        #   relative `.md` links (they 404 on the site; the build rewrites them to `{{ site.baseurl }}/...`), A2b no leaked
+        #   `W-anp-P*` / `C-anp-P*` internal IDs (public-surface filtering contract), A2c the first heading matches the docs
+        #   (backstop for "the page was never regenerated"); A3 the front-matter contract (`lang: zh-CN`, `permalink: /<path>/`,
+        #   and `parent` matching the manifest); A4 unpublished docs are listed as a soft metric only.
+        #   **Key calibration fix (the first run overturned the original design)**: the first version required "mirror body == docs
+        #   source" and 16 of 29 pages failed — yet every difference came from the build's two legitimate transformations (link
+        #   rewriting + public-surface text filtering) with identical line counts, i.e. the inequality is by design; the real
+        #   problem was on the other side: several pages I hand-synced during `C-anp-P28` were verbatim docs copies **missing both
+        #   transformations** (raw relative links 404, internal IDs leak). So the gate now checks shape invariants, and one run of
+        #   `Build-PortalSite.ps1` restored those pages to build output (measured: 29 zh/en pages generated, 82 pages checked with
+        #   Pass, only 4 files changed).</en>
+        # </lang>
+        @{ File = 'Test-PortalSiteMirrorConsistency.ps1'; Runner = 'ps1'; Kind = '站点镜像一致性'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
