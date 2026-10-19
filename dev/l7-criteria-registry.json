@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "note": "L7（M-ANP-TRUSTED-PORTAL）判据表（W-anp-P156）：把里程碑的 T1-T7 判据条目化，每条写明判定标准、当前状态、证据指针、复核方式（脚本或人工程序）与失效条件，使判据可逐条复核而不是散落在叙述里。status 取值：met-dev-side（开发侧已满足）/ needs-target-env（需目标环境才能满足）/ not-met（未满足）。needs-target-env 的条目必须在 dev/target-environment-evidence.json 中有对应证据条目（本台账由 L0 门禁 Test-PortalL7CriteriaRegistry.ps1 核对）。",
+  "milestone": "M-ANP-TRUSTED-PORTAL",
+  "criteria": [
+    {
+      "id": "T1",
+      "name": "凭据可信",
+      "requirement": "新密码不写 MD5，旧账号有可验证升级/重置路径",
+      "status": "met-dev-side",
+      "statusNote": "开发侧已满足：强哈希 + 可配置迭代次数（只增不减）+ 登录成功后渐进 rehash + 旧 MD5 升级路径 + 失败登录与凭据成本升级审计。",
+      "evidence": [
+        "dev/scripts/Test-PortalDefaultCredentialRisk.ps1",
+        "work-zone/dev/plans/works/W-anp-P42-p7-closeout.md"
+      ],
+      "verify": {
+        "kind": "script",
+        "script": "dev/scripts/Test-PortalDefaultCredentialRisk.ps1",
+        "args": [],
+        "manual": "静态门禁核对默认凭据与 seed；凭据哈希与 rehash 行为另由单元测试（Invoke-PortalTests.ps1）覆盖。"
+      },
+      "invalidation": "新密码再次写入 MD5，或凭据迁移绕过强哈希。",
+      "owner": "项目维护者",
+      "reEntry": "每次改凭据存储/迁移逻辑后重跑上述门禁与单测。"
+    },
+    {
+      "id": "T2",
+      "name": "会话收紧",
+      "requirement": "登出、密码重置、角色/权限变化可使旧会话下一请求失效或重新判定",
+      "status": "met-dev-side",
+      "statusNote": "开发侧已满足：登出、密码重置后旧会话失效、角色变化后下一请求重新判定，已用浏览器模拟复核。",
+      "evidence": [
+        "work-zone/dev/plans/works/W-anp-P5.5-closeout.md"
+      ],
+      "verify": {
+        "kind": "manual",
+        "script": null,
+        "args": [],
+        "manual": "人工复核程序：开两个浏览器上下文分别登录；在上下文中 A 执行登出/改密/改角色，然后在上下文 B（旧会话）发起一次高风险后台请求，必须失效或重新判定（不得继续访问）。当前无专用门禁，故登记为人工复核项。"
+      },
+      "invalidation": "角色、权限或密码重置后，旧会话仍能访问高风险后台功能。",
+      "owner": "项目维护者",
+      "reEntry": "改认证/会话/角色判定逻辑后按上述程序复核一次并记录结论。"
+    },
+    {
+      "id": "T3",
+      "name": "权限边界",
+      "requirement": "高风险后台入口有权限 key、角色映射和 Admins 兼容",
+      "status": "met-dev-side",
+      "statusNote": "开发侧已满足：权限 key + 角色映射 + Admins 兼容 seed 已由静态门禁核对；匿名与普通用户负例由冒烟门禁运行期覆盖。",
+      "evidence": [
+        "dev/scripts/Test-PortalBusinessPermissionAudit.ps1"
+      ],
+      "verify": {
+        "kind": "script",
+        "script": "dev/scripts/Test-PortalBusinessPermissionAudit.ps1",
+        "args": [],
+        "manual": "静态核对权限键/角色映射/授权入口；运行期匿名与越权负例另由 Test-PortalSmoke.ps1 覆盖（需站点运行）。"
+      },
+      "invalidation": "普通用户可绕过权限 key 访问诊断、审计、主题、模块、用户、角色或原始 HTML 管理。",
+      "owner": "项目维护者",
+      "reEntry": "新增后台入口或改权限键后重跑权限审计门禁。"
+    },
+    {
+      "id": "T4",
+      "name": "诊断与审计",
+      "requirement": "错误页、诊断、审计不泄漏密码、摘要、Cookie、Token 或连接串",
+      "status": "met-dev-side",
+      "statusNote": "开发侧已满足：权限拒绝日志净化已复核；脱敏规则与例外登记机制已建立；静态泄漏扫描作为日常看守。",
+      "evidence": [
+        "dev/scripts/Test-PortalSecretLeakage.ps1",
+        "docs/audit-retention-policy.md"
+      ],
+      "verify": {
+        "kind": "script",
+        "script": "dev/scripts/Test-PortalSecretLeakage.ps1",
+        "args": [],
+        "manual": "静态扫描敏感形态；审计留存与「不得删除」边界另由 Test-PortalAuditRetentionDeclaration.ps1 看守。"
+      },
+      "invalidation": "错误页、日志、审计或文档泄漏密码、Cookie、Token、连接串、证书私钥或真实密钥。",
+      "owner": "项目维护者",
+      "reEntry": "改日志/审计/错误页后重跑泄漏扫描与留存门禁。"
+    },
+    {
+      "id": "T5",
+      "name": "部署可信",
+      "requirement": "真实 IIS、HTTPS、ACL、配置转换、Cookie 和 machineKey 有目标环境证据",
+      "status": "needs-target-env",
+      "statusNote": "未满足：本机只有静态预检与可配置能力（Cookie Secure/SameSite、哈希迭代），真实 IIS/TLS/ACL/外置配置证据仍待目标环境。",
+      "evidence": [
+        "dev/target-environment-evidence.json"
+      ],
+      "verify": {
+        "kind": "script",
+        "script": "dev/scripts/Invoke-PortalTargetEnvironmentEvidencePack.ps1",
+        "args": [],
+        "manual": "目标环境就绪后运行一键证据包（加 -BaseUrl 指向目标终结点），iis-tls-acl-target 与 cookie-machinekey-target 两项出证即满足。"
+      },
+      "invalidation": "发布清单、目标环境配置和实际运行路径长期不一致。",
+      "owner": "项目维护者",
+      "reEntry": "拿到目标 IIS 环境后一键出证；ADR 0021 需同步转「已接受」。"
+    },
+    {
+      "id": "T6",
+      "name": "质量门禁",
+      "requirement": "构建、SQL、文档、前端和 smoke 可重复执行",
+      "status": "met-dev-side",
+      "statusNote": "当前范围已满足：L0/L1/L2 分层门禁可重复执行，覆盖率与缺口由覆盖地图登记。",
+      "evidence": [
+        "dev/scripts/Invoke-PortalGateSuite.ps1",
+        "dev/gate-coverage-map.json"
+      ],
+      "verify": {
+        "kind": "script",
+        "script": "dev/scripts/Invoke-PortalGateSuite.ps1",
+        "args": [ "-Layer", "L0" ],
+        "manual": "全量复核另跑 -Layer L1 与 -Layer L2；门禁集与未覆盖缺口以覆盖地图为准。"
+      },
+      "invalidation": "门禁被跳过、结果被手工改写，或覆盖地图与实际门禁集不一致。",
+      "owner": "项目维护者",
+      "reEntry": "每次交付后按分层重跑；新增门禁必须登记进覆盖地图（M1 default-deny）。"
+    },
+    {
+      "id": "T7",
+      "name": "风险分流",
+      "requirement": "历史警告、生成物、人工项和目标环境项有明确边界",
+      "status": "met-dev-side",
+      "statusNote": "开发侧已满足：证据、例外与后置补证清单已成机制；目标环境项由 L7 证据清单逐条登记并显式跳过。",
+      "evidence": [
+        "dev/gate-coverage-map.json",
+        "dev/target-environment-evidence.json"
+      ],
+      "verify": {
+        "kind": "script",
+        "script": "dev/scripts/Test-PortalGateCoverageMap.ps1",
+        "args": [],
+        "manual": "覆盖地图保证门禁与缺口不漂移；目标环境项与人工项（业务签收）的边界由证据清单的 mode 字段区分。"
+      },
+      "invalidation": "把目标环境项或人工项当作已完成项宣称。",
+      "owner": "项目维护者",
+      "reEntry": "每次新增未覆盖项须进覆盖地图；新增环境证据须进证据清单。"
+    }
+  ]
+}

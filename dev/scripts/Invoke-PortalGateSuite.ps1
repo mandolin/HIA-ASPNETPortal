@@ -488,6 +488,27 @@ $gateLayers = [ordered]@{
         #   collects 4 items, skips 6 explicitly, has 1 manual item, exit 0.</en>
         # </lang>
         @{ File = 'Test-PortalTargetEnvironmentEvidenceMap.ps1'; Runner = 'ps1'; Kind = 'L7 证据清单'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P28`（`W-anp-P156`）新增：**L7 判据表**门禁（L0）。里程碑 `M-ANP-TRUSTED-PORTAL` 的
+        #   T1–T7 判据原先只以叙述形式存在于文档里，无法逐条复核。本包把它条目化为台账
+        #   `dev/l7-criteria-registry.json`（每条：判定标准、当前状态、证据指针、复核方式、失效条件、所有者、再入条件），
+        #   并由本门禁看守：A1 字段齐备/id 唯一/status 合法；A2 复核方式可用（script 必须存在、manual 必须写得具体 ≥20 字，
+        #   **不得登记跑不起来的复核命令或空话程序**）；A3 T1–T7 全覆盖（漏一条 = 有判据没人复核）；
+        #   A4 状态自洽（needs-target-env 必须在本仓 `dev/target-environment-evidence.json` 有对应证据条目，
+        #   met-dev-side 必须有证据指针）；A5 与 work-zone 里程碑文档交叉核对（软，私有仓缺失不阻断）。
+        #   实测：7 条判据（met-dev-side 6 / needs-target-env 1），脚本复核 6、人工复核 1。</zh-CN>
+        #   <en>`C-anp-P28` (`W-anp-P156`) addition: the **L7 criteria table** gate (L0). The T1–T7 criteria of the milestone
+        #   `M-ANP-TRUSTED-PORTAL` previously existed only as prose in documents and could not be reviewed criterion by criterion.
+        #   This work item itemises them into the registry `dev/l7-criteria-registry.json` (per criterion: requirement, current
+        #   status, evidence pointers, verification method, invalidation condition, owner, re-entry), guarded by this gate:
+        #   A1 fields present / ids unique / status valid; A2 usable verification (script must exist; manual must be concrete,
+        #   >= 20 characters — **a review command that cannot run or a vacuous procedure must not be registered**);
+        #   A3 full coverage of T1–T7 (a missing one means a criterion nobody reviews); A4 status coherence (needs-target-env must
+        #   have a matching evidence entry in `dev/target-environment-evidence.json`; met-dev-side must have evidence pointers);
+        #   A5 cross-check against the work-zone milestone doc (soft; a missing private repo does not block).
+        #   Measured: 7 criteria (6 met-dev-side / 1 needs-target-env), 6 script-verified and 1 manually verified.</en>
+        # </lang>
+        @{ File = 'Test-PortalL7CriteriaRegistry.ps1';       Runner = 'ps1'; Kind = 'L7 判据表'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

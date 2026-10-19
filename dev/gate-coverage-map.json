@@ -264,6 +264,14 @@
       "gate": "Test-PortalTargetEnvironmentEvidenceMap.ps1"
     },
     {
+      "id": "l7-criteria-registry",
+      "name": "L7 判据表（T1–T7 条目化、可逐条复核）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明判据表结构完整、复核命令可执行、状态与证据登记自洽；不证明判据本身已被满足（met-dev-side 是开发侧结论，须按 verify 逐条跑/复核才算数），不替代人工复核（T2 等 manual 项必须由人执行并留结论）。",
+      "gate": "Test-PortalL7CriteriaRegistry.ps1"
+    },
+    {
       "id": "landing-stats",
       "name": "landing 统计数字（文档子站首页统计与可计算真值一致）",
       "layer": "L0",
@@ -340,7 +348,8 @@
     "Test-PortalContentModuleDocs.ps1",
     "Test-PortalApprovalBoundaryDocs.ps1",
     "Test-PortalAuditRetentionDeclaration.ps1",
-    "Test-PortalTargetEnvironmentEvidenceMap.ps1"
+    "Test-PortalTargetEnvironmentEvidenceMap.ps1",
+    "Test-PortalL7CriteriaRegistry.ps1"
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
