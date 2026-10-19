@@ -411,6 +411,29 @@ $gateLayers = [ordered]@{
         #   adds, and does not verify deployment locations (TabId/ModuleId are a delivery-time snapshot).</en>
         # </lang>
         @{ File = 'Test-PortalContentModuleDocs.ps1';         Runner = 'ps1'; Kind = '内容模块文档一致性'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P28`（`W-anp-P153`）新增：**审批流转边界看守**门禁（L0）。验收判据 V3 要求
+        #   「审批流转边界在公开文档中有明确声明」。源码实测（2026-10-19）：请假 / 报销两个模块的提交动作链
+        #   仅为「字段校验 → 落库（状态固定 `Pending`）→ 生成待办（指派 `Admins`）→ 写审计」，**没有任何审批动作**；
+        #   `MyWorkItems` 也只做待办的只读投影（全部 / 仅超期筛选），不处理业务、不拥有流程语义。
+        #   本门禁把这条边界**双向看守**：A1 公开文档必须含「审批流转边界（必读）」小节与关键短语；
+        #   A2 两个模块的 code-behind 不得出现审批动作标识（`Approve` / `Reject`），`MyWorkItems` 必须保持只读；
+        #   A3 文档点名要看的门禁必须存在。任一侧变化而另一侧未同步即失败——将来真加审批流程，门禁会强制先改文档。
+        #   注入法实测曾暴露本门禁自身两处弱断言（标题前缀匹配、`\bApprove\b` 词边界匹配不到 `ApproveRequest`），
+        #   已分别改为精确标题匹配与子串匹配。</zh-CN>
+        #   <en>`C-anp-P28` (`W-anp-P153`) addition: the **approval-flow boundary guard** gate (L0). Acceptance criterion V3 requires an
+        #   explicit declaration of the approval-flow boundary in the public docs. Measured from source (2026-10-19): the submit chain
+        #   of the leave and expense modules is only "field validation → persist (status fixed to `Pending`) → create a work item
+        #   (assigned to `Admins`) → write an audit" with **no approval action at all**, and `MyWorkItems` is only a read-only
+        #   projection of work items (all / overdue filters) that neither processes business nor owns process semantics. This gate
+        #   guards the boundary **in both directions**: A1 the public doc must contain the "approval flow boundary (must read)" section
+        #   and its key phrases; A2 the two modules' code-behind must not contain approval action identifiers (`Approve` / `Reject`) and
+        #   `MyWorkItems` must stay read-only; A3 the gate the doc names must exist. If either side changes without the other, the gate
+        #   fails — when approval is genuinely added later, the doc must be corrected first.
+        #   Injection testing exposed two weak assertions in this gate itself (a heading prefix match and `\bApprove\b` word-boundary
+        #   matching that missed `ApproveRequest`), now fixed to an exact heading match and substring matching.</en>
+        # </lang>
+        @{ File = 'Test-PortalApprovalBoundaryDocs.ps1';      Runner = 'ps1'; Kind = '审批流转边界'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

@@ -240,6 +240,14 @@
       "gate": "Test-PortalContentModuleDocs.ps1"
     },
     {
+      "id": "approval-boundary-docs",
+      "name": "审批流转边界声明（请假/报销仅落库 + 生成待办，审批不在本模块内）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明公开文档明确声明了该边界、且源码侧无审批动作（文档点名要看的门禁存在）；不证明外部审批流程被正确执行（本门户不含该流程，外部实现不在仓库内），不证明文档措辞语义正确（人工复核承载），不证明待办指派角色始终为 Admins（运行期配置，由配置与运行期证据承载）。",
+      "gate": "Test-PortalApprovalBoundaryDocs.ps1"
+    },
+    {
       "id": "landing-stats",
       "name": "landing 统计数字（文档子站首页统计与可计算真值一致）",
       "layer": "L0",
@@ -313,7 +321,8 @@
     "Test-PortalLandingStats.ps1",
     "Test-PortalDefaultThemeVisualBaseline.mjs",
     "Test-PortalRuntimeScreenshotBaseline.ps1",
-    "Test-PortalContentModuleDocs.ps1"
+    "Test-PortalContentModuleDocs.ps1",
+    "Test-PortalApprovalBoundaryDocs.ps1"
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
