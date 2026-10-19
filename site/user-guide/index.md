@@ -142,9 +142,26 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - **审计**：与同族旧内容编辑页一致，该保存 / 删除路径**不写运营审计**。
 - **当前部署**（开发库实测）：**3 个实例**——首页「快速链接」、产品信息「值得关注的竞争者」、关于门户「快速链接」。
 
+### XML / XSL 模块（XmlModule）
+
+- **用途**：渲染**部署在站内**的 XML 数据，并可选用 XSL/T 转换后呈现（当前部署样例：首页「热门动态」）。
+- **数据来源**：XML 与 XSL 都是**受信任部署目录内的文件**（样例 `~/Data/sales.xml` 与 `~/Data/sales.xsl`），路径作为模块设置 `xmlsrc` / `xslsrc` 存入 `PortalCfg_ModuleSettings`——**本模块没有自己的业务数据表**。
+- **显示**：`DesktopModules/XmlModule.ascx`——两个路径各自经 `TryNormalizeTrustedDeploymentResourcePath` 与物理文件存在性校验后，才交给 `Xml` 控件（`DocumentSource` / `TransformSource`）：
+  - 任一路径不合规或文件不存在 → 只显示**中性的编码提示**（`Legacy_XmlModule_MessageXmlUnavailable` / `Legacy_XmlModule_MessageXsltUnavailable`），**不回显原始路径、不输出物理路径或异常堆栈**；
+  - 只配 XML、不配 XSL 也能正常显示（两者独立校验）。
+- **编辑页** `DesktopModules/EditXml.aspx`：
+  - `XmlDataSrc` XML 数据文件的应用内虚拟路径（可选，最长 250 字符）
+  - `XslTransformSrc` XSL/T 转换文件的应用内虚拟路径（可选，最长 250 字符）
+- **必填项**：该编辑页**没有任何 `RequiredFieldValidator`**——两个字段都可留空保存。
+- **保存校验**：两个值都经同一路径策略规范化；**任一不合规即拒绝保存**，并提示 `EditXml_MessageInvalidResourcePath`（不含原始输入）。
+- **权限**：正整数 `Mid` + `HasEditPermissions(moduleId)`（**不要求** HTML 模块那种 `ContentRawHtmlEdit` 窄权限）。
+- **不做的事（如实说明）**：不提供上传、在线编辑、外部 URL 或任意物理路径能力；不自动加载外部 XML、远程样式表或脚本。
+- **审计**：该保存路径**不写运营审计**。
+- **当前部署**（开发库实测）：**1 个实例**——首页「热门动态」（`ModuleId=6`：`xmlsrc=~/data/sales.xml`、`xslsrc=~/data/sales.xsl`）。
+
 ### 未在本节逐项展开的模块
 
-`XML`、`Signin` 两个模块本次未逐项展开（待补，已登记为文档缺口）。
+`Signin` 模块本次未逐项展开（待补，已登记为文档缺口）。
 
 ## 管理入口
 

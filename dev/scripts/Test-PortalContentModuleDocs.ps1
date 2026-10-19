@@ -108,6 +108,11 @@ $MODULES = @(
     # <en>`C-anp-P31` (`W-anp-P172`) adds Quick Links. It **shares** `EditLinks.aspx` with Links, so its fields and required count
     # match Links (5 controls / 3 RequiredFieldValidators) — measured from source, not copied.</en></lang>
     [pscustomobject]@{ name = '快速链接'; heading = '快速链接（QuickLinks）'; view = 'QuickLinks.ascx'; edit = 'EditLinks.aspx' }
+    # <lang><zh-CN>`C-anp-P31`（`W-anp-P173`）新增 XML/XSL 模块。其编辑页同样**没有 RequiredFieldValidator**，
+    # 故文档小节中**不得**出现 `**必填**` 标注（A4 会比对数量）。</zh-CN>
+    # <en>`C-anp-P31` (`W-anp-P173`) adds the XML/XSL module. Its edit page likewise has **no RequiredFieldValidator**, so the doc
+    # section must **not** contain any `**必填**` marker (A4 compares counts).</en></lang>
+    [pscustomobject]@{ name = 'XML 模块'; heading = 'XML / XSL 模块（XmlModule）'; view = 'XmlModule.ascx'; edit = 'EditXml.aspx' }
 )
 
 $failures = @()
