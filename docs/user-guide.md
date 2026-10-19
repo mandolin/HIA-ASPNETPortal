@@ -152,9 +152,19 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - **审计**：该保存路径**不写运营审计**。
 - **当前部署**（开发库实测）：**1 个实例**——首页「热门动态」（`ModuleId=6`：`xmlsrc=~/data/sales.xml`、`xslsrc=~/data/sales.xsl`）。
 
+### 登录（Signin）
+
+- **用途**：在页签上提供登录表单（登录标识 + 口令 + 记住登录）。
+- **显示**：`DesktopModules/Signin.ascx`——`EmailOrName`（登录标识）、`password`（口令）、`RememberCheckbox`（记住登录）、`SigninBtn`（登录）、`RegisterLink`（自主注册入口，指向 `~/Admin/Register.aspx`，**仅当 `PortalRegistrationOptions.AllowSelfRegistration` 显式开启时可见，默认关闭**）。
+- **提交保护**：提交前用**一次性 RSA 公钥**把口令写入隐藏字段 `EncryptedPassword`（公钥由 `~/Security/LoginPasswordKey.ashx` 提供），服务端解密后只在**当前请求内**传递；是否强制加密提交由 `PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired()` 决定，未要求时才接受明文回退。
+- **校验与票据**：口令校验交给 `IUsersDb.SignIn`（强哈希 + 旧 MD5 兼容升级 + 多标识解析：登录名 / 旧名 / 在职员工号 / 邮箱）；成功 → `PortalAuthenticationService.SignIn` 签发**带安全版本**的票据（角色 Cookie 在认证请求阶段按需建立）；**失败提示是通用的**，不暴露用户是否存在、审核状态或摘要比较细节。
+- **审计（与前面几个内容模块不同，如实说明）**：**登录失败会写运营审计**（`SignInFailed`，`Outcome=Failure`，只携带登录标识，**绝不写口令、盐或哈希材料**）；旧凭据升级、口令迭代次数升级也各写一条审计。
+- **编辑页**：**无编辑页**——本模块没有 `EditSignin` 之类的设置页，登录行为由运行期设置与认证服务决定，**不在模块实例上配置**。
+- **当前部署与证据边界（如实登记）**：开发库中 **0 个实例**（`PortalCfg_Modules` 无 `Signin.ascx` 记录），因此**本模块没有运行期证据**，以上均为**源码级说明**；再入条件：在目标环境挂载该模块实例后可采集运行期证据并补齐本节的实测读数。
+
 ### 未在本节逐项展开的模块
 
-`Signin` 模块本次未逐项展开（待补，已登记为文档缺口）。
+无——本节已覆盖 `user-guide` 登记的所有内容模块（含 `HTML` / `QuickLinks` / `XML` / `Signin`）。
 
 ## 管理入口
 

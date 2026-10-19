@@ -113,6 +113,12 @@ $MODULES = @(
     # <en>`C-anp-P31` (`W-anp-P173`) adds the XML/XSL module. Its edit page likewise has **no RequiredFieldValidator**, so the doc
     # section must **not** contain any `**必填**` marker (A4 compares counts).</en></lang>
     [pscustomobject]@{ name = 'XML 模块'; heading = 'XML / XSL 模块（XmlModule）'; view = 'XmlModule.ascx'; edit = 'EditXml.aspx' }
+    # <lang><zh-CN>`C-anp-P31`（`W-anp-P174`）新增登录模块。它**没有编辑页**（无 `EditSignin.aspx`），故 `edit` 记为空串：
+    # A3 / A4 不适用，改由 A5 要求文档写明「无编辑页」。另：开发库中 **0 个实例**，故本模块只有源码级说明。</zh-CN>
+    # <en>`C-anp-P31` (`W-anp-P174`) adds the sign-in module. It has **no edit page** (no `EditSignin.aspx`), so `edit` is an empty
+    # string: A3 / A4 do not apply and A5 instead requires the doc to state 「无编辑页」. Also: **zero instances** in the dev
+    # database, so this module is documented at source level only.</en></lang>
+    [pscustomobject]@{ name = '登录'; heading = '登录（Signin）'; view = 'Signin.ascx'; edit = '' }
 )
 
 $failures = @()
@@ -134,11 +140,16 @@ foreach ($line in [System.IO.File]::ReadAllLines($docPath)) {
 }
 
 foreach ($module in $MODULES) {
-    # <lang><zh-CN>A1：源码文件必须存在。</zh-CN><en>A1: source files must exist.</en></lang>
+    # <lang><zh-CN>A1：源码文件必须存在。`edit` 为空串表示**该模块没有编辑页**（如 `Signin`），此时不检查编辑页；
+    # 但必须在文档中声明（见 A5），否则"没有编辑页"这件事会被当成"漏写字段"而悄悄放过。</zh-CN>
+    # <en>A1: source files must exist. An empty `edit` means the module has **no edit page** (as with `Signin`), in which case the
+    # edit page is not checked; it must instead be declared in the doc (see A5), otherwise "no edit page" would quietly pass as
+    # "fields omitted".</en></lang>
     $viewPath = Join-Path $modulesDir $module.view
-    $editPath = Join-Path $modulesDir $module.edit
+    $hasEdit = -not [string]::IsNullOrWhiteSpace($module.edit)
+    $editPath = if ($hasEdit) { Join-Path $modulesDir $module.edit } else { $null }
     if (-not (Test-Path -LiteralPath $viewPath)) { $failures += "A1 模块显示控件不存在：$($module.name) → $($module.view)。"; continue }
-    if (-not (Test-Path -LiteralPath $editPath)) { $failures += "A1 模块编辑页不存在：$($module.name) → $($module.edit)。"; continue }
+    if ($hasEdit -and -not (Test-Path -LiteralPath $editPath)) { $failures += "A1 模块编辑页不存在：$($module.name) → $($module.edit)。"; continue }
 
     # <lang><zh-CN>A2：文档必须有该模块小节。</zh-CN><en>A2: the doc must have the module section.</en></lang>
     if (-not $sections.ContainsKey($module.heading)) {
@@ -146,6 +157,17 @@ foreach ($module in $MODULES) {
         continue
     }
     $sectionText = $sections[$module.heading]
+
+    # <lang><zh-CN>A5（无编辑页模块）：必须在文档中明确写出「无编辑页」——否则读者会以为文档漏写了字段，
+    # 也会让人误以为该模块可以在实例上配置。</zh-CN>
+    # <en>A5 (modules without an edit page): the doc must state 「无编辑页」 explicitly — otherwise readers assume fields were
+    # omitted, or assume the module can be configured per instance.</en></lang>
+    if (-not $hasEdit) {
+        if ($sectionText -notmatch '无编辑页') {
+            $failures += "A5 无编辑页模块未在文档声明：$($module.name) 的小节必须写明「无编辑页」。"
+        }
+        continue
+    }
 
     # <lang><zh-CN>A3：编辑页每个输入控件 id 必须出现在小节文本中（源码 → 文档，防漏写）。</zh-CN>
     # <en>A3: every input control id in the edit page must appear in the section text (source → doc; catches omissions).</en></lang>
