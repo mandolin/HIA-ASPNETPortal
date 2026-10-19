@@ -256,6 +256,14 @@
       "gate": "Test-PortalAuditRetentionDeclaration.ps1"
     },
     {
+      "id": "target-environment-evidence-map",
+      "name": "L7 目标环境证据清单与一键证据包（环境触发型证据的登记与出证）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明证据清单结构齐备、生成器脚本可执行、判据与阻断项全覆盖、且公开运维文档已点名该工具；不证明任何证据已取得（targetEnv 项当前一律显式跳过，由证据包运行时如实呈现），不证明证据内容满足 L7 判据（需目标环境与人工判读）。",
+      "gate": "Test-PortalTargetEnvironmentEvidenceMap.ps1"
+    },
+    {
       "id": "landing-stats",
       "name": "landing 统计数字（文档子站首页统计与可计算真值一致）",
       "layer": "L0",
@@ -331,11 +339,13 @@
     "Test-PortalRuntimeScreenshotBaseline.ps1",
     "Test-PortalContentModuleDocs.ps1",
     "Test-PortalApprovalBoundaryDocs.ps1",
-    "Test-PortalAuditRetentionDeclaration.ps1"
+    "Test-PortalAuditRetentionDeclaration.ps1",
+    "Test-PortalTargetEnvironmentEvidenceMap.ps1"
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
     { "id": "Invoke-PortalGateInjectionProof.ps1", "basis": "门禁有效性（注入法）验证工具，按需手工执行，不进日常编排。" },
+    { "id": "Invoke-PortalTargetEnvironmentEvidencePack.ps1", "basis": "L7 目标环境证据一键出证工具（W-anp-P155），按台账逐项采集证据；不是门禁（自身正确性由其产物与 Test-PortalTargetEnvironmentEvidenceMap.ps1 的台账核对承载）。" },
     { "id": "Build-PortalSite.ps1", "basis": "站点构建辅助脚本，非质量门禁。" },
     { "id": "Build-PortalDotNetDocPilot.ps1", "basis": ".NET 文档试点生成工具，非质量门禁。" },
     { "id": "Build-PortalJsdocPilot.ps1", "basis": "JSDoc 试点生成工具，非质量门禁。" }

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "note": "L7（M-ANP-TRUSTED-PORTAL）目标环境证据清单（W-anp-P155）：登记每项环境触发型证据的判据归属、可否在本机出证、生成脚本、前置条件与再入条件。mode=local 表示现在就能出证；mode=targetEnv 表示必须拿到目标环境后才能出证（一键证据包会显式跳过并说明原因，不静默通过）；mode=manual 表示人工产物（如业务签收）。本清单由 L0 门禁 Test-PortalTargetEnvironmentEvidenceMap.ps1 看守：条目缺字段、脚本不存在、或里程碑阻断项没有对应条目都会失败。",
+  "milestone": "M-ANP-TRUSTED-PORTAL",
+  "items": [
+    {
+      "id": "secret-leakage-static",
+      "criterion": "T4",
+      "name": "秘密泄漏静态扫描（源码/配置/文档中的口令、连接串、证书形态）",
+      "mode": "local",
+      "generator": { "script": "dev\\scripts\\Test-PortalSecretLeakage.ps1", "args": [] },
+      "prereqs": "无（纯静态扫描）",
+      "expectedArtifacts": [ "secret-leakage.log.md" ],
+      "owner": "项目维护者",
+      "reEntry": "每次出证包时自动执行；规则变更时同步本清单。",
+      "basis": "T4 要求错误页/日志/审计不泄漏敏感信息；静态扫描是本机可验证的一部分。"
+    },
+    {
+      "id": "default-credential-risk",
+      "criterion": "T1",
+      "name": "默认凭据风险核查（默认口令、seed 凭据、文档中的共享口令）",
+      "mode": "local",
+      "generator": { "script": "dev\\scripts\\Test-PortalDefaultCredentialRisk.ps1", "args": [] },
+      "prereqs": "无（静态核查）",
+      "expectedArtifacts": [ "default-credential-risk.log.md" ],
+      "owner": "项目维护者",
+      "reEntry": "每次出证包时自动执行。",
+      "basis": "T1 凭据可信的开发侧组成部分；目标环境改密属 targetEnv 项。"
+    },
+    {
+      "id": "ie-mode-readiness",
+      "criterion": "blocker-1",
+      "name": "IE 模式就绪静态核查（IE9+ 兼容声明与代码约束）",
+      "mode": "local",
+      "generator": { "script": "dev\\scripts\\Test-PortalIeModeReadiness.ps1", "args": [] },
+      "prereqs": "无（静态核查）",
+      "expectedArtifacts": [ "ie-mode-readiness.log.md" ],
+      "owner": "项目维护者",
+      "reEntry": "每次出证包时自动执行；真实 IE9+ 复测见 legacy-ie-retest。",
+      "basis": "阻断项 1 的本机可验证部分；真实目标浏览器复测需目标环境。"
+    },
+    {
+      "id": "target-env-package-dev",
+      "criterion": "T5",
+      "name": "目标环境就绪包（Dev 档：运维就绪 + SQL 版本矩阵静态预检 + 合规基线 + 公开文档）",
+      "mode": "local",
+      "generator": { "script": "dev\\scripts\\New-PortalTargetEnvironmentEvidencePackage.ps1", "args": [ "-Profile", "Dev", "-MatrixPath", "work-zone\\dev\\plans\\works\\W-anp-P14.1-target-environment-matrix.md" ] },
+      "prereqs": "无（只读门禁编排，不连接生产）",
+      "expectedArtifacts": [ "operations-readiness.log.md", "sql-version-matrix.log.md", "compliance-baseline.log.md", "public-documentation.log.md" ],
+      "owner": "项目维护者",
+      "reEntry": "每次出证包时自动执行；Prod 档见 iis-tls-acl-target。",
+      "basis": "既有 P14.1 就绪包的 Dev 档，作为 L7 出证包的本地组成部分复用，不重复造编排。"
+    },
+    {
+      "id": "iis-tls-acl-target",
+      "criterion": "T5",
+      "name": "真实 IIS / HTTPS(TLS) / 应用池 ACL / 外置配置 / 配置转换实证",
+      "mode": "targetEnv",
+      "generator": { "script": "dev\\scripts\\New-PortalTargetEnvironmentEvidencePackage.ps1", "args": [ "-Profile", "Prod", "-MatrixPath", "work-zone\\dev\\plans\\works\\W-anp-P14.1-target-environment-matrix.md" ] },
+      "prereqs": "目标 IIS 环境 + HTTPS 终结点 + 应用池 ACL 权限 + 外置配置目录 + 目标 BaseUrl",
+      "expectedArtifacts": [ "operations-readiness.log.md", "compliance-baseline.log.md", "public-documentation.log.md" ],
+      "owner": "项目维护者",
+      "reEntry": "拿到目标 IIS 环境后，以 -BaseUrl 指向目标终结点重跑本项（同一命令一键出证）。",
+      "basis": "T5 与阻断项 1：真实部署可信必须由目标环境证据支撑，本机无法闭环。"
+    },
+    {
+      "id": "cookie-machinekey-target",
+      "criterion": "blocker-2",
+      "name": "Cookie（Secure/SameSite）与 machineKey 目标环境实证 + ADR 0021 转已接受",
+      "mode": "targetEnv",
+      "generator": { "script": "dev\\scripts\\New-PortalTargetEnvironmentEvidencePackage.ps1", "args": [ "-Profile", "Prod" ] },
+      "prereqs": "目标环境请求/响应头采集 + ADR 0021 决策记录转「已接受」",
+      "expectedArtifacts": [ "cookie-machinekey-observations.md" ],
+      "owner": "项目维护者",
+      "reEntry": "ADR 0021 经目标环境事实支撑并转为已接受后，随 Prod 档证据包一并出证。",
+      "basis": "阻断项 2：ADR 0021 需由目标环境事实支撑 Cookie 与 machineKey 策略。"
+    },
+    {
+      "id": "sql-server-target-instance",
+      "criterion": "blocker-3",
+      "name": "SQL Server 2016/2017/2019 目标实例矩阵实证",
+      "mode": "targetEnv",
+      "generator": { "script": "dev\\scripts\\Test-PortalSqlVersionMatrix.ps1", "args": [] },
+      "prereqs": "可连接的目标 SQL Server 2016/2017/2019 实例与凭据（外置配置，不入库）",
+      "expectedArtifacts": [ "sql-version-matrix.json" ],
+      "owner": "项目维护者",
+      "reEntry": "提供目标实例连接后在目标环境执行同一脚本；本机当前仅静态预检。",
+      "basis": "阻断项 3：需目标实例补证；本机 SQL 快照不构成版本矩阵证据。"
+    },
+    {
+      "id": "enterprise-scan-report",
+      "criterion": "blocker-3",
+      "name": "企业安全扫描工具报告（漏洞/配置基线）",
+      "mode": "targetEnv",
+      "generator": { "script": "dev\\scripts\\New-PortalEnterpriseScanBaseline.ps1", "args": [ "-Profile", "Scan" ] },
+      "prereqs": "企业扫描工具许可与扫描目标（目标环境终结点）",
+      "expectedArtifacts": [ "enterprise-scan-baseline.md" ],
+      "owner": "项目维护者",
+      "reEntry": "取得扫描工具与目标终结点后执行；报告结论须人工判读。",
+      "basis": "阻断项 3：企业扫描报告属环境触发型证据。"
+    },
+    {
+      "id": "legacy-ie-retest",
+      "criterion": "blocker-1",
+      "name": "IE9+ 目标浏览器复测包",
+      "mode": "targetEnv",
+      "generator": { "script": "dev\\scripts\\New-PortalLegacyIeTestPackage.ps1", "args": [] },
+      "prereqs": "目标环境 BaseUrl + 可用管理员账号（不写入仓库）",
+      "expectedArtifacts": [ "legacy-ie-test-package.zip" ],
+      "owner": "项目维护者",
+      "reEntry": "目标环境可达后以 -BaseUrl 生成复测包并交付执行。",
+      "basis": "阻断项 1：真实旧浏览器生产证据需目标环境。"
+    },
+    {
+      "id": "business-signoff",
+      "criterion": "L8-handoff",
+      "name": "业务签收记录（业务方对承载能力的正式确认）",
+      "mode": "manual",
+      "generator": null,
+      "prereqs": "业务方 + 目标环境演示",
+      "expectedArtifacts": [ "business-signoff-record.md" ],
+      "owner": "项目维护者",
+      "reEntry": "业务方在目标环境完成演示后人工出具签收记录并归档。",
+      "basis": "周期边界明确：业务签收属环境触发型，本周期只登记不代办。"
+    }
+  ]
+}

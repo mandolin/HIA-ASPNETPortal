@@ -133,6 +133,20 @@ dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Test
 4. SQL Server 版本、兼容级别、备份任务、恢复演练和最小权限账号。
 5. 磁盘空间、日志保留、监控、告警和企业审计平台对接。
 
+## L7 目标环境证据（一键证据包）
+
+安全可信门户里程碑 `M-ANP-TRUSTED-PORTAL`（L7）所需的环境触发型证据，已登记成机器可核对的清单，并可用**一条命令**出证：
+
+```powershell
+& 'dev\scripts\Invoke-PortalTargetEnvironmentEvidencePack.ps1'
+```
+
+- **清单**：`dev/target-environment-evidence.json`——逐项登记判据归属（T1–T7 与阻断项）、能否在本机出证、生成脚本、前置条件、预期产物与再入条件。
+- **三种模式**：`local`（立即出证）、`targetEnv`（需目标环境，**显式跳过并说明缺失的前置条件**，绝不静默通过）、`manual`（人工产物，如业务签收）。
+- **目标环境就绪后**：同一条命令加上 `-BaseUrl <目标终结点>` 即可把环境项一并出证；产物为带时间戳的证据目录（`manifest.json` + 各步骤日志 + `summary.md`）。
+- **跳过不是通过**：摘要会逐条列出"尚未取得目标环境证据"的项；当前未满足项与 `M-ANP-TRUSTED-PORTAL` 的阻断项一致（真实 IIS/TLS/ACL、SQL Server 2016/2017/2019 目标实例、企业扫描报告、IE9+ 复测、ADR 0021 目标环境实证、业务签收）。
+- 清单本身由 L0 门禁 `Test-PortalTargetEnvironmentEvidenceMap.ps1` 看守：条目缺字段、脚本不存在、或判据/阻断项漏登记都会失败。
+
 ## 证据包解释
 
 `New-PortalOperationsEvidencePackage.ps1` 会把只读脚本输出编排成证据包。证据包中的 `Pending` 表示需要目标环境或人工材料补齐，不等于失败；`Fail` 表示当前仓库或公开文档存在需要先处理的问题。

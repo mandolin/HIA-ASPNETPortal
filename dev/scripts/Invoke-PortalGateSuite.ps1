@@ -462,6 +462,32 @@ $gateLayers = [ordered]@{
         #   replaced); after fixing them, all 3 were caught.</en>
         # </lang>
         @{ File = 'Test-PortalAuditRetentionDeclaration.ps1';  Runner = 'ps1'; Kind = '审计留存登记'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P28`（`W-anp-P155`）新增：**L7 目标环境证据清单**门禁（L0）。验收判据 V5 要求
+        #   「拿到目标环境后，一条命令产出 L7 所需全部证据」。本包交付两件东西：
+        #   ① 台账 `dev/target-environment-evidence.json`——逐项登记 `M-ANP-TRUSTED-PORTAL`（L7）判据与阻断项
+        #   对应的环境触发型证据：mode=local（现在就能出证）/ targetEnv（需目标环境）/ manual（人工产物）；
+        #   ② 一键证据包 `Invoke-PortalTargetEnvironmentEvidencePack.ps1`——按台账逐项出证，环境项**显式跳过并
+        #   说明缺失前置**（P139 口径，绝不静默通过），目标就绪后同一条命令（加 -BaseUrl）即自动补齐。
+        #   本门禁保证台账不漏、不假、不腐：A1 字段齐备且 id 唯一、mode 合法；A2 生成器脚本必须存在
+        #   （不得登记跑不起来的命令）；A3 T1/T4/T5/blocker-1/2/3/L8-handoff 全覆盖（漏登记=环境到了也出不全证）；
+        #   A4 模式语义自洽（local 必须有 generator、targetEnv 必须写 prereqs）；A5 公开运维文档必须点名该工具
+        #   （有工具没人知道 = 没交付）。实测：证据包当前 4 项出证 / 6 项显式跳过 / 1 项待人工，exit 0。</zh-CN>
+        #   <en>`C-anp-P28` (`W-anp-P155`) addition: the **L7 target-environment evidence registry** gate (L0). Acceptance
+        #   criterion V5 requires that "once the target environment is available, one command produces all evidence required by
+        #   L7". This work item delivers two things: ① the registry `dev/target-environment-evidence.json`, which registers the
+        #   environment-triggered evidence for each `M-ANP-TRUSTED-PORTAL` (L7) criterion and blocker with mode=local (collectable
+        #   now) / targetEnv (needs the target environment) / manual (human artefact); ② the one-command pack
+        #   `Invoke-PortalTargetEnvironmentEvidencePack.ps1`, which produces evidence item by item, **skipping environment items
+        #   explicitly with the missing prerequisite stated** (P139 convention — never a silent pass); once the environment exists
+        #   the same command (plus -BaseUrl) fills them in. This gate keeps the registry complete, truthful and unrotted: A1 fields
+        #   present, ids unique, mode valid; A2 generator scripts must exist (a command that cannot run must not be registered);
+        #   A3 full coverage of T1/T4/T5/blocker-1/2/3/L8-handoff (an unregistered item means "the environment arrives but the
+        #   evidence is incomplete"); A4 mode semantics self-consistent (local requires a generator, targetEnv must state prereqs);
+        #   A5 the public operations doc must name the tool (a tool nobody knows about is not delivered). Measured: the pack currently
+        #   collects 4 items, skips 6 explicitly, has 1 manual item, exit 0.</en>
+        # </lang>
+        @{ File = 'Test-PortalTargetEnvironmentEvidenceMap.ps1'; Runner = 'ps1'; Kind = 'L7 证据清单'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
