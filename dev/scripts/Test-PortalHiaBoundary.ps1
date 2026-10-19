@@ -16,6 +16,10 @@
   <en>Build configuration for the proof project, normally Debug or Release.</en>
   <zh-CN>proof 项目的构建配置，通常为 Debug 或 Release。</zh-CN>
 </lang>
+
+  证明边界：只证明 HIA 边界 proof 项目能构建并运行通过；不证明业务模块运行期行为，不覆盖 proof 之外的边界。
+
+  Proof boundary: Proof boundary: proves only that the HIA boundary proof project builds and runs; it does not prove business-module runtime behaviour and covers no boundary outside the proof.
 #>
 [CmdletBinding()]
 param(

@@ -7,6 +7,10 @@
       <zh-CN>本脚本只做静态门禁，确认 P12.4 拆分后的业务权限键、Admin 兼容 seed、页面授权入口、待办分派键和关键运营审计调用保持一致。</zh-CN>
       <en>This script performs static checks only, ensuring P12.4 fine-grained business permission keys, Admin compatibility seeds, page authorization gates, work-item assignment, and key operation-audit calls stay aligned.</en>
     </lang>
+
+  证明边界：只证明 P12.4 拆分后的业务权限键、Admin 兼容 seed、页面授权入口、待办分派键与关键运营审计调用在源码中**存在且一致**（静态断言）；不证明运行期授权判定正确（由运行期门禁承载），不执行页面授权或数据库操作。
+
+  Proof boundary: Proof boundary: proves only that the business permission keys, Admin-compatibility seed, page authorisation entries, work-item assignment keys and key operational audit calls **exist and agree in source** (static assertions); it does not prove runtime authorisation decisions (runtime gates do) and performs no page authorisation or database operations.
 #>
 [CmdletBinding()]
 param(

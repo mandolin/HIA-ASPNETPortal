@@ -7,6 +7,10 @@
       <zh-CN>本脚本只做静态门禁，确认员工号登录标识、用户资料字段、员工主数据和账号员工绑定的关键契约仍存在。</zh-CN>
       <en>This script performs static checks only, ensuring the employee-code sign-in identifier, user-profile fields, employee master data, and user/employee binding contracts remain present.</en>
     </lang>
+
+  证明边界：只证明员工号登录标识、用户资料字段、员工主数据与账号员工绑定的关键契约锚点**在源码文本中存在**（序数静态断言）；不证明运行期登录行为正确（由运行期门禁承载），不解析或执行 C#/SQL，不校验数据库实际数据。
+
+  Proof boundary: Proof boundary: proves only that the key contract anchors (employee-number login identity, profile fields, employee master data, account binding) **exist in source text** (ordinal static assertions); it does not prove runtime login behaviour (runtime gates do), does not parse or execute C#/SQL, and does not validate actual database data.
 #>
 [CmdletBinding()]
 param(

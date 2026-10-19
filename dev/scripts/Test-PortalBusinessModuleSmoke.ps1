@@ -52,6 +52,10 @@
   <en>Skips the optional SQL migration file check.</en>
   <zh-CN>跳过可选 SQL 迁移文件检查。</zh-CN>
 </lang>
+
+  证明边界：只证明受信任业务模块包满足**静态** smoke 契约；不证明模块在运行期可用（由运行期证据与模块门禁承载），不覆盖未登记为"受信任"的模块包。
+
+  Proof boundary: Proof boundary: proves only that trusted business module packages satisfy the **static** smoke contract; it does not prove the modules are usable at runtime (runtime evidence and module gates do) and does not cover packages not registered as trusted.
 #>
 [CmdletBinding()]
 param(

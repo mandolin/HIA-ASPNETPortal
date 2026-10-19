@@ -28,6 +28,10 @@
   <en>Keeps an existing proof database instead of deleting it before the run.</en>
   <zh-CN>运行前保留已有 proof 数据库，而不是先删除它。</zh-CN>
 </lang>
+
+  证明边界：只证明 SQLite 数据 provider proof 项目能构建并运行通过；不证明生产 SQL Server 路径可用（由 SQL 兼容性与版本矩阵承载），不覆盖其它 provider。
+
+  Proof boundary: Proof boundary: proves only that the SQLite data-provider proof project builds and runs; it does not prove the production SQL Server path works (SQL compatibility and version matrix do) and covers no other provider.
 #>
 [CmdletBinding()]
 param(

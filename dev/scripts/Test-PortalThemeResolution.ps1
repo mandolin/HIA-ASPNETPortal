@@ -22,6 +22,10 @@
   <en>IIS Express port used by the isolated theme proof site.</en>
   <zh-CN>隔离主题 proof 站点使用的 IIS Express 端口。</zh-CN>
 </lang>
+
+  证明边界：只证明在**测试数据库配置**下主题解析隔离 proof 通过；不证明视觉回归的机器判据（由 Default 主题视觉基线门禁承载），不连接生产库。
+
+  Proof boundary: Proof boundary: proves only that the isolated theme-resolution proof passes under the **test database configuration**; it does not prove the machine criterion for visual regression (the Default theme visual baseline gate does) and connects to no production database.
 #>
 [CmdletBinding()]
 param(

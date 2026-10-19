@@ -36,6 +36,10 @@
 //   Output: `temp\p74\ui-verify\*.png` and `verify-summary.json`; exits with code 1 when any assertion fails.
 //   </en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻、当前数据集**下后台列表页渲染出预期结构并留档截图；不证明跨机器像素一致（字体/渲染差异），数据量随夹具变化处只采集不断言（null 语义），不证明可访问性与性能。
+//
+// Proof boundary: proves only that, **at collection time with the current dataset**, the admin list pages render the expected structure and are screenshotted; it does not prove cross-machine pixel equality (font/rendering differences), only collects without asserting where the dataset depends on fixtures (null semantics), and does not prove accessibility or performance.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

@@ -41,6 +41,10 @@
       Low-sensitivity boundary: no secrets are written, Web.config is not modified, no external scanner is executed; HTTP is GET-only with no login and no site changes, and connection strings or credentials are never echoed.
     </en>
   </lang>
+
+  证明边界：只证明响应头、安全相关配置、凭据风险标记与旧兼容警告等**静态事实**及可选 HTTP 观测项符合基线；不登录、不改站点、不改写 Web.config、不写密钥、不跑外部扫描工具；HTTP 观测不等于渗透测试。
+
+  Proof boundary: Proof boundary: proves only that **static facts** such as response headers, security configuration, credential-risk markers and legacy compatibility warnings, plus optional HTTP observations, match the baseline; it does not log in, modify the site, rewrite Web.config, write secrets or run external scanners, and HTTP observation is not a penetration test.
 #>
 [CmdletBinding()]
 param(

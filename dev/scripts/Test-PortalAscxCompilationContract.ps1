@@ -17,6 +17,10 @@
     **Verification**: exit code 0 passes, 1 means violations; each offending file and rule number is listed.
     **Low-sensitivity boundary**: only source and project files are read — no connection strings, credentials or business data, and nothing is rewritten.</en>
   </lang>
+
+  证明边界：只证明 ASCX 标记满足已登记的**静态**契约（把运行期问题前移）；不证明 ASCX 在运行期能成功编译加载（由运行期证据与模块门禁承载）。对无模块级唯一 class 的模块只能退化断言"未落错误页"，且会明确提示该退化。
+
+  Proof boundary: Proof boundary: proves only that ASCX markup satisfies the registered **static** contract (pulling runtime problems earlier); it does not prove ASCX compiles and loads at runtime (runtime evidence and module gates do). For modules without a module-level unique class the assertion degrades to "did not land on an error page", and the degradation is reported explicitly.
 #>
 
 # W87 ASCX 编译契约静态门禁：把"运行期才暴露的标记层问题"前移到静态检查。

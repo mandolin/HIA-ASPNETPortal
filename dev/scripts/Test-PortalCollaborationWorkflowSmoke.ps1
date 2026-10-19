@@ -7,6 +7,10 @@
       <zh-CN>本脚本执行 P23.6 静态门禁，核对事件时间线扩展、状态机、服务端身份复核、评论可见范围、超期只读投影、页面审计及迁移登记。它不读取连接串，也不连接数据库。</zh-CN>
       <en>This script performs P23.6 static gates for the event-timeline extension, state machine, server-side identity recheck, comment visibility, read-only overdue projection, page audits, and migration registration. It reads no connection string and never connects to a database.</en>
     </lang>
+
+  证明边界：只证明事件时间线扩展、状态机、服务端身份复核、评论可见范围、超期只读投影、页面审计与迁移登记的**源码锚点存在**；不证明迁移已执行或数据已迁移，不连接数据库、不读取连接串，不证明状态机运行期行为。
+
+  Proof boundary: Proof boundary: proves only that the **source anchors** exist for timeline extension, state machine, server-side identity recheck, comment visibility, overdue read-only projection, page audit and migration registration; it does not prove migrations ran or data moved, connects to no database and reads no connection string, and does not prove runtime state-machine behaviour.
 #>
 [CmdletBinding()]
 param(

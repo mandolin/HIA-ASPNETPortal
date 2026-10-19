@@ -15,6 +15,10 @@
     **Verification**: exit code 0 passes, 1 means blocking-level violations; advisory issues are summarised without blocking.
     **Low-sensitivity boundary**: only plan document text is read — no connection strings, credentials or business data.</en>
   </lang>
+
+  证明边界：只证明《细节级对标规范》§七 的 7 条检查表项**在本仓文本层面**满足；不证明规范本身的正确性或完整性，不覆盖检查表之外的对标项，不证明运行期表现。
+
+  Proof boundary: Proof boundary: proves only that the seven checklist items of §7 of the benchmark spec hold **at the repository text level**; it does not prove the spec itself is correct or complete, does not cover benchmark items outside the checklist, and does not prove runtime behaviour.
 #>
 
 # W88 对标检查表门禁：把规范 §七 的 7 条检查表固化为可重复运行的检查。

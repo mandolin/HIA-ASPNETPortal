@@ -25,6 +25,10 @@
     <zh-CN>不切换模块档位，供由 CI 自行管理档位的场景使用。</zh-CN>
     <en>Does not switch module profiles, for scenarios where CI manages the profile itself.</en>
   </lang>
+
+  证明边界：只证明**当前数据库注册事实**下的启用模块能被加载并通过已登记断言；不证明未启用/未注册模块（不在发现集合内），不证明模块业务语义正确，不证明跨档位配置差异（按传入档位），证据需人工判读（不自动判合格）。
+
+  Proof boundary: Proof boundary: proves only that the enabled modules discovered from the **current database registration facts** load and pass the registered assertions; it does not cover disabled/unregistered modules (outside the discovery set), does not prove business semantics, does not prove cross-profile configuration differences (per the given profile), and its evidence needs human reading (it is not auto-graded).
 #>
 
 # W83 P83.3 发布前门禁编排层：自动发现全部启用模块，逐档位验证其运行期可加载。

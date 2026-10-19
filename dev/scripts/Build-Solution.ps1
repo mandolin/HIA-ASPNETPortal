@@ -22,6 +22,10 @@
   <en>MSBuild platform value. The legacy solution normally uses Any CPU.</en>
   <zh-CN>MSBuild 平台值。旧解决方案通常使用 Any CPU。</zh-CN>
 </lang>
+
+  证明边界：只证明解决方案能被 msbuild 成功构建（按传入配置/平台）；不证明构建产物可运行或行为正确（由 L2 运行期门禁与冒烟承载），不校验 ASCX 标记（Web Site 项目不进编译），不发布、不部署、不改 IIS。
+
+  Proof boundary: Proof boundary: proves only that the solution builds with msbuild (per the given configuration/platform); it does not prove the output runs or behaves correctly (L2 runtime gates and smoke cover that), does not validate ASCX markup (a Web Site project does not compile it), and does not publish, deploy or touch IIS.
 #>
 [CmdletBinding()]
 param(

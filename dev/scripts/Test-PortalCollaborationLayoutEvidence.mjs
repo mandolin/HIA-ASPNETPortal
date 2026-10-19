@@ -54,6 +54,10 @@
 //   Output: `work-zone\dev\evidence\p79.4\<timestamp>-Dev\*.png` and `layout-summary.json`; exits with code 1 when any assertion fails.
 //   </en>
 // </lang>
+//
+// 证明边界：只证明**采集时刻**协同事项后台的列结构与宽度表达符合预期（并留档 100% / 200% 截图）；不证明跨浏览器一致（仅本机 Chromium），不覆盖其它页面布局，不证明全部响应式断点。
+//
+// Proof boundary: proves only that, **at collection time**, the collaboration admin column structure and width expressions match expectations (with 100% / 200% screenshots archived); it does not prove cross-browser consistency (local Chromium only), does not cover other page layouts, and does not prove every responsive breakpoint.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

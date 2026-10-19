@@ -28,6 +28,10 @@
   <en>Temporary cache duration used for the module instance under test.</en>
   <zh-CN>测试模块实例使用的临时缓存秒数。</zh-CN>
 </lang>
+
+  证明边界：只证明在**测试数据库配置**下模块缓存隔离 proof 通过；不证明生产配置下的行为，不连接生产库。
+
+  Proof boundary: Proof boundary: proves only that the module-cache isolation proof passes under the **test database configuration**; it does not prove behaviour under the production configuration and connects to no production database.
 #>
 [CmdletBinding()]
 param(

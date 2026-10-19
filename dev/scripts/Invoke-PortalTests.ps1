@@ -34,6 +34,10 @@
   <en>Skips solution build and runs the existing test assembly.</en>
   <zh-CN>跳过解决方案构建并运行现有测试程序集。</zh-CN>
 </lang>
+
+  证明边界：只证明指定测试程序集能被发现并执行、且结果按退出码返回；不证明覆盖充分（覆盖率由其它门禁承载），不证明未接入该运行器的测试被执行，不构建解决方案（构建由 Build-Solution.ps1 承载）。
+
+  Proof boundary: Proof boundary: proves only that the given test assemblies are discovered and executed and that the result is returned as an exit code; it does not prove coverage is sufficient (other gates do), does not prove tests outside this runner were executed, and does not build the solution (Build-Solution.ps1 does).
 #>
 [CmdletBinding()]
 param(
