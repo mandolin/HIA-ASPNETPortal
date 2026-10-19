@@ -104,9 +104,24 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
   - `ViewOrderField` 显示顺序（**必填**，另有数值比较校验 `VerifyViewOrder`）
 - 新建入口：「Add Link」。当前部署：**TabId=1004 测试页「测试链接模块」**——即当前仅部署在测试页，正式页签暂未使用。
 
+### HTML 文本模块（HtmlModule）
+
+- **用途**：在页签上渲染一段由受信任管理员维护的**原始 HTML**（欢迎语、说明块等）。
+- **显示**：`DesktopModules/HtmlModule.ascx`——按 `ModuleId` 读取已保存内容，`HtmlDecode` 后以 `LiteralControl` 原样输出；**记录缺失或内容为空时不输出任何内容**（普通页面不暴露配置状态）。
+- **编辑页** `DesktopModules/EditHtml.aspx`（标记层 `ValidateRequest="false"`）：
+  - `DesktopText` 桌面端原始 HTML（可选）
+  - `MobileSummary` 移动端摘要（可选）
+  - `MobileDetails` 移动端详情（可选）
+- **必填项**：该编辑页**没有任何 `RequiredFieldValidator`**——三个字段均可留空保存。
+- **存储**：`HtmlTexts` 按 `ModuleId` 唯一定位（`UpdateHtmlText`）：首次保存创建记录，之后只替换三个内容字段；入库前统一 HTML 编码、显示时解码（历史兼容契约）。
+- **权限**：编辑需**同时**具备模块编辑权限与更窄的「原始 HTML」权限（`PortalPermissionKeys.ContentRawHtmlEdit`）；`Mid` 来自查询串或回发的未验证集合，必须为正整数，否则跳转编辑拒绝页。
+- **审计**：本保存路径**不写运营审计**（同族旧内容编辑页亦无）。审计覆盖集中在业务申请与关键运营动作，见「审计与留存」。
+- **安全边界（如实说明）**：这是"展示时 HTML 编码"规则的**明确例外**——渲染时**不做 HTML 白名单净化**，因此只能由受信任管理员维护，**不得用于承载普通用户输入**；`ValidateRequest="false"` 仅满足旧 Web Forms 回发兼容，**不构成安全边界**。
+- **当前部署**（开发库实测）：**12 个实例**——首页 2、员工信息、产品信息、讨论区、关于门户 7，以及 `G1P2-Test-A` 测试页。
+
 ### 未在本节逐项展开的模块
 
-`HTML`、`快速链接（QuickLinks）`、`XML` 三个模块本次未逐项展开（待补，已登记为文档缺口）。
+`快速链接（QuickLinks）`、`XML`、`Signin` 三个模块本次未逐项展开（待补，已登记为文档缺口）。
 
 ## 管理入口
 

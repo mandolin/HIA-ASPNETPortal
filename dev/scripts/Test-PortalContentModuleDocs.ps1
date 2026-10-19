@@ -98,6 +98,11 @@ $MODULES = @(
     [pscustomobject]@{ name = '事件';   heading = '事件（Events）';           view = 'Events.ascx';         edit = 'EditEvents.aspx' },
     [pscustomobject]@{ name = '图片';   heading = '图片（ImageModule）';      view = 'ImageModule.ascx';    edit = 'EditImage.aspx' },
     [pscustomobject]@{ name = '链接';   heading = '链接（Links）';            view = 'Links.ascx';          edit = 'EditLinks.aspx' }
+    # <lang><zh-CN>`C-anp-P31`（`W-anp-P171`）新增 HTML 文本模块。注意该编辑页**没有任何 RequiredFieldValidator**，
+    # 故文档小节中**不得**出现 `**必填**` 标注（A4 会比对数量）。</zh-CN>
+    # <en>`C-anp-P31` (`W-anp-P171`) adds the HTML text module. Note that its edit page has **no RequiredFieldValidator**, so the
+    # doc section must **not** contain any `**必填**` marker (A4 compares counts).</en></lang>
+    [pscustomobject]@{ name = 'HTML 文本'; heading = 'HTML 文本模块（HtmlModule）'; view = 'HtmlModule.ascx'; edit = 'EditHtml.aspx' }
 )
 
 $failures = @()
