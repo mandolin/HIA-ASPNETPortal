@@ -272,6 +272,14 @@
       "gate": "Test-PortalL7CriteriaRegistry.ps1"
     },
     {
+      "id": "plan-ledger-consistency",
+      "name": "计划账本一致性（状态块 / 状态总表 / 编号登记册三处一致 + 收口文档存在）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明三处账本的状态标记一致、已收口/已裁定周期的文档存在、且「下一步唯一动作」未指向已收口周期的工作包；不证明状态所反映的交付内容真实完成，不检查工作包内部质量，不核对证据目录完整性。",
+      "gate": "Test-PortalPlanLedgerConsistency.ps1"
+    },
+    {
       "id": "landing-stats",
       "name": "landing 统计数字（文档子站首页统计与可计算真值一致）",
       "layer": "L0",
@@ -349,7 +357,8 @@
     "Test-PortalApprovalBoundaryDocs.ps1",
     "Test-PortalAuditRetentionDeclaration.ps1",
     "Test-PortalTargetEnvironmentEvidenceMap.ps1",
-    "Test-PortalL7CriteriaRegistry.ps1"
+    "Test-PortalL7CriteriaRegistry.ps1",
+    "Test-PortalPlanLedgerConsistency.ps1"
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },

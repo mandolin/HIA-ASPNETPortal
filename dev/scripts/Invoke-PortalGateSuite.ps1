@@ -509,6 +509,32 @@ $gateLayers = [ordered]@{
         #   Measured: 7 criteria (6 met-dev-side / 1 needs-target-env), 6 script-verified and 1 manually verified.</en>
         # </lang>
         @{ File = 'Test-PortalL7CriteriaRegistry.ps1';       Runner = 'ps1'; Kind = 'L7 判据表'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P30`（`W-anp-P165`）新增：**计划账本一致性**门禁（L0）。起因是 2026-10-20 跨周期盘点发现
+        #   **账本漂移 3 处、且没有任何门禁能发现**：`cycle-status.md` 第五节的"当前线 / 下一步"长期停在
+        #   `C-anp-P26` / `W-anp-P139`（而 P26–P29 均已收口）、第三节跳跃记录停在 2026-10-15、
+        #   `works-index.md` 把 P26/P27/P28 标"待开始"、P29 标"进行中"。编号门禁一路通过，因为它只核对
+        #   "编号不冲突 / 不悬空 / 不外泄"，**不核对周期状态与实际是否一致**。
+        #   修法：在 `cycle-status.md` 引入机器可读状态块（`LEDGER-STATE-BEGIN/END` 包 JSON）作唯一事实源，
+        #   本门禁交叉核对三处账本：A1 状态块存在且可解析、与状态总表两边集合一致；A2 状态总表标记 == 状态块；
+        #   A3 编号登记册标记 == 状态块；A4 closed 必须有收口文档、disposition 必须有裁定文档；
+        #   A5 「下一步唯一动作」引用的 W 编号不得属于已收口周期（这正是原来那处漂移的形态）。
+        #   A5 只扫「下一步唯一动作」这一行——首跑时整节扫描误报了我说明文字里的旧编号，已收窄。</zh-CN>
+        #   <en>`C-anp-P30` (`W-anp-P165`) addition: the **plan ledger consistency** gate (L0). It originates from the 2026-10-20
+        #   cross-cycle audit, which found **three ledger drifts that no gate could catch**: section 5 of `cycle-status.md` had
+        #   long been stuck on `C-anp-P26` / `W-anp-P139` while P26–P29 were all closed, the jump log stopped at 2026-10-15, and
+        #   `works-index.md` marked P26/P27/P28 as "not started" and P29 as "in progress". The numbering gate passed throughout,
+        #   because it only checks "no conflicts / no dangling / no public leak" and **never checks whether cycle status matches
+        #   reality**.
+        #   Fix: a machine-readable state block (`LEDGER-STATE-BEGIN/END` wrapping JSON) in `cycle-status.md` becomes the single
+        #   source of truth, and this gate cross-checks the three ledgers: A1 the block exists, parses, and its cycle set matches
+        #   the status table; A2 status-table markers equal the block; A3 numbering-register markers equal the block; A4 a `closed`
+        #   cycle must have a closeout document and a `disposition` cycle a disposition document; A5 any W number referenced by the
+        #   "next single action" must not belong to a closed cycle (exactly the shape of the original drift).
+        #   A5 scans only the "next single action" line — a first-run whole-section scan false-positived on an old number inside my
+        #   own explanatory note, so it was narrowed.</en>
+        # </lang>
+        @{ File = 'Test-PortalPlanLedgerConsistency.ps1';    Runner = 'ps1'; Kind = '计划账本一致性'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
