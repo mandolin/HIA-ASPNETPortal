@@ -28,6 +28,16 @@
 
 **当前状态**：本策略为**定义**；自动归档与到期清理**尚未实现**。在自动清理实现并有运维确认前，**不得删除任何审计数据**（避免无依据删数据导致合规缺口）。
 
+### 3.1 已登记的例外（唯一，default-deny）
+
+仓库内当前**只有一处**对审计表的删除，且已登记为例外：
+
+| 位置 | 性质 | 依据 |
+| --- | --- | --- |
+| `dev/scripts/New-PortalP19BrowserSmokeFixture.ps1`（冒烟 fixture 清理段） | 删除该 fixture **自己创建**的审计行（`TargetType = 'BusinessApplication'` 且 `TargetId` 属于 fixture 业务单、`ActorUserName` 属于 fixture 用户） | fixture 运行在**可丢弃开发库**上，属"自产自销"清理，不触碰任何既有审计数据 |
+
+规则：**新增任何针对 `PortalCfg_OperationAudits` 的删除点，必须先在本文件登记依据**，否则 L0 门禁 `Test-PortalAuditRetentionDeclaration.ps1` 失败（default-deny）。该门禁同时核对：产品源码 `src/` 内不得出现审计表删除语句、本文件必须保留「尚未实现 + 不得删除」的状态声明。
+
 ## 四、处置方式
 
 1. **归档**：超出在线窗口的记录导出为**只读归档**（不可修改），归档文件随备份策略保留。

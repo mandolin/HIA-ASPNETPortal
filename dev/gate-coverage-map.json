@@ -248,6 +248,14 @@
       "gate": "Test-PortalApprovalBoundaryDocs.ps1"
     },
     {
+      "id": "audit-retention-declaration",
+      "name": "审计留存处置登记（未实现 + 不得删除审计数据，删除点全部登记）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明策略文档保留了「尚未实现 + 不得删除」的状态声明、产品源码无审计表删除语句、且仓库内其余删除点全部登记在豁免清单；不证明自动归档 / 到期清理已实现（明确未实现，属环境触发型），不证明保留期天数被自动执行，不证明归档数据完整性与备份可用性（属运维与备份策略范围）。",
+      "gate": "Test-PortalAuditRetentionDeclaration.ps1"
+    },
+    {
       "id": "landing-stats",
       "name": "landing 统计数字（文档子站首页统计与可计算真值一致）",
       "layer": "L0",
@@ -322,7 +330,8 @@
     "Test-PortalDefaultThemeVisualBaseline.mjs",
     "Test-PortalRuntimeScreenshotBaseline.ps1",
     "Test-PortalContentModuleDocs.ps1",
-    "Test-PortalApprovalBoundaryDocs.ps1"
+    "Test-PortalApprovalBoundaryDocs.ps1",
+    "Test-PortalAuditRetentionDeclaration.ps1"
   ],
   "tooling": [
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },

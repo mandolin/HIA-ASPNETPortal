@@ -434,6 +434,34 @@ $gateLayers = [ordered]@{
         #   matching that missed `ApproveRequest`), now fixed to an exact heading match and substring matching.</en>
         # </lang>
         @{ File = 'Test-PortalApprovalBoundaryDocs.ps1';      Runner = 'ps1'; Kind = '审批流转边界'; Args = @() }
+        # <lang>
+        #   <zh-CN>`C-anp-P28`（`W-anp-P154`）新增：**审计留存处置登记**门禁（L0）。验收判据 V4 要求审计留存二选一：
+        #   实现自动归档 / 到期清理，**或**正式登记「未实现 + 不得删除审计数据」。本包选后者（实现需运维确认与
+        #   备份策略，属环境触发型），但把登记变成**机器可核对**的——否则"不得删除"只是一句没人验证的散文。
+        #   断言：A1 策略文档必须保留「尚未实现」+「不得删除」状态声明与「3.1 已登记的例外」小节；
+        #   A2 产品源码 `src/` 不得出现针对 `PortalCfg_OperationAudits` 的 DELETE / TRUNCATE（**无豁免**）；
+        #   A3 仓库内其余删除点必须在显式豁免清单中并附依据（default-deny），清单漂移同样失败；
+        #   A4 策略文档点名要看的门禁必须存在。
+        #   实测发现仓库内确有一处审计表删除（`New-PortalP19BrowserSmokeFixture.ps1` 的 fixture 自产自销清理：
+        #   只删该 fixture 自己创建的审计行、跑在可丢弃开发库），已正式登记为唯一例外。
+        #   注入法首轮曾三路"全部通过"，诊断后确认是**注入脚本自身三处缺陷**（PowerShell 参数模式丢弃拼接表达式、
+        #   rogue 文件写在扫描范围外、短语有两处只改一处），修正后 3/3 抓获。</zh-CN>
+        #   <en>`C-anp-P28` (`W-anp-P154`) addition: the **audit-retention declaration** gate (L0). Acceptance criterion V4 requires
+        #   audit retention to land one of two ways: implement automatic archiving / expiry cleanup, **or** formally register
+        #   "not implemented + audit data must not be deleted". This work item chose the latter (implementation needs operational
+        #   sign-off and a backup strategy, i.e. environment-triggered) but makes the registration machine-checkable — otherwise
+        #   "must not delete" is prose nobody verifies. Assertions: A1 the policy doc must keep its "not yet implemented" +
+        #   "must not delete" declaration and the "3.1 registered exceptions" section; A2 product source `src/` must contain no
+        #   DELETE / TRUNCATE against `PortalCfg_OperationAudits` (**no exemptions**); A3 every other delete point must be in the
+        #   explicit allowlist with a basis (default-deny), and allowlist drift also fails; A4 the gate the policy doc names must
+        #   exist. Measurement found exactly one audit-table delete in the repository (the self-cleaning fixture
+        #   `New-PortalP19BrowserSmokeFixture.ps1`: it deletes only the audit rows the fixture itself created and runs on a
+        #   disposable dev database), now formally registered as the sole exception. A first injection round "passed" all three
+        #   cases; diagnosis showed three defects in the injection script itself (PowerShell argument mode dropping the
+        #   concatenation expression, the rogue file written outside the scan scope, and only one of two phrase occurrences
+        #   replaced); after fixing them, all 3 were caught.</en>
+        # </lang>
+        @{ File = 'Test-PortalAuditRetentionDeclaration.ps1';  Runner = 'ps1'; Kind = '审计留存登记'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
