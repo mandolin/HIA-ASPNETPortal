@@ -146,6 +146,11 @@ $INTENTIONALLY_UNPUBLISHED = @{
     'modules\discussion.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
     'modules\document.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
     'modules\events.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\image-module.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\links.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\quick-links.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\html-module.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\xml-module.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
 }
 
 $sitePages = @()

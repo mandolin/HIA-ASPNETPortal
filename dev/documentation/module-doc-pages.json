@@ -70,7 +70,7 @@
       "en": "ImageModule",
       "slug": "image-module",
       "batch": 2,
-      "status": "pending",
+      "status": "delivered",
       "view": "ImageModule.ascx",
       "edit": "EditImage.aspx",
       "boundary": []
@@ -80,7 +80,7 @@
       "en": "Links",
       "slug": "links",
       "batch": 2,
-      "status": "pending",
+      "status": "delivered",
       "view": "Links.ascx",
       "edit": "EditLinks.aspx",
       "boundary": [
@@ -96,7 +96,7 @@
       "en": "QuickLinks",
       "slug": "quick-links",
       "batch": 2,
-      "status": "pending",
+      "status": "delivered",
       "view": "QuickLinks.ascx",
       "edit": "EditLinks.aspx",
       "boundary": [
@@ -112,7 +112,7 @@
       "en": "HtmlModule",
       "slug": "html-module",
       "batch": 2,
-      "status": "pending",
+      "status": "delivered",
       "view": "HtmlModule.ascx",
       "edit": "EditHtml.aspx",
       "boundary": [
@@ -128,7 +128,7 @@
       "en": "XmlModule",
       "slug": "xml-module",
       "batch": 2,
-      "status": "pending",
+      "status": "delivered",
       "view": "XmlModule.ascx",
       "edit": "EditXml.aspx",
       "boundary": []

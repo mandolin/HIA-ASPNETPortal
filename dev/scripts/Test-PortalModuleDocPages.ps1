@@ -188,7 +188,7 @@ foreach ($mod in $registry.modules) {
 
     # ---------- M2 字段集 ⊇ 源码控件集（词边界） ----------
     foreach ($control in (Get-InputControls $editPath)) {
-        if ($page -notmatch ('(?<![\w])' + [regex]::Escape($control) + '(?![\w])')) {
+        if ($page -cnotmatch ('(?<![\w])' + [regex]::Escape($control) + '(?![\w])')) {
             $failures += "M2 文档页未记录字段：$pageName 的编辑页控件 $control（源码有、文档缺；须以完整 id 出现，不能只作子串）。"
         }
     }

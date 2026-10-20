@@ -73,6 +73,16 @@ maintainers. Internal planning and collaboration material are not published with
   policies, storage and audit, permissions, common questions.
 - `modules/events.md`: detailed operating instructions for the **Events** module — field table, all four fields required,
   expiry filtering, storage and audit, permissions, common questions.
+- `modules/image-module.md`: detailed operating instructions for the **ImageModule** module — field table, no required fields and
+  no validation, text settings only with no upload, storage and audit, permissions, common questions.
+- `modules/links.md`: detailed operating instructions for the **Links** module — field table, three required fields and the integer
+  order check, link-ownership check, the test-tab-only deployment status, storage and audit, common questions.
+- `modules/quick-links.md`: detailed operating instructions for the **QuickLinks** module — shared data and edit page with the Links
+  module, how the navigation policy suppresses non-compliant addresses, permission model, storage and audit, common questions.
+- `modules/html-module.md`: detailed operating instructions for the **HtmlModule** module — field table, no required fields, the narrow
+  raw-HTML permission and the no-sanitisation security boundary, storage and audit, common questions.
+- `modules/xml-module.md`: detailed operating instructions for the **XmlModule** module — field table, path-compliance checks and neutral
+  runtime degradation, virtual paths only with no upload, storage and audit, common questions.
 - `code-documentation.md`: the **code documentation system** — API-level documentation generated from source comments by
   HIA-Documentation-Sys (the JSDoc half is published as bilingual pages; the DotNetDoc half is intermediate output), plus
   refresh procedure and dependency-installation notes. dependencies.

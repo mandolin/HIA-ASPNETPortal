@@ -191,7 +191,7 @@ foreach ($module in $MODULES) {
         # a weak assertion: renaming the doc's `TitleField` to `LinkTitleField` (which contains the original id as a substring) still
         # passed, i.e. a renamed field could not be detected. A word boundary requires non-word characters on both sides, so
         # documenting it as `` `TitleField` `` or "TitleField ..." matches, while `LinkTitleField` no longer does.</en></lang>
-        if ($sectionText -notmatch ('(?<![\w])' + [regex]::Escape($control) + '(?![\w])')) {
+        if ($sectionText -cnotmatch ('(?<![\w])' + [regex]::Escape($control) + '(?![\w])')) {
             $failures += "A3 文档未记录字段：$($module.name) 的编辑页控件 $control（源码有、文档缺；须以完整 id 出现，不能只作子串）。"
         }
     }
