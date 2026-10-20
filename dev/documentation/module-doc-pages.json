@@ -20,7 +20,7 @@
       "en": "Announcements",
       "slug": "announcements",
       "batch": 1,
-      "status": "pending",
+      "status": "delivered",
       "view": "Announcements.ascx",
       "edit": "EditAnnouncements.aspx",
       "boundary": []
@@ -30,7 +30,7 @@
       "en": "Contacts",
       "slug": "contacts",
       "batch": 1,
-      "status": "pending",
+      "status": "delivered",
       "view": "Contacts.ascx",
       "edit": "EditContacts.aspx",
       "boundary": []
@@ -40,7 +40,7 @@
       "en": "Discussion",
       "slug": "discussion",
       "batch": 1,
-      "status": "pending",
+      "status": "delivered",
       "view": "Discussion.ascx",
       "edit": "DiscussDetails.aspx",
       "boundary": []
@@ -50,7 +50,7 @@
       "en": "Document",
       "slug": "document",
       "batch": 1,
-      "status": "pending",
+      "status": "delivered",
       "view": "Document.ascx",
       "edit": "EditDocs.aspx",
       "boundary": []
@@ -60,7 +60,7 @@
       "en": "Events",
       "slug": "events",
       "batch": 1,
-      "status": "pending",
+      "status": "delivered",
       "view": "Events.ascx",
       "edit": "EditEvents.aspx",
       "boundary": []

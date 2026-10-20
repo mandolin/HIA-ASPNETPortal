@@ -129,6 +129,23 @@ function Get-FirstHeading([string] $path) {
 $INTENTIONALLY_UNPUBLISHED = @{
     'documentation-registry.md' = '内部文档治理台账（登记与复核用），不属公开文档集。'
     'documentation-review-checklist.md' = '内部文档复核走查清单（流程工具），不属公开文档集。'
+    # <lang>
+    #   <zh-CN>本周期 `C-anp-P33` 的模块详细页（中文正文已由 `W-anp-P185` 交付，登记在 `dev/documentation/module-doc-pages.json`）。
+    #     它们**不是**"刻意不上架"，而是**尚未到上架时点**：英译与 `published.yml` 上架登记统一在 `W-anp-P187` 完成，
+    #     届时本白名单中的这五条会被删除、landing 统计数字随之更新。此处登记是为满足 default-deny
+    #     （新文档要么已上架、要么有明确依据），避免"既没上架、也没说清为什么没上架"。</zh-CN>
+    #   <en>The module detail pages of this cycle (`C-anp-P33`): the Chinese text was delivered by `W-anp-P185` and registered
+    #     in `dev/documentation/module-doc-pages.json`. They are **not** "deliberately unpublished" but **not yet at their
+    #     publication point** — the English renders and the `published.yml` registration are done in `W-anp-P187`, at which
+    #     time these five entries are removed and the landing statistics are updated accordingly. Registering them here
+    #     satisfies the default-deny rule (a new document is either published or has an explicit basis) and avoids
+    #     "neither published nor explained".</en>
+    # </lang>
+    'modules\announcements.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\contacts.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\discussion.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\document.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
+    'modules\events.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
 }
 
 $sitePages = @()
