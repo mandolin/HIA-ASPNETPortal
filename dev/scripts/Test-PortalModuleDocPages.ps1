@@ -1,61 +1,94 @@
-# <lang><zh-CN>
-# `C-anp-P33` / `W-anp-P184`：模块独立文档页门禁（L0）。
-#
-# 为什么需要它：现有 `Test-PortalContentModuleDocs.ps1` 只扫 `docs/user-guide.md` 的**一节**，
-# 即"11 个模块各一小节"。本周期（`C-anp-P33`，承接备忘 D9）要求**每个模块有独立页**，
-# 字段表、必填与校验、操作步骤、常见问题、边界都要成篇。本门禁把页面纳入硬断言。
-#
-# 六类断言：
-#   M1 页面存在性：登记为「已交付」的模块必须有页面文件。
-#   M2 字段集 ⊇ 源码控件集：编辑页每个输入控件 id 必须在页面中出现（**词边界**匹配，
-#      与 A3 同口径——`LinkTitleField` 这类"含原 id 的改名"不算命中）。
-#   M3 八节齐全：用途与前置 / 操作步骤 / 字段表 / 必填与校验 / 存储与审计 / 权限 /
-#      常见问题 / 边界与不做——缺一即失败（这是"详细使用说明"的可判定定义）。
-#   M4 必填数量一致：编辑页 `RequiredFieldValidator` 数 == 页面中 `**必填**` 出现次数。
-#   M5 部署边界必须写明：按登记表的 boundary 规则逐条检查（`Links` 仅测试页签、
-#      `QuickLinks` 与 Links 共用编辑页、`HtmlModule` 不做净化、`Signin` 无运行期证据/无编辑页）。
-#   M6 default-deny 自检：全部模块交付后 mode 必须切为 hard；pending 为 0 而 mode 仍是
-#      soft-until-complete → 失败（防止"归零了却没人把软指标转成硬断言"，即 A6 同类问题）。
-#
-# 模式（soft-until-complete → hard）：批次未全部交付前，待交付模块按软指标列出，
-# 避免 L0 在周期中途红；**最后一个批次交付后必须切换 hard**（由 `W-anp-P187` 执行）。
-# 这条转换点写在登记表的 `mode` 字段里，由 M6 强制。
-# </zh-CN>
-# <en>
-# `C-anp-P33` / `W-anp-P184`: the module document pages gate (L0).
-#
-# Why it exists: `Test-PortalContentModuleDocs.ps1` only scans one section of `docs/user-guide.md`
-# (one small section per module). This cycle (`C-anp-P33`, following memo D9) requires a **dedicated page per
-# module** with a field table, required/validation rules, operating steps, common questions and boundaries.
-# This gate brings those pages under hard assertions.
-#
-# Six assertion families: M1 page existence; M2 field set ⊇ source control set (word-boundary matching, same
-# convention as A3 — a rename such as `LinkTitleField` does not count); M3 all eight required sections present;
-# M4 required-field count agrees with the source; M5 deployment boundaries stated; M6 default-deny self-check
-# (once nothing is pending, the mode must be `hard`).
-#
-# Mode (soft-until-complete → hard): while batches are outstanding the remaining modules are reported as a soft
-# metric so L0 does not go red mid-cycle; the **last batch must flip the mode to hard** (`W-anp-P187`).
-# M6 enforces that transition.
-# </en>
-# <lang><zh-CN>
-# 证明边界：只证明"已登记为已交付的模块页面**存在**、**八节齐全**、编辑页输入控件 id 以**词边界**出现在页面中、
-# **必填项数量与源码一致**、登记表中要求的**部署边界语句已写明**"，以及"全部交付后模式必须切 hard"。
-# **不证明**页面叙述的语义正确与操作步骤的可执行性（由人工复核承载）；**不检查**页面多写的字段或文字；
-# **不核对**部署页签实测值（TabId/ModuleId 为交付时快照）；**不采集**运行期证据（如 `Signin` 在开发库 0 个实例，
-# 只有源码级说明）。边界规则用**正则**匹配，故"写了类似的话"即算通过——它守住的是"关键事实不能被删掉"，
-# 不是"话写得对不对"。
-# </zh-CN>
-# <en>
-# Proof boundary: proves only that a module page registered as delivered **exists**, has **all eight sections**,
-# contains every edit-page input control id under **word-boundary** matching, has a **required-field count equal to the
-# source**, and **states the deployment boundaries** the registry requires — plus that the mode must be `hard` once
-# everything is delivered. It does **not** prove the semantics of the prose or that the steps are executable (human review
-# carries that); it does **not** check extra fields or extra prose; it does **not** re-verify measured deployment tab ids
-# (TabId/ModuleId are delivery-time snapshots); it collects **no** runtime evidence (e.g. `Signin` has 0 instances in the
-# dev database, so source-level description only). Boundary rules are matched by **regex**, so "something similar is
-# written" passes — what this guards is that key facts cannot be deleted, not that the wording is right.
-# </en>
+<#
+.SYNOPSIS
+<lang>
+  <zh-CN>模块独立文档页门禁：已登记为「已交付」的模块必须有独立页面，且八节齐全、字段与必填项同源码一致、部署边界已写明。</zh-CN>
+  <en>Module document pages gate: a module registered as delivered must have a dedicated page whose eight sections are
+  complete, whose fields and required-field count agree with the source, and which states the required deployment
+  boundaries.</en>
+</lang>
+
+.DESCRIPTION
+<lang>
+  <zh-CN>
+    背景：现有 `Test-PortalContentModuleDocs.ps1` 只扫 `docs/user-guide.md` 的**一节**，即"11 个模块各一小节"。
+    本周期（`C-anp-P33`，承接备忘 D9）要求**每个模块有独立页**——字段表、必填与校验、操作步骤、常见问题、
+    边界都要成篇。本门禁把这些页面纳入硬断言。
+
+    登记表 `dev/documentation/module-doc-pages.json` 只放**门禁无法从源码推出**的东西：页面 slug、批次、
+    交付状态、以及**必须写明的部署边界语句**。字段与必填项**不写进登记册**——门禁从源码现取，
+    避免"登记册与源码漂移"。
+
+    六类断言：
+      M1 页面存在性：登记为「已交付」的模块必须有页面文件。
+      M2 字段集 ⊇ 源码控件集：编辑页每个输入控件 id 必须在页面中出现（**词边界**匹配，与 A3 同口径——
+         `LinkTitleField` 这类"含原 id 的改名"不算命中）。
+      M3 八节齐全：用途与前置 / 操作步骤 / 字段表 / 必填与校验 / 存储与审计 / 权限 / 常见问题 / 边界与不做
+         ——缺一即失败（这是"详细使用说明"的可判定定义）。
+      M4 必填数量一致：编辑页 `RequiredFieldValidator` 数 == 页面中 `**必填**` 出现次数。
+      M5 部署边界必须写明：按登记表的 boundary 规则逐条检查（`Links` 仅测试页签、`QuickLinks` 与 Links
+         共用编辑页、`HtmlModule` 不做净化、`Signin` 无运行期证据 / 无编辑页）。
+      M6 default-deny 自检：已无待交付模块时 mode 必须切为 hard；pending 为 0 而 mode 仍是
+         soft-until-complete → 失败（防止"归零了却没人把软指标转成硬断言"，与 A6 同类问题）。
+
+    模式（soft-until-complete → hard）：批次未全部交付前，待交付模块按软指标列出，避免 L0 在周期中途红；
+    **最后一个批次交付后必须切换 hard**（由 `W-anp-P187` 执行）。这条转换点写在登记表的 `mode` 字段里，
+    由 M6 强制——软只是周期中途的临时态，且这个临时态有明确的、自检的出口。
+  </zh-CN>
+  <en>
+    Background: `Test-PortalContentModuleDocs.ps1` only scans one section of `docs/user-guide.md` (one small section
+    per module). This cycle (`C-anp-P33`, following memo D9) requires a **dedicated page per module** — field table,
+    required/validation rules, operating steps, common questions and boundaries all in full. This gate brings those
+    pages under hard assertions.
+
+    The registry `dev/documentation/module-doc-pages.json` holds only what the gate **cannot derive from source**:
+    page slug, batch, delivery status, and the **deployment boundaries that must be stated**. Fields and required
+    counts are deliberately **not** in the registry — the gate reads them from source, so the register cannot drift
+    away from the code.
+
+    Six assertion families:
+      M1 page existence: a module registered as delivered must have a page file;
+      M2 field set ⊇ source control set: every edit-page input control id must appear in the page (**word-boundary**
+         matching, same convention as A3 — a rename such as `LinkTitleField` does not count);
+      M3 all eight sections present: purpose & prerequisites / operating steps / field table / required & validation /
+         storage & audit / permissions / common questions / boundaries — missing one fails (this is the decidable
+         definition of "detailed operating instructions");
+      M4 required count agrees: the number of `RequiredFieldValidator` controls in the edit page == the number of
+         `**必填**` occurrences in the page;
+      M5 deployment boundaries stated: each boundary rule in the registry must be matched by the page;
+      M6 default-deny self-check: once nothing is pending the mode must be `hard`; pending = 0 with mode still
+         soft-until-complete fails (this prevents "it reached zero but nobody turned the soft metric into a hard
+         assertion" — the same class of problem as A6).
+
+    Mode (soft-until-complete → hard): while batches are outstanding the remaining modules are reported as a soft
+    metric so L0 does not go red mid-cycle; the **last batch must flip the mode to hard** (`W-anp-P187`). The
+    transition point lives in the registry's `mode` field and is enforced by M6 — soft is only a temporary mid-cycle
+    state, and that temporary state has an explicit, self-checked exit.
+  </en>
+</lang>
+
+.Proof boundary（证明边界）
+<lang>
+  <zh-CN>
+    只证明"已登记为已交付的模块页面**存在**、**八节齐全**、编辑页输入控件 id 以**词边界**出现在页面中、
+    **必填项数量与源码一致**、登记表中要求的**部署边界语句已写明**"，以及"全部交付后模式必须切 hard"。
+    **不证明**页面叙述的语义正确与操作步骤的可执行性（由人工复核承载）；**不检查**页面多写的字段或文字；
+    **不核对**部署页签实测值（TabId/ModuleId 为交付时快照）；**不采集**运行期证据（如 `Signin` 在开发库
+    0 个实例，只有源码级说明）。边界规则用**正则**匹配，故"写了类似的话"即算通过——它守住的是
+    "关键事实不能被删掉"，不是"话写得对不对"。
+  </zh-CN>
+  <en>
+    Proves only that a module page registered as delivered **exists**, has **all eight sections**, contains every
+    edit-page input control id under **word-boundary** matching, has a **required-field count equal to the source**,
+    and **states the deployment boundaries** the registry requires — plus that the mode must be `hard` once everything
+    is delivered. It does **not** prove the semantics of the prose or that the steps are executable (human review
+    carries that); it does **not** check extra fields or extra prose; it does **not** re-verify measured deployment tab
+    ids (TabId/ModuleId are delivery-time snapshots); it collects **no** runtime evidence (e.g. `Signin` has 0
+    instances in the dev database, so source-level description only). Boundary rules are matched by **regex**, so
+    "something similar is written" passes — what this guards is that key facts cannot be deleted, not that the wording
+    is right.
+  </en>
+</lang>
+#>
 param(
     [string] $RegistryPath = '',
     [string] $PagesRoot = ''
