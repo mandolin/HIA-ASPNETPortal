@@ -61,7 +61,10 @@ maintainers. Internal planning and collaboration material are not published with
   collaboration items.
 - `audit-retention-policy.md`: retention principles and their basis for the operational audit table.
 - `font-policy-and-audit.md`: font usage principles, licence boundaries and current audit results.
-- `third-party-dependencies.md`: purpose, licence and distribution boundaries of newly added third-party dependencies.
+- `third-party-dependencies.md`: purpose, licence and distribution boundaries of newly added third-party
+- `code-documentation.md`: the **code documentation system** — API-level documentation generated from source comments by
+  HIA-Documentation-Sys (the JSDoc half is published as bilingual pages; the DotNetDoc half is intermediate output), plus
+  refresh procedure and dependency-installation notes. dependencies.
 
 ## How to use this documentation
 

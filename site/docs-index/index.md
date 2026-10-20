@@ -39,6 +39,7 @@ title: HIA-ASPNETPortal 文档
 - `audit-retention-policy.md`：运营审计表的保留期原则与依据。
 - `font-policy-and-audit.md`：字体使用原则、许可证边界和当前审计结果。
 - `third-party-dependencies.md`：新增第三方依赖的用途、许可证和分发边界。
+- `code-documentation.md`：**代码文档体系**——由 HIA-Documentation-Sys 从源码注释生成的 API 级文档（JSDoc 半边已发布中英双语页面，DotNetDoc 半边为中间产物）、刷新方式与依赖安装注意事项。
 
 ## 使用说明
 

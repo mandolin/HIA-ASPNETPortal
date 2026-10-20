@@ -41,9 +41,21 @@ Not in `docs/`; lives in source node/flow comments.
 - `user-guide.md` — how to run and use the portal; includes the **typical portal configuration flow**, **common
   administrator operations** and **troubleshooting** 
 - `p12-sample-business-flow.md` — a sample business flow
-- **Remaining gaps**: runtime screenshots; item-by-item operating instructions for existing content modules
-  (announcements, contacts, discussions, documents, events, images, links, etc.); the approval flow UI for leave and
-  reimbursement (approval is not inside these modules)
+- **Remaining gaps**: **none for module-level instructions**." in `user-guide.md`; ~~`HTML`~~ by ; ~~`QuickLinks`~~ by
+  ; ~~`XML / XSL`~~ by ; ~~`Signin`~~ by )
+  - **Evidence boundary (registered honestly)**: the `Signin` module has **0 instances** in the development database, so
+    it is documented at source level only and **has no runtime evidence**; re-entry condition: mount the module instance
+    in the target environment and collect runtime evidence.
+  - **Code documentation**: the JSDoc half is published (`/api/jsdoc/`, bilingual, explainer
+    page `code-documentation.md`, source fingerprint guarded by an L0 gate); the DotNetDoc half is still **intermediate
+    JSON and not published** — re-entry condition: add it through the same snapshot-manifest mechanism once a
+    rendering/publishing component exists.
+  - **Disposition of the two unpublished docs**:
+    `documentation-registry.md` (documentation-family register) and `documentation-review-checklist.md` (review
+    checklist) **stay unpublished** — they are **internal governance artifacts** (the register records each doc's family,
+    status and owner; the checklist is a process tool), public readers do not need them, and they contain internal
+    work-item numbers unsuitable for publication. Both stay in `docs/` with English translations; if the governance
+    process is ever made public, publish them through the `published.yml` mechanism.
 
 ### 4. Developers and contributors
 
