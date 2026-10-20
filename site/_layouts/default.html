@@ -3,7 +3,7 @@ layout: table_wrappers
 ---
 
 <!--
-  Controlled override of the just-the-docs theme's _layouts/default.html (C-anp-P22).
+  Controlled override of the just-the-docs theme's _layouts/default.html.
   Upstream source: just-the-docs v0.12.0, _layouts/default.html (47 lines).
 
   **DOM order is upstream's, verbatim**: sidebar include first, then .main — this is not
@@ -12,7 +12,7 @@ layout: table_wrappers
   which silently disabled that selector and broke the whole docs layout (sidebar floating,
   content under the fixed column). Keep `sidebar → .main` adjacent, exactly like upstream.
 
-  Restyle (C-anp-P22 docs overhaul, benchmark: docs.orchardcore.net = Material for MkDocs):
+  Restyle (benchmark: docs.orchardcore.net = Material for MkDocs):
   a full-width dark top bar (body level, above the fixed sidebar) with brand + search box +
   repo link + language switch; no breadcrumb bar (Material has none); content grid with a
   sticky right "Table of contents" rail built below by splitting the rendered HTML on h2

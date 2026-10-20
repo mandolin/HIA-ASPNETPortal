@@ -15,9 +15,13 @@
     本门禁把它们变成硬断言以防复发，并覆盖同源的**内部编号**类（公开页里作为出处引用的 `W-anp-P*` /
     `C-anp-P*`，共 54 处，同批清理）。
 
-    范围：**只扫已上架的公开文档**——`site/_data/published.yml` 声明的 `doc` 条目，中文取 `docs/<doc>`、
-    英文取 `site/_translations/<doc>`。**未上架文档不在范围**：内部治理件（如 `documentation-registry.md`）
-    本就是内部件，含内部编号是应该的，把它们纳入反而会让"内部件"与"公开页"的边界再次模糊。
+    范围：**只扫会到读者面前的东西**，分两组——
+      （1）**已上架的公开文档**：`site/_data/published.yml` 声明的 `doc` 条目，中文取 `docs/<doc>`、
+          英文取 `site/_translations/<doc>`；
+      （2）**服务模板**：`site/_layouts/**.html` 与 `site/_includes/**.html`——它们的 HTML / Liquid 注释
+          随**每一个页面**发出，与文档同等对待。
+    **未上架文档不在范围**：内部治理件（如 `documentation-registry.md`）本就是内部件，含内部编号是应该的，
+    把它们纳入反而会让"内部件"与"公开页"的边界再次模糊。
 
     两类断言（命中即失败，列出文件行号与片段）：
       A1 内部向表述：
@@ -67,13 +71,14 @@
 .Proof boundary（证明边界）
 <lang>
   <zh-CN>
-    只证明"已上架公开文档里**不存在**这两类模式"。**不证明**公开文档的叙述正确、完整或对读者真的有用
+    只证明"已上架公开文档与**服务模板**里**不存在**这两类模式"。**不证明**公开文档的叙述正确、完整或对读者真的有用
     （那些由人工复核承载）；**不检查**未上架文档（内部治理件不在范围内）；**不做语义判断**——模式命中
     即失败，所以"为了讲产品而不得不提到内部概念"的正常句子若命中模式也会被判失败。这是**有意的保守
     口径**：宁可让人看一眼再放行，也不让内部表述悄悄回到公开页。
   </zh-CN>
   <en>
-    Proves only that these two families of patterns are **absent** from published public documents. It does **not**
+    Proves only that these two families of patterns are **absent** from published public documents **and from the
+    served templates**. It does **not**
     prove the prose is correct, complete or genuinely useful to readers (human review carries that); it does **not**
     check unpublished documents (internal governance artifacts are out of scope); it makes **no semantic judgement** —
     a pattern hit fails the gate, so even a legitimate sentence that must mention an internal concept is rejected if it
@@ -105,38 +110,56 @@ $docs = @([regex]::Matches($manifest, '(?m)^\s*-\s*doc:\s*(.+?)\s*$') | ForEach-
 $all = @()
 $scanned = 0
 
-foreach ($doc in $docs) {
-    foreach ($kv in @(@{ p = (Join-Path $DocsRoot $doc); lang = 'zh' }, @{ p = (Join-Path $TranslationsRoot $doc); lang = 'en' })) {
-        if (-not (Test-Path -LiteralPath $kv.p -PathType Leaf)) { continue }
-        $scanned++
-        $rel = $kv.p.Substring($repoRoot.Length + 1)
-        $lines = [System.IO.File]::ReadAllText($kv.p) -split "`r?`n"
-        for ($i = 0; $i -lt $lines.Count; $i++) {
-            $line = $lines[$i]
-            $skip = $false
-            foreach ($a in $ALLOW) { if ($line.Contains($a)) { $skip = $true; break } }
-            if ($skip) { continue }
-            # A1 内部向表述
-            foreach ($pat in $(if ($kv.lang -eq 'zh') { $A1_ZH } else { $A1_EN })) {
-                if ($line.Contains($pat)) {
-                    $snippet = $line.Trim(); if ($snippet.Length -gt 120) { $snippet = $snippet.Substring(0, 120) + '…' }
-                    $all += ([pscustomobject]@{ kind = 'A1'; file = $rel; line = $i + 1; text = $snippet })
-                    break
-                }
-            }
-            # A2 内部编号
-            $m = [regex]::Match($line, '(W|C)-anp-P\d+(\.\d+)?')
-            if ($m.Success) {
+# <lang>
+#   <zh-CN>扫描单元：对单个文件逐行做 A1 / A2 检查。**模板也扫**——`site/_layouts`、`site/_includes`
+#     下的 HTML / Liquid 注释会随**每一个页面**发出去，因此它们和文档一样是"会到读者面前的东西"。
+#     本门禁首版只扫文档，是**线上复核**抓到这个盲点的（英文页源码里赫然有 `C-anp-P22`），不是本地门禁。</zh-CN>
+#   <en>Scanning unit: per-file, line-by-line A1 / A2 checks. **Templates are scanned too** — HTML / Liquid comments
+#     under `site/_layouts` and `site/_includes` are shipped with **every page**, so they reach readers just as
+#     documentation does. The first version of this gate scanned documents only; the blind spot was caught by the
+#     **online re-check** (the English page source plainly contained `C-anp-P22`), not by the gate itself.</en>
+# </lang>
+function Scan-File {
+    param([string] $Path, [string] $Lang)
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { return }
+    $script:scanned++
+    $rel = $Path.Substring($repoRoot.Length + 1)
+    $lines = [System.IO.File]::ReadAllText($Path) -split "`r?`n"
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+        $line = $lines[$i]
+        $skip = $false
+        foreach ($a in $ALLOW) { if ($line.Contains($a)) { $skip = $true; break } }
+        if ($skip) { continue }
+        # A1 内部向表述
+        foreach ($pat in $(if ($Lang -eq 'zh') { $A1_ZH } else { $A1_EN })) {
+            if ($line.Contains($pat)) {
                 $snippet = $line.Trim(); if ($snippet.Length -gt 120) { $snippet = $snippet.Substring(0, 120) + '…' }
-                $all += ([pscustomobject]@{ kind = 'A2'; file = $rel; line = $i + 1; text = $snippet })
+                $script:all += ([pscustomobject]@{ kind = 'A1'; file = $rel; line = $i + 1; text = $snippet })
+                break
             }
+        }
+        # A2 内部编号
+        $m = [regex]::Match($line, '(W|C)-anp-P\d+(\.\d+)?')
+        if ($m.Success) {
+            $snippet = $line.Trim(); if ($snippet.Length -gt 120) { $snippet = $snippet.Substring(0, 120) + '…' }
+            $script:all += ([pscustomobject]@{ kind = 'A2'; file = $rel; line = $i + 1; text = $snippet })
         }
     }
 }
 
-Write-Host ('[INFO] 公开文档内容适用性：已扫描已上架文档文件 ' + $scanned + ' 份（源自 ' + $docs.Count + ' 条上架声明）')
+foreach ($doc in $docs) {
+    Scan-File (Join-Path $DocsRoot $doc) 'zh'
+    Scan-File (Join-Path $TranslationsRoot $doc) 'en'
+}
+# 服务模板：`site/_layouts` 与 `site/_includes` 下的注释随每个页面发出，与文档同等对待
+foreach ($tpl in @((Join-Path $repoRoot 'site/_layouts'), (Join-Path $repoRoot 'site/_includes'))) {
+    if (-not (Test-Path -LiteralPath $tpl)) { continue }
+    foreach ($f in (Get-ChildItem $tpl -Recurse -File -Filter '*.html')) { Scan-File $f.FullName 'en' }
+}
+
+Write-Host ('[INFO] 公开文档内容适用性：已扫描 ' + $scanned + ' 份文件（已上架文档 ' + $docs.Count + ' 条声明 + 服务模板）')
 if ($all.Count -eq 0) {
-    Write-Host '[PASS] 公开文档内容适用性：已上架公开文档无内部向表述、无内部工作项编号。'
+    Write-Host '[PASS] 公开文档内容适用性：已上架公开文档与服务模板无内部向表述、无内部工作项编号。'
     exit 0
 }
 foreach ($f in $all) {
