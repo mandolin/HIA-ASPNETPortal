@@ -152,3 +152,16 @@
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
+
+# <lang>
+#   <zh-CN>`C-anp-P32`（`W-anp-P180`）新增：代码文档页。它本身不是代码文档产物，而是**说明页**——
+#   真正的产物是 `/api/jsdoc/` 下的 JSDoc 双语 HTML（由 `site/api/jsdoc/` 快照发布，非本清单驱动）。
+#   挂到「开发」分区：读者沿 产品入口 → 评估 → 快速上手 → 学习 → 参考 → **开发** 的路径抵达。</zh-CN>
+#   <en>`C-anp-P32` (`W-anp-P180`) addition: the code-documentation page. It is not itself a code-doc artifact but an
+#   **explainer** — the real artifacts are the JSDoc bilingual HTML pages under `/api/jsdoc/` (published from the
+#   `site/api/jsdoc/` snapshot, not driven by this manifest). Attached to the Develop section so readers reach it along
+#   the path product entry → evaluate → quick start → learn → reference → **develop**.</en>
+# </lang>
+- doc: code-documentation.md
+  path: code-documentation
+  parent: 开发

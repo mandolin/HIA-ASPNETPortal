@@ -248,6 +248,14 @@
       "gate": "Test-PortalSiteTranslationFreshness.ps1"
     },
     {
+      "id": "code-docs-publishing",
+      "name": "代码文档发布（/api/jsdoc 快照与源码指纹一致、形状合格、入口已上架）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明快照与清单一致、源指纹匹配（覆盖 JSDoc 的 2 个输入文件）、公开面无内部编号与绝对路径、说明页已上架并链接；不证明快照等于一次全新生成的逐字节输出（指纹不覆盖 JSDoc 工具链与主题包版本，二者变化需人工重跑），不覆盖 DotNetDoc 半边（仍是中间 JSON、未上架）。",
+      "gate": "Test-PortalCodeDocs.ps1"
+    },
+    {
       "id": "approval-boundary-docs",
       "name": "审批流转边界声明（请假/报销仅落库 + 生成待办，审批不在本模块内）",
       "layer": "L0",

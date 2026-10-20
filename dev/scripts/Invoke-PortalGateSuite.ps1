@@ -440,6 +440,26 @@ $gateLayers = [ordered]@{
         # </lang>
         @{ File = 'Test-PortalSiteTranslationFreshness.ps1';   Runner = 'ps1'; Kind = '官网译本新鲜度'; Args = @() }
         # <lang>
+        #   <zh-CN>`C-anp-P32`（`W-anp-P180`）新增：**代码文档发布**门禁（L0）。官网 `/api/jsdoc/` 是
+        #   HIA-Documentation-Sys JSDoc 半边产物的**快照**（官网由签入静态文件发布）——源码改了而快照没刷，
+        #   官网就会展示过期代码文档且无人发现。本门禁四查：A1 快照完整（清单声明产物齐备、HTML ≥ 3）；
+        #   A2 **源指纹一致**（对 JSDoc 的 2 个输入文件算 SHA256 组合指纹，与清单比对——这正是"源码变了快照没刷"的形态）；
+        #   A3 公开面形状（无内部编号、无本地绝对路径）；A4 说明页已上架且链接到 `/api/jsdoc/`。
+        #   首跑即抓到一处真问题：我手算指纹时用了反斜杠路径、门禁按 `/` 规范化，两者不一致 → A2 报出，
+        #   按门禁算法重算后通过（**指纹算法以门禁为准，文档只是记录者**）。</zh-CN>
+        #   <en>`C-anp-P32` (`W-anp-P180`) addition: the **code documentation publishing** gate (L0). `/api/jsdoc/` on the
+        #   site is a **snapshot** of the JSDoc half of HIA-Documentation-Sys output (the site is published from committed
+        #   static files) — if the sources change but the snapshot is not refreshed, the site serves stale code documentation
+        #   unnoticed. Four checks: A1 snapshot completeness (manifest-declared artifacts present, HTML ≥ 3); A2 **source
+        #   fingerprint agreement** (combined SHA-256 over the two JSDoc input files vs the manifest — exactly the shape of
+        #   "sources changed, snapshot not refreshed"); A3 public-surface shape (no internal IDs, no local absolute paths);
+        #   A4 the explainer page is published and links to `/api/jsdoc/`.
+        #   The first run caught a real problem: my hand-computed fingerprint used backslash paths while the gate normalises
+        #   to `/`, so they disagreed and A2 fired; recomputing with the gate's algorithm passed (**the gate's algorithm is
+        #   authoritative; the manifest is only a record**).</en>
+        # </lang>
+        @{ File = 'Test-PortalCodeDocs.ps1';                   Runner = 'ps1'; Kind = '代码文档发布'; Args = @() }
+        # <lang>
         #   <zh-CN>`C-anp-P28`（`W-anp-P153`）新增：**审批流转边界看守**门禁（L0）。验收判据 V3 要求
         #   「审批流转边界在公开文档中有明确声明」。源码实测（2026-10-19）：请假 / 报销两个模块的提交动作链
         #   仅为「字段校验 → 落库（状态固定 `Pending`）→ 生成待办（指派 `Admins`）→ 写审计」，**没有任何审批动作**；

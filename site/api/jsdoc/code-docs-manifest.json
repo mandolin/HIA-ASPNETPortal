@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "generator": "HIA-Documentation-Sys JSDoc pilot（dev/scripts/Build-PortalJsdocPilot.ps1 → dev/documentation/jsdoc，npm script docs）",
+  "generatedUtc": "2026-10-20T00:00:00Z",
+  "publishedBy": "C-anp-P32 / W-anp-P180",
+  "sourceInputs": [
+    "src/Portal/gulpfile.js",
+    "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js"
+  ],
+  "sourceFingerprint": "8023706dda21fc465e26e890727881138450bb33f6d9617cf8e7d756b06a2081",
+  "fingerprintAlgorithm": "SHA256 over '<relativePath>|<byteLength>|<sha256(content)>' lines, joined by LF",
+  "artifacts": [
+    "index.html",
+    "index.zh-CN.html",
+    "index.en.html",
+    "hia-theme.css",
+    "hia-theme.js",
+    "hia-metadata.json",
+    "hia-integration.json",
+    "i18n-index.json",
+    "search-index.json"
+  ],
+  "notes": {
+    "zh-CN": "本目录是 JSDoc 半边代码文档的**已发布快照**（快照而非实时生成：官网由签入的静态文件发布）。刷新方式：运行 dev/scripts/Build-PortalJsdocPilot.ps1，再把 temp/documentation/jsdoc 的产物拷到本目录并更新 generatedUtc 与 sourceFingerprint。L0 门禁 Test-PortalCodeDocs.ps1 会核对源指纹与产物形状（不一致即失败）。",
+    "en": "This folder is a **published snapshot** of the JSDoc half of the code documentation (a snapshot rather than live generation: the site is published from committed static files). Refresh: run dev/scripts/Build-PortalJsdocPilot.ps1, then copy the artifacts from temp/documentation/jsdoc here and update generatedUtc and sourceFingerprint. The L0 gate Test-PortalCodeDocs.ps1 checks the source fingerprint and artifact shape (mismatch fails)."
+  },
+  "dotnetdocStatus": {
+    "zh-CN": "DotNetDoc 半边（C# XML 文档）当前只生成**中间 JSON**（14 个产物 / 60.8 MB，无渲染面），**未上架**；待 HIA-Documentation-Sys 的渲染/发布组件就位后按同一清单机制补入。",
+    "en": "The DotNetDoc half (C# XML documentation) currently produces **intermediate JSON only** (14 artifacts / 60.8 MB, no rendering surface) and is **not published**; it will be added through the same manifest mechanism once the HIA-Documentation-Sys rendering/publishing component is available."
+  }
+}

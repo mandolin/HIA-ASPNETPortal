@@ -40,8 +40,194 @@ passwords no longer writes legacy MD5 digests.
 
 ## Common modules
 
-Portal modules currently in the source tree include announcements, contacts, discussions, documents, events, HTML, images,
-links, quick links and XML. See `src/Portal/DesktopModules/` for the actual set.
+The following modules are itemised from the source tree (`src/Portal/DesktopModules/`); deployment locations are
+measured values from the development database, and tab names are data values kept verbatim.
+
+### Announcements
+
+- Purpose: publish in-site announcements with an expiry date; expired items are no longer displayed.
+- Display: title + description + expiry time; each row carries an edit entry (visible only with edit permission).
+- Edit page `DesktopModules/EditAnnouncements.aspx`:
+  - `TitleField` title (**required**)
+  - `MoreLinkField` details link (optional)
+  - `MobileMoreField` mobile link (optional)
+  - `DescriptionField` description (**required**)
+  - `ExpireField` expiry date (**required**, with a date-format comparison validator `VerifyExpireDate`)
+- New entry: "Add New Announcement" in the module title bar.
+- Current deployment: TabId=1「新闻与特写」、TabId=2「人事福利」、TabId=3「竞赛：TradeCraft / 监视 / 保护」。
+
+### Contacts
+
+- Purpose: maintain a contact directory (name, role, e-mail, two contact numbers).
+- Display: name / role / e-mail (clickable to compose) / contact numbers; each row carries an edit entry.
+- Edit page `DesktopModules/EditContacts.aspx`:
+  - `NameField` name (**required**)
+  - `RoleField` role
+  - `EmailField` e-mail
+  - `Contact1Field` contact number 1
+  - `Contact2Field` contact number 2
+- **Note: only the name is required** — role, e-mail and contact numbers have neither required nor format validation and
+  may be left empty, so verify entries yourself.
+- New entry: "Add New Contact". Current deployment: TabId=2「员工联系信息」。
+
+### Discussion
+
+- Purpose: topic-based discussion area supporting reply hierarchies under a topic.
+- Display: topic list (child replies can be expanded/collapsed, with the expand state showing the child-reply count);
+  each row shows author and post time, and the title links to the detail page (new window).
+- Detail page `DesktopModules/DiscussDetails.aspx?ItemID=<id>&mid=<module id>`: shows title / author / date / body;
+  provides a reply form (`TitleField` max 100 characters, `BodyField` multi-line, `ReplyBtn` submit) and paging between
+  the previous / next item.
+- New entry: "Add New Thread" in the module title bar (opens the detail page in a new window).
+- Current deployment: TabId=4「TradeCraft 技巧与装备」「实战手册」。
+
+### Document
+
+- Purpose: document entries (upload a file or point at an existing path) for download or viewing in a new window.
+- Display: document link (opens in a new window) + edit entry.
+- Edit page `DesktopModules/EditDocs.aspx`:
+  - `NameField` document name (**required**)
+  - `CategoryField` category
+  - `PathField` path
+  - `Upload` whether to upload (checkbox)
+  - `storeInDatabase` whether to store in the database (checkbox)
+- Viewing goes through `DesktopModules/ViewDocument.aspx`. New entry: "Add New Document".
+- Current deployment: TabId=2「新员工文档」、TabId=4「好书推荐」。
+
+### Events
+
+- Purpose: publish activities (with time and place); expired items are no longer displayed.
+- Display: title + description + time and place.
+- Edit page `DesktopModules/EditEvents.aspx`:
+  - `TitleField` title (**required**)
+  - `DescriptionField` description (**required**)
+  - `WhereWhenField` time and place (**required**)
+  - `ExpireField` expiry date (**required**, with a date-format comparison validator `VerifyExpireDate`)
+- New entry: "Add New Event". Current deployment: TabId=1「近期活动」。
+
+### ImageModule
+
+- Purpose: display a single image on a tab.
+- Edit page `DesktopModules/EditImage.aspx`: `Src` image path, `Width` width, `Height` height. **None are required.**
+- New / edit entry: "Edit". Current deployment: TabId=3「夜视镜」。
+
+### Links
+
+- Purpose: maintain a list of links (site navigation or resource entries).
+- Display: link title (clickable) + edit entry.
+- Edit page `DesktopModules/EditLinks.aspx`:
+  - `TitleField` title (**required**)
+  - `UrlField` URL (**required**)
+  - `MobileUrlField` mobile URL (optional)
+  - `DescriptionField` description (optional)
+  - `ViewOrderField` display order (**required**, with a numeric comparison validator `VerifyViewOrder`)
+- New entry: "Add Link". Current deployment: **TabId=1004 test tab「测试链接模块」** — i.e. currently deployed on the test
+  tab only and not yet used on production tabs.
+
+### HtmlModule
+
+- **Purpose**: render a fragment of **raw HTML** maintained by a trusted administrator on a tab (welcome text,
+  explanatory blocks, etc.).
+- **Display**: `DesktopModules/HtmlModule.ascx` — reads the stored content by `ModuleId`, `HtmlDecode`s it and emits it
+  verbatim through a `LiteralControl`; **a missing record or empty content emits nothing at all** (the ordinary page does
+  not disclose configuration state).
+- **Edit page** `DesktopModules/EditHtml.aspx` (markup-level `ValidateRequest="false"`):
+  - `DesktopText` desktop raw HTML (optional)
+  - `MobileSummary` mobile summary (optional)
+  - `MobileDetails` mobile details (optional)
+- **Required fields**: this edit page has **no `RequiredFieldValidator` at all** — all three fields may be saved empty.
+- **Storage**: `HtmlTexts` located uniquely by `ModuleId` (`UpdateHtmlText`): the first save creates the record, later
+  saves replace only the three content fields; values are HTML-encoded before persistence and decoded on display (the
+  historical compatibility contract).
+- **Permissions**: editing requires **both** module-edit permission and the narrower "raw HTML" permission
+  (`PortalPermissionKeys.ContentRawHtmlEdit`); `Mid` comes from the query string or the unvalidated postback collection
+  and must be a positive integer, otherwise the request is redirected to the edit-denied page.
+- **Audit**: this save path **does not write an operation audit** (neither do the other legacy content edit pages). Audit
+  coverage concentrates on business requests and key operations — see "Audit and retention".
+- **Security boundary (stated honestly)**: this is an **explicit exception** to the "HTML-encode at display time" rule —
+  rendering performs **no HTML allow-list sanitisation**, so content must be maintained by trusted administrators and
+  **must not carry general-user input**; `ValidateRequest="false"` only satisfies legacy Web Forms postback compatibility
+  and **is not a security boundary**.
+- **Current deployment** (measured in the development database): **12 instances** — 2 on the home tab, plus employee
+  information, product information, discussion, 7 on the about tab, and the `G1P2-Test-A` test tab.
+
+### QuickLinks
+
+- **Purpose**: present common entries as a compact link group; **shares the same link data and the same edit page** as
+  Links.
+- **Display**: `DesktopModules/QuickLinks.ascx` — rebinds `ILinksDb.GetLinks(ModuleId)` on every request (ViewState
+  disabled):
+  - **Editors** (members of the module's `AuthorizedEditRoles`) additionally see the "add link" entry and a per-row "edit"
+    entry (both pointing at `EditLinks.aspx`);
+  - **Viewers** only see links that **pass the navigation policy** — legacy addresses that fail the policy are suppressed
+    as **encoded text** (no longer links) and the raw address is not echoed.
+- **Edit page**: **shared** with Links — `DesktopModules/EditLinks.aspx`:
+  - `TitleField` title (**required**)
+  - `UrlField` URL (**required**)
+  - `MobileUrlField` mobile URL (optional)
+  - `DescriptionField` description (optional)
+  - `ViewOrderField` display order (**required**, with a numeric comparison validator `VerifyViewOrder`)
+- **Permissions**: module-edit permission (**does not require** the narrower "raw HTML" permission that the HTML module
+  needs) plus **link ownership validation** (a link of another module cannot be edited or deleted by `ItemID`).
+- **Audit**: consistent with the other legacy content edit pages, this save / delete path **does not write an operation
+  audit**.
+- **Current deployment** (measured in the development database): **3 instances** — "快速链接" on the home tab,
+  "值得关注的竞争者" on the product-information tab, and "快速链接" on the about tab.
+
+### XmlModule
+
+- **Purpose**: render XML data **deployed inside the site**, optionally transformed with XSL/T before display (current
+  sample: "热门动态" on the home tab).
+- **Data source**: both the XML and the XSL are **files inside the trusted deployment directory** (samples
+  `~/Data/sales.xml` and `~/Data/sales.xsl`), with their paths stored as the module settings `xmlsrc` / `xslsrc` in
+  `PortalCfg_ModuleSettings` — **this module has no business data table of its own**.
+- **Display**: `DesktopModules/XmlModule.ascx` — each path must pass
+  `TryNormalizeTrustedDeploymentResourcePath` and a physical file-existence check before it is handed to the `Xml`
+  control (`DocumentSource` / `TransformSource`):
+  - if either path fails the policy or the file does not exist, only a **neutral, encoded notice** is shown
+    (`Legacy_XmlModule_MessageXmlUnavailable` / `Legacy_XmlModule_MessageXsltUnavailable`) — **the raw path is not echoed,
+    and no physical path or exception stack is output**;
+  - XML-only configuration (no XSL) also displays normally (the two are validated independently).
+- **Edit page** `DesktopModules/EditXml.aspx`:
+  - `XmlDataSrc` in-application virtual path of the XML data file (optional, max 250 characters)
+  - `XslTransformSrc` in-application virtual path of the XSL/T transform file (optional, max 250 characters)
+- **Required fields**: this edit page has **no `RequiredFieldValidator` at all** — both fields may be saved empty.
+- **Save validation**: both values are normalised through the same path policy; **if either fails, the save is rejected**
+  with the notice `EditXml_MessageInvalidResourcePath` (which does not include the raw input).
+- **Permissions**: positive-integer `Mid` + `HasEditPermissions(moduleId)` (**does not require** the narrower
+  `ContentRawHtmlEdit` permission that the HTML module needs).
+- **What it does not do (stated honestly)**: no upload, online editing, external URL or arbitrary physical-path
+  capability; external XML, remote stylesheets and scripts are never auto-loaded.
+- **Audit**: this save path **does not write an operation audit**.
+- **Current deployment** (measured in the development database): **1 instance** — "热门动态" on the home tab
+  (`ModuleId=6`: `xmlsrc=~/data/sales.xml`, `xslsrc=~/data/sales.xsl`).
+
+### Signin
+
+- **Purpose**: provide a sign-in form on a tab (login identifier + password + remember me).
+- **Display**: `DesktopModules/Signin.ascx` — `EmailOrName` (login identifier), `password` (password),
+  `RememberCheckbox` (remember me), `SigninBtn` (sign in), `RegisterLink` (self-registration entry pointing at
+  `~/Admin/Register.aspx`, **visible only when `PortalRegistrationOptions.AllowSelfRegistration` is explicitly enabled —
+  off by default**).
+- **Submission protection**: before submit, the password is written into the hidden field `EncryptedPassword` using a
+  **one-time RSA public key** (provided by `~/Security/LoginPasswordKey.ashx`); the server decrypts it and keeps the plain
+  value **only within the current request**. Whether encrypted submission is mandatory is decided by
+  `PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired()`, and a plain fallback is accepted only when it is not
+  required.
+- **Validation and ticket**: password verification is delegated to `IUsersDb.SignIn` (strong hashing + legacy MD5
+  compatibility upgrade + multi-identifier resolution: login name / legacy name / active employee code / e-mail); on
+  success `PortalAuthenticationService.SignIn` issues a ticket **carrying the security version** (the role cookie is
+  built on demand during the authentication-request phase); the **failure message is generic** and discloses neither
+  whether the user exists, nor review status, nor digest-comparison details.
+- **Audit (unlike the content modules above, stated honestly)**: **a failed sign-in writes an operation audit**
+  (`SignInFailed`, `Outcome=Failure`, carrying only the login identifier and **never the password, salt or hash
+  material**); a legacy-credential upgrade and a password iteration-count upgrade each write one audit record as well.
+- **Edit page**: **no edit page** — this module has no settings page such as `EditSignin`; sign-in behaviour is decided by
+  runtime settings and the authentication service and **is not configured per module instance**.
+- **Current deployment and evidence boundary (registered honestly)**: **0 instances** in the development database (no
+  `Signin.ascx` row in `PortalCfg_Modules`), so **this module has no runtime evidence** — everything above is
+  **source-level description**; re-entry condition: after the module instance is mounted in the target environment,
+  runtime evidence can be collected and this section's measured readings filled in.
 
 ## Administration entry point
 
@@ -156,13 +342,19 @@ reason), **confirm which configuration takes effect** (see above), and **confirm
 
 ## Not yet covered (registered honestly)
 
-The following has **no documentation support at present** — consult the source or open an issue; do not assume
+The following currently has **no documentation support** — consult the source or open an issue; do not assume
 documentation exists:
 
-- Runtime screenshots.
-- Production deployment considerations (for deployment refer to `deployment-checklist.md` and `operations-runbook.md`; this
-  page deliberately does not repeat deployment steps).
-- The **approval flow UI** for leave requests and expense reimbursements — this cycle only persists records and generates work
-  items; approval actions are out of scope for these modules.
-- Item-by-item operating instructions for the existing content modules (announcements, contacts, discussions, documents,
-  events, images, links, etc.).
+- ~~Runtime screenshots~~ — **delivered**:  established the **runtime screenshot baseline** (reproducible
+  capture at a fixed 1440×1000 viewport, unified naming, artifacts into the internal evidence package, manifest kept in
+  the repository); see `documentation-artifacts-guide.md` "Runtime screenshot baseline".
+- Production deployment considerations (for deployment refer to `deployment-checklist.md` and `operations-runbook.md`;
+  this page deliberately does not repeat deployment steps).
+- ~~Item-by-item operating instructions for the approval-flow UI of leave requests and expense reimbursements~~ —
+  **delivered**: the approval-flow boundary is declared in the public documentation (see "Approval flow boundary
+  (required reading)" above: these modules only persist data and generate to-dos; approval actions are not part of them,
+  and the boundary is machine-guarded by a gate, ).
+- ~~Item-by-item operating instructions for the existing content modules (announcements, contacts, discussions, documents,
+  events, images, links, etc.)~~ — **delivered**: see the "Common modules" subsections above.
+- ~~Item-by-item operating instructions for the four modules `HTML`, `QuickLinks`, `XML` and `Signin`~~ — **delivered**:
+  see the "Common modules" subsections above.
