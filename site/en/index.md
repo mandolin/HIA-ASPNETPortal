@@ -43,7 +43,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 <section class="oc-section">
   <p class="oc-eyebrow">Core capability</p>
   <h2 class="oc-h2">Ready out of the box, and yours to extend</h2>
-  <p class="oc-lead">These four areas are the platform's core capabilities. Each is independent: enable what you need, or take a single one as a reference.</p>
+  <p class="oc-lead">These five areas are the platform's core capabilities. Each is independent: enable what you need, or take a single one as a reference.</p>
   <div class="oc-grid-2">
     <a class="oc-card" href="{{ site.baseurl }}/en/business-application-state-machine/">
       <h3 class="oc-card-title">Permissions and data scope</h3>
@@ -64,9 +64,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
       <h3 class="oc-card-title">Module and theme governance</h3>
       <p>Trusted module packages can be registered, enabled, disabled, removed and boundary-checked; theme packages have contract validation and fallback, with 7 official skins sharing one semantic variable matrix.</p>
       <span class="oc-card-more">Theme-module appearance contract →</span>
-    </a>
-  </div>
-</section>
+      </a>
+      <a class="oc-card" href="{{ site.baseurl }}/en/code-documentation/">
+      <h3 class="oc-card-title">Code documentation</h3>
+      <p>API-level documentation generated from source comments by HIA-Documentation-Sys: the JSDoc half is published as bilingual pages, while the DotNetDoc half produces intermediate output awaiting a rendering component.</p>
+      <span class="oc-card-more">Code documentation guide →</span>
+      </a>
+      </div>
+      </section>
 
 <section class="oc-section">
   <p class="oc-eyebrow">Feature tour</p>

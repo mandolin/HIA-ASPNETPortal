@@ -43,7 +43,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 <section class="oc-section">
   <p class="oc-eyebrow">核心能力</p>
   <h2 class="oc-h2">开箱就有，也能按自己的方式扩展</h2>
-  <p class="oc-lead">下面四类是这个门户平台的核心能力：它们彼此独立，可以按需要启用，也可以只参考其中一部分。</p>
+  <p class="oc-lead">下面五类是这个门户平台的核心能力：它们彼此独立，可以按需要启用，也可以只参考其中一部分。</p>
   <div class="oc-grid-2">
     <a class="oc-card" href="{{ site.baseurl }}/business-application-state-machine/">
       <h3 class="oc-card-title">权限与数据范围</h3>
@@ -61,11 +61,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
       <span class="oc-card-more">查看审计保留期策略 →</span>
     </a>
     <a class="oc-card" href="{{ site.baseurl }}/theme-module-contract/">
-      <h3 class="oc-card-title">模块与主题治理</h3>
-      <p>受信任模块包可注册、启停、移除并做边界校验；主题包有契约校验与回退，7 套正式皮肤共用一套语义变量矩阵。</p>
-      <span class="oc-card-more">查看模块外观契约 →</span>
+    <h3 class="oc-card-title">模块与主题治理</h3>
+    <p>受信任模块包可注册、启停、移除并做边界校验；主题包有契约校验与回退，7 套正式皮肤共用一套语义变量矩阵。</p>
+    <span class="oc-card-more">查看模块外观契约 →</span>
     </a>
-  </div>
+    <a class="oc-card" href="{{ site.baseurl }}/code-documentation/">
+    <h3 class="oc-card-title">代码文档</h3>
+    <p>由 HIA-Documentation-Sys 从源码注释生成 API 级文档：JSDoc 半边已发布中英双语页面，DotNetDoc 半边生成中间产物、待渲染组件就位后补入。</p>
+    <span class="oc-card-more">查看代码文档说明 →</span>
+    </a>
+    </div>
 </section>
 
 <section class="oc-section">

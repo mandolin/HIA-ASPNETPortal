@@ -42,9 +42,24 @@ Not in `docs/`; lives in source node/flow comments.
 - `user-guide.md` — how to run and use the portal; includes the **typical portal configuration flow**, **common
   administrator operations** and **troubleshooting** 
 - `p12-sample-business-flow.md` — a sample business flow
-- **Remaining gaps**: runtime screenshots; item-by-item operating instructions for existing content modules
-  (announcements, contacts, discussions, documents, events, images, links, etc.); the approval flow UI for leave and
-  reimbursement (approval is not inside these modules)
+- **Remaining gaps**: **none for module-level instructions**. (~~Runtime screenshots~~ delivered by `W-anp-P151` as a
+  reproducible baseline; ~~item-by-item instructions for existing content modules~~ delivered by `W-anp-P152`;
+  ~~the approval-flow UI for leave and reimbursement~~ delivered by `W-anp-P153` as an explicit boundary statement, see
+  "Approval flow boundary (required reading)" in `user-guide.md`; ~~`HTML`~~ by `W-anp-P171`; ~~`QuickLinks`~~ by
+  `W-anp-P172`; ~~`XML / XSL`~~ by `W-anp-P173`; ~~`Signin`~~ by `W-anp-P174`)
+  - **Evidence boundary (registered honestly)**: the `Signin` module has **0 instances** in the development database, so
+    it is documented at source level only and **has no runtime evidence**; re-entry condition: mount the module instance
+    in the target environment and collect runtime evidence.
+  - **Code documentation (`C-anp-P32` / `W-anp-P180`)**: the JSDoc half is published (`/api/jsdoc/`, bilingual, explainer
+    page `code-documentation.md`, source fingerprint guarded by an L0 gate); the DotNetDoc half is still **intermediate
+    JSON and not published** — re-entry condition: add it through the same snapshot-manifest mechanism once a
+    rendering/publishing component exists.
+  - **Disposition of the two unpublished docs (`C-anp-P32` / `W-anp-P181`, from a hanging gap to an explicit decision)**:
+    `documentation-registry.md` (documentation-family register) and `documentation-review-checklist.md` (review
+    checklist) **stay unpublished** — they are **internal governance artifacts** (the register records each doc's family,
+    status and owner; the checklist is a process tool), public readers do not need them, and they contain internal
+    work-item numbers unsuitable for publication. Both stay in `docs/` with English translations; if the governance
+    process is ever made public, publish them through the `published.yml` mechanism.
 
 ### 4. Developers and contributors
 
