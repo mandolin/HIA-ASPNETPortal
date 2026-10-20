@@ -165,3 +165,50 @@
 - doc: code-documentation.md
   path: code-documentation
   parent: 开发
+
+# <lang>
+#   <zh-CN>`C-anp-P33`（`W-anp-P187`）新增：**模块详细使用说明**。此前每个模块只有 `docs/user-guide.md`
+#     里的一小节（`D9`），本周期为每个模块补独立页（八节：用途与前置 / 操作步骤 / 字段表 / 必填与校验 /
+#     存储与审计 / 权限 / 常见问题 / 边界与不做），挂在「参考」分区下。中文正文在 `docs/modules/`，英文译本
+#     在 `site/_translations/modules/` —— 两者齐备才可声明上架（构建会拦）。</zh-CN>
+#   <en>`C-anp-P33` (`W-anp-P187`) addition: the **module operating guides**. Previously each module had only a short
+#     section inside `docs/user-guide.md` (`D9`); this cycle adds a dedicated page per module (eight sections), attached
+#     to the Reference section. Chinese text lives in `docs/modules/`, English renders in `site/_translations/modules/`
+#     — a page may be declared published only when both exist (the build enforces this).</en>
+# </lang>
+- doc: modules/index.md
+  path: modules
+  parent: 参考
+- doc: modules/announcements.md
+  path: modules/announcements
+  parent: 参考
+- doc: modules/contacts.md
+  path: modules/contacts
+  parent: 参考
+- doc: modules/discussion.md
+  path: modules/discussion
+  parent: 参考
+- doc: modules/document.md
+  path: modules/document
+  parent: 参考
+- doc: modules/events.md
+  path: modules/events
+  parent: 参考
+- doc: modules/image-module.md
+  path: modules/image-module
+  parent: 参考
+- doc: modules/links.md
+  path: modules/links
+  parent: 参考
+- doc: modules/quick-links.md
+  path: modules/quick-links
+  parent: 参考
+- doc: modules/html-module.md
+  path: modules/html-module
+  parent: 参考
+- doc: modules/xml-module.md
+  path: modules/xml-module
+  parent: 参考
+- doc: modules/signin.md
+  path: modules/signin
+  parent: 参考

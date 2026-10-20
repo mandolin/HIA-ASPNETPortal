@@ -39,6 +39,16 @@ title: HIA-ASPNETPortal 文档
 - `audit-retention-policy.md`：运营审计表的保留期原则与依据。
 - `font-policy-and-audit.md`：字体使用原则、许可证边界和当前审计结果。
 - `third-party-dependencies.md`：新增第三方依赖的用途、许可证和分发边界。
+- `modules/announcements.md`：**公告模块**详细使用说明——字段表、必填与日期比较校验、有效期语义、存储与审计、权限、常见问题。
+- `modules/contacts.md`：**联系人模块**详细使用说明——字段表、唯一必填项、无格式校验的风险、存储与审计、权限、常见问题。
+- `modules/discussion.md`：**讨论模块**详细使用说明——详情页参数、主题与回复层级、无必填校验的事实、存储与审计、权限、常见问题。
+- `modules/document.md`：**文档模块**详细使用说明——字段表、上传与路径安全策略、存储与审计、权限、常见问题。
+- `modules/events.md`：**事件模块**详细使用说明——字段表、四项全必填、到期过滤、存储与审计、权限、常见问题。
+- `modules/image-module.md`：**图片模块**详细使用说明——字段表、零必填零校验、只存文本设置不做上传、存储与审计、权限、常见问题。
+- `modules/links.md`：**链接模块**详细使用说明——字段表、三处必填与整数顺序校验、链接归属校验、仅测试页签的部署现状、存储与审计、常见问题。
+- `modules/quick-links.md`：**快速链接**详细使用说明——与链接模块共用数据与编辑页、导航策略对不合规地址的抑制、权限模型、存储与审计、常见问题。
+- `modules/html-module.md`：**HTML 文本模块**详细使用说明——字段表、零必填、原始 HTML 窄权限与不做净化的安全边界、存储与审计、常见问题。
+- `modules/xml-module.md`：**XML / XSL 模块**详细使用说明——字段表、路径合规校验与运行期中性降级、只存虚拟路径不做上传、存储与审计、常见问题。
 - `code-documentation.md`：**代码文档体系**——由 HIA-Documentation-Sys 从源码注释生成的 API 级文档（JSDoc 半边已发布中英双语页面，DotNetDoc 半边为中间产物）、刷新方式与依赖安装注意事项。
 
 ## 使用说明

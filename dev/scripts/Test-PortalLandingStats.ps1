@@ -141,27 +141,33 @@ $INTENTIONALLY_UNPUBLISHED = @{
     #     satisfies the default-deny rule (a new document is either published or has an explicit basis) and avoids
     #     "neither published nor explained".</en>
     # </lang>
-    'modules\announcements.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\contacts.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\discussion.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\document.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\events.md' = '模块详细使用说明（中文正文已交付 W-anp-P185）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\image-module.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\links.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\quick-links.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\html-module.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
-    'modules\xml-module.md' = '模块详细使用说明（中文正文已交付 W-anp-P186）；英译与上架统一在 W-anp-P187 完成，届时移出本白名单。'
 }
 
 $sitePages = @()
-foreach ($dir in (Get-ChildItem $siteDir -Directory | Where-Object { $_.Name -notmatch '^(_|en$)' })) {
-    $indexPath = Join-Path $dir.FullName 'index.md'
-    if (-not (Test-Path -LiteralPath $indexPath)) { continue }
-    $text = [System.IO.File]::ReadAllText($indexPath)
+# <lang><zh-CN>**递归收集站点页**（`W-anp-P187` 修复的门禁缺陷）：首版只扫 `site/` 下**一层**目录的 `index.md`
+#   （`site/<slug>/index.md`）。本周期引入**嵌套**页面 `site/modules/<slug>/index.md` 后，这些**已上架**
+#   页面被漏扫，于是 A1 把它们判成"既没上架、也没登记依据"——**门禁自己的漏检制造了假失败**。
+#   现改为递归收集，并保留原有排除口径：跳过 `_` 开头目录（Jekyll 内部目录与 `_translations`）、
+#   英文页所在的 `en/` 目录（英文页是同一文档的另一种语言呈现，不重复计入"文档"），以及站点根
+#   `site/index.md`（它自身不是一篇文档）。</zh-CN>
+#   <en>**Collect site pages recursively** (gate defect fixed in `W-anp-P187`): the first version scanned only `index.md`
+#   **one level** below `site/` (`site/<slug>/index.md`). Once **nested** pages `site/modules/<slug>/index.md` appeared,
+#   those **published** pages were missed, so A1 judged them "neither published nor registered" — **a false failure
+#   manufactured by the gate's own blind spot**. Now recursive, keeping the original exclusion logic: directories starting
+#   with `_` (Jekyll internals and `_translations`), the `en/` directories (English renders are another language view of
+#   the same document, not a second document), and the site root `site/index.md` (not itself a document).</en>
+# </lang>
+$rootIndexPath = Join-Path $siteDir 'index.md'
+foreach ($indexPath in (Get-ChildItem $siteDir -Recurse -File -Filter 'index.md' | Where-Object {
+        $_.FullName -ne $rootIndexPath -and
+        $_.FullName -notmatch '[\\/]_' -and
+        $_.FullName -notmatch '[\\/]en[\\/]'
+    })) {
+    $text = [System.IO.File]::ReadAllText($indexPath.FullName)
     $title = $null
     if ($text -match '(?m)^title:\s*(.+?)\s*$') { $title = $Matches[1].Trim() }
-    if (-not $title) { $title = Get-FirstHeading $indexPath }
-    $sitePages += [pscustomobject]@{ dir = $dir.Name; title = $title }
+    if (-not $title) { $title = Get-FirstHeading $indexPath.FullName }
+    $sitePages += [pscustomobject]@{ dir = $indexPath.Directory.Name; title = $title }
 }
 
 $docs = @()

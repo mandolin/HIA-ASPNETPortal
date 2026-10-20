@@ -83,6 +83,14 @@ maintainers. Internal planning and collaboration material are not published with
   raw-HTML permission and the no-sanitisation security boundary, storage and audit, common questions.
 - `modules/xml-module.md`: detailed operating instructions for the **XmlModule** module — field table, path-compliance checks and neutral
   runtime degradation, virtual paths only with no upload, storage and audit, common questions.
+- `modules/index.md`: the **index of the module operating guides** — one page per module (purpose and prerequisites,
+  operating steps, field table, required fields and validation, storage and audit, permissions, common questions,
+  boundaries and non-goals), plus three cross-cutting facts (only Signin writes operational audit, validation strength
+  varies enormously between modules, and deployment status differs).
+- `modules/signin.md`: detailed operating instructions for the **Signin** module — view controls and submission
+  protection (one-time RSA public key encryption), the validation flow, the **only path in this repository that writes
+  operational audit**, the permission model beyond `ContentRawHtmlEdit`, and the evidence boundary of **no edit page /
+  0 instances / source-level description only**.
 - `code-documentation.md`: the **code documentation system** — API-level documentation generated from source comments by
   HIA-Documentation-Sys (the JSDoc half is published as bilingual pages; the DotNetDoc half is intermediate output), plus
   refresh procedure and dependency-installation notes. dependencies.
