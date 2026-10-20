@@ -485,6 +485,23 @@ $gateLayers = [ordered]@{
         #   entirely under `temp/`, touching no repository file.</en>
         # </lang>
         @{ File = 'Test-PortalModuleDocPages.ps1';             Runner = 'ps1'; Kind = '模块独立文档页'; Args = @() }
+
+        # <lang>
+        #   <zh-CN>公开文档**内容适用性**门禁（L0；用户 2026-10-21 指出、备忘 D11）：已上架的公开文档不得出现
+        #     「内部资料放哪 / 不随本站发布」一类表述，也不得出现内部工作项编号（W-anp-P* / C-anp-P*）。
+        #     只扫 published.yml 声明的已上架文档（中文 docs/<doc> + 英文 site/_translations/<doc>），
+        #     **未上架的内部治理件不在范围**（它们本就是内部件）。原则：公开页面只讲产品与其使用/运维，
+        #     不讲项目内部的计划、协作与治理安排。刻意放行 <internal evidence directory> 命令占位符。</zh-CN>
+        #   <en>Public documentation **content applicability** gate (L0; raised by the user 2026-10-21, memo D11):
+        #     published public documents must not contain "where internal material lives / not published here"
+        #     statements, nor internal work-item numbers (W-anp-P* / C-anp-P*). It scans only the published
+        #     documents declared in published.yml (Chinese docs/<doc> + English site/_translations/<doc>);
+        #     **unpublished internal governance artifacts are out of scope** (they are internal by design).
+        #     Principle: a public page talks about the product and its use/operation, not about the project's internal
+        #     planning, collaboration or governance. The <internal evidence directory> command placeholder is
+        #     deliberately allowed.</en>
+        # </lang>
+        @{ File = 'Test-PortalPublicDocContentApplicability.ps1'; Runner = 'ps1'; Kind = '公开文档内容适用性'; Args = @() }
         # <lang>
         #   <zh-CN>`C-anp-P28`（`W-anp-P153`）新增：**审批流转边界看守**门禁（L0）。验收判据 V3 要求
         #   「审批流转边界在公开文档中有明确声明」。源码实测（2026-10-19）：请假 / 报销两个模块的提交动作链

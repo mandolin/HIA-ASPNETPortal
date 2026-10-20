@@ -19,28 +19,28 @@ title: 部署式模块包开发指南
 
 ```text
 DesktopModules/
-  ModuleProbe/
-    ModuleProbe.ascx
-    ModuleProbe.ascx.cs
-    ModuleProbe.ascx.designer.cs
-    module.json
-    Styles/
-      ModuleProbe.css
+ ModuleProbe/
+ ModuleProbe.ascx
+ ModuleProbe.ascx.cs
+ ModuleProbe.ascx.designer.cs
+ module.json
+ Styles/
+ ModuleProbe.css
 ```
 
 `PackageFolder` 必须匹配 `^[A-Za-z][A-Za-z0-9_-]{0,63}$`。`moduleFolder` 下的 `module.json` 当前对只读参考包（如 `ModuleProbe`）使用 `schemaVersion: 1`：
 
 ```json
 {
-  "schemaVersion": 1,
-  "packageId": "HIA.ModuleProbe",
-  "displayName": "模块验证 / Module Probe",
-  "version": "1.0.0",
-  "minimumPortalVersion": "1.0",
-  "desktopEntry": "DesktopModules/ModuleProbe/ModuleProbe.ascx",
-  "resources": [
-    "Styles/ModuleProbe.css"
-  ]
+ "schemaVersion": 1,
+ "packageId": "HIA.ModuleProbe",
+ "displayName": "模块验证 / Module Probe",
+ "version": "1.0.0",
+ "minimumPortalVersion": "1.0",
+ "desktopEntry": "DesktopModules/ModuleProbe/ModuleProbe.ascx",
+ "resources": [
+ "Styles/ModuleProbe.css"
+ ]
 }
 ```
 
@@ -69,10 +69,10 @@ DesktopModules/
 
 ```aspx
 <%--
-    <lang>
-        <zh-CN>说明：员工只确认自己当前绑定的低敏资料，不提供上传或外部资源。</zh-CN>
-        <en>Note: employees only confirm their currently bound low-sensitivity profile data; no upload or external resource capability is provided.</en>
-    </lang>
+ <lang>
+ <zh-CN>说明：员工只确认自己当前绑定的低敏资料，不提供上传或外部资源。</zh-CN>
+ <en>Note: employees only confirm their currently bound low-sensitivity profile data; no upload or external resource capability is provided.</en>
+ </lang>
 --%>
 ```
 
@@ -120,10 +120,10 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 1. 先在 Visual Studio 或 VSCode 构建解决方案，完成受信任部署流程后把包目录部署到 `DesktopModules/`。
 2. 对目标数据库执行 `src/Setup/PortalCfg_ModulePackageStates.sql`，或使用 SQL 兼容性脚本：
 
-   ```powershell
-   & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 `
-       -ConnectionStringsConfigPath $testConfig -ApplyP3Migrations -RequireP3Migrations
-   ```
+ ```powershell
+ & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 `
+ -ConnectionStringsConfigPath $testConfig -ApplyP3Migrations -RequireP3Migrations
+ ```
 
 3. 以 `Admins` 身份访问 `Admin/ModuleCatalog.aspx`。目录页只显示已部署且通过校验的包；点击 **Register** 会创建指向 manifest `desktopEntry` 的旧模块定义记录。
 4. 在既有 Tab 布局管理页面从已注册定义中添加实例。新模块默认使用 `CacheTimeout=0`；缓存策略需要单独评估后再调整。
@@ -137,8 +137,8 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalBusinessModuleSmoke.ps1 `
-    -ModuleName HIA.YourModule `
-    -SqlMigrationFile src\Setup\PortalBiz_YourEntities.sql
+ -ModuleName HIA.YourModule `
+ -SqlMigrationFile src\Setup\PortalBiz_YourEntities.sql
 ```
 
 冒烟门禁强制以下约束（**均为 Fail 级，不可绕过**）：
@@ -189,21 +189,21 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 
 ## 新增模块的隐藏陷阱（实测）
 
-以下四类缺陷**构建与单测全绿时不会出现，只在运行期以"页面空白 / 门禁误判"形式暴露**，是 两个业务模块时逐项踩出的。新增任何模块都先过一遍：
+以下四类缺陷**构建与单测全绿时不会出现，只在运行期以"页面空白 / 门禁误判"形式暴露**，是交付两个业务模块时逐项踩出的。新增任何模块都先过一遍：
 
 1. **代码后置必须登记进 `Portal.csproj`。** `src/Portal` 是 **Web Application 项目**（有 `Portal.csproj`），既有模块的 `.ascx.cs` 编译进 `bin/Portal.dll`。新增模块若只在磁盘上放文件、未在 csproj 登记 `<Compile Include="DesktopModules\{Module}\{Module}.ascx.cs">`（及 `.ascx.designer.cs`）与 `<Content Include="...{Module}.ascx / module.json / Styles/*.css">`，则 `CodeBehind` 在运行期报"未能加载类型 ASPNET.StarterKit.Portal.{Module}"；更隐蔽的是**未登记时 MSBuild 不编译这些文件**，于是 `out var`、`long→string` 一类编译错误只在运行期炸。
-2. **7 套正式皮肤（含 `Default` 回退主题）必须补齐主题作用域规则。** 只写模块自带 `Styles/{Module}.css` 而**不在 `src/Portal/App_Themes/<Theme>/Default.css` 补 `body.portal-theme-<规范化名> .<模块前缀类>` 规则**，模块在多数皮肤下丢失主题化样式（AGENTS.md 硬性要求）。取值取自各皮肤既有 `my-work-items` 同族调色板，并为不支持 `var()` 的 IE9+ 提供显式回退。`Default` 虽是回退主题，同样受覆盖门禁约束，不能只补 6 套正式皮肤而漏它。
+2. **7 套正式皮肤（含 `Default` 回退主题）必须补齐主题作用域规则。** 只写模块自带 `Styles/{Module}.css` 而**不在 `src/Portal/App_Themes/<Theme>/Default.css` 补 `body.portal-theme-<规范化名> .<模块前缀类>` 规则**，模块在多数皮肤下丢失主题化样式（AGENTS.md 硬性要求）。取值取自各皮肤既有 `my-work-items` 同族调色板，并为不支持 `var` 的 IE9+ 提供显式回退。`Default` 虽是回退主题，同样受覆盖门禁约束，不能只补 6 套正式皮肤而漏它。
 3. **标记层与 CSS 类名必须一致。** 标记层用 `form-grid` / `form-field` / `list` 而模块 CSS 写 `.grid` / `.field` / `.recent` 时，模块样式与主题规则会**全部落空却无任何报错**。以标记层（`.ascx` 的 `class=` 与 Web Forms 控件的 `CssClass=`）为权威，模块 CSS 与主题规则只承载布局与取色。
 4. **配置生效源分两层，判断依据是「JSON 文件是否存在于站点根目录」。** 业务包需经 `Portal.ModulePackages.Enabled` 白名单放行。机制如下（见 `src/Portal/Util/AppSettingsLoader.cs`）：
-   - **基础值**：`Web.config` 的 `<appSettings>` 始终先生效；
-   - **覆盖值**：`AppSettingsLoader.LoadConfig` 只在其参数指向的文件**确实存在于站点根目录**时，才把该 JSON 的 `appSettings` 键 `Set` 进 `ConfigurationManager.AppSettings`（覆盖同名键，未声明的键按 `preservePrevious` 保留或移除）；**文件不存在则静默跳过**，不做任何覆盖。
-   - 由此产生的两个实践结论：① 在开发机上改 `src/Portal/Config/appSettings.dev.json`（gitignore，不入库、通常也不在站点根目录）的 `Set` 值**不会落地**，本机运行期读的是 `Web.config` 的既有 `<appSettings>`；② 部署环境把 `appSettings.json` 随包放进站点根目录后，该文件的覆盖**才会**生效（详见 [user-guide.md]({{ site.baseurl }}/user-guide/)「启用前提」）。
-   - 放行业务包时两处一并改，并确认档位键（`Portal.ModuleProfiles.Active`）含该包所在档位。
+ - **基础值**：`Web.config` 的 `<appSettings>` 始终先生效；
+ - **覆盖值**：`AppSettingsLoader.LoadConfig` 只在其参数指向的文件**确实存在于站点根目录**时，才把该 JSON 的 `appSettings` 键 `Set` 进 `ConfigurationManager.AppSettings`（覆盖同名键，未声明的键按 `preservePrevious` 保留或移除）；**文件不存在则静默跳过**，不做任何覆盖。
+ - 由此产生的两个实践结论：① 在开发机上改 `src/Portal/Config/appSettings.dev.json`（gitignore，不入库、通常也不在站点根目录）的 `Set` 值**不会落地**，本机运行期读的是 `Web.config` 的既有 `<appSettings>`；② 部署环境把 `appSettings.json` 随包放进站点根目录后，该文件的覆盖**才会**生效（详见 [user-guide.md]({{ site.baseurl }}/user-guide/)「启用前提」）。
+ - 放行业务包时两处一并改，并确认档位键（`Portal.ModuleProfiles.Active`）含该包所在档位。
 
 > 上述 1–3 已由静态门禁 `Test-PortalNewModuleReadiness.ps1` 守护（L0 层，只依赖源码，无需 IIS/DB）：
 > ```powershell
 > & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalNewModuleReadiness.ps1 `
->     -ModuleName LeaveRequest -ModuleCssPrefix leave-request -ExpectedPackageId HIA.LeaveRequest
+> -ModuleName LeaveRequest -ModuleCssPrefix leave-request -ExpectedPackageId HIA.LeaveRequest
 > ```
 > 门禁检查：R1 csproj 登记、R2 `.ascx` 用 `CodeBehind`、R3 7 套皮肤（含 `Default` 回退主题）均含 `<prefix>` 主题规则、R4 模块 CSS 类选择符均在 `.ascx` 出现（含 `CssClass`）。确有 JS/代码后置专属类时用 `-SkipClassConsistency` 据实豁免并在提交信息写明。
 

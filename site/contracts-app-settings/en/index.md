@@ -18,15 +18,15 @@ Configuration is read in two layers, decided by **whether the file exists in the
 
 1. **Base values**: `<appSettings>` in `Web.config` always takes effect first;
 2. **Override values**: `AppSettingsLoader` writes the file's `appSettings` keys into
-   `ConfigurationManager.AppSettings` (overriding keys of the same name) **only when the JSON file it points at actually
-   exists in the site root directory**; **if the file is absent it is silently skipped**.
+ `ConfigurationManager.AppSettings` (overriding keys of the same name) **only when the JSON file it points at actually
+ exists in the site root directory**; **if the file is absent it is silently skipped**.
 
 Two practical consequences follow:
 
 - Changes to the uncommitted `src/Portal/Config/appSettings.dev.json` on a development machine **do not take effect** — the
-  local runtime reads the existing `Web.config` values;
+ local runtime reads the existing `Web.config` values;
 - In a deployment environment, the file's overrides take effect **only once** `appSettings.json` is placed in the site root
-  directory.
+ directory.
 
 Key names are **flat dotted keys** (e.g. `Portal.ModuleProfiles.Active`). Assigning with `$obj.'a.b.c'` directly on the
 configuration object is treated as nested path navigation and throws; keys must be handled literally.
@@ -71,8 +71,8 @@ The two mechanisms are **independent of each other** and easy to conflate:
 ## 4. Related documents
 
 - Operating steps for enabling business modules: the "Business modules: leave requests and expense reimbursement" section of
-  [user-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/user-guide.md).
+ [user-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/user-guide.md).
 - Deployment configuration: [deployment-checklist.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-checklist.md).
 - External connection strings (**not committed**): see
-  [dev-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/dev-guide.md) and
-  `src/Portal/Config/Templates/connectionStrings.config`.
+ [dev-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/dev-guide.md) and
+ `src/Portal/Config/Templates/connectionStrings.config`.

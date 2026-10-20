@@ -31,7 +31,7 @@ Prerequisites:
 
 1. Before submitting, the page encrypts the password with a **one-time RSA public key** into the hidden field `EncryptedPassword` (the key is served by `~/Security/LoginPasswordKey.ashx`).
 2. The server decrypts it and the password travels **only within the current request**.
-3. Whether encrypted submission is **mandatory** is decided by `PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired()`; plain-text fallback is accepted only when it is not required.
+3. Whether encrypted submission is **mandatory** is decided by `PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired`; plain-text fallback is accepted only when it is not required.
 
 **Server-side validation flow**:
 
@@ -61,9 +61,9 @@ This module has **no edit page**, so there is no "edit-page control" field table
 
 - **Storage**: password verification goes through `UsersDB.SignIn` (`IUsersDb.SignIn`); the ticket is issued by `PortalAuthenticationService.SignIn`. **The sign-in module itself stores no business data.**
 - **Audit (the only content path in this repository that writes operational audit — must be known)**:
-  - **sign-in failure** writes one record: `SignInFailed`, `Outcome=Failure`, **carrying only the identifier**, **never the password, salt or hash material**;
-  - **legacy credential upgrade** writes one record: `LegacyCredentialUpgraded`;
-  - **password iteration-cost upgrade** writes one record: `CredentialCostUpgraded`.
+ - **sign-in failure** writes one record: `SignInFailed`, `Outcome=Failure`, **carrying only the identifier**, **never the password, salt or hash material**;
+ - **legacy credential upgrade** writes one record: `LegacyCredentialUpgraded`;
+ - **password iteration-cost upgrade** writes one record: `CredentialCostUpgraded`.
 - By contrast, announcements, contacts, discussion, document, events, images, links, quick links, HTML text and XML/XSL — **all ten content edit paths write no operational audit**.
 
 ## Permissions

@@ -9,12 +9,12 @@
 
 1. `src/Portal/Components/PortalPage.cs` 在 `PreInit` 解析并应用唯一的原生 Web Forms Theme。
 2. `src/Portal/App_Themes/{ThemeName}/` 提供主题清单和 `Default.css`；主题选择、Tab 覆盖和回退规则见
-   [theme-package-guide.md](theme-package-guide.md)。
+ [theme-package-guide.md](theme-package-guide.md)。
 3. `src/Portal/Default.master` 提供默认 Banner、唯一的 server form 和 `MainContent` 占位符。
 4. `src/Portal/Default.master.cs` 在渲染前写入稳定的主题/Tab CSS class，并仅为当前 Tab 的已启用、受信任模块包
-   挂载已验证的站内 CSS。
+ 挂载已验证的站内 CSS。
 5. 模块包样式例如 `DesktopModules/ModuleProbe/Styles/ModuleProbe.css` 必须通过模块 catalog 校验。主题资源、外部 URL
-   和模块 JavaScript 不会由 Master 页面自动加载。
+ 和模块 JavaScript 不会由 Master 页面自动加载。
 
 默认主题继续支持 IE9+ 兼容 CSS。不要在主题中依赖 CSS variables、Grid、Flexbox、远程字体、远程资源或主题脚本。
 普通文字使用开源字体优先栈和 generic fallback，具体许可证边界见 [font-policy-and-audit.md](font-policy-and-audit.md)。

@@ -13,7 +13,7 @@ This document is the human-readable baseline for the portal theme layer's **sema
 
 > **Authority note**: this document is a **snapshot extracted from `src/Portal/App_Themes/*/Default.css`**, provided for
 > reading and cross-checking. The machine-checkable authoritative source is the CSS itself plus the corresponding gate
-> (`C-anp-P18` / `W-anp-P100`). Where the two disagree, **the CSS and the gate win**, and this document should be updated.
+> Where the two disagree, **the CSS and the gate win**, and this document should be updated.
 > This follows the project's standing principle: registry entries go stale, and the only reliable thing is a repeatable
 > check.
 
@@ -52,13 +52,13 @@ The 7 themes are the 6 official skins plus the `Default` fallback theme: `Enterp
 ### Two patterns in the matrix (understand these before adding a variable)
 
 1. **The first 13 variables come in one light-family set and one dark-family set**: the 4 light themes
-   (Default / EnterpriseLight / OaLight / StateClassicLight) have identical values, and the 3 dark themes
-   (EnterpriseDark / OaDark / StateClassicDark) also have identical values. They express **light/dark tonality**, not
-   theme-family style (including `--portal-text-subtle`, added).
+ (Default / EnterpriseLight / OaLight / StateClassicLight) have identical values, and the 3 dark themes
+ (EnterpriseDark / OaDark / StateClassicDark) also have identical values. They express **light/dark tonality**, not
+ theme-family style (including `--portal-text-subtle`, added).
 2. **`--portal-danger-text` is the only variable distinguished by theme family**: because it does not express light/dark
-   but rather **each theme family's own error colour** (taken directly from that theme's existing `.NormalRed`). The
-   Enterprise and Oa families share the same light error colour (`#b42318`) but differ in dark (`#ff8b8b` / `#ff9b9b`);
-   StateClassic differs at both ends (`#9e2f2e` / `#ff9c99`).
+ but rather **each theme family's own error colour** (taken directly from that theme's existing `.NormalRed`). The
+ Enterprise and Oa families share the same light error colour (`#b42318`) but differ in dark (`#ff8b8b` / `#ff9b9b`);
+ StateClassic differs at both ends (`#9e2f2e` / `#ff9c99`).
 
 **Corollary**: when adding a semantic variable, first decide which class it belongs to — one that expresses light/dark
 tonality should join the "light/dark pair"; one that expresses an inherent theme-family property (such as an error or
@@ -87,14 +87,14 @@ rather than inventing a new colour.
 ## 4. Usage rules
 
 1. **Module CSS must not hard-code colours.** Where a colour is needed, write `var(--portal-*, fallback)`, with the
-   fallback being the value the rule had before, guaranteeing unchanged behaviour on older engines.
+ fallback being the value the rule had before, guaranteeing unchanged behaviour on older engines.
 2. **All 7 themes must define it at the same time.** When adding a variable, not one of the 7 `Default.css` files may be
-   missing it; a theme missing the definition falls back to the fallback value in browsers that support variables, causing
-   "style drift in individual skins" that is hard to notice.
+ missing it; a theme missing the definition falls back to the fallback value in browsers that support variables, causing
+ "style drift in individual skins" that is hard to notice.
 3. **Prefer reusing existing theme classes** rather than inventing new colours for a new variable. Reuse `.NormalRed` for
-   the error colour, and existing values such as `.portal-admin-subtitle` for neutrals.
+ the error colour, and existing values such as `.portal-admin-subtitle` for neutrals.
 4. **Variables are defined only in the theme layer**; the module layer only references them. Defining another layer of
-   semantic variables in the module layer creates two levels of indirection that are hard to trace.
+ semantic variables in the module layer creates two levels of indirection that are hard to trace.
 
 ## 5. How to reproduce this matrix
 
@@ -103,12 +103,12 @@ The following command extracts the matrix from the live CSS and can be used to c
 ```powershell
 $themes = @('Default','EnterpriseLight','EnterpriseDark','OaLight','OaDark','StateClassicLight','StateClassicDark')
 foreach ($t in $themes) {
-    $text = Get-Content "src/Portal/App_Themes/$t/Default.css" -Raw -Encoding UTF8
-    $vars = @{}
-    foreach ($m in [regex]::Matches($text, '--portal-([a-z0-9-]+)\s*:\s*([^;]+);')) {
-        $vars[$m.Groups[1].Value] = $m.Groups[2].Value.Trim()
-    }
-    Write-Host ("$t : " + (($vars.Keys | Sort-Object | ForEach-Object { "$_=$vars[$_]" }) -join '  '))
+ $text = Get-Content "src/Portal/App_Themes/$t/Default.css" -Raw -Encoding UTF8
+ $vars = @{}
+ foreach ($m in [regex]::Matches($text, '--portal-([a-z0-9-]+)\s*:\s*([^;]+);')) {
+ $vars[$m.Groups[1].Value] = $m.Groups[2].Value.Trim
+ }
+ Write-Host ("$t : " + (($vars.Keys | Sort-Object | ForEach-Object { "$_=$vars[$_]" }) -join ' '))
 }
 ```
 
@@ -120,4 +120,4 @@ theme lacks a variable, that is a missing definition and must be filled in.
 - `theme-package-guide.md`: directory, enablement, fallback and release boundaries for trusted theme packages.
 - `frontend-asset-guide.md`: Web Forms presentation, themes, module CSS and frontend asset boundaries.
 - For the module appearance contract (the class set for container / heading / partition / table / notice / muted / danger,
-  plus per-skin palettes), see the output of `C-anp-P18` / `W-anp-P99`.
+ plus per-skin palettes), see `theme-module-contract.md`.

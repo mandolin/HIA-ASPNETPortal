@@ -72,15 +72,15 @@ the module requires**. It is a **separate dimension** from the product version (
 
 - the product version evolves with releases (see section 2) and may be incremented by any change;
 - `minimumPortalVersion` is the module's **compatibility declaration** about its host portal, and needs to be raised only
-  when the portal kernel introduces an **incompatible change**.
+ when the portal kernel introduces an **incompatible change**.
 
 **Current disposition (2026-09-26)**: the `"1.0"` values written in historical `module.json` files are **early placeholder
 values** and do **not** mean the product has released `v1.0.0`. To avoid the ambiguity of "requires 1.0 while the product is
 the portal-kernel capability baseline is not the same dimension", the convention is:
 
 1. before the first release (`v1.0.0`), new modules uniformly use a value consistent with the current portal-kernel
-   baseline;
+ baseline;
 2. the portal kernel's compatibility baseline is maintained by this document, and a module's value must be traceable to a
-   meaning here;
+ meaning here;
 3. validation behaviour (whether loading is forcibly blocked) is defined by the module-loading logic; this document defines
-   the semantics only.
+ the semantics only.

@@ -3,7 +3,7 @@
 本文件是门户主题层**语义变量**的人类可读基线：登记 7 套主题各自定义了哪些 `--portal-*` 变量、取值是多少、各自适用于什么场景。
 
 > **权威性说明**：本文件是**从 `src/Portal/App_Themes/*/Default.css` 提取的快照**，便于阅读与对照；
-> 机器可检查的权威来源是 CSS 本身与对应门禁（`C-anp-P18` / `W-anp-P100`）。二者不一致时**以 CSS 与门禁为准**，
+> 机器可检查的权威来源是 CSS 本身与对应门禁。二者不一致时**以 CSS 与门禁为准**，
 > 并应更新本文件。这遵循项目一贯原则：登记项会过期，唯一可靠的是可重复运行的检查。
 
 ## 一、为什么要有语义变量
@@ -76,12 +76,12 @@
 ```powershell
 $themes = @('Default','EnterpriseLight','EnterpriseDark','OaLight','OaDark','StateClassicLight','StateClassicDark')
 foreach ($t in $themes) {
-    $text = Get-Content "src/Portal/App_Themes/$t/Default.css" -Raw -Encoding UTF8
-    $vars = @{}
-    foreach ($m in [regex]::Matches($text, '--portal-([a-z0-9-]+)\s*:\s*([^;]+);')) {
-        $vars[$m.Groups[1].Value] = $m.Groups[2].Value.Trim()
-    }
-    Write-Host ("$t : " + (($vars.Keys | Sort-Object | ForEach-Object { "$_=$vars[$_]" }) -join '  '))
+ $text = Get-Content "src/Portal/App_Themes/$t/Default.css" -Raw -Encoding UTF8
+ $vars = @{}
+ foreach ($m in [regex]::Matches($text, '--portal-([a-z0-9-]+)\s*:\s*([^;]+);')) {
+ $vars[$m.Groups[1].Value] = $m.Groups[2].Value.Trim
+ }
+ Write-Host ("$t : " + (($vars.Keys | Sort-Object | ForEach-Object { "$_=$vars[$_]" }) -join ' '))
 }
 ```
 
@@ -91,4 +91,4 @@ foreach ($t in $themes) {
 
 - `theme-package-guide.md`：受信任主题包的目录、启用、回退和发布边界。
 - `frontend-asset-guide.md`：Web Forms 呈现、主题、模块 CSS 与前端资产边界。
-- 模块外观契约（容器/标题/分区/表格/提示/弱化/危险的类集与逐皮肤色板）见 `C-anp-P18` / `W-anp-P99` 产出。
+- 模块外观契约（容器/标题/分区/表格/提示/弱化/危险的类集与逐皮肤色板）见 `theme-module-contract.md`。

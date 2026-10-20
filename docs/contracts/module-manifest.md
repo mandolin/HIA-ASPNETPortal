@@ -38,16 +38,16 @@
 
 ```json
 "capability": {
-  "capabilityId": "BasicBusiness.LeaveRequest",
-  "role": "Primary"
+ "capabilityId": "BasicBusiness.LeaveRequest",
+ "role": "Primary"
 }
 ```
 
 - **未声明**时 `capabilityId` / `capabilityRole` 保持稳定的空文本，该模块视为 **Unclassified**（未分类）—— 这是合法状态，不是错误。
 - **一旦声明**，则：
-  1. `capabilityId` 与 `role` 均不得为空；
-  2. `capabilityId` 必须能在**权威能力注册表**（`PortalCapabilityRegistry`）中解析到 —— 否则判为"未注册"并拒绝；
-  3. `role` 必须属于**封闭五值词表**（`PortalCapabilityRoles`）：`Primary` / `Contributor` / `Projection` / `Adapter` / `Block`。
+ 1. `capabilityId` 与 `role` 均不得为空；
+ 2. `capabilityId` 必须能在**权威能力注册表**（`PortalCapabilityRegistry`）中解析到 —— 否则判为"未注册"并拒绝；
+ 3. `role` 必须属于**封闭五值词表**（`PortalCapabilityRoles`）：`Primary` / `Contributor` / `Projection` / `Adapter` / `Block`。
 
 ### 当前登记的能力键（实测）
 

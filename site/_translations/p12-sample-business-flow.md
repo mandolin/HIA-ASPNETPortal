@@ -17,11 +17,11 @@ administrator reviews the request in the back office and tracks it through work 
 1. This path is for development, testing and demonstration — it is not a production initialisation process.
 2. Sample data creates no user passwords and stores no credentials.
 3. An employee number is only one of the login identifiers, not an independent password or independent authentication
-   credential.
+ credential.
 4. Only field-level text corrections are covered; high-sensitivity data such as attachments, phone numbers, national ID
-   numbers, salary and performance is not handled.
+ numbers, salary and performance is not handled.
 5. The current work-item capability is lightweight: it includes no transfer, delegation, co-signing, notification or
-   general-purpose workflow designer.
+ general-purpose workflow designer.
 
 ## Automated-side acceptance
 
@@ -38,7 +38,7 @@ The script orchestrates the following read-only checks and, by default, runs one
 3. Business permission and audit gate.
 4. Solution build.
 
-Evidence is written to an internal evidence directory by default; if that directory does not exist, it falls back to
+Evidence is written to the evidence directory by default; if that directory does not exist, it falls back to
 `temp/evidence/p12.5/`.
 
 ## Sample data SQL
@@ -63,16 +63,16 @@ account-employee binding, but never creates users or modifies passwords.
 
 1. Sign in with an ordinary employee test account.
 2. Open the employee profile confirmation module and confirm the employee number, name, organisation and other profile
-   data are visible.
+ data are visible.
 3. Open the employee profile correction request module, pick a low-sensitivity field, enter a suggested value and submit.
 4. Sign in to the back office with an administrator account and open
-   `Admin/EmployeeProfileCorrectionRequests.aspx`.
+ `Admin/EmployeeProfileCorrectionRequests.aspx`.
 5. Confirm the submitted request appears in the list.
 6. Open `Admin/WorkItems.aspx` and confirm the lightweight work item for that request exists.
 7. Perform one of approve, reject or close in the profile correction back office.
 8. Open the operations audit page and confirm the submission and review actions can be traced.
 9. Open the work-item back office again and confirm the corresponding work item status has been synced to completed or
-   cancelled.
+ cancelled.
 
 ## Expected results
 
@@ -81,12 +81,12 @@ account-employee binding, but never creates users or modifies passwords.
 3. A successful profile correction submission produces an operations audit record and a lightweight work item.
 4. A successful administrator review produces a review audit record and syncs the work item status.
 5. Current permissions still retain `Admins` compatibility, but code entry points already use fine-grained business
-   permissions.
+ permissions.
 
 ## Follow-up deepening directions
 
 1. Once a role-permission UI exists, assign the current fine-grained permissions to roles such as HR, business reviewers
-   and read-only observers.
+ and read-only observers.
 2. Bring read-type auditing, audit detail levels and the audit retention policy into system settings and release-time
-   configuration.
+ configuration.
 3. In a later Workflow cycle, add transfer, delegation, co-signing, notification and more business objects.

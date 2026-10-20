@@ -35,29 +35,29 @@ systems, enterprise intranets and Web Forms still have to be maintained.
 
 - Database initialisation scripts live in `src/Setup/`.
 - Strong user password hashes live in `Portal_UserCredentials` and session security versions in
-  `Portal_UserSecurityStates`; the legacy `Portal_Users.Password` column is kept only as a compatibility migration sample for
-  existing MD5 data.
+ `Portal_UserSecurityStates`; the legacy `Portal_Users.Password` column is kept only as a compatibility migration sample for
+ existing MD5 data.
 - Provider-specific scripts live in `src/Setup/Providers/{ProviderId}/`; the first SQLite proof is under `Providers/SQLite/`,
-  and providers such as MySQL or PostgreSQL can be added alongside it later without migrating the existing SQL Server scripts.
+ and providers such as MySQL or PostgreSQL can be added alongside it later without migrating the existing SQL Server scripts.
 - Local database files live in `db/MSSQLLocalDB/`.
 - Data access uses Entity Framework 6.1.0.
 - Dependency injection uses Unity 5.x.
 - The web project still uses the classic `packages.config` and the `src/packages/` NuGet directory.
 - `src/Portal.DataProviderProof/` is a .NET Framework 4.8 development/test proof project that is **not** part of the main
-  solution; it verifies the ADO.NET provider factory and basic SQLite transaction capability and does not take part in normal
-  portal deployment.
-  runtime dependency or transport.
+ solution; it verifies the ADO.NET provider factory and basic SQLite transaction capability and does not take part in normal
+ portal deployment.
+ runtime dependency or transport.
 
 Data-access compatibility is recorded under four labels:
 
 - `SqlServerOnly`: capabilities that can currently be treated as SQL Server only, e.g. `System.Data.SqlClient`, the EF SQL
-  Server provider, `[dbo]`, `OBJECT_ID`, `SYSUTCDATETIME()`, `IDENTITY`, `ROWVERSION`.
+ Server provider, `[dbo]`, `OBJECT_ID`, `SYSUTCDATETIME`, `IDENTITY`, `ROWVERSION`.
 - `NeedsDialect`: SQL that could be abstracted but must be rewritten per provider, e.g. `SELECT TOP`, lock hints,
-  `OUTPUT INSERTED` and table variables.
+ `OUTPUT INSERTED` and table variables.
 - `PortableCandidate`: capabilities that can serve as a provider-abstraction entry point or are close to universal, e.g.
-  `PortalDatabaseProfile`, `DbProviderFactories`, simple connection checks.
+ `PortalDatabaseProfile`, `DbProviderFactories`, simple connection checks.
 - `ProviderProof`: standalone proof scope, e.g. the current SQLite proof; it does **not** mean the portal's primary business
-  database already supports that provider.
+ database already supports that provider.
 
 A read-only inventory can be produced with `dev/scripts/Get-PortalDataAccessInventory.ps1`. The script scans only Git-tracked
 source and never reads real connection strings or configuration outside the repository.
@@ -66,9 +66,9 @@ source and never reads real connection strings or configuration outside the repo
 ## Current architectural risks
 
 - Two closely related data-access projects exist, `Portal.Components.Data` and `Portal.Components.Data1`; their
-  responsibility boundary needs further confirmation.
+ responsibility boundary needs further confirmation.
 - Generated documentation is mixed with source in directories such as `src/Documentation`; a clear generation location and
-  cleanup policy should be defined later.
+ cleanup policy should be defined later.
 - There is currently no automated test project; a minimal regression check is needed before architectural changes.
 - The configuration directory holds both templates and real environment files; rules for managing sensitive configuration
-  need to be established.
+ need to be established.

@@ -52,7 +52,7 @@ Taken from `EnterpriseLight`'s `--portal-*` semantic variables (light family; `D
 | Zebra-stripe row | `--portal-list-row-alt` | `#f7f9fc` |
 | Error / failure / validation feedback | `--portal-danger-text` | `#b42318` |
 
-> `--portal-text-subtle` was added by the `C-anp-P23` D3 ruling, for colour layering between heading and subheading.
+> `--portal-text-subtle` was added by the D3 ruling, for colour layering between heading and subheading.
 > `--portal-danger-text` is the only variable that differs per theme family (see `docs/theme-semantic-variables.md`);
 > the site uses the Enterprise light value `#b42318`.
 
@@ -112,39 +112,39 @@ product entry → evaluate → quick start → learn → reference → develop �
 ## 8. Bilingual typography conventions
 
 - The Chinese tree sits at the site root, the English tree under `/en/`; **paths and file names correspond one-to-one**
-  (e.g. `product-overview/` ↔ `en/product-overview/`).
+ (e.g. `product-overview/` ↔ `en/product-overview/`).
 - Each page offers a cross-language entry at the **top** (already present on the home page) so any page can be switched in
-  one click.
+ one click.
 - Bilingual text must **not** be machine placeholder: a translation must be semantically equivalent to its source,
-  confirmed by a human walkthrough.
+ confirmed by a human walkthrough.
 
 ## 10. HIA series main palette and landing styles (sourced wiring)
 
 `color_scheme` in `site/_config.yml` is the custom scheme **`hia`** (defined in `site/_sass/color_schemes/hia.scss`).
 
 - **Colour authority (user request)**: the HIA series' own design tokens —
-  the `:root` of `HIA-Theme-Builder/HIA/web/src/style.css`
-  (primary `#0047AB`, secondary `#00A8D3`, blue scale p50–p900, cyan scale s50–s900,
-  `surface #F3F6F9` / `surface-2 #EAF0F5` / `panel #FFFFFF` / `line #DCE5EC`,
-  `text #172633` / `muted #667782`, fonts Inter + Noto Sans CJK SC).
-  The `--portal-*` matrix in section 2 of this file remains the value basis for the **product portal skins**
-  (the site keeps product-semantic alignment), but the site's own brand colours follow the HIA series tokens.
+ the `:root` of `HIA-Theme-Builder/HIA/web/src/style.css`
+ (primary `#0047AB`, secondary `#00A8D3`, blue scale p50–p900, cyan scale s50–s900,
+ `surface #F3F6F9` / `surface-2 #EAF0F5` / `panel #FFFFFF` / `line #DCE5EC`,
+ `text #172633` / `muted #667782`, fonts Inter + Noto Sans CJK SC).
+ The `--portal-*` matrix in section 2 of this file remains the value basis for the **product portal skins**
+ (the site keeps product-semantic alignment), but the site's own brand colours follow the HIA series tokens.
 - **Landing styles**: `site/_sass/custom/custom.scss` + `site/_layouts/home.html` (theme override point and custom layout).
-  **The benchmark is orchardcore.net** (user request), following its "main site vs documentation, two distinct styles"
-  approach: **the landing/marketing page** copies the main-site block order — own top nav, hero (big headline +
-  copyable command block + dual CTA), stat row, capability and feature card grids with small-caps section eyebrows,
-  CTA band, getting-started cards, FAQ accordion (native `<details>`, no JS) and a multi-column footer;
-  **documentation pages** are rewritten in the style of docs.orchardcore.net (Material for MkDocs): dark top bar
-  (brand + search box + repo link + language switch), left nav tree (upstream component, recoloured), **no breadcrumb
-  bar** (as in Material), article + **sticky right "Table of contents" rail** (generated in the layout by splitting the
-  rendered HTML on h2 ids), **previous/next pagination** within the same section, uppercase headings with anchors,
-  admonition-style blockquotes (HIA p50 base + primary left bar), **dark code blocks** and a dark footer bar.
-  The two styles are deliberately different (the OC main-site vs docs-subsites split). Block structure is copied;
-  colours stay HIA tokens.
+ **The benchmark is orchardcore.net** (user request), following its "main site vs documentation, two distinct styles"
+ approach: **the landing/marketing page** copies the main-site block order — own top nav, hero (big headline +
+ copyable command block + dual CTA), stat row, capability and feature card grids with small-caps section eyebrows,
+ CTA band, getting-started cards, FAQ accordion (native `<details>`, no JS) and a multi-column footer;
+ **documentation pages** are rewritten in the style of docs.orchardcore.net (Material for MkDocs): dark top bar
+ (brand + search box + repo link + language switch), left nav tree (upstream component, recoloured), **no breadcrumb
+ bar** (as in Material), article + **sticky right "Table of contents" rail** (generated in the layout by splitting the
+ rendered HTML on h2 ids), **previous/next pagination** within the same section, uppercase headings with anchors,
+ admonition-style blockquotes (HIA p50 base + primary left bar), **dark code blocks** and a dark footer bar.
+ The two styles are deliberately different (the OC main-site vs docs-subsites split). Block structure is copied;
+ colours stay HIA tokens.
 - **Variable names**: verified one by one against the local gem `just-the-docs v0.12.0`
-  (`_sass/color_schemes/light.scss`), not guessed.
+ (`_sass/color_schemes/light.scss`), not guessed.
 - **Code highlighting**: the scheme file keeps the upstream
-  `@import "./vendor/accessible-pygments/github-light"` at the end (same as `light.scss`).
+ `@import "./vendor/accessible-pygments/github-light"` at the end (same as `light.scss`).
 - **On theme upgrades**: re-verify the new version's `light.scss` variable names; if upstream renames or adds/removes
-  palette variables, update the scheme file and custom.scss. The mechanism uses the theme-supported `color_scheme`
-  and custom hooks, touching no theme-internal files.
+ palette variables, update the scheme file and custom.scss. The mechanism uses the theme-supported `color_scheme`
+ and custom hooks, touching no theme-internal files.

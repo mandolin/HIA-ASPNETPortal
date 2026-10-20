@@ -61,13 +61,13 @@ formal release>; its maturity and publicity framing follow [versioning.md](https
 ## Release and deployment notes
 
 1. Confirm the target environment, external configuration, database and rollback owner per
-   [deployment-checklist.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-checklist.md).
+ [deployment-checklist.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-checklist.md).
 2. Prepare file, configuration, database and evidence rollback material per
-   [deployment-rollback-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-rollback-guide.md).
+ [deployment-rollback-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/deployment-rollback-guide.md).
 3. Complete post-release health checks, the logging maintenance dry-run, audit queries and the backup reminder per
-   [operations-runbook.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/operations-runbook.md).
+ [operations-runbook.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/operations-runbook.md).
 4. Before releasing, do not put development connection strings, shared default passwords, real certificate private keys,
-   production backups or internal evidence directories into the release package.
+ production backups or internal evidence directories into the release package.
 
 ## Known limitations and deferred evidence
 

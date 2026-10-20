@@ -23,7 +23,7 @@ packages and existing Task Runner bindings:
 
 - `Build-PortalDotNetDocPilot.ps1` — XML precheck → `npm ci` → `docs:build` → `docs:verify`;
 - `Build-PortalJsdocPilot.ps1` — restore the isolated workspace dependencies → `docs:build` (`jsdoc -c jsdoc.conf.json`)
-  → `docs:verify`.
+ → `docs:verify`.
 
 ## Published code documentation (JSDoc)
 
@@ -41,7 +41,7 @@ generation. To refresh:
 
 1. Run `dev/scripts/Build-PortalJsdocPilot.ps1` (artifacts land in `temp/documentation/jsdoc`, which is git-ignored);
 2. Copy the artifacts to `site/api/jsdoc/` and update `generatedUtc` and `sourceFingerprint` in `code-docs-manifest.json`
-   in the same folder;
+ in the same folder;
 3. Commit and push.
 
 The L0 gate `Test-PortalCodeDocs.ps1` checks the **source fingerprint** (SHA-256 over the two JSDoc input files) and the

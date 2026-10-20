@@ -23,13 +23,13 @@ A new module package lives at `src/Portal/DesktopModules/{PackageFolder}/`, for 
 
 ```text
 DesktopModules/
-  ModuleProbe/
-    ModuleProbe.ascx
-    ModuleProbe.ascx.cs
-    ModuleProbe.ascx.designer.cs
-    module.json
-    Styles/
-      ModuleProbe.css
+ ModuleProbe/
+ ModuleProbe.ascx
+ ModuleProbe.ascx.cs
+ ModuleProbe.ascx.designer.cs
+ module.json
+ Styles/
+ ModuleProbe.css
 ```
 
 `PackageFolder` must match `^[A-Za-z][A-Za-z0-9_-]{0,63}$`. For read-only reference packages (such as `ModuleProbe`), the
@@ -37,15 +37,15 @@ DesktopModules/
 
 ```json
 {
-  "schemaVersion": 1,
-  "packageId": "HIA.ModuleProbe",
-  "displayName": "模块验证 / Module Probe",
-  "version": "1.0.0",
-  "minimumPortalVersion": "1.0",
-  "desktopEntry": "DesktopModules/ModuleProbe/ModuleProbe.ascx",
-  "resources": [
-    "Styles/ModuleProbe.css"
-  ]
+ "schemaVersion": 1,
+ "packageId": "HIA.ModuleProbe",
+ "displayName": "模块验证 / Module Probe",
+ "version": "1.0.0",
+ "minimumPortalVersion": "1.0",
+ "desktopEntry": "DesktopModules/ModuleProbe/ModuleProbe.ascx",
+ "resources": [
+ "Styles/ModuleProbe.css"
+ ]
 }
 ```
 
@@ -64,14 +64,14 @@ The rules are:
 
 1. `packageId` must match `^[A-Za-z][A-Za-z0-9_.-]{0,99}$` and stay unique among deployed packages.
 2. `desktopEntry` must be an existing `.ascx` file inside the current package directory and must pass the portal's existing
-   `DesktopModules/` path validation.
+ `DesktopModules/` path validation.
 3. `resources` must be existing relative files inside the package directory; `.css`, `.png`, `.jpg`, `.jpeg`, `.gif` and
-   `.webp` are allowed. Only declared CSS is automatically de-duplicated and mounted by the portal host.
+ `.webp` are allowed. Only declared CSS is automatically de-duplicated and mounted by the portal host.
 4. The manifest must not contain `script`, `scripts`, `externalUrl`, `externalUrls`, `assembly`, `assemblies` or
-   `packageUrl`. Those capabilities need a future trusted-deployment mechanism, designed and reviewed separately.
+ `packageUrl`. Those capabilities need a future trusted-deployment mechanism, designed and reviewed separately.
 5. A new module should inherit `PortalModuleControl<T>` and implement `IPortalModuleControl`. When public APIs,
-   configuration, security boundaries or complex flows are involved, use the bilingual Chinese/English paragraphs inside
-   standard XML comments.
+ configuration, security boundaries or complex flows are involved, use the bilingual Chinese/English paragraphs inside
+ standard XML comments.
 
 ## Code skeleton
 
@@ -91,10 +91,10 @@ Comments in markup and code-behind use bilingual blocks:
 
 ```aspx
 <%--
-    <lang>
-        <zh-CN>说明：员工只确认自己当前绑定的低敏资料，不提供上传或外部资源。</zh-CN>
-        <en>Note: employees only confirm their currently bound low-sensitivity profile data; no upload or external resource capability is provided.</en>
-    </lang>
+ <lang>
+ <zh-CN>说明：员工只确认自己当前绑定的低敏资料，不提供上传或外部资源。</zh-CN>
+ <en>Note: employees only confirm their currently bound low-sensitivity profile data; no upload or external resource capability is provided.</en>
+ </lang>
 --%>
 ```
 
@@ -139,11 +139,11 @@ gates):
 Two easy-to-get-wrong points:
 
 - **`for` may only point at a form control.** Adding `for` to a read-only display field is wrong semantics — assistive
-  technology will associate the label with an unrelated control, which is worse than omitting it. Read-only fields use
-  `dl/dt/dd`.
+ technology will associate the label with an unrelated control, which is worse than omitting it. Read-only fields use
+ `dl/dt/dd`.
 - **Do not change element names for semantics.** `asp:Label` renders as `span`; changing it to a native `h1` changes the
-  visuals (unless precisely equivalent CSS exists elsewhere) and requires a new custom rendering control. An ARIA heading
-  is semantically equivalent and visually zero-change.
+ visuals (unless precisely equivalent CSS exists elsewhere) and requires a new custom rendering control. An ARIA heading
+ is semantically equivalent and visually zero-change.
 
 CSS should use the stable scopes emitted by the portal (`portal-module`, `portal-module-{id}`, `portal-pane-{pane}`,
 `portal-package-{packageId}`), avoiding global element selectors that pollute other modules; do not declare or distribute
@@ -152,20 +152,20 @@ proprietary fonts with a package, and follow the project's font licensing rules.
 ## Installation and enabling
 
 1. Build the solution first in Visual Studio or VSCode, then deploy the package directory to `DesktopModules/` after
-   completing the trusted deployment pipeline.
+ completing the trusted deployment pipeline.
 2. Execute `src/Setup/PortalCfg_ModulePackageStates.sql` against the target database, or use the SQL compatibility script:
 
-   ```powershell
-   & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 `
-       -ConnectionStringsConfigPath $testConfig -ApplyP3Migrations -RequireP3Migrations
-   ```
+ ```powershell
+ & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalSqlCompatibility.ps1 `
+ -ConnectionStringsConfigPath $testConfig -ApplyP3Migrations -RequireP3Migrations
+ ```
 
 3. Visit `Admin/ModuleCatalog.aspx` as `Admins`. The catalogue page shows only deployed packages that pass validation;
-   clicking **Register** creates a legacy module definition record pointing at the manifest's `desktopEntry`.
+ clicking **Register** creates a legacy module definition record pointing at the manifest's `desktopEntry`.
 4. Add instances from the registered definitions in the existing tab layout management page. New modules default to
-   `CacheTimeout=0`; the caching policy needs separate evaluation before adjustment.
+ `CacheTimeout=0`; the caching policy needs separate evaluation before adjustment.
 5. A registered package can be **Enabled** or **Disabled** from the catalogue page. State is written to
-   `PortalCfg_ModulePackageStates` and recorded in the operations audit.
+ `PortalCfg_ModulePackageStates` and recorded in the operations audit.
 
 When the package state table has no record for a package, a verified package is treated as enabled, for compatibility with
 deployments that have not configured state rows. When the state table is missing or unreadable, the front end likewise keeps
@@ -177,8 +177,8 @@ Every new module should be wired into the gate orchestration and pass the smoke 
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalBusinessModuleSmoke.ps1 `
-    -ModuleName HIA.YourModule `
-    -SqlMigrationFile src\Setup\PortalBiz_YourEntities.sql
+ -ModuleName HIA.YourModule `
+ -SqlMigrationFile src\Setup\PortalBiz_YourEntities.sql
 ```
 
 The smoke gate enforces the following constraints (**all Fail-level, no bypass**):
@@ -219,12 +219,12 @@ to recycle. The back office never deletes a module's physical directory.
 paths; it writes no business data. When troubleshooting a new package:
 
 1. First confirm that `module.json`, the entry control and the declared resources are all deployed, and that path casing
-   matches the manifest.
+ matches the manifest.
 2. Confirm in `Admin/ModuleCatalog.aspx` that the package was discovered, and run **Preflight**.
 3. Confirm the registered definition and tab instance exist; when disabled, the front end should skip that package's
-   instances.
+ instances.
 4. Check `ModulePackage.*` events in `Admin/DiagnosticsLogs.aspx`. Logs must never rely on connection strings, cookies,
-   tokens or passwords.
+ tokens or passwords.
 
 Common faults and where to look:
 
@@ -241,49 +241,49 @@ Common faults and where to look:
 ## Hidden traps when adding a module (verified)
 
 The following four classes of defect **do not appear when builds and unit tests are green; they surface only at runtime as
-"blank page / gate misjudgement"**, and were found one by one while  delivered the two business modules. Run
+"blank page / gate misjudgement"**, and were found one by one while delivering the two business modules. Run
 through them before adding any module:
 
 1. **The code-behind must be registered in `Portal.csproj`.** `src/Portal` is a **Web Application project** (it has
-   `Portal.csproj`), and existing modules' `.ascx.cs` files compile into `bin/Portal.dll`. If a new module only puts files
-   on disk without registering `<Compile Include="DesktopModules\{Module}\{Module}.ascx.cs">` (and
-   `.ascx.designer.cs`) and `<Content Include="...{Module}.ascx / module.json / Styles/*.css">` in the csproj, then
-   `CodeBehind` reports "could not load type ASPNET.StarterKit.Portal.{Module}" at runtime; more insidiously, **when
-   unregistered MSBuild does not compile these files**, so compile errors such as `out var` or `long→string` only blow up at
-   runtime.
+ `Portal.csproj`), and existing modules' `.ascx.cs` files compile into `bin/Portal.dll`. If a new module only puts files
+ on disk without registering `<Compile Include="DesktopModules\{Module}\{Module}.ascx.cs">` (and
+ `.ascx.designer.cs`) and `<Content Include="...{Module}.ascx / module.json / Styles/*.css">` in the csproj, then
+ `CodeBehind` reports "could not load type ASPNET.StarterKit.Portal.{Module}" at runtime; more insidiously, **when
+ unregistered MSBuild does not compile these files**, so compile errors such as `out var` or `long→string` only blow up at
+ runtime.
 2. **All seven official skins (including the `Default` fallback theme) must get the theme scope rule.** Writing only the
-   module's own `Styles/{Module}.css` while **not adding `body.portal-theme-<normalised name> .<module prefix class>` to
-   `src/Portal/App_Themes/<Theme>/Default.css`** makes the module lose themed styling in most skins (a hard AGENTS.md
-   requirement). Values are taken from each skin's existing `my-work-items` palette family, with an explicit fallback for
-   IE9+ which does not support `var()`. `Default`, although a fallback theme, is also bound by the coverage gate — you
-   cannot cover only six official skins and miss it.
+ module's own `Styles/{Module}.css` while **not adding `body.portal-theme-<normalised name> .<module prefix class>` to
+ `src/Portal/App_Themes/<Theme>/Default.css`** makes the module lose themed styling in most skins (a hard AGENTS.md
+ requirement). Values are taken from each skin's existing `my-work-items` palette family, with an explicit fallback for
+ IE9+ which does not support `var`. `Default`, although a fallback theme, is also bound by the coverage gate — you
+ cannot cover only six official skins and miss it.
 3. **Markup and CSS class names must match.** When the markup uses `form-grid` / `form-field` / `list` while the module CSS
-   writes `.grid` / `.field` / `.recent`, the module styles and theme rules **all fall silent with no error at all**. Treat
-   the markup (`.ascx`'s `class=` and Web Forms controls' `CssClass=`) as authoritative; module CSS and theme rules carry
-   layout and colour only.
+ writes `.grid` / `.field` / `.recent`, the module styles and theme rules **all fall silent with no error at all**. Treat
+ the markup (`.ascx`'s `class=` and Web Forms controls' `CssClass=`) as authoritative; module CSS and theme rules carry
+ layout and colour only.
 4. **Which configuration takes effect has two layers; the test is "does the JSON file exist in the site root".** Business
-   packages must be allowed through the `Portal.ModulePackages.Enabled` allow-list. The mechanism (see
-   `src/Portal/Util/AppSettingsLoader.cs`):
-   - **Base values**: `<appSettings>` in `Web.config` always applies first;
-   - **Override values**: `AppSettingsLoader.LoadConfig` only `Set`s that JSON's `appSettings` keys into
-     `ConfigurationManager.AppSettings` (overriding same-named keys; undeclared keys are preserved or removed per
-     `preservePrevious`) when the file it points at **actually exists in the site root**; **when the file does not exist it
-     is silently skipped**, with no override at all.
-   - Two practical consequences: ① changing the `Set` values in
-     `src/Portal/Config/appSettings.dev.json` on a development machine (gitignored, not committed, and usually not in the
-     site root) **does not take effect** — the local runtime reads the existing `<appSettings>` from `Web.config`; ② only
-     after the deployment environment places `appSettings.json` in the site root does that file's override **take effect**
-     (see "Enabling prerequisites" in
-     [user-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/user-guide.md)).
-   - When allowing a business package, change both places and confirm the profile key (`Portal.ModuleProfiles.Active`)
-     contains the package's profile.
+ packages must be allowed through the `Portal.ModulePackages.Enabled` allow-list. The mechanism (see
+ `src/Portal/Util/AppSettingsLoader.cs`):
+ - **Base values**: `<appSettings>` in `Web.config` always applies first;
+ - **Override values**: `AppSettingsLoader.LoadConfig` only `Set`s that JSON's `appSettings` keys into
+ `ConfigurationManager.AppSettings` (overriding same-named keys; undeclared keys are preserved or removed per
+ `preservePrevious`) when the file it points at **actually exists in the site root**; **when the file does not exist it
+ is silently skipped**, with no override at all.
+ - Two practical consequences: ① changing the `Set` values in
+ `src/Portal/Config/appSettings.dev.json` on a development machine (gitignored, not committed, and usually not in the
+ site root) **does not take effect** — the local runtime reads the existing `<appSettings>` from `Web.config`; ② only
+ after the deployment environment places `appSettings.json` in the site root does that file's override **take effect**
+ (see "Enabling prerequisites" in
+ [user-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/user-guide.md)).
+ - When allowing a business package, change both places and confirm the profile key (`Portal.ModuleProfiles.Active`)
+ contains the package's profile.
 
 > Items 1–3 above are guarded by the static gate `Test-PortalNewModuleReadiness.ps1` (L0 layer, source-only, no IIS/DB
 > needed):
 >
 > ```powershell
 > & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Test-PortalNewModuleReadiness.ps1 `
->     -ModuleName LeaveRequest -ModuleCssPrefix leave-request -ExpectedPackageId HIA.LeaveRequest
+> -ModuleName LeaveRequest -ModuleCssPrefix leave-request -ExpectedPackageId HIA.LeaveRequest
 > ```
 >
 > Gate checks: R1 csproj registration, R2 `.ascx` uses `CodeBehind`, R3 all seven skins (including the `Default` fallback
@@ -301,12 +301,12 @@ through them before adding any module:
 - [ ] No JavaScript, no inline scripts, no DLLs or executables
 - [ ] Business migration scripts are named `PortalBiz_*.sql` and contain no `USE [database]`
 - [ ] `.ascx.cs` and `.ascx.designer.cs` are registered in `Portal.csproj`'s `<Compile>` (Web Application project; omitting
-      this makes `CodeBehind` report "could not load type" at runtime)
+ this makes `CodeBehind` report "could not load type" at runtime)
 - [ ] All seven official skins' (including the `Default` fallback theme) `Default.css` have the `.<module prefix class>`
-      theme scope rule
+ theme scope rule
 - [ ] `Test-PortalNewModuleReadiness.ps1 -ModuleName <Module>` passes (csproj / CodeBehind / 7 skins / markup-CSS class
-      consistency)
+ consistency)
 - [ ] `Test-PortalBusinessModuleSmoke.ps1 -ModuleName HIA.YourModule` passes
 - [ ] Wire into the orchestration: add this module's smoke and readiness checks to
-      `dev/scripts/Invoke-PortalGateSuite.ps1` (L1 smoke / L0 readiness)
+ `dev/scripts/Invoke-PortalGateSuite.ps1` (L1 smoke / L0 readiness)
 - [ ] The whole gate suite is green: `Invoke-PortalGateSuite.ps1`

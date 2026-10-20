@@ -9,15 +9,15 @@ title: Documentation artefacts and toolchain boundaries
 
 This document describes the boundaries between HIA-ASPNETPortal's publicly maintained documentation, documentation inputs and
 reproducible artefacts. The goal is that a maintainer can repeat existing verification **without** depending on a
-**separate private repository**, the portal runtime, or local directories of other HIA projects.
+the portal runtime, or local directories of other HIA projects.
 
 ## Public documentation and private material
 
 - The root `README.md` and the Markdown under this directory are the main repository's publicly maintained documentation.
 
 - Documentation may describe reproducible configuration using `{ExternalCfgPath}`, `$env:USERPROFILE`, template file names and
-  logical connection-string names, but must not write real connection strings, passwords, tokens, cookies, certificates,
-  production backups or machine-specific absolute paths.
+ logical connection-string names, but must not write real connection strings, passwords, tokens, cookies, certificates,
+ production backups or machine-specific absolute paths.
 
 ## JavaScript documentation
 
@@ -79,9 +79,9 @@ ownership:
 - `temp/documentation/`: local verification output from the JSDoc and DotNetDoc pilots, protected by `.gitignore`.
 - `bin/`: assembly and XML documentation output from Visual Studio and MSBuild, protected by `.gitignore`.
 - `src/Documentation/`, `src/Portal/Documentation/`, `src/Portal.Components.Data/Documentation/`: historical SHFB/Doxygen
-  generated output; currently not public documentation input and not a release directory.
+ generated output; currently not public documentation input and not a release directory.
 - `src/DoxyGen/`, `src/Portal.shfbproj`: historical Doxygen/SHFB tool sites or configuration candidates; not currently part of
-  a formal release package.
+ a formal release package.
 
 `portal: verify public documentation` checks that these unconfirmed generated directories have not entered Git-tracked files.
 If versioned documentation ever needs to be published, ownership, licence, cleanup method, publication location, access
@@ -91,10 +91,10 @@ boundary and rollback plan must be defined first, and this guide, the public ind
 ## Local verification order
 
 1. Run `portal: verify public documentation` to check public entry points, relative links, privacy and generated-directory
-   boundaries.
+ boundaries.
 2. To confirm the JavaScript documentation tool, run the JSDoc pilot; keep its output in the ignored directory.
 3. To confirm C# XML output, run `portal: verify .NET XML documentation`; if necessary let that task build the Debug
-   configuration first.
+ configuration first.
 4. To confirm the HIA DotNetDoc output contract, run `portal: build .NET DotNetDoc pilot`.
 5. To retain documentation evidence, run:
 

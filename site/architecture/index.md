@@ -42,7 +42,7 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 
 数据访问兼容性标签按四类记录：
 
-- `SqlServerOnly`：当前只能视为 SQL Server 能力，例如 `System.Data.SqlClient`、EF SQL Server provider、`[dbo]`、`OBJECT_ID`、`SYSUTCDATETIME()`、`IDENTITY`、`ROWVERSION`。
+- `SqlServerOnly`：当前只能视为 SQL Server 能力，例如 `System.Data.SqlClient`、EF SQL Server provider、`[dbo]`、`OBJECT_ID`、`SYSUTCDATETIME`、`IDENTITY`、`ROWVERSION`。
 - `NeedsDialect`：具备抽象可能但必须按 provider 改写的 SQL，例如 `SELECT TOP`、锁提示、`OUTPUT INSERTED` 和 table variable。
 - `PortableCandidate`：可作为 provider 抽象入口或接近通用的能力，例如 `PortalDatabaseProfile`、`DbProviderFactories`、简单连接检查。
 - `ProviderProof`：独立 proof 范围，例如当前 SQLite proof；不表示门户主业务数据库已支持该 provider。

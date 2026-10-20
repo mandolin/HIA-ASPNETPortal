@@ -45,16 +45,16 @@ by deleting data without a basis).
 ## 4. Handling
 
 1. **Archive**: records past the online window are exported to a **read-only archive** (not modifiable); archive files are kept
-   under the backup policy.
+ under the backup policy.
 2. **Deletion at expiry**: secure deletion after the archive period ends; the deletion must be recorded in a high-level
-   audit / operations record stating scope and time.
+ audit / operations record stating scope and time.
 3. **Prohibited**: audit data must not be deleted during the retention period on "disk / database capacity" grounds; if
-   capacity becomes a problem, shrink the online window and expand the archive instead of deleting outright.
+ capacity becomes a problem, shrink the online window and expand the archive instead of deleting outright.
 
 ## 5. Responsibility and access control
 
 - **Read access to audit data is restricted** (authorised roles only), and **access to audit data should itself be recorded and
-  controlled** (OWASP protection requirement).
+ controlled** (OWASP protection requirement).
 - Archiving and deletion are high-risk operations: they require authorisation and must leave a trace.
 - Any change to the retention period goes through change management and must be registered by updating this document.
 
@@ -72,7 +72,7 @@ record runtime detail.
 ## 7. Export and search
 
 - Search: `Admin/OperationAudits.aspx` supports filtering and paging by time range, category, action and target identifier (the
-  query window is bounded by `MaximumQueryDays = 31`).
+ query window is bounded by `MaximumQueryDays = 31`).
 - Export: listed as a later candidate (a common requirement for compliance evidence).
 - Alerting / centralisation: listed as a later candidate (SIEM integration is not in the current phase).
 

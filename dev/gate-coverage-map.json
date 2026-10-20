@@ -261,7 +261,14 @@
       "layer": "L0",
       "coverage": "partial",
       "boundary": "只证明已登记为「已交付」的模块页面存在、八节模板齐全、编辑页输入控件 id 以词边界出现在页面中、必填项数量与源码 RequiredFieldValidator 数一致、登记表中要求的部署边界语句已写明；不证明页面叙述的语义正确与操作步骤的可执行性（由人工复核承载），不检查页面多写的字段或文字，不核对部署页签实测值（TabId/ModuleId 为交付时快照），不采集运行期证据（如 Signin 在开发库 0 个实例，只有源码级说明）。批次未全部交付前，待交付模块按软指标列出（soft-until-complete），由 M6 在无待交付时强制切换为 hard。",
-      "gate": "Test-PortalModuleDocPages.ps1"
+      "gate": "Test-PortalModuleDocPages.ps1"    },
+    {
+      "id": "public-doc-content-applicability",
+      "name": "公开文档内容适用性（已上架公开文档不含内部向表述、不含内部工作项编号）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明已上架（published.yml 声明）的公开文档——中文 docs/<doc> 与英文 site/_translations/<doc>——中**不存在**\"内部向表述\"与\"内部工作项编号\"两类模式；不证明叙述正确、完整或对读者有用（由人工复核承载）；不检查未上架文档（内部治理件如 documentation-registry.md 本就是内部件，含内部编号是应该的）；不做语义判断（模式命中即失败，因此为讲产品而不得不提到内部概念的正常句子也会被判失败——这是有意的保守口径，宁可让人看一眼再放行）。刻意放行 <internal evidence directory> 命令占位符（读者执行时需要路径位置，且不含不发布声明）。",
+      "gate": "Test-PortalPublicDocContentApplicability.ps1"
     },
     {
       "id": "approval-boundary-docs",
@@ -387,6 +394,7 @@
     "Test-PortalRuntimeScreenshotBaseline.ps1",
     "Test-PortalContentModuleDocs.ps1",
     "Test-PortalSiteTranslationFreshness.ps1",
+    "Test-PortalPublicDocContentApplicability.ps1",
 "Test-PortalCodeDocs.ps1",
 "Test-PortalModuleDocPages.ps1",
     "Test-PortalApprovalBoundaryDocs.ps1",

@@ -40,11 +40,11 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - 用途：发布带有效期的站内公告，过期后不再显示。
 - 显示：标题 + 描述 + 过期时间；每条右侧有编辑入口（仅编辑权限可见）。
 - 编辑页 `DesktopModules/EditAnnouncements.aspx`：
-  - `TitleField` 标题（**必填**）
-  - `MoreLinkField` 详情链接（可选）
-  - `MobileMoreField` 移动端链接（可选）
-  - `DescriptionField` 描述（**必填**）
-  - `ExpireField` 过期日期（**必填**，另有日期格式比较校验 `VerifyExpireDate`）
+ - `TitleField` 标题（**必填**）
+ - `MoreLinkField` 详情链接（可选）
+ - `MobileMoreField` 移动端链接（可选）
+ - `DescriptionField` 描述（**必填**）
+ - `ExpireField` 过期日期（**必填**，另有日期格式比较校验 `VerifyExpireDate`）
 - 新建入口：模块标题栏「Add New Announcement」。
 - 当前部署：TabId=1「新闻与特写」、TabId=2「人事福利」、TabId=3「竞赛：TradeCraft / 监视 / 保护」。
 
@@ -53,11 +53,11 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - 用途：维护联系人名录（姓名、角色、邮箱、两个联系方式）。
 - 显示：姓名 / 角色 / 邮箱（可点击发信）/ 联系方式；每条有编辑入口。
 - 编辑页 `DesktopModules/EditContacts.aspx`：
-  - `NameField` 姓名（**必填**）
-  - `RoleField` 角色
-  - `EmailField` 邮箱
-  - `Contact1Field` 联系方式一
-  - `Contact2Field` 联系方式二
+ - `NameField` 姓名（**必填**）
+ - `RoleField` 角色
+ - `EmailField` 邮箱
+ - `Contact1Field` 联系方式一
+ - `Contact2Field` 联系方式二
 - **注意：仅姓名必填**，角色 / 邮箱 / 联系方式均无必填与格式校验，可留空——录入时须自行核对。
 - 新建入口：「Add New Contact」。当前部署：TabId=2「员工联系信息」。
 
@@ -74,11 +74,11 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - 用途：文档条目（上传文件或指向已有路径），供下载或新窗口查看。
 - 显示：文档链接（新窗口打开）+ 编辑入口。
 - 编辑页 `DesktopModules/EditDocs.aspx`：
-  - `NameField` 文档名（**必填**）
-  - `CategoryField` 分类
-  - `PathField` 路径
-  - `Upload` 是否上传（勾选）
-  - `storeInDatabase` 是否存入数据库（勾选）
+ - `NameField` 文档名（**必填**）
+ - `CategoryField` 分类
+ - `PathField` 路径
+ - `Upload` 是否上传（勾选）
+ - `storeInDatabase` 是否存入数据库（勾选）
 - 查看走 `DesktopModules/ViewDocument.aspx`。新建入口：「Add New Document」。
 - 当前部署：TabId=2「新员工文档」、TabId=4「好书推荐」。
 
@@ -87,10 +87,10 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - 用途：发布活动（含时间地点），过期后不再显示。
 - 显示：标题 + 描述 + 时间地点。
 - 编辑页 `DesktopModules/EditEvents.aspx`：
-  - `TitleField` 标题（**必填**）
-  - `DescriptionField` 描述（**必填**）
-  - `WhereWhenField` 时间地点（**必填**）
-  - `ExpireField` 过期日期（**必填**，另有日期格式比较校验 `VerifyExpireDate`）
+ - `TitleField` 标题（**必填**）
+ - `DescriptionField` 描述（**必填**）
+ - `WhereWhenField` 时间地点（**必填**）
+ - `ExpireField` 过期日期（**必填**，另有日期格式比较校验 `VerifyExpireDate`）
 - 新建入口：「Add New Event」。当前部署：TabId=1「近期活动」。
 
 ### 图片（ImageModule）
@@ -104,11 +104,11 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - 用途：维护链接列表（站点导航或资源入口）。
 - 显示：链接标题（可点击跳转）+ 编辑入口。
 - 编辑页 `DesktopModules/EditLinks.aspx`：
-  - `TitleField` 标题（**必填**）
-  - `UrlField` 地址（**必填**）
-  - `MobileUrlField` 移动端地址（可选）
-  - `DescriptionField` 描述（可选）
-  - `ViewOrderField` 显示顺序（**必填**，另有数值比较校验 `VerifyViewOrder`）
+ - `TitleField` 标题（**必填**）
+ - `UrlField` 地址（**必填**）
+ - `MobileUrlField` 移动端地址（可选）
+ - `DescriptionField` 描述（可选）
+ - `ViewOrderField` 显示顺序（**必填**，另有数值比较校验 `VerifyViewOrder`）
 - 新建入口：「Add Link」。当前部署：**TabId=1004 测试页「测试链接模块」**——即当前仅部署在测试页，正式页签暂未使用。
 
 ### HTML 文本模块（HtmlModule）
@@ -116,9 +116,9 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - **用途**：在页签上渲染一段由受信任管理员维护的**原始 HTML**（欢迎语、说明块等）。
 - **显示**：`DesktopModules/HtmlModule.ascx`——按 `ModuleId` 读取已保存内容，`HtmlDecode` 后以 `LiteralControl` 原样输出；**记录缺失或内容为空时不输出任何内容**（普通页面不暴露配置状态）。
 - **编辑页** `DesktopModules/EditHtml.aspx`（标记层 `ValidateRequest="false"`）：
-  - `DesktopText` 桌面端原始 HTML（可选）
-  - `MobileSummary` 移动端摘要（可选）
-  - `MobileDetails` 移动端详情（可选）
+ - `DesktopText` 桌面端原始 HTML（可选）
+ - `MobileSummary` 移动端摘要（可选）
+ - `MobileDetails` 移动端详情（可选）
 - **必填项**：该编辑页**没有任何 `RequiredFieldValidator`**——三个字段均可留空保存。
 - **存储**：`HtmlTexts` 按 `ModuleId` 唯一定位（`UpdateHtmlText`）：首次保存创建记录，之后只替换三个内容字段；入库前统一 HTML 编码、显示时解码（历史兼容契约）。
 - **权限**：编辑需**同时**具备模块编辑权限与更窄的「原始 HTML」权限（`PortalPermissionKeys.ContentRawHtmlEdit`）；`Mid` 来自查询串或回发的未验证集合，必须为正整数，否则跳转编辑拒绝页。
@@ -130,14 +130,14 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 - **用途**：以紧凑链接组呈现常用入口；与「链接（Links）」**共享同一份链接数据与同一个编辑页**。
 - **显示**：`DesktopModules/QuickLinks.ascx`——每次请求重新绑定 `ILinksDb.GetLinks(ModuleId)`（关闭 ViewState）：
-  - **编辑者**（属于模块 `AuthorizedEditRoles`）额外看到「新增链接」入口与逐条「编辑」入口（均指向 `EditLinks.aspx`）；
-  - **浏览者**只能看到**通过导航策略**的链接——不合规的历史地址被抑制为**编码文本**（不再是链接），且不回显原始地址。
+ - **编辑者**（属于模块 `AuthorizedEditRoles`）额外看到「新增链接」入口与逐条「编辑」入口（均指向 `EditLinks.aspx`）；
+ - **浏览者**只能看到**通过导航策略**的链接——不合规的历史地址被抑制为**编码文本**（不再是链接），且不回显原始地址。
 - **编辑页**：与「链接（Links）」**共用** `DesktopModules/EditLinks.aspx`：
-  - `TitleField` 标题（**必填**）
-  - `UrlField` 地址（**必填**）
-  - `MobileUrlField` 移动端地址（可选）
-  - `DescriptionField` 描述（可选）
-  - `ViewOrderField` 显示顺序（**必填**，另有数值比较校验 `VerifyViewOrder`）
+ - `TitleField` 标题（**必填**）
+ - `UrlField` 地址（**必填**）
+ - `MobileUrlField` 移动端地址（可选）
+ - `DescriptionField` 描述（可选）
+ - `ViewOrderField` 显示顺序（**必填**，另有数值比较校验 `VerifyViewOrder`）
 - **权限**：模块编辑权限（**不要求** HTML 模块那种「原始 HTML」窄权限）+ **链接归属校验**（不能凭 `ItemID` 改、删其它模块的链接）。
 - **审计**：与同族旧内容编辑页一致，该保存 / 删除路径**不写运营审计**。
 - **当前部署**（开发库实测）：**3 个实例**——首页「快速链接」、产品信息「值得关注的竞争者」、关于门户「快速链接」。
@@ -147,11 +147,11 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 - **用途**：渲染**部署在站内**的 XML 数据，并可选用 XSL/T 转换后呈现（当前部署样例：首页「热门动态」）。
 - **数据来源**：XML 与 XSL 都是**受信任部署目录内的文件**（样例 `~/Data/sales.xml` 与 `~/Data/sales.xsl`），路径作为模块设置 `xmlsrc` / `xslsrc` 存入 `PortalCfg_ModuleSettings`——**本模块没有自己的业务数据表**。
 - **显示**：`DesktopModules/XmlModule.ascx`——两个路径各自经 `TryNormalizeTrustedDeploymentResourcePath` 与物理文件存在性校验后，才交给 `Xml` 控件（`DocumentSource` / `TransformSource`）：
-  - 任一路径不合规或文件不存在 → 只显示**中性的编码提示**（`Legacy_XmlModule_MessageXmlUnavailable` / `Legacy_XmlModule_MessageXsltUnavailable`），**不回显原始路径、不输出物理路径或异常堆栈**；
-  - 只配 XML、不配 XSL 也能正常显示（两者独立校验）。
+ - 任一路径不合规或文件不存在 → 只显示**中性的编码提示**（`Legacy_XmlModule_MessageXmlUnavailable` / `Legacy_XmlModule_MessageXsltUnavailable`），**不回显原始路径、不输出物理路径或异常堆栈**；
+ - 只配 XML、不配 XSL 也能正常显示（两者独立校验）。
 - **编辑页** `DesktopModules/EditXml.aspx`：
-  - `XmlDataSrc` XML 数据文件的应用内虚拟路径（可选，最长 250 字符）
-  - `XslTransformSrc` XSL/T 转换文件的应用内虚拟路径（可选，最长 250 字符）
+ - `XmlDataSrc` XML 数据文件的应用内虚拟路径（可选，最长 250 字符）
+ - `XslTransformSrc` XSL/T 转换文件的应用内虚拟路径（可选，最长 250 字符）
 - **必填项**：该编辑页**没有任何 `RequiredFieldValidator`**——两个字段都可留空保存。
 - **保存校验**：两个值都经同一路径策略规范化；**任一不合规即拒绝保存**，并提示 `EditXml_MessageInvalidResourcePath`（不含原始输入）。
 - **权限**：正整数 `Mid` + `HasEditPermissions(moduleId)`（**不要求** HTML 模块那种 `ContentRawHtmlEdit` 窄权限）。
@@ -163,7 +163,7 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 - **用途**：在页签上提供登录表单（登录标识 + 口令 + 记住登录）。
 - **显示**：`DesktopModules/Signin.ascx`——`EmailOrName`（登录标识）、`password`（口令）、`RememberCheckbox`（记住登录）、`SigninBtn`（登录）、`RegisterLink`（自主注册入口，指向 `~/Admin/Register.aspx`，**仅当 `PortalRegistrationOptions.AllowSelfRegistration` 显式开启时可见，默认关闭**）。
-- **提交保护**：提交前用**一次性 RSA 公钥**把口令写入隐藏字段 `EncryptedPassword`（公钥由 `~/Security/LoginPasswordKey.ashx` 提供），服务端解密后只在**当前请求内**传递；是否强制加密提交由 `PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired()` 决定，未要求时才接受明文回退。
+- **提交保护**：提交前用**一次性 RSA 公钥**把口令写入隐藏字段 `EncryptedPassword`（公钥由 `~/Security/LoginPasswordKey.ashx` 提供），服务端解密后只在**当前请求内**传递；是否强制加密提交由 `PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired` 决定，未要求时才接受明文回退。
 - **校验与票据**：口令校验交给 `IUsersDb.SignIn`（强哈希 + 旧 MD5 兼容升级 + 多标识解析：登录名 / 旧名 / 在职员工号 / 邮箱）；成功 → `PortalAuthenticationService.SignIn` 签发**带安全版本**的票据（角色 Cookie 在认证请求阶段按需建立）；**失败提示是通用的**，不暴露用户是否存在、审核状态或摘要比较细节。
 - **审计（与前面几个内容模块不同，如实说明）**：**登录失败会写运营审计**（`SignInFailed`，`Outcome=Failure`，只携带登录标识，**绝不写口令、盐或哈希材料**）；旧凭据升级、口令迭代次数升级也各写一条审计。
 - **编辑页**：**无编辑页**——本模块没有 `EditSignin` 之类的设置页，登录行为由运行期设置与认证服务决定，**不在模块实例上配置**。
@@ -179,14 +179,14 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 ## 业务模块：请假申请与费用报销
 
-这两个模块（`HIA.LeaveRequest`、`HIA.ExpenseReimbursement`）是面向员工自助（ESS）的业务模块，由 。它们按模块包方式部署，**默认不随核心档位启用**。
+这两个模块（`HIA.LeaveRequest`、`HIA.ExpenseReimbursement`）是面向员工自助（ESS）的业务模块。它们按模块包方式部署，**默认不随核心档位启用**。
 
 ### 启用前提
 
 1. 执行业务表迁移脚本：`src/Setup/PortalBiz_LeaveRequests.sql` 与 `src/Setup/PortalBiz_ExpenseReimbursements.sql`。两个脚本可重复执行（建表前用 `OBJECT_ID` 守卫判断）。
 2. 在模块包白名单中放行：`Portal.ModulePackages.Enabled` 追加 `HIA.LeaveRequest,HIA.ExpenseReimbursement`（`appSettings.json` 及环境覆盖文件）。该键与 Profile 无关，用于跨档位放行部署包。
 
-   > **覆盖生效的前提**：`appSettings.json` 只有**部署到站点根目录**时才会覆盖 `Web.config` 的同名 `<appSettings>` 键——`AppSettingsLoader` 在文件不存在时静默跳过，此时运行期读到的仍是 `Web.config` 的基础值。开发机上改动不入库的 `appSettings.dev.json` 不会落地。完整机制见 [module-development-guide.md]({{ site.baseurl }}/module-development/)「新增模块的隐藏陷阱」第 4 条。
+ > **覆盖生效的前提**：`appSettings.json` 只有**部署到站点根目录**时才会覆盖 `Web.config` 的同名 `<appSettings>` 键——`AppSettingsLoader` 在文件不存在时静默跳过，此时运行期读到的仍是 `Web.config` 的基础值。开发机上改动不入库的 `appSettings.dev.json` 不会落地。完整机制见 [module-development-guide.md]({{ site.baseurl }}/module-development/)「新增模块的隐藏陷阱」第 4 条。
 3. 由管理员在页签上挂载模块实例（模块定义在包启用后才会出现在可挂载列表）。
 
 ### 请假申请
@@ -264,8 +264,8 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用示例和改造项目�
 
 以下**目前没有文档支持**，遇到时请查阅源码或提 issue，不要假定已有说明：
 
-- ~~运行截图~~ —— **已交付**： 建立**运行截图基线**（固定视口 1440×1000 的可复现采集脚本、统一命名规范、产物进内部证据包、清单入库），规范见 `documentation-artifacts-guide.md`「运行截图基线」节。
+- ~~运行截图~~ —— **已交付**：建立**运行截图基线**（固定视口 1440×1000 的可复现采集脚本、统一命名规范、产物进证据包、清单入库），规范见 `documentation-artifacts-guide.md`「运行截图基线」节。
 - 生产部署注意事项（部署相关请以 `deployment-checklist.md` 与 `operations-runbook.md` 为准；本页不重复给出部署步骤）。
-- ~~请假与报销的**审批流转界面**~~ —— **已交付**：审批流转边界已在公开文档明确声明（见上文「审批流转边界（必读）」：本模块仅落库 + 生成待办，审批操作不在本模块内，且由门禁机器看守，）。
+- ~~请假与报销的**审批流转界面**~~ —— **已交付**：审批流转边界已在公开文档明确声明（见上文「审批流转边界（必读）」：本模块仅落库 + 生成待办，审批操作不在本模块内，且由门禁机器看守）。
 - ~~各既有内容模块（公告、联系人、讨论、文档、事件、图片、链接等）的逐项操作说明~~ —— **已交付**：见上文「常见模块」各子节。
-- ~~`HTML`、`快速链接（QuickLinks）`、`XML`、`登录（Signin）` 四个模块的逐项操作说明~~ —— **已交付**：见上文「常见模块」各子节。
+- ~~`HTML`、`快速链接（QuickLinks）`、`XML`、`登录（Signin）` 四个模块的逐项操作说明~~ —— **已交付**：见上文「常见模块」各子节（其中 `Signin` 在开发库中 **0 个实例**，仅有源码级说明、**无运行期证据**，再入条件见该节末）。

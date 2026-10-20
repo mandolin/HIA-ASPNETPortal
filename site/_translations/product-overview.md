@@ -8,7 +8,7 @@ nav_order: 1
 
 # Product overview and positioning (HIA-ASPNETPortal)
 
-> **`W-anp-P124` deliverable**. This page answers "what it is, who it is for, what it can do, and where its
+> This page answers "what it is, who it is for, what it can do, and where its
 > boundaries lie". For step-by-step operations see
 > [user-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/user-guide.md); for deployment and
 > operations see `deployment-checklist.md` and `operations-runbook.md`.
@@ -41,12 +41,12 @@ SQL Server, enterprise scanning, and so on), so **direct production use is not r
 - Scenarios that need an **enterprise intranet** portal quickly (tabs + modular content + role permissions + admin console);
 - Teams already invested in the .NET Framework 4.8 / Web Forms stack and its operations practices;
 - Readers using the project as a **reference baseline** for how portal permission models, module package governance, theme
-  governance, and automated gates can be implemented.
+ governance, and automated gates can be implemented.
 
 **Not suitable for**:
 
 - Integration scenarios that need an **external REST / GraphQL API** — this project is a Web Forms portal with **no such
-  external surface**;
+ external surface**;
 - Scenarios requiring modern frontend frameworks (React / Vue) or a separated frontend/backend architecture;
 - Deployments that demand "production-grade trust evidence" — that evidence is not yet achieved.
 
@@ -72,7 +72,7 @@ SQL Server, enterprise scanning, and so on), so **direct production use is not r
 - **No claim of production-grade trust** (L7 evidence not achieved);
 - No support for modern frontend frameworks or a separated frontend/backend architecture;
 - Generated documentation directories (`src/Documentation/`, `src/Portal.Components.Data/Documentation/`, `src/DoxyGen/`)
-  are **generated output**, not maintained documentation entry points;
+ are **generated output**, not maintained documentation entry points;
 
 
 ## 5. Compatibility and runtime
@@ -84,7 +84,7 @@ SQL Server, enterprise scanning, and so on), so **direct production use is not r
 | Build | Visual Studio 2022, or VS / Build Tools able to build .NET Framework 4.8 |
 | Database | SQL Server or SQL Server LocalDB |
 | Web server | IIS Express (local) / IIS (deployment) |
-| Browser baseline | **IE9+** (CSS uses the "explicit value first, `var()` second" double-declaration pattern for fallback) |
+| Browser baseline | **IE9+** (CSS uses the "explicit value first, `var` second" double-declaration pattern for fallback) |
 | Node.js | Needed **only** when maintaining frontend asset builds |
 
 ## 6. License

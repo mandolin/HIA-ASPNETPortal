@@ -38,7 +38,7 @@
 | 列表隔行底色 | `--portal-list-row-alt` | `#f7f9fc` |
 | 错误 / 失败 / 校验反馈 | `--portal-danger-text` | `#b42318` |
 
-> `--portal-text-subtle` 由 `C-anp-P23` D3 裁定新增，用于标题与副标题的色层次。
+> `--portal-text-subtle` 依 D3 裁定新增，用于标题与副标题的色层次。
 > `--portal-danger-text` 是唯一按主题族区分的变量（见 `docs/theme-semantic-variables.md`）；
 > 官网取 Enterprise 族浅色值 `#b42318`。
 
@@ -110,9 +110,9 @@
 **已采取的处置**：
 
 1. `site/_layouts/default.html` 是上游 layout 的**受控覆盖**，与上游的**唯一差异**是 `<html lang>` 改为
-   `{{ page.lang | default: site.lang | default: 'en-US' }}`。其余行逐字复制，**不做顺手优化**（否则将来无法与上游 diff）。
+ `{{ page.lang | default: site.lang | default: 'en-US' }}`。其余行逐字复制，**不做顺手优化**（否则将来无法与上游 diff）。
 2. `_config.yml` 的 `remote_theme` **固定到 `v0.12.0`**，与本地 gem 一致 —— 否则 Pages 拉到更新版主题、其 include/Sass
-   已变而覆盖文件仍是旧版，会造成"部分新部分旧"的错配。
+ 已变而覆盖文件仍是旧版，会造成"部分新部分旧"的错配。
 
 **升级主题时的动作**：取新版 `_layouts/default.html`，只把 `<html lang>` 一行替换为上述表达式，其余照抄；
 若上游在别处也改了 `<html>` 或 `head.html` 的 lang 逻辑，须一并复核。
@@ -120,34 +120,34 @@
 **两条实测得到的教训（写在这里以免重犯）**：
 
 - **不要在 layout 注释里写字面的 html-lang 标记样例**。覆盖文件初版的注释里写了一处这样的样例，
-  结果任何基于该标记的检查都**先命中注释里的假标记**，把"修复已生效"误判成"修复失败"，
-  并引出三轮无效排查。**注释中的示例文本不得与真实标记形成可匹配的同形文本。**
+ 结果任何基于该标记的检查都**先命中注释里的假标记**，把"修复已生效"误判成"修复失败"，
+ 并引出三轮无效排查。**注释中的示例文本不得与真实标记形成可匹配的同形文本。**
 - **不要在该 layout 里使用 Liquid 注释 `{#- ... -#}`**。曾用 Liquid 注释写双语说明，结果整个 layout 被静默旁路
-  （Jekyll 回退到主题 layout），页面看起来正常、但 lang 修复完全失效。说明文字一律用 HTML 注释或独立文档承载。
+ （Jekyll 回退到主题 layout），页面看起来正常、但 lang 修复完全失效。说明文字一律用 HTML 注释或独立文档承载。
 
 ## 10. HIA 系列主配色与 landing 样式（同源接线）
 
 `site/_config.yml` 的 `color_scheme` 为自定义方案 **`hia`**（定义在 `site/_sass/color_schemes/hia.scss`）。
 
 - **配色权威源（用户指定）**：HIA 系列自己的设计令牌 ——
-  `HIA-Theme-Builder/HIA/web/src/style.css` 的 `:root`
-  （primary `#0047AB`、secondary `#00A8D3`、蓝色阶 p50–p900、cyan 阶 s50–s900、
-  `surface #F3F6F9` / `surface-2 #EAF0F5` / `panel #FFFFFF` / `line #DCE5EC`、
-  `text #172633` / `muted #667782`、字体 Inter + Noto Sans CJK SC）。
-  本文件第 2 节的 `--portal-*` 矩阵仍是**产品门户皮肤**的取值依据（站点与其保持同源的产品语义，
-  但站点自身品牌色以 HIA 系列令牌为准）。
+ `HIA-Theme-Builder/HIA/web/src/style.css` 的 `:root`
+ （primary `#0047AB`、secondary `#00A8D3`、蓝色阶 p50–p900、cyan 阶 s50–s900、
+ `surface #F3F6F9` / `surface-2 #EAF0F5` / `panel #FFFFFF` / `line #DCE5EC`、
+ `text #172633` / `muted #667782`、字体 Inter + Noto Sans CJK SC）。
+ 本文件第 2 节的 `--portal-*` 矩阵仍是**产品门户皮肤**的取值依据（站点与其保持同源的产品语义，
+ 但站点自身品牌色以 HIA 系列令牌为准）。
 - **landing 样式**：`site/_sass/custom/custom.scss` + `site/_layouts/home.html`（主题官方覆盖点与自定义 layout）。
-  **对标基准为 orchardcore.net**（用户指定），且照它"主站与文档两套风格"的做法：**首页/营销页**照搬
-  主站板块顺序——自带顶部导航、hero（大字标题 + 可复制命令块 + 双 CTA）、统计行、全大写小标题的能力卡与功能卡栅格、
-  CTA 带、入手方式、FAQ 折叠（原生 `<details>`，无 JS 依赖）、多列页脚；
-  **文档页**重写为 docs.orchardcore.net（Material for MkDocs）的风格：深色顶栏（品牌 + 搜索框 +
-  仓库链接 + 语言切换）、左侧导航树（沿用主题组件重新着色）、**无面包屑**（与 Material 一致）、
-  正文 + **右栏 sticky「本页目录」**（由 layout 对渲染 HTML 按 h2 拆分生成）、同一分区内**上一篇/下一篇**分页、
-  大写标题带锚点、admonition 式引用块（HIA p50 底 + 主色左条）、**深色代码块**、深色页脚条。
-  两套风格刻意不同（对应 OC 主站与文档子站的划分）。板块结构照搬，配色保持 HIA 令牌。
+ **对标基准为 orchardcore.net**（用户指定），且照它"主站与文档两套风格"的做法：**首页/营销页**照搬
+ 主站板块顺序——自带顶部导航、hero（大字标题 + 可复制命令块 + 双 CTA）、统计行、全大写小标题的能力卡与功能卡栅格、
+ CTA 带、入手方式、FAQ 折叠（原生 `<details>`，无 JS 依赖）、多列页脚；
+ **文档页**重写为 docs.orchardcore.net（Material for MkDocs）的风格：深色顶栏（品牌 + 搜索框 +
+ 仓库链接 + 语言切换）、左侧导航树（沿用主题组件重新着色）、**无面包屑**（与 Material 一致）、
+ 正文 + **右栏 sticky「本页目录」**（由 layout 对渲染 HTML 按 h2 拆分生成）、同一分区内**上一篇/下一篇**分页、
+ 大写标题带锚点、admonition 式引用块（HIA p50 底 + 主色左条）、**深色代码块**、深色页脚条。
+ 两套风格刻意不同（对应 OC 主站与文档子站的划分）。板块结构照搬，配色保持 HIA 令牌。
 - **变量名**：对照本地 gem `just-the-docs v0.12.0` 的 `_sass/color_schemes/light.scss`
-  逐一核实后使用，非猜测。
+ 逐一核实后使用，非猜测。
 - **代码高亮**：方案文件末尾保留上游的
-  `@import "./vendor/accessible-pygments/github-light"`（与 `light.scss` 一致）。
+ `@import "./vendor/accessible-pygments/github-light"`（与 `light.scss` 一致）。
 - **升级主题时**：重新核对新版 `light.scss` 的变量名；若上游改名或增删调色板变量，
-  需同步方案文件与 custom.scss。本机制走主题支持的 `color_scheme` 与 custom 挂钩，不触碰主题内部文件。
+ 需同步方案文件与 custom.scss。本机制走主题支持的 `color_scheme` 与 custom 挂钩，不触碰主题内部文件。

@@ -12,25 +12,25 @@
 
 ```text
 App_Themes/
-  {ThemeName}/
-    Default.css
-    theme.json
-    Images/              # 可选，只能是主题目录内的相对资源
+ {ThemeName}/
+ Default.css
+ theme.json
+ Images/ # 可选，只能是主题目录内的相对资源
 ```
 
 `ThemeName` 必须匹配 `^[A-Za-z][A-Za-z0-9_-]{0,63}$`，并与清单中的 `name` 完全一致。当前清单版本为 `schemaVersion: 1`：
 
 ```json
 {
-  "schemaVersion": 1,
-  "name": "ExampleTheme",
-  "displayName": "示例主题 / Example Theme",
-  "version": "1.0.0",
-  "minimumPortalVersion": "1.0",
-  "inheritsDefault": true,
-  "resources": [
-    "Default.css"
-  ]
+ "schemaVersion": 1,
+ "name": "ExampleTheme",
+ "displayName": "示例主题 / Example Theme",
+ "version": "1.0.0",
+ "minimumPortalVersion": "1.0",
+ "inheritsDefault": true,
+ "resources": [
+ "Default.css"
+ ]
 }
 ```
 

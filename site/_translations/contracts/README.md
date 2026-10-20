@@ -43,21 +43,21 @@ The full boundary decision is registered in
 ## 3. Shared constraints
 
 1. **Trusted boundary**: module packages follow a "trusted deployment" model — only controlled ASCX entry points and in-site
-   static resources are allowed; a manifest declaring `script` / `scripts` / `externalUrl` / `externalUrls` / an assembly / a
-   package URL is **explicitly rejected** — a manifest declaration cannot change execution or download capability.
+ static resources are allowed; a manifest declaring `script` / `scripts` / `externalUrl` / `externalUrls` / an assembly / a
+ package URL is **explicitly rejected** — a manifest declaration cannot change execution or download capability.
 2. **Defaults are taken from the source**: this directory does not copy default values (they would go stale). For defaults,
-   look at `<appSettings>` in `src/Portal/Web.config` and the per-environment `appSettings*.json`.
+ look at `<appSettings>` in `src/Portal/Web.config` and the per-environment `appSettings*.json`.
 3. **Configuration effective sources**: `Web.config` holds the base values; only an `appSettings.json` **deployed to the site
-   root directory** overrides keys of the same name (silently skipped if absent). See item 4 of "Hidden traps when adding a
-   module" in [module-development-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/module-development-guide.md).
+ root directory** overrides keys of the same name (silently skipped if absent). See item 4 of "Hidden traps when adding a
+ module" in [module-development-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/module-development-guide.md).
 4. **Contract changes must be synced**: when changing a contract implementation, update the corresponding explanation in this
-   directory and constant sources such as `PortalSettingKeys.cs`; the verification method is to run the gate suite
-   (`dev/scripts/Invoke-PortalGateSuite.ps1`).
+ directory and constant sources such as `PortalSettingKeys.cs`; the verification method is to run the gate suite
+ (`dev/scripts/Invoke-PortalGateSuite.ps1`).
 
 ## 4. Verification
 
 - Machine validation of the module contract: `dev/scripts/Test-PortalNewModuleReadiness.ps1` and
-  `Test-PortalBusinessModuleSmoke.ps1` (L0).
+ `Test-PortalBusinessModuleSmoke.ps1` (L0).
 - Asset and theme contracts: `Test-PortalModuleSkinCoverage.ps1` (L0).
 - For concrete commands see
-  [testing-checklist.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/testing-checklist.md).
+ [testing-checklist.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/testing-checklist.md).

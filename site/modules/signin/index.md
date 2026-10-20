@@ -37,7 +37,7 @@ title: 登录（Signin）
 
 1. 提交前，页面用**一次性 RSA 公钥**把口令加密后写入隐藏字段 `EncryptedPassword`（公钥由 `~/Security/LoginPasswordKey.ashx` 提供）。
 2. 服务端解密后，口令**只在当前请求内**传递。
-3. 是否**强制**加密提交由 `PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired()` 决定；未要求时才接受明文回退。
+3. 是否**强制**加密提交由 `PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired` 决定；未要求时才接受明文回退。
 
 **服务端校验流程**
 
@@ -68,9 +68,9 @@ title: 登录（Signin）
 
 - **存储**：口令校验走 `UsersDB.SignIn`（`IUsersDb.SignIn`），票据由 `PortalAuthenticationService.SignIn` 签发。**登录模块本身不保存业务数据**。
 - **审计（本仓唯一写运营审计的内容路径，须如实知道）**：
-  - **登录失败**写一条审计：`SignInFailed`，`Outcome=Failure`，**只携带登录标识**，**绝不写口令、盐或哈希材料**；
-  - **旧凭据升级**写一条：`LegacyCredentialUpgraded`；
-  - **口令迭代次数升级**写一条：`CredentialCostUpgraded`。
+ - **登录失败**写一条审计：`SignInFailed`，`Outcome=Failure`，**只携带登录标识**，**绝不写口令、盐或哈希材料**；
+ - **旧凭据升级**写一条：`LegacyCredentialUpgraded`；
+ - **口令迭代次数升级**写一条：`CredentialCostUpgraded`。
 - 与之相对：公告、联系人、讨论、文档、事件、图片、链接、快速链接、HTML 文本、XML / XSL **十个内容编辑路径都不写运营审计**。
 
 ## 权限

@@ -28,30 +28,30 @@ of the target IIS, SQL Server, backup systems or enterprise monitoring platforms
 ## Daily checks
 
 1. Open `Admin/SystemHealth.aspx`, confirm the overall status is not `Error`, and record `Pending` items that need
-   target-environment evidence.
+ target-environment evidence.
 2. Open `Admin/DiagnosticsLogs.aspx` and review recent errors and warnings; when a generic error-page event ID appears,
-   look it up by that ID.
+ look it up by that ID.
 3. Open `Admin/OperationAudits.aspx` and spot-check key business audit records such as registration, review, roles, profile
-   corrections and work items.
+ corrections and work items.
 4. Confirm that the site root directory, `App_Data/Logs`, the upload directory and the external configuration directory
-   permissions meet the minimal-write requirement.
+ permissions meet the minimal-write requirement.
 
 ## Weekly checks
 
 1. Run operations readiness:
 
-   ```powershell
-   dev/scripts/Test-PortalOperationsReadiness.ps1
-   ```
+ ```powershell
+ dev/scripts/Test-PortalOperationsReadiness.ps1
+ ```
 
 2. Run the diagnostic log retention policy dry-run:
 
-   ```powershell
-   dev/scripts/Test-PortalLogMaintenance.ps1
-   ```
+ ```powershell
+ dev/scripts/Test-PortalLogMaintenance.ps1
+ ```
 
 3. Review `RetentionCandidates` and `UnmanagedFiles` in the dry-run output. The script never deletes logs; before production
-   cleanup, confirm backups, retention days, audit requirements and the change window first.
+ cleanup, confirm backups, retention days, audit requirements and the change window first.
 4. Check the upload directory for abnormal extensions, abnormally sized files or signs of unauthorised access.
 
 ## Before and after release

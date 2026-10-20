@@ -18,8 +18,8 @@ Renders **a block of raw HTML maintained by a trusted administrator** (welcome t
 Prerequisites:
 
 1. You are signed in and hold **both**:
-   - **module edit permission** (`HasEditPermissions(moduleId)`), and
-   - the narrower **"raw HTML" permission** (`PortalPermissionKeys.ContentRawHtmlEdit`).
+ - **module edit permission** (`HasEditPermissions(moduleId)`), and
+ - the narrower **"raw HTML" permission** (`PortalPermissionKeys.ContentRawHtmlEdit`).
 2. The module must be mounted on a tab. Current deployment (measured in the development database): **12 instances** — home page 2, employee information, product information, discussion area, about the portal 7, and the `G1P2-Test-A` test page.
 3. The edit page's `Mid` comes from the unverified query-string / post-back collection and **must be a positive integer**, otherwise the page redirects to the edit-denied page.
 

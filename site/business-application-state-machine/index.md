@@ -60,7 +60,7 @@ title: 业务申请状态机（Business Application State Machine）
 | `Returned` | `Resubmit` | `Submitted` | **申请人自助** |
 
 - `MapActionToStatus(actionKey)` 由该表派生（同一动作目标唯一）。
-- `ReviewApplication` 的 SQL 写入守卫谓词由 `BuildSqlStatusPredicate()` 从同一表生成（**仅含审核路径动作**），避免与表漂移；`Resubmit` 因 `ViaReviewPath = false` 不进入该谓词，防止自助动作被后台审核路径意外触发。
+- `ReviewApplication` 的 SQL 写入守卫谓词由 `BuildSqlStatusPredicate` 从同一表生成（**仅含审核路径动作**），避免与表漂移；`Resubmit` 因 `ViaReviewPath = false` 不进入该谓词，防止自助动作被后台审核路径意外触发。
 - 有单测断言生成谓词与显式化之前的手写窗口 `IN (N'Submitted', N'InReview')` **语义等价**。
 
 **保留既有语义（重要）**：`Close` 仅允许从 `Submitted` / `InReview`，**不是**从 `Approved` / `Rejected`。这是显式化之前的既有行为，本轮原样保留；调整属独立决策（需迁移与回归），并由等价性单测守护现状。

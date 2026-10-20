@@ -10,8 +10,8 @@ HTML 文本模块在页签上渲染**一段由受信任管理员维护的原始 
 前置条件：
 
 1. 你已登录门户，并**同时**具备：
-   - **模块编辑权限**（`HasEditPermissions(moduleId)`），以及
-   - **更窄的「原始 HTML」权限**（`PortalPermissionKeys.ContentRawHtmlEdit`）。
+ - **模块编辑权限**（`HasEditPermissions(moduleId)`），以及
+ - **更窄的「原始 HTML」权限**（`PortalPermissionKeys.ContentRawHtmlEdit`）。
 2. 模块需挂载在页签上。当前部署（开发库实测）：**12 个实例**——首页 2、员工信息、产品信息、讨论区、关于门户 7，以及 `G1P2-Test-A` 测试页。
 3. 编辑页的 `Mid` 来自查询串或回发的未验证集合，**必须为正整数**，否则跳转编辑拒绝页。
 

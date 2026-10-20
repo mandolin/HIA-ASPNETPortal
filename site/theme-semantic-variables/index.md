@@ -83,12 +83,12 @@ title: 主题语义变量矩阵（`--portal-*`）
 ```powershell
 $themes = @('Default','EnterpriseLight','EnterpriseDark','OaLight','OaDark','StateClassicLight','StateClassicDark')
 foreach ($t in $themes) {
-    $text = Get-Content "src/Portal/App_Themes/$t/Default.css" -Raw -Encoding UTF8
-    $vars = @{}
-    foreach ($m in [regex]::Matches($text, '--portal-([a-z0-9-]+)\s*:\s*([^;]+);')) {
-        $vars[$m.Groups[1].Value] = $m.Groups[2].Value.Trim()
-    }
-    Write-Host ("$t : " + (($vars.Keys | Sort-Object | ForEach-Object { "$_=$vars[$_]" }) -join '  '))
+ $text = Get-Content "src/Portal/App_Themes/$t/Default.css" -Raw -Encoding UTF8
+ $vars = @{}
+ foreach ($m in [regex]::Matches($text, '--portal-([a-z0-9-]+)\s*:\s*([^;]+);')) {
+ $vars[$m.Groups[1].Value] = $m.Groups[2].Value.Trim
+ }
+ Write-Host ("$t : " + (($vars.Keys | Sort-Object | ForEach-Object { "$_=$vars[$_]" }) -join ' '))
 }
 ```
 
@@ -98,4 +98,4 @@ foreach ($t in $themes) {
 
 - `theme-package-guide.md`：受信任主题包的目录、启用、回退和发布边界。
 - `frontend-asset-guide.md`：Web Forms 呈现、主题、模块 CSS 与前端资产边界。
-- 模块外观契约（容器/标题/分区/表格/提示/弱化/危险的类集与逐皮肤色板）见 主题契约门禁 产出。
+- 模块外观契约（容器/标题/分区/表格/提示/弱化/危险的类集与逐皮肤色板）见 `theme-module-contract.md`。

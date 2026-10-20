@@ -12,7 +12,7 @@ side owns layout and structure, the theme layer owns colour. It also records the
 `var(--portal-*, fallback)` and the known inconsistencies.
 
 > Authority is the same as `theme-semantic-variables.md`: this document is a snapshot extracted from the live code, while the
-> machine-checkable authoritative source is the CSS and the 自动化门禁 gates.
+> machine-checkable authoritative source is the CSS and the corresponding gates.
 
 ## 1. Division of labour
 
@@ -59,7 +59,7 @@ layer; see the matrix in `theme-semantic-variables.md`.
 | **One variable, two fallback values** | `--portal-text-strong`: title `#2f475f` / subtitle `#41556b` | **The original design used different colours for title and subtitle**; after migration both take the same theme value → the colour layering was flattened (see below) |
 | Fallback diverges from theme value | `--portal-text-muted`: `#6b7c8f` ≠ theme `#5b6b7d` | Slightly darker than the theme on older engines |
 | A whole module's own palette | `ModuleProbe` has 6 fallback values (`#52718a` / `#f4f8fb` / `#1f3546` / `#1b4f72` / `#496274` / `#31495c`) | A diagnostic module's own palette; none matches a theme value, and it is a low-priority diagnostic surface by design |
-| Error colour | `--portal-danger-text`: `#8a1f1f` ≠ theme light `#b42318` |  changed the module side to take the variable; the difference is visible only as a fallback on older engines |
+| Error colour | `--portal-danger-text`: `#8a1f1f` ≠ theme light `#b42318` | the module side reads the variable; the difference is visible only as a fallback on older engines |
 
 ### D3 ruling: the colour layering of subtitle vs title (closed)
 
@@ -75,20 +75,20 @@ subtitle's intermediate colour. See the matrix in
 The two rejected options:
 
 - **(a) accept** the same colour and separate levels by size/weight — rejected: colour layering was the original design
-  intent, and size/weight alone do not carry it.
+ intent, and size/weight alone do not carry it.
 - **(c) switch the subtitle to `--portal-text-muted`** — rejected: it would become lighter and depart from the original
-  intent.
+ intent.
 
 ## 4. Checklist for a new module's appearance
 
 1. Layout and structure belong in the module's `Styles/<Module>.css`.
 2. Where a colour is needed, always use `var(--portal-*, fallback)`, with the fallback being the value that rule had before.
 3. If a **semantic meaning the theme layer lacks** is needed, first read the "corollary for adding variables" in
-   `theme-semantic-variables.md`: one expressing light/dark tonality joins the light/dark pair, while one expressing an
-   inherent theme-family property is valued per theme family, preferably reusing an existing class.
+ `theme-semantic-variables.md`: one expressing light/dark tonality joins the light/dark pair, while one expressing an
+ inherent theme-family property is valued per theme family, preferably reusing an existing class.
 4. **All 7 themes' `Default.css` must add the scope rule for that class**
-   (`body.portal-theme-<name> .<module class>`); missing one means the module loses themed styling in most skins — treat it
-   as unfinished.
+ (`body.portal-theme-<name> .<module class>`); missing one means the module loses themed styling in most skins — treat it
+ as unfinished.
 5. If the interface form changes, produce a real rendered prototype (light + dark) and get it confirmed before touching CSS.
 
 ## 5. Related documents

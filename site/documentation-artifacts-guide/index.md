@@ -8,14 +8,14 @@ title: 文档产物与工具链边界
 # 文档产物与工具链边界
 
 本文说明 HIA-ASPNETPortal 的公开维护文档、文档化输入和可再生产物之间的边界。目标是让维护者能够在不依赖
-**独立私有仓库**、门户运行时或其他 HIA 项目本地目录的前提下，重复执行已有验证。
+门户运行时或其他 HIA 项目本地目录的前提下，重复执行已有验证。
 
 ## 公开文档与私有资料
 
 - 根 `README.md` 与本目录下的 Markdown 是主仓库的公开维护文档。
 
 - 文档可以使用 `{ExternalCfgPath}`、`$env:USERPROFILE`、模板文件名和逻辑连接串名称说明可复现的配置方式，
-  不得写入真实连接串、密码、Token、Cookie、证书、生产备份或项目本机绝对路径。
+ 不得写入真实连接串、密码、Token、Cookie、证书、生产备份或项目本机绝对路径。
 
 ## JavaScript 文档化
 
@@ -75,7 +75,7 @@ surface 和 solution/project discovery。生成的 DotNetDoc extraction、HIA do
 
 ## 运行截图基线
 
- 交付：把长期登记为缺口的「运行截图」变成**可复现产物**——手工贴一次的截图必然随时间腐坏且与源码脱节。
+运行截图由长期登记的缺口变为**可复现产物**——手工贴一次的截图必然随时间腐坏且与源码脱节。
 
 规范与既有主题截图工具（`Capture-PortalThemeScreenshots.ps1`）同源，不另起一套：
 
@@ -92,8 +92,8 @@ surface 和 solution/project discovery。生成的 DotNetDoc extraction、HIA do
 
 ```powershell
 $env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path 'temp\node_modules\playwright').Path
-& $node 'dev\scripts\Capture-PortalRuntimeScreenshots.mjs'          # 按需采集（非门禁）
-& 'dev\scripts\Test-PortalRuntimeScreenshotBaseline.ps1'            # L0 门禁：校验规范与清单一致
+& $node 'dev\scripts\Capture-PortalRuntimeScreenshots.mjs' # 按需采集（非门禁）
+& 'dev\scripts\Test-PortalRuntimeScreenshotBaseline.ps1' # L0 门禁：校验规范与清单一致
 ```
 
 边界：截图**不进入公开文档与根仓库**（`operations-runbook.md`：公开交付只引用脱敏摘要，不把内部证据或生产截图放入根仓库）；

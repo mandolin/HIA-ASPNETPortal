@@ -80,7 +80,7 @@ The public documentation gate reads only the root README, `docs/` and the JSDoc 
 
 The gate verifies public entry points, relative file links, the documentation index, absolute project paths / credential shapes and the Git boundary of unconfirmed generated directories. It allows reproducible examples such as `$env:USERPROFILE`, `{ExternalCfgPath}` and the common PowerShell 7 install path, but does not verify complex Markdown anchors, external links or network reachability.
 
-`Get-PortalDocumentationBaseline.ps1` is the read-only baseline tool of . It only counts Git-tracked `src/` sources and outputs file counts for C#, Web Forms, frontend and configuration, an inventory of C# XML documentation, and the boundary state of known generated / untracked directories; these numbers are not a documentation quality or coverage percentage.
+`Get-PortalDocumentationBaseline.ps1` is the read-only baseline tool. It only counts Git-tracked `src/` sources and outputs file counts for C#, Web Forms, frontend and configuration, an inventory of C# XML documentation, and the boundary state of known generated / untracked directories; these numbers are not a documentation quality or coverage percentage.
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -AsJson
@@ -101,7 +101,7 @@ Documentation readiness and the evidence package can be run with:
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalDocumentationEvidencePackage.ps1
 ```
 
-Readiness checks the Required / Recommended / Deferred coverage scopes, JSDoc pilot isolation, the .NET XML deferral boundary, that generated output is not committed, and HIA notification reading. The evidence package is written to the internal evidence directory by default; it does not modify source comments, does not commit generated output, does not read sensitive configuration, and does not connect to a database.
+Readiness checks the Required / Recommended / Deferred coverage scopes, JSDoc pilot isolation, the .NET XML deferral boundary, that generated output is not committed, and HIA notification reading. The evidence package is written to the evidence directory by default; it does not modify source comments, does not commit generated output, does not read sensitive configuration, and does not connect to a database.
 
 ## JavaScript documentation pilot
 
@@ -344,23 +344,23 @@ $participantPassword = Read-Host -AsSecureString 'P19 fixture participant passwo
 $administratorPassword = Read-Host -AsSecureString 'P19 fixture administrator password'
 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
-  -ConnectionStringsConfigPath $testConfig `
-  -Action Create `
-  -FixtureId 'p19-local-001' `
-  -ParticipantPassword $participantPassword `
-  -AdministratorPassword $administratorPassword `
-  -Confirm:$false
+ -ConnectionStringsConfigPath $testConfig `
+ -Action Create `
+ -FixtureId 'p19-local-001' `
+ -ParticipantPassword $participantPassword `
+ -AdministratorPassword $administratorPassword `
+ -Confirm:$false
 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
-  -ConnectionStringsConfigPath $testConfig `
-  -Action Inspect `
-  -FixtureId 'p19-local-001'
+ -ConnectionStringsConfigPath $testConfig `
+ -Action Inspect `
+ -FixtureId 'p19-local-001'
 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
-  -ConnectionStringsConfigPath $testConfig `
-  -Action Remove `
-  -FixtureId 'p19-local-001' `
-  -Confirm:$false
+ -ConnectionStringsConfigPath $testConfig `
+ -Action Remove `
+ -FixtureId 'p19-local-001' `
+ -Confirm:$false
 ```
 
 The helper outputs only count-level facts, never connection strings, passwords, salts, hashes or application bodies. Remove deletes, in a single transaction and in dependency order, that fixture's records, entity-role relations and both accounts; it cannot delete data by arbitrary username, role or prefix. It proves only that the test database and an isolated browser form a closed loop, and cannot substitute for real IIS/HTTPS, production or enterprise-scan evidence.

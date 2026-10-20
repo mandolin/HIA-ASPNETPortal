@@ -32,7 +32,7 @@ dev/scripts/New-PortalP12EvidencePackage.ps1
 3. 业务权限与审计门禁。
 4. 解决方案构建。
 
-证据默认写入内部证据目录；若该目录不存在，则写入 `temp/evidence/p12.5/`。
+证据默认写入证据目录；若该目录不存在，则写入 `temp/evidence/p12.5/`。
 
 ## 样例数据 SQL
 

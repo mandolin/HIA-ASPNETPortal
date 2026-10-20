@@ -76,7 +76,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 `$env:USERPROFILE`、`{ExternalCfgPath}` 和 PowerShell 7 通用安装路径等可复现示例，但不会验证复杂 Markdown 锚点、
 外部链接或网络可达性。
 
-`Get-PortalDocumentationBaseline.ps1` 是 `W-anp-P4.1` 的只读基线工具。它只统计 Git 已追踪的 `src/` 源码，输出 C#、Web Forms、前端与配置的文件数量、C# XML 文档 inventory，以及已知生成/未跟踪目录的边界状态；这些数值不是文档质量或覆盖率百分比。
+`Get-PortalDocumentationBaseline.ps1` 是只读基线工具。它只统计 Git 已追踪的 `src/` 源码，输出 C#、Web Forms、前端与配置的文件数量、C# XML 文档 inventory，以及已知生成/未跟踪目录的边界状态；这些数值不是文档质量或覆盖率百分比。
 
 ```powershell
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\Get-PortalDocumentationBaseline.ps1 -AsJson
@@ -97,7 +97,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalDocumentationEvidencePackage.ps1
 ```
 
-readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JSDoc pilot 隔离、.NET XML 延期边界、生成物未入库和 HIA 通知读取。证据包默认写入内部证据目录；它不修改源码注释、不提交生成物、不读取敏感配置，也不连接数据库。
+readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JSDoc pilot 隔离、.NET XML 延期边界、生成物未入库和 HIA 通知读取。证据包默认写入证据目录；它不修改源码注释、不提交生成物、不读取敏感配置，也不连接数据库。
 
 ## JavaScript 文档化 Pilot
 
@@ -348,23 +348,23 @@ $participantPassword = Read-Host -AsSecureString 'P19 fixture participant passwo
 $administratorPassword = Read-Host -AsSecureString 'P19 fixture administrator password'
 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
-  -ConnectionStringsConfigPath $testConfig `
-  -Action Create `
-  -FixtureId 'p19-local-001' `
-  -ParticipantPassword $participantPassword `
-  -AdministratorPassword $administratorPassword `
-  -Confirm:$false
+ -ConnectionStringsConfigPath $testConfig `
+ -Action Create `
+ -FixtureId 'p19-local-001' `
+ -ParticipantPassword $participantPassword `
+ -AdministratorPassword $administratorPassword `
+ -Confirm:$false
 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
-  -ConnectionStringsConfigPath $testConfig `
-  -Action Inspect `
-  -FixtureId 'p19-local-001'
+ -ConnectionStringsConfigPath $testConfig `
+ -Action Inspect `
+ -FixtureId 'p19-local-001'
 
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalP19BrowserSmokeFixture.ps1 `
-  -ConnectionStringsConfigPath $testConfig `
-  -Action Remove `
-  -FixtureId 'p19-local-001' `
-  -Confirm:$false
+ -ConnectionStringsConfigPath $testConfig `
+ -Action Remove `
+ -FixtureId 'p19-local-001' `
+ -Confirm:$false
 ```
 
 该 helper 只输出计数级事实，不输出连接串、密码、盐、哈希或申请正文。Remove 在单一事务中按依赖顺序删除该 fixture 的记录、实体角色关系和两个账号；它不能按任意用户名、角色或前缀删除数据。它只证明 test 数据库与隔离浏览器闭环，不能替代真实 IIS/HTTPS、生产或企业扫描证明。

@@ -17,12 +17,12 @@ refactor plan, a frontend framework migration, or a dynamic asset management sch
 
 1. `src/Portal/Components/PortalPage.cs` resolves and applies the single native Web Forms Theme in `PreInit`.
 2. `src/Portal/App_Themes/{ThemeName}/` provides the theme manifest and `Default.css`; for theme selection, tab overrides and
-   the fallback rule, see [theme-package-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/theme-package-guide.md).
+ the fallback rule, see [theme-package-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/theme-package-guide.md).
 3. `src/Portal/Default.master` provides the default Banner, the single server form and the `MainContent` placeholder.
 4. `src/Portal/Default.master.cs` writes stable theme/Tab CSS classes before rendering, and mounts only validated in-site CSS
-   for the current tab's enabled, trusted module packages.
+ for the current tab's enabled, trusted module packages.
 5. Module package styles such as `DesktopModules/ModuleProbe/Styles/ModuleProbe.css` must pass module catalog validation. Theme
-   resources, external URLs and module JavaScript are **not** auto-loaded by the Master page.
+ resources, external URLs and module JavaScript are **not** auto-loaded by the Master page.
 
 The default theme continues to support IE9+ compatible CSS. Do not rely on CSS variables, Grid, Flexbox, remote fonts, remote
 resources or theme scripts inside a theme. Body text uses the open-source-first font stack with a generic fallback; for

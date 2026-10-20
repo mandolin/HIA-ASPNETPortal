@@ -54,7 +54,7 @@
 | `Cancelled` | `Close` | `Closed` |
 
 - `MapActionToStatus(actionKey)` 由该表派生（同一动作目标唯一）。
-- 数据库写入守卫的 SQL `WHERE` 谓词由 `BuildSqlStatusPredicate()` 从同一表生成，避免与表漂移。
+- 数据库写入守卫的 SQL `WHERE` 谓词由 `BuildSqlStatusPredicate` 从同一表生成，避免与表漂移。
 
 ## 四、强制校验（Enforcement）
 

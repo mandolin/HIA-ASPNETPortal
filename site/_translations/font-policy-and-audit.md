@@ -11,13 +11,13 @@ nav_order: 1
 ## Usage principles
 
 - The project does not ship body-text font files with the site, avoiding unnecessary licensing, package size and cache
-  maintenance costs.
+ maintenance costs.
 - Page styles actively reference only open-source fonts with clear licences, and keep a `sans-serif` or `monospace` generic
-  fallback.
+ fallback.
 - Verdana, Arial, Helvetica, Times New Roman, Courier New, Consolas, Segoe UI, Microsoft YaHei and other proprietary fonts or
-  fonts with unclear licensing boundaries are not actively referenced.
+ fonts with unclear licensing boundaries are not actively referenced.
 - If font files ever need to be shipped with the project, the original licence, copyright notice, source, version and release
-  audit record must be submitted at the same time.
+ audit record must be submitted at the same time.
 
 ## Current font stacks
 
@@ -50,13 +50,13 @@ the browser falls back to the generic family, so site startup is unaffected.
 - The main project's Git currently tracks no `.eot`, `.otf`, `.ttf`, `.woff` or `.woff2` font binaries.
 - The default theme has had its Verdana, Helvetica and Lucida Console references replaced with the open-source stacks above.
 - Back-office role controls and the document upload control have had their inline Verdana/Arial bindings removed and now
-  inherit the theme font.
+ inherit the theme font.
 - The old `src/Setup/SystemReqs.rtf` was not referenced by the project, and its font table contained several
-  Office/Windows proprietary fonts; the existing `SystemReqs.md` keeps the same historical requirements content, so the
-  redundant RTF was deleted.
+ Office/Windows proprietary fonts; the existing `SystemReqs.md` keeps the same historical requirements content, so the
+ redundant RTF was deleted.
 - Untracked generated documentation contains the Font Awesome Free 6.1.1 icon font, whose CSS header declares the font under
-  SIL OFL 1.1, the code under MIT and the icons under CC BY 4.0; that directory is still treated as generated output and is
-  not part of this repository's font distribution.
+ SIL OFL 1.1, the code under MIT and the icons under CC BY 4.0; that directory is still treated as generated output and is
+ not part of this repository's font distribution.
 
 ## Audit result, 2026-07-19
 
@@ -64,4 +64,4 @@ the browser falls back to the generic family, so site startup is unaffected.
 - No `@font-face`, remote font URL or `data:font` was found under `src/Portal/App_Themes/`.
 - The themes continue to use the open-source-first stacks above and keep the `sans-serif` / `monospace` generic fallbacks.
 - `Default`, `EnterpriseLight/Dark`, `OaLight/Dark`, `StateClassicLight/Dark` and `ThemeProbe` do not actively reference
-  Verdana, Arial, Helvetica, Times New Roman, Courier New, Consolas, Segoe UI, Microsoft YaHei or 微软雅黑.
+ Verdana, Arial, Helvetica, Times New Roman, Courier New, Consolas, Segoe UI, Microsoft YaHei or 微软雅黑.

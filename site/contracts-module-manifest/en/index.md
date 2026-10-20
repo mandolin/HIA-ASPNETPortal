@@ -52,19 +52,19 @@ The `capability` section is **optional** and declares the module's capability ow
 
 ```json
 "capability": {
-  "capabilityId": "BasicBusiness.LeaveRequest",
-  "role": "Primary"
+ "capabilityId": "BasicBusiness.LeaveRequest",
+ "role": "Primary"
 }
 ```
 
 - When **not declared**, `capabilityId` / `capabilityRole` keep a stable empty text and the module is considered
-  **Unclassified** — a legal state, not an error.
+ **Unclassified** — a legal state, not an error.
 - Once **declared**:
-  1. Neither `capabilityId` nor `role` may be empty;
-  2. `capabilityId` must resolve in the **authoritative capability registry** (`PortalCapabilityRegistry`) — otherwise it is
-     judged "unregistered" and rejected;
-  3. `role` must belong to the **closed five-value vocabulary** (`PortalCapabilityRoles`): `Primary` / `Contributor` /
-     `Projection` / `Adapter` / `Block`.
+ 1. Neither `capabilityId` nor `role` may be empty;
+ 2. `capabilityId` must resolve in the **authoritative capability registry** (`PortalCapabilityRegistry`) — otherwise it is
+ judged "unregistered" and rejected;
+ 3. `role` must belong to the **closed five-value vocabulary** (`PortalCapabilityRoles`): `Primary` / `Contributor` /
+ `Projection` / `Adapter` / `Block`.
 
 ### Currently registered capability keys (measured)
 
@@ -95,6 +95,6 @@ fields appearing in a manifest causes rejection — **a manifest declaration can
 ## 5. Related gates and documents
 
 - New-module readiness check: `dev/scripts/Test-PortalNewModuleReadiness.ps1` (R1 csproj registration / R2 `CodeBehind` /
-  R3 theme scope rules / R4 markup and CSS class consistency).
+ R3 theme scope rules / R4 markup and CSS class consistency).
 - Business module smoke: `dev/scripts/Test-PortalBusinessModuleSmoke.ps1`.
 - Development flow and traps: [module-development-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/module-development-guide.md).

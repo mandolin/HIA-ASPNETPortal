@@ -71,7 +71,7 @@ title: 产品概览与定位（HIA-ASPNETPortal）
 | 构建 | Visual Studio 2022，或可构建 .NET Framework 4.8 的 VS / Build Tools |
 | 数据库 | SQL Server 或 SQL Server LocalDB |
 | Web 服务器 | IIS Express（本地）/ IIS（部署） |
-| 浏览器兼容 | 面向 **IE9+** 的兼容基线（CSS 采用"显式值在前、`var()` 在后"的双声明范式提供回退） |
+| 浏览器兼容 | 面向 **IE9+** 的兼容基线（CSS 采用"显式值在前、`var` 在后"的双声明范式提供回退） |
 | Node.js | **仅在**需要维护前端资源构建时需要 |
 
 浏览器兼容与 CSS 回退约定的细节见 `frontend-asset-guide.md` 与 `theme-module-contract.md`。
