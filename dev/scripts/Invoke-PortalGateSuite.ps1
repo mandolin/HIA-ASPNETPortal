@@ -460,6 +460,32 @@ $gateLayers = [ordered]@{
         # </lang>
         @{ File = 'Test-PortalCodeDocs.ps1';                   Runner = 'ps1'; Kind = '代码文档发布'; Args = @() }
         # <lang>
+        #   <zh-CN>`C-anp-P33`（`W-anp-P184`）新增：**模块独立文档页**门禁（L0）。现有
+        #   `Test-PortalContentModuleDocs.ps1` 只扫 `docs/user-guide.md` 的**一节**（11 个模块各一小节）；
+        #   本周期要求**每个模块有独立页**（字段表 / 必填与校验 / 操作步骤 / 常见问题 / 边界成篇）。
+        #   登记表 `dev/documentation/module-doc-pages.json` 记录每个模块的页面 slug、批次、交付状态与
+        #   **必须写明的部署边界**（`Links` 仅测试页签、`QuickLinks` 与 Links 共用编辑页、`HtmlModule`
+        #   不做净化、`Signin` 无运行期证据/无编辑页）。六类断言：M1 页面存在 / M2 字段集 ⊇ 源码控件集
+        #   （**词边界**口径，与 A3 同源）/ M3 八节齐全 / M4 必填数量与源码一致 / M5 部署边界必须写明 /
+        #   M6 **default-deny 自检**（已无待交付时 mode 必须切 hard）。
+        #   模式 soft-until-complete → hard：批次未交付完时待交付模块只作软指标（避免 L0 周期中途红），
+        #   **最后一个批次交付后由 M6 强制切换**——这正是 `C-anp-P31` 的 A6 教训（"归零 ≠ 有约束"）在此处的落点。
+        #   注入验证 7/7（基线 + 六类断言各触发一次），全部在 `temp/` 下进行、不触碰仓库文件。</zh-CN>
+        #   <en>`C-anp-P33` (`W-anp-P184`) addition: the **module document pages** gate (L0). The existing
+        #   `Test-PortalContentModuleDocs.ps1` only scans one section of `docs/user-guide.md`; this cycle requires a
+        #   **dedicated page per module**. The registry `dev/documentation/module-doc-pages.json` records each module's
+        #   page slug, batch, delivery status and the **deployment boundaries that must be stated** (`Links` is on the test
+        #   tab only, `QuickLinks` shares the edit page with Links, `HtmlModule` performs no sanitisation, `Signin` has no
+        #   runtime evidence / no edit page). Six assertion families: M1 page exists / M2 field set ⊇ source controls
+        #   (**word-boundary** convention, same source as A3) / M3 all eight sections / M4 required count agrees /
+        #   M5 boundaries stated / M6 **default-deny self-check** (mode must be `hard` once nothing is pending).
+        #   Mode soft-until-complete → hard: while batches are outstanding the remainder is a soft metric so L0 does not go
+        #   red mid-cycle; **M6 forces the switch after the last batch** — the landing point of the `C-anp-P31` A6 lesson
+        #   ("zero is not the same as constrained"). Injection proof 7/7 (baseline plus one trigger per assertion family),
+        #   entirely under `temp/`, touching no repository file.</en>
+        # </lang>
+        @{ File = 'Test-PortalModuleDocPages.ps1';             Runner = 'ps1'; Kind = '模块独立文档页'; Args = @() }
+        # <lang>
         #   <zh-CN>`C-anp-P28`（`W-anp-P153`）新增：**审批流转边界看守**门禁（L0）。验收判据 V3 要求
         #   「审批流转边界在公开文档中有明确声明」。源码实测（2026-10-19）：请假 / 报销两个模块的提交动作链
         #   仅为「字段校验 → 落库（状态固定 `Pending`）→ 生成待办（指派 `Admins`）→ 写审计」，**没有任何审批动作**；
