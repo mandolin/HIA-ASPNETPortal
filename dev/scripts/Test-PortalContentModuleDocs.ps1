@@ -15,14 +15,18 @@
   文档里多写的叙述不在本门禁检查范围内（见证明边界）。
 
   断言：
-    A1 注册的七个模块，其显示控件（`.ascx`）与编辑页（`Edit*.aspx` / 讨论的 `DiscussDetails.aspx`）必须在磁盘存在。
+    A1 注册的模块（`C-anp-P31` 收尾后为 11 个），其显示控件（`.ascx`）必须存在；声明了编辑页的模块，
+       其编辑页（`Edit*.aspx` / 讨论的 `DiscussDetails.aspx`）也必须存在——`edit` 为空串表示**无编辑页**，不检查。
     A2 文档 `docs/user-guide.md` 必须为每个模块设有小节（`### <标题>`），标题与注册表一致。
     A3 编辑页每个**输入控件 id**（TextBox / DropDownList / CheckBox / HtmlTextArea）必须出现在该模块的小节文本中
        ——源码里有而文档没写 = 漏写字段，直接失败。故文档字段一律写成"中文标签 + 源码控件 id"。
+       匹配用**词边界**（`W-anp-P172` 修正）：写成 `` `TitleField` `` 或「TitleField …」可命中，
+       而 `LinkTitleField` 这类"含原 id 的改名"**不再**命中。
     A4 必填项数量一致：编辑页 `RequiredFieldValidator` 控件数（按 id 去重）== 小节内 `**必填**` 出现次数
        ——加/去一个必填校验而文档没同步即失败。（只数控件数，不依赖 `ControlToValidate` 属性顺序。）
-    default-deny：注册表外仍存在的模块文件（如 `HTML` / `QuickLinks` / `XmlModule`）**只作软指标上报**，
-       不静默放过——它们是下一批待补文档的清单。
+    A5 无编辑页模块（如 `Signin`）必须在小节中写明「无编辑页」——否则"真的没有编辑页"会被当成"漏写字段"放过。
+    A6 **default-deny（硬断言）**：注册表外的模块控件**必须为零**（`W-anp-P175` 由软指标提升）。
+       新增模块控件若不登记并补文档，L0 **立即失败**——不再只是"提一句"。
 
   证明边界：只证明"文档覆盖了源码中的输入字段、且必填项数量与源码一致"；
   **不证明文档叙述的语义正确**（字段用途、操作流程由人工复核承载）、
@@ -41,17 +45,21 @@
   proof boundary).
 
   Assertions:
-    A1 for the seven registered modules, both the view control (`.ascx`) and the edit page (`Edit*.aspx`, or `DiscussDetails.aspx`
-       for discussions) must exist on disk.
+    A1 for the registered modules (11 after `C-anp-P31`), the view control (`.ascx`) must exist; when an edit page is declared it must
+       exist too (`Edit*.aspx`, or `DiscussDetails.aspx` for discussions) — an empty `edit` means **no edit page** and is not checked.
     A2 the doc `docs/user-guide.md` must have a section per module (`### <heading>`), with headings matching the registry.
     A3 every **input control id** in the edit page (TextBox / DropDownList / CheckBox / HtmlTextArea) must appear in that module's
        section text — present in source but missing from the doc is an omission and fails outright. Documentation therefore
-       writes fields as "Chinese label + source control id".
+       writes fields as "Chinese label + source control id". Matching uses a **word boundary** (fixed by `W-anp-P172`): writing
+       `` `TitleField` `` or "TitleField …" matches, while a rename such as `LinkTitleField` no longer does.
     A4 required counts agree: the number of `RequiredFieldValidator` controls (deduplicated by id) == the number of `**必填**`
        occurrences in the section — adding or removing a required validator without updating the doc fails. (Only the control count
        is used, so attribute order such as `ControlToValidate` does not matter.)
-    default-deny: module files outside the registry (for example `HTML` / `QuickLinks` / `XmlModule`) are **reported as a soft
-       metric**, never silently ignored — they are the backlog for the next documentation batch.
+    A5 a module with no edit page (for example `Signin`) must state 「无编辑页」 in its section — otherwise "there really is no edit
+       page" would pass as "fields omitted".
+    A6 **default-deny (hard assertion)**: module controls outside the registry **must be zero** (promoted from a soft metric by
+       `W-anp-P175`). A newly added module control that is neither registered nor documented **fails L0 immediately** — it is no
+       longer merely "mentioned".
 
   Proof boundary: proves only that "the doc covers the input fields present in the source, and that required-counts agree with the
   source"; does **not** prove that the doc's prose is semantically correct (field purpose and procedures belong to human review),
@@ -197,8 +205,13 @@ foreach ($module in $MODULES) {
     }
 }
 
-# <lang><zh-CN>default-deny：注册表外的模块文件只作软指标上报（下一批待补文档清单）。</zh-CN>
-# <en>default-deny: module files outside the registry are reported as a soft metric (backlog for the next doc batch).</en></lang>
+# <lang><zh-CN>**A6（default-deny，硬断言）**：注册表外的模块控件**必须为零**——`W-anp-P175` 把这一项从软指标提升为硬断言。
+# 起因：`C-anp-P31` 收尾时未登记控件已归零，但它仍是**软指标**——将来新增模块控件若不登记，只会被"提一句"，
+# 不会让 L0 失败，等于没有 default-deny。转硬后：新增模块控件**必须**登记并补文档，否则 L0 立即失败。</zh-CN>
+# <en>**A6 (default-deny, hard assertion)**: module controls outside the registry **must be zero** — `W-anp-P175` promotes this
+# from a soft metric to a hard assertion. Reason: at the close of `C-anp-P31` the unregistered count reached zero, but it was still
+# a **soft metric**, so a newly added module control would only be "mentioned" rather than failing L0 — i.e. no real default-deny.
+# After promotion: a new module control **must** be registered and documented, or L0 fails immediately.</en></lang>
 $registeredViews = @($MODULES | ForEach-Object { $_.view })
 $unregistered = @()
 if (Test-Path -LiteralPath $modulesDir) {
@@ -207,7 +220,10 @@ if (Test-Path -LiteralPath $modulesDir) {
     }
 }
 if ($unregistered.Count -gt 0) {
-    $softNotes += "[soft] 未登记逐项说明的模块控件 $($unregistered.Count) 个：" + ($unregistered -join '、') + '（下一批待补文档）。'
+    $failures += "A6 存在未登记逐项说明的模块控件 $($unregistered.Count) 个：" + ($unregistered -join '、') + '（default-deny：新增模块控件必须登记进注册表并补文档）。'
+}
+else {
+    $softNotes += '[soft] 未登记模块控件 0 个（A6 default-deny 已生效：新增模块控件必须登记并补文档，否则 L0 失败）。'
 }
 
 # <lang><zh-CN>统计落盘 + 输出。</zh-CN><en>Stats output and reporting.</en></lang>
@@ -241,5 +257,5 @@ if ($failures.Count -gt 0) {
     foreach ($failure in $failures) { Write-Host ('  - ' + $failure) -ForegroundColor Red }
     exit 1
 }
-Write-Host '[PASS] 内容模块文档：七个小节齐备、字段与必填项同源码一致。' -ForegroundColor Green
+Write-Host '[PASS] 内容模块文档：注册模块小节齐备、字段与必填项同源码一致、无编辑页模块已声明、未登记模块控件为 0。' -ForegroundColor Green
 exit 0
