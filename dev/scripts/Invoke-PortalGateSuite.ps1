@@ -412,6 +412,34 @@ $gateLayers = [ordered]@{
         # </lang>
         @{ File = 'Test-PortalContentModuleDocs.ps1';         Runner = 'ps1'; Kind = '内容模块文档一致性'; Args = @() }
         # <lang>
+        #   <zh-CN>`C-anp-P32`（`W-anp-P178`）新增：**官网译本新鲜度**门禁（L0）。`W-anp-P177` 机器化审计发现
+        #   `site/_translations/user-guide.md` 的 `## Common modules` **只有一句散文**（"include announcements,
+        #   contacts, ..."），而中文版有 16 个 `###` 模块小节——`W-anp-P152` 的 7 个 + `C-anp-P31` 的 4 个
+        #   **英文版一个都没有**。现有 `Build-PortalSite.ps1` 的"缺译即 Fail"只校验**翻译文件存在**，
+        #   不校验**内容新鲜度**，所以这类滞后一路绿灯。
+        #   口径（三处教训固化）：①只认**标题行**——首版把"标题行或反引号代码"都算覆盖，注入把 `### HtmlModule`
+        #   改名成 `### HTML text module` 时锚点仍靠别处代码命中，门禁放行；②**大小写敏感**——
+        #   PowerShell `-notmatch` 默认忽略大小写，`W-anp-P177` 首版审计曾把 6 个模块蒙成"已覆盖"；
+        #   ③中文侧只取**小节标题括号内的 ASCII 标识符**作锚点（中英标题不可直接比对，必须语言无关）。
+        #   另含 A2：导航分区必须中英标题齐备（**按行解析**——`W-anp-P177` 用负向预查找正则，因回溯把
+        #   「产品概览」截成「产品概」而误报 8 个）。</zh-CN>
+        #   <en>`C-anp-P32` (`W-anp-P178`) addition: the **site translation freshness** gate (L0). The `W-anp-P177`
+        #   machine-driven audit found that `## Common modules` in `site/_translations/user-guide.md` was **a single prose
+        #   sentence** ("include announcements, contacts, ...") while the Chinese source had 16 `###` module sections — the 7
+        #   from `W-anp-P152` plus the 4 from `C-anp-P31` were **entirely absent** from English. The existing "missing
+        #   translation fails" check in `Build-PortalSite.ps1` only verifies that a translation **file exists**, never its
+        #   **freshness**, so this lag stayed green.
+        #   Contract (three lessons hardened): 1) **heading lines only** — the first version also accepted backticked code,
+        #   so an injection renaming `### HtmlModule` to `### HTML text module` still passed via a code reference
+        #   elsewhere; 2) **case-sensitive** — PowerShell `-notmatch` is case-insensitive by default, and the first
+        #   `W-anp-P177` audit marked 6 modules as covered by one lowercase English prose list; 3) the Chinese side takes
+        #   **ASCII identifiers inside section-heading parentheses** as anchors (Chinese and English headings cannot be
+        #   compared directly, so anchors must be language-independent).
+        #   Also A2: navigation sections must carry both titles (**parsed line by line** — the `W-anp-P177` negative-lookahead
+        #   regex backtracked and truncated 「产品概览」 to 「产品概」, falsely reporting 8).</en>
+        # </lang>
+        @{ File = 'Test-PortalSiteTranslationFreshness.ps1';   Runner = 'ps1'; Kind = '官网译本新鲜度'; Args = @() }
+        # <lang>
         #   <zh-CN>`C-anp-P28`（`W-anp-P153`）新增：**审批流转边界看守**门禁（L0）。验收判据 V3 要求
         #   「审批流转边界在公开文档中有明确声明」。源码实测（2026-10-19）：请假 / 报销两个模块的提交动作链
         #   仅为「字段校验 → 落库（状态固定 `Pending`）→ 生成待办（指派 `Admins`）→ 写审计」，**没有任何审批动作**；

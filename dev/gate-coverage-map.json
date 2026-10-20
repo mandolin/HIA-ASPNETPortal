@@ -240,6 +240,14 @@
       "gate": "Test-PortalContentModuleDocs.ps1"
     },
     {
+      "id": "site-translation-freshness",
+      "name": "官网译本新鲜度（上架文档的小节结构在英文译本中有标题级对应）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明中文小节标题括号内的 ASCII 结构锚点在英文译本的**标题行**中大小写敏感地可对应，以及导航分区中英标题齐备；不证明英文译文语义正确或完整（由人工复核承载），不证明锚点所在小节的其余内容已翻译（只查标题级结构）；翻译后改写标题措辞致不含原 ASCII 标识符时会被误判为缺失（宁误报不漏报）。",
+      "gate": "Test-PortalSiteTranslationFreshness.ps1"
+    },
+    {
       "id": "approval-boundary-docs",
       "name": "审批流转边界声明（请假/报销仅落库 + 生成待办，审批不在本模块内）",
       "layer": "L0",
@@ -362,6 +370,7 @@
     "Test-PortalDefaultThemeVisualBaseline.mjs",
     "Test-PortalRuntimeScreenshotBaseline.ps1",
     "Test-PortalContentModuleDocs.ps1",
+    "Test-PortalSiteTranslationFreshness.ps1",
     "Test-PortalApprovalBoundaryDocs.ps1",
     "Test-PortalAuditRetentionDeclaration.ps1",
     "Test-PortalTargetEnvironmentEvidenceMap.ps1",
