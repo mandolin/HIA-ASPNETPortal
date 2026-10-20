@@ -50,21 +50,7 @@ Not in `docs/`; lives in source node/flow comments.
     page `code-documentation.md`, source fingerprint guarded by an L0 gate); the DotNetDoc half is still **intermediate
     JSON and not published** — re-entry condition: add it through the same snapshot-manifest mechanism once a
     rendering/publishing component exists.
-  - **Disposition of the two unpublished docs**:
-    `documentation-registry.md` (documentation-family register) and `documentation-review-checklist.md` (review
-    checklist) **stay unpublished** — they are **internal governance artifacts** (the register records each doc's family,
-    status and owner; the checklist is a process tool), public readers do not need them, and they contain internal
-    work-item numbers unsuitable for publication. Both stay in `docs/` with English translations; if the governance
-    process is ever made public, publish them through the `published.yml` mechanism.
 
-### 4. Developers and contributors
-
-- `dev-guide.md` — the general development guide
-- `module-development-guide.md` — module development guide
-- `frontend-asset-guide.md` — frontend asset guide
-- `theme-package-guide.md` — theme package guide 
-- `theme-semantic-variables.md` — the theme semantic variable matrix (7 themes × **14 variables**, purpose quick-reference,
-  usage rules)
 - `theme-module-contract.md` — module appearance contract (layer division of labour, appearance class families, fallback
   meaning and differences)
 - `documentation-artifacts-guide.md` — documentation artefacts guide
@@ -85,8 +71,6 @@ Not in `docs/`; lives in source node/flow comments.
 - `architecture.md` — overall architecture
 - `business-application-state-machine.md` — business application state machine
 - `collaboration-item-state-machine.md` — collaboration item state machine
-- (Major-decision ADRs / milestones live in the **separate private repository** and are not published with the public
-  documentation.)
 
 ### 7. Change, compatibility and release
 

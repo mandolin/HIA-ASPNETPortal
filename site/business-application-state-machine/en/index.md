@@ -7,7 +7,7 @@ title: Business application state machine
 ---
 # Business application state machine
 
-> Source:  state-machine explicitisation . Code source of truth:
+> Code source of truth:
 > `src/Portal.Components/PortalBusinessApplicationTransitions.cs`.
 > Criteria source: internal benchmark study (the four "initially complete" criteria: explicit transition table,
 > fail-closed before write, every transition writes an event, and a documented state flow).

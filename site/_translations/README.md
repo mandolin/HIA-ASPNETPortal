@@ -9,7 +9,7 @@ nav_order: 1
 # HIA-ASPNETPortal documentation
 
 This directory is the project's public maintained-documentation entry point, addressed to users, developers and future
-maintainers. Internal planning and collaboration material are not published with this site.
+maintainers.
 
 ## Documentation index
 

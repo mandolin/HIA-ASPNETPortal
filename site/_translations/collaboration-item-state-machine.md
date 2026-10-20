@@ -8,7 +8,7 @@ nav_order: 1
 
 # Collaboration item state machine
 
-> Source: `W-anp-P64` state-machine explicitisation (internal planning, not public). Code source of truth:
+> Code source of truth:
 > `src/Portal.Components/PortalCollaborationItemTransitions.cs`.
 
 ## 1. Status vocabulary

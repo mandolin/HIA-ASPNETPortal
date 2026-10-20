@@ -71,8 +71,7 @@ When operations evidence must be retained:
 dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Test
 ```
 
-Evidence packages are written to an internal evidence directory by default (not published with the public documentation).
-Public delivery documentation references only sanitised summaries, and internal evidence, real configuration or production
+Public delivery documentation references only sanitised summaries, and real configuration or production
 screenshots are never placed in the root repository.
 
 ## Log maintenance

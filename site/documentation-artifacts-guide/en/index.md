@@ -14,8 +14,7 @@ reproducible artefacts. The goal is that a maintainer can repeat existing verifi
 ## Public documentation and private material
 
 - The root `README.md` and the Markdown under this directory are the main repository's publicly maintained documentation.
-- Internal planning, ADRs, AI collaboration material and phase evidence live in the **separate private repository**; public
-  documentation must not link to files inside it.
+
 - Documentation may describe reproducible configuration using `{ExternalCfgPath}`, `$env:USERPROFILE`, template file names and
   logical connection-string names, but must not write real connection strings, passwords, tokens, cookies, certificates,
   production backups or machine-specific absolute paths.

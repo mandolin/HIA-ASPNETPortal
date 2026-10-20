@@ -13,7 +13,7 @@ title: 文档产物与工具链边界
 ## 公开文档与私有资料
 
 - 根 `README.md` 与本目录下的 Markdown 是主仓库的公开维护文档。
-- 内部计划、ADR、AI 协作资料与阶段证据保存在**独立私有仓库**中；公开文档不得链接到其中的文件。
+
 - 文档可以使用 `{ExternalCfgPath}`、`$env:USERPROFILE`、模板文件名和逻辑连接串名称说明可复现的配置方式，
   不得写入真实连接串、密码、Token、Cookie、证书、生产备份或项目本机绝对路径。
 
@@ -86,7 +86,7 @@ surface 和 solution/project discovery。生成的 DotNetDoc extraction、HIA do
 | 命名 | `p151-<area>-<target>-zh-CN-1440x1000.png` |
 | 覆盖 | 业务页（前台门户页签）+ 后台页（`/Admin/*.aspx`）；目标在脚本 `TARGETS` 中登记，default-deny |
 | 校验 | 落通用错误页 / 文件 < 1KB / 导航失败 = 该目标失败，不静默产出坏图 |
-| 产物 | 截图 → **内部证据目录**（私有，不随公开文档发布，受私有仓 `.gitignore` 保护；`operations-runbook.md`：公开交付只引用脱敏摘要，不把内部证据或截图放入根仓库）；清单 → 同目录 `screenshot-manifest.json`（**入库**，含 sha256 / 字节数 / 视口 / locale / 目标 URL / 采集时间）。具体路径见采集脚本与 `operations-runbook.md` |
+| 产物 | 截图 → **内部证据目录**（`operations-runbook.md`：公开交付只引用脱敏摘要）；清单 → 同目录 `screenshot-manifest.json`（**入库**，含 sha256 / 字节数 / 视口 / locale / 目标 URL / 采集时间）。具体路径见采集脚本与 `operations-runbook.md` |
 
 复现命令（仓库根目录）：
 

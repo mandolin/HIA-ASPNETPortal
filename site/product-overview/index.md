@@ -60,7 +60,7 @@ title: 产品概览与定位（HIA-ASPNETPortal）
 - **不提供生产环境验证证据**；
 - 不支持现代前端框架或前后端分离；
 - 生成文档目录（`src/Documentation/`、`src/Portal.Components.Data/Documentation/`、`src/DoxyGen/`）为**生成物输出**，不是维护文档入口（见 `documentation-artifacts-guide.md`）；
-- 内部计划、ADR、AI 协作资料统一留在**独立的私有仓库**中，不进公开 `docs/`。
+
 
 ## 五、兼容性与运行环境
 

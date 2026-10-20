@@ -62,7 +62,7 @@ dev/scripts/Test-PortalDefaultCredentialRisk.ps1 -Profile Test
 dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Test
 ```
 
-证据包默认写入内部证据目录（不随公开文档发布）。公开交付文档只引用脱敏摘要，不把内部证据、真实配置或生产截图放入根仓库。
+公开交付文档只引用脱敏摘要，不引用真实配置或生产截图。
 
 ## 日志维护
 

@@ -129,5 +129,4 @@ external configuration.
 - [ ] File, configuration, database and evidence rollback materials are prepared per
       `docs/deployment-rollback-guide.md`.
 - [ ] Application rollback, configuration rollback and database recovery steps are all executable.
-- [ ] Real IIS re-test results, known limitations and deferred items are written to internal records (not published with
-      the public documentation).
+- [ ] Real IIS re-test results, known limitations and deferred items are recorded.

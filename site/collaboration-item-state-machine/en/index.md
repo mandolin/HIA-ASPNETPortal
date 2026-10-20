@@ -7,7 +7,7 @@ title: Collaboration item state machine
 ---
 # Collaboration item state machine
 
-> Source:  state-machine explicitisation . Code source of truth:
+> Code source of truth:
 > `src/Portal.Components/PortalCollaborationItemTransitions.cs`.
 
 ## 1. Status vocabulary

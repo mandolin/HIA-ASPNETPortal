@@ -97,7 +97,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalDocumentationEvidencePackage.ps1
 ```
 
-readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JSDoc pilot 隔离、.NET XML 延期边界、生成物未入库和 HIA 通知读取。证据包默认写入内部证据目录（不随公开文档发布）；它不修改源码注释、不提交生成物、不读取敏感配置，也不连接数据库。
+readiness 会检查 Required、Recommended、Deferred 三档覆盖率口径、JSDoc pilot 隔离、.NET XML 延期边界、生成物未入库和 HIA 通知读取。证据包默认写入内部证据目录；它不修改源码注释、不提交生成物、不读取敏感配置，也不连接数据库。
 
 ## JavaScript 文档化 Pilot
 

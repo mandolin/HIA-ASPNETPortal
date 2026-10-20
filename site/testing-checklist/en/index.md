@@ -108,8 +108,7 @@ title: Testing checklist
 
 - [ ] `dev/scripts/Test-PortalPublicDocumentation.ps1` passes for the public entry points, relative file links and privacy
       boundaries.
-- [ ] To retain compliance evidence, run `dev/scripts/New-PortalComplianceEvidencePackage.ps1` and keep the output in an
-      internal evidence directory (not published with the public documentation).
+- [ ] To retain compliance evidence, run `dev/scripts/New-PortalComplianceEvidencePackage.ps1` and retain the output.
 - [ ] To retain operations evidence, run `dev/scripts/New-PortalOperationsEvidencePackage.ps1` and confirm `Fail=0`;
       `Pending` items should be recorded as target-environment evidence to gather.
 - [ ] `dev/scripts/Test-PortalPublishReadiness.ps1` passes for the project Content manifest, theme packages, module
@@ -120,7 +119,7 @@ title: Testing checklist
       the manifest output directory.
 - [ ] To shape version cadence or release-note material, run `dev/scripts/Get-PortalReleaseSummary.ps1` and confirm the
       release manifest, operations evidence and documentation evidence can all be summarised.
-- [ ] For external or cross-team circulation, prepare public release notes per `docs/release-notes-template.md` and keep
+- [ ] For external or cross-team circulation, prepare public release notes from `docs/release-notes-template.md` (sanitised summaries only).
       internal evidence paths in private records.
 - [ ] No real connection strings, passwords, tokens or certificates are committed.
 - [ ] No local database files, `node_modules/`, `bin/` or `obj/` are committed.

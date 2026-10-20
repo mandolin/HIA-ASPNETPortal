@@ -101,7 +101,7 @@ Documentation readiness and the evidence package can be run with:
 & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev\scripts\New-PortalDocumentationEvidencePackage.ps1
 ```
 
-Readiness checks the Required / Recommended / Deferred coverage scopes, JSDoc pilot isolation, the .NET XML deferral boundary, that generated output is not committed, and HIA notification reading. The evidence package is written to the internal evidence directory by default (not published with the public documentation); it does not modify source comments, does not commit generated output, does not read sensitive configuration, and does not connect to a database.
+Readiness checks the Required / Recommended / Deferred coverage scopes, JSDoc pilot isolation, the .NET XML deferral boundary, that generated output is not committed, and HIA notification reading. The evidence package is written to the internal evidence directory by default; it does not modify source comments, does not commit generated output, does not read sensitive configuration, and does not connect to a database.
 
 ## JavaScript documentation pilot
 

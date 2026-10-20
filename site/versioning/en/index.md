@@ -26,7 +26,7 @@ carrier of the criteria for "publicity / first-release milestone".
 | Version | Milestone meaning |
 | --- | --- |
 | `v0.1.0` | Closed-loop baseline for the mechanism (the four layers capability ↔ module ↔ Profile ↔ permission connected and verifiable locally) |
-| `v0.2.0` – `v0.6.0` | Evolution versions on the way to the first release (the roadmap lives in this project's internal planning docs and is not published with the public documentation) |
+| `v0.2.0` – `v0.6.0` | Evolution versions on the way to the first release |
 | **`v1.0.0`** | **First formal release** — capability coverage, quality gates, documentation and open-source readiness all complete |
 | `v2.0.0` (reserved) | The production-ready version, once real-environment validation evidence is obtained |
 
