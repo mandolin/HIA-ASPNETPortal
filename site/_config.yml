@@ -43,6 +43,28 @@ search_enabled: true
 heading_anchors: true
 
 # <lang>
+#   <zh-CN>`C-anp-P32` 收口后复查补充（用户指出"官网看不到代码文档的链接"）：**代码文档必须有导航入口**。
+#     `site/api/jsdoc/` 是 JSDoc 产物快照——**无 front matter 的静态文件**，因此不会进入 just-the-docs 的
+#     `parent` 层级导航；此前只能从说明页 `/code-documentation/` 点进去，等于"发布了但找不到"。
+#     主题为此提供 `nav_external_links`（`components/site_nav.html` 渲染的顶层外链列表），用它把代码文档
+#     中英两个入口直接放进侧边导航。说明页仍在「开发」分区内，两者互补：
+#     导航负责"看得到"，说明页负责"看得懂"（刷新方式、依赖注意事项、DotNetDoc 现状）。</zh-CN>
+#   <en>Post-closeout follow-up in `C-anp-P32` (the user pointed out "the site shows no link to the code documentation"):
+#     **the code documentation must have a navigation entry**. `site/api/jsdoc/` is a JSDoc artifact snapshot —
+#     **static files without front matter**, so they never enter just-the-docs' `parent`-based navigation; previously
+#     the only path in was via the explainer page `/code-documentation/`, i.e. "published but unfindable".
+#     The theme provides `nav_external_links` (the top-level external list rendered by `components/site_nav.html`);
+#     use it to put both the Chinese and English code-documentation entries directly into the side navigation.
+#     The explainer page stays inside the Develop section; the two are complementary: navigation makes it
+#     **visible**, the explainer makes it **understandable** (refresh procedure, dependency notes, DotNetDoc status).</en>
+# </lang>
+nav_external_links:
+  - title: 代码文档（JSDoc）· 中文
+    url: /api/jsdoc/index.zh-CN.html
+  - title: Code documentation (JSDoc) · English
+    url: /api/jsdoc/index.en.html
+
+# <lang>
 #   <zh-CN>生成物由 `dev/scripts/Build-PortalSite.ps1` 从 `docs/` 与翻译源产出；
 #     本目录为**站点源码版本化位置**，不是运行期输出。</zh-CN>
 #   <en>Output is produced by `dev/scripts/Build-PortalSite.ps1` from `docs/` plus the translation source;
