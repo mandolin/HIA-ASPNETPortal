@@ -672,6 +672,23 @@ $gateLayers = [ordered]@{
         #     stale, caught only by a human at commit time via `git status` — this gate turns that into a machine assertion.</en>
         # </lang>
         @{ File = 'Test-PortalSiteMirrorFreshness.ps1';  Runner = 'ps1'; Kind = '站点镜像新鲜度'; Args = @() }
+        # <lang>
+        #   <zh-CN>手写页面新鲜度门禁（L0，静态）：不走生成流程的页面（首页 / 营销三页 / 八个分区页）
+        #     必须与 `_data/navigation.yml` 一致且中英成对。核心判据是"**分区页 title 必须等于导航分区名**"——
+        #     已上架页面的 `parent` 是按这个字符串去匹配父页 title 的，两侧漂移时页面还在、链接不坏、
+        #     parent 也仍"有效"（构建 N1 只校验 parent 是否属于已知分区名），**但子页不会嵌套到分区下**，
+        #     导航结构静默失效。首页统计数字归 landing 门禁、站内链接与 parent 有效性归构建 N1/N2，
+        #     本门禁不重复。</zh-CN>
+        #   <en>Handwritten page freshness gate (L0, static): pages that skip generation (landing / three
+        #     marketing pages / eight section pages) must agree with `_data/navigation.yml` and be paired across
+        #     languages. The core criterion is "**a section page's title must equal the navigation section name**"
+        #     — published pages match their `parent` string against the parent page's title, so when the two sides
+        #     drift the page still exists, no link breaks and `parent` remains "valid" (build N1 only checks that
+        #     a parent is a known section name), **yet children no longer nest under the section** and navigation
+        #     fails silently. Landing statistics belong to the landing gate; in-site links and `parent` validity
+        #     belong to the build's N1/N2 — this gate does not duplicate them.</en>
+        # </lang>
+        @{ File = 'Test-PortalHandwrittenPageFreshness.ps1'; Runner = 'ps1'; Kind = '手写页面新鲜度'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

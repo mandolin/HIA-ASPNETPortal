@@ -311,6 +311,14 @@
       "gate": "Test-PortalPlanLedgerConsistency.ps1"
     },
     {
+      "id": "handwritten-page-freshness",
+      "name": "手写页面（首页/营销三页/分区页）与导航数据一致、中英成对、分区页 H1 正确",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明手写页（site/ 下不由构建生成的 index.md：首页、营销三页、八个分区页）与 _data/navigation.yml 一致（分区页 title 等于导航分区名、nav_order 等于其序号）、中英成对、分区页 H1 唯一且等于 title、permalink 命名空间正确（中文不以 /en/ 开头、英文以 /en/ 开头）。不重复既有门禁的职责：首页统计数字归 landing 门禁（A1/A2/A4/M0）；站内链接与 parent 有效性归构建 N1/N2；镜像是否等于构建产物归镜像新鲜度门禁。不证明营销三页文案是否准确或过时（人工复核，属公开面复核）；不做语义判断；不检查未上架的手写文件（README.md 之类）。手写页集合动态界定（site/ 下的 index.md 减去 published.yml 生成的那些），不硬编码清单。Not duplicating: landing stats (landing gate), in-site links and parent validity (build N1/N2), mirror equals build output (mirror-freshness gate). Does not judge marketing copy (human review).",
+      "gate": "Test-PortalHandwrittenPageFreshness.ps1"
+    },
+    {
       "id": "site-mirror-consistency",
       "name": "docs 与 site 镜像一致且新鲜（上架清单驱动：镜像须为构建产物形状，且须等于当前 docs 的构建产物）",
       "layer": "L0",
@@ -407,6 +415,7 @@
     "Test-PortalPlanLedgerConsistency.ps1",
     "Test-PortalSiteMirrorConsistency.ps1",
     "Test-PortalSiteMirrorFreshness.ps1",
+    "Test-PortalHandwrittenPageFreshness.ps1",
     "Build-Solution.ps1",
     "Invoke-PortalModuleRuntimeGate.ps1",
     "Invoke-PortalTests.ps1",
