@@ -65,9 +65,15 @@
     <zh-CN>仓库根目录；留空时取脚本所在目录的上两级目录（`dev\scripts` → 仓库根）。</zh-CN>
     <en>Repository root; when empty, two levels above the script directory (`dev\scripts` -> repository root).</en>
   </lang>
+.PARAMETER DryRun
+<lang>
+  <zh-CN>**dry-run：只报告将生成什么，不落盘**（`W-anp-P191`，解备忘 D4）。`site/` 一个字节都不改——包括**目录创建**也受同一开关控制（否则 dry-run 会留下空目录，那仍然是落盘）。报告区分三类：新增 / 内容变更 / 无变化。dry-run 在**生成循环之后、N1/N2 校验之前**显式收口退出：那些校验读的是**当前**站点内容，在 dry-run 下运行会把当前站点的状态误呈现成本次构建的结论（假绿灯）。**同源原则**：内容计算路径完全不变，只有最后一步"写不写"分叉——不引入第二套生成逻辑。</zh-CN>
+  <en>**dry-run: report what would be generated without writing anything** (`W-anp-P191`, resolves memo D4). Not one byte of `site/` changes — **directory creation** is governed by the same switch (otherwise dry-run would leave empty directories behind, which is still a write). The report distinguishes three states: new / content changed / unchanged. Dry-run **exits explicitly after the generation loop and before the N1/N2 checks**: those checks read the **current** site content, so running them under dry-run would present the current site's state as this build's conclusion (a false green light). **Same-source principle**: the content computation path is unchanged and only the final "write or not" step branches — no second generation logic is introduced.</en>
+</lang>
 #>
 param(
-    [string] $RepoRoot
+    [string] $RepoRoot,
+    [switch] $DryRun
 )
 
 $ErrorActionPreference = 'Stop'
@@ -88,6 +94,32 @@ if (-not (Test-Path -LiteralPath $siteDir)) { Write-Host 'ERROR: site/ 不存在
 $gaps = New-Object 'System.Collections.Generic.List[string]'
 $generated = 0
 $pending = 0
+
+# <lang>
+#   <zh-CN>dry-run 计数器与**唯一写入入口**。同源原则落在这里：页面内容照原路径计算（一个字节都不改），
+#     只有最后一步"写不写"分叉；目录创建也由同一开关控制（否则 dry-run 会留下空目录，那仍然是落盘）。</zh-CN>
+#   <en>Dry-run counters and the **single write entry point**. The same-source principle lands here: page content is computed
+#     along the original path (not one byte changed) and only the final "write or not" step branches; directory creation is
+#     governed by the same switch (otherwise dry-run would leave empty directories behind, which is still a write).</en>
+# </lang>
+$dryNew = 0
+$dryChanged = 0
+$drySame = 0
+$dryPlan = New-Object 'System.Collections.Generic.List[string]'
+
+function Write-GeneratedPage {
+    param([string] $Path, [string] $Content)
+    $existing = $null
+    if (Test-Path -LiteralPath $Path -PathType Leaf) { $existing = [System.IO.File]::ReadAllText($Path, $utf8) }
+    if ($DryRun) {
+        if ($null -eq $existing) { $script:dryNew++; $state = '新增' }
+        elseif ($existing -eq $Content) { $script:drySame++; $state = '无变化' }
+        else { $script:dryChanged++; $state = '内容变更' }
+        $script:dryPlan.Add(($state + ' ' + $Path))
+        return
+    }
+    [System.IO.File]::WriteAllText($Path, $Content, $utf8)
+}
 
 # --- 解析 _data/published.yml（结构化：doc / path / parent） ---
 $publishedPath = Join-Path $dataDir 'published.yml'
@@ -434,7 +466,7 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     $enBody = Convert-PublicText -Body $enBody
 
     $targetDir = Join-Path $siteDir $pathSeg
-    if (-not (Test-Path -LiteralPath $targetDir)) { $null = New-Item -ItemType Directory -Path $targetDir }
+    if (-not ($DryRun) -and -not (Test-Path -LiteralPath $targetDir)) { $null = New-Item -ItemType Directory -Path $targetDir }
     # <lang>
     #   <zh-CN>**parent 必须按页面语言注入对应语言的分区名**（`W-anp-P148`，由用户截图发现）。
     #     初版中英两页都注入 `$e.parent`（中文分区名），于是**英文内容页全挂到了中文分区下**，
@@ -477,17 +509,33 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     $enParent = $enBare
     $zhParent = $e.parent
     $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $zhParent + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
-    [System.IO.File]::WriteAllText((Join-Path $targetDir 'index.md'), ($zhFm + $zhBody), $utf8)
+    Write-GeneratedPage -Path (Join-Path $targetDir 'index.md') -Content ($zhFm + $zhBody)
 
     $enFm = "---`nlayout: default`nlang: en`nparent: " + $enParent + "`npermalink: /en/" + $pathSeg + "/`ntitle: " + $enTitle + "`n---`n"
 
     $enDir = Join-Path $targetDir 'en'
-    if (-not (Test-Path -LiteralPath $enDir)) { $null = New-Item -ItemType Directory -Path $enDir }
-    [System.IO.File]::WriteAllText((Join-Path $enDir 'index.md'), ($enFm + $enBody), $utf8)
+    if (-not ($DryRun) -and -not (Test-Path -LiteralPath $enDir)) { $null = New-Item -ItemType Directory -Path $enDir }
+    Write-GeneratedPage -Path (Join-Path $enDir 'index.md') -Content ($enFm + $enBody)
 
     $generated++
 }
 
+# <lang>
+#   <zh-CN>**dry-run 在此显式收口退出**。后面的 N1/N2 与双语成对校验读的是**当前**站点内容，
+#     在 dry-run 下运行会把"当前站点的状态"误呈现成"本次构建的结论"——那正是一种假绿灯
+#     （dry-run 绿了，实跑却可能坏）。故 dry-run 只报告将写入什么，然后退出。</zh-CN>
+#   <en>**Dry-run exits explicitly here.** The N1/N2 and bilingual-pairing checks that follow read the **current** site
+#     content, so running them under dry-run would present the current site's state as this build's conclusion — a false
+#     green light (dry-run green while a real run could fail). Dry-run therefore only reports what would be written, then
+#     exits.</en>
+# </lang>
+if ($DryRun) {
+    Write-Host ('[DRY-RUN] 将生成 ' + $generated + ' 个页面（中/英各一份）：新增 ' + $dryNew + '｜内容变更 ' + $dryChanged + '｜无变化 ' + $drySame + '。')
+    foreach ($p in $dryPlan) { Write-Host ('  ' + $p) }
+    Write-Host '[DRY-RUN] 未写入任何文件（含目录创建）；N1/N2 与双语成对校验未运行（它们读当前站点内容，会把当前状态误呈现成本次结论）。'
+    Write-Host 'RESULT: Pass'
+    exit 0
+}
 # <lang>
 #   <zh-CN>N2：站点页面中的站内链接必须**既形态合法、又目标存在** —— 这是 `W-anp-P132` 为
 #     "导航/首页链接全部 404 而门禁未发现"补的检查。注意只检查 `site/**/index.md`

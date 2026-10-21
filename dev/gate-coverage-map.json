@@ -463,7 +463,7 @@
     { "id": "Invoke-PortalGateInjectionProof.ps1", "basis": "门禁有效性（注入法）验证工具，按需手工执行，不进日常编排。" },
     { "id": "Invoke-PortalTargetEnvironmentEvidencePack.ps1", "basis": "L7 目标环境证据一键出证工具（W-anp-P155），按台账逐项采集证据；不是门禁（自身正确性由其产物与 Test-PortalTargetEnvironmentEvidenceMap.ps1 的台账核对承载）。" },
         { "id": "Test-PortalPublishedSiteChecks.ps1", "basis": "发布后线上复核（依赖外网，故不进 L0/L1/L2 编排）：由 CI 发布工作流后置步骤自动跑（continue-on-error，只报警、不阻断发布），也可本地手动复跑。用户 2026-10-21 裁定「两者都要」。本地门禁全绿只代表构建产物没问题，这一步盯的是发布后的真实产物。 Post-publish live re-check (needs the network, hence not wired into L0/L1/L2): runs automatically as a CI post-publish step (continue-on-error, warn only) and can be re-run manually. User ruling 2026-10-21: both. An all-green local suite means only that the build artifact is fine; this watches the real published output." },
-{ "id": "Build-PortalSite.ps1", "basis": "站点构建辅助脚本，非质量门禁。" },
+{ "id": "Build-PortalSite.ps1", "basis": "站点构建辅助脚本，非质量门禁。支持 -DryRun（W-anp-P191，解备忘 D4）：只报告将生成什么（新增/内容变更/无变化）、一个字节都不落盘（含目录创建），并在 N1/N2 校验之前显式收口退出；内容计算路径与实跑完全同源，不引入第二套生成逻辑。Site build helper script, not a quality gate. Supports -DryRun (W-anp-P191, resolves memo D4): reports what would be generated (new/content changed/unchanged), writes not a single byte (directory creation included), and exits explicitly before the N1/N2 checks; the content computation path is identical to a real run, with no second generation logic." },
     { "id": "Build-PortalDotNetDocPilot.ps1", "basis": ".NET 文档试点生成工具，非质量门禁。" },
     { "id": "Build-PortalJsdocPilot.ps1", "basis": "JSDoc 试点生成工具，非质量门禁。" }
   ]
