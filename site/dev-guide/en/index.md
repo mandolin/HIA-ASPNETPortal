@@ -414,3 +414,5 @@ To review the formal frontend inputs read-only without running Node/Gulp:
 - The repository-root `.editorconfig` sets `charset = utf-8`.
 - `src/Portal/.editorconfig` contains `root = true`, so `charset = utf-8` is set there separately.
 - The VSCode workspace sets `"files.encoding": "utf8"`, i.e. UTF-8 without signature.
+
+<!-- build-stamp: 284986A4391B -->

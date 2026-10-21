@@ -108,3 +108,5 @@ generated output, does not read sensitive configuration, and does not connect to
 
 These verifications are all local / VSCode gates. CI, online link monitoring, a documentation site, search and versioned
 releases will be designed separately once requirements, secrets, caching, branching and release policy are settled.
+
+<!-- build-stamp: 8FCD4215E494 -->

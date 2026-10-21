@@ -76,3 +76,5 @@ The two mechanisms are **independent of each other** and easy to conflate:
 - External connection strings (**not committed**): see
  [dev-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/dev-guide.md) and
  `src/Portal/Config/Templates/connectionStrings.config`.
+
+<!-- build-stamp: C517644EEB2F -->

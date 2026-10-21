@@ -158,3 +158,5 @@ title: 官网视觉基线
  `@import "./vendor/accessible-pygments/github-light"`（与 `light.scss` 一致）。
 - **升级主题时**：重新核对新版 `light.scss` 的变量名；若上游改名或增删调色板变量，
  需同步方案文件与 custom.scss。本机制走主题支持的 `color_scheme` 与 custom 挂钩，不触碰主题内部文件。
+
+<!-- build-stamp: 4DB572C66315 -->

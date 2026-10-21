@@ -78,3 +78,5 @@ Control ids, types and lengths are taken from the `EditContacts.aspx` markup —
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Deployment tab (TabId=2) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Compared with [Announcements]({{ site.baseurl }}/modules/announcements/) this module carries **no business rule beyond the required check**, making it the **most lightly validated module in this repository** — which is exactly why **manual review is the only safeguard**.
+
+<!-- build-stamp: 0D32B720DD42 -->

@@ -80,3 +80,5 @@ select/clear action is written to the existing settings or to the operations aud
  faulty, roll back the deployed version of that theme directory.
 
 Theme CSS must keep the IE9+ baseline: CSS Custom Properties, Grid and Flexbox must not be treated as required mechanisms.
+
+<!-- build-stamp: ED51B0F9A4E0 -->

@@ -99,3 +99,5 @@ title: 测试清单
 - [ ] 已按 `docs/operations-runbook.md` 完成运维入口、日志 dry-run、审计查询、备份提醒和计划任务建议复核。
 - [ ] 新模块包已通过 `module.json`、入口 `.ascx` 和本地资源校验；启用时模块/CSS 可用，禁用时二者均不加载。
 - [ ] 有实例引用的模块定义不能通过 Legacy 删除页直接级联删除；先完成禁用、迁移或显式实例清理。
+
+<!-- build-stamp: 361FB76E32DD -->

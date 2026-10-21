@@ -56,3 +56,5 @@ HIA-ASPNETPortal 是一个 ASP.NET Web Forms 门户应用，来源于原 ASP.NET
 - 生成文档与源码混放在 `src/Documentation` 等目录，后续可考虑明确生成位置和清理策略。
 - 当前缺少自动化测试项目，架构调整前需要先补最小回归验证。
 - 配置目录中同时存在模板和实际环境文件，后续需要建立敏感配置管理规则。
+
+<!-- build-stamp: 9B0E0F1C9928 -->

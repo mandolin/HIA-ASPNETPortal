@@ -359,3 +359,5 @@ documentation exists:
  see the "Common modules" subsections above (note that `Signin` has **0 instances** in the
  development database, so it is documented at source level only and **has no runtime evidence** — see that section for
  the re-entry condition).
+
+<!-- build-stamp: 4D1C158F1385 -->

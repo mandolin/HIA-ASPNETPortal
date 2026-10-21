@@ -116,3 +116,5 @@ dev/scripts/New-PortalDocumentationEvidencePackage.ps1
 不提交生成物、不读取敏感配置，也不连接数据库。
 
 这些验证均是本地/VSCode 门禁。CI、在线链接监测、文档站、搜索和版本发布将在需求、密钥、缓存、分支与发布策略明确后另行设计。
+
+<!-- build-stamp: E1DBAF1FE550 -->

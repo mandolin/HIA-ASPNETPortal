@@ -41,3 +41,5 @@ This directory holds a dedicated operating page for **every content module** of 
 - This directory is **operating documentation**, not source documentation: it does not change module behaviour and does not replace the [code documentation]({{ site.baseurl }}/code-documentation/) or the [documentation map]({{ site.baseurl }}/documentation-map/).
 - The pages **do not rely on runtime screenshots**: every statement is traceable to source markup and verified deployment readings; where screenshot evidence would be needed (for example Signin) the page states the **re-entry condition** explicitly.
 - Fields, required fields and validation on each page are guarded by a gate (`Test-PortalModuleDocPages.ps1`): the field set must cover the source control set, the required count must agree with the source, all eight sections must be present, and the **deployment boundary statements** required by the registry must be written out.
+
+<!-- build-stamp: 96EF6AD172F9 -->

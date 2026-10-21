@@ -76,3 +76,5 @@ Control ids, types and lengths are taken from the `EditLinks.aspx` markup — **
 - The view's **navigation policy** suppresses non-compliant addresses (shown as encoded text) — the most visible behavioural difference from the Links view.
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Instance count (3) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
+
+<!-- build-stamp: 312EBD1DFBF3 -->

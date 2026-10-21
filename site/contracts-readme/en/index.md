@@ -60,3 +60,5 @@ The full boundary decision is registered in
 - Asset and theme contracts: `Test-PortalModuleSkinCoverage.ps1` (L0).
 - For concrete commands see
  [testing-checklist.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/testing-checklist.md).
+
+<!-- build-stamp: BC1D38097435 -->

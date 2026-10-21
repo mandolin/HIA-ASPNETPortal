@@ -81,3 +81,5 @@ record runtime detail.
 2. Audit export capability.
 3. Tamper-resistance enhancement (hash chain / read-only replica).
 4. Centralised logging and alerting.
+
+<!-- build-stamp: 5F17511315F8 -->

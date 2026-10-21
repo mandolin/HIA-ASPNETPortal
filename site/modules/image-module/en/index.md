@@ -73,3 +73,5 @@ Control ids, types and lengths are taken from the `EditImage.aspx` markup — **
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Deployment tab (TabId=3) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Like [XmlModule]({{ site.baseurl }}/modules/xml-module/) this module stores its configuration in **module settings rather than a table of its own**; the difference is that here the settings are **plain text** (address and size), whereas the XML module's settings are **virtual paths of trusted deployment resources** and are checked for path compliance at save time.
+
+<!-- build-stamp: 22D5637A538B -->

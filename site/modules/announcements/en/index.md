@@ -76,3 +76,5 @@ Control ids, types and lengths are taken from the `EditAnnouncements.aspx` marku
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Deployment tabs (TabId=1 / 2 / 3) are a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Compared with [Events]({{ site.baseurl }}/modules/events/): similar fields and expiry semantics, but Events has an extra "where and when" field (`WhereWhenField`) and **all four fields are required**, whereas here only the title, description and expiry date are required, plus two optional links.
+
+<!-- build-stamp: FC68900E4369 -->

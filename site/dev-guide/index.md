@@ -427,3 +427,5 @@ npm run assets:stop-watch
 - 仓库根目录 `.editorconfig` 已设置 `charset = utf-8`。
 - `src/Portal/.editorconfig` 因包含 `root = true`，也已单独设置 `charset = utf-8`。
 - VSCode 工作区已设置 `"files.encoding": "utf8"`，对应 UTF-8 无签名。
+
+<!-- build-stamp: 7EFD8E0E54D6 -->

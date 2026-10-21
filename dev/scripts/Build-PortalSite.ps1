@@ -485,6 +485,34 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     $zhBody = Convert-PublicText -Body $zhBody
     $enBody = Convert-PublicText -Body $enBody
 
+    # <lang>
+    #   <zh-CN>**构建戳**：把**源文档指纹**（SHA-256 前 12 位）写进生成页末尾的 HTML 注释里。
+    #     为什么是"源"的指纹而不是"生成结果"的指纹：线上复核要判断的是"**线上这一页是不是由当前
+    #     `docs/` 构建出来的**"，所以它必须能在**不重新构建**的前提下被复算——读源文件算哈希即可，
+    #     而生成结果的指纹要跑一遍构建才能拿到（那是镜像新鲜度门禁的做法，职责不同）。
+    #     为什么用 HTML 注释：markdown 里的原始 HTML 会被 Jekyll 原样输出，于是戳**随页面发到线上**
+    #     且对读者不可见；放在 front matter 里则不进 HTML，线上读不到。
+    #     中英两页各自取自己那一侧的源（中文 `docs/<doc>`、英文 `site/_translations/<doc>`），
+    #     因此某一侧改了、另一侧没改，能被分别看出来。</zh-CN>
+    #   <en>**Build stamp**: the **source document fingerprint** (first 12 hex chars of SHA-256) is written into an HTML
+    #     comment at the end of each generated page. Why the *source* fingerprint rather than the *generated result*'s:
+    #     the live re-check asks "**is this live page built from the current `docs/`**", so it must be recomputable
+    #     **without re-running the build** — hashing the source file suffices, whereas the result's fingerprint would
+    #     require a build (that is the mirror-freshness gate's approach, a different responsibility). Why an HTML comment:
+    #     raw HTML inside markdown is passed through by Jekyll, so the stamp **ships with the page** while staying
+    #     invisible to readers; front matter, by contrast, does not reach the HTML. Each language page stamps its own
+    #     source (Chinese `docs/<doc>`, English `site/_translations/<doc>`), so a change on one side only is visible
+    #     per side.</en>
+    # </lang>
+    $stampAlg = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $zhStamp = ([BitConverter]::ToString($stampAlg.ComputeHash([System.IO.File]::ReadAllBytes($zhPath)))).Replace('-', '').Substring(0, 12)
+        $enStamp = ([BitConverter]::ToString($stampAlg.ComputeHash([System.IO.File]::ReadAllBytes($enSource)))).Replace('-', '').Substring(0, 12)
+    }
+    finally { $stampAlg.Dispose() }
+    $zhBody = $zhBody.TrimEnd() + "`n`n<!-- build-stamp: " + $zhStamp + " -->`n"
+    $enBody = $enBody.TrimEnd() + "`n`n<!-- build-stamp: " + $enStamp + " -->`n"
+
     $targetDir = Join-Path $outDir $pathSeg
     if (-not ($DryRun) -and -not (Test-Path -LiteralPath $targetDir)) { $null = New-Item -ItemType Directory -Path $targetDir }
     # <lang>

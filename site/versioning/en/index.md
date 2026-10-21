@@ -83,3 +83,5 @@ the portal-kernel capability baseline is not the same dimension", the convention
  meaning here;
 3. validation behaviour (whether loading is forcibly blocked) is defined by the module-loading logic; this document defines
  the semantics only.
+
+<!-- build-stamp: DA83ED2BB6A4 -->

@@ -89,3 +89,5 @@ account-employee binding, but never creates users or modifies passwords.
 2. Bring read-type auditing, audit detail levels and the audit retention policy into system settings and release-time
  configuration.
 3. In a later Workflow cycle, add transfer, delegation, co-signing, notification and more business objects.
+
+<!-- build-stamp: 18013E9B6B2E -->

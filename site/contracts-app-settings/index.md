@@ -61,3 +61,5 @@ title: 配置契约（`appSettings`）
 - 启用业务模块的操作步骤：[../user-guide.md]({{ site.baseurl }}/user-guide/)「业务模块：请假申请与费用报销」。
 - 部署配置：[../deployment-checklist.md]({{ site.baseurl }}/deployment-checklist/)。
 - 外置连接串（**不入库**）：见 [../dev-guide.md]({{ site.baseurl }}/dev-guide/) 与 `src/Portal/Config/Templates/connectionStrings.config`。
+
+<!-- build-stamp: 08931BEA1AE4 -->

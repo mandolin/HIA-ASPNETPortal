@@ -32,3 +32,5 @@ title: 第三方依赖审计
 
 1. [System.Data.SQLite.Core 1.0.119 NuGet 包页](https://www.nuget.org/packages/System.Data.SQLite.Core/1.0.119)
 2. [SQLite 版权与许可说明](https://www.sqlite.org/copyright.html)
+
+<!-- build-stamp: F242AF55A317 -->

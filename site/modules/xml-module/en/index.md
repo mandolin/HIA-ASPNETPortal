@@ -78,3 +78,5 @@ Control ids, types and lengths are taken from the `EditXml.aspx` markup — **no
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Instance count (1) and its `xmlsrc` / `xslsrc` values are a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [ImageModule]({{ site.baseurl }}/modules/image-module/): both store configuration in **module settings rather than a table of their own**; the difference is that here the settings are **virtual paths of trusted deployment resources** with **save-time path compliance checks and runtime degradation**, whereas the image module's settings are plain text addresses and sizes with **no validation at all**.
+
+<!-- build-stamp: 4F3FC85074F0 -->

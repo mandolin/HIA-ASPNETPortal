@@ -97,3 +97,5 @@ The two rejected options:
 - [`theme-package-guide.md`](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/theme-package-guide.md): directory, enablement, fallback and release boundaries for trusted theme packages.
 - [`frontend-asset-guide.md`](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/frontend-asset-guide.md): Web Forms presentation, themes, module CSS and frontend asset boundaries.
 - [`module-development-guide.md`](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/module-development-guide.md): development, registration, enable/disable and removal boundaries for trusted deployed module packages (including hidden traps when adding a module).
+
+<!-- build-stamp: 5D8F27C22F5D -->

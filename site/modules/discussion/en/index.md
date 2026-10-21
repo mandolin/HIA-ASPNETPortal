@@ -78,3 +78,5 @@ Control ids, types and lengths are taken from the `DiscussDetails.aspx` markup �
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Deployment tab (TabId=4) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [Announcements]({{ site.baseurl }}/modules/announcements/) and [Events]({{ site.baseurl }}/modules/events/): Discussion is the **only module in this batch with no required field** and the **only one with no expiry** — it organises content by hierarchy and paging, not by filtering on a validity date.
+
+<!-- build-stamp: AA343FDD7CFF -->

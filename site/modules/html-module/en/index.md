@@ -78,3 +78,5 @@ Control ids and types are taken from the `EditHtml.aspx` markup — **not estima
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Instance count (12) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [ImageModule]({{ site.baseurl }}/modules/image-module/) and [XmlModule]({{ site.baseurl }}/modules/xml-module/): this module **has a business table of its own** (`HtmlTexts`) and **additionally requires the narrow permission**; it is the **only module in this batch that renders un-sanitised HTML.
+
+<!-- build-stamp: DD612F0829E4 -->

@@ -75,3 +75,5 @@ npm run assets:stop-watch
 
 该脚本只读取 Git 已追踪的正式主题和模块 CSS。Flex/Grid、CSS 变量、现代单位、现代滤镜和 CSS 渐变依赖会作为阻断项；圆角、
 阴影、透明度等 IE8 视觉降级项默认只警告。真实 IE8/IE9 或国产旧内核表现仍需通过云测试平台、旧 VM 或目标环境人工补证。
+
+<!-- build-stamp: 82D74A2FD8A5 -->

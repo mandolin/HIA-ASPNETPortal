@@ -64,3 +64,5 @@ Admin 页面只使用全局主题，通用错误页固定使用最小 Default �
 4. 发生问题时，在 `Admin/ThemeSettings.aspx` 清除 Tab 覆盖或选择 `Default`；若包本身有问题，回滚该主题目录的部署版本。
 
 主题 CSS 必须保持 IE9+ 基线：不把 CSS Custom Properties、Grid 或 Flexbox 作为必要机制。
+
+<!-- build-stamp: 4083142AC535 -->

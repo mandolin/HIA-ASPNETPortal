@@ -72,3 +72,5 @@ source and never reads real connection strings or configuration outside the repo
 - There is currently no automated test project; a minimal regression check is needed before architectural changes.
 - The configuration directory holds both templates and real environment files; rules for managing sensitive configuration
  need to be established.
+
+<!-- build-stamp: 2FA332146DCD -->

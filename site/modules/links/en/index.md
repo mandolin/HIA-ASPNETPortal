@@ -79,3 +79,5 @@ Control ids, types and lengths are taken from the `EditLinks.aspx` markup — **
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - **Deployment tab (TabId=1004 test tab) is a delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Compared with [QuickLinks]({{ site.baseurl }}/modules/quick-links/): the two **share one data set and one edit page** (see that page); they differ in view presentation and permission context, not in fields or validation.
+
+<!-- build-stamp: 3852F5696F95 -->

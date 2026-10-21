@@ -25,6 +25,12 @@
       C4 内部编号：页面 HTML 内 `(W|C)-anp-P\d+` 出现 **0** 次（`C-anp-P33` 的教训：
          模板注释里的编号会随每页发出，而当时没有任何机制能发现）。
 
+    另有**一项传播信号（不是第五项判据）**：**构建戳**。构建把源文档指纹写进页面末尾的 HTML
+      注释，本门禁读同一个源文件复算同一个哈希——一致即说明"线上这一页就是当前 `docs/` 的产物"。
+      用它替代"全部可达"作为传播判据：旧页面在传播完成前**一直可达**，只看可达会把"旧产物还在"
+      当成"已传播"。戳不匹配 → **未确认**，不是缺陷；且**只在带等待窗口的复核中判定**
+      （`-WaitSeconds > 0`），随手复核时本地常有未发布的在改内容，判它就是制造噪声。
+
     **判据编号是**稳定接口**（契约，中英同）：每条失败消息以编号开头——
       `C1-HTTP`（拿到 HTTP 错误响应，页面真的不在）｜`C1-TRANSPORT`（传输层失败，无法确认）｜
       `C2-TITLE`（标题不一致或本地无 title）｜`C3-NAV`（导航不可见）｜`C4-INTERNAL-ID`（页面内出现内部编号）。
@@ -58,6 +64,14 @@
          this is precisely the criterion for the user's 2026-10-20 complaint of "**published but unfindable**";
       C4 internal numbering: `(W|C)-anp-P\d+` occurs **0** times in the page HTML (the `C-anp-P33` lesson: numbers in
          template comments ship with every page and no mechanism could see them then).
+
+    There is also **one propagation signal (not a fifth criterion)**: the **build stamp**. The build writes the source
+      document fingerprint into an HTML comment at the end of each page; this gate reads the same source file and
+      recomputes the same hash — agreement means "this live page is the output of the current `docs/`". It replaces
+      "all reachable" as the propagation judgment: the old page stays **reachable** until propagation finishes, so
+      reachability alone mistakes "the old artifact is still there" for "propagated". A mismatched stamp is
+      **unconfirmed**, not a defect, and it is judged **only in a re-check with a wait window** (`-WaitSeconds > 0`);
+      during a casual re-check the local tree routinely holds unpublished work in progress, and flagging that is noise.
 
     **Criterion IDs are the stable interface** (a contract, same in both languages): every failure message starts with an
       ID — `C1-HTTP` (an HTTP error response was obtained, so the page really is absent) | `C1-TRANSPORT` (a transport
@@ -113,6 +127,27 @@ $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 if ([string]::IsNullOrWhiteSpace($SiteRoot)) { $SiteRoot = Join-Path $repoRoot 'site' }
 if ([string]::IsNullOrWhiteSpace($PublishedYml)) { $PublishedYml = Join-Path $SiteRoot '_data/published.yml' }
 $BaseUrl = $BaseUrl.TrimEnd('/')
+$docsRoot = Join-Path $repoRoot 'docs'
+$translationsRoot = Join-Path $SiteRoot '_translations'
+
+# <lang>
+#   <zh-CN>**构建戳的复算**（本包新增）：构建把"源文档指纹"写进生成页末尾的 HTML 注释，本门禁
+#     读**同一个源文件**复算同一个哈希，两边一致即说明"**线上这一页就是当前 `docs/` 构建出来的**"。
+#     复算**不需要跑构建**——这正是它比"全部可达"更精确的地方：可达只能证明"页面在"，
+#     戳一致才能证明"页面在**且是这一次构建的产物**"。</zh-CN>
+#   <en>**Recomputing the build stamp** (added by this package): the build writes the "source document fingerprint" into
+#     an HTML comment at the end of each generated page; this gate reads **the same source file** and recomputes the same
+#     hash. Agreement means "**this live page is the output of the current `docs/`**". Recomputation **needs no build** —
+#     that is precisely why it beats "all reachable": reachability proves only "the page is there", while a matching
+#     stamp proves "the page is there **and is this build's output**".</en>
+# </lang>
+function Get-SourceStamp {
+    param([string] $Path)
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { return $null }
+    $alg = [System.Security.Cryptography.SHA256]::Create()
+    try { return ([BitConverter]::ToString($alg.ComputeHash([System.IO.File]::ReadAllBytes($Path)))).Replace('-', '').Substring(0, 12) }
+    finally { $alg.Dispose() }
+}
 
 # <lang>
 #   <zh-CN>从**本地构建产物**取期望值：`published.yml` 给出页面清单与 permalink，
@@ -138,12 +173,15 @@ foreach ($e in $entries) {
             if ($m.Success) { $title = $m.Groups[1].Value.Trim() }
         }
         $url = if ($lang -eq 'zh') { $BaseUrl + '/' + $e.path + '/' } else { $BaseUrl + '/en/' + $e.path + '/' }
+        $srcFile = if ($lang -eq 'zh') { Join-Path $docsRoot $e.doc } else { Join-Path $translationsRoot $e.doc }
         $items += [pscustomobject]@{
-            url    = $url
-            lang   = $lang
-            path   = $e.path
-            title  = $title
-            mirror = $mirrorRel
+            url     = $url
+            lang    = $lang
+            path    = $e.path
+            doc     = $e.doc
+            title   = $title
+            mirror  = $mirrorRel
+            srcSha  = (Get-SourceStamp $srcFile)
         }
     }
 }
@@ -154,15 +192,19 @@ if ($items.Count -eq 0) { Write-Host '[FAIL] 上架清单解析为 0 条页面�
 #   <zh-CN>阶段一：**等待传播**。GitHub Pages 在发布后有几十秒到数分钟的传播延迟，
 #     立刻抓取会把"还没生效"误判成"页面丢了"——那正是假失败。故在等待窗口内轮询，
 #     超时仍未出现的页面记为 **INCOMPLETE（无法确认）**，而不是 FAIL（缺陷）。
-#     精确的传播信号（构建戳）留给 `W-anp-P192` 的 D10 镜像新鲜度门禁，那里本来就要引入
-#     源文档指纹；本包先用"全部可达"作为可判定信号。</zh-CN>
+#     **本包把传播信号换成了构建戳**：判定从"全部可达"升级为"**可达 且 页面里的构建戳等于本地源
+#     指纹**"。只看可达是不够的——旧页面在传播完成前**一直可达**（它承载上一次构建的内容），
+#     于是"旧产物还在"会被误读成"已传播"。</zh-CN>
 #   <en>Stage one: **wait for propagation**. GitHub Pages takes tens of seconds to a few minutes after publishing, so
 #     fetching immediately would mistake "not live yet" for "page missing" — a false failure. Hence polling inside a
-#     wait window; pages that never appear are recorded as **INCOMPLETE (unconfirmed)**, not FAIL (defect). A precise
-#     propagation signal (a build stamp) is left to `W-anp-P192`'s D10 mirror-freshness gate, which introduces source
-#     fingerprints anyway; this package uses "all reachable" as the decidable signal.</en>
+#     wait window; pages that never appear are recorded as **INCOMPLETE (unconfirmed)**, not FAIL (defect).
+#     **This package replaces the propagation signal with the build stamp**: the judgment moves from "all reachable" to
+#     "**reachable AND the page's build stamp equals the local source fingerprint**". Reachability alone is not enough —
+#     the old page stays **reachable** until propagation finishes (it carries the previous build's content), so "the old
+#     artifact is still there" would be misread as "propagated".</en>
 # </lang>
 $reachable = @{}
+$stampSeen = 0
 if ($WaitSeconds -gt 0) {
     $deadline = (Get-Date).AddSeconds($WaitSeconds)
     do {
@@ -171,7 +213,20 @@ if ($WaitSeconds -gt 0) {
         foreach ($it in $missing) {
             try {
                 $r = Invoke-WebRequest -Uri $it.url -Headers @{ 'User-Agent' = 'Mozilla/5.0' } -TimeoutSec 15 -ErrorAction Stop
-                if ($r.StatusCode -eq 200) { $reachable[$it.url] = $true }
+                if ($r.StatusCode -eq 200) {
+                    $ls = ([regex]::Match([string]$r.Content, 'build-stamp:\s*([0-9a-fA-F]{6,64})')).Groups[1].Value
+                    if ($ls) { $stampSeen++ }
+                    # <lang>
+                    #   <zh-CN>**传播完成的判据是"可达 且 构建戳为当前构建"**，不再只是"可达"。
+                    #     旧页面在传播完成前**一直可达**（是上一次构建的内容），只看可达会把
+                    #     "旧产物还在"当成"已传播"——这正是粗判据的漏洞。</zh-CN>
+                    #   <en>**Propagation is complete when the page is reachable AND its stamp is this build's**, not merely
+                    #     reachable. The old page stays **reachable** until propagation finishes (it holds the previous
+                    #     build's content), so reachability alone mistakes "the old artifact is still there" for
+                    #     "propagated" — exactly the coarse signal's hole.</en>
+                    # </lang>
+                    if (-not $it.srcSha -or $ls -eq $it.srcSha) { $reachable[$it.url] = $true }
+                }
             }
             catch { }
         }
@@ -180,10 +235,10 @@ if ($WaitSeconds -gt 0) {
     } while ($true)
     $pending = @($items | Where-Object { -not $reachable.ContainsKey($_.url) })
     if ($pending.Count -gt 0) {
-        Write-Host ('[WARN] 等待 ' + $WaitSeconds + ' 秒后仍有 ' + $pending.Count + ' 个页面未观测到可达（传播未完成），将记为 INCOMPLETE。')
+        Write-Host ('[WARN] 等待 ' + $WaitSeconds + ' 秒后仍有 ' + $pending.Count + ' 个页面未观测到"可达且构建戳为当前构建"（传播未完成），将记为 INCOMPLETE。')
     }
     else {
-        Write-Host ('[INFO] 传播已观测到：' + $items.Count + ' 个页面在等待窗口内全部可达。')
+        Write-Host ('[INFO] 传播已观测到：' + $items.Count + ' 个页面在等待窗口内可达、且构建戳与本地源一致。')
     }
 }
 
@@ -197,8 +252,8 @@ if ($WaitSeconds -gt 0) {
 #     sequential (identical results, only slower).</en>
 # </lang>
 function Test-OnePage {
-    param([string] $Url, [string] $ExpectedTitle, [string] $Path, [int] $TimeoutSec)
-    $res = [pscustomobject]@{ url = $Url; reachable = $false; status = 0; title = ''; failures = @(); transport = $false }
+    param([string] $Url, [string] $ExpectedTitle, [string] $Path, [int] $TimeoutSec, [string] $ExpectedStamp)
+    $res = [pscustomobject]@{ url = $Url; reachable = $false; status = 0; title = ''; failures = @(); transport = $false; stamp = ''; stampOk = $false; srcSha = $ExpectedStamp }
     $html = $null
     # <lang>
     #   <zh-CN>抓取重试 **3 次 + 退避 1s/3s**，并在页面之间加 120ms pacing。
@@ -286,6 +341,20 @@ function Test-OnePage {
         $shown = (@($nums | ForEach-Object { $_.Value } | Select-Object -Unique -First 3)) -join '、'
         $res.failures += ('C4-INTERNAL-ID 页面内含内部编号 ' + $nums.Count + ' 处（' + $shown + '）')
     }
+    # <lang>
+    #   <zh-CN>**构建戳比对**（本包新增的传播信号）。戳**不是第五项判据**：它是"传播是否完成"的
+    #     证据，不匹配只说明"线上还不是这一次构建的产物"——那是**无法确认**，不是页面缺陷，
+    #     因此进 INCOMPLETE 而不进 failures。旧站点（本机制之前发布的）根本没有戳，同样按
+    #     "无法确认"处理，不会因为历史产物而误报缺陷。</zh-CN>
+    #   <en>**Build-stamp comparison** (the propagation signal added by this package). The stamp is **not a fifth
+    #     criterion**: it evidences whether propagation has completed, so a mismatch means only "the live page is not yet
+    #     this build's output" — that is **unconfirmed**, not a page defect, and therefore goes to INCOMPLETE rather than
+    #     into failures. Older sites (published before this mechanism) carry no stamp at all and are treated the same way,
+    #     so historical artifacts never produce false defects.</en>
+    # </lang>
+    $liveStamp = ([regex]::Match($html, 'build-stamp:\s*([0-9a-fA-F]{6,64})')).Groups[1].Value
+    $res.stamp = $liveStamp
+    if ($ExpectedStamp -and $liveStamp) { $res.stampOk = ($liveStamp -eq $ExpectedStamp) }
     return $res
 }
 
@@ -302,7 +371,7 @@ function Test-OnePage {
 # </lang>
 $results = @()
 foreach ($it in $items) {
-    $results += (Test-OnePage -Url $it.url -ExpectedTitle $it.title -Path $it.path -TimeoutSec $TimeoutSec)
+    $results += (Test-OnePage -Url $it.url -ExpectedTitle $it.title -Path $it.path -TimeoutSec $TimeoutSec -ExpectedStamp $it.srcSha)
 }
 
 # <lang>
@@ -330,6 +399,25 @@ foreach ($r in $results) {
         continue
     }
     if ($r.failures.Count -gt 0) { $defects += $r }
+    # <lang>
+    #   <zh-CN>**构建戳只在"刚发布后复核"的语境下判定**（`WaitSeconds > 0`）。
+    #     不带等待窗口的随手复核（`-WaitSeconds 0`，默认值）**不判戳**：那时本地 `docs/` 常有
+    #     尚未发布的正常在改内容，戳不一致只是"你有没发布的改动"，不是站点问题；
+    #     把这种常态判成"未确认"会产生持续噪声，而噪声会让人习惯性忽略 INCOMPLETE。</zh-CN>
+    #   <en>**The build stamp is judged only in the "just published" context** (`WaitSeconds > 0`). A casual re-check
+    #     without a wait window (`-WaitSeconds 0`, the default) **does not judge the stamp**: local `docs/` then routinely
+    #     holds unpublished work in progress, so a mismatch only means "you have unpublished edits", not a site problem.
+    #     Flagging that routine state as "unconfirmed" would create constant noise, and noise trains people to ignore
+    #     INCOMPLETE.</en>
+    # </lang>
+    elseif ($WaitSeconds -gt 0 -and $r.srcSha -and -not $r.stampOk) {
+        $shown = if ($r.stamp) { $r.stamp } else { '无戳' }
+        $incomplete += [pscustomobject]@{ url = $r.url; reason = ('构建戳未更新：线上 ' + $shown + ' ≠ 本地源 ' + $r.srcSha + '（线上仍是上一次构建的产物）') }
+    }
+}
+
+if ($WaitSeconds -gt 0 -and $stampSeen -eq 0) {
+    Write-Host '[INFO] 线上站点目前**没有任何页面带构建戳**——说明它早于本机制发布（或本次构建尚未发布）。这类页面一律记为"未确认"，不当作缺陷。'
 }
 
 foreach ($d in $defects) {
@@ -349,5 +437,6 @@ if ($incomplete.Count -gt 0) {
     Write-Host ('[INCOMPLETE] 有 ' + $incomplete.Count + ' 个页面未能在等待窗口内确认——不当作通过，也不当作缺陷；请加大 -WaitSeconds 后重试。')
     exit 2
 }
-Write-Host '[PASS] 发布后线上复核：全部页面可达、标题与本地构建产物一致、导航可见、页面内无内部编号。'
+$stampClause = if ($WaitSeconds -gt 0) { '、且构建戳与本地源一致（传播已确认）' } else { '' }
+Write-Host ('[PASS] 发布后线上复核：全部页面可达、标题与本地构建产物一致、导航可见、页面内无内部编号' + $stampClause + '。')
 exit 0

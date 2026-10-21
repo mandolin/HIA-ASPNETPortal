@@ -130,3 +130,5 @@ external configuration.
  `docs/deployment-rollback-guide.md`.
 - [ ] Application rollback, configuration rollback and database recovery steps are all executable.
 - [ ] Real IIS re-test results, known limitations and deferred items are recorded.
+
+<!-- build-stamp: 8979B75A363D -->

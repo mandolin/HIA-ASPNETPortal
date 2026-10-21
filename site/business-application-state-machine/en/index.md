@@ -119,3 +119,5 @@ vocabulary nor action constants (`PortalCollaborationItemActions` and `PortalWor
 - **The legacy business-application sample**: this state machine **is** the explicitisation of `BusinessApplicationDb` (the old
  sample); there is no "second business-application state machine".
 - This round **adds or removes no statuses** and changes no business semantics and no UI.
+
+<!-- build-stamp: 5F5D112D262B -->

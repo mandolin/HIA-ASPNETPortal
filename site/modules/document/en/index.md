@@ -79,3 +79,5 @@ Control ids, types and lengths are taken from the `EditDocs.aspx` markup — **n
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Deployment tabs (TabId=2 / 4) are a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [Announcements]({{ site.baseurl }}/modules/announcements/): this is the **only module in this batch with file upload and a path security policy**, which is why its common questions cluster around upload and path issues.
+
+<!-- build-stamp: C6D54D06136E -->

@@ -88,3 +88,5 @@ title: 业务申请状态机（Business Application State Machine）
 - **后台审核动作的合法来源调整**（如 `Close` 是否应允许从 `Approved`）：属独立决策，本轮保留现状。
 - **旧业务申请样板**：本状态机即 `BusinessApplicationDb`（旧样板）的显式化结果，不存在"第二套业务申请状态机"。
 - 本轮**不新增/删除状态**，不改变业务语义与 UI。
+
+<!-- build-stamp: 2C73109FC49E -->

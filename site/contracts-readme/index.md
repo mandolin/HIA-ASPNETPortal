@@ -46,3 +46,5 @@ title: 技术契约（HIA-ASPNETPortal）
 - 模块契约的机器校验：`dev/scripts/Test-PortalNewModuleReadiness.ps1`、`Test-PortalBusinessModuleSmoke.ps1`（L0）。
 - 资源与主题契约：`Test-PortalModuleSkinCoverage.ps1`（L0）。
 - 具体命令见 [../testing-checklist.md]({{ site.baseurl }}/testing-checklist/)。
+
+<!-- build-stamp: 36720C41CA1A -->

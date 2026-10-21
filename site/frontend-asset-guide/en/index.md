@@ -86,3 +86,5 @@ That script reads only Git-tracked formal theme and module CSS. Flex/Grid, CSS v
 gradient dependencies are treated as blockers; IE8 visual degradations such as rounded corners, shadows and opacity default to
 warnings only. Real IE8/IE9 or older domestic-engine behaviour still needs evidence from a cloud testing platform, an old VM
 or manual verification in the target environment.
+
+<!-- build-stamp: 8FDD44336C9D -->

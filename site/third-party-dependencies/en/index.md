@@ -32,3 +32,5 @@ an old package from this list does **not** mean its licence has been audited.
 
 1. [System.Data.SQLite.Core 1.0.119 NuGet package page](https://www.nuget.org/packages/System.Data.SQLite.Core/1.0.119)
 2. [SQLite copyright and licence](https://www.sqlite.org/copyright.html)
+
+<!-- build-stamp: BA338DFDE1AE -->

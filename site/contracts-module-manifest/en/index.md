@@ -98,3 +98,5 @@ fields appearing in a manifest causes rejection — **a manifest declaration can
  R3 theme scope rules / R4 markup and CSS class consistency).
 - Business module smoke: `dev/scripts/Test-PortalBusinessModuleSmoke.ps1`.
 - Development flow and traps: [module-development-guide.md](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/module-development-guide.md).
+
+<!-- build-stamp: 80F7F737249E -->

@@ -80,3 +80,5 @@ title: 协同事项状态机（Collaboration Item State Machine）
 
 - 旧业务申请 `BusinessApplicationDb`（旧样板）有独立状态机，不在本状态机范围内。
 - 本轮不新增/删除状态或迁移，不改变业务语义与 UI。
+
+<!-- build-stamp: D76A41C368A9 -->

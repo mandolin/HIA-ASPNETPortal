@@ -48,3 +48,5 @@ JSDoc 试点工作区（`dev/documentation/jsdoc`）通过工作区级 `.npmrc` 
 - 模块与主题契约：`contracts/module-manifest.md`、`contracts/app-settings.md`；
 - 源码注释规范（中英双语 `<lang>` 块）：见「设计与开发」相关页；
 - 文档族总览与缺口：`documentation-map.md`。
+
+<!-- build-stamp: 36C4CD9A9FD6 -->

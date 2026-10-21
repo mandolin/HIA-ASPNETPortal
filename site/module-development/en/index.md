@@ -310,3 +310,5 @@ through them before adding any module:
 - [ ] Wire into the orchestration: add this module's smoke and readiness checks to
  `dev/scripts/Invoke-PortalGateSuite.ps1` (L1 smoke / L0 readiness)
 - [ ] The whole gate suite is green: `Invoke-PortalGateSuite.ps1`
+
+<!-- build-stamp: 88870BBD57E2 -->

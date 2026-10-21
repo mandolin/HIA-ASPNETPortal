@@ -64,3 +64,5 @@ the browser falls back to the generic family, so site startup is unaffected.
 - The themes continue to use the open-source-first stacks above and keep the `sans-serif` / `monospace` generic fallbacks.
 - `Default`, `EnterpriseLight/Dark`, `OaLight/Dark`, `StateClassicLight/Dark` and `ThemeProbe` do not actively reference
  Verdana, Arial, Helvetica, Times New Roman, Courier New, Consolas, Segoe UI, Microsoft YaHei or 微软雅黑.
+
+<!-- build-stamp: 1B691CDF3E39 -->

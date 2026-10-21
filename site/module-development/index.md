@@ -222,3 +222,5 @@ CSS 应使用门户输出的稳定 scope（`portal-module`、`portal-module-{id}
 - [ ] `Test-PortalBusinessModuleSmoke.ps1 -ModuleName HIA.YourModule` 通过
 - [ ] 新增接入编排：把该模块的冒烟检查与就绪检查加入 `dev/scripts/Invoke-PortalGateSuite.ps1`（L1 冒烟 / L0 就绪）
 - [ ] 门禁套件全绿：`Invoke-PortalGateSuite.ps1`
+
+<!-- build-stamp: C7A7500A9EE0 -->

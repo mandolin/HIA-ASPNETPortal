@@ -120,3 +120,5 @@ theme lacks a variable, that is a missing definition and must be filled in.
 - `frontend-asset-guide.md`: Web Forms presentation, themes, module CSS and frontend asset boundaries.
 - For the module appearance contract (the class set for container / heading / partition / table / notice / muted / danger,
  plus per-skin palettes), see `theme-module-contract.md`.
+
+<!-- build-stamp: 68AD751EF6D4 -->

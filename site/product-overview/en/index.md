@@ -102,3 +102,5 @@ matters in `docs/font-policy-and-audit.md`.
 - To **work on themes**: `docs/theme-package-guide.md` → `docs/theme-semantic-variables.md`
 - To **deploy it**: `docs/deployment-checklist.md` → `docs/operations-runbook.md`
 - To **find everything**: `docs/documentation-map.md`
+
+<!-- build-stamp: 85658A9D1669 -->

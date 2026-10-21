@@ -77,3 +77,5 @@ title: 模块外观契约（Theme → Module Contract）
 - [`theme-package-guide.md`]({{ site.baseurl }}/theme-package-guide/)：受信任主题包的目录、启用、回退和发布边界。
 - [`frontend-asset-guide.md`]({{ site.baseurl }}/frontend-asset-guide/)：Web Forms 呈现、主题、模块 CSS 与前端资产边界。
 - [`module-development-guide.md`]({{ site.baseurl }}/module-development/)：受信任部署模块包的开发、注册、启停和移除边界（含新增模块的隐藏陷阱）。
+
+<!-- build-stamp: 148F695CC475 -->

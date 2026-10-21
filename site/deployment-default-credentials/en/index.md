@@ -45,3 +45,5 @@ Before a test or production release, use the stricter scope and keep JSON eviden
 ```powershell
 & "C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -NoProfile -File dev/scripts/Test-PortalDefaultCredentialRisk.ps1 -Profile Prod -OutputJson temp/compliance/default-credential-risk.json
 ```
+
+<!-- build-stamp: 3B53766D1F95 -->

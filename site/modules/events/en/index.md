@@ -75,3 +75,5 @@ Control ids, types and lengths are taken from the `EditEvents.aspx` markup — *
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Deployment tab (TabId=1) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [Announcements]({{ site.baseurl }}/modules/announcements/): both filter by expiry and share the date comparison check, but Events has **one extra where-and-when field** and **all four fields are required**, whereas Announcements requires three and carries two optional links.
+
+<!-- build-stamp: 6EF99956700C -->

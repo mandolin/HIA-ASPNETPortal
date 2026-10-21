@@ -95,3 +95,5 @@ This module has **no edit page**, so there is no "edit-page control" field table
 - Covers **view controls, submission protection, validation flow, audit and permissions**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - **Instance count (0) is a delivery-time snapshot**; re-check this section after adding or migrating tabs, and collect runtime evidence at that point.
 - Against the other ten modules, this one is the **only** module that **writes operational audit**, the **only** one with **no edit page** and the **only** one with **0 instances** — three facts that the other module pages refer back to and that are essential to understanding the audit surface of this repository.
+
+<!-- build-stamp: 834A2CB3C36E -->

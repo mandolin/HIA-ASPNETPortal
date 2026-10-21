@@ -86,3 +86,5 @@ Not in `docs/`; lives in source node/flow comments.
  colours / navigation skeleton)
  correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)
+
+<!-- build-stamp: F8E146017225 -->

@@ -82,6 +82,8 @@ It verifies four criteria per page: reachability (HTTP 200), title agreement wit
 
 Exit codes: `0` all pages pass; `1` a defect was found (the page is already published; fix and republish); `2` unconfirmed (the propagation wait timed out — **not treated as a pass**; retry with a larger `-WaitSeconds`).
 
+Whether propagation has finished is decided by the **build stamp**, not by "the page opens": the build writes the source document fingerprint into an HTML comment at the end of each page, and the re-check reads the same source file and recomputes the same hash — agreement is what makes the live page "this build's output". "It opens" is not enough: the old page stays **openable** until propagation finishes (it carries the previous build's content), so "the old artifact is still there" would be misread as "propagated". A mismatched stamp is recorded as unconfirmed rather than a defect, and it is judged only in a re-check with a wait window: during a casual re-check the local tree routinely holds unpublished work in progress, and flagging that is noise.
+
 > Why this step exists: an all-green local gate suite means only that the build artifact is fine, not that the published pages are. Template comments, mirror consistency and propagation delay can all make the live site differ from the local build — this step watches the real published output.
 
 ## Log maintenance
@@ -169,3 +171,5 @@ substitute:
 `New-PortalOperationsEvidencePackage.ps1` orchestrates read-only script output into an evidence package. In an evidence
 package, `Pending` means target-environment or manual material is still needed — it does **not** mean failure; `Fail` means
 the current repository or public documentation has a problem that must be handled first.
+
+<!-- build-stamp: 506AE60DCD8A -->
