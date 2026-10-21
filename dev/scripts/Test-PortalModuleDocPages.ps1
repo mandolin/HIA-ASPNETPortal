@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
 <lang>
-  <zh-CN>模块独立文档页门禁：已登记为「已交付」的模块必须有独立页面，且八节齐全、字段与必填项同源码一致、部署边界已写明。</zh-CN>
+  <zh-CN>模块独立文档页门禁：已登记为「已交付」的模块必须有独立页面，且 **H1 指明本模块**、八节齐全、字段与必填项同源码一致、部署边界已写明。</zh-CN>
   <en>Module document pages gate: a module registered as delivered must have a dedicated page whose eight sections are
   complete, whose fields and required-field count agree with the source, and which states the required deployment
   boundaries.</en>
@@ -23,6 +23,7 @@
       M2 字段集 ⊇ 源码控件集：编辑页每个输入控件 id 必须在页面中出现（**词边界**匹配，与 A3 同口径——
          `LinkTitleField` 这类"含原 id 的改名"不算命中）。
       M3 八节齐全：用途与前置 / 操作步骤 / 字段表 / 必填与校验 / 存储与审计 / 权限 / 常见问题 / 边界与不做
+      M3a **H1 存在且指向本模块**（`W-anp-P190` 新增）：页面必须有**唯一**一级标题，且标题须含登记表的模块名——补上"页面看着正常但语义缺失"这一类（构建会拿 parent 兜底当标题）。
          ——缺一即失败（这是"详细使用说明"的可判定定义）。
       M4 必填数量一致：编辑页 `RequiredFieldValidator` 数 == 页面中 `**必填**` 出现次数。
       M5 部署边界必须写明：按登记表的 boundary 规则逐条检查（`Links` 仅测试页签、`QuickLinks` 与 Links
@@ -69,7 +70,7 @@
 .Proof boundary（证明边界）
 <lang>
   <zh-CN>
-    只证明"已登记为已交付的模块页面**存在**、**八节齐全**、编辑页输入控件 id 以**词边界**出现在页面中、
+    只证明"已登记为已交付的模块页面**存在**、**H1 唯一且指明本模块**、**八节齐全**、编辑页输入控件 id 以**词边界**出现在页面中、
     **必填项数量与源码一致**、登记表中要求的**部署边界语句已写明**"，以及"全部交付后模式必须切 hard"。
     **不证明**页面叙述的语义正确与操作步骤的可执行性（由人工复核承载）；**不检查**页面多写的字段或文字；
     **不核对**部署页签实测值（TabId/ModuleId 为交付时快照）；**不采集**运行期证据（如 `Signin` 在开发库
@@ -77,7 +78,7 @@
     "关键事实不能被删掉"，不是"话写得对不对"。
   </zh-CN>
   <en>
-    Proves only that a module page registered as delivered **exists**, has **all eight sections**, contains every
+    Proves only that a module page registered as delivered **exists**, has **exactly one H1 naming the module**, has **all eight sections**, contains every
     edit-page input control id under **word-boundary** matching, has a **required-field count equal to the source**,
     and **states the deployment boundaries** the registry requires — plus that the mode must be `hard` once everything
     is delivered. It does **not** prove the semantics of the prose or that the steps are executable (human review
@@ -164,6 +165,32 @@ foreach ($mod in $registry.modules) {
     $checkedModules++
     $page = [System.IO.File]::ReadAllText($pagePath, $utf8)
 
+    # ---------- M3a H1 存在且指向本模块 ----------
+    # <lang>
+    #   <zh-CN>上一周期如实登记的覆盖缺口（W-anp-P187）：document.md 因「占位替换」丢了 H1，构建拿
+    #     parent（参考）兜底当标题，**页面看起来完全正常**，直到 landing 的标题唯一性检查才间接暴露。
+    #     M3 当时只查八节，没守住这个位置。本条把它变成直接断言，且放在「无编辑页」分支**之前**——
+    #     登录页同样必须有 H1（它正是靠别的门禁间接抓出的那一类）。</zh-CN>
+    #   <en>The coverage gap honestly registered last cycle (W-anp-P187): document.md lost its H1 to a "placeholder
+    #     replacement", the build fell back to parent (Reference) as the title, so **the page looked perfectly normal**,
+    #     and only the landing title-uniqueness check exposed it indirectly. M3 then checked the eight sections only and did
+    #     not guard this spot. This turns it into a direct assertion, placed **before** the "no edit page" branch — the Signin
+    #     page must have an H1 too (it belongs to exactly the class that was caught only indirectly).</en>
+    # </lang>
+    $h1Matches = @([regex]::Matches($page, '(?m)^#\s+(.+?)\s*$'))
+    if ($h1Matches.Count -eq 0) {
+        $failures += "M3a 页面缺 H1：$pageName（$($mod.slug).md）没有任何一级标题。构建会拿 parent（参考）兜底当标题，页面看起来正常、唯独缺了语义——上一周期 document.md 正是这样丢的 H1。"
+    }
+    elseif ($h1Matches.Count -gt 1) {
+        $failures += "M3a 页面有多个 H1（共 $($h1Matches.Count) 个）：$pageName（$($mod.slug).md）只应有一个一级标题。"
+    }
+    else {
+        $h1Text = $h1Matches[0].Groups[1].Value
+        if ($h1Text -notmatch [regex]::Escape($mod.name)) {
+            $failures += "M3a H1 未指明模块：$pageName（$($mod.slug).md）的一级标题「$h1Text」不含登记表模块名「$($mod.name)」——读者无法从标题看出这页讲哪个模块。"
+        }
+    }
+
     # ---------- M3 八节齐全 ----------
     foreach ($section in $requiredSections) {
         if ($page -notmatch [regex]::Escape($section)) {
@@ -233,5 +260,5 @@ if ($failures.Count -gt 0) {
     exit 1
 }
 
-Write-Host '[PASS] 模块文档页：八节齐全、字段与必填项同源码一致、部署边界已写明。'
+Write-Host '[PASS] 模块文档页：H1 指明本模块、八节齐全、字段与必填项同源码一致、部署边界已写明。'
 exit 0
