@@ -25,6 +25,12 @@
       C4 内部编号：页面 HTML 内 `(W|C)-anp-P\d+` 出现 **0** 次（`C-anp-P33` 的教训：
          模板注释里的编号会随每页发出，而当时没有任何机制能发现）。
 
+    **判据编号是**稳定接口**（契约，中英同）：每条失败消息以编号开头——
+      `C1-HTTP`（拿到 HTTP 错误响应，页面真的不在）｜`C1-TRANSPORT`（传输层失败，无法确认）｜
+      `C2-TITLE`（标题不一致或本地无 title）｜`C3-NAV`（导航不可见）｜`C4-INTERNAL-ID`（页面内出现内部编号）。
+      注入证明与外部断言一律**匹配编号**，不要匹配中文/英文自然语言片段——否则改一句措辞就会让注入脚本
+      静默失效（这是上一周期真实发生过的一次返工：改了消息文本，注入断言仍在匹配旧文本，误报失败）。
+
     三种退出码（刻意区分，**不把"没查到"当成"干净"**）：
       0 PASS      —— 全部页面四项判据均通过；
       1 FAIL      —— 发现缺陷（输出 URL / 判据 / 片段）；
@@ -52,6 +58,14 @@
          this is precisely the criterion for the user's 2026-10-20 complaint of "**published but unfindable**";
       C4 internal numbering: `(W|C)-anp-P\d+` occurs **0** times in the page HTML (the `C-anp-P33` lesson: numbers in
          template comments ship with every page and no mechanism could see them then).
+
+    **Criterion IDs are the stable interface** (a contract, same in both languages): every failure message starts with an
+      ID — `C1-HTTP` (an HTTP error response was obtained, so the page really is absent) | `C1-TRANSPORT` (a transport
+      failure, so nothing could be confirmed) | `C2-TITLE` (title mismatch, or no local title) | `C3-NAV` (navigation
+      not visible) | `C4-INTERNAL-ID` (internal numbering present in the page). Injection proofs and any external
+      assertion must **match the ID**, never a Chinese/English prose fragment — otherwise rewording a message silently
+      invalidates the injection script (a real rework in the previous cycle: the message text changed while the
+      injection assertion still matched the old prose, reporting a false failure).
 
     Three exit codes (deliberately distinct — **"unconfirmed" is never treated as "clean"**):
       0 PASS       — every page passes all four criteria;
@@ -225,8 +239,8 @@ function Test-OnePage {
             try { if ($null -ne $_.Exception.Response) { $hasResponse = $true } } catch { }
             if (-not $hasResponse) { $res.transport = $true }
             if ($try -eq 3) {
-                if ($hasResponse) { $res.failures += ('C1 页面不可达（HTTP 错误）：' + $_.Exception.Message.Substring(0, [Math]::Min(70, $_.Exception.Message.Length))) }
-                else { $res.failures += ('C1 传输层不可达（网络/SSL/超时，非页面缺失）：' + $_.Exception.Message.Substring(0, [Math]::Min(70, $_.Exception.Message.Length))) }
+                if ($hasResponse) { $res.failures += ('C1-HTTP 页面不可达（HTTP 错误）：' + $_.Exception.Message.Substring(0, [Math]::Min(70, $_.Exception.Message.Length))) }
+                else { $res.failures += ('C1-TRANSPORT 传输层不可达（网络/SSL/超时，非页面缺失）：' + $_.Exception.Message.Substring(0, [Math]::Min(70, $_.Exception.Message.Length))) }
             }
             Start-Sleep -Milliseconds $(if ($try -eq 1) { 1000 } else { 3000 })
         }
@@ -255,22 +269,22 @@ function Test-OnePage {
         $normLive = (($liveTitle -replace '`', '') -replace '\s+', ' ').Trim()
         $normExp = (($ExpectedTitle -replace '`', '') -replace '\s+', ' ').Trim()
         if (-not $normLive.StartsWith($normExp)) {
-            $res.failures += ('C2 标题不一致：线上「' + $liveTitle + '」与本地构建产物「' + $ExpectedTitle + '」不符')
+            $res.failures += ('C2-TITLE 标题不一致：线上「' + $liveTitle + '」与本地构建产物「' + $ExpectedTitle + '」不符')
         }
     }
     else {
-        $res.failures += 'C2 本地镜像页无 title（构建产物与上架清单不一致）'
+        $res.failures += 'C2-TITLE 本地镜像页无 title（构建产物与上架清单不一致）'
     }
     # C3 导航可见性：页面 HTML 内含指向本页 permalink 的链接
     $needle = '/' + $Path.Trim('/') + '/'
     if (-not [regex]::IsMatch($html, 'href="[^"]*' + [regex]::Escape($needle) + '"')) {
-        $res.failures += ('C3 导航不可见：页面 HTML 内没有指向 ' + $needle + ' 的链接')
+        $res.failures += ('C3-NAV 导航不可见：页面 HTML 内没有指向 ' + $needle + ' 的链接')
     }
     # C4 内部编号（C-anp-P33 的教训：模板注释里的编号会随每页发出）
     $nums = [regex]::Matches($html, '(W|C)-anp-P\d+(\.\d+)?')
     if ($nums.Count -gt 0) {
         $shown = (@($nums | ForEach-Object { $_.Value } | Select-Object -Unique -First 3)) -join '、'
-        $res.failures += ('C4 页面内含内部编号 ' + $nums.Count + ' 处（' + $shown + '）')
+        $res.failures += ('C4-INTERNAL-ID 页面内含内部编号 ' + $nums.Count + ' 处（' + $shown + '）')
     }
     return $res
 }
