@@ -48,6 +48,7 @@ on:
       - 'dev/scripts/Build-PortalSite.ps1'
       - 'dev/scripts/Test-PortalSitePublicSurface.ps1'
       - 'dev/scripts/Test-PortalPublicDocumentation.ps1'
+      - 'dev/scripts/Test-PortalPublishedSiteChecks.ps1'
       - '.github/workflows/publish-site.yml'
   workflow_dispatch:
 
@@ -167,3 +168,23 @@ jobs:
           Invoke-Git @('-C', $publishDir, 'remote', 'add', 'origin', ('https://x-access-token:' + $env:GITHUB_TOKEN + '@github.com/' + $env:GITHUB_REPOSITORY + '.git'))
           Invoke-Git @('-C', $publishDir, 'push', '--force', 'origin', 'HEAD:gh-pages')
           Write-Host 'Published to gh-pages.'
+
+      # <lang>
+      #   <zh-CN>**发布后线上复核**（用户 2026-10-21 裁定"两者都要"中的 CI 侧）。发布成功后对**线上**逐页
+      #     核对四项判据：可达性（HTTP 200）、标题与本地构建产物一致、导航可见性、页面内无内部编号。
+      #     **`continue-on-error: true` 是刻意为之**：复核失败**只报警、不阻断发布**——"红了该不该阻断/回滚"
+      #     是另一个裁定，本周期按默认执行并登记为开放项。同一脚本也可本地手动复跑。
+      #     退出码：0 全部通过｜1 发现缺陷（页面已发布，需修复后重新发布）｜2 未确认（传播等待超时，**不当作通过**）。</zh-CN>
+      #   <en>**Post-publish live re-check** (the CI half of the user's 2026-10-21 "both" ruling). After a successful
+      #     publish it verifies four criteria per page **online**: reachability (HTTP 200), title agreement with the locally
+      #     built artifact, navigation visibility, and no internal numbering in the page. **`continue-on-error: true` is
+      #     deliberate**: a failed re-check **warns only and never blocks publication** — "should red block or roll back" is a
+      #     separate ruling; this cycle keeps the default and registers it as an open item. The same script can be re-run
+      #     manually. Exit codes: 0 all pass | 1 defect found (already published; fix and republish) | 2 unconfirmed
+      #     (propagation wait timed out — **never treated as a pass**).</en>
+      # </lang>
+      - name: Re-check published site (C1-C4, warn only)
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        shell: pwsh
+        run: ./dev/scripts/Test-PortalPublishedSiteChecks.ps1 -WaitSeconds 180

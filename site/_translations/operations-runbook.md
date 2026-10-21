@@ -73,6 +73,17 @@ dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Test
 
 Public delivery documentation references only sanitised summaries, and real configuration or production
 screenshots are never placed in the root repository.
+A post-publish live re-check runs **automatically** in the publish workflow and can be re-run at any time:
+
+```powershell
+dev/scripts/Test-PortalPublishedSiteChecks.ps1
+```
+
+It verifies four criteria per page: reachability (HTTP 200), title agreement with the locally built artifact, navigation visibility (a link to the page exists in the page HTML), and no internal numbering inside the page. CI runs it with `-WaitSeconds 180` to allow GitHub Pages propagation and with `continue-on-error` — **a failed re-check warns only and never blocks publication**.
+
+Exit codes: `0` all pages pass; `1` a defect was found (the page is already published; fix and republish); `2` unconfirmed (the propagation wait timed out — **not treated as a pass**; retry with a larger `-WaitSeconds`).
+
+> Why this step exists: an all-green local gate suite means only that the build artifact is fine, not that the published pages are. Template comments, mirror consistency and propagation delay can all make the live site differ from the local build — this step watches the real published output.
 
 ## Log maintenance
 

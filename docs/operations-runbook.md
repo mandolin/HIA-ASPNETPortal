@@ -56,6 +56,17 @@ dev/scripts/New-PortalOperationsEvidencePackage.ps1 -Profile Test
 ```
 
 公开交付文档只引用脱敏摘要，不引用真实配置或生产截图。
+发布后线上复核由发布工作流**自动执行**，也可随时手动复跑：
+
+```powershell
+dev/scripts/Test-PortalPublishedSiteChecks.ps1
+```
+
+它逐页核对四项判据：页面可达（HTTP 200）、标题与本地构建产物一致、导航可见（页面 HTML 内能链到它）、页面内不含内部编号。CI 侧带 `-WaitSeconds 180` 等待 GitHub Pages 传播，并配 `continue-on-error`——**复核失败只报警，不阻断发布**。
+
+退出码含义：`0` 全部通过；`1` 发现缺陷（页面已发布，需修复后重新发布）；`2` 未确认（等待传播超时，**不当作通过**，加大 `-WaitSeconds` 后重试）。
+
+> 为什么需要这一步：本地门禁全绿只代表"构建产物没问题"，不代表"发布出去的页面没问题"。模板注释、镜像一致性、传播延迟都可能让线上与本地不一致——这一步专门盯发布后的真实产物。
 
 ## 日志维护
 

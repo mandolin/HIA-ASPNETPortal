@@ -462,7 +462,8 @@
     { "id": "Invoke-PortalGateSuite.ps1", "basis": "门禁编排入口自身，不是被编排的门禁。" },
     { "id": "Invoke-PortalGateInjectionProof.ps1", "basis": "门禁有效性（注入法）验证工具，按需手工执行，不进日常编排。" },
     { "id": "Invoke-PortalTargetEnvironmentEvidencePack.ps1", "basis": "L7 目标环境证据一键出证工具（W-anp-P155），按台账逐项采集证据；不是门禁（自身正确性由其产物与 Test-PortalTargetEnvironmentEvidenceMap.ps1 的台账核对承载）。" },
-    { "id": "Build-PortalSite.ps1", "basis": "站点构建辅助脚本，非质量门禁。" },
+        { "id": "Test-PortalPublishedSiteChecks.ps1", "basis": "发布后线上复核（依赖外网，故不进 L0/L1/L2 编排）：由 CI 发布工作流后置步骤自动跑（continue-on-error，只报警、不阻断发布），也可本地手动复跑。用户 2026-10-21 裁定「两者都要」。本地门禁全绿只代表构建产物没问题，这一步盯的是发布后的真实产物。 Post-publish live re-check (needs the network, hence not wired into L0/L1/L2): runs automatically as a CI post-publish step (continue-on-error, warn only) and can be re-run manually. User ruling 2026-10-21: both. An all-green local suite means only that the build artifact is fine; this watches the real published output." },
+{ "id": "Build-PortalSite.ps1", "basis": "站点构建辅助脚本，非质量门禁。" },
     { "id": "Build-PortalDotNetDocPilot.ps1", "basis": ".NET 文档试点生成工具，非质量门禁。" },
     { "id": "Build-PortalJsdocPilot.ps1", "basis": "JSDoc 试点生成工具，非质量门禁。" }
   ]
