@@ -85,7 +85,9 @@ Exit codes: `0` all pages pass; `1` a defect was found (the page is already publ
 
 Whether propagation has finished is decided by the **build stamp**, not by "the page opens": the build writes the source document fingerprint into an HTML comment at the end of each page, and the re-check reads the same source file and recomputes the same hash — agreement is what makes the live page "this build's output". "It opens" is not enough: the old page stays **openable** until propagation finishes (it carries the previous build's content), so "the old artifact is still there" would be misread as "propagated". A mismatched stamp is recorded as unconfirmed rather than a defect, and it is judged only in a re-check with a wait window: during a casual re-check the local tree routinely holds unpublished work in progress, and flagging that is noise.
 
-> Why this step exists: an all-green local gate suite means only that the build artifact is fine, not that the published pages are. Template comments, mirror consistency and propagation delay can all make the live site differ from the local build — this step watches the real published output.
+> Why this step exists: an all-green local gate suite means only that the build artifact is fine, not that the published pages are.
+
+> To confirm that these criteria still work, **re-run the local injection track with one command** (no network, nothing online is touched): dev/scripts/Invoke-PortalPublishedSiteCheckInjection.ps1 — it hosts simulated published pages on a local static server, injects defects one by one and asserts that the gate really finds them. Template comments, mirror consistency and propagation delay can all make the live site differ from the local build — this step watches the real published output.
 
 ## Log maintenance
 
