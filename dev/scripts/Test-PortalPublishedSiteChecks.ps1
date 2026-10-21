@@ -184,7 +184,7 @@ if ($WaitSeconds -gt 0) {
 # </lang>
 function Test-OnePage {
     param([string] $Url, [string] $ExpectedTitle, [string] $Path, [int] $TimeoutSec)
-    $res = [pscustomobject]@{ url = $Url; reachable = $false; status = 0; title = ''; failures = @() }
+    $res = [pscustomobject]@{ url = $Url; reachable = $false; status = 0; title = ''; failures = @(); transport = $false }
     $html = $null
     # <lang>
     #   <zh-CN>抓取重试 **3 次 + 退避 1s/3s**，并在页面之间加 120ms pacing。
@@ -205,8 +205,29 @@ function Test-OnePage {
             if ($res.reachable) { break }
         }
         catch {
+            # <lang>
+            #   <zh-CN>**传输层失败与 HTTP 错误必须分开**（`W-anp-P193` 收口时发现的校准缺陷）。
+            #     此前一律记为"不可达（缺陷）"，于是本机一次 SSL 抖动就把一个**健康页面**判成缺陷——
+            #     而 CI 侧虽配了 `continue-on-error`，**噪声会让人习惯性忽略它**（P189 已记过同类教训，
+            #     当时只修了抓取重试，没修这个区分）。判据：异常里**拿得到 HTTP 响应**（404/5xx 等）才算
+            #     "页面真的不在"；拿不到响应（SSL / 连接重置 / 超时 / 响应截断）是"**无法确认**"，
+            #     与"页面缺失"是两件不同的事。</zh-CN>
+            #   <en>**Transport failures and HTTP errors must be separated** (a calibration defect found during the
+            #     `W-anp-P193` closeout). Everything used to be recorded as "unreachable (defect)", so one local SSL blip
+            #     judged a **healthy page** defective — and while CI pairs that with `continue-on-error`, **noise trains
+            #     people to ignore it** (the same lesson recorded in P189, where only the fetch retries were fixed, not this
+            #     distinction). Criterion: only when an HTTP response **is** obtainable (404/5xx etc.) does it count as "the
+            #     page really is not there"; no response (SSL / connection reset / timeout / truncated response) means
+            #     "**unconfirmed**", which is a different thing from "the page is missing".</en>
+            # </lang>
             $res.status = 0
-            if ($try -eq 3) { $res.failures += ('C1 不可达（3 次重试后）：' + $_.Exception.Message.Substring(0, [Math]::Min(70, $_.Exception.Message.Length))) }
+            $hasResponse = $false
+            try { if ($null -ne $_.Exception.Response) { $hasResponse = $true } } catch { }
+            if (-not $hasResponse) { $res.transport = $true }
+            if ($try -eq 3) {
+                if ($hasResponse) { $res.failures += ('C1 页面不可达（HTTP 错误）：' + $_.Exception.Message.Substring(0, [Math]::Min(70, $_.Exception.Message.Length))) }
+                else { $res.failures += ('C1 传输层不可达（网络/SSL/超时，非页面缺失）：' + $_.Exception.Message.Substring(0, [Math]::Min(70, $_.Exception.Message.Length))) }
+            }
             Start-Sleep -Milliseconds $(if ($try -eq 1) { 1000 } else { 3000 })
         }
     }
@@ -282,7 +303,15 @@ $defects = @()
 $incomplete = @()
 foreach ($r in $results) {
     if (-not $r.reachable) {
-        if ($reachable.ContainsKey($r.url)) { $defects += $r }
+        # <lang>
+        #   <zh-CN>传输层不可达一律算"未确认"——**哪怕它在等待窗口内曾可达**。理由：传输失败说明
+        #     "这次没查到"，而不是"页面没了"；只有拿到 HTTP 错误响应（404/5xx）才是页面真的不在。</zh-CN>
+        #   <en>A transport failure always counts as "unconfirmed" — **even if it was reachable inside the wait window**.
+        #     Reason: a transport failure means "this attempt could not tell", not "the page is gone"; only an HTTP error
+        #     response (404/5xx) means the page really is not there.</en>
+        # </lang>
+        if ($r.transport) { $incomplete += [pscustomobject]@{ url = $r.url; reason = '传输层不可达（网络/SSL/超时），无法确认' } }
+        elseif ($reachable.ContainsKey($r.url)) { $defects += $r }
         else { $incomplete += [pscustomobject]@{ url = $r.url; reason = '未观测到可达（等待传播超时或抓取失败）' } }
         continue
     }
