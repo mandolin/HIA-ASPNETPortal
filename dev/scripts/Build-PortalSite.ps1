@@ -70,10 +70,16 @@
   <zh-CN>**dry-run：只报告将生成什么，不落盘**（`W-anp-P191`，解备忘 D4）。`site/` 一个字节都不改——包括**目录创建**也受同一开关控制（否则 dry-run 会留下空目录，那仍然是落盘）。报告区分三类：新增 / 内容变更 / 无变化。dry-run 在**生成循环之后、N1/N2 校验之前**显式收口退出：那些校验读的是**当前**站点内容，在 dry-run 下运行会把当前站点的状态误呈现成本次构建的结论（假绿灯）。**同源原则**：内容计算路径完全不变，只有最后一步"写不写"分叉——不引入第二套生成逻辑。</zh-CN>
   <en>**dry-run: report what would be generated without writing anything** (`W-anp-P191`, resolves memo D4). Not one byte of `site/` changes — **directory creation** is governed by the same switch (otherwise dry-run would leave empty directories behind, which is still a write). The report distinguishes three states: new / content changed / unchanged. Dry-run **exits explicitly after the generation loop and before the N1/N2 checks**: those checks read the **current** site content, so running them under dry-run would present the current site's state as this build's conclusion (a false green light). **Same-source principle**: the content computation path is unchanged and only the final "write or not" step branches — no second generation logic is introduced.</en>
 </lang>
+.PARAMETER OutputRoot
+<lang>
+  <zh-CN>**输出根目录重定向**（`W-anp-P192`，解备忘 D10 的底座）。留空 = 写入真实 `site/`（默认行为，一字不变）；给定目录 = 把生成结果写到那里，**输入仍读真实 `site/`**（`_data/published.yml`、`_translations/` 不随输出走）。用于**镜像新鲜度门禁**：它把构建输出导到临时目录，再与仓库内 `site/` 逐字节比对——"合法变换"由构建自身定义，门禁不需要复述哪些变换被允许。该模式下**跳过 N1/N2 与双语成对校验**（它们读真实站点内容，对临时目录运行会把手写页面误判为缺失）。</zh-CN>
+  <en>**Output root redirection** (`W-anp-P192`, the foundation for resolving memo D10). Empty = write to the real `site/` (default behaviour, unchanged); a given directory = write the generated result there while **inputs still come from the real `site/`** (`_data/published.yml` and `_translations/` do not follow the output). Used by the **mirror freshness gate**: it directs the build output into a temp directory and compares it byte-for-byte with the repository's `site/` — the "legitimate transformations" are defined by the build itself, so the gate need not restate which transformations are allowed. In this mode the **N1/N2 and bilingual-pairing checks are skipped** (they read the real site content and would misreport hand-written pages as missing against a temp directory).</en>
+</lang>
 #>
 param(
     [string] $RepoRoot,
-    [switch] $DryRun
+    [switch] $DryRun,
+    [string] $OutputRoot
 )
 
 $ErrorActionPreference = 'Stop'
@@ -85,6 +91,20 @@ if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
 $utf8 = [System.Text.UTF8Encoding]::new($false)
 $docsDir = Join-Path $RepoRoot 'docs'
 $siteDir = Join-Path $RepoRoot 'site'
+# <lang>
+#   <zh-CN>**输入与输出分离**：`$siteDir` 始终是**真实**站点目录（`_data`、`_translations` 从它读）；
+#     `$outDir` 是生成产物去向——留空时等于 `$siteDir`（默认行为不变），给了 `-OutputRoot` 时指向该目录。
+#     这是镜像新鲜度门禁的底座：门禁把输出导到临时目录，再与仓库内 `site/` 比对。</zh-CN>
+#   <en>**Inputs and outputs separated**: `$siteDir` is always the **real** site directory (`_data` and `_translations` are read
+#     from it); `$outDir` is where generated output goes — equal to `$siteDir` when empty (default behaviour unchanged), or the
+#     given directory when `-OutputRoot` is supplied. This is the foundation of the mirror freshness gate: the gate directs
+#     output into a temp directory and compares it with the repository's `site/`.</en>
+# </lang>
+$outDir = $siteDir
+if (-not [string]::IsNullOrWhiteSpace($OutputRoot)) {
+    $outDir = [System.IO.Path]::GetFullPath($OutputRoot)
+    if (-not (Test-Path -LiteralPath $outDir)) { $null = New-Item -ItemType Directory -Path $outDir -Force }
+}
 $translationsDir = Join-Path $siteDir '_translations'
 $dataDir = Join-Path $siteDir '_data'
 
@@ -465,7 +485,7 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     $zhBody = Convert-PublicText -Body $zhBody
     $enBody = Convert-PublicText -Body $enBody
 
-    $targetDir = Join-Path $siteDir $pathSeg
+    $targetDir = Join-Path $outDir $pathSeg
     if (-not ($DryRun) -and -not (Test-Path -LiteralPath $targetDir)) { $null = New-Item -ItemType Directory -Path $targetDir }
     # <lang>
     #   <zh-CN>**parent 必须按页面语言注入对应语言的分区名**（`W-anp-P148`，由用户截图发现）。
@@ -533,6 +553,22 @@ if ($DryRun) {
     Write-Host ('[DRY-RUN] 将生成 ' + $generated + ' 个页面（中/英各一份）：新增 ' + $dryNew + '｜内容变更 ' + $dryChanged + '｜无变化 ' + $drySame + '。')
     foreach ($p in $dryPlan) { Write-Host ('  ' + $p) }
     Write-Host '[DRY-RUN] 未写入任何文件（含目录创建）；N1/N2 与双语成对校验未运行（它们读当前站点内容，会把当前状态误呈现成本次结论）。'
+    Write-Host 'RESULT: Pass'
+    exit 0
+}
+
+# <lang>
+#   <zh-CN>`-OutputRoot` 模式同样在此收口：N1/N2 与双语成对校验读的是**真实**站点内容（含手写页面），
+#     对临时输出目录运行会把"手写页面不在这里"误判成缺口——**假失败**。本模式的唯一目的就是
+#     "产出可比对的一组生成文件"，校验由调用方（镜像新鲜度门禁）负责。</zh-CN>
+#   <en>`-OutputRoot` mode exits here for the same reason: the N1/N2 and bilingual-pairing checks read the **real** site
+#     content (including hand-written pages), so running them against a temp output directory would misreport "hand-written
+#     pages are not here" as a gap — a **false failure**. This mode's only purpose is to produce a comparable set of generated
+#     files; verification is the caller's job (the mirror freshness gate).</en>
+# </lang>
+if (-not [string]::IsNullOrWhiteSpace($OutputRoot)) {
+    Write-Host ('[OUTPUT-REDIRECT] 已生成 ' + $generated + ' 个页面（中/英各一份）到：' + $outDir)
+    Write-Host '[OUTPUT-REDIRECT] N1/N2 与双语成对校验未运行（它们读真实站点内容，对临时目录会误判手写页面缺失）。'
     Write-Host 'RESULT: Pass'
     exit 0
 }

@@ -312,11 +312,14 @@
     },
     {
       "id": "site-mirror-consistency",
-      "name": "docs 与 site 镜像一致（上架清单驱动，镜像须为构建产物形状）",
+      "name": "docs 与 site 镜像一致且新鲜（上架清单驱动：镜像须为构建产物形状，且须等于当前 docs 的构建产物）",
       "layer": "L0",
       "coverage": "partial",
-      "boundary": "只证明上架文档均有镜像页、镜像为构建产物形状（无裸相对 .md 链接、无内部编号外泄、首标题一致）且 front matter 契约成立；不要求镜像与 docs 字节相等（构建会做链接重写与公开面文本过滤，16/29 页本就不同），不证明镜像等于 Build-PortalSite.ps1 的生成输出（本门禁不运行构建），不检查英文译本与站内链接可达性。",
-      "gate": "Test-PortalSiteMirrorConsistency.ps1"
+      "boundary": "只证明上架文档均有镜像页、镜像为构建产物形状（无裸相对 .md 链接、无内部编号外泄、首标题一致）且 front matter 契约成立；不要求镜像与 docs 字节相等（构建会做链接重写与公开面文本过滤，16/29 页本就不同），镜像是否等于当前 docs 的构建输出由 Test-PortalSiteMirrorFreshness.ps1 证明（它把构建输出重定向到临时目录后逐字节比对；「合法变换」由构建自身定义，故可比字节也不必复述变换清单），不检查英文译本与站内链接可达性。",
+      "gate": "Test-PortalSiteMirrorConsistency.ps1",
+      "gates": [
+        "Test-PortalSiteMirrorFreshness.ps1"
+      ]
     },
     {
       "id": "landing-stats",
@@ -403,6 +406,7 @@
     "Test-PortalL7CriteriaRegistry.ps1",
     "Test-PortalPlanLedgerConsistency.ps1",
     "Test-PortalSiteMirrorConsistency.ps1",
+    "Test-PortalSiteMirrorFreshness.ps1",
     "Build-Solution.ps1",
     "Invoke-PortalModuleRuntimeGate.ps1",
     "Invoke-PortalTests.ps1",

@@ -655,6 +655,23 @@ $gateLayers = [ordered]@{
         #   Pass, only 4 files changed).</en>
         # </lang>
         @{ File = 'Test-PortalSiteMirrorConsistency.ps1'; Runner = 'ps1'; Kind = '站点镜像一致性'; Args = @() }
+        # <lang>
+        #   <zh-CN>**镜像新鲜度**（`W-anp-P192`，解备忘 D10）。与上一条（一致性）分工明确：一致性查"形状"
+        #     （无裸相对链接、无内部编号外泄、首标题一致、front matter 契约）；新鲜度查"**是不是当前 `docs/`
+        #     的构建产物**"——把构建输出重定向到临时目录后逐字节比对。之所以能逐字节：**"合法变换"由构建自身定义**，
+        #     门禁不需要复述哪些变换被允许（链接重写、发布面文本过滤、front matter 注入、路径变化），
+        #     因此也不会因新增变换而漏判。D10 的真实形态：曾有周期改了 `docs/` 却没提交构建产物，仓库内 `site/`
+        #     副本陈旧，靠人工提交时 `git status` 发现——本门禁把这件事变成机器断言。</zh-CN>
+        #   <en>**Mirror freshness** (`W-anp-P192`, resolves memo D10). Clear division from the entry above (consistency):
+        #     consistency checks "shape" (no raw relative links, no internal-ID leakage, first heading agrees, front-matter
+        #     contract); freshness checks "**is this the build output of the current `docs/`**" — redirecting the build
+        #     output to a temp directory and comparing byte-for-byte. Byte comparison is possible because **the build itself
+        #     defines the legitimate transformations** (link rewriting, publication-surface filtering, front-matter injection,
+        #     path changes), so the gate need not restate which are allowed and cannot miss newly added ones. The real shape of
+        #     D10: a cycle once changed `docs/` without committing the build output, leaving the repository's `site/` copy
+        #     stale, caught only by a human at commit time via `git status` — this gate turns that into a machine assertion.</en>
+        # </lang>
+        @{ File = 'Test-PortalSiteMirrorFreshness.ps1';  Runner = 'ps1'; Kind = '站点镜像新鲜度'; Args = @() }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }
