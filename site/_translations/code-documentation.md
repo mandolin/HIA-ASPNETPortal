@@ -34,6 +34,14 @@ packages and existing Task Runner bindings:
 The artifact shape is guarded by a gate: no internal work-item numbers (`W-anp-P*` / `C-anp-P*`) and no local absolute
 paths.
 
+## Published code documentation (DotNetDoc)
+
+- Entry: `/api/dotnetdoc/` (that page lists every half and language)
+- Coverage: **four API projects** (`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`) and the **markup comments**, all **bilingual** — because the C# XML documentation comments are themselves written in the bilingual `<lang><zh-CN>…<en>…</lang>` convention.
+- **The surface and project-discovery halves are English-only**: they are structural descriptions (route inventory, solution composition), not human-written comments, so there is no Chinese content. **Published as English honestly, rather than fabricating Chinese directories to look bilingual.**
+- Size: about 16.8 MB of rendered artifacts (versus roughly 0.5 MB for the JSDoc half).
+- Refresh: `dev/scripts/Publish-PortalDotNetDoc.ps1` (first run `Build-PortalDotNetDocPilot.ps1` to produce the HIA artifacts; this script then renders each half in **that artifact's own declared languages** into `site/api/dotnetdoc/`).
+
 ## Refresh procedure (snapshot mechanism)
 
 The site is published from **committed static files**, so the code documentation is a **snapshot** rather than live

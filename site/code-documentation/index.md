@@ -29,6 +29,14 @@ title: 代码文档（Code documentation）
 
 产物形状经门禁看守：不得包含内部工作项编号（`W-anp-P*` / `C-anp-P*`）、不得包含本地绝对路径。
 
+## 已发布的代码文档（DotNetDoc）
+
+- 入口：`/api/dotnetdoc/`（该页按半边与语言列出全部链接）
+- 覆盖：**4 个 API 工程**（`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`）与**标记层注释**，均为**中英双语**——因为 C# 的 XML 文档注释本身就按 `<lang><zh-CN>…<en>…</lang>` 双语惯例书写。
+- **页面表层与工程发现两个半边只有英文**：它们是结构描述（路由清单、解决方案构成），不是人工撰写的注释，因此没有中文内容。**如实按英文发布，不为凑双语而伪造中文目录。**
+- 体积：约 16.8 MB 渲染产物（对比 JSDoc 半边的约 0.5 MB）。
+- 刷新：脚本 `dev/scripts/Publish-PortalDotNetDoc.ps1`（先跑 `Build-PortalDotNetDocPilot.ps1` 生成 HIA 工件，再由本脚本逐半边按**该工件自己声明的语言**渲染并落到 `site/api/dotnetdoc/`）。
+
 ## 刷新方式（快照机制）
 
 官网由**签入的静态文件**发布，因此代码文档是**快照**而非实时生成。刷新步骤：
@@ -49,4 +57,4 @@ JSDoc 试点工作区（`dev/documentation/jsdoc`）通过工作区级 `.npmrc` 
 - 源码注释规范（中英双语 `<lang>` 块）：见「设计与开发」相关页；
 - 文档族总览与缺口：`documentation-map.md`。
 
-<!-- build-stamp: 7ECE29783FEB -->
+<!-- build-stamp: 5931A67A091E -->

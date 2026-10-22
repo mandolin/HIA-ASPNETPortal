@@ -148,6 +148,44 @@ foreach ($artifact in $hiaArtifacts) {
     }
 }
 
+# <lang>
+#   <zh-CN>**源指纹**（`W-anp-P202` 新增）：覆盖 `dotnetdoc.config.json` 及其声明的**全部输入**——
+#     4 个 XML 文档、54 个标记层文件、7 个页面表层文件、`src/master.sln`。算法与 JSDoc 半边一致
+#     （`'<相对路径>|<字节数>|<sha256>'` 各行按 LF 连接后再取 SHA-256），使两侧可用同一套判定。
+#     为什么连配置本身也算进去：输入集合变了（增删文件）产物就该变，只算文件不算声明会漏掉这一类漂移。
+#     输入缺失时该行记 `<missing>` 而不是跳过——跳过会让指纹"看起来正常"，那是假装通过。</zh-CN>
+#   <en>**Source fingerprint** (added by `W-anp-P202`): covers `dotnetdoc.config.json` and **every input it declares** —
+#     the four XML documents, the 54 markup files, the 7 surface files and `src/master.sln`. The algorithm matches the
+#     JSDoc half (`'<relativePath>|<byteLength>|<sha256>'` lines joined by LF, then SHA-256), so both halves can be
+#     judged by one rule. Why the config itself is included: when the input set changes (files added or removed) the
+#     output should change, and hashing only the files would miss that class of drift. A missing input records
+#     `<missing>` on its line rather than being skipped — skipping would make the fingerprint "look fine", which is
+#     pretending to pass.</en>
+# </lang>
+$configPath = Join-Path $repositoryRoot 'dotnetdoc.config.json'
+$fingerprintInputs = @()
+if (Test-Path -LiteralPath $configPath -PathType Leaf) {
+    $fingerprintInputs += 'dotnetdoc.config.json'
+    $config = [System.IO.File]::ReadAllText($configPath, [System.Text.UTF8Encoding]::new($false)) | ConvertFrom-Json
+    foreach ($input in @($config.inputs)) {
+        if ($input.PSObject.Properties.Name -contains 'path' -and $input.path) { $fingerprintInputs += $input.path }
+        if ($input.PSObject.Properties.Name -contains 'paths') { foreach ($p in @($input.paths)) { $fingerprintInputs += $p } }
+    }
+}
+$fingerprintInputs = @($fingerprintInputs | Sort-Object -Unique)
+$sha = [System.Security.Cryptography.SHA256]::Create()
+$fingerprintParts = @()
+foreach ($rel in $fingerprintInputs) {
+    $full = Join-Path $repositoryRoot ($rel -replace '/', '\')
+    if (-not (Test-Path -LiteralPath $full -PathType Leaf)) { $fingerprintParts += (($rel -replace '\\', '/') + '|<missing>|<missing>'); continue }
+    $bytes = [System.IO.File]::ReadAllBytes($full)
+    $hash = ([BitConverter]::ToString($sha.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
+    $fingerprintParts += (($rel -replace '\\', '/') + '|' + $bytes.Length + '|' + $hash)
+}
+$sourceFingerprint = ([BitConverter]::ToString($sha.ComputeHash([System.Text.Encoding]::UTF8.GetBytes(($fingerprintParts -join "`n"))))).Replace('-', '').ToLowerInvariant()
+$sha.Dispose()
+
+
 $totalLocales = @($plan | ForEach-Object { $_.Locales.Count } | Measure-Object -Sum).Sum
 Write-Host ('[INFO] DotNetDoc 半边 ' + $plan.Count + ' 个｜声明语言组合 ' + $totalLocales + ' 个')
 foreach ($entry in $plan) {
@@ -261,6 +299,9 @@ $manifest = [ordered]@{
     generatedUtc   = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
     publishedBy    = 'HIA-ASPNETPortal 文档发布流程（Publish-PortalDotNetDoc.ps1）'
     localePolicy   = '每个半边按其在 HIA 工件中声明的 locales 渲染；未声明 zh-CN 的半边（surface、project）为结构描述，只有英文。'
+    sourceFingerprint = $sourceFingerprint
+    fingerprintAlgorithm = "SHA256 over '<relativePath>|<byteLength>|<sha256(content)>' lines, joined by LF；输入缺失记 <missing>。覆盖 dotnetdoc.config.json 及其声明的全部输入。"
+    fingerprintInputs = @($fingerprintInputs)
     halves         = @($published | ForEach-Object {
             [ordered]@{
                 half       = $_.Half
@@ -270,6 +311,9 @@ $manifest = [ordered]@{
                 files      = $_.Files
                 bytes      = $_.Bytes
             }
+        })
+    declaredLocales = @($plan | ForEach-Object {
+            [ordered]@{ half = $_.Half; locales = @($_.Locales) }
         })
     totalBytes     = ($published | Measure-Object Bytes -Sum).Sum
 }

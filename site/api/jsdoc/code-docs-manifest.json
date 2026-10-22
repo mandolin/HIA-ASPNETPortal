@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generator": "HIA-Documentation-Sys JSDoc pilot（dev/scripts/Build-PortalJsdocPilot.ps1 → dev/documentation/jsdoc，npm script docs）",
   "generatedUtc": "2026-10-20T00:00:00Z",
-  "publishedBy": "C-anp-P32 / W-anp-P180",
+  "publishedBy": "HIA-ASPNETPortal 文档发布流程（Build-PortalJsdocPilot.ps1 + 快照刷新）",
   "sourceInputs": [
     "src/Portal/gulpfile.js",
     "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js"
