@@ -22,7 +22,8 @@
       M1 页面存在性：登记为「已交付」的模块必须有页面文件。
       M2 字段集 ⊇ 源码控件集：编辑页每个输入控件 id 必须在页面中出现（**词边界**匹配，与 A3 同口径——
          `LinkTitleField` 这类"含原 id 的改名"不算命中）。
-      M3 八节齐全：用途与前置 / 操作步骤 / 字段表 / 必填与校验 / 存储与审计 / 权限 / 常见问题 / 边界与不做
+      M3 八节齐全（**须为 `## ` 二级标题**，只出现节名这个词不算）：用途与前置 / 操作步骤 / 字段表 /
+       必填与校验 / 存储与审计 / 权限 / 常见问题 / 边界与不做
       M3a **H1 存在且指向本模块**（`W-anp-P190` 新增）：页面必须有**唯一**一级标题，且标题须含登记表的模块名——补上"页面看着正常但语义缺失"这一类（构建会拿 parent 兜底当标题）。
          ——缺一即失败（这是"详细使用说明"的可判定定义）。
       M4 必填数量一致：编辑页 `RequiredFieldValidator` 数 == 页面中 `**必填**` 出现次数。
@@ -50,7 +51,8 @@
       M1 page existence: a module registered as delivered must have a page file;
       M2 field set ⊇ source control set: every edit-page input control id must appear in the page (**word-boundary**
          matching, same convention as A3 — a rename such as `LinkTitleField` does not count);
-      M3 all eight sections present: purpose & prerequisites / operating steps / field table / required & validation /
+      M3 all eight sections present **as `## ` level-2 headings** (the word appearing in prose does not count):
+         purpose & prerequisites / operating steps / field table / required & validation /
          storage & audit / permissions / common questions / boundaries — missing one fails (this is the decidable
          definition of "detailed operating instructions");
       M4 required count agrees: the number of `RequiredFieldValidator` controls in the edit page == the number of
@@ -192,9 +194,26 @@ foreach ($mod in $registry.modules) {
     }
 
     # ---------- M3 八节齐全 ----------
+    # <lang>
+    #   <zh-CN>**必须是 `## ` 标题，不能只是"这个词出现过"**（`W-anp-P208` 修的真实缺口）：
+    #     原判据是 `$page -notmatch [regex]::Escape($section)`——只查节名这个词是否出现在页面任何位置。
+    #     注入验证当场证伪：把 `## 权限` 这一标题改成别的，门禁**仍然 PASS**，因为"权限"二字在正文里还有。
+    #     也就是说，一篇把八个词散在正文里、根本没有分节的页面，会被判为"八节齐全"。
+    #     **它能挡住的只是"整页没提这个词"，挡不住"没有分节"**——而后者才是"详细使用说明"的实质。
+    #     改为按行首 `## <节名>` 匹配。改前已核对 19 个页面全部符合该严格口径（0 不合规），故不会误伤。</zh-CN>
+    #   <en>**Must be an `## ` heading, not merely "the word appears somewhere"** (a real gap fixed by `W-anp-P208`):
+    #     the old assertion was `$page -notmatch [regex]::Escape($section)` — it only asked whether the section name
+    #     appears anywhere on the page. Injection verification disproved it on the spot: renaming the `## 权限`
+    #     heading left the gate **PASSing**, because the word still occurred in the prose. A page that scatters all
+    #     eight words through its body without a single section heading would therefore be judged "all eight
+    #     sections present". What it guarded was only "the page never mentions the word", not "the page is actually
+    #     sectioned" — and the latter is the substance of "detailed operating instructions". Now matched as a
+    #     line-initial `## <section>`. All 19 pages were verified against this stricter form before the change
+    #     (0 non-conforming), so nothing is broken by tightening it.</en>
+    # </lang>
     foreach ($section in $requiredSections) {
-        if ($page -notmatch [regex]::Escape($section)) {
-            $failures += "M3 模块文档页缺小节：$pageName 的页面必须含「$section」（八节模板，缺一即不合格）。"
+        if ($page -notmatch ('(?m)^##\s+' + [regex]::Escape($section) + '\s*$')) {
+            $failures += "M3 模块文档页缺小节（须为二级标题）：$pageName 的页面必须有 `## $section` 这一节标题（八节模板，缺一即不合格；只出现这个词不算）。"
         }
     }
 
