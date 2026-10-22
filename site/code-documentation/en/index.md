@@ -15,7 +15,7 @@ This page explains the project's **code documentation system** — API-level doc
 | Half | Inputs | Artifact form | Current status |
 | --- | --- | --- | --- |
 | **JSDoc (JavaScript)** | `src/Portal/gulpfile.js`, `src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js` | **Bilingual HTML pages** + theme assets | ✅ **Published** — see "Published code documentation" below |
-| **DotNetDoc (C# XML documentation)** | 4 XML documentation outputs such as `src/Portal/bin/Portal.xml`, plus `src/master.sln` | **Intermediate JSON** (14 artifacts / 60.8 MB, no rendering surface yet) | ⏸ **Not published** — will be added through the same manifest mechanism once a rendering/publishing component exists |
+| **DotNetDoc (C# XML documentation)** | 4 XML documentation outputs such as `src/Portal/bin/Portal.xml`, plus `src/master.sln` | **Intermediate JSON** (14 artifacts / 60.8 MB, no rendering surface yet; that figure is one measurement taken when the generation pipeline was first proven and may differ on a re-run) | ⏸ **Not published** — will be added through the same manifest mechanism once a rendering/publishing component exists |
 
 The two entry scripts (under `dev/scripts/`) stay isolated from each other and from the portal runtime, front-end
 packages and existing Task Runner bindings:
@@ -60,4 +60,4 @@ tarballs correctly, otherwise the project convention treats it as a missing prer
 - Source comment conventions (bilingual `<lang>` blocks): see the design and development pages;
 - Documentation family overview and gaps: `documentation-map.md`.
 
-<!-- build-stamp: 4917D43DCEB1 -->
+<!-- build-stamp: E64DEC2120FF -->

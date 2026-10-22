@@ -7,7 +7,7 @@
 | 半边 | 输入 | 产物形态 | 当前状态 |
 | --- | --- | --- | --- |
 | **JSDoc（JavaScript）** | `src/Portal/gulpfile.js`、`src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js` | **双语 HTML 页面** + 主题资源 | ✅ **已发布**：见下方「已发布的代码文档」 |
-| **DotNetDoc（C# XML 文档）** | `src/Portal/bin/Portal.xml` 等 4 个 XML 文档产物 + `src/master.sln` | 生成**中间 JSON**（14 个产物 / 60.8 MB，暂无渲染面） | ⏸ **未上架**：待渲染/发布组件就位后按同一清单机制补入 |
+| **DotNetDoc（C# XML 文档）** | `src/Portal/bin/Portal.xml` 等 4 个 XML 文档产物 + `src/master.sln` | 生成**中间 JSON**（14 个产物 / 60.8 MB，暂无渲染面；该数字为打通生成链路时的一次实测，重跑后可能不同） | ⏸ **未上架**：待渲染/发布组件就位后按同一清单机制补入 |
 
 两侧的入口脚本（`dev/scripts/` 下）与门禁彼此隔离，不改变门户运行时、前端包或既有 Task Runner 绑定：
 

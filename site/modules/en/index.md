@@ -29,7 +29,7 @@ This directory holds a dedicated operating page for **every content module** of 
 
 1. **Audit surface**: of these eleven modules, **only Signin writes operational audit** (`SignInFailed` / `LegacyCredentialUpgraded` / `CredentialCostUpgraded`); the other ten content edit paths **write none**. If you need a traceable record of who changed what, it must be arranged outside the portal.
 2. **Validation varies enormously**: Events requires all four fields, Discussion requires none, and Contacts performs **no format validation at all** beyond the name (e-mail and phone are stored exactly as typed). **Do not assume that silence means the value is correct.**
-3. **Deployment differs**: Links is in use **on a test tab only** (no production tab yet); Signin has **0 instances in the development database** and therefore **source-level description only, with no runtime evidence**; HtmlModule has 12 instances and XmlModule 1. Deployment readings on each page are a **delivery-time snapshot** — re-check after adding or migrating tabs.
+3. **Deployment differs**: Links is in use **on a test tab only** (no production tab yet); Signin has **0 instances in the development database** and therefore **source-level description only, with no runtime evidence**; HtmlModule has 12 instances and XmlModule 1. Deployment readings on each page are a **delivery-time snapshot taken on 2026-10-21** — re-check after adding or migrating tabs.
 
 ## Two things that look like defects but are established behaviour
 
@@ -42,4 +42,4 @@ This directory holds a dedicated operating page for **every content module** of 
 - The pages **do not rely on runtime screenshots**: every statement is traceable to source markup and verified deployment readings; where screenshot evidence would be needed (for example Signin) the page states the **re-entry condition** explicitly.
 - Fields, required fields and validation on each page are guarded by a gate (`Test-PortalModuleDocPages.ps1`): the field set must cover the source control set, the required count must agree with the source, all eight sections must be present, and the **deployment boundary statements** required by the registry must be written out.
 
-<!-- build-stamp: 96EF6AD172F9 -->
+<!-- build-stamp: 1A57BE4D0A05 -->

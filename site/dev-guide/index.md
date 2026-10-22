@@ -49,6 +49,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
 
 脚本会通过 `dev\scripts\Find-MsBuild.ps1` 查找 Visual Studio / Build Tools 中的 MSBuild。当前已验证脚本可自动定位已安装的 MSBuild 并完成 `Debug|Any CPU` 构建；实际安装路径因本机 Visual Studio / Build Tools 配置而异。
 
+## 文档子站构建
+
+文档子站里的页面（`site/` 下的镜像页）由构建脚本从 `docs/` 与 `site/_translations/` 生成：
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -File dev/scripts/Build-PortalSite.ps1
+```
+
+两个**只读**开关（都不改 `site/`，适合先看清再动手）：
+
+- `-DryRun`：只报告"将生成什么"（新增 / 内容变更 / 无变化），**一个字节都不落盘**（含目录创建）——用来先预演一次再决定要不要真跑；
+- `-OutputRoot <目录>`：把产物写到指定目录，输入仍然读真实 `site/`，用于在不改动工作区的前提下比较"现在应该生成什么"（镜像新鲜度门禁正是这么做的）。
+
 ## VSCode 任务
 
 `.vscode/tasks.json` 提供以下常用任务：
@@ -428,4 +441,4 @@ npm run assets:stop-watch
 - `src/Portal/.editorconfig` 因包含 `root = true`，也已单独设置 `charset = utf-8`。
 - VSCode 工作区已设置 `"files.encoding": "utf8"`，对应 UTF-8 无签名。
 
-<!-- build-stamp: 7EFD8E0E54D6 -->
+<!-- build-stamp: 11A508421D48 -->

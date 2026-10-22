@@ -14,7 +14,7 @@ title: 代码文档（Code documentation）
 | 半边 | 输入 | 产物形态 | 当前状态 |
 | --- | --- | --- | --- |
 | **JSDoc（JavaScript）** | `src/Portal/gulpfile.js`、`src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js` | **双语 HTML 页面** + 主题资源 | ✅ **已发布**：见下方「已发布的代码文档」 |
-| **DotNetDoc（C# XML 文档）** | `src/Portal/bin/Portal.xml` 等 4 个 XML 文档产物 + `src/master.sln` | 生成**中间 JSON**（14 个产物 / 60.8 MB，暂无渲染面） | ⏸ **未上架**：待渲染/发布组件就位后按同一清单机制补入 |
+| **DotNetDoc（C# XML 文档）** | `src/Portal/bin/Portal.xml` 等 4 个 XML 文档产物 + `src/master.sln` | 生成**中间 JSON**（14 个产物 / 60.8 MB，暂无渲染面；该数字为打通生成链路时的一次实测，重跑后可能不同） | ⏸ **未上架**：待渲染/发布组件就位后按同一清单机制补入 |
 
 两侧的入口脚本（`dev/scripts/` 下）与门禁彼此隔离，不改变门户运行时、前端包或既有 Task Runner 绑定：
 
@@ -49,4 +49,4 @@ JSDoc 试点工作区（`dev/documentation/jsdoc`）通过工作区级 `.npmrc` 
 - 源码注释规范（中英双语 `<lang>` 块）：见「设计与开发」相关页；
 - 文档族总览与缺口：`documentation-map.md`。
 
-<!-- build-stamp: 36C4CD9A9FD6 -->
+<!-- build-stamp: 7ECE29783FEB -->
