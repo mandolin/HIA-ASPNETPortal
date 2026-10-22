@@ -37,7 +37,8 @@ paths.
 ## Published code documentation (DotNetDoc)
 
 - Entry: `/api/dotnetdoc/` (that page lists every half and language)
-- Coverage: **four API projects** (`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`) and the **markup comments**, all **bilingual** — because the C# XML documentation comments are themselves written in the bilingual `<lang><zh-CN>…<en>…</lang>` convention.
+- Coverage: **four API projects** (`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`) and the **markup comments**; the source comments follow the bilingual `<lang><zh-CN>…<en>…</lang>` convention.
+- **[Measured coverage, reviewed 2026-10-22] this is *partially* bilingual, not fully bilingual**: about **62% of the text spans on the Chinese pages actually contain Chinese**; for the remaining ~38% of members only an English comment exists, and **the Chinese page shows the English text verbatim**. Per half: `markup` 51.2%, `api/Portal` 61.0%, `api/Portal.Components` 62.7%, `api/Portal.Components.Data` 66.7%, `api/Portal.Components.Data1` 67.9%. **This is the honestly recorded state rather than a defect** — adding Chinese comments is a separate piece of work (it changes C# source comments, out of scope for this cycle).
 - **The surface and project-discovery halves are English-only**: they are structural descriptions (route inventory, solution composition), not human-written comments, so there is no Chinese content. **Published as English honestly, rather than fabricating Chinese directories to look bilingual.**
 - Size: about 16.8 MB of rendered artifacts (versus roughly 0.5 MB for the JSDoc half).
 - Refresh: `dev/scripts/Publish-PortalDotNetDoc.ps1` (first run `Build-PortalDotNetDocPilot.ps1` to produce the HIA artifacts; this script then renders each half in **that artifact's own declared languages** into `site/api/dotnetdoc/`).

@@ -25,7 +25,8 @@
 ## 已发布的代码文档（DotNetDoc）
 
 - 入口：`/api/dotnetdoc/`（该页按半边与语言列出全部链接）
-- 覆盖：**4 个 API 工程**（`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`）与**标记层注释**，均为**中英双语**——因为 C# 的 XML 文档注释本身就按 `<lang><zh-CN>…<en>…</lang>` 双语惯例书写。
+- 覆盖：**4 个 API 工程**（`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`）与**标记层注释**；源注释按 `<lang><zh-CN>…<en>…</lang>` 双语惯例书写。
+- **【实测覆盖率，2026-10-22 审校】是"部分双语"，不是"全双语"**：中文页里**实际含中文的文本段约占 62%**，其余约 38% 的成员只有英文注释，**中文页直接显示英文原文**。逐半边覆盖率：`markup` 51.2%、`api/Portal` 61.0%、`api/Portal.Components` 62.7%、`api/Portal.Components.Data` 66.7%、`api/Portal.Components.Data1` 67.9%。**这不是缺陷而是现状如实登记**——补中文注释属另一件事（改的是 C# 源码注释内容，不在本周期范围）。
 - **页面表层与工程发现两个半边只有英文**：它们是结构描述（路由清单、解决方案构成），不是人工撰写的注释，因此没有中文内容。**如实按英文发布，不为凑双语而伪造中文目录。**
 - 体积：约 16.8 MB 渲染产物（对比 JSDoc 半边的约 0.5 MB）。
 - 刷新：脚本 `dev/scripts/Publish-PortalDotNetDoc.ps1`（先跑 `Build-PortalDotNetDocPilot.ps1` 生成 HIA 工件，再由本脚本逐半边按**该工件自己声明的语言**渲染并落到 `site/api/dotnetdoc/`）。
