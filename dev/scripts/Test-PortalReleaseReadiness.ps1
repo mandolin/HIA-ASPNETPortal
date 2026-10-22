@@ -221,7 +221,8 @@ else {
         Add-Result 'F4' 'INCOMPLETE' '找不到门禁套件统计产物——请先跑一次 L0/L1 并用 -SuiteStatsPath 传入（不假装通过）'
     }
     else {
-        $age = ((Get-Date) - (Get-Item -LiteralPath $suitePath).LastWriteTimeUtc).TotalMinutes
+        # 必须用 **UTC 的现在** 减 **UTC 的时间戳**：本地时间是 UTC+8，混用会把年龄多算 8 小时，窗口一收紧就会把新鲜产物误判成过期
+        $age = ((Get-Date).ToUniversalTime() - (Get-Item -LiteralPath $suitePath).LastWriteTimeUtc).TotalMinutes
         if ($age -gt $SuiteMaxAgeMinutes) { Add-Result 'F4' 'INCOMPLETE' ('套件统计产物已过期（' + [int]$age + ' 分钟前，上限 ' + $SuiteMaxAgeMinutes + '）——请重跑套件') }
         else {
             $s = Get-Content -LiteralPath $suitePath -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -266,7 +267,7 @@ else {
         Add-Result 'F6' 'INCOMPLETE' '找不到线上复核统计产物——请跑一次复核并用 -LiveRecheckStatsPath 传入（不假装通过）'
     }
     else {
-        $age = ((Get-Date) - (Get-Item -LiteralPath $livePath).LastWriteTimeUtc).TotalMinutes
+        $age = ((Get-Date).ToUniversalTime() - (Get-Item -LiteralPath $livePath).LastWriteTimeUtc).TotalMinutes
         if ($age -gt $LiveRecheckMaxAgeMinutes) { Add-Result 'F6' 'INCOMPLETE' ('线上复核产物已过期（' + [int]$age + ' 分钟前，上限 ' + $LiveRecheckMaxAgeMinutes + '）——请重跑复核') }
         else {
             $r = Get-Content -LiteralPath $livePath -Raw -Encoding UTF8 | ConvertFrom-Json
