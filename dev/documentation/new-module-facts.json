@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "generatedUtc": "2026-10-22T15:52:59Z",
+  "producedBy": "C-anp-P37 / W-anp-P206（dev/scripts/Get-PortalNewModuleFacts.ps1）",
+  "sourceRoot": "src/Portal/DesktopModules",
+  "note": "字段/必填/权限/存储一律机械取自源码；「是否用户面向」不下结论，只给证据。",
+  "moduleCount": 8,
+  "modules": [
+    {
+      "directory": "BusinessApplicationRequest",
+      "view": "BusinessApplicationRequest/BusinessApplicationRequest.ascx",
+      "hasEditPage": false,
+      "editPages": [],
+      "controlCount": 7,
+      "controls": [
+        {
+          "id": "BodyTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "CategoryList",
+          "kind": "DropDownList"
+        },
+        {
+          "id": "MessageLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "RequestPanel",
+          "kind": "Panel"
+        },
+        {
+          "id": "SubmitButton",
+          "kind": "Button"
+        },
+        {
+          "id": "SummaryTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "TitleTextBox",
+          "kind": "TextBox"
+        }
+      ],
+      "validatorCount": 0,
+      "selfDescriptionZh": "P74.3 空态渲染器位于 ASPNET.StarterKit.Portal 命名空间，而 Web.config 只全局导入 Resources：标记层若引用该类型必须显式导入本命名空间，否则**运行期编译**报 CS0103（msbuild 构建不会校验 ASCX）。",
+      "selfDescriptionEn": "The P74.3 empty-state renderer lives in the ASPNET.StarterKit.Portal namespace while Web.config imports only Resources globally: markup that references that type must import this namespace explicitly, otherwise the **runtime compilation** of the ASCX reports CS0103 (an msbuild build does not validate ASCX files).",
+      "permissionHints": [],
+      "dataAccessHints": [],
+      "auditHints": [
+        "//   <zh-CN>失败只展示数据层提供的业务消息并重新绑定读模型，不执行审计或待办投影。</zh-CN>",
+        "//   <zh-CN>提交请求携带归一化字段、当前用户、审核角色和 UTC 时间，形成可审计的数据层输入。</zh-CN>",
+        "//   <zh-CN>先解析当前用户物理标识，所有提交和审计都必须绑定该身份。</zh-CN>",
+        "//   <zh-CN>业务事实成功后记录操作审计；审计目标使用稳定申请编号，不写入申请正文。</zh-CN>",
+        "///   <en>P19.4 uses this module to validate the shortest loop across enterprise capability module, business fact, WorkflowEvent, WorkItem, and OperationAudit without carrying specific research, well-design, or intelligence fields.</en>",
+        "///   <zh-CN>P19.4 用它验证“企业能力模块 - 业务事实 - WorkflowEvent - WorkItem - OperationAudit”的最短闭环，不承载具体科研、井设计或情报字段。</zh-CN>",
+        "PortalOperationAudit.Record(",
+        "PortalOperationAuditEvents.BusinessApplicationSubmitted,"
+      ]
+    },
+    {
+      "directory": "EmployeeProfileConfirm",
+      "view": "EmployeeProfileConfirm/EmployeeProfileConfirm.ascx",
+      "hasEditPage": false,
+      "editPages": [],
+      "controlCount": 10,
+      "controls": [
+        {
+          "id": "ConfirmButton",
+          "kind": "Button"
+        },
+        {
+          "id": "DisplayNameLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "EmployeeCodeLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "EmploymentStatusLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "LastConfirmedLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "MessageLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "OrganizationLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "PreferredNameLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "ProfilePanel",
+          "kind": "Panel"
+        },
+        {
+          "id": "WorkEmailLabel",
+          "kind": "Label"
+        }
+      ],
+      "validatorCount": 0,
+      "selfDescriptionZh": "P6.4 首批业务模块样板：员工只确认自己当前绑定的低敏资料，不提供上传、脚本或外部资源。",
+      "selfDescriptionEn": "P6.4 first business module sample: employees only confirm their currently bound low-sensitivity profile data; no upload, script, or external resource capability is provided.",
+      "permissionHints": [],
+      "dataAccessHints": [],
+      "auditHints": [
+        "//   <zh-CN>W70：提交前再次校验权限。确认按钮的启用状态来自上一次渲染，可被绕过，不能作为授权依据；校验失败即拒绝并写授权失败审计。</zh-CN>",
+        "PortalOperationAudit.Record(",
+        "PortalOperationAuditEvents.AccessDenied,",
+        "PortalOperationAuditEvents.BusinessModuleCategory,",
+        "PortalOperationAuditEvents.EmployeeProfileConfirmationTargetType,",
+        "PortalOperationAuditEvents.EmployeeProfileConfirmed,"
+      ]
+    },
+    {
+      "directory": "EmployeeProfileCorrectionRequest",
+      "view": "EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx",
+      "hasEditPage": false,
+      "editPages": [],
+      "controlCount": 11,
+      "controls": [
+        {
+          "id": "DisplayNameLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "EmployeeCodeLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "FieldNameList",
+          "kind": "DropDownList"
+        },
+        {
+          "id": "MessageLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "OrganizationLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "PreferredNameLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "ProposedValueTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "RequestNoteTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "RequestPanel",
+          "kind": "Panel"
+        },
+        {
+          "id": "SubmitButton",
+          "kind": "Button"
+        },
+        {
+          "id": "WorkEmailLabel",
+          "kind": "Label"
+        }
+      ],
+      "validatorCount": 0,
+      "selfDescriptionZh": "P74.3 空态渲染器位于 ASPNET.StarterKit.Portal 命名空间，而 Web.config 只全局导入 Resources：标记层若引用该类型必须显式导入本命名空间，否则**运行期编译**报 CS0103（msbuild 构建不会校验 ASCX）。",
+      "selfDescriptionEn": "The P74.3 empty-state renderer lives in the ASPNET.StarterKit.Portal namespace while Web.config imports only Resources globally: markup that references that type must import this namespace explicitly, otherwise the **runtime compilation** of the ASCX reports CS0103 (an msbuild build does not validate ASCX files).",
+      "permissionHints": [],
+      "dataAccessHints": [],
+      "auditHints": [
+        "//   <en>Audit only the request id, employee id, and allowlisted field name; do not put the proposed value or note in the event text.</en>",
+        "//   <zh-CN>按白名单字段读取当前值，拒绝无变化请求，减少无意义的待办和审计记录。</zh-CN>",
+        "//   <zh-CN>服务失败消息由数据访问契约提供；失败时不写审计、不创建待办，也不清空用户输入。</zh-CN>",
+        "//   <zh-CN>审计记录只写请求编号、员工编号和白名单字段名，不把建议值或备注写入事件正文。</zh-CN>",
+        "//   <zh-CN>以下四项是当前允许更正的低敏字段；新增字段必须同时审查数据访问、审计和输出边界。</zh-CN>",
+        "//   <zh-CN>W69：提交前再次校验权限。按钮启用状态来自上一次渲染，可被绕过，不能作为授权依据；校验失败即拒绝并写授权失败审计。</zh-CN>",
+        "PortalOperationAudit.Record(",
+        "PortalOperationAuditEvents.AccessDenied,"
+      ]
+    },
+    {
+      "directory": "EnterpriseCapabilityWorkbench",
+      "view": "EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "hasEditPage": false,
+      "editPages": [],
+      "controlCount": 12,
+      "controls": [
+        {
+          "id": "AddParticipantCommentButton",
+          "kind": "Button"
+        },
+        {
+          "id": "DescriptionTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "DueUtcTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "ItemTypeList",
+          "kind": "DropDownList"
+        },
+        {
+          "id": "MessageLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "ParticipantCommentTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "PriorityList",
+          "kind": "DropDownList"
+        },
+        {
+          "id": "ResubmitButton",
+          "kind": "Button"
+        },
+        {
+          "id": "SubmitButton",
+          "kind": "Button"
+        },
+        {
+          "id": "SummaryTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "TitleTextBox",
+          "kind": "TextBox"
+        },
+        {
+          "id": "WorkbenchPanel",
+          "kind": "Panel"
+        }
+      ],
+      "validatorCount": 0,
+      "selfDescriptionZh": "P74.3 空态渲染器位于 ASPNET.StarterKit.Portal 命名空间，而 Web.config 只全局导入 Resources：标记层若引用该类型必须显式导入本命名空间，否则**运行期编译**报 CS0103（msbuild 构建不会校验 ASCX，只有在真实站点加载模块时才暴露）。",
+      "selfDescriptionEn": "The P74.3 empty-state renderer lives in the ASPNET.StarterKit.Portal namespace while Web.config imports only Resources globally: markup that references that type must import this namespace explicitly, otherwise the **runtime compilation** of the ASCX reports CS0103 (an msbuild build does not validate ASCX files; it only surfaces when a real site loads the module).",
+      "permissionHints": [],
+      "dataAccessHints": [],
+      "auditHints": [
+        "//   <en>Audit only successful results whose action key is explicitly resubmission to avoid duplicates or false reports.</en>",
+        "//   <en>Audit retains only traceable item, event, scope, and length metadata to reduce comment-body exposure.</en>",
+        "//   <zh-CN>领域事实成功后记录操作审计；后续待办投影失败不回滚已提交事项。</zh-CN>",
+        "//   <zh-CN>审计仅保留可追踪的事项、事件、可见范围和长度，降低正文泄露风险。</zh-CN>",
+        "//   <zh-CN>只审计成功且动作键明确为重提的结果，避免重复或误报。</zh-CN>",
+        "//   <zh-CN>重提动作成功后重新读取本人事项，再补建后台待办并记录动作审计。</zh-CN>",
+        "///     P22.4 首版只复用 P21 企业协同事项、待办和运营审计链路，提供普通用户提交与本人查看入口。",
+        "///   <zh-CN>记录评论成功事件的审计元数据，不写入评论正文。</zh-CN>"
+      ]
+    },
+    {
+      "directory": "ExpenseReimbursement",
+      "view": "ExpenseReimbursement/ExpenseReimbursement.ascx",
+      "hasEditPage": false,
+      "editPages": [],
+      "controlCount": 8,
+      "controls": [
+        {
+          "id": "btnSubmit",
+          "kind": "Button"
+        },
+        {
+          "id": "ddlCategory",
+          "kind": "DropDownList"
+        },
+        {
+          "id": "fileAttach",
+          "kind": "FileUpload"
+        },
+        {
+          "id": "litMessage",
+          "kind": "Literal"
+        },
+        {
+          "id": "pnlEmpty",
+          "kind": "Panel"
+        },
+        {
+          "id": "pnlMessage",
+          "kind": "Panel"
+        },
+        {
+          "id": "txtAmount",
+          "kind": "TextBox"
+        },
+        {
+          "id": "txtReason",
+          "kind": "TextBox"
+        }
+      ],
+      "validatorCount": 0,
+      "selfDescriptionZh": "C-anp-P20 业务模块：员工提交费用报销单并查看本人历史记录。低敏数据（费用类别、金额、事由、发票附件）， 不含脚本、外部资源或第三方引用；标记层不执行任何数据写入，提交与读取全部由 code-behind 负责。",
+      "selfDescriptionEn": "C-anp-P20 business module: employees submit expense reimbursement claims and review their own history. It handles low-sensitivity data (category, amount, reason, invoice attachment) with no script, external resource or third-party reference; the markup performs no data writes — submission and reads are entirely the code-behind's responsibility.",
+      "permissionHints": [],
+      "dataAccessHints": [],
+      "auditHints": [
+        "PortalOperationAudit.Record(",
+        "PortalOperationAuditEvents.BusinessModuleCategory,"
+      ]
+    },
+    {
+      "directory": "LeaveRequest",
+      "view": "LeaveRequest/LeaveRequest.ascx",
+      "hasEditPage": false,
+      "editPages": [],
+      "controlCount": 10,
+      "controls": [
+        {
+          "id": "btnSubmit",
+          "kind": "Button"
+        },
+        {
+          "id": "ddlLeaveType",
+          "kind": "DropDownList"
+        },
+        {
+          "id": "fileAttach",
+          "kind": "FileUpload"
+        },
+        {
+          "id": "litMessage",
+          "kind": "Literal"
+        },
+        {
+          "id": "pnlEmpty",
+          "kind": "Panel"
+        },
+        {
+          "id": "pnlMessage",
+          "kind": "Panel"
+        },
+        {
+          "id": "txtDays",
+          "kind": "TextBox"
+        },
+        {
+          "id": "txtEndDate",
+          "kind": "TextBox"
+        },
+        {
+          "id": "txtReason",
+          "kind": "TextBox"
+        },
+        {
+          "id": "txtStartDate",
+          "kind": "TextBox"
+        }
+      ],
+      "validatorCount": 0,
+      "selfDescriptionZh": "C-anp-P20 业务模块：员工提交请假申请并查看本人历史记录。低敏数据（假期类型、起止日期、天数、事由、附件）， 不含脚本、外部资源或第三方引用；标记层不执行任何数据写入，提交与读取全部由 code-behind 负责。",
+      "selfDescriptionEn": "C-anp-P20 business module: employees submit leave requests and review their own history. It handles low-sensitivity data (leave type, start/end dates, day count, reason, attachment) with no script, external resource or third-party reference; the markup performs no data writes — submission and reads are entirely the code-behind's responsibility.",
+      "permissionHints": [],
+      "dataAccessHints": [],
+      "auditHints": [
+        "PortalOperationAudit.Record(",
+        "PortalOperationAuditEvents.BusinessModuleCategory,"
+      ]
+    },
+    {
+      "directory": "ModuleProbe",
+      "view": "ModuleProbe/ModuleProbe.ascx",
+      "hasEditPage": false,
+      "editPages": [],
+      "controlCount": 5,
+      "controls": [
+        {
+          "id": "ModuleLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "PackageLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "PlacementLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "RenderedUtcLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "ThemeScopeLabel",
+          "kind": "Label"
+        }
+      ],
+      "validatorCount": 0,
+      "selfDescriptionZh": "P3.2 只读模块包验证样例：不写入业务数据，不提供脚本、上传或外链入口。",
+      "selfDescriptionEn": "P3.2 is a read-only deployment-package verification sample; it writes no business data and exposes no script, upload, or external-link entry.",
+      "permissionHints": [],
+      "dataAccessHints": [],
+      "auditHints": []
+    },
+    {
+      "directory": "MyWorkItems",
+      "view": "MyWorkItems/MyWorkItems.ascx",
+      "hasEditPage": false,
+      "editPages": [],
+      "controlCount": 12,
+      "controls": [
+        {
+          "id": "AllFilterButton",
+          "kind": "LinkButton"
+        },
+        {
+          "id": "ContentPanel",
+          "kind": "Panel"
+        },
+        {
+          "id": "DueLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "EmptyLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "EmptyPanel",
+          "kind": "Panel"
+        },
+        {
+          "id": "FailureLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "FailurePanel",
+          "kind": "Panel"
+        },
+        {
+          "id": "ItemTitleLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "KindLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "OverdueFilterButton",
+          "kind": "LinkButton"
+        },
+        {
+          "id": "OverdueLabel",
+          "kind": "Label"
+        },
+        {
+          "id": "UnavailableLabel",
+          "kind": "Label"
+        }
+      ],
+      "validatorCount": 0,
+      "selfDescriptionZh": "W67 前台「我的待办」聚合入口：只呈现当前用户本人或其持有角色键所指派的未完成待办，不提供就地办理，也不暴露业务正文。",
+      "selfDescriptionEn": "W67 front-end \"My To-Do Items\" aggregation entry: it lists only unfinished work items assigned to the current user or to role keys the user holds, offers no inline processing, and exposes no domain content.",
+      "permissionHints": [
+        "public bool IsInRoles(string accessRoles)",
+        "return PortalSecurity.IsInRoles(accessRoles);"
+      ],
+      "dataAccessHints": [],
+      "auditHints": [
+        "//   <zh-CN>绑定前重置解析统计并创建反查端口：行绑定期间累加，随后一次性进入审计，避免每行写一条审计记录。</zh-CN>",
+        "//   <zh-CN>查看与筛选只记录条数、筛选态、解析成功/降级计数与降级原因分布；标题、业务正文与地址一律不写，避免审计承载业务数据或可被复用的跳转细节。目标解析统计是本模块\"点击跳转待补审计\"的落点：普通超链接的点击本身对服务器不可见，故以**本次呈现**解析到多少可达目标作为替代证据，并在文档中如实说明其边界。</zh-CN>",
+        "//   <zh-CN>权限门禁失败即拒绝并写审计：这是 W62 补齐的\"授权失败必须可审计\"能力在本模块的落点。</zh-CN>",
+        "///   <zh-CN>把降级原因计数汇总为稳定的非敏感文本；无降级时返回 <c>none</c>。键按序排序，使同一状态的审计文本可复现、可比较。</zh-CN>",
+        "///   <zh-CN>页面加载入口：先做认证与权限门禁，再绑定列表；门禁不通过时整块隐藏并留下授权失败审计。</zh-CN>",
+        "/// <summary><lang><zh-CN>降级原因计数，键为解析器原因码；用于审计正文的非敏感统计。</zh-CN><en>Degradation reason counts keyed by resolver reason code, used for the non-sensitive statistics in the audit text.</en></lang></summary>",
+        "/// <summary><lang><zh-CN>最近一次绑定中已解析出可导航目标的行数；仅用于本次查看的审计统计，不跨请求保留。</zh-CN><en>Rows whose navigable target resolved during the latest bind; used only for this view's audit counters and never kept across requests.</en></lang></summary>",
+        "PortalOperationAudit.Record("
+      ]
+    }
+  ]
+}
