@@ -242,39 +242,81 @@ foreach ($entry in $plan) {
 }
 
 # <lang>
-#   <zh-CN>顶层入口页由脚本生成：按半边分组、每行给出每种语言的链接。**中文标签与英文标签都由脚本写**，
-#     与本站其余页面一样是双语入口；半边自身只有英文时，该行只出英文链接（与产物的 locale 声明一致）。</zh-CN>
-#   <en>The top-level entry page is generated here: grouped by half, one row per declared locale. **Both the Chinese and
-#     English labels are written by the script**, matching the bilingual entry convention used elsewhere on this site;
-#     when a half declares English only, that row shows the English link only — consistent with the artifact's locale
-#     declaration.</en>
+#   <zh-CN>**三个入口页，而不是一个双语页**（`W-anp-P203` 调整）：`index.html`（双语默认）、
+#     `index.zh-CN.html`（中文）、`index.en.html`（英文）。为什么改：侧边导航的外链是**按语言过滤**的
+#     （2026-10-22 刚修的那个机制），中文导航点中文页、英文导航点英文页，读者落地页与当前语言一致；
+#     若只有一个双语页，两种语言的导航都落在同一页上，语言过滤就白做了。
+#     语言页对"只有英文的半边"**如实标注"仅英文"**，不藏也不装中文。</zh-CN>
+#   <en>**Three entry pages rather than one bilingual page** (`W-anp-P203` adjustment): `index.html` (bilingual default),
+#     `index.zh-CN.html` (Chinese) and `index.en.html` (English). Why: the side-navigation external links are
+#     **filtered by language** (the mechanism fixed on 2026-10-22), so the Chinese navigation should land on the Chinese
+#     page and the English navigation on the English page; with a single bilingual page both would land on the same page
+#     and the language filtering would be undone. A language page **honestly marks an English-only half as "English
+#     only"** — neither hidden nor faked as Chinese.</en>
 # </lang>
-$rows = New-Object 'System.Collections.Generic.List[string]'
-foreach ($entry in ($plan | Sort-Object Half)) {
-    $links = @()
-    foreach ($locale in $entry.Locales) {
-        $href = ($entry.Half + '/' + $locale + '/')
-        if ($locale -eq 'zh-CN') { $links += ('<a href="' + $href + '">中文</a>') }
-        elseif ($locale -eq 'en') { $links += ('<a href="' + $href + '">English</a>') }
-        else { $links += ('<a href="' + $href + '">' + $locale + '</a>') }
+function New-DotNetDocEntryHtml {
+    param([string] $PageLocale)   # 'zh-CN' | 'en' | '' = bilingual
+    $isBilingual = ($PageLocale -eq '')
+    $rows = New-Object 'System.Collections.Generic.List[string]'
+    foreach ($entry in ($plan | Sort-Object Half)) {
+        $links = @()
+        if ($isBilingual) {
+            foreach ($locale in $entry.Locales) {
+                $href = ($entry.Half + '/' + $locale + '/')
+                if ($locale -eq 'zh-CN') { $links += ('<a href="' + $href + '">中文</a>') }
+                elseif ($locale -eq 'en') { $links += ('<a href="' + $href + '">English</a>') }
+                else { $links += ('<a href="' + $href + '">' + $locale + '</a>') }
+            }
+        }
+        else {
+            $target = @($entry.Locales | Where-Object { $_ -eq $PageLocale } | Select-Object -First 1)
+            if ($target.Count -gt 0) {
+                $href = ($entry.Half + '/' + $target[0] + '/')
+                $links += ('<a href="' + $href + '">' + $(if ($PageLocale -eq 'zh-CN') { '中文' } else { 'English' }) + '</a>')
+            }
+            else {
+                $fallback = @($entry.Locales | Where-Object { $_ -eq 'en' } | Select-Object -First 1)
+                if ($fallback.Count -gt 0) {
+                    $href = ($entry.Half + '/' + $fallback[0] + '/')
+                    $links += ('<a href="' + $href + '">' + $(if ($PageLocale -eq 'zh-CN') { '仅英文' } else { 'English only' }) + '</a>')
+                }
+            }
+        }
+        $rows.Add('    <tr><td>' + $entry.Half + '</td><td>' + ($links -join ' · ') + '</td></tr>')
     }
-    $rows.Add('    <tr><td>' + $entry.Half + '</td><td>' + ($links -join ' · ') + '</td></tr>')
-}
-$entryHtml = @"
+    if ($isBilingual) {
+        $lang = 'zh-CN'; $title = '代码文档（DotNetDoc）· Code documentation (DotNetDoc)'
+        $h1 = '代码文档（DotNetDoc）'
+        $intro = '由源码 XML 文档注释生成；本页为各半边的语言入口。<br>Generated from the source XML documentation comments; this page lists every half and its languages.'
+        $head = '半边 / Half'; $headLang = '语言 / Languages'
+    }
+    elseif ($PageLocale -eq 'zh-CN') {
+        $lang = 'zh-CN'; $title = '代码文档（DotNetDoc）· 中文'
+        $h1 = '代码文档（DotNetDoc）'
+        $intro = '由源码 XML 文档注释生成；本页只列中文入口（仅英文的半边如实标注）。'
+        $head = '半边'; $headLang = '语言'
+    }
+    else {
+        $lang = 'en'; $title = 'Code documentation (DotNetDoc) · English'
+        $h1 = 'Code documentation (DotNetDoc)'
+        $intro = 'Generated from the source XML documentation comments; this page lists the English entries only.'
+        $head = 'Half'; $headLang = 'Languages'
+    }
+    return @"
 <!doctype html>
-<html lang="zh-CN">
+<html lang="$lang">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>代码文档（DotNetDoc）· Code documentation (DotNetDoc)</title>
+<title>$title</title>
 <link rel="stylesheet" href="hia-default.css">
 </head>
 <body>
 <main>
-<h1>代码文档（DotNetDoc）</h1>
-<p>由源码 XML 文档注释生成；本页为各半边的语言入口。<br>Generated from the source XML documentation comments; this page lists every half and its languages.</p>
+<h1>$h1</h1>
+<p>$intro</p>
 <table>
-<thead><tr><th>半边 / Half</th><th>语言 / Languages</th></tr></thead>
+<thead><tr><th>$head</th><th>$headLang</th></tr></thead>
 <tbody>
 $($rows -join "`n")
 </tbody>
@@ -283,7 +325,10 @@ $($rows -join "`n")
 </body>
 </html>
 "@
-[System.IO.File]::WriteAllText((Join-Path $publishRoot 'index.html'), $entryHtml, [System.Text.UTF8Encoding]::new($false))
+}
+[System.IO.File]::WriteAllText((Join-Path $publishRoot 'index.html'), (New-DotNetDocEntryHtml -PageLocale ''), [System.Text.UTF8Encoding]::new($false))
+[System.IO.File]::WriteAllText((Join-Path $publishRoot 'index.zh-CN.html'), (New-DotNetDocEntryHtml -PageLocale 'zh-CN'), [System.Text.UTF8Encoding]::new($false))
+[System.IO.File]::WriteAllText((Join-Path $publishRoot 'index.en.html'), (New-DotNetDocEntryHtml -PageLocale 'en'), [System.Text.UTF8Encoding]::new($false))
 
 # <lang>
 #   <zh-CN>入口页自带一份主题样式（从任一渲染产物拷贝），保证不依赖某个半边目录是否存在。</zh-CN>

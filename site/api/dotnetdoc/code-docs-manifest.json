@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generator": "@hia-doc/dotnetdoc-runner（hia-dotnetdoc）+ @hia-doc/renderer-html（hia docs build），由 dev/scripts/Publish-PortalDotNetDoc.ps1 编排",
-  "generatedUtc": "2026-10-22T14:33:20Z",
+  "generatedUtc": "2026-10-22T14:59:47Z",
   "publishedBy": "HIA-ASPNETPortal 文档发布流程（Publish-PortalDotNetDoc.ps1）",
   "localePolicy": "每个半边按其在 HIA 工件中声明的 locales 渲染；未声明 zh-CN 的半边（surface、project）为结构描述，只有英文。",
   "sourceFingerprint": "6e89c880c32f7891b0da1ee6ef279b0e03640a4cc99a12b2eb073e6d48df7781",

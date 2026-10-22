@@ -69,12 +69,29 @@ heading_anchors: true
 #     `代码文档（JSDoc）· 中文`, an English page only `Code documentation (JSDoc) · English`. This is the same mechanism
 #     (`nav_lang`) that already filters the page tree in that file; the external links were the half that was missed.</en>
 # </lang>
+# <lang>
+#   <zh-CN>**DotNetDoc 半边同样两条、同样按 `lang` 过滤**（`C-anp-P36` / `W-anp-P203` 补）。它指向
+#     `index.zh-CN.html` / `index.en.html` 这两个**语言专属入口页**，而不是共用一个双语页——
+#     否则中文导航与英文导航会落在同一页上，语言过滤就白做了。语言页对"只有英文的半边"
+#     （页面表层、工程发现）**如实标注"仅英文"**，不藏也不装中文。</zh-CN>
+#   <en>**The DotNetDoc half likewise has two entries, likewise filtered by `lang`** (added by `C-anp-P36` /
+#     `W-anp-P203`). They point at `index.zh-CN.html` / `index.en.html`, the **language-specific entry pages**, rather
+#     than sharing one bilingual page — otherwise both the Chinese and English navigation would land on the same page and
+#     the language filtering would be undone. A language page **honestly marks an English-only half** (surface,
+#     project discovery) as "English only" — neither hidden nor faked as Chinese.</en>
+# </lang>
 nav_external_links:
   - title: 代码文档（JSDoc）· 中文
     url: /api/jsdoc/index.zh-CN.html
     lang: zh-CN
   - title: Code documentation (JSDoc) · English
     url: /api/jsdoc/index.en.html
+    lang: en
+  - title: 代码文档（DotNetDoc）· 中文
+    url: /api/dotnetdoc/index.zh-CN.html
+    lang: zh-CN
+  - title: Code documentation (DotNetDoc) · English
+    url: /api/dotnetdoc/index.en.html
     lang: en
 
 # <lang>
