@@ -42,8 +42,16 @@
 - `modules/quick-links.md`：**快速链接**详细使用说明——与链接模块共用数据与编辑页、导航策略对不合规地址的抑制、权限模型、存储与审计、常见问题。
 - `modules/html-module.md`：**HTML 文本模块**详细使用说明——字段表、零必填、原始 HTML 窄权限与不做净化的安全边界、存储与审计、常见问题。
 - `modules/xml-module.md`：**XML / XSL 模块**详细使用说明——字段表、路径合规校验与运行期中性降级、只存虚拟路径不做上传、存储与审计、常见问题。
-- `modules/index.md`：**模块详细使用说明的索引**——11 个模块各一页的详细说明（用途与前置 / 操作步骤 / 字段表 / 必填与校验 / 存储与审计 / 权限 / 常见问题 / 边界与不做），含三条横向事实（只有登录模块写运营审计、各模块校验强度差异极大、部署状态不同）。
+- `modules/index.md`：**模块详细使用说明的索引**——19 个模块各一页的详细说明（用途与前置 / 操作步骤 / 字段表 / 必填与校验 / 存储与审计 / 权限 / 常见问题 / 边界与不做），含三条横向事实（只有登录模块写运营审计、各模块校验强度差异极大、部署状态不同）。
 - `modules/signin.md`：**登录模块**详细使用说明——视图控件与提交保护（一次性 RSA 公钥加密）、校验流程、本仓**唯一写运营审计**的路径、`ContentRawHtmlEdit` 之外的权限模型，以及**无编辑页 / 0 实例 / 仅源码级说明**的证据边界。
+- `modules/business-application-request.md`：**业务申请模块**详细使用说明——**抽象**申请骨架（不含任何具体业务字段）、四个输入控件与长度上限、**标记层无必填校验器**（提交时由代码判定）、落表与 `BusinessApplicationSubmitted` 审计。
+- `modules/employee-profile-confirm.md`：**员工资料确认模块**详细使用说明——**只读确认**自己绑定的低敏资料（无输入控件、无编辑页）、确认动作写 `EmployeeProfileConfirmed`、无权限写 `AccessDenied`、不写入业务数据。
+- `modules/employee-profile-correction-request.md`：**员工资料更正申请模块**详细使用说明——提交**更正申请**而非直接改资料、可更正字段受下拉框限制、拟改值的合法性按目标字段在代码侧判定、`EmployeeProfileCorrectionRequested` 审计。
+- `modules/enterprise-capability-workbench.md`：**企业能力工作台模块**详细使用说明——协作条目的提交 / 重新提交 / 参与者评论三种动作、七个输入控件与 UTC 截止时间格式、`CollaborationItemSubmitted` / `Resubmitted` / `CommentAdded` 审计、`.GetFallbackItems(` 降级路径属既定行为。
+- `modules/expense-reimbursement.md`：**费用报销模块**详细使用说明——报销单字段与可选附件、落表 `PortalBiz_ExpenseReimbursements` 并写入「我的待办」、金额格式由代码侧判定（标记层不标红）。
+- `modules/leave-request.md`：**请假申请模块**详细使用说明——假别 / 起止日期 / 天数 / 事由与可选证明、落表 `PortalBiz_LeaveRequests` 并写入「我的待办」、日期区间与天数在标记层无校验器（提交后才拒）。
+- `modules/module-probe.md`：**模块探针模块**详细使用说明——**只读验证样例、不是业务办理入口**：呈现模块 / 包 / 位置 / 渲染时刻 / 主题作用域五项只读事实，**不写入任何数据、不写审计、无输入控件与提交动作**。
+- `modules/my-work-items.md`：**我的待办模块**详细使用说明——待办聚合入口（本人或本人持有角色键所指派的未完成项）、**不提供就地办理**属既定设计、查看动作写 `WorkItemsViewed` 审计、无输入控件。
 - `code-documentation.md`：**代码文档体系**——由 HIA-Documentation-Sys 从源码注释生成的 API 级文档（JSDoc 半边已发布中英双语页面，DotNetDoc 半边为中间产物）、刷新方式与依赖安装注意事项。
 
 ## 使用说明

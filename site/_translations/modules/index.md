@@ -26,9 +26,26 @@ This directory holds a dedicated operating page for **every content module** of 
 | [XmlModule]({{ site.baseurl }}/modules/xml-module/) | XmlModule | Renders in-site XML; path compliance checks and neutral degradation | 2 | 0 | module settings (`xmlsrc` / `xslsrc`) |
 | [Signin]({{ site.baseurl }}/modules/signin/) | Signin | Sign-in form; **the only module writing operational audit**, **no edit page**, **0 instances** | 6 view controls | — | `UsersDB.SignIn` |
 
+## Pages for the newer (directory-style) modules
+
+These modules live at `src/Portal/DesktopModules/<module>/<module>.ascx` and have **no standalone `Edit*.aspx`** — the form and the list sit in the same `ascx`. The field tables on these pages are therefore taken straight from that `ascx` markup, and **the gate points `edit` at the same `ascx`** so that "the field set covers the source controls" and "the required count matches the source" are real assertions rather than skipped ones (leaving it empty would skip both, and then nobody checks the field table).
+
+| Page | Module | One line | Input controls | Writes | Audit event |
+| --- | --- | --- | --- | --- | --- |
+| [Business Application]({{ site.baseurl }}/modules/business-application-request/) | BusinessApplicationRequest | An **abstract** application skeleton with no concrete business fields | 4 | business record + work item | `BusinessApplicationSubmitted` |
+| [Employee Profile Confirmation]({{ site.baseurl }}/modules/employee-profile-confirm/) | EmployeeProfileConfirm | **Read-only confirmation** of your own bound low-sensitivity profile; nothing editable | 0 | no business data | `EmployeeProfileConfirmed` |
+| [Employee Profile Correction Request]({{ site.baseurl }}/modules/employee-profile-correction-request/) | EmployeeProfileCorrectionRequest | Raises a **correction request**; does not change the profile directly | 3 | the request (profile change happens later) | `EmployeeProfileCorrectionRequested` |
+| [Enterprise Capability Workbench]({{ site.baseurl }}/modules/enterprise-capability-workbench/) | EnterpriseCapabilityWorkbench | Collaboration items: submit / resubmit / comment | 7 | collaboration items | `CollaborationItemSubmitted` / `Resubmitted` / `CommentAdded` |
+| [Expense Reimbursement]({{ site.baseurl }}/modules/expense-reimbursement/) | ExpenseReimbursement | Expense claim, document attachable | 3 (+attachment) | `PortalBiz_ExpenseReimbursements` + work item | `BusinessModuleCategory` |
+| [Leave Request]({{ site.baseurl }}/modules/leave-request/) | LeaveRequest | Leave request, evidence attachable | 5 (+attachment) | `PortalBiz_LeaveRequests` + work item | `BusinessModuleCategory` |
+| [Module Probe]({{ site.baseurl }}/modules/module-probe/) | ModuleProbe | A **read-only verification sample**, not a business entry | 0 | **writes nothing** | **writes no audit** |
+| [My Work Items]({{ site.baseurl }}/modules/my-work-items/) | MyWorkItems | Work-item aggregation entry, **no in-place handling** | 0 | nothing; read-only aggregation | `WorkItemsViewed` |
+
+**The single most important difference from the classic modules**: these have **no required validators in markup** (the `RequiredFieldValidator` count is 0 everywhere) — required-ness is **decided in code at submit time**, so **the page never turns red and a wrong value is rejected only after you submit**. The date range in `LeaveRequest` and the amount in `ExpenseReimbursement` are the sharpest cases: markup looks like "anything goes", and only the server says no.
+
 ## Three cross-cutting facts to know before reading
 
-1. **Audit surface**: of these eleven modules, **only Signin writes operational audit** (`SignInFailed` / `LegacyCredentialUpgraded` / `CredentialCostUpgraded`); the other ten content edit paths **write none**. If you need a traceable record of who changed what, it must be arranged outside the portal.
+1. **Audit surface**: **the classic content modules and the newer business modules are opposites** — of the eleven classic content modules, **only Signin writes operational audit** (`SignInFailed` / `LegacyCredentialUpgraded` / `CredentialCostUpgraded`) and the other ten content edit paths **write none**; whereas the newer business modules (business application / employee-profile confirmation / employee-profile correction request / enterprise-capability workbench / my work items) **all write operational audit**, with events listed on their own pages. **The only one that writes neither business data nor audit is the module probe** (a read-only verification sample with no business action). For the classic content modules, a traceable record of who changed what must be arranged outside the portal.
 2. **Validation varies enormously**: Events requires all four fields, Discussion requires none, and Contacts performs **no format validation at all** beyond the name (e-mail and phone are stored exactly as typed). **Do not assume that silence means the value is correct.**
 3. **Deployment differs**: Links is in use **on a test tab only** (no production tab yet); Signin has **0 instances in the development database** and therefore **source-level description only, with no runtime evidence**; HtmlModule has 12 instances and XmlModule 1. Deployment readings on each page are a **delivery-time snapshot taken on 2026-10-21** — re-check after adding or migrating tabs.
 

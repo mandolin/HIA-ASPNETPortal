@@ -3,7 +3,7 @@
   "purpose": "模块独立文档页的登记表（C-anp-P33 / W-anp-P184）。门禁 Test-PortalModuleDocPages.ps1 据此判断：哪些模块的页面**已交付**（必须存在且内容合规），哪些仍在批次中（软指标清单）。字段与必填项**不写在这里**——门禁从源码现取，避免登记册与源码漂移。",
   "pagesRoot": "docs/modules",
   "mode": "hard",
-  "modeNote": "已于 2026-10-20 由 W-anp-P187 切换为 hard：全部 11 个模块均已交付，M6 会持续核对 mode 必须为 hard（防止「已交付」这个状态失去约束力）。",
+  "modeNote": "已于 2026-10-20 由 W-anp-P187 切换为 hard：全部 19 个模块均已交付（11 个经典模块 + 8 个较新模块，后者由 C-anp-P37 / W-anp-P207 补齐），M6 会持续核对 mode 必须为 hard（防止「已交付」这个状态失去约束力）。",
   "requiredSections": [
     "用途与前置",
     "操作步骤",
@@ -151,6 +151,134 @@
           "id": "signin-no-edit-page",
           "note": "无编辑页，须在页面中写明",
           "pattern": "无编辑页"
+        }
+      ]
+    },
+    {
+      "name": "业务申请",
+      "en": "BusinessApplicationRequest",
+      "slug": "business-application-request",
+      "batch": 4,
+      "status": "delivered",
+      "view": "BusinessApplicationRequest/BusinessApplicationRequest.ascx",
+      "edit": "BusinessApplicationRequest/BusinessApplicationRequest.ascx",
+      "boundary": [
+        {
+          "id": "",
+          "note": "",
+          "pattern": ""
+        }
+      ]
+    },
+    {
+      "name": "员工资料确认",
+      "en": "EmployeeProfileConfirm",
+      "slug": "employee-profile-confirm",
+      "batch": 4,
+      "status": "delivered",
+      "view": "EmployeeProfileConfirm/EmployeeProfileConfirm.ascx",
+      "edit": "EmployeeProfileConfirm/EmployeeProfileConfirm.ascx",
+      "boundary": [
+        {
+          "id": "epc-no-edit",
+          "note": "「员工资料确认」不提供任何编辑能力（无输入控件、无编辑页），须在页面中写明",
+          "pattern": "不提供任何编辑能力"
+        }
+      ]
+    },
+    {
+      "name": "员工资料更正申请",
+      "en": "EmployeeProfileCorrectionRequest",
+      "slug": "employee-profile-correction-request",
+      "batch": 4,
+      "status": "delivered",
+      "view": "EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx",
+      "edit": "EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx",
+      "boundary": [
+        {
+          "id": "",
+          "note": "",
+          "pattern": ""
+        }
+      ]
+    },
+    {
+      "name": "企业能力工作台",
+      "en": "EnterpriseCapabilityWorkbench",
+      "slug": "enterprise-capability-workbench",
+      "batch": 4,
+      "status": "delivered",
+      "view": "EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "edit": "EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx",
+      "boundary": [
+        {
+          "id": "",
+          "note": "",
+          "pattern": ""
+        }
+      ]
+    },
+    {
+      "name": "费用报销",
+      "en": "ExpenseReimbursement",
+      "slug": "expense-reimbursement",
+      "batch": 4,
+      "status": "delivered",
+      "view": "ExpenseReimbursement/ExpenseReimbursement.ascx",
+      "edit": "ExpenseReimbursement/ExpenseReimbursement.ascx",
+      "boundary": [
+        {
+          "id": "",
+          "note": "",
+          "pattern": ""
+        }
+      ]
+    },
+    {
+      "name": "请假申请",
+      "en": "LeaveRequest",
+      "slug": "leave-request",
+      "batch": 4,
+      "status": "delivered",
+      "view": "LeaveRequest/LeaveRequest.ascx",
+      "edit": "LeaveRequest/LeaveRequest.ascx",
+      "boundary": [
+        {
+          "id": "",
+          "note": "",
+          "pattern": ""
+        }
+      ]
+    },
+    {
+      "name": "模块探针",
+      "en": "ModuleProbe",
+      "slug": "module-probe",
+      "batch": 4,
+      "status": "delivered",
+      "view": "ModuleProbe/ModuleProbe.ascx",
+      "edit": "ModuleProbe/ModuleProbe.ascx",
+      "boundary": [
+        {
+          "id": "moduleprobe-readonly-sample",
+          "note": "「模块探针」是只读验证样例、不是业务办理入口，须在页面中写明",
+          "pattern": "只读验证样例"
+        }
+      ]
+    },
+    {
+      "name": "我的待办",
+      "en": "MyWorkItems",
+      "slug": "my-work-items",
+      "batch": 4,
+      "status": "delivered",
+      "view": "MyWorkItems/MyWorkItems.ascx",
+      "edit": "MyWorkItems/MyWorkItems.ascx",
+      "boundary": [
+        {
+          "id": "myworkitems-no-inline-handling",
+          "note": "「我的待办」不提供就地办理（设计如此，不是缺陷），须在页面中写明",
+          "pattern": "不提供就地办理"
         }
       ]
     }
