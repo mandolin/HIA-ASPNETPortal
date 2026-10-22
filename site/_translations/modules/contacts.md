@@ -18,7 +18,7 @@ Maintains a **directory of people**: name, role, e-mail and two contact details.
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=2 "员工联系信息"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=2 "员工联系信息" (Employee contact information)**.
 3. This module only manages a **directory** — it does not manage accounts, permissions or the organisation structure.
 
 ## Operating steps

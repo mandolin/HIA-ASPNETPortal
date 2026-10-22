@@ -19,7 +19,7 @@ Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
 2. The module must be mounted on a tab.
-3. **Current deployment status (must be known)**: this module is deployed **on a test tab only** — **TabId=1004 "测试链接模块"** — i.e. **only** a test tab uses it and **no production tab uses it yet**. Enabling it on a production tab is a new deployment, after which this section must be re-checked.
+3. **Current deployment status (must be known)**: this module is deployed **on a test tab only** — **TabId=1004 "测试链接模块" (test links module)** — i.e. **only** a test tab uses it and **no production tab uses it yet**. Enabling it on a production tab is a new deployment, after which this section must be re-checked.
 
 ## Operating steps
 

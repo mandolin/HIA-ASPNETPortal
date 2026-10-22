@@ -17,7 +17,7 @@ Renders **XML data deployed inside the site**, optionally transformed through XS
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request). The narrow `ContentRawHtmlEdit` permission of the HTML module is **not** required.
-2. The module must be mounted on a tab. Current deployment (measured in the development database): **1 instance** — home page "热门动态" (`ModuleId=6`, `xmlsrc=~/data/sales.xml`, `xslsrc=~/data/sales.xsl`).
+2. The module must be mounted on a tab. Current deployment (measured in the development database): **1 instance** — home page "热门动态" (Trending news) (`ModuleId=6`, `xmlsrc=~/data/sales.xml`, `xslsrc=~/data/sales.xsl`).
 3. The XML and XSL files must **already exist inside the application's trusted deployment directory** (for example `~/Data/`). **This module offers no upload and no online editing.**
 
 ## Operating steps
@@ -79,4 +79,4 @@ Control ids, types and lengths are taken from the `EditXml.aspx` markup — **no
 - Instance count (1) and its `xmlsrc` / `xslsrc` values are a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [ImageModule]({{ site.baseurl }}/modules/image-module/): both store configuration in **module settings rather than a table of their own**; the difference is that here the settings are **virtual paths of trusted deployment resources** with **save-time path compliance checks and runtime degradation**, whereas the image module's settings are plain text addresses and sizes with **no validation at all**.
 
-<!-- build-stamp: 4F3FC85074F0 -->
+<!-- build-stamp: 31C18E9E0EF7 -->

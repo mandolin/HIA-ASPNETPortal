@@ -17,7 +17,7 @@ A **threaded discussion area**: each thread can carry replies, and replies can c
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=4 "TradeCraft 技巧与装备" and "实战手册"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=4 "TradeCraft 技巧与装备" (TradeCraft tips and gear) and "实战手册" (Field manual)**.
 3. The detail page locates an item through **query parameters**: `DiscussDetails.aspx?ItemID=<id>&mid=<moduleId>`. **Both parameters are required** — opening the page without them targets no item.
 
 ## Operating steps
@@ -79,4 +79,4 @@ Control ids, types and lengths are taken from the `DiscussDetails.aspx` markup �
 - Deployment tab (TabId=4) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [Announcements]({{ site.baseurl }}/modules/announcements/) and [Events]({{ site.baseurl }}/modules/events/): Discussion is the **only module in this batch with no required field** and the **only one with no expiry** — it organises content by hierarchy and paging, not by filtering on a validity date.
 
-<!-- build-stamp: AA343FDD7CFF -->
+<!-- build-stamp: 2F0AFD163785 -->

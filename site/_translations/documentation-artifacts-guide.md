@@ -89,6 +89,38 @@ If versioned documentation ever needs to be published, ownership, licence, clean
 boundary and rollback plan must be defined first, and this guide, the public index and the gates must be updated.
 
 
+## Runtime screenshot baseline
+
+Runtime screenshots have moved from a long-registered gap to a **reproducible artifact** — a screenshot pasted once by
+hand inevitably rots over time and drifts away from the source.
+
+The convention shares its origin with the existing theme screenshot tool (`Capture-PortalThemeScreenshots.ps1`) rather
+than starting a second one:
+
+| Item | Rule |
+| --- | --- |
+| Viewport | 1440 × 1000, `deviceScaleFactor: 1`, locale `zh-CN` |
+| Capture | After signing in as an administrator, capture each registered target one by one, **viewport only** (`fullPage: false`) — a fixed viewport is the precondition for reproducibility; full-page screenshots change with content height and are not comparable |
+| Naming | `p151-<area>-<target>-zh-CN-1440x1000.png` |
+| Coverage | Business pages (front-end portal tabs) + admin pages (`/Admin/*.aspx`); targets are registered in the script's `TARGETS`, default-deny |
+| Validation | Landing on a generic error page / file < 1 KB / navigation failure = that target failed; no broken image is produced silently |
+| Artifacts | Screenshots → the **internal evidence directory** (`operations-runbook.md`: public delivery cites redacted summaries only); manifest → `screenshot-manifest.json` in the same directory (**committed**, with sha256 / byte count / viewport / locale / target URL / capture time). Exact paths live in the capture script and in `operations-runbook.md` |
+
+Reproduce (from the repository root):
+
+```powershell
+$env:PORTAL_PLAYWRIGHT_MODULE = (Resolve-Path 'temp\node_modules\playwright').Path
+& $node 'dev\scripts\Capture-PortalRuntimeScreenshots.mjs' # on demand (not a gate)
+& 'dev\scripts\Test-PortalRuntimeScreenshotBaseline.ps1' # L0 gate: checks the spec against the manifest
+```
+
+Boundaries: screenshots **do not enter the public documentation or the root repository** (`operations-runbook.md`:
+public delivery cites redacted summaries only and never puts internal evidence or production screenshots into the root
+repository); the gate proves only that "the spec is fixed, targets and manifest agree, and the images are non-empty" —
+it does **not** prove that the screenshot content matches the page semantics (that is human review), and it does
+**not** require pixel equality across machines (font / rendering / data-state differences are inherent; hash
+differences are recorded as a soft metric only).
+
 ## Local verification order
 
 1. Run `portal: verify public documentation` to check public entry points, relative links, privacy and generated-directory

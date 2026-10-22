@@ -17,7 +17,7 @@ Publishes **activity information** including time and place. Like Announcements,
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=1 "近期活动"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=1 "近期活动" (Upcoming events)**.
 3. There is **no "never expires" and no scheduled-publishing switch** — long-term display is only possible by adjusting `ExpireField`.
 
 ## Operating steps
@@ -76,4 +76,4 @@ Control ids, types and lengths are taken from the `EditEvents.aspx` markup — *
 - Deployment tab (TabId=1) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [Announcements]({{ site.baseurl }}/modules/announcements/): both filter by expiry and share the date comparison check, but Events has **one extra where-and-when field** and **all four fields are required**, whereas Announcements requires three and carries two optional links.
 
-<!-- build-stamp: 6EF99956700C -->
+<!-- build-stamp: 4768FECCD4EC -->

@@ -58,6 +58,17 @@ Not in `docs/`; lives in source node/flow comments.
 - `documentation-artifacts-guide.md` — documentation artefacts guide
 - `testing-checklist.md` — testing checklist
 
+### 4. Developers and contributors
+
+- `dev-guide.md` — general development guide
+- `module-development-guide.md` — module development guide
+- `frontend-asset-guide.md` — front-end asset guide
+- `theme-package-guide.md` — theme package guide
+- `theme-semantic-variables.md` — theme semantic variable matrix (7 themes × **14 variables**, purpose quick reference, usage rules)
+- `theme-module-contract.md` — module appearance contract (division of labour between layers, appearance class families, fallback value meaning and differences)
+- `documentation-artifacts-guide.md` — documentation artifacts guide
+- `testing-checklist.md` — testing checklist
+
 ### 5. Operations, deployment, security
 
 - `deployment-checklist.md` — deployment checklist
@@ -87,4 +98,4 @@ Not in `docs/`; lives in source node/flow comments.
  correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)
 
-<!-- build-stamp: 825D782C2D8A -->
+<!-- build-stamp: 67C4002813D5 -->

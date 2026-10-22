@@ -18,7 +18,7 @@ Publishes **activity information** including time and place. Like Announcements,
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=1 "近期活动"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=1 "近期活动" (Upcoming events)**.
 3. There is **no "never expires" and no scheduled-publishing switch** — long-term display is only possible by adjusting `ExpireField`.
 
 ## Operating steps

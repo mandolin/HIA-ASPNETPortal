@@ -17,7 +17,7 @@ Presents frequently used entry points as a **compact link group**. It **shares o
 Prerequisites:
 
 1. You are signed in and belong to the module's **`AuthorizedEditRoles`** — only those users see the edit entries.
-2. The module must be mounted on a tab. Current deployment (measured in the development database): **3 instances** — home page "快速链接", product information "值得关注的竞争者", about the portal "快速链接".
+2. The module must be mounted on a tab. Current deployment (measured in the development database): **3 instances** — home page "快速链接" (Quick links), product information "值得关注的竞争者" (Competitors worth watching), about the portal "快速链接" (Quick links).
 
 ## Operating steps
 
@@ -77,4 +77,4 @@ Control ids, types and lengths are taken from the `EditLinks.aspx` markup — **
 - Covers the **complete edit-side fields and validation**; **does not rely on runtime screenshots** — every statement is traceable to source markup and verified deployment readings.
 - Instance count (3) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 
-<!-- build-stamp: 312EBD1DFBF3 -->
+<!-- build-stamp: C41ABFBC3160 -->

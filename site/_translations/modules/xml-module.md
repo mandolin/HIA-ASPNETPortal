@@ -18,7 +18,7 @@ Renders **XML data deployed inside the site**, optionally transformed through XS
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request). The narrow `ContentRawHtmlEdit` permission of the HTML module is **not** required.
-2. The module must be mounted on a tab. Current deployment (measured in the development database): **1 instance** — home page "热门动态" (`ModuleId=6`, `xmlsrc=~/data/sales.xml`, `xslsrc=~/data/sales.xsl`).
+2. The module must be mounted on a tab. Current deployment (measured in the development database): **1 instance** — home page "热门动态" (Trending news) (`ModuleId=6`, `xmlsrc=~/data/sales.xml`, `xslsrc=~/data/sales.xsl`).
 3. The XML and XSL files must **already exist inside the application's trusted deployment directory** (for example `~/Data/`). **This module offers no upload and no online editing.**
 
 ## Operating steps

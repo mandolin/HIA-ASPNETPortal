@@ -42,6 +42,20 @@ a shorter retention period, defined separately (see section 6).
 automatic cleanup exists and operations has confirmed it, **no audit data may be deleted** (so that compliance is not breached
 by deleting data without a basis).
 
+### 3.1 The one registered exception (default-deny)
+
+There is currently **exactly one** deletion against the audit table in this repository, and it is registered as an
+exception:
+
+| Location | Nature | Basis |
+| --- | --- | --- |
+| `dev/scripts/New-PortalP19BrowserSmokeFixture.ps1` (smoke-fixture cleanup section) | Deletes the audit rows **the fixture itself created** (`TargetType = 'BusinessApplication'` with a `TargetId` belonging to a fixture business record and an `ActorUserName` belonging to the fixture user) | The fixture runs against a **throwaway development database**; this is "cleaning up after itself" and touches no pre-existing audit data |
+
+Rule: **any new deletion point against `PortalCfg_OperationAudits` must register its basis in this file first**,
+otherwise the L0 gate `Test-PortalAuditRetentionDeclaration.ps1` fails (default-deny). That gate also checks that no
+audit-table delete statements appear in the product source under `src/`, and that this file keeps its "not yet
+implemented + must not delete" status statement.
+
 ## 4. Handling
 
 1. **Archive**: records past the online window are exported to a **read-only archive** (not modifiable); archive files are kept

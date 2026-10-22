@@ -17,7 +17,7 @@ Publishes **in-site notices with an expiry date**. Each notice has a title, a de
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked on every request).
-2. The module must be mounted on a tab. Current deployment: **TabId=1 "新闻与特写", TabId=2 "人事福利", TabId=3 "竞赛：TradeCraft / 监视 / 保护"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=1 "新闻与特写" (News & Features), TabId=2 "人事福利" (HR & Benefits), TabId=3 "竞赛：TradeCraft / 监视 / 保护" (Competition: TradeCraft / Surveillance / Protection)**.
 3. There is **no "never expires" switch**. To keep a notice visible you must adjust `ExpireField` before it lapses.
 
 ## Operating steps
@@ -77,4 +77,4 @@ Control ids, types and lengths are taken from the `EditAnnouncements.aspx` marku
 - Deployment tabs (TabId=1 / 2 / 3) are a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Compared with [Events]({{ site.baseurl }}/modules/events/): similar fields and expiry semantics, but Events has an extra "where and when" field (`WhereWhenField`) and **all four fields are required**, whereas here only the title, description and expiry date are required, plus two optional links.
 
-<!-- build-stamp: FC68900E4369 -->
+<!-- build-stamp: A6718F10E37B -->

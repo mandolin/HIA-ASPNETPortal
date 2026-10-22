@@ -29,6 +29,15 @@ an old package from this list does **not** mean its licence has been audited.
 4. If SQLite, MySQL, PostgreSQL or other providers are ever used for real portal capabilities, a corresponding audit of
  version, licence, native runtime and deployment notes must be added, together with a standalone ADR and regression run.
 
+## Machine-readable baseline and change rules
+
+`dev/dependency-baseline.json` is the machine snapshot of the **audited dependency set** (every `packages.config`
+declaration plus the development-time dependencies listed above). Any addition, removal or version change in that set
+must be synchronised in three places: ① registration in this file; ② a re-assessment of the vulnerability surface (the
+L0 gate scans the NuGet vulnerability data source automatically); ③ a deliberate update of the baseline. Missing any one
+of them makes the gate `Test-PortalDependencyVulnerabilityBaseline.ps1` fail (default-deny: unaudited dependency changes
+are not allowed).
+
 ## External references
 
 1. [System.Data.SQLite.Core 1.0.119 NuGet package page](https://www.nuget.org/packages/System.Data.SQLite.Core/1.0.119)

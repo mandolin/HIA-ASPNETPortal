@@ -230,6 +230,11 @@ measured values from the development database, and tab names are data values kep
  **source-level description**; re-entry condition: after the module instance is mounted in the target environment,
  runtime evidence can be collected and this section's measured readings filled in.
 
+### Modules not covered item by item in this section
+
+None — this section covers every content module registered in `user-guide` (including `HTML` / `QuickLinks` / `XML` /
+`Signin`).
+
 ## Administration entry point
 
 Back-office pages live under `src/Portal/Admin/`, covering users, roles, module definitions, module settings, site settings
@@ -273,6 +278,26 @@ These two modules (`HIA.LeaveRequest`, `HIA.ExpenseReimbursement`) are employee 
  reimbursements".
 - Submitting also creates one work item, with business type `ExpenseReimbursement`, likewise assigned to `Admins`.
 - Validation: amount is required and must be positive (a `CHECK` constraint also enforces this at the database layer).
+
+### Approval flow boundary (required reading)
+
+The leave-request and expense-reimbursement modules **only submit**; they contain **no approval action at all**. This
+boundary was established by reading the source (2026-10-19) and is machine-guarded by
+`Test-PortalApprovalBoundaryDocs.ps1` — if an approval action is ever added and the documentation is not updated, the
+gate fails.
+
+- **What these modules do** (the full action chain behind the submit button): field validation → write to the business
+  table (status fixed to `Pending`) → create one work item (assigned to an approval role, currently fixed to `Admins`) →
+  write one operations audit record.
+- **What they do not do**: approve / reject, status transitions (nothing changes after `Pending`), approval comments, or
+  withdrawing or editing a submitted record. No approval action method or button exists anywhere in the source.
+- **"My Work Items" contains no approval either**: it is a **read-only projection** of work items (filterable by
+  "all / overdue only"); it neither handles business nor owns process semantics. By design, handling should jump to the
+  associated business object — and the current version provides no such handling screen.
+- **Therefore**: approval is not part of these modules and must be carried by an external process or a later version.
+  Not finding an approval screen on the tab is **expected behaviour**, not a defect — please do not file an issue for it.
+- The message shown after a successful submission ("you can track approval progress in 'My Work Items'") refers to
+  **tracking the work item itself**; it does not mean this portal provides approval handling.
 
 ### FAQ
 

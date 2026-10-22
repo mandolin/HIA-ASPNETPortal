@@ -17,7 +17,7 @@ Maintains a **directory of people**: name, role, e-mail and two contact details.
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=2 "员工联系信息"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=2 "员工联系信息" (Employee contact information)**.
 3. This module only manages a **directory** — it does not manage accounts, permissions or the organisation structure.
 
 ## Operating steps
@@ -79,4 +79,4 @@ Control ids, types and lengths are taken from the `EditContacts.aspx` markup —
 - Deployment tab (TabId=2) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Compared with [Announcements]({{ site.baseurl }}/modules/announcements/) this module carries **no business rule beyond the required check**, making it the **most lightly validated module in this repository** — which is exactly why **manual review is the only safeguard**.
 
-<!-- build-stamp: 0D32B720DD42 -->
+<!-- build-stamp: 4AC799FF7E9B -->

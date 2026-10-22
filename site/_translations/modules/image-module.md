@@ -18,7 +18,7 @@ Displays **a single image** on a tab. It has no table of its own and stores thre
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=3 "夜视镜"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=3 "夜视镜" (Night vision)**.
 3. **The image file itself is not managed by this module**: the edit page only maintains text settings and **does not handle binary uploads** (stated in the source comments). Put the image somewhere reachable first; this module only stores the address that points at it.
 
 ## Operating steps

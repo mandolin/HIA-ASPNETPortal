@@ -18,7 +18,7 @@ A **threaded discussion area**: each thread can carry replies, and replies can c
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=4 "TradeCraft 技巧与装备" and "实战手册"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=4 "TradeCraft 技巧与装备" (TradeCraft tips and gear) and "实战手册" (Field manual)**.
 3. The detail page locates an item through **query parameters**: `DiscussDetails.aspx?ItemID=<id>&mid=<moduleId>`. **Both parameters are required** — opening the page without them targets no item.
 
 ## Operating steps

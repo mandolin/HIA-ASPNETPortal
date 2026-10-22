@@ -18,7 +18,7 @@ Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
 2. The module must be mounted on a tab.
-3. **Current deployment status (must be known)**: this module is deployed **on a test tab only** — **TabId=1004 "测试链接模块"** — i.e. **only** a test tab uses it and **no production tab uses it yet**. Enabling it on a production tab is a new deployment, after which this section must be re-checked.
+3. **Current deployment status (must be known)**: this module is deployed **on a test tab only** — **TabId=1004 "测试链接模块" (test links module)** — i.e. **only** a test tab uses it and **no production tab uses it yet**. Enabling it on a production tab is a new deployment, after which this section must be re-checked.
 
 ## Operating steps
 
@@ -80,4 +80,4 @@ Control ids, types and lengths are taken from the `EditLinks.aspx` markup — **
 - **Deployment tab (TabId=1004 test tab) is a delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Compared with [QuickLinks]({{ site.baseurl }}/modules/quick-links/): the two **share one data set and one edit page** (see that page); they differ in view presentation and permission context, not in fields or validation.
 
-<!-- build-stamp: 3852F5696F95 -->
+<!-- build-stamp: F0A8471C06BC -->

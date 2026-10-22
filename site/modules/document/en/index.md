@@ -17,7 +17,7 @@ Manages **document entries that can be downloaded or viewed**. An entry either p
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=2 "新员工文档", TabId=4 "好书推荐"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=2 "新员工文档" (New-employee documents), TabId=4 "好书推荐" (Recommended reading)**.
 3. For the **upload** path you must also satisfy the server's **shared upload policy** (file size and extension allow-list).
 
 ## Operating steps
@@ -80,4 +80,4 @@ Control ids, types and lengths are taken from the `EditDocs.aspx` markup — **n
 - Deployment tabs (TabId=2 / 4) are a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Against [Announcements]({{ site.baseurl }}/modules/announcements/): this is the **only module in this batch with file upload and a path security policy**, which is why its common questions cluster around upload and path issues.
 
-<!-- build-stamp: C6D54D06136E -->
+<!-- build-stamp: 43026101D093 -->

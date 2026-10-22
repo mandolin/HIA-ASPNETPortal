@@ -168,10 +168,32 @@ substitute:
 4. SQL Server version, compatibility level, backup tasks, restore rehearsals and least-privilege accounts.
 5. Disk space, log retention, monitoring, alerting and enterprise audit platform integration.
 
+## L7 target-environment evidence (one-command evidence pack)
+
+The environment-triggered evidence required by the trusted-portal milestone `M-ANP-TRUSTED-PORTAL` (L7) is registered
+as a machine-checkable checklist and can be produced with **one command**:
+
+```powershell
+& 'dev\scripts\Invoke-PortalTargetEnvironmentEvidencePack.ps1'
+```
+
+- **Checklist**: `dev/target-environment-evidence.json` — registers per item which criterion it belongs to (T1–T7 and
+  the blocking items), whether it can be evidenced on this machine, the generating script, prerequisites, expected
+  artifacts and the re-entry condition.
+- **Three modes**: `local` (evidence immediately), `targetEnv` (needs the target environment — **skipped explicitly with
+  the missing prerequisites stated**, never passed silently), `manual` (human artifact, e.g. business sign-off).
+- **Once the target environment is ready**: the same command plus `-BaseUrl <target endpoint>` also evidences the
+  environment items; the artifact is a timestamped evidence directory (`manifest.json` + per-step logs + `summary.md`).
+- **Skipped is not passed**: the summary lists every item "still without target-environment evidence"; the currently
+  unmet items match the blocking items of `M-ANP-TRUSTED-PORTAL` (real IIS/TLS/ACL, SQL Server 2016/2017/2019 target
+  instance, enterprise scan report, IE9+ re-test, ADR 0021 target-environment proof, business sign-off).
+- The checklist itself is guarded by the L0 gate `Test-PortalTargetEnvironmentEvidenceMap.ps1`: a missing field, a
+  non-existent script, or a criterion / blocking item left unregistered all fail the gate.
+
 ## Evidence package explained
 
 `New-PortalOperationsEvidencePackage.ps1` orchestrates read-only script output into an evidence package. In an evidence
 package, `Pending` means target-environment or manual material is still needed — it does **not** mean failure; `Fail` means
 the current repository or public documentation has a problem that must be handled first.
 
-<!-- build-stamp: E9475FD75114 -->
+<!-- build-stamp: 8AF849F339C8 -->

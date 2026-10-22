@@ -17,7 +17,7 @@ Displays **a single image** on a tab. It has no table of its own and stores thre
 Prerequisites:
 
 1. You are signed in and hold **edit permission on this module** (`HasEditPermissions(moduleId)`, re-checked per request).
-2. The module must be mounted on a tab. Current deployment: **TabId=3 "夜视镜"**.
+2. The module must be mounted on a tab. Current deployment: **TabId=3 "夜视镜" (Night vision)**.
 3. **The image file itself is not managed by this module**: the edit page only maintains text settings and **does not handle binary uploads** (stated in the source comments). Put the image somewhere reachable first; this module only stores the address that points at it.
 
 ## Operating steps
@@ -74,4 +74,4 @@ Control ids, types and lengths are taken from the `EditImage.aspx` markup — **
 - Deployment tab (TabId=3) is a **delivery-time snapshot**; **re-check this section after adding or migrating tabs**.
 - Like [XmlModule]({{ site.baseurl }}/modules/xml-module/) this module stores its configuration in **module settings rather than a table of its own**; the difference is that here the settings are **plain text** (address and size), whereas the XML module's settings are **virtual paths of trusted deployment resources** and are checked for path compliance at save time.
 
-<!-- build-stamp: 22D5637A538B -->
+<!-- build-stamp: 4FD387A9A5A4 -->

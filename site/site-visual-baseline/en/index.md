@@ -117,6 +117,35 @@ product entry → evaluate → quick start → learn → reference → develop �
 - Bilingual text must **not** be machine placeholder: a translation must be semantically equivalent to its source,
  confirmed by a human walkthrough.
 
+## 9. `<html lang>` override and theme version coupling
+
+**Background**: upstream `just-the-docs`'s `_layouts/default.html` line 7 reads only the **site-level** `site.lang` and
+**ignores `page.lang`**, so English pages were emitting `<html lang="zh-CN">` — harming accessibility (a screen reader
+reading English content with Chinese pronunciation) and SEO.
+
+**What was done**:
+
+1. `site/_layouts/default.html` is a **controlled override** of the upstream layout. Its **only** difference from
+   upstream is that `<html lang>` became `{{ page.lang | default: site.lang | default: 'en-US' }}`. Every other line is
+   copied verbatim, with **no opportunistic tidying** (otherwise it cannot be diffed against upstream later).
+2. `_config.yml` pins `remote_theme` **to `v0.12.0`**, matching the local gem — otherwise Pages pulls a newer theme whose
+   includes/Sass have changed while the override file is still the old one, producing a "partly new, partly old"
+   mismatch.
+
+**When upgrading the theme**: take the new version's `_layouts/default.html`, replace only the `<html lang>` line with
+the expression above and copy the rest verbatim; if upstream also changed the lang logic elsewhere in `<html>` or in
+`head.html`, review that too.
+
+**Two lessons measured the hard way (recorded here so they are not repeated)**:
+
+- **Do not write a literal html-lang sample inside a layout comment.** The first version of the override carried such a
+  sample in a comment, so any check based on that token **matched the fake token in the comment first** and reported "the
+  fix is already applied" as "the fix failed", triggering three rounds of dead-end investigation. **Example text in a
+  comment must not form matchable text identical to the real token.**
+- **Do not use Liquid comments `{#- ... -#}` in that layout.** A bilingual note was once written as a Liquid comment and
+  the whole layout was silently bypassed (Jekyll fell back to the theme layout): the page looked normal but the lang fix
+  was completely ineffective. Explanatory text goes in HTML comments or a separate document.
+
 ## 10. HIA series main palette and landing styles (sourced wiring)
 
 `color_scheme` in `site/_config.yml` is the custom scheme **`hia`** (defined in `site/_sass/color_schemes/hia.scss`).
@@ -148,4 +177,4 @@ product entry → evaluate → quick start → learn → reference → develop �
  palette variables, update the scheme file and custom.scss. The mechanism uses the theme-supported `color_scheme`
  and custom hooks, touching no theme-internal files.
 
-<!-- build-stamp: B2C4AE8BC0E1 -->
+<!-- build-stamp: 10A3AC12E81A -->
