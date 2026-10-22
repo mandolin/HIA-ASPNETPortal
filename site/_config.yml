@@ -48,21 +48,34 @@ heading_anchors: true
 #     `parent` 层级导航；此前只能从说明页 `/code-documentation/` 点进去，等于"发布了但找不到"。
 #     主题为此提供 `nav_external_links`（`components/site_nav.html` 渲染的顶层外链列表），用它把代码文档
 #     中英两个入口直接放进侧边导航。说明页仍在「开发」分区内，两者互补：
-#     导航负责"看得到"，说明页负责"看得懂"（刷新方式、依赖注意事项、DotNetDoc 现状）。</zh-CN>
+#     导航负责"看得到"，说明页负责"看得懂"（刷新方式、依赖注意事项、DotNetDoc 现状）。
+#
+#     **每条带 `lang`，按当前页面语言只显示一条**（用户指出侧边导航同时出现中英两条）：`nav_external_links`
+#     默认无条件下渲染全部条目，所以中文页也会挂上英文入口、英文页也挂上中文入口。`site_nav.html`
+#     现在按 `lang` 过滤——中文页只出 `代码文档（JSDoc）· 中文`，英文页只出 `Code documentation (JSDoc) · English`。
+#     这与同一文件里页面树的语言过滤是同一个机制（`nav_lang`），页面树早就按语言分开了，外链是漏掉的那一半。</zh-CN>
 #   <en>Post-closeout follow-up in `C-anp-P32` (the user pointed out "the site shows no link to the code documentation"):
 #     **the code documentation must have a navigation entry**. `site/api/jsdoc/` is a JSDoc artifact snapshot —
 #     **static files without front matter**, so they never enter just-the-docs' `parent`-based navigation; previously
 #     the only path in was via the explainer page `/code-documentation/`, i.e. "published but unfindable".
 #     The theme provides `nav_external_links` (the top-level external list rendered by `components/site_nav.html`);
-#     use it to put both the Chinese and English code-documentation entries directly into the side navigation.
+#     use it to put the code-documentation entries directly into the side navigation.
 #     The explainer page stays inside the Develop section; the two are complementary: navigation makes it
-#     **visible**, the explainer makes it **understandable** (refresh procedure, dependency notes, DotNetDoc status).</en>
+#     **visible**, the explainer makes it **understandable** (refresh procedure, dependency notes, DotNetDoc status).
+#
+#     **Each entry carries `lang` so only the current language's entry is shown** (the user pointed out that the side
+#     navigation showed both at once): `nav_external_links` renders every entry unconditionally, so a Chinese page
+#     also carried the English entry and vice versa. `site_nav.html` now filters by `lang` — a Chinese page shows only
+#     `代码文档（JSDoc）· 中文`, an English page only `Code documentation (JSDoc) · English`. This is the same mechanism
+#     (`nav_lang`) that already filters the page tree in that file; the external links were the half that was missed.</en>
 # </lang>
 nav_external_links:
   - title: 代码文档（JSDoc）· 中文
     url: /api/jsdoc/index.zh-CN.html
+    lang: zh-CN
   - title: Code documentation (JSDoc) · English
     url: /api/jsdoc/index.en.html
+    lang: en
 
 # <lang>
 #   <zh-CN>生成物由 `dev/scripts/Build-PortalSite.ps1` 从 `docs/` 与翻译源产出；

@@ -39,8 +39,23 @@
     {% include components/nav/pages.html pages=nav_pages all=include.all %}
   {% endif %}
   {%- if site.nav_external_links -%}
+    {%- comment -%}
+      **Language filtering for external links.** The page tree above is already filtered by `nav_lang`, but
+      `nav_external_links` was not, so every entry rendered on every page — the user found both the Chinese and
+      the English code-documentation entries sitting side by side in one sidebar. An entry may carry a `lang`
+      key and is rendered only when it matches the current navigation language. Two deliberate choices:
+      (a) `nav_lang` is normalised to a **boolean** (`en` or not) instead of compared as a string, so a page with
+      no `lang` front matter at all still gets the Chinese entry rather than none at all;
+      (b) an entry **without** `lang` defaults to `site.lang` (Chinese) — the same "absent means Chinese" rule the
+      rest of this site follows, so a future entry added without thinking still appears somewhere sensible.
+    {%- endcomment -%}
+    {%- assign nav_is_en = false -%}
+    {%- if nav_lang == 'en' -%}{%- assign nav_is_en = true -%}{%- endif -%}
     <ul class="nav-list">
       {%- for node in site.nav_external_links -%}
+        {%- assign node_is_en = false -%}
+        {%- if node.lang == 'en' -%}{%- assign node_is_en = true -%}{%- endif -%}
+        {%- if node_is_en == nav_is_en -%}
         <li class="nav-list-item external">
           <a href="{{ node.url | absolute_url }}" class="nav-list-link external"
             {% if node.opens_in_new_tab or node.opens_in_new_tab == nil and site.nav_external_links_new_tab %}
@@ -51,6 +66,7 @@
             {% unless node.hide_icon %}<svg viewBox="0 0 24 24" aria-labelledby="svg-external-link-title"><use xlink:href="#svg-external-link"></use></svg>{% endunless %}
           </a>
         </li>
+        {%- endif -%}
       {%- endfor -%}
 
     </ul>
