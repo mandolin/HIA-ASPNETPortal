@@ -59,7 +59,7 @@ allowed.
 
 ## 6. Current version
 
-**`v1.1.0`** (2026-10-17, current) — the product website and documentation subsite were overhauled. The first formal
+**`v1.2.0`** (2026-10-22, current) — verification and release mechanics were closed out: post-publish live re-check, build stamps with a precise propagation criterion, handwritten page freshness, build rehearsal and output redirection switches, a local injection-track tool, and the release-readiness gate. The previous version `v1.1.0` (2026-10-17) — the product website and documentation subsite were overhauled. The first formal
 release `v1.0.0` (2026-10-09) completed capability coverage, quality gates, documentation and open-source readiness;
 the external wording remains limited to "development, testing, demonstration and reference" (see section 6).
 See `CHANGELOG.md` for details.
@@ -84,4 +84,4 @@ the portal-kernel capability baseline is not the same dimension", the convention
 3. validation behaviour (whether loading is forcibly blocked) is defined by the module-loading logic; this document defines
  the semantics only.
 
-<!-- build-stamp: DA83ED2BB6A4 -->
+<!-- build-stamp: 1A55CF994A1B -->
