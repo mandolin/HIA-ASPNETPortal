@@ -54,6 +54,29 @@ $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $toolDirectory = Join-Path $repositoryRoot 'dev\documentation\dotnetdoc'
 $packageLockPath = Join-Path $toolDirectory 'package-lock.json'
 $nodeModulesPath = Join-Path $toolDirectory 'node_modules'
+
+# <lang>
+#   <zh-CN>**本机 `node`/`npm` 常不在 PowerShell 的 PATH 里**（实测 `C:\Program Files\nodejs\node.exe` 存在，
+#     但 `npm` 术语找不到），于是脚本会以一句难以归因的"术语 'npm' 不会被识别"失败——而且它**先清空了产物目录**，
+#     把上一次可用的工件一起删掉。因此在任何 npm 调用之前先把 node 目录补进 PATH，找不到就**明确失败并说明原因**。
+#     与 `Publish-PortalDotNetDoc.ps1` 中的同一处理保持一致（两个脚本前后相接，任一环节的 PATH 断裂都会让整条链断）。</zh-CN>
+#   <en>**On this machine `node`/`npm` are frequently absent from PowerShell's PATH** (measured: `C:\Program Files\nodejs\node.exe`
+#     exists, yet the term `npm` is not found), so the script would fail with a hard-to-attribute "term 'npm' is not recognized" —
+#     and it **clears the output directory first**, deleting the previous usable artifacts along with it. So the node directory
+#     is added to PATH before any npm call, and if it cannot be found the script **fails explicitly with a reason**.
+#     This mirrors the same handling in `Publish-PortalDotNetDoc.ps1` (the two scripts are consecutive links in one chain, and a
+#     PATH break at either end breaks the whole chain).</en>
+# </lang>
+$nodeDirectory = $null
+$nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+if ($nodeCommand) { $nodeDirectory = Split-Path -Parent $nodeCommand.Source }
+else {
+    foreach ($candidate in @("$env:ProgramFiles\nodejs", "${env:ProgramFiles(x86)}\nodejs", "$env:LOCALAPPDATA\Programs\nodejs")) {
+        if (Test-Path -LiteralPath (Join-Path $candidate 'node.exe') -PathType Leaf) { $nodeDirectory = $candidate; break }
+    }
+}
+if (-not $nodeDirectory) { throw '找不到 node.exe（试过 PATH 与常见安装目录）。DotNetDoc 试点依赖 Node 运行时。' }
+if (-not (($env:PATH -split ';') -contains $nodeDirectory)) { $env:PATH = $nodeDirectory + ';' + $env:PATH }
 $outputDirectoryName = if ($SourceProbe) { 'dotnetdoc-source-probe' } else { 'dotnetdoc' }
 $outputDirectory = Join-Path $repositoryRoot "temp\documentation\$outputDirectoryName"
 

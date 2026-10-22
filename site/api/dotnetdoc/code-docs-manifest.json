@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "generator": "@hia-doc/dotnetdoc-runner（hia-dotnetdoc）+ @hia-doc/renderer-html（hia docs build），由 dev/scripts/Publish-PortalDotNetDoc.ps1 编排",
+  "generatedUtc": "2026-10-22T13:56:34Z",
+  "publishedBy": "HIA-ASPNETPortal 文档发布流程（Publish-PortalDotNetDoc.ps1）",
+  "localePolicy": "每个半边按其在 HIA 工件中声明的 locales 渲染；未声明 zh-CN 的半边（surface、project）为结构描述，只有英文。",
+  "halves": [
+    {
+      "half": "api/Portal.Components.Data",
+      "locale": "en",
+      "title": "HIA-ASPNETPortal Portal.Components.Data API",
+      "entrypoint": "api/Portal.Components.Data/en/index.html",
+      "files": 4,
+      "bytes": 47409.0
+    },
+    {
+      "half": "api/Portal.Components.Data",
+      "locale": "zh-CN",
+      "title": "HIA-ASPNETPortal Portal.Components.Data API",
+      "entrypoint": "api/Portal.Components.Data/zh-CN/index.html",
+      "files": 4,
+      "bytes": 47541.0
+    },
+    {
+      "half": "api/Portal.Components.Data1",
+      "locale": "en",
+      "title": "HIA-ASPNETPortal Portal.Components.Data1 API",
+      "entrypoint": "api/Portal.Components.Data1/en/index.html",
+      "files": 4,
+      "bytes": 1347008.0
+    },
+    {
+      "half": "api/Portal.Components.Data1",
+      "locale": "zh-CN",
+      "title": "HIA-ASPNETPortal Portal.Components.Data1 API",
+      "entrypoint": "api/Portal.Components.Data1/zh-CN/index.html",
+      "files": 4,
+      "bytes": 1351568.0
+    },
+    {
+      "half": "api/Portal.Components",
+      "locale": "en",
+      "title": "HIA-ASPNETPortal Portal.Components API",
+      "entrypoint": "api/Portal.Components/en/index.html",
+      "files": 4,
+      "bytes": 2049937.0
+    },
+    {
+      "half": "api/Portal.Components",
+      "locale": "zh-CN",
+      "title": "HIA-ASPNETPortal Portal.Components API",
+      "entrypoint": "api/Portal.Components/zh-CN/index.html",
+      "files": 4,
+      "bytes": 2057317.0
+    },
+    {
+      "half": "api/Portal",
+      "locale": "en",
+      "title": "HIA-ASPNETPortal Portal API",
+      "entrypoint": "api/Portal/en/index.html",
+      "files": 4,
+      "bytes": 4795283.0
+    },
+    {
+      "half": "api/Portal",
+      "locale": "zh-CN",
+      "title": "HIA-ASPNETPortal Portal API",
+      "entrypoint": "api/Portal/zh-CN/index.html",
+      "files": 4,
+      "bytes": 4813511.0
+    },
+    {
+      "half": "markup/Portal",
+      "locale": "zh-CN",
+      "title": "Portal Markup Comments",
+      "entrypoint": "markup/Portal/zh-CN/index.html",
+      "files": 4,
+      "bytes": 554825.0
+    },
+    {
+      "half": "markup/Portal",
+      "locale": "en",
+      "title": "Portal Markup Comments",
+      "entrypoint": "markup/Portal/en/index.html",
+      "files": 4,
+      "bytes": 552977.0
+    },
+    {
+      "half": "project/Portal",
+      "locale": "en",
+      "title": "HIA-ASPNETPortal Project Discovery",
+      "entrypoint": "project/Portal/en/index.html",
+      "files": 4,
+      "bytes": 13422.0
+    },
+    {
+      "half": "surface/Portal",
+      "locale": "en",
+      "title": "Portal Web Forms Surface",
+      "entrypoint": "surface/Portal/en/index.html",
+      "files": 4,
+      "bytes": 13999.0
+    }
+  ],
+  "totalBytes": 17644797.0
+}

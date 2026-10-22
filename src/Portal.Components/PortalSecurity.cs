@@ -14,10 +14,10 @@ namespace ASPNET.StarterKit.Portal
     /// <remarks>
     /// <lang>
     ///   <zh-CN>模块编辑必须同时满足父 Tab 的访问角色与模块的编辑角色。<see cref="Encrypt"/> 使用无盐 MD5， 仅为既有用户数据兼容保留；新密码体系不得采用该方法，后续迁移需支持旧摘要验证后的渐进强哈希更新。
-    ///   C-anp-P19 `W-anp-P111` 延期项登记（四分法：**可实治范围之外的真实待办**）——判定依据：本项目新密码体系已改用 PBKDF2（见 `PortalPasswordHasher`），本条指的是**存量 MD5 摘要账号**的渐进升级，属数据迁移而非注释可闭合项，故不在本周期实治。
+    ///   内部延期项登记（四分法：**可实治范围之外的真实待办**）——判定依据：本项目新密码体系已改用 PBKDF2（见 `PortalPasswordHasher`），本条指的是**存量 MD5 摘要账号**的渐进升级，属数据迁移而非注释可闭合项，故不在本周期实治。
     ///   所有者：密码体系专题（下一 Cycle 入口）。再入条件：出现任一即启动 —— ① 需要支持旧摘要账号登录时自动 rehash；② MD5 兼容面被要求收敛或下线；③ 安全评审把无盐 MD5 列为必须处置项。再入时须先出只读盘点（存量 MD5 账号数、登录成功率），再定迁移批次，禁止无盘点直接改写。</zh-CN>
     ///   <en>Module editing requires both parent-tab access roles and module edit roles. <see cref="Encrypt"/> uses unsalted MD5 and remains only for existing user-data compatibility; new password systems must not use it, and a later migration must support gradual strong-hash updates after legacy-digest verification.
-    ///   C-anp-P19 `W-anp-P111` deferred-item registration (four-way split: **a real work item outside the actionable range**) — basis: this project's new password system already uses PBKDF2 (see `PortalPasswordHasher`); this entry concerns the gradual upgrade of **existing MD5-digest accounts**, which is a data migration rather than something a comment can close, so it is not remediated in this cycle.
+    ///   Internal deferred-item registration (four-way split: **a real work item outside the actionable range**) — basis: this project's new password system already uses PBKDF2 (see `PortalPasswordHasher`); this entry concerns the gradual upgrade of **existing MD5-digest accounts**, which is a data migration rather than something a comment can close, so it is not remediated in this cycle.
     ///   Owner: the password-system workstream (entry point in the next cycle). Re-entry conditions — start when any applies: 1) legacy-digest accounts must be rehashed automatically at sign-in; 2) the MD5 compatibility surface is required to shrink or retire; 3) a security review lists unsalted MD5 as a must-fix. On re-entry, first produce a read-only inventory (count of MD5 accounts, sign-in success rate) before deciding migration batches; never rewrite without that inventory.</en>
     /// </lang>
     /// </remarks>

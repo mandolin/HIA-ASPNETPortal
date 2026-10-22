@@ -3,10 +3,10 @@
 <%--
 <lang>
  <zh-CN>默认 Master 固定引用桌面 Banner 控件；P7.4 起它承载现代门户外壳，Banner 的进一步组件化或可配置化属于后续专题。
- C-anp-P19 `W-anp-P111` 延期项登记（四分法：**外部 Pending——专题未启动**）——判定依据：Banner 组件化需要先有外壳组件的设计契约与主题分层结论，本周期不具备该输入，故只登记不处置。
+ 内部延期项登记（四分法：**外部 Pending——专题未启动**）——判定依据：Banner 组件化需要先有外壳组件的设计契约与主题分层结论，本周期不具备该输入，故只登记不处置。
  所有者：主题/外壳专题。再入条件：门户外壳组件化方案启动并覆盖 Banner 时。再入前保持固定引用，不改标记结构。</zh-CN>
  <en>The default Master keeps the desktop Banner control. Starting with P7.4, it hosts the modern portal shell; further componentization or configurability of the banner remains future work.
- C-anp-P19 `W-anp-P111` deferred-item registration (four-way split: **external Pending — workstream not started**) — basis: componentizing the banner first needs a design contract for shell components and a theme-layering conclusion, neither of which exists in this cycle, so it is registered only.
+ Internal deferred-item registration (four-way split: **external Pending — workstream not started**) — basis: componentizing the banner first needs a design contract for shell components and a theme-layering conclusion, neither of which exists in this cycle, so it is registered only.
  Owner: the theme/shell workstream. Re-entry condition: a shell-component plan starts and covers the banner. Until then keep the fixed reference and do not change the markup structure.</en>
 </lang>
 --%>
