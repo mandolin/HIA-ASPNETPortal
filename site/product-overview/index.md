@@ -91,4 +91,4 @@ title: 产品概览与定位（HIA-ASPNETPortal）
 - 想**部署**：`deployment-checklist.md` → `operations-runbook.md`
 - 想**查全部文档**：[documentation-map.md]({{ site.baseurl }}/documentation-map/)
 
-<!-- build-stamp: AE3CD1AF229A -->
+<!-- build-stamp: 84F648FB8AC5 -->

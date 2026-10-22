@@ -68,4 +68,4 @@ title: 文档地图 / 导航索引（HIA-ASPNETPortal）
 - `site-visual-baseline.md` — **官网视觉基线**（配色 / 字体 / 排版层级 / 代码块与表格取色 / 导航骨架）
 - `README.md` — 仓库入口（含文档分区导航指向本图）
 
-<!-- build-stamp: 863A5B20F287 -->
+<!-- build-stamp: 2D43BBDC6A3B -->

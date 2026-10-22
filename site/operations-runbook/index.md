@@ -166,4 +166,4 @@ dev/scripts/Test-PortalPublishedSiteChecks.ps1
 
 `New-PortalOperationsEvidencePackage.ps1` 会把只读脚本输出编排成证据包。证据包中的 `Pending` 表示需要目标环境或人工材料补齐，不等于失败；`Fail` 表示当前仓库或公开文档存在需要先处理的问题。
 
-<!-- build-stamp: 2BC7A78CD71F -->
+<!-- build-stamp: B520523D25F2 -->

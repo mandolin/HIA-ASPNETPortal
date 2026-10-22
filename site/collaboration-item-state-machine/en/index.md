@@ -96,4 +96,4 @@ zero-row update writes no orphan event.
  state machine's scope.
 - This round adds or removes no status or transition, and changes no business semantics and no UI.
 
-<!-- build-stamp: 100382DD79E4 -->
+<!-- build-stamp: 626F82CDA753 -->

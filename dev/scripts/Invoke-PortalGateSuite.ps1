@@ -689,6 +689,22 @@ $gateLayers = [ordered]@{
         #     belong to the build's N1/N2 — this gate does not duplicate them.</en>
         # </lang>
         @{ File = 'Test-PortalHandwrittenPageFreshness.ps1'; Runner = 'ps1'; Kind = '手写页面新鲜度'; Args = @() }
+        # <lang>
+        #   <zh-CN>封版前检查门禁（`W-anp-P199`）。**日常编排只跑静态判据**（`-DailySelfCheck`：F1 Unreleased 有内容 /
+        #     F2 版本锚点一致 / F7 备忘无阻塞项 / F8 当前版本未漂移）。产物类判据（F4 套件新鲜运行、F6 线上复核结论）
+        #     **不在日常跑**：它们需要"刚出炉"的统计产物，日常每次都会因拿不到而报未确认——而**持续跳过的告警等于
+        #     没有告警**。封版前由人显式传入新鲜产物后跑全八项。F4/F6 读产物而不自己跑，是为了**反递归**
+        #     （套件里包含本门禁，自己调自己会无限递归）。</zh-CN>
+        #   <en>Release-readiness gate (`W-anp-P199`). **Daily orchestration runs only the static checks**
+        #     (`-DailySelfCheck`: F1 non-empty Unreleased / F2 version anchors agree / F7 no blocking memo item /
+        #     F8 current version not drifted). The artifact-based checks (F4 a fresh suite run, F6 the live re-check
+        #     verdict) are **not run daily**: they need a "just produced" statistics artifact, so a daily run would
+        #     report unconfirmed every single time — and **an alarm that skips every day is no alarm at all**. Before
+        #     sealing, a human runs all eight with fresh artifacts supplied explicitly. F4/F6 read artifacts rather
+        #     than executing anything themselves, for **anti-recursion** (the suite contains this gate, so invoking
+        #     it would recurse forever).</en>
+        # </lang>
+        @{ File = 'Test-PortalReleaseReadiness.ps1';  Runner = 'ps1'; Kind = '封版前检查'; Args = @('-DailySelfCheck') }
     )
     L1 = @(
         @{ File = 'Build-Solution.ps1';                   Runner = 'ps1'; Kind = '构建'; Args = @() }

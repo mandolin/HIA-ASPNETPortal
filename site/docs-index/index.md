@@ -58,4 +58,4 @@ title: HIA-ASPNETPortal 文档
 - 本站文档同时提供中文与英文两个版本，可随时切换。
 - 文档按「产品概览 / 评估 / 快速上手 / 学习 / 参考 / 开发 / 运维 / 变更」八个分区组织，见[文档地图]({{ site.baseurl }}/documentation-map/)。
 
-<!-- build-stamp: 8663281EE845 -->
+<!-- build-stamp: 0AC1E03968F2 -->

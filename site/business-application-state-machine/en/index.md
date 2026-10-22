@@ -120,4 +120,4 @@ vocabulary nor action constants (`PortalCollaborationItemActions` and `PortalWor
  sample); there is no "second business-application state machine".
 - This round **adds or removes no statuses** and changes no business semantics and no UI.
 
-<!-- build-stamp: 5F5D112D262B -->
+<!-- build-stamp: B7B5507C75E8 -->

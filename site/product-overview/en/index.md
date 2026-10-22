@@ -103,4 +103,4 @@ matters in `docs/font-policy-and-audit.md`.
 - To **deploy it**: `docs/deployment-checklist.md` → `docs/operations-runbook.md`
 - To **find everything**: `docs/documentation-map.md`
 
-<!-- build-stamp: 85658A9D1669 -->
+<!-- build-stamp: 24A68EF895E3 -->

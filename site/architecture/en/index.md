@@ -73,4 +73,4 @@ source and never reads real connection strings or configuration outside the repo
 - The configuration directory holds both templates and real environment files; rules for managing sensitive configuration
  need to be established.
 
-<!-- build-stamp: 2FA332146DCD -->
+<!-- build-stamp: ECDDA62EBA57 -->

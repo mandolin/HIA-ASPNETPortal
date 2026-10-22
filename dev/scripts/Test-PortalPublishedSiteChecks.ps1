@@ -145,7 +145,14 @@ function Get-SourceStamp {
     param([string] $Path)
     if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { return $null }
     $alg = [System.Security.Cryptography.SHA256]::Create()
-    try { return ([BitConverter]::ToString($alg.ComputeHash([System.IO.File]::ReadAllBytes($Path)))).Replace('-', '').Substring(0, 12) }
+    try {
+        # 与构建侧同一算法：**先归一化行尾再哈希**。否则 `core.autocrlf=true` 会让 CI 检出（CRLF）与
+        # 本地工作区（LF）对同一源文件算出不同指纹，本地复核永远无法确认 CI 发布的页面
+        # （实测 52 个页面被误报"构建戳未更新"，而内容一字未改）。
+        $text = [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false)) -replace "`r`n", "`n"
+        $bytes = [System.Text.UTF8Encoding]::new($false).GetBytes($text)
+        return ([BitConverter]::ToString($alg.ComputeHash($bytes))).Replace('-', '').Substring(0, 12)
+    }
     finally { $alg.Dispose() }
 }
 
@@ -428,6 +435,38 @@ foreach ($i in $incomplete) { Write-Host ('  [UNCONFIRMED] ' + $i.url + ' — ' 
 
 $passCount = @($results | Where-Object { $_.reachable -and $_.failures.Count -eq 0 }).Count
 Write-Host ('[INFO] 已核页面 ' + $results.Count + ' 个｜通过 ' + $passCount + '｜缺陷 ' + $defects.Count + '｜未确认 ' + $incomplete.Count)
+
+# <lang>
+#   <zh-CN>**落一份统计产物**（`W-anp-P199` 封版前检查的 F6 输入）。为什么需要它：封版就绪判定必须建立在
+#     **一次新鲜运行的产物**上，而不是"我记得刚跑过、是绿的"——口头结论不可复核。产物里带
+#     `verdict`（PASS / FAIL / INCOMPLETE）、各项计数与未确认原因，下游据此判定：
+#     PASS 或**显式** INCOMPLETE 均可接受（后者是诚实状态），FAIL 则不就绪；**产物缺失或过期 → 未确认，
+#     不当作通过**。写证据目录（与门禁套件同一约定），不写进站点产物。</zh-CN>
+#   <en>**Write a statistics artifact** (input to check F6 of the release-readiness gate, `W-anp-P199`). Why: a
+#     release-readiness verdict must rest on **the output of a fresh run**, not on "I think it just ran green" — a
+#     spoken conclusion cannot be re-verified. The artifact carries `verdict` (PASS / FAIL / INCOMPLETE), per-item counts
+#     and unconfirmed reasons, so the consumer can judge: PASS or an **explicit** INCOMPLETE are both acceptable (the
+#     latter is an honest state), FAIL means not ready; a **missing or stale artifact is unconfirmed, never a pass**.
+#     It goes to the evidence directory (same convention as the gate suite), never into the site output.</en>
+# </lang>
+$verdict = if ($defects.Count -gt 0) { 'FAIL' } elseif ($incomplete.Count -gt 0) { 'INCOMPLETE' } else { 'PASS' }
+$stats = [ordered]@{
+    generatedUtc       = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+    baseUrl            = $BaseUrl
+    waitSeconds        = $WaitSeconds
+    total              = $results.Count
+    pass               = $passCount
+    defects            = $defects.Count
+    incomplete         = $incomplete.Count
+    stampSeen          = $stampSeen
+    verdict            = $verdict
+    unconfirmedReasons = @($incomplete | ForEach-Object { $_.reason })
+}
+$recheckDir = Join-Path $repoRoot 'work-zone/dev/evidence/published-site-recheck'
+if (-not (Test-Path -LiteralPath $recheckDir)) { New-Item -ItemType Directory -Force -Path $recheckDir | Out-Null }
+$recheckPath = Join-Path $recheckDir ('recheck-' + (Get-Date -Format 'yyyyMMddTHHmmss') + '.json')
+[System.IO.File]::WriteAllText($recheckPath, ($stats | ConvertTo-Json -Depth 5), (New-Object System.Text.UTF8Encoding($false)))
+Write-Host ('[INFO] 统计产物：' + $recheckPath)
 
 if ($defects.Count -gt 0) {
     Write-Host ('[FAIL] 发布后线上复核发现 ' + $defects.Count + ' 个页面存在缺陷（页面已发布，需修复后重新发布）。')

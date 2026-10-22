@@ -89,4 +89,4 @@ title: 文档（Document）
 - 部署页签（TabId=2 / 4）是交付时的快照；**新增或迁移页签后需重新核对**本节。
 - 与[公告模块]({{ site.baseurl }}/modules/announcements/)相比，本模块是本批**唯一带文件上传与路径安全策略**的模块，其常见问题也集中在上传与路径两类。
 
-<!-- build-stamp: F0D9744DD289 -->
+<!-- build-stamp: 1FB5F078D2CF -->

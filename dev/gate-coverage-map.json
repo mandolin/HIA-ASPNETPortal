@@ -319,6 +319,14 @@
       "gate": "Test-PortalHandwrittenPageFreshness.ps1"
     },
     {
+      "id": "release-readiness",
+      "name": "封版前检查（版本锚点 / 门禁套件新鲜运行 / 镜像新鲜度 / 线上复核 / 备忘无阻塞项 / Unreleased 有内容）",
+      "layer": "L0",
+      "coverage": "partial",
+      "boundary": "只证明封版前八项锚点在机器可判范围内成立：F1 CHANGELOG 的 Unreleased 段非空；F2 版本锚点一致（委托 Test-PortalVersionConsistency）；F3 目标 tag 不存在；F4 套件统计产物新鲜且失败 0、每个 Skip 均带自报原因（读产物，不自己跑——反递归）；F5 镜像新鲜度（委托 Test-PortalSiteMirrorFreshness）；F6 线上复核 verdict 为 PASS 或显式 INCOMPLETE（读产物）；F7 备忘每条 D 都带判定且无阻塞项；F8 versioning.md 第六节与 CHANGELOG 最新已发布版本一致。不证明发布流程已执行、产物已发布、版本号语义正确（是否升主版本由人决定）、目标环境证据齐备（属 v2.0.0 与后续规划）。日常编排只跑静态判据（-DailySelfCheck：F1/F2/F7/F8），产物类判据在封版前由人喂入新鲜产物后判定。Proves only the eight pre-seal anchors within what machines can decide; F2/F5 delegate to existing gates, F4/F6 consume fresh statistics artifacts (anti-recursion). Does not prove the release was executed, that artifacts are published, version semantics, or target-environment evidence (v2.0.0 scope). Daily orchestration runs static checks only (-DailySelfCheck).",
+      "gate": "Test-PortalReleaseReadiness.ps1"
+    },
+    {
       "id": "site-mirror-consistency",
       "name": "docs 与 site 镜像一致且新鲜（上架清单驱动：镜像须为构建产物形状，且须等于当前 docs 的构建产物）",
       "layer": "L0",
@@ -416,6 +424,7 @@
     "Test-PortalSiteMirrorConsistency.ps1",
     "Test-PortalSiteMirrorFreshness.ps1",
     "Test-PortalHandwrittenPageFreshness.ps1",
+    "Test-PortalReleaseReadiness.ps1",
     "Build-Solution.ps1",
     "Invoke-PortalModuleRuntimeGate.ps1",
     "Invoke-PortalTests.ps1",

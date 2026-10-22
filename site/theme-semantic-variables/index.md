@@ -100,4 +100,4 @@ foreach ($t in $themes) {
 - `frontend-asset-guide.md`：Web Forms 呈现、主题、模块 CSS 与前端资产边界。
 - 模块外观契约（容器/标题/分区/表格/提示/弱化/危险的类集与逐皮肤色板）见 `theme-module-contract.md`。
 
-<!-- build-stamp: CE4A2F985E48 -->
+<!-- build-stamp: FC89D241F7DE -->

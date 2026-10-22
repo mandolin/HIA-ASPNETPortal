@@ -485,6 +485,27 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     $zhBody = Convert-PublicText -Body $zhBody
     $enBody = Convert-PublicText -Body $enBody
 
+# <lang>
+#   <zh-CN>**源指纹必须先归一化行尾再哈希**（`W-anp-P199` 验证时发现的缺陷）。原因：仓库的
+#     `core.autocrlf=true` 让 **CI 检出的是 CRLF、本地工作区是 LF**；若按**原始字节**哈希，
+#     同一个源文件在两处会得到不同指纹——于是**本地复核永远无法确认 CI 发布出去的页面**
+#     （实测：52 个页面被报"构建戳未更新"，而内容一字未改）。归一化后指纹只反映**内容**，
+#     与行尾表示无关。构建侧与线上复核侧必须用同一算法，这是戳能对上的前提。</zh-CN>
+#   <en>**The source fingerprint must normalise line endings before hashing** (a defect found while verifying
+#     `W-anp-P199`). Reason: the repository's `core.autocrlf=true` means **CI checks out CRLF while the local working
+#     tree is LF**; hashing **raw bytes** would give different fingerprints for the same source in the two places —
+#     so a **local re-check could never confirm a page published by CI** (measured: 52 pages reported "build stamp not
+#     updated" while not one byte of content had changed). After normalisation the fingerprint reflects **content
+#     only**, independent of line-ending representation. The build side and the live re-check side must use the same
+#     algorithm; that is the precondition for stamps ever matching.</en>
+# </lang>
+function Get-Stamp12 {
+    param([string] $Path, $Alg)
+    $text = [System.IO.File]::ReadAllText($Path, [System.Text.UTF8Encoding]::new($false))
+    $text = $text -replace "`r`n", "`n"
+    $bytes = [System.Text.UTF8Encoding]::new($false).GetBytes($text)
+    return ([BitConverter]::ToString($Alg.ComputeHash($bytes))).Replace('-', '').Substring(0, 12)
+}
     # <lang>
     #   <zh-CN>**构建戳**：把**源文档指纹**（SHA-256 前 12 位）写进生成页末尾的 HTML 注释里。
     #     为什么是"源"的指纹而不是"生成结果"的指纹：线上复核要判断的是"**线上这一页是不是由当前
@@ -506,8 +527,8 @@ foreach ($e in $entries) {    if ([string]::IsNullOrWhiteSpace($e.doc)) { $gaps.
     # </lang>
     $stampAlg = [System.Security.Cryptography.SHA256]::Create()
     try {
-        $zhStamp = ([BitConverter]::ToString($stampAlg.ComputeHash([System.IO.File]::ReadAllBytes($zhPath)))).Replace('-', '').Substring(0, 12)
-        $enStamp = ([BitConverter]::ToString($stampAlg.ComputeHash([System.IO.File]::ReadAllBytes($enSource)))).Replace('-', '').Substring(0, 12)
+        $zhStamp = (Get-Stamp12 -Path $zhPath -Alg $stampAlg)
+        $enStamp = (Get-Stamp12 -Path $enSource -Alg $stampAlg)
     }
     finally { $stampAlg.Dispose() }
     $zhBody = $zhBody.TrimEnd() + "`n`n<!-- build-stamp: " + $zhStamp + " -->`n"

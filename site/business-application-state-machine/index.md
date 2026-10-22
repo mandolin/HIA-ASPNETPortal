@@ -89,4 +89,4 @@ title: 业务申请状态机（Business Application State Machine）
 - **旧业务申请样板**：本状态机即 `BusinessApplicationDb`（旧样板）的显式化结果，不存在"第二套业务申请状态机"。
 - 本轮**不新增/删除状态**，不改变业务语义与 UI。
 
-<!-- build-stamp: 2C73109FC49E -->
+<!-- build-stamp: 52596BE563B8 -->

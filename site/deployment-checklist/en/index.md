@@ -131,4 +131,4 @@ external configuration.
 - [ ] Application rollback, configuration rollback and database recovery steps are all executable.
 - [ ] Real IIS re-test results, known limitations and deferred items are recorded.
 
-<!-- build-stamp: 8979B75A363D -->
+<!-- build-stamp: 676E1F5285CF -->

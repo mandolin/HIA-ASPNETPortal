@@ -76,4 +76,4 @@ temp/p12.5/PortalP12SampleScenario.sql
 2. 将读取类审计、审计详细级别和审计保留策略纳入系统设置与发布时配置。
 3. 在后续 Workflow 周期中补转办、委托、会签、通知和更多业务对象。
 
-<!-- build-stamp: 44967AC75A09 -->
+<!-- build-stamp: 20BD8C5D53E3 -->

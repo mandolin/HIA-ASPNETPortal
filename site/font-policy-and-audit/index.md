@@ -54,4 +54,4 @@ font-family: "Sarasa Mono SC", "Noto Sans Mono CJK SC", "Source Han Mono SC", "L
 - 主题继续使用上述开源字体优先栈，并保留 `sans-serif` / `monospace` 通用回退。
 - `Default`、`EnterpriseLight/Dark`、`OaLight/Dark`、`StateClassicLight/Dark` 和 `ThemeProbe` 未主动引用 Verdana、Arial、Helvetica、Times New Roman、Courier New、Consolas、Segoe UI、Microsoft YaHei 或微软雅黑。
 
-<!-- build-stamp: 8488FD69BE0F -->
+<!-- build-stamp: DADD0334689B -->

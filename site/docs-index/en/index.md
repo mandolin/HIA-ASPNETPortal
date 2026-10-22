@@ -100,4 +100,4 @@ maintainers.
 - Documents are organised into eight sections — product overview / evaluate / quick start / learn / reference / develop /
  operate / changes; see the [documentation map](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-map.md).
 
-<!-- build-stamp: EA86F0CB2B1B -->
+<!-- build-stamp: 3690472743AA -->
