@@ -1,16 +1,16 @@
 <#
 .SYNOPSIS
 <lang>
-  <zh-CN>版本一致性门禁：校验「CHANGELOG 最新条目版本」「最新 git 标签版本」「程序集版本」三者一致，防止版本锚点漂移。</zh-CN>
-  <en>Version-consistency gate: verifies that the latest CHANGELOG entry, the latest git tag and the assembly versions all agree so version anchors cannot drift.</en>
+  <zh-CN>版本一致性门禁：校验全部 8 类版本锚点（CHANGELOG 最新条目 / 最新 git 标签 / 5 个程序集 / README 中英「当前版本」声明 / versioning §6 当前版本 / 首页中英版本统计）一致，防止版本锚点漂移。</zh-CN>
+  <en>Version-consistency gate: verifies that all 8 version anchors agree — the latest CHANGELOG entry, the latest git tag, the five assemblies, the README (zh/en) "current version" declarations, the versioning §6 current version, and the homepage (zh/en) version statistic — so version anchors cannot drift.</en>
 </lang>
 .DESCRIPTION
 <lang>
   <zh-CN>**前置条件**：Git 仓库可读、根 `CHANGELOG.md` 存在；本脚本不连接网络、不写入任何文件、不创建或修改标签。
-  **验证方式**：退出码 0 表示三者一致、1 表示存在漂移；输出逐项列出不一致的版本锚点。
+  **验证方式**：退出码 0 表示各版本锚点一致、1 表示存在漂移；输出逐项列出不一致的版本锚点。
   **低敏边界**：只读取版本文本与 git 标签名，不读取凭据、连接串或业务数据。</zh-CN>
   <en>**Prerequisites**: a readable Git repository and an existing root `CHANGELOG.md`; this script does not use the network, write any file, or create or modify tags.
-  **Verification**: exit code 0 means all three agree, 1 means drift; the output lists each inconsistent version anchor.
+  **Verification**: exit code 0 means all anchors agree, 1 means drift; the output lists each inconsistent version anchor.
   **Low-sensitivity boundary**: only version text and git tag names are read — no credentials, connection strings or business data.</en>
 </lang>
 .PARAMETER RepoRoot
@@ -19,9 +19,9 @@
   <en>Repository root; when empty, two levels above the script directory (`dev\scripts` -> repository root).</en>
 </lang>
 
-  证明边界：只证明「CHANGELOG 最新条目版本 / 最新 git 标签版本 / 程序集版本」三者一致；不证明发布流程已执行或产物已发布，不校验版本号语义（是否该升主版本由人决定）。
+  证明边界：只证明「CHANGELOG 最新条目 / 最新 git 标签 / 5 个程序集 / README 中英「当前版本」声明 / versioning §6 当前版本 / 首页中英版本统计」各版本锚点一致；不证明发布流程已执行或产物已发布，不校验版本号语义（是否该升主版本由人决定）。
 
-  Proof boundary: Proves only that the three version anchors (latest CHANGELOG entry, latest git tag, assembly version) agree; it does not prove a release was performed or artefacts published, and does not judge version-number semantics (whether a major bump is warranted is a human decision).
+  Proof boundary: Proves only that all version anchors agree — latest CHANGELOG entry, latest git tag, the five assemblies, the README (zh/en) "current version" declarations, the versioning §6 current version, and the homepage (zh/en) version statistic; it does not prove a release was performed or artefacts published, and does not judge version-number semantics (whether a major bump is warranted is a human decision).
 #>
 
 param(
@@ -169,6 +169,47 @@ foreach ($p in $declarationTargets) {
         if ($authoritative -and $declared -ne $authoritative) {
             $problems += ('公开面文档 ' + $rel + ' 声明的当前版本 ' + $d.Groups[2].Value + ' 与权威版本 ' + $tag + ' 不一致（过期版本号）')
         }
+    }
+}
+
+# <lang>
+#   <zh-CN>**B2-site（W-anp-P219 新增）：首页版本统计（A7/A8）必须与权威版本一致。**
+#     W138/B2 已覆盖 README 中英与 `docs/versioning.md` 的「当前版本」声明（A4/A5/A6），但 `site/index.md` 与
+#     `site/en/index.md` 里的版本统计（`<div class="oc-stat-val">vX.Y.Z</div>` 紧跟 `<div class="oc-stat-label">当前版本</div>`）
+#     仍是盲区——正是 v1.2.0 封版漏改的两处之一。首页是构建产物的手写残留，标签在**兄弟 div**而非同行，
+#     故用「版本 div 后紧跟当前版本标签 div」的精确正则，避免误命中 MIT / 皮肤套数 / 文档篇数 等其它 oc-stat-val。
+#     权威源同样取 git tag（与 B2 一致）；tag 缺失时跳过该项（不误报）。</zh-CN>
+#   <en>**B2-site (new in W-anp-P219): the homepage version statistic (A7/A8) must match the authoritative version.**
+#     W138/B2 already covers the README (zh/en) and `docs/versioning.md` "current version" declarations (A4/A5/A6),
+#     but the version statistic inside `site/index.md` and `site/en/index.md`
+#     (`<div class="oc-stat-val">vX.Y.Z</div>` immediately followed by `<div class="oc-stat-label">当前版本</div>`)
+#     was still a blind spot — one of the two places missed at the v1.2.0 release. The homepage is a hand-maintained
+#     build artefact whose label sits in a **sibling div**, not on the same line, so we use a precise regex matching the
+#     version div immediately followed by the current-version label div, avoiding false hits on MIT / skin count /
+#     document count and other oc-stat-val entries. The authoritative source is again the git tag (same as B2); when the
+#     tag is missing this check is skipped (no false positive).</en>
+# </lang>
+$siteStatSpecs = @(
+    @{ Rel = 'site/index.md'; Label = '当前版本' },
+    @{ Rel = 'site/en/index.md'; Label = 'Current version' }
+)
+foreach ($spec in $siteStatSpecs) {
+    $p = Join-Path $RepoRoot $spec.Rel
+    if (-not (Test-Path -LiteralPath $p)) { continue }
+    $rel = $spec.Rel
+    $text = [System.IO.File]::ReadAllText($p, [System.Text.UTF8Encoding]::new($false))
+    # 版本 div 后（可有空白）紧跟「当前版本」标签 div——精确锚定，避开其它统计项
+    $m = [regex]::Match($text, '<div class="oc-stat-val">v(\d+\.\d+\.\d+)</div>\s*<div class="oc-stat-label">' + [regex]::Escape($spec.Label) + '</div>')
+    $authoritative = ($tag -replace '^v', '')
+    if ($m.Success) {
+        $declared = $m.Groups[1].Value
+        if ($authoritative -and $declared -ne $authoritative) {
+            $problems += ('首页 ' + $rel + ' 版本统计 ' + $declared + ' 与权威版本 ' + $tag + ' 不一致（过期版本号，A7/A8 盲区）')
+        }
+    }
+    else {
+        # 结构缺失也报出来，避免「页面被改坏 / 版本统计被删」静默通过
+        $problems += ('首页 ' + $rel + ' 未找到「版本统计 div 紧跟 oc-stat-label=' + $spec.Label + '」结构（首页版本锚点丢失）')
     }
 }
 
