@@ -32,7 +32,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
   <h2 class="oc-h2">为已经有 .NET 资产的团队准备</h2>
   <p class="oc-lead">如果你希望在既有 .NET Framework 4.8 / Web Forms 技术栈与运维体系上继续建设内网门户，本项目提供缺少的那几块：细粒度授权、流程状态机、审计、模块与主题治理，以及把质量约束跑成命令门的自动化门禁。</p>
   <div class="oc-stats">
-    <div><div class="oc-stat-val">v1.2.0</div><div class="oc-stat-label">当前版本</div></div>
+    <div><div class="oc-stat-val">v1.3.0</div><div class="oc-stat-label">当前版本</div></div>
     <div><div class="oc-stat-val">MIT</div><div class="oc-stat-label">开源许可</div></div>
     <div><div class="oc-stat-val">7</div><div class="oc-stat-label">套正式皮肤</div></div>
     <div><div class="oc-stat-val">双语</div><div class="oc-stat-label">中 / 英文资源</div></div>
