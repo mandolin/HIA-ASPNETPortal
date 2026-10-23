@@ -6,6 +6,26 @@
 
 ## [Unreleased]
 
+## [v1.4.0] - 2026-10-23
+
+**发布与门禁自动化**：质量门禁从"只在本地被人跑"变成 **CI 真在跑、且红线由结构保证**；发布流程从"版本锚点分散在多个文件里人工逐处改、一致性门禁只查三类、封版前检查靠人记得、Release 说明手写"变成**半自动 + 机器可判**。对应 `C-anp-P38`（门禁接入 CI）与 `C-anp-P39`（发布流程半自动化），产品行为改动为零。
+### 新增
+- **L1 门禁进 CI、红即阻断发布**：`publish-site.yml` 的 `gates` 作业跑 L1（构建 + 单元测试 + 业务模块冒烟），`publish` 作业 `needs: gates`——门禁红则发布根本不开始，"发布前必须门禁绿"由**结构**保证，而不是靠人记得先跑一遍。
+- **L0 每日报告工作流**（`gate-report.yml`）：每日定时跑 L0 全量，失败不阻断但作业摘要标红 + 附证据；区分真失败（exit 1 = 红）与环境性前置缺失（exit 2 = 不阻断），不让"CI 取不到某数据源"误报红。
+- **版本锚点同步半自动脚本**（`Sync-PortalVersionAnchors.ps1`）：从单一来源（版本号 + 日期）一次性写全部 8 类锚点（CHANGELOG / 5 个 `AssemblyInfo.cs` / README 中英 / `versioning.md` 第六节 / 首页中英统计），幂等、支持 `-WhatIf` 预览；只改当前版本锚点、不动历史版本提及。
+- **封版前检查门禁接入发布流程**（`release-gate.yml`）：手动触发，跑 `Test-PortalReleaseReadiness.ps1` 全量 F1–F8，作为人工封版前的必跑检查点；独立于每 push 的发布流程（避免封版间期的正常状态误阻日常发布）。
+- **Release 说明自动生成**（`New-PortalReleaseNotes.ps1`）：从 CHANGELOG 指定版本段**逐字**生成 GitHub Release 说明，无编造、无遗漏；与文件系统发布包 manifest 脚本职责区分。
+- **并发两层互斥**：CI `concurrency` 组（同组排队、绝不取消）+ 门禁套件命名互斥体（崩溃由 OS 自动释放、无残留锁），避免并发运行互相覆盖构建产物。
+### 变更
+- **版本一致性门禁扩面**（`Test-PortalVersionConsistency.ps1`）：从"CHANGELOG / tag / 程序集"三查扩到 **8 类锚点全查**——新增首页版本统计（`site/index.md` 与 `site/en/index.md`）检查，补齐 v1.2.0 漏改暴露的最后一类盲区；任一锚点漂移即 fail，不再依赖别的检查恰好兜底。
+- **`Build-Solution.ps1` 补 NuGet 还原**：`src/packages/` 被 gitignore、零文件入库，此前干净检出上不还原会导致构建失败。
+### 修复
+- **CI 首跑暴露的真缺陷**（"本地绿、CI 红"）：`Build-Solution.ps1` 不还原 `packages/`，本地因存在未跟踪包假绿、CI 干净检出必红（`MSB3245` + 一连串 `CS0234`）；已补 NuGet 还原 + `gates` 作业加 Ensure NuGet CLI 步骤。
+- **`publish-site.yml` 的 `paths` 过滤器**：原逐个列举脚本、漏列 `Build-Solution.ps1`（改门禁自身脚本却不触发门禁的典型失效）；改为整个 `dev/scripts/**` 计入触发条件。
+### 验证
+- 门禁套件 L0 53 项（失败 0、跳过 1 为环境性）、L1 9/9；账本一致性 PASS；编号门禁 FailedChecks 0。
+- **模拟封版演练**：临时副本跑 `Sync` → 封版后一致性**零漂移 PASS** → Release 说明与 CHANGELOG **逐字节一致**。
+- **注入验证 3 项**：故意把程序集 / 首页版本统计 / README 当前版本改旧，一致性门禁均 fail 抓回，还原后零漂移恢复。
 ## [v1.3.0] - 2026-10-23
 
 **文档体系完整化**：代码文档从"只有 JSDoc 半边、说明页写着待渲染组件就位"变成**双半边上架且被门禁看守**；模块使用说明从 11 个扩到 **19 个**（含此前既无页面也未登记的 8 个较新模块）。与 `C-anp-P36`、`C-anp-P37` 两个周期对应，产品行为改动为零。
