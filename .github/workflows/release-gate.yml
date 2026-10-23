@@ -1,0 +1,165 @@
+# <lang>
+#   <zh-CN>封版前检查门禁工作流（`C-anp-P39` / `W-anp-P220`）。
+#
+#     **它做什么**：只在人要领封版时**手动触发**（`workflow_dispatch`，填目标版本号），跑
+#     `Test-PortalReleaseReadiness.ps1` 全量 F1–F8，作为封版前的必跑检查点；失败明确列出哪一项不过。
+#
+#     **为什么是独立工作流、不并进 `publish-site.yml`**（用户裁定 / 本周期护栏）：
+#     `publish-site.yml` 的 `gates` 作业只跑 **L1**（P38 已定红线：L1 红即阻止发布），其门禁是"每次 push
+#     到 `main` 时自动跑"的日常门禁。而封版就绪检查（F1 `Unreleased` 段有内容 / F3 目标 tag 尚未存在 /
+#     F4 最近门禁运行无失败 / F7 备忘无阻塞项 / F8 versioning §6 无漂移……）是**封版间期的正常状态会让它 FAIL**
+#     的检查（例如封版后 `Unreleased` 段本就为空），若并进每 push 的发布流程会**误阻日常发布**。
+#     所以封版就绪检查独立成此工作流，只在人要领封版时手动触发。
+#
+#     **F6（发布后线上复核）为什么在本检查点不阻断**：F6 依赖已发布的站点，封版前根本跑不了——
+#     它是"发布后"的判据。故本工作流跑出 `exit 2`（无硬失败、但有未确认项，通常就是 F6）时**放行**，
+#     但在作业摘要里明确提示"F6 需发布后另跑"。硬失败（`exit 1`，如 F1 空段 / F2 漂移 / F3 重复 tag /
+#     F4 门禁红 / F7 有阻塞项 / F8 漂移）才阻断。
+#
+#     **F4 的新鲜产物从哪来**：本工作流先跑一次 **L1 门禁套件**（构建 + 单测 + 业务模块冒烟，约 0.6 分钟），
+#     把 `gate-suite-summary.json` 喂给 F4——避免"F4 永远拿不到刚出炉的产物而每天未确认"。
+#     L0（53 项静态门禁）由每日 `gate-report.yml` 覆盖，此处不重跑（避免网络依赖性门禁在 CI 误阻封版）。
+#
+#     **与 `publish-site.yml` 共用 `windows-latest` 与并发互斥体思路**：本工作流也加 `concurrency` 组
+#     （排队不取消），避免和正在跑的 `publish-site.yml` 的 `gates` 作业同时改写 `bin/obj` / `site/`（同源的 D2 风险）。</zh-CN>
+#   <en>Release-readiness gate workflow (`C-anp-P39` / `W-anp-P220`).
+#
+#     **What it does**: triggered **manually only** (`workflow_dispatch`, with a target-version input) when a human is
+#     about to seal a release; it runs `Test-PortalReleaseReadiness.ps1` for the full F1–F8 and serves as the mandatory
+#     pre-seal checkpoint, listing exactly which item failed.
+#
+#     **Why a separate workflow, not folded into `publish-site.yml`** (user ruling / this cycle's guardrail): the
+#     `publish-site.yml` `gates` job runs only **L1** (P38's red line: a red L1 blocks publishing), and those gates are
+#     the *daily* gates that run on every push to `main`. The release-readiness checks (F1 non-empty `Unreleased` section /
+#     F3 target tag not yet existing / F4 no failed recent gate run / F7 no blocking memo item / F8 versioning §6 no drift…)
+#     are checks whose **normal between-release state would make them FAIL** (for example the empty `Unreleased` section
+#     right after a seal). Folding them into the per-push publish flow would **falsely block everyday publishing**, so they
+#     live in this separate, manually-triggered workflow.
+#
+#     **Why F6 (post-publish live re-check) does not block this checkpoint**: F6 depends on the already-published site,
+#     which cannot exist before sealing — it is a *post-publish* criterion. Hence when this workflow yields `exit 2` (no hard
+#     failure but unconfirmed items, typically F6 only), it **passes** while the job summary clearly notes "F6 must be run
+#     after publishing". A hard failure (`exit 1` — F1 empty section / F2 drift / F3 duplicate tag / F4 red gates / F7
+#     blocking item / F8 drift) does block.
+#
+#     **Where F4's fresh artifact comes from**: this workflow first runs the **L1 gate suite** (build + unit tests +
+#     business-module smoke, ~0.6 min) and feeds its `gate-suite-summary.json` to F4, so F4 never sits on a stale or
+#     perpetually-unconfirmed artifact. L0 (53 static gates) is covered by the daily `gate-report.yml` and is not re-run
+#     here (to avoid network-dependent gates falsely blocking a release in CI).
+#
+#     **Shares `windows-latest` and the concurrency-mutex thinking with `publish-site.yml`**: this workflow also adds a
+#     `concurrency` group (queue, no cancel) to avoid clashing with a running `publish-site.yml` `gates` job over
+#     `bin/obj` / `site/` rewrites (the same-root D2 risk).</en>
+# </lang>
+name: Release readiness gate
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_version:
+        description: '目标版本号（形如 v1.4.0）；F3 用它判断 tag 是否已存在，其余判据也以它为参照。'
+        required: true
+        default: 'v1.4.0'
+
+permissions:
+  contents: read
+
+# <lang>
+#   <zh-CN>并发组：同组排队，绝不取消（与 P38 同款思路）。避免和正在跑的 `publish-site.yml` 的 `gates` 作业
+#     同时改写 `bin/obj` / `site/`，真正的产物互相覆盖风险（备忘 D2 同源）。</zh-CN>
+#   <en>Concurrency group: queue, never cancel (same thinking as P38). Avoids clashing with a running `publish-site.yml`
+#     `gates` job over `bin/obj` / `site/` rewrites — the genuine artifact-overwrite risk (same root as memo D2).</en>
+# </lang>
+concurrency:
+  group: release-gate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  readiness:
+    runs-on: windows-latest
+    steps:
+      # <lang>
+      #   <zh-CN>完整抓取历史与 tag（`fetch-depth: 0`）——F3 需要完整 tag 列表判断目标 tag 是否已存在。</zh-CN>
+      #   <en>Fetch full history and tags (`fetch-depth: 0`) — F3 needs the complete tag list to judge whether the target
+      #     tag already exists.</en>
+      # </lang>
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # <lang>
+      #   <zh-CN>保障 NuGet CLI 可用（P38 修的真缺陷配套）：`src/packages/` 被 gitignore 零入库，干净检出上 L1 必须先还原，
+      #     `Build-Solution.ps1` 要求 `nuget.exe` 在 PATH 上——本步骤满足该前置。</zh-CN>
+      #   <en>Ensure the NuGet CLI is available (the P38 real-defect counterpart): `src/packages/` is gitignored with zero
+      #     files committed, so a clean checkout must restore first; `Build-Solution.ps1` requires `nuget.exe` on PATH — this
+      #     step satisfies that precondition.</en>
+      # </lang>
+      - name: Ensure NuGet CLI
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (Get-Command nuget.exe -ErrorAction SilentlyContinue) {
+            Write-Host 'nuget.exe already on PATH.'
+            exit 0
+          }
+          $nugetDir = Join-Path $env:RUNNER_TEMP 'nuget-cli'
+          $nugetExe = Join-Path $nugetDir 'nuget.exe'
+          New-Item -ItemType Directory -Force -Path $nugetDir | Out-Null
+          Write-Host 'nuget.exe not on PATH; fetching the official NuGet CLI.'
+          Invoke-WebRequest -Uri 'https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' -OutFile $nugetExe
+          if (-not (Test-Path -LiteralPath $nugetExe -PathType Leaf)) { throw 'NuGet CLI 下载后不存在——下载失败' }
+          Add-Content -Path $env:GITHUB_PATH -Value $nugetDir
+          Write-Host ('NuGet CLI ready at ' + $nugetExe)
+
+      # <lang>
+      #   <zh-CN>先跑一次 **L1 门禁套件**，产出新鲜的 `gate-suite-summary.json`（F4 的来源）。本步骤即 F4 的"新鲜产物"；
+      #     L1 红则这里就抛错，不会带着红门禁继续到 readiness 检查。</zh-CN>
+      #   <en>Run the **L1 gate suite** first to produce a fresh `gate-suite-summary.json` (the source for F4). This step is
+      #     F4's "fresh artifact"; a red L1 throws here instead of carrying a red gate into the readiness check.</en>
+      # </lang>
+      - name: L1 gates (fresh suite stats for F4)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $evidenceDir = Join-Path $env:RUNNER_TEMP 'gate-suite-l1'
+          & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoProfile -NoLogo -File ./dev/scripts/Invoke-PortalGateSuite.ps1 -Layer L1 -EvidenceDir $evidenceDir
+          if ($LASTEXITCODE -ne 0) { throw ('L1 门禁失败，退出码 ' + $LASTEXITCODE + '——按红线中止，F4 不会判过') }
+
+      # <lang>
+      #   <zh-CN>封版前检查（F1–F8）。喂入新鲜 L1 统计产物；`target_version` 来自手动输入。
+      #     退出码映射：`0` 全部通过；`1` 存在硬失败（不就绪，**阻断**）；`2` 无硬失败但有未确认项
+      #     （通常是 F6 发布后线上复核，封版前跑不了）——**放行**但摘要明确提示发布后另跑。</zh-CN>
+      #   <en>Release-readiness check (F1–F8). Feeds the fresh L1 statistics artifact; `target_version` comes from the manual
+      #     input. Exit-code mapping: `0` all pass; `1` a hard failure (not ready, **blocks**); `2` no hard failure but
+      #     unconfirmed items (typically F6 post-publish live re-check, which cannot run before sealing) — **passes** but the
+      #     summary explicitly notes to run it after publishing.</en>
+      # </lang>
+      - name: Release readiness check (F1-F8)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $evidenceDir = Join-Path $env:RUNNER_TEMP 'gate-suite-l1'
+          $summaryPath = Join-Path $evidenceDir 'gate-suite-summary.json'
+          if (-not (Test-Path -LiteralPath $summaryPath -PathType Leaf)) { throw ('未找到 L1 套件统计产物：' + $summaryPath) }
+          & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoProfile -NoLogo -File ./dev/scripts/Test-PortalReleaseReadiness.ps1 -TargetVersion '${{ inputs.target_version }}' -SuiteStatsPath $summaryPath
+          $code = $LASTEXITCODE
+          if ($code -eq 1) {
+            throw ('封版前检查存在 FAIL（exit 1）——不就绪，见上方逐项输出')
+          }
+          elseif ($code -eq 2) {
+            Write-Host '封版前检查：无硬失败，但有未确认项（通常是 F6 发布后线上复核，封版前跑不了）。本检查点为封版前快照，未确认项不阻断；发布后必须另跑 F6 线上复核与完整 L0。'
+          }
+          Write-Host ('封版前检查结论：exit ' + $code)
+
+      # <lang>
+      #   <zh-CN>失败时把 L1 套件证据上传为 artifact，便于排查"哪项红了"。</zh-CN>
+      #   <en>On failure, upload the L1 suite evidence as an artifact so triage can see which gate went red.</en>
+      # </lang>
+      - name: Upload gate evidence (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-suite-l1
+          path: ${{ runner.temp }}/gate-suite-l1
+          if-no-files-found: warn
