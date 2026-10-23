@@ -90,7 +90,7 @@ if (-not (Test-Path -LiteralPath $packagesRoot)) {
         # </lang>
         throw '找不到 nuget.exe，无法还原 packages.config 依赖（src/packages 不存在）。请安装 NuGet CLI 后重跑；不跳过——跳过会重现"本地绿、CI 红"。'
     }
-    & $nuget.Source restore $solutionPath -Verbosity minimal
+    & $nuget.Source restore $solutionPath -Verbosity quiet
     if ($LASTEXITCODE -ne 0) { throw ('nuget restore 失败，退出码 ' + $LASTEXITCODE) }
     Write-Host "NuGet restore complete."
 }
