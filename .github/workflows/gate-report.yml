@@ -83,7 +83,8 @@ jobs:
           $lines = @('### 门禁每日报告（L0）', '', ('运行时间（UTC）：' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-dd HH:mm:ss')), '')
           if (Test-Path -LiteralPath $summary) {
             $s = Get-Content -LiteralPath $summary -Raw | ConvertFrom-Json
-            $lines += ('结论：**' + $(if ($code -eq 0) { '全部通过' } else { '存在失败' }) + '**｜门禁 ' + $s.gateCount + ' 项｜失败 ' + $s.failedCount + '｜跳过 ' + $s.skippedCount)
+            $verdict = $(switch ($code) { 0 { '全部通过' } 2 { '全部通过（含前置缺失跳过）' } default { '存在失败' } })
+            $lines += ('结论：**' + $verdict + '**｜门禁 ' + $s.gateCount + ' 项｜失败 ' + $s.failedCount + '｜跳过 ' + $s.skippedCount)
             $lines += ''
             $lines += '| 门禁 | 类型 | 结论 |'
             $lines += '| --- | --- | --- |'
@@ -97,7 +98,20 @@ jobs:
           }
           Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value ($lines -join "`n")
 
-          if ($code -ne 0) { throw ('L0 门禁报告：存在失败（退出码 ' + $code + '）。详见作业摘要与证据 artifact。') }
+          # <lang>
+          #   <zh-CN>**区分两种非 0**：退出码 1 = 真有门禁失败（产品漂移，必须红）；退出码 2 = 前置缺失式的跳过
+          #     （环境没装某依赖，如 CI 取不到漏洞数据源），**不是产品缺陷**，不应让每日报告误报红。
+          #     但这不等于"忽略"——上述摘要已把跳过项逐条列出，运维看得到。L0 的职责是"让漂移在一天内被发现"，
+          #     而环境性跳过不算漂移。</zh-CN>
+          #   <en>**Distinguish the two non-zero exits**: exit 1 = a gate genuinely failed (product drift, must go red);
+          #     exit 2 = a prerequisite-missing skip (the environment lacks some dependency, e.g. the CI cannot reach the
+          #     vulnerability data source) — **not a product defect**, so the daily report must not false-red on it.
+          #     That does not mean "ignore it": the summary above already lists every skip, so operations can see it. L0's
+          #     job is "let drift be noticed within a day", and an environmental skip is not drift.</en>
+          # </lang>
+          if ($code -eq 1) { throw ('L0 门禁报告：存在失败（退出码 1）。详见作业摘要与证据 artifact。') }
+          elseif ($code -eq 2) { Write-Host 'L0 退出码 2（前置缺失式跳过）：不阻断每日报告，但摘要已列出跳过项。' }
+
 
       - name: Upload gate evidence
         if: always()

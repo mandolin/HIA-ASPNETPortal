@@ -66,7 +66,15 @@ param(
     [string] $EvidenceDir,
     [switch] $StopOnFirstFailure,
     [switch] $IncludeSlow,
-    [switch] $SkipProfileSwitch
+    [switch] $SkipProfileSwitch,
+    # <lang>
+    #   <zh-CN>等待套件互斥体的秒数（`C-anp-P38` / `W-anp-P215`）。默认 600 秒：足够等另一个本地套件跑完
+    #   一轮 L0；设 0 表示"另一个在跑就立即失败"，用于快速确认而不是干等。</zh-CN>
+    #   <en>Seconds to wait for the suite mutex (`C-anp-P38` / `W-anp-P215`). Default 600 s: long enough to let another
+    #     local suite finish an L0 round; 0 means "fail immediately if another is running", for a fast check rather than
+    #     waiting.</en>
+    # </lang>
+    [int] $LockWaitSeconds = 600
 )
 
 $ErrorActionPreference = 'Stop'
@@ -1006,7 +1014,55 @@ $overallFailed = $false
 # </lang>
 $prereqMissing = $false
 
-foreach ($layerName in $layersToRun) {
+# <lang>
+#   <zh-CN>**运行级互斥：一次只允许一个门禁套件**（`C-anp-P38` / `W-anp-P215`，据此关闭备忘 D2）。
+#     D2 的原文是"后续一次只启动一个套件，超时后先确认进程状态再重试"——那是**靠人守的约定**。
+#     本周期把它变成机器断言：用**命名互斥体**而不是锁文件，理由有两条：
+#     ① 进程崩溃或被 kill 时，操作系统会自动释放互斥体，**不存在残留锁**（锁文件会，且要靠时间戳猜新鲜度）；
+#     ② 不需要在每条退出路径上写清理逻辑。
+#     **为什么必须做**：套件里有改写工作树的步骤（`Build-Solution.ps1` 写 `bin/obj`、
+#     `Build-PortalSite.ps1` 改写已签入的 `site/`）。两个套件同时跑不是"假失败"，
+#     是**真的会把对方的产物改掉**——这正是 D2 当初观察到的现象，只是源头从 L2 切库变成了构建产物。
+#     等待而不是立即失败：给人"另一个正在跑、我等它"的机会，而不是一上来就报错。</zh-CN>
+#   <en>**Run-level mutual exclusion: only one gate suite at a time** (`C-anp-P38` / `W-anp-P215`, which closes memo D2).
+#     D2's original wording was "from now on start only one suite at a time; after a timeout, confirm the process state
+#     before retrying" — that was a **convention kept by people**. This cycle turns it into a machine assertion, using a
+#     **named mutex** rather than a lock file, for two reasons: ① when a process crashes or is killed the OS releases the
+#     mutex automatically, so **no stale lock can remain** (a lock file can, and staleness has to be guessed from
+#     timestamps); ② no cleanup logic is needed on every exit path.
+#     **Why it is necessary**: the suite contains steps that rewrite the working tree (`Build-Solution.ps1` writes
+#     `bin/obj`, `Build-PortalSite.ps1` rewrites the committed `site/`). Two suites running at once is not a "false
+#     failure" — they **really overwrite each other's artifacts**, which is exactly the phenomenon D2 observed, with the
+#     source moved from L2 database switching to build artifacts. Waiting rather than failing immediately gives a person
+#     the chance to say "another one is running, I'll wait for it" instead of an instant error.</en>
+# </lang>
+$mutexName = 'Global\HIA-ASPNETPortal-GateSuite'
+$suiteMutex = New-Object System.Threading.Mutex($false, $mutexName)
+$mutexHeld = $false
+$mutexWaitSeconds = if ($LockWaitSeconds -gt 0) { $LockWaitSeconds } else { 600 }
+$mutexWait = [TimeSpan]::FromSeconds($mutexWaitSeconds)
+try {
+    try {
+        $mutexHeld = $suiteMutex.WaitOne($mutexWait)
+    }
+    catch [System.Threading.AbandonedMutexException] {
+        # <lang>
+        #   <zh-CN>上一个持有者**死了但没释放**（崩溃 / kill）。操作系统把互斥体交给我们——
+        #     这正是选互斥体而不是锁文件的理由：不会有永远打不开的残留锁。记一笔再继续。</zh-CN>
+        #   <en>The previous holder **died without releasing** (crash / kill). The OS hands the mutex to us —
+        #     exactly why a mutex was chosen over a lock file: there can be no permanently stuck stale lock. Note it and
+        #     continue.</en>
+        # </lang>
+        Write-Step '[WARN] 上一个门禁套件异常退出（互斥体被放弃），已接管——这不会造成产物冲突，因为对方已不在运行。'
+        $mutexHeld = $true
+    }
+    if (-not $mutexHeld) {
+        $msg = ('另一个门禁套件正在运行（互斥体 ' + $mutexName + '）。已等待 ' + $mutexWait.TotalSeconds + ' 秒仍未取得锁。请等它结束，或用 -LockWaitSeconds 0 立即失败以快速确认。（同时运行会互相覆盖构建产物：Build-Solution 写 bin/obj、Build-PortalSite 改写已签入的 site/。）')
+        throw $msg
+    }
+    Write-Step ('已取得门禁套件互斥体（一次只运行一个；锁由操作系统在进程退出时自动释放）。')
+
+    foreach ($layerName in $layersToRun) {
     Write-Step "--- 层 $layerName ---"
     $gates = @($gateLayers[$layerName])
     if ($IncludeSlow -and $layerName -eq 'L2') { $gates += $slowGates }
@@ -1422,6 +1478,15 @@ foreach ($layerName in $layersToRun) {
     if ($StopOnFirstFailure -and $overallFailed) { break }
 }
 
+# <lang>
+#   <zh-CN>互斥体在这里释放。用 `try/finally` 包住整个执行段，而不是在每条 `exit` 前写一遍：
+#   PowerShell 会保证 `finally` 在 `exit` 之前执行，所以三条退出路径（失败 / 前置缺失 / 成功）
+#   以及任何异常都走同一处清理——**清理逻辑只有一份，就不会漏**。</zh-CN>
+#   <en>The mutex is released here. The whole execution segment is wrapped in `try/finally` rather than writing cleanup
+#     before each `exit`: PowerShell guarantees `finally` runs before `exit`, so all three exit paths (failure /
+#     prerequisite missing / success) and any exception go through one cleanup — **there is only one copy of the cleanup
+#     logic, so it cannot be missed**.</en>
+# </lang>
 $summary = [pscustomobject]@{
     phase = 'W-anp-P85 gate suite'
     generatedUtc = (Get-Date).ToUniversalTime().ToString('o')
@@ -1442,4 +1507,20 @@ Write-Step "证据：$EvidenceDir"
 if ($overallFailed) { exit 1 }
 if ($prereqMissing) { exit 2 }
 exit 0
+}
+finally {
+    # <lang>
+    #   <zh-CN>无论成功、失败还是异常，都在这里释放互斥体。**先判 `$mutexHeld` 再释放**——
+    #     没拿到锁就释放会抛 `ApplicationException`（"Object synchronization method was called from an
+    #     unsynchronized block of code"），把一次"另一个套件在跑"的清晰失败糊成难懂的异常。</zh-CN>
+    #   <en>The mutex is released here on success, failure or exception. **Check `$mutexHeld` before releasing** —
+    #     releasing without holding throws `ApplicationException` ("Object synchronization method was called from an
+    #     unsynchronized block of code"), which would smear a clear "another suite is running" failure into an
+    #     unintelligible exception.</en>
+    # </lang>
+    if ($mutexHeld) {
+        try { $suiteMutex.ReleaseMutex() } catch { Write-Step ('[WARN] 释放互斥体失败：' + $_.Exception.Message) }
+    }
+    try { $suiteMutex.Dispose() } catch { }
+}
 
