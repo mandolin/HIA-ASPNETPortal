@@ -48,12 +48,21 @@ on:
     paths:
       - 'site/**'
       - 'docs/**'
-      - 'dev/scripts/Build-PortalSite.ps1'
-      - 'dev/scripts/Test-PortalSitePublicSurface.ps1'
-      - 'dev/scripts/Test-PortalPublicDocumentation.ps1'
-      - 'dev/scripts/Test-PortalPublishedSiteChecks.ps1'
-      - 'dev/scripts/Invoke-PortalGateSuite.ps1'
-      - '.github/workflows/publish-site.yml'
+      # <lang>
+      #   <zh-CN>**整个 `dev/scripts/**` 都算触发条件**（`C-anp-P38` / `W-anp-P213` 修的真缺口）。
+      #     此前逐个列出脚本，结果漏了 `Build-Solution.ps1`——而它正是 `gates` 作业跑 L1 时的第一个门禁。
+      #     改门禁自己的脚本却不触发门禁，是 `paths` 过滤最典型的一种失效：**清单式列举必然漏，
+      #     而漏掉的那一个往往就是关键的那一个**。既然本工作流既跑门禁又建站点，
+      #     它依赖的就是全部脚本，没有理由只挑几个。</zh-CN>
+      #   <en>**The whole `dev/scripts/**` counts as a trigger** (a real gap fixed by `C-anp-P38` / `W-anp-P213`).
+      #     This used to list scripts individually and therefore missed `Build-Solution.ps1` — which is precisely the
+      #     first gate the `gates` job runs for L1. Changing a gate's own script without triggering the gate is the most
+      #     typical `paths`-filter failure: **an enumerated list is bound to miss something, and the thing it misses tends
+      #     to be the critical one**. Since this workflow runs both the gates and the site build, it depends on all the
+      #     scripts, and there is no reason to pick only a few.</en>
+      # </lang>
+      - 'dev/scripts/**'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
