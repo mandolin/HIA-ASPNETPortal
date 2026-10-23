@@ -104,6 +104,38 @@ jobs:
         with:
           fetch-depth: 0
 
+      # <lang>
+      #   <zh-CN>**保障 NuGet CLI 可用**（`C-anp-P38` / `W-anp-P213` 修的真缺陷的配套）。
+      #     解决方案用 `packages.config` 风格引用，而 `src/packages/` 被 gitignore、零文件入库，
+      #     所以干净检出上必须**先还原**。`Build-Solution.ps1` 现在会自己做这件事，但它要求
+      #     `nuget.exe` 在 PATH 上——**本步骤负责满足这个前置**（缺失则从官方 dist 站点取）。
+      #     职责划分：门禁**断言**前置，工作流**满足**前置。两边都做，才不会出现
+      #     "门禁说缺工具、工作流以为门禁自己会装"的空档。</zh-CN>
+      #   <en>**Ensure the NuGet CLI is available** (the counterpart to the real defect fixed by `C-anp-P38` /
+      #     `W-anp-P213`). The solution uses `packages.config`-style references while `src/packages/` is gitignored
+      #     with zero files committed, so a clean checkout must **restore first**. `Build-Solution.ps1` now does that
+      #     itself, but it requires `nuget.exe` on PATH — **this step satisfies that precondition** (fetching from the
+      #     official dist site when absent). Division of duty: the gate **asserts** the precondition, the workflow
+      #     **satisfies** it. Both halves are needed, otherwise a gap opens where "the gate says a tool is missing"
+      #     and "the workflow assumes the gate installs it itself".</en>
+      # </lang>
+      - name: Ensure NuGet CLI
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (Get-Command nuget.exe -ErrorAction SilentlyContinue) {
+            Write-Host 'nuget.exe already on PATH.'
+            exit 0
+          }
+          $nugetDir = Join-Path $env:RUNNER_TEMP 'nuget-cli'
+          $nugetExe = Join-Path $nugetDir 'nuget.exe'
+          New-Item -ItemType Directory -Force -Path $nugetDir | Out-Null
+          Write-Host 'nuget.exe not on PATH; fetching the official NuGet CLI.'
+          Invoke-WebRequest -Uri 'https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' -OutFile $nugetExe
+          if (-not (Test-Path -LiteralPath $nugetExe -PathType Leaf)) { throw 'NuGet CLI 下载后不存在——下载失败' }
+          Add-Content -Path $env:GITHUB_PATH -Value $nugetDir
+          Write-Host ('NuGet CLI ready at ' + $nugetExe)
+
       - name: L1 gates (build + tests + business-module smoke)
         shell: pwsh
         run: |

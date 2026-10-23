@@ -54,6 +54,51 @@ if (-not (Test-Path -LiteralPath $solutionPath)) {
 }
 
 # <lang>
+#   <zh-CN>**构建前先还原 NuGet 包**（`C-anp-P38` / `W-anp-P213` 修的真缺陷）。
+#     这个解决方案用 `packages.config` 风格引用（EntityFramework / MSTest.TestFramework / EntityFramework.SqlServer /
+#     Microsoft.VisualStudio.QualityTools.UnitTestFramework），而 `src/packages/` **被 .gitignore 忽略、零文件入库**。
+#     于是本脚本此前在本地永远绿——本地工作树里恰好有 19 个未跟踪的包目录；而在 CI 的干净检出上
+#     引用无法解析，构建直接失败（`MSB3245: Could not locate the assembly "EntityFramework"` +
+#     一连串 `CS0234`）。
+#     **这正是备忘 D8 那一类**："本地门禁跑在未跟踪文件上会给假通过"——只是这里未跟踪的不是文档，是依赖包。
+#     修在门禁自身而不是只修工作流：门禁必须在"干净树"与"本地树"两种环境下都自足，
+#     否则同一份代码在两种环境给出相反结论，比没有门禁更糟。</zh-CN>
+#   <en>**Restore NuGet packages before building** (a real defect fixed by `C-anp-P38` / `W-anp-P213`).
+#     This solution uses `packages.config`-style references (EntityFramework / MSTest.TestFramework /
+#     EntityFramework.SqlServer / Microsoft.VisualStudio.QualityTools.UnitTestFramework), while `src/packages/`
+#     **is gitignored with zero files committed**. This script therefore always passed locally — the local working tree
+#     happens to hold 19 untracked package directories; on a clean CI checkout the references cannot resolve and the build
+#     fails outright (`MSB3245: Could not locate the assembly "EntityFramework"` followed by a chain of `CS0234`).
+#     **This is exactly the class of memo D8**: "local gates run on untracked files give false passes" — except here the
+#     untracked thing is not documentation but dependency packages. The fix belongs in the gate itself rather than only in
+#     the workflow: a gate must be self-sufficient on both a clean tree and a local tree, otherwise the same code yields
+#     opposite verdicts in the two environments, which is worse than having no gate.</en>
+# </lang>
+$packagesRoot = Join-Path $repoRoot 'src\packages'
+if (-not (Test-Path -LiteralPath $packagesRoot)) {
+    Write-Host "Restoring NuGet packages (src/packages absent on a clean checkout)"
+    $nuget = Get-Command nuget.exe -ErrorAction SilentlyContinue
+    if (-not $nuget) {
+        # <lang>
+        #   <zh-CN>找不到 `nuget.exe` 时**不静默跳过**：跳过就等于回到"本地绿、CI 红"的老路。
+        #     明确失败并给出可执行提示（windows-latest 运行器自带 nuget CLI；本地可用
+        #     `dotnet tool install --global NuGet.CommandLine` 或从 VS 开发者命令行取）。</zh-CN>
+        #   <en>When `nuget.exe` cannot be found the script **does not silently skip**: skipping would walk straight back
+        #     into the old "green locally, red in CI" path. It fails explicitly with an actionable hint (the windows-latest
+        #     runner ships the nuget CLI; locally use `dotnet tool install --global NuGet.CommandLine` or take it from a VS
+        #     developer prompt).</en>
+        # </lang>
+        throw '找不到 nuget.exe，无法还原 packages.config 依赖（src/packages 不存在）。请安装 NuGet CLI 后重跑；不跳过——跳过会重现"本地绿、CI 红"。'
+    }
+    & $nuget.Source restore $solutionPath -Verbosity minimal
+    if ($LASTEXITCODE -ne 0) { throw ('nuget restore 失败，退出码 ' + $LASTEXITCODE) }
+    Write-Host "NuGet restore complete."
+}
+else {
+    Write-Host "NuGet packages already present (src/packages exists); skipping restore."
+}
+
+# <lang>
 #   <zh-CN>MSBuild 解析委托给共享只读 helper；本入口不安装、修复或修改 Visual Studio 组件。</zh-CN>
 #   <en>Delegate MSBuild discovery to the shared read-only helper; this entrypoint does not install, repair, or modify Visual Studio components.</en>
 # </lang>
