@@ -1,0 +1,1522 @@
+[
+  {
+    "name": "portal-build",
+    "longname": "module:portal-build",
+    "kind": "module",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 5,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 5,
+            "column": 1
+          },
+          "end": {
+            "line": 5,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L5",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:module:module:portal-build",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 13,
+            "column": 1
+          },
+          "end": {
+            "line": 31,
+            "column": 37
+          }
+        },
+        "content": "// <lang>\n//   <zh-CN>这些导入共同组成旧 Web Forms 门户的前端资产管线；保持显式依赖，避免 Visual Studio Task Runner 与 VSCode 自动化走不同实现。</zh-CN>\n//   <en>These imports form the legacy Web Forms portal asset pipeline; keeping dependencies explicit prevents Visual Studio Task Runner and VSCode automation from using divergent implementations.</en>\n// </lang>\nimport gulp from 'gulp';\nimport changed from 'gulp-changed';\nimport gulpCoffee from 'gulp-coffee';\nimport gulpUglify from 'gulp-uglify';\nimport gulpRename from 'gulp-rename';\nimport sourcemaps from 'gulp-sourcemaps';\nimport cleanCSS from 'gulp-clean-css';\nimport postcss from 'gulp-postcss';\nimport gulpSass from 'gulp-sass';\nimport * as sass from 'sass';\nimport autoprefixer from 'autoprefixer';\nimport cssnano from 'cssnano';\nimport fs from 'fs';\nimport path from 'path';\nimport { fileURLToPath } from 'url';",
+        "rangeSource": "heuristic",
+        "confidence": "medium",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L13-L31",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "// <lang>\n//   <zh-CN>这些导入共同组成旧 Web Forms 门户的前端资产管线；保持显式依赖，避免 Visual Studio Task Runner 与 VSCode 自动化走不同实现。</zh-CN>\n//   <en>These imports form the legacy Web Forms portal asset pipeline; keeping dependencies explicit prevents Visual Studio Task Runner and VSCode automation from using divergent implementations.</en>\n// </lang>\nimport gulp from 'gulp';\nimport changed from 'gulp-changed';\nimport gulpCoffee from 'gulp-coffee';\nimport gulpUglify from 'gulp-uglify';\nimport gulpRename from 'gulp-rename';\nimport sourcemaps from 'gulp-sourcemaps';\nimport cleanCSS from 'gulp-clean-css';\nimport postcss from 'gulp-postcss';\nimport gulpSass from 'gulp-sass';\nimport * as sass from 'sass';\nimport autoprefixer from 'autoprefixer';\nimport cssnano from 'cssnano';\nimport fs from 'fs';\nimport path from 'path';\nimport { fileURLToPath } from 'url';",
+          "range": {
+            "start": {
+              "line": 13,
+              "column": 1
+            },
+            "end": {
+              "line": 31,
+              "column": 37
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 1,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "postcssProcessors",
+    "longname": "module:portal-build~postcssProcessors",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 47,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 47,
+            "column": 1
+          },
+          "end": {
+            "line": 47,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L47",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-build~postcssProcessors",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 55,
+            "column": 1
+          },
+          "end": {
+            "line": 67,
+            "column": 3
+          }
+        },
+        "content": "const postcssProcessors = () => [\n    // <lang>\n    //   <zh-CN>先补浏览器前缀再压缩，避免 cssnano 在最终输出阶段前移除仍需参与兼容转换的结构。</zh-CN>\n    //   <en>Apply browser prefixes before minification so cssnano does not remove structures still needed for compatibility transforms.</en>\n    // </lang>\n    autoprefixer(),\n\n    // <lang>\n    //   <zh-CN>最后压缩 CSS，使 Visual Studio 和自动化任务得到相同的发布形态资源。</zh-CN>\n    //   <en>Minify CSS last so Visual Studio and automation tasks produce the same release-shaped assets.</en>\n    // </lang>\n    cssnano()\n];",
+        "rangeSource": "parser-js",
+        "confidence": "medium",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L55-L67",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "const postcssProcessors = () => [\n    // <lang>\n    //   <zh-CN>先补浏览器前缀再压缩，避免 cssnano 在最终输出阶段前移除仍需参与兼容转换的结构。</zh-CN>\n    //   <en>Apply browser prefixes before minification so cssnano does not remove structures still needed for compatibility transforms.</en>\n    // </lang>\n    autoprefixer(),\n\n    // <lang>\n    //   <zh-CN>最后压缩 CSS，使 Visual Studio 和自动化任务得到相同的发布形态资源。</zh-CN>\n    //   <en>Minify CSS last so Visual Studio and automation tasks produce the same release-shaped assets.</en>\n    // </lang>\n    cssnano()\n];",
+          "range": {
+            "start": {
+              "line": 55,
+              "column": 1
+            },
+            "end": {
+              "line": 67,
+              "column": 3
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 2,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "esjs",
+    "longname": "module:portal-build~esjs",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 69,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 69,
+            "column": 1
+          },
+          "end": {
+            "line": 69,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L69",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-build~esjs",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 77,
+            "column": 1
+          },
+          "end": {
+            "line": 82,
+            "column": 31
+          }
+        },
+        "content": "const esjs = () => {\n    // <lang>\n    //   <zh-CN>保留低成本控制台标记，方便 Task Runner 与命令行区分 ES 模块构建是否真正触发。</zh-CN>\n    //   <en>Keep a low-cost console marker so Task Runner and command-line runs can tell whether the ES module build actually started.</en>\n    // </lang>\n    console.log('esjs begin');",
+        "rangeSource": "parser-js",
+        "confidence": "medium",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L77-L82",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "const esjs = () => {\n    // <lang>\n    //   <zh-CN>保留低成本控制台标记，方便 Task Runner 与命令行区分 ES 模块构建是否真正触发。</zh-CN>\n    //   <en>Keep a low-cost console marker so Task Runner and command-line runs can tell whether the ES module build actually started.</en>\n    // </lang>\n    console.log('esjs begin');",
+          "range": {
+            "start": {
+              "line": 77,
+              "column": 1
+            },
+            "end": {
+              "line": 82,
+              "column": 31
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 2,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "coffeejs",
+    "longname": "module:portal-build~coffeejs",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 166,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 166,
+            "column": 1
+          },
+          "end": {
+            "line": 166,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L166",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-build~coffeejs",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 174,
+            "column": 1
+          },
+          "end": {
+            "line": 202,
+            "column": 3
+          }
+        },
+        "content": "const coffeejs = () => {\n    // <lang>\n    //   <zh-CN>CoffeeScript 管线只处理现有 `.coffee` 源文件，并以相邻 `.js` 作为增量输出目标。</zh-CN>\n    //   <en>The CoffeeScript pipeline processes only existing `.coffee` sources and uses adjacent `.js` files as incremental output targets.</en>\n    // </lang>\n    // <lang><zh-CN>同 `esjs`：源目录不存在时跳过而非抛错；`js/` 不存在时上一条任务已返回。</zh-CN><en>As in `esjs`: skip rather than throw when the source folder is absent; if `js/` does not exist this pipeline has nothing to do.</en></lang>\n    if (!fs.existsSync('js/')) {\n        console.log('coffeejs skipped: source folder js/ does not exist.');\n        return Promise.resolve();\n    }\n    return gulp.src('js/**/*.coffee', { sourcemaps: true, allowEmpty: true })\n        .pipe(changed('js/', { extension: '.js' }))\n        .pipe(sourcemaps.init())\n        // <lang>\n        //   <zh-CN>`bare: true` 保持旧脚本的全局/模块包装行为，不额外套 CoffeeScript 生成闭包。</zh-CN>\n        //   <en>`bare: true` preserves legacy script global/module wrapping behavior instead of adding a CoffeeScript-generated closure.</en>\n        // </lang>\n        .pipe(gulpCoffee({ bare: true }))\n        .pipe(gulpUglify())\n        .pipe(gulpRename((newPath) => {\n            // <lang>\n            //   <zh-CN>无论输入后缀如何，运行时产物固定为 `.js`，匹配 Web Forms 页面和静态资源约定。</zh-CN>\n            //   <en>Whatever the input suffix, runtime artifacts are fixed to `.js` to match Web Forms page and static-asset conventions.</en>\n            // </lang>\n            newPath.extname = '.js';\n        }))\n        .pipe(sourcemaps.write(''))\n        .pipe(gulp.dest('js/'));\n};",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L174-L202",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "const coffeejs = () => {\n    // <lang>\n    //   <zh-CN>CoffeeScript 管线只处理现有 `.coffee` 源文件，并以相邻 `.js` 作为增量输出目标。</zh-CN>\n    //   <en>The CoffeeScript pipeline processes only existing `.coffee` sources and uses adjacent `.js` files as incremental output targets.</en>\n    // </lang>\n    // <lang><zh-CN>同 `esjs`：源目录不存在时跳过而非抛错；`js/` 不存在时上一条任务已返回。</zh-CN><en>As in `esjs`: skip rather than throw when the source folder is absent; if `js/` does not exist this pipeline has nothing to do.</en></lang>\n    if (!fs.existsSync('js/')) {\n        console.log('coffeejs skipped: source folder js/ does not exist.');\n        return Promise.resolve();\n    }\n    return gulp.src('js/**/*.coffee', { sourcemaps: true, allowEmpty: true })\n        .pipe(changed('js/', { extension: '.js' }))\n        .pipe(sourcemaps.init())\n        // <lang>\n        //   <zh-CN>`bare: true` 保持旧脚本的全局/模块包装行为，不额外套 CoffeeScript 生成闭包。</zh-CN>\n        //   <en>`bare: true` preserves legacy script global/module wrapping behavior instead of adding a CoffeeScript-generated closure.</en>\n        // </lang>\n        .pipe(gulpCoffee({ bare: true }))\n        .pipe(gulpUglify())\n        .pipe(gulpRename((newPath) => {\n            // <lang>\n            //   <zh-CN>无论输入后缀如何，运行时产物固定为 `.js`，匹配 Web Forms 页面和静态资源约定。</zh-CN>\n            //   <en>Whatever the input suffix, runtime artifacts are fixed to `.js` to match Web Forms page and static-asset conventions.</en>\n            // </lang>\n            newPath.extname = '.js';\n        }))\n        .pipe(sourcemaps.write(''))\n        .pipe(gulp.dest('js/'));\n};",
+          "range": {
+            "start": {
+              "line": 174,
+              "column": 1
+            },
+            "end": {
+              "line": 202,
+              "column": 3
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 2,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "sasscss",
+    "longname": "module:portal-build~sasscss",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 204,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 204,
+            "column": 1
+          },
+          "end": {
+            "line": 204,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L204",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-build~sasscss",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 212,
+            "column": 1
+          },
+          "end": {
+            "line": 244,
+            "column": 3
+          }
+        },
+        "content": "const sasscss = () => {\n    // <lang>\n    //   <zh-CN>`sassDealer` 绑定当前 Dart Sass 实现，并提供同一个错误记录器给本次 Sass 管线。</zh-CN>\n    //   <en>`sassDealer` binds the current Dart Sass implementation and supplies the same error logger for this Sass pipeline.</en>\n    // </lang>\n    const sassDealer = gulpSass(sass);\n\n    // <lang>\n    //   <zh-CN>Sass/SCSS 共用同一输出目录与 source map 策略，避免主题 CSS 构建在两种语法间分叉。</zh-CN>\n    //   <en>Sass and SCSS share the same output folder and source-map strategy so theme CSS builds do not diverge by syntax.</en>\n    // </lang>\n    // <lang><zh-CN>同 `esjs`：源目录不存在时跳过而非抛错，避免整条 `assets:build` 被 Sass 输入目录缺失打断。</zh-CN><en>As in `esjs`: skip rather than throw when the source folder is absent, so a missing Sass input folder cannot abort the whole `assets:build`.</en></lang>\n    if (!fs.existsSync('css/')) {\n        console.log('sasscss skipped: source folder css/ does not exist.');\n        return Promise.resolve();\n    }\n    return gulp.src(['css/**/*.scss', 'css/**/*.sass'], { sourcemaps: true, allowEmpty: true })\n        .pipe(changed('css/', { extension: '.css' }))\n        .pipe(sourcemaps.init())\n        // <lang>\n        //   <zh-CN>Sass 编译错误交给插件日志器，保持 watcher 进程可诊断而不是在第一处样式错误后静默退出。</zh-CN>\n        //   <en>Sass compilation errors go through the plugin logger so the watcher remains diagnosable instead of silently exiting on the first style error.</en>\n        // </lang>\n        .pipe(sassDealer().on('error', sassDealer.logError))\n        // <lang>\n        //   <zh-CN>PostCSS 统一执行兼容前缀和压缩前处理，然后再交给 cleanCSS 做最终压缩。</zh-CN>\n        //   <en>PostCSS performs shared compatibility prefixing and pre-minification processing before cleanCSS applies final compression.</en>\n        // </lang>\n        .pipe(postcss(postcssProcessors()))\n        .pipe(cleanCSS())\n        .pipe(sourcemaps.write(''))\n        .pipe(gulp.dest('css/'));\n};",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L212-L244",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "const sasscss = () => {\n    // <lang>\n    //   <zh-CN>`sassDealer` 绑定当前 Dart Sass 实现，并提供同一个错误记录器给本次 Sass 管线。</zh-CN>\n    //   <en>`sassDealer` binds the current Dart Sass implementation and supplies the same error logger for this Sass pipeline.</en>\n    // </lang>\n    const sassDealer = gulpSass(sass);\n\n    // <lang>\n    //   <zh-CN>Sass/SCSS 共用同一输出目录与 source map 策略，避免主题 CSS 构建在两种语法间分叉。</zh-CN>\n    //   <en>Sass and SCSS share the same output folder and source-map strategy so theme CSS builds do not diverge by syntax.</en>\n    // </lang>\n    // <lang><zh-CN>同 `esjs`：源目录不存在时跳过而非抛错，避免整条 `assets:build` 被 Sass 输入目录缺失打断。</zh-CN><en>As in `esjs`: skip rather than throw when the source folder is absent, so a missing Sass input folder cannot abort the whole `assets:build`.</en></lang>\n    if (!fs.existsSync('css/')) {\n        console.log('sasscss skipped: source folder css/ does not exist.');\n        return Promise.resolve();\n    }\n    return gulp.src(['css/**/*.scss', 'css/**/*.sass'], { sourcemaps: true, allowEmpty: true })\n        .pipe(changed('css/', { extension: '.css' }))\n        .pipe(sourcemaps.init())\n        // <lang>\n        //   <zh-CN>Sass 编译错误交给插件日志器，保持 watcher 进程可诊断而不是在第一处样式错误后静默退出。</zh-CN>\n        //   <en>Sass compilation errors go through the plugin logger so the watcher remains diagnosable instead of silently exiting on the first style error.</en>\n        // </lang>\n        .pipe(sassDealer().on('error', sassDealer.logError))\n        // <lang>\n        //   <zh-CN>PostCSS 统一执行兼容前缀和压缩前处理，然后再交给 cleanCSS 做最终压缩。</zh-CN>\n        //   <en>PostCSS performs shared compatibility prefixing and pre-minification processing before cleanCSS applies final compression.</en>\n        // </lang>\n        .pipe(postcss(postcssProcessors()))\n        .pipe(cleanCSS())\n        .pipe(sourcemaps.write(''))\n        .pipe(gulp.dest('css/'));\n};",
+          "range": {
+            "start": {
+              "line": 212,
+              "column": 1
+            },
+            "end": {
+              "line": 244,
+              "column": 3
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 2,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "closeWatchers",
+    "longname": "module:portal-build~closeWatchers",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 270,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 270,
+            "column": 1
+          },
+          "end": {
+            "line": 270,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L270",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-build~closeWatchers",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 278,
+            "column": 1
+          },
+          "end": {
+            "line": 314,
+            "column": 3
+          }
+        },
+        "content": "const closeWatchers = () => {\n    // <lang>\n    //   <zh-CN>关闭 ES watcher 后立即清空句柄，确保后续 `startWatch` 能重新建立干净监听。</zh-CN>\n    //   <en>Clear the ES watcher handle immediately after closing it so a later `startWatch` can create a clean listener.</en>\n    // </lang>\n    if (esWatcher) {\n        esWatcher.close();\n        esWatcher = null;\n    }\n\n    // <lang>\n    //   <zh-CN>关闭 CoffeeScript watcher 时保持同样的幂等模式，避免重复 close 已释放资源。</zh-CN>\n    //   <en>Use the same idempotent pattern for the CoffeeScript watcher to avoid closing an already released resource.</en>\n    // </lang>\n    if (coffeeWatcher) {\n        coffeeWatcher.close();\n        coffeeWatcher = null;\n    }\n\n    // <lang>\n    //   <zh-CN>关闭 Sass watcher 后释放模块级引用，防止长驻 Task Runner 进程继续持有文件系统监听。</zh-CN>\n    //   <en>Release the module-level reference after closing the Sass watcher so the long-lived Task Runner process stops holding file-system listeners.</en>\n    // </lang>\n    if (sassWatcher) {\n        sassWatcher.close();\n        sassWatcher = null;\n    }\n\n    // <lang>\n    //   <zh-CN>退出信号 watcher 也属于同一资源生命周期；重启 watcher 前必须先解除旧信号监听。</zh-CN>\n    //   <en>The exit-signal watcher shares the same resource lifetime and must be removed before the watcher set is restarted.</en>\n    // </lang>\n    if (watcherSignWatcher) {\n        watcherSignWatcher.close();\n        watcherSignWatcher = null;\n    }\n};",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L278-L314",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "const closeWatchers = () => {\n    // <lang>\n    //   <zh-CN>关闭 ES watcher 后立即清空句柄，确保后续 `startWatch` 能重新建立干净监听。</zh-CN>\n    //   <en>Clear the ES watcher handle immediately after closing it so a later `startWatch` can create a clean listener.</en>\n    // </lang>\n    if (esWatcher) {\n        esWatcher.close();\n        esWatcher = null;\n    }\n\n    // <lang>\n    //   <zh-CN>关闭 CoffeeScript watcher 时保持同样的幂等模式，避免重复 close 已释放资源。</zh-CN>\n    //   <en>Use the same idempotent pattern for the CoffeeScript watcher to avoid closing an already released resource.</en>\n    // </lang>\n    if (coffeeWatcher) {\n        coffeeWatcher.close();\n        coffeeWatcher = null;\n    }\n\n    // <lang>\n    //   <zh-CN>关闭 Sass watcher 后释放模块级引用，防止长驻 Task Runner 进程继续持有文件系统监听。</zh-CN>\n    //   <en>Release the module-level reference after closing the Sass watcher so the long-lived Task Runner process stops holding file-system listeners.</en>\n    // </lang>\n    if (sassWatcher) {\n        sassWatcher.close();\n        sassWatcher = null;\n    }\n\n    // <lang>\n    //   <zh-CN>退出信号 watcher 也属于同一资源生命周期；重启 watcher 前必须先解除旧信号监听。</zh-CN>\n    //   <en>The exit-signal watcher shares the same resource lifetime and must be removed before the watcher set is restarted.</en>\n    // </lang>\n    if (watcherSignWatcher) {\n        watcherSignWatcher.close();\n        watcherSignWatcher = null;\n    }\n};",
+          "range": {
+            "start": {
+              "line": 278,
+              "column": 1
+            },
+            "end": {
+              "line": 314,
+              "column": 3
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 1,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "startWatch",
+    "longname": "module:portal-build~startWatch",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 316,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 316,
+            "column": 1
+          },
+          "end": {
+            "line": 316,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L316",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-build~startWatch",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 325,
+            "column": 1
+          },
+          "end": {
+            "line": 381,
+            "column": 3
+          }
+        },
+        "content": "const startWatch = (cb) => {\n    // <lang>\n    //   <zh-CN>仅在句柄为空时注册 ES watcher，避免 ProjectOpened 重入造成重复构建回调。</zh-CN>\n    //   <en>Register the ES watcher only when its handle is empty so ProjectOpened re-entry does not duplicate build callbacks.</en>\n    // </lang>\n    if (!esWatcher) {\n        esWatcher = gulp.watch('js/**/*.src.js', { ignoreInitial: true, delay: 500 });\n        esWatcher.on('all', esjs);\n    }\n\n    // <lang>\n    //   <zh-CN>CoffeeScript watcher 同样跳过初始构建，只响应后续文件变化以保护 Visual Studio 打开项目的速度。</zh-CN>\n    //   <en>The CoffeeScript watcher also skips the initial build and reacts only to later changes to preserve Visual Studio project-open speed.</en>\n    // </lang>\n    if (!coffeeWatcher) {\n        coffeeWatcher = gulp.watch('js/**/*.coffee', { ignoreInitial: true, delay: 500 });\n        coffeeWatcher.on('all', coffeejs);\n    }\n\n    // <lang>\n    //   <zh-CN>Sass watcher 同时覆盖 `.scss` 与缩进式 `.sass`，保持两类历史样式源的热构建入口一致。</zh-CN>\n    //   <en>The Sass watcher covers both `.scss` and indented `.sass` sources so both legacy style formats share one hot-build entry.</en>\n    // </lang>\n    if (!sassWatcher) {\n        sassWatcher = gulp.watch(['css/**/*.scss', 'css/**/*.sass'], { ignoreInitial: true, delay: 500 });\n        sassWatcher.on('all', sasscss);\n    }\n\n    // <lang>\n    //   <zh-CN>信号 watcher 只在缺失时创建，避免多个退出监听同时响应同一次 stopWatch 写入。</zh-CN>\n    //   <en>Create the signal watcher only when absent so multiple exit listeners do not respond to one stopWatch write.</en>\n    // </lang>\n    if (!watcherSignWatcher) {\n        watcherSignWatcher = gulp.watch('Gulp/gulp-watcher-sign.cfg', { ignoreInitial: true });\n        watcherSignWatcher.on('change', () => {\n            // <lang>\n            //   <zh-CN>收到信号后先释放所有 watcher，确保退出前不再接收新的资产变更事件。</zh-CN>\n            //   <en>After receiving the signal, release all watchers first so no new asset-change events are accepted before exit.</en>\n            // </lang>\n            closeWatchers();\n\n            // <lang>\n            //   <zh-CN>延迟退出给文件系统 close 事件留出短窗口，降低 Task Runner 看到异常退出的概率。</zh-CN>\n            //   <en>Delay process exit briefly so file-system close events can settle and Task Runner is less likely to observe an abrupt termination.</en>\n            // </lang>\n            setTimeout(() => {\n                process.exit();\n            }, 1000);\n        });\n    }\n\n    // <lang>\n    //   <zh-CN>所有 watcher 注册完成后通知 Gulp；此回调不表示任何资产已经被重新构建。</zh-CN>\n    //   <en>Notify Gulp after all watchers are registered; this callback does not mean any asset has been rebuilt.</en>\n    // </lang>\n    cb();\n};",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L325-L381",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "const startWatch = (cb) => {\n    // <lang>\n    //   <zh-CN>仅在句柄为空时注册 ES watcher，避免 ProjectOpened 重入造成重复构建回调。</zh-CN>\n    //   <en>Register the ES watcher only when its handle is empty so ProjectOpened re-entry does not duplicate build callbacks.</en>\n    // </lang>\n    if (!esWatcher) {\n        esWatcher = gulp.watch('js/**/*.src.js', { ignoreInitial: true, delay: 500 });\n        esWatcher.on('all', esjs);\n    }\n\n    // <lang>\n    //   <zh-CN>CoffeeScript watcher 同样跳过初始构建，只响应后续文件变化以保护 Visual Studio 打开项目的速度。</zh-CN>\n    //   <en>The CoffeeScript watcher also skips the initial build and reacts only to later changes to preserve Visual Studio project-open speed.</en>\n    // </lang>\n    if (!coffeeWatcher) {\n        coffeeWatcher = gulp.watch('js/**/*.coffee', { ignoreInitial: true, delay: 500 });\n        coffeeWatcher.on('all', coffeejs);\n    }\n\n    // <lang>\n    //   <zh-CN>Sass watcher 同时覆盖 `.scss` 与缩进式 `.sass`，保持两类历史样式源的热构建入口一致。</zh-CN>\n    //   <en>The Sass watcher covers both `.scss` and indented `.sass` sources so both legacy style formats share one hot-build entry.</en>\n    // </lang>\n    if (!sassWatcher) {\n        sassWatcher = gulp.watch(['css/**/*.scss', 'css/**/*.sass'], { ignoreInitial: true, delay: 500 });\n        sassWatcher.on('all', sasscss);\n    }\n\n    // <lang>\n    //   <zh-CN>信号 watcher 只在缺失时创建，避免多个退出监听同时响应同一次 stopWatch 写入。</zh-CN>\n    //   <en>Create the signal watcher only when absent so multiple exit listeners do not respond to one stopWatch write.</en>\n    // </lang>\n    if (!watcherSignWatcher) {\n        watcherSignWatcher = gulp.watch('Gulp/gulp-watcher-sign.cfg', { ignoreInitial: true });\n        watcherSignWatcher.on('change', () => {\n            // <lang>\n            //   <zh-CN>收到信号后先释放所有 watcher，确保退出前不再接收新的资产变更事件。</zh-CN>\n            //   <en>After receiving the signal, release all watchers first so no new asset-change events are accepted before exit.</en>\n            // </lang>\n            closeWatchers();\n\n            // <lang>\n            //   <zh-CN>延迟退出给文件系统 close 事件留出短窗口，降低 Task Runner 看到异常退出的概率。</zh-CN>\n            //   <en>Delay process exit briefly so file-system close events can settle and Task Runner is less likely to observe an abrupt termination.</en>\n            // </lang>\n            setTimeout(() => {\n                process.exit();\n            }, 1000);\n        });\n    }\n\n    // <lang>\n    //   <zh-CN>所有 watcher 注册完成后通知 Gulp；此回调不表示任何资产已经被重新构建。</zh-CN>\n    //   <en>Notify Gulp after all watchers are registered; this callback does not mean any asset has been rebuilt.</en>\n    // </lang>\n    cb();\n};",
+          "range": {
+            "start": {
+              "line": 325,
+              "column": 1
+            },
+            "end": {
+              "line": 381,
+              "column": 3
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 2,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "stopWatch",
+    "longname": "module:portal-build~stopWatch",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 383,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 383,
+            "column": 1
+          },
+          "end": {
+            "line": 383,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L383",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-build~stopWatch",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 392,
+            "column": 1
+          },
+          "end": {
+            "line": 416,
+            "column": 3
+          }
+        },
+        "content": "const stopWatch = (cb) => {\n    // <lang>\n    //   <zh-CN>`filePath` 指向受控信号文件，不从用户输入或网络输入派生。</zh-CN>\n    //   <en>`filePath` points to the controlled signal file and is not derived from user or network input.</en>\n    // </lang>\n    const filePath = path.join(__dirname, 'Gulp/gulp-watcher-sign.cfg');\n\n    // <lang>\n    //   <zh-CN>`dataToWrite` 只包含低敏 UTC 秒值，用作变化触发器而非审计记录。</zh-CN>\n    //   <en>`dataToWrite` contains only a low-sensitivity UTC seconds value used as a change trigger rather than an audit record.</en>\n    // </lang>\n    const dataToWrite = { Date: new Date().getUTCSeconds() };\n\n    // <lang>\n    //   <zh-CN>同步写入确保 stop task 返回前信号已落盘；文件内容不包含凭据或本机路径。</zh-CN>\n    //   <en>Synchronous writing ensures the signal is on disk before the stop task returns; the file content contains no credentials or local paths.</en>\n    // </lang>\n    fs.writeFileSync(filePath, JSON.stringify(dataToWrite), 'utf8');\n\n    // <lang>\n    //   <zh-CN>通知 Gulp stop task 已完成；实际 watcher 退出由另一个进程收到文件变化后完成。</zh-CN>\n    //   <en>Notify Gulp that the stop task is complete; the actual watcher exits after the other process receives the file change.</en>\n    // </lang>\n    cb();\n};",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L392-L416",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "const stopWatch = (cb) => {\n    // <lang>\n    //   <zh-CN>`filePath` 指向受控信号文件，不从用户输入或网络输入派生。</zh-CN>\n    //   <en>`filePath` points to the controlled signal file and is not derived from user or network input.</en>\n    // </lang>\n    const filePath = path.join(__dirname, 'Gulp/gulp-watcher-sign.cfg');\n\n    // <lang>\n    //   <zh-CN>`dataToWrite` 只包含低敏 UTC 秒值，用作变化触发器而非审计记录。</zh-CN>\n    //   <en>`dataToWrite` contains only a low-sensitivity UTC seconds value used as a change trigger rather than an audit record.</en>\n    // </lang>\n    const dataToWrite = { Date: new Date().getUTCSeconds() };\n\n    // <lang>\n    //   <zh-CN>同步写入确保 stop task 返回前信号已落盘；文件内容不包含凭据或本机路径。</zh-CN>\n    //   <en>Synchronous writing ensures the signal is on disk before the stop task returns; the file content contains no credentials or local paths.</en>\n    // </lang>\n    fs.writeFileSync(filePath, JSON.stringify(dataToWrite), 'utf8');\n\n    // <lang>\n    //   <zh-CN>通知 Gulp stop task 已完成；实际 watcher 退出由另一个进程收到文件变化后完成。</zh-CN>\n    //   <en>Notify Gulp that the stop task is complete; the actual watcher exits after the other process receives the file change.</en>\n    // </lang>\n    cb();\n};",
+          "range": {
+            "start": {
+              "line": 392,
+              "column": 1
+            },
+            "end": {
+              "line": 416,
+              "column": 3
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 2,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "assetsBuild",
+    "longname": "module:portal-build~assetsBuild",
+    "kind": "constant",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "position": {
+          "line": 432,
+          "column": 6
+        },
+        "range": {
+          "start": {
+            "line": 432,
+            "column": 6
+          },
+          "end": {
+            "line": 432,
+            "column": 6
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L432",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:constant:module:portal-build~assetsBuild",
+        "relativePath": "src/Portal/gulpfile.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 432,
+            "column": 1
+          },
+          "end": {
+            "line": 432,
+            "column": 60
+          }
+        },
+        "content": "const assetsBuild = gulp.parallel(esjs, coffeejs, sasscss);",
+        "rangeSource": "parser-js",
+        "confidence": "medium",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/gulpfile.js#L432",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "const assetsBuild = gulp.parallel(esjs, coffeejs, sasscss);",
+          "range": {
+            "start": {
+              "line": 432,
+              "column": 1
+            },
+            "end": {
+              "line": 432,
+              "column": 60
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 1,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "portal-login-password-encryption",
+    "longname": "module:portal-login-password-encryption",
+    "kind": "module",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "position": {
+          "line": 1,
+          "column": 1
+        },
+        "range": {
+          "start": {
+            "line": 1,
+            "column": 1
+          },
+          "end": {
+            "line": 1,
+            "column": 1
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L1",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:module:module:portal-login-password-encryption",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 8,
+            "column": 1
+          },
+          "end": {
+            "line": 87,
+            "column": 36
+          }
+        },
+        "content": "(function (window, document) {\n    // <lang>\n    //   <zh-CN>旧浏览器可能没有 console；此兼容对象只吸收诊断调用，不改变加密或提交结果。</zh-CN>\n    //   <en>Legacy browsers may not provide console; this compatibility object only absorbs diagnostics and does not change encryption or submission results.</en>\n    // </lang>\n    if (!window.console) {\n        window.console = {\n            error: function () { },\n            log: function () { }\n        };\n    }\n\n    /**\n     * Resolves a page element by its DOM id.\n     *\n     * @function getById\n     * @param {string} id DOM id supplied by the page integration.\n     * @returns {HTMLElement|null} The matching element, or null when the page does not contain it.\n     * @lang zh-CN 按页面集成提供的 DOM id 查找元素；找不到时返回 null，不创建或修改元素。\n     * @lang en Resolves the element identified by the page integration's DOM id; returns null when it is absent and never creates or mutates an element.\n     */\n    function getById(id) {\n        // <lang>\n        //   <zh-CN>查询保持在调用方文档上下文内，缺失元素由上层流程决定是否报告为准备失败。</zh-CN>\n        //   <en>Keep the lookup within the caller's document context; the higher-level flow decides whether a missing element is a preparation failure.</en>\n        // </lang>\n        return document.getElementById(id);\n    }\n\n    /**\n     * Writes a fixed login-preparation message into the page message element.\n     *\n     * @function setMessage\n     * @param {string} messageElementId DOM id of the page-owned message element.\n     * @param {string} text Message text selected by this helper.\n     * @returns {void}\n     * @lang zh-CN 将本助手选择的固定提示写入页面消息元素；不承担通用 HTML 净化或错误详情展示。\n     * @lang en Writes the fixed message selected by this helper into the page message element; it is not a general HTML sanitizer or error-detail renderer.\n     */\n    function setMessage(messageElementId, text) {\n        // <lang>\n        //   <zh-CN>消息元素是可选的；登录页缺少该元素时仍保持原有布尔失败语义，不因提示展示失败而抛出异常。</zh-CN>\n        //   <en>The message element is optional; when the login page omits it, the existing Boolean failure semantics remain and message rendering does not throw.</en>\n        // </lang>\n        // <lang>\n        //   <zh-CN>保存页面消息节点，用于避免重复查找并限定后续副作用范围。</zh-CN>\n        //   <en>Resolve the page message node once to avoid repeated lookup and limit the scope of the following side effect.</en>\n        // </lang>\n        var messageElement = getById(messageElementId);\n        if (messageElement) {\n            // <lang>\n            //   <zh-CN>提示文本由本文件的固定失败消息调用；这里只更新可见提示，不改变隐藏字段或密码值。</zh-CN>\n            //   <en>The caller supplies this file's fixed failure message; update only the visible hint without changing hidden fields or password values.</en>\n            // </lang>\n            messageElement.innerHTML = text;\n        }\n    }\n\n    /**\n     * Creates an XMLHttpRequest-compatible object for the current browser.\n     *\n     * @function createRequest\n     * @returns {XMLHttpRequest|null} A native or ActiveX request object, or null when the browser exposes neither API.\n     * @lang zh-CN 按现代接口、Msxml2.XMLHTTP、Microsoft.XMLHTTP 顺序创建请求对象；均不可用时返回 null。\n     * @lang en Creates a request object in the order native API, Msxml2.XMLHTTP, then Microsoft.XMLHTTP; returns null when none is available.\n     */\n    function createRequest() {\n        // <lang>\n        //   <zh-CN>优先使用标准 XMLHttpRequest，避免在支持标准接口的浏览器中触发旧版 ActiveX 分支。</zh-CN>\n        //   <en>Prefer the standard XMLHttpRequest so browsers with the native API never enter the legacy ActiveX branches.</en>\n        // </lang>\n        if (window.XMLHttpRequest) {\n            return new window.XMLHttpRequest();\n        }\n\n        // <lang>\n        //   <zh-CN>仅在旧 IE 缺少标准接口时尝试 ActiveX；失败不向页面泄露 COM 细节，而是继续走受控的 null 回退。</zh-CN>\n        //   <en>Try ActiveX only for old IE without the standard API; do not expose COM details to the page and fall back to the controlled null result.</en>\n        // </lang>\n        if (window.ActiveXObject) {",
+        "rangeSource": "heuristic",
+        "confidence": "low",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L8-L87",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "(function (window, document) {\n    // <lang>\n    //   <zh-CN>旧浏览器可能没有 console；此兼容对象只吸收诊断调用，不改变加密或提交结果。</zh-CN>\n    //   <en>Legacy browsers may not provide console; this compatibility object only absorbs diagnostics and does not change encryption or submission results.</en>\n    // </lang>\n    if (!window.console) {\n        window.console = {\n            error: function () { },\n            log: function () { }\n        };\n    }\n\n    /**\n     * Resolves a page element by its DOM id.\n     *\n     * @function getById\n     * @param {string} id DOM id supplied by the page integration.\n     * @returns {HTMLElement|null} The matching element, or null when the page does not contain it.\n     * @lang zh-CN 按页面集成提供的 DOM id 查找元素；找不到时返回 null，不创建或修改元素。\n     * @lang en Resolves the element identified by the page integration's DOM id; returns null when it is absent and never creates or mutates an element.\n     */\n    function getById(id) {\n        // <lang>\n        //   <zh-CN>查询保持在调用方文档上下文内，缺失元素由上层流程决定是否报告为准备失败。</zh-CN>\n        //   <en>Keep the lookup within the caller's document context; the higher-level flow decides whether a missing element is a preparation failure.</en>\n        // </lang>\n        return document.getElementById(id);\n    }\n\n    /**\n     * Writes a fixed login-preparation message into the page message element.\n     *\n     * @function setMessage\n     * @param {string} messageElementId DOM id of the page-owned message element.\n     * @param {string} text Message text selected by this helper.\n     * @returns {void}\n     * @lang zh-CN 将本助手选择的固定提示写入页面消息元素；不承担通用 HTML 净化或错误详情展示。\n     * @lang en Writes the fixed message selected by this helper into the page message element; it is not a general HTML sanitizer or error-detail renderer.\n     */\n    function setMessage(messageElementId, text) {\n        // <lang>\n        //   <zh-CN>消息元素是可选的；登录页缺少该元素时仍保持原有布尔失败语义，不因提示展示失败而抛出异常。</zh-CN>\n        //   <en>The message element is optional; when the login page omits it, the existing Boolean failure semantics remain and message rendering does not throw.</en>\n        // </lang>\n        // <lang>\n        //   <zh-CN>保存页面消息节点，用于避免重复查找并限定后续副作用范围。</zh-CN>\n        //   <en>Resolve the page message node once to avoid repeated lookup and limit the scope of the following side effect.</en>\n        // </lang>\n        var messageElement = getById(messageElementId);\n        if (messageElement) {\n            // <lang>\n            //   <zh-CN>提示文本由本文件的固定失败消息调用；这里只更新可见提示，不改变隐藏字段或密码值。</zh-CN>\n            //   <en>The caller supplies this file's fixed failure message; update only the visible hint without changing hidden fields or password values.</en>\n            // </lang>\n            messageElement.innerHTML = text;\n        }\n    }\n\n    /**\n     * Creates an XMLHttpRequest-compatible object for the current browser.\n     *\n     * @function createRequest\n     * @returns {XMLHttpRequest|null} A native or ActiveX request object, or null when the browser exposes neither API.\n     * @lang zh-CN 按现代接口、Msxml2.XMLHTTP、Microsoft.XMLHTTP 顺序创建请求对象；均不可用时返回 null。\n     * @lang en Creates a request object in the order native API, Msxml2.XMLHTTP, then Microsoft.XMLHTTP; returns null when none is available.\n     */\n    function createRequest() {\n        // <lang>\n        //   <zh-CN>优先使用标准 XMLHttpRequest，避免在支持标准接口的浏览器中触发旧版 ActiveX 分支。</zh-CN>\n        //   <en>Prefer the standard XMLHttpRequest so browsers with the native API never enter the legacy ActiveX branches.</en>\n        // </lang>\n        if (window.XMLHttpRequest) {\n            return new window.XMLHttpRequest();\n        }\n\n        // <lang>\n        //   <zh-CN>仅在旧 IE 缺少标准接口时尝试 ActiveX；失败不向页面泄露 COM 细节，而是继续走受控的 null 回退。</zh-CN>\n        //   <en>Try ActiveX only for old IE without the standard API; do not expose COM details to the page and fall back to the controlled null result.</en>\n        // </lang>\n        if (window.ActiveXObject) {",
+          "range": {
+            "start": {
+              "line": 8,
+              "column": 1
+            },
+            "end": {
+              "line": 87,
+              "column": 36
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 1,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "getById",
+    "longname": "module:portal-login-password-encryption~getById",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "position": {
+          "line": 20,
+          "column": 4
+        },
+        "range": {
+          "start": {
+            "line": 20,
+            "column": 4
+          },
+          "end": {
+            "line": 20,
+            "column": 4
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L20",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-login-password-encryption~getById",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 29,
+            "column": 1
+          },
+          "end": {
+            "line": 35,
+            "column": 6
+          }
+        },
+        "content": "    function getById(id) {\n        // <lang>\n        //   <zh-CN>查询保持在调用方文档上下文内，缺失元素由上层流程决定是否报告为准备失败。</zh-CN>\n        //   <en>Keep the lookup within the caller's document context; the higher-level flow decides whether a missing element is a preparation failure.</en>\n        // </lang>\n        return document.getElementById(id);\n    }",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L29-L35",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "    function getById(id) {\n        // <lang>\n        //   <zh-CN>查询保持在调用方文档上下文内，缺失元素由上层流程决定是否报告为准备失败。</zh-CN>\n        //   <en>Keep the lookup within the caller's document context; the higher-level flow decides whether a missing element is a preparation failure.</en>\n        // </lang>\n        return document.getElementById(id);\n    }",
+          "range": {
+            "start": {
+              "line": 29,
+              "column": 1
+            },
+            "end": {
+              "line": 35,
+              "column": 6
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 3,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "setMessage",
+    "longname": "module:portal-login-password-encryption~setMessage",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "position": {
+          "line": 37,
+          "column": 4
+        },
+        "range": {
+          "start": {
+            "line": 37,
+            "column": 4
+          },
+          "end": {
+            "line": 37,
+            "column": 4
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L37",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-login-password-encryption~setMessage",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 47,
+            "column": 1
+          },
+          "end": {
+            "line": 64,
+            "column": 6
+          }
+        },
+        "content": "    function setMessage(messageElementId, text) {\n        // <lang>\n        //   <zh-CN>消息元素是可选的；登录页缺少该元素时仍保持原有布尔失败语义，不因提示展示失败而抛出异常。</zh-CN>\n        //   <en>The message element is optional; when the login page omits it, the existing Boolean failure semantics remain and message rendering does not throw.</en>\n        // </lang>\n        // <lang>\n        //   <zh-CN>保存页面消息节点，用于避免重复查找并限定后续副作用范围。</zh-CN>\n        //   <en>Resolve the page message node once to avoid repeated lookup and limit the scope of the following side effect.</en>\n        // </lang>\n        var messageElement = getById(messageElementId);\n        if (messageElement) {\n            // <lang>\n            //   <zh-CN>提示文本由本文件的固定失败消息调用；这里只更新可见提示，不改变隐藏字段或密码值。</zh-CN>\n            //   <en>The caller supplies this file's fixed failure message; update only the visible hint without changing hidden fields or password values.</en>\n            // </lang>\n            messageElement.innerHTML = text;\n        }\n    }",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L47-L64",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "    function setMessage(messageElementId, text) {\n        // <lang>\n        //   <zh-CN>消息元素是可选的；登录页缺少该元素时仍保持原有布尔失败语义，不因提示展示失败而抛出异常。</zh-CN>\n        //   <en>The message element is optional; when the login page omits it, the existing Boolean failure semantics remain and message rendering does not throw.</en>\n        // </lang>\n        // <lang>\n        //   <zh-CN>保存页面消息节点，用于避免重复查找并限定后续副作用范围。</zh-CN>\n        //   <en>Resolve the page message node once to avoid repeated lookup and limit the scope of the following side effect.</en>\n        // </lang>\n        var messageElement = getById(messageElementId);\n        if (messageElement) {\n            // <lang>\n            //   <zh-CN>提示文本由本文件的固定失败消息调用；这里只更新可见提示，不改变隐藏字段或密码值。</zh-CN>\n            //   <en>The caller supplies this file's fixed failure message; update only the visible hint without changing hidden fields or password values.</en>\n            // </lang>\n            messageElement.innerHTML = text;\n        }\n    }",
+          "range": {
+            "start": {
+              "line": 47,
+              "column": 1
+            },
+            "end": {
+              "line": 64,
+              "column": 6
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 3,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "createRequest",
+    "longname": "module:portal-login-password-encryption~createRequest",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "position": {
+          "line": 66,
+          "column": 4
+        },
+        "range": {
+          "start": {
+            "line": 66,
+            "column": 4
+          },
+          "end": {
+            "line": 66,
+            "column": 4
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L66",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-login-password-encryption~createRequest",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 74,
+            "column": 1
+          },
+          "end": {
+            "line": 104,
+            "column": 6
+          }
+        },
+        "content": "    function createRequest() {\n        // <lang>\n        //   <zh-CN>优先使用标准 XMLHttpRequest，避免在支持标准接口的浏览器中触发旧版 ActiveX 分支。</zh-CN>\n        //   <en>Prefer the standard XMLHttpRequest so browsers with the native API never enter the legacy ActiveX branches.</en>\n        // </lang>\n        if (window.XMLHttpRequest) {\n            return new window.XMLHttpRequest();\n        }\n\n        // <lang>\n        //   <zh-CN>仅在旧 IE 缺少标准接口时尝试 ActiveX；失败不向页面泄露 COM 细节，而是继续走受控的 null 回退。</zh-CN>\n        //   <en>Try ActiveX only for old IE without the standard API; do not expose COM details to the page and fall back to the controlled null result.</en>\n        // </lang>\n        if (window.ActiveXObject) {\n            try {\n                return new window.ActiveXObject(\"Msxml2.XMLHTTP\");\n            } catch (ignoreMsxml) {\n                // <lang>\n                //   <zh-CN>Msxml2 不可用时保留 Microsoft.XMLHTTP 兼容回退，异常本身不改变调用方的失败判定。</zh-CN>\n                //   <en>Keep the Microsoft.XMLHTTP compatibility fallback when Msxml2 is unavailable; the exception itself does not alter the caller's failure decision.</en>\n                // </lang>\n                return new window.ActiveXObject(\"Microsoft.XMLHTTP\");\n            }\n        }\n\n        // <lang>\n        //   <zh-CN>浏览器没有可用请求实现时返回 null，由公钥读取流程统一转为空响应。</zh-CN>\n        //   <en>Return null when the browser exposes no request implementation; the public-key flow converts it into an empty response.</en>\n        // </lang>\n        return null;\n    }",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L74-L104",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "    function createRequest() {\n        // <lang>\n        //   <zh-CN>优先使用标准 XMLHttpRequest，避免在支持标准接口的浏览器中触发旧版 ActiveX 分支。</zh-CN>\n        //   <en>Prefer the standard XMLHttpRequest so browsers with the native API never enter the legacy ActiveX branches.</en>\n        // </lang>\n        if (window.XMLHttpRequest) {\n            return new window.XMLHttpRequest();\n        }\n\n        // <lang>\n        //   <zh-CN>仅在旧 IE 缺少标准接口时尝试 ActiveX；失败不向页面泄露 COM 细节，而是继续走受控的 null 回退。</zh-CN>\n        //   <en>Try ActiveX only for old IE without the standard API; do not expose COM details to the page and fall back to the controlled null result.</en>\n        // </lang>\n        if (window.ActiveXObject) {\n            try {\n                return new window.ActiveXObject(\"Msxml2.XMLHTTP\");\n            } catch (ignoreMsxml) {\n                // <lang>\n                //   <zh-CN>Msxml2 不可用时保留 Microsoft.XMLHTTP 兼容回退，异常本身不改变调用方的失败判定。</zh-CN>\n                //   <en>Keep the Microsoft.XMLHTTP compatibility fallback when Msxml2 is unavailable; the exception itself does not alter the caller's failure decision.</en>\n                // </lang>\n                return new window.ActiveXObject(\"Microsoft.XMLHTTP\");\n            }\n        }\n\n        // <lang>\n        //   <zh-CN>浏览器没有可用请求实现时返回 null，由公钥读取流程统一转为空响应。</zh-CN>\n        //   <en>Return null when the browser exposes no request implementation; the public-key flow converts it into an empty response.</en>\n        // </lang>\n        return null;\n    }",
+          "range": {
+            "start": {
+              "line": 74,
+              "column": 1
+            },
+            "end": {
+              "line": 104,
+              "column": 6
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 2,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "requestPublicKey",
+    "longname": "module:portal-login-password-encryption~requestPublicKey",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "position": {
+          "line": 106,
+          "column": 4
+        },
+        "range": {
+          "start": {
+            "line": 106,
+            "column": 4
+          },
+          "end": {
+            "line": 106,
+            "column": 4
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L106",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-login-password-encryption~requestPublicKey",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 115,
+            "column": 1
+          },
+          "end": {
+            "line": 151,
+            "column": 6
+          }
+        },
+        "content": "    function requestPublicKey(keyUrl) {\n        // <lang>\n        //   <zh-CN>请求对象只在本次读取中使用；创建失败时不发起网络调用并立即返回空响应。</zh-CN>\n        //   <en>Use the request object only for this read; when creation fails, make no network call and return an empty response immediately.</en>\n        // </lang>\n        var request = createRequest();\n        if (!request) {\n            return \"\";\n        }\n\n        // <lang>\n        //   <zh-CN>根据现有查询串选择连接符，时间戳仅用于抑制缓存，不改变服务端公钥参数。</zh-CN>\n        //   <en>Choose the separator from the existing query string; the timestamp only suppresses caching and does not change server-side key parameters.</en>\n        // </lang>\n        var separator = keyUrl.indexOf(\"?\") >= 0 ? \"&\" : \"?\";\n        // <lang>\n        //   <zh-CN>同步 GET 保持旧登录提交链的顺序：调用方在加密前必须拿到同一轮公钥响应。</zh-CN>\n        //   <en>The synchronous GET preserves the legacy login sequence: the caller must receive this public-key response before encryption.</en>\n        // </lang>\n        request.open(\"GET\", keyUrl + separator + \"t=\" + new Date().getTime(), false);\n        // <lang>\n        //   <zh-CN>禁止中间缓存返回过期公钥；请求头不携带密码或其他凭据。</zh-CN>\n        //   <en>Prevent intermediary caches from returning an expired public key; no password or other credential is sent in this request header.</en>\n        // </lang>\n        request.setRequestHeader(\"Cache-Control\", \"no-cache\");\n        request.send(null);\n\n        // <lang>\n        //   <zh-CN>仅接受 2xx 响应正文；非成功状态或空正文返回空响应，底层 send 异常保持现有调用方异常路径。</zh-CN>\n        //   <en>Accept only the response body from a 2xx status; non-success statuses or empty bodies return an empty response, while send exceptions remain on the existing caller exception path.</en>\n        // </lang>\n        if (request.status >= 200 && request.status < 300) {\n            return request.responseText || \"\";\n        }\n\n        return \"\";\n    }",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L115-L151",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "    function requestPublicKey(keyUrl) {\n        // <lang>\n        //   <zh-CN>请求对象只在本次读取中使用；创建失败时不发起网络调用并立即返回空响应。</zh-CN>\n        //   <en>Use the request object only for this read; when creation fails, make no network call and return an empty response immediately.</en>\n        // </lang>\n        var request = createRequest();\n        if (!request) {\n            return \"\";\n        }\n\n        // <lang>\n        //   <zh-CN>根据现有查询串选择连接符，时间戳仅用于抑制缓存，不改变服务端公钥参数。</zh-CN>\n        //   <en>Choose the separator from the existing query string; the timestamp only suppresses caching and does not change server-side key parameters.</en>\n        // </lang>\n        var separator = keyUrl.indexOf(\"?\") >= 0 ? \"&\" : \"?\";\n        // <lang>\n        //   <zh-CN>同步 GET 保持旧登录提交链的顺序：调用方在加密前必须拿到同一轮公钥响应。</zh-CN>\n        //   <en>The synchronous GET preserves the legacy login sequence: the caller must receive this public-key response before encryption.</en>\n        // </lang>\n        request.open(\"GET\", keyUrl + separator + \"t=\" + new Date().getTime(), false);\n        // <lang>\n        //   <zh-CN>禁止中间缓存返回过期公钥；请求头不携带密码或其他凭据。</zh-CN>\n        //   <en>Prevent intermediary caches from returning an expired public key; no password or other credential is sent in this request header.</en>\n        // </lang>\n        request.setRequestHeader(\"Cache-Control\", \"no-cache\");\n        request.send(null);\n\n        // <lang>\n        //   <zh-CN>仅接受 2xx 响应正文；非成功状态或空正文返回空响应，底层 send 异常保持现有调用方异常路径。</zh-CN>\n        //   <en>Accept only the response body from a 2xx status; non-success statuses or empty bodies return an empty response, while send exceptions remain on the existing caller exception path.</en>\n        // </lang>\n        if (request.status >= 200 && request.status < 300) {\n            return request.responseText || \"\";\n        }\n\n        return \"\";\n    }",
+          "range": {
+            "start": {
+              "line": 115,
+              "column": 1
+            },
+            "end": {
+              "line": 151,
+              "column": 6
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 3,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "encryptPasswordFields",
+    "longname": "module:portal-login-password-encryption~encryptPasswordFields",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "position": {
+          "line": 153,
+          "column": 4
+        },
+        "range": {
+          "start": {
+            "line": 153,
+            "column": 4
+          },
+          "end": {
+            "line": 153,
+            "column": 4
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L153",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-login-password-encryption~encryptPasswordFields",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 164,
+            "column": 1
+          },
+          "end": {
+            "line": 169,
+            "column": 51
+          }
+        },
+        "content": "    function encryptPasswordFields(fieldPairs, keyUrl, messageElementId) {\n        // <lang>\n        //   <zh-CN>失败提示使用固定文案，避免把请求、密钥或加密库细节写回页面。</zh-CN>\n        //   <en>Use a fixed failure message so request, key, or library details never flow back into the page.</en>\n        // </lang>\n        var failureMessage = \"密码加密准备失败，请刷新页面后重试。\";",
+        "rangeSource": "parser-js",
+        "confidence": "medium",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L164-L169",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "    function encryptPasswordFields(fieldPairs, keyUrl, messageElementId) {\n        // <lang>\n        //   <zh-CN>失败提示使用固定文案，避免把请求、密钥或加密库细节写回页面。</zh-CN>\n        //   <en>Use a fixed failure message so request, key, or library details never flow back into the page.</en>\n        // </lang>\n        var failureMessage = \"密码加密准备失败，请刷新页面后重试。\";",
+          "range": {
+            "start": {
+              "line": 164,
+              "column": 1
+            },
+            "end": {
+              "line": 169,
+              "column": 51
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 5,
+      "missingLocales": []
+    }
+  },
+  {
+    "name": "encryptPassword",
+    "longname": "module:portal-login-password-encryption~encryptPassword",
+    "kind": "function",
+    "hia": {
+      "hasHia": true,
+      "microPlugins": [
+        "code-fragment",
+        "source-link",
+        "source-preview",
+        "doc-i18n",
+        "doclet-normalizer",
+        "diagnostics"
+      ],
+      "sourceReferenceCount": 0,
+      "sourceDefinedIn": {
+        "kind": "defined-in",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "position": {
+          "line": 303,
+          "column": 4
+        },
+        "range": {
+          "start": {
+            "line": 303,
+            "column": 4
+          },
+          "end": {
+            "line": 303,
+            "column": 4
+          }
+        },
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L303",
+          "openMode": "same-tab"
+        }
+      },
+      "sourcePrimaryBlock": {
+        "kind": "primary-block",
+        "id": "doclet:function:module:portal-login-password-encryption~encryptPassword",
+        "relativePath": "src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+        "language": "javascript",
+        "range": {
+          "start": {
+            "line": 315,
+            "column": 1
+          },
+          "end": {
+            "line": 329,
+            "column": 6
+          }
+        },
+        "content": "    function encryptPassword(passwordElementId, encryptedElementId, keyUrl, messageElementId) {\n        // <lang>\n        //   <zh-CN>构造单项配置并复用批量实现，避免两个入口产生不同的安全边界。</zh-CN>\n        //   <en>Build a single-item configuration and reuse the batch implementation so the two entry points cannot diverge in security behavior.</en>\n        // </lang>\n        return encryptPasswordFields(\n            [\n                {\n                    passwordElementId: passwordElementId,\n                    encryptedElementId: encryptedElementId\n                }\n            ],\n            keyUrl,\n            messageElementId);\n    }",
+        "rangeSource": "parser-js",
+        "confidence": "high",
+        "diagnostics": [],
+        "link": {
+          "enabled": true,
+          "fileUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js",
+          "lineUrl": "https://github.com/mandolin/HIA-ASPNETPortal/blob/main/src/Portal/Scripts/Security/PortalLoginPasswordEncryption.js#L315-L329",
+          "openMode": "same-tab"
+        },
+        "preview": {
+          "enabled": true,
+          "defaultExpanded": false,
+          "language": "javascript",
+          "content": "    function encryptPassword(passwordElementId, encryptedElementId, keyUrl, messageElementId) {\n        // <lang>\n        //   <zh-CN>构造单项配置并复用批量实现，避免两个入口产生不同的安全边界。</zh-CN>\n        //   <en>Build a single-item configuration and reuse the batch implementation so the two entry points cannot diverge in security behavior.</en>\n        // </lang>\n        return encryptPasswordFields(\n            [\n                {\n                    passwordElementId: passwordElementId,\n                    encryptedElementId: encryptedElementId\n                }\n            ],\n            keyUrl,\n            messageElementId);\n    }",
+          "range": {
+            "start": {
+              "line": 315,
+              "column": 1
+            },
+            "end": {
+              "line": 329,
+              "column": 6
+            }
+          }
+        }
+      },
+      "sourcePreviewEnabled": true,
+      "sourceLinkEnabled": true,
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "defaultLocale": "zh-CN",
+      "fallbackLocale": "en",
+      "i18nMode": "runtimeSwitch",
+      "i18nFieldCount": 6,
+      "missingLocales": []
+    }
+  }
+]

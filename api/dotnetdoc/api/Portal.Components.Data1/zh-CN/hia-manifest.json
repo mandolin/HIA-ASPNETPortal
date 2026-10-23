@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "0.1.0",
+  "renderer": "@hia-doc/renderer-html",
+  "documentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components.Data1",
+  "title": "HIA-ASPNETPortal Portal.Components.Data1 API",
+  "entrypoint": "index.html",
+  "initialLocale": "zh-CN",
+  "locales": [
+    "en",
+    "zh-CN"
+  ],
+  "files": [
+    {
+      "path": "index.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "assets/hia-default.css",
+      "role": "asset",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/hia-default.js",
+      "role": "asset",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "hia-manifest.json",
+      "role": "manifest",
+      "contentType": "application/json; charset=utf-8"
+    }
+  ]
+}
