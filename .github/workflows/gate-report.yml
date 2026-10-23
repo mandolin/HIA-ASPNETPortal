@@ -1,0 +1,109 @@
+# <lang>
+#   <zh-CN>**门禁每日报告工作流**（`C-anp-P38` / `W-anp-P214`）。
+#
+#     用户裁定红线（路线图 D3）：**L1 红即阻止发布、L0 每日报告**。
+#     L1 那一半在 `publish-site.yml` 里（`gates` 作业 + `publish` 的 `needs`）；
+#     本工作流负责 L0 那一半——**每日定时跑全量 53 项静态门禁并出报告**。
+#
+#     **为什么不放进每次 PR**：路线图明确不做（太慢）；也**不阻断任何东西**——
+#     它的职责是"让漂移在一天内被发现"，不是"这次推送能不能合"。
+#
+#     **为什么失败仍要退出码 0 之外的处理**：GitHub Actions 的作业结论本身就是报告
+#     （红 = 今日门禁有失败）。本工作流额外做两件事：① 把结论写进 **作业摘要**（`$GITHUB_STEP_SUMMARY`），
+#     让人不用点开日志就看到哪几项红；② 失败时上传**套件证据目录**为 artifact，
+#     否则排查者只能在本地重跑（本地环境未必与 CI 一致）。
+#
+#     **不跑 L2**：IIS Express / LocalDB / `temp/node_modules/playwright` 前置在 CI 不存在，
+#     会全体 Skip——**持续跳过等于没有告警**，那比没有更糟。L2 仍是本地/手动。</zh-CN>
+#   <en>**Daily gate report workflow** (`C-anp-P38` / `W-anp-P214`).
+#
+#     User-ruled red line (roadmap D3): **a red L1 blocks publishing; L0 is a daily report**.
+#     The L1 half lives in `publish-site.yml` (`gates` job + `publish`'s `needs`); this workflow covers the L0 half —
+#     **running the full 53 static gates on a daily schedule and reporting**.
+#
+#     **Why not on every PR**: the roadmap explicitly excludes it (too slow); and it **blocks nothing** —
+#     its job is "drift is noticed within a day", not "may this push merge".
+#
+#     **Why handle more than the exit code**: the GitHub Actions job conclusion *is* the report (red = today's gates
+#     failed). This workflow adds two things: ① writing the verdict into the **job summary** (`$GITHUB_STEP_SUMMARY`)
+#     so which gates are red is visible without opening logs; ② uploading the **suite evidence directory** as an
+#     artifact on failure, otherwise a triager can only re-run locally (and the local environment may not match CI).
+#
+#     **L2 is not run**: IIS Express / LocalDB / `temp/node_modules/playwright` prerequisites are absent in CI and
+#     everything would skip — **an alarm that skips every day is no alarm at all**, which is worse than not having one.
+#     L2 remains local/manual.</en>
+# </lang>
+
+name: Gate report (L0 daily)
+
+on:
+  schedule:
+    # 每日 17:00 UTC（北京时间次日 01:00）。避开整点高峰，且落在当天工作结束之后。
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# <lang>
+#   <zh-CN>同组排队、不取消（与 `publish-site.yml` 同一理由）：取消会丢掉一次运行的结论。
+#     另外**两个工作流之间不共享组**——L0 报告与站点发布互不依赖，排队组只防"自己撞自己"。</zh-CN>
+#   <en>Queue within the group, never cancel (same reason as `publish-site.yml`): cancelling discards a run's verdict.
+#     The two workflows deliberately **do not share a group** — the L0 report and the site publish are independent;
+#     the queue group only prevents a workflow colliding with itself.</en>
+# </lang>
+concurrency:
+  group: gate-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: L0 gates (53 static gates)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoProfile -NoLogo -File ./dev/scripts/Invoke-PortalGateSuite.ps1 -Layer L0 -EvidenceDir (Join-Path $env:RUNNER_TEMP 'gate-suite-l0')
+          $code = $LASTEXITCODE
+          $summary = Join-Path $env:RUNNER_TEMP 'gate-suite-l0' 'gate-suite-summary.json'
+
+          # <lang>
+          #   <zh-CN>把逐项结论写进作业摘要。**无论红绿都写**——绿的那天也要能看到"今天跑过、全绿"，
+          #     否则"没有消息"与"工作流没跑"无法区分（这正是门禁设计里反复强调的两态区分）。</zh-CN>
+          #   <en>Writes per-gate results into the job summary, **whether red or green** — on a green day it must still be
+          #     visible that "it ran today and was green", otherwise "no news" and "the workflow did not run" cannot be
+          #     told apart (the same two-state distinction the gate design keeps insisting on).</en>
+          # </lang>
+          $lines = @('### 门禁每日报告（L0）', '', ('运行时间（UTC）：' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-dd HH:mm:ss')), '')
+          if (Test-Path -LiteralPath $summary) {
+            $s = Get-Content -LiteralPath $summary -Raw | ConvertFrom-Json
+            $lines += ('结论：**' + $(if ($code -eq 0) { '全部通过' } else { '存在失败' }) + '**｜门禁 ' + $s.gateCount + ' 项｜失败 ' + $s.failedCount + '｜跳过 ' + $s.skippedCount)
+            $lines += ''
+            $lines += '| 门禁 | 类型 | 结论 |'
+            $lines += '| --- | --- | --- |'
+            foreach ($g in @($s.results)) {
+              $mark = $(switch ($g.status) { 'Pass' { '通过' } 'Fail' { '**失败**' } 'Skip' { '跳过' } default { $g.status } })
+              $lines += ('| ' + $g.gate + ' | ' + $g.kind + ' | ' + $mark + ' |')
+            }
+          }
+          else {
+            $lines += ('**未取到套件摘要**（' + $summary + '）——退出码 ' + $code + '。按"不假装通过"口径记为未确认。')
+          }
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value ($lines -join "`n")
+
+          if ($code -ne 0) { throw ('L0 门禁报告：存在失败（退出码 ' + $code + '）。详见作业摘要与证据 artifact。') }
+
+      - name: Upload gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-suite-l0-${{ github.run_id }}
+          path: ${{ runner.temp }}/gate-suite-l0
+          if-no-files-found: warn
+          retention-days: 30

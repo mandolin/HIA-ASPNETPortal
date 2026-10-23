@@ -3,12 +3,15 @@
 #
 #     **它做什么**：在 `main` 变更时重新生成站点 → 跑三项不需要编译的静态门禁 → 发布到 `gh-pages` 分支。
 #
-#     **与既有 L0 门禁套件的关系（不重复、不冲突）**：
-#     - 本工作流**只跑不需要编译的静态子集**（生成 + 双语/N1/N2 + 公开面 + 文档合规）。
-#       **完整 L0 门禁套件**（`Invoke-PortalGateSuite.ps1 -Layer L0`，现 29 个）仍需在**本地**运行 ——
-#       其中含 .NET Framework 4.8 的构建类门禁，需要 Windows + Visual Studio/MSBuild 环境，不适合在 CI 内重跑。
-#     - 因此**不存在重复**：CI 守"发布面"，本地 L0 守"代码与文档整体"；两者的公共部分（如公开面门禁）
-#       是**同一个脚本**，不是各写一套。
+#     **与门禁套件的关系（不重复、不冲突）**（`C-anp-P38` / `W-anp-P213` 起更新）：
+#     - 本工作流的 `gates` 作业跑 **L1**（构建 + 单元测试 + 业务模块冒烟），且 `publish` 作业
+#       `needs: gates`——**门禁红则发布不开始**（用户裁定红线：L1 红即阻止发布）。
+#       `windows-latest` 自带 MSBuild 与 .NET Framework 4.8，L1 前置在 CI 真实存在。
+#     - **L0**（53 项静态门禁）不放这里：太慢，按裁定改为**每日定时报告**（见 `gate-report.yml`），
+#       失败不阻断发布，但作业摘要标红并附证据。
+#     - **L2**（运行期）**不进 CI**：IIS Express / LocalDB / `temp/node_modules/playwright` 前置在 CI 不存在，
+#       会全体 Skip——**持续跳过等于没有告警**，那比没有更糟。
+#     - 公共部分（如公开面门禁）是**同一个脚本**，不是各写一套。
 #
 #     **为什么用 windows-latest**：站点脚本是 PowerShell（`Build-PortalSite.ps1` 等），
 #       Windows 运行器自带 PowerShell，无需额外安装。
@@ -49,15 +52,83 @@ on:
       - 'dev/scripts/Test-PortalSitePublicSurface.ps1'
       - 'dev/scripts/Test-PortalPublicDocumentation.ps1'
       - 'dev/scripts/Test-PortalPublishedSiteChecks.ps1'
+      - 'dev/scripts/Invoke-PortalGateSuite.ps1'
       - '.github/workflows/publish-site.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+# <lang>
+#   <zh-CN>**并发组：同组排队，绝不取消**（`C-anp-P38` / `W-anp-P213`）。
+#     为什么不用 `cancel-in-progress: true`：取消会**丢掉一次运行的结论**——而本周期的红线恰恰是
+#     "L1 红即阻止发布"，它依赖每一次运行都有一个明确结论。被取消的运行没有结论，等于这次推送
+#     没人把过关。排队只是慢一点，结论不丢。
+#     为什么必须加：门禁套件里有**改写工作树**的步骤（`Build-Solution.ps1` 写 `bin/obj`、
+#     `Build-PortalSite.ps1` 改写已签入的 `site/`）。两个运行同时进行不是"假失败"，
+#     是**真的会把对方的产物改掉**（备忘 D2 的同源风险，只是源头从 L2 切库变成了构建产物）。</zh-CN>
+#   <en>**Concurrency group: queue, never cancel** (`C-anp-P38` / `W-anp-P213`).
+#     Why not `cancel-in-progress: true`: cancelling **discards a run's verdict** — and this cycle's red line is precisely
+#     "a red L1 blocks publishing", which depends on every run producing a definite verdict. A cancelled run has no verdict,
+#     so that push goes unreviewed. Queueing is merely slower; no verdict is lost.
+#     Why it is needed at all: the gate suite contains steps that **rewrite the working tree** (`Build-Solution.ps1` writes
+#     `bin/obj`, `Build-PortalSite.ps1` rewrites the committed `site/`). Two concurrent runs are not a "false failure" —
+#     they **really overwrite each other's artifacts** (the same-root risk as memo D2, with the source moved from L2
+#     database switching to build artifacts).</en>
+# </lang>
+concurrency:
+  group: publish-site-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
+  # <lang>
+  #   <zh-CN>**门禁作业（L1）**：构建 + 单元测试 + 业务模块冒烟。
+  #     `windows-latest` 自带 MSBuild 与 .NET Framework 4.8，L1 的前置在 CI 里真实存在——
+  #     工作流头注释里"L0 含构建类门禁、不适合 CI 重跑"的说法**已过期**（实测本地 0.6 分钟跑完 9 项）。
+  #     真正不适合进 CI 的是 L2（IIS Express / LocalDB / playwright 前置不存在，会全体 Skip）。
+  #     **这个作业是 `publish` 的 `needs`**：门禁红 → `publish` 根本不会开始，
+  #     "发布前必须门禁绿"由**结构**保证，而不是靠人记得先跑一遍。</zh-CN>
+  #   <en>**Gate job (L1)**: build + unit tests + business-module smoke.
+  #     `windows-latest` ships MSBuild and .NET Framework 4.8, so L1's prerequisites genuinely exist in CI —
+  #     the workflow header's claim that "L0 contains build gates unsuited to CI" is **outdated** (measured: 9 gates in
+  #     0.6 minutes locally). What is genuinely unsuited to CI is **L2** (IIS Express / LocalDB / playwright prerequisites
+  #     are absent, so everything would skip).
+  #     **This job is a `needs` of `publish`**: a red gate means `publish` never starts, so "gates must be green before
+  #     publishing" is guaranteed **structurally**, not by someone remembering to run it first.</en>
+  # </lang>
+  gates:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: L1 gates (build + tests + business-module smoke)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & 'C:\Program Files\PowerShell\7\pwsh.exe' -NoProfile -NoLogo -File ./dev/scripts/Invoke-PortalGateSuite.ps1 -Layer L1 -EvidenceDir (Join-Path $env:RUNNER_TEMP 'gate-suite-l1')
+          if ($LASTEXITCODE -ne 0) { throw ('L1 门禁失败，退出码 ' + $LASTEXITCODE + '——按红线（L1 红即阻止发布）中止') }
+
+      # <lang>
+      #   <zh-CN>失败时把套件摘要上传为 artifact：CI 日志里能看到"哪项红了"，摘要里能看到全部九项的
+      #     退出码与说明。没有这一步，排查者只能从头在本地重跑（而本地环境未必一致）。</zh-CN>
+      #   <en>On failure, upload the suite summary as an artifact: the CI log shows *which* gate went red, the summary
+      #     shows all nine exit codes and notes. Without this, a triager can only re-run everything locally — and the
+      #     local environment may not match.</en>
+      # </lang>
+      - name: Upload gate evidence (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-suite-l1
+          path: ${{ runner.temp }}/gate-suite-l1
+          if-no-files-found: warn
+
   publish:
     runs-on: windows-latest
+    needs: gates
     steps:
       - name: Checkout
         uses: actions/checkout@v4
