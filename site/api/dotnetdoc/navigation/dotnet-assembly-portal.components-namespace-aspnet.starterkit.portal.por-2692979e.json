@@ -1,0 +1,21 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal.portalhiaboundarycontract",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal.portalhiaboundarycontract:type:t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule",
+      "kind": "type",
+      "label": "PayloadRule",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalhiaboundarycontract-54d1a48f.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal.por-2a73f64f.json"
+    }
+  ]
+}

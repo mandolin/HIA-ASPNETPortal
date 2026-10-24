@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionregistry",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionregistry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
+      "kind": "entry",
+      "label": "Definitions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpermissionregistry.definitions",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.-4f512f3d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionregistry:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
+      "kind": "entry",
+      "label": "IsDefined",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.-1d47b608.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionregistry:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
+      "kind": "entry",
+      "label": "NormalizeDefinedKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.-792a605a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionregistry:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
+      "kind": "entry",
+      "label": "NormalizeDefinedKeys",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.-02c84ef0.html"
+    }
+  ]
+}

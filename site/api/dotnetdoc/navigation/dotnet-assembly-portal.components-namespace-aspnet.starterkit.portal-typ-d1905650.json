@@ -1,0 +1,137 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.applicantemployeeid",
+      "kind": "entry",
+      "label": "ApplicantEmployeeId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.applicantemployeeid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.applicantemployeeid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-1a9ca5bb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.applicantuserid",
+      "kind": "entry",
+      "label": "ApplicantUserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.applicantuserid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.applicantuserid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-d2b31618.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.body",
+      "kind": "entry",
+      "label": "Body",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.body",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.body",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-ac275230.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.categorykey",
+      "kind": "entry",
+      "label": "CategoryKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.categorykey",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.categorykey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-49ee133b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.organizationunitid",
+      "kind": "entry",
+      "label": "OrganizationUnitId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.organizationunitid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.organizationunitid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-3b7f5d6c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.reviewrolekey",
+      "kind": "entry",
+      "label": "ReviewRoleKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.reviewrolekey",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.reviewrolekey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-7c5c8747.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.submittedby",
+      "kind": "entry",
+      "label": "SubmittedBy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.submittedby",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.submittedby",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-4e2f6f30.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.submittedutc",
+      "kind": "entry",
+      "label": "SubmittedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.submittedutc",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.submittedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-f6d2bc91.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.summary",
+      "kind": "entry",
+      "label": "Summary",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.summary",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.summary",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-0a3309dc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationsubmitrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.title",
+      "kind": "entry",
+      "label": "Title",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationsubmitrequest.title",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationsubmitrequest.title",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationsubmit-2db64a42.html"
+    }
+  ]
+}

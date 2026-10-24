@@ -1,0 +1,280 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.-ctor-aspnet.starterkit.portal.portalsecuritydbcontext",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.-ctor-aspnet.starterkit.portal.portalsecuritydbcontext",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.-ctor-aspnet.starterkit.portal.portalsecuritydbcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.-ctor-aspnet.star-12a268b6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.addrole-system.int32-system.string",
+      "kind": "entry",
+      "label": "AddRole",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.addrole-system.int32-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.addrole-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.addrole-system.in-6be614e7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.adduserrole-system.int32-system.int32",
+      "kind": "entry",
+      "label": "AddUserRole",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.adduserrole-system.int32-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.adduserrole-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.adduserrole-syste-6047f241.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.deleterole-system.int32",
+      "kind": "entry",
+      "label": "DeleteRole",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.deleterole-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.deleterole-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.deleterole-system-19fa24f8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.deleteuserrole-system.int32-system.int32",
+      "kind": "entry",
+      "label": "DeleteUserRole",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.deleteuserrole-system.int32-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.deleteuserrole-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.deleteuserrole-sy-11f5c2fb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.ensureuserandroleexist-system.int32-system.int32",
+      "kind": "entry",
+      "label": "EnsureUserAndRoleExist",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.ensureuserandroleexist-system.int32-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.ensureuserandroleexist-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.ensureuserandrole-6d8e5b2e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getpermissionkeysbyusername-system.string",
+      "kind": "entry",
+      "label": "GetPermissionKeysByUserName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getpermissionkeysbyusername-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.getpermissionkeysbyusername-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.getpermissionkeys-bc81d5d2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getportalroles-system.int32",
+      "kind": "entry",
+      "label": "GetPortalRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getportalroles-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.getportalroles-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.getportalroles-sy-3af91a74.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getrolememberids-system.int32",
+      "kind": "entry",
+      "label": "GetRoleMemberIds",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getrolememberids-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.getrolememberids-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.getrolememberids--b2907d8d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getrolemembers-system.int32",
+      "kind": "entry",
+      "label": "GetRoleMembers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getrolemembers-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.getrolemembers-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.getrolemembers-sy-dd5fc464.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getrolepermissionentries",
+      "kind": "entry",
+      "label": "GetRolePermissionEntries",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getrolepermissionentries",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.getrolepermissionentries",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.getrolepermission-1ca239fa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getusers",
+      "kind": "entry",
+      "label": "GetUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.getusers",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.getusers",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.getusers-16f6594f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.hasrolepermissionstable",
+      "kind": "entry",
+      "label": "HasRolePermissionsTable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.hasrolepermissionstable",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.hasrolepermissionstable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.hasrolepermission-cce479e9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.hassecuritystatetable",
+      "kind": "entry",
+      "label": "HasSecurityStateTable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.hassecuritystatetable",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.hassecuritystatetable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.hassecuritystatet-d79800d8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.hasuserrole-system.int32-system.int32",
+      "kind": "entry",
+      "label": "HasUserRole",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.hasuserrole-system.int32-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.hasuserrole-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.hasuserrole-syste-1a632c8a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.incrementsecurityversion-system.int32-system.string",
+      "kind": "entry",
+      "label": "IncrementSecurityVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.incrementsecurityversion-system.int32-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.incrementsecurityversion-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.incrementsecurity-768a810b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.incrementsecurityversions-system.collections.generic.ienumerable-system.int32-system.string",
+      "kind": "entry",
+      "label": "IncrementSecurityVersions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.incrementsecurityversions-system.collections.generic.ienumerable-system.int32-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.incrementsecurityversions-system.collections.generic.ienumerable-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.incrementsecurity-46203e7d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.normalizereason-system.string",
+      "kind": "entry",
+      "label": "NormalizeReason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.normalizereason-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.normalizereason-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.normalizereason-s-c5cc2f0b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.normalizeupdatedby-system.string",
+      "kind": "entry",
+      "label": "NormalizeUpdatedBy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.normalizeupdatedby-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.normalizeupdatedby-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.normalizeupdatedb-8dbc6a45.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.saverolepermissions-system.int32-system.collections.generic.ienumerable-system.string-system.string",
+      "kind": "entry",
+      "label": "SaveRolePermissions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.saverolepermissions-system.int32-system.collections.generic.ienumerable-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.saverolepermissions-system.int32-system.collections.generic.ienumerable-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.saverolepermissio-a29a75cf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolesdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.updaterole-system.int32-system.string",
+      "kind": "entry",
+      "label": "UpdateRole",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.rolesdb.updaterole-system.int32-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.rolesdb.updaterole-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.rolesdb.updaterole-system-e58f4363.html"
+    }
+  ]
+}

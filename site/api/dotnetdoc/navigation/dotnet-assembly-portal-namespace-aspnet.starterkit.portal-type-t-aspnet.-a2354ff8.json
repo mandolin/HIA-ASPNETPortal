@@ -1,0 +1,280 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.cancelbtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "CancelBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.cancelbtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editcontacts.cancelbtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editcontacts.cancelbtn_cl-87555046.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.contact1field",
+      "kind": "entry",
+      "label": "Contact1Field",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.contact1field",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.contact1field",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.contact1fiel-4ebedb5f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.contact2field",
+      "kind": "entry",
+      "label": "Contact2Field",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.contact2field",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.contact2field",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.contact2fiel-83734108.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-p-aspnet.starterkit.portal.editcontacts.contactsdb",
+      "kind": "entry",
+      "label": "ContactsDB",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.editcontacts.contactsdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.editcontacts.contactsdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.editcontacts.contactsdb-d9b0acab.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.createdby",
+      "kind": "entry",
+      "label": "CreatedBy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.createdby",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.createdby",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.createdby-08a55c63.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.createddate",
+      "kind": "entry",
+      "label": "CreatedDate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.createddate",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.createddate",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.createddate-d58d1c7e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.deletebtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "DeleteBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.deletebtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editcontacts.deletebtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editcontacts.deletebtn_cl-d3eb2baf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.emailfield",
+      "kind": "entry",
+      "label": "EmailField",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.emailfield",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.emailfield",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.emailfield-ea01cc5e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.encodedisplaytext-system.string",
+      "kind": "entry",
+      "label": "EncodeDisplayText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.encodedisplaytext-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editcontacts.encodedisplaytext-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editcontacts.encodedispla-bb226fc5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.namefield",
+      "kind": "entry",
+      "label": "NameField",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.namefield",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.namefield",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.namefield-06bdae2f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editcontacts.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editcontacts.page_load-sy-3a2fa145.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-p-aspnet.starterkit.portal.editcontacts.portalsecurity",
+      "kind": "entry",
+      "label": "PortalSecurity",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.editcontacts.portalsecurity",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.editcontacts.portalsecurity",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.editcontacts.portalsecuri-2d1f8448.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.requiredfieldvalidator1",
+      "kind": "entry",
+      "label": "RequiredFieldValidator1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.requiredfieldvalidator1",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.requiredfieldvalidator1",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.requiredfiel-7db4cc2c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.rolefield",
+      "kind": "entry",
+      "label": "RoleField",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.rolefield",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.rolefield",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.rolefield-0941bd62.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.tryinitializerequest-aspnet.starterkit.portal.icontactitem",
+      "kind": "entry",
+      "label": "TryInitializeRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.tryinitializerequest-aspnet.starterkit.portal.icontactitem",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editcontacts.tryinitializerequest-aspnet.starterkit.portal.icontactitem",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editcontacts.tryinitializ-ce881056.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.updatebtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "UpdateBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editcontacts.updatebtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editcontacts.updatebtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editcontacts.updatebtn_cl-40729fc5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.cancelbutton",
+      "kind": "entry",
+      "label": "cancelButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.cancelbutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.cancelbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.cancelbutton-5ed53790.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.deletebutton",
+      "kind": "entry",
+      "label": "deleteButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.deletebutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.deletebutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.deletebutton-cf1a509d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.itemid",
+      "kind": "entry",
+      "label": "itemId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.itemid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.itemid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.itemid-75bf2068.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.moduleid",
+      "kind": "entry",
+      "label": "moduleId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.moduleid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.moduleid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.moduleid-586705f7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editcontacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.updatebutton",
+      "kind": "entry",
+      "label": "updateButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editcontacts.updatebutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editcontacts.updatebutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editcontacts.updatebutton-f8d5d977.html"
+    }
+  ]
+}

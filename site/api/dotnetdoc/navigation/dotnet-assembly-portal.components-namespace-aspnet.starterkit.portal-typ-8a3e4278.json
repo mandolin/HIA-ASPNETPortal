@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationrequest.confirmedby",
+      "kind": "entry",
+      "label": "ConfirmedBy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationrequest.confirmedby",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeeprofileconfirmationrequest.confirmedby",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmati-41aad8c8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationrequest.confirmedutc",
+      "kind": "entry",
+      "label": "ConfirmedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationrequest.confirmedutc",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeeprofileconfirmationrequest.confirmedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmati-b9f2b509.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationrequest.employeeid",
+      "kind": "entry",
+      "label": "EmployeeId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationrequest.employeeid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeeprofileconfirmationrequest.employeeid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmati-91079e05.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationrequest.userid",
+      "kind": "entry",
+      "label": "UserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmationrequest.userid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeeprofileconfirmationrequest.userid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofileconfirmati-7ba159b6.html"
+    }
+  ]
+}

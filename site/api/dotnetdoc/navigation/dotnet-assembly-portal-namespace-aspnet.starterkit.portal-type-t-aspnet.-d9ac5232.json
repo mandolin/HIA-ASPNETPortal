@@ -1,0 +1,85 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.boolean",
+      "kind": "entry",
+      "label": "Boolean",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.boolean",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingvaluetype.boolean",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.bo-0ee6f934.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.duration",
+      "kind": "entry",
+      "label": "Duration",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.duration",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingvaluetype.duration",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.du-6933a3b8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.enum",
+      "kind": "entry",
+      "label": "Enum",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.enum",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingvaluetype.enum",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.en-ea4dba25.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.integer",
+      "kind": "entry",
+      "label": "Integer",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.integer",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingvaluetype.integer",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.in-5f7981d2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.path",
+      "kind": "entry",
+      "label": "Path",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.path",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingvaluetype.path",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.pa-d2d6387f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.string",
+      "kind": "entry",
+      "label": "String",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalsettingvaluetype.string",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.st-618415f1.html"
+    }
+  ]
+}

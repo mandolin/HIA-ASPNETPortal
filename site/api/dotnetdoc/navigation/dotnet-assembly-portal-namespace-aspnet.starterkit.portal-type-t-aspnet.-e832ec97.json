@@ -1,0 +1,176 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-m-aspnet.starterkit.portal.signin.clearsubmittedpasswordfields",
+      "kind": "entry",
+      "label": "ClearSubmittedPasswordFields",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.signin.clearsubmittedpasswordfields",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.signin.clearsubmittedpasswordfields",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.signin.clearsubmittedpass-899cab9e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-f-aspnet.starterkit.portal.signin.emailorname",
+      "kind": "entry",
+      "label": "EmailOrName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.emailorname",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.signin.emailorname",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.signin.emailorname-5d4487ff.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-f-aspnet.starterkit.portal.signin.encryptedpassword",
+      "kind": "entry",
+      "label": "EncryptedPassword",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.encryptedpassword",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.signin.encryptedpassword",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.signin.encryptedpassword-2ae731e0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-m-aspnet.starterkit.portal.signin.loginbtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "LoginBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.signin.loginbtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.signin.loginbtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.signin.loginbtn_click-sys-94e1fac0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-f-aspnet.starterkit.portal.signin.message",
+      "kind": "entry",
+      "label": "Message",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.message",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.signin.message",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.signin.message-33e37ed6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-m-aspnet.starterkit.portal.signin.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.signin.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.signin.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.signin.page_load-system.o-76e627c8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-f-aspnet.starterkit.portal.signin.registerlink",
+      "kind": "entry",
+      "label": "RegisterLink",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.registerlink",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.signin.registerlink",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.signin.registerlink-55790e52.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-m-aspnet.starterkit.portal.signin.registerloginpasswordencryptionscripts",
+      "kind": "entry",
+      "label": "RegisterLoginPasswordEncryptionScripts",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.signin.registerloginpasswordencryptionscripts",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.signin.registerloginpasswordencryptionscripts",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.signin.registerloginpassw-a63451ea.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-f-aspnet.starterkit.portal.signin.remembercheckbox",
+      "kind": "entry",
+      "label": "RememberCheckbox",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.remembercheckbox",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.signin.remembercheckbox",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.signin.remembercheckbox-41653cc9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-f-aspnet.starterkit.portal.signin.signinbtn",
+      "kind": "entry",
+      "label": "SigninBtn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.signinbtn",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.signin.signinbtn",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.signin.signinbtn-d35afecf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-m-aspnet.starterkit.portal.signin.tryresolvesubmittedpassword-system.string",
+      "kind": "entry",
+      "label": "TryResolveSubmittedPassword",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.signin.tryresolvesubmittedpassword-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.signin.tryresolvesubmittedpassword-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.signin.tryresolvesubmitte-16982bc4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-p-aspnet.starterkit.portal.signin.usersdb",
+      "kind": "entry",
+      "label": "UsersDB",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.signin.usersdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.signin.usersdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.signin.usersdb-6fe89d1d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin:entry:hia-document:dotnet-f-aspnet.starterkit.portal.signin.password",
+      "kind": "entry",
+      "label": "password",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.password",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.signin.password",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.signin.password-6e681bde.html"
+    }
+  ]
+}

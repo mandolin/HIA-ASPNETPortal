@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesecurityoptions",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesecurityoptions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalcookiesecurityoptions.-ctor-system.boolean-aspnet.starterkit.portal.portalcookiesamesitemode-system.boolean-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcookiesecurityoptions.-ctor-system.boolean-aspnet.starterkit.portal.portalcookiesamesitemode-system.boolean-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcookiesecurityoptions.-ctor-system.boolean-aspnet.starterkit.portal.portalcookiesamesitemode-system.boolean-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcookiesecurityoptio-157a2adf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesecurityoptions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptions.degradereason",
+      "kind": "entry",
+      "label": "DegradeReason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptions.degradereason",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcookiesecurityoptions.degradereason",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptio-e4928dad.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesecurityoptions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptions.degraded",
+      "kind": "entry",
+      "label": "Degraded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptions.degraded",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcookiesecurityoptions.degraded",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptio-2003fc7f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesecurityoptions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptions.samesite",
+      "kind": "entry",
+      "label": "SameSite",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptions.samesite",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcookiesecurityoptions.samesite",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptio-504b8adc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesecurityoptions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptions.secure",
+      "kind": "entry",
+      "label": "Secure",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptions.secure",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcookiesecurityoptions.secure",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcookiesecurityoptio-5f699594.html"
+    }
+  ]
+}

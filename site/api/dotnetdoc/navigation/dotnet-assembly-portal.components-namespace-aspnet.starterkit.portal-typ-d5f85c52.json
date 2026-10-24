@@ -1,0 +1,46 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
+      "kind": "entry",
+      "label": "CreateRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.createreq-97fcce90.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32",
+      "kind": "entry",
+      "label": "GetRecentByUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecent-2e9a040e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaavailable",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaa-67f3de9d.html"
+    }
+  ]
+}

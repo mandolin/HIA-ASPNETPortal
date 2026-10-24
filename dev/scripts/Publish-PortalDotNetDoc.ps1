@@ -200,24 +200,48 @@ if ($WhatIf) {
 if (Test-Path -LiteralPath $stagingRoot -PathType Container) { Remove-Item -LiteralPath $stagingRoot -Recurse -Force }
 $null = New-Item -ItemType Directory -Force -Path $stagingRoot
 
+# <lang>
+#   <zh-CN>**渲染方式（W-anp-P225 起改为多页）**：不再逐半边 `--input` 单页渲染（那样一个 API
+#     工程整面挤在一页，Portal 中文版实测 4.58 MB），而是用 **`--project-manifest` 一次渲染成
+#     split-site 多页站点**（`index.html` 壳 + `entries/<逐成员>` + `navigation/` + `search/` +
+#     `assets/`）。`hia.config.json` 的 `docs.renderer.projectLayout = "split-site"` 决定布局，
+#     `docs.theme.colors.accent` 把主色覆写为门户蓝 `#0f4f82`（工具在默认 CSS 之后追加
+#     高特异性 `:root[data-hia-skin]` 覆盖块）。`--locale zh-CN` 只决定**默认显示语言**——
+#     条目页本身含中英双语内容块，站内语言切换器可切英文，故一套产物即双语。
+#   <en>**Rendering (multi-page since W-anp-P225)**: instead of rendering each half with `--input`
+#     (which crams an entire API project onto one page — 4.58 MB measured for the Chinese Portal half),
+#     we now render **once via `--project-manifest` into a split-site** (`index.html` shell +
+#     `entries/<per member>` + `navigation/` + `search/` + `assets/`). `docs.renderer.projectLayout =
+#     "split-site"` in `hia.config.json` selects the layout, and `docs.theme.colors.accent` overrides
+#     the accent with the portal blue `#0f4f82` (the tool appends a higher-specificity `:root[data-hia-skin]`
+#     block after the default CSS). `--locale zh-CN` only sets the **initially displayed language** — entry
+#     pages carry both zh and en content blocks and the in-site switcher toggles English, so one artefact
+#     set serves both languages.</en>
+# </lang>
+$configPath = Join-Path $repositoryRoot 'hia.config.json'
+$projectManifestPath = Join-Path $repositoryRoot 'hia.project.json'
+foreach ($required in @($configPath, $projectManifestPath)) {
+    if (-not (Test-Path -LiteralPath $required -PathType Leaf)) { throw "缺少多页渲染所需配置：$required" }
+}
+$renderTarget = Join-Path $stagingRoot 'api/dotnetdoc'
+$null = New-Item -ItemType Directory -Force -Path $renderTarget
+
 Push-Location $toolDirectory
 try {
-    foreach ($entry in $plan) {
-        foreach ($locale in $entry.Locales) {
-            $destination = Join-Path $stagingRoot ($entry.Half + '/' + $locale)
-            $null = New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination)
-            & $hiaCommand docs build --input $entry.Artifact --out $destination --locale $locale 2>&1 |
-                Where-Object { $_ -match '\[error' } |
-                ForEach-Object { Write-Host ('    ' + $_) }
-            if ($LASTEXITCODE -ne 0) { throw ("渲染失败：" + $entry.Half + ' / ' + $locale + '（exit ' + $LASTEXITCODE + '）') }
-            if (-not (Test-Path -LiteralPath (Join-Path $destination 'index.html') -PathType Leaf)) {
-                throw ('渲染未产出 index.html：' + $entry.Half + ' / ' + $locale)
-            }
-        }
+    & $hiaCommand docs build --config $configPath --project-manifest $projectManifestPath --out $renderTarget --locale 'zh-CN' 2>&1 |
+        Where-Object { $_ -match '\[error|\[warning:PRESENTATION' } |
+        ForEach-Object { Write-Host ('    ' + $_) }
+    if ($LASTEXITCODE -ne 0) { throw ("多页渲染失败（exit " + $LASTEXITCODE + '）') }
+    if (-not (Test-Path -LiteralPath (Join-Path $renderTarget 'index.html') -PathType Leaf)) {
+        throw ('多页渲染未产出 index.html：' + $renderTarget)
     }
+    $entryPages = @(Get-ChildItem -LiteralPath (Join-Path $renderTarget 'entries') -File -Filter '*.html' -ErrorAction SilentlyContinue)
+    if ($entryPages.Count -eq 0) { throw ('多页渲染未产出任何条目页：' + (Join-Path $renderTarget 'entries')) }
 }
 finally { Pop-Location }
 
+# ---------- 发布：先清后建，整体重建 ----------
+$u = [System.Text.UTF8Encoding]::new($false)
 # <lang>
 #   <zh-CN>**先清后建**：发布目录整体重建，避免上一版残留的半边/语言目录变成"幽灵产物"（读者点到 404，
 #     而 manifest 里又没有它——那种不一致最难查）。</zh-CN>
@@ -227,145 +251,53 @@ finally { Pop-Location }
 # </lang>
 if (Test-Path -LiteralPath $publishRoot -PathType Container) { Remove-Item -LiteralPath $publishRoot -Recurse -Force }
 $null = New-Item -ItemType Directory -Force -Path $publishRoot
+Copy-Item -Path (Join-Path $renderTarget '*') -Destination $publishRoot -Recurse -Force
 
-$published = @()
-foreach ($entry in $plan) {
-    foreach ($locale in $entry.Locales) {
-        $source = Join-Path $stagingRoot ($entry.Half + '/' + $locale)
-        $target = Join-Path $publishRoot ($entry.Half + '/' + $locale)
-        $null = New-Item -ItemType Directory -Force -Path (Split-Path -Parent $target)
-        Copy-Item -LiteralPath $source -Destination $target -Recurse -Force
-        $files = @(Get-ChildItem -LiteralPath $target -Recurse -File)
-        $bytes = ($files | Measure-Object Length -Sum).Sum
-        $published += [pscustomobject]@{ Half = $entry.Half; Locale = $locale; Title = $entry.Title; Files = $files.Count; Bytes = $bytes }
-    }
-}
+$publishedFiles = @(Get-ChildItem -LiteralPath $publishRoot -Recurse -File)
+$publishedBytes = ($publishedFiles | Measure-Object Length -Sum).Sum
+$entryPageCount = @(Get-ChildItem -LiteralPath (Join-Path $publishRoot 'entries') -File -Filter '*.html' -ErrorAction SilentlyContinue).Count
 
+# ---------- manifest：站点级（多页 split-site） ----------
 # <lang>
-#   <zh-CN>**三个入口页，而不是一个双语页**（`W-anp-P203` 调整）：`index.html`（双语默认）、
-#     `index.zh-CN.html`（中文）、`index.en.html`（英文）。为什么改：侧边导航的外链是**按语言过滤**的
-#     （2026-10-22 刚修的那个机制），中文导航点中文页、英文导航点英文页，读者落地页与当前语言一致；
-#     若只有一个双语页，两种语言的导航都落在同一页上，语言过滤就白做了。
-#     语言页对"只有英文的半边"**如实标注"仅英文"**，不藏也不装中文。</zh-CN>
-#   <en>**Three entry pages rather than one bilingual page** (`W-anp-P203` adjustment): `index.html` (bilingual default),
-#     `index.zh-CN.html` (Chinese) and `index.en.html` (English). Why: the side-navigation external links are
-#     **filtered by language** (the mechanism fixed on 2026-10-22), so the Chinese navigation should land on the Chinese
-#     page and the English navigation on the English page; with a single bilingual page both would land on the same page
-#     and the language filtering would be undone. A language page **honestly marks an English-only half as "English
-#     only"** — neither hidden nor faked as Chinese.</en>
+#   <zh-CN>**为什么 manifest 从 halves[] 改成站点级**：多页 split-site 是**一个自包含站点**
+#     （index.html + entries/ + navigation/ + search/），不再有"半边 × 语言"的目录矩阵。若继续按
+#      halves[] 登记，manifest 会描述一个不存在的结构——那正是"看起来通过、实际不一致"。
+#     因此改为站点级：登记入口、布局、语言、条目数与源指纹。</zh-CN>
+#   <en>**Why the manifest changed from halves[] to site-level**: the multi-page split-site is **one
+#     self-contained site** (index.html + entries/ + navigation/ + search/), so the "half × locale"
+#     directory matrix no longer exists. Keeping halves[] would describe a structure that is not there —
+#     exactly the "looks passing, actually inconsistent" failure. It now records the entrypoint,
+#     layout, locales, entry count and source fingerprint at site level.</en>
 # </lang>
-function New-DotNetDocEntryHtml {
-    param([string] $PageLocale)   # 'zh-CN' | 'en' | '' = bilingual
-    $isBilingual = ($PageLocale -eq '')
-    $rows = New-Object 'System.Collections.Generic.List[string]'
-    foreach ($entry in ($plan | Sort-Object Half)) {
-        $links = @()
-        if ($isBilingual) {
-            foreach ($locale in $entry.Locales) {
-                $href = ($entry.Half + '/' + $locale + '/')
-                if ($locale -eq 'zh-CN') { $links += ('<a href="' + $href + '">中文</a>') }
-                elseif ($locale -eq 'en') { $links += ('<a href="' + $href + '">English</a>') }
-                else { $links += ('<a href="' + $href + '">' + $locale + '</a>') }
-            }
-        }
-        else {
-            $target = @($entry.Locales | Where-Object { $_ -eq $PageLocale } | Select-Object -First 1)
-            if ($target.Count -gt 0) {
-                $href = ($entry.Half + '/' + $target[0] + '/')
-                $links += ('<a href="' + $href + '">' + $(if ($PageLocale -eq 'zh-CN') { '中文' } else { 'English' }) + '</a>')
-            }
-            else {
-                $fallback = @($entry.Locales | Where-Object { $_ -eq 'en' } | Select-Object -First 1)
-                if ($fallback.Count -gt 0) {
-                    $href = ($entry.Half + '/' + $fallback[0] + '/')
-                    $links += ('<a href="' + $href + '">' + $(if ($PageLocale -eq 'zh-CN') { '仅英文' } else { 'English only' }) + '</a>')
-                }
-            }
-        }
-        $rows.Add('    <tr><td>' + $entry.Half + '</td><td>' + ($links -join ' · ') + '</td></tr>')
-    }
-    if ($isBilingual) {
-        $lang = 'zh-CN'; $title = '代码文档（DotNetDoc）· Code documentation (DotNetDoc)'
-        $h1 = '代码文档（DotNetDoc）'
-        $intro = '由源码 XML 文档注释生成；本页为各半边的语言入口。<br>Generated from the source XML documentation comments; this page lists every half and its languages.'
-        $head = '半边 / Half'; $headLang = '语言 / Languages'
-    }
-    elseif ($PageLocale -eq 'zh-CN') {
-        $lang = 'zh-CN'; $title = '代码文档（DotNetDoc）· 中文'
-        $h1 = '代码文档（DotNetDoc）'
-        $intro = '由源码 XML 文档注释生成；本页只列中文入口（仅英文的半边如实标注）。'
-        $head = '半边'; $headLang = '语言'
-    }
-    else {
-        $lang = 'en'; $title = 'Code documentation (DotNetDoc) · English'
-        $h1 = 'Code documentation (DotNetDoc)'
-        $intro = 'Generated from the source XML documentation comments; this page lists the English entries only.'
-        $head = 'Half'; $headLang = 'Languages'
-    }
-    return @"
-<!doctype html>
-<html lang="$lang">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>$title</title>
-<link rel="stylesheet" href="hia-default.css">
-</head>
-<body>
-<main>
-<h1>$h1</h1>
-<p>$intro</p>
-<table>
-<thead><tr><th>$head</th><th>$headLang</th></tr></thead>
-<tbody>
-$($rows -join "`n")
-</tbody>
-</table>
-</main>
-</body>
-</html>
-"@
+$projectIndexPath = Join-Path $renderTarget 'project-index.json'
+$entryIds = @()
+if (Test-Path -LiteralPath $projectIndexPath -PathType Leaf) {
+    $projectIndex = [System.IO.File]::ReadAllText($projectIndexPath, $u) | ConvertFrom-Json
+    if ($null -ne $projectIndex.entries) { $entryIds = @($projectIndex.entries | ForEach-Object { $_.id }) }
 }
-[System.IO.File]::WriteAllText((Join-Path $publishRoot 'index.html'), (New-DotNetDocEntryHtml -PageLocale ''), [System.Text.UTF8Encoding]::new($false))
-[System.IO.File]::WriteAllText((Join-Path $publishRoot 'index.zh-CN.html'), (New-DotNetDocEntryHtml -PageLocale 'zh-CN'), [System.Text.UTF8Encoding]::new($false))
-[System.IO.File]::WriteAllText((Join-Path $publishRoot 'index.en.html'), (New-DotNetDocEntryHtml -PageLocale 'en'), [System.Text.UTF8Encoding]::new($false))
-
-# <lang>
-#   <zh-CN>入口页自带一份主题样式（从任一渲染产物拷贝），保证不依赖某个半边目录是否存在。</zh-CN>
-#   <en>The entry page carries its own copy of the theme stylesheet (copied from any rendered artifact) so it does not
-#     depend on a particular half directory existing.</en>
-# </lang>
-$assetSource = Get-ChildItem -LiteralPath $publishRoot -Recurse -File -Filter 'hia-default.css' | Select-Object -First 1
-if ($assetSource) { Copy-Item -LiteralPath $assetSource.FullName -Destination (Join-Path $publishRoot 'hia-default.css') -Force }
 
 $manifest = [ordered]@{
-    schemaVersion  = 1
-    generator      = '@hia-doc/dotnetdoc-runner（hia-dotnetdoc）+ @hia-doc/renderer-html（hia docs build），由 dev/scripts/Publish-PortalDotNetDoc.ps1 编排'
-    generatedUtc   = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
-    publishedBy    = 'HIA-ASPNETPortal 文档发布流程（Publish-PortalDotNetDoc.ps1）'
-    localePolicy   = '每个半边按其在 HIA 工件中声明的 locales 渲染；未声明 zh-CN 的半边（surface、project）为结构描述，只有英文。'
-    sourceFingerprint = $sourceFingerprint
+    schemaVersion    = 2
+    layout           = 'split-site'
+    generator        = '@hia-doc/dotnetdoc-runner（hia-dotnetdoc）+ @hia-doc/renderer-html（hia docs build），由 dev/scripts/Publish-PortalDotNetDoc.ps1 编排'
+    publishedBy      = 'HIA-ASPNETPortal 文档发布流程（Publish-PortalDotNetDoc.ps1）'
+    generatedUtc     = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+    entrypoint       = 'index.html'
+    defaultLocale    = 'zh-CN'
+    locales          = @('zh-CN', 'en')
+    localeNote       = '条目页内含中英双语内容块，站内语言切换器切换显示语言；默认显示中文。已知限制：搜索索引按默认语言（中文）建立。'
+    sourceFingerprint    = $sourceFingerprint
     fingerprintAlgorithm = "SHA256 over '<relativePath>|<byteLength>|<sha256(content)>' lines, joined by LF；输入缺失记 <missing>。覆盖 dotnetdoc.config.json 及其声明的全部输入。"
-    fingerprintInputs = @($fingerprintInputs)
-    halves         = @($published | ForEach-Object {
-            [ordered]@{
-                half       = $_.Half
-                locale     = $_.Locale
-                title      = $_.Title
-                entrypoint = ($_.Half + '/' + $_.Locale + '/index.html')
-                files      = $_.Files
-                bytes      = $_.Bytes
-            }
-        })
-    declaredLocales = @($plan | ForEach-Object {
-            [ordered]@{ half = $_.Half; locales = @($_.Locales) }
-        })
-    totalBytes     = ($published | Measure-Object Bytes -Sum).Sum
+    fingerprintInputs    = @($fingerprintInputs)
+    counts               = [ordered]@{
+        entryPages = $entryPageCount
+        files      = $publishedFiles.Count
+        bytes      = $publishedBytes
+    }
+    declaredInputs = @($plan | ForEach-Object {
+        [ordered]@{ half = $_.Half; locales = @($_.Locales); title = $_.Title }
+    })
 }
-[System.IO.File]::WriteAllText((Join-Path $publishRoot 'code-docs-manifest.json'), ($manifest | ConvertTo-Json -Depth 6), [System.Text.UTF8Encoding]::new($false))
+[System.IO.File]::WriteAllText((Join-Path $publishRoot 'code-docs-manifest.json'), ($manifest | ConvertTo-Json -Depth 6), $u)
 
-$totalBytes = ($published | Measure-Object Bytes -Sum).Sum
-Write-Host ('[OK] 已发布 ' + $published.Count + ' 个半边×语言组合到 site/api/dotnetdoc/，共 ' + [Math]::Round($totalBytes / 1MB, 2) + ' MB')
-foreach ($item in ($published | Sort-Object Half, Locale)) {
-    Write-Host ('     ' + $item.Half.PadRight(26) + $item.Locale.PadRight(8) + [Math]::Round($item.Bytes / 1MB, 2).ToString().PadLeft(8) + ' MB  ' + $item.Files + ' 文件')
-}
+Write-Host ('[OK] 已发布多页站点（split-site）到 site/api/dotnetdoc/：条目页 ' + $entryPageCount + ' 个，共 ' + $publishedFiles.Count + ' 文件 / ' + [Math]::Round($publishedBytes / 1MB, 2) + ' MB')

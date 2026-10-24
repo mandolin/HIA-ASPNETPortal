@@ -1,0 +1,150 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryrow.-ctor-aspnet.starterkit.portal.iemployeeinfo",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryrow.-ctor-aspnet.starterkit.portal.iemployeeinfo",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectoryrow.-ctor-aspnet.starterkit.portal.iemployeeinfo",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectoryrow.-cto-8351d58e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.bindurl",
+      "kind": "entry",
+      "label": "BindUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.bindurl",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.bindurl",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.bind-859cb200.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.displayname",
+      "kind": "entry",
+      "label": "DisplayName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.displayname",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.displayname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.disp-baf7d6fd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.editurl",
+      "kind": "entry",
+      "label": "EditUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.editurl",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.editurl",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.edit-ae250c8d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employeecode",
+      "kind": "entry",
+      "label": "EmployeeCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employeecode",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.employeecode",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.empl-56cd2f65.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employeeid",
+      "kind": "entry",
+      "label": "EmployeeId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employeeid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.employeeid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.empl-5d2a8ccd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employmentstatus",
+      "kind": "entry",
+      "label": "EmploymentStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employmentstatus",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.employmentstatus",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.empl-8437cfac.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.organizationtext",
+      "kind": "entry",
+      "label": "OrganizationText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.organizationtext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.organizationtext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.orga-8865b058.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.preferredname",
+      "kind": "entry",
+      "label": "PreferredName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.preferredname",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.preferredname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.pref-91066c26.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.sourcesystem",
+      "kind": "entry",
+      "label": "SourceSystem",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.sourcesystem",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.sourcesystem",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.sour-2f19b36c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.workemail",
+      "kind": "entry",
+      "label": "WorkEmail",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.workemail",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.workemail",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.work-459bb2df.html"
+    }
+  ]
+}

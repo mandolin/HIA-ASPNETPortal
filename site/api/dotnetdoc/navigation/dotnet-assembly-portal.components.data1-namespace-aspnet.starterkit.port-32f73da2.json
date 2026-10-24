@@ -1,0 +1,124 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext-aspnet.starterkit.portal.iportaldb",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext-aspnet.starterkit.portal.iportaldb",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext-aspnet.starterkit.portal.iportaldb",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.-ctor-aspnet.start-27ebc02f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.addtab-system.int32-system.string-system.int32",
+      "kind": "entry",
+      "label": "AddTab",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.addtab-system.int32-system.string-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.addtab-system.int32-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.addtab-system.int3-c515da51.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.deletetab-system.int32",
+      "kind": "entry",
+      "label": "DeleteTab",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.deletetab-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.deletetab-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.deletetab-system.i-7054677e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.findtabbyid-system.int32",
+      "kind": "entry",
+      "label": "FindTabById",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.findtabbyid-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.findtabbyid-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.findtabbyid-system-3c589592.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.getmobiletabs",
+      "kind": "entry",
+      "label": "GetMobileTabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.getmobiletabs",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.getmobiletabs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.getmobiletabs-50eae0a6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.getsingletab-system.int32",
+      "kind": "entry",
+      "label": "GetSingleTab",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.getsingletab-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.getsingletab-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.getsingletab-syste-c2fe1529.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.gettabs",
+      "kind": "entry",
+      "label": "GetTabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.gettabs",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.gettabs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.gettabs-3e04a9bc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.updatetab-system.int32-system.int32-system.string-system.int32-system.string-system.string-system.boolean-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "UpdateTab",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.updatetab-system.int32-system.int32-system.string-system.int32-system.string-system.string-system.boolean-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.updatetab-system.int32-system.int32-system.string-system.int32-system.string-system.string-system.boolean-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.updatetab-system.i-5f602dbc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.updatetaborder-system.int32-system.int32",
+      "kind": "entry",
+      "label": "UpdateTabOrder",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.updatetaborder-system.int32-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.updatetaborder-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.updatetaborder-sys-5e942074.html"
+    }
+  ]
+}

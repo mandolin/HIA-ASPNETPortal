@@ -1,0 +1,371 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.binddefinition",
+      "kind": "entry",
+      "label": "BindDefinition",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.binddefinition",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.binddefinition",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.binddef-25cb3746.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.buildportalreturnurl",
+      "kind": "entry",
+      "label": "BuildPortalReturnUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.buildportalreturnurl",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.buildportalreturnurl",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.buildpo-3a242195.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.cancelbtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "CancelBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.cancelbtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.cancelbtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.cancelb-5b1ce977.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.deletebtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "DeleteBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.deletebtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.deletebtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.deleteb-a2f15fde.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.desktopsrc",
+      "kind": "entry",
+      "label": "DesktopSrc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.desktopsrc",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.desktopsrc",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.desktop-ba39afbf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.desktopsrcpathvalidator",
+      "kind": "entry",
+      "label": "DesktopSrcPathValidator",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.desktopsrcpathvalidator",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.desktopsrcpathvalidator",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.desktop-31a94866.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.desktopsrcpathvalidator_servervalidate-system.object-system.web.ui.webcontrols.servervalidateeventargs",
+      "kind": "entry",
+      "label": "DesktopSrcPathValidator_ServerValidate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.desktopsrcpathvalidator_servervalidate-system.object-system.web.ui.webcontrols.servervalidateeventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.desktopsrcpathvalidator_servervalidate-system.object-system.web.ui.webcontrols.servervalidateeventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.desktop-65f754c4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.friendlyname",
+      "kind": "entry",
+      "label": "FriendlyName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.friendlyname",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.friendlyname",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.friendl-8fe413ed.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.messagelabel",
+      "kind": "entry",
+      "label": "MessageLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.messagelabel",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.messagelabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.message-7ec5df52.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.mobilesrc",
+      "kind": "entry",
+      "label": "MobileSrc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.mobilesrc",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.mobilesrc",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.mobiles-da07eb2b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduledefinitions.moduledefconfig",
+      "kind": "entry",
+      "label": "ModuleDefConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduledefinitions.moduledefconfig",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduledefinitions.moduledefconfig",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduledefinitions.moduled-363679fc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-p-aspnet.starterkit.portal.moduledefinitions.modulesconfig",
+      "kind": "entry",
+      "label": "ModulesConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduledefinitions.modulesconfig",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.moduledefinitions.modulesconfig",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduledefinitions.modules-139f87fe.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.normalizedesktopsrc",
+      "kind": "entry",
+      "label": "NormalizeDesktopSrc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.normalizedesktopsrc",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.normalizedesktopsrc",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.normali-0ba9a479.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.page_lo-068927a4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.req1",
+      "kind": "entry",
+      "label": "Req1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.req1",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.req1",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.req1-407f2016.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.req2",
+      "kind": "entry",
+      "label": "Req2",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.req2",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.req2",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.req2-3f7f1e83.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.showmessage-system.string",
+      "kind": "entry",
+      "label": "ShowMessage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.showmessage-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.showmessage-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.showmes-6f0cb0bd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryinitializerequest",
+      "kind": "entry",
+      "label": "TryInitializeRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryinitializerequest",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.tryinitializerequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryinit-b235de8c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryreadoptionalnonnegativeparameter-system.string-system.int32",
+      "kind": "entry",
+      "label": "TryReadOptionalNonNegativeParameter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryreadoptionalnonnegativeparameter-system.string-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.tryreadoptionalnonnegativeparameter-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryread-d3cf1389.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryreadoptionalpositiveparameter-system.string-system.int32",
+      "kind": "entry",
+      "label": "TryReadOptionalPositiveParameter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryreadoptionalpositiveparameter-system.string-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.tryreadoptionalpositiveparameter-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.tryread-26d40c18.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.updatebtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "UpdateBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefinitions.updatebtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefinitions.updatebtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefinitions.updateb-729a1558.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.cancelbutton",
+      "kind": "entry",
+      "label": "cancelButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.cancelbutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.cancelbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.cancelb-018079d3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.currentdefinition",
+      "kind": "entry",
+      "label": "currentDefinition",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.currentdefinition",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.currentdefinition",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.current-861f82fb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.defid",
+      "kind": "entry",
+      "label": "defId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.defid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.defid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.defid-a76059b1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.deletebutton",
+      "kind": "entry",
+      "label": "deleteButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.deletebutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.deletebutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.deleteb-8a5da1a2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.tabid",
+      "kind": "entry",
+      "label": "tabId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.tabid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.tabid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.tabid-7034b9d1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.tabindex",
+      "kind": "entry",
+      "label": "tabIndex",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.tabindex",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.tabindex",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.tabinde-972dff38.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.moduledefinitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.updatebutton",
+      "kind": "entry",
+      "label": "updateButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefinitions.updatebutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefinitions.updatebutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefinitions.updateb-86c69340.html"
+    }
+  ]
+}

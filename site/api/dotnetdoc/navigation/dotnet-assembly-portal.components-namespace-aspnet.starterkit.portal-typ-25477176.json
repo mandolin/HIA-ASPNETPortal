@@ -1,0 +1,85 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationinviterejection",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationinviterejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.invitedisabled",
+      "kind": "entry",
+      "label": "InviteDisabled",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.invitedisabled",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationinviterejection.invitedisabled",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationinviter-9755d7c5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationinviterejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.inviteexpired",
+      "kind": "entry",
+      "label": "InviteExpired",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.inviteexpired",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationinviterejection.inviteexpired",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationinviter-ffaa6cf2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationinviterejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.invitenotfound",
+      "kind": "entry",
+      "label": "InviteNotFound",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.invitenotfound",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationinviterejection.invitenotfound",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationinviter-946dc406.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationinviterejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.invitetablemissing",
+      "kind": "entry",
+      "label": "InviteTableMissing",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.invitetablemissing",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationinviterejection.invitetablemissing",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationinviter-6614b70d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationinviterejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.inviteusagelimitreached",
+      "kind": "entry",
+      "label": "InviteUsageLimitReached",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.inviteusagelimitreached",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationinviterejection.inviteusagelimitreached",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationinviter-59dfa5cb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalregistrationinviterejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.none",
+      "kind": "entry",
+      "label": "None",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalregistrationinviterejection.none",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalregistrationinviterejection.none",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalregistrationinviter-6a288afe.html"
+    }
+  ]
+}

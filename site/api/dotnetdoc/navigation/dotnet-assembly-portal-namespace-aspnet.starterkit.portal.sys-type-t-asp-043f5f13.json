@@ -1,0 +1,33 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.sys.envsection.value",
+      "kind": "entry",
+      "label": "Value",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.sys.envsection.value",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.sys.envsection.value",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.sys.envsection.value-fd89aa87.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection:entry:hia-document:dotnet-m-aspnet.starterkit.portal.sys.envsection.op_implicit-aspnet.starterkit.portal.sys.envsection-system.string",
+      "kind": "entry",
+      "label": "op_Implicit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.sys.envsection.op_implicit-aspnet.starterkit.portal.sys.envsection-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.sys.envsection.op_implicit-aspnet.starterkit.portal.sys.envsection-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.sys.envsection.op_implici-3e44cbd9.html"
+    }
+  ]
+}

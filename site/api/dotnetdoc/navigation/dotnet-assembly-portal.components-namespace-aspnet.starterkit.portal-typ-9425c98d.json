@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iuseremployeebindingadmindb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iuseremployeebindingadmindb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.bindusertoemployee-aspnet.starterkit.portal.useremployeebindingsaverequest",
+      "kind": "entry",
+      "label": "BindUserToEmployee",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.bindusertoemployee-aspnet.starterkit.portal.useremployeebindingsaverequest",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iuseremployeebindingadmindb.bindusertoemployee-aspnet.starterkit.portal.useremployeebindingsaverequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmin-6c158ef6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iuseremployeebindingadmindb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.endbinding-aspnet.starterkit.portal.useremployeebindingendrequest",
+      "kind": "entry",
+      "label": "EndBinding",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.endbinding-aspnet.starterkit.portal.useremployeebindingendrequest",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iuseremployeebindingadmindb.endbinding-aspnet.starterkit.portal.useremployeebindingendrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmin-b73a9dcf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iuseremployeebindingadmindb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.getbindingbyid-system.int32",
+      "kind": "entry",
+      "label": "GetBindingById",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.getbindingbyid-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iuseremployeebindingadmindb.getbindingbyid-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmin-986b9ff3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iuseremployeebindingadmindb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.isschemaavailable",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iuseremployeebindingadmindb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmin-5fdd684a.html"
+    }
+  ]
+}

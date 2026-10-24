@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesettingitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesettingitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.moduleid",
+      "kind": "entry",
+      "label": "ModuleId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.moduleid",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.modulesettingitem.moduleid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulesettingitem.modulei-f579a65d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesettingitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.modulesettingid",
+      "kind": "entry",
+      "label": "ModuleSettingId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.modulesettingid",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.modulesettingitem.modulesettingid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulesettingitem.modules-e1dfa8a1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesettingitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.settingname",
+      "kind": "entry",
+      "label": "SettingName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.settingname",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.modulesettingitem.settingname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulesettingitem.setting-c0f2177f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesettingitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.settingtext",
+      "kind": "entry",
+      "label": "SettingText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.settingtext",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.modulesettingitem.settingtext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulesettingitem.setting-e4064893.html"
+    }
+  ]
+}

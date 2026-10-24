@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordrejection",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordrejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.belowcomplexitypolicy",
+      "kind": "entry",
+      "label": "BelowComplexityPolicy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.belowcomplexitypolicy",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordrejection.belowcomplexitypolicy",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.b-91b06e1c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordrejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.containsaccountcontextterm",
+      "kind": "entry",
+      "label": "ContainsAccountContextTerm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.containsaccountcontextterm",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordrejection.containsaccountcontextterm",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.c-a4bc54ec.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordrejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.none",
+      "kind": "entry",
+      "label": "None",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.none",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordrejection.none",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.n-ca19878b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordrejection:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.weakdictionarymatch",
+      "kind": "entry",
+      "label": "WeakDictionaryMatch",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.weakdictionarymatch",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordrejection.weakdictionarymatch",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordrejection.w-7161a672.html"
+    }
+  ]
+}

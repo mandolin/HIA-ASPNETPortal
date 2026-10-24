@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitembusinesskinds",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitembusinesskinds:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.businessapplication",
+      "kind": "entry",
+      "label": "BusinessApplication",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.businessapplication",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitembusinesskinds.businessapplication",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskin-e6ad9328.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitembusinesskinds:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.collaborationitem",
+      "kind": "entry",
+      "label": "CollaborationItem",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.collaborationitem",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitembusinesskinds.collaborationitem",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskin-79f29996.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitembusinesskinds:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.employeeprofilecorrectionrequest",
+      "kind": "entry",
+      "label": "EmployeeProfileCorrectionRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.employeeprofilecorrectionrequest",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitembusinesskinds.employeeprofilecorrectionrequest",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskin-f61f91b6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitembusinesskinds:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.expensereimbursement",
+      "kind": "entry",
+      "label": "ExpenseReimbursement",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.expensereimbursement",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitembusinesskinds.expensereimbursement",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskin-d20d6640.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitembusinesskinds:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.leaverequest",
+      "kind": "entry",
+      "label": "LeaveRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskinds.leaverequest",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitembusinesskinds.leaverequest",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitembusinesskin-ac0b2a50.html"
+    }
+  ]
+}

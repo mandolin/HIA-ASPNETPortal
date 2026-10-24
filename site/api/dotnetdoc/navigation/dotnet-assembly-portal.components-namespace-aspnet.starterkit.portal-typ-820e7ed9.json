@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemdatascopepolicy",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemdatascopepolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemdatascopepolicy.canview-aspnet.starterkit.portal.collaborationiteminfo-aspnet.starterkit.portal.collaborationitemdatascope",
+      "kind": "entry",
+      "label": "CanView",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemdatascopepolicy.canview-aspnet.starterkit.portal.collaborationiteminfo-aspnet.starterkit.portal.collaborationitemdatascope",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.collaborationitemdatascopepolicy.canview-aspnet.starterkit.portal.collaborationiteminfo-aspnet.starterkit.portal.collaborationitemdatascope",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.collaborationitemdatascop-38ddcf99.html"
+    }
+  ]
+}

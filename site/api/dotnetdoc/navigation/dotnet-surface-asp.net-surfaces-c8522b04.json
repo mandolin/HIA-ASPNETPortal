@@ -1,0 +1,27 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:endpoints",
+      "kind": "namespace",
+      "label": "Endpoints",
+      "entryCount": 7,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-endpoints-c6231131.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup",
+      "kind": "namespace",
+      "label": "Markup",
+      "entryCount": 307,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-3c022739.json"
+    }
+  ]
+}

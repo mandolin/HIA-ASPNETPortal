@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesamesitemode",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesamesitemode:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.lax",
+      "kind": "entry",
+      "label": "Lax",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.lax",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcookiesamesitemode.lax",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.-b0d5fbc0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesamesitemode:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.none",
+      "kind": "entry",
+      "label": "None",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.none",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcookiesamesitemode.none",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.-588cab41.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesamesitemode:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.strict",
+      "kind": "entry",
+      "label": "Strict",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.strict",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcookiesamesitemode.strict",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.-29f8380a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesamesitemode:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.unset",
+      "kind": "entry",
+      "label": "Unset",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.unset",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcookiesamesitemode.unset",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.-004b7200.html"
+    }
+  ]
+}

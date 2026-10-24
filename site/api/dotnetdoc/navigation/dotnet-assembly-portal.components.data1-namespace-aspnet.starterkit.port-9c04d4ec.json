@@ -1,0 +1,124 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.createhash-system.string",
+      "kind": "entry",
+      "label": "CreateHash",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.createhash-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordhasher.createhash-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.crea-94be73fb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.createhash-system.string-system.int32",
+      "kind": "entry",
+      "label": "CreateHash",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.createhash-system.string-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordhasher.createhash-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.crea-cabf6b11.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.defaultiterationcount",
+      "kind": "entry",
+      "label": "DefaultIterationCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.defaultiterationcount",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordhasher.defaultiterationcount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.defa-83450274.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.derivehash-system.string-system.byte-system.int32",
+      "kind": "entry",
+      "label": "DeriveHash",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.derivehash-system.string-system.byte-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordhasher.derivehash-system.string-system.byte-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.deri-3b28486e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.fixedtimeequals-system.byte-system.byte",
+      "kind": "entry",
+      "label": "FixedTimeEquals",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.fixedtimeequals-system.byte-system.byte",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordhasher.fixedtimeequals-system.byte-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.fixe-6274852c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.format",
+      "kind": "entry",
+      "label": "Format",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.format",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordhasher.format",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.form-e96cacea.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.hashlength",
+      "kind": "entry",
+      "label": "HashLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.hashlength",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordhasher.hashlength",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.hash-3461bf91.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.saltlength",
+      "kind": "entry",
+      "label": "SaltLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.saltlength",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordhasher.saltlength",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordhasher.salt-6070feb1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordhasher:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.verify-system.string-system.string-system.byte-system.byte-system.int32",
+      "kind": "entry",
+      "label": "Verify",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.verify-system.string-system.string-system.byte-system.byte-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordhasher.verify-system.string-system.string-system.byte-system.byte-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordhasher.veri-c08594cd.html"
+    }
+  ]
+}

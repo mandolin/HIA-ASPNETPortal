@@ -1,0 +1,319 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.bindcategorylist",
+      "kind": "entry",
+      "label": "BindCategoryList",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.bindcategorylist",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.bindcategorylist",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-e1737e9e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.bindmodule",
+      "kind": "entry",
+      "label": "BindModule",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.bindmodule",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.bindmodule",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-e88c9596.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.bindrecentapplications-system.int32",
+      "kind": "entry",
+      "label": "BindRecentApplications",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.bindrecentapplications-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.bindrecentapplications-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-4224e85e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.bodytextbox",
+      "kind": "entry",
+      "label": "BodyTextBox",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.bodytextbox",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.bodytextbox",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-2f13c3be.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrequest.businessapplicationdb",
+      "kind": "entry",
+      "label": "BusinessApplicationDb",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrequest.businessapplicationdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrequest.businessapplicationdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationreques-1dae504e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.categorylist",
+      "kind": "entry",
+      "label": "CategoryList",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.categorylist",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.categorylist",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-099522ca.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.getcurrentuserid",
+      "kind": "entry",
+      "label": "GetCurrentUserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.getcurrentuserid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.getcurrentuserid",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-b3b6f422.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.getcurrentusername",
+      "kind": "entry",
+      "label": "GetCurrentUserName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.getcurrentusername",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.getcurrentusername",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-1c6d2aec.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.iscurrentuserauthenticated",
+      "kind": "entry",
+      "label": "IsCurrentUserAuthenticated",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.iscurrentuserauthenticated",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.iscurrentuserauthenticated",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-d15523ec.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.messagelabel",
+      "kind": "entry",
+      "label": "MessageLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.messagelabel",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.messagelabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-f3e05b5d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.normalizeinput-system.string-system.int32",
+      "kind": "entry",
+      "label": "NormalizeInput",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.normalizeinput-system.string-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.normalizeinput-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-e3cca587.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-fac9dc0d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrequest.recentapplicationcount",
+      "kind": "entry",
+      "label": "RecentApplicationCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrequest.recentapplicationcount",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrequest.recentapplicationcount",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationreques-4561166e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.recentapplicationsrepeater",
+      "kind": "entry",
+      "label": "RecentApplicationsRepeater",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.recentapplicationsrepeater",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.recentapplicationsrepeater",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-c3a5db76.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.requestpanel",
+      "kind": "entry",
+      "label": "RequestPanel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.requestpanel",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.requestpanel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-85805b03.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.showmessage-system.string",
+      "kind": "entry",
+      "label": "ShowMessage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.showmessage-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.showmessage-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-59bcb68e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.submitbutton",
+      "kind": "entry",
+      "label": "SubmitButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.submitbutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.submitbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-f99b6536.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.submitbutton_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "SubmitButton_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.submitbutton_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.submitbutton_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-83de1756.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.summarytextbox",
+      "kind": "entry",
+      "label": "SummaryTextBox",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.summarytextbox",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.summarytextbox",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-3e9f49c6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.titletextbox",
+      "kind": "entry",
+      "label": "TitleTextBox",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.titletextbox",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.titletextbox",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-cfca3a98.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.tryensureworkitem-system.int64-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryEnsureWorkItem",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrequest.tryensureworkitem-system.int64-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrequest.tryensureworkitem-system.int64-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationreques-cfd9ec9c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrequest.usersdb",
+      "kind": "entry",
+      "label": "UsersDb",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrequest.usersdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrequest.usersdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationreques-63d0ee6e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrequest.workitemdb",
+      "kind": "entry",
+      "label": "WorkItemDb",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationrequest.workitemdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationrequest.workitemdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationreques-d5c99e48.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationrequest:entry:hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.recentapplicationrowcount",
+      "kind": "entry",
+      "label": "recentApplicationRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.businessapplicationrequest.recentapplicationrowcount",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.businessapplicationrequest.recentapplicationrowcount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.businessapplicationreques-ba935012.html"
+    }
+  ]
+}

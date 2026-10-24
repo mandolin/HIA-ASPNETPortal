@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalorganizationtreeexpander",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalorganizationtreeexpander:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalorganizationtreeexpander.expandsubtreeids-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalorganizationtreeedge-system.int32-system.int32",
+      "kind": "entry",
+      "label": "ExpandSubtreeIds",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalorganizationtreeexpander.expandsubtreeids-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalorganizationtreeedge-system.int32-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalorganizationtreeexpander.expandsubtreeids-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalorganizationtreeedge-system.int32-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalorganizationtreeexp-56114158.html"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contacts.contactsdb",
+      "kind": "entry",
+      "label": "ContactsDB",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contacts.contactsdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contacts.contactsdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contacts.contactsdb-505b1eb7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contacts.contactsemptystaterowcount",
+      "kind": "entry",
+      "label": "ContactsEmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contacts.contactsemptystaterowcount",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contacts.contactsemptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contacts.contactsemptysta-192d607c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-p-aspnet.starterkit.portal.contacts.contactsemptystatetext",
+      "kind": "entry",
+      "label": "ContactsEmptyStateText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.contacts.contactsemptystatetext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.contacts.contactsemptystatetext",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.contacts.contactsemptysta-7c7e0498.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.contacts.getmailtourl-system.object",
+      "kind": "entry",
+      "label": "GetMailToUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.contacts.getmailtourl-system.object",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.contacts.getmailtourl-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.contacts.getmailtourl-sys-45e7002d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.contacts.hasemail-system.object",
+      "kind": "entry",
+      "label": "HasEmail",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.contacts.hasemail-system.object",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.contacts.hasemail-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.contacts.hasemail-system.-78b576ee.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-m-aspnet.starterkit.portal.contacts.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.contacts.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.contacts.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.contacts.page_load-system-1dbb5351.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.contacts.title1",
+      "kind": "entry",
+      "label": "Title1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.contacts.title1",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.contacts.title1",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.contacts.title1-4c43212f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.contacts.contactsemptystaterowcount",
+      "kind": "entry",
+      "label": "contactsEmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.contacts.contactsemptystaterowcount",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.contacts.contactsemptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.contacts.contactsemptysta-968d5832.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contacts:entry:hia-document:dotnet-f-aspnet.starterkit.portal.contacts.mydatagrid",
+      "kind": "entry",
+      "label": "myDataGrid",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.contacts.mydatagrid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.contacts.mydatagrid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.contacts.mydatagrid-5f3bb7f4.html"
+    }
+  ]
+}

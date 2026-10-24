@@ -1,0 +1,137 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.getchildpath-system.string-system.string",
+      "kind": "entry",
+      "label": "GetChildPath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.getchildpath-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.getchildpath-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.getchi-089ed38d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.gettrustedpackages",
+      "kind": "entry",
+      "label": "GetTrustedPackages",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.gettrustedpackages",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.gettrustedpackages",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.gettru-e92c6fda.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isschemaversionsupported-newtonsoft.json.linq.jobject",
+      "kind": "entry",
+      "label": "IsSchemaVersionSupported",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isschemaversionsupported-newtonsoft.json.linq.jobject",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.isschemaversionsupported-newtonsoft.json.linq.jobject",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.issche-a418056c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isvalidresourcepath-system.string",
+      "kind": "entry",
+      "label": "IsValidResourcePath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isvalidresourcepath-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.isvalidresourcepath-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isvali-77e5d934.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isvalidthemename-system.string",
+      "kind": "entry",
+      "label": "IsValidThemeName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isvalidthemename-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.isvalidthemename-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isvali-2113b8f1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readandvalidateresources-newtonsoft.json.linq.jobject-system.string",
+      "kind": "entry",
+      "label": "ReadAndValidateResources",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readandvalidateresources-newtonsoft.json.linq.jobject-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.readandvalidateresources-newtonsoft.json.linq.jobject-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readan-72486a56.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readoptionalboolean-newtonsoft.json.linq.jobject-system.string",
+      "kind": "entry",
+      "label": "ReadOptionalBoolean",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readoptionalboolean-newtonsoft.json.linq.jobject-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.readoptionalboolean-newtonsoft.json.linq.jobject-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readop-056a1c1e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readoptionalstring-newtonsoft.json.linq.jobject-system.string-system.int32",
+      "kind": "entry",
+      "label": "ReadOptionalString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readoptionalstring-newtonsoft.json.linq.jobject-system.string-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.readoptionalstring-newtonsoft.json.linq.jobject-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readop-250fbee7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readrequiredstring-newtonsoft.json.linq.jobject-system.string-system.int32",
+      "kind": "entry",
+      "label": "ReadRequiredString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readrequiredstring-newtonsoft.json.linq.jobject-system.string-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.readrequiredstring-newtonsoft.json.linq.jobject-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readre-fbb99902.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.trygettrustedpackage-system.string-aspnet.starterkit.portal.portalthemepackage-system.string",
+      "kind": "entry",
+      "label": "TryGetTrustedPackage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.trygettrustedpackage-system.string-aspnet.starterkit.portal.portalthemepackage-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.trygettrustedpackage-system.string-aspnet.starterkit.portal.portalthemepackage-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.tryget-532e9926.html"
+    }
+  ]
+}

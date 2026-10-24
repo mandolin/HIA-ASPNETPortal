@@ -1,0 +1,267 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabs.addtab_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "AddTab_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabs.addtab_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabs.addtab_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabs.addtab_click-system.-2089d55d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabs.deletebtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "DeleteBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabs.deletebtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabs.deletebtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabs.deletebtn_click-syst-3f2e1a58.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabs.editbtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "EditBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabs.editbtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabs.editbtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabs.editbtn_click-system-5a0622c7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.message",
+      "kind": "entry",
+      "label": "Message",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.message",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.message",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.message-c6439738.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabs.moduledefconfig",
+      "kind": "entry",
+      "label": "ModuleDefConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabs.moduledefconfig",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabs.moduledefconfig",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabs.moduledefconfig-f6be0674.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabs.modulesconfig",
+      "kind": "entry",
+      "label": "ModulesConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabs.modulesconfig",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabs.modulesconfig",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabs.modulesconfig-26db4cd6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabs.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabs.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabs.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabs.page_load-system.obj-0224ca92.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabs.portalconfig",
+      "kind": "entry",
+      "label": "PortalConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabs.portalconfig",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabs.portalconfig",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabs.portalconfig-2410ebf7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.portaltabs",
+      "kind": "entry",
+      "label": "PortalTabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.portaltabs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.portaltabs",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.portaltabs-f71b9eaf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tabs.tabsconfig",
+      "kind": "entry",
+      "label": "TabsConfig",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tabs.tabsconfig",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tabs.tabsconfig",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tabs.tabsconfig-44adb4dd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.title1",
+      "kind": "entry",
+      "label": "Title1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.title1",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.title1",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.title1-01d031f4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tabs.updown_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "UpDown_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabs.updown_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tabs.updown_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabs.updown_click-system.-f1e2a314.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.addbtn",
+      "kind": "entry",
+      "label": "addBtn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.addbtn",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.addbtn",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.addbtn-68836880.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.deletebtn",
+      "kind": "entry",
+      "label": "deleteBtn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.deletebtn",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.deletebtn",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.deletebtn-1253dce2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.downbtn",
+      "kind": "entry",
+      "label": "downBtn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.downbtn",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.downbtn",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.downbtn-8d3e4f6b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.editbtn",
+      "kind": "entry",
+      "label": "editBtn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.editbtn",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.editbtn",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.editbtn-97f08507.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.tabid",
+      "kind": "entry",
+      "label": "tabId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.tabid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.tabid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.tabid-ec7d0225.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.tabindex",
+      "kind": "entry",
+      "label": "tabIndex",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.tabindex",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.tabindex",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.tabindex-3b457cb4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.tablist",
+      "kind": "entry",
+      "label": "tabList",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.tablist",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.tablist",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.tablist-5153ed00.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabs:entry:hia-document:dotnet-f-aspnet.starterkit.portal.tabs.upbtn",
+      "kind": "entry",
+      "label": "upBtn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.tabs.upbtn",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.tabs.upbtn",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.tabs.upbtn-cde335f4.html"
+    }
+  ]
+}

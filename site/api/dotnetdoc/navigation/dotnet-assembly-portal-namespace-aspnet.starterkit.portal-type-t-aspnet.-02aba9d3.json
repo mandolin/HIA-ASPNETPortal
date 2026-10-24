@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingreadresult",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingreadresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingreadresult.-ctor-system.boolean-system.boolean-system.string-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingreadresult.-ctor-system.boolean-system.boolean-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingreadresult.-ctor-system.boolean-system.boolean-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingreadre-7db327e7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingreadresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadresult.isavailable",
+      "kind": "entry",
+      "label": "IsAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadresult.isavailable",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsystemsettingreadresult.isavailable",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadre-66dc1118.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingreadresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadresult.isfound",
+      "kind": "entry",
+      "label": "IsFound",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadresult.isfound",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsystemsettingreadresult.isfound",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadre-2460b21f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingreadresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadresult.value",
+      "kind": "entry",
+      "label": "Value",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadresult.value",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsystemsettingreadresult.value",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadre-0497013a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingreadresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadresult.valuetype",
+      "kind": "entry",
+      "label": "ValueType",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadresult.valuetype",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsystemsettingreadresult.valuetype",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsystemsettingreadre-2cdfbcfa.html"
+    }
+  ]
+}

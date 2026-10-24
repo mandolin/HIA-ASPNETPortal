@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.icontactsdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.icontactsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.addcontact-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "AddContact",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.addcontact-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.icontactsdb.addcontact-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.icontactsdb.addcontact-sy-4e577b15.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.icontactsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.deletecontact-system.int32",
+      "kind": "entry",
+      "label": "DeleteContact",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.deletecontact-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.icontactsdb.deletecontact-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.icontactsdb.deletecontact-48d57f0d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.icontactsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.getcontacts-system.int32",
+      "kind": "entry",
+      "label": "GetContacts",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.getcontacts-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.icontactsdb.getcontacts-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.icontactsdb.getcontacts-s-87d90e51.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.icontactsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.getsinglecontact-system.int32",
+      "kind": "entry",
+      "label": "GetSingleContact",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.getsinglecontact-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.icontactsdb.getsinglecontact-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.icontactsdb.getsinglecont-86c6dad2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.icontactsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.updatecontact-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "UpdateContact",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.icontactsdb.updatecontact-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.icontactsdb.updatecontact-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.icontactsdb.updatecontact-03dd9d07.html"
+    }
+  ]
+}

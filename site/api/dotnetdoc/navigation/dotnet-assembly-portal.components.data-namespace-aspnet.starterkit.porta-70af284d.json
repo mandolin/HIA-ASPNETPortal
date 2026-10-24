@@ -1,0 +1,33 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldb.-ctor-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldb.-ctor-system.string",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldb.-ctor-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldb.-ctor-system.str-2810382e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldb.deletemodule-system.int32",
+      "kind": "entry",
+      "label": "DeleteModule",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldb.deletemodule-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldb.deletemodule-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldb.deletemodule-sys-65e3d087.html"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeedirectorydb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeedirectorydb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyemployeecode-system.string",
+      "kind": "entry",
+      "label": "GetActiveBindingByEmployeeCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyemployeecode-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyemployeecode-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.geta-69550dc4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeedirectorydb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyuserid-system.int32",
+      "kind": "entry",
+      "label": "GetActiveBindingByUserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyuserid-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyuserid-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.geta-cf2752da.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeedirectorydb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getemployees-aspnet.starterkit.portal.employeedirectoryquery",
+      "kind": "entry",
+      "label": "GetEmployees",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getemployees-aspnet.starterkit.portal.employeedirectoryquery",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getemployees-aspnet.starterkit.portal.employeedirectoryquery",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.gete-a7a57e33.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeedirectorydb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunitsubtreeids-system.int32",
+      "kind": "entry",
+      "label": "GetOrganizationUnitSubtreeIds",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunitsubtreeids-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunitsubtreeids-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.geto-61d71fe9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeedirectorydb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunits-aspnet.starterkit.portal.employeedirectoryquery",
+      "kind": "entry",
+      "label": "GetOrganizationUnits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunits-aspnet.starterkit.portal.employeedirectoryquery",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunits-aspnet.starterkit.portal.employeedirectoryquery",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.geto-4fde6e10.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeedirectorydb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getuseremployeebindings-aspnet.starterkit.portal.employeedirectoryquery",
+      "kind": "entry",
+      "label": "GetUserEmployeeBindings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getuseremployeebindings-aspnet.starterkit.portal.employeedirectoryquery",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getuseremployeebindings-aspnet.starterkit.portal.employeedirectoryquery",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getu-ca80a3cb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeedirectorydb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.isschemaavailable",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.issc-0c01aa80.html"
+    }
+  ]
+}

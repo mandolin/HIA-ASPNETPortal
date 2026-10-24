@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-editaccessdenied.aspx-2",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-editaccessdenied.aspx-2:entry:hia-document:dotnetdoc-markup-comment-src-portal-admin-editaccessdenied.aspx-2",
+      "kind": "entry",
+      "label": "EditAccessDenied.aspx webforms-server-comment 2",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-admin-editaccessdenied.aspx-2",
+      "sourcePath": "src/Portal/Admin/EditAccessDenied.aspx",
+      "symbolId": "dotnetdoc:markup-comment:src-portal-admin-editaccessdenied.aspx:2",
+      "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-admin-editaccessdenied.-2d4258b3.html"
+    }
+  ]
+}

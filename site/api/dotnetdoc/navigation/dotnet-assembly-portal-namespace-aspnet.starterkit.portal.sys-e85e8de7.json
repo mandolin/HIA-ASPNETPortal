@@ -1,0 +1,35 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection",
+      "kind": "type",
+      "label": "EnvSection",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.sys.envsection",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.sys.envsection",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.sys.envsection-c099c3d8.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.sys-type-t-asp-043f5f13.json"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.globalinfo",
+      "kind": "type",
+      "label": "GlobalInfo",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.sys.globalinfo",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.sys.globalinfo",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.sys.globalinfo-807eec99.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.sys-type-t-asp-d21cd84e.json"
+    }
+  ]
+}

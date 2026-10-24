@@ -1,0 +1,306 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editevents.cancelbtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "CancelBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editevents.cancelbtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editevents.cancelbtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editevents.cancelbtn_clic-66688a6a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.createdby",
+      "kind": "entry",
+      "label": "CreatedBy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.createdby",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.createdby",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.createdby-cb6af6d7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.createddate",
+      "kind": "entry",
+      "label": "CreatedDate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.createddate",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.createddate",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.createddate-fb3961aa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editevents.deletebtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "DeleteBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editevents.deletebtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editevents.deletebtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editevents.deletebtn_clic-9ceefbab.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.descriptionfield",
+      "kind": "entry",
+      "label": "DescriptionField",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.descriptionfield",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.descriptionfield",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.descriptionfie-0c6c7220.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editevents.encodedisplaytext-system.string",
+      "kind": "entry",
+      "label": "EncodeDisplayText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editevents.encodedisplaytext-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editevents.encodedisplaytext-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editevents.encodedisplayt-c9284c51.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-p-aspnet.starterkit.portal.editevents.eventsdb",
+      "kind": "entry",
+      "label": "EventsDB",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.editevents.eventsdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.editevents.eventsdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.editevents.eventsdb-04c4a8c3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.expirefield",
+      "kind": "entry",
+      "label": "ExpireField",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.expirefield",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.expirefield",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.expirefield-b5f0739f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editevents.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editevents.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editevents.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editevents.page_load-syst-2e7bef41.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-p-aspnet.starterkit.portal.editevents.portalsecurity",
+      "kind": "entry",
+      "label": "PortalSecurity",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.editevents.portalsecurity",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.editevents.portalsecurity",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.editevents.portalsecurity-7d839f54.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.requiredexpiredate",
+      "kind": "entry",
+      "label": "RequiredExpireDate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.requiredexpiredate",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.requiredexpiredate",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.requiredexpire-3660edb8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editevents.showvalidationmessage-system.string",
+      "kind": "entry",
+      "label": "ShowValidationMessage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editevents.showvalidationmessage-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editevents.showvalidationmessage-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editevents.showvalidation-d4d2e063.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.titlefield",
+      "kind": "entry",
+      "label": "TitleField",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.titlefield",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.titlefield",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.titlefield-63604b70.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editevents.tryinitializerequest-aspnet.starterkit.portal.ieventitem",
+      "kind": "entry",
+      "label": "TryInitializeRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editevents.tryinitializerequest-aspnet.starterkit.portal.ieventitem",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editevents.tryinitializerequest-aspnet.starterkit.portal.ieventitem",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editevents.tryinitializer-4dc93896.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editevents.updatebtn_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "UpdateBtn_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editevents.updatebtn_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.editevents.updatebtn_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editevents.updatebtn_clic-8f0086c1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.validationmessage",
+      "kind": "entry",
+      "label": "ValidationMessage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.validationmessage",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.validationmessage",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.validationmess-895a9290.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.verifyexpiredate",
+      "kind": "entry",
+      "label": "VerifyExpireDate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.verifyexpiredate",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.verifyexpiredate",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.verifyexpireda-97ac6568.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.wherewhenfield",
+      "kind": "entry",
+      "label": "WhereWhenField",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.wherewhenfield",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.wherewhenfield",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.wherewhenfield-49f7100f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.cancelbutton",
+      "kind": "entry",
+      "label": "cancelButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.cancelbutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.cancelbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.cancelbutton-8d1c535c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.deletebutton",
+      "kind": "entry",
+      "label": "deleteButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.deletebutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.deletebutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.deletebutton-f2b1f771.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.itemid",
+      "kind": "entry",
+      "label": "itemId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.itemid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.itemid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.itemid-74d6bba4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.moduleid",
+      "kind": "entry",
+      "label": "moduleId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.moduleid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.moduleid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.moduleid-42d606db.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editevents:entry:hia-document:dotnet-f-aspnet.starterkit.portal.editevents.updatebutton",
+      "kind": "entry",
+      "label": "updateButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.editevents.updatebutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.editevents.updatebutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.editevents.updatebutton-08e7d75b.html"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussionitem",
+      "kind": "type",
+      "label": "DiscussionItem",
+      "entryCount": 11,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.discussionitem",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.discussionitem",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.discussionitem-c48df924.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data-namespace-aspnet.starterkit.porta-21b8570a.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussionsdb",
+      "kind": "type",
+      "label": "DiscussionsDb",
+      "entryCount": 7,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.discussionsdb",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.discussionsdb",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.discussionsdb-8cb6549a.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data-namespace-aspnet.starterkit.porta-076314ec.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldb",
+      "kind": "type",
+      "label": "PortalDb",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaldb",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portaldb",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaldb-ee037c33.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data-namespace-aspnet.starterkit.porta-70af284d.json"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit",
+      "kind": "namespace",
+      "label": "StarterKit",
+      "entryCount": 1229,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit-05073bc0.json"
+    }
+  ]
+}

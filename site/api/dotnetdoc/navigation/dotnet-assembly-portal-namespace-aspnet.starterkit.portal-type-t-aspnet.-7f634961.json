@@ -1,0 +1,85 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthsnapshot",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthsnapshot:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthsnapshot.-ctor-system.datetime-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.collections.generic.ilist-aspnet.starterkit.portal.portalsettinghealthinfo",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthsnapshot.-ctor-system.datetime-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.collections.generic.ilist-aspnet.starterkit.portal.portalsettinghealthinfo",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthsnapshot.-ctor-system.datetime-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.collections.generic.ilist-aspnet.starterkit.portal.portalsettinghealthinfo",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthsnapshot.-cto-2f2e0e7b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthsnapshot:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthsnapshot.calculateoverallstatus-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalhealthcheckresult",
+      "kind": "entry",
+      "label": "CalculateOverallStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthsnapshot.calculateoverallstatus-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalhealthcheckresult",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthsnapshot.calculateoverallstatus-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalhealthcheckresult",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthsnapshot.calc-51eff044.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthsnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.checks",
+      "kind": "entry",
+      "label": "Checks",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.checks",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthsnapshot.checks",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.chec-cd90d38e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthsnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.generatedutc",
+      "kind": "entry",
+      "label": "GeneratedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.generatedutc",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthsnapshot.generatedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.gene-acf96a7a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthsnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.overallstatus",
+      "kind": "entry",
+      "label": "OverallStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.overallstatus",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthsnapshot.overallstatus",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.over-91b87c16.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthsnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.settings",
+      "kind": "entry",
+      "label": "Settings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.settings",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthsnapshot.settings",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthsnapshot.sett-04d1853a.html"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalsigninresult.-ctor-system.boolean-system.int32-system.string-system.int64-system.boolean-system.boolean-system.boolean",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsigninresult.-ctor-system.boolean-system.int32-system.string-system.int64-system.boolean-system.boolean-system.boolean",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsigninresult.-ctor-system.boolean-system.int32-system.string-system.int64-system.boolean-system.boolean-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsigninresult.-ctor--28e5a4e6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.credentialcostupgraded",
+      "kind": "entry",
+      "label": "CredentialCostUpgraded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.credentialcostupgraded",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsigninresult.credentialcostupgraded",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsigninresult.creden-f899ea4c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalsigninresult.failed",
+      "kind": "entry",
+      "label": "Failed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsigninresult.failed",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsigninresult.failed",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsigninresult.failed-80c10ec8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.requiresreset",
+      "kind": "entry",
+      "label": "RequiresReset",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.requiresreset",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsigninresult.requiresreset",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsigninresult.requir-16c4c8c3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.securityversion",
+      "kind": "entry",
+      "label": "SecurityVersion",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.securityversion",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsigninresult.securityversion",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsigninresult.securi-0cf266e2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.succeeded",
+      "kind": "entry",
+      "label": "Succeeded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.succeeded",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsigninresult.succeeded",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsigninresult.succee-8fd4ff95.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.upgradedlegacycredential",
+      "kind": "entry",
+      "label": "UpgradedLegacyCredential",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.upgradedlegacycredential",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsigninresult.upgradedlegacycredential",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsigninresult.upgrad-ebe22ae6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.userid",
+      "kind": "entry",
+      "label": "UserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.userid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsigninresult.userid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsigninresult.userid-6ad9fb66.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsigninresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.username",
+      "kind": "entry",
+      "label": "UserName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsigninresult.username",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsigninresult.username",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsigninresult.userna-6d74fb10.html"
+    }
+  ]
+}

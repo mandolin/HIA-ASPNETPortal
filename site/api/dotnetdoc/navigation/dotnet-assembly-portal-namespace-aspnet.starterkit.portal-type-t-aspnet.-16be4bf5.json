@@ -1,0 +1,215 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.bindlist",
+      "kind": "entry",
+      "label": "BindList",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.bindlist",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.bindlist",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.bindlist-b11ad929.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-p-aspnet.starterkit.portal.discussion.discussiondb",
+      "kind": "entry",
+      "label": "DiscussionDB",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.discussion.discussiondb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.discussion.discussiondb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.discussion.discussiondb-05b70c19.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.encodedisplaytext-system.object",
+      "kind": "entry",
+      "label": "EncodeDisplayText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.encodedisplaytext-system.object",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.encodedisplaytext-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.encodedisplayt-d382ee9e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.formatdate-system.object",
+      "kind": "entry",
+      "label": "FormatDate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.formatdate-system.object",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.formatdate-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.formatdate-sys-27eaae56.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.formaturl-system.int32",
+      "kind": "entry",
+      "label": "FormatUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.formaturl-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.formaturl-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.formaturl-syst-e2dc3436.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.getindenthtml-system.object",
+      "kind": "entry",
+      "label": "GetIndentHtml",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.getindenthtml-system.object",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.getindenthtml-system.object",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.getindenthtml--af367afa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.getthreadmessages-system.string",
+      "kind": "entry",
+      "label": "GetThreadMessages",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.getthreadmessages-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.getthreadmessages-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.getthreadmessa-1fab0cc7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.haschildmessages-system.int32",
+      "kind": "entry",
+      "label": "HasChildMessages",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.haschildmessages-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.haschildmessages-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.haschildmessag-9229d70c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.nodecommandname-system.int32",
+      "kind": "entry",
+      "label": "NodeCommandName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.nodecommandname-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.nodecommandname-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.nodecommandnam-e6daec24.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.nodetogglecssclass-system.int32",
+      "kind": "entry",
+      "label": "NodeToggleCssClass",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.nodetogglecssclass-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.nodetogglecssclass-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.nodetogglecssc-b78be469.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.nodetoggletext-system.int32",
+      "kind": "entry",
+      "label": "NodeToggleText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.nodetoggletext-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.nodetoggletext-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.nodetoggletext-79ae5983.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.page_load-syst-d38d9d3e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-f-aspnet.starterkit.portal.discussion.title1",
+      "kind": "entry",
+      "label": "Title1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussion.title1",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.discussion.title1",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussion.title1-b5f39bb8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-f-aspnet.starterkit.portal.discussion.toplevellist",
+      "kind": "entry",
+      "label": "TopLevelList",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussion.toplevellist",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.discussion.toplevellist",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussion.toplevellist-5673206e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.toplevellist_itemdatabound-system.object-system.web.ui.webcontrols.datalistitemeventargs",
+      "kind": "entry",
+      "label": "TopLevelList_ItemDataBound",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.toplevellist_itemdatabound-system.object-system.web.ui.webcontrols.datalistitemeventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.toplevellist_itemdatabound-system.object-system.web.ui.webcontrols.datalistitemeventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.toplevellist_i-0707882a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussion:entry:hia-document:dotnet-m-aspnet.starterkit.portal.discussion.toplevellist_onitemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
+      "kind": "entry",
+      "label": "TopLevelList_OnItemCommand",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussion.toplevellist_onitemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.discussion.toplevellist_onitemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussion.toplevellist_o-4a5e7c2e.html"
+    }
+  ]
+}

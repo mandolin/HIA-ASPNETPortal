@@ -1,0 +1,254 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.createstoragefilename-system.string",
+      "kind": "entry",
+      "label": "CreateStorageFileName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.createstoragefilename-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.createstoragefilename-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.crea-d3b3ae22.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.formatfilesize-system.int32",
+      "kind": "entry",
+      "label": "FormatFileSize",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.formatfilesize-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.formatfilesize-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.form-b36072af.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getallowedextensionsdisplaytext",
+      "kind": "entry",
+      "label": "GetAllowedExtensionsDisplayText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getallowedextensionsdisplaytext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getallowedextensionsdisplaytext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.geta-2e8df790.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getconfiguredallowedextensions",
+      "kind": "entry",
+      "label": "GetConfiguredAllowedExtensions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getconfiguredallowedextensions",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getconfiguredallowedextensions",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getc-edb5dfbf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getmaximumuploadbytes",
+      "kind": "entry",
+      "label": "GetMaximumUploadBytes",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getmaximumuploadbytes",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getmaximumuploadbytes",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getm-432b17d9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getmaximumuploadsizedisplaytext",
+      "kind": "entry",
+      "label": "GetMaximumUploadSizeDisplayText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getmaximumuploadsizedisplaytext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getmaximumuploadsizedisplaytext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getm-502d8814.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getnormalizedextension-system.string",
+      "kind": "entry",
+      "label": "GetNormalizedExtension",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getnormalizedextension-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getnormalizedextension-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getn-db39ebea.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getsafedownloadfilename-system.string",
+      "kind": "entry",
+      "label": "GetSafeDownloadFileName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getsafedownloadfilename-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getsafedownloadfilename-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.gets-a9d246e6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest-system.string",
+      "kind": "entry",
+      "label": "GetSafeReturnUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.gets-fa3d2d5f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest",
+      "kind": "entry",
+      "label": "GetSafeReturnUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.gets-6c327f62.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getuploadvirtualpath-system.string",
+      "kind": "entry",
+      "label": "GetUploadVirtualPath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getuploadvirtualpath-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getuploadvirtualpath-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getu-af26403f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaldocumentpolicy.infrastructuremaximumuploadbytes",
+      "kind": "entry",
+      "label": "InfrastructureMaximumUploadBytes",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaldocumentpolicy.infrastructuremaximumuploadbytes",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaldocumentpolicy.infrastructuremaximumuploadbytes",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaldocumentpolicy.infr-577b8c3b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.isextensionallowed-system.string",
+      "kind": "entry",
+      "label": "IsExtensionAllowed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.isextensionallowed-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.isextensionallowed-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.isex-f025d2ab.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.normalizeconfiguredextension-system.string",
+      "kind": "entry",
+      "label": "NormalizeConfiguredExtension",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.normalizeconfiguredextension-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.normalizeconfiguredextension-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.norm-f0636fa4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.redirecttosafereturnurl-system.web.httpcontext-system.string",
+      "kind": "entry",
+      "label": "RedirectToSafeReturnUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.redirecttosafereturnurl-system.web.httpcontext-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.redirecttosafereturnurl-system.web.httpcontext-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.redi-dc046d0a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.sanitizefilestem-system.string",
+      "kind": "entry",
+      "label": "SanitizeFileStem",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.sanitizefilestem-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.sanitizefilestem-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.sani-6532aa18.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.trynormalizebrowseurl-system.string-system.web.httprequest-system.string",
+      "kind": "entry",
+      "label": "TryNormalizeBrowseUrl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.trynormalizebrowseurl-system.string-system.web.httprequest-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.trynormalizebrowseurl-system.string-system.web.httprequest-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.tryn-0a4490a3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.tryvalidateupload-system.web.httppostedfile-system.string",
+      "kind": "entry",
+      "label": "TryValidateUpload",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.tryvalidateupload-system.web.httppostedfile-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.tryvalidateupload-system.web.httppostedfile-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.tryv-2dd80a35.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldocumentpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaldocumentpolicy.uploadvirtualdirectory",
+      "kind": "entry",
+      "label": "UploadVirtualDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaldocumentpolicy.uploadvirtualdirectory",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portaldocumentpolicy.uploadvirtualdirectory",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaldocumentpolicy.uplo-6d2686e1.html"
+    }
+  ]
+}

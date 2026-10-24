@@ -1,0 +1,163 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-m-aspnet.starterkit.portal.systemhealth.bindhealthsnapshot",
+      "kind": "entry",
+      "label": "BindHealthSnapshot",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.systemhealth.bindhealthsnapshot",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.systemhealth.bindhealthsnapshot",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.systemhealth.bindhealthsn-f9fdf33e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.generatedutclabel",
+      "kind": "entry",
+      "label": "GeneratedUtcLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.generatedutclabel",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.systemhealth.generatedutclabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.systemhealth.generatedutc-17ec9155.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-p-aspnet.starterkit.portal.systemhealth.healthchecksemptystaterowcount",
+      "kind": "entry",
+      "label": "HealthChecksEmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.systemhealth.healthchecksemptystaterowcount",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.systemhealth.healthchecksemptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.systemhealth.healthchecks-07b7180c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.healthchecksrepeater",
+      "kind": "entry",
+      "label": "HealthChecksRepeater",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.healthchecksrepeater",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.systemhealth.healthchecksrepeater",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.systemhealth.healthchecks-3aa10ac3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.overallstatuslabel",
+      "kind": "entry",
+      "label": "OverallStatusLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.overallstatuslabel",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.systemhealth.overallstatuslabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.systemhealth.overallstatu-e9ff52d7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-m-aspnet.starterkit.portal.systemhealth.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.systemhealth.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.systemhealth.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.systemhealth.page_load-sy-db2515ef.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.refreshbutton",
+      "kind": "entry",
+      "label": "RefreshButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.refreshbutton",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.systemhealth.refreshbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.systemhealth.refreshbutto-f23cf78f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-m-aspnet.starterkit.portal.systemhealth.refreshbutton_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "RefreshButton_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.systemhealth.refreshbutton_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.systemhealth.refreshbutton_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.systemhealth.refreshbutto-0805cb03.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-p-aspnet.starterkit.portal.systemhealth.settingsemptystaterowcount",
+      "kind": "entry",
+      "label": "SettingsEmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.systemhealth.settingsemptystaterowcount",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.systemhealth.settingsemptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.systemhealth.settingsempt-585244a6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.settingsrepeater",
+      "kind": "entry",
+      "label": "SettingsRepeater",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.settingsrepeater",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.systemhealth.settingsrepeater",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.systemhealth.settingsrepe-6aea8d51.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.healthchecksemptystaterowcount",
+      "kind": "entry",
+      "label": "healthChecksEmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.healthchecksemptystaterowcount",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.systemhealth.healthchecksemptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.systemhealth.healthchecks-ff0f87aa.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.systemhealth:entry:hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.settingsemptystaterowcount",
+      "kind": "entry",
+      "label": "settingsEmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.systemhealth.settingsemptystaterowcount",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.systemhealth.settingsemptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.systemhealth.settingsempt-3f34e834.html"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.portalid",
+      "kind": "entry",
+      "label": "PortalId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.portalid",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.roleitem.portalid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.roleitem.portalid-8bbc284d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.roleid",
+      "kind": "entry",
+      "label": "RoleId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.roleid",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.roleitem.roleid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.roleitem.roleid-b40e4b97.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.rolename",
+      "kind": "entry",
+      "label": "RoleName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.rolename",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.roleitem.rolename",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.roleitem.rolename-4d41d0a1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.users",
+      "kind": "entry",
+      "label": "Users",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.users",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.roleitem.users",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.roleitem.users-99b221aa.html"
+    }
+  ]
+}

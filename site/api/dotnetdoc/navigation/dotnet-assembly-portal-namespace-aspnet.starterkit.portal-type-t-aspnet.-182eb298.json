@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprofilesnapshot",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprofilesnapshot:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.-ctor-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.-ctor-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleprofilesnapshot.-ctor-system.string-system.collections.generic.ilist-system.string-system.collections.generic.ilist-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapsh-30bcba61.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprofilesnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapshot.activeprofile",
+      "kind": "entry",
+      "label": "ActiveProfile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapshot.activeprofile",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmoduleprofilesnapshot.activeprofile",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapsh-f9fee94f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprofilesnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapshot.allowedpackageids",
+      "kind": "entry",
+      "label": "AllowedPackageIds",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapshot.allowedpackageids",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmoduleprofilesnapshot.allowedpackageids",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapsh-23f694e2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprofilesnapshot:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapshot.invalidentries",
+      "kind": "entry",
+      "label": "InvalidEntries",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapshot.invalidentries",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmoduleprofilesnapshot.invalidentries",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmoduleprofilesnapsh-f1d7e901.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmoduleprofilesnapshot:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-system.string",
+      "kind": "entry",
+      "label": "IsPackageAllowed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleprofilesnapshot.ispackageallowed-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofilesnapsh-5ed9519e.html"
+    }
+  ]
+}

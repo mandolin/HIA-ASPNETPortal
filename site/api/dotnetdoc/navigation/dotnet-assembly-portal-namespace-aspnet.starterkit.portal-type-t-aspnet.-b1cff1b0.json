@@ -1,0 +1,33 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tab",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tab:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tab.-ctor-system.int32-aspnet.starterkit.portal.itabitem",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tab.-ctor-system.int32-aspnet.starterkit.portal.itabitem",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.tab.-ctor-system.int32-aspnet.starterkit.portal.itabitem",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tab.-ctor-system.int32-as-f385ce4c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tab:entry:hia-document:dotnet-p-aspnet.starterkit.portal.tab.tabindex",
+      "kind": "entry",
+      "label": "TabIndex",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tab.tabindex",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.tab.tabindex",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tab.tabindex-450ab841.html"
+    }
+  ]
+}

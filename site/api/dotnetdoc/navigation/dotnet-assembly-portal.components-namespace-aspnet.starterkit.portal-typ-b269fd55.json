@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentrykind",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentrykind:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.adminpage",
+      "kind": "entry",
+      "label": "AdminPage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.adminpage",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationentrykind.adminpage",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind-3c34b14f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentrykind:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.desktopmodule",
+      "kind": "entry",
+      "label": "DesktopModule",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.desktopmodule",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationentrykind.desktopmodule",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind-30fbc25f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentrykind:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.documentation",
+      "kind": "entry",
+      "label": "Documentation",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.documentation",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationentrykind.documentation",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind-1b799401.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentrykind:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.legacyaccount",
+      "kind": "entry",
+      "label": "LegacyAccount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.legacyaccount",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationentrykind.legacyaccount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind-6f957b01.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationentrykind:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.tab",
+      "kind": "entry",
+      "label": "Tab",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind.tab",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationentrykind.tab",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationentrykind-813e51cc.html"
+    }
+  ]
+}

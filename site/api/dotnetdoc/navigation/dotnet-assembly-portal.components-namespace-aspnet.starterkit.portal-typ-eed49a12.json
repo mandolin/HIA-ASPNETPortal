@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolepermissionentry",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolepermissionentry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.rolepermissionentry.isenabled",
+      "kind": "entry",
+      "label": "IsEnabled",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.rolepermissionentry.isenabled",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.rolepermissionentry.isenabled",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.rolepermissionentry.isena-8620bd67.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolepermissionentry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.rolepermissionentry.permissionkey",
+      "kind": "entry",
+      "label": "PermissionKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.rolepermissionentry.permissionkey",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.rolepermissionentry.permissionkey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.rolepermissionentry.permi-066d23c0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolepermissionentry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.rolepermissionentry.roleid",
+      "kind": "entry",
+      "label": "RoleId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.rolepermissionentry.roleid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.rolepermissionentry.roleid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.rolepermissionentry.rolei-b3db06d3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.rolepermissionentry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.rolepermissionentry.rolename",
+      "kind": "entry",
+      "label": "RoleName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.rolepermissionentry.rolename",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.rolepermissionentry.rolename",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.rolepermissionentry.rolen-d5d4b5ed.html"
+    }
+  ]
+}

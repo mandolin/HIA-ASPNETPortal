@@ -88,10 +88,10 @@ nav_external_links:
     url: /api/jsdoc/index.en.html
     lang: en
   - title: 代码文档（DotNetDoc）· 中文
-    url: /api/dotnetdoc/index.zh-CN.html
+    url: /api/dotnetdoc/
     lang: zh-CN
   - title: Code documentation (DotNetDoc) · English
-    url: /api/dotnetdoc/index.en.html
+    url: /api/dotnetdoc/
     lang: en
 
 # <lang>

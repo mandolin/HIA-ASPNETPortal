@@ -1,0 +1,111 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.addnullabletextparameter-system.data.sqlclient.sqlcommand-system.string-system.int32-system.string",
+      "kind": "entry",
+      "label": "AddNullableTextParameter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.addnullabletextparameter-system.data.sqlclient.sqlcommand-system.string-system.int32-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestates.addnullabletextparameter-system.data.sqlclient.sqlcommand-system.string-system.int32-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates-25c84870.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.addtextparameter-system.data.sqlclient.sqlcommand-system.string-system.int32-system.string-system.string",
+      "kind": "entry",
+      "label": "AddTextParameter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.addtextparameter-system.data.sqlclient.sqlcommand-system.string-system.int32-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestates.addtextparameter-system.data.sqlclient.sqlcommand-system.string-system.int32-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates-ee300c1e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.createconnection",
+      "kind": "entry",
+      "label": "CreateConnection",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.createconnection",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestates.createconnection",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates-4153151a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.existsforupdate-system.data.sqlclient.sqlconnection-system.data.sqlclient.sqltransaction-system.string",
+      "kind": "entry",
+      "label": "ExistsForUpdate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.existsforupdate-system.data.sqlclient.sqlconnection-system.data.sqlclient.sqltransaction-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestates.existsforupdate-system.data.sqlclient.sqlconnection-system.data.sqlclient.sqltransaction-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates-89c790d5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.getactorusername-system.web.httpcontext",
+      "kind": "entry",
+      "label": "GetActorUserName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.getactorusername-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestates.getactorusername-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates-826bdab6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.istableavailable-system.data.sqlclient.sqlconnection",
+      "kind": "entry",
+      "label": "IsTableAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.istableavailable-system.data.sqlclient.sqlconnection",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestates.istableavailable-system.data.sqlclient.sqlconnection",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates-5d051692.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.read-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "Read",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.read-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestates.read-system.string-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates-3e28dcce.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestates:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.save-system.string-system.boolean-system.string-system.web.httpcontext",
+      "kind": "entry",
+      "label": "Save",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates.save-system.string-system.boolean-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestates.save-system.string-system.boolean-system.string-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestates-44a22a6e.html"
+    }
+  ]
+}

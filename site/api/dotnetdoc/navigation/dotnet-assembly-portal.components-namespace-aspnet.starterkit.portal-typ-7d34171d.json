@@ -1,0 +1,111 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.description",
+      "kind": "entry",
+      "label": "Description",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.description",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.referencedataitem.description",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.referencedataitem.descrip-f2ae8be7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.displayname",
+      "kind": "entry",
+      "label": "DisplayName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.displayname",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.referencedataitem.displayname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.referencedataitem.display-f29b8a68.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.isactive",
+      "kind": "entry",
+      "label": "IsActive",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.isactive",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.referencedataitem.isactive",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.referencedataitem.isactiv-ddfe1a19.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.issystemseed",
+      "kind": "entry",
+      "label": "IsSystemSeed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.issystemseed",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.referencedataitem.issystemseed",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.referencedataitem.issyste-8ef4af3f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.referencedataid",
+      "kind": "entry",
+      "label": "ReferenceDataId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.referencedataid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.referencedataitem.referencedataid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.referencedataitem.referen-acb1c49d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.referencesetkey",
+      "kind": "entry",
+      "label": "ReferenceSetKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.referencesetkey",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.referencedataitem.referencesetkey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.referencedataitem.referen-e34094e7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.sortorder",
+      "kind": "entry",
+      "label": "SortOrder",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.sortorder",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.referencedataitem.sortorder",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.referencedataitem.sortord-554e56cd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedataitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.valuekey",
+      "kind": "entry",
+      "label": "ValueKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.referencedataitem.valuekey",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.referencedataitem.valuekey",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.referencedataitem.valueke-4a2c6e0f.html"
+    }
+  ]
+}

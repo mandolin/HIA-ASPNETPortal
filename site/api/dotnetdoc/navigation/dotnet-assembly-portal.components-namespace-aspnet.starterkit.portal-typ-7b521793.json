@@ -1,0 +1,462 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.buildtabentrykey-system.string",
+      "kind": "entry",
+      "label": "BuildTabEntryKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.buildtabentrykey-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.buildtabentrykey-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-ea4f4c71.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.buildtabentrykey-system.string-system.string",
+      "kind": "entry",
+      "label": "BuildTabEntryKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.buildtabentrykey-system.string-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.buildtabentrykey-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-b8474874.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.commonfallbackentrykeys",
+      "kind": "entry",
+      "label": "CommonFallbackEntryKeys",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.commonfallbackentrykeys",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.commonfallbackentrykeys",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-c16b7910.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.corepackageid",
+      "kind": "entry",
+      "label": "CorePackageId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.corepackageid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.corepackageid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-7b9fe415.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.defaultmaxrelatedentries",
+      "kind": "entry",
+      "label": "DefaultMaxRelatedEntries",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.defaultmaxrelatedentries",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.defaultmaxrelatedentries",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-2d027d63.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getblockedreason-aspnet.starterkit.portal.portalnavigationentry-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "kind": "entry",
+      "label": "GetBlockedReason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getblockedreason-aspnet.starterkit.portal.portalnavigationentry-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getblockedreason-aspnet.starterkit.portal.portalnavigationentry-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-820d5335.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getgroupkey-aspnet.starterkit.portal.portalnavigationentry",
+      "kind": "entry",
+      "label": "GetGroupKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getgroupkey-aspnet.starterkit.portal.portalnavigationentry",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getgroupkey-aspnet.starterkit.portal.portalnavigationentry",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-60d280f1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getgroupkey-system.string",
+      "kind": "entry",
+      "label": "GetGroupKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getgroupkey-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getgroupkey-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-04bf2543.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getrelatedentries-system.string-system.int32",
+      "kind": "entry",
+      "label": "GetRelatedEntries",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getrelatedentries-system.string-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getrelatedentries-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-a00ed704.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.gettabblockedreason-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "kind": "entry",
+      "label": "GetTabBlockedReason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.gettabblockedreason-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.gettabblockedreason-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-d68e1254.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.gettabblockedreason-system.string-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "kind": "entry",
+      "label": "GetTabBlockedReason",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.gettabblockedreason-system.string-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.gettabblockedreason-system.string-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-45c0b94f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getvisiblerelatedentries-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext-system.int32",
+      "kind": "entry",
+      "label": "GetVisibleRelatedEntries",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getvisiblerelatedentries-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.getvisiblerelatedentries-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-490770ca.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminaccount",
+      "kind": "entry",
+      "label": "GroupAdminAccount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminaccount",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminaccount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-afc9c778.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadmincapability",
+      "kind": "entry",
+      "label": "GroupAdminCapability",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadmincapability",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadmincapability",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-b947c2bb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminerror",
+      "kind": "entry",
+      "label": "GroupAdminError",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminerror",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminerror",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-6198e30d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminmodules",
+      "kind": "entry",
+      "label": "GroupAdminModules",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminmodules",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminmodules",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-211a37a6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminops",
+      "kind": "entry",
+      "label": "GroupAdminOps",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminops",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminops",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-b0a0ccaf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminpresentation",
+      "kind": "entry",
+      "label": "GroupAdminPresentation",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminpresentation",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupadminpresentation",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-793270e5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupcoreadmin",
+      "kind": "entry",
+      "label": "GroupCoreAdmin",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupcoreadmin",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupcoreadmin",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-87a8591c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupenterprise",
+      "kind": "entry",
+      "label": "GroupEnterprise",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupenterprise",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.groupenterprise",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-7e8c94b9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.grouptab",
+      "kind": "entry",
+      "label": "GroupTab",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.grouptab",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.grouptab",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-c60b0399.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isnavigable-aspnet.starterkit.portal.portalnavigationentry",
+      "kind": "entry",
+      "label": "IsNavigable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isnavigable-aspnet.starterkit.portal.portalnavigationentry",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isnavigable-aspnet.starterkit.portal.portalnavigationentry",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-29c69170.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.ispackageallowed-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "kind": "entry",
+      "label": "IsPackageAllowed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.ispackageallowed-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.ispackageallowed-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-faa8962b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isprofileactive-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "kind": "entry",
+      "label": "IsProfileActive",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isprofileactive-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isprofileactive-system.string-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-1679f5ea.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.istabgateenabled-system.string",
+      "kind": "entry",
+      "label": "IsTabGateEnabled",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.istabgateenabled-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.istabgateenabled-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-f3691294.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isvisible-aspnet.starterkit.portal.portalnavigationentry-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "kind": "entry",
+      "label": "IsVisible",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isvisible-aspnet.starterkit.portal.portalnavigationentry-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.isvisible-aspnet.starterkit.portal.portalnavigationentry-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-19c7f9cf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.legacygroupmap",
+      "kind": "entry",
+      "label": "LegacyGroupMap",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.legacygroupmap",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.legacygroupmap",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-ae4000e7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.minimumrelatedentries",
+      "kind": "entry",
+      "label": "MinimumRelatedEntries",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.minimumrelatedentries",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.minimumrelatedentries",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-234a88b8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonlifecycle",
+      "kind": "entry",
+      "label": "ReasonLifecycle",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonlifecycle",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonlifecycle",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-6c827c69.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonpackage",
+      "kind": "entry",
+      "label": "ReasonPackage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonpackage",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonpackage",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-d09aab8d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonpermission",
+      "kind": "entry",
+      "label": "ReasonPermission",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonpermission",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonpermission",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-1d6d5aa8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonprofile",
+      "kind": "entry",
+      "label": "ReasonProfile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonprofile",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonprofile",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-38d406a8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonrole",
+      "kind": "entry",
+      "label": "ReasonRole",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonrole",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonrole",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-66405963.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonvisibilitymode",
+      "kind": "entry",
+      "label": "ReasonVisibilityMode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonvisibilitymode",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.reasonvisibilitymode",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-1f18fc7c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.tabentrykeyprefix",
+      "kind": "entry",
+      "label": "TabEntryKeyPrefix",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitypolicy.tabentrykeyprefix",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationvisibilitypolicy.tabentrykeyprefix",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilit-0e7b1ebd.html"
+    }
+  ]
+}

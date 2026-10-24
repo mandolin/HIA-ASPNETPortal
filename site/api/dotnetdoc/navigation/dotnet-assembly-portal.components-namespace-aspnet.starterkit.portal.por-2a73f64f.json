@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal.portalhiaboundarycontract:type:t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal.portalhiaboundarycontract:type:t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.-ctor-system.collections.generic.ienumerable-system.string-system.collections.generic.ienumerable-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.-ctor-system.collections.generic.ienumerable-system.string-system.collections.generic.ienumerable-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.-ctor-system.collections.generic.ienumerable-system.string-system.collections.generic.ienumerable-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-ab325859.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal.portalhiaboundarycontract:type:t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.allows-system.string",
+      "kind": "entry",
+      "label": "Allows",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.allows-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.allows-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundarycontract-b4edcb9b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal.portalhiaboundarycontract:type:t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.requiredkeys",
+      "kind": "entry",
+      "label": "RequiredKeys",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.requiredkeys",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule.requiredkeys",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaboundarycontract-57bdff26.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal.portalhiaboundarycontract:type:t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule._allowedkeys",
+      "kind": "entry",
+      "label": "_allowedKeys",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule._allowedkeys",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule._allowedkeys",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalhiaboundarycontract-38d822d6.html"
+    }
+  ]
+}

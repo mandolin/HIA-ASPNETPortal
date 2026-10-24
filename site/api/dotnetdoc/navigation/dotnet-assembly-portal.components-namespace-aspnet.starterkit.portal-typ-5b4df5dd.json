@@ -1,0 +1,124 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.approve",
+      "kind": "entry",
+      "label": "Approve",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.approve",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.approve",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.app-b26422a2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.claim",
+      "kind": "entry",
+      "label": "Claim",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.claim",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.claim",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.cla-8b8444d7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.close",
+      "kind": "entry",
+      "label": "Close",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.close",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.close",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.clo-f380185b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.createdraft",
+      "kind": "entry",
+      "label": "CreateDraft",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.createdraft",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.createdraft",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.cre-0dd71eec.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.reject",
+      "kind": "entry",
+      "label": "Reject",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.reject",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.reject",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.rej-42cf017e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.resubmit",
+      "kind": "entry",
+      "label": "Resubmit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.resubmit",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.resubmit",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.res-e7eb4350.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.return",
+      "kind": "entry",
+      "label": "Return",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.return",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.return",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.ret-495735d7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.submit",
+      "kind": "entry",
+      "label": "Submit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.submit",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.submit",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.sub-454fdb8d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkflowactions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.withdraw",
+      "kind": "entry",
+      "label": "Withdraw",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkflowactions.withdraw",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkflowactions.withdraw",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkflowactions.wit-69c479bf.html"
+    }
+  ]
+}

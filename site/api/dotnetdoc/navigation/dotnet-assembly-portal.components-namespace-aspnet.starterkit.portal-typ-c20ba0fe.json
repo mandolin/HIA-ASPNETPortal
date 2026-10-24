@@ -1,0 +1,46 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofileconfirmationdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofileconfirmationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
+      "kind": "entry",
+      "label": "ConfirmProfile",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmat-db7010b2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofileconfirmationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.getcurrentprofileforuser-system.int32",
+      "kind": "entry",
+      "label": "GetCurrentProfileForUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.getcurrentprofileforuser-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofileconfirmationdb.getcurrentprofileforuser-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmat-4937aef3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iemployeeprofileconfirmationdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.isschemaavailable",
+      "kind": "entry",
+      "label": "IsSchemaAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.isschemaavailable",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofileconfirmationdb.isschemaavailable",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmat-5475ae8f.html"
+    }
+  ]
+}

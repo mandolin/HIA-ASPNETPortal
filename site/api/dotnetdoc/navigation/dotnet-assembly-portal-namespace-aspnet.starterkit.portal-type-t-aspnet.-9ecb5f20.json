@@ -1,0 +1,176 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addapplicationchecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "kind": "entry",
+      "label": "AddApplicationChecks",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addapplicationchecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.addapplicationchecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addap-3492dd55.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addconfigurationchecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "kind": "entry",
+      "label": "AddConfigurationChecks",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addconfigurationchecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.addconfigurationchecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addco-35018fb2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.adddatabasecheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "kind": "entry",
+      "label": "AddDatabaseCheck",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.adddatabasecheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.adddatabasecheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addda-21ad26bd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.adddirectorychecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "kind": "entry",
+      "label": "AddDirectoryChecks",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.adddirectorychecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.adddirectorychecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.adddi-2f454b5f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addmoduleprofilechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "kind": "entry",
+      "label": "AddModuleProfileChecks",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addmoduleprofilechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.addmoduleprofilechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addmo-252d9030.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addregistrycheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.collections.generic.ilist-aspnet.starterkit.portal.portalsettinghealthinfo",
+      "kind": "entry",
+      "label": "AddRegistryCheck",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addregistrycheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.collections.generic.ilist-aspnet.starterkit.portal.portalsettinghealthinfo",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.addregistrycheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.collections.generic.ilist-aspnet.starterkit.portal.portalsettinghealthinfo",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addre-d840cbd2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addruntimechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "kind": "entry",
+      "label": "AddRuntimeChecks",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addruntimechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.addruntimechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addru-87a7517c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addthemechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "kind": "entry",
+      "label": "AddThemeChecks",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addthemechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.addthemechecks-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addth-2dddc860.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addwritabledirectorycheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "AddWritableDirectoryCheck",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addwritabledirectorycheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.addwritabledirectorycheck-system.collections.generic.ilist-aspnet.starterkit.portal.portalhealthcheckresult-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.addwr-0c2a9d35.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.buildsettingrows",
+      "kind": "entry",
+      "label": "BuildSettingRows",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.buildsettingrows",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.buildsettingrows",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.build-66570792.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.check-system.web.httpcontext",
+      "kind": "entry",
+      "label": "Check",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.check-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.check-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.check-8144a90c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.geteffectivesettingvalue-aspnet.starterkit.portal.portalsettingdefinition-system.string-system.string",
+      "kind": "entry",
+      "label": "GetEffectiveSettingValue",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.geteffectivesettingvalue-aspnet.starterkit.portal.portalsettingdefinition-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.geteffectivesettingvalue-aspnet.starterkit.portal.portalsettingdefinition-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.getef-3e363ff1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthchecker:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.trydelete-system.string",
+      "kind": "entry",
+      "label": "TryDelete",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthchecker.trydelete-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthchecker.trydelete-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthchecker.tryde-d445d146.html"
+    }
+  ]
+}

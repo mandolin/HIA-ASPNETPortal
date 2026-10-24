@@ -1,0 +1,163 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.approvedby",
+      "kind": "entry",
+      "label": "ApprovedBy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.approvedby",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.approvedby",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.appr-96b594f6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.approvedutc",
+      "kind": "entry",
+      "label": "ApprovedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.approvedutc",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.approvedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.appr-ab974f6b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.employeecode",
+      "kind": "entry",
+      "label": "EmployeeCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.employeecode",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.employeecode",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.empl-d45b8469.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.invitecode",
+      "kind": "entry",
+      "label": "InviteCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.invitecode",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.invitecode",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.invi-43e3bf94.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.registeredutc",
+      "kind": "entry",
+      "label": "RegisteredUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.registeredutc",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.registeredutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.regi-91c256ea.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.registrationid",
+      "kind": "entry",
+      "label": "RegistrationId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.registrationid",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.registrationid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.regi-f17285a8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.rejectedby",
+      "kind": "entry",
+      "label": "RejectedBy",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.rejectedby",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.rejectedby",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.reje-31af122f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.rejectedutc",
+      "kind": "entry",
+      "label": "RejectedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.rejectedutc",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.rejectedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.reje-d39a2dcc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.requiresapproval",
+      "kind": "entry",
+      "label": "RequiresApproval",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.requiresapproval",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.requiresapproval",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.requ-11d81013.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.reviewnote",
+      "kind": "entry",
+      "label": "ReviewNote",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.reviewnote",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.reviewnote",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.revi-ff810cbc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.status",
+      "kind": "entry",
+      "label": "Status",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.status",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.status",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.stat-f22b6026.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.userid",
+      "kind": "entry",
+      "label": "UserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userregistrationitem.userid",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.userregistrationitem.userid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userregistrationitem.user-d11783f2.html"
+    }
+  ]
+}

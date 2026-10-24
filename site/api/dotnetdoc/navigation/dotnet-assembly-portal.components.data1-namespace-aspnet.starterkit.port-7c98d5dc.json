@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.useremployeebindingadmindb:type:t-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.useremployeebindingadmindb:type:t-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.displayname",
+      "kind": "entry",
+      "label": "DisplayName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.displayname",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.displayname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingadmind-5276a7c3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.useremployeebindingadmindb:type:t-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employeecode",
+      "kind": "entry",
+      "label": "EmployeeCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employeecode",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employeecode",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingadmind-0452a74b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.useremployeebindingadmindb:type:t-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employeeid",
+      "kind": "entry",
+      "label": "EmployeeId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employeeid",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employeeid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingadmind-c258f90b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.useremployeebindingadmindb:type:t-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employmentstatus",
+      "kind": "entry",
+      "label": "EmploymentStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employmentstatus",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingadmindb.employeebindingprojection.employmentstatus",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingadmind-c941d506.html"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.-ctor-system.boolean-system.string-system.string",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.-ctor-system.boolean-system.string-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundaryvalidationresult.-ctor-system.boolean-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundaryvalidati-6d55a46d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.code",
+      "kind": "entry",
+      "label": "Code",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.code",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaboundaryvalidationresult.code",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidati-9383773c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.isvalid",
+      "kind": "entry",
+      "label": "IsValid",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.isvalid",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaboundaryvalidationresult.isvalid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidati-93e556d9.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.message",
+      "kind": "entry",
+      "label": "Message",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.message",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaboundaryvalidationresult.message",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidati-365fc05c.html"
+    }
+  ]
+}

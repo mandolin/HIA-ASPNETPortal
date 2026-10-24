@@ -1,0 +1,46 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestatereadresult",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestatereadresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestatereadresult.-ctor-system.boolean-aspnet.starterkit.portal.portalmodulepackagestate",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestatereadresult.-ctor-system.boolean-aspnet.starterkit.portal.portalmodulepackagestate",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestatereadresult.-ctor-system.boolean-aspnet.starterkit.portal.portalmodulepackagestate",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestater-0f867ae5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestatereadresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackagestatereadresult.isavailable",
+      "kind": "entry",
+      "label": "IsAvailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackagestatereadresult.isavailable",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmodulepackagestatereadresult.isavailable",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulepackagestater-6d5e563c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestatereadresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackagestatereadresult.state",
+      "kind": "entry",
+      "label": "State",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackagestatereadresult.state",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmodulepackagestatereadresult.state",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulepackagestater-a4becb72.html"
+    }
+  ]
+}

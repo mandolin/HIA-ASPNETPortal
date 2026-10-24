@@ -1,0 +1,215 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.clearloginpasswordkey-system.web.httpcontext",
+      "kind": "entry",
+      "label": "ClearLoginPasswordKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.clearloginpasswordkey-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.clearloginpasswordkey-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-8a76177e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.concat-system.byte-system.byte",
+      "kind": "entry",
+      "label": "Concat",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.concat-system.byte-system.byte",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.concat-system.byte-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-575869db.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalloginpasswordcrypto.defaultkeysizebits",
+      "kind": "entry",
+      "label": "DefaultKeySizeBits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalloginpasswordcrypto.defaultkeysizebits",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalloginpasswordcrypto.defaultkeysizebits",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalloginpasswordcrypto-26a40bd7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodebitstring-system.byte",
+      "kind": "entry",
+      "label": "EncodeBitString",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodebitstring-system.byte",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.encodebitstring-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-7c47462b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodeinteger-system.byte",
+      "kind": "entry",
+      "label": "EncodeInteger",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodeinteger-system.byte",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.encodeinteger-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-2dadf4ff.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodelength-system.int32",
+      "kind": "entry",
+      "label": "EncodeLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodelength-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.encodelength-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-d046efef.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodesequence-system.byte",
+      "kind": "entry",
+      "label": "EncodeSequence",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodesequence-system.byte",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.encodesequence-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-f06ac23a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodesubjectpublickeyinfo-system.security.cryptography.rsaparameters",
+      "kind": "entry",
+      "label": "EncodeSubjectPublicKeyInfo",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodesubjectpublickeyinfo-system.security.cryptography.rsaparameters",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.encodesubjectpublickeyinfo-system.security.cryptography.rsaparameters",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-206c33bd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodetag-system.byte-system.byte",
+      "kind": "entry",
+      "label": "EncodeTag",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.encodetag-system.byte-system.byte",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.encodetag-system.byte-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-3a71ef9f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.ensuresession-system.web.httpcontext",
+      "kind": "entry",
+      "label": "EnsureSession",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.ensuresession-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.ensuresession-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-d093c986.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.exportsubjectpublickeyinfopem-system.security.cryptography.rsaparameters",
+      "kind": "entry",
+      "label": "ExportSubjectPublicKeyInfoPem",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.exportsubjectpublickeyinfopem-system.security.cryptography.rsaparameters",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.exportsubjectpublickeyinfopem-system.security.cryptography.rsaparameters",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-51f45f21.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.isencryptedsubmissionrequired",
+      "kind": "entry",
+      "label": "IsEncryptedSubmissionRequired",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.isencryptedsubmissionrequired",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.isencryptedsubmissionrequired",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-01dc31d8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.issueloginpasswordkey-system.web.httpcontext",
+      "kind": "entry",
+      "label": "IssueLoginPasswordKey",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.issueloginpasswordkey-system.web.httpcontext",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.issueloginpasswordkey-system.web.httpcontext",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-e486c080.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.trimleadingzerobytes-system.byte",
+      "kind": "entry",
+      "label": "TrimLeadingZeroBytes",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.trimleadingzerobytes-system.byte",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.trimleadingzerobytes-system.byte",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-a56b81d2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpassword-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryDecryptSubmittedPassword",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpassword-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpassword-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-f6a1bd02.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordcrypto:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "TryDecryptSubmittedPasswords",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-8b66d433.html"
+    }
+  ]
+}

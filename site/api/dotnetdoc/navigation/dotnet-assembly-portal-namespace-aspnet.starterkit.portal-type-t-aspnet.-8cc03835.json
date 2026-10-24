@@ -1,0 +1,85 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.capabilitypermissionmatrix",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.capabilitypermissionmatrix:entry:hia-document:dotnet-f-aspnet.starterkit.portal.capabilitypermissionmatrix.matrixliteral",
+      "kind": "entry",
+      "label": "MatrixLiteral",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.capabilitypermissionmatrix.matrixliteral",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.capabilitypermissionmatrix.matrixliteral",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.capabilitypermissionmatri-18d712b3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.capabilitypermissionmatrix:entry:hia-document:dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatrix.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatrix.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.capabilitypermissionmatrix.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatri-9cf16f36.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.capabilitypermissionmatrix:entry:hia-document:dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatrix.rendermatrix",
+      "kind": "entry",
+      "label": "RenderMatrix",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatrix.rendermatrix",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.capabilitypermissionmatrix.rendermatrix",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatri-934cf6e7.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.capabilitypermissionmatrix:entry:hia-document:dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatrix.resolvematrixtext-system.string",
+      "kind": "entry",
+      "label": "ResolveMatrixText",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatrix.resolvematrixtext-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.capabilitypermissionmatrix.resolvematrixtext-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatri-afd9b045.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.capabilitypermissionmatrix:entry:hia-document:dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatrix.resolverolesdb",
+      "kind": "entry",
+      "label": "ResolveRolesDb",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatrix.resolverolesdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.capabilitypermissionmatrix.resolverolesdb",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.capabilitypermissionmatri-cfcd1511.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.capabilitypermissionmatrix:entry:hia-document:dotnet-f-aspnet.starterkit.portal.capabilitypermissionmatrix.unavailablelabel",
+      "kind": "entry",
+      "label": "UnavailableLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.capabilitypermissionmatrix.unavailablelabel",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.capabilitypermissionmatrix.unavailablelabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.capabilitypermissionmatri-7f3dc1c1.html"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.collaborationitemdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.collaborationitemdb:type:t-aspnet.starterkit.portal.collaborationitemdb.collaborationitemactorauthorization",
+      "kind": "type",
+      "label": "CollaborationItemActorAuthorization",
+      "entryCount": 6,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemdb.collaborationitemactorauthorization",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemdb.collaborationitemactorauthorization",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemdb.colla-5b6faba3.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data1-namespace-aspnet.starterkit.port-09269e54.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.collaborationitemdb:type:t-aspnet.starterkit.portal.collaborationitemdb.collaborationitemwriterow",
+      "kind": "type",
+      "label": "CollaborationItemWriteRow",
+      "entryCount": 3,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemdb.collaborationitemwriterow",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemdb.collaborationitemwriterow",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemdb.colla-1937dd48.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data1-namespace-aspnet.starterkit.port-ab126ce3.json"
+    }
+  ]
+}

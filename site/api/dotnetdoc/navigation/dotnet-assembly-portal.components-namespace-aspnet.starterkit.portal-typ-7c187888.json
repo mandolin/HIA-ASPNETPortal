@@ -1,0 +1,215 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.configureoptionsprovider-system.func-aspnet.starterkit.portal.portalpasswordpolicyoptions",
+      "kind": "entry",
+      "label": "ConfigureOptionsProvider",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.configureoptionsprovider-system.func-aspnet.starterkit.portal.portalpasswordpolicyoptions",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.configureoptionsprovider-system.func-aspnet.starterkit.portal.portalpasswordpolicyoptions",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.conf-1bcf5e72.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.containscontextterm-system.string-system.collections.generic.ienumerable-system.string",
+      "kind": "entry",
+      "label": "ContainsContextTerm",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.containscontextterm-system.string-system.collections.generic.ienumerable-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.containscontextterm-system.string-system.collections.generic.ienumerable-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.cont-9b5518ec.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.countcategories-system.string",
+      "kind": "entry",
+      "label": "CountCategories",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.countcategories-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.countcategories-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.coun-63b45c21.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.geteffectiveoptions",
+      "kind": "entry",
+      "label": "GetEffectiveOptions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.geteffectiveoptions",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.geteffectiveoptions",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.gete-1c8ba556.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.issinglerepeatedcharacter-system.string",
+      "kind": "entry",
+      "label": "IsSingleRepeatedCharacter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.issinglerepeatedcharacter-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.issinglerepeatedcharacter-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.issi-f60e6983.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.isweakpassword-system.string",
+      "kind": "entry",
+      "label": "IsWeakPassword",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.isweakpassword-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.isweakpassword-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.iswe-0076952d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.minimumlength",
+      "kind": "entry",
+      "label": "MinimumLength",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.minimumlength",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.minimumlength",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.mini-f448ee66.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.normalizeoptions-aspnet.starterkit.portal.portalpasswordpolicyoptions",
+      "kind": "entry",
+      "label": "NormalizeOptions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.normalizeoptions-aspnet.starterkit.portal.portalpasswordpolicyoptions",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.normalizeoptions-aspnet.starterkit.portal.portalpasswordpolicyoptions",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.norm-7c84744c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.normalizetoken-system.string",
+      "kind": "entry",
+      "label": "NormalizeToken",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.normalizetoken-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.normalizetoken-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.norm-ce895364.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.optionsproviderlock",
+      "kind": "entry",
+      "label": "OptionsProviderLock",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.optionsproviderlock",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.optionsproviderlock",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.opti-39892d5a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.requiredcategorycount",
+      "kind": "entry",
+      "label": "RequiredCategoryCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.requiredcategorycount",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.requiredcategorycount",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.requ-526961ba.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.splitcontexttokens-system.string",
+      "kind": "entry",
+      "label": "SplitContextTokens",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.splitcontexttokens-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.splitcontexttokens-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.spli-2dbe0cdd.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-aspnet.starterkit.portal.portalpasswordrejection",
+      "kind": "entry",
+      "label": "TryValidate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-aspnet.starterkit.portal.portalpasswordrejection",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-aspnet.starterkit.portal.portalpasswordrejection",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryv-589c9fce.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-system.collections.generic.ienumerable-system.string-aspnet.starterkit.portal.portalpasswordrejection",
+      "kind": "entry",
+      "label": "TryValidate",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-system.collections.generic.ienumerable-system.string-aspnet.starterkit.portal.portalpasswordrejection",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-system.collections.generic.ienumerable-system.string-aspnet.starterkit.portal.portalpasswordrejection",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryv-9d14a9f0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.weakpassworddictionary",
+      "kind": "entry",
+      "label": "WeakPasswordDictionary",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.weakpassworddictionary",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.weakpassworddictionary",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.weak-f0216adb.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.optionsprovider",
+      "kind": "entry",
+      "label": "optionsProvider",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.optionsprovider",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.optionsprovider",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.opti-9e68318d.html"
+    }
+  ]
+}

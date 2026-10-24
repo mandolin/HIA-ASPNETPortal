@@ -1,0 +1,21 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.employeeprofilecorrectionrequestdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal.employeeprofilecorrectionrequestdb:type:t-aspnet.starterkit.portal.employeeprofilecorrectionrequestdb.profileprojection",
+      "kind": "type",
+      "label": "ProfileProjection",
+      "entryCount": 10,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionrequestdb.profileprojection",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofilecorrectionrequestdb.profileprojection",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofilecorrection-62ce3ac9.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components.data1-namespace-aspnet.starterkit.port-b8607406.json"
+    }
+  ]
+}

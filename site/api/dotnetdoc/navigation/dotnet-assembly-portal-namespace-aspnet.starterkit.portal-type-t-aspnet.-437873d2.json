@@ -1,0 +1,98 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookies",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookies:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.buildroledata-system.int64-system.string",
+      "kind": "entry",
+      "label": "BuildRoleData",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.buildroledata-system.int64-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.buildroledata-system.int64-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-2c452eef.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookies:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.expirerolescookie-system.web.httpresponse-system.web.httprequest",
+      "kind": "entry",
+      "label": "ExpireRolesCookie",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.expirerolescookie-system.web.httpresponse-system.web.httprequest",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.expirerolescookie-system.web.httpresponse-system.web.httprequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-b68ff4af.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookies:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.getcookiepath-system.web.httprequest",
+      "kind": "entry",
+      "label": "GetCookiePath",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.getcookiepath-system.web.httprequest",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.getcookiepath-system.web.httprequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-fa5001f3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookies:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalauthenticationcookies.rolescookiename",
+      "kind": "entry",
+      "label": "RolesCookieName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalauthenticationcookies.rolescookiename",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalauthenticationcookies.rolescookiename",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalauthenticationcooki-e9e93880.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookies:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.tryparseroledata-system.string-system.int64-system.string",
+      "kind": "entry",
+      "label": "TryParseRoleData",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.tryparseroledata-system.string-system.int64-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.tryparseroledata-system.string-system.int64-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-08e875d6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookies:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.tryreadroles-system.web.httprequest-system.int64-system.string",
+      "kind": "entry",
+      "label": "TryReadRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.tryreadroles-system.web.httprequest-system.int64-system.string",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.tryreadroles-system.web.httprequest-system.int64-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-64d037b6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookies:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.writerolescookie-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.string-system.boolean",
+      "kind": "entry",
+      "label": "WriteRolesCookie",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.writerolescookie-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.string-system.boolean",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.writerolescookie-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.string-system.boolean",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-f65844ca.html"
+    }
+  ]
+}

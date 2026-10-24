@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.idiscussionsdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.idiscussionsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.idiscussionsdb.addmessage-system.int32-system.int32-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "AddMessage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idiscussionsdb.addmessage-system.int32-system.int32-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.idiscussionsdb.addmessage-system.int32-system.int32-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idiscussionsdb.addmessage-eec87e07.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.idiscussionsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.idiscussionsdb.getsinglemessage-system.int32",
+      "kind": "entry",
+      "label": "GetSingleMessage",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idiscussionsdb.getsinglemessage-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.idiscussionsdb.getsinglemessage-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idiscussionsdb.getsinglem-00ab9a51.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.idiscussionsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.idiscussionsdb.getthreadmessages-system.string",
+      "kind": "entry",
+      "label": "GetThreadMessages",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idiscussionsdb.getthreadmessages-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.idiscussionsdb.getthreadmessages-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idiscussionsdb.getthreadm-bbdaab5d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.idiscussionsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.idiscussionsdb.gettoplevelmessages-system.int32",
+      "kind": "entry",
+      "label": "GetTopLevelMessages",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idiscussionsdb.gettoplevelmessages-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.idiscussionsdb.gettoplevelmessages-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idiscussionsdb.gettopleve-882c5f39.html"
+    }
+  ]
+}

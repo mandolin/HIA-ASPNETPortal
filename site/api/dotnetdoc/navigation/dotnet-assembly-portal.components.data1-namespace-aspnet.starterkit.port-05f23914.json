@@ -1,0 +1,46 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.alwaysshoweditbutton",
+      "kind": "entry",
+      "label": "AlwaysShowEditButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.alwaysshoweditbutton",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.globalitem.alwaysshoweditbutton",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.globalitem.alwaysshowedit-32922f2b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.portalid",
+      "kind": "entry",
+      "label": "PortalId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.portalid",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.globalitem.portalid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.globalitem.portalid-b42a238c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.portalname",
+      "kind": "entry",
+      "label": "PortalName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.portalname",
+      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.globalitem.portalname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.globalitem.portalname-c1d86162.html"
+    }
+  ]
+}

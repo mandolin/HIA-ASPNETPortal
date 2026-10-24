@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemesource",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemesource:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.appsettings",
+      "kind": "entry",
+      "label": "AppSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.appsettings",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemesource.appsettings",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemesource.appsett-9c7c5c41.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemesource:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.database",
+      "kind": "entry",
+      "label": "Database",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.database",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemesource.database",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemesource.databas-a66bd968.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemesource:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.default",
+      "kind": "entry",
+      "label": "Default",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.default",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemesource.default",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemesource.default-197ce26e.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemesource:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.fallback",
+      "kind": "entry",
+      "label": "Fallback",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.fallback",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemesource.fallback",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemesource.fallbac-b3a8ae6b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemesource:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.taboverride",
+      "kind": "entry",
+      "label": "TabOverride",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.taboverride",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemesource.taboverride",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemesource.tabover-22e88ea4.html"
+    }
+  ]
+}

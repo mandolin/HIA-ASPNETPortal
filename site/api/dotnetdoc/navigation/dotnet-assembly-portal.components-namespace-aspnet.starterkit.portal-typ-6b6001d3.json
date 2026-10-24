@@ -1,0 +1,111 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.approved",
+      "kind": "entry",
+      "label": "Approved",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.approved",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationstatuses.approved",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-86aa170c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.closed",
+      "kind": "entry",
+      "label": "Closed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.closed",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationstatuses.closed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-e757ee5f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.draft",
+      "kind": "entry",
+      "label": "Draft",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.draft",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationstatuses.draft",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-9fec6ff6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.inreview",
+      "kind": "entry",
+      "label": "InReview",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.inreview",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationstatuses.inreview",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-13482d4c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.rejected",
+      "kind": "entry",
+      "label": "Rejected",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.rejected",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationstatuses.rejected",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-56500da1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.returned",
+      "kind": "entry",
+      "label": "Returned",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.returned",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationstatuses.returned",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-a7feef80.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.submitted",
+      "kind": "entry",
+      "label": "Submitted",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.submitted",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationstatuses.submitted",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-7c3b4894.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.withdrawn",
+      "kind": "entry",
+      "label": "Withdrawn",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationstatuses.withdrawn",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationstatuses.withdrawn",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-11fa9b4d.html"
+    }
+  ]
+}

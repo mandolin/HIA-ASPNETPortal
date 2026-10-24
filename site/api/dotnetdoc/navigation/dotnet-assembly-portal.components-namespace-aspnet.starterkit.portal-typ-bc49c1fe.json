@@ -1,0 +1,72 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.imoduledefsdb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.imoduledefsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.addmoduledefinition-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "AddModuleDefinition",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.addmoduledefinition-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.imoduledefsdb.addmoduledefinition-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imoduledefsdb.addmodulede-4e09c838.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.imoduledefsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.deletemoduledefinition-system.int32",
+      "kind": "entry",
+      "label": "DeleteModuleDefinition",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.deletemoduledefinition-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.imoduledefsdb.deletemoduledefinition-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imoduledefsdb.deletemodul-76895449.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.imoduledefsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.getmoduledefinitions",
+      "kind": "entry",
+      "label": "GetModuleDefinitions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.getmoduledefinitions",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.imoduledefsdb.getmoduledefinitions",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imoduledefsdb.getmodulede-1b6b3bc3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.imoduledefsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.getsinglemoduledefinition-system.int32",
+      "kind": "entry",
+      "label": "GetSingleModuleDefinition",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.getsinglemoduledefinition-system.int32",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.imoduledefsdb.getsinglemoduledefinition-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imoduledefsdb.getsinglemo-47b7a55a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.imoduledefsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.updatemoduledefinition-system.int32-system.string-system.string-system.string",
+      "kind": "entry",
+      "label": "UpdateModuleDefinition",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imoduledefsdb.updatemoduledefinition-system.int32-system.string-system.string-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.imoduledefsdb.updatemoduledefinition-system.int32-system.string-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imoduledefsdb.updatemodul-7608650e.html"
+    }
+  ]
+}

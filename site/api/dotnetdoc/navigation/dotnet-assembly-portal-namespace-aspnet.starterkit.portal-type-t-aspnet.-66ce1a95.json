@@ -1,0 +1,59 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.viewdocument",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.viewdocument:entry:hia-document:dotnet-p-aspnet.starterkit.portal.viewdocument.documentdb",
+      "kind": "entry",
+      "label": "DocumentDB",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.viewdocument.documentdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.viewdocument.documentdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.viewdocument.documentdb-a042ff78.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.viewdocument:entry:hia-document:dotnet-m-aspnet.starterkit.portal.viewdocument.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.viewdocument.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.viewdocument.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.viewdocument.page_load-sy-4489dc46.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.viewdocument:entry:hia-document:dotnet-p-aspnet.starterkit.portal.viewdocument.shouldapplyportaltheme",
+      "kind": "entry",
+      "label": "ShouldApplyPortalTheme",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.viewdocument.shouldapplyportaltheme",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.viewdocument.shouldapplyportaltheme",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.viewdocument.shouldapplyp-f1a78d1f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.viewdocument:entry:hia-document:dotnet-m-aspnet.starterkit.portal.viewdocument.writenotfoundresponse",
+      "kind": "entry",
+      "label": "WriteNotFoundResponse",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.viewdocument.writenotfoundresponse",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.viewdocument.writenotfoundresponse",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.viewdocument.writenotfoun-8c224b55.html"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:resources",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang",
+      "kind": "type",
+      "label": "lang",
+      "entryCount": 942,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-resources.lang",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:t:resources.lang",
+      "contentPath": "entries/hia-document-dotnet-t-resources.lang-531f9488.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-resources-type-t-resources.lang-91997ffd.json"
+    }
+  ]
+}

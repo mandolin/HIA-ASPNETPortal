@@ -1,0 +1,202 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-m-aspnet.starterkit.portal.users.adduser_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "AddUser_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.users.adduser_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.users.adduser_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.users.adduser_click-syste-00b34967.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-m-aspnet.starterkit.portal.users.edituser_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "EditUser_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.users.edituser_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.users.edituser_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.users.edituser_click-syst-202894c6.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.message",
+      "kind": "entry",
+      "label": "Message",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.message",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.message",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.message-e20db9de.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-m-aspnet.starterkit.portal.users.page_load-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "Page_Load",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.users.page_load-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.users.page_load-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.users.page_load-system.ob-fe030166.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.placeholdercreationattempts",
+      "kind": "entry",
+      "label": "PlaceholderCreationAttempts",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.placeholdercreationattempts",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.placeholdercreationattempts",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.placeholdercreation-31753faf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-p-aspnet.starterkit.portal.users.rolesdb",
+      "kind": "entry",
+      "label": "RolesDB",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.users.rolesdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.users.rolesdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.users.rolesdb-f3db23b4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.title1",
+      "kind": "entry",
+      "label": "Title1",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.title1",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.title1",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.title1-b2bbab52.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-p-aspnet.starterkit.portal.users.usersdb",
+      "kind": "entry",
+      "label": "UsersDB",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.users.usersdb",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.users.usersdb",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.users.usersdb-a4f3a105.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.btn_adduser",
+      "kind": "entry",
+      "label": "btn_AddUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.btn_adduser",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.btn_adduser",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.btn_adduser-6370c91a.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.btn_deleteuser",
+      "kind": "entry",
+      "label": "btn_DeleteUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.btn_deleteuser",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.btn_deleteuser",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.btn_deleteuser-fb638e86.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-m-aspnet.starterkit.portal.users.btn_deleteuser_click-system.object-system.eventargs",
+      "kind": "entry",
+      "label": "btn_DeleteUser_Click",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.users.btn_deleteuser_click-system.object-system.eventargs",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.users.btn_deleteuser_click-system.object-system.eventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.users.btn_deleteuser_clic-62fedd28.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.btn_edituser",
+      "kind": "entry",
+      "label": "btn_EditUser",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.btn_edituser",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.btn_edituser",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.btn_edituser-133dc3d5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.ddl_allusers",
+      "kind": "entry",
+      "label": "ddl_AllUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.ddl_allusers",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.ddl_allusers",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.ddl_allusers-01a35faf.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.tabid",
+      "kind": "entry",
+      "label": "tabId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.tabid",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.tabid",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.tabid-4ae6cd6b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.users:entry:hia-document:dotnet-f-aspnet.starterkit.portal.users.tabindex",
+      "kind": "entry",
+      "label": "tabIndex",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.users.tabindex",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.users.tabindex",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.users.tabindex-09b28dba.html"
+    }
+  ]
+}

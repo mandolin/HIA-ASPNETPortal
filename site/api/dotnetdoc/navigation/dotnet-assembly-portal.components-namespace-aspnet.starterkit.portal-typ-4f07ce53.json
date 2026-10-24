@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ireferencedatadb",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ireferencedatadb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ireferencedatadb.trygetactiveitems-system.string-system.collections.generic.ilist-aspnet.starterkit.portal.referencedataitem",
+      "kind": "entry",
+      "label": "TryGetActiveItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ireferencedatadb.trygetactiveitems-system.string-system.collections.generic.ilist-aspnet.starterkit.portal.referencedataitem",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ireferencedatadb.trygetactiveitems-system.string-system.collections.generic.ilist-aspnet.starterkit.portal.referencedataitem",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ireferencedatadb.trygetac-dc92a73a.html"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.moduleprobe",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.moduleprobe:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-moduleprobe-moduleprobe.ascx-1",
+      "kind": "type",
+      "label": "ModuleProbe",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.modulepr-4bc7a62d.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.moduleprobe:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-moduleprobe-moduleprobe.ascx-2",
+      "kind": "type",
+      "label": "ModuleProbe",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.modulepr-48c7a174.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules.moduleprobe:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-moduleprobe-moduleprobe.ascx-3",
+      "kind": "type",
+      "label": "ModuleProbe",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules.modulepr-49c7a307.json"
+    }
+  ]
+}

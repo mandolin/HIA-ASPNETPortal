@@ -1,0 +1,1627 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:surface:asp.net-surfaces:namespace:markup.admin",
+  "children": [
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-accessdenied.aspx-1",
+      "kind": "type",
+      "label": "AccessDenied",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8ebd1b80.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-accessdenied.aspx-2",
+      "kind": "type",
+      "label": "AccessDenied",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-91bd2039.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-accessdenied.aspx-3",
+      "kind": "type",
+      "label": "AccessDenied",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-90bd1ea6.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticlogdetail.aspx-1",
+      "kind": "type",
+      "label": "DiagnosticLogDetail",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-cae7df97.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticlogdetail.aspx-2",
+      "kind": "type",
+      "label": "DiagnosticLogDetail",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-cbe7e12a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticlogdetail.aspx-3",
+      "kind": "type",
+      "label": "DiagnosticLogDetail",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-cce7e2bd.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticlogdetail.aspx-4",
+      "kind": "type",
+      "label": "DiagnosticLogDetail",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c5e7d7b8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticlogdetail.aspx-5",
+      "kind": "type",
+      "label": "DiagnosticLogDetail",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c6e7d94b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticslogs.aspx-1",
+      "kind": "type",
+      "label": "DiagnosticsLogs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-90bf9bcc.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticslogs.aspx-2",
+      "kind": "type",
+      "label": "DiagnosticsLogs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-93bfa085.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticslogs.aspx-3",
+      "kind": "type",
+      "label": "DiagnosticsLogs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-92bf9ef2.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticslogs.aspx-4",
+      "kind": "type",
+      "label": "DiagnosticsLogs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8dbf9713.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticslogs.aspx-5",
+      "kind": "type",
+      "label": "DiagnosticsLogs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8cbf9580.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-diagnosticslogs.aspx-6",
+      "kind": "type",
+      "label": "DiagnosticsLogs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8fbf9a39.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-editaccessdenied.aspx-1",
+      "kind": "type",
+      "label": "EditAccessDenied",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-10972004.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-editaccessdenied.aspx-2",
+      "kind": "type",
+      "label": "EditAccessDenied",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-139724bd.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-editaccessdenied.aspx-3",
+      "kind": "type",
+      "label": "EditAccessDenied",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1297232a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-1",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-2abbd51c.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-2",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-2dbbd9d5.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-3",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-2cbbd842.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-4",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-27bbd063.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-5",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-26bbced0.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-6",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-29bbd389.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-7",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-28bbd1f6.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-8",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-33bbe347.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-9",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-32bbe1b4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeedirectory.aspx-10",
+      "kind": "type",
+      "label": "EmployeeDirectory",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-71b09444.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeedit.aspx-1",
+      "kind": "type",
+      "label": "EmployeeEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-7816b3a7.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeedit.aspx-2",
+      "kind": "type",
+      "label": "EmployeeEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-7916b53a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeedit.aspx-3",
+      "kind": "type",
+      "label": "EmployeeEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-7a16b6cd.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeedit.aspx-4",
+      "kind": "type",
+      "label": "EmployeeEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-7316abc8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeedit.aspx-5",
+      "kind": "type",
+      "label": "EmployeeEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-7416ad5b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeprofilecorrectionrequests.aspx-1",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-fe3a3860.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeprofilecorrectionrequests.aspx-2",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-013a3d19.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeprofilecorrectionrequests.aspx-3",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-003a3b86.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeprofilecorrectionrequests.aspx-4",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-033a403f.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeprofilecorrectionrequests.aspx-5",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-023a3eac.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeprofilecorrectionrequests.aspx-6",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-053a4365.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-employeeprofilecorrectionrequests.aspx-7",
+      "kind": "type",
+      "label": "EmployeeProfileCorrectionRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-043a41d2.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-logoff.aspx-1",
+      "kind": "type",
+      "label": "Logoff",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-f42e1bb2.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-logoff.aspx-2",
+      "kind": "type",
+      "label": "Logoff",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-f32e1a1f.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-1",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1876ba6a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-2",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1776b8d7.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-3",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1676b744.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-4",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1576b5b1.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-5",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1476b41e.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-6",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1376b28b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-7",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1276b0f8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-8",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1176af65.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-9",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1076add2.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-10",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-dce75bae.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-11",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-dde75d41.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-12",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-dae75888.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-13",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-dbe75a1b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-14",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-e0e761fa.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-15",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-e1e7638d.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-manageusers.aspx-16",
+      "kind": "type",
+      "label": "ManageUsers",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-dee75ed4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulecatalog.aspx-1",
+      "kind": "type",
+      "label": "ModuleCatalog",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-6e3acfa8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulecatalog.aspx-2",
+      "kind": "type",
+      "label": "ModuleCatalog",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-713ad461.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulecatalog.aspx-3",
+      "kind": "type",
+      "label": "ModuleCatalog",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-703ad2ce.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulecatalog.aspx-4",
+      "kind": "type",
+      "label": "ModuleCatalog",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-733ad787.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulecatalog.aspx-5",
+      "kind": "type",
+      "label": "ModuleCatalog",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-723ad5f4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulecatalog.aspx-6",
+      "kind": "type",
+      "label": "ModuleCatalog",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-753adaad.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-moduledefinitions.aspx-1",
+      "kind": "type",
+      "label": "ModuleDefinitions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-f1b3d29b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-moduledefinitions.aspx-2",
+      "kind": "type",
+      "label": "ModuleDefinitions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-f2b3d42e.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-moduledefinitions.aspx-3",
+      "kind": "type",
+      "label": "ModuleDefinitions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-f3b3d5c1.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-moduledefinitions.aspx-4",
+      "kind": "type",
+      "label": "ModuleDefinitions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-f4b3d754.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-moduledefs.ascx-1",
+      "kind": "type",
+      "label": "ModuleDefs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-a70c2bd4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-moduledefs.ascx-2",
+      "kind": "type",
+      "label": "ModuleDefs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-aa0c308d.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-moduledefs.ascx-3",
+      "kind": "type",
+      "label": "ModuleDefs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-a90c2efa.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-moduledefs.ascx-4",
+      "kind": "type",
+      "label": "ModuleDefs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-a40c271b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulesettings.aspx-1",
+      "kind": "type",
+      "label": "ModuleSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-b326c4a8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulesettings.aspx-2",
+      "kind": "type",
+      "label": "ModuleSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-b626c961.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulesettings.aspx-3",
+      "kind": "type",
+      "label": "ModuleSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-b526c7ce.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulesettings.aspx-4",
+      "kind": "type",
+      "label": "ModuleSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-b826cc87.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulesettings.aspx-5",
+      "kind": "type",
+      "label": "ModuleSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-b726caf4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-modulesettings.aspx-6",
+      "kind": "type",
+      "label": "ModuleSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-ba26cfad.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-notimplemented.aspx-1",
+      "kind": "type",
+      "label": "NotImplemented",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c34fb5fe.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-notimplemented.aspx-2",
+      "kind": "type",
+      "label": "NotImplemented",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c24fb46b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-notimplemented.aspx-3",
+      "kind": "type",
+      "label": "NotImplemented",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c14fb2d8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-notimplemented.aspx-4",
+      "kind": "type",
+      "label": "NotImplemented",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c84fbddd.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-notimplemented.aspx-5",
+      "kind": "type",
+      "label": "NotImplemented",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c74fbc4a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-operationaudits.aspx-1",
+      "kind": "type",
+      "label": "OperationAudits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-e3114592.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-operationaudits.aspx-2",
+      "kind": "type",
+      "label": "OperationAudits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-e21143ff.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-operationaudits.aspx-3",
+      "kind": "type",
+      "label": "OperationAudits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-e111426c.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-operationaudits.aspx-4",
+      "kind": "type",
+      "label": "OperationAudits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-e01140d9.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-operationaudits.aspx-5",
+      "kind": "type",
+      "label": "OperationAudits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-df113f46.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-operationaudits.aspx-6",
+      "kind": "type",
+      "label": "OperationAudits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-de113db3.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-organizationunitedit.aspx-1",
+      "kind": "type",
+      "label": "OrganizationUnitEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-33b7e9e0.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-organizationunitedit.aspx-2",
+      "kind": "type",
+      "label": "OrganizationUnitEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-36b7ee99.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-organizationunitedit.aspx-3",
+      "kind": "type",
+      "label": "OrganizationUnitEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-35b7ed06.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-organizationunitedit.aspx-4",
+      "kind": "type",
+      "label": "OrganizationUnitEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-38b7f1bf.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-organizationunitedit.aspx-5",
+      "kind": "type",
+      "label": "OrganizationUnitEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-37b7f02c.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-1",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-91560388.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-2",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-94560841.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-3",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-935606ae.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-4",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-96560b67.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-5",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-955609d4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-6",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-98560e8d.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-7",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-97560cfa.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-8",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8a55f883.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-9",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8955f6f0.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-10",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8267daa8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-11",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8367dc3b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-12",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8467ddce.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-13",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8567df61.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-register.aspx-14",
+      "kind": "type",
+      "label": "Register",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8667e0f4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-roles.ascx-1",
+      "kind": "type",
+      "label": "Roles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c9e35511.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-roles.ascx-2",
+      "kind": "type",
+      "label": "Roles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c6e35058.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-roles.ascx-3",
+      "kind": "type",
+      "label": "Roles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c7e351eb.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-roles.ascx-4",
+      "kind": "type",
+      "label": "Roles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-cce359ca.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-securityroles.aspx-1",
+      "kind": "type",
+      "label": "SecurityRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-3b8785c4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-securityroles.aspx-2",
+      "kind": "type",
+      "label": "SecurityRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-3e878a7d.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-securityroles.aspx-3",
+      "kind": "type",
+      "label": "SecurityRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-3d8788ea.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-securityroles.aspx-4",
+      "kind": "type",
+      "label": "SecurityRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-3887810b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-securityroles.aspx-5",
+      "kind": "type",
+      "label": "SecurityRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-37877f78.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-securityroles.aspx-6",
+      "kind": "type",
+      "label": "SecurityRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-3a878431.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-securityroles.aspx-7",
+      "kind": "type",
+      "label": "SecurityRoles",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-3987829e.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-sitesettings.ascx-1",
+      "kind": "type",
+      "label": "SiteSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-90e38032.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-sitesettings.ascx-2",
+      "kind": "type",
+      "label": "SiteSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8fe37e9f.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-sitesettings.ascx-3",
+      "kind": "type",
+      "label": "SiteSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8ee37d0c.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-sitesettings.ascx-4",
+      "kind": "type",
+      "label": "SiteSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-8de37b79.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-systemhealth.aspx-1",
+      "kind": "type",
+      "label": "SystemHealth",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c2ab490e.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-systemhealth.aspx-2",
+      "kind": "type",
+      "label": "SystemHealth",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c1ab477b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-systemhealth.aspx-3",
+      "kind": "type",
+      "label": "SystemHealth",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c0ab45e8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-systemhealth.aspx-4",
+      "kind": "type",
+      "label": "SystemHealth",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c7ab50ed.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-systemhealth.aspx-5",
+      "kind": "type",
+      "label": "SystemHealth",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-c6ab4f5a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tablayout.aspx-1",
+      "kind": "type",
+      "label": "TabLayout",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-ea47aab6.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tablayout.aspx-2",
+      "kind": "type",
+      "label": "TabLayout",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-e947a923.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tablayout.aspx-3",
+      "kind": "type",
+      "label": "TabLayout",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-e847a790.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tablayout.aspx-4",
+      "kind": "type",
+      "label": "TabLayout",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-ef47b295.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tablayout.aspx-5",
+      "kind": "type",
+      "label": "TabLayout",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-ee47b102.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tablayout.aspx-6",
+      "kind": "type",
+      "label": "TabLayout",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-ed47af6f.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tabs.ascx-1",
+      "kind": "type",
+      "label": "Tabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-19080a3c.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tabs.ascx-2",
+      "kind": "type",
+      "label": "Tabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1c080ef5.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tabs.ascx-3",
+      "kind": "type",
+      "label": "Tabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1b080d62.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-tabs.ascx-4",
+      "kind": "type",
+      "label": "Tabs",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-16080583.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-1",
+      "kind": "type",
+      "label": "ThemeSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-d20f1b1d.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-2",
+      "kind": "type",
+      "label": "ThemeSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-cf0f1664.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-3",
+      "kind": "type",
+      "label": "ThemeSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-d00f17f7.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-4",
+      "kind": "type",
+      "label": "ThemeSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-cd0f133e.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-themesettings.aspx-5",
+      "kind": "type",
+      "label": "ThemeSettings",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-ce0f14d1.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-useremployeebindingedit.aspx-1",
+      "kind": "type",
+      "label": "UserEmployeeBindingEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-22353595.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-useremployeebindingedit.aspx-2",
+      "kind": "type",
+      "label": "UserEmployeeBindingEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1f3530dc.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-useremployeebindingedit.aspx-3",
+      "kind": "type",
+      "label": "UserEmployeeBindingEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-2035326f.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-useremployeebindingedit.aspx-4",
+      "kind": "type",
+      "label": "UserEmployeeBindingEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1d352db6.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-useremployeebindingedit.aspx-5",
+      "kind": "type",
+      "label": "UserEmployeeBindingEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1e352f49.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-useremployeebindingedit.aspx-6",
+      "kind": "type",
+      "label": "UserEmployeeBindingEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1b352a90.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-useremployeebindingedit.aspx-7",
+      "kind": "type",
+      "label": "UserEmployeeBindingEdit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-1c352c23.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-users.ascx-1",
+      "kind": "type",
+      "label": "Users",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-d22d074a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-users.ascx-2",
+      "kind": "type",
+      "label": "Users",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-d12d05b7.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-users.ascx-3",
+      "kind": "type",
+      "label": "Users",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-d02d0424.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-users.ascx-4",
+      "kind": "type",
+      "label": "Users",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-cf2d0291.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-1",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-598ff9f4.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-2",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-5c8ffead.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-3",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-5b8ffd1a.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-4",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-568ff53b.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-5",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-558ff3a8.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-6",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-588ff861.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-7",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-578ff6ce.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-8",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-528feeef.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.admin:type:hia-document-dotnetdoc-markup-comment-src-portal-admin-workitems.aspx-9",
+      "kind": "type",
+      "label": "WorkItems",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.admin-type-hia-document-518fed5c.json"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordpublickey",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordpublickey:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordpublickey.-ctor-system.string-system.int32",
+      "kind": "entry",
+      "label": "#ctor",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordpublickey.-ctor-system.string-system.int32",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordpublickey.-ctor-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordpublic-cda281dc.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordpublickey:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublickey.keysizebits",
+      "kind": "entry",
+      "label": "KeySizeBits",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublickey.keysizebits",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalloginpasswordpublickey.keysizebits",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublic-64843b4d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordpublickey:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublickey.publickeypem",
+      "kind": "entry",
+      "label": "PublicKeyPem",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublickey.publickeypem",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.portalloginpasswordpublickey.publickeypem",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublic-5dd20a3b.html"
+    }
+  ]
+}

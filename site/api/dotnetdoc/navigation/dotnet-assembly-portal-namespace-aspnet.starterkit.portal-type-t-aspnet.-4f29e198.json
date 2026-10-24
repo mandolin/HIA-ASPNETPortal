@@ -1,0 +1,33 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookiesettings",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookiesettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookiesettings.applyto-system.web.httpcookie",
+      "kind": "entry",
+      "label": "ApplyTo",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookiesettings.applyto-system.web.httpcookie",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookiesettings.applyto-system.web.httpcookie",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-908f863c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookiesettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookiesettings.resolve",
+      "kind": "entry",
+      "label": "Resolve",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookiesettings.resolve",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookiesettings.resolve",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-df707cfb.html"
+    }
+  ]
+}

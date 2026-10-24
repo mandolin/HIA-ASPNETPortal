@@ -1,0 +1,20 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.icontaineraccessor",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.icontaineraccessor:entry:hia-document:dotnet-p-aspnet.starterkit.portal.icontaineraccessor.container",
+      "kind": "entry",
+      "label": "Container",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.icontaineraccessor.container",
+      "sourcePath": "src/Portal/bin/Portal.xml",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.icontaineraccessor.container",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.icontaineraccessor.contai-91cbd34b.html"
+    }
+  ]
+}

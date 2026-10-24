@@ -1,0 +1,150 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemtargetresolver.getcapabilityid-system.string",
+      "kind": "entry",
+      "label": "GetCapabilityId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemtargetresolver.getcapabilityid-system.string",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemtargetresolver.getcapabilityid-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemtargetresol-a9fd027f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnoaccessibletab",
+      "kind": "entry",
+      "label": "ReasonNoAccessibleTab",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnoaccessibletab",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnoaccessibletab",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-e227673c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnodesktopentry",
+      "kind": "entry",
+      "label": "ReasonNoDesktopEntry",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnodesktopentry",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnodesktopentry",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-ad13ff63.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnomoduledefinition",
+      "kind": "entry",
+      "label": "ReasonNoModuleDefinition",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnomoduledefinition",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnomoduledefinition",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-17761806.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnomoduleinstance",
+      "kind": "entry",
+      "label": "ReasonNoModuleInstance",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnomoduleinstance",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnomoduleinstance",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-cc7746b8.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnoprimarymodule",
+      "kind": "entry",
+      "label": "ReasonNoPrimaryModule",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnoprimarymodule",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonnoprimarymodule",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-25572d0b.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonresolutionfailed",
+      "kind": "entry",
+      "label": "ReasonResolutionFailed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonresolutionfailed",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonresolutionfailed",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-de6ac6d3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonsourceunavailable",
+      "kind": "entry",
+      "label": "ReasonSourceUnavailable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonsourceunavailable",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonsourceunavailable",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-b6993329.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonunknownbusinesskind",
+      "kind": "entry",
+      "label": "ReasonUnknownBusinessKind",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonunknownbusinesskind",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonunknownbusinesskind",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-f206e4d2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonunknowncapability",
+      "kind": "entry",
+      "label": "ReasonUnknownCapability",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresolver.reasonunknowncapability",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemtargetresolver.reasonunknowncapability",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemtargetresol-4f3c9af0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemtargetresolver:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemtargetresolver.resolve-system.string-aspnet.starterkit.portal.iportalmoduletargetsource",
+      "kind": "entry",
+      "label": "Resolve",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemtargetresolver.resolve-system.string-aspnet.starterkit.portal.iportalmoduletargetsource",
+      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemtargetresolver.resolve-system.string-aspnet.starterkit.portal.iportalmoduletargetsource",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemtargetresol-b071cce6.html"
+    }
+  ]
+}
