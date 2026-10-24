@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "project": {
+    "id": "hia-aspnetportal",
+    "name": "HIA-ASPNETPortal",
+    "title": "HIA-ASPNETPortal 代码文档 · Code Documentation",
+    "defaultLocale": "zh-CN",
+    "locales": ["zh-CN", "en"]
+  },
+  "metadata": {
+    "note": "由 Build-PortalDotNetDocPilot.ps1 生成的 dotnetdoc.producer-result.json 聚合；来源为 4 个 API 工程 + 标记层 + ASP.NET 表面 + 工程关系（共 14 工件 / 7 双语半边）。"
+  },
+  "inputs": [
+    {
+      "kind": "documentation-producer-result",
+      "path": "temp/documentation/dotnetdoc/dotnetdoc.producer-result.json",
+      "domain": "dotnet",
+      "title": "HIA-ASPNETPortal .NET 代码文档（全工程聚合）"
+    }
+  ]
+}

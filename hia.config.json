@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "0.1.0",
+  "docs": {
+    "renderer": {
+      "projectLayout": "split-site",
+      "title": "HIA-ASPNETPortal 代码文档 · Code Documentation",
+      "includeThemeAssets": true
+    },
+    "theme": {
+      "name": "default",
+      "scheme": "system",
+      "colors": {
+        "accent": "#0f4f82",
+        "accentContrast": "#ffffff",
+        "accentSoft": "#e6eef6",
+        "accentHover": "#0d4068"
+      }
+    },
+    "source": {
+      "presentation": "link"
+    }
+  }
+}
