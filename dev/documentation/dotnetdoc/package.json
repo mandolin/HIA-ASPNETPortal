@@ -18,7 +18,7 @@
     "fast-xml-parser": "5.7.0"
   },
   "devDependencies": {
-    "@hia-doc/cli": "^0.1.5",
-    "@hia-doc/dotnetdoc-runner": "^0.1.8"
+    "@hia-doc/cli": "^0.1.7",
+    "@hia-doc/dotnetdoc-runner": "^0.1.10"
   }
 }
