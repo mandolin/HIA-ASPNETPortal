@@ -35,12 +35,12 @@ paths.
 
 ## Published code documentation (DotNetDoc)
 
-- Entry: `/api/dotnetdoc/` (that page lists every half and language)
+- Entry: `/api/dotnetdoc/` (**multi-page site**: the entry page is a navigation shell with a type tree and search; every type/member gets its own page)
 - Coverage: **four API projects** (`Portal` / `Portal.Components` / `Portal.Components.Data` / `Portal.Components.Data1`) and the **markup comments**; the source comments follow the bilingual `<lang><zh-CN>…<en>…</lang>` convention.
 - **[Measured coverage, reviewed 2026-10-22] this is *partially* bilingual, not fully bilingual**: about **62% of the text spans on the Chinese pages actually contain Chinese**; for the remaining ~38% of members only an English comment exists, and **the Chinese page shows the English text verbatim**. Per half: `markup` 51.2%, `api/Portal` 61.0%, `api/Portal.Components` 62.7%, `api/Portal.Components.Data` 66.7%, `api/Portal.Components.Data1` 67.9%. **This is the honestly recorded state rather than a defect** — adding Chinese comments is a separate piece of work (it changes C# source comments, out of scope for this cycle).
 - **The surface and project-discovery halves are English-only**: they are structural descriptions (route inventory, solution composition), not human-written comments, so there is no Chinese content. **Published as English honestly, rather than fabricating Chinese directories to look bilingual.**
-- Size: about 16.8 MB of rendered artifacts (versus roughly 0.5 MB for the JSDoc half).
-- Refresh: `dev/scripts/Publish-PortalDotNetDoc.ps1` (first run `Build-PortalDotNetDocPilot.ps1` to produce the HIA artifacts; this script then renders each half in **that artifact's own declared languages** into `site/api/dotnetdoc/`).
+- Size: about 91 MB of rendered artifacts (11475 files / 5366 entry pages). The single-page era was about 16.8 MB (15 huge pages, 4.58 MB for the Chinese Portal page alone): **total bytes grew 5x, but per-load cost dropped from MB to KB** — the latter is what readers actually feel.
+- Refresh: `dev/scripts/Publish-PortalDotNetDoc.ps1` (first run `Build-PortalDotNetDocPilot.ps1` to produce the HIA artifacts; this script then renders **once via `--project-manifest` into a multi-page site** under `site/api/dotnetdoc/`).
 
 ## Refresh procedure (snapshot mechanism)
 
