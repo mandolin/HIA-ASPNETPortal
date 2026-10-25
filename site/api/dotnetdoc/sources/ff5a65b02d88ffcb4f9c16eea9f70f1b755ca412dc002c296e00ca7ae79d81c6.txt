@@ -1,0 +1,29 @@
+        public IList<CollaborationItemParticipantInfo> GetParticipants(long itemId)
+        {
+            if (itemId <= 0 || !HasTable("PortalBiz_CollaborationItemParticipants"))
+            {
+                return new List<CollaborationItemParticipantInfo>();
+            }
+
+            try
+            {
+                return context.Database.SqlQuery<CollaborationItemParticipantInfo>(@"
+SELECT
+    [P].[ParticipantId],
+    [P].[ItemId],
+    [P].[UserId],
+    [U].[Name] AS [UserName],
+    [P].[ParticipantRoleKey],
+    [P].[CreatedUtc]
+FROM [dbo].[PortalBiz_CollaborationItemParticipants] AS [P]
+LEFT JOIN [dbo].[Portal_Users] AS [U]
+    ON [U].[UserID] = [P].[UserId]
+WHERE [P].[ItemId] = @ItemId
+ORDER BY [P].[ParticipantId];",
+                    new SqlParameter("@ItemId", itemId)).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<CollaborationItemParticipantInfo>();
+            }
+        }

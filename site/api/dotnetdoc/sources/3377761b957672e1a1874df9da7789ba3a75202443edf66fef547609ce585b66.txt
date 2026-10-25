@@ -1,0 +1,19 @@
+        private string LocalizeBusinessKind(string businessKind)
+        {
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.CollaborationItem, StringComparison.Ordinal))
+            {
+                return GetResource("MyWorkItems_KindCollaborationItem");
+            }
+
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.BusinessApplication, StringComparison.Ordinal))
+            {
+                return GetResource("MyWorkItems_KindBusinessApplication");
+            }
+
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest, StringComparison.Ordinal))
+            {
+                return GetResource("MyWorkItems_KindEmployeeProfileCorrectionRequest");
+            }
+
+            return Server.HtmlEncode(businessKind ?? string.Empty);
+        }

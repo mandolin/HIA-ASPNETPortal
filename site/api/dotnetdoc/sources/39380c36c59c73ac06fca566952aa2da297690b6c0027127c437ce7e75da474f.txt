@@ -1,0 +1,10 @@
+        private static string NormalizeActor(string value)
+        {
+            string actor = NormalizeOptional(value);
+            if (string.IsNullOrEmpty(actor))
+            {
+                return "admin";
+            }
+
+            return actor.Length > 100 ? actor.Substring(0, 100) : actor;
+        }

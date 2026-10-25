@@ -1,0 +1,8 @@
+        private void ShowMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>提示统一 HTML 编码，避免站点名称或诊断编号被当作标记输出。</zh-CN>
+            //   <en>HTML-encode messages so a site name or diagnostic identifier cannot be emitted as markup.</en>
+            // </lang>
+            Message.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

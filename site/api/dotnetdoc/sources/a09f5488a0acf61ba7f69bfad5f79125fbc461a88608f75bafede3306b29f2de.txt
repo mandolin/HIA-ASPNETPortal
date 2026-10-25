@@ -1,0 +1,13 @@
+        public static bool IsNavigable(PortalNavigationEntry entry)
+        {
+            // <lang>
+            //   <zh-CN>以 .aspx 作为可导航目标的判定依据：Admin/*.ascx 是模块控件，直接生成 href 会指向不可访问的资源。</zh-CN>
+            //   <en>Use the .aspx extension as the navigability test: Admin/*.ascx are module controls, and generating an href to them would point at an unreachable resource.</en>
+            // </lang>
+            if (entry == null || string.IsNullOrWhiteSpace(entry.Target))
+            {
+                return false;
+            }
+
+            return entry.Target.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase);
+        }

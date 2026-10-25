@@ -1,0 +1,1 @@
+        public string MobileSummary { get; set; }

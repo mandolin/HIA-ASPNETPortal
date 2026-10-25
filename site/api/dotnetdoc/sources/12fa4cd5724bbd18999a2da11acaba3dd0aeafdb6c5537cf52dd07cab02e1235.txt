@@ -1,0 +1,11 @@
+        private string GetCurrentActor()
+        {
+            // <lang>
+            //   <zh-CN>审计操作者只来自当前身份；缺失时保留固定 admin 兼容值，不采用表单输入。</zh-CN>
+            //   <en>Take the audit actor only from the current identity; preserve the fixed admin compatibility value when missing, never using form input.</en>
+            // </lang>
+            return Context.User == null || Context.User.Identity == null ||
+                   string.IsNullOrWhiteSpace(Context.User.Identity.Name)
+                ? "admin"
+                : Context.User.Identity.Name;
+        }

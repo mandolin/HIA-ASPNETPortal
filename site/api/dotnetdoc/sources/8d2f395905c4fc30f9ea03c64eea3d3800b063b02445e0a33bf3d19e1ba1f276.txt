@@ -1,0 +1,18 @@
+    public enum PortalDatabasePurpose
+    {
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>门户正常运行使用的主业务数据库。</zh-CN>
+        /// <en>The primary business database used by normal portal runtime.</en>
+        /// </lang>
+        /// </summary>
+        PrimaryPortal = 0,
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>仅用于开发或测试中 provider 能力验证的数据库；枚举值本身不授予连接或发布权限。</zh-CN>
+        /// <en>A database used only for provider-capability verification in development or testing; the enum value itself grants no connection or publishing permission.</en>
+        /// </lang>
+        /// </summary>
+        ProviderProof = 1
+    }

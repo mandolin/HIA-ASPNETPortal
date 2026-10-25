@@ -1,0 +1,2 @@
+        [StringLength(100)]
+        public string EmployeeCode { get; set; }

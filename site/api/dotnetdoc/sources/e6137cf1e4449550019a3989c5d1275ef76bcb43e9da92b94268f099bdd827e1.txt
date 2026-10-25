@@ -1,0 +1,70 @@
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    internal class DesktopBanner {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal DesktopBanner() {
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>返回此强类型资源访问器使用的缓存 ResourceManager 实例。</zh-CN>
+        ///   <en>Returns the cached ResourceManager instance used by this strongly typed resource accessor.</en>
+        /// </lang>
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ASPNET.StarterKit.Portal.DesktopBanner", typeof(DesktopBanner).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>重写当前线程的 CurrentUICulture，影响此强类型资源类执行的所有资源查找。</zh-CN>
+        ///   <en>Overrides the current thread CurrentUICulture for all lookups performed by this strongly typed resource class.</en>
+        /// </lang>
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Welcome {0}!</zh-CN>
+        ///   <en>Looks up a localized string similar to: Welcome {0}!</en>
+        /// </lang>
+        /// </summary>
+        internal static string WelcomeMessage {
+            get {
+                return ResourceManager.GetString("WelcomeMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找页眉注销链接的本地化文案；仅 Forms 身份会渲染该链接。</zh-CN>
+        ///   <en>Looks up the localized text of the header logoff link; only Forms identities render that link.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Logoff {
+            get {
+                return ResourceManager.GetString("Logoff", resourceCulture);
+            }
+        }
+    }

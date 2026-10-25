@@ -1,0 +1,1 @@
+        public DbSet<TabItem> Tabs { get; set; }

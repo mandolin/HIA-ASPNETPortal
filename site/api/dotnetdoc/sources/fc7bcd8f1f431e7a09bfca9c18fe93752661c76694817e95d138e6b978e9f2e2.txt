@@ -1,0 +1,35 @@
+        private void BindRequests()
+        {
+            if (CorrectionRequestDb == null)
+            {
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered);
+                return;
+            }
+
+            if (!CorrectionRequestDb.IsSchemaAvailable())
+            {
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageSchemaUnavailable);
+                return;
+            }
+
+            IList<EmployeeProfileCorrectionRequestInfo> requests = CorrectionRequestDb.GetAdminRequests(
+                StatusFilterList.SelectedValue,
+                PageSize);
+            List<EmployeeProfileCorrectionAdminRow> rows = requests
+                .Select(request => new EmployeeProfileCorrectionAdminRow(request)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it, and <c>null</c> suppresses it on failure paths.</en>
+            // </lang>
+            requestsEmptyStateRowCount = rows.Count;
+
+            RequestsRepeater.DataSource = rows;
+            RequestsRepeater.DataBind();
+
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_EmployeeProfileCorrectionRequests_MessagePageInfo,
+                PageSize,
+                requests.Count);
+        }

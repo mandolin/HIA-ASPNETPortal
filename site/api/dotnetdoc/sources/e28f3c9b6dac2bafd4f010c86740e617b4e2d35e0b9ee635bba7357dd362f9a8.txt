@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_LabelOrganization {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_LabelOrganization", resourceCulture);
+            }
+        }

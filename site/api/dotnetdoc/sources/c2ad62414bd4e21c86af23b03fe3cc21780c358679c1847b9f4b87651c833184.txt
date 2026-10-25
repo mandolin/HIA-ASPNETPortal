@@ -1,0 +1,2 @@
+        [Dependency]
+        public IPortalSecurity PortalSecurity { private get; set; }

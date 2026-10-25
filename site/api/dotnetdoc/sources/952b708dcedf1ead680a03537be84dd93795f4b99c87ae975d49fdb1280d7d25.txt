@@ -1,0 +1,7 @@
+        private string GetCurrentActor()
+        {
+            return Context.User == null || Context.User.Identity == null ||
+                   string.IsNullOrWhiteSpace(Context.User.Identity.Name)
+                ? "admin"
+                : Context.User.Identity.Name;
+        }

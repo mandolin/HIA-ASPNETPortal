@@ -1,0 +1,14 @@
+        protected void CancelBtn_Click(object sender, EventArgs e)
+        {
+            if (!TryAuthorizeEditorForCurrentItem())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>取消只恢复详情动作区，不清理数据库或请求标识；当前页面仍指向同一讨论消息。</zh-CN>
+            //   <en>Cancel only restores the detail action area and does not clear database state or request identifiers; the page still points to the same discussion message.</en>
+            // </lang>
+            EditPanel.Visible = false;
+            ButtonPanel.Visible = true;
+        }

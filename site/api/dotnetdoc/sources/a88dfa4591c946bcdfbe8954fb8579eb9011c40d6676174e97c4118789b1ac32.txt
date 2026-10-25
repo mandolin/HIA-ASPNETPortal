@@ -1,0 +1,21 @@
+        private void BindUserSummary(int userId)
+        {
+            if (userId <= 0)
+            {
+                UserSummaryText.Text = string.Empty;
+                ManageUserLink.Visible = false;
+                return;
+            }
+
+            IUserItem user = UsersDb.FindUserById(userId);
+            if (user == null)
+            {
+                UserSummaryText.Text = lang.Admin_UserEmployeeBindingEdit_MessageUserNotFound;
+                ManageUserLink.Visible = false;
+                return;
+            }
+
+            UserSummaryText.Text = Server.HtmlEncode(user.Name + " / " + user.Email);
+            ManageUserLink.NavigateUrl = ResolveUrl("~/Admin/ManageUsers.aspx?userId=" + userId.ToString(CultureInfo.InvariantCulture));
+            ManageUserLink.Visible = true;
+        }

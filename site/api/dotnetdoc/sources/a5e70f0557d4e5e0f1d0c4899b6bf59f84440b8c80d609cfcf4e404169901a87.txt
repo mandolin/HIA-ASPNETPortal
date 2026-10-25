@@ -1,0 +1,2 @@
+        [Dependency]
+        public IEmployeeProfileConfirmationDb EmployeeProfileConfirmationDb { private get; set; }

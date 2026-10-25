@@ -1,0 +1,5 @@
+        private static readonly string[] CommonFallbackEntryKeys =
+        {
+            "Admin.SystemHealth",
+            "Admin.ModuleCatalog"
+        };

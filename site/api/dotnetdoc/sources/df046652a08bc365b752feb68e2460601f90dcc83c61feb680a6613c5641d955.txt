@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_MessageValidTitle {
+            get {
+                return ResourceManager.GetString("LegacyEdit_MessageValidTitle", resourceCulture);
+            }
+        }

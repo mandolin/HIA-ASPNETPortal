@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_ColumnPeriod {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnPeriod", resourceCulture);
+            }
+        }

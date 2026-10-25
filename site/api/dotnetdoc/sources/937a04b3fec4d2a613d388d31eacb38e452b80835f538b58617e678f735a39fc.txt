@@ -1,0 +1,26 @@
+        private PortalLoginIdentifierResolution(bool found, bool ambiguous, bool hasDecision, int userId)
+        {
+            // <lang>
+            //   <zh-CN>保存唯一命中状态；false 不区分未命中和歧义，需结合其他标志读取。</zh-CN>
+            //   <en>Store unique-found state; false alone does not distinguish no match from ambiguity and must be read with the other flags.</en>
+            // </lang>
+            Found = found;
+
+            // <lang>
+            //   <zh-CN>保存歧义状态；歧义绝不选择任一候选账号。</zh-CN>
+            //   <en>Store ambiguity state; ambiguity never selects either candidate account.</en>
+            // </lang>
+            Ambiguous = ambiguous;
+
+            // <lang>
+            //   <zh-CN>保存当前路径是否终止，供调用方决定是否继续尝试后续身份来源。</zh-CN>
+            //   <en>Store whether the current path is terminal so callers can decide whether to try subsequent identity sources.</en>
+            // </lang>
+            HasDecision = hasDecision;
+
+            // <lang>
+            //   <zh-CN>保存唯一命中的门户用户标识；非唯一结果固定为 0，不能作为登录主体使用。</zh-CN>
+            //   <en>Store the uniquely matched portal user id; non-unique results are fixed to 0 and cannot be used as a sign-in principal.</en>
+            // </lang>
+            UserId = userId;
+        }

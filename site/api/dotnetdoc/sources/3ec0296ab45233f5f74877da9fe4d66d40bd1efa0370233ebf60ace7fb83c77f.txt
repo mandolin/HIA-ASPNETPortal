@@ -1,0 +1,9 @@
+        private static int NormalizeTake(int take, int defaultValue)
+        {
+            if (take <= 0)
+            {
+                return defaultValue;
+            }
+
+            return Math.Min(take, 200);
+        }

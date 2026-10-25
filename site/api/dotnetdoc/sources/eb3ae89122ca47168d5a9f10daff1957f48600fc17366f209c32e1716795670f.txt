@@ -1,0 +1,1 @@
+        void UpdateModuleSetting(int moduleId, string key, string val);

@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>标题控件只连接既有 EditEvents 页面；列表绑定、过期筛选和权限判断仍由 code-behind 与数据服务负责。</zh-CN>
+        <en>The title control points only to the existing EditEvents page; list binding, expiry filtering, and permission decisions remain with code-behind and the data service.</en>
+    </lang>
+--%>

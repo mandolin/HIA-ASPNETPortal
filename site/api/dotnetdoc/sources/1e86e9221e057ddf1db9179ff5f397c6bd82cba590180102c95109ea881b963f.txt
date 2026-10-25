@@ -1,0 +1,6 @@
+    <%--
+      <lang>
+        <zh-CN>员工目录页只重构展示壳，数据读取、新增和编辑入口保持既有行为。</zh-CN>
+        <en>The employee directory page only rebuilds the presentation shell; data reads, creation, and edit entry behavior remain unchanged.</en>
+      </lang>
+    --%>

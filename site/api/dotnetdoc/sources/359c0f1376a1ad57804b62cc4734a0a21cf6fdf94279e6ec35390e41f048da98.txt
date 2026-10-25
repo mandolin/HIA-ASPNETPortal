@@ -1,0 +1,4 @@
+            internal PortalModuleTargetSource(MyWorkItems owner)
+            {
+                this.owner = owner;
+            }

@@ -1,0 +1,5 @@
+        internal static string Admin_ManageUsers_MessageApprovalFailed {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageApprovalFailed", resourceCulture);
+            }
+        }

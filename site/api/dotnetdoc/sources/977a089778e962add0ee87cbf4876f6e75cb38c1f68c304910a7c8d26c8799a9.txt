@@ -1,0 +1,8 @@
+        public ILinkItem GetSingleLink(int itemId)
+        {
+            // <lang>
+            //   <zh-CN>编辑入口的 ItemId 来自请求，未命中返回空值，让页面层统一输出低敏提示或拒绝访问响应。</zh-CN>
+            //   <en>The editor item identifier comes from a request; misses return null so the page layer can emit a low-sensitivity message or access-denied response.</en>
+            // </lang>
+            return _context.Links.SingleOrDefault(i => i.ItemId == itemId);
+        }

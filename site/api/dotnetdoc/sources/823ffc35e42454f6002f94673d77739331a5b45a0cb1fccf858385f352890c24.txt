@@ -1,0 +1,50 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先校验正整数文档标识，再检查内容和声明长度；任何不满足条件的路径统一返回 404。</zh-CN>
+            //   <en>Validate a positive document identifier first, then verify content and declared length; every invalid path returns the common 404.</en>
+            // </lang>
+            int documentId;
+            if (!int.TryParse(Request.Params["DocumentId"], out documentId) || documentId <= 0)
+            {
+                WriteNotFoundResponse();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>文档内容只通过数据服务读取，不从请求参数推断文件名或长度。</zh-CN>
+            //   <en>Read document content only through the data service; never infer filename or length from request parameters.</en>
+            // </lang>
+            IDocumentItemDetails item = DocumentDB.GetDocumentContent(documentId);
+            if (item == null || item.Content == null || !item.ContentSize.HasValue || item.ContentSize.Value <= 0)
+            {
+                WriteNotFoundResponse();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>响应字节数取实际内容和数据库声明长度的较小值，限制历史异常元数据影响响应体。</zh-CN>
+            //   <en>Bound the response byte count by the smaller of actual content and the database-declared length so abnormal legacy metadata cannot expand the body.</en>
+            // </lang>
+            int byteCount = Math.Min(item.Content.Length, item.ContentSize.Value);
+            if (byteCount <= 0)
+            {
+                WriteNotFoundResponse();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>下载文件名只来自统一策略，响应体只写入数据库中声明长度以内的字节，避免历史记录中的异常长度或文件名影响响应头。</zh-CN>
+            //   <en>The download filename comes only from the shared policy, and the response writes no more than the declared byte count so abnormal legacy length or filename data cannot shape headers unexpectedly.</en>
+            // </lang>
+            string downloadFileName = PortalDocumentPolicy.GetSafeDownloadFileName(item.FileNameUrl);
+            Response.Clear();
+            Response.BufferOutput = false;
+            Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.ContentType = "application/octet-stream";
+            Response.AddHeader("Content-Disposition", "attachment; filename=\"" + downloadFileName + "\"");
+            Response.AddHeader("Content-Length", byteCount.ToString());
+            Response.OutputStream.Write(item.Content, 0, byteCount);
+            Context.ApplicationInstance.CompleteRequest();
+        }

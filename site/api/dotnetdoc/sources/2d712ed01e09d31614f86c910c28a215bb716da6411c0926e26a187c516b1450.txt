@@ -1,0 +1,47 @@
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool IsEditable
+        {
+            get
+            {
+                // <lang>
+                //   <zh-CN>只在三态值未知时计算展示提示，避免同一控件实例反复读取 Portal 设置和执行角色匹配。</zh-CN>
+                //   <en>Compute the display hint only while the tri-state value is unknown, avoiding repeated Portal-settings reads and role matching within the same control instance.</en>
+                // </lang>
+                if (_isEditable == 0) // 如果状态未知
+                {
+                    // <lang>
+                    //   <zh-CN>读取当前请求已建立的 Portal 设置，仅消费 AlwaysShowEditButton 展示偏好；该对象不是模块授权结果。</zh-CN>
+                    //   <en>Read Portal settings already established for the current request and consume only the AlwaysShowEditButton display preference; the object is not a module-authorization result.</en>
+                    // </lang>
+                    var portalSettings = PortalContext.GetPortalSettings();
+
+                    // <lang>
+                    //   <zh-CN>全局强制显示时短路角色查询；否则用已绑定配置的编辑角色列表生成 UI 布尔提示，两条分支都不授权具体动作。</zh-CN>
+                    //   <en>Short-circuit role lookup when global display is forced; otherwise derive a UI Boolean hint from the bound configuration's edit-role list, with neither branch authorizing a concrete action.</en>
+                    // </lang>
+                    if (portalSettings.AlwaysShowEditButton || // 如果总是显示编辑按钮
+                        PortalSecurity.IsInRoles(_moduleConfiguration.AuthorizedEditRoles)) // 或者当前用户具有编辑权限
+                    {
+                        // <lang>
+                        //   <zh-CN>以 1 固化本实例的“显示”提示，不写入角色、配置或用户状态。</zh-CN>
+                        //   <en>Persist the per-instance “display” hint as 1 without writing role, configuration, or user state.</en>
+                        // </lang>
+                        _isEditable = 1; // 设置为可编辑
+                    }
+                    else
+                    {
+                        // <lang>
+                        //   <zh-CN>以 2 固化本实例的“隐藏”提示，避免 0 与 false 结果混淆并重复计算。</zh-CN>
+                        //   <en>Persist the per-instance “hide” hint as 2 so a false result is not confused with unknown 0 and recomputed.</en>
+                        // </lang>
+                        _isEditable = 2; // 设置为不可编辑
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>只把三态 1 投影为 true；返回值供界面使用，不携带授权证明。</zh-CN>
+                //   <en>Project only tri-state 1 to true; the return value is for UI use and carries no authorization proof.</en>
+                // </lang>
+                return (_isEditable == 1); // 返回是否可编辑
+            }
+        }

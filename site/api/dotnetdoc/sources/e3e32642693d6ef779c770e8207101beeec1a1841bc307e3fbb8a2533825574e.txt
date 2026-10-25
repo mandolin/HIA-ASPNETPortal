@@ -1,0 +1,1 @@
+        public DateTime StartUtc { get; set; }

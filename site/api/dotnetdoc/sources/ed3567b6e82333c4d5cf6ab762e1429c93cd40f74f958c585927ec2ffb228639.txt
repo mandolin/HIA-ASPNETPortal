@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel 进入图片配置的既有服务器流程；按钮不改变来源信任、尺寸校验或权限。</zh-CN>
+                    <en>Update and Cancel enter the existing server flow for image settings; the buttons do not change source trust, dimension validation, or authorization.</en>
+                </lang>
+            --%>

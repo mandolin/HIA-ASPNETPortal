@@ -1,0 +1,20 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每次请求先验证模块编辑权限和 Tab 归属，避免未验证上下文进入布局读写。</zh-CN>
+            //   <en>Validate module-edit permission and Tab ownership on every request before layout reads or writes use the context.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>首次请求绑定 Tab 设置、角色和窗格列表；回发保留用户当前选择。</zh-CN>
+            //   <en>Bind Tab settings, roles, and pane lists only on the initial request, preserving postback selections.</en>
+            // </lang>
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }

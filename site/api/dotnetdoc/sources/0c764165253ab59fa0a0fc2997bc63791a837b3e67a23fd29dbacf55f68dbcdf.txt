@@ -1,0 +1,37 @@
+        public static string CheckSqlConnection(string connectionString)
+        {
+            // <lang>
+            //   <zh-CN>空白连接串只写入固定“跳过”事实，不将配置值或其长度带入诊断输出。</zh-CN>
+            //   <en>A blank connection string records only the fixed “skipped” fact and does not put the configuration value or its length into diagnostics output.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                return Warn("DatabaseHealth", "SQL health check skipped because the connection string is empty.");
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>探针固定为短生命周期连接、无参数的 <c>SELECT 1</c> 和五秒命令超时；using 保证连接与命令在成功或异常后释放。</zh-CN>
+                //   <en>The probe is fixed to a short-lived connection, parameterless <c>SELECT 1</c>, and a five-second command timeout; using releases connection and command after success or failure.</en>
+                // </lang>
+                using (var connection = new SqlConnection(connectionString))
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT 1";
+                    command.CommandTimeout = 5;
+                    connection.Open();
+                    command.ExecuteScalar();
+                }
+
+                return Info("DatabaseHealth", "SQL health check passed.");
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>失败交给既有 Error 写入链净化、限长和隔离；不把数据库异常或连接串直接返回给健康检查调用方。</zh-CN>
+                //   <en>Route failure through the established Error write pipeline for sanitization, capping, and isolation; do not return database exception or connection string directly to the health-check caller.</en>
+                // </lang>
+                return Error("DatabaseHealth", "SQL health check failed.", exception);
+            }
+        }

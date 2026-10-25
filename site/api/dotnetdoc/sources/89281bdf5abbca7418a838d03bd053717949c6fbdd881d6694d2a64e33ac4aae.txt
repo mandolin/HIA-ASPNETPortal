@@ -1,0 +1,4 @@
+        protected int RecentRequestCount
+        {
+            get { return recentRequestRowCount; }
+        }

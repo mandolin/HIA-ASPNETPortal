@@ -1,0 +1,14 @@
+        public IEnumerable<string> GetRoleNamesByUser(string name)
+        {
+            return _context.Database.SqlQuery<string>(
+                @"
+SELECT [Roles].[RoleName]
+FROM [dbo].[Portal_Roles] AS [Roles]
+INNER JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+    ON [UserRoles].[RoleID] = [Roles].[RoleID]
+INNER JOIN [dbo].[Portal_Users] AS [Users]
+    ON [Users].[UserID] = [UserRoles].[UserID]
+WHERE [Users].[Name] = @p0 OR [Users].[Email] = @p0
+ORDER BY [Roles].[RoleName]",
+                name).ToList();
+        }

@@ -1,0 +1,7 @@
+        private void ShowUnavailable(string message)
+        {
+            ShowMessage(message, true);
+            BindButton.Enabled = false;
+            EndBindingButton.Enabled = false;
+            CurrentBindingText.Text = lang.Admin_UserEmployeeBindingEdit_MessageUnavailable;
+        }

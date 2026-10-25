@@ -1,0 +1,5 @@
+        internal static string ExpenseReimbursement_CategoryOffice {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_CategoryOffice", resourceCulture);
+            }
+        }

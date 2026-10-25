@@ -1,0 +1,7 @@
+        private bool HasUserRole(int roleId, int userId)
+        {
+            return _context.Database.SqlQuery<int>(
+                "SELECT CASE WHEN EXISTS (SELECT 1 FROM [dbo].[Portal_UserRoles] WHERE [UserID] = @p0 AND [RoleID] = @p1) THEN 1 ELSE 0 END",
+                userId,
+                roleId).Single() == 1;
+        }

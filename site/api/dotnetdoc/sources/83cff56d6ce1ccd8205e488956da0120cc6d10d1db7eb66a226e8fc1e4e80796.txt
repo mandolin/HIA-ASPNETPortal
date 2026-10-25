@@ -1,0 +1,41 @@
+        private List<long> FilterVisibleItemIds(List<long> itemIds, CollaborationItemActorAuthorization actor)
+        {
+            List<long> visibleIds = new List<long>();
+            if (actor == null)
+            {
+                return visibleIds;
+            }
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            string itemIdList = BuildItemIdParameterList(itemIds, parameters);
+
+            // <lang>
+            //   <zh-CN>一次读取全部事项事实（上限取请求条数），随后在内存中逐条判定；事项缺失即视为不可见，与逐条路径一致。</zh-CN>
+            //   <en>Read every item fact in one pass (taking at most the requested count) and then decide per item in memory; a missing item counts as invisible, matching the per-item path.</en>
+            // </lang>
+            IList<CollaborationItemInfo> items = QueryItems(
+                @"
+WHERE [Item].[ItemId] IN (" + itemIdList + ")",
+                itemIds.Count,
+                parameters.ToArray());
+
+            Dictionary<long, CollaborationItemInfo> itemsById = new Dictionary<long, CollaborationItemInfo>();
+            foreach (CollaborationItemInfo item in items)
+            {
+                if (item != null && !itemsById.ContainsKey(item.ItemId))
+                {
+                    itemsById[item.ItemId] = item;
+                }
+            }
+
+            foreach (long itemId in itemIds)
+            {
+                CollaborationItemInfo item;
+                if (itemsById.TryGetValue(itemId, out item) && CanParticipate(item, actor) && CanView(item, actor))
+                {
+                    visibleIds.Add(itemId);
+                }
+            }
+
+            return visibleIds;
+        }

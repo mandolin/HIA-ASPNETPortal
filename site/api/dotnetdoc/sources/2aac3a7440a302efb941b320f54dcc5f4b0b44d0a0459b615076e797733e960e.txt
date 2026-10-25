@@ -1,0 +1,8 @@
+        public DiscussionsDb(string connectionString)
+        {
+            // <lang>
+            //   <zh-CN>保存已由外部配置边界解析出的连接串引用；构造阶段不打开 SQL 连接，避免 DI 创建时产生隐式数据库 I/O。</zh-CN>
+            //   <en>Store the connection string reference already resolved by the external-configuration boundary; construction does not open SQL connections, avoiding implicit database I/O during DI creation.</en>
+            // </lang>
+            _connectionString = connectionString;
+        }

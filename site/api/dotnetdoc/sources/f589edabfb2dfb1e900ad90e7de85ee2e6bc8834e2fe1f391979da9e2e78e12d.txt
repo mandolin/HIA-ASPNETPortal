@@ -1,0 +1,1 @@
+        public string EntryKey { get; private set; }

@@ -1,0 +1,14 @@
+        private static string[] BuildPasswordPolicyContextTerms(
+            string loginName,
+            string displayName,
+            string nickname,
+            string email)
+        {
+            return new[]
+            {
+                loginName ?? string.Empty,
+                displayName ?? string.Empty,
+                nickname ?? string.Empty,
+                email ?? string.Empty
+            };
+        }

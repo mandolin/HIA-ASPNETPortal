@@ -1,0 +1,5 @@
+        internal static string EditHtml_PlaceholderAddContent {
+            get {
+                return ResourceManager.GetString("EditHtml_PlaceholderAddContent", resourceCulture);
+            }
+        }

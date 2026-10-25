@@ -1,0 +1,8 @@
+        protected string ChooseTarget()
+        {
+            // <lang>
+            //   <zh-CN>目标窗口跟随 URL 语义：站内编辑页保持当前上下文，外部或内容链接避免替换门户页。</zh-CN>
+            //   <en>The target follows URL semantics: the in-site edit page keeps the current context, while external or content links avoid replacing the portal page.</en>
+            // </lang>
+            return IsEditable ? "_self" : "_blank";
+        }

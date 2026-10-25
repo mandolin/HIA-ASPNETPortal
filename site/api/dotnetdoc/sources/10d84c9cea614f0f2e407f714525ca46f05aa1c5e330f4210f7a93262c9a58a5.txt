@@ -1,0 +1,5 @@
+        internal static string EditHtml_SectionTrustedHtml {
+            get {
+                return ResourceManager.GetString("EditHtml_SectionTrustedHtml", resourceCulture);
+            }
+        }

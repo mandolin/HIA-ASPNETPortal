@@ -1,0 +1,4 @@
+        public ExpenseReimbursementDb(PortalBizDbContext context)
+        {
+            this.context = context;
+        }

@@ -1,0 +1,18 @@
+        private bool TryNormalizeOptionalDeploymentPath(string value, out string normalizedPath)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                // <lang>
+                //   <zh-CN>XML 或 XSL 路径允许清空；空输入保存为空字符串且不触发文件探测。</zh-CN>
+                //   <en>XML or XSL paths may be cleared; blank input persists as an empty string and does not trigger file probing.</en>
+                // </lang>
+                normalizedPath = string.Empty;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非空路径必须通过可信部署资源策略，拒绝应用外路径、远程 URL 和不受信资源。</zh-CN>
+            //   <en>Non-empty paths must pass the trusted deployment-resource policy, rejecting outside-application paths, remote URLs, and untrusted resources.</en>
+            // </lang>
+            return PortalNavigationPolicy.TryNormalizeTrustedDeploymentResourcePath(value, Request, out normalizedPath);
+        }

@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>动作区是否可见由服务器角色和模块编辑上下文决定；隐藏或显示按钮都不替代后端授权检查。</zh-CN>
+                <en>The server decides action-area visibility from roles and module-edit context; hiding or showing a button does not replace backend authorization.</en>
+            </lang>
+        --%>

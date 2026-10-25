@@ -1,0 +1,6 @@
+        private void SetProfileInputsEnabled(bool enabled)
+        {
+            LoginName.Enabled = enabled;
+            DisplayName.Enabled = enabled;
+            Nickname.Enabled = enabled;
+        }

@@ -1,0 +1,149 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>顶栏依赖已在页面生命周期早期写入上下文的 PortalSettings；这里不重新构造配置，避免导航和模块区使用不同快照。</zh-CN>
+            //   <en>The header depends on PortalSettings already written into context earlier in the page lifecycle; it does not rebuild settings here, avoiding divergent snapshots between navigation and module content.</en>
+            // </lang>
+            var portalSettings = PortalContext.GetPortalSettings();
+
+            // <lang>
+            //   <zh-CN>站点名称来自当前门户配置，主题层只负责外观，不覆盖这里的业务文本。</zh-CN>
+            //   <en>The site name comes from the current Portal configuration; themes handle presentation only and do not override this business text.</en>
+            // </lang>
+            SiteName.Text = portalSettings.PortalName;
+
+            // <lang>
+            //   <zh-CN>登录区域兼容旧 Forms Authentication；匿名请求保持空白，避免主题布局展示伪登录状态。</zh-CN>
+            //   <en>The user area remains compatible with legacy Forms Authentication; anonymous requests stay blank so themed layouts do not show a false sign-in state.</en>
+            // </lang>
+            if (Request.IsAuthenticated)
+            {
+                WelcomeMessage.Text = string.Format(DesktopBanner.WelcomeMessage, Context.User.Identity.Name);
+
+                // <lang>
+                //   <zh-CN>只有 Forms 身份才输出注销链接，Windows/外部身份模式由上游认证机制处理退出。</zh-CN>
+                //   <en>Only Forms identities render the logoff link; Windows or external identity modes leave sign-out to the upstream authentication mechanism.</en>
+                // </lang>
+                if (Context.User.Identity.AuthenticationType == "Forms")
+                {
+                    string logoffUrl = HttpUtility.HtmlAttributeEncode(
+                        Global.GetApplicationPath(Request) + "/Admin/Logoff.aspx");
+
+                    // <lang>
+                    //   <zh-CN>注销链接文案改为取自本地资源 DesktopBanner.resx，随界面语言切换；此前为硬编码英文字面量，中文界面下仍显示英文。文本按 HTML 编码后拼接，避免资源值污染标记。</zh-CN>
+                    //   <en>The logoff link text now comes from the local resource DesktopBanner.resx and follows the UI language; it was previously a hardcoded English literal that stayed English on Chinese pages. The value is HTML-encoded before concatenation so resource text cannot corrupt the markup.</en>
+                    // </lang>
+                    LogoffLink = "<a href=\"" + logoffUrl + "\" class=\"SiteLink portal-toplink portal-logoff\">" +
+                        HttpUtility.HtmlEncode(DesktopBanner.Logoff) + "</a>";
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>Tab 导航按当前用户可访问角色过滤后再绑定，隐藏 Tab 不应参与显示索引计算。</zh-CN>
+            //   <en>Tab navigation is filtered by roles before binding; hidden Tabs must not participate in display-index calculation.</en>
+            // </lang>
+            if (ShowTabs)
+            {
+                TabIndex = portalSettings.ActiveTab.TabIndex;
+
+                // <lang>
+                //   <zh-CN>第一阶段只做既有角色过滤：保持旧门户分号角色串判断的边界，后续细粒度权限扩展或 gate 都不能削弱它。</zh-CN>
+                //   <en>Phase one performs the existing role filtering only: it preserves the legacy semicolon-delimited role boundary, which neither finer-grained permissions nor the gate may weaken.</en>
+                // </lang>
+                var roleFilteredTabs = new List<ITabItem>();
+                for (int i = 0; i < portalSettings.DesktopTabs.Count; i++)
+                {
+                    ITabItem tab = portalSettings.DesktopTabs[i];
+
+                    if (PortalSecurity.IsInRoles(tab.AccessRoles))
+                    {
+                        roleFilteredTabs.Add(tab);
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>门控开关默认关闭（配置缺失即关闭）；关闭时行为与改造前完全一致，这是出问题时的回滚点。</zh-CN>
+                //   <en>The gate switch defaults to off (a missing configuration means off); while off the behaviour is identical to before the change, which is the rollback point if anything goes wrong.</en>
+                // </lang>
+                bool gateEnabled = PortalNavigationVisibilityPolicy.IsTabGateEnabled(
+                    ConfigurationManager.AppSettings["Portal.Navigation.TabGateEnabled"]);
+
+                // <lang>
+                //   <zh-CN>授权后集合是最终绑定来源：要么是角色过滤结果本身（门控关闭），要么是叠加 gate 判定后的子集。</zh-CN>
+                //   <en>The authorized collection is the final binding source: either the role-filtered result itself (gate off) or the subset remaining after the gate decision.</en>
+                // </lang>
+                var authorizedTabs = new List<ITabItem>();
+
+                if (gateEnabled && roleFilteredTabs.Count > 0)
+                {
+                    // <lang>
+                    //   <zh-CN>只有"已登记且键可构造"的 Tab 才交给 registry 判定；未登记 Tab 不参与门控，继续沿用角色过滤结果。</zh-CN>
+                    //   <en>Only tabs that are registered and yield a buildable key go to the registry; unregistered tabs stay outside the gate and keep the role-filtered outcome.</en>
+                    // </lang>
+                    var registeredEntries = new Dictionary<int, PortalNavigationEntry>();
+                    foreach (ITabItem tab in roleFilteredTabs)
+                    {
+                        PortalNavigationEntry registeredEntry = PortalNavigationRegistry.FindByKey(
+                            PortalNavigationVisibilityPolicy.BuildTabEntryKey(tab.TabName, tab.NavigationKey));
+                        if (registeredEntry != null)
+                        {
+                            registeredEntries[tab.TabId] = registeredEntry;
+                        }
+                    }
+
+                    // <lang>
+                    //   <zh-CN>上下文只组装一次，并与 Admin 动作区共用同一工厂，避免每个 Tab 重复探测权限与 Profile。</zh-CN>
+                    //   <en>The context is assembled once through the same factory used by the Admin action area, avoiding repeated permission and Profile probing per tab.</en>
+                    // </lang>
+                    PortalNavigationVisibilityContext tabContext =
+                        PortalNavigationVisibilityContextFactory.Create(registeredEntries.Values);
+
+                    foreach (ITabItem tab in roleFilteredTabs)
+                    {
+                        PortalNavigationEntry registeredEntry;
+                        if (registeredEntries.TryGetValue(tab.TabId, out registeredEntry))
+                        {
+                            string blockedReason = PortalNavigationVisibilityPolicy.GetBlockedReason(registeredEntry, tabContext);
+                            if (!string.IsNullOrEmpty(blockedReason))
+                            {
+                                // <lang>
+                                //   <zh-CN>普通用户看不到被阻断项（不渲染、不留占位）；管理员保留位置并看到禁用态与原因，与动作区既有口径一致。</zh-CN>
+                                //   <en>Regular users never see a blocked tab (it is neither rendered nor left as a placeholder); administrators keep the position and see the disabled state with its reason, matching the existing action-area convention.</en>
+                                // </lang>
+                                if (!tabContext.IsAdministrator)
+                                {
+                                    continue;
+                                }
+
+                                tabBlockedReasons[tab.TabId] = blockedReason;
+                            }
+                        }
+
+                        authorizedTabs.Add(tab);
+                    }
+                }
+                else
+                {
+                    authorizedTabs.AddRange(roleFilteredTabs);
+                }
+
+                // <lang>
+                //   <zh-CN>选中索引必须基于最终集合计算，否则被移除的 Tab 会导致高亮错位。</zh-CN>
+                //   <en>The selected index must be computed from the final collection, otherwise a removed tab would shift the highlight.</en>
+                // </lang>
+                for (int i = 0; i < authorizedTabs.Count; i++)
+                {
+                    if (authorizedTabs[i].TabId == portalSettings.ActiveTab.TabId)
+                    {
+                        Tabs.SelectedIndex = i;
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>最终只绑定授权后的 Tab；主题 CSS 可以改变排列方式，但不应改变这里的角色过滤与 gate 判定结果。</zh-CN>
+                //   <en>Bind only authorized tabs at the end; theme CSS may change layout but must not alter the role-filtered or gated result.</en>
+                // </lang>
+                Tabs.DataSource = authorizedTabs;
+                Tabs.DataBind();
+            }
+        }

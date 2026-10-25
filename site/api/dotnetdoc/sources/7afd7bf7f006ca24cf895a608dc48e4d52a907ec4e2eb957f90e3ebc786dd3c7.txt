@@ -1,0 +1,4 @@
+        private static readonly string[] ResubmitSources =
+        {
+            PortalBusinessApplicationStatuses.Returned
+        };

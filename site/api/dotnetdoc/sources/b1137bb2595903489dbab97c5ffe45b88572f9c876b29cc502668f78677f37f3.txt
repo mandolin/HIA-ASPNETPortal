@@ -1,0 +1,18 @@
+        public static string GetModuleCssClass(int moduleId, string paneName, string packageId = null)
+        {
+            // <lang>
+            //   <zh-CN>构造模块作用域 class；窗格和包标识均先规范化，模块 ID 保留整数形式。</zh-CN>
+            //   <en>Build module-scope classes; pane and package identifiers are normalized first while module ID remains an integer representation.</en>
+            // </lang>
+            var builder = new StringBuilder("portal-module portal-module-");
+            builder.Append(moduleId);
+            builder.Append(" portal-pane-");
+            builder.Append(NormalizeCssSegment(paneName));
+            if (!string.IsNullOrWhiteSpace(packageId))
+            {
+                builder.Append(" portal-package-");
+                builder.Append(NormalizeCssSegment(packageId));
+            }
+
+            return builder.ToString();
+        }

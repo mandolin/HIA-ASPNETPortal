@@ -1,0 +1,208 @@
+    public static class PortalPermissionRegistry
+    {
+        // <lang>
+        //   <zh-CN>固定数组是权限定义的唯一注册来源；运行时不会从数据库或用户输入动态扩展权限键。</zh-CN>
+        //   <en>The fixed array is the single registration source; runtime code does not extend permission keys from the database or user input.</en>
+        // </lang>
+        private static readonly PortalPermissionDefinition[] DefinitionArray =
+        {
+            new PortalPermissionDefinition(PortalPermissionKeys.SettingsView, "Settings", "查看普通系统设置。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.SettingsEdit, "Settings", "编辑普通系统设置。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.SettingsSensitiveView, "Settings", "查看敏感系统设置状态。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.OpsHealthView, "Operations", "查看系统健康状态。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.OpsDiagnosticsView, "Operations", "查看诊断日志列表。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.OpsDiagnosticsDetail, "Operations", "查看诊断日志详情。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.AuditOperationView, "Audit", "查看运营审计。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.AdminUsersView, "Administration", "查看用户后台。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.AdminUsersEdit, "Administration", "编辑用户资料和注册审核。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.AdminUsersResetPassword, "Administration", "重置用户密码。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.AdminRolesEdit, "Administration", "编辑角色和角色成员关系。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryView, "EnterpriseDirectory", "查看员工、组织和账号绑定目录。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryEdit, "EnterpriseDirectory", "编辑员工与组织主数据。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeDirectoryBind, "EnterpriseDirectory", "绑定或解绑门户账号与员工。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmView, "Business.EmployeeProfileConfirm", "查看员工资料确认模块。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmConfirm, "Business.EmployeeProfileConfirm", "确认自己的员工资料。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileConfirmAdmin, "Business.EmployeeProfileConfirm", "管理员查看和处理员工资料确认记录。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestView, "Business.EmployeeProfileCorrectionRequest", "查看员工资料更正请求模块。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestSubmit, "Business.EmployeeProfileCorrectionRequest", "提交自己的员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestReview, "Business.EmployeeProfileCorrectionRequest", "审核员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestCancel, "Business.EmployeeProfileCorrectionRequest", "取消或关闭员工资料更正请求。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin, "Business.EmployeeProfileCorrectionRequest", "员工资料更正请求旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsView, "Business.WorkItems", "查看业务待办。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsHandle, "Business.WorkItems", "处理业务待办。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkItemsAdmin, "Business.WorkItems", "业务待办旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationSubmit, "Business.Application", "提交抽象业务申请。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationViewOwn, "Business.Application", "查看本人提交的抽象业务申请。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationReview, "Business.Application", "审核抽象业务申请。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessApplicationAdmin, "Business.Application", "抽象业务申请旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkflowView, "Business.Workflow", "查看业务流程事件。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessWorkflowAdmin, "Business.Workflow", "业务流程旧聚合管理权限。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationCreate, "Business.Collaboration", "创建企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationViewOwn, "Business.Collaboration", "查看本人发起或本人负责的企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationHandle, "Business.Collaboration", "处理分派给本人或本人角色的企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationViewAll, "Business.Collaboration", "查看全部企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationAdmin, "Business.Collaboration", "管理企业协同事项。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.BusinessCollaborationEventsView, "Business.Collaboration", "查看企业协同事项流程事件。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ThemeView, "Theme", "查看主题设置。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ThemeEdit, "Theme", "编辑主题设置和 Tab 覆盖。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogView, "Module", "查看模块包目录。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ModuleCatalogEdit, "Module", "启停模块包。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ModuleDefinitionEdit, "Module", "编辑模块定义。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.PortalTabsEdit, "PortalStructure", "编辑门户 Tab。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.PortalModulesEdit, "PortalStructure", "编辑门户模块实例和布局。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ContentRawHtmlEdit, "Content", "编辑原始 HTML 内容。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.ContentUploadManage, "Content", "管理上传内容策略。"),
+            // <lang>
+            //   <zh-CN>P45.5 分层键族定义：Category 直接承载"能力层"（矩阵按层分组的数据源）。跨层 View 用 `EnterpriseCapability`，其余按层后缀，层标识与 [已脱敏].2 的能力分层表一致。</zh-CN>
+            //   <en>P45.5 layered family definitions: the Category itself carries the capability layer, which is the data source for grouping the matrix. The cross-layer View uses `EnterpriseCapability`, and the rest are suffixed by layer, matching the layering table in [已脱敏].2.</en>
+            // </lang>
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityView, "EnterpriseCapability", "查看能力治理视图（只读权限矩阵）。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityFoundationManage, "EnterpriseCapability.Foundation", "管理 Foundation Core 层能力。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityFoundationReview, "EnterpriseCapability.Foundation", "Foundation Core 层审核委派（预留，未授予非管理员）。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityBasicBusinessManage, "EnterpriseCapability.BasicBusiness", "管理 Enterprise Basic Business 层能力。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityBasicBusinessReview, "EnterpriseCapability.BasicBusiness", "Enterprise Basic Business 层审核委派（预留，未授予非管理员）。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityPlatformManage, "EnterpriseCapability.Platform", "管理 Platform Capability 层能力。"),
+            new PortalPermissionDefinition(PortalPermissionKeys.EnterpriseCapabilityPlatformReview, "EnterpriseCapability.Platform", "Platform Capability 层审核委派（预留，未授予非管理员）。")
+        };
+
+        // <lang>
+        //   <zh-CN>已知键集合只用于不区分大小写的存在性检查；规范化结果仍从固定数组返回其规范大小写。</zh-CN>
+        //   <en>The known-key set is only for case-insensitive existence checks; normalization still returns canonical casing from the fixed array.</en>
+        // </lang>
+        private static readonly HashSet<string> KnownKeys = new HashSet<string>(
+            DefinitionArray.Select(definition => definition.Key),
+            StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>获取全部已定义权限。</zh-CN>
+        ///   <en>Gets every defined permission.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>返回固定注册数组的只读接口视图；调用方不能通过该属性新增定义，且定义存在不等于当前主体已获权。</zh-CN>
+        ///   <en>Returns an interface view over the fixed registration array; callers cannot add definitions through it, and a defined key is not evidence that the current subject is authorized.</en>
+        /// </lang>
+        /// </remarks>
+        public static IEnumerable<PortalPermissionDefinition> Definitions
+        {
+            get { return DefinitionArray; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断权限键名是否已在注册表中定义。</zh-CN>
+        ///   <en>Determines whether a permission key is defined in the registry.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="key">
+        /// <l>
+        ///   <zh-CN>待检查权限键名。</zh-CN>
+        ///   <en>Permission key to check.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>已定义时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when defined.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>空白输入返回 <c>false</c>；比较会去除首尾空白并忽略大小写。未知键永远不会因本方法而变成已授权。</zh-CN>
+        ///   <en>Blank input returns <c>false</c>; comparison trims surrounding whitespace and ignores case. An unknown key never becomes authorized through this method.</en>
+        /// </lang>
+        /// </remarks>
+        public static bool IsDefined(string key)
+        {
+            return !string.IsNullOrWhiteSpace(key) && KnownKeys.Contains(key.Trim());
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>规范化并校验权限键名。</zh-CN>
+        ///   <en>Normalizes and validates a permission key.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="key">
+        /// <l>
+        ///   <zh-CN>待规范化权限键名。</zh-CN>
+        ///   <en>Permission key to normalize.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>规范化权限键名。</zh-CN>
+        ///   <en>Normalized permission key.</en>
+        /// </l>
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// <l>
+        ///   <zh-CN>权限键名不存在于注册表时引发。</zh-CN>
+        ///   <en>Thrown when the key is not registered.</en>
+        /// </l>
+        /// </exception>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>结果只来自固定注册数组，并保留注册时的规范大小写；本方法不查询角色，也不授予当前请求权限。</zh-CN>
+        ///   <en>The result comes only from the fixed registration array and preserves registered canonical casing; this method does not query roles or grant permission to the current request.</en>
+        /// </lang>
+        /// </remarks>
+        public static string NormalizeDefinedKey(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentException("Permission key is required.", "key");
+            }
+
+            string normalized = key.Trim();
+            if (!KnownKeys.Contains(normalized))
+            {
+                throw new ArgumentException("Permission key is not defined: " + normalized, "key");
+            }
+
+            return DefinitionArray
+                .First(definition => string.Equals(definition.Key, normalized, StringComparison.OrdinalIgnoreCase))
+                .Key;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>规范化权限键集合，并拒绝未定义键名。</zh-CN>
+        ///   <en>Normalizes a permission-key collection and rejects undefined keys.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="keys">
+        /// <l>
+        ///   <zh-CN>待规范化权限键集合。</zh-CN>
+        ///   <en>Permission keys to normalize.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>去空白、去重后的权限键数组。</zh-CN>
+        ///   <en>Trimmed and deduplicated permission-key array.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>空集合输入返回空数组；非空但未定义的键会沿用单键方法抛出异常；结果按不区分大小写去重并排序。</zh-CN>
+        ///   <en>A null collection returns an empty array; a non-blank undefined key propagates the single-key method's exception; results are deduplicated and sorted case-insensitively.</en>
+        /// </lang>
+        /// </remarks>
+        public static string[] NormalizeDefinedKeys(IEnumerable<string> keys)
+        {
+            if (keys == null)
+            {
+                return new string[0];
+            }
+
+            return keys
+                .Where(key => !string.IsNullOrWhiteSpace(key))
+                .Select(NormalizeDefinedKey)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(key => key, StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+        }
+    }

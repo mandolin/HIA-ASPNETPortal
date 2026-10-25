@@ -1,0 +1,2 @@
+        [Dependency]
+        public ILeaveRequestDb LeaveRequestDb { private get; set; }

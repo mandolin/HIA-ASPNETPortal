@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>确认密码字段用于前后台一致性校验，并同样配合隐藏加密字段提交。</zh-CN>
+                    <en>The confirm-password field supports client/server consistency validation and is also submitted with a hidden encrypted field.</en>
+                  </lang>
+                --%>

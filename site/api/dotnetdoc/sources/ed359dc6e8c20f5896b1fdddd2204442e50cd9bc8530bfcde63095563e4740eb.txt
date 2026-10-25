@@ -1,0 +1,1 @@
+        void RejectUser(int userId, string rejectedBy);

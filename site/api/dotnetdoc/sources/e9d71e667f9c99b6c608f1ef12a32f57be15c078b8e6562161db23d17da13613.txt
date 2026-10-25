@@ -1,0 +1,101 @@
+        public void UpdateUserProfile(
+            int userId,
+            string loginName,
+            string displayName,
+            string nickname,
+            string email,
+            string password,
+            string actor)
+        {
+            string normalizedEmail = Normalize(email);
+            if (string.IsNullOrEmpty(normalizedEmail))
+            {
+                throw new InvalidOperationException("Email is required.");
+            }
+
+            string normalizedPassword = password ?? string.Empty;
+            bool shouldResetCredential = !string.IsNullOrEmpty(normalizedPassword);
+            if (shouldResetCredential && !HasCredentialTables())
+            {
+                throw new InvalidOperationException("Credential metadata tables are not available.");
+            }
+
+            PortalPasswordRejection passwordRejection;
+            if (shouldResetCredential &&
+                !PortalPasswordPolicy.TryValidate(
+                    normalizedPassword,
+                    BuildPasswordPolicyContextTerms(loginName, displayName, nickname, email),
+                    out passwordRejection))
+            {
+                throw new InvalidOperationException("PasswordPolicyRejection." + passwordRejection);
+            }
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                var item = _context.Users.Single(i => i.UserId == userId);
+                string normalizedLoginName = string.IsNullOrWhiteSpace(loginName)
+                    ? Normalize(item.Name)
+                    : Normalize(loginName);
+                // <lang>
+                //   <zh-CN>注意：显示名的空值回退策略与登录名**不同** —— 登录名为空时保留**旧值**（`item.Name`），
+                // 而显示名为空时**不保留旧显示名**，而是回退到本次规范化后的登录名。调用方若想保留原显示名，
+                // 必须显式传入原值，不能靠"传空"实现。</zh-CN>
+                //   <en>Note: the empty-value fallback for the display name differs from the login name's — an empty login name preserves
+                // the **old value** (`item.Name`), whereas an empty display name does **not** preserve the old display name and instead
+                // falls back to this run's normalized login name. A caller that wants to keep the original display name must pass it
+                // explicitly; passing empty will not do it.</en>
+                // </lang>
+                string normalizedDisplayName = string.IsNullOrWhiteSpace(displayName)
+                    ? normalizedLoginName
+                    : Normalize(displayName);
+                string normalizedNickname = Normalize(nickname);
+                string normalizedActor = Normalize(actor);
+
+                if (string.IsNullOrEmpty(normalizedLoginName))
+                {
+                    throw new InvalidOperationException("Login name is required.");
+                }
+
+                bool hasProfileTable = HasUserProfileTable();
+                if (hasProfileTable)
+                {
+                    if (HasLoginNameConflict(userId, normalizedLoginName))
+                    {
+                        throw new InvalidOperationException("Login name is already used by another user.");
+                    }
+
+                    if (HasEmailConflict(userId, normalizedEmail))
+                    {
+                        throw new InvalidOperationException("Email is already used by another user.");
+                    }
+
+                    UpsertUserProfile(
+                        item.UserId,
+                        normalizedLoginName,
+                        normalizedDisplayName,
+                        normalizedNickname,
+                        normalizedEmail,
+                        NormalizeProfileStatus(GetExistingProfileStatus(item.UserId)),
+                        normalizedActor);
+                }
+                else if (HasLegacyEmailConflict(userId, normalizedEmail))
+                {
+                    throw new InvalidOperationException("Email is already used by another user.");
+                }
+
+                item.Email = normalizedEmail;
+                item.Password = string.Empty;
+                if (shouldResetCredential)
+                {
+                    UpsertCredential(userId, normalizedPassword, null, null, false, null);
+                }
+
+                _context.SaveChanges();
+                if (shouldResetCredential)
+                {
+                    IncrementSecurityVersion(userId, "CredentialReset");
+                }
+
+                transaction.Commit();
+            }
+        }

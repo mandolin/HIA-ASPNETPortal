@@ -1,0 +1,18 @@
+        private static string NormalizeFilter(string value, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>空白过滤器归一为稳定空字符串；非空值仅修剪并按调用方固定上限截断，不执行通配、正则或授权解释。</zh-CN>
+            //   <en>Normalize a blank filter to stable empty string; trim and truncate non-blank input only to the caller's fixed cap, without wildcard, regex, or authorization interpretation.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return string.Empty;
+            }
+
+            // <lang>
+            //   <zh-CN>去除首尾空白后按调用方上限截断，过滤器不执行通配、正则或授权解释。</zh-CN>
+            //   <en>Trim and truncate to the caller's cap; the filter receives no wildcard, regex, or authorization interpretation.</en>
+            // </lang>
+            string normalized = value.Trim();
+            return normalized.Substring(0, Math.Min(normalized.Length, maximumLength));
+        }

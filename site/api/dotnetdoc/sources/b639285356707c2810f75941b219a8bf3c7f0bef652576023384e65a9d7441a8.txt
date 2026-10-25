@@ -1,0 +1,6 @@
+            <%--
+              <lang>
+                <zh-CN>员工绑定卡片只提供进入单绑定维护页的导航；绑定目标、版本刷新和审计动作不在此标记层执行。</zh-CN>
+                <en>The employee-binding card only navigates to the single-binding maintenance page; binding targets, security-version refresh, and audit actions are not executed by this markup.</en>
+              </lang>
+            --%>

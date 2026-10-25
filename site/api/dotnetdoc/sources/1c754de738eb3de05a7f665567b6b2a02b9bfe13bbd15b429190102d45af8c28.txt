@@ -1,0 +1,4 @@
+        private static PortalHiaBoundaryValidationResult Failure(string code, string message)
+        {
+            return new PortalHiaBoundaryValidationResult(false, code, message);
+        }

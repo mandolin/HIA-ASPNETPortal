@@ -1,0 +1,92 @@
+        protected void SaveButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存动作再次检查权限，避免管理员在页面加载后被撤权仍能通过旧表单提交。</zh-CN>
+            //   <en>The save action checks permission again so an administrator whose permission changed after page load cannot submit an old form.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.EmployeeDirectoryEdit))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>保存前要求写入服务和 schema 同时可用；不可用时只展示固定提示，不尝试部分写入。</zh-CN>
+            //   <en>Require both the write service and schema before saving; when unavailable, show a fixed message without attempting a partial write.</en>
+            // </lang>
+            if (EmployeeDirectoryAdminDb == null || !EmployeeDirectoryAdminDb.IsSchemaAvailable())
+            {
+                ShowMessage(lang.Admin_Common_MessageP63SchemaUnavailable);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>请求仅在页面级输入校验全部通过后生成，失败提示保持低敏且不回显原始正文。</zh-CN>
+            //   <en>Create the request only after page-level input validation succeeds; failure messages remain low-sensitivity and do not echo raw content.</en>
+            // </lang>
+            OrganizationUnitSaveRequest request;
+            string validationMessage;
+            if (!TryCreateSaveRequest(out request, out validationMessage))
+            {
+                ShowMessage(validationMessage);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>用请求标识选择新增或更新审计事件，页面层不生成组织主键。</zh-CN>
+            //   <en>Use the request identifier to choose the creation or update audit event; the page does not generate organization keys.</en>
+            // </lang>
+            bool isNew = request.OrganizationUnitId <= 0;
+            try
+            {
+                // <lang>
+                //   <zh-CN>数据层负责父级存在性、自引用、循环关系和并发时间戳校验；页面只拼装请求和展示低敏结果。</zh-CN>
+                //   <en>The data layer owns parent existence, self-parenting, cycle and concurrency timestamp validation; the page only builds the request and displays low-sensitivity results.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>保存结果是数据层给出的低敏成功/失败事实和实体标识，页面不自行推断树规则或并发结果。</zh-CN>
+                //   <en>The result carries the data layer's low-sensitivity success/failure fact and entity identifier; the page does not infer tree rules or concurrency outcomes.</en>
+                // </lang>
+                EmployeeDirectoryWriteResult result = EmployeeDirectoryAdminDb.SaveOrganizationUnit(request);
+                if (!result.Succeeded)
+                {
+                    // <lang>
+                    //   <zh-CN>失败时停留当前页并显示数据层提示，不记录成功审计或执行回跳。</zh-CN>
+                    //   <en>On failure, keep the current page with the data-layer message and avoid success auditing or redirecting.</en>
+                    // </lang>
+                    ShowMessage(result.Message);
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>仅在持久化成功后记录创建/更新审计，并用稳定实体类型和不变文化标识。</zh-CN>
+                //   <en>Record the creation/update audit only after persistence succeeds, using a stable entity type and invariant-culture identifier.</en>
+                // </lang>
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.EnterpriseDirectoryCategory,
+                    isNew
+                        ? PortalOperationAuditEvents.OrganizationUnitCreated
+                        : PortalOperationAuditEvents.OrganizationUnitUpdated,
+                    PortalOperationAuditEvents.OrganizationUnitTargetType,
+                    result.EntityId.ToString(CultureInfo.InvariantCulture),
+                    isNew ? "Created organization unit metadata." : "Updated organization unit metadata.",
+                    Context);
+                RedirectToDirectory();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>异常详情进入结构化诊断日志；浏览器只看到事件编号，便于管理员定位而不暴露数据库细节。</zh-CN>
+                //   <en>Exception details go to structured diagnostics; the browser sees only the event id so administrators can locate it without exposing database details.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>事件编号只用于关联结构化诊断，页面不回显异常正文或数据库细节。</zh-CN>
+                //   <en>The event id links to structured diagnostics while the page does not echo exception text or database details.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.OrganizationUnitEdit.Save",
+                    "Saving organization unit failed. OrganizationUnitId=" + request.OrganizationUnitId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_OrganizationUnitEdit_MessageSaveFailed, eventId));
+            }
+        }

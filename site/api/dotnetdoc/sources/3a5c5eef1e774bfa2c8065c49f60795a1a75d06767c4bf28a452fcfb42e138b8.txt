@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>保存命令进入既有服务器持久化和审计流程，取消只离开当前编辑上下文，不在客户端撤销或伪造状态。</zh-CN>
+                  <en>The save command enters the existing server persistence and audit flow; cancel only leaves the edit context and does not revoke or forge state on the client.</en>
+                </lang>
+                --%>

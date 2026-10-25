@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>DataList 使用 ModuleDefID 作为命令键并保留服务器事件，展示名称采用编码绑定以避免把定义元数据当作标记输出。</zh-CN>
+                    <en>The DataList keeps ModuleDefID as the command key and retains server events; the display name uses encoded binding so definition metadata is not emitted as markup.</en>
+                </lang>
+            --%>

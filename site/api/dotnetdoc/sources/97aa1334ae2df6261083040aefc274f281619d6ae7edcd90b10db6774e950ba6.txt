@@ -1,0 +1,5 @@
+        internal static string EditAnnouncements_MessageInvalidReadMoreUrl {
+            get {
+                return ResourceManager.GetString("EditAnnouncements_MessageInvalidReadMoreUrl", resourceCulture);
+            }
+        }

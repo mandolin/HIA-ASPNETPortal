@@ -97746,7 +97746,8 @@
       "entryId": "hia-document:dotnet-project-src-portal-portal.csproj",
       "metadata": {
         "language": "xml",
-        "rangeStartLine": 1
+        "rangeStartLine": 1,
+        "rangeEndLine": 400
       }
     },
     {
@@ -97758,7 +97759,8 @@
       "entryId": "hia-document:dotnet-project-src-portal.components-portal.components.csproj",
       "metadata": {
         "language": "xml",
-        "rangeStartLine": 1
+        "rangeStartLine": 1,
+        "rangeEndLine": 249
       }
     },
     {
@@ -97770,7 +97772,8 @@
       "entryId": "hia-document:dotnet-project-src-portal.components.data-portal.components.data.csproj",
       "metadata": {
         "language": "xml",
-        "rangeStartLine": 1
+        "rangeStartLine": 1,
+        "rangeEndLine": 138
       }
     },
     {
@@ -97782,7 +97785,8 @@
       "entryId": "hia-document:dotnet-project-src-portal.components.data1-portal.components.data1.csproj",
       "metadata": {
         "language": "xml",
-        "rangeStartLine": 1
+        "rangeStartLine": 1,
+        "rangeEndLine": 143
       }
     },
     {
@@ -97794,7 +97798,8 @@
       "entryId": "hia-document:dotnet-project-src-portal.tests-portal.tests.csproj",
       "metadata": {
         "language": "xml",
-        "rangeStartLine": 1
+        "rangeStartLine": 1,
+        "rangeEndLine": 92
       }
     },
     {
@@ -97806,7 +97811,8 @@
       "entryId": "hia-document:dotnet-solution-src-master.sln",
       "metadata": {
         "language": "sln",
-        "rangeStartLine": 1
+        "rangeStartLine": 1,
+        "rangeEndLine": 68
       }
     },
     {
@@ -97871,7 +97877,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 21,
-        "rangeEndLine": 989
+        "rangeEndLine": 420
       }
     },
     {
@@ -98066,7 +98072,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 21,
-        "rangeEndLine": 2127
+        "rangeEndLine": 420
       }
     },
     {
@@ -98248,7 +98254,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 21,
-        "rangeEndLine": 446
+        "rangeEndLine": 420
       }
     },
     {
@@ -98300,7 +98306,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 22,
-        "rangeEndLine": 1408
+        "rangeEndLine": 421
       }
     },
     {
@@ -98339,7 +98345,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 930
+        "rangeEndLine": 419
       }
     },
     {
@@ -98456,7 +98462,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 456
+        "rangeEndLine": 419
       }
     },
     {
@@ -98560,7 +98566,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 1152
+        "rangeEndLine": 419
       }
     },
     {
@@ -98781,7 +98787,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 35,
-        "rangeEndLine": 638
+        "rangeEndLine": 434
       }
     },
     {
@@ -99470,7 +99476,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 18,
-        "rangeEndLine": 534
+        "rangeEndLine": 417
       }
     },
     {
@@ -99613,7 +99619,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 21,
-        "rangeEndLine": 548
+        "rangeEndLine": 420
       }
     },
     {
@@ -99795,7 +99801,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 559
+        "rangeEndLine": 419
       }
     },
     {
@@ -100198,7 +100204,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 24,
-        "rangeEndLine": 786
+        "rangeEndLine": 423
       }
     },
     {
@@ -100211,7 +100217,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 24,
-        "rangeEndLine": 934
+        "rangeEndLine": 423
       }
     },
     {
@@ -100250,7 +100256,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 23,
-        "rangeEndLine": 633
+        "rangeEndLine": 422
       }
     },
     {
@@ -100289,7 +100295,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 30,
-        "rangeEndLine": 837
+        "rangeEndLine": 429
       }
     },
     {
@@ -100341,7 +100347,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 21,
-        "rangeEndLine": 683
+        "rangeEndLine": 420
       }
     },
     {
@@ -100445,7 +100451,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 916
+        "rangeEndLine": 419
       }
     },
     {
@@ -100484,7 +100490,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 285,
-        "rangeEndLine": 1278
+        "rangeEndLine": 684
       }
     },
     {
@@ -100549,7 +100555,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 219,
-        "rangeEndLine": 650
+        "rangeEndLine": 618
       }
     },
     {
@@ -100588,7 +100594,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 22,
-        "rangeEndLine": 664
+        "rangeEndLine": 421
       }
     },
     {
@@ -100692,7 +100698,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 18,
-        "rangeEndLine": 694
+        "rangeEndLine": 417
       }
     },
     {
@@ -100705,7 +100711,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 558,
-        "rangeEndLine": 1291
+        "rangeEndLine": 957
       }
     },
     {
@@ -100757,7 +100763,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 159,
-        "rangeEndLine": 1008
+        "rangeEndLine": 558
       }
     },
     {
@@ -100770,7 +100776,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 133,
-        "rangeEndLine": 662
+        "rangeEndLine": 532
       }
     },
     {
@@ -100796,7 +100802,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 9,
-        "rangeEndLine": 418
+        "rangeEndLine": 408
       }
     },
     {
@@ -100913,7 +100919,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 18,
-        "rangeEndLine": 500
+        "rangeEndLine": 417
       }
     },
     {
@@ -100978,7 +100984,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 19,
-        "rangeEndLine": 461
+        "rangeEndLine": 418
       }
     },
     {
@@ -101069,7 +101075,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 562
+        "rangeEndLine": 419
       }
     },
     {
@@ -101186,7 +101192,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 17,
-        "rangeEndLine": 568
+        "rangeEndLine": 416
       }
     },
     {
@@ -101238,7 +101244,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 150,
-        "rangeEndLine": 1088
+        "rangeEndLine": 549
       }
     },
     {
@@ -101277,7 +101283,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 128,
-        "rangeEndLine": 559
+        "rangeEndLine": 527
       }
     },
     {
@@ -101303,7 +101309,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 151,
-        "rangeEndLine": 796
+        "rangeEndLine": 550
       }
     },
     {
@@ -101342,7 +101348,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 151,
-        "rangeEndLine": 733
+        "rangeEndLine": 550
       }
     },
     {
@@ -101472,7 +101478,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 21,
-        "rangeEndLine": 917
+        "rangeEndLine": 420
       }
     },
     {
@@ -101654,7 +101660,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 19,
-        "rangeEndLine": 643
+        "rangeEndLine": 418
       }
     },
     {
@@ -101771,7 +101777,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 705
+        "rangeEndLine": 419
       }
     },
     {
@@ -101940,7 +101946,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 2120
+        "rangeEndLine": 419
       }
     },
     {
@@ -101979,7 +101985,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 148,
-        "rangeEndLine": 562
+        "rangeEndLine": 547
       }
     },
     {
@@ -102018,7 +102024,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 25,
-        "rangeEndLine": 11306
+        "rangeEndLine": 424
       }
     },
     {

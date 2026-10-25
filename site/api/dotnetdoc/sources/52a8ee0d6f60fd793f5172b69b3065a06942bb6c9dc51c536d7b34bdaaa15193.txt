@@ -1,0 +1,64 @@
+    public sealed class PortalDbConnectionFactory : IPortalDbConnectionFactory
+    {
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>解析 profile 的 provider 工厂，创建并配置尚未打开的连接。</zh-CN>
+        /// <en>Resolves the profile provider factory, creates, and configures a connection that remains unopened.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="profile"><lang><zh-CN>已验证的数据库 profile，不能为空。</zh-CN><en>Validated database profile, which cannot be null.</en></lang></param>
+        /// <returns><lang><zh-CN>已配置敏感连接串但仍关闭的连接；调用方负责释放且决定是否打开。</zh-CN><en>Connection configured with its sensitive connection string and still closed; callers dispose it and decide whether to open it.</en></lang></returns>
+        /// <exception cref="ArgumentNullException"><lang><zh-CN>profile 为 null 时抛出。</zh-CN><en>Thrown when profile is null.</en></lang></exception>
+        /// <exception cref="ArgumentException"><lang><zh-CN>provider invariant 未注册时由 DbProviderFactories.GetFactory 抛出。</zh-CN><en>Thrown by DbProviderFactories.GetFactory when the provider invariant is unregistered.</en></lang></exception>
+        /// <exception cref="InvalidOperationException"><lang><zh-CN>工厂不可用，或 CreateConnection 返回 null 时抛出。</zh-CN><en>Thrown when the factory is unavailable or CreateConnection returns null.</en></lang></exception>
+        public DbConnection CreateConnection(PortalDatabaseProfile profile)
+        {
+            // <lang>
+            //   <zh-CN>在读取 profile 字段前拒绝 null，避免把调用方缺失配置收敛为不透明的空引用异常。</zh-CN>
+            //   <en>Reject null before reading profile fields so missing caller configuration is not collapsed into an opaque null-reference failure.</en>
+            // </lang>
+            if (profile == null)
+            {
+                throw new ArgumentNullException(nameof(profile));
+            }
+
+            // <lang>
+            //   <zh-CN>按已验证 invariant 解析已注册的 ADO.NET 工厂；解析异常保持可见，不包装或记录敏感连接串。</zh-CN>
+            //   <en>Resolve the registered ADO.NET factory by validated invariant; resolution exceptions remain visible and do not wrap or log the sensitive connection string.</en>
+            // </lang>
+            DbProviderFactory providerFactory = DbProviderFactories.GetFactory(profile.ProviderInvariantName);
+
+            // <lang>
+            //   <zh-CN>保留工厂返回 null 的防御性回退，确保调用方得到稳定的配置/运行时失败，而非在后续成员调用时发生空引用。</zh-CN>
+            //   <en>Retain the defensive fallback for a null factory so callers receive a stable configuration/runtime failure rather than a later null reference during member access.</en>
+            // </lang>
+            if (providerFactory == null)
+            {
+                throw new InvalidOperationException(
+                    "The database provider factory is unavailable: " + profile.ProviderInvariantName);
+            }
+
+            // <lang>
+            //   <zh-CN>仅请求 provider 创建连接对象，不在工厂内调用 Open；网络、凭据验证和事务生命周期仍由调用方控制。</zh-CN>
+            //   <en>Ask the provider only to create a connection object and do not call Open in this factory; networking, credential validation, and transaction lifetime remain caller-controlled.</en>
+            // </lang>
+            DbConnection connection = providerFactory.CreateConnection();
+
+            // <lang>
+            //   <zh-CN>provider 未返回连接对象时以稳定异常失败，避免在连接串赋值时泄露实现相关的空引用细节。</zh-CN>
+            //   <en>Fail with a stable exception when the provider returns no connection object, avoiding implementation-specific null-reference detail during connection-string assignment.</en>
+            // </lang>
+            if (connection == null)
+            {
+                throw new InvalidOperationException(
+                    "The database provider factory did not create a connection: " + profile.ProviderInvariantName);
+            }
+
+            // <lang>
+            //   <zh-CN>仅在可用连接对象上赋入敏感连接串并立即返回关闭连接；不输出连接串，且连接的打开、使用和释放所有权属于调用方。</zh-CN>
+            //   <en>Assign the sensitive connection string only to a usable connection object and immediately return the closed connection; do not output the string, and callers own opening, using, and disposing the connection.</en>
+            // </lang>
+            connection.ConnectionString = profile.ConnectionString;
+            return connection;
+        }
+    }

@@ -1,0 +1,4 @@
+        protected int? BindingsEmptyStateRowCount
+        {
+            get { return bindingsEmptyStateRowCount; }
+        }

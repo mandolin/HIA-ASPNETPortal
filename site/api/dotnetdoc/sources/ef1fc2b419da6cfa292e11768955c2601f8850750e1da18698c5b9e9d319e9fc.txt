@@ -1,0 +1,7 @@
+        private bool HasPasswordResetSubmission()
+        {
+            return !string.IsNullOrEmpty(Password.Text) ||
+                   !string.IsNullOrEmpty(ConfirmPassword.Text) ||
+                   !string.IsNullOrWhiteSpace(EncryptedPassword.Value) ||
+                   !string.IsNullOrWhiteSpace(EncryptedConfirmPassword.Value);
+        }

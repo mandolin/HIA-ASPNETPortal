@@ -1,0 +1,34 @@
+    public enum PortalNavigationLifecycleState
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>已登记但尚未进入可用导航的入口。</zh-CN>
+        ///   <en>Registered entry that has not entered active navigation.</en>
+        /// </lang>
+        /// </summary>
+        Draft,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前可用入口。</zh-CN>
+        ///   <en>Currently active entry.</en>
+        /// </lang>
+        /// </summary>
+        Active,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为历史兼容性保留登记的入口。</zh-CN>
+        ///   <en>Entry retained in the registry for legacy compatibility.</en>
+        /// </lang>
+        /// </summary>
+        Legacy,
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>不建议继续使用的入口。</zh-CN>
+        ///   <en>Entry that should no longer be used for new flows.</en>
+        /// </lang>
+        /// </summary>
+        Deprecated
+    }

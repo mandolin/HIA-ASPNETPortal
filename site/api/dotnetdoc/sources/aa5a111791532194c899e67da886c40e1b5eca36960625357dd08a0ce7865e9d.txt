@@ -1,0 +1,23 @@
+        public int CompareTo(ModuleSettings value)
+        {
+            if (value == null)
+            {
+                return 1;
+            }
+
+            int compareOrder = value.ModuleOrder;
+
+            if (ModuleOrder == compareOrder)
+            {
+                return 0;
+            }
+            if (ModuleOrder < compareOrder)
+            {
+                return -1;
+            }
+            if (ModuleOrder > compareOrder)
+            {
+                return 1;
+            }
+            return 0;
+        }

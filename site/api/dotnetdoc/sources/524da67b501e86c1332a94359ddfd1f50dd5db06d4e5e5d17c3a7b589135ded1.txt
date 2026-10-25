@@ -1,0 +1,5 @@
+        internal static string Admin_NotImplemented_Brand {
+            get {
+                return ResourceManager.GetString("Admin_NotImplemented_Brand", resourceCulture);
+            }
+        }

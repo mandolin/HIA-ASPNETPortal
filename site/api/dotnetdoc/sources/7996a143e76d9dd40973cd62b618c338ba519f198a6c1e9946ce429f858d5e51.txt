@@ -1,0 +1,1 @@
+        public string ExceptionDetail { get; set; }

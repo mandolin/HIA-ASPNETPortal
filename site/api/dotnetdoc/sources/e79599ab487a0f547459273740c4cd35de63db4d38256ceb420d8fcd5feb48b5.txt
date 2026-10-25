@@ -1,0 +1,1 @@
+        public const string BusinessCollaborationEventsView = "Business.Collaboration.Events.View";

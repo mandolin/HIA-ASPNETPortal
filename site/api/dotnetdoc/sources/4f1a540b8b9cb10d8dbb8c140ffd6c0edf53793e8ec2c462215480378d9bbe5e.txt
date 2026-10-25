@@ -1,0 +1,6 @@
+                    <%--
+                        <lang>
+                            <zh-CN>编辑链接只在当前用户具备模块编辑权限时显示。</zh-CN>
+                            <en>The edit link is shown only when the current user has module edit permission.</en>
+                        </lang>
+                    --%>

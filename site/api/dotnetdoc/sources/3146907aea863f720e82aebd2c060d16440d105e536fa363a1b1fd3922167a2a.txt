@@ -1,0 +1,14 @@
+        private static bool IsUtcTimestamp(string value)
+        {
+            // <lang>
+            //   <zh-CN>暂存 round-trip 解析结果，并要求偏移为零来保持 UTC-only 契约。</zh-CN>
+            //   <en>Hold the round-trip parse result and require zero offset to preserve the UTC-only contract.</en>
+            // </lang>
+            DateTimeOffset timestamp;
+            return DateTimeOffset.TryParseExact(
+                value,
+                "o",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.RoundtripKind,
+                out timestamp) && timestamp.Offset == TimeSpan.Zero;
+        }

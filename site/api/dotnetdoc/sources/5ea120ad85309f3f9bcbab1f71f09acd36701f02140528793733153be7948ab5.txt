@@ -1,0 +1,12 @@
+        public static bool TryParseSecurityVersion(string value, out long securityVersion)
+        {
+            securityVersion = 0;
+            if (string.IsNullOrWhiteSpace(value) ||
+                !value.StartsWith(SecurityVersionPrefix, StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            return long.TryParse(value.Substring(SecurityVersionPrefix.Length), out securityVersion) &&
+                   securityVersion >= 0;
+        }

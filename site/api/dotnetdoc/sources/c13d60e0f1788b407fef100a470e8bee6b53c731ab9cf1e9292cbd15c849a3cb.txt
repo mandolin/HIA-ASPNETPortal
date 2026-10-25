@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>新增用户按钮是显式管理员写库入口，继续通过 AddUser_Click 执行服务器端占位账号创建与授权边界。</zh-CN>
+                    <en>The add-user button is an explicit administrator persistence entry point and still uses AddUser_Click for server-side placeholder creation and authorization boundaries.</en>
+                </lang>
+            --%>

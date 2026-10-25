@@ -1,0 +1,4 @@
+        public LinksDb(PortalDbContext context)
+        {
+            _context = context;
+        }

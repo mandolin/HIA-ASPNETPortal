@@ -1,0 +1,38 @@
+    public sealed class PortalWorkItemTargetResolution
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一次解析结果。</zh-CN>
+        ///   <en>Creates one resolution outcome.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tab">
+        /// <l>
+        ///   <zh-CN>已通过角色检查的承载页签；未解析时为 <c>null</c>。</zh-CN>
+        ///   <en>The hosting tab that passed the role check, or <c>null</c> when unresolved.</en>
+        /// </l>
+        /// </param>
+        /// <param name="reasonCode">
+        /// <l>
+        ///   <zh-CN>未解析时的原因码；已解析时为空串。</zh-CN>
+        ///   <en>The reason code when unresolved, or an empty string when resolved.</en>
+        /// </l>
+        /// </param>
+        internal PortalWorkItemTargetResolution(ITabItem tab, string reasonCode)
+        {
+            Tab = tab;
+            ReasonCode = reasonCode ?? string.Empty;
+        }
+
+        /// <summary><lang><zh-CN>承载业务对象的页签；未解析时为 <c>null</c>。</zh-CN><en>The tab hosting the business object, or <c>null</c> when unresolved.</en></lang></summary>
+        public ITabItem Tab { get; private set; }
+
+        /// <summary><lang><zh-CN>未解析原因码；已解析时为空串。取值集合见 <see cref="PortalWorkItemTargetResolver"/> 的常量。</zh-CN><en>The unresolved reason code, or an empty string when resolved; the value set is defined by the constants on <see cref="PortalWorkItemTargetResolver"/>.</en></lang></summary>
+        public string ReasonCode { get; private set; }
+
+        /// <summary><lang><zh-CN>是否解析到可导航页签。为 <c>false</c> 时调用方必须降级呈现，不得凭业务类型猜测地址。</zh-CN><en>Whether a navigable tab was resolved. When <c>false</c> the caller must render the degraded form and must not guess a URL from the business kind.</en></lang></summary>
+        public bool IsResolved
+        {
+            get { return Tab != null; }
+        }
+    }

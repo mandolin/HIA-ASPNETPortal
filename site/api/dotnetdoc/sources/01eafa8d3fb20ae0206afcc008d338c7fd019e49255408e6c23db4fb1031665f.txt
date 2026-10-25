@@ -1,0 +1,400 @@
+    public class RolesDb : IRolesDb
+    {
+        private readonly PortalSecurityDbContext _context;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化角色数据访问实现。</zh-CN>
+        ///   <en>Initializes the role data-access implementation.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>门户安全数据库上下文。</zh-CN>
+        ///   <en>Portal security database context.</en>
+        /// </l>
+        /// </param>
+        public RolesDb(PortalSecurityDbContext context)
+        {
+            _context = context;
+        }
+
+        #region IRolesDb Members
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指定门户下的全部角色。</zh-CN>
+        ///   <en>Reads all roles for the specified Portal.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="portalId">
+        /// <l>
+        ///   <zh-CN>门户标识。</zh-CN>
+        ///   <en>Portal identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>可由后台维护的角色集合；不含 <c>All Users</c> 的权限配置载体记录。</zh-CN>
+        ///   <en>Roles that can be maintained through administration, excluding the <c>All Users</c> permission-configuration carrier.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN><c>All Users</c> 在访问判定中仍是虚拟通配角色。细粒度权限表需要外键目标时，迁移会维护一个同名但无成员关系的配置载体记录；后台角色列表必须隐藏它，以免被误当成可分配或可删除的普通角色。</zh-CN>
+        ///   <en><c>All Users</c> remains a virtual wildcard for access checks. When the fine-grained permission table needs a foreign-key target, migration maintains a same-named configuration carrier with no membership; administration lists must hide it so it is not mistaken for an assignable or deletable regular role.</en>
+        /// </lang>
+        /// </remarks>
+        public IEnumerable<IRoleItem> GetPortalRoles(int portalId)
+        {
+            return _context.Roles
+                .Where(i => i.PortalId == portalId && i.RoleName != PortalRoleNames.AllUsers)
+                .ToList();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>为门户新增一个角色。</zh-CN>
+        ///   <en>Adds a new role for a Portal.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="portalId">
+        /// <l>
+        ///   <zh-CN>门户标识。</zh-CN>
+        ///   <en>Portal identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="roleName">
+        /// <l>
+        ///   <zh-CN>角色名称。</zh-CN>
+        ///   <en>Role name.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>新角色标识。</zh-CN>
+        ///   <en>New role identifier.</en>
+        /// </l>
+        /// </returns>
+        public int AddRole(int portalId, string roleName)
+        {
+            var item = new RoleItem
+            {
+                PortalId = portalId,
+                RoleName = roleName
+            };
+
+            _context.Roles.Add(item);
+
+            // <lang>
+            //   <zh-CN>保存后使用数据库生成的 RoleId 作为后台页面继续编辑和授权映射的稳定标识。</zh-CN>
+            //   <en>After saving, the database-generated RoleId becomes the stable identifier used by administration pages for later editing and permission mapping.</en>
+            // </lang>
+            _context.SaveChanges();
+            return item.RoleId;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>删除指定角色，并使原成员的安全版本失效。</zh-CN>
+        ///   <en>Deletes the specified role and invalidates security versions for previous members.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="roleId">
+        /// <l>
+        ///   <zh-CN>角色标识。</zh-CN>
+        ///   <en>Role identifier.</en>
+        /// </l>
+        /// </param>
+        public void DeleteRole(int roleId)
+        {
+            var item = _context.Roles.Single(i => i.RoleId == roleId);
+            var affectedUserIds = GetRoleMemberIds(roleId);
+
+            _context.Roles.Remove(item);
+
+            // <lang>
+            //   <zh-CN>先保存角色删除，再递增原成员安全版本；这样即使旧票据仍存在，下一请求也会重新读取角色状态。</zh-CN>
+            //   <en>Persist the role deletion first, then increment former members' security versions so existing tickets re-read role state on the next request.</en>
+            // </lang>
+            _context.SaveChanges();
+            IncrementSecurityVersions(affectedUserIds, "RoleDeleted");
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>更新指定角色名称，并使成员票据重新判定角色信息。</zh-CN>
+        ///   <en>Updates a role name and causes members' tickets to re-evaluate role information.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="roleId">
+        /// <l>
+        ///   <zh-CN>角色标识。</zh-CN>
+        ///   <en>Role identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="roleName">
+        /// <l>
+        ///   <zh-CN>新的角色名称。</zh-CN>
+        ///   <en>New role name.</en>
+        /// </l>
+        /// </param>
+        public void UpdateRole(int roleId, string roleName)
+        {
+            var item = _context.Roles.Single(i => i.RoleId == roleId);
+            var affectedUserIds = GetRoleMemberIds(roleId);
+
+            item.RoleName = roleName;
+
+            // <lang>
+            //   <zh-CN>角色名称会进入角色 Cookie 和后台显示；保存后递增安全版本，让旧票据尽快重新生成。</zh-CN>
+            //   <en>Role names flow into role cookies and administration displays; after saving, increment security versions so older tickets are regenerated promptly.</en>
+            // </lang>
+            _context.SaveChanges();
+            IncrementSecurityVersions(affectedUserIds, "RoleUpdated");
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指定角色的成员用户。</zh-CN>
+        ///   <en>Reads users assigned to the specified role.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="roleId">
+        /// <l>
+        ///   <zh-CN>角色标识。</zh-CN>
+        ///   <en>Role identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>按用户名排序的成员用户集合。</zh-CN>
+        ///   <en>Member users ordered by user name.</en>
+        /// </l>
+        /// </returns>
+        public IEnumerable<IUserItem> GetRoleMembers(int roleId)
+        {
+            // <lang>
+            //   <zh-CN>旧 EF 导航集合在某些运行路径中可能未初始化；显式读取中间表更稳定。</zh-CN>
+            //   <en>The legacy EF navigation collection can be uninitialized in some runtime paths; reading the join table explicitly is more stable.</en>
+            // </lang>
+            var userIds = GetRoleMemberIds(roleId);
+            return _context.Users
+                .Where(user => userIds.Contains(user.UserId))
+                .OrderBy(user => user.Name)
+                .ToList<IUserItem>();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把用户加入指定角色。</zh-CN>
+        ///   <en>Adds a user to the specified role.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="roleId">
+        /// <l>
+        ///   <zh-CN>角色标识。</zh-CN>
+        ///   <en>Role identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户标识。</zh-CN>
+        ///   <en>User identifier.</en>
+        /// </l>
+        /// </param>
+        public void AddUserRole(int roleId, int userId)
+        {
+            // <lang>
+            //   <zh-CN>显式确认用户和角色存在，再用中间表写入，避免旧 EF 导航集合为空导致后台错误页。</zh-CN>
+            //   <en>Confirm that user and role exist, then write the join table explicitly to avoid admin error pages from null legacy EF collections.</en>
+            // </lang>
+            EnsureUserAndRoleExist(roleId, userId);
+            if (HasUserRole(roleId, userId))
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                "INSERT INTO [dbo].[Portal_UserRoles] ([UserID], [RoleID]) VALUES (@p0, @p1)",
+                userId,
+                roleId);
+            IncrementSecurityVersion(userId, "RoleMembershipAdded");
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>从指定角色移除用户。</zh-CN>
+        ///   <en>Removes a user from the specified role.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="roleId">
+        /// <l>
+        ///   <zh-CN>角色标识。</zh-CN>
+        ///   <en>Role identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>用户标识。</zh-CN>
+        ///   <en>User identifier.</en>
+        /// </l>
+        /// </param>
+        public void DeleteUserRole(int roleId, int userId)
+        {
+            EnsureUserAndRoleExist(roleId, userId);
+            if (!HasUserRole(roleId, userId))
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                "DELETE FROM [dbo].[Portal_UserRoles] WHERE [UserID] = @p0 AND [RoleID] = @p1",
+                userId,
+                roleId);
+            IncrementSecurityVersion(userId, "RoleMembershipRemoved");
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取所有门户用户，并按名称排序。</zh-CN>
+        ///   <en>Reads all Portal users ordered by name.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>用户集合。</zh-CN>
+        ///   <en>User collection.</en>
+        /// </l>
+        /// </returns>
+        public IEnumerable<IUserItem> GetUsers()
+        {
+            return _context.Users.OrderBy(i => i.Name).ToList();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指定用户通过角色映射获得的权限键；权限扩展表未部署时保持空集合。</zh-CN>
+        ///   <en>Reads permission keys granted through role mappings for the specified user; returns an empty collection when the permission extension table is not deployed.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="name">
+        /// <l>
+        ///   <zh-CN>用户登录名或邮箱。</zh-CN>
+        ///   <en>User sign-in name or email.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>直接角色成员关系以及虚拟 <c>All Users</c> 配置载体授予的权限键集合。</zh-CN>
+        ///   <en>Permission keys granted through direct role membership and the virtual <c>All Users</c> configuration carrier.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>为保持旧门户中 <c>All Users</c> 的通配语义，查询会把同名配置载体的启用权限合并给每个已认证身份，但不会要求或写入 <c>Portal_UserRoles</c> 成员记录。普通角色仍严格按用户成员关系查询。</zh-CN>
+        ///   <en>To preserve the legacy wildcard semantics of <c>All Users</c>, this query unions enabled permissions from its same-named configuration carrier for every authenticated identity without requiring or writing a <c>Portal_UserRoles</c> membership row. Regular roles remain strictly membership based.</en>
+        /// </lang>
+        /// </remarks>
+        public IEnumerable<string> GetPermissionKeysByUserName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name) || !HasRolePermissionsTable())
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            return _context.Database.SqlQuery<string>(
+                @"
+SELECT DISTINCT [RolePermissions].[PermissionKey]
+FROM [dbo].[PortalCfg_RolePermissions] AS [RolePermissions]
+INNER JOIN [dbo].[Portal_Roles] AS [Roles]
+    ON [Roles].[RoleID] = [RolePermissions].[RoleId]
+LEFT JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+    ON [UserRoles].[RoleID] = [RolePermissions].[RoleId]
+LEFT JOIN [dbo].[Portal_Users] AS [Users]
+    ON [Users].[UserID] = [UserRoles].[UserID]
+WHERE [RolePermissions].[IsEnabled] = 1
+  AND
+  (
+      [Roles].[RoleName] = @p1
+      OR [Users].[Name] = @p0
+      OR [Users].[Email] = @p0
+  )
+ORDER BY [RolePermissions].[PermissionKey]",
+                name.Trim(),
+                PortalRoleNames.AllUsers).ToList();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取全部角色权限映射的只读投影，供能力权限矩阵按"能力层 → 权限分类 → 角色"呈现现状。</zh-CN>
+        ///   <en>Reads a read-only projection of every role-permission mapping so the capability permission matrix can present the current state by capability layer, permission category, and role.</en>
+        /// </lang>
+        /// </summary>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>按角色名与权限键排序的映射集合；权限表缺失或查询失败时返回空集合。</zh-CN>
+        ///   <en>Mappings ordered by role name and permission key; empty when the permission table is missing or the query fails.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>只读实现：使用与既有权限查询一致的表存在性守卫与失败降级（返回空集合而非抛异常），不写库、不递增安全版本、不缓存。`IsEnabled` 直接投影数据库生效态，禁用映射不得被展示为"未授权"。</zh-CN>
+        ///   <en>Read-only implementation: it reuses the table-existence guard and failure degradation (empty result instead of an exception) of the existing permission query, and it writes nothing, increments no security version, and caches nothing. `IsEnabled` is projected straight from the effective database state, and a disabled mapping must never be rendered as "not granted".</en>
+        /// </lang>
+        /// </remarks>
+        public IEnumerable<RolePermissionEntry> GetRolePermissionEntries()
+        {
+            // <lang>
+            //   <zh-CN>权限表未部署时直接返回空集合：矩阵页据此显示"权限映射表不可用"，而不是让整页失败。</zh-CN>
+            //   <en>Return an empty set when the permission table is not deployed, so the matrix page can show "permission mapping table unavailable" instead of failing as a whole.</en>
+            // </lang>
+            if (!HasRolePermissionsTable())
+            {
+                return Enumerable.Empty<RolePermissionEntry>();
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>只投影矩阵需要的四列（角色、角色名、权限键、生效态），并按角色名与权限键稳定排序，保证同一数据每次呈现顺序一致。</zh-CN>
+                //   <en>Project only the four columns the matrix needs (role, role name, permission key, effective state) and order stably by role name then permission key so the same data renders in the same order every time.</en>
+                // </lang>
+                return _context.Database.SqlQuery<RolePermissionEntry>(
+                    @"
+SELECT [RolePermissions].[RoleId] AS [RoleId],
+       [Roles].[RoleName] AS [RoleName],
+       [RolePermissions].[PermissionKey] AS [PermissionKey],
+       [RolePermissions].[IsEnabled] AS [IsEnabled]
+FROM [dbo].[PortalCfg_RolePermissions] AS [RolePermissions]
+INNER JOIN [dbo].[Portal_Roles] AS [Roles]
+    ON [Roles].[RoleID] = [RolePermissions].[RoleId]
+ORDER BY [Roles].[RoleName], [RolePermissions].[PermissionKey]").ToList();
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>查询失败一律降级为空集合：与既有权限读取保持同一失败语义，避免只读诊断视图把异常扩散到页面其余部分。</zh-CN>
+                //   <en>Degrade every query failure to an empty set, matching the existing permission read semantics so a read-only diagnostic view never spreads an exception into the rest of the page.</en>
+                // </lang>
+                return Enumerable.Empty<RolePermissionEntry>();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>替换角色权限映射，并递增该角色成员的安全版本以使旧票据在下一请求重新判定。</zh-CN>
+        ///   <en>Replaces role-permission mappings and increments member security versions so older tickets are re-evaluated on the next request.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="roleId">
+        /// <l>
+        ///   <zh-CN>角色数值标识。</zh-CN>
+        ///   <en>Numeric role identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="permissionKeys">
+        /// <l>
+        ///   <zh-CN>新的权限键集合。</zh-CN>
+        ///   <en>New permission-key collection.</en>
+        /// </l>

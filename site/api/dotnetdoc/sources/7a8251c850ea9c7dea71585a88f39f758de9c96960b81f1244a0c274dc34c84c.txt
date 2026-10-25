@@ -1,0 +1,60 @@
+    public interface IHtmlTextsDb
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取指定模块的 HTML 文本记录。</zh-CN>
+        ///   <en>Reads the HTML text record for the specified module.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="moduleId">
+        /// <l>
+        ///   <zh-CN>HTML 模块实例标识。</zh-CN>
+        ///   <en>The HTML module instance identifier.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>匹配的 HTML 文本记录；模块尚未保存内容时返回 <c>null</c>。</zh-CN>
+        ///   <en>The matching HTML text record, or <c>null</c> before the module has saved content.</en>
+        /// </l>
+        /// </returns>
+        IHtmlTextItem GetHtmlText(int moduleId);
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>写入指定模块的桌面和旧移动端 HTML 文本。</zh-CN>
+        ///   <en>Writes desktop and legacy mobile HTML text for the specified module.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>调用方必须先确认模块编辑权限和“受信任原始 HTML”边界，并按当前兼容约定对桌面 HTML、移动摘要和移动详情做编码存储。展示层在输出前再按旧模块约定解码或直接输出。</zh-CN>
+        ///   <en>Callers must first confirm module-edit authorization and the trusted raw-HTML boundary, then encode desktop HTML, mobile summary, and mobile details for storage under the current compatibility convention. The presentation layer later decodes or emits content according to legacy module rules.</en>
+        /// </lang>
+        /// </remarks>
+        /// <param name="moduleId">
+        /// <l>
+        ///   <zh-CN>HTML 模块实例标识。</zh-CN>
+        ///   <en>The HTML module instance identifier.</en>
+        /// </l>
+        /// </param>
+        /// <param name="desktopHtml">
+        /// <l>
+        ///   <zh-CN>桌面端 HTML 正文；当前仅允许受信任管理员提交原始 HTML。</zh-CN>
+        ///   <en>The desktop HTML body; currently only trusted administrators may submit raw HTML.</en>
+        /// </l>
+        /// </param>
+        /// <param name="mobileSummary">
+        /// <l>
+        ///   <zh-CN>旧移动端摘要 HTML 或文本。</zh-CN>
+        ///   <en>The legacy mobile summary HTML or text.</en>
+        /// </l>
+        /// </param>
+        /// <param name="mobileDetails">
+        /// <l>
+        ///   <zh-CN>旧移动端详情 HTML 或文本。</zh-CN>
+        ///   <en>The legacy mobile details HTML or text.</en>
+        /// </l>
+        /// </param>
+        void UpdateHtmlText(int moduleId, string desktopHtml, string mobileSummary, string mobileDetails);
+    }

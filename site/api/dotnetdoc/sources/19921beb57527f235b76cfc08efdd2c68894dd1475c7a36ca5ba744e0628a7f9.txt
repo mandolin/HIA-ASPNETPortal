@@ -1,0 +1,5 @@
+        internal static string Collaboration_ParticipantRole_Collaborator {
+            get {
+                return ResourceManager.GetString("Collaboration_ParticipantRole_Collaborator", resourceCulture);
+            }
+        }

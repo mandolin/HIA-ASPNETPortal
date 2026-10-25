@@ -1,0 +1,5 @@
+        internal static string Admin_WorkItems_ColumnId {
+            get {
+                return ResourceManager.GetString("Admin_WorkItems_ColumnId", resourceCulture);
+            }
+        }

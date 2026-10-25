@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>媒体容器只承载经过导航策略归一化的图片输出；非法地址由 code-behind 隐藏图片，不回显原始设置。</zh-CN>
+        <en>The media container hosts only image output normalized by the navigation policy; code-behind hides invalid addresses instead of echoing raw settings.</en>
+    </lang>
+--%>

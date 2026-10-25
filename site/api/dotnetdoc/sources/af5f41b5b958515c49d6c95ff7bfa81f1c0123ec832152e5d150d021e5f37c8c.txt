@@ -1,0 +1,1 @@
+        public const string OpsDiagnosticsView = "Ops.Diagnostics.View";

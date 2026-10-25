@@ -1,0 +1,18 @@
+        private bool TryNormalizeOptionalBrowseUrl(string value, out string normalizedUrl)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                // <lang>
+                //   <zh-CN>移动端兼容地址允许为空；空输入保存为空字符串而不是触发校验错误。</zh-CN>
+                //   <en>The mobile compatibility URL may be blank; blank input is saved as an empty string instead of causing a validation error.</en>
+                // </lang>
+                normalizedUrl = string.Empty;
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>非空兼容地址仍必须通过统一浏览地址策略，保持桌面和移动链接安全边界一致。</zh-CN>
+            //   <en>Non-empty compatibility URLs must still pass the shared browse-url policy, keeping desktop and mobile link safety boundaries aligned.</en>
+            // </lang>
+            return PortalNavigationPolicy.TryNormalizeBrowseUrl(value, Request, out normalizedUrl);
+        }

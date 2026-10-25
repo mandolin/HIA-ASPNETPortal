@@ -1,0 +1,49 @@
+        private bool TryUpgradeCredentialCost(
+            int userId,
+            string password,
+            int storedIterationCount,
+            DateTime? lastVerifiedUtc,
+            DateTime? legacyUpgradedUtc)
+        {
+            // <lang>
+            //   <zh-CN>仅低于目标成本时才写入；默认目标等于现有默认成本，因此默认不产生任何写操作。</zh-CN>
+            //   <en>Write only when below the target cost; the default target equals the current default cost, so no write happens by default.</en>
+            // </lang>
+            if (!PortalPasswordIterationPolicy.NeedsRehash(storedIterationCount))
+            {
+                return false;
+            }
+
+            int targetIterationCount = PortalPasswordIterationPolicy.ResolveTargetIterationCount();
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>重哈希与 legacy 升级同样放在事务内；必须显式回传原有时间字段，否则 UpsertCredential 会把它们清空。</zh-CN>
+                //   <en>Rehashing runs in a transaction like the legacy upgrade; the original time fields must be passed back explicitly, otherwise UpsertCredential clears them.</en>
+                // </lang>
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    UpsertCredential(
+                        userId,
+                        password,
+                        legacyUpgradedUtc,
+                        lastVerifiedUtc,
+                        false,
+                        null,
+                        targetIterationCount);
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+
+                return true;
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>重哈希失败不影响本次已成功的登录；凭据保持原成本，后续登录会再次尝试。</zh-CN>
+                //   <en>A failed rehash does not affect the already-successful sign-in; the credential keeps its old cost and later sign-ins retry.</en>
+                // </lang>
+                return false;
+            }
+        }

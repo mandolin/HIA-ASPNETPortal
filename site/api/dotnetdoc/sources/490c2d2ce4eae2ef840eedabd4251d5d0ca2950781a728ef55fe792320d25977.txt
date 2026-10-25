@@ -1,0 +1,29 @@
+        public static string GetCapabilityId(string businessKind)
+        {
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.CollaborationItem, StringComparison.Ordinal))
+            {
+                return PortalCapabilityRegistry.Collaboration;
+            }
+
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.BusinessApplication, StringComparison.Ordinal))
+            {
+                return PortalCapabilityRegistry.ApplicationRequest;
+            }
+
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest, StringComparison.Ordinal))
+            {
+                return PortalCapabilityRegistry.EmployeeProfileCorrectionRequest;
+            }
+
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.LeaveRequest, StringComparison.Ordinal))
+            {
+                return PortalCapabilityRegistry.LeaveRequest;
+            }
+
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.ExpenseReimbursement, StringComparison.Ordinal))
+            {
+                return PortalCapabilityRegistry.ExpenseReimbursement;
+            }
+
+            return string.Empty;
+        }

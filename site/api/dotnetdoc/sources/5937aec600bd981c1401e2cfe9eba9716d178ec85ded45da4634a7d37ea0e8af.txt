@@ -1,0 +1,1 @@
+        <%-- <lang><zh-CN>左侧模块容器；仅在当前 Tab 配置了左侧模块时由 code-behind 显示。</zh-CN><en>Left module pane; code-behind shows it only when the current tab has left-pane modules.</en></lang> --%>

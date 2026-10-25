@@ -1,0 +1,4 @@
+        public EventsDb(PortalDbContext context)
+        {
+            _context = context;
+        }

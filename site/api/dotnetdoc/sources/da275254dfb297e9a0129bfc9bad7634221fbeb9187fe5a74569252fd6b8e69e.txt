@@ -1,0 +1,10 @@
+        public static bool IsCoreDesktopSource(string normalizedDesktopSource)
+        {
+            // <lang>
+            //   <zh-CN>先将历史路径收敛为相对正斜杠形式，再仅识别登录入口和 Admin 前缀；该分类不替代访问该入口所需的授权检查。</zh-CN>
+            //   <en>First converge a legacy path to relative forward-slash form, then recognize only the sign-in entry and Admin prefix; this classification does not replace authorization required to access that entry.</en>
+            // </lang>
+            string source = NormalizeSource(normalizedDesktopSource);
+            return string.Equals(source, "DesktopModules/SignIn.ascx", StringComparison.OrdinalIgnoreCase) ||
+                   source.StartsWith("Admin/", StringComparison.OrdinalIgnoreCase);
+        }

@@ -1,0 +1,26 @@
+        internal PortalThemeContext(string themeName, PortalThemeSource source, int? tabId, string fallbackReason)
+        {
+            // <lang>
+            //   <zh-CN>将主题名空值归一为安全 Default，保证 Web Forms 始终接收单一可用基底主题。</zh-CN>
+            //   <en>Normalize a null theme name to safe Default so Web Forms always receives one usable base theme.</en>
+            // </lang>
+            ThemeName = themeName ?? PortalThemeResolver.DefaultThemeName;
+
+            // <lang>
+            //   <zh-CN>保存最终来源层级，供健康检查和受限诊断解释回退但不暴露配置原文。</zh-CN>
+            //   <en>Store the final source layer so health checks and restricted diagnostics can explain fallback without exposing raw configuration.</en>
+            // </lang>
+            Source = source;
+
+            // <lang>
+            //   <zh-CN>保存可选 Tab 标识；后台、错误或无门户上下文请求保持 null。</zh-CN>
+            //   <en>Store the optional tab identifier; administration, error, or no-portal-context requests remain null.</en>
+            // </lang>
+            TabId = tabId;
+
+            // <lang>
+            //   <zh-CN>将回退原因空值归一为空字符串，且该字段只容纳非敏感说明。</zh-CN>
+            //   <en>Normalize a null fallback reason to empty; this field holds non-sensitive explanation only.</en>
+            // </lang>
+            FallbackReason = fallbackReason ?? string.Empty;
+        }

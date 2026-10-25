@@ -1,0 +1,61 @@
+        private void BindModule()
+        {
+            // <lang>
+            //   <zh-CN>先解析用户标识，即使后续身份检查失败也统一得到零值。</zh-CN>
+            //   <en>Resolve the user id first so later identity failures consistently operate on zero.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            if (!IsCurrentUserAuthenticated())
+            {
+                // <lang>
+                //   <zh-CN>匿名用户不能看到提交区域，最近申请也以空列表绑定。</zh-CN>
+                //   <en>Anonymous users cannot see the submission area, and recent applications are bound as an empty list.</en>
+                // </lang>
+                RequestPanel.Visible = false;
+                BindRecentApplications(0);
+                ShowMessage(lang.BusinessApplicationRequest_MessageSignInRequired);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>Schema 不可用时保持页面可渲染但不触达创建查询，明确提示数据库初始化边界。</zh-CN>
+            //   <en>When the schema is unavailable, keep the page renderable without issuing creation queries and expose the database-initialization boundary.</en>
+            // </lang>
+            if (BusinessApplicationDb == null || !BusinessApplicationDb.IsSchemaAvailable())
+            {
+                RequestPanel.Visible = false;
+                BindRecentApplications(0);
+                ShowMessage(lang.BusinessApplicationRequest_MessageModuleNotInitialized);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>提交区域只对提交权限或管理员权限开放，读取列表仍由当前模块策略控制。</zh-CN>
+            //   <en>Expose the submission area only to submit or administrator permission holders; list binding remains controlled by this module's policy.</en>
+            // </lang>
+            bool canSubmit = PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.BusinessApplicationSubmit,
+                PortalPermissionKeys.BusinessApplicationAdmin);
+            RequestPanel.Visible = canSubmit;
+            if (!canSubmit)
+            {
+                // <lang>
+                //   <zh-CN>无提交权限时不触达业务创建，仍绑定空最近列表并给出低敏提示。</zh-CN>
+                //   <en>Without submit permission, do not reach business creation; bind an empty recent list and show a low-sensitivity message.</en>
+                // </lang>
+                BindRecentApplications(0);
+                ShowMessage(lang.BusinessApplicationRequest_MessageNoPermission);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(MessageLabel.Text))
+            {
+                // <lang>
+                //   <zh-CN>保持空消息为空，避免初始化阶段生成不必要的文本。</zh-CN>
+                //   <en>Keep an empty message empty so initialization does not create unnecessary text.</en>
+                // </lang>
+                MessageLabel.Text = string.Empty;
+            }
+
+            BindRecentApplications(userId);
+        }

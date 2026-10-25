@@ -1,0 +1,5 @@
+        internal static string Discussion_Collapse {
+            get {
+                return ResourceManager.GetString("Discussion_Collapse", resourceCulture);
+            }
+        }

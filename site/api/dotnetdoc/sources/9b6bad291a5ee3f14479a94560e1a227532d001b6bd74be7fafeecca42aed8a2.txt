@@ -1,0 +1,27 @@
+        public IList<BusinessApplicationInfo> GetAdminApplications(string status, int take)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return new List<BusinessApplicationInfo>();
+            }
+
+            string normalizedStatus = NormalizeStatusFilter(status);
+            try
+            {
+                // <lang>
+                //   <zh-CN>后台路径先把状态和条数归一化，再选择固定的无筛选或参数化状态 where 片段；不拼接用户文本到 SQL。</zh-CN>
+                //   <en>Normalize status and count before choosing a fixed no-filter or parameterized-status where fragment; user text is never concatenated into SQL.</en>
+                // </lang>
+                return string.IsNullOrEmpty(normalizedStatus)
+                    ? QueryApplications(string.Empty, NormalizeTake(take, 50))
+                    : QueryApplications(
+                        @"
+WHERE [Application].[ApplicationStatus] = @ApplicationStatus",
+                        NormalizeTake(take, 50),
+                        new SqlParameter("@ApplicationStatus", normalizedStatus));
+            }
+            catch (Exception)
+            {
+                return new List<BusinessApplicationInfo>();
+            }
+        }

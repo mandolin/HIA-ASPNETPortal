@@ -1,0 +1,23 @@
+        protected void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除同样重新走初始化校验，避免仅凭隐藏字段或 ViewState 删除其他模块条目。</zh-CN>
+            //   <en>Deletion also reruns initialization checks, avoiding deletion of another module's item based only on hidden fields or ViewState.</en>
+            // </lang>
+            IAnnouncementItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            if (itemId != 0)
+            {
+                // <lang>
+                //   <zh-CN>新增路径没有持久化条目可删；只有既有条目且归属已核验时才调用数据层删除。</zh-CN>
+                //   <en>The creation path has no persisted row to delete; the data layer is called only for an existing item whose ownership has been verified.</en>
+                // </lang>
+                AnnouncementsDB.DeleteAnnouncement(itemId);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

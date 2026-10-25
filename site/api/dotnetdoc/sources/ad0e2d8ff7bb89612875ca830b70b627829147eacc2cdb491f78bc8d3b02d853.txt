@@ -1,0 +1,32 @@
+        private static bool TryParseRoleData(string value, out long securityVersion, out string roleData)
+        {
+            securityVersion = 0;
+            roleData = string.Empty;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>查找固定分隔符位置，拒绝缺少角色片段边界的票据数据。</zh-CN>
+            //   <en>Find the fixed separator and reject ticket data without a role-segment boundary.</en>
+            // </lang>
+            int separatorIndex = value.IndexOf(RolesDataSeparator, StringComparison.Ordinal);
+            if (separatorIndex < 0)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>提取分隔符前的安全版本文本，交给主认证服务按固定格式校验。</zh-CN>
+            //   <en>Extract the security-version text before the separator and validate it through the main authentication service.</en>
+            // </lang>
+            string versionData = value.Substring(0, separatorIndex);
+            if (!PortalAuthenticationService.TryParseSecurityVersion(versionData, out securityVersion))
+            {
+                return false;
+            }
+
+            roleData = value.Substring(separatorIndex + RolesDataSeparator.Length);
+            return true;
+        }

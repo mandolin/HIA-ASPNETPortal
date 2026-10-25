@@ -1,0 +1,1 @@
+        public string StatusReason { get; private set; }

@@ -1,0 +1,4 @@
+        public static PortalSignInResult Failed()
+        {
+            return new PortalSignInResult(false, 0, string.Empty, 0, false, false);
+        }

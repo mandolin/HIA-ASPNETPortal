@@ -1,0 +1,22 @@
+        private bool HasRoleReferences(PortalSettings portalSettings, string roleName)
+        {
+            // <lang>
+            //   <zh-CN>对每个 Tab 先检查访问角色，再检查其模块编辑角色；发现一处即阻断删除。</zh-CN>
+            //   <en>Check each Tab's access roles and then its module edit roles; any match blocks deletion immediately.</en>
+            // </lang>
+            foreach (ITabItem tab in portalSettings.DesktopTabs)
+            {
+                if (PortalRoleParser.Contains(tab.AccessRoles, roleName))
+                {
+                    return true;
+                }
+
+                if (ModulesConfig.GetModulesByTab(tab.TabId)
+                    .Any(module => PortalRoleParser.Contains(module.EditRoles, roleName)))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }

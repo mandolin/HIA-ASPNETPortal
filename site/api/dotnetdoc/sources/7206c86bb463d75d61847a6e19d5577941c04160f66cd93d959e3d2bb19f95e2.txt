@@ -1,0 +1,9 @@
+        public PortalOperationAuditQueryResult(
+            IList<PortalOperationAuditEntry> entries,
+            bool hasMore,
+            bool isAvailable)
+        {
+            Entries = entries ?? new List<PortalOperationAuditEntry>();
+            HasMore = hasMore;
+            IsAvailable = isAvailable;
+        }

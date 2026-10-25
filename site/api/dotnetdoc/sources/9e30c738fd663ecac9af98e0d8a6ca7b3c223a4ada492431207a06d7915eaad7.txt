@@ -1,0 +1,4 @@
+        private static string FormatFileSize(int bytes)
+        {
+            return (bytes / 1024d / 1024d).ToString("0.##", CultureInfo.InvariantCulture) + " MB";
+        }

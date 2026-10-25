@@ -1,0 +1,18 @@
+        private bool TryGetExistingResource(string configuredPath, out string normalizedPath)
+        {
+            // <lang>
+            //   <zh-CN>输出参数先归零，保证任何失败分支都不会把原始配置路径泄露给调用方。</zh-CN>
+            //   <en>The output parameter is cleared first so no failure path leaks the raw configured path back to the caller.</en>
+            // </lang>
+            normalizedPath = string.Empty;
+            if (!PortalNavigationPolicy.TryNormalizeTrustedDeploymentResourcePath(configuredPath, Context.Request, out normalizedPath))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>路径通过策略后再映射物理文件；这里只返回存在性，不把物理路径写入页面。</zh-CN>
+            //   <en>After policy validation, the path is mapped to the physical file; only existence is returned, and the physical path is not written to the page.</en>
+            // </lang>
+            return File.Exists(Server.MapPath(normalizedPath));
+        }

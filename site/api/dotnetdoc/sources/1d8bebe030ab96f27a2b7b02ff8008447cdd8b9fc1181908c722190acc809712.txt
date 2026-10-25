@@ -1,0 +1,7 @@
+        private bool EnsureCanHandleApplications()
+        {
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessApplicationReview,
+                PortalPermissionKeys.BusinessApplicationAdmin);
+        }

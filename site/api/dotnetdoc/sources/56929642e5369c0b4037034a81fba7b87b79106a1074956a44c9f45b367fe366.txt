@@ -1,0 +1,2 @@
+        [Dependency]
+        public IEmployeeDirectoryDb EmployeeDirectoryDb { private get; set; }

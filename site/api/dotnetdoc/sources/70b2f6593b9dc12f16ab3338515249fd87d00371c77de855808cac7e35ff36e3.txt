@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleCatalog_ColumnPackageId {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_ColumnPackageId", resourceCulture);
+            }
+        }

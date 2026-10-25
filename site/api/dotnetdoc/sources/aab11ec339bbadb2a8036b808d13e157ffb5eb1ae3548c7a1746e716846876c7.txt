@@ -1,0 +1,5 @@
+        internal static string Discussion_ExpandThread {
+            get {
+                return ResourceManager.GetString("Discussion_ExpandThread", resourceCulture);
+            }
+        }

@@ -1,0 +1,14 @@
+        private static string MapWorkItemEventType(string requestStatus)
+        {
+            if (string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Rejected, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Rejected;
+            }
+
+            if (string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Cancelled;
+            }
+
+            return PortalWorkItemEventTypes.Approved;
+        }

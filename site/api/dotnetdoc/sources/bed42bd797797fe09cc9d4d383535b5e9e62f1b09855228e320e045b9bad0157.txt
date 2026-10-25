@@ -1,0 +1,8 @@
+        private void AddConfigurationMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>提示通过 LiteralControl 追加到模块内，但消息本身先 HTML 编码，保持低敏文本输出。</zh-CN>
+            //   <en>The notice is appended through LiteralControl inside the module, but the message itself is HTML-encoded to keep output low-sensitivity text.</en>
+            // </lang>
+            Controls.Add(new LiteralControl("<br><span class=\"NormalRed\">" + Server.HtmlEncode(message) + "</span>"));
+        }

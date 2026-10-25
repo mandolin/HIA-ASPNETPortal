@@ -1,0 +1,1 @@
+        bool HasEditPermissions(int moduleId);

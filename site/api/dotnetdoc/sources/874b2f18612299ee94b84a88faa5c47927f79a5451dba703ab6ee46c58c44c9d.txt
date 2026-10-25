@@ -1,0 +1,5 @@
+        internal static string Admin_DiagnosticLogDetail_FieldUserAgent {
+            get {
+                return ResourceManager.GetString("Admin_DiagnosticLogDetail_FieldUserAgent", resourceCulture);
+            }
+        }

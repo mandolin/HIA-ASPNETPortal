@@ -1,0 +1,40 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>item 是通过权限和归属校验后的链接快照；新增链接时为空。</zh-CN>
+            //   <en>item is the link snapshot after permission and ownership validation; it is null when creating a new link.</en>
+            // </lang>
+            ILinkItem item;
+            if (!TryInitializeRequest(out item))
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                if (item != null)
+                {
+                    // <lang>
+                    //   <zh-CN>首次加载只在归属校验通过后回填旧链接字段，避免通过 ItemId 读取其他模块的条目。</zh-CN>
+                    //   <en>Initial binding fills legacy link fields only after ownership validation, avoiding reads of items from another module via ItemId.</en>
+                    // </lang>
+                    TitleField.Text = item.Title;
+                    DescriptionField.Text = item.Description;
+                    UrlField.Text = item.Url;
+                    MobileUrlField.Text = item.MobileUrl;
+                    // <lang>
+                    //   <zh-CN>显示顺序按旧整数文本回填；空值保留为空字符串交由保存阶段校验。</zh-CN>
+                    //   <en>The display order is filled as legacy integer text; null stays blank and is validated during save.</en>
+                    // </lang>
+                    ViewOrderField.Text = item.ViewOrder.HasValue ? item.ViewOrder.Value.ToString() : string.Empty;
+                    CreatedBy.Text = EncodeDisplayText(item.CreatedByUser);
+                    CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
+                }
+
+                // <lang>
+                //   <zh-CN>回跳地址只保存经策略清洗后的站内地址，供保存、删除和取消共用。</zh-CN>
+                //   <en>The return URL stores only a policy-cleaned in-app address shared by save, delete and cancel actions.</en>
+                // </lang>
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
+            }
+        }

@@ -1,0 +1,7 @@
+        public static bool IsKnown(string value)
+        {
+            return string.Equals(value, Active, StringComparison.Ordinal) ||
+                   string.Equals(value, Pending, StringComparison.Ordinal) ||
+                   string.Equals(value, Suspended, StringComparison.Ordinal) ||
+                   string.Equals(value, Left, StringComparison.Ordinal);
+        }

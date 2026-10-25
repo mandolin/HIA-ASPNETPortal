@@ -1,0 +1,117 @@
+        public PortalSignInResult SignIn(string emailOrName, string password)
+        {
+            // <lang>
+            //   <zh-CN>只保留归一化后的登录标识用于解析；密码不写入本地变量日志或诊断文本。</zh-CN>
+            //   <en>Use only the normalized sign-in identifier for resolution; never write the password to logs or diagnostic text.</en>
+            // </lang>
+            string normalizedLogin = Normalize(emailOrName);
+            if (string.IsNullOrEmpty(normalizedLogin) || password == null)
+            {
+                return PortalSignInResult.Failed();
+            }
+
+            var resolution = new PortalLoginIdentifierResolver(
+                _context,
+                HasUserProfileTable(),
+                HasEmployeeCodeSignInTables()).Resolve(normalizedLogin);
+            // <lang>
+            //   <zh-CN>未找到或存在歧义时统一失败，避免通过响应差异暴露账号解析结果。</zh-CN>
+            //   <en>Fail uniformly when resolution is missing or ambiguous so response differences do not disclose account lookup results.</en>
+            // </lang>
+            if (!resolution.Found || resolution.Ambiguous)
+            {
+                return PortalSignInResult.Failed();
+            }
+
+            var item = _context.Users
+                .AsNoTracking()
+                .SingleOrDefault(i => i.UserId == resolution.UserId);
+
+            if (item == null || !IsUserProfileLoginAllowed(item.UserId) || !IsLoginAllowed(item.UserId))
+            {
+                return PortalSignInResult.Failed();
+            }
+
+            bool hasCredentialTables = HasCredentialTables();
+            // <lang>
+            //   <zh-CN>强凭据表和安全状态表必须同时可用才进入强凭据路径；扩展表不可用时保留受控 legacy 兼容读取。</zh-CN>
+            //   <en>Use the strong-credential path only when both credential and security-state tables are available; otherwise retain the controlled legacy compatibility read.</en>
+            // </lang>
+            if (hasCredentialTables)
+            {
+                var credential = _context.UserCredentials
+                    .AsNoTracking()
+                    .SingleOrDefault(i => i.UserId == item.UserId);
+
+                if (credential != null)
+                {
+                    if (credential.RequiresReset)
+                    {
+                        return new PortalSignInResult(false, item.UserId, SafeName(item.Name), GetSecurityVersionByUserId(item.UserId), false, true);
+                    }
+
+                    if (!PortalPasswordHasher.Verify(
+                        password,
+                        credential.PasswordFormat,
+                        credential.PasswordSalt,
+                        credential.PasswordHash,
+                        credential.IterationCount))
+                    {
+                        return PortalSignInResult.Failed();
+                    }
+
+                    // <lang>
+                    //   <zh-CN>强凭据验证成功后先按需提升哈希成本，再更新最后验证时间；全程不重新读取或暴露哈希材料。</zh-CN>
+                    //   <en>After strong-credential verification, raise the hashing cost when needed and then update the last-verified time; hash material is never re-read or exposed.</en>
+                    // </lang>
+                    bool credentialCostUpgraded = TryUpgradeCredentialCost(
+                        item.UserId,
+                        password,
+                        credential.IterationCount,
+                        credential.LastVerifiedUtc,
+                        credential.LegacyUpgradedUtc);
+
+                    MarkCredentialVerified(item.UserId);
+                    return new PortalSignInResult(
+                        true,
+                        item.UserId,
+                        SafeName(item.Name),
+                        GetSecurityVersionByUserId(item.UserId),
+                        false,
+                        false,
+                        credentialCostUpgraded);
+                }
+            }
+
+            if (!VerifyLegacyPassword(item, password))
+            {
+                return PortalSignInResult.Failed();
+            }
+
+            bool upgradedLegacyCredential = false;
+            if (hasCredentialTables)
+            {
+                // <lang>
+                //   <zh-CN>legacy 登录成功只在事务内升级为强凭据并初始化安全状态；升级异常沿既有调用路径传播，不把明文密码写入表。</zh-CN>
+                //   <en>After legacy sign-in succeeds, upgrade the credential and initialize security state in one transaction; upgrade exceptions follow the existing call path and plaintext passwords are never stored.</en>
+                // </lang>
+                DateTime nowUtc = DateTime.UtcNow;
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    EnsureSecurityState(item.UserId, "LegacyCredentialUpgrade");
+                    UpsertCredential(item.UserId, password, nowUtc, nowUtc, false, null);
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+
+                upgradedLegacyCredential = true;
+            }
+
+            return new PortalSignInResult(
+                true,
+                item.UserId,
+                SafeName(item.Name),
+                GetSecurityVersionByUserId(item.UserId),
+                upgradedLegacyCredential,
+                false);
+        }

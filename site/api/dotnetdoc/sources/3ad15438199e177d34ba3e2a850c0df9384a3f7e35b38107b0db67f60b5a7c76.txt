@@ -1,0 +1,14 @@
+        private static string NormalizeInput(string value, int maxLength)
+        {
+            // <lang>
+            //   <zh-CN>先把 null 归为空文本并去除首尾空白，保证持久化和无变化比较使用同一规范化值。</zh-CN>
+            //   <en>Normalize null to empty text and trim both ends so persistence and unchanged-value comparison use the same value.</en>
+            // </lang>
+            string normalized = (value ?? string.Empty).Trim();
+
+            // <lang>
+            //   <zh-CN>超长输入只保留字段允许的前缀；长度限制在 UI 与服务边界均应保持一致。</zh-CN>
+            //   <en>For oversized input, retain only the permitted prefix; the same length boundary must hold at both UI and service edges.</en>
+            // </lang>
+            return normalized.Length <= maxLength ? normalized : normalized.Substring(0, maxLength);
+        }

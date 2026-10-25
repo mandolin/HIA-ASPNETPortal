@@ -1,0 +1,132 @@
+    public sealed class BusinessApplicationAdminRow
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把业务申请转换为低敏只读后台展示模型。</zh-CN>
+        ///   <en>Converts a business application into a low-sensitivity read-only administration display model.</en>
+        /// </lang>
+        /// </summary>
+        internal BusinessApplicationAdminRow(BusinessApplicationInfo application)
+        {
+            // <lang>
+            //   <zh-CN>展示行保留审核所需字段，申请正文和审核意见只作为既有展示文本处理。</zh-CN>
+            //   <en>The display row keeps review-required fields while treating body and review comment as existing display text.</en>
+            // </lang>
+            ApplicationId = application.ApplicationId;
+            ApplicationCode = application.ApplicationCode;
+            Title = EmptyToNone(application.Title);
+            CategoryKey = EmptyToNone(application.CategoryKey);
+            Summary = EmptyToNone(application.Summary);
+            Body = EmptyToNone(application.Body);
+            ApplicantText = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_BusinessApplications_ApplicantFormat,
+                application.ApplicantUserId.ToString(CultureInfo.InvariantCulture),
+                EmptyToNone(application.ApplicantUserName));
+            ApplicationStatus = application.ApplicationStatus;
+            SubmittedUtcText = application.SubmittedUtc.HasValue
+                ? application.SubmittedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
+                : lang.Common_NonePlaceholder;
+            ReviewText = application.ReviewedUtc.HasValue
+                ? string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Admin_BusinessApplications_ReviewFormat,
+                    application.ReviewedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture),
+                    application.ReviewedByUserId.HasValue
+                        ? application.ReviewedByUserId.Value.ToString(CultureInfo.InvariantCulture)
+                        : lang.Common_NonePlaceholder,
+                    EmptyToNone(application.ReviewComment))
+                : lang.Admin_BusinessApplications_NotReviewed;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请主键。</zh-CN>
+        ///   <en>Application primary key.</en>
+        /// </lang>
+        /// </summary>
+        public long ApplicationId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请编号。</zh-CN>
+        ///   <en>Application code.</en>
+        /// </lang>
+        /// </summary>
+        public string ApplicationCode { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请标题。</zh-CN>
+        ///   <en>Application title.</en>
+        /// </lang>
+        /// </summary>
+        public string Title { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>分类键。</zh-CN>
+        ///   <en>Category key.</en>
+        /// </lang>
+        /// </summary>
+        public string CategoryKey { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>低敏摘要。</zh-CN>
+        ///   <en>Low-sensitivity summary.</en>
+        /// </lang>
+        /// </summary>
+        public string Summary { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请说明正文。</zh-CN>
+        ///   <en>Application body text.</en>
+        /// </lang>
+        /// </summary>
+        public string Body { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请人展示文本。</zh-CN>
+        ///   <en>Applicant display text.</en>
+        /// </lang>
+        /// </summary>
+        public string ApplicantText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>申请状态。</zh-CN>
+        ///   <en>Application status.</en>
+        /// </lang>
+        /// </summary>
+        public string ApplicationStatus { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交 UTC 展示文本。</zh-CN>
+        ///   <en>Submission UTC display text.</en>
+        /// </lang>
+        /// </summary>
+        public string SubmittedUtcText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近审核展示文本。</zh-CN>
+        ///   <en>Latest review display text.</en>
+        /// </lang>
+        /// </summary>
+        public string ReviewText { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将空白展示字段统一转换为占位文本。</zh-CN>
+        ///   <en>Converts blank display fields to a consistent placeholder.</en>
+        /// </lang>
+        /// </summary>
+        private static string EmptyToNone(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? lang.Common_NonePlaceholder : value;
+        }
+    }

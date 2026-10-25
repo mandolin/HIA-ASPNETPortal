@@ -1,0 +1,38 @@
+        private static IEnumerable<string> SplitContextTokens(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                yield break;
+            }
+
+            // <lang>
+            //   <zh-CN>记录当前字母数字令牌起点；-1 表示当前不在令牌内部。</zh-CN>
+            //   <en>Track the current alphanumeric token start; -1 means no token is currently open.</en>
+            // </lang>
+            int tokenStart = -1;
+
+            // <lang>
+            //   <zh-CN>按原始上下文字符扫描边界，只产生规范化片段，不返回原始上下文文本。</zh-CN>
+            //   <en>Scan boundaries across raw context characters, producing normalized fragments only and never returning raw context text.</en>
+            // </lang>
+            for (int index = 0; index < value.Length; index++)
+            {
+                if (char.IsLetterOrDigit(value[index]))
+                {
+                    if (tokenStart < 0)
+                    {
+                        tokenStart = index;
+                    }
+                }
+                else if (tokenStart >= 0)
+                {
+                    yield return NormalizeToken(value.Substring(tokenStart, index - tokenStart));
+                    tokenStart = -1;
+                }
+            }
+
+            if (tokenStart >= 0)
+            {
+                yield return NormalizeToken(value.Substring(tokenStart));
+            }
+        }

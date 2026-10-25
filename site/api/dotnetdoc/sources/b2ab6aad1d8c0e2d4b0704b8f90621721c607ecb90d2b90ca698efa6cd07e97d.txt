@@ -1,0 +1,31 @@
+        private void BindRecentRequests(int userId)
+        {
+            // <lang>
+            //   <zh-CN>schema 不可用时使用空列表；可用时由数据访问层按固定上限返回当前用户自己的请求。</zh-CN>
+            //   <en>Use an empty list when the schema is unavailable; otherwise let data access return only the current user's requests under the fixed limit.</en>
+            // </lang>
+            IList<EmployeeProfileCorrectionRequestInfo> requests = CorrectionRequestDb == null
+                ? new List<EmployeeProfileCorrectionRequestInfo>()
+                : CorrectionRequestDb.GetRecentRequestsForUser(userId, RecentRequestLimit);
+
+            // <lang>
+            //   <zh-CN>把数据访问投影转换为只读展示行，避免 Repeater 直接接触内部数据访问对象。</zh-CN>
+            //   <en>Convert the data-access projection into display rows so the Repeater does not bind directly to internal data-access objects.</en>
+            // </lang>
+            List<EmployeeProfileCorrectionRecentRequestRow> rows = requests
+                .Select(request => new EmployeeProfileCorrectionRecentRequestRow(request)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前先记录行数：标记层在表尾用该计数决定是否渲染空态提示行（Repeater 在零条时仍渲染表头与表尾）。</zh-CN>
+            //   <en>Record the row count before binding: the markup uses it in the footer to decide whether to render the empty-state hint (a Repeater still renders header and footer with zero rows).</en>
+            // </lang>
+            recentRequestRowCount = rows.Count;
+
+            RecentRequestsRepeater.DataSource = rows;
+
+            // <lang>
+            //   <zh-CN>提交绑定结果，让标记层显示当前用户的最近请求集合。</zh-CN>
+            //   <en>Commit the binding result so the markup renders the current user's recent-request collection.</en>
+            // </lang>
+            RecentRequestsRepeater.DataBind();
+        }

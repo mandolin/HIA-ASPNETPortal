@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>P6.4 首批业务模块样板：员工只确认自己当前绑定的低敏资料，不提供上传、脚本或外部资源。</zh-CN>
+        <en>P6.4 first business module sample: employees only confirm their currently bound low-sensitivity profile data; no upload, script, or external resource capability is provided.</en>
+    </lang>
+--%>

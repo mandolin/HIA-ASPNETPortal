@@ -1,0 +1,25 @@
+        public EmployeeProfileConfirmationView(
+            int employeeId,
+            string employeeCode,
+            string displayName,
+            string preferredName,
+            string workEmail,
+            string organizationDisplayName,
+            string employmentStatus,
+            int bindingId,
+            DateTime boundUtc,
+            long? lastConfirmationId,
+            DateTime? lastConfirmedUtc)
+        {
+            EmployeeId = employeeId;
+            EmployeeCode = employeeCode ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            PreferredName = preferredName ?? string.Empty;
+            WorkEmail = workEmail ?? string.Empty;
+            OrganizationDisplayName = organizationDisplayName ?? string.Empty;
+            EmploymentStatus = employmentStatus ?? string.Empty;
+            BindingId = bindingId;
+            BoundUtc = boundUtc;
+            LastConfirmationId = lastConfirmationId;
+            LastConfirmedUtc = lastConfirmedUtc;
+        }

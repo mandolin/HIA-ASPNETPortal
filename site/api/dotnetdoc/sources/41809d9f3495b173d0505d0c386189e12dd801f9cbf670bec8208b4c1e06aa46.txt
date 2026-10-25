@@ -1,0 +1,1 @@
+        public int CredentialVersion { get; set; }

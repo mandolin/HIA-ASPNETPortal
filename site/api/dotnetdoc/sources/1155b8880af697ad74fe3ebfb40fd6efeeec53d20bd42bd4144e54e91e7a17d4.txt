@@ -1,0 +1,2 @@
+        [Dependency]
+        public IRolesDb RolesDB { private get; set; }

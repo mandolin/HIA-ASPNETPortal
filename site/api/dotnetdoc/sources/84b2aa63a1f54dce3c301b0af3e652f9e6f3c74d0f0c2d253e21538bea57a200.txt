@@ -1,0 +1,49 @@
+        private static XElement ReadConnectionStringEntry(string configFile, string connectionStringName)
+        {
+            if (!File.Exists(configFile))
+            {
+                // <lang>
+                //   <zh-CN>关键配置缺失时立即失败，避免应用静默连接到错误数据库。</zh-CN>
+                //   <en>Fail immediately when critical configuration is missing so the application cannot silently connect to the wrong database.</en>
+                // </lang>
+                throw new ConfigurationErrorsException(
+                    "External connection string file is missing. Expected path: " + configFile);
+            }
+
+            // <lang>
+            //   <zh-CN>加载已确认存在的外置 XML；此时仍处于启动配置边界，不把文档内容暴露给页面或日志。</zh-CN>
+            //   <en>Load the confirmed external XML within the startup-configuration boundary; document content is not exposed to pages or logs.</en>
+            // </lang>
+            XDocument document = XDocument.Load(configFile);
+            if (document.Root == null || !string.Equals(document.Root.Name.LocalName, "connectionStrings", StringComparison.OrdinalIgnoreCase))
+            {
+                // <lang>
+                //   <zh-CN>根节点检查采用 fail-closed：此处只接受外置 XML 的 connectionStrings 形状；它贴近 .NET 配置是为了人工迁移和审计，不表示会读取 Web.config/App.config 或其它格式。</zh-CN>
+                //   <en>The root check is fail-closed: this path accepts only the external XML connectionStrings shape; matching the .NET configuration shape aids manual migration and review, but does not mean Web.config/App.config or other formats are read.</en>
+                // </lang>
+                throw new ConfigurationErrorsException(
+                    "External connection string file must use <connectionStrings> as root. File: " + configFile);
+            }
+
+            // <lang>
+            //   <zh-CN>按逻辑名称选择唯一 add 条目，保持 Portal 连接串语义与 XML 顺序无关。</zh-CN>
+            //   <en>Select the add entry by logical name so Portal connection semantics do not depend on XML element order.</en>
+            // </lang>
+            XElement entry = document.Root
+                .Elements()
+                .FirstOrDefault(element =>
+                    string.Equals(element.Name.LocalName, "add", StringComparison.OrdinalIgnoreCase) &&
+                    string.Equals((string)element.Attribute("name"), connectionStringName, StringComparison.OrdinalIgnoreCase));
+
+            if (entry == null)
+            {
+                // <lang>
+                //   <zh-CN>当前阶段只加载 Portal 这一条，缺失时提示具体名称和文件位置。</zh-CN>
+                //   <en>The current stage loads only the Portal entry, so missing configuration should name both the logical key and the file path.</en>
+                // </lang>
+                throw new ConfigurationErrorsException(
+                    "Connection string '" + connectionStringName + "' is missing in " + configFile);
+            }
+
+            return entry;
+        }

@@ -1,0 +1,2 @@
+        [Key]
+        public int ModuleSettingId { get; set; }

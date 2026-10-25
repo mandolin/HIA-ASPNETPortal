@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>XML 容器只为已通过受信任部署路径校验的站内资源提供输出区域；无效配置由服务器给出中性提示。</zh-CN>
+        <en>The XML container provides an output area only for in-application resources that pass trusted-deployment path checks; invalid configuration receives a neutral server-side notice.</en>
+    </lang>
+--%>

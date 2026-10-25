@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>公告列表关闭 ViewState，标题和正文使用编码绑定；旧记录的更多链接不因存在值就自动输出为可点击地址。</zh-CN>
+        <en>The announcement list disables ViewState and uses encoded binding for title and body; a legacy read-more value is not emitted as a clickable address merely because it exists.</en>
+    </lang>
+--%>

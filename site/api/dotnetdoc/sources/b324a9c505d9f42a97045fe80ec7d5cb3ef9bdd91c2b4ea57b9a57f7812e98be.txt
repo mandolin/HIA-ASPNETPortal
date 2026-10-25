@@ -1,0 +1,11 @@
+        protected string BindingsEmptyStateText
+        {
+            get
+            {
+                return BuildEmptyStateText(
+                    lang.Admin_EmployeeDirectory_EmptyNoBindings,
+                    lang.Admin_EmployeeDirectory_EmptyNoMatchingBindings,
+                    KeywordTextBox.Text,
+                    BindingStatusList.SelectedValue);
+            }
+        }

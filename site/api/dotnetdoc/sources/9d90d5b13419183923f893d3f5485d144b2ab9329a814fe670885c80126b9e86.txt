@@ -1,0 +1,2 @@
+        void UpdateLink(int itemId, string userName, string title, string url, string mobileUrl,
+                        int viewOrder, string description);

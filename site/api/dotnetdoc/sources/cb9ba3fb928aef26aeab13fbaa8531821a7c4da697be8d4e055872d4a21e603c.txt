@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_MessageNotAuthenticated {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageNotAuthenticated", resourceCulture);
+            }
+        }

@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition AllowSelfRegistration =
+            new PortalSettingDefinition(
+                PortalSettingKeys.AllowSelfRegistration,
+                "是否允许自主注册",
+                "控制是否显示注册链接并允许访问注册页；默认关闭。",
+                PortalSettingValueType.Boolean,
+                "false",
+                true,
+                false,
+                "Admins",
+                "Security");

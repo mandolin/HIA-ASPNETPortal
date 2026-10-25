@@ -1,0 +1,64 @@
+        protected void Application_AuthenticateRequest(Object sender, EventArgs e)
+        {
+            if (Request.IsAuthenticated)
+            {
+                string[] roles;
+                var usersDb = Container.Resolve<IUsersDb>();
+                var formsIdentity = Context.User?.Identity as FormsIdentity;
+                long ticketSecurityVersion;
+                long databaseSecurityVersion = usersDb.GetSecurityVersionByUserName(Context.User.Identity.Name);
+
+                // <lang>
+                //   <zh-CN>比较票据和数据库安全版本先于角色 Cookie 读取；不一致时必须先注销，不能用缓存角色继续当前请求。</zh-CN>
+                //   <en>Compare the ticket and database security versions before reading the role cookie; on mismatch, sign out first and never continue the request with cached roles.</en>
+                // </lang>
+                if (!PortalAuthenticationService.TryReadSecurityVersion(formsIdentity, out ticketSecurityVersion) ||
+                    ticketSecurityVersion != databaseSecurityVersion)
+                {
+                    PortalOperationAudit.Record(
+                        "SecuritySession",
+                        "Revoke",
+                        "User",
+                        Context.User.Identity.Name,
+                        "Authentication ticket security version mismatch.",
+                        Context);
+                    PortalAuthenticationService.SignOut(Response, Request);
+                    Context.User = null;
+                    Response.Redirect(Request.ApplicationPath, false);
+                    Context.ApplicationInstance.CompleteRequest();
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>优先使用安全版本匹配的角色 Cookie；缺失或失效时从数据库重建，避免旧会话保留被撤销角色。</zh-CN>
+                //   <en>Prefer a role cookie whose security version matches; rebuild from the database when absent or invalid so old sessions do not retain revoked roles.</en>
+                // </lang>
+                if (!PortalAuthenticationCookies.TryReadRoles(Request, databaseSecurityVersion, out roles))
+                {
+                    // <lang>
+                    //   <zh-CN>角色 Cookie 缺失或无效时从数据访问层重新读取；该回退仍不替代当前页面的权限检查。</zh-CN>
+                    //   <en>When the role cookie is missing or invalid, reload roles through the data-access layer; this fallback still does not replace the current page's permission check.</en>
+                    // </lang>
+                    // <lang>
+                    //   <zh-CN>只将角色名称写入加密票据，不写入密码、用户资料或其他敏感业务数据。</zh-CN>
+                    //   <en>Write role names only into the encrypted ticket, never passwords, profile data, or other sensitive business data.</en>
+                    // </lang>
+                    roles = PortalRoleParser.Parse(string.Join(";", usersDb.GetRoleNamesByUser(User.Identity.Name)));
+
+                    bool isPersistent = formsIdentity?.Ticket?.IsPersistent ?? false;
+                    PortalAuthenticationCookies.WriteRolesCookie(
+                        Response,
+                        Request,
+                        Context.User.Identity.Name,
+                        databaseSecurityVersion,
+                        roles,
+                        isPersistent);
+                }
+
+                // <lang>
+                //   <zh-CN>当前只构造请求级 GenericPrincipal；SysUser/BizUser 等 HIA 模型保留给后续边界设计。</zh-CN>
+                //   <en>Build only a request-level GenericPrincipal for now; HIA models such as SysUser/BizUser remain for later boundary design.</en>
+                // </lang>
+                Context.User = new GenericPrincipal(Context.User.Identity, roles);
+            }
+        }

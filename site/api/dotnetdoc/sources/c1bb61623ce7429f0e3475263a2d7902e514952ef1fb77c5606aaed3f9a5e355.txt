@@ -1,0 +1,5 @@
+        internal static string EditEvents_LabelExpires {
+            get {
+                return ResourceManager.GetString("EditEvents_LabelExpires", resourceCulture);
+            }
+        }

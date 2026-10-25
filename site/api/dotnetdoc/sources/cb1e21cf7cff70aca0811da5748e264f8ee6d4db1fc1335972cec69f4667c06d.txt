@@ -1,0 +1,5 @@
+        internal static string Admin_OrganizationUnitEdit_MessageSaveFailed {
+            get {
+                return ResourceManager.GetString("Admin_OrganizationUnitEdit_MessageSaveFailed", resourceCulture);
+            }
+        }

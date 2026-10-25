@@ -1,0 +1,17 @@
+        private void BindEmployeeBindingInfo(int currentUserId)
+        {
+            EmployeeBindingLink.NavigateUrl = ResolveUrl(
+                "~/Admin/UserEmployeeBindingEdit.aspx?userId=" + currentUserId.ToString());
+            EmployeeBindingLink.Visible = true;
+
+            if (EmployeeDirectoryDb == null || !EmployeeDirectoryDb.IsSchemaAvailable())
+            {
+                EmployeeBindingText.Text = lang.Admin_Common_MessageP63SchemaUnavailable;
+                return;
+            }
+
+            IUserEmployeeBindingInfo binding = EmployeeDirectoryDb.GetActiveBindingByUserId(currentUserId);
+            EmployeeBindingText.Text = binding == null
+                ? lang.Common_NonePlaceholder
+                : EncodeDisplay(binding.EmployeeCode + " / " + binding.EmployeeDisplayName);
+        }

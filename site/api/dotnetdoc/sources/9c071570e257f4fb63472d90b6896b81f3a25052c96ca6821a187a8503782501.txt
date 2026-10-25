@@ -1,0 +1,400 @@
+    public static class PortalPermissionKeys
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看普通系统设置。</zh-CN>
+        ///   <en>View regular system settings.</en>
+        /// </lang>
+        /// </summary>
+        public const string SettingsView = "Settings.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑普通系统设置。</zh-CN>
+        ///   <en>Edit regular system settings.</en>
+        /// </lang>
+        /// </summary>
+        public const string SettingsEdit = "Settings.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看敏感系统设置状态。</zh-CN>
+        ///   <en>View sensitive system-setting status.</en>
+        /// </lang>
+        /// </summary>
+        public const string SettingsSensitiveView = "Settings.SensitiveView";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看系统健康状态。</zh-CN>
+        ///   <en>View system health status.</en>
+        /// </lang>
+        /// </summary>
+        public const string OpsHealthView = "Ops.Health.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看诊断日志列表。</zh-CN>
+        ///   <en>View diagnostics log list.</en>
+        /// </lang>
+        /// </summary>
+        public const string OpsDiagnosticsView = "Ops.Diagnostics.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看诊断日志详情。</zh-CN>
+        ///   <en>View diagnostics log details.</en>
+        /// </lang>
+        /// </summary>
+        public const string OpsDiagnosticsDetail = "Ops.Diagnostics.Detail";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看运营审计。</zh-CN>
+        ///   <en>View operation audits.</en>
+        /// </lang>
+        /// </summary>
+        public const string AuditOperationView = "Audit.Operation.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看用户后台。</zh-CN>
+        ///   <en>View user administration.</en>
+        /// </lang>
+        /// </summary>
+        public const string AdminUsersView = "Admin.Users.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑用户资料和注册审核。</zh-CN>
+        ///   <en>Edit user profile and registration-review state.</en>
+        /// </lang>
+        /// </summary>
+        public const string AdminUsersEdit = "Admin.Users.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>重置用户密码。</zh-CN>
+        ///   <en>Reset user credentials.</en>
+        /// </lang>
+        /// </summary>
+        public const string AdminUsersResetPassword = "Admin.Users.ResetPassword";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑角色和角色成员关系。</zh-CN>
+        ///   <en>Edit roles and role memberships.</en>
+        /// </lang>
+        /// </summary>
+        public const string AdminRolesEdit = "Admin.Roles.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看员工、组织和账号绑定目录。</zh-CN>
+        ///   <en>View employee, organization, and user-binding directories.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeDirectoryView = "EmployeeDirectory.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑员工与组织主数据。</zh-CN>
+        ///   <en>Edit employee and organization master data.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeDirectoryEdit = "EmployeeDirectory.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定或解绑门户账号与员工。</zh-CN>
+        ///   <en>Bind or unbind Portal users and employees.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeDirectoryBind = "EmployeeDirectory.Bind";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看员工资料确认模块。</zh-CN>
+        ///   <en>View the employee-profile confirmation module.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileConfirmView = "EmployeeProfileConfirm.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>确认自己的员工资料。</zh-CN>
+        ///   <en>Confirm one's own employee profile.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileConfirmConfirm = "EmployeeProfileConfirm.Confirm";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理员工资料确认记录。</zh-CN>
+        ///   <en>Administer employee-profile confirmation records.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileConfirmAdmin = "EmployeeProfileConfirm.Admin";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看员工资料更正请求模块。</zh-CN>
+        ///   <en>View the employee-profile correction request module.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequestView = "EmployeeProfileCorrectionRequest.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交自己的员工资料更正请求。</zh-CN>
+        ///   <en>Submit one's own employee-profile correction request.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequestSubmit = "EmployeeProfileCorrectionRequest.Submit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审核员工资料更正请求。</zh-CN>
+        ///   <en>Review employee-profile correction requests.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequestReview = "EmployeeProfileCorrectionRequest.Review";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>取消或关闭员工资料更正请求。</zh-CN>
+        ///   <en>Cancel or close employee-profile correction requests.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequestCancel = "EmployeeProfileCorrectionRequest.Cancel";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理员工资料更正请求的旧聚合权限。</zh-CN>
+        ///   <en>Legacy aggregate permission for employee-profile correction administration.</en>
+        /// </lang>
+        /// </summary>
+        public const string EmployeeProfileCorrectionRequestAdmin = "EmployeeProfileCorrectionRequest.Admin";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看业务待办。</zh-CN>
+        ///   <en>View business work items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessWorkItemsView = "Business.WorkItems.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理业务待办。</zh-CN>
+        ///   <en>Handle business work items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessWorkItemsHandle = "Business.WorkItems.Handle";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看和处理业务待办的旧聚合权限。</zh-CN>
+        ///   <en>Legacy aggregate permission for viewing and handling business work items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessWorkItemsAdmin = "Business.WorkItems.Admin";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>提交抽象业务申请。</zh-CN>
+        ///   <en>Submit abstract business applications.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationSubmit = "Business.Application.Submit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看本人提交的抽象业务申请。</zh-CN>
+        ///   <en>View one's own abstract business applications.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationViewOwn = "Business.Application.ViewOwn";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>审核抽象业务申请。</zh-CN>
+        ///   <en>Review abstract business applications.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationReview = "Business.Application.Review";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理抽象业务申请。</zh-CN>
+        ///   <en>Administer abstract business applications.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessApplicationAdmin = "Business.Application.Admin";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看业务流程事件。</zh-CN>
+        ///   <en>View business workflow events.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>W73（D1 裁定）：`Business.Workflow` 已**合并到 `BusinessApplicationRequest`**。本键仅作为**历史兼容别名保留**，代码中**没有任何引用点**，不得再作为新功能的门禁使用；业务申请的门禁请使用 `Business.Application.*` 键族。删除本常量会破坏历史角色映射的兼容性，因此保留而不移除。</zh-CN>
+        ///   <en>W73 (decision D1): `Business.Workflow` has been **merged into `BusinessApplicationRequest`**. This key remains only as a **historical compatibility alias**, has **no reference sites in code**, and must not be used as a gate for new functionality; use the `Business.Application.*` family for business-application gates instead. Removing the constant would break historical role-mapping compatibility, so it is retained rather than deleted.</en>
+        /// </lang>
+        /// </remarks>
+        public const string BusinessWorkflowView = "Business.Workflow.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理业务流程事件和相关配置。</zh-CN>
+        ///   <en>Administer business workflow events and related configuration.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>W73（D1 裁定）：与 <see cref="BusinessWorkflowView"/> 同为**历史兼容别名**，已随 `Business.Workflow` 合并到 `BusinessApplicationRequest`；代码中无任何引用点，不作为门禁使用。业务申请的管理门禁请使用 `Business.Application.Admin`。</zh-CN>
+        ///   <en>W73 (decision D1): like <see cref="BusinessWorkflowView"/>, this is a **historical compatibility alias** that followed the merge of `Business.Workflow` into `BusinessApplicationRequest`; it has no reference sites in code and is not used as a gate. Use `Business.Application.Admin` for business-application administration gating.</en>
+        /// </lang>
+        /// </remarks>
+        public const string BusinessWorkflowAdmin = "Business.Workflow.Admin";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建企业协同事项。</zh-CN>
+        ///   <en>Create enterprise collaboration items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationCreate = "Business.Collaboration.Create";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看本人发起或本人负责的企业协同事项。</zh-CN>
+        ///   <en>View enterprise collaboration items initiated by or assigned to oneself.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationViewOwn = "Business.Collaboration.ViewOwn";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理分派给本人或本人角色的企业协同事项。</zh-CN>
+        ///   <en>Handle enterprise collaboration items assigned to oneself or one's role.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationHandle = "Business.Collaboration.Handle";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看全部企业协同事项。</zh-CN>
+        ///   <en>View all enterprise collaboration items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationViewAll = "Business.Collaboration.ViewAll";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理企业协同事项。</zh-CN>
+        ///   <en>Administer enterprise collaboration items.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationAdmin = "Business.Collaboration.Admin";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看企业协同事项流程事件。</zh-CN>
+        ///   <en>View enterprise collaboration-item workflow events.</en>
+        /// </lang>
+        /// </summary>
+        public const string BusinessCollaborationEventsView = "Business.Collaboration.Events.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看主题设置。</zh-CN>
+        ///   <en>View theme settings.</en>
+        /// </lang>
+        /// </summary>
+        public const string ThemeView = "Theme.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑主题设置和 Tab 覆盖。</zh-CN>
+        ///   <en>Edit theme settings and Tab overrides.</en>
+        /// </lang>
+        /// </summary>
+        public const string ThemeEdit = "Theme.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看模块包目录。</zh-CN>
+        ///   <en>View the module package catalog.</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleCatalogView = "Module.Catalog.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>启停模块包。</zh-CN>
+        ///   <en>Enable or disable module packages.</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleCatalogEdit = "Module.Catalog.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑模块定义。</zh-CN>
+        ///   <en>Edit module definitions.</en>
+        /// </lang>
+        /// </summary>
+        public const string ModuleDefinitionEdit = "Module.Definition.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑门户 Tab。</zh-CN>
+        ///   <en>Edit Portal Tabs.</en>
+        /// </lang>
+        /// </summary>
+        public const string PortalTabsEdit = "Portal.Tabs.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑门户模块实例和布局。</zh-CN>
+        ///   <en>Edit Portal module instances and layout.</en>
+        /// </lang>
+        /// </summary>
+        public const string PortalModulesEdit = "Portal.Modules.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>编辑原始 HTML 内容。</zh-CN>
+        ///   <en>Edit raw HTML content.</en>
+        /// </lang>
+        /// </summary>
+        public const string ContentRawHtmlEdit = "Content.RawHtml.Edit";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理上传内容策略。</zh-CN>
+        ///   <en>Manage uploaded-content policy.</en>
+        /// </lang>
+        /// </summary>
+        public const string ContentUploadManage = "Content.Upload.Manage";
+
+        // <lang>
+        //   <zh-CN>以下 7 个键属 P45.5 新增的 `EnterpriseCapability.*` 分层键族（跨层 1 键 + 在用 3 层 × 管理/审核 6 键）。分层口径取自 [已脱敏].2 的「能力分层」表（本项目企业能力分类权威定义），**禁止使用扁平单层键**（如 `EnterpriseCapability.Manage`）。层内能力共享层键；候选层（BusinessCapability / Professional / Industry）当前无能力实现，故不建键，待对应能力进入实现时按同一规则补键。</zh-CN>
+        //   <en>The seven keys below are the layered `EnterpriseCapability.*` family added by P45.5 (one cross-layer key plus six manage/review keys for the three layers in use). The layering follows the capability-layering table in [已脱敏].2, which is the authoritative classification for this project; flat single-layer keys such as `EnterpriseCapability.Manage` are forbidden. Capabilities inside a layer share that layer's keys, and the candidate layers (BusinessCapability / Professional / Industry) have no capability implementation yet, so they get no keys until such capabilities enter implementation.</en>
+        // </lang>
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查看能力治理视图（按企业能力分层的只读权限矩阵）。</zh-CN>
+        ///   <en>View the capability governance view: the read-only permission matrix grouped by enterprise capability layer.</en>
+        /// </lang>
+        /// </summary>
+        public const string EnterpriseCapabilityView = "EnterpriseCapability.View";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>管理 Foundation Core 层能力（身份与账户、组织拓扑、授权与数据范围、审计等基础能力的配置与装配）。</zh-CN>
+        ///   <en>Manage Foundation Core layer capabilities (configuration and assembly of identity, organization, authorization scope, and audit foundations).</en>
+        /// </lang>

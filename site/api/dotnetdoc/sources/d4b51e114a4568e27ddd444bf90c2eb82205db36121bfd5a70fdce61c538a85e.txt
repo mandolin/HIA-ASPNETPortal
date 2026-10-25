@@ -1,0 +1,1 @@
+        string MobileSourceFile { get; set; }

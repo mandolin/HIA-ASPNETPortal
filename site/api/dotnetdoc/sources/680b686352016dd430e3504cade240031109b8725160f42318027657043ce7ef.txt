@@ -1,0 +1,69 @@
+        public static IList<PortalNavigationEntry> GetRelatedEntries(string entryKey, int maxCount = DefaultMaxRelatedEntries)
+        {
+            // <lang>
+            //   <zh-CN>上限非正时回落默认值，避免调用方误传 0 导致动作区为空或负数导致异常。</zh-CN>
+            //   <en>Fall back to the default when the limit is non-positive, preventing an empty action area from a mistaken 0 or an exception from a negative value.</en>
+            // </lang>
+            if (maxCount <= 0)
+            {
+                maxCount = DefaultMaxRelatedEntries;
+            }
+
+            string group = GetGroupKey(entryKey);
+
+            // <lang>
+            //   <zh-CN>分组未知时不猜配：返回空列表，避免把无关入口塞进动作区。</zh-CN>
+            //   <en>Do not guess when the group is unknown: return an empty list so unrelated entries never enter the action area.</en>
+            // </lang>
+            if (string.IsNullOrEmpty(group))
+            {
+                return new List<PortalNavigationEntry>().AsReadOnly();
+            }
+
+            List<PortalNavigationEntry> related = PortalNavigationRegistry.GetEntries()
+                .Where(entry => string.Equals(GetGroupKey(entry), group, StringComparison.OrdinalIgnoreCase))
+                .Where(entry => !string.Equals(entry.EntryKey, entryKey, StringComparison.OrdinalIgnoreCase))
+                .Where(entry => entry.LifecycleState == PortalNavigationLifecycleState.Active)
+                .Where(entry => entry.VisibilityMode != PortalNavigationVisibilityMode.DiagnosticOnly)
+                .Where(IsNavigable)
+                .OrderBy(entry => entry.SortOrder)
+                .ThenBy(entry => entry.EntryKey, StringComparer.OrdinalIgnoreCase)
+                .Take(maxCount)
+                .ToList();
+
+            // <lang>
+            //   <zh-CN>同组入口不足下限时用显式常用入口补足：避免只因分组过窄就让动作区整块消失，同时补的是受 registry 管辖的入口而非新硬编码。</zh-CN>
+            //   <en>When same-group entries fall below the minimum, top up with explicit common entries: this prevents the action area from vanishing only because a group is narrow, and the top-up entries still come from the registry rather than new hardcoded links.</en>
+            // </lang>
+            if (related.Count < MinimumRelatedEntries)
+            {
+                foreach (string fallbackKey in CommonFallbackEntryKeys)
+                {
+                    if (related.Count >= MinimumRelatedEntries)
+                    {
+                        break;
+                    }
+
+                    if (string.Equals(fallbackKey, entryKey, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    if (related.Any(entry => string.Equals(entry.EntryKey, fallbackKey, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        continue;
+                    }
+
+                    PortalNavigationEntry fallback = PortalNavigationRegistry.FindByKey(fallbackKey);
+                    if (fallback != null && IsNavigable(fallback))
+                    {
+                        related.Add(fallback);
+                    }
+                }
+            }
+
+            return related
+                .Take(maxCount)
+                .ToList()
+                .AsReadOnly();
+        }

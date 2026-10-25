@@ -1,0 +1,1 @@
+        private static readonly object TargetProviderLock = new object();

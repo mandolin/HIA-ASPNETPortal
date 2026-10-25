@@ -1,0 +1,8 @@
+        protected string FormatUrl(int item)
+        {
+            // <lang>
+            //   <zh-CN>详情页仍沿用旧查询参数契约，模块标识用于返回当前模块上下文。</zh-CN>
+            //   <en>The detail page keeps the legacy query-string contract, and the module identifier preserves the current module context.</en>
+            // </lang>
+            return "~/DesktopModules/DiscussDetails.aspx?ItemID=" + item + "&mid=" + ModuleId;
+        }

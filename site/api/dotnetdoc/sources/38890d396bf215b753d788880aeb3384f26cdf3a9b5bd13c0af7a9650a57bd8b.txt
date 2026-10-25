@@ -1,0 +1,4 @@
+        public static bool IsEmployeeCodeRequired(string inviteCode)
+        {
+            return !string.IsNullOrWhiteSpace(inviteCode);
+        }

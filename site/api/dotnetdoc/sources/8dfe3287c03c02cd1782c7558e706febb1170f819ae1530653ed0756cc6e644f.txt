@@ -1,0 +1,71 @@
+        private void BindWorkItems()
+        {
+            string userName = GetCurrentUserName();
+            int userId = GetCurrentUserId();
+
+            // <lang>
+            //   <zh-CN>权限键由角色门面按登录名解析后传入；数据层不解析成员关系，因此此处是归属判定的唯一来源。</zh-CN>
+            //   <en>Permission keys are resolved by the role facade from the sign-in name and passed in; the data layer does not resolve membership, so this is the only source of the ownership decision.</en>
+            // </lang>
+            IList<string> roleKeys = ResolveHeldPermissionKeys(userName);
+
+            PortalWorkItemQueryResult result = WorkItemDb == null
+                ? null
+                : WorkItemDb.GetWorkItemsForUser(userId, roleKeys, string.Empty, WorkItemLimit);
+
+            // <lang>
+            //   <zh-CN>门面缺失或查询失败都呈现失败态，而不是空态：空态会让人误以为确实没有待办。</zh-CN>
+            //   <en>A missing facade or a failed query renders the failure state rather than the empty state, because the empty state would suggest there are genuinely no to-do items.</en>
+            // </lang>
+            if (result == null || !result.Succeeded)
+            {
+                ContentPanel.Visible = false;
+                FailurePanel.Visible = true;
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.BusinessModuleCategory,
+                    PortalOperationAuditEvents.WorkItemsViewed,
+                    PortalOperationAuditEvents.WorkItemTargetType,
+                    userId.ToString(CultureInfo.InvariantCulture),
+                    "My work items read failed.",
+                    Context,
+                    null,
+                    "Failure");
+                return;
+            }
+
+            IList<PortalWorkItemInfo> items = ShowOverdueOnly ? FilterOverdue(result.Items) : result.Items;
+
+            ContentPanel.Visible = true;
+            FailurePanel.Visible = false;
+            WorkItemRepeater.Visible = items.Count > 0;
+            WorkItemRepeater.DataSource = items;
+
+            // <lang>
+            //   <zh-CN>绑定前重置解析统计并创建反查端口：行绑定期间累加，随后一次性进入审计，避免每行写一条审计记录。</zh-CN>
+            //   <en>Reset the resolution counters and create the reverse-lookup port before binding: row binding accumulates them and they enter the audit once afterwards, instead of writing one audit record per row.</en>
+            // </lang>
+            resolvedTargetCount = 0;
+            degradedTargetCount = 0;
+            degradationReasonCounts.Clear();
+            targetSource = new PortalModuleTargetSource(this);
+
+            WorkItemRepeater.DataBind();
+            EmptyPanel.Visible = items.Count == 0;
+            EmptyLabel.Text = ShowOverdueOnly ? GetResource("MyWorkItems_EmptyNoMatch") : GetResource("MyWorkItems_EmptyNone");
+
+            // <lang>
+            //   <zh-CN>查看与筛选只记录条数、筛选态、解析成功/降级计数与降级原因分布；标题、业务正文与地址一律不写，避免审计承载业务数据或可被复用的跳转细节。目标解析统计是本模块"点击跳转待补审计"的落点：普通超链接的点击本身对服务器不可见，故以**本次呈现**解析到多少可达目标作为替代证据，并在文档中如实说明其边界。</zh-CN>
+            //   <en>Viewing and filtering record only the row count, filter state, resolved/degraded counters, and the reason breakdown; titles, domain content, and URLs are never written so the audit carries neither business data nor reusable navigation detail. The resolution counters are where this module's pending "click-through audit" lands: a plain hyperlink click is invisible to the server, so how many navigable targets **this render** resolved stands in as the evidence, with its limits stated in the documents.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.WorkItemsViewed,
+                PortalOperationAuditEvents.WorkItemTargetType,
+                userId.ToString(CultureInfo.InvariantCulture),
+                "My work items viewed. Count=" + items.Count.ToString(CultureInfo.InvariantCulture) +
+                "; OverdueOnly=" + ShowOverdueOnly.ToString(CultureInfo.InvariantCulture) +
+                "; ResolvedTargets=" + resolvedTargetCount.ToString(CultureInfo.InvariantCulture) +
+                "; DegradedTargets=" + degradedTargetCount.ToString(CultureInfo.InvariantCulture) +
+                "; DegradationReasons=" + BuildDegradationReasonSummary(),
+                Context);
+        }

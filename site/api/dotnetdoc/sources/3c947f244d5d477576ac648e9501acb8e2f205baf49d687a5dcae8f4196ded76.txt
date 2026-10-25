@@ -1,0 +1,6 @@
+        private List<int> GetRoleMemberIds(int roleId)
+        {
+            return _context.Database.SqlQuery<int>(
+                "SELECT [UserID] FROM [dbo].[Portal_UserRoles] WHERE [RoleID] = @p0",
+                roleId).ToList();
+        }

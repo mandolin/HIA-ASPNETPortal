@@ -1,0 +1,7 @@
+        internal PortalSystemSettingReadResult(bool isAvailable, bool isFound, string value, string valueType)
+        {
+            IsAvailable = isAvailable;
+            IsFound = isFound;
+            Value = value ?? string.Empty;
+            ValueType = valueType ?? string.Empty;
+        }

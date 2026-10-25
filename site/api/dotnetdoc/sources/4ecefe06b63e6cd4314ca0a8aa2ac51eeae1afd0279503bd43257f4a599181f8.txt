@@ -1,0 +1,34 @@
+        public static PortalPasswordPolicyOptions GetEffectiveOptions()
+        {
+            // <lang>
+            //   <zh-CN>复制当前提供器引用，缩短锁持有时间并让外部提供器在锁外执行。</zh-CN>
+            //   <en>Copy the current provider reference to shorten lock hold time and execute external providers outside the lock.</en>
+            // </lang>
+            Func<PortalPasswordPolicyOptions> provider;
+            lock (OptionsProviderLock)
+            {
+                provider = optionsProvider;
+            }
+
+            if (provider == null)
+            {
+                return PortalPasswordPolicyOptions.CreateDefault();
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>调用提供器后立即规范化结果，防止配置把组件硬下限降低到不安全值。</zh-CN>
+                //   <en>Normalize the provider result immediately, preventing configuration from lowering component hard bounds to unsafe values.</en>
+                // </lang>
+                return NormalizeOptions(provider());
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>提供器故障按 fail-safe 回退默认策略，且不记录可能包含敏感配置上下文的异常。</zh-CN>
+                //   <en>Fail safely to the default policy when the provider faults, without logging an exception that could contain sensitive configuration context.</en>
+                // </lang>
+                return PortalPasswordPolicyOptions.CreateDefault();
+            }
+        }

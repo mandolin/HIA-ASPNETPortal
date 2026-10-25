@@ -1,0 +1,1 @@
+        public const string EnterpriseCapabilityBasicBusinessReview = "EnterpriseCapability.BasicBusiness.Review";

@@ -1,0 +1,8 @@
+        protected bool HasSafeBrowseUrl(object value)
+        {
+            // <lang>
+            //   <zh-CN>链接可见性使用与 href 相同的规范化结果，避免显示无法访问的快捷链接。</zh-CN>
+            //   <en>Link visibility uses the same normalization result as href generation, avoiding visible quick links that cannot be reached.</en>
+            // </lang>
+            return !string.IsNullOrEmpty(GetSafeBrowseUrl(value));
+        }

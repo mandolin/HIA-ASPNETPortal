@@ -1,0 +1,27 @@
+        private void TryEnsureWorkItem(long requestId, int employeeId, string fieldName)
+        {
+            // <lang>
+            //   <zh-CN>待办写入只补充后台处理入口，不能阻断用户已经成功提交的资料更正请求。</zh-CN>
+            //   <en>Work-item writes only add an administration entry point and must not block an already submitted profile-correction request.</en>
+            // </lang>
+            if (WorkItemDb == null || requestId <= 0)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>待办投影使用请求编号作为稳定业务键，并只写员工编号、字段名和固定审核权限键。</zh-CN>
+            //   <en>The work-item projection uses the request id as a stable business key and writes only the employee id, field name, and fixed review-permission key.</en>
+            // </lang>
+            WorkItemDb.EnsureWorkItem(
+                new PortalWorkItemCreateRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest,
+                    BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                    Title = "Employee profile correction request #" + requestId.ToString(CultureInfo.InvariantCulture),
+                    Summary = "EmployeeId=" + employeeId.ToString(CultureInfo.InvariantCulture) + "; FieldName=" + fieldName,
+                    AssignedRoleKey = PortalPermissionKeys.EmployeeProfileCorrectionRequestReview,
+                    CreatedUtc = DateTime.UtcNow,
+                    CreatedBy = GetCurrentUserName()
+                });
+        }

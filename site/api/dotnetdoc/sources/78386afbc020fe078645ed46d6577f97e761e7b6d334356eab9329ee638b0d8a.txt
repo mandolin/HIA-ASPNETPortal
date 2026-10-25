@@ -1,0 +1,18 @@
+        private static bool IsIntegerInRange(PortalSettingDefinition definition, int value)
+        {
+            // <lang>
+            //   <zh-CN>下限和上限均为可选约束；只有存在的边界参与拒绝，未设置的边界不隐含额外限制。</zh-CN>
+            //   <en>Lower and upper bounds are optional constraints; only present bounds reject a value and an absent bound implies no additional restriction.</en>
+            // </lang>
+            if (definition.MinIntegerValue.HasValue && value < definition.MinIntegerValue.Value)
+            {
+                return false;
+            }
+
+            if (definition.MaxIntegerValue.HasValue && value > definition.MaxIntegerValue.Value)
+            {
+                return false;
+            }
+
+            return true;
+        }

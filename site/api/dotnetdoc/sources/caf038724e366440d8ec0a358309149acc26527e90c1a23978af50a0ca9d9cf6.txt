@@ -1,0 +1,110 @@
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先解析当前用户物理标识，所有提交和审计都必须绑定该身份。</zh-CN>
+            //   <en>Resolve the current physical user id first; every submission and audit record must be bound to that identity.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            if (userId <= 0)
+            {
+                ShowMessage(lang.BusinessApplicationRequest_MessageSignInRequired);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>提交权限允许普通提交者或后台管理员进入同一创建入口。</zh-CN>
+            //   <en>Allow either a regular submitter or an administration user to enter the same creation path.</en>
+            // </lang>
+            if (!PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.BusinessApplicationSubmit,
+                PortalPermissionKeys.BusinessApplicationAdmin))
+            {
+                ShowMessage(lang.BusinessApplicationRequest_MessageNoPermission);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>所有自由文本先按字段上限归一化，避免把未限制的表单值传给数据层。</zh-CN>
+            //   <en>Normalize all free text by field limits before passing any unrestricted form value to the data layer.</en>
+            // </lang>
+            string title = NormalizeInput(TitleTextBox.Text, 200);
+            string summary = NormalizeInput(SummaryTextBox.Text, 500);
+            string body = NormalizeInput(BodyTextBox.Text, 4000);
+            // <lang>
+            //   <zh-CN>标题是申请索引的必填字段，缺失时不创建业务事实。</zh-CN>
+            //   <en>The title is required for application indexing; do not create a business fact when it is missing.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                ShowMessage(lang.BusinessApplicationRequest_MessageTitleRequired);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>摘要和正文至少提供一项，防止提交只有标题的空申请。</zh-CN>
+            //   <en>Require either summary or body to prevent a title-only empty application.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(summary) && string.IsNullOrWhiteSpace(body))
+            {
+                ShowMessage(lang.BusinessApplicationRequest_MessageContentRequired);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>提交请求携带归一化字段、当前用户、审核角色和 UTC 时间，形成可审计的数据层输入。</zh-CN>
+            //   <en>Build the data-layer request from normalized fields, current user, review role, and UTC time to form an auditable input.</en>
+            // </lang>
+            BusinessApplicationResult result = BusinessApplicationDb.SubmitApplication(
+                new BusinessApplicationSubmitRequest
+                {
+                    Title = title,
+                    CategoryKey = CategoryList.SelectedValue,
+                    Summary = summary,
+                    Body = body,
+                    ApplicantUserId = userId,
+                    ReviewRoleKey = PortalPermissionKeys.BusinessApplicationReview,
+                    SubmittedUtc = DateTime.UtcNow,
+                    SubmittedBy = GetCurrentUserName()
+                });
+
+            if (!result.Succeeded)
+            {
+                // <lang>
+                //   <zh-CN>失败只展示数据层提供的业务消息并重新绑定读模型，不执行审计或待办投影。</zh-CN>
+                //   <en>On failure, display the data-layer business message and rebind the read model without recording audit or work-item projection.</en>
+                // </lang>
+                ShowMessage(result.Message);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>业务事实成功后记录操作审计；审计目标使用稳定申请编号，不写入申请正文。</zh-CN>
+            //   <en>Record operation audit after the business fact succeeds; use the stable application id as target and do not write application body content.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.BusinessApplicationSubmitted,
+                PortalOperationAuditEvents.BusinessApplicationTargetType,
+                result.ApplicationId.ToString(CultureInfo.InvariantCulture),
+                "Business application submitted. ApplicationCode=" + result.ApplicationCode,
+                Context);
+
+            // <lang>
+            //   <zh-CN>待办只是审核入口投影，尝试失败不能撤销已经成功的申请。</zh-CN>
+            //   <en>The work item is only a review-entry projection; failure to create it must not undo the successful application.</en>
+            // </lang>
+            TryEnsureWorkItem(result.ApplicationId, result.ApplicationCode, title, summary);
+
+            // <lang>
+            //   <zh-CN>成功后清空本次输入，避免回发或重新绑定时复用旧申请内容。</zh-CN>
+            //   <en>Clear this submission's inputs after success so a postback or rebind cannot reuse the old application content.</en>
+            // </lang>
+            TitleTextBox.Text = string.Empty;
+            SummaryTextBox.Text = string.Empty;
+            BodyTextBox.Text = string.Empty;
+            ShowMessage(lang.BusinessApplicationRequest_MessageSubmittedPrefix + result.ApplicationCode);
+            BindModule();
+        }

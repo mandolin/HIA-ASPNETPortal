@@ -1,0 +1,1 @@
+        IDictionary<long, IList<CollaborationItemParticipantInfo>> GetParticipantsForItems(IList<long> itemIds);

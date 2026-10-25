@@ -1,0 +1,26 @@
+        private void TryCompleteWorkItem(long itemId, string actionKey, string actionComment)
+        {
+            // <lang>
+            //   <zh-CN>`Start` 当前只写协同事项事件，不改变待办投影；终态和退回动作则关闭当前处理待办，避免列表留下陈旧入口。</zh-CN>
+            //   <en>`Start` currently writes only a collaboration-item event and does not mutate the work-item projection; terminal and return actions close the current handling work item so the list does not keep a stale entry.</en>
+            // </lang>
+            if (WorkItemDb == null ||
+                itemId <= 0 ||
+                string.Equals(actionKey, PortalCollaborationItemActions.Start, StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            WorkItemDb.CompleteBusinessWorkItem(
+                new PortalWorkItemCompletionRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.CollaborationItem,
+                    BusinessId = itemId.ToString(CultureInfo.InvariantCulture),
+                    EventType = MapWorkItemEventType(actionKey),
+                    TargetStatus = MapWorkItemTargetStatus(actionKey),
+                    ActorUserId = GetCurrentUserId(),
+                    ActorName = GetCurrentUserName(),
+                    Comment = NormalizeInput(actionComment, 1000),
+                    OccurredUtc = DateTime.UtcNow
+                });
+        }

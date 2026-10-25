@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>Repeater 只读呈现当前值、提议值和审核文本，使用编码绑定避免把申请内容当作标记执行；请求编号和状态命令仍需服务端重新校验。</zh-CN>
+                    <en>The Repeater renders current, proposed, and review text read-only with encoded bindings so request content is not executed as markup; the server must revalidate request id and status commands.</en>
+                  </lang>
+                --%>

@@ -1,0 +1,11 @@
+        private bool IsCurrentUserAuthenticated()
+        {
+            // <lang>
+            //   <zh-CN>逐级检查上下文、用户、身份和认证标志，兼容模块在无 HttpContext 的静态/测试创建场景。</zh-CN>
+            //   <en>Check context, user, identity, and authentication flag step by step so the module remains safe when created without an HttpContext in tests or static tooling.</en>
+            // </lang>
+            return Context != null &&
+                   Context.User != null &&
+                   Context.User.Identity != null &&
+                   Context.User.Identity.IsAuthenticated;
+        }

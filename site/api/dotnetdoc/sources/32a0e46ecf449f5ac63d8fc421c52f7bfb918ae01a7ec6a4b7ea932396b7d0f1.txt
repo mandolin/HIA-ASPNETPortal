@@ -1,0 +1,8 @@
+        public IModuleItem FindModuleById(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>SingleOrDefault 保留重复记录的完整性异常，同时允许授权层对缺失模块安全拒绝。</zh-CN>
+            //   <en>SingleOrDefault preserves duplicate-record integrity errors while allowing authorization to deny a missing module safely.</en>
+            // </lang>
+            return _items.SingleOrDefault(i => i.ModuleId == moduleId);
+        }

@@ -1,0 +1,10 @@
+        public static string GetString(PortalSettingDefinition definition)
+        {
+            // <lang>
+            //   <zh-CN>先保持与其它读取入口一致的空定义门禁，再仅返回已解析值文本；不暴露来源内部状态或绕过规范化。</zh-CN>
+            //   <en>Keep the same null-definition gate as other read entry points, then return only resolved value text without exposing source internals or bypassing normalization.</en>
+            // </lang>
+            EnsureDefinition(definition);
+
+            return GetEffectiveValue(definition).Value;
+        }

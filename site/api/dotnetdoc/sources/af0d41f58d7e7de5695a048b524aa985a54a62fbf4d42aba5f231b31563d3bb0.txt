@@ -1,0 +1,52 @@
+        protected void AddRole_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>创建事件再次验证权限和导航上下文，防止陈旧模块状态触发新增。</zh-CN>
+            //   <en>Revalidate permission and navigation context before creation so stale module state cannot trigger an add.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminRolesEdit) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>从当前门户读取角色集合，生成唯一默认名称后写入角色定义。</zh-CN>
+                //   <en>Read current-Portal roles, generate a unique default name, and persist the new role definition.</en>
+                // </lang>
+                PortalSettings portalSettings = PortalContext.GetPortalSettings();
+                // <lang>
+                //   <zh-CN>默认名称生成器只在当前门户集合内保证唯一。</zh-CN>
+                //   <en>The default-name generator guarantees uniqueness only within the current Portal collection.</en>
+                // </lang>
+                string roleName = CreateUniqueDefaultRoleName(RolesDB.GetPortalRoles(portalSettings.PortalId));
+                // <lang>
+                //   <zh-CN>保存成功后记录角色创建审计并刷新列表进入编辑状态。</zh-CN>
+                //   <en>After persistence succeeds, audit role creation and refresh the list in edit state.</en>
+                // </lang>
+                int roleId = RolesDB.AddRole(portalSettings.PortalId, roleName);
+                PortalOperationAudit.Record(
+                    "RoleAdministration",
+                    "Create",
+                    "Role",
+                    roleId.ToString(),
+                    "Created role.",
+                    Context);
+                rolesList.EditItemIndex = rolesList.Items.Count;
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>创建异常写入诊断并只显示事件编号。</zh-CN>
+                //   <en>Record creation failures through diagnostics and display only the event id.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Roles.Add",
+                    "Adding a role failed.",
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Roles_MessageCreateFailed, eventId));
+            }
+        }

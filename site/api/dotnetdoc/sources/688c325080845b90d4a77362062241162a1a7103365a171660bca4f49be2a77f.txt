@@ -1,0 +1,18 @@
+        public static readonly IReadOnlyList<CollaborationItemTransition> All = new[]
+        {
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Draft, PortalCollaborationItemActions.Submit, PortalCollaborationItemStatuses.Submitted),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Submitted, PortalCollaborationItemActions.Start, PortalCollaborationItemStatuses.InProgress),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Submitted, PortalCollaborationItemActions.Complete, PortalCollaborationItemStatuses.Completed),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.InProgress, PortalCollaborationItemActions.Complete, PortalCollaborationItemStatuses.Completed),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Submitted, PortalCollaborationItemActions.Return, PortalCollaborationItemStatuses.Returned),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.InProgress, PortalCollaborationItemActions.Return, PortalCollaborationItemStatuses.Returned),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Returned, PortalCollaborationItemActions.Resubmit, PortalCollaborationItemStatuses.Submitted),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Submitted, PortalCollaborationItemActions.Reject, PortalCollaborationItemStatuses.Rejected),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.InProgress, PortalCollaborationItemActions.Reject, PortalCollaborationItemStatuses.Rejected),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Draft, PortalCollaborationItemActions.Cancel, PortalCollaborationItemStatuses.Cancelled),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Submitted, PortalCollaborationItemActions.Cancel, PortalCollaborationItemStatuses.Cancelled),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Returned, PortalCollaborationItemActions.Cancel, PortalCollaborationItemStatuses.Cancelled),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Completed, PortalCollaborationItemActions.Close, PortalCollaborationItemStatuses.Closed),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Rejected, PortalCollaborationItemActions.Close, PortalCollaborationItemStatuses.Closed),
+            new CollaborationItemTransition(PortalCollaborationItemStatuses.Cancelled, PortalCollaborationItemActions.Close, PortalCollaborationItemStatuses.Closed)
+        };

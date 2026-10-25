@@ -11,6 +11,7 @@
     {
       "kind": "dotnet-xml-doc",
       "path": "src/Portal/bin/Portal.xml",
+      "projectPath": "src/Portal/Portal.csproj",
       "artifactBasePath": "api/Portal",
       "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal",
       "title": "HIA-ASPNETPortal Portal API"
@@ -18,6 +19,7 @@
     {
       "kind": "dotnet-xml-doc",
       "path": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "projectPath": "src/Portal.Components/Portal.Components.csproj",
       "artifactBasePath": "api/Portal.Components",
       "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components",
       "title": "HIA-ASPNETPortal Portal.Components API"
@@ -25,6 +27,7 @@
     {
       "kind": "dotnet-xml-doc",
       "path": "src/Portal/bin/Portal.Components.Data.xml",
+      "projectPath": "src/Portal.Components.Data/Portal.Components.Data.csproj",
       "artifactBasePath": "api/Portal.Components.Data",
       "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components.Data",
       "title": "HIA-ASPNETPortal Portal.Components.Data API"
@@ -32,6 +35,7 @@
     {
       "kind": "dotnet-xml-doc",
       "path": "src/Portal/bin/Portal.Components.Data1.xml",
+      "projectPath": "src/Portal.Components.Data1/Portal.Components.Data1.csproj",
       "artifactBasePath": "api/Portal.Components.Data1",
       "hiaDocumentId": "dotnetdoc:HIA-ASPNETPortal:Portal.Components.Data1",
       "title": "HIA-ASPNETPortal Portal.Components.Data1 API"

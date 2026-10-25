@@ -1,0 +1,23 @@
+        public static string Encrypt(string cleanString)
+        {
+            // <lang>
+            //   <zh-CN>保留现有 UTF-8 与 BitConverter 格式，避免破坏旧数据库摘要匹配。</zh-CN>
+            //   <en>Preserve the current UTF-8 and BitConverter format to avoid breaking legacy database digest matches.</en>
+            // </lang>
+            byte[] clearBytes = Encoding.UTF8.GetBytes(cleanString);
+
+            // <lang>
+            //   <zh-CN>MD5 实例只用于旧摘要兼容，不得扩展到新凭据写入路径。</zh-CN>
+            //   <en>The MD5 instance is used only for legacy digest compatibility and must not be extended to new credential-write paths.</en>
+            // </lang>
+            using (HashAlgorithm algorithm = MD5.Create())
+            {
+                byte[] hashedBytes = algorithm.ComputeHash(clearBytes);
+
+                // <lang>
+                //   <zh-CN>此处不能添加盐或更换算法；安全升级必须经独立兼容迁移实施。</zh-CN>
+                //   <en>Do not add salt or change algorithms here; security upgrades require a separate compatible migration.</en>
+                // </lang>
+                return BitConverter.ToString(hashedBytes);
+            }
+        }

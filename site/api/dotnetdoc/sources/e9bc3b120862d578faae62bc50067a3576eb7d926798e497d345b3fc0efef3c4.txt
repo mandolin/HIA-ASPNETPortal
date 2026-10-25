@@ -1,0 +1,28 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>每次请求都重新建立并校验编辑上下文；无效上下文立即停止，首次请求才绑定文档和安全回跳。</zh-CN>
+            //   <en>Rebuild and validate the edit context on every request; stop immediately for invalid context, and bind the document and safe return URL only on the first request.</en>
+            // </lang>
+            _hasValidEditContext = TryInitializeEditContext();
+            if (!_hasValidEditContext)
+            {
+                return;
+            }
+
+            ApplyUploadPolicyPresentation();
+
+            if (!Page.IsPostBack)
+            {
+                if (_currentItem != null)
+                {
+                    BindDocument(_currentItem);
+                }
+
+                // <lang>
+                //   <zh-CN>只保存已经验证在当前应用内的回跳地址，后续仍会再次校验。</zh-CN>
+                //   <en>Store only a return URL already verified as inside the current application; it is revalidated later.</en>
+                // </lang>
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
+            }
+        }

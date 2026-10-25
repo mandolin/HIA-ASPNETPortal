@@ -1,0 +1,1 @@
+        public const string ModuleCatalogEdit = "Module.Catalog.Edit";

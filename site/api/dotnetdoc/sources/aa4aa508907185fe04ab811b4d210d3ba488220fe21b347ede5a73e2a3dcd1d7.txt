@@ -1,0 +1,14 @@
+        public static string Join(IEnumerable<string> roles)
+        {
+            if (roles == null)
+            {
+                return string.Empty;
+            }
+
+            return string.Join(
+                ";",
+                roles
+                    .Where(role => !string.IsNullOrWhiteSpace(role))
+                    .Select(role => role.Trim())
+                    .Distinct(StringComparer.OrdinalIgnoreCase));
+        }

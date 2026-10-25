@@ -1,0 +1,1 @@
+        public virtual ICollection<ModuleSettingItem> Settings { get; set; }

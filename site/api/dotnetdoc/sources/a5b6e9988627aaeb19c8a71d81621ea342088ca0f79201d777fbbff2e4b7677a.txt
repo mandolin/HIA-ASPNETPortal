@@ -1,0 +1,4 @@
+        protected string ContactsEmptyStateText
+        {
+            get { return Resources.lang.Contacts_EmptyNoContacts; }
+        }

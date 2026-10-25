@@ -1,0 +1,6 @@
+    <%--
+    <lang>
+      <zh-CN>组织单元编辑页只重构展示壳和表单布局，父级循环校验、并发时间戳、保存和审计仍由 code-behind 处理。</zh-CN>
+      <en>The organization-unit edit page only rebuilds the display shell and form layout; parent-cycle validation, concurrency timestamps, persistence, and auditing remain handled by the code-behind.</en>
+    </lang>
+    --%>

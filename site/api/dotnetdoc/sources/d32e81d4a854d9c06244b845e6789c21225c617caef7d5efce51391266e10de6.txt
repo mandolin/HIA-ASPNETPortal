@@ -1,0 +1,11 @@
+                        <%--
+                          <lang>
+                            <zh-CN>角色名用 **`<%#:`**（冒号）而非 `<%#` 绑定：前者会先做 HTML 编码再输出，是角色名这类可控数据的 XSS 防护基线，
+                            改动时不得退化成 `<%#`。删除按钮不带 `CommandArgument`，要移除的角色由 `DataList` 的 `DataKeyField="RoleId"`
+                            经 `OnItemCommand` 取回 —— 即"删哪一行"由 DataKey 决定，标记层不含行标识。</zh-CN>
+                            <en>The role name binds with **`<%#:`** (with colon) rather than `<%#`: the former HTML-encodes before emitting, which is the
+                            XSS baseline for controllable data such as role names — do not regress it to `<%#`. The delete button carries no
+                            `CommandArgument`; the role to remove is recovered via the DataList's `DataKeyField="RoleId"` in `OnItemCommand`, i.e.
+                            "which row" comes from the DataKey and the markup holds no row identifier.</en>
+                          </lang>
+                        --%>

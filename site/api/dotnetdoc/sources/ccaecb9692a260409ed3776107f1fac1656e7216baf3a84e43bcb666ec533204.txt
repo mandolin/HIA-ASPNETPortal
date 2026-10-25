@@ -1,0 +1,2 @@
+        [Key]
+        public int PortalId { get; set; }

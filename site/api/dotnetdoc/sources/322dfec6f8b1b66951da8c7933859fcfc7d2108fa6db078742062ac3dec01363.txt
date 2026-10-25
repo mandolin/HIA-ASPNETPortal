@@ -1,0 +1,43 @@
+        private void BindApplications()
+        {
+            // <lang>
+            //   <zh-CN>数据服务缺失或 Schema 不可用时绑定空集合，不继续读取业务申请数据。</zh-CN>
+            //   <en>Bind an empty collection when the service or schema is unavailable and do not continue reading application data.</en>
+            // </lang>
+            if (BusinessApplicationDb == null)
+            {
+                ShowUnavailable(lang.Admin_BusinessApplications_MessageServiceNotRegistered);
+                return;
+            }
+
+            if (!BusinessApplicationDb.IsSchemaAvailable())
+            {
+                ShowUnavailable(lang.Admin_BusinessApplications_MessageSchemaUnavailable);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>查询使用固定分页上限，展示行只保留申请审核所需低敏字段。</zh-CN>
+            //   <en>Use the fixed page-size limit and keep only the low-sensitivity fields needed for review display.</en>
+            // </lang>
+            IList<BusinessApplicationInfo> applications = BusinessApplicationDb.GetAdminApplications(
+                StatusFilterList.SelectedValue,
+                PageSize);
+            List<BusinessApplicationAdminRow> rows = applications
+                .Select(application => new BusinessApplicationAdminRow(application)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it, and <c>null</c> suppresses it on failure paths.</en>
+            // </lang>
+            applicationsEmptyStateRowCount = rows.Count;
+
+            ApplicationsRepeater.DataSource = rows;
+            ApplicationsRepeater.DataBind();
+
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_BusinessApplications_MessagePageInfo,
+                PageSize,
+                applications.Count);
+        }

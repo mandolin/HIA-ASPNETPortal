@@ -1,0 +1,54 @@
+        public IList<EmployeeProfileCorrectionRequestInfo> GetAdminRequests(string status, int take)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return new List<EmployeeProfileCorrectionRequestInfo>();
+            }
+
+            string normalizedStatus = NormalizeStatusFilter(status);
+            int safeTake = NormalizeTake(take, 50);
+            try
+            {
+                // <lang>
+                //   <zh-CN>后台列表按状态可选过滤，默认只取有限条数，避免旧 WebForms 页面一次绑定过多记录。</zh-CN>
+                //   <en>The admin list optionally filters by status and always limits rows so the legacy WebForms page does not bind too many records at once.</en>
+                // </lang>
+                return context.Database.SqlQuery<EmployeeProfileCorrectionRequestInfo>(
+                    @"
+SELECT TOP (@Take)
+    [Request].[RequestId],
+    [Request].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName] AS [EmployeeDisplayName],
+    [Request].[UserId],
+    [User].[Name] AS [UserName],
+    [Request].[BindingId],
+    [Request].[SubmittedUtc],
+    [Request].[SubmittedBy],
+    [Request].[FieldName],
+    [Request].[CurrentValueSnapshot],
+    [Request].[ProposedValue],
+    [Request].[RequestNote],
+    [Request].[RequestStatus],
+    [Request].[ReviewedUtc],
+    [Request].[ReviewedBy],
+    [Request].[ReviewNote]
+FROM [dbo].[PortalBiz_EmployeeProfileCorrectionRequests] AS [Request]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Request].[EmployeeId]
+INNER JOIN [dbo].[Portal_Users] AS [User]
+    ON [User].[UserID] = [Request].[UserId]
+WHERE (@Status = N'' OR [Request].[RequestStatus] = @Status)
+ORDER BY [Request].[SubmittedUtc] DESC, [Request].[RequestId] DESC;",
+                    new SqlParameter("@Take", safeTake),
+                    new SqlParameter("@Status", normalizedStatus)).ToList();
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>后台查询失败时返回空集合，由页面级提示和诊断日志承接，不把 SQL 细节直接暴露到浏览器。</zh-CN>
+                //   <en>When admin querying fails, return an empty list and let page-level messaging and diagnostics handle it without exposing SQL details to the browser.</en>
+                // </lang>
+                return new List<EmployeeProfileCorrectionRequestInfo>();
+            }
+        }

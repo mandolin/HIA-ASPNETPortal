@@ -1,0 +1,30 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>首次加载只在模块编辑权限通过后读取模块设置，避免未授权用户探测图片资源配置。</zh-CN>
+                //   <en>Initial binding reads module settings only after edit permission succeeds, avoiding unauthorized probing of image-resource configuration.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>settings 是当前模块的持久化文本设置快照，只在首次加载时回填表单。</zh-CN>
+                //   <en>settings is the persisted text-setting snapshot for the current module and is used only to fill the form on first load.</en>
+                // </lang>
+                Hashtable settings = ModulesConfig.GetModuleSettings(moduleId);
+                Src.Text = settings["src"] as string;
+                Width.Text = settings["width"] as string;
+                Height.Text = settings["height"] as string;
+                ApplyImagePreview(Src.Text);
+
+                // <lang>
+                //   <zh-CN>回跳地址只保存经策略清洗后的站内地址，供保存和取消共用。</zh-CN>
+                //   <en>The return URL stores only a policy-cleaned in-app address shared by save and cancel actions.</en>
+                // </lang>
+                ViewState["UrlReferrer"] = PortalNavigationPolicy.GetSafeReturnUrl(Request);
+            }
+        }

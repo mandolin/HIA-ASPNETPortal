@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileConfirm_MessageUserUnresolved {
+            get {
+                return ResourceManager.GetString("EmployeeProfileConfirm_MessageUserUnresolved", resourceCulture);
+            }
+        }

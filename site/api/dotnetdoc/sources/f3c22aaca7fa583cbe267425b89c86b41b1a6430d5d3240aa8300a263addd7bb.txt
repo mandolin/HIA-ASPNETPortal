@@ -1,0 +1,65 @@
+        private bool TrySaveUploadedFile(out string virtualPath, out string savedPhysicalPath)
+        {
+            // <lang>
+            //   <zh-CN>输出先初始化为空，确保验证失败或异常路径不泄漏上一次请求的路径。</zh-CN>
+            //   <en>Initialize outputs to empty values so validation failure or exception paths cannot leak a prior request's paths.</en>
+            // </lang>
+            virtualPath = string.Empty;
+            savedPhysicalPath = null;
+
+            // <lang>
+            //   <zh-CN>统一策略同时检查文件大小、扩展名和上传对象存在性。</zh-CN>
+            //   <en>The shared policy checks file presence, size, and extension together.</en>
+            // </lang>
+            string errorMessage;
+            if (!PortalDocumentPolicy.TryValidateUpload(FileUpload.PostedFile, out errorMessage))
+            {
+                UploadMessage.Text = errorMessage;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>物理目录由受治理的虚拟目录映射，不接受用户输入作为目录来源。</zh-CN>
+            //   <en>Map the physical directory from the governed virtual directory; user input never supplies the directory.</en>
+            // </lang>
+            string uploadDirectory = Server.MapPath(PortalDocumentPolicy.UploadVirtualDirectory);
+            Directory.CreateDirectory(uploadDirectory);
+
+            // <lang>
+            //   <zh-CN>有限重试处理极低概率名称冲突，达到上限仍抛出原异常。</zh-CN>
+            //   <en>Use bounded retries for rare name collisions and rethrow the original exception after the limit.</en>
+            // </lang>
+            for (int attempt = 0; attempt < 5; attempt++)
+            {
+                // <lang>
+                //   <zh-CN>存储文件名由统一策略生成，与原始上传文件名解耦。</zh-CN>
+                //   <en>Generate the storage filename through the shared policy, decoupling it from the original upload name.</en>
+                // </lang>
+                string fileName = PortalDocumentPolicy.CreateStorageFileName(FileUpload.PostedFile.FileName);
+                string physicalPath = Path.Combine(uploadDirectory, fileName);
+                try
+                {
+                    // <lang>
+                    //   <zh-CN>CreateNew 避免即使出现极低概率名称冲突时也覆盖已有文件。</zh-CN>
+                    //   <en>CreateNew avoids overwriting an existing file even in the unlikely event of a name collision.</en>
+                    // </lang>
+                    using (var output = new FileStream(physicalPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                    {
+                        FileUpload.PostedFile.InputStream.CopyTo(output);
+                    }
+
+                    virtualPath = PortalDocumentPolicy.GetUploadVirtualPath(fileName);
+                    savedPhysicalPath = physicalPath;
+                    return true;
+                }
+                catch (IOException)
+                {
+                    if (!File.Exists(physicalPath) || attempt == 4)
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return false;
+        }

@@ -1,0 +1,25 @@
+        protected void ResetGlobalThemeButton_Click(object sender, EventArgs e)
+        {
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.ThemeEdit))
+            {
+                return;
+            }
+
+            PortalSystemSettingWriteResult result = PortalSystemSettingsStore.DeleteOverride(
+                PortalSettingsRegistry.ThemeName,
+                Context);
+            if (result.Succeeded)
+            {
+                PortalOperationAudit.Record(
+                    "Theme",
+                    "ResetGlobalTheme",
+                    "SystemSetting",
+                    PortalSettingKeys.ThemeName,
+                    "Removed the database global-theme override.",
+                    Context);
+                RedirectToSelf();
+                return;
+            }
+
+            ShowMessage(result.Message);
+        }

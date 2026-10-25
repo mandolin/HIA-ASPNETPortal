@@ -1,0 +1,6 @@
+                                    <%--
+                                      <lang>
+                                        <zh-CN>员工账号绑定以员工行为入口，避免组织行误引用不存在的绑定地址。</zh-CN>
+                                        <en>User-employee binding is exposed from employee rows to avoid organization rows referencing a binding URL that does not exist.</en>
+                                      </lang>
+                                    --%>

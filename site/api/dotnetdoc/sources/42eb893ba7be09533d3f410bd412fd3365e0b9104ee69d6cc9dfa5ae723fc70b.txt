@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>讨论详情页主体区域。页面允许访客读取已存在消息，但回复、创建主题等写操作仍由 code-behind 的模块编辑权限检查控制。</zh-CN>
+  <en>Main discussion-detail area. Visitors may read existing messages, while write operations such as replying or creating a topic remain controlled by module edit-permission checks in the code-behind.</en>
+</lang>
+--%>

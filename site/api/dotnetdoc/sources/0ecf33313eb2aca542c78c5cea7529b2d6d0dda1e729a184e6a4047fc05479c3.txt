@@ -1,0 +1,43 @@
+        public int AddAnnouncement(int moduleId, string userName, string title, DateTime expireDate,
+                                  string description, string moreLink, string mobileMoreLink)
+        {
+            // <lang>
+            //   <zh-CN>旧内容表只有显示用创建人字段；缺失认证名称时使用占位值，不把它作为权限依据。</zh-CN>
+            //   <en>The legacy content table only has a display creator field; when the authenticated name is missing, use a placeholder and do not treat it as an authorization source.</en>
+            // </lang>
+            userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
+
+            // <lang>
+            //   <zh-CN>新公告实体承载一次新增投影；字段值均来自已由编辑页校验或兼容处理后的输入。</zh-CN>
+            //   <en>The new announcement entity carries one create projection; every field value comes from input already validated or compatibility-handled by the editor page.</en>
+            // </lang>
+            var item = new AnnouncementItem
+            {
+                ModuleId = moduleId,
+                CreatedByUser = userName,
+                CreatedDate = DateTime.Now,
+                Description = description,
+                ExpireDate = expireDate,
+                MoreLink = moreLink,
+                MobileMoreLink = mobileMoreLink,
+                Title = title
+            };
+
+            // <lang>
+            //   <zh-CN>把新实体加入 EF 跟踪集，数据库标识会在保存后回填到同一对象。</zh-CN>
+            //   <en>Add the new entity to the EF tracking set; the database identifier is populated back onto the same object after saving.</en>
+            // </lang>
+            _context.Announcements.Add(item);
+
+            // <lang>
+            //   <zh-CN>提交新增批次；本层不写审计、不重判权限，也不检查链接是否可点击。</zh-CN>
+            //   <en>Commit the create batch; this layer does not write audit records, re-authorize, or check whether links are clickable.</en>
+            // </lang>
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>返回 EF 保存后生成的旧表主键，供编辑页继续导航或反馈。</zh-CN>
+            //   <en>Return the legacy-table primary key generated after EF saving, allowing the editor page to continue navigation or feedback.</en>
+            // </lang>
+            return item.ItemId;
+        }

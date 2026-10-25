@@ -1,0 +1,1 @@
+        public DateTime UpdatedUtc { get; private set; }

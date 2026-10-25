@@ -1,0 +1,13 @@
+        public static readonly PortalSettingDefinition DiagnosticsMaxFileBytes =
+            new PortalSettingDefinition(
+                PortalSettingKeys.DiagnosticsMaxFileBytes,
+                "诊断日志单文件大小上限",
+                "结构化诊断日志单个文件允许的最大字节数；达到上限后自动滚动到下一个序号文件。",
+                PortalSettingValueType.Integer,
+                "10485760",
+                false,
+                true,
+                "Admins",
+                "Diagnostics",
+                minIntegerValue: 1024,
+                maxIntegerValue: 104857600);

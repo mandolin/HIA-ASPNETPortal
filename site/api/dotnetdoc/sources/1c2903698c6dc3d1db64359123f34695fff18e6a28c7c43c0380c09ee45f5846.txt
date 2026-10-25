@@ -1,0 +1,12 @@
+    public interface IExpenseReimbursementDb
+    {
+        /// <summary><lang><zh-CN>探测业务表是否可用。</zh-CN><en>Probe whether the business table is available.</en></lang></summary>
+        bool IsSchemaAvailable();
+        /// <summary><lang><zh-CN>创建一条费用报销。</zh-CN><en>Create an expense reimbursement.</en></lang></summary>
+        /// <param name="request"><l><zh-CN>创建请求。</zh-CN><en>Creation request.</en></l></param>
+        ExpenseReimbursementResult CreateRequest(ExpenseReimbursementCreateRequest request);
+        /// <summary><lang><zh-CN>取申请人的最近报销列表。</zh-CN><en>Get the applicant's recent reimbursements.</en></lang></summary>
+        /// <param name="userId"><l><zh-CN>用户标识。</zh-CN><en>User identifier.</en></l></param>
+        /// <param name="limit"><l><zh-CN>上限。</zh-CN><en>Limit.</en></l></param>
+        IReadOnlyList<ExpenseReimbursementInfo> GetRecentByUser(int userId, int limit);
+    }

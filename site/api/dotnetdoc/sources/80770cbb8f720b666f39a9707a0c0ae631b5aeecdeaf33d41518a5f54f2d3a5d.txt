@@ -1,0 +1,8 @@
+        private void ShowMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>统一 HTML 编码页面提示，避免服务层或诊断摘要成为标记注入。</zh-CN>
+            //   <en>HTML-encode page messages consistently so service text or diagnostic summaries cannot become markup injection.</en>
+            // </lang>
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

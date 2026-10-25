@@ -1,0 +1,5 @@
+        internal static string Admin_SecurityRoles_LabelUser {
+            get {
+                return ResourceManager.GetString("Admin_SecurityRoles_LabelUser", resourceCulture);
+            }
+        }

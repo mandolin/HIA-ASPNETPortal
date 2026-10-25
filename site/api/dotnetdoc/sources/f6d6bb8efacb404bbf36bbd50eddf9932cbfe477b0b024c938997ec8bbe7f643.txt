@@ -1,0 +1,1 @@
+        public string EndedBy { get; set; }

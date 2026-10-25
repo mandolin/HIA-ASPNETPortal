@@ -1,0 +1,4 @@
+        private bool HasUserProfileTable()
+        {
+            return HasTable(ProfileTableName);
+        }

@@ -1,0 +1,5 @@
+        internal static string LegacyEdit_LabelRole {
+            get {
+                return ResourceManager.GetString("LegacyEdit_LabelRole", resourceCulture);
+            }
+        }

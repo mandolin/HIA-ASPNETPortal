@@ -1,0 +1,6 @@
+        <%--
+            <lang>
+                <zh-CN>密码输入和隐藏密文字段共同服务于提交前保护；隐藏字段仍是客户端回传值，最终校验、失败处理和票据签发必须由服务器完成。</zh-CN>
+                <en>The password input and hidden ciphertext field support pre-submit protection; the hidden field is still client-posted data, so final validation, failure handling, and ticket issuance must remain server-side.</en>
+            </lang>
+        --%>

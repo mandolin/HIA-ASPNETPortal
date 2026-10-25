@@ -1,0 +1,1 @@
+        CollaborationItemParticipantResult RemoveParticipant(long itemId, int userId, int actorUserId);

@@ -1,0 +1,58 @@
+        public EmployeeProfileCorrectionProfileView GetCurrentProfileForUser(int userId)
+        {
+            if (userId <= 0 || !IsSchemaAvailable())
+            {
+                return null;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>读取当前用户最近的 Active 员工绑定，且员工自身也必须 Active；页面展示资料不信任客户端传入的员工标识。</zh-CN>
+                //   <en>Read the current user's latest active employee binding and require the employee to be active as well; profile display does not trust an employee id supplied by the client.</en>
+                // </lang>
+                ProfileProjection row = context.Database.SqlQuery<ProfileProjection>(
+                    @"
+SELECT TOP (1)
+    [Employee].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName],
+    [Employee].[PreferredName],
+    [Employee].[WorkEmail],
+    [Organization].[DisplayName] AS [OrganizationDisplayName],
+    [Employee].[EmploymentStatus],
+    [Binding].[BindingId],
+    [Binding].[BoundUtc]
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+LEFT JOIN [dbo].[PortalBiz_OrganizationUnits] AS [Organization]
+    ON [Organization].[OrganizationUnitId] = [Employee].[OrganizationUnitId]
+WHERE [Binding].[UserId] = @p0
+  AND [Binding].[BindingStatus] = N'Active'
+  AND [Employee].[EmploymentStatus] = N'Active'
+ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC;",
+                    userId).SingleOrDefault();
+
+                return row == null
+                    ? null
+                    : new EmployeeProfileCorrectionProfileView(
+                        row.EmployeeId,
+                        row.EmployeeCode,
+                        row.DisplayName,
+                        row.PreferredName,
+                        row.WorkEmail,
+                        row.OrganizationDisplayName,
+                        row.EmploymentStatus,
+                        row.BindingId,
+                        row.BoundUtc);
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>只读资料入口软失败，避免缺表或迁移中的数据库状态打断前台门户首页。</zh-CN>
+                //   <en>The read-only profile entry fails softly so missing tables or in-progress migrations do not break the portal home page.</en>
+                // </lang>
+                return null;
+            }
+        }

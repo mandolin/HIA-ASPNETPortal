@@ -1,0 +1,349 @@
+    internal sealed class PortalLoginIdentifierResolver
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前调用持有的安全 EF 上下文，仅用于受控标识查询，不验证密码或授予角色。</zh-CN>
+        ///   <en>Security EF context held for the current call, used only for controlled identifier queries and never for password validation or role grants.</en>
+        /// </lang>
+        /// </summary>
+        private readonly PortalSecurityDbContext context;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户资料扩展表是否可用；不可用时解析安全地跳过资料登录名和资料邮箱来源。</zh-CN>
+        ///   <en>Whether the user-profile extension table is available; when unavailable, resolution safely skips profile login-name and profile-email sources.</en>
+        /// </lang>
+        /// </summary>
+        private readonly bool userProfilesAvailable;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工及绑定表是否可用；不可用时工号解析被显式跳过。</zh-CN>
+        ///   <en>Whether employee and binding tables are available; when unavailable, employee-code resolution is explicitly skipped.</en>
+        /// </lang>
+        /// </summary>
+        private readonly bool employeeCodeSignInAvailable;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化登录标识解析器。</zh-CN>
+        ///   <en>Initializes the login-identifier resolver.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>安全相关 EF 上下文。</zh-CN>
+        ///   <en>Security-related EF context.</en>
+        /// </l>
+        /// </param>
+        /// <param name="userProfilesAvailable">
+        /// <l>
+        ///   <zh-CN>用户资料扩展表是否可用。</zh-CN>
+        ///   <en>Whether the user-profile extension table is available.</en>
+        /// </l>
+        /// </param>
+        /// <param name="employeeCodeSignInAvailable">
+        /// <l>
+        ///   <zh-CN>工号登录解析所需员工/绑定表是否可用。</zh-CN>
+        ///   <en>Whether employee and binding tables required for employee-code sign-in are available.</en>
+        /// </l>
+        /// </param>
+        internal PortalLoginIdentifierResolver(
+            PortalSecurityDbContext context,
+            bool userProfilesAvailable,
+            bool employeeCodeSignInAvailable)
+        {
+            // <lang>
+            //   <zh-CN>保存当前安全查询上下文；其生命周期由调用方数据访问操作限定。</zh-CN>
+            //   <en>Store the current security-query context; its lifetime is bounded by the caller's data-access operation.</en>
+            // </lang>
+            this.context = context;
+
+            // <lang>
+            //   <zh-CN>保存资料表可用性快照，避免每个解析分支重复探测数据库 schema。</zh-CN>
+            //   <en>Store the profile-table availability snapshot, avoiding repeated database-schema probing in every resolution branch.</en>
+            // </lang>
+            this.userProfilesAvailable = userProfilesAvailable;
+
+            // <lang>
+            //   <zh-CN>保存员工工号解析依赖表可用性快照，不把工号当作独立凭据。</zh-CN>
+            //   <en>Store the availability snapshot for employee-code resolution dependencies and never treat an employee code as a standalone credential.</en>
+            // </lang>
+            this.employeeCodeSignInAvailable = employeeCodeSignInAvailable;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把一次登录输入解析为唯一门户用户。</zh-CN>
+        ///   <en>Resolves one sign-in input to a unique Portal user.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="input">
+        /// <l>
+        ///   <zh-CN>用户输入的登录名、邮箱或员工工号。</zh-CN>
+        ///   <en>User-entered login name, email address or employee code.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>解析结果；可能是唯一命中、歧义、未命中或未作终止判断。</zh-CN>
+        ///   <en>Resolution result; it may be uniquely found, ambiguous, not found or non-terminal.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>解析顺序优先使用新用户资料登录名，其次旧用户表名称，再尝试工号，最后合并邮箱结果。前两个唯一字段出现未命中时允许继续向后查找。</zh-CN>
+        ///   <en>The resolver first checks the new profile login name, then the legacy user name, then employee code, and finally merged email results. Not-found results from the first two unique-field checks may continue to later checks.</en>
+        /// </lang>
+        /// </remarks>
+        internal PortalLoginIdentifierResolution Resolve(string input)
+        {
+            // <lang>
+            //   <zh-CN>裁剪一次性登录输入；空白输入立即得到终止性未命中，不访问数据库。</zh-CN>
+            //   <en>Trim the one-time sign-in input; blank input immediately yields terminal not-found without database access.</en>
+            // </lang>
+            string normalizedInput = Normalize(input);
+            if (string.IsNullOrEmpty(normalizedInput))
+            {
+                return PortalLoginIdentifierResolution.CreateNotFound();
+            }
+
+            if (userProfilesAvailable)
+            {
+                // <lang>
+                //   <zh-CN>先查询资料表中应唯一的登录名；歧义是终止性安全结果，未命中才允许继续旧来源。</zh-CN>
+                //   <en>Query the profile table's expected-unique login name first; ambiguity is terminal and safe, while no match alone permits legacy sources to continue.</en>
+                // </lang>
+                PortalLoginIdentifierResolution profileLoginName = ResolveSingle(
+                    "SELECT TOP (2) [UserId] FROM [dbo].[PortalBiz_UserProfiles] WHERE [LoginName] = @p0",
+                    normalizedInput);
+                if (profileLoginName.HasDecision)
+                {
+                    return profileLoginName;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>查询旧用户表名称，保留与资料来源相同的唯一/歧义判定语义。</zh-CN>
+            //   <en>Query the legacy user-table name while retaining the same unique-versus-ambiguous decision semantics as the profile source.</en>
+            // </lang>
+            PortalLoginIdentifierResolution legacyName = ResolveSingle(
+                "SELECT TOP (2) [UserID] FROM [dbo].[Portal_Users] WHERE [Name] = @p0",
+                normalizedInput);
+            if (legacyName.HasDecision)
+            {
+                return legacyName;
+            }
+
+            if (employeeCodeSignInAvailable)
+            {
+                // <lang>
+                //   <zh-CN>仅在员工和绑定表可用时尝试工号，并要求两端 Active 才返回门户用户。</zh-CN>
+                //   <en>Attempt employee code only when employee and binding tables are available, requiring both sides to be Active before returning a portal user.</en>
+                // </lang>
+                PortalLoginIdentifierResolution employeeCode = ResolveEmployeeCode(normalizedInput);
+                if (employeeCode.HasDecision)
+                {
+                    return employeeCode;
+                }
+            }
+
+            return ResolveEmail(normalizedInput);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按员工工号解析当前有效门户账号。</zh-CN>
+        ///   <en>Resolves the current active Portal account by employee code.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="normalizedInput">
+        /// <l>
+        ///   <zh-CN>已裁剪的登录输入。</zh-CN>
+        ///   <en>Trimmed sign-in input.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>员工和绑定均 Active 时的解析结果。</zh-CN>
+        ///   <en>Resolution result when both employee and binding are active.</en>
+        /// </l>
+        /// </returns>
+        private PortalLoginIdentifierResolution ResolveEmployeeCode(string normalizedInput)
+        {
+            return ResolveSingle(
+                @"
+SELECT TOP (2) [Binding].[UserId]
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+WHERE [Binding].[BindingStatus] = N'Active'
+  AND [Employee].[EmploymentStatus] = N'Active'
+  AND [Employee].[EmployeeCode] = @p0",
+                normalizedInput);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按邮箱在新旧资料来源之间合并解析门户账号。</zh-CN>
+        ///   <en>Resolves a Portal account by merging email matches from new and legacy profile sources.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="normalizedInput">
+        /// <l>
+        ///   <zh-CN>已裁剪的邮箱输入。</zh-CN>
+        ///   <en>Trimmed email input.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>邮箱唯一命中、歧义或未命中的最终结果。</zh-CN>
+        ///   <en>Final email result: unique match, ambiguous match or not found.</en>
+        /// </l>
+        /// </returns>
+        private PortalLoginIdentifierResolution ResolveEmail(string normalizedInput)
+        {
+            // <lang>
+            //   <zh-CN>暂存新旧来源的候选用户标识；集合只在当前解析中存活，不保存邮箱原文。</zh-CN>
+            //   <en>Hold candidate user ids from new and legacy sources; the collection lives only during current resolution and does not retain raw email text.</en>
+            // </lang>
+            var ids = new List<int>();
+
+            if (userProfilesAvailable)
+            {
+                // <lang>
+                //   <zh-CN>合并资料扩展表邮箱候选；后续会去重并至多保留两个以识别歧义。</zh-CN>
+                //   <en>Merge profile-extension email candidates; later processing de-duplicates and retains at most two to identify ambiguity.</en>
+                // </lang>
+                ids.AddRange(QueryIds(
+                    "SELECT [UserId] FROM [dbo].[PortalBiz_UserProfiles] WHERE [PreferredEmail] = @p0",
+                    normalizedInput));
+            }
+
+            ids.AddRange(QueryIds(
+                "SELECT [UserID] FROM [dbo].[Portal_Users] WHERE [Email] = @p0",
+                normalizedInput));
+
+            // <lang>
+            //   <zh-CN>按用户标识去重并截断为两个候选；一个即唯一，两个即歧义，无需扫描全部记录。</zh-CN>
+            //   <en>De-duplicate by user id and cap at two candidates; one is unique and two are ambiguous without scanning all records.</en>
+            // </lang>
+            List<int> distinctIds = ids.Distinct().Take(2).ToList();
+            if (distinctIds.Count == 1)
+            {
+                return PortalLoginIdentifierResolution.CreateFound(distinctIds[0]);
+            }
+
+            return distinctIds.Count > 1
+                ? PortalLoginIdentifierResolution.CreateAmbiguous()
+                : PortalLoginIdentifierResolution.CreateNotFound();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>执行一个应当唯一的标识查询。</zh-CN>
+        ///   <en>Executes an identifier query that should be unique.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sql">
+        /// <l>
+        ///   <zh-CN>受控 SQL 模板。</zh-CN>
+        ///   <en>Controlled SQL template.</en>
+        /// </l>
+        /// </param>
+        /// <param name="normalizedInput">
+        /// <l>
+        ///   <zh-CN>已裁剪的查询值。</zh-CN>
+        ///   <en>Trimmed query value.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>唯一命中、歧义或未命中且不终止解析的结果。</zh-CN>
+        ///   <en>Unique, ambiguous or not-found-without-decision result.</en>
+        /// </l>
+        /// </returns>
+        private PortalLoginIdentifierResolution ResolveSingle(string sql, string normalizedInput)
+        {
+            // <lang>
+            //   <zh-CN>取得应唯一字段的至多两个不同用户标识，保留未命中但可继续的语义。</zh-CN>
+            //   <en>Retrieve at most two distinct user ids for an expected-unique field while retaining no-match-but-may-continue semantics.</en>
+            // </lang>
+            List<int> ids = QueryIds(sql, normalizedInput).Distinct().Take(2).ToList();
+            if (ids.Count == 1)
+            {
+                return PortalLoginIdentifierResolution.CreateFound(ids[0]);
+            }
+
+            return ids.Count > 1
+                ? PortalLoginIdentifierResolution.CreateAmbiguous()
+                : PortalLoginIdentifierResolution.CreateNotFoundWithoutDecision();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>执行登录标识查询并返回最多两个候选用户标识。</zh-CN>
+        ///   <en>Executes a login-identifier query and returns up to two candidate user ids.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="sql">
+        /// <l>
+        ///   <zh-CN>受控 SQL 模板。</zh-CN>
+        ///   <en>Controlled SQL template.</en>
+        /// </l>
+        /// </param>
+        /// <param name="normalizedInput">
+        /// <l>
+        ///   <zh-CN>已裁剪的查询值。</zh-CN>
+        ///   <en>Trimmed query value.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>候选用户标识列表；查询异常时返回空集合。</zh-CN>
+        ///   <en>Candidate user id list; empty when querying fails.</en>
+        /// </l>
+        /// </returns>
+        private List<int> QueryIds(string sql, string normalizedInput)
+        {
+            try
+            {
+                // <lang>
+                //   <zh-CN>执行调用点提供的受控 SQL 模板，并把登录输入作为 EF 参数传入；不拼接用户输入。</zh-CN>
+                //   <en>Execute the controlled SQL template supplied by the call site and pass sign-in input as an EF parameter; user input is never concatenated.</en>
+                // </lang>
+                return context.Database.SqlQuery<int>(sql, normalizedInput).ToList();
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>解析扩展表失败时按未命中处理，调用方仍可走旧路径或通用失败。</zh-CN>
+                //   <en>Treat extension-table resolution failures as no match so callers can still use legacy paths or return a generic failure.</en>
+                // </lang>
+                return new List<int>();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>裁剪登录输入。</zh-CN>
+        ///   <en>Trims a sign-in input.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        /// <l>
+        ///   <zh-CN>原始输入。</zh-CN>
+        ///   <en>Raw input.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>裁剪后的输入；空白值返回空字符串。</zh-CN>
+        ///   <en>Trimmed input, or an empty string for blank values.</en>
+        /// </l>
+        /// </returns>
+        private static string Normalize(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? string.Empty : value.Trim();
+        }
+    }

@@ -1,0 +1,61 @@
+        public int AddMessage(int moduleId, int parentId, string userName, string title, string body)
+        {
+            // <lang>
+            //   <zh-CN>空白用户名降级为旧占位值，只满足历史显示字段；认证身份和发帖权限不从该值推断。</zh-CN>
+            //   <en>A blank user name falls back to the legacy placeholder only for the historical display field; authenticated identity and posting permission are not inferred from this value.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                userName = "unknown";
+            }
+
+            // <lang>
+            //   <zh-CN>新增消息调用封装一次旧存储过程执行；线程 DisplayOrder 分配由数据库过程维护。</zh-CN>
+            //   <en>The add-message call wraps one legacy stored-procedure execution; thread DisplayOrder allocation is maintained by the database procedure.</en>
+            // </lang>
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand("Portal_AddMessage", connection))
+            {
+                // <lang>
+                //   <zh-CN>明确以存储过程模式执行，避免把过程名称作为文本 SQL。</zh-CN>
+                //   <en>Execute explicitly in stored-procedure mode so the procedure name is not treated as text SQL.</en>
+                // </lang>
+                command.CommandType = CommandType.StoredProcedure;
+
+                // <lang>
+                //   <zh-CN>旧存储过程通过输出参数返回新消息 ID；如果没有返回，方法尾部会统一降级为 -1。</zh-CN>
+                //   <en>The legacy stored procedure returns the new message ID through an output parameter; when it does not, the method tail falls back to -1.</en>
+                // </lang>
+                SqlParameter itemIdParam = new SqlParameter("@ItemID", SqlDbType.Int);
+                itemIdParam.Direction = ParameterDirection.Output;
+                command.Parameters.Add(itemIdParam);
+
+                // <lang>
+                //   <zh-CN>保留旧过程的参数名称，避免影响现有 SQL 脚本和 SQL Server 2016+ 兼容矩阵。</zh-CN>
+                //   <en>Keep the legacy procedure parameter names so existing SQL scripts and the SQL Server 2016+ compatibility matrix are not disturbed.</en>
+                // </lang>
+                command.Parameters.AddWithValue("@ModuleID", moduleId);
+                command.Parameters.AddWithValue("@ParentID", parentId);
+                command.Parameters.AddWithValue("@UserName", userName);
+                command.Parameters.AddWithValue("@Title", title ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@Body", body ?? (object)DBNull.Value);
+
+                // <lang>
+                //   <zh-CN>参数全部绑定后再打开连接；执行过程时不在代码层拼接标题或正文。</zh-CN>
+                //   <en>Open the connection after all parameters are bound; title and body are not concatenated into SQL at the code layer.</en>
+                // </lang>
+                connection.Open();
+
+                // <lang>
+                //   <zh-CN>执行写入过程；数据库负责插入、父子路径维护和输出参数赋值。</zh-CN>
+                //   <en>Execute the write procedure; the database owns insertion, parent/child path maintenance, and output parameter assignment.</en>
+                // </lang>
+                command.ExecuteNonQuery();
+
+                // <lang>
+                //   <zh-CN>读取输出参数；未返回标识时保持旧契约的 -1 回退，调用页再决定提示或重试策略。</zh-CN>
+                //   <en>Read the output parameter; when no identifier is returned, keep the legacy -1 fallback and let the caller page decide messaging or retry policy.</en>
+                // </lang>
+                return itemIdParam.Value == DBNull.Value ? -1 : Convert.ToInt32(itemIdParam.Value);
+            }
+        }

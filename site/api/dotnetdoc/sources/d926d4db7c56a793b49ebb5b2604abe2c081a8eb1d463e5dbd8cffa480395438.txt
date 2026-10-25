@@ -1,0 +1,8 @@
+        public CollaborationItemResult(bool succeeded, long itemId, string itemCode, string actionKey, string message)
+        {
+            Succeeded = succeeded;
+            ItemId = itemId;
+            ItemCode = itemCode ?? string.Empty;
+            ActionKey = actionKey ?? string.Empty;
+            Message = message ?? string.Empty;
+        }

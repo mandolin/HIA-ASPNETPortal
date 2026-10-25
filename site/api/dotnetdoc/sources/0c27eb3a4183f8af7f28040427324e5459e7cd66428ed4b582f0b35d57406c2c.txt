@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_ColumnUtc {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_ColumnUtc", resourceCulture);
+            }
+        }

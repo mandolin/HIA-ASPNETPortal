@@ -1,0 +1,34 @@
+        private static readonly IDictionary<string, PayloadRule> PayloadRules =
+            new Dictionary<string, PayloadRule>(StringComparer.Ordinal)
+            {
+                {
+                    "portal.module-capability",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "packageId", "displayName", "packageVersion", "state", "capabilities" },
+                        new string[0])
+                },
+                {
+                    "portal.theme-capability",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "themeName", "packageVersion", "isAvailable", "capabilities" },
+                        new string[0])
+                },
+                {
+                    "portal.setting-capability",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "settingKey", "valueType", "isSensitive", "sourceLevel", "canEditOnline" },
+                        new string[0])
+                },
+                {
+                    "portal.health-capability",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "componentId", "status" },
+                        new string[0])
+                },
+                {
+                    "portal.diagnostic-reference",
+                    new PayloadRule(
+                        new[] { "descriptorVersion", "eventId", "level", "category" },
+                        new string[0])
+                }
+            };

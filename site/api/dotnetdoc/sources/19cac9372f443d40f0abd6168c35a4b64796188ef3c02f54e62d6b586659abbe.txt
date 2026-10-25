@@ -1,0 +1,5 @@
+        internal static string Admin_EmployeeEdit_MessageInvalidTimestamp {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_MessageInvalidTimestamp", resourceCulture);
+            }
+        }

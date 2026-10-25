@@ -1,0 +1,18 @@
+        protected void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除仍依赖每次请求的编辑上下文，且只删除记录，不删除可能被历史记录共享的物理文件。</zh-CN>
+            //   <en>Deletion still requires the per-request edit context and removes only the record, not a physical file that legacy records may share.</en>
+            // </lang>
+            if (!_hasValidEditContext)
+            {
+                return;
+            }
+
+            if (_itemId != 0)
+            {
+                DocumentDB.DeleteDocument(_itemId);
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

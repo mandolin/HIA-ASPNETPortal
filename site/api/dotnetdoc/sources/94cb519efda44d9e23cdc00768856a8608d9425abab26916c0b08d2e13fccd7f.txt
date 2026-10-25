@@ -1,0 +1,16 @@
+        private static byte[] Concat(byte[] first, byte[] second)
+        {
+            // <lang>
+            //   <zh-CN>一次分配两个片段的总长度，避免组合 DER 结构时改变片段内容。</zh-CN>
+            //   <en>Allocate the combined length once without altering either fragment while composing the DER structure.</en>
+            // </lang>
+            byte[] result = new byte[first.Length + second.Length];
+
+            // <lang>
+            //   <zh-CN>先写入前置片段，再从其长度位置写入后置片段，保持参数顺序。</zh-CN>
+            //   <en>Copy the leading fragment first, then copy the trailing fragment at its length offset to preserve argument order.</en>
+            // </lang>
+            Buffer.BlockCopy(first, 0, result, 0, first.Length);
+            Buffer.BlockCopy(second, 0, result, first.Length, second.Length);
+            return result;
+        }

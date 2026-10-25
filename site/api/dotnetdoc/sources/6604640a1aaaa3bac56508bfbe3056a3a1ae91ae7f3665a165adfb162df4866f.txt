@@ -1,0 +1,6 @@
+        <%--
+          <lang>
+            <zh-CN>EmployeeIdField 和 OriginalUpdatedUtcField 只是回发状态载体，客户端可以修改；实体身份和并发版本必须由 code-behind 重新解析与校验。</zh-CN>
+            <en>EmployeeIdField and OriginalUpdatedUtcField are postback state carriers that the client can modify; code-behind must resolve and validate entity identity and concurrency version again.</en>
+          </lang>
+        --%>

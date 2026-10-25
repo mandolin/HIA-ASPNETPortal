@@ -1,0 +1,22 @@
+        private static IList<string> NormalizeList(IEnumerable<string> values)
+        {
+            // <lang>
+            //   <zh-CN>空序列统一为稳定空数组，不保留 null 语义给导航消费方，也不生成占位依赖。</zh-CN>
+            //   <en>Converge a null sequence to a stable empty array, leaving no null semantics for navigation consumers and creating no placeholder dependency.</en>
+            // </lang>
+            if (values == null)
+            {
+                return new string[0];
+            }
+
+            // <lang>
+            //   <zh-CN>依赖项仅做去空白和 ordinal-ignore-case 去重后复制为只读列表；本 helper 不验证角色、权限、包或 Profile 是否真实存在。</zh-CN>
+            //   <en>Trim and ordinal-ignore-case deduplicate dependency items, then copy them to a read-only list; this helper does not validate whether roles, permissions, packages, or Profiles actually exist.</en>
+            // </lang>
+            return values
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Select(value => value.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }

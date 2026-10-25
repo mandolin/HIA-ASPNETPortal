@@ -1,0 +1,9 @@
+        public static bool IsProtectedAdministrationTabName(string tabName, string navigationKey)
+        {
+            // <lang>
+            //   <zh-CN>稳定键优先：只有它为空（历史数据未回填）才退化为按显示名判定，保证改造期间行为连续。</zh-CN>
+            //   <en>The stable key wins: only when it is blank (legacy data not yet backfilled) does recognition degrade to the display name, keeping behaviour continuous during the migration.</en>
+            // </lang>
+            string recognitionSource = string.IsNullOrWhiteSpace(navigationKey) ? tabName : navigationKey;
+            return string.Equals(recognitionSource, "Admin", StringComparison.OrdinalIgnoreCase);
+        }

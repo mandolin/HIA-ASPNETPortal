@@ -1,0 +1,16 @@
+        public static void RequirePermission(string permissionKey)
+        {
+            // <lang>
+            //   <zh-CN>保留当前上下文引用，使 EnsurePermission 的拒绝结果可以进入兼容性终止重定向。</zh-CN>
+            //   <en>Keep the current context reference so EnsurePermission's denial can enter the compatibility aborting redirect.</en>
+            // </lang>
+            HttpContext context = HttpContext.Current;
+            if (!EnsurePermission(context, permissionKey) && context != null)
+            {
+                // <lang>
+                //   <zh-CN>Require* 兼容旧 Response.Redirect 默认中止语义，避免调用方漏写 return 后继续执行敏感逻辑。</zh-CN>
+                //   <en>Require* keeps the legacy aborting redirect semantics so missed returns cannot continue sensitive logic.</en>
+                // </lang>
+                context.Response.Redirect(EditAccessDeniedUrl, true);
+            }
+        }

@@ -1,0 +1,6 @@
+<%--
+    <lang>
+        <zh-CN>P3.2 只读模块包验证样例：不写入业务数据，不提供脚本、上传或外链入口。</zh-CN>
+        <en>P3.2 is a read-only deployment-package verification sample; it writes no business data and exposes no script, upload, or external-link entry.</en>
+    </lang>
+--%>

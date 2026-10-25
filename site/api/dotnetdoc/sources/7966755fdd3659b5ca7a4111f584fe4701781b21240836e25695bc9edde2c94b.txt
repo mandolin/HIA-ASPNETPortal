@@ -1,0 +1,46 @@
+        public static string BuildSqlStatusPredicate()
+        {
+            StringBuilder predicate = new StringBuilder();
+            bool isFirstAction = true;
+
+            foreach (string action in ActionOrder)
+            {
+                IReadOnlyList<string> fromStatuses = AllowedFromStatuses(action);
+                if (fromStatuses.Count == 0)
+                {
+                    continue;
+                }
+
+                if (!isFirstAction)
+                {
+                    predicate.Append(" OR ");
+                }
+
+                isFirstAction = false;
+                predicate.Append("(@ActionKey = N'").Append(action).Append("' AND [ItemStatus]");
+
+                if (fromStatuses.Count == 1)
+                {
+                    predicate.Append(" = N'").Append(fromStatuses[0]).Append("'");
+                }
+                else
+                {
+                    predicate.Append(" IN (");
+                    for (int index = 0; index < fromStatuses.Count; index++)
+                    {
+                        if (index > 0)
+                        {
+                            predicate.Append(", ");
+                        }
+
+                        predicate.Append("N'").Append(fromStatuses[index]).Append("'");
+                    }
+
+                    predicate.Append(")");
+                }
+
+                predicate.Append(")");
+            }
+
+            return predicate.ToString();
+        }

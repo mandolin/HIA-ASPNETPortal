@@ -1,0 +1,40 @@
+        private static IList<PortalSettingHealthInfo> BuildSettingRows()
+        {
+            // <lang>
+            //   <zh-CN>使用本次构建独立的可变列表承接每个已登记定义的只读投影。</zh-CN>
+            //   <en>Use a list owned by this build to hold the read-only projection for each registered definition.</en>
+            // </lang>
+            var settings = new List<PortalSettingHealthInfo>();
+
+            // <lang>
+            //   <zh-CN>只遍历静态 Registry 定义，不从请求或未知键动态扩展健康行。</zh-CN>
+            //   <en>Traverse only static registry definitions and never extend health rows from requests or unknown keys.</en>
+            // </lang>
+            foreach (PortalSettingDefinition definition in PortalSettingsRegistry.GetAll())
+            {
+                // <lang>
+                //   <zh-CN>承接当前定义的有效文本和来源；解析器负责来源优先级与安全回退。</zh-CN>
+                //   <en>Receive the current definition's effective text and source; the resolver owns source precedence and safe fallback.</en>
+                // </lang>
+                string currentValue;
+
+                // <lang>
+                //   <zh-CN>保存当前有效值的来源名称，供设置健康行展示；不把来源名称当作新的解析输入。</zh-CN>
+                //   <en>Keep the source name of the effective value for the setting-health row; do not treat the source label as new resolver input.</en>
+                // </lang>
+                string source;
+                GetEffectiveSettingValue(definition, out currentValue, out source);
+
+                settings.Add(new PortalSettingHealthInfo(
+                    definition.Key,
+                    definition.DisplayName,
+                    definition.ValueType.ToString(),
+                    definition.IsSensitive ? "(sensitive)" : currentValue,
+                    source,
+                    definition.IsSensitive,
+                    definition.CanEditOnline,
+                    definition.RequiresRestart));
+            }
+
+            return settings;
+        }

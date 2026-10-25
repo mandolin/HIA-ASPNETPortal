@@ -1,0 +1,6 @@
+                    <%--
+                        <lang>
+                            <zh-CN>编辑和删除命令沿用旧回调；删除是不可逆风险动作，服务器必须重新确认目标、权限和引用状态。</zh-CN>
+                            <en>Edit and delete commands use the legacy callbacks; deletion is an irreversible-risk action, so the server must recheck target, authorization, and reference state.</en>
+                        </lang>
+                    --%>

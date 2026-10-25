@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>邮箱字段可作为联系信息或登录标识输入之一，最终解析仍由认证服务控制。</zh-CN>
+                    <en>The email field may serve as contact information or one login identifier input; final resolution remains controlled by the authentication service.</en>
+                  </lang>
+                --%>

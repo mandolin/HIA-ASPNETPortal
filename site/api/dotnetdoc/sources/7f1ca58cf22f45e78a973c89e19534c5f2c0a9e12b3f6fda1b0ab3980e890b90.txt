@@ -1,0 +1,13 @@
+        protected void CancelBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>取消不写入 XML/XSL 设置，但仍确认请求合法后才使用安全回跳地址。</zh-CN>
+            //   <en>Cancel does not write XML/XSL settings, but still confirms the request is valid before using the safe return URL.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

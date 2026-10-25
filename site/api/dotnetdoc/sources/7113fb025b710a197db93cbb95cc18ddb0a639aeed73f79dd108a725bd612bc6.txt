@@ -1,0 +1,4 @@
+        private static string NormalizeStatusFilter(string status)
+        {
+            return string.IsNullOrWhiteSpace(status) ? string.Empty : status.Trim();
+        }

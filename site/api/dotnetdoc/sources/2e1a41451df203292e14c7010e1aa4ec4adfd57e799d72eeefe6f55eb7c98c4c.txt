@@ -1,0 +1,4 @@
+        public static bool IsCategoryLayerRegistered(string category)
+        {
+            return !string.IsNullOrWhiteSpace(category) && CategoryLayerMap.ContainsKey(category.Trim());
+        }

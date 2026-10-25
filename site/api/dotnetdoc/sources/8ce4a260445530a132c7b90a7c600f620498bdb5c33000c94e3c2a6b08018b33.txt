@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>Repeater 只读展示受限诊断条目；`<%#: ... %>` 负责编码文本绑定，详情链接统一经过 GetDetailUrl 生成，不在标记层拼接路径。</zh-CN>
+                    <en>The Repeater renders constrained diagnostic entries read-only; `<%#: ... %>` encodes text bindings, and detail links are produced by GetDetailUrl rather than concatenated in markup.</en>
+                  </lang>
+                --%>

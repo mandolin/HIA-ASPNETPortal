@@ -1,0 +1,19 @@
+        private static bool IsValidResourcePath(string resource)
+        {
+            // <lang>
+            //   <zh-CN>先拒绝绝对路径、协议和网络路径前缀；这些形式即使最终映射到本机也不属于 manifest 可声明的包内资源。</zh-CN>
+            //   <en>First reject absolute paths, protocol prefixes, and network-path prefixes; even if they ultimately map locally, these forms are not package-local resources that a manifest may declare.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(resource) || resource.StartsWith("/", StringComparison.Ordinal) ||
+                resource.IndexOf("://", StringComparison.Ordinal) >= 0 || resource.StartsWith("//", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>逐段拒绝空段、当前目录和上级目录，防止混合分隔符归一化后出现目录逃逸或不稳定同义路径。</zh-CN>
+            //   <en>Reject empty, current-directory, and parent-directory segments one by one to prevent directory escape or unstable equivalent paths after mixed-separator normalization.</en>
+            // </lang>
+            string[] segments = resource.Split('/');
+            return segments.All(segment => !string.IsNullOrWhiteSpace(segment) && segment != "." && segment != "..");
+        }

@@ -1,0 +1,1 @@
+        IList<CollaborationItemInfo> GetAdminItems(string status, int take);

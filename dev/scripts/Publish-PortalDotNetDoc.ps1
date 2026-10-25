@@ -240,8 +240,40 @@ try {
 }
 finally { Pop-Location }
 
-# ---------- 发布：先清后建，整体重建 ----------
 $u = [System.Text.UTF8Encoding]::new($false)
+# ---------- 公开面脱敏：内部工作项编号 ----------
+# <lang>
+#   <zh-CN>**为什么脱敏**：开启源码预览（`publicAssetPolicy=explicit-public`）后，源码正文（注释与标识符）
+#     会作为同源公开资产发布到 `sources/`。源码注释里的内部工作项编号（`W-anp-P43`、`C-anp-P43` 等）
+#     随之落到公开面，触发 A3 门禁（公开面不得外泄内部工作项编号）——这正是 B3 公开面源码边界的真问题。
+#     故在**拷贝进 `site/` 之前**替换掉，使发布产物从源头上就是干净的。
+#     只处理文本类扩展名：二进制文件（图片/字体等）不可能含该模式，跳过以免读写损坏。</zh-CN>
+#   <en>**Why redact**: with source preview enabled (`publicAssetPolicy=explicit-public`) the source body (comments and
+#     identifiers) is published as a same-origin public asset under `sources/`. Internal work-item numbers in source
+#     comments (e.g. `W-anp-P43`, `C-anp-P43`) then land on the public surface and trip the A3 gate (no internal
+#     work-item numbers on the public surface) — the real substance of the B3 public-surface source boundary. They are
+#     therefore replaced **before the copy into `site/`** so the published artifact is clean at the source.
+#     Only text-like extensions are processed: binaries (images, fonts) cannot carry the pattern and are skipped so
+#     they are not corrupted by round-tripping.</en>
+# </lang>
+$textExtensions = '.html', '.htm', '.txt', '.json', '.js', '.css', '.md', '.xml'
+$redactedFiles = 0
+$redactedHits = 0
+foreach ($f in (Get-ChildItem -LiteralPath $renderTarget -Recurse -File -ErrorAction SilentlyContinue)) {
+    if ($textExtensions -notcontains $f.Extension.ToLowerInvariant()) { continue }
+    $text = [System.IO.File]::ReadAllText($f.FullName, $u)
+    $m = [regex]::Matches($text, '(?:W|C)-anp-P\d+')
+    if ($m.Count -eq 0) { continue }
+    $redactedFiles++
+    $redactedHits += $m.Count
+    $clean = [regex]::Replace($text, '(?:W|C)-anp-P\d+', '[已脱敏]')
+    [System.IO.File]::WriteAllText($f.FullName, $clean, $u)
+}
+if ($redactedHits -gt 0) {
+    Write-Host ('    [公开面脱敏] 已替换内部工作项编号 ' + $redactedHits + ' 处（' + $redactedFiles + ' 个文件）')
+}
+
+# ---------- 发布：先清后建，整体重建 ----------
 # <lang>
 #   <zh-CN>**先清后建**：发布目录整体重建，避免上一版残留的半边/语言目录变成"幽灵产物"（读者点到 404，
 #     而 manifest 里又没有它——那种不一致最难查）。</zh-CN>

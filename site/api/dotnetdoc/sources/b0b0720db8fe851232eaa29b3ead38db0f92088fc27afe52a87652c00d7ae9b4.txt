@@ -1,0 +1,29 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                // <lang>
+                //   <zh-CN>资料确认模块只在首次加载时绑定，确认按钮回发完成后由事件方法显式刷新，避免重复覆盖提示信息。</zh-CN>
+                //   <en>The profile-confirmation module binds only on initial load; after the confirm postback, the event handler refreshes explicitly so messages are not overwritten.</en>
+                // </lang>
+                BindProfile();
+            }
+
+            // <lang>
+            //   <zh-CN>W70 渲染期门禁：只有持有确认或管理权限的用户才启用确认按钮；按钮状态只是界面提示，真正的授权判定在提交时由服务端再次执行。</zh-CN>
+            //   <en>W70 render-time gate: only users holding the confirm or administration permission get an enabled confirm button; the button state is a UI hint only and the real authorization decision is repeated server-side on submit.</en>
+            // </lang>
+            bool canConfirm = IsCurrentUserAuthenticated() && PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.EmployeeProfileConfirmConfirm,
+                PortalPermissionKeys.EmployeeProfileConfirmAdmin);
+
+            ConfirmButton.Enabled = canConfirm;
+            if (!canConfirm && IsCurrentUserAuthenticated())
+            {
+                // <lang>
+                //   <zh-CN>仅在已认证但无权限时给出提示；未认证的情形由资料门禁给出登录提示，避免两条提示互相覆盖。</zh-CN>
+                //   <en>Show the hint only when the user is authenticated but unauthorized; the unauthenticated case is covered by the profile gate's sign-in hint so the two messages do not overwrite each other.</en>
+                // </lang>
+                ShowMessage(lang.EmployeeProfileConfirm_MessageNoPermission);
+            }
+        }

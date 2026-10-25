@@ -1,0 +1,1 @@
+        public string PortalName { get; set; }

@@ -1,0 +1,16 @@
+        private int ResolveTabIndex(int tabId)
+        {
+            PortalSettings settings = PortalContext.GetPortalSettings(Context);
+            if (settings == null || settings.DesktopTabs == null)
+            {
+                return 0;
+            }
+
+            int index = settings.DesktopTabs.FindIndex(tab => tab != null && tab.TabId == tabId);
+
+            // <lang>
+            //   <zh-CN>未命中时退化为 0 而不是 -1：目标页的 tabindex 参数按非负解析，负数没有意义，而授权真源是 tabid。</zh-CN>
+            //   <en>Degrade to 0 rather than -1 when not found: the target page parses the tabindex parameter as non-negative, a negative value is meaningless, and the authorization source of truth is tabid.</en>
+            // </lang>
+            return index < 0 ? 0 : index;
+        }

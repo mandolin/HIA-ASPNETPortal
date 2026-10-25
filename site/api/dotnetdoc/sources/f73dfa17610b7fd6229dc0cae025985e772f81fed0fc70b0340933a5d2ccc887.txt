@@ -1,0 +1,47 @@
+        protected void btn_DeleteUser_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>删除需要独立编辑权限，并复用选中用户的正数标识和数据存在性校验。</zh-CN>
+            //   <en>Deletion requires separate edit permission and reuses positive-id and data-existence checks for the selected user.</en>
+            // </lang>
+            if (!PortalAuthorization.EnsurePermission(Context, PortalPermissionKeys.AdminUsersEdit) || !TryReadNavigationParameters())
+            {
+                return;
+            }
+
+            IUserItem user;
+            if (!TryGetSelectedUser(out user))
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>删除成功后记录不含资料内容的低敏审计并刷新列表。</zh-CN>
+                //   <en>After deletion, record a low-sensitivity audit without profile content and refresh the list.</en>
+                // </lang>
+                UsersDB.DeleteUser(user.UserId);
+                PortalOperationAudit.Record(
+                    "UserAdministration",
+                    "Delete",
+                    "User",
+                    user.UserId.ToString(),
+                    "Deleted user from the legacy administration list.",
+                    Context);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>删除失败只向页面返回事件编号，不暴露底层异常。</zh-CN>
+                //   <en>On deletion failure, return only the event identifier to the page without exposing the underlying exception.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Users.DeleteUser",
+                    "Deleting a user from the admin Users module failed. UserId=" + user.UserId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Users_MessageDeleteFailed, eventId));
+            }
+        }

@@ -1,0 +1,29 @@
+        private static readonly IList<PortalSettingDefinition> AllDefinitions =
+            // <lang>
+            //   <zh-CN>集中列出所有受控定义并冻结集合，供精确键查找和后台展示复用；静态初始化不触发配置、数据库或请求访问。</zh-CN>
+            //   <en>List every controlled definition centrally and freeze the collection for exact-key lookup and administration-display reuse; static initialization triggers no configuration, database, or request access.</en>
+            // </lang>
+            new List<PortalSettingDefinition>
+            {
+                AllowSelfRegistration,
+                RequireRegistrationApproval,
+                RequireEncryptedLoginPassword,
+                PasswordMinimumLength,
+                PasswordRequiredCategoryCount,
+                PasswordWeakDictionaryEnabled,
+                PasswordDisallowContextTerms,
+                PasswordIterationCount,
+                RegistrationInviteDefaultExpiryDays,
+                AllowPendingEmployeeBinding,
+                MaxUploadBytes,
+                AllowedDocumentExtensions,
+                ThemeName,
+                DiagnosticsDetailedErrors,
+                DiagnosticsLogDirectory,
+                DiagnosticsMaxFileBytes,
+                DiagnosticsRetentionDays,
+                DiagnosticsAllowAdminDetailView,
+                HiaPortalInstanceId,
+                CookiesSecure,
+                CookiesSameSite
+            }.AsReadOnly();

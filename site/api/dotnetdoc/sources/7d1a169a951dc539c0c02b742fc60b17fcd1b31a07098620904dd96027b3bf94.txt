@@ -1,0 +1,5 @@
+        private static string CreateApplicationCode(DateTime submittedUtc)
+        {
+            return "BA-" + submittedUtc.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture) + "-" +
+                   Guid.NewGuid().ToString("N").Substring(0, 8);
+        }

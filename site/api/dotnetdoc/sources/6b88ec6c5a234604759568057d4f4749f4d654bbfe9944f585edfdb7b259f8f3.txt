@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>绑定页只重构展示壳，绑定、解绑、安全版本刷新和审计逻辑仍由 code-behind 处理。</zh-CN>
+            <en>The binding page only rebuilds the presentation shell; binding, unbinding, security-version refresh, and audit logic remain in code-behind.</en>
+        </lang>
+    --%>

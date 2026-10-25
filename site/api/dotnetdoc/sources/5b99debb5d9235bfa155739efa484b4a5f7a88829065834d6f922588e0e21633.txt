@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_MessageNoPermission {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageNoPermission", resourceCulture);
+            }
+        }

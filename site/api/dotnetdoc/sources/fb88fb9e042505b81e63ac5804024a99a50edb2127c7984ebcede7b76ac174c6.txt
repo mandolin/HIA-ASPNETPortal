@@ -1,0 +1,400 @@
+    public class UsersDb : IUsersDb
+    {
+        private const long InitialSecurityVersion = 1;
+        private const string CredentialTableName = "Portal_UserCredentials";
+        private const string EmployeeTableName = "PortalBiz_Employees";
+        private const string EmployeeBindingTableName = "PortalBiz_UserEmployeeBindings";
+        private const string ProfileTableName = "PortalBiz_UserProfiles";
+        private const string SecurityStateTableName = "Portal_UserSecurityStates";
+        private readonly PortalSecurityDbContext _context;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化用户、凭据和注册审核数据访问实现。</zh-CN>
+        ///   <en>Initializes the user, credential, and registration-review data-access implementation.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>门户安全数据库上下文。</zh-CN>
+        ///   <en>Portal security database context.</en>
+        /// </l>
+        /// </param>
+        public UsersDb(PortalSecurityDbContext context)
+        {
+            _context = context;
+        }
+
+        #region IUsersDb Members
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>添加由管理员或既有流程创建的用户；非空密码写入强哈希凭据表。</zh-CN>
+        ///   <en>Adds a user created by an administrator or an existing legacy flow; non-empty passwords are written to the strong-hash credential table.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="fullName">
+        /// <l>
+        ///   <zh-CN>用户登录名称。</zh-CN>
+        ///   <en>User sign-in name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="email">
+        /// <l>
+        ///   <zh-CN>用户邮箱地址。</zh-CN>
+        ///   <en>User email address.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>用户提交的密码输入；空值表示创建不可登录占位用户。</zh-CN>
+        ///   <en>Submitted password input; empty creates a non-signable placeholder user.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功时返回新用户标识；预期写入失败时返回 <c>-1</c>。</zh-CN>
+        ///   <en>New user identifier on success; <c>-1</c> for expected write failures.</en>
+        /// </l>
+        /// </returns>
+        public int AddUser(string fullName, string email, string password)
+        {
+            string normalizedPassword = password ?? string.Empty;
+            PortalPasswordRejection passwordRejection;
+            if (!string.IsNullOrEmpty(normalizedPassword) &&
+                !PortalPasswordPolicy.TryValidate(
+                    normalizedPassword,
+                    BuildPasswordPolicyContextTerms(fullName, email),
+                    out passwordRejection))
+            {
+                return -1;
+            }
+
+            if (!string.IsNullOrEmpty(normalizedPassword) && !HasCredentialTables())
+            {
+                return -1;
+            }
+
+            try
+            {
+                UserItem item;
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    item = new UserItem
+                    {
+                        Name = fullName,
+                        Email = email,
+                        // <lang>
+                        //   <zh-CN>新用户不再生成 MD5；旧字段只保留既有数据的迁移样本。</zh-CN>
+                        //   <en>New users no longer receive MD5; the legacy column remains only for existing data migration samples.</en>
+                        // </lang>
+                        Password = string.Empty
+                    };
+
+                    _context.Users.Add(item);
+                    _context.SaveChanges();
+
+                    EnsureSecurityState(item.UserId, "UserCreated");
+                    TryEnsureUserProfile(
+                        item.UserId,
+                        item.Name,
+                        item.Email,
+                        PortalUserProfileStatuses.Active,
+                        "system-admin");
+                    if (!string.IsNullOrEmpty(normalizedPassword))
+                    {
+                        UpsertCredential(item.UserId, normalizedPassword, null, null, false, null);
+                    }
+
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+
+                // <lang>
+                //   <zh-CN>管理员或旧入口创建的用户默认已批准；缺少扩展表时保持旧行为。</zh-CN>
+                //   <en>Users created by administration or legacy entry points are approved by default; missing extension tables preserve legacy behavior.</en>
+                // </lang>
+                TryEnsureApprovedRegistration(item.UserId, "system-admin");
+                return item.UserId;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>保持旧接口约定，预期写入失败用 -1 表达，不在此记录敏感输入。</zh-CN>
+                //   <en>Preserve the legacy interface contract: expected write failures return -1 and do not log sensitive input here.</en>
+                // </lang>
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>添加自主注册用户，并在同一事务写入强哈希凭据、注册审核元数据和邀请码使用次数。</zh-CN>
+        ///   <en>Adds a self-registered user and writes the strong-hash credential, registration-review metadata, and invite usage in one transaction.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="fullName">
+        /// <l>
+        ///   <zh-CN>用户登录名称。</zh-CN>
+        ///   <en>User sign-in name.</en>
+        /// </l>
+        /// </param>
+        /// <param name="email">
+        /// <l>
+        ///   <zh-CN>用户邮箱地址。</zh-CN>
+        ///   <en>User email address.</en>
+        /// </l>
+        /// </param>
+        /// <param name="password">
+        /// <l>
+        ///   <zh-CN>用户提交的密码输入。</zh-CN>
+        ///   <en>Submitted password input.</en>
+        /// </l>
+        /// </param>
+        /// <param name="employeeCode">
+        /// <l>
+        ///   <zh-CN>可为空的员工号。</zh-CN>
+        ///   <en>Optional employee code.</en>
+        /// </l>
+        /// </param>
+        /// <param name="inviteCode">
+        /// <l>
+        ///   <zh-CN>可为空的邀请码；空值代表当前允许的非邀请注册。</zh-CN>
+        ///   <en>Optional invite code; an empty value represents currently allowed non-invite registration.</en>
+        /// </l>
+        /// </param>
+        /// <param name="requiresApproval">
+        /// <l>
+        ///   <zh-CN>是否以待审核状态创建用户。</zh-CN>
+        ///   <en>Whether to create the user in pending-approval status.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>成功时返回新用户标识；审核表、凭据表不可用或邀请码无效时返回 <c>-1</c>。</zh-CN>
+        ///   <en>New user identifier on success; <c>-1</c> when review tables, credential tables, or invites are unavailable.</en>
+        /// </l>
+        /// </returns>
+        public int AddSelfRegisteredUser(
+            string fullName,
+            string email,
+            string password,
+            string employeeCode,
+            string inviteCode,
+            bool requiresApproval)
+        {
+            if (!HasRegistrationTable() || !HasCredentialTables())
+            {
+                return -1;
+            }
+
+            PortalPasswordRejection passwordRejection;
+            if (!PortalPasswordPolicy.TryValidate(
+                password,
+                BuildPasswordPolicyContextTerms(fullName, email, employeeCode),
+                out passwordRejection))
+            {
+                return -1;
+            }
+
+            string normalizedInviteCode = Normalize(inviteCode);
+            PortalRegistrationInviteRejection inviteRejection;
+            if (!ValidateRegistrationInvite(normalizedInviteCode, out inviteRejection))
+            {
+                return -1;
+            }
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var item = new UserItem
+                    {
+                        Name = fullName,
+                        Email = email,
+                        Password = string.Empty
+                    };
+
+                    _context.Users.Add(item);
+                    _context.SaveChanges();
+
+                    EnsureSecurityState(item.UserId, "SelfRegistration");
+                    TryEnsureUserProfile(
+                        item.UserId,
+                        item.Name,
+                        item.Email,
+                        requiresApproval
+                            ? PortalUserProfileStatuses.PendingApproval
+                            : PortalUserProfileStatuses.Active,
+                        "system-self-registration");
+                    UpsertCredential(item.UserId, password, null, null, false, null);
+
+                    // <lang>
+                    //   <zh-CN>所有注册审核时间统一以 UTC 保存。</zh-CN>
+                    //   <en>Store all registration-review timestamps in UTC.</en>
+                    // </lang>
+                    DateTime nowUtc = DateTime.UtcNow;
+                    _context.UserRegistrations.Add(new UserRegistrationItem
+                    {
+                        UserId = item.UserId,
+                        Status = requiresApproval
+                            ? PortalUserRegistrationStatuses.PendingApproval
+                            : PortalUserRegistrationStatuses.Approved,
+                        RequiresApproval = requiresApproval,
+                        EmployeeCode = NullIfEmpty(employeeCode),
+                        InviteCode = NullIfEmpty(normalizedInviteCode),
+                        RegisteredUtc = nowUtc,
+                        ApprovedUtc = requiresApproval ? (DateTime?)null : nowUtc,
+                        ApprovedBy = requiresApproval ? null : "system-self-registration"
+                    });
+
+                    // <lang>
+                    //   <zh-CN>空邀请码不会增加使用次数；有效邀请码的计数与用户创建同一事务提交。</zh-CN>
+                    //   <en>Empty invite codes do not increment usage; valid invite counts commit in the same transaction as user creation.</en>
+                    // </lang>
+                    IncrementInviteUsage(normalizedInviteCode);
+                    _context.SaveChanges();
+                    transaction.Commit();
+
+                    return item.UserId;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>删除指定用户及可用的注册审核元数据。</zh-CN>
+        ///   <en>Deletes the specified user and available registration-review metadata.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要删除的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to delete.</en>
+        /// </l>
+        /// </param>
+        public void DeleteUser(int userId)
+        {
+            // <lang>
+            //   <zh-CN>先清理扩展元数据，避免显式 FK 部署阻止既有删除流程。</zh-CN>
+            //   <en>Clean up extension metadata first so explicit FK deployments do not block the legacy delete flow.</en>
+            // </lang>
+            TryDeleteRegistration(userId);
+
+            var item = _context.Users.Single(i => i.UserId == userId);
+
+            _context.Users.Remove(item);
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>批准用户注册，并恢复已拒绝记录的登录资格。</zh-CN>
+        ///   <en>Approves a user registration and restores sign-in eligibility for a previously rejected record.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要批准的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to approve.</en>
+        /// </l>
+        /// </param>
+        /// <param name="approvedBy">
+        /// <l>
+        ///   <zh-CN>批准操作人标识。</zh-CN>
+        ///   <en>Approving operator identifier.</en>
+        /// </l>
+        /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>注册审核表不可用时引发。</zh-CN>
+        ///   <en>Thrown when the registration-review table is unavailable.</en>
+        /// </l>
+        /// </exception>
+        public void ApproveUser(int userId, string approvedBy)
+        {
+            if (!HasRegistrationTable())
+            {
+                throw new InvalidOperationException("Registration metadata table is not available.");
+            }
+
+            DateTime nowUtc = DateTime.UtcNow;
+            var registration = _context.UserRegistrations.SingleOrDefault(i => i.UserId == userId);
+            if (registration == null)
+            {
+                _context.UserRegistrations.Add(new UserRegistrationItem
+                {
+                    UserId = userId,
+                    Status = PortalUserRegistrationStatuses.Approved,
+                    RequiresApproval = false,
+                    RegisteredUtc = nowUtc,
+                    ApprovedUtc = nowUtc,
+                    ApprovedBy = Normalize(approvedBy)
+                });
+            }
+            else
+            {
+                registration.Status = PortalUserRegistrationStatuses.Approved;
+                registration.ApprovedUtc = nowUtc;
+                registration.ApprovedBy = Normalize(approvedBy);
+                registration.RejectedUtc = null;
+                registration.RejectedBy = null;
+                registration.ReviewNote = null;
+            }
+
+            _context.SaveChanges();
+            TrySetUserProfileStatus(
+                userId,
+                PortalUserProfileStatuses.Active,
+                string.Empty,
+                Normalize(approvedBy));
+            IncrementSecurityVersion(userId, "RegistrationApproved");
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>拒绝处于待审核状态的用户注册；管理员后续仍可重新批准。</zh-CN>
+        ///   <en>Rejects a pending user registration; an administrator may approve it later.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="userId">
+        /// <l>
+        ///   <zh-CN>要拒绝的用户数值标识。</zh-CN>
+        ///   <en>Numeric identifier of the user to reject.</en>
+        /// </l>
+        /// </param>
+        /// <param name="rejectedBy">
+        /// <l>
+        ///   <zh-CN>拒绝操作人标识。</zh-CN>
+        ///   <en>Rejecting operator identifier.</en>
+        /// </l>
+        /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// <l>
+        ///   <zh-CN>注册审核表或用户审核记录不可用时引发。</zh-CN>
+        ///   <en>Thrown when the registration-review table or user review record is unavailable.</en>
+        /// </l>
+        /// </exception>
+        public void RejectUser(int userId, string rejectedBy)
+        {
+            if (!HasRegistrationTable())
+            {
+                throw new InvalidOperationException("Registration metadata table is not available.");
+            }
+
+            var registration = _context.UserRegistrations.SingleOrDefault(i => i.UserId == userId);
+            if (registration == null)
+            {
+                throw new InvalidOperationException("Registration metadata does not exist for this user.");
+            }
+
+            registration.Status = PortalUserRegistrationStatuses.Rejected;
+            registration.RejectedUtc = DateTime.UtcNow;
+            registration.RejectedBy = Normalize(rejectedBy);
+            registration.ApprovedUtc = null;
+            registration.ApprovedBy = null;

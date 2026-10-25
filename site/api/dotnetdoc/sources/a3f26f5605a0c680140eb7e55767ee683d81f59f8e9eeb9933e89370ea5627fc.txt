@@ -1,0 +1,7 @@
+        private bool EnsureCanViewItems()
+        {
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.BusinessCollaborationViewAll,
+                PortalPermissionKeys.BusinessCollaborationAdmin);
+        }

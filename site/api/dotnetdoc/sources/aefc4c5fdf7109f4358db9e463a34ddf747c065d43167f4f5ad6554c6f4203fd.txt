@@ -1,0 +1,67 @@
+        public static bool TryNormalizeValue(
+            PortalSettingDefinition definition,
+            string candidateValue,
+            out string normalizedValue)
+        {
+            // <lang>
+            //   <zh-CN>先写入稳定失败输出；缺少定义或候选为空白时不尝试推断默认值，也不把原始输入作为成功值返回。</zh-CN>
+            //   <en>Set a stable failure output first; when definition is missing or candidate is blank, do not infer a default or return raw input as a successful value.</en>
+            // </lang>
+            normalizedValue = string.Empty;
+            if (definition == null || string.IsNullOrWhiteSpace(candidateValue))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>生成仅用于本次类型分派的去首尾空白文本，不修改调用方字符串，也不扩大候选值生命周期。</zh-CN>
+            //   <en>Create a trimmed text used only for this type dispatch without modifying the caller's string or extending the candidate's lifetime.</en>
+            // </lang>
+            string trimmedValue = candidateValue.Trim();
+            switch (definition.ValueType)
+            {
+                case PortalSettingValueType.Boolean:
+                    // <lang>
+                    //   <zh-CN>布尔值只接受 .NET 固定解析形式，并规范为小写稳定文本，避免来源间大小写差异影响后续比较。</zh-CN>
+                    //   <en>Accept only fixed .NET Boolean parse forms and normalize to stable lowercase text so source casing differences do not affect later comparisons.</en>
+                    // </lang>
+                    // <lang>
+                    //   <zh-CN>承接布尔解析结果，再写入稳定的小写表示；不保留候选原文。</zh-CN>
+                    //   <en>Receive the Boolean parse result before writing a stable lowercase representation; do not retain the candidate text.</en>
+                    // </lang>
+                    bool booleanValue;
+                    if (bool.TryParse(trimmedValue, out booleanValue))
+                    {
+                        normalizedValue = booleanValue.ToString().ToLowerInvariant();
+                        return true;
+                    }
+
+                    return false;
+
+                case PortalSettingValueType.Integer:
+                    // <lang>
+                    //   <zh-CN>整数必须可解析且同时满足定义的可选上下限；超界值与格式错误同样触发来源回退。</zh-CN>
+                    //   <en>An integer must parse and satisfy the definition's optional lower and upper bounds; out-of-range values fall back just like malformed values.</en>
+                    // </lang>
+                    // <lang>
+                    //   <zh-CN>承接整数解析结果并立即应用定义边界；越界值不得进入规范化输出。</zh-CN>
+                    //   <en>Receive the integer parse result and apply definition bounds immediately; out-of-range values must not enter normalized output.</en>
+                    // </lang>
+                    int integerValue;
+                    if (int.TryParse(trimmedValue, out integerValue) && IsIntegerInRange(definition, integerValue))
+                    {
+                        normalizedValue = integerValue.ToString();
+                        return true;
+                    }
+
+                    return false;
+
+                default:
+                    // <lang>
+                    //   <zh-CN>其它已登记类型保留去空白后的文本；其语义约束由对应定义和消费方承担，本 helper 不把文本解释为路径、权限或秘密。</zh-CN>
+                    //   <en>Other registered types retain trimmed text; their semantic constraints belong to the definition and consumer, and this helper does not interpret text as a path, permission, or secret.</en>
+                    // </lang>
+                    normalizedValue = trimmedValue;
+                    return true;
+            }
+        }

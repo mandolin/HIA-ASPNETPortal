@@ -1,0 +1,82 @@
+        public IDictionary<long, IList<CollaborationItemEventInfo>> GetVisibleEventsForItems(IList<long> itemIds, int actorUserId)
+        {
+            // <lang>
+            //   <zh-CN>先把请求标识规范化并预置空桶：调用方对任何请求标识都能取到集合，无需区分"未授权""不存在""无事件"。</zh-CN>
+            //   <en>Normalize the requested identifiers and pre-create empty buckets so callers always get a collection per requested identifier without distinguishing unauthorized, missing, or event-less items.</en>
+            // </lang>
+            List<long> requestedIds = NormalizeItemIdList(itemIds);
+            if (requestedIds.Count == 0 || !IsSchemaAvailable())
+            {
+                return CreateEmptyEventMap(requestedIds);
+            }
+
+            // <lang>
+            //   <zh-CN>动作人授权与标识无关，批量路径只计算一次 —— 这是 N+1 的主要来源之一（逐条路径每个事项都会重算）。</zh-CN>
+            //   <en>Actor authorization does not depend on the item, so the batch path computes it once — one of the main sources of the N+1 pattern, since the per-item path recomputes it for every item.</en>
+            // </lang>
+            CollaborationItemActorAuthorization actor;
+            if (!TryGetActorAuthorization(actorUserId, out actor))
+            {
+                return CreateEmptyEventMap(requestedIds);
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>批量取事项事实后**逐条**执行 CanParticipate 与 CanView —— 可见性校验不因性能而合并，未通过者不进入事件查询。</zh-CN>
+                //   <en>After loading item facts in one batch, run CanParticipate and CanView **per item** — visibility checks are never collapsed for performance, and items that fail them never enter the event query.</en>
+                // </lang>
+                List<long> visibleIds = FilterVisibleItemIds(requestedIds, actor);
+                if (visibleIds.Count == 0)
+                {
+                    return CreateEmptyEventMap(requestedIds);
+                }
+
+                string visibilityClause = actor.IsAdministrator
+                    ? string.Empty
+                    : @"
+  AND ([Event].[EventType] = N'WorkflowAction' OR [Event].[VisibilityScope] = N'ItemParticipants')";
+
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                string itemIdList = BuildItemIdParameterList(visibleIds, parameters);
+
+                List<CollaborationItemEventInfo> events = context.Database.SqlQuery<CollaborationItemEventInfo>(
+                    @"
+SELECT
+    [Event].[EventId],
+    [Event].[ItemId],
+    [Event].[EventType],
+    [Event].[ActionKey],
+    [Event].[VisibilityScope],
+    [Event].[ActorUserId],
+    [Event].[ActorName],
+    [Event].[OccurredUtc],
+    [Event].[FromStatus],
+    [Event].[ToStatus],
+    [Event].[Comment]
+FROM [dbo].[PortalBiz_CollaborationItemEvents] AS [Event]
+WHERE [Event].[ItemId] IN (" + itemIdList + ")" + visibilityClause + @"
+ORDER BY [Event].[ItemId] ASC, [Event].[OccurredUtc] ASC, [Event].[EventId] ASC;",
+                    parameters.ToArray()).ToList();
+
+                IDictionary<long, IList<CollaborationItemEventInfo>> eventsByItem = CreateEmptyEventMap(requestedIds);
+                foreach (CollaborationItemEventInfo itemEvent in events)
+                {
+                    IList<CollaborationItemEventInfo> bucket;
+                    if (itemEvent != null && eventsByItem.TryGetValue(itemEvent.ItemId, out bucket))
+                    {
+                        bucket.Add(itemEvent);
+                    }
+                }
+
+                return eventsByItem;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>读取失败一律回到"全部空列表"，不返回部分结果，避免页面把半截时间线当成完整事实。</zh-CN>
+                //   <en>On read failure, return all-empty lists rather than partial results so a page cannot present a half-loaded timeline as complete fact.</en>
+                // </lang>
+                return CreateEmptyEventMap(requestedIds);
+            }
+        }

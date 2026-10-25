@@ -1,0 +1,9 @@
+        private void ShowMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>提示只进入编码后的文本控件，清空旧结果以避免误读上一次命令状态。</zh-CN>
+            //   <en>Send only encoded text to the message control and clear the old result so a prior command state is not misread.</en>
+            // </lang>
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+            ResultLabel.Text = string.Empty;
+        }

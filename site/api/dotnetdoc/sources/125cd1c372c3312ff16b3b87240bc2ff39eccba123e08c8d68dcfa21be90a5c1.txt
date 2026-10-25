@@ -1,0 +1,28 @@
+        private static bool Matches(PortalDiagnosticEntry entry, PortalDiagnosticQuery query)
+        {
+            // <lang>
+            //   <zh-CN>先以 UTC 半开区间排除事件，保持结束日不包含并避免相邻查询重复。</zh-CN>
+            //   <en>Exclude entries first with the UTC half-open interval, keeping the end day exclusive and avoiding duplication across adjacent queries.</en>
+            // </lang>
+            if (entry.UtcTime < query.StartUtc || entry.UtcTime >= query.EndUtcExclusive)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(query.Level) && !string.Equals(entry.Level, query.Level, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(query.Category) && !string.Equals(entry.Category, query.Category, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>可选事件编号使用 ordinal 精确比较；空过滤器只表示不按编号缩小已受限结果，不构成授权判断。</zh-CN>
+            //   <en>Use ordinal exact comparison for optional event id; an empty filter merely does not narrow the already restricted result and is not authorization.</en>
+            // </lang>
+            return string.IsNullOrEmpty(query.EventId) ||
+                   string.Equals(entry.EventId, query.EventId, StringComparison.Ordinal);
+        }

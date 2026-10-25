@@ -1,0 +1,17 @@
+        private void BindStatusFilter()
+        {
+            // <lang>
+            //   <zh-CN>状态值使用固定契约键，显示文本保持后台既有英文兼容值。</zh-CN>
+            //   <en>Use fixed contract keys for status values while preserving the administration page's existing display values.</en>
+            // </lang>
+            StatusFilterList.Items.Clear();
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Submitted, PortalCollaborationItemStatuses.Submitted));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.InProgress, PortalCollaborationItemStatuses.InProgress));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Returned, PortalCollaborationItemStatuses.Returned));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Completed, PortalCollaborationItemStatuses.Completed));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Rejected, PortalCollaborationItemStatuses.Rejected));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Cancelled, PortalCollaborationItemStatuses.Cancelled));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Closed, PortalCollaborationItemStatuses.Closed));
+            StatusFilterList.SelectedValue = PortalCollaborationItemStatuses.Submitted;
+        }

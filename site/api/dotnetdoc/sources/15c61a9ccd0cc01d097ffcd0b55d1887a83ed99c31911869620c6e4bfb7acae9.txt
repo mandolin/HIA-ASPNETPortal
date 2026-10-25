@@ -1,0 +1,13 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>公告查询限制在当前模块实例内，过期筛选由数据访问层保持旧模块规则。</zh-CN>
+            //   <en>The announcement query is scoped to the current module instance, with expiry filtering kept in the data-access layer under legacy module rules.</en>
+            // </lang>
+            myDataList.DataSource = AnnouncementsDB.GetAnnouncements(ModuleId);
+            // <lang>
+            //   <zh-CN>立即绑定可以让编辑回跳后的公告标题、描述和更多链接策略在本次请求中生效。</zh-CN>
+            //   <en>Binding immediately lets edited titles, descriptions, and read-more URL policy results take effect on this request after returning from edit.</en>
+            // </lang>
+            myDataList.DataBind();
+        }

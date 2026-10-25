@@ -1,0 +1,6 @@
+                                        <%--
+                                          <lang>
+                                            <zh-CN>标题文本是此页面的可见入口提示；账号创建结果仍以后续服务器消息为准。</zh-CN>
+                                            <en>The heading is the visible entry cue for this page; the outcome of account creation is still determined by the later server message.</en>
+                                          </lang>
+                                        --%>

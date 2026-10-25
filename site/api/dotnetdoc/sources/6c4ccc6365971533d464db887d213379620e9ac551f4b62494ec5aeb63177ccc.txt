@@ -1,0 +1,27 @@
+        private void BindHealthSnapshot()
+        {
+            // <lang>
+            //   <zh-CN>使用当前请求上下文执行受控检查，保留健康检查器统一的权限、配置和诊断边界。</zh-CN>
+            //   <en>Use the current request context for the controlled check, preserving the health checker's shared permission, configuration, and diagnostics boundaries.</en>
+            // </lang>
+            PortalHealthSnapshot snapshot = PortalHealthChecker.Check(Context);
+            OverallStatusLabel.Text = snapshot.OverallStatus.ToString();
+            GeneratedUtcLabel.Text = snapshot.GeneratedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'");
+
+            // <lang>
+            //   <zh-CN>三个控件只绑定快照投影，避免页面重复查询或把设置值当作可编辑配置。</zh-CN>
+            //   <en>Bind only the snapshot projections to the three controls so the page neither repeats queries nor treats settings as editable configuration.</en>
+            // </lang>
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在各自表尾据此渲染空态行；两者都无筛选条件，故零条即"暂无"。</zh-CN>
+            //   <en>Record the row counts before binding: the markup renders the empty-state row in each footer from them. Neither list has filters, so zero rows simply means "nothing here".</en>
+            // </lang>
+            healthChecksEmptyStateRowCount = snapshot.Checks.Count;
+            settingsEmptyStateRowCount = snapshot.Settings.Count;
+
+            HealthChecksRepeater.DataSource = snapshot.Checks;
+            HealthChecksRepeater.DataBind();
+
+            SettingsRepeater.DataSource = snapshot.Settings;
+            SettingsRepeater.DataBind();
+        }

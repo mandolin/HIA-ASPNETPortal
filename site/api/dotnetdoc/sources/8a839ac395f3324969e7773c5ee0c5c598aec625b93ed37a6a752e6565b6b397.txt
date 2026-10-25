@@ -1,0 +1,8 @@
+        private void ShowMessage(string message)
+        {
+            // <lang>
+            //   <zh-CN>提示内容按不可信文本处理，避免服务返回信息直接形成标记。</zh-CN>
+            //   <en>Treat message content as untrusted text so service-returned text cannot become markup.</en>
+            // </lang>
+            MessageLabel.Text = Server.HtmlEncode(message ?? string.Empty);
+        }

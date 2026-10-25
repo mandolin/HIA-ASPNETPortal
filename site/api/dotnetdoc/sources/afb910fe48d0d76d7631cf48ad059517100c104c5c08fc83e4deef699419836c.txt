@@ -1,0 +1,1 @@
+        string TabNameEn { get; set; }

@@ -1,0 +1,4 @@
+        internal static PortalLoginIdentifierResolution CreateAmbiguous()
+        {
+            return new PortalLoginIdentifierResolution(false, true, true, 0);
+        }

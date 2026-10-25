@@ -1,0 +1,133 @@
+    public sealed class PortalNavigationVisibilityContext
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>使用给定的当前用户与部署状态初始化可见性上下文。</zh-CN>
+        ///   <en>Initializes the visibility context from the supplied current user and deployment state.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="isAdministrator">
+        /// <l>
+        ///   <zh-CN>当前用户是否管理员；管理员可见被阻断入口的原因。</zh-CN>
+        ///   <en>Whether the current user is an administrator; administrators may see why an entry is blocked.</en>
+        /// </l>
+        /// </param>
+        /// <param name="roleNames">
+        /// <l>
+        ///   <zh-CN>当前用户所属旧角色名集合；可为 null。</zh-CN>
+        ///   <en>Legacy role names the current user belongs to; may be null.</en>
+        /// </l>
+        /// </param>
+        /// <param name="permissionKeys">
+        /// <l>
+        ///   <zh-CN>当前用户已授予的细粒度权限键集合；可为 null。</zh-CN>
+        ///   <en>Fine-grained permission keys granted to the current user; may be null.</en>
+        /// </l>
+        /// </param>
+        /// <param name="allowedPackageIds">
+        /// <l>
+        ///   <zh-CN>当前 Profile 允许的部署包集合；可为 null。</zh-CN>
+        ///   <en>Deployment packages allowed by the current Profile; may be null.</en>
+        /// </l>
+        /// </param>
+        /// <param name="activeProfile">
+        /// <l>
+        ///   <zh-CN>当前启用的 Profile 名称；可为空。</zh-CN>
+        ///   <en>Currently active Profile name; may be blank.</en>
+        /// </l>
+        /// </param>
+        /// <param name="includedProfiles">
+        /// <l>
+        ///   <zh-CN>当前 Profile 通过 Includes 传递包含的 Profile 集合；可为 null。</zh-CN>
+        ///   <en>Profiles transitively included by the current Profile through Includes; may be null.</en>
+        /// </l>
+        /// </param>
+        public PortalNavigationVisibilityContext(
+            bool isAdministrator,
+            IEnumerable<string> roleNames,
+            IEnumerable<string> permissionKeys,
+            IEnumerable<string> allowedPackageIds,
+            string activeProfile,
+            IEnumerable<string> includedProfiles)
+        {
+            // <lang>
+            //   <zh-CN>逐字段保存并规范化：集合去空白、按大小写不敏感去重、只读化，防止调用方在判定期间修改输入。</zh-CN>
+            //   <en>Store and normalize each field: trim, case-insensitively deduplicate, and make collections read-only so callers cannot mutate inputs during evaluation.</en>
+            // </lang>
+            IsAdministrator = isAdministrator;
+            RoleNames = NormalizeList(roleNames);
+            PermissionKeys = NormalizeList(permissionKeys);
+            AllowedPackageIds = NormalizeList(allowedPackageIds);
+            ActiveProfile = activeProfile ?? string.Empty;
+            IncludedProfiles = NormalizeList(includedProfiles);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前用户是否管理员。</zh-CN>
+        ///   <en>Whether the current user is an administrator.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsAdministrator { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前用户所属旧角色名（只读，已去重）。</zh-CN>
+        ///   <en>Legacy role names of the current user (read-only, deduplicated).</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> RoleNames { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前用户已授予的权限键（只读，已去重）。</zh-CN>
+        ///   <en>Permission keys granted to the current user (read-only, deduplicated).</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> PermissionKeys { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前 Profile 允许的部署包（只读，已去重）。</zh-CN>
+        ///   <en>Deployment packages allowed by the current Profile (read-only, deduplicated).</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> AllowedPackageIds { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前启用的 Profile 名称。</zh-CN>
+        ///   <en>Currently active Profile name.</en>
+        /// </lang>
+        /// </summary>
+        public string ActiveProfile { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>当前 Profile 传递包含的 Profile（只读，已去重）。</zh-CN>
+        ///   <en>Profiles transitively included by the current Profile (read-only, deduplicated).</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> IncludedProfiles { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>把可空字符串序列规范化为只读去重列表；空输入返回空列表而非 null。</zh-CN>
+        ///   <en>Normalize a nullable string sequence into a read-only deduplicated list; empty input yields an empty list instead of null.</en>
+        /// </lang>
+        /// </summary>
+        private static IList<string> NormalizeList(IEnumerable<string> values)
+        {
+            if (values == null)
+            {
+                return new string[0];
+            }
+
+            return values
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Select(value => value.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }
+    }

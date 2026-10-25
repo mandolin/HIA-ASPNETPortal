@@ -1,0 +1,19 @@
+        private EmployeeProfileCorrectionProfileView GetCurrentProfile(int userId)
+        {
+            // <lang>
+            //   <zh-CN>只有数据服务存在、目标 schema 可用且用户标识为正数时才允许读取员工资料。</zh-CN>
+            //   <en>Read an employee profile only when the data service exists, the target schema is available, and the user id is positive.</en>
+            // </lang>
+            if (CorrectionRequestDb == null ||
+                !CorrectionRequestDb.IsSchemaAvailable() ||
+                userId <= 0)
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>实际员工绑定关系由数据访问层决定；模块不在内存中拼接或覆盖员工主数据。</zh-CN>
+            //   <en>The data-access layer determines the actual employee binding; the module does not assemble or overwrite employee master data in memory.</en>
+            // </lang>
+            return CorrectionRequestDb.GetCurrentProfileForUser(userId);
+        }

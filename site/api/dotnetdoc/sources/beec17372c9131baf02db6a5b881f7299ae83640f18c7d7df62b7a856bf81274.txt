@@ -1,0 +1,6 @@
+<%--
+<lang>
+  <zh-CN>PortalMasterPage 在渲染前为此 body 写入受控主题和 Tab class；标记层不得直接拼接外部资源，避免绕过主题包和模块包的受信任部署边界。</zh-CN>
+  <en>PortalMasterPage writes controlled theme and Tab classes to this body before rendering. Markup must not concatenate external resources, so it does not bypass the trusted deployment boundary of theme and module packages.</en>
+</lang>
+--%>

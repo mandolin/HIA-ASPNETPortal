@@ -1,0 +1,5 @@
+        internal static string QuickLinks_TooltipAddLink {
+            get {
+                return ResourceManager.GetString("QuickLinks_TooltipAddLink", resourceCulture);
+            }
+        }

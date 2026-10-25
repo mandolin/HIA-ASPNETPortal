@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>事件编辑页使用统一主题化表单，保留既有校验、回发和删除事件。</zh-CN>
+            <en>The event edit page uses the shared themed form while preserving existing validation, postback, and delete events.</en>
+        </lang>
+    --%>

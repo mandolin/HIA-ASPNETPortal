@@ -1,0 +1,17 @@
+        private static string ReadConnectionString(string configFile, string connectionStringName)
+        {
+            XElement entry = ReadConnectionStringEntry(configFile, connectionStringName);
+            string connectionString = (string)entry.Attribute("connectionString");
+
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                // <lang>
+                //   <zh-CN>空字符串通常意味着模板尚未正确改成真实配置，也按配置错误处理。</zh-CN>
+                //   <en>An empty value usually means the template was not replaced with a real configuration, so treat it as a configuration error.</en>
+                // </lang>
+                throw new ConfigurationErrorsException(
+                    "Connection string '" + connectionStringName + "' is empty in " + configFile);
+            }
+
+            return connectionString;
+        }

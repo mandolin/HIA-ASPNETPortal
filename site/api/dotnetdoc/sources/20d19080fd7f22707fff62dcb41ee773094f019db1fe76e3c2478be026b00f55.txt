@@ -1,0 +1,5 @@
+        internal static string Admin_ManageUsers_MessageSelectValidRole {
+            get {
+                return ResourceManager.GetString("Admin_ManageUsers_MessageSelectValidRole", resourceCulture);
+            }
+        }

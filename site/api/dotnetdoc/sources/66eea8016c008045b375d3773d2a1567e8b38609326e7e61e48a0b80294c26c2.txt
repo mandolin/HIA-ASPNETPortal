@@ -1,0 +1,30 @@
+        private static void WriteTrace(PortalDiagnosticEntry entry)
+        {
+            // <lang>
+            //   <zh-CN>Trace 投影只使用已净化的标识、级别、分类和摘要消息；不追加异常详情、物理路径或原始请求内容。</zh-CN>
+            //   <en>The Trace projection uses only sanitized id, level, category, and summary message; it adds no exception detail, physical path, or raw request content.</en>
+            // </lang>
+            string traceMessage = string.Format(
+                "Portal diagnostics. EventId={0}; Level={1}; Category={2}; Message={3}",
+                entry.EventId,
+                entry.Level,
+                entry.Category,
+                entry.Message);
+
+            switch (entry.Level)
+            {
+                case "Info":
+                    Trace.TraceInformation(traceMessage);
+                    break;
+                case "Warning":
+                    Trace.TraceWarning(traceMessage);
+                    break;
+                default:
+                    // <lang>
+                    //   <zh-CN>未知级别沿用既有保守回退为错误 Trace，不扩展为新的日志路由或信任外部级别文本。</zh-CN>
+                    //   <en>An unknown level retains the established conservative fallback to error Trace; do not create new routing or trust external level text.</en>
+                    // </lang>
+                    Trace.TraceError(traceMessage);
+                    break;
+            }
+        }

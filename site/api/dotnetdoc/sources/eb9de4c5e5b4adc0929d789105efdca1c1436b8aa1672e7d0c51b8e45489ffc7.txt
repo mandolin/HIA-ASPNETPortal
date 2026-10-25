@@ -1,0 +1,6 @@
+<%--
+  <lang>
+    <zh-CN>P6.3-S4 员工组织目录页的列表本身只读，新增和编辑交给独立维护页处理。</zh-CN>
+    <en>The P6.3-S4 employee and organization directory list is read-only; creation and editing are handled by dedicated maintenance pages.</en>
+  </lang>
+--%>

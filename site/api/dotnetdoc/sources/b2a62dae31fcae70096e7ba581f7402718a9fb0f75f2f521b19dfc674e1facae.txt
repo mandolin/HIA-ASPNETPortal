@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleDefinitions_MessageSaveFailed {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_MessageSaveFailed", resourceCulture);
+            }
+        }

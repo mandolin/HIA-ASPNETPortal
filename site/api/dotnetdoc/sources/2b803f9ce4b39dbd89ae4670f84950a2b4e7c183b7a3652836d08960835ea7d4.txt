@@ -1,0 +1,49 @@
+    public sealed class PortalDiagnosticQueryResult
+    {
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>创建诊断查询结果，并在调用方未提供集合时回退为空集合。</zh-CN>
+        /// <en>Creates a diagnostic query result and falls back to an empty collection when the caller supplies none.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="entries"><lang><zh-CN>当前页诊断条目；null 会回退为新的空集合，不生成或读取条目。</zh-CN><en>Current-page diagnostic entries; null falls back to a new empty collection without creating or reading entries.</en></lang></param>
+        /// <param name="hasMore"><lang><zh-CN>是否还有下一页，由查询服务根据受限扫描结果决定。</zh-CN><en>Whether another page exists, determined by the query service from restricted scan results.</en></lang></param>
+        /// <param name="wasTruncated"><lang><zh-CN>是否因服务端扫描上限截断结果，不等同于客户端筛选成功或失败。</zh-CN><en>Whether a server-side scan limit truncated results; it is not equivalent to client-filter success or failure.</en></lang></param>
+        public PortalDiagnosticQueryResult(
+            IList<PortalDiagnosticEntry> entries,
+            bool hasMore,
+            bool wasTruncated)
+        {
+            // <lang>
+            //   <zh-CN>将 null 条目集合回退为空集合，使结果消费者可安全枚举；该回退不读取日志、不制造条目，也不隐藏服务端截断事实。</zh-CN>
+            //   <en>Fall back from a null entry collection to an empty collection so result consumers can enumerate safely; this fallback neither reads logs nor fabricates entries nor hides server-side truncation facts.</en>
+            // </lang>
+            Entries = entries ?? new List<PortalDiagnosticEntry>();
+            HasMore = hasMore;
+            WasTruncated = wasTruncated;
+        }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>当前页诊断条目；调用方仍须按管理员展示路径处理其中受控字段。</zh-CN>
+        /// <en>Current-page diagnostic entries; callers still handle controlled fields through administrator display paths.</en>
+        /// </lang>
+        /// </summary>
+        public IList<PortalDiagnosticEntry> Entries { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>是否还有下一页结果；不表示扫描范围未受服务端上限限制。</zh-CN>
+        /// <en>Whether another result page is available; it does not mean the scan range was unconstrained by server limits.</en>
+        /// </lang>
+        /// </summary>
+        public bool HasMore { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        /// <zh-CN>是否因服务器扫描上限而截断；为 true 时当前页不是完整匹配集的证明。</zh-CN>
+        /// <en>Whether a server scan limit truncated the result; when true, the current page is not proof of a complete match set.</en>
+        /// </lang>
+        /// </summary>
+        public bool WasTruncated { get; private set; }
+    }

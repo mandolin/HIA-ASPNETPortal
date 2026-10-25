@@ -1,0 +1,43 @@
+        private IList<int> ResolveVisibleOrganizationUnitIds(int actorUserId)
+        {
+            if (employeeDirectoryDb == null || actorUserId <= 0)
+            {
+                return new int[0];
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>没有有效绑定的账号没有组织身份，组织维度不授予任何可见性。</zh-CN>
+                //   <en>An account without an active binding has no organization identity, so the organization dimension grants nothing.</en>
+                // </lang>
+                IUserEmployeeBindingInfo binding = employeeDirectoryDb.GetActiveBindingByUserId(actorUserId);
+                if (binding == null || binding.EmployeeId <= 0 || string.IsNullOrWhiteSpace(binding.EmployeeCode))
+                {
+                    return new int[0];
+                }
+
+                // <lang>
+                //   <zh-CN>用员工号作为关键字回查员工主数据，并按员工标识精确取回，避免模糊匹配把其他员工带进组织范围。</zh-CN>
+                //   <en>Look the employee master data back up by employee code and select strictly by employee identifier so fuzzy matching cannot pull another employee into the organization scope.</en>
+                // </lang>
+                IEmployeeInfo employee = employeeDirectoryDb
+                    .GetEmployees(new EmployeeDirectoryQuery { Keyword = binding.EmployeeCode, Take = 20 })
+                    .FirstOrDefault(candidate => candidate.EmployeeId == binding.EmployeeId);
+
+                if (employee == null || !employee.OrganizationUnitId.HasValue || employee.OrganizationUnitId.Value <= 0)
+                {
+                    return new int[0];
+                }
+
+                return new[] { employee.OrganizationUnitId.Value };
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>目录读取失败按范围未知处理；此处不记录异常细节，避免低敏组织信息之外的内容进入调用方反馈。</zh-CN>
+                //   <en>Treat a directory read failure as unknown scope; no exception detail is recorded here so nothing beyond low-sensitivity organization data can reach caller feedback.</en>
+                // </lang>
+                return new int[0];
+            }
+        }

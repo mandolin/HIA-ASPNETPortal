@@ -1,0 +1,30 @@
+        public PortalPasswordPolicyOptions(
+            int minimumLength,
+            int requiredCategoryCount,
+            bool weakDictionaryEnabled,
+            bool disallowContextTerms)
+        {
+            // <lang>
+            //   <zh-CN>保存请求的最小长度；实际使用前仍由策略类施加硬下限。</zh-CN>
+            //   <en>Store the requested minimum length; the policy class still applies hard lower bounds before use.</en>
+            // </lang>
+            MinimumLength = minimumLength;
+
+            // <lang>
+            //   <zh-CN>保存请求的类别数量；实际使用前仍限制在四类可表达范围内。</zh-CN>
+            //   <en>Store the requested category count; actual use remains limited to the expressible range of four categories.</en>
+            // </lang>
+            RequiredCategoryCount = requiredCategoryCount;
+
+            // <lang>
+            //   <zh-CN>保存弱口令字典开关；该开关不携带任何用户密码。</zh-CN>
+            //   <en>Store the weak-dictionary switch; it carries no user password.</en>
+            // </lang>
+            WeakDictionaryEnabled = weakDictionaryEnabled;
+
+            // <lang>
+            //   <zh-CN>保存账号上下文词限制开关；调用方仍负责不记录上下文文本。</zh-CN>
+            //   <en>Store the account-context-term restriction switch; callers remain responsible for not logging context text.</en>
+            // </lang>
+            DisallowContextTerms = disallowContextTerms;
+        }

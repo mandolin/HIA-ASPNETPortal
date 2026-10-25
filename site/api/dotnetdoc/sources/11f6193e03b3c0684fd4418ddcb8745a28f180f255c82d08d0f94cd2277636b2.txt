@@ -1,0 +1,8 @@
+        protected string ChooseTip(object description)
+        {
+            // <lang>
+            //   <zh-CN>编辑状态不暴露旧描述作为 tooltip，固定提示能清楚表达点击会进入编辑页。</zh-CN>
+            //   <en>Edit mode does not expose the legacy description as the tooltip; the fixed hint clearly states the click opens editing.</en>
+            // </lang>
+            return IsEditable ? "Edit" : Convert.ToString(description);
+        }

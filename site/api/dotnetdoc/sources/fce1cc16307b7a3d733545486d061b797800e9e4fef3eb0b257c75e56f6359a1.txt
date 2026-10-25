@@ -1,0 +1,1 @@
+        public IList<PortalOperationAuditEntry> Entries { get; private set; }

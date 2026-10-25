@@ -1,0 +1,34 @@
+        public static string CreateStorageFileName(string originalFileName)
+        {
+            // <lang>
+            //   <zh-CN>先去除目录部分，避免原始路径进入生成文件名或影响后续扩展名判断。</zh-CN>
+            //   <en>Strip directory components first so an original path cannot enter the generated filename or influence extension validation.</en>
+            // </lang>
+            string sourceFileName = Path.GetFileName(originalFileName ?? string.Empty);
+            // <lang>
+            //   <zh-CN>扩展名必须先通过同一策略，生成器不为不允许类型提供旁路。</zh-CN>
+            //   <en>The extension must pass the same policy before generation; the generator provides no bypass for disallowed types.</en>
+            // </lang>
+            string extension = GetNormalizedExtension(sourceFileName);
+            if (!IsExtensionAllowed(extension))
+            {
+                throw new ArgumentException("The upload extension is not allowed.", "originalFileName");
+            }
+
+            // <lang>
+            //   <zh-CN>主名只用于可读性，经过控制字符、路径字符和长度净化，不承担授权或保密作用。</zh-CN>
+            //   <en>The stem is for readability only; it is sanitized for control/path characters and length and carries no authorization or secrecy.</en>
+            // </lang>
+            string stem = SanitizeFileStem(Path.GetFileNameWithoutExtension(sourceFileName));
+            // <lang>
+            //   <zh-CN>使用 UTC 固定格式生成可按时间观察的低敏文件名片段，避免本地时区歧义。</zh-CN>
+            //   <en>Use a fixed UTC format for a low-sensitivity, time-observable filename segment without local-time ambiguity.</en>
+            // </lang>
+            string timestamp = DateTime.UtcNow.ToString("yyyyMMdd-HHmmss'Z'", CultureInfo.InvariantCulture);
+            // <lang>
+            //   <zh-CN>随机串用于降低同秒同主名冲突；它不是下载令牌，不写入权限或审计语义。</zh-CN>
+            //   <en>The random token reduces same-second/name collisions; it is not a download token and carries no permission or audit semantics.</en>
+            // </lang>
+            string randomToken = Guid.NewGuid().ToString("N").Substring(0, 12);
+            return timestamp + "-" + randomToken + "-" + stem + extension;
+        }

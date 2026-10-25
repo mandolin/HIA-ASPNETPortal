@@ -1,0 +1,14 @@
+        private static IList<string> NormalizeList(IEnumerable<string> values)
+        {
+            if (values == null)
+            {
+                return new string[0];
+            }
+
+            return values
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Select(value => value.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }

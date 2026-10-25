@@ -1,0 +1,22 @@
+        private static bool IsWeakPassword(string password)
+        {
+            // <lang>
+            //   <zh-CN>将一次性输入规范化为比较令牌；令牌只在当前调用中存活且不写入诊断。</zh-CN>
+            //   <en>Normalize the one-time input into a comparison token that lives only for this call and is never written to diagnostics.</en>
+            // </lang>
+            string normalizedPassword = NormalizeToken(password);
+
+            // <lang>
+            //   <zh-CN>逐项比较公开弱口令样例，使用 ordinal 避免区域性规则改变安全判断。</zh-CN>
+            //   <en>Compare public weak-password examples one by one using ordinal comparison so locale rules cannot change the security decision.</en>
+            // </lang>
+            foreach (string weakPassword in WeakPasswordDictionary)
+            {
+                if (string.Equals(normalizedPassword, weakPassword, StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+
+            return IsSingleRepeatedCharacter(normalizedPassword);
+        }

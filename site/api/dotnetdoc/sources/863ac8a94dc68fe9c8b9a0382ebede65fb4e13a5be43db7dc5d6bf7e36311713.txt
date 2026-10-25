@@ -1,0 +1,5 @@
+        internal static string BusinessApplicationRequest_MessageModuleNotInitialized {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_MessageModuleNotInitialized", resourceCulture);
+            }
+        }

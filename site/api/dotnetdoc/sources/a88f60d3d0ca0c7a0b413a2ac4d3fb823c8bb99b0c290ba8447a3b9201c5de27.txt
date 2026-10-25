@@ -1,0 +1,1 @@
+        public IList<string> IncludedProfiles { get; private set; }

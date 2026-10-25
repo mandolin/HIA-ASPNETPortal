@@ -1,0 +1,2 @@
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        bool IsEditable { get; }

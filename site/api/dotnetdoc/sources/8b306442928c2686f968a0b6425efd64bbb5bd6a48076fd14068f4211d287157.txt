@@ -1,0 +1,45 @@
+        public static int ResolveTargetIterationCount()
+        {
+            // <lang>
+            //   <zh-CN>复制提供器引用以缩短锁持有时间，并让外部提供器在锁外执行。</zh-CN>
+            //   <en>Copy the provider reference to shorten lock hold time and execute external providers outside the lock.</en>
+            // </lang>
+            Func<int> provider;
+            lock (TargetProviderLock)
+            {
+                provider = targetProvider;
+            }
+
+            // <lang>
+            //   <zh-CN>未注入提供器时直接使用硬下限，与组件当前默认成本一致。</zh-CN>
+            //   <en>Without an injected provider the hard lower bound is used, matching the component's current default cost.</en>
+            // </lang>
+            if (provider == null)
+            {
+                return MinimumIterationCount;
+            }
+
+            try
+            {
+                int configured = provider();
+
+                // <lang>
+                //   <zh-CN>低于硬下限的配置一律回落，避免在线配置把哈希成本降到不安全值。</zh-CN>
+                //   <en>Configuration below the hard lower bound always falls back, preventing online configuration from lowering hashing cost to an unsafe value.</en>
+                // </lang>
+                if (configured < MinimumIterationCount)
+                {
+                    return MinimumIterationCount;
+                }
+
+                return configured;
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>提供器故障按 fail-safe 回落到硬下限，且不记录可能包含敏感配置上下文的异常。</zh-CN>
+                //   <en>Fail safely back to the hard lower bound when the provider faults, without logging an exception that could contain sensitive configuration context.</en>
+                // </lang>
+                return MinimumIterationCount;
+            }
+        }

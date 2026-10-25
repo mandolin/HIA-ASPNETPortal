@@ -1,0 +1,8 @@
+        public IEnumerable<ITabItem> GetMobileTabs()
+        {
+            // <lang>
+            //   <zh-CN>保持历史字段语义，方便旧模块或迁移脚本读取；排序规则与桌面 Tab 一致。</zh-CN>
+            //   <en>The historical field semantics are retained for legacy modules or migration scripts; ordering matches desktop Tabs.</en>
+            // </lang>
+            return _tabs.Where(i => i.ShowMobile==true).OrderBy(i => i.TabOrder).ThenBy(i => i.TabId);
+        }

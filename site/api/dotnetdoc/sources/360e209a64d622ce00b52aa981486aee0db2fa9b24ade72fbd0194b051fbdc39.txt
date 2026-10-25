@@ -1,0 +1,6 @@
+        public static bool TryGet(string capabilityId, out PortalCapabilityDefinition definition)
+        {
+            definition = DefinitionArray.FirstOrDefault(item =>
+                string.Equals(item.CapabilityId, capabilityId, StringComparison.Ordinal));
+            return definition != null;
+        }

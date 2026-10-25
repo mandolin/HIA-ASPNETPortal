@@ -1,0 +1,1 @@
+        void UpdateModuleOrder(int moduleId, int moduleOrder, string pane);

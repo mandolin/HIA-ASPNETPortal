@@ -1,0 +1,5 @@
+        internal static string EditEvents_MessageValidExpirationDate {
+            get {
+                return ResourceManager.GetString("EditEvents_MessageValidExpirationDate", resourceCulture);
+            }
+        }

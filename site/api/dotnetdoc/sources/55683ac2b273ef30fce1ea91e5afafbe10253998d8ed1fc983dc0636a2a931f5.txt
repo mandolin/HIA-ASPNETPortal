@@ -1,0 +1,16 @@
+        private bool OrganizationCodeExists(string organizationCode, int excludingOrganizationUnitId)
+        {
+            if (string.IsNullOrEmpty(organizationCode))
+            {
+                return false;
+            }
+
+            return ScalarInt(
+                @"
+SELECT COUNT(*)
+FROM [dbo].[PortalBiz_OrganizationUnits]
+WHERE [OrganizationCode] = @OrganizationCode
+  AND [OrganizationUnitId] <> @OrganizationUnitId;",
+                TextParameter("@OrganizationCode", organizationCode),
+                IntParameter("@OrganizationUnitId", Math.Max(0, excludingOrganizationUnitId))) > 0;
+        }

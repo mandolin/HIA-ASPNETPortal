@@ -1,0 +1,1 @@
+        void SetUserProfileStatus(int userId, string status, string reason, string actor);

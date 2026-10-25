@@ -1,0 +1,5 @@
+        internal static string Admin_EmployeeEdit_MessageInvalidLeftUtc {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeEdit_MessageInvalidLeftUtc", resourceCulture);
+            }
+        }

@@ -1,0 +1,94 @@
+    public static class PortalCapabilityRegistry
+    {
+        /// <summary><lang><zh-CN>企业协同事项能力键。</zh-CN><en>Enterprise collaboration-item capability key.</en></lang></summary>
+        public const string Collaboration = "BasicBusiness.Collaboration";
+
+        /// <summary><lang><zh-CN>业务申请能力键；与 <c>BasicBusiness.Collaboration</c> 同属基础业务层，复用既有 <c>Business.Application</c> 权限键族。</zh-CN><en>Business application request capability key; shares the BasicBusiness layer with <c>BasicBusiness.Collaboration</c> and reuses the existing <c>Business.Application</c> permission-key family.</en></lang></summary>
+        public const string ApplicationRequest = "BasicBusiness.ApplicationRequest";
+
+        /// <summary><lang><zh-CN>员工资料确认能力键；W73 新增，用于消除 `HIA.EmployeeProfileConfirm` 的孤儿声明状态，复用既有 `Business.EmployeeProfileConfirm` 权限键族。</zh-CN><en>Employee profile confirmation capability key; added in W73 to end the orphan-declaration state of `HIA.EmployeeProfileConfirm`, reusing the existing `Business.EmployeeProfileConfirm` permission-key family.</en></lang></summary>
+        public const string EmployeeProfileConfirm = "BasicBusiness.EmployeeProfileConfirm";
+
+        /// <summary><lang><zh-CN>员工资料更正请求能力键；W73 新增，用于消除 `HIA.EmployeeProfileCorrectionRequest` 的孤儿声明状态，复用既有 `Business.EmployeeProfileCorrectionRequest` 权限键族。</zh-CN><en>Employee profile correction request capability key; added in W73 to end the orphan-declaration state of `HIA.EmployeeProfileCorrectionRequest`, reusing the existing `Business.EmployeeProfileCorrectionRequest` permission-key family.</en></lang></summary>
+        public const string EmployeeProfileCorrectionRequest = "BasicBusiness.EmployeeProfileCorrectionRequest";
+
+        /// <summary><lang><zh-CN>请假申请能力键；P20 新增，复用既有 `Business.LeaveRequest` 权限键族。</zh-CN><en>Leave-request capability key; added in P20, reusing the existing `Business.LeaveRequest` permission-key family.</en></lang></summary>
+        public const string LeaveRequest = "BasicBusiness.LeaveRequest";
+
+        /// <summary><lang><zh-CN>费用报销能力键；P20 新增，复用既有 `Business.ExpenseReimbursement` 权限键族。</zh-CN><en>Expense-reimbursement capability key; added in P20, reusing the existing `Business.ExpenseReimbursement` permission-key family.</en></lang></summary>
+        public const string ExpenseReimbursement = "BasicBusiness.ExpenseReimbursement";
+
+        private static readonly PortalCapabilityDefinition[] DefinitionArray =
+        {
+            new PortalCapabilityDefinition(
+                Collaboration,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.EnterpriseCapabilityWorkbench",
+                "Business.Collaboration",
+                "企业协同事项",
+                "Enterprise Collaboration Item"),
+            new PortalCapabilityDefinition(
+                ApplicationRequest,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.BusinessApplicationRequest",
+                "Business.Application",
+                "业务申请",
+                "Business Application Request"),
+            new PortalCapabilityDefinition(
+                EmployeeProfileConfirm,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.EmployeeProfileConfirm",
+                "Business.EmployeeProfileConfirm",
+                "员工资料确认",
+                "Employee Profile Confirmation"),
+            new PortalCapabilityDefinition(
+                EmployeeProfileCorrectionRequest,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.EmployeeProfileCorrectionRequest",
+                "Business.EmployeeProfileCorrectionRequest",
+                "员工资料更正请求",
+                "Employee Profile Correction Request"),
+            new PortalCapabilityDefinition(
+                LeaveRequest,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.LeaveRequest",
+                "Business.LeaveRequest",
+                "请假申请",
+                "Leave Request"),
+            new PortalCapabilityDefinition(
+                ExpenseReimbursement,
+                "BasicBusiness",
+                PortalCapabilityLifecycleStates.Active,
+                "HIA.ExpenseReimbursement",
+                "Business.ExpenseReimbursement",
+                "费用报销",
+                "Expense Reimbursement")
+        };
+
+        private static readonly IList<PortalCapabilityDefinition> ReadOnlyDefinitions =
+            new ReadOnlyCollection<PortalCapabilityDefinition>(DefinitionArray);
+
+        /// <summary><lang><zh-CN>当前已登记的能力定义只读集合。</zh-CN><en>Read-only set of currently registered capability definitions.</en></lang></summary>
+        public static IList<PortalCapabilityDefinition> Definitions
+        {
+            get { return ReadOnlyDefinitions; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按稳定能力键解析一条能力定义。</zh-CN>
+        ///   <en>Resolves one capability definition by stable capability key.</en>
+        /// </lang>
+        /// </summary>
+        public static bool TryGet(string capabilityId, out PortalCapabilityDefinition definition)
+        {
+            definition = DefinitionArray.FirstOrDefault(item =>
+                string.Equals(item.CapabilityId, capabilityId, StringComparison.Ordinal));
+            return definition != null;
+        }
+    }

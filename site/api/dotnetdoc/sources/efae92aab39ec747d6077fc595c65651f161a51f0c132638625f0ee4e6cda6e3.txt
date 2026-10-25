@@ -1,0 +1,57 @@
+        private static PortalDiagnosticQuery NormalizeQuery(PortalDiagnosticQuery query)
+        {
+            // <lang>
+            //   <zh-CN>以当前 UTC 日期建立默认窗口，避免调用方本地时区或缺失日期扩大诊断扫描范围。</zh-CN>
+            //   <en>Establish the default window from the current UTC date so caller local time zones or missing dates cannot broaden diagnostic scanning.</en>
+            // </lang>
+            DateTime nowUtc = DateTime.UtcNow.Date;
+
+            // <lang>
+            //   <zh-CN>计算查询起始 UTC 日期；缺失值回退到固定历史窗口，调用方日期只保留日期部分。</zh-CN>
+            //   <en>Compute the query start UTC date; missing input falls back to the fixed history window and caller time is reduced to a date.</en>
+            // </lang>
+            DateTime startUtc = query == null || query.StartUtc == DateTime.MinValue
+                ? nowUtc.AddDays(-6)
+                : query.StartUtc.Date;
+
+            // <lang>
+            //   <zh-CN>计算半开结束日期；缺失值覆盖到当前 UTC 日结束，避免未提供条件造成无限范围。</zh-CN>
+            //   <en>Compute the exclusive end date; missing input ends at the current UTC day boundary so absent criteria cannot create an unbounded range.</en>
+            // </lang>
+            DateTime endUtcExclusive = query == null || query.EndUtcExclusive == DateTime.MinValue
+                ? nowUtc.AddDays(1)
+                : query.EndUtcExclusive.Date;
+
+            if (endUtcExclusive <= startUtc)
+            {
+                // <lang>
+                //   <zh-CN>倒置或零长度区间回退为从起始日开始的一天半开窗口，保证下游日期比较具有正长度。</zh-CN>
+                //   <en>Fall back an inverted or zero-length interval to a one-day half-open window from start date so downstream date comparisons have positive length.</en>
+                // </lang>
+                endUtcExclusive = startUtc.AddDays(1);
+            }
+
+            if ((endUtcExclusive - startUtc).TotalDays > MaximumQueryDays)
+            {
+                // <lang>
+                //   <zh-CN>将过宽窗口截到固定天数上限，限制文件枚举和 NDJSON 扫描成本，而不以异常回显调用方日期。</zh-CN>
+                //   <en>Clamp an over-wide window to the fixed day cap, limiting file enumeration and NDJSON scan cost without echoing caller dates through an exception.</en>
+                // </lang>
+                endUtcExclusive = startUtc.AddDays(MaximumQueryDays);
+            }
+
+            // <lang>
+            //   <zh-CN>构造独立的受限查询对象：明确 UTC Kind、长度受限过滤器和有界分页；不修改调用方 DTO。</zh-CN>
+            //   <en>Construct an independent restricted query with explicit UTC kind, length-bounded filters, and bounded paging; do not mutate the caller DTO.</en>
+            // </lang>
+            return new PortalDiagnosticQuery
+            {
+                StartUtc = DateTime.SpecifyKind(startUtc, DateTimeKind.Utc),
+                EndUtcExclusive = DateTime.SpecifyKind(endUtcExclusive, DateTimeKind.Utc),
+                Level = NormalizeFilter(query == null ? null : query.Level, 20),
+                Category = NormalizeFilter(query == null ? null : query.Category, 80),
+                EventId = NormalizeFilter(query == null ? null : query.EventId, 64),
+                Page = Math.Max(0, Math.Min(query == null ? 0 : query.Page, MaximumPage)),
+                PageSize = Math.Max(1, Math.Min(query == null || query.PageSize <= 0 ? DefaultPageSize : query.PageSize, MaximumPageSize))
+            };
+        }

@@ -1,0 +1,18 @@
+        public void AddUserRole(int roleId, int userId)
+        {
+            // <lang>
+            //   <zh-CN>显式确认用户和角色存在，再用中间表写入，避免旧 EF 导航集合为空导致后台错误页。</zh-CN>
+            //   <en>Confirm that user and role exist, then write the join table explicitly to avoid admin error pages from null legacy EF collections.</en>
+            // </lang>
+            EnsureUserAndRoleExist(roleId, userId);
+            if (HasUserRole(roleId, userId))
+            {
+                return;
+            }
+
+            _context.Database.ExecuteSqlCommand(
+                "INSERT INTO [dbo].[Portal_UserRoles] ([UserID], [RoleID]) VALUES (@p0, @p1)",
+                userId,
+                roleId);
+            IncrementSecurityVersion(userId, "RoleMembershipAdded");
+        }

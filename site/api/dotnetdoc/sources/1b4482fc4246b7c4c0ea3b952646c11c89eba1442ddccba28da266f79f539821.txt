@@ -1,0 +1,388 @@
+    public sealed class PortalNavigationEntry
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建一个导航入口元数据对象。</zh-CN>
+        ///   <en>Creates a navigation-entry metadata object.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="entryKey">
+        ///   <l>
+        ///     <zh-CN>不能为空的稳定入口键。</zh-CN>
+        ///     <en>Nonblank stable entry key.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="entryKind">
+        ///   <l>
+        ///     <zh-CN>入口的固定类型。</zh-CN>
+        ///     <en>Fixed kind of entry.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="displayNameZhCn">
+        ///   <l>
+        ///     <zh-CN>可为空的中文显示文本。</zh-CN>
+        ///     <en>Chinese display text, which may be blank.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="displayNameEn">
+        ///   <l>
+        ///     <zh-CN>可为空的英文显示文本。</zh-CN>
+        ///     <en>English display text, which may be blank.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="target">
+        ///   <l>
+        ///     <zh-CN>可为空的注册目标元数据；本构造器不解析或访问它。</zh-CN>
+        ///     <en>Registered target metadata, which may be blank; this constructor does not resolve or access it.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="visibilityMode">
+        ///   <l>
+        ///     <zh-CN>导航消费方使用的显示策略提示。</zh-CN>
+        ///     <en>Visibility-policy hint used by navigation consumers.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="lifecycleState">
+        ///   <l>
+        ///     <zh-CN>入口在注册表中的生命周期状态。</zh-CN>
+        ///     <en>Entry lifecycle state in the registry.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="sortOrder">
+        ///   <l>
+        ///     <zh-CN>稳定导航排序值。</zh-CN>
+        ///     <en>Stable navigation sort value.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="requiredRoles">
+        ///   <l>
+        ///     <zh-CN>可为空的旧角色依赖序列。</zh-CN>
+        ///     <en>Legacy-role dependency sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="requiredPermissionKeys">
+        ///   <l>
+        ///     <zh-CN>可为空的细粒度权限键依赖序列。</zh-CN>
+        ///     <en>Fine-grained permission-key dependency sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="requiredPackageIds">
+        ///   <l>
+        ///     <zh-CN>可为空的部署包依赖序列。</zh-CN>
+        ///     <en>Deployment-package dependency sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="requiredProfiles">
+        ///   <l>
+        ///     <zh-CN>可为空的部署 Profile 依赖序列。</zh-CN>
+        ///     <en>Deployment-Profile dependency sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="notes">
+        ///   <l>
+        ///     <zh-CN>可为空的维护说明。</zh-CN>
+        ///     <en>Maintainer note, which may be blank.</en>
+        ///   </l>
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// <l>
+        ///   <zh-CN><paramref name="entryKey"/> 为空白时引发。</zh-CN>
+        ///   <en>Thrown when <paramref name="entryKey"/> is blank.</en>
+        /// </l>
+        /// </exception>
+        public PortalNavigationEntry(
+            string entryKey,
+            PortalNavigationEntryKind entryKind,
+            string displayNameZhCn,
+            string displayNameEn,
+            string target,
+            PortalNavigationVisibilityMode visibilityMode,
+            PortalNavigationLifecycleState lifecycleState,
+            int sortOrder,
+            IEnumerable<string> requiredRoles,
+            IEnumerable<string> requiredPermissionKeys,
+            IEnumerable<string> requiredPackageIds,
+            IEnumerable<string> requiredProfiles,
+            string notes)
+        {
+            // <lang>
+            //   <zh-CN>构造器只建立静态导航元数据：稳定键必须存在；显示、目标和说明可为空；它不读取配置、不执行路由，也不将任一依赖解释为授权成功。</zh-CN>
+            //   <en>The constructor creates static navigation metadata only: the stable key must exist while display, target, and notes may be blank; it reads no configuration, performs no routing, and does not interpret any dependency as successful authorization.</en>
+            // </lang>
+            EntryKey = NormalizeRequired(entryKey, "entryKey");
+
+            // <lang>
+            //   <zh-CN>枚举、排序和可选文本按调用方登记值保存；真正的可访问性仍由消费边界验证，不能由元数据对象自行放行。</zh-CN>
+            //   <en>Store enum, order, and optional text as registered by the caller; actual accessibility remains verified by consuming boundaries and cannot be granted by this metadata object itself.</en>
+            // </lang>
+            EntryKind = entryKind;
+            DisplayNameZhCn = displayNameZhCn ?? string.Empty;
+            DisplayNameEn = displayNameEn ?? string.Empty;
+            Target = target ?? string.Empty;
+            VisibilityMode = visibilityMode;
+            LifecycleState = lifecycleState;
+            SortOrder = sortOrder;
+
+            // <lang>
+            //   <zh-CN>四类依赖序列分别复制、去空白、按大小写不敏感去重并只读化，防止外部枚举在注册后改变可见性提示。</zh-CN>
+            //   <en>Copy, trim, case-insensitively deduplicate, and make all four dependency sequences read-only so external enumeration cannot alter visibility hints after registration.</en>
+            // </lang>
+            RequiredRoles = NormalizeList(requiredRoles);
+            RequiredPermissionKeys = NormalizeList(requiredPermissionKeys);
+            RequiredPackageIds = NormalizeList(requiredPackageIds);
+            RequiredProfiles = NormalizeList(requiredProfiles);
+            Notes = notes ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>不随显示名变化的稳定入口键。</zh-CN>
+        ///   <en>Stable entry key that does not change with display text.</en>
+        /// </lang>
+        /// </summary>
+        public string EntryKey { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>入口类型。</zh-CN>
+        ///   <en>Entry type.</en>
+        /// </lang>
+        /// </summary>
+        public PortalNavigationEntryKind EntryKind { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>中文显示名。</zh-CN>
+        ///   <en>Chinese display name.</en>
+        /// </lang>
+        /// </summary>
+        public string DisplayNameZhCn { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>英文显示名。</zh-CN>
+        ///   <en>English display name.</en>
+        /// </lang>
+        /// </summary>
+        public string DisplayNameEn { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按界面语言返回入口显示名：中文文化取中文名，其余文化取英文名；缺失一侧时回落到另一侧。</zh-CN>
+        ///   <en>Return the entry display name for a UI culture: Chinese cultures use the Chinese name, other cultures use the English name, and a missing side falls back to the other.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="culture">
+        /// <l>
+        ///   <zh-CN>目标界面文化；为 null 时使用当前线程界面文化。</zh-CN>
+        ///   <en>Target UI culture; null uses the current thread UI culture.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>显示名；两侧均缺失时返回稳定键，保证标签不为空。</zh-CN>
+        ///   <en>Display name; when both sides are missing the stable key is returned so the label is never blank.</en>
+        /// </l>
+        /// </returns>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>判定依据是界面文化的语言代码，与 Web.config 的 globalization uiCulture 以及 App_GlobalResources/lang.* 的解析保持同源；因此切换 uiCulture 时，管理面页头链接与页面文案会一起切换，不会出现中英混排。</zh-CN>
+        ///   <en>The decision uses the UI culture language code and stays aligned with the Web.config globalization uiCulture and App_GlobalResources/lang.* resolution; switching uiCulture therefore switches both the admin header links and the page text together, avoiding a mixed-language surface.</en>
+        /// </lang>
+        /// </remarks>
+        public string GetDisplayName(System.Globalization.CultureInfo culture)
+        {
+            // <lang>
+            //   <zh-CN>未显式传入文化时取当前线程界面文化，保证调用方无需自行读取全球化配置。</zh-CN>
+            //   <en>When no culture is supplied, use the current thread UI culture so callers need not read globalization configuration themselves.</en>
+            // </lang>
+            System.Globalization.CultureInfo effectiveCulture = culture ?? System.Globalization.CultureInfo.CurrentUICulture;
+
+            // <lang>
+            //   <zh-CN>以两字母语言代码判定中文，兼容 zh-CN、zh-TW 等区域变体。</zh-CN>
+            //   <en>Detect Chinese by the two-letter language code, covering regional variants such as zh-CN and zh-TW.</en>
+            // </lang>
+            bool preferChinese = effectiveCulture != null &&
+                string.Equals(effectiveCulture.TwoLetterISOLanguageName, "zh", StringComparison.OrdinalIgnoreCase);
+
+            string preferred = preferChinese ? DisplayNameZhCn : DisplayNameEn;
+            string fallback = preferChinese ? DisplayNameEn : DisplayNameZhCn;
+
+            if (!string.IsNullOrWhiteSpace(preferred))
+            {
+                return preferred;
+            }
+
+            if (!string.IsNullOrWhiteSpace(fallback))
+            {
+                return fallback;
+            }
+
+            // <lang>
+            //   <zh-CN>两侧都缺失时返回稳定键：宁可显示键名也不留空标签。</zh-CN>
+            //   <en>Return the stable key when both sides are missing: showing the key beats an empty label.</en>
+            // </lang>
+            return EntryKey ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>入口目标，可能是模块入口、后台页或文档路径。</zh-CN>
+        ///   <en>Entry target, such as a module entry, admin page, or document path.</en>
+        /// </lang>
+        /// </summary>
+        public string Target { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>入口显示策略。</zh-CN>
+        ///   <en>Entry visibility policy.</en>
+        /// </lang>
+        /// </summary>
+        public PortalNavigationVisibilityMode VisibilityMode { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>入口生命周期。</zh-CN>
+        ///   <en>Entry lifecycle state.</en>
+        /// </lang>
+        /// </summary>
+        public PortalNavigationLifecycleState LifecycleState { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>导航排序值。</zh-CN>
+        ///   <en>Navigation sort value.</en>
+        /// </lang>
+        /// </summary>
+        public int SortOrder { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>导航消费方参考的旧角色依赖；本属性本身不授予角色能力。</zh-CN>
+        ///   <en>Legacy role dependencies consulted by navigation consumers; this property does not grant role capability itself.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> RequiredRoles { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>导航消费方参考的细粒度权限依赖；实际权限检查由消费边界完成。</zh-CN>
+        ///   <en>Fine-grained permission dependencies consulted by navigation consumers; consuming boundaries perform actual permission checks.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> RequiredPermissionKeys { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>导航消费方参考的模块包依赖；它不表示模块已启用。</zh-CN>
+        ///   <en>Module-package dependencies consulted by navigation consumers; they do not mean the module is enabled.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> RequiredPackageIds { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>导航消费方参考的部署 Profile 依赖；它不替代实际 Profile 解析。</zh-CN>
+        ///   <en>Deployment-Profile dependencies consulted by navigation consumers; they do not replace actual Profile resolution.</en>
+        /// </lang>
+        /// </summary>
+        public IList<string> RequiredProfiles { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>维护说明。</zh-CN>
+        ///   <en>Maintainer note.</en>
+        /// </lang>
+        /// </summary>
+        public string Notes { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>验证并规范化一个必需的稳定导航元数据值。</zh-CN>
+        ///   <en>Validates and normalizes one required stable navigation-metadata value.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="value">
+        ///   <l>
+        ///     <zh-CN>待验证的候选文本。</zh-CN>
+        ///     <en>Candidate text to validate.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="argumentName">
+        ///   <l>
+        ///     <zh-CN>用于受控参数异常的固定参数名。</zh-CN>
+        ///     <en>Fixed parameter name for the controlled argument exception.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>已去除边缘空白的必需值。</zh-CN>
+        ///     <en>Required value with edge whitespace removed.</en>
+        ///   </l>
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        ///   <l>
+        ///     <zh-CN>候选值为空白时引发。</zh-CN>
+        ///     <en>Thrown when the candidate is blank.</en>
+        ///   </l>
+        /// </exception>
+        private static string NormalizeRequired(string value, string argumentName)
+        {
+            // <lang>
+            //   <zh-CN>空白稳定键会使按键查找和排序失去确定性，因此在对象创建时以固定消息和参数名拒绝，而不回退为显示名或目标。</zh-CN>
+            //   <en>A blank stable key would make key lookup and ordering indeterminate, so reject it at object creation with a fixed message and parameter name rather than falling back to display text or target.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("Navigation entry value is required.", argumentName);
+            }
+
+            // <lang>
+            //   <zh-CN>只去除边缘空白；不改变大小写或字符内容，保持注册键与消费方使用的稳定标识一致。</zh-CN>
+            //   <en>Trim edge whitespace only; do not alter casing or character content so the registered key remains consistent with the stable identifier used by consumers.</en>
+            // </lang>
+            return value.Trim();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>复制并规范化可选导航依赖列表。</zh-CN>
+        ///   <en>Copies and normalizes an optional navigation-dependency list.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="values">
+        ///   <l>
+        ///     <zh-CN>可为空的依赖候选序列。</zh-CN>
+        ///     <en>Dependency candidate sequence, which may be null.</en>
+        ///   </l>
+        /// </param>
+        /// <returns>
+        ///   <l>
+        ///     <zh-CN>已去空白、按大小写不敏感去重的只读列表。</zh-CN>
+        ///     <en>Read-only list with blanks removed and case-insensitive duplicates removed.</en>
+        ///   </l>
+        /// </returns>
+        private static IList<string> NormalizeList(IEnumerable<string> values)
+        {
+            // <lang>
+            //   <zh-CN>空序列统一为稳定空数组，不保留 null 语义给导航消费方，也不生成占位依赖。</zh-CN>
+            //   <en>Converge a null sequence to a stable empty array, leaving no null semantics for navigation consumers and creating no placeholder dependency.</en>
+            // </lang>
+            if (values == null)
+            {
+                return new string[0];
+            }
+
+            // <lang>
+            //   <zh-CN>依赖项仅做去空白和 ordinal-ignore-case 去重后复制为只读列表；本 helper 不验证角色、权限、包或 Profile 是否真实存在。</zh-CN>
+            //   <en>Trim and ordinal-ignore-case deduplicate dependency items, then copy them to a read-only list; this helper does not validate whether roles, permissions, packages, or Profiles actually exist.</en>
+            // </lang>
+            return values
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Select(value => value.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList()
+                .AsReadOnly();
+        }
+    }

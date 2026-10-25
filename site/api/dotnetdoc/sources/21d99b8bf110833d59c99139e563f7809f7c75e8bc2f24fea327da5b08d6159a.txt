@@ -1,0 +1,17 @@
+        public static string NormalizeDefinedKey(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentException("Permission key is required.", "key");
+            }
+
+            string normalized = key.Trim();
+            if (!KnownKeys.Contains(normalized))
+            {
+                throw new ArgumentException("Permission key is not defined: " + normalized, "key");
+            }
+
+            return DefinitionArray
+                .First(definition => string.Equals(definition.Key, normalized, StringComparison.OrdinalIgnoreCase))
+                .Key;
+        }

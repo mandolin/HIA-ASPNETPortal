@@ -1,0 +1,1 @@
+        public DateTime ChangedUtc { get; set; }

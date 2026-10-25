@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_MessageNoChangeNeeded {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageNoChangeNeeded", resourceCulture);
+            }
+        }

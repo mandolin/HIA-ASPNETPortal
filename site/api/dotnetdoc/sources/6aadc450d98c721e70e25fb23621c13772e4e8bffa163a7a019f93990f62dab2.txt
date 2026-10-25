@@ -1,0 +1,16 @@
+        private void BindStatusFilter()
+        {
+            // <lang>
+            //   <zh-CN>筛选项使用稳定状态键，显示值保持现有后台兼容文本。</zh-CN>
+            //   <en>Use stable status keys for filters while preserving the existing administration-compatible display text.</en>
+            // </lang>
+            StatusFilterList.Items.Clear();
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.Submitted, PortalBusinessApplicationStatuses.Submitted));
+            StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.InReview, PortalBusinessApplicationStatuses.InReview));
+            StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.Returned, PortalBusinessApplicationStatuses.Returned));
+            StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.Approved, PortalBusinessApplicationStatuses.Approved));
+            StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.Rejected, PortalBusinessApplicationStatuses.Rejected));
+            StatusFilterList.Items.Add(new ListItem(PortalBusinessApplicationStatuses.Closed, PortalBusinessApplicationStatuses.Closed));
+            StatusFilterList.SelectedValue = PortalBusinessApplicationStatuses.Submitted;
+        }

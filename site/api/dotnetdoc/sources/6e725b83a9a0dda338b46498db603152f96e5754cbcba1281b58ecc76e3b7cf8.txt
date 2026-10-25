@@ -1,0 +1,65 @@
+        private bool TryResolvePasswordResetSubmission(
+            bool passwordResetSubmitted,
+            out string password,
+            out string confirmPassword,
+            out bool shouldResetPassword)
+        {
+            password = string.Empty;
+            confirmPassword = string.Empty;
+            shouldResetPassword = false;
+
+            if (!passwordResetSubmitted)
+            {
+                return true;
+            }
+
+            bool hasEncryptedPassword = !string.IsNullOrWhiteSpace(EncryptedPassword.Value);
+            bool hasEncryptedConfirmPassword = !string.IsNullOrWhiteSpace(EncryptedConfirmPassword.Value);
+
+            if (hasEncryptedPassword || hasEncryptedConfirmPassword)
+            {
+                if (!hasEncryptedPassword || !hasEncryptedConfirmPassword)
+                {
+                    PortalDiagnostics.Warn(
+                        "PasswordSubmissionEncryption",
+                        "Administrator password-reset submission was incomplete: one encrypted password field was missing.",
+                        Context);
+                    ShowRegistrationMessage(lang.Admin_ManageUsers_MessagePasswordIncomplete, true);
+                    return false;
+                }
+
+                string[] submittedPasswords;
+                string failureCode;
+                string eventId;
+                if (PortalPasswordSubmissionCrypto.TryDecryptSubmittedPasswords(
+                    Context,
+                    new[] { EncryptedPassword.Value, EncryptedConfirmPassword.Value },
+                    out submittedPasswords,
+                    out failureCode,
+                    out eventId))
+                {
+                    password = submittedPasswords.Length > 0 ? submittedPasswords[0] : string.Empty;
+                    confirmPassword = submittedPasswords.Length > 1 ? submittedPasswords[1] : string.Empty;
+                    shouldResetPassword = !string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(confirmPassword);
+                    return true;
+                }
+
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessagePasswordVerifyFailed, eventId), true);
+                return false;
+            }
+
+            if (PortalPasswordSubmissionCrypto.IsEncryptedSubmissionRequired())
+            {
+                PortalDiagnostics.Warn(
+                    "PasswordSubmissionEncryption",
+                    "Administrator password reset was submitted without the required encrypted fields.",
+                    Context);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessagePasswordVerifyRejected, true);
+                return false;
+            }
+
+            password = Password.Text ?? string.Empty;
+            confirmPassword = ConfirmPassword.Text ?? string.Empty;
+            shouldResetPassword = !string.IsNullOrEmpty(password) || !string.IsNullOrEmpty(confirmPassword);
+            return true;
+        }

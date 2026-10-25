@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_ColumnType {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnType", resourceCulture);
+            }
+        }

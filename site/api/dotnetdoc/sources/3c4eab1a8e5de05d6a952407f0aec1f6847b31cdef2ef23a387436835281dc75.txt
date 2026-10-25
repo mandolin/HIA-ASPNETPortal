@@ -1,0 +1,6 @@
+                    <%--
+                        <lang>
+                            <zh-CN>邮箱链接只有在服务器生成非空 mailto 地址时显示；空值回退为编码文本，不把联系人字段强制变成可点击外部动作。</zh-CN>
+                            <en>The email link appears only when the server produces a non-empty mailto address; blank values fall back to encoded text instead of forcing a contact field into a clickable external action.</en>
+                        </lang>
+                    --%>

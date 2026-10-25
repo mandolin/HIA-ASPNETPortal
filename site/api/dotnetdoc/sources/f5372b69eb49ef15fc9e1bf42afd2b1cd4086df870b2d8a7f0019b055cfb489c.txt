@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition AllowPendingEmployeeBinding =
+            new PortalSettingDefinition(
+                PortalSettingKeys.AllowPendingEmployeeBinding,
+                "允许待绑定员工号注册",
+                "员工号绑定失败时是否仍允许注册进入待审核；默认不允许。",
+                PortalSettingValueType.Boolean,
+                "false",
+                true,
+                false,
+                "Admins",
+                "Registration");

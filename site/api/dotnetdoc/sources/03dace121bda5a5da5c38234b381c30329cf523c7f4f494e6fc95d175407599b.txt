@@ -1,0 +1,14 @@
+        private void BindDefinition()
+        {
+            // <lang>
+            //   <zh-CN>从已验证快照投影名称和路径；路径只读，验证器停用以保持“仅改名称”的契约。</zh-CN>
+            //   <en>Project the name and paths from the verified snapshot; paths stay read-only and validation is disabled to preserve the name-only contract.</en>
+            // </lang>
+            FriendlyName.Text = currentDefinition.FriendlyName;
+            DesktopSrc.Text = currentDefinition.DesktopSourceFile;
+            MobileSrc.Text = currentDefinition.MobileSourceFile;
+            DesktopSrc.ReadOnly = true;
+            MobileSrc.ReadOnly = true;
+            Req2.Enabled = false;
+            DesktopSrcPathValidator.Enabled = false;
+        }

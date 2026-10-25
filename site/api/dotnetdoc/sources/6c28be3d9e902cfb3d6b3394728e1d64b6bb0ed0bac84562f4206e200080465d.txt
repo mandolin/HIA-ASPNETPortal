@@ -1,0 +1,5 @@
+        internal static string Common_OverdueSuffix {
+            get {
+                return ResourceManager.GetString("Common_OverdueSuffix", resourceCulture);
+            }
+        }

@@ -1,0 +1,38 @@
+        private static string SanitizeFileStem(string value)
+        {
+            // <lang>
+            //   <zh-CN>将 null 视为空主名，并固定当前平台非法字符集合作为替换依据。</zh-CN>
+            //   <en>Treat null as an empty stem and use the current platform's invalid-character set for replacement.</en>
+            // </lang>
+            string source = value ?? string.Empty;
+            // <lang>
+            //   <zh-CN>逐字符替换控制码、引号和平台非法字符，避免主名进入响应头或物理路径时形成结构。</zh-CN>
+            //   <en>Replace control codes, quotes, and platform-invalid characters one by one so the stem cannot form response-header or physical-path structure.</en>
+            // </lang>
+            char[] invalidCharacters = Path.GetInvalidFileNameChars();
+            var builder = new StringBuilder();
+            foreach (char character in source)
+            {
+                if (char.IsControl(character) || character == '"' || character == '\'' ||
+                    Array.IndexOf(invalidCharacters, character) >= 0)
+                {
+                    builder.Append('-');
+                }
+                else
+                {
+                    builder.Append(character);
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>去除边界空格、点和替换横线；完全为空时使用低敏固定名称。</zh-CN>
+            //   <en>Trim boundary spaces, dots, and replacement hyphens; use a fixed low-sensitivity name when nothing remains.</en>
+            // </lang>
+            string sanitized = builder.ToString().Trim(' ', '.', '-');
+            if (sanitized.Length == 0)
+            {
+                sanitized = "document";
+            }
+
+            return sanitized.Substring(0, Math.Min(sanitized.Length, StorageStemMaximumLength));
+        }

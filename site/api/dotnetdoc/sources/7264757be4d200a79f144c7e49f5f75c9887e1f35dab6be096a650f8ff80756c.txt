@@ -1,0 +1,6 @@
+        public static ConcurrentDictionary<string, object> ExtInfo
+            // <lang>
+            //   <zh-CN>初始化为线程安全字典，适配旧 WebForms 多请求并发访问的静态共享模式。</zh-CN>
+            //   <en>Initialize as a thread-safe dictionary to fit the legacy WebForms static sharing pattern under concurrent requests.</en>
+            // </lang>
+            = new ConcurrentDictionary<string, object>();

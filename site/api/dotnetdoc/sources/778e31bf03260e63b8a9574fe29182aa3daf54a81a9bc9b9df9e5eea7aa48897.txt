@@ -1,0 +1,5 @@
+        internal static string EditHtml_HintMobileFallback {
+            get {
+                return ResourceManager.GetString("EditHtml_HintMobileFallback", resourceCulture);
+            }
+        }

@@ -1,0 +1,52 @@
+        public void UpdateDocument(int moduleId, int itemId, string userName, string name, string url, string category,
+                                   byte[] content, int size, string contentType)
+        {
+            // <lang>
+            //   <zh-CN>用户名只做旧表必需的空值回退，不做身份重判；真实身份和权限已经由页面层建立。</zh-CN>
+            //   <en>The user name receives only the legacy-table required blank fallback and is not re-authenticated here; real identity and permission are established by the page layer.</en>
+            // </lang>
+            userName = string.IsNullOrEmpty(userName) ? "unknown" : userName;
+
+            // <lang>
+            //   <zh-CN>本地实体变量在新增和更新分支之间共享，生命周期只覆盖本次保存批次。</zh-CN>
+            //   <en>The local entity variable is shared by the create and update branches and lives only for this save batch.</en>
+            // </lang>
+            DocumentItem item;
+            if (itemId == 0)
+            {
+                // <lang>
+                //   <zh-CN>零标识保持旧约定表示新增；新实体先纳入 EF 集合，随后统一赋值，避免新增/更新字段漂移。</zh-CN>
+                //   <en>The zero identifier keeps the legacy convention for creation; add the new entity to the EF set first, then use the common assignment block to avoid create/update field drift.</en>
+                // </lang>
+                item = new DocumentItem();
+                _context.Documents.Add(item);
+            }
+            else
+            {
+                // <lang>
+                //   <zh-CN>非零标识表示更新既有记录；缺失或重复记录应作为完整性/归属前置校验失败暴露。</zh-CN>
+                //   <en>A non-zero identifier updates an existing record; missing or duplicate records should surface as integrity or prevalidated-ownership failures.</en>
+                // </lang>
+                item = _context.Documents.Single(record => record.ItemId == itemId);
+            }
+
+            // <lang>
+            //   <zh-CN>以下赋值是旧文档表的完整持久化投影；策略校验后的 URL/上传路径、分类和历史内容占位由调用方按契约传入。</zh-CN>
+            //   <en>The assignments below are the full persistence projection for the legacy document table; the caller supplies policy-validated URL/upload path, category, and legacy-content placeholders according to contract.</en>
+            // </lang>
+            item.ModuleId = moduleId;
+            item.CreatedByUser = userName;
+            item.CreatedDate = DateTime.Now;
+            item.FileFriendlyName = name;
+            item.FileNameUrl = url;
+            item.Category = category;
+            item.Content = content;
+            item.ContentSize = size;
+            item.ContentType = contentType;
+
+            // <lang>
+            //   <zh-CN>提交当前新增或更新批次；本方法不附带文件移动、MIME 复核、审计或浏览器可见输出。</zh-CN>
+            //   <en>Commit the current create or update batch; this method does not perform file moves, MIME re-checks, auditing, or browser-visible output.</en>
+            // </lang>
+            _context.SaveChanges();
+        }

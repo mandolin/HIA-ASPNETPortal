@@ -1,0 +1,13 @@
+        protected void CancelBtn_Click(Object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>取消也需要验证当前请求，返回地址只能由已解析的 Tab 参数构造。</zh-CN>
+            //   <en>Cancellation still validates the request, and the return URL can only be built from parsed Tab parameters.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, BuildPortalReturnUrl());
+        }

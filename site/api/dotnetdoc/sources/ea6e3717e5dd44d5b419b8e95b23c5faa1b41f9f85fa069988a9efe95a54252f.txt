@@ -1,0 +1,9 @@
+        private void BindData()
+        {
+            // <lang>
+            //   <zh-CN>从旧模块定义数据源绑定只读列表，不在控件绑定阶段执行写入。</zh-CN>
+            //   <en>Bind the read-only list from the legacy definition source without performing writes during binding.</en>
+            // </lang>
+            defsList.DataSource = ModuleDefConfig.GetModuleDefinitions();
+            defsList.DataBind();
+        }

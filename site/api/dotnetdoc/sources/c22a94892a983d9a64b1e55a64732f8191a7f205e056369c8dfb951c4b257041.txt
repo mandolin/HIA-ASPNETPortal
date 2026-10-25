@@ -1,0 +1,2 @@
+<%@ Page Language="c#" CodeBehind="Register.aspx.cs" AutoEventWireup="True" Inherits="ASPNET.StarterKit.Portal.Register"
+    MasterPageFile="~/Default.master" %>

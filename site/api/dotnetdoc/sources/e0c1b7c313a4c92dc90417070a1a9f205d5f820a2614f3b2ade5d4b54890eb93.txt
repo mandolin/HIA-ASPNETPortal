@@ -1,0 +1,4 @@
+        public IUserItem GetSingleUser(string name)
+        {
+            return _context.Users.Single(i => i.Name == name);
+        }

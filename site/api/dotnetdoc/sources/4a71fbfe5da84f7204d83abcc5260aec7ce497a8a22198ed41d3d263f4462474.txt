@@ -1,0 +1,5 @@
+        internal static string Admin_TabLayout_LabelMobileTabName {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_LabelMobileTabName", resourceCulture);
+            }
+        }

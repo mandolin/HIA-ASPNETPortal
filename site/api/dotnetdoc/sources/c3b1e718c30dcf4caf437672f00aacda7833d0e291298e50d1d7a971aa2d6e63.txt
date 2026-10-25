@@ -1,0 +1,6 @@
+                <%--
+                <lang>
+                  <zh-CN>Apply_Click 负责将设置提交到既有持久化流程；标记层只提供命令入口，不实现保存或回滚。</zh-CN>
+                  <en>Apply_Click submits settings to the existing persistence flow; the markup provides only the command entry and does not implement saving or rollback.</en>
+                </lang>
+                --%>

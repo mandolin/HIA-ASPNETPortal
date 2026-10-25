@@ -1,0 +1,77 @@
+        protected void CreateButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>创建流程按创建权限、期限格式和数据服务顺序推进；门禁失败保持页面提示，不进入持久化。</zh-CN>
+            //   <en>The create flow proceeds through create permission, due-date format, and data-service gates; failures stay as page messages and never reach persistence.</en>
+            // </lang>
+            if (!EnsureCanCreateItems())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>后台表单期限统一解释为 UTC；空值表示未设置，非法格式不会写入事项。</zh-CN>
+            //   <en>Interpret administration-form due dates as UTC; blank means unset and invalid formats never write an item.</en>
+            // </lang>
+            DateTime? dueUtc;
+            if (!TryParseDueUtc(DueUtcTextBox.Text, out dueUtc))
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageDueUtcFormat;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>父事项编号为空表示顶层事项；非空必须是正整数，具体存在性、终态与层级深度校验由数据层承担。</zh-CN>
+            //   <en>A blank parent code marks a top-level item; a non-blank value must be a positive integer, while existence, terminal state, and depth checks belong to the data layer.</en>
+            // </lang>
+            long? parentItemId;
+            if (!TryParseParentItemId(ParentItemTextBox.Text, out parentItemId))
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParentItemInvalid;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>创建请求保留后台指定的处理角色和当前管理员身份，服务层负责事实与状态写入。</zh-CN>
+            //   <en>The create request preserves the administration-selected handling role and current administrator identity while the service writes the fact and state.</en>
+            // </lang>
+            CollaborationItemResult result = CollaborationItemDb.CreateSubmittedItem(
+                new CollaborationItemCreateRequest
+                {
+                    ItemTypeKey = ItemTypeList.SelectedValue,
+                    Title = TitleTextBox.Text,
+                    Summary = SummaryTextBox.Text,
+                    Description = DescriptionTextBox.Text,
+                    InitiatorUserId = GetCurrentUserId(),
+                    OwnerRoleKey = OwnerRoleKeyTextBox.Text,
+                    PriorityKey = PriorityList.SelectedValue,
+                    DueUtc = dueUtc,
+                    SubmittedUtc = DateTime.UtcNow,
+                    SubmittedBy = GetCurrentUserName(),
+                    ParentItemId = parentItemId
+                });
+
+            if (!result.Succeeded)
+            {
+                MessageLabel.Text = result.Message;
+                BindItems();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>事项创建成功后记录审计，再补建待办投影；待办失败不回滚事项事实。</zh-CN>
+            //   <en>Record audit after item creation succeeds, then ensure the work-item projection; projection failure does not roll back the item fact.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemSubmitted,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item submitted. ItemCode=" + result.ItemCode,
+                Context);
+
+            TryEnsureWorkItem(result.ItemId, result.ItemCode, TitleTextBox.Text, SummaryTextBox.Text, OwnerRoleKeyTextBox.Text, dueUtc);
+            ClearCreateForm();
+            MessageLabel.Text = lang.Admin_CollaborationItems_MessageSubmitted;
+            BindItems();
+        }

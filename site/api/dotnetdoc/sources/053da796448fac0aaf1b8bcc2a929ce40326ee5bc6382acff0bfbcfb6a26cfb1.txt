@@ -1,0 +1,24 @@
+        private void TryCompleteWorkItem(long applicationId, string actionKey, string reviewComment)
+        {
+            // <lang>
+            //   <zh-CN>待办投影只反映审核入口是否已处理，WorkflowEvent 才是业务流程事实；待办写入失败不回滚申请状态。</zh-CN>
+            //   <en>The work-item projection only reflects whether the review entry has been handled, while WorkflowEvent is the business-flow fact; work-item failures do not roll back application state.</en>
+            // </lang>
+            if (WorkItemDb == null || applicationId <= 0)
+            {
+                return;
+            }
+
+            WorkItemDb.CompleteBusinessWorkItem(
+                new PortalWorkItemCompletionRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.BusinessApplication,
+                    BusinessId = applicationId.ToString(CultureInfo.InvariantCulture),
+                    EventType = MapWorkItemEventType(actionKey),
+                    TargetStatus = PortalWorkItemStatuses.Completed,
+                    ActorUserId = GetCurrentUserId(),
+                    ActorName = GetCurrentUserName(),
+                    Comment = NormalizeInput(reviewComment, 1000),
+                    OccurredUtc = DateTime.UtcNow
+                });
+        }

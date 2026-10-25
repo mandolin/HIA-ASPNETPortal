@@ -1,0 +1,5 @@
+        internal static string Admin_EmployeeProfileCorrectionRequests_ColumnCurrentProposed {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeProfileCorrectionRequests_ColumnCurrentProposed", resourceCulture);
+            }
+        }

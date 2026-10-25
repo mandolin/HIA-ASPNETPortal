@@ -1,0 +1,15 @@
+        private static byte[] DeriveHash(string password, byte[] salt, int iterationCount)
+        {
+            // <lang>
+            //   <zh-CN>PBKDF2 实例持有密码派生过程中的内部状态，限定在 using 块内释放。</zh-CN>
+            //   <en>The PBKDF2 instance holds internal state for password derivation and is released within this using block.</en>
+            // </lang>
+            using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterationCount, HashAlgorithmName.SHA256))
+            {
+                // <lang>
+                //   <zh-CN>派生长度固定为当前格式约定的字节数，确保保存与验证时的比较尺寸一致。</zh-CN>
+                //   <en>The derived length is fixed to the byte count required by the current format, keeping persistence and verification comparison sizes aligned.</en>
+                // </lang>
+                return deriveBytes.GetBytes(HashLength);
+            }
+        }

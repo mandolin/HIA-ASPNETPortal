@@ -1,0 +1,37 @@
+        private PortalLoginIdentifierResolution ResolveEmail(string normalizedInput)
+        {
+            // <lang>
+            //   <zh-CN>暂存新旧来源的候选用户标识；集合只在当前解析中存活，不保存邮箱原文。</zh-CN>
+            //   <en>Hold candidate user ids from new and legacy sources; the collection lives only during current resolution and does not retain raw email text.</en>
+            // </lang>
+            var ids = new List<int>();
+
+            if (userProfilesAvailable)
+            {
+                // <lang>
+                //   <zh-CN>合并资料扩展表邮箱候选；后续会去重并至多保留两个以识别歧义。</zh-CN>
+                //   <en>Merge profile-extension email candidates; later processing de-duplicates and retains at most two to identify ambiguity.</en>
+                // </lang>
+                ids.AddRange(QueryIds(
+                    "SELECT [UserId] FROM [dbo].[PortalBiz_UserProfiles] WHERE [PreferredEmail] = @p0",
+                    normalizedInput));
+            }
+
+            ids.AddRange(QueryIds(
+                "SELECT [UserID] FROM [dbo].[Portal_Users] WHERE [Email] = @p0",
+                normalizedInput));
+
+            // <lang>
+            //   <zh-CN>按用户标识去重并截断为两个候选；一个即唯一，两个即歧义，无需扫描全部记录。</zh-CN>
+            //   <en>De-duplicate by user id and cap at two candidates; one is unique and two are ambiguous without scanning all records.</en>
+            // </lang>
+            List<int> distinctIds = ids.Distinct().Take(2).ToList();
+            if (distinctIds.Count == 1)
+            {
+                return PortalLoginIdentifierResolution.CreateFound(distinctIds[0]);
+            }
+
+            return distinctIds.Count > 1
+                ? PortalLoginIdentifierResolution.CreateAmbiguous()
+                : PortalLoginIdentifierResolution.CreateNotFound();
+        }

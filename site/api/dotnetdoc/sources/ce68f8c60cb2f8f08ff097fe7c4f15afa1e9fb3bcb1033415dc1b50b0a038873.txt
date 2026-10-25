@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleCatalog_DiscoveryNotePost {
+            get {
+                return ResourceManager.GetString("Admin_ModuleCatalog_DiscoveryNotePost", resourceCulture);
+            }
+        }

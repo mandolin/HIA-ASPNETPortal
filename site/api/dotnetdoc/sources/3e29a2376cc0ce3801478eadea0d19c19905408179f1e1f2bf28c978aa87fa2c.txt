@@ -1,0 +1,9 @@
+        protected void RestoreUser_Click(object sender, EventArgs e)
+        {
+            ChangeUserProfileStatus(
+                PortalUserProfileStatuses.Active,
+                PortalOperationAuditEvents.UserRestored,
+                "User account restored by administrator.",
+                lang.Admin_ManageUsers_MessageUserRestored,
+                lang.Admin_ManageUsers_MessageUserRestoredFailed);
+        }

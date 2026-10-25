@@ -1,0 +1,19 @@
+        public void DeleteModule(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>先删除旧门户附属数据，避免模块行删除后遗留孤儿设置或权限记录。</zh-CN>
+            //   <en>Delete legacy Portal auxiliary data first to avoid orphaned settings or permission rows after the module row is removed.</en>
+            // </lang>
+            _portalDb.DeleteModule(moduleId);
+
+            var moduleRow = _items.Single(i => i.ModuleId == moduleId);
+            _context.Modules.Remove(moduleRow);
+
+            _context.SaveChanges();
+
+            // <lang>
+            //   <zh-CN>删除后刷新快照，保证同一请求链不再看到已删除模块。</zh-CN>
+            //   <en>Refresh the snapshot after deletion so the same request chain no longer sees the removed module.</en>
+            // </lang>
+            _items = _context.Modules.ToList();
+        }

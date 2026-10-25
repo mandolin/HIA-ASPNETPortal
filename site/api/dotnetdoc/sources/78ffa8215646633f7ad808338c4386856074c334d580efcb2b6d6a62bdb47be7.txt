@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>用户下拉列表只提供当前角色的候选用户键；添加命令必须由 code-behind 重新校验用户存在性、角色授权和重复成员状态。</zh-CN>
+                    <en>The user dropdown only supplies candidate user keys for the current role; code-behind must revalidate user existence, role authorization, and duplicate membership before adding.</en>
+                  </lang>
+                --%>

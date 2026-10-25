@@ -1,0 +1,5 @@
+        internal static string Admin_ModuleDefinitions_Title {
+            get {
+                return ResourceManager.GetString("Admin_ModuleDefinitions_Title", resourceCulture);
+            }
+        }

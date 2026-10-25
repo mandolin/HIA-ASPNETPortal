@@ -1,0 +1,1 @@
+        string ModuleTitleLocalizedJson { get; set; }

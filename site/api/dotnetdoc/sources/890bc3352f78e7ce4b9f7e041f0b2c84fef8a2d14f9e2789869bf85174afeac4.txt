@@ -1,0 +1,36 @@
+        private bool BindData()
+        {
+            // <lang>
+            //   <zh-CN>详情快照必须从当前消息标识重新读取，防止回发期间使用过期或跨模块缓存对象。</zh-CN>
+            //   <en>The detail snapshot must be reloaded from the current message identifier to avoid using stale or cross-module cached objects during postback.</en>
+            // </lang>
+            IDiscussionItem item = DiscussionDB.GetSingleMessage(itemId);
+            if (item == null || item.ModuleID != moduleId)
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>历史讨论数据可能已经 HTML 编码；展示前先解码再编码，尽量得到稳定普通文本输出。</zh-CN>
+            //   <en>Legacy discussion data may already be HTML-encoded; decode and then encode before display to produce stable ordinary-text output.</en>
+            // </lang>
+            Subject.Text = EncodeDisplayText(item.Title);
+            Body.Text = EncodeDisplayText(item.Body);
+            CreatedByUser.Text = EncodeDisplayText(item.CreatedByUser ?? lang.Legacy_Discussion_AnonymousAuthor);
+            CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("d") : lang.Legacy_Discussion_UnknownDate;
+
+            // <lang>
+            //   <zh-CN>回复标题使用解码后的主题文本生成，避免把历史实体文本继续累积到输入框中。</zh-CN>
+            //   <en>The reply title is generated from decoded subject text so historical entity text does not keep accumulating in the input box.</en>
+            // </lang>
+            TitleField.Text = ReTitle(Server.HtmlDecode(item.Title ?? string.Empty));
+
+            // <lang>
+            //   <zh-CN>上一条/下一条链接在旧页面中未实现，绑定阶段保持隐藏以免暴露空导航锚点。</zh-CN>
+            //   <en>Previous/next links are not implemented in the legacy page, so binding keeps them hidden to avoid exposing empty navigation anchors.</en>
+            // </lang>
+            prevItem.Visible = false;
+            nextItem.Visible = false;
+            return true;
+        }

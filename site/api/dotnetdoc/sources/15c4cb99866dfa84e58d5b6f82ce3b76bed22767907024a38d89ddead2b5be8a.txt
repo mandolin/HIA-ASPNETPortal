@@ -1,0 +1,5 @@
+        internal static string Common_ModulePathMessageNotAscx {
+            get {
+                return ResourceManager.GetString("Common_ModulePathMessageNotAscx", resourceCulture);
+            }
+        }

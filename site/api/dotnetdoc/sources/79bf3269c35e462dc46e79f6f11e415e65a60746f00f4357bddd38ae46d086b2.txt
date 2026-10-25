@@ -1,0 +1,8 @@
+        public IEnumerable<ITabItem> GetTabs()
+        {
+            // <lang>
+            //   <zh-CN>`TabId` 只作为同序号时的稳定兜底，避免维护界面因为数据库返回顺序变化而抖动。</zh-CN>
+            //   <en>`TabId` is only a stable tiebreaker for identical sort values, preventing the maintenance UI from shifting with database return order.</en>
+            // </lang>
+            return _tabs.OrderBy(i => i.TabOrder).ThenBy(i => i.TabId);
+        }

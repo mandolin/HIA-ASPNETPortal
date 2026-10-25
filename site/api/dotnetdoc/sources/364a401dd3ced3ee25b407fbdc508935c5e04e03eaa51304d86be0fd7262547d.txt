@@ -1,0 +1,1 @@
+        public DbSet<RegistrationInviteItem> RegistrationInvites { get; set; }

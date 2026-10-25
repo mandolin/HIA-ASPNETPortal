@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>P6.2 新登录名字段由后台校验唯一性和格式。</zh-CN>
+                    <en>The P6.2 login-name field has uniqueness and format validation in code-behind.</en>
+                  </lang>
+                --%>

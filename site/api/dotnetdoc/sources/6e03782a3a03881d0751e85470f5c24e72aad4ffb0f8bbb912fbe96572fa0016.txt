@@ -1,0 +1,54 @@
+        internal PortalLoginIdentifierResolution Resolve(string input)
+        {
+            // <lang>
+            //   <zh-CN>裁剪一次性登录输入；空白输入立即得到终止性未命中，不访问数据库。</zh-CN>
+            //   <en>Trim the one-time sign-in input; blank input immediately yields terminal not-found without database access.</en>
+            // </lang>
+            string normalizedInput = Normalize(input);
+            if (string.IsNullOrEmpty(normalizedInput))
+            {
+                return PortalLoginIdentifierResolution.CreateNotFound();
+            }
+
+            if (userProfilesAvailable)
+            {
+                // <lang>
+                //   <zh-CN>先查询资料表中应唯一的登录名；歧义是终止性安全结果，未命中才允许继续旧来源。</zh-CN>
+                //   <en>Query the profile table's expected-unique login name first; ambiguity is terminal and safe, while no match alone permits legacy sources to continue.</en>
+                // </lang>
+                PortalLoginIdentifierResolution profileLoginName = ResolveSingle(
+                    "SELECT TOP (2) [UserId] FROM [dbo].[PortalBiz_UserProfiles] WHERE [LoginName] = @p0",
+                    normalizedInput);
+                if (profileLoginName.HasDecision)
+                {
+                    return profileLoginName;
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>查询旧用户表名称，保留与资料来源相同的唯一/歧义判定语义。</zh-CN>
+            //   <en>Query the legacy user-table name while retaining the same unique-versus-ambiguous decision semantics as the profile source.</en>
+            // </lang>
+            PortalLoginIdentifierResolution legacyName = ResolveSingle(
+                "SELECT TOP (2) [UserID] FROM [dbo].[Portal_Users] WHERE [Name] = @p0",
+                normalizedInput);
+            if (legacyName.HasDecision)
+            {
+                return legacyName;
+            }
+
+            if (employeeCodeSignInAvailable)
+            {
+                // <lang>
+                //   <zh-CN>仅在员工和绑定表可用时尝试工号，并要求两端 Active 才返回门户用户。</zh-CN>
+                //   <en>Attempt employee code only when employee and binding tables are available, requiring both sides to be Active before returning a portal user.</en>
+                // </lang>
+                PortalLoginIdentifierResolution employeeCode = ResolveEmployeeCode(normalizedInput);
+                if (employeeCode.HasDecision)
+                {
+                    return employeeCode;
+                }
+            }
+
+            return ResolveEmail(normalizedInput);
+        }

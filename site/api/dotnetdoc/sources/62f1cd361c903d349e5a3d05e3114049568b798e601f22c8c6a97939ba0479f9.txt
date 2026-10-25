@@ -1,0 +1,1 @@
+        public string Code { get; private set; }

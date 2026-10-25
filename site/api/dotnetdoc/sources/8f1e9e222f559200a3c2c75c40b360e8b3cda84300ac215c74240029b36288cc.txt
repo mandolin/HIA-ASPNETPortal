@@ -1,0 +1,9 @@
+        private static string NormalizeInput(string value, int maxLength)
+        {
+            // <lang>
+            //   <zh-CN>该 helper 只负责输入边界归一化，不承担权限、状态或持久化职责。</zh-CN>
+            //   <en>This helper performs input-boundary normalization only; authorization, state, and persistence remain elsewhere.</en>
+            // </lang>
+            string normalized = (value ?? string.Empty).Trim();
+            return normalized.Length <= maxLength ? normalized : normalized.Substring(0, maxLength);
+        }

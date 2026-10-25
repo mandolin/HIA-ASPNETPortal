@@ -1,0 +1,37 @@
+        public IList<int> GetOrganizationUnitSubtreeIds(int organizationUnitId)
+        {
+            if (organizationUnitId <= 0 || !IsSchemaAvailable())
+            {
+                return new List<int>();
+            }
+
+            // <lang>
+            //   <zh-CN>深度上限与协同事项层级（≤5）对齐；写入侧已有防环，此处仍保留上限作为纵深防御。</zh-CN>
+            //   <en>The depth cap aligns with the collaboration-item hierarchy (≤5); the write side already guards cycles, and the cap remains as defense in depth.</en>
+            // </lang>
+            const int maxDepth = 5;
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>复用既有组织投影：未选择的列保持默认值，不影响只取两个标识列的目的。</zh-CN>
+                //   <en>Reuse the existing organization projection: unselected columns keep their default values and do not affect the goal of reading only two identifier columns.</en>
+                // </lang>
+                var rows = _context.Database.SqlQuery<OrganizationUnitProjection>(
+                    @"
+SELECT
+    [OrganizationUnitId],
+    [ParentOrganizationUnitId]
+FROM [dbo].[PortalBiz_OrganizationUnits];").ToList();
+
+                IList<PortalOrganizationTreeEdge> edges = rows
+                    .Select(row => new PortalOrganizationTreeEdge(row.OrganizationUnitId, row.ParentOrganizationUnitId))
+                    .ToList();
+
+                return PortalOrganizationTreeExpander.ExpandSubtreeIds(edges, organizationUnitId, maxDepth);
+            }
+            catch (Exception)
+            {
+                return new List<int>();
+            }
+        }

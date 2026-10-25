@@ -1,0 +1,5 @@
+        internal static string ExpenseReimbursement_LabelInvoice {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_LabelInvoice", resourceCulture);
+            }
+        }

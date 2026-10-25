@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel/Delete 进入链接记录的既有服务器流程；按钮不自行解析 URL、改变排序或绕过删除权限。</zh-CN>
+                    <en>Update, Cancel, and Delete enter the existing server flow for the link record; the buttons do not parse URLs, change ordering, or bypass delete authorization.</en>
+                </lang>
+            --%>

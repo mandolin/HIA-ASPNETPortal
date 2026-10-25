@@ -1,0 +1,5 @@
+        internal static string DiscussDetails_Heading {
+            get {
+                return ResourceManager.GetString("DiscussDetails_Heading", resourceCulture);
+            }
+        }

@@ -1,0 +1,96 @@
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先解析当前身份，再执行权限、期限、内容和数据服务门禁；任何门禁失败都只显示提示并保持页面闭环。</zh-CN>
+            //   <en>Resolve the current identity before permission, due-date, content, and data-service gates; every failed gate stays within the page flow and only reports a message.</en>
+            // </lang>
+            int userId = GetCurrentUserId();
+            if (userId <= 0)
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSignInRequiredSubmit);
+                BindModule();
+                return;
+            }
+
+            if (!PortalAuthorization.HasAnyPermission(
+                PortalPermissionKeys.BusinessCollaborationCreate,
+                PortalPermissionKeys.BusinessCollaborationAdmin))
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageNoPermissionSubmit);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>期限按 UTC 解析；空值代表未设置，格式错误不会进入持久化。</zh-CN>
+            //   <en>Parse the due date as UTC; an empty value means unset, while an invalid format never reaches persistence.</en>
+            // </lang>
+            DateTime? dueUtc;
+            if (!TryParseDueUtc(DueUtcTextBox.Text, out dueUtc))
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageInvalidDueUtc);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>在服务调用前统一裁剪文本，保持 UI 输入与领域字段长度契约一致。</zh-CN>
+            //   <en>Normalize text before the service call so UI input remains within the domain field-length contract.</en>
+            // </lang>
+            string title = NormalizeInput(TitleTextBox.Text, 200);
+            string summary = NormalizeInput(SummaryTextBox.Text, 500);
+            string description = NormalizeInput(DescriptionTextBox.Text, 4000);
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageTitleRequired);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(summary) && string.IsNullOrWhiteSpace(description))
+            {
+                ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageContentRequired);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>协同事项服务写入提交事实和状态；提交人和处理角色采用当前上下文的稳定身份键。</zh-CN>
+            //   <en>The collaboration-item service writes the submission fact and state; submitter and handling role use stable identity keys from the current context.</en>
+            // </lang>
+            CollaborationItemResult result = CollaborationItemDb.CreateSubmittedItem(
+                new CollaborationItemCreateRequest
+                {
+                    ItemTypeKey = ItemTypeList.SelectedValue,
+                    Title = title,
+                    Summary = summary,
+                    Description = description,
+                    InitiatorUserId = userId,
+                    OwnerRoleKey = PortalPermissionKeys.BusinessCollaborationHandle,
+                    PriorityKey = PriorityList.SelectedValue,
+                    DueUtc = dueUtc,
+                    SubmittedUtc = DateTime.UtcNow,
+                    SubmittedBy = GetCurrentUserName()
+                });
+
+            if (!result.Succeeded)
+            {
+                ShowMessage(result.Message);
+                BindModule();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>领域事实成功后记录操作审计；后续待办投影失败不回滚已提交事项。</zh-CN>
+            //   <en>Record operation audit after the domain fact succeeds; a later work-item projection failure must not roll back the submitted item.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemSubmitted,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item submitted from EnterpriseCapabilityWorkbench. ItemCode=" + result.ItemCode,
+                Context);
+
+            TryEnsureWorkItem(result.ItemId, result.ItemCode, title, summary, dueUtc);
+            ClearSubmitForm();
+            ShowMessage(lang.EnterpriseCapabilityWorkbench_MessageSubmittedPrefix + result.ItemCode);
+            BindModule();
+        }

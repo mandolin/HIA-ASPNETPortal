@@ -1,0 +1,72 @@
+        public static string GetGroupKey(string entryKey)
+        {
+            // <lang>
+            //   <zh-CN>空键无法分组，直接返回空字符串，避免把未知入口误归入某个业务组。</zh-CN>
+            //   <en>A blank key cannot be grouped; return an empty string so unknown entries are never mis-assigned to a business group.</en>
+            // </lang>
+            if (string.IsNullOrWhiteSpace(entryKey))
+            {
+                return string.Empty;
+            }
+
+            string mapped;
+            if (LegacyGroupMap.TryGetValue(entryKey.Trim(), out mapped))
+            {
+                return mapped;
+            }
+
+            // <lang>
+            //   <zh-CN>按稳定键前缀判定新命名入口的分组；前缀不匹配时返回空字符串。</zh-CN>
+            //   <en>Match newly named entries by stable-key prefix; return an empty string when no prefix matches.</en>
+            // </lang>
+            if (entryKey.StartsWith("Core.Admin.", StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupCoreAdmin;
+            }
+
+            if (entryKey.StartsWith("Admin.Capability.", StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupAdminCapability;
+            }
+
+            if (entryKey.StartsWith("Admin.Modules.", StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupAdminModules;
+            }
+
+            if (entryKey.StartsWith("Admin.Ops.", StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupAdminOps;
+            }
+
+            if (entryKey.StartsWith("Admin.Presentation.", StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupAdminPresentation;
+            }
+
+            if (entryKey.StartsWith("Admin.Account.", StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupAdminAccount;
+            }
+
+            if (entryKey.StartsWith("Admin.Error.", StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupAdminError;
+            }
+
+            // <lang>
+            //   <zh-CN>Tab 条目自成一组的判定必须早于普通业务前缀：它只做门控，不能因为键形相近而被并入 Admin 动作区的相关入口。</zh-CN>
+            //   <en>The tab-entry group check must run before ordinary business prefixes: tab entries exist for gating only and must never be folded into an Admin action-area related group because their keys look similar.</en>
+            // </lang>
+            if (entryKey.StartsWith(TabEntryKeyPrefix, StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupTab;
+            }
+
+            if (entryKey.StartsWith("Enterprise.", StringComparison.OrdinalIgnoreCase))
+            {
+                return GroupEnterprise;
+            }
+
+            return string.Empty;
+        }

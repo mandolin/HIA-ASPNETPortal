@@ -1,0 +1,43 @@
+        public PortalNavigationEntry(
+            string entryKey,
+            PortalNavigationEntryKind entryKind,
+            string displayNameZhCn,
+            string displayNameEn,
+            string target,
+            PortalNavigationVisibilityMode visibilityMode,
+            PortalNavigationLifecycleState lifecycleState,
+            int sortOrder,
+            IEnumerable<string> requiredRoles,
+            IEnumerable<string> requiredPermissionKeys,
+            IEnumerable<string> requiredPackageIds,
+            IEnumerable<string> requiredProfiles,
+            string notes)
+        {
+            // <lang>
+            //   <zh-CN>构造器只建立静态导航元数据：稳定键必须存在；显示、目标和说明可为空；它不读取配置、不执行路由，也不将任一依赖解释为授权成功。</zh-CN>
+            //   <en>The constructor creates static navigation metadata only: the stable key must exist while display, target, and notes may be blank; it reads no configuration, performs no routing, and does not interpret any dependency as successful authorization.</en>
+            // </lang>
+            EntryKey = NormalizeRequired(entryKey, "entryKey");
+
+            // <lang>
+            //   <zh-CN>枚举、排序和可选文本按调用方登记值保存；真正的可访问性仍由消费边界验证，不能由元数据对象自行放行。</zh-CN>
+            //   <en>Store enum, order, and optional text as registered by the caller; actual accessibility remains verified by consuming boundaries and cannot be granted by this metadata object itself.</en>
+            // </lang>
+            EntryKind = entryKind;
+            DisplayNameZhCn = displayNameZhCn ?? string.Empty;
+            DisplayNameEn = displayNameEn ?? string.Empty;
+            Target = target ?? string.Empty;
+            VisibilityMode = visibilityMode;
+            LifecycleState = lifecycleState;
+            SortOrder = sortOrder;
+
+            // <lang>
+            //   <zh-CN>四类依赖序列分别复制、去空白、按大小写不敏感去重并只读化，防止外部枚举在注册后改变可见性提示。</zh-CN>
+            //   <en>Copy, trim, case-insensitively deduplicate, and make all four dependency sequences read-only so external enumeration cannot alter visibility hints after registration.</en>
+            // </lang>
+            RequiredRoles = NormalizeList(requiredRoles);
+            RequiredPermissionKeys = NormalizeList(requiredPermissionKeys);
+            RequiredPackageIds = NormalizeList(requiredPackageIds);
+            RequiredProfiles = NormalizeList(requiredProfiles);
+            Notes = notes ?? string.Empty;
+        }

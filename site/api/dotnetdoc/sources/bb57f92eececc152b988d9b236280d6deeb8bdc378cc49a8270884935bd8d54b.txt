@@ -1,0 +1,40 @@
+        protected void AddRole_Click(object sender, EventArgs e)
+        {
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            IRoleItem role;
+            if (!TryGetSelectedPortalRole(out role))
+            {
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>角色成员写入先于运营审计；审计失败不会把已完成的角色关系写入误报为已回滚。</zh-CN>
+                //   <en>Role membership persistence precedes operations audit; an audit failure must not be read as rollback of an already completed role change.</en>
+                // </lang>
+                RolesDB.AddUserRole(role.RoleId, userId);
+                PortalOperationAudit.Record(
+                    PortalOperationAuditEvents.UserAdministrationCategory,
+                    PortalOperationAuditEvents.RoleAdded,
+                    PortalOperationAuditEvents.UserTargetType,
+                    userId.ToString(),
+                    "Added role id " + role.RoleId + " to user.",
+                    Context);
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageRoleJoined, false);
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.ManageUsers.AddRole",
+                    "Adding a role to user failed. UserId=" + userId + "; RoleId=" + role.RoleId,
+                    exception,
+                    Context);
+                ShowRegistrationMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_ManageUsers_MessageJoinRoleFailed, eventId), true);
+            }
+        }

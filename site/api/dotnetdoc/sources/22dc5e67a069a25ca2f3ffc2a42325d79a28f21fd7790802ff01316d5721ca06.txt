@@ -1,0 +1,6 @@
+        <%--
+        <lang>
+          <zh-CN>状态筛选项由 code-behind 在首次加载时从稳定状态契约建立；标记层只承载已授权页面的控件状态，不直接读取数据库或解释状态迁移。</zh-CN>
+          <en>Status-filter options are created by code-behind from the stable status contract during the initial load; this markup layer carries only the authorized page control state and neither reads the database nor interprets state transitions.</en>
+        </lang>
+        --%>

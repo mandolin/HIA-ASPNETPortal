@@ -1,0 +1,8 @@
+        public IEnumerable<IContactItem> GetContacts(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>只按模块过滤，不在数据层追加排序规则；旧页面按数据库默认顺序展示。</zh-CN>
+            //   <en>Filter only by module and do not add a data-layer ordering rule; legacy pages display the database default order.</en>
+            // </lang>
+            return _context.Contacts.Where(i => i.ModuleId == moduleId).ToList<IContactItem>();
+        }

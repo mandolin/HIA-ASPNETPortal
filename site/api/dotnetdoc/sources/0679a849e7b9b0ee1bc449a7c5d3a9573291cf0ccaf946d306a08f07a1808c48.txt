@@ -1,0 +1,24 @@
+        public IOrganizationUnitInfo GetOrganizationUnitById(int organizationUnitId)
+        {
+            if (organizationUnitId <= 0 || !IsSchemaAvailable())
+            {
+                return null;
+            }
+
+            OrganizationUnitProjection row = _context.Database.SqlQuery<OrganizationUnitProjection>(
+                @"
+SELECT
+    [OrganizationUnitId],
+    [ParentOrganizationUnitId],
+    [OrganizationCode],
+    [DisplayName],
+    [SortOrder],
+    [IsActive],
+    [CreatedUtc],
+    [UpdatedUtc]
+FROM [dbo].[PortalBiz_OrganizationUnits]
+WHERE [OrganizationUnitId] = @OrganizationUnitId;",
+                IntParameter("@OrganizationUnitId", organizationUnitId)).SingleOrDefault();
+
+            return row == null ? null : CreateOrganizationInfo(row);
+        }

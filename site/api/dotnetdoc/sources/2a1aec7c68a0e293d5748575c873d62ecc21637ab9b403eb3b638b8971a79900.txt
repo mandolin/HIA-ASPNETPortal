@@ -1,0 +1,36 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存前重新核验模块编辑权限，避免凭首次加载状态写入模块设置。</zh-CN>
+            //   <en>Module edit permission is rechecked before saving so module settings are not written based on first-load state.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>xmlPath 与 xslPath 保存通过部署资源策略后的应用内虚拟路径；空输入表示清空对应设置。</zh-CN>
+            //   <en>xmlPath and xslPath hold in-application virtual paths after deployment-resource policy validation; blank input clears the corresponding setting.</en>
+            // </lang>
+            string xmlPath;
+            string xslPath;
+            if (!TryNormalizeOptionalDeploymentPath(XmlDataSrc.Text, out xmlPath) ||
+                !TryNormalizeOptionalDeploymentPath(XslTransformSrc.Text, out xslPath))
+            {
+                // <lang>
+                //   <zh-CN>路径策略会拒绝应用外路径、远程地址和不存在的资源；页面只返回低敏提示，不暴露物理路径。</zh-CN>
+                //   <en>The path policy rejects outside-application paths, remote addresses, and missing resources; the page returns only low-sensitivity guidance and does not expose physical paths.</en>
+                // </lang>
+                ShowValidationMessage(lang.EditXml_MessageInvalidResourcePath);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>只在路径已被标准化后写入模块设置，避免之后的渲染阶段再处理不可信输入。</zh-CN>
+            //   <en>Write module settings only after paths are normalized so later rendering stages do not process untrusted input.</en>
+            // </lang>
+            ModulesConfig.UpdateModuleSetting(moduleId, "xmlsrc", xmlPath);
+            ModulesConfig.UpdateModuleSetting(moduleId, "xslsrc", xslPath);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_MessageUserNotResolved {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageUserNotResolved", resourceCulture);
+            }
+        }

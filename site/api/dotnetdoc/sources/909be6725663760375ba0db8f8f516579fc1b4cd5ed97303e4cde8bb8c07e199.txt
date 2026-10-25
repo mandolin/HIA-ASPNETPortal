@@ -1,0 +1,28 @@
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>快捷链接每次请求都重新绑定，确保编辑完成回到门户页后立即反映最新链接和地址策略结果。</zh-CN>
+            //   <en>Quick Links bind on every request so returning from edit immediately reflects the latest links and URL-policy results.</en>
+            // </lang>
+            myDataList.DataSource = LinkDB.GetLinks(ModuleId);
+            myDataList.DataBind();
+
+            // <lang>
+            //   <zh-CN>快捷链接新增入口默认隐藏，避免匿名浏览时渲染空按钮框。</zh-CN>
+            //   <en>Hide the quick-link add action by default so anonymous browsing does not render an empty button.</en>
+            // </lang>
+            QuickLinkActions.Visible = false;
+            EditButton.Visible = false;
+            if (PortalSecurity.IsInRoles(ModuleConfiguration.AuthorizedEditRoles))
+            {
+                // <lang>
+                //   <zh-CN>新增入口只给模块编辑者显示；普通访问者即使能看链接，也不能看到编辑页地址。</zh-CN>
+                //   <en>The add action is shown only to module editors; ordinary visitors may see links but not edit-page URLs.</en>
+                // </lang>
+                EditButton.Text = lang.QuickLinks_ButtonAddLink;
+                EditButton.NavigateUrl = "~/DesktopModules/EditLinks.aspx?mid=" + ModuleId;
+                EditButton.ToolTip = lang.QuickLinks_TooltipAddLink;
+                EditButton.Visible = true;
+                QuickLinkActions.Visible = true;
+            }
+        }

@@ -1,0 +1,5 @@
+        internal static string EnterpriseCapabilityWorkbench_LabelItemTitle {
+            get {
+                return ResourceManager.GetString("EnterpriseCapabilityWorkbench_LabelItemTitle", resourceCulture);
+            }
+        }

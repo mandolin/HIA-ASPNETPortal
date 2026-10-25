@@ -1,0 +1,49 @@
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>保存前重新校验模块权限，避免只凭首次加载状态写入设置。</zh-CN>
+            //   <en>Module permission is checked again before saving so settings are not written based only on first-load state.</en>
+            // </lang>
+            if (!TryInitializeRequest())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>imageUrl、width 和 height 都保存经过策略或格式校验后的文本值，不直接持久化原始输入。</zh-CN>
+            //   <en>imageUrl, width, and height persist policy- or format-validated text values rather than raw input.</en>
+            // </lang>
+            string imageUrl;
+            string width;
+            string height;
+            if (!TryNormalizeOptionalBrowseUrl(Src.Text, out imageUrl))
+            {
+                // <lang>
+                //   <zh-CN>图片地址失败时只展示低敏提示，并清空预览，避免把不可接受地址继续渲染到页面。</zh-CN>
+                //   <en>When image URL validation fails, show only a low-sensitivity message and clear the preview so rejected addresses are not rendered back to the page.</en>
+                // </lang>
+                ShowValidationMessage(lang.EditImage_MessageInvalidUrl);
+                ApplyImagePreview(string.Empty);
+                return;
+            }
+
+            if (!TryNormalizeDimension(Width.Text, out width) || !TryNormalizeDimension(Height.Text, out height))
+            {
+                // <lang>
+                //   <zh-CN>尺寸字段保持旧模块的“空值表示不限制”语义，只接受非负整数以避免样式注入。</zh-CN>
+                //   <en>Dimension fields keep the legacy "blank means unrestricted" semantics and accept only non-negative integers to avoid style injection.</en>
+                // </lang>
+                ShowValidationMessage(lang.EditImage_MessageInvalidSize);
+                ApplyImagePreview(imageUrl);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>三个设置分开写入沿用旧模块设置表契约；本页不处理图片二进制或上传目录。</zh-CN>
+            //   <en>The three settings are written separately to keep the legacy module-settings table contract; this page does not handle image binaries or upload directories.</en>
+            // </lang>
+            ModulesConfig.UpdateModuleSetting(moduleId, "src", imageUrl);
+            ModulesConfig.UpdateModuleSetting(moduleId, "height", height);
+            ModulesConfig.UpdateModuleSetting(moduleId, "width", width);
+            PortalNavigationPolicy.RedirectToSafeReturnUrl(Context, ViewState["UrlReferrer"] as string);
+        }

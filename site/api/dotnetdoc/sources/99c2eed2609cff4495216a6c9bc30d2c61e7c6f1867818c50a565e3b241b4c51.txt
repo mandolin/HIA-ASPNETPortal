@@ -1,0 +1,13 @@
+        public string CacheKey
+        {
+            get
+            {
+                // <lang>
+                //   <zh-CN>保留历史键文本和拼接顺序，使读取与写入继续命中同一项；角色 helper 只贡献编辑角色布尔分区，不扩大为用户身份或授权缓存。</zh-CN>
+                //   <en>Preserve historical key text and concatenation order so reads and writes continue targeting the same item; the role helper contributes only an edit-role Boolean partition and is not expanded into user identity or cached authorization.</en>
+                // </lang>
+                return "Key:" + GetType().FullName + ModuleId +
+                       PortalSecurity.IsInRoles(_moduleConfiguration.AuthorizedEditRoles) + "|" +
+                       (CacheIdentity ?? string.Empty);
+            }
+        }

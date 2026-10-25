@@ -1,0 +1,5 @@
+        internal static string Admin_ThemeSettings_MessageTabThemeMigrationMissing {
+            get {
+                return ResourceManager.GetString("Admin_ThemeSettings_MessageTabThemeMigrationMissing", resourceCulture);
+            }
+        }

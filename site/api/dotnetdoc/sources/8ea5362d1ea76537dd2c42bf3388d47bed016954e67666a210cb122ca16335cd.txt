@@ -1,0 +1,2 @@
+        [Dependency]
+        public IReferenceDataDb ReferenceDataDb { private get; set; }

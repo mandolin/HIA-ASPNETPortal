@@ -1,0 +1,5 @@
+        internal static string MyWorkItems_NoOnlineEntry {
+            get {
+                return ResourceManager.GetString("MyWorkItems_NoOnlineEntry", resourceCulture);
+            }
+        }

@@ -1,0 +1,17 @@
+        public static bool TryNormalizeOptionalSingleLineText(
+            string candidate,
+            int maximumLength,
+            out string normalizedValue)
+        {
+            // <lang>
+            //   <zh-CN>可选字段同样先取得规范值；空字符串由长度检查自然放行，但控制字符和无效上限仍拒绝。</zh-CN>
+            //   <en>Optional fields still produce a normalized value first; an empty string passes naturally, while control characters and an invalid limit remain rejected.</en>
+            // </lang>
+            normalizedValue = Normalize(candidate);
+            // <lang>
+            //   <zh-CN>允许空值但不放宽字段上限或控制字符边界。</zh-CN>
+            //   <en>Allow an empty value without relaxing the field limit or control-character boundary.</en>
+            // </lang>
+            return maximumLength > 0 && normalizedValue.Length <= maximumLength &&
+                   !ContainsControlCharacter(normalizedValue);
+        }

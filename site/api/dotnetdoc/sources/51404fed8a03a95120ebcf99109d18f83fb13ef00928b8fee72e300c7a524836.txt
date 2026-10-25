@@ -1,0 +1,16 @@
+        private PortalLoginIdentifierResolution ResolveSingle(string sql, string normalizedInput)
+        {
+            // <lang>
+            //   <zh-CN>取得应唯一字段的至多两个不同用户标识，保留未命中但可继续的语义。</zh-CN>
+            //   <en>Retrieve at most two distinct user ids for an expected-unique field while retaining no-match-but-may-continue semantics.</en>
+            // </lang>
+            List<int> ids = QueryIds(sql, normalizedInput).Distinct().Take(2).ToList();
+            if (ids.Count == 1)
+            {
+                return PortalLoginIdentifierResolution.CreateFound(ids[0]);
+            }
+
+            return ids.Count > 1
+                ? PortalLoginIdentifierResolution.CreateAmbiguous()
+                : PortalLoginIdentifierResolution.CreateNotFoundWithoutDecision();
+        }

@@ -1,0 +1,18 @@
+        public IEnumerable<IRoleItem> GetRolesByUser(string name)
+        {
+            // <lang>
+            //   <zh-CN>角色成员关系可能由 RolesDb 通过中间表直接写入；显式查询可避开 singleton DbContext 的导航集合缓存。</zh-CN>
+            //   <en>Role memberships may be written directly through the join table by RolesDb; explicit querying avoids stale navigation collections on the singleton DbContext.</en>
+            // </lang>
+            return _context.Database.SqlQuery<RoleItem>(
+                @"
+SELECT [Roles].[RoleID], [Roles].[PortalID], [Roles].[RoleName]
+FROM [dbo].[Portal_Roles] AS [Roles]
+INNER JOIN [dbo].[Portal_UserRoles] AS [UserRoles]
+    ON [UserRoles].[RoleID] = [Roles].[RoleID]
+INNER JOIN [dbo].[Portal_Users] AS [Users]
+    ON [Users].[UserID] = [UserRoles].[UserID]
+WHERE [Users].[Name] = @p0 OR [Users].[Email] = @p0
+ORDER BY [Roles].[RoleName]",
+                name).ToList<IRoleItem>();
+        }

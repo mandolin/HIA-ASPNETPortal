@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>P7.4.2-E 将图片配置页改为主题化表单，并保留站内或 HTTP(S) 图片地址边界。</zh-CN>
+            <en>P7.4.2-E rebuilds the image settings page with a themed form while keeping the current application-or-HTTP(S) image URL boundary.</en>
+        </lang>
+    --%>

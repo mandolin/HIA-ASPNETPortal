@@ -1,0 +1,6 @@
+            <%--
+                <lang>
+                    <zh-CN>Tabs 数据源来自门户配置；每个导航 URL 由应用路径、索引和 TabId 组合，实际可见性与访问权限仍由服务器控制。</zh-CN>
+                    <en>The Tabs data source comes from portal configuration; each navigation URL combines the application path, index, and TabId, while visibility and access remain server-controlled.</en>
+                </lang>
+            --%>

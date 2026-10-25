@@ -1,0 +1,13 @@
+        protected string GetMailToUrl(object value)
+        {
+            // <lang>
+            //   <zh-CN>email 是展示型联系人字段，不代表已验证身份；这里只做空白归一，不做登录语义推断。</zh-CN>
+            //   <en>email is a display-oriented contact field rather than verified identity; this path only normalizes blanks and does not infer login semantics.</en>
+            // </lang>
+            string email = Convert.ToString(value);
+            // <lang>
+            //   <zh-CN>空邮箱返回空地址，让标记层隐藏链接；非空值只加 mailto 前缀，保留旧模块兼容行为。</zh-CN>
+            //   <en>Blank email returns an empty address so markup can hide the link; non-blank values only receive the mailto prefix to preserve legacy module behavior.</en>
+            // </lang>
+            return string.IsNullOrWhiteSpace(email) ? string.Empty : "mailto:" + email.Trim();
+        }

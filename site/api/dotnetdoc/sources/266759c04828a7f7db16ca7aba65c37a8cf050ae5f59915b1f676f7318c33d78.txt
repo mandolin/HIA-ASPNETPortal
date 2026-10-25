@@ -1,0 +1,4 @@
+        protected string DocumentEmptyStateText
+        {
+            get { return Resources.lang.Document_EmptyNoDocuments; }
+        }

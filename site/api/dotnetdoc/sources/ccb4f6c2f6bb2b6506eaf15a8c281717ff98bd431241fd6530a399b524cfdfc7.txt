@@ -1,0 +1,1 @@
+        public const string BusinessWorkItemsView = "Business.WorkItems.View";

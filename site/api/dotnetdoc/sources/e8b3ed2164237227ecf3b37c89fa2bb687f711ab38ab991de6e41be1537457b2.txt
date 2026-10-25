@@ -1,0 +1,4 @@
+        private static string[] BuildPasswordPolicyContextTerms(params string[] terms)
+        {
+            return terms ?? new string[0];
+        }

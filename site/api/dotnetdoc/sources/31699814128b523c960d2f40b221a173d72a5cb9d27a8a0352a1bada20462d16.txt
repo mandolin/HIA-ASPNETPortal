@@ -1,0 +1,25 @@
+        private void ApplyDimension(string configuredValue, bool isWidth)
+        {
+            // <lang>
+            //   <zh-CN>dimension 是从模块设置解析出的像素数量，生命周期只覆盖本次宽度或高度赋值尝试。</zh-CN>
+            //   <en>dimension is the pixel count parsed from module settings and lives only for this width-or-height assignment attempt.</en>
+            // </lang>
+            int dimension;
+            if (!int.TryParse(configuredValue, out dimension) || dimension < 0)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>布尔参数决定目标维度；保持单一 helper 可避免宽高解析规则漂移。</zh-CN>
+            //   <en>The Boolean parameter selects the target dimension, keeping one helper so width and height parsing rules do not drift apart.</en>
+            // </lang>
+            if (isWidth)
+            {
+                Image1.Width = dimension;
+            }
+            else
+            {
+                Image1.Height = dimension;
+            }
+        }

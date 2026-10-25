@@ -1,0 +1,24 @@
+        public long GetSecurityVersionByUserName(string userName)
+        {
+            // <lang>
+            //   <zh-CN>名称查询失败和未找到统一返回 0；0 只表示当前无法取得版本，不能当作已验证的初始状态。</zh-CN>
+            //   <en>Return zero for both lookup failure and absence; zero means the version is currently unavailable, not that an initial state was verified.</en>
+            // </lang>
+            string normalizedUserName = Normalize(userName);
+            if (string.IsNullOrEmpty(normalizedUserName))
+            {
+                return 0;
+            }
+
+            try
+            {
+                var userIds = _context.Database.SqlQuery<int>(
+                    "SELECT TOP (1) [UserID] FROM [dbo].[Portal_Users] WHERE [Name] = @p0",
+                    normalizedUserName).ToList();
+                return userIds.Count == 0 ? 0 : GetSecurityVersionByUserId(userIds[0]);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }

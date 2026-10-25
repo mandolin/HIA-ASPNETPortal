@@ -1,0 +1,5 @@
+        internal static string EmployeeProfileCorrectionRequest_MessageSchemaUnavailable {
+            get {
+                return ResourceManager.GetString("EmployeeProfileCorrectionRequest_MessageSchemaUnavailable", resourceCulture);
+            }
+        }

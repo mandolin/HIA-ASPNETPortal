@@ -1,0 +1,5 @@
+        internal static string BusinessApplicationRequest_SectionRecentRequests {
+            get {
+                return ResourceManager.GetString("BusinessApplicationRequest_SectionRecentRequests", resourceCulture);
+            }
+        }

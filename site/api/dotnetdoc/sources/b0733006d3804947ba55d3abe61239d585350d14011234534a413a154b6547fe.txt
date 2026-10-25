@@ -1,0 +1,5 @@
+        internal PortalWorkItemTargetResolution(ITabItem tab, string reasonCode)
+        {
+            Tab = tab;
+            ReasonCode = reasonCode ?? string.Empty;
+        }

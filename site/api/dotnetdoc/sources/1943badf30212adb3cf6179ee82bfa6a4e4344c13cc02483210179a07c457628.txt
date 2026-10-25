@@ -1,0 +1,1 @@
+        public const string EmployeeDirectoryBind = "EmployeeDirectory.Bind";

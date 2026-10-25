@@ -1,0 +1,1 @@
+        public long EventId { get; private set; }

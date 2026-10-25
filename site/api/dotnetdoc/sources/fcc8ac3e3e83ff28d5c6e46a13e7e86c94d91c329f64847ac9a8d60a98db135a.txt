@@ -1,0 +1,9 @@
+        protected string EntriesEmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(LevelFilter.SelectedValue) && string.IsNullOrEmpty(CategoryFilter.Text) && string.IsNullOrEmpty(EventIdFilter.Text)
+                    ? lang.Admin_DiagnosticsLogs_EmptyNoEntries
+                    : lang.Admin_DiagnosticsLogs_EmptyNoMatches;
+            }
+        }

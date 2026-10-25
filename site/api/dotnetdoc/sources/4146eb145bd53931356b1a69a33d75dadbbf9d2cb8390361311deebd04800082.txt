@@ -1,0 +1,6 @@
+    <%--
+        <lang>
+            <zh-CN>资料面板的可见性由服务器根据当前身份和在职绑定决定；标记层只提供承载区域，不授予确认权限。</zh-CN>
+            <en>The server decides panel visibility from the current identity and active binding; the markup only provides a host and does not grant confirmation permission.</en>
+        </lang>
+    --%>

@@ -1,0 +1,10 @@
+        protected string OrganizationsEmptyStateText
+        {
+            get
+            {
+                return BuildEmptyStateText(
+                    lang.Admin_EmployeeDirectory_EmptyNoOrganizations,
+                    lang.Admin_EmployeeDirectory_EmptyNoMatchingOrganizations,
+                    KeywordTextBox.Text);
+            }
+        }

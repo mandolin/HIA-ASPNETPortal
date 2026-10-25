@@ -1,0 +1,6 @@
+                <%--
+                  <lang>
+                    <zh-CN>TabList 的自动回发只用于加载当前页签覆盖值；页签身份、主题键和覆盖清除范围不能由客户端选择直接信任。</zh-CN>
+                    <en>TabList postback only loads the selected tab's override values; the server must not trust client-selected tab identity, theme keys, or clear scope.</en>
+                  </lang>
+                --%>

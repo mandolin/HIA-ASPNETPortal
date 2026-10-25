@@ -1,0 +1,14 @@
+        public static string[] NormalizeDefinedKeys(IEnumerable<string> keys)
+        {
+            if (keys == null)
+            {
+                return new string[0];
+            }
+
+            return keys
+                .Where(key => !string.IsNullOrWhiteSpace(key))
+                .Select(NormalizeDefinedKey)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(key => key, StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+        }

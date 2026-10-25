@@ -1,0 +1,5 @@
+        internal static string EditContacts_Heading {
+            get {
+                return ResourceManager.GetString("EditContacts_Heading", resourceCulture);
+            }
+        }

@@ -1,0 +1,18 @@
+        private static SqlConnection CreateConnection()
+        {
+            // <lang>
+            //   <zh-CN>容器尚未初始化时安全返回 null，让上层公开操作映射为受控可展示结果，而不是从这里访问全局配置细节。</zh-CN>
+            //   <en>When the container is not initialized, return null safely so upper public operations map it to a controlled display-safe result rather than accessing global configuration detail here.</en>
+            // </lang>
+            if (Global.Container == null)
+            {
+                return null;
+            }
+
+            // <lang>
+            //   <zh-CN>连接串仅从既有外置连接串注册名解析；空白时不创建连接对象、不记录值，非空时也由调用方负责打开和释放。</zh-CN>
+            //   <en>Resolve the connection string only through the established external-connection-string registration name; do not create or log a connection object when blank, and callers remain responsible for opening and releasing a nonblank result.</en>
+            // </lang>
+            string connectionString = Global.Container.Resolve<string>(ExternalConnectionStringLoader.UnityConnectionStringName);
+            return string.IsNullOrWhiteSpace(connectionString) ? null : new SqlConnection(connectionString);
+        }

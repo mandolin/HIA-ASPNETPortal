@@ -1,0 +1,9 @@
+        protected string EntriesEmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(CategoryFilter.Text) && string.IsNullOrEmpty(ActionFilter.Text) && string.IsNullOrEmpty(TargetIdFilter.Text)
+                    ? lang.Admin_OperationAudits_EmptyNoEntries
+                    : lang.Admin_OperationAudits_EmptyNoMatches;
+            }
+        }

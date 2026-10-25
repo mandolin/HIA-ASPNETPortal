@@ -1,0 +1,15 @@
+        protected string FormatDate(object dateObj)
+        {
+            // <lang>
+            //   <zh-CN>旧数据和 DataBinder 都可能以空引用或 DBNull 表示缺失时间；两者需要同一占位输出。</zh-CN>
+            //   <en>Legacy data and DataBinder may represent a missing date as either null or DBNull, so both need the same placeholder output.</en>
+            // </lang>
+            if (dateObj == null || dateObj == DBNull.Value)
+                return lang.Legacy_Discussion_UnknownDate;
+
+            // <lang>
+            //   <zh-CN>格式化只发生在服务器端，返回值随后进入普通文本节点，不携带 HTML 标记。</zh-CN>
+            //   <en>Formatting happens only on the server, and the returned value later enters an ordinary text node without carrying HTML markup.</en>
+            // </lang>
+            return ((DateTime)dateObj).ToString("g");
+        }

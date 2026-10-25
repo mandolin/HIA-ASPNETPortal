@@ -1,0 +1,1 @@
+        public DbSet<HtmlTextItem> HtmlTexts { get; set; }

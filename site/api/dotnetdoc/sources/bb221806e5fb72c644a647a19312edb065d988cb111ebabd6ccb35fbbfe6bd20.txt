@@ -1,0 +1,7 @@
+        int AddSelfRegisteredUser(
+            string fullName,
+            string email,
+            string password,
+            string employeeCode,
+            string inviteCode,
+            bool requiresApproval);

@@ -1,0 +1,14 @@
+        public static bool TryGetPortalInstanceId(out string portalInstanceId)
+        {
+            // <lang>
+            //   <zh-CN>从受控 registry 读取部署级候选值；该读取不会启用外围适配器或外部连接。</zh-CN>
+            //   <en>Read the deployment-level candidate from the controlled registry; this read does not enable peripheral adapters or external connections.</en>
+            // </lang>
+            string configuredValue = PortalRuntimeSettings.GetString(PortalSettingsRegistry.HiaPortalInstanceId);
+
+            // <lang>
+            //   <zh-CN>统一交给正式契约执行空值、GUID、大小写和字符范围校验，避免设置读取器复制规则。</zh-CN>
+            //   <en>Delegate null, GUID, casing, and character-range validation to the production contract so the settings reader does not duplicate rules.</en>
+            // </lang>
+            return PortalHiaBoundaryContract.TryNormalizePortalInstanceId(configuredValue, out portalInstanceId);
+        }

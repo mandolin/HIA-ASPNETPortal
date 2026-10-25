@@ -1,0 +1,5 @@
+        internal static string EditImage_LabelImageWidth {
+            get {
+                return ResourceManager.GetString("EditImage_LabelImageWidth", resourceCulture);
+            }
+        }

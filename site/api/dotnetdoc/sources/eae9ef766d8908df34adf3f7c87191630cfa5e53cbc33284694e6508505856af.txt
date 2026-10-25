@@ -1,0 +1,14 @@
+        public void UpdateRole(int roleId, string roleName)
+        {
+            var item = _context.Roles.Single(i => i.RoleId == roleId);
+            var affectedUserIds = GetRoleMemberIds(roleId);
+
+            item.RoleName = roleName;
+
+            // <lang>
+            //   <zh-CN>角色名称会进入角色 Cookie 和后台显示；保存后递增安全版本，让旧票据尽快重新生成。</zh-CN>
+            //   <en>Role names flow into role cookies and administration displays; after saving, increment security versions so older tickets are regenerated promptly.</en>
+            // </lang>
+            _context.SaveChanges();
+            IncrementSecurityVersions(affectedUserIds, "RoleUpdated");
+        }

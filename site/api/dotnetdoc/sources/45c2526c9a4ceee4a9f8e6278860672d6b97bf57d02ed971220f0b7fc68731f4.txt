@@ -1,0 +1,5 @@
+        internal static string Document_LabelLastUpdated {
+            get {
+                return ResourceManager.GetString("Document_LabelLastUpdated", resourceCulture);
+            }
+        }

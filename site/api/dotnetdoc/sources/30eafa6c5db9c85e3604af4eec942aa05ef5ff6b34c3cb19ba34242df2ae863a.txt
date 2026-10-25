@@ -1,0 +1,43 @@
+        private static bool IsValidCapabilities(object value)
+        {
+            // <lang>
+            //   <zh-CN>暂存集合视图并拒绝字符串伪装的集合输入。</zh-CN>
+            //   <en>Hold the collection view and reject string values that masquerade as collections.</en>
+            // </lang>
+            IEnumerable values = value as IEnumerable;
+            if (values == null || value is string)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>累计能力项数量，用于执行非空和最多 32 项的契约上限。</zh-CN>
+            //   <en>Count capability items to enforce the non-empty contract and its maximum of 32 entries.</en>
+            // </lang>
+            int count = 0;
+
+            // <lang>
+            //   <zh-CN>逐项要求安全文本和实例标识字符集，避免能力名携带路径或外部地址。</zh-CN>
+            //   <en>Require safe text and instance-identifier characters for each item so capability names cannot carry paths or external addresses.</en>
+            // </lang>
+            foreach (object item in values)
+            {
+                // <lang>
+                //   <zh-CN>将当前集合项限制为字符串，再复用统一文本安全检查。</zh-CN>
+                //   <en>Restrict the current collection item to a string and reuse the shared text-safety check.</en>
+                // </lang>
+                string capability = item as string;
+                if (!IsSafeText(capability, 80) || !InstanceIdPattern.IsMatch(capability.ToLowerInvariant()))
+                {
+                    return false;
+                }
+
+                count++;
+                if (count > 32)
+                {
+                    return false;
+                }
+            }
+
+            return count > 0;
+        }

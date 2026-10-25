@@ -1,0 +1,23 @@
+        private static void AddPackageList(
+            string configured,
+            ISet<string> allowedPackages,
+            IList<string> invalidEntries,
+            string sourceKey)
+        {
+            foreach (string packageId in SplitCsv(configured))
+            {
+                // <lang>
+                //   <zh-CN>包 id 不满足稳定名称规则时只记录来源键和受控文本并跳过，避免让任意配置片段进入允许集合。</zh-CN>
+                //   <en>When a package id fails the stable-name rule, record only the source key and controlled text then skip it, preventing arbitrary configuration segments from entering the allowed set.</en>
+                // </lang>
+                string normalized = NormalizeStableName(packageId, string.Empty, invalidEntries, sourceKey);
+                if (!string.IsNullOrEmpty(normalized))
+                {
+                    // <lang>
+                    //   <zh-CN>集合按大小写不敏感语义去重；添加包只形成部署允许范围，不改变模块状态或用户权限。</zh-CN>
+                    //   <en>The set deduplicates case-insensitively; adding a package only forms the deployment allow scope and does not alter module state or user permissions.</en>
+                    // </lang>
+                    allowedPackages.Add(normalized);
+                }
+            }
+        }

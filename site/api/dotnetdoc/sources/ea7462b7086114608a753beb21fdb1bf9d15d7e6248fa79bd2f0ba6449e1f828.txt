@@ -1,0 +1,8 @@
+        protected List<IDiscussionItem> GetThreadMessages(string displayOrder)
+        {
+            // <lang>
+            //   <zh-CN>此 helper 只桥接模板绑定表达式和数据访问接口，不缓存回复集合，避免跨回发复用旧主题内容。</zh-CN>
+            //   <en>This helper only bridges the template binding expression to the data-access contract and does not cache replies, avoiding reuse of stale thread content across postbacks.</en>
+            // </lang>
+            return DiscussionDB.GetThreadMessages(displayOrder);
+        }

@@ -1,0 +1,5 @@
+        internal static string Logoff {
+            get {
+                return ResourceManager.GetString("Logoff", resourceCulture);
+            }
+        }

@@ -1,0 +1,1 @@
+        int AddTab(int portalId, string tabName, int tabOrder);

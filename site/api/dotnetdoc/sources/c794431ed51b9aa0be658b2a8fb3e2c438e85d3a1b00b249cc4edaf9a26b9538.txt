@@ -1,0 +1,178 @@
+    public sealed class UserProfileInfo : IUserProfileInfo
+    {
+        /// <summary>
+        ///   <lang>
+        ///     <zh-CN>创建用户资料扩展只读视图。</zh-CN>
+        ///     <en>Creates a user-profile extension read-only view.</en>
+        ///   </lang>
+        /// </summary>
+        /// <param name="userId">
+        ///   <l>
+        ///     <zh-CN>门户用户主键。</zh-CN>
+        ///     <en>Portal user primary key.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="legacyName">
+        ///   <l>
+        ///     <zh-CN>旧用户表中的原始名称，用于兼容显示和迁移核对。</zh-CN>
+        ///     <en>Original name from the legacy user table, used for compatibility display and migration review.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="loginName">
+        ///   <l>
+        ///     <zh-CN>当前登录名或账号名；展示层输出前仍需编码。</zh-CN>
+        ///     <en>Current login or account name; presentation code must still encode it before output.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="displayName">
+        ///   <l>
+        ///     <zh-CN>用户显示名称，优先服务企业门户界面展示。</zh-CN>
+        ///     <en>User display name, primarily used by the enterprise portal UI.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="nickname">
+        ///   <l>
+        ///     <zh-CN>用户昵称或短名称；为空时由页面决定回退显示。</zh-CN>
+        ///     <en>User nickname or short name; pages decide fallback display when empty.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="preferredEmail">
+        ///   <l>
+        ///     <zh-CN>首选联系邮箱；不是认证凭据。</zh-CN>
+        ///     <en>Preferred contact email; this is not an authentication credential.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="status">
+        ///   <l>
+        ///     <zh-CN>用户资料状态稳定字符串。</zh-CN>
+        ///     <en>Stable user-profile status string.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="statusReason">
+        ///   <l>
+        ///     <zh-CN>状态原因或备注；显示前需编码，且不应包含敏感值。</zh-CN>
+        ///     <en>Status reason or note; encode before display and do not include secrets.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="isAvailable">
+        ///   <l>
+        ///     <zh-CN>当前资料是否可用于页面展示或后台选择。</zh-CN>
+        ///     <en>Whether the profile is currently available for page display or administration selection.</en>
+        ///   </l>
+        /// </param>
+        /// <param name="source">
+        ///   <l>
+        ///     <zh-CN>资料来源标识，用于区分旧表、扩展表或扩展同步来源。</zh-CN>
+        ///     <en>Profile source marker used to distinguish legacy table, extension table, or extended synchronization sources.</en>
+        ///   </l>
+        /// </param>
+        /// <remarks>
+        ///   <lang>
+        ///     <zh-CN>构造函数统一把可空文本归一化为空字符串，减少 Web Forms 控件绑定时的空值判断噪声。</zh-CN>
+        ///     <en>The constructor normalizes nullable text to empty strings to reduce null-check noise in Web Forms control binding.</en>
+        ///   </lang>
+        /// </remarks>
+        public UserProfileInfo(
+            int userId,
+            string legacyName,
+            string loginName,
+            string displayName,
+            string nickname,
+            string preferredEmail,
+            string status,
+            string statusReason,
+            bool isAvailable,
+            string source)
+        {
+            UserId = userId;
+            LegacyName = legacyName ?? string.Empty;
+            LoginName = loginName ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            Nickname = nickname ?? string.Empty;
+            PreferredEmail = preferredEmail ?? string.Empty;
+            Status = status ?? string.Empty;
+            StatusReason = statusReason ?? string.Empty;
+            IsAvailable = isAvailable;
+            Source = source ?? string.Empty;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧门户用户标识。</zh-CN>
+        ///   <en>Legacy Portal user identifier.</en>
+        /// </lang>
+        /// </summary>
+        public int UserId { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>旧 <c>Portal_Users.Name</c>，P6.2.3 中只读展示。</zh-CN>
+        ///   <en>Legacy <c>Portal_Users.Name</c>, displayed as read-only in P6.2.3.</en>
+        /// </lang>
+        /// </summary>
+        public string LegacyName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>新的稳定登录名。</zh-CN>
+        ///   <en>New stable login name.</en>
+        /// </lang>
+        /// </summary>
+        public string LoginName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>正式显示名。</zh-CN>
+        ///   <en>Formal display name.</en>
+        /// </lang>
+        /// </summary>
+        public string DisplayName { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>昵称或偏好称呼。</zh-CN>
+        ///   <en>Nickname or preferred name.</en>
+        /// </lang>
+        /// </summary>
+        public string Nickname { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>偏好邮箱；非空时可作为登录标识。</zh-CN>
+        ///   <en>Preferred email; when non-empty it may be used as a sign-in identifier.</en>
+        /// </lang>
+        /// </summary>
+        public string PreferredEmail { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>账号资料状态。</zh-CN>
+        ///   <en>Account profile status.</en>
+        /// </lang>
+        /// </summary>
+        public string Status { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>非敏感状态说明。</zh-CN>
+        ///   <en>Non-sensitive status reason.</en>
+        /// </lang>
+        /// </summary>
+        public string StatusReason { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>资料扩展表是否已部署并成功读取。</zh-CN>
+        ///   <en>Whether the profile extension table is deployed and was read successfully.</en>
+        /// </lang>
+        /// </summary>
+        public bool IsAvailable { get; private set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>资料来源说明。</zh-CN>
+        ///   <en>Profile source description.</en>
+        /// </lang>
+        /// </summary>
+        public string Source { get; private set; }
+    }

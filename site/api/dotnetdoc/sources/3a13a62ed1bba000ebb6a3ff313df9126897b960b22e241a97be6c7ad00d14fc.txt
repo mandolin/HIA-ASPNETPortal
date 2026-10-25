@@ -1,0 +1,5 @@
+        internal static string Admin_EmployeeDirectory_SectionOrganizations {
+            get {
+                return ResourceManager.GetString("Admin_EmployeeDirectory_SectionOrganizations", resourceCulture);
+            }
+        }

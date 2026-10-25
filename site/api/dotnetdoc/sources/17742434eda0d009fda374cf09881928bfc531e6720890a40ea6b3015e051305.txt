@@ -1,0 +1,8 @@
+        public ITabItem FindTabById(int tabId)
+        {
+            // <lang>
+            //   <zh-CN>重复 Tab 仍应作为配置完整性错误暴露，缺失 Tab 则交由授权层安全拒绝。</zh-CN>
+            //   <en>Duplicate Tabs still surface as configuration-integrity errors, while a missing Tab is safely denied by authorization.</en>
+            // </lang>
+            return _tabs.SingleOrDefault(i => i.TabId == tabId);
+        }

@@ -1,0 +1,10 @@
+        public PortalWorkItemResult(bool succeeded, long workItemId, string message)
+        {
+            // <lang>
+            //   <zh-CN>一次性固定三项结果事实；只对消息做 null 归一化，不隐式修正调用方传入的成功标志或标识。</zh-CN>
+            //   <en>Capture the three result facts together; only normalize a null message and do not silently repair the caller-supplied success flag or identifier.</en>
+            // </lang>
+            Succeeded = succeeded;
+            WorkItemId = workItemId;
+            Message = message ?? string.Empty;
+        }

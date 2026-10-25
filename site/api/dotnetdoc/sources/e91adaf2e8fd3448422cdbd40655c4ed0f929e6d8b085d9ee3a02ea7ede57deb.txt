@@ -1,0 +1,15 @@
+        private static byte[] EncodeBitString(byte[] value)
+        {
+            // <lang>
+            //   <zh-CN>首字节记录未使用位数为 0，随后复制完整 RSA 公钥主体，符合 SubjectPublicKeyInfo 的 BIT STRING 约束。</zh-CN>
+            //   <en>Set the unused-bit count to zero, then copy the complete RSA public-key body to satisfy the SubjectPublicKeyInfo BIT STRING constraint.</en>
+            // </lang>
+            byte[] bitStringValue = new byte[value.Length + 1];
+
+            // <lang>
+            //   <zh-CN>从索引 1 写入主体，保留索引 0 的未使用位计数前导字节。</zh-CN>
+            //   <en>Copy the body at index 1 and retain index 0 for the unused-bit-count prefix.</en>
+            // </lang>
+            Buffer.BlockCopy(value, 0, bitStringValue, 1, value.Length);
+            return EncodeTag(0x03, bitStringValue);
+        }

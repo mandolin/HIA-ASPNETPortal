@@ -1,0 +1,5 @@
+        internal static string Admin_TabLayout_MessageModuleMoveFailed {
+            get {
+                return ResourceManager.GetString("Admin_TabLayout_MessageModuleMoveFailed", resourceCulture);
+            }
+        }

@@ -1,0 +1,170 @@
+        private static bool TryReadPackage(string directoryName, out PortalModulePackage package, out string reason)
+        {
+            package = null;
+            reason = string.Empty;
+
+            // <lang>
+            //   <zh-CN>目录名在任何文件系统组合前必须满足受控规则；拒绝的名称不应触发根外探测、异常文本回显或路径修复尝试。</zh-CN>
+            //   <en>The directory name must satisfy the controlled rule before any filesystem combination; a rejected name must not trigger outside-root probing, exception-text echoing, or path-repair attempts.</en>
+            // </lang>
+            if (!DirectoryNamePattern.IsMatch(directoryName ?? string.Empty))
+            {
+                reason = "Module package directory name is invalid.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>再次从固定应用根解析物理位置，避免调用方传入的目录名隐式绑定到当前工作目录或任意文件系统根。</zh-CN>
+            //   <en>Resolve the physical location again from the fixed application root so a caller-supplied directory name cannot implicitly bind to the current working directory or an arbitrary filesystem root.</en>
+            // </lang>
+            string rootPath = HostingEnvironment.MapPath(ModuleRootVirtualPath);
+            if (string.IsNullOrWhiteSpace(rootPath) || !Directory.Exists(rootPath))
+            {
+                reason = "Module root is unavailable.";
+                return false;
+            }
+
+            string packagePath;
+            try
+            {
+                // <lang>
+                //   <zh-CN>根内路径 helper 规范化并检查候选仍在根下；目录名正则是第一层，完整路径比较是防御性第二层。</zh-CN>
+                //   <en>The in-root path helper normalizes and checks that the candidate remains below the root; the directory-name regex is the first layer and the full-path comparison is the defensive second layer.</en>
+                // </lang>
+                packagePath = GetChildPath(rootPath, directoryName);
+            }
+            catch (InvalidOperationException)
+            {
+                reason = "Module package directory is outside the allowed root.";
+                return false;
+            }
+
+            string manifestPath = Path.Combine(packagePath, "module.json");
+            if (!Directory.Exists(packagePath) || !File.Exists(manifestPath))
+            {
+                // <lang>
+                //   <zh-CN>目录或固定 manifest 缺失时不把候选降级为 Legacy，也不依据其它文件推断可信元数据。</zh-CN>
+                //   <en>When the directory or fixed manifest is missing, do not downgrade this candidate to Legacy or infer trusted metadata from other files.</en>
+                // </lang>
+                reason = "module.json is missing.";
+                return false;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>只按 UTF-8 读取固定 manifest 文件并解析为 JSON 对象；解析后仍须通过 schema、字段、路径和禁止能力校验，JSON 可解析本身不足以建立信任。</zh-CN>
+                //   <en>Read only the fixed manifest file as UTF-8 and parse it as a JSON object; parsed JSON still must pass schema, field, path, and prohibited-capability validation, because parseability alone does not establish trust.</en>
+                // </lang>
+                JObject manifest = JObject.Parse(File.ReadAllText(manifestPath, Encoding.UTF8));
+                if (!IsSchemaVersionSupported(manifest))
+                {
+                    reason = "Module manifest schemaVersion is unsupported.";
+                    return false;
+                }
+
+                string packageId = ReadRequiredString(manifest, "packageId", 100);
+                string displayName = ReadRequiredString(manifest, "displayName", 100);
+                string version = ReadRequiredString(manifest, "version", 64);
+                string minimumPortalVersion = ReadOptionalString(manifest, "minimumPortalVersion", 64);
+                string desktopEntry = ReadRequiredString(manifest, "desktopEntry", 250);
+                string normalizedEntry;
+                string validationError;
+
+                // <lang>
+                //   <zh-CN>稳定包标识、入口路径和包目录三者必须一致：路径校验器先消除表示差异，再要求入口仍位于当前包目录，不能借合格 ID 访问其它包或根外控件。</zh-CN>
+                //   <en>Stable package identifier, entry path, and package directory must agree: the path validator first removes representation differences and then the entry must remain in the current package directory, so a valid ID cannot reach another package or an outside-root control.</en>
+                // </lang>
+                if (!IsValidPackageId(packageId) ||
+                    !PortalModulePathValidator.TryNormalizeDesktopSource(desktopEntry, out normalizedEntry, out validationError) ||
+                    !normalizedEntry.StartsWith("DesktopModules/" + directoryName + "/", StringComparison.OrdinalIgnoreCase))
+                {
+                    reason = "Module manifest packageId or desktopEntry is invalid.";
+                    return false;
+                }
+
+                string relativeEntry = normalizedEntry.Substring(("DesktopModules/" + directoryName + "/").Length);
+                if (!File.Exists(GetChildPath(packagePath, relativeEntry.Replace('/', Path.DirectorySeparatorChar))))
+                {
+                    // <lang>
+                    //   <zh-CN>通过文本路径校验仍不足够；入口文件必须实际存在于已验证包根内，避免把陈旧 manifest 或空占位当作可加载控件。</zh-CN>
+                    //   <en>Passing textual path validation is still insufficient; the entry file must actually exist beneath the validated package root so stale manifests or empty placeholders are not treated as loadable controls.</en>
+                    // </lang>
+                    reason = "Module manifest desktopEntry does not exist.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>当前部署模型只允许受控 ASCX 入口和站内静态资源；显式拒绝脚本、外部 URL、程序集和包 URL，不能因 manifest 声明而改变执行或下载能力。</zh-CN>
+                //   <en>The current deployment model permits only controlled ASCX entries and site-local static resources; explicitly reject scripts, external URLs, assemblies, and package URLs because a manifest declaration cannot change execution or download capability.</en>
+                // </lang>
+                if (manifest["script"] != null || manifest["scripts"] != null ||
+                    manifest["externalUrl"] != null || manifest["externalUrls"] != null ||
+                    manifest["assembly"] != null || manifest["assemblies"] != null || manifest["packageUrl"] != null)
+                {
+                    reason = "Module manifest declares a prohibited script, external URL, or assembly.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>资源列表先完整验证后才形成不可变包快照；单个越界、缺失或禁止扩展资源会拒绝整包，而不是悄悄丢弃声明。</zh-CN>
+                //   <en>Validate the resource list completely before forming the immutable package snapshot; one escaping, missing, or prohibited-extension resource rejects the whole package instead of silently dropping the declaration.</en>
+                // </lang>
+                // <lang>
+                //   <zh-CN>P47.3：可选 capability 段声明模块的能力归属与角色；未声明时保持空值（Unclassified），声明则能力键必须能解析到权威词表且角色合法。</zh-CN>
+                //   <en>P47.3: the optional capability section declares the module's capability and role; empty values remain when absent (Unclassified), while a declaration must resolve in the authority registry with a valid role.</en>
+                // </lang>
+                string capabilityId = string.Empty;
+                string capabilityRole = string.Empty;
+                JObject capability = manifest["capability"] as JObject;
+                if (capability != null)
+                {
+                    capabilityId = ReadOptionalString(capability, "capabilityId", 100);
+                    capabilityRole = ReadOptionalString(capability, "role", 40);
+                    if (string.IsNullOrWhiteSpace(capabilityId) || string.IsNullOrWhiteSpace(capabilityRole))
+                    {
+                        reason = "Module manifest capability is invalid.";
+                        return false;
+                    }
+
+                    PortalCapabilityDefinition definition;
+                    if (!PortalCapabilityRegistry.TryGet(capabilityId, out definition))
+                    {
+                        reason = "Module manifest capability is not registered.";
+                        return false;
+                    }
+
+                    if (!IsValidCapabilityRole(capabilityRole))
+                    {
+                        reason = "Module manifest capability role is invalid.";
+                        return false;
+                    }
+                }
+
+                IList<string> resources = ReadAndValidateResources(manifest, packagePath);
+                package = new PortalModulePackage(
+                    directoryName,
+                    packageId,
+                    displayName,
+                    version,
+                    minimumPortalVersion,
+                    normalizedEntry,
+                    resources,
+                    capabilityId,
+                    capabilityRole);
+                return true;
+            }
+            catch (Exception exception) when (
+                exception is IOException ||
+                exception is UnauthorizedAccessException ||
+                exception is Newtonsoft.Json.JsonException ||
+                exception is InvalidOperationException)
+            {
+                // <lang>
+                //   <zh-CN>预期的 I/O、权限、JSON 或路径/字段校验失败统一收敛为受控原因；不暴露物理路径、manifest 内容或异常细节，且不把失败包加入可信集合。</zh-CN>
+                //   <en>Expected I/O, authorization, JSON, or path/field-validation failures converge to a controlled reason; do not expose physical paths, manifest content, or exception detail, and never add the failed package to the trusted set.</en>
+                // </lang>
+                reason = "Module manifest is invalid.";
+                return false;
+            }
+        }

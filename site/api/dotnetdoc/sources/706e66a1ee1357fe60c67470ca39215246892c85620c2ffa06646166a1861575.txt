@@ -1,0 +1,55 @@
+        private static PortalHiaBoundaryValidationResult ValidatePayload(
+            string kind,
+            IDictionary<string, object> payload)
+        {
+            if (payload == null)
+            {
+                return Failure("HIA_PERIPHERAL_INVALID_PAYLOAD", "The capability payload is required.");
+            }
+
+            // <lang>
+            //   <zh-CN>按 capability kind 取得字段白名单；未知 kind 立即失败，避免宽松接受未定义 payload。</zh-CN>
+            //   <en>Resolve the field allowlist by capability kind; fail unknown kinds immediately instead of accepting undefined payloads.</en>
+            // </lang>
+            PayloadRule rule;
+            if (!PayloadRules.TryGetValue(kind, out rule))
+            {
+                return Failure("HIA_PERIPHERAL_UNSUPPORTED_KIND", "The capability kind has no payload rule.");
+            }
+
+            // <lang>
+            //   <zh-CN>逐项确认契约声明的必填字段都存在，缺失时返回稳定错误码。</zh-CN>
+            //   <en>Confirm every contract-declared required field is present and return a stable error code when one is missing.</en>
+            // </lang>
+            foreach (string requiredKey in rule.RequiredKeys)
+            {
+                if (!payload.ContainsKey(requiredKey))
+                {
+                    return Failure("HIA_PERIPHERAL_MISSING_FIELD", "A required capability field is missing.");
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>遍历实际 payload，依次执行敏感字段拒绝、白名单校验和字段值类型/范围校验。</zh-CN>
+            //   <en>Traverse the actual payload to reject sensitive names, enforce the allowlist, and validate value type and scope.</en>
+            // </lang>
+            foreach (KeyValuePair<string, object> entry in payload)
+            {
+                if (ContainsProhibitedFieldName(entry.Key))
+                {
+                    return Failure("HIA_PERIPHERAL_PROHIBITED_FIELD", "The capability payload contains a prohibited field.");
+                }
+
+                if (!rule.Allows(entry.Key))
+                {
+                    return Failure("HIA_PERIPHERAL_UNKNOWN_FIELD", "The capability payload contains an unknown field.");
+                }
+
+                if (!IsValidPayloadValue(kind, entry.Key, entry.Value))
+                {
+                    return Failure("HIA_PERIPHERAL_INVALID_FIELD", "The capability payload contains an invalid field value.");
+                }
+            }
+
+            return Success();
+        }

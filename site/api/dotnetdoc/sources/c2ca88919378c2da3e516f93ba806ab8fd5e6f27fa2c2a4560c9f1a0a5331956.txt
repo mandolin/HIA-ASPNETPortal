@@ -1,0 +1,20 @@
+        public void DeleteLink(int itemId)
+        {
+            // <lang>
+            //   <zh-CN>待删除链接必须唯一存在；缺失或重复说明调用页归属校验前提或数据完整性已失效。</zh-CN>
+            //   <en>The link to delete must exist uniquely; a miss or duplicate means caller-side ownership validation assumptions or data integrity have failed.</en>
+            // </lang>
+            var item = _context.Links.Single(i => i.ItemId == itemId);
+
+            // <lang>
+            //   <zh-CN>删除动作直接提交到旧表；审计、权限和站内回跳由编辑页完成。</zh-CN>
+            //   <en>The delete action is committed directly to the legacy table; audit, permission, and safe return navigation are completed by the editor page.</en>
+            // </lang>
+            _context.Links.Remove(item);
+
+            // <lang>
+            //   <zh-CN>提交当前删除批次；本方法不触碰外部 URL，也不刷新导航或页面缓存。</zh-CN>
+            //   <en>Commit the current deletion batch; this method does not touch external URLs or refresh navigation/page caches.</en>
+            // </lang>
+            _context.SaveChanges();
+        }

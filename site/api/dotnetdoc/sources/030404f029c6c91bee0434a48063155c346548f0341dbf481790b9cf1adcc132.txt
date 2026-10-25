@@ -1,0 +1,5 @@
+        internal static string Document_LabelArea {
+            get {
+                return ResourceManager.GetString("Document_LabelArea", resourceCulture);
+            }
+        }

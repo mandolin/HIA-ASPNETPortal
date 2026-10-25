@@ -1,0 +1,5 @@
+        internal static string DiscussDetails_LabelDate {
+            get {
+                return ResourceManager.GetString("DiscussDetails_LabelDate", resourceCulture);
+            }
+        }

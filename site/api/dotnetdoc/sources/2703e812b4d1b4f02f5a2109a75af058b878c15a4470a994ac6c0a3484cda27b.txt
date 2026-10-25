@@ -1,0 +1,6 @@
+        public static bool CanAutoApply(string fieldName)
+        {
+            return string.Equals(fieldName, FieldDisplayName, System.StringComparison.Ordinal) ||
+                   string.Equals(fieldName, FieldPreferredName, System.StringComparison.Ordinal) ||
+                   string.Equals(fieldName, FieldWorkEmail, System.StringComparison.Ordinal);
+        }

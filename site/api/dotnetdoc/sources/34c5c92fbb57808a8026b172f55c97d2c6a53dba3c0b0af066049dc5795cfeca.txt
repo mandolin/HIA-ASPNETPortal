@@ -1,0 +1,35 @@
+        private void RenderMatrix()
+        {
+            // <lang>
+            //   <zh-CN>角色数据门面从受控容器解析；容器缺失时按"无映射"处理，不伪造任何授权事实。</zh-CN>
+            //   <en>Resolve the role-data facade from the controlled container; when it is unavailable, treat the state as "no mapping" and never fabricate an authorization fact.</en>
+            // </lang>
+            IRolesDb rolesDb = ResolveRolesDb();
+
+            // <lang>
+            //   <zh-CN>映射集合只来自只读查询，保持页面无写入路径；查询失败已由数据层降级为空集合。</zh-CN>
+            //   <en>Mappings come from the read-only query only, keeping the page free of any write path; query failures are already degraded to an empty set by the data layer.</en>
+            // </lang>
+            List<RolePermissionEntry> grants = rolesDb == null
+                ? new List<RolePermissionEntry>()
+                : rolesDb.GetRolePermissionEntries().Where(entry => entry != null).ToList();
+
+            // <lang>
+            //   <zh-CN>无映射（或表不可用）时给出显式提示：这既可能是"尚未配置"，也可能是"表未部署"，两者都需要维护者知情。</zh-CN>
+            //   <en>Show an explicit hint when there is no mapping (or the table is unavailable): the cause may be "nothing configured yet" or "table not deployed", and a maintainer needs to know either way.</en>
+            // </lang>
+            if (grants.Count == 0)
+            {
+                UnavailableLabel.Text = lang.Admin_CapabilityPermissionMatrix_Unavailable;
+                UnavailableLabel.Visible = true;
+            }
+
+            // <lang>
+            //   <zh-CN>矩阵内容仍然渲染：即使没有映射，表头与"未授权"态可以让维护者确认权限定义是否已登记。</zh-CN>
+            //   <en>The matrix is still rendered: even without mappings, the header and the not-granted state let a maintainer confirm whether the permission definitions are registered.</en>
+            // </lang>
+            MatrixLiteral.Text = PortalCapabilityPermissionMatrixRenderer.Render(
+                PortalPermissionRegistry.Definitions,
+                grants,
+                ResolveMatrixText);
+        }

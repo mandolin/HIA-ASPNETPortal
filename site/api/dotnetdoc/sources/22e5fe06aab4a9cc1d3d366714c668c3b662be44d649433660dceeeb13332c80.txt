@@ -1,0 +1,4 @@
+        public static bool RequiresManualHandling(string fieldName)
+        {
+            return IsKnownField(fieldName) && !CanAutoApply(fieldName);
+        }

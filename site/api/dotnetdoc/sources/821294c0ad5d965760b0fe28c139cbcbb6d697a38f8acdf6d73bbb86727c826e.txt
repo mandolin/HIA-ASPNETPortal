@@ -1,0 +1,36 @@
+        private static bool FixedTimeEquals(byte[] left, byte[] right)
+        {
+            // <lang>
+            //   <zh-CN>空数组引用代表损坏或未迁移的凭据字段，固定时间比较不负责猜测兼容格式。</zh-CN>
+            //   <en>Null array references represent damaged or unmigrated credential fields; fixed-time comparison does not guess compatibility formats.</en>
+            // </lang>
+            if (left == null || right == null)
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>长度差异先进入累积差异位，保证最终结果同时包含尺寸和内容两个维度。</zh-CN>
+            //   <en>The length difference enters the accumulated difference bits first, ensuring the final result covers both size and content.</en>
+            // </lang>
+            int difference = left.Length ^ right.Length;
+            // <lang>
+            //   <zh-CN>共同长度限制后续索引范围；长度不同时仍会扫描可比较的完整前缀。</zh-CN>
+            //   <en>The shared length bounds subsequent indexing; when lengths differ, the full comparable prefix is still scanned.</en>
+            // </lang>
+            int count = Math.Min(left.Length, right.Length);
+            // <lang>
+            //   <zh-CN>即使长度不同，也比较共同长度内的所有字节，减少基于首个差异位置的时间侧信道。</zh-CN>
+            //   <en>Even when lengths differ, compare every byte in the shared length to reduce timing side channels based on the first differing position.</en>
+            // </lang>
+            for (int i = 0; i < count; i++)
+            {
+                difference |= left[i] ^ right[i];
+            }
+
+            // <lang>
+            //   <zh-CN>只有长度差异和每个字节差异都为零时，凭据哈希才被视为匹配。</zh-CN>
+            //   <en>The credential hash is considered matched only when both length difference and every byte difference are zero.</en>
+            // </lang>
+            return difference == 0;
+        }

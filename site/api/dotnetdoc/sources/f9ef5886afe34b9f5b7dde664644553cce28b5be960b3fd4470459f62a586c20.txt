@@ -1,0 +1,27 @@
+        public UserRegistrationInfo(
+            int userId,
+            string status,
+            bool requiresApproval,
+            string employeeCode,
+            string inviteCode,
+            DateTime registeredUtc,
+            DateTime? approvedUtc,
+            string approvedBy,
+            DateTime? rejectedUtc,
+            string rejectedBy,
+            string reviewNote,
+            string source)
+        {
+            UserId = userId;
+            Status = status ?? string.Empty;
+            RequiresApproval = requiresApproval;
+            EmployeeCode = employeeCode ?? string.Empty;
+            InviteCode = inviteCode ?? string.Empty;
+            RegisteredUtc = registeredUtc;
+            ApprovedUtc = approvedUtc;
+            ApprovedBy = approvedBy ?? string.Empty;
+            RejectedUtc = rejectedUtc;
+            RejectedBy = rejectedBy ?? string.Empty;
+            ReviewNote = reviewNote ?? string.Empty;
+            Source = source ?? string.Empty;
+        }

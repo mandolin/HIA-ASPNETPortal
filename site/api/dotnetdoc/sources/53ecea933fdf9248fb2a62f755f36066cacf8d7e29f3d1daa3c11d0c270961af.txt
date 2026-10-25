@@ -1,0 +1,5 @@
+        internal static string ExpenseReimbursement_LabelReason {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_LabelReason", resourceCulture);
+            }
+        }

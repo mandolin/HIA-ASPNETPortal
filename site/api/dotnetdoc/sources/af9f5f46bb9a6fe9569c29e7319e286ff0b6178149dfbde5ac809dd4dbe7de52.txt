@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_SubtitleMyRequests {
+            get {
+                return ResourceManager.GetString("LeaveRequest_SubtitleMyRequests", resourceCulture);
+            }
+        }
