@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulecatalog",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulecatalog:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulecatalog:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.getactivestyleresources-system.web.httpcontext",
       "kind": "entry",
       "label": "GetActiveStyleResources",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.getactivestyleresources-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.getactivestyleresources-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.getac-1a9764de.html"
     },
@@ -25,7 +33,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.getchildpath-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.getchildpath-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.getch-eebfb080.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.gettrustedpackages",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.gettrustedpackages",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.gettr-ac35819f.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.hasmanifestcandidate-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.hasmanifestcandidate-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.hasma-01988d22.html"
     },
@@ -64,7 +72,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isadminrequest-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.isadminrequest-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isadm-96017690.html"
     },
@@ -77,7 +84,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isallowedresourceextension-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.isallowedresourceextension-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isall-a0fb2465.html"
     },
@@ -90,7 +97,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isschemaversionsupported-newtonsoft.json.linq.jobject",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.isschemaversionsupported-newtonsoft.json.linq.jobject",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.issch-f40cfe8f.html"
     },
@@ -103,7 +109,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isvalidpackageid-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.isvalidpackageid-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isval-2735ef9b.html"
     },
@@ -116,7 +122,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isvalidresourcepath-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.isvalidresourcepath-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.isval-c9598c7b.html"
     },
@@ -129,7 +135,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.readandvalidateresources-newtonsoft.json.linq.jobject-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.readandvalidateresources-newtonsoft.json.linq.jobject-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.reada-c035301d.html"
     },
@@ -142,7 +147,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.readoptionalstring-newtonsoft.json.linq.jobject-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.readoptionalstring-newtonsoft.json.linq.jobject-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.reado-f0a0e872.html"
     },
@@ -155,7 +159,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.readrequiredstring-newtonsoft.json.linq.jobject-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.readrequiredstring-newtonsoft.json.linq.jobject-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.readr-a717560b.html"
     },
@@ -168,7 +171,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.trygettrustedpackage-system.string-aspnet.starterkit.portal.portalmodulepackage-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.trygettrustedpackage-system.string-aspnet.starterkit.portal.portalmodulepackage-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.tryge-ebd75ea2.html"
     },
@@ -181,7 +184,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.tryreadpackage-system.string-aspnet.starterkit.portal.portalmodulepackage-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.tryreadpackage-system.string-aspnet.starterkit.portal.portalmodulepackage-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.tryre-565c3aa9.html"
     },
@@ -194,7 +197,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.tryresolvedesktopsource-system.string-system.web.httpcontext-aspnet.starterkit.portal.portalmoduleruntimedescriptor-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.tryresolvedesktopsource-system.string-system.web.httpcontext-aspnet.starterkit.portal.portalmoduleruntimedescriptor-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.tryre-bab45936.html"
     },
@@ -207,7 +209,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.tryresolvemodule-aspnet.starterkit.portal.modulesettings-system.web.httpcontext-aspnet.starterkit.portal.portalmoduleruntimedescriptor-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulecatalog.tryresolvemodule-aspnet.starterkit.portal.modulesettings-system.web.httpcontext-aspnet.starterkit.portal.portalmoduleruntimedescriptor-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulecatalog.tryre-e4f9dc32.html"
     }

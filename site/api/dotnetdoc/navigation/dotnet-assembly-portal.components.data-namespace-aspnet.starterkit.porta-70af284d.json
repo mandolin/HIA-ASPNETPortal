@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldb",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldb:base:iportaldb",
+      "kind": "relation",
+      "label": "Base: !:IPortalDb",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldb.-ctor-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldb.-ctor-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "sourcePath": "src/Portal.Components.Data/PortalDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldb.-ctor-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldb.-ctor-system.str-2810382e.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldb.deletemodule-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "sourcePath": "src/Portal.Components.Data/PortalDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldb.deletemodule-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldb.deletemodule-sys-65e3d087.html"
     }

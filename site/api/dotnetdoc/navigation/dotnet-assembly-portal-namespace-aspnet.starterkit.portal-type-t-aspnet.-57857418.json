@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulestyleresource",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulestyleresource:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulestyleresource:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulestyleresource.-ctor-system.string-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulestyleresource.-ctor-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulestyleresource.-ctor-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulestyleresource-1df77e60.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource.packageid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmodulestyleresource.packageid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource-61767051.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource.virtualpath",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackage.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmodulestyleresource.virtualpath",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulestyleresource-cecebeb0.html"
     }

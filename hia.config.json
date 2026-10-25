@@ -17,10 +17,7 @@
       }
     },
     "source": {
-      "presentation": "fetch",
-      "publicAssetPolicy": "explicit-public",
-      "fetchTrigger": "on-expand",
-      "maxLines": 400
+      "presentation": "link"
     }
   }
 }

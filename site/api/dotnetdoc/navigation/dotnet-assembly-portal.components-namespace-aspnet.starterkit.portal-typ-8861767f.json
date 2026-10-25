@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationtransitions",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationtransitions:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbusinessapplicationtransitions:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationtransitions.all",
       "kind": "entry",
       "label": "All",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationtransitions.all",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationtransitions.all",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-ece8ee32.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbusinessapplicationtransitions.allowedfromstatuses-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalbusinessapplicationtransitions.allowedfromstatuses-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbusinessapplication-6bbd3e1b.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbusinessapplicationtransitions.buildsqlstatuspredicate",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalbusinessapplicationtransitions.buildsqlstatuspredicate",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbusinessapplication-2ffd7ca7.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbusinessapplicationtransitions.islegaltransition-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalbusinessapplicationtransitions.islegaltransition-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbusinessapplication-41acfb86.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationtransitions.resubmitsources",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationtransitions.resubmitsources",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-9c03a7a0.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalbusinessapplicationtransitions.reviewsources",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalbusinessapplicationtransitions.reviewsources",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalbusinessapplication-c073f53b.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbusinessapplicationtransitions.trygettargetstatus-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalbusinessapplicationtransitions.trygettargetstatus-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbusinessapplication-dd54c5b8.html"
     }

@@ -4,6 +4,69 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate:base:t-system.enum",
+      "kind": "relation",
+      "label": "Base: System.Enum",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate:base:t-system.valuetype",
+      "kind": "relation",
+      "label": "Base: System.ValueType",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate:interface:t-system.icomparable",
+      "kind": "relation",
+      "label": "Interface: System.IComparable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate:interface:t-system.iconvertible",
+      "kind": "relation",
+      "label": "Interface: System.IConvertible",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate:interface:t-system.iformattable",
+      "kind": "relation",
+      "label": "Interface: System.IFormattable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate:interface:t-system.ispanformattable",
+      "kind": "relation",
+      "label": "Interface: System.ISpanFormattable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationlifecyclestate:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationlifecyclestate.active",
       "kind": "entry",
       "label": "Active",
@@ -12,7 +75,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationlifecyclestate.active",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationlifecyclestate.active",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationlifecycle-7750960c.html"
     },
@@ -25,7 +88,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationlifecyclestate.deprecated",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationlifecyclestate.deprecated",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationlifecycle-37f82b03.html"
     },
@@ -38,7 +101,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationlifecyclestate.draft",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationlifecyclestate.draft",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationlifecycle-e6972f69.html"
     },
@@ -51,7 +114,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationlifecyclestate.legacy",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalnavigationlifecyclestate.legacy",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalnavigationlifecycle-918e9191.html"
     }

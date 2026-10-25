@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaltabthemeoverridewriteresult",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaltabthemeoverridewriteresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaltabthemeoverridewriteresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaltabthemeoverridewriteresult.-ctor-system.boolean-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaltabthemeoverridewriteresult.-ctor-system.boolean-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalTabThemeOverrides.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaltabthemeoverridewriteresult.-ctor-system.boolean-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaltabthemeoverridewri-fc635a6c.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaltabthemeoverridewriteresult.message",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalTabThemeOverrides.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaltabthemeoverridewriteresult.message",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaltabthemeoverridewri-4e7a9de8.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaltabthemeoverridewriteresult.succeeded",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalTabThemeOverrides.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaltabthemeoverridewriteresult.succeeded",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaltabthemeoverridewri-7ae27086.html"
     }

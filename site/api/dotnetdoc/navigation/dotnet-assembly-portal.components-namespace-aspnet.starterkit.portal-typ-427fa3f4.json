@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.cancelownrequest-system.int32-system.int64-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.cancelownrequest-system.int32-system.int64-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-0252396e.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getadminrequests-system.string-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getadminrequests-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-0ba51985.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getcurrentprofileforuser-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getcurrentprofileforuser-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-ba73fa77.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getrecentrequestsforuser-system.int32-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.getrecentrequestsforuser-system.int32-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-97a3bf9c.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.isschemaavailable",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-a10f08d3.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.reviewrequest-aspnet.starterkit.portal.employeeprofilecorrectionreviewrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.reviewrequest-aspnet.starterkit.portal.employeeprofilecorrectionreviewrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-03a6f5db.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.submitrequest-aspnet.starterkit.portal.employeeprofilecorrectionsubmitrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb.submitrequest-aspnet.starterkit.portal.employeeprofilecorrectionsubmitrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofilecorrectio-a3420deb.html"
     }

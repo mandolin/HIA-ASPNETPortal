@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.util.appsettingsloader",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Util/AppSettingsLoader.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.util.appsettingsloader",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.util.appsettingsloader-10a6c03c.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.util-type-t-as-041df524.json"
@@ -26,7 +26,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.util.externalconnectionstringloadresult",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.util.externalconnectionstringloadresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.util.externalconnectionst-72030f78.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.util-type-t-as-32ab7a10.json"
@@ -40,7 +40,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.util.externalconnectionstringloader",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Util/ExternalConnectionStringLoader.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.util.externalconnectionstringloader",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.util.externalconnectionst-bdc31052.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.util-type-t-as-51fe6b9a.json"
@@ -54,7 +54,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.util.unityconfigloader",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Util/UnityConfigLoader.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.util.unityconfigloader",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.util.unityconfigloader-7a70b885.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.util-type-t-as-7e85a56d.json"

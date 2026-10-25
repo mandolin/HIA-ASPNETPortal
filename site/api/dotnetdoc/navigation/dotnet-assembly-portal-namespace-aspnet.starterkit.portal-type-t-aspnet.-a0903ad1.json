@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditquery",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditquery:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaloperationauditquery:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditquery.action",
       "kind": "entry",
       "label": "Action",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditquery.action",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalOperationAudit.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaloperationauditquery.action",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaloperationauditquery-759486c5.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditquery.category",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalOperationAudit.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaloperationauditquery.category",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaloperationauditquery-509bb993.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditquery.endutcexclusive",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalOperationAudit.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaloperationauditquery.endutcexclusive",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaloperationauditquery-502e71ea.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditquery.page",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalOperationAudit.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaloperationauditquery.page",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaloperationauditquery-a06357a4.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditquery.pagesize",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalOperationAudit.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaloperationauditquery.pagesize",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaloperationauditquery-05d5ac5d.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditquery.startutc",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalOperationAudit.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaloperationauditquery.startutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaloperationauditquery-66dd13ad.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaloperationauditquery.targetid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalOperationAudit.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaloperationauditquery.targetid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaloperationauditquery-cf2c27ef.html"
     }

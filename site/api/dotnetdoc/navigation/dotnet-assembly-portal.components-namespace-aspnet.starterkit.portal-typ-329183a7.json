@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookiepolicy",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookiepolicy:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationcookiepolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookiepolicy.normalize-system.boolean-aspnet.starterkit.portal.portalcookiesamesitemode-system.string",
       "kind": "entry",
       "label": "Normalize",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookiepolicy.normalize-system.boolean-aspnet.starterkit.portal.portalcookiesamesitemode-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAuthenticationCookiePolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookiepolicy.normalize-system.boolean-aspnet.starterkit.portal.portalcookiesamesitemode-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-40e21bd7.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalauthenticationcookiepolicy.reasonnonerequiressecure",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAuthenticationCookiePolicy.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalauthenticationcookiepolicy.reasonnonerequiressecure",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalauthenticationcooki-b747a620.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalauthenticationcookiepolicy.reasonsettingsreadfailed",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAuthenticationCookiePolicy.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalauthenticationcookiepolicy.reasonsettingsreadfailed",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalauthenticationcooki-9f578317.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalauthenticationcookiepolicy.reasonunparsablesamesite",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAuthenticationCookiePolicy.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalauthenticationcookiepolicy.reasonunparsablesamesite",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalauthenticationcooki-607c8089.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookiepolicy.tryparsesamesite-system.string-aspnet.starterkit.portal.portalcookiesamesitemode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAuthenticationCookiePolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookiepolicy.tryparsesamesite-system.string-aspnet.starterkit.portal.portalcookiesamesitemode",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-0a05780f.html"
     }

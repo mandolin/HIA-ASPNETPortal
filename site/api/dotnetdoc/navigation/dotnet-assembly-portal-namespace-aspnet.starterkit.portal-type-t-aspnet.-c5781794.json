@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.icontaineraccessor.container",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/IContainerAccessor.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.icontaineraccessor.container",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.icontaineraccessor.contai-91cbd34b.html"
     }

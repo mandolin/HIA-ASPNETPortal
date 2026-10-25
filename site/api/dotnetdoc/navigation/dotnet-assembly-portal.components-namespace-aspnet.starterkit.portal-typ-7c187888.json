@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.configureoptionsprovider-system.func-aspnet.starterkit.portal.portalpasswordpolicyoptions",
       "kind": "entry",
       "label": "ConfigureOptionsProvider",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.configureoptionsprovider-system.func-aspnet.starterkit.portal.portalpasswordpolicyoptions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.configureoptionsprovider-system.func-aspnet.starterkit.portal.portalpasswordpolicyoptions",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.conf-1bcf5e72.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.containscontextterm-system.string-system.collections.generic.ienumerable-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.containscontextterm-system.string-system.collections.generic.ienumerable-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.cont-9b5518ec.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.countcategories-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.countcategories-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.coun-63b45c21.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.geteffectiveoptions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.geteffectiveoptions",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.gete-1c8ba556.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.issinglerepeatedcharacter-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.issinglerepeatedcharacter-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.issi-f60e6983.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.isweakpassword-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.isweakpassword-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.iswe-0076952d.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.minimumlength",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.minimumlength",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.mini-f448ee66.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.normalizeoptions-aspnet.starterkit.portal.portalpasswordpolicyoptions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.normalizeoptions-aspnet.starterkit.portal.portalpasswordpolicyoptions",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.norm-7c84744c.html"
     },
@@ -116,7 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.normalizetoken-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.normalizetoken-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.norm-ce895364.html"
     },
@@ -129,7 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.optionsproviderlock",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.optionsproviderlock",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.opti-39892d5a.html"
     },
@@ -142,7 +151,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.requiredcategorycount",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.requiredcategorycount",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.requ-526961ba.html"
     },
@@ -155,7 +164,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.splitcontexttokens-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.splitcontexttokens-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.spli-2dbe0cdd.html"
     },
@@ -168,7 +177,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-aspnet.starterkit.portal.portalpasswordrejection",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-aspnet.starterkit.portal.portalpasswordrejection",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryv-589c9fce.html"
     },
@@ -181,7 +190,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-system.collections.generic.ienumerable-system.string-aspnet.starterkit.portal.portalpasswordrejection",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicy.tryvalidate-system.string-system.collections.generic.ienumerable-system.string-aspnet.starterkit.portal.portalpasswordrejection",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicy.tryv-9d14a9f0.html"
     },
@@ -194,7 +203,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.weakpassworddictionary",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.weakpassworddictionary",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.weak-f0216adb.html"
     },
@@ -207,7 +216,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.optionsprovider",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpasswordpolicy.optionsprovider",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpasswordpolicy.opti-9e68318d.html"
     }

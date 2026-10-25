@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.category",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.category",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.category-dad2cce6.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.contentsize",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.contentsize",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.contentsize-f4409d66.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.createdbyuser",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.createdbyuser",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.createdbyus-4f19c090.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.createddate",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.createddate",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.createddate-ba82160e.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.filefriendlyname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.filefriendlyname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.filefriendl-0b246b64.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.filenameurl",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.filenameurl",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.filenameurl-45ded1bc.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.itemid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.itemid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.itemid-ebff6098.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.moduleid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.moduleid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.moduleid-cd738c27.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitem.size",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitem.size",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitem.size-4a03d56f.html"
     }

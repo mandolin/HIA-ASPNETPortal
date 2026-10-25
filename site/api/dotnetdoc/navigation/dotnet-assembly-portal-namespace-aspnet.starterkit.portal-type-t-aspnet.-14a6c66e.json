@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.cachedportalmodulecontrol",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.cachedportalmodulecontrol:base:control",
+      "kind": "relation",
+      "label": "Base: !:Control",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.cachedportalmodulecontrol:entry:hia-document:dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol.cacheidentity",
       "kind": "entry",
       "label": "CacheIdentity",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol.cacheidentity",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/CachedPortalModuleControl.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.cachedportalmodulecontrol.cacheidentity",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol-db6c6156.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol.cachekey",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/CachedPortalModuleControl.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.cachedportalmodulecontrol.cachekey",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol-d761062b.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.cachedportalmodulecontrol.createchildcontrols",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/CachedPortalModuleControl.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.cachedportalmodulecontrol.createchildcontrols",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.cachedportalmodulecontrol-22d182e7.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol.desktopsource",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/CachedPortalModuleControl.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.cachedportalmodulecontrol.desktopsource",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol-29117f5b.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol.moduleconfiguration",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/CachedPortalModuleControl.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.cachedportalmodulecontrol.moduleconfiguration",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol-c890b1c8.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol.moduleid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/CachedPortalModuleControl.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.cachedportalmodulecontrol.moduleid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol-4e423817.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol.portalid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/CachedPortalModuleControl.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.cachedportalmodulecontrol.portalid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.cachedportalmodulecontrol-35551661.html"
     },
@@ -103,7 +112,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.cachedportalmodulecontrol.render-system.web.ui.htmltextwriter",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.cachedportalmodulecontrol.render-system.web.ui.htmltextwriter",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.cachedportalmodulecontrol-b5ad4ba6.html"
     }

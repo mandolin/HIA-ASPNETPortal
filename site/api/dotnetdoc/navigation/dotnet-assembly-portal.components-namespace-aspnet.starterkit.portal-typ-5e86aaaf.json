@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ieventsdb.addevent-system.int32-system.string-system.string-system.datetime-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEventsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ieventsdb.addevent-system.int32-system.string-system.string-system.datetime-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ieventsdb.addevent-system-12bf23a4.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ieventsdb.deleteevent-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEventsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ieventsdb.deleteevent-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ieventsdb.deleteevent-sys-a2ad3025.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ieventsdb.getevents-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEventsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ieventsdb.getevents-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ieventsdb.getevents-syste-f5833a59.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ieventsdb.getsingleevent-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEventsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ieventsdb.getsingleevent-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ieventsdb.getsingleevent--23fe2dea.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ieventsdb.updateevent-system.int32-system.string-system.string-system.datetime-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEventsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ieventsdb.updateevent-system.int32-system.string-system.string-system.datetime-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ieventsdb.updateevent-sys-60d034f2.html"
     }

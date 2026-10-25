@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestatewriteresult",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestatewriteresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmodulepackagestatewriteresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestatewriteresult.-ctor-system.boolean-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmodulepackagestatewriteresult.-ctor-system.boolean-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackageStates.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmodulepackagestatewriteresult.-ctor-system.boolean-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmodulepackagestatew-a61c1699.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackagestatewriteresult.message",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackageStates.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmodulepackagestatewriteresult.message",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulepackagestatew-11498f67.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalmodulepackagestatewriteresult.succeeded",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalModulePackageStates.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalmodulepackagestatewriteresult.succeeded",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalmodulepackagestatew-8a1fc6cd.html"
     }

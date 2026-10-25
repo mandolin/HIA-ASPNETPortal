@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.-ctor-system.boolean-system.string-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.-ctor-system.boolean-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhiaboundaryvalidationresult.-ctor-system.boolean-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhiaboundaryvalidati-6d55a46d.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.code",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaboundaryvalidationresult.code",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidati-9383773c.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.isvalid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaboundaryvalidationresult.isvalid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidati-93e556d9.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidationresult.message",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaboundaryvalidationresult.message",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaboundaryvalidati-365fc05c.html"
     }

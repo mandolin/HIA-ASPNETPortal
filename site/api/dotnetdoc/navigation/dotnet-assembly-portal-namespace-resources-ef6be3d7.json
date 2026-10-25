@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-resources.lang",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
       "symbolId": "dotnet:t:resources.lang",
       "contentPath": "entries/hia-document-dotnet-t-resources.lang-531f9488.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-resources-type-t-resources.lang-91997ffd.json"

@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb:base:ileaverequestdb",
+      "kind": "relation",
+      "label": "Base: !:ILeaveRequestDb",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/LeaveRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequestdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.-ctor-aspn-e5e8e8d4.html"
     },
@@ -25,7 +34,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.createrequ-d5037ca1.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.getrecentbyuser-system.int32-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/LeaveRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequestdb.getrecentbyuser-system.int32-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.getrecentb-4ae1ab9d.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.isschemaavailable",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/LeaveRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequestdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.isschemaav-6f9176d2.html"
     }

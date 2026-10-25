@@ -4,6 +4,24 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.accessdenied",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.accessdenied:base:page",
+      "kind": "relation",
+      "label": "Base: !:Page",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.accessdenied:base:t-aspnet.starterkit.portal.portalpage-aspnet.starterkit.portal.accessdenied",
+      "kind": "relation",
+      "label": "Base: ASPNET.StarterKit.Portal.PortalPage{ASPNET.StarterKit.Portal.AccessDenied}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.accessdenied:entry:hia-document:dotnet-m-aspnet.starterkit.portal.accessdenied.page_load-system.object-system.eventargs",
       "kind": "entry",
       "label": "Page_Load",
@@ -12,7 +30,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.accessdenied.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/AccessDenied.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.accessdenied.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.accessdenied.page_load-sy-5f84a045.html"
     }

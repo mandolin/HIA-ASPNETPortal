@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldbcontext",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldbcontext:base:dbcontext",
+      "kind": "relation",
+      "label": "Base: !:DbContext",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldbcontext:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldbcontext.-ctor-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldbcontext.-ctor-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalDbContext.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldbcontext.-ctor-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldbcontext.-ctor-sys-cf850431.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldbcontext.announcements",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldbcontext.announcements",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldbcontext.announcem-ab21f00c.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldbcontext.contacts",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldbcontext.contacts",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldbcontext.contacts-05a0821d.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldbcontext.documents",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldbcontext.documents",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldbcontext.documents-848e204e.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldbcontext.events",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldbcontext.events",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldbcontext.events-ce921641.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldbcontext.htmltexts",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldbcontext.htmltexts",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldbcontext.htmltexts-49760b17.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldbcontext.links",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldbcontext.links",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldbcontext.links-a36cf519.html"
     }

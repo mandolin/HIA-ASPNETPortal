@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticentry",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticentry:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticentry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.category",
       "kind": "entry",
       "label": "Category",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.category",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.category",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.cat-01775554.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.clientip",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.clientip",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.cli-16f122f2.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.eventid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.eventid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.eve-e4c4ee39.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.exceptiondetail",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.exceptiondetail",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.exc-af449fdc.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.exceptiontype",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.exceptiontype",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.exc-16d1bce5.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.httpmethod",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.httpmethod",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.htt-5840c2d5.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.level",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.level",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.lev-a9dd9c22.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.message",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.message",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.mes-b005151b.html"
     },
@@ -116,7 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.physicalpath",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.physicalpath",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.phy-806f7912.html"
     },
@@ -129,7 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.requestpath",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.requestpath",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.req-6e40c4b6.html"
     },
@@ -142,7 +151,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.useragent",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.useragent",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.use-a9cf78c4.html"
     },
@@ -155,7 +164,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.username",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.username",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.use-cf8f29fc.html"
     },
@@ -168,7 +177,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.utctime",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticEntry.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portaldiagnosticentry.utctime",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portaldiagnosticentry.utc-33492a0b.html"
     }

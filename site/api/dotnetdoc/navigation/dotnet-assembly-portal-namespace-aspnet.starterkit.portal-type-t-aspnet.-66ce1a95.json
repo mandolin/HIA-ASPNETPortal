@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.viewdocument.documentdb",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/ViewDocument.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.viewdocument.documentdb",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.viewdocument.documentdb-a042ff78.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.viewdocument.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/ViewDocument.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.viewdocument.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.viewdocument.page_load-sy-4489dc46.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.viewdocument.shouldapplyportaltheme",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/ViewDocument.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.viewdocument.shouldapplyportaltheme",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.viewdocument.shouldapplyp-f1a78d1f.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.viewdocument.writenotfoundresponse",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/ViewDocument.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.viewdocument.writenotfoundresponse",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.viewdocument.writenotfoun-8c224b55.html"
     }

@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaperipheralenvelope",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaperipheralenvelope:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaperipheralenvelope:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.contract",
       "kind": "entry",
       "label": "Contract",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.contract",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaperipheralenvelope.contract",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelo-29e317e3.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.contractversion",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaperipheralenvelope.contractversion",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelo-a171457d.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.kind",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaperipheralenvelope.kind",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelo-836cb123.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.metadata",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaperipheralenvelope.metadata",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelo-a2525d20.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.occurredutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaperipheralenvelope.occurredutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelo-7e01de18.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.payload",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaperipheralenvelope.payload",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelo-f7be1e05.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.portalinstanceid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaperipheralenvelope.portalinstanceid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelo-b7e1ea45.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelope.producer",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhiaperipheralenvelope.producer",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhiaperipheralenvelo-a8df6007.html"
     }

@@ -4,16 +4,6 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal.portalhiaboundarycontract",
-      "kind": "namespace",
-      "label": "PortalHiaBoundaryContract",
-      "entryCount": 5,
-      "views": [
-        "dotnet"
-      ],
-      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal.por-2692979e.json"
-    },
-    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationinfo",
       "kind": "type",
       "label": "BusinessApplicationInfo",
@@ -22,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/BusinessApplicationInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.businessapplicationinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationinfo-780101f9.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d0260423.json"
@@ -36,7 +26,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/BusinessApplicationResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.businessapplicationresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationresult-31ab0a10.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4486843e.json"
@@ -50,7 +40,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationreviewrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/BusinessApplicationReviewRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.businessapplicationreviewrequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationreview-20c57dfa.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-439c70e0.json"
@@ -64,7 +54,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationsubmitrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/BusinessApplicationSubmitRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.businessapplicationsubmitrequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.businessapplicationsubmit-251625de.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d1905650.json"
@@ -78,7 +68,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemactionrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemActionRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemactionrequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemactionre-ea1463e2.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-b05e40f4.json"
@@ -92,7 +82,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemcommentcreaterequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemCommentCreateRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemcommentcreaterequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemcommentc-0b2e4f45.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-14480583.json"
@@ -106,7 +96,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemcommentresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemCommentResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemcommentresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemcommentr-ece98341.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-5ef202e3.json"
@@ -120,7 +110,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemcreaterequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemCreateRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemcreaterequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemcreatere-4d68fa48.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d54cf11e.json"
@@ -134,7 +124,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemdatascope",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScope.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemdatascope",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemdatascop-cc0bf6f5.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-97d4dba7.json"
@@ -148,7 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemdatascopepolicy",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScopePolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemdatascopepolicy",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemdatascop-eb97c4ef.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-820e7ed9.json"
@@ -162,7 +152,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemeventinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemeventinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemeventinf-66ecd6fd.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-078ca597.json"
@@ -176,7 +166,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationiteminfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationiteminfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationiteminfo-246630bb.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-00886091.json"
@@ -190,7 +180,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemparticipantcreaterequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemParticipantCreateRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemparticipantcreaterequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemparticip-fd7c46fd.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-6b4d597b.json"
@@ -204,7 +194,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemparticipantinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemParticipantInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemparticipantinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemparticip-f947dbdc.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-b021fd5a.json"
@@ -218,7 +208,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemparticipantresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemParticipantResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemparticipantresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemparticip-a7bbc919.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-35b63cdb.json"
@@ -232,7 +222,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemresult-5ea66c16.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-23fc76e8.json"
@@ -246,7 +236,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemtransition",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemTransitions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.collaborationitemtransition",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.collaborationitemtransiti-a17d8000.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-212dd4ae.json"
@@ -260,7 +250,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeedirectoryquery",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryQuery.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeedirectoryquery",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeedirectoryquery-c0efb64a.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-ee64be74.json"
@@ -274,7 +264,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeedirectorywriteresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeedirectorywriteresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeedirectorywriteres-868303f0.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-609c8b66.json"
@@ -288,7 +278,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileConfirmationRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofileconfirmationrequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofileconfirmati-097f13ba.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-8a3e4278.json"
@@ -302,7 +292,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofileconfirmationresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileConfirmationResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofileconfirmationresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofileconfirmati-8e93aeec.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-68cbc51e.json"
@@ -316,7 +306,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofileconfirmationview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileConfirmationView.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofileconfirmationview",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofileconfirmati-a0e62300.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-69a88e62.json"
@@ -330,7 +320,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionprofileview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileCorrectionProfileView.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofilecorrectionprofileview",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofilecorrection-1cb68148.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-adb52e1a.json"
@@ -344,7 +334,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionrequestinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileCorrectionRequestInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofilecorrectionrequestinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofilecorrection-76064969.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2c52dc6b.json"
@@ -358,7 +348,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionrequestresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileCorrectionRequestResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofilecorrectionrequestresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofilecorrection-e0ada780.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f07d8946.json"
@@ -372,7 +362,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionrequeststatuses",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileCorrectionRequestStatuses.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofilecorrectionrequeststatuses",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofilecorrection-2a81d143.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-fc3d71f5.json"
@@ -386,7 +376,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionreviewrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileCorrectionReviewRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofilecorrectionreviewrequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofilecorrection-cd65f01d.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-00fb8887.json"
@@ -400,7 +390,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionsubmitrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileCorrectionSubmitRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofilecorrectionsubmitrequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofilecorrection-2ff17ed9.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-82f85737.json"
@@ -414,7 +404,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionwritebackpolicy",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeProfileCorrectionWriteBackPolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeeprofilecorrectionwritebackpolicy",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeeprofilecorrection-f94a5202.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-329b96ac.json"
@@ -428,7 +418,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeesaverequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeSaveRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.employeesaverequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.employeesaverequest-652ded17.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-8d979c31.json"
@@ -442,7 +432,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementcreaterequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursementcreaterequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementcreat-585938c8.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-1d91313a.json"
@@ -456,7 +446,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursementinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementinfo-8b40983b.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-35cb20e5.json"
@@ -470,7 +460,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursementresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementresul-728ddf96.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7c2e6c04.json"
@@ -484,7 +474,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iannouncementitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IAnnouncementItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iannouncementitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iannouncementitem-91c061a2.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-24c80888.json"
@@ -498,7 +488,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iannouncementsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IAnnouncementsDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iannouncementsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iannouncementsdb-7478af54.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-1904b4b6.json"
@@ -512,7 +502,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ibusinessapplicationdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ibusinessapplicationdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ibusinessapplicationdb-e9b50e5c.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-5be6f0fa.json"
@@ -526,7 +516,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.icollaborationitemdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ICollaborationItemDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.icollaborationitemdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.icollaborationitemdb-c1e70f1a.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-38d5a2a4.json"
@@ -540,7 +530,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.icontactitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IContactItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.icontactitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.icontactitem-d2897351.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-c1a7ec5b.json"
@@ -554,7 +544,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.icontactsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IContactsDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.icontactsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.icontactsdb-f94889ad.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-c8d61753.json"
@@ -568,7 +558,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.idiscussionitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDiscussionItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.idiscussionitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.idiscussionitem-97d66cf1.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-1a7a8c27.json"
@@ -582,7 +572,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.idiscussionsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDiscussionDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.idiscussionsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.idiscussionsdb-1c37c3cd.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-79a1c717.json"
@@ -596,7 +586,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.idocumentitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.idocumentitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.idocumentitem-0d8a5ee8.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-8a06818a.json"
@@ -610,7 +600,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.idocumentitemdetails",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItemDetails.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.idocumentitemdetails",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.idocumentitemdetails-aa49816e.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d6c86298.json"
@@ -624,7 +614,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.idocumentsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.idocumentsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.idocumentsdb-25a61796.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-5800d06c.json"
@@ -638,7 +628,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iemployeedirectoryadmindb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryAdminDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iemployeedirectoryadmindb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iemployeedirectoryadmindb-5def04e6.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-831a2198.json"
@@ -652,7 +642,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iemployeedirectorydb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iemployeedirectorydb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iemployeedirectorydb-8cfb0893.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-35735bdd.json"
@@ -666,7 +656,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iemployeeinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iemployeeinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iemployeeinfo-781f192e.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-0c789304.json"
@@ -680,7 +670,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iemployeeprofileconfirmationdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileConfirmationDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iemployeeprofileconfirmationdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iemployeeprofileconfirmat-89aff424.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-c20ba0fe.json"
@@ -694,7 +684,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileCorrectionRequestDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iemployeeprofilecorrectionrequestdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iemployeeprofilecorrectio-0ad04356.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-427fa3f4.json"
@@ -708,7 +698,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ieventitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEventItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ieventitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ieventitem-75b76acd.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-c0af896f.json"
@@ -722,7 +712,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ieventsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEventsDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ieventsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ieventsdb-0a654481.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-5e86aaaf.json"
@@ -736,7 +726,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iexpensereimbursementdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iexpensereimbursementdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iexpensereimbursementdb-b29aec24.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2896e6d2.json"
@@ -750,7 +740,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iglobalitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IGlobalItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iglobalitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iglobalitem-93125b4e.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-04c8d988.json"
@@ -764,7 +754,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iglobalsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IGlobalDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iglobalsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iglobalsdb-e2dfbb68.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4d073fb6.json"
@@ -778,7 +768,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ihtmltextitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IHtmlTextItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ihtmltextitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ihtmltextitem-d56d6ee7.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-491a06d5.json"
@@ -792,7 +782,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ihtmltextsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IHtmlTextDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ihtmltextsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ihtmltextsdb-1bec10d7.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2ac9a259.json"
@@ -806,7 +796,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ileaverequestdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ileaverequestdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ileaverequestdb-22ec3454.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d5f85c52.json"
@@ -820,7 +810,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ilinkitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ilinkitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ilinkitem-3cb68481.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-c5940337.json"
@@ -834,7 +824,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ilinksdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ilinksdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ilinksdb-ffacfe3d.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-9091a587.json"
@@ -848,7 +838,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.imoduledefinitionitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleDefinitionItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.imoduledefinitionitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.imoduledefinitionitem-b3221860.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-11ae29ea.json"
@@ -862,7 +852,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.imoduledefsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleDefsDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.imoduledefsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.imoduledefsdb-9d77e490.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-bc49c1fe.json"
@@ -876,7 +866,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.imoduleitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.imoduleitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.imoduleitem-441c9aed.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f517677f.json"
@@ -890,7 +880,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.imodulesdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.imodulesdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.imodulesdb-d5f1e721.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7285d99f.json"
@@ -904,7 +894,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iorganizationunitinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iorganizationunitinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iorganizationunitinfo-a70e7363.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-79381f05.json"
@@ -918,7 +908,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iportaldb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IPortalDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iportaldb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportaldb-14580ed2.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-ed232304.json"
@@ -932,7 +922,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iportaldbconnectionfactory",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iportaldbconnectionfactory",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportaldbconnectionfactor-0322d288.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-faaefed2.json"
@@ -946,7 +936,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iportalmoduletargetsource",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iportalmoduletargetsource",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportalmoduletargetsource-889f18d4.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-85d59f3e.json"
@@ -960,7 +950,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iportalsecurity",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IPortalSecurity.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iportalsecurity",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportalsecurity-93f2347e.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-62d52230.json"
@@ -974,7 +964,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iportalworkitemdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IPortalWorkItemDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iportalworkitemdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iportalworkitemdb-e83b7f9c.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f3e24446.json"
@@ -988,7 +978,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.ireferencedatadb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IReferenceDataDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.ireferencedatadb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.ireferencedatadb-122d86a9.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4f07ce53.json"
@@ -1002,7 +992,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iroleitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IRoleItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iroleitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iroleitem-f79e42e9.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-994a0237.json"
@@ -1016,7 +1006,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.irolesdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IRolesDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.irolesdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.irolesdb-fcfe3195.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7b7f0a87.json"
@@ -1030,7 +1020,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.itabitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.itabitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.itabitem-a2caa4aa.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-40f44620.json"
@@ -1044,7 +1034,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.itabsdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.itabsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.itabsdb-751c2b0c.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f8d2447e.json"
@@ -1058,7 +1048,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iuseremployeebindingadmindb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iuseremployeebindingadmindb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iuseremployeebindingadmin-c5b952f3.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-9425c98d.json"
@@ -1072,7 +1062,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iuseremployeebindinginfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserEmployeeBindingInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iuseremployeebindinginfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iuseremployeebindinginfo-c225fd66.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-1ac37548.json"
@@ -1086,7 +1076,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iuseritem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iuseritem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iuseritem-d4622196.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-059b551c.json"
@@ -1100,7 +1090,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iuserprofileinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserProfileInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iuserprofileinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iuserprofileinfo-69e7035e.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-426ece18.json"
@@ -1114,7 +1104,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iuserregistrationinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iuserregistrationinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iuserregistrationinfo-a60fcf94.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d9c65486.json"
@@ -1128,7 +1118,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.iusersdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.iusersdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.iusersdb-cfc4ce60.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2fb2df22.json"
@@ -1142,7 +1132,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestcreaterequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequestcreaterequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestcreaterequest-a3fa83c0.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7ab110f2.json"
@@ -1156,7 +1146,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequestinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestinfo-fe9489b3.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-318cd3dd.json"
@@ -1170,7 +1160,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequestresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestresult-969727ce.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e2adcddc.json"
@@ -1184,10 +1174,20 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.organizationunitsaverequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.organizationunitsaverequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.organizationunitsavereque-3b264f44.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d937fbfa.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule",
+      "kind": "type",
+      "label": "PayloadRule",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-fd220e6d.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaladministrationpolicy",
@@ -1198,7 +1198,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaladministrationpolicy",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAdministrationPolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaladministrationpolicy",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaladministrationpolic-b84f95b1.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-c0016007.json"
@@ -1212,7 +1212,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalauthenticationcookiepolicy",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAuthenticationCookiePolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalauthenticationcookiepolicy",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalauthenticationcooki-994044a5.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-329183a7.json"
@@ -1226,7 +1226,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalbusinessapplicationstatuses",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationStatuses.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalbusinessapplicationstatuses",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalbusinessapplication-76cc3851.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-6b6001d3.json"
@@ -1240,7 +1240,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalbusinessapplicationtransition",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalbusinessapplicationtransition",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalbusinessapplication-20f6a154.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f6e07a96.json"
@@ -1254,7 +1254,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalbusinessapplicationtransitions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalBusinessApplicationTransitions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalbusinessapplicationtransitions",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalbusinessapplication-0b3fb065.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-8861767f.json"
@@ -1268,7 +1268,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcapabilitydefinition",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCapabilityRegistry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcapabilitydefinition",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcapabilitydefinitio-6d97ea4a.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-b8213b5c.json"
@@ -1282,7 +1282,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcapabilitylifecyclestates",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCapabilityRegistry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcapabilitylifecyclestates",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcapabilitylifecycle-f21847fb.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-cce97815.json"
@@ -1296,7 +1296,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCapabilityPermissionMatrixRenderer.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcapabilitypermissionmatrixrenderer",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcapabilitypermissio-dc285c62.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-73d3cb8c.json"
@@ -1310,7 +1310,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcapabilityregistry",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCapabilityRegistry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcapabilityregistry",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcapabilityregistry-b909de50.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d0ebf5ea.json"
@@ -1324,7 +1324,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcapabilityroles",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCapabilityRoles.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcapabilityroles",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcapabilityroles-bd1cc350.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-074af4a2.json"
@@ -1338,7 +1338,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcollaborationitemactions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemActions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcollaborationitemactions",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcollaborationitemac-551c8484.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-8cccac72.json"
@@ -1352,7 +1352,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcollaborationitemeventtypes",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemEventTypes.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcollaborationitemeventtypes",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcollaborationitemev-e8a0ef9c.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-26b81a42.json"
@@ -1366,7 +1366,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcollaborationitemparticipantroles",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemParticipantRoles.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcollaborationitemparticipantroles",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcollaborationitempa-73c6f3ff.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4cd623d9.json"
@@ -1380,7 +1380,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcollaborationitemstatuses",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemStatuses.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcollaborationitemstatuses",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcollaborationitemst-a9864ad7.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4297ed85.json"
@@ -1394,7 +1394,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcollaborationitemtransitions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemTransitions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcollaborationitemtransitions",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcollaborationitemtr-f592bf63.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-845a0809.json"
@@ -1408,7 +1408,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemVisibilityScopes.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcollaborationitemvisibilityscopes",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcollaborationitemvi-14e6cd08.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-246e8076.json"
@@ -1422,7 +1422,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcookiesamesitemode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAuthenticationCookiePolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcookiesamesitemode",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcookiesamesitemode-d28121e9.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-9242fc3f.json"
@@ -1436,7 +1436,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcookiesecurityoptions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalAuthenticationCookiePolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalcookiesecurityoptions",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalcookiesecurityoptio-68ee8461.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e2e7d18b.json"
@@ -1450,7 +1450,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaldatabaseprofile",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaldatabaseprofile",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaldatabaseprofile-39a08fed.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-726dab97.json"
@@ -1464,7 +1464,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaldatabaseprovidernames",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaldatabaseprovidernames",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaldatabaseprovidernam-eb7158ef.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-2f62ddc5.json"
@@ -1478,7 +1478,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaldatabasepurpose",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaldatabasepurpose",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaldatabasepurpose-4665dafe.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d2b08738.json"
@@ -1492,7 +1492,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaldbconnectionfactory",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaldbconnectionfactory",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaldbconnectionfactory-63888c2f.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-fea3684d.json"
@@ -1506,7 +1506,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaldesktoptaburl",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDesktopTabUrl.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaldesktoptaburl",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaldesktoptaburl-950d75c3.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-66a84325.json"
@@ -1520,7 +1520,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaldisplaynameresolver",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDisplayNameResolver.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaldisplaynameresolver",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaldisplaynameresolver-cc7bc38c.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-65756e96.json"
@@ -1534,7 +1534,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalemployeestatuses",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalEmployeeStatuses.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalemployeestatuses",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalemployeestatuses-1e86b1c3.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-6b169c85.json"
@@ -1543,14 +1543,14 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhiaboundarycontract",
       "kind": "type",
       "label": "PortalHiaBoundaryContract",
-      "entryCount": 21,
+      "entryCount": 22,
       "views": [
         "dotnet"
       ],
-      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaboundarycontract",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
-      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalhiaboundarycontract",
-      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalhiaboundarycontract-e6f6a6cd.html",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalhiaboundarycontract.payloadrule",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalhiaboundarycontract-54d1a48f.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-17756aff.json"
     },
     {
@@ -1562,7 +1562,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaboundaryvalidationresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalhiaboundaryvalidationresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalhiaboundaryvalidati-2b5687fd.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f181269f.json"
@@ -1576,7 +1576,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaperipheralenvelope",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalhiaperipheralenvelope",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalhiaperipheralenvelo-5f2ce2c5.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-82102337.json"
@@ -1590,7 +1590,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaproducerdescriptor",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalHiaBoundaryContracts.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalhiaproducerdescriptor",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalhiaproducerdescript-e21c8302.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-80fce964.json"
@@ -1604,7 +1604,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationentry",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationentry",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationentry-c3dec92d.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-df0eda5f.json"
@@ -1618,7 +1618,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationentrykind",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationentrykind",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationentrykind-502115db.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-b269fd55.json"
@@ -1632,7 +1632,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationlifecyclestate",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationlifecyclestate",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationlifecycle-0872a3a6.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-8cf18fbc.json"
@@ -1646,7 +1646,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationregistry",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationregistry",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationregistry-cf938174.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-ff81ae62.json"
@@ -1660,7 +1660,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationVisibilityPolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationvisibilitycontext",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilit-246ca99e.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-0c8202e0.json"
@@ -1674,7 +1674,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilitymode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationRegistry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationvisibilitymode",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilit-fdd243b0.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-09e7d9b6.json"
@@ -1688,7 +1688,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilitypolicy",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalNavigationVisibilityPolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationvisibilitypolicy",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilit-6b282149.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7b521793.json"
@@ -1702,7 +1702,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalorganizationtreeedge",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalOrganizationTreeExpander.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalorganizationtreeedge",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalorganizationtreeedg-d30d00af.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-0cb6a5ad.json"
@@ -1716,7 +1716,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalorganizationtreeexpander",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalOrganizationTreeExpander.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalorganizationtreeexpander",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalorganizationtreeexp-0322e2e5.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-d6369e27.json"
@@ -1730,7 +1730,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpassworditerationpolicy",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordIterationPolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalpassworditerationpolicy",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalpassworditerationpo-0418a119.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-18d432ef.json"
@@ -1744,7 +1744,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpasswordpolicy",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalpasswordpolicy",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalpasswordpolicy-30123ad2.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7c187888.json"
@@ -1758,7 +1758,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpasswordpolicyoptions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalpasswordpolicyoptions",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalpasswordpolicyoptio-a1c8ba5c.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-a02b22d6.json"
@@ -1772,7 +1772,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpasswordrejection",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordRejection.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalpasswordrejection",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalpasswordrejection-ed0e701f.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7296825d.json"
@@ -1786,7 +1786,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissiondefinition",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalpermissiondefinition",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalpermissiondefinitio-3d257fe3.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-ac876411.json"
@@ -1800,7 +1800,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissionkeys",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalpermissionkeys",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalpermissionkeys-fdbbc55e.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-04a62314.json"
@@ -1814,7 +1814,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalpermissionregistry",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalpermissionregistry",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalpermissionregistry-7ec02fe9.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-42961637.json"
@@ -1828,7 +1828,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalreferencedatasets",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalReferenceDataSets.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalreferencedatasets",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalreferencedatasets-7fcfc4eb.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-65eeb2ad.json"
@@ -1842,7 +1842,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalregistrationinviterejection",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalRegistrationInviteRejection.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalregistrationinviterejection",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalregistrationinviter-1dcdfe04.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-25477176.json"
@@ -1856,7 +1856,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalrolenames",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalRoles.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalrolenames",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalrolenames-69cc7123.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4ad6a809.json"
@@ -1870,7 +1870,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalroleparser",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalRoles.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalroleparser",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalroleparser-1939db16.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-6ade3cc4.json"
@@ -1884,7 +1884,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalsecurity",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalSecurity.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalsecurity",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalsecurity-5f8c7f0b.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-33d52b79.json"
@@ -1898,7 +1898,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalsigninresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalSignInResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalsigninresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalsigninresult-7c4a8602.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-5ff3b3d4.json"
@@ -1912,7 +1912,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaluseremployeebindingstatuses",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalUserEmployeeBindingStatuses.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaluseremployeebindingstatuses",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaluseremployeebinding-5044fcb9.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-adf90f27.json"
@@ -1926,7 +1926,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaluserprofilestatuses",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalUserProfileStatuses.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaluserprofilestatuses",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaluserprofilestatuses-6c0abb95.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-770836fb.json"
@@ -1940,7 +1940,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaluserregistrationstatuses",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalUserRegistrationStatuses.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaluserregistrationstatuses",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaluserregistrationsta-542bfe61.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-b3cfe92f.json"
@@ -1954,7 +1954,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitembusinesskinds",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemBusinessKinds.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitembusinesskinds",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitembusinesskin-760fd14c.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-dded1112.json"
@@ -1968,7 +1968,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemcompletionrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemCompletionRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemcompletionrequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemcompletionr-5f286476.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-9701f064.json"
@@ -1982,7 +1982,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemcreaterequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemCreateRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemcreaterequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemcreatereque-3b7407d8.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-b3180276.json"
@@ -1996,7 +1996,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemeventinfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemEventInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemeventinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemeventinfo-20cd56ed.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-6dfe92af.json"
@@ -2010,7 +2010,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemeventtypes",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemEventTypes.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemeventtypes",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemeventtypes-435d0cd2.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-cd752480.json"
@@ -2024,7 +2024,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkiteminfo",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkiteminfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkiteminfo-7355e5cb.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e038cb09.json"
@@ -2038,7 +2038,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemqueryresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemQueryResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemqueryresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemqueryresult-1b1a59e4.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-45b8791e.json"
@@ -2052,7 +2052,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemresult",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemResult.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemresult-6a527ca6.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-f5d29820.json"
@@ -2066,7 +2066,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemstatuses",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemStatuses.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemstatuses",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemstatuses-685c3655.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-bc93d5e3.json"
@@ -2080,7 +2080,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemtargetresolution",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemtargetresolution",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemtargetresol-f4b84a18.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-8ffd6cfe.json"
@@ -2094,7 +2094,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkitemtargetresolver",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkitemtargetresolver",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkitemtargetresol-ff8d61d0.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-3cb73566.json"
@@ -2108,7 +2108,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalworkflowactions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkflowActions.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalworkflowactions",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalworkflowactions-300eb803.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-5b4df5dd.json"
@@ -2122,7 +2122,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.referencedataitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ReferenceDataItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.referencedataitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.referencedataitem-9c0ae6bb.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7d34171d.json"
@@ -2136,7 +2136,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.rolepermissionentry",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/RolePermissionEntry.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.rolepermissionentry",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.rolepermissionentry-aea60be0.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-eed49a12.json"
@@ -2150,7 +2150,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.useremployeebindingendrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingEndRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.useremployeebindingendrequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.useremployeebindingendreq-9748c197.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-add90cbd.json"
@@ -2164,7 +2164,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.useremployeebindingsaverequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingSaveRequest.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.useremployeebindingsaverequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.useremployeebindingsavere-4b576729.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-0b29804f.json"

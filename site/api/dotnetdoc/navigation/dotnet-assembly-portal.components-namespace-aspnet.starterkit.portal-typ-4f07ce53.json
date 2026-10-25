@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ireferencedatadb.trygetactiveitems-system.string-system.collections.generic.ilist-aspnet.starterkit.portal.referencedataitem",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IReferenceDataDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ireferencedatadb.trygetactiveitems-system.string-system.collections.generic.ilist-aspnet.starterkit.portal.referencedataitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ireferencedatadb.trygetac-dc92a73a.html"
     }

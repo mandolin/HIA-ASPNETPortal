@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionregistry",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionregistry:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionregistry:entry:hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
       "kind": "entry",
       "label": "Definitions",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.definitions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpermissionregistry.definitions",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpermissionregistry.-4f512f3d.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpermissionregistry.isdefined-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.-1d47b608.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkey-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.-792a605a.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpermissionregistry.normalizedefinedkeys-system.collections.generic.ienumerable-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpermissionregistry.-02c84ef0.html"
     }

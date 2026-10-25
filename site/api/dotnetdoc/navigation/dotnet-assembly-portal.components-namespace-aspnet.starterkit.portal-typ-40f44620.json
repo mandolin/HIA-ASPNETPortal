@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.accessroles",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.accessroles",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.accessroles-825106b3.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.mobiletabname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.mobiletabname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.mobiletabname-4d520022.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.mobiletabnameen",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.mobiletabnameen",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.mobiletabnameen-3b51ca31.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.mobiletabnamelocalizedjson",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.mobiletabnamelocalizedjson",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.mobiletabnameloc-451b8a3d.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.navigationkey",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.navigationkey",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.navigationkey-18750a29.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.showmobile",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.showmobile",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.showmobile-1102f92b.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.tabid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.tabid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.tabid-c5f3f032.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.tabname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.tabname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.tabname-dad782fc.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.tabnameen",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.tabnameen",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.tabnameen-0bd33eef.html"
     },
@@ -129,7 +129,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.tabnamelocalizedjson",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.tabnamelocalizedjson",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.tabnamelocalized-f645312f.html"
     },
@@ -142,7 +142,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.itabitem.taborder",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.itabitem.taborder",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.itabitem.taborder-7b775e51.html"
     }

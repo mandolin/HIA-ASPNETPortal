@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingwriteresult",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingwriteresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingwriteresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingwriteresult.-ctor-system.boolean-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingwriteresult.-ctor-system.boolean-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingwriteresult.-ctor-system.boolean-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingwriter-9bf54b07.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingwriteresult.message",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsystemsettingwriteresult.message",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsystemsettingwriter-a899d713.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsystemsettingwriteresult.succeeded",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsystemsettingwriteresult.succeeded",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsystemsettingwriter-a27814b9.html"
     }

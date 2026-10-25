@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iglobalsdb.getsingleportal-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IGlobalDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iglobalsdb.getsingleportal-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iglobalsdb.getsingleporta-f6747359.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iglobalsdb.updateportalinfo-system.int32-system.string-system.boolean",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IGlobalDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iglobalsdb.updateportalinfo-system.int32-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iglobalsdb.updateportalin-bf2fbacf.html"
     }

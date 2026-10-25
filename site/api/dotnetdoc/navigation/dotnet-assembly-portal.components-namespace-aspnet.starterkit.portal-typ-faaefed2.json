@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportaldbconnectionfactory.createconnection-aspnet.starterkit.portal.portaldatabaseprofile",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportaldbconnectionfactory.createconnection-aspnet.starterkit.portal.portaldatabaseprofile",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportaldbconnectionfactor-4331fa82.html"
     }

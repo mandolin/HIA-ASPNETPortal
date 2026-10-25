@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcollaborationitemeventtypes",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcollaborationitemeventtypes:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcollaborationitemeventtypes:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcollaborationitemeventtypes.comment",
       "kind": "entry",
       "label": "Comment",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcollaborationitemeventtypes.comment",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemEventTypes.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcollaborationitemeventtypes.comment",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcollaborationitemev-edba330d.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcollaborationitemeventtypes.workflowaction",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCollaborationItemEventTypes.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcollaborationitemeventtypes.workflowaction",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcollaborationitemev-7b2e700f.html"
     }

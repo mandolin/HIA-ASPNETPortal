@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesettingitem",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesettingitem:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesettingitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.moduleid",
       "kind": "entry",
       "label": "ModuleId",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.moduleid",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/ModuleSettingItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulesettingitem.moduleid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulesettingitem.modulei-f579a65d.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.modulesettingid",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/ModuleSettingItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulesettingitem.modulesettingid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulesettingitem.modules-e1dfa8a1.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.settingname",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/ModuleSettingItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulesettingitem.settingname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulesettingitem.setting-c0f2177f.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulesettingitem.settingtext",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/ModuleSettingItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulesettingitem.settingtext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulesettingitem.setting-e4064893.html"
     }

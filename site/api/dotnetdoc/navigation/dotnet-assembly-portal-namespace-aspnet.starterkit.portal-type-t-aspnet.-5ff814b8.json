@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulecatalogrow",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulecatalogrow:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulecatalogrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.modulecatalogrow.-ctor-aspnet.starterkit.portal.portalmodulepackage-system.boolean-system.boolean-system.string-aspnet.starterkit.portal.portalmodulepackagestatereadresult-aspnet.starterkit.portal.imoduledefinitionitem-system.int32",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulecatalogrow.-ctor-aspnet.starterkit.portal.portalmodulepackage-system.boolean-system.boolean-system.string-aspnet.starterkit.portal.portalmodulepackagestatereadresult-aspnet.starterkit.portal.imoduledefinitionitem-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.modulecatalogrow.-ctor-aspnet.starterkit.portal.portalmodulepackage-system.boolean-system.boolean-system.string-aspnet.starterkit.portal.portalmodulepackagestatereadresult-aspnet.starterkit.portal.imoduledefinitionitem-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.modulecatalogrow.-ctor-as-49df060b.html"
     },
@@ -25,7 +33,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.candisable",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.candisable",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.candisab-2af20d8a.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.canenable",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.canenable",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.canenabl-82a02ba1.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.canregister",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.canregister",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.canregis-eb9b474b.html"
     },
@@ -64,7 +72,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.definitiontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.definitiontext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.definiti-b70245f2.html"
     },
@@ -77,7 +85,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.desktopentry",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.desktopentry",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.desktope-10e691ec.html"
     },
@@ -90,7 +98,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.displayname",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.displayname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.displayn-c5bc442d.html"
     },
@@ -103,7 +111,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.instancecount",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.instancecount",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.instance-dcd128aa.html"
     },
@@ -116,7 +124,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.isenabled",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.isenabled",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.isenable-ed703419.html"
     },
@@ -129,7 +137,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.isprofileallowed",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.isprofileallowed",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.isprofil-8871c2cb.html"
     },
@@ -142,7 +150,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.isregistered",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.isregistered",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.isregist-e6e85bd8.html"
     },
@@ -155,7 +163,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.packageid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.packageid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.packagei-4c84f60d.html"
     },
@@ -168,7 +176,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.profiletext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.profiletext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.profilet-795c17be.html"
     },
@@ -181,7 +189,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.statetext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.statetext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.statetex-0d3dacce.html"
     },
@@ -194,7 +202,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.modulecatalogrow.version",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.modulecatalogrow.version",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.modulecatalogrow.version-902236ac.html"
     }

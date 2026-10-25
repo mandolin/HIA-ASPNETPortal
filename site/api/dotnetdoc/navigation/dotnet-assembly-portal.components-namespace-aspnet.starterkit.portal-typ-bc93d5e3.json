@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemstatuses",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemstatuses:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemstatuses:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.cancelled",
       "kind": "entry",
       "label": "Cancelled",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.cancelled",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemStatuses.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemstatuses.cancelled",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.ca-553f2e0a.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.completed",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemStatuses.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemstatuses.completed",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.co-aefef8ac.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.expired",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemStatuses.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemstatuses.expired",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.ex-0c6d7628.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.inprogress",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemStatuses.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemstatuses.inprogress",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.in-0ad33933.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.open",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemStatuses.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalworkitemstatuses.open",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalworkitemstatuses.op-869107cf.html"
     }

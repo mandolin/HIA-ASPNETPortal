@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.createdbyuser",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.createdbyuser",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.createdbyuser-d040e09d.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.createddate",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.createddate",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.createddate-7e17b2bb.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.description",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.description",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.description-5db6b255.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.itemid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.itemid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.itemid-4db20107.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.mobileurl",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.mobileurl",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.mobileurl-72a23374.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.moduleid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.moduleid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.moduleid-13c31ccc.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.title",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.title",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.title-31f2d93d.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.url",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.url",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.url-03c944e2.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ilinkitem.vieworder",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ilinkitem.vieworder",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ilinkitem.vieworder-3cfa28a4.html"
     }

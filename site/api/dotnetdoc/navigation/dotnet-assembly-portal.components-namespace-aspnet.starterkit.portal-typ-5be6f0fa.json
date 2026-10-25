@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.getadminapplications-system.string-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.getadminapplications-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.ge-20ae0a02.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.getrecentapplicationsforuser-system.int32-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.getrecentapplicationsforuser-system.int32-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.ge-7ed4eefb.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.isschemaavailable",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.is-8da59df3.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.resubmitapplication-system.int64-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.resubmitapplication-system.int64-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.re-6c504e8c.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.reviewapplication-aspnet.starterkit.portal.businessapplicationreviewrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.reviewapplication-aspnet.starterkit.portal.businessapplicationreviewrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.re-ecde7467.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.submitapplication-aspnet.starterkit.portal.businessapplicationsubmitrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IBusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ibusinessapplicationdb.submitapplication-aspnet.starterkit.portal.businessapplicationsubmitrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ibusinessapplicationdb.su-22ec01af.html"
     }

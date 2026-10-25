@@ -1,9 +1,0 @@
-        <%--
-            <lang>
-                <zh-CN>编辑链接沿用服务器生成的目标和权限判断；没有有效编辑页时不应把它当作可用导航。</zh-CN>
-                <en>The edit link keeps the server-generated target and permission decision; without a valid edit page it must not be treated as usable navigation.</en>
-            </lang>
-        --%>
-        <asp:hyperlink id="EditButton" cssclass="CommandButton portal-module-action portal-secondary-action" EnableViewState="false" runat="server" />
-    </asp:Panel>
-</div>

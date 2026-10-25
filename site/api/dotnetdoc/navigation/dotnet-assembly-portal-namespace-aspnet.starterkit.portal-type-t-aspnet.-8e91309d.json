@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.binddata",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.binddata",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.binddata-3e9b72e1.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.body",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.body",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.body-9bc0062d.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.bodyfield",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.bodyfield",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.bodyfield-22d8dbff.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.buttonpanel",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.buttonpanel",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.buttonpane-30c0b469.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.cancelbtn_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.cancelbtn_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.cancelbtn_-a0f837fd.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.createdbyuser",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.createdbyuser",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.createdbyu-b2b54f51.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.createddate",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.createddate",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.createddat-56429617.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.discussdetails.discussiondb",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.discussdetails.discussiondb",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.discussdetails.discussion-8ebd4f7d.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.editpanel",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.editpanel",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.editpanel-62cc46b9.html"
     },
@@ -129,7 +129,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.encodedisplaytext-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.encodedisplaytext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.encodedisp-906894c8.html"
     },
@@ -142,7 +142,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.page_load--501d1b9a.html"
     },
@@ -155,7 +155,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.discussdetails.portalsecurity",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.discussdetails.portalsecurity",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.discussdetails.portalsecu-8ffcafc3.html"
     },
@@ -168,7 +168,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.retitle-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.retitle-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.retitle-sy-a27a9216.html"
     },
@@ -181,7 +181,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.replybtn",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.replybtn",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.replybtn-ded67955.html"
     },
@@ -194,7 +194,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.replybtn_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.replybtn_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.replybtn_c-24a7e4ef.html"
     },
@@ -207,7 +207,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.subject",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.subject",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.subject-aee8fa47.html"
     },
@@ -220,7 +220,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.titlefield",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.titlefield",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.titlefield-72831ffb.html"
     },
@@ -233,7 +233,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.tryauthorizeeditorforcurrentitem",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.tryauthorizeeditorforcurrentitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.tryauthori-b4b89144.html"
     },
@@ -246,7 +246,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.tryreadrequestidentifiers",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.tryreadrequestidentifiers",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.tryreadreq-15106e30.html"
     },
@@ -259,7 +259,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.discussdetails.updatebtn_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.discussdetails.updatebtn_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.discussdetails.updatebtn_-b1b00462.html"
     },
@@ -272,7 +272,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.cancelbutton",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.cancelbutton",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.cancelbutt-b04d383b.html"
     },
@@ -285,7 +285,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.itemid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.itemid",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.itemid-9e400123.html"
     },
@@ -298,7 +298,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.moduleid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.moduleid",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.moduleid-91188000.html"
     },
@@ -311,7 +311,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.nextitem",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.nextitem",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.nextitem-aa2ad88f.html"
     },
@@ -324,7 +324,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.previtem",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.previtem",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.previtem-cc0e9117.html"
     },
@@ -337,7 +337,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.discussdetails.updatebutton",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/DiscussDetails.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.discussdetails.updatebutton",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.discussdetails.updatebutt-7bb86428.html"
     }

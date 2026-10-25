@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsecuritydbcontext",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsecuritydbcontext:base:dbcontext",
+      "kind": "relation",
+      "label": "Base: !:DbContext",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsecuritydbcontext:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalsecuritydbcontext.-ctor-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsecuritydbcontext.-ctor-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalSecurityDbContext.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsecuritydbcontext.-ctor-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsecuritydbcontext.--318f1083.html"
     },
@@ -25,7 +34,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsecuritydbcontext.onmodelcreating-system.data.entity.dbmodelbuilder",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsecuritydbcontext.onmodelcreating-system.data.entity.dbmodelbuilder",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsecuritydbcontext.o-414d53c5.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.registrationinvites",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalSecurityDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsecuritydbcontext.registrationinvites",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.r-df512af7.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.roles",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalSecurityDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsecuritydbcontext.roles",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.r-74e8424b.html"
     },
@@ -64,7 +72,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.usercredentials",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalSecurityDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsecuritydbcontext.usercredentials",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.u-927f5129.html"
     },
@@ -77,7 +85,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.userprofiles",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalSecurityDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsecuritydbcontext.userprofiles",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.u-1fd2eeef.html"
     },
@@ -90,7 +98,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.userregistrations",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalSecurityDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsecuritydbcontext.userregistrations",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.u-e94cc259.html"
     },
@@ -103,7 +111,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.usersecuritystates",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalSecurityDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsecuritydbcontext.usersecuritystates",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.u-f5d24835.html"
     },
@@ -116,7 +124,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.users",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalSecurityDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalsecuritydbcontext.users",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalsecuritydbcontext.u-f4da93aa.html"
     }

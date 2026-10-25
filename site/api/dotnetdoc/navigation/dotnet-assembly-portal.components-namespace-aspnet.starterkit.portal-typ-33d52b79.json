@@ -4,6 +4,24 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsecurity",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsecurity:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsecurity:interface:t-aspnet.starterkit.portal.iportalsecurity",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IPortalSecurity",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsecurity:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalsecurity.-ctor-aspnet.starterkit.portal.itabsdb-aspnet.starterkit.portal.imodulesdb",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +30,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsecurity.-ctor-aspnet.starterkit.portal.itabsdb-aspnet.starterkit.portal.imodulesdb",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalSecurity.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsecurity.-ctor-aspnet.starterkit.portal.itabsdb-aspnet.starterkit.portal.imodulesdb",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsecurity.-ctor-aspn-04fe6338.html"
     },
@@ -25,7 +43,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsecurity.encrypt-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalSecurity.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsecurity.encrypt-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsecurity.encrypt-sy-19d0f89e.html"
     },
@@ -38,7 +56,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsecurity.haseditpermissions-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalSecurity.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsecurity.haseditpermissions-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsecurity.haseditper-2de845ca.html"
     },
@@ -51,7 +69,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsecurity.isinrole-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalSecurity.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsecurity.isinrole-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsecurity.isinrole-s-7c45111c.html"
     },
@@ -64,7 +82,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsecurity.isinroles-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalSecurity.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsecurity.isinroles-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsecurity.isinroles--e48179cb.html"
     }

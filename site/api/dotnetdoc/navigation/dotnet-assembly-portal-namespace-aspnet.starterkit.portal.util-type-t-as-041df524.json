@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.appsettingsloader",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.appsettingsloader:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.appsettingsloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadappsettings-newtonsoft.json.linq.jobject-system.boolean",
       "kind": "entry",
       "label": "LoadAppSettings",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadappsettings-newtonsoft.json.linq.jobject-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.util.appsettingsloader.loadappsettings-newtonsoft.json.linq.jobject-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.lo-f1e28f36.html"
     },
@@ -25,7 +33,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadconfig-system.string-system.boolean-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Util/AppSettingsLoader.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.util.appsettingsloader.loadconfig-system.string-system.boolean-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.lo-95abaeec.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.loadconfigfile-system.string-system.boolean-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Util/AppSettingsLoader.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.util.appsettingsloader.loadconfigfile-system.string-system.boolean-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.appsettingsloader.lo-1c07676e.html"
     }

@@ -1,8 +1,0 @@
-    <%--
-        <lang>
-            <zh-CN>DocumentSource 和 TransformSource 由 code-behind 在路径和文件存在性验证后设置；标记层不接受客户端路径或远程资源。</zh-CN>
-            <en>Code-behind sets DocumentSource and TransformSource only after path and file-existence checks; the markup accepts neither client paths nor remote resources.</en>
-        </lang>
-    --%>
-    <asp:xml id="xml1" runat="server" />
-</div>

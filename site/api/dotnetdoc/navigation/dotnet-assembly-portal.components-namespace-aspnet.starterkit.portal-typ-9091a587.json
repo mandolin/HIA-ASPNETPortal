@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ilinksdb.addlink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ilinksdb.addlink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ilinksdb.addlink-system.i-9000499a.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ilinksdb.deletelink-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ilinksdb.deletelink-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ilinksdb.deletelink-syste-e06d7639.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ilinksdb.getlinks-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ilinksdb.getlinks-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ilinksdb.getlinks-system.-cd7a5073.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ilinksdb.getsinglelink-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ilinksdb.getsinglelink-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ilinksdb.getsinglelink-sy-434b8250.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ilinksdb.updatelink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ILinkDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ilinksdb.updatelink-system.int32-system.string-system.string-system.string-system.string-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ilinksdb.updatelink-syste-9d523cd4.html"
     }

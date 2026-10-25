@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemdb",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemdb:base:iportalworkitemdb",
+      "kind": "relation",
+      "label": "Base: !:IPortalWorkItemDb",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalworkitemdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.-ctor-aspnet.starterkit.portal.portalbizdbcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.-ctor-as-6b02fe20.html"
     },
@@ -25,7 +34,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.completebusinessworkitem-aspnet.starterkit.portal.portalworkitemcompletionrequest",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.completebusinessworkitem-aspnet.starterkit.portal.portalworkitemcompletionrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.complete-5133561d.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.createnullabledatetimeparameter-system.string-system.nullable-system.datetime",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.createnullabledatetimeparameter-system.string-system.nullable-system.datetime",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.createnu-b686c31e.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.createnullableintparameter-system.string-system.nullable-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.createnullableintparameter-system.string-system.nullable-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.createnu-ebca7d53.html"
     },
@@ -64,7 +72,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.createnullablestringparameter-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.createnullablestringparameter-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.createnu-6ee2bda3.html"
     },
@@ -77,7 +85,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.ensureworkitem-aspnet.starterkit.portal.portalworkitemcreaterequest",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.ensureworkitem-aspnet.starterkit.portal.portalworkitemcreaterequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.ensurewo-0d97635e.html"
     },
@@ -90,7 +97,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.getadminworkitems-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.getadminworkitems-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.getadmin-57404bf9.html"
     },
@@ -103,7 +110,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.getworkitemevents-system.int64-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.getworkitemevents-system.int64-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.getworki-2ca068ba.html"
     },
@@ -116,7 +123,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.getworkitemsforuser-system.int32-system.collections.generic.ienumerable-system.string-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.getworkitemsforuser-system.int32-system.collections.generic.ienumerable-system.string-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.getworki-12d7cfe0.html"
     },
@@ -129,7 +136,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.hastable-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.hastable-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.hastable-077f4321.html"
     },
@@ -142,7 +149,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.isschemaavailable",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.isschema-2b06b8fe.html"
     },
@@ -155,7 +162,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normalizecompletionrequest-aspnet.starterkit.portal.portalworkitemcompletionrequest",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.normalizecompletionrequest-aspnet.starterkit.portal.portalworkitemcompletionrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normaliz-2655347a.html"
     },
@@ -168,7 +174,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normalizecreaterequest-aspnet.starterkit.portal.portalworkitemcreaterequest",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.normalizecreaterequest-aspnet.starterkit.portal.portalworkitemcreaterequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normaliz-2c8cd8fe.html"
     },
@@ -181,7 +186,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normalizeoptionaltext-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.normalizeoptionaltext-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normaliz-f63f6393.html"
     },
@@ -194,7 +199,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normalizestatusfilter-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.normalizestatusfilter-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normaliz-a2642d62.html"
     },
@@ -207,7 +212,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normalizetake-system.int32-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.normalizetake-system.int32-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normaliz-6704bacc.html"
     },
@@ -220,7 +225,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normalizetext-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalWorkItemDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemdb.normalizetext-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemdb.normaliz-84c0d95b.html"
     }

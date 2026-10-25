@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource.findmodulebyid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalmoduletargetsource.findmodulebyid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource-0a546eb6.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource.findtabbyid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalmoduletargetsource.findtabbyid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource-3bef2103.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource.getdesktopentry-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalmoduletargetsource.getdesktopentry-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource-38226fa6.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource.getmoduledefinitions",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalmoduletargetsource.getmoduledefinitions",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource-252d1aab.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource.getmoduleidsbydefinitionid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalmoduletargetsource.getmoduleidsbydefinitionid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource-69a6cfb2.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource.isinroles-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalWorkItemTargetResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalmoduletargetsource.isinroles-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalmoduletargetsource-82e58e0a.html"
     }

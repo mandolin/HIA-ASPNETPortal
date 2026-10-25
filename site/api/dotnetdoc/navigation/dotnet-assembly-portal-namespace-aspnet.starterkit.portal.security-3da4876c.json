@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.security.loginpasswordkey",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Security/LoginPasswordKey.ashx.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.security.loginpasswordkey",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.security.loginpasswordkey-61e04c36.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.security-type--b0417974.json"

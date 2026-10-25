@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalruntimesettingvalue",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalruntimesettingvalue:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalruntimesettingvalue:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettingvalue.-ctor-system.string-aspnet.starterkit.portal.portalruntimesettingsource",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettingvalue.-ctor-system.string-aspnet.starterkit.portal.portalruntimesettingsource",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettingvalue.-ctor-system.string-aspnet.starterkit.portal.portalruntimesettingsource",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettingvalue-7c13871b.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalruntimesettingvalue.source",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalruntimesettingvalue.source",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalruntimesettingvalue-f9a6e571.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalruntimesettingvalue.value",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalruntimesettingvalue.value",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalruntimesettingvalue-577f1d4d.html"
     }

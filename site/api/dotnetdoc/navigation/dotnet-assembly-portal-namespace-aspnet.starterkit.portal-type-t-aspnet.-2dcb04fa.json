@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.addrole_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.addrole_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.addrole_click-9384a1a9.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.appendchangedfield-system.string-system.string-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.appendchangedfield-system.string-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.appendchanged-e6566171.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.approveregistrationbtn",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.approveregistrationbtn",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.approveregist-f001896c.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.approveregistration_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.approveregistration_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.approveregist-97dd2adc.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.approvedutctext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.approvedutctext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.approvedutcte-5da90008.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.binddata",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.binddata",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.binddata-ddc9e706.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.bindemployeebindinginfo-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.bindemployeebindinginfo-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.bindemployeeb-19162801.html"
     },
@@ -103,7 +103,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.bindprofilelifecycleactions-aspnet.starterkit.portal.iuserprofileinfo-aspnet.starterkit.portal.iuserregistrationinfo",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.bindprofilelifecycleactions-aspnet.starterkit.portal.iuserprofileinfo-aspnet.starterkit.portal.iuserregistrationinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.bindprofileli-f3ee1342.html"
     },
@@ -116,7 +115,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.bindregistrationinfo-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.bindregistrationinfo-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.bindregistrat-f1b22051.html"
     },
@@ -129,7 +128,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.buildpasswordfieldscriptobject-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.buildpasswordfieldscriptobject-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.buildpassword-dd7cb0fe.html"
     },
@@ -142,7 +141,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.buildpasswordpolicycontextterms-system.string-system.string-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.buildpasswordpolicycontextterms-system.string-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.buildpassword-a8681f8a.html"
     },
@@ -155,7 +154,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.buildportalreturnurl",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.buildportalreturnurl",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.buildportalre-9cb29c54.html"
     },
@@ -168,7 +167,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.buildprofileauditsummary-aspnet.starterkit.portal.iuserprofileinfo-system.string-system.string-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.buildprofileauditsummary-aspnet.starterkit.portal.iuserprofileinfo-system.string-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.buildprofilea-a0861d29.html"
     },
@@ -181,7 +179,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.changeuserprofilestatus-system.string-system.string-system.string-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.changeuserprofilestatus-system.string-system.string-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.changeuserpro-d09e47b4.html"
     },
@@ -194,7 +192,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.clearsubmittedpasswordfields",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.clearsubmittedpasswordfields",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.clearsubmitte-48e3c94f.html"
     },
@@ -207,7 +205,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.comparevalidator1",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.comparevalidator1",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.comparevalida-9152f41e.html"
     },
@@ -220,7 +218,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.configurepasswordsubmission",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.configurepasswordsubmission",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.configurepass-c6e1995e.html"
     },
@@ -233,7 +231,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.confirmpassword",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.confirmpassword",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.confirmpasswo-af2997b1.html"
     },
@@ -246,7 +244,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.disableuserbtn",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.disableuserbtn",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.disableuserbt-374a8b2d.html"
     },
@@ -259,7 +257,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.disableuser_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.disableuser_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.disableuser_c-430f18dd.html"
     },
@@ -272,7 +270,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.displayname",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.displayname",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.displayname-9f131905.html"
     },
@@ -285,7 +283,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.email",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.email",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.email-b778c5e0.html"
     },
@@ -298,7 +296,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.employeebindinglink",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.employeebindinglink",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.employeebindi-32809b3d.html"
     },
@@ -311,7 +309,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.employeebindingtext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.employeebindingtext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.employeebindi-a7347eca.html"
     },
@@ -324,7 +322,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.employeecodetext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.employeecodetext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.employeecodet-7d19eb26.html"
     },
@@ -337,7 +335,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.manageusers.employeedirectorydb",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.manageusers.employeedirectorydb",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.manageusers.employeedirec-9d709577.html"
     },
@@ -350,7 +348,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.emptytonone-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.emptytonone-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.emptytonone-s-5160de70.html"
     },
@@ -363,7 +361,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.encodedisplay-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.encodedisplay-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.encodedisplay-a9e52926.html"
     },
@@ -376,7 +374,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.encryptedconfirmpassword",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.encryptedconfirmpassword",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.encryptedconf-f03955f1.html"
     },
@@ -389,7 +387,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.encryptedpassword",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.encryptedpassword",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.encryptedpass-719f5511.html"
     },
@@ -402,7 +400,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.findcurrentportalrole-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.findcurrentportalrole-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.findcurrentpo-ec88b2a7.html"
     },
@@ -415,7 +413,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.formatutc-system.datetime",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.formatutc-system.datetime",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.formatutc-sys-2864e585.html"
     },
@@ -428,7 +426,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.formatutc-system.nullable-system.datetime",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.formatutc-system.nullable-system.datetime",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.formatutc-sys-1aaca838.html"
     },
@@ -441,7 +439,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.getcurrentactor",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.getcurrentactor",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.getcurrentact-04d36c21.html"
     },
@@ -454,7 +452,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.geteffectivedisplayname-aspnet.starterkit.portal.iuserprofileinfo-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.geteffectivedisplayname-aspnet.starterkit.portal.iuserprofileinfo-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.geteffectived-a6095cfc.html"
     },
@@ -467,7 +464,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.haspasswordresetsubmission",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.haspasswordresetsubmission",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.haspasswordre-d776bbb1.html"
     },
@@ -480,7 +477,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.invitecodetext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.invitecodetext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.invitecodetex-d2d9909f.html"
     },
@@ -493,7 +490,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.iscurrenttargetself",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.iscurrenttargetself",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.iscurrenttarg-f43f6b9d.html"
     },
@@ -506,7 +503,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.legacyusernametext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.legacyusernametext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.legacyusernam-819b6978.html"
     },
@@ -519,7 +516,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.loginname",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.loginname",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.loginname-2f81c456.html"
     },
@@ -532,7 +529,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.nickname",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.nickname",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.nickname-735dbb44.html"
     },
@@ -545,7 +542,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.normalize-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.normalize-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.normalize-sys-74bf2a05.html"
     },
@@ -558,7 +555,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.page_load-sys-de78b821.html"
     },
@@ -571,7 +568,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.password",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.password",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.password-608831d1.html"
     },
@@ -584,7 +581,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.profilesourcetext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.profilesourcetext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.profilesource-18095057.html"
     },
@@ -597,7 +594,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.profilestatustext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.profilestatustext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.profilestatus-e509fdc0.html"
     },
@@ -610,7 +607,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.redirecttocurrentuser",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.redirecttocurrentuser",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.redirecttocur-d077f3fa.html"
     },
@@ -623,7 +620,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.registeredutctext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.registeredutctext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.registeredutc-17e96b9d.html"
     },
@@ -636,7 +633,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.registrationmessage",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.registrationmessage",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.registrationm-9f399ea0.html"
     },
@@ -649,7 +646,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.registrationsource",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.registrationsource",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.registrations-607709d4.html"
     },
@@ -662,7 +659,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.registrationstatus",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.registrationstatus",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.registrations-c47dcd8b.html"
     },
@@ -675,7 +672,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.rejectregistrationbtn",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.rejectregistrationbtn",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.rejectregistr-642b7702.html"
     },
@@ -688,7 +685,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.rejectregistration_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.rejectregistration_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.rejectregistr-129215a8.html"
     },
@@ -701,7 +698,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.requiredfieldvalidator1",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.requiredfieldvalidator1",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.requiredfield-f091ba9a.html"
     },
@@ -714,7 +711,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.requiredfieldvalidator2",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.requiredfieldvalidator2",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.requiredfield-ef91b907.html"
     },
@@ -727,7 +724,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.restoreuserbtn",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.restoreuserbtn",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.restoreuserbt-e9f354cf.html"
     },
@@ -740,7 +737,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.restoreuser_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.restoreuser_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.restoreuser_c-16a7123b.html"
     },
@@ -753,7 +750,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.manageusers.rolesdb",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.manageusers.rolesdb",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.manageusers.rolesdb-315ef351.html"
     },
@@ -766,7 +763,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.save_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.save_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.save_click-sy-cc1fb1d5.html"
     },
@@ -779,7 +776,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.setprofileinputsenabled-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.setprofileinputsenabled-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.setprofileinp-3d05d8ee.html"
     },
@@ -792,7 +789,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.showregistrationmessage-system.string-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.showregistrationmessage-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.showregistrat-d5227faf.html"
     },
@@ -805,7 +802,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.titletext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.titletext",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.titletext-664ad01d.html"
     },
@@ -818,7 +815,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.trygetselectedportalrole-aspnet.starterkit.portal.iroleitem",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.trygetselectedportalrole-aspnet.starterkit.portal.iroleitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.trygetselecte-db76d454.html"
     },
@@ -831,7 +827,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.tryinitializerequest",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.tryinitializerequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.tryinitialize-78e71315.html"
     },
@@ -844,7 +840,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.tryreadoptionalnonnegativeparameter-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.tryreadoptionalnonnegativeparameter-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.tryreadoption-b93b6580.html"
     },
@@ -857,7 +853,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.tryreadoptionalpositiveparameter-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.tryreadoptionalpositiveparameter-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.tryreadoption-2f83298b.html"
     },
@@ -870,7 +866,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.tryresolvepasswordresetsubmission-system.boolean-system.string-system.string-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.tryresolvepasswordresetsubmission-system.boolean-system.string-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.tryresolvepas-687a2bfa.html"
     },
@@ -883,7 +879,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.updateuserbtn",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.updateuserbtn",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.updateuserbtn-5331dc32.html"
     },
@@ -896,7 +892,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.updateuser_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.updateuser_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.updateuser_cl-dc65ce40.html"
     },
@@ -909,7 +905,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.userroles_itemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.userroles_itemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.userroles_ite-a827dec5.html"
     },
@@ -922,7 +917,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.manageusers.usersdb",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.manageusers.usersdb",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.manageusers.usersdb-f6451e74.html"
     },
@@ -935,7 +930,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.addexisting",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.addexisting",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.addexisting-4741e736.html"
     },
@@ -948,7 +943,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.allroles",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.allroles",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.allroles-2783f124.html"
     },
@@ -961,7 +956,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.savebtn",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.savebtn",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.savebtn-14570c07.html"
     },
@@ -974,7 +969,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.manageusers.userroles",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.manageusers.userroles",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.manageusers.userroles-af1470a4.html"
     }

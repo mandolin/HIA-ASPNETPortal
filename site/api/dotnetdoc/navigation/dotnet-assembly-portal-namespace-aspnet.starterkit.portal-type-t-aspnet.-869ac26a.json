@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imagemodule.applydimension-system.string-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/ImageModule.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imagemodule.applydimension-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imagemodule.applydimensio-e2e9d8f4.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.imagemodule.image1",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/ImageModule.ascx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.imagemodule.image1",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.imagemodule.image1-a6d56064.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imagemodule.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/ImageModule.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imagemodule.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imagemodule.page_load-sys-1bf9f769.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.imagemodule.title1",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/DesktopModules/ImageModule.ascx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.imagemodule.title1",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.imagemodule.title1-be2d8c25.html"
     }

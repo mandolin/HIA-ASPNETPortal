@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.idocumentitemdetails",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.idocumentitemdetails:interface:t-aspnet.starterkit.portal.idocumentitem",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IDocumentItem",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.idocumentitemdetails:entry:hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitemdetails.content",
       "kind": "entry",
       "label": "Content",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitemdetails.content",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItemDetails.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitemdetails.content",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitemdetails.cont-432ff171.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.idocumentitemdetails.contenttype",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentItemDetails.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.idocumentitemdetails.contenttype",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.idocumentitemdetails.cont-7a86ef59.html"
     }

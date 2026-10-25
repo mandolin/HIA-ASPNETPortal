@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationdirectoryrow",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationdirectoryrow:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationdirectoryrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.organizationdirectoryrow.-ctor-aspnet.starterkit.portal.iorganizationunitinfo-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.organizationdirectoryrow.-ctor-aspnet.starterkit.portal.iorganizationunitinfo-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.organizationdirectoryrow.-ctor-aspnet.starterkit.portal.iorganizationunitinfo-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.organizationdirectoryrow.-eb52dea3.html"
     },
@@ -25,7 +33,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.displayname",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationdirectoryrow.displayname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.-f419f39a.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.editurl",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationdirectoryrow.editurl",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.-d8e61d86.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.isactivetext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationdirectoryrow.isactivetext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.-5e5baf7c.html"
     },
@@ -64,7 +72,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.organizationcode",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationdirectoryrow.organizationcode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.-b47752d3.html"
     },
@@ -77,7 +85,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.organizationunitid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationdirectoryrow.organizationunitid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.-32d9d725.html"
     },
@@ -90,7 +98,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.parenttext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationdirectoryrow.parenttext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.-e3cd121a.html"
     },
@@ -103,7 +111,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.sortorder",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationdirectoryrow.sortorder",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationdirectoryrow.-4a797257.html"
     }

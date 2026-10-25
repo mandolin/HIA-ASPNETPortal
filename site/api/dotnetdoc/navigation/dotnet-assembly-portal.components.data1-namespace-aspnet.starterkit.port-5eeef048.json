@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentsdb",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentsdb:base:idocumentsdb",
+      "kind": "relation",
+      "label": "Base: !:IDocumentsDb",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.documentsdb.-ctor-aspnet.starterkit.portal.portaldbcontext",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.documentsdb.-ctor-aspnet.starterkit.portal.portaldbcontext",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/DocumentsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.documentsdb.-ctor-aspnet.starterkit.portal.portaldbcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.documentsdb.-ctor-aspnet.-c99af2dd.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.documentsdb.deletedocument-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/DocumentsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.documentsdb.deletedocument-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.documentsdb.deletedocumen-07a86108.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.documentsdb.getdocumentcontent-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/DocumentsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.documentsdb.getdocumentcontent-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.documentsdb.getdocumentco-152eecd0.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.documentsdb.getdocuments-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/DocumentsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.documentsdb.getdocuments-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.documentsdb.getdocuments--8e29378c.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.documentsdb.getsingledocument-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/DocumentsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.documentsdb.getsingledocument-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.documentsdb.getsingledocu-411a5f49.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.documentsdb.updatedocument-system.int32-system.int32-system.string-system.string-system.string-system.string-system.byte-system.int32-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/DocumentsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.documentsdb.updatedocument-system.int32-system.int32-system.string-system.string-system.string-system.string-system.byte-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.documentsdb.updatedocumen-7361aaed.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.documentsdb._context",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/DocumentsDb.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.documentsdb._context",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.documentsdb._context-f0c7c6f3.html"
     }

@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestresult",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresult.errorcode",
       "kind": "entry",
       "label": "ErrorCode",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresult.errorcode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestresult.errorcode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresult.errorc-62dff70f.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresult.ok",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestresult.ok",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresult.ok-40e8d87e.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresult.requestid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestresult.requestid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresult.reques-0a4d4c78.html"
     }

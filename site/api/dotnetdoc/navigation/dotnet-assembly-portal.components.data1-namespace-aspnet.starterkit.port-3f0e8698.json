@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useritem",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useritem:base:iuseritem",
+      "kind": "relation",
+      "label": "Base: !:IUserItem",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useritem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useritem.email",
       "kind": "entry",
       "label": "Email",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useritem.email",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useritem.email",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useritem.email-5e73fda1.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useritem.name",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useritem.name",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useritem.name-27940c68.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useritem.password",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useritem.password",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useritem.password-f4e59592.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useritem.roles",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useritem.roles",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useritem.roles-9cdab77c.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useritem.userid",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useritem.userid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useritem.userid-c5b6255d.html"
     }

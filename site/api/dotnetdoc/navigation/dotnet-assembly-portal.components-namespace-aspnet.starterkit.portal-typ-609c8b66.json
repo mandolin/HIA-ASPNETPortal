@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorywriteresult",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorywriteresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorywriteresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectorywriteresult.-ctor-system.boolean-system.int32-system.string-system.boolean-system.boolean",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectorywriteresult.-ctor-system.boolean-system.int32-system.string-system.boolean-system.boolean",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectorywriteresult.-ctor-system.boolean-system.int32-system.string-system.boolean-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectorywriteres-bad23f15.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectorywriteresult.concurrencyconflict-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectorywriteresult.concurrencyconflict-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectorywriteres-9b422b75.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorywriteresult.conflict",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorywriteresult.conflict",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorywriteres-7abd92ac.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorywriteresult.entityid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorywriteresult.entityid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorywriteres-1ef80150.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectorywriteresult.failed-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectorywriteresult.failed-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectorywriteres-334e7a97.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorywriteresult.message",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorywriteresult.message",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorywriteres-0327a765.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectorywriteresult.missing-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectorywriteresult.missing-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectorywriteres-554b1fe0.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorywriteresult.notfound",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorywriteresult.notfound",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorywriteres-f1e3f7d5.html"
     },
@@ -116,7 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorywriteresult.succeeded",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorywriteresult.succeeded",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorywriteres-64bbb5ab.html"
     },
@@ -129,7 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectorywriteresult.success-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/EmployeeDirectoryWriteResult.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectorywriteresult.success-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectorywriteres-2cc70d8f.html"
     }

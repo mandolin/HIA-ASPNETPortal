@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.addannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IAnnouncementsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iannouncementsdb.addannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.addannou-d80c0167.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.deleteannouncement-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IAnnouncementsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iannouncementsdb.deleteannouncement-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.deletean-e1a28de1.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getannouncements-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IAnnouncementsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iannouncementsdb.getannouncements-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getannou-605e1825.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getsingleannouncement-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IAnnouncementsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iannouncementsdb.getsingleannouncement-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getsingl-28b270ea.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.updateannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IAnnouncementsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iannouncementsdb.updateannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.updatean-10afde43.html"
     }

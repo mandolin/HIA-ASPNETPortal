@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.addmodule-system.int32-system.int32-system.string-system.string-system.int32-system.int32-system.string-system.boolean",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.addmodule-system.int32-system.int32-system.string-system.string-system.int32-system.int32-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.addmodule-syst-46b121ba.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.deletemodule-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.deletemodule-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.deletemodule-s-b940d649.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.findmodulebyid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.findmodulebyid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.findmodulebyid-3dc557e1.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.getmodulesettings-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.getmodulesettings-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.getmodulesetti-faaaed97.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.getmodulesbymoduledefid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.getmodulesbymoduledefid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.getmodulesbymo-2f3e1eca.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.getmodulesbytab-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.getmodulesbytab-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.getmodulesbyta-20de8e5d.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.getsinglemodule-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.getsinglemodule-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.getsinglemodul-09aaafe0.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.updatemodule-system.int32-system.int32-system.string-system.string-system.int32-system.string-system.boolean-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.updatemodule-system.int32-system.int32-system.string-system.string-system.int32-system.string-system.boolean-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.updatemodule-s-e5f04a22.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.updatemoduleorder-system.int32-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.updatemoduleorder-system.int32-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.updatemoduleor-60d2f666.html"
     },
@@ -129,7 +129,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.imodulesdb.updatemodulesetting-system.int32-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.imodulesdb.updatemodulesetting-system.int32-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.imodulesdb.updatemodulese-745c73e5.html"
     }

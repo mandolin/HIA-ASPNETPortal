@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem:base:iglobalitem",
+      "kind": "relation",
+      "label": "Base: !:IGlobalItem",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.alwaysshoweditbutton",
       "kind": "entry",
       "label": "AlwaysShowEditButton",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.alwaysshoweditbutton",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/GlobalItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.globalitem.alwaysshoweditbutton",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.globalitem.alwaysshowedit-32922f2b.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.portalid",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/GlobalItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.globalitem.portalid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.globalitem.portalid-b42a238c.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.globalitem.portalname",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/GlobalItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.globalitem.portalname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.globalitem.portalname-c1d86162.html"
     }

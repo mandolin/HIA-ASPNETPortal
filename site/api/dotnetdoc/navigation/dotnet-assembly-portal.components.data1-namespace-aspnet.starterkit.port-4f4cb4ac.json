@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userprofileinfo",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userprofileinfo:base:iuserprofileinfo",
+      "kind": "relation",
+      "label": "Base: !:IUserProfileInfo",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userprofileinfo:entry:hia-document:dotnet-m-aspnet.starterkit.portal.userprofileinfo.-ctor-system.int32-system.string-system.string-system.string-system.string-system.string-system.string-system.string-system.boolean-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.userprofileinfo.-ctor-system.int32-system.string-system.string-system.string-system.string-system.string-system.string-system.string-system.boolean-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.userprofileinfo.-ctor-system.int32-system.string-system.string-system.string-system.string-system.string-system.string-system.string-system.boolean-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.userprofileinfo.-ctor-sys-543e783d.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.displayname",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.displayname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.displayna-10b0c932.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.isavailable",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.isavailable",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.isavailab-d6e0ff9c.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.legacyname",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.legacyname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.legacynam-40ef83d9.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.loginname",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.loginname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.loginname-257348f5.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.nickname",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.nickname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.nickname-049cb6f9.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.preferredemail",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.preferredemail",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.preferred-e10890c6.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.source",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.source",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.source-e06fcfdc.html"
     },
@@ -116,7 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.status",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.status",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.status-b6d6d2e3.html"
     },
@@ -129,7 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.statusreason",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.statusreason",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.statusrea-57fe64a7.html"
     },
@@ -142,7 +151,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.userprofileinfo.userid",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/UserProfileInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.userprofileinfo.userid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.userprofileinfo.userid-11596b73.html"
     }

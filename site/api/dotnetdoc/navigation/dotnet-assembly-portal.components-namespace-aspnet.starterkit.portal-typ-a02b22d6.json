@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicyoptions",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicyoptions:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpasswordpolicyoptions:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicyoptions.-ctor-system.int32-system.int32-system.boolean-system.boolean",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicyoptions.-ctor-system.int32-system.int32-system.boolean-system.boolean",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicyoptions.-ctor-system.int32-system.int32-system.boolean-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicyoptio-e965cab6.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpasswordpolicyoptions.createdefault",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpasswordpolicyoptions.createdefault",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpasswordpolicyoptio-64109876.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpasswordpolicyoptions.disallowcontextterms",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpasswordpolicyoptions.disallowcontextterms",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpasswordpolicyoptio-0fa580e1.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpasswordpolicyoptions.minimumlength",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpasswordpolicyoptions.minimumlength",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpasswordpolicyoptio-0fd8f6b2.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpasswordpolicyoptions.requiredcategorycount",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpasswordpolicyoptions.requiredcategorycount",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpasswordpolicyoptio-ce5a66a6.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpasswordpolicyoptions.weakdictionaryenabled",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPasswordPolicy.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpasswordpolicyoptions.weakdictionaryenabled",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpasswordpolicyoptio-85fe0153.html"
     }

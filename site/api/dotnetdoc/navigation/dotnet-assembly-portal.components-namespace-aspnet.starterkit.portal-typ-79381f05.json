@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.createdutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iorganizationunitinfo.createdutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.cre-8e8e318d.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.displayname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iorganizationunitinfo.displayname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.dis-19ca7d58.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.isactive",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iorganizationunitinfo.isactive",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.isa-56deb3a9.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.organizationcode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iorganizationunitinfo.organizationcode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.org-3dddf3c1.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.organizationunitid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iorganizationunitinfo.organizationunitid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.org-a2384977.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.parentorganizationunitid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iorganizationunitinfo.parentorganizationunitid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.par-3ee4e01f.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.sortorder",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iorganizationunitinfo.sortorder",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.sor-14d9bdfd.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.updatedutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IOrganizationUnitInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iorganizationunitinfo.updatedutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iorganizationunitinfo.upd-b435efc0.html"
     }

@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingsaverequest",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingsaverequest:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingsaverequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingsaverequest.actorname",
       "kind": "entry",
       "label": "ActorName",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingsaverequest.actorname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingsaverequest.actorname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingsavere-27ac77b5.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingsaverequest.employeecode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingsaverequest.employeecode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingsavere-68aa8504.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingsaverequest.reason",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingsaverequest.reason",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingsavere-c2175b55.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingsaverequest.userid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingsaverequest.userid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingsavere-84ded44b.html"
     }

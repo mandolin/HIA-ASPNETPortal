@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmasterpage",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmasterpage:base:masterpage",
+      "kind": "relation",
+      "label": "Base: !:MasterPage",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalmasterpage:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalmasterpage.addmodulepackagestyles",
       "kind": "entry",
       "label": "AddModulePackageStyles",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmasterpage.addmodulepackagestyles",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Default.master.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmasterpage.addmodulepackagestyles",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmasterpage.addmodul-fc11d7b8.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmasterpage.onprerender-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Default.master.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmasterpage.onprerender-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmasterpage.onpreren-a5e620a0.html"
     }

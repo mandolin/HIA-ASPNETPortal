@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemactionrequest",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemactionrequest:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemactionrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemactionrequest.actionkey",
       "kind": "entry",
       "label": "ActionKey",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemactionrequest.actionkey",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemActionRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemactionrequest.actionkey",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemactionre-e132b651.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemactionrequest.actorname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemActionRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemactionrequest.actorname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemactionre-c6833c8a.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemactionrequest.actoruserid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemActionRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemactionrequest.actoruserid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemactionre-d4200383.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemactionrequest.comment",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemActionRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemactionrequest.comment",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemactionre-75acdb25.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemactionrequest.itemid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemActionRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemactionrequest.itemid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemactionre-17bca082.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemactionrequest.occurredutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemActionRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemactionrequest.occurredutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemactionre-f93d50b7.html"
     }

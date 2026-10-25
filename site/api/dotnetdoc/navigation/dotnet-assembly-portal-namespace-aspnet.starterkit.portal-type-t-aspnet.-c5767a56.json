@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory.create-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationentry",
       "kind": "entry",
       "label": "Create",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory.create-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationentry",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory.create-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationentry",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-fd7d3d17.html"
     },
@@ -25,7 +33,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory.readincludedprofiles-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalNavigationVisibilityContextFactory.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory.readincludedprofiles-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-5d956314.html"
     }

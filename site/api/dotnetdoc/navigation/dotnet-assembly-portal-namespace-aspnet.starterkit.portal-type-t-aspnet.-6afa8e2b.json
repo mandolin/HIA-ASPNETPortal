@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticqueryservice",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticqueryservice:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticqueryservice:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.findbyeventid-system.string",
       "kind": "entry",
       "label": "FindByEventId",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.findbyeventid-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.findbyeventid-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-4586b19e.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.getlogfiles-system.string-system.datetime-system.datetime",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.getlogfiles-system.string-system.datetime-system.datetime",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-8f851e5c.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.isvalideventid-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.isvalideventid-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-8599489a.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.matches-aspnet.starterkit.portal.portaldiagnosticentry-aspnet.starterkit.portal.portaldiagnosticquery",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.matches-aspnet.starterkit.portal.portaldiagnosticentry-aspnet.starterkit.portal.portaldiagnosticquery",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-ce181f19.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.normalizefilter-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.normalizefilter-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-554cf6fc.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.normalizequery-aspnet.starterkit.portal.portaldiagnosticquery",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.normalizequery-aspnet.starterkit.portal.portaldiagnosticquery",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-89621a87.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.parseentry-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.parseentry-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-dec6352d.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.query-aspnet.starterkit.portal.portaldiagnosticquery",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.query-aspnet.starterkit.portal.portaldiagnosticquery",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-5ef3f0a4.html"
     },
@@ -116,7 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.trygeteventdate-system.string-system.datetime",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.trygeteventdate-system.string-system.datetime",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-badb5f95.html"
     },
@@ -129,7 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryservice.trygetfileparts-system.string-system.datetime-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticQueryService.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticqueryservice.trygetfileparts-system.string-system.datetime-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticqueryserv-3e3eb86f.html"
     }

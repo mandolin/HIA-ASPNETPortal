@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissiondefinition",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissiondefinition:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissiondefinition:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissiondefinition.-ctor-system.string-system.string-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpermissiondefinition.-ctor-system.string-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpermissiondefinition.-ctor-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpermissiondefinitio-16fbf96a.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.category",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpermissiondefinition.category",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpermissiondefinitio-11237f0f.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.description",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpermissiondefinition.description",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpermissiondefinitio-d543fd2f.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalpermissiondefinition.key",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalpermissiondefinition.key",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalpermissiondefinitio-cc088f12.html"
     }

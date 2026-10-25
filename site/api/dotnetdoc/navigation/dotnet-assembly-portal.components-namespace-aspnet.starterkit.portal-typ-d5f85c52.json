@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.createreq-97fcce90.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecent-2e9a040e.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaavailable",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaa-67f3de9d.html"
     }

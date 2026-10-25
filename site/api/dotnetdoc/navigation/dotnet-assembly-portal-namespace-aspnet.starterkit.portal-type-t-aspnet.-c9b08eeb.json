@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.genericerrorpage",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.genericerrorpage:base:page",
+      "kind": "relation",
+      "label": "Base: !:Page",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.genericerrorpage:entry:hia-document:dotnet-p-aspnet.starterkit.portal.genericerrorpage.eventidtext",
       "kind": "entry",
       "label": "EventIdText",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.genericerrorpage.eventidtext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/GenericErrorPage.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.genericerrorpage.eventidtext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.genericerrorpage.eventidt-9add3e61.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.genericerrorpage.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/GenericErrorPage.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.genericerrorpage.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.genericerrorpage.page_loa-e49546e8.html"
     }

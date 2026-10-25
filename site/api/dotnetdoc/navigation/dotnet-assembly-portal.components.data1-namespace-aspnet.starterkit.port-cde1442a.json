@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalsdb",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalsdb:base:iglobalsdb",
+      "kind": "relation",
+      "label": "Base: !:IGlobalsDb",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.globalsdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.globalsdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/GlobalsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.globalsdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.globalsdb.-ctor-aspnet.st-60bd6e49.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.globalsdb.getsingleportal-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/GlobalsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.globalsdb.getsingleportal-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.globalsdb.getsingleportal-0d0cb31a.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.globalsdb.updateportalinfo-system.int32-system.string-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/GlobalsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.globalsdb.updateportalinfo-system.int32-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.globalsdb.updateportalinf-636c955c.html"
     }

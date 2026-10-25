@@ -4,6 +4,33 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tab",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tab:base:t-aspnet.starterkit.portal.tabsettings",
+      "kind": "relation",
+      "label": "Base: ASPNET.StarterKit.Portal.TabSettings",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tab:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tab:interface:t-system.icomparable-aspnet.starterkit.portal.tabsettings",
+      "kind": "relation",
+      "label": "Interface: System.IComparable{ASPNET.StarterKit.Portal.TabSettings}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tab:entry:hia-document:dotnet-m-aspnet.starterkit.portal.tab.-ctor-system.int32-aspnet.starterkit.portal.itabitem",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +39,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tab.-ctor-system.int32-aspnet.starterkit.portal.itabitem",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.tab.-ctor-system.int32-aspnet.starterkit.portal.itabitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tab.-ctor-system.int32-as-f385ce4c.html"
     },
@@ -25,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.tab.tabindex",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.tab.tabindex",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.tab.tabindex-450ab841.html"
     }

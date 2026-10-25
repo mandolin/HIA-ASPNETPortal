@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ihtmltextitem.desktophtml",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IHtmlTextItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ihtmltextitem.desktophtml",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ihtmltextitem.desktophtml-88255f20.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ihtmltextitem.mobiledetails",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IHtmlTextItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ihtmltextitem.mobiledetails",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ihtmltextitem.mobiledetai-aea7ac69.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ihtmltextitem.mobilesummary",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IHtmlTextItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ihtmltextitem.mobilesummary",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ihtmltextitem.mobilesumma-fe28ed8f.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.ihtmltextitem.moduleid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IHtmlTextItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.ihtmltextitem.moduleid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.ihtmltextitem.moduleid-c6aaa526.html"
     }

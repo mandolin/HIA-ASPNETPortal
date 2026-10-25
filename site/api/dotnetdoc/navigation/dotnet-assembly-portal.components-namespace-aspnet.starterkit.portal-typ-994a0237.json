@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iroleitem.portalid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IRoleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iroleitem.portalid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iroleitem.portalid-9878fce2.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iroleitem.roleid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IRoleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iroleitem.roleid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iroleitem.roleid-e18fcd18.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iroleitem.rolename",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IRoleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iroleitem.rolename",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iroleitem.rolename-0565a98e.html"
     }

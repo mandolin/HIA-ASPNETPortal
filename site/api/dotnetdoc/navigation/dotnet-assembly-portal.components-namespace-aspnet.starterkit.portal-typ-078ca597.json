@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemeventinfo",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemeventinfo:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemeventinfo:entry:hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.actionkey",
       "kind": "entry",
       "label": "ActionKey",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.actionkey",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.actionkey",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-dd94c27e.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.actorname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.actorname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-070d1119.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.actoruserid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.actoruserid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-d613de70.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.comment",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.comment",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-3f7d8fc6.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.eventid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.eventid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-19ae46fa.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.eventtype",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.eventtype",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-b04e42af.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.fromstatus",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.fromstatus",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-c9abc297.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.itemid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.itemid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-862bd363.html"
     },
@@ -116,7 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.occurredutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.occurredutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-9ffd84b0.html"
     },
@@ -129,7 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.tostatus",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.tostatus",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-a25ace96.html"
     },
@@ -142,7 +151,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemeventinfo.visibilityscope",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemEventInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemeventinfo.visibilityscope",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemeventinf-2e90a283.html"
     }

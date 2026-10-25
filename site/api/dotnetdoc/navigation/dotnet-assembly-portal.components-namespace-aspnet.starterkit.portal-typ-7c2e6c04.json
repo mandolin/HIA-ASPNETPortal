@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementresult",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresult.errorcode",
       "kind": "entry",
       "label": "ErrorCode",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresult.errorcode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementresult.errorcode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresul-301bbb67.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresult.ok",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementresult.ok",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresul-442ce886.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresult.requestid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementresult.requestid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresul-dc9c10c0.html"
     }

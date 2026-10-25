@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection:base:configurationsection",
+      "kind": "relation",
+      "label": "Base: !:ConfigurationSection",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.sys.envsection.value",
       "kind": "entry",
       "label": "Value",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.sys.envsection.value",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Sys/EnvSection.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.sys.envsection.value",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.sys.envsection.value-fd89aa87.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.sys.envsection.op_implicit-aspnet.starterkit.portal.sys.envsection-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Sys/EnvSection.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.sys.envsection.op_implicit-aspnet.starterkit.portal.sys.envsection-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.sys.envsection.op_implici-3e44cbd9.html"
     }

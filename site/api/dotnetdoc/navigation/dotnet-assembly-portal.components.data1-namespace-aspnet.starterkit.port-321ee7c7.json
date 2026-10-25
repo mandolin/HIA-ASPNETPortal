@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.registrationinviteitem",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.registrationinviteitem:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.registrationinviteitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.createdby",
       "kind": "entry",
       "label": "CreatedBy",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.createdby",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.createdby",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.cr-172e5b4f.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.createdutc",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.createdutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.cr-fafb796c.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.description",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.description",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.de-22fec384.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.expiresutc",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.expiresutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.ex-20c5dcf0.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.invitecode",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.invitecode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.in-8a9497ba.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.isenabled",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.isenabled",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.is-fe411803.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.maxuses",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.maxuses",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.ma-36c63ce4.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.requireemployeecode",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.requireemployeecode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.re-5e22eb60.html"
     },
@@ -116,7 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.registrationinviteitem.usedcount",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RegistrationInviteItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.registrationinviteitem.usedcount",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.registrationinviteitem.us-fe616ef2.html"
     }

@@ -4,6 +4,24 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editaccessdenied",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editaccessdenied:base:page",
+      "kind": "relation",
+      "label": "Base: !:Page",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editaccessdenied:base:t-aspnet.starterkit.portal.portalpage-aspnet.starterkit.portal.editaccessdenied",
+      "kind": "relation",
+      "label": "Base: ASPNET.StarterKit.Portal.PortalPage{ASPNET.StarterKit.Portal.EditAccessDenied}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.editaccessdenied:entry:hia-document:dotnet-m-aspnet.starterkit.portal.editaccessdenied.page_load-system.object-system.eventargs",
       "kind": "entry",
       "label": "Page_Load",
@@ -12,7 +30,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.editaccessdenied.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EditAccessDenied.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.editaccessdenied.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.editaccessdenied.page_loa-d6ba5249.html"
     }

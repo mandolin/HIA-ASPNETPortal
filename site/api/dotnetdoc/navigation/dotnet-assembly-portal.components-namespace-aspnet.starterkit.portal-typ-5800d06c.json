@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idocumentsdb.deletedocument-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.idocumentsdb.deletedocument-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idocumentsdb.deletedocume-484075a1.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idocumentsdb.getdocumentcontent-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.idocumentsdb.getdocumentcontent-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idocumentsdb.getdocumentc-63919c8d.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idocumentsdb.getdocuments-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.idocumentsdb.getdocuments-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idocumentsdb.getdocuments-e3ce4565.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idocumentsdb.getsingledocument-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.idocumentsdb.getsingledocument-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idocumentsdb.getsingledoc-bb013bfe.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.idocumentsdb.updatedocument-system.int32-system.int32-system.string-system.string-system.string-system.string-system.byte-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IDocumentDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.idocumentsdb.updatedocument-system.int32-system.int32-system.string-system.string-system.string-system.string-system.byte-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.idocumentsdb.updatedocume-8bd6123c.html"
     }

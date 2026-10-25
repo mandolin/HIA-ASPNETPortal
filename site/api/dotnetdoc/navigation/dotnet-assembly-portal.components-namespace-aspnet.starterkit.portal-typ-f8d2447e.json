@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.itabsdb.addtab-system.int32-system.string-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.itabsdb.addtab-system.int32-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.itabsdb.addtab-system.int-d43d0058.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.itabsdb.deletetab-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.itabsdb.deletetab-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.itabsdb.deletetab-system.-943cefbb.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.itabsdb.findtabbyid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.itabsdb.findtabbyid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.itabsdb.findtabbyid-syste-f78f5f97.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.itabsdb.getmobiletabs",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.itabsdb.getmobiletabs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.itabsdb.getmobiletabs-150ba891.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.itabsdb.getsingletab-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.itabsdb.getsingletab-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.itabsdb.getsingletab-syst-c32bb7be.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.itabsdb.gettabs",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.itabsdb.gettabs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.itabsdb.gettabs-b596908f.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.itabsdb.updatetab-system.int32-system.int32-system.string-system.int32-system.string-system.string-system.boolean-system.string-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.itabsdb.updatetab-system.int32-system.int32-system.string-system.int32-system.string-system.string-system.boolean-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.itabsdb.updatetab-system.-47f2d60b.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.itabsdb.updatetaborder-system.int32-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ITabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.itabsdb.updatetaborder-system.int32-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.itabsdb.updatetaborder-sy-e37e317d.html"
     }

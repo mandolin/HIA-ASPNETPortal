@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationunitsaverequest",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationunitsaverequest:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationunitsaverequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.actorname",
       "kind": "entry",
       "label": "ActorName",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.actorname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationunitsaverequest.actorname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationunitsavereque-4473ca28.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.displayname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationunitsaverequest.displayname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationunitsavereque-ea2db7db.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.isactive",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationunitsaverequest.isactive",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationunitsavereque-5e5d5900.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.organizationcode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationunitsaverequest.organizationcode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationunitsavereque-b119fa94.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.organizationunitid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationunitsaverequest.organizationunitid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationunitsavereque-ca3dd36a.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.originalupdatedutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationunitsaverequest.originalupdatedutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationunitsavereque-ad1e85b2.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.parentorganizationunitid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationunitsaverequest.parentorganizationunitid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationunitsavereque-798584a2.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.organizationunitsaverequest.sortorder",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/OrganizationUnitSaveRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.organizationunitsaverequest.sortorder",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.organizationunitsavereque-c8a8b5ca.html"
     }

@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.discussionitem",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "sourcePath": "src/Portal.Components.Data/DiscussionItem.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.discussionitem",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.discussionitem-c48df924.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components.data-namespace-aspnet.starterkit.porta-21b8570a.json"
@@ -26,7 +26,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.discussionsdb",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "sourcePath": "src/Portal.Components.Data/DiscussionDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.discussionsdb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.discussionsdb-8cb6549a.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components.data-namespace-aspnet.starterkit.porta-076314ec.json"
@@ -40,7 +40,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portaldb",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data.xml",
+      "sourcePath": "src/Portal.Components.Data/PortalDb.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portaldb",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portaldb-ee037c33.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components.data-namespace-aspnet.starterkit.porta-70af284d.json"

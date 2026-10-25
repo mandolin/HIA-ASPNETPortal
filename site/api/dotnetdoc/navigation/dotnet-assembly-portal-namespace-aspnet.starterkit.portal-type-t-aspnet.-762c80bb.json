@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticsanitizer",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticsanitizer:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldiagnosticsanitizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.replaceassignment-system.text.regularexpressions.match",
       "kind": "entry",
       "label": "ReplaceAssignment",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.replaceassignment-system.text.regularexpressions.match",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticSanitizer.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticsanitizer.replaceassignment-system.text.regularexpressions.match",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer-591ab6ea.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitize-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticSanitizer.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitize-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer-48b621c0.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitizeandtruncate-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalDiagnosticSanitizer.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnosticsanitizer.sanitizeandtruncate-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnosticsanitizer-1e932aff.html"
     }

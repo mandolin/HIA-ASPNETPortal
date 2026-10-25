@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemptystaterenderer",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemptystaterenderer:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalemptystaterenderer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalemptystaterenderer.render-system.nullable-system.int32-system.string-system.int32",
       "kind": "entry",
       "label": "Render",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalemptystaterenderer.render-system.nullable-system.int32-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalEmptyStateRenderer.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalemptystaterenderer.render-system.nullable-system.int32-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalemptystaterenderer.-d9c3093d.html"
     }

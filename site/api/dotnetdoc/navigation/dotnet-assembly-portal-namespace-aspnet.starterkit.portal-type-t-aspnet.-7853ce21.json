@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefs.adddefbtn",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefs.adddefbtn",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefs.adddefbtn-0372b4cd.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefs.adddef_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefs.adddef_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefs.adddef_click-s-4aa6ac9d.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefs.binddata",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefs.binddata",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefs.binddata-50e27199.html"
     },
@@ -51,7 +51,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefs.defslist_itemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefs.defslist_itemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefs.defslist_itemc-2983f726.html"
     },
@@ -64,7 +63,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.moduledefs.moduledefconfig",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.moduledefs.moduledefconfig",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.moduledefs.moduledefconfi-9483da80.html"
     },
@@ -77,7 +76,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefs.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefs.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefs.page_load-syst-2c73b812.html"
     },
@@ -90,7 +89,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefs.title1",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefs.title1",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefs.title1-8e74cb5c.html"
     },
@@ -103,7 +102,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefs.tryreadnavigationparameters",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefs.tryreadnavigationparameters",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefs.tryreadnavigat-f25ab11d.html"
     },
@@ -116,7 +115,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefs.tryreadoptionalnonnegativeparameter-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefs.tryreadoptionalnonnegativeparameter-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefs.tryreadoptiona-77d0115f.html"
     },
@@ -129,7 +128,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.moduledefs.tryreadoptionalpositiveparameter-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.moduledefs.tryreadoptionalpositiveparameter-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.moduledefs.tryreadoptiona-e3c98d3e.html"
     },
@@ -142,7 +141,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefs.defslist",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefs.defslist",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefs.defslist-eac66d45.html"
     },
@@ -155,7 +154,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefs.tabid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefs.tabid",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefs.tabid-7d01d24d.html"
     },
@@ -168,7 +167,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.moduledefs.tabindex",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/ModuleDefs.ascx.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.moduledefs.tabindex",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.moduledefs.tabindex-af0936cc.html"
     }

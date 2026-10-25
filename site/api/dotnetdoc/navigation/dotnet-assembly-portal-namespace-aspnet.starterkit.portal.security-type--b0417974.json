@@ -4,6 +4,24 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey:base:ihttphandler",
+      "kind": "relation",
+      "label": "Base: !:IHttpHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey:interface:irequiressessionstate",
+      "kind": "relation",
+      "label": "Interface: !:IRequiresSessionState",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.security:type:t-aspnet.starterkit.portal.security.loginpasswordkey:entry:hia-document:dotnet-p-aspnet.starterkit.portal.security.loginpasswordkey.isreusable",
       "kind": "entry",
       "label": "IsReusable",
@@ -12,7 +30,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.security.loginpasswordkey.isreusable",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Security/LoginPasswordKey.ashx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.security.loginpasswordkey.isreusable",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.security.loginpasswordkey-de8ffdf1.html"
     },
@@ -25,7 +43,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.security.loginpasswordkey.processrequest-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.security.loginpasswordkey.processrequest-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.security.loginpasswordkey-64f2e6fc.html"
     }

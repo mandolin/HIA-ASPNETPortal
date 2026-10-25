@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportalsecurity.haseditpermissions-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IPortalSecurity.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportalsecurity.haseditpermissions-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportalsecurity.haseditpe-b732915d.html"
     }

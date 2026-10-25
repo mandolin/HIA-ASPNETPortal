@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalruntimesettings",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalruntimesettings:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalruntimesettings:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.ensuredefinition-aspnet.starterkit.portal.portalsettingdefinition",
       "kind": "entry",
       "label": "EnsureDefinition",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.ensuredefinition-aspnet.starterkit.portal.portalsettingdefinition",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.ensuredefinition-aspnet.starterkit.portal.portalsettingdefinition",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.ens-2ac53714.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.ensurevaluetype-aspnet.starterkit.portal.portalsettingdefinition-aspnet.starterkit.portal.portalsettingvaluetype",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.ensurevaluetype-aspnet.starterkit.portal.portalsettingdefinition-aspnet.starterkit.portal.portalsettingvaluetype",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.ens-3c362c68.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.getboolean-aspnet.starterkit.portal.portalsettingdefinition",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.getboolean-aspnet.starterkit.portal.portalsettingdefinition",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.get-5debc155.html"
     },
@@ -51,7 +60,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.geteffectivevalue-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.geteffectivevalue-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.get-69735aa0.html"
     },
@@ -64,7 +72,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.getint32-aspnet.starterkit.portal.portalsettingdefinition",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.getint32-aspnet.starterkit.portal.portalsettingdefinition",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.get-8a7aa955.html"
     },
@@ -77,7 +85,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.getstring-aspnet.starterkit.portal.portalsettingdefinition",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.getstring-aspnet.starterkit.portal.portalsettingdefinition",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.get-21cf0418.html"
     },
@@ -90,7 +98,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.isintegerinrange-aspnet.starterkit.portal.portalsettingdefinition-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.isintegerinrange-aspnet.starterkit.portal.portalsettingdefinition-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.isi-2cc313b9.html"
     },
@@ -103,7 +111,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.trynormalizevalue-aspnet.starterkit.portal.portalsettingdefinition-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.trynormalizevalue-aspnet.starterkit.portal.portalsettingdefinition-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.try-2ced9f80.html"
     },
@@ -116,7 +124,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.warndatabasefallback-system.string-system.string-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.warndatabasefallback-system.string-system.string-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.war-89eb20d3.html"
     }

@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.bindusertoemployee-aspnet.starterkit.portal.useremployeebindingsaverequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iuseremployeebindingadmindb.bindusertoemployee-aspnet.starterkit.portal.useremployeebindingsaverequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmin-6c158ef6.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.endbinding-aspnet.starterkit.portal.useremployeebindingendrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iuseremployeebindingadmindb.endbinding-aspnet.starterkit.portal.useremployeebindingendrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmin-b73a9dcf.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.getbindingbyid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iuseremployeebindingadmindb.getbindingbyid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmin-986b9ff3.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmindb.isschemaavailable",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iuseremployeebindingadmindb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iuseremployeebindingadmin-5fdd684a.html"
     }

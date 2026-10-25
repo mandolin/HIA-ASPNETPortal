@@ -1,0 +1,111 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.createdutc",
+      "kind": "entry",
+      "label": "CreatedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.createdutc",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.createdutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organ-bd8c0e22.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.displayname",
+      "kind": "entry",
+      "label": "DisplayName",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.displayname",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.displayname",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organ-7789c429.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.isactive",
+      "kind": "entry",
+      "label": "IsActive",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.isactive",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.isactive",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organ-7542ff76.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.organizationcode",
+      "kind": "entry",
+      "label": "OrganizationCode",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.organizationcode",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.organizationcode",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organ-bbec6492.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.organizationunitid",
+      "kind": "entry",
+      "label": "OrganizationUnitId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.organizationunitid",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.organizationunitid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organ-01578b94.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.parentorganizationunitid",
+      "kind": "entry",
+      "label": "ParentOrganizationUnitId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.parentorganizationunitid",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.parentorganizationunitid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organ-6c1eb18c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.sortorder",
+      "kind": "entry",
+      "label": "SortOrder",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.sortorder",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.sortorder",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organ-9f314ba0.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection:entry:hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.updatedutc",
+      "kind": "entry",
+      "label": "UpdatedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.updatedutc",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryDb.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectorydb.organizationunitprojection.updatedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectorydb.organ-21a95efb.html"
+    }
+  ]
+}

@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:base:dbcontext",
+      "kind": "relation",
+      "label": "Base: !:DbContext",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalbizdbcontext:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.-ctor-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.-ctor-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalbizdbcontext.-ctor-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.-ctor--1c9b1f0a.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.employees",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalbizdbcontext.employees",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.employ-d867a1a8.html"
     },
@@ -38,7 +47,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.onmodelcreating-system.data.entity.dbmodelbuilder",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalbizdbcontext.onmodelcreating-system.data.entity.dbmodelbuilder",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalbizdbcontext.onmode-b858055c.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.organizationunits",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalbizdbcontext.organizationunits",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.organi-ac0598f3.html"
     },
@@ -64,7 +72,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.useremployeebindings",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalBizDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalbizdbcontext.useremployeebindings",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalbizdbcontext.userem-882e039e.html"
     }

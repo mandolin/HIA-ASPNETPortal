@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemdatascopepolicy",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemdatascopepolicy:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemdatascopepolicy:entry:hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemdatascopepolicy.canview-aspnet.starterkit.portal.collaborationiteminfo-aspnet.starterkit.portal.collaborationitemdatascope",
       "kind": "entry",
       "label": "CanView",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemdatascopepolicy.canview-aspnet.starterkit.portal.collaborationiteminfo-aspnet.starterkit.portal.collaborationitemdatascope",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScopePolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.collaborationitemdatascopepolicy.canview-aspnet.starterkit.portal.collaborationiteminfo-aspnet.starterkit.portal.collaborationitemdatascope",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.collaborationitemdatascop-38ddcf99.html"
     }

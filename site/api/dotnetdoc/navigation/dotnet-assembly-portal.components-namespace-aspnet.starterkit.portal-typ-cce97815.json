@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitylifecyclestates",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitylifecyclestates:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcapabilitylifecyclestates:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcapabilitylifecyclestates.active",
       "kind": "entry",
       "label": "Active",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcapabilitylifecyclestates.active",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCapabilityRegistry.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcapabilitylifecyclestates.active",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcapabilitylifecycle-75342407.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcapabilitylifecyclestates.deprecated",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCapabilityRegistry.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcapabilitylifecyclestates.deprecated",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcapabilitylifecycle-0589682c.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalcapabilitylifecyclestates.planned",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalCapabilityRegistry.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalcapabilitylifecyclestates.planned",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalcapabilitylifecycle-ec1988cd.html"
     }

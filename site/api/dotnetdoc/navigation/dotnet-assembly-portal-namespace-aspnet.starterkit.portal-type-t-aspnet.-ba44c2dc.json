@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryrow.-ctor-aspnet.starterkit.portal.iemployeeinfo",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryrow.-ctor-aspnet.starterkit.portal.iemployeeinfo",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectoryrow.-ctor-aspnet.starterkit.portal.iemployeeinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectoryrow.-cto-8351d58e.html"
     },
@@ -25,7 +33,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.bindurl",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.bindurl",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.bind-859cb200.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.displayname",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.displayname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.disp-baf7d6fd.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.editurl",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.editurl",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.edit-ae250c8d.html"
     },
@@ -64,7 +72,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employeecode",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.employeecode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.empl-56cd2f65.html"
     },
@@ -77,7 +85,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employeeid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.employeeid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.empl-5d2a8ccd.html"
     },
@@ -90,7 +98,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.employmentstatus",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.employmentstatus",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.empl-8437cfac.html"
     },
@@ -103,7 +111,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.organizationtext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.organizationtext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.orga-8865b058.html"
     },
@@ -116,7 +124,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.preferredname",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.preferredname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.pref-91066c26.html"
     },
@@ -129,7 +137,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.sourcesystem",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.sourcesystem",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.sour-2f19b36c.html"
     },
@@ -142,7 +150,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.workemail",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeedirectoryrow.workemail",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeedirectoryrow.work-459bb2df.html"
     }

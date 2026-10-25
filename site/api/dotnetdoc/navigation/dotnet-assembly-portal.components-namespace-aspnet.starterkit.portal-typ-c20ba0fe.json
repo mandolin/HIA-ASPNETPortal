@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileConfirmationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmat-db7010b2.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.getcurrentprofileforuser-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileConfirmationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofileconfirmationdb.getcurrentprofileforuser-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmat-4937aef3.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmationdb.isschemaavailable",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeProfileConfirmationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeeprofileconfirmationdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeeprofileconfirmat-5475ae8f.html"
     }

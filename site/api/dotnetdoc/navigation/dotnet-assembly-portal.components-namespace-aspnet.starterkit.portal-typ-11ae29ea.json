@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduledefinitionitem.desktopsourcefile",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleDefinitionItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduledefinitionitem.desktopsourcefile",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduledefinitionitem.des-65bf000d.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduledefinitionitem.friendlyname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleDefinitionItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduledefinitionitem.friendlyname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduledefinitionitem.fri-e302e402.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduledefinitionitem.mobilesourcefile",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleDefinitionItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduledefinitionitem.mobilesourcefile",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduledefinitionitem.mob-0d7b567b.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduledefinitionitem.moduledefid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleDefinitionItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduledefinitionitem.moduledefid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduledefinitionitem.mod-65b7deac.html"
     }

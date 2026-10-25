@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.approvedby",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.approvedby",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.app-0d9749dc.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.approvedutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.approvedutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.app-2c7de425.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.employeecode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.employeecode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.emp-28199e63.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.invitecode",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.invitecode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.inv-8197bbaa.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.registeredutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.registeredutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.reg-beb0cc38.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.rejectedby",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.rejectedby",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.rej-20771e7d.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.rejectedutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.rejectedutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.rej-99ade096.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.requiresapproval",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.requiresapproval",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.req-84d24969.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.reviewnote",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.reviewnote",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.rev-ffbfef66.html"
     },
@@ -129,7 +129,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.source",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.source",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.sou-65d3b23f.html"
     },
@@ -142,7 +142,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.status",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.status",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.sta-b90e4cac.html"
     },
@@ -155,7 +155,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.userid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUserRegistrationInfo.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iuserregistrationinfo.userid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iuserregistrationinfo.use-28dfac40.html"
     }

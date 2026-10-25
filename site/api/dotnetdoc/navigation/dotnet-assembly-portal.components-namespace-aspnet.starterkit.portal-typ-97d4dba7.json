@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemdatascope",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemdatascope:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.collaborationitemdatascope:entry:hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemdatascope.-ctor-system.int32-system.boolean-system.boolean-system.collections.generic.ienumerable-system.int32-system.boolean",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemdatascope.-ctor-system.int32-system.boolean-system.boolean-system.collections.generic.ienumerable-system.int32-system.boolean",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScope.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.collaborationitemdatascope.-ctor-system.int32-system.boolean-system.boolean-system.collections.generic.ienumerable-system.int32-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.collaborationitemdatascop-16e280dc.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemdatascope.actoruserid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScope.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemdatascope.actoruserid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemdatascop-cca4cbc8.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemdatascope.holdsownerrolekey",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScope.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemdatascope.holdsownerrolekey",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemdatascop-9e312657.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemdatascope.isadministrator",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScope.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemdatascope.isadministrator",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemdatascop-0b07c21a.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemdatascope.isparticipant",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScope.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemdatascope.isparticipant",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemdatascop-4da6e39e.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemdatascope.visibleorganizationunitids",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/CollaborationItemDataScope.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.collaborationitemdatascope.visibleorganizationunitids",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.collaborationitemdatascop-19b240ea.html"
     }

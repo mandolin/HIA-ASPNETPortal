@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyemployeecode-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyemployeecode-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.geta-69550dc4.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyuserid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getactivebindingbyuserid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.geta-cf2752da.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getemployees-aspnet.starterkit.portal.employeedirectoryquery",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getemployees-aspnet.starterkit.portal.employeedirectoryquery",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.gete-a7a57e33.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunitsubtreeids-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunitsubtreeids-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.geto-61d71fe9.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunits-aspnet.starterkit.portal.employeedirectoryquery",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getorganizationunits-aspnet.starterkit.portal.employeedirectoryquery",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.geto-4fde6e10.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getuseremployeebindings-aspnet.starterkit.portal.employeedirectoryquery",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.getuseremployeebindings-aspnet.starterkit.portal.employeedirectoryquery",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.getu-ca80a3cb.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.isschemaavailable",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IEmployeeDirectoryDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iemployeedirectorydb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iemployeedirectorydb.issc-0c01aa80.html"
     }

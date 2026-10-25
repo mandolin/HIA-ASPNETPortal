@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.addselfregistereduser-system.string-system.string-system.string-system.string-system.string-system.boolean",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.addselfregistereduser-system.string-system.string-system.string-system.string-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.addselfregistere-9e6cbeda.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.adduser-system.string-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.adduser-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.adduser-system.s-47b3664c.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.approveuser-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.approveuser-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.approveuser-syst-9383f628.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.deleteuser-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.deleteuser-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.deleteuser-syste-2f9ffe1d.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.finduserbyid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.finduserbyid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.finduserbyid-sys-e744fa2d.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getregistrationinfo-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getregistrationinfo-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getregistrationi-0497f16c.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getrolenamesbyuser-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getrolenamesbyuser-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getrolenamesbyus-f1b65508.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getrolesbyuser-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getrolesbyuser-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getrolesbyuser-s-0191ea81.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversionbyuserid-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getsecurityversionbyuserid-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversi-a29a139e.html"
     },
@@ -129,7 +129,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversionbyusername-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getsecurityversionbyusername-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getsecurityversi-089e0a19.html"
     },
@@ -142,7 +142,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getsingleuser-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getsingleuser-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getsingleuser-sy-055d2ddf.html"
     },
@@ -155,7 +155,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.getuserprofileinfo-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.getuserprofileinfo-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.getuserprofilein-dc2fb2bd.html"
     },
@@ -168,7 +168,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.incrementsecurityversion-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.incrementsecurityversion-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.incrementsecurit-c4071593.html"
     },
@@ -181,7 +181,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.login-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.login-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.login-system.str-ece878a0.html"
     },
@@ -194,7 +194,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.rejectuser-system.int32-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.rejectuser-system.int32-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.rejectuser-syste-5326c940.html"
     },
@@ -207,7 +207,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.setuserprofilestatus-system.int32-system.string-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.setuserprofilestatus-system.int32-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.setuserprofilest-20f7cff6.html"
     },
@@ -220,7 +220,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.signin-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.signin-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.signin-system.st-5cb39801.html"
     },
@@ -233,7 +233,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.updateuser-system.int32-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.updateuser-system.int32-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.updateuser-syste-70b2259f.html"
     },
@@ -246,7 +246,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.updateuserprofile-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.updateuserprofile-system.int32-system.string-system.string-system.string-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.updateuserprofil-d7b4ae9e.html"
     },
@@ -259,7 +259,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iusersdb.validateregistrationinvite-system.string-aspnet.starterkit.portal.portalregistrationinviterejection",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IUsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iusersdb.validateregistrationinvite-system.string-aspnet.starterkit.portal.portalregistrationinviterejection",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iusersdb.validateregistra-ccddd996.html"
     }

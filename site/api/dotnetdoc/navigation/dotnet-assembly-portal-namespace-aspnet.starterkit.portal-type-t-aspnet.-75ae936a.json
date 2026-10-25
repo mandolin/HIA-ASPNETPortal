@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthcheckresult",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthcheckresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalhealthcheckresult:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthcheckresult.-ctor-system.string-system.string-aspnet.starterkit.portal.portalhealthstatus-system.string-system.string-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalhealthcheckresult.-ctor-system.string-system.string-aspnet.starterkit.portal.portalhealthstatus-system.string-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalHealthCheckResult.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalhealthcheckresult.-ctor-system.string-system.string-aspnet.starterkit.portal.portalhealthstatus-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalhealthcheckresult.--3e21d518.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.category",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalHealthCheckResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthcheckresult.category",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.c-584526c6.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.detail",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalHealthCheckResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthcheckresult.detail",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.d-02768f0f.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.eventid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalHealthCheckResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthcheckresult.eventid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.e-43459c97.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.name",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalHealthCheckResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthcheckresult.name",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.n-ec1b2a6d.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.status",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalHealthCheckResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthcheckresult.status",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.s-bf187190.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.summary",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalHealthCheckResult.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalhealthcheckresult.summary",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalhealthcheckresult.s-bc1a32ca.html"
     }

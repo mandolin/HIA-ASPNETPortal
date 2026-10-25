@@ -1,6 +1,0 @@
-        <%-- P81.3 空态：无文档时给出说明行，避免出现"只有表头"的空白表格。 --%>
-        <%= PortalEmptyStateRenderer.Render(DocumentEmptyStateRowCount, DocumentEmptyStateText, 5) %>
-        </table>
-    </FooterTemplate>
-</asp:Repeater>
-</div>

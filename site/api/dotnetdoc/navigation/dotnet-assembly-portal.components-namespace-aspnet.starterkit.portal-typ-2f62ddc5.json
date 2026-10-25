@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprovidernames",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprovidernames:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portaldatabaseprovidernames:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernames.mysql",
       "kind": "entry",
       "label": "MySql",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernames.mysql",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portaldatabaseprovidernames.mysql",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernam-673a3895.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernames.postgresql",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portaldatabaseprovidernames.postgresql",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernam-db04c6eb.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernames.sqlserver",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portaldatabaseprovidernames.sqlserver",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernam-0e2e158c.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernames.sqlite",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalDatabaseProfile.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portaldatabaseprovidernames.sqlite",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portaldatabaseprovidernam-3b03735d.html"
     }

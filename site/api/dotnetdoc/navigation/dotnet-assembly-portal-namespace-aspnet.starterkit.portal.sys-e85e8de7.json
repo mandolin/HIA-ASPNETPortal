@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.sys.envsection",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Sys/EnvSection.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.sys.envsection",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.sys.envsection-c099c3d8.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.sys-type-t-asp-043f5f13.json"
@@ -26,7 +26,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.sys.globalinfo",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Sys/GlobalInfo.cs",
       "symbolId": "dotnet:t:aspnet.starterkit.portal.sys.globalinfo",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.sys.globalinfo-807eec99.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal.sys-type-t-asp-d21cd84e.json"

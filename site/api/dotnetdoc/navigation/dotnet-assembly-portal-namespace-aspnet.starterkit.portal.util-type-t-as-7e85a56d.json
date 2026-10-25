@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.unityconfigloader",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.unityconfigloader:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.util:type:t-aspnet.starterkit.portal.util.unityconfigloader:entry:hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadconfig-unity.iunitycontainer-system.string",
       "kind": "entry",
       "label": "LoadConfig",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadconfig-unity.iunitycontainer-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.util.unityconfigloader.loadconfig-unity.iunitycontainer-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.lo-08c06a06.html"
     },
@@ -25,7 +33,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadunityconfig-unity.iunitycontainer-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.util.unityconfigloader.loadunityconfig-unity.iunitycontainer-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.lo-ac87b81f.html"
     }

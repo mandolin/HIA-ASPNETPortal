@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementinfo",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementinfo:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementinfo:entry:hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.amount",
       "kind": "entry",
       "label": "Amount",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.amount",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.amount",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-35ea67bf.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.attachmentname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.attachmentname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-7e4b5d65.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.category",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.category",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-100c288f.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.createdutc",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.createdutc",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-4ad386b5.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.reason",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.reason",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-747ae02f.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.requestid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.requestid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-4a253db9.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.status",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.status",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-0c03fa7d.html"
     }

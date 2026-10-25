@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.cachetimeout",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.cachetimeout",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.cachetimeout-7167e340.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.editroles",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.editroles",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.editroles-11671ba2.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.moduledefid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.moduledefid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.moduledefid-fe82d801.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.moduleid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.moduleid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.moduleid-fba61160.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.moduleorder",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.moduleorder",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.moduleorder-41b75817.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.moduletitle",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.moduletitle",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.moduletitle-66f0fc89.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.moduletitleen",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.moduletitleen",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.moduletitleen-7938d55e.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.moduletitlelocalizedjson",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.moduletitlelocalizedjson",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.moduletitlelo-b2270e78.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.panename",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.panename",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.panename-06565bf8.html"
     },
@@ -129,7 +129,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.showmobile",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.showmobile",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.showmobile-24516a0e.html"
     },
@@ -142,7 +142,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.imoduleitem.tabid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IModuleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.imoduleitem.tabid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.imoduleitem.tabid-f4905c79.html"
     }

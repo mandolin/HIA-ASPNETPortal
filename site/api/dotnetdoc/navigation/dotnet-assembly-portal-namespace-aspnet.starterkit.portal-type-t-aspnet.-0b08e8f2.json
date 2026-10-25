@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemeresolver",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemeresolver:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemeresolver:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.applytheme-system.web.ui.page",
       "kind": "entry",
       "label": "ApplyTheme",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.applytheme-system.web.ui.page",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.applytheme-system.web.ui.page",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.apply-17ff182f.html"
     },
@@ -25,7 +33,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemeresolver.defaultthemename",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemeresolver.defaultthemename",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemeresolver.defau-bb9d1dc1.html"
     },
@@ -38,7 +46,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getcurrentcssclass-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.getcurrentcssclass-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getcu-e54f2b94.html"
     },
@@ -51,7 +58,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getcurrentthemecontext-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.getcurrentthemecontext-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getcu-df25b40b.html"
     },
@@ -64,7 +70,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getmodulecssclass-system.int32-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.getmodulecssclass-system.int32-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getmo-fcd687c6.html"
     },
@@ -77,7 +83,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.isadminrequest-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.isadminrequest-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.isadm-27ed7418.html"
     },
@@ -90,7 +95,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.normalizecsssegment-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.normalizecsssegment-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.norma-63feea19.html"
     },
@@ -103,7 +108,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resolvethemecontext-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.resolvethemecontext-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resol-182f5f0a.html"
     },
@@ -116,7 +120,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resolvethemename-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.resolvethemename-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resol-fe7764da.html"
     },
@@ -129,7 +132,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resolvetrustedthemename-system.string-system.web.httpcontext-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.resolvetrustedthemename-system.string-system.web.httpcontext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resol-40d91311.html"
     },
@@ -142,7 +144,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemeresolver.themecontextkey",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemeresolver.themecontextkey",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemeresolver.theme-6429aaeb.html"
     },
@@ -155,7 +157,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemeresolver.themenamesettingkey",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemeresolver.themenamesettingkey",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemeresolver.theme-eac19ed9.html"
     },
@@ -168,7 +170,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.tothemesource-aspnet.starterkit.portal.portalruntimesettingsource-system.boolean",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.tothemesource-aspnet.starterkit.portal.portalruntimesettingsource-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.tothe-451b36ce.html"
     },
@@ -181,7 +183,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemeresolver.tracecategory",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemeresolver.tracecategory",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemeresolver.trace-56704025.html"
     },
@@ -194,7 +196,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.tracefallback-system.web.httpcontext-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.tracefallback-system.web.httpcontext-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.trace-58f364a7.html"
     },
@@ -207,7 +208,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemeresolver.tracelock",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemeresolver.tracelock",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemeresolver.trace-5dad2906.html"
     },
@@ -220,7 +221,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.trygetactivetabid-system.web.httpcontext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.trygetactivetabid-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.tryge-fe4f13ed.html"
     },
@@ -233,7 +233,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalthemeresolver.warnedfallbacks",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalthemeresolver.warnedfallbacks",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalthemeresolver.warne-dc288a50.html"
     }

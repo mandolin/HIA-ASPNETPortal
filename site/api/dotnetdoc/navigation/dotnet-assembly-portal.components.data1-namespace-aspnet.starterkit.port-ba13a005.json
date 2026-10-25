@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:base:dbcontext",
+      "kind": "relation",
+      "label": "Base: !:DbContext",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalcfgdbcontext.-ctor-system.string",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcfgdbcontext.-ctor-system.string",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcfgdbcontext.-ctor-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcfgdbcontext.-ctor--66e6e657.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.globals",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.globals",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.global-44898630.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.moduledefinitions",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.moduledefinitions",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.module-cb5701fa.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.modules",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.modules",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.module-0d75be55.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.settings",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.settings",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.settin-23fb0e71.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.tabs",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/PortalCfgDbContext.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalcfgdbcontext.tabs",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalcfgdbcontext.tabs-e4f84768.html"
     }

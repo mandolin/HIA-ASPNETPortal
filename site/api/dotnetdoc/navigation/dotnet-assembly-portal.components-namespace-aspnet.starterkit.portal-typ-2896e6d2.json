@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.createrequest-aspnet.starterkit.portal.expensereimbursementcreaterequest",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iexpensereimbursementdb.createrequest-aspnet.starterkit.portal.expensereimbursementcreaterequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.c-774d5510.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.getrecentbyuser-system.int32-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iexpensereimbursementdb.getrecentbyuser-system.int32-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.g-9a0a7d26.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.isschemaavailable",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iexpensereimbursementdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.i-33c7e115.html"
     }

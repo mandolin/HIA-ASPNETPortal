@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:base:iroleitem",
+      "kind": "relation",
+      "label": "Base: !:IRoleItem",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.portalid",
       "kind": "entry",
       "label": "PortalId",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.portalid",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RoleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.roleitem.portalid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.roleitem.portalid-8bbc284d.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.roleid",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RoleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.roleitem.roleid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.roleitem.roleid-b40e4b97.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.rolename",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RoleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.roleitem.rolename",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.roleitem.rolename-4d41d0a1.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.roleitem.users",
-      "sourcePath": "src/Portal/bin/Portal.Components.Data1.xml",
+      "sourcePath": "src/Portal.Components.Data1/RoleItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.roleitem.users",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.roleitem.users-99b221aa.html"
     }

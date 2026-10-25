@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationadminrow",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationadminrow:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationadminrow:entry:hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationadminrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationadminrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationadminrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationadminr-08cd064d.html"
     },
@@ -25,7 +33,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.applicanttext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.applicanttext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-8cf568e3.html"
     },
@@ -38,7 +46,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.applicationcode",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.applicationcode",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-33870a4d.html"
     },
@@ -51,7 +59,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.applicationid",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.applicationid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-a4768275.html"
     },
@@ -64,7 +72,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.applicationstatus",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.applicationstatus",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-0a47856a.html"
     },
@@ -77,7 +85,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.body",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.body",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-d50a1f3e.html"
     },
@@ -90,7 +98,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.categorykey",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.categorykey",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-12665019.html"
     },
@@ -103,7 +111,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationadminrow.emptytonone-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationadminrow.emptytonone-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationadminr-0fdda8d8.html"
     },
@@ -116,7 +124,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.reviewtext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.reviewtext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-6dd34949.html"
     },
@@ -129,7 +137,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.submittedutctext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.submittedutctext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-2dc92584.html"
     },
@@ -142,7 +150,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.summary",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.summary",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-3c77db46.html"
     },
@@ -155,7 +163,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.title",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/BusinessApplications.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.businessapplicationadminrow.title",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.businessapplicationadminr-7811d4ac.html"
     }

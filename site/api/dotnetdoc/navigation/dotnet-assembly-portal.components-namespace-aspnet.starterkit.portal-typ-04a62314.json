@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpermissionkeys:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.adminrolesedit",
       "kind": "entry",
       "label": "AdminRolesEdit",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.adminrolesedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.adminrolesedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.admi-dd8ade3e.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.adminusersedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.adminusersedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.admi-200b3c53.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.adminusersresetpassword",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.adminusersresetpassword",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.admi-517e15b3.html"
     },
@@ -51,7 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.adminusersview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.adminusersview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.admi-4186490a.html"
     },
@@ -64,7 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.auditoperationview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.auditoperationview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.audi-3faba5e7.html"
     },
@@ -77,7 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationadmin",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessapplicationadmin",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-a474500d.html"
     },
@@ -90,7 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessapplicationreview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-bf75c326.html"
     },
@@ -103,7 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationsubmit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessapplicationsubmit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-2e71911e.html"
     },
@@ -116,7 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessapplicationviewown",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessapplicationviewown",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-7b96e561.html"
     },
@@ -129,7 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationadmin",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationadmin",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-49c9cc74.html"
     },
@@ -142,7 +151,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationcreate",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationcreate",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-d5c10e3d.html"
     },
@@ -155,7 +164,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationeventsview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationeventsview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-4b8549fd.html"
     },
@@ -168,7 +177,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationhandle",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationhandle",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-cd0d8db3.html"
     },
@@ -181,7 +190,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationviewall",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationviewall",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-1825e3db.html"
     },
@@ -194,7 +203,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationviewown",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businesscollaborationviewown",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-1ed24cf8.html"
     },
@@ -207,7 +216,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkitemsadmin",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessworkitemsadmin",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-8c74ab36.html"
     },
@@ -220,7 +229,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkitemshandle",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessworkitemshandle",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-a0357cc9.html"
     },
@@ -233,7 +242,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkitemsview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessworkitemsview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-f1c52be2.html"
     },
@@ -246,7 +255,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkflowadmin",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessworkflowadmin",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-265cf7ec.html"
     },
@@ -259,7 +268,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.businessworkflowview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.businessworkflowview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.busi-a2d3bb20.html"
     },
@@ -272,7 +281,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentrawhtmledit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.contentrawhtmledit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.cont-b37fa192.html"
     },
@@ -285,7 +294,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.contentuploadmanage",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.contentuploadmanage",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.cont-889fee85.html"
     },
@@ -298,7 +307,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeedirectorybind",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeedirectorybind",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-8deabb96.html"
     },
@@ -311,7 +320,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeedirectoryedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeedirectoryedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-effcb1a9.html"
     },
@@ -324,7 +333,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeedirectoryview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeedirectoryview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-04ef8b70.html"
     },
@@ -337,7 +346,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmadmin",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmadmin",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-6dde128c.html"
     },
@@ -350,7 +359,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmconfirm",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmconfirm",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-c1e44937.html"
     },
@@ -363,7 +372,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofileconfirmview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-abdc7c40.html"
     },
@@ -376,7 +385,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestadmin",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestadmin",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-9903a833.html"
     },
@@ -389,7 +398,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestcancel",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestcancel",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-12d07b5e.html"
     },
@@ -402,7 +411,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestreview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestreview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-eb42de00.html"
     },
@@ -415,7 +424,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestsubmit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestsubmit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-4f09348c.html"
     },
@@ -428,7 +437,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.employeeprofilecorrectionrequestview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.empl-79fc60c5.html"
     },
@@ -441,7 +450,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessmanage",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessmanage",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-a09731be.html"
     },
@@ -454,7 +463,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessreview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilitybasicbusinessreview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-02addb99.html"
     },
@@ -467,7 +476,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationmanage",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationmanage",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-1e6d8535.html"
     },
@@ -480,7 +489,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationreview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityfoundationreview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-eea05d6e.html"
     },
@@ -493,7 +502,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformmanage",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformmanage",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-ebae6d9b.html"
     },
@@ -506,7 +515,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformreview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityplatformreview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-cf74e6c8.html"
     },
@@ -519,7 +528,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.enterprisecapabilityview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.ente-11724c9e.html"
     },
@@ -532,7 +541,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.modulecatalogedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-4776a159.html"
     },
@@ -545,7 +554,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modulecatalogview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.modulecatalogview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-15049c00.html"
     },
@@ -558,7 +567,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.moduledefinitionedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.modu-483bf4c3.html"
     },
@@ -571,7 +580,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.opsdiagnosticsdetail",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.opsdiagnosticsdetail",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.opsd-ed40ae13.html"
     },
@@ -584,7 +593,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.opsdiagnosticsview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.opsdiagnosticsview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.opsd-4136376b.html"
     },
@@ -597,7 +606,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.opshealthview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.opshealthview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.opsh-fdc42011.html"
     },
@@ -610,7 +619,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portalmodulesedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.portalmodulesedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.port-67109c15.html"
     },
@@ -623,7 +632,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.portaltabsedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.portaltabsedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.port-440d13c0.html"
     },
@@ -636,7 +645,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.settingsedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.settingsedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.sett-598350e3.html"
     },
@@ -649,7 +658,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.settingssensitiveview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.settingssensitiveview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.sett-8647d190.html"
     },
@@ -662,7 +671,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.settingsview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.settingsview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.sett-dfa8c43a.html"
     },
@@ -675,7 +684,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeedit",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.themeedit",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.them-735670f7.html"
     },
@@ -688,7 +697,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.themeview",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/PortalPermissions.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.portalpermissionkeys.themeview",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalpermissionkeys.them-697481be.html"
     }

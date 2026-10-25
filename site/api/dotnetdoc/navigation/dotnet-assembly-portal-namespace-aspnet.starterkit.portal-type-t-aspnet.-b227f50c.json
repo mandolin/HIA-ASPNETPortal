@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.bindrequests",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.bindrequests",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-49c13006.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.bindstatusfilter",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.bindstatusfilter",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-75b68e2c.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionrequests.correctionrequestdb",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeeprofilecorrectionrequests.correctionrequestdb",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofilecorrection-dd69bfab.html"
     },
@@ -51,7 +51,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionrequests.emptystaterowcount",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeeprofilecorrectionrequests.emptystaterowcount",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofilecorrection-5300a699.html"
     },
@@ -64,7 +64,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionrequests.emptystatetext",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeeprofilecorrectionrequests.emptystatetext",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofilecorrection-ee7a629d.html"
     },
@@ -77,7 +77,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.ensurecanapplyrequeststatus-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.ensurecanapplyrequeststatus-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-f148d433.html"
     },
@@ -90,7 +90,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.ensurecanviewrequests",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.ensurecanviewrequests",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-d9f6d0f6.html"
     },
@@ -103,7 +103,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.getcurrentusername",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.getcurrentusername",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-9cc59d6a.html"
     },
@@ -116,7 +116,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.issupportedtargetstatus-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.issupportedtargetstatus-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-deb6dad5.html"
     },
@@ -129,7 +129,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.mapworkitemeventtype-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.mapworkitemeventtype-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-0b4556fa.html"
     },
@@ -142,7 +142,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.mapworkitemstatus-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.mapworkitemstatus-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-64f237ca.html"
     },
@@ -155,7 +155,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.employeeprofilecorrectionrequests.messagelabel",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.employeeprofilecorrectionrequests.messagelabel",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.employeeprofilecorrection-9254c639.html"
     },
@@ -168,7 +168,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.normalizeinput-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.normalizeinput-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-50641ce9.html"
     },
@@ -181,7 +181,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.page_load-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.page_load-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-142684f3.html"
     },
@@ -194,7 +194,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.employeeprofilecorrectionrequests.requestsrepeater",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.employeeprofilecorrectionrequests.requestsrepeater",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.employeeprofilecorrection-f42c5bf0.html"
     },
@@ -207,7 +207,6 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-e916e483.html"
     },
@@ -220,7 +219,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.employeeprofilecorrectionrequests.resultlabel",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.employeeprofilecorrectionrequests.resultlabel",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.employeeprofilecorrection-2931989b.html"
     },
@@ -233,7 +232,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.employeeprofilecorrectionrequests.searchbutton",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.employeeprofilecorrectionrequests.searchbutton",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.employeeprofilecorrection-5963380a.html"
     },
@@ -246,7 +245,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.searchbutton_click-system.object-system.eventargs",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.searchbutton_click-system.object-system.eventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-3b79b318.html"
     },
@@ -259,7 +258,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.showunavailable-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.showunavailable-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-17bc23f5.html"
     },
@@ -272,7 +271,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.employeeprofilecorrectionrequests.statusfilterlist",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.designer.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.employeeprofilecorrectionrequests.statusfilterlist",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.employeeprofilecorrection-278e8c22.html"
     },
@@ -285,7 +284,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.trycompleteworkitem-system.int64-system.string-system.string",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrequests.trycompleteworkitem-system.int64-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-066026e4.html"
     },
@@ -298,7 +297,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionrequests.workitemdb",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.employeeprofilecorrectionrequests.workitemdb",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.employeeprofilecorrection-ba6f0060.html"
     },
@@ -311,7 +310,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.employeeprofilecorrectionrequests.requestsemptystaterowcount",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.cs",
       "symbolId": "dotnet:f:aspnet.starterkit.portal.employeeprofilecorrectionrequests.requestsemptystaterowcount",
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.employeeprofilecorrection-33714349.html"
     }

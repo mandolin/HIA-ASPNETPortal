@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingendrequest",
   "children": [
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingendrequest:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingendrequest:entry:hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingendrequest.actorname",
       "kind": "entry",
       "label": "ActorName",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingendrequest.actorname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingEndRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingendrequest.actorname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingendreq-4ece6017.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingendrequest.bindingid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingEndRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingendrequest.bindingid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingendreq-2c97131d.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.useremployeebindingendrequest.reason",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/UserEmployeeBindingEndRequest.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.useremployeebindingendrequest.reason",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.useremployeebindingendreq-2081475b.html"
     }

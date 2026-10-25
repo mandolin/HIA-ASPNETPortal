@@ -4,6 +4,15 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordpublickey",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordpublickey:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalloginpasswordpublickey:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordpublickey.-ctor-system.string-system.int32",
       "kind": "entry",
       "label": "#ctor",
@@ -12,7 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordpublickey.-ctor-system.string-system.int32",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordpublickey.-ctor-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordpublic-cda281dc.html"
     },
@@ -25,7 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublickey.keysizebits",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalloginpasswordpublickey.keysizebits",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublic-64843b4d.html"
     },
@@ -38,7 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublickey.publickeypem",
-      "sourcePath": "src/Portal/bin/Portal.xml",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.portalloginpasswordpublickey.publickeypem",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.portalloginpasswordpublic-5dd20a3b.html"
     }

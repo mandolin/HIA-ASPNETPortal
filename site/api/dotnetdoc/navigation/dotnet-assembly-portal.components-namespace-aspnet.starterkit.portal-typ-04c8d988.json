@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iglobalitem.alwaysshoweditbutton",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IGlobalItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iglobalitem.alwaysshoweditbutton",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iglobalitem.alwaysshowedi-f1660aa8.html"
     },
@@ -25,7 +25,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iglobalitem.portalid",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IGlobalItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iglobalitem.portalid",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iglobalitem.portalid-72ab4eef.html"
     },
@@ -38,7 +38,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iglobalitem.portalname",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IGlobalItem.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.iglobalitem.portalname",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iglobalitem.portalname-0c1b41a9.html"
     }

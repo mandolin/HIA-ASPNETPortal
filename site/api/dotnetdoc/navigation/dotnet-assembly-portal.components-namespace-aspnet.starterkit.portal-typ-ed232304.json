@@ -12,7 +12,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iportaldb.deletemodule-system.int32",
-      "sourcePath": "src/Portal.Components/bin/Debug/Portal.Components.xml",
+      "sourcePath": "src/Portal.Components/IPortalDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.iportaldb.deletemodule-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iportaldb.deletemodule-sy-d9e814b8.html"
     }
