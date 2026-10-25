@@ -68,7 +68,7 @@
       "criterion": "blocker-2",
       "name": "Cookie（Secure/SameSite）与 machineKey 目标环境实证 + ADR 0021 转已接受",
       "mode": "targetEnv",
-      "generator": { "script": "dev\\scripts\\New-PortalTargetEnvironmentEvidencePackage.ps1", "args": [ "-Profile", "Prod" ] },
+      "generator": { "script": "dev\\scripts\\New-PortalCookieMachineKeyObservations.ps1", "args": [] },
       "prereqs": "目标环境请求/响应头采集 + ADR 0021 决策记录转「已接受」",
       "expectedArtifacts": [ "cookie-machinekey-observations.md" ],
       "owner": "项目维护者",

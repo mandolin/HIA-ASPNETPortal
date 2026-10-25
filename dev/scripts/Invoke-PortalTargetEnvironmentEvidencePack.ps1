@@ -66,7 +66,16 @@ param(
 
     [string] $OutputRoot,
 
-    [string] $BaseUrl
+    [string] $BaseUrl,
+
+    # <lang>
+    #   <zh-CN>目标环境**已部署**的 Web.config 路径：合规基线据此评价目标环境事实，
+    #     而不是把源码开发基线（允许 HTTP Cookie、HSTS 仅在 Release transform）当目标环境判不合格。</zh-CN>
+    #   <en>Path to the **deployed** Web.config of the target environment, so the compliance baseline
+    #     evaluates the target environment's actual state instead of judging the source development
+    #     baseline (which permits HTTP cookies and keeps HSTS only in the Release transform).</en>
+    # </lang>
+    [string] $TargetWebConfigPath
 )
 
 Set-StrictMode -Version Latest
@@ -156,7 +165,6 @@ foreach ($item in @($registry.items)) {
         }
     }
     elseif ($mode -eq 'targetEnv') {
-        $record.reason = "需要目标环境，前置条件未满足：$([string]$item.prereqs)"
         if (-not [string]::IsNullOrWhiteSpace($BaseUrl)) {
             $scriptRel = [string]$item.generator.script
             if (-not [string]::IsNullOrWhiteSpace($scriptRel)) {
@@ -181,6 +189,17 @@ foreach ($item in @($registry.items)) {
                     if ($generatorCommand -and $generatorCommand.Parameters.ContainsKey('BaseUrl')) {
                         $generatorArgs += @('-BaseUrl', $BaseUrl)
                     }
+                    # 同理：把"已部署 Web.config 路径"只传给声明了该参数的生成器，
+                    # 让合规基线评价目标环境事实而不是源码开发基线。
+                    if ($generatorCommand -and $generatorCommand.Parameters.ContainsKey('WebConfigPath') -and
+                        -not [string]::IsNullOrWhiteSpace($TargetWebConfigPath)) {
+                        $generatorArgs += @('-WebConfigPath', $TargetWebConfigPath)
+                    }
+                    # 期望产物落地位置：声明了 OutputPath 的生成器，把首个期望产物名落到本次运行目录。
+                    $expectedArtifactNames = @($item.expectedArtifacts | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+                    if ($generatorCommand -and $generatorCommand.Parameters.ContainsKey('OutputPath') -and $expectedArtifactNames.Count -gt 0) {
+                        $generatorArgs += @('-OutputPath', (Join-Path $runDirectory $expectedArtifactNames[0]))
+                    }
                     $logPath = Join-Path $runDirectory ($id + '.log.md')
                     $record.log = $logPath
                     $output = & $pwshPath -NoLogo -NoProfile -ExecutionPolicy Bypass -File $scriptPath @generatorArgs 2>&1
@@ -188,8 +207,35 @@ foreach ($item in @($registry.items)) {
                     Write-Utf8NoBomFile -Path $logPath -Content (($output | ForEach-Object { $_.ToString() }) -join "`r`n")
                     $record.exitCode = $code
                     if ($code -eq 0) { $record.status = 'Collected' } else { $record.status = 'Failed'; $record.reason = "生成器退出码 $code"; $failed += 1 }
+                    # <lang>
+                    #   <zh-CN>**期望产物必须真的落地**：只凭生成器退出码 0 就记 Collected 会产生假阳性
+                    #     （例：`cookie-machinekey-target` 的期望产物 `cookie-machinekey-observations.md`
+                    #     此前没有任何生成器产出，却因复用了就绪包而被记为已出证）。</zh-CN>
+                    #   <en>**The expected artifacts must actually exist**: recording Collected on the
+                    #     generator's exit code alone produces false positives (e.g. the
+                    #     `cookie-machinekey-target` item's expected artifact
+                    #     `cookie-machinekey-observations.md` had no producer at all, yet was recorded
+                    #     as collected because it reused the readiness package).</en>
+                    # </lang>
+                    # 只在"本包把产物位置显式指定给了生成器"时校验落地：其余生成器把产物写进各自的
+                    # 输出目录（就绪包写 evidence/p14.1/<时间戳>/、矩阵脚本写自己的 -OutputJson…），
+                    # 本包无从得知其位置，强行按运行目录校验会把已出证项误判为失败。
+                    if ($code -eq 0 -and $expectedArtifactNames.Count -gt 0 -and
+                        $generatorCommand -and $generatorCommand.Parameters.ContainsKey('OutputPath')) {
+                        $missing = @($expectedArtifactNames | Where-Object { -not (Test-Path -LiteralPath (Join-Path $runDirectory $_)) })
+                        if ($missing.Count -gt 0) {
+                            $record.status = 'Failed'
+                            $record.reason = '期望产物未生成：' + ($missing -join '、')
+                            $failed += 1
+                        }
+                    }
                 }
             }
+        }
+        else {
+            # 未提供目标终结点时，生成器根本没跑，此时才写"前置条件未满足"；
+            # 否则已出证项会挂着这句误导性文案。
+            $record.reason = "需要目标环境，前置条件未满足：$([string]$item.prereqs)"
         }
     }
     elseif ($mode -eq 'manual') {

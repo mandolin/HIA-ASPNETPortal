@@ -18,6 +18,8 @@ param(
 
     [string]$MatrixPath,
 
+    [string]$WebConfigPath,
+
     [string]$OutputRoot,
 
     [switch]$AllowFailures
@@ -28,7 +30,9 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 if ([string]::IsNullOrWhiteSpace($MatrixPath)) {
-    $MatrixPath = Join-Path $repoRoot 'work-zone/dev/plans/W-anp-P14.1-target-environment-matrix.md'
+    # 该文件实际位于 plans/works/ 下；默认值此前漏了 works/，导致未显式传 -MatrixPath 的
+    # 调用方（如证据项 cookie-machinekey-target）解析失败。
+    $MatrixPath = Join-Path $repoRoot 'work-zone/dev/plans/works/W-anp-P14.1-target-environment-matrix.md'
 }
 
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
@@ -366,6 +370,21 @@ $complianceJson = Join-Path $runDirectory 'compliance-baseline.json'
 $complianceArgs = @('-Profile', $Profile, '-OutputJson', $complianceJson)
 if (-not [string]::IsNullOrWhiteSpace($BaseUrl)) {
     $complianceArgs += @('-BaseUrl', $BaseUrl)
+}
+# <lang>
+#   <zh-CN>**目标环境必须校验已部署配置**：合规基线默认读 `src/Portal/Web.config`（开发基线，
+#     允许 HTTP Cookie、且 HSTS 只存在于 Release transform），于是用 Prod profile 判定时
+#     会把"源码基线不满足 Prod"误记成"目标环境不合规"——而目标环境实际发布的配置是满足的。
+#     传入 `-WebConfigPath` 指向**已部署**的 Web.config，即可让检查评价目标环境事实。</zh-CN>
+#   <en>**The target environment must be checked against the deployed configuration**: the compliance
+#     baseline reads `src/Portal/Web.config` by default (the development baseline, which permits HTTP
+#     cookies and keeps HSTS only in the Release transform), so a Prod-profile run misrecords
+#     "the source baseline is not Prod-compliant" as "the target environment is non-compliant" — even
+#     though the published target configuration does comply. Passing `-WebConfigPath` pointing at the
+#     **deployed** Web.config makes the check evaluate the target environment's actual state.</en>
+# </lang>
+if (-not [string]::IsNullOrWhiteSpace($WebConfigPath)) {
+    $complianceArgs += @('-WebConfigPath', $WebConfigPath)
 }
 
 Invoke-ReadinessStep `
