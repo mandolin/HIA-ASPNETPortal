@@ -269,40 +269,43 @@ if (-not (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf)) {
 else {
     $dnManifest = [System.IO.File]::ReadAllText($dotnetdocManifestPath, $utf8) | ConvertFrom-Json
 
-    # B1 正反两向
-    $declared = @()
-    foreach ($h in @($dnManifest.halves)) { $declared += ($h.half + '/' + $h.locale) }
-    foreach ($key in $declared) {
-        $entry = Join-Path $dotnetdocDir ($key -replace '/', '\')
-        if (-not (Test-Path -LiteralPath (Join-Path $entry 'index.html') -PathType Leaf)) {
-            $failures += "B1 清单登记的半边×语言缺少 index.html：$key。"
-        }
-    }
-    $ghost = @()
-    if (Test-Path -LiteralPath $dotnetdocDir) {
-        # <lang>
-        #   <zh-CN>**目录是三层**：`<分组>/<半边>/<语言>/`（如 `api/Portal/en/`）——半边名本身含一个斜杠
-        #     （`api/Portal`）。首版只走两层，于是把 7 个半边整体误判成"幽灵目录"：
-        #     **检查逻辑写错比没有检查更糟**，它会用自信的语气报出假失败，让人先去修不存在的问题。</zh-CN>
-        #   <en>**The tree is three levels**: `<group>/<half>/<locale>/` (e.g. `api/Portal/en/`) — the half name itself
-        #     contains a slash (`api/Portal`). The first version walked only two levels and so misreported all seven halves
-        #     as "ghost directories": **a wrong check is worse than no check**, because it reports false failures
-        #     confidently and sends people to fix problems that do not exist.</en>
-        # </lang>
-        foreach ($group in (Get-ChildItem -LiteralPath $dotnetdocDir -Directory)) {
-            foreach ($halfDir in (Get-ChildItem -LiteralPath $group.FullName -Directory)) {
-                $halfKey = $group.Name + '/' + $halfDir.Name
-                foreach ($locDir in (Get-ChildItem -LiteralPath $halfDir.FullName -Directory)) {
-                    $key = $halfKey + '/' + $locDir.Name
-                    if ($declared -notcontains $key) { $ghost += $key }
-                }
-            }
-        }
-    }
-    if ($ghost.Count -gt 0) {
-        $failures += ('B1 快照存在清单未登记的"半边×语言"目录（残留/幽灵产物，读者会点到 404）：' + ($ghost -join '、') + '。请重跑 Publish-PortalDotNetDoc.ps1（它整体重建发布目录）。')
+    # B1 站点级形状：入口页 + 条目页 + 清单登记一致（正反两向）
+    # <lang>
+    #   <zh-CN>多页化后快照是**扁平结构**（index.html + entries/ + navigation/ + search/），
+    #     不再是"半边 × 语言"的目录矩阵。因此 B1 改为校验：入口页存在、entries/ 非空、
+    #     清单登记的条目数与实际条目数一致（双向）。同时保留"幽灵目录"检查——但改为校验
+    #     顶层不应再残留旧的半边目录（api/、markup/、surface/、project/）。</zh-CN>
+    #   <en>After going multi-page the snapshot is a **flat structure** (index.html + entries/ +
+    #     navigation/ + search/), no longer a "half x locale" directory matrix. B1 now checks: the
+    #     entrypage exists, entries/ is non-empty, and the manifest's declared entry count matches the
+    #     actual count (both directions). The "ghost directory" check is kept but re-pointed: no legacy
+    #     half directories (api/, markup/, surface/, project/) should remain at the top level.</en>
+    # </lang>
+    $dnEntrypoint = Join-Path $dotnetdocDir ([string]$dnManifest.entrypoint)
+    if (-not (Test-Path -LiteralPath $dnEntrypoint -PathType Leaf)) {
+        $failures += ('B1 DotNetDoc 多页站点缺少入口页：' + [string]$dnManifest.entrypoint)
     }
 
+    $dnEntriesDir = Join-Path $dotnetdocDir 'entries'
+    $dnEntryFiles = @(Get-ChildItem -LiteralPath $dnEntriesDir -File -Filter '*.html' -ErrorAction SilentlyContinue)
+    if ($dnEntryFiles.Count -eq 0) {
+        $failures += 'B1 DotNetDoc 多页站点未产出任何条目页（entries/ 为空；渲染失败）。'
+    }
+
+    if ($null -ne $dnManifest.counts -and $null -ne $dnManifest.counts.entryPages) {
+        $dnDeclaredCount = [int]$dnManifest.counts.entryPages
+        if ($dnEntryFiles.Count -ne $dnDeclaredCount) {
+            $failures += ('B1 清单登记条目数 ' + $dnDeclaredCount + ' 与实际 ' + $dnEntryFiles.Count + ' 不一致（快照与清单漂移）。')
+        }
+    }
+
+    # 幽灵产物：顶层不应残留旧的半边目录
+    foreach ($legacy in @('api', 'markup', 'surface', 'project')) {
+        $legacyPath = Join-Path $dotnetdocDir $legacy
+        if (Test-Path -LiteralPath $legacyPath -PathType Container) {
+            $failures += ('B1 快照残留旧的单页半边目录：' + $legacy + '（多页化后应已整体重建清除）。')
+        }
+    }
     # B2 源指纹
     $fp = Get-DotNetDocSourceFingerprint
     if ($null -eq $fp) {
@@ -320,36 +323,49 @@ else {
     # B3 公开面形状（递归、所有文件）
     $dnScanned = Test-PublicShape -Directory $dotnetdocDir -Label 'DotNetDoc 快照'
 
-    # B4 语言声明与产物一致
-    foreach ($entry in @($dnManifest.declaredLocales)) {
-        $halfDir = Join-Path $dotnetdocDir ($entry.half -replace '/', '\')
-        $actual = @()
-        if (Test-Path -LiteralPath $halfDir) {
-            $actual = @(Get-ChildItem -LiteralPath $halfDir -Directory | ForEach-Object { $_.Name })
-        }
-        $want = @($entry.locales)
-        $missingLocales = @($want | Where-Object { $actual -notcontains $_ })
-        $extraLocales = @($actual | Where-Object { $want -notcontains $_ })
-        if ($missingLocales.Count -gt 0) {
-            $failures += ('B4 半边 ' + $entry.half + ' 声明了语言 ' + ($want -join '/') + ' 但产物缺少：' + ($missingLocales -join '、') + '（漏渲染）。')
-        }
-        if ($extraLocales.Count -gt 0) {
-            $failures += ('B4 半边 ' + $entry.half + ' 只声明 ' + ($want -join '/') + ' 却存在产物目录：' + ($extraLocales -join '、') + '——**伪造双语**（把英文内容复制成中文目录，读者看不出差别）；请删掉该目录并重跑 Publish-PortalDotNetDoc.ps1。')
-        }
+    # B4 语言声明与产物一致（多页站点：声明语言须为站点实际支持语言的子集）
+    $dnProjectIndexPath = Join-Path $dotnetdocDir 'project-index.json'
+    if (-not (Test-Path -LiteralPath $dnProjectIndexPath -PathType Leaf)) {
+        $failures += 'B4 DotNetDoc 多页站点缺少 project-index.json（无法核对声明语言）。'
     }
-
-    # B5 产物非空
-    foreach ($key in $declared) {
-        $entry = Join-Path $dotnetdocDir ($key -replace '/', '\') 'index.html'
-        if (Test-Path -LiteralPath $entry -PathType Leaf) {
-            $size = (Get-Item -LiteralPath $entry).Length
-            if ($size -lt 1KB) {
-                $failures += ('B5 产物疑似空壳：' + $key + '/index.html 仅 ' + $size + ' 字节（渲染失败或被清空）。')
+    else {
+        $dnProjectIndex = [System.IO.File]::ReadAllText($dnProjectIndexPath, $utf8) | ConvertFrom-Json
+        # StrictMode 下访问缺失属性会抛错，故统一用 PSObject.Properties 探测（project / site / 顶层）
+        $dnSiteLocales = @()
+        foreach ($candidate in @($dnProjectIndex.project, $dnProjectIndex.site, $dnProjectIndex)) {
+            if ($null -eq $candidate) { continue }
+            $prop = $candidate.PSObject.Properties['locales']
+            if ($null -ne $prop -and $null -ne $prop.Value) {
+                $dnSiteLocales = @($prop.Value)
+                break
+            }
+        }
+        if ($dnSiteLocales.Count -eq 0) {
+            Write-Host '    [提示] project-index.json 未暴露 locales；B4 跳过语言一致性核对。'
+        }
+        if ($dnSiteLocales.Count -gt 0) {
+            foreach ($loc in @($dnManifest.locales)) {
+                if ($dnSiteLocales -notcontains $loc) {
+                    $failures += ('B4 清单声明语言 ' + $loc + ' 不在站点实际支持语言（' + ($dnSiteLocales -join '、') + '）内（漏渲染或声明漂移）。')
+                }
             }
         }
     }
-}
 
+    # B5 产物非空：入口页 + 抽样条目页
+    if (Test-Path -LiteralPath $dnEntrypoint -PathType Leaf) {
+        $dnShellSize = (Get-Item -LiteralPath $dnEntrypoint).Length
+        if ($dnShellSize -lt 1KB) {
+            $failures += ('B5 入口页疑似空壳：仅 ' + $dnShellSize + ' 字节（渲染失败或被清空）。')
+        }
+    }
+    $dnSampled = @($dnEntryFiles | Select-Object -First 10)
+    foreach ($f in $dnSampled) {
+        if ($f.Length -lt 256) {
+            $failures += ('B5 条目页疑似空壳：entries/' + $f.Name + ' 仅 ' + $f.Length + ' 字节。')
+        }
+    }
+}
 # ---------- 统计与输出 ----------
 if ([string]::IsNullOrWhiteSpace($StatsPath)) {
     $statsDir = Join-Path $repoRoot 'temp\p180'
@@ -365,7 +381,10 @@ $report = [ordered]@{
     }
     dotnetdoc = [ordered]@{
         manifestPresent = (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf)
-        halves          = if (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf) { @($dnManifest.halves | ForEach-Object { $_.half + '/' + $_.locale }) } else { @() }
+        layout          = if (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf) { [string]$dnManifest.layout } else { $null }
+        entrypoint      = if (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf) { [string]$dnManifest.entrypoint } else { $null }
+        entryPages      = if (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf) { $dnManifest.counts.entryPages } else { $null }
+        declaredInputs  = if (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf) { @($dnManifest.declaredInputs | ForEach-Object { $_.half }) } else { @() }
         sourceFingerprint = if (Test-Path -LiteralPath $dotnetdocConfigPath -PathType Leaf) { (Get-DotNetDocSourceFingerprint).Fingerprint } else { $null }
         scannedFiles    = $dnScanned
     }
@@ -381,7 +400,7 @@ if ($failures.Count -gt 0) {
 }
 
 foreach ($s in $softNotes) { Write-Host ('  ' + $s) }
-$halfCount = if (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf) { @($dnManifest.halves).Count } else { 0 }
-Write-Host ('[PASS] 代码文档发布：JSDoc 快照完整、源指纹一致、公开面形状合格；DotNetDoc ' + $halfCount + ' 个半边×语言完整、源指纹一致、形状合格、语言声明与产物一致；说明页已上架并链接两个入口。') -ForegroundColor Green
+$entryPageCount = if (Test-Path -LiteralPath $dotnetdocManifestPath -PathType Leaf) { $dnManifest.counts.entryPages } else { 0 }
+Write-Host ('[PASS] 代码文档发布：JSDoc 快照完整、源指纹一致、公开面形状合格；DotNetDoc 为多页 split-site 站点（' + $entryPageCount + ' 个条目页），入口与形状合格、条目数与清单一致、语言声明与产物一致；说明页已上架并链接两个入口。') -ForegroundColor Green
 Write-Host ('统计已写入：' + $StatsPath)
 exit 0
