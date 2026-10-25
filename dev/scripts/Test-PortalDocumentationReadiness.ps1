@@ -351,12 +351,12 @@ $dotnetDocSourceProbeConfigPath = Get-RepoPath -RelativePath 'dotnetdoc.source-p
 # <zh-CN>声明清单中允许的 runner 版本范围；升级必须先审查，再同步此契约。</zh-CN>
 # <en>Declare the runner version range allowed by the manifest; an upgrade must be reviewed before this contract is updated.</en>
 # </lang>
-$expectedDotnetDocRunnerRange = '^0.1.8'
+$expectedDotnetDocRunnerRange = '^0.1.10'
 # <lang>
 # <zh-CN>声明锁文件中当前可复现的 runner 版本；它不能仅由 semver 范围隐式决定。</zh-CN>
 # <en>Declare the runner version currently reproducible from the lockfile; it must not be implied by the semver range alone.</en>
 # </lang>
-$expectedDotnetDocRunnerLockedVersion = '0.1.8'
+$expectedDotnetDocRunnerLockedVersion = '0.1.10'
 # <lang>
 # <zh-CN>以失败为默认值，使缺失或不一致的 pilot 契约明确失败。</zh-CN>
 # <en>Default to failure so a missing or inconsistent pilot contract fails explicitly.</en>

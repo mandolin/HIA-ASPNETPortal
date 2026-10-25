@@ -69,4 +69,4 @@ tarballs correctly, otherwise the project convention treats it as a missing prer
 - Source comment conventions (bilingual `<lang>` blocks): see the design and development pages;
 - Documentation family overview and gaps: `documentation-map.md`.
 
-<!-- build-stamp: FA61403B1359 -->
+<!-- build-stamp: 137E0219D5F6 -->

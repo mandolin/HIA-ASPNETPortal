@@ -58,4 +58,4 @@ JSDoc 试点工作区（`dev/documentation/jsdoc`）通过工作区级 `.npmrc` 
 - 源码注释规范（中英双语 `<lang>` 块）：见「设计与开发」相关页；
 - 文档族总览与缺口：`documentation-map.md`。
 
-<!-- build-stamp: 4ABAA074B262 -->
+<!-- build-stamp: 3BB445FF6FC1 -->
