@@ -1,0 +1,22 @@
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel/Delete 进入链接记录的既有服务器流程；按钮不自行解析 URL、改变排序或绕过删除权限。</zh-CN>
+                    <en>Update, Cancel, and Delete enter the existing server flow for the link record; the buttons do not parse URLs, change ordering, or bypass delete authorization.</en>
+                </lang>
+            --%>
+            <div class="portal-form-actions">
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
+                    CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
+                    CssClass="portal-button portal-button-secondary" BorderStyle="none" OnClick="CancelBtn_Click" />
+                <asp:LinkButton ID="deleteButton" Text="<%$ Resources:lang,LegacyEdit_ButtonDelete %>" CausesValidation="False" runat="server"
+                    CssClass="portal-button portal-button-danger" BorderStyle="none" OnClick="DeleteBtn_Click" />
+            </div>
+        </div>
+
+        <p class="portal-edit-metadata">
+            <%= lang.LegacyEdit_CreatedBy %> <asp:Label ID="CreatedBy" runat="server" />
+            <%= lang.LegacyEdit_CreatedOn %> <asp:Label ID="CreatedDate" runat="server" />
+        </p>
+    </section>
+</asp:Content>

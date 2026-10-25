@@ -1,0 +1,15 @@
+            <%--
+                <lang>
+                    <zh-CN>更多链接只有在服务器导航策略通过时显示；非法地址保持隐藏，不把原始历史值回显给客户端。</zh-CN>
+                    <en>The read-more link appears only after the server navigation policy passes; invalid addresses stay hidden instead of echoing raw legacy values to the client.</en>
+                </lang>
+            --%>
+            <div class="portal-content-item-actions">
+                <asp:HyperLink id="moreLink" CssClass="portal-text-action"
+                    NavigateUrl='<%# GetSafeBrowseUrl(DataBinder.Eval(Container.DataItem, "MoreLink")) %>'
+                    Visible='<%# HasSafeBrowseUrl(DataBinder.Eval(Container.DataItem, "MoreLink")) %>'
+                    runat="server" Text='<%$ Resources: lang, Announcements_readMore %>'/>
+            </div>
+        </div>
+    </ItemTemplate>
+</asp:DataList>

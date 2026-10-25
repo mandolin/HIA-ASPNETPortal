@@ -1,0 +1,12 @@
+        <%--
+          <lang>
+            <zh-CN>保存角色变更按钮只触发服务端成员同步；管理员授权、重复项、并发和旧授权字符串兼容逻辑不由标记层实现。</zh-CN>
+            <en>The save-role-changes button only triggers server-side membership synchronization; administrator authorization, duplicates, concurrency, and legacy authorization-string compatibility are not implemented by markup.</en>
+          </lang>
+        --%>
+        <div class="portal-form-actions">
+            <asp:LinkButton ID="saveBtn" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang, Admin_SecurityRoles_ButtonSave %>" runat="server"
+                OnClick="Save_Click" />
+        </div>
+    </div>
+</asp:Content>

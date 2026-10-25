@@ -1,0 +1,4 @@
+        <%-- <lang><zh-CN>右侧模块容器；保留旧门户三栏布局契约，并由主题决定实际展现。</zh-CN><en>Right module pane; it preserves the legacy three-pane portal contract while themes decide the actual presentation.</en></lang> --%>
+        <div id="RightPane" class="portal-pane portal-pane-right" runat="server" visible="false"></div>
+    </div>
+</asp:Content>

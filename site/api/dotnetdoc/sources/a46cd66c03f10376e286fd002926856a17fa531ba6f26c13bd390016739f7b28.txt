@@ -1,0 +1,7 @@
+<%--
+    <lang>
+        <zh-CN>HtmlHolder 只是 code-behind 注入受信任内容的服务器容器；没有有效记录时保持空容器，不向客户端泄露原始配置值。</zh-CN>
+        <en>HtmlHolder is only the server container for trusted code-behind content; without a valid record it stays empty and does not disclose raw configuration values to the client.</en>
+    </lang>
+--%>
+<div id="HtmlHolder" class="portal-content-html" runat="server"></div>

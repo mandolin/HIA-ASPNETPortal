@@ -1,0 +1,13 @@
+                <%--
+                  <lang>
+                    <zh-CN>结束绑定按钮的 OnClientClick 原先硬编码中文确认文案，英文界面下会显示中文；现整体取自资源（该资源值必须保持为合法的 JS 语句，且消息文本使用单引号，避免破坏标记属性）。</zh-CN>
+                    <en>The end-binding button previously hardcoded Chinese confirmation text, which showed Chinese even in an English UI; the whole statement now comes from a resource (the value must stay a valid JS statement with single-quoted text so the markup attribute is not broken).</en>
+                  </lang>
+                --%>
+                <asp:LinkButton ID="EndBindingButton" CssClass="CommandButton" Text="<%$ Resources:lang, Admin_UserEmployeeBindingEdit_ButtonEndActiveBinding %>"
+                    CausesValidation="False" OnClick="EndBindingButton_Click"
+                    OnClientClick="<%$ Resources:lang, Admin_UserEmployeeBindingEdit_ConfirmEndBinding %>" runat="server" />
+            </div>
+        </div>
+    </div>
+</asp:Content>

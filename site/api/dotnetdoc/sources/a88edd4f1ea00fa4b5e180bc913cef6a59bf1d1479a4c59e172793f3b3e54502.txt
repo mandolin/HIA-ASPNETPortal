@@ -1,0 +1,18 @@
+        <%--
+            <lang>
+                <zh-CN>登录按钮进入 LoginBtn_Click，注册链接仅在 code-behind 明确开放时显示；认证结果和跳转不能由标记层伪造。</zh-CN>
+                <en>The sign-in button enters LoginBtn_Click, while the registration link is shown only when the code-behind explicitly enables it; authentication results and redirects cannot be forged by the markup.</en>
+            </lang>
+        --%>
+        <asp:Button id="SigninBtn" CssClass="CommandButton portal-primary-action" Text='<%$ Resources:lang,Signin_LoginText %>' runat="server" onclick="LoginBtn_Click" />
+        <asp:HyperLink
+            id="RegisterLink"
+            CssClass="CommandButton portal-secondary-action"
+            NavigateUrl="~/Admin/Register.aspx"
+            Text='<%$ Resources:lang,Signin_RegisterText %>'
+            Visible="false"
+            runat="server" />
+    </div>
+
+    <asp:Label id="Message" CssClass="NormalRed portal-form-message" runat="server" />
+</div>

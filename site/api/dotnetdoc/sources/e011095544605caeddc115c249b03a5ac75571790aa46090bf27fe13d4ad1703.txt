@@ -1,0 +1,22 @@
+                        <%--
+                        <lang>
+                          <zh-CN>回复标题同样通过编码 helper 输出，避免旧讨论内容直接进入页面文本节点。</zh-CN>
+                          <en>Reply titles are also emitted through the encoding helper so legacy discussion content does not enter page text nodes directly.</en>
+                        </lang>
+                        --%>
+                        <asp:HyperLink
+                            CssClass="portal-discussion-title"
+                            Text='<%# EncodeDisplayText(Eval("Title")) %>'
+                            NavigateUrl='<%# FormatUrl((int)Eval("ItemID")) %>'
+                            Target="_blank"
+                            runat="server" />
+                        <span class="portal-discussion-meta">
+                            <%= lang.Discussion_From %> <%# EncodeDisplayText(Eval("CreatedByUser")) %>
+                            <%= lang.Discussion_Posted %> <%# FormatDate(Eval("CreatedDate")) %>
+                        </span>
+                    </span>
+                </div>
+            </ItemTemplate>
+        </asp:DataList>
+    </SelectedItemTemplate>
+</asp:datalist>

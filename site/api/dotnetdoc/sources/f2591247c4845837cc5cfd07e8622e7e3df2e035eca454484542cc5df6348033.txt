@@ -1,0 +1,54 @@
+                            <%--
+                              <lang>
+                                <zh-CN>密码与确认密码的隐藏密文字段仅用于提交前保护，仍属于客户端回传；服务器必须重新验证匹配、策略和安全存储。</zh-CN>
+                                <en>The password and confirmation ciphertext fields only support pre-submit protection and remain client-posted data; the server must revalidate matching, policy, and secure storage.</en>
+                              </lang>
+                            --%>
+                            <asp:TextBox size="25" ID="Password" TextMode="Password" runat="server" />
+                            <asp:HiddenField ID="EncryptedPassword" runat="server" />
+                            &nbsp;
+                            <asp:RequiredFieldValidator ControlToValidate="Password" ErrorMessage="<%$ Resources:lang,Admin_Register_ValidatorPasswordRequired %>"
+                                runat="server" ID="RequiredFieldValidator3" />
+                            <p>
+                            <%--
+                              <lang>
+                                <zh-CN>确认密码字段只为本次回发提供一致性检查；匹配验证发生在页面层，服务器仍需重新确认明文/密文输入对应同一用户意图。</zh-CN>
+                                <en>The confirmation password field only supports consistency checks for this postback; matching validation occurs at the page layer, and the server must still re-confirm that plaintext or ciphertext input reflects the same user intent.</en>
+                              </lang>
+                            --%>
+                            <%= lang.Admin_Register_LabelConfirmPassword %>
+                            <br>
+                            <asp:TextBox size="25" ID="ConfirmPassword" TextMode="Password" runat="server" />
+                            <asp:HiddenField ID="EncryptedConfirmPassword" runat="server" />
+                            &nbsp;
+                            <asp:RequiredFieldValidator ControlToValidate="ConfirmPassword" Display="Dynamic"
+                                ErrorMessage="<%$ Resources:lang,Admin_Register_MessageConfirmBlank %>" runat="server" ID="RequiredFieldValidator4" />
+                            <asp:CompareValidator ControlToValidate="ConfirmPassword" ControlToCompare="Password"
+                                ErrorMessage="<%$ Resources:lang,Admin_Register_MessagePasswordMismatch %>" runat="server" ID="CompareValidator1" />
+                            <p>
+                            <%--
+                              <lang>
+                                <zh-CN>RegisterBtn_Click 是账号创建与失败提示的服务器入口；Message 只能反馈服务器结果，不能由页面标记宣称注册成功。</zh-CN>
+                                <en>RegisterBtn_Click is the server entry for account creation and failure messaging; Message reports the server result and cannot be used by markup to claim registration success.</en>
+                              </lang>
+                            --%>
+                            <asp:LinkButton class="CommandButton" Text="<%$ Resources:lang,Admin_Register_ButtonSubmit %>" runat="server"
+                                ID="RegisterBtn" OnClick="RegisterBtn_Click" />
+                            <br>
+                            <br>
+                            <p>
+                                <%--
+                                  <lang>
+                                    <zh-CN>Message 标签只显示服务器返回的注册结果或错误提示，不保存敏感输入，也不承担客户端状态同步职责。</zh-CN>
+                                    <en>The Message label only displays the registration result or error returned by the server; it does not store sensitive input or synchronize client-side state.</en>
+                                  </lang>
+                                --%>
+                                <asp:Label ID="Message" CssClass="NormalRed" runat="server" />
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</asp:Content>

@@ -1,0 +1,157 @@
+                <%--
+                    <lang>
+                        <zh-CN>组织行使用编码绑定的只读字段，并把编辑入口指向服务器生成的 URL；页面不在表格中自行推断组织权限或关系。</zh-CN>
+                        <en>Organization rows use encoded read-only bindings and link to server-generated edit URLs; the table does not infer organization permissions or relationships on its own.</en>
+                    </lang>
+                --%>
+                <asp:Repeater ID="OrganizationsRepeater" runat="server">
+                    <HeaderTemplate>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnId %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnCode %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnOrgName %></th>
+                                <th scope="col" width="22%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnParent %></th>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnSort %></th>
+                                <th scope="col" width="9%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnActive %></th>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
+                            </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                            <tr class="Normal">
+                                <td><%#: Eval("OrganizationUnitId") %></td>
+                                <td><%#: Eval("OrganizationCode") %></td>
+                                <td><%#: Eval("DisplayName") %></td>
+                                <td><%#: Eval("ParentText") %></td>
+                                <td><%#: Eval("SortOrder") %></td>
+                                <td><%#: Eval("IsActiveText") %></td>
+                                <td>
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonEdit %>"
+                                        NavigateUrl='<%# Eval("EditUrl") %>'
+                                        runat="server" />
+                                </td>
+                            </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <%-- P74.3 空态：零条时渲染表头 + 提示行；失败路径由 null 计数抑制。 / Empty state: header-plus-hint row when there are zero rows; a null count suppresses it on failure paths. --%>
+                        <%= PortalEmptyStateRenderer.Render(OrganizationsEmptyStateRowCount, OrganizationsEmptyStateText, 7) %>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
+        </div>
+
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title"><%= lang.Admin_EmployeeDirectory_SectionEmployees %></h2>
+            </div>
+            <div class="portal-table-wrap">
+                <%--
+                    <lang>
+                        <zh-CN>员工行同时提供编辑和绑定入口，绑定 URL 只针对员工记录生成；编码输出与操作授权仍由服务器端模型和 code-behind 负责。</zh-CN>
+                        <en>Employee rows expose edit and binding entries, with binding URLs generated only for employee records; encoded output and operation authorization remain owned by the server model and code-behind.</en>
+                    </lang>
+                --%>
+                <asp:Repeater ID="EmployeesRepeater" runat="server">
+                    <HeaderTemplate>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></th>
+                                <th scope="col" width="16%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeName %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnPreferred %></th>
+                                <th scope="col" width="20%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnWorkEmail %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnOrganization %></th>
+                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnStatus %></th>
+                                <th scope="col" width="10%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnSource %></th>
+                                <th scope="col" width="100" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
+                            </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                            <tr class="Normal">
+                                <td><%#: Eval("EmployeeCode") %></td>
+                                <td><%#: Eval("DisplayName") %></td>
+                                <td><%#: Eval("PreferredName") %></td>
+                                <td><%#: Eval("WorkEmail") %></td>
+                                <td><%#: Eval("OrganizationText") %></td>
+                                <td><%#: Eval("EmploymentStatus") %></td>
+                                <td><%#: Eval("SourceSystem") %></td>
+                                <td>
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonEdit %>"
+                                        NavigateUrl='<%# Eval("EditUrl") %>'
+                                        runat="server" />
+                                    <%--
+                                      <lang>
+                                        <zh-CN>员工账号绑定以员工行为入口，避免组织行误引用不存在的绑定地址。</zh-CN>
+                                        <en>User-employee binding is exposed from employee rows to avoid organization rows referencing a binding URL that does not exist.</en>
+                                      </lang>
+                                    --%>
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonBind %>"
+                                        NavigateUrl='<%# Eval("BindUrl") %>'
+                                        runat="server" />
+                                </td>
+                            </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <%-- P74.3 空态：零条时渲染表头 + 提示行；失败路径由 null 计数抑制。 / Empty state: header-plus-hint row when there are zero rows; a null count suppresses it on failure paths. --%>
+                        <%= PortalEmptyStateRenderer.Render(EmployeesEmptyStateRowCount, EmployeesEmptyStateText, 8) %>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
+        </div>
+
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title"><%= lang.Admin_EmployeeDirectory_SectionBindings %></h2>
+            </div>
+            <div class="portal-table-wrap">
+                <asp:Repeater ID="BindingsRepeater" runat="server">
+                    <HeaderTemplate>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="8%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBindingId %></th>
+                                <th scope="col" width="8%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnUserId %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnUserName %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnEmployeeCode %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBindingEmployeeName %></th>
+                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnStatus %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnBoundUtc %></th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnAction %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_EmployeeDirectory_ColumnReason %></th>
+                            </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                            <tr class="Normal">
+                                <td><%#: Eval("BindingId") %></td>
+                                <td><%#: Eval("UserId") %></td>
+                                <td><%#: Eval("UserName") %></td>
+                                <td><%#: Eval("EmployeeCode") %></td>
+                                <td><%#: Eval("EmployeeDisplayName") %></td>
+                                <td><%#: Eval("BindingStatus") %></td>
+                                <td><%#: Eval("BoundUtcText") %></td>
+                                <td>
+                                    <asp:HyperLink
+                                        CssClass="CommandButton"
+                                        Text="<%$ Resources:lang, Admin_EmployeeDirectory_ButtonManage %>"
+                                        NavigateUrl='<%# Eval("EditUrl") %>'
+                                        runat="server" />
+                                </td>
+                                <td><%#: Eval("Reason") %></td>
+                            </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <%-- P74.3 空态：零条时渲染表头 + 提示行；失败路径由 null 计数抑制。 / Empty state: header-plus-hint row when there are zero rows; a null count suppresses it on failure paths. --%>
+                        <%= PortalEmptyStateRenderer.Render(BindingsEmptyStateRowCount, BindingsEmptyStateText, 9) %>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
+        </div>
+    </div>
+</asp:Content>

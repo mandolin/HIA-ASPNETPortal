@@ -1,0 +1,35 @@
+                    <%--
+                        <lang>
+                            <zh-CN>文档链接地址由服务器根据数据库内容大小选择受控下载入口或校验后的旧链接；原始路径不直接进入页面输出。</zh-CN>
+                            <en>The server chooses a controlled download endpoint or a validated legacy link from the database-content size; raw paths do not enter page output directly.</en>
+                        </lang>
+                    --%>
+                    <asp:HyperLink
+                        ID="editLink"
+                        CssClass="CommandButton portal-content-edit-action"
+                        Text="<%$ Resources:lang,PortalModule_ButtonEdit %>"
+                        NavigateUrl='<%# "~/DesktopModules/EditDocs.aspx?ItemID=" + DataBinder.Eval(Container.DataItem, "ItemID") + "&mid=" + ModuleId %>'
+                        Visible="<%# IsEditable %>"
+                        runat="server" />
+                </td>
+                <td>
+                    <asp:HyperLink
+                        ID="docLink"
+                        Text='<%# EncodeText(DataBinder.Eval(Container.DataItem, "FileFriendlyName")) %>'
+                        NavigateUrl='<%# GetBrowsePath(Convert.ToString(DataBinder.Eval(Container.DataItem, "FileNameUrl")), DataBinder.Eval(Container.DataItem, "Size"), (int) DataBinder.Eval(Container.DataItem, "ItemId")) %>'
+                        CssClass="Normal"
+                        Target="_new"
+                        runat="server" />
+                </td>
+                <td class="Normal"><%# EncodeText(DataBinder.Eval(Container.DataItem, "CreatedByUser")) %></td>
+                <td class="Normal" nowrap="nowrap"><%# EncodeText(DataBinder.Eval(Container.DataItem, "Category")) %></td>
+                <td class="Normal"><%# DataBinder.Eval(Container.DataItem, "CreatedDate", "{0:d}") %></td>
+            </tr>
+    </ItemTemplate>
+    <FooterTemplate>
+        <%-- P81.3 空态：无文档时给出说明行，避免出现"只有表头"的空白表格。 --%>
+        <%= PortalEmptyStateRenderer.Render(DocumentEmptyStateRowCount, DocumentEmptyStateText, 5) %>
+        </table>
+    </FooterTemplate>
+</asp:Repeater>
+</div>

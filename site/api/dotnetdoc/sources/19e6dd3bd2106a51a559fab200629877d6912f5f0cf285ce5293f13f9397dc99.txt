@@ -1,0 +1,41 @@
+                <%--
+                <lang>
+                  <zh-CN>设置 registry 行同时标出敏感性、在线可编辑和重启要求；这些标签只反映服务器元数据，不能绕过配置写入策略。</zh-CN>
+                  <en>Settings-registry rows expose sensitivity, online-editability, and restart requirements; these labels reflect server metadata and cannot bypass configuration-write policy.</en>
+                </lang>
+                --%>
+                <asp:Repeater ID="SettingsRepeater" runat="server">
+                    <HeaderTemplate>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="20%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnKey %></th>
+                                <th scope="col" width="14%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnName %></th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_SystemHealth_ColumnType %></th>
+                                <th scope="col" width="16%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnCurrentValue %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSource %></th>
+                                <th scope="col" width="80" class="SubHead"><%= lang.Admin_SystemHealth_ColumnSensitive %></th>
+                                <th scope="col" width="90" class="SubHead"><%= lang.Admin_SystemHealth_ColumnEditable %></th>
+                                <th scope="col" width="90" class="SubHead"><%= lang.Admin_SystemHealth_ColumnRestart %></th>
+                            </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                            <tr class="Normal">
+                                <td><%#: Eval("Key") %></td>
+                                <td><%#: Eval("DisplayName") %></td>
+                                <td><%#: Eval("ValueType") %></td>
+                                <td><%#: Eval("CurrentValue") %></td>
+                                <td><%#: Eval("Source") %></td>
+                                <td><%#: Eval("IsSensitive") %></td>
+                                <td><%#: Eval("CanEditOnline") %></td>
+                                <td><%#: Eval("RequiresRestart") %></td>
+                            </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <%= PortalEmptyStateRenderer.Render(SettingsEmptyStateRowCount, lang.Admin_SystemHealth_EmptyNoSettings, 8) %>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
+        </div>
+    </div>
+</asp:Content>

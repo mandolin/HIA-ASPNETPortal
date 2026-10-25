@@ -1,0 +1,9 @@
+        <%--
+        <lang>
+          <zh-CN>返回首页链接使用应用路径生成，离开落地页但不改变任何配置或业务状态。</zh-CN>
+          <en>The home link uses the application path and only leaves the landing page; it does not change configuration or business state.</en>
+        </lang>
+        --%>
+        <a class="CommandButton portal-static-message-action" href="<%=Global.GetApplicationPath(Request)%>/DesktopDefault.aspx"><%= lang.Admin_NotImplemented_ReturnHome %></a>
+    </div>
+</asp:Content>

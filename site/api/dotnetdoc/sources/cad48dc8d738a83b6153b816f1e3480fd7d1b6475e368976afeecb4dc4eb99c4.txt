@@ -1,0 +1,25 @@
+        <%--
+        <lang>
+          <zh-CN>消息内容展示区只渲染已经由 code-behind 规范化的显示文本；主题样式负责版式，安全边界仍在服务器端编码。</zh-CN>
+          <en>The message display area renders only code-behind-normalized display text. Theme styles own layout, while the safety boundary remains server-side encoding.</en>
+        </lang>
+        --%>
+        <div class="portal-detail-card portal-message-detail-card">
+            <div class="portal-detail-row">
+                <span class="portal-detail-label"><%= lang.DiscussDetails_LabelSubject %></span>
+                <asp:Label ID="Subject" runat="server"></asp:Label>
+            </div>
+            <div class="portal-detail-row">
+                <span class="portal-detail-label"><%= lang.DiscussDetails_LabelAuthor %></span>
+                <asp:Label ID="CreatedByUser" runat="server"></asp:Label>
+            </div>
+            <div class="portal-detail-row">
+                <span class="portal-detail-label"><%= lang.DiscussDetails_LabelDate %></span>
+                <asp:Label ID="CreatedDate" runat="server"></asp:Label>
+            </div>
+            <div class="portal-message-body">
+                <asp:Label ID="Body" runat="server"></asp:Label>
+            </div>
+        </div>
+    </div>
+</asp:Content>

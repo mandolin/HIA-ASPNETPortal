@@ -1,0 +1,31 @@
+            <%--
+              <lang>
+                <zh-CN>更新、取消和删除按钮只发送命令意图；定义身份、实例引用、受信路径、删除保护和审计仍由 code-behind 决定。</zh-CN>
+                <en>Update, cancel, and delete buttons submit only command intent; code-behind decides definition identity, instance references, trusted paths, delete protection, and auditing.</en>
+              </lang>
+            --%>
+            <div class="portal-form-actions">
+                <asp:LinkButton
+                    ID="updateButton"
+                    Text="<%$ Resources:lang, Admin_ModuleDefinitions_ButtonUpdate %>"
+                    runat="server"
+                    CssClass="CommandButton portal-primary-action"
+                    OnClick="UpdateBtn_Click" />
+                <asp:LinkButton
+                    ID="cancelButton"
+                    Text="<%$ Resources:lang, Admin_ModuleDefinitions_ButtonCancel %>"
+                    CausesValidation="False"
+                    runat="server"
+                    CssClass="CommandButton portal-secondary-action"
+                    OnClick="CancelBtn_Click" />
+                <asp:LinkButton
+                    ID="deleteButton"
+                    Text="<%$ Resources:lang, Admin_ModuleDefinitions_ButtonDelete %>"
+                    CausesValidation="False"
+                    runat="server"
+                    CssClass="CommandButton portal-danger-action"
+                    OnClick="DeleteBtn_Click" />
+            </div>
+        </div>
+    </div>
+</asp:Content>

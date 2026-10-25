@@ -1,0 +1,31 @@
+<%--
+<lang>
+  <zh-CN>PortalMasterPage 在渲染前为此 body 写入受控主题和 Tab class；标记层不得直接拼接外部资源，避免绕过主题包和模块包的受信任部署边界。</zh-CN>
+  <en>PortalMasterPage writes controlled theme and Tab classes to this body before rendering. Markup must not concatenate external resources, so it does not bypass the trusted deployment boundary of theme and module packages.</en>
+</lang>
+--%>
+<body id="PortalBody" runat="server" bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
+    <form id="Form1" runat="server">
+        <%--
+        <lang>
+          <zh-CN>P7.4 主壳层已改为 div 结构；仍保留单一 server form 与 Web Forms postback，避免破坏旧控件生命周期。</zh-CN>
+          <en>P7.4 moved the shell to div markup while retaining the single server form and Web Forms postback, preserving the legacy control lifecycle.</en>
+        </lang>
+        --%>
+        <div class="portal-app-shell">
+            <ASPNETPortal:Banner ID="Banner" runat="server" SelectedTabIndex="0"></ASPNETPortal:Banner>
+            <div class="portal-main-shell">
+                <div class="portal-content-stage">
+                    <%--
+                    <lang>
+                      <zh-CN>门户页、后台页和旧模块页都通过此占位符提供主体内容；主题样式应围绕该稳定入口做兼容。</zh-CN>
+                      <en>Portal pages, administration pages, and legacy module pages all provide main content through this placeholder; theme styles should treat it as a stable compatibility entry point.</en>
+                    </lang>
+                    --%>
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

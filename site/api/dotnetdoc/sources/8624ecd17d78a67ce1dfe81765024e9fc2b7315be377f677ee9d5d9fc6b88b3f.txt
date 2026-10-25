@@ -1,0 +1,62 @@
+                <%--
+                  <lang>
+                    <zh-CN>全局主题下拉列表只提供已部署主题键；应用和重置命令的权限、manifest 信任与数据库写入仍由服务端处理。</zh-CN>
+                    <en>The global-theme dropdown only supplies keys for deployed themes; server code owns authorization, manifest trust, and database writes for apply/reset commands.</en>
+                  </lang>
+                --%>
+                <div class="portal-filter-grid">
+                    <div class="portal-filter-field">
+                        <span class="SubHead portal-filter-label"><%= lang.Admin_ThemeSettings_LabelGlobalTheme %></span>
+                        <asp:DropDownList ID="GlobalThemeList" CssClass="NormalTextBox portal-filter-input" runat="server" />
+                    </div>
+                    <div class="portal-filter-actions">
+                        <asp:LinkButton ID="SaveGlobalThemeButton" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang, Admin_ThemeSettings_ButtonApply %>" OnClick="SaveGlobalThemeButton_Click" runat="server" />
+                        <asp:LinkButton ID="ResetGlobalThemeButton" CssClass="CommandButton portal-secondary-action" Text="<%$ Resources:lang, Admin_ThemeSettings_ButtonResetOverride %>" CausesValidation="False" OnClick="ResetGlobalThemeButton_Click" runat="server" />
+                    </div>
+                </div>
+                <div class="Normal portal-status-line">
+                    <span class="SubHead"><%= lang.Admin_ThemeSettings_EffectiveSourceLabel %></span>
+                    <asp:Label ID="GlobalThemeStatusLabel" runat="server" />
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title"><%= lang.Admin_ThemeSettings_TabOverrideSectionTitle %></h2>
+            </div>
+            <div class="portal-filter-panel">
+                <%--
+                  <lang>
+                    <zh-CN>TabList 的自动回发只用于加载当前页签覆盖值；页签身份、主题键和覆盖清除范围不能由客户端选择直接信任。</zh-CN>
+                    <en>TabList postback only loads the selected tab's override values; the server must not trust client-selected tab identity, theme keys, or clear scope.</en>
+                  </lang>
+                --%>
+                <div class="portal-filter-grid">
+                    <div class="portal-filter-field">
+                        <span class="SubHead portal-filter-label"><%= lang.Admin_ThemeSettings_LabelPortalTab %></span>
+                        <asp:DropDownList ID="TabList" CssClass="NormalTextBox portal-filter-input" AutoPostBack="True" OnSelectedIndexChanged="TabList_SelectedIndexChanged" runat="server" />
+                    </div>
+                    <div class="portal-filter-field">
+                        <span class="SubHead portal-filter-label"><%= lang.Admin_ThemeSettings_LabelOverrideTheme %></span>
+                        <asp:DropDownList ID="TabThemeList" CssClass="NormalTextBox portal-filter-input" runat="server" />
+                    </div>
+                    <div class="portal-filter-actions">
+                        <asp:LinkButton ID="SaveTabThemeButton" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang, Admin_ThemeSettings_ButtonApply %>" OnClick="SaveTabThemeButton_Click" runat="server" />
+                        <asp:LinkButton ID="ClearTabThemeButton" CssClass="CommandButton portal-secondary-action" Text="<%$ Resources:lang, Admin_ThemeSettings_ButtonClearOverride %>" CausesValidation="False" OnClick="ClearTabThemeButton_Click" runat="server" />
+                    </div>
+                </div>
+                <%--
+                  <lang>
+                    <zh-CN>页签主题应用/清除按钮只触发 code-behind 命令；回退策略、权限、审计和持久化事务不由标记层实现。</zh-CN>
+                    <en>Tab-theme apply/clear buttons only trigger code-behind commands; fallback policy, authorization, auditing, and persistence transactions are not implemented by markup.</en>
+                  </lang>
+                --%>
+                <div class="Normal portal-status-line">
+                    <span class="SubHead"><%= lang.Admin_ThemeSettings_CurrentOverrideLabel %></span>
+                    <asp:Label ID="TabThemeStatusLabel" runat="server" />
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>

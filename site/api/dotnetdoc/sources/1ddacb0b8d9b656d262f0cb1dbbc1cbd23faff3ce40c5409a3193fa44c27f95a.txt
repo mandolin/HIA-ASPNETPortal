@@ -1,0 +1,53 @@
+                <%--
+                <lang>
+                  <zh-CN>上传区域由 Upload 选项、文件输入和服务器策略提示组成；文件名、大小、类型、落盘位置和覆盖行为不能由客户端决定。</zh-CN>
+                  <en>The upload area combines the Upload option, file input, and server policy hint; filename, size, type, storage location, and overwrite behavior cannot be decided by the client.</en>
+                </lang>
+                --%>
+                <h2 class="portal-edit-subtitle"><%= lang.EditDocs_SectionServerUpload %></h2>
+                <asp:Label ID="UploadPolicyHint" CssClass="portal-field-help portal-upload-policy" runat="server" />
+            </div>
+
+            <div class="portal-option-stack">
+                <asp:CheckBox ID="Upload" CssClass="Normal portal-checkbox" Text="<%$ Resources:lang,LegacyEdit_LabelUploadOption %>"
+                    runat="server" />
+                <span class="portal-field-help"><%= lang.EditDocs_HintUploadOverride %></span>
+            </div>
+
+            <div class="portal-field-stack">
+                <asp:Label ID="FileUploadLabel" CssClass="portal-field-stack-label" AssociatedControlID="FileUpload"
+                    runat="server" Text="<%$ Resources:lang,LegacyEdit_LabelFile %>" />
+                <input type="file" id="FileUpload" class="portal-input portal-file-input" runat="server"
+                    name="FileUpload" />
+                <asp:Label ID="UploadMessage" CssClass="NormalRed portal-validation-message" runat="server" />
+            </div>
+
+            <div class="portal-option-stack portal-disabled-option">
+                <asp:CheckBox ID="storeInDatabase" CssClass="Normal portal-checkbox"
+                    Text="<%$ Resources:lang,LegacyEdit_LabelStoreInDatabase %>" runat="server" />
+                <span class="portal-field-help"><%= lang.EditDocs_HintDatabaseDisabled %></span>
+            </div>
+
+            <div class="portal-form-actions">
+                <%--
+                <lang>
+                  <zh-CN>Update/Cancel/Delete 进入既有文档状态流程；数据库存储选项当前禁用，不能把页面勾选当作已启用能力。</zh-CN>
+                  <en>Update, Cancel, and Delete enter the existing document state flow; database storage is currently disabled, so a page option cannot be treated as an enabled capability.</en>
+                </lang>
+                --%>
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
+                    CssClass="portal-button portal-button-primary" BorderStyle="none" OnClick="UpdateBtn_Click" />
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
+                    CssClass="portal-button portal-button-secondary" BorderStyle="none" OnClick="CancelBtn_Click" />
+                <asp:LinkButton ID="deleteButton" Text="<%$ Resources:lang,LegacyEdit_ButtonDelete %>" CausesValidation="False"
+                    runat="server" CssClass="portal-button portal-button-danger" BorderStyle="none"
+                    OnClick="DeleteBtn_Click" />
+            </div>
+        </div>
+
+        <p class="portal-edit-metadata">
+            <%= lang.LegacyEdit_CreatedBy %> <asp:Label ID="CreatedBy" runat="server" />
+            <%= lang.LegacyEdit_CreatedOn %> <asp:Label ID="CreatedDate" runat="server" />
+        </p>
+    </section>
+</asp:Content>

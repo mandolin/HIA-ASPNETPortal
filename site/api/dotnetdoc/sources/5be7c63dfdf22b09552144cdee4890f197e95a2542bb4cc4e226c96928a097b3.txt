@@ -1,0 +1,78 @@
+                <%--
+                    <lang>
+                        <zh-CN>三个 ListBox 及其命令栏共同表达模块所在 pane 和顺序；移动、编辑、删除操作均通过既有事件回调进入服务器状态机。</zh-CN>
+                        <en>The three ListBoxes and their command bars together express module pane membership and order; move, edit, and delete actions enter the server state machine through the existing callbacks.</en>
+                    </lang>
+                --%>
+                <div class="portal-layout-panes">
+                    <div class="portal-layout-pane portal-layout-pane-mini">
+                        <h3 class="SubHead portal-layout-pane-title"><%= lang.Admin_TabLayout_PaneTitleLeft %></h3>
+                        <div class="portal-layout-pane-body">
+                            <asp:ListBox ID="leftPane" CssClass="NormalTextBox portal-layout-list" DataSource="<%# leftList %>" DataTextField="ModuleTitle"
+                                DataValueField="ModuleId" Width="100%" Rows="9" runat="server" />
+                            <div class="portal-layout-toolbar">
+                                <asp:LinkButton ID="LeftUpBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonUp %>" CommandName="up" CommandArgument="leftPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveUp %>" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="LeftRightBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonRight %>" CommandName="right" sourcepane="leftPane"
+                                    targetpane="contentPane" ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveToContentPane %>"
+                                    runat="server" OnClick="RightLeft_Click" />
+                                <asp:LinkButton ID="LeftDownBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonDown %>" CommandName="down" CommandArgument="leftPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveDown %>" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="LeftEditBtn" CssClass="CommandButton portal-layout-command portal-primary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonEdit %>" CommandName="edit" CommandArgument="leftPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipEditItem %>" runat="server" OnClick="EditBtn_Click" />
+                                <asp:LinkButton ID="LeftDeleteBtn" CssClass="CommandButton portal-layout-command portal-danger-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonDelete %>" CommandName="delete" CommandArgument="leftPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipDeleteItem %>" runat="server" OnClick="DeleteBtn_Click" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portal-layout-pane portal-layout-pane-content">
+                        <h3 class="SubHead portal-layout-pane-title"><%= lang.Admin_TabLayout_PaneTitleContent %></h3>
+                        <div class="portal-layout-pane-body">
+                            <asp:ListBox ID="contentPane" CssClass="NormalTextBox portal-layout-list" DataSource="<%# contentList %>" DataTextField="ModuleTitle"
+                                DataValueField="ModuleId" Width="100%" Rows="9" runat="server" />
+                            <div class="portal-layout-toolbar portal-layout-toolbar-wide">
+                                <asp:LinkButton ID="ContentUpBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonUp %>" CommandName="up" CommandArgument="contentPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveUp %>" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="ContentLeftBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonLeft %>" sourcepane="contentPane" targetpane="leftPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveToLeftPane %>" runat="server" OnClick="RightLeft_Click" />
+                                <asp:LinkButton ID="ContentRightBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonRight %>" sourcepane="contentPane" targetpane="rightPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveToRightPane %>" runat="server" OnClick="RightLeft_Click" />
+                                <asp:LinkButton ID="ContentDownBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonDown %>" CommandName="down" CommandArgument="contentPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveDown %>" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="ContentEditBtn" CssClass="CommandButton portal-layout-command portal-primary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonEdit %>" CommandName="edit" CommandArgument="contentPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipEditItem %>" runat="server" OnClick="EditBtn_Click" />
+                                <asp:LinkButton ID="ContentDeleteBtn" CssClass="CommandButton portal-layout-command portal-danger-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonDelete %>" CommandName="delete" CommandArgument="contentPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipDeleteItem %>" runat="server" OnClick="DeleteBtn_Click" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portal-layout-pane portal-layout-pane-mini">
+                        <h3 class="SubHead portal-layout-pane-title"><%= lang.Admin_TabLayout_PaneTitleRight %></h3>
+                        <div class="portal-layout-pane-body">
+                            <asp:ListBox ID="rightPane" CssClass="NormalTextBox portal-layout-list" DataSource="<%# rightList %>" DataTextField="ModuleTitle"
+                                DataValueField="ModuleId" Width="100%" Rows="9" runat="server" />
+                            <div class="portal-layout-toolbar">
+                                <asp:LinkButton ID="RightUpBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonUp %>" CommandName="up" CommandArgument="rightPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveUp %>" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="RightLeftBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonLeft %>" sourcepane="rightPane" targetpane="contentPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveToContentPane %>" runat="server" OnClick="RightLeft_Click" />
+                                <asp:LinkButton ID="RightDownBtn" CssClass="CommandButton portal-layout-command portal-secondary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonDown %>" CommandName="down" CommandArgument="rightPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipMoveDown %>" runat="server" OnClick="UpDown_Click" />
+                                <asp:LinkButton ID="RightEditBtn" CssClass="CommandButton portal-layout-command portal-primary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonEdit %>" CommandName="edit" CommandArgument="rightPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipEditItem %>" runat="server" OnClick="EditBtn_Click" />
+                                <asp:LinkButton ID="RightDeleteBtn" CssClass="CommandButton portal-layout-command portal-danger-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonDelete %>" CommandName="delete" CommandArgument="rightPane"
+                                    ToolTip="<%$ Resources:lang, Admin_TabLayout_TooltipDeleteItem %>" runat="server" OnClick="DeleteBtn_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-form-actions">
+                <asp:LinkButton ID="applyBtn" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang, Admin_TabLayout_ButtonApplyChanges %>" runat="server"
+                    OnClick="Apply_Click" />
+            </div>
+        </div>
+    </div>
+</asp:Content>

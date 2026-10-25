@@ -1,0 +1,17 @@
+            <%--
+                <lang>
+                    <zh-CN>Update/Cancel 进入图片配置的既有服务器流程；按钮不改变来源信任、尺寸校验或权限。</zh-CN>
+                    <en>Update and Cancel enter the existing server flow for image settings; the buttons do not change source trust, dimension validation, or authorization.</en>
+                </lang>
+            --%>
+            <div class="portal-form-actions">
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
+                    CssClass="portal-button portal-button-primary" BorderStyle="none"
+                    OnClick="UpdateBtn_Click" />
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
+                    CssClass="portal-button portal-button-secondary" BorderStyle="none"
+                    OnClick="CancelBtn_Click" />
+            </div>
+        </div>
+    </section>
+</asp:Content>

@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Portal.Components</name>
+    </assembly>
+    <members>
+        <member name="T:ASPNET.StarterKit.Portal.IAnnouncementItem">
+            <summary>
+              <lang>
+                <zh-CN>公告模块条目的跨层只读/可写契约。</zh-CN>
+                <en>Cross-layer readable/writable contract for an announcement module item.</en>
+              </lang>
+            </summary>
+            <remarks>
+              <lang>
+                <zh-CN>
+                  该接口用于旧内容模块数据访问和 Web Forms 展示控件之间传递公告字段。实现只表达字段语义；
+                  模块归属、链接安全、过期过滤和 HTML 编码由调用层各自负责。
+                </zh-CN>
+                <en>
+                  This interface passes announcement fields between legacy content-module data access and Web Forms
+                  display controls. Implementations express field semantics only; module ownership, link safety,
+                  expiry filtering, and HTML encoding are owned by callers.
+                </en>
+              </lang>
+            </remarks>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.ItemId">
+            <summary>
+              <l>
+                <zh-CN>公告条目的数据库主键。</zh-CN>
+                <en>Database primary key for the announcement item.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.ModuleId">
+            <summary>
+              <l>
+                <zh-CN>拥有该公告条目的模块实例标识。</zh-CN>
+                <en>Module instance identifier that owns this announcement item.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.CreatedByUser">
+            <summary>
+              <l>
+                <zh-CN>创建人显示名称；来自旧内容模块保存流程，不作为授权依据。</zh-CN>
+                <en>Display name of the creator from the legacy content save flow; not an authorization source.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.CreatedDate">
+            <summary>
+              <l>
+                <zh-CN>公告创建时间；旧数据可能为空。</zh-CN>
+                <en>Announcement creation time; legacy rows may be null.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.Title">
+            <summary>
+              <l>
+                <zh-CN>公告标题，展示层输出前必须编码。</zh-CN>
+                <en>Announcement title; presentation code must encode it before output.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.MoreLink">
+            <summary>
+              <l>
+                <zh-CN>更多链接地址；站内/受信任导航策略由调用层复核。</zh-CN>
+                <en>More-link URL; callers re-check it with the in-site or trusted navigation policy.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.MobileMoreLink">
+            <summary>
+              <l>
+                <zh-CN>历史移动端更多链接地址，当前仅作为兼容字段保留。</zh-CN>
+                <en>Legacy mobile more-link URL retained only as a compatibility field.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.ExpireDate">
+            <summary>
+              <l>
+                <zh-CN>公告过期时间；过期过滤由查询或展示层决定。</zh-CN>
+                <en>Announcement expiry time; query or presentation code decides expiry filtering.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IAnnouncementItem.Description">
+            <summary>
+              <l>
+                <zh-CN>公告正文描述，展示层输出前必须编码。</zh-CN>
+                <en>Announcement body description; presentation code must encode it before output.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="T:ASPNET.StarterKit.Portal.IDiscussionItem">
+            <summary>
+              <lang>
+                <zh-CN>旧讨论模块条目的跨层契约。</zh-CN>
+                <en>Cross-layer contract for legacy discussion module items.</en>
+              </lang>
+            </summary>
+            <remarks>
+              <lang>
+                <zh-CN>
+                  该接口由旧讨论数据访问层和 Web Forms 展示/详情页共享。它只表达旧表投影形状，不负责权限判断、
+                  HTML 编码或线程路径校验；这些安全与展示规则仍由调用模块、详情页和数据访问实现分别承担。
+                </zh-CN>
+                <en>
+                  This interface is shared by the legacy discussion data access layer and Web Forms list/detail pages. It only
+                  describes the legacy table projection shape and does not own authorization checks, HTML encoding, or thread-path
+                  validation; those safety and display rules remain with the calling module, detail page, and data access implementation.
+                </en>
+              </lang>
+            </remarks>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDiscussionItem.ItemID">
+            <summary>
+              <l>
+                <zh-CN>讨论条目的旧数据库主键。</zh-CN>
+                <en>Legacy database primary key of the discussion item.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDiscussionItem.ModuleID">
+            <summary>
+              <l>
+                <zh-CN>拥有该讨论条目的模块实例标识。</zh-CN>
+                <en>Module instance identifier that owns this discussion item.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDiscussionItem.Parent">
+            <summary>
+              <l>
+                <zh-CN>历史线程父路径字符串，用于查找父消息和生成讨论树。</zh-CN>
+                <en>Legacy parent-thread path string used to locate the parent message and build the discussion tree.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDiscussionItem.Title">
+            <summary>
+              <l>
+                <zh-CN>讨论标题；展示层输出前必须按页面上下文编码。</zh-CN>
+                <en>Discussion title; the presentation layer must encode it according to page context before output.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDiscussionItem.CreatedDate">
+            <summary>
+              <l>
+                <zh-CN>讨论条目创建时间；历史数据可能为空。</zh-CN>
+                <en>Creation time of the discussion item; historical rows may be empty.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDiscussionItem.Body">
+            <summary>
+              <l>
+                <zh-CN>讨论正文；不能直接作为受信任 HTML 输出。</zh-CN>
+                <en>Discussion body; it must not be emitted directly as trusted HTML.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDiscussionItem.DisplayOrder">
+            <summary>
+              <l>
+                <zh-CN>历史排序路径，用于按树形顺序显示讨论线程。</zh-CN>
+                <en>Legacy sort path used to display discussion threads in tree order.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDiscussionItem.CreatedByUser">
+            <summary>
+              <l>
+                <zh-CN>创建人显示名快照；它只是展示文本，不是授权依据。</zh-CN>
+                <en>Creator display-name snapshot; this is display text only and not an authorization source.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="T:ASPNET.StarterKit.Portal.IContactItem">
+            <summary>
+              <lang>
+                <zh-CN>联系人模块条目的跨层只读/可写契约。</zh-CN>
+                <en>Cross-layer readable/writable contract for a contact module item.</en>
+              </lang>
+            </summary>
+            <remarks>
+              <lang>
+                <zh-CN>
+                  该接口用于旧联系人数据访问和展示控件之间传递展示型资料。邮箱和联系方式不代表登录身份；
+                  展示层必须负责 HTML 编码和邮件链接安全处理。
+                </zh-CN>
+                <en>
+                  This interface passes display-oriented contact data between legacy contact data access and display
+                  controls. Email and contact fields do not represent login identity; presentation code must perform
+                  HTML encoding and safe mail-link handling.
+                </en>
+              </lang>
+            </remarks>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.ItemId">
+            <summary>
+              <l>
+                <zh-CN>联系人条目的数据库主键。</zh-CN>
+                <en>Database primary key for the contact item.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.ModuleId">
+            <summary>
+              <l>
+                <zh-CN>拥有该联系人条目的模块实例标识。</zh-CN>
+                <en>Module instance identifier that owns this contact item.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.CreatedDate">
+            <summary>
+              <l>
+                <zh-CN>联系人条目创建时间；旧数据可能为空。</zh-CN>
+                <en>Creation time for the contact item; legacy rows may be null.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.CreatedByUser">
+            <summary>
+              <l>
+                <zh-CN>创建人显示名称；不是授权依据。</zh-CN>
+                <en>Display name of the creator; this is not an authorization source.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.Name">
+            <summary>
+              <l>
+                <zh-CN>联系人姓名，展示层输出前必须编码。</zh-CN>
+                <en>Contact name; presentation code must encode it before output.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.Role">
+            <summary>
+              <l>
+                <zh-CN>联系人岗位或角色说明，展示层输出前必须编码。</zh-CN>
+                <en>Contact role or job description; presentation code must encode it before output.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.Email">
+            <summary>
+              <l>
+                <zh-CN>联系人邮箱；仅作为展示和邮件链接输入，不作为登录身份。</zh-CN>
+                <en>Contact email; only used for display and mail-link input, not as login identity.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.Contact1">
+            <summary>
+              <l>
+                <zh-CN>第一联系方式文本，通常是电话或办公信息。</zh-CN>
+                <en>First contact information text, typically phone or office details.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IContactItem.Contact2">
+            <summary>
+              <l>
+                <zh-CN>第二联系方式文本，通常是备用电话、传真或地址。</zh-CN>
+                <en>Second contact information text, typically alternate phone, fax, or address.</en>
+              </l>
+            </summary>
+        </member>
+        <member name="T:ASPNET.StarterKit.Portal.IDocumentItem">
+            <summary>
+            <lang>
+              <zh-CN>文档模块列表项的跨层数据契约。</zh-CN>
+              <en>Cross-layer data contract for one document-module list item.</en>
+            </lang>
+            </summary>
+            <remarks>
+            <lang>
+              <zh-CN><see cref="P:ASPNET.StarterKit.Portal.IDocumentItem.FileNameUrl"/> 可以是受限服务器上传的应用相对地址，也可以是经过策略校验的外部 HTTP(S) 地址。它不是文件授权凭据；数据库内容大于零时由历史下载页处理。</zh-CN>
+              <en><see cref="P:ASPNET.StarterKit.Portal.IDocumentItem.FileNameUrl"/> may be an application-relative address for a restricted server upload or an HTTP(S) address validated by policy. It is not a file authorization credential; positive database content is handled by the legacy download page.</en>
+            </lang>
+            </remarks>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.FileFriendlyName">
+            <summary>
+            <lang>
+              <zh-CN>面向门户访问者的文档显示名称。</zh-CN>
+              <en>Document display name shown to Portal visitors.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.FileNameUrl">
+            <summary>
+            <lang>
+              <zh-CN>浏览地址或服务器上传相对路径。</zh-CN>
+              <en>Browse address or server-upload relative path.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.CreatedByUser">
+            <summary>
+            <lang>
+              <zh-CN>最后写入记录的用户名。</zh-CN>
+              <en>User name that last wrote the record.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.CreatedDate">
+            <summary>
+            <lang>
+              <zh-CN>记录最后写入时间；旧记录可能为空。</zh-CN>
+              <en>Record last-write time; legacy records may be empty.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.Category">
+            <summary>
+            <lang>
+              <zh-CN>供列表筛选或显示使用的业务分类。</zh-CN>
+              <en>Business category used for list filtering or display.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.ContentSize">
+            <summary>
+            <lang>
+              <zh-CN>历史数据库内容的声明字节数。</zh-CN>
+              <en>Declared byte count of legacy database content.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.Size">
+            <summary>
+            <lang>
+              <zh-CN>兼容旧绑定的内容大小，空值按零处理。</zh-CN>
+              <en>Content size compatible with legacy binding; null is treated as zero.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.ModuleId">
+            <summary>
+            <lang>
+              <zh-CN>文档所属模块实例标识。</zh-CN>
+              <en>Owning module-instance identifier.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItem.ItemId">
+            <summary>
+            <lang>
+              <zh-CN>文档项目稳定数值标识。</zh-CN>
+              <en>Stable numeric document-item identifier.</en>
+            </lang>
+            </summary>
+        </member>
+        <member name="T:ASPNET.StarterKit.Portal.IDocumentItemDetails">
+            <summary>
+            <lang>
+              <zh-CN>包含历史数据库二进制内容的文档模块详情契约。</zh-CN>
+              <en>Document-module detail contract that includes legacy database binary content.</en>
+            </lang>
+            </summary>
+            <remarks>
+            <lang>
+              <zh-CN>当前项目不再写入此二进制内容；它只为已有记录下载兼容保留，输出时必须作为附件处理，并由下载页重新决定文件名、MIME 类型和缓存策略。</zh-CN>
+              <en>The project no longer writes this binary content; it remains only for existing-record download compatibility, must be emitted as an attachment, and lets the download page decide file name, MIME type, and caching policy again.</en>
+            </lang>
+            </remarks>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItemDetails.Content">
+            <summary>
+            <lang>
+              <zh-CN>历史数据库保存的二进制内容。</zh-CN>
+              <en>Binary content stored by the legacy database.</en>
+            </lang>
+            </summary>
+            <remarks>
+            <lang>
+              <zh-CN>该字段可能较大，不应在列表页、审计日志或诊断日志中展开；读取后只应进入受控下载响应。</zh-CN>
+              <en>This field may be large and should not be expanded in list pages, audit logs, or diagnostic logs; after reading it should only flow into a controlled download response.</en>
+            </lang>
+            </remarks>
+        </member>
+        <member name="P:ASPNET.StarterKit.Portal.IDocumentItemDetails.ContentType">
+            <summary>
+            <lang>
+              <zh-CN>历史记录保存的 MIME 类型提示，不应直接信任。</zh-CN>
+              <en>MIME-type hint stored by legacy records; it must not be trusted directly.</en>
+            </lang>
+            </summary>
+            <remarks>
+            <lang>

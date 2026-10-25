@@ -1,0 +1,67 @@
+                <%--
+                  <lang>
+                    <zh-CN>Repeater 只读呈现当前值、提议值和审核文本，使用编码绑定避免把申请内容当作标记执行；请求编号和状态命令仍需服务端重新校验。</zh-CN>
+                    <en>The Repeater renders current, proposed, and review text read-only with encoded bindings so request content is not executed as markup; the server must revalidate request id and status commands.</en>
+                  </lang>
+                --%>
+                <asp:Repeater ID="RequestsRepeater" OnItemCommand="RequestsRepeater_ItemCommand" runat="server">
+                    <HeaderTemplate>
+                        <table class="portal-data-table" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <th scope="col" width="70" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnId %></th>
+                                <th scope="col" width="15%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnSubmittedUtc %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnEmployee %></th>
+                                <th scope="col" width="13%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnUser %></th>
+                                <th scope="col" width="12%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnField %></th>
+                                <th scope="col" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnCurrentProposed %></th>
+                                <th scope="col" width="95" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnStatus %></th>
+                                <th scope="col" width="22%" class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_ColumnReview %></th>
+                            </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                            <tr class="Normal">
+                                <td><%#: Eval("RequestId") %></td>
+                                <td><%#: Eval("SubmittedUtcText") %></td>
+                                <td><%#: Eval("EmployeeText") %></td>
+                                <td><%#: Eval("UserText") %></td>
+                                <td><%#: Eval("FieldName") %></td>
+                                <td>
+                                    <div class="portal-value-stack">
+                                        <div><span class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelCurrent %></span> <%#: Eval("CurrentValueSnapshot") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelProposed %></span> <%#: Eval("ProposedValue") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelNote %></span> <%#: Eval("RequestNote") %></div>
+                                        <div><span class="SubHead"><%= lang.Admin_EmployeeProfileCorrectionRequests_LabelReview %></span> <%#: Eval("ReviewText") %></div>
+                                    </div>
+                                </td>
+                                <td><%#: Eval("RequestStatus") %></td>
+                                <td>
+                                    <%--
+                                      <lang>
+                                        <zh-CN>审核备注有长度上限但仍是管理员输入；状态转换、请求归属、审计事件和主数据旁路规则由 code-behind 校验。</zh-CN>
+                                        <en>The review note has a length limit but remains administrator input; code-behind validates state transition, request ownership, audit events, and the master-data side-channel rule.</en>
+                                      </lang>
+                                    --%>
+                                    <asp:TextBox ID="ReviewNoteTextBox" CssClass="NormalTextBox portal-review-note" Width="210" MaxLength="1000" TextMode="MultiLine" Rows="3" runat="server" />
+                                    <div class="portal-row-actions">
+                                        <asp:LinkButton ID="ReviewedButton" Text="<%$ Resources:lang, Admin_EmployeeProfileCorrectionRequests_ButtonApprove %>" CssClass="CommandButton" CommandName="Reviewed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="ClosedButton" Text="<%$ Resources:lang, Admin_EmployeeProfileCorrectionRequests_ButtonCancel %>" CssClass="CommandButton" CommandName="Closed" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                        <asp:LinkButton ID="RejectedButton" Text="<%$ Resources:lang, Admin_EmployeeProfileCorrectionRequests_ButtonReject %>" CssClass="CommandButton" CommandName="Rejected" CommandArgument='<%# Eval("RequestId") %>' CausesValidation="False" runat="server" />
+                                    </div>
+                                </td>
+                            </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <%--
+                            <lang>
+                                <zh-CN>P74.3 空态：零条时在表尾渲染"表头 + 提示行"，文案按是否处于筛选态区分（本页默认选中"已提交"，故默认即筛选态）；失败路径由 EmptyStateRowCount 为 null 抑制，避免与错误提示矛盾。列数（8）与本表表头一致。</zh-CN>
+                                <en>P74.3 empty state: with zero rows the footer renders the header-plus-hint row whose wording depends on whether a filter is active (this page preselects the submitted status, so its default view is already filtered); failure paths suppress it by passing a null count so it cannot contradict the error message. The column count (8) matches this table's header.</en>
+                            </lang>
+                        --%>
+                        <%= PortalEmptyStateRenderer.Render(EmptyStateRowCount, EmptyStateText, 8) %>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
+        </div>
+    </div>
+</asp:Content>

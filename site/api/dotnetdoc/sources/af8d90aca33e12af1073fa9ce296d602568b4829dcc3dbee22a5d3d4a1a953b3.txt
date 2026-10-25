@@ -1,0 +1,19 @@
+            <%--
+              <lang>
+                <zh-CN>保存按钮只触发服务端员工资料更新；并发版本、授权、审计和失败回退不由标记层或取消链接决定。</zh-CN>
+                <en>The save button only triggers the server-side employee update; concurrency version, authorization, audit, and failure fallback are not decided by markup or the cancel link.</en>
+              </lang>
+            --%>
+            <div class="portal-form-actions">
+                <asp:LinkButton
+                    ID="SaveButton"
+                    CssClass="CommandButton portal-primary-action"
+                    Text="<%$ Resources:lang,Admin_EmployeeEdit_ButtonSave %>"
+                    CausesValidation="False"
+                    OnClick="SaveButton_Click"
+                    runat="server" />
+                <a class="CommandButton" href="EmployeeDirectory.aspx"><%= lang.Admin_ModuleDefinitions_ButtonCancel %></a>
+            </div>
+        </div>
+    </div>
+</asp:Content>

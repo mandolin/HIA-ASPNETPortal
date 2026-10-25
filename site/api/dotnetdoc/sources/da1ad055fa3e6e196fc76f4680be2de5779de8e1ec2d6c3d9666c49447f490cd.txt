@@ -1,0 +1,54 @@
+        <%--
+          <lang>
+            <zh-CN>角色成员区将可选角色和当前成员作为回发命令载体；角色身份、去重、授权和审计仍由 code-behind 在写入前重新判断。</zh-CN>
+            <en>The role-membership section carries selected roles and current members through postback commands; code-behind rechecks role identity, duplication, authorization, and audit requirements before writing.</en>
+          </lang>
+        --%>
+        <div class="portal-admin-section">
+            <div class="portal-section-header">
+                <h2 class="Head portal-section-title"><%= lang.Admin_ManageUsers_SectionRoleMembership %></h2>
+            </div>
+            <div class="portal-filter-panel">
+                <div class="portal-filter-grid">
+                    <div class="portal-filter-field">
+                        <span class="SubHead portal-filter-label"><%= lang.Admin_ManageUsers_LabelRole %></span>
+                        <asp:DropDownList ID="allRoles" CssClass="NormalTextBox portal-filter-input" DataTextField="RoleName" DataValueField="RoleID"
+                            runat="server" />
+                    </div>
+                    <div class="portal-filter-actions">
+                        <asp:LinkButton ID="addExisting" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang,Admin_ManageUsers_AddUserToRole %>"
+                            runat="server" CausesValidation="False" OnClick="AddRole_Click" />
+                    </div>
+                </div>
+            </div>
+            <div class="portal-chip-list-wrap">
+                <asp:DataList ID="userRoles" CssClass="portal-chip-list" RepeatColumns="2" DataKeyField="RoleId" OnItemCommand="UserRoles_ItemCommand" runat="server">
+                    <ItemStyle Width="225" CssClass="portal-chip-item" />
+                    <ItemTemplate>
+                        <%--
+                          <lang>
+                            <zh-CN>角色名用 **`<%#:`**（冒号）而非 `<%#` 绑定：前者会先做 HTML 编码再输出，是角色名这类可控数据的 XSS 防护基线，
+                            改动时不得退化成 `<%#`。删除按钮不带 `CommandArgument`，要移除的角色由 `DataList` 的 `DataKeyField="RoleId"`
+                            经 `OnItemCommand` 取回 —— 即"删哪一行"由 DataKey 决定，标记层不含行标识。</zh-CN>
+                            <en>The role name binds with **`<%#:`** (with colon) rather than `<%#`: the former HTML-encodes before emitting, which is the
+                            XSS baseline for controllable data such as role names — do not regress it to `<%#`. The delete button carries no
+                            `CommandArgument`; the role to remove is recovered via the DataList's `DataKeyField="RoleId"` in `OnItemCommand`, i.e.
+                            "which row" comes from the DataKey and the markup holds no row identifier.</en>
+                          </lang>
+                        --%>
+                        <asp:LinkButton ID="Imagebutton1" CommandName="delete" Text="<%$ Resources:lang,Admin_ManageUsers_RemoveFromRoleText %>"
+                            ToolTip="<%$ Resources:lang,Admin_ManageUsers_RemoveFromRoleAlt %>" CssClass="CommandButton portal-chip-delete portal-danger-action"
+                            CausesValidation="False" runat="server" />
+                        <asp:Label Text='<%#: DataBinder.Eval(Container.DataItem, "RoleName") %>' CssClass="Normal portal-chip-text"
+                            runat="server" ID="Label1" />
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
+        </div>
+
+        <div class="portal-form-actions">
+            <asp:LinkButton ID="saveBtn" CssClass="CommandButton portal-primary-action" Text="<%$ Resources:lang,Admin_ManageUsers_SaveUserChange %>"
+                runat="server" CausesValidation="False" OnClick="Save_Click" />
+        </div>
+    </div>
+</asp:Content>

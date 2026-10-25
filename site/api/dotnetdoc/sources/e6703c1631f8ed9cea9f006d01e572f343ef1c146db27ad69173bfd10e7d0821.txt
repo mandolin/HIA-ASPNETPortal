@@ -1,0 +1,32 @@
+                    <%--
+                        <lang>
+                            <zh-CN>编辑模板允许改名或进入成员管理，但角色删除保护、旧分号授权同步和保存结果仍由 code-behind 决定。</zh-CN>
+                            <en>The edit template allows renaming or entering membership management, while deletion protection, legacy semicolon-authorization synchronization, and save results remain decided by the code-behind.</en>
+                        </lang>
+                    --%>
+                    <div class="portal-chip-item portal-legacy-role-item portal-legacy-role-edit">
+                        <asp:TextBox
+                            ID="roleName"
+                            CssClass="NormalTextBox portal-form-input"
+                            MaxLength="50"
+                            Text='<%# DataBinder.Eval(Container.DataItem, "RoleName") %>'
+                            runat="server" />
+                        <div class="portal-row-actions">
+                            <asp:LinkButton
+                                Text="<%$ Resources:lang, Admin_Roles_ButtonApply %>"
+                                CommandName="apply"
+                                CssClass="portal-button portal-button-primary portal-button-compact"
+                                runat="server" />
+                            <asp:LinkButton
+                                Text="<%$ Resources:lang, Admin_Roles_ButtonChangeRoleMembers %>"
+                                CommandName="members"
+                                CssClass="portal-button portal-button-secondary portal-button-compact"
+                                runat="server" />
+                        </div>
+                    </div>
+                </EditItemTemplate>
+            </asp:DataList>
+        </div>
+        <p class="Normal portal-status-line"><%= lang.Admin_Roles_DeleteWarning %></p>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+                    <%--
+                        <lang>
+                            <zh-CN>每个条目仅提供受编码的友好名称和编辑命令，实际定义读取、授权与保存仍由 code-behind 决定。</zh-CN>
+                            <en>Each item exposes only an encoded friendly name and an edit command; definition loading, authorization, and persistence remain decided by the code-behind.</en>
+                        </lang>
+                    --%>
+                    <div class="portal-chip-item">
+                        <asp:Label
+                            Text='<%#: DataBinder.Eval(Container.DataItem, "FriendlyName") %>'
+                            CssClass="Normal portal-chip-text"
+                            runat="server" />
+                        <asp:LinkButton
+                            Text="<%$ Resources:lang, Admin_ModuleDefs_ButtonEditDefinition %>"
+                            CommandName="edit"
+                            CssClass="portal-button portal-button-secondary portal-button-compact"
+                            CausesValidation="False"
+                            runat="server" />
+                    </div>
+                </ItemTemplate>
+            </asp:DataList>
+        </div>
+    </div>
+</div>

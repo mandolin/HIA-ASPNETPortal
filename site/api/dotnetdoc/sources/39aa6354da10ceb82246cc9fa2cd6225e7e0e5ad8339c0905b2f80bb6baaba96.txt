@@ -1,0 +1,52 @@
+                <%--
+                <lang>
+                  <zh-CN>允许受信任管理员输入原始 HTML；这里必须保持普通请求验证关闭，否则旧 Web Forms 回发无法保存真实 HTML 片段。</zh-CN>
+                  <en>Allows trusted administrators to enter raw HTML. Ordinary request validation must remain disabled here, otherwise the legacy Web Forms postback cannot save real HTML fragments.</en>
+                </lang>
+                --%>
+                <asp:TextBox ID="DesktopText" CssClass="NormalTextBox portal-input portal-code-textarea"
+                    Columns="75" Rows="12" TextMode="MultiLine" runat="server" />
+            </div>
+
+            <div class="portal-edit-subsection">
+                <%--
+                <lang>
+                  <zh-CN>移动端摘要和详情是旧数据兼容字段；它们的可选性和展示回退由服务器内容模型决定。</zh-CN>
+                  <en>Mobile summary and detail are legacy-compatibility fields; their optionality and display fallback are decided by the server content model.</en>
+                </lang>
+                --%>
+                <h2 class="portal-edit-subtitle"><%= lang.EditHtml_SectionMobileFallback %></h2>
+                <p class="portal-field-help"><%= lang.EditHtml_HintMobileFallback %></p>
+            </div>
+
+            <div class="portal-field-stack">
+                <asp:Label ID="MobileSummaryLabel" CssClass="portal-field-stack-label" AssociatedControlID="MobileSummary"
+                    runat="server" Text="<%$ Resources:lang,EditHtml_LabelMobileSummary %>" />
+                <asp:TextBox ID="MobileSummary" CssClass="NormalTextBox portal-input portal-small-textarea"
+                    Columns="75" Rows="3" TextMode="MultiLine" runat="server" />
+            </div>
+
+            <div class="portal-field-stack">
+                <asp:Label ID="MobileDetailsLabel" CssClass="portal-field-stack-label" AssociatedControlID="MobileDetails"
+                    runat="server" Text="<%$ Resources:lang,EditHtml_LabelMobileDetails %>" />
+                <asp:TextBox ID="MobileDetails" CssClass="NormalTextBox portal-input portal-small-textarea"
+                    Columns="75" Rows="5" TextMode="MultiLine" runat="server" />
+            </div>
+
+            <div class="portal-form-actions">
+                <%--
+                <lang>
+                  <zh-CN>Update/Cancel 分别进入既有保存或离开流程；按钮不在客户端实现 HTML 清洗、权限判断或回滚。</zh-CN>
+                  <en>Update and Cancel enter the existing save or leave flows; the buttons do not implement HTML sanitization, authorization, or rollback on the client.</en>
+                </lang>
+                --%>
+                <asp:LinkButton ID="updateButton" Text="<%$ Resources:lang,LegacyEdit_ButtonUpdate %>" runat="server"
+                    CssClass="portal-button portal-button-primary" BorderStyle="none"
+                    OnClick="UpdateBtn_Click" />
+                <asp:LinkButton ID="cancelButton" Text="<%$ Resources:lang,LegacyEdit_ButtonCancel %>" CausesValidation="False" runat="server"
+                    CssClass="portal-button portal-button-secondary" BorderStyle="none"
+                    OnClick="CancelBtn_Click" />
+            </div>
+        </div>
+    </section>
+</asp:Content>
