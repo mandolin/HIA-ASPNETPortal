@@ -39,6 +39,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tab.-ctor-system.int32-aspnet.starterkit.portal.itabitem",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.tab.-ctor-system.int32-aspnet.starterkit.portal.itabitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tab.-ctor-system.int32-as-f385ce4c.html"
     },

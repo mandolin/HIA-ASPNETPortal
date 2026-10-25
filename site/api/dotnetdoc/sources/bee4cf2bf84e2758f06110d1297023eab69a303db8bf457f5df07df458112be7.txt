@@ -1,0 +1,60 @@
+        private void DeleteRole(IRoleItem role)
+        {
+            // <lang>
+            //   <zh-CN>删除路径先做业务防护，再进入数据库删除，避免留下无法从 UI 恢复的权限空洞。</zh-CN>
+            //   <en>The delete path performs business guards before database deletion to avoid authorization gaps that the UI cannot recover.</en>
+            // </lang>
+            if (string.Equals(role.RoleName, PortalRoleNames.Administrators, StringComparison.OrdinalIgnoreCase))
+            {
+                ShowMessage(lang.Admin_Roles_MessageCoreRoleDeleteBlocked);
+                return;
+            }
+
+            if (RolesDB.GetRoleMembers(role.RoleId).Any())
+            {
+                ShowMessage(lang.Admin_Roles_MessageRoleHasMembers);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>引用检查覆盖当前门户 Tab 和模块编辑角色，删除前不隐式清理授权。</zh-CN>
+            //   <en>Reference checks cover current-Portal Tab and module edit roles; deletion never performs implicit authorization cleanup.</en>
+            // </lang>
+            PortalSettings portalSettings = PortalContext.GetPortalSettings();
+            if (HasRoleReferences(portalSettings, role.RoleName))
+            {
+                ShowMessage(lang.Admin_Roles_MessageRoleReferenced);
+                return;
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>仅在管理员、成员和授权引用检查均通过后删除，并记录成功审计。</zh-CN>
+                //   <en>Delete only after administrator, member, and authorization-reference guards pass, then record success.</en>
+                // </lang>
+                RolesDB.DeleteRole(role.RoleId);
+                PortalOperationAudit.Record(
+                    "RoleAdministration",
+                    "Delete",
+                    "Role",
+                    role.RoleId.ToString(),
+                    "Deleted an unreferenced role without members.",
+                    Context);
+                rolesList.EditItemIndex = -1;
+                BindData();
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>删除异常写入诊断并保持页面低敏反馈。</zh-CN>
+                //   <en>Record deletion failures through diagnostics and keep page feedback low sensitivity.</en>
+                // </lang>
+                string eventId = PortalDiagnostics.Error(
+                    "Admin.Roles.Delete",
+                    "Deleting a role failed. RoleId=" + role.RoleId,
+                    exception,
+                    Context);
+                ShowMessage(string.Format(CultureInfo.CurrentCulture, lang.Admin_Roles_MessageDeleteFailed, eventId));
+            }
+        }

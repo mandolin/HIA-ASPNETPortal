@@ -1,0 +1,76 @@
+        public static PortalNavigationVisibilityContext Create(IEnumerable<PortalNavigationEntry> entries)
+        {
+            // <lang>
+            //   <zh-CN>管理员身份由既有授权入口判定；它不是放行条件，后续仍逐项校验角色、权限、包与 Profile。</zh-CN>
+            //   <en>Administrator identity comes from the existing authorization entry point; it is not a bypass, because roles, permissions, packages, and Profiles are still checked individually.</en>
+            // </lang>
+            bool isAdministrator = PortalAuthorization.IsAdmin();
+
+            // <lang>
+            //   <zh-CN>角色与权限集合按候选项声明逐个探测：只为"确实被声明且当前用户确实拥有"的项建集合，减少无谓的权限查询。</zh-CN>
+            //   <en>Probe role and permission collections per declared dependency: only entries that are actually declared and actually held by the current user are collected, reducing needless permission lookups.</en>
+            // </lang>
+            List<string> roles = new List<string>();
+            List<string> permissions = new List<string>();
+
+            if (entries != null)
+            {
+                foreach (PortalNavigationEntry entry in entries)
+                {
+                    if (entry == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (string role in entry.RequiredRoles)
+                    {
+                        if (!roles.Contains(role) && PortalSecurity.IsInRole(role))
+                        {
+                            roles.Add(role);
+                        }
+                    }
+
+                    foreach (string key in entry.RequiredPermissionKeys)
+                    {
+                        if (!permissions.Contains(key) && PortalAuthorization.HasPermission(key))
+                        {
+                            permissions.Add(key);
+                        }
+                    }
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>部署侧状态取自 Profile resolver；读取失败时退化为"无允许包、无包含 Profile"，宁可不显示也不放行。</zh-CN>
+            //   <en>Deployment state comes from the Profile resolver; on failure it degrades to "no allowed packages, no included profiles", preferring to hide rather than grant.</en>
+            // </lang>
+            string activeProfile = string.Empty;
+            IList<string> allowedPackages = new string[0];
+            IList<string> includedProfiles = new string[0];
+
+            try
+            {
+                PortalModuleProfileSnapshot snapshot = PortalModuleProfileResolver.Resolve(HttpContext.Current);
+                if (snapshot != null)
+                {
+                    activeProfile = snapshot.ActiveProfile ?? string.Empty;
+                    allowedPackages = snapshot.AllowedPackageIds ?? new string[0];
+                    includedProfiles = ReadIncludedProfiles(activeProfile);
+                }
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>Profile 解析异常不影响页面其余部分：按最保守状态处理。</zh-CN>
+                //   <en>A Profile resolution failure must not affect the rest of the page: fall back to the most conservative state.</en>
+                // </lang>
+            }
+
+            return new PortalNavigationVisibilityContext(
+                isAdministrator,
+                roles,
+                permissions,
+                allowedPackages,
+                activeProfile,
+                includedProfiles);
+        }

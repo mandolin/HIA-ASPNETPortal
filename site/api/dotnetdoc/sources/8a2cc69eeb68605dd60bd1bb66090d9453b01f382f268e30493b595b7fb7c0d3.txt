@@ -1,0 +1,23 @@
+        private static PortalOperationAuditEntry ReadEntry(SqlDataReader reader)
+        {
+            // <lang>
+            //   <zh-CN>各 ordinal 与 Query 的固定 SELECT 顺序一一对应；可空上下文字段经专用 helper 转为空字符串，供旧 Web Forms 绑定稳定显示。</zh-CN>
+            //   <en>Each ordinal corresponds one-to-one with Query's fixed SELECT order; nullable context fields pass through a dedicated helper to become empty strings for stable legacy Web Forms binding.</en>
+            // </lang>
+            return new PortalOperationAuditEntry
+            {
+                AuditId = reader.GetInt64(0),
+                OccurredUtc = reader.GetDateTime(1),
+                Category = reader.GetString(2),
+                Action = reader.GetString(3),
+                Outcome = reader.GetString(4),
+                ActorUserName = reader.GetString(5),
+                TargetType = reader.GetString(6),
+                TargetId = reader.GetString(7),
+                Summary = reader.GetString(8),
+                RelatedEventId = ReadNullableString(reader, 9),
+                ClientIp = ReadNullableString(reader, 10),
+                UserAgent = ReadNullableString(reader, 11),
+                CorrelationId = ReadNullableString(reader, 12)
+            };
+        }

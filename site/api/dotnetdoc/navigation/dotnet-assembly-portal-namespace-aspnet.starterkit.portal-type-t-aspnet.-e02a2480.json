@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthorization.ensureadmin-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalAuthorization.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthorization.ensureadmin-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthorization.ensur-4a2f3af7.html"
     },
@@ -33,6 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthorization.ensureanypermission-system.web.httpcontext-system.string",
+      "sourcePath": "src/Portal/Components/PortalAuthorization.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthorization.ensureanypermission-system.web.httpcontext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthorization.ensur-0fb65eb0.html"
     },
@@ -45,6 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthorization.ensurepermission-system.web.httpcontext-system.string",
+      "sourcePath": "src/Portal/Components/PortalAuthorization.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthorization.ensurepermission-system.web.httpcontext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthorization.ensur-1f18f638.html"
     },
@@ -57,6 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthorization.getcurrentusername-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalAuthorization.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthorization.getcurrentusername-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthorization.getcu-53df4de5.html"
     },
@@ -147,6 +151,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthorization.trynormalizepermissionkey-system.string-system.web.httpcontext-system.string",
+      "sourcePath": "src/Portal/Components/PortalAuthorization.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthorization.trynormalizepermissionkey-system.string-system.web.httpcontext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthorization.tryno-67b6c820.html"
     },
@@ -159,6 +164,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthorization.trynormalizepermissionkeys-system.string-system.web.httpcontext-system.string",
+      "sourcePath": "src/Portal/Components/PortalAuthorization.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthorization.trynormalizepermissionkeys-system.string-system.web.httpcontext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthorization.tryno-294cd659.html"
     }

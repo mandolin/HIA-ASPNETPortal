@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesdb:base:imodulesdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IModulesDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.modulesdb:interface:t-aspnet.starterkit.portal.imodulesdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IModulesDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -21,6 +30,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulesdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext-aspnet.starterkit.portal.iportaldb",
+      "sourcePath": "src/Portal.Components.Data1/ModulesDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.modulesdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext-aspnet.starterkit.portal.iportaldb",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.modulesdb.-ctor-aspnet.st-e021e3a0.html"
     },

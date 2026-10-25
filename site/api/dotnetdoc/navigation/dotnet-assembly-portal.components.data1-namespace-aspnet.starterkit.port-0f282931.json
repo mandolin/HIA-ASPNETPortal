@@ -4,18 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingadmindb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingadmindb:base:iuseremployeebindingadmindb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingadmindb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IUserEmployeeBindingAdminDb",
+      "label": "Base: System.Object",
       "entryCount": 0,
       "views": [
         "dotnet"
       ]
     },
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingadmindb:base:t-system.object",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindingadmindb:interface:t-aspnet.starterkit.portal.iuseremployeebindingadmindb",
       "kind": "relation",
-      "label": "Base: System.Object",
+      "label": "Interface: ASPNET.StarterKit.Portal.IUserEmployeeBindingAdminDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -43,6 +43,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.useremployeebindingadmindb.bindusertoemployee-aspnet.starterkit.portal.useremployeebindingsaverequest",
+      "sourcePath": "src/Portal.Components.Data1/UserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.useremployeebindingadmindb.bindusertoemployee-aspnet.starterkit.portal.useremployeebindingsaverequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.useremployeebindingadmind-2884fbc7.html"
     },
@@ -81,6 +82,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.useremployeebindingadmindb.endbinding-aspnet.starterkit.portal.useremployeebindingendrequest",
+      "sourcePath": "src/Portal.Components.Data1/UserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.useremployeebindingadmindb.endbinding-aspnet.starterkit.portal.useremployeebindingendrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.useremployeebindingadmind-2f69ddf4.html"
     },
@@ -223,6 +225,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.useremployeebindingadmindb.normalizeendrequest-aspnet.starterkit.portal.useremployeebindingendrequest",
+      "sourcePath": "src/Portal.Components.Data1/UserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.useremployeebindingadmindb.normalizeendrequest-aspnet.starterkit.portal.useremployeebindingendrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.useremployeebindingadmind-9f7b6843.html"
     },
@@ -261,6 +264,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.useremployeebindingadmindb.normalizesaverequest-aspnet.starterkit.portal.useremployeebindingsaverequest",
+      "sourcePath": "src/Portal.Components.Data1/UserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.useremployeebindingadmindb.normalizesaverequest-aspnet.starterkit.portal.useremployeebindingsaverequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.useremployeebindingadmind-f1b0d90d.html"
     },
@@ -299,6 +303,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.useremployeebindingadmindb.tryvalidatesaverequest-aspnet.starterkit.portal.useremployeebindingsaverequest-system.string",
+      "sourcePath": "src/Portal.Components.Data1/UserEmployeeBindingAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.useremployeebindingadmindb.tryvalidatesaverequest-aspnet.starterkit.portal.useremployeebindingsaverequest-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.useremployeebindingadmind-d6ce92dc.html"
     },

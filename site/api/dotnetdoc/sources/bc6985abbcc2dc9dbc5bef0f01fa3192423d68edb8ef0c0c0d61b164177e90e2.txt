@@ -1,0 +1,6 @@
+        public static void SignOut(HttpResponse response, HttpRequest request)
+        {
+            FormsAuthentication.SignOut();
+            ExpireAuthenticationCookie(response, request);
+            PortalAuthenticationCookies.ExpireRolesCookie(response, request);
+        }

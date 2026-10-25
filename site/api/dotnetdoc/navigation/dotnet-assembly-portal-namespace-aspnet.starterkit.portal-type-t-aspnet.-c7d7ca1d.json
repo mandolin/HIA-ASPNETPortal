@@ -30,6 +30,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsettings.-ctor-aspnet.starterkit.portal.itabitem",
+      "sourcePath": "src/Portal/Components/TabSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsettings.-ctor-aspnet.starterkit.portal.itabitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsettings.-ctor-aspnet.-e9a61c3d.html"
     },

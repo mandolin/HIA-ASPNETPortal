@@ -4,18 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationdb:base:iemployeeprofileconfirmationdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IEmployeeProfileConfirmationDb",
+      "label": "Base: System.Object",
       "entryCount": 0,
       "views": [
         "dotnet"
       ]
     },
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationdb:base:t-system.object",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeeprofileconfirmationdb:interface:t-aspnet.starterkit.portal.iemployeeprofileconfirmationdb",
       "kind": "relation",
-      "label": "Base: System.Object",
+      "label": "Interface: ASPNET.StarterKit.Portal.IEmployeeProfileConfirmationDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -43,6 +43,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeProfileConfirmationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofileconfirmationdb.confirmprofile-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofileconfirmati-a773fab5.html"
     },
@@ -94,6 +95,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofileconfirmationdb.normalizerequest-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeProfileConfirmationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofileconfirmationdb.normalizerequest-aspnet.starterkit.portal.employeeprofileconfirmationrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofileconfirmati-c14bcb50.html"
     }

@@ -58,15 +58,6 @@
       ]
     },
     {
-      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype:interface:t-system.ispanformattable",
-      "kind": "relation",
-      "label": "Interface: System.ISpanFormattable",
-      "entryCount": 0,
-      "views": [
-        "dotnet"
-      ]
-    },
-    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingvaluetype:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingvaluetype.boolean",
       "kind": "entry",
       "label": "Boolean",

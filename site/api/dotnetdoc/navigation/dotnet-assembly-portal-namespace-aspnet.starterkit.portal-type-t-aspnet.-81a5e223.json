@@ -34,6 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.getportalhomeurl-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.getportalhomeurl-system.web.httprequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.ge-4db4ecbf.html"
     },
@@ -46,6 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.getsafereturnurl-system.web.httprequest-system.string",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.getsafereturnurl-system.web.httprequest-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.ge-60135fb4.html"
     },
@@ -58,6 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.getsafereturnurl-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.getsafereturnurl-system.web.httprequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.ge-a21cb0b1.html"
     },
@@ -83,6 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.iscurrentapplicationpath-system.string-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.iscurrentapplicationpath-system.string-system.web.httprequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.is-0c58a080.html"
     },
@@ -95,6 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.redirecttoaccessdenied-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.redirecttoaccessdenied-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.re-01c1739b.html"
     },
@@ -107,6 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.redirecttoeditaccessdenied-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.redirecttoeditaccessdenied-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.re-2aca68e7.html"
     },
@@ -119,6 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.redirecttosafereturnurl-system.web.httpcontext-system.string",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.redirecttosafereturnurl-system.web.httpcontext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.re-b576bd5b.html"
     },
@@ -131,6 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.trynormalizebrowseurl-system.string-system.web.httprequest-system.string",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.trynormalizebrowseurl-system.string-system.web.httprequest-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.tr-432ee822.html"
     },
@@ -143,6 +151,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.trynormalizereturnurl-system.web.httprequest-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.trynormalizereturnurl-system.web.httprequest-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.tr-a5289a98.html"
     },
@@ -155,6 +164,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.trynormalizetrusteddeploymentresourcepath-system.string-system.web.httprequest-system.string",
+      "sourcePath": "src/Portal/Components/PortalNavigationPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.trynormalizetrusteddeploymentresourcepath-system.string-system.web.httprequest-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.tr-1f2e0ede.html"
     },

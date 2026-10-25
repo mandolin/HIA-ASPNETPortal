@@ -1,0 +1,34 @@
+        private static string ResolveTrustedThemeName(
+            string requestedThemeName,
+            HttpContext context,
+            out string fallbackReason)
+        {
+            // <lang>
+            //   <zh-CN>把空白候选归一为 Default，否则只去除外围空白；最终可信度由主题目录校验决定。</zh-CN>
+            //   <en>Normalize a blank candidate to Default and otherwise trim surrounding whitespace; theme-directory validation decides final trust.</en>
+            // </lang>
+            string themeName = string.IsNullOrWhiteSpace(requestedThemeName)
+                ? DefaultThemeName
+                : requestedThemeName.Trim();
+
+            // <lang>
+            //   <zh-CN>保存可信主题包，在成功时只返回其规范名称。</zh-CN>
+            //   <en>Hold the trusted theme package and return only its canonical name on success.</en>
+            // </lang>
+            PortalThemePackage package;
+
+            // <lang>
+            //   <zh-CN>接收非敏感验证失败原因，用于受限告警和最终上下文而不泄露 manifest 内容。</zh-CN>
+            //   <en>Receive the non-sensitive validation failure reason for restricted warning and final context without leaking manifest content.</en>
+            // </lang>
+            string validationReason;
+            if (PortalThemeCatalog.TryGetTrustedPackage(themeName, out package, out validationReason))
+            {
+                fallbackReason = string.Empty;
+                return package.Name;
+            }
+
+            fallbackReason = validationReason;
+            TraceFallback(context, themeName, validationReason);
+            return DefaultThemeName;
+        }

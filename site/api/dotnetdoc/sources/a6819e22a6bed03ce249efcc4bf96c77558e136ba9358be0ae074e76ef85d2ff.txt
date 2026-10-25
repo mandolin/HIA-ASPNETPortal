@@ -1,0 +1,14 @@
+        private static void SelectReferenceValue(DropDownList list, string valueKey)
+        {
+            if (list == null)
+            {
+                return;
+            }
+
+            ListItem item = list.Items.FindByValue(valueKey);
+            if (item != null)
+            {
+                list.ClearSelection();
+                item.Selected = true;
+            }
+        }

@@ -1,0 +1,114 @@
+        public BusinessApplicationResult SubmitApplication(BusinessApplicationSubmitRequest request)
+        {
+            // <lang>
+            //   <zh-CN>先生成不可变于调用方的归一化快照；后续必填校验和 SQL 参数都只使用该快照，避免原请求在流程中改变。</zh-CN>
+            //   <en>Build a normalized snapshot independent of caller mutations first; required-field checks and SQL parameters use only that snapshot.</en>
+            // </lang>
+            BusinessApplicationSubmitRequest normalized = NormalizeSubmitRequest(request);
+            if (normalized.ApplicantUserId <= 0)
+            {
+                return new BusinessApplicationResult(false, 0, string.Empty, "A signed-in portal user is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(normalized.Title))
+            {
+                return new BusinessApplicationResult(false, 0, string.Empty, "Application title is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(normalized.Summary) && string.IsNullOrWhiteSpace(normalized.Body))
+            {
+                return new BusinessApplicationResult(false, 0, string.Empty, "Application summary or body is required.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new BusinessApplicationResult(false, 0, string.Empty, "Business application schema is unavailable.");
+            }
+
+            string applicationCode = CreateApplicationCode(normalized.SubmittedUtc.Value);
+            try
+            {
+                // <lang>
+                //   <zh-CN>申请事实和 Submit 流程事件必须同批写入，避免申请已经存在但流程流水缺失；待办投影稍后由页面层旁路补充。</zh-CN>
+                //   <en>The application fact and Submit workflow event are written in the same batch to avoid an application without event history; the page layer later adds the work-item projection as a sidecar.</en>
+                // </lang>
+                List<long> rows = context.Database.SqlQuery<long>(
+                    @"
+DECLARE @ApplicationId BIGINT;
+
+INSERT INTO [dbo].[PortalBiz_BusinessApplications]
+    ([ApplicationCode],
+     [Title],
+     [CategoryKey],
+     [Summary],
+     [Body],
+     [ApplicantUserId],
+     [ApplicantEmployeeId],
+     [OrganizationUnitId],
+     [ReviewRoleKey],
+     [ApplicationStatus],
+     [SubmittedUtc],
+     [CreatedUtc],
+     [CreatedBy],
+     [UpdatedUtc],
+     [UpdatedBy])
+VALUES
+    (@ApplicationCode,
+     @Title,
+     @CategoryKey,
+     @Summary,
+     @Body,
+     @ApplicantUserId,
+     @ApplicantEmployeeId,
+     @OrganizationUnitId,
+     @ReviewRoleKey,
+     N'Submitted',
+     @SubmittedUtc,
+     @SubmittedUtc,
+     @SubmittedBy,
+     @SubmittedUtc,
+     @SubmittedBy);
+
+SET @ApplicationId = CONVERT(BIGINT, SCOPE_IDENTITY());
+
+INSERT INTO [dbo].[PortalBiz_WorkflowEvents]
+    ([BusinessKind], [BusinessId], [OccurredUtc], [ActionKey], [ActorUserId], [ActorName], [FromStatus], [ToStatus], [Comment], [EventDataJson])
+VALUES
+    (N'BusinessApplication',
+     CONVERT(NVARCHAR(80), @ApplicationId),
+     @SubmittedUtc,
+     N'Submit',
+     @ApplicantUserId,
+     @SubmittedBy,
+     NULL,
+     N'Submitted',
+     @Summary,
+     NULL);
+
+SELECT @ApplicationId;",
+                    new SqlParameter("@ApplicationCode", applicationCode),
+                    new SqlParameter("@Title", normalized.Title),
+                    CreateNullableStringParameter("@CategoryKey", normalized.CategoryKey),
+                    CreateNullableStringParameter("@Summary", normalized.Summary),
+                    CreateNullableStringParameter("@Body", normalized.Body),
+                    new SqlParameter("@ApplicantUserId", normalized.ApplicantUserId),
+                    CreateNullableIntParameter("@ApplicantEmployeeId", normalized.ApplicantEmployeeId),
+                    CreateNullableIntParameter("@OrganizationUnitId", normalized.OrganizationUnitId),
+                    new SqlParameter("@ReviewRoleKey", normalized.ReviewRoleKey),
+                    new SqlParameter("@SubmittedUtc", normalized.SubmittedUtc.Value),
+                    new SqlParameter("@SubmittedBy", normalized.SubmittedBy)).ToList();
+
+                long applicationId = rows.Count == 0 ? 0 : rows[0];
+                return applicationId <= 0
+                    ? new BusinessApplicationResult(false, 0, string.Empty, "Business application was not created.")
+                    : new BusinessApplicationResult(true, applicationId, applicationCode, "Business application submitted.");
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>申请和 Submit 事件的批次失败时统一返回低敏结果，不把 SQL、连接或表结构细节暴露给页面。</zh-CN>
+                //   <en>When the application-and-Submit batch fails, return one low-sensitivity result without exposing SQL, connection, or schema details to the page.</en>
+                // </lang>
+                return new BusinessApplicationResult(false, 0, string.Empty, "Business application submission failed.");
+            }
+        }

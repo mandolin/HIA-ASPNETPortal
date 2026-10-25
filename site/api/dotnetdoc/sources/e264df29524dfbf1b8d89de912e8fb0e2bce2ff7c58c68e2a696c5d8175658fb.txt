@@ -1,0 +1,54 @@
+        public static void SignIn(
+            HttpResponse response,
+            HttpRequest request,
+            string userName,
+            long securityVersion,
+            bool isPersistent)
+        {
+            // <lang>
+            //   <zh-CN>记录本次票据签发的本地时间起点，后续过期边界与 Forms Authentication timeout 保持一致。</zh-CN>
+            //   <en>Record the local issuance start so the later expiration boundary matches the Forms Authentication timeout.</en>
+            // </lang>
+            DateTime issuedAt = DateTime.Now;
+
+            // <lang>
+            //   <zh-CN>计算票据过期时间；持久 Cookie 仅在调用方选择持久登录时复用该边界。</zh-CN>
+            //   <en>Compute the ticket expiration; a persistent cookie reuses this boundary only when persistent sign-in is selected.</en>
+            // </lang>
+            DateTime expiresAt = issuedAt.Add(FormsAuthentication.Timeout);
+
+            // <lang>
+            //   <zh-CN>创建只包含安全版本 UserData 的 Forms Authentication 票据，角色和业务资料不进入主票据。</zh-CN>
+            //   <en>Create a Forms Authentication ticket whose UserData contains only the security version; roles and business data stay out of the main ticket.</en>
+            // </lang>
+            var ticket = new FormsAuthenticationTicket(
+                1,
+                userName,
+                issuedAt,
+                expiresAt,
+                isPersistent,
+                FormatSecurityVersion(securityVersion));
+
+            // <lang>
+            //   <zh-CN>创建 HttpOnly 身份 Cookie，并复用虚拟目录 Path 规则；Secure/SameSite 由传输安全策略统一应用，默认与历史行为一致（均不下发）。</zh-CN>
+            //   <en>Create the HttpOnly identity cookie using the virtual-directory Path rule; Secure/SameSite are applied centrally by the transport-security policy and default to historical behavior (neither emitted).</en>
+            // </lang>
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket))
+            {
+                HttpOnly = true,
+                Path = GetCookiePath(request)
+            };
+
+            // <lang>
+            //   <zh-CN>应用传输安全策略：默认不下发 Secure/SameSite；配置缺失或读取异常时同样回落默认，不会阻断登录。</zh-CN>
+            //   <en>Apply the transport-security policy: by default neither Secure nor SameSite is emitted; missing or failing configuration also falls back to the default without blocking sign-in.</en>
+            // </lang>
+            PortalAuthenticationCookieSettings.ApplyTo(cookie);
+
+            if (isPersistent)
+            {
+                cookie.Expires = expiresAt;
+            }
+
+            response.Cookies.Add(cookie);
+        }

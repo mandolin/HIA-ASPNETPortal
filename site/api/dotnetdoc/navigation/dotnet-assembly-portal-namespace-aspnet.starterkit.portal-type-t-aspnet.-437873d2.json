@@ -34,6 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.expirerolescookie-system.web.httpresponse-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationCookies.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.expirerolescookie-system.web.httpresponse-system.web.httprequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-b68ff4af.html"
     },
@@ -46,6 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.getcookiepath-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationCookies.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.getcookiepath-system.web.httprequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-fa5001f3.html"
     },
@@ -84,6 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.tryreadroles-system.web.httprequest-system.int64-system.string",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationCookies.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.tryreadroles-system.web.httprequest-system.int64-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-64d037b6.html"
     },
@@ -96,6 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationcookies.writerolescookie-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.string-system.boolean",
+      "sourcePath": "src/Portal/Components/PortalAuthenticationCookies.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalauthenticationcookies.writerolescookie-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationcooki-f65844ca.html"
     }

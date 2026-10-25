@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrecentrequestrow.-ctor-aspnet.starterkit.portal.employeeprofilecorrectionrequestinfo",
+      "sourcePath": "src/Portal/DesktopModules/EmployeeProfileCorrectionRequest/EmployeeProfileCorrectionRequest.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeeprofilecorrectionrecentrequestrow.-ctor-aspnet.starterkit.portal.employeeprofilecorrectionrequestinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeeprofilecorrection-89a5a755.html"
     },

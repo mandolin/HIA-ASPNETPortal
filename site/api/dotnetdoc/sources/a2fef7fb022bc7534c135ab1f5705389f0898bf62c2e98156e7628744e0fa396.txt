@@ -1,0 +1,9 @@
+        private static string GetUserAgent(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>只读取既有请求字段并允许缺失；长度限制与净化由随后参数 helper 承担，避免此 helper 改写原始 HTTP 对象。</zh-CN>
+            //   <en>Read only the established request field and allow it to be absent; the following parameter helper owns length limiting and sanitization, so this helper does not rewrite the original HTTP object.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;
+            return current == null || current.Request == null ? string.Empty : current.Request.UserAgent;
+        }

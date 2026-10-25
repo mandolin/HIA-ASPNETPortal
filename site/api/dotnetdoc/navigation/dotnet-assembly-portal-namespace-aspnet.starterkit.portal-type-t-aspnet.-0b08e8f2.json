@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.applytheme-system.web.ui.page",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.applytheme-system.web.ui.page",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.apply-17ff182f.html"
     },
@@ -46,6 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getcurrentcssclass-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.getcurrentcssclass-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getcu-e54f2b94.html"
     },
@@ -58,6 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getcurrentthemecontext-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.getcurrentthemecontext-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.getcu-df25b40b.html"
     },
@@ -83,6 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.isadminrequest-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.isadminrequest-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.isadm-27ed7418.html"
     },
@@ -108,6 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resolvethemecontext-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.resolvethemecontext-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resol-182f5f0a.html"
     },
@@ -120,6 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resolvethemename-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.resolvethemename-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resol-fe7764da.html"
     },
@@ -132,6 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resolvetrustedthemename-system.string-system.web.httpcontext-system.string",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.resolvetrustedthemename-system.string-system.web.httpcontext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.resol-40d91311.html"
     },
@@ -196,6 +203,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.tracefallback-system.web.httpcontext-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.tracefallback-system.web.httpcontext-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.trace-58f364a7.html"
     },
@@ -221,6 +229,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemeresolver.trygetactivetabid-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalThemeResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemeresolver.trygetactivetabid-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemeresolver.tryge-fe4f13ed.html"
     },

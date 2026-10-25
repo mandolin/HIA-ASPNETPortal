@@ -4,6 +4,177 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:base:t-aspnet.starterkit.portal.portalmodulecontrol-aspnet.starterkit.portal.roles",
+      "kind": "relation",
+      "label": "Base: ASPNET.StarterKit.Portal.PortalModuleControl{ASPNET.StarterKit.Portal.Roles}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:base:t-system.web.ui.control",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.Control",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:base:t-system.web.ui.templatecontrol",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.TemplateControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:base:t-system.web.ui.usercontrol",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.UserControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-aspnet.starterkit.portal.iportalmodulecontrol",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IPortalModuleControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.componentmodel.icomponent",
+      "kind": "relation",
+      "label": "Interface: System.ComponentModel.IComponent",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.iattributeaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IAttributeAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.icontrolbuilderaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlBuilderAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.icontroldesigneraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlDesignerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.idatabindingsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IDataBindingsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.iexpressionsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IExpressionsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.ifilterresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IFilterResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.inamingcontainer",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.INamingContainer",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.inonbindingcontainer",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.INonBindingContainer",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.iparseraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IParserAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.iurlresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IUrlResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:interface:t-system.web.ui.iusercontroldesigneraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IUserControlDesignerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roles:entry:hia-document:dotnet-f-aspnet.starterkit.portal.roles.addrolebtn",
       "kind": "entry",
       "label": "AddRoleBtn",
@@ -51,6 +222,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.roles.createuniquedefaultrolename-system.collections.generic.ienumerable-aspnet.starterkit.portal.iroleitem",
+      "sourcePath": "src/Portal/Admin/Roles.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.roles.createuniquedefaultrolename-system.collections.generic.ienumerable-aspnet.starterkit.portal.iroleitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.roles.createuniquedefault-32678f8c.html"
     },
@@ -63,6 +235,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.roles.deleterole-aspnet.starterkit.portal.iroleitem",
+      "sourcePath": "src/Portal/Admin/Roles.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.roles.deleterole-aspnet.starterkit.portal.iroleitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.roles.deleterole-aspnet.s-7c16c0cd.html"
     },
@@ -166,6 +339,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.roles.roleslist_itemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
+      "sourcePath": "src/Portal/Admin/Roles.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.roles.roleslist_itemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.roles.roleslist_itemcomma-b703dffa.html"
     },
@@ -217,6 +391,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.roles.trygetrolefromdatalist-system.web.ui.webcontrols.datalistcommandeventargs-aspnet.starterkit.portal.iroleitem",
+      "sourcePath": "src/Portal/Admin/Roles.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.roles.trygetrolefromdatalist-system.web.ui.webcontrols.datalistcommandeventargs-aspnet.starterkit.portal.iroleitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.roles.trygetrolefromdatal-8f98b78d.html"
     },
@@ -255,6 +430,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.roles.tryrenamerole-aspnet.starterkit.portal.iroleitem-system.string",
+      "sourcePath": "src/Portal/Admin/Roles.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.roles.tryrenamerole-aspnet.starterkit.portal.iroleitem-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.roles.tryrenamerole-aspne-d70b046a.html"
     },

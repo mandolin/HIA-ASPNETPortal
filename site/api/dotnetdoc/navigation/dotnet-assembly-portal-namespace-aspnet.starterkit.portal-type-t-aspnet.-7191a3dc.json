@@ -30,6 +30,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulesettings.-ctor-aspnet.starterkit.portal.imoduleitem-aspnet.starterkit.portal.imoduledefsdb",
+      "sourcePath": "src/Portal/Components/ModuleSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.modulesettings.-ctor-aspnet.starterkit.portal.imoduleitem-aspnet.starterkit.portal.imoduledefsdb",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.modulesettings.-ctor-aspn-5811a349.html"
     },

@@ -1,0 +1,17 @@
+        protected string BuildTabUrl(int itemIndex, ITabItem tab)
+        {
+            // <lang>
+            //   <zh-CN>Tab 缺失时不生成地址，由调用方保持空白链接而不是猜测目标。</zh-CN>
+            //   <en>When the tab is missing no URL is produced: the caller keeps a blank link instead of guessing a target.</en>
+            // </lang>
+            if (tab == null)
+            {
+                return string.Empty;
+            }
+
+            // <lang>
+            //   <zh-CN>地址形状改由共享构造点提供（P77.3 收敛）：此前页签导航与待办深链各自拼接同一形状，存在随时间漂移的风险。</zh-CN>
+            //   <en>The URL shape now comes from the shared construction point (converged in P77.3): tab navigation and work-item deep links had each assembled the same shape, which risked drifting apart over time.</en>
+            // </lang>
+            return PortalDesktopTabUrl.Build(Global.GetApplicationPath(Request), itemIndex, tab.TabId);
+        }

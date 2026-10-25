@@ -1,0 +1,10 @@
+        private static UserEmployeeBindingEndRequest NormalizeEndRequest(UserEmployeeBindingEndRequest request)
+        {
+            request = request ?? new UserEmployeeBindingEndRequest();
+            return new UserEmployeeBindingEndRequest
+            {
+                BindingId = request.BindingId,
+                Reason = NormalizeReason(request.Reason),
+                ActorName = NormalizeActor(request.ActorName)
+            };
+        }

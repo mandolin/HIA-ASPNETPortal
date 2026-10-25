@@ -4,9 +4,27 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection",
   "children": [
     {
-      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection:base:configurationsection",
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection:base:t-system.configuration.configurationelement",
       "kind": "relation",
-      "label": "Base: !:ConfigurationSection",
+      "label": "Base: System.Configuration.ConfigurationElement",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection:base:t-system.configuration.configurationsection",
+      "kind": "relation",
+      "label": "Base: System.Configuration.ConfigurationSection",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal.sys:type:t-aspnet.starterkit.portal.sys.envsection:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
       "entryCount": 0,
       "views": [
         "dotnet"

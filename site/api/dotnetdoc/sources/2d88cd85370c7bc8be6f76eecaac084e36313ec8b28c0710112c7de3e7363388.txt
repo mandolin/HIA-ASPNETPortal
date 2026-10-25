@@ -1,0 +1,49 @@
+        internal PortalWorkItemAdminRow(PortalWorkItemInfo item)
+        {
+            // <lang>
+            //   <zh-CN>保留模板和受控 URL 映射所需的原始标识、状态与业务类型；BusinessId 仅保留在展示模型中，当前模板不直接输出它。</zh-CN>
+            //   <en>Retain the raw identifier, status, and business kind needed by the template and controlled URL mapping; BusinessId remains in the display model but the current template does not render it directly.</en>
+            // </lang>
+            WorkItemId = item.WorkItemId;
+            WorkItemStatus = item.WorkItemStatus;
+            BusinessKind = item.BusinessKind;
+            BusinessId = item.BusinessId;
+
+            // <lang>
+            //   <zh-CN>业务入口只由固定白名单 helper 生成，不能将业务标识或其他数据值拼接成 URL。</zh-CN>
+            //   <en>Generate the business entry only through the fixed allowlist helper; do not concatenate the business identifier or other data values into a URL.</en>
+            // </lang>
+            BusinessUrl = GetBusinessUrl(item.BusinessKind);
+
+            // <lang>
+            //   <zh-CN>保留标题供标记层的编码绑定使用；此投影不改变标题内容或添加 HTML。</zh-CN>
+            //   <en>Retain the title for encoded markup binding; this projection neither changes its content nor adds HTML.</en>
+            // </lang>
+            Title = item.Title;
+
+            // <lang>
+            //   <zh-CN>摘要使用既有空值占位，避免后台列表以空单元格掩盖缺失的业务摘要。</zh-CN>
+            //   <en>Apply the established empty-value placeholder to the summary so the administration list does not conceal a missing business summary with a blank cell.</en>
+            // </lang>
+            Summary = EmptyToNone(item.Summary);
+
+            // <lang>
+            //   <zh-CN>将用户或角色分派转换为单一展示文本；helper 保持两种分派模式的既有优先级和占位规则。</zh-CN>
+            //   <en>Convert user or role assignment to one display text; the helper preserves the established precedence and placeholder rules for both assignment modes.</en>
+            // </lang>
+            AssignedText = GetAssignedText(item);
+
+            // <lang>
+            //   <zh-CN>创建时间以不随服务器区域变化的 UTC 格式投影，保证后台列表和审计时间语义可比较。</zh-CN>
+            //   <en>Project the creation time in a server-locale-independent UTC format so administration-list and audit-time semantics remain comparable.</en>
+            // </lang>
+            CreatedUtcText = item.CreatedUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture);
+
+            // <lang>
+            //   <zh-CN>完成事实存在时显示 UTC 时间和完成人空值占位；未完成事项保留既有的“(open)”状态文本。</zh-CN>
+            //   <en>When completion fact exists, show its UTC time and a placeholder for a missing completer; incomplete items retain the established “(open)” status text.</en>
+            // </lang>
+            CompletedUtcText = item.CompletedUtc.HasValue
+                ? item.CompletedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture) + " / " + EmptyToNone(item.CompletedBy)
+                : "(open)";
+        }

@@ -1,0 +1,25 @@
+        private bool TryGetSelectedPortalRole(out IRoleItem role)
+        {
+            role = null;
+            if (allRoles.SelectedItem == null)
+            {
+                ShowRegistrationMessage(lang.Admin_ManageUsers_MessageSelectValidRole, true);
+                return false;
+            }
+
+            int roleId;
+            if (!PortalNavigationPolicy.TryReadNonNegativeInt32(allRoles.SelectedItem.Value, out roleId))
+            {
+                PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+                return false;
+            }
+
+            role = FindCurrentPortalRole(roleId);
+            if (role != null)
+            {
+                return true;
+            }
+
+            PortalNavigationPolicy.RedirectToEditAccessDenied(Context);
+            return false;
+        }

@@ -1,0 +1,400 @@
+    public partial class EmployeeProfileCorrectionRequests : PortalPage<EmployeeProfileCorrectionRequests>
+    {
+        private const int PageSize = 50;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>员工资料更正请求数据服务。</zh-CN>
+        ///   <en>Employee-profile correction-request data service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IEmployeeProfileCorrectionRequestDb CorrectionRequestDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>轻量待办数据服务，用于把资料更正处理同步为待办完成事件。</zh-CN>
+        ///   <en>Lightweight work-item data service used to mirror correction reviews into work-item completion events.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IPortalWorkItemDb WorkItemDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化员工资料更正请求后台页。</zh-CN>
+        ///   <en>Initializes the employee-profile correction-request administration page.</en>
+        /// </lang>
+        /// </summary>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!EnsureCanViewRequests())
+            {
+                return;
+            }
+
+            if (!Page.IsPostBack)
+            {
+                BindStatusFilter();
+                BindRequests();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按当前筛选条件重新绑定请求列表。</zh-CN>
+        ///   <en>Rebinds requests using the current filter.</en>
+        /// </lang>
+        /// </summary>
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            if (!EnsureCanViewRequests())
+            {
+                return;
+            }
+
+            BindRequests();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理请求列表中的管理员状态命令。</zh-CN>
+        ///   <en>Handles administrator status commands from the request list.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>命令状态先经过固定白名单和按状态分支的权限检查，再解析正数请求标识并调用数据服务。审核事实成功后才记录运营审计；待办同步是后续旁路，不能被文档化为与审核写入同一事务。</zh-CN>
+        ///   <en>The command status passes a fixed allowlist and status-specific permission check before the positive request identifier is parsed and the data service is called. Operations audit is recorded only after the review fact succeeds; work-item synchronization is a later sidecar and must not be documented as the same transaction as the review write.</en>
+        /// </lang>
+        /// </remarks>
+        protected void RequestsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            string targetStatus = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+            if (!IsSupportedTargetStatus(targetStatus))
+            {
+                // <lang>
+                //   <zh-CN>命令名来自回发控件，不能直接当作任意状态传入数据层；未知值只刷新列表并返回。</zh-CN>
+                //   <en>The command name comes from a postback control and cannot be passed to the data layer as an arbitrary status; unknown values only refresh the list and return.</en>
+                // </lang>
+                MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageUnsupportedStatus;
+                BindRequests();
+                return;
+            }
+
+            if (!EnsureCanApplyRequestStatus(targetStatus))
+            {
+                // <lang>
+                //   <zh-CN>关闭状态使用取消权限，其它处理状态使用审核权限；权限门禁在每次命令回发时重新执行。</zh-CN>
+                //   <en>The closed status uses the cancel permission while other processing statuses use the review permission; the gate is re-evaluated on every command postback.</en>
+                // </lang>
+                return;
+            }
+
+            if (CorrectionRequestDb == null)
+            {
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered);
+                return;
+            }
+
+            long requestId;
+            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out requestId))
+            {
+                MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageInvalidId;
+                return;
+            }
+
+            TextBox noteBox = e.Item.FindControl("ReviewNoteTextBox") as TextBox;
+            string reviewNote = noteBox == null ? string.Empty : noteBox.Text;
+            EmployeeProfileCorrectionRequestResult result = CorrectionRequestDb.ReviewRequest(
+                new EmployeeProfileCorrectionReviewRequest
+                {
+                    RequestId = requestId,
+                    RequestStatus = targetStatus,
+                    ReviewNote = NormalizeInput(reviewNote, 1000),
+                    ReviewedUtc = DateTime.UtcNow,
+                    ReviewedBy = GetCurrentUserName()
+                });
+
+            if (!result.Succeeded)
+            {
+                // <lang>
+                //   <zh-CN>数据服务返回失败事实时不记录成功审计或待办完成，重新绑定列表以呈现服务端状态。</zh-CN>
+                //   <en>When the data service returns a failed fact, do not record success audit or work-item completion; rebind the list to show the server state.</en>
+                // </lang>
+                MessageLabel.Text = result.Message;
+                BindRequests();
+                return;
+            }
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.EmployeeProfileCorrectionReviewed,
+                PortalOperationAuditEvents.EmployeeProfileCorrectionRequestTargetType,
+                result.RequestId.ToString(CultureInfo.InvariantCulture),
+                "Employee profile correction reviewed. RequestStatus=" + targetStatus,
+                Context);
+
+            // <lang>
+            //   <zh-CN>审核写入和运营审计已经完成后才尝试待办旁路；旁路调用是否传播异常遵循其既有实现。</zh-CN>
+            //   <en>Attempt the work-item sidecar only after the review write and operations audit complete; whether sidecar exceptions propagate follows its existing implementation.</en>
+            // </lang>
+            TryCompleteWorkItem(result.RequestId, targetStatus, reviewNote);
+
+            MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageStatusUpdated;
+            BindRequests();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化资料更正请求状态筛选项。</zh-CN>
+        ///   <en>Initializes employee-profile correction request status filter options.</en>
+        /// </lang>
+        /// </summary>
+        private void BindStatusFilter()
+        {
+            StatusFilterList.Items.Clear();
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Submitted, EmployeeProfileCorrectionRequestStatuses.Submitted));
+            StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Reviewed, EmployeeProfileCorrectionRequestStatuses.Reviewed));
+            StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Closed, EmployeeProfileCorrectionRequestStatuses.Closed));
+            StatusFilterList.Items.Add(new ListItem(EmployeeProfileCorrectionRequestStatuses.Rejected, EmployeeProfileCorrectionRequestStatuses.Rejected));
+            StatusFilterList.SelectedValue = EmployeeProfileCorrectionRequestStatuses.Submitted;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前状态筛选下的更正请求并绑定后台列表。</zh-CN>
+        ///   <en>Reads correction requests for the current status filter and binds the administration list.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>读取只使用当前状态筛选和固定 PageSize；schema 或依赖不可用时显示受控提示并清空列表。展示行随后由 ASPX 的编码绑定输出，不在此层承担 HTML 或授权。</zh-CN>
+        ///   <en>The read uses only the current status filter and fixed PageSize; unavailable schema or dependencies produce a controlled message and an empty list. The display rows are later emitted through encoded ASPX bindings, so this method does not own HTML encoding or authorization.</en>
+        /// </lang>
+        /// </remarks>
+        private void BindRequests()
+        {
+            if (CorrectionRequestDb == null)
+            {
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered);
+                return;
+            }
+
+            if (!CorrectionRequestDb.IsSchemaAvailable())
+            {
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageSchemaUnavailable);
+                return;
+            }
+
+            IList<EmployeeProfileCorrectionRequestInfo> requests = CorrectionRequestDb.GetAdminRequests(
+                StatusFilterList.SelectedValue,
+                PageSize);
+            List<EmployeeProfileCorrectionAdminRow> rows = requests
+                .Select(request => new EmployeeProfileCorrectionAdminRow(request)).ToList();
+
+            // <lang>
+            //   <zh-CN>绑定前记录行数：标记层在表尾据此渲染空态行；<c>null</c> 表示抑制（失败路径）。</zh-CN>
+            //   <en>Record the row count before binding: the markup renders the empty-state row in the footer from it, and <c>null</c> suppresses it on failure paths.</en>
+            // </lang>
+            requestsEmptyStateRowCount = rows.Count;
+
+            RequestsRepeater.DataSource = rows;
+            RequestsRepeater.DataBind();
+
+            ResultLabel.Text = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_EmployeeProfileCorrectionRequests_MessagePageInfo,
+                PageSize,
+                requests.Count);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态行数：有数据为正数、零条为 0、失败或不可用为 <c>null</c>（抑制空态，避免把故障说成"暂无"）。</zh-CN>
+        ///   <en>Empty-state row count: positive when rows exist, zero when the result set is empty, and <c>null</c> on failure and unavailable paths, which suppress the empty state so a fault is not presented as "nothing here".</en>
+        /// </lang>
+        /// </summary>
+        protected int? EmptyStateRowCount
+        {
+            get { return requestsEmptyStateRowCount; }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>空态文案：筛选值为空（"全部"）时用"无数据"，否则用"筛选无结果"。本页默认选中"已提交"，因此默认即筛选态，空态文案相应为"筛选无结果"。</zh-CN>
+        ///   <en>Empty-state wording: "no data" when the filter value is empty ("all") and "no matches" otherwise. This page preselects the submitted status, so its default view is already filtered and the wording is correspondingly "no matches".</en>
+        /// </lang>
+        /// </summary>
+        protected string EmptyStateText
+        {
+            get
+            {
+                return string.IsNullOrEmpty(StatusFilterList.SelectedValue)
+                    ? lang.Admin_EmployeeProfileCorrectionRequests_EmptyNoItems
+                    : lang.Admin_EmployeeProfileCorrectionRequests_EmptyNoMatches;
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>资料更正列表的空态行数；由 <c>BindRequests</c> 在绑定前写入，失败路径置为 <c>null</c>。</zh-CN>
+        ///   <en>Empty-state row count of the correction-request list; written by <c>BindRequests</c> before binding and set to <c>null</c> on failure paths.</en>
+        /// </lang>
+        /// </summary>
+        private int? requestsEmptyStateRowCount;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显示请求数据不可用提示，并清空请求列表。</zh-CN>
+        ///   <en>Displays request-data unavailable messages and clears the request list.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>该回退只清理本页展示状态，不伪造数据可用性、不改变权限，也不写入诊断或数据库。</zh-CN>
+        ///   <en>This fallback only clears the page's display state; it does not fake data availability, change permissions, or write diagnostics or database state.</en>
+        /// </lang>
+        /// </remarks>
+        private void ShowUnavailable(string message)
+        {
+            MessageLabel.Text = message ?? string.Empty;
+            ResultLabel.Text = string.Empty;
+            // <lang>
+            //   <zh-CN>显式抑制空态：本页失败时表格仍然可见，若再渲染"暂无请求"会与上方错误提示自相矛盾。</zh-CN>
+            //   <en>Suppress the empty state explicitly: this page keeps the table visible on failure, so rendering "no requests" would contradict the error message shown above.</en>
+            // </lang>
+            requestsEmptyStateRowCount = null;
+            RequestsRepeater.DataSource = Enumerable.Empty<EmployeeProfileCorrectionAdminRow>();
+            RequestsRepeater.DataBind();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>确认当前用户具备查看更正请求的权限。</zh-CN>
+        ///   <en>Ensures that the current user can view correction requests.</en>
+        /// </lang>
+        /// </summary>
+        private bool EnsureCanViewRequests()
+        {
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestReview,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按目标状态确认当前用户具备处理权限。</zh-CN>
+        ///   <en>Ensures that the current user has processing permission for the target status.</en>
+        /// </lang>
+        /// </summary>
+        private bool EnsureCanApplyRequestStatus(string targetStatus)
+        {
+            if (string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal))
+            {
+                return PortalAuthorization.EnsureAnyPermission(
+                    Context,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestCancel,
+                    PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+            }
+
+            return PortalAuthorization.EnsureAnyPermission(
+                Context,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestReview,
+                PortalPermissionKeys.EmployeeProfileCorrectionRequestAdmin);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>判断列表命令传入的目标状态是否在本页允许范围内。</zh-CN>
+        ///   <en>Determines whether the target status from a list command is allowed by this page.</en>
+        /// </lang>
+        /// </summary>
+        private static bool IsSupportedTargetStatus(string targetStatus)
+        {
+            return string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Reviewed, StringComparison.Ordinal) ||
+                   string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Rejected, StringComparison.Ordinal) ||
+                   string.Equals(targetStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>读取当前登录用户名，无法取得时使用系统占位值。</zh-CN>
+        ///   <en>Reads the current signed-in user name, using a system placeholder when unavailable.</en>
+        /// </lang>
+        /// </summary>
+        private string GetCurrentUserName()
+        {
+            return Context != null &&
+                   Context.User != null &&
+                   Context.User.Identity != null &&
+                   Context.User.Identity.IsAuthenticated
+                ? Context.User.Identity.Name
+                : "system";
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>尝试把资料更正处理结果同步到轻量待办。</zh-CN>
+        ///   <en>Attempts to mirror the profile-correction review result into lightweight work items.</en>
+        /// </lang>
+        /// </summary>
+        /// <remarks>
+        /// <lang>
+        ///   <zh-CN>当前实现仅在待办依赖为空或请求标识非正数时短路；对实际 CompleteBusinessWorkItem 调用的异常保留既有传播行为。因此该方法是旁路调用边界，不是失败隔离或跨服务事务保证。</zh-CN>
+        ///   <en>The current implementation short-circuits only when the work-item dependency is absent or the request identifier is non-positive; exceptions from CompleteBusinessWorkItem retain their existing propagation behavior. This method is therefore a sidecar-call boundary, not a failure-isolation or cross-service transaction guarantee.</en>
+        /// </lang>
+        /// </remarks>
+        private void TryCompleteWorkItem(long requestId, string requestStatus, string reviewNote)
+        {
+            // <lang>
+            //   <zh-CN>待办是审核后的旁路增强能力；当前调用不捕获服务异常，是否隔离失败属于后续实现任务，不能把“旁路”误写成“不会传播异常”。
+            //   [已脱敏] `[已脱敏]` 延期项登记（四分法：**可实治范围之外的真实待办**）——判定依据：隔离失败会改变审核主流程的异常传播语义，属行为变更而非注释可闭合项，本周期（注释-only）不做。
+            //   所有者：业务工作流专题。再入条件：① 要求审核主流程不因待办旁路失败而回滚；② 出现待办服务异常导致审核失败的真实案例。再入时须先补异常路径单测锁定现状，再改隔离策略，并同步修订本条注释。</zh-CN>
+            //   <en>Work items are a sidecar enhancement after review; this call currently does not catch service exceptions, so failure isolation is a follow-up implementation task and “sidecar” must not be misread as “exceptions never propagate.”
+            //   [已脱敏] `[已脱敏]` deferred-item registration (four-way split: **a real work item outside the actionable range**) — basis: isolating the failure would change how the review main flow propagates exceptions, which is a behaviour change rather than something a comment can close, so it is out of scope for this comment-only cycle.
+            //   Owner: the business-workflow workstream. Re-entry conditions: 1) the review main flow must not roll back when the work-item sidecar fails; 2) a real case appears where a work-item service exception fails a review. On re-entry, first add exception-path tests pinning current behaviour, then change the isolation strategy and update this comment in the same change.</en>
+            // </lang>
+            if (WorkItemDb == null || requestId <= 0)
+            {
+                return;
+            }
+
+            WorkItemDb.CompleteBusinessWorkItem(
+                new PortalWorkItemCompletionRequest
+                {
+                    BusinessKind = PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest,
+                    BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                    EventType = MapWorkItemEventType(requestStatus),
+                    TargetStatus = MapWorkItemStatus(requestStatus),
+                    ActorName = GetCurrentUserName(),
+                    Comment = NormalizeInput(reviewNote, 1000),
+                    OccurredUtc = DateTime.UtcNow
+                });
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>将资料更正请求状态映射为待办事件类型。</zh-CN>
+        ///   <en>Maps a profile-correction request status to a work-item event type.</en>
+        /// </lang>
+        /// </summary>
+        private static string MapWorkItemEventType(string requestStatus)
+        {
+            if (string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Rejected, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Rejected;
+            }
+
+            if (string.Equals(requestStatus, EmployeeProfileCorrectionRequestStatuses.Closed, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Cancelled;
+            }
+
+            return PortalWorkItemEventTypes.Approved;
+        }
+
+        /// <summary>
+        /// <lang>

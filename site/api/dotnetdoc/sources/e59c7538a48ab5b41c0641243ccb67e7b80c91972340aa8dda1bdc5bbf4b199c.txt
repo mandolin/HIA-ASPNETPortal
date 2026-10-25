@@ -1,0 +1,8 @@
+        private void BindDocument(IDocumentItem item)
+        {
+            NameField.Text = item.FileFriendlyName;
+            PathField.Text = item.FileNameUrl;
+            CategoryField.Text = item.Category;
+            CreatedBy.Text = item.CreatedByUser;
+            CreatedDate.Text = item.CreatedDate.HasValue ? item.CreatedDate.Value.ToShortDateString() : string.Empty;
+        }

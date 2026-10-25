@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global",
   "children": [
     {
-      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:base:httpapplication",
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:HttpApplication",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:base:t-system.web.httpapplication",
+      "kind": "relation",
+      "label": "Base: System.Web.HttpApplication",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -16,6 +25,60 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-aspnet.starterkit.portal.icontaineraccessor",
       "kind": "relation",
       "label": "Interface: ASPNET.StarterKit.Portal.IContainerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.componentmodel.icomponent",
+      "kind": "relation",
+      "label": "Interface: System.ComponentModel.IComponent",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.web.ihttpasynchandler",
+      "kind": "relation",
+      "label": "Interface: System.Web.IHttpAsyncHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.web.ihttphandler",
+      "kind": "relation",
+      "label": "Interface: System.Web.IHttpHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.web.irequestcompletednotifier",
+      "kind": "relation",
+      "label": "Interface: System.Web.IRequestCompletedNotifier",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.global:interface:t-system.web.util.isynccontext",
+      "kind": "relation",
+      "label": "Interface: System.Web.Util.ISyncContext",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -108,6 +171,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.builditemwithcurrentcontext-1-system.web.ui.control",
+      "sourcePath": "src/Portal/Global.asax.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.global.builditemwithcurrentcontext-1-system.web.ui.control",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.builditemwithcurre-ef310c2d.html"
     },
@@ -133,6 +197,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.getapplicationpath-system.web.httprequest",
+      "sourcePath": "src/Portal/Global.asax.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.global.getapplicationpath-system.web.httprequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.getapplicationpath-0d853edf.html"
     },
@@ -145,6 +210,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.isgenericerrorpagerequest-system.web.httprequest",
+      "sourcePath": "src/Portal/Global.asax.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.global.isgenericerrorpagerequest-system.web.httprequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.global.isgenericerrorpage-1fc03503.html"
     },

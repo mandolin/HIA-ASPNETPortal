@@ -4,6 +4,177 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:base:t-aspnet.starterkit.portal.portalmodulecontrol-aspnet.starterkit.portal.enterprisecapabilityworkbench",
+      "kind": "relation",
+      "label": "Base: ASPNET.StarterKit.Portal.PortalModuleControl{ASPNET.StarterKit.Portal.EnterpriseCapabilityWorkbench}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:base:t-system.web.ui.control",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.Control",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:base:t-system.web.ui.templatecontrol",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.TemplateControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:base:t-system.web.ui.usercontrol",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.UserControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-aspnet.starterkit.portal.iportalmodulecontrol",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IPortalModuleControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.componentmodel.icomponent",
+      "kind": "relation",
+      "label": "Interface: System.ComponentModel.IComponent",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.iattributeaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IAttributeAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.icontrolbuilderaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlBuilderAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.icontroldesigneraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlDesignerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.idatabindingsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IDataBindingsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.iexpressionsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IExpressionsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.ifilterresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IFilterResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.inamingcontainer",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.INamingContainer",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.inonbindingcontainer",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.INonBindingContainer",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.iparseraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IParserAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.iurlresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IUrlResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:interface:t-system.web.ui.iusercontroldesigneraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IUserControlDesignerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.enterprisecapabilityworkbench:entry:hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbench.binditemtypelist",
       "kind": "entry",
       "label": "BindItemTypeList",
@@ -64,6 +235,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbench.bindreferencedatalist-system.web.ui.webcontrols.dropdownlist-system.string",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.enterprisecapabilityworkbench.bindreferencedatalist-system.web.ui.webcontrols.dropdownlist-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkb-1ab1e432.html"
     },
@@ -258,6 +430,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbench.recentitemsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.enterprisecapabilityworkbench.recentitemsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkb-b5aac4ef.html"
     },
@@ -270,6 +443,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbench.recordactionaudit-aspnet.starterkit.portal.collaborationitemresult",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.enterprisecapabilityworkbench.recordactionaudit-aspnet.starterkit.portal.collaborationitemresult",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkb-49daa1e2.html"
     },
@@ -282,6 +456,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbench.recordcommentaudit-aspnet.starterkit.portal.collaborationitemcommentresult-system.string-system.string",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.enterprisecapabilityworkbench.recordcommentaudit-aspnet.starterkit.portal.collaborationitemcommentresult-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkb-9f2a148e.html"
     },
@@ -307,6 +482,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbench.selectreferencevalue-system.web.ui.webcontrols.dropdownlist-system.string",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.enterprisecapabilityworkbench.selectreferencevalue-system.web.ui.webcontrols.dropdownlist-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkb-76b41568.html"
     },

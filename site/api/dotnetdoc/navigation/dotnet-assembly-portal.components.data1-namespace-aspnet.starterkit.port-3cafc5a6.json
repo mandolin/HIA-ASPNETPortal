@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersdb:base:iusersdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IUsersDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.usersdb:interface:t-aspnet.starterkit.portal.iusersdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IUsersDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -463,6 +472,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.usersdb.validateregistrationinvite-system.string-aspnet.starterkit.portal.portalregistrationinviterejection",
+      "sourcePath": "src/Portal.Components.Data1/UsersDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.usersdb.validateregistrationinvite-system.string-aspnet.starterkit.portal.portalregistrationinviterejection",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.usersdb.validateregistrat-1d210f63.html"
     },

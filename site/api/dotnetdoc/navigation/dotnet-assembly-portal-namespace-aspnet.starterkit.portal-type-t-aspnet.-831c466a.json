@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsettings.-ctor-system.int32-system.int32-aspnet.starterkit.portal.iglobalsdb-aspnet.starterkit.portal.itabsdb-aspnet.starterkit.portal.imodulesdb-aspnet.starterkit.portal.imoduledefsdb",
+      "sourcePath": "src/Portal/Components/PortalSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsettings.-ctor-system.int32-system.int32-aspnet.starterkit.portal.iglobalsdb-aspnet.starterkit.portal.itabsdb-aspnet.starterkit.portal.imodulesdb-aspnet.starterkit.portal.imoduledefsdb",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsettings.-ctor-syst-798e61fb.html"
     },

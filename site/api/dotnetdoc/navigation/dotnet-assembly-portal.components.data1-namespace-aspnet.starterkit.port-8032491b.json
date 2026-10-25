@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:base:iroleitem",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IRoleItem",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.roleitem:interface:t-aspnet.starterkit.portal.iroleitem",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IRoleItem",
       "entryCount": 0,
       "views": [
         "dotnet"

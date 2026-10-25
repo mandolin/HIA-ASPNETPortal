@@ -1,0 +1,76 @@
+        protected void RequestsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            string targetStatus = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+            if (!IsSupportedTargetStatus(targetStatus))
+            {
+                // <lang>
+                //   <zh-CN>命令名来自回发控件，不能直接当作任意状态传入数据层；未知值只刷新列表并返回。</zh-CN>
+                //   <en>The command name comes from a postback control and cannot be passed to the data layer as an arbitrary status; unknown values only refresh the list and return.</en>
+                // </lang>
+                MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageUnsupportedStatus;
+                BindRequests();
+                return;
+            }
+
+            if (!EnsureCanApplyRequestStatus(targetStatus))
+            {
+                // <lang>
+                //   <zh-CN>关闭状态使用取消权限，其它处理状态使用审核权限；权限门禁在每次命令回发时重新执行。</zh-CN>
+                //   <en>The closed status uses the cancel permission while other processing statuses use the review permission; the gate is re-evaluated on every command postback.</en>
+                // </lang>
+                return;
+            }
+
+            if (CorrectionRequestDb == null)
+            {
+                ShowUnavailable(lang.Admin_EmployeeProfileCorrectionRequests_MessageServiceNotRegistered);
+                return;
+            }
+
+            long requestId;
+            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out requestId))
+            {
+                MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageInvalidId;
+                return;
+            }
+
+            TextBox noteBox = e.Item.FindControl("ReviewNoteTextBox") as TextBox;
+            string reviewNote = noteBox == null ? string.Empty : noteBox.Text;
+            EmployeeProfileCorrectionRequestResult result = CorrectionRequestDb.ReviewRequest(
+                new EmployeeProfileCorrectionReviewRequest
+                {
+                    RequestId = requestId,
+                    RequestStatus = targetStatus,
+                    ReviewNote = NormalizeInput(reviewNote, 1000),
+                    ReviewedUtc = DateTime.UtcNow,
+                    ReviewedBy = GetCurrentUserName()
+                });
+
+            if (!result.Succeeded)
+            {
+                // <lang>
+                //   <zh-CN>数据服务返回失败事实时不记录成功审计或待办完成，重新绑定列表以呈现服务端状态。</zh-CN>
+                //   <en>When the data service returns a failed fact, do not record success audit or work-item completion; rebind the list to show the server state.</en>
+                // </lang>
+                MessageLabel.Text = result.Message;
+                BindRequests();
+                return;
+            }
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.EmployeeProfileCorrectionReviewed,
+                PortalOperationAuditEvents.EmployeeProfileCorrectionRequestTargetType,
+                result.RequestId.ToString(CultureInfo.InvariantCulture),
+                "Employee profile correction reviewed. RequestStatus=" + targetStatus,
+                Context);
+
+            // <lang>
+            //   <zh-CN>审核写入和运营审计已经完成后才尝试待办旁路；旁路调用是否传播异常遵循其既有实现。</zh-CN>
+            //   <en>Attempt the work-item sidecar only after the review write and operations audit complete; whether sidecar exceptions propagate follows its existing implementation.</en>
+            // </lang>
+            TryCompleteWorkItem(result.RequestId, targetStatus, reviewNote);
+
+            MessageLabel.Text = lang.Admin_EmployeeProfileCorrectionRequests_MessageStatusUpdated;
+            BindRequests();
+        }

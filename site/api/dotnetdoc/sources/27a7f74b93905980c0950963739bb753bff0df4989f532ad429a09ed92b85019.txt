@@ -1,0 +1,8 @@
+        public static string Error(string category, string message, Exception exception, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>门面固定 Error 级别；异常本身不直接返回给调用方，而是进入受控构造和净化链。</zh-CN>
+            //   <en>The facade fixes the Error level; the exception is not returned directly to callers and enters the controlled construction and sanitization pipeline instead.</en>
+            // </lang>
+            return Write("Error", category, message, exception, context);
+        }

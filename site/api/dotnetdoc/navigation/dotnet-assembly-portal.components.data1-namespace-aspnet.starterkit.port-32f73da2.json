@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:base:itabsdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:ITabsDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.tabsdb:interface:t-aspnet.starterkit.portal.itabsdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.ITabsDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -21,6 +30,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.tabsdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext-aspnet.starterkit.portal.iportaldb",
+      "sourcePath": "src/Portal.Components.Data1/TabsDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.tabsdb.-ctor-aspnet.starterkit.portal.portalcfgdbcontext-aspnet.starterkit.portal.iportaldb",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.tabsdb.-ctor-aspnet.start-27ebc02f.html"
     },

@@ -1,0 +1,14 @@
+        private static string GetCookiePath(HttpRequest request)
+        {
+            // <lang>
+            //   <zh-CN>提取应用程序路径并在当前 helper 内使用；不接受请求参数作为额外路径片段。</zh-CN>
+            //   <en>Extract the application path for this helper only and accept no request parameter as an additional path fragment.</en>
+            // </lang>
+            string applicationPath = request == null ? null : request.ApplicationPath;
+            if (string.IsNullOrWhiteSpace(applicationPath) || applicationPath == "/")
+            {
+                return "/";
+            }
+
+            return applicationPath.TrimEnd('/');
+        }

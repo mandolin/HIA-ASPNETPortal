@@ -1,0 +1,7 @@
+        private static string RenderDisabled(PortalNavigationEntry entry, string reason)
+        {
+            string text = HttpUtility.HtmlEncode(GetDisplayText(entry));
+
+            return "<span class=\"CommandButton portal-secondary-action portal-disabled-text\" aria-disabled=\"true\" title=\"" +
+                   HttpUtility.HtmlAttributeEncode(text + " (" + reason + ")") + "\">" + text + "</span>";
+        }

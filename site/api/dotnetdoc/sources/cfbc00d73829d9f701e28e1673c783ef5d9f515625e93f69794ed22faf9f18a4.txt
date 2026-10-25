@@ -1,0 +1,29 @@
+        private static string ReadOptionalString(JObject manifest, string propertyName, int maximumLength)
+        {
+            // <lang>
+            //   <zh-CN>按属性名读取原始 JSON token；缺失或 null 明确回退为空字符串，不伪造默认业务值。</zh-CN>
+            //   <en>Read the raw JSON token by property name; missing or null values explicitly fall back to an empty string without fabricating a business default.</en>
+            // </lang>
+            JToken token = manifest[propertyName];
+            if (token == null || token.Type == JTokenType.Null)
+            {
+                return string.Empty;
+            }
+
+            if (token.Type != JTokenType.String)
+            {
+                throw new InvalidOperationException("Manifest string value is invalid.");
+            }
+
+            // <lang>
+            //   <zh-CN>类型确认后去除首尾空白，再按 manifest 字段上限拒绝过长值。</zh-CN>
+            //   <en>After confirming the type, trim surrounding whitespace and reject values beyond the manifest field limit.</en>
+            // </lang>
+            string value = token.Value<string>().Trim();
+            if (value.Length > maximumLength)
+            {
+                throw new InvalidOperationException("Manifest string value is too long.");
+            }
+
+            return value;
+        }

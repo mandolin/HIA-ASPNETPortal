@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.useremployeebindingdirectoryrow.-ctor-aspnet.starterkit.portal.iuseremployeebindinginfo",
+      "sourcePath": "src/Portal/Admin/EmployeeDirectory.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.useremployeebindingdirectoryrow.-ctor-aspnet.starterkit.portal.iuseremployeebindinginfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.useremployeebindingdirect-595dab72.html"
     },

@@ -1,0 +1,120 @@
+        private static void AddThemeChecks(IList<PortalHealthCheckResult> checks, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>解析当前主题的有效设置值及来源，供后续比较配置意图与实际主题选择。</zh-CN>
+            //   <en>Resolve the effective theme setting and source so later checks can compare configuration intent with actual theme selection.</en>
+            // </lang>
+            PortalRuntimeSettingValue configuredTheme = PortalRuntimeSettings.GetEffectiveValue(
+                PortalSettingsRegistry.ThemeName,
+                context);
+
+            // <lang>
+            //   <zh-CN>解析主题上下文并保存最终主题名；该值来自受信主题解析器，不直接接受请求主题文本。</zh-CN>
+            //   <en>Resolve the theme context and keep the final theme name from the trusted resolver rather than accepting request theme text directly.</en>
+            // </lang>
+            PortalThemeContext resolvedThemeContext = PortalThemeResolver.ResolveThemeContext(context);
+
+            // <lang>
+            //   <zh-CN>保存解析主题名用于目录、manifest 和配置来源三路一致性检查。</zh-CN>
+            //   <en>Keep the resolved theme name for consistent directory, manifest, and configuration-source checks.</en>
+            // </lang>
+            string resolvedTheme = resolvedThemeContext.ThemeName;
+
+            // <lang>
+            //   <zh-CN>把解析主题映射为应用主题目录路径；路径仅用于存在性检查，不作为用户可浏览入口。</zh-CN>
+            //   <en>Map the resolved theme to an application-theme directory path for existence checks only, not as a user-browsable entry point.</en>
+            // </lang>
+            string resolvedPath = HostingEnvironment.MapPath("~/App_Themes/" + resolvedTheme);
+
+            // <lang>
+            //   <zh-CN>构造固定默认主题目录路径，作为主题回退的独立部署基线。</zh-CN>
+            //   <en>Compose the fixed default-theme directory path as an independent deployment baseline for fallback.</en>
+            // </lang>
+            string defaultPath = HostingEnvironment.MapPath("~/App_Themes/" + PortalThemeResolver.DefaultThemeName);
+
+            // <lang>
+            //   <zh-CN>仅把解析主题和默认主题目录是否存在作为布尔健康事实，不读取目录内容。</zh-CN>
+            //   <en>Record only whether the resolved and default theme directories exist as Boolean health facts; do not read directory contents here.</en>
+            // </lang>
+            bool resolvedExists = !string.IsNullOrEmpty(resolvedPath) && Directory.Exists(resolvedPath);
+
+            // <lang>
+            //   <zh-CN>单独保存默认主题目录存在事实，与解析主题目录结果保持可审计的独立字段。</zh-CN>
+            //   <en>Keep the default-theme directory fact separately so it remains auditable alongside the resolved-theme result.</en>
+            // </lang>
+            bool defaultExists = !string.IsNullOrEmpty(defaultPath) && Directory.Exists(defaultPath);
+
+            // <lang>
+            //   <zh-CN>承接受信主题包检查结果及受控失败原因；包对象仅在当前健康检查中短暂使用。</zh-CN>
+            //   <en>Receive trusted-theme-package results and controlled failure reasons; package objects live only for this health check.</en>
+            // </lang>
+            PortalThemePackage resolvedPackage;
+
+            // <lang>
+            //   <zh-CN>保存解析主题受信包失败原因的受控文本，仅用于健康摘要，不作为路径或控制输入。</zh-CN>
+            //   <en>Keep the controlled failure text for the resolved trusted package for health summary only, never as a path or control input.</en>
+            // </lang>
+            string resolvedPackageReason;
+
+            // <lang>
+            //   <zh-CN>验证解析主题的 manifest 和资源边界，拒绝以目录存在替代受信包校验。</zh-CN>
+            //   <en>Validate the resolved theme manifest and resource boundary rather than treating directory existence as package trust.</en>
+            // </lang>
+            bool resolvedPackageIsValid = PortalThemeCatalog.TryGetTrustedPackage(
+                resolvedTheme,
+                out resolvedPackage,
+                out resolvedPackageReason);
+            // <lang>
+            //   <zh-CN>承接默认主题受信包对象；该对象只在当前健康检查中短暂使用。</zh-CN>
+            //   <en>Hold the default trusted-package object only for the current health check.</en>
+            // </lang>
+            PortalThemePackage defaultPackage;
+
+            // <lang>
+            //   <zh-CN>保存默认主题受信包失败原因的受控文本，仅用于健康摘要。</zh-CN>
+            //   <en>Keep the controlled failure text for the default trusted package for health summary only.</en>
+            // </lang>
+            string defaultPackageReason;
+
+            // <lang>
+            //   <zh-CN>验证固定默认主题包，使回退基线本身也必须通过相同受信校验；布尔结果只表达 manifest/资源边界是否有效。</zh-CN>
+            //   <en>Validate the fixed default package with the same trust gate so the fallback baseline is trusted; the Boolean result expresses only manifest/resource-boundary validity.</en>
+            // </lang>
+            bool defaultPackageIsValid = PortalThemeCatalog.TryGetTrustedPackage(
+                PortalThemeResolver.DefaultThemeName,
+                out defaultPackage,
+                out defaultPackageReason);
+            // <lang>
+            //   <zh-CN>只有两套目录和两份受信 manifest 都有效时才判定健康；任一部署缺口都 fail-closed 为 Error。</zh-CN>
+            //   <en>Mark the check healthy only when both directories and both trusted manifests are valid; any deployment gap fails closed to Error.</en>
+            // </lang>
+            PortalHealthStatus status = resolvedExists && defaultExists && resolvedPackageIsValid && defaultPackageIsValid
+                ? PortalHealthStatus.Healthy
+                : PortalHealthStatus.Error;
+
+            // <lang>
+            //   <zh-CN>目录和 manifest 均健康但有效配置与解析主题不一致，或解析器发生回退时标记 Warning，不伪装为错误部署。</zh-CN>
+            //   <en>When directories and manifests are healthy but effective configuration disagrees with the resolved theme or the resolver fell back, mark Warning rather than mislabeling deployment as Error.</en>
+            // </lang>
+            if (status == PortalHealthStatus.Healthy &&
+                (!string.Equals(configuredTheme.Value, resolvedTheme, StringComparison.Ordinal) ||
+                 resolvedThemeContext.Source == PortalThemeSource.Fallback))
+            {
+                status = PortalHealthStatus.Warning;
+            }
+
+            checks.Add(new PortalHealthCheckResult(
+                "Theme",
+                "主题部署包",
+                status,
+                status == PortalHealthStatus.Healthy ? "主题部署包检查通过。" : "主题目录或 manifest 存在异常。",
+                "Configured=" + configuredTheme.Value +
+                "; Source=" + configuredTheme.Source +
+                "; Resolved=" + resolvedTheme +
+                "; ResolvedPath=" + resolvedPath +
+                "; DefaultPath=" + defaultPath +
+                "; ResolvedManifest=" + resolvedPackageIsValid +
+                "; DefaultManifest=" + defaultPackageIsValid +
+                "; ResolvedManifestReason=" + resolvedPackageReason +
+                "; DefaultManifestReason=" + defaultPackageReason));
+        }

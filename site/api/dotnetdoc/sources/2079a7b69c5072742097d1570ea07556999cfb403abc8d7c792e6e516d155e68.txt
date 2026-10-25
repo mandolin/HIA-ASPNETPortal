@@ -1,0 +1,15 @@
+        private static bool IsSchemaVersionSupported(JObject manifest)
+        {
+            // <lang>
+            //   <zh-CN>版本字段必须存在且为 JSON 整数；当前支持版本 1（无 capability 段）与版本 2（可选 capability 段），未来版本仍按严格拒绝处理。</zh-CN>
+            //   <en>The version field must exist and be a JSON integer; versions 1 (no capability section) and 2 (optional capability section) are supported, while future versions are still rejected strictly.</en>
+            // </lang>
+            JToken token = manifest["schemaVersion"];
+            if (token == null || token.Type != JTokenType.Integer)
+            {
+                return false;
+            }
+
+            int version = token.Value<int>();
+            return version == 1 || version == ManifestSchemaVersion;
+        }

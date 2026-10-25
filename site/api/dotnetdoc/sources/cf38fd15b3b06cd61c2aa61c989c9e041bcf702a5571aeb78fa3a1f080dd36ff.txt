@@ -1,0 +1,399 @@
+    public partial class CollaborationItems : PortalPage<CollaborationItems>
+    {
+        private const int PageSize = 50;
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>企业协同事项数据服务。</zh-CN>
+        ///   <en>Enterprise collaboration-item data service.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public ICollaborationItemDb CollaborationItemDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>受治理参考数据目录读取服务，用于后台创建表单的类型和优先级选择。</zh-CN>
+        ///   <en>Governed reference-data catalog reader for type and priority selectors on the administration create form.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IReferenceDataDb ReferenceDataDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>轻量待办数据服务，用于把事项提交和处理结果投影到后台待办。</zh-CN>
+        ///   <en>Lightweight work-item data service used to project item submissions and handling results into the administration work queue.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IPortalWorkItemDb WorkItemDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>用户数据访问服务，用于解析当前管理员用户标识。</zh-CN>
+        ///   <en>User data service used to resolve the current administrator user identifier.</en>
+        /// </lang>
+        /// </summary>
+        [Dependency]
+        public IUsersDb UsersDb { private get; set; }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>初始化后台页并绑定筛选条件和协同事项列表。</zh-CN>
+        ///   <en>Initializes the administration page and binds filters plus the collaboration-item list.</en>
+        /// </lang>
+        /// </summary>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>先执行查看权限门禁，再仅在首次请求绑定筛选项和列表，避免回发覆盖管理员输入。</zh-CN>
+            //   <en>Apply the view gate first, then bind filters and the list only on the first request so postbacks do not overwrite administrator input.</en>
+            // </lang>
+            if (!EnsureCanViewItems())
+            {
+                return;
+            }
+
+            if (!IsPostBack)
+            {
+                BindReferenceDataLists();
+                BindStatusFilter();
+                BindItems();
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>创建并提交一条低敏企业协同事项。</zh-CN>
+        ///   <en>Creates and submits one low-sensitivity enterprise collaboration item.</en>
+        /// </lang>
+        /// </summary>
+        protected void CreateButton_Click(object sender, EventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>创建流程按创建权限、期限格式和数据服务顺序推进；门禁失败保持页面提示，不进入持久化。</zh-CN>
+            //   <en>The create flow proceeds through create permission, due-date format, and data-service gates; failures stay as page messages and never reach persistence.</en>
+            // </lang>
+            if (!EnsureCanCreateItems())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>后台表单期限统一解释为 UTC；空值表示未设置，非法格式不会写入事项。</zh-CN>
+            //   <en>Interpret administration-form due dates as UTC; blank means unset and invalid formats never write an item.</en>
+            // </lang>
+            DateTime? dueUtc;
+            if (!TryParseDueUtc(DueUtcTextBox.Text, out dueUtc))
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageDueUtcFormat;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>父事项编号为空表示顶层事项；非空必须是正整数，具体存在性、终态与层级深度校验由数据层承担。</zh-CN>
+            //   <en>A blank parent code marks a top-level item; a non-blank value must be a positive integer, while existence, terminal state, and depth checks belong to the data layer.</en>
+            // </lang>
+            long? parentItemId;
+            if (!TryParseParentItemId(ParentItemTextBox.Text, out parentItemId))
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParentItemInvalid;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>创建请求保留后台指定的处理角色和当前管理员身份，服务层负责事实与状态写入。</zh-CN>
+            //   <en>The create request preserves the administration-selected handling role and current administrator identity while the service writes the fact and state.</en>
+            // </lang>
+            CollaborationItemResult result = CollaborationItemDb.CreateSubmittedItem(
+                new CollaborationItemCreateRequest
+                {
+                    ItemTypeKey = ItemTypeList.SelectedValue,
+                    Title = TitleTextBox.Text,
+                    Summary = SummaryTextBox.Text,
+                    Description = DescriptionTextBox.Text,
+                    InitiatorUserId = GetCurrentUserId(),
+                    OwnerRoleKey = OwnerRoleKeyTextBox.Text,
+                    PriorityKey = PriorityList.SelectedValue,
+                    DueUtc = dueUtc,
+                    SubmittedUtc = DateTime.UtcNow,
+                    SubmittedBy = GetCurrentUserName(),
+                    ParentItemId = parentItemId
+                });
+
+            if (!result.Succeeded)
+            {
+                MessageLabel.Text = result.Message;
+                BindItems();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>事项创建成功后记录审计，再补建待办投影；待办失败不回滚事项事实。</zh-CN>
+            //   <en>Record audit after item creation succeeds, then ensure the work-item projection; projection failure does not roll back the item fact.</en>
+            // </lang>
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.CollaborationItemSubmitted,
+                PortalOperationAuditEvents.CollaborationItemTargetType,
+                result.ItemId.ToString(CultureInfo.InvariantCulture),
+                "Collaboration item submitted. ItemCode=" + result.ItemCode,
+                Context);
+
+            TryEnsureWorkItem(result.ItemId, result.ItemCode, TitleTextBox.Text, SummaryTextBox.Text, OwnerRoleKeyTextBox.Text, dueUtc);
+            ClearCreateForm();
+            MessageLabel.Text = lang.Admin_CollaborationItems_MessageSubmitted;
+            BindItems();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按当前筛选条件重新绑定协同事项列表。</zh-CN>
+        ///   <en>Rebinds collaboration items using the current filter.</en>
+        /// </lang>
+        /// </summary>
+        protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            if (!EnsureCanViewItems())
+            {
+                return;
+            }
+
+            BindItems();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>处理列表中的协同事项动作。</zh-CN>
+        ///   <en>Handles collaboration-item actions from the list.</en>
+        /// </lang>
+        /// </summary>
+        protected void ItemsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>列表动作先校验动作参数，再区分评论与状态动作，最后由处理权限门禁保护领域动作。</zh-CN>
+            //   <en>Validate the list action first, separate comments from state actions, and protect domain actions with the handling-permission gate.</en>
+            // </lang>
+            string actionKey = Convert.ToString(e.CommandName, CultureInfo.InvariantCulture);
+
+            // <lang>
+            //   <zh-CN>参与人命令先于状态动作处理：添加以事项标识为参数，移除以"事项标识|用户标识"为参数，授权由数据层复核。</zh-CN>
+            //   <en>Participant commands are handled before state actions: Add takes the item identifier, Remove takes "item id|user id", and the data layer rechecks authorization.</en>
+            // </lang>
+            if (string.Equals(actionKey, "AddParticipant", StringComparison.Ordinal))
+            {
+                long addItemId;
+                if (long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out addItemId) && addItemId > 0)
+                {
+                    TryAddParticipant(addItemId, e.Item);
+                }
+                else
+                {
+                    MessageLabel.Text = lang.Admin_CollaborationItems_MessageInvalidId;
+                }
+
+                BindItems();
+                return;
+            }
+
+            if (string.Equals(actionKey, "RemoveParticipant", StringComparison.Ordinal))
+            {
+                long removeItemId;
+                if (long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out removeItemId) && removeItemId > 0)
+                {
+                    TryRemoveParticipant(removeItemId, e.Item);
+                }
+                else
+                {
+                    MessageLabel.Text = lang.Admin_CollaborationItems_MessageInvalidId;
+                }
+
+                BindItems();
+                return;
+            }
+
+            long itemId;
+            if (!long.TryParse(Convert.ToString(e.CommandArgument, CultureInfo.InvariantCulture), out itemId) || itemId <= 0)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageInvalidId;
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>评论文本来自当前列表行控件；后续服务和审计只使用归一化长度边界。</zh-CN>
+            //   <en>Read the comment from the current list-row control; the service and audit later use the normalized length boundary.</en>
+            // </lang>
+            TextBox commentBox = e.Item.FindControl("ActionCommentTextBox") as TextBox;
+            string actionComment = commentBox == null ? string.Empty : commentBox.Text;
+            if (IsCommentCommand(actionKey))
+            {
+                // <lang>
+                //   <zh-CN>评论动作不改变事项状态，但会写入对应可见范围并刷新列表。</zh-CN>
+                //   <en>Comment actions do not change item state; they write the corresponding visibility scope and refresh the list.</en>
+                // </lang>
+                TryAddComment(itemId, actionKey, actionComment);
+                BindItems();
+                return;
+            }
+
+            if (!IsSupportedAction(actionKey))
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageUnsupportedAction;
+                BindItems();
+                return;
+            }
+
+            if (!EnsureCanHandleItems())
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>状态动作由协同事项服务执行，动作键和评论长度都沿用固定契约。</zh-CN>
+            //   <en>State actions are executed by the collaboration-item service using the fixed action-key and comment-length contracts.</en>
+            // </lang>
+            CollaborationItemResult result = CollaborationItemDb.ApplyAction(
+                new CollaborationItemActionRequest
+                {
+                    ItemId = itemId,
+                    ActionKey = actionKey,
+                    Comment = NormalizeInput(actionComment, 1000),
+                    ActorUserId = GetCurrentUserId(),
+                    ActorName = GetCurrentUserName(),
+                    OccurredUtc = DateTime.UtcNow
+                });
+
+            if (!result.Succeeded)
+            {
+                MessageLabel.Text = result.Message;
+                BindItems();
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>动作事实成功后记录审计，并按重提或其它动作分别维护待办投影。</zh-CN>
+            //   <en>After the action fact succeeds, record audit and maintain the work-item projection differently for resubmission versus other actions.</en>
+            // </lang>
+            TryRecordOperationAudit(result);
+            if (string.Equals(actionKey, PortalCollaborationItemActions.Resubmit, StringComparison.Ordinal))
+            {
+                TryEnsureResubmittedWorkItem(result.ItemId);
+            }
+            else
+            {
+                TryCompleteWorkItem(result.ItemId, actionKey, actionComment);
+            }
+
+            MessageLabel.Text = lang.Admin_CollaborationItems_MessageStateUpdated;
+            BindItems();
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定后台允许筛选的协同事项状态，并默认定位到已提交状态。</zh-CN>
+        ///   <en>Binds administration-allowed collaboration-item statuses and defaults to submitted items.</en>
+        /// </lang>
+        /// </summary>
+        private void BindStatusFilter()
+        {
+            // <lang>
+            //   <zh-CN>状态值使用固定契约键，显示文本保持后台既有英文兼容值。</zh-CN>
+            //   <en>Use fixed contract keys for status values while preserving the administration page's existing display values.</en>
+            // </lang>
+            StatusFilterList.Items.Clear();
+            StatusFilterList.Items.Add(new ListItem(lang.Admin_Common_AllOption, string.Empty));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Submitted, PortalCollaborationItemStatuses.Submitted));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.InProgress, PortalCollaborationItemStatuses.InProgress));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Returned, PortalCollaborationItemStatuses.Returned));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Completed, PortalCollaborationItemStatuses.Completed));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Rejected, PortalCollaborationItemStatuses.Rejected));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Cancelled, PortalCollaborationItemStatuses.Cancelled));
+            StatusFilterList.Items.Add(new ListItem(PortalCollaborationItemStatuses.Closed, PortalCollaborationItemStatuses.Closed));
+            StatusFilterList.SelectedValue = PortalCollaborationItemStatuses.Submitted;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>绑定创建表单的事项类型和优先级参考数据。</zh-CN>
+        ///   <en>Binds item-type and priority reference data for the create form.</en>
+        /// </lang>
+        /// </summary>
+        private void BindReferenceDataLists()
+        {
+            BindReferenceDataList(ItemTypeList, PortalReferenceDataSets.CollaborationItemType);
+            BindReferenceDataList(PriorityList, PortalReferenceDataSets.CollaborationPriority);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>优先读取活动参考数据，服务不可用时使用固定治理回退项。</zh-CN>
+        ///   <en>Prefers active reference data and uses governed fixed fallback entries when the service is unavailable.</en>
+        /// </lang>
+        /// </summary>
+        private void BindReferenceDataList(DropDownList list, string referenceSetKey)
+        {
+            // <lang>
+            //   <zh-CN>绑定前清空旧项，避免后台回发或服务切换造成重复选项。</zh-CN>
+            //   <en>Clear old entries before binding so postbacks or service switches cannot duplicate options.</en>
+            // </lang>
+            list.Items.Clear();
+            IList<ReferenceDataItem> items;
+            if (ReferenceDataDb == null || !ReferenceDataDb.TryGetActiveItems(referenceSetKey, out items))
+            {
+                items = PortalReferenceDataSets.GetFallbackItems(referenceSetKey);
+            }
+
+            // <lang>
+            //   <zh-CN>下拉项保存稳定值键，显示名称仅来自参考数据目录。</zh-CN>
+            //   <en>Store stable value keys in the drop-down while taking display names only from the reference catalog.</en>
+            // </lang>
+            foreach (ReferenceDataItem item in items)
+            {
+                list.Items.Add(new ListItem(item.DisplayName, item.ValueKey));
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按筛选状态读取后台事项和管理员可见事件并绑定展示行。</zh-CN>
+        ///   <en>Loads administration items and administrator-visible events by status and binds display rows.</en>
+        /// </lang>
+        /// </summary>
+        private void BindItems()
+        {
+            // <lang>
+            //   <zh-CN>数据服务缺失或 Schema 不可用时使用统一空列表回退，不继续读取业务数据。</zh-CN>
+            //   <en>Use the common empty-list fallback when the data service or schema is unavailable and do not continue reading business data.</en>
+            // </lang>
+            if (CollaborationItemDb == null)
+            {
+                ShowUnavailable(lang.Admin_CollaborationItems_MessageServiceNotRegistered);
+                return;
+            }
+
+            if (!CollaborationItemDb.IsSchemaAvailable())
+            {
+                ShowUnavailable(lang.Admin_CollaborationItems_MessageSchemaUnavailable);
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>后台查询固定分页上限；事件可见性由服务按当前管理员身份裁剪。</zh-CN>
+            //   <en>Use the fixed administration page-size limit; the service scopes visible events to the current administrator.</en>
+            // </lang>
+            IList<CollaborationItemInfo> items = CollaborationItemDb.GetAdminItems(
+                StatusFilterList.SelectedValue,
+                PageSize);
+            int currentUserId = GetCurrentUserId();
+            // <lang>
+            //   <zh-CN>P74.5 起改为批量读取：一次性取回本页所有事项的可见事件与参与人集合，再在内存中按事项装配（逐行版本约 4N 次往返，批量版为常数次）。
+            //   可见性语义不变：服务层仍对每个事项执行 CanParticipate 与 CanView；参与人只影响展示与可见性，不参与授权判定。</zh-CN>
+            //   <en>Since P74.5 this reads in batch: it fetches every visible event and participant set for the page's items once and assembles them in memory (the per-row version took roughly 4N round trips; the batch version takes a constant number).
+            //   Visibility semantics are unchanged: the service still applies CanParticipate and CanView per item; participants affect display and visibility only, never authorization.</en>
+            // </lang>
+            List<long> adminItemIds = items.Select(item => item.ItemId).ToList();
+            IDictionary<long, IList<CollaborationItemEventInfo>> adminVisibleEventsByItem =
+                CollaborationItemDb.GetVisibleEventsForItems(adminItemIds, currentUserId);
+            IDictionary<long, IList<CollaborationItemParticipantInfo>> adminParticipantsByItem =
+                CollaborationItemDb.GetParticipantsForItems(adminItemIds);

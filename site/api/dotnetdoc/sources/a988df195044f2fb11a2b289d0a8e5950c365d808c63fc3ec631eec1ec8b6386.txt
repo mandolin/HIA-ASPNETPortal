@@ -1,0 +1,20 @@
+        private static string GetActorUserName(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>优先使用显式上下文，缺省时才读取当前上下文；该 helper 不创建身份、不检查权限，也不因后台任务缺少请求而抛出。</zh-CN>
+            //   <en>Prefer explicit context and read current context only when absent; this helper creates no identity, checks no permission, and does not throw when a background task lacks a request.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;
+
+            // <lang>
+            //   <zh-CN>只有已认证身份可进入审计字段；所有缺失或未认证组合归一为固定匿名值，避免写入 null 或猜测用户来源。</zh-CN>
+            //   <en>Only an authenticated identity enters the audit field; every missing or unauthenticated combination normalizes to the fixed anonymous value rather than writing null or guessing a user source.</en>
+            // </lang>
+            if (current == null || current.User == null || current.User.Identity == null ||
+                !current.User.Identity.IsAuthenticated)
+            {
+                return "(anonymous)";
+            }
+
+            return current.User.Identity.Name;
+        }

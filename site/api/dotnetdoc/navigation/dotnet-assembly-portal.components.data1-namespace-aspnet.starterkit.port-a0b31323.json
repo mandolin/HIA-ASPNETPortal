@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.eventsdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.eventsdb:base:ieventsdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.eventsdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IEventsDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.eventsdb:interface:t-aspnet.starterkit.portal.ieventsdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IEventsDb",
       "entryCount": 0,
       "views": [
         "dotnet"

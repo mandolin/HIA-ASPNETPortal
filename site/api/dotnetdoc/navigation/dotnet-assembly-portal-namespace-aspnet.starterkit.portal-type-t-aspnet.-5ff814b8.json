@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.modulecatalogrow.-ctor-aspnet.starterkit.portal.portalmodulepackage-system.boolean-system.boolean-system.string-aspnet.starterkit.portal.portalmodulepackagestatereadresult-aspnet.starterkit.portal.imoduledefinitionitem-system.int32",
+      "sourcePath": "src/Portal/Admin/ModuleCatalog.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.modulecatalogrow.-ctor-aspnet.starterkit.portal.portalmodulepackage-system.boolean-system.boolean-system.string-aspnet.starterkit.portal.portalmodulepackagestatereadresult-aspnet.starterkit.portal.imoduledefinitionitem-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.modulecatalogrow.-ctor-as-49df060b.html"
     },

@@ -1,0 +1,61 @@
+        public IEnumerable<IUserEmployeeBindingInfo> GetUserEmployeeBindings(EmployeeDirectoryQuery query)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return Enumerable.Empty<IUserEmployeeBindingInfo>();
+            }
+
+            EmployeeDirectoryQuery normalizedQuery = NormalizeQuery(query);
+            string keyword = Normalize(normalizedQuery.Keyword);
+            string status = Normalize(normalizedQuery.Status);
+            if (!string.IsNullOrEmpty(status) && !PortalUserEmployeeBindingStatuses.IsKnown(status))
+            {
+                return Enumerable.Empty<IUserEmployeeBindingInfo>();
+            }
+
+            string keywordPattern = ToLikePattern(keyword);
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>绑定列表联接用户表和员工表，作为后台核对视图；写入、结束绑定和审计由后台写入契约负责。</zh-CN>
+                //   <en>The binding list joins user and employee tables as an administration review view; writes, binding termination, and audit are handled by the administration write contract.</en>
+                // </lang>
+                var rows = _context.Database.SqlQuery<UserEmployeeBindingProjection>(
+                    @"
+SELECT
+    [Binding].[BindingId],
+    [Binding].[UserId],
+    [User].[Name] AS [UserName],
+    [Binding].[EmployeeId],
+    [Employee].[EmployeeCode],
+    [Employee].[DisplayName] AS [EmployeeDisplayName],
+    [Binding].[BindingStatus],
+    [Binding].[BoundUtc],
+    [Binding].[BoundBy],
+    [Binding].[EndedUtc],
+    [Binding].[EndedBy],
+    [Binding].[Reason]
+FROM [dbo].[PortalBiz_UserEmployeeBindings] AS [Binding]
+INNER JOIN [dbo].[PortalBiz_Employees] AS [Employee]
+    ON [Employee].[EmployeeId] = [Binding].[EmployeeId]
+INNER JOIN [dbo].[Portal_Users] AS [User]
+    ON [User].[UserID] = [Binding].[UserId]
+WHERE (@p0 = N'' OR [User].[Name] LIKE @p1 OR [Employee].[EmployeeCode] LIKE @p1
+    OR [Employee].[DisplayName] LIKE @p1)
+    AND (@p2 = N'' OR [Binding].[BindingStatus] = @p2)
+ORDER BY [Binding].[BoundUtc] DESC, [Binding].[BindingId] DESC
+OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
+                    keyword,
+                    keywordPattern,
+                    status,
+                    normalizedQuery.Skip,
+                    normalizedQuery.Take).ToList();
+
+                return rows.Select(CreateBindingInfo).ToList();
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<IUserEmployeeBindingInfo>();
+            }
+        }

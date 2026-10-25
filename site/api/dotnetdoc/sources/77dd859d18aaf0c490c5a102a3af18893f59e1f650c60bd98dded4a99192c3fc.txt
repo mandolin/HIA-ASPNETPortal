@@ -1,0 +1,4 @@
+        public static string GetSafeReturnUrl(HttpRequest request)
+        {
+            return PortalNavigationPolicy.GetSafeReturnUrl(request);
+        }

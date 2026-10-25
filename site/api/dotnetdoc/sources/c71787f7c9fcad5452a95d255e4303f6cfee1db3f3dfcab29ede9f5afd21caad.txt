@@ -1,0 +1,52 @@
+        public static PortalModuleProfileSnapshot Resolve(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>收集受控的配置问题摘要而非抛出原始配置文本；快照调用方可诊断部署错误，同时仍取得安全的允许包集合。</zh-CN>
+            //   <en>Collect controlled summaries of configuration issues instead of throwing raw configuration text; snapshot consumers can diagnose deployment faults while still receiving a safe allowed-package set.</en>
+            // </lang>
+            var invalidEntries = new List<string>();
+
+            // <lang>
+            //   <zh-CN>只读取固定活动键；HTTP 上下文和任何数据库覆盖均不参与决定本部署的模块能力范围。</zh-CN>
+            //   <en>Read only the fixed active key; neither HTTP context nor any database override participates in deciding this deployment's module-capability scope.</en>
+            // </lang>
+            string configuredActiveProfile = ConfigurationManager.AppSettings[ActiveProfileKey];
+
+            // <lang>
+            //   <zh-CN>活动值必须成为稳定名称，否则收敛到 CoreOnly；回退不保留非法文本作为 Profile 或配置键的一部分。</zh-CN>
+            //   <en>The active value must become a stable name or converge to CoreOnly; fallback does not retain invalid text as part of a Profile or configuration key.</en>
+            // </lang>
+            string activeProfile = NormalizeStableName(configuredActiveProfile, CoreOnlyProfile, invalidEntries, "active profile");
+
+            // <lang>
+            //   <zh-CN>允许集合使用 ordinal-ignore-case 语义，确保 Profile、include 和显式包重复出现时不会因大小写差异扩大或重复快照。</zh-CN>
+            //   <en>The allowed set uses ordinal-ignore-case semantics so duplicate Profile, include, and explicit packages do not enlarge or duplicate the snapshot through casing differences.</en>
+            // </lang>
+            var allowedPackages = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            // <lang>
+            //   <zh-CN>递归展开活动 Profile 与其 include；独立已访问和展开中集合分别处理重复引用与真正循环。</zh-CN>
+            //   <en>Recursively expand the active Profile and its includes; separate visited and expanding sets distinguish repeated references from actual cycles.</en>
+            // </lang>
+            AddProfileAndIncludes(
+                activeProfile,
+                allowedPackages,
+                invalidEntries,
+                new HashSet<string>(StringComparer.OrdinalIgnoreCase),
+                new HashSet<string>(StringComparer.OrdinalIgnoreCase));
+
+            // <lang>
+            //   <zh-CN>仅追加受控部署键中的显式包；这些包同样经稳定名称验证，且不跳过模块状态或页面授权。</zh-CN>
+            //   <en>Append only explicit packages from the controlled deployment key; they pass the same stable-name validation and do not bypass module state or page authorization.</en>
+            // </lang>
+            AddPackageList(ConfigurationManager.AppSettings[EnabledPackagesKey], allowedPackages, invalidEntries, EnabledPackagesKey);
+
+            // <lang>
+            //   <zh-CN>按稳定大小写不敏感顺序发布不可变快照，使同一配置产生可预测的展示与审计顺序。</zh-CN>
+            //   <en>Publish an immutable snapshot in stable case-insensitive order so the same configuration yields predictable display and audit ordering.</en>
+            // </lang>
+            return new PortalModuleProfileSnapshot(
+                activeProfile,
+                allowedPackages.OrderBy(item => item, StringComparer.OrdinalIgnoreCase).ToList(),
+                invalidEntries);
+        }

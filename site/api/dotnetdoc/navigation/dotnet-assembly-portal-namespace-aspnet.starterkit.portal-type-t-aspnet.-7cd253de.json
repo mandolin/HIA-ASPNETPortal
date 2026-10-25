@@ -138,6 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalmoduleprofileresolver.resolve-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalModuleProfileResolver.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalmoduleprofileresolver.resolve-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalmoduleprofileresolv-a902cde6.html"
     },

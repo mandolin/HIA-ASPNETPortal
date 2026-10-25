@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.clearloginpasswordkey-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.clearloginpasswordkey-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-8a76177e.html"
     },
@@ -137,6 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.ensuresession-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.ensuresession-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-d093c986.html"
     },
@@ -175,6 +177,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.issueloginpasswordkey-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.issueloginpasswordkey-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-e486c080.html"
     },
@@ -200,6 +203,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpassword-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpassword-system.web.httpcontext-system.string-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-f6a1bd02.html"
     },
@@ -212,6 +216,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalLoginPasswordCrypto.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalloginpasswordcrypto.trydecryptsubmittedpasswords-system.web.httpcontext-system.string-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalloginpasswordcrypto-8b66d433.html"
     }

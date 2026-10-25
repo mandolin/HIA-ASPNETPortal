@@ -1,0 +1,19 @@
+        public ExpenseReimbursementResult CreateRequest(ExpenseReimbursementCreateRequest request)
+        {
+            try
+            {
+                var id = context.Database.SqlQuery<long>(
+                    "INSERT INTO dbo.PortalBiz_ExpenseReimbursements (UserId, Category, Amount, Reason, AttachmentName, Status, CreatedUtc) " +
+                    "OUTPUT INSERTED.RequestId VALUES (@UserId, @Category, @Amount, @Reason, @AttachmentName, N'Pending', SYSUTCDATETIME());",
+                    new SqlParameter("@UserId", request.UserId),
+                    new SqlParameter("@Category", (object)request.Category ?? DBNull.Value),
+                    new SqlParameter("@Amount", request.Amount),
+                    new SqlParameter("@Reason", (object)request.Reason ?? DBNull.Value),
+                    new SqlParameter("@AttachmentName", (object)request.AttachmentName ?? DBNull.Value)).Single();
+                return new ExpenseReimbursementResult { Ok = true, RequestId = id };
+            }
+            catch
+            {
+                return new ExpenseReimbursementResult { Ok = false, ErrorCode = "DbError" };
+            }
+        }

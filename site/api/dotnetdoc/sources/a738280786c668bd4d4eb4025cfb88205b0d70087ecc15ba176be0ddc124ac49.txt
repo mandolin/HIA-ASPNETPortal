@@ -1,0 +1,54 @@
+        public IEnumerable<IOrganizationUnitInfo> GetOrganizationUnits(EmployeeDirectoryQuery query)
+        {
+            if (!IsSchemaAvailable())
+            {
+                return Enumerable.Empty<IOrganizationUnitInfo>();
+            }
+
+            EmployeeDirectoryQuery normalizedQuery = NormalizeQuery(query);
+            string keyword = Normalize(normalizedQuery.Keyword);
+            string keywordPattern = ToLikePattern(keyword);
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>组织目录只暴露轻量层级字段；分页在 SQL 侧完成，避免后台页面一次性拉取完整组织树。</zh-CN>
+                //   <en>The organization directory exposes only lightweight hierarchy fields; paging happens in SQL so administration pages do not pull the full organization tree at once.</en>
+                // </lang>
+                var rows = _context.Database.SqlQuery<OrganizationUnitProjection>(
+                    @"
+SELECT
+    [OrganizationUnitId],
+    [ParentOrganizationUnitId],
+    [OrganizationCode],
+    [DisplayName],
+    [SortOrder],
+    [IsActive],
+    [CreatedUtc],
+    [UpdatedUtc]
+FROM [dbo].[PortalBiz_OrganizationUnits]
+WHERE (@p0 = N'' OR [OrganizationCode] LIKE @p1 OR [DisplayName] LIKE @p1)
+    AND (@p2 = 1 OR [IsActive] = 1)
+ORDER BY [ParentOrganizationUnitId], [SortOrder], [DisplayName], [OrganizationUnitId]
+OFFSET @p3 ROWS FETCH NEXT @p4 ROWS ONLY;",
+                    keyword,
+                    keywordPattern,
+                    normalizedQuery.IncludeInactiveOrganizations,
+                    normalizedQuery.Skip,
+                    normalizedQuery.Take).ToList();
+
+                return rows.Select(row => new OrganizationUnitInfo(
+                    row.OrganizationUnitId,
+                    row.ParentOrganizationUnitId,
+                    row.OrganizationCode,
+                    row.DisplayName,
+                    row.SortOrder,
+                    row.IsActive,
+                    row.CreatedUtc,
+                    row.UpdatedUtc)).ToList();
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<IOrganizationUnitInfo>();
+            }
+        }

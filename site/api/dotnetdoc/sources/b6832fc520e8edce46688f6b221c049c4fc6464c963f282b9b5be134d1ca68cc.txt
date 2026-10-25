@@ -1,0 +1,39 @@
+        private IList<BusinessApplicationInfo> QueryApplications(string whereClause, int take, params SqlParameter[] parameters)
+        {
+            string sql = @"
+SELECT TOP (@Take)
+    [Application].[ApplicationId],
+    [Application].[ApplicationCode],
+    [Application].[Title],
+    [Application].[CategoryKey],
+    [Application].[Summary],
+    [Application].[Body],
+    [Application].[ApplicantUserId],
+    [User].[Name] AS [ApplicantUserName],
+    [Application].[ApplicantEmployeeId],
+    [Application].[OrganizationUnitId],
+    [Application].[ReviewRoleKey],
+    [Application].[ApplicationStatus],
+    [Application].[SubmittedUtc],
+    [Application].[ReviewedUtc],
+    [Application].[ReviewedByUserId],
+    [Application].[ReviewComment]
+FROM [dbo].[PortalBiz_BusinessApplications] AS [Application]
+LEFT JOIN [dbo].[Portal_Users] AS [User]
+    ON [User].[UserID] = [Application].[ApplicantUserId]" +
+                whereClause +
+                @"
+ORDER BY [Application].[SubmittedUtc] DESC, [Application].[ApplicationId] DESC;";
+
+            // <lang>
+            //   <zh-CN>条数始终作为参数传入；固定 where 片段之外的筛选值由调用方提供参数，避免把用户文本拼入 SQL。</zh-CN>
+            //   <en>Always pass the row count as a parameter; callers provide parameters for values outside the fixed where fragment so user text is never concatenated into SQL.</en>
+            // </lang>
+            var sqlParameters = new List<SqlParameter> { new SqlParameter("@Take", take) };
+            if (parameters != null)
+            {
+                sqlParameters.AddRange(parameters);
+            }
+
+            return context.Database.SqlQuery<BusinessApplicationInfo>(sql, sqlParameters.ToArray()).ToList();
+        }

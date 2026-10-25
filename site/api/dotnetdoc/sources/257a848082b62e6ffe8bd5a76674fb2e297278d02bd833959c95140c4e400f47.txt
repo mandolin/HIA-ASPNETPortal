@@ -1,0 +1,20 @@
+        private static void AddTextParameter(
+            SqlCommand command,
+            string parameterName,
+            int size,
+            string value,
+            string fallback)
+        {
+            // <lang>
+            //   <zh-CN>先按目标参数大小净化并截断文本；这同时限制请求审计字段和稳定键/类型字段进入 SQL 前的长度与控制字符。</zh-CN>
+            //   <en>Sanitize and truncate text to the target parameter size first; this limits length and control characters for request-audit fields and stable key/type fields before they enter SQL.</en>
+            // </lang>
+            string sanitized = PortalDiagnosticSanitizer.SanitizeAndTruncate(value, size);
+
+            // <lang>
+            //   <zh-CN>始终添加带显式 NVarChar 长度的参数；空白净化结果改用调用方受控回退，而不以内联文本拼接 SQL。</zh-CN>
+            //   <en>Always add a parameter with explicit NVarChar length; replace a blank sanitized result with caller-controlled fallback rather than concatenating inline text into SQL.</en>
+            // </lang>
+            command.Parameters.Add(parameterName, SqlDbType.NVarChar, size).Value =
+                string.IsNullOrWhiteSpace(sanitized) ? fallback : sanitized;
+        }

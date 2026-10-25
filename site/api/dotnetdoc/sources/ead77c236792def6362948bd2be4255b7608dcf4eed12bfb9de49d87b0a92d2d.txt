@@ -1,0 +1,15 @@
+        public static void ExpireRolesCookie(HttpResponse response, HttpRequest request)
+        {
+            // <lang>
+            //   <zh-CN>失效 Cookie 必须与写入时使用同一 Path 与安全属性，否则浏览器可能不会覆盖目标 Cookie。</zh-CN>
+            //   <en>An expiring cookie must reuse the same Path and security attributes as the write, otherwise the browser may not overwrite the target cookie.</en>
+            // </lang>
+            var cookie = new HttpCookie(RolesCookieName, string.Empty)
+            {
+                Expires = DateTime.Now.AddDays(-1),
+                HttpOnly = true,
+                Path = GetCookiePath(request)
+            };
+            PortalAuthenticationCookieSettings.ApplyTo(cookie);
+            response.Cookies.Add(cookie);
+        }

@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationinfo",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationinfo:base:iuserregistrationinfo",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationinfo:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IUserRegistrationInfo",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.userregistrationinfo:interface:t-aspnet.starterkit.portal.iuserregistrationinfo",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IUserRegistrationInfo",
       "entryCount": 0,
       "views": [
         "dotnet"

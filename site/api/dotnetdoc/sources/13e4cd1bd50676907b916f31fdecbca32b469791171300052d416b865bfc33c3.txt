@@ -1,0 +1,158 @@
+        public static bool TryResolveDesktopSource(
+            string desktopSource,
+            HttpContext context,
+            out PortalModuleRuntimeDescriptor descriptor,
+            out string reason)
+        {
+            descriptor = null;
+            reason = string.Empty;
+
+            string source;
+            try
+            {
+                // <lang>
+                //   <zh-CN>即使调用方已经规范化路径，也在公共入口重新使用同一校验器，避免不同调用点以字符串表示差异绕过受控模块分支。</zh-CN>
+                //   <en>Even when a caller has normalized the path, reuse the same validator at this public entry so representation differences across call sites cannot bypass controlled module branches.</en>
+                // </lang>
+                source = PortalModulePathValidator.NormalizeDesktopSourceOrThrow(desktopSource);
+            }
+            catch (InvalidOperationException exception)
+            {
+                // <lang>
+                //   <zh-CN>失败原因经过净化和长度限制后才交给 UI/调用方；不把原始路径或异常细节变成可探测信息。</zh-CN>
+                //   <en>Sanitize and length-limit the failure reason before it reaches UI/callers; do not turn raw paths or exception detail into probeable information.</en>
+                // </lang>
+                reason = PortalDiagnosticSanitizer.SanitizeAndTruncate(exception.Message, 200);
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>Profile 快照是当前环境允许范围的输入；它不是用户权限，并且 Core 分支不会用它拒绝恢复性基础模块。</zh-CN>
+            //   <en>The profile snapshot supplies the current environment's allowed scope; it is not user permission, and the Core branch does not use it to reject recoverability-critical base modules.</en>
+            // </lang>
+            PortalModuleProfileSnapshot profile = PortalModuleProfileResolver.Resolve(context);
+            if (PortalModuleProfileResolver.IsCoreDesktopSource(source))
+            {
+                // <lang>
+                //   <zh-CN>Core 路径在路径已规范化后获得硬保护：它不伪装为 manifest 包、不读取状态表，缓存身份只绑定受控入口。</zh-CN>
+                //   <en>After path normalization, a Core path receives hard protection: it is not disguised as a manifest package, does not read the state table, and has a cache identity bound only to the controlled entry.</en>
+                // </lang>
+                descriptor = new PortalModuleRuntimeDescriptor(
+                    source,
+                    "Core",
+                    false,
+                    true,
+                    true,
+                    null,
+                    "core|" + source.ToLowerInvariant());
+                return true;
+            }
+
+            // <lang>
+            //   <zh-CN>仅从已验证部署包集合按已规范化入口精确匹配；这里消费前批 manifest 信任事实，不重读或放宽文件校验。</zh-CN>
+            //   <en>Match only from the validated deployment-package set by normalized entry; consume the earlier manifest-trust fact here without rereading or loosening file validation.</en>
+            // </lang>
+            PortalModulePackage package = GetTrustedPackages().FirstOrDefault(item =>
+                string.Equals(item.DesktopEntry, source, StringComparison.OrdinalIgnoreCase));
+            if (package == null)
+            {
+                if (HasManifestCandidate(source))
+                {
+                    // <lang>
+                    //   <zh-CN>位于带 manifest 候选目录却未进入可信集合时必须拒绝，不能回退为 Legacy；否则无效 manifest 可绕过受信任部署边界。</zh-CN>
+                    //   <en>When an entry lies in a candidate directory with a manifest but did not enter the trusted set, reject it rather than falling back to Legacy; otherwise an invalid manifest could bypass the trusted-deployment boundary.</en>
+                    // </lang>
+                    reason = "Module package manifest is invalid or does not declare the requested entry.";
+                    return false;
+                }
+
+                string legacyPackageId;
+                if (!PortalModuleProfileResolver.TryGetLegacyPackageId(source, out legacyPackageId))
+                {
+                    // <lang>
+                    //   <zh-CN>Legacy 兼容只接受内置路径到虚拟包标识的固定映射；未映射路径不会因为不是 manifest 包就自动允许。</zh-CN>
+                    //   <en>Legacy compatibility accepts only fixed mappings from built-in paths to virtual package identifiers; an unmapped path is not automatically allowed merely because it is not a manifest package.</en>
+                    // </lang>
+                    reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                             " Legacy module path is not mapped to a package profile.";
+                    return false;
+                }
+
+                if (!profile.IsPackageAllowed(legacyPackageId))
+                {
+                    // <lang>
+                    //   <zh-CN>Legacy 虚拟包同样必须通过当前 Profile；这里仍不判定用户角色、权限或页面访问。</zh-CN>
+                    //   <en>A Legacy virtual package must also pass the current profile; this still does not decide user role, permission, or page access.</en>
+                    // </lang>
+                    reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                             " Package '" + legacyPackageId + "' is not allowed by active profile '" +
+                             profile.ActiveProfile + "'.";
+                    return false;
+                }
+
+                // <lang>
+                //   <zh-CN>Legacy 经过路径和 Profile 允许后不依赖状态表；缓存身份区分虚拟包与规范入口，但不把它称为物理部署包。</zh-CN>
+                //   <en>After passing path and profile gates, Legacy does not depend on the state table; its cache identity distinguishes virtual package and normalized entry without calling it a physical deployment package.</en>
+                // </lang>
+                descriptor = new PortalModuleRuntimeDescriptor(
+                    source,
+                    legacyPackageId,
+                    false,
+                    true,
+                    true,
+                    null,
+                    "legacy|" + legacyPackageId.ToLowerInvariant() + "|" + source.ToLowerInvariant());
+                return true;
+            }
+
+            if (!profile.IsPackageAllowed(package.PackageId))
+            {
+                // <lang>
+                //   <zh-CN>已验证部署包先受 Profile 环境边界限制，再考虑状态表；显式启用状态不能越过未允许的 Profile。</zh-CN>
+                //   <en>A validated deployment package is constrained by the profile environment boundary before considering the state table; an explicit enabled state cannot bypass a disallowed profile.</en>
+                // </lang>
+                reason = PortalModuleProfileResolver.NotAllowedReasonPrefix +
+                         " Package '" + package.PackageId + "' is not allowed by active profile '" +
+                         profile.ActiveProfile + "'.";
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>仅在 Profile 已允许的受信任部署包上读取状态。读取不可用或无状态快照时按 ADR 既有兼容规则默认启用；这不改变 manifest/Profile 结论。</zh-CN>
+            //   <en>Read state only for a profile-allowed validated deployment package. When the read is unavailable or lacks a snapshot, default enabled under the existing ADR compatibility rule; this does not change manifest or profile conclusions.</en>
+            // </lang>
+            PortalModulePackageStateReadResult stateResult = PortalModulePackageStates.Read(package.PackageId, context);
+            bool isEnabled = stateResult.IsAvailable && stateResult.State != null
+                ? stateResult.State.IsEnabled
+                : true;
+
+            // <lang>
+            //   <zh-CN>缓存修订只采用可用显式状态行的 UTC tick；缺行与不可用均使用稳定 default，避免把失败详情或不受控时间进入缓存键。</zh-CN>
+            //   <en>Cache revision uses UTC ticks only from an available explicit state row; both missing and unavailable states use stable default, preventing failure detail or uncontrolled time from entering the cache key.</en>
+            // </lang>
+            string stateRevision = stateResult.IsAvailable && stateResult.State != null && stateResult.State.IsConfigured
+                ? stateResult.State.UpdatedUtc.Ticks.ToString()
+                : "default";
+            descriptor = new PortalModuleRuntimeDescriptor(
+                source,
+                package.PackageId,
+                true,
+                isEnabled,
+                stateResult.IsAvailable,
+                package,
+                "package|" + package.PackageId.ToLowerInvariant() + "|" + package.Version + "|" + stateRevision + "|" + source.ToLowerInvariant());
+            if (!isEnabled)
+            {
+                // <lang>
+                //   <zh-CN>显式禁用不是解析失败：保留描述符与受控原因，使页面/样式消费方可以跳过后续加载并给出稳定诊断。</zh-CN>
+                //   <en>Explicit disablement is not resolution failure: retain descriptor and controlled reason so page/style consumers can skip later loading and provide stable diagnostics.</en>
+                // </lang>
+                reason = "Module package is disabled.";
+            }
+
+            // <lang>
+            //   <zh-CN>true 只表示解析链已产生受控描述；调用方仍须检查 IsEnabled 并在各自页面边界实施加载与授权。</zh-CN>
+            //   <en>True means only that the resolution chain produced a controlled descriptor; callers still must check IsEnabled and enforce loading and authorization at their own page boundary.</en>
+            // </lang>
+            return true;
+        }

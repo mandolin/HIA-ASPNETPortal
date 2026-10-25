@@ -1,0 +1,11 @@
+        public ModulesDb(PortalCfgDbContext context, IPortalDb portalDb)
+        {
+            _context = context;
+            _portalDb = portalDb;
+
+            // <lang>
+            //   <zh-CN>保留旧门户的快照读取模型，避免每次模块渲染都重新访问数据库。</zh-CN>
+            //   <en>Keep the legacy Portal snapshot read model so each module render does not re-query the database.</en>
+            // </lang>
+            _items = _context.Modules.ToList();
+        }

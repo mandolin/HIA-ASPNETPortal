@@ -125,6 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest-system.string",
+      "sourcePath": "src/Portal/Components/PortalDocumentPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.gets-fa3d2d5f.html"
     },
@@ -137,6 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest",
+      "sourcePath": "src/Portal/Components/PortalDocumentPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.getsafereturnurl-system.web.httprequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.gets-6c327f62.html"
     },
@@ -201,6 +203,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.redirecttosafereturnurl-system.web.httpcontext-system.string",
+      "sourcePath": "src/Portal/Components/PortalDocumentPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.redirecttosafereturnurl-system.web.httpcontext-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.redi-dc046d0a.html"
     },
@@ -226,6 +229,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.trynormalizebrowseurl-system.string-system.web.httprequest-system.string",
+      "sourcePath": "src/Portal/Components/PortalDocumentPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.trynormalizebrowseurl-system.string-system.web.httprequest-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.tryn-0a4490a3.html"
     },
@@ -238,6 +242,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.tryvalidateupload-system.web.httppostedfile-system.string",
+      "sourcePath": "src/Portal/Components/PortalDocumentPolicy.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldocumentpolicy.tryvalidateupload-system.web.httppostedfile-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldocumentpolicy.tryv-2dd80a35.html"
     },

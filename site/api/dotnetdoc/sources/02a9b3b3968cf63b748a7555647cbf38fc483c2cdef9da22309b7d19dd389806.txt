@@ -1,0 +1,55 @@
+        protected void Tabs_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+            // <lang>
+            //   <zh-CN>只有普通与交替数据项承载 Tab；其它行没有可切换的禁用态，直接返回。</zh-CN>
+            //   <en>Only regular and alternating item rows carry a tab; every other row has no disabled state to switch, so return immediately.</en>
+            // </lang>
+            if (e == null || e.Item == null ||
+                (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>取出本行绑定的 Tab；类型不符时不做任何 DOM 改动。</zh-CN>
+            //   <en>Take the tab bound to this row; when the type does not match, no DOM change is made.</en>
+            // </lang>
+            ITabItem boundTab = e.Item.DataItem as ITabItem;
+            string blockedReason;
+
+            // <lang>
+            //   <zh-CN>未登记阻断原因的项保持模板默认形态（普通链接 + 隐藏禁用元素），因此门控关闭时不会出现任何多余输出。</zh-CN>
+            //   <en>A tab without a recorded blocked reason keeps the template default (normal link plus hidden disabled element), so nothing extra is emitted while the gate is off.</en>
+            // </lang>
+            if (boundTab == null || !tabBlockedReasons.TryGetValue(boundTab.TabId, out blockedReason))
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>链接与禁用元素都在模板内，切换二者可见性即可保持原有排列位置与主题类语义。</zh-CN>
+            //   <en>Both the link and the disabled element live inside the template, so switching their visibility keeps the original position and the theme class semantics.</en>
+            // </lang>
+            HyperLink tabLink = e.Item.FindControl("TabLink") as HyperLink;
+            Label disabledTab = e.Item.FindControl("TabDisabled") as Label;
+
+            if (tabLink != null)
+            {
+                tabLink.Visible = false;
+            }
+
+            if (disabledTab != null)
+            {
+                disabledTab.Visible = true;
+                disabledTab.Text = BuildTabDisplayName(boundTab);
+
+                // <lang>
+                //   <zh-CN>原因码只进入工具提示，不成为可见文案，避免内部诊断信息变成普通界面文本。
+                //   提示文本同样用本地化名，使管理员看到的名称与界面一致。</zh-CN>
+                //   <en>The reason code only goes into the tooltip and never becomes visible text, keeping internal diagnostics out of the ordinary interface copy.
+                //   The tooltip uses the localized name as well so administrators see the same label the interface shows.</en>
+                // </lang>
+                disabledTab.ToolTip = BuildTabDisplayName(boundTab) + " (" + blockedReason + ")";
+                disabledTab.Attributes["aria-disabled"] = "true";
+            }
+        }

@@ -4,6 +4,150 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:base:t-aspnet.starterkit.portal.portalpage-aspnet.starterkit.portal.manageusers",
+      "kind": "relation",
+      "label": "Base: ASPNET.StarterKit.Portal.PortalPage{ASPNET.StarterKit.Portal.ManageUsers}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:base:t-system.web.ui.control",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.Control",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:base:t-system.web.ui.page",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.Page",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:base:t-system.web.ui.templatecontrol",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.TemplateControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.componentmodel.icomponent",
+      "kind": "relation",
+      "label": "Interface: System.ComponentModel.IComponent",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ihttphandler",
+      "kind": "relation",
+      "label": "Interface: System.Web.IHttpHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ui.icontrolbuilderaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlBuilderAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ui.icontroldesigneraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlDesignerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ui.idatabindingsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IDataBindingsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ui.iexpressionsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IExpressionsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ui.ifilterresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IFilterResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ui.inamingcontainer",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.INamingContainer",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ui.iparseraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IParserAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:interface:t-system.web.ui.iurlresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IUrlResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.manageusers:entry:hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.addrole_click-system.object-system.eventargs",
       "kind": "entry",
       "label": "AddRole_Click",
@@ -103,6 +247,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.bindprofilelifecycleactions-aspnet.starterkit.portal.iuserprofileinfo-aspnet.starterkit.portal.iuserregistrationinfo",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.bindprofilelifecycleactions-aspnet.starterkit.portal.iuserprofileinfo-aspnet.starterkit.portal.iuserregistrationinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.bindprofileli-f3ee1342.html"
     },
@@ -167,6 +312,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.buildprofileauditsummary-aspnet.starterkit.portal.iuserprofileinfo-system.string-system.string-system.string-system.string",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.buildprofileauditsummary-aspnet.starterkit.portal.iuserprofileinfo-system.string-system.string-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.buildprofilea-a0861d29.html"
     },
@@ -452,6 +598,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.geteffectivedisplayname-aspnet.starterkit.portal.iuserprofileinfo-system.string",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.geteffectivedisplayname-aspnet.starterkit.portal.iuserprofileinfo-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.geteffectived-a6095cfc.html"
     },
@@ -815,6 +962,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.trygetselectedportalrole-aspnet.starterkit.portal.iroleitem",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.trygetselectedportalrole-aspnet.starterkit.portal.iroleitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.trygetselecte-db76d454.html"
     },
@@ -905,6 +1053,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.manageusers.userroles_itemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
+      "sourcePath": "src/Portal/Admin/ManageUsers.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.manageusers.userroles_itemcommand-system.object-system.web.ui.webcontrols.datalistcommandeventargs",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.manageusers.userroles_ite-a827dec5.html"
     },

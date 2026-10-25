@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcollaborationparticipanttext.buildparticipantlines-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
+      "sourcePath": "src/Portal/Components/PortalCollaborationParticipantText.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcollaborationparticipanttext.buildparticipantlines-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcollaborationpartic-77cbe5ae.html"
     },
@@ -33,6 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcollaborationparticipanttext.buildparticipantstext-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
+      "sourcePath": "src/Portal/Components/PortalCollaborationParticipantText.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcollaborationparticipanttext.buildparticipantstext-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcollaborationpartic-5410511d.html"
     },

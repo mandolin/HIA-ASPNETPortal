@@ -4,9 +4,27 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentitem",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentitem:base:idocumentitemdetails",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentitem:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IDocumentItemDetails",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentitem:interface:t-aspnet.starterkit.portal.idocumentitem",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IDocumentItem",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentitem:interface:t-aspnet.starterkit.portal.idocumentitemdetails",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IDocumentItemDetails",
       "entryCount": 0,
       "views": [
         "dotnet"

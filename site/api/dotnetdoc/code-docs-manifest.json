@@ -3,7 +3,7 @@
   "layout": "split-site",
   "generator": "@hia-doc/dotnetdoc-runner（hia-dotnetdoc）+ @hia-doc/renderer-html（hia docs build），由 dev/scripts/Publish-PortalDotNetDoc.ps1 编排",
   "publishedBy": "HIA-ASPNETPortal 文档发布流程（Publish-PortalDotNetDoc.ps1）",
-  "generatedUtc": "2026-10-25T19:45:50Z",
+  "generatedUtc": "2026-10-25T21:37:57Z",
   "entrypoint": "index.html",
   "defaultLocale": "zh-CN",
   "locales": [
@@ -80,8 +80,8 @@
   ],
   "counts": {
     "entryPages": 5366,
-    "files": 20756,
-    "bytes": 152429845.0
+    "files": 21362,
+    "bytes": 167475645.0
   },
   "declaredInputs": [
     {

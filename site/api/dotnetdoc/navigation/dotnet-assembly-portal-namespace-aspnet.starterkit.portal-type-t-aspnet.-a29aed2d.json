@@ -58,15 +58,6 @@
       ]
     },
     {
-      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemesource:interface:t-system.ispanformattable",
-      "kind": "relation",
-      "label": "Interface: System.ISpanFormattable",
-      "entryCount": 0,
-      "views": [
-        "dotnet"
-      ]
-    },
-    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalthemesource:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalthemesource.appsettings",
       "kind": "entry",
       "label": "AppSettings",

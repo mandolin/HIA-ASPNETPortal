@@ -1,0 +1,14 @@
+        private static string GetPortalHomeUrl(HttpRequest request)
+        {
+            // <lang>
+            //   <zh-CN>读取应用路径，生命周期仅覆盖本次首页回退地址生成。</zh-CN>
+            //   <en>Read the application path for the lifetime of this home-url fallback calculation.</en>
+            // </lang>
+            string applicationPath = request == null ? string.Empty : request.ApplicationPath;
+            if (string.IsNullOrEmpty(applicationPath) || string.Equals(applicationPath, "/", StringComparison.Ordinal))
+            {
+                return "/DesktopDefault.aspx";
+            }
+
+            return applicationPath.TrimEnd('/') + "/DesktopDefault.aspx";
+        }

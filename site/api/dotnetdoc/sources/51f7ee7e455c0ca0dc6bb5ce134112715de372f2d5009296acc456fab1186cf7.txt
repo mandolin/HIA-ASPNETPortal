@@ -1,0 +1,117 @@
+        public static IList<PortalModuleStyleResource> GetActiveStyleResources(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>保持按 Tab 顺序的可变候选容器，直到所有受控过滤完成后才作为只读集合交给调用方。</zh-CN>
+            //   <en>Keep a mutable candidate container in Tab order until all controlled filtering completes, then expose it to the caller as a read-only collection.</en>
+            // </lang>
+            var resources = new List<PortalModuleStyleResource>();
+
+            // <lang>
+            //   <zh-CN>优先使用显式上下文以支持受控调用；仅在其缺失时回退到当前 HTTP 上下文，不持久化请求对象。</zh-CN>
+            //   <en>Prefer the explicit context for controlled callers; fall back to the current HTTP context only when it is absent, without retaining a request object.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;
+
+            // <lang>
+            //   <zh-CN>没有前台请求上下文或请求位于后台时不产生样式候选；后台排除只控制资源输出，不是后台页授权判定。</zh-CN>
+            //   <en>Produce no style candidates when no front-end request context exists or the request is in administration; the administration exclusion controls resource output only and is not an authorization decision for the administration page.</en>
+            // </lang>
+            if (current == null || IsAdminRequest(current))
+            {
+                // <lang>
+                //   <zh-CN>空集合仍以只读表面返回，避免调用方把无上下文或后台情况当作可修改的资源列表。</zh-CN>
+                //   <en>Return the empty collection through the same read-only surface so callers do not treat the no-context or administration case as a mutable resource list.</en>
+                // </lang>
+                return resources.AsReadOnly();
+            }
+
+            try
+            {
+                // <lang>
+                //   <zh-CN>门户设置提供当前活动 Tab 的配置模块顺序；该读取不替代每个模块后续的受控解析。</zh-CN>
+                //   <en>Portal settings provide the configured module order for the current active Tab; this lookup does not replace controlled resolution of each module below.</en>
+                // </lang>
+                PortalSettings settings = PortalContext.GetPortalSettings(current);
+
+                // <lang>
+                //   <zh-CN>未解析到门户设置或活动 Tab 时没有可消费的模块集合，因此保持无副作用的空输出。</zh-CN>
+                //   <en>When portal settings or the active Tab cannot be resolved, there is no module set to consume, so retain an empty output without side effects.</en>
+                // </lang>
+                if (settings == null || settings.ActiveTab == null)
+                {
+                    return resources.AsReadOnly();
+                }
+
+                // <lang>
+                //   <zh-CN>路径集合按大小写无关方式记录已输出的站内 CSS 路径，避免同一资源因重复模块配置或大小写差异被重复注入。</zh-CN>
+                //   <en>The path set records emitted site-local CSS paths case-insensitively, preventing duplicate injection when module configuration repeats a resource or differs only by casing.</en>
+                // </lang>
+                var paths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                // <lang>
+                //   <zh-CN>按照活动 Tab 已配置的模块顺序消费描述符；第一个合格路径决定最终输出中的稳定相对顺序。</zh-CN>
+                //   <en>Consume descriptors in the active Tab's configured module order; the first qualifying path determines the stable relative order in the final output.</en>
+                // </lang>
+                foreach (ModuleSettings module in settings.ActiveTab.Modules)
+                {
+                    // <lang>
+                    //   <zh-CN>描述符承载已受控解析的包、Profile 和状态事实；此消费方不自行拼接或猜测模块来源。</zh-CN>
+                    //   <en>The descriptor carries controlled package, Profile, and state facts; this consumer does not compose or guess a module source itself.</en>
+                    // </lang>
+                    PortalModuleRuntimeDescriptor descriptor;
+
+                    // <lang>
+                    //   <zh-CN>解析原因仅满足共享解析 API 的输出契约；样式候选不向页面泄露该诊断文本。</zh-CN>
+                    //   <en>The resolution reason only satisfies the shared resolver API's output contract; style candidates do not disclose that diagnostic text to the page.</en>
+                    // </lang>
+                    string reason;
+
+                    // <lang>
+                    //   <zh-CN>仅消费成功解析、属于受管理部署包且显式启用的描述符；Core/Legacy、未解析或禁用模块都不获得此模块包 CSS 输出。</zh-CN>
+                    //   <en>Consume only descriptors that resolve successfully, belong to a managed deployment package, and are explicitly enabled; Core, Legacy, unresolved, and disabled modules receive no module-package CSS output here.</en>
+                    // </lang>
+                    if (!TryResolveModule(module, current, out descriptor, out reason) ||
+                        !descriptor.IsManagedPackage || !descriptor.IsEnabled)
+                    {
+                        continue;
+                    }
+
+                    // <lang>
+                    //   <zh-CN>资源集合已在 manifest 信任边界验证为包内声明项；本层只选择 CSS 后缀，不接受脚本或外部资源。</zh-CN>
+                    //   <en>The resource collection was validated as declared in-package items at the manifest trust boundary; this layer selects only the CSS suffix and accepts neither scripts nor external resources.</en>
+                    // </lang>
+                    foreach (string resource in descriptor.Package.Resources.Where(item =>
+                        item.EndsWith(".css", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        // <lang>
+                        //   <zh-CN>从受信任目录名和已验证资源相对路径组成应用内虚拟路径；不把请求输入拼入路径，也不形成外部 URL。</zh-CN>
+                        //   <en>Compose an application-local virtual path from the trusted directory name and validated resource-relative path; do not concatenate request input or form an external URL.</en>
+                        // </lang>
+                        string virtualPath = "~/DesktopModules/" + descriptor.Package.DirectoryName + "/" + resource;
+
+                        // <lang>
+                        //   <zh-CN>仅在该路径尚未输出时创建 DTO，借此保留首次出现的包归属和活动 Tab 顺序。</zh-CN>
+                        //   <en>Create the DTO only when this path has not yet been output, preserving the first occurrence's package ownership and active-Tab order.</en>
+                        // </lang>
+                        if (paths.Add(virtualPath))
+                        {
+                            resources.Add(new PortalModuleStyleResource(descriptor.Package.PackageId, virtualPath));
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // <lang>
+                //   <zh-CN>将解析故障限制在诊断通道而不向页面抛出内部详情；已在异常前累计的候选保持可用，调用方仍只会看到只读集合。</zh-CN>
+                //   <en>Confine a resolution failure to the diagnostic channel without throwing internal detail to the page; candidates accumulated before the exception remain available and the caller still sees only a read-only collection.</en>
+                // </lang>
+                PortalDiagnostics.Error("ModulePackage.Styles", "Resolving active module package styles failed.", exception, current);
+            }
+
+            // <lang>
+            //   <zh-CN>封存最终候选以避免页面层在注入前修改 catalog 已完成的过滤和去重结果。</zh-CN>
+            //   <en>Seal the final candidates so the page layer cannot modify the catalog's completed filtering and de-duplication result before injection.</en>
+            // </lang>
+            return resources.AsReadOnly();
+        }

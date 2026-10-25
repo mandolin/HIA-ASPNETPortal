@@ -1,0 +1,8 @@
+        public static bool TryReadSecurityVersion(FormsIdentity identity, out long securityVersion)
+        {
+            securityVersion = 0;
+            return identity != null &&
+                   identity.Ticket != null &&
+                   !identity.Ticket.Expired &&
+                   TryParseSecurityVersion(identity.Ticket.UserData, out securityVersion);
+        }

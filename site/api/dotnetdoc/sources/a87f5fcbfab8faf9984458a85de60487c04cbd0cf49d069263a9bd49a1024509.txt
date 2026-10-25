@@ -1,0 +1,32 @@
+        internal BusinessApplicationAdminRow(BusinessApplicationInfo application)
+        {
+            // <lang>
+            //   <zh-CN>展示行保留审核所需字段，申请正文和审核意见只作为既有展示文本处理。</zh-CN>
+            //   <en>The display row keeps review-required fields while treating body and review comment as existing display text.</en>
+            // </lang>
+            ApplicationId = application.ApplicationId;
+            ApplicationCode = application.ApplicationCode;
+            Title = EmptyToNone(application.Title);
+            CategoryKey = EmptyToNone(application.CategoryKey);
+            Summary = EmptyToNone(application.Summary);
+            Body = EmptyToNone(application.Body);
+            ApplicantText = string.Format(
+                CultureInfo.CurrentCulture,
+                lang.Admin_BusinessApplications_ApplicantFormat,
+                application.ApplicantUserId.ToString(CultureInfo.InvariantCulture),
+                EmptyToNone(application.ApplicantUserName));
+            ApplicationStatus = application.ApplicationStatus;
+            SubmittedUtcText = application.SubmittedUtc.HasValue
+                ? application.SubmittedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture)
+                : lang.Common_NonePlaceholder;
+            ReviewText = application.ReviewedUtc.HasValue
+                ? string.Format(
+                    CultureInfo.CurrentCulture,
+                    lang.Admin_BusinessApplications_ReviewFormat,
+                    application.ReviewedUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'", CultureInfo.InvariantCulture),
+                    application.ReviewedByUserId.HasValue
+                        ? application.ReviewedByUserId.Value.ToString(CultureInfo.InvariantCulture)
+                        : lang.Common_NonePlaceholder,
+                    EmptyToNone(application.ReviewComment))
+                : lang.Admin_BusinessApplications_NotReviewed;
+        }

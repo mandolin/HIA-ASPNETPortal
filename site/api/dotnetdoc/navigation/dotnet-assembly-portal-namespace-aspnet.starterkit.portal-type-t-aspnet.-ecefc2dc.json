@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemadminrow.-ctor-aspnet.starterkit.portal.portalworkiteminfo",
+      "sourcePath": "src/Portal/Admin/WorkItems.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemadminrow.-ctor-aspnet.starterkit.portal.portalworkiteminfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemadminrow.-c-3d649193.html"
     },
@@ -124,6 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalworkitemadminrow.getassignedtext-aspnet.starterkit.portal.portalworkiteminfo",
+      "sourcePath": "src/Portal/Admin/WorkItems.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalworkitemadminrow.getassignedtext-aspnet.starterkit.portal.portalworkiteminfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalworkitemadminrow.ge-e346d595.html"
     },

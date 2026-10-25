@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactsdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactsdb:base:icontactsdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactsdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IContactsDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.contactsdb:interface:t-aspnet.starterkit.portal.icontactsdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IContactsDb",
       "entryCount": 0,
       "views": [
         "dotnet"

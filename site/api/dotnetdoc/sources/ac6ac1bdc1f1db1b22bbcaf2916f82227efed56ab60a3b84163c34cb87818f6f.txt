@@ -1,0 +1,132 @@
+        public EmployeeProfileCorrectionRequestResult ReviewRequest(EmployeeProfileCorrectionReviewRequest request)
+        {
+            // <lang>
+            //   <zh-CN>审核入口只改变请求状态和审核备注；当前不在此处直接写员工主数据，避免把审批和资料维护混成一个不可审计动作。</zh-CN>
+            //   <en>The review entry changes only request state and review notes; it does not write employee master data here, keeping approval and profile maintenance as auditable separate actions.</en>
+            // </lang>
+            EmployeeProfileCorrectionReviewRequest normalized = NormalizeReviewRequest(request);
+            if (normalized.RequestId <= 0)
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Correction request id is required.");
+            }
+
+            if (!IsReviewStatus(normalized.RequestStatus))
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Select a supported review status.");
+            }
+
+            if (!IsSchemaAvailable())
+            {
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee profile correction schema is unavailable.");
+            }
+
+            // <lang>
+            //   <zh-CN>W69：审核通过（Reviewed）必须先产生业务结果——把建议值回写到员工主数据，成功后再置位；任何失败都不置位，杜绝"已批准但未生效"的静默不一致。</zh-CN>
+            //   <en>W69: an approval (Reviewed) must first produce the business result by writing the proposed value into employee master data, and only then set the status; any failure leaves the status unchanged, eliminating the silent inconsistency of "approved but not applied".</en>
+            // </lang>
+            if (string.Equals(normalized.RequestStatus, EmployeeProfileCorrectionRequestStatuses.Reviewed, StringComparison.Ordinal))
+            {
+                EmployeeProfileCorrectionRequestInfo pending = LoadRequestForReview(normalized.RequestId);
+                if (pending == null)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "Correction request was not found.");
+                }
+
+                // <lang>
+                //   <zh-CN>字段名必须由服务端再次校验：前端白名单可被绕过，未知字段一律拒绝。</zh-CN>
+                //   <en>The field name must be re-validated server-side: the front-end allow list can be bypassed, so unknown fields are always rejected.</en>
+                // </lang>
+                if (EmployeeProfileCorrectionWriteBackPolicy.RequiresManualHandling(pending.FieldName))
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "This field requires manual maintenance and was not written back automatically.");
+                }
+
+                if (!EmployeeProfileCorrectionWriteBackPolicy.CanAutoApply(pending.FieldName))
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "This correction field is not supported.");
+                }
+
+                if (employeeAdminDb == null)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "Employee master data administration is unavailable.");
+                }
+
+                IEmployeeInfo employee = employeeAdminDb.GetEmployeeById(pending.EmployeeId);
+                if (employee == null)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "The employee for this correction request was not found.");
+                }
+
+                // <lang>
+                //   <zh-CN>回写是全量更新且带乐观并发条件，因此必须带齐现有值与加载时的更新时间戳；否则既会覆盖其它字段，也会因缺少时间戳失败。</zh-CN>
+                //   <en>The write-back is a full update guarded by optimistic concurrency, so it must carry the current values and the update timestamp from load time; otherwise it would overwrite other fields and fail the timestamp check.</en>
+                // </lang>
+                EmployeeSaveRequest saveRequest = new EmployeeSaveRequest
+                {
+                    EmployeeId = employee.EmployeeId,
+                    EmployeeCode = employee.EmployeeCode,
+                    DisplayName = employee.DisplayName,
+                    PreferredName = employee.PreferredName,
+                    WorkEmail = employee.WorkEmail,
+                    OrganizationUnitId = employee.OrganizationUnitId,
+                    EmploymentStatus = employee.EmploymentStatus,
+                    JoinedUtc = employee.JoinedUtc,
+                    LeftUtc = employee.LeftUtc,
+                    SourceSystem = employee.SourceSystem,
+                    OriginalUpdatedUtc = employee.UpdatedUtc,
+                    ActorName = normalized.ReviewedBy
+                };
+
+                if (!EmployeeProfileCorrectionWriteBackPolicy.TryApply(saveRequest, pending.FieldName, pending.ProposedValue))
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "The proposed value could not be applied to employee master data.");
+                }
+
+                EmployeeDirectoryWriteResult writeResult = employeeAdminDb.SaveEmployee(saveRequest);
+                if (!writeResult.Succeeded)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "The approved correction could not be written to employee master data.");
+                }
+            }
+
+            try
+            {
+                List<long> rows = context.Database.SqlQuery<long>(
+                    @"
+DECLARE @Updated TABLE
+(
+    [RequestId] BIGINT NOT NULL
+);
+
+UPDATE [dbo].[PortalBiz_EmployeeProfileCorrectionRequests]
+SET [RequestStatus] = @RequestStatus,
+    [ReviewedUtc] = @ReviewedUtc,
+    [ReviewedBy] = @ReviewedBy,
+    [ReviewNote] = @ReviewNote
+OUTPUT INSERTED.[RequestId] INTO @Updated
+WHERE [RequestId] = @RequestId;
+
+SELECT [RequestId] FROM @Updated;",
+                    new SqlParameter("@RequestId", normalized.RequestId),
+                    new SqlParameter("@RequestStatus", normalized.RequestStatus),
+                    new SqlParameter("@ReviewedUtc", normalized.ReviewedUtc.Value),
+                    new SqlParameter("@ReviewedBy", normalized.ReviewedBy),
+                    CreateNullableStringParameter("@ReviewNote", normalized.ReviewNote)).ToList();
+
+                long requestId = rows.Count == 0 ? 0 : rows[0];
+                if (requestId <= 0)
+                {
+                    return new EmployeeProfileCorrectionRequestResult(false, 0, "Correction request was not found.");
+                }
+
+                return new EmployeeProfileCorrectionRequestResult(true, requestId, "Correction request review state updated.");
+            }
+            catch (Exception)
+            {
+                // <lang>
+                //   <zh-CN>审核写入异常同样返回低敏失败，由调用方记录事件编号并提示管理员复核。</zh-CN>
+                //   <en>Review write exceptions also return a low-sensitivity failure; callers log an event id and ask administrators to review.</en>
+                // </lang>
+                return new EmployeeProfileCorrectionRequestResult(false, 0, "Correction request review failed.");
+            }
+        }

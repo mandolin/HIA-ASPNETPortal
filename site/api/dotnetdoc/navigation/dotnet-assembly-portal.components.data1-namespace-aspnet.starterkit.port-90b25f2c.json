@@ -4,18 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryadmindb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryadmindb:base:iemployeedirectoryadmindb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryadmindb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IEmployeeDirectoryAdminDb",
+      "label": "Base: System.Object",
       "entryCount": 0,
       "views": [
         "dotnet"
       ]
     },
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryadmindb:base:t-system.object",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.employeedirectoryadmindb:interface:t-aspnet.starterkit.portal.iemployeedirectoryadmindb",
       "kind": "relation",
-      "label": "Base: System.Object",
+      "label": "Interface: ASPNET.StarterKit.Portal.IEmployeeDirectoryAdminDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -212,6 +212,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.normalizeemployeerequest-aspnet.starterkit.portal.employeesaverequest",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectoryadmindb.normalizeemployeerequest-aspnet.starterkit.portal.employeesaverequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.-e1776e6b.html"
     },
@@ -237,6 +238,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.normalizeorganizationrequest-aspnet.starterkit.portal.organizationunitsaverequest",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectoryadmindb.normalizeorganizationrequest-aspnet.starterkit.portal.organizationunitsaverequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.-eb9dcfe7.html"
     },
@@ -314,6 +316,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.saveemployee-aspnet.starterkit.portal.employeesaverequest",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectoryadmindb.saveemployee-aspnet.starterkit.portal.employeesaverequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.-6e8f1f88.html"
     },
@@ -326,6 +329,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.saveorganizationunit-aspnet.starterkit.portal.organizationunitsaverequest",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectoryadmindb.saveorganizationunit-aspnet.starterkit.portal.organizationunitsaverequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.-0951143c.html"
     },
@@ -364,6 +368,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.tryvalidateemployeerequest-aspnet.starterkit.portal.employeesaverequest-system.string",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectoryadmindb.tryvalidateemployeerequest-aspnet.starterkit.portal.employeesaverequest-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.-0d06ed1e.html"
     },
@@ -376,6 +381,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.tryvalidateorganizationrequest-aspnet.starterkit.portal.organizationunitsaverequest-system.string",
+      "sourcePath": "src/Portal.Components.Data1/EmployeeDirectoryAdminDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.employeedirectoryadmindb.tryvalidateorganizationrequest-aspnet.starterkit.portal.organizationunitsaverequest-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.employeedirectoryadmindb.-fcf474a2.html"
     },

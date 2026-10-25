@@ -1,0 +1,14 @@
+        public TabSettings(ITabItem item)
+        {
+            AuthorizedRoles            = item.AccessRoles;
+            MobileTabName              = item.MobileTabName;
+            MobileTabNameEn            = item.MobileTabNameEn;
+            MobileTabNameLocalizedJson = item.MobileTabNameLocalizedJson;
+            ShowMobile                 = item.ShowMobile.Value;
+            TabId                      = item.TabId;
+            TabName                    = item.TabName;
+            TabNameEn                  = item.TabNameEn;
+            TabNameLocalizedJson       = item.TabNameLocalizedJson;
+            NavigationKey              = item.NavigationKey;
+            TabOrder                   = item.TabOrder.Value;
+        }

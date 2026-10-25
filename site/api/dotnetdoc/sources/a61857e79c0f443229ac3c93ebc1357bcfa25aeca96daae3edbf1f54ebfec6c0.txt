@@ -1,0 +1,18 @@
+        private static int? TryGetActiveTabId(HttpContext context)
+        {
+            try
+            {
+                // <lang>
+                //   <zh-CN>读取当前请求关联的门户设置；该操作只服务 Tab 判定，不修改上下文或主题设置。</zh-CN>
+                //   <en>Read portal settings associated with the current request; this serves tab determination only and changes neither context nor theme settings.</en>
+                // </lang>
+                PortalSettings settings = PortalContext.GetPortalSettings(context);
+                return settings.ActiveTab == null || settings.ActiveTab.TabId <= 0
+                    ? (int?)null
+                    : settings.ActiveTab.TabId;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        }

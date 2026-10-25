@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem:base:iglobalitem",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IGlobalItem",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.globalitem:interface:t-aspnet.starterkit.portal.iglobalitem",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IGlobalItem",
       "entryCount": 0,
       "views": [
         "dotnet"

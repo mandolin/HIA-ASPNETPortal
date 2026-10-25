@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemadminrow.-ctor-aspnet.starterkit.portal.collaborationiteminfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemeventinfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
+      "sourcePath": "src/Portal/Admin/CollaborationItems.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.collaborationitemadminrow.-ctor-aspnet.starterkit.portal.collaborationiteminfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemeventinfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.collaborationitemadminrow-17b9fbe8.html"
     },
@@ -59,6 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemadminrow.getownertext-aspnet.starterkit.portal.collaborationiteminfo",
+      "sourcePath": "src/Portal/Admin/CollaborationItems.aspx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.collaborationitemadminrow.getownertext-aspnet.starterkit.portal.collaborationiteminfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.collaborationitemadminrow-720ed308.html"
     },

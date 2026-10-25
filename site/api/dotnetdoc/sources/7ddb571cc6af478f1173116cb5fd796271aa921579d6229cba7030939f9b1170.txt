@@ -1,0 +1,25 @@
+        private bool TryGetRoleFromDataList(DataListCommandEventArgs e, out IRoleItem role)
+        {
+            // <lang>
+            //   <zh-CN>先验证行对象和 DataKeys 索引，再解析非负角色标识。</zh-CN>
+            //   <en>Validate the row and DataKeys index before parsing the non-negative role identifier.</en>
+            // </lang>
+            role = null;
+            // <lang>
+            //   <zh-CN>角色标识来自服务器 DataKeys，不直接信任客户端行文本。</zh-CN>
+            //   <en>The role id comes from server DataKeys rather than trusting client row text.</en>
+            // </lang>
+            int roleId;
+            if (e.Item == null || e.Item.ItemIndex < 0 || e.Item.ItemIndex >= rolesList.DataKeys.Count ||
+                !PortalNavigationPolicy.TryReadNonNegativeInt32(rolesList.DataKeys[e.Item.ItemIndex].ToString(), out roleId))
+            {
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>只接受当前门户集合中的角色，阻断跨门户或陈旧角色操作。</zh-CN>
+            //   <en>Accept only a role in the current Portal collection, blocking cross-Portal or stale operations.</en>
+            // </lang>
+            role = FindCurrentPortalRole(roleId);
+            return role != null;
+        }

@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentsdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentsdb:base:idocumentsdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentsdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IDocumentsDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.documentsdb:interface:t-aspnet.starterkit.portal.idocumentsdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IDocumentsDb",
       "entryCount": 0,
       "views": [
         "dotnet"

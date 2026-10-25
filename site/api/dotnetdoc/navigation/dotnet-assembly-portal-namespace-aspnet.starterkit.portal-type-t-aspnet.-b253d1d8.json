@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationrecentrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
+      "sourcePath": "src/Portal/DesktopModules/BusinessApplicationRequest/BusinessApplicationRequest.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationrecentrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationrecent-976a7f81.html"
     },

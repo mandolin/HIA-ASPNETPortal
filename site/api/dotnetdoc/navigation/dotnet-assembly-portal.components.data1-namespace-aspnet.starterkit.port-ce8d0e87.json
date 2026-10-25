@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedatadb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedatadb:base:ireferencedatadb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedatadb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IReferenceDataDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.referencedatadb:interface:t-aspnet.starterkit.portal.ireferencedatadb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IReferenceDataDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -73,6 +82,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.referencedatadb.trygetactiveitems-system.string-system.collections.generic.ilist-aspnet.starterkit.portal.referencedataitem",
+      "sourcePath": "src/Portal.Components.Data1/ReferenceDataDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.referencedatadb.trygetactiveitems-system.string-system.collections.generic.ilist-aspnet.starterkit.portal.referencedataitem",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.referencedatadb.trygetact-18423153.html"
     },

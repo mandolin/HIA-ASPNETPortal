@@ -1,0 +1,22 @@
+        private static bool TryNormalizePermissionKey(string permissionKey, HttpContext context, out string normalizedKey)
+        {
+            // <lang>
+            //   <zh-CN>失败默认为空，避免异常或注册表失败时把调用方原文当成可信权限键。</zh-CN>
+            //   <en>Default to empty so an exception or registry failure never promotes caller input to a trusted permission key.</en>
+            // </lang>
+            normalizedKey = string.Empty;
+            try
+            {
+                normalizedKey = PortalPermissionRegistry.NormalizeDefinedKey(permissionKey);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                PortalDiagnostics.Error(
+                    "Authorization.PermissionKey",
+                    "Undefined or invalid permission key requested.",
+                    exception,
+                    context);
+                return false;
+            }
+        }

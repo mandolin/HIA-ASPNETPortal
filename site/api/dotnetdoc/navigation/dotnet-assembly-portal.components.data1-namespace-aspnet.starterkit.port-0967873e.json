@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb:base:iexpensereimbursementdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IExpenseReimbursementDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb:interface:t-aspnet.starterkit.portal.iexpensereimbursementdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IExpenseReimbursementDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -34,6 +43,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.createrequest-aspnet.starterkit.portal.expensereimbursementcreaterequest",
+      "sourcePath": "src/Portal.Components.Data1/ExpenseReimbursementDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.createrequest-aspnet.starterkit.portal.expensereimbursementcreaterequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.cr-aff7d3e1.html"
     },

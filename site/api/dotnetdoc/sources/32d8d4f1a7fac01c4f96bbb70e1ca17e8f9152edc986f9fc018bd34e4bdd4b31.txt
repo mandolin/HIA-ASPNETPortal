@@ -1,0 +1,53 @@
+        public PortalSettings(int tabIndex, int tabId,
+                              IGlobalsDb portalConfig, ITabsDb tabsConfig, IModulesDb modulesConfig,
+                              IModuleDefsDb moduleDefConfig)
+        {
+            // <lang>
+            //   <zh-CN>门户全局配置当前沿用既有单门户记录读取方式。</zh-CN>
+            //   <en>Portal global configuration currently follows the legacy single-Portal record lookup.</en>
+            // </lang>
+            IGlobalItem globalSettings = portalConfig.GetSinglePortal(1);
+
+            // <lang>
+            //   <zh-CN>读取门户基本元数据和编辑入口策略。</zh-CN>
+            //   <en>Read Portal base metadata and the edit-entry policy.</en>
+            // </lang>
+            PortalId = globalSettings.PortalId;
+            PortalName = globalSettings.PortalName;
+            AlwaysShowEditButton = globalSettings.AlwaysShowEditButton.Value;
+
+            // <lang>
+            //   <zh-CN>读取桌面版导航页签，保留数据访问层返回的顺序。</zh-CN>
+            //   <en>Read desktop navigation tabs and retain the order returned by the data-access layer.</en>
+            // </lang>
+            DesktopTabs.AddRange(tabsConfig.GetTabs());
+
+            // <lang>
+            //   <zh-CN>读取移动版兼容页签，保留数据访问层返回的顺序。</zh-CN>
+            //   <en>Read mobile-compatibility tabs and retain the order returned by the data-access layer.</en>
+            // </lang>
+            MobileTabs.AddRange(tabsConfig.GetMobileTabs());
+
+            // <lang>
+            //   <zh-CN>创建活动页签容器，随后填入该页的模块设置。</zh-CN>
+            //   <en>Create the active-tab container, then populate its module settings.</en>
+            // </lang>
+            ActiveTab = new Tab(tabIndex, tabsConfig.GetSingleTab(tabId));
+
+            // <lang>
+            //   <zh-CN>按既有数据关系读取活动页签的模块实例。</zh-CN>
+            //   <en>Read module instances for the active tab through the legacy data relationship.</en>
+            // </lang>
+            foreach (IModuleItem module in modulesConfig.GetModulesByTab(tabId))
+            {
+                var moduleSettings = new ModuleSettings(module, moduleDefConfig);
+
+                ActiveTab.Modules.Add(moduleSettings);
+            }
+
+            // <lang>
+            //   <zh-CN>按 ModuleOrder 排序，保持既有页面模块展示顺序。</zh-CN>
+            //   <en>Sort by ModuleOrder to preserve legacy page-module display order.</en>
+            // </lang>
+            ActiveTab.Modules.Sort();
+        }

@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb:base:ileaverequestdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:ILeaveRequestDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb:interface:t-aspnet.starterkit.portal.ileaverequestdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.ILeaveRequestDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -34,6 +43,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
+      "sourcePath": "src/Portal.Components.Data1/LeaveRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequestdb.createrequest-aspnet.starterkit.portal.leaverequestcreaterequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.createrequ-d5037ca1.html"
     },

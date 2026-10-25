@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory.create-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationentry",
+      "sourcePath": "src/Portal/Components/PortalNavigationVisibilityContextFactory.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory.create-system.collections.generic.ienumerable-aspnet.starterkit.portal.portalnavigationentry",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilit-fd7d3d17.html"
     },

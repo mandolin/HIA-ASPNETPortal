@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.addtextparameter-system.data.sqlclient.sqlcommand-system.string-system.int32-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.addtextparameter-system.data.sqlclient.sqlcommand-system.string-system.int32-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-63d90b57.html"
     },
@@ -33,6 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.addunlimitedtextparameter-system.data.sqlclient.sqlcommand-system.string-system.string",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.addunlimitedtextparameter-system.data.sqlclient.sqlcommand-system.string-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-6b9d9dd3.html"
     },
@@ -71,6 +73,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.deleteoverride-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.deleteoverride-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-0fbba113.html"
     },
@@ -83,6 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.getactorusername-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.getactorusername-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-b733b5b1.html"
     },
@@ -95,6 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.getclientip-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.getclientip-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-5691b6ce.html"
     },
@@ -107,6 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.getuseragent-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.getuseragent-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-47ae2f16.html"
     },
@@ -119,6 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.istableavailable-system.data.sqlclient.sqlconnection-system.string",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.istableavailable-system.data.sqlclient.sqlconnection-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-75fd1976.html"
     },
@@ -131,6 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.read-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.read-system.string-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-26183451.html"
     },
@@ -143,6 +151,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.readcurrentvalueforupdate-system.data.sqlclient.sqlconnection-system.data.sqlclient.sqltransaction-system.string-system.boolean-system.string-system.boolean",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.readcurrentvalueforupdate-system.data.sqlclient.sqlconnection-system.data.sqlclient.sqltransaction-system.string-system.boolean-system.string-system.boolean",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-b1828795.html"
     },
@@ -155,6 +164,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.saveoverride-aspnet.starterkit.portal.portalsettingdefinition-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.saveoverride-aspnet.starterkit.portal.portalsettingdefinition-system.string-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-79f4015e.html"
     },
@@ -167,6 +177,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore.writeaudit-system.data.sqlclient.sqlconnection-system.data.sqlclient.sqltransaction-system.string-system.string-system.string-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalSystemSettingsStore.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalsystemsettingsstore.writeaudit-system.data.sqlclient.sqlconnection-system.data.sqlclient.sqltransaction-system.string-system.string-system.string-system.string-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalsystemsettingsstore-2b12f8c6.html"
     }

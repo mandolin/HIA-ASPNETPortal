@@ -1,0 +1,9 @@
+        private static string GetClientIp(HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>与操作者审计使用同一显式优先上下文规则；没有请求时返回稳定空值而不尝试解析转发头或网络连接。</zh-CN>
+            //   <en>Use the same explicit-context-first rule as actor audit; return a stable empty value without parsing forwarded headers or network connections when no request exists.</en>
+            // </lang>
+            HttpContext current = context ?? HttpContext.Current;
+            return current == null || current.Request == null ? string.Empty : current.Request.UserHostAddress;
+        }

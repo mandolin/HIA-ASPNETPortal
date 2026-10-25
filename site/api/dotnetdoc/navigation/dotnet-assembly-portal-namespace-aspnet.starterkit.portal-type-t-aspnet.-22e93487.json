@@ -47,6 +47,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.isschemaversionsupported-newtonsoft.json.linq.jobject",
+      "sourcePath": "src/Portal/Components/PortalThemePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.isschemaversionsupported-newtonsoft.json.linq.jobject",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.issche-a418056c.html"
     },
@@ -85,6 +86,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readandvalidateresources-newtonsoft.json.linq.jobject-system.string",
+      "sourcePath": "src/Portal/Components/PortalThemePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.readandvalidateresources-newtonsoft.json.linq.jobject-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readan-72486a56.html"
     },
@@ -97,6 +99,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readoptionalboolean-newtonsoft.json.linq.jobject-system.string",
+      "sourcePath": "src/Portal/Components/PortalThemePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.readoptionalboolean-newtonsoft.json.linq.jobject-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readop-056a1c1e.html"
     },
@@ -109,6 +112,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readoptionalstring-newtonsoft.json.linq.jobject-system.string-system.int32",
+      "sourcePath": "src/Portal/Components/PortalThemePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.readoptionalstring-newtonsoft.json.linq.jobject-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readop-250fbee7.html"
     },
@@ -121,6 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readrequiredstring-newtonsoft.json.linq.jobject-system.string-system.int32",
+      "sourcePath": "src/Portal/Components/PortalThemePackage.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalthemecatalog.readrequiredstring-newtonsoft.json.linq.jobject-system.string-system.int32",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalthemecatalog.readre-fbb99902.html"
     },

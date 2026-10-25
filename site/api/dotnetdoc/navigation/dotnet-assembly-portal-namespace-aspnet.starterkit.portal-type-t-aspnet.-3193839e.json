@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcontext.gethttpcontext-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalContext.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcontext.gethttpcontext-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcontext.gethttpcont-fd9ff555.html"
     },
@@ -33,6 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcontext.getportalsettings-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalContext.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcontext.getportalsettings-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcontext.getportalse-a4a6c2d7.html"
     },
@@ -58,6 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalcontext.setportalsettings-aspnet.starterkit.portal.portalsettings-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalContext.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalcontext.setportalsettings-aspnet.starterkit.portal.portalsettings-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalcontext.setportalse-ea50a6f5.html"
     }

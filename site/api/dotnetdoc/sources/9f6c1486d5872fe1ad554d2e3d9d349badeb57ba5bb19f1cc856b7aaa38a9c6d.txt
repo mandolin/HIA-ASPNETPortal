@@ -1,0 +1,10 @@
+        public ModuleDefsDb(PortalCfgDbContext context, IModulesDb modulesDb)
+        {
+            _context = context;
+            _modulesDb = modulesDb;
+            // <lang>
+            //   <zh-CN>旧页面频繁枚举模块定义，这里保留原有的轻量内存快照模式；每次写入后会主动刷新。</zh-CN>
+            //   <en>Legacy pages enumerate module definitions frequently, so keep the existing lightweight in-memory snapshot and refresh it after each write.</en>
+            // </lang>
+            _items = _context.ModuleDefinitions.ToList();
+        }

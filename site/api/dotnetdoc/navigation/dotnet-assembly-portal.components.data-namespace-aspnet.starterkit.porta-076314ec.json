@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussionsdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussionsdb:base:idiscussionsdb",
+      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussionsdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IDiscussionsDb",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.discussionsdb:interface:t-aspnet.starterkit.portal.idiscussionsdb",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IDiscussionsDb",
       "entryCount": 0,
       "views": [
         "dotnet"

@@ -58,15 +58,6 @@
       ]
     },
     {
-      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitymode:interface:t-system.ispanformattable",
-      "kind": "relation",
-      "label": "Interface: System.ISpanFormattable",
-      "entryCount": 0,
-      "views": [
-        "dotnet"
-      ]
-    },
-    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitymode:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalnavigationvisibilitymode.adminonly",
       "kind": "entry",
       "label": "AdminOnly",

@@ -4,9 +4,36 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:base:dbcontext",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:base:t-system.data.entity.dbcontext",
       "kind": "relation",
-      "label": "Base: !:DbContext",
+      "label": "Base: System.Data.Entity.DbContext",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:interface:t-system.data.entity.infrastructure.iobjectcontextadapter",
+      "kind": "relation",
+      "label": "Interface: System.Data.Entity.Infrastructure.IObjectContextAdapter",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcfgdbcontext:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
       "entryCount": 0,
       "views": [
         "dotnet"

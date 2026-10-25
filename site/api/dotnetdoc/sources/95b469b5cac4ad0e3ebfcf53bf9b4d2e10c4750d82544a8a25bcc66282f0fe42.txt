@@ -1,0 +1,34 @@
+        private void TryAddParticipant(long itemId, RepeaterItem rowItem)
+        {
+            // <lang>
+            //   <zh-CN>用户标识必须为正整数、角色来自封闭词表；存在性、重复性和操作者授权均由数据层复核，标记层不做授权判断。</zh-CN>
+            //   <en>The user identifier must be a positive integer and the role must come from the closed vocabulary; existence, duplication, and actor authorization are all rechecked by the data layer, and markup performs no authorization decision.</en>
+            // </lang>
+            TextBox userBox = rowItem == null ? null : rowItem.FindControl("ParticipantUserTextBox") as TextBox;
+            DropDownList roleList = rowItem == null ? null : rowItem.FindControl("ParticipantRoleList") as DropDownList;
+            if (userBox == null || roleList == null || CollaborationItemDb == null)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParticipantFailed;
+                return;
+            }
+
+            int userId;
+            if (!int.TryParse(userBox.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out userId) || userId <= 0)
+            {
+                MessageLabel.Text = lang.Admin_CollaborationItems_MessageParticipantFailed;
+                return;
+            }
+
+            CollaborationItemParticipantResult result = CollaborationItemDb.AddParticipant(
+                new CollaborationItemParticipantCreateRequest
+                {
+                    ItemId = itemId,
+                    UserId = userId,
+                    ParticipantRoleKey = roleList.SelectedValue,
+                    ActorUserId = GetCurrentUserId()
+                });
+
+            MessageLabel.Text = result.Success
+                ? lang.Admin_CollaborationItems_MessageParticipantAdded
+                : result.Message;
+        }

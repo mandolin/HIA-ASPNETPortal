@@ -1,0 +1,45 @@
+        private static IList<string> ReadAndValidateResources(JObject manifest, string packagePath)
+        {
+            // <lang>
+            //   <zh-CN>资源必须显式为 JSON 数组；缺失不等同于空数组，避免未声明资源边界的包被隐式接受。</zh-CN>
+            //   <en>Resources must be an explicit JSON array; absence is not equivalent to an empty array, avoiding implicit acceptance of a package with no declared resource boundary.</en>
+            // </lang>
+            JArray resources = manifest["resources"] as JArray;
+            if (resources == null)
+            {
+                throw new InvalidOperationException("Module resources are missing.");
+            }
+
+            var validatedResources = new List<string>();
+            foreach (JToken token in resources)
+            {
+                // <lang>
+                //   <zh-CN>每项必须是文本并标准化为正斜杠相对路径；不允许把 JSON 其它类型或平台分隔符的歧义直接带入物理路径组合。</zh-CN>
+                //   <en>Each item must be text and normalizes to a forward-slash relative path; do not carry other JSON types or platform-separator ambiguity directly into physical-path combination.</en>
+                // </lang>
+                if (token.Type != JTokenType.String)
+                {
+                    throw new InvalidOperationException("Module resource is invalid.");
+                }
+
+                string resource = token.Value<string>().Trim().Replace('\\', '/');
+                if (!IsValidResourcePath(resource))
+                {
+                    throw new InvalidOperationException("Module resource path is not allowed.");
+                }
+
+                // <lang>
+                //   <zh-CN>路径文本通过后仍在包根内解析并要求文件存在且扩展名受限；既不下载外部资源，也不接受可执行或任意静态文件类型。</zh-CN>
+                //   <en>After the path text passes, resolve it under the package root and require an existing file with an allowed extension; never download an external resource or accept executable or arbitrary static file types.</en>
+                // </lang>
+                string physicalPath = GetChildPath(packagePath, resource.Replace('/', Path.DirectorySeparatorChar));
+                if (!File.Exists(physicalPath) || !IsAllowedResourceExtension(resource))
+                {
+                    throw new InvalidOperationException("Module resource is unavailable or uses a prohibited extension.");
+                }
+
+                validatedResources.Add(resource);
+            }
+
+            return validatedResources.AsReadOnly();
+        }

@@ -1,0 +1,19 @@
+        internal OrganizationDirectoryRow(IOrganizationUnitInfo organization, string parentText)
+        {
+            // <lang>
+            //   <zh-CN>投影复制组织字段并把启用状态、编辑地址转换为只读展示值；不保留可写数据对象。</zh-CN>
+            //   <en>Project organization fields and convert active state and edit URL into read-only display values without retaining a writable data object.</en>
+            // </lang>
+            OrganizationUnitId = organization.OrganizationUnitId;
+            OrganizationCode = organization.OrganizationCode;
+            DisplayName = organization.DisplayName;
+            ParentText = parentText;
+            SortOrder = organization.SortOrder;
+            IsActiveText = organization.IsActive ? "Yes" : "No";
+            // <lang>
+            //   <zh-CN>编辑地址固定为当前应用内页，标识使用不变文化格式，不接受外部 URL。</zh-CN>
+            //   <en>Keep the edit URL inside the current application and format the identifier invariantly; no external URL is accepted.</en>
+            // </lang>
+            EditUrl = "OrganizationUnitEdit.aspx?organizationUnitId=" +
+                      organization.OrganizationUnitId.ToString(CultureInfo.InvariantCulture);
+        }

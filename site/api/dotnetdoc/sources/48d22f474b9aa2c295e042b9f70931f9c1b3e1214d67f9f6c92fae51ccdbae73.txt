@@ -1,0 +1,29 @@
+        internal EmployeeDirectoryRow(IEmployeeInfo employee)
+        {
+            // <lang>
+            //   <zh-CN>投影只复制目录展示所需的低敏字段；账号安全版本、凭据和绑定写入不在此模型中。</zh-CN>
+            //   <en>Project only low-sensitivity fields needed for directory display; credentials, security versions and binding writes are outside this model.</en>
+            // </lang>
+            EmployeeId = employee.EmployeeId;
+            EmployeeCode = employee.EmployeeCode;
+            DisplayName = employee.DisplayName;
+            PreferredName = employee.PreferredName;
+            WorkEmail = employee.WorkEmail;
+            // <lang>
+            //   <zh-CN>组织显示优先使用已联接名称，缺失时回退到稳定组织标识或空字符串，不臆造名称。</zh-CN>
+            //   <en>Prefer the joined organization name, then fall back to the stable organization identifier or empty text without inventing a name.</en>
+            // </lang>
+            OrganizationText = string.IsNullOrEmpty(employee.OrganizationDisplayName)
+                ? employee.OrganizationUnitId.HasValue
+                    ? "#" + employee.OrganizationUnitId.Value.ToString(CultureInfo.InvariantCulture)
+                    : string.Empty
+                : employee.OrganizationDisplayName;
+            EmploymentStatus = employee.EmploymentStatus;
+            SourceSystem = employee.SourceSystem;
+            // <lang>
+            //   <zh-CN>两个动作地址都固定为站内维护页，分别表达员工编辑与绑定维护，不在只读页执行动作。</zh-CN>
+            //   <en>Both action URLs point to fixed in-application maintenance pages, representing employee editing and binding maintenance without executing actions here.</en>
+            // </lang>
+            EditUrl = "EmployeeEdit.aspx?employeeId=" + employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
+            BindUrl = "UserEmployeeBindingEdit.aspx?employeeId=" + employee.EmployeeId.ToString(CultureInfo.InvariantCulture);
+        }

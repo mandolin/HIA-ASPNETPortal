@@ -60,6 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.geteffectivevalue-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.geteffectivevalue-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.get-69735aa0.html"
     },
@@ -124,6 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalruntimesettings.warndatabasefallback-system.string-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalRuntimeSettings.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portalruntimesettings.warndatabasefallback-system.string-system.string-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalruntimesettings.war-89eb20d3.html"
     }

@@ -1,0 +1,86 @@
+        private bool TryCreateSaveRequest(out EmployeeSaveRequest request, out string message)
+        {
+            // <lang>
+            //   <zh-CN>先清空输出，保证任何失败路径都不会把旧请求或旧提示泄漏给调用者。</zh-CN>
+            //   <en>Clear outputs first so every failure path cannot leak a request or message from a previous invocation.</en>
+            // </lang>
+            request = null;
+            message = string.Empty;
+
+            // <lang>
+            //   <zh-CN>员工标识只接受非负不变整数；0 保留给新增，正数表示已有实体。</zh-CN>
+            //   <en>Accept only a non-negative invariant integer for the employee identifier; zero denotes creation and a positive value an existing entity.</en>
+            // </lang>
+            int employeeId;
+            if (!int.TryParse(EmployeeIdField.Value, NumberStyles.None, CultureInfo.InvariantCulture, out employeeId) ||
+                employeeId < 0)
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidEmployeeId;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>组织下拉框的空值映射为 null，正整数才进入保存请求，避免伪造负数或非数字归属。</zh-CN>
+            //   <en>Map an empty organization selector to null and allow only positive integers into the request, rejecting forged negative or non-numeric ownership.</en>
+            // </lang>
+            int? organizationUnitId;
+            if (!TryReadOptionalListInt32(OrganizationUnitList.SelectedValue, out organizationUnitId))
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidOrganizationId;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>入职和离职时间按统一 helper 解析为 UTC，页面不把本地时间假设写入请求。</zh-CN>
+            //   <en>Parse joined and left times through the shared UTC helper so the page does not write local-time assumptions into the request.</en>
+            // </lang>
+            DateTime? joinedUtc;
+            if (!TryReadOptionalUtc(JoinedUtcTextBox.Text, out joinedUtc))
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidJoinedUtc;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>离职时间与入职时间使用同一格式边界，业务上的先后关系由数据层继续负责。</zh-CN>
+            //   <en>Use the same format boundary for the leaving time; the data layer remains responsible for business ordering rules.</en>
+            // </lang>
+            DateTime? leftUtc;
+            if (!TryReadOptionalUtc(LeftUtcTextBox.Text, out leftUtc))
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidLeftUtc;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>编辑时间戳来自隐藏域，仅用于并发保护；新增路径允许为空。</zh-CN>
+            //   <en>The edit timestamp comes from a hidden field only for concurrency protection; creation allows it to be empty.</en>
+            // </lang>
+            DateTime? originalUpdatedUtc;
+            if (!TryReadOriginalUpdatedUtc(employeeId, OriginalUpdatedUtcField.Value, out originalUpdatedUtc))
+            {
+                message = lang.Admin_EmployeeEdit_MessageInvalidTimestamp;
+                return false;
+            }
+
+            // <lang>
+            //   <zh-CN>最后组装完整请求，保留页面字段原值交给数据层做业务清理、唯一性和状态组合校验。</zh-CN>
+            //   <en>Assemble the complete request last, leaving field cleanup, uniqueness and status-combination validation to the data layer.</en>
+            // </lang>
+            request = new EmployeeSaveRequest
+            {
+                EmployeeId = employeeId,
+                EmployeeCode = EmployeeCodeTextBox.Text,
+                DisplayName = DisplayNameTextBox.Text,
+                PreferredName = PreferredNameTextBox.Text,
+                WorkEmail = WorkEmailTextBox.Text,
+                OrganizationUnitId = organizationUnitId,
+                EmploymentStatus = EmploymentStatusList.SelectedValue,
+                JoinedUtc = joinedUtc,
+                LeftUtc = leftUtc,
+                SourceSystem = SourceSystemTextBox.Text,
+                OriginalUpdatedUtc = originalUpdatedUtc,
+                ActorName = GetCurrentActor()
+            };
+            return true;
+        }

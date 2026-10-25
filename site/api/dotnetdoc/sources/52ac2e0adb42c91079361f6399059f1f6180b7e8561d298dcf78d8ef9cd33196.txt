@@ -1,0 +1,8 @@
+        public static string Info(string category, string message, HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>门面固定使用受控 Info 级别，不接受调用方提供任意 Trace 路由值。</zh-CN>
+            //   <en>The facade fixes the controlled Info level and does not accept an arbitrary caller-supplied Trace-routing value.</en>
+            // </lang>
+            return Write("Info", category, message, null, context);
+        }

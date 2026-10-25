@@ -1,0 +1,22 @@
+        private static PortalWorkItemCompletionRequest NormalizeCompletionRequest(PortalWorkItemCompletionRequest request)
+        {
+            request = request ?? new PortalWorkItemCompletionRequest();
+            return new PortalWorkItemCompletionRequest
+            {
+                BusinessKind = NormalizeText(request.BusinessKind, 80),
+                BusinessId = NormalizeText(request.BusinessId, 80),
+                EventType = NormalizeText(request.EventType, 40),
+                TargetStatus = NormalizeText(request.TargetStatus, 20),
+                ActorUserId = request.ActorUserId.HasValue && request.ActorUserId.Value > 0 ? request.ActorUserId : null,
+                // <lang>
+                //   <zh-CN>与创建者的 `"system"` 兜底同一口径：未显式提供操作者时落库为该字面量，它**不是真实身份**，
+                // 不得在审计中解读为"系统自动处理"；追溯真实操作者须由调用方显式传入。</zh-CN>
+                //   <en>The same rule as the `"system"` creator fallback: when no actor is supplied explicitly this literal is stored, and it is
+                // **not a real identity** — audits must not read it as "handled automatically by the system". Tracing the real actor requires the
+                // caller to pass it explicitly.</en>
+                // </lang>
+                ActorName = string.IsNullOrWhiteSpace(request.ActorName) ? "system" : NormalizeText(request.ActorName, 100),
+                Comment = NormalizeOptionalText(request.Comment, 1000),
+                OccurredUtc = request.OccurredUtc ?? DateTime.UtcNow
+            };
+        }

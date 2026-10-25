@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadconfig-unity.iunitycontainer-system.string",
+      "sourcePath": "src/Portal/Util/UnityConfigLoader.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.util.unityconfigloader.loadconfig-unity.iunitycontainer-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.lo-08c06a06.html"
     },
@@ -33,6 +34,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.loadunityconfig-unity.iunitycontainer-system.string",
+      "sourcePath": "src/Portal/Util/UnityConfigLoader.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.util.unityconfigloader.loadunityconfig-unity.iunitycontainer-system.string",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.util.unityconfigloader.lo-ac87b81f.html"
     }

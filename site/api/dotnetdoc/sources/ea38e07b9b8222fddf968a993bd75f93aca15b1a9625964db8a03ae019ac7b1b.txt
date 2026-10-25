@@ -1,0 +1,10 @@
+        private static string GetCurrentUserName(HttpContext context)
+        {
+            if (context == null || context.User == null || context.User.Identity == null ||
+                !context.User.Identity.IsAuthenticated)
+            {
+                return string.Empty;
+            }
+
+            return context.User.Identity.Name;
+        }

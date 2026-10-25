@@ -1,0 +1,5 @@
+        public EmployeeProfileCorrectionRequestDb(PortalBizDbContext context, IEmployeeDirectoryAdminDb employeeAdminDb = null)
+        {
+            this.context = context;
+            this.employeeAdminDb = employeeAdminDb;
+        }

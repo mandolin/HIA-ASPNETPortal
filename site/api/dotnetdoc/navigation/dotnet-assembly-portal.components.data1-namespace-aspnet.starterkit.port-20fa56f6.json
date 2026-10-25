@@ -4,18 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationdb",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationdb:base:ibusinessapplicationdb",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationdb:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IBusinessApplicationDb",
+      "label": "Base: System.Object",
       "entryCount": 0,
       "views": [
         "dotnet"
       ]
     },
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationdb:base:t-system.object",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.businessapplicationdb:interface:t-aspnet.starterkit.portal.ibusinessapplicationdb",
       "kind": "relation",
-      "label": "Base: System.Object",
+      "label": "Interface: ASPNET.StarterKit.Portal.IBusinessApplicationDb",
       "entryCount": 0,
       "views": [
         "dotnet"
@@ -160,6 +160,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationdb.normalizereviewrequest-aspnet.starterkit.portal.businessapplicationreviewrequest",
+      "sourcePath": "src/Portal.Components.Data1/BusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationdb.normalizereviewrequest-aspnet.starterkit.portal.businessapplicationreviewrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationdb.nor-1de1730c.html"
     },
@@ -185,6 +186,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationdb.normalizesubmitrequest-aspnet.starterkit.portal.businessapplicationsubmitrequest",
+      "sourcePath": "src/Portal.Components.Data1/BusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationdb.normalizesubmitrequest-aspnet.starterkit.portal.businessapplicationsubmitrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationdb.nor-9f6f98dc.html"
     },
@@ -223,6 +225,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationdb.queryapplications-system.string-system.int32-system.data.sqlclient.sqlparameter",
+      "sourcePath": "src/Portal.Components.Data1/BusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationdb.queryapplications-system.string-system.int32-system.data.sqlclient.sqlparameter",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationdb.que-028213d4.html"
     },
@@ -248,6 +251,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationdb.reviewapplication-aspnet.starterkit.portal.businessapplicationreviewrequest",
+      "sourcePath": "src/Portal.Components.Data1/BusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationdb.reviewapplication-aspnet.starterkit.portal.businessapplicationreviewrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationdb.rev-45ea4b7a.html"
     },
@@ -260,6 +264,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationdb.submitapplication-aspnet.starterkit.portal.businessapplicationsubmitrequest",
+      "sourcePath": "src/Portal.Components.Data1/BusinessApplicationDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.businessapplicationdb.submitapplication-aspnet.starterkit.portal.businessapplicationsubmitrequest",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.businessapplicationdb.sub-189f610a.html"
     }

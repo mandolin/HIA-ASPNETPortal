@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnostics.appendrequestcontext-aspnet.starterkit.portal.portaldiagnosticentry-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalDiagnostics.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnostics.appendrequestcontext-aspnet.starterkit.portal.portaldiagnosticentry-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnostics.appendr-2aadc2af.html"
     },
@@ -59,6 +60,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnostics.buildentry-system.string-system.string-system.string-system.exception-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalDiagnostics.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnostics.buildentry-system.string-system.string-system.string-system.exception-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnostics.builden-2e0dabb9.html"
     },
@@ -123,6 +125,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnostics.error-system.string-system.string-system.exception-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalDiagnostics.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnostics.error-system.string-system.string-system.exception-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnostics.error-s-597857d2.html"
     },
@@ -135,6 +138,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnostics.info-system.string-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalDiagnostics.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnostics.info-system.string-system.string-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnostics.info-sy-b112c5e7.html"
     },
@@ -199,6 +203,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnostics.unhandled-system.exception-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalDiagnostics.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnostics.unhandled-system.exception-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnostics.unhandl-446a6b27.html"
     },
@@ -211,6 +216,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnostics.warn-system.string-system.string-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalDiagnostics.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnostics.warn-system.string-system.string-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnostics.warn-sy-04a9597f.html"
     },
@@ -223,6 +229,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portaldiagnostics.write-system.string-system.string-system.string-system.exception-system.web.httpcontext",
+      "sourcePath": "src/Portal/Components/PortalDiagnostics.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.portaldiagnostics.write-system.string-system.string-system.string-system.exception-system.web.httpcontext",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portaldiagnostics.write-s-5aa74f42.html"
     },

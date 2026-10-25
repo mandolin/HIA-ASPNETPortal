@@ -58,15 +58,6 @@
       ]
     },
     {
-      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesamesitemode:interface:t-system.ispanformattable",
-      "kind": "relation",
-      "label": "Interface: System.ISpanFormattable",
-      "entryCount": 0,
-      "views": [
-        "dotnet"
-      ]
-    },
-    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalcookiesamesitemode:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalcookiesamesitemode.lax",
       "kind": "entry",
       "label": "Lax",

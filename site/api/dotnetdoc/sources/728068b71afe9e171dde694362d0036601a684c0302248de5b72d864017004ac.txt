@@ -1,0 +1,15 @@
+        public static PortalThemeContext ApplyTheme(Page page)
+        {
+            if (page == null)
+            {
+                throw new ArgumentNullException("page");
+            }
+
+            // <lang>
+            //   <zh-CN>解析当前请求主题上下文；解析只依赖既有受控来源，不接受 URL 或脚本输入。</zh-CN>
+            //   <en>Resolve the current-request theme context from existing controlled sources only, never from URL or script input.</en>
+            // </lang>
+            PortalThemeContext themeContext = ResolveThemeContext(HttpContext.Current);
+            page.Theme = themeContext.ThemeName;
+            return themeContext;
+        }

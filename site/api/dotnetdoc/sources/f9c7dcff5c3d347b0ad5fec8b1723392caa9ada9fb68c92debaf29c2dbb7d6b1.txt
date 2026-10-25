@@ -1,0 +1,13 @@
+        private static EmployeeProfileConfirmationRequest NormalizeRequest(EmployeeProfileConfirmationRequest request)
+        {
+            request = request ?? new EmployeeProfileConfirmationRequest();
+            return new EmployeeProfileConfirmationRequest
+            {
+                UserId = request.UserId,
+                EmployeeId = request.EmployeeId,
+                ConfirmedUtc = request.ConfirmedUtc ?? DateTime.UtcNow,
+                ConfirmedBy = string.IsNullOrWhiteSpace(request.ConfirmedBy)
+                    ? "system"
+                    : request.ConfirmedBy.Trim()
+            };
+        }

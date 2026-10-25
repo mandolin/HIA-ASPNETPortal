@@ -4,9 +4,18 @@
   "nodeId": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindinginfo",
   "children": [
     {
-      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindinginfo:base:iuseremployeebindinginfo",
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindinginfo:base:t-system.object",
       "kind": "relation",
-      "label": "Base: !:IUserEmployeeBindingInfo",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.useremployeebindinginfo:interface:t-aspnet.starterkit.portal.iuseremployeebindinginfo",
+      "kind": "relation",
+      "label": "Interface: ASPNET.StarterKit.Portal.IUserEmployeeBindingInfo",
       "entryCount": 0,
       "views": [
         "dotnet"

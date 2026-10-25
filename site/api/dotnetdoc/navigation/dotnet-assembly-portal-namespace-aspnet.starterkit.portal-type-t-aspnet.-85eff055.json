@@ -4,6 +4,19 @@
   "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpage-t",
   "children": [
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpage-t:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpage-1.buildupcontrol-system.web.ui.control",
+      "kind": "entry",
+      "label": "BuildUpControl",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalpage-1.buildupcontrol-system.web.ui.control",
+      "sourcePath": "src/Portal/Components/PortalPage.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalpage-1.buildupcontrol-system.web.ui.control",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalpage-1.buildupcontr-676cf754.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalpage-t:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalpage-1.injectdependencies",
       "kind": "entry",
       "label": "InjectDependencies",

@@ -21,6 +21,7 @@
         "dotnet"
       ],
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.-ctor-aspnet.starterkit.portal.collaborationiteminfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemeventinfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
+      "sourcePath": "src/Portal/DesktopModules/EnterpriseCapabilityWorkbench/EnterpriseCapabilityWorkbench.ascx.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.enterprisecapabilityworkbenchitemrow.-ctor-aspnet.starterkit.portal.collaborationiteminfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemeventinfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.enterprisecapabilityworkb-e2a121d4.html"
     },
