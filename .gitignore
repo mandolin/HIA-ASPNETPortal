@@ -395,3 +395,7 @@ MigrationBackup/
 
 # Playwright CLI 浏览器回归快照，属于本机临时证据。
 /.playwright-cli/
+
+# P40 目标环境运行目录（IIS 物理路径，发布生成物，非源码）
+/Web/
+/Web-P40/

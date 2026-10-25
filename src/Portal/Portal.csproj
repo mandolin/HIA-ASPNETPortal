@@ -54,6 +54,18 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <!-- EF6 的 SqlClient 提供程序由 EntityFramework.SqlServer.dll 在运行时被反射发现；
+         该程序集不被 IL 直接引用，MSBuild 依赖剪枝会漏掉它，导致发布包报
+         “No Entity Framework provider found for invariant name 'System.Data.SqlClient'”。
+         在部署入口工程显式引用以保证它进入输出目录。 -->
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Linq.Extras, Version=5.0.0.0, Culture=neutral, PublicKeyToken=487ae61f5d540dab, processorArchitecture=MSIL">
       <HintPath>..\packages\Linq.Extras.5.0.0\lib\net45\Linq.Extras.dll</HintPath>
     </Reference>
@@ -795,6 +807,14 @@
     <ProjectReference Include="..\Portal.Components\Portal.Components.csproj">
       <Project>{2B458F39-E3EE-44CA-B2E8-BFD787183ECE}</Project>
       <Name>Portal.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Components.Data\Portal.Components.Data.csproj">
+      <Project>{358EB6A9-B21A-44A8-9307-A495CE431518}</Project>
+      <Name>Portal.Components.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal.Components.Data1\Portal.Components.Data1.csproj">
+      <Project>{9F84089A-C636-4BBE-A049-1236A7AB5F36}</Project>
+      <Name>Portal.Components.Data1</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

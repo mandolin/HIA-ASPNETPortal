@@ -164,7 +164,23 @@ foreach ($item in @($registry.items)) {
                 if (Test-Path -LiteralPath $scriptPath) {
                     $generatorArgs = @()
                     foreach ($arg in @($item.generator.args)) { $generatorArgs += [string]$arg }
-                    $generatorArgs += @('-BaseUrl', $BaseUrl)
+                    # <lang>
+                    #   <zh-CN>**只对声明了 `BaseUrl` 的生成器追加该参数**：此前无条件追加，会让不接受
+                    #     `BaseUrl` 的生成器（如 `Test-PortalSqlVersionMatrix.ps1`、
+                    #     `New-PortalEnterpriseScanBaseline.ps1`）直接以
+                    #     “找不到与参数名称 'BaseUrl' 匹配的参数” 失败——这不是环境缺失，而是接线错误，
+                    #     会让本可出证的目标环境项被误记为 Failed。</zh-CN>
+                    #   <en>**Append `BaseUrl` only for generators that declare it**: appending it
+                    #     unconditionally made generators that do not accept `BaseUrl`
+                    #     (e.g. `Test-PortalSqlVersionMatrix.ps1`, `New-PortalEnterpriseScanBaseline.ps1`)
+                    #     fail immediately with “A parameter cannot be found that matches parameter name
+                    #     'BaseUrl'”. That is a wiring error rather than a missing environment, and it
+                    #     wrongly recorded collectible target-environment items as Failed.</en>
+                    # </lang>
+                    $generatorCommand = Get-Command -Name $scriptPath -ErrorAction SilentlyContinue
+                    if ($generatorCommand -and $generatorCommand.Parameters.ContainsKey('BaseUrl')) {
+                        $generatorArgs += @('-BaseUrl', $BaseUrl)
+                    }
                     $logPath = Join-Path $runDirectory ($id + '.log.md')
                     $record.log = $logPath
                     $output = & $pwshPath -NoLogo -NoProfile -ExecutionPolicy Bypass -File $scriptPath @generatorArgs 2>&1
