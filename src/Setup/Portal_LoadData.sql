@@ -128,7 +128,7 @@ GO
 </lang>
 */
 SET IDENTITY_INSERT [Portal_Roles] ON
-INSERT [Portal_Roles] ([RoleID], [PortalID], [RoleName]) VALUES (0, 0, N'Admins')
+INSERT [Portal_Roles] ([RoleID], [PortalID], [RoleName]) VALUES (0, 1, N'Admins')
 SET IDENTITY_INSERT [Portal_Roles] OFF
 
 /* <lang><zh-CN>`Portal_HtmlText` 种子包含大量作为 SQL Unicode 字符串保存的演示 HTML；注释必须停留在 SQL 语句外层，避免进入文本常量后改变页面正文、HTML 转义、图片路径或移动端摘要。</zh-CN><en>The `Portal_HtmlText` seed contains large demo HTML fragments stored as SQL Unicode strings; comments must stay outside the SQL statement bodies to avoid changing page text, HTML escaping, image paths, or mobile summaries.</en></lang> */

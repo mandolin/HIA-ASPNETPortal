@@ -62,7 +62,7 @@ BEGIN
     INSERT INTO [dbo].[Portal_Roles]
         ([PortalID], [RoleName])
     VALUES
-        (0, N'All Users');
+        (1, N'All Users');
 END
 GO
 

@@ -525,13 +525,16 @@ namespace ASPNET.StarterKit.Portal
                 var formsIdentity = Context.User?.Identity as FormsIdentity;
                 long ticketSecurityVersion;
                 long databaseSecurityVersion = usersDb.GetSecurityVersionByUserName(Context.User.Identity.Name);
+                bool ticketSecurityVersionReadable = PortalAuthenticationService.TryReadSecurityVersion(formsIdentity, out ticketSecurityVersion);
 
                 // <lang>
-                //   <zh-CN>比较票据和数据库安全版本先于角色 Cookie 读取；不一致时必须先注销，不能用缓存角色继续当前请求。</zh-CN>
-                //   <en>Compare the ticket and database security versions before reading the role cookie; on mismatch, sign out first and never continue the request with cached roles.</en>
+                //   <zh-CN>签退门槛：仅当票据可读且数据库安全版本可确定（>0）且与票据不符时才注销。数据库版本为 0 表示“无法判定”（瞬态读取失败、旧库无 Portal_UserSecurityStates 状态表、或状态行缺失），此时不得签退——单例 DbContext 上的并发查询竞态会使读取偶发失败返回 0，若据此注销会把活跃会话随机踢出。真实失效（密码重置/角色变更使版本递增）仍会落到 >0 的不匹配分支，照常签退。决策抽成纯函数以便回归测试守护。</zh-CN>
+                //   <en>Revoke threshold: sign out only when the ticket is readable and the database security version is determinable (>0) and differs from the ticket. A database version of 0 means "undetermined" (transient read failure, a legacy DB without the Portal_UserSecurityStates table, or a missing state row) and must not revoke—concurrent queries on the singleton DbContext race and intermittently return 0, which would otherwise randomly sign out active sessions. Genuine invalidation (password reset or role change incrementing the version) still lands in the >0 mismatch branch and revokes as expected. The decision is extracted into a pure function so regression tests can guard it.</en>
                 // </lang>
-                if (!PortalAuthenticationService.TryReadSecurityVersion(formsIdentity, out ticketSecurityVersion) ||
-                    ticketSecurityVersion != databaseSecurityVersion)
+                if (PortalAuthenticationService.ShouldRevokeForSecurityVersionMismatch(
+                        ticketSecurityVersion,
+                        databaseSecurityVersion,
+                        ticketSecurityVersionReadable))
                 {
                     PortalOperationAudit.Record(
                         "SecuritySession",

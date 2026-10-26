@@ -175,6 +175,49 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>纯函数化的签退决策，供 Application_AuthenticateRequest 与回归测试共用。票据不可读，或数据库安全版本可确定（>0）且与票据不符时返回 true；数据库版本为 0 表示“无法判定”（瞬态读取失败、旧库无 Portal_UserSecurityStates 状态表、或状态行缺失），必须返回 false，否则单例 DbContext 上的并发查询竞态会使读取偶发失败返回 0，把活跃会话随机踢出（P42 修复）。</zh-CN>
+        ///   <en>Pure revoke decision shared by Application_AuthenticateRequest and regression tests. Returns true when the ticket is unreadable, or the database security version is determinable (>0) and differs from the ticket; a database version of 0 means "undetermined" (transient read failure, a legacy DB without the Portal_UserSecurityStates table, or a missing state row) and must return false, otherwise concurrent queries on the singleton DbContext would intermittently return 0 and randomly sign out active sessions (P42 fix).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="ticketSecurityVersion">
+        /// <l>
+        ///   <zh-CN>票据中解析出的安全版本；仅当 <paramref name="ticketSecurityVersionReadable"/> 为 true 时有效。</zh-CN>
+        ///   <en>Security version parsed from the ticket; valid only when <paramref name="ticketSecurityVersionReadable"/> is true.</en>
+        /// </l>
+        /// </param>
+        /// <param name="databaseSecurityVersion">
+        /// <l>
+        ///   <zh-CN>数据库中的安全版本；0 表示无法判定。</zh-CN>
+        ///   <en>Security version from the database; 0 means undetermined.</en>
+        /// </l>
+        /// </param>
+        /// <param name="ticketSecurityVersionReadable">
+        /// <l>
+        ///   <zh-CN>票据安全版本是否成功解析且未过期。</zh-CN>
+        ///   <en>Whether the ticket security version was parsed successfully and is unexpired.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>应当签退时为 <c>true</c>。</zh-CN>
+        ///   <en><c>true</c> when the user should be signed out.</en>
+        /// </l>
+        /// </returns>
+        public static bool ShouldRevokeForSecurityVersionMismatch(
+            long ticketSecurityVersion,
+            long databaseSecurityVersion,
+            bool ticketSecurityVersionReadable)
+        {
+            // <lang>
+            //   <zh-CN>票据不可读（无有效票据）时必然签退；票据可读时仅当数据库版本可确定（>0）且与票据不符才签退。</zh-CN>
+            //   <en>An unreadable ticket always revokes; a readable ticket revokes only when the database version is determinable (>0) and differs.</en>
+            // </lang>
+            return !ticketSecurityVersionReadable ||
+                   (databaseSecurityVersion > 0 && ticketSecurityVersion != databaseSecurityVersion);
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>将安全版本格式化为票据 UserData。</zh-CN>
         ///   <en>Formats a security version for ticket UserData.</en>
         /// </lang>

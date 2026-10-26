@@ -24,12 +24,12 @@
 
         <!--
         <lang>
-          <zh-CN>门户安全区注册旧 EF 安全上下文；容器以单例生命周期创建上下文，并通过启动期注册的 connectionString 命名实例注入外置连接串。</zh-CN>
-          <en>The portal security section registers the legacy EF security context; the container creates it as a singleton and injects the external connection string through the startup-registered connectionString named instance.</en>
+          <zh-CN>P42 修复：门户安全区注册旧 EF 安全上下文，生命周期改为 transient（每解析一次新建实例），并通过启动期注册的 connectionString 命名实例注入外置连接串。原先的单例上下文会被并发请求（含并行的 WebResource.axd 子资源）共享，导致实时安全版本/角色查询在共享 DbContext 上竞态抛异常、被吞掉返回 0 而误签退活跃会话；每请求/瞬态实例彻底隔离并发读取。</zh-CN>
+          <en>P42 fix: the portal security section registers the legacy EF security context with a transient lifetime (a new instance per resolve) and injects the external connection string through the startup-registered connectionString named instance. The former singleton context was shared by concurrent requests (including parallel WebResource.axd sub-resources); real-time security-version/role queries raced on that shared DbContext, threw, were swallowed into a 0 result, and wrongly signed out active sessions. Per-resolve instances fully isolate concurrent reads.</en>
         </lang>
         -->
         <register type="PortalSecurityDbContext" mapTo="PortalSecurityDbContext">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
             <constructor>
                 <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
             </constructor>
@@ -37,12 +37,12 @@
 
         <!--
         <lang>
-          <zh-CN>用户数据访问契约映射到旧 UsersDb 单例，维持 Web Forms 页面在应用生命周期内共享同一用户存储入口。</zh-CN>
-          <en>The user data-access contract maps to the legacy UsersDb singleton, preserving a shared user-store entry for Web Forms pages across the application lifetime.</en>
+          <zh-CN>P42 修复：用户数据访问契约映射到 UsersDb，生命周期改为 transient。原先的单例会在并发请求间共享同一 DbContext，使 Application_AuthenticateRequest 的实时安全版本/角色查询竞态失败并误签退用户；每解析一次新建实例可彻底隔离并发读取。</zh-CN>
+          <en>P42 fix: the user data-access contract maps to UsersDb with a transient lifetime. The former singleton shared one DbContext across concurrent requests, so the real-time security-version/role queries in Application_AuthenticateRequest raced and wrongly signed out users; a new instance per resolve fully isolates concurrent reads.</en>
         </lang>
         -->
         <register type="IUsersDb" mapTo="UsersDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <!--
@@ -52,142 +52,142 @@
         </lang>
         -->
         <register type="PortalBizDbContext" mapTo="PortalBizDbContext">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
             <constructor>
                 <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
             </constructor>
         </register>
 
         <register type="IEmployeeDirectoryDb" mapTo="EmployeeDirectoryDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IEmployeeDirectoryAdminDb" mapTo="EmployeeDirectoryAdminDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IUserEmployeeBindingAdminDb" mapTo="UserEmployeeBindingAdminDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IEmployeeProfileConfirmationDb" mapTo="EmployeeProfileConfirmationDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IEmployeeProfileCorrectionRequestDb" mapTo="EmployeeProfileCorrectionRequestDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IBusinessApplicationDb" mapTo="BusinessApplicationDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="ICollaborationItemDb" mapTo="CollaborationItemDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IReferenceDataDb" mapTo="ReferenceDataDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IPortalWorkItemDb" mapTo="PortalWorkItemDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
         <register type="ILeaveRequestDb" mapTo="LeaveRequestDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
         <register type="IExpenseReimbursementDb" mapTo="ExpenseReimbursementDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IRolesDb" mapTo="RolesDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IPortalSecurity" mapTo="PortalSecurity">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <!--
         <lang>
-          <zh-CN>门户配置区注册旧 Tab、Module、Global 和运行时配置访问入口，继续使用单例生命周期匹配旧站点行为。</zh-CN>
-          <en>The portal configuration section registers legacy Tab, Module, Global, and runtime-configuration data-access entries, keeping singleton lifetimes to match legacy site behavior.</en>
+          <zh-CN>P42 修复：门户配置区注册旧 Tab、Module、Global 和运行时配置访问入口，生命周期由单例改为 transient。单例 DbContext 在并发子资源请求间共享会竞态；瞬态实例按解析隔离，消除该竞态（各仓储内部的只读缓存会随实例重建，属可接受的行为变化）。</zh-CN>
+          <en>P42 fix: the portal configuration section registers legacy Tab, Module, Global, and runtime-configuration data-access entries, now with transient lifetimes instead of singleton. A singleton DbContext shared across concurrent sub-resource requests raced; transient instances isolate per resolve and remove the race (any read-only in-repository caches are rebuilt with each instance, an acceptable behavioral change).</en>
         </lang>
         -->
 
         <register type="PortalCfgDbContext" mapTo="PortalCfgDbContext">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
             <constructor>
                 <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
             </constructor>
         </register>
 
         <register type="IPortalDb" mapTo="PortalDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
             <constructor>
                 <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
             </constructor>
         </register>
 
         <register type="ITabsDb" mapTo="TabsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IModulesDb" mapTo="ModulesDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IModuleDefsDb" mapTo="ModuleDefsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IGlobalsDb" mapTo="GlobalsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
 
         <!--
         <lang>
-          <zh-CN>门户内容模块区注册旧模块数据访问实现；讨论区仍需要连接串构造参数，其余模块沿用默认单例映射。</zh-CN>
-          <en>The portal module section registers legacy module data-access implementations; Discussions still requires a connection-string constructor argument while the other modules keep default singleton mappings.</en>
+          <zh-CN>P42 修复：门户内容模块区注册旧模块数据访问实现；讨论区仍需要连接串构造参数，其余模块生命周期由单例改为 transient，与全数据层一致地消除共享 DbContext 的并发竞态。</zh-CN>
+          <en>P42 fix: the portal module section registers legacy module data-access implementations; Discussions still requires a connection-string constructor argument, while the other modules now use a transient lifetime, consistent with the whole data layer to remove the shared-DbContext concurrency race.</en>
         </lang>
         -->
         <register type="PortalDbContext" mapTo="PortalDbContext">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
             <constructor>
                 <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
             </constructor>
         </register>
 
         <register type="IAnnouncementsDb" mapTo="AnnouncementsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IContactsDb" mapTo="ContactsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IDiscussionsDb" mapTo="DiscussionsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
             <constructor>
                 <param name="connectionString" dependencyName="connectionString" dependencyType="string" />
             </constructor>
         </register>
 
         <register type="IDocumentsDb" mapTo="DocumentsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IEventsDb" mapTo="EventsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="IHtmlTextsDb" mapTo="HtmlTextsDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
         <register type="ILinksDb" mapTo="LinksDb">
-            <lifetime type="singleton" />
+            <lifetime type="transient" />
         </register>
 
     </container>
