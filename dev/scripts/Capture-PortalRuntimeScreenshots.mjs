@@ -95,7 +95,14 @@ const SPEC = {
 
 // <lang><zh-CN>环境前置：验收上下文缺失 → 显式 exit 2（P139 口径）。</zh-CN>
 // <en>Environment prerequisite: a missing acceptance context exits 2 explicitly (P139 convention).</en></lang>
-const contextPath = path.join(repoRoot, 'temp', 'p65', 'p65-acceptance-context.json');
+// <lang><zh-CN>验收上下文路径：默认仍是 P65 本机开发环境；目标环境可用 `PORTAL_ACCEPTANCE_CONTEXT` 覆盖，
+// 使同一工具能对**不同环境**采集（此前路径硬编码，换环境即 exit 2 无法采集）。</zh-CN>
+// <en>Acceptance-context path: still the P65 local dev environment by default; `PORTAL_ACCEPTANCE_CONTEXT`
+// overrides it so the same tool can capture a **different environment** (the path used to be hard-coded, which
+// made capturing any other environment impossible with exit 2).</en></lang>
+const contextPath = process.env.PORTAL_ACCEPTANCE_CONTEXT
+  ? path.resolve(process.env.PORTAL_ACCEPTANCE_CONTEXT)
+  : path.join(repoRoot, 'temp', 'p65', 'p65-acceptance-context.json');
 if (!fs.existsSync(contextPath)) {
   console.error('[PREREQ-MISSING] 验收上下文不存在：' + contextPath + '（环境前置缺失，exit 2）');
   process.exit(2);
@@ -154,7 +161,13 @@ try {
   const browserContext = await browser.newContext({
     viewport: SPEC.viewport,
     deviceScaleFactor: SPEC.deviceScaleFactor,
-    locale: SPEC.locale
+    locale: SPEC.locale,
+    // <lang><zh-CN>目标环境可能使用自签证书（如本机验证环境），不豁免则握手失败、全部目标采集不到。
+    // 豁免只影响本工具的采集会话，不改变目标环境配置，也不代表对证书链的信任判断。</zh-CN>
+    // <en>The target environment may use a self-signed certificate (e.g. the local validation environment); without
+    // this exemption the handshake fails and no target can be captured. It only affects this capture session — it
+    // changes no target configuration and expresses no judgement about the certificate chain.</en></lang>
+    ignoreHTTPSErrors: true
   });
   const page = await browserContext.newPage();
   page.setDefaultTimeout(40000);
@@ -173,7 +186,11 @@ try {
   for (const target of TARGETS) {
     const fileName = `p151-${target.area}-${target.id}-${SPEC.locale}-${SPEC.viewport.width}x${SPEC.viewport.height}.png`;
     const filePath = path.join(outputDir, fileName);
-    const record = { id: target.id, area: target.area, url: target.url, file: fileName, status: 'Pass', notes: [] };
+    // 条目字段必须**同构**：成功与失败都带 id/area/url/file/status/notes/bytes/sha256。
+    // 此前失败分支不写 bytes/sha256，清单里同一 schema 出现两种形状，下游校验
+    // （如 Test-PortalRuntimeScreenshotBaseline.ps1 的 A3）访问缺失属性会直接抛异常，
+    // 而不是给出可读结论。失败时 bytes=0、sha256='' 表示"未采到"。
+    const record = { id: target.id, area: target.area, url: target.url, file: fileName, status: 'Pass', notes: [], bytes: 0, sha256: '' };
     try {
       await gotoWithRetry(page, target.url);
       await page.waitForLoadState('networkidle').catch(() => {});
@@ -192,7 +209,12 @@ try {
       record.sha256 = crypto.createHash('sha256').update(buffer).digest('hex');
     } catch (error) {
       record.status = 'Fail';
+      record.bytes = 0;
+      record.sha256 = '';
       record.notes.push(error instanceof Error ? error.message : String(error));
+      // 清理可能已写出的半成品（过小/错误页截图）：否则下游按"本地存在"校验会把它
+      // 判成白页缺陷，而它其实是"未采到"的残留。
+      try { if (fs.existsSync(filePath)) fs.unlinkSync(filePath); } catch { /* 清理失败不影响登记 */ }
       failures.push(`${target.area}/${target.id}: ${record.notes[0]}`);
     }
     entries.push(record);

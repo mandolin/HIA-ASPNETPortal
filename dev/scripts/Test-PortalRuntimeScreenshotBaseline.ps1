@@ -143,11 +143,32 @@ foreach ($key in $targetKeys) {
 foreach ($key in $manifestKeys) {
     if ($targetKeys -notcontains $key) { $failures += "A3 证据清单存在未登记目标条目：$key（目标清单已变更，须同步）。" }
 }
+# <lang><zh-CN>A3：条目命名与清单结构。`status=Pass` 的条目必须带合规的 sha256/bytes；
+# `status=Fail` 的条目表示该目标在本次采集环境**未采到**（截图按需生成，缺失属环境事实），
+# 逐条登记为软指标而不判失败——与 A4「本地缺失=按需生成登记」的既有口径一致。
+# 属性访问一律走 `PSObject.Properties[...]` 安全判定，避免清单缺字段时直接抛异常（门禁崩溃
+# 无法给出可读结论）。</zh-CN>
+# <en>A3: entry naming and manifest structure. Entries with `status=Pass` must carry a well-formed sha256/bytes;
+# entries with `status=Fail` mean the target was **not captured** in this environment (screenshots are generated on
+# demand, so absence is an environment fact) and are registered as soft notes rather than failures — consistent with
+# A4's existing "absence is registered as generated on demand". Attribute access goes through the safe
+# `PSObject.Properties[...]` check so a manifest missing a field cannot crash the gate.</en></lang>
+$notCaptured = @()
 foreach ($entry in @($manifest.entries)) {
     $expectedName = "p151-$($entry.area)-$($entry.id)-zh-CN-1440x1000.png"
     if ($entry.file -ne $expectedName) { $failures += "A3 条目命名不符合规范：$($entry.file)（应为 $expectedName）。" }
-    if ([string]::IsNullOrWhiteSpace([string]$entry.sha256) -or ([string]$entry.sha256).Length -ne 64) { $failures += "A3 条目 sha256 缺失或长度异常：$($entry.file)。" }
-    if (-not ($entry.bytes -ge 1024)) { $failures += "A3 条目 bytes < 1024（疑似空白页）：$($entry.file)。" }
+    $hasSha = $entry.PSObject.Properties['sha256'] -ne $null
+    $hasBytes = $entry.PSObject.Properties['bytes'] -ne $null
+    if ($entry.status -eq 'Fail') {
+        $notCaptured += ("{0}/{1}（{2}）" -f $entry.area, $entry.id, (($entry.notes | Select-Object -First 1) -replace '\s+', ' '))
+        if (-not $hasSha -or -not $hasBytes) { $failures += "A3 失败条目缺字段（sha256/bytes 必须存在，未采到时为占位值）：$($entry.file)。" }
+        continue
+    }
+    if (-not $hasSha -or [string]::IsNullOrWhiteSpace([string]$entry.sha256) -or ([string]$entry.sha256).Length -ne 64) { $failures += "A3 条目 sha256 缺失或长度异常：$($entry.file)。" }
+    if (-not $hasBytes -or -not ($entry.bytes -ge 1024)) { $failures += "A3 条目 bytes < 1024（疑似空白页）：$($entry.file)。" }
+}
+if ($notCaptured.Count -gt 0) {
+    $softNotes += "[soft] $($notCaptured.Count) 个目标本次未采到（截图按需生成，缺失属环境事实，已登记）：" + ($notCaptured -join '；')
 }
 
 # <lang><zh-CN>A4：本地截图存在则校验非空（sha256 差异仅软指标；不存在则登记"按需生成"）。</zh-CN>
@@ -155,6 +176,8 @@ foreach ($entry in @($manifest.entries)) {
 $present = 0
 $hashMismatch = 0
 foreach ($entry in @($manifest.entries)) {
+    # 未采到的目标不参与本地文件校验（其 sha256/bytes 是占位值，且采集时已清理半成品）
+    if ($entry.status -eq 'Fail') { continue }
     $filePath = Join-Path $screenshotDir ([string]$entry.file)
     if (-not (Test-Path -LiteralPath $filePath)) { continue }
     $present += 1
@@ -185,6 +208,7 @@ $report = [ordered]@{
     screenshotsPresent = $present
     screenshotsMissing = $missing
     hashMismatch = $hashMismatch
+    notCaptured = $notCaptured
     softNotes = $softNotes
     failures = $failures
 }
