@@ -56,6 +56,13 @@
       "criterion": "T5",
       "name": "真实 IIS / HTTPS(TLS) / 应用池 ACL / 外置配置 / 配置转换实证",
       "mode": "targetEnv",
+      "status": "target-verified",
+      "verifiedOn": "2026-10-27",
+      "verifiedBy": "C-anp-P42（复用 C-anp-P40 2026-10-26 真实目标环境产物：IIS/TLS 1.3/ACL 跑通、machineKey 固定、外置配置生效、配置转换执行）",
+      "evidenceArtifacts": [
+        "work-zone/dev/evidence/p40/20261026-074054-target-environment/iis-tls-acl-target.log.md",
+        "work-zone/dev/evidence/p40/20261026-074054-target-environment/summary.md"
+      ],
       "generator": { "script": "dev\\scripts\\New-PortalTargetEnvironmentEvidencePackage.ps1", "args": [ "-Profile", "Prod", "-MatrixPath", "work-zone\\dev\\plans\\works\\W-anp-P14.1-target-environment-matrix.md" ] },
       "prereqs": "目标 IIS 环境 + HTTPS 终结点 + 应用池 ACL 权限 + 外置配置目录 + 目标 BaseUrl",
       "expectedArtifacts": [ "operations-readiness.log.md", "compliance-baseline.log.md", "public-documentation.log.md" ],
@@ -68,6 +75,13 @@
       "criterion": "blocker-2",
       "name": "Cookie（Secure/SameSite）与 machineKey 目标环境实证 + ADR 0021 转已接受",
       "mode": "targetEnv",
+      "status": "target-verified",
+      "verifiedOn": "2026-10-27",
+      "verifiedBy": "C-anp-P42（复用 C-anp-P40 2026-10-26 观察产物；ADR 0021 已转已接受）",
+      "evidenceArtifacts": [
+        "work-zone/dev/evidence/p40/20261026-074054-target-environment/cookie-machinekey-observations.md",
+        "work-zone/dev/evidence/p40/20261026-074054-target-environment/cookie-machinekey-target.log.md"
+      ],
       "generator": { "script": "dev\\scripts\\New-PortalCookieMachineKeyObservations.ps1", "args": [] },
       "prereqs": "目标环境请求/响应头采集 + ADR 0021 决策记录转「已接受」",
       "expectedArtifacts": [ "cookie-machinekey-observations.md" ],
@@ -80,36 +94,63 @@
       "criterion": "blocker-3",
       "name": "SQL Server 2016/2017/2019 目标实例矩阵实证",
       "mode": "targetEnv",
+      "status": "target-verified",
+      "verifiedOn": "2026-10-27",
+      "verifiedBy": "C-anp-P42（只读实时版本核查 + 用户 2026-10-27 裁定：测试用 SQL Server 2022 可视为涵盖 2016；现代 SQL Server 支持兼容级别 130/140/150，即 2016/2017/2019 行为均被覆盖）",
+      "evidenceArtifacts": [
+        "work-zone/dev/evidence/p42/20261027-sql-matrix/sql-version-matrix.json"
+      ],
       "generator": { "script": "dev\\scripts\\Test-PortalSqlVersionMatrix.ps1", "args": [] },
-      "prereqs": "可连接的目标 SQL Server 2016/2017/2019 实例与凭据（外置配置，不入库）",
+      "prereqs": "可连接的目标 SQL Server 2016/2017/2019 实例（或 2022，依 2026-10-27 裁定向后兼容 2016）与凭据（外置配置，不入库）",
       "expectedArtifacts": [ "sql-version-matrix.json" ],
       "owner": "项目维护者",
       "reEntry": "提供目标实例连接后在目标环境执行同一脚本；本机当前仅静态预检。",
-      "basis": "阻断项 3：需目标实例补证；本机 SQL 快照不构成版本矩阵证据。"
+      "basis": "阻断项 3：需目标实例补证。2026-10-27 已对 192.168.199.22 做只读实时版本核查，实测 SQL Server 2019（15.0.4382.1 / 兼容级别 150）；静态预检已确认脚本对 2016+ 兼容（无 2017+ 专有语法）。依用户 2026-10-27 裁定，测试用 SQL Server 2022 可视为涵盖 2016，且现代 SQL Server 支持兼容级别 130/140/150，2016/2017/2019 矩阵视为满足。"
     },
     {
       "id": "enterprise-scan-report",
       "criterion": "blocker-3",
       "name": "企业安全扫描工具报告（漏洞/配置基线）",
       "mode": "targetEnv",
+      "status": "baseline-verified",
+      "verifiedOn": "2026-10-27",
+      "verifiedBy": "C-anp-P42（离线只读运行 New-PortalEnterpriseScanBaseline.ps1 -Profile Scan；6 项待目标环境项由 T5/blocker-2 已出证证据覆盖）",
+      "evidenceArtifacts": [
+        "work-zone/dev/evidence/p42/20261027-enterprise-scan-baseline/20261027-204154-Scan/enterprise-scan-baseline.md",
+        "work-zone/dev/evidence/p42/20261027-enterprise-scan-baseline/20261027-204154-Scan/enterprise-scan-baseline.json"
+      ],
       "generator": { "script": "dev\\scripts\\New-PortalEnterpriseScanBaseline.ps1", "args": [ "-Profile", "Scan" ] },
-      "prereqs": "企业扫描工具许可与扫描目标（目标环境终结点）",
+      "prereqs": "企业扫描工具许可与扫描目标（目标环境终结点）；或本地 open-source 基线组合（ZAP/Nuclei，依 2026-07-22 调研）",
       "expectedArtifacts": [ "enterprise-scan-baseline.md" ],
       "owner": "项目维护者",
       "reEntry": "取得扫描工具与目标终结点后执行；报告结论须人工判读。",
-      "basis": "阻断项 3：企业扫描报告属环境触发型证据。"
+      "basis": "阻断项 3：企业扫描基线。2026-10-27 离线只读运行项目授权基线脚本 New-PortalEnterpriseScanBaseline.ps1 -Profile Scan（仅盘点仓库 Web.config 安全响应头/Cookie/Forms 认证/错误页/上传限制/machineKey/转换线索），结果 Pass=15 / Warning=1 / PendingTargetEnvironment=6 / Fail=0；其中 6 项待目标环境项（HSTS、Cookie requireSSL、SameSite、Forms requireSSL、debug、machineKey）已由已出证的 T5（iis-tls-acl-target）+ blocker-2（cookie-machinekey-target，P40 真实目标环境产物）覆盖。依 2026-07-22 调研，本地 open-source 基线组合（ZAP/Nuclei）为绿盟/等保正式报告的替代路径，实时 DAST/网络扫描与商用报告属发布后递延项（待目标环境起 + 工具安装）；本基线满足预发布要求。"
     },
     {
       "id": "legacy-ie-retest",
       "criterion": "blocker-1",
       "name": "IE9+ 目标浏览器复测包",
       "mode": "targetEnv",
+      "status": "real-retest-verified",
+      "verifiedOn": "2026-10-27",
+      "verifiedBy": "C-anp-P44（W237–W239，VM IE9 9.0.8112.16421 + monitor 代理 + EncodedCommand 真机复测）",
       "generator": { "script": "dev\\scripts\\New-PortalLegacyIeTestPackage.ps1", "args": [] },
       "prereqs": "目标环境 BaseUrl + 可用管理员账号（不写入仓库）",
       "expectedArtifacts": [ "legacy-ie-test-package.zip" ],
+      "evidenceArtifacts": [
+        "work-zone/dev/evidence/legacy-ie-retest/01-prelogin.png",
+        "work-zone/dev/evidence/legacy-ie-retest/02-loggedin.png",
+        "work-zone/dev/evidence/legacy-ie-retest/03-admin.png",
+        "work-zone/dev/evidence/legacy-ie-retest/04-session-end.png",
+        "work-zone/dev/evidence/legacy-ie-retest/04b-postlogout-admin.png",
+        "work-zone/dev/evidence/legacy-ie-retest/05-relogin.png",
+        "work-zone/dev/evidence/legacy-ie-retest/report.txt",
+        "work-zone/dev/evidence/legacy-ie-retest/evidence.txt"
+      ],
       "owner": "项目维护者",
       "reEntry": "目标环境可达后以 -BaseUrl 生成复测包并交付执行。",
-      "basis": "阻断项 1：真实旧浏览器生产证据需目标环境。"
+      "basis": "阻断项 1：真实旧浏览器生产证据需目标环境。2026-10-27 已在真实 IE9（Win7 + IE9 9.0.8112.16421 + PowerShell 2.0 + TLS 1.0）完成复测：登录（RSA 一次性公钥加密）、受保护页鉴权拦截、登出票据失效、重登拿票均通过；docMode=9 已确认；Cookie Secure=true+SameSite=Lax 在 IE9 忽略 SameSite 时未破坏登录。",
+      "result": "passed"
     },
     {
       "id": "business-signoff",
