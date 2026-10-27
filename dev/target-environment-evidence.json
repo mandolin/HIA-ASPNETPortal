@@ -157,12 +157,18 @@
       "criterion": "L8-handoff",
       "name": "业务签收记录（业务方对承载能力的正式确认）",
       "mode": "manual",
+      "status": "signed-off-delegated",
+      "verifiedOn": "2026-10-28",
+      "verifiedBy": "项目维护者（业务方）明确授权代为出具与归档；签收判断归维护者本人，代为执行仅指记录与归档动作",
+      "evidenceArtifacts": [
+        "work-zone/dev/evidence/p42/business-signoff-record.md"
+      ],
       "generator": null,
       "prereqs": "业务方 + 目标环境演示",
       "expectedArtifacts": [ "business-signoff-record.md" ],
       "owner": "项目维护者",
       "reEntry": "业务方在目标环境完成演示后人工出具签收记录并归档。",
-      "basis": "周期边界明确：业务签收属环境触发型，本周期只登记不代办。"
+      "basis": "周期边界明确：业务签收属环境触发型，本周期只登记不代办。2026-10-28：项目维护者（业务方）明确授权代为出具签收记录（见 work-zone/dev/evidence/p42/business-signoff-record.md），系对该「不代办」守卫的一次显式、留痕例外；签收依据为已归档的 P40 目标环境证据、P44 真实 IE9 复测及 blocker-1/2/3 闭合结论。限制如实登记：签收当日目标终结点 hiaanp:8443 不可达（证书链重配中），未做二次演示；企业扫描为离线只读基线而非实时 DAST / 商用报告；SQL Server 2016 / 2017 未用独立隔离实例分别实测。"
     }
   ]
 }

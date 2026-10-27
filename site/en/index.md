@@ -32,7 +32,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
   <h2 class="oc-h2">For teams that already have .NET assets</h2>
   <p class="oc-lead">If you want to keep building intranet portals on your existing .NET Framework 4.8 / Web Forms stack and operations model, this project supplies the parts that tend to be missing: fine-grained authorisation, workflow state machines, auditing, module and theme governance, and quality constraints run as automated commands.</p>
   <div class="oc-stats">
-    <div><div class="oc-stat-val">v1.4.0</div><div class="oc-stat-label">Current version</div></div>
+    <div><div class="oc-stat-val">v2.0.0</div><div class="oc-stat-label">Current version</div></div>
     <div><div class="oc-stat-val">MIT</div><div class="oc-stat-label">Licence</div></div>
     <div><div class="oc-stat-val">7</div><div class="oc-stat-label">Official skins</div></div>
     <div><div class="oc-stat-val">2</div><div class="oc-stat-label">UI languages</div></div>

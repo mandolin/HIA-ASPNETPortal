@@ -34,6 +34,6 @@ using System.Runtime.InteropServices;
 //   <en>The following version attributes keep an explicit fixed version to avoid non-repeatable outputs from wildcard versions during legacy release and evidence-package comparisons.</en>
 // </lang>
 
-[assembly: AssemblyVersion("1.4.0.0")]
-[assembly: AssemblyFileVersion("1.4.0.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
 [assembly: AssemblyInformationalVersion("1.3.0.0")]

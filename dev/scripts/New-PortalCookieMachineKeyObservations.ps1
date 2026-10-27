@@ -1,11 +1,50 @@
-# 目标环境 Cookie / machineKey 观察（只读，不记录任何密钥明文）
-# 用途：ADR 0021「可信部署配置与生产 Cookie 策略」由"提议"转"已接受"所需的目标环境事实证据。
-# 约束（ADR 0021 第 7 条）：不得记录连接串、密码、Cookie 值、Token、证书私钥或真实密钥。
-#   → 本脚本只记录 Cookie **属性**（Secure/HttpOnly/SameSite）、machineKey 的**算法与指纹**。
-#
-# 可选的登录观测：若提供环境变量 HIA_TARGET_SIGNIN_USER / HIA_TARGET_SIGNIN_PASSWORD，
-#   脚本会按门户真实登录链路（一次性 RSA 公钥加密口令 → 提交 Signin 表单）尝试登录，
-#   并记录**票据 Cookie 的属性**（不含值）。未提供时如实记为"未观测"。
+<#
+.SYNOPSIS
+    生成目标环境 Cookie / machineKey 观察证据（只读，不记录任何密钥明文）。
+
+.DESCRIPTION
+    <lang>
+      <zh-CN>用途：产出 ADR 0021「可信部署配置与生产 Cookie 策略」由「提议」转「已接受」所需的目标环境事实证据。
+约束（ADR 0021 第 7 条）：不得记录连接串、密码、Cookie 值、Token、证书私钥或真实密钥——本脚本只记录 Cookie
+**属性**（Secure / HttpOnly / SameSite）与 machineKey 的**算法与指纹**。
+
+可选的登录观测：若提供环境变量 HIA_TARGET_SIGNIN_USER / HIA_TARGET_SIGNIN_PASSWORD，脚本会按门户真实登录链路
+（一次性 RSA 公钥加密口令 → 提交 Signin 表单）尝试登录，并只记录**票据 Cookie 的属性**（不含值）；未提供时如实记为「未观测」。</zh-CN>
+      <en>Purpose: produces the target-environment facts required to move ADR 0021 ("trusted deployment configuration and
+production cookie policy") from "proposed" to "accepted".
+Constraint (ADR 0021 section 7): it must never record connection strings, passwords, cookie values, tokens, certificate
+private keys or real secrets — this script records only cookie **attributes** (Secure / HttpOnly / SameSite) and the
+machineKey **algorithm and fingerprint**.
+
+Optional sign-in observation: when HIA_TARGET_SIGNIN_USER / HIA_TARGET_SIGNIN_PASSWORD are supplied, the script follows the
+real portal sign-in flow (one-time RSA public-key password encryption → Signin form submit) and records only the
+**attributes** of the ticket cookie (never its value); when absent it records "not observed" truthfully.</en>
+    </lang>
+
+.PARAMETER BaseUrl
+    <lang>
+      <zh-CN>目标环境基址（HTTPS 终结点），用于采集 TLS 事实与响应头。</zh-CN>
+      <en>Target-environment base URL (HTTPS endpoint) used to capture TLS facts and response headers.</en>
+    </lang>
+
+.PARAMETER WebConfigPath
+    <lang>
+      <zh-CN>可选：目标环境已部署的 Web.config 路径，用于读取 httpCookies / forms / machineKey 配置事实。</zh-CN>
+      <en>Optional: path to the deployed target-environment Web.config used to read httpCookies / forms / machineKey facts.</en>
+    </lang>
+
+.PARAMETER OutputPath
+    <lang>
+      <zh-CN>可选：观察结果 markdown 的输出路径。</zh-CN>
+      <en>Optional: output path for the observation markdown.</en>
+    </lang>
+
+.PARAMETER PackageLabel
+    <lang>
+      <zh-CN>可选：发布包标识，写入观察结果以便追溯。</zh-CN>
+      <en>Optional: release-package label written into the observation for traceability.</en>
+    </lang>
+#>
 param(
     [Parameter(Mandatory = $true)][string]$BaseUrl,
     [string]$WebConfigPath,

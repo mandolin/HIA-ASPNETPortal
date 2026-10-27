@@ -974,7 +974,26 @@ function Test-GateFailed([string] $output, [int] $exitCode) {
     #   contain words like "missing" or "not ready", so including it in failure matching would score a passing gate as
     #   failing; it is therefore stripped here, applying the same principle already used for `note:` lines.</en>
     # </lang>
-    $effectiveOutput = (($output -split "`r?`n") | Where-Object { $_ -notmatch '^\s*note\s*:' -and $_ -notmatch '\[GATE-NOTE\]' }) -join "`n"
+    # <lang>
+    #   <zh-CN>`[soft]` 是门禁自述的**软指标 / 环境事实通道**：它登记"通过但受环境制约"的事实，
+    #   例如 `Test-PortalRuntimeScreenshotBaseline` 打印"截图按需生成，**缺失**属环境事实，已登记"，
+    #   而该门禁自身退出码 0、结论为 `[PASS]`。中文失败标志 `未能|缺失|不存在.*文件` 没有否定式，
+    #   会把这句软提示里的"缺失"判成失败 —— 即"红色其实是误报"。这比漏判更隐蔽：它让套件长期假红，
+    #   最终被人忽略（与 `W83` "门禁变弱比门禁报错更危险"同源）。
+    #   故此处把 `[soft]` 行一并剔除，与 `note:` / `[GATE-NOTE]` 同理：剔除的是**原因说明**，不是结论；
+    #   行级失败标志（`[Fail]` / `RESULT: Fail`）依然生效，真实失败不会被漏判。</zh-CN>
+    #   <en>`[soft]` is a gate's self-reported **soft-metric / environment-fact channel**: it records facts that hold
+    #   "passed but constrained by the environment", for example `Test-PortalRuntimeScreenshotBaseline` printing
+    #   "screenshots are generated on demand; **absence** is an environment fact and is recorded", while the gate itself
+    #   exits 0 and concludes `[PASS]`. The Chinese failure marker `未能|缺失|不存在.*文件` carries no negation, so the word
+    #   for "absence" inside that soft note is scored as a failure — the red is a false positive. That is more insidious
+    #   than a miss: it keeps the suite falsely red until people ignore it (the same root as `W83` "a weakened gate is
+    #   more dangerous than a failing one").
+    #   `[soft]` lines are therefore stripped here, exactly like `note:` / `[GATE-NOTE]`: what is removed is the **cause
+    #   explanation**, not the verdict; line-level markers (`[Fail]` / `RESULT: Fail`) remain in force, so real failures
+    #   are still caught.</en>
+    # </lang>
+    $effectiveOutput = (($output -split "`r?`n") | Where-Object { $_ -notmatch '^\s*note\s*:' -and $_ -notmatch '\[GATE-NOTE\]' -and $_ -notmatch '\[soft\]' }) -join "`n"
     foreach ($indicator in $failureIndicators) {
         if ($effectiveOutput -match $indicator.Pattern) {
             # <lang>

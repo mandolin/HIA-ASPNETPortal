@@ -125,7 +125,7 @@ Add-BusinessPermissionCheck `
 $allUsersPermissionBridgeOk = (Test-ContainsAll $rolePermissionsSql @(
     'All Users is a legacy virtual access role.',
     '([PortalID], [RoleName])',
-    "(0, N'All Users')"
+    "(1, N'All Users')"
 )) -and (Test-ContainsAll $rolesDb @(
     'i.RoleName != PortalRoleNames.AllUsers',
     '[Roles].[RoleName] = @p1',

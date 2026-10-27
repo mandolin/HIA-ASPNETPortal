@@ -6,6 +6,26 @@
 
 ## [Unreleased]
 
+## [v2.0.0] - 2026-10-28
+**生产就绪收口（`M-ANP-TRUSTED-PORTAL` / L7 达成）**：真实目标环境证据闭环后封版 `v2.0.0`。对应 `C-anp-P40`（目标环境部署与运行期基线）、`C-anp-P41`（运行期证据采集）、`C-anp-P44`（真实 IE9 复测）、`C-anp-P42`（生产就绪收口）。本版以环境证据闭环与发布收口为主，并修复目标环境暴露的 5 个真实缺陷。
+### 新增
+- **真实目标环境部署可信（T5）**：真实 IIS 站点（应用池 CLR v4.0 / Integrated）绑定 `http:8090` + `https:8443`（TLS 1.3）；`App_Data`、`App_Data\Logs`、`Uploads` 仅授予应用池 Modify；`machineKey` 在目标环境固定（只记指纹、不入库）；连接串经 `ExternalCfgPath` 指向仓库外目录。
+- **Cookie 与 machineKey 目标环境实证（阻断项 2）**：真实登录 302 并签发 `.ASPXAUTH`，属性实测 `; path=/; secure; HttpOnly; SameSite=Lax`；ADR 0021 由「提议」转「已接受」。
+- **SQL Server 版本矩阵（阻断项 3）**：目标实例只读实时版本核查，实测 SQL Server 2019（`15.0.4382.1` / 兼容级别 150）；静态预检确认脚本对 2016+ 兼容无 2017+ 专有语法。
+- **企业安全扫描基线（阻断项 3）**：离线只读基线 Pass 15 / Warning 1 / 待目标环境 6 / Fail 0；6 项待目标环境项由已出证的部署与 Cookie 证据覆盖。
+- **真实 IE9 复测（阻断项 1）**：Win7 + IE9 `9.0.8112.16421` 真机复测通过（登录取票、非管理员越权被拦截、登出后票据失效）。
+- **业务签收（L8）**：出具 `business-signoff-record.md`，并记录三项如实限制。
+### 变更
+- **公开口径升级**：README 中英与运维手册中「不宣称生产级可信」改为「可宣称生产级可信（L7 达成）」。
+### 修复
+- **发布包缺 DLL 导致启动 500**：`Portal.csproj` 缺 `Portal.Components.Data` / `Data1` 项目引用，Unity 按名解析失败。
+- **EF6 无法反射发现 SqlClient 提供程序**：`EntityFramework.SqlServer.dll` 不被 IL 引用而被 MSBuild 剪枝，改由部署入口工程显式引用。
+- **证据包无条件追加 `-BaseUrl`**：不接受该参数的生成器直接失败、两项被误记 Failed；改为按参数集探测。
+- **就绪包默认 `MatrixPath` 漏 `works/`**：输入解析失败，且合规基线只读源码开发基线；补默认路径并新增 `-WebConfigPath` 转发。
+- **台账期望产物无人产出却记已出证**：新增真实生成器与期望产物落地校验，消除假阳性。
+### 验证
+- 环境证据清单十项齐备：`Test-PortalTargetEnvironmentEvidenceMap.ps1` 判据覆盖 7/7；`Test-PortalL7CriteriaRegistry.ps1` 判据表自洽。
+- 账本一致性 `Test-PortalPlanLedgerConsistency.ps1` 三处一致。
 ## [v1.4.0] - 2026-10-23
 
 **发布与门禁自动化**：质量门禁从"只在本地被人跑"变成 **CI 真在跑、且红线由结构保证**；发布流程从"版本锚点分散在多个文件里人工逐处改、一致性门禁只查三类、封版前检查靠人记得、Release 说明手写"变成**半自动 + 机器可判**。对应 `C-anp-P38`（门禁接入 CI）与 `C-anp-P39`（发布流程半自动化），产品行为改动为零。
