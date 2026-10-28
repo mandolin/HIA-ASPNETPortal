@@ -469,7 +469,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iannouncementitem",
       "kind": "type",
       "label": "IAnnouncementItem",
-      "entryCount": 10,
+      "entryCount": 11,
       "views": [
         "dotnet"
       ],
@@ -483,7 +483,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iannouncementsdb",
       "kind": "type",
       "label": "IAnnouncementsDb",
-      "entryCount": 6,
+      "entryCount": 7,
       "views": [
         "dotnet"
       ],

@@ -1,0 +1,67 @@
+        protected void Application_AuthenticateRequest(Object sender, EventArgs e)
+        {
+            if (Request.IsAuthenticated)
+            {
+                string[] roles;
+                var usersDb = Container.Resolve<IUsersDb>();
+                var formsIdentity = Context.User?.Identity as FormsIdentity;
+                long ticketSecurityVersion;
+                long databaseSecurityVersion = usersDb.GetSecurityVersionByUserName(Context.User.Identity.Name);
+                bool ticketSecurityVersionReadable = PortalAuthenticationService.TryReadSecurityVersion(formsIdentity, out ticketSecurityVersion);
+
+                // <lang>
+                //   <zh-CN>签退门槛：仅当票据可读且数据库安全版本可确定（>0）且与票据不符时才注销。数据库版本为 0 表示“无法判定”（瞬态读取失败、旧库无 Portal_UserSecurityStates 状态表、或状态行缺失），此时不得签退——单例 DbContext 上的并发查询竞态会使读取偶发失败返回 0，若据此注销会把活跃会话随机踢出。真实失效（密码重置/角色变更使版本递增）仍会落到 >0 的不匹配分支，照常签退。决策抽成纯函数以便回归测试守护。</zh-CN>
+                //   <en>Revoke threshold: sign out only when the ticket is readable and the database security version is determinable (>0) and differs from the ticket. A database version of 0 means "undetermined" (transient read failure, a legacy DB without the Portal_UserSecurityStates table, or a missing state row) and must not revoke—concurrent queries on the singleton DbContext race and intermittently return 0, which would otherwise randomly sign out active sessions. Genuine invalidation (password reset or role change incrementing the version) still lands in the >0 mismatch branch and revokes as expected. The decision is extracted into a pure function so regression tests can guard it.</en>
+                // </lang>
+                if (PortalAuthenticationService.ShouldRevokeForSecurityVersionMismatch(
+                        ticketSecurityVersion,
+                        databaseSecurityVersion,
+                        ticketSecurityVersionReadable))
+                {
+                    PortalOperationAudit.Record(
+                        "SecuritySession",
+                        "Revoke",
+                        "User",
+                        Context.User.Identity.Name,
+                        "Authentication ticket security version mismatch.",
+                        Context);
+                    PortalAuthenticationService.SignOut(Response, Request);
+                    Context.User = null;
+                    Response.Redirect(Request.ApplicationPath, false);
+                    Context.ApplicationInstance.CompleteRequest();
+                    return;
+                }
+
+                // <lang>
+                //   <zh-CN>优先使用安全版本匹配的角色 Cookie；缺失或失效时从数据库重建，避免旧会话保留被撤销角色。</zh-CN>
+                //   <en>Prefer a role cookie whose security version matches; rebuild from the database when absent or invalid so old sessions do not retain revoked roles.</en>
+                // </lang>
+                if (!PortalAuthenticationCookies.TryReadRoles(Request, databaseSecurityVersion, out roles))
+                {
+                    // <lang>
+                    //   <zh-CN>角色 Cookie 缺失或无效时从数据访问层重新读取；该回退仍不替代当前页面的权限检查。</zh-CN>
+                    //   <en>When the role cookie is missing or invalid, reload roles through the data-access layer; this fallback still does not replace the current page's permission check.</en>
+                    // </lang>
+                    // <lang>
+                    //   <zh-CN>只将角色名称写入加密票据，不写入密码、用户资料或其他敏感业务数据。</zh-CN>
+                    //   <en>Write role names only into the encrypted ticket, never passwords, profile data, or other sensitive business data.</en>
+                    // </lang>
+                    roles = PortalRoleParser.Parse(string.Join(";", usersDb.GetRoleNamesByUser(User.Identity.Name)));
+
+                    bool isPersistent = formsIdentity?.Ticket?.IsPersistent ?? false;
+                    PortalAuthenticationCookies.WriteRolesCookie(
+                        Response,
+                        Request,
+                        Context.User.Identity.Name,
+                        databaseSecurityVersion,
+                        roles,
+                        isPersistent);
+                }
+
+                // <lang>
+                //   <zh-CN>当前只构造请求级 GenericPrincipal；SysUser/BizUser 等 HIA 模型保留给后续边界设计。</zh-CN>
+                //   <en>Build only a request-level GenericPrincipal for now; HIA models such as SysUser/BizUser remain for later boundary design.</en>
+                // </lang>
+                Context.User = new GenericPrincipal(Context.User.Identity, roles);
+            }
+        }

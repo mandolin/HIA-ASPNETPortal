@@ -74,6 +74,19 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.announcementsdb.getannoun-5e4ded80.html"
     },
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.announcementsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32",
+      "kind": "entry",
+      "label": "GetGuestVisibleAnnouncements",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32",
+      "sourcePath": "src/Portal.Components.Data1/AnnouncementsDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestv-72f6807e.html"
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.announcementsdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getsingleannouncement-system.int32",
       "kind": "entry",
       "label": "GetSingleAnnouncement",

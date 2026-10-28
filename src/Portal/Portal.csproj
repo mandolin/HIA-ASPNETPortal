@@ -225,6 +225,8 @@
     <Content Include="DesktopModules\MyWorkItems\module.json" />
     <Content Include="DesktopModules\MyWorkItems\MyWorkItems.ascx" />
     <Content Include="DesktopModules\MyWorkItems\Styles\MyWorkItems.css" />
+    <Content Include="DesktopModules\Help\module.json" />
+    <Content Include="DesktopModules\Help\Help.ascx" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\module.json" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\Styles\EmployeeProfileCorrectionRequest.css" />
@@ -490,6 +492,7 @@
     <Compile Include="Components\PortalDiagnostics.cs" />
     <Compile Include="Components\PortalDocumentPolicy.cs" />
     <Compile Include="Components\PortalNavigationPolicy.cs" />
+    <Compile Include="Components\PortalNavigationSettings.cs" />
     <Compile Include="Components\PortalNavigationVisibilityContextFactory.cs" />
     <Compile Include="Components\PortalDiagnosticEntry.cs" />
     <Compile Include="Components\PortalDiagnosticQuery.cs" />
@@ -688,6 +691,10 @@
     </Compile>
     <Compile Include="DesktopModules\MyWorkItems\MyWorkItems.ascx.designer.cs">
       <DependentUpon>MyWorkItems.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DesktopModules\Help\Help.ascx.cs">
+      <DependentUpon>Help.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx.cs">
       <DependentUpon>EmployeeProfileCorrectionRequest.ascx</DependentUpon>

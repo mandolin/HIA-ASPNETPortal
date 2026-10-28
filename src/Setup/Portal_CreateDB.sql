@@ -912,11 +912,24 @@ CREATE TABLE [dbo].[Portal_Announcements](
 	[MobileMoreLink] [nvarchar](150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 	[ExpireDate] [datetime] NULL,
 	[Description] [nvarchar](2000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[IsGuestVisible] [bit] NOT NULL CONSTRAINT [DF_Portal_Announcements_IsGuestVisible] DEFAULT ((0)),
  CONSTRAINT [PK_Announcements] PRIMARY KEY NONCLUSTERED 
 (
 	[ItemID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
 )
+END
+GO
+
+-- <lang>
+--   <zh-CN>ADR 0027：为已存在的公告表幂等补列 IsGuestVisible（默认 0）。存量公告升级后仍不可见，
+--   必须由管理员显式标记才会对匿名访客公开（fail-closed 默认）。</zh-CN>
+--   <en>ADR 0027: idempotently add IsGuestVisible (default 0) to an existing announcements table. After upgrading,
+--   existing announcements remain non-public and must be explicitly marked by an administrator (fail-closed default).</en>
+-- </lang>
+IF COL_LENGTH('dbo.Portal_Announcements', 'IsGuestVisible') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[Portal_Announcements] ADD [IsGuestVisible] BIT NOT NULL CONSTRAINT [DF_Portal_Announcements_IsGuestVisible] DEFAULT ((0))
 END
 GO
 -- <lang>

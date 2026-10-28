@@ -137,6 +137,18 @@ namespace ASPNET.StarterKit.Portal
                 }
 
                 // <lang>
+                //   <zh-CN>ADR 0026 决策二：系统设置驱动的**展示层**过滤（显式键 / 前缀）在角色过滤之后、既有门控之前执行。
+                //   它只决定"是否出现在导航"，不改变 AccessRoles 授权结论——直接访问被隐藏页签仍由页面授权判定。
+                //   读取失败时读取器已退化为空集合，即"不隐藏任何页签"，因此这里不会把导航打空。</zh-CN>
+                //   <en>ADR 0026 decision 2: system-setting-driven **presentation-layer** filtering (explicit keys / prefixes)
+                //   runs after role filtering and before the existing gate. It decides only whether a tab appears in the
+                //   navigation and never changes AccessRoles outcomes — a directly requested hidden tab is still authorized by
+                //   its page. On read failure the reader already degrades to empty sets, meaning "hide nothing", so this step
+                //   can never empty the navigation.</en>
+                // </lang>
+                ApplyNavigationSettingsFilter(roleFilteredTabs);
+
+                // <lang>
                 //   <zh-CN>门控开关默认关闭（配置缺失即关闭）；关闭时行为与改造前完全一致，这是出问题时的回滚点。</zh-CN>
                 //   <en>The gate switch defaults to off (a missing configuration means off); while off the behaviour is identical to before the change, which is the rollback point if anything goes wrong.</en>
                 // </lang>
@@ -344,6 +356,142 @@ namespace ASPNET.StarterKit.Portal
                 // </lang>
                 disabledTab.ToolTip = BuildTabDisplayName(boundTab) + " (" + blockedReason + ")";
                 disabledTab.Attributes["aria-disabled"] = "true";
+            }
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按系统设置移除导航页签：先判显式隐藏键，再判前缀排除。</zh-CN>
+        ///   <en>Removes navigation tabs per system settings: explicit hidden keys first, then excluded prefixes.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="tabs">
+        /// <l>
+        ///   <zh-CN>已通过角色过滤的可变页签集合；方法就地移除命中项。</zh-CN>
+        ///   <en>Mutable role-filtered tab collection; matching items are removed in place.</en>
+        /// </l>
+        /// </param>
+        private void ApplyNavigationSettingsFilter(List<ITabItem> tabs)
+        {
+            // <lang>
+            //   <zh-CN>三个配置项都来自已登记的系统设置定义（DB 覆盖 → appSettings → 默认）；读取失败只会得到空集合或默认值。</zh-CN>
+            //   <en>All three come from registered system-setting definitions (database override → appSettings → default); a read failure yields only empty sets or defaults.</en>
+            // </lang>
+            IList<string> hiddenKeys = PortalNavigationSettings.HiddenNavigationKeys(Context);
+            IList<string> excludedPrefixes = PortalNavigationSettings.ExcludedNavigationKeyPrefixes(Context);
+            bool logHidden = PortalNavigationSettings.LogHiddenTabs(Context);
+
+            // <lang>
+            //   <zh-CN>没有任何配置时立即返回：门控关闭场景下的导航输出与改造前逐字节一致，这是回滚点。</zh-CN>
+            //   <en>Return immediately when nothing is configured: with the gate off the navigation output stays byte-for-byte identical to before the change, which is the rollback point.</en>
+            // </lang>
+            if (hiddenKeys.Count == 0 && excludedPrefixes.Count == 0)
+            {
+                return;
+            }
+
+            // <lang>
+            //   <zh-CN>命中项先收集到独立集合，遍历结束后再统一移除，避免在枚举过程中修改原集合。</zh-CN>
+            //   <en>Collect matches in a separate collection and remove them after enumeration, avoiding modification of the source collection while iterating.</en>
+            // </lang>
+            List<ITabItem> toRemove = new List<ITabItem>();
+
+            foreach (ITabItem tab in tabs)
+            {
+                // <lang>
+                //   <zh-CN>稳定键优先取 NavigationKey；为空时前缀判定回退 TabName、显式键判定回退 TabId，与 ADR 契约一致。</zh-CN>
+                //   <en>The stable key prefers NavigationKey; when blank, prefix matching falls back to TabName and explicit-key matching falls back to TabId, per the ADR contract.</en>
+                // </lang>
+                string navigationKey = (tab.NavigationKey ?? string.Empty).Trim();
+                string tabName = (tab.TabName ?? string.Empty).Trim();
+                string tabIdText = tab.TabId.ToString(CultureInfo.InvariantCulture);
+                string hiddenReason = string.Empty;
+
+                // <lang>
+                //   <zh-CN>显式隐藏优先于前缀排除：显式配置是"点名"，语义应压过"按类隐藏"。</zh-CN>
+                //   <en>Explicit hiding outranks prefix exclusion: an explicit entry names a tab and is more specific than class-based hiding.</en>
+                // </lang>
+                for (int keyIndex = 0; keyIndex < hiddenKeys.Count; keyIndex++)
+                {
+                    // <lang>
+                    //   <zh-CN>逐项修剪；空项被视为无效配置直接跳过，避免空串匹配到所有页签。</zh-CN>
+                    //   <en>Trim each entry; blank items are treated as invalid and skipped so an empty string cannot match every tab.</en>
+                    // </lang>
+                    string candidate = (hiddenKeys[keyIndex] ?? string.Empty).Trim();
+                    if (candidate.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    // <lang>
+                    //   <zh-CN>NavigationKey 存在时只按稳定键匹配；为空时才回退 TabId，避免双重匹配语义含混。</zh-CN>
+                    //   <en>When NavigationKey exists, match the stable key only; fall back to TabId only when it is blank, avoiding ambiguous dual matching.</en>
+                    // </lang>
+                    bool matched = navigationKey.Length > 0
+                        ? string.Equals(candidate, navigationKey, StringComparison.OrdinalIgnoreCase)
+                        : string.Equals(candidate, tabIdText, StringComparison.OrdinalIgnoreCase);
+
+                    if (matched)
+                    {
+                        hiddenReason = "Navigation.HiddenNavigationKeys";
+                        break;
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>前缀排除仅在前一步未命中时判定；前缀为空同样跳过。</zh-CN>
+                //   <en>Prefix exclusion is evaluated only when the previous step did not match; blank prefixes are likewise skipped.</en>
+                // </lang>
+                if (hiddenReason.Length == 0)
+                {
+                    string prefixTarget = navigationKey.Length > 0 ? navigationKey : tabName;
+                    if (prefixTarget.Length > 0)
+                    {
+                        for (int prefixIndex = 0; prefixIndex < excludedPrefixes.Count; prefixIndex++)
+                        {
+                            // <lang>
+                            //   <zh-CN>逐项修剪并按不区分大小写匹配前缀；命中即记录原因并停止。</zh-CN>
+                            //   <en>Trim each item and match the prefix case-insensitively; on a hit, record the reason and stop.</en>
+                            // </lang>
+                            string prefix = (excludedPrefixes[prefixIndex] ?? string.Empty).Trim();
+                            if (prefix.Length == 0)
+                            {
+                                continue;
+                            }
+
+                            if (prefixTarget.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                            {
+                                hiddenReason = "Navigation.ExcludedNavigationKeyPrefixes";
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (hiddenReason.Length > 0)
+                {
+                    toRemove.Add(tab);
+
+                    // <lang>
+                    //   <zh-CN>诊断只包含页签 ID、稳定键（或回退名）与原因码，不含用户身份、请求参数或配置原文。</zh-CN>
+                    //   <en>Diagnostics contain only the tab id, stable key (or fallback name), and reason code — no user identity, request parameters, or raw configuration.</en>
+                    // </lang>
+                    if (logHidden)
+                    {
+                        PortalDiagnostics.Warn(
+                            "Navigation.TabHidden",
+                            "Tab " + tabIdText + " (" + (navigationKey.Length > 0 ? navigationKey : tabName) + ") hidden by " + hiddenReason + ".");
+                    }
+                }
+            }
+
+            // <lang>
+            //   <zh-CN>统一移除命中项；未命中的页签保持原有相对顺序，避免因过滤产生位置漂移。</zh-CN>
+            //   <en>Remove matched items in one pass; unmatched tabs keep their relative order so filtering never causes position drift.</en>
+            // </lang>
+            for (int removeIndex = 0; removeIndex < toRemove.Count; removeIndex++)
+            {
+                tabs.Remove(toRemove[removeIndex]);
             }
         }
 

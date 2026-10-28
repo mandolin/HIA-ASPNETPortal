@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83FC3CAD-9568-42B2-99D1-2C92432CEB25}</ProjectGuid>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASPNET.StarterKit.Portal</RootNamespace>
+    <AssemblyName>Portal</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Portal.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- EF6 的 SqlClient 提供程序由 EntityFramework.SqlServer.dll 在运行时被反射发现；
+         该程序集不被 IL 直接引用，MSBuild 依赖剪枝会漏掉它，导致发布包报
+         “No Entity Framework provider found for invariant name 'System.Data.SqlClient'”。
+         在部署入口工程显式引用以保证它进入输出目录。 -->
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Linq.Extras, Version=5.0.0.0, Culture=neutral, PublicKeyToken=487ae61f5d540dab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Linq.Extras.5.0.0\lib\net45\Linq.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.11.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Configuration.5.11.2\lib\net47\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\AccessDenied.aspx" />
+    <Content Include="Admin\BusinessApplications.aspx" />
+    <Content Include="Admin\CollaborationItems.aspx" />
+    <Content Include="Admin\EditAccessDenied.aspx" />
+    <Content Include="Admin\EmployeeEdit.aspx" />
+    <Content Include="Admin\EmployeeDirectory.aspx" />
+    <Content Include="Admin\Logoff.aspx" />
+    <Content Include="Admin\ManageUsers.aspx" />
+    <Content Include="Admin\ModuleCatalog.aspx" />
+    <Content Include="Admin\ModuleDefinitions.aspx" />
+    <Content Include="Admin\ModuleDefs.ascx" />
+    <Content Include="Admin\ModuleSettings.aspx" />
+    <Content Include="Admin\NotImplemented.aspx" />
+    <Content Include="Admin\Register.aspx" />
+    <Content Include="Admin\Roles.ascx" />
+    <Content Include="Admin\SecurityRoles.aspx" />
+    <Content Include="Admin\SiteSettings.ascx" />
+    <Content Include="Admin\DiagnosticLogDetail.aspx" />
+    <Content Include="Admin\DiagnosticsLogs.aspx" />
+    <Content Include="Admin\EmployeeProfileCorrectionRequests.aspx" />
+    <Content Include="Admin\OperationAudits.aspx" />
+    <Content Include="Admin\OrganizationUnitEdit.aspx" />
+    <Content Include="Admin\CapabilityPermissionMatrix.aspx" />
+    <Content Include="Admin\SystemHealth.aspx" />
+    <Content Include="Admin\ThemeSettings.aspx" />
+    <Content Include="Admin\TabLayout.aspx" />
+    <Content Include="Admin\Tabs.ascx" />
+    <Content Include="Admin\UserEmployeeBindingEdit.aspx" />
+    <Content Include="Admin\Users.ascx" />
+    <Content Include="Admin\WorkItems.aspx" />
+    <Content Include="App_Themes\Default\Default.css" />
+    <Content Include="App_Themes\Default\theme.json" />
+    <Content Include="App_Themes\EnterpriseDark\Default.css" />
+    <Content Include="App_Themes\EnterpriseDark\theme.json" />
+    <Content Include="App_Themes\EnterpriseLight\Default.css" />
+    <Content Include="App_Themes\EnterpriseLight\theme.json" />
+    <Content Include="App_Themes\OaDark\Default.css" />
+    <Content Include="App_Themes\OaDark\theme.json" />
+    <Content Include="App_Themes\OaLight\Default.css" />
+    <Content Include="App_Themes\OaLight\theme.json" />
+    <Content Include="App_Themes\StateClassicDark\Default.css" />
+    <Content Include="App_Themes\StateClassicDark\theme.json" />
+    <Content Include="App_Themes\StateClassicLight\Default.css" />
+    <Content Include="App_Themes\StateClassicLight\theme.json" />
+    <Content Include="App_Themes\ThemeProbe\Default.css" />
+    <Content Include="App_Themes\ThemeProbe\theme.json" />
+    <Content Include="Config\Templates\connectionStrings.config" />
+    <Content Include="Config\UnityCfg.dev.template.xml" />
+    <Content Include="Config\UnityCfg.prod.template.xml" />
+    <Content Include="Config\UnityCfg.test.template.xml" />
+    <Content Include="Config\UnityCfg.xml" />
+    <Content Include="Data\Admin.gif" />
+    <Content Include="Data\config_auth_forms.gif" />
+    <Content Include="Data\config_auth_win.gif" />
+    <Content Include="Data\enigma.gif" />
+    <Content Include="Data\hart.gif" />
+    <Content Include="Data\Layout.gif" />
+    <Content Include="Data\logoneg.gif" />
+    <Content Include="Data\mobilelogo.gif" />
+    <Content Include="Data\moduledefs.gif" />
+    <Content Include="Data\modulesettings.gif" />
+    <Content Include="Data\moduletypedef.gif" />
+    <Content Include="Data\m_ann.gif" />
+    <Content Include="Data\m_con.gif" />
+    <Content Include="Data\m_doc.gif" />
+    <Content Include="Data\m_dsc.gif" />
+    <Content Include="Data\m_evt.gif" />
+    <Content Include="Data\m_htm.gif" />
+    <Content Include="Data\m_img.gif" />
+    <Content Include="Data\m_lnk.gif" />
+    <Content Include="Data\m_ql.gif" />
+    <Content Include="Data\m_xml.gif" />
+    <Content Include="Data\nightvis.gif" />
+    <Content Include="Data\perfmon.gif" />
+    <Content Include="Data\QLT2112.gif" />
+    <Content Include="Data\rolemembership.gif" />
+    <Content Include="Data\Roles.gif" />
+    <Content Include="Data\Roles1.gif" />
+    <Content Include="Data\sales.xml" />
+    <Content Include="Data\sales.xsl" />
+    <Content Include="Data\sample.gif" />
+    <Content Include="Data\sitesettings.gif" />
+    <Content Include="Data\tabbar.gif" />
+    <Content Include="Data\tabs.gif" />
+    <Content Include="Data\vanlew.gif" />
+    <Content Include="Data\whataremodules.gif" />
+    <Content Include="Default.aspx" />
+    <Content Include="DesktopDefault.aspx" />
+    <Content Include="DesktopModules\Announcements.ascx" />
+    <Content Include="DesktopModules\Contacts.ascx" />
+    <Content Include="DesktopModules\DiscussDetails.aspx" />
+    <Content Include="DesktopModules\Discussion.ascx" />
+    <Content Include="DesktopModules\Document.ascx" />
+    <Content Include="DesktopModules\EditAnnouncements.aspx" />
+    <Content Include="DesktopModules\EditContacts.aspx" />
+    <Content Include="DesktopModules\EditDocs.aspx" />
+    <Content Include="DesktopModules\EditEvents.aspx" />
+    <Content Include="DesktopModules\EditHtml.aspx" />
+    <Content Include="DesktopModules\EditImage.aspx" />
+    <Content Include="DesktopModules\EditLinks.aspx" />
+    <Content Include="DesktopModules\EditXml.aspx" />
+    <Content Include="DesktopModules\Events.ascx" />
+    <Content Include="DesktopModules\HtmlModule.ascx" />
+    <Content Include="DesktopModules\ImageModule.ascx" />
+    <Content Include="DesktopModules\Links.ascx" />
+    <Content Include="DesktopModules\BusinessApplicationRequest\module.json" />
+    <Content Include="DesktopModules\BusinessApplicationRequest\BusinessApplicationRequest.ascx" />
+    <Content Include="DesktopModules\BusinessApplicationRequest\Styles\BusinessApplicationRequest.css" />
+    <Content Include="DesktopModules\EnterpriseCapabilityWorkbench\module.json" />
+    <Content Include="DesktopModules\EnterpriseCapabilityWorkbench\EnterpriseCapabilityWorkbench.ascx" />
+    <Content Include="DesktopModules\EnterpriseCapabilityWorkbench\Styles\EnterpriseCapabilityWorkbench.css" />
+    <Content Include="DesktopModules\EmployeeProfileConfirm\module.json" />
+    <Content Include="DesktopModules\EmployeeProfileConfirm\EmployeeProfileConfirm.ascx" />
+    <Content Include="DesktopModules\EmployeeProfileConfirm\Styles\EmployeeProfileConfirm.css" />
+    <Content Include="DesktopModules\MyWorkItems\module.json" />
+    <Content Include="DesktopModules\MyWorkItems\MyWorkItems.ascx" />
+    <Content Include="DesktopModules\MyWorkItems\Styles\MyWorkItems.css" />
+    <Content Include="DesktopModules\Help\module.json" />
+    <Content Include="DesktopModules\Help\Help.ascx" />
+    <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\module.json" />
+    <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx" />
+    <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\Styles\EmployeeProfileCorrectionRequest.css" />
+    <Content Include="DesktopModules\ModuleProbe\module.json" />
+    <Content Include="DesktopModules\ModuleProbe\ModuleProbe.ascx" />
+    <Content Include="DesktopModules\ModuleProbe\Styles\ModuleProbe.css" />
+    <Content Include="DesktopModules\LeaveRequest\module.json" />
+    <Content Include="DesktopModules\LeaveRequest\LeaveRequest.ascx" />
+    <Content Include="DesktopModules\LeaveRequest\Styles\LeaveRequest.css" />
+    <Content Include="DesktopModules\ExpenseReimbursement\module.json" />
+    <Content Include="DesktopModules\ExpenseReimbursement\ExpenseReimbursement.ascx" />
+    <Content Include="DesktopModules\ExpenseReimbursement\Styles\ExpenseReimbursement.css" />
+    <Content Include="DesktopModules\QuickLinks.ascx" />
+    <Content Include="DesktopModules\Signin.ascx" />
+    <Content Include="DesktopModules\ViewDocument.aspx" />
+    <Content Include="DesktopModules\XmlModule.ascx" />
+    <Content Include="DesktopModuleTitle.ascx" />
+    <Content Include="DesktopPortalBanner.ascx" />
+    <Content Include="GenericErrorPage.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Security\LoginPasswordKey.ashx" />
+    <Content Include="Scripts\Security\jsencrypt-ie6.LICENSE.txt" />
+    <Content Include="Scripts\Security\jsencrypt-ie6.min.js" />
+    <Content Include="Scripts\Security\PortalLoginPasswordEncryption.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\AccessDenied.aspx.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\BusinessApplications.aspx.cs">
+      <DependentUpon>BusinessApplications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\BusinessApplications.aspx.designer.cs">
+      <DependentUpon>BusinessApplications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\CollaborationItems.aspx.cs">
+      <DependentUpon>CollaborationItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CollaborationItems.aspx.designer.cs">
+      <DependentUpon>CollaborationItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EditAccessDenied.aspx.cs">
+      <DependentUpon>EditAccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeEdit.aspx.cs">
+      <DependentUpon>EmployeeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeEdit.aspx.designer.cs">
+      <DependentUpon>EmployeeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EmployeeDirectory.aspx.cs">
+      <DependentUpon>EmployeeDirectory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeDirectory.aspx.designer.cs">
+      <DependentUpon>EmployeeDirectory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Logoff.aspx.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Logoff.aspx.designer.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ManageUsers.aspx.cs">
+      <DependentUpon>ManageUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageUsers.aspx.designer.cs">
+      <DependentUpon>ManageUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleCatalog.aspx.cs">
+      <DependentUpon>ModuleCatalog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleCatalog.aspx.designer.cs">
+      <DependentUpon>ModuleCatalog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleDefinitions.aspx.cs">
+      <DependentUpon>ModuleDefinitions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleDefinitions.aspx.designer.cs">
+      <DependentUpon>ModuleDefinitions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleDefs.ascx.cs">
+      <DependentUpon>ModuleDefs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleDefs.ascx.designer.cs">
+      <DependentUpon>ModuleDefs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleSettings.aspx.cs">
+      <DependentUpon>ModuleSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleSettings.aspx.designer.cs">
+      <DependentUpon>ModuleSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\NotImplemented.aspx.cs">
+      <DependentUpon>NotImplemented.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Roles.ascx.cs">
+      <DependentUpon>Roles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Roles.ascx.designer.cs">
+      <DependentUpon>Roles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SecurityRoles.aspx.cs">
+      <DependentUpon>SecurityRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SecurityRoles.aspx.designer.cs">
+      <DependentUpon>SecurityRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\SiteSettings.ascx.cs">
+      <DependentUpon>SiteSettings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SiteSettings.ascx.designer.cs">
+      <DependentUpon>SiteSettings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DiagnosticLogDetail.aspx.cs">
+      <DependentUpon>DiagnosticLogDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DiagnosticLogDetail.aspx.designer.cs">
+      <DependentUpon>DiagnosticLogDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DiagnosticsLogs.aspx.cs">
+      <DependentUpon>DiagnosticsLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DiagnosticsLogs.aspx.designer.cs">
+      <DependentUpon>DiagnosticsLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EmployeeProfileCorrectionRequests.aspx.cs">
+      <DependentUpon>EmployeeProfileCorrectionRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EmployeeProfileCorrectionRequests.aspx.designer.cs">
+      <DependentUpon>EmployeeProfileCorrectionRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\OperationAudits.aspx.cs">
+      <DependentUpon>OperationAudits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\OperationAudits.aspx.designer.cs">
+      <DependentUpon>OperationAudits.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\WorkItems.aspx.cs">
+      <DependentUpon>WorkItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\WorkItems.aspx.designer.cs">
+      <DependentUpon>WorkItems.aspx</DependentUpon>
+    </Compile>

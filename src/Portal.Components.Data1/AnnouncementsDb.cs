@@ -78,6 +78,40 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>获取指定模块下"游客可见"且未过期的公告（ADR 0027）。</zh-CN>
+        ///   <en>Gets non-expired announcements marked guest-visible for the specified module (ADR 0027).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="moduleId">
+        /// <l>
+        ///   <zh-CN>公告模块实例 ID。</zh-CN>
+        ///   <en>Announcement module instance ID.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>未过期且标记为游客可见的公告集合；匿名访客只能看到这些条目。</zh-CN>
+        ///   <en>Non-expired announcements marked guest-visible; anonymous visitors may only see these items.</en>
+        /// </l>
+        /// </returns>
+        public IEnumerable<IAnnouncementItem> GetGuestVisibleAnnouncements(int moduleId)
+        {
+            // <lang>
+            //   <zh-CN>过滤条件与全量查询保持一致，只额外要求 IsGuestVisible，避免两条路径出现过期语义差异。
+            //   这里不做授权判定：条目是否公开由数据属性决定，能否进入页面仍由页签 AccessRoles 决定。</zh-CN>
+            //   <en>Keep the same expiry semantics as the full query and add only the IsGuestVisible requirement so the
+            //   two paths cannot diverge. No authorization decision is made here: an item's publicness is a data attribute,
+            //   while page access is still governed by the tab's AccessRoles.</en>
+            // </lang>
+            return _context.Announcements
+                .Where(i => i.ModuleId == moduleId)
+                .Where(i => i.ExpireDate > DateTime.Now)
+                .Where(i => i.IsGuestVisible)
+                .ToList<IAnnouncementItem>();
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>获取单个公告；用户指定的不存在标识返回 <c>null</c>，由调用页决定其授权失败响应。</zh-CN>
         ///   <en>Gets one announcement. A user-supplied missing identifier returns <c>null</c> so the caller can select its authorization-failure response.</en>
         /// </lang>

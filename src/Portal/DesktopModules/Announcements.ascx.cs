@@ -57,7 +57,20 @@ namespace ASPNET.StarterKit.Portal
             //   <zh-CN>公告查询限制在当前模块实例内，过期筛选由数据访问层保持旧模块规则。</zh-CN>
             //   <en>The announcement query is scoped to the current module instance, with expiry filtering kept in the data-access layer under legacy module rules.</en>
             // </lang>
-            myDataList.DataSource = AnnouncementsDB.GetAnnouncements(ModuleId);
+            // <lang>
+            //   <zh-CN>ADR 0027 决策 2：匿名访客只读取"游客可见"公告，登录用户保持原有全量视图。
+            //   身份判定只读请求的 Forms 身份，不解析角色串，也不在此处产生授权结论。</zh-CN>
+            //   <en>ADR 0027 decision 2: anonymous visitors read only guest-visible announcements, while signed-in users keep
+            //   the full existing view. Identity comes only from the request's Forms identity; no role string is parsed and
+            //   no authorization conclusion is produced here.</en>
+            // </lang>
+            bool isAuthenticated = Context.User != null
+                && Context.User.Identity != null
+                && Context.User.Identity.IsAuthenticated;
+
+            myDataList.DataSource = isAuthenticated
+                ? AnnouncementsDB.GetAnnouncements(ModuleId)
+                : AnnouncementsDB.GetGuestVisibleAnnouncements(ModuleId);
             // <lang>
             //   <zh-CN>立即绑定可以让编辑回跳后的公告标题、描述和更多链接策略在本次请求中生效。</zh-CN>
             //   <en>Binding immediately lets edited titles, descriptions, and read-more URL policy results take effect on this request after returning from edit.</en>

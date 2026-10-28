@@ -39,6 +39,26 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>读取指定模块下"游客可见"且未过期的公告（ADR 0027）。</zh-CN>
+        ///   <en>Reads non-expired announcements marked guest-visible for the specified module (ADR 0027).</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="moduleId">
+        /// <l>
+        ///   <zh-CN>公告模块实例标识；调用方应来自当前 Tab 的已解析模块。</zh-CN>
+        ///   <en>The announcement module instance identifier; callers should obtain it from the resolved module on the current Tab.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>未过期且 <c>IsGuestVisible = true</c> 的公告集合。</zh-CN>
+        ///   <en>Non-expired announcements whose <c>IsGuestVisible</c> flag is <c>true</c>.</en>
+        /// </l>
+        /// </returns>
+        IEnumerable<IAnnouncementItem> GetGuestVisibleAnnouncements(int moduleId);
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>按公告标识读取单条公告。</zh-CN>
         ///   <en>Reads a single announcement by identifier.</en>
         /// </lang>

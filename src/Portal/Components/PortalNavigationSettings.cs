@@ -1,0 +1,224 @@
+using System;
+using System.Collections.Generic;
+using System.Web;
+
+namespace ASPNET.StarterKit.Portal
+{
+    /// <summary>
+    /// <lang>
+    ///   <zh-CN>导航可见性设置的强类型读取器（ADR 0026 决策二）。</zh-CN>
+    ///   <en>Typed reader for navigation-visibility settings (ADR 0026 decision 2).</en>
+    /// </lang>
+    /// </summary>
+    /// <remarks>
+    /// <lang>
+    ///   <zh-CN>只通过已登记定义读取（数据库覆盖 → appSettings → 代码默认），不直接读取原始配置键，也不判定任何授权。
+    ///   任何解析失败都退回"不隐藏任何页签"的保守默认，确保配置错误永远不会把导航清空。
+    ///   本类不缓存结果：底层 `PortalRuntimeSettings` 已按定义做受控解析，缓存失效策略由消费方（导航渲染层）决定。</zh-CN>
+    ///   <en>Reads only through registered definitions (database override → appSettings → code default); it never reads raw
+    ///   configuration keys directly and never decides authorization. Any parse failure falls back to the conservative
+    ///   default of hiding nothing, so a configuration error can never empty the navigation. This class does not cache:
+    ///   the underlying `PortalRuntimeSettings` already resolves per definition, and the consumer (navigation renderer)
+    ///   owns cache invalidation.</en>
+    /// </lang>
+    /// </remarks>
+    public static class PortalNavigationSettings
+    {
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否隐藏"所有模块都被档位禁用 / 页签无模块"的导航页签；默认关闭。</zh-CN>
+        ///   <en>Whether to hide navigation tabs whose modules are all disabled by the active profile or which have no module at all; disabled by default.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于受控诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>解析成功时为配置值；缺失或非法时为 <c>false</c>。</zh-CN>
+        ///   <en>The configured value when parsed; <c>false</c> when absent or invalid.</en>
+        /// </l>
+        /// </returns>
+        public static bool HideTabsWithoutRenderableModules(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>布尔项以 false 为保守默认：未知时不隐藏，保持既有菜单形态，避免配置缺失导致导航突然变空。</zh-CN>
+            //   <en>Boolean fallback is false: when unknown, hide nothing and preserve the existing menu shape so a missing setting cannot suddenly empty the navigation.</en>
+            // </lang>
+            return ReadBoolean(PortalSettingsRegistry.NavigationHideTabsWithoutRenderableModules, false, context);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显式隐藏的导航页签键集合；NavigationKey 优先，为空时由消费方回退 TabId。</zh-CN>
+        ///   <en>Explicitly hidden navigation tab keys; NavigationKey takes precedence, with the consumer falling back to TabId when blank.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于受控诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>规范化后的只读集合；缺失或非法时为空集合（不隐藏任何页签）。</zh-CN>
+        ///   <en>Read-only normalized collection; empty when absent or invalid (hide nothing).</en>
+        /// </l>
+        /// </returns>
+        public static IList<string> HiddenNavigationKeys(HttpContext context = null)
+        {
+            return ReadList(PortalSettingsRegistry.NavigationHiddenNavigationKeys, context);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按 NavigationKey 前缀整类隐藏的页签前缀集合。</zh-CN>
+        ///   <en>NavigationKey prefixes whose tabs are hidden as a whole.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于受控诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>规范化后的只读前缀集合；缺失或非法时为空集合。</zh-CN>
+        ///   <en>Read-only normalized prefix collection; empty when absent or invalid.</en>
+        /// </l>
+        /// </returns>
+        public static IList<string> ExcludedNavigationKeyPrefixes(HttpContext context = null)
+        {
+            return ReadList(PortalSettingsRegistry.NavigationExcludedNavigationKeyPrefixes, context);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否记录页签隐藏原因；默认开启，便于排障。</zh-CN>
+        ///   <en>Whether tab-hide reasons are logged; enabled by default for troubleshooting.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于受控诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>解析成功时为配置值；缺失或非法时为 <c>true</c>。</zh-CN>
+        ///   <en>The configured value when parsed; <c>true</c> when absent or invalid.</en>
+        /// </l>
+        /// </returns>
+        public static bool LogHiddenTabs(HttpContext context = null)
+        {
+            // <lang>
+            //   <zh-CN>诊断项以 true 为默认：排障信息属于低风险输出，宁可多记一条受控原因也不让"为何不显示"无从追查。</zh-CN>
+            //   <en>Diagnostics default to true: hide-reason output is low risk, and it is better to record one controlled reason than to leave "why is it hidden" untraceable.</en>
+            // </lang>
+            return ReadBoolean(PortalSettingsRegistry.NavigationLogHiddenTabs, true, context);
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按已登记定义读取布尔值，失败时返回调用方给定的保守默认。</zh-CN>
+        ///   <en>Reads a boolean through its registered definition, returning the caller's conservative fallback on failure.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="definition"><l zh-CN="已登记的设置定义，提供键、类型与默认值契约。" en="Registered setting definition supplying the key, type, and default contract." /></param>
+        /// <param name="fallback"><l zh-CN="解析失败时采用的保守默认。" en="Conservative fallback used when parsing fails." /></param>
+        /// <param name="context"><l zh-CN="可选的受控诊断上下文。" en="Optional restricted diagnostics context." /></param>
+        /// <returns><l zh-CN="解析成功时为配置值，否则为 fallback。" en="The configured value when parsed, otherwise the fallback." /></returns>
+        private static bool ReadBoolean(PortalSettingDefinition definition, bool fallback, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>读取与解析整体包在 try 中：底层存储不可用、表缺失或类型不符都不得把异常抛到导航渲染路径。</zh-CN>
+            //   <en>Reading and parsing are wrapped together: storage unavailability, a missing table, or a type mismatch must never throw into the navigation rendering path.</en>
+            // </lang>
+            try
+            {
+                // <lang>
+                //   <zh-CN>由运行时解析器统一完成来源优先级与基础校验，本方法只做布尔转换。</zh-CN>
+                //   <en>The runtime resolver performs source precedence and baseline validation; this method only converts to boolean.</en>
+                // </lang>
+                string raw = PortalRuntimeSettings.GetEffectiveValue(definition, context).Value;
+                bool parsed;
+
+                // <lang>
+                //   <zh-CN>只接受标准布尔文本；其它形式一律视为非法并走保守回退，不猜测 "1"/"yes" 之类的同义写法。</zh-CN>
+                //   <en>Accept standard boolean text only; anything else is treated as invalid and takes the conservative fallback rather than guessing synonyms such as "1" or "yes".</en>
+                // </lang>
+                if (bool.TryParse((raw ?? string.Empty).Trim(), out parsed))
+                {
+                    return parsed;
+                }
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>异常被有意吞掉：导航可见性属展示层，读取失败不应影响页面其余部分。</zh-CN>
+                //   <en>The exception is intentionally swallowed: navigation visibility is presentation-layer, and a read failure must not affect the rest of the page.</en>
+                // </lang>
+            }
+
+            return fallback;
+        }
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按已登记定义读取逗号分隔列表，去空白、去重并保持原顺序；失败时返回空集合。</zh-CN>
+        ///   <en>Reads a comma-separated list through its registered definition, trimming, de-duplicating, and preserving order; returns an empty collection on failure.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="definition"><l zh-CN="已登记的设置定义。" en="Registered setting definition." /></param>
+        /// <param name="context"><l zh-CN="可选的受控诊断上下文。" en="Optional restricted diagnostics context." /></param>
+        /// <returns><l zh-CN="只读规范化集合；缺失或非法时为空。" en="Read-only normalized collection; empty when absent or invalid." /></returns>
+        private static IList<string> ReadList(PortalSettingDefinition definition, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>结果容器只在成功解析的条目上增长；可变集合直到最终封存前都不交给调用方。</zh-CN>
+            //   <en>The result container grows only for successfully parsed entries; the mutable collection is not exposed to callers until it is finally sealed.</en>
+            // </lang>
+            List<string> result = new List<string>();
+
+            try
+            {
+                string raw = PortalRuntimeSettings.GetEffectiveValue(definition, context).Value;
+
+                // <lang>
+                //   <zh-CN>空白配置等价于"不隐藏任何页签"；不把空串当成一个有效条目。</zh-CN>
+                //   <en>A blank configuration is equivalent to "hide nothing"; an empty string is never treated as a valid entry.</en>
+                // </lang>
+                if (!string.IsNullOrWhiteSpace(raw))
+                {
+                    foreach (string part in raw.Split(','))
+                    {
+                        // <lang>
+                        //   <zh-CN>逐项修剪并跳过空段；重复项按首次出现保留，避免同一页签被重复判定。</zh-CN>
+                        //   <en>Trim each item and skip empty segments; duplicates keep their first occurrence so a tab is not evaluated twice.</en>
+                        // </lang>
+                        string item = (part ?? string.Empty).Trim();
+                        if (item.Length > 0 && !result.Contains(item))
+                        {
+                            result.Add(item);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>与布尔读取一致：失败即空集合，保守地不隐藏任何页签。</zh-CN>
+                //   <en>Consistent with boolean reads: a failure yields an empty set, conservatively hiding nothing.</en>
+                // </lang>
+            }
+
+            return result.AsReadOnly();
+        }
+    }
+}

@@ -247,7 +247,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopportalbanner",
       "kind": "type",
       "label": "DesktopPortalBanner",
-      "entryCount": 13,
+      "entryCount": 14,
       "views": [
         "dotnet"
       ],
@@ -650,6 +650,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-39f10862.json"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.help",
+      "kind": "type",
+      "label": "Help",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.help",
+      "sourcePath": "src/Portal/DesktopModules/Help/Help.ascx.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.help",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.help-a084b49c.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-50c8fe2e.json"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.htmlmodule",
       "kind": "type",
       "label": "HtmlModule",
@@ -961,7 +975,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalauthenticationservice",
       "kind": "type",
       "label": "PortalAuthenticationService",
-      "entryCount": 8,
+      "entryCount": 9,
       "views": [
         "dotnet"
       ],
@@ -1454,6 +1468,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-81a5e223.json"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationsettings",
+      "kind": "type",
+      "label": "PortalNavigationSettings",
+      "entryCount": 7,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationsettings",
+      "sourcePath": "src/Portal/Components/PortalNavigationSettings.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalnavigationsettings",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationsettings-5852629e.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-131c60b4.json"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory",
       "kind": "type",
       "label": "PortalNavigationVisibilityContextFactory",
@@ -1663,7 +1691,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingkeys",
       "kind": "type",
       "label": "PortalSettingKeys",
-      "entryCount": 22,
+      "entryCount": 26,
       "views": [
         "dotnet"
       ],
@@ -1705,7 +1733,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsettingsregistry",
       "kind": "type",
       "label": "PortalSettingsRegistry",
-      "entryCount": 25,
+      "entryCount": 29,
       "views": [
         "dotnet"
       ],

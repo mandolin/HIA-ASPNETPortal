@@ -127,6 +127,7 @@
         "Test-PortalModuleCache.ps1",
         "Test-PortalModuleSkinCoverage.ps1",
         "Test-PortalRuntimeGatePackageSet.ps1",
+        "Test-PortalModulePackageContract.ps1",
         "Test-PortalNewModuleReadiness.ps1"
       ]
     },
@@ -453,6 +454,7 @@
     "Test-PortalLocalizedNameGate.ps1",
     "Test-PortalLocalizedNameRuntimeEvidence.ps1",
     "Test-PortalLogMaintenance.ps1",
+    "Test-PortalModulePackageContract.ps1",
     "Test-PortalModuleRuntimeEvidence.mjs",
     "Test-PortalModuleSkinCoverage.ps1",
     "Test-PortalNewModuleReadiness.ps1",

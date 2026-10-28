@@ -157,6 +157,19 @@
       ]
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopportalbanner:entry:hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem",
+      "kind": "entry",
+      "label": "ApplyNavigationSettingsFilter",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem",
+      "sourcePath": "src/Portal/DesktopPortalBanner.ascx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.apply-5ac5eb07.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.desktopportalbanner:entry:hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildtabdisplayname-aspnet.starterkit.portal.itabitem",
       "kind": "entry",
       "label": "BuildTabDisplayName",

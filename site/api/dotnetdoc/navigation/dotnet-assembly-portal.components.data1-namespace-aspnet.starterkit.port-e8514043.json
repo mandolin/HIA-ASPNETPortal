@@ -7,7 +7,7 @@
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.announcementitem",
       "kind": "type",
       "label": "AnnouncementItem",
-      "entryCount": 10,
+      "entryCount": 11,
       "views": [
         "dotnet"
       ],
@@ -21,7 +21,7 @@
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.announcementsdb",
       "kind": "type",
       "label": "AnnouncementsDb",
-      "entryCount": 8,
+      "entryCount": 9,
       "views": [
         "dotnet"
       ],

@@ -101,6 +101,14 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        ///   <l>
+        ///     <zh-CN>该公告条目是否对匿名访客可见（ADR 0027）。数据库默认 0，先插入后授权的顺序保证存量数据不会因升级突然公开。</zh-CN>
+        ///     <en>Whether this announcement item is visible to anonymous visitors (ADR 0027). The database default is 0, so existing rows never become public merely by upgrading.</en>
+        ///   </l>
+        /// </summary>
+        public bool IsGuestVisible { get; set; }
+
         #endregion
     }
 }

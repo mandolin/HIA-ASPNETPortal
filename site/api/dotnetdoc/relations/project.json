@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 5794,
-  "relationCount": 5373,
+  "nodeCount": 5818,
+  "relationCount": 5395,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -5087,6 +5087,34 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes",
+      "kind": "entry",
+      "label": "NavigationExcludedNavigationKeyPrefixes",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys",
+      "kind": "entry",
+      "label": "NavigationHiddenNavigationKeys",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules",
+      "kind": "entry",
+      "label": "NavigationHideTabsWithoutRenderableModules",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs",
+      "kind": "entry",
+      "label": "NavigationLogHiddenTabs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.passworddisallowcontextterms",
       "kind": "entry",
       "label": "PasswordDisallowContextTerms",
@@ -5252,6 +5280,34 @@
       "kind": "entry",
       "label": "MaxUploadBytes",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.maxuploadbytes",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes",
+      "kind": "entry",
+      "label": "NavigationExcludedNavigationKeyPrefixes",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys",
+      "kind": "entry",
+      "label": "NavigationHiddenNavigationKeys",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules",
+      "kind": "entry",
+      "label": "NavigationHideTabsWithoutRenderableModules",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs",
+      "kind": "entry",
+      "label": "NavigationLogHiddenTabs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs",
       "view": "dotnet"
     },
     {
@@ -6928,6 +6984,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32",
+      "kind": "entry",
+      "label": "GetGuestVisibleAnnouncements",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getsingleannouncement-system.int32",
       "kind": "entry",
       "label": "GetSingleAnnouncement",
@@ -7849,6 +7912,13 @@
       "kind": "entry",
       "label": "Page_Load",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopmoduletitle.page_load-system.object-system.eventargs",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem",
+      "kind": "entry",
+      "label": "ApplyNavigationSettingsFilter",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem",
       "view": "dotnet"
     },
     {
@@ -10082,6 +10152,13 @@
       "kind": "entry",
       "label": "GetAnnouncements",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getannouncements-system.int32",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements-system.int32",
+      "kind": "entry",
+      "label": "GetGuestVisibleAnnouncements",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements-system.int32",
       "view": "dotnet"
     },
     {
@@ -12423,6 +12500,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean",
+      "kind": "entry",
+      "label": "ShouldRevokeForSecurityVersionMismatch",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.signin-system.web.httpresponse-system.web.httprequest-system.string-system.int64-system.boolean",
       "kind": "entry",
       "label": "SignIn",
@@ -14100,6 +14184,48 @@
       "kind": "entry",
       "label": "GetEntries",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationregistry.getentries",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
+      "kind": "entry",
+      "label": "ExcludedNavigationKeyPrefixes",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
+      "kind": "entry",
+      "label": "HiddenNavigationKeys",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext",
+      "kind": "entry",
+      "label": "HideTabsWithoutRenderableModules",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
+      "kind": "entry",
+      "label": "LogHiddenTabs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext",
+      "kind": "entry",
+      "label": "ReadBoolean",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "kind": "entry",
+      "label": "ReadList",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
       "view": "dotnet"
     },
     {
@@ -16767,6 +16893,13 @@
       "kind": "entry",
       "label": "ExpireDate",
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.expiredate",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible",
+      "kind": "entry",
+      "label": "IsGuestVisible",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible",
       "view": "dotnet"
     },
     {
@@ -20533,6 +20666,13 @@
       "kind": "entry",
       "label": "ExpireDate",
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.expiredate",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguestvisible",
+      "kind": "entry",
+      "label": "IsGuestVisible",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguestvisible",
       "view": "dotnet"
     },
     {
@@ -33535,6 +33675,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.help",
+      "kind": "entry",
+      "label": "Help",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.help",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.htmlmodule",
       "kind": "entry",
       "label": "HtmlModule",
@@ -34652,6 +34799,13 @@
       "kind": "entry",
       "label": "PortalNavigationRegistry",
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationregistry",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationsettings",
+      "kind": "entry",
+      "label": "PortalNavigationSettings",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationsettings",
       "view": "dotnet"
     },
     {
@@ -39410,6 +39564,12 @@
       "path": "src/Portal/Components/PortalNavigationPolicy.cs"
     },
     {
+      "id": "source:src/Portal/Components/PortalNavigationSettings.cs",
+      "kind": "source",
+      "label": "src/Portal/Components/PortalNavigationSettings.cs",
+      "path": "src/Portal/Components/PortalNavigationSettings.cs"
+    },
+    {
       "id": "source:src/Portal/Components/PortalNavigationVisibilityContextFactory.cs",
       "kind": "source",
       "label": "src/Portal/Components/PortalNavigationVisibilityContextFactory.cs",
@@ -39894,6 +40054,12 @@
       "kind": "source",
       "label": "src/Portal/DesktopModules/ExpenseReimbursement/ExpenseReimbursement.ascx.designer.cs",
       "path": "src/Portal/DesktopModules/ExpenseReimbursement/ExpenseReimbursement.ascx.designer.cs"
+    },
+    {
+      "id": "source:src/Portal/DesktopModules/Help/Help.ascx.cs",
+      "kind": "source",
+      "label": "src/Portal/DesktopModules/Help/Help.ascx.cs",
+      "path": "src/Portal/DesktopModules/Help/Help.ascx.cs"
     },
     {
       "id": "source:src/Portal/DesktopModules/HtmlModule.ascx",
@@ -41001,8 +41167,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.desktopportalbanner.tabnamediagnostic",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 232,
-        "rangeEndLine": 232
+        "rangeStartLine": 244,
+        "rangeEndLine": 244
       }
     },
     {
@@ -49547,6 +49713,58 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes->source:src/Portal/Components/PortalSettingKeys.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes",
+      "to": "source:src/Portal/Components/PortalSettingKeys.cs",
+      "label": "Source: src/Portal/Components/PortalSettingKeys.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 201,
+        "rangeEndLine": 201
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys->source:src/Portal/Components/PortalSettingKeys.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys",
+      "to": "source:src/Portal/Components/PortalSettingKeys.cs",
+      "label": "Source: src/Portal/Components/PortalSettingKeys.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 193,
+        "rangeEndLine": 193
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules->source:src/Portal/Components/PortalSettingKeys.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules",
+      "to": "source:src/Portal/Components/PortalSettingKeys.cs",
+      "label": "Source: src/Portal/Components/PortalSettingKeys.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 185,
+        "rangeEndLine": 185
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs->source:src/Portal/Components/PortalSettingKeys.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs",
+      "to": "source:src/Portal/Components/PortalSettingKeys.cs",
+      "label": "Source: src/Portal/Components/PortalSettingKeys.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 209,
+        "rangeEndLine": 209
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.passworddisallowcontextterms->source:src/Portal/Components/PortalSettingKeys.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.passworddisallowcontextterms",
@@ -49698,8 +49916,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.alldefinitions",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 467,
-        "rangeEndLine": 495
+        "rangeStartLine": 544,
+        "rangeEndLine": 576
       }
     },
     {
@@ -49856,6 +50074,58 @@
         "language": "csharp",
         "rangeStartLine": 234,
         "rangeEndLine": 246
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes->source:src/Portal/Components/PortalSettingsRegistry.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes",
+      "to": "source:src/Portal/Components/PortalSettingsRegistry.cs",
+      "label": "Source: src/Portal/Components/PortalSettingsRegistry.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 502,
+        "rangeEndLine": 512
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys->source:src/Portal/Components/PortalSettingsRegistry.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys",
+      "to": "source:src/Portal/Components/PortalSettingsRegistry.cs",
+      "label": "Source: src/Portal/Components/PortalSettingsRegistry.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 484,
+        "rangeEndLine": 494
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules->source:src/Portal/Components/PortalSettingsRegistry.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules",
+      "to": "source:src/Portal/Components/PortalSettingsRegistry.cs",
+      "label": "Source: src/Portal/Components/PortalSettingsRegistry.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 466,
+        "rangeEndLine": 476
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs->source:src/Portal/Components/PortalSettingsRegistry.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs",
+      "to": "source:src/Portal/Components/PortalSettingsRegistry.cs",
+      "label": "Source: src/Portal/Components/PortalSettingsRegistry.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 520,
+        "rangeEndLine": 530
       }
     },
     {
@@ -52883,8 +53153,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcements.getsafebrowseurl-system.object",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 86,
-        "rangeEndLine": 100
+        "rangeStartLine": 99,
+        "rangeEndLine": 113
       }
     },
     {
@@ -52896,8 +53166,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcements.hassafebrowseurl-system.object",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 120,
-        "rangeEndLine": 127
+        "rangeStartLine": 133,
+        "rangeEndLine": 140
       }
     },
     {
@@ -52910,7 +53180,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 54,
-        "rangeEndLine": 66
+        "rangeEndLine": 79
       }
     },
     {
@@ -52935,8 +53205,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.addannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 165,
-        "rangeEndLine": 207
+        "rangeStartLine": 199,
+        "rangeEndLine": 241
       }
     },
     {
@@ -52948,8 +53218,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.deleteannouncement-system.int32",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 124,
-        "rangeEndLine": 143
+        "rangeStartLine": 158,
+        "rangeEndLine": 177
       }
     },
     {
@@ -52966,6 +53236,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32->source:src/Portal.Components.Data1/AnnouncementsDb.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32",
+      "to": "source:src/Portal.Components.Data1/AnnouncementsDb.cs",
+      "label": "Source: src/Portal.Components.Data1/AnnouncementsDb.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 97,
+        "rangeEndLine": 111
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getsingleannouncement-system.int32->source:src/Portal.Components.Data1/AnnouncementsDb.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getsingleannouncement-system.int32",
@@ -52974,8 +53257,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getsingleannouncement-system.int32",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 97,
-        "rangeEndLine": 104
+        "rangeStartLine": 131,
+        "rangeEndLine": 138
       }
     },
     {
@@ -52987,8 +53270,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.updateannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 228,
-        "rangeEndLine": 259
+        "rangeStartLine": 262,
+        "rangeEndLine": 293
       }
     },
     {
@@ -54682,6 +54965,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem->source:src/Portal/DesktopPortalBanner.ascx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem",
+      "to": "source:src/Portal/DesktopPortalBanner.ascx.cs",
+      "label": "Source: src/Portal/DesktopPortalBanner.ascx.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 374,
+        "rangeEndLine": 496
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildtabdisplayname-aspnet.starterkit.portal.itabitem->source:src/Portal/DesktopPortalBanner.ascx.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildtabdisplayname-aspnet.starterkit.portal.itabitem",
@@ -54690,8 +54986,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildtabdisplayname-aspnet.starterkit.portal.itabitem",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 376,
-        "rangeEndLine": 400
+        "rangeStartLine": 524,
+        "rangeEndLine": 548
       }
     },
     {
@@ -54703,8 +54999,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildtaburl-system.int32-aspnet.starterkit.portal.itabitem",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 258,
-        "rangeEndLine": 274
+        "rangeStartLine": 270,
+        "rangeEndLine": 286
       }
     },
     {
@@ -54717,7 +55013,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 76,
-        "rangeEndLine": 224
+        "rangeEndLine": 236
       }
     },
     {
@@ -54729,8 +55025,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.tabs_itemdatabound-system.object-system.web.ui.webcontrols.datalistitemeventargs",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 294,
-        "rangeEndLine": 348
+        "rangeStartLine": 306,
+        "rangeEndLine": 360
       }
     },
     {
@@ -58578,7 +58874,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 519,
-        "rangeEndLine": 582
+        "rangeEndLine": 585
       }
     },
     {
@@ -58655,8 +58951,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.getapplicationpath-system.web.httprequest",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 602,
-        "rangeEndLine": 609
+        "rangeStartLine": 605,
+        "rangeEndLine": 612
       }
     },
     {
@@ -58668,8 +58964,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.global.isgenericerrorpagerequest-system.web.httprequest",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 629,
-        "rangeEndLine": 637
+        "rangeStartLine": 632,
+        "rangeEndLine": 640
       }
     },
     {
@@ -58798,8 +59094,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.addannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 128,
-        "rangeEndLine": 129
+        "rangeStartLine": 148,
+        "rangeEndLine": 149
       }
     },
     {
@@ -58811,8 +59107,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.deleteannouncement-system.int32",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 72,
-        "rangeEndLine": 72
+        "rangeStartLine": 92,
+        "rangeEndLine": 92
       }
     },
     {
@@ -58829,6 +59125,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements-system.int32->source:src/Portal.Components/IAnnouncementsDb.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements-system.int32",
+      "to": "source:src/Portal.Components/IAnnouncementsDb.cs",
+      "label": "Source: src/Portal.Components/IAnnouncementsDb.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements-system.int32",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 58,
+        "rangeEndLine": 58
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getsingleannouncement-system.int32->source:src/Portal.Components/IAnnouncementsDb.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getsingleannouncement-system.int32",
@@ -58837,8 +59146,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getsingleannouncement-system.int32",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 58,
-        "rangeEndLine": 58
+        "rangeStartLine": 78,
+        "rangeEndLine": 78
       }
     },
     {
@@ -58850,8 +59159,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.updateannouncement-system.int32-system.string-system.string-system.datetime-system.string-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 179,
-        "rangeEndLine": 180
+        "rangeStartLine": 199,
+        "rangeEndLine": 200
       }
     },
     {
@@ -63140,8 +63449,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.expireauthenticationcookie-system.web.httpresponse-system.web.httprequest",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 287,
-        "rangeEndLine": 301
+        "rangeStartLine": 330,
+        "rangeEndLine": 344
       }
     },
     {
@@ -63153,8 +63462,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.formatsecurityversion-system.int64",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 194,
-        "rangeEndLine": 197
+        "rangeStartLine": 237,
+        "rangeEndLine": 240
       }
     },
     {
@@ -63166,8 +63475,21 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.getcookiepath-system.web.httprequest",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 254,
-        "rangeEndLine": 267
+        "rangeStartLine": 297,
+        "rangeEndLine": 310
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean->source:src/Portal/Components/PortalAuthenticationService.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean",
+      "to": "source:src/Portal/Components/PortalAuthenticationService.cs",
+      "label": "Source: src/Portal/Components/PortalAuthenticationService.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 206,
+        "rangeEndLine": 217
       }
     },
     {
@@ -63205,8 +63527,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.tryparsesecurityversion-system.string-system.int64",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 223,
-        "rangeEndLine": 234
+        "rangeStartLine": 266,
+        "rangeEndLine": 277
       }
     },
     {
@@ -66291,6 +66613,84 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext->source:src/Portal/Components/PortalNavigationSettings.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalNavigationSettings.cs",
+      "label": "Source: src/Portal/Components/PortalNavigationSettings.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 95,
+        "rangeEndLine": 98
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext->source:src/Portal/Components/PortalNavigationSettings.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalNavigationSettings.cs",
+      "label": "Source: src/Portal/Components/PortalNavigationSettings.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 72,
+        "rangeEndLine": 75
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext->source:src/Portal/Components/PortalNavigationSettings.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalNavigationSettings.cs",
+      "label": "Source: src/Portal/Components/PortalNavigationSettings.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 45,
+        "rangeEndLine": 52
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext->source:src/Portal/Components/PortalNavigationSettings.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalNavigationSettings.cs",
+      "label": "Source: src/Portal/Components/PortalNavigationSettings.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 118,
+        "rangeEndLine": 125
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext->source:src/Portal/Components/PortalNavigationSettings.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalNavigationSettings.cs",
+      "label": "Source: src/Portal/Components/PortalNavigationSettings.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 137,
+        "rangeEndLine": 170
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext->source:src/Portal/Components/PortalNavigationSettings.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "to": "source:src/Portal/Components/PortalNavigationSettings.cs",
+      "label": "Source: src/Portal/Components/PortalNavigationSettings.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 181,
+        "rangeEndLine": 222
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitycontext.-ctor-system.boolean-system.collections.generic.ienumerable-system.string-system.collections.generic.ienumerable-system.string-system.collections.generic.ienumerable-system.string-system.string-system.collections.generic.ienumerable-system.string->source:src/Portal.Components/PortalNavigationVisibilityPolicy.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationvisibilitycontext.-ctor-system.boolean-system.collections.generic.ienumerable-system.string-system.collections.generic.ienumerable-system.string-system.collections.generic.ienumerable-system.string-system.string-system.collections.generic.ienumerable-system.string",
@@ -67521,8 +67921,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsettingsregistry.getall",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 509,
-        "rangeEndLine": 516
+        "rangeStartLine": 590,
+        "rangeEndLine": 597
       }
     },
     {
@@ -67534,8 +67934,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalsettingsregistry.tryget-system.string-aspnet.starterkit.portal.portalsettingdefinition",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 542,
-        "rangeEndLine": 567
+        "rangeStartLine": 623,
+        "rangeEndLine": 648
       }
     },
     {
@@ -71241,6 +71641,19 @@
         "language": "csharp",
         "rangeStartLine": 94,
         "rangeEndLine": 94
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible->source:src/Portal.Components.Data1/AnnouncementItem.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible",
+      "to": "source:src/Portal.Components.Data1/AnnouncementItem.cs",
+      "label": "Source: src/Portal.Components.Data1/AnnouncementItem.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 110,
+        "rangeEndLine": 110
       }
     },
     {
@@ -78235,6 +78648,19 @@
         "language": "csharp",
         "rangeStartLine": 88,
         "rangeEndLine": 88
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguestvisible->source:src/Portal.Components/IAnnouncementItem.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguestvisible",
+      "to": "source:src/Portal.Components/IAnnouncementItem.cs",
+      "label": "Source: src/Portal.Components/IAnnouncementItem.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguestvisible",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 104,
+        "rangeEndLine": 104
       }
     },
     {
@@ -100997,7 +101423,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 26,
-        "rangeEndLine": 105
+        "rangeEndLine": 113
       }
     },
     {
@@ -101010,7 +101436,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 19,
-        "rangeEndLine": 128
+        "rangeEndLine": 141
       }
     },
     {
@@ -101023,7 +101449,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 20,
-        "rangeEndLine": 262
+        "rangeEndLine": 296
       }
     },
     {
@@ -101517,7 +101943,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 24,
-        "rangeEndLine": 401
+        "rangeEndLine": 423
       }
     },
     {
@@ -102379,6 +102805,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.help->source:src/Portal/DesktopModules/Help/Help.ascx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.help",
+      "to": "source:src/Portal/DesktopModules/Help/Help.ascx.cs",
+      "label": "Source: src/Portal/DesktopModules/Help/Help.ascx.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.help",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 25,
+        "rangeEndLine": 27
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.htmlmodule->source:src/Portal/DesktopModules/HtmlModule.ascx.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.htmlmodule",
@@ -102427,7 +102866,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 24,
-        "rangeEndLine": 97
+        "rangeEndLine": 105
       }
     },
     {
@@ -102440,7 +102879,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 18,
-        "rangeEndLine": 181
+        "rangeEndLine": 201
       }
     },
     {
@@ -103532,7 +103971,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 19,
-        "rangeEndLine": 302
+        "rangeEndLine": 345
       }
     },
     {
@@ -104459,6 +104898,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationsettings->source:src/Portal/Components/PortalNavigationSettings.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationsettings",
+      "to": "source:src/Portal/Components/PortalNavigationSettings.cs",
+      "label": "Source: src/Portal/Components/PortalNavigationSettings.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationsettings",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 25,
+        "rangeEndLine": 223
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilitycontext->source:src/Portal.Components/PortalNavigationVisibilityPolicy.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilitycontext",
@@ -104910,7 +105362,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 9,
-        "rangeEndLine": 178
+        "rangeEndLine": 210
       }
     },
     {

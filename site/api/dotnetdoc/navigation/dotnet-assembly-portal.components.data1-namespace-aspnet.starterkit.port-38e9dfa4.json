@@ -74,6 +74,19 @@
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.announcementitem.expireda-b751c9a8.html"
     },
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.announcementitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible",
+      "kind": "entry",
+      "label": "IsGuestVisible",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible",
+      "sourcePath": "src/Portal.Components.Data1/AnnouncementItem.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.announcementitem.isguestvisible",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.announcementitem.isguestv-43d22085.html"
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.announcementitem:entry:hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.itemid",
       "kind": "entry",
       "label": "ItemId",

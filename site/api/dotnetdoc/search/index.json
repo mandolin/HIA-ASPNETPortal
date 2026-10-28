@@ -7356,6 +7356,15 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.tryreadsecurityversion-system.web.security.formsidentity-system.int64 tryreadsecurityversion dotnet-method reads the security version from a forms authentication identity. public static bool aspnet.starterkit.portal.portalauthenticationservice.tryreadsecurityversion(system.web.security.formsidentity identity, out long securityversion) dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.tryreadsecurityversion-system.web.security.formsidentity-system.int64 portal aspnet.starterkit.portal aspnet.starterkit.portal.portalauthenticationservice t:aspnet.starterkit.portal.portalauthenticationservice dotnet hia-document api/portal.hia.json src/portal/components/portalauthenticationservice.cs csharp 从 forms authentication 身份中读取安全版本。 reads the security version from a forms authentication identity. forms 身份。 forms identity. 读取到的安全版本。 parsed security version. 成功解析安全版本时为。 true when the security version was parsed successfully. true"
     },
     {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean",
+      "name": "ShouldRevokeForSecurityVersionMismatch",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-bbf3534f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalauthenticationservi-bbf3534f.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean shouldrevokeforsecurityversionmismatch dotnet-method pure revoke decision shared by application_authenticaterequest and regression tests. returns true when the ticket is unreadable, or the database security version is determinable (>0) and differs from the ticket; a database version of 0 means \"undetermined\" (transient read failure, a legacy db without the portal_usersecuritystates table, or a missing state row) and must return false, otherwise concurrent queries on the singleton dbcontext would intermittently return 0 and randomly sign out active sessions (p42 fix). public static bool aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch(long ticketsecurityversion, long databasesecurityversion, bool ticketsecurityversionreadable) dotnet:m:aspnet.starterkit.portal.portalauthenticationservice.shouldrevokeforsecurityversionmismatch-system.int64-system.int64-system.boolean portal aspnet.starterkit.portal aspnet.starterkit.portal.portalauthenticationservice t:aspnet.starterkit.portal.portalauthenticationservice dotnet hia-document api/portal.hia.json src/portal/components/portalauthenticationservice.cs csharp 纯函数化的签退决策，供 application_authenticaterequest 与回归测试共用。票据不可读，或数据库安全版本可确定（>0）且与票据不符时返回 true；数据库版本为 0 表示“无法判定”（瞬态读取失败、旧库无 portal_usersecuritystates 状态表、或状态行缺失），必须返回 false，否则单例 dbcontext 上的并发查询竞态会使读取偶发失败返回 0，把活跃会话随机踢出（p42 修复）。 pure revoke decision shared by application_authenticaterequest and regression tests. returns true when the ticket is unreadable, or the database security version is determinable (>0) and differs from the ticket; a database version of 0 means \"undetermined\" (transient read failure, a legacy db without the portal_usersecuritystates table, or a missing state row) and must return false, otherwise concurrent queries on the singleton dbcontext would intermittently return 0 and randomly sign out active sessions (p42 fix). 票据中解析出的安全版本；仅当为 true 时有效。 security version parsed from the ticket; valid only whenis true. 数据库中的安全版本；0 表示无法判定。 security version from the database; 0 means undetermined. 票据安全版本是否成功解析且未过期。 whether the ticket security version was parsed successfully and is unexpired. 应当签退时为。 true when the user should be signed out. true"
+    },
+    {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalauthenticationservice.formatsecurityversion-system.int64",
       "name": "FormatSecurityVersion",
       "kind": "dotnet-method",
@@ -9966,6 +9975,69 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationpolicy.getportalhomeurl-system.web.httprequest getportalhomeurl dotnet-method builds the portal desktop-home url from the current application virtual directory. private static string aspnet.starterkit.portal.portalnavigationpolicy.getportalhomeurl(system.web.httprequest request) dotnet:m:aspnet.starterkit.portal.portalnavigationpolicy.getportalhomeurl-system.web.httprequest portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationpolicy t:aspnet.starterkit.portal.portalnavigationpolicy dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationpolicy.cs csharp 根据当前应用虚拟目录构造门户桌面首页地址。 builds the portal desktop-home url from the current application virtual directory. 当前请求；为空时使用根应用回退地址。 current request; a root-application fallback is used when it is null. 当前应用内的 desktopdefault.aspx 地址。 an in-application desktopdefault.aspx address."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationsettings",
+      "name": "PortalNavigationSettings",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationsettings-5852629e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalnavigationsettings-5852629e.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationsettings portalnavigationsettings dotnet-type typed reader for navigation-visibility settings (adr 0026 decision 2). class aspnet.starterkit.portal.portalnavigationsettings dotnet:t:aspnet.starterkit.portal.portalnavigationsettings portal aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 导航可见性设置的强类型读取器（adr 0026 决策二）。 typed reader for navigation-visibility settings (adr 0026 decision 2). 只通过已登记定义读取（数据库覆盖 → appsettings → 代码默认），不直接读取原始配置键，也不判定任何授权。 任何解析失败都退回\"不隐藏任何页签\"的保守默认，确保配置错误永远不会把导航清空。 本类不缓存结果：底层 `portalruntimesettings` 已按定义做受控解析，缓存失效策略由消费方（导航渲染层）决定。 reads only through registered definitions (database override → appsettings → code default); it never reads raw configuration keys directly and never decides authorization. any parse failure falls back to the conservative default of hiding nothing, so a configuration error can never empty the navigation. this class does not cache: the underlying `portalruntimesettings` already resolves per definition, and the consumer (navigation renderer) owns cache invalidation."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext",
+      "name": "HideTabsWithoutRenderableModules",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-cad44b53.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-cad44b53.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext hidetabswithoutrenderablemodules dotnet-method whether to hide navigation tabs whose modules are all disabled by the active profile or which have no module at all; disabled by default. public static bool aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules(system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.hidetabswithoutrenderablemodules-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 是否隐藏\"所有模块都被档位禁用 / 页签无模块\"的导航页签；默认关闭。 whether to hide navigation tabs whose modules are all disabled by the active profile or which have no module at all; disabled by default. 用于受控诊断的当前 http 上下文，可为。 null current http context for restricted diagnostics; may be. null 解析成功时为配置值；缺失或非法时为。 false the configured value when parsed;when absent or invalid. false"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext",
+      "name": "HiddenNavigationKeys",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-8bf3304a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-8bf3304a.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext hiddennavigationkeys dotnet-method explicitly hidden navigation tab keys; navigationkey takes precedence, with the consumer falling back to tabid when blank. public static system.collections.generic.ilist<string> aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys(system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.hiddennavigationkeys-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 显式隐藏的导航页签键集合；navigationkey 优先，为空时由消费方回退 tabid。 explicitly hidden navigation tab keys; navigationkey takes precedence, with the consumer falling back to tabid when blank. 用于受控诊断的当前 http 上下文，可为。 null current http context for restricted diagnostics; may be. null 规范化后的只读集合；缺失或非法时为空集合（不隐藏任何页签）。 read-only normalized collection; empty when absent or invalid (hide nothing)."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext",
+      "name": "ExcludedNavigationKeyPrefixes",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-5f60b17f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-5f60b17f.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext excludednavigationkeyprefixes dotnet-method navigationkey prefixes whose tabs are hidden as a whole. public static system.collections.generic.ilist<string> aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes(system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 按 navigationkey 前缀整类隐藏的页签前缀集合。 navigationkey prefixes whose tabs are hidden as a whole. 用于受控诊断的当前 http 上下文，可为。 null current http context for restricted diagnostics; may be. null 规范化后的只读前缀集合；缺失或非法时为空集合。 read-only normalized prefix collection; empty when absent or invalid."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
+      "name": "LogHiddenTabs",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-b914f190.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-b914f190.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext loghiddentabs dotnet-method whether tab-hide reasons are logged; enabled by default for troubleshooting. public static bool aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs(system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 是否记录页签隐藏原因；默认开启，便于排障。 whether tab-hide reasons are logged; enabled by default for troubleshooting. 用于受控诊断的当前 http 上下文，可为。 null current http context for restricted diagnostics; may be. null 解析成功时为配置值；缺失或非法时为。 true the configured value when parsed;when absent or invalid. true"
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext",
+      "name": "ReadBoolean",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-7777c66a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-7777c66a.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext readboolean dotnet-method reads a boolean through its registered definition, returning the caller's conservative fallback on failure. private static bool aspnet.starterkit.portal.portalnavigationsettings.readboolean(aspnet.starterkit.portal.portalsettingdefinition definition, bool fallback, system.web.httpcontext context) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.readboolean-aspnet.starterkit.portal.portalsettingdefinition-system.boolean-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 按已登记定义读取布尔值，失败时返回调用方给定的保守默认。 reads a boolean through its registered definition, returning the caller's conservative fallback on failure. 已登记的设置定义，提供键、类型与默认值契约。 registered setting definition supplying the key, type, and default contract. 解析失败时采用的保守默认。 conservative fallback used when parsing fails. 可选的受控诊断上下文。 optional restricted diagnostics context. 解析成功时为配置值，否则为 fallback。 the configured value when parsed, otherwise the fallback."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext",
+      "name": "ReadList",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-49be249e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-49be249e.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext readlist dotnet-method reads a comma-separated list through its registered definition, trimming, de-duplicating, and preserving order; returns an empty collection on failure. private static system.collections.generic.ilist<string> aspnet.starterkit.portal.portalnavigationsettings.readlist(aspnet.starterkit.portal.portalsettingdefinition definition, system.web.httpcontext context) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.readlist-aspnet.starterkit.portal.portalsettingdefinition-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 按已登记定义读取逗号分隔列表，去空白、去重并保持原顺序；失败时返回空集合。 reads a comma-separated list through its registered definition, trimming, de-duplicating, and preserving order; returns an empty collection on failure. 已登记的设置定义。 registered setting definition. 可选的受控诊断上下文。 optional restricted diagnostics context. 只读规范化集合；缺失或非法时为空。 read-only normalized collection; empty when absent or invalid."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalnavigationvisibilitycontextfactory",
       "name": "PortalNavigationVisibilityContextFactory",
       "kind": "dotnet-type",
@@ -11541,6 +11613,42 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.hiaportalinstanceid hiaportalinstanceid dotnet-field setting key for the deployment-level portal instance identifier used by hia peripheral capability descriptors. public const string aspnet.starterkit.portal.portalsettingkeys.hiaportalinstanceid dotnet:f:aspnet.starterkit.portal.portalsettingkeys.hiaportalinstanceid portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp hia 外围能力描述使用的部署级门户实例标识设置键。 setting key for the deployment-level portal instance identifier used by hia peripheral capability descriptors."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules",
+      "name": "NavigationHideTabsWithoutRenderableModules",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-7260a372.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-7260a372.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules navigationhidetabswithoutrenderablemodules dotnet-field setting key controlling whether navigation tabs with no renderable module are hidden (adr 0026 decision 2). public const string aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules dotnet:f:aspnet.starterkit.portal.portalsettingkeys.navigationhidetabswithoutrenderablemodules portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp 是否隐藏\"没有可渲染模块\"的导航页签（adr 0026 决策二）。 setting key controlling whether navigation tabs with no renderable module are hidden (adr 0026 decision 2)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys",
+      "name": "NavigationHiddenNavigationKeys",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-316b83bd.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-316b83bd.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys navigationhiddennavigationkeys dotnet-field setting key for explicitly hidden navigation tabs (by navigationkey, falling back to tabid when blank). public const string aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys dotnet:f:aspnet.starterkit.portal.portalsettingkeys.navigationhiddennavigationkeys portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp 显式隐藏的导航页签键列表（按 navigationkey，空则回退 tabid）。 setting key for explicitly hidden navigation tabs (by navigationkey, falling back to tabid when blank)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes",
+      "name": "NavigationExcludedNavigationKeyPrefixes",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-c34ca1c2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-c34ca1c2.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes navigationexcludednavigationkeyprefixes dotnet-field setting key for hiding navigation tabs by navigationkey prefix. public const string aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes dotnet:f:aspnet.starterkit.portal.portalsettingkeys.navigationexcludednavigationkeyprefixes portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp 按 navigationkey 前缀整类隐藏导航页签。 setting key for hiding navigation tabs by navigationkey prefix."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs",
+      "name": "NavigationLogHiddenTabs",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-5787c25b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-5787c25b.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs navigationloghiddentabs dotnet-field setting key controlling whether navigation-tab hide reasons are logged. public const string aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs dotnet:f:aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp 是否记录导航页签隐藏原因。 setting key controlling whether navigation-tab hide reasons are logged."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaboundarysettings",
       "name": "PortalHiaBoundarySettings",
       "kind": "dotnet-type",
@@ -11845,6 +11953,42 @@
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.co-9710adb5.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.co-9710adb5.html",
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.cookiessamesite cookiessamesite dotnet-field setting definition controlling the samesite mode of identity and role cookies; the attribute is not emitted by default. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.cookiessamesite dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.cookiessamesite portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 控制身份与角色 cookie samesite 模式的设置定义，默认不下发该属性。 setting definition controlling the samesite mode of identity and role cookies; the attribute is not emitted by default."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules",
+      "name": "NavigationHideTabsWithoutRenderableModules",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-4cf03ee6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-4cf03ee6.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules navigationhidetabswithoutrenderablemodules dotnet-field whether to hide navigation tabs whose modules are all disabled by the active profile or which have no module at all; disabled by default for backward compatibility. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationhidetabswithoutrenderablemodules portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 是否隐藏\"所有模块都被档位禁用 / 页签无模块\"的导航页签；默认关闭以保持向后兼容。 whether to hide navigation tabs whose modules are all disabled by the active profile or which have no module at all; disabled by default for backward compatibility."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys",
+      "name": "NavigationHiddenNavigationKeys",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-98be4449.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-98be4449.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys navigationhiddennavigationkeys dotnet-field explicitly hidden navigation tab keys, comma separated; navigationkey takes precedence and tabid is used when blank. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationhiddennavigationkeys portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 显式隐藏的导航页签键，逗号分隔；navigationkey 优先，为空时回退 tabid。 explicitly hidden navigation tab keys, comma separated; navigationkey takes precedence and tabid is used when blank."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes",
+      "name": "NavigationExcludedNavigationKeyPrefixes",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-06e3d35e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-06e3d35e.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes navigationexcludednavigationkeyprefixes dotnet-field hide navigation tabs by navigationkey prefix. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationexcludednavigationkeyprefixes portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 按 navigationkey 前缀整类隐藏导航页签。 hide navigation tabs by navigationkey prefix."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs",
+      "name": "NavigationLogHiddenTabs",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-67fccd77.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-67fccd77.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs navigationloghiddentabs dotnet-field whether navigation-tab hide reasons are logged for troubleshooting. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 是否记录导航页签隐藏原因，便于排障。 whether navigation-tab hide reasons are logged for troubleshooting."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.alldefinitions",
@@ -17112,6 +17256,15 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.myworkitems.emptylabel emptylabel dotnet-field label that displays the empty or no-match wording. protected system.web.ui.webcontrols.label aspnet.starterkit.portal.myworkitems.emptylabel dotnet:f:aspnet.starterkit.portal.myworkitems.emptylabel portal aspnet.starterkit.portal aspnet.starterkit.portal.myworkitems t:aspnet.starterkit.portal.myworkitems dotnet hia-document api/portal.hia.json src/portal/desktopmodules/myworkitems/myworkitems.ascx.designer.cs csharp 显示空态或筛选无结果文案的标签。 label that displays the empty or no-match wording."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.help",
+      "name": "Help",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.help-a084b49c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.help-a084b49c.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.help help dotnet-type static \"help and notes\" content module. class aspnet.starterkit.portal.help dotnet:t:aspnet.starterkit.portal.help portal aspnet.starterkit.portal t:aspnet.starterkit.portal.portalmodulecontrol{aspnet.starterkit.portal.help} t:system.web.ui.usercontrol t:system.web.ui.templatecontrol t:system.web.ui.control t:system.object t:system.componentmodel.icomponent t:system.idisposable t:system.web.ui.iparseraccessor t:system.web.ui.iurlresolutionservice t:system.web.ui.idatabindingsaccessor t:system.web.ui.icontrolbuilderaccessor t:system.web.ui.icontroldesigneraccessor t:system.web.ui.iexpressionsaccessor t:system.web.ui.ifilterresolutionservice t:system.web.ui.iattributeaccessor t:system.web.ui.inonbindingcontainer t:system.web.ui.inamingcontainer t:system.web.ui.iusercontroldesigneraccessor t:aspnet.starterkit.portal.iportalmodulecontrol dotnet hia-document api/portal.hia.json src/portal/desktopmodules/help/help.ascx.cs csharp 「帮助与说明」静态内容模块。 static \"help and notes\" content module. 本模块刻意做成**纯静态**：不读取数据库、不读取任何系统设置、不判定授权、不接受请求参数， 因此可以安全地对匿名访客渲染。内容固化在控件标记里，**不提供后台编辑入口**——这是 adr 0027 的边界： 后台可编辑的 html 片段在净化方案落地前不得公开给匿名访客；帮助内容改为随代码发布，从根上消除该 xss 面。 可见性仍由页签的 `accessroles` 决定，本控件不参与授权判断。 this module is deliberately **purely static**: it reads no database, no system setting, performs no authorization decision, and accepts no request parameter, so it can be rendered safely to anonymous visitors. its content is fixed in the control markup with **no administration editing surface** — that is the adr 0027 boundary: administrator-editable html fragments must not be exposed to anonymous visitors before a sanitization decision exists, so help content ships with the code and removes that xss surface entirely. visibility is still governed by the tab's `accessroles`; this control never participates in authorization."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionrequest",
       "name": "EmployeeProfileCorrectionRequest",
       "kind": "dotnet-type",
@@ -18325,6 +18478,15 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.tabs_-ea85a45d.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.tabs_-ea85a45d.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.tabs_itemdatabound-system.object-system.web.ui.webcontrols.datalistitemeventargs tabs_itemdatabound dotnet-method switches a tab item between its forms according to the bound result: a gate-blocked item shows a disabled state with its reason to administrators while every other case stays a normal link. protected void aspnet.starterkit.portal.desktopportalbanner.tabs_itemdatabound(object sender, system.web.ui.webcontrols.datalistitemeventargs e) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.tabs_itemdatabound-system.object-system.web.ui.webcontrols.datalistitemeventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 按绑定结果切换 tab 项形态：被 gate 阻断的项由管理员看到禁用态与原因，其余情况保持普通链接。 switches a tab item between its forms according to the bound result: a gate-blocked item shows a disabled state with its reason to administrators while every other case stays a normal link. 事件源。 event source. 事件数据；非数据项行（页眉、页脚）直接忽略。 event data; non-item rows (header, footer) are ignored."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem",
+      "name": "ApplyNavigationSettingsFilter",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.apply-5ac5eb07.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.desktopportalbanner.apply-5ac5eb07.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem applynavigationsettingsfilter dotnet-method removes navigation tabs per system settings: explicit hidden keys first, then excluded prefixes. private void aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter(system.collections.generic.list<aspnet.starterkit.portal.itabitem> tabs) dotnet:m:aspnet.starterkit.portal.desktopportalbanner.applynavigationsettingsfilter-system.collections.generic.list-aspnet.starterkit.portal.itabitem portal aspnet.starterkit.portal aspnet.starterkit.portal.desktopportalbanner t:aspnet.starterkit.portal.desktopportalbanner dotnet hia-document api/portal.hia.json src/portal/desktopportalbanner.ascx.cs csharp 按系统设置移除导航页签：先判显式隐藏键，再判前缀排除。 removes navigation tabs per system settings: explicit hidden keys first, then excluded prefixes. 已通过角色过滤的可变页签集合；方法就地移除命中项。 mutable role-filtered tab collection; matching items are removed in place."
     },
     {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.desktopportalbanner.buildtabdisplayname-aspnet.starterkit.portal.itabitem",
@@ -27426,6 +27588,15 @@
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.description description dotnet-property announcement body description; presentation code must encode it before output. string aspnet.starterkit.portal.iannouncementitem.description { get; set; } dotnet:p:aspnet.starterkit.portal.iannouncementitem.description portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iannouncementitem t:aspnet.starterkit.portal.iannouncementitem dotnet hia-document api/portal.components.hia.json src/portal.components/iannouncementitem.cs csharp 公告正文描述，展示层输出前必须编码。 announcement body description; presentation code must encode it before output."
     },
     {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguestvisible",
+      "name": "IsGuestVisible",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguest-c949a752.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguest-c949a752.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.iannouncementitem.isguestvisible isguestvisible dotnet-property whether this announcement item is visible to anonymous visitors (adr 0027). defaults to, so nothing is public unless explicitly marked. false bool aspnet.starterkit.portal.iannouncementitem.isguestvisible { get; set; } dotnet:p:aspnet.starterkit.portal.iannouncementitem.isguestvisible portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iannouncementitem t:aspnet.starterkit.portal.iannouncementitem dotnet hia-document api/portal.components.hia.json src/portal.components/iannouncementitem.cs csharp 该公告条目是否对匿名访客可见（adr 0027）。默认：未显式标记即不公开。 false whether this announcement item is visible to anonymous visitors (adr 0027). defaults to, so nothing is public unless explicitly marked. false"
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.idiscussionitem",
       "name": "IDiscussionItem",
       "kind": "dotnet-type",
@@ -28000,6 +28171,15 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getannou-605e1825.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getannou-605e1825.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getannouncements-system.int32 getannouncements dotnet-method reads currently active announcements for the specified module. system.collections.generic.ienumerable<aspnet.starterkit.portal.iannouncementitem> aspnet.starterkit.portal.iannouncementsdb.getannouncements(int moduleid) dotnet:m:aspnet.starterkit.portal.iannouncementsdb.getannouncements-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iannouncementsdb t:aspnet.starterkit.portal.iannouncementsdb dotnet hia-document api/portal.components.hia.json src/portal.components/iannouncementsdb.cs csharp 读取指定模块当前仍有效的公告列表。 reads currently active announcements for the specified module. 公告模块实例标识；调用方应来自当前 tab 的已解析模块。 the announcement module instance identifier; callers should obtain it from the resolved module on the current tab. 未过期公告集合；展示层仍负责 html 编码和链接渲染策略。 the non-expired announcement collection; the presentation layer still owns html encoding and link rendering policy."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements-system.int32",
+      "name": "GetGuestVisibleAnnouncements",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguest-43f6464b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguest-43f6464b.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements-system.int32 getguestvisibleannouncements dotnet-method reads non-expired announcements marked guest-visible for the specified module (adr 0027). system.collections.generic.ienumerable<aspnet.starterkit.portal.iannouncementitem> aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements(int moduleid) dotnet:m:aspnet.starterkit.portal.iannouncementsdb.getguestvisibleannouncements-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iannouncementsdb t:aspnet.starterkit.portal.iannouncementsdb dotnet hia-document api/portal.components.hia.json src/portal.components/iannouncementsdb.cs csharp 读取指定模块下\"游客可见\"且未过期的公告（adr 0027）。 reads non-expired announcements marked guest-visible for the specified module (adr 0027). 公告模块实例标识；调用方应来自当前 tab 的已解析模块。 the announcement module instance identifier; callers should obtain it from the resolved module on the current tab. 未过期且的公告集合。 isguestvisible = true non-expired announcements whoseflag is. isguestvisible true"
     },
     {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iannouncementsdb.getsingleannouncement-system.int32",
@@ -38622,6 +38802,15 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getannouncements-system.int32 getannouncements dotnet-method gets announcements that have not expired for the specified module. public system.collections.generic.ienumerable<aspnet.starterkit.portal.iannouncementitem> aspnet.starterkit.portal.announcementsdb.getannouncements(int moduleid) dotnet:m:aspnet.starterkit.portal.announcementsdb.getannouncements-system.int32 portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.announcementsdb t:aspnet.starterkit.portal.announcementsdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/announcementsdb.cs csharp 获取指定模块下尚未过期的公告列表。 gets announcements that have not expired for the specified module. 公告模块实例 id。 announcement module instance id. 当前服务器时间之后仍有效的公告集合。 announcement collection whose expiration time is later than the current server time."
     },
     {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32",
+      "name": "GetGuestVisibleAnnouncements",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestv-72f6807e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestv-72f6807e.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32 getguestvisibleannouncements dotnet-method gets non-expired announcements marked guest-visible for the specified module (adr 0027). public system.collections.generic.ienumerable<aspnet.starterkit.portal.iannouncementitem> aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements(int moduleid) dotnet:m:aspnet.starterkit.portal.announcementsdb.getguestvisibleannouncements-system.int32 portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.announcementsdb t:aspnet.starterkit.portal.announcementsdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/announcementsdb.cs csharp 获取指定模块下\"游客可见\"且未过期的公告（adr 0027）。 gets non-expired announcements marked guest-visible for the specified module (adr 0027). 公告模块实例 id。 announcement module instance id. 未过期且标记为游客可见的公告集合；匿名访客只能看到这些条目。 non-expired announcements marked guest-visible; anonymous visitors may only see these items."
+    },
+    {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.announcementsdb.getsingleannouncement-system.int32",
       "name": "GetSingleAnnouncement",
       "kind": "dotnet-method",
@@ -39853,6 +40042,15 @@
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.announcementitem.descript-92f2aa87.html",
       "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.announcementitem.descript-92f2aa87.html",
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.description description dotnet-property announcement body description; presentation code must encode it before output. public string aspnet.starterkit.portal.announcementitem.description { get; set; } dotnet:p:aspnet.starterkit.portal.announcementitem.description portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.announcementitem t:aspnet.starterkit.portal.announcementitem dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/announcementitem.cs csharp 公告正文描述，展示层输出前必须编码。 announcement body description; presentation code must encode it before output."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible",
+      "name": "IsGuestVisible",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.announcementitem.isguestv-43d22085.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.announcementitem.isguestv-43d22085.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.announcementitem.isguestvisible isguestvisible dotnet-property whether this announcement item is visible to anonymous visitors (adr 0027). the database default is 0, so existing rows never become public merely by upgrading. public bool aspnet.starterkit.portal.announcementitem.isguestvisible { get; set; } dotnet:p:aspnet.starterkit.portal.announcementitem.isguestvisible portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.announcementitem t:aspnet.starterkit.portal.announcementitem dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/announcementitem.cs csharp 该公告条目是否对匿名访客可见（adr 0027）。数据库默认 0，先插入后授权的顺序保证存量数据不会因升级突然公开。 whether this announcement item is visible to anonymous visitors (adr 0027). the database default is 0, so existing rows never become public merely by upgrading."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalcfgdbcontext",

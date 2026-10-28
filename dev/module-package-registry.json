@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "description": "模块包契约登记（ADR 0026 决策一）。appendAllowList 限定 Portal.ModulePackages.Enabled 可追加的包；notMounted 显式登记“存在于仓库但刻意不挂载”的包。任何 module.json 的 packageId 必须被某个 Profile 的 Packages、Enabled、或 notMounted 之一覆盖，否则契约门禁失败。",
+  "appendAllowList": [
+    "HIA.LeaveRequest",
+    "HIA.ExpenseReimbursement",
+    "HIA.Help"
+  ],
+  "notMounted": [
+    "HIA.MyWorkItems"
+  ]
+}

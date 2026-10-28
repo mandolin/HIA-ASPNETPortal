@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 2,
+  "packageId": "HIA.Help",
+  "displayName": "帮助与说明 / Help",
+  "version": "1.0.0",
+  "minimumPortalVersion": "2.0.0",
+  "desktopEntry": "DesktopModules/Help/Help.ascx",
+  "resources": []
+}

@@ -1,0 +1,11 @@
+        public static readonly PortalSettingDefinition NavigationHiddenNavigationKeys =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationHiddenNavigationKeys,
+                "显式隐藏的导航页签",
+                "逗号分隔的页签键；优先匹配 NavigationKey，为空时回退 TabId。默认空。",
+                PortalSettingValueType.String,
+                "",
+                true,
+                false,
+                "Admins",
+                "Navigation");

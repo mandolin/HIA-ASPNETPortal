@@ -254,3 +254,58 @@ BEGIN
         (N'Portal.Theme.Name', N'EnterpriseLight', N'Enum', N'Database', 1, N'system', SYSUTCDATETIME())
 END
 GO
+
+-- <lang>
+--   <zh-CN>导航可见性 seed（ADR 0026 决策二）：只写展示层开关，不改变 AccessRoles 授权结论，也不替代模块档位。
+--   每项均以 NOT EXISTS 保护，二次运行不会覆盖管理员已改的值。</zh-CN>
+--   <en>Navigation-visibility seeds (ADR 0026 decision 2): presentation-layer switches only; they neither change
+--   AccessRoles authorization outcomes nor replace module profiles. Every item is guarded by NOT EXISTS so reruns
+--   never overwrite administrator-maintained values.</en>
+-- </lang>
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Navigation.HideTabsWithoutRenderableModules')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Navigation.HideTabsWithoutRenderableModules', N'false', N'Boolean', N'Database', 1, N'system', SYSUTCDATETIME())
+END
+GO
+
+-- <lang>
+--   <zh-CN>显式隐藏页签键：默认空，管理员按 NavigationKey（为空则 TabId）填写。</zh-CN>
+--   <en>Explicit hidden-tab keys: empty by default; administrators enter NavigationKey (or TabId when blank).</en>
+-- </lang>
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Navigation.HiddenNavigationKeys')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Navigation.HiddenNavigationKeys', N'', N'String', N'Database', 1, N'system', SYSUTCDATETIME())
+END
+GO
+
+-- <lang>
+--   <zh-CN>按 NavigationKey 前缀整类隐藏：默认排除测试页签前缀。</zh-CN>
+--   <en>Hide tabs by NavigationKey prefix: test-tab prefixes are excluded by default.</en>
+-- </lang>
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Navigation.ExcludedNavigationKeyPrefixes')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Navigation.ExcludedNavigationKeyPrefixes', N'Test.,P22-Test-,P19-Test-', N'String', N'Database', 1, N'system', SYSUTCDATETIME())
+END
+GO
+
+-- <lang>
+--   <zh-CN>是否记录页签隐藏原因：默认开启，仅写受控诊断，不记录用户隐私或配置原文。</zh-CN>
+--   <en>Whether to log tab-hide reasons: enabled by default, writing controlled diagnostics only and no user privacy or raw configuration.</en>
+-- </lang>
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Navigation.LogHiddenTabs')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Navigation.LogHiddenTabs', N'true', N'Boolean', N'Database', 1, N'system', SYSUTCDATETIME())
+END
+GO

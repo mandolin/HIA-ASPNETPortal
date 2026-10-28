@@ -94,5 +94,13 @@ namespace ASPNET.StarterKit.Portal
         ///   </l>
         /// </summary>
         string Description { get; set; }
+
+        /// <summary>
+        ///   <l>
+        ///     <zh-CN>该公告条目是否对匿名访客可见（ADR 0027）。默认 <c>false</c>：未显式标记即不公开。</zh-CN>
+        ///     <en>Whether this announcement item is visible to anonymous visitors (ADR 0027). Defaults to <c>false</c>, so nothing is public unless explicitly marked.</en>
+        ///   </l>
+        /// </summary>
+        bool IsGuestVisible { get; set; }
     }
 }

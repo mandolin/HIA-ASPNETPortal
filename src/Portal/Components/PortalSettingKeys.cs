@@ -175,5 +175,37 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string HiaPortalInstanceId = "Portal.Hia.InstanceId";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否隐藏"没有可渲染模块"的导航页签（ADR 0026 决策二）。</zh-CN>
+        ///   <en>Setting key controlling whether navigation tabs with no renderable module are hidden (ADR 0026 decision 2).</en>
+        /// </lang>
+        /// </summary>
+        public const string NavigationHideTabsWithoutRenderableModules = "Portal.Navigation.HideTabsWithoutRenderableModules";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显式隐藏的导航页签键列表（按 NavigationKey，空则回退 TabId）。</zh-CN>
+        ///   <en>Setting key for explicitly hidden navigation tabs (by NavigationKey, falling back to TabId when blank).</en>
+        /// </lang>
+        /// </summary>
+        public const string NavigationHiddenNavigationKeys = "Portal.Navigation.HiddenNavigationKeys";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按 NavigationKey 前缀整类隐藏导航页签。</zh-CN>
+        ///   <en>Setting key for hiding navigation tabs by NavigationKey prefix.</en>
+        /// </lang>
+        /// </summary>
+        public const string NavigationExcludedNavigationKeyPrefixes = "Portal.Navigation.ExcludedNavigationKeyPrefixes";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否记录导航页签隐藏原因。</zh-CN>
+        ///   <en>Setting key controlling whether navigation-tab hide reasons are logged.</en>
+        /// </lang>
+        /// </summary>
+        public const string NavigationLogHiddenTabs = "Portal.Navigation.LogHiddenTabs";
     }
 }

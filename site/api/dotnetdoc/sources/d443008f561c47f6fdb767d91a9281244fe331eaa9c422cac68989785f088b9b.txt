@@ -1,0 +1,42 @@
+        private static IList<string> ReadList(PortalSettingDefinition definition, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>结果容器只在成功解析的条目上增长；可变集合直到最终封存前都不交给调用方。</zh-CN>
+            //   <en>The result container grows only for successfully parsed entries; the mutable collection is not exposed to callers until it is finally sealed.</en>
+            // </lang>
+            List<string> result = new List<string>();
+
+            try
+            {
+                string raw = PortalRuntimeSettings.GetEffectiveValue(definition, context).Value;
+
+                // <lang>
+                //   <zh-CN>空白配置等价于"不隐藏任何页签"；不把空串当成一个有效条目。</zh-CN>
+                //   <en>A blank configuration is equivalent to "hide nothing"; an empty string is never treated as a valid entry.</en>
+                // </lang>
+                if (!string.IsNullOrWhiteSpace(raw))
+                {
+                    foreach (string part in raw.Split(','))
+                    {
+                        // <lang>
+                        //   <zh-CN>逐项修剪并跳过空段；重复项按首次出现保留，避免同一页签被重复判定。</zh-CN>
+                        //   <en>Trim each item and skip empty segments; duplicates keep their first occurrence so a tab is not evaluated twice.</en>
+                        // </lang>
+                        string item = (part ?? string.Empty).Trim();
+                        if (item.Length > 0 && !result.Contains(item))
+                        {
+                            result.Add(item);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>与布尔读取一致：失败即空集合，保守地不隐藏任何页签。</zh-CN>
+                //   <en>Consistent with boolean reads: a failure yields an empty set, conservatively hiding nothing.</en>
+                // </lang>
+            }
+
+            return result.AsReadOnly();
+        }

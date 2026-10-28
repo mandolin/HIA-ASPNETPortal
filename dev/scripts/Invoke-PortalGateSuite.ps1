@@ -266,6 +266,24 @@ $gateLayers = [ordered]@{
         # </lang>
         @{ File = 'Test-PortalRuntimeGatePackageSet.ps1';    Runner = 'ps1'; Kind = '档位包集合并集'; Args = @() }
         # <lang>
+        #   <zh-CN>`C-anp-P42` 新增：**模块包契约**门禁（ADR 0026 决策一）。与上一条“档位包集合并集”职责不同：
+        #   上一条管“并集计算与替换语义”，本条管“覆盖面与登记自洽”。五项检查（M1–M5）：
+        #   M1 `Enabled` 追加必须先在 `dev/module-package-registry.json` 的 appendAllowList 登记；
+        #   M2 汇总所有 Profile 的 Packages 并集；M3 每个 `module.json` 的 packageId 必须被 Profile 并集 / Enabled /
+        #   notMounted 之一覆盖（治住 `HIA.MyWorkItems` 这类“有 manifest 但永远不渲染、无人发现”的漏覆盖）；
+        #   M4 notMounted 不得再被覆盖（防登记腐化）；M5 两个清单不得重叠。
+        #   证明边界：只证明“包与配置覆盖面自洽”，不证明包可运行或档位已启用。归 L0：只读配置/清单，不连库、不启动站点。</zh-CN>
+        #   <en>`C-anp-P42` new: the **module-package contract** gate (ADR 0026 decision 1). It differs from the package-set-union
+        #   gate above: that one owns union computation and replacement semantics, while this one owns coverage and registry
+        #   self-consistency. Five checks (M1–M5): M1 every `Enabled` append must be registered in
+        #   `dev/module-package-registry.json`; M2 union all Profile Packages; M3 every `module.json` packageId must be covered by
+        #   the Profile union / Enabled / notMounted (catching silent gaps such as `HIA.MyWorkItems`, which shipped a manifest but
+        #   never rendered and was invisible to every gate); M4 notMounted entries must not become covered (registry rot);
+        #   M5 the two lists must not overlap. Proof boundary: only package-to-configuration consistency, not that a package runs
+        #   or a Profile is active. Classified L0: reads configuration and manifests only.</en>
+        # </lang>
+        @{ File = 'Test-PortalModulePackageContract.ps1';     Runner = 'ps1'; Kind = '模块包契约覆盖'; Args = @() }
+        # <lang>
         #   <zh-CN>`C-anp-P29`（`W-anp-P164`）新增：**页签名与模块标题多语言链路**门禁。
         #   防的是一条编译期完全无声、直到界面上出现半中半英才被发现的链路断裂：渲染点没接解析器、保存链路断一环、
         #   迁移脚本没登记、资源键三处不同步、门控键跟着显示名漂移。六项检查（L1–L6）均为只读取证。

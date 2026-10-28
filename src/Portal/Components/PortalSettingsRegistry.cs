@@ -452,6 +452,83 @@ namespace ASPNET.StarterKit.Portal
                 "Admins",
                 "Security");
 
+        // <lang>
+        //   <zh-CN>ADR 0026 决策二：导航可见性设置。这些定义只描述展示层策略，不改变 AccessRoles 授权结论，也不替代模块档位。</zh-CN>
+        //   <en>ADR 0026 decision 2: navigation-visibility settings. These definitions describe presentation-layer policy only; they neither change AccessRoles authorization outcomes nor replace module profiles.</en>
+        // </lang>
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否隐藏"所有模块都被档位禁用 / 页签无模块"的导航页签；默认关闭以保持向后兼容。</zh-CN>
+        ///   <en>Whether to hide navigation tabs whose modules are all disabled by the active profile or which have no module at all; disabled by default for backward compatibility.</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition NavigationHideTabsWithoutRenderableModules =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationHideTabsWithoutRenderableModules,
+                "隐藏无内容页签",
+                "控制是否隐藏没有可渲染模块的导航页签；默认关闭，配置非法时退回全量显示。",
+                PortalSettingValueType.Boolean,
+                "false",
+                true,
+                false,
+                "Admins",
+                "Navigation");
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>显式隐藏的导航页签键，逗号分隔；NavigationKey 优先，为空时回退 TabId。</zh-CN>
+        ///   <en>Explicitly hidden navigation tab keys, comma separated; NavigationKey takes precedence and TabId is used when blank.</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition NavigationHiddenNavigationKeys =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationHiddenNavigationKeys,
+                "显式隐藏的导航页签",
+                "逗号分隔的页签键；优先匹配 NavigationKey，为空时回退 TabId。默认空。",
+                PortalSettingValueType.String,
+                "",
+                true,
+                false,
+                "Admins",
+                "Navigation");
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>按 NavigationKey 前缀整类隐藏导航页签。</zh-CN>
+        ///   <en>Hide navigation tabs by NavigationKey prefix.</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition NavigationExcludedNavigationKeyPrefixes =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationExcludedNavigationKeyPrefixes,
+                "按前缀隐藏页签",
+                "逗号分隔的 NavigationKey 前缀，命中的页签整类隐藏；默认 Test.,P22-Test-,P19-Test-。",
+                PortalSettingValueType.String,
+                "Test.,P22-Test-,P19-Test-",
+                true,
+                false,
+                "Admins",
+                "Navigation");
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>是否记录导航页签隐藏原因，便于排障。</zh-CN>
+        ///   <en>Whether navigation-tab hide reasons are logged for troubleshooting.</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition NavigationLogHiddenTabs =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationLogHiddenTabs,
+                "记录页签隐藏原因",
+                "控制是否在诊断日志中记录每个页签被隐藏的原因；默认开启。",
+                PortalSettingValueType.Boolean,
+                "true",
+                true,
+                false,
+                "Admins",
+                "Navigation");
+
         /// <summary>
         /// <lang>
         ///   <zh-CN>按稳定声明顺序保存的全部受控设置定义只读集合。</zh-CN>
@@ -491,7 +568,11 @@ namespace ASPNET.StarterKit.Portal
                 DiagnosticsAllowAdminDetailView,
                 HiaPortalInstanceId,
                 CookiesSecure,
-                CookiesSameSite
+                CookiesSameSite,
+                NavigationHideTabsWithoutRenderableModules,
+                NavigationHiddenNavigationKeys,
+                NavigationExcludedNavigationKeyPrefixes,
+                NavigationLogHiddenTabs
             }.AsReadOnly();
 
         /// <summary>

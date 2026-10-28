@@ -1,0 +1,1 @@
+        public const string NavigationLogHiddenTabs = "Portal.Navigation.LogHiddenTabs";

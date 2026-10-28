@@ -1,0 +1,34 @@
+        private static bool ReadBoolean(PortalSettingDefinition definition, bool fallback, HttpContext context)
+        {
+            // <lang>
+            //   <zh-CN>读取与解析整体包在 try 中：底层存储不可用、表缺失或类型不符都不得把异常抛到导航渲染路径。</zh-CN>
+            //   <en>Reading and parsing are wrapped together: storage unavailability, a missing table, or a type mismatch must never throw into the navigation rendering path.</en>
+            // </lang>
+            try
+            {
+                // <lang>
+                //   <zh-CN>由运行时解析器统一完成来源优先级与基础校验，本方法只做布尔转换。</zh-CN>
+                //   <en>The runtime resolver performs source precedence and baseline validation; this method only converts to boolean.</en>
+                // </lang>
+                string raw = PortalRuntimeSettings.GetEffectiveValue(definition, context).Value;
+                bool parsed;
+
+                // <lang>
+                //   <zh-CN>只接受标准布尔文本；其它形式一律视为非法并走保守回退，不猜测 "1"/"yes" 之类的同义写法。</zh-CN>
+                //   <en>Accept standard boolean text only; anything else is treated as invalid and takes the conservative fallback rather than guessing synonyms such as "1" or "yes".</en>
+                // </lang>
+                if (bool.TryParse((raw ?? string.Empty).Trim(), out parsed))
+                {
+                    return parsed;
+                }
+            }
+            catch
+            {
+                // <lang>
+                //   <zh-CN>异常被有意吞掉：导航可见性属展示层，读取失败不应影响页面其余部分。</zh-CN>
+                //   <en>The exception is intentionally swallowed: navigation visibility is presentation-layer, and a read failure must not affect the rest of the page.</en>
+                // </lang>
+            }
+
+            return fallback;
+        }

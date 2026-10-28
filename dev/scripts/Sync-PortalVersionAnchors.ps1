@@ -68,7 +68,14 @@ function Invoke-AnchorEdit {
     $text = [System.IO.File]::ReadAllText($FilePath, $utf8)
     $newText = & $Transform $text
     if ($newText -eq $text) {
-        Write-Host ('  [OK]   ' + $DisplayLabel + '：已是 ' + $Version + '，无需改动')
+        # <lang>
+        #   <zh-CN>不能声称"已是目标版本"：文本未变更既可能是本就正确，也可能是搜索式未命中（D17 就是这样被掩盖的）。
+        #   故只陈述事实，并明确"未命中不视为成功"。</zh-CN>
+        #   <en>Do not claim "already at target version": unchanged text may mean either already correct or the
+        #   pattern simply did not match (that is exactly how D17 stayed hidden). State only the fact, and make
+        #   clear that a miss is not a success.</en>
+        # </lang>
+        Write-Host ('  [UNCHANGED] ' + $DisplayLabel + '：文本未变更（本就正确，或锚点格式未命中——后者不视为成功）')
         return
     }
     if ($WhatIfPreference) {
@@ -148,7 +155,14 @@ foreach ($af in $assemblyFiles) {
 $readmePath = Join-Path $RepoRoot 'README.md'
 Invoke-AnchorEdit -FilePath $readmePath -DisplayLabel 'A4 README 中文' -FindPattern '当前版本' -Transform {
     param($t)
-    $t -replace '当前版本：\*\*v\d+\.\d+\.\d+\*\*\（\d{4}-\d{2}-\d{2}', ('当前版本：**' + $Version + '**（`' + $Date)
+    # <lang>
+    #   <zh-CN>日期前存在反引号：本脚本自身写入的格式就是 `**vX.Y.Z**（`DATE`。
+    #   原搜索式只写 `（\d{4}`，无法命中自己写出的格式 → 静默 no-op 并误报"已是目标版本"（D17 根因）。</zh-CN>
+    #   <en>The date is preceded by a literal backtick: this script's own output format is `**vX.Y.Z**（`DATE`.
+    #   The original pattern only allowed `（\d{4}`, so it could never match its own output — a silent no-op that
+    #   falsely reported "already at target version" (root cause of D17).</en>
+    # </lang>
+    $t -replace '当前版本：\*\*v\d+\.\d+\.\d+\*\*\（`?\d{4}-\d{2}-\d{2}', ('当前版本：**' + $Version + '**（`' + $Date)
 }
 Invoke-AnchorEdit -FilePath $readmePath -DisplayLabel 'A5 README 英文' -FindPattern 'Current version' -Transform {
     param($t)
@@ -169,8 +183,8 @@ Invoke-AnchorEdit -FilePath $versioningPath -DisplayLabel 'A6 versioning §6' -F
     $done = $false
     for ($i = 0; $i -lt $lines.Count; $i++) {
         if ($lines[$i] -match '^##\s+六、当前版本') { $inSection = $true; continue }
-        if ($inSection -and -not $done -and $lines[$i] -match '\*\*`v\d+\.\d+\.\d+`\*\*\（\d{4}-\d{2}-\d{2}') {
-            $lines[$i] = $lines[$i] -replace '\*\*`v\d+\.\d+\.\d+`\*\*\（\d{4}-\d{2}-\d{2}', ('**`' + $Version + '`**（`' + $Date)
+        if ($inSection -and -not $done -and $lines[$i] -match '\*\*`v\d+\.\d+\.\d+`\*\*\（`?\d{4}-\d{2}-\d{2}') {
+            $lines[$i] = $lines[$i] -replace '\*\*`v\d+\.\d+\.\d+`\*\*\（`?\d{4}-\d{2}-\d{2}', ('**`' + $Version + '`**（`' + $Date)
             $done = $true
         }
         if ($inSection -and $lines[$i] -match '^##\s+七、') { break }
