@@ -207,5 +207,16 @@ namespace ASPNET.StarterKit.Portal
         /// </lang>
         /// </summary>
         public const string NavigationLogHiddenTabs = "Portal.Navigation.LogHiddenTabs";
+
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>**仅对匿名访客**隐藏的导航页签键集合。业务功能页签应列在此处：
+        ///   登录用户看得见、匿名看不见 —— 避免"匿名看到入口、点进去却因未认证而无内容"（ADR 0027）。</zh-CN>
+        ///   <en>Navigation tab keys hidden **from anonymous visitors only**. Business-capability tabs belong here: signed-in
+        ///   users see them while anonymous visitors do not, which prevents "anonymous sees the entry but the page has no
+        ///   content because it is unauthenticated" (ADR 0027).</en>
+        /// </lang>
+        /// </summary>
+        public const string NavigationAnonymousHiddenNavigationKeys = "Portal.Navigation.AnonymousHiddenNavigationKeys";
     }
 }

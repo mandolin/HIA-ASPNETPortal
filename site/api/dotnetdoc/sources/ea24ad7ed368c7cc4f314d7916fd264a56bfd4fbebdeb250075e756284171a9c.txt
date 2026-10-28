@@ -359,10 +359,29 @@
             bool logHidden = PortalNavigationSettings.LogHiddenTabs(Context);
 
             // <lang>
+            //   <zh-CN>ADR 0027：业务功能入口**只对匿名隐藏**——登录用户看得见、匿名看不见。
+            //   若对所有人隐藏，登录用户就找不到功能；若对所有人放开，匿名会点进"模块因未认证而自隐"的空白页。
+            //   因此这里先判定当前请求是否已认证，再决定这份清单是否生效。</zh-CN>
+            //   <en>ADR 0027: business-capability entries are hidden **from anonymous visitors only** — visible to signed-in users,
+            //   invisible to anonymous ones. Hiding them from everyone leaves signed-in users unable to find the capability, while
+            //   showing them to everyone lets anonymous visitors land on a page whose module self-hides because it is unauthenticated.
+            //   This therefore decides whether the list applies based on whether the current request is authenticated.</en>
+            // </lang>
+            bool isAuthenticated = Context.User != null
+                && Context.User.Identity != null
+                && Context.User.Identity.IsAuthenticated;
+
+            IList<string> anonymousHiddenKeys = new string[0];
+            if (!isAuthenticated)
+            {
+                anonymousHiddenKeys = PortalNavigationSettings.AnonymousHiddenNavigationKeys(Context);
+            }
+
+            // <lang>
             //   <zh-CN>没有任何配置时立即返回：门控关闭场景下的导航输出与改造前逐字节一致，这是回滚点。</zh-CN>
             //   <en>Return immediately when nothing is configured: with the gate off the navigation output stays byte-for-byte identical to before the change, which is the rollback point.</en>
             // </lang>
-            if (hiddenKeys.Count == 0 && excludedPrefixes.Count == 0)
+            if (hiddenKeys.Count == 0 && excludedPrefixes.Count == 0 && anonymousHiddenKeys.Count == 0)
             {
                 return;
             }
@@ -379,22 +398,3 @@
                 //   <zh-CN>稳定键优先取 NavigationKey；为空时前缀判定回退 TabName、显式键判定回退 TabId，与 ADR 契约一致。</zh-CN>
                 //   <en>The stable key prefers NavigationKey; when blank, prefix matching falls back to TabName and explicit-key matching falls back to TabId, per the ADR contract.</en>
                 // </lang>
-                string navigationKey = (tab.NavigationKey ?? string.Empty).Trim();
-                string tabName = (tab.TabName ?? string.Empty).Trim();
-                string tabIdText = tab.TabId.ToString(CultureInfo.InvariantCulture);
-                string hiddenReason = string.Empty;
-
-                // <lang>
-                //   <zh-CN>显式隐藏优先于前缀排除：显式配置是"点名"，语义应压过"按类隐藏"。</zh-CN>
-                //   <en>Explicit hiding outranks prefix exclusion: an explicit entry names a tab and is more specific than class-based hiding.</en>
-                // </lang>
-                for (int keyIndex = 0; keyIndex < hiddenKeys.Count; keyIndex++)
-                {
-                    // <lang>
-                    //   <zh-CN>逐项修剪；空项被视为无效配置直接跳过，避免空串匹配到所有页签。</zh-CN>
-                    //   <en>Trim each entry; blank items are treated as invalid and skipped so an empty string cannot match every tab.</en>
-                    // </lang>
-                    string candidate = (hiddenKeys[keyIndex] ?? string.Empty).Trim();
-                    if (candidate.Length == 0)
-                    {
-                        continue;

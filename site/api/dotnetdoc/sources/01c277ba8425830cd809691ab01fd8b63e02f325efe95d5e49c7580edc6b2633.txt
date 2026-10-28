@@ -9,10 +9,29 @@
             bool logHidden = PortalNavigationSettings.LogHiddenTabs(Context);
 
             // <lang>
+            //   <zh-CN>ADR 0027：业务功能入口**只对匿名隐藏**——登录用户看得见、匿名看不见。
+            //   若对所有人隐藏，登录用户就找不到功能；若对所有人放开，匿名会点进"模块因未认证而自隐"的空白页。
+            //   因此这里先判定当前请求是否已认证，再决定这份清单是否生效。</zh-CN>
+            //   <en>ADR 0027: business-capability entries are hidden **from anonymous visitors only** — visible to signed-in users,
+            //   invisible to anonymous ones. Hiding them from everyone leaves signed-in users unable to find the capability, while
+            //   showing them to everyone lets anonymous visitors land on a page whose module self-hides because it is unauthenticated.
+            //   This therefore decides whether the list applies based on whether the current request is authenticated.</en>
+            // </lang>
+            bool isAuthenticated = Context.User != null
+                && Context.User.Identity != null
+                && Context.User.Identity.IsAuthenticated;
+
+            IList<string> anonymousHiddenKeys = new string[0];
+            if (!isAuthenticated)
+            {
+                anonymousHiddenKeys = PortalNavigationSettings.AnonymousHiddenNavigationKeys(Context);
+            }
+
+            // <lang>
             //   <zh-CN>没有任何配置时立即返回：门控关闭场景下的导航输出与改造前逐字节一致，这是回滚点。</zh-CN>
             //   <en>Return immediately when nothing is configured: with the gate off the navigation output stays byte-for-byte identical to before the change, which is the rollback point.</en>
             // </lang>
-            if (hiddenKeys.Count == 0 && excludedPrefixes.Count == 0)
+            if (hiddenKeys.Count == 0 && excludedPrefixes.Count == 0 && anonymousHiddenKeys.Count == 0)
             {
                 return;
             }
@@ -91,6 +110,30 @@
                                 hiddenReason = "Navigation.ExcludedNavigationKeyPrefixes";
                                 break;
                             }
+                        }
+                    }
+                }
+
+                // <lang>
+                //   <zh-CN>仅对匿名隐藏的清单：登录请求下 `anonymousHiddenKeys` 恒为空集合，故本分支不会作用于已登录用户。</zh-CN>
+                //   <en>The anonymous-only list: for an authenticated request `anonymousHiddenKeys` is always empty, so this branch
+                //   never applies to signed-in users.</en>
+                // </lang>
+                if (hiddenReason.Length == 0 && anonymousHiddenKeys.Count > 0)
+                {
+                    string keyTarget = navigationKey.Length > 0 ? navigationKey : tabIdText;
+                    for (int anonymousIndex = 0; anonymousIndex < anonymousHiddenKeys.Count; anonymousIndex++)
+                    {
+                        string candidate = (anonymousHiddenKeys[anonymousIndex] ?? string.Empty).Trim();
+                        if (candidate.Length == 0)
+                        {
+                            continue;
+                        }
+
+                        if (string.Equals(candidate, keyTarget, StringComparison.OrdinalIgnoreCase))
+                        {
+                            hiddenReason = "Navigation.AnonymousHiddenNavigationKeys";
+                            break;
                         }
                     }
                 }

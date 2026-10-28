@@ -531,6 +531,27 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>仅对匿名访客隐藏的导航页签键集合（ADR 0027）。业务功能页签应登记在此：
+        ///   登录用户可见、匿名不可见。缺失或非法时为空集合，即"不对任何人额外隐藏"。</zh-CN>
+        ///   <en>Navigation tab keys hidden from anonymous visitors only (ADR 0027). Business-capability tabs are registered here:
+        ///   visible to signed-in users, invisible to anonymous ones. A missing or invalid value yields an empty set, meaning
+        ///   "no additional hiding for anyone".</en>
+        /// </lang>
+        /// </summary>
+        public static readonly PortalSettingDefinition NavigationAnonymousHiddenNavigationKeys =
+            new PortalSettingDefinition(
+                PortalSettingKeys.NavigationAnonymousHiddenNavigationKeys,
+                "仅对匿名隐藏的页签",
+                "逗号分隔的页签键；这些页签对未登录访客隐藏，对登录用户正常显示。默认空。",
+                PortalSettingValueType.String,
+                "",
+                true,
+                false,
+                "Admins",
+                "Navigation");
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>按稳定声明顺序保存的全部受控设置定义只读集合。</zh-CN>
         ///   <en>Read-only collection of all controlled setting definitions in stable declaration order.</en>
         /// </lang>
@@ -572,7 +593,8 @@ namespace ASPNET.StarterKit.Portal
                 NavigationHideTabsWithoutRenderableModules,
                 NavigationHiddenNavigationKeys,
                 NavigationExcludedNavigationKeyPrefixes,
-                NavigationLogHiddenTabs
+                NavigationLogHiddenTabs,
+                NavigationAnonymousHiddenNavigationKeys
             }.AsReadOnly();
 
         /// <summary>

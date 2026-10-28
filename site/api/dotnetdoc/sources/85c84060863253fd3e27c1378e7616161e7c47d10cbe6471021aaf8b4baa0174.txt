@@ -29,5 +29,6 @@
                 NavigationHideTabsWithoutRenderableModules,
                 NavigationHiddenNavigationKeys,
                 NavigationExcludedNavigationKeyPrefixes,
-                NavigationLogHiddenTabs
+                NavigationLogHiddenTabs,
+                NavigationAnonymousHiddenNavigationKeys
             }.AsReadOnly();

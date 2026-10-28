@@ -10011,6 +10011,15 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext excludednavigationkeyprefixes dotnet-method navigationkey prefixes whose tabs are hidden as a whole. public static system.collections.generic.ilist<string> aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes(system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.excludednavigationkeyprefixes-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp 按 navigationkey 前缀整类隐藏的页签前缀集合。 navigationkey prefixes whose tabs are hidden as a whole. 用于受控诊断的当前 http 上下文，可为。 null current http context for restricted diagnostics; may be. null 规范化后的只读前缀集合；缺失或非法时为空集合。 read-only normalized prefix collection; empty when absent or invalid."
     },
     {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.anonymoushiddennavigationkeys-system.web.httpcontext",
+      "name": "AnonymousHiddenNavigationKeys",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-914cbe17.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.-914cbe17.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.anonymoushiddennavigationkeys-system.web.httpcontext anonymoushiddennavigationkeys dotnet-method tab keys hidden **from anonymous visitors only** (adr 0027). business-capability entries are listed here: visible to signed-in users, invisible to anonymous ones. public static system.collections.generic.ilist<string> aspnet.starterkit.portal.portalnavigationsettings.anonymoushiddennavigationkeys(system.web.httpcontext context = null) dotnet:m:aspnet.starterkit.portal.portalnavigationsettings.anonymoushiddennavigationkeys-system.web.httpcontext portal aspnet.starterkit.portal aspnet.starterkit.portal.portalnavigationsettings t:aspnet.starterkit.portal.portalnavigationsettings dotnet hia-document api/portal.hia.json src/portal/components/portalnavigationsettings.cs csharp **仅对匿名访客**隐藏的页签键集合（adr 0027）。业务功能入口列在此处：登录用户可见、匿名不可见。 tab keys hidden **from anonymous visitors only** (adr 0027). business-capability entries are listed here: visible to signed-in users, invisible to anonymous ones. 用于受控诊断的当前 http 上下文，可为。 null current http context for restricted diagnostics; may be. null 规范化后的只读集合；缺失或非法时为空集合。 read-only normalized collection; empty when absent or invalid."
+    },
+    {
       "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationsettings.loghiddentabs-system.web.httpcontext",
       "name": "LogHiddenTabs",
       "kind": "dotnet-method",
@@ -11649,6 +11658,15 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs navigationloghiddentabs dotnet-field setting key controlling whether navigation-tab hide reasons are logged. public const string aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs dotnet:f:aspnet.starterkit.portal.portalsettingkeys.navigationloghiddentabs portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp 是否记录导航页签隐藏原因。 setting key controlling whether navigation-tab hide reasons are logged."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationanonymoushiddennavigationkeys",
+      "name": "NavigationAnonymousHiddenNavigationKeys",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-c0802a76.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigat-c0802a76.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingkeys.navigationanonymoushiddennavigationkeys navigationanonymoushiddennavigationkeys dotnet-field navigation tab keys hidden **from anonymous visitors only**. business-capability tabs belong here: signed-in users see them while anonymous visitors do not, which prevents \"anonymous sees the entry but the page has no content because it is unauthenticated\" (adr 0027). public const string aspnet.starterkit.portal.portalsettingkeys.navigationanonymoushiddennavigationkeys dotnet:f:aspnet.starterkit.portal.portalsettingkeys.navigationanonymoushiddennavigationkeys portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingkeys t:aspnet.starterkit.portal.portalsettingkeys dotnet hia-document api/portal.hia.json src/portal/components/portalsettingkeys.cs csharp **仅对匿名访客**隐藏的导航页签键集合。业务功能页签应列在此处： 登录用户看得见、匿名看不见 —— 避免\"匿名看到入口、点进去却因未认证而无内容\"（adr 0027）。 navigation tab keys hidden **from anonymous visitors only**. business-capability tabs belong here: signed-in users see them while anonymous visitors do not, which prevents \"anonymous sees the entry but the page has no content because it is unauthenticated\" (adr 0027)."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalhiaboundarysettings",
       "name": "PortalHiaBoundarySettings",
       "kind": "dotnet-type",
@@ -11989,6 +12007,15 @@
       "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-67fccd77.html",
       "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-67fccd77.html",
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs navigationloghiddentabs dotnet-field whether navigation-tab hide reasons are logged for troubleshooting. public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationloghiddentabs portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 是否记录导航页签隐藏原因，便于排障。 whether navigation-tab hide reasons are logged for troubleshooting."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys",
+      "name": "NavigationAnonymousHiddenNavigationKeys",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-6d1dd86a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.na-6d1dd86a.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys navigationanonymoushiddennavigationkeys dotnet-field navigation tab keys hidden from anonymous visitors only (adr 0027). business-capability tabs are registered here: visible to signed-in users, invisible to anonymous ones. a missing or invalid value yields an empty set, meaning \"no additional hiding for anyone\". public static readonly aspnet.starterkit.portal.portalsettingdefinition aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys dotnet:f:aspnet.starterkit.portal.portalsettingsregistry.navigationanonymoushiddennavigationkeys portal aspnet.starterkit.portal aspnet.starterkit.portal.portalsettingsregistry t:aspnet.starterkit.portal.portalsettingsregistry dotnet hia-document api/portal.hia.json src/portal/components/portalsettingsregistry.cs csharp 仅对匿名访客隐藏的导航页签键集合（adr 0027）。业务功能页签应登记在此： 登录用户可见、匿名不可见。缺失或非法时为空集合，即\"不对任何人额外隐藏\"。 navigation tab keys hidden from anonymous visitors only (adr 0027). business-capability tabs are registered here: visible to signed-in users, invisible to anonymous ones. a missing or invalid value yields an empty set, meaning \"no additional hiding for anyone\"."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.portalsettingsregistry.alldefinitions",

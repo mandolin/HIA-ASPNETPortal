@@ -309,3 +309,19 @@ BEGIN
         (N'Portal.Navigation.LogHiddenTabs', N'true', N'Boolean', N'Database', 1, N'system', SYSUTCDATETIME())
 END
 GO
+
+-- <lang>
+--   <zh-CN>ADR 0027：「仅对匿名隐藏」的页签键。业务功能入口（我的待办 / 请假与报销 / 业务办理 / 我的信息）
+--   登录用户可见、匿名不可见，避免匿名点进"模块因未认证而自隐"的空白页。</zh-CN>
+--   <en>ADR 0027: tab keys hidden "from anonymous only". Business-capability entries (my to-do items / leave and expense /
+--   business requests / my profile) stay visible to signed-in users and hidden from anonymous visitors, so an anonymous visitor
+--   never lands on a page whose module self-hides because it is unauthenticated.</en>
+-- </lang>
+IF NOT EXISTS (SELECT 1 FROM [dbo].[PortalCfg_SystemSettings] WHERE [SettingKey] = N'Portal.Navigation.AnonymousHiddenNavigationKeys')
+BEGIN
+    INSERT INTO [dbo].[PortalCfg_SystemSettings]
+        ([SettingKey], [SettingValue], [ValueType], [SourceLevel], [CanDelete], [UpdatedBy], [UpdatedUtc])
+    VALUES
+        (N'Portal.Navigation.AnonymousHiddenNavigationKeys', N'MyWorkItems,LeaveAndExpense,BusinessRequests,MyProfile', N'String', N'Database', 1, N'system', SYSUTCDATETIME())
+END
+GO

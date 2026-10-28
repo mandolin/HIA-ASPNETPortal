@@ -99,6 +99,30 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>**仅对匿名访客**隐藏的页签键集合（ADR 0027）。业务功能入口列在此处：登录用户可见、匿名不可见。</zh-CN>
+        ///   <en>Tab keys hidden **from anonymous visitors only** (ADR 0027). Business-capability entries are listed here: visible
+        ///   to signed-in users, invisible to anonymous ones.</en>
+        /// </lang>
+        /// </summary>
+        /// <param name="context">
+        /// <l>
+        ///   <zh-CN>用于受控诊断的当前 HTTP 上下文，可为 <c>null</c>。</zh-CN>
+        ///   <en>Current HTTP context for restricted diagnostics; may be <c>null</c>.</en>
+        /// </l>
+        /// </param>
+        /// <returns>
+        /// <l>
+        ///   <zh-CN>规范化后的只读集合；缺失或非法时为空集合。</zh-CN>
+        ///   <en>Read-only normalized collection; empty when absent or invalid.</en>
+        /// </l>
+        /// </returns>
+        public static IList<string> AnonymousHiddenNavigationKeys(HttpContext context = null)
+        {
+            return ReadList(PortalSettingsRegistry.NavigationAnonymousHiddenNavigationKeys, context);
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>是否记录页签隐藏原因；默认开启，便于排障。</zh-CN>
         ///   <en>Whether tab-hide reasons are logged; enabled by default for troubleshooting.</en>
         /// </lang>

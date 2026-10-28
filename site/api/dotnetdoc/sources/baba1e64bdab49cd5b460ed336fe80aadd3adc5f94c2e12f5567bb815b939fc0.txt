@@ -134,7 +134,61 @@
             //   <zh-CN>创建活动页签容器，随后填入该页的模块设置。</zh-CN>
             //   <en>Create the active-tab container, then populate its module settings.</en>
             // </lang>
-            ActiveTab = new Tab(tabIndex, tabsConfig.GetSingleTab(tabId));
+            // <lang>
+            //   <zh-CN>ADR 0026 决策二第 8 条：**`tabid` 是唯一权威，`tabindex` 仅作兼容**。
+            //   隐藏页签会让可见页签的序号整体位移，历史书签与截图清单里记下的 `tabindex` 随之失效；
+            //   若继续按 (tabindex, tabid) 双条件定位，就会抛「序列不包含任何匹配元素」并把整页打到通用错误页（备忘 D16）。
+            //   因此这里只按 tabid 定位，再由 DesktopTabs 重新计算权威序号。</zh-CN>
+            //   <en>ADR 0026 decision 2 item 8: **`tabid` is the sole authority and `tabindex` is compatibility only.**
+            //   Hiding a tab shifts the index of every visible tab, so a `tabindex` recorded in an old bookmark or screenshot
+            //   manifest drifts. Locating by (tabindex, tabid) then throws "sequence contains no matching element" and drops the
+            //   whole page onto the generic error page (memo D16). This therefore locates by tabid alone and recomputes the
+            //   authoritative index from DesktopTabs.</en>
+            // </lang>
+            ITabItem activeTabItem = tabsConfig.FindTabById(tabId);
+
+            if (activeTabItem == null)
+            {
+                // <lang>
+                //   <zh-CN>未知 tabid 不得让页面崩到未处理异常：记一条受控诊断，并退回首个桌面页签（通常是首页）。
+                //   缺失与重复仍区别对待 —— 重复由 `FindTabById` 的 `SingleOrDefault` 作为完整性错误抛出，此处只处理缺失。</zh-CN>
+                //   <en>An unknown tabid must not crash the page into an unhandled exception: record one controlled diagnostic and
+                //   fall back to the first desktop tab (normally Home). Missing and duplicate remain distinct — a duplicate is still
+                //   raised as an integrity error by `FindTabById`'s `SingleOrDefault`, while this branch handles absence only.</en>
+                // </lang>
+                PortalDiagnostics.Warn(
+                    "PortalSettings.TabNotFound",
+                    "Requested tabId " + tabId.ToString(CultureInfo.InvariantCulture) + " was not found; falling back to the first desktop tab.");
+
+                activeTabItem = DesktopTabs.Count > 0 ? DesktopTabs[0] : null;
+            }
+
+            if (activeTabItem == null)
+            {
+                // <lang>
+                //   <zh-CN>连一个桌面页签都没有属配置完整性错误，仍按既有严格语义抛出，不静默造出空门户。</zh-CN>
+                //   <en>Having no desktop tab at all is a configuration-integrity error and still throws under the existing strict
+                //   semantics rather than silently producing an empty portal.</en>
+                // </lang>
+                throw new InvalidOperationException("The portal has no desktop tab to render.");
+            }
+
+            // <lang>
+            //   <zh-CN>权威序号由当前导航集合重新计算：请求里的 tabindex 只用于兼容，不一致时以重算值为准。</zh-CN>
+            //   <en>The authoritative index is recomputed from the current navigation set: the requested tabindex is kept only for
+            //   compatibility, and the recomputed value wins whenever the two disagree.</en>
+            // </lang>
+            int authoritativeIndex = 0;
+            for (int index = 0; index < DesktopTabs.Count; index++)
+            {
+                if (DesktopTabs[index].TabId == activeTabItem.TabId)
+                {
+                    authoritativeIndex = index;
+                    break;
+                }
+            }
+
+            ActiveTab = new Tab(authoritativeIndex, activeTabItem);
 
             // <lang>
             //   <zh-CN>按既有数据关系读取活动页签的模块实例。</zh-CN>
