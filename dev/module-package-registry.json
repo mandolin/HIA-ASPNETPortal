@@ -6,7 +6,5 @@
     "HIA.ExpenseReimbursement",
     "HIA.Help"
   ],
-  "notMounted": [
-    "HIA.MyWorkItems"
-  ]
+  "notMounted": []
 }

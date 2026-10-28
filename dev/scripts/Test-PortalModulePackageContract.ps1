@@ -118,11 +118,38 @@ foreach ($match in [regex]::Matches($configText, '<add\s+key="([^"]+)"\s+value="
 # </lang>
 $jsonConfig = Join-Path $RepoRoot 'src\Portal\Config\appSettings.json'
 if (Test-Path -LiteralPath $jsonConfig) {
-    $jsonSettings = Read-Text $jsonConfig | ConvertFrom-Json
+    # <lang>
+    #   <zh-CN>该文件是**嵌套结构** `{ "appSettings": { ... } }`：顶层只有一个 `appSettings` 属性。
+    #   直接遍历顶层属性会一个 `Portal.*` 键都取不到，于是覆盖层**静默失效**、门禁继续读 Web.config ——
+    #   这正是 2026-10-29 实际发生过的情况：覆盖代码写了，却什么也没覆盖到（"写了等于没写"）。
+    #   因此这里显式下潜到 `appSettings`，并在解析不出任何相关键时**报失败而不是静默跳过**。</zh-CN>
+    #   <en>The file is **nested**: `{ "appSettings": { ... } }`, whose top level exposes only the `appSettings` property.
+    #   Iterating top-level properties therefore yields no `Portal.*` keys, so the override layer fails **silently** and the gate
+    #   keeps reading Web.config — exactly what happened on 2026-10-29: the override code existed but overrode nothing.
+    #   This therefore descends explicitly into `appSettings` and **fails loudly** when no relevant key can be parsed.</en>
+    # </lang>
+    $jsonRoot = Read-Text $jsonConfig | ConvertFrom-Json
+    $jsonSettings = $jsonRoot
+    if ($jsonRoot.PSObject.Properties.Name -contains 'appSettings') {
+        $jsonSettings = $jsonRoot.appSettings
+    }
+
+    $jsonKeyCount = 0
     foreach ($property in $jsonSettings.PSObject.Properties) {
         if ($property.Name -eq 'Portal.ModulePackages.Enabled' -or $property.Name -like 'Portal.ModuleProfiles.*') {
             $settings[$property.Name] = [string]$property.Value
+            $jsonKeyCount++
         }
+    }
+
+    # <lang>
+    #   <zh-CN>解析不出任何相关键只可能是结构变了或文件坏了；静默继续会让本门禁校验一个不生效的配置源，
+    #   比报错更危险。故作为 M0 失败项登记。</zh-CN>
+    #   <en>Zero relevant keys can only mean the structure changed or the file is broken; continuing silently would make this gate
+    #   validate an inert configuration source, which is more dangerous than failing. Registered as an M0 failure.</en>
+    # </lang>
+    if ($jsonKeyCount -eq 0) {
+        $failures.Add('M0 Config/appSettings.json 未解析出任何 Portal.ModulePackages / Portal.ModuleProfiles 键（结构变更或文件损坏，禁止静默跳过）。')
     }
 }
 
