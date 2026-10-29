@@ -72,6 +72,11 @@ Not in `docs/`; lives in source node/flow comments.
 - `business-application-review.md` — **Reviewer path: how a business application gets reviewed** (the administration review
   page → status filter → approve / return / reject → where to look afterwards; including the boundary that a failed work-item
   projection does not roll back the application state, and that there is no approval-trail screen)
+- `leave-and-expense-review.md` — **Leave and expense: the review side today (no administration entry point yet)** (the
+  administration to-do page is read-only and its business-entry allowlist recognises only three kinds, so leave and expense
+  fall through to a not-implemented placeholder page)
+- `profile-correction-review.md` — **Profile correction: the reviewer path** (Reviewed / Rejected / Closed; the key boundary
+  is that it **does not modify employee master data** — changing the profile goes through the employee directory)
 - `module-mechanics-and-extension.md` — **Module mechanics and secondary development** (the Reference overview: the five
   layers → profiles → adding a module → changing the look → the four gates → where the API documentation lives)
 - **Gaps registered after the two-track re-cut (2026-10-29) — now filled**: three end-to-end task paths (business requests /
@@ -135,4 +140,4 @@ Not in `docs/`; lives in source node/flow comments.
  correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)
 
-<!-- build-stamp: F4571077632E -->
+<!-- build-stamp: C7E76E8CFF2B -->

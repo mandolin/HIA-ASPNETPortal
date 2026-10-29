@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 9
+nav_order: 11
 permalink: /modules/contacts/
 title: 联系人（Contacts）
 ---

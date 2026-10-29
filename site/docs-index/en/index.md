@@ -44,6 +44,12 @@ visibility → enable and configure modules → a quick map of the administratio
 - `business-application-review.md`: **Reviewer path: how a business application gets reviewed** (the administration review
 page → status filter → approve / return / reject → where to look afterwards; including the boundary that a failed work-item
 projection does not roll back the application state).
+- `leave-and-expense-review.md`: **Leave and expense: the review side today (no administration entry point yet)** (the
+administration to-do page is read-only and its business-entry allowlist recognises only three kinds, so leave and expense
+fall through to a not-implemented placeholder page).
+- `profile-correction-review.md`: **Profile correction: the reviewer path** (the administration handling page →
+Reviewed / Rejected / Closed; the key boundary is that it updates only request status and notes and **does not modify
+employee master data** — changing the profile goes through the employee directory).
 - `testing-checklist.md`: build, test, manual verification and pre-release checklists.
 - `documentation-artifacts-guide.md`: input/output boundaries for public documentation, JSDoc, XML documentation and
  generated output.
@@ -118,4 +124,4 @@ entry.
 - Documents are organised into eight sections — product overview / evaluate / quick start / learn / reference / develop /
  operate / changes; see the [documentation map](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-map.md).
 
-<!-- build-stamp: 767FC8200D54 -->
+<!-- build-stamp: 80A5CE0E9EF8 -->

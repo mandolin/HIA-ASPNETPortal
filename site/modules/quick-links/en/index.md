@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Learn
-nav_order: 15
+nav_order: 17
 permalink: /en/modules/quick-links/
 title: QuickLinks
 ---

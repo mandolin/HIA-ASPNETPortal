@@ -88,6 +88,14 @@
 - doc: business-application-review.md
   path: business-application-review
   parent: 学习
+
+- doc: leave-and-expense-review.md
+  path: leave-and-expense-review
+  parent: 学习
+
+- doc: profile-correction-review.md
+  path: profile-correction-review
+  parent: 学习
 - doc: modules/index.md
   path: modules
   parent: 学习

@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 19
+nav_order: 21
 permalink: /modules/business-application-request/
 title: 业务申请（BusinessApplicationRequest）
 ---

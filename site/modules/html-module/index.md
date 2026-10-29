@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 16
+nav_order: 18
 permalink: /modules/html-module/
 title: HTML 文本模块（HtmlModule）
 ---
