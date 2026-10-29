@@ -2013,3 +2013,36 @@ body.portal-theme-stateclassicdark .portal-package-hia-moduleprobe { /* <lang><z
 
 .portal-footer-copy { float: left; }
 .portal-footer-note { float: right; }
+/* ===== 首页布局（上二下一）：账户登录 + 门户公告 并排第一行，帮助与说明 通栏第二行 =====
+   作用域：body.portal-tab-1（真实 TabId=1 的首页）。其它页签仍是原来的三栏等高表格布局 ——
+   那些页签通常只有一个模块，若套用两列浮动会被挤到 40% 宽。
+   实现约束：IE9 安全（float + clear；不用 Grid / Flexbox —— 见 Default/Default.css 的主题包约束）。
+   为什么改：原布局把三个窗格排成同一行（账户登录 260px｜门户公告 300px｜帮助与说明），
+   公告与帮助两张卡内容都短，右侧长期留白、首页显得空；改为「上二下一」后，
+   第一行两张卡并排占满宽度，第二行帮助与说明通栏，与产品草图一致。 */
+body.portal-tab-1 .portal-dashboard-layout {
+    display: block;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-left: 0;
+    overflow: hidden;
+}
+body.portal-tab-1 .portal-dashboard-layout .portal-pane {
+    display: block;
+    vertical-align: top;
+}
+body.portal-tab-1 .portal-dashboard-layout .portal-pane-left {
+    float: left;
+    width: 58%;
+    margin: 0 2% 18px 0;
+}
+body.portal-tab-1 .portal-dashboard-layout .portal-pane-content {
+    float: right;
+    width: 40%;
+    margin: 0 0 18px 0;
+}
+body.portal-tab-1 .portal-dashboard-layout .portal-pane-right {
+    clear: both;
+    width: 100%;
+    margin: 0;
+}
