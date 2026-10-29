@@ -8,91 +8,81 @@ title: First use of the portal
 ---
 # First use of the portal
 
-> This page answers: **for someone logging in for the first time — where am I, what do I click, and what counts as normal?** Written for site users and colleagues new to the portal. Per-feature fields and validation rules live in the module pages under the Learn section; mechanics and configuration live under Reference.
+The first time you open this portal you will probably trip over three things: why the page looks empty, why the menu is so short, and where to click after signing in. This page takes them in order.
 
-## Before you begin
+## Open the home page
 
-1. You have a usable login identifier and password. The identifier may be **a login name, a legacy name, an active employee number, or an email address**.
-2. You open the site home page in a browser. The portal still works on **IE9** and later, and of course on modern browsers.
-3. Reading this page **does not require signing in**; the "Menu after signing in" section below does.
+The home page has three columns: the sign-in box on the left, announcements in the middle, help and notes on the right.
 
-## Recognize the three areas on the home page
+![The home page before signing in: account sign-in on the left, portal announcements in the middle, help and notes on the right; the left menu has only the Home and Help tabs]({{ site.baseurl }}/assets/img/first-use/home-anonymous.en.png)
 
-Before signing in, the home page shows three areas:
-
-| Position | Content | What to look for |
-| --- | --- | --- |
-| Left | **Account sign-in** | The sign-in form: identifier, password, remember me |
-| Middle | **Portal announcements** | Only announcements **marked visible to guests, item by item**; unmarked entries never appear here |
-| Right | **Help and notes** | Usage notes for the site; also the "Help" page in the left navigation |
-
-While **not signed in**, the left navigation contains only "Home" and "Help". That is the normal state: **business capability entries appear only for signed-in users**, so an empty-looking menu before signing in is expected.
+Before signing in, the left side has just two tabs, "Home" and "Help". The business entries show up only after you sign in — that is by design, not a broken page.
 
 ## Sign in
 
-1. In the **Account sign-in** card on the left of the home page, fill in your **identifier** and **password**.
-2. Tick **Remember me** if you want the session kept.
-3. Click **Sign in**.
+In the box on the left, fill in your email address, user name or employee number and your password, then click Sign in. Tick "Remember me" if you want the session kept.
 
-Expected result: the user area at the top shows your name, and the left navigation grows from two items to six.
+![The account sign-in card on the left of the home page: email, user name or employee number, password, remember me, and the sign-in button]({{ site.baseurl }}/assets/img/first-use/signin-card.en.png)
 
-> The page encrypts the password with a **one-time RSA public key** before submission; the server decrypts it only within the current request, so it never travels in plain text.
-> A failed sign-in shows a **generic** message — it does not distinguish "no such account" from "wrong password".
+The identifier may be a user name, a legacy name, an active employee number, or an email address.
 
-## Menu after signing in
+There is no registration link on the page. Whether self-registration is open is a deployment decision, and it is off by default — so not seeing the link is normal.
 
-| Menu item | What it is for | Who sees it |
-| --- | --- | --- |
-| Home | Back to the sign-in card and announcements | Everyone |
-| Help | Usage notes for the site | Everyone |
-| My to-do items | An aggregate of **unfinished** to-dos (view only) | Signed-in users |
-| Leave and expense | Leave requests and expense claims | Signed-in users |
-| Business requests | Submit and track business requests | Signed-in users |
-| My profile | Employee profile confirmation and correction requests | Signed-in users |
-| Platform administration | Site settings, tabs, modules, roles and users | Administrators only |
-| Enterprise workbench | Submit, resubmit and comment on collaboration items | Administrators only |
+The password is encrypted with a one-time public key before it is sent, and the server decrypts it only for that one request, so it never travels in plain text.
 
-> Menu labels follow the interface language: the Chinese interface shows "我的待办", the English interface shows "My To-Do Items". The table above uses the Chinese wording.
+When the password is wrong the page only says the sign-in failed; it does not tell you whether the account does not exist or the password is wrong — deliberately, so the form cannot be used to probe for accounts.
+
+After signing in, the top of the page says "Welcome, your name", and the left menu grows from two tabs to six.
+
+## What the left side shows after signing in
+
+![The home page after signing in: the welcome line at the top, and the left menu expanded to Home, Help, My to-do items, Leave and expense, Business requests and My profile]({{ site.baseurl }}/assets/img/first-use/home-signed-in.en.png)
+
+In order:
+
+- Home — back to the sign-in box and the announcements
+- Help — usage notes; the block on the right of the home page is the same page
+- My to-do items — the things assigned to you that are not finished yet
+- Leave and expense — leave requests and expense claims
+- Business requests — submit and track business requests
+- My profile — confirm and correct your employee profile
+
+Administrators get two more: platform administration (site settings, tabs, modules, roles, users) and the enterprise workbench (submitting, resubmitting and commenting on collaboration items).
 
 ## View your to-do items
 
-1. Click **My to-do items** in the left navigation.
-2. The page lists, on load, the **unfinished** to-dos **assigned to you or to a role key you hold** — you do not have to press anything.
-3. Click **Overdue** to see only overdue entries; click **All** to return to the full list.
+Click "My to-do items" and the page lists, as it loads, the unfinished items assigned to you. You do not have to press anything.
 
-Expected result: every entry states the **source module** it comes from.
+![The My to-do items page: the All and Overdue only filters at the top, and an empty list below saying there are no to-do items]({{ site.baseurl }}/assets/img/first-use/my-work-items.en.png)
 
-> **To-dos can be seen here but not handled here**: this module **presents and does not process** — it does not approve, does not change data, and does not write back to the source module. Handling happens in the module that produced the to-do (expense reimbursement, leave request, business request).
+There are two filters, "All" and "Overdue only". Click "Overdue only" to see just the late ones, and "All" to go back to the full list.
+
+When you have nothing outstanding the list is empty and it says so.
+
+Every entry names the module it came from.
+
+You can look here but you cannot deal with anything here. This module does not approve anything, does not change data, and does not write back to the source module. Handling happens in the module that produced the to-do.
 
 ## Handle it in the source module
 
-1. Find the to-do in the list and note the source it names.
-2. Click the matching tab in the left navigation (for example "Leave and expense").
-3. Complete the request or the handling action inside that tab.
+Find the to-do in the list, note the source it names, then click the matching tab in the left navigation — say "Leave and expense" — and finish the job in that tab.
 
-Expected result: once handled, the to-do disappears from "My to-do items" — because the module lists unfinished items only.
+Once it is handled, the to-do disappears from the list, because only unfinished items are listed.
 
 ## When something is not showing
 
-| Symptom | Cause | What to do |
-| --- | --- | --- |
-| The left navigation shows only "Home" and "Help" | Not signed in (business entries are hidden from anonymous visitors) | Sign in first |
-| "My to-do items" and the other entries are still missing after signing in | The sign-in did not succeed, or the entry is not visible to your account | Check whether your name appears at the top; ask an administrator to confirm the account is enabled |
-| "My to-do items" is empty | Nothing unfinished is assigned to you | Normal state; the module lists unfinished items only |
-| A particular to-do disappeared | It was completed, it was assigned to someone else, or its source module is outside the aggregate | Confirm in the source module |
-| There is no action button in "My to-do items" | This module deliberately offers no in-place handling | Handle it in the source module |
-| The announcements area on the home page is empty | Each announcement must be **marked visible to guests individually** to appear here | Contact the site administrator |
+- Only "Home" and "Help" on the left — you are not signed in. The business entries show for signed-in users only.
+- Still no business entries after signing in — the sign-in did not succeed (check whether your name appears at the top), or the account has not been enabled; ask an administrator.
+- "My to-do items" is empty — nothing unfinished is assigned to you right now. That is normal.
+- A to-do you expected is gone — it was completed, it was assigned to someone else, or its source module is outside the aggregate. Check the source module.
+- No action button in "My to-do items" — this module deliberately does not offer in-place handling. Handle it in the source module.
+- The announcements area on the home page is empty — each announcement has to be marked visible to guests individually to show up here. Ask the site administrator.
 
-## Not covered on this page
+## What this page does not cover
 
-- **Per-feature fields, required inputs and validation**: see the module pages under Learn.
-- **Publishing and maintaining announcements**: that is a site operation; see the operator handbook (separate page).
-- **A screen showing approval-trajectory details**: the approval flow of business requests and of leave/expense is a **data-layer state machine** and there is currently **no dedicated trajectory page** — this page therefore does not describe an interface that does not exist.
-- **Site configuration and secondary development**: see Reference.
+- What each module lets you fill in and what is required — the module pages under Learn.
+- Publishing announcements and maintaining tabs and modules — that is site operations; there is a separate handbook.
+- The trail of an approval — **there is no such page**. The approval flow is recorded inside the system and is not visible in the interface; what the "Business requests" and "Leave and expense" tabs show is the request itself and its current state.
+- How the site is configured and how modules are extended — see Reference.
 
-## Where to go next
-
-- Module usage guides: "Sign-in", "My to-do items", "Leave and expense", "Business requests", "My profile", "Enterprise workbench" (Learn section)
-- Mechanics and configuration: module package contract, module mechanics and secondary development, navigation visibility (Reference section)
-
-<!-- build-stamp: 60BEF23949F0 -->
+<!-- build-stamp: 3A45A7AE7A2B -->

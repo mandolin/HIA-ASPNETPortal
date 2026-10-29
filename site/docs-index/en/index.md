@@ -28,7 +28,10 @@ maintainers.
 - `product-overview.md`: product overview and positioning (what it is, who it is for, capability map, boundaries,
  compatibility and licence, where it fits).
 - `user-guide.md`: how to run and use the portal, including the portal configuration flow, common administrator operations
- and troubleshooting.
+and troubleshooting.
+- `first-use-portal.md`: **First use of the portal** (the entry page of the operator track: sign in → recognize the three
+areas of the home page → recognize the menu after signing in → view to-dos → handle it in the source module → what to check
+when something is missing), with screenshots of the running portal.
 - `testing-checklist.md`: build, test, manual verification and pre-release checklists.
 - `documentation-artifacts-guide.md`: input/output boundaries for public documentation, JSDoc, XML documentation and
  generated output.
@@ -101,4 +104,4 @@ maintainers.
 - Documents are organised into eight sections — product overview / evaluate / quick start / learn / reference / develop /
  operate / changes; see the [documentation map](https://github.com/mandolin/HIA-ASPNETPortal/blob/main/docs/documentation-map.md).
 
-<!-- build-stamp: 3690472743AA -->
+<!-- build-stamp: 2F39C3C91BF8 -->

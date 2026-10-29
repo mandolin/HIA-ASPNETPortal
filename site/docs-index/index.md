@@ -22,6 +22,7 @@ title: HIA-ASPNETPortal 文档
 - `module-development-guide.md`：受信任部署模块包的开发、注册、启停和移除边界。
 - `product-overview.md`：产品概览与定位（是什么、给谁用、能力地图、边界、兼容性与许可证、适用场景）。
 - `user-guide.md`：运行和使用入口说明，含门户配置流程、管理员常用操作与故障排除。
+- `first-use-portal.md`：**第一次使用本站**（使用者轨入口页：登录 → 认识首页三栏 → 认识登录后菜单 → 看待办 → 回来源模块办理 → 排查清单），带实拍截图。
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。
 - `documentation-review-checklist.md`：文档复核**人工走查清单**（正确性 / 双语对等 / 读者可达性 / 不误信门禁），对应自动化门禁无法证明的部分。
@@ -67,4 +68,4 @@ title: HIA-ASPNETPortal 文档
 - 本站文档同时提供中文与英文两个版本，可随时切换。
 - 文档按「产品概览 / 评估 / 快速上手 / 学习 / 参考 / 开发 / 运维 / 变更」八个分区组织，见[文档地图]({{ site.baseurl }}/documentation-map/)。
 
-<!-- build-stamp: 1FEA9315FAF9 -->
+<!-- build-stamp: 5B9B6D620062 -->

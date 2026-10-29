@@ -780,6 +780,26 @@ foreach ($pf in $pageFiles) {
         $seg = ($seg -split '#')[0].Trim('/')
         if ($seg.StartsWith('en/')) { $seg = $seg.Substring(3) }
         if ($seg -eq '') { continue }
+
+        # <lang>
+        #   <zh-CN>**静态资源与页面分开校验**：静态资源（图片等）按**文件是否存在**判定，页面仍按 `<seg>/index.md` 判定。
+        #     旧实现把图片链接也当页面查 `site/<seg>/index.md`，于是**任何**图片链接都被判坏链 —— 既误报、
+        #     又完全放过了"引用了并不存在的图片"这种真坏链。分开校验后：图片链接必须真的在仓库里，
+        #     少一张就报错（比原来更强，不是放水）。</zh-CN>
+        #   <en>**Validate static assets and pages separately**: static assets (images and the like) are judged by whether the
+        #     **file exists**, while pages are still judged by `<seg>/index.md`. The previous implementation looked up
+        #     `site/<seg>/index.md` for image links too, so **every** image link was reported as broken — both a false
+        #     positive and a complete blind spot for "links to an image that does not exist". With the split, an image link
+        #     must resolve to a real file in the repository: a missing image fails the build (stronger, not weaker).</en>
+        # </lang>
+        if ($seg -match '\.(png|jpe?g|svg|webp|gif|pdf|ico|css|js)$') {
+            $assetPath = Join-Path $siteDir ($seg.Replace('/', '\'))
+            if (-not (Test-Path -LiteralPath $assetPath)) {
+                $gaps.Add(('N2 站内静态资源缺失: site' + $rel + ' -> ' + $target))
+            }
+            continue
+        }
+
         $exists = Test-Path -LiteralPath (Join-Path $siteDir ($seg + '\index.md'))
         if (-not $exists) {
             $gaps.Add(('N2 站内坏链: site' + $rel + ' -> ' + $target))

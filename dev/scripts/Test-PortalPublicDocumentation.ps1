@@ -97,6 +97,37 @@ function Test-RelativeMarkdownLinks {
 
         foreach ($match in $linkPattern.Matches($content)) {
             $rawTarget = ([string]$match.Groups['target'].Value).Trim()
+
+            # <lang>
+            #   <zh-CN>**站点根相对链接必须在空白切分之前判定**：`{{ site.baseurl }}/assets/...` 里含空格，
+            #     而下面的 `$target = ($rawTarget -split '\s+')[0]` 是为兼容"链接 + 标题"写法而设的，
+            #     它会把 baseurl 形式切成只剩 `{{`，之后无论怎么判定都无从下手（图片链接一律被判"相对路径无法解析"）。
+            #     故此处先按完整目标处理 baseurl 形式：静态资源查文件、页面查 index.md，两者都必须真的存在。</zh-CN>
+            #   <en>**Site-root-relative links must be handled before the whitespace split**: `{{ site.baseurl }}/assets/...`
+            #     contains a space, and the `$target = ($rawTarget -split '\s+')[0]` below exists to support the
+            #     "link + title" form — it reduces the baseurl form to just `{{`, after which no judgement is possible
+            #     (every image link was reported as "relative path cannot be resolved"). So the baseurl form is handled
+            #     here on the full target: static assets by file, pages by index.md, and both must really exist.</en>
+            # </lang>
+            $siteRootPrefix = '^\{\{\s*site\.baseurl\s*\}\}/'
+            if ($rawTarget -match $siteRootPrefix) {
+                $siteRelative = (($rawTarget -replace $siteRootPrefix, '') -split '#', 2)[0] -replace '/', '\'
+                if (-not [string]::IsNullOrWhiteSpace($siteRelative)) {
+                    $siteTree = Join-Path $repositoryRoot 'site'
+                    if ($siteRelative -match '\.(png|jpe?g|svg|webp|gif|pdf|ico|css|js)$') {
+                        if (-not (Test-Path -LiteralPath (Join-Path $siteTree $siteRelative) -PathType Leaf)) {
+                            $invalidLinks.Add($relativePath + ' -> ' + $rawTarget)
+                        }
+                    }
+                    else {
+                        if (-not (Test-Path -LiteralPath (Join-Path $siteTree ($siteRelative.TrimEnd('\') + '\index.md')) -PathType Leaf)) {
+                            $invalidLinks.Add($relativePath + ' -> ' + $rawTarget)
+                        }
+                    }
+                }
+                continue
+            }
+
             $target = ($rawTarget -split '\s+')[0]
             if ([string]::IsNullOrWhiteSpace($target) -or $target.StartsWith('#')) {
                 continue
