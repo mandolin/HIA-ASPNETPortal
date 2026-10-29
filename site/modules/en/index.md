@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Learn
-nav_order: 2
+nav_order: 6
 permalink: /en/modules/
 title: Module guides
 ---

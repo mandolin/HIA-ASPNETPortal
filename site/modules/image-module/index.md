@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 8
+nav_order: 12
 permalink: /modules/image-module/
 title: 图片（ImageModule）
 ---

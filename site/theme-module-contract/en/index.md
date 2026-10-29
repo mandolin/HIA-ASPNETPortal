@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 15
+nav_order: 17
 permalink: /en/theme-module-contract/
 title: Theme-module appearance contract
 ---

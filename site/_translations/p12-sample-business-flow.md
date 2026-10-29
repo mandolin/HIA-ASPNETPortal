@@ -12,6 +12,10 @@ This page describes the minimal enterprise business path currently uses for demo
 employee signs in with an existing account and submits a profile correction request based on a valid employee binding; an
 administrator reviews the request in the back office and tracks it through work items, audits and the employee directory.
 
+This is the **implementation and regression** view: how to produce the sample data and how to walk the chain once. The
+**user's** path (confirm the profile, spot an error, file the correction, who handles it) is in
+[employee profile: confirm and correct]({{ site.baseurl }}/en/profile-confirm-and-correct/).
+
 ## Boundaries
 
 1. This path is for development, testing and demonstration — it is not a production initialisation process.

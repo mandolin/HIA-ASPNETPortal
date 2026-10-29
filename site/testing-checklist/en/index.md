@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 1
+nav_order: 3
 permalink: /en/testing-checklist/
 title: Testing checklist
 ---

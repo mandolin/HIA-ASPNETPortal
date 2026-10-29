@@ -1,8 +1,8 @@
 ---
 layout: default
 lang: en
-parent: Learn
-nav_order: 22
+parent: Reference
+nav_order: 1
 permalink: /en/p12-sample-business-flow/
 title: Sample business flow
 ---
@@ -11,6 +11,10 @@ title: Sample business flow
 This page describes the minimal enterprise business path currently uses for demonstration and regression: an ordinary
 employee signs in with an existing account and submits a profile correction request based on a valid employee binding; an
 administrator reviews the request in the back office and tracks it through work items, audits and the employee directory.
+
+This is the **implementation and regression** view: how to produce the sample data and how to walk the chain once. The
+**user's** path (confirm the profile, spot an error, file the correction, who handles it) is in
+[employee profile: confirm and correct]({{ site.baseurl }}/en/profile-confirm-and-correct/).
 
 ## Boundaries
 
@@ -91,4 +95,4 @@ account-employee binding, but never creates users or modifies passwords.
  configuration.
 3. In a later Workflow cycle, add transfer, delegation, co-signing, notification and more business objects.
 
-<!-- build-stamp: DB41A7212964 -->
+<!-- build-stamp: BAA7DC822881 -->

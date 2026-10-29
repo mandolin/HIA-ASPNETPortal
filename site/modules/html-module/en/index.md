@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Learn
-nav_order: 11
+nav_order: 15
 permalink: /en/modules/html-module/
 title: HtmlModule
 ---

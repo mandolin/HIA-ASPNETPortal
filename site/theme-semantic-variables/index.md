@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 2
+nav_order: 4
 permalink: /theme-semantic-variables/
 title: 主题语义变量矩阵（`--portal-*`）
 ---

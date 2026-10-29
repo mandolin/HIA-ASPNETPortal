@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 6
+nav_order: 8
 permalink: /en/collaboration-item-state-machine/
 title: Collaboration item state machine
 ---

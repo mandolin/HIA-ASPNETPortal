@@ -1,14 +1,16 @@
 ---
 layout: default
 lang: zh-CN
-parent: 学习
-nav_order: 22
+parent: 参考
+nav_order: 1
 permalink: /p12-sample-business-flow/
 title: 员工资料更正样板业务路径
 ---
 # 员工资料更正样板业务路径
 
 本文说明当前用于演示和回归的最小企业业务路径：普通员工通过已有账号登录，基于有效员工绑定提交资料更正请求；管理员在后台审核请求，并通过待办、审计和员工目录进行追踪。
+
+这一页是**实施与回归**视角：怎么造样例数据、怎么把这条链验一遍。**使用者**的操作路径（确认资料、发现错误、提交更正、谁在处理）见[员工资料：确认与更正]({{ site.baseurl }}/profile-confirm-and-correct/)。
 
 ## 边界
 
@@ -77,4 +79,4 @@ temp/p12.5/PortalP12SampleScenario.sql
 2. 将读取类审计、审计详细级别和审计保留策略纳入系统设置与发布时配置。
 3. 在后续 Workflow 周期中补转办、委托、会签、通知和更多业务对象。
 
-<!-- build-stamp: 20BD8C5D53E3 -->
+<!-- build-stamp: C7596955B945 -->

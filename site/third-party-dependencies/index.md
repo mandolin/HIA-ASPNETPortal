@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 3
+nav_order: 5
 permalink: /third-party-dependencies/
 title: 第三方依赖审计
 ---

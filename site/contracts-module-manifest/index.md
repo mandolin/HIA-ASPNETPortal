@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 10
+nav_order: 12
 permalink: /contracts-module-manifest/
 title: 模块契约（`module.json`）
 ---

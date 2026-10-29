@@ -68,6 +68,22 @@
 - doc: first-use-portal.md
   path: first-use-portal
   parent: 学习
+
+- doc: business-application-workflow.md
+  path: business-application-workflow
+  parent: 学习
+
+- doc: leave-and-expense-workflow.md
+  path: leave-and-expense-workflow
+  parent: 学习
+
+- doc: profile-confirm-and-correct.md
+  path: profile-confirm-and-correct
+  parent: 学习
+
+- doc: operator-handbook.md
+  path: operator-handbook
+  parent: 学习
 - doc: modules/index.md
   path: modules
   parent: 学习
@@ -132,7 +148,11 @@
 
 - doc: p12-sample-business-flow.md
   path: p12-sample-business-flow
-  parent: 学习
+  parent: 参考
+
+- doc: module-mechanics-and-extension.md
+  path: module-mechanics-and-extension
+  parent: 参考
 
 - doc: testing-checklist.md
   path: testing-checklist

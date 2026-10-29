@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 4
+nav_order: 6
 permalink: /font-policy-and-audit/
 title: 字体政策与审计
 ---

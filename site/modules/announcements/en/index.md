@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Learn
-nav_order: 3
+nav_order: 7
 permalink: /en/modules/announcements/
 title: Announcements
 ---

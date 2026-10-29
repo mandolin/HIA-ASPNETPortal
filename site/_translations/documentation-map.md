@@ -59,10 +59,22 @@ Not in `docs/`; lives in source node/flow comments.
 - `first-use-portal.md` — **First use of the portal**: the entry page of the operator track (sign in → recognize the three
   areas of the home page → recognize the menu after signing in → view to-dos → handle it in the source module →
   troubleshooting table), written on the Learn skeleton of the two-track standard
-- **New gaps registered after the two-track re-cut (2026-10-29)**: only one end-to-end task path exists
-  (`first-use-portal.md`); **business requests**, **leave and expense** and **profile confirmation and correction** are
-  still to be written; the **operator handbook** (publishing announcements, maintaining tabs and modules) has not started;
-  the Reference section still lacks a **module mechanics and secondary development** overview and an API entry point.
+- `business-application-workflow.md` — **Business requests: from submission to closure** (an end-to-end task path: submit →
+  what happens after submitting → amend and resubmit when returned → why you cannot see the approval trail → when the
+  submission did not go through)
+- `leave-and-expense-workflow.md` — **Leave and expense: from filling in to appearing in to-dos** (two structurally identical
+  modules covered together: how their fields differ, what lands where after submitting, and the failure paths)
+- `profile-confirm-and-correct.md` — **Employee profile: confirm and correct** (read-only confirmation → spot an error →
+  file a correction request → who handles it → when you cannot see the progress)
+- `operator-handbook.md` — **Operator handbook: running the portal day to day** (publish an announcement → adjust tabs and
+  visibility → enable and configure modules → a quick map of the administration pages; it states plainly that the
+  announcement guest-visibility flag and tab ordering have no administration entry point)
+- `module-mechanics-and-extension.md` — **Module mechanics and secondary development** (the Reference overview: the five
+  layers → profiles → adding a module → changing the look → the four gates → where the API documentation lives)
+- **Gaps registered after the two-track re-cut (2026-10-29) — now filled**: three end-to-end task paths (business requests /
+  leave and expense / profile confirmation and correction), the operator handbook, and the Reference overview are all
+  published; `p12-sample-business-flow.md` stays as the **implementation and regression** view and has moved to the
+  Reference section.
 - **Remaining gaps**: **none for module-level instructions**. (~~Runtime screenshots~~ as a
  reproducible baseline; ~~item-by-item instructions for existing content modules~~;
  ~~the approval-flow UI for leave and reimbursement~~ as an explicit boundary statement, see

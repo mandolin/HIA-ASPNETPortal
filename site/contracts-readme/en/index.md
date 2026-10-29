@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 9
+nav_order: 11
 permalink: /en/contracts-readme/
 title: Technical contracts
 ---

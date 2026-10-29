@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Learn
-nav_order: 17
+nav_order: 21
 permalink: /en/modules/enterprise-capability-workbench/
 title: Enterprise Capability Workbench (EnterpriseCapabilityWorkbench)
 ---

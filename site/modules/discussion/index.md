@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 5
+nav_order: 9
 permalink: /modules/discussion/
 title: 讨论（Discussion）
 ---

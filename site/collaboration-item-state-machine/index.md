@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 6
+nav_order: 8
 permalink: /collaboration-item-state-machine/
 title: 协同事项状态机（Collaboration Item State Machine）
 ---

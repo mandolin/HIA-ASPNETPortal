@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 13
+nav_order: 15
 permalink: /en/module-development/
 title: Deployed module package development guide
 ---

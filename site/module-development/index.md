@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 13
+nav_order: 15
 permalink: /module-development/
 title: 部署式模块包开发指南
 ---
