@@ -198,6 +198,9 @@
   <data name="Signin_accountLogin" xml:space="preserve">
     <value>Account Login</value>
   </data>
+  <data name="Signin_forgotPasswordHint" xml:space="preserve">
+    <value>Forgotten your password? Ask a platform administrator to reset it.</value>
+  </data>
   <data name="Signin_email" xml:space="preserve">
     <value>Email:</value>
   </data>

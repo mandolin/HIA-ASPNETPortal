@@ -32,5 +32,8 @@ namespace ASPNET.StarterKit.Portal
 
         /// <summary><lang><zh-CN>显示登录失败、成功或后续提示的消息标签。</zh-CN><en>Message label for sign-in failure, success, or follow-up guidance.</en></lang></summary>
         protected global::System.Web.UI.WebControls.Label Message;
+
+        /// <summary><lang><zh-CN>承载"忘记口令请联系平台管理员重置"提示的文本控件；文案由资源键提供，不含请求参数或动态内容。</zh-CN><en>Literal carrying the "ask a platform administrator to reset a forgotten password" hint; its wording comes from a resource key and carries no request parameter or dynamic content.</en></lang></summary>
+        protected global::System.Web.UI.WebControls.Literal ForgotPasswordHint;
     }
 }

@@ -610,6 +610,18 @@ namespace Resources {
 
         /// <summary>
         /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：Forgotten your password? Ask a platform administrator to reset it.</zh-CN>
+        ///   <en>Looks up a localized string similar to: Forgotten your password? Ask a platform administrator to reset it.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Signin_forgotPasswordHint {
+            get {
+                return ResourceManager.GetString("Signin_forgotPasswordHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <lang>
         ///   <zh-CN>查找类似以下内容的本地化字符串：Email:</zh-CN>
         ///   <en>Looks up a localized string similar to: Email:</en>
         /// </lang>

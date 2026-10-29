@@ -12220,6 +12220,19 @@
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.signin_email-9a3dee3f.html"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.signin_forgotpasswordhint",
+      "kind": "entry",
+      "label": "Signin_forgotPasswordHint",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.signin_forgotpasswordhint",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.signin_forgotpasswordhint",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.signin_forgotpasswordhint-ca19a2ba.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.signin_password",
       "kind": "entry",
       "label": "Signin_password",

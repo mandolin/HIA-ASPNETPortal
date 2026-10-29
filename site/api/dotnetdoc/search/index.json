@@ -18237,6 +18237,15 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.message message dotnet-field message label for sign-in failure, success, or follow-up guidance. protected system.web.ui.webcontrols.label aspnet.starterkit.portal.signin.message dotnet:f:aspnet.starterkit.portal.signin.message portal aspnet.starterkit.portal aspnet.starterkit.portal.signin t:aspnet.starterkit.portal.signin dotnet hia-document api/portal.hia.json src/portal/desktopmodules/signin.ascx.designer.cs csharp 显示登录失败、成功或后续提示的消息标签。 message label for sign-in failure, success, or follow-up guidance."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.forgotpasswordhint",
+      "name": "ForgotPasswordHint",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.signin.forgotpasswordhint-2e383b20.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.signin.forgotpasswordhint-2e383b20.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.signin.forgotpasswordhint forgotpasswordhint dotnet-field literal carrying the \"ask a platform administrator to reset a forgotten password\" hint; its wording comes from a resource key and carries no request parameter or dynamic content. protected system.web.ui.webcontrols.literal aspnet.starterkit.portal.signin.forgotpasswordhint dotnet:f:aspnet.starterkit.portal.signin.forgotpasswordhint portal aspnet.starterkit.portal aspnet.starterkit.portal.signin t:aspnet.starterkit.portal.signin dotnet hia-document api/portal.hia.json src/portal/desktopmodules/signin.ascx.designer.cs csharp 承载\"忘记口令请联系平台管理员重置\"提示的文本控件；文案由资源键提供，不含请求参数或动态内容。 literal carrying the \"ask a platform administrator to reset a forgotten password\" hint; its wording comes from a resource key and carries no request parameter or dynamic content."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.viewdocument",
       "name": "ViewDocument",
       "kind": "dotnet-type",
@@ -19477,6 +19486,15 @@
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.signin_accountlogin-9004c039.html",
       "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.signin_accountlogin-9004c039.html",
       "searchText": "hia-document:dotnet-p-resources.lang.signin_accountlogin signin_accountlogin dotnet-property looks up a localized string similar to: account login internal static string resources.lang.signin_accountlogin { get; } dotnet:p:resources.lang.signin_accountlogin portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：account login looks up a localized string similar to: account login"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.signin_forgotpasswordhint",
+      "name": "Signin_forgotPasswordHint",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.signin_forgotpasswordhint-ca19a2ba.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.signin_forgotpasswordhint-ca19a2ba.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.signin_forgotpasswordhint signin_forgotpasswordhint dotnet-property looks up a localized string similar to: forgotten your password? ask a platform administrator to reset it. internal static string resources.lang.signin_forgotpasswordhint { get; } dotnet:p:resources.lang.signin_forgotpasswordhint portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：forgotten your password? ask a platform administrator to reset it. looks up a localized string similar to: forgotten your password? ask a platform administrator to reset it."
     },
     {
       "id": "hia-document:dotnet-p-resources.lang.signin_email",
@@ -48258,7 +48276,16 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-signin.a-d376b848.html",
       "noScriptPagePath": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-signin.a-d376b848.html",
-      "searchText": "hia-document:dotnetdoc-markup-comment-src-portal-desktopmodules-signin.ascx-5 signin.ascx webforms-server-comment 5 dotnet-markup-comment the sign-in button enters loginbtn_click, while the registration link is shown only when the code-behind explicitly enables it; authentication results and redirects cannot be forged by the markup. dotnetdoc:markup-comment:src-portal-desktopmodules-signin.ascx:5 dotnet hia-document markup/portal.hia.json src/portal/desktopmodules/signin.ascx ascx 登录按钮进入 loginbtn_click，注册链接仅在 code-behind 明确开放时显示；认证结果和跳转不能由标记层伪造。 the sign-in button enters loginbtn_click, while the registration link is shown only when the code-behind explicitly enables it; authentication results and redirects cannot be forged by the markup."
+      "searchText": "hia-document:dotnetdoc-markup-comment-src-portal-desktopmodules-signin.ascx-5 signin.ascx webforms-server-comment 5 dotnet-markup-comment this line states an existing fact only (the help module already says a forgotten password must be reset by a platform\n    administrator); it carries no request parameter or dynamic content. the wording comes from a resource key with a chinese\n    and an english version, so it follows the interface language.\n    note: a resource expression is only allowed inside a **server control attribute** — in a text position asp.net raises\n    httpparseexception — so an asp:literal carries it here rather than writing <%$ %> into the markup. dotnetdoc:markup-comment:src-portal-desktopmodules-signin.ascx:5 dotnet hia-document markup/portal.hia.json src/portal/desktopmodules/signin.ascx ascx 这一行只陈述既有事实（帮助模块已写明\"忘记密码请联系平台管理员重置\"），不含任何请求参数或动态内容；\n    文案由资源键提供，中英各一份，界面语言切换时随之切换。\n    注意：资源表达式只能出现在**服务器控件属性**里（文本节点位置会被 asp.net 判为 httpparseexception），\n    故这里用 asp:literal 承载，而不是把 <%$ %> 直接写在文本里。 this line states an existing fact only (the help module already says a forgotten password must be reset by a platform\n    administrator); it carries no request parameter or dynamic content. the wording comes from a resource key with a chinese\n    and an english version, so it follows the interface language.\n    note: a resource expression is only allowed inside a **server control attribute** — in a text position asp.net raises\n    httpparseexception — so an asp:literal carries it here rather than writing <%$ %> into the markup."
+    },
+    {
+      "id": "hia-document:dotnetdoc-markup-comment-src-portal-desktopmodules-signin.ascx-6",
+      "name": "Signin.ascx webforms-server-comment 6",
+      "kind": "dotnet-markup-comment",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-signin.a-d676bd01.html",
+      "noScriptPagePath": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-signin.a-d676bd01.html",
+      "searchText": "hia-document:dotnetdoc-markup-comment-src-portal-desktopmodules-signin.ascx-6 signin.ascx webforms-server-comment 6 dotnet-markup-comment the sign-in button enters loginbtn_click, while the registration link is shown only when the code-behind explicitly enables it; authentication results and redirects cannot be forged by the markup. dotnetdoc:markup-comment:src-portal-desktopmodules-signin.ascx:6 dotnet hia-document markup/portal.hia.json src/portal/desktopmodules/signin.ascx ascx 登录按钮进入 loginbtn_click，注册链接仅在 code-behind 明确开放时显示；认证结果和跳转不能由标记层伪造。 the sign-in button enters loginbtn_click, while the registration link is shown only when the code-behind explicitly enables it; authentication results and redirects cannot be forged by the markup."
     },
     {
       "id": "hia-document:dotnetdoc-markup-comment-src-portal-desktopmodules-viewdocument.aspx-1",

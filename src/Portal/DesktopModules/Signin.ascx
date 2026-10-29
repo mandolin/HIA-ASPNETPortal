@@ -43,6 +43,23 @@
         <asp:CheckBox id="RememberCheckbox" CssClass="Normal portal-check" Text='<%$ Resources:lang,Signin_rememberLogin %>' runat="server" />
     </div>
 
+    <div class="portal-signin-note">
+        <%--
+            <lang>
+                <zh-CN>这一行只陈述既有事实（帮助模块已写明"忘记密码请联系平台管理员重置"），不含任何请求参数或动态内容；
+                文案由资源键提供，中英各一份，界面语言切换时随之切换。
+                注意：资源表达式只能出现在**服务器控件属性**里（文本节点位置会被 ASP.NET 判为 HttpParseException），
+                故这里用 asp:Literal 承载，而不是把 &lt;%$ %&gt; 直接写在文本里。</zh-CN>
+                <en>This line states an existing fact only (the help module already says a forgotten password must be reset by a platform
+                administrator); it carries no request parameter or dynamic content. The wording comes from a resource key with a Chinese
+                and an English version, so it follows the interface language.
+                Note: a resource expression is only allowed inside a **server control attribute** — in a text position ASP.NET raises
+                HttpParseException — so an asp:Literal carries it here rather than writing &lt;%$ %&gt; into the markup.</en>
+            </lang>
+        --%>
+        <asp:Literal ID="ForgotPasswordHint" runat="server" Text="<%$ Resources:lang, Signin_forgotPasswordHint %>" />
+    </div>
+
     <div class="portal-action-row">
         <%--
             <lang>

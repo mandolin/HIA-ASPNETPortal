@@ -198,6 +198,9 @@
   <data name="Signin_accountLogin" xml:space="preserve">
     <value>账户登录</value>
   </data>
+  <data name="Signin_forgotPasswordHint" xml:space="preserve">
+    <value>忘记口令？请联系平台管理员重置。</value>
+  </data>
   <data name="Signin_email" xml:space="preserve">
     <value>邮箱：</value>
   </data>

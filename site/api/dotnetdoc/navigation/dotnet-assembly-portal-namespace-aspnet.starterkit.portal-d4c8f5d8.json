@@ -1971,7 +1971,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.signin",
       "kind": "type",
       "label": "Signin",
-      "entryCount": 14,
+      "entryCount": 15,
       "views": [
         "dotnet"
       ],

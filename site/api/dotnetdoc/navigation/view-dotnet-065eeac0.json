@@ -17,7 +17,7 @@
       "id": "dotnet:surface:asp.net-surfaces",
       "kind": "surface",
       "label": "ASP.NET Surfaces",
-      "entryCount": 317,
+      "entryCount": 318,
       "views": [
         "dotnet"
       ],
@@ -27,7 +27,7 @@
       "id": "dotnet:assembly:portal",
       "kind": "assembly",
       "label": "Portal",
-      "entryCount": 3058,
+      "entryCount": 3060,
       "views": [
         "dotnet"
       ],

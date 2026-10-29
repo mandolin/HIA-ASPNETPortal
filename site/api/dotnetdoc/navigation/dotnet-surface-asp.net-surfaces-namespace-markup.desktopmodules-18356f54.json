@@ -1014,6 +1014,16 @@
       "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules-type-hia-6a645ada.json"
     },
     {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-signin.ascx-6",
+      "kind": "type",
+      "label": "Signin",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup.desktopmodules-type-hia-69645947.json"
+    },
+    {
       "id": "dotnet:surface:asp.net-surfaces:namespace:markup.desktopmodules:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopmodules-viewdocument.aspx-1",
       "kind": "type",
       "label": "ViewDocument",
