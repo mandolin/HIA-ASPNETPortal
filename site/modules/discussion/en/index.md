@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Learn
-nav_order: 4
+nav_order: 5
 permalink: /en/modules/discussion/
 title: Discussion
 ---

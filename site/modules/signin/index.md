@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 12
+nav_order: 13
 permalink: /modules/signin/
 title: 登录（Signin）
 ---

@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 1
+nav_order: 2
 permalink: /modules/
 title: 模块详细使用说明（索引）
 ---

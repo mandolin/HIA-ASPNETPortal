@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 5
+nav_order: 6
 permalink: /modules/document/
 title: 文档（Document）
 ---

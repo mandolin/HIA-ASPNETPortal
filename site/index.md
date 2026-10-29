@@ -36,7 +36,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dev\scripts\Build-Solution.p
     <div><div class="oc-stat-val">MIT</div><div class="oc-stat-label">开源许可</div></div>
     <div><div class="oc-stat-val">7</div><div class="oc-stat-label">套正式皮肤</div></div>
     <div><div class="oc-stat-val">双语</div><div class="oc-stat-label">中 / 英文资源</div></div>
-    <div><div class="oc-stat-val">50</div><div class="oc-stat-label">篇文档</div></div>
+    <div><div class="oc-stat-val">51</div><div class="oc-stat-label">篇文档</div></div>
   </div>
 </section>
 

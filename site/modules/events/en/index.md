@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Learn
-nav_order: 6
+nav_order: 7
 permalink: /en/modules/events/
 title: Events
 ---

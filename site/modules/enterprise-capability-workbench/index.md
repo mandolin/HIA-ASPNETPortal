@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 16
+nav_order: 17
 permalink: /modules/enterprise-capability-workbench/
 title: 企业能力工作台（EnterpriseCapabilityWorkbench）
 ---

@@ -64,6 +64,10 @@
 - doc: user-guide.md
   path: user-guide
   parent: 快速上手
+
+- doc: first-use-portal.md
+  path: first-use-portal
+  parent: 学习
 - doc: modules/index.md
   path: modules
   parent: 学习

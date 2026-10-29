@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 2
+nav_order: 3
 permalink: /modules/announcements/
 title: 公告（Announcements）
 ---

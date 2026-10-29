@@ -56,6 +56,13 @@ Not in `docs/`; lives in source node/flow comments.
 - `user-guide.md` — how to run and use the portal; includes the **typical portal configuration flow**, **common
  administrator operations** and **troubleshooting** 
 - `p12-sample-business-flow.md` — a sample business flow
+- `first-use-portal.md` — **First use of the portal**: the entry page of the operator track (sign in → recognize the three
+  areas of the home page → recognize the menu after signing in → view to-dos → handle it in the source module →
+  troubleshooting table), written on the Learn skeleton of the two-track standard
+- **New gaps registered after the two-track re-cut (2026-10-29)**: only one end-to-end task path exists
+  (`first-use-portal.md`); **business requests**, **leave and expense** and **profile confirmation and correction** are
+  still to be written; the **operator handbook** (publishing announcements, maintaining tabs and modules) has not started;
+  the Reference section still lacks a **module mechanics and secondary development** overview and an API entry point.
 - **Remaining gaps**: **none for module-level instructions**. (~~Runtime screenshots~~ as a
  reproducible baseline; ~~item-by-item instructions for existing content modules~~;
  ~~the approval-flow UI for leave and reimbursement~~ as an explicit boundary statement, see
