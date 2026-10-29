@@ -2009,7 +2009,9 @@ body.portal-theme-oadark .portal-package-hia-moduleprobe { /* <lang><zh-CN>布�
    实现约束：IE9 安全（float + clear；不用 Grid / Flexbox —— 见 Default/Default.css 的主题包约束）。
    为什么改：原布局把三个窗格排成同一行（账户登录 260px｜门户公告 300px｜帮助与说明），
    公告与帮助两张卡内容都短，右侧长期留白、首页显得空；改为「上二下一」后，
-   第一行两张卡并排占满宽度，第二行帮助与说明通栏，与产品草图一致。 */
+   第一行两张卡并排占满宽度，第二行帮助与说明通栏，与产品草图一致。
+   两卡等高：登录卡的字段改为纵排（并排时卡片只有一行高，与公告卡不齐），
+   公告卡相应拉宽（描述换行变少、卡片更矮），两者高度因此接近。 */
 body.portal-tab-1 .portal-dashboard-layout {
     display: block;
     border-collapse: separate;
@@ -2023,16 +2025,44 @@ body.portal-tab-1 .portal-dashboard-layout .portal-pane {
 }
 body.portal-tab-1 .portal-dashboard-layout .portal-pane-left {
     float: left;
-    width: 58%;
+    width: 54%;
     margin: 0 2% 18px 0;
 }
 body.portal-tab-1 .portal-dashboard-layout .portal-pane-content {
     float: right;
-    width: 40%;
+    width: 44%;
     margin: 0 0 18px 0;
 }
 body.portal-tab-1 .portal-dashboard-layout .portal-pane-right {
     clear: both;
     width: 100%;
     margin: 0;
+}
+/* 登录卡：两个字段由并排改为纵排，卡片高度随之增加，与公告卡视觉等高 */
+body.portal-tab-1 .portal-pane-left .portal-field {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 0 12px 0;
+}
+/* 登录卡等高处理：按钮贴卡片底部（表单的"呼吸区"留在中部），卡片最小高度对齐公告卡当前高度。
+   min-height 作用在内容盒，故总高 = min-height + 上下内边距 + 边框。公告条数变化后需复核该值。 */
+body.portal-tab-1 .portal-pane-left .portal-module {
+    position: relative;
+    min-height: 274px;
+    padding-bottom: 60px;
+}
+body.portal-tab-1 .portal-pane-left .portal-action-row {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+}
+/* 公告卡"降低"：条目内距与行高收紧，两条公告的卡片高度下降，与加高后的登录卡齐平 */
+body.portal-tab-1 .portal-pane-content .portal-content-list-item {
+    margin: 0 0 8px;
+    padding: 9px;
+}
+body.portal-tab-1 .portal-pane-content .portal-content-item-summary {
+    margin-top: 6px;
+    line-height: 1.55;
 }
