@@ -32,6 +32,15 @@ and troubleshooting.
 - `first-use-portal.md`: **First use of the portal** (the entry page of the operator track: sign in → recognize the three
 areas of the home page → recognize the menu after signing in → view to-dos → handle it in the source module → what to check
 when something is missing), with screenshots of the running portal.
+- `business-application-workflow.md`: **Business requests: from submission to closure** (an end-to-end task path: submit →
+what happens after submitting → amend and resubmit when returned → why you cannot see the approval trail → when the
+submission did not go through).
+- `leave-and-expense-workflow.md`: **Leave and expense: from filling in to appearing in to-dos** (two structurally identical
+modules covered together: how their fields differ, what lands where after submitting, and the failure paths).
+- `profile-confirm-and-correct.md`: **Employee profile: confirm and correct** (read-only confirmation → spot an error →
+file a correction request → who handles it → when you cannot see the progress).
+- `operator-handbook.md`: **Operator handbook: running the portal day to day** (publish an announcement → adjust tabs and
+visibility → enable and configure modules → a quick map of the administration pages).
 - `testing-checklist.md`: build, test, manual verification and pre-release checklists.
 - `documentation-artifacts-guide.md`: input/output boundaries for public documentation, JSDoc, XML documentation and
  generated output.
@@ -58,7 +67,9 @@ when something is missing), with screenshots of the running portal.
 - `deployment-default-credentials.md`: default accounts, sample passwords in initialisation scripts and legacy credential
  governance.
 - `p12-sample-business-flow.md`: the employee-profile-correction sample business path, sample data SQL and the acceptance
- entry.
+entry.
+- `module-mechanics-and-extension.md`: **Module mechanics and secondary development** (the Reference overview: the five layers
+→ profiles → adding a module → changing the look → the four gates → where the API documentation lives).
 - `business-application-state-machine.md`: the status vocabulary, allowed transitions and fail-closed write constraints of
  business applications.
 - `collaboration-item-state-machine.md`: the status vocabulary, allowed transitions and handling-role semantics of

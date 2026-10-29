@@ -23,6 +23,10 @@ title: HIA-ASPNETPortal 文档
 - `product-overview.md`：产品概览与定位（是什么、给谁用、能力地图、边界、兼容性与许可证、适用场景）。
 - `user-guide.md`：运行和使用入口说明，含门户配置流程、管理员常用操作与故障排除。
 - `first-use-portal.md`：**第一次使用本站**（使用者轨入口页：登录 → 认识首页三栏 → 认识登录后菜单 → 看待办 → 回来源模块办理 → 排查清单），带实拍截图。
+- `business-application-workflow.md`：**业务申请：从提交到办结**（端到端任务路径：提交 → 提交后发生了什么 → 退回后重提 → 为什么看不到审批过程 → 没提交成功时）。
+- `leave-and-expense-workflow.md`：**请假与报销：从填写到出现在待办里**（两个同构模块一次讲清：字段差异、提交后落库与待办、失败路径）。
+- `profile-confirm-and-correct.md`：**员工资料：确认与更正**（只读确认 → 发现错误 → 提交更正申请 → 谁在处理 → 看不到进度时）。
+- `operator-handbook.md`：**运营者手册：把门户用起来**（发公告 → 调整页签与可见性 → 模块启停与设置 → 后台页面速查）。
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。
 - `documentation-review-checklist.md`：文档复核**人工走查清单**（正确性 / 双语对等 / 读者可达性 / 不误信门禁），对应自动化门禁无法证明的部分。
@@ -36,6 +40,7 @@ title: HIA-ASPNETPortal 文档
 - `operations-runbook.md`：运维入口、例行检查、日志维护、审计查询、备份提醒和证据包说明。
 - `deployment-default-credentials.md`：默认账号、初始化脚本样例口令和旧凭据治理说明。
 - `p12-sample-business-flow.md`：员工资料更正样板业务路径、样例数据 SQL 和 验收入口。
+- `module-mechanics-and-extension.md`：**模块运作与二次开发**（参考轨总纲：五层结构 → 档位 → 加一个模块 → 改外观 → 四道门禁 → API 文档在哪）。
 - `business-application-state-machine.md`：业务申请的状态词汇、允许迁移与 fail-closed 写入约束。
 - `collaboration-item-state-machine.md`：协同事项的状态词汇、允许迁移与处理角色语义。
 - `audit-retention-policy.md`：运营审计表的保留期原则与依据。
@@ -68,4 +73,4 @@ title: HIA-ASPNETPortal 文档
 - 本站文档同时提供中文与英文两个版本，可随时切换。
 - 文档按「产品概览 / 评估 / 快速上手 / 学习 / 参考 / 开发 / 运维 / 变更」八个分区组织，见[文档地图]({{ site.baseurl }}/documentation-map/)。
 
-<!-- build-stamp: 5B9B6D620062 -->
+<!-- build-stamp: 6EDD918ADBAF -->
