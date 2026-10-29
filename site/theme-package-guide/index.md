@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 开发
+nav_order: 3
 permalink: /theme-package-guide/
 title: 主题包部署指南
 ---

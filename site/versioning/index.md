@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 变更
+nav_order: 1
 permalink: /versioning/
 title: 版本策略
 ---

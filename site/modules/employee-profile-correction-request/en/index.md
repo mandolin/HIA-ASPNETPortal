@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 15
 permalink: /en/modules/employee-profile-correction-request/
 title: Employee Profile Correction Request (EmployeeProfileCorrectionRequest)
 ---

@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 31
 permalink: /en/contracts-app-settings/
 title: Configuration contract (appSettings)
 ---

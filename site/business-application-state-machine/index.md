@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
+nav_order: 25
 permalink: /business-application-state-machine/
 title: 业务申请状态机（Business Application State Machine）
 ---

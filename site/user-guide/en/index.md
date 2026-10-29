@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Quick start
+nav_order: 1
 permalink: /en/user-guide/
 title: User guide
 ---

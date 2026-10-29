@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Develop
+nav_order: 3
 permalink: /en/theme-package-guide/
 title: Theme package deployment guide
 ---

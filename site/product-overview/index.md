@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 产品概览
+nav_order: 1
 permalink: /product-overview/
 title: 产品概览与定位（HIA-ASPNETPortal）
 ---

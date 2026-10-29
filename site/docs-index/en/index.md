@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Product overview
+nav_order: 2
 permalink: /en/docs-index/
 title: HIA-ASPNETPortal documentation
 ---

@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 变更
+nav_order: 2
 permalink: /release-notes-template/
 title: 发布说明模板
 ---

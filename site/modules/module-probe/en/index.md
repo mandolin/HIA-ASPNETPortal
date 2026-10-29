@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 19
 permalink: /en/modules/module-probe/
 title: Module Probe (ModuleProbe)
 ---

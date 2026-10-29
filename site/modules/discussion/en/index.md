@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 4
 permalink: /en/modules/discussion/
 title: Discussion
 ---

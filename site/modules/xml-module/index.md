@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
+nav_order: 11
 permalink: /modules/xml-module/
 title: XML / XSL 模块（XmlModule）
 ---

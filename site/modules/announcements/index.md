@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
+nav_order: 2
 permalink: /modules/announcements/
 title: 公告（Announcements）
 ---

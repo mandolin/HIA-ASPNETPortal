@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 开发
+nav_order: 5
 permalink: /dev-guide/
 title: 开发指南
 ---

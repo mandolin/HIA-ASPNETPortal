@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 快速上手
+nav_order: 1
 permalink: /user-guide/
 title: 用户指南
 ---

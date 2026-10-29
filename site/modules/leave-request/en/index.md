@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 18
 permalink: /en/modules/leave-request/
 title: Leave Request (LeaveRequest)
 ---

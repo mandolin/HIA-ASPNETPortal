@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Changes
+nav_order: 1
 permalink: /en/versioning/
 title: Versioning policy
 ---

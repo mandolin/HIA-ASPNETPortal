@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Operate
+nav_order: 5
 permalink: /en/audit-retention-policy/
 title: Audit retention policy
 ---

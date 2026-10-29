@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
+nav_order: 19
 permalink: /modules/module-probe/
 title: 模块探针（ModuleProbe）
 ---

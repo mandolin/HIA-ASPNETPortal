@@ -160,6 +160,33 @@ if (Test-Path -LiteralPath $publishedPath) {
     }
 }
 
+# <lang>
+#   <zh-CN>**分区内的页面顺序也由上架清单决定**（`nav_order`）：同一分区的条目在清单里出现的先后，
+#     就是它们在导航里的先后，并在生成时注入 front matter。
+#     此前生成页只有 layout/lang/parent/permalink/title，**没有 nav_order**，导航只能落到主题默认序
+#     （实测为标题 Unicode 码位序）——「参考」分区 32 页于是排成 "HTML → XML → 业 → 主 → 事 → 企 → 公 → 协 →
+#     员 → 图 → 字 → 官" 的一长串：既不是上架顺序，也没有分组，中英文两棵树的顺序还不一致。
+#     清单既然是路径与分区的单一事实源，**顺序同样应当只由它决定**；要调整顺序就调整清单里的位置。
+#     编号在**解析阶段**一次算完（每个分区从 1 起），使编号只取决于清单，
+#     而不取决于某一次构建里哪些页面恰好生成成功。</zh-CN>
+#   <en>**Ordering within a section is decided by the publish manifest as well** (`nav_order`): the order in which a
+#     section's entries appear in the manifest is their navigation order, injected into the generated front matter.
+#     Generated pages previously carried only layout/lang/parent/permalink/title and **no nav_order**, so navigation fell
+#     back to the theme's default order (observed: Unicode code-point order by title) — the Reference section's 32 pages
+#     lined up as "HTML → XML → 业 → 主 → 事 → 企 → 公 → 协 → 员 → 图 → 字 → 官": neither the manifest order nor grouped,
+#     and the two language trees disagreed. The manifest is already the single source for paths and sections, so the
+#     **order must be decided by it alone**; to change the order, change the position in the manifest. The numbering is
+#     computed **once during parsing** (per section, from 1), so it depends only on the manifest and never on which pages
+#     happened to be generated in a particular run.</en>
+# </lang>
+$sectionOrder = @{}
+foreach ($entry in $entries) {
+    $sectionKey = if ([string]::IsNullOrWhiteSpace($entry.parent)) { '__root__' } else { [string]$entry.parent }
+    if (-not $sectionOrder.ContainsKey($sectionKey)) { $sectionOrder[$sectionKey] = 0 }
+    $sectionOrder[$sectionKey] = $sectionOrder[$sectionKey] + 1
+    $entry['nav_order'] = $sectionOrder[$sectionKey]
+}
+
 # --- 解析 _data/navigation.yml（分区标题，供 N1 校验） ---
 # <lang>
 #   <zh-CN>分区标题的实际形态是 `- title: 产品概览`（带 `- ` 前缀），故正则须允许可选的前导 `- `；
@@ -577,10 +604,10 @@ function Get-Stamp12 {
     }
     $enParent = $enBare
     $zhParent = $e.parent
-    $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $zhParent + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
+    $zhFm = "---`nlayout: default`nlang: zh-CN`nparent: " + $zhParent + "`nnav_order: " + $e['nav_order'] + "`npermalink: /" + $pathSeg + "/`ntitle: " + $zhTitle + "`n---`n"
     Write-GeneratedPage -Path (Join-Path $targetDir 'index.md') -Content ($zhFm + $zhBody)
 
-    $enFm = "---`nlayout: default`nlang: en`nparent: " + $enParent + "`npermalink: /en/" + $pathSeg + "/`ntitle: " + $enTitle + "`n---`n"
+    $enFm = "---`nlayout: default`nlang: en`nparent: " + $enParent + "`nnav_order: " + $e['nav_order'] + "`npermalink: /en/" + $pathSeg + "/`ntitle: " + $enTitle + "`n---`n"
 
     $enDir = Join-Path $targetDir 'en'
     if (-not ($DryRun) -and -not (Test-Path -LiteralPath $enDir)) { $null = New-Item -ItemType Directory -Path $enDir }

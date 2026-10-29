@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 2
 permalink: /en/modules/announcements/
 title: Announcements
 ---

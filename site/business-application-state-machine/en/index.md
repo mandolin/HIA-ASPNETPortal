@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 25
 permalink: /en/business-application-state-machine/
 title: Business application state machine
 ---

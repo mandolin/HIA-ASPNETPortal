@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Evaluate
+nav_order: 1
 permalink: /en/architecture/
 title: Architecture overview
 ---

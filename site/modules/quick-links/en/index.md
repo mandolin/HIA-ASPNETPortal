@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 9
 permalink: /en/modules/quick-links/
 title: QuickLinks
 ---

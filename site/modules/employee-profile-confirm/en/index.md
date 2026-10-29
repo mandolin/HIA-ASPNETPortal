@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 14
 permalink: /en/modules/employee-profile-confirm/
 title: Employee Profile Confirmation (EmployeeProfileConfirm)
 ---

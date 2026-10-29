@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 运维
+nav_order: 2
 permalink: /operations-runbook/
 title: 运维运行手册
 ---

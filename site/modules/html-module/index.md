@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
+nav_order: 10
 permalink: /modules/html-module/
 title: HTML 文本模块（HtmlModule）
 ---

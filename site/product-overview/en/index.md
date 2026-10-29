@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Product overview
+nav_order: 1
 permalink: /en/product-overview/
 title: Product overview and positioning
 ---

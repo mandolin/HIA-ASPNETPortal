@@ -37,6 +37,7 @@
 #     gate caught it. Now there is a **single source** for paths, and the script verifies that `parent` exists in the
 #     navigation skeleton.</en>
 # </lang>
+
 - doc: product-overview.md
   path: product-overview
   parent: 产品概览
@@ -64,118 +65,6 @@
 - doc: operations-runbook.md
   path: operations-runbook
   parent: 运维
-
-- doc: testing-checklist.md
-  path: testing-checklist
-  parent: 参考
-
-- doc: p12-sample-business-flow.md
-  path: p12-sample-business-flow
-  parent: 学习
-
-- doc: theme-semantic-variables.md
-  path: theme-semantic-variables
-  parent: 参考
-
-- doc: frontend-asset-guide.md
-  path: frontend-asset-guide
-  parent: 开发
-
-- doc: third-party-dependencies.md
-  path: third-party-dependencies
-  parent: 参考
-
-- doc: deployment-default-credentials.md
-  path: deployment-default-credentials
-  parent: 运维
-
-- doc: deployment-rollback-guide.md
-  path: deployment-rollback-guide
-  parent: 运维
-
-- doc: theme-package-guide.md
-  path: theme-package-guide
-  parent: 开发
-
-- doc: theme-module-contract.md
-  path: theme-module-contract
-  parent: 开发
-
-- doc: font-policy-and-audit.md
-  path: font-policy-and-audit
-  parent: 参考
-
-- doc: dev-guide.md
-  path: dev-guide
-  parent: 开发
-
-- doc: business-application-state-machine.md
-  path: business-application-state-machine
-  parent: 参考
-
-- doc: collaboration-item-state-machine.md
-  path: collaboration-item-state-machine
-  parent: 参考
-
-- doc: audit-retention-policy.md
-  path: audit-retention-policy
-  parent: 运维
-
-- doc: release-notes-template.md
-  path: release-notes-template
-  parent: 变更
-
-- doc: README.md
-  path: docs-index
-  parent: 产品概览
-
-- doc: documentation-map.md
-  path: documentation-map
-  parent: 参考
-
-- doc: documentation-artifacts-guide.md
-  path: documentation-artifacts-guide
-  parent: 参考
-
-- doc: contracts/README.md
-  path: contracts-readme
-  parent: 参考
-
-- doc: contracts/module-manifest.md
-  path: contracts-module-manifest
-  parent: 参考
-
-- doc: contracts/app-settings.md
-  path: contracts-app-settings
-  parent: 参考
-
-- doc: site-visual-baseline.md
-  path: site-visual-baseline
-  parent: 参考
-
-# <lang>
-#   <zh-CN>`C-anp-P32`（`W-anp-P180`）新增：代码文档页。它本身不是代码文档产物，而是**说明页**——
-#   真正的产物是 `/api/jsdoc/` 下的 JSDoc 双语 HTML（由 `site/api/jsdoc/` 快照发布，非本清单驱动）。
-#   挂到「开发」分区：读者沿 产品入口 → 评估 → 快速上手 → 学习 → 参考 → **开发** 的路径抵达。</zh-CN>
-#   <en>`C-anp-P32` (`W-anp-P180`) addition: the code-documentation page. It is not itself a code-doc artifact but an
-#   **explainer** — the real artifacts are the JSDoc bilingual HTML pages under `/api/jsdoc/` (published from the
-#   `site/api/jsdoc/` snapshot, not driven by this manifest). Attached to the Develop section so readers reach it along
-#   the path product entry → evaluate → quick start → learn → reference → **develop**.</en>
-# </lang>
-- doc: code-documentation.md
-  path: code-documentation
-  parent: 开发
-
-# <lang>
-#   <zh-CN>`C-anp-P33`（`W-anp-P187`）新增：**模块详细使用说明**。此前每个模块只有 `docs/user-guide.md`
-#     里的一小节（`D9`），本周期为每个模块补独立页（八节：用途与前置 / 操作步骤 / 字段表 / 必填与校验 /
-#     存储与审计 / 权限 / 常见问题 / 边界与不做），挂在「参考」分区下。中文正文在 `docs/modules/`，英文译本
-#     在 `site/_translations/modules/` —— 两者齐备才可声明上架（构建会拦）。</zh-CN>
-#   <en>`C-anp-P33` (`W-anp-P187`) addition: the **module operating guides**. Previously each module had only a short
-#     section inside `docs/user-guide.md` (`D9`); this cycle adds a dedicated page per module (eight sections), attached
-#     to the Reference section. Chinese text lives in `docs/modules/`, English renders in `site/_translations/modules/`
-#     — a page may be declared published only when both exist (the build enforces this).</en>
-# </lang>
 - doc: modules/index.md
   path: modules
   parent: 参考
@@ -236,3 +125,114 @@
 - doc: modules/my-work-items.md
   path: modules/my-work-items
   parent: 参考
+
+- doc: testing-checklist.md
+  path: testing-checklist
+  parent: 参考
+
+- doc: theme-semantic-variables.md
+  path: theme-semantic-variables
+  parent: 参考
+
+- doc: third-party-dependencies.md
+  path: third-party-dependencies
+  parent: 参考
+
+- doc: font-policy-and-audit.md
+  path: font-policy-and-audit
+  parent: 参考
+
+- doc: business-application-state-machine.md
+  path: business-application-state-machine
+  parent: 参考
+
+- doc: collaboration-item-state-machine.md
+  path: collaboration-item-state-machine
+  parent: 参考
+
+- doc: documentation-map.md
+  path: documentation-map
+  parent: 参考
+
+- doc: documentation-artifacts-guide.md
+  path: documentation-artifacts-guide
+  parent: 参考
+
+- doc: contracts/README.md
+  path: contracts-readme
+  parent: 参考
+
+- doc: contracts/module-manifest.md
+  path: contracts-module-manifest
+  parent: 参考
+
+- doc: contracts/app-settings.md
+  path: contracts-app-settings
+  parent: 参考
+
+# <lang>
+#   <zh-CN>`C-anp-P32`（`W-anp-P180`）新增：代码文档页。它本身不是代码文档产物，而是**说明页**——
+#   真正的产物是 `/api/jsdoc/` 下的 JSDoc 双语 HTML（由 `site/api/jsdoc/` 快照发布，非本清单驱动）。
+#   挂到「开发」分区：读者沿 产品入口 → 评估 → 快速上手 → 学习 → 参考 → **开发** 的路径抵达。</zh-CN>
+#   <en>`C-anp-P32` (`W-anp-P180`) addition: the code-documentation page. It is not itself a code-doc artifact but an
+#   **explainer** — the real artifacts are the JSDoc bilingual HTML pages under `/api/jsdoc/` (published from the
+#   `site/api/jsdoc/` snapshot, not driven by this manifest). Attached to the Develop section so readers reach it along
+#   the path product entry → evaluate → quick start → learn → reference → **develop**.</en>
+# </lang>
+- doc: site-visual-baseline.md
+  path: site-visual-baseline
+  parent: 参考
+
+- doc: p12-sample-business-flow.md
+  path: p12-sample-business-flow
+  parent: 学习
+
+- doc: frontend-asset-guide.md
+  path: frontend-asset-guide
+  parent: 开发
+
+- doc: deployment-default-credentials.md
+  path: deployment-default-credentials
+  parent: 运维
+
+- doc: deployment-rollback-guide.md
+  path: deployment-rollback-guide
+  parent: 运维
+
+- doc: theme-package-guide.md
+  path: theme-package-guide
+  parent: 开发
+
+- doc: theme-module-contract.md
+  path: theme-module-contract
+  parent: 开发
+
+- doc: dev-guide.md
+  path: dev-guide
+  parent: 开发
+
+- doc: audit-retention-policy.md
+  path: audit-retention-policy
+  parent: 运维
+
+- doc: release-notes-template.md
+  path: release-notes-template
+  parent: 变更
+
+- doc: README.md
+  path: docs-index
+  parent: 产品概览
+
+# <lang>
+#   <zh-CN>`C-anp-P33`（`W-anp-P187`）新增：**模块详细使用说明**。此前每个模块只有 `docs/user-guide.md`
+#     里的一小节（`D9`），本周期为每个模块补独立页（八节：用途与前置 / 操作步骤 / 字段表 / 必填与校验 /
+#     存储与审计 / 权限 / 常见问题 / 边界与不做），挂在「参考」分区下。中文正文在 `docs/modules/`，英文译本
+#     在 `site/_translations/modules/` —— 两者齐备才可声明上架（构建会拦）。</zh-CN>
+#   <en>`C-anp-P33` (`W-anp-P187`) addition: the **module operating guides**. Previously each module had only a short
+#     section inside `docs/user-guide.md` (`D9`); this cycle adds a dedicated page per module (eight sections), attached
+#     to the Reference section. Chinese text lives in `docs/modules/`, English renders in `site/_translations/modules/`
+#     — a page may be declared published only when both exist (the build enforces this).</en>
+# </lang>
+- doc: code-documentation.md
+  path: code-documentation
+  parent: 开发

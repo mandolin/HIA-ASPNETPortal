@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Develop
+nav_order: 6
 permalink: /en/code-documentation/
 title: Code documentation
 ---

@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Operate
+nav_order: 4
 permalink: /en/deployment-rollback-guide/
 title: Release rollback guide
 ---

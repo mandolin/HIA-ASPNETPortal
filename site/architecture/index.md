@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 评估
+nav_order: 1
 permalink: /architecture/
 title: 架构概览
 ---

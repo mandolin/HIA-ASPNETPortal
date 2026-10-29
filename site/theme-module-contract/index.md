@@ -2,6 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 开发
+nav_order: 4
 permalink: /theme-module-contract/
 title: 模块外观契约（Theme → Module Contract）
 ---

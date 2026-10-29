@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Operate
+nav_order: 2
 permalink: /en/operations-runbook/
 title: Operations runbook
 ---

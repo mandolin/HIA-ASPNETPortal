@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Develop
+nav_order: 5
 permalink: /en/dev-guide/
 title: Developer guide
 ---

@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Changes
+nav_order: 2
 permalink: /en/release-notes-template/
 title: Release notes template
 ---

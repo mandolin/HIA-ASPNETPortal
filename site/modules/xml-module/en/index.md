@@ -2,6 +2,7 @@
 layout: default
 lang: en
 parent: Reference
+nav_order: 11
 permalink: /en/modules/xml-module/
 title: XmlModule
 ---
