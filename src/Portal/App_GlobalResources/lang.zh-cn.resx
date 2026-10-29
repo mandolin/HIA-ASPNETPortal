@@ -658,7 +658,7 @@
     <value>返回首页</value>
   </data>
   <data name="PortalBanner_Subtitle" xml:space="preserve">
-    <value>企业门户</value>
+    <value>统一身份 · 协同事项 · 运营审计</value>
   </data>
   <data name="PortalBanner_Home" xml:space="preserve">
     <value>门户首页</value>
@@ -670,7 +670,7 @@
     <value>模块操作：{0}</value>
   </data>
   <data name="Portal_Title" xml:space="preserve">
-    <value>ASP.NET 门户入门套件</value>
+    <value>HIA 企业门户</value>
   </data>
   <data name="EditLinks_MessageInvalidViewOrder" xml:space="preserve">
     <value>请输入有效的显示顺序。</value>

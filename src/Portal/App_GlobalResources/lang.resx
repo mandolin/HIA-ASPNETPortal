@@ -658,7 +658,7 @@
     <value>Return to home page</value>
   </data>
   <data name="PortalBanner_Subtitle" xml:space="preserve">
-    <value>Enterprise Portal</value>
+    <value>Unified Identity · Workflow · Audit</value>
   </data>
   <data name="PortalBanner_Home" xml:space="preserve">
     <value>Portal Home</value>
@@ -670,7 +670,7 @@
     <value>Open module action: {0}</value>
   </data>
   <data name="Portal_Title" xml:space="preserve">
-    <value>ASP.NET Portal Starter Kit</value>
+    <value>HIA Enterprise Portal</value>
   </data>
   <data name="EditLinks_MessageInvalidViewOrder" xml:space="preserve">
     <value>Enter a valid display order.</value>

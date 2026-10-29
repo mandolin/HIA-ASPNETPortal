@@ -17,7 +17,7 @@
       F4 **L0/L1 最近一次运行无失败**，且每个 Skip 都必须带自报原因——读取**新鲜的套件统计产物**判定；
       F5 镜像新鲜度 Pass——委托给镜像新鲜度门禁；
       F6 发布后线上复核结论为 PASS 或**显式** INCOMPLETE——读取**新鲜的复核统计产物**判定；
-      F7 备忘里没有"阻塞封版"级未决项，且**每条 D 条目都带显式判定**（阻塞 / 不阻塞 / 已关闭）；
+      F7 备忘里没有"阻塞封版"级未决项，且**每条 D 条目都带显式判定**（阻塞 / 不阻塞 / 已关闭）；**两模式**：封版前模式下阻塞项判 FAIL，日常自检模式下判 PASS 但逐条点名待处理项（避免未决项天天把 L0 变红）；
       F8 `docs/versioning.md` 第六节"当前版本"与 CHANGELOG 最新已发布版本一致——没漂移。
 
     **F4 / F6 为什么读产物而不是自己跑（反递归设计）**：本门禁**不调用门禁套件**——套件里包含本门禁，
@@ -45,7 +45,8 @@
       F6 the post-publish live re-check verdict is PASS or an **explicit** INCOMPLETE — judged from a **fresh re-check
          statistics artifact**;
       F7 no "blocks the release" open item in the memo, and **every D entry carries an explicit verdict**
-         (blocking / non-blocking / closed);
+         (blocking / non-blocking / closed); **two modes**: before sealing a blocking entry fails, while the daily self-check
+         passes but names each pending entry explicitly (so an open item does not turn L0 red every day);
       F8 the "current version" in section 6 of `docs/versioning.md` matches the latest released CHANGELOG version — no
          drift.
 
@@ -295,7 +296,25 @@ else {
             Add-Result 'F7' 'FAIL' ('有 ' + $noVerdict.Count + ' 条 D 条目未标判定（' + (($noVerdict | ForEach-Object { [regex]::Match($_.Value, '^\|\s*(D\d+)').Groups[1].Value }) -join '、') + '）——每条都必须标 阻塞 / 不阻塞 / 已关闭')
         }
         elseif ($blocking.Count -gt 0) {
-            Add-Result 'F7' 'FAIL' ('有 ' + $blocking.Count + ' 条 D 条目被标为阻塞封版（' + (($blocking | ForEach-Object { [regex]::Match($_.Value, '^\|\s*(D\d+)').Groups[1].Value }) -join '、') + '）')
+            # <lang>
+            #   <zh-CN>**两模式判定**（沿用 F1 已确立的"同一判据在两模式下判定不同"范式，刻意）：
+            #     · **封版前**：阻塞项必须 FAIL —— 它正是"封版前必须处理"的强制点，拦不住就等于没有这条约束；
+            #     · **日常自检**：判 PASS 但**显式列出待处理条目** —— 否则一条"下次封版前清理"的未决项会天天把 L0 变红，
+            #       而"持续告警等于没有告警"正是本脚本自己写下的原则。日常输出里逐条点名，不靠沉默掩盖。</zh-CN>
+            #   <en>**Two-mode judgement** (deliberately following the pattern F1 already established, where one criterion is judged
+            #   differently per mode):
+            #     - **Before sealing**: a blocking item must FAIL — it *is* the enforcement point for "must be handled before
+            #       sealing", and an unenforceable constraint is no constraint;
+            #     - **Daily self-check**: PASS, but the pending entries are **listed explicitly** — otherwise an item like "clean
+            #       up before the next seal" turns L0 red every single day, and "an alarm that fires daily is no alarm at all" is
+            #       this script's own stated principle. The daily output names each entry; nothing is hidden by staying silent.</en>
+            # </lang>
+            $blockingIds = (($blocking | ForEach-Object { [regex]::Match($_.Value, '^\|\s*(D\d+)').Groups[1].Value }) -join '、')
+            if ($DailySelfCheck) {
+                Add-Result 'F7' 'PASS' ('有 ' + $blocking.Count + ' 条 D 条目待封版前处理（' + $blockingIds + '）——日常自检不判红，封版前检查会判红')
+            } else {
+                Add-Result 'F7' 'FAIL' ('有 ' + $blocking.Count + ' 条 D 条目被标为阻塞封版（' + $blockingIds + '）')
+            }
         }
         else {
             $closed = @($dRows | Where-Object { $_.Value -match '判定：已关闭' }).Count

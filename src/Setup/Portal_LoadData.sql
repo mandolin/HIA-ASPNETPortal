@@ -701,7 +701,7 @@ INSERT [Portal_HtmlText] ([ModuleID], [DesktopHtml], [MobileSummary], [MobileDet
 </lang>
 */
 SET IDENTITY_INSERT [PortalCfg_Globals] ON
-INSERT [PortalCfg_Globals] ([PortalId], [PortalName], [AlwaysShowEditButton]) VALUES (1, N'ASP.NET Portal Starter Kit', 0)
+INSERT [PortalCfg_Globals] ([PortalId], [PortalName], [AlwaysShowEditButton]) VALUES (1, N'HIA Enterprise Portal', 0)
 SET IDENTITY_INSERT [PortalCfg_Globals] OFF
 /* <lang><zh-CN>默认用户种子创建历史演示管理员账号 `admin` 及其旧式口令哈希；该值只用于 Starter Kit 可重建样例环境，生产或共享环境必须通过正式账号初始化流程替换。</zh-CN><en>The default-user seed creates the historical demo administrator account `admin` and its legacy password hash; the value is only for rebuildable Starter Kit sample environments, and production or shared environments must replace it through the formal account-initialization flow.</en></lang> */
 /*
