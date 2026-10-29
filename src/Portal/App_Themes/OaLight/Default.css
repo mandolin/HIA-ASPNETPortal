@@ -2057,8 +2057,9 @@ body.portal-tab-1 .portal-pane-left .portal-module {
 }
 body.portal-tab-1 .portal-pane-left .portal-action-row {
     position: absolute;
-    left: 18px;
+    right: 18px;
     bottom: 18px;
+    margin: 0;
 }
 /* 公告卡"降低"：条目内距与行高收紧，两条公告的卡片高度下降，与加高后的登录卡齐平 */
 body.portal-tab-1 .portal-pane-content .portal-content-list-item {
@@ -2076,4 +2077,12 @@ body.portal-tab-1 .portal-pane-left .portal-signin-note {
     font-size: 12px;
     line-height: 1.6;
     opacity: .75;
+}
+/* 登录卡底部一行：「记住登录状态」靠左、登录按钮靠右，同一行底对齐。
+   字段与提示行留在上方，中部留白作为表单呼吸区；两行移出正常流后不再占据正文高度。 */
+body.portal-tab-1 .portal-pane-left .portal-checkline {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    margin: 0;
 }
