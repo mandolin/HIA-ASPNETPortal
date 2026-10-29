@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 3
 permalink: /en/modules/contacts/
 title: Contacts

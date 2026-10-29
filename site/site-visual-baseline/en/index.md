@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 32
+nav_order: 12
 permalink: /en/site-visual-baseline/
 title: Site visual baseline
 ---

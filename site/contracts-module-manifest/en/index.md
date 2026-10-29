@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 30
+nav_order: 10
 permalink: /en/contracts-module-manifest/
 title: Module contract (module.json)
 ---

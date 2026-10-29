@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 28
+nav_order: 8
 permalink: /documentation-artifacts-guide/
 title: 文档产物与工具链边界
 ---

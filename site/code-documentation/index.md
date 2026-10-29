@@ -1,8 +1,8 @@
 ---
 layout: default
 lang: zh-CN
-parent: 开发
-nav_order: 6
+parent: 参考
+nav_order: 18
 permalink: /code-documentation/
 title: 代码文档（Code documentation）
 ---

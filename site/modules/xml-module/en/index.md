@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 11
 permalink: /en/modules/xml-module/
 title: XmlModule

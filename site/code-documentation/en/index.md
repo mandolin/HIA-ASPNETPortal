@@ -1,8 +1,8 @@
 ---
 layout: default
 lang: en
-parent: Develop
-nav_order: 6
+parent: Reference
+nav_order: 18
 permalink: /en/code-documentation/
 title: Code documentation
 ---

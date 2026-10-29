@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 5
 permalink: /en/modules/document/
 title: Document

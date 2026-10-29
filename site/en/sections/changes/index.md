@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Changes
-nav_order: 8
+nav_order: 7
 lang: en
 permalink: /en/sections/changes/
 ---

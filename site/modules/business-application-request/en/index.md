@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 13
 permalink: /en/modules/business-application-request/
 title: Business Application (BusinessApplicationRequest)

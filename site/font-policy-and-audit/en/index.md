@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 24
+nav_order: 4
 permalink: /en/font-policy-and-audit/
 title: Font policy and audit
 ---

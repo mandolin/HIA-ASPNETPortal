@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 22
+nav_order: 2
 permalink: /en/theme-semantic-variables/
 title: Theme semantic variables
 ---

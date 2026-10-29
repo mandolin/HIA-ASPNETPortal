@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 学习
 nav_order: 9
 permalink: /modules/quick-links/
 title: 快速链接（QuickLinks）

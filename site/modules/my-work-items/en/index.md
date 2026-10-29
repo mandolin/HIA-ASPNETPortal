@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 20
 permalink: /en/modules/my-work-items/
 title: My Work Items (MyWorkItems)

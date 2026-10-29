@@ -1,8 +1,8 @@
 ---
 layout: default
 lang: zh-CN
-parent: 开发
-nav_order: 2
+parent: 参考
+nav_order: 16
 permalink: /frontend-asset-guide/
 title: Web Forms 呈现与前端资产维护
 ---

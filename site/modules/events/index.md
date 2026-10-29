@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 学习
 nav_order: 6
 permalink: /modules/events/
 title: 事件（Events）

@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 27
+nav_order: 7
 permalink: /en/documentation-map/
 title: Documentation map and navigation index
 ---
@@ -16,7 +16,21 @@ title: Documentation map and navigation index
 - **Developer / contributor**: architecture design decisions → developers and contributors → API and technical contracts →
  in-code documentation (in source)
 - **Auditor / security**: operations, deployment, security → architecture design decisions → change, compatibility and
- release
+  release
+
+## Two reader tracks and section ownership (established 2026-10-29)
+
+The site is split **by reader**, and the two tracks never restate each other (restating is how documents drift):
+
+| Section | Reader | Question it answers | Content |
+| --- | --- | --- | --- |
+| **Learn** | Site operators / end users | "How do I use this feature? How do I get a task done?" | The 20 module usage guides (`docs/modules/`) plus business flows (`p12-sample-business-flow.md` and others) |
+| **Reference** | Developers / secondary developers | "How does it work? What do I change or extend? Where is the API?" | Contracts and state machines (`docs/contracts/`, the two state-machine pages), theme and asset documents, the **developer-guide family** (module development, theme packages, theme module contract, frontend assets, developer overview, code documentation explainer), plus the testing checklist and documentation-artifacts guide |
+
+> **Rule of thumb**: if the reader's task is to **change the system**, it belongs in Reference; if it is to **use the
+> system**, it belongs in Learn. The former "Develop" section has been merged into "Reference", so the navigation now runs
+> seven sections: Product overview → Evaluate → Quick start → Learn → Reference → Operate → Changes.
+> The house style and prohibitions live in an internal standard (internal material, not published).
 
 ## Documentation family index
 
@@ -99,4 +113,4 @@ Not in `docs/`; lives in source node/flow comments.
  correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)
 
-<!-- build-stamp: 67C4002813D5 -->
+<!-- build-stamp: 5A2A3388FC7C -->

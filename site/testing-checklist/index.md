@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 21
+nav_order: 1
 permalink: /testing-checklist/
 title: 测试清单
 ---

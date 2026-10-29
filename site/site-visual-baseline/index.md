@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 参考
-nav_order: 32
+nav_order: 12
 permalink: /site-visual-baseline/
 title: 官网视觉基线
 ---

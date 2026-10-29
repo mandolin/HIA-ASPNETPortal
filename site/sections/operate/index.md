@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 运维
-nav_order: 7
+nav_order: 6
 lang: zh-CN
 permalink: /sections/operate/
 ---

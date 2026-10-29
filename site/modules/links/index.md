@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 学习
 nav_order: 8
 permalink: /modules/links/
 title: 链接（Links）

@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 7
 permalink: /en/modules/image-module/
 title: ImageModule

@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 学习
 nav_order: 15
 permalink: /modules/employee-profile-correction-request/
 title: 员工资料更正申请（EmployeeProfileCorrectionRequest）

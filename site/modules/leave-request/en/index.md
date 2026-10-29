@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 18
 permalink: /en/modules/leave-request/
 title: Leave Request (LeaveRequest)

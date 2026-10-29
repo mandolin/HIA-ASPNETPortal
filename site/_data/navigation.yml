@@ -1,7 +1,7 @@
 # <lang>
 #   <zh-CN>双语导航骨架（C-anp-P22 `W-anp-P130` 建立，`W-anp-P132` 改为**纯分区**）。
 #     顺序严格沿用 `docs/documentation-map.md` 的读者路径：
-#     产品入口 → 评估 → 快速上手 → 学习 → 参考 → 开发 → 运维 → 变更。
+#     产品入口 → 评估 → 快速上手 → 学习 → 参考 → 运维 → 变更。
 #     每条必须**同时提供中文与英文标题**，缺一即视为未就绪（原则4：双语并行）。
 #
 #     **为何没有 `url`（`W-anp-P132` 的修正）**：初版给每个分区都写了理想化的 `url`
@@ -12,7 +12,7 @@
 #     分区下暂无页面时只是不展开，**不会出现坏链**。</zh-CN>
 #   <en>Bilingual navigation skeleton (established in C-anp-P22 `W-anp-P130`, changed to **pure sections** in `W-anp-P132`).
 #     The order strictly follows the reader path in `docs/documentation-map.md`:
-#     product entry → evaluate → quick start → learn → reference → develop → operate → change.
+#     product entry → evaluate → quick start → learn → reference → operate → changes.
 #     Every entry must carry **both Chinese and English titles**; a missing one means not ready (Principle 4: bilingual parity).
 #
 #     **Why there is no `url` (`W-anp-P132` fix)**: the first version gave every section an idealised `url`
@@ -36,8 +36,6 @@
 - title: 参考
   title_en: Reference
 
-- title: 开发
-  title_en: Develop
 
 - title: 运维
   title_en: Operate

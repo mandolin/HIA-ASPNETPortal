@@ -38,8 +38,23 @@
 #     navigation skeleton.</en>
 # </lang>
 
+
 - doc: product-overview.md
   path: product-overview
+  parent: 产品概览
+
+# <lang>
+#   <zh-CN>`C-anp-P33`（`W-anp-P187`）新增：**模块详细使用说明**。此前每个模块只有 `docs/user-guide.md`
+#     里的一小节（`D9`），本周期为每个模块补独立页（八节：用途与前置 / 操作步骤 / 字段表 / 必填与校验 /
+#     存储与审计 / 权限 / 常见问题 / 边界与不做），挂在「参考」分区下。中文正文在 `docs/modules/`，英文译本
+#     在 `site/_translations/modules/` —— 两者齐备才可声明上架（构建会拦）。</zh-CN>
+#   <en>`C-anp-P33` (`W-anp-P187`) addition: the **module operating guides**. Previously each module had only a short
+#     section inside `docs/user-guide.md` (`D9`); this cycle adds a dedicated page per module (eight sections), attached
+#     to the Reference section. Chinese text lives in `docs/modules/`, English renders in `site/_translations/modules/`
+#     — a page may be declared published only when both exist (the build enforces this).</en>
+# </lang>
+- doc: README.md
+  path: docs-index
   parent: 产品概览
 
 - doc: architecture.md
@@ -49,82 +64,71 @@
 - doc: user-guide.md
   path: user-guide
   parent: 快速上手
-
-- doc: versioning.md
-  path: versioning
-  parent: 变更
-
-- doc: module-development-guide.md
-  path: module-development
-  parent: 开发
-
-- doc: deployment-checklist.md
-  path: deployment-checklist
-  parent: 运维
-
-- doc: operations-runbook.md
-  path: operations-runbook
-  parent: 运维
 - doc: modules/index.md
   path: modules
-  parent: 参考
+  parent: 学习
 - doc: modules/announcements.md
   path: modules/announcements
-  parent: 参考
+  parent: 学习
 - doc: modules/contacts.md
   path: modules/contacts
-  parent: 参考
+  parent: 学习
 - doc: modules/discussion.md
   path: modules/discussion
-  parent: 参考
+  parent: 学习
 - doc: modules/document.md
   path: modules/document
-  parent: 参考
+  parent: 学习
 - doc: modules/events.md
   path: modules/events
-  parent: 参考
+  parent: 学习
 - doc: modules/image-module.md
   path: modules/image-module
-  parent: 参考
+  parent: 学习
 - doc: modules/links.md
   path: modules/links
-  parent: 参考
+  parent: 学习
 - doc: modules/quick-links.md
   path: modules/quick-links
-  parent: 参考
+  parent: 学习
 - doc: modules/html-module.md
   path: modules/html-module
-  parent: 参考
+  parent: 学习
 - doc: modules/xml-module.md
   path: modules/xml-module
-  parent: 参考
+  parent: 学习
 - doc: modules/signin.md
   path: modules/signin
-  parent: 参考
+  parent: 学习
 - doc: modules/business-application-request.md
   path: modules/business-application-request
-  parent: 参考
+  parent: 学习
 - doc: modules/employee-profile-confirm.md
   path: modules/employee-profile-confirm
-  parent: 参考
+  parent: 学习
 - doc: modules/employee-profile-correction-request.md
   path: modules/employee-profile-correction-request
-  parent: 参考
+  parent: 学习
 - doc: modules/enterprise-capability-workbench.md
   path: modules/enterprise-capability-workbench
-  parent: 参考
+  parent: 学习
 - doc: modules/expense-reimbursement.md
   path: modules/expense-reimbursement
-  parent: 参考
+  parent: 学习
 - doc: modules/leave-request.md
   path: modules/leave-request
-  parent: 参考
+  parent: 学习
 - doc: modules/module-probe.md
   path: modules/module-probe
-  parent: 参考
+  parent: 学习
+
 - doc: modules/my-work-items.md
   path: modules/my-work-items
-  parent: 参考
+  parent: 学习
+
+- doc: p12-sample-business-flow.md
+  path: p12-sample-business-flow
+  parent: 学习
 
 - doc: testing-checklist.md
   path: testing-checklist
@@ -166,10 +170,6 @@
   path: contracts-module-manifest
   parent: 参考
 
-- doc: contracts/app-settings.md
-  path: contracts-app-settings
-  parent: 参考
-
 # <lang>
 #   <zh-CN>`C-anp-P32`（`W-anp-P180`）新增：代码文档页。它本身不是代码文档产物，而是**说明页**——
 #   真正的产物是 `/api/jsdoc/` 下的 JSDoc 双语 HTML（由 `site/api/jsdoc/` 快照发布，非本清单驱动）。
@@ -179,17 +179,43 @@
 #   `site/api/jsdoc/` snapshot, not driven by this manifest). Attached to the Develop section so readers reach it along
 #   the path product entry → evaluate → quick start → learn → reference → **develop**.</en>
 # </lang>
+- doc: contracts/app-settings.md
+  path: contracts-app-settings
+  parent: 参考
+
 - doc: site-visual-baseline.md
   path: site-visual-baseline
   parent: 参考
 
-- doc: p12-sample-business-flow.md
-  path: p12-sample-business-flow
-  parent: 学习
+- doc: module-development-guide.md
+  path: module-development
+  parent: 参考
+
+- doc: theme-package-guide.md
+  path: theme-package-guide
+  parent: 参考
+
+- doc: theme-module-contract.md
+  path: theme-module-contract
+  parent: 参考
 
 - doc: frontend-asset-guide.md
   path: frontend-asset-guide
-  parent: 开发
+  parent: 参考
+
+- doc: dev-guide.md
+  path: dev-guide
+  parent: 参考
+- doc: code-documentation.md
+  path: code-documentation
+  parent: 参考
+
+- doc: deployment-checklist.md
+  path: deployment-checklist
+  parent: 运维
+- doc: operations-runbook.md
+  path: operations-runbook
+  parent: 运维
 
 - doc: deployment-default-credentials.md
   path: deployment-default-credentials
@@ -199,40 +225,14 @@
   path: deployment-rollback-guide
   parent: 运维
 
-- doc: theme-package-guide.md
-  path: theme-package-guide
-  parent: 开发
-
-- doc: theme-module-contract.md
-  path: theme-module-contract
-  parent: 开发
-
-- doc: dev-guide.md
-  path: dev-guide
-  parent: 开发
-
 - doc: audit-retention-policy.md
   path: audit-retention-policy
   parent: 运维
 
+- doc: versioning.md
+  path: versioning
+  parent: 变更
+
 - doc: release-notes-template.md
   path: release-notes-template
   parent: 变更
-
-- doc: README.md
-  path: docs-index
-  parent: 产品概览
-
-# <lang>
-#   <zh-CN>`C-anp-P33`（`W-anp-P187`）新增：**模块详细使用说明**。此前每个模块只有 `docs/user-guide.md`
-#     里的一小节（`D9`），本周期为每个模块补独立页（八节：用途与前置 / 操作步骤 / 字段表 / 必填与校验 /
-#     存储与审计 / 权限 / 常见问题 / 边界与不做），挂在「参考」分区下。中文正文在 `docs/modules/`，英文译本
-#     在 `site/_translations/modules/` —— 两者齐备才可声明上架（构建会拦）。</zh-CN>
-#   <en>`C-anp-P33` (`W-anp-P187`) addition: the **module operating guides**. Previously each module had only a short
-#     section inside `docs/user-guide.md` (`D9`); this cycle adds a dedicated page per module (eight sections), attached
-#     to the Reference section. Chinese text lives in `docs/modules/`, English renders in `site/_translations/modules/`
-#     — a page may be declared published only when both exist (the build enforces this).</en>
-# </lang>
-- doc: code-documentation.md
-  path: code-documentation
-  parent: 开发

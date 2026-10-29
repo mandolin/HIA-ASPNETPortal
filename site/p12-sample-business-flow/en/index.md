@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Learn
-nav_order: 1
+nav_order: 21
 permalink: /en/p12-sample-business-flow/
 title: Sample business flow
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 学习
 nav_order: 14
 permalink: /modules/employee-profile-confirm/
 title: 员工资料确认（EmployeeProfileConfirm）

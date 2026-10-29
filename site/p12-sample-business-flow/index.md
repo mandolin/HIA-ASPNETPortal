@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 1
+nav_order: 21
 permalink: /p12-sample-business-flow/
 title: 员工资料更正样板业务路径
 ---

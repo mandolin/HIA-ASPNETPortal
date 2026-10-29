@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 28
+nav_order: 8
 permalink: /en/documentation-artifacts-guide/
 title: Documentation artefacts and toolchain boundaries
 ---

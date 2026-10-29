@@ -1,8 +1,8 @@
 ---
 layout: default
 lang: en
-parent: Develop
-nav_order: 4
+parent: Reference
+nav_order: 15
 permalink: /en/theme-module-contract/
 title: Theme-module appearance contract
 ---

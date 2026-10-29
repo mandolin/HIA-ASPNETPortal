@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: zh-CN
-parent: 参考
+parent: 学习
 nav_order: 7
 permalink: /modules/image-module/
 title: 图片（ImageModule）

@@ -2,7 +2,7 @@
 layout: default
 lang: en
 parent: Reference
-nav_order: 23
+nav_order: 3
 permalink: /en/third-party-dependencies/
 title: Third-party dependency audit
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 12
 permalink: /en/modules/signin/
 title: Signin

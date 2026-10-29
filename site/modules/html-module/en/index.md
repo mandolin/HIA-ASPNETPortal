@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: en
-parent: Reference
+parent: Learn
 nav_order: 10
 permalink: /en/modules/html-module/
 title: HtmlModule

@@ -1,8 +1,8 @@
 ---
 layout: default
 lang: en
-parent: Develop
-nav_order: 2
+parent: Reference
+nav_order: 16
 permalink: /en/frontend-asset-guide/
 title: Web Forms presentation and frontend assets
 ---
