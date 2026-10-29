@@ -84,6 +84,10 @@
 - doc: operator-handbook.md
   path: operator-handbook
   parent: 学习
+
+- doc: business-application-review.md
+  path: business-application-review
+  parent: 学习
 - doc: modules/index.md
   path: modules
   parent: 学习

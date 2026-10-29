@@ -41,6 +41,9 @@ modules covered together: how their fields differ, what lands where after submit
 file a correction request → who handles it → when you cannot see the progress).
 - `operator-handbook.md`: **Operator handbook: running the portal day to day** (publish an announcement → adjust tabs and
 visibility → enable and configure modules → a quick map of the administration pages).
+- `business-application-review.md`: **Reviewer path: how a business application gets reviewed** (the administration review
+page → status filter → approve / return / reject → where to look afterwards; including the boundary that a failed work-item
+projection does not roll back the application state).
 - `testing-checklist.md`: build, test, manual verification and pre-release checklists.
 - `documentation-artifacts-guide.md`: input/output boundaries for public documentation, JSDoc, XML documentation and
  generated output.

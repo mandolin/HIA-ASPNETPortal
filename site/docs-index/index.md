@@ -27,6 +27,7 @@ title: HIA-ASPNETPortal 文档
 - `leave-and-expense-workflow.md`：**请假与报销：从填写到出现在待办里**（两个同构模块一次讲清：字段差异、提交后落库与待办、失败路径）。
 - `profile-confirm-and-correct.md`：**员工资料：确认与更正**（只读确认 → 发现错误 → 提交更正申请 → 谁在处理 → 看不到进度时）。
 - `operator-handbook.md`：**运营者手册：把门户用起来**（发公告 → 调整页签与可见性 → 模块启停与设置 → 后台页面速查）。
+- `business-application-review.md`：**审核人操作路径：业务申请怎么批**（后台审核页 → 状态筛选 → 批准/退回/驳回 → 批完去哪查；含"待办投影失败不回滚申请状态"等边界）。
 - `testing-checklist.md`：构建、测试、手工验证和发布前检查清单。
 - `documentation-artifacts-guide.md`：公开文档、JSDoc、XML 文档和生成物的输入输出边界。
 - `documentation-review-checklist.md`：文档复核**人工走查清单**（正确性 / 双语对等 / 读者可达性 / 不误信门禁），对应自动化门禁无法证明的部分。
@@ -73,4 +74,4 @@ title: HIA-ASPNETPortal 文档
 - 本站文档同时提供中文与英文两个版本，可随时切换。
 - 文档按「产品概览 / 评估 / 快速上手 / 学习 / 参考 / 开发 / 运维 / 变更」八个分区组织，见[文档地图]({{ site.baseurl }}/documentation-map/)。
 
-<!-- build-stamp: 6EDD918ADBAF -->
+<!-- build-stamp: 30982FA837C0 -->

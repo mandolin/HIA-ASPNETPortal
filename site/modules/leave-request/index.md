@@ -2,7 +2,7 @@
 layout: default
 lang: zh-CN
 parent: 学习
-nav_order: 23
+nav_order: 24
 permalink: /modules/leave-request/
 title: 请假申请（LeaveRequest）
 ---

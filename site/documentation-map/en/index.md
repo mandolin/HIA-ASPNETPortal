@@ -69,6 +69,9 @@ Not in `docs/`; lives in source node/flow comments.
 - `operator-handbook.md` — **Operator handbook: running the portal day to day** (publish an announcement → adjust tabs and
   visibility → enable and configure modules → a quick map of the administration pages; it states plainly that the
   announcement guest-visibility flag and tab ordering have no administration entry point)
+- `business-application-review.md` — **Reviewer path: how a business application gets reviewed** (the administration review
+  page → status filter → approve / return / reject → where to look afterwards; including the boundary that a failed work-item
+  projection does not roll back the application state, and that there is no approval-trail screen)
 - `module-mechanics-and-extension.md` — **Module mechanics and secondary development** (the Reference overview: the five
   layers → profiles → adding a module → changing the look → the four gates → where the API documentation lives)
 - **Gaps registered after the two-track re-cut (2026-10-29) — now filled**: three end-to-end task paths (business requests /
@@ -132,4 +135,4 @@ Not in `docs/`; lives in source node/flow comments.
  correctness / bilingual equivalence / reader reachability / not over-trusting the gates)
 - `README.md` — the repository entry point (with documentation section navigation pointing to this map)
 
-<!-- build-stamp: C9F4C231B339 -->
+<!-- build-stamp: F4571077632E -->
