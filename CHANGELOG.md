@@ -6,6 +6,29 @@
 
 ## [Unreleased]
 
+## [v2.1.0] - 2026-10-29
+**门户信息架构与导航可用性收口**：把用户实测提出的 5 条槽点（不居中 / 菜单空白 / 首页单薄 / 缺 logo / 缺版权）背后的**结构性**问题一并收口。对应 `C-anp-P45`（W-anp-P253–W-anp-P258）、ADR 0026（内置内容能力包与导航可见性配置）、ADR 0027（匿名可见内容与公告游客可见属性）。
+### 新增
+- **导航可见性进入 L3 系统设置**：`Portal.Navigation.HideTabsWithoutRenderableModules` / `HiddenNavigationKeys` / `ExcludedNavigationKeyPrefixes` / `LogHiddenTabs` 四键落 `PortalCfg_SystemSettings`，由 `PortalNavigationSettings` 强类型读取（数据库覆盖 → appSettings → 代码默认；解析失败退回"不隐藏任何页签"的保守默认）。
+- **仅对匿名隐藏**：`Portal.Navigation.AnonymousHiddenNavigationKeys` 让业务功能入口对登录用户可见、对匿名不可见，避免"匿名点进因未认证而无内容的页面"。
+- **公告条目游客可见属性**：`Portal_Announcements.IsGuestVisible`（默认 0，存量升级后不自动公开）；匿名只读取标记为游客可见的条目，登录用户保持全量视图。
+- **模块包契约门禁** `Test-PortalModulePackageContract.ps1`（M1–M5）+ 登记清单 `dev/module-package-registry.json`：`Enabled` 追加必须先登记；每个 `module.json` 的 `packageId` 必须被档位并集、`Enabled` 或显式"不挂载"清单覆盖——治住"模块在仓库里却永远不渲染、无人发现"的静默漏覆盖。
+- **`HIA.Help` 静态帮助模块**：纯静态、不读库、不接受请求参数、**不开放后台编辑**（规避 ADR 0027 的 XSS 面），作为菜单项对匿名可见。
+- **品牌标识**：`src/Portal/Images/portal-logo.png`（海洋之心主题，蓝白圆形，128×128 / 16.7KB）。
+### 变更
+- **`tabId` 权威化**：`PortalSettings` 只按 `tabId` 定位页签并由当前导航集合重算索引；隐藏页签不再让 `tabindex` 整体位移而使历史书签与截图清单失效（同时闭合备忘 D16 的异常）。
+- **居中修正**：`.portal-content-stage` 补自动外边距（此前只有 `max-width` 而无自动外边距，宽屏下内容贴左、右侧大片空白）。
+- **版权页脚**：新增 `.portal-footer`，文案「happy-dev 版权所有 2026-」与「© 2026- happy-dev. All rights reserved.」；页脚置于主壳层内，左对齐随各主题自身偏移，不硬编码列宽。
+- **首页信息架构**：形成「账户登录 | 门户公告 | 帮助与说明」三栏；公告仅展示标记为游客可见的条目，演示型存量公告一律不展示。
+- **移除公开导航死链**：横幅「门户文档」原指向 `/admin/NotImplemented.aspx`（未实现占位页），已移除。
+### 修复
+- **契约门禁读了不生效的配置源**：`Config/appSettings.json` 为嵌套结构 `{ appSettings: {...} }`，覆盖逻辑只遍历顶层导致一个 `Portal.*` 键都取不到、门禁一直读 `Web.config`（"写了等于没写"）；现显式下潜并在解析为空时报失败而非静默跳过。
+- **无障碍门禁解析器截断标签**：标签扫描正则 `<img\b[^>]*>` 会被属性内 ASP.NET 内联表达式（`%>` 含 `>`）提前截断，使已写 `alt` 的 `img` 被误判缺 `alt`；现先归一化内联表达式再扫描，断言强度只增不减（注入真缺 `alt` 的 `img` 仍必须 Fail，已双向验证）。
+- **Legacy CSS 兼容违规**：新增样式曾使用 `display:flex` 与 `var()` 兜底写法，违反 IE9/IE8 基础路径；改为块级堆叠 + `float` 两栏，颜色遵循 P18 双声明范式（显式 hex 在前、`var(--portal-*)` 在后），并同步进入全部 8 套主题。
+### 验证
+- 导航：匿名仅见首页与帮助；登录后见业务功能入口；直接访问被隐藏页签仍按 `AccessRoles` 判定。
+- 登录链路：建测试用户走真实链路（一次性 RSA 公钥加密口令 → Signin 表单 → 取 `.ASPXAUTH` 票据），业务页对登录用户渲染真实内容。
+- 门禁：L0 54 项全绿；契约门禁注入验证（清空"不挂载"清单必须干净失败并指名缺失包）；无障碍门禁注入验证（真缺 `alt` 必须 Fail）。
 ## [v2.0.0] - 2026-10-28
 **生产就绪收口（`M-ANP-TRUSTED-PORTAL` / L7 达成）**：真实目标环境证据闭环后封版 `v2.0.0`。对应 `C-anp-P40`（目标环境部署与运行期基线）、`C-anp-P41`（运行期证据采集）、`C-anp-P44`（真实 IE9 复测）、`C-anp-P42`（生产就绪收口）。本版以环境证据闭环与发布收口为主，并修复目标环境暴露的 5 个真实缺陷。
 ### 新增
