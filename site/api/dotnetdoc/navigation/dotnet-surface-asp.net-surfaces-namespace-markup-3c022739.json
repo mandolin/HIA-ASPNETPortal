@@ -94,6 +94,16 @@
       "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-4ac999e9.json"
     },
     {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-default.master-6",
+      "kind": "type",
+      "label": "Default",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-47c99530.json"
+    },
+    {
       "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-1",
       "kind": "type",
       "label": "DesktopDefault",
@@ -232,6 +242,26 @@
         "dotnet"
       ],
       "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f4d6dcf0.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-5",
+      "kind": "type",
+      "label": "DesktopPortalBanner",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f5d6de83.json"
+    },
+    {
+      "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-6",
+      "kind": "type",
+      "label": "DesktopPortalBanner",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "childrenPath": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f6d6e016.json"
     },
     {
       "id": "dotnet:surface:asp.net-surfaces:namespace:markup:type:hia-document-dotnetdoc-markup-comment-src-portal-genericerrorpage.aspx-1",

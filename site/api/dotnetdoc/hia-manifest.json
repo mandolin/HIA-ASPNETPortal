@@ -1536,6 +1536,11 @@
       "contentType": "application/json; charset=utf-8"
     },
     {
+      "path": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-47c99530.json",
+      "role": "index",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
       "path": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f9bc2797.json",
       "role": "index",
       "contentType": "application/json; charset=utf-8"
@@ -1602,6 +1607,16 @@
     },
     {
       "path": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f4d6dcf0.json",
+      "role": "index",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "path": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f5d6de83.json",
+      "role": "index",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "path": "navigation/dotnet-surface-asp.net-surfaces-namespace-markup-type-hia-document-dotne-f6d6e016.json",
       "role": "index",
       "contentType": "application/json; charset=utf-8"
     },
@@ -56076,6 +56091,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "entries/hia-document-dotnetdoc-markup-comment-src-portal-default.master-6-f8bbb3a9.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnetdoc-markup-comment-src-portal-default.master-6-f8bbb3a9.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-1-c76d9330.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
@@ -57422,6 +57447,26 @@
     },
     {
       "path": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-134b537d.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-124b51ea.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-124b51ea.html",
+      "role": "entry",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "entries/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-114b5057.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "pages/hia-document-dotnetdoc-markup-comment-src-portal-desktopportalbanner.asc-114b5057.html",
       "role": "entry",
       "contentType": "text/html; charset=utf-8"
     },
@@ -63386,16 +63431,6 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
-      "path": "sources/c7b51c7a928f2c32b97d92fed91b5d605c9d8c41974bba643a19dcf3678a4a85.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "sources/1be6c602ed5dcd26a6fed85c4c381e0bf127d913353617a680c0f2b78507740b.L31.html",
-      "role": "asset",
-      "contentType": "text/html; charset=utf-8"
-    },
-    {
       "path": "sources/241234c03f3fca32022ca2501b77d5e38a8d27749e87caee709cfc250b5241df.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -65727,16 +65762,6 @@
     },
     {
       "path": "sources/268492bbaa1b62fe9031a63e8137b7e62255e0b04d4aedfe58da16cc6e2b5fe7.L46.html",
-      "role": "asset",
-      "contentType": "text/html; charset=utf-8"
-    },
-    {
-      "path": "sources/d623cea5b1034b7b41cc36ca6b06263e771977bb0d7340c4154d11acb9271ec1.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "sources/2687d3aeb9824992bb30ea551c45c5d8198b09e82c5dc1adef330169a05f67a0.L46.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -82511,6 +82536,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/3fa6d31958f3fa67a79865463f40911e9bae689af1d95fa7a548156f9ae97beb.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/7cc9ce197547315fc44a6250cf02eb005a91488ff655d7baaeb827a188c3a1d8.L35.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/344647946eaaabc70010592ad39749d0c37e22b4f53e70e9290717a144ffc3c4.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -85796,6 +85831,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/846b970b83c0e26c7f55d85a0e2599aefda243240f5588911d3195cb2584f348.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/8f8c3c1e7bae5bfadf088ebb40f8fc6200be85fbc1d686340293bf6088c7d772.L1.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/b6e10a7dbc20efa5224ad86d8634ccc83a35e73252c84493f9938ac195425d98.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -88342,16 +88387,6 @@
     },
     {
       "path": "sources/9cdbc0cbbc27613c77c7fef825ba46c8b6be583e30dffdd2eed6239e8dea1d60.L55.html",
-      "role": "asset",
-      "contentType": "text/html; charset=utf-8"
-    },
-    {
-      "path": "sources/7358a055d666f93cf139bf9243c54bd9d7305dddcb2881c651f82e121d834839.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "sources/9cf27fdd0892801154e8e52b67bfb554a5cefb7c405fcb7e13587e267769e77a.L17.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -91871,6 +91906,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/c7b51c7a928f2c32b97d92fed91b5d605c9d8c41974bba643a19dcf3678a4a85.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/afac3cf5f097ec51a5a7af6027cfe244e8b27c9f493bc6e7738ca069753d7c03.L49.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/17aaf17985fbbda3583b764ca6b3f0494ff6843328c2389bfe4fa0166bd67922.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -93421,6 +93466,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/7358a055d666f93cf139bf9243c54bd9d7305dddcb2881c651f82e121d834839.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/b74160ceef5fbcd02464c8a3266a7b287240e67e06b6c0b91808c4f0ec540b0a.L27.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/349f59beecaf4c5cac0abf5ae7af83b011d4154a18a0c998e2ffc849eaa1c9ce.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -94602,6 +94657,16 @@
     },
     {
       "path": "sources/bd733356ad587bbdbd8113386fb6df450012a2e772836cd416a52add18fa2c89.L247.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "sources/9f4132fa5ac1f96bc1ad3f5533b9045e63926af794be4e73a5d1195b1d2fa87d.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/bd7b5227a52eb4872eab641950d6640d311c62002e4b4cedd141cbbdae598750.L13.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -98446,6 +98511,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/d623cea5b1034b7b41cc36ca6b06263e771977bb0d7340c4154d11acb9271ec1.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/d21cdb92c5bc0f1ffb548e57ee65d0e9f37ea273cb993747f3bdd07548f5f265.L64.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/16565d1042ba3a3eef40d193690a14a513294c42ade1ebd23916263ce78ded9e.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -100512,16 +100587,6 @@
     },
     {
       "path": "sources/dcad322a6f46a976cfd95066b26f92b4aaf0973b24da2bc2d9fac0833fdbf888.L69.html",
-      "role": "asset",
-      "contentType": "text/html; charset=utf-8"
-    },
-    {
-      "path": "sources/22e4d6f45063fd7fa6b30bd4637e13682cd1e1ab33dd0646d01399f0a41c8730.txt",
-      "role": "asset",
-      "contentType": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "sources/dcc1cef62ab04e123a379de3f8a24df0e0131789676d1db99203695d69fb90a9.L1.html",
       "role": "asset",
       "contentType": "text/html; charset=utf-8"
     },
@@ -106041,6 +106106,16 @@
       "contentType": "text/html; charset=utf-8"
     },
     {
+      "path": "sources/9e0e9ae3708b029a93722c09108f0d8f61fb0eb119e7406eb0cee8d95ccaf00c.txt",
+      "role": "asset",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sources/f93e6146984a81b587bbbdcf68a366addb8b20bb81207c1cb1c107ca430420db.L52.html",
+      "role": "asset",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
       "path": "sources/bd742dc2a1bcf3c2db53c5c1d2c843254e24f8837fb8b391714e5f43fe73c495.txt",
       "role": "asset",
       "contentType": "text/plain; charset=utf-8"
@@ -107339,8 +107414,8 @@
       "dotnet"
     ],
     "entryCounts": {
-      "all": 5391,
-      "dotnet": 5391
+      "all": 5394,
+      "dotnet": 5394
     },
     "theme": {
       "contract": "documentation-portal-theme",
@@ -107359,14 +107434,14 @@
     "navigationIndex": {
       "contract": "hia-project-navigation-index",
       "contractVersion": "0.1.0-draft",
-      "entryCount": 5391,
+      "entryCount": 5394,
       "path": "project-index.json"
     },
     "relationGraph": {
       "contract": "hia-project-relation-graph",
       "contractVersion": "0.1.0-draft",
-      "nodeCount": 5821,
-      "relationCount": 5398,
+      "nodeCount": 5824,
+      "relationCount": 5401,
       "path": "project-index.json"
     }
   },

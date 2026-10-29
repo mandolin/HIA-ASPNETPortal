@@ -212,13 +212,26 @@ $markupFiles = Get-ChildItem (Join-Path $repoRoot 'src\Portal') -Recurse -File -
 foreach ($f in $markupFiles) {
     $text = [System.IO.File]::ReadAllText($f.FullName)
     $rel = $f.FullName.Substring($repoRoot.Length + 1)
-    foreach ($m in [regex]::Matches($text, '<img\b[^>]*>')) {
+    # <lang>
+    #   <zh-CN>归一化 ASP.NET 内联表达式：`<%= %>` / `<%# %>` / `<% %>` / `<%-- --%>` 的内容里可能含 `>`，
+    #   而标签扫描用的是 `<img\b[^>]*>` 这类正则 —— 内联表达式的 `%>` 会让标签被**提前截断**，
+    #   于是 `alt="HIA"` 明明存在却被判成"缺 alt"（真实发生于门户 logo 的 `src="<%= ... %>"`）。
+    #   这里把内联表达式整体替换为不含 `>` 与引号的占位符 `ASPXINLINE`：既让标签被完整扫描，
+    #   又不会把 `alt="<%= 变量 %>"` 这类写法误判为缺 alt —— 断言强度只增不减。</zh-CN>
+    #   <en>Normalize ASP.NET inline expressions: `<%= %>` / `<%# %>` / `<% %>` / `<%-- --%>` may contain `>`, while tag
+    #   scanning uses patterns like `<img\b[^>]*>`. The `%>` of an inline expression truncates the tag early, so an
+    #   existing `alt="HIA"` is reported as missing (observed on the portal logo's `src="<%= ... %>"`). Replacing the inline
+    #   expression with a placeholder free of `>` and quotes — `ASPXINLINE` — lets the whole tag be scanned and never turns
+    #   `alt="<%= variable %>"` into a false "missing alt": the assertion only gets stronger, never weaker.</en>
+    # </lang>
+    $scanText = $text -replace '<%[\s\S]*?%>', 'ASPXINLINE'
+    foreach ($m in [regex]::Matches($scanText, '<img\b[^>]*>')) {
         if ($m.Value -notmatch '\balt=') { $imgNoAlt += $rel }
     }
-    foreach ($m in [regex]::Matches($text, '<(div|span|td|tr|li|img)\b[^>]*\sonclick=')) {
+    foreach ($m in [regex]::Matches($scanText, '<(div|span|td|tr|li|img)\b[^>]*\sonclick=')) {
         $onclickNonFocusable += ("{0} :: {1}" -f $rel, $m.Value.Substring(0, [Math]::Min(100, $m.Value.Length)))
     }
-    foreach ($m in [regex]::Matches($text, '<a\b[^>]*>')) {
+    foreach ($m in [regex]::Matches($scanText, '<a\b[^>]*>')) {
         # <lang><zh-CN>命名锚豁免：name/id 无 href 是跳转目标不是交互元素。</zh-CN>
         # <en>Named-anchor exemption: name/id without href is a jump target, not an interactive element.</en></lang>
         if ($m.Value -notmatch '\bhref=' -and $m.Value -notmatch '\b(name|id)=') { $anchorNoHref += ("{0} :: {1}" -f $rel, $m.Value) }

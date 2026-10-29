@@ -1980,3 +1980,39 @@ body.portal-theme-stateclassiclight .employee-profile-confirm-message {
 body.portal-theme-stateclassiclight .employee-profile-correction-message {
     color: var(--portal-danger-text, #8a1f1f);
 }
+/* ===================================================================
+   门户品牌标识、整体居中与页脚版权（随 UI 落地一并进入全部主题）
+
+   兼容性约束（Test-PortalLegacyCssCompatibility）：IE9/IE8 为基础路径，因此本段
+   1) 不使用 Flex/Grid 布局（品牌区改为块级堆叠，页脚改为 float 两栏）；
+   2) 颜色遵循 P18 语义变量双声明范式——显式 hex 在前、var(--portal-*) 在后，
+      回退值即 IE9+ 可见值，故旧浏览器得到视觉降级而非无样式；
+   3) 居中修正针对 `.portal-content-stage` 已有 max-width 却缺少自动外边距的情况。
+   =================================================================== */
+.portal-logo {
+    width: 46px;
+    height: 46px;
+    display: block;
+    margin: 0 0 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .28);
+}
+
+.portal-brand-block { display: block; }
+.portal-brand-block .SiteTitle { display: block; }
+.portal-brand-block .portal-brand-subtitle { display: block; }
+
+.portal-content-stage { margin-left: auto; margin-right: auto; }
+
+.portal-footer {
+    padding: 16px 30px 22px;
+    border-top: 1px solid #d8dee8;
+    border-top: 1px solid var(--portal-border);
+    color: #5b6b7d;
+    color: var(--portal-text-muted);
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.portal-footer-copy { float: left; }
+.portal-footer-note { float: right; }

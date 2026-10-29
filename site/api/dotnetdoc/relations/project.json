@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 5821,
-  "relationCount": 5398,
+  "nodeCount": 5824,
+  "relationCount": 5401,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -36825,6 +36825,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnetdoc-markup-comment-src-portal-default.master-6",
+      "kind": "entry",
+      "label": "Default.master webforms-server-comment 6",
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-default.master-6",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-1",
       "kind": "entry",
       "label": "DesktopDefault.aspx webforms-server-comment 1",
@@ -37767,6 +37774,20 @@
       "kind": "entry",
       "label": "DesktopPortalBanner.ascx webforms-server-comment 4",
       "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-4",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-5",
+      "kind": "entry",
+      "label": "DesktopPortalBanner.ascx webforms-server-comment 5",
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-5",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-6",
+      "kind": "entry",
+      "label": "DesktopPortalBanner.ascx webforms-server-comment 6",
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-6",
       "view": "dotnet"
     },
     {
@@ -108676,6 +108697,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnetdoc-markup-comment-src-portal-default.master-6->source:src/Portal/Default.master",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnetdoc-markup-comment-src-portal-default.master-6",
+      "to": "source:src/Portal/Default.master",
+      "label": "Source: src/Portal/Default.master",
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-default.master-6",
+      "metadata": {
+        "language": "aspnet-master",
+        "rangeStartLine": 52,
+        "rangeEndLine": 60
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-1->source:src/Portal/DesktopDefault.aspx",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopdefault.aspx-1",
@@ -110400,8 +110434,8 @@
       "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-2",
       "metadata": {
         "language": "ascx",
-        "rangeStartLine": 17,
-        "rangeEndLine": 22
+        "rangeStartLine": 13,
+        "rangeEndLine": 21
       }
     },
     {
@@ -110413,8 +110447,8 @@
       "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-3",
       "metadata": {
         "language": "ascx",
-        "rangeStartLine": 31,
-        "rangeEndLine": 36
+        "rangeStartLine": 27,
+        "rangeEndLine": 32
       }
     },
     {
@@ -110426,8 +110460,34 @@
       "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-4",
       "metadata": {
         "language": "ascx",
-        "rangeStartLine": 46,
-        "rangeEndLine": 53
+        "rangeStartLine": 35,
+        "rangeEndLine": 43
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-5->source:src/Portal/DesktopPortalBanner.ascx",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-5",
+      "to": "source:src/Portal/DesktopPortalBanner.ascx",
+      "label": "Source: src/Portal/DesktopPortalBanner.ascx",
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-5",
+      "metadata": {
+        "language": "ascx",
+        "rangeStartLine": 49,
+        "rangeEndLine": 54
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-6->source:src/Portal/DesktopPortalBanner.ascx",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-6",
+      "to": "source:src/Portal/DesktopPortalBanner.ascx",
+      "label": "Source: src/Portal/DesktopPortalBanner.ascx",
+      "entryId": "hia-document:dotnetdoc-markup-comment-src-portal-desktopportalbanner.ascx-6",
+      "metadata": {
+        "language": "ascx",
+        "rangeStartLine": 64,
+        "rangeEndLine": 71
       }
     },
     {

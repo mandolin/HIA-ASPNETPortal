@@ -227,6 +227,7 @@
     <Content Include="DesktopModules\MyWorkItems\Styles\MyWorkItems.css" />
     <Content Include="DesktopModules\Help\module.json" />
     <Content Include="DesktopModules\Help\Help.ascx" />
+    <Content Include="Images\portal-logo.png" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\module.json" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\EmployeeProfileCorrectionRequest.ascx" />
     <Content Include="DesktopModules\EmployeeProfileCorrectionRequest\Styles\EmployeeProfileCorrectionRequest.css" />
@@ -397,4 +398,3 @@
     </Compile>
     <Compile Include="Admin\WorkItems.aspx.designer.cs">
       <DependentUpon>WorkItems.aspx</DependentUpon>
-    </Compile>

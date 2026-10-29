@@ -10,6 +10,16 @@
     <div class="portal-header-inner">
         <div class="portal-brand-row">
             <div class="portal-brand-block">
+                <%--
+                    <lang>
+                        <zh-CN>品牌标识为随代码发布的静态资源（src/Portal/Images/portal-logo.png），不经数据库、不接受请求参数。
+                        替代文本给出项目标识；品牌文字紧随其后，故该图不承担额外语义。</zh-CN>
+                        <en>The brand mark is a static asset shipped with the code (src/Portal/Images/portal-logo.png); it comes from no
+                        database and accepts no request parameter. Its alternative text names the project, while the brand text follows
+                        immediately, so the image carries no additional meaning.</en>
+                    </lang>
+                --%>
+                <img class="portal-logo" src="<%= Global.GetApplicationPath(Request) %>/Images/portal-logo.png" alt="HIA" />
                 <asp:Label ID="SiteName" CssClass="SiteTitle" EnableViewState="false" runat="server" />
                 <span class="portal-brand-subtitle"><%= lang.PortalBanner_Subtitle %></span>
             </div>
@@ -22,7 +32,15 @@
                 --%>
                 <asp:Label ID="WelcomeMessage" CssClass="portal-welcome" runat="server" />
                 <a href="<%= Global.GetApplicationPath(Request) %>/DesktopDefault.aspx" class="SiteLink portal-toplink"><%= lang.PortalBanner_Home %></a>
-                <a href="<%= Global.GetApplicationPath(Request) %>/admin/NotImplemented.aspx" class="SiteLink portal-toplink"><%= lang.PortalBanner_Documentation %></a>
+                <%--
+                <lang>
+                  <zh-CN>原「门户文档」按钮指向 `/admin/NotImplemented.aspx`（未实现占位页），是公开导航里的一处死链，
+                  已移除。文档入口应由部署侧提供真实文档地址后再挂回，避免把"未实现"页面暴露给使用者。</zh-CN>
+                  <en>The former "Documentation" button pointed at `/admin/NotImplemented.aspx` — a not-implemented placeholder —
+                  a dead link inside the public chrome, now removed. A documentation entry should be re-added only once the
+                  deployment supplies a real documentation address, so that no "not implemented" page is ever exposed to users.</en>
+                </lang>
+                --%>
                 <%= LogoffLink %>
             </div>
         </div>

@@ -17,7 +17,7 @@
       "id": "dotnet:surface:asp.net-surfaces",
       "kind": "surface",
       "label": "ASP.NET Surfaces",
-      "entryCount": 314,
+      "entryCount": 317,
       "views": [
         "dotnet"
       ],

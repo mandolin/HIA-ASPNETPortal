@@ -4,7 +4,8 @@
   "appendAllowList": [
     "HIA.LeaveRequest",
     "HIA.ExpenseReimbursement",
-    "HIA.Help"
+    "HIA.Help",
+    "Legacy.Announcements"
   ],
   "notMounted": []
 }

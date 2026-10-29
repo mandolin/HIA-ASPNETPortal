@@ -49,6 +49,19 @@
                     --%>
                     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                 </div>
+                <%--
+                <lang>
+                  <zh-CN>页脚版权置于主壳层**之内**：这样它自动跟随各主题自身的侧栏偏移与宽度，无需在样式里硬编码列宽
+                  （不同主题的侧栏宽度并不一致），从而在 8 套主题下都对齐。</zh-CN>
+                  <en>The footer copyright lives **inside** the main shell so it automatically follows each theme's own sidebar offset and
+                  width without hard-coding a column width in CSS (sidebar widths differ across themes), keeping it aligned under all
+                  eight themes.</en>
+                </lang>
+                --%>
+                <div class="portal-footer">
+                    <span class="portal-footer-copy">happy-dev 版权所有 2026-</span>
+                    <span class="portal-footer-note">© 2026- happy-dev. All rights reserved.</span>
+                </div>
             </div>
         </div>
     </form>
