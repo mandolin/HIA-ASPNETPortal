@@ -928,24 +928,7 @@ namespace ASPNET.StarterKit.Portal
                 new string[0],
                 "P44.5: core administration module running under the CoreOnly profile."),
 
-            // <lang>
-            //   <zh-CN>D22 修正：旧版后台控件（站点设置/页签/角色/用户/模块类型）无独立 .aspx 宿主页，其登记 Target 为 .ascx 故不可导航；它们作为模块实例挂载在 TabId=6「后台管理」页签下，经 ~/DesktopDefault.aspx?tabid=6 可达。本条目补一个可导航入口，暴露该页签。</zh-CN>
-            //   <en>D22 fix: the legacy admin controls (site settings / tabs / roles / users / module types) have no standalone .aspx host page and were registered with .ascx targets (hence non-navigable); they are mounted as module instances on the TabId=6 "Administration" tab and reachable via ~/DesktopDefault.aspx?tabid=6. This entry exposes that tab as a navigable link.</en>
-            // </lang>
-            new PortalNavigationEntry(
-                "Core.Admin.LegacyHub",
-                PortalNavigationEntryKind.AdminPage,
-                "旧版后台管理",
-                "Legacy Administration",
-                "~/DesktopDefault.aspx?tabid=6",
-                PortalNavigationVisibilityMode.AdminOnly,
-                PortalNavigationLifecycleState.Active,
-                60,
-                new[] { PortalRoleNames.Administrators },
-                new[] { PortalPermissionKeys.SettingsView },
-                new[] { "Core" },
-                new string[0],
-                "D22: 暴露旧版后台入口所在的「后台管理」页签（tabid=6），含站点设置/页签/角色/用户/模块类型。"),
+
 
             // <lang>
             //   <zh-CN>错误与占位入口：仅为治理/诊断登记，不进入普通导航，也不改变实际拒绝或占位流程。</zh-CN>
