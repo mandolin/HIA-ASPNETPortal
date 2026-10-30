@@ -641,18 +641,30 @@ namespace ASPNET.StarterKit.Portal
                 return;
             }
 
-            WorkItemDb.CompleteBusinessWorkItem(
-                new PortalWorkItemCompletionRequest
-                {
-                    BusinessKind = PortalWorkItemBusinessKinds.CollaborationItem,
-                    BusinessId = itemId.ToString(CultureInfo.InvariantCulture),
-                    EventType = MapWorkItemEventType(actionKey),
-                    TargetStatus = MapWorkItemTargetStatus(actionKey),
-                    ActorUserId = GetCurrentUserId(),
-                    ActorName = GetCurrentUserName(),
-                    Comment = NormalizeInput(actionComment, 1000),
-                    OccurredUtc = DateTime.UtcNow
-                });
+            try
+            {
+                WorkItemDb.CompleteBusinessWorkItem(
+                    new PortalWorkItemCompletionRequest
+                    {
+                        BusinessKind = PortalWorkItemBusinessKinds.CollaborationItem,
+                        BusinessId = itemId.ToString(CultureInfo.InvariantCulture),
+                        EventType = MapWorkItemEventType(actionKey),
+                        TargetStatus = MapWorkItemTargetStatus(actionKey),
+                        ActorUserId = GetCurrentUserId(),
+                        ActorName = GetCurrentUserName(),
+                        Comment = NormalizeInput(actionComment, 1000),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+            }
+            catch (Exception ex)
+            {
+                // <lang>
+                //   <zh-CN>待办投影失败属旁路降级：不向上抛出，避免回滚已成功的协同事项处理主流程；仅记录诊断日志。</zh-CN>
+                //   <en>A failed work-item projection is a sidecar degradation: do not rethrow (that would roll back the already-succeeded collaboration-item handling main flow); record a diagnostic log only.</en>
+                // </lang>
+                System.Diagnostics.Trace.TraceError(
+                    "协同事项处理通过后待办投影失败（已降级，不影响处理主流程）：" + ex);
+            }
         }
 
         /// <summary>

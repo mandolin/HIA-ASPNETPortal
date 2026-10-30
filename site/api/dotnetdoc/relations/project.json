@@ -53385,8 +53385,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationadminrow.-ctor-aspnet.starterkit.portal.businessapplicationinfo",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 468,
-        "rangeEndLine": 499
+        "rangeStartLine": 480,
+        "rangeEndLine": 511
       }
     },
     {
@@ -53398,8 +53398,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationadminrow.emptytonone-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 587,
-        "rangeEndLine": 590
+        "rangeStartLine": 599,
+        "rangeEndLine": 602
       }
     },
     {
@@ -53918,8 +53918,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplications.issupportedaction-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 430,
-        "rangeEndLine": 435
+        "rangeStartLine": 442,
+        "rangeEndLine": 447
       }
     },
     {
@@ -53931,8 +53931,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplications.mapworkitemeventtype-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 405,
-        "rangeEndLine": 422
+        "rangeStartLine": 417,
+        "rangeEndLine": 434
       }
     },
     {
@@ -53944,8 +53944,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplications.normalizeinput-system.string-system.int32",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 443,
-        "rangeEndLine": 451
+        "rangeStartLine": 455,
+        "rangeEndLine": 463
       }
     },
     {
@@ -53997,7 +53997,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 374,
-        "rangeEndLine": 397
+        "rangeEndLine": 409
       }
     },
     {
@@ -54100,8 +54100,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemadminrow.-ctor-aspnet.starterkit.portal.collaborationiteminfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemeventinfo-system.collections.generic.ilist-aspnet.starterkit.portal.collaborationitemparticipantinfo",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1090,
-        "rangeEndLine": 1133
+        "rangeStartLine": 1102,
+        "rangeEndLine": 1145
       }
     },
     {
@@ -54113,8 +54113,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemadminrow.emptytonone-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1214,
-        "rangeEndLine": 1217
+        "rangeStartLine": 1226,
+        "rangeEndLine": 1229
       }
     },
     {
@@ -54126,8 +54126,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitemadminrow.getownertext-aspnet.starterkit.portal.collaborationiteminfo",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1194,
-        "rangeEndLine": 1206
+        "rangeStartLine": 1206,
+        "rangeEndLine": 1218
       }
     },
     {
@@ -54568,8 +54568,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.clearcreateform",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 765,
-        "rangeEndLine": 778
+        "rangeStartLine": 777,
+        "rangeEndLine": 790
       }
     },
     {
@@ -54659,8 +54659,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.iscommentcommand-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 919,
-        "rangeEndLine": 923
+        "rangeStartLine": 931,
+        "rangeEndLine": 935
       }
     },
     {
@@ -54672,8 +54672,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.issupportedaction-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 902,
-        "rangeEndLine": 911
+        "rangeStartLine": 914,
+        "rangeEndLine": 923
       }
     },
     {
@@ -54698,8 +54698,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.mapauditevent-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 852,
-        "rangeEndLine": 894
+        "rangeStartLine": 864,
+        "rangeEndLine": 906
       }
     },
     {
@@ -54711,8 +54711,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.mapworkitemeventtype-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 807,
-        "rangeEndLine": 830
+        "rangeStartLine": 819,
+        "rangeEndLine": 842
       }
     },
     {
@@ -54724,8 +54724,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.mapworkitemtargetstatus-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 838,
-        "rangeEndLine": 844
+        "rangeStartLine": 850,
+        "rangeEndLine": 856
       }
     },
     {
@@ -54763,8 +54763,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.selectreferencevalue-system.web.ui.webcontrols.dropdownlist-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 786,
-        "rangeEndLine": 799
+        "rangeStartLine": 798,
+        "rangeEndLine": 811
       }
     },
     {
@@ -54789,8 +54789,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.tryaddcomment-system.int64-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 691,
-        "rangeEndLine": 730
+        "rangeStartLine": 703,
+        "rangeEndLine": 742
       }
     },
     {
@@ -54802,8 +54802,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.tryaddparticipant-system.int64-system.web.ui.webcontrols.repeateritem",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 994,
-        "rangeEndLine": 1027
+        "rangeStartLine": 1006,
+        "rangeEndLine": 1039
       }
     },
     {
@@ -54816,7 +54816,7 @@
       "metadata": {
         "language": "csharp",
         "rangeStartLine": 631,
-        "rangeEndLine": 656
+        "rangeEndLine": 668
       }
     },
     {
@@ -54828,8 +54828,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.tryensureresubmittedworkitem-system.int64",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 664,
-        "rangeEndLine": 683
+        "rangeStartLine": 676,
+        "rangeEndLine": 695
       }
     },
     {
@@ -54854,8 +54854,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.tryparsedueutc-system.string-system.nullable-system.datetime",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 931,
-        "rangeEndLine": 956
+        "rangeStartLine": 943,
+        "rangeEndLine": 968
       }
     },
     {
@@ -54867,8 +54867,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.tryparseparentitemid-system.string-system.nullable-system.int64",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 970,
-        "rangeEndLine": 986
+        "rangeStartLine": 982,
+        "rangeEndLine": 998
       }
     },
     {
@@ -54880,8 +54880,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.tryrecordoperationaudit-aspnet.starterkit.portal.collaborationitemresult",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 738,
-        "rangeEndLine": 757
+        "rangeStartLine": 750,
+        "rangeEndLine": 769
       }
     },
     {
@@ -54893,8 +54893,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.collaborationitems.tryremoveparticipant-system.int64-system.web.ui.webcontrols.repeateritem",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1035,
-        "rangeEndLine": 1063
+        "rangeStartLine": 1047,
+        "rangeEndLine": 1075
       }
     },
     {
@@ -71858,8 +71858,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.applicanttext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 555,
-        "rangeEndLine": 555
+        "rangeStartLine": 567,
+        "rangeEndLine": 567
       }
     },
     {
@@ -71871,8 +71871,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.applicationcode",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 515,
-        "rangeEndLine": 515
+        "rangeStartLine": 527,
+        "rangeEndLine": 527
       }
     },
     {
@@ -71884,8 +71884,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.applicationid",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 507,
-        "rangeEndLine": 507
+        "rangeStartLine": 519,
+        "rangeEndLine": 519
       }
     },
     {
@@ -71897,8 +71897,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.applicationstatus",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 563,
-        "rangeEndLine": 563
+        "rangeStartLine": 575,
+        "rangeEndLine": 575
       }
     },
     {
@@ -71910,8 +71910,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.body",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 547,
-        "rangeEndLine": 547
+        "rangeStartLine": 559,
+        "rangeEndLine": 559
       }
     },
     {
@@ -71923,8 +71923,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.categorykey",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 531,
-        "rangeEndLine": 531
+        "rangeStartLine": 543,
+        "rangeEndLine": 543
       }
     },
     {
@@ -71936,8 +71936,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.reviewtext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 579,
-        "rangeEndLine": 579
+        "rangeStartLine": 591,
+        "rangeEndLine": 591
       }
     },
     {
@@ -71949,8 +71949,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.submittedutctext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 571,
-        "rangeEndLine": 571
+        "rangeStartLine": 583,
+        "rangeEndLine": 583
       }
     },
     {
@@ -71962,8 +71962,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.summary",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 539,
-        "rangeEndLine": 539
+        "rangeStartLine": 551,
+        "rangeEndLine": 551
       }
     },
     {
@@ -71975,8 +71975,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.businessapplicationadminrow.title",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 523,
-        "rangeEndLine": 523
+        "rangeStartLine": 535,
+        "rangeEndLine": 535
       }
     },
     {
@@ -72820,8 +72820,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.description",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1151,
-        "rangeEndLine": 1151
+        "rangeStartLine": 1163,
+        "rangeEndLine": 1163
       }
     },
     {
@@ -72833,8 +72833,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.hasparentitem",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1172,
-        "rangeEndLine": 1172
+        "rangeStartLine": 1184,
+        "rangeEndLine": 1184
       }
     },
     {
@@ -72846,8 +72846,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.itemcode",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1139,
-        "rangeEndLine": 1139
+        "rangeStartLine": 1151,
+        "rangeEndLine": 1151
       }
     },
     {
@@ -72859,8 +72859,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.itemid",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1136,
-        "rangeEndLine": 1136
+        "rangeStartLine": 1148,
+        "rangeEndLine": 1148
       }
     },
     {
@@ -72872,8 +72872,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.itemstatus",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1154,
-        "rangeEndLine": 1154
+        "rangeStartLine": 1166,
+        "rangeEndLine": 1166
       }
     },
     {
@@ -72885,8 +72885,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.itemtypekey",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1142,
-        "rangeEndLine": 1142
+        "rangeStartLine": 1154,
+        "rangeEndLine": 1154
       }
     },
     {
@@ -72898,8 +72898,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.lastactioncomment",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1166,
-        "rangeEndLine": 1166
+        "rangeStartLine": 1178,
+        "rangeEndLine": 1178
       }
     },
     {
@@ -72911,8 +72911,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.lastactionutctext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1163,
-        "rangeEndLine": 1163
+        "rangeStartLine": 1175,
+        "rangeEndLine": 1175
       }
     },
     {
@@ -72924,8 +72924,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.latestvisiblecomment",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1169,
-        "rangeEndLine": 1169
+        "rangeStartLine": 1181,
+        "rangeEndLine": 1181
       }
     },
     {
@@ -72937,8 +72937,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.ownertext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1160,
-        "rangeEndLine": 1160
+        "rangeStartLine": 1172,
+        "rangeEndLine": 1172
       }
     },
     {
@@ -72950,8 +72950,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.participantlines",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1186,
-        "rangeEndLine": 1186
+        "rangeStartLine": 1198,
+        "rangeEndLine": 1198
       }
     },
     {
@@ -72963,8 +72963,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.participantstext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1175,
-        "rangeEndLine": 1175
+        "rangeStartLine": 1187,
+        "rangeEndLine": 1187
       }
     },
     {
@@ -72976,8 +72976,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.prioritykey",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1157,
-        "rangeEndLine": 1157
+        "rangeStartLine": 1169,
+        "rangeEndLine": 1169
       }
     },
     {
@@ -72989,8 +72989,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.summary",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1148,
-        "rangeEndLine": 1148
+        "rangeStartLine": 1160,
+        "rangeEndLine": 1160
       }
     },
     {
@@ -73002,8 +73002,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.collaborationitemadminrow.title",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1145,
-        "rangeEndLine": 1145
+        "rangeStartLine": 1157,
+        "rangeEndLine": 1157
       }
     },
     {
@@ -101589,8 +101589,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.businessapplicationadminrow",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 460,
-        "rangeEndLine": 591
+        "rangeStartLine": 472,
+        "rangeEndLine": 603
       }
     },
     {
@@ -101771,8 +101771,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitemadminrow",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1082,
-        "rangeEndLine": 1218
+        "rangeStartLine": 1094,
+        "rangeEndLine": 1230
       }
     },
     {
