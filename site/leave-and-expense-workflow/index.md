@@ -69,5 +69,6 @@ title: 请假与报销：从填写到出现在待办里
 - 报销的字段清单与校验细节 → [费用报销模块页]({{ site.baseurl }}/modules/expense-reimbursement/)
 - 待办的呈现与办理边界 → [我的待办]({{ site.baseurl }}/modules/my-work-items/)
 - 同类的通用申请骨架 → [业务申请：从提交到办结]({{ site.baseurl }}/business-application-workflow/)
+- 审核侧现状（目前没有后台审核入口）→ [请假与报销：审核侧现状]({{ site.baseurl }}/leave-and-expense-review/)
 
-<!-- build-stamp: 023AD636BC03 -->
+<!-- build-stamp: CE56D80985A3 -->
