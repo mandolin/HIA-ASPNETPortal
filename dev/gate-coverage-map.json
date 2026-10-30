@@ -437,6 +437,7 @@
     "Test-PortalBusinessPermissionAudit.ps1",
     "Test-PortalCollaborationLayoutEvidence.mjs",
     "Test-PortalCollaborationWorkflowSmoke.ps1",
+    "Test-PortalD23ReviewEvidence.mjs",
     "Test-PortalComplianceBaseline.ps1",
     "Test-PortalDataProvider.ps1",
     "Test-PortalHiaBoundary.ps1",
@@ -491,6 +492,7 @@
         { "id": "Test-PortalPublishedSiteChecks.ps1", "basis": "发布后线上复核（依赖外网，故不进 L0/L1/L2 编排）：由 CI 发布工作流后置步骤自动跑（continue-on-error，只报警、不阻断发布），也可本地手动复跑。用户 2026-10-21 裁定「两者都要」。本地门禁全绿只代表构建产物没问题，这一步盯的是发布后的真实产物。 Post-publish live re-check (needs the network, hence not wired into L0/L1/L2): runs automatically as a CI post-publish step (continue-on-error, warn only) and can be re-run manually. User ruling 2026-10-21: both. An all-green local suite means only that the build artifact is fine; this watches the real published output." },
 { "id": "Build-PortalSite.ps1", "basis": "站点构建辅助脚本，非质量门禁。支持 -DryRun（W-anp-P191，解备忘 D4）：只报告将生成什么（新增/内容变更/无变化）、一个字节都不落盘（含目录创建），并在 N1/N2 校验之前显式收口退出；内容计算路径与实跑完全同源，不引入第二套生成逻辑。Site build helper script, not a quality gate. Supports -DryRun (W-anp-P191, resolves memo D4): reports what would be generated (new/content changed/unchanged), writes not a single byte (directory creation included), and exits explicitly before the N1/N2 checks; the content computation path is identical to a real run, with no second generation logic." },
     { "id": "Build-PortalDotNetDocPilot.ps1", "basis": ".NET 文档试点生成工具，非质量门禁。" },
-    { "id": "Build-PortalJsdocPilot.ps1", "basis": "JSDoc 试点生成工具，非质量门禁。" }
+    { "id": "Build-PortalJsdocPilot.ps1", "basis": "JSDoc 试点生成工具，非质量门禁。" },
+    { "id": "Test-PortalD23ReviewEvidence.mjs", "basis": "D23 运行期审批证据脚本（W-anp-P111 同法）：登录管理员实际审批一条请假/报销并断言写入持久化 + 截图；依赖运行中的 IIS Express + LocalDB，按需手工执行，不进日常 L0/L1/L2 编排。D23 runtime review-evidence script (same approach as W-anp-P111): signs in as admin, actually approves one leave/expense request, asserts the write persisted and keeps screenshots; needs a running IIS Express + LocalDB, run manually on demand, not wired into daily L0/L1/L2 orchestration." }
   ]
 }

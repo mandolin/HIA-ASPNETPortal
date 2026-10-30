@@ -110,7 +110,7 @@ namespace ASPNET.StarterKit.Portal
         {
             try
             {
-                string sql = "SELECT TOP (@Limit) RequestId, UserId, Category, Amount, Reason, AttachmentName, Status, CreatedUtc " +
+                string sql = "SELECT TOP (@Limit) RequestId, UserId, Category, Amount, Reason, AttachmentName, Status, CreatedUtc, ReviewedUtc, ReviewedByUserId, ReviewComment " +
                     "FROM dbo.PortalBiz_ExpenseReimbursements";
                 if (!string.IsNullOrEmpty(statusFilter))
                 {

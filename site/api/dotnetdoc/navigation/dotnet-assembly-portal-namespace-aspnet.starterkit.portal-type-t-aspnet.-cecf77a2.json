@@ -1,0 +1,255 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:base:t-aspnet.starterkit.portal.portalpage-aspnet.starterkit.portal.leaverequests",
+      "kind": "relation",
+      "label": "Base: ASPNET.StarterKit.Portal.PortalPage{ASPNET.StarterKit.Portal.LeaveRequests}",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:base:t-system.web.ui.control",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.Control",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:base:t-system.web.ui.page",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.Page",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:base:t-system.web.ui.templatecontrol",
+      "kind": "relation",
+      "label": "Base: System.Web.UI.TemplateControl",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.componentmodel.icomponent",
+      "kind": "relation",
+      "label": "Interface: System.ComponentModel.IComponent",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.idisposable",
+      "kind": "relation",
+      "label": "Interface: System.IDisposable",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ihttphandler",
+      "kind": "relation",
+      "label": "Interface: System.Web.IHttpHandler",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ui.icontrolbuilderaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlBuilderAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ui.icontroldesigneraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IControlDesignerAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ui.idatabindingsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IDataBindingsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ui.iexpressionsaccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IExpressionsAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ui.ifilterresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IFilterResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ui.inamingcontainer",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.INamingContainer",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ui.iparseraccessor",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IParserAccessor",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:interface:t-system.web.ui.iurlresolutionservice",
+      "kind": "relation",
+      "label": "Interface: System.Web.UI.IUrlResolutionService",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount",
+      "kind": "entry",
+      "label": "EmptyStateRowCount",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequests.emptystaterowcount",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequests.emptystater-85fe17b3.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel",
+      "kind": "entry",
+      "label": "MessageLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.leaverequests.messagelabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabe-52061aff.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater",
+      "kind": "entry",
+      "label": "RequestsRepeater",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.leaverequests.requestsrepeater",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrep-c5d44282.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "kind": "entry",
+      "label": "RequestsRepeater_ItemCommand",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrep-bcf36731.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel",
+      "kind": "entry",
+      "label": "ResultLabel",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.leaverequests.resultlabel",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel-64e3fac1.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton",
+      "kind": "entry",
+      "label": "SearchButton",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.leaverequests.searchbutton",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutto-f4c0f188.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist",
+      "kind": "entry",
+      "label": "StatusFilterList",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "symbolId": "dotnet:f:aspnet.starterkit.portal.leaverequests.statusfilterlist",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilte-2a331754.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests:entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string",
+      "kind": "entry",
+      "label": "TryCompleteWorkItem",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequests.trycomplete-5a62f1d6.html"
+    }
+  ]
+}

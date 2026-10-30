@@ -112,7 +112,7 @@ namespace ASPNET.StarterKit.Portal
         {
             try
             {
-                string sql = "SELECT TOP (@Limit) RequestId, UserId, LeaveType, StartDate, EndDate, Days, Reason, AttachmentName, Status, CreatedUtc " +
+                string sql = "SELECT TOP (@Limit) RequestId, UserId, LeaveType, StartDate, EndDate, Days, Reason, AttachmentName, Status, CreatedUtc, ReviewedUtc, ReviewedByUserId, ReviewComment " +
                     "FROM dbo.PortalBiz_LeaveRequests";
                 if (!string.IsNullOrEmpty(statusFilter))
                 {

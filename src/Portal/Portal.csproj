@@ -110,6 +110,8 @@
   <ItemGroup>
     <Content Include="Admin\AccessDenied.aspx" />
     <Content Include="Admin\BusinessApplications.aspx" />
+    <Content Include="Admin\LeaveRequests.aspx" />
+    <Content Include="Admin\ExpenseReimbursements.aspx" />
     <Content Include="Admin\CollaborationItems.aspx" />
     <Content Include="Admin\EditAccessDenied.aspx" />
     <Content Include="Admin\EmployeeEdit.aspx" />
@@ -264,6 +266,20 @@
     </Compile>
     <Compile Include="Admin\BusinessApplications.aspx.designer.cs">
       <DependentUpon>BusinessApplications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\LeaveRequests.aspx.cs">
+      <DependentUpon>LeaveRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\LeaveRequests.aspx.designer.cs">
+      <DependentUpon>LeaveRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ExpenseReimbursements.aspx.cs">
+      <DependentUpon>ExpenseReimbursements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ExpenseReimbursements.aspx.designer.cs">
+      <DependentUpon>ExpenseReimbursements.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\CollaborationItems.aspx.cs">
       <DependentUpon>CollaborationItems.aspx</DependentUpon>

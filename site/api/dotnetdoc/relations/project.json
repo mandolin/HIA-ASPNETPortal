@@ -1,8 +1,8 @@
 {
   "contract": "hia-project-relation-graph",
   "contractVersion": "0.1.0-draft",
-  "nodeCount": 5875,
-  "relationCount": 5452,
+  "nodeCount": 5917,
+  "relationCount": 5490,
   "nodes": [
     {
       "id": "endpoint:hia-document:aspnet-aspnet-webforms-page-admin-diagnosticslogs.aspx",
@@ -2217,6 +2217,41 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.messagelabel",
+      "kind": "entry",
+      "label": "MessageLabel",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.messagelabel",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.requestsrepeater",
+      "kind": "entry",
+      "label": "RequestsRepeater",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.requestsrepeater",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.resultlabel",
+      "kind": "entry",
+      "label": "ResultLabel",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.resultlabel",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.searchbutton",
+      "kind": "entry",
+      "label": "SearchButton",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.searchbutton",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.statusfilterlist",
+      "kind": "entry",
+      "label": "StatusFilterList",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.statusfilterlist",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved",
       "kind": "entry",
       "label": "Approved",
@@ -2354,6 +2389,41 @@
       "kind": "entry",
       "label": "txtStartDate",
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequest.txtstartdate",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel",
+      "kind": "entry",
+      "label": "MessageLabel",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater",
+      "kind": "entry",
+      "label": "RequestsRepeater",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel",
+      "kind": "entry",
+      "label": "ResultLabel",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton",
+      "kind": "entry",
+      "label": "SearchButton",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist",
+      "kind": "entry",
+      "label": "StatusFilterList",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist",
       "view": "dotnet"
     },
     {
@@ -10099,6 +10169,20 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "kind": "entry",
+      "label": "RequestsRepeater_ItemCommand",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem-system.int64-system.string-system.string",
+      "kind": "entry",
+      "label": "TryCompleteWorkItem",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem-system.int64-system.string-system.string",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.genericerrorpage.page_load-system.object-system.eventargs",
       "kind": "entry",
       "label": "Page_Load",
@@ -11398,6 +11482,20 @@
       "kind": "entry",
       "label": "ReviewRequest",
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "kind": "entry",
+      "label": "RequestsRepeater_ItemCommand",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string",
+      "kind": "entry",
+      "label": "TryCompleteWorkItem",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string",
       "view": "dotnet"
     },
     {
@@ -20795,6 +20893,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursements.emptystaterowcount",
+      "kind": "entry",
+      "label": "EmptyStateRowCount",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursements.emptystaterowcount",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.genericerrorpage.eventidtext",
       "kind": "entry",
       "label": "EventIdText",
@@ -22199,6 +22304,13 @@
       "kind": "entry",
       "label": "Succeeded",
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.succeeded",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount",
+      "kind": "entry",
+      "label": "EmptyStateRowCount",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount",
       "view": "dotnet"
     },
     {
@@ -28418,6 +28530,146 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_columnapplication",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_ColumnApplication",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_columnapplication",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineamount",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_InlineAmount",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineamount",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineattachment",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_InlineAttachment",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineattachment",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinecategory",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_InlineCategory",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinecategory",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinelatestreview",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_InlineLatestReview",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinelatestreview",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinereason",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_InlineReason",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinereason",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_sectionrequests",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_SectionRequests",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_sectionrequests",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_subtitle",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_Subtitle",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_subtitle",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_title",
+      "kind": "entry",
+      "label": "Admin_ExpenseReimbursements_Title",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_title",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_columnapplication",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_ColumnApplication",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_columnapplication",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineattachment",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_InlineAttachment",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineattachment",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinedays",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_InlineDays",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinedays",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineenddate",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_InlineEndDate",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineenddate",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinelatestreview",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_InlineLatestReview",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinelatestreview",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineleavetype",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_InlineLeaveType",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineleavetype",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinereason",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_InlineReason",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinereason",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinestartdate",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_InlineStartDate",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinestartdate",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_sectionrequests",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_SectionRequests",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_sectionrequests",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_subtitle",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_Subtitle",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_subtitle",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_title",
+      "kind": "entry",
+      "label": "Admin_LeaveRequests_Title",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_title",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-p-resources.lang.admin_manageusers_addusertorole",
       "kind": "entry",
       "label": "Admin_ManageUsers_AddUserToRole",
@@ -33990,6 +34242,13 @@
       "view": "dotnet"
     },
     {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursements",
+      "kind": "entry",
+      "label": "ExpenseReimbursements",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursements",
+      "view": "dotnet"
+    },
+    {
       "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementstatuses",
       "kind": "entry",
       "label": "ExpenseReimbursementStatuses",
@@ -34449,6 +34708,13 @@
       "kind": "entry",
       "label": "LeaveRequestReviewResult",
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestreviewresult",
+      "view": "dotnet"
+    },
+    {
+      "id": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.leaverequests",
+      "kind": "entry",
+      "label": "LeaveRequests",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequests",
       "view": "dotnet"
     },
     {
@@ -39427,6 +39693,30 @@
       "kind": "source",
       "label": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.designer.cs",
       "path": "src/Portal/Admin/EmployeeProfileCorrectionRequests.aspx.designer.cs"
+    },
+    {
+      "id": "source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "kind": "source",
+      "label": "src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "path": "src/Portal/Admin/ExpenseReimbursements.aspx.cs"
+    },
+    {
+      "id": "source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "kind": "source",
+      "label": "src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "path": "src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs"
+    },
+    {
+      "id": "source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "kind": "source",
+      "label": "src/Portal/Admin/LeaveRequests.aspx.cs",
+      "path": "src/Portal/Admin/LeaveRequests.aspx.cs"
+    },
+    {
+      "id": "source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "kind": "source",
+      "label": "src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "path": "src/Portal/Admin/LeaveRequests.aspx.designer.cs"
     },
     {
       "id": "source:src/Portal/Admin/Logoff.aspx",
@@ -44782,6 +45072,71 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.messagelabel->source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.messagelabel",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.messagelabel",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11,
+        "rangeEndLine": 11
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.requestsrepeater->source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.requestsrepeater",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.requestsrepeater",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 23,
+        "rangeEndLine": 23
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.resultlabel->source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.resultlabel",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.resultlabel",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 20,
+        "rangeEndLine": 20
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.searchbutton->source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.searchbutton",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.searchbutton",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 17,
+        "rangeEndLine": 17
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.statusfilterlist->source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.statusfilterlist",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.statusfilterlist",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 14,
+        "rangeEndLine": 14
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved->source:src/Portal.Components/ExpenseReimbursementContracts.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved",
@@ -45039,6 +45394,71 @@
         "language": "csharp",
         "rangeStartLine": 22,
         "rangeEndLine": 22
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel->source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11,
+        "rangeEndLine": 11
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater->source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 23,
+        "rangeEndLine": 23
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel->source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 20,
+        "rangeEndLine": 20
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton->source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 17,
+        "rangeEndLine": 17
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist->source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.designer.cs",
+      "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 14,
+        "rangeEndLine": 14
       }
     },
     {
@@ -59420,6 +59840,32 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs->source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 55,
+        "rangeEndLine": 105
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem-system.int64-system.string-system.string->source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem-system.int64-system.string-system.string",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem-system.int64-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 197,
+        "rangeEndLine": 223
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.genericerrorpage.page_load-system.object-system.eventargs->source:src/Portal/GenericErrorPage.aspx.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.genericerrorpage.page_load-system.object-system.eventargs",
@@ -61835,6 +62281,32 @@
         "language": "csharp",
         "rangeStartLine": 141,
         "rangeEndLine": 165
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs->source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 55,
+        "rangeEndLine": 105
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string->source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.cs",
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 197,
+        "rangeEndLine": 223
       }
     },
     {
@@ -79284,6 +79756,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursements.emptystaterowcount->source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursements.emptystaterowcount",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursements.emptystaterowcount",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 262,
+        "rangeEndLine": 262
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.genericerrorpage.eventidtext->source:src/Portal/GenericErrorPage.aspx.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.genericerrorpage.eventidtext",
@@ -81894,6 +82379,19 @@
         "language": "csharp",
         "rangeStartLine": 110,
         "rangeEndLine": 110
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount->source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.cs",
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 262,
+        "rangeEndLine": 262
       }
     },
     {
@@ -91941,8 +92439,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.admin_diagnosticslogs_emptynoentries",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11377,
-        "rangeEndLine": 11381
+        "rangeStartLine": 11497,
+        "rangeEndLine": 11501
       }
     },
     {
@@ -91954,8 +92452,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.admin_diagnosticslogs_emptynomatches",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11389,
-        "rangeEndLine": 11393
+        "rangeStartLine": 11509,
+        "rangeEndLine": 11513
       }
     },
     {
@@ -93397,8 +93895,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.admin_employeeprofilecorrectionrequests_notreviewed",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11126,
-        "rangeEndLine": 11130
+        "rangeStartLine": 11246,
+        "rangeEndLine": 11250
       }
     },
     {
@@ -93438,6 +93936,266 @@
         "language": "csharp",
         "rangeStartLine": 5237,
         "rangeEndLine": 5241
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_columnapplication->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_columnapplication",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_columnapplication",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11179,
+        "rangeEndLine": 11183
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineamount->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineamount",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineamount",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11201,
+        "rangeEndLine": 11205
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineattachment->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineattachment",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineattachment",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11223,
+        "rangeEndLine": 11227
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinecategory->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinecategory",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinecategory",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11190,
+        "rangeEndLine": 11194
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinelatestreview->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinelatestreview",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinelatestreview",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11234,
+        "rangeEndLine": 11238
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinereason->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinereason",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinereason",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11212,
+        "rangeEndLine": 11216
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_sectionrequests->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_sectionrequests",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_sectionrequests",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11168,
+        "rangeEndLine": 11172
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_subtitle->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_subtitle",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_subtitle",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11157,
+        "rangeEndLine": 11161
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_title->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_expensereimbursements_title",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_title",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11146,
+        "rangeEndLine": 11150
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_columnapplication->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_columnapplication",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_columnapplication",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11058,
+        "rangeEndLine": 11062
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineattachment->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineattachment",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineattachment",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11124,
+        "rangeEndLine": 11128
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinedays->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinedays",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinedays",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11102,
+        "rangeEndLine": 11106
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineenddate->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineenddate",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineenddate",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11091,
+        "rangeEndLine": 11095
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinelatestreview->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinelatestreview",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinelatestreview",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11135,
+        "rangeEndLine": 11139
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineleavetype->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineleavetype",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineleavetype",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11069,
+        "rangeEndLine": 11073
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinereason->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinereason",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinereason",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11113,
+        "rangeEndLine": 11117
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinestartdate->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinestartdate",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinestartdate",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11080,
+        "rangeEndLine": 11084
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_sectionrequests->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_sectionrequests",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_sectionrequests",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11047,
+        "rangeEndLine": 11051
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_subtitle->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_subtitle",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_subtitle",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11036,
+        "rangeEndLine": 11040
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_title->source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-p-resources.lang.admin_leaverequests_title",
+      "to": "source:src/Portal/App_GlobalResources/lang.designer.cs",
+      "label": "Source: src/Portal/App_GlobalResources/lang.designer.cs",
+      "entryId": "hia-document:dotnet-p-resources.lang.admin_leaverequests_title",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 11025,
+        "rangeEndLine": 11029
       }
     },
     {
@@ -95191,8 +95949,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.admin_operationaudits_emptynoentries",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11353,
-        "rangeEndLine": 11357
+        "rangeStartLine": 11473,
+        "rangeEndLine": 11477
       }
     },
     {
@@ -95204,8 +95962,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.admin_operationaudits_emptynomatches",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11365,
-        "rangeEndLine": 11369
+        "rangeStartLine": 11485,
+        "rangeEndLine": 11489
       }
     },
     {
@@ -96543,8 +97301,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.admin_systemhealth_emptynochecks",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11329,
-        "rangeEndLine": 11333
+        "rangeStartLine": 11449,
+        "rangeEndLine": 11453
       }
     },
     {
@@ -96556,8 +97314,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.admin_systemhealth_emptynosettings",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11341,
-        "rangeEndLine": 11345
+        "rangeStartLine": 11461,
+        "rangeEndLine": 11465
       }
     },
     {
@@ -98948,8 +99706,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.contacts_emptynocontacts",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11401,
-        "rangeEndLine": 11405
+        "rangeStartLine": 11521,
+        "rangeEndLine": 11525
       }
     },
     {
@@ -99221,8 +99979,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.document_emptynodocuments",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11413,
-        "rangeEndLine": 11417
+        "rangeStartLine": 11533,
+        "rangeEndLine": 11537
       }
     },
     {
@@ -101925,8 +102683,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_columncreated",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11186,
-        "rangeEndLine": 11190
+        "rangeStartLine": 11306,
+        "rangeEndLine": 11310
       }
     },
     {
@@ -101938,8 +102696,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_columndue",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11198,
-        "rangeEndLine": 11202
+        "rangeStartLine": 11318,
+        "rangeEndLine": 11322
       }
     },
     {
@@ -101951,8 +102709,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_columnitem",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11174,
-        "rangeEndLine": 11178
+        "rangeStartLine": 11294,
+        "rangeEndLine": 11298
       }
     },
     {
@@ -101964,8 +102722,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_columntype",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11162,
-        "rangeEndLine": 11166
+        "rangeStartLine": 11282,
+        "rangeEndLine": 11286
       }
     },
     {
@@ -101977,8 +102735,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_emptynomatch",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11246,
-        "rangeEndLine": 11250
+        "rangeStartLine": 11366,
+        "rangeEndLine": 11370
       }
     },
     {
@@ -101990,8 +102748,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_emptynone",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11234,
-        "rangeEndLine": 11238
+        "rangeStartLine": 11354,
+        "rangeEndLine": 11358
       }
     },
     {
@@ -102003,8 +102761,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_errorloadfailed",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11258,
-        "rangeEndLine": 11262
+        "rangeStartLine": 11378,
+        "rangeEndLine": 11382
       }
     },
     {
@@ -102016,8 +102774,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_filterall",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11210,
-        "rangeEndLine": 11214
+        "rangeStartLine": 11330,
+        "rangeEndLine": 11334
       }
     },
     {
@@ -102029,8 +102787,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_filteroverdue",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11222,
-        "rangeEndLine": 11226
+        "rangeStartLine": 11342,
+        "rangeEndLine": 11346
       }
     },
     {
@@ -102042,8 +102800,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_kindbusinessapplication",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11306,
-        "rangeEndLine": 11310
+        "rangeStartLine": 11426,
+        "rangeEndLine": 11430
       }
     },
     {
@@ -102055,8 +102813,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_kindcollaborationitem",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11294,
-        "rangeEndLine": 11298
+        "rangeStartLine": 11414,
+        "rangeEndLine": 11418
       }
     },
     {
@@ -102068,8 +102826,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_kindemployeeprofilecorrectionrequest",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11318,
-        "rangeEndLine": 11322
+        "rangeStartLine": 11438,
+        "rangeEndLine": 11442
       }
     },
     {
@@ -102081,8 +102839,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_noonlineentry",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11282,
-        "rangeEndLine": 11286
+        "rangeStartLine": 11402,
+        "rangeEndLine": 11406
       }
     },
     {
@@ -102094,8 +102852,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.myworkitems_overduedays",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11270,
-        "rangeEndLine": 11274
+        "rangeStartLine": 11390,
+        "rangeEndLine": 11394
       }
     },
     {
@@ -102289,8 +103047,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.signin_logintext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11138,
-        "rangeEndLine": 11142
+        "rangeStartLine": 11258,
+        "rangeEndLine": 11262
       }
     },
     {
@@ -102315,8 +103073,8 @@
       "entryId": "hia-document:dotnet-p-resources.lang.signin_registertext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 11150,
-        "rangeEndLine": 11154
+        "rangeStartLine": 11270,
+        "rangeEndLine": 11274
       }
     },
     {
@@ -103789,6 +104547,19 @@
       }
     },
     {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursements->source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursements",
+      "to": "source:src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "label": "Source: src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursements",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 17,
+        "rangeEndLine": 321
+      }
+    },
+    {
       "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementstatuses->source:src/Portal.Components/ExpenseReimbursementContracts.cs",
       "kind": "semantic-member",
       "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementstatuses",
@@ -104644,6 +105415,19 @@
         "language": "csharp",
         "rangeStartLine": 107,
         "rangeEndLine": 115
+      }
+    },
+    {
+      "id": "semantic-member:entry:hia-document:dotnet-t-aspnet.starterkit.portal.leaverequests->source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "kind": "semantic-member",
+      "from": "entry:hia-document:dotnet-t-aspnet.starterkit.portal.leaverequests",
+      "to": "source:src/Portal/Admin/LeaveRequests.aspx.cs",
+      "label": "Source: src/Portal/Admin/LeaveRequests.aspx.cs",
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequests",
+      "metadata": {
+        "language": "csharp",
+        "rangeStartLine": 17,
+        "rangeEndLine": 325
       }
     },
     {

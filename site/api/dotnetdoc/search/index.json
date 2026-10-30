@@ -372,6 +372,168 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.businessapplicationadminrow.emptytonone-system.string emptytonone dotnet-method converts blank display fields to a consistent placeholder. private static string aspnet.starterkit.portal.businessapplicationadminrow.emptytonone(string value) dotnet:m:aspnet.starterkit.portal.businessapplicationadminrow.emptytonone-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.businessapplicationadminrow t:aspnet.starterkit.portal.businessapplicationadminrow dotnet hia-document api/portal.hia.json src/portal/admin/businessapplications.aspx.cs csharp 将空白展示字段统一转换为占位文本。 converts blank display fields to a consistent placeholder."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequests",
+      "name": "LeaveRequests",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequests-82c8caac.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequests-82c8caac.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequests leaverequests dotnet-type admin review page for leave requests (d23): lists pending leave requests, supports approve/return/reject, and projects work items. class aspnet.starterkit.portal.leaverequests dotnet:t:aspnet.starterkit.portal.leaverequests portal aspnet.starterkit.portal t:aspnet.starterkit.portal.portalpage{aspnet.starterkit.portal.leaverequests} t:system.web.ui.page t:system.web.ui.templatecontrol t:system.web.ui.control t:system.object t:system.componentmodel.icomponent t:system.idisposable t:system.web.ui.iparseraccessor t:system.web.ui.iurlresolutionservice t:system.web.ui.idatabindingsaccessor t:system.web.ui.icontrolbuilderaccessor t:system.web.ui.icontroldesigneraccessor t:system.web.ui.iexpressionsaccessor t:system.web.ui.inamingcontainer t:system.web.ui.ifilterresolutionservice t:system.web.ihttphandler dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.cs csharp 请假申请后台审核页（d23）：列出待审核的请假申请，支持批准/退回/拒绝并投影工作项。 admin review page for leave requests (d23): lists pending leave requests, supports approve/return/reject, and projects work items."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "name": "RequestsRepeater_ItemCommand",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrep-bcf36731.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrep-bcf36731.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs requestsrepeater_itemcommand dotnet-method review command handler: resolves the action key, writes the review result, records an audit, and projects a work item. protected void aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand(object source, system.web.ui.webcontrols.repeatercommandeventargs e) dotnet:m:aspnet.starterkit.portal.leaverequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequests t:aspnet.starterkit.portal.leaverequests dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.cs csharp 审核命令处理：解析动作键、写入审核结果、记录审计并投影工作项。 review command handler: resolves the action key, writes the review result, records an audit, and projects a work item."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string",
+      "name": "TryCompleteWorkItem",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequests.trycomplete-5a62f1d6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequests.trycomplete-5a62f1d6.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string trycompleteworkitem dotnet-method work items are a sidecar enhancement after a successful review: a failure is caught and degraded (diagnostic log only) so it never rolls back the main \"review succeeded, request status updated\" result. private void aspnet.starterkit.portal.leaverequests.trycompleteworkitem(long requestid, string actionkey, string reviewnote) dotnet:m:aspnet.starterkit.portal.leaverequests.trycompleteworkitem-system.int64-system.string-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequests t:aspnet.starterkit.portal.leaverequests dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.cs csharp 待办是审核通过后的旁路增强能力：调用失败仅记录诊断日志并降级，不影响\"审核已成功、申请状态已更新\"这一主流程结果。 work items are a sidecar enhancement after a successful review: a failure is caught and degraded (diagnostic log only) so it never rolls back the main \"review succeeded, request status updated\" result."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount",
+      "name": "EmptyStateRowCount",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequests.emptystater-85fe17b3.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequests.emptystater-85fe17b3.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequests.emptystaterowcount emptystaterowcount dotnet-property empty-state row count (used by portalemptystaterenderer). protected int aspnet.starterkit.portal.leaverequests.emptystaterowcount { get; private set; } dotnet:p:aspnet.starterkit.portal.leaverequests.emptystaterowcount portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequests t:aspnet.starterkit.portal.leaverequests dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.cs csharp 列表空态行计数（供 portalemptystaterenderer 使用）。 empty-state row count (used by portalemptystaterenderer)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel",
+      "name": "MessageLabel",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabe-52061aff.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabe-52061aff.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.messagelabel messagelabel dotnet-field displays the leave-request page-level status message. protected system.web.ui.webcontrols.label aspnet.starterkit.portal.leaverequests.messagelabel dotnet:f:aspnet.starterkit.portal.leaverequests.messagelabel portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequests t:aspnet.starterkit.portal.leaverequests dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.designer.cs csharp 显示请假申请页面级状态提示。 displays the leave-request page-level status message."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist",
+      "name": "StatusFilterList",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilte-2a331754.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilte-2a331754.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.statusfilterlist statusfilterlist dotnet-field filters the list by leave-request status. protected system.web.ui.webcontrols.dropdownlist aspnet.starterkit.portal.leaverequests.statusfilterlist dotnet:f:aspnet.starterkit.portal.leaverequests.statusfilterlist portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequests t:aspnet.starterkit.portal.leaverequests dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.designer.cs csharp 按请假申请状态筛选列表。 filters the list by leave-request status."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton",
+      "name": "SearchButton",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutto-f4c0f188.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutto-f4c0f188.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.searchbutton searchbutton dotnet-field button that submits the leave-request status filter query. protected system.web.ui.webcontrols.button aspnet.starterkit.portal.leaverequests.searchbutton dotnet:f:aspnet.starterkit.portal.leaverequests.searchbutton portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequests t:aspnet.starterkit.portal.leaverequests dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.designer.cs csharp 提交请假申请状态筛选查询的按钮。 button that submits the leave-request status filter query."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel",
+      "name": "ResultLabel",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel-64e3fac1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel-64e3fac1.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.resultlabel resultlabel dotnet-field displays the leave-request query result summary. protected system.web.ui.webcontrols.label aspnet.starterkit.portal.leaverequests.resultlabel dotnet:f:aspnet.starterkit.portal.leaverequests.resultlabel portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequests t:aspnet.starterkit.portal.leaverequests dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.designer.cs csharp 显示请假申请查询结果摘要。 displays the leave-request query result summary."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater",
+      "name": "RequestsRepeater",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrep-c5d44282.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrep-c5d44282.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequests.requestsrepeater requestsrepeater dotnet-field repeater bound to leave-request query result rows. protected system.web.ui.webcontrols.repeater aspnet.starterkit.portal.leaverequests.requestsrepeater dotnet:f:aspnet.starterkit.portal.leaverequests.requestsrepeater portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequests t:aspnet.starterkit.portal.leaverequests dotnet hia-document api/portal.hia.json src/portal/admin/leaverequests.aspx.designer.cs csharp 绑定请假申请查询结果行的 repeater。 repeater bound to leave-request query result rows."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursements",
+      "name": "ExpenseReimbursements",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursements-08a6a874.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursements-08a6a874.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursements expensereimbursements dotnet-type admin review page for expense reimbursements (d23): lists pending reimbursements, supports approve/return/reject, and projects work items. class aspnet.starterkit.portal.expensereimbursements dotnet:t:aspnet.starterkit.portal.expensereimbursements portal aspnet.starterkit.portal t:aspnet.starterkit.portal.portalpage{aspnet.starterkit.portal.expensereimbursements} t:system.web.ui.page t:system.web.ui.templatecontrol t:system.web.ui.control t:system.object t:system.componentmodel.icomponent t:system.idisposable t:system.web.ui.iparseraccessor t:system.web.ui.iurlresolutionservice t:system.web.ui.idatabindingsaccessor t:system.web.ui.icontrolbuilderaccessor t:system.web.ui.icontroldesigneraccessor t:system.web.ui.iexpressionsaccessor t:system.web.ui.inamingcontainer t:system.web.ui.ifilterresolutionservice t:system.web.ihttphandler dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.cs csharp 费用报销后台审核页（d23）：列出待审核的费用报销，支持批准/退回/拒绝并投影工作项。 admin review page for expense reimbursements (d23): lists pending reimbursements, supports approve/return/reject, and projects work items."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "name": "RequestsRepeater_ItemCommand",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursements.req-e6327ac1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursements.req-e6327ac1.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs requestsrepeater_itemcommand dotnet-method review command handler: resolves the action key, writes the review result, records an audit, and projects a work item. protected void aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand(object source, system.web.ui.webcontrols.repeatercommandeventargs e) dotnet:m:aspnet.starterkit.portal.expensereimbursements.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursements t:aspnet.starterkit.portal.expensereimbursements dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.cs csharp 审核命令处理：解析动作键、写入审核结果、记录审计并投影工作项。 review command handler: resolves the action key, writes the review result, records an audit, and projects a work item."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem-system.int64-system.string-system.string",
+      "name": "TryCompleteWorkItem",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursements.try-cdbf1d86.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursements.try-cdbf1d86.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem-system.int64-system.string-system.string trycompleteworkitem dotnet-method work items are a sidecar enhancement after a successful review: a failure is caught and degraded (diagnostic log only) so it never rolls back the main \"review succeeded, reimbursement status updated\" result. private void aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem(long requestid, string actionkey, string reviewnote) dotnet:m:aspnet.starterkit.portal.expensereimbursements.trycompleteworkitem-system.int64-system.string-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursements t:aspnet.starterkit.portal.expensereimbursements dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.cs csharp 待办是审核通过后的旁路增强能力：调用失败仅记录诊断日志并降级，不影响\"审核已成功、报销状态已更新\"这一主流程结果。 work items are a sidecar enhancement after a successful review: a failure is caught and degraded (diagnostic log only) so it never rolls back the main \"review succeeded, reimbursement status updated\" result."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursements.emptystaterowcount",
+      "name": "EmptyStateRowCount",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursements.emp-99cb1e0b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursements.emp-99cb1e0b.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursements.emptystaterowcount emptystaterowcount dotnet-property empty-state row count (used by portalemptystaterenderer). protected int aspnet.starterkit.portal.expensereimbursements.emptystaterowcount { get; private set; } dotnet:p:aspnet.starterkit.portal.expensereimbursements.emptystaterowcount portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursements t:aspnet.starterkit.portal.expensereimbursements dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.cs csharp 列表空态行计数（供 portalemptystaterenderer 使用）。 empty-state row count (used by portalemptystaterenderer)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.messagelabel",
+      "name": "MessageLabel",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.mes-3ff45fd7.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.mes-3ff45fd7.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.messagelabel messagelabel dotnet-field displays the expense-reimbursement page-level status message. protected system.web.ui.webcontrols.label aspnet.starterkit.portal.expensereimbursements.messagelabel dotnet:f:aspnet.starterkit.portal.expensereimbursements.messagelabel portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursements t:aspnet.starterkit.portal.expensereimbursements dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.designer.cs csharp 显示费用报销页面级状态提示。 displays the expense-reimbursement page-level status message."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.statusfilterlist",
+      "name": "StatusFilterList",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.sta-4720eadc.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.sta-4720eadc.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.statusfilterlist statusfilterlist dotnet-field filters the list by expense-reimbursement status. protected system.web.ui.webcontrols.dropdownlist aspnet.starterkit.portal.expensereimbursements.statusfilterlist dotnet:f:aspnet.starterkit.portal.expensereimbursements.statusfilterlist portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursements t:aspnet.starterkit.portal.expensereimbursements dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.designer.cs csharp 按费用报销状态筛选列表。 filters the list by expense-reimbursement status."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.searchbutton",
+      "name": "SearchButton",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.sea-56e27340.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.sea-56e27340.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.searchbutton searchbutton dotnet-field button that submits the expense-reimbursement status filter query. protected system.web.ui.webcontrols.button aspnet.starterkit.portal.expensereimbursements.searchbutton dotnet:f:aspnet.starterkit.portal.expensereimbursements.searchbutton portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursements t:aspnet.starterkit.portal.expensereimbursements dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.designer.cs csharp 提交费用报销状态筛选查询的按钮。 button that submits the expense-reimbursement status filter query."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.resultlabel",
+      "name": "ResultLabel",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.res-7c527129.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.res-7c527129.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.resultlabel resultlabel dotnet-field displays the expense-reimbursement query result summary. protected system.web.ui.webcontrols.label aspnet.starterkit.portal.expensereimbursements.resultlabel dotnet:f:aspnet.starterkit.portal.expensereimbursements.resultlabel portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursements t:aspnet.starterkit.portal.expensereimbursements dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.designer.cs csharp 显示费用报销查询结果摘要。 displays the expense-reimbursement query result summary."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.requestsrepeater",
+      "name": "RequestsRepeater",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.req-76d275ca.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursements.req-76d275ca.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursements.requestsrepeater requestsrepeater dotnet-field repeater bound to expense-reimbursement query result rows. protected system.web.ui.webcontrols.repeater aspnet.starterkit.portal.expensereimbursements.requestsrepeater dotnet:f:aspnet.starterkit.portal.expensereimbursements.requestsrepeater portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursements t:aspnet.starterkit.portal.expensereimbursements dotnet hia-document api/portal.hia.json src/portal/admin/expensereimbursements.aspx.designer.cs csharp 绑定费用报销查询结果行的 repeater。 repeater bound to expense-reimbursement query result rows."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.collaborationitems",
       "name": "CollaborationItems",
       "kind": "dotnet-type",
@@ -27316,6 +27478,186 @@
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_businessapplications_notrevie-ae35ddb8.html",
       "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_businessapplications_notrevie-ae35ddb8.html",
       "searchText": "hia-document:dotnet-p-resources.lang.admin_businessapplications_notreviewed admin_businessapplications_notreviewed dotnet-property looks up a localized string similar to: (not reviewed) internal static string resources.lang.admin_businessapplications_notreviewed { get; } dotnet:p:resources.lang.admin_businessapplications_notreviewed portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：未审核 looks up a localized string similar to: (not reviewed)"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_title",
+      "name": "Admin_LeaveRequests_Title",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_title-bf9ba31a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_title-bf9ba31a.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_title admin_leaverequests_title dotnet-property leave request review page title. internal static string resources.lang.admin_leaverequests_title { get; } dotnet:p:resources.lang.admin_leaverequests_title portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 请假申请审核页标题。 leave request review page title."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_subtitle",
+      "name": "Admin_LeaveRequests_Subtitle",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_subtitle-06eb1a68.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_subtitle-06eb1a68.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_subtitle admin_leaverequests_subtitle dotnet-property leave request review page subtitle. internal static string resources.lang.admin_leaverequests_subtitle { get; } dotnet:p:resources.lang.admin_leaverequests_subtitle portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 请假申请审核页副标题。 leave request review page subtitle."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_sectionrequests",
+      "name": "Admin_LeaveRequests_SectionRequests",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_sectionrequests-543c37d5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_sectionrequests-543c37d5.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_sectionrequests admin_leaverequests_sectionrequests dotnet-property leave request list section heading. internal static string resources.lang.admin_leaverequests_sectionrequests { get; } dotnet:p:resources.lang.admin_leaverequests_sectionrequests portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 请假申请列表分区标题。 leave request list section heading."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_columnapplication",
+      "name": "Admin_LeaveRequests_ColumnApplication",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_columnapplicati-4044ea04.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_columnapplicati-4044ea04.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_columnapplication admin_leaverequests_columnapplication dotnet-property leave request details column heading. internal static string resources.lang.admin_leaverequests_columnapplication { get; } dotnet:p:resources.lang.admin_leaverequests_columnapplication portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 请假申请详情列标题。 leave request details column heading."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineleavetype",
+      "name": "Admin_LeaveRequests_InlineLeaveType",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlineleavetype-5c434f24.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlineleavetype-5c434f24.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineleavetype admin_leaverequests_inlineleavetype dotnet-property leave type field label. internal static string resources.lang.admin_leaverequests_inlineleavetype { get; } dotnet:p:resources.lang.admin_leaverequests_inlineleavetype portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 请假类型字段标签。 leave type field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinestartdate",
+      "name": "Admin_LeaveRequests_InlineStartDate",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlinestartdate-7049e68f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlinestartdate-7049e68f.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinestartdate admin_leaverequests_inlinestartdate dotnet-property start date field label. internal static string resources.lang.admin_leaverequests_inlinestartdate { get; } dotnet:p:resources.lang.admin_leaverequests_inlinestartdate portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 开始日期字段标签。 start date field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineenddate",
+      "name": "Admin_LeaveRequests_InlineEndDate",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlineenddate-f85f028a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlineenddate-f85f028a.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineenddate admin_leaverequests_inlineenddate dotnet-property end date field label. internal static string resources.lang.admin_leaverequests_inlineenddate { get; } dotnet:p:resources.lang.admin_leaverequests_inlineenddate portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 结束日期字段标签。 end date field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinedays",
+      "name": "Admin_LeaveRequests_InlineDays",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlinedays-f02ce086.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlinedays-f02ce086.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinedays admin_leaverequests_inlinedays dotnet-property days field label. internal static string resources.lang.admin_leaverequests_inlinedays { get; } dotnet:p:resources.lang.admin_leaverequests_inlinedays portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 天数字段标签。 days field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinereason",
+      "name": "Admin_LeaveRequests_InlineReason",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlinereason-2fe285e5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlinereason-2fe285e5.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinereason admin_leaverequests_inlinereason dotnet-property reason field label. internal static string resources.lang.admin_leaverequests_inlinereason { get; } dotnet:p:resources.lang.admin_leaverequests_inlinereason portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 请假事由字段标签。 reason field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineattachment",
+      "name": "Admin_LeaveRequests_InlineAttachment",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlineattachmen-6e9da49c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlineattachmen-6e9da49c.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlineattachment admin_leaverequests_inlineattachment dotnet-property attachment field label. internal static string resources.lang.admin_leaverequests_inlineattachment { get; } dotnet:p:resources.lang.admin_leaverequests_inlineattachment portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 附件字段标签。 attachment field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinelatestreview",
+      "name": "Admin_LeaveRequests_InlineLatestReview",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlinelatestrev-fc8bc2d2.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_leaverequests_inlinelatestrev-fc8bc2d2.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_leaverequests_inlinelatestreview admin_leaverequests_inlinelatestreview dotnet-property latest review field label. internal static string resources.lang.admin_leaverequests_inlinelatestreview { get; } dotnet:p:resources.lang.admin_leaverequests_inlinelatestreview portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 最近审核字段标签。 latest review field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_title",
+      "name": "Admin_ExpenseReimbursements_Title",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_title-2b0dd7fa.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_title-2b0dd7fa.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_title admin_expensereimbursements_title dotnet-property expense reimbursement review page title. internal static string resources.lang.admin_expensereimbursements_title { get; } dotnet:p:resources.lang.admin_expensereimbursements_title portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 费用报销审核页标题。 expense reimbursement review page title."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_subtitle",
+      "name": "Admin_ExpenseReimbursements_Subtitle",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_subtitl-b1302bc8.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_subtitl-b1302bc8.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_subtitle admin_expensereimbursements_subtitle dotnet-property expense reimbursement review page subtitle. internal static string resources.lang.admin_expensereimbursements_subtitle { get; } dotnet:p:resources.lang.admin_expensereimbursements_subtitle portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 费用报销审核页副标题。 expense reimbursement review page subtitle."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_sectionrequests",
+      "name": "Admin_ExpenseReimbursements_SectionRequests",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_section-dc610cb5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_section-dc610cb5.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_sectionrequests admin_expensereimbursements_sectionrequests dotnet-property expense reimbursement list section heading. internal static string resources.lang.admin_expensereimbursements_sectionrequests { get; } dotnet:p:resources.lang.admin_expensereimbursements_sectionrequests portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 费用报销列表分区标题。 expense reimbursement list section heading."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_columnapplication",
+      "name": "Admin_ExpenseReimbursements_ColumnApplication",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_columna-c041dbe4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_columna-c041dbe4.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_columnapplication admin_expensereimbursements_columnapplication dotnet-property reimbursement details column heading. internal static string resources.lang.admin_expensereimbursements_columnapplication { get; } dotnet:p:resources.lang.admin_expensereimbursements_columnapplication portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 报销详情列标题。 reimbursement details column heading."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinecategory",
+      "name": "Admin_ExpenseReimbursements_InlineCategory",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inlinec-a7bc6f35.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inlinec-a7bc6f35.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinecategory admin_expensereimbursements_inlinecategory dotnet-property category field label. internal static string resources.lang.admin_expensereimbursements_inlinecategory { get; } dotnet:p:resources.lang.admin_expensereimbursements_inlinecategory portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 费用类别字段标签。 category field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineamount",
+      "name": "Admin_ExpenseReimbursements_InlineAmount",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inlinea-4438b295.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inlinea-4438b295.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineamount admin_expensereimbursements_inlineamount dotnet-property amount field label. internal static string resources.lang.admin_expensereimbursements_inlineamount { get; } dotnet:p:resources.lang.admin_expensereimbursements_inlineamount portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 金额字段标签。 amount field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinereason",
+      "name": "Admin_ExpenseReimbursements_InlineReason",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inliner-28b8cd45.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inliner-28b8cd45.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinereason admin_expensereimbursements_inlinereason dotnet-property reason field label. internal static string resources.lang.admin_expensereimbursements_inlinereason { get; } dotnet:p:resources.lang.admin_expensereimbursements_inlinereason portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 报销事由字段标签。 reason field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineattachment",
+      "name": "Admin_ExpenseReimbursements_InlineAttachment",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inlinea-af6314fc.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inlinea-af6314fc.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlineattachment admin_expensereimbursements_inlineattachment dotnet-property attachment field label. internal static string resources.lang.admin_expensereimbursements_inlineattachment { get; } dotnet:p:resources.lang.admin_expensereimbursements_inlineattachment portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 附件字段标签。 attachment field label."
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinelatestreview",
+      "name": "Admin_ExpenseReimbursements_InlineLatestReview",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inlinel-12b16732.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.admin_expensereimbursements_inlinel-12b16732.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.admin_expensereimbursements_inlinelatestreview admin_expensereimbursements_inlinelatestreview dotnet-property latest review field label. internal static string resources.lang.admin_expensereimbursements_inlinelatestreview { get; } dotnet:p:resources.lang.admin_expensereimbursements_inlinelatestreview portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 最近审核字段标签。 latest review field label."
     },
     {
       "id": "hia-document:dotnet-p-resources.lang.admin_employeeprofilecorrectionrequests_notreviewed",

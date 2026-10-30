@@ -622,6 +622,20 @@
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-ff098dcd.json"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursements",
+      "kind": "type",
+      "label": "ExpenseReimbursements",
+      "entryCount": 9,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursements",
+      "sourcePath": "src/Portal/Admin/ExpenseReimbursements.aspx.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursements",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursements-08a6a874.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-3a0a221a.json"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.genericerrorpage",
       "kind": "type",
       "label": "GenericErrorPage",
@@ -732,6 +746,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequest",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequest-a2386657.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-c41c7765.json"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequests",
+      "kind": "type",
+      "label": "LeaveRequests",
+      "entryCount": 9,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequests",
+      "sourcePath": "src/Portal/Admin/LeaveRequests.aspx.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequests",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequests-82c8caac.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-cecf77a2.json"
     },
     {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.links",

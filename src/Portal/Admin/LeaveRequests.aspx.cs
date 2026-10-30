@@ -5,6 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
+using Resources;
+using Unity;
 
 namespace ASPNET.StarterKit.Portal
 {
@@ -90,16 +92,12 @@ namespace ASPNET.StarterKit.Portal
             //   <en>The audit event temporarily reuses the business-application review event type (splitting out LeaveRequestReviewed is a follow-up).</en>
             // </lang>
             PortalOperationAudit.Record(
-                new PortalOperationAuditContext
-                {
-                    EventType = PortalOperationAuditEvents.BusinessApplicationReviewed,
-                    TargetType = PortalOperationAuditEvents.BusinessApplicationTargetType,
-                    TargetId = requestId.ToString(CultureInfo.InvariantCulture),
-                    ActorUserId = reviewerUserId,
-                    ActorName = GetCurrentUserName(),
-                    ModuleCategory = PortalOperationAuditEvents.BusinessModuleCategory,
-                    Detail = string.Format(CultureInfo.InvariantCulture, "action={0}", e.CommandName)
-                });
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                PortalOperationAuditEvents.BusinessApplicationReviewed,
+                PortalOperationAuditEvents.BusinessApplicationTargetType,
+                requestId.ToString(CultureInfo.InvariantCulture),
+                string.Format(CultureInfo.InvariantCulture, "Leave request reviewed. ActionKey={0}", e.CommandName),
+                Context);
 
             TryCompleteWorkItem(requestId, e.CommandName, reviewComment);
             MessageLabel.Text = lang.Admin_BusinessApplications_MessageStateUpdated;
@@ -156,31 +154,29 @@ namespace ASPNET.StarterKit.Portal
         private void EnsureCanViewLeaveRequests()
         {
             PortalAuthorization.EnsureAnyPermission(
-                new[] { PortalPermissionKeys.BusinessApplicationReview, PortalPermissionKeys.BusinessApplicationAdmin },
-                PortalAuthorization.FriendlyMessages.Admin);
+                Context,
+                PortalPermissionKeys.BusinessApplicationReview,
+                PortalPermissionKeys.BusinessApplicationAdmin);
         }
 
         private void EnsureCanHandleLeaveRequests()
         {
             PortalAuthorization.EnsureAnyPermission(
-                new[] { PortalPermissionKeys.BusinessApplicationReview, PortalPermissionKeys.BusinessApplicationAdmin },
-                PortalAuthorization.FriendlyMessages.Admin);
+                Context,
+                PortalPermissionKeys.BusinessApplicationReview,
+                PortalPermissionKeys.BusinessApplicationAdmin);
         }
 
         private int GetCurrentUserId()
         {
-            if (UsersDb == null)
+            string userName = GetCurrentUserName();
+            if (string.IsNullOrWhiteSpace(userName) || UsersDb == null)
             {
                 return 0;
             }
 
-            var user = Context?.User?.Identity;
-            if (user == null || !user.IsAuthenticated)
-            {
-                return 0;
-            }
-
-            return UsersDb.GetUserByEmail(user.Name)?.UserId ?? 0;
+            IUserItem user = UsersDb.GetSingleUser(userName);
+            return user == null ? 0 : user.UserId;
         }
 
         private string GetCurrentUserName()
@@ -221,28 +217,24 @@ namespace ASPNET.StarterKit.Portal
             }
             catch (Exception ex)
             {
-                Trace.TraceError(
+                System.Diagnostics.Trace.TraceError(
                     "请假申请审核通过后待办投影失败（已降级，不影响审核结果）：" + ex);
             }
         }
 
         private static string MapWorkItemEventType(string actionKey)
         {
-            string eventType = PortalWorkItemEventTypes.StatusChanged;
-            if (string.Equals(actionKey, PortalWorkflowActions.Approve, StringComparison.Ordinal))
+            if (string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal))
             {
-                eventType = PortalWorkItemEventTypes.Approved;
-            }
-            else if (string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal))
-            {
-                eventType = PortalWorkItemEventTypes.Rejected;
-            }
-            else if (string.Equals(actionKey, PortalWorkflowActions.Return, StringComparison.Ordinal))
-            {
-                eventType = PortalWorkItemEventTypes.Returned;
+                return PortalWorkItemEventTypes.Rejected;
             }
 
-            return eventType;
+            if (string.Equals(actionKey, PortalWorkflowActions.Return, StringComparison.Ordinal))
+            {
+                return PortalWorkItemEventTypes.Commented;
+            }
+
+            return PortalWorkItemEventTypes.Approved;
         }
 
         private static bool IsSupportedAction(string actionName)
@@ -269,7 +261,7 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>列表空态行计数（供 PortalEmptyStateRenderer 使用）。</zh-CN><en>Empty-state row count (used by PortalEmptyStateRenderer).</en></lang></summary>
         protected int EmptyStateRowCount { get; private set; }
 
-        private string EmptyStateText
+        protected string EmptyStateText
         {
             get
             {
