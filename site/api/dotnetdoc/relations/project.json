@@ -43986,8 +43986,8 @@
       "entryId": "hia-document:dotnet-f-aspnet.starterkit.portal.employeeprofilecorrectionrequests.requestsemptystaterowcount",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 269,
-        "rangeEndLine": 269
+        "rangeStartLine": 270,
+        "rangeEndLine": 270
       }
     },
     {
@@ -57753,8 +57753,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.-ctor-aspnet.starterkit.portal.employeeprofilecorrectionrequestinfo",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 468,
-        "rangeEndLine": 484
+        "rangeStartLine": 479,
+        "rangeEndLine": 495
       }
     },
     {
@@ -57766,8 +57766,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.emptytonone-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 572,
-        "rangeEndLine": 575
+        "rangeStartLine": 583,
+        "rangeEndLine": 586
       }
     },
     {
@@ -58286,8 +58286,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.bindrequests",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 200,
-        "rangeEndLine": 234
+        "rangeStartLine": 201,
+        "rangeEndLine": 235
       }
     },
     {
@@ -58299,8 +58299,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.bindstatusfilter",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 177,
-        "rangeEndLine": 186
+        "rangeStartLine": 178,
+        "rangeEndLine": 187
       }
     },
     {
@@ -58312,8 +58312,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.ensurecanapplyrequeststatus-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 316,
-        "rangeEndLine": 330
+        "rangeStartLine": 317,
+        "rangeEndLine": 331
       }
     },
     {
@@ -58325,8 +58325,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.ensurecanviewrequests",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 302,
-        "rangeEndLine": 308
+        "rangeStartLine": 303,
+        "rangeEndLine": 309
       }
     },
     {
@@ -58338,8 +58338,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.getcurrentusername",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 351,
-        "rangeEndLine": 359
+        "rangeStartLine": 352,
+        "rangeEndLine": 360
       }
     },
     {
@@ -58351,8 +58351,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.issupportedtargetstatus-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 338,
-        "rangeEndLine": 343
+        "rangeStartLine": 339,
+        "rangeEndLine": 344
       }
     },
     {
@@ -58364,8 +58364,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.mapworkitemeventtype-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 407,
-        "rangeEndLine": 420
+        "rangeStartLine": 418,
+        "rangeEndLine": 431
       }
     },
     {
@@ -58377,8 +58377,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.mapworkitemstatus-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 428,
-        "rangeEndLine": 433
+        "rangeStartLine": 439,
+        "rangeEndLine": 444
       }
     },
     {
@@ -58390,8 +58390,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.normalizeinput-system.string-system.int32",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 441,
-        "rangeEndLine": 445
+        "rangeStartLine": 452,
+        "rangeEndLine": 456
       }
     },
     {
@@ -58403,8 +58403,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.page_load-system.object-system.eventargs",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 52,
-        "rangeEndLine": 64
+        "rangeStartLine": 53,
+        "rangeEndLine": 65
       }
     },
     {
@@ -58416,8 +58416,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.requestsrepeater_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 94,
-        "rangeEndLine": 169
+        "rangeStartLine": 95,
+        "rangeEndLine": 170
       }
     },
     {
@@ -58429,8 +58429,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.searchbutton_click-system.object-system.eventargs",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 72,
-        "rangeEndLine": 80
+        "rangeStartLine": 73,
+        "rangeEndLine": 81
       }
     },
     {
@@ -58442,8 +58442,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.showunavailable-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 283,
-        "rangeEndLine": 294
+        "rangeStartLine": 284,
+        "rangeEndLine": 295
       }
     },
     {
@@ -58455,8 +58455,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.employeeprofilecorrectionrequests.trycompleteworkitem-system.int64-system.string-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 373,
-        "rangeEndLine": 399
+        "rangeStartLine": 374,
+        "rangeEndLine": 410
       }
     },
     {
@@ -66697,8 +66697,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationregistry.findbykey-system.string",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1273,
-        "rangeEndLine": 1290
+        "rangeStartLine": 1275,
+        "rangeEndLine": 1292
       }
     },
     {
@@ -66710,8 +66710,8 @@
       "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalnavigationregistry.getentries",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 1242,
-        "rangeEndLine": 1253
+        "rangeStartLine": 1244,
+        "rangeEndLine": 1255
       }
     },
     {
@@ -76889,8 +76889,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.currentvaluesnapshot",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 532,
-        "rangeEndLine": 532
+        "rangeStartLine": 543,
+        "rangeEndLine": 543
       }
     },
     {
@@ -76902,8 +76902,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.employeetext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 508,
-        "rangeEndLine": 508
+        "rangeStartLine": 519,
+        "rangeEndLine": 519
       }
     },
     {
@@ -76915,8 +76915,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.fieldname",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 524,
-        "rangeEndLine": 524
+        "rangeStartLine": 535,
+        "rangeEndLine": 535
       }
     },
     {
@@ -76928,8 +76928,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.proposedvalue",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 540,
-        "rangeEndLine": 540
+        "rangeStartLine": 551,
+        "rangeEndLine": 551
       }
     },
     {
@@ -76941,8 +76941,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.requestid",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 492,
-        "rangeEndLine": 492
+        "rangeStartLine": 503,
+        "rangeEndLine": 503
       }
     },
     {
@@ -76954,8 +76954,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.requestnote",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 548,
-        "rangeEndLine": 548
+        "rangeStartLine": 559,
+        "rangeEndLine": 559
       }
     },
     {
@@ -76967,8 +76967,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.requeststatus",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 556,
-        "rangeEndLine": 556
+        "rangeStartLine": 567,
+        "rangeEndLine": 567
       }
     },
     {
@@ -76980,8 +76980,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.reviewtext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 564,
-        "rangeEndLine": 564
+        "rangeStartLine": 575,
+        "rangeEndLine": 575
       }
     },
     {
@@ -76993,8 +76993,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.submittedutctext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 500,
-        "rangeEndLine": 500
+        "rangeStartLine": 511,
+        "rangeEndLine": 511
       }
     },
     {
@@ -77006,8 +77006,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionadminrow.usertext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 516,
-        "rangeEndLine": 516
+        "rangeStartLine": 527,
+        "rangeEndLine": 527
       }
     },
     {
@@ -77630,8 +77630,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionrequests.correctionrequestdb",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 34,
-        "rangeEndLine": 35
+        "rangeStartLine": 35,
+        "rangeEndLine": 36
       }
     },
     {
@@ -77643,8 +77643,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionrequests.emptystaterowcount",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 242,
-        "rangeEndLine": 245
+        "rangeStartLine": 243,
+        "rangeEndLine": 246
       }
     },
     {
@@ -77656,8 +77656,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionrequests.emptystatetext",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 253,
-        "rangeEndLine": 261
+        "rangeStartLine": 254,
+        "rangeEndLine": 262
       }
     },
     {
@@ -77669,8 +77669,8 @@
       "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.employeeprofilecorrectionrequests.workitemdb",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 43,
-        "rangeEndLine": 44
+        "rangeStartLine": 44,
+        "rangeEndLine": 45
       }
     },
     {
@@ -102577,8 +102577,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionadminrow",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 460,
-        "rangeEndLine": 576
+        "rangeStartLine": 471,
+        "rangeEndLine": 587
       }
     },
     {
@@ -102681,8 +102681,8 @@
       "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.employeeprofilecorrectionrequests",
       "metadata": {
         "language": "csharp",
-        "rangeStartLine": 24,
-        "rangeEndLine": 423
+        "rangeStartLine": 25,
+        "rangeEndLine": 424
       }
     },
     {

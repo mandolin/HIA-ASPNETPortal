@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Diagnostics;
 using System.Web.UI.WebControls;
 using Microsoft.Practices.Unity;
 using Resources;
@@ -366,36 +367,46 @@ namespace ASPNET.StarterKit.Portal
         /// </summary>
         /// <remarks>
         /// <lang>
-        ///   <zh-CN>当前实现仅在待办依赖为空或请求标识非正数时短路；对实际 CompleteBusinessWorkItem 调用的异常保留既有传播行为。因此该方法是旁路调用边界，不是失败隔离或跨服务事务保证。</zh-CN>
-        ///   <en>The current implementation short-circuits only when the work-item dependency is absent or the request identifier is non-positive; exceptions from CompleteBusinessWorkItem retain their existing propagation behavior. This method is therefore a sidecar-call boundary, not a failure-isolation or cross-service transaction guarantee.</en>
+        ///   <zh-CN>待办是审核通过后的旁路增强能力：本方法只在待办依赖为空或请求标识非正数时短路，其余情况一律调用待办服务；调用失败会被捕获并降级（记录诊断日志），不影响"审核已成功、请求状态已更新"这一主流程结果。</zh-CN>
+        ///   <en>Work items are a sidecar enhancement after a successful review: this method short-circuits only when the work-item dependency is absent or the request identifier is non-positive; otherwise it always calls the work-item service, but a failure is caught and degraded (diagnostic log only) so it never rolls back the main "review succeeded, request status updated" result.</en>
         /// </lang>
         /// </remarks>
         private void TryCompleteWorkItem(long requestId, string requestStatus, string reviewNote)
         {
             // <lang>
-            //   <zh-CN>待办是审核后的旁路增强能力；当前调用不捕获服务异常，是否隔离失败属于后续实现任务，不能把“旁路”误写成“不会传播异常”。
-            //   C-anp-P19 `W-anp-P111` 延期项登记（四分法：**可实治范围之外的真实待办**）——判定依据：隔离失败会改变审核主流程的异常传播语义，属行为变更而非注释可闭合项，本周期（注释-only）不做。
-            //   所有者：业务工作流专题。再入条件：① 要求审核主流程不因待办旁路失败而回滚；② 出现待办服务异常导致审核失败的真实案例。再入时须先补异常路径单测锁定现状，再改隔离策略，并同步修订本条注释。</zh-CN>
-            //   <en>Work items are a sidecar enhancement after review; this call currently does not catch service exceptions, so failure isolation is a follow-up implementation task and “sidecar” must not be misread as “exceptions never propagate.”
-            //   C-anp-P19 `W-anp-P111` deferred-item registration (four-way split: **a real work item outside the actionable range**) — basis: isolating the failure would change how the review main flow propagates exceptions, which is a behaviour change rather than something a comment can close, so it is out of scope for this comment-only cycle.
-            //   Owner: the business-workflow workstream. Re-entry conditions: 1) the review main flow must not roll back when the work-item sidecar fails; 2) a real case appears where a work-item service exception fails a review. On re-entry, first add exception-path tests pinning current behaviour, then change the isolation strategy and update this comment in the same change.</en>
+            //   <zh-CN>原 W-anp-P111 延期项：审核主流程不得因待办旁路失败而回滚。此处以 try/catch 隔离待办服务异常——
+            //   待办投影是补充能力，失败仅记录诊断日志，请求状态更新（主流程）照常提交。C-anp-P19 `W-anp-P111` 已在本提交闭合：
+            //   补了异常路径单测（资料更正审核侧单测锁定"旁路抛错不回滚"），并据实修订本条注释。</zh-CN>
+            //   <en>Formerly deferred as W-anp-P111: the review main flow must not roll back because of a sidecar failure. This try/catch isolates the work-item service exception — the work-item projection is supplemental, so a failure only records a diagnostic log while the request-status update (main flow) commits as usual. C-anp-P19 `W-anp-P111` is closed in this change: an exception-path unit test now pins "sidecar throws but does not roll back", and this comment is updated accordingly.</en>
             // </lang>
             if (WorkItemDb == null || requestId <= 0)
             {
                 return;
             }
 
-            WorkItemDb.CompleteBusinessWorkItem(
-                new PortalWorkItemCompletionRequest
-                {
-                    BusinessKind = PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest,
-                    BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
-                    EventType = MapWorkItemEventType(requestStatus),
-                    TargetStatus = MapWorkItemStatus(requestStatus),
-                    ActorName = GetCurrentUserName(),
-                    Comment = NormalizeInput(reviewNote, 1000),
-                    OccurredUtc = DateTime.UtcNow
-                });
+            try
+            {
+                WorkItemDb.CompleteBusinessWorkItem(
+                    new PortalWorkItemCompletionRequest
+                    {
+                        BusinessKind = PortalWorkItemBusinessKinds.EmployeeProfileCorrectionRequest,
+                        BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                        EventType = MapWorkItemEventType(requestStatus),
+                        TargetStatus = MapWorkItemStatus(requestStatus),
+                        ActorName = GetCurrentUserName(),
+                        Comment = NormalizeInput(reviewNote, 1000),
+                        OccurredUtc = DateTime.UtcNow
+                    });
+            }
+            catch (Exception ex)
+            {
+                // <lang>
+                //   <zh-CN>待办投影失败属旁路降级：不向上抛出，避免回滚已成功的审核主流程；仅记录诊断日志供运维排查。</zh-CN>
+                //   <en>A failed work-item projection is a sidecar degradation: do not rethrow (that would roll back the already-succeeded review main flow); record a diagnostic log for operations.</en>
+                // </lang>
+                System.Diagnostics.Trace.TraceError(
+                    "资料更正审核通过后待办投影失败（已降级，不影响审核结果）：" + ex);
+            }
         }
 
         /// <summary>
