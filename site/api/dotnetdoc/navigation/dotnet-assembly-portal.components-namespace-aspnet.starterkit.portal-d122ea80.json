@@ -441,7 +441,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementinfo",
       "kind": "type",
       "label": "ExpenseReimbursementInfo",
-      "entryCount": 8,
+      "entryCount": 12,
       "views": [
         "dotnet"
       ],
@@ -464,6 +464,48 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursementresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementresul-728ddf96.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-7c2e6c04.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "kind": "type",
+      "label": "ExpenseReimbursementReviewRequest",
+      "entryCount": 7,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementrevie-21dac688.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-4c8915f6.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementreviewresult",
+      "kind": "type",
+      "label": "ExpenseReimbursementReviewResult",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementreviewresult",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursementreviewresult",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementrevie-92035e2e.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-97a92070.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementstatuses",
+      "kind": "type",
+      "label": "ExpenseReimbursementStatuses",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementstatuses",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.expensereimbursementstatuses",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementstatu-5f4db405.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-35d67b17.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iannouncementitem",
@@ -721,7 +763,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.iexpensereimbursementdb",
       "kind": "type",
       "label": "IExpenseReimbursementDb",
-      "entryCount": 4,
+      "entryCount": 6,
       "views": [
         "dotnet"
       ],
@@ -791,7 +833,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb",
       "kind": "type",
       "label": "ILeaveRequestDb",
-      "entryCount": 4,
+      "entryCount": 6,
       "views": [
         "dotnet"
       ],
@@ -1141,7 +1183,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestinfo",
       "kind": "type",
       "label": "LeaveRequestInfo",
-      "entryCount": 10,
+      "entryCount": 14,
       "views": [
         "dotnet"
       ],
@@ -1164,6 +1206,48 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequestresult",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestresult-969727ce.html",
       "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e2adcddc.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "kind": "type",
+      "label": "LeaveRequestReviewRequest",
+      "entryCount": 7,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequestreviewrequest",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestreviewrequest-b15ea290.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e99a849e.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestreviewresult",
+      "kind": "type",
+      "label": "LeaveRequestReviewResult",
+      "entryCount": 4,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestreviewresult",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequestreviewresult",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestreviewresult-b7784ad6.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-3db8a378.json"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequeststatuses",
+      "kind": "type",
+      "label": "LeaveRequestStatuses",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequeststatuses",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.leaverequeststatuses",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequeststatuses-48a0aded.html",
+      "childrenPath": "navigation/dotnet-assembly-portal.components-namespace-aspnet.starterkit.portal-typ-e0356b9f.json"
     },
     {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.organizationunitsaverequest",

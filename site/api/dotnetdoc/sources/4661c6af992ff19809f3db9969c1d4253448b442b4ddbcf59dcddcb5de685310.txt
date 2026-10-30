@@ -1,0 +1,25 @@
+        public LeaveRequestReviewResult ReviewRequest(LeaveRequestReviewRequest request)
+        {
+            try
+            {
+                string status = MapActionToStatus(request.ActionKey);
+                int rows = context.Database.ExecuteSqlCommand(
+                    "UPDATE dbo.PortalBiz_LeaveRequests SET Status = @Status, ReviewedByUserId = @ReviewedByUserId, ReviewedBy = @ReviewedBy, ReviewedUtc = @ReviewedUtc, ReviewComment = @ReviewComment WHERE RequestId = @RequestId;",
+                    new SqlParameter("@Status", status),
+                    new SqlParameter("@ReviewedByUserId", request.ReviewedByUserId),
+                    new SqlParameter("@ReviewedBy", (object)request.ReviewedBy ?? DBNull.Value),
+                    new SqlParameter("@ReviewedUtc", request.ReviewedUtc),
+                    new SqlParameter("@ReviewComment", (object)request.ReviewComment ?? DBNull.Value),
+                    new SqlParameter("@RequestId", request.RequestId));
+                if (rows <= 0)
+                {
+                    return new LeaveRequestReviewResult { Succeeded = false, Message = "NotFound", RequestId = request.RequestId };
+                }
+
+                return new LeaveRequestReviewResult { Succeeded = true, RequestId = request.RequestId };
+            }
+            catch
+            {
+                return new LeaveRequestReviewResult { Succeeded = false, Message = "DbError", RequestId = request.RequestId };
+            }
+        }

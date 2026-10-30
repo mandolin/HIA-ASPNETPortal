@@ -1,0 +1,11 @@
+    public static class ExpenseReimbursementStatuses
+    {
+        /// <summary><lang><zh-CN>待审批。</zh-CN><en>Pending review.</en></lang></summary>
+        public const string Pending = "Pending";
+        /// <summary><lang><zh-CN>已批准。</zh-CN><en>Approved.</en></lang></summary>
+        public const string Approved = "Approved";
+        /// <summary><lang><zh-CN>已拒绝。</zh-CN><en>Rejected.</en></lang></summary>
+        public const string Rejected = "Rejected";
+        /// <summary><lang><zh-CN>已关闭。</zh-CN><en>Closed.</en></lang></summary>
+        public const string Closed = "Closed";
+    }

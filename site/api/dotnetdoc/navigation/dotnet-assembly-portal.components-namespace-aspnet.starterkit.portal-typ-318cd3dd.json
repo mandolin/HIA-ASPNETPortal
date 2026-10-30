@@ -104,6 +104,45 @@
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.requesti-416f2711.html"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestinfo:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewcomment",
+      "kind": "entry",
+      "label": "ReviewComment",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewcomment",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestinfo.reviewcomment",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewco-21b8bc4c.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestinfo:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewedbyuserid",
+      "kind": "entry",
+      "label": "ReviewedByUserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewedbyuserid",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestinfo.reviewedbyuserid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewed-915adb9d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestinfo:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewedutc",
+      "kind": "entry",
+      "label": "ReviewedUtc",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewedutc",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestinfo.reviewedutc",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewed-bd712938.html"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestinfo:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.startdate",
       "kind": "entry",
       "label": "StartDate",
@@ -128,6 +167,19 @@
       "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
       "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestinfo.status",
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.status-287254d5.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestinfo:entry:hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.userid",
+      "kind": "entry",
+      "label": "UserId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.userid",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.leaverequestinfo.userid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.userid-179ad4dd.html"
     }
   ]
 }

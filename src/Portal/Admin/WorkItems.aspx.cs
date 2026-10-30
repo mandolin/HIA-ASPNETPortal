@@ -533,6 +533,24 @@ namespace ASPNET.StarterKit.Portal
             }
 
             // <lang>
+            //   <zh-CN>请假申请待办映射至固定请假后台审核页（D23 新增）。</zh-CN>
+            //   <en>Leave-request work items map to the fixed leave-request administration review page (added in D23).</en>
+            // </lang>
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.LeaveRequest, StringComparison.Ordinal))
+            {
+                return "LeaveRequests.aspx";
+            }
+
+            // <lang>
+            //   <zh-CN>费用报销待办映射至固定报销后台审核页（D23 新增）。</zh-CN>
+            //   <en>Expense-reimbursement work items map to the fixed reimbursement administration review page (added in D23).</en>
+            // </lang>
+            if (string.Equals(businessKind, PortalWorkItemBusinessKinds.ExpenseReimbursement, StringComparison.Ordinal))
+            {
+                return "ExpenseReimbursements.aspx";
+            }
+
+            // <lang>
             //   <zh-CN>未知或未来业务类型进入显式占位页，使新增类型必须先完成受审查的导航注册而非隐式放行。</zh-CN>
             //   <en>Unknown or future business kinds enter an explicit placeholder page so a new kind must complete reviewed navigation registration instead of being implicitly allowed.</en>
             // </lang>

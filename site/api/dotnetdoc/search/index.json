@@ -32151,6 +32151,15 @@
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.requestid requestid dotnet-property request identity key. public long aspnet.starterkit.portal.leaverequestinfo.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestinfo.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestinfo t:aspnet.starterkit.portal.leaverequestinfo dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 申请主键。 request identity key."
     },
     {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.userid",
+      "name": "UserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.userid-179ad4dd.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.userid-179ad4dd.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.userid userid dotnet-property submitting portal user identifier (for admin review display). public int aspnet.starterkit.portal.leaverequestinfo.userid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestinfo.userid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestinfo t:aspnet.starterkit.portal.leaverequestinfo dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 申请人门户用户标识（后台审核展示用）。 submitting portal user identifier (for admin review display)."
+    },
+    {
       "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.leavetype",
       "name": "LeaveType",
       "kind": "dotnet-property",
@@ -32223,6 +32232,33 @@
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.createdutc createdutc dotnet-property creation time (utc). public system.datetime aspnet.starterkit.portal.leaverequestinfo.createdutc { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestinfo.createdutc portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestinfo t:aspnet.starterkit.portal.leaverequestinfo dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 创建时间（utc）。 creation time (utc)."
     },
     {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewedutc",
+      "name": "ReviewedUtc",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewed-bd712938.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewed-bd712938.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewedutc reviewedutc dotnet-property review time (utc; non-null after an admin review). public system.datetime? aspnet.starterkit.portal.leaverequestinfo.reviewedutc { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestinfo.reviewedutc portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestinfo t:aspnet.starterkit.portal.leaverequestinfo dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 审核时间（utc，后台审核写入后为非空）。 review time (utc; non-null after an admin review)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewedbyuserid",
+      "name": "ReviewedByUserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewed-915adb9d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewed-915adb9d.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewedbyuserid reviewedbyuserid dotnet-property reviewer portal user identifier. public int? aspnet.starterkit.portal.leaverequestinfo.reviewedbyuserid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestinfo.reviewedbyuserid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestinfo t:aspnet.starterkit.portal.leaverequestinfo dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 审核人门户用户标识。 reviewer portal user identifier."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewcomment",
+      "name": "ReviewComment",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewco-21b8bc4c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewco-21b8bc4c.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestinfo.reviewcomment reviewcomment dotnet-property review comment. public string aspnet.starterkit.portal.leaverequestinfo.reviewcomment { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestinfo.reviewcomment portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestinfo t:aspnet.starterkit.portal.leaverequestinfo dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 审核意见。 review comment."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestresult",
       "name": "LeaveRequestResult",
       "kind": "dotnet-type",
@@ -32259,6 +32295,150 @@
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresult.requestid requestid dotnet-property new request identity key (valid on success). public long aspnet.starterkit.portal.leaverequestresult.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestresult.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestresult t:aspnet.starterkit.portal.leaverequestresult dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 新建申请主键（成功时有效）。 new request identity key (valid on success)."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequeststatuses",
+      "name": "LeaveRequestStatuses",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequeststatuses-48a0aded.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequeststatuses-48a0aded.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequeststatuses leaverequeststatuses dotnet-type leave-request approval status keys (consistent with the admin review-page filter and work-item projection). class aspnet.starterkit.portal.leaverequeststatuses dotnet:t:aspnet.starterkit.portal.leaverequeststatuses portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 请假申请审批状态键（与后台审核页筛选及工作项投影保持一致）。 leave-request approval status keys (consistent with the admin review-page filter and work-item projection)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.pending",
+      "name": "Pending",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.pend-d19cba3e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.pend-d19cba3e.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.pending pending dotnet-field pending review. public const string aspnet.starterkit.portal.leaverequeststatuses.pending dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.pending portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 待审批。 pending review."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.approved",
+      "name": "Approved",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.appr-d8c7d420.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.appr-d8c7d420.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.approved approved dotnet-field approved. public const string aspnet.starterkit.portal.leaverequeststatuses.approved dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.approved portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已批准。 approved."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.rejected",
+      "name": "Rejected",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.reje-a9ca532d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.reje-a9ca532d.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.rejected rejected dotnet-field rejected. public const string aspnet.starterkit.portal.leaverequeststatuses.rejected dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已拒绝。 rejected."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.closed",
+      "name": "Closed",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.clos-efa45d13.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.clos-efa45d13.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.closed closed dotnet-field closed. public const string aspnet.starterkit.portal.leaverequeststatuses.closed dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.closed portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已关闭。 closed."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "name": "LeaveRequestReviewRequest",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestreviewrequest-b15ea290.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestreviewrequest-b15ea290.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestreviewrequest leaverequestreviewrequest dotnet-type leave-request review request (submitted from the admin review page). class aspnet.starterkit.portal.leaverequestreviewrequest dotnet:t:aspnet.starterkit.portal.leaverequestreviewrequest portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 请假申请审核请求（后台审核页提交）。 leave-request review request (submitted from the admin review page)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.requestid",
+      "name": "RequestId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-e6d39dd6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-e6d39dd6.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.requestid requestid dotnet-property request identity key. public long aspnet.starterkit.portal.leaverequestreviewrequest.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewrequest.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewrequest t:aspnet.starterkit.portal.leaverequestreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 申请主键。 request identity key."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.actionkey",
+      "name": "ActionKey",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-6e352ccb.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-6e352ccb.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.actionkey actionkey dotnet-property review action key (approve/reject/return). public string aspnet.starterkit.portal.leaverequestreviewrequest.actionkey { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewrequest.actionkey portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewrequest t:aspnet.starterkit.portal.leaverequestreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 审核动作键（approve/reject/return）。 review action key (approve/reject/return)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.reviewcomment",
+      "name": "ReviewComment",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-e1adb4f3.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-e1adb4f3.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.reviewcomment reviewcomment dotnet-property review comment (normalized). public string aspnet.starterkit.portal.leaverequestreviewrequest.reviewcomment { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewrequest.reviewcomment portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewrequest t:aspnet.starterkit.portal.leaverequestreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 审核意见（已归一化）。 review comment (normalized)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.reviewedbyuserid",
+      "name": "ReviewedByUserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-b8772c68.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-b8772c68.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.reviewedbyuserid reviewedbyuserid dotnet-property reviewer user identifier. public int aspnet.starterkit.portal.leaverequestreviewrequest.reviewedbyuserid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewrequest.reviewedbyuserid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewrequest t:aspnet.starterkit.portal.leaverequestreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 审核人用户标识。 reviewer user identifier."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.reviewedby",
+      "name": "ReviewedBy",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-7a2a3a1a.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-7a2a3a1a.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.reviewedby reviewedby dotnet-property reviewer name. public string aspnet.starterkit.portal.leaverequestreviewrequest.reviewedby { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewrequest.reviewedby portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewrequest t:aspnet.starterkit.portal.leaverequestreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 审核人名称。 reviewer name."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.reviewedutc",
+      "name": "ReviewedUtc",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-bbf02e47.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest-bbf02e47.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewrequest.reviewedutc reviewedutc dotnet-property review time (utc). public system.datetime aspnet.starterkit.portal.leaverequestreviewrequest.reviewedutc { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewrequest.reviewedutc portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewrequest t:aspnet.starterkit.portal.leaverequestreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 审核时间（utc）。 review time (utc)."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestreviewresult",
+      "name": "LeaveRequestReviewResult",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestreviewresult-b7784ad6.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestreviewresult-b7784ad6.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestreviewresult leaverequestreviewresult dotnet-type leave-request review result. class aspnet.starterkit.portal.leaverequestreviewresult dotnet:t:aspnet.starterkit.portal.leaverequestreviewresult portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 请假申请审核结果。 leave-request review result."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.succeeded",
+      "name": "Succeeded",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.-81cde4c1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.-81cde4c1.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.succeeded succeeded dotnet-property whether the review succeeded. public bool aspnet.starterkit.portal.leaverequestreviewresult.succeeded { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewresult.succeeded portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewresult t:aspnet.starterkit.portal.leaverequestreviewresult dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 是否成功。 whether the review succeeded."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.message",
+      "name": "Message",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.-ffcd44ab.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.-ffcd44ab.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.message message dotnet-property low-sensitivity result message (used on failure). public string aspnet.starterkit.portal.leaverequestreviewresult.message { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewresult.message portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewresult t:aspnet.starterkit.portal.leaverequestreviewresult dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 低敏结果消息（失败时使用）。 low-sensitivity result message (used on failure)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.requestid",
+      "name": "RequestId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.-de202b50.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.-de202b50.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestreviewresult.requestid requestid dotnet-property request identity key. public long aspnet.starterkit.portal.leaverequestreviewresult.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestreviewresult.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestreviewresult t:aspnet.starterkit.portal.leaverequestreviewresult dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 申请主键。 request identity key."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.ileaverequestdb",
       "name": "ILeaveRequestDb",
       "kind": "dotnet-type",
@@ -32293,6 +32473,24 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecent-2e9a040e.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecent-2e9a040e.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32 getrecentbyuser dotnet-method get the applicant's recent requests. system.collections.generic.ireadonlylist<aspnet.starterkit.portal.leaverequestinfo> aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser(int userid, int limit) dotnet:m:aspnet.starterkit.portal.ileaverequestdb.getrecentbyuser-system.int32-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.ileaverequestdb t:aspnet.starterkit.portal.ileaverequestdb dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 取申请人的最近申请列表。 get the applicant's recent requests. 用户标识。 user identifier. 上限。 limit."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getadminrequests-system.string-system.int32",
+      "name": "GetAdminRequests",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getadminr-52dc05e3.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getadminr-52dc05e3.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.getadminrequests-system.string-system.int32 getadminrequests dotnet-method reads the administration review list filtered by status (an empty filter means all). system.collections.generic.ilist<aspnet.starterkit.portal.leaverequestinfo> aspnet.starterkit.portal.ileaverequestdb.getadminrequests(string statusfilter, int limit) dotnet:m:aspnet.starterkit.portal.ileaverequestdb.getadminrequests-system.string-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.ileaverequestdb t:aspnet.starterkit.portal.ileaverequestdb dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 按状态筛选读取后台审核用请假申请列表（空筛选值表示全部）。 reads the administration review list filtered by status (an empty filter means all). 状态筛选值。 status filter value. 上限。 limit."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "name": "ReviewRequest",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewreq-97fd26b4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewreq-97fd26b4.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest reviewrequest dotnet-method reviews a leave request by action key (updates status and reviewer info). aspnet.starterkit.portal.leaverequestreviewresult aspnet.starterkit.portal.ileaverequestdb.reviewrequest(aspnet.starterkit.portal.leaverequestreviewrequest request) dotnet:m:aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest portal.components aspnet.starterkit.portal aspnet.starterkit.portal.ileaverequestdb t:aspnet.starterkit.portal.ileaverequestdb dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 按动作键审核请假申请（更新状态与审核人信息）。 reviews a leave request by action key (updates status and reviewer info). 审核请求。 review request."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementcreaterequest",
@@ -32367,6 +32565,15 @@
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.requestid requestid dotnet-property reimbursement identity key. public long aspnet.starterkit.portal.expensereimbursementinfo.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementinfo t:aspnet.starterkit.portal.expensereimbursementinfo dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 报销主键。 reimbursement identity key."
     },
     {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.userid",
+      "name": "UserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-fdcf85f5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-fdcf85f5.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.userid userid dotnet-property submitting portal user identifier (for admin review display). public int aspnet.starterkit.portal.expensereimbursementinfo.userid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.userid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementinfo t:aspnet.starterkit.portal.expensereimbursementinfo dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 申请人门户用户标识（后台审核展示用）。 submitting portal user identifier (for admin review display)."
+    },
+    {
       "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.category",
       "name": "Category",
       "kind": "dotnet-property",
@@ -32421,6 +32628,33 @@
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.createdutc createdutc dotnet-property creation time (utc). public system.datetime aspnet.starterkit.portal.expensereimbursementinfo.createdutc { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.createdutc portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementinfo t:aspnet.starterkit.portal.expensereimbursementinfo dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 创建时间（utc）。 creation time (utc)."
     },
     {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.reviewedutc",
+      "name": "ReviewedUtc",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-295a1c00.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-295a1c00.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.reviewedutc reviewedutc dotnet-property review time (utc; non-null after an admin review). public system.datetime? aspnet.starterkit.portal.expensereimbursementinfo.reviewedutc { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.reviewedutc portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementinfo t:aspnet.starterkit.portal.expensereimbursementinfo dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 审核时间（utc，后台审核写入后为非空）。 review time (utc; non-null after an admin review)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.reviewedbyuserid",
+      "name": "ReviewedByUserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-e56688d5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-e56688d5.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.reviewedbyuserid reviewedbyuserid dotnet-property reviewer portal user identifier. public int? aspnet.starterkit.portal.expensereimbursementinfo.reviewedbyuserid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.reviewedbyuserid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementinfo t:aspnet.starterkit.portal.expensereimbursementinfo dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 审核人门户用户标识。 reviewer portal user identifier."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.reviewcomment",
+      "name": "ReviewComment",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-4a67dc54.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.-4a67dc54.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementinfo.reviewcomment reviewcomment dotnet-property review comment. public string aspnet.starterkit.portal.expensereimbursementinfo.reviewcomment { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementinfo.reviewcomment portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementinfo t:aspnet.starterkit.portal.expensereimbursementinfo dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 审核意见。 review comment."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementresult",
       "name": "ExpenseReimbursementResult",
       "kind": "dotnet-type",
@@ -32457,6 +32691,150 @@
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresult.requestid requestid dotnet-property new reimbursement identity key (valid on success). public long aspnet.starterkit.portal.expensereimbursementresult.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementresult.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementresult t:aspnet.starterkit.portal.expensereimbursementresult dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 新建报销主键（成功时有效）。 new reimbursement identity key (valid on success)."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementstatuses",
+      "name": "ExpenseReimbursementStatuses",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementstatu-5f4db405.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementstatu-5f4db405.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementstatuses expensereimbursementstatuses dotnet-type expense-reimbursement approval status keys (consistent with the admin review-page filter and work-item projection). class aspnet.starterkit.portal.expensereimbursementstatuses dotnet:t:aspnet.starterkit.portal.expensereimbursementstatuses portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 费用报销审批状态键（与后台审核页筛选及工作项投影保持一致）。 expense-reimbursement approval status keys (consistent with the admin review-page filter and work-item projection)."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.pending",
+      "name": "Pending",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-b7b4de76.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-b7b4de76.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.pending pending dotnet-field pending review. public const string aspnet.starterkit.portal.expensereimbursementstatuses.pending dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.pending portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 待审批。 pending review."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved",
+      "name": "Approved",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-ff2e1b28.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-ff2e1b28.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.approved approved dotnet-field approved. public const string aspnet.starterkit.portal.expensereimbursementstatuses.approved dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.approved portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已批准。 approved."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.rejected",
+      "name": "Rejected",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-a8b6bc95.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-a8b6bc95.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.rejected rejected dotnet-field rejected. public const string aspnet.starterkit.portal.expensereimbursementstatuses.rejected dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已拒绝。 rejected."
+    },
+    {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.closed",
+      "name": "Closed",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-089d858b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-089d858b.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.closed closed dotnet-field closed. public const string aspnet.starterkit.portal.expensereimbursementstatuses.closed dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.closed portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已关闭。 closed."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "name": "ExpenseReimbursementReviewRequest",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementrevie-21dac688.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementrevie-21dac688.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementreviewrequest expensereimbursementreviewrequest dotnet-type expense-reimbursement review request (submitted from the admin review page). class aspnet.starterkit.portal.expensereimbursementreviewrequest dotnet:t:aspnet.starterkit.portal.expensereimbursementreviewrequest portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 费用报销审核请求（后台审核页提交）。 expense-reimbursement review request (submitted from the admin review page)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.requestid",
+      "name": "RequestId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-90e9c00e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-90e9c00e.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.requestid requestid dotnet-property reimbursement identity key. public long aspnet.starterkit.portal.expensereimbursementreviewrequest.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewrequest.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewrequest t:aspnet.starterkit.portal.expensereimbursementreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 报销主键。 reimbursement identity key."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.actionkey",
+      "name": "ActionKey",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-5134ca63.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-5134ca63.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.actionkey actionkey dotnet-property review action key (approve/reject/return). public string aspnet.starterkit.portal.expensereimbursementreviewrequest.actionkey { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewrequest.actionkey portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewrequest t:aspnet.starterkit.portal.expensereimbursementreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 审核动作键（approve/reject/return）。 review action key (approve/reject/return)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewcomment",
+      "name": "ReviewComment",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-9192b34b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-9192b34b.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewcomment reviewcomment dotnet-property review comment (normalized). public string aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewcomment { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewcomment portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewrequest t:aspnet.starterkit.portal.expensereimbursementreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 审核意见（已归一化）。 review comment (normalized)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedbyuserid",
+      "name": "ReviewedByUserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-7b5337b0.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-7b5337b0.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedbyuserid reviewedbyuserid dotnet-property reviewer user identifier. public int aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedbyuserid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedbyuserid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewrequest t:aspnet.starterkit.portal.expensereimbursementreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 审核人用户标识。 reviewer user identifier."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedby",
+      "name": "ReviewedBy",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-229d9792.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-229d9792.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedby reviewedby dotnet-property reviewer name. public string aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedby { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedby portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewrequest t:aspnet.starterkit.portal.expensereimbursementreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 审核人名称。 reviewer name."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedutc",
+      "name": "ReviewedUtc",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-ded8e5bf.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-ded8e5bf.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedutc reviewedutc dotnet-property review time (utc). public system.datetime aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedutc { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewrequest.reviewedutc portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewrequest t:aspnet.starterkit.portal.expensereimbursementreviewrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 审核时间（utc）。 review time (utc)."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementreviewresult",
+      "name": "ExpenseReimbursementReviewResult",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementrevie-92035e2e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementrevie-92035e2e.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementreviewresult expensereimbursementreviewresult dotnet-type expense-reimbursement review result. class aspnet.starterkit.portal.expensereimbursementreviewresult dotnet:t:aspnet.starterkit.portal.expensereimbursementreviewresult portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 费用报销审核结果。 expense-reimbursement review result."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewresult.succeeded",
+      "name": "Succeeded",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-2ab387e9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-2ab387e9.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewresult.succeeded succeeded dotnet-property whether the review succeeded. public bool aspnet.starterkit.portal.expensereimbursementreviewresult.succeeded { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewresult.succeeded portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewresult t:aspnet.starterkit.portal.expensereimbursementreviewresult dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 是否成功。 whether the review succeeded."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewresult.message",
+      "name": "Message",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-c95f6543.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-c95f6543.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewresult.message message dotnet-property low-sensitivity result message (used on failure). public string aspnet.starterkit.portal.expensereimbursementreviewresult.message { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewresult.message portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewresult t:aspnet.starterkit.portal.expensereimbursementreviewresult dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 低敏结果消息（失败时使用）。 low-sensitivity result message (used on failure)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewresult.requestid",
+      "name": "RequestId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-67146b28.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementrevie-67146b28.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementreviewresult.requestid requestid dotnet-property reimbursement identity key. public long aspnet.starterkit.portal.expensereimbursementreviewresult.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementreviewresult.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementreviewresult t:aspnet.starterkit.portal.expensereimbursementreviewresult dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 报销主键。 reimbursement identity key."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.iexpensereimbursementdb",
       "name": "IExpenseReimbursementDb",
       "kind": "dotnet-type",
@@ -32491,6 +32869,24 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.g-9a0a7d26.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.g-9a0a7d26.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.getrecentbyuser-system.int32-system.int32 getrecentbyuser dotnet-method get the applicant's recent reimbursements. system.collections.generic.ireadonlylist<aspnet.starterkit.portal.expensereimbursementinfo> aspnet.starterkit.portal.iexpensereimbursementdb.getrecentbyuser(int userid, int limit) dotnet:m:aspnet.starterkit.portal.iexpensereimbursementdb.getrecentbyuser-system.int32-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iexpensereimbursementdb t:aspnet.starterkit.portal.iexpensereimbursementdb dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 取申请人的最近报销列表。 get the applicant's recent reimbursements. 用户标识。 user identifier. 上限。 limit."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.getadminrequests-system.string-system.int32",
+      "name": "GetAdminRequests",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.g-4658406b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.g-4658406b.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.getadminrequests-system.string-system.int32 getadminrequests dotnet-method reads the administration review list filtered by status (an empty filter means all). system.collections.generic.ilist<aspnet.starterkit.portal.expensereimbursementinfo> aspnet.starterkit.portal.iexpensereimbursementdb.getadminrequests(string statusfilter, int limit) dotnet:m:aspnet.starterkit.portal.iexpensereimbursementdb.getadminrequests-system.string-system.int32 portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iexpensereimbursementdb t:aspnet.starterkit.portal.iexpensereimbursementdb dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 按状态筛选读取后台审核用费用报销列表（空筛选值表示全部）。 reads the administration review list filtered by status (an empty filter means all). 状态筛选值。 status filter value. 上限。 limit."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "name": "ReviewRequest",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.r-edcf20f4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.r-edcf20f4.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest reviewrequest dotnet-method reviews an expense reimbursement by action key (updates status and reviewer info). aspnet.starterkit.portal.expensereimbursementreviewresult aspnet.starterkit.portal.iexpensereimbursementdb.reviewrequest(aspnet.starterkit.portal.expensereimbursementreviewrequest request) dotnet:m:aspnet.starterkit.portal.iexpensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iexpensereimbursementdb t:aspnet.starterkit.portal.iexpensereimbursementdb dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 按动作键审核费用报销（更新状态与审核人信息）。 reviews an expense reimbursement by action key (updates status and reviewer info). 审核请求。 review request."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.iorganizationunitinfo",
@@ -42186,6 +42582,24 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.getrecentbyuser-system.int32-system.int32 getrecentbyuser dotnet-method returns the most recent leave requests for a user (descending by creation time) for the module's \"my leave\" list. public system.collections.generic.ireadonlylist<aspnet.starterkit.portal.leaverequestinfo> aspnet.starterkit.portal.leaverequestdb.getrecentbyuser(int userid, int limit) dotnet:m:aspnet.starterkit.portal.leaverequestdb.getrecentbyuser-system.int32-system.int32 portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestdb t:aspnet.starterkit.portal.leaverequestdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/leaverequestdb.cs csharp 按申请人取最近若干条请假申请（按创建时间倒序），供模块“我的请假”列表展示。 returns the most recent leave requests for a user (descending by creation time) for the module's \"my leave\" list. 申请人用户标识。 applicant user identifier. 返回条数上限。 maximum number of rows to return. 只读请假申请列表；查询异常时返回空列表而非抛错。 a read-only list of leave requests; returns an empty list on query failure instead of throwing."
     },
     {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.getadminrequests-system.string-system.int32",
+      "name": "GetAdminRequests",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.getadminre-47640acc.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.getadminre-47640acc.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.getadminrequests-system.string-system.int32 getadminrequests dotnet-method reads the administration review list filtered by status; an empty filter means all. public system.collections.generic.ilist<aspnet.starterkit.portal.leaverequestinfo> aspnet.starterkit.portal.leaverequestdb.getadminrequests(string statusfilter, int limit) dotnet:m:aspnet.starterkit.portal.leaverequestdb.getadminrequests-system.string-system.int32 portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestdb t:aspnet.starterkit.portal.leaverequestdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/leaverequestdb.cs csharp 按状态筛选读取后台审核用请假申请列表；空筛选值表示全部。 reads the administration review list filtered by status; an empty filter means all."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "name": "ReviewRequest",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequ-8fdf02d9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequ-8fdf02d9.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest reviewrequest dotnet-method reviews a leave request by action key: updates status and reviewer info and returns a low-sensitivity result. public aspnet.starterkit.portal.leaverequestreviewresult aspnet.starterkit.portal.leaverequestdb.reviewrequest(aspnet.starterkit.portal.leaverequestreviewrequest request) dotnet:m:aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestdb t:aspnet.starterkit.portal.leaverequestdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/leaverequestdb.cs csharp 按动作键审核请假申请：更新状态与审核人信息，返回低敏结果。 reviews a leave request by action key: updates status and reviewer info and returns a low-sensitivity result."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementdb",
       "name": "ExpenseReimbursementDb",
       "kind": "dotnet-type",
@@ -42229,6 +42643,24 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.ge-038ed8ad.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.ge-038ed8ad.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.getrecentbyuser-system.int32-system.int32 getrecentbyuser dotnet-method returns the most recent expense reimbursements for a user (descending by creation time) for the module's \"my reimbursement\" list. public system.collections.generic.ireadonlylist<aspnet.starterkit.portal.expensereimbursementinfo> aspnet.starterkit.portal.expensereimbursementdb.getrecentbyuser(int userid, int limit) dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.getrecentbyuser-system.int32-system.int32 portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementdb t:aspnet.starterkit.portal.expensereimbursementdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/expensereimbursementdb.cs csharp 按申请人取最近若干条费用报销（按创建时间倒序），供模块“我的报销”列表展示。 returns the most recent expense reimbursements for a user (descending by creation time) for the module's \"my reimbursement\" list. 申请人用户标识。 applicant user identifier. 返回条数上限。 maximum number of rows to return. 只读费用报销列表；查询异常时返回空列表而非抛错。 a read-only list of reimbursements; returns an empty list on query failure instead of throwing."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.getadminrequests-system.string-system.int32",
+      "name": "GetAdminRequests",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.ge-b5f36fdc.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.ge-b5f36fdc.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.getadminrequests-system.string-system.int32 getadminrequests dotnet-method reads the administration review list filtered by status; an empty filter means all. public system.collections.generic.ilist<aspnet.starterkit.portal.expensereimbursementinfo> aspnet.starterkit.portal.expensereimbursementdb.getadminrequests(string statusfilter, int limit) dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.getadminrequests-system.string-system.int32 portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementdb t:aspnet.starterkit.portal.expensereimbursementdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/expensereimbursementdb.cs csharp 按状态筛选读取后台审核用费用报销列表；空筛选值表示全部。 reads the administration review list filtered by status; an empty filter means all."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "name": "ReviewRequest",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.re-48ba57b9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.re-48ba57b9.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest reviewrequest dotnet-method reviews an expense reimbursement by action key: updates status and reviewer info and returns a low-sensitivity result. public aspnet.starterkit.portal.expensereimbursementreviewresult aspnet.starterkit.portal.expensereimbursementdb.reviewrequest(aspnet.starterkit.portal.expensereimbursementreviewrequest request) dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementdb t:aspnet.starterkit.portal.expensereimbursementdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/expensereimbursementdb.cs csharp 按动作键审核费用报销：更新状态与审核人信息，返回低敏结果。 reviews an expense reimbursement by action key: updates status and reviewer info and returns a low-sensitivity result."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.organizationunitinfo",

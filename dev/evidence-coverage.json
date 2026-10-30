@@ -41,6 +41,8 @@
         { "id": "Admin/TabLayout.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Modules.TabLayout）+ 页签模块跨链（Tabs.ascx.cs:321/376）" },
         { "id": "Admin/UserEmployeeBindingEdit.aspx", "covered": true, "entry": "ManageUsers.aspx.cs:1067 绑定链接 + EmployeeDirectory.aspx:41 硬链 + 行级 BindUrl（EmployeeDirectory.aspx.cs:621/737）" },
         { "id": "Admin/WorkItems.aspx", "covered": true, "entry": "注册表动作区互链（Admin.WorkItems）+ 自身动作区硬链 3 页（WorkItems.aspx:31-33）" },
+        { "id": "Admin/LeaveRequests.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Capability.LeaveRequests）+ WorkItems.aspx.cs 业务类型路由（LeaveRequest→LeaveRequests.aspx）+ 后台管理页签可达（D23）" },
+        { "id": "Admin/ExpenseReimbursements.aspx", "covered": true, "entry": "注册表动作区互链（Admin.Capability.ExpenseReimbursements）+ WorkItems.aspx.cs 业务类型路由（ExpenseReimbursement→ExpenseReimbursements.aspx）+ 后台管理页签可达（D23）" },
         { "id": "Admin/ThemeSettings.aspx", "covered": false, "owner": "项目维护者", "reEntry": "①进入导航/UI 类周期补导航链接（硬性前置：先出原型与设计稿并经确认）；或②裁定为主题运维直链专用页，维持「直链可达、不入导航」口径并同步站点文档", "basis": "全仓入链审计 0 处引用（除注册条目 PortalNavigationRegistry.cs:818-831 与自身文件）；W-anp-P138 运行期锚点爬取不可达；无 postback 入口（works/W-anp-P138-admin-module-access-entries.md 第五节）" }
       ],
       "excluded": [

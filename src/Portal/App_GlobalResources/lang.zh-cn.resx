@@ -2787,6 +2787,66 @@
   <data name="Admin_BusinessApplications_NotReviewed" xml:space="preserve">
     <value>未审核</value>
   </data>
+  <data name="Admin_LeaveRequests_Title" xml:space="preserve">
+    <value>请假申请审核</value>
+  </data>
+  <data name="Admin_LeaveRequests_Subtitle" xml:space="preserve">
+    <value>审批员工请假申请并更新申请状态。</value>
+  </data>
+  <data name="Admin_LeaveRequests_SectionRequests" xml:space="preserve">
+    <value>请假申请列表</value>
+  </data>
+  <data name="Admin_LeaveRequests_ColumnApplication" xml:space="preserve">
+    <value>请假信息</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineLeaveType" xml:space="preserve">
+    <value>请假类型</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineStartDate" xml:space="preserve">
+    <value>开始日期</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineEndDate" xml:space="preserve">
+    <value>结束日期</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineDays" xml:space="preserve">
+    <value>天数</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineReason" xml:space="preserve">
+    <value>请假事由</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineAttachment" xml:space="preserve">
+    <value>附件</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineLatestReview" xml:space="preserve">
+    <value>最近审核</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_Title" xml:space="preserve">
+    <value>费用报销审核</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_Subtitle" xml:space="preserve">
+    <value>审批员工费用报销并更新报销状态。</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_SectionRequests" xml:space="preserve">
+    <value>费用报销列表</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_ColumnApplication" xml:space="preserve">
+    <value>报销信息</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineCategory" xml:space="preserve">
+    <value>费用类别</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineAmount" xml:space="preserve">
+    <value>金额</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineReason" xml:space="preserve">
+    <value>报销事由</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineAttachment" xml:space="preserve">
+    <value>附件</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineLatestReview" xml:space="preserve">
+    <value>最近审核</value>
+  </data>
   <data name="Admin_EmployeeProfileCorrectionRequests_NotReviewed" xml:space="preserve">
     <value>未审核</value>
   </data>

@@ -1097,6 +1097,44 @@ namespace ASPNET.StarterKit.Portal
                 "P44.5: enterprise capability administration entry."),
 
             // <lang>
+            //   <zh-CN>D23：请假申请后台审核页登记（复用业务申请查看/处理权限键，专用权限键为后续项）。</zh-CN>
+            //   <en>D23: leave-request administration review page registration (reuses the business-application view/handle permission keys; dedicated keys are a follow-up).</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.LeaveRequests",
+                PortalNavigationEntryKind.AdminPage,
+                "请假申请后台",
+                "Leave Request Administration",
+                "Admin/LeaveRequests.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                230,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.BusinessApplicationReview, PortalPermissionKeys.BusinessApplicationAdmin },
+                new string[0],
+                new string[0],
+                "D23: 请假申请后台审核页（列表/筛选/批准/退回/拒绝 + 工作项投影）。"),
+
+            // <lang>
+            //   <zh-CN>D23：费用报销后台审核页登记（复用业务申请查看/处理权限键，专用权限键为后续项）。</zh-CN>
+            //   <en>D23: expense-reimbursement administration review page registration (reuses the business-application view/handle permission keys; dedicated keys are a follow-up).</en>
+            // </lang>
+            new PortalNavigationEntry(
+                "Admin.Capability.ExpenseReimbursements",
+                PortalNavigationEntryKind.AdminPage,
+                "费用报销后台",
+                "Expense Reimbursement Administration",
+                "Admin/ExpenseReimbursements.aspx",
+                PortalNavigationVisibilityMode.AdminOnly,
+                PortalNavigationLifecycleState.Active,
+                240,
+                new[] { PortalRoleNames.Administrators },
+                new[] { PortalPermissionKeys.BusinessApplicationReview, PortalPermissionKeys.BusinessApplicationAdmin },
+                new string[0],
+                new string[0],
+                "D23: 费用报销后台审核页（列表/筛选/批准/退回/拒绝 + 工作项投影）。"),
+
+            // <lang>
             //   <zh-CN>遗留角色成员管理页登记（W44.5 裁定）：SecurityRoles.aspx 是旧角色成员管理宿主页，与 Core.Admin.Roles（指向 Roles.ascx 控件）目标不同；两者并存，故本条按遗留登记且只作诊断，不进普通导航，也不生成动作区链接。</zh-CN>
             //   <en>Legacy role-membership page registration (W44.5 decision): SecurityRoles.aspx is the legacy role-membership host page and has a different target from Core.Admin.Roles (which points at the Roles.ascx control); both coexist, so this entry is registered as legacy for diagnostics only and never enters ordinary navigation or produces action-area links.</en>
             // </lang>

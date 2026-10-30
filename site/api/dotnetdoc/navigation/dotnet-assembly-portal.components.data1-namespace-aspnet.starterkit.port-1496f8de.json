@@ -48,6 +48,19 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.createrequ-d5037ca1.html"
     },
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.getadminrequests-system.string-system.int32",
+      "kind": "entry",
+      "label": "GetAdminRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.getadminrequests-system.string-system.int32",
+      "sourcePath": "src/Portal.Components.Data1/LeaveRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequestdb.getadminrequests-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.getadminre-47640acc.html"
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.getrecentbyuser-system.int32-system.int32",
       "kind": "entry",
       "label": "GetRecentByUser",
@@ -72,6 +85,19 @@
       "sourcePath": "src/Portal.Components.Data1/LeaveRequestDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequestdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.isschemaav-6f9176d2.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "kind": "entry",
+      "label": "ReviewRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "sourcePath": "src/Portal.Components.Data1/LeaveRequestDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequ-8fdf02d9.html"
     }
   ]
 }

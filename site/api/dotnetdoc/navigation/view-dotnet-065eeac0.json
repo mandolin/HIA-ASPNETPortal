@@ -37,7 +37,7 @@
       "id": "dotnet:assembly:portal.components",
       "kind": "assembly",
       "label": "Portal.Components",
-      "entryCount": 1231,
+      "entryCount": 1275,
       "views": [
         "dotnet"
       ],
@@ -57,7 +57,7 @@
       "id": "dotnet:assembly:portal.components.data1",
       "kind": "assembly",
       "label": "Portal.Components.Data1",
-      "entryCount": 761,
+      "entryCount": 765,
       "views": [
         "dotnet"
       ],

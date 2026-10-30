@@ -7,7 +7,7 @@
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit",
       "kind": "namespace",
       "label": "StarterKit",
-      "entryCount": 1231,
+      "entryCount": 1275,
       "views": [
         "dotnet"
       ],

@@ -11016,6 +11016,226 @@ namespace Resources {
                 return ResourceManager.GetString("Admin_BusinessApplications_NotReviewed", resourceCulture);
             }
         }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请假申请审核页标题。</zh-CN>
+        ///   <en>Leave request review page title.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_Title {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_Title", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请假申请审核页副标题。</zh-CN>
+        ///   <en>Leave request review page subtitle.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_Subtitle", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请假申请列表分区标题。</zh-CN>
+        ///   <en>Leave request list section heading.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_SectionRequests {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_SectionRequests", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请假申请详情列标题。</zh-CN>
+        ///   <en>Leave request details column heading.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_ColumnApplication {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_ColumnApplication", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请假类型字段标签。</zh-CN>
+        ///   <en>Leave type field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_InlineLeaveType {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineLeaveType", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>开始日期字段标签。</zh-CN>
+        ///   <en>Start date field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_InlineStartDate {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineStartDate", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>结束日期字段标签。</zh-CN>
+        ///   <en>End date field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_InlineEndDate {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineEndDate", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>天数字段标签。</zh-CN>
+        ///   <en>Days field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_InlineDays {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineDays", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>请假事由字段标签。</zh-CN>
+        ///   <en>Reason field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_InlineReason {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineReason", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>附件字段标签。</zh-CN>
+        ///   <en>Attachment field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_InlineAttachment {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineAttachment", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近审核字段标签。</zh-CN>
+        ///   <en>Latest review field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_LeaveRequests_InlineLatestReview {
+            get {
+                return ResourceManager.GetString("Admin_LeaveRequests_InlineLatestReview", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>费用报销审核页标题。</zh-CN>
+        ///   <en>Expense reimbursement review page title.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_Title {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_Title", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>费用报销审核页副标题。</zh-CN>
+        ///   <en>Expense reimbursement review page subtitle.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_Subtitle {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_Subtitle", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>费用报销列表分区标题。</zh-CN>
+        ///   <en>Expense reimbursement list section heading.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_SectionRequests {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_SectionRequests", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>报销详情列标题。</zh-CN>
+        ///   <en>Reimbursement details column heading.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_ColumnApplication {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_ColumnApplication", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>费用类别字段标签。</zh-CN>
+        ///   <en>Category field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_InlineCategory {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_InlineCategory", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>金额字段标签。</zh-CN>
+        ///   <en>Amount field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_InlineAmount {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_InlineAmount", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>报销事由字段标签。</zh-CN>
+        ///   <en>Reason field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_InlineReason {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_InlineReason", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>附件字段标签。</zh-CN>
+        ///   <en>Attachment field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_InlineAttachment {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_InlineAttachment", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>最近审核字段标签。</zh-CN>
+        ///   <en>Latest review field label.</en>
+        /// </lang>
+        /// </summary>
+        internal static string Admin_ExpenseReimbursements_InlineLatestReview {
+            get {
+                return ResourceManager.GetString("Admin_ExpenseReimbursements_InlineLatestReview", resourceCulture);
+            }
+        }
 
         /// <summary>
         /// <lang>

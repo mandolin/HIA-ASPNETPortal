@@ -48,6 +48,19 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.cr-aff7d3e1.html"
     },
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.getadminrequests-system.string-system.int32",
+      "kind": "entry",
+      "label": "GetAdminRequests",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.getadminrequests-system.string-system.int32",
+      "sourcePath": "src/Portal.Components.Data1/ExpenseReimbursementDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.getadminrequests-system.string-system.int32",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.ge-b5f36fdc.html"
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.getrecentbyuser-system.int32-system.int32",
       "kind": "entry",
       "label": "GetRecentByUser",
@@ -72,6 +85,19 @@
       "sourcePath": "src/Portal.Components.Data1/ExpenseReimbursementDb.cs",
       "symbolId": "dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.isschemaavailable",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.is-809b4322.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "kind": "entry",
+      "label": "ReviewRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "sourcePath": "src/Portal.Components.Data1/ExpenseReimbursementDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.re-48ba57b9.html"
     }
   ]
 }

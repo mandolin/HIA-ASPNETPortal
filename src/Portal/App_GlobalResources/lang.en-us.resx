@@ -2787,6 +2787,66 @@
   <data name="Admin_BusinessApplications_NotReviewed" xml:space="preserve">
     <value>(not reviewed)</value>
   </data>
+  <data name="Admin_LeaveRequests_Title" xml:space="preserve">
+    <value>Leave Request Review</value>
+  </data>
+  <data name="Admin_LeaveRequests_Subtitle" xml:space="preserve">
+    <value>Approve employee leave requests and update their status.</value>
+  </data>
+  <data name="Admin_LeaveRequests_SectionRequests" xml:space="preserve">
+    <value>Leave Request List</value>
+  </data>
+  <data name="Admin_LeaveRequests_ColumnApplication" xml:space="preserve">
+    <value>Leave Details</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineLeaveType" xml:space="preserve">
+    <value>Leave Type</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineStartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineEndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineDays" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineAttachment" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="Admin_LeaveRequests_InlineLatestReview" xml:space="preserve">
+    <value>Latest Review</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_Title" xml:space="preserve">
+    <value>Expense Reimbursement Review</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_Subtitle" xml:space="preserve">
+    <value>Approve employee expense reimbursements and update their status.</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_SectionRequests" xml:space="preserve">
+    <value>Expense Reimbursement List</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_ColumnApplication" xml:space="preserve">
+    <value>Reimbursement Details</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineAttachment" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="Admin_ExpenseReimbursements_InlineLatestReview" xml:space="preserve">
+    <value>Latest Review</value>
+  </data>
   <data name="Admin_EmployeeProfileCorrectionRequests_NotReviewed" xml:space="preserve">
     <value>(not reviewed)</value>
   </data>

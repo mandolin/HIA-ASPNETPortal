@@ -44,6 +44,12 @@ namespace ASPNET.StarterKit.Portal
         public string Status { get; set; }
         /// <summary><lang><zh-CN>创建时间（UTC）。</zh-CN><en>Creation time (UTC).</en></lang></summary>
         public DateTime CreatedUtc { get; set; }
+        /// <summary><lang><zh-CN>审核时间（UTC，后台审核写入后为非空）。</zh-CN><en>Review time (UTC; non-null after an admin review).</en></lang></summary>
+        public DateTime? ReviewedUtc { get; set; }
+        /// <summary><lang><zh-CN>审核人门户用户标识。</zh-CN><en>Reviewer Portal user identifier.</en></lang></summary>
+        public int? ReviewedByUserId { get; set; }
+        /// <summary><lang><zh-CN>审核意见。</zh-CN><en>Review comment.</en></lang></summary>
+        public string ReviewComment { get; set; }
     }
 
     /// <summary><lang><zh-CN>费用报销创建结果。</zh-CN><en>Expense-reimbursement creation result.</en></lang></summary>
