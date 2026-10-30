@@ -103,5 +103,80 @@ namespace ASPNET.StarterKit.Portal
                 return new List<LeaveRequestInfo>();
             }
         }
+
+        /// <summary><lang>
+        ///   <zh-CN>按状态筛选读取后台审核用请假申请列表；空筛选值表示全部。</zh-CN>
+        ///   <en>Reads the administration review list filtered by status; an empty filter means all.</en>
+        /// </lang></summary>
+        public IList<LeaveRequestInfo> GetAdminRequests(string statusFilter, int limit)
+        {
+            try
+            {
+                string sql = "SELECT TOP (@Limit) RequestId, UserId, LeaveType, StartDate, EndDate, Days, Reason, AttachmentName, Status, CreatedUtc " +
+                    "FROM dbo.PortalBiz_LeaveRequests";
+                if (!string.IsNullOrEmpty(statusFilter))
+                {
+                    sql += " WHERE Status = @Status";
+                }
+
+                sql += " ORDER BY CreatedUtc DESC;";
+                var parameters = new List<SqlParameter> { new SqlParameter("@Limit", limit) };
+                if (!string.IsNullOrEmpty(statusFilter))
+                {
+                    parameters.Add(new SqlParameter("@Status", statusFilter));
+                }
+
+                return context.Database.SqlQuery<LeaveRequestInfo>(sql, parameters.ToArray()).ToList();
+            }
+            catch
+            {
+                return new List<LeaveRequestInfo>();
+            }
+        }
+
+        /// <summary><lang>
+        ///   <zh-CN>按动作键审核请假申请：更新状态与审核人信息，返回低敏结果。</zh-CN>
+        ///   <en>Reviews a leave request by action key: updates status and reviewer info and returns a low-sensitivity result.</en>
+        /// </lang></summary>
+        public LeaveRequestReviewResult ReviewRequest(LeaveRequestReviewRequest request)
+        {
+            try
+            {
+                string status = MapActionToStatus(request.ActionKey);
+                int rows = context.Database.ExecuteSqlCommand(
+                    "UPDATE dbo.PortalBiz_LeaveRequests SET Status = @Status, ReviewedByUserId = @ReviewedByUserId, ReviewedBy = @ReviewedBy, ReviewedUtc = @ReviewedUtc, ReviewComment = @ReviewComment WHERE RequestId = @RequestId;",
+                    new SqlParameter("@Status", status),
+                    new SqlParameter("@ReviewedByUserId", request.ReviewedByUserId),
+                    new SqlParameter("@ReviewedBy", (object)request.ReviewedBy ?? DBNull.Value),
+                    new SqlParameter("@ReviewedUtc", request.ReviewedUtc),
+                    new SqlParameter("@ReviewComment", (object)request.ReviewComment ?? DBNull.Value),
+                    new SqlParameter("@RequestId", request.RequestId));
+                if (rows <= 0)
+                {
+                    return new LeaveRequestReviewResult { Succeeded = false, Message = "NotFound", RequestId = request.RequestId };
+                }
+
+                return new LeaveRequestReviewResult { Succeeded = true, RequestId = request.RequestId };
+            }
+            catch
+            {
+                return new LeaveRequestReviewResult { Succeeded = false, Message = "DbError", RequestId = request.RequestId };
+            }
+        }
+
+        private static string MapActionToStatus(string actionKey)
+        {
+            if (string.Equals(actionKey, PortalWorkflowActions.Approve, StringComparison.Ordinal))
+            {
+                return LeaveRequestStatuses.Approved;
+            }
+
+            if (string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal))
+            {
+                return LeaveRequestStatuses.Rejected;
+            }
+
+            return LeaveRequestStatuses.Pending;
+        }
     }
 }
