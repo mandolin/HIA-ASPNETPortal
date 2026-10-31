@@ -611,7 +611,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursement",
       "kind": "type",
       "label": "ExpenseReimbursement",
-      "entryCount": 15,
+      "entryCount": 16,
       "views": [
         "dotnet"
       ],
@@ -737,7 +737,7 @@
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.leaverequest",
       "kind": "type",
       "label": "LeaveRequest",
-      "entryCount": 17,
+      "entryCount": 18,
       "views": [
         "dotnet"
       ],
@@ -1770,6 +1770,20 @@
       "symbolId": "dotnet:t:aspnet.starterkit.portal.portalsettingsregistry",
       "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalsettingsregistry-2952547f.html",
       "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-362fc261.json"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer",
+      "kind": "type",
+      "label": "PortalStatusLocalizer",
+      "entryCount": 5,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-t-aspnet.starterkit.portal.portalstatuslocalizer",
+      "sourcePath": "src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "symbolId": "dotnet:t:aspnet.starterkit.portal.portalstatuslocalizer",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalstatuslocalizer-fdcc2bce.html",
+      "childrenPath": "navigation/dotnet-assembly-portal-namespace-aspnet.starterkit.portal-type-t-aspnet.-c52e68dc.json"
     },
     {
       "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalsystemsettingreadresult",

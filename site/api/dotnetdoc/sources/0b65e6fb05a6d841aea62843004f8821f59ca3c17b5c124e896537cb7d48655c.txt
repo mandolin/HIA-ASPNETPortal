@@ -1,0 +1,9 @@
+    public sealed class LeaveRequestResubmitRequest
+    {
+        /// <summary><lang><zh-CN>申请主键。</zh-CN><en>Request identity key.</en></lang></summary>
+        public long RequestId { get; set; }
+        /// <summary><lang><zh-CN>申请人用户标识（用于审计与归属核对）。</zh-CN><en>Applicant user identity (for audit and ownership checks).</en></lang></summary>
+        public int ApplicantUserId { get; set; }
+        /// <summary><lang><zh-CN>操作者名称（审计用）。</zh-CN><en>Actor name for audit.</en></lang></summary>
+        public string ActorName { get; set; }
+    }

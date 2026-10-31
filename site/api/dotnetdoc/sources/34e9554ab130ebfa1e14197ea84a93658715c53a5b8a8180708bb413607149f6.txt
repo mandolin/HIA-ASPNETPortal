@@ -1,0 +1,5 @@
+        internal static string ExpenseReimbursement_ColumnActions {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ColumnActions", resourceCulture);
+            }
+        }

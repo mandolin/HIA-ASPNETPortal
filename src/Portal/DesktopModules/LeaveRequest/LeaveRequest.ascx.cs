@@ -58,7 +58,7 @@ namespace ASPNET.StarterKit.Portal
             pnlEmpty.Visible = false;
         }
 
-        /// <summary><lang><zh-CN>提交请假申请：校验必填项与数值后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。</zh-CN><en>Submits the leave request: validates required fields and numeric input, writes the business row, and creates a work item assigned to the approval role; any failure surfaces as a low-sensitivity message.</en></lang></summary>
+        /// <summary><lang><zh-CN>提交请假申请：校验必填项与数值后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。</zh-CN><en>Submits the leave request: validates required fields and numeric input, writes the business row, and creates a work item assigned to the review role; any failure surfaces as a low-sensitivity message.</en></lang></summary>
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             int userId = GetCurrentUserId();
@@ -161,6 +161,78 @@ namespace ASPNET.StarterKit.Portal
             litMessage.Text = Server.HtmlEncode(message ?? string.Empty);
             pnlMessage.Visible = true;
             pnlMessage.CssClass = isError ? "leave-request-message" : "leave-request-message";
+        }
+
+        /// <summary><lang><zh-CN>列表内「重新提交」命令：仅允许本人把退回状态的申请重置为待审批，并重新打开待办工作项，最后重渲染列表（拒绝项同样可重新提交）。</zh-CN><en>Handles the in-list "Resubmit" command: resets the caller's own returned request to pending, reopens the work item, and re-renders the list (declined items are also resubmittable).</en></lang></summary>
+        protected void rptRecent_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (!string.Equals(e.CommandName, "Resubmit", StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            long requestId;
+            if (!long.TryParse(e.CommandArgument == null ? string.Empty : e.CommandArgument.ToString(), out requestId) || requestId <= 0)
+            {
+                ShowMessage("无效的重提请求。");
+                return;
+            }
+
+            int userId = GetCurrentUserId();
+            if (userId <= 0)
+            {
+                ShowMessage("请先登录后再操作。");
+                return;
+            }
+
+            LeaveRequestResubmitResult result = LeaveRequestDb.ResubmitRequest(new LeaveRequestResubmitRequest
+            {
+                RequestId = requestId,
+                ApplicantUserId = userId,
+                ActorName = GetCurrentUserName()
+            });
+
+            if (!result.Succeeded)
+            {
+                ShowMessage("重新提交失败，请稍后重试。");
+                return;
+            }
+
+            string summary = string.Empty;
+            var recent = LeaveRequestDb.GetRecentByUser(userId, 20);
+            if (recent != null)
+            {
+                foreach (LeaveRequestInfo item in recent)
+                {
+                    if (item.RequestId == requestId)
+                    {
+                        summary = item.LeaveType + " " + item.StartDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + " ~ " + item.EndDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                        break;
+                    }
+                }
+            }
+
+            WorkItemDb.EnsureWorkItem(new PortalWorkItemCreateRequest
+            {
+                BusinessKind = PortalWorkItemBusinessKinds.LeaveRequest,
+                BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                Title = "请假申请 #" + requestId,
+                Summary = summary,
+                AssignedRoleKey = "Admins"
+            });
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                "LeaveRequest.Resubmit",
+                "Request",
+                requestId.ToString(CultureInfo.InvariantCulture),
+                "Leave request resubmitted. UserId=" + userId,
+                Context,
+                null,
+                "Success");
+
+            ShowMessage("已重新提交，可在「我的待办」跟踪审批进度。", false);
+            RenderRecent();
         }
     }
 }

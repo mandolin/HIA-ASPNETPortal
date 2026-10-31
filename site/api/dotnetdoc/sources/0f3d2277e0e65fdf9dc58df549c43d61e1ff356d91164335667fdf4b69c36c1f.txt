@@ -1,0 +1,5 @@
+        internal static string Common_StatusApproved {
+            get {
+                return ResourceManager.GetString("Common_StatusApproved", resourceCulture);
+            }
+        }

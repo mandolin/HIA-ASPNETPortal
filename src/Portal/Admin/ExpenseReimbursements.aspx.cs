@@ -114,6 +114,7 @@ namespace ASPNET.StarterKit.Portal
             AddStatusOption(ExpenseReimbursementStatuses.Pending, "待审批");
             AddStatusOption(ExpenseReimbursementStatuses.Approved, "已批准");
             AddStatusOption(ExpenseReimbursementStatuses.Rejected, "已拒绝");
+            AddStatusOption(ExpenseReimbursementStatuses.Returned, "退回");
             AddStatusOption(ExpenseReimbursementStatuses.Closed, "已关闭");
             StatusFilterList.Items.Insert(0, new ListItem(lang.Admin_Common_AllOption, string.Empty));
             StatusFilterList.SelectedIndex = 0;

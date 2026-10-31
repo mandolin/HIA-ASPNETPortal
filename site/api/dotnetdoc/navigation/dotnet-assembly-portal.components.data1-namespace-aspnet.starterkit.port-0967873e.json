@@ -87,6 +87,19 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.is-809b4322.html"
     },
     {
+      "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest",
+      "kind": "entry",
+      "label": "ResubmitReimbursement",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest",
+      "sourcePath": "src/Portal.Components.Data1/ExpenseReimbursementDb.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.re-c9409690.html"
+    },
+    {
       "id": "dotnet:assembly:portal.components.data1:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest",
       "kind": "entry",
       "label": "ReviewRequest",

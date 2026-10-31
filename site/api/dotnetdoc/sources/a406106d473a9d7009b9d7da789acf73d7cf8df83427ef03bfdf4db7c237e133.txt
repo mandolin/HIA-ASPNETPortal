@@ -1,0 +1,5 @@
+        internal static string LeaveRequest_ColumnActions {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnActions", resourceCulture);
+            }
+        }

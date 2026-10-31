@@ -31,6 +31,28 @@ namespace ASPNET.StarterKit.Portal
         public string AttachmentName { get; set; }
     }
 
+    /// <summary><lang><zh-CN>请假申请重新提交请求（申请人从退回或拒绝状态重新提交）。</zh-CN><en>Leave-request resubmission request (applicant resubmits from a returned or rejected state).</en></lang></summary>
+    public sealed class LeaveRequestResubmitRequest
+    {
+        /// <summary><lang><zh-CN>申请主键。</zh-CN><en>Request identity key.</en></lang></summary>
+        public long RequestId { get; set; }
+        /// <summary><lang><zh-CN>申请人用户标识（用于审计与归属核对）。</zh-CN><en>Applicant user identity (for audit and ownership checks).</en></lang></summary>
+        public int ApplicantUserId { get; set; }
+        /// <summary><lang><zh-CN>操作者名称（审计用）。</zh-CN><en>Actor name for audit.</en></lang></summary>
+        public string ActorName { get; set; }
+    }
+
+    /// <summary><lang><zh-CN>请假申请重新提交结果。</zh-CN><en>Leave-request resubmission result.</en></lang></summary>
+    public sealed class LeaveRequestResubmitResult
+    {
+        /// <summary><lang><zh-CN>是否成功（受保护更新命中一行）。</zh-CN><en>Whether the guarded update hit a row.</en></lang></summary>
+        public bool Succeeded { get; set; }
+        /// <summary><lang><zh-CN>低敏结果说明（InvalidRequest/NotFound/DbError/OK）。</zh-CN><en>Low-sensitivity result note (InvalidRequest/NotFound/DbError/OK).</en></lang></summary>
+        public string Message { get; set; }
+        /// <summary><lang><zh-CN>申请主键。</zh-CN><en>Request identity key.</en></lang></summary>
+        public long RequestId { get; set; }
+    }
+
     /// <summary><lang><zh-CN>请假申请读取模型。</zh-CN><en>Leave-request read model.</en></lang></summary>
     public sealed class LeaveRequestInfo
     {
@@ -82,6 +104,8 @@ namespace ASPNET.StarterKit.Portal
         public const string Approved = "Approved";
         /// <summary><lang><zh-CN>已拒绝。</zh-CN><en>Rejected.</en></lang></summary>
         public const string Rejected = "Rejected";
+        /// <summary><lang><zh-CN>已退回（等待申请人修订后重新提交）。</zh-CN><en>Returned (awaiting applicant revision and resubmission).</en></lang></summary>
+        public const string Returned = "Returned";
         /// <summary><lang><zh-CN>已关闭。</zh-CN><en>Closed.</en></lang></summary>
         public const string Closed = "Closed";
     }
@@ -133,5 +157,7 @@ namespace ASPNET.StarterKit.Portal
         /// <summary><lang><zh-CN>按动作键审核请假申请（更新状态与审核人信息）。</zh-CN><en>Reviews a leave request by action key (updates status and reviewer info).</en></lang></summary>
         /// <param name="request"><l><zh-CN>审核请求。</zh-CN><en>Review request.</en></l></param>
         LeaveRequestReviewResult ReviewRequest(LeaveRequestReviewRequest request);
+        /// <summary><lang><zh-CN>把退回或拒绝状态的请假申请重置为待审批，并清空审核身份列（保留退回意见作为历史）；工作项重开由调用方负责。</zh-CN><en>Resets a returned or rejected leave request to pending and clears the reviewer-identity columns (keeping the return comment as history); the caller reopens the work item.</en></lang></summary>
+        LeaveRequestResubmitResult ResubmitRequest(LeaveRequestResubmitRequest request);
     }
 }

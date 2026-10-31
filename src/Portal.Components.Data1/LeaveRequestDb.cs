@@ -164,6 +164,49 @@ namespace ASPNET.StarterKit.Portal
             }
         }
 
+        /// <summary><lang>
+        ///   <zh-CN>把退回或拒绝状态的请假申请重置为待审批，并清空审核身份列（ReviewedUtc / ReviewedByUserId / ReviewedBy），保留退回意见（ReviewComment）作为历史。
+        ///   受保护更新仅命中 Returned/Rejected → Pending 一行；工作项重开由调用方（前台模块）负责。</zh-CN>
+        ///   <en>Resets a returned or rejected leave request to pending and clears the reviewer-identity columns (ReviewedUtc / ReviewedByUserId / ReviewedBy) while keeping the return comment (ReviewComment) as history.
+        ///   The guarded update only hits a single Returned/Rejected → Pending row; reopening the work item is the caller's (front-end module) responsibility.</en>
+        /// </lang></summary>
+        /// <remarks><lang>
+        ///   <zh-CN>本方法刻意不写入 PortalBiz_WorkflowEvents：该表 ActionKey/ToStatus 白名单不含请假/报销使用的 Pending（仅业务申请的 Submitted），且请假/报销的审核路径本就不写工作流事件；如需审计事件，应在把白名单扩展到 Pending 或引入请假/报销专属事件表后再补。</zh-CN>
+        ///   <en>This method intentionally does not write PortalBiz_WorkflowEvents: the table's ActionKey/ToStatus whitelist excludes the Pending status used by leave/expense (only the business-application Submitted is allowed), and the leave/expense review path already omits workflow events. Add audit logging only after extending the whitelist to Pending or introducing a leave/expense-specific event table.</en>
+        /// </lang></remarks>
+        public LeaveRequestResubmitResult ResubmitRequest(LeaveRequestResubmitRequest request)
+        {
+            if (request == null || request.RequestId <= 0)
+            {
+                return new LeaveRequestResubmitResult { Succeeded = false, Message = "InvalidRequest", RequestId = request == null ? 0 : request.RequestId };
+            }
+
+            try
+            {
+                int rows = context.Database.ExecuteSqlCommand(
+                    "UPDATE dbo.PortalBiz_LeaveRequests " +
+                    "SET Status = @Status, ReviewedUtc = NULL, ReviewedByUserId = NULL, ReviewedBy = NULL " +
+                    "WHERE RequestId = @RequestId AND UserId = @ApplicantUserId AND Status IN (@FromReturned, @FromRejected);",
+                    new SqlParameter("@Status", LeaveRequestStatuses.Pending),
+                    new SqlParameter("@RequestId", request.RequestId),
+                    new SqlParameter("@ApplicantUserId", request.ApplicantUserId),
+                    new SqlParameter("@FromReturned", LeaveRequestStatuses.Returned),
+                    new SqlParameter("@FromRejected", LeaveRequestStatuses.Rejected));
+
+                if (rows <= 0)
+                {
+                    return new LeaveRequestResubmitResult { Succeeded = false, Message = "NotFound", RequestId = request.RequestId };
+                }
+
+                return new LeaveRequestResubmitResult { Succeeded = true, RequestId = request.RequestId };
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError("请假申请重新提交失败（RequestId=" + request.RequestId + "）：" + ex);
+                return new LeaveRequestResubmitResult { Succeeded = false, Message = "DbError", RequestId = request.RequestId };
+            }
+        }
+
         private static string MapActionToStatus(string actionKey)
         {
             if (string.Equals(actionKey, PortalWorkflowActions.Approve, StringComparison.Ordinal))
@@ -174,6 +217,11 @@ namespace ASPNET.StarterKit.Portal
             if (string.Equals(actionKey, PortalWorkflowActions.Reject, StringComparison.Ordinal))
             {
                 return LeaveRequestStatuses.Rejected;
+            }
+
+            if (string.Equals(actionKey, PortalWorkflowActions.Return, StringComparison.Ordinal))
+            {
+                return LeaveRequestStatuses.Returned;
             }
 
             return LeaveRequestStatuses.Pending;

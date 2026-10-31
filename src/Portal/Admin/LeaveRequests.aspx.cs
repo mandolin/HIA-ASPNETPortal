@@ -114,6 +114,7 @@ namespace ASPNET.StarterKit.Portal
             AddStatusOption(LeaveRequestStatuses.Pending, "待审批");
             AddStatusOption(LeaveRequestStatuses.Approved, "已批准");
             AddStatusOption(LeaveRequestStatuses.Rejected, "已拒绝");
+            AddStatusOption(LeaveRequestStatuses.Returned, "退回");
             AddStatusOption(LeaveRequestStatuses.Closed, "已关闭");
             StatusFilterList.Items.Insert(0, new ListItem(lang.Admin_Common_AllOption, string.Empty));
             StatusFilterList.SelectedIndex = 0;

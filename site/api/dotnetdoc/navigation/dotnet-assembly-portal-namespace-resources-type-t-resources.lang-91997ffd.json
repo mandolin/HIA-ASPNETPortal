@@ -9126,6 +9126,71 @@
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_passwordmessageweakdictionar-c39c45dd.html"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statusapproved",
+      "kind": "entry",
+      "label": "Common_StatusApproved",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusapproved",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statusapproved",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusapproved-b63c0c75.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statusclosed",
+      "kind": "entry",
+      "label": "Common_StatusClosed",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusclosed",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statusclosed",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusclosed-11bff616.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statuspending",
+      "kind": "entry",
+      "label": "Common_StatusPending",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statuspending",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statuspending",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statuspending-3322cced.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statusrejected",
+      "kind": "entry",
+      "label": "Common_StatusRejected",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusrejected",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statusrejected",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusrejected-51d9e828.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.common_statusreturned",
+      "kind": "entry",
+      "label": "Common_StatusReturned",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.common_statusreturned",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.common_statusreturned",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusreturned-4a4be2f5.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.contacts_emptynocontacts",
       "kind": "entry",
       "label": "Contacts_EmptyNoContacts",
@@ -11115,6 +11180,19 @@
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.enterprisecapabilityworkbench_secti-418ed027.html"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.expensereimbursement_buttonresubmit",
+      "kind": "entry",
+      "label": "ExpenseReimbursement_ButtonResubmit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.expensereimbursement_buttonresubmit",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.expensereimbursement_buttonresubmit",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.expensereimbursement_buttonresubmit-e643a86e.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.expensereimbursement_buttonsubmit",
       "kind": "entry",
       "label": "ExpenseReimbursement_ButtonSubmit",
@@ -11178,6 +11256,19 @@
       "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
       "symbolId": "dotnet:p:resources.lang.expensereimbursement_categorytravel",
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.expensereimbursement_categorytravel-451b7f1f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.expensereimbursement_columnactions",
+      "kind": "entry",
+      "label": "ExpenseReimbursement_ColumnActions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.expensereimbursement_columnactions",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.expensereimbursement_columnactions",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.expensereimbursement_columnactions-fb23a8a4.html"
     },
     {
       "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.expensereimbursement_columnamount",
@@ -11401,6 +11492,19 @@
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.genericerror_title-54fe9ade.html"
     },
     {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.leaverequest_buttonresubmit",
+      "kind": "entry",
+      "label": "LeaveRequest_ButtonResubmit",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.leaverequest_buttonresubmit",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.leaverequest_buttonresubmit",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.leaverequest_buttonresubmit-14700ade.html"
+    },
+    {
       "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.leaverequest_buttonsubmit",
       "kind": "entry",
       "label": "LeaveRequest_ButtonSubmit",
@@ -11412,6 +11516,19 @@
       "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
       "symbolId": "dotnet:p:resources.lang.leaverequest_buttonsubmit",
       "contentPath": "entries/hia-document-dotnet-p-resources.lang.leaverequest_buttonsubmit-d14be61f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.leaverequest_columnactions",
+      "kind": "entry",
+      "label": "LeaveRequest_ColumnActions",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-resources.lang.leaverequest_columnactions",
+      "sourcePath": "src/Portal/App_GlobalResources/lang.designer.cs",
+      "symbolId": "dotnet:p:resources.lang.leaverequest_columnactions",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.leaverequest_columnactions-b1cafdf4.html"
     },
     {
       "id": "dotnet:assembly:portal:namespace:resources:type:t-resources.lang:entry:hia-document:dotnet-p-resources.lang.leaverequest_columndays",

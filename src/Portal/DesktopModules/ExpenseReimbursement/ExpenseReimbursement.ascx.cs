@@ -58,7 +58,7 @@ namespace ASPNET.StarterKit.Portal
             pnlEmpty.Visible = false;
         }
 
-        /// <summary><lang><zh-CN>提交费用报销：校验金额为正数后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。</zh-CN><en>Submits the expense reimbursement: validates that the amount is positive, writes the business row, and creates a work item assigned to the approval role; any failure surfaces as a low-sensitivity message.</en></lang></summary>
+        /// <summary><lang><zh-CN>提交费用报销：校验金额为正数后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。</zh-CN><en>Submits the expense reimbursement: validates that the amount is positive, writes the business row, and creates a work item assigned to the review role; any failure surfaces as a low-sensitivity message.</en></lang></summary>
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             int userId = GetCurrentUserId();
@@ -155,6 +155,78 @@ namespace ASPNET.StarterKit.Portal
             litMessage.Text = Server.HtmlEncode(message ?? string.Empty);
             pnlMessage.Visible = true;
             pnlMessage.CssClass = isError ? "expense-reimbursement-message" : "expense-reimbursement-message";
+        }
+
+        /// <summary><lang><zh-CN>列表内「重新提交」命令：仅允许本人把退回状态的报销单重置为待审批，并重新打开待办工作项，最后重渲染列表（拒绝项同样可重新提交）。</zh-CN><en>Handles the in-list "Resubmit" command: resets the caller's own returned reimbursement to pending, reopens the work item, and re-renders the list (declined items are also resubmittable).</en></lang></summary>
+        protected void rptRecent_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (!string.Equals(e.CommandName, "Resubmit", StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            long requestId;
+            if (!long.TryParse(e.CommandArgument == null ? string.Empty : e.CommandArgument.ToString(), out requestId) || requestId <= 0)
+            {
+                ShowMessage("无效的重提请求。");
+                return;
+            }
+
+            int userId = GetCurrentUserId();
+            if (userId <= 0)
+            {
+                ShowMessage("请先登录后再操作。");
+                return;
+            }
+
+            ExpenseReimbursementResubmitResult result = ExpenseReimbursementDb.ResubmitReimbursement(new ExpenseReimbursementResubmitRequest
+            {
+                RequestId = requestId,
+                ApplicantUserId = userId,
+                ActorName = GetCurrentUserName()
+            });
+
+            if (!result.Succeeded)
+            {
+                ShowMessage("重新提交失败，请稍后重试。");
+                return;
+            }
+
+            string summary = string.Empty;
+            var recent = ExpenseReimbursementDb.GetRecentByUser(userId, 20);
+            if (recent != null)
+            {
+                foreach (ExpenseReimbursementInfo item in recent)
+                {
+                    if (item.RequestId == requestId)
+                    {
+                        summary = item.Category + " ¥" + item.Amount.ToString("N2", CultureInfo.InvariantCulture);
+                        break;
+                    }
+                }
+            }
+
+            WorkItemDb.EnsureWorkItem(new PortalWorkItemCreateRequest
+            {
+                BusinessKind = PortalWorkItemBusinessKinds.ExpenseReimbursement,
+                BusinessId = requestId.ToString(CultureInfo.InvariantCulture),
+                Title = "费用报销 #" + requestId,
+                Summary = summary,
+                AssignedRoleKey = "Admins"
+            });
+
+            PortalOperationAudit.Record(
+                PortalOperationAuditEvents.BusinessModuleCategory,
+                "ExpenseReimbursement.Resubmit",
+                "Request",
+                requestId.ToString(CultureInfo.InvariantCulture),
+                "Expense reimbursement resubmitted. UserId=" + userId,
+                Context,
+                null,
+                "Success");
+
+            ShowMessage("已重新提交，可在「我的待办」跟踪审批进度。", false);
+            RenderRecent();
         }
     }
 }

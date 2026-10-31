@@ -727,6 +727,7 @@
     <Compile Include="DesktopModules\LeaveRequest\LeaveRequest.ascx.designer.cs">
       <DependentUpon>LeaveRequest.ascx</DependentUpon>
     </Compile>
+    <Compile Include="DesktopModules\PortalStatusLocalizer.cs" />
     <Compile Include="DesktopModules\ExpenseReimbursement\ExpenseReimbursement.ascx.cs">
       <DependentUpon>ExpenseReimbursement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

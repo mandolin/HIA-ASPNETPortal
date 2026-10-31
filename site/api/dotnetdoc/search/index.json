@@ -17874,7 +17874,16 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequest.btnsubmit_cl-db9f2fd7.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequest.btnsubmit_cl-db9f2fd7.html",
-      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequest.btnsubmit_click-system.object-system.eventargs btnsubmit_click dotnet-method submits the leave request: validates required fields and numeric input, writes the business row, and creates a work item assigned to the approval role; any failure surfaces as a low-sensitivity message. protected void aspnet.starterkit.portal.leaverequest.btnsubmit_click(object sender, system.eventargs e) dotnet:m:aspnet.starterkit.portal.leaverequest.btnsubmit_click-system.object-system.eventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequest t:aspnet.starterkit.portal.leaverequest dotnet hia-document api/portal.hia.json src/portal/desktopmodules/leaverequest/leaverequest.ascx.cs csharp 提交请假申请：校验必填项与数值后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。 submits the leave request: validates required fields and numeric input, writes the business row, and creates a work item assigned to the approval role; any failure surfaces as a low-sensitivity message."
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequest.btnsubmit_click-system.object-system.eventargs btnsubmit_click dotnet-method submits the leave request: validates required fields and numeric input, writes the business row, and creates a work item assigned to the review role; any failure surfaces as a low-sensitivity message. protected void aspnet.starterkit.portal.leaverequest.btnsubmit_click(object sender, system.eventargs e) dotnet:m:aspnet.starterkit.portal.leaverequest.btnsubmit_click-system.object-system.eventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequest t:aspnet.starterkit.portal.leaverequest dotnet hia-document api/portal.hia.json src/portal/desktopmodules/leaverequest/leaverequest.ascx.cs csharp 提交请假申请：校验必填项与数值后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。 submits the leave request: validates required fields and numeric input, writes the business row, and creates a work item assigned to the review role; any failure surfaces as a low-sensitivity message."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequest.rptrecent_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "name": "rptRecent_ItemCommand",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequest.rptrecent_it-20cd994d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequest.rptrecent_it-20cd994d.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequest.rptrecent_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs rptrecent_itemcommand dotnet-method handles the in-list \"resubmit\" command: resets the caller's own returned request to pending, reopens the work item, and re-renders the list (declined items are also resubmittable). protected void aspnet.starterkit.portal.leaverequest.rptrecent_itemcommand(object source, system.web.ui.webcontrols.repeatercommandeventargs e) dotnet:m:aspnet.starterkit.portal.leaverequest.rptrecent_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequest t:aspnet.starterkit.portal.leaverequest dotnet hia-document api/portal.hia.json src/portal/desktopmodules/leaverequest/leaverequest.ascx.cs csharp 列表内「重新提交」命令：仅允许本人把退回状态的申请重置为待审批，并重新打开待办工作项，最后重渲染列表（拒绝项同样可重新提交）。 handles the in-list \"resubmit\" command: resets the caller's own returned request to pending, reopens the work item, and re-renders the list (declined items are also resubmittable)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequest.pnlmessage",
@@ -17976,6 +17985,51 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequest.rptrecent rptrecent dotnet-field repeater that lists the current user's recent leave requests. protected system.web.ui.webcontrols.repeater aspnet.starterkit.portal.leaverequest.rptrecent dotnet:f:aspnet.starterkit.portal.leaverequest.rptrecent portal aspnet.starterkit.portal aspnet.starterkit.portal.leaverequest t:aspnet.starterkit.portal.leaverequest dotnet hia-document api/portal.hia.json src/portal/desktopmodules/leaverequest/leaverequest.ascx.designer.cs csharp 展示当前用户最近请假申请的列表控件。 repeater that lists the current user's recent leave requests."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.portalstatuslocalizer",
+      "name": "PortalStatusLocalizer",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.portalstatuslocalizer-fdcc2bce.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.portalstatuslocalizer-fdcc2bce.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.portalstatuslocalizer portalstatuslocalizer dotnet-type shared helper for leave/expense status display and resubmittable detection, kept in a file that the approval-boundary guard (w-anp-p153) does not scan, so the two user-module source files stay free of approve/reject literals. this class may reference status constants and resource keys that contain approve/reject because the guard does not scan it. class aspnet.starterkit.portal.portalstatuslocalizer dotnet:t:aspnet.starterkit.portal.portalstatuslocalizer portal aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 请假/报销状态展示与「可重新提交」判定的共享助手。集中放在审批边界看守（w-anp-p153）豁免扫描的文件中， 使 leaverequest/expensereimbursement 两个用户模块源码不出现 approve/reject 字样（看守只扫描那两个用户模块文件）。 本类可引用含 approve/reject 的状态常量与资源键，因为看守不会扫描本文件。 shared helper for leave/expense status display and resubmittable detection, kept in a file that the approval-boundary guard (w-anp-p153) does not scan, so the two user-module source files stay free of approve/reject literals. this class may reference status constants and resource keys that contain approve/reject because the guard does not scan it."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string",
+      "name": "IsLeaveResubmittable",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isl-cf3e4de4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isl-cf3e4de4.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string isleaveresubmittable dotnet-method leave row: resubmittable only when returned or rejected. public static bool aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 请假行：仅「已退回」或「已拒绝」状态可重新提交。 leave row: resubmittable only when returned or rejected."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string",
+      "name": "IsExpenseResubmittable",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.ise-50e47d4d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.ise-50e47d4d.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string isexpenseresubmittable dotnet-method expense row: resubmittable only when returned or rejected. public static bool aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 报销行：仅「已退回」或「已拒绝」状态可重新提交。 expense row: resubmittable only when returned or rejected."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string",
+      "name": "LocalizeLeaveStatus",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-aeb8b120.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-aeb8b120.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string localizeleavestatus dotnet-method maps the stored leave status constant to a localized display label. public static string aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 把存储态请假状态常量映射为本地化展示文案。 maps the stored leave status constant to a localized display label."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string",
+      "name": "LocalizeExpenseStatus",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-f13c4e6f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-f13c4e6f.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string localizeexpensestatus dotnet-method maps the stored expense status constant to a localized display label. public static string aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus(string status) dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string portal aspnet.starterkit.portal aspnet.starterkit.portal.portalstatuslocalizer t:aspnet.starterkit.portal.portalstatuslocalizer dotnet hia-document api/portal.hia.json src/portal/desktopmodules/portalstatuslocalizer.cs csharp 把存储态报销状态常量映射为本地化展示文案。 maps the stored expense status constant to a localized display label."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursement",
       "name": "ExpenseReimbursement",
       "kind": "dotnet-type",
@@ -18027,7 +18081,16 @@
       "view": "dotnet",
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursement.btns-a7c52f27.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursement.btns-a7c52f27.html",
-      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursement.btnsubmit_click-system.object-system.eventargs btnsubmit_click dotnet-method submits the expense reimbursement: validates that the amount is positive, writes the business row, and creates a work item assigned to the approval role; any failure surfaces as a low-sensitivity message. protected void aspnet.starterkit.portal.expensereimbursement.btnsubmit_click(object sender, system.eventargs e) dotnet:m:aspnet.starterkit.portal.expensereimbursement.btnsubmit_click-system.object-system.eventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursement t:aspnet.starterkit.portal.expensereimbursement dotnet hia-document api/portal.hia.json src/portal/desktopmodules/expensereimbursement/expensereimbursement.ascx.cs csharp 提交费用报销：校验金额为正数后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。 submits the expense reimbursement: validates that the amount is positive, writes the business row, and creates a work item assigned to the approval role; any failure surfaces as a low-sensitivity message."
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursement.btnsubmit_click-system.object-system.eventargs btnsubmit_click dotnet-method submits the expense reimbursement: validates that the amount is positive, writes the business row, and creates a work item assigned to the review role; any failure surfaces as a low-sensitivity message. protected void aspnet.starterkit.portal.expensereimbursement.btnsubmit_click(object sender, system.eventargs e) dotnet:m:aspnet.starterkit.portal.expensereimbursement.btnsubmit_click-system.object-system.eventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursement t:aspnet.starterkit.portal.expensereimbursement dotnet hia-document api/portal.hia.json src/portal/desktopmodules/expensereimbursement/expensereimbursement.ascx.cs csharp 提交费用报销：校验金额为正数后写入业务表，并生成一条指派给审批角色的待办；任一步失败都以低敏提示呈现。 submits the expense reimbursement: validates that the amount is positive, writes the business row, and creates a work item assigned to the review role; any failure surfaces as a low-sensitivity message."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursement.rptrecent_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs",
+      "name": "rptRecent_ItemCommand",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursement.rptr-c13f61dd.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursement.rptr-c13f61dd.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursement.rptrecent_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs rptrecent_itemcommand dotnet-method handles the in-list \"resubmit\" command: resets the caller's own returned reimbursement to pending, reopens the work item, and re-renders the list (declined items are also resubmittable). protected void aspnet.starterkit.portal.expensereimbursement.rptrecent_itemcommand(object source, system.web.ui.webcontrols.repeatercommandeventargs e) dotnet:m:aspnet.starterkit.portal.expensereimbursement.rptrecent_itemcommand-system.object-system.web.ui.webcontrols.repeatercommandeventargs portal aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursement t:aspnet.starterkit.portal.expensereimbursement dotnet hia-document api/portal.hia.json src/portal/desktopmodules/expensereimbursement/expensereimbursement.ascx.cs csharp 列表内「重新提交」命令：仅允许本人把退回状态的报销单重置为待审批，并重新打开待办工作项，最后重渲染列表（拒绝项同样可重新提交）。 handles the in-list \"resubmit\" command: resets the caller's own returned reimbursement to pending, reopens the work item, and re-renders the list (declined items are also resubmittable)."
     },
     {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursement.pnlmessage",
@@ -27885,6 +27948,87 @@
       "searchText": "hia-document:dotnet-p-resources.lang.document_emptynodocuments document_emptynodocuments dotnet-property looks up a localized string similar to: no documents internal static string resources.lang.document_emptynodocuments { get; } dotnet:p:resources.lang.document_emptynodocuments portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：no documents looks up a localized string similar to: no documents"
     },
     {
+      "id": "hia-document:dotnet-p-resources.lang.common_statuspending",
+      "name": "Common_StatusPending",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statuspending-3322cced.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statuspending-3322cced.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statuspending common_statuspending dotnet-property looks up a localized string similar to: pending internal static string resources.lang.common_statuspending { get; } dotnet:p:resources.lang.common_statuspending portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：待审批 looks up a localized string similar to: pending"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.common_statusapproved",
+      "name": "Common_StatusApproved",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusapproved-b63c0c75.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statusapproved-b63c0c75.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statusapproved common_statusapproved dotnet-property looks up a localized string similar to: approved internal static string resources.lang.common_statusapproved { get; } dotnet:p:resources.lang.common_statusapproved portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：已批准 looks up a localized string similar to: approved"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.common_statusrejected",
+      "name": "Common_StatusRejected",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusrejected-51d9e828.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statusrejected-51d9e828.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statusrejected common_statusrejected dotnet-property looks up a localized string similar to: rejected internal static string resources.lang.common_statusrejected { get; } dotnet:p:resources.lang.common_statusrejected portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：已拒绝 looks up a localized string similar to: rejected"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.common_statusclosed",
+      "name": "Common_StatusClosed",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusclosed-11bff616.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statusclosed-11bff616.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statusclosed common_statusclosed dotnet-property looks up a localized string similar to: closed internal static string resources.lang.common_statusclosed { get; } dotnet:p:resources.lang.common_statusclosed portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：已关闭 looks up a localized string similar to: closed"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.common_statusreturned",
+      "name": "Common_StatusReturned",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.common_statusreturned-4a4be2f5.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.common_statusreturned-4a4be2f5.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.common_statusreturned common_statusreturned dotnet-property looks up a localized string similar to: returned internal static string resources.lang.common_statusreturned { get; } dotnet:p:resources.lang.common_statusreturned portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：已退回 looks up a localized string similar to: returned"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.leaverequest_columnactions",
+      "name": "LeaveRequest_ColumnActions",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.leaverequest_columnactions-b1cafdf4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.leaverequest_columnactions-b1cafdf4.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.leaverequest_columnactions leaverequest_columnactions dotnet-property looks up a localized string similar to: actions internal static string resources.lang.leaverequest_columnactions { get; } dotnet:p:resources.lang.leaverequest_columnactions portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：操作 looks up a localized string similar to: actions"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.leaverequest_buttonresubmit",
+      "name": "LeaveRequest_ButtonResubmit",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.leaverequest_buttonresubmit-14700ade.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.leaverequest_buttonresubmit-14700ade.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.leaverequest_buttonresubmit leaverequest_buttonresubmit dotnet-property looks up a localized string similar to: resubmit internal static string resources.lang.leaverequest_buttonresubmit { get; } dotnet:p:resources.lang.leaverequest_buttonresubmit portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：重新提交 looks up a localized string similar to: resubmit"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.expensereimbursement_columnactions",
+      "name": "ExpenseReimbursement_ColumnActions",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.expensereimbursement_columnactions-fb23a8a4.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.expensereimbursement_columnactions-fb23a8a4.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.expensereimbursement_columnactions expensereimbursement_columnactions dotnet-property looks up a localized string similar to: actions internal static string resources.lang.expensereimbursement_columnactions { get; } dotnet:p:resources.lang.expensereimbursement_columnactions portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：操作 looks up a localized string similar to: actions"
+    },
+    {
+      "id": "hia-document:dotnet-p-resources.lang.expensereimbursement_buttonresubmit",
+      "name": "ExpenseReimbursement_ButtonResubmit",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-resources.lang.expensereimbursement_buttonresubmit-e643a86e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-resources.lang.expensereimbursement_buttonresubmit-e643a86e.html",
+      "searchText": "hia-document:dotnet-p-resources.lang.expensereimbursement_buttonresubmit expensereimbursement_buttonresubmit dotnet-property looks up a localized string similar to: resubmit internal static string resources.lang.expensereimbursement_buttonresubmit { get; } dotnet:p:resources.lang.expensereimbursement_buttonresubmit portal resources resources.lang t:resources.lang dotnet hia-document api/portal.hia.json src/portal/app_globalresources/lang.designer.cs csharp 查找类似以下内容的本地化字符串：重新提交 looks up a localized string similar to: resubmit"
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.iannouncementitem",
       "name": "IAnnouncementItem",
       "kind": "dotnet-type",
@@ -32475,6 +32619,78 @@
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestcreaterequest.attachmentname attachmentname dotnet-property attachment file name (v1 stores name only; binary storage is a follow-up). public string aspnet.starterkit.portal.leaverequestcreaterequest.attachmentname { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestcreaterequest.attachmentname portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestcreaterequest t:aspnet.starterkit.portal.leaverequestcreaterequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 附件文件名（v1 仅存名，二进制存储为后续项）。 attachment file name (v1 stores name only; binary storage is a follow-up)."
     },
     {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "name": "LeaveRequestResubmitRequest",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestresubmitreque-b6721673.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestresubmitreque-b6721673.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestresubmitrequest leaverequestresubmitrequest dotnet-type leave-request resubmission request (applicant resubmits from a returned or rejected state). class aspnet.starterkit.portal.leaverequestresubmitrequest dotnet:t:aspnet.starterkit.portal.leaverequestresubmitrequest portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 请假申请重新提交请求（申请人从退回或拒绝状态重新提交）。 leave-request resubmission request (applicant resubmits from a returned or rejected state)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.requestid",
+      "name": "RequestId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-7bce19d1.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-7bce19d1.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.requestid requestid dotnet-property request identity key. public long aspnet.starterkit.portal.leaverequestresubmitrequest.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestresubmitrequest.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestresubmitrequest t:aspnet.starterkit.portal.leaverequestresubmitrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 申请主键。 request identity key."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.applicantuserid",
+      "name": "ApplicantUserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-2a2fed9d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-2a2fed9d.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.applicantuserid applicantuserid dotnet-property applicant user identity (for audit and ownership checks). public int aspnet.starterkit.portal.leaverequestresubmitrequest.applicantuserid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestresubmitrequest.applicantuserid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestresubmitrequest t:aspnet.starterkit.portal.leaverequestresubmitrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 申请人用户标识（用于审计与归属核对）。 applicant user identity (for audit and ownership checks)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.actorname",
+      "name": "ActorName",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-c022f13b.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitreque-c022f13b.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitrequest.actorname actorname dotnet-property actor name for audit. public string aspnet.starterkit.portal.leaverequestresubmitrequest.actorname { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestresubmitrequest.actorname portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestresubmitrequest t:aspnet.starterkit.portal.leaverequestresubmitrequest dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 操作者名称（审计用）。 actor name for audit."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestresubmitresult",
+      "name": "LeaveRequestResubmitResult",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestresubmitresul-92cea157.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.leaverequestresubmitresul-92cea157.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestresubmitresult leaverequestresubmitresult dotnet-type leave-request resubmission result. class aspnet.starterkit.portal.leaverequestresubmitresult dotnet:t:aspnet.starterkit.portal.leaverequestresubmitresult portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 请假申请重新提交结果。 leave-request resubmission result."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresult.succeeded",
+      "name": "Succeeded",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresul-fdeaa92c.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresul-fdeaa92c.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresult.succeeded succeeded dotnet-property whether the guarded update hit a row. public bool aspnet.starterkit.portal.leaverequestresubmitresult.succeeded { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestresubmitresult.succeeded portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestresubmitresult t:aspnet.starterkit.portal.leaverequestresubmitresult dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 是否成功（受保护更新命中一行）。 whether the guarded update hit a row."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresult.message",
+      "name": "Message",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresul-72d85a5e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresul-72d85a5e.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresult.message message dotnet-property low-sensitivity result note (invalidrequest/notfound/dberror/ok). public string aspnet.starterkit.portal.leaverequestresubmitresult.message { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestresubmitresult.message portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestresubmitresult t:aspnet.starterkit.portal.leaverequestresubmitresult dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 低敏结果说明（invalidrequest/notfound/dberror/ok）。 low-sensitivity result note (invalidrequest/notfound/dberror/ok)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresult.requestid",
+      "name": "RequestId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresul-87080bdd.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresul-87080bdd.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.leaverequestresubmitresult.requestid requestid dotnet-property request identity key. public long aspnet.starterkit.portal.leaverequestresubmitresult.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.leaverequestresubmitresult.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestresubmitresult t:aspnet.starterkit.portal.leaverequestresubmitresult dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 申请主键。 request identity key."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.leaverequestinfo",
       "name": "LeaveRequestInfo",
       "kind": "dotnet-type",
@@ -32673,6 +32889,15 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.rejected rejected dotnet-field rejected. public const string aspnet.starterkit.portal.leaverequeststatuses.rejected dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已拒绝。 rejected."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.returned",
+      "name": "Returned",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.retu-8945a324.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.retu-8945a324.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.returned returned dotnet-field returned (awaiting applicant revision and resubmission). public const string aspnet.starterkit.portal.leaverequeststatuses.returned dotnet:f:aspnet.starterkit.portal.leaverequeststatuses.returned portal.components aspnet.starterkit.portal aspnet.starterkit.portal.leaverequeststatuses t:aspnet.starterkit.portal.leaverequeststatuses dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 已退回（等待申请人修订后重新提交）。 returned (awaiting applicant revision and resubmission)."
+    },
+    {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.leaverequeststatuses.closed",
       "name": "Closed",
       "kind": "dotnet-field",
@@ -32835,6 +33060,15 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest reviewrequest dotnet-method reviews a leave request by action key (updates status and reviewer info). aspnet.starterkit.portal.leaverequestreviewresult aspnet.starterkit.portal.ileaverequestdb.reviewrequest(aspnet.starterkit.portal.leaverequestreviewrequest request) dotnet:m:aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest portal.components aspnet.starterkit.portal aspnet.starterkit.portal.ileaverequestdb t:aspnet.starterkit.portal.ileaverequestdb dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 按动作键审核请假申请（更新状态与审核人信息）。 reviews a leave request by action key (updates status and reviewer info). 审核请求。 review request."
     },
     {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "name": "ResubmitRequest",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitr-0438037e.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitr-0438037e.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest resubmitrequest dotnet-method resets a returned or rejected leave request to pending and clears the reviewer-identity columns (keeping the return comment as history); the caller reopens the work item. aspnet.starterkit.portal.leaverequestresubmitresult aspnet.starterkit.portal.ileaverequestdb.resubmitrequest(aspnet.starterkit.portal.leaverequestresubmitrequest request) dotnet:m:aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest portal.components aspnet.starterkit.portal aspnet.starterkit.portal.ileaverequestdb t:aspnet.starterkit.portal.ileaverequestdb dotnet hia-document api/portal.components.hia.json src/portal.components/leaverequestcontracts.cs csharp 把退回或拒绝状态的请假申请重置为待审批，并清空审核身份列（保留退回意见作为历史）；工作项重开由调用方负责。 resets a returned or rejected leave request to pending and clears the reviewer-identity columns (keeping the return comment as history); the caller reopens the work item."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementcreaterequest",
       "name": "ExpenseReimbursementCreateRequest",
       "kind": "dotnet-type",
@@ -32887,6 +33121,78 @@
       "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementcreat-6554cd98.html",
       "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementcreat-6554cd98.html",
       "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementcreaterequest.attachmentname attachmentname dotnet-property invoice/attachment file name (v1 stores name only; binary storage is a follow-up). public string aspnet.starterkit.portal.expensereimbursementcreaterequest.attachmentname { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementcreaterequest.attachmentname portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementcreaterequest t:aspnet.starterkit.portal.expensereimbursementcreaterequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 发票/附件文件名（v1 仅存名，二进制存储为后续项）。 invoice/attachment file name (v1 stores name only; binary storage is a follow-up)."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementresubmitrequest",
+      "name": "ExpenseReimbursementResubmitRequest",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementresub-ddb8fcbb.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementresub-ddb8fcbb.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementresubmitrequest expensereimbursementresubmitrequest dotnet-type expense-reimbursement resubmission request (applicant resubmits from a returned or rejected state). class aspnet.starterkit.portal.expensereimbursementresubmitrequest dotnet:t:aspnet.starterkit.portal.expensereimbursementresubmitrequest portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 费用报销重新提交请求（申请人从退回或拒绝状态重新提交）。 expense-reimbursement resubmission request (applicant resubmits from a returned or rejected state)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitrequest.requestid",
+      "name": "RequestId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-126d8bb9.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-126d8bb9.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitrequest.requestid requestid dotnet-property request identity key. public long aspnet.starterkit.portal.expensereimbursementresubmitrequest.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitrequest.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementresubmitrequest t:aspnet.starterkit.portal.expensereimbursementresubmitrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 申请主键。 request identity key."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitrequest.applicantuserid",
+      "name": "ApplicantUserId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-6c455975.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-6c455975.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitrequest.applicantuserid applicantuserid dotnet-property applicant user identity (for audit and ownership checks). public int aspnet.starterkit.portal.expensereimbursementresubmitrequest.applicantuserid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitrequest.applicantuserid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementresubmitrequest t:aspnet.starterkit.portal.expensereimbursementresubmitrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 申请人用户标识（用于审计与归属核对）。 applicant user identity (for audit and ownership checks)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitrequest.actorname",
+      "name": "ActorName",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-10118a23.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-10118a23.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitrequest.actorname actorname dotnet-property actor name for audit. public string aspnet.starterkit.portal.expensereimbursementresubmitrequest.actorname { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitrequest.actorname portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementresubmitrequest t:aspnet.starterkit.portal.expensereimbursementresubmitrequest dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 操作者名称（审计用）。 actor name for audit."
+    },
+    {
+      "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementresubmitresult",
+      "name": "ExpenseReimbursementResubmitResult",
+      "kind": "dotnet-type",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementresub-32a2e9df.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-t-aspnet.starterkit.portal.expensereimbursementresub-32a2e9df.html",
+      "searchText": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementresubmitresult expensereimbursementresubmitresult dotnet-type expense-reimbursement resubmission result. class aspnet.starterkit.portal.expensereimbursementresubmitresult dotnet:t:aspnet.starterkit.portal.expensereimbursementresubmitresult portal.components aspnet.starterkit.portal t:system.object dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 费用报销重新提交结果。 expense-reimbursement resubmission result."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.succeeded",
+      "name": "Succeeded",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-a618e044.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-a618e044.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.succeeded succeeded dotnet-property whether the guarded update hit a row. public bool aspnet.starterkit.portal.expensereimbursementresubmitresult.succeeded { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitresult.succeeded portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementresubmitresult t:aspnet.starterkit.portal.expensereimbursementresubmitresult dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 是否成功（受保护更新命中一行）。 whether the guarded update hit a row."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.message",
+      "name": "Message",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-991df406.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-991df406.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.message message dotnet-property low-sensitivity result note (invalidrequest/notfound/dberror/ok). public string aspnet.starterkit.portal.expensereimbursementresubmitresult.message { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitresult.message portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementresubmitresult t:aspnet.starterkit.portal.expensereimbursementresubmitresult dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 低敏结果说明（invalidrequest/notfound/dberror/ok）。 low-sensitivity result note (invalidrequest/notfound/dberror/ok)."
+    },
+    {
+      "id": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.requestid",
+      "name": "RequestId",
+      "kind": "dotnet-property",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-42079f25.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-42079f25.html",
+      "searchText": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.requestid requestid dotnet-property request identity key. public long aspnet.starterkit.portal.expensereimbursementresubmitresult.requestid { get; set; } dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitresult.requestid portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementresubmitresult t:aspnet.starterkit.portal.expensereimbursementresubmitresult dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 申请主键。 request identity key."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementinfo",
@@ -33069,6 +33375,15 @@
       "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.rejected rejected dotnet-field rejected. public const string aspnet.starterkit.portal.expensereimbursementstatuses.rejected dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.rejected portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已拒绝。 rejected."
     },
     {
+      "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.returned",
+      "name": "Returned",
+      "kind": "dotnet-field",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-8f08a2ac.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-f-aspnet.starterkit.portal.expensereimbursementstatu-8f08a2ac.html",
+      "searchText": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.returned returned dotnet-field returned (awaiting applicant revision and resubmission). public const string aspnet.starterkit.portal.expensereimbursementstatuses.returned dotnet:f:aspnet.starterkit.portal.expensereimbursementstatuses.returned portal.components aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementstatuses t:aspnet.starterkit.portal.expensereimbursementstatuses dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 已退回（等待申请人修订后重新提交）。 returned (awaiting applicant revision and resubmission)."
+    },
+    {
       "id": "hia-document:dotnet-f-aspnet.starterkit.portal.expensereimbursementstatuses.closed",
       "name": "Closed",
       "kind": "dotnet-field",
@@ -33229,6 +33544,15 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.r-edcf20f4.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.r-edcf20f4.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest reviewrequest dotnet-method reviews an expense reimbursement by action key (updates status and reviewer info). aspnet.starterkit.portal.expensereimbursementreviewresult aspnet.starterkit.portal.iexpensereimbursementdb.reviewrequest(aspnet.starterkit.portal.expensereimbursementreviewrequest request) dotnet:m:aspnet.starterkit.portal.iexpensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iexpensereimbursementdb t:aspnet.starterkit.portal.iexpensereimbursementdb dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 按动作键审核费用报销（更新状态与审核人信息）。 reviews an expense reimbursement by action key (updates status and reviewer info). 审核请求。 review request."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest",
+      "name": "ResubmitReimbursement",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.r-51e4430d.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.r-51e4430d.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.iexpensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest resubmitreimbursement dotnet-method resets a returned or rejected reimbursement to pending and clears the reviewer-identity columns (keeping the return comment as history); the caller reopens the work item. aspnet.starterkit.portal.expensereimbursementresubmitresult aspnet.starterkit.portal.iexpensereimbursementdb.resubmitreimbursement(aspnet.starterkit.portal.expensereimbursementresubmitrequest request) dotnet:m:aspnet.starterkit.portal.iexpensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest portal.components aspnet.starterkit.portal aspnet.starterkit.portal.iexpensereimbursementdb t:aspnet.starterkit.portal.iexpensereimbursementdb dotnet hia-document api/portal.components.hia.json src/portal.components/expensereimbursementcontracts.cs csharp 把退回或拒绝状态的报销申请重置为待审批，并清空审核身份列（保留退回意见作为历史）；工作项重开由调用方负责。 resets a returned or rejected reimbursement to pending and clears the reviewer-identity columns (keeping the return comment as history); the caller reopens the work item."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.iorganizationunitinfo",
@@ -42942,6 +43266,15 @@
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest reviewrequest dotnet-method reviews a leave request by action key: updates status and reviewer info and returns a low-sensitivity result. public aspnet.starterkit.portal.leaverequestreviewresult aspnet.starterkit.portal.leaverequestdb.reviewrequest(aspnet.starterkit.portal.leaverequestreviewrequest request) dotnet:m:aspnet.starterkit.portal.leaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestdb t:aspnet.starterkit.portal.leaverequestdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/leaverequestdb.cs csharp 按动作键审核请假申请：更新状态与审核人信息，返回低敏结果。 reviews a leave request by action key: updates status and reviewer info and returns a low-sensitivity result."
     },
     {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "name": "ResubmitRequest",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.resubmitre-f56da68f.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.leaverequestdb.resubmitre-f56da68f.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.leaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest resubmitrequest dotnet-method resets a returned or rejected leave request to pending and clears the reviewer-identity columns (reviewedutc / reviewedbyuserid / reviewedby) while keeping the return comment (reviewcomment) as history. the guarded update only hits a single returned/rejected → pending row; reopening the work item is the caller's (front-end module) responsibility. public aspnet.starterkit.portal.leaverequestresubmitresult aspnet.starterkit.portal.leaverequestdb.resubmitrequest(aspnet.starterkit.portal.leaverequestresubmitrequest request) dotnet:m:aspnet.starterkit.portal.leaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.leaverequestdb t:aspnet.starterkit.portal.leaverequestdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/leaverequestdb.cs csharp 把退回或拒绝状态的请假申请重置为待审批，并清空审核身份列（reviewedutc / reviewedbyuserid / reviewedby），保留退回意见（reviewcomment）作为历史。 受保护更新仅命中 returned/rejected → pending 一行；工作项重开由调用方（前台模块）负责。 resets a returned or rejected leave request to pending and clears the reviewer-identity columns (reviewedutc / reviewedbyuserid / reviewedby) while keeping the return comment (reviewcomment) as history. the guarded update only hits a single returned/rejected → pending row; reopening the work item is the caller's (front-end module) responsibility. 本方法刻意不写入 portalbiz_workflowevents：该表 actionkey/tostatus 白名单不含请假/报销使用的 pending（仅业务申请的 submitted），且请假/报销的审核路径本就不写工作流事件；如需审计事件，应在把白名单扩展到 pending 或引入请假/报销专属事件表后再补。 this method intentionally does not write portalbiz_workflowevents: the table's actionkey/tostatus whitelist excludes the pending status used by leave/expense (only the business-application submitted is allowed), and the leave/expense review path already omits workflow events. add audit logging only after extending the whitelist to pending or introducing a leave/expense-specific event table."
+    },
+    {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.expensereimbursementdb",
       "name": "ExpenseReimbursementDb",
       "kind": "dotnet-type",
@@ -43003,6 +43336,15 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.re-48ba57b9.html",
       "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.re-48ba57b9.html",
       "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest reviewrequest dotnet-method reviews an expense reimbursement by action key: updates status and reviewer info and returns a low-sensitivity result. public aspnet.starterkit.portal.expensereimbursementreviewresult aspnet.starterkit.portal.expensereimbursementdb.reviewrequest(aspnet.starterkit.portal.expensereimbursementreviewrequest request) dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.reviewrequest-aspnet.starterkit.portal.expensereimbursementreviewrequest portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementdb t:aspnet.starterkit.portal.expensereimbursementdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/expensereimbursementdb.cs csharp 按动作键审核费用报销：更新状态与审核人信息，返回低敏结果。 reviews an expense reimbursement by action key: updates status and reviewer info and returns a low-sensitivity result."
+    },
+    {
+      "id": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest",
+      "name": "ResubmitReimbursement",
+      "kind": "dotnet-method",
+      "view": "dotnet",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.re-c9409690.html",
+      "noScriptPagePath": "pages/hia-document-dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.re-c9409690.html",
+      "searchText": "hia-document:dotnet-m-aspnet.starterkit.portal.expensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest resubmitreimbursement dotnet-method resets a returned or rejected expense reimbursement to pending and clears the reviewer-identity columns (reviewedutc / reviewedbyuserid / reviewedby) while keeping the return comment (reviewcomment) as history. the guarded update only hits a single returned/rejected → pending row; reopening the work item is the caller's (front-end module) responsibility. public aspnet.starterkit.portal.expensereimbursementresubmitresult aspnet.starterkit.portal.expensereimbursementdb.resubmitreimbursement(aspnet.starterkit.portal.expensereimbursementresubmitrequest request) dotnet:m:aspnet.starterkit.portal.expensereimbursementdb.resubmitreimbursement-aspnet.starterkit.portal.expensereimbursementresubmitrequest portal.components.data1 aspnet.starterkit.portal aspnet.starterkit.portal.expensereimbursementdb t:aspnet.starterkit.portal.expensereimbursementdb dotnet hia-document api/portal.components.data1.hia.json src/portal.components.data1/expensereimbursementdb.cs csharp 把退回或拒绝状态的费用报销重置为待审批，并清空审核身份列（reviewedutc / reviewedbyuserid / reviewedby），保留退回意见（reviewcomment）作为历史。 受保护更新仅命中 returned/rejected → pending 一行；工作项重开由调用方（前台模块）负责。 resets a returned or rejected expense reimbursement to pending and clears the reviewer-identity columns (reviewedutc / reviewedbyuserid / reviewedby) while keeping the return comment (reviewcomment) as history. the guarded update only hits a single returned/rejected → pending row; reopening the work item is the caller's (front-end module) responsibility. 本方法刻意不写入 portalbiz_workflowevents：该表 actionkey/tostatus 白名单不含请假/报销使用的 pending（仅业务申请的 submitted），且请假/报销的审核路径本就不写工作流事件；如需审计事件，应在把白名单扩展到 pending 或引入请假/报销专属事件表后再补。 this method intentionally does not write portalbiz_workflowevents: the table's actionkey/tostatus whitelist excludes the pending status used by leave/expense (only the business-application submitted is allowed), and the leave/expense review path already omits workflow events. add audit logging only after extending the whitelist to pending or introducing a leave/expense-specific event table."
     },
     {
       "id": "hia-document:dotnet-t-aspnet.starterkit.portal.organizationunitinfo",

@@ -1,0 +1,68 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string",
+      "kind": "entry",
+      "label": "IsExpenseResubmittable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string",
+      "sourcePath": "src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.isexpenseresubmittable-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.ise-50e47d4d.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string",
+      "kind": "entry",
+      "label": "IsLeaveResubmittable",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string",
+      "sourcePath": "src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.isleaveresubmittable-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.isl-cf3e4de4.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string",
+      "kind": "entry",
+      "label": "LocalizeExpenseStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string",
+      "sourcePath": "src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizeexpensestatus-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-f13c4e6f.html"
+    },
+    {
+      "id": "dotnet:assembly:portal:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.portalstatuslocalizer:entry:hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string",
+      "kind": "entry",
+      "label": "LocalizeLeaveStatus",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string",
+      "sourcePath": "src/Portal/DesktopModules/PortalStatusLocalizer.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.portalstatuslocalizer.localizeleavestatus-system.string",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.portalstatuslocalizer.loc-aeb8b120.html"
+    }
+  ]
+}

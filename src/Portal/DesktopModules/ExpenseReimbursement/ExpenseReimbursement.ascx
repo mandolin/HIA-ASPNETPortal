@@ -69,17 +69,18 @@
         <asp:Panel ID="pnlEmpty" runat="server" Visible="false">
             <span class="expense-reimbursement-empty"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_EmptyState%>" runat="server" /></span>
         </asp:Panel>
-        <asp:Repeater ID="rptRecent" runat="server" Visible="false">
+        <asp:Repeater ID="rptRecent" runat="server" Visible="false" OnItemCommand="rptRecent_ItemCommand">
             <HeaderTemplate>
                 <table class="expense-reimbursement-list" cellspacing="0" cellpadding="4" border="0">
-                    <tr><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnId%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnCategory%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnAmount%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnStatus%>" runat="server" /></th></tr>
+                    <tr><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnId%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnCategory%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnAmount%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnStatus%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,ExpenseReimbursement_ColumnActions%>" runat="server" /></th></tr>
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
                     <td><%# Eval("RequestId") %></td>
                     <td><%# Eval("Category") %></td>
                     <td><%# Eval("Amount", "{0:N2}") %></td>
-                    <td><%# Eval("Status") %></td>
+                    <td><%# ASPNET.StarterKit.Portal.PortalStatusLocalizer.LocalizeExpenseStatus(Eval("Status") as string) %></td>
+                    <td><asp:LinkButton ID="btnResubmit" runat="server" CommandName="Resubmit" CommandArgument='<%# Eval("RequestId") %>' Text='<%$ Resources:lang,ExpenseReimbursement_ButtonResubmit %>' CssClass="CommandButton" Visible='<%# ASPNET.StarterKit.Portal.PortalStatusLocalizer.IsExpenseResubmittable(Eval("Status") as string) %>' /></td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>

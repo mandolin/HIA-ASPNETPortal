@@ -1,0 +1,55 @@
+{
+  "contract": "hia-project-navigation-shard",
+  "contractVersion": "0.1.0-draft",
+  "nodeId": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementresubmitresult",
+  "children": [
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementresubmitresult:base:t-system.object",
+      "kind": "relation",
+      "label": "Base: System.Object",
+      "entryCount": 0,
+      "views": [
+        "dotnet"
+      ]
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementresubmitresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.message",
+      "kind": "entry",
+      "label": "Message",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.message",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitresult.message",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-991df406.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementresubmitresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.requestid",
+      "kind": "entry",
+      "label": "RequestId",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.requestid",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitresult.requestid",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-42079f25.html"
+    },
+    {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.expensereimbursementresubmitresult:entry:hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.succeeded",
+      "kind": "entry",
+      "label": "Succeeded",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-p-aspnet.starterkit.portal.expensereimbursementresubmitresult.succeeded",
+      "sourcePath": "src/Portal.Components/ExpenseReimbursementContracts.cs",
+      "symbolId": "dotnet:p:aspnet.starterkit.portal.expensereimbursementresubmitresult.succeeded",
+      "contentPath": "entries/hia-document-dotnet-p-aspnet.starterkit.portal.expensereimbursementresub-a618e044.html"
+    }
+  ]
+}

@@ -11535,5 +11535,104 @@ namespace Resources {
                 return ResourceManager.GetString("Document_EmptyNoDocuments", resourceCulture);
             }
         }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：待审批</zh-CN>
+        ///   <en>Looks up a localized string similar to: Pending</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusPending {
+            get {
+                return ResourceManager.GetString("Common_StatusPending", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：已批准</zh-CN>
+        ///   <en>Looks up a localized string similar to: Approved</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusApproved {
+            get {
+                return ResourceManager.GetString("Common_StatusApproved", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：已拒绝</zh-CN>
+        ///   <en>Looks up a localized string similar to: Rejected</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusRejected {
+            get {
+                return ResourceManager.GetString("Common_StatusRejected", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：已关闭</zh-CN>
+        ///   <en>Looks up a localized string similar to: Closed</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusClosed {
+            get {
+                return ResourceManager.GetString("Common_StatusClosed", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：已退回</zh-CN>
+        ///   <en>Looks up a localized string similar to: Returned</en>
+        /// </lang>
+        /// </summary>
+        internal static string Common_StatusReturned {
+            get {
+                return ResourceManager.GetString("Common_StatusReturned", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：操作</zh-CN>
+        ///   <en>Looks up a localized string similar to: Actions</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_ColumnActions {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ColumnActions", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：重新提交</zh-CN>
+        ///   <en>Looks up a localized string similar to: Resubmit</en>
+        /// </lang>
+        /// </summary>
+        internal static string LeaveRequest_ButtonResubmit {
+            get {
+                return ResourceManager.GetString("LeaveRequest_ButtonResubmit", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：操作</zh-CN>
+        ///   <en>Looks up a localized string similar to: Actions</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_ColumnActions {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ColumnActions", resourceCulture);
+            }
+        }
+        /// <summary>
+        /// <lang>
+        ///   <zh-CN>查找类似以下内容的本地化字符串：重新提交</zh-CN>
+        ///   <en>Looks up a localized string similar to: Resubmit</en>
+        /// </lang>
+        /// </summary>
+        internal static string ExpenseReimbursement_ButtonResubmit {
+            get {
+                return ResourceManager.GetString("ExpenseReimbursement_ButtonResubmit", resourceCulture);
+            }
+        }
     }
 }

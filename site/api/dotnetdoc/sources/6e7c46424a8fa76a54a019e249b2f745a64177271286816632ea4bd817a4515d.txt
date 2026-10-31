@@ -1,0 +1,32 @@
+        public ExpenseReimbursementResubmitResult ResubmitReimbursement(ExpenseReimbursementResubmitRequest request)
+        {
+            if (request == null || request.RequestId <= 0)
+            {
+                return new ExpenseReimbursementResubmitResult { Succeeded = false, Message = "InvalidRequest", RequestId = request == null ? 0 : request.RequestId };
+            }
+
+            try
+            {
+                int rows = context.Database.ExecuteSqlCommand(
+                    "UPDATE dbo.PortalBiz_ExpenseReimbursements " +
+                    "SET Status = @Status, ReviewedUtc = NULL, ReviewedByUserId = NULL, ReviewedBy = NULL " +
+                    "WHERE RequestId = @RequestId AND UserId = @ApplicantUserId AND Status IN (@FromReturned, @FromRejected);",
+                    new SqlParameter("@Status", ExpenseReimbursementStatuses.Pending),
+                    new SqlParameter("@RequestId", request.RequestId),
+                    new SqlParameter("@ApplicantUserId", request.ApplicantUserId),
+                    new SqlParameter("@FromReturned", ExpenseReimbursementStatuses.Returned),
+                    new SqlParameter("@FromRejected", ExpenseReimbursementStatuses.Rejected));
+
+                if (rows <= 0)
+                {
+                    return new ExpenseReimbursementResubmitResult { Succeeded = false, Message = "NotFound", RequestId = request.RequestId };
+                }
+
+                return new ExpenseReimbursementResubmitResult { Succeeded = true, RequestId = request.RequestId };
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError("费用报销重新提交失败（RequestId=" + request.RequestId + "）：" + ex);
+                return new ExpenseReimbursementResubmitResult { Succeeded = false, Message = "DbError", RequestId = request.RequestId };
+            }
+        }

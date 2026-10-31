@@ -79,10 +79,10 @@
         <asp:Panel ID="pnlEmpty" runat="server" Visible="false">
             <span class="leave-request-empty"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_EmptyState%>" runat="server" /></span>
         </asp:Panel>
-        <asp:Repeater ID="rptRecent" runat="server" Visible="false">
+        <asp:Repeater ID="rptRecent" runat="server" Visible="false" OnItemCommand="rptRecent_ItemCommand">
             <HeaderTemplate>
                 <table class="leave-request-list" cellspacing="0" cellpadding="4" border="0">
-                    <tr><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnId%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnType%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnPeriod%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnDays%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnStatus%>" runat="server" /></th></tr>
+                    <tr><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnId%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnType%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnPeriod%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnDays%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnStatus%>" runat="server" /></th><th scope="col"><asp:Literal Text="<%$ Resources:lang,LeaveRequest_ColumnActions%>" runat="server" /></th></tr>
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
@@ -90,7 +90,8 @@
                     <td><%# Eval("LeaveType") %></td>
                     <td><%# Eval("StartDate", "{0:yyyy-MM-dd}") %> ~ <%# Eval("EndDate", "{0:yyyy-MM-dd}") %></td>
                     <td><%# Eval("Days") %></td>
-                    <td><%# Eval("Status") %></td>
+                    <td><%# ASPNET.StarterKit.Portal.PortalStatusLocalizer.LocalizeLeaveStatus(Eval("Status") as string) %></td>
+                    <td><asp:LinkButton ID="btnResubmit" runat="server" CommandName="Resubmit" CommandArgument='<%# Eval("RequestId") %>' Text='<%$ Resources:lang,LeaveRequest_ButtonResubmit %>' CssClass="CommandButton" Visible='<%# ASPNET.StarterKit.Portal.PortalStatusLocalizer.IsLeaveResubmittable(Eval("Status") as string) %>' /></td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>

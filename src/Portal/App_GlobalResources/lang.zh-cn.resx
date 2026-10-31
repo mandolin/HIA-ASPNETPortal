@@ -2943,4 +2943,31 @@
 <data name="ExpenseReimbursement_CategoryOther" xml:space="preserve">
     <value>其他</value>
 </data>
+  <data name="Common_StatusPending" xml:space="preserve">
+    <value>待审批</value>
+  </data>
+  <data name="Common_StatusApproved" xml:space="preserve">
+    <value>已批准</value>
+  </data>
+  <data name="Common_StatusRejected" xml:space="preserve">
+    <value>已拒绝</value>
+  </data>
+  <data name="Common_StatusClosed" xml:space="preserve">
+    <value>已关闭</value>
+  </data>
+  <data name="Common_StatusReturned" xml:space="preserve">
+    <value>已退回</value>
+  </data>
+  <data name="LeaveRequest_ColumnActions" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="LeaveRequest_ButtonResubmit" xml:space="preserve">
+    <value>重新提交</value>
+  </data>
+  <data name="ExpenseReimbursement_ColumnActions" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="ExpenseReimbursement_ButtonResubmit" xml:space="preserve">
+    <value>重新提交</value>
+  </data>
 </root>

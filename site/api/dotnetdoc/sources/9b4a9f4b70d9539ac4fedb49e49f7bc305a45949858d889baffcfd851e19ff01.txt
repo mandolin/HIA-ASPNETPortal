@@ -1,0 +1,5 @@
+        public static bool IsExpenseResubmittable(string status)
+        {
+            return string.Equals(status, ExpenseReimbursementStatuses.Returned, StringComparison.Ordinal)
+                || string.Equals(status, ExpenseReimbursementStatuses.Rejected, StringComparison.Ordinal);
+        }

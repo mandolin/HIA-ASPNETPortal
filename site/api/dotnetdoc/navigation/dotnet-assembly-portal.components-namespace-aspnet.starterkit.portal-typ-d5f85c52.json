@@ -56,6 +56,19 @@
       "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.isschemaa-67f3de9d.html"
     },
     {
+      "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "kind": "entry",
+      "label": "ResubmitRequest",
+      "entryCount": 1,
+      "views": [
+        "dotnet"
+      ],
+      "entryId": "hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "sourcePath": "src/Portal.Components/LeaveRequestContracts.cs",
+      "symbolId": "dotnet:m:aspnet.starterkit.portal.ileaverequestdb.resubmitrequest-aspnet.starterkit.portal.leaverequestresubmitrequest",
+      "contentPath": "entries/hia-document-dotnet-m-aspnet.starterkit.portal.ileaverequestdb.resubmitr-0438037e.html"
+    },
+    {
       "id": "dotnet:assembly:portal.components:namespace:aspnet.starterkit.portal:type:t-aspnet.starterkit.portal.ileaverequestdb:entry:hia-document:dotnet-m-aspnet.starterkit.portal.ileaverequestdb.reviewrequest-aspnet.starterkit.portal.leaverequestreviewrequest",
       "kind": "entry",
       "label": "ReviewRequest",
